@@ -18,10 +18,4 @@ steps:
 - script:
     npm install
     npm run build
-  displayName: 'npm install and build'
- 
-# Publish Artifacts
-- task: PublishBuildArtifacts@1
-  inputs:
-    artifactName: dist
-    pathtoPublish: 'dist' 
+  displayName: 'npm install and build' 
