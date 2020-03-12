@@ -17,22 +17,31 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RegistrationComponent } from './learner/pages/registration/registration.component';
+import { MatCardModule } from '@angular/material/card';
+// import { NgOtpInputModule } from  'ng-otp-input';
 import { LoginComponent } from './learner/pages/login/login.component';
 import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
 import { HeaderComponent } from './header/header.component';
+import { OtpComponent } from './learner/pages/otp/otp.component';
+import { PasswordComponent } from './learner/pages/password/password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegistrationComponent,
     LoginComponent,
     CoursedetailsComponent,
     HeaderComponent,
+    OtpComponent,
+    PasswordComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     GraphqlModule,
+    MatCardModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,

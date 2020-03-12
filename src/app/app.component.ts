@@ -8,7 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent {
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, 
+    private cookieService: CookieService
+    ) {
     // this.router.events.subscribe((e) => {
     // if (e instanceof NavigationStart) {
     //   console.log('hiiiiiiiiiiii');
