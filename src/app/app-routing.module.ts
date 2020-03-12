@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './learner/pages/login/login.component';
 const routes: Routes = [
-  // {
-  //    path: 'address',
-  //    component: AddressComponent
-  // },	
   {
-      path: '',
-      redirectTo: '/login',
-      pathMatch: 'full'
+    path: 'login',
+    component: LoginComponent
   },
+  // {
+  //     path: '',
+  //     redirectTo: '/login',
+  //     pathMatch: 'full'
+  // },
   // {
   //     path: '**',
   //     component: PageNotFoundComponent

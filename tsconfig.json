@@ -1,5 +1,8 @@
 {
   "compileOnSave": false,
+  "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true,
+  },
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -17,7 +20,8 @@
     "lib": [
       "es2018",
       "dom",
-      "esnext.asynciterable"
+      "esnext.asynciterable",
+      "ESNext"
     ]
   }
 }
