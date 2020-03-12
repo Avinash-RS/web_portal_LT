@@ -18,11 +18,15 @@ import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './learner/pages/login/login.component';
+import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    CoursedetailsComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

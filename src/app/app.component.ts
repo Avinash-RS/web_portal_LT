@@ -30,7 +30,7 @@ export class AppComponent {
     var psd = ps && atob(ps);
     console.log(name, ps, psd)
     if ((name && psd) == null) {
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/courses"]);
     }
   }
 
