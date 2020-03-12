@@ -8,7 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent {
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, 
+    private cookieService: CookieService
+    ) {
     // this.router.events.subscribe((e) => {
     // if (e instanceof NavigationStart) {
     //   console.log('hiiiiiiiiiiii');
@@ -30,7 +32,7 @@ export class AppComponent {
     var psd = ps && atob(ps);
     console.log(name, ps, psd)
     if ((name && psd) == null) {
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/reg"]);
     }
   }
 
