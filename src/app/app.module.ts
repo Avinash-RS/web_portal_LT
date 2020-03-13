@@ -25,7 +25,7 @@ import { RegistrationComponent } from './learner/pages/registration/registration
 import { LoginComponent } from './learner/pages/login/login.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
 import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './common/header/header.component';
 import { OtpComponent } from './learner/pages/otp/otp.component';
 import { PasswordComponent } from './learner/pages/password/password.component';
 

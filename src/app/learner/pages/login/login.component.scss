@@ -1,12 +1,37 @@
  mat-card{
-    width: 40%;
+    width: 25%;
     margin: auto;
-    top: 20%;
+    top: 10%;
 }
 
 button {
-    background: darkblue !important;
-    color: white;
+    background: #1f3777 !important;
+    color: white !important;
+    width: 70%;
+}
+mat-form-field {
+    width: 80%;
+    // height: 10vh !important;
+}
+.remember_me {
+    float: left;
+    margin-left: 6vh;
+}
+.forgot_ps {
+    text-align: end;
+    width: 90%;
+    color: #3f548b;
+    font-weight: 500;
+}
+.sign_up, .remember_me,mat-card-title {
+    color: #3f548b;
+}
+.mat-checkbox .mat-checkbox-frame {
+    border-color: black;
+    background-color: #dddddd
+}
+mat-card-title {
+    font-weight: 400;
 }
 
  

@@ -29,8 +29,10 @@ export class AppComponent {
     var name = this.cookieService.get('uname') ? this.cookieService.get('uname') : null;
     var ps = this.cookieService.get('ps') ? this.cookieService.get('ps') : null;
     var psd = ps && atob(ps);
-    console.log(name, ps, psd)
-    if ((name && psd) == null) {
+    console.log(name, ps, psd,(name || psd) == null )
+    if ((name || psd) == null) {
+      this.router.navigate(["/login"]);
+    } else {
       this.router.navigate(["/courses"]);
     }
   }

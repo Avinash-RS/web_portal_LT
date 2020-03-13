@@ -12,8 +12,8 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: '**',
-    component: CoursedetailsComponent
+    path: '',
+    component: LoginComponent
   },
   {
     path: 'courses',
