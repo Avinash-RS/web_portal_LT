@@ -1,23 +1,29 @@
 <!------------------------------Phone Number and OTP------------------------>
-
-<div class="content">
-  <form [formGroup]="otpForm">
-  <div class="form-group">
-    <input type="number" formControlName="mobile" placeholder="Mobile *" class="form-control"
+<form [formGroup]="otpForm">
+  <div class="parentcontent">
+    <div class="form-group">
+      <input type="text" formControlName="mobile" placeholder="Mobile *" class="form-control"
         [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
-    <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+      <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
         <div *ngIf="f.mobile.errors.required">Mobile is required</div>
         <div *ngIf="f.mobile.errors.pattern">Mobile is invalid</div>
         <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile must be 10 digits</div>
+      </div>
+
+
+      <div *ngIf="showotp">
+        <p class="">Enter OTP</p>
+        <input type="tel" formControlName="otp" class="form-control"
+          [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" />
+        <div *ngIf="f.otp.touched && f.otp.errors" class="invalid-feedback">
+          <div *ngIf="f.otp.errors.required">OTP is required</div>
+          <div *ngIf="f.otp.errors.pattern">OTP is invalid</div>
+          <div *ngIf="f.otp.errors.maxlength">OTP must have only 4 numbers</div>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button (click)="otpverification()">Verify</button>
+      </div>
     </div>
-</div>
-
-<div *ngIf="showotp">
-<p class="">Enter OTP</p>
-</div>
-<div>
-  <button mat-raised-button (click)="otpverification()">Verify</button>
-</div>
+  </div>
 </form>
-</div>
-

@@ -42,8 +42,8 @@ export class OtpComponent implements OnInit {
     console.log(this.currentUser)
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
-    
-  }, {
+      otp: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern('[0-9]{4}')]),
+    }, {
   });
    
   }

@@ -11,9 +11,13 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'courses',
-    component: CoursedetailsComponent
+  // {
+  //       path: '**',
+  //       component: CoursedetailsComponent
+  //   },
+    {
+      path: 'courses',
+      component: CoursedetailsComponent
   },
   {
     path: 'reg',
