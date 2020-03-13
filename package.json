@@ -29,6 +29,7 @@
     "apollo-client": "^2.6.8",
     "core-js": "^2.5.4",
     "graphql": "^14.6.0",
+    "ng-otp-input": "^1.7.0",
     "ngx-cookie-service": "^2.4.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
