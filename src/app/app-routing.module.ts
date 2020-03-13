@@ -11,23 +11,9 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-<<<<<<< HEAD
-  // {
-  //       path: '**',
-  //       component: CoursedetailsComponent
-  //   },
-    {
-      path: 'courses',
-      component: CoursedetailsComponent
-=======
-  {
-    path: '**',
-    component: CoursedetailsComponent
-  },
   {
     path: 'courses',
     component: CoursedetailsComponent
->>>>>>> e5856cbcbe86e96885641b73dd50f5ebda791a8d
   },
   {
     path: 'reg',
