@@ -1,5 +1,9 @@
-# Introduction
+# Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Regex- const regex = RegExp("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!@#%^*()]*$).{8,20}$/")
+
+
+https://xd.adobe.com/view/46413cf3-f31a-42e0-6d96-e49b6d40fe37-3070/
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
@@ -18,5 +22,3 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
-
-Regex- const regex = RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[A-Za-z0-9!@#$%^*()]*$")
