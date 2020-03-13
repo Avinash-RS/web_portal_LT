@@ -58,6 +58,9 @@ export const user_registration_done = gql`
     ) {
       _id
       success
+      success_
+      message_
+      statusmsg
       message{
         user_id
         username

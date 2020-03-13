@@ -75,7 +75,7 @@ export class OtpComponent implements OnInit {
             this.showotp = true;
             this.router.navigate(['/password']);
           } else{
-            alert('Something went wrong..!')
+            alert(data.data['user_registration_mobile_otp_verify'].message)
           }
       })
 
