@@ -1,5 +1,8 @@
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Regex- const regex = RegExp("^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&*])[A-Za-z0-9!@#%^*()]*")
+
+
 https://xd.adobe.com/view/46413cf3-f31a-42e0-6d96-e49b6d40fe37-3070/
 
 # Getting Started
