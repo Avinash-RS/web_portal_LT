@@ -24,17 +24,14 @@
     "@angular/router": "~7.2.0",
     "apollo": "^2.25.0",
     "apollo-angular": "^1.8.0",
-    "apollo-angular-link-http": "^1.9.0",  
+    "apollo-angular-link-http": "^1.9.0",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "graphql": "^14.6.0",
-<<<<<<< HEAD
-    "ng-otp-input": "^1.7.0",
-=======
     "jquery": "^3.4.1",
->>>>>>> 381ebde2d92b17f8265afce53476c12b9b639c0e
+    "ng-otp-input": "^1.7.0",
     "ngx-cookie-service": "^2.4.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
