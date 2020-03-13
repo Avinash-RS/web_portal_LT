@@ -7,7 +7,7 @@
 .example-full-width {
     width: 100%;
   }
-  .content{
+  .parentcontent{
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -19,6 +19,26 @@
   }
   .button{
     margin-top: 25px;
+  }
+  .o-t-p {
+    display: block;
+    margin-top: 10px;
+    font-size: 19px;
+  }
+  .o-c {
+    display: block;
+  }
+  .card {
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    border-radius: 4px;
+    background: white;
+    margin: 0 auto;
+  }
+  .content {
+    display: inline-block;
+    width: calc(100% - 250px);
+    vertical-align: top;
   }
   
   

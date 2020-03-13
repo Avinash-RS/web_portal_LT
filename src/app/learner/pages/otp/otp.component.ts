@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -20,6 +20,21 @@ export class OtpComponent implements OnInit {
   otpForm: FormGroup;
   constructor(private router:Router,  private formBuilder: FormBuilder,
     public service : LearnerServicesService) { }
+  otp: any;
+  showotp: boolean = false;
+
+  @ViewChild('ngOtpInput') ngOtpInput: any;
+  config = {
+    allowNumbersOnly: false,
+    length: 5,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder:'',
+    inputStyles: {
+      'width': '50px',
+      'height': '50px'
+    }
+  };
 
   ngOnInit() {
     var user = localStorage.getItem('UserDetails')
@@ -44,6 +59,11 @@ export class OtpComponent implements OnInit {
           
           } 
       })
+    // this.router.navigate(['/password']);
+    this.showotp = true;
+  }
+  onOtpChange(otp) {
+    this.otp = otp;
   }
 
   }

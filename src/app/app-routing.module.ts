@@ -6,10 +6,12 @@ import { RegistrationComponent } from './learner/pages/registration/registration
 import { OtpComponent } from './learner/pages/otp/otp.component';
 import { PasswordComponent } from './learner/pages/password/password.component';
 const routes: Routes = [
+
   {
     path: 'login',
     component: LoginComponent
   },
+<<<<<<< HEAD
   // {
   //       path: '**',
   //       component: CoursedetailsComponent
@@ -17,6 +19,15 @@ const routes: Routes = [
     {
       path: 'courses',
       component: CoursedetailsComponent
+=======
+  {
+    path: '**',
+    component: CoursedetailsComponent
+  },
+  {
+    path: 'courses',
+    component: CoursedetailsComponent
+>>>>>>> e5856cbcbe86e96885641b73dd50f5ebda791a8d
   },
   {
     path: 'reg',

@@ -9,13 +9,14 @@ export class LearnerServicesService {
 
   constructor(private Apollo: Apollo,) { }
 
-  login(username, password) {
-    console.log('inside services', username, password)
+  login(username, password, is_admin) {
+    console.log('inside services', username, password,is_admin)
     return this.Apollo.query({
       query: login,
       variables: {
         username: username,
-        password: password
+        password: password,
+        is_admin : is_admin
       }
     });
   }
