@@ -6,17 +6,18 @@ import { RegistrationComponent } from './learner/pages/registration/registration
 import { OtpComponent } from './learner/pages/otp/otp.component';
 import { PasswordComponent } from './learner/pages/password/password.component';
 const routes: Routes = [
+
   {
     path: 'login',
     component: LoginComponent
   },
   {
-        path: '**',
-        component: CoursedetailsComponent
-    },
-    {
-      path: 'courses',
-      component: CoursedetailsComponent
+    path: '**',
+    component: CoursedetailsComponent
+  },
+  {
+    path: 'courses',
+    component: CoursedetailsComponent
   },
   {
     path: 'reg',

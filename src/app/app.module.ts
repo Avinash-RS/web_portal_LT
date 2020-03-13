@@ -12,15 +12,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { MatGridListModule } from '@angular/material/grid-list'
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+
 //local
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './learner/pages/registration/registration.component';
-import { MatCardModule } from '@angular/material/card';
 // import { NgOtpInputModule } from  'ng-otp-input';
 import { LoginComponent } from './learner/pages/login/login.component';
+import { AlertComponentComponent } from './common/alert-component/alert-component.component';
 import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
 import { HeaderComponent } from './header/header.component';
 import { OtpComponent } from './learner/pages/otp/otp.component';
@@ -31,6 +34,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     AppComponent,
     RegistrationComponent,
     LoginComponent,
+    AlertComponentComponent,
     CoursedetailsComponent,
     HeaderComponent,
     OtpComponent,
@@ -47,14 +51,17 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     MatCheckboxModule,
     MatGridListModule,
     FormsModule,
+    MatDialogModule,
+    MatCardModule,
     // MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
   ],
-  providers: [ CookieService ],
+  providers: [CookieService, AlertComponentComponent],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [AlertComponentComponent]
 })
 export class AppModule { }
