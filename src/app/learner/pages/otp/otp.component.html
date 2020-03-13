@@ -1,0 +1,32 @@
+<!------------------------------Phone Number and OTP------------------------>
+<div class="parentcontent">
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field class="example-full-width">
+        <mat-label>Phone number</mat-label>
+        <input matInput [formControl]="phoneNumber" [errorStateMatcher]="matcher" placeholder="Phone number">
+        <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
+          Please enter valid phone number
+        </mat-error>
+        <mat-error *ngIf="phoneNumber.hasError('required')">
+          Phone number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!--------------------------OTP----------------------->
+      <!-- <div *ngIf="showotp">
+        <p class="a-o-i">Enter OTP</p> -->
+        <!-- <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+        <span *ngIf="otp" class="o-t-p">Entered otp :-{{otp}}</span> -->
+        <mat-form-field class="example-full-width" *ngIf="showotp">
+          <mat-label>Enter OTP</mat-label>
+        <input matInput>
+        </mat-form-field>
+      <!-- </div> -->
+
+      <div>
+        <button mat-raised-button (click)="otpverification()">Verify</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
