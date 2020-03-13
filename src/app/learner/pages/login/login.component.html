@@ -4,7 +4,7 @@
       <mat-card-title> Sign In </mat-card-title> <br>
       <mat-card-content>
         <!-- <mat-label>Username</mat-label> -->
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline"  matTooltip="No space allowed, Should be minimum 3 characters and maximum 20 characters, Alphanumeric">
           <mat-label>Username</mat-label>
           <input matInput name="username" formControlName="username">
         </mat-form-field>
@@ -12,7 +12,7 @@
           <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
           <mat-error *ngIf="f.username.errors.pattern">Username pattern is invalid</mat-error>
         </div><br />
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" matTooltip="No space allowed, It cannot be blank and is case sensitive, Should be a minimum 8 characters and maximum 20 characters, Atleast 1 uppercase character, 1 lowercase character, 1 number and one special character">
           <mat-label>Password</mat-label>
           <input matInput name="password" type = "password" formControlName="password">
         </mat-form-field>
@@ -20,6 +20,8 @@
           <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
           <mat-error *ngIf="f.password.errors.pattern">Password pattern is invalid</mat-error>
         </div>
+
+        <!-- <mat-spinner></mat-spinner> -->
         <div class="forgot_ps">
           <mat-label>Forgot password/username?</mat-label>
         </div>
@@ -28,9 +30,10 @@
           Remember Me 
         </mat-checkbox>
         <br><br><br>
+       
         <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign in</button>
         <br><br>
-        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/reg']">Sign up</a> </mat-label><br><br>
+        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/reg']"><strong>Sign up</strong></a> </mat-label><br><br>
       </mat-card-content>
     </form>
   </mat-card>

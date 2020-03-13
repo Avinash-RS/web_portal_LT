@@ -26,7 +26,7 @@ const defaultOptions: DefaultOptions = {
 export class GraphqlModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
     apollo.create({
-      link: httpLink.create({ uri: 'http://10.8.15.118:3000/graphql'}),
+      link: httpLink.create({ uri: 'http://10.8.15.82:3000/graphql'}),
       cache: new InMemoryCache(),
       defaultOptions: defaultOptions,
     });
