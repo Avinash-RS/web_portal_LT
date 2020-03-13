@@ -36,7 +36,8 @@
     margin: 0 auto;
   }
   .content {
-    display: inline-block;
+    // display: inline-block;
+    justify-content: center !important;
     width: calc(100% - 250px);
     vertical-align: top;
   }

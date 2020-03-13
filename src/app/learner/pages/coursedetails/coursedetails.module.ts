@@ -10,4 +10,4 @@ import { CoursedetailsComponent } from './coursedetails.component';
     CoursedetailsComponent
   ]
 })
-export class LoginModule { }
+export class CoursedetailsModule { }

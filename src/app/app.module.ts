@@ -28,7 +28,6 @@ import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedeta
 import { HeaderComponent } from './common/header/header.component';
 import { OtpComponent } from './learner/pages/otp/otp.component';
 import { PasswordComponent } from './learner/pages/password/password.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +38,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     HeaderComponent,
     OtpComponent,
     PasswordComponent,
+ 
   ],
   imports: [
     BrowserModule,
