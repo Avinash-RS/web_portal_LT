@@ -1,25 +1,22 @@
 <!------------------------------Phone Number and OTP------------------------>
+<form [formGroup]="otpForm">
 <div class="content">
-<mat-card *ngIf="showCard">
-  <mat-card-content>
-    <mat-form-field class="example-full-width">
-      <mat-label>Phone number</mat-label>
-      <input matInput [formControl]="phoneNumber" [errorStateMatcher]="matcher" placeholder="Phone number">
-      <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
-        Please enter valid phone number
-      </mat-error>
-      <mat-error *ngIf="phoneNumber.hasError('required')">
-        Phone number is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <!-- <mat-form-field>
-      <mat-label>OTP</mat-label>
-    <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:5}"></ng-otp-input>
-    <ng-otp-input #ngOtpInput ></ng-otp-input>
-    </mat-form-field> -->
-    <div>
-      <button mat-raised-button (click)="otpverification()">Verify</button>
+  <div class="form-group">
+    <input type="text" formControlName="mobile" placeholder="Mobile *" class="form-control"
+        [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
+    <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+        <div *ngIf="f.mobile.errors.required">Mobile is required</div>
+        <div *ngIf="f.mobile.errors.pattern">Mobile is invalid</div>
+        <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile must be 10 digits</div>
     </div>
-  </mat-card-content>
-</mat-card>
 </div>
+
+<div *ngIf="showotp">
+<p class="">Enter OTP</p>
+</div>
+<div>
+  <button mat-raised-button (click)="otpverification()">Verify</button>
+</div>
+
+</div>
+</form>

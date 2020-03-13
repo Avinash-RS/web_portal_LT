@@ -25,7 +25,6 @@ import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedeta
 import { HeaderComponent } from './header/header.component';
 import { OtpComponent } from './learner/pages/otp/otp.component';
 import { PasswordComponent } from './learner/pages/password/password.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +34,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     HeaderComponent,
     OtpComponent,
     PasswordComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     MatRadioModule,
     MatSelectModule,
   ],
-  providers: [ CookieService ],
+  providers: [ CookieService, ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
