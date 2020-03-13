@@ -41,14 +41,19 @@ export class AppComponent {
     });
   }
   changeOfRoutes() {
-    // console.log('hiiiiiiiiiiii');
-    // var name = this.cookieService.get('uname') ? this.cookieService.get('uname') : null;
-    // var ps = this.cookieService.get('ps') ? this.cookieService.get('ps') : null;
-    // var psd = ps && atob(ps);
-    // console.log(name, ps, psd)
-    // if ((name && psd) == null) {
-    //   this.router.navigate(["/reg"]);
-    // }
+    var name = this.cookieService.get('uname') ? this.cookieService.get('uname') : null;
+    var ps = this.cookieService.get('ps') ? this.cookieService.get('ps') : null;
+    var psd = ps && atob(ps);
+    var cookie = this.cookieService.get('remember_me') ? this.cookieService.get('remember_me') : 'false';
+    console.log(name, ps, psd,(name || psd) == null )
+    if(cookie == 'true') {
+      if ((name || psd) == null) {
+        this.router.navigate(["/login"]);
+      } else {
+        this.router.navigate(["/courses"]);
+      }
+    }
+   
   }
 
 }
