@@ -24,7 +24,6 @@ export class AppComponent {
   }
 
   changeOfRoutes() {
-    console.log('hiiiiiiiiiiii');
     var name = this.cookieService.get('uname') ? this.cookieService.get('uname') : null;
     var ps = this.cookieService.get('ps') ? this.cookieService.get('ps') : null;
     var psd = ps && atob(ps);
