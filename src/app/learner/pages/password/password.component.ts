@@ -29,15 +29,18 @@ export class PasswordComponent implements OnInit {
   });
   }
   get f() { return this.passwordForm.controls; }
-  otpverification(){
+  submit(){
     this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
         console.log(data.data['user_registration_done'])
           if (data.data['user_registration_done']['success'] == 'true') {
             console.log('in')
             alert(data.data['user_registration_done'].message)
-            this.router.navigate(['/password']);
+            localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].message))
+            this.router.navigate(['/courses']);
           
-          } 
+          } else{
+            alert('Something went wrong..!')
+          }
       })
   }
   

@@ -49,7 +49,9 @@ export class RegistrationComponent implements OnInit {
             localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
             this.router.navigate(['otp']);
             this.registerForm.reset();
-          } 
+          } else{
+            alert('Something went wrong..!')
+          }
       })
   }
 

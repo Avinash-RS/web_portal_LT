@@ -55,17 +55,32 @@ export class OtpComponent implements OnInit {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             console.log('in')
             alert(data.data['user_registration_mobile_otp_send'].message)
-            this.router.navigate(['/password']);
+            this.showotp = true;
           
           } 
       })
-    // this.router.navigate(['/password']);
-    this.showotp = true;
+  
   }
   onOtpChange(otp) {
     this.otp = otp;
-  }
 
+  }
+  otpverify(){
+    console.log(this.otpForm.value.mobile,this.otpForm.value.otp)
+    this.service.user_registration_verify(this.otpForm.value.mobile,this.otpForm.value.otp).subscribe(data => {
+        console.log(data.data['user_registration_mobile_otp_verify'])
+          if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
+            console.log('in')
+            alert(data.data['user_registration_mobile_otp_verify'].message)
+            this.showotp = true;
+            this.router.navigate(['/password']);
+          } else{
+            alert('Something went wrong..!')
+          }
+      })
+
+  }
+  
   }
 
 

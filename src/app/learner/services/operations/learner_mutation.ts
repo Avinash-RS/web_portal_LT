@@ -33,6 +33,21 @@ export const user_registration_mobile_otp_send = gql`
   }
 `;
 
+export const user_registration_mobile_otp_verify = gql`
+  mutation user_registration_mobile_otp_verify($mobile_number: String!,$otp:String!) {
+    user_registration_mobile_otp_verify(
+      mobile_number:$mobile_number,
+      otp: $otp,
+    ) {
+      otp
+      mobile_number
+      _id
+      message
+      success
+    }
+  }
+`;
+
 export const user_registration_done = gql`
   mutation user_registration_done($user_id: String,$username: String,$password:String!, $created_by_ip: String!) {
     user_registration_done(
