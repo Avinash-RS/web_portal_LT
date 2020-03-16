@@ -31,6 +31,7 @@ export class RegistrationComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
           username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(50)]),
           email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+          termsandconditions: new FormControl("", [])
       }, {
       });
   }
@@ -55,6 +56,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.registerForm.value.termsandconditions)
       if (this.registerForm.valid) {
           this.Submit();
       } 

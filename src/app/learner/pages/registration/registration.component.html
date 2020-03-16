@@ -33,7 +33,8 @@
             <button class="btn " [disabled]="!registerForm.valid" (click)="Submit()">
                Register
             </button><br><br>
-            <div class="account">Already an account? <b (click)="signIn()">Sign In</b></div> 
+            <!-- <div class="account"> <b (click)="signIn()">Sign In</b></div>  -->
+            <div class="account">Already an account?<a [routerLink]="['/Learner/login']"><strong>Sign In</strong></a> </div>
     </form>
     </div>
     </div>
