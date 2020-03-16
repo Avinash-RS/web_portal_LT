@@ -20,7 +20,7 @@ import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'courses', component: CoursedetailsComponent },
-  { path: 'reg', component: RegistrationComponent },
+  { path: 'register', component: RegistrationComponent },
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
