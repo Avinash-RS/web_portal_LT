@@ -1,11 +1,13 @@
- mat-card{
+@import "../../../../assets/variable.scss";
+
+mat-card{
     width: 24%;
     margin: auto;
     top: 10%;
 }
 
 button {
-    background: #1f3777 !important;
+    background: $color-blue !important;
     color: white !important;
     width: 70%;
 }
