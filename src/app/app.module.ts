@@ -15,45 +15,33 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import {MatProgressSpinnerModule,} from '@angular/material/progress-spinner';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatProgressSpinnerModule, } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 //local
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './learner/pages/registration/registration.component';
-// import { NgOtpInputModule } from  'ng-otp-input';
-import { LoginComponent } from './learner/pages/login/login.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
-import { HeaderComponent } from './common/header/header.component';
-import { OtpComponent } from './learner/pages/otp/otp.component';
-import { PasswordComponent } from './learner/pages/password/password.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
-    LoginComponent,
     AlertComponentComponent,
-    CoursedetailsComponent,
-    HeaderComponent,
-    OtpComponent,
-    PasswordComponent,
- 
   ],
   imports: [
-    MatTooltipModule,
+    BrowserAnimationsModule,
     BrowserModule,
     NgxSpinnerModule,
-    ReactiveFormsModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     GraphqlModule,
+
     MatCardModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatGridListModule,
-    FormsModule,
+    MatTooltipModule,
     MatDialogModule,
     MatProgressSpinnerModule, MatRadioModule,
     MatCardModule,
