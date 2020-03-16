@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import {MatProgressSpinnerModule,} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 //local
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
@@ -58,6 +59,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     MatProgressSpinnerModule, MatRadioModule,
     MatCardModule,
     // MatDatepickerModule,
+    // FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
