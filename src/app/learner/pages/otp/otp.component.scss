@@ -1,45 +1,26 @@
-/* .example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-} */
 
-.example-full-width {
-    width: 100%;
+
+     
+  .otp {
+    margin: 0 5px;
+    text-align: center;
+    font-size: 27px;
+    outline: none;
+    width: 21%;
+    transition: all .2s ease-in-out;
+    &:focus {
+      border-color: #94b5f1;
+      box-shadow: 0 0 5px #94b5f1 inset;
+    }
+    
+    &::selection {
+      background: transparent;
+    }
   }
-  .parentcontent{
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    margin-top: 176px;
-  }
-  mat-card{
-    width: 23%;
-    border: dashed;
-  }
-  .button{
-    margin-top: 25px;
-  }
-  .o-t-p {
-    display: block;
-    margin-top: 10px;
-    font-size: 19px;
-  }
-  .o-c {
-    display: block;
-  }
-  .card {
-    padding: 2rem;
-    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-    border-radius: 4px;
-    background: white;
-    margin: 0 auto;
-  }
-  .content {
-    // display: inline-block;
-    justify-content: center !important;
-    width: calc(100% - 250px);
-    vertical-align: top;
-  }
+  div.account{
+    color: #1F3777;
+    word-break: break-all !important;
+    text-align: center !important;
+}
   
   

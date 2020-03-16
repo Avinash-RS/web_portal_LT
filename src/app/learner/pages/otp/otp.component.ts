@@ -80,10 +80,8 @@ export class OtpComponent implements OnInit {
       })
 
   }
+  Resendcode(){
+    
+  }
   
   }
-
-
-//   Submit() {
-
-// }
