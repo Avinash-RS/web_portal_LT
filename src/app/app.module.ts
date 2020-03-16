@@ -1,10 +1,6 @@
+//angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
-import { NgxSpinnerModule } from 'ngx-spinner';
-//mat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -18,35 +14,27 @@ import { MatCardModule } from '@angular/material/card';
 import {MatProgressSpinnerModule,} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 // import { FlexLayoutModule } from '@angular/flex-layout';
+//others
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CookieService } from 'ngx-cookie-service';
 //local
+import { MaterialModule } from './common/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './learner/pages/registration/registration.component';
-// import { NgOtpInputModule } from  'ng-otp-input';
-import { LoginComponent } from './learner/pages/login/login.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-import { CoursedetailsComponent } from './learner/pages/coursedetails/coursedetails.component';
-import { HeaderComponent } from './common/header/header.component';
-import { OtpComponent } from './learner/pages/otp/otp.component';
-import { PasswordComponent } from './learner/pages/password/password.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
-    LoginComponent,
     AlertComponentComponent,
-    CoursedetailsComponent,
-    HeaderComponent,
-    OtpComponent,
-    PasswordComponent,
- 
   ],
   imports: [
-    MatTooltipModule,
+    GraphqlModule,
+    MaterialModule,
+    BrowserAnimationsModule,
     BrowserModule,
     NgxSpinnerModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     GraphqlModule,
     MatCardModule,
@@ -54,7 +42,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     MatButtonModule,
     MatCheckboxModule,
     MatGridListModule,
-    FormsModule,
+    // FormsModule,
     MatDialogModule,
     MatProgressSpinnerModule, MatRadioModule,
     MatCardModule,
@@ -65,7 +53,7 @@ import { PasswordComponent } from './learner/pages/password/password.component';
     MatRadioModule,
     MatSelectModule,
   ],
-  providers: [CookieService, AlertComponentComponent],
+  providers: [CookieService,AlertComponentComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [AlertComponentComponent]
