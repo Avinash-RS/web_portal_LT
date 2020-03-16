@@ -3,6 +3,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBui
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -18,7 +20,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class OtpComponent implements OnInit {
   currentUser: any = []
   otpForm: FormGroup;
-  constructor(private router:Router,  private formBuilder: FormBuilder,
+  constructor(private router:Router,  private formBuilder: FormBuilder,  private alert: AlertServiceService,
+    private cookieService: CookieService,
     public service : LearnerServicesService) { }
   otp: any;
   showotp: boolean = false;
@@ -37,7 +40,8 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
+    var user = this.cookieService.get('UserDetails')
+    // var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     console.log(this.currentUser)
     this.otpForm = this.formBuilder.group({
@@ -49,14 +53,10 @@ export class OtpComponent implements OnInit {
   }
   get f() { return this.otpForm.controls; }
   otpverification(){
-    console.log( this.currentUser.user_id, this.currentUser._id,this.otpForm.value.mobile)
     this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
-        console.log(data.data['user_registration_mobile_otp_send'])
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
-            console.log('in')
-            alert(data.data['user_registration_mobile_otp_send'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_send'].message,null)
             this.showotp = true;
-          
           } 
       })
   
@@ -68,14 +68,12 @@ export class OtpComponent implements OnInit {
   otpverify(){
     console.log(this.otpForm.value.mobile,this.otpForm.value.otp)
     this.service.user_registration_verify(this.otpForm.value.mobile,this.otpForm.value.otp).subscribe(data => {
-        console.log(data.data['user_registration_mobile_otp_verify'])
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
-            console.log('in')
-            alert(data.data['user_registration_mobile_otp_verify'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
             this.router.navigate(['/password']);
           } else{
-            alert(data.data['user_registration_mobile_otp_verify'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
           }
       })
 

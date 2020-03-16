@@ -40,11 +40,11 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username)
+   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           this.loader.show();
           if (data.data['user_registration']['success'] == 'true') {
-            alert(data.data['user_registration'].message)
+            this.alert.openAlert(data.data['user_registration'].message,null)
             this.cookieService.set('UserDetails',JSON.stringify(data.data['user_registration'].data))
             this.loader.hide();
             this.registerForm.reset();
