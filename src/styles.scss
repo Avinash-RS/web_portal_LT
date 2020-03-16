@@ -104,7 +104,7 @@ body
 .p-b-30 {padding-bottom: 30px !important;}
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #1f3777;
+  background-color: $color-blue;
 }
 
 // input[type=text], input[type=password] {

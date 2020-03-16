@@ -8,7 +8,7 @@ mat-card{
 
 button {
     background: $color-blue !important;
-    color: white !important;
+    color: white ;
     width: 70%;
 }
 mat-form-field {
@@ -34,6 +34,11 @@ mat-form-field {
 }
 mat-card-title {
     font-weight: 400;
+}
+mat-error {
+    float: left;
+    margin-left: 10%;
+    margin-top: -5%;
 }
 
  
