@@ -6,7 +6,7 @@
         <form [formGroup]="registerForm">
             <div class="form-group">
                 <label>Full Name</label><span style="color: red;"> *</span>
-                <input type="text" formControlName="username" placeholder="example" class="form-control"
+                <input type="text" formControlName="username" placeholder="example"  maxlength="50" class="form-control"
                     [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
                     <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Full Name is required</div>
