@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { LearnerServicesService } from '../../services/learner-services.service';
-
+import { CookieService } from 'ngx-cookie-service';
+import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -20,21 +20,18 @@ export class RegistrationComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
+      private alert: AlertServiceService,
+      private loader : NgxSpinnerService,
+      private cookieService: CookieService,
       public service : LearnerServicesService,
   ) {
   }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
-          name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
-          email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
-          mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
-          organization: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
-          password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
-          confirmpassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+          username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(50)]),
+          email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
       }, {
-          // validator: MustMatch('password', 'confirmpassword')
       });
   }
 
@@ -44,13 +41,15 @@ export class RegistrationComponent implements OnInit {
   Submit() {
    this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username)
     .subscribe(data => {
+          this.loader.show();
           if (data.data['user_registration']['success'] == 'true') {
             alert(data.data['user_registration'].message)
-            localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
-            this.router.navigate(['otp']);
+            this.cookieService.set('UserDetails',JSON.stringify(data.data['user_registration'].data))
+            this.loader.hide();
             this.registerForm.reset();
           } else{
-            alert('Something went wrong..!')
+            this.alert.openAlert(data.data['user_registration'].message,null)
+            this.loader.hide();
           }
       })
   }
@@ -58,14 +57,10 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
       if (this.registerForm.valid) {
           this.Submit();
-      } else {
-          // Swal.fire({
-          //     title: 'Required!',
-          //     text: 'Please fill required details correctly',
-          //     icon: 'error',
-          //     confirmButtonText: 'OK'
-          // })
-          return;
-      }
+      } 
+  }
+
+  signIn(){
+    
   }
 }

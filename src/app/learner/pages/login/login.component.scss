@@ -1,12 +1,14 @@
- mat-card{
+@import "../../../../assets/variable.scss";
+
+mat-card{
     width: 24%;
     margin: auto;
     top: 10%;
 }
 
 button {
-    background: #1f3777 !important;
-    color: white !important;
+    background: $color-blue !important;
+    color: white ;
     width: 70%;
 }
 mat-form-field {
@@ -32,6 +34,11 @@ mat-form-field {
 }
 mat-card-title {
     font-weight: 400;
+}
+mat-error {
+    float: left;
+    margin-left: 10%;
+    margin-top: -5%;
 }
 
  

@@ -1,42 +1,14 @@
-/* .example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-} */
 
-.example-full-width {
-    width: 100%;
-  }
-  .content{
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    margin-top: 176px;
-  }
-  mat-card{
-    width: 23%;
-    border: dashed;
-  }
-  .button{
-    margin-top: 25px;
-  }
-  
-  
-.column2 {
-  text-align: center;
-  width: 90%;
-  float: right;
-  height: 100vh;
+div.terms{
+    color: #1F3777;
+    word-break: break-all !important;
+    font-size: 12px;
+    font-weight: 500;
 }
-.continer {
-  margin-top: 50px;
-  position: relative;
-  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-  padding: 10px;
-  background: white;
-  display: flex;
-  justify-content: center;
-  height: 500px;
+div.account{
+    color: #1F3777;
+    word-break: break-all !important;
+    text-align: center !important;
 }
+
+

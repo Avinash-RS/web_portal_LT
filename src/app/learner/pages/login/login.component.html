@@ -10,7 +10,7 @@
         </mat-form-field>
         <div *ngIf="f.username.touched && f.username.errors">
           <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
-          <mat-error *ngIf="f.username.errors.pattern">Username pattern is invalid</mat-error>
+          <mat-error *ngIf="f.username.errors.pattern">Username is invalid</mat-error>
         </div><br />
         <mat-form-field appearance="outline" matTooltip="No space allowed, It cannot be blank and is case sensitive, Should be a minimum 8 characters and maximum 20 characters, Atleast 1 uppercase character, 1 lowercase character, 1 number and one special character">
           <mat-label>Password</mat-label>
@@ -18,9 +18,9 @@
         </mat-form-field>
         <div *ngIf="f.password.touched && f.password.errors">
           <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
-          <mat-error *ngIf="f.password.errors.pattern">Password pattern is invalid</mat-error>
+          <mat-error *ngIf="f.password.errors.pattern">Password is invalid</mat-error>
         </div>
-
+<br>
         <!-- <mat-spinner></mat-spinner> -->
         <div class="forgot_ps">
           <mat-label>Forgot password/username?</mat-label>
@@ -32,8 +32,8 @@
         <br><br><br>
        
         <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign in</button>
-        <br><br>
-        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/reg']"><strong>Sign up</strong></a> </mat-label><br><br>
+        <br><br><br>
+        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/Learner/reg']"><strong>Sign up</strong></a> </mat-label><br><br>
       </mat-card-content>
     </form>
   </mat-card>

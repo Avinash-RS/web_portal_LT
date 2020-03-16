@@ -21,9 +21,9 @@ export class PasswordComponent implements OnInit {
     this.systemip = localStorage.getItem('Systemip')
     this.currentUser = JSON.parse(user);
     this.passwordForm = this.formBuilder.group({
-            username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
-            password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
-            confirmpassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+            username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+$/), Validators.minLength(3), Validators.maxLength(20)]),
+            password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
+            confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
   }, {
     validator: MustMatch('password', 'confirmpassword'),
   });
@@ -34,12 +34,12 @@ export class PasswordComponent implements OnInit {
         console.log(data.data['user_registration_done'])
           if (data.data['user_registration_done']['success'] == 'true') {
             console.log('in')
-            alert(data.data['user_registration_done'].message)
+            alert(data.data['user_registration_done'].statusmsg)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].message))
             this.router.navigate(['/courses']);
           
           } else{
-            alert('Something went wrong..!')
+            alert(data.data['user_registration_done'].statusmsg)
           }
       })
   }
