@@ -57,18 +57,10 @@ export const user_registration_done = gql`
       password:$password,
       created_by_ip:$created_by_ip
     ) {
-      _id
       success
-      success_
-      message_
-      statusmsg
-      message{
-        user_id
-        username
-        token
-        password
-        created_by_ip
-      }
+      _id
+      message
+      token
     }
   }
 `;

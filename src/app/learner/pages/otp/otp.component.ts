@@ -20,11 +20,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class OtpComponent implements OnInit {
   currentUser: any = []
   otpForm: FormGroup;
+  systemip:String;
+  otp: any;
+  showotp: boolean = false;
   constructor(private router:Router,  private formBuilder: FormBuilder,  private alert: AlertServiceService,
     // private cookieService: CookieService,
     public service : LearnerServicesService) { }
-  otp: any;
-  showotp: boolean = false;
+
 
   @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
@@ -40,38 +42,40 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-    // var user = this.cookieService.get('UserDetails')
-    // var user = localStorage.getItem('UserDetails')
-    // this.currentUser = JSON.parse(user);
-    console.log(this.currentUser)
-    this.otpForm = this.formBuilder.group({
-      mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
-      otp: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern('[0-9]{4}')]),
-    }, {
-  });
-   
-  }
-  get f() { return this.otpForm.controls; }
+  var user = localStorage.getItem('UserDetails')
+  this.currentUser = JSON.parse(user);
+  this.systemip = localStorage.getItem('Systemip')
+  this.otpForm = this.formBuilder.group({
+          mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
+          otp1: new FormControl("", []),
+          otp2: new FormControl("", []),
+          otp3: new FormControl("", []),
+          otp4: new FormControl("", [])
+}, {
+
+});
+}
+get f() { return this.otpForm.controls; }
   otpverification(){
     this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
-            this.alert.openAlert(data.data['user_registration_mobile_otp_send'].message,null)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.showotp = true;
           } 
       })
   
   }
-  onOtpChange(otp) {
-    this.otp = otp;
+  // onOtpChange(otp) {
+  //   this.otp = otp;
 
-  }
+  // }
   otpverify(){
-    console.log(this.otpForm.value.mobile,this.otpForm.value.otp)
-    this.service.user_registration_verify(this.otpForm.value.mobile,this.otpForm.value.otp).subscribe(data => {
+    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp3
+    this.service.user_registration_verify(this.otpForm.value.mobile,this.otp).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
-            this.router.navigate(['/password']);
+            this.router.navigate(['Learner/password']);
           } else{
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
           }
@@ -79,7 +83,13 @@ export class OtpComponent implements OnInit {
 
   }
   Resendcode(){
-    
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
+      this.otp = '';
+      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+        this.showotp = true;
+      } 
+  })
   }
   
   }
