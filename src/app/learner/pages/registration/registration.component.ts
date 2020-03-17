@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
       private router: Router,
       private alert: AlertServiceService,
       private loader : NgxSpinnerService,
-      private cookieService: CookieService,
+      // private cookieService: CookieService,
       public service : LearnerServicesService,
   ) {
   }
