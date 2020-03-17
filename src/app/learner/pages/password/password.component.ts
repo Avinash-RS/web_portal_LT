@@ -34,11 +34,11 @@ export class PasswordComponent implements OnInit {
   submit(){
     this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
           if (data.data['user_registration_done']['success'] == 'true') {
-            this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
+            this.alert.openAlert(data.data['user_registration_done'].message,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].message))
             this.router.navigate(['Learner/courses']);
           } else{
-            this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
+            this.alert.openAlert(data.data['user_registration_done'].message,null)
           }
       })
   }
