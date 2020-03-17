@@ -45,7 +45,7 @@ export class RegistrationComponent implements OnInit {
           this.loader.show();
           if (data.data['user_registration']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration'].message,null)
-            this.cookieService.set('UserDetails',JSON.stringify(data.data['user_registration'].data))
+            localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
             this.loader.hide();
             this.registerForm.reset();
           } else{

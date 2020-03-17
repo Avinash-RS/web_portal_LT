@@ -3,12 +3,14 @@
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
       <h1 class="head">Enter the mobile number</h1>
       <form [formGroup]="otpForm">
-        <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control"
+        <div class="form-group">
+        <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control" pattern="[0-9]{10}"
           [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
         <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
           <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
           <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
           <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits</div>
+        </div>
         </div>
         <div><br>
           <p class="head">OTP will be sent to this number</p>
@@ -17,21 +19,25 @@
         <div *ngIf="showotp"><br>
           <p class="head">OTP Code</p>
 
-          <input [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" class="otp" type="tel"
+          <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
             formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-          <input [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" class="otp" type="tel"
+
+          <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
             formControlName="otp2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-          <input [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" class="otp" type="tel"
+
+          <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
             formControlName="otp3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-          <input [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" class="otp" type="tel"
+
+          <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
             formControlName="otp4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
           <!-- <input type="tel" formControlName="otp" class="form-control"
           [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" /> -->
-          <div *ngIf="f.otp.touched && f.otp.errors" class="invalid-feedback">
+          <!-- <div *ngIf="f.otp.touched && f.otp.errors" class="invalid-feedback">
             <div *ngIf="f.otp.errors.required">OTP is required</div>
             <div *ngIf="f.otp.errors.pattern">OTP is invalid</div>
             <div *ngIf="f.otp.errors.maxlength">OTP must have only 4 numbers</div>
-          </div><br><br>
+          </div> -->
+          <br><br>
         </div>
         <div *ngIf="showotp">
           <button class="btn" (click)="otpverify()">Verify</button>

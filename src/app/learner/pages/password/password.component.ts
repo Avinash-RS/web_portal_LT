@@ -19,7 +19,7 @@ export class PasswordComponent implements OnInit {
     private cookieService: CookieService,public service : LearnerServicesService) { }
 
   ngOnInit() {
-    var user = this.cookieService.get('UserDetails')
+    var user = localStorage.getItem('UserDetails')
     this.systemip = localStorage.getItem('Systemip')
     this.currentUser = JSON.parse(user);
     this.passwordForm = this.formBuilder.group({
@@ -36,7 +36,7 @@ export class PasswordComponent implements OnInit {
           if (data.data['user_registration_done']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].message))
-            this.router.navigate(['/courses']);
+            this.router.navigate(['Learner/courses']);
           } else{
             this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
           }
