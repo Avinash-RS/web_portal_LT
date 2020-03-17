@@ -5,6 +5,8 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as myGlobals from '../../../common/globals'; 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,17 +20,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: new FormControl("", [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-        Validators.pattern(/^[A-Za-z0-9]*$/)]),
-      password: new FormControl("", [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!@#%^*()]*$).{8,20}$/)
-      ]),
+      username: new FormControl("", myGlobals.usernameVal),
+      password: new FormControl("",myGlobals.passwordVal),
       remember_me: new FormControl("", [])
     });
   }

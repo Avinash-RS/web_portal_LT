@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -21,7 +21,7 @@ export class OtpComponent implements OnInit {
   currentUser: any = []
   otpForm: FormGroup;
   constructor(private router:Router,  private formBuilder: FormBuilder,  private alert: AlertServiceService,
-    private cookieService: CookieService,
+    // private cookieService: CookieService,
     public service : LearnerServicesService) { }
   otp: any;
   showotp: boolean = false;
@@ -40,9 +40,9 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-    var user = this.cookieService.get('UserDetails')
+    // var user = this.cookieService.get('UserDetails')
     // var user = localStorage.getItem('UserDetails')
-    this.currentUser = JSON.parse(user);
+    // this.currentUser = JSON.parse(user);
     console.log(this.currentUser)
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
