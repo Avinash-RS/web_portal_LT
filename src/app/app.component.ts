@@ -31,16 +31,19 @@ export class AppComponent {
   changeOfRoutes() {
     // var name = this.cookieService.get('uname') ? this.cookieService.get('uname') : null;
     // var ps = this.cookieService.get('ps') ? this.cookieService.get('ps') : null;
-    // var psd = ps && atob(ps);
+    var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
+    var psd =  localStorage.getItem('ps') ? localStorage.getItem('ps') : null; 
+    var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
+    var ps = atob(psd)
     // var cookie = this.cookieService.get('remember_me') ? this.cookieService.get('remember_me') : 'false';
-    // console.log(name, ps, psd, (name || psd) == null)
-    // if (cookie == 'true') {
-    //   if ((name || psd) == null) {
-    //     this.router.navigate(["/login"]);
-    //   } else {
-    //     this.router.navigate(["/courses"]);
-    //   }
-    // }
+    console.log(name, psd, (name || psd) == null)
+    if (cookie == 'true') {
+      if ((name || psd) == null) {
+        this.router.navigate(["/Learner/login"]);
+      } else {
+        this.router.navigate(["/Learner/courses"]);
+      }
+    }
   }
 
 }

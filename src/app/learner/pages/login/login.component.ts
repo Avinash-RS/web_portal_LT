@@ -33,17 +33,20 @@ export class LoginComponent implements OnInit {
   login() {
     this.loader.show();
     this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false).subscribe((loginresult: any) => {
+      console.log(loginresult.data.login.message)
       if (loginresult.data.login.success) {
         this.loader.hide();
         if (loginresult.data.login && this.loginForm.value.remember_me === true) {
-          // this.cookieService.set('uname', this.loginForm.value.username);
-          // this.cookieService.set('remember_me','true');
+          localStorage.setItem('uname', this.loginForm.value.username);
+          localStorage.setItem('remember_me', 'true');
           var ps = btoa(this.loginForm.value.password);
-          // this.cookieService.set('ps', ps);
-          this.router.navigate(['/courses'])
+          localStorage.setItem('ps', ps);
+          localStorage.setItem('UserDetails',JSON.stringify(loginresult.data.login.message))
+          this.router.navigate(['/Learner/courses'])
         } else {
-          // this.cookieService.set('remember_me','false');
-          this.router.navigate(['/courses'])
+          localStorage.setItem('UserDetails',JSON.stringify(loginresult.data.login.message))
+          localStorage.setItem('remember_me','false');
+          this.router.navigate(['/Learner/courses'])
         }
       } else {
         this.loader.hide();
