@@ -5,11 +5,11 @@ const routes: Routes = [
 
   // {
   //   path: '',
-  //   component: LoginComponent
+  //   component: LearnerHomeComponent
   // },
   // {
   //   path: '**',
-  //   component: RegistrationComponent
+  //   component: LearnerHomeComponent
   // },
   {
     path: 'Learner',

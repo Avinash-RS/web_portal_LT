@@ -4,21 +4,27 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-// import { CookieService } from 'ngx-cookie-service';
-// import { CookieModule, CookieService } from 'ngx-cookie';
 //local
-
+import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './../learner/pages/login/login.component';
 import { CoursedetailsComponent } from './../learner/pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from './../learner/pages/registration/registration.component';
 import { OtpComponent } from './../learner/pages/otp/otp.component';
 import { PasswordComponent } from './../learner/pages/password/password.component';
 import { MaterialModule } from './../common/material.module';
+import { LearnerHomeComponent } from './pages/learner-home/learner-home.component';
 import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
 import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
+import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
+
+import { CourseComponentComponent } from './../common/learner/course-component/course-component.component';
+import { TopCoursesComponent } from './../common/learner/top-courses/top-courses.component';
+import { RecomendedCoursesComponent } from './../common/learner/recomended-courses/recomended-courses.component';
+import { WishlistCoursesComponent } from './../common/learner/wishlist-courses/wishlist-courses.component';
 //others
 
 const routes: Routes = [
+  { path: '', component: LearnerHomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'courses', component: CoursedetailsComponent },
   { path: 'register', component: RegistrationComponent },
@@ -30,13 +36,22 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    HeaderComponent,
     LoginComponent,
+    LearnerHomeComponent,
     CoursedetailsComponent,
     RegistrationComponent,
     OtpComponent,
     PasswordComponent,
     ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent],
+    RecoverFogotpasswordOTPComponent,
+    LearnerMyCourseComponent,
+  
+    CourseComponentComponent,
+    TopCoursesComponent,
+    RecomendedCoursesComponent,
+    WishlistCoursesComponent
+  ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 
