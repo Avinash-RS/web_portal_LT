@@ -34,14 +34,16 @@ export class LearnerServicesService {
   }
 
 
-  submit_otp(user_id,_id,mobile) {
+  submit_otp(user_id,_id,mobile,email) {
     console.log(user_id,_id,mobile)
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
       variables: {
         user_id: user_id,
         user: _id,
-        mobile_number:mobile
+        mobile_number:mobile,
+        email:email,
+      
       }
     });
   }

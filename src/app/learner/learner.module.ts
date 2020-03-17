@@ -16,6 +16,7 @@ import { PasswordComponent } from './../learner/pages/password/password.componen
 import { MaterialModule } from './../common/material.module';
 import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
 import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 //others
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'password', component: PasswordComponent },
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({
@@ -36,7 +38,8 @@ const routes: Routes = [
     OtpComponent,
     PasswordComponent,
     ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent],
+    RecoverFogotpasswordOTPComponent,
+    ProfileComponent],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 

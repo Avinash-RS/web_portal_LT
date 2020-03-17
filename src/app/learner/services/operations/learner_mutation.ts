@@ -22,11 +22,13 @@ export const user_registration = gql`
 `;
 
 export const user_registration_mobile_otp_send = gql`
-  mutation user_registration_mobile_otp_send($user_id: String,$user: String,$mobile_number: String!) {
+  mutation user_registration_mobile_otp_send($user_id: String,$user: String,$mobile_number: String!,$email: String) {
     user_registration_mobile_otp_send(
       user_id:$user_id,
       user: $user,
-      mobile_number: $mobile_number
+      mobile_number: $mobile_number,
+      email: $email,
+      is_active: true
     ) {
       message
       success

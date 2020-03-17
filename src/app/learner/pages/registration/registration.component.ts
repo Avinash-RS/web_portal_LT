@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
 // import { CookieService } from 'ngx-cookie-service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import * as myGlobals from '../../../common/globals'; 
+
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-registration',
@@ -29,8 +31,8 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(50)]),
-          email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)]),
+          username: new FormControl("", myGlobals.usernameVal),
+          email: new FormControl("", myGlobals.emailVal),
           termsandconditions: new FormControl('', [])
       }, {
       });
@@ -40,6 +42,7 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
+    debugger;
    this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           this.loader.show();

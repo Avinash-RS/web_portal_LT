@@ -1,0 +1,29 @@
+.container-reg200 {
+    width: 100%;
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color:white;
+}
+.wrap-reg {
+    width: 90%;
+    height: auto;
+    background: #fff !important;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color:skyblue !important;
+    box-shadow: blue;
+  }
+.simple-card {
+    max-width: 400px !important;
+  }
+  textarea {
+    width: 314px;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
