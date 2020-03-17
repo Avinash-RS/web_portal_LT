@@ -14,14 +14,18 @@ import { RegistrationComponent } from './../learner/pages/registration/registrat
 import { OtpComponent } from './../learner/pages/otp/otp.component';
 import { PasswordComponent } from './../learner/pages/password/password.component';
 import { MaterialModule } from './../common/material.module';
+import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
+import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 //others
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'courses', component: CoursedetailsComponent },
-  { path: 'reg', component: RegistrationComponent },
+  { path: 'register', component: RegistrationComponent },
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },
+  { path: 'recover', component: ForgotUsernameAndPasswordComponent },
+  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
 ];
 
 @NgModule({
@@ -30,7 +34,9 @@ const routes: Routes = [
     CoursedetailsComponent,
     RegistrationComponent,
     OtpComponent,
-    PasswordComponent],
+    PasswordComponent,
+    ForgotUsernameAndPasswordComponent,
+    RecoverFogotpasswordOTPComponent],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 

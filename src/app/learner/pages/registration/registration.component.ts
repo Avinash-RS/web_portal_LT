@@ -30,7 +30,8 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
           username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(50)]),
-          email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+          email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)]),
+          termsandconditions: new FormControl('', [])
       }, {
       });
   }
@@ -39,12 +40,12 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username)
+   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           this.loader.show();
           if (data.data['user_registration']['success'] == 'true') {
-            alert(data.data['user_registration'].message)
-            // this.cookieService.set('UserDetails',JSON.stringify(data.data['user_registration'].data))
+            this.alert.openAlert(data.data['user_registration'].message,null)
+            localStorage.set('UserDetails',JSON.stringify(data.data['user_registration'].data))
             this.loader.hide();
             this.registerForm.reset();
           } else{
@@ -55,6 +56,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.registerForm.value.termsandconditions)
       if (this.registerForm.valid) {
           this.Submit();
       } 

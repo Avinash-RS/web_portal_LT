@@ -22,12 +22,13 @@ export class LearnerServicesService {
     });
   }
 
-  user_registration(email, full_name) {
+  user_registration(email, full_name,termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name: full_name,
-        email: email
+        email: email,
+        term_condition:termsandconditions
       }
     });
   }

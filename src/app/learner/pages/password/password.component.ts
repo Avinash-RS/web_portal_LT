@@ -3,6 +3,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBui
 import { MustMatch } from '../../../common/_helpers/must-match.validator';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
+import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-password',
@@ -13,11 +15,11 @@ export class PasswordComponent implements OnInit {
   currentUser: any = []
   passwordForm: FormGroup;
   systemip:String;
-  constructor(private router:Router, private formBuilder: FormBuilder, 
-    public service : LearnerServicesService) { }
+  constructor(private router:Router, private formBuilder: FormBuilder,private alert: AlertServiceService,
+    private cookieService: CookieService,public service : LearnerServicesService) { }
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
+    var user = this.cookieService.get('UserDetails')
     this.systemip = localStorage.getItem('Systemip')
     this.currentUser = JSON.parse(user);
     this.passwordForm = this.formBuilder.group({
@@ -31,15 +33,12 @@ export class PasswordComponent implements OnInit {
   get f() { return this.passwordForm.controls; }
   submit(){
     this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
-        console.log(data.data['user_registration_done'])
           if (data.data['user_registration_done']['success'] == 'true') {
-            console.log('in')
-            alert(data.data['user_registration_done'].statusmsg)
+            this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].message))
             this.router.navigate(['/courses']);
-          
           } else{
-            alert(data.data['user_registration_done'].statusmsg)
+            this.alert.openAlert(data.data['user_registration_done'].statusmsg,null)
           }
       })
   }

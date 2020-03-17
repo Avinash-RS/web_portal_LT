@@ -14,7 +14,8 @@ import {
     MatRadioModule,
     MatDialogModule,
     MatTooltipModule,
-    MatDialogRef
+    MatDialogRef,
+    MatTabsModule,
   } from '@angular/material';
   @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import {
         MatSelectModule,
         MatRadioModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTabsModule,
+        MatTooltipModule,
     ],
     exports: [
         MatButtonModule,
@@ -45,7 +47,8 @@ import {
         MatSelectModule,
         MatRadioModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatTabsModule,
     ],
     providers: [
       {
