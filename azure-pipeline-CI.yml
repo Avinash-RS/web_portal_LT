@@ -5,8 +5,6 @@ variables:
 
   azureSubscription: ''
 
-  webAppName: 'lxp'
-
   environmentName: 'DEV'
 
   vmImageName: 'ubantu-latest'
