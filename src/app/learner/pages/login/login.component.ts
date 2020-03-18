@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loader.show();
-    this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false).subscribe((loginresult: any) => {
+    this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
+    .subscribe((loginresult: any) => {
       console.log(loginresult.data.login.message)
       if (loginresult.data.login.success) {
         this.loader.hide();

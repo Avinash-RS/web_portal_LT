@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '../services/common-services.service'
+import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  userDetailes: any;
 
-  constructor(public services: CommonServicesService) { }
+  constructor(public services: CommonServicesService, private alert: AlertServiceService, ) { }
 
   ngOnInit() {
-
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
   }
+
   logout() {
-    var user = JSON.parse(localStorage.getItem('UserDetails'));
-    // console.log(user,JSON.parse(user));
-    this.services.logout(user._id, false).subscribe((logout: any) => {
-      console.log(logout.data.logout.success)
-      if (logout.data.logout.success)
+    this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
+      console.log(logout.data.logout)
+      if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
+      }
+      else if (logout.data.logout && !logout.data.logout.success)
+        this.alert.openAlert(logout.data.logout.message, null)
       else
-        alert(logout.data.logout.message)
+        alert('Please try again later')
     });
   }
 }
