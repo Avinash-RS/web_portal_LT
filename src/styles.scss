@@ -83,19 +83,21 @@ body
 .limiter {
   width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 .wrap-reg {
   width: 350px;
   height: 500px;
   background: #fff !important;
   border-radius: 3px;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 @media (max-width: 480px) {
   .wrap-reg {
     padding-left: 15px;
     padding-right: 15px;
+    overflow: hidden !important;
   }
 }
 .p-l-50 {padding-left: 40px !important;}
