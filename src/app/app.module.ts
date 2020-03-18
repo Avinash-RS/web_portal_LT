@@ -12,14 +12,11 @@ import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    AdminLoginComponent,
-    
   ],
   imports: [
     // CookieModule.forRoot() ,
