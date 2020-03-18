@@ -4,6 +4,16 @@
     <img src="../../../../assets/learner/key_down.svg">
   </mat-grid-tile>
 </mat-grid-list>
+
 <mat-card style="text-align: center;">
-  <app-course-component> </app-course-component>
+  <mat-grid-list cols="4" >
+    <mat-grid-tile *ngFor="let course of tiles" [colspan]="1" [rowspan]="1">
+      <!-- <img src="./assets/Dotnettricks.png">
+    <mat-grid-tile-footer>
+    <h3></h3>
+    </mat-grid-tile-footer>
+    </mat-grid-tile> -->
+      <app-course-component [course] = "course"> </app-course-component>
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-card>
