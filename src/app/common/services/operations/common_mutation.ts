@@ -1,1 +1,0 @@
-import qql from "graphql-tag";
