@@ -79,4 +79,15 @@ export const get_forgot_username_mobile_email = gql`
     }
   }
 `;
-
+export const get_forgot_password_byusername = gql`
+  mutation get_forgot_password_byusername($username: String) {
+    get_forgot_password_byusername(
+      username:$username,
+    ) {
+      message
+      success
+      data
+      
+    }
+  }
+`;

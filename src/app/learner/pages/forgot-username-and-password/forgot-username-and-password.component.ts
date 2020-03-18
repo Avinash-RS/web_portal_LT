@@ -11,9 +11,10 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 })
 export class ForgotUsernameAndPasswordComponent implements OnInit {
   forgotUsername: FormGroup;
+  forgotPasswordform: FormGroup;
   currentUser: any = []
   recoveryType: string;
-  recoveryTypes: string[] = ['+917737924803', 'ankitkachhwahaha6@gmail.com'];
+  recoveryTypes: string[] = [];
   type: string;
   subtype: string;
   constructor( private formBuilder: FormBuilder,
@@ -34,6 +35,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
   get f() { return this.forgotUsername.controls; }
+  get fp() { return this.forgotPasswordform.controls; }
 
   inputChanged(element: HTMLElement) {
     this.subtype = element.getAttribute('formControlName')
@@ -56,8 +58,24 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
           }
       })
   }
-  forgotPassword(){
 
+  forgotPassword(){
+    console.log(this.forgotUsername.value.username)
+    this.service.forgotPasswordByUsername(this.forgotUsername.value.username)
+    .subscribe(data => {
+          this.loader.show();
+          if (data.data['get_forgot_password_byusername']['success'] == 'true') {
+            // this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
+              this.recoveryTypes = data.data['get_forgot_password_byusername'].data
+            // localStorage.setItem('UserDetails',JSON.stringify(data.data['get_forgot_username_mobile'].data))
+            this.loader.hide();
+         
+          } else{
+            this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
+            this.loader.hide();
+          }
+      })
+    
   }
 
   

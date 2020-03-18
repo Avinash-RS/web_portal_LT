@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { login } from "./operations/learner_query";
-import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,get_forgot_username_mobile_email,
+import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
+  get_forgot_username_mobile_email,get_forgot_password_byusername,
   user_registration_done} from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
@@ -81,16 +82,12 @@ export class LearnerServicesService {
     });
   }
   
-  
-  // submit_otp(user_id,_id,mobile) {
-  //   return this.Apollo.query({
-  //     query: user_registration_mobile_otp_send,
-  //     variables: {
-  //       mobile_number:mobile,
-  //       user_id:user_id,
-  //       user:_id,
-
-  //     }
-  //   });
-  // }
+  forgotPasswordByUsername(username){
+    return this.Apollo.query({
+      query: get_forgot_password_byusername,
+      variables: {
+        username:username
+      }
+    });
+  }
 }
