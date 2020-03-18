@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// import { NgOtpInputModule } from 'ng-otp-input';
+import { NgOtpInputModule } from 'ng-otp-input';
 import { OtpRoutingModule } from './otp-routing.module';
 
 @NgModule({
@@ -9,7 +9,7 @@ import { OtpRoutingModule } from './otp-routing.module';
   imports: [
     CommonModule,
     OtpRoutingModule,
-    // NgOtpInputModule
+    NgOtpInputModule
   ]
 })
 export class OtpModule { }

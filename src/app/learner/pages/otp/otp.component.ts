@@ -3,6 +3,10 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBui
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import * as myGlobals from '../../../common/globals'; 
+
+// import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -18,10 +22,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class OtpComponent implements OnInit {
   currentUser: any = []
   otpForm: FormGroup;
-  constructor(private router:Router,  private formBuilder: FormBuilder,
-    public service : LearnerServicesService) { }
+  systemip:String;
   otp: any;
   showotp: boolean = false;
+  otp1 :number;
+  otp2 :number;
+  otp3 :number;
+  otp4 :number;
+  showverify: boolean = false;
+  constructor(private router:Router,  private formBuilder: FormBuilder,  private alert: AlertServiceService,
+    // private cookieService: CookieService,
+    public service : LearnerServicesService) { }
+
 
   @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
@@ -37,51 +49,57 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
-    this.currentUser = JSON.parse(user);
-    console.log(this.currentUser)
-    this.otpForm = this.formBuilder.group({
-      mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
-      otp: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern('[0-9]{4}')]),
-    }, {
-  });
-   
-  }
-  get f() { return this.otpForm.controls; }
+  var user = localStorage.getItem('UserDetails')
+  this.currentUser = JSON.parse(user);
+  this.systemip = localStorage.getItem('Systemip')
+  this.otpForm = this.formBuilder.group({
+         mobile: new FormControl("", myGlobals.mobVal),
+          otp1: new FormControl("", []),
+          otp2: new FormControl("", []),
+          otp3: new FormControl("", []),
+          otp4: new FormControl("", [])
+}, {
+
+});
+}
+get f() { return this.otpForm.controls; }
   otpverification(){
-    console.log( this.currentUser.user_id, this.currentUser._id,this.otpForm.value.mobile)
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
-        console.log(data.data['user_registration_mobile_otp_send'])
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
-            console.log('in')
-            alert(data.data['user_registration_mobile_otp_send'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.showotp = true;
-          
           } 
       })
   
   }
-  onOtpChange(otp) {
-    this.otp = otp;
+  // onOtpChange(otp) {
+  //   this.otp = otp;
 
-  }
+  // }
   otpverify(){
-    console.log(this.otpForm.value.mobile,this.otpForm.value.otp)
-    this.service.user_registration_verify(this.otpForm.value.mobile,this.otpForm.value.otp).subscribe(data => {
-        console.log(data.data['user_registration_mobile_otp_verify'])
+    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
+    this.service.user_registration_verify(this.otpForm.value.mobile,this.otp).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
-            console.log('in')
-            alert(data.data['user_registration_mobile_otp_verify'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
-            this.router.navigate(['/password']);
+            this.router.navigate(['Learner/password']);
           } else{
-            alert(data.data['user_registration_mobile_otp_verify'].message)
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
           }
       })
 
   }
   Resendcode(){
-    
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+      this.otp = '';
+      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+        this.showotp = true;
+      } 
+  })
+  }
+  correctotp(){
+    this.showverify = true;
   }
   
   }

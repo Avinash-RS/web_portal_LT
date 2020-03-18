@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { login } from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
-  user_registration_done} from "./operations/learner_mutation"
+  user_registration_done} from "./operations/learner_mutation";
 @Injectable({
   providedIn: 'root'
 })
@@ -22,25 +22,28 @@ export class LearnerServicesService {
     });
   }
 
-  user_registration(email, full_name) {
+  user_registration(email, full_name,termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name: full_name,
-        email: email
+        email: email,
+        term_condition:termsandconditions
       }
     });
   }
 
 
-  submit_otp(user_id,_id,mobile) {
+  submit_otp(user_id,_id,mobile,email) {
     console.log(user_id,_id,mobile)
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
       variables: {
         user_id: user_id,
         user: _id,
-        mobile_number:mobile
+        mobile_number:mobile,
+        email:email,
+      
       }
     });
   }

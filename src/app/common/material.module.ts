@@ -1,6 +1,41 @@
-import { NgModule } from '@angular/core';   
+import { NgModule } from '@angular/core';
 
 import {
+  MatButtonModule,
+  MatMenuModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatCardModule,
+  MatGridListModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatDialogModule,
+  MatTooltipModule,
+  MatDialogRef,
+  MatTabsModule,
+} from '@angular/material';
+
+@NgModule({
+  imports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatTooltipModule,
+  ],
+  exports: [
     MatButtonModule,
     MatMenuModule,
     MatInputModule,
@@ -14,44 +49,14 @@ import {
     MatRadioModule,
     MatDialogModule,
     MatTooltipModule,
-    MatDialogRef
-  } from '@angular/material';
-  @NgModule({
-    imports: [
-        MatButtonModule,
-        MatMenuModule,
-        MatInputModule,
-        MatToolbarModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatCardModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatDialogModule,
-        MatTooltipModule
-    ],
-    exports: [
-        MatButtonModule,
-        MatMenuModule,
-        MatInputModule,
-        MatToolbarModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatCardModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatDialogModule,
-        MatTooltipModule
-    ],
-    providers: [
-      {
-        provide: MatDialogRef,
-        useValue: {}
-      },
-   ],
-  })
-  export class MaterialModule {}
+    MatTabsModule,
+  ],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+  ],
+  declarations: [],
+})
+export class MaterialModule { }
