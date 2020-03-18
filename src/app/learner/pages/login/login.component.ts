@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
           var ps = btoa(this.loginForm.value.password);
           localStorage.setItem('ps', ps);
           localStorage.setItem('UserDetails',JSON.stringify(loginresult.data.login.message))
-          this.router.navigate(['/Learner/courses'])
+          this.router.navigate(['/Learner'])
         } else {
           localStorage.setItem('UserDetails',JSON.stringify(loginresult.data.login.message))
           localStorage.setItem('remember_me','false');
-          this.router.navigate(['/Learner/courses'])
+          this.router.navigate(['/Learner'])
         }
       } else {
         this.loader.hide();
