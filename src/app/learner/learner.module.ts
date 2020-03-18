@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 //local
 import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './../learner/pages/login/login.component';
-import { CoursedetailsComponent } from './../learner/pages/coursedetails/coursedetails.component';
+import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from './../learner/pages/registration/registration.component';
 import { OtpComponent } from './../learner/pages/otp/otp.component';
 import { PasswordComponent } from './../learner/pages/password/password.component';
