@@ -3,7 +3,9 @@ trigger:
 
 variables:
 
-  azureSubscription: ''
+  azureSubscription: '264b9899-fe1b-430b-9509-2154878d5774'
+
+  webAppName: 'lxp'
 
   environmentName: 'DEV'
 
