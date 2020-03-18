@@ -1,4 +1,4 @@
-@import "../../assets/variable.scss";
+@import "../../../../assets/variable.scss";
 mat-card {
     padding: 2% !important;
 }
@@ -12,6 +12,8 @@ mat-card {
 }
 ::ng-deep .mat-grid-tile .mat-figure, mat-grid-tile {
     display: block !important;
+    margin-right: 19px !important;
+    margin-left: 19px !important;
 }
 .key_down {
     text-align: end;

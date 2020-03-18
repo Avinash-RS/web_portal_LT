@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
       console.log(logout.data.logout)
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
+        this.userDetailes = null;
       }
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)

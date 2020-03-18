@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { login } from "./operations/learner_query";
-import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,get_forgot_username_mobile_email,
-  user_registration_done} from "./operations/learner_mutation"
+import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
+  user_registration_done} from "./operations/learner_mutation";
 @Injectable({
   providedIn: 'root'
 })
