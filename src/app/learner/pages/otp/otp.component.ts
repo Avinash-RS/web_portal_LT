@@ -80,7 +80,6 @@ get f() { return this.otpForm.controls; }
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
           }
       })
-
   }
   Resendcode(){
     this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
