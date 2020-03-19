@@ -16,8 +16,10 @@
                 </div>
             </div>
 
+            <span class="alert ">This name will be used in your certificates</span>
 
-            <div class="form-group">
+
+            <div class="form-group space5">
                 <label>Email ID</label><span style="color: red;"> *</span>
                 <input type="text" formControlName="email" placeholder="example@mail.com"  maxlength="64" class="form-control"
                     [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
