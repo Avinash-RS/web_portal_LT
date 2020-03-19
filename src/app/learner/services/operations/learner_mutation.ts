@@ -35,16 +35,21 @@ export const user_registration_mobile_otp_send = gql`
 `;
 
 export const user_registration_mobile_otp_verify = gql`
-  mutation user_registration_mobile_otp_verify($mobile_number: String!,$otp:String!) {
+  mutation user_registration_mobile_otp_verify($otp:String!,$mobile_number: String!) {
     user_registration_mobile_otp_verify(
-      mobile_number:$mobile_number,
       otp: $otp,
+      mobile_number:$mobile_number
+      
     ) {
-      otp
-      mobile_number
-      _id
       message
       success
+      data{
+        otp
+        _id
+        mobile_number
+        user_id
+        username
+      }
     }
   }
 `;
@@ -79,15 +84,45 @@ export const get_forgot_username_mobile_email = gql`
     }
   }
 `;
+
 export const get_forgot_password_byusername = gql`
   mutation get_forgot_password_byusername($username: String) {
     get_forgot_password_byusername(
       username:$username,
     ) {
+      data{
+        value
+        type
+      }
+      message
+      success
+        
+    }
+  }
+`;
+
+
+export const user_registration_username_suggestion = gql`
+  mutation user_registration_username_suggestion($user_id: String) {
+    user_registration_username_suggestion(
+      user_id:$user_id,
+    ) {
       message
       success
       data
-      
+        
+    }
+  }
+`;
+
+export const get_forgot_password_byresetpassword = gql`
+  mutation get_forgot_password_byresetpassword($username: String!,$password:String!) {
+    get_forgot_password_byresetpassword(
+      username:$username,
+      password:$password
+    ) {
+      message
+      success
     }
   }
 `;

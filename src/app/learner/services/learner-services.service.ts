@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { login } from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
-  get_forgot_username_mobile_email,get_forgot_password_byusername,
-  user_registration_done} from "./operations/learner_mutation"
+  get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
+  user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -47,12 +47,13 @@ export class LearnerServicesService {
     });
   }
 
-  user_registration_verify(mobile_number,otp){
+  user_registration_verify(otp,mobile_number){
     return this.Apollo.query({
       query: user_registration_mobile_otp_verify,
       variables: {
-        mobile_number: mobile_number,
         otp: otp,
+        mobile_number: mobile_number
+       
       }
     });
   }
@@ -83,10 +84,30 @@ export class LearnerServicesService {
   }
   
   forgotPasswordByUsername(username){
+    console.log(username)
     return this.Apollo.query({
       query: get_forgot_password_byusername,
       variables: {
         username:username
+      }
+    });
+  }
+
+  userNamesuggestion(userId){
+    return this.Apollo.query({
+      query: user_registration_username_suggestion,
+      variables: {
+        user_id:userId
+      }
+    });
+  }
+
+  resetPassword(username,password){
+    return this.Apollo.query({
+      query: get_forgot_password_byresetpassword,
+      variables: {
+        username:username,
+        password:password
       }
     });
   }

@@ -4,17 +4,25 @@ import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LearnerServicesService } from '../../services/learner-services.service';
+
 @Component({
   selector: 'app-forgot-username-and-password',
   templateUrl: './forgot-username-and-password.component.html',
   styleUrls: ['./forgot-username-and-password.component.scss']
 })
+
 export class ForgotUsernameAndPasswordComponent implements OnInit {
+
   forgotUsername: FormGroup;
   forgotPasswordform: FormGroup;
   currentUser: any = []
   recoveryType: string;
-  recoveryTypes: string[] = [];
+  recoveryTypes: any = [] ;
+  // [
+    // {email: 'first', mobile: 'one'},
+   
+  // ];
+
   type: string;
   subtype: string;
   constructor( private formBuilder: FormBuilder,
@@ -59,24 +67,48 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       })
   }
 
-  forgotPassword(){
+  getUserDetails(){
     console.log(this.forgotUsername.value.username)
-    this.service.forgotPasswordByUsername(this.forgotUsername.value.username)
-    .subscribe(data => {
-          this.loader.show();
-          if (data.data['get_forgot_password_byusername']['success'] == 'true') {
-            // this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
-              this.recoveryTypes = data.data['get_forgot_password_byusername'].data
-            // localStorage.setItem('UserDetails',JSON.stringify(data.data['get_forgot_username_mobile'].data))
-            this.loader.hide();
-         
-          } else{
-            this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
-            this.loader.hide();
-          }
-      })
-    
+    this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
+      if (data.data['get_forgot_password_byusername']['success'] == 'true') {
+        this.recoveryTypes = data.data['get_forgot_password_byusername'].data
+        console.log(this.recoveryTypes)
+      } else{
+        this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
+      }
+  })
   }
+  
+  
 
+  forgotPassword(recovertype){
+    console.log(recovertype)
+    if(recovertype.type === "mobile"){
+        this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,recovertype.value).subscribe(data => {
+              if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+                console.log(data.data['user_registration_mobile_otp_send'])
+                this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+                this.router.navigate(['Learner/recoverotp',{mobile:recovertype.value}])
+              } 
+          })
+    }else{
+      this.type = "password"
+      this.service.forgotUsernameandPassword(this.type,recovertype.type,this.forgotUsername.value.mobile,this.forgotUsername.value.email)
+      .subscribe(data => {
+            this.loader.show();
+            if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
+              this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
+              console.log(data.data['get_forgot_username_mobile_email'])
+              this.loader.hide();
+           
+            } else{
+              this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
+              this.loader.hide();
+            }
+        })
+    }
+   
+
+  }
   
 }

@@ -71,7 +71,7 @@ get f() { return this.otpForm.controls; }
   // }
   otpverify(){
     this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.user_registration_verify(this.otpForm.value.mobile,this.otp).subscribe(data => {
+    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile,).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
