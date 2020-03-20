@@ -71,7 +71,7 @@ export const user_registration_done = gql`
 `;
 
 export const get_forgot_username_mobile_email = gql`
-  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String!,$email: String!) {
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String) {
     get_forgot_username_mobile_email(
       type:$type,
       subtype:$subtype,

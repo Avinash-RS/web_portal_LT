@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -35,16 +35,25 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+$/), Validators.minLength(3), Validators.maxLength(20)]),
     }, {
       
-  });
-
-  
-  }
+  });}
 
   get f() { return this.forgotUsername.controls; }
   get fp() { return this.forgotPasswordform.controls; }
 
   inputChanged(element: HTMLElement) {
     this.subtype = element.getAttribute('formControlName')
+  }
+
+  focusout(e){
+    if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 0){
+      this.forgotUsername.controls['email'].disable();
+    }
+    else if (e.target.id === 'email' && e.target.value != "" && e.target.value.length > 0){
+      this.forgotUsername.controls['mobile'].disable();
+    }else{
+      this.forgotUsername.controls['email'].enable();
+      this.forgotUsername.controls['mobile'].enable();
+    }
   }
 
   forgotusername(){
