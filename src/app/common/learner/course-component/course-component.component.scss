@@ -71,8 +71,8 @@ strong {
     left:0;
     color:white;
     background-color:$color-blue !important;
-    width:70%;
-    margin-left: 15%;
+    width:72%;
+    margin-left: 14%;
     height:45vh;
 }
 
@@ -98,5 +98,35 @@ strong {
 }
 .bottomButtons {
     position: absolute;
-    bottom: 0;
+    bottom: 2vh;
+    width: 100%;
+}
+.buy_now {
+    background-color: transparent;
+    color: white;
+    border : 0.5px solid rgb(211, 210, 210);
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.wishlst {
+    position: absolute;
+    left: 78%;
+    top: 1vh;
+}
+.wishlst img, .wishlstinContent img {
+    border-radius: 50px;
+    width: 100%;
+    // background-color: #ffcf01;
+    background-color: rgb(20, 20, 20);
+    opacity: 0.5;
+    border: none;
+}
+.wishlstinContent {
+    position: absolute;
+    left: 84%;
+    top: 1vh;
+    border: none;
+    background-color : transparent;
 }

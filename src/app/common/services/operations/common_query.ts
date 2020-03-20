@@ -8,7 +8,8 @@ export const logout = gql`
       error_msg
     }
   }`;
-  export const viewcourse = gql`
+
+export const viewcourse = gql`
   query viewcourse($course_id: String){
     viewcourse(course_id: $course_id) {
       success
@@ -56,4 +57,24 @@ export const logout = gql`
       }
     }
   }`;
-  
+
+export const view_wishlist = gql`
+  query view_wishlist($user_id: String){
+    view_wishlist(user_id: $user_id) {
+      success
+      error_msg
+      message{
+        _id
+        course_id
+        user_id
+        created_on
+        is_active
+        updated_on
+      }
+    }
+  }`;
+
+
+
+
+
