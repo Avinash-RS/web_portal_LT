@@ -31,7 +31,6 @@ export class AppComponent {
   changeOfRoutes() {
     var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     console.log(userDetailes,this.router.url)
-
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
     var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
     var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
