@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { BarRatingModule } from "ngx-bar-rating";
+// import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -23,6 +23,7 @@ import { TopCoursesComponent } from '../common/learner/top-courses/top-courses.c
 import { RecomendedCoursesComponent } from '../common/learner/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from '../common/learner/wishlist-courses/wishlist-courses.component';
 
+import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 //others
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
   { path: 'profile', component: ProfileComponent },
-  { path : 'MyCourse', component : LearnerMyCourseComponent}
+  { path : 'MyCourse', component : LearnerMyCourseComponent},
+  { path: 'resetpassword', component: ResetpasswordComponent },
 ];
 
 @NgModule({
@@ -55,14 +57,16 @@ const routes: Routes = [
     TopCoursesComponent,
     RecomendedCoursesComponent,
     WishlistCoursesComponent,
-    LearnerMyCourseComponent
+    LearnerMyCourseComponent,
+    ResetpasswordComponent
   ],
+    
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 
   imports: [
     // CookieModule.forRoot() ,
-    BarRatingModule,
+    // BarRatingModule,
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,

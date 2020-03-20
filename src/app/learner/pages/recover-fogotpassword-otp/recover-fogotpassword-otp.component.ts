@@ -3,7 +3,7 @@ import { FormGroup,Validators, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LearnerServicesService } from '../../services/learner-services.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recover-fogotpassword-otp',
@@ -13,11 +13,16 @@ import { Router } from '@angular/router';
 export class RecoverFogotpasswordOTPComponent implements OnInit {
   recoverOTPForm: FormGroup;
   otp: any;
-  constructor(  private formBuilder: FormBuilder,  private alert: AlertServiceService,
+  mobile: any;
+  constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
     private loader : NgxSpinnerService,private router: Router,
-    public service : LearnerServicesService,) { }
+    public service : LearnerServicesService,) { 
+      this.mobile = this.activatedRoute.snapshot.paramMap.get('mobile')
+      console.log(this.mobile)
+    }
 
   ngOnInit() {
+
     this.recoverOTPForm = this.formBuilder.group({
       otp1: new FormControl("", []),
       otp2: new FormControl("", []),
@@ -28,19 +33,20 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   }
   get f() { return this.recoverOTPForm.controls; }
   VerifyOTP(){
-    this.otp = this.recoverOTPForm.value.otp1+this.recoverOTPForm.value.otp2+this.recoverOTPForm.value.otp3+this.recoverOTPForm.value.otp3
-    // this.service.user_registration_verify(this.recoverOTPForm.value.mobile,this.otp).subscribe(data => {
-    //       if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
-    //         this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
-    //         this.router.navigate(['Learner/password']);
-    //       } else{
-    //         this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
-    //       }
-    //   })
+    this.otp = this.recoverOTPForm.value.otp1+this.recoverOTPForm.value.otp2+this.recoverOTPForm.value.otp3+this.recoverOTPForm.value.otp4
+    this.service.user_registration_verify(this.otp,this.mobile).subscribe(data => {
+          if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration_mobile_otp_verify'].data[0]))
+            this.router.navigate(['Learner/resetpassword']);
+          } else{
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+          }
+      })
   }
 
   resendcode(){
-    
+
   }
 
 }

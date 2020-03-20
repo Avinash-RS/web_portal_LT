@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean!) {
+  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean) {
     user_registration(
       full_name: $full_name
       email: $email,
@@ -37,16 +37,21 @@ export const user_registration_mobile_otp_send = gql`
 `;
 
 export const user_registration_mobile_otp_verify = gql`
-  mutation user_registration_mobile_otp_verify($mobile_number: String!,$otp:String!) {
+  mutation user_registration_mobile_otp_verify($otp:String!,$mobile_number: String!) {
     user_registration_mobile_otp_verify(
-      mobile_number:$mobile_number,
       otp: $otp,
+      mobile_number:$mobile_number
+      
     ) {
-      otp
-      mobile_number
-      _id
       message
       success
+      data{
+        otp
+        _id
+        mobile_number
+        user_id
+        username
+      }
     }
   }
 `;
@@ -67,3 +72,59 @@ export const user_registration_done = gql`
   }
 `;
 
+export const get_forgot_username_mobile_email = gql`
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String) {
+    get_forgot_username_mobile_email(
+      type:$type,
+      subtype:$subtype,
+      mobile_number:$mobile_number,
+      email:$email
+    ) {
+      success
+      message
+      
+    }
+  }
+`;
+
+export const get_forgot_password_byusername = gql`
+  mutation get_forgot_password_byusername($username: String) {
+    get_forgot_password_byusername(
+      username:$username,
+    ) {
+      data{
+        value
+        type
+      }
+      message
+      success
+        
+    }
+  }
+`;
+
+
+export const user_registration_username_suggestion = gql`
+  mutation user_registration_username_suggestion($user_id: String) {
+    user_registration_username_suggestion(
+      user_id:$user_id,
+    ) {
+      message
+      success
+      data
+        
+    }
+  }
+`;
+
+export const get_forgot_password_byresetpassword = gql`
+  mutation get_forgot_password_byresetpassword($username: String!,$password:String!) {
+    get_forgot_password_byresetpassword(
+      username:$username,
+      password:$password
+    ) {
+      message
+      success
+    }
+  }
+`;
