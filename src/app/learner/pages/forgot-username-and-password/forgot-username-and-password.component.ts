@@ -39,7 +39,10 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64), Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
       username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+$/), Validators.minLength(3), Validators.maxLength(20)]),
     }, {
+      
   });
+
+  
   }
 
   get f() { return this.forgotUsername.controls; }
