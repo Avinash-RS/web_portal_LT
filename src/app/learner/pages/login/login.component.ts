@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import * as myGlobals from '../../../common/globals';
 
 @Component({
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private alert: AlertServiceService, private service: LearnerServicesService, private loader: NgxSpinnerService) { }
+    private alert: AlertServiceService, private service: LearnerServicesService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -31,12 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loader.show();
     this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            this.loader.hide();
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
@@ -50,7 +47,6 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/Learner'])
             }
           } else {
-            this.loader.hide();
             this.alert.openAlert(loginresult.data.login.error_msg, null)
           }
         } else {
