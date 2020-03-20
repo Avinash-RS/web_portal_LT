@@ -11,7 +11,7 @@
     <!-- <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/course']">My courses</button> -->
     <mat-card style="text-align: center;">
         <mat-grid-list cols="4" rowHeight="fit" style="height: 60vh">
-            <mat-grid-tile *ngFor="let course of tiles" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
                 <app-course-component [course]="course"> </app-course-component>
             </mat-grid-tile>
         </mat-grid-list>
