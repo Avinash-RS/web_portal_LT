@@ -31,12 +31,7 @@ export class AppComponent {
   changeOfRoutes() {
     var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     console.log(userDetailes,this.router.url)
-    // if (userDetailes != null && this.router.url == '/Learner/login' || this.router.url == '/Admin/login')
-    //   this.router.navigate(["/Learner/courses"]);
-    // else if (userDetailes == null && this.router.url == '/Learner/MyCourse')
-    //   this.router.navigate(["/Learner/login"])
-    // else
-    //   this.router.navigate([this.router.url]);
+
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
     var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
     var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';

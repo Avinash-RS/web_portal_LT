@@ -22,21 +22,21 @@ import { CourseComponentComponent } from '../common/learner/course-component/cou
 import { TopCoursesComponent } from '../common/learner/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from '../common/learner/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from '../common/learner/wishlist-courses/wishlist-courses.component';
-
+import { AuthGuard } from './../common/_helpers/auth.guard';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 //others
 
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent,   canActivate:[AuthGuard] },
   { path: 'courses', component: CoursedetailsComponent },
-  { path: 'register', component: RegistrationComponent },
+  { path: 'register', component: RegistrationComponent ,},
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
   { path: 'profile', component: ProfileComponent },
-  { path : 'MyCourse', component : LearnerMyCourseComponent},
+  { path : 'MyCourse', component : LearnerMyCourseComponent,   canActivate:[AuthGuard]},
   { path: 'resetpassword', component: ResetpasswordComponent },
 ];
 

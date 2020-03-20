@@ -5,8 +5,10 @@ import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../common/material.module';
+import { AuthGuard } from './../common/_helpers/auth.guard';
+
 const routes: Routes = [
-  { path: 'login', component: AdminLoginComponent },
+  { path: 'login', component: AdminLoginComponent,canActivate:[AuthGuard]  },
 ];
 
 @NgModule({
