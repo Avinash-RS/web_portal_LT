@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate {
     var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetailes != null) {
       if (state.url == '/Learner/login' || state.url == '/Admin/login') {
-        this.router.navigate(["/Learner/courses"]);
+        this.router.navigate(["/Learner"]);
         return false;
       }
       else
@@ -58,7 +58,7 @@ export class AuthGuard implements CanActivate {
     }
     else if (userDetailes == null) {
       if (state.url == '/Learner/MyCourse') {
-        this.router.navigate(["/Learner/login"])
+        this.router.navigate(["/Learner"])
         return false;
       } else
         return true;

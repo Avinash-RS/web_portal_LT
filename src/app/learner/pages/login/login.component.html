@@ -4,14 +4,14 @@
       <mat-card-title style="text-align: center;"> Sign In </mat-card-title> <br>
       <mat-card-content>
         <div class="form-group">
-          <label>Full Name</label><span style="color: red;"> *</span>
+          <label>User Name</label><span style="color: red;"> *</span>
           <input type="text" formControlName="username" class="form-control"
             [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
           <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Full Name is required</div>
-            <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
-            <div *ngIf="f.username.errors.minlength">Full Name must be minimum of 3 characters </div>
-            <div *ngIf="f.username.errors.maxlength">Full Name must be 50 maximum of characters</div>
+            <div *ngIf="f.username.errors.required">User Name is required</div>
+            <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
+            <div *ngIf="f.username.errors.minlength">User Name must be minimum of 3 characters </div>
+            <div *ngIf="f.username.errors.maxlength">User Name must be 50 maximum of characters</div>
           </div>
         </div>
         <div class="form-group">
@@ -22,8 +22,7 @@
           <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
             <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            <div *ngIf="f.password.errors.pattern">Your password must contain at least one number and have a mixture
-              of uppercase and lowercase letters.</div>
+            <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div>
             <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
           </div>
         </div>

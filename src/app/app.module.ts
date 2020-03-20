@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
-// import { BarRatingModule } from "ngx-bar-rating";
+import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MaterialModule } from './common/material.module';
@@ -19,6 +19,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   ],
   imports: [
     // CookieModule.forRoot() ,
+    BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot() ,
     GraphqlModule,
     MaterialModule,

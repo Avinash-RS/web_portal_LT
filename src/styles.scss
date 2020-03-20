@@ -2,8 +2,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* Add application styles & imports to this file! */
-// @import '~ngx-bar-rating/themes/br-default-theme.css';
-// @import '~ngx-bar-rating/themes/br-horizontal-theme.css';
+@import '~ngx-bar-rating/themes/br-default-theme.css';
 body 
 
 {font-family: Roboto, Arial, sans-serif;margin: 0;}
