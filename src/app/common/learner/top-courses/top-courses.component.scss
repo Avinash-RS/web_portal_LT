@@ -3,7 +3,7 @@ mat-card {
     padding: 2% !important;
 }
 .mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 2px 1px 1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+   border: 0.5px solid lightgrey;
 }
 .top_course {
     font-size: 15px;
@@ -12,12 +12,14 @@ mat-card {
 }
 ::ng-deep .mat-grid-tile .mat-figure, mat-grid-tile {
     display: block !important;
-    margin-right: 19px !important;
-    margin-left: 19px !important;
 }
 .key_down {
-    text-align: end;
+    text-align: end !important;
 }
 .top_course {
     color: $color-blue !important;
+}
+img {
+    width: 7%;
+    margin-right: 3%;
 }

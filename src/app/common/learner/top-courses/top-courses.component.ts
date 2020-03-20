@@ -11,18 +11,10 @@ export class TopCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.tiles = [
-      { text: 'Tile 1', cols: 65671, rows: 15657 , img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 2', cols: 15765, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 3', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 4', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 1', cols: 65671, rows: 15657, border: '0' , img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 2', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 3', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 4', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 3', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 4', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 1', cols: 65671, rows: 15657, border: '0' , img : "../../../../assets/learner/download.jpg"},
-      { text: 'Tile 2', cols: 65671, rows: 15657,  img : "../../../../assets/learner/download.jpg"},
+      { text: 'Start', cols: 65671, rows: 1565 ,rating : 2, img : "../../../../assets/learner/1.jpg"},
+      { text: 'Resume', cols: 15765, rows: 1565, rating : 5, img : "../../../../assets/learner/2.jpg", statusValue : 70},
+      { text: 'Completed', cols: 65671, rows: 1567, rating : 3, img : "../../../../assets/learner/3.jpg"},
+      { text: 'Completed', cols: 65671, rows: 1567, rating : 1, img : "../../../../assets/learner/4.jpg"},
     ];
   }
 

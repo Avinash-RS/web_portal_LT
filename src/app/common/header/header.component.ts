@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)
       else
-        alert('Please try again later')
+      this.alert.openAlert('Please try again later',null)
     });
   }
 }

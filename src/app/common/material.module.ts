@@ -16,6 +16,7 @@ import {
   MatTooltipModule,
   MatDialogRef,
   MatTabsModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -34,6 +35,7 @@ import {
     MatDialogModule,
     MatTabsModule,
     MatTooltipModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -50,6 +52,7 @@ import {
     MatDialogModule,
     MatTooltipModule,
     MatTabsModule,
+    MatProgressBarModule,
   ],
   providers: [
     {

@@ -1,3 +1,38 @@
-<p>
-  admin-login works!
-</p>
+  <mat-card style="text-align: center;">
+    <form [formGroup]="loginForm"><br><br>
+      <mat-card-title> Sign In </mat-card-title> <br>
+      <mat-card-content>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput name="username" formControlName="username">
+        </mat-form-field>
+        <div *ngIf="f.username.touched && f.username.errors">
+          <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
+          <mat-error *ngIf="f.username.errors.pattern">Username is invalid</mat-error>
+        </div><br />
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput name="password" type="password" formControlName="password">
+        </mat-form-field>
+        <div *ngIf="f.password.touched && f.password.errors">
+          <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
+          <mat-error *ngIf="f.password.errors.pattern">Password is invalid</mat-error>
+        </div>
+        <br>
+        <div class="forgot_ps">
+          <mat-label>Forgot password/username?</mat-label>
+        </div>
+        <br />
+        <mat-checkbox class="remember_me" formControlName="remember_me">
+          Remember Me
+        </mat-checkbox>
+        <br><br><br>
+
+        <button id="login" mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign
+          in</button>
+        <br><br><br>
+        <!-- <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/Learner/register']"><strong>Sign
+              up</strong></a> </mat-label><br><br>-->
+      </mat-card-content>
+    </form>
+  </mat-card>

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './../learner/pages/login/login.component';
@@ -17,11 +18,11 @@ import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-
 import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
-
 import { CourseComponentComponent } from './../common/learner/course-component/course-component.component';
 import { TopCoursesComponent } from './../common/learner/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from './../common/learner/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from './../common/learner/wishlist-courses/wishlist-courses.component';
+
 //others
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
   { path: 'profile', component: ProfileComponent },
+  { path : 'MyCourse', component : LearnerMyCourseComponent}
 ];
 
 @NgModule({
@@ -49,17 +51,18 @@ const routes: Routes = [
     RecoverFogotpasswordOTPComponent,
     ProfileComponent,
     LearnerMyCourseComponent,
-  
     CourseComponentComponent,
     TopCoursesComponent,
     RecomendedCoursesComponent,
-    WishlistCoursesComponent
+    WishlistCoursesComponent,
+    LearnerMyCourseComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 
   imports: [
     // CookieModule.forRoot() ,
+    BarRatingModule,
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,

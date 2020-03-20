@@ -13,7 +13,8 @@
         </div><br />
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput name="password" type="password" formControlName="password">
+          <input matInput onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+            autocomplete=off name="password" type="password" formControlName="password">
         </mat-form-field>
         <div *ngIf="f.password.touched && f.password.errors">
           <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
