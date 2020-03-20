@@ -19,6 +19,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   recoveryTypes: any = [] ;
   type: string;
   subtype: string;
+  isenable: boolean = false;
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private alert: AlertServiceService,
@@ -76,6 +77,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
       if (data.data['get_forgot_password_byusername']['success'] == 'true') {
         this.recoveryTypes = data.data['get_forgot_password_byusername'].data
+        this.isenable = true;
       } else{
         this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
       }
