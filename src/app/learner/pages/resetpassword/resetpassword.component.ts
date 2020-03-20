@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MustMatch } from '../../../common/_helpers/must-match.validator';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import * as myGlobals from '../../../common/globals'; 
 @Component({
@@ -14,7 +15,11 @@ export class ResetpasswordComponent implements OnInit {
   resetForm: FormGroup;
   currentUser:any = [];
   user:any;
-  constructor(private router:Router, private formBuilder: FormBuilder,private alert: AlertServiceService,
+  constructor(
+    private loader : Ng4LoadingSpinnerService,
+    private router:Router, 
+    private formBuilder: FormBuilder,
+    private alert: AlertServiceService,
     public service : LearnerServicesService) { }
 
   ngOnInit() {
@@ -31,12 +36,15 @@ validator: MustMatch('password', 'confirmpassword'),
   get f() { return this.resetForm.controls; }
 
   resetpassword(){
+    this.loader.show();
     this.service.resetPassword(this.currentUser.username,this.resetForm.value.password).subscribe(data => {
       if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
+        this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
         
         this.router.navigate(['Learner/login']);
       } else{
+        this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
       }
   })

@@ -4,8 +4,8 @@ import { MustMatch } from '../../../common/_helpers/must-match.validator';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import * as myGlobals from '../../../common/globals';
-// import { CookieService } from 'ngx-cookie-service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import * as myGlobals from '../../../common/globals'; 
 
 @Component({
   selector: 'app-password',
@@ -20,7 +20,10 @@ export class PasswordComponent implements OnInit {
 
   myControl = new FormControl();
   options: string[] = [];
-  constructor(private router:Router, private formBuilder: FormBuilder,private alert: AlertServiceService,
+  constructor(private router:Router, 
+    private loader : Ng4LoadingSpinnerService,
+    private formBuilder: FormBuilder,
+    private alert: AlertServiceService,
     public service : LearnerServicesService) { }
 
   ngOnInit() {
@@ -38,12 +41,15 @@ export class PasswordComponent implements OnInit {
   }
   get f() { return this.passwordForm.controls; }
   submit(){
+    this.loader.show();
     this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
           if (data.data['user_registration_done']['success'] == 'true') {
+            this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].token))
             this.router.navigate(['Learner/courses']);
           } else{
+            this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
           }
       })
