@@ -1,4 +1,3 @@
-<div class="login">
   <mat-card style="text-align: center;">
     <form [formGroup]="loginForm"><br><br>
       <mat-card-title> Sign In </mat-card-title> <br>
@@ -13,8 +12,7 @@
         </div><br />
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-            autocomplete=off name="password" type="password" formControlName="password">
+          <input matInput name="password" type="password" formControlName="password">
         </mat-form-field>
         <div *ngIf="f.password.touched && f.password.errors">
           <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
@@ -33,9 +31,8 @@
         <button id="login" mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign
           in</button>
         <br><br><br>
-        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/Learner/register']"><strong>Sign
-              up</strong></a> </mat-label><br><br>
+        <!-- <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/Learner/register']"><strong>Sign
+              up</strong></a> </mat-label><br><br>-->
       </mat-card-content>
     </form>
   </mat-card>
-</div>

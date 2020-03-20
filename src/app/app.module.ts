@@ -4,8 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
 import { NgxSpinnerModule } from 'ngx-spinner';
-// import { CookieModule, CookieService } from 'ngx-cookie';
-// import { CookieService } from 'ngx-cookie-service';
+import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { MaterialModule } from './common/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
@@ -17,10 +16,10 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    
   ],
   imports: [
     // CookieModule.forRoot() ,
+    BarRatingModule,
     GraphqlModule,
     MaterialModule,
     BrowserAnimationsModule,

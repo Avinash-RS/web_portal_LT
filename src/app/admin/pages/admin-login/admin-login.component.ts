@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-// import { CookieService } from 'ngx-cookie-service';
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
-import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import * as myGlobals from '../../../common/globals';
-
+import { LearnerServicesService } from '../../../learner/services/learner-services.service';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private alert: AlertServiceService, private service: LearnerServicesService, private loader: NgxSpinnerService) { }
+    private alert: AlertServiceService, private service: LearnerServicesService, ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -29,14 +26,11 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-
   login() {
-    this.loader.show();
-    this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
+    this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, true)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            this.loader.hide();
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
@@ -50,8 +44,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/Learner'])
             }
           } else {
-            this.loader.hide();
-            this.alert.openAlert(loginresult.data.login.error_msg, null)
+            this.alert.openAlert("Invalid login. Please try again", null)
           }
         } else {
           this.alert.openAlert("Please try again later", null)
