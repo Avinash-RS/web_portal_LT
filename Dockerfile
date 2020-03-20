@@ -1,3 +1,13 @@
-FROM scratch
+FROM node:8.11.2-alpine as node
+
+WORKDIR /src/app
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
-CMD ["/hello"]
+
+RUN ng serve --host 0.0.0.0 [--port 80 --live-reload-port 49153]
+
+RUN npm run build
