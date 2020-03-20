@@ -1,0 +1,33 @@
+@import "../../assets/variable.scss";
+
+.login {
+    background: url('../../assets/learner/download.jpg') !important;
+    background-size: cover !important;
+    background-position: center;
+    background-repeat: no-repeat !important;
+    background-size: cover;
+    height: 100vh !important;
+}
+.custom-modalbox {
+    .mat-dialog-actions {
+          justify-content: center;
+    }
+    button {
+        background: $color-blue !important;
+        color: white;
+    }
+    .mat-dialog-title {
+        font-weight: 400;
+        text-align: center;
+    }
+}
+.label{
+    color: blue;
+}
+.mand{
+    color: red;
+}
+
+.wrap-body {
+    padding:3% !important;
+}

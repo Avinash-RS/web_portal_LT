@@ -1,0 +1,22 @@
+@import "../../../../assets/variable.scss";
+mat-card {
+    padding: 2% !important;
+}
+::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+    border: 0.5px solid lightgrey !important;
+}
+.top_course {
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 3%;
+}
+::ng-deep .mat-grid-tile .mat-figure, mat-grid-tile {
+    display: block !important;
+}
+.key_down {
+    text-align: end;
+    width: 8% !important;
+}
+.top_course {
+    color: $color-blue !important;
+}
