@@ -12,24 +12,19 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 })
 
 export class ForgotUsernameAndPasswordComponent implements OnInit {
-
   forgotUsername: FormGroup;
   forgotPasswordform: FormGroup;
   currentUser: any = []
   recoveryType: string;
   recoveryTypes: any = [] ;
-  // [
-    // {email: 'first', mobile: 'one'},
-   
-  // ];
-
   type: string;
   subtype: string;
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private alert: AlertServiceService,
     private loader : NgxSpinnerService,
-    public service : LearnerServicesService,) { }
+    public service : LearnerServicesService) { 
+    }
 
   ngOnInit() {
     var user = localStorage.getItem('UserDetails')
@@ -59,8 +54,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
           this.loader.show();
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
-            console.log(data.data['get_forgot_username_mobile_email'])
-            // localStorage.setItem('UserDetails',JSON.stringify(data.data['get_forgot_username_mobile'].data))
             this.loader.hide();
          
           } else{
@@ -71,11 +64,9 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
   getUserDetails(){
-    console.log(this.forgotUsername.value.username)
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
       if (data.data['get_forgot_password_byusername']['success'] == 'true') {
         this.recoveryTypes = data.data['get_forgot_password_byusername'].data
-        console.log(this.recoveryTypes)
       } else{
         this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
       }
@@ -85,7 +76,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   
 
   forgotPassword(recovertype){
-    console.log(recovertype)
     if(recovertype.type === "mobile"){
         this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,recovertype.value).subscribe(data => {
               if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
@@ -101,7 +91,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
             this.loader.show();
             if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
               this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
-              console.log(data.data['get_forgot_username_mobile_email'])
               this.loader.hide();
            
             } else{
