@@ -16,7 +16,7 @@ img {
     font-weight: 400;
 }
 
-.Description {
+.title {
     font-size: 14px;
     margin-top: 10px;
     font-weight: 500 !important;
@@ -25,6 +25,11 @@ img {
     text-align: initial;
     height: 13vh;
     margin-left: 12%;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 3em;
+    line-height: 1.8em;
 }
 .mat-progress-bar {
     display: block;
