@@ -7,6 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // import { CookieModule, CookieService } from 'ngx-cookie';
 // import { CookieService } from 'ngx-cookie-service';
 //local
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MaterialModule } from './common/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   ],
   imports: [
     // CookieModule.forRoot() ,
+    Ng4LoadingSpinnerModule.forRoot() ,
     GraphqlModule,
     MaterialModule,
     BrowserAnimationsModule,
