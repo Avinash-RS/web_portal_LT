@@ -20,6 +20,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   type: string;
   subtype: string;
   isenable: boolean = false;
+  isshow:boolean = true;
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private alert: AlertServiceService,
@@ -48,12 +49,15 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   focusout(e){
     if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 0){
       this.forgotUsername.controls['email'].disable();
+      this.isshow = false;
     }
     else if (e.target.id === 'email' && e.target.value != "" && e.target.value.length > 0){
       this.forgotUsername.controls['mobile'].disable();
+      this.isshow = false;
     }else{
       this.forgotUsername.controls['email'].enable();
       this.forgotUsername.controls['mobile'].enable();
+      this.isshow = true;
     }
   }
 
