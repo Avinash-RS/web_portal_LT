@@ -26,6 +26,7 @@ export class OtpComponent implements OnInit {
   systemip:String;
   otp: any;
   showotp: boolean = false;
+  showverify: boolean = false;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,

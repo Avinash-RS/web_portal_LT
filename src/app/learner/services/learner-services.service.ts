@@ -44,7 +44,6 @@ export class LearnerServicesService {
         user: _id,
         mobile_number:mobile,
         email:email,
-      
       }
     });
   }
