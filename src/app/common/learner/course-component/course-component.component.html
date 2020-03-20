@@ -1,6 +1,7 @@
 <div class="example">
+  <div class="wishlst"><img src = "../../../../assets/learner/key_down.svg"></div>
   <img src="{{course.img}}">
-  <p class="title">{{course.title}}</p>
+  <p class="title">{{course.title}}...</p>
   <p class="rating">
     <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
     <span class="details"><strong>{{course.rating}}</strong> {{course.rows | number}}
@@ -23,7 +24,11 @@
         {{course.description}}
       </p>
       <div class="bottomButtons">
-isdjfoijsdioj
+        <button id="buy_now" mat-raised-button class="buy_now" (click)="login()">Buy Now
+        </button>
+        <button id="add_to_cart" mat-raised-button class="buy_now" (click)="login()">Add
+          to cart
+        </button>
       </div>
     </div>
 
