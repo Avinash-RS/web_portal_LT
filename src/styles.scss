@@ -1,6 +1,11 @@
 @import "assets/variable";
+// @import '~@angular/material/theming';
+// @include mat-core();
 /* You can add global styles to this file, and also import other style files */
-@import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @include mat-progress-bar-theme($app-theme); 
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body 
 
 {font-family: Roboto, Arial, sans-serif;margin: 0;}
@@ -10,117 +15,82 @@ body
 .version-info {font-size: 8pt;float: right;margin: 8px;}
 
 
-// .example-full-width {
-//     width: 100%;
-//   }
-//   .parentcontent{
-//     display: flex;
-//     justify-content: center;
-//     /* align-items: center; */
-//     margin-top: 176px;
-//     height: 198px;
-//   }
-//   // mat-card{
-//   //   width: 23%;
-//   //   border: dashed;
-//   // }
-//   .button{
-//     margin-top: 25px;
-//   }
-//   .column2 {
-//     text-align: center;
-//     width: 90%;
-//     float: right;
-//     height: 100vh;
-//   }
-//   .continer {
-//     margin-top: 50px;
-//     position: relative;
-//     -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-//     -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-//     box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-//     padding: 10px;
-//     background: white;
-//     display: flex;
-//     justify-content: center;
-//     height: 277px;
-//   }
+  .container-reg100 {
+    width: 100%;
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background: url('./assets/learner/download.jpg');
+}
 
-//   .container-reg100 {
-//     width: 100%;
-//     height: 100vh !important;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding: 15px;
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     background: url('./assets/learner/download.jpg');
-// }
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #ffffff !important;
+  text-align: center;
+  vertical-align: middle !important;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #1F3777 !important;
+  // padding: .375rem .75rem;
+  border-radius: 0px !important;
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 90%;
+  margin-left: 15px;
+  margin-right: 25px;
 
-// .btn {
-//   display: inline-block;
-//   font-weight: 400;
-//   color: #ffffff !important;
-//   text-align: center;
-//   vertical-align: middle !important;
-//   cursor: pointer;
-//   -webkit-user-select: none;
-//   -moz-user-select: none;
-//   -ms-user-select: none;
-//   user-select: none;
-//   background-color: #1F3777 !important;
-//   // padding: .375rem .75rem;
-//   border-radius: 0px !important;
-//   font-size: 1rem;
-//   line-height: 1.5;
-//   width: 90%;
-//   margin-left: 15px;
-//   margin-right: 25px;
+}
 
-// }
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+.wrap-reg {
+  width: 350px;
+  height: 500px;
+  background: #fff !important;
+  border-radius: 3px;
+  overflow: hidden;
+}
 
-// .limiter {
-//   width: 100%;
-//   margin: 0 auto;
-// }
-// .wrap-reg {
-//   width: 350px;
-//   height: 500px;
-//   background: #fff !important;
-//   border-radius: 3px;
-//   overflow: hidden;
-// }
+@media (max-width: 480px) {
+  .wrap-reg {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.p-l-50 {padding-left: 40px !important;}
+.p-r-50 {padding-right: 40px !important;}
+.p-t-77 {padding-top: 52px !important;}
+.p-b-30 {padding-bottom: 30px !important;}
 
-// @media (max-width: 480px) {
-//   .wrap-reg {
-//     padding-left: 15px;
-//     padding-right: 15px;
-//   }
-// }
-// .p-l-50 {padding-left: 40px !important;}
-// .p-r-50 {padding-right: 40px !important;}
-// .p-t-77 {padding-top: 52px !important;}
-// .p-b-30 {padding-bottom: 30px !important;}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: $color-blue;
+}
 
-// .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-//   background-color: $color-blue;
-// }
-
-// input[type=text], input[type=password] {
-//   width: 100%;
-//   padding: 12px 20px;
-//   margin: 1px 0;
-//   // background: #94b5f1;
-//   display: inline-block;
-//   border: 1px solid #ccc;
-//   box-sizing: border-box;
-// }
-// label{
-//   color: #1F3777;
-//   font-weight: 500;
-// }
-// .head{
-//   text-align: center;
-//   color: #1F3777;   
-// }
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  // background: #94b5f1;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+label{
+  color: #1F3777;
+  font-weight: 500;
+  text-align: left;
+}
+.head{
+  text-align: center;
+  color: #1F3777;   
+}

@@ -2,81 +2,184 @@
 <div class="limiter">
   <div class="container-reg200 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
-      <div class="row">
-        <div class="col-sm-6 label">
-          <label>Information about you</label>
-          <div class="row">
-            <textarea></textarea>
-          </div><br>
-          <div class="row ">
-            <div class="col-sm-2 label">
-              <label>Gender</label><span class="mand">*</span>
+      <mat-grid-list class="masterGrid" cols="2" rowHeight="2:1">
+        <mat-grid-tile class="grid1">
+          <form>
+            <div class="row">
+              <label>Information about you</label>
             </div>
-            <div class="col-sm-6">
+            <div class="row textarea">
+              <textarea placeholder="500 characters"></textarea>
+            </div><br>
+            <div class="row">
+              <div class="col">
+                <label>Gender</label><span class="mand">*</span>
+              </div>
               <mat-radio-group>
                 <mat-radio-button value="M">M</mat-radio-button>
                 <mat-radio-button value="F">F</mat-radio-button>
                 <mat-radio-button value="O">Rather not say</mat-radio-button>
               </mat-radio-group>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2 label">
-              <label>I am a</label><span class="mand">*</span>
-            </div>
-            <div class="col-sm-6">
-            <mat-radio-group>
-              <mat-radio-button value="student">Student</mat-radio-button>
-              <mat-radio-button value="professional">Professional</mat-radio-button>
-            </mat-radio-group>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-            <label>Language Known</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-            <mat-select>
-              <mat-option>Tamil</mat-option>
-              <mat-option>English</mat-option>
-              <mat-option>Hindi</mat-option>
-            </mat-select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <label>Location</label><span class="mand">*</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <mat-select>
-                <mat-option selected>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
-              </mat-select>
+            <div class="row">
+              <div class="col">
+                <label>I am a</label><span class="mand">*</span>
               </div>
-              <div class="col-sm-2">
+              <mat-radio-group>
+                <mat-radio-button value="student">Student</mat-radio-button>
+                <mat-radio-button value="professional">Professional</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="row">
+              <label>Language Known</label>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
                 <mat-select>
                   <mat-option>Tamil</mat-option>
                   <mat-option>English</mat-option>
                   <mat-option>Hindi</mat-option>
                 </mat-select>
+              </div>
+            </div>
+            <div class="row">
+              <label>Location</label><span class="mand">*</span>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-select>
+                  <mat-option>Tamil</mat-option>
+                  <mat-option>English</mat-option>
+                  <mat-option>Hindi</mat-option>
+                </mat-select>
+              </div>
+              <div class="col-sm-4">
+                <mat-select>
+                  <mat-option>Tamil</mat-option>
+                  <mat-option>English</mat-option>
+                  <mat-option>Hindi</mat-option>
+                </mat-select>
+              </div>
+              <div class="col-sm-4">
+                <mat-select>
+                  <mat-option>Tamil</mat-option>
+                  <mat-option>English</mat-option>
+                  <mat-option>Hindi</mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </form>
+        </mat-grid-tile>
+        <!----------------------------Profile--------------------->
+        <mat-grid-tile>
+          <div class="profilegrid">
+            <label>My Profile</label>
+            <mat-icon class="createicon">create</mat-icon>
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
+              </div>
+            </div><br>
+            <div>
+              <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+            </div>
+            <div class="Edit">
+              <div class="row">
+                <div class="col-sm-3">
+                  <label>Password</label>
                 </div>
-                <div class="col-sm-2">
-                  <mat-select>
-                    <mat-option>Tamil</mat-option>
-                    <mat-option>English</mat-option>
-                    <mat-option>Hindi</mat-option>
-                  </mat-select>
-                  </div>
-          </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <mat-icon class="createicon">create</mat-icon>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                <label>Mobileno</label>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                <mat-icon class="createicon">create</mat-icon>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                <label>Example@gmail.com</label>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                <mat-icon class="createicon">create</mat-icon>
+                </div>
+              </div>
+            </div>
+            </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <!-----------------------Profile End----------------------->
+      <div class="row">
+        <label>Qualification</label><span class="mand">*</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <mat-select>
+            <mat-option>Tamil</mat-option>
+            <mat-option>English</mat-option>
+            <mat-option>Hindi</mat-option>
+          </mat-select>
         </div>
-        <div class="col-sm-6 label" style="text-align:right">
-          <label>My Profile</label><span></span>
+        <div class="col-sm-2">
+          <mat-select>
+            <mat-option>Tamil</mat-option>
+            <mat-option>English</mat-option>
+            <mat-option>Hindi</mat-option>
+          </mat-select>
         </div>
+        <div class="col-sm-2">
+          <mat-select>
+            <mat-option>Tamil</mat-option>
+            <mat-option>English</mat-option>
+            <mat-option>Hindi</mat-option>
+          </mat-select>
+        </div>
+        <div class="col-sm-2">
+          <mat-select>
+            <mat-option>Tamil</mat-option>
+            <mat-option>English</mat-option>
+            <mat-option>Hindi</mat-option>
+          </mat-select>
+        </div>
+        <div class="col-sm-2">
+          <mat-select>
+            <mat-option>Tamil</mat-option>
+            <mat-option>English</mat-option>
+            <mat-option>Hindi</mat-option>
+          </mat-select>
+        </div>
+        <div class="col-sm-2">
+          <input matInput placeholder="Year of Passing">
+        </div>
+        <!-- <div class="col-sm-2">
+            <input matInput placeholder="Percentage">
+          </div> -->
+      </div> <br>
+      <div class="row">
+        <div class="col-sm-2">
+          <input matInput placeholder="Certificate Link">
+        </div>
+        <div class="col-sm-2">
+          <mat-icon>add_circle_outline</mat-icon>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-sm-2">
+          <input matInput placeholder="Socialmedia Link">
+        </div>
+      </div><br>
+      <div class="subbtn">
+        <button mat-raised-button color="primary">Submit</button>
       </div>
     </div>
   </div>

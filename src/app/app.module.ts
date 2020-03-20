@@ -8,6 +8,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // import { CookieService } from 'ngx-cookie-service';
 //local
 import { MaterialModule } from './common/material.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
     // CookieModule.forRoot() ,
     GraphqlModule,
     MaterialModule,
+    MatProgressBarModule,
     BrowserAnimationsModule,
     BrowserModule,
     NgxSpinnerModule,
