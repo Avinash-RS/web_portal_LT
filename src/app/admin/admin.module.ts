@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from './../common/material.module';
+import { MaterialModule } from '../common/material.module';
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent },
 ];
