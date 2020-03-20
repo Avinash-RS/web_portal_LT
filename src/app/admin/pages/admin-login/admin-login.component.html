@@ -21,7 +21,7 @@
             [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
           <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
             <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div>
             <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
           </div>
