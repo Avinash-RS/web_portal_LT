@@ -1,4 +1,9 @@
 trigger:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'LXPRegistry'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 - master
 
 variables:
