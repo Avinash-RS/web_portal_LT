@@ -32,6 +32,8 @@ export class AppComponent {
     var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetailes != null && this.router.url == '/Learner/login' || this.router.url == '/Admin/login')
       this.router.navigate(["/Learner/courses"]);
+    else if (userDetailes == null && this.router.url == '/Learner/MyCourse')
+      this.router.navigate(["/Learner/login"])
     else
       this.router.navigate([this.router.url]);
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;

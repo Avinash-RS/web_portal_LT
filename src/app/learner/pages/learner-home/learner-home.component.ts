@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LearnerHomeComponent implements OnInit {
   tiles: any = [];
+  userDetailes: any;
   constructor() { }
 
   ngOnInit() {
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.tiles = [
       {
         text: 'Start', cols: 65671, rows: 1565, rating: 2, img: "../../../../assets/learner/1.jpg",

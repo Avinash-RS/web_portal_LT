@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '../services/common-services.service'
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { AlertServiceService } from 'src/app/common/services/handlers/alert-serv
 export class HeaderComponent implements OnInit {
   userDetailes: any;
 
-  constructor(public services: CommonServicesService, private alert: AlertServiceService, ) { }
+  constructor(public services: CommonServicesService, private alert: AlertServiceService,
+    private router: Router, ) { }
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
         this.userDetailes = null;
+        this.router.navigate(['/Learner'])
       }
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)
