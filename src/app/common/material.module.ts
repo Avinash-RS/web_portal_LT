@@ -16,7 +16,8 @@ import {
   MatTooltipModule,
   MatDialogRef,
   MatTabsModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 @NgModule({
@@ -36,6 +37,7 @@ import {
     MatTabsModule,
     MatTooltipModule,
     MatProgressBarModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -53,6 +55,7 @@ import {
     MatTooltipModule,
     MatTabsModule,
     MatProgressBarModule,
+    MatAutocompleteModule
   ],
   providers: [
     {
