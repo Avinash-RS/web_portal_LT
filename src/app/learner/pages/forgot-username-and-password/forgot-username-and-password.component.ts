@@ -19,6 +19,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   recoveryTypes: any = [] ;
   type: string;
   subtype: string;
+  isenable: boolean = false;
+  isshow:boolean = true;
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private alert: AlertServiceService,
@@ -45,12 +47,15 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   focusout(e){
     if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 0){
       this.forgotUsername.controls['email'].disable();
+      this.isshow = false;
     }
     else if (e.target.id === 'email' && e.target.value != "" && e.target.value.length > 0){
       this.forgotUsername.controls['mobile'].disable();
+      this.isshow = false;
     }else{
       this.forgotUsername.controls['email'].enable();
       this.forgotUsername.controls['mobile'].enable();
+      this.isshow = true;
     }
   }
 
@@ -74,6 +79,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
       if (data.data['get_forgot_password_byusername']['success'] == 'true') {
         this.recoveryTypes = data.data['get_forgot_password_byusername'].data
+        this.isenable = true;
       } else{
         this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
       }
