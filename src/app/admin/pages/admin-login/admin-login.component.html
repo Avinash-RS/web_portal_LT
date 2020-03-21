@@ -22,8 +22,10 @@
           <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
             <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+            <div *ngIf="f.password.errors.maxlength">Password must be 20 maximum of characters</div>
             <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div>
-            <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
+            <!-- <div *ngIf="f.password.value"> Password and username cannot be same</div> -->
+            {{f.password | json}}
           </div>
         </div>
         <div class="forgot_ps">
