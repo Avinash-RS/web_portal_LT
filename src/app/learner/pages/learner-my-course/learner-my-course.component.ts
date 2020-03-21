@@ -19,8 +19,6 @@ export class LearnerMyCourseComponent implements OnInit {
           console.log(getMyCourse.data.get_course_by_user)
           this.myCoursesList = getMyCourse.data.get_course_by_user.message
         }
-        // else
-      } else {
       }
     });
     // this.myCoursesList = [

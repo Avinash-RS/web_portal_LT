@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-// import { BarRatingModule } from "ngx-bar-rating";
+import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -66,7 +66,7 @@ const routes: Routes = [
 
   imports: [
     // CookieModule.forRoot() ,
-    // BarRatingModule,
+    BarRatingModule,
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,

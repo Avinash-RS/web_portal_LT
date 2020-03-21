@@ -13,7 +13,6 @@ export class LearnerHomeComponent implements OnInit {
   constructor(public service: LearnerServicesService,private router:Router,) { }
 
   ngOnInit() {
-  
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     console.log('hi',this.userDetailes)
   }

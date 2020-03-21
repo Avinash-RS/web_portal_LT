@@ -16,15 +16,19 @@ img {
     font-weight: 400;
 }
 
-.Description {
+.title {
     font-size: 14px;
     margin-top: 10px;
     font-weight: 500 !important;
     text-align: justify;
     width: 76%;
     text-align: initial;
-    height: 13vh;
+    height: 3vh;
     margin-left: 12%;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.8em;
 }
 .mat-progress-bar {
     display: block;
@@ -37,7 +41,7 @@ img {
     border-radius: 30px;
 }
 .rating {
-    // margin-top: -7vh;
+    margin-top: -3vh;
     display: flex;
     font-size: 13px;
     margin-left: 12%;
@@ -119,7 +123,7 @@ strong {
     border-radius: 50px;
     width: 100%;
     // background-color: #ffcf01;
-    background-color: rgb(20, 20, 20);
+    // background-color: rgb(20, 20, 20);
     opacity: 0.5;
     border: none;
 }
