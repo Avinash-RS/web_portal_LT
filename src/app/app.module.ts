@@ -5,8 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-// import { CookieModule, CookieService } from 'ngx-cookie';
-// import { CookieService } from 'ngx-cookie-service';
 //local
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 // import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -22,7 +20,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   ],
   imports: [
     // CookieModule.forRoot() ,
-    Ng4LoadingSpinnerModule.forRoot() ,
+    Ng4LoadingSpinnerModule.forRoot(),
     // Ng4LoadingSpinnerService,
     GraphqlModule,
     MaterialModule,
