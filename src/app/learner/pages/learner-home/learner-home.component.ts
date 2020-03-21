@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class LearnerHomeComponent implements OnInit {
   tiles: any = [];
   userDetailes: any;
+  panelOpenState = false;
+  
   constructor(public service: LearnerServicesService,private router:Router,) { }
 
   ngOnInit() {

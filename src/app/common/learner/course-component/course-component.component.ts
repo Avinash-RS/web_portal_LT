@@ -35,7 +35,7 @@ export class CourseComponentComponent implements OnInit {
   selectWishlist(course) {
     console.log(this.course.wishlisted, this.course.wishlist_id)
     if (this.course.wishlisted == false) {
-      this.service.addWishlist(course, this.userDetail._id).subscribe((addWishlist: any) => {
+      this.service.addWishlist(course.course_id , this.userDetail._id).subscribe((addWishlist: any) => {
         if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
           console.log(addWishlist.data.add_to_wishlist)
           this.course.wishlisted = !this.course.wishlisted;

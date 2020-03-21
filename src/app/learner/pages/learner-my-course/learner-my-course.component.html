@@ -19,4 +19,47 @@
     <br><br>
     <app-wishlist-courses></app-wishlist-courses>
     <br><br>
+
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    My Courses
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-card style="text-align: center;">
+                <mat-grid-list cols="4" rowHeight="fit" style="height: 60vh">
+                    <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+                        <app-course-component [course]="course" [from] = "'myCourse'"> </app-course-component>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <br><br>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Personal data
+                </mat-panel-title>
+                <mat-panel-description>
+                    Type your name and age
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+    
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Age</mat-label>
+                <input matInput type="number" min="1">
+            </mat-form-field>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
 </div>
