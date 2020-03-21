@@ -5,7 +5,7 @@
             <h1 class="head">Create an account </h1>
         <form [formGroup]="registerForm">
             <div class="form-group">
-                <label>Full Name</label><span style="color: red;"> *</span>
+                <label>Full Name</label><span class="mand"> *</span>
                 <input type="text" formControlName="username" placeholder="example"  maxlength="50" class="form-control"
                     [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
                     <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
@@ -18,7 +18,7 @@
 
 
             <div class="form-group">
-                <label>Email ID</label><span style="color: red;"> *</span>
+                <label>Email ID</label><span  class="mand"> *</span>
                 <input type="text" formControlName="email" placeholder="example@mail.com"  maxlength="64" class="form-control"
                     [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
                 <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">

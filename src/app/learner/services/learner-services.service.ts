@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { login } from "./operations/learner_query";
+import { login , get_country_details} from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
-  user_registration_done} from "./operations/learner_mutation";
+  user_registration_done, view_profile, get_state_details} from "./operations/learner_mutation";
 @Injectable({
   providedIn: 'root'
 })
@@ -69,7 +69,28 @@ export class LearnerServicesService {
       }
     });
   }
-
+  view_profile(user_id){
+    console.log('view',user_id)
+    return this.Apollo.query({
+      query: view_profile,
+      variables: {
+        user_id: user_id
+      }
+    });
+  }
+  get_country_details(){
+    return this.Apollo.query({
+      query: get_country_details,
+    })
+  }
+  get_state_details(_id){
+    return this.Apollo.query({
+      query: get_state_details,
+      variables: {
+        _id: _id
+      }
+    })
+  }
   
   // submit_otp(user_id,_id,mobile) {
   //   return this.Apollo.query({

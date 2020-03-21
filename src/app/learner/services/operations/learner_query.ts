@@ -14,3 +14,23 @@ export const login = gql`
       }
     }
   }`;
+
+  export const get_country_details = gql`
+    query get_country_details{
+      get_country_details{
+        message
+    success
+    data{
+      _id
+      countryname
+      countryshortcode
+      created_by
+      created_by_ip
+      updated_on
+      updated_by
+      updated_by_ip
+      is_active
+
+    }
+      }
+    }`;

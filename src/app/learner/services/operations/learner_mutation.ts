@@ -66,4 +66,72 @@ export const user_registration_done = gql`
     }
   }
 `;
+export const view_profile = gql`
+  mutation view_profile($user_id: String) {
+    view_profile(
+      user_id:$user_id
+    ) {
+      success
+message{
+full_name
+email
+user_id
+user_mobile{
+mobile_number
+}
+user_profile{
+_id
+languages_known
+about_you
+certificate
+user_id
+profile_img
+year_of_birth
+doj_lxp
+is_active
+gender
+country
+state
+city_town
+student
+last_login
+created_by_ip
+created_by
+created_on
+updated_by_ip
+updated_on
+updated_by
+}
+}
+    }
+    }
+`;
 
+// export const update_profile = gql`
+// mutation update_profile($user_id: String, $profile_img: String , $year_of_birth: String, $doj_lxp: String,){
+
+// }
+// `
+export const get_state_details = gql`
+    mutation get_state_details($_id: String){
+      get_state_details(
+        _id: $_id
+      ) {
+        message
+    success
+    data{
+      _id
+      statename
+      stateshortcode
+      country
+      created_by
+      created_on
+      created_by_ip
+      updated_on
+      updated_by
+      updated_by_ip
+      is_active
+    }
+      }
+    }
+    `;

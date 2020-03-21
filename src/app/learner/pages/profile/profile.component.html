@@ -6,65 +6,63 @@
         <mat-grid-tile class="grid1">
           <form>
             <div class="row">
-              <label>Information about you</label>
+              <mat-label>Information about you</mat-label><span class="mand">*</span>
             </div>
-            <div class="row textarea">
-              <textarea placeholder="500 characters"></textarea>
+            <div class="row">
+              <textarea matInput class="inputs" placeholder="500 characters" [(ngModel)]="info" name="info"></textarea>
             </div><br>
             <div class="row">
+              <mat-label>Gender</mat-label><span class="mand">*</span>
               <div class="col">
-                <label>Gender</label><span class="mand">*</span>
+                <mat-radio-group [(ngModel)]="gender" name="gender">
+                  <mat-radio-button value="M">M</mat-radio-button>
+                  <mat-radio-button value="F">F</mat-radio-button>
+                  <mat-radio-button value="O">Rather not say</mat-radio-button>
+                </mat-radio-group>
               </div>
-              <mat-radio-group>
-                <mat-radio-button value="M">M</mat-radio-button>
-                <mat-radio-button value="F">F</mat-radio-button>
-                <mat-radio-button value="O">Rather not say</mat-radio-button>
-              </mat-radio-group>
             </div>
             <div class="row">
+              <mat-label>Iam a</mat-label><span class="mand">*</span>
               <div class="col">
-                <label>I am a</label><span class="mand">*</span>
-              </div>
-              <mat-radio-group>
+              <mat-radio-group [(ngModel)]="profession" name="profession">
                 <mat-radio-button value="student">Student</mat-radio-button>
                 <mat-radio-button value="professional">Professional</mat-radio-button>
               </mat-radio-group>
-            </div>
-            <div class="row">
-              <label>Language Known</label>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <mat-select>
-                  <mat-option>Tamil</mat-option>
-                  <mat-option>English</mat-option>
-                  <mat-option>Hindi</mat-option>
-                </mat-select>
               </div>
             </div>
             <div class="row">
-              <label>Location</label><span class="mand">*</span>
+                <mat-label>Language Known</mat-label>
+            </div>
+                <div class="row">
+                    <mat-select class="inputs" [(ngModel)]="language" name="language">
+                      <mat-option value="t">Tamil</mat-option>
+                      <mat-option value="t">English</mat-option>
+                      <mat-option value="t">Hindi</mat-option>
+                  </mat-select>
+            </div><br>
+            <div class="row">
+              <mat-label>Location</mat-label><span class="mand">*</span>
             </div>
             <div class="row">
               <div class="col-sm-4">
-                <mat-select>
-                  <mat-option>Tamil</mat-option>
-                  <mat-option>English</mat-option>
-                  <mat-option>Hindi</mat-option>
+                <mat-select class="inputs" [(ngModel)]="country" name="country" placeholder="Country">
+                  <mat-option *ngFor="let country of countryValue">
+                    {{country.countryname}}
+                  </mat-option>
                 </mat-select>
               </div>
               <div class="col-sm-4">
-                <mat-select>
-                  <mat-option>Tamil</mat-option>
-                  <mat-option>English</mat-option>
-                  <mat-option>Hindi</mat-option>
+                <mat-select class="inputs" [(ngModel)]="state" name="state" placeholder="State">
+                  <mat-option value="t">Tamil</mat-option>
+                  <mat-option value="t">English</mat-option>
+                  <mat-option value="t">Hindi</mat-option>
                 </mat-select>
               </div>
               <div class="col-sm-4">
-                <mat-select>
-                  <mat-option>Tamil</mat-option>
-                  <mat-option>English</mat-option>
-                  <mat-option>Hindi</mat-option>
+                <mat-select class="inputs" [(ngModel)]="city" name="city" placeholder="City">
+                  <mat-option value="t">Tamil</mat-option>
+                  <mat-option value="t">English</mat-option>
+                  <mat-option value="t">Hindi</mat-option>
                 </mat-select>
               </div>
             </div>
@@ -73,11 +71,16 @@
         <!----------------------------Profile--------------------->
         <mat-grid-tile>
           <div class="profilegrid">
-            <label>My Profile</label>
+            <div class="row myprofile">
+            <mat-label>My Profile</mat-label>
             <mat-icon class="createicon">create</mat-icon>
+          </div>
             <div class="row">
               <div class="col-sm-4">
                 <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
+              </div>
+              <div class="cameraicon">
+                <mat-icon>camera_alt</mat-icon>
               </div>
             </div><br>
             <div>
@@ -86,7 +89,7 @@
             <div class="Edit">
               <div class="row">
                 <div class="col-sm-3">
-                  <label>Password</label>
+                  <mat-label>Password</mat-label>
                 </div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3"></div>
@@ -96,90 +99,93 @@
               </div>
               <div class="row">
                 <div class="col-sm-3">
-                <label>Mobileno</label>
+                  <mat-label>Mobileno</mat-label>
                 </div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3">
-                <mat-icon class="createicon">create</mat-icon>
+                  <mat-icon class="createicon">create</mat-icon>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3">
-                <label>Example@gmail.com</label>
+                  <mat-label>Example@gmail.com</mat-label>
                 </div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3">
-                <mat-icon class="createicon">create</mat-icon>
+                  <mat-icon class="createicon">create</mat-icon>
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         </mat-grid-tile>
       </mat-grid-list>
       <!-----------------------Profile End----------------------->
       <div class="row">
-        <label>Qualification</label><span class="mand">*</span>
+        <mat-label>Qualification</mat-label><span class="mand">*</span>
       </div>
       <div class="row">
         <div class="col-sm-2">
-          <mat-select>
+          <mat-select class="inputs" [(ngModel)]="level" name="level" placeholder="Level">
             <mat-option>Tamil</mat-option>
             <mat-option>English</mat-option>
             <mat-option>Hindi</mat-option>
           </mat-select>
         </div>
         <div class="col-sm-2">
-          <mat-select>
+          <mat-select class="inputs" [(ngModel)]="board" name="board" placeholder="Board/University">
             <mat-option>Tamil</mat-option>
             <mat-option>English</mat-option>
             <mat-option>Hindi</mat-option>
           </mat-select>
         </div>
         <div class="col-sm-2">
-          <mat-select>
+          <mat-select class="inputs" [(ngModel)]="institute" name="institute" placeholder="Institute">
             <mat-option>Tamil</mat-option>
             <mat-option>English</mat-option>
             <mat-option>Hindi</mat-option>
           </mat-select>
         </div>
         <div class="col-sm-2">
-          <mat-select>
+          <mat-select class="inputs" [(ngModel)]="discipline" name="discipline" placeholder="Discipline">
             <mat-option>Tamil</mat-option>
             <mat-option>English</mat-option>
             <mat-option>Hindi</mat-option>
           </mat-select>
         </div>
         <div class="col-sm-2">
-          <mat-select>
+          <mat-select class="inputs" [(ngModel)]="spec" name="spec" placeholder="Specification">
             <mat-option>Tamil</mat-option>
             <mat-option>English</mat-option>
             <mat-option>Hindi</mat-option>
           </mat-select>
         </div>
         <div class="col-sm-2">
-          <input matInput placeholder="Year of Passing">
+          <input class="inputs" matInput placeholder="Year of Passing" [(ngModel)]="year" name="year">
         </div>
         <!-- <div class="col-sm-2">
             <input matInput placeholder="Percentage">
+          </div>
+          <div class="col-sm-2">
+            <mat-icon (click)="addnewRow()">add_circle_outline</mat-icon>
           </div> -->
       </div> <br>
-      <div class="row">
+      <div class="row certificate">
         <div class="col-sm-2">
-          <input matInput placeholder="Certificate Link">
+          <input class="inputs" matInput placeholder="Certificate Link" [(ngModel)]="certificate" name="certificate">
         </div>
         <div class="col-sm-2">
-          <mat-icon>add_circle_outline</mat-icon>
+          <mat-icon (click)="addnewRow()">add_circle_outline</mat-icon>
         </div>
       </div><br>
-      <div class="row">
+      <div class="row certificate">
         <div class="col-sm-2">
-          <input matInput placeholder="Socialmedia Link">
+          <input class="inputs" matInput placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
         </div>
       </div><br>
       <div class="subbtn">
-        <button mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="primary" (click)="updateProfile()">Submit</button>
       </div>
     </div>
   </div>

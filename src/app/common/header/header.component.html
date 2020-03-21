@@ -33,5 +33,28 @@
     </ul>
 
   </div>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu class="menu" #menu="matMenu">
+    <button mat-menu-item>
+     <label>Profile</label>
+    </button>
+    <button mat-menu-item>
+      <label>My Course</label>
+    </button>
+    <button mat-menu-item>
+      <label>Dashboard</label>
+    </button>
+    <button mat-menu-item>
+      <label>Wishlist</label>
+    </button>
+    <button mat-menu-item>
+      <label>Certificate</label>
+    </button>
+    <button mat-menu-item>
+      <label>Logout</label>
+    </button>
+  </mat-menu>
 </nav>
 <br><br><br>

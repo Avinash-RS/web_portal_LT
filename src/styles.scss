@@ -1,10 +1,11 @@
 @import "assets/variable";
-// @import '~@angular/material/theming';
-// @include mat-core();
+
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 // @include mat-progress-bar-theme($app-theme); 
-// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import '~@angular/material/theming';
+// @include mat-core();
 
 body 
 
@@ -93,4 +94,10 @@ label{
 .head{
   text-align: center;
   color: #1F3777;   
+}
+.mand{
+  color: red !important;
+}
+mat-icon{
+  cursor: pointer;
 }

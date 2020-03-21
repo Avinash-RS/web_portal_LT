@@ -12,6 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms'
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
     AppRoutingModule,
     GraphqlModule,
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [AlertComponentComponent],
   bootstrap: [AppComponent],

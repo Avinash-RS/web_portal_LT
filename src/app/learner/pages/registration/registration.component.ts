@@ -41,7 +41,6 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
-    debugger;
    this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           this.loader.show();
