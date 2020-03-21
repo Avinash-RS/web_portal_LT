@@ -71,6 +71,63 @@ export const user_registration_done = gql`
     }
   }
 `;
+
+export const get_forgot_username_mobile_email = gql`
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String) {
+    get_forgot_username_mobile_email(
+      type:$type,
+      subtype:$subtype,
+      mobile_number:$mobile_number,
+      email:$email
+    ) {
+      success
+      message
+      
+    }
+  }
+`;
+
+export const get_forgot_password_byusername = gql`
+  mutation get_forgot_password_byusername($username: String) {
+    get_forgot_password_byusername(
+      username:$username,
+    ) {
+      data{
+        value
+        type
+      }
+      message
+      success
+        
+    }
+  }
+`;
+
+
+export const user_registration_username_suggestion = gql`
+  mutation user_registration_username_suggestion($user_id: String) {
+    user_registration_username_suggestion(
+      user_id:$user_id,
+    ) {
+      message
+      success
+      data
+        
+    }
+  }
+`;
+
+export const get_forgot_password_byresetpassword = gql`
+  mutation get_forgot_password_byresetpassword($username: String!,$password:String!) {
+    get_forgot_password_byresetpassword(
+      username:$username,
+      password:$password
+    ) {
+      message
+      success
+    }
+  }
+`;
 export const view_profile = gql`
   mutation view_profile($user_id: String) {
     view_profile(
@@ -112,11 +169,6 @@ updated_by
     }
 `;
 
-// export const update_profile = gql`
-// mutation update_profile($user_id: String, $profile_img: String , $year_of_birth: String, $doj_lxp: String,){
-
-// }
-// `
 export const get_state_details = gql`
     mutation get_state_details($_id: String){
       get_state_details(
@@ -140,3 +192,5 @@ export const get_state_details = gql`
       }
     }
     `;
+ 
+

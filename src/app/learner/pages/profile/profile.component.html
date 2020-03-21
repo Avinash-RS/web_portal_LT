@@ -33,7 +33,7 @@
             <div class="row">
                 <mat-label>Language Known</mat-label>
             </div>
-                <div class="row">
+                <div class="row language">
                     <mat-select class="inputs" [(ngModel)]="language" name="language">
                       <mat-option value="t">Tamil</mat-option>
                       <mat-option value="t">English</mat-option>
@@ -44,21 +44,21 @@
               <mat-label>Location</mat-label><span class="mand">*</span>
             </div>
             <div class="row">
-              <div class="col-sm-4">
-                <mat-select class="inputs" [(ngModel)]="country" name="country" placeholder="Country">
+              <div class="col">
+                <mat-select class="inputs" [(ngModel)]="country" name="country" placeholder="Country" value="_id">
                   <mat-option *ngFor="let country of countryValue">
                     {{country.countryname}}
                   </mat-option>
                 </mat-select>
               </div>
-              <div class="col-sm-4">
+              <div class="col">
                 <mat-select class="inputs" [(ngModel)]="state" name="state" placeholder="State">
                   <mat-option value="t">Tamil</mat-option>
                   <mat-option value="t">English</mat-option>
                   <mat-option value="t">Hindi</mat-option>
                 </mat-select>
               </div>
-              <div class="col-sm-4">
+              <div class="col">
                 <mat-select class="inputs" [(ngModel)]="city" name="city" placeholder="City">
                   <mat-option value="t">Tamil</mat-option>
                   <mat-option value="t">English</mat-option>

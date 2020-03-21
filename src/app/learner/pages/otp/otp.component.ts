@@ -61,7 +61,7 @@ export class OtpComponent implements OnInit {
 get f() { return this.otpForm.controls; }
   otpverification(){
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
@@ -88,7 +88,7 @@ get f() { return this.otpForm.controls; }
 
   }
   Resendcode(){
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
       this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
@@ -97,7 +97,7 @@ get f() { return this.otpForm.controls; }
   })
   }
   correctotp(){
-    this.showverify = true;
+    // this.showverify = true;
   }
   
   }
