@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', myGlobals.usernameVal),
+          username: new FormControl('', [Validators.required, Validators.pattern(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/), Validators.minLength(3), Validators.maxLength(50)]),
           email: new FormControl('',myGlobals.emailVal),
           termsandconditions: new FormControl('', [])
       }, {
