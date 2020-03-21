@@ -1,3 +1,14 @@
-<p>
-  wishlist-courses works!
-</p>
+<mat-grid-list cols="2" rowHeight="10vh">
+  <mat-grid-tile class="top_course">Wishlist</mat-grid-tile>
+  <mat-grid-tile class="key_down">
+    <img src="../../../../assets/learner/key_down.svg">
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-card style="text-align: center;">
+  <mat-grid-list cols="4" >
+    <mat-grid-tile *ngFor="let course of wishlist" [style.border] = "'none'" [colspan]="1" [rowspan]="1">
+      <app-course-component [course] = "course" [from] = "'wishlist'"> </app-course-component>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

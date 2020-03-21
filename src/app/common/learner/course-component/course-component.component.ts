@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 })
 export class CourseComponentComponent implements OnInit {
   @Input('course') course: any;
+  @Input('from') from: any;
   userDetail: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService) {
@@ -21,6 +22,7 @@ export class CourseComponentComponent implements OnInit {
     this.service.viewWishlist(this.userDetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         _.filter(viewWishlist.data.view_wishlist.message, function (o) {
+          console.log(o.course_id,course.course_id)
           if (o.course_id == course.course_id) {
             course.wishlisted = true;
             course.wishlist_id = o._id 

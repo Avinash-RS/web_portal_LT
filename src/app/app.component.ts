@@ -27,12 +27,11 @@ export class AppComponent {
     if (cookie == 'true') {
       if ((name || psd) == null) {
         this.router.navigate(["/Learner/login"]);
-      } else {
-        this.router.navigate(["/Learner"]);
-      }
+      } 
     } else {
       localStorage.clear();
-      this.router.navigate(["/Learner/login"]);
+      // console.log(this.router.url)
+      // this.router.navigate(["/Learner/login"]);
     }
   }
 
