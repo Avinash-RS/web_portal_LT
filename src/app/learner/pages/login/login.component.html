@@ -3,7 +3,9 @@
     <form [formGroup]="loginForm"><br><br>
       <mat-card-title> Sign In </mat-card-title> <br>
       <mat-card-content>
-        <mat-form-field appearance="outline">
+        <!-- <mat-label>Username</mat-label> -->
+        <mat-form-field appearance="outline"
+          matTooltip="No space allowed, Should be minimum 3 characters and maximum 20 characters, Alphanumeric">
           <mat-label>Username</mat-label>
           <input matInput name="username" formControlName="username">
         </mat-form-field>
@@ -11,7 +13,8 @@
           <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
           <mat-error *ngIf="f.username.errors.pattern">Username is invalid</mat-error>
         </div><br />
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline"
+          matTooltip="No space allowed, It cannot be blank and is case sensitive, Should be a minimum 8 characters and maximum 20 characters, Atleast 1 uppercase character, 1 lowercase character, 1 number and one special character">
           <mat-label>Password</mat-label>
           <input matInput name="password" type="password" formControlName="password">
         </mat-form-field>
@@ -20,8 +23,10 @@
           <mat-error *ngIf="f.password.errors.pattern">Password is invalid</mat-error>
         </div>
         <br>
+        <!-- <mat-spinner></mat-spinner> -->
         <div class="forgot_ps">
-          <mat-label>Forgot password/username?</mat-label>
+          <mat-label  ><a [routerLink]="['/Learner/recover']"><strong>Forgot password/username?</strong></a></mat-label>
+          <!-- recover -->
         </div>
         <br />
         <mat-checkbox class="remember_me" formControlName="remember_me">

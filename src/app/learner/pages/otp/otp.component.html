@@ -20,17 +20,16 @@
           <p class="head">OTP Code</p>
 
           <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
-            formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" required />
+            formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
 
           <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
-            formControlName="otp2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" required />
+            formControlName="otp2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
 
           <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
-            formControlName="otp3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" required />
+            formControlName="otp3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
 
           <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
-            formControlName="otp4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" required
-            (change)="correctotp()">
+            formControlName="otp4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
           <!-- <input type="tel" formControlName="otp" class="form-control"
           [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }" /> -->
           <!-- <div *ngIf="f.otp.touched && f.otp.errors" class="invalid-feedback">
@@ -40,7 +39,7 @@
           </div> -->
           <br><br>
         </div>
-        <div *ngIf="showverify">
+        <div *ngIf="showotp">
           <button class="btn" (click)="otpverify()">Verify</button>
         </div><br>
         <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>

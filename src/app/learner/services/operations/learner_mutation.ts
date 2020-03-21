@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean!) {
+  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean) {
     user_registration(
       full_name: $full_name
       email: $email,
@@ -37,16 +37,21 @@ export const user_registration_mobile_otp_send = gql`
 `;
 
 export const user_registration_mobile_otp_verify = gql`
-  mutation user_registration_mobile_otp_verify($mobile_number: String!,$otp:String!) {
+  mutation user_registration_mobile_otp_verify($otp:String!,$mobile_number: String!) {
     user_registration_mobile_otp_verify(
-      mobile_number:$mobile_number,
       otp: $otp,
+      mobile_number:$mobile_number
+      
     ) {
-      otp
-      mobile_number
-      _id
       message
       success
+      data{
+        otp
+        _id
+        mobile_number
+        user_id
+        username
+      }
     }
   }
 `;

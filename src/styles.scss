@@ -1,12 +1,6 @@
 @import "assets/variable";
-
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-// @include mat-progress-bar-theme($app-theme); 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-// @import '~@angular/material/theming';
-// @include mat-core();
-
+@import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
 body 
 
 {font-family: Roboto, Arial, sans-serif;margin: 0;}
@@ -15,6 +9,42 @@ body
 
 .version-info {font-size: 8pt;float: right;margin: 8px;}
 
+
+.example-full-width {
+    width: 100%;
+  }
+  .parentcontent{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin-top: 176px;
+    height: 198px;
+  }
+  // mat-card{
+  //   width: 23%;
+  //   border: dashed;
+  // }
+  .button{
+    margin-top: 25px;
+  }
+  .column2 {
+    text-align: center;
+    width: 90%;
+    float: right;
+    height: 100vh;
+  }
+  .continer {
+    margin-top: 50px;
+    position: relative;
+    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 10px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    height: 277px;
+  }
 
   .container-reg100 {
     width: 100%;
@@ -53,19 +83,21 @@ body
 .limiter {
   width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 .wrap-reg {
   width: 350px;
   height: 500px;
   background: #fff !important;
   border-radius: 3px;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 @media (max-width: 480px) {
   .wrap-reg {
     padding-left: 15px;
     padding-right: 15px;
+    overflow: hidden !important;
   }
 }
 .p-l-50 {padding-left: 40px !important;}
@@ -77,19 +109,18 @@ body
   background-color: $color-blue;
 }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 1px 0;
-  // background: #94b5f1;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+// input[type=text], input[type=password] {
+//   width: 100%;
+//   padding: 12px 20px;
+//   margin: 1px 0;
+//   // background: #94b5f1;
+//   display: inline-block;
+//   border: 1px solid #ccc;
+//   box-sizing: border-box;
+// }
 label{
   color: #1F3777;
   font-weight: 500;
-  text-align: left;
 }
 .head{
   text-align: center;

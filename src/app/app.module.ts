@@ -3,36 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-// import { CookieModule, CookieService } from 'ngx-cookie';
-// import { CookieService } from 'ngx-cookie-service';
 //local
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+// import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MaterialModule } from './common/material.module';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms'
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    
   ],
   imports: [
     // CookieModule.forRoot() ,
+    Ng4LoadingSpinnerModule.forRoot(),
+    // Ng4LoadingSpinnerService,
     GraphqlModule,
     MaterialModule,
-    MatProgressBarModule,
     BrowserAnimationsModule,
     BrowserModule,
     NgxSpinnerModule,
     AppRoutingModule,
     GraphqlModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    FormsModule
   ],
   providers: [AlertComponentComponent],
   bootstrap: [AppComponent],

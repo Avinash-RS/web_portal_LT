@@ -1,15 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { RegistrationComponent } from './registration.component';
+import { ResetpasswordComponent } from './resetpassword.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { MatDialogModule } from '@angular/material';
-describe('RegistrationComponent', () => {
-  let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import {  MatDialogModule } from '@angular/material';
+import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
+
+describe('ResetpasswordComponent', () => {
+
+  let component: ResetpasswordComponent;
+  let fixture: ComponentFixture<ResetpasswordComponent>;
   let backend: ApolloTestingController;
   const fakeActivatedRoute = {
     snapshot: { data: {  } }
@@ -18,21 +19,19 @@ describe('RegistrationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatCheckboxModule,
         ReactiveFormsModule,
         MatDialogModule,
         ApolloTestingModule,
         RouterTestingModule
    ],
-
-  providers: [Ng4LoadingSpinnerService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
-      declarations: [ RegistrationComponent]
+   providers: [Ng4LoadingSpinnerService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
+      declarations: [ ResetpasswordComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationComponent);
+    fixture = TestBed.createComponent(ResetpasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     backend = TestBed.get(ApolloTestingController);

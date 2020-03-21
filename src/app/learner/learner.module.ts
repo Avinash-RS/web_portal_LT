@@ -22,6 +22,7 @@ import { CourseComponentComponent } from './../common/learner/course-component/c
 import { TopCoursesComponent } from './../common/learner/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from './../common/learner/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from './../common/learner/wishlist-courses/wishlist-courses.component';
+import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 //others
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'resetpassword', component: ResetpasswordComponent },
 ];
 
 @NgModule({
@@ -53,8 +55,10 @@ const routes: Routes = [
     CourseComponentComponent,
     TopCoursesComponent,
     RecomendedCoursesComponent,
-    WishlistCoursesComponent
+    WishlistCoursesComponent,
+    ResetpasswordComponent
   ],
+    
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 

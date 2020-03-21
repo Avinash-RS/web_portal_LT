@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import * as myGlobals from '../../../common/globals'; 
-
-// import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -25,13 +24,10 @@ export class OtpComponent implements OnInit {
   systemip:String;
   otp: any;
   showotp: boolean = false;
-  otp1 :number;
-  otp2 :number;
-  otp3 :number;
-  otp4 :number;
-  showverify: boolean = false;
-  constructor(private router:Router,  private formBuilder: FormBuilder,  private alert: AlertServiceService,
-    // private cookieService: CookieService,
+  constructor(private router:Router,
+      private formBuilder: FormBuilder,
+      private alert: AlertServiceService,
+      private loader:Ng4LoadingSpinnerService,
     public service : LearnerServicesService) { }
 
 
@@ -53,7 +49,7 @@ export class OtpComponent implements OnInit {
   this.currentUser = JSON.parse(user);
   this.systemip = localStorage.getItem('Systemip')
   this.otpForm = this.formBuilder.group({
-         mobile: new FormControl("", myGlobals.mobVal),
+          mobile: new FormControl('', myGlobals.mobileVal),
           otp1: new FormControl("", []),
           otp2: new FormControl("", []),
           otp3: new FormControl("", []),
@@ -64,8 +60,10 @@ export class OtpComponent implements OnInit {
 }
 get f() { return this.otpForm.controls; }
   otpverification(){
+    this.loader.show();
     this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+            this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.showotp = true;
           } 
@@ -78,7 +76,7 @@ get f() { return this.otpForm.controls; }
   // }
   otpverify(){
     this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.user_registration_verify(this.otpForm.value.mobile,this.otp).subscribe(data => {
+    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile,).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
