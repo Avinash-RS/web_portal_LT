@@ -30,18 +30,6 @@ variables:
           npm run build --prod   
           displayName: 'npm install, build and test'
 
-      - task: ArchiveFiles
-        displayName: 'Achive files'
-        inputs:
-          rootFolderorFile: '$(System.DefaultWorkingDirectory)'
-          includeRootFolder: false
-          archivType: zip
-          archiveFile: $9Build.ArtifactStaginDirectory)/$(Build.BuildId).zip
-          replaceExistingArchive: true
-
-       - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip   
-
-
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
