@@ -18,7 +18,7 @@ export class PasswordComponent implements OnInit {
   passwordForm: FormGroup;
   systemip:String;
 
-  myControl = new FormControl();
+  // myControl = new FormControl();
   options: string[] = [];
   constructor(private router:Router, 
     private loader : Ng4LoadingSpinnerService,

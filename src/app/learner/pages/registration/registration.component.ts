@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', myGlobals.fullname),
+         fullname: new FormControl('', myGlobals.fullnameVal),
           email: new FormControl('',myGlobals.emailVal),
           termsandconditions: new FormControl('', [])
       }, {
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 
   Submit() {
     this.loader.show();
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
+   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.fullname,this.registerForm.value.termsandconditions)
     .subscribe(data => {
         
           if (data.data['user_registration']['success'] == 'true') {

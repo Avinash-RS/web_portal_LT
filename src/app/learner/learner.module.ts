@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 // import { CookieService } from 'ngx-cookie-service';
 // import { CookieModule, CookieService } from 'ngx-cookie';
 //local
-
+import { NgxMaskModule } from 'ngx-mask'
 import { LoginComponent } from './../learner/pages/login/login.component';
 import { CoursedetailsComponent } from './../learner/pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from './../learner/pages/registration/registration.component';
@@ -48,8 +48,11 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
+    NgxMaskModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
+
+
   ],
   providers: [],
 })

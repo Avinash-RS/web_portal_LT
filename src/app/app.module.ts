@@ -13,6 +13,7 @@ import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
+import { NgxMaskModule } from 'ngx-mask'
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   imports: [
     // CookieModule.forRoot() ,
     Ng4LoadingSpinnerModule.forRoot(),
+    NgxMaskModule.forRoot(),
     // Ng4LoadingSpinnerService,
     GraphqlModule,
     MaterialModule,

@@ -87,7 +87,7 @@ body
 }
 .wrap-reg {
   width: 350px;
-  height: 500px;
+  height: 525px;
   background: #fff !important;
   border-radius: 3px;
   overflow: hidden !important;
@@ -109,15 +109,16 @@ body
   background-color: $color-blue;
 }
 
-// input[type=text], input[type=password] {
-//   width: 100%;
-//   padding: 12px 20px;
-//   margin: 1px 0;
-//   // background: #94b5f1;
-//   display: inline-block;
-//   border: 1px solid #ccc;
-//   box-sizing: border-box;
-// }
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  background: #94b5f1;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 0px;
+}
 label{
   color: #1F3777;
   font-weight: 500;
