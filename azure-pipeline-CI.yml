@@ -17,4 +17,5 @@ steps:
 
 - script: |
     npm install
+    ng serve 
   displayName: 'npm install and build'
