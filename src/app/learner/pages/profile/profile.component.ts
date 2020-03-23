@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import { FormGroup } from '@angular/forms';
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,20 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  // profileForm: FormGroup;
+  public qual: any[] = [{
+    level: '',
+    board: '',
+    institute: '',
+    discipline: '',
+    spec: '',
+    year: '',
+    percentage: ''
+  }];
+  public links: any[] = [{
+    certificate: ''
+  }];
+  
+  //Declarations
   info: any;
   fieldArray: Array<any> = [];
   newAttribute: any = {};
@@ -23,6 +37,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
@@ -54,12 +70,30 @@ export class ProfileComponent implements OnInit {
   //     // }
   //   })
   // }
-  // addnewRow() {
-  //   this.fieldArray.push(this.newAttribute)
-  //   this.newAttribute = {};
-  // }
+  addnewQual(){
+    this.qual.push({
+      level: '',
+      board: '',
+      institute: '',
+      discipline: '',
+      spec: '',
+      year: '',
+      percentage: ''
+    });
+  }
+  addnewLink(){
+    this.links.push({
+      certificate: ''
+    })
+  }
+  
   updateProfile() {
     console.log('info', this.info)
     console.log('gender',this.gender)
   }
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  //     width: '250px',
+  //     // data: {name: this.name, animal: this.animal}
+  //   });
 }

@@ -19,7 +19,7 @@
   border: 1px outset white;
   overflow: hidden;
   background-color: white !important;
-  box-shadow: rgb(255, 0, 191);
+  box-shadow: 0 2px 11px 0 rgba(0,0,0,2);
 }
 textarea {
   width: 314px;
@@ -42,8 +42,8 @@ text-align: center;
 }
 .avatar {
 vertical-align: middle;
-width: 60px;
-height: 60px;
+width: 70px;
+height: 70px;
 border-radius: 50%;
 margin-left: -47px;
 }
@@ -77,22 +77,11 @@ mat-select{
 }
 .Edit{
   margin-left: -59px;
+  margin-top: 21px;
 }
 .mat-progress-bar {
   height: 30px;
 }
-
-// ::ng-deep .mat-progress-bar-fill::after {
-//   background-color: #1E457C;
-// }
-
-// ::ng-deep .mat-progress-bar-buffer {
-//   background: #E4E8EB;
-// }
-
-// ::ng-deep .mat-progress-bar {
-//   border-radius: 2px;
-// }
 .certificate{
   margin-left: -30px;
 }
@@ -100,8 +89,8 @@ mat-select{
   margin-left: 69px;
 }
 .cameraicon{
-  margin-left: -60px;
-  margin-top: 37px;
+  margin-left: -52px;
+  margin-top: 48px;
   font-size: 20px;
   // color: darkslateblue;
   color: black;
@@ -124,6 +113,28 @@ mat-label{
 }
 .language{
    padding-left: 18px;
+}
+.doj{
+  margin-left: 33px;
+  margin-top: -86px;
+}
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 5px;
+  margin-left: -48px;
+  margin-top: 26px;
+}
+.example-margin {
+  margin: 0 10px;
+  color: black;
+  border: 2px solid;
+  height: 5px;
+  width: 100%;
+}
+.studentradio {
+  margin-left: 10px;
 }
 
 
