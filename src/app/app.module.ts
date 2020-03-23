@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
-import { NgxSpinnerModule } from 'ngx-spinner';
-// import { CookieModule, CookieService } from 'ngx-cookie';
-// import { CookieService } from 'ngx-cookie-service';
+// import { BarRatingModule } from "ngx-bar-rating";
 //local
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MaterialModule } from './common/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,15 +16,14 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    
   ],
   imports: [
     // CookieModule.forRoot() ,
+    Ng4LoadingSpinnerModule.forRoot() ,
     GraphqlModule,
     MaterialModule,
     BrowserAnimationsModule,
     BrowserModule,
-    NgxSpinnerModule,
     AppRoutingModule,
     GraphqlModule,
     BrowserAnimationsModule,

@@ -14,42 +14,58 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     // private authenticationService: AuthenticationService
-  ) {}
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // const currentUser = this.authenticationService.currentUserValue;
-    console.log(state.url)
-    if (state.url == "/home") {
-      this.guard("currentUserLMS");
-      const currentUser = localStorage.getItem("currentUserLMS");
-      if (currentUser == "true") {
-        return true;
-      } else {
-        this.router.navigate(["/"]);
+    // console.log(state.url)
+    // if (state.url == "/home") {
+    //   this.guard("currentUserLMS");
+    //   const currentUser = localStorage.getItem("currentUserLMS");
+    //   if (currentUser == "true") {
+    //     return true;
+    //   } else {
+    //     this.router.navigate(["/"]);
+    //     return false;
+    //   }
+    // } else if ((state.url == "/courseCreation") || ( state.url == "/courseview")) {
+    //   this.guard("currentUserLMS");
+    //   const currentUser = localStorage.getItem("currentUserCMS");
+    //   if (currentUser == "true") {
+    //     return true;
+    //   } else {
+    //     this.router.navigate(["/"]);
+    //     return false;
+    //   }
+    // } else if (state.url == "/adminDashboard") {
+    //   const currentUser = localStorage.getItem("currentUser");
+    //   this.guard("currentUserLMS");
+    //   if (currentUser == "true") {
+    //     return true;
+    //   } else {
+    //     this.router.navigate(["/"]);
+    //     return false;
+    //   }
+    // }
+    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    if (userDetailes != null) {
+      if (state.url == '/Learner/login' || state.url == '/Admin/login') {
+        this.router.navigate(["/Learner/courses"]);
         return false;
       }
-    } else if ((state.url == "/courseCreation") || ( state.url == "/courseview")) {
-      this.guard("currentUserLMS");
-      const currentUser = localStorage.getItem("currentUserCMS");
-      if (currentUser == "true") {
+      else
         return true;
-      } else {
-        this.router.navigate(["/"]);
-        return false;
-      }
-    } else if (state.url == "/adminDashboard") {
-      const currentUser = localStorage.getItem("currentUser");
-      this.guard("currentUserLMS");
-      if (currentUser == "true") {
-        return true;
-      } else {
-        this.router.navigate(["/"]);
-        return false;
-      }
     }
-
-    // not logged in so redirect to login page with the return url
+    else if (userDetailes == null) {
+      if (state.url == '/Learner/MyCourse') {
+        this.router.navigate(["/Learner/login"])
+        return false;
+      } else
+        return true;
+    }
+    else
+      return true;
   }
 
-  guard(user) {}
+  guard(user) { }
 }

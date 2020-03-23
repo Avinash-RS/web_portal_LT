@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { login } from "./operations/learner_query";
+import { login,get_course_by_user } from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
-  user_registration_done} from "./operations/learner_mutation";
+  get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
+  user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -43,17 +44,17 @@ export class LearnerServicesService {
         user: _id,
         mobile_number:mobile,
         email:email,
-      
       }
     });
   }
 
-  user_registration_verify(mobile_number,otp){
+  user_registration_verify(otp,mobile_number){
     return this.Apollo.query({
       query: user_registration_mobile_otp_verify,
       variables: {
-        mobile_number: mobile_number,
         otp: otp,
+        mobile_number: mobile_number
+       
       }
     });
   }
@@ -70,7 +71,37 @@ export class LearnerServicesService {
     });
   }
 
+  forgotUsernameandPassword(type,subtype,mobile_number,email) {
+    return this.Apollo.query({
+      query: get_forgot_username_mobile_email,
+      variables: {
+        type: type,
+        subtype:subtype,
+        mobile_number:mobile_number,
+        email:email
+
+      }
+    });
+  }
   
+  forgotPasswordByUsername(username){
+    console.log(username)
+    return this.Apollo.query({
+      query: get_forgot_password_byusername,
+      variables: {
+        username:username
+      }
+    });
+  }
+  getMyCourse(user_id) {
+    console.log('inside services', user_id)
+    return this.Apollo.query({
+      query: get_course_by_user,
+      variables: {
+        user_id: user_id,
+      }
+    });
+  }
   // submit_otp(user_id,_id,mobile) {
   //   return this.Apollo.query({
   //     query: user_registration_mobile_otp_send,
@@ -79,7 +110,22 @@ export class LearnerServicesService {
   //       user_id:user_id,
   //       user:_id,
 
-  //     }
-  //   });
-  // }
+  userNamesuggestion(userId){
+    return this.Apollo.query({
+      query: user_registration_username_suggestion,
+      variables: {
+        user_id:userId
+      }
+    });
+  }
+
+  resetPassword(username,password){
+    return this.Apollo.query({
+      query: get_forgot_password_byresetpassword,
+      variables: {
+        username:username,
+        password:password
+      }
+    });
+  }
 }
