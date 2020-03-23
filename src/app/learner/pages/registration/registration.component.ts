@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', myGlobals.usernameVal),
+          username: new FormControl('', myGlobals.fullname),
           email: new FormControl('',myGlobals.emailVal),
           termsandconditions: new FormControl('', [])
       }, {
