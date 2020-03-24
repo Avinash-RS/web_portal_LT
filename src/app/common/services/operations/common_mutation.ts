@@ -5,7 +5,8 @@ mutation add_to_wishlist($user_id: String, $course_id: String){
     add_to_wishlist(user_id: $user_id, course_id: $course_id) {
       success
       message
-      error_msg
+      error_msg,
+      wishlist_id
     }
   }`;
 

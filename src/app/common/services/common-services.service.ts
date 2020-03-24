@@ -11,7 +11,6 @@ export class CommonServicesService {
   constructor(private Apollo: Apollo) { }
 
   logout(user_id, is_admin) {
-    console.log('inside services', user_id, is_admin)
     return this.Apollo.query({
       query: logout,
       variables: {
@@ -22,7 +21,6 @@ export class CommonServicesService {
   }
 
   viewCurseByID(course_id) {
-    console.log('inside services', course_id)
     return this.Apollo.query({
       query: viewcourse,
       variables: {
@@ -31,18 +29,16 @@ export class CommonServicesService {
     });
   }
 
-  viewWishlist(course_id) {
-    console.log('inside services', course_id)
+  viewWishlist(user_id) {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
-        course_id: course_id,
+        user_id: user_id,
       }
     });
   }
 
   addWishlist(course_id,user_id) {
-    console.log('inside services', course_id)
     return this.Apollo.query({
       query: add_to_wishlist,
       variables: {
@@ -52,12 +48,11 @@ export class CommonServicesService {
     });
   }
 
-  removeWishlist(course_id) {
-    console.log('inside services', course_id)
+  removeWishlist(wishlist_id) {
     return this.Apollo.query({
       query: delete_wishlist,
       variables: {
-        course_id: course_id,
+        wishlist_id: wishlist_id,
       }
     });
   }

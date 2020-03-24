@@ -22,13 +22,15 @@ export const login = gql`
     error_msg
     message{
       course_id
-  course_description
-  course_name
-  course_img_url
-  certificate_name
-  max_student_enrollments_allowed
-  short_description
-  rating
+      course_description
+      course_name
+      course_img_url
+      certificate_name
+      max_student_enrollments_allowed
+      short_description
+      rating,
+      price
+
     }
   }
 }`;

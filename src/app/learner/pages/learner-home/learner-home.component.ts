@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service'
+import { Router } from '@angular/router';
+import { GlobalServiceService } from 'src/app/common/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-learner-home',
@@ -9,12 +11,16 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 export class LearnerHomeComponent implements OnInit {
   tiles: any = [];
   userDetailes: any;
-  constructor(public service: LearnerServicesService) { }
+  panelOpenState = false;
+  
+  constructor(public service: LearnerServicesService,private router:Router,private gs: GlobalServiceService,) { }
 
   ngOnInit() {
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-
-  
+    if (this.gs.checkLogout()) {
+      this.userDetailes = this.gs.checkLogout()
+      console.log('hi',this.userDetailes)
+    }
+   
   }
   myCourses() {
 
