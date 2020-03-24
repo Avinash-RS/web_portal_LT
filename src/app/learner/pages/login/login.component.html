@@ -5,7 +5,7 @@
       <mat-card-content>
         <div class="form-group">
           <label>User Name</label><span style="color: red;"> *</span>
-          <input type="text" formControlName="username" class="form-control"
+          <input type="text" name="username" formControlName="username" class="form-control"
             [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
           <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">User Name is required</div>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
           <label>Password</label><span style="color: red;"> *</span>
-          <input type="password" formControlName="password" onCopy="return false" onDrag="return false"
+          <input type="password" name="password" formControlName="password" onCopy="return false" onDrag="return false"
             onDrop="return false" onPaste="return false" class="form-control"
             [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
           <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">

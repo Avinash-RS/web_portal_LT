@@ -74,5 +74,6 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [],
+  entryComponents : []
 })
 export class LearnerModule { }

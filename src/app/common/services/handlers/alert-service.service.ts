@@ -9,7 +9,6 @@ export class AlertServiceService {
   constructor(public matDialog: MatDialog) { }
 
   public openAlert(title, msg) {
-    console.log(title,msg)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { title: title, msg: msg ? msg : null };
     dialogConfig.width= '30%',

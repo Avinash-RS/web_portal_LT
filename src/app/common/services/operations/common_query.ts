@@ -66,11 +66,18 @@ export const view_wishlist = gql`
       message{
         _id
         course_id
-        user_id
         created_on
         is_active
-        updated_on
-      }
+        user_id
+        certificate_name
+        course_description
+        course_img_url
+        course_name
+        max_student_enrollments_allowed
+        price
+        rating
+        short_description
+        }
     }
   }`;
 

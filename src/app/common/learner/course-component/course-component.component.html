@@ -2,8 +2,8 @@
   <div class="wishlst" (change)="selectWishlist(course)">
     <!-- <img [ngStyle]="{'background-color':course.wishlisted === ture ? 'yellow' : 'black' }"
       src="../../../../assets/learner/key_down.svg"> -->
-      <i class="fa fa-heart" aria-hidden="true" *ngIf = "course.wishlisted == true" style="font-size:25px;color:yellow;"></i>
-      <i class="fa fa-heart" aria-hidden="true" *ngIf = "course.wishlisted == false"  style="font-size:25px;color:red;"></i>
+      <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:yellow;"></i>
+      <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
   </div>
   <img *ngIf="course.course_img_url != 'null'" src="{{course.course_img_url}}">
   <img *ngIf="course.course_img_url == 'null'" src="../../../../assets/learner/1.jpg">
@@ -21,18 +21,17 @@
   <small class="progressBar">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
   <mat-progress-bar *ngIf="course.text === 'Resume'" mode="determinate" value="{{course.statusValue}}">
   </mat-progress-bar> -->
-  <button *ngIf = "from == 'myCourse'" mat-raised-button class="status" block
-    [ngStyle]="{'background-color':course.text === 'Start' ? 
-    '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '028514' : '#1f3777' }">Start</button>
+  <button *ngIf="from == 'myCourse'" mat-raised-button class="status" block
+    style="background-color:#1f3777 ;">Start</button>
 
   <div class="content">
     <div class="text">
       <button (click)="selectWishlist(course)" class="wishlstinContent">
         <!-- <img [ngClass]="{'background-color':course.wishlisted === ture ? 'yellow' : 'black' }"
           src="../../../../assets/learner/key_down.svg"> -->
-          <i class="fa fa-heart" aria-hidden="true" *ngIf = "course.wishlisted == true" style="font-size:25px;color:yellow;"></i>
-          <i class="fa fa-heart" aria-hidden="true" *ngIf = "course.wishlisted == false"  style="font-size:25px;color:red;"></i>
-        </button>
+        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:yellow;"></i>
+        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
+      </button>
       <p>
         Description
       </p>

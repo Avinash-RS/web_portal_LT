@@ -11,6 +11,7 @@ import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
+// import { GlobalServiceService } from './common/services/handlers/global-service.service';
 
 @NgModule({
   declarations: [

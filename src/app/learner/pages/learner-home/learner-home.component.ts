@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service'
 import { Router } from '@angular/router';
+import { GlobalServiceService } from 'src/app/common/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-learner-home',
@@ -12,11 +13,14 @@ export class LearnerHomeComponent implements OnInit {
   userDetailes: any;
   panelOpenState = false;
   
-  constructor(public service: LearnerServicesService,private router:Router,) { }
+  constructor(public service: LearnerServicesService,private router:Router,private gs: GlobalServiceService,) { }
 
   ngOnInit() {
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    console.log('hi',this.userDetailes)
+    if (this.gs.checkLogout()) {
+      this.userDetailes = this.gs.checkLogout()
+      console.log('hi',this.userDetailes)
+    }
+   
   }
   myCourses() {
 

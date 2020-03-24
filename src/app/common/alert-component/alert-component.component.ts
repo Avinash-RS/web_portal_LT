@@ -11,7 +11,6 @@ export class AlertComponentComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AlertComponentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any ) {
-    console.log(data)
   }
 
   ngOnInit() {

@@ -30,3 +30,11 @@ img {
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow : none;
 }
+::ng-deep .mat-expansion-indicator {
+    margin-right: 25px !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    padding: 7px !important;
+    color: $color-blue;
+}

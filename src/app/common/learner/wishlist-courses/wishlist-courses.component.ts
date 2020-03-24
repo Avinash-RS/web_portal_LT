@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonServicesService } from '../../services/common-services.service';
+import { GlobalServiceService } from '../../services/handlers/global-service.service';
 
 @Component({
   selector: 'app-wishlist-courses',
@@ -7,19 +8,24 @@ import { CommonServicesService } from '../../services/common-services.service';
   styleUrls: ['./wishlist-courses.component.scss']
 })
 export class WishlistCoursesComponent implements OnInit {
-  userDetail: any;
   wishlist: any = [];
-
-  constructor(public service: CommonServicesService) { }
+  constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
   ngOnInit() {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.service.viewWishlist(this.userDetail._id).subscribe((viewWishlist: any) => {
+    if (this.gs.checkLogout()) {
+      this.viewWishlist();
+      this.gs.callWishlist.subscribe(message =>
+        this.viewWishlist()
+      )
+    }
+  }
+
+  viewWishlist() {
+    var userdetail = this.gs.checkLogout()
+    this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
-        console.log(this.wishlist)
       }
     });
   }
-
 }

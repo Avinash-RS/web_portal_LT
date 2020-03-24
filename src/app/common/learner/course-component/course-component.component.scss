@@ -116,16 +116,16 @@ strong {
 }
 .wishlst {
     position: absolute;
-    left: 78%;
+    left: 76%;
     top: 1vh;
 }
 .wishlst i, .wishlstinContent i {
     border-radius: 50px;
     width: 100%;
-    // background-color: #ffcf01;
     background-color: rgb(20, 20, 20);
     opacity: 0.5;
     border: none;
+    padding: 7px;
 }
 .wishlstinContent {
     position: absolute;
@@ -133,4 +133,9 @@ strong {
     top: 1vh;
     border: none;
     background-color : transparent;
+}
+.fa {
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: red;
+    font-size:20px; 
 }

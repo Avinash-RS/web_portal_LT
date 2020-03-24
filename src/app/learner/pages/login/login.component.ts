@@ -53,5 +53,16 @@ export class LoginComponent implements OnInit {
           this.alert.openAlert("Please try again later", null)
         }
       });
+
+
+
+    // localStorage.setItem('uname', this.loginForm.value.username);
+    // localStorage.setItem('remember_me', 'false');
+    // var ps = btoa(this.loginForm.value.password);
+    // localStorage.setItem('ps', ps);
+    // localStorage.setItem('UserDetails', '{}')
+    // this.router.navigate(['/Learner'])
+
+
   }
 }
