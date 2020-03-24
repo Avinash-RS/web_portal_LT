@@ -35,7 +35,7 @@ padding-left: -39px;
 }
 .profilegrid{
   margin-left: 451px;
-  margin-top: -39px;
+  margin-top: -24px;
 }
 .subbtn{
 text-align: center;
@@ -86,7 +86,7 @@ mat-select{
   margin-left: -30px;
 }
 .myprofile{
-  margin-left: 69px;
+  margin-left: 76px;
 }
 .cameraicon{
   margin-left: -52px;
@@ -135,6 +135,11 @@ mat-label{
 }
 .studentradio {
   margin-left: 10px;
+}
+.myDialog{
+  width: 70%;
+  height: 300px !important;
+  display: flex;
 }
 
 

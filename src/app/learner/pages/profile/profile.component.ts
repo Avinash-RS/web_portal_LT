@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
-
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import * as myGlobals from '../../../common/globals';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  mailForm: FormGroup;
   public qual: any[] = [{
     level: '',
     board: '',
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit {
   public links: any[] = [{
     certificate: ''
   }];
-  
+
   //Declarations
   info: any;
   fieldArray: Array<any> = [];
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   user_id: string = "l9m2l2";
   countryValue: any;
   countryId: any;
+  showotp: boolean = false;
   // countryDetails: any = [];
 
 
@@ -44,13 +46,29 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getAllcountry();
     // this.getprofileDetails();
+    this.mailForm = this.formBuilder.group({
+      // username: new FormControl('', myGlobals.usernameVal),
+      mailid: new FormControl('', myGlobals.emailVal),
+      mobile: new FormControl('', myGlobals.mobileVal),
+          otp1: new FormControl("", []),
+          otp2: new FormControl("", []),
+          otp3: new FormControl("", []),
+          otp4: new FormControl("", []),
+      currentpassword: new FormControl('', myGlobals.passwordVal),  
+      newpassword: new FormControl('', myGlobals.passwordVal),  
+      confirmpassword: new FormControl('', myGlobals.passwordVal),  
+    }, {
+    });
+  }
+  get f() { 
+    return this.mailForm.controls; 
   }
   //Country List
-  getAllcountry(){
-      this.service.get_country_details().subscribe(countryDetails => {
-      console.log('sss',countryDetails);
+  getAllcountry() {
+    this.service.get_country_details().subscribe(countryDetails => {
+      console.log('sss', countryDetails);
       this.countryValue = countryDetails.data['get_country_details'].data;
-      console.log('countryValue',this.countryValue)
+      console.log('countryValue', this.countryValue)
     })
   }
   //State List
@@ -70,7 +88,7 @@ export class ProfileComponent implements OnInit {
   //     // }
   //   })
   // }
-  addnewQual(){
+  addnewQual() {
     this.qual.push({
       level: '',
       board: '',
@@ -81,19 +99,28 @@ export class ProfileComponent implements OnInit {
       percentage: ''
     });
   }
-  addnewLink(){
+  addnewLink() {
     this.links.push({
       certificate: ''
     })
   }
-  
+
   updateProfile() {
     console.log('info', this.info)
-    console.log('gender',this.gender)
+    console.log('gender', this.gender)
   }
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-  //     width: '250px',
-  //     // data: {name: this.name, animal: this.animal}
-  //   });
+
+  editEmail(templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef);
+  }
+
+  editmobno(mobRef: TemplateRef<any>) {
+    this.dialog.open(mobRef);
+  }
+  editPassword(passRef: TemplateRef<any>) {
+    this.dialog.open(passRef);
+  }
+  otpverification(){
+    this.showotp = true;
+  }
 }
