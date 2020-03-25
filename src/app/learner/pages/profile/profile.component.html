@@ -9,7 +9,7 @@
               <mat-label>Information about you</mat-label><span class="mand">*</span>
             </div>
             <div class="row">
-              <textarea matInput class="inputs" placeholder="500 characters" [(ngModel)]="info" name="info" maxlength="1000"></textarea>
+              <textarea class="inputs" placeholder="500 characters" [(ngModel)]="info" name="info" maxlength="1000"></textarea>
             </div><br>
             <div class="row">
               <mat-label>Gender</mat-label><span class="mand">*</span>
@@ -66,10 +66,11 @@
                 </mat-select>
               </div>
             </div>
-          </form>
+          </form >
         </mat-grid-tile>
         <!----------------------------Profile--------------------->
         <mat-grid-tile>
+          <form>
           <div class="profilegrid">
             <div class="row myprofile">
               <mat-label>My Profile</mat-label>
@@ -94,9 +95,9 @@
                 <mat-label>DOJ lxp</mat-label>
               </div>
             </div>
-            <section class="example-section">
+            <!-- <section class="example-section">
               <mat-progress-bar class="example-margin" mode="determinate" value="40"></mat-progress-bar>
-            </section>
+            </section> -->
             <div class="Edit">
               <div class="row">
                 <div class="col-sm-3">
@@ -130,6 +131,7 @@
               </div><br>
             </div>
           </div>
+          </form>
         </mat-grid-tile>
       </mat-grid-list>
       <!-----------------------Profile End----------------------->
@@ -179,10 +181,10 @@
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <input type="tel" class="inputs" matInput placeholder="Year of Passing" [(ngModel)]="qualification.year" name="year" maxlength="4" minlength="4">
+              <input type="tel" class="inputs" placeholder="Year of Passing" [(ngModel)]="qualification.year" name="year" maxlength="4" minlength="4">
             </div>
             <div class="col-sm-3">
-              <input class="inputs" matInput placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage">
+              <input class="inputs" placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage">
             </div>
             <div class="col-sm-3">
               <mat-icon (click)="addnewQual()">add_circle_outline</mat-icon>
@@ -192,7 +194,7 @@
       </div> <br>
       <div class="row certificate" *ngFor="let link of links">
         <div class="col-sm-2">
-          <input class="inputs" matInput placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
+          <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
         </div>
         <div class="col-sm-2">
           <mat-icon (click)="addnewLink()">add_circle_outline</mat-icon>
@@ -200,9 +202,30 @@
       </div><br>
       <div class="row certificate">
         <div class="col-sm-2">
-          <input class="inputs" matInput placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
+          <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
         </div>
       </div><br>
+      <div *ngIf="profession == 'professional'">
+        <div class="row">
+          <mat-label>Experience</mat-label><span class="mand">*</span>
+        </div>
+        <div class="row experirnce">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-4">
+                <input type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="totExp" name="totExp" minlength="2">
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="inputs" placeholder="Current Organisation" [(ngModel)]="currentOrg" name="currentOrg" minlength="4" maxlength="16">
+              </div>
+              <div class="col-sm-4">
+                <input class="inputs" placeholder="Current role" [(ngMdel)]="currentRole" name="currentRole">
+              </div>
+            </div>
+          </div>
+        </div><br>
+      </div>
+      
       <div class="subbtn">
         <button mat-raised-button color="primary" (click)="updateProfile()">Submit</button>
       </div>
