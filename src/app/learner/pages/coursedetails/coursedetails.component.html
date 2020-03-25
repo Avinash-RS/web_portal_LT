@@ -1,3 +1,96 @@
-
-
 <app-header></app-header>
+
+<div class="section_1"></div>
+<mat-card style="text-align: center;" class="section_1_card_1"></mat-card>
+<mat-card style="text-align: center;" class="section_1_card_2">
+    <mat-card-title> <span class="icon">ICON 600</span>
+        <span class="price_striked">Rs 70000</span>
+        <span class="percent_off"> 90% Off </span>
+    </mat-card-title>
+    <mat-card-content>
+        <p class="day_left"><i class="fa fa-hourglass" style=" -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: black;" aria-hidden="true"></i>1 day left at this price</p>
+        <div> <button mat-raised-button class="add_to_cart">ADD TO CART</button></div><br>
+        <div><button mat-raised-button class="buy_now">BUY NOW</button></div><br>
+        <div>
+            <button mat-raised-button class="share_text"><i class="fa fa-share" aria-hidden="true"></i>Share</button>
+            <button mat-raised-button class="share_text"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</button>
+        </div>
+    </mat-card-content>
+    <br>
+    <br>
+</mat-card>
+<div class="section_1_a">
+    <p class="course_name">Online Photography Course </p>
+    <bar-rating [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
+    <p class="course_desc">I'm trying to blur the background image, but the main content is blurred too blur the
+        background image</p>
+    <table>
+        <tr>
+            <td> Already enrolled</td>
+            <td><i class="fa fa-address-card" style="background-color: #f8f9fa;
+                width: 18%;
+                font-size:18px;
+                border-radius: 50px;
+                padding: 10px;"></i> Certificate</td>
+            <td> <i class="fa fa-refresh" style="background-color: #f8f9fa;
+                width:17%;
+                font-size:20px;
+                -webkit-text-stroke-color: black; 
+                border-radius: 50px;
+                padding: 10px;"></i>Self Placed</td>
+        </tr>
+        <tr>
+            <td> Last updated</td>
+            <td> <i class="fa fa-language" style="background-color: #f8f9fa;
+                width: 18%;
+                font-size:25px;
+                -webkit-text-stroke-color: black; 
+                border-radius: 50px;
+                padding: 8px;"></i>English</td>
+        </tr>
+    </table>
+    <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
+            width: 10%;
+            border-radius: 50px;
+            padding: 15px 15px 15px 27px;margin-top: 3% !important;"></i>
+
+    <div class="course_preview">
+        <h1>Course <br> Preview</h1>
+    </div>
+
+    <div class="partner_image_div">
+        <img src="../../../../assets/learner/1.jpg" class="partner_img">
+        <img src="../../../../assets/learner/1.jpg" class="partner_img">
+        <img src="../../../../assets/learner/1.jpg" class="partner_img">
+    </div>
+</div>
+<div class="wrap_content">
+    <mat-tab-group>
+        <mat-tab label="About">
+            <h1>Some tab content</h1>
+            <p>...</p>
+        </mat-tab>
+        <mat-tab label="Take aways">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+        </mat-tab>
+        <mat-tab label="Syllabus">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+        </mat-tab>
+        <mat-tab label="Review">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+        </mat-tab>
+        <mat-tab label="Instructor">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+        </mat-tab>
+        <mat-tab label="FAQ">
+            <h1>Some more tab content</h1>
+            <p>...</p>
+        </mat-tab>
+    </mat-tab-group>
+</div>
