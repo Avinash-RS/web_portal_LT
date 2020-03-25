@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { CommonServicesService } from '../../services/common-services.service';
-import { GlobalServiceService } from '../../services/handlers/global-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-wishlist-courses',

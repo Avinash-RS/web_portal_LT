@@ -7,12 +7,12 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { NgImageSliderModule } from 'ng-image-slider';
 //local
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { MaterialModule } from './common/material.module';
+import { MaterialModule } from '././core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-// import { GlobalServiceService } from './common/services/handlers/global-service.service';
+import { AlertComponentComponent } from './core/shared/alert-component/alert-component.component';
+// import { GlobalServiceService } from '././core/services/handlers/global-service.service';
 
 @NgModule({
   declarations: [

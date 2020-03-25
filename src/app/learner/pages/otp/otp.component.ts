@@ -3,9 +3,9 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBui
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import * as myGlobals from '../../../common/globals'; 
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import * as myGlobals from '@core/globals'; 
 
 // import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {

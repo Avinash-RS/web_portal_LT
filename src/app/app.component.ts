@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { GlobalServiceService } from './common/services/handlers/global-service.service'
+import { GlobalServiceService } from '././core/services/handlers/global-service.service'
 
 @Component({
   selector: 'app-root',

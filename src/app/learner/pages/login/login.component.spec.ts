@@ -11,7 +11,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { AlertComponentComponent } from '../../../common/alert-component/alert-component.component';
+import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonServicesService } from '../services/common-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
 
 @Component({

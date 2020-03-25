@@ -1,4 +1,6 @@
 @import "../../../../assets/variable.scss";
+// @import "@assets/variable.scss";
+// @import "@assets/variable";
 
 mat-card{
     width: 24%;
@@ -37,11 +39,4 @@ mat-form-field {
 mat-card-title {
     font-weight: 400;
 }
-
-// mat-error {
-//     float: left;
-//     margin-left: 10%;
-//     margin-top: -5%;
-// }
-
  

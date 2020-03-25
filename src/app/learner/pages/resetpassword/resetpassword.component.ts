@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MustMatch } from '../../../common/_helpers/must-match.validator';
-import { LearnerServicesService } from '../../services/learner-services.service';
+import { MustMatch } from '@core/services/_helpers/must-match.validator';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import * as myGlobals from '../../../common/globals'; 
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import * as myGlobals from '@core/globals'; 
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '../../../common/globals'; 
+import * as myGlobals from '@core/globals'; 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

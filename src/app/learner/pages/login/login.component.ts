@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { CookieService } from 'ngx-cookie-service';
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
-import { LearnerServicesService } from '../../services/learner-services.service';
+import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import * as myGlobals from '../../../common/globals';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import * as myGlobals from '@core/globals';
 
 @Component({
   selector: 'app-login',

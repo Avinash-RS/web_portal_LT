@@ -6,8 +6,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["app/*"],
-      "@shared/*": ["src/app/common/*"]
+      "@admin/*": ["src/app/admin/*"],
+      "@core/*": ["src/app/core/*"],
+      "@learner/*": ["src/app/learner/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CommonServicesService } from '../../services/common-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { GlobalServiceService } from '../../services/handlers/global-service.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-course-component',

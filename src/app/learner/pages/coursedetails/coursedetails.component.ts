@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonServicesService } from 'src/app/common/services/common-services.service';
+import { CommonServicesService } from '@core/services/common-services.service';
 
 @Component({
   selector: 'app-coursedetails',
