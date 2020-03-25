@@ -29,7 +29,7 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
   { path: 'login', component: LoginComponent,   canActivate:[AuthGuard] },
-  { path: 'courses', component: CoursedetailsComponent },
+  { path: 'courseDetail', component: CoursedetailsComponent },
   { path: 'register', component: RegistrationComponent ,},
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },

@@ -53,8 +53,8 @@
     <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
             width: 10%;
-            border-radius: 50px;
-            padding: 15px 15px 15px 27px;margin-top: 3% !important;"></i>
+            border-radius: 50px; 
+            padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
 
     <div class="course_preview">
         <h1>Course <br> Preview</h1>
@@ -66,31 +66,73 @@
         <img src="../../../../assets/learner/1.jpg" class="partner_img">
     </div>
 </div>
+
 <div class="wrap_content">
-    <mat-tab-group>
-        <mat-tab label="About">
-            <h1>Some tab content</h1>
-            <p>...</p>
-        </mat-tab>
-        <mat-tab label="Take aways">
-            <h1>Some more tab content</h1>
-            <p>...</p>
-        </mat-tab>
-        <mat-tab label="Syllabus">
-            <h1>Some more tab content</h1>
-            <p>...</p>
-        </mat-tab>
-        <mat-tab label="Review">
-            <h1>Some more tab content</h1>
-            <p>...</p>
-        </mat-tab>
-        <mat-tab label="Instructor">
-            <h1>Some more tab content</h1>
-            <p>...</p>
-        </mat-tab>
-        <mat-tab label="FAQ">
-            <h1>Some more tab content</h1>
-            <p>...</p>
-        </mat-tab>
-    </mat-tab-group>
+    <div class="tabs">
+        <button mat-raised-button (click)="scroll(About)">About</button>
+        <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
+        <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
+        <button mat-raised-button (click)="scroll(Review)">Review</button>
+        <button mat-raised-button (click)="scroll(Instructor)">Instructor</button>
+        <button mat-raised-button (click)="scroll(FAZ)">FAQ</button>
+    </div>
+
+    <br>
+    <div #About class="about_tab">
+        <h2>Details About Course</h2>
+        <!-- <tr>
+            <th>
+                <h2 style="width: 50%;">Details About Course</h2>
+            </th>
+            <th>
+                <h2 style="width: 50%;">Details About Course</h2>
+            </th>
+        </tr> -->
+        <table>
+      
+            <tr>
+                <td style="width: 20%;font-size: 15px;font-weight: 400;">Course Instructor</td>
+                <td style="width: 40%;font-size: 15px;font-weight: 400;">Ajay</td>
+                <td style="width: 10%;"></td>
+                <td style="width: 5%;"><i class="fa fa-language" style="background-color: #f8f9fa;
+                width: 18%;
+                font-size:25px;
+                -webkit-text-stroke-color: black; 
+                border-radius: 50px;
+                padding: 8px;"></i></td>
+                <td style="font-size: 15px;font-weight: 400;">20 hrs demand</td>
+            </tr>
+            <tr>
+                <td class="tr_w_1">Pre Requisite</td>
+                <td class="tr_w_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                <td style="width: 10%;"></td>
+                <td class="tr_w_4"><i class="fa fa-language" style="background-color: #f8f9fa;
+                width: 18%;
+                font-size:25px;
+                -webkit-text-stroke-color: black; 
+                border-radius: 50px;
+                padding: 8px;"></i></td>
+                <td class="tr_w_5">20 hrs demand</td>
+            </tr>
+            <tr>
+                <td class="tr_w_1">Course Description</td>
+                <td class="tr_w_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries</td>
+                <td style="width: 10%;"></td>
+                <td class="tr_w_4"><i class="fa fa-language" style="background-color: #f8f9fa;
+                width: 18%;
+                font-size:25px;
+                -webkit-text-stroke-color: black; 
+                border-radius: 50px;
+                padding: 8px;"></i></td>
+                <td class="tr_w_5">20 hrs demand</td>
+            </tr>
+        </table>
+    </div>
+    <br> <br>
+    <div #Take_away class="">
+      <h1>  TAKE AWAY</h1>
+        </div>
 </div>
