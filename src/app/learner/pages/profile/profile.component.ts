@@ -25,14 +25,14 @@ export class ProfileComponent implements OnInit {
   }];
 
   //Declarations
-  info: any;
+  profileDetails: any = [];
   fieldArray: Array<any> = [];
   newAttribute: any = {};
-  gender: any;
   user_id: string = "l9m2l2";
   countryValue: any;
   countryId: any;
   showotp: boolean = false;
+  qualification: any;
   // countryDetails: any = [];
 
 
@@ -106,8 +106,16 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-    console.log('info', this.info)
-    console.log('gender', this.gender)
+    
+    if(this.profileDetails.gender === undefined){
+      this.alert.openAlert('Select a value for gender', null)
+    }
+    if(this.profileDetails.profession === undefined){
+      this.alert.openAlert('Select a value for profession', null)
+    }
+    if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
+      this.alert.openAlert('Select values for all fields in location', null)
+    }
   }
 
   editEmail(templateRef: TemplateRef<any>) {

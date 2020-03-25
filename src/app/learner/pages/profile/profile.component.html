@@ -4,166 +4,169 @@
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
       <mat-grid-list class="masterGrid" cols="2" rowHeight="2:1">
         <mat-grid-tile class="grid1">
-          <form>
+          <form #createForm="ngForm">
             <div class="row">
-              <mat-label>Information about you</mat-label><span class="mand">*</span>
+              <mat-label>Information about you</mat-label>
             </div>
             <div class="row">
-              <textarea class="inputs" placeholder="500 characters" [(ngModel)]="info" name="info" maxlength="1000"></textarea>
-            </div><br>
-            <div class="row">
-              <mat-label>Gender</mat-label><span class="mand">*</span>
-              <div class="col">
-                <mat-radio-group [(ngModel)]="gender" name="gender">
-                  <mat-radio-button value="M">M</mat-radio-button>
-                  <mat-radio-button value="F">F</mat-radio-button>
-                  <mat-radio-button value="O">Rather not say</mat-radio-button>
-                </mat-radio-group>
+              <textarea class="inputs" placeholder="500 characters"
+                [(ngModel)]="info" name="info" maxlength="1000"></textarea>
+              </div><br>
+              <div class="row">
+                <mat-label>Gender</mat-label><span class="text-danger">*</span>
+                <div class="col">
+                  <mat-radio-group [(ngModel)]="profileDetails.gender" name="gender" required>
+                    <mat-radio-button value="M">M</mat-radio-button>
+                    <mat-radio-button value="F">F</mat-radio-button>
+                    <mat-radio-button value="O">Rather not say</mat-radio-button>
+                  </mat-radio-group>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <mat-label>Iam a</mat-label><span class="mand">*</span>
-              <div class="col studentradio">
-                <mat-radio-group [(ngModel)]="profession" name="profession">
-                  <mat-radio-button value="student">Student</mat-radio-button>
-                  <mat-radio-button value="professional">Professional</mat-radio-button>
-                </mat-radio-group>
+              <div class="row">
+                <mat-label>Iam a</mat-label><span class="text-danger">*</span>
+                <div class="col studentradio">
+                  <mat-radio-group [(ngModel)]="profileDetails.profession" name="profession" required>
+                    <mat-radio-button value="student">Student</mat-radio-button>
+                    <mat-radio-button value="professional">Professional</mat-radio-button>
+                  </mat-radio-group>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <mat-label>Language Known</mat-label>
-            </div>
-            <div class="row language">
-              <mat-select class="inputs" [(ngModel)]="language" name="language">
-                <mat-option value="t">Tamil</mat-option>
-                <mat-option value="t">English</mat-option>
-                <mat-option value="t">Hindi</mat-option>
-              </mat-select>
-            </div><br>
-            <div class="row">
-              <mat-label>Location</mat-label><span class="mand">*</span>
-            </div>
-            <div class="row">
-              <div class="col">
-                <mat-select class="inputs" [(ngModel)]="country" name="country" placeholder="Country" value="_id">
-                  <mat-option *ngFor="let country of countryValue">
-                    {{country.countryname}}
-                  </mat-option>
-                </mat-select>
+              <div class="row">
+                <mat-label>Language Known</mat-label>
               </div>
-              <div class="col">
-                <mat-select class="inputs" [(ngModel)]="state" name="state" placeholder="State">
+              <div class="row language">
+                <mat-select class="inputs" [(ngModel)]="language" name="language">
                   <mat-option value="t">Tamil</mat-option>
                   <mat-option value="t">English</mat-option>
                   <mat-option value="t">Hindi</mat-option>
                 </mat-select>
+              </div><br>
+              <div class="row">
+                <mat-label>Location</mat-label><span class="text-danger">*</span>
               </div>
-              <div class="col">
-                <mat-select class="inputs" [(ngModel)]="city" name="city" placeholder="City">
-                  <mat-option value="t">Tamil</mat-option>
-                  <mat-option value="t">English</mat-option>
-                  <mat-option value="t">Hindi</mat-option>
-                </mat-select>
+              <div class="row">
+                <div class="col">
+                  <mat-select class="inputs" [(ngModel)]="profileDetails.country" name="country" placeholder="Country"
+                    value="_id" required>
+                    <mat-option *ngFor="let country of countryValue">
+                      {{country.countryname}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col">
+                  <mat-select class="inputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" required>
+                    <mat-option value="t">Tamil</mat-option>
+                    <mat-option value="t">English</mat-option>
+                    <mat-option value="t">Hindi</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col">
+                  <mat-select class="inputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
+                    <mat-option value="t">Tamil</mat-option>
+                    <mat-option value="t">English</mat-option>
+                    <mat-option value="t">Hindi</mat-option>
+                  </mat-select>
+                </div>
               </div>
-            </div>
-          </form >
+          </form>
         </mat-grid-tile>
         <!----------------------------Profile--------------------->
         <mat-grid-tile>
           <form>
-          <div class="profilegrid">
-            <div class="row myprofile">
-              <mat-label>My Profile</mat-label>
-              <mat-icon class="createicon">create</mat-icon>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
+            <div class="profilegrid">
+              <div class="row myprofile">
+                <mat-label>My Profile</mat-label>
+                <mat-icon class="createicon">create</mat-icon>
               </div>
-              <div class="cameraicon">
-                <mat-icon>camera_alt</mat-icon>
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="cameraicon">
+                  <mat-icon>camera_alt</mat-icon>
+                </div>
+              </div><br>
+              <div class="row doj">
+                <div class="col">
+                  <mat-label>Full Name</mat-label>
+                </div>
+                <div class="col">
+                  <mat-label>Username</mat-label>
+                </div>
+                <div class="col">
+                  <mat-label>DOJ lxp</mat-label>
+                </div>
               </div>
-            </div><br>
-            <div class="row doj">
-              <div class="col">
-                <mat-label>Full Name</mat-label>
-              </div>
-              <div class="col">
-                <mat-label>Username</mat-label>
-              </div>
-              <div class="col">
-                <mat-label>DOJ lxp</mat-label>
-              </div>
-            </div>
-            <!-- <section class="example-section">
+              <section class="example-section">
               <mat-progress-bar class="example-margin" mode="determinate" value="40"></mat-progress-bar>
-            </section> -->
-            <div class="Edit">
-              <div class="row">
-                <div class="col-sm-3">
-                  <mat-label>Password</mat-label>
-                </div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3">
-                  <mat-icon class="createicon" (click)="editPassword(passwordDialog)">create</mat-icon>
-                </div>
-              </div><br>
-              <div class="row">
-                <div class="col-sm-3">
-                  <mat-label>Mobileno</mat-label>
-                </div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3">
-                  <mat-icon class="createicon" (click)="editmobno(mobDialog)">create</mat-icon>
-                </div>
-              </div><br>
-              <div class="row">
-                <div class="col-sm-3">
-                  <mat-label>Example@gmail.com</mat-label>
-                </div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3">
-                  <mat-icon class="createicon" (click)="editEmail(emailDialog)">create</mat-icon>
-                </div>
-              </div><br>
+            </section>
+              <div class="Edit">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-label>Password</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editPassword(passwordDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-label>Mobileno</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editmobno(mobDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-label>Example@gmail.com</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editEmail(emailDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+              </div>
             </div>
-          </div>
           </form>
         </mat-grid-tile>
       </mat-grid-list>
       <!-----------------------Profile End----------------------->
       <div class="row">
-        <mat-label>Qualification</mat-label><span class="mand">*</span>
+        <mat-label>Qualification</mat-label><span class="text-danger">*</span>
       </div>
-        <div class="row" *ngFor="let qualification of qual; let i = index;">
+      <div class="row" *ngFor="let qualification of qual; let i = index;">
         <div class="col-sm-6">
           <div class="row">
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level">
+              <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level" required>
                 <mat-option>Tamil</mat-option>
                 <mat-option>English</mat-option>
                 <mat-option>Hindi</mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University">
+              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" required>
                 <mat-option>Tamil</mat-option>
                 <mat-option>English</mat-option>
                 <mat-option>Hindi</mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute">
+              <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute" required>
                 <mat-option>Tamil</mat-option>
                 <mat-option>English</mat-option>
                 <mat-option>Hindi</mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.discipline" name="discipline" placeholder="Discipline">
+              <mat-select class="inputs" [(ngModel)]="qualification.discipline" name="discipline"
+                placeholder="Discipline" required>
                 <mat-option>Tamil</mat-option>
                 <mat-option>English</mat-option>
                 <mat-option>Hindi</mat-option>
@@ -174,17 +177,18 @@
         <div class="col-sm-6">
           <div class="row">
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.spec" name="spec" placeholder="Specification">
+              <mat-select class="inputs" [(ngModel)]="qualification.spec" name="spec" placeholder="Specification" required>
                 <mat-option>Tamil</mat-option>
                 <mat-option>English</mat-option>
                 <mat-option>Hindi</mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <input type="tel" class="inputs" placeholder="Year of Passing" [(ngModel)]="qualification.year" name="year" maxlength="4" minlength="4">
+              <input type="tel" class="inputs" placeholder="Year of Passing" [(ngModel)]="qualification.year"
+                name="year" maxlength="4" minlength="4" required>
             </div>
             <div class="col-sm-3">
-              <input class="inputs" placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage">
+              <input class="inputs" placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage" required>
             </div>
             <div class="col-sm-3">
               <mat-icon (click)="addnewQual()">add_circle_outline</mat-icon>
@@ -205,31 +209,34 @@
           <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
         </div>
       </div><br>
-      <div *ngIf="profession == 'professional'">
+      <div *ngIf="profileDetails.profession == 'professional'">
         <div class="row">
-          <mat-label>Experience</mat-label><span class="mand">*</span>
+          <mat-label>Experience</mat-label><span class="text-danger">*</span>
         </div>
         <div class="row experirnce">
           <div class="col-sm-6">
             <div class="row">
               <div class="col-sm-4">
-                <input type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="totExp" name="totExp" minlength="2">
+                <input type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.totExp"
+                  name="totExp" maxlength="2" required>
               </div>
               <div class="col-sm-4">
-                <input type="text" class="inputs" placeholder="Current Organisation" [(ngModel)]="currentOrg" name="currentOrg" minlength="4" maxlength="16">
+                <input type="text" class="inputs" placeholder="Current Organisation"
+                  [(ngModel)]="profileDetails.currentOrg" name="currentOrg" minlength="4" maxlength="16" required>
               </div>
               <div class="col-sm-4">
-                <input class="inputs" placeholder="Current role" [(ngMdel)]="currentRole" name="currentRole">
+                <input class="inputs" placeholder="Current role" [(ngMdel)]="currentRole"
+                  name="profileDetails.currentRole" required>
               </div>
             </div>
           </div>
         </div><br>
       </div>
-      
+
       <div class="subbtn">
         <button mat-raised-button color="primary" (click)="updateProfile()">Submit</button>
       </div>
-<!------------------------------Change Email Dialog---------------------->
+      <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <h1 class="head">Change the Mail ID</h1>
         <mat-dialog-content>
@@ -237,18 +244,18 @@
             <div class="form-group">
               <label>Enter new mailid</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                  [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
+                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
                 <div *ngIf="f.mailid.errors.required">Email is required</div>
                 <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
               </div>
-              </div>
-              </form><br>
+            </div>
+          </form><br>
         </mat-dialog-content>
         <mat-dialog-actions>
           <button class="btn">
             Submit
-         </button><br><br>
+          </button><br><br>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobno Dialog---------------------->
@@ -258,95 +265,98 @@
           <form [formGroup]="mailForm">
             <div class="form-group">
               <label>Enter new mobile no</label>
-            <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control" pattern="[0-9]{10}"
-              [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
-            <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
-              <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
-              <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
-              <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits</div>
-            </div>
+              <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control"
+                pattern="[0-9]{10}" [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
+              <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
+                <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
+                </div>
+              </div>
             </div>
             <p class="head">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
               <p class="head">OTP Code</p>
-    
+
               <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
                 formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-    
+
               <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
                 formControlName="otp2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-    
+
               <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
                 formControlName="otp3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-    
+
               <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
                 formControlName="otp4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                <br><br>
-        </div>
-        <div *ngIf="showotp">
-          <button class="btn" (click)="otpverify()">Verify</button>
-        </div><br>
-        <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
-            </form>
+              <br><br>
+            </div>
+            <div *ngIf="showotp">
+              <button class="btn" (click)="otpverify()">Verify</button>
+            </div><br>
+            <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
+          </form>
         </mat-dialog-content>
         <mat-dialog-actions>
           <button class="btn">
             Verification
-         </button><br><br>
+          </button><br><br>
         </mat-dialog-actions>
       </ng-template>
-<!---------------------------------Password Dialog--------------------------------->
-<ng-template #passwordDialog>
-  <h1 class="head">Change the Password</h1>
-  <mat-dialog-content>
-    <form [formGroup]="mailForm">
-      <div class="form-group">
-        <label>Enter the current password</label>
-      <input type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-          onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
-          [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" />
-      <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
-          <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
-          <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
-          <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a mixture
-              of uppercase and lowercase letters.</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Enter the new password</label>
-    <input type="password" formControlName="newpassword" onCopy="return false" onDrag="return false"
-        onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
-        [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
-    <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
-        <div *ngIf="f.newpassword.errors.required">New Password is required</div>
-        <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 6 characters</div>
-        <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a mixture
-            of uppercase and lowercase letters.</div>
-        <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
+      <!---------------------------------Password Dialog--------------------------------->
+      <ng-template #passwordDialog>
+        <h1 class="head">Change the Password</h1>
+        <mat-dialog-content>
+          <form [formGroup]="mailForm">
+            <div class="form-group">
+              <label>Enter the current password</label>
+              <input type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" />
+              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
+                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
+                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture
+                  of uppercase and lowercase letters.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Enter the new password</label>
+              <input type="password" formControlName="newpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
+              <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.newpassword.errors.required">New Password is required</div>
+                <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 6 characters</div>
+                <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture
+                  of uppercase and lowercase letters.</div>
+                <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div>
+            <p class="head">The password should not be last password</p>
+            <div class="form-group">
+              <label>Confirm the new password</label>
+              <input type="password" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Confirm Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
+              <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
+                <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture of uppercase and lowercase letters.</div>
+                <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div>
+
+          </form><br>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+          <button class="btn">
+            Submit
+          </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
     </div>
   </div>
-  <p class="head">The password should not be last password</p>
-    <div class="form-group">
-        <label>Confirm the new password</label>
-      <input type="password" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
-          onDrop="return false" onPaste="return false" placeholder="Confirm Password" class="form-control"
-          [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
-      <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
-          <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
-          <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
-          <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
-              mixture of uppercase and lowercase letters.</div>
-          <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
-      </div>
-    </div>
-    
-        </form><br>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button class="btn">
-      Submit
-   </button><br><br>
-  </mat-dialog-actions>
-</ng-template>  
-</div>
-</div>
