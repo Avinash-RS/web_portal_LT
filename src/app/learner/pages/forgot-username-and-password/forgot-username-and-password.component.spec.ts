@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('ForgotUsernameAndPasswordComponent', () => {
   let component: ForgotUsernameAndPasswordComponent;
   let fixture: ComponentFixture<ForgotUsernameAndPasswordComponent>;
@@ -22,11 +24,15 @@ describe('ForgotUsernameAndPasswordComponent', () => {
         MatTabsModule,
         ApolloTestingModule,
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        BrowserAnimationsModule
    ],
    providers: [Ng4LoadingSpinnerService,
     {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
-      declarations: [ ForgotUsernameAndPasswordComponent ]
+      declarations: [ ForgotUsernameAndPasswordComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
     })
     .compileComponents();
   }));

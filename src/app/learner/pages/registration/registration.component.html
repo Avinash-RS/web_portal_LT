@@ -6,7 +6,7 @@
         <form [formGroup]="registerForm">
             <div class="form-group">
                 <label>Full Name</label><span style="color: red;"> *</span>
-                <input type="text" formControlName="fullname" placeholder="example"  minlength="3" maxlength="64" class="form-control"
+                <input type="text" id="fullname" #fullname formControlName="fullname" placeholder="example"  minlength="3" maxlength="64" class="form-control"
                     [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }"  />
                     <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
                     <div *ngIf="f.fullname.errors.required">Full Name is required</div>
@@ -21,7 +21,7 @@
 
             <div class="form-group space5">
                 <label>Email ID</label><span style="color: red;"> *</span>
-                <input type="text" formControlName="email" placeholder="example@mail.com"  maxlength="64" class="form-control"
+                <input type="text" id="email" #email formControlName="email" placeholder="example@mail.com"  maxlength="64" class="form-control"
                     [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
                 <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Email is required</div>
@@ -32,7 +32,7 @@
             <mat-checkbox class="" formControlName="termsandconditions"> 
                <div class="terms">I agree to the <a href="#">"Terms and Conditions"</a> and <br> privacy policy  by clicking on register</div> 
               </mat-checkbox><br><br>
-            <button class="btn " [disabled]="!registerForm.valid" (click)="Submit()">
+            <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                Register
             </button><br><br>
             <!-- <div class="account"> <b (click)="signIn()">Sign In</b></div>  -->

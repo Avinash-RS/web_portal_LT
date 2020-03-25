@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   ipAddress = '';
+  title = 'Lxpfrontend';
   constructor(private router: Router,
     // private cookieService: CookieService,
     private http: HttpClient

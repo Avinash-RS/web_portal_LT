@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl,Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MustMatch } from '../../../common/_helpers/must-match.validator';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class PasswordComponent implements OnInit {
     validator: MustMatch('password', 'confirmpassword'),
   });
   }
-  get f() { return this.passwordForm.controls; }
+  get pf() { return this.passwordForm.controls; }
   submit(){
     this.loader.show();
     this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {

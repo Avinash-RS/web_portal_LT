@@ -24,6 +24,7 @@ export class OtpComponent implements OnInit {
   systemip:String;
   otp: any;
   showotp: boolean = false;
+  isenable:boolean = true;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -65,6 +66,7 @@ get f() { return this.otpForm.controls; }
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+            this.isenable = false;
             this.showotp = true;
           } 
       })

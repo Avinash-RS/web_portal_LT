@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {  MatDialogModule } from '@angular/material';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ResetpasswordComponent', () => {
 
@@ -25,7 +26,10 @@ describe('ResetpasswordComponent', () => {
         RouterTestingModule
    ],
    providers: [Ng4LoadingSpinnerService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
-      declarations: [ ResetpasswordComponent ]
+      declarations: [ ResetpasswordComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
     })
     .compileComponents();
   }));

@@ -7,6 +7,7 @@ import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/tes
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatDialogModule } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('RecoverFogotpasswordOTPComponent', () => {
   let component: RecoverFogotpasswordOTPComponent;
   let fixture: ComponentFixture<RecoverFogotpasswordOTPComponent>;
@@ -26,7 +27,10 @@ describe('RecoverFogotpasswordOTPComponent', () => {
 
   providers: [Ng4LoadingSpinnerService,
      {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
-      declarations: [ RecoverFogotpasswordOTPComponent ]
+      declarations: [ RecoverFogotpasswordOTPComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
     })
     .compileComponents();
   }));
