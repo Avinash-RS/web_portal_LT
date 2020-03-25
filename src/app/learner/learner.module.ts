@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from "ngx-bar-rating";
+import { NgImageSliderModule } from 'ng-image-slider';
 //local
 import { HeaderComponent } from '../common/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -28,15 +29,15 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
 
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
-  { path: 'login', component: LoginComponent,   canActivate:[AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'courseDetail', component: CoursedetailsComponent },
-  { path: 'register', component: RegistrationComponent ,},
+  { path: 'register', component: RegistrationComponent, },
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
   { path: 'profile', component: ProfileComponent },
-  { path : 'MyCourse', component : LearnerMyCourseComponent,   canActivate:[AuthGuard]},
+  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
 ];
 
@@ -60,12 +61,12 @@ const routes: Routes = [
     LearnerMyCourseComponent,
     ResetpasswordComponent
   ],
-    
 
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
   imports: [
-    // CookieModule.forRoot() ,
+    NgImageSliderModule,
     BarRatingModule,
     CommonModule,
     RouterModule.forChild(routes),
@@ -74,6 +75,6 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [],
-  entryComponents : []
+  entryComponents: []
 })
 export class LearnerModule { }

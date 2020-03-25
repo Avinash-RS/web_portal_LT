@@ -54,6 +54,7 @@ export const viewcourse = gql`
         course_level
         step_towards
         rating
+        price
       }
     }
   }`;

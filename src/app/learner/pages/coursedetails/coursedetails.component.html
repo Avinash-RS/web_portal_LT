@@ -1,9 +1,12 @@
 <app-header></app-header>
 
 <div class="section_1"></div>
+<!-- <div class="section_1"></div> -->
 <mat-card style="text-align: center;" class="section_1_card_1"></mat-card>
 <mat-card style="text-align: center;" class="section_1_card_2">
-    <mat-card-title> <span class="icon">ICON 600</span>
+    <mat-card-title>
+        <span class="icon">ICON 600</span>
+        <!-- <span class="icon">ICON {{course.price}}</span> -->
         <span class="price_striked">Rs 70000</span>
         <span class="percent_off"> 90% Off </span>
     </mat-card-title>
@@ -22,32 +25,34 @@
 </mat-card>
 <div class="section_1_a">
     <p class="course_name">Online Photography Course </p>
+    <!-- <p class="course_name">{{course.course_name}}</p> -->
     <bar-rating [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
+    <!-- <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> -->
     <p class="course_desc">I'm trying to blur the background image, but the main content is blurred too blur the
         background image</p>
+    <!-- <p class="course_desc">{{course.short_description}}</p> -->
     <table>
         <tr>
             <td> Already enrolled</td>
-            <td><i class="fa fa-address-card" style="background-color: #f8f9fa;
-                width: 18%;
-                font-size:18px;
-                border-radius: 50px;
-                padding: 10px;"></i> Certificate</td>
-            <td> <i class="fa fa-refresh" style="background-color: #f8f9fa;
-                width:17%;
-                font-size:20px;
-                -webkit-text-stroke-color: black; 
-                border-radius: 50px;
-                padding: 10px;"></i>Self Placed</td>
+            <!-- <td>{{course.max_student_enrollments_allowed}} Already enrolled</td> -->
+            <td>
+                <i class="fa fa-id-card-o" style="background-color: #f8f9fa;
+                width: 18%;font-size:18px;border-radius: 50px;padding: 10px;margin-right: 10px;"></i> Certificate
+            </td>
+            <td>
+                <i class="fa fa-refresh" style="background-color: #f8f9fa;
+                width:17%;font-size:20px;-webkit-text-stroke-color: black; 
+                border-radius: 50px;padding: 10px;margin-right: 10px;"></i>Self Placed
+            </td>
         </tr>
         <tr>
             <td> Last updated</td>
+            <!-- <td> Last updated {{course.updated_on}}</td> -->
             <td> <i class="fa fa-language" style="background-color: #f8f9fa;
-                width: 18%;
-                font-size:25px;
-                -webkit-text-stroke-color: black; 
-                border-radius: 50px;
-                padding: 8px;"></i>English</td>
+                width: 18%;font-size:25px;-webkit-text-stroke-color: black; 
+                border-radius: 50px;padding: 8px;margin-right: 10px;"></i>
+                <!-- {{course.course_language}}</td> -->
+                English</td>
         </tr>
     </table>
     <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
@@ -56,7 +61,7 @@
             border-radius: 50px; 
             padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
 
-    <div class="course_preview">
+    <div class="course_preview" (click)="coursePlay()">
         <h1>Course <br> Preview</h1>
     </div>
 
@@ -78,10 +83,20 @@
     </div>
 
     <br>
+    <div style="float: right;">
+        <button mat-mini-fab
+            style="position:fixed;background-color: white;border: 0.5px solid gainsboro;float: inline-end;">
+            <i class='fa fa-comments'
+                style='font-size:22px;color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);'>
+            </i>
+        </button>
+    </div>
+
     <div #About class="about_tab">
-        <h2>Details About Course</h2>
+       <h2>Details About Course</h2>
+        <h2 style="margin-top: -9vh;margin-left: 70%;">This Course Includes</h2>
         <!-- <tr>
-            <th>
+            <th> 
                 <h2 style="width: 50%;">Details About Course</h2>
             </th>
             <th>
@@ -89,50 +104,90 @@
             </th>
         </tr> -->
         <table>
-      
             <tr>
-                <td style="width: 20%;font-size: 15px;font-weight: 400;">Course Instructor</td>
-                <td style="width: 40%;font-size: 15px;font-weight: 400;">Ajay</td>
+                <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Instructor</td>
+                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Ajay</td>
+                <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
                 <td style="width: 10%;"></td>
-                <td style="width: 5%;"><i class="fa fa-language" style="background-color: #f8f9fa;
-                width: 18%;
-                font-size:25px;
-                -webkit-text-stroke-color: black; 
-                border-radius: 50px;
-                padding: 8px;"></i></td>
-                <td style="font-size: 15px;font-weight: 400;">20 hrs demand</td>
+                <td style="width: 5%;">
+                    <i class="fa fa-film" style="background-color: #f8f9fa;
+                    width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i>
+                </td>
+                <td>20 hrs on-demand video</td>
             </tr>
             <tr>
-                <td class="tr_w_1">Pre Requisite</td>
-                <td class="tr_w_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                <td style="width: 15%;font-size: 16px;font-weight: 500;">Pre Requisite</td>
+                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                <!-- <td>{{course.pre_requisite}}</td> -->
                 <td style="width: 10%;"></td>
-                <td class="tr_w_4"><i class="fa fa-language" style="background-color: #f8f9fa;
-                width: 18%;
-                font-size:25px;
-                -webkit-text-stroke-color: black; 
-                border-radius: 50px;
-                padding: 8px;"></i></td>
-                <td class="tr_w_5">20 hrs demand</td>
+                <td><i class="fa fa-file" style="background-color: #f8f9fa;
+                width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
+                <td>{{course.downloadable_resource_count}} downloadable resources</td>
             </tr>
             <tr>
-                <td class="tr_w_1">Course Description</td>
-                <td class="tr_w_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Description</td>
+                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the
                     industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
                     and scrambled it to make a type specimen book. It has survived not only five centuries</td>
+                <!-- <td>{{course.course_description}}</td> -->
                 <td style="width: 10%;"></td>
-                <td class="tr_w_4"><i class="fa fa-language" style="background-color: #f8f9fa;
-                width: 18%;
-                font-size:25px;
-                -webkit-text-stroke-color: black; 
-                border-radius: 50px;
-                padding: 8px;"></i></td>
-                <td class="tr_w_5">20 hrs demand</td>
+                <td><i class="fa fa-pause" style="background-color: #f8f9fa;
+                width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
+                <td>Level in Analytics</td>
+                <td>{{course.course_level}} Level in Analytics</td>
             </tr>
         </table>
     </div>
     <br> <br>
     <div #Take_away class="">
-      <h1>  TAKE AWAY</h1>
+        <h1> TAKE AWAY</h1>
+        <ng-image-slider [images]="imageObject" [autoSlide]=1 [slideImage]=1></ng-image-slider>
+    </div><br>
+    <div style="display: flex">
+        <div #Syllabus style="width: 45%;margin-right: 5%;">
+            <h1> Syllabus</h1>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header (click)="viewWishlist()">
+                        <mat-panel-title class="top_course">
+                            Title 1
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header (click)="viewWishlist()">
+                            <mat-panel-title class="top_course">
+                                Sub Title 1
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                    </mat-expansion-panel>
+
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
+        <div #Syllabus style="width: 40%;margin-left: 5%;">
+            <h1> Syllabus</h1>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header (click)="viewWishlist()">
+                        <mat-panel-title class="top_course">
+                            Title 1
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header (click)="viewWishlist()">
+                            <mat-panel-title class="top_course">
+                                Sub Title 1
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                    </mat-expansion-panel>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
 </div>
+<br>
+<app-footer></app-footer>
