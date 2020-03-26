@@ -16,7 +16,7 @@ export class GlobalServiceService {
   constructor(public route : Router, public alert : AlertServiceService) { }
 
   checkLogout() {
-    if(this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner') {
+    if(this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner' ) {
       var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
       if (userDetail)
         return userDetail
