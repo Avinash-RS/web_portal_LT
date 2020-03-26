@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { login, get_country_details } from "./operations/learner_query";
-import {
-  user_registration, user_registration_mobile_otp_send, user_registration_mobile_otp_verify,
-  get_forgot_username_mobile_email, get_forgot_password_byusername, user_registration_username_suggestion, view_profile, get_state_details,
-  user_registration_done, get_forgot_password_byresetpassword
-} from "./operations/learner_mutation"
+
+import { login,get_course_by_user ,get_country_details } from "./operations/learner_query";
+import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
+  get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
+  view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -37,25 +36,26 @@ export class LearnerServicesService {
   }
 
 
-  submit_otp(user_id, _id, mobile) {
-    console.log(user_id, _id, mobile)
+  submit_otp(user_id,_id,mobile,email) {
+    console.log(user_id,_id,mobile)
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
       variables: {
         user_id: user_id,
         user: _id,
-        mobile_number: mobile
+        mobile_number:mobile,
+        email:email,
       }
     });
   }
 
-  user_registration_verify(otp, mobile_number) {
+  user_registration_verify(otp,mobile_number){
     return this.Apollo.query({
       query: user_registration_mobile_otp_verify,
       variables: {
         otp: otp,
         mobile_number: mobile_number
-
+       
       }
     });
   }
@@ -93,7 +93,24 @@ export class LearnerServicesService {
       }
     })
   }
-  userNamesuggestion(userId) {
+  getMyCourse(user_id) {
+    console.log('inside services', user_id)
+    return this.Apollo.query({
+      query: get_course_by_user,
+      variables: {
+        user_id: user_id,
+      }
+    });
+  }
+  // submit_otp(user_id,_id,mobile) {
+  //   return this.Apollo.query({
+  //     query: user_registration_mobile_otp_send,
+  //     variables: {
+  //       mobile_number:mobile,
+  //       user_id:user_id,
+  //       user:_id,
+
+  userNamesuggestion(userId){
     return this.Apollo.query({
       query: user_registration_username_suggestion,
       variables: {
@@ -131,17 +148,4 @@ export class LearnerServicesService {
       }
     });
   }
-
-
-  // submit_otp(user_id,_id,mobile) {
-  //   return this.Apollo.query({
-  //     query: user_registration_mobile_otp_send,
-  //     variables: {
-  //       mobile_number:mobile,
-  //       user_id:user_id,
-  //       user:_id,
-
-  //     }
-  //   });
-  // }
 }

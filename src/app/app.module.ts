@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { BarRatingModule } from "ngx-bar-rating";
 //local
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-// import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MaterialModule } from './common/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from './common/alert-component/alert-component.component';
+// import { GlobalServiceService } from './common/services/handlers/global-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,17 +20,16 @@ import { AlertComponentComponent } from './common/alert-component/alert-componen
   ],
   imports: [
     // CookieModule.forRoot() ,
-    Ng4LoadingSpinnerModule.forRoot(),
-    // Ng4LoadingSpinnerService,
+    BarRatingModule,
+    Ng4LoadingSpinnerModule.forRoot() ,
     GraphqlModule,
     MaterialModule,
     BrowserAnimationsModule,
     BrowserModule,
-    NgxSpinnerModule,
     AppRoutingModule,
     GraphqlModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
   providers: [AlertComponentComponent],

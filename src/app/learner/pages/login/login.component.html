@@ -1,29 +1,32 @@
 <div class="login">
-  <mat-card style="text-align: center;">
+  <mat-card >
     <form [formGroup]="loginForm"><br><br>
-      <mat-card-title> Sign In </mat-card-title> <br>
+      <mat-card-title style="text-align: center;"> Sign In </mat-card-title> <br>
       <mat-card-content>
-        <!-- <mat-label>Username</mat-label> -->
-        <mat-form-field appearance="outline"
-          matTooltip="No space allowed, Should be minimum 3 characters and maximum 20 characters, Alphanumeric">
-          <mat-label>Username</mat-label>
-          <input matInput name="username" formControlName="username">
-        </mat-form-field>
-        <div *ngIf="f.username.touched && f.username.errors">
-          <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
-          <mat-error *ngIf="f.username.errors.pattern">Username is invalid</mat-error>
-        </div><br />
-        <mat-form-field appearance="outline"
-          matTooltip="No space allowed, It cannot be blank and is case sensitive, Should be a minimum 8 characters and maximum 20 characters, Atleast 1 uppercase character, 1 lowercase character, 1 number and one special character">
-          <mat-label>Password</mat-label>
-          <input matInput name="password" type="password" formControlName="password">
-        </mat-form-field>
-        <div *ngIf="f.password.touched && f.password.errors">
-          <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
-          <mat-error *ngIf="f.password.errors.pattern">Password is invalid</mat-error>
+        <div class="form-group">
+          <label>User Name</label><span style="color: red;"> *</span>
+          <input type="text" name="username" formControlName="username" class="form-control"
+            [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
+          <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">User Name is required</div>
+            <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
+            <div *ngIf="f.username.errors.minlength">User Name must be minimum of 3 characters </div>
+            <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div>
+          </div>
         </div>
-        <br>
-        <!-- <mat-spinner></mat-spinner> -->
+        <div class="form-group">
+          <label>Password</label><span style="color: red;"> *</span>
+          <input type="password" name="password" formControlName="password" onCopy="return false" onDrag="return false"
+            onDrop="return false" onPaste="return false" class="form-control"
+            [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
+          <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+            <div *ngIf="f.password.errors.maxlength">Password must be 20 maximum of characters</div>
+            <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div>
+            <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
+          </div>
+        </div>
         <div class="forgot_ps">
           <mat-label  ><a [routerLink]="['/Learner/recover']"><strong>Forgot password/username?</strong></a></mat-label>
           <!-- recover -->
@@ -34,10 +37,11 @@
         </mat-checkbox>
         <br><br><br>
 
-        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign in</button>
-        <br><br><br>
-        <mat-label class="sign_up">Don't have an account? <a [routerLink]="['/Learner/register']"><strong>Sign
-              up</strong></a> </mat-label><br><br>
+        <button id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">Sign
+          in</button>
+        <br><br>
+        <div class="sign_up">Don't have an account? <a [routerLink]="['/Learner/register']"><strong>Sign
+              up</strong></a> </div><br><br>
       </mat-card-content>
     </form>
   </mat-card>

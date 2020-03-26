@@ -2,6 +2,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* Add application styles & imports to this file! */
+@import '~ngx-bar-rating/themes/br-default-theme.css';
 body 
 
 {font-family: Roboto, Arial, sans-serif;margin: 0;}
@@ -10,7 +13,19 @@ body
 
 .version-info {font-size: 8pt;float: right;margin: 8px;}
 
-
+.mat-progress-bar-buffer {
+    background: #8f9bbb;
+}
+.mat-progress-bar-fill::after {
+    background-color: #ffcf01;
+}
+.br-default .br-selected:after {
+    color: #ffcf05 !important;
+}
+.br-default .br-unit:after {
+    content: "\2605";
+    color: #d2d2d2;
+}
 .example-full-width {
     width: 100%;
   }
@@ -84,21 +99,19 @@ body
 .limiter {
   width: 100%;
   margin: 0 auto;
-  overflow: hidden;
 }
 .wrap-reg {
   width: 350px;
   height: 500px;
   background: #fff !important;
   border-radius: 3px;
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 @media (max-width: 480px) {
   .wrap-reg {
     padding-left: 15px;
     padding-right: 15px;
-    overflow: hidden !important;
   }
 }
 .p-l-50 {padding-left: 40px !important;}
@@ -110,15 +123,15 @@ body
   background-color: $color-blue;
 }
 
-// input[type=text], input[type=password] {
-//   width: 100%;
-//   padding: 12px 20px;
-//   margin: 1px 0;
-//   // background: #94b5f1;
-//   display: inline-block;
-//   border: 1px solid #ccc;
-//   box-sizing: border-box;
-// }
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  background: #94b5f1;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 label{
   color: #1F3777;
   font-weight: 500;

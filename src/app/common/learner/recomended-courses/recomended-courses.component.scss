@@ -2,8 +2,8 @@
 mat-card {
     padding: 2% !important;
 }
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 2px 1px 1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+    border: 0.5px solid lightgrey !important;
 }
 .top_course {
     font-size: 15px;
@@ -15,6 +15,7 @@ mat-card {
 }
 .key_down {
     text-align: end;
+    width: 8% !important;
 }
 .top_course {
     color: $color-blue !important;

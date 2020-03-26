@@ -1,8 +1,8 @@
 @import "../../assets/variable.scss";
 
 .login {
-    background: url('../../assets/learner/download.jpg');
-    background-size: cover;
+    background: url('../../assets/learner/download.jpg') !important;
+    background-size: cover !important;
     background-position: center;
     background-repeat: no-repeat !important;
     background-size: cover;

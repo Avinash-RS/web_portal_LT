@@ -11,5 +11,11 @@ export class CoursedetailsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  scroll(el: HTMLElement) {
+    console.log(el)
+    el.scrollIntoView();
+  }
+  coursePlay() {
+    
+  }
 }

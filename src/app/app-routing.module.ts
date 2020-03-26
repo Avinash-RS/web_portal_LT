@@ -5,15 +5,19 @@ const routes: Routes = [
 
   // {
   //   path: '',
-  //   component: LoginComponent
+  //   component: LearnerHomeComponent
   // },
   // {
   //   path: '**',
-  //   component: RegistrationComponent
+  //   component: LearnerHomeComponent
   // },
   {
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule'
+  },
+  {
+    path: 'Admin',
+    loadChildren: './admin/admin.module#AdminModule'
   }
 
 ];

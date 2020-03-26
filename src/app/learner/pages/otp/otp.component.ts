@@ -6,6 +6,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import * as myGlobals from '../../../common/globals'; 
+
+// import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -24,6 +26,8 @@ export class OtpComponent implements OnInit {
   systemip:String;
   otp: any;
   showotp: boolean = false;
+  isenable:boolean = true;
+  showverify: boolean = false;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -61,10 +65,11 @@ export class OtpComponent implements OnInit {
 get f() { return this.otpForm.controls; }
   otpverification(){
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+            this.isenable = false;
             this.showotp = true;
           } 
       })
@@ -88,9 +93,11 @@ get f() { return this.otpForm.controls; }
 
   }
   Resendcode(){
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile).subscribe(data => {
+    this.loader.show();
+    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
       this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
         this.showotp = true;
       } 

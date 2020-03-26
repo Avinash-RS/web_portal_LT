@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,ReactiveFormsModule , Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -29,8 +29,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
-    this.currentUser = JSON.parse(user);
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('',myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),
@@ -38,6 +36,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }, {
       
   });}
+
 
   get f() { return this.forgotUsername.controls; }
   get fp() { return this.forgotPasswordform.controls; }
@@ -97,7 +96,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   forgotPassword(recovertype){
     if(recovertype.type === "mobile"){
       this.loader.show();
-        this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,recovertype.value).subscribe(data => {
+        this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,recovertype.value,this.forgotUsername.value.email).subscribe(data => {
               if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
                 console.log(data.data['user_registration_mobile_otp_send'])
                 this.loader.hide();

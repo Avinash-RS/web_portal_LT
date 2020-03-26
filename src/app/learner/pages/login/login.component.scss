@@ -1,7 +1,7 @@
 @import "../../../../assets/variable.scss";
 
 mat-card{
-    width: 24%;
+    width: 22%;
     margin: auto;
     top: 10%;
 }
@@ -10,6 +10,7 @@ button {
     background: $color-blue !important;
     color: white ;
     width: 70%;
+    margin-left: 15%;
 }
 mat-form-field {
     width: 80%;
@@ -17,7 +18,6 @@ mat-form-field {
 }
 .remember_me {
     float: left;
-    margin-left: 6vh;
 }
 .forgot_ps {
     text-align: end;
@@ -27,6 +27,7 @@ mat-form-field {
 }
 .sign_up, .remember_me,mat-card-title , a{
     color: #3f548b;
+    text-align: center !important;
 }
 .mat-checkbox .mat-checkbox-frame {
     border-color: black;
@@ -35,10 +36,11 @@ mat-form-field {
 mat-card-title {
     font-weight: 400;
 }
-mat-error {
-    float: left;
-    margin-left: 10%;
-    margin-top: -5%;
-}
+
+// mat-error {
+//     float: left;
+//     margin-left: 10%;
+//     margin-top: -5%;
+// }
 
  

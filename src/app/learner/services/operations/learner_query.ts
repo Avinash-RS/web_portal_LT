@@ -34,3 +34,22 @@ export const login = gql`
     }
       }
     }`;
+  export const get_course_by_user = gql`
+  query get_course_by_user($user_id: String){
+    get_course_by_user(user_id: $user_id) {
+      success
+    error_msg
+    message{
+      course_id
+      course_description
+      course_name
+      course_img_url
+      certificate_name
+      max_student_enrollments_allowed
+      short_description
+      rating,
+      price
+
+    }
+  }
+}`;
