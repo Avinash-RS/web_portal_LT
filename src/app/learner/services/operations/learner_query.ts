@@ -37,10 +37,10 @@ export const login = gql`
 export const list_content = gql`
 query list_content{
   list_content {
-    message
+    message,
     success,
     data
   }
 }
-}`;
+`;
 
