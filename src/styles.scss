@@ -4,6 +4,10 @@
 /* Add application styles & imports to this file! */
 @import '~ngx-bar-rating/themes/br-default-theme.css';
 
+.f_wt_200 {
+  font-weight: 300;
+}
+
 .f_wt_300 {
   font-weight: 300;
 }
@@ -52,6 +56,10 @@
   font-size: 20px;
 }
 
+.f_size_23 {
+  font-size: 23px;
+}
+
 .f_size_25 {
   font-size: 25px;
 }
@@ -64,6 +72,9 @@
   width: 80%;
 }
 
+.width_60 {
+  width: 60%;
+}
 .width_50 {
   width: 50%;
 }
@@ -75,7 +86,13 @@
 .capitalize {
   text-transform: capitalize;
 }
+.strike_text {
+  text-decoration: line-through;
+}
 
+.absolute {
+  position: absolute !important;
+}
 .float_right {
   float: right;
   text-align: right;
@@ -86,7 +103,7 @@
 }
 
 .background_trans {
-  background: transparent;
+  background: transparent !important;
 }
 ////////////////////////////////////////////////////////////////////////
 body {

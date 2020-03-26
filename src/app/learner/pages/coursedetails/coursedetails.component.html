@@ -2,36 +2,36 @@
 
 <div class="section_1"></div>
 <!-- <div class="section_1"></div> -->
-<mat-card style="text-align: center;" class="section_1_card_1"></mat-card>
-<mat-card style="text-align: center;" class="section_1_card_2">
+<mat-card style="text-align: center;" class="section_1_card_1 opacity absolute"></mat-card>
+<mat-card style="text-align: center;" class="section_1_card_1 background_trans absolute">
     <mat-card-title>
-        <span class="icon">ICON 600</span>
+        <span class="icon f_wt_400 f_size_23">ICON 600</span>
         <!-- <span class="icon">ICON {{course.price}}</span> -->
-        <span class="price_striked">Rs 70000</span>
-        <span class="percent_off"> 90% Off </span>
+        <span class="f_wt_200 strike_text f_size_16 ">Rs 70000</span>
+        <span class="f_wt_200 f_size_16"> 90% Off </span>
     </mat-card-title>
     <mat-card-content>
         <p class="day_left"><i class="fa fa-hourglass" style=" -webkit-text-stroke-width: 1px;
                 -webkit-text-stroke-color: black;" aria-hidden="true"></i>1 day left at this price</p>
-        <div> <button mat-raised-button class="add_to_cart">ADD TO CART</button></div><br>
-        <div><button mat-raised-button class="buy_now">BUY NOW</button></div><br>
+        <div> <button mat-raised-button class="add_to_cart bg_add_to_Cart">ADD TO CART</button></div><br>
+        <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
         <div>
-            <button mat-raised-button class="share_text"><i class="fa fa-share" aria-hidden="true"></i>Share</button>
-            <button mat-raised-button class="share_text"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</button>
+            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300"><i class="fa fa-share" aria-hidden="true"></i>Share</button>
+            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</button>
         </div>
     </mat-card-content>
     <br>
     <br>
 </mat-card>
-<div class="section_1_a">
-    <p class="course_name">Online Photography Course </p>
+<div class="section_1_a absolte width_60 absolute">
+    <p class="course_name f_wt_500 capitalize">Online Photography Course </p>
     <!-- <p class="course_name">{{course.course_name}}</p> -->
     <bar-rating [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
     <!-- <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> -->
-    <p class="course_desc">I'm trying to blur the background image, but the main content is blurred too blur the
+    <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur the
         background image</p>
     <!-- <p class="course_desc">{{course.short_description}}</p> -->
-    <table>
+    <table class="width_80">
         <tr>
             <td> Already enrolled</td>
             <!-- <td>{{course.max_student_enrollments_allowed}} Already enrolled</td> -->
@@ -66,20 +66,20 @@
     </div>
 
     <div class="partner_image_div">
-        <img src="../../../../assets/learner/1.jpg" class="partner_img">
-        <img src="../../../../assets/learner/1.jpg" class="partner_img">
-        <img src="../../../../assets/learner/1.jpg" class="partner_img">
+        <img src="../../../../assets/learner/1.jpg"  width="7%" class="float_right">
+        <img src="../../../../assets/learner/1.jpg" width="7%" class="float_right">
+        <img src="../../../../assets/learner/1.jpg" width="7%" class="float_right">
     </div>
 </div>
 
 <div class="wrap_content">
-    <div class="tabs">
+    <div class="tabs width_50">
         <button mat-raised-button (click)="scroll(About)">About</button>
         <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
         <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
         <button mat-raised-button (click)="scroll(Review)">Review</button>
         <button mat-raised-button (click)="scroll(Instructor)">Instructor</button>
-        <button mat-raised-button (click)="scroll(FAZ)">FAQ</button>
+        <button mat-raised-button (click)="scroll(FAQ)">FAQ</button>
     </div>
 
     <br>
@@ -92,52 +92,63 @@
         </button>
     </div>
 
-    <div #About class="about_tab">
-       <h2>Details About Course</h2>
-        <h2 style="margin-top: -9vh;margin-left: 70%;">This Course Includes</h2>
-        <!-- <tr>
-            <th> 
-                <h2 style="width: 50%;">Details About Course</h2>
-            </th>
-            <th>
-                <h2 style="width: 50%;">Details About Course</h2>
-            </th>
-        </tr> -->
-        <table>
-            <tr>
-                <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Instructor</td>
-                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Ajay</td>
-                <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
-                <td style="width: 10%;"></td>
-                <td style="width: 5%;">
-                    <i class="fa fa-film" style="background-color: #f8f9fa;
-                    width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i>
-                </td>
-                <td>20 hrs on-demand video</td>
-            </tr>
-            <tr>
-                <td style="width: 15%;font-size: 16px;font-weight: 500;">Pre Requisite</td>
-                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <!-- <td>{{course.pre_requisite}}</td> -->
-                <td style="width: 10%;"></td>
-                <td><i class="fa fa-file" style="background-color: #f8f9fa;
+    <div #About class="about_tab" style="display: flex;">
+        <div style="width: 60%;">
+            <h2>Details About Course</h2>
+            <table>
+                <tr>
+                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Instructor</td>
+                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Ajay</td>
+                    <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
+                    <td style="width: 10%;"></td>
+
+                </tr>
+                <tr>
+                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Pre Requisite</td>
+                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy
+                        text of
+                        the printing and typesetting industry.</td>
+                    <!-- <td>{{course.pre_requisite}}</td> -->
+                    <td style="width: 10%;"></td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Description</td>
+                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy
+                        text of
+                        the printing and typesetting industry. Lorem
+                        Ipsum has been the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                        type
+                        and scrambled it to make a type specimen book. It has survived not only five centuries</td>
+                    <!-- <td>{{course.course_description}}</td> -->
+                    <td style="width: 10%;"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 40%;">
+            <h2>This Course Includes</h2>
+            <table>
+                <tr>
+                    <td style="width: 5%;">
+                        <i class="fa fa-film" style="background-color: #f8f9fa;
+                    width: 90%;font-size:23px;border-radius: 50px;padding: 8px;"></i>
+                    </td>
+                    <td>20 hrs on-demand video</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-file" style="background-color: #f8f9fa;
                 width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
-                <td>{{course.downloadable_resource_count}} downloadable resources</td>
-            </tr>
-            <tr>
-                <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Description</td>
-                <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries</td>
-                <!-- <td>{{course.course_description}}</td> -->
-                <td style="width: 10%;"></td>
-                <td><i class="fa fa-pause" style="background-color: #f8f9fa;
-                width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
-                <td>Level in Analytics</td>
-                <td>{{course.course_level}} Level in Analytics</td>
-            </tr>
-        </table>
+                    <!-- <td>{{course.downloadable_resource_count}} downloadable resources</td> -->
+                    <td> downloadable resources</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-pause" style="background-color: #f8f9fa;
+                        width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
+                    <td>Level in Analytics</td>
+                    <!-- <td>{{course.course_level}} Level in Analytics</td> -->
+                </tr>
+            </table>
+        </div>
     </div>
     <br> <br>
     <div #Take_away class="">
@@ -149,45 +160,48 @@
             <h1> Syllabus</h1>
             <mat-accordion>
                 <mat-expansion-panel>
-                    <mat-expansion-panel-header (click)="viewWishlist()">
-                        <mat-panel-title class="top_course">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             Title 1
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-expansion-panel>
-                        <mat-expansion-panel-header (click)="viewWishlist()">
-                            <mat-panel-title class="top_course">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
                                 Sub Title 1
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-
+                        content
                     </mat-expansion-panel>
-
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
-        <div #Syllabus style="width: 40%;margin-left: 5%;">
-            <h1> Syllabus</h1>
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header (click)="viewWishlist()">
-                        <mat-panel-title class="top_course">
-                            Title 1
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header (click)="viewWishlist()">
-                            <mat-panel-title class="top_course">
-                                Sub Title 1
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-
-                    </mat-expansion-panel>
-
-                </mat-expansion-panel>
-            </mat-accordion>
+        <div style="width: 40%;margin-left: 5%;">
+            <h1>Learning Paths</h1><br><br>
+            <img src="../../../../assets/learner/lens.jpg" width="70%">
         </div>
     </div>
+    <br>
+    <div #FAQ style="width: 60%;">
+        <h1>FAQ</h1>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Title 1
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Sub Title 1
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    content
+                </mat-expansion-panel>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 </div>
-<br>
+<br><br>
 <app-footer></app-footer>
