@@ -30,7 +30,7 @@
             </div>
 
             <mat-checkbox class="" formControlName="termsandconditions"> 
-               <div class="terms">I agree to the <a href="#">"Terms and Conditions"</a> and <br> privacy policy  by clicking on register</div> 
+               <div class="terms">I agree to the <a [routerLink]="['/Learner/terms']">"Terms and Conditions"</a> and <br> privacy policy  by clicking on register</div> 
               </mat-checkbox><br><br>
             <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                Register
