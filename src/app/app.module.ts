@@ -23,7 +23,7 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     AlertComponentComponent,
   ],
   imports: [
-    NgImageSliderModule,
+    // NgImageSliderModule,
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot() ,
     NgxMaskModule.forRoot(),
