@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LearnerServicesService } from '../../services/learner-services.service';
 @Component({
   selector: 'app-scormplayer',
   templateUrl: './scormplayer.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScormplayerComponent implements OnInit {
 
-  constructor() { }
+  constructor(   public service : LearnerServicesService) { }
 
   ngOnInit() {
   }
+  getcontent(){
+    this.service.list_content().subscribe(data => {
+      
 
+    })
+  }
 }
