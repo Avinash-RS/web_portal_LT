@@ -15,7 +15,7 @@
         </div>
         <div><br>
           <p class="head">OTP will be sent to this number</p>
-          <button class="btn" [disabled]="!otpForm.valid && isenable" (click)="otpverification()">Verification</button>
+          <button class="btn" [disabled]=" isenable" (click)="otpverification()">Verification</button>
         </div>
         <!-- *ngIf="showotp" -->
         <div  *ngIf="showotp"><br>
