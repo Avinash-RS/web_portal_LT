@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CommonServicesService } from '../../services/common-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { GlobalServiceService } from '../../services/handlers/global-service.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-course-component',
@@ -14,8 +15,8 @@ export class CourseComponentComponent implements OnInit {
   @Input('from') from: any;
   userDetail: any;
 
-  constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService
-   ) {
+  constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
+    private router: Router ) {
 
   }
 
@@ -62,7 +63,10 @@ export class CourseComponentComponent implements OnInit {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
     }
-
   }
 
+  gotoDescription(course) {
+    var id = course.course_id;
+    this.router.navigate(['/Learner/courseDetail',id])
+  }
 }

@@ -1,3 +1,5 @@
+@import "../../assets/variable.scss";
+
 .section_1 {
     background: url('../../../../assets/learner/lens.jpg') !important;
     height: 60vh;
@@ -15,19 +17,11 @@
     top: 15%;
     float: right;
     right: 5%;
-    opacity: 0.6;
-    position: absolute;
     height: 45vh;
 }
 
-.section_1_card_2 {
-    width: 30%;
-    top: 15%;
-    float: right;
-    height: 45vh;
-    right: 5%;
-    position: absolute;
-    background: transparent;
+.opacity {
+    opacity: 0.6 !important;
 }
 
 ::ng-deep .mat-card-title {
@@ -35,7 +29,6 @@
 }
 
 .add_to_cart {
-    background-color: red;
     height: 7vh;
     width: 60%;
     opacity: 1 !important;
@@ -45,60 +38,37 @@
     font-weight: 200;
 }
 
-.buy_now {
-    background-color: rgb(97, 96, 96);
-    height: 7vh;
-    width: 60%;
-    opacity: 1 !important;
-    border-radius: none;
-    color: white;
-    font-size: 20px;
-    font-weight: 200;
+.bg_add_to_Cart {
+    background-color: $color-maroon;
+}
+
+.bg_buy_now {
+    background-color: $color-darkGrey;
 }
 
 .share_text {
-    background-color: transparent;
     height: 5vh;
-    width: 23%;
-    opacity: 1 !important;
-    border-radius: none;
-    color: red;
-    border: 1px solid red;
+    color: $color-maroon;
+    border: 1px solid $color-maroon;
     box-shadow: none;
-    font-size: 15px;
-    font-weight: 300;
     margin-left: 10px;
     margin-top: 10px;
 }
 
 .icon {
-    color: red;
-    font-weight: 400;
-    font-size: 23px;
+    color: $color-maroon;
     margin-right: 6px;
-}
-
-.price_striked {
-    font-weight: 200;
-    font-size: 16px;
-    text-decoration: line-through;
-}
-
-.percent_off {
-    font-weight: 200;
-    font-size: 16px;
 }
 
 .fa {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: red;
+    -webkit-text-stroke-color: $color-maroon;
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
 }
 
 .section_1_a {
-    position: absolute;
     top: 8%;
     padding: 4%;
     width: 60%;
@@ -108,14 +78,11 @@
 .section_1_a {
     .course_name {
         font-size: 2.3rem;
-        font-weight: 500;
-        text-transform: capitalize;
         line-height: 2rem;
     }
 
     .course_desc {
         font-size: 1.4rem;
-        font-weight: 500;
         height: 10vh;
         margin-bottom: 0px;
     }
@@ -134,7 +101,7 @@
 }
 
 .section_1_a table {
-    width: 80%;
+    // width: 80%;
 
     td {
         font-size: 18px;
@@ -147,33 +114,26 @@
     margin-top: -9.5vh;
 }
 
-.partner_img {
-    width: 7%;
-}
 
 .partner_image_div {
     margin-top: -10vh;
 }
 
 .partner_img {
-    float: right;
     margin-left: 12px;
 }
 
 .wrap_content {
-    padding-left: 5% !important;
-    padding-right: 5% !important;
+    padding-left: 8% !important;
+    padding-right: 8% !important;
 }
 
 .tabs {
     height: 11vh;
     border: 0.5px solid rgb(245, 245, 245);
-    width: 48%;
     margin-top: 2vh;
     -webkit-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    /* Firefox 3.5 - 3.6 */
     box-shadow: 2px 2px 1px 1px rgb(245, 245, 245);
 
     button {
@@ -195,22 +155,8 @@
         margin-left: 15vh;
     }
 
-    .tr_w_1{
-        font-size: 15px;
-        font-weight: 400 !important;
-        width: 20% !important;
+    .inline_block {
+        display: inline;
     }
 
-    .tr_w_2 {
-        width: 40% !important;
-    }
-
-    .tr_w_3 {
-        width: 10%;
-    }
-
-    .tr_w_4 {
-
-        width: 5%;
-    }
 }

@@ -7,26 +7,26 @@ import { HttpClient } from '@angular/common/http';
 import { BarRatingModule } from "ngx-bar-rating";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxMaskModule } from 'ngx-mask'
 //local
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 // import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { MaterialModule } from './common/material.module';
+import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertComponentComponent } from './common/alert-component/alert-component.component';
-import { NgxMaskModule } from 'ngx-mask'
+import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponentComponent,
   ],
   imports: [
-    // CookieModule.forRoot() ,
+    NgImageSliderModule,
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot() ,
     NgxMaskModule.forRoot(),
-    // Ng4LoadingSpinnerService,
     GraphqlModule,
     MaterialModule,
     BrowserAnimationsModule,

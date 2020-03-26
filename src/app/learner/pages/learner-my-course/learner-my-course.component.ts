@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { GlobalServiceService } from 'src/app/common/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-learner-my-course',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { logout, viewcourse, view_wishlist } from "./operations/common_query";
-import { add_to_wishlist, delete_wishlist } from "./operations/common_mutation";
+import { logout, viewcourse, view_wishlist } from "@core/services/operations/common_query";
+import { add_to_wishlist, delete_wishlist } from "@core/services/operations/common_mutation";
 
 @Injectable({
   providedIn: 'root'
