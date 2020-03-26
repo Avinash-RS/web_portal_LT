@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           if (loginresult.data.login.success) {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
+              localStorage.setItem('learner', 'true');
               localStorage.setItem('remember_me', 'true');
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
             } else {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               localStorage.setItem('remember_me', 'false');
+              localStorage.setItem('learner', 'true');
               this.router.navigate(['/Learner'])
             }
           } else {
