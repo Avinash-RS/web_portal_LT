@@ -53,3 +53,55 @@ export const login = gql`
     }
   }
 }`;
+
+export const   get_qualification_details = gql`
+	query   get_qualification_details{
+		  get_qualification_details{
+	message
+    success
+    data{
+      _id
+     levelname
+      levelcode
+      is_active
+    }
+}
+}
+`;
+
+export const get_board_university_details= gql`
+query get_board_university_details{
+  get_board_university_details{
+        message
+success
+data{
+  board{
+    _id
+    Board_Id
+    Board_Name
+    created_on
+    created_by
+    created_by_ip
+    updated_on
+    updated_by
+    updated_by_ip
+    is_active
+  }
+  university{
+    _id
+    University_Id
+    University_Name
+    created_on
+    created_by
+    created_by_ip
+    updated_on
+    updated_by
+    updated_by_ip
+    is_active
+  }
+}
+
+  }
+}`;
+
+

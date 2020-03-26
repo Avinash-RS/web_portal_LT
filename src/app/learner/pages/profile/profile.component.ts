@@ -33,7 +33,10 @@ export class ProfileComponent implements OnInit {
   countryId: any;
   showotp: boolean = false;
   qualification: any;
-  country: any = {};
+  // country: any = {};
+  stateValue: any;
+  levelValue: any;
+  boardValue: any;
   // countryDetails: any = [];
 
 
@@ -46,6 +49,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getAllcountry();
+    this.getAllLevels();
+    this.getBoardsUniv();
     // this.getprofileDetails();
     this.mailForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.usernameVal),
@@ -67,16 +72,29 @@ export class ProfileComponent implements OnInit {
   //Country List
   getAllcountry() {
     this.service.get_country_details().subscribe(countryDetails => {
-      console.log('sss', countryDetails);
       this.countryValue = countryDetails.data['get_country_details'].data;
-      this.countryId = this.country._id;
-      console.log('countryValue', this.countryValue)
     })
   }
   //State List
-  // getAllState(){
-  //   this.service.get_state_details()
-  // }
+  getAllState(country){
+    let countryId = country.value;
+    this.service.get_state_details(countryId).subscribe(stateDetails => {
+      console.log('state', stateDetails);
+      this.stateValue = stateDetails.data['get_state_details'].data;
+    })
+  }
+  getAllLevels(){
+    this.service.get_qualification_details().subscribe(level => {
+      this.levelValue = level.data[' get_qualification_details'].data;
+      console.log('level',this.levelValue)
+    })
+  }
+  getBoardsUniv(){
+    this.service.get_board_university_details().subscribe(boards => {
+      this.boardValue = boards.data['get_board_university_details'].data;
+      console.log('board', this.boardValue);
+    })
+  }
 
 
   // getprofileDetails() {

@@ -1,4 +1,5 @@
 <app-header></app-header>
+<div class="profile">
 <div class="limiter">
   <div class="container-reg200 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
@@ -46,18 +47,20 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-select class="inputs" [(ngModel)]="profileDetails.country" name="country" placeholder="Country"
-                    value="country._id" required>
-                    <mat-option *ngFor="let country of countryValue">
-                      {{country.countryname}}
-                    </mat-option>
-                  </mat-select>
+                    <mat-select class="inputs" placeholder="Country" [(ngModel)]="profileDetails.country" name="country" 
+                    (selectionChange)="getAllState($event)" required>
+                      <mat-option [value]="country._id" *ngFor="let country of countryValue">
+                        {{country.countryname}}
+                      </mat-option>
+                    </mat-select>
+                    
+                  <!-- </mat-select> -->
                 </div>
                 <div class="col">
                   <mat-select class="inputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" required>
-                    <mat-option value="t">Tamil</mat-option>
-                    <mat-option value="t">English</mat-option>
-                    <mat-option value="t">Hindi</mat-option>
+                    <mat-option [value]="state._id" *ngFor="let state of stateValue">
+                      {{state.statename}}
+                    </mat-option>
                   </mat-select>
                 </div>
                 <div class="col">
@@ -75,7 +78,7 @@
           <form>
             <div class="profilegrid">
               <div class="row myprofile">
-                <mat-label>My Profile</mat-label>
+                <label>My Profile</label>
                 <mat-icon class="createicon">create</mat-icon>
               </div>
               <div class="row">
@@ -98,7 +101,8 @@
                 </div>
               </div>
               <section class="example-section">
-              <mat-progress-bar class="example-margin" mode="determinate" value="10"></mat-progress-bar>
+              <mat-progress-bar class="example-margin" mode="determinate" value="10">
+              </mat-progress-bar>
             </section>
               <div class="Edit">
                 <div class="row">
@@ -145,16 +149,17 @@
           <div class="row">
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level" required>
-                <mat-option>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
+                <mat-option *ngFor="let level of levelValue">
+                  {{level.levelname}}
+                </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" required>
-                <mat-option>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
+                <mat-option *ngFor="let board of boards">
+                  {{board.Board_Name}}
+                  {{board.University_Name}}
+                </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
@@ -359,4 +364,5 @@
         </mat-dialog-actions>
       </ng-template>
     </div>
+  </div>
   </div>

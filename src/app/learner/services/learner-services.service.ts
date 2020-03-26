@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 
-import { login,get_course_by_user ,get_country_details } from "./operations/learner_query";
+import { login,get_course_by_user ,get_country_details,get_qualification_details,
+  get_board_university_details } from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
@@ -148,4 +149,14 @@ export class LearnerServicesService {
       }
     });
   }
-}
+  get_qualification_details(){
+    return this.Apollo.query({
+    query:  get_qualification_details,
+  })
+  }
+  get_board_university_details(){
+    return this.Apollo.query({
+    query:get_board_university_details,
+  });
+  }
+};

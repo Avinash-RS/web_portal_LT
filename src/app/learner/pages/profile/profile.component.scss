@@ -1,36 +1,11 @@
 @import "../../../../assets/variable.scss";
 
-
-.container-reg200 {
-  width: 100%;
-  height: 100vh !important;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color:white;
-}
-.wrap-reg {
-  width: 100%;
-  height: auto;
-  background: #fff !important;
-  border-radius: 25px;
-  border: 1px outset white;
-  overflow: hidden;
-  background-color: white !important;
-  box-shadow: 0 2px 11px 0 rgba(0,0,0,2);
-}
 textarea {
   width: 314px;
   border-radius: 4px;
 }
 .mat-radio-button ~ .mat-radio-button {
-margin-left: 30px;
-}
-mat-radio-outer-circle{
-  height: 14px !important;
-  width:14px !important;
+margin-left: 25px;
 }
 figure.mat-figure {
 padding-left: -39px;
@@ -70,10 +45,6 @@ margin-left: -47px;
     padding-top: 23%;
     margin-left: -13%;
 }
-mat-select{
-  border-radius: 10px;
-  margin-left: -18px;
-}
 .Edit{
   margin-left: -59px;
   margin-top: 21px;
@@ -98,9 +69,7 @@ mat-select{
   color: #1F3777;
   width: 100%;
 }
-mat-label{
-  color: #1F3777;
-}
+
 .language{
    padding-left: 18px;
 }

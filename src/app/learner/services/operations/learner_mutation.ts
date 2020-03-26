@@ -170,7 +170,7 @@ updated_by
 `;
 
 export const get_state_details = gql`
-    mutation get_state_details($_id: String){
+    mutation   get_state_details($_id: String){
       get_state_details(
         _id: $_id
       ) {
