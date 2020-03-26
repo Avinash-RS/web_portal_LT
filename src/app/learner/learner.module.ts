@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from "ngx-bar-rating";
-import { NgImageSliderModule } from 'ng-image-slider';
+// import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxMaskModule } from 'ngx-mask'
 //local
 import { HeaderComponent } from '@core/core/header/header.component';
@@ -68,9 +68,10 @@ const routes: Routes = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
   imports: [
-    NgImageSliderModule,
+    // NgImageSliderModule,
     BarRatingModule,
     CommonModule,
+    NgxMaskModule,
     RouterModule.forChild(routes),
     MaterialModule,
     NgxMaskModule.forChild(),

@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 import { BarRatingModule } from "ngx-bar-rating";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgxMaskModule } from 'ngx-mask'
 //local
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 // import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
