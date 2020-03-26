@@ -5,13 +5,16 @@
 </span>
 <!-- <li class="subNav"><a class="navLink" href="${child.link}">${child.title}</a></li> -->
 <h1>This is the player.</h1>
+<!--this for all courses-->
 <div class="right" id="contentNav" *ngFor="let navtree of productsData">
   {{navtree.title}}
+  <!--this is for particular course syllabus-->
   <div *ngFor="let child of navtree.children" >
     <li class="subNav"><a class="navLink" href="http://192.168.0.103:8080{{child.link}}" >{{child.title}}</a></li>
   </div>
   
 </div>
+<!--this is for player-->
 <div class="left">
     <iframe id="content" ></iframe>
 </div>
