@@ -34,3 +34,13 @@ export const login = gql`
     }
   }
 }`;
+
+export const get_user_detail = gql`
+  query get_user_detail($email: String){
+    get_user_detail(email: $email) {
+      message{
+        user_id
+      }
+      success
+  }
+}`;
