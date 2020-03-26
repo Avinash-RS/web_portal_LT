@@ -20,9 +20,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.getIPAddress();
-    console.log('inside')
-    // if(this.gs.checkLogout()) {
-     
       var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
       var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
       var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
