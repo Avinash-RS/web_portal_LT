@@ -44,3 +44,18 @@ query list_content{
 }
 `;
 
+export const syllabus_of_particular_scorm = gql`
+query syllabus_of_particular_scorm($contentid:String){
+  syllabus_of_particular_scorm(contentid:$contentid) {
+    message,
+    success,
+    data{
+      title,
+      children{
+      title,
+        link
+    }
+    }
+  }
+}`;
+

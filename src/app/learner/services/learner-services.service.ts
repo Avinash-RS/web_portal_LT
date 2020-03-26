@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { login,get_course_by_user,list_content } from "./operations/learner_query";
+import { login,get_course_by_user,list_content,syllabus_of_particular_scorm } from "./operations/learner_query";
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
@@ -134,6 +134,14 @@ export class LearnerServicesService {
       query:list_content,
       variables:{
         
+      }
+    })
+  }
+  syllabus_of_particular_scorm(contentid){
+    return this.Apollo.query({
+      query:syllabus_of_particular_scorm,
+      variables:{
+        contentid:contentid
       }
     })
   }
