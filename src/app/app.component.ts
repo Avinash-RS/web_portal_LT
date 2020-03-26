@@ -30,9 +30,10 @@ export class AppComponent {
           this.router.navigate(["/Learner/login"]);
         } 
       } else {
-        // localStorage.clear();
+        console.log('inside')
+        localStorage.clear();
         // console.log(this.router.url)
-        // this.router.navigate(["/Learner/login"]);
+        this.router.navigate(["/Learner"]);
       }
     // }
   }
