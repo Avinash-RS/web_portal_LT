@@ -31,5 +31,5 @@ export const fullnameVal: any = [
     Validators.required, 
     Validators.pattern(/^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/),
      Validators.minLength(3),
-      Validators.maxLength(60)
+      Validators.maxLength(50)
 ]
