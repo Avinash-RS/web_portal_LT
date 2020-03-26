@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   countryId: any;
   showotp: boolean = false;
   qualification: any;
+  country: any = {};
   // countryDetails: any = [];
 
 
@@ -68,6 +69,7 @@ export class ProfileComponent implements OnInit {
     this.service.get_country_details().subscribe(countryDetails => {
       console.log('sss', countryDetails);
       this.countryValue = countryDetails.data['get_country_details'].data;
+      this.countryId = this.country._id;
       console.log('countryValue', this.countryValue)
     })
   }
