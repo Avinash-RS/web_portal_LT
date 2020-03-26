@@ -32,7 +32,7 @@ export class OtpComponent implements OnInit {
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
       private loader:Ng4LoadingSpinnerService,
-    public service : LearnerServicesService) { }
+      public service : LearnerServicesService) { }
 
 
   @ViewChild('ngOtpInput') ngOtpInput: any;

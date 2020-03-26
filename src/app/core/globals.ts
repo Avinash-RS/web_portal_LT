@@ -18,7 +18,7 @@ export const mobileVal: any = [
     Validators.required,
     Validators.minLength(10), 
     Validators.maxLength(10), 
-    Validators.pattern(/^[6-9]\d{9}\1*$/)
+    Validators.pattern(/^[6-9][0-9]{9}$/)
 ]
 export const emailVal: any = [
     Validators.required, 
@@ -31,5 +31,5 @@ export const fullnameVal: any = [
     Validators.required, 
     Validators.pattern(/^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/),
      Validators.minLength(3),
-      Validators.maxLength(50)
+      Validators.maxLength(60)
 ]

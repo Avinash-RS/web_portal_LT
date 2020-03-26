@@ -23,9 +23,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/favicon.png" 
+              "src/fav.png",
+              "src/assets"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -100,7 +99,7 @@
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
+              "src/fav.png",
               "src/assets"
             ]
           }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl,ReactiveFormsModule , Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
