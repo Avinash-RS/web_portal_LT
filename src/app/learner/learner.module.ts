@@ -10,23 +10,24 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { NgxMaskModule } from 'ngx-mask'
 //local
 import { HeaderComponent } from '@core/core/header/header.component';
-import { LoginComponent } from './pages/login/login.component';
-import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
-import { OtpComponent } from './pages/otp/otp.component';
-import { PasswordComponent } from './pages/password/password.component';
+import { LoginComponent } from '@learner/pages/login/login.component';
+import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
+import { RegistrationComponent } from '@learner/pages/registration/registration.component';
+import { OtpComponent } from '@learner/pages/otp/otp.component';
+import { PasswordComponent } from '@learner/pages/password/password.component';
 import { MaterialModule } from '@core/material.module';
-import { LearnerHomeComponent } from './pages/learner-home/learner-home.component';
-import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
+import { LearnerHomeComponent } from '@learner/pages/learner-home/learner-home.component';
+import { ForgotUsernameAndPasswordComponent } from '@learner/pages/forgot-username-and-password/forgot-username-and-password.component';
+import { RecoverFogotpasswordOTPComponent } from '@learner/pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
+import { ProfileComponent } from '@learner/pages/profile/profile.component';
+import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learner-my-course.component';
 import { CourseComponentComponent } from '@core/shared/course-component/course-component.component';
 import { TopCoursesComponent } from '@core/shared/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from '@core/shared/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist-courses.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
+import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
+import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 //others
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
+  {path :  "terms",component:TermsconditionsComponent}
 ];
 
 @NgModule({
@@ -61,7 +63,8 @@ const routes: Routes = [
     RecomendedCoursesComponent,
     WishlistCoursesComponent,
     LearnerMyCourseComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    TermsconditionsComponent
   ],
 
 
