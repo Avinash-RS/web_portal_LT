@@ -1,20 +1,53 @@
 
 <app-header></app-header>
-<span  *ngFor="let item of products">
-  <li ><a href="/scormPlayer.html?contentID={{item}}">{{item}}</a></li>
-</span>
-<!-- <li class="subNav"><a class="navLink" href="${child.link}">${child.title}</a></li> -->
-<h1>This is the player.</h1>
-<!--this for all courses-->
-<div class="right" id="contentNav" *ngFor="let navtree of productsData">
-  {{navtree.title}}
-  <!--this is for particular course syllabus-->
-  <div *ngFor="let child of navtree.children" >
-    <li class="subNav"><a class="navLink" href="http://192.168.0.103:8080{{child.link}}" >{{child.title}}</a></li>
-  </div>
-  
+
+<div class="limiter">
+  <mat-tab-group style="margin-top: 10px;">
+    <mat-tab class="mat" label="About"><br>
+
+
+
+      <span  *ngFor="let item of products">
+        <li ><a href="/scormPlayer.html?contentID={{item}}">{{item}}</a></li>
+      </span>
+      <!-- <li class="subNav"><a class="navLink" href="${child.link}">${child.title}</a></li> -->
+      <!-- <h1>This is the player.</h1> -->
+      <!--this for all courses-->
+      <div class="right" id="contentNav" *ngFor="let navtree of productsData">
+        {{navtree.title}}
+        <!--this is for particular course syllabus-->
+        <div *ngFor="let child of navtree.children" >
+          <li class="subNav"><a class="navLink" href="http://192.168.0.103:8080{{child.link}}" >{{child.title}}</a></li>
+        </div>
+        
+      </div>
+      <!--this is for player-->
+      <div class="left">
+          <iframe class="player" id="content" ></iframe>
+      </div>
+
+      <!-- <h1 class="space">About the course</h1> -->
+
+    </mat-tab>
+
+    <mat-tab label="Syllabus">
+
+    </mat-tab>
+
+    <mat-tab label="Review">
+
+    </mat-tab>
+
+    <mat-tab label="Instructor">
+
+    </mat-tab>
+
+    <mat-tab label="FAQ">
+
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
-<!--this is for player-->
-<div class="left">
-    <iframe id="content" ></iframe>
-</div>
+
+
+
