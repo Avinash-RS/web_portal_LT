@@ -13,6 +13,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { OtpComponent } from './pages/otp/otp.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { MaterialModule } from '../common/material.module';
+import { NgxMaskModule } from 'ngx-mask'
 import { LearnerHomeComponent } from './pages/learner-home/learner-home.component';
 import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
 import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
@@ -70,8 +71,11 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
+    NgxMaskModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
+
+
   ],
   providers: [],
   entryComponents : []

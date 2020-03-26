@@ -10,6 +10,7 @@ import { GlobalServiceService } from './common/services/handlers/global-service.
 })
 export class AppComponent {
   ipAddress = '';
+  title = 'Lxpfrontend';
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient

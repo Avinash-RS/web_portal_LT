@@ -26,7 +26,6 @@ export class ResetpasswordComponent implements OnInit {
     this.user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(this.user)
     this.resetForm = this.formBuilder.group({
-      // username: new FormControl('', myGlobals.usernameVal),
       password: new FormControl('', myGlobals.passwordVal),
       confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
 }, {
