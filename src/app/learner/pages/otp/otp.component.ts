@@ -94,6 +94,7 @@ get f() { return this.otpForm.controls; }
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
+            localStorage.setItem("key",this.userid)
             this.router.navigate(['Learner/password']);
           } else{
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
