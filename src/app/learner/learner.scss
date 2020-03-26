@@ -27,7 +27,9 @@
 .mand{
     color: red;
 }
-
+.mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
+    color : rgb(199, 199, 199)
+}
 .wrap-body {
     padding:3% !important;
 
