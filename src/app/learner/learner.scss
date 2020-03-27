@@ -57,6 +57,8 @@
         overflow: hidden;
         background-color: white !important;
         box-shadow: 0 2px 11px 0 rgba(0,0,0,2);
+        margin-top: 50px;
+        margin-bottom: 30px;
       }
       mat-label{
         color: #1F3777;
@@ -139,4 +141,8 @@
 [data-tip]:hover:before,
 [data-tip]:hover:after {
 	display:block;
+}
+mat-icon{
+    cursor: pointer;
+    color: #1F3777 ;
 }

@@ -7,7 +7,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals'; 
 
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;

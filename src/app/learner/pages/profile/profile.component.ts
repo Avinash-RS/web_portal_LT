@@ -1,10 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import * as myGlobals from '../../../common/globals';
+import * as myGlobals from '@core/globals';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
