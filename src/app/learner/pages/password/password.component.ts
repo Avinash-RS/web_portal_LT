@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { MustMatch } from '../../../common/_helpers/must-match.validator';
-import { LearnerServicesService } from '../../services/learner-services.service';
+import { MustMatch } from '@core/services/_helpers/must-match.validator';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { AlertServiceService } from 'src/app/./core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '../../../common/globals'; 
+import * as myGlobals from '@core/globals'; 
 
 @Component({
   selector: 'app-password',
@@ -17,8 +17,8 @@ export class PasswordComponent implements OnInit {
   usersuggestion:any =[];
   passwordForm: FormGroup;
   systemip:String;
-
-  myControl = new FormControl();
+  userid:any;
+  // myControl = new FormControl();
   options: string[] = [];
   constructor(private router:Router, 
     private loader : Ng4LoadingSpinnerService,
@@ -39,15 +39,16 @@ export class PasswordComponent implements OnInit {
     validator: MustMatch('password', 'confirmpassword'),
   });
   }
-  get f() { return this.passwordForm.controls; }
+  get pf() { return this.passwordForm.controls; }
   submit(){
     this.loader.show();
-    this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
+    this.userid=localStorage.getItem('key')
+    this.service.user_registration_done(this.userid,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
           if (data.data['user_registration_done']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].token))
-            this.router.navigate(['Learner/courses']);
+            this.router.navigate(['/Learner/MyCourse']);
           } else{
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
@@ -56,7 +57,8 @@ export class PasswordComponent implements OnInit {
   }
 
   userNamesuggestion(){
-    this.service.userNamesuggestion(this.currentUser.user_id).subscribe(data => {
+    this.userid=localStorage.getItem('key')
+    this.service.userNamesuggestion(this.userid).subscribe(data => {
       if (data.data['user_registration_username_suggestion']['success'] == 'true') {
         // this.alert.openAlert(data.data['user_registration_username_suggestion'].message,null)
         this.options = data.data['user_registration_username_suggestion'].data

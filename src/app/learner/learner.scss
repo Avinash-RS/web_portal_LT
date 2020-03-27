@@ -21,6 +21,15 @@
         text-align: center;
     }
 }
+.label{
+    color: blue;
+}
+.mand{
+    color: red;
+}
+.mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
+    color : rgb(199, 199, 199)
+}
 .wrap-body {
     padding:3% !important;
 
@@ -68,3 +77,66 @@
       }
   }
   
+
+.space5{
+    margin-top: 5%;
+}.space10{
+    margin-top: 10%;
+}
+.space20{
+    margin-top: 20%;
+}
+.space30{
+    margin-top: 30%;
+}
+.space40{
+    margin-top: 40%;
+}
+
+  
+[data-tip] {
+	position:relative;
+
+}
+
+// To add tooltip for input box for headling
+[data-tip]:before {
+	content:'';
+	/* hides the tooltip when not hovered */
+	display:none;
+	content:'';
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid $color-blue;	
+	position:absolute;
+	top:30px;
+	left:35px;
+	z-index:8;
+	font-size:0;
+	line-height:0;
+	width:0;
+	height:0;
+}
+[data-tip]:after {
+	display:none;
+	content:attr(data-tip);
+	position:absolute;
+	top:35px;
+	left:0px;
+	padding:5px 8px;
+	background:$color-blue;
+	color:#fff;
+	z-index:9;
+	font-size: 0.75em;
+	height:auto;
+	line-height:18px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	white-space:normal;
+	word-wrap:normal;
+}
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+	display:block;
+}

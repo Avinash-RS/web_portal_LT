@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
-import { LearnerServicesService } from '../../services/learner-services.service';
+import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
-import * as myGlobals from '../../../common/globals';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import * as myGlobals from '@core/globals';
 
 @Component({
   selector: 'app-login',
@@ -36,14 +35,18 @@ export class LoginComponent implements OnInit {
           if (loginresult.data.login.success) {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
+              localStorage.setItem('learner', 'true');
               localStorage.setItem('remember_me', 'true');
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
+              localStorage.setItem('login', 'true');
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Learner'])
             } else {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               localStorage.setItem('remember_me', 'false');
+              localStorage.setItem('learner', 'true');
+              localStorage.setItem('login', 'true');
               this.router.navigate(['/Learner'])
             }
           } else {

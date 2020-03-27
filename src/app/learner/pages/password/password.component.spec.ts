@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('PasswordComponent', () => {
   let component: PasswordComponent;
   let fixture: ComponentFixture<PasswordComponent>;
@@ -26,6 +27,9 @@ describe('PasswordComponent', () => {
         MatDialogModule
    ],
       declarations: [ PasswordComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
       providers: [Ng4LoadingSpinnerService,
         {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
     })
@@ -39,7 +43,25 @@ describe('PasswordComponent', () => {
     backend = TestBed.get(ApolloTestingController);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('form invalid when empty', () => {
+    expect(component.passwordForm.valid).toBeFalsy();
   });
+
+  it('username field validation', () => {
+    let username = component.passwordForm.controls['username']
+    expect(username.valid).toBeFalsy();
+    let errors = {};
+        errors = username.errors
+        expect(errors['required']).toBeTruthy();
+  });
+
+  it('check password and confirm password is match'),() =>{
+    let password = component.passwordForm.controls['password'];
+    let conpassword =  component.passwordForm.controls['confirmpassword']
+    if(password == conpassword){
+      expect(password.valid).toBeTruthy();
+    }else{
+      expect(password.invalid).toBeFalsy();
+    }
+  }
 });

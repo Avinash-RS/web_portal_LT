@@ -1,3 +1,9 @@
+@import "../../assets/variable.scss";
+
+.m-l-2 {
+    margin-left: 2%;
+}
+
 .section_1 {
     background: url('../../../../assets/learner/lens.jpg') !important;
     height: 60vh;
@@ -12,30 +18,21 @@
 
 .section_1_card_1 {
     width: 30%;
-    top: 15%;
+    top: 13%;
     float: right;
     right: 5%;
-    opacity: 0.6;
-    position: absolute;
-    height: 45vh;
+    height: 50vh;
 }
 
-.section_1_card_2 {
-    width: 30%;
-    top: 15%;
-    float: right;
-    height: 45vh;
-    right: 5%;
-    position: absolute;
-    background: transparent;
+.opacity {
+    opacity: 0.6 !important;
 }
 
 ::ng-deep .mat-card-title {
-    margin-top: 10% !important;
+    margin-top: 7% !important;
 }
 
 .add_to_cart {
-    background-color: red;
     height: 7vh;
     width: 60%;
     opacity: 1 !important;
@@ -45,60 +42,38 @@
     font-weight: 200;
 }
 
-.buy_now {
-    background-color: rgb(97, 96, 96);
-    height: 7vh;
-    width: 60%;
-    opacity: 1 !important;
-    border-radius: none;
-    color: white;
-    font-size: 20px;
-    font-weight: 200;
+.bg_buy_now {
+    background-color: $color-darkGrey;
 }
 
 .share_text {
-    background-color: transparent;
     height: 5vh;
-    width: 23%;
-    opacity: 1 !important;
-    border-radius: none;
-    color: red;
-    border: 1px solid red;
+    color: $color-maroon;
+    border: 1px solid $color-maroon;
     box-shadow: none;
-    font-size: 15px;
-    font-weight: 300;
     margin-left: 10px;
     margin-top: 10px;
 }
 
 .icon {
-    color: red;
-    font-weight: 400;
-    font-size: 23px;
+    color: $color-maroon;
     margin-right: 6px;
-}
-
-.price_striked {
-    font-weight: 200;
-    font-size: 16px;
-    text-decoration: line-through;
-}
-
-.percent_off {
-    font-weight: 200;
-    font-size: 16px;
 }
 
 .fa {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: red;
+    -webkit-text-stroke-color: black;
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
+    background-color: #ebebeb;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 20px;
 }
 
+
 .section_1_a {
-    position: absolute;
     top: 8%;
     padding: 4%;
     width: 60%;
@@ -108,21 +83,18 @@
 .section_1_a {
     .course_name {
         font-size: 2.3rem;
-        font-weight: 500;
-        text-transform: capitalize;
         line-height: 2rem;
     }
 
     .course_desc {
         font-size: 1.4rem;
-        font-weight: 500;
         height: 10vh;
         margin-bottom: 0px;
     }
 }
 
 ::ng-deep .br-default .br-unit {
-    background: rgb(22, 22, 22) !important;
+    // background: gray !important;
     border-radius: 6px;
     width: 21px;
     height: 23px;
@@ -134,8 +106,6 @@
 }
 
 .section_1_a table {
-    width: 80%;
-
     td {
         font-size: 18px;
         font-weight: 500;
@@ -147,33 +117,26 @@
     margin-top: -9.5vh;
 }
 
-.partner_img {
-    width: 7%;
-}
 
 .partner_image_div {
     margin-top: -10vh;
 }
 
 .partner_img {
-    float: right;
     margin-left: 12px;
 }
 
 .wrap_content {
-    padding-left: 5% !important;
-    padding-right: 5% !important;
+    padding-left: 8% !important;
+    padding-right: 8% !important;
 }
 
 .tabs {
     height: 11vh;
     border: 0.5px solid rgb(245, 245, 245);
-    width: 48%;
     margin-top: 2vh;
     -webkit-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    /* Firefox 3.5 - 3.6 */
     box-shadow: 2px 2px 1px 1px rgb(245, 245, 245);
 
     button {
@@ -195,22 +158,91 @@
         margin-left: 15vh;
     }
 
-    .tr_w_1{
-        font-size: 15px;
-        font-weight: 400 !important;
-        width: 20% !important;
+    .inline_block {
+        display: inline;
     }
 
-    .tr_w_2 {
-        width: 40% !important;
-    }
+}
 
-    .tr_w_3 {
-        width: 10%;
-    }
+.mat-mini-fab {
+    position: fixed;
+    background-color: white;
+    border: 0.5px solid gainsboro;
+    float: inline-end;
+}
 
-    .tr_w_4 {
+mat-card {
+    text-align: center;
+    border: 0.5px solid lightgray;
+    z-index: -1;
+    // box-shadow: 0 6px 1px -1px rgba(227, 226, 226, 0.2), 0 1px 5px 0 rgba(227, 226, 226, 0.2), 0 2px 4px 0 rgba(0,0,0,.12);
+}
 
-        width: 5%;
-    }
+.faq_border {
+    border: 1px solid rgb(9, 20, 121);
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: $color-maroon;
+}
+
+.mat-progress-bar {
+    height: 15px;
+}
+
+.no_margin {
+    margin-top: -18px;
+    margin-bottom: -18px;
+}
+
+::ng-deep .br-default .br-unit {
+    width: 10px !important;
+    font-size: 16px;
+}
+
+.m-l-2 {
+    margin-top: -1px;
+    margin-left: 2%;
+}
+
+.rating_number {
+    font-size: 3rem;
+    color: rgb(111, 113, 114);
+    text-align: center;
+    // margin-left: 30%;
+}
+
+h2 {
+    color: black;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main {
+    height: 400px !important;
+
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner {
+    margin-left: 10% !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
+    width: 1000px !important;
+    height: 500px !important;
+    margin-left: 30px !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div.image-popup {
+    width: 1000px !important;
+    height: 500px !important;
+    margin-left: 30px !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .prev.disable {
+    background-color: rgb(58, 58, 58) !important;
+    color: honeydew !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .next.disable {
+    background-color: rgb(58, 58, 58) !important;
+    color: honeydew !important;
 }

@@ -3,7 +3,7 @@ import { Apollo } from "apollo-angular";
 
 import { login,get_course_by_user ,get_country_details,get_qualification_details,
   get_board_university_details,get_discipline_details,get_specification_details,
-  get_institute_details ,get_language_details} from "./operations/learner_query";
+  get_institute_details ,get_language_details,get_user_detail} from "./operations/learner_query";
 
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
@@ -219,5 +219,14 @@ export class LearnerServicesService {
         otp: otp
       }
     })
+  }
+  get_user_detail(email){
+    return this.Apollo.query({
+      query: get_user_detail,
+      variables: {
+        email:email
+     
+      }
+    });
   }
 };

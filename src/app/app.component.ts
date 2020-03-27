@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { GlobalServiceService } from './common/services/handlers/global-service.service'
+import { GlobalServiceService } from '././core/services/handlers/global-service.service'
 
 @Component({
   selector: 'app-root',
@@ -10,33 +10,28 @@ import { GlobalServiceService } from './common/services/handlers/global-service.
 })
 export class AppComponent {
   ipAddress = '';
+  title = 'Lxpfrontend';
   constructor(private router: Router,
     private gs: GlobalServiceService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.getIPAddress();
   }
 
   ngOnInit() {
     this.getIPAddress();
-    console.log('inside')
-    // if(this.gs.checkLogout()) {
-     
-      var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
-      var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-      var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
-      var ps = atob(psd)
-      console.log('inside',cookie)
-      if (cookie == 'true') {
-        if ((name || psd) == null) {
-          this.router.navigate(["/Learner/login"]);
-        } 
-      } else {
-        // localStorage.clear();
-        // console.log(this.router.url)
-        // this.router.navigate(["/Learner/login"]);
+    var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
+    var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
+    var login = localStorage.getItem('true') ? localStorage.getItem('true') : null;
+    var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
+    var ps = atob(psd)
+    if (cookie == 'true' && login == 'true') {
+      if ((name || psd) == null) {
+        this.router.navigate(["/Learner/login"]);
       }
-    // }
+    } else {
+      // localStorage.clear();
+    }
   }
 
   getIPAddress() {
