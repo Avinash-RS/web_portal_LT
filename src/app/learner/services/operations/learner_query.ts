@@ -104,4 +104,66 @@ data{
   }
 }`;
 
+export const   get_discipline_details = gql`
+  query   get_discipline_details{
+    get_discipline_details{
+      message
+      success
+      data{
+        _id
+        discipline_id
+        discipline_name
+        discipline_code
+        is_active
+      }  
+    }
+  }
+`;
+
+export const  get_specification_details = gql`
+  query    get_specification_details{
+    get_specification_details{
+      message
+      success
+      data{
+        _id
+        specification_id
+        specification_name
+        specification_code
+        is_active
+      }  
+    }
+  }
+`;
+
+export const  get_institute_details = gql`
+  query    get_institute_details{
+    get_institute_details{
+      message
+      success
+      data{
+        _id
+        institute_id
+        institute_name
+        institute_code
+        is_active
+      }  
+    }
+  }
+`;
+
+export const  get_language_details = gql`
+  query    get_language_details{
+    get_language_details{
+      message
+      success
+      data{
+        _id
+        is_active
+        languagecode
+        languagename
+      }  
+    }
+  }
+`;
 

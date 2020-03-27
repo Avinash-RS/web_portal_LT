@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
@@ -25,10 +26,11 @@ export class ProfileComponent implements OnInit {
   }];
 
   //Declarations
+  currentUser: any = [];
+  otp: any;
   profileDetails: any = [];
   fieldArray: Array<any> = [];
   newAttribute: any = {};
-  user_id: string = "l9m2l2";
   countryValue: any;
   countryId: any;
   showotp: boolean = false;
@@ -37,6 +39,14 @@ export class ProfileComponent implements OnInit {
   stateValue: any;
   levelValue: any;
   boardValue: any;
+  cityValue: any;
+  updatePass: any;
+  dis: any;
+  specValue: any;
+  institutes: any;
+  languageList: any;
+  isenable:boolean = true;
+  userData: any;
   // countryDetails: any = [];
 
 
@@ -44,16 +54,23 @@ export class ProfileComponent implements OnInit {
     private alert: AlertServiceService,
     public service: LearnerServicesService,
     private dialog: MatDialog,
+    private loader:Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    var user = localStorage.getItem('UserDetails')
+    this.currentUser = JSON.parse(user);
+    // var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
+    // var ps = atob(psd);
+    // this.currentUser = JSON.parse(ps);
+    this.getprofileDetails();
     this.getAllcountry();
-    this.getAllLevels();
+    this.getAllLanguage();
     this.getBoardsUniv();
-    // this.getprofileDetails();
+    this.getDiscipline();
+    this.getSpec();
     this.mailForm = this.formBuilder.group({
-      // username: new FormControl('', myGlobals.usernameVal),
       mailid: new FormControl('', myGlobals.emailVal),
       mobile: new FormControl('', myGlobals.mobileVal),
           otp1: new FormControl("", []),
@@ -79,35 +96,67 @@ export class ProfileComponent implements OnInit {
   getAllState(country){
     let countryId = country.value;
     this.service.get_state_details(countryId).subscribe(stateDetails => {
-      console.log('state', stateDetails);
       this.stateValue = stateDetails.data['get_state_details'].data;
+      if(this.stateValue == null){
+        this.alert.openAlert(stateDetails.data['get_state_details'].message, null);
+      }
     })
   }
-  getAllLevels(){
-    this.service.get_qualification_details().subscribe(level => {
-      this.levelValue = level.data[' get_qualification_details'].data;
-      console.log('level',this.levelValue)
-    })
-  }
+  // getAllLevels(){
+  //   this.service.get_qualification_details().subscribe(level => {
+  //     this.levelValue = level.data[' get_qualification_details'].data;
+  //     if(this.levelValue == null){
+  //       this.alert.openAlert(level.data['get_qualification_details'].message, null);
+  //     }
+  //     console.log('level',this.levelValue)
+  //   })
+  // }
   getBoardsUniv(){
     this.service.get_board_university_details().subscribe(boards => {
       this.boardValue = boards.data['get_board_university_details'].data;
       console.log('board', this.boardValue);
     })
   }
+  getInstitute(){
+    this.service.get_institute_details().subscribe(institute => {
+      this.institutes = institute.data['get_institute_details'].data;
+    })
+  }
 
+  getDistrict(city){
+    let stateId = city.value;
+    this.service.get_district_details(this.countryId,stateId).subscribe(city => {
+      this.cityValue = city.data['get_district_details'].data;
+      console.log('city',this.cityValue)
+    })
+  }
+  getDiscipline(){
+    this.service.get_discipline_details().subscribe(discipline => {
+      this.dis =discipline.data['get_discipline_details'].data;
+      console.log('dis',this.dis)
+    })
+  }
+  getSpec(){
+    this.service.get_specification_details().subscribe(spec => {
+      this.specValue =spec.data['get_specification_details'].data;
+      console.log('spec',this.specValue);
+    })
+  }
+  getAllLanguage(){
+    this.service.get_language_details().subscribe(language => {
+      this.languageList = language.data['get_language_details'].data;
+      console.log('lang',this.languageList)
+    })
+  }
 
-  // getprofileDetails() {
-  //   this.service.view_profile(this.user_id).subscribe(data => {
-  //     console.log('values',this.user_id);
-  //     // if (data.data['view_profile']['success'] == 'true') {
-  //     //   this.alert.openAlert(data.data['view_profile'].message, null)
-  //     // }
-  //     // else{
-  //     //   this.alert.openAlert(data.data['view_profile'].message, null)
-  //     // }
-  //   })
-  // }
+//View Profile
+  getprofileDetails() {
+    this.service.view_profile(this.currentUser.user_id).subscribe(data => {
+      console.log('user',this.currentUser.user_id);
+      this.userData = data.data['view_profile'].message;
+      console.log('userdata',this.userData)
+    })
+  }
   addnewQual() {
     this.qual.push({
       level: '',
@@ -148,7 +197,39 @@ export class ProfileComponent implements OnInit {
   editPassword(passRef: TemplateRef<any>) {
     this.dialog.open(passRef);
   }
+  //Update Mobile
   otpverification(){
-    this.showotp = true;
+    this.loader.show();
+    this.service.update_mobile_onprofile().subscribe(data => {
+      if(data.data['update_mobile_onprofile']['success'] == 'true'){
+        this.loader.hide();
+        this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
+        this.isenable = false;
+        this.showotp = true;
+      } else{
+        this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
+      }
+    })
+  
   }
+  //Verify OTP
+  otpverify(){
+    this.otp = this.mailForm.value.otp1+this.mailForm.value.otp2+this.mailForm.value.otp3+this.mailForm.value.otp4
+    this.service.user_registration_verify(this.otp,this.mailForm.value.mobile,).subscribe(data => {
+          if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            this.showotp = true;
+          } else{
+            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+          }
+      })
+
+  }
+  // updatePassword(){
+  //   this.service.get_change_password_updateprofile(this.currentUser.username,this.currentUser.ps).subscribe(password => {
+  //     console.log('uname',this.currentUser.username);
+  //     console.log('ps',this.currentUser.ps)
+  //     this.updatePass = password.data['get_change_password_updateprofile'].data;
+  //   })
+  // }
 }

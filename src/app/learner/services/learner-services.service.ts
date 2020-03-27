@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 
 import { login,get_course_by_user ,get_country_details,get_qualification_details,
-  get_board_university_details } from "./operations/learner_query";
+  get_board_university_details,get_discipline_details,get_specification_details,
+  get_institute_details ,get_language_details} from "./operations/learner_query";
+
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
-  view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword} from "./operations/learner_mutation"
+  view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
+  get_district_details,get_change_password_updateprofile, update_mobile_onprofile } from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -158,5 +161,51 @@ export class LearnerServicesService {
     return this.Apollo.query({
     query:get_board_university_details,
   });
+  }
+
+  get_district_details(country, state){
+    return this.Apollo.query({
+    query: get_district_details,
+    variables: {
+    country: country,
+    state: state
+  }
+  });
+  }
+
+  get_change_password_updateprofile(username, password){
+    return this.Apollo.query({
+      query:  get_change_password_updateprofile,
+      variables: {
+        username: username,
+        password: password
+      }
+    })
+  }
+  get_discipline_details(){
+    return this.Apollo.query({
+      query: get_discipline_details,
+    })
+  }
+  get_specification_details(){
+    return this.Apollo.query({
+      query: get_specification_details,
+    })
+  }
+  get_institute_details(){
+    return this.Apollo.query({
+      query: get_institute_details,
+    })
+  }
+  get_language_details(){
+    return this.Apollo.query({
+      query: get_language_details,
+    })
+  }
+
+  update_mobile_onprofile (){
+    return this.Apollo.query({
+      query: update_mobile_onprofile ,
+    })
   }
 };

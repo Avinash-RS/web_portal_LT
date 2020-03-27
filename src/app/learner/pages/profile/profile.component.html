@@ -36,10 +36,10 @@
                 <mat-label>Language Known</mat-label>
               </div>
               <div class="row language">
-                <mat-select class="inputs" [(ngModel)]="language" name="language">
-                  <mat-option value="t">Tamil</mat-option>
-                  <mat-option value="t">English</mat-option>
-                  <mat-option value="t">Hindi</mat-option>
+                <mat-select multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language">
+                  <mat-option *ngFor="let item of languageList" [value]="item._id">
+                    {{item.languagename}}
+                  </mat-option>
                 </mat-select>
               </div><br>
               <div class="row">
@@ -53,11 +53,10 @@
                         {{country.countryname}}
                       </mat-option>
                     </mat-select>
-                    
-                  <!-- </mat-select> -->
                 </div>
                 <div class="col">
-                  <mat-select class="inputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" required>
+                  <mat-select class="inputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" 
+                  (selectionChange)="getDistrict($event)" required>
                     <mat-option [value]="state._id" *ngFor="let state of stateValue">
                       {{state.statename}}
                     </mat-option>
@@ -65,9 +64,9 @@
                 </div>
                 <div class="col">
                   <mat-select class="inputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
-                    <mat-option value="t">Tamil</mat-option>
-                    <mat-option value="t">English</mat-option>
-                    <mat-option value="t">Hindi</mat-option>
+                    <mat-option [value]="city._id" *ngFor="let city of cityValue">
+                      {{city.districtname}}
+                    </mat-option>
                   </mat-select>
                 </div>
               </div>
@@ -91,7 +90,7 @@
               </div><br>
               <div class="row doj">
                 <div class="col">
-                  <mat-label>Full Name</mat-label>
+                  <mat-label>{{full_name}}</mat-label>
                 </div>
                 <div class="col">
                   <mat-label>Username</mat-label>
@@ -155,8 +154,9 @@
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" required>
-                <mat-option *ngFor="let board of boards">
+              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" 
+              (selectionChange)="getInstitute($event)" required>
+                <mat-option [value]="board.Board_Id" *ngFor="let board of boards">
                   {{board.Board_Name}}
                   {{board.University_Name}}
                 </mat-option>
@@ -164,17 +164,17 @@
             </div>
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute" required>
-                <mat-option>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
+                <mat-option [value]="item.institute_id" *ngFor="let item of insValue">
+                  {{item.institute_name}}
+                </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.discipline" name="discipline"
                 placeholder="Discipline" required>
-                <mat-option>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
+                <mat-option [value]="item.discipline_id" *ngFor="let item of dis">
+                  {{item.discipline_name}}
+                </mat-option>
               </mat-select>
             </div>
           </div>
@@ -183,9 +183,9 @@
           <div class="row">
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.spec" name="spec" placeholder="Specification" required>
-                <mat-option>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
+                <mat-option [value]="item.specification_id" *ngFor="let item of specValue">
+                  {{item.specification_name}}
+                </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
@@ -302,8 +302,8 @@
             <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
           </form>
         </mat-dialog-content>
-        <mat-dialog-actions>
-          <button class="btn">
+        <mat-dialog-actions *ngIf="isenable">
+          <button class="btn" (click)="otpverification()">
             Verification
           </button><br><br>
         </mat-dialog-actions>
@@ -358,7 +358,7 @@
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions>
-          <button class="btn">
+          <button class="btn" (click)="updatePassword()">
             Submit
           </button><br><br>
         </mat-dialog-actions>

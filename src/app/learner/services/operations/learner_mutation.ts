@@ -192,5 +192,56 @@ export const get_state_details = gql`
       }
     }
     `;
- 
 
+export const get_district_details = gql`
+mutation get_district_details($country: String,$state: String){
+	get_district_details(
+	country: $country,
+	state: $state) {
+	  message
+    success
+    data{
+       _id
+      districtname
+      state
+      country
+      created_by
+      created_on
+      created_by_ip
+      updated_on
+      updated_by
+      updated_by_ip
+      is_active
+    }
+} 
+}
+`;
+export const get_change_password_updateprofile = gql`
+mutation get_change_password_updateprofile($username: String, $password: String){
+  get_change_password_updateprofile(
+    username: $username,
+    password: $password
+  ) {
+    message
+success
+  }
+}
+`;
+// export const update_profile = gql`
+//   mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,){
+//     update_profile(
+//       user_id: $user_id,
+//     ) {
+
+//     }
+//   }
+// `;
+export const update_mobile_onprofile = gql`
+mutation update_mobile_onprofile{
+	update_mobile_onprofile{
+	    message
+    success
+
+}
+}
+`;
