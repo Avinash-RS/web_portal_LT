@@ -26,7 +26,7 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
 
     this.activeroute.queryParams.subscribe(params => {
-      this.user = params["user_id"]
+      this.user = params["user_id"];
       console.log(this.user)
     })
     this.resetForm = this.formBuilder.group({
