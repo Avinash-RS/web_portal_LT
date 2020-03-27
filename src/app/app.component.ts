@@ -32,7 +32,7 @@ export class AppComponent {
           this.router.navigate(["/Learner/login"]);
         } 
       } else {
-        localStorage.clear();
+        // localStorage.clear();
         // console.log(this.router.url)
         // this.router.navigate(["/Learner/login"]);
       }
