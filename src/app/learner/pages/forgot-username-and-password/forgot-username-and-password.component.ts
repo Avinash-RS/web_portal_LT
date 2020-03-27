@@ -29,6 +29,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
 
   ngOnInit() {
+    var user = localStorage.getItem('UserDetails')
+    this.currentUser = JSON.parse(user);
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('',myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),
@@ -106,7 +108,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
           })
     }else{
       this.type = "password"
-      this.service.forgotUsernameandPassword(this.type,recovertype.type,this.forgotUsername.value.mobile,this.forgotUsername.value.email)
+      this.service.forgotUsernameandPassword(this.type,recovertype.type,this.forgotUsername.value.mobile,recovertype.value)
       .subscribe(data => {
             this.loader.show();
             if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
