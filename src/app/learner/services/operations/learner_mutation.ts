@@ -245,3 +245,15 @@ mutation update_mobile_onprofile{
 }
 }
 `;
+export const update_verifyotp_mobile_onprofile = gql`
+  mutation update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
+    update_verifyotp_mobile_onprofile(
+      user_id: $user_id,
+      mobile_number: $mobile_number,
+      otp: $otp
+    ) {
+      message
+      success
+    }
+  }
+`;

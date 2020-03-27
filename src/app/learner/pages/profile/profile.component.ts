@@ -61,10 +61,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
-    // var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-    // var ps = atob(psd);
-    // this.currentUser = JSON.parse(ps);
-    this.getprofileDetails();
+    // this.getprofileDetails();
     this.getAllcountry();
     this.getAllLanguage();
     this.getBoardsUniv();
@@ -150,13 +147,13 @@ export class ProfileComponent implements OnInit {
   }
 
 //View Profile
-  getprofileDetails() {
-    this.service.view_profile(this.currentUser.user_id).subscribe(data => {
-      console.log('user',this.currentUser.user_id);
-      this.userData = data.data['view_profile'].message;
-      console.log('userdata',this.userData)
-    })
-  }
+  // getprofileDetails() {
+  //   this.service.view_profile(this.currentUser.user_id).subscribe(data => {
+  //     console.log('user',this.currentUser.user_id);
+  //     this.userData = data.data['view_profile'].message;
+  //     console.log('userdata',this.userData)
+  //   })
+  // }
   addnewQual() {
     this.qual.push({
       level: '',
@@ -215,12 +212,12 @@ export class ProfileComponent implements OnInit {
   //Verify OTP
   otpverify(){
     this.otp = this.mailForm.value.otp1+this.mailForm.value.otp2+this.mailForm.value.otp3+this.mailForm.value.otp4
-    this.service.user_registration_verify(this.otp,this.mailForm.value.mobile,).subscribe(data => {
-          if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
-            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otp,this.mailForm.value.mobile).subscribe(data => {
+          if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+            this.alert.openAlert(data.data['uupdate_verifyotp_mobile_onprofile'].message,null)
             this.showotp = true;
           } else{
-            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
           }
       })
 

@@ -8,7 +8,8 @@ import { login,get_course_by_user ,get_country_details,get_qualification_details
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
-  get_district_details,get_change_password_updateprofile, update_mobile_onprofile } from "./operations/learner_mutation"
+  get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
+  update_verifyotp_mobile_onprofile} from "./operations/learner_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -206,6 +207,17 @@ export class LearnerServicesService {
   update_mobile_onprofile (){
     return this.Apollo.query({
       query: update_mobile_onprofile ,
+    })
+  }
+
+  update_verifyotp_mobile_onprofile(user_id,mobile_number,otp){
+    return this.Apollo.query({
+      query:  update_verifyotp_mobile_onprofile,
+      variables: {
+        user_id: user_id,
+        mobile_number: mobile_number,
+        otp: otp
+      }
     })
   }
 };
