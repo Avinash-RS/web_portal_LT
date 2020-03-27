@@ -185,13 +185,14 @@ mat-card {
 ::ng-deep .mat-progress-bar-fill::after {
     background-color: $color-maroon;
 }
+
 .mat-progress-bar {
     height: 15px;
 }
 
 .no_margin {
-    margin-top : -18px;
-    margin-bottom : -18px;
+    margin-top: -18px;
+    margin-bottom: -18px;
 }
 
 ::ng-deep .br-default .br-unit {
@@ -203,12 +204,45 @@ mat-card {
     margin-top: -1px;
     margin-left: 2%;
 }
+
 .rating_number {
     font-size: 3rem;
     color: rgb(111, 113, 114);
     text-align: center;
     // margin-left: 30%;
 }
+
 h2 {
     color: black;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main {
+    height: 400px !important;
+
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner {
+    margin-left: 10% !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
+    width: 1000px !important;
+    height: 500px !important;
+    margin-left: 30px !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div.image-popup {
+    width: 1000px !important;
+    height: 500px !important;
+    margin-left: 30px !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .prev.disable {
+    background-color: rgb(58, 58, 58) !important;
+    color: honeydew !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .next.disable {
+    background-color: rgb(58, 58, 58) !important;
+    color: honeydew !important;
 }
