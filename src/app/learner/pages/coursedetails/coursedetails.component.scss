@@ -1,5 +1,9 @@
 @import "../../assets/variable.scss";
 
+.m-l-2 {
+    margin-left: 2%;
+}
+
 .section_1 {
     background: url('../../../../assets/learner/lens.jpg') !important;
     height: 60vh;
@@ -14,10 +18,10 @@
 
 .section_1_card_1 {
     width: 30%;
-    top: 15%;
+    top: 13%;
     float: right;
     right: 5%;
-    height: 45vh;
+    height: 50vh;
 }
 
 .opacity {
@@ -25,7 +29,7 @@
 }
 
 ::ng-deep .mat-card-title {
-    margin-top: 10% !important;
+    margin-top: 7% !important;
 }
 
 .add_to_cart {
@@ -36,10 +40,6 @@
     color: white;
     font-size: 20px;
     font-weight: 200;
-}
-
-.bg_add_to_Cart {
-    background-color: $color-maroon;
 }
 
 .bg_buy_now {
@@ -62,11 +62,16 @@
 
 .fa {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: $color-maroon;
+    -webkit-text-stroke-color: black;
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
+    background-color: #ebebeb;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 20px;
 }
+
 
 .section_1_a {
     top: 8%;
@@ -89,7 +94,7 @@
 }
 
 ::ng-deep .br-default .br-unit {
-    background: rgb(22, 22, 22) !important;
+    // background: gray !important;
     border-radius: 6px;
     width: 21px;
     height: 23px;
@@ -101,8 +106,6 @@
 }
 
 .section_1_a table {
-    // width: 80%;
-
     td {
         font-size: 18px;
         font-weight: 500;
@@ -159,4 +162,53 @@
         display: inline;
     }
 
+}
+
+.mat-mini-fab {
+    position: fixed;
+    background-color: white;
+    border: 0.5px solid gainsboro;
+    float: inline-end;
+}
+
+mat-card {
+    text-align: center;
+    border: 0.5px solid lightgray;
+    z-index: -1;
+    // box-shadow: 0 6px 1px -1px rgba(227, 226, 226, 0.2), 0 1px 5px 0 rgba(227, 226, 226, 0.2), 0 2px 4px 0 rgba(0,0,0,.12);
+}
+
+.faq_border {
+    border: 1px solid rgb(9, 20, 121);
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: $color-maroon;
+}
+.mat-progress-bar {
+    height: 15px;
+}
+
+.no_margin {
+    margin-top : -18px;
+    margin-bottom : -18px;
+}
+
+::ng-deep .br-default .br-unit {
+    width: 10px !important;
+    font-size: 16px;
+}
+
+.m-l-2 {
+    margin-top: -1px;
+    margin-left: 2%;
+}
+.rating_number {
+    font-size: 3rem;
+    color: rgb(111, 113, 114);
+    text-align: center;
+    // margin-left: 30%;
+}
+h2 {
+    color: black;
 }

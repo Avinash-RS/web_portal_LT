@@ -2,8 +2,8 @@
 
 <div class="section_1"></div>
 <!-- <div class="section_1"></div> -->
-<mat-card style="text-align: center;" class="section_1_card_1 opacity absolute"></mat-card>
-<mat-card style="text-align: center;" class="section_1_card_1 background_trans absolute">
+<mat-card class="section_1_card_1 opacity absolute" style="z-index: 1;"></mat-card>
+<mat-card class="section_1_card_1 background_trans absolute" style="z-index: 1;">
     <mat-card-title>
         <span class="icon f_wt_400 f_size_23">ICON 600</span>
         <!-- <span class="icon">ICON {{course.price}}</span> -->
@@ -11,13 +11,17 @@
         <span class="f_wt_200 f_size_16"> 90% Off </span>
     </mat-card-title>
     <mat-card-content>
-        <p class="day_left"><i class="fa fa-hourglass" style=" -webkit-text-stroke-width: 1px;
-                -webkit-text-stroke-color: black;" aria-hidden="true"></i>1 day left at this price</p>
-        <div> <button mat-raised-button class="add_to_cart bg_add_to_Cart">ADD TO CART</button></div><br>
+        <p class="day_left"><i class="fa fa-hourglass" style="background-color: transparent;" aria-hidden="true"></i>
+            1 day left at this price</p>
+        <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div><br>
         <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
         <div>
-            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300"><i class="fa fa-share" aria-hidden="true"></i>Share</button>
-            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</button>
+            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300">
+                <i class="fa fa-share" style="-webkit-text-stroke-color: #db3137; background-color: transparent; "
+                    aria-hidden="true"></i>Share</button>
+            <button mat-raised-button class="share_text background_trans width_25 f_size_15 f_wt_300">
+                <i class="fa fa-heart" style="-webkit-text-stroke-color: #db3137; background-color: transparent;"
+                    aria-hidden="true"></i>Wishlist</button>
         </div>
     </mat-card-content>
     <br>
@@ -28,53 +32,51 @@
     <!-- <p class="course_name">{{course.course_name}}</p> -->
     <bar-rating [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
     <!-- <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> -->
-    <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur the
+    <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur
+        the
         background image</p>
     <!-- <p class="course_desc">{{course.short_description}}</p> -->
-    <table class="width_80">
+    <table class="width_90">
         <tr>
             <td> Already enrolled</td>
             <!-- <td>{{course.max_student_enrollments_allowed}} Already enrolled</td> -->
             <td>
-                <i class="fa fa-id-card-o" style="background-color: #f8f9fa;
-                width: 18%;font-size:18px;border-radius: 50px;padding: 10px;margin-right: 10px;"></i> Certificate
+                <i class="fa fa-id-card-o"></i> Certificate
             </td>
             <td>
-                <i class="fa fa-refresh" style="background-color: #f8f9fa;
-                width:17%;font-size:20px;-webkit-text-stroke-color: black; 
-                border-radius: 50px;padding: 10px;margin-right: 10px;"></i>Self Placed
+                <i class="fa fa-book"></i>Self Placed
             </td>
         </tr>
         <tr>
-            <td> Last updated</td>
+            <td> <span class="background-maroon border-radius-5 p-5px">Last updated</span></td>
             <!-- <td> Last updated {{course.updated_on}}</td> -->
-            <td> <i class="fa fa-language" style="background-color: #f8f9fa;
-                width: 18%;font-size:25px;-webkit-text-stroke-color: black; 
-                border-radius: 50px;padding: 8px;margin-right: 10px;"></i>
+            <td> <i class="fa fa-language"></i>
                 <!-- {{course.course_language}}</td> -->
                 English</td>
         </tr>
     </table>
+    <!-- <button style="background-color: transparent;"> -->
     <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
-            width: 10%;
-            border-radius: 50px; 
-            padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
+        -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
+        width: 10%;
+        border-radius: 50px; 
+        padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
+    <!-- </button> -->
 
     <div class="course_preview" (click)="coursePlay()">
-        <h1>Course <br> Preview</h1>
+        <h2>Course <br> Preview</h2>
     </div>
 
     <div class="partner_image_div">
-        <img src="../../../../assets/learner/1.jpg"  width="7%" class="float_right">
-        <img src="../../../../assets/learner/1.jpg" width="7%" class="float_right">
-        <img src="../../../../assets/learner/1.jpg" width="7%" class="float_right">
+        <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right  m-l-2 border-radius-5">
+        <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right  m-l-2 border-radius-5">
+        <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right border-radius-5">
     </div>
 </div>
 
 <div class="wrap_content">
     <div class="tabs width_50">
-        <button mat-raised-button (click)="scroll(About)">About</button>
+        <button mat-raised-button>About</button>
         <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
         <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
         <button mat-raised-button (click)="scroll(Review)">Review</button>
@@ -83,37 +85,36 @@
     </div>
 
     <br>
-    <div style="float: right;">
-        <button mat-mini-fab
-            style="position:fixed;background-color: white;border: 0.5px solid gainsboro;float: inline-end;">
-            <i class='fa fa-comments'
-                style='font-size:22px;color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);'>
+    <div class="float_right">
+        <button mat-mini-fab>
+            <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
+            margin-right: 0px;padding: 0px;background: transparent;'>
             </i>
         </button>
     </div>
 
-    <div #About class="about_tab" style="display: flex;">
-        <div style="width: 60%;">
+    <div #About class="about_tab" class="display_flex">
+        <div class="width_60">
             <h2>Details About Course</h2>
             <table>
                 <tr>
-                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Instructor</td>
-                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Ajay</td>
+                    <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Ajay</td>
                     <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
-                    <td style="width: 10%;"></td>
+                    <td class="width_10"></td>
 
                 </tr>
                 <tr>
-                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Pre Requisite</td>
-                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy
+                    <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
                         text of
                         the printing and typesetting industry.</td>
                     <!-- <td>{{course.pre_requisite}}</td> -->
-                    <td style="width: 10%;"></td>
+                    <td class="width_10"></td>
                 </tr>
                 <tr>
-                    <td style="width: 15%;font-size: 16px;font-weight: 500;">Course Description</td>
-                    <td style="width: 40%;font-size: 16px;font-weight: 400;color: grey;">Lorem Ipsum is simply dummy
+                    <td class="width_15 f_size_16 f_wt_500">Course Description</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
                         text of
                         the printing and typesetting industry. Lorem
                         Ipsum has been the
@@ -121,29 +122,26 @@
                         type
                         and scrambled it to make a type specimen book. It has survived not only five centuries</td>
                     <!-- <td>{{course.course_description}}</td> -->
-                    <td style="width: 10%;"></td>
+                    <td class="width_10"></td>
                 </tr>
             </table>
         </div>
-        <div style="width: 40%;">
+        <div class="width_40">
             <h2>This Course Includes</h2>
             <table>
                 <tr>
-                    <td style="width: 5%;">
-                        <i class="fa fa-film" style="background-color: #f8f9fa;
-                    width: 90%;font-size:23px;border-radius: 50px;padding: 8px;"></i>
+                    <td>
+                        <i class="fa fa-film"></i>
                     </td>
                     <td>20 hrs on-demand video</td>
                 </tr>
                 <tr>
-                    <td><i class="fa fa-file" style="background-color: #f8f9fa;
-                width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
+                    <td><i class="fa fa-file"></i></td>
                     <!-- <td>{{course.downloadable_resource_count}} downloadable resources</td> -->
                     <td> downloadable resources</td>
                 </tr>
                 <tr>
-                    <td><i class="fa fa-pause" style="background-color: #f8f9fa;
-                        width: 55%;font-size:23px;border-radius: 50px;padding: 8px;"></i></td>
+                    <td><i class="fa fa-pause"></i></td>
                     <td>Level in Analytics</td>
                     <!-- <td>{{course.course_level}} Level in Analytics</td> -->
                 </tr>
@@ -152,12 +150,12 @@
     </div>
     <br> <br>
     <div #Take_away class="">
-        <h1> TAKE AWAY</h1>
+        <h2> TAKE AWAY</h2>
         <ng-image-slider [images]="imageObject" [autoSlide]=1 [slideImage]=1></ng-image-slider>
-    </div><br>
-    <div style="display: flex">
-        <div #Syllabus style="width: 45%;margin-right: 5%;">
-            <h1> Syllabus</h1>
+    </div><br><br><br>
+    <div class="display_flex">
+        <div #Syllabus class="width_40 m-r-5">
+            <h2> Course Outline</h2>
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -176,32 +174,136 @@
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
-        <div style="width: 40%;margin-left: 5%;">
-            <h1>Learning Paths</h1><br><br>
-            <img src="../../../../assets/learner/lens.jpg" width="70%">
+        <div class="width_40 m-l-5">
+            <h2>Learning Paths</h2><br>
+            <img src="../../../../assets/learner/lens.jpg" width="100%">
         </div>
     </div>
-    <br>
-    <div #FAQ style="width: 60%;">
-        <h1>FAQ</h1>
+    <br><br><br>
+</div>
+<br><br><br>
+<mat-card>
+    <div #Review class="display_flex">
+        <br><br>
+        <div class="width_60">
+            <h2>Reviews</h2>
+            <table>
+                <tr>
+                    <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Ajay</td>
+                    <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
+                    <td class="width_10"></td>
+
+                </tr>
+                <tr>
+                    <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
+                        text of
+                        the printing and typesetting industry.</td>
+                    <!-- <td>{{course.pre_requisite}}</td> -->
+                    <td class="width_10"></td>
+                </tr>
+                <tr>
+                    <td class="width_15 f_size_16 f_wt_500">Course Description</td>
+                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
+                        text of
+                        the printing and typesetting industry. Lorem
+                        Ipsum has been the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                        type
+                        and scrambled it to make a type specimen book. It has survived not only five centuries</td>
+                    <!-- <td>{{course.course_description}}</td> -->
+                    <td class="width_10"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="width_40 float_left">
+            <h2>Students Feedback</h2><br>
+            <div class="display_flex ">
+
+                <div class="width_25 center_align">
+                    <br>
+                    <span class="rating_number f_wt_600">3.0</span>
+                    <!-- <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating> -->
+                    <p>Course rating</p>
+                </div>
+                <div class="width_50">
+                    <div class="display_flex">
+                        <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="70">
+                        </mat-progress-bar>
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
+                        <span class="f_wt_500 f_size_15 m-l-2">4.5</span>
+                    </div>
+                    <br>
+                    <div class="display_flex">
+                        <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="30">
+                        </mat-progress-bar>
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
+                        <span class="f_wt_500 f_size_15 m-l-2">4.0</span>
+                    </div><br>
+                    <div class="display_flex">
+                        <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="90">
+                        </mat-progress-bar>
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="4" [max]="5"></bar-rating>
+                        <span class="f_wt_500 f_size_15 m-l-2">3.5</span>
+                    </div><br>
+                    <div class="display_flex">
+                        <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="50">
+                        </mat-progress-bar>
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="2" [max]="5"></bar-rating>
+                        <span class="f_wt_500 f_size_15 m-l-2">3.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<br><br>
+<div class="wrap_content">
+    <div #FAQ class="width_60">
+        <h2>FAQ</h2>
         <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="faq_border">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Title 1
+                        It has roots in a piece of classical Latin literature from 45 BC, making 
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Sub Title 1
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    content
-                </mat-expansion-panel>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </mat-expansion-panel>
+            <mat-expansion-panel class="faq_border">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        It has roots in a piece of classical Latin literature from 45 BC, making 
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </mat-expansion-panel>
+            <mat-expansion-panel class="faq_border">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        It has roots in a piece of classical Latin literature from 45 BC, making 
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 </div>
-<br><br>
+<br><br><br>
+<!-- <div class="width_90 m-l-5">
+    <h2>
+        Frequently bought together
+    </h2>
+    <br>
+    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+  
+</div>
+<div class="width_90 m-l-5">
+    <h2>
+        People Also Viewed
+    </h2>
+    <br>
+    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+</div> -->
 <app-footer></app-footer>
