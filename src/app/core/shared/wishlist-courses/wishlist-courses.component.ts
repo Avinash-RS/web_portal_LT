@@ -9,6 +9,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 })
 export class WishlistCoursesComponent implements OnInit {
   wishlist: any = [];
+  @Input('from') from: any;
   constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
   ngOnInit() {
