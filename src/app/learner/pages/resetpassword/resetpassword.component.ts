@@ -46,7 +46,7 @@ validator: MustMatch('password', 'confirmpassword'),
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
         
-        this.router.navigate(['Learner/login']);
+        this.router.navigate(['/Learner/login']);
       } else{
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
