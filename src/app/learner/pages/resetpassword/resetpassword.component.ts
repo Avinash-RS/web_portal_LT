@@ -27,9 +27,18 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
 
     this.activeroute.queryParams.subscribe(params => {
-      this.user = params["user_id"];
-      console.log(this.user)
+      if(params["user_id"]){
+        this.user = params["user_id"];
+        console.log(this.user)
+      }
+     else{
+      var userdetails= localStorage.getItem('UserDetails')
+      this.currentUser = JSON.parse(userdetails);
+      this.user = this.currentUser.username;
+     }
+    
     })
+
     this.resetForm = this.formBuilder.group({
       password: new FormControl('', myGlobals.passwordVal),
       confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])

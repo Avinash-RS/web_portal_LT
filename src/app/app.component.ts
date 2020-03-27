@@ -29,7 +29,7 @@ export class AppComponent {
         this.router.navigate(["/Learner/login"]);
       }
     } else {
-      localStorage.clear();
+      // localStorage.clear();
     }
   }
 
