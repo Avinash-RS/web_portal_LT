@@ -16,7 +16,6 @@ export class LearnerHomeComponent implements OnInit {
   constructor(public service: LearnerServicesService,private router:Router,private gs: GlobalServiceService,) { }
 
   ngOnInit() {
-    console.log('ho')
     // if (this.gs.checkLogout()) {
     //   this.userDetailes = this.gs.checkLogout()
     //   console.log('hi',this.userDetailes)

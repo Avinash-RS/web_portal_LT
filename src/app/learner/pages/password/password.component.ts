@@ -17,7 +17,7 @@ export class PasswordComponent implements OnInit {
   usersuggestion:any =[];
   passwordForm: FormGroup;
   systemip:String;
-
+  userid:any;
   // myControl = new FormControl();
   options: string[] = [];
   constructor(private router:Router, 
@@ -42,12 +42,13 @@ export class PasswordComponent implements OnInit {
   get pf() { return this.passwordForm.controls; }
   submit(){
     this.loader.show();
-    this.service.user_registration_done(this.currentUser.user_id,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
+    this.userid=localStorage.getItem('key')
+    this.service.user_registration_done(this.userid,this.passwordForm.value.username,this.passwordForm.value.password,this.systemip).subscribe(data => {
           if (data.data['user_registration_done']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
             localStorage.setItem('UserToken',JSON.stringify(data.data['user_registration_done'].token))
-            this.router.navigate(['Learner/courses']);
+            this.router.navigate(['Learner/MyCourse']);
           } else{
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_done'].message,null)
@@ -56,7 +57,8 @@ export class PasswordComponent implements OnInit {
   }
 
   userNamesuggestion(){
-    this.service.userNamesuggestion(this.currentUser.user_id).subscribe(data => {
+    this.userid=localStorage.getItem('key')
+    this.service.userNamesuggestion(this.userid).subscribe(data => {
       if (data.data['user_registration_username_suggestion']['success'] == 'true') {
         // this.alert.openAlert(data.data['user_registration_username_suggestion'].message,null)
         this.options = data.data['user_registration_username_suggestion'].data

@@ -15,6 +15,7 @@ export class ResetpasswordComponent implements OnInit {
   resetForm: FormGroup;
   currentUser:any = [];
   user:any;
+  username:any;
   constructor(
     private loader : Ng4LoadingSpinnerService,
     private router:Router, 
@@ -40,7 +41,7 @@ validator: MustMatch('password', 'confirmpassword'),
 
   resetpassword(){
     this.loader.show();
-    this.service.resetPassword(this.user,this.resetForm.value.password).subscribe(data => {
+    this.service.resetPassword(this.username,this.resetForm.value.password).subscribe(data => {
       if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)

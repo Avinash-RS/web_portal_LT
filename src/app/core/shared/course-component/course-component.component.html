@@ -2,7 +2,7 @@
   <div class="wishlst" (change)="selectWishlist(course)">
     <!-- <img [ngStyle]="{'background-color':course.wishlisted === ture ? 'yellow' : 'black' }"
       src="../../../../assets/learner/key_down.svg"> -->
-    <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:yellow;"></i>
+    <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:red;"></i>
     <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
   </div>
   <img *ngIf="course.course_img_url != 'null'" src="{{course.course_img_url}}">
@@ -29,7 +29,7 @@
       <button (click)="selectWishlist(course)" class="wishlstinContent">
         <!-- <img [ngClass]="{'background-color':course.wishlisted === ture ? 'yellow' : 'black' }"
           src="../../../../assets/learner/key_down.svg"> -->
-        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:yellow;"></i>
+        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:red;"></i>
         <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
       </button>
       <p (click)="gotoDescription()">

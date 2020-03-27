@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service'
 
@@ -13,29 +13,24 @@ export class AppComponent {
   title = 'Lxpfrontend';
   constructor(private router: Router,
     private gs: GlobalServiceService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.getIPAddress();
   }
 
   ngOnInit() {
     this.getIPAddress();
-      var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
-      var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-      var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
-      var ps = atob(psd)
-      console.log('inside',cookie)
-      if (cookie == 'true') {
-        if ((name || psd) == null) {
-          this.router.navigate(["/Learner/login"]);
-        } 
-      } else {
-        console.log('inside')
-        localStorage.clear();
-        // console.log(this.router.url)
-        this.router.navigate(["/Learner"]);
+    var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
+    var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
+    var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
+    var ps = atob(psd)
+    if (cookie == 'true') {
+      if ((name || psd) == null) {
+        this.router.navigate(["/Learner/login"]);
       }
-    // }
+    } else {
+      localStorage.clear();
+    }
   }
 
   getIPAddress() {

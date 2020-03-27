@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -28,11 +28,20 @@ export class OtpComponent implements OnInit {
   showotp: boolean = false;
   isenable:boolean = true;
   showverify: boolean = false;
+  email:any;
+  useridData:any;
+  userid:any;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
       private loader:Ng4LoadingSpinnerService,
-      public service : LearnerServicesService) { }
+      public service : LearnerServicesService,
+      private activeroute: ActivatedRoute) { 
+        this.activeroute.queryParams.subscribe(params => {
+          this.email = params["email"]
+          this.get_user_detail(this.email)
+        })
+      }
 
 
   @ViewChild('ngOtpInput') ngOtpInput: any;
@@ -65,7 +74,7 @@ export class OtpComponent implements OnInit {
 get f() { return this.otpForm.controls; }
   otpverification(){
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+    this.service.submit_otp(this.userid,'this.currentUser._id',this.otpForm.value.mobile,this.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
@@ -85,6 +94,7 @@ get f() { return this.otpForm.controls; }
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
+            localStorage.setItem("key",this.userid)
             this.router.navigate(['Learner/password']);
           } else{
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
@@ -94,7 +104,7 @@ get f() { return this.otpForm.controls; }
   }
   Resendcode(){
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+    this.service.submit_otp(this.userid,'this.currentUser._id',this.otpForm.value.mobile,this.email).subscribe(data => {
       this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.loader.hide();
@@ -106,5 +116,16 @@ get f() { return this.otpForm.controls; }
   correctotp(){
     this.showverify = true;
   }
-  
+  get_user_detail(email){
+    try {
+      this.service.get_user_detail(email).subscribe(data => {
+        this.useridData=data.data
+        this.userid =this.useridData.get_user_detail.message[0].user_id
+        
+      })
+      
+    } catch (error) {
+        throw error 
+    }
+  }
   }
