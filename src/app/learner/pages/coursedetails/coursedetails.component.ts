@@ -12,8 +12,10 @@ export class CoursedetailsComponent implements OnInit {
   imageObject: {}[];
   course: any;
   wishlist: any = [];
+  syllabus: {}[];
+  open : boolean = false;
 
-  constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,) { }
+  constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
   ngOnInit() {
     var userdetail = this.gs.checkLogout()
@@ -33,13 +35,89 @@ export class CoursedetailsComponent implements OnInit {
     this.imageObject = [{
       image: '../../../../assets/learner/lens.jpg',
       thumbImage: '../../../../assets/learner/lens.jpg'
-    }, {
-      image: '../../../../assets/learner/1.jpg',
-      thumbImage: '../../../../assets/learner/1.jpg'
-    }, {
-      image: '../../../../assets/learner/lens.jpg',
-      thumbImage: '../../../../assets/learner/lens.jpg'
+    // }, {
+    //   image: '../../../../assets/learner/1.jpg',
+    //   thumbImage: '../../../../assets/learner/1.jpg'
+    // }, {
+    //   image: '../../../../assets/learner/lens.jpg',
+    //   thumbImage: '../../../../assets/learner/lens.jpg'
     }]
+      this.syllabus = [{
+      "title": "Lorem ipsum dolor sit ame,",
+      "subtitle": [{
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      }
+      ],
+    },
+    {
+      "title": "Lorem ipsum dolor sit ame,",
+      "subtitle": [{
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      }
+      ],
+    },
+    {
+      "title": "Lorem ipsum dolor sit ame,",
+      "subtitle": [{
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      },
+      {
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" },
+          { "name": "Lorem ipsum dolor sit ame" }
+        ]
+      }
+      ],
+    },
+    ]
   }
 
   scroll(el: HTMLElement) {
@@ -49,5 +127,10 @@ export class CoursedetailsComponent implements OnInit {
 
   coursePlay() {
 
+  }
+  openb() {
+    console.log(this.open)
+    this.open = !this.open
+    console.log(this.open)
   }
 }

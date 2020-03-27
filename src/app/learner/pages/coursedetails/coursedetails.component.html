@@ -94,7 +94,7 @@
     </div>
 
     <div #About class="about_tab" class="display_flex">
-        <div class="width_60">
+        <div class="width_70">
             <h2>Details About Course</h2>
             <table>
                 <tr>
@@ -126,7 +126,7 @@
                 </tr>
             </table>
         </div>
-        <div class="width_40">
+        <div class="width_30">
             <h2>This Course Includes</h2>
             <table>
                 <tr>
@@ -150,26 +150,39 @@
     </div>
     <br> <br>
     <div #Take_away class="">
-        <h2> TAKE AWAY</h2>
+        <h2> Takeaways</h2><br>
         <ng-image-slider [images]="imageObject" [autoSlide]=1 [slideImage]=1></ng-image-slider>
-    </div><br><br><br>
+    </div><br><br><br><br><br><br> <br><br><br> <br><br><br> <br><br><br>
     <div class="display_flex">
         <div #Syllabus class="width_40 m-r-5">
-            <h2> Course Outline</h2>
+            <h2> Course Outline</h2><br>
             <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
+                <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
                         <mat-panel-title>
-                            Title 1
+                            {{i.title}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-expansion-panel>
+                    <mat-expansion-panel *ngFor="let it of i.subtitle">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                Sub Title 1
+                                {{it.name}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        content
+                        <table>
+                            <tr *ngFor="let item of it.content">
+                                <td style="width: 90%;"><i class="fa fa-circle"
+                                        style="background-color: transparent;font-size: 10px;color: black;"
+                                        aria-hidden="true"></i>{{item.name}}</td>
+                                <td><i class="fa fa-play" aria-hidden="true"
+                                        style="font-size:10px;background: rgb(29, 29, 29);color: whitesmoke;"></i></td>
+                                <td>20.00</td>
+                            </tr>
+                        </table>
+                        <!-- <div class="width_100 display_flex">
+                            <span style="width: 90%;" ></span>
+                             style="float: right;"></i>
+                        </div> -->
                     </mat-expansion-panel>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -179,43 +192,77 @@
             <img src="../../../../assets/learner/lens.jpg" width="100%">
         </div>
     </div>
-    <br><br><br>
+   
 </div>
-<br><br><br>
+<br><br><br> 
 <mat-card>
-    <div #Review class="display_flex">
-        <br><br>
-        <div class="width_60">
-            <h2>Reviews</h2>
-            <table>
-                <tr>
-                    <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
-                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Ajay</td>
-                    <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
-                    <td class="width_10"></td>
+    <div #Review class="display_flex m-l-5">
+        <br><br><br>
+        <div class="width_60 float_left">
+            <h2 class="float_left m-l-5">Reviews</h2>
+            <br><br><br>
+            <div class="display_flex width_100">
+                <div class="width_10">
+                    <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px" style="border-radius: 50px;">
+                    <br>
+                    <p class="display_flex">
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
+                        <strong>1</strong>
+                    </p>
+                  
+                </div>
+                <div class="width_15">
+                    <strong>Ankit</strong><br>
+                    <small>1 week ago</small><br>
+                    <small>2 years of experience</small>
+                </div>
+                <div class="width_60">
+                    ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                </div>
+            </div>
+<br>
+            <div class="display_flex width_100">
+                <div class="width_10">
+                    <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px" style="border-radius: 50px;">
+                    <br>
+                    <p class="display_flex">
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="5" [max]="5"></bar-rating>
+                        <strong>5</strong>
+                    </p>
+                  
+                </div>
+                <div class="width_15">
+                    <strong>Anurag</strong><br>
+                    <small>1 week ago</small><br>
+                    <small>2 years of experience</small>
+                </div>
+                <div class="width_50" style="color: rgb(61, 61, 61)">
+                    ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                </div>
+            </div>
+          
+<!-- <button mat-raised-button style="color: red;text-align: center;border: none;" (click)="openb()" >Read more..</button> -->
+<!-- {{open}} -->
+            <div class="display_flex width_100" *ngIf = "open">
+                <div class="width_10">
+                    <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px" style="border-radius: 50px;">
+                    <br>
+                    <p class="display_flex">
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
+                        <strong>1</strong>
+                    </p>
+                  
+                </div>
+                <div class="width_15">
+                    <strong>Ankit</strong><br>
+                    <small>1 week ago</small><br>
+                    <small>2 years of experience</small>
+                </div>
+                <div class="width_50" style="color: rgb(61, 61, 61)">
+                    ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                </div>
+            </div>
 
-                </tr>
-                <tr>
-                    <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
-                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
-                        text of
-                        the printing and typesetting industry.</td>
-                    <!-- <td>{{course.pre_requisite}}</td> -->
-                    <td class="width_10"></td>
-                </tr>
-                <tr>
-                    <td class="width_15 f_size_16 f_wt_500">Course Description</td>
-                    <td class="width_40 f_size_16 f_wt_400" style="color: grey;">Lorem Ipsum is simply dummy
-                        text of
-                        the printing and typesetting industry. Lorem
-                        Ipsum has been the
-                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                        type
-                        and scrambled it to make a type specimen book. It has survived not only five centuries</td>
-                    <!-- <td>{{course.course_description}}</td> -->
-                    <td class="width_10"></td>
-                </tr>
-            </table>
         </div>
         <div class="width_40 float_left">
             <h2>Students Feedback</h2><br>
@@ -263,29 +310,32 @@
     <div #FAQ class="width_60">
         <h2>FAQ</h2>
         <mat-accordion>
-            <mat-expansion-panel class="faq_border">
+            <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        It has roots in a piece of classical Latin literature from 45 BC, making 
+                        It has roots in a piece of classical Latin literature from 45 BC, making
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s,
             </mat-expansion-panel>
-            <mat-expansion-panel class="faq_border">
+            <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        It has roots in a piece of classical Latin literature from 45 BC, making 
+                        It has roots in a piece of classical Latin literature from 45 BC, making
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s,
             </mat-expansion-panel>
-            <mat-expansion-panel class="faq_border">
+            <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        It has roots in a piece of classical Latin literature from 45 BC, making 
+                        It has roots in a piece of classical Latin literature from 45 BC, making
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s,
             </mat-expansion-panel>
         </mat-accordion>
     </div>
