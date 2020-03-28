@@ -229,9 +229,10 @@ mutation get_district_details($country: String,$state: String){
 }
 `;
 export const get_change_password_updateprofile = gql`
-mutation get_change_password_updateprofile($username: String, $password: String){
+mutation get_change_password_updateprofile($username: String, $old_password: String $password: String){
   get_change_password_updateprofile(
     username: $username,
+    old_password: $old_password,
     password: $password
   ) {
     message
@@ -239,24 +240,52 @@ success
   }
 }
 `;
-// export const update_profile = gql`
-//   mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,){
-//     update_profile(
-//       user_id: $user_id,
-//       profile_img: $profile_img,
-//       year_of_birth: $year_of_birth,
-//       doj_lxp: $doj_lxp
-//     ) {
+export const update_profile = gql`
+  mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: String,
+    $social_media: String, $is_active: Boolean, $progress: String, $gender: String, $languages_known: String,
+    $country: String, $state: String, $city_town: String, $about_you: String, $certificate: String, $student: String,
+    $professional: String, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
+    $updated_by_ip: String, $updated_on: String, $updated_by: String){
+    update_profile(
+      user_id: $user_id,
+      profile_img: $profile_img,
+      year_of_birth: $year_of_birth,
+      doj_lxp: $doj_lxp,
+      qualification: $qualification,
+      social_media: $social_media,
+      is_active: $is_active,
+      progress: $progress,
+      gender: $gender,
+      languages_known: $languages_known,
+      country: $country,
+      state: $state,
+      city_town: $city_town,
+      about_you: $about_you,
+      certificate: $certificate,
+      student: $student,
+      professional: $professional,
+      last_login: $last_login,
+      created_by_ip: created_by_ip,
+      created_by: $created_by,
+      created_on: $created_on,
+      updated_by_ip: $updated_by_ip,
+      updated_on: $updated_on,
+      updated_by: $updated_by
+    ) {
+      success
+      message
 
-//     }
-//   }
-// `;
+    }
+  }
+`;
 export const update_mobile_onprofile = gql`
-mutation update_mobile_onprofile{
-	update_mobile_onprofile{
+mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
+	update_mobile_onprofile(
+    user_id: $user_id,
+    mobile_number: $mobile_number,
+    ) {
 	    message
     success
-
 }
 }
 `;

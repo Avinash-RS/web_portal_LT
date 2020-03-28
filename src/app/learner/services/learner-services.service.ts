@@ -9,7 +9,7 @@ import {user_registration,user_registration_mobile_otp_send,user_registration_mo
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
   get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
-  update_verifyotp_mobile_onprofile,update_email_onprofile} from "./operations/learner_mutation"
+  update_verifyotp_mobile_onprofile,update_email_onprofile,update_profile} from "./operations/learner_mutation"
 
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
@@ -176,11 +176,12 @@ export class LearnerServicesService {
   });
   }
 
-  get_change_password_updateprofile(username, password){
+  get_change_password_updateprofile(username,old_password, password){
     return this.Apollo.query({
       query:  get_change_password_updateprofile,
       variables: {
         username: username,
+        old_password: old_password,
         password: password
       }
     })
@@ -206,9 +207,13 @@ export class LearnerServicesService {
     })
   }
 
-  update_mobile_onprofile (){
+  update_mobile_onprofile (user_id,mobile_number){
     return this.Apollo.query({
       query: update_mobile_onprofile ,
+      variables: {
+        user_id: user_id,
+        mobile_number: mobile_number
+      }
     })
   }
 
@@ -255,6 +260,32 @@ export class LearnerServicesService {
         contentid:contentid
       }
     })
+}
+
+update_profile(user_id,profile_img,year_of_birth,doj_lxp,qualification,social_media,is_active,
+  progress,gender,languages_known,country,state,city_town,certificate,about_you,student,
+  professional){
+  return this.Apollo.query({
+    query: update_profile,
+    variables:{
+      user_id: user_id,
+      profile_img: profile_img,
+      year_of_birth: year_of_birth,
+      doj_lxp: doj_lxp,
+      qualification: qualification,
+      social_media: social_media,
+      progress: progress,
+      gender: gender,
+      languages_known: languages_known,
+      country: country,
+      state: state,
+      city_town: city_town,
+      certificate: certificate,
+      about_you: about_you,
+      student: student,
+      professional: professional
+    }
+  })
 }
 };
   

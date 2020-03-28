@@ -183,16 +183,19 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+    // this.service.update_profile(this.currentUser.user_id,).subscribe(data => {
+
+    // })
     
-    if(this.profileDetails.gender === undefined){
-      this.alert.openAlert('Select a value for gender', null)
-    }
-    if(this.profileDetails.profession === undefined){
-      this.alert.openAlert('Select a value for profession', null)
-    }
-    if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
-      this.alert.openAlert('Select values for all fields in location', null)
-    }
+    // if(this.profileDetails.gender === undefined){
+    //   this.alert.openAlert('Select a value for gender', null)
+    // }
+    // if(this.profileDetails.profession === undefined){
+    //   this.alert.openAlert('Select a value for profession', null)
+    // }
+    // if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
+    //   this.alert.openAlert('Select values for all fields in location', null)
+    // }
   }
 
   editEmail(templateRef: TemplateRef<any>) {
@@ -208,7 +211,8 @@ export class ProfileComponent implements OnInit {
   //Update Mobile
   otpverification(){
     this.loader.show();
-    this.service.update_mobile_onprofile().subscribe(data => {
+    this.service.update_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile).subscribe(data => {
+      console.log('mob',this.mailForm.value.mobile);
       if(data.data['update_mobile_onprofile']['success'] == 'true'){
         this.loader.hide();
         this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
@@ -227,7 +231,7 @@ export class ProfileComponent implements OnInit {
       console.log('mob',this.mailForm.value.mobile)
       console.log('data',data);
           if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-            this.alert.openAlert(data.data['uupdate_verifyotp_mobile_onprofile'].message,null)
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
             this.showotp = true;
           } else{
             this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
@@ -235,13 +239,20 @@ export class ProfileComponent implements OnInit {
       })
 
   }
-  // updatePassword(){
-  //   this.service.get_change_password_updateprofile(this.currentUser.username,this.currentUser.ps).subscribe(password => {
-  //     console.log('uname',this.currentUser.username);
-  //     console.log('ps',this.currentUser.ps)
-  //     this.updatePass = password.data['get_change_password_updateprofile'].data;
-  //   })
-  // }
+  //Update Password
+  updatePassword(){
+    var psd = localStorage.getItem('ps');
+    var ps = atob(psd)
+    this.service.get_change_password_updateprofile(this.currentUser.username,ps,this.mailForm.value.newpassword).subscribe(password => {
+      console.log('password',this.mailForm.value.newpassword);
+      if(password.data['get_change_password_updateprofile']['success'] == 'true'){
+        this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
+      } else{
+        this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
+      }
+    })
+  }
+  //Update Email
   updateEmail(){
     this.service.update_email_onprofile(this.currentUser.user_id,this.currentUser.email).subscribe(data => {
       if(data.data['update_email_onprofile']['success'] == 'true'){
