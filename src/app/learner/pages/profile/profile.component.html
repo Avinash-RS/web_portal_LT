@@ -12,9 +12,17 @@
             <div class="row">
               <mat-label>Information about you</mat-label>
             </div>
-            <div class="row">
-              <textarea class="inputs" placeholder="500 characters"
-                [(ngModel)]="info" name="info" maxlength="500"></textarea>
+            <!-- <div class="form-group">
+              <textarea class="form-control inputs" placeholder="500 characters"  formControlName="info"
+                maxlength="500" [ngClass]="{ 'is-invalid': f.info.touched && f.info.errors }"> </textarea>
+                <div *ngIf="f.info.touched && f.info.errors" class="invalid-feedback">
+                <div *ngIf="f.info.errors.maxlength">Full Name must be 500 maximum of characters</div>
+              </div>
+             
+              </div><br> -->
+              <div class="row">
+                <textarea class="inputs" placeholder="500 characters" maxlength="500" 
+                [(ngModel)]="info" name="info"></textarea>
               </div><br>
               <div class="row">
                 <mat-label >Gender</mat-label><span class="text-danger">*</span>

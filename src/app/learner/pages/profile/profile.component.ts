@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit {
     this.getDiscipline();
     this.getSpec();
     this.mailForm = this.formBuilder.group({
+      // info: new FormControl('', myGlobals.fullnameVal),
       mailid: new FormControl('', myGlobals.emailVal),
       mobile: new FormControl('', myGlobals.mobileVal),
           otp1: new FormControl("", []),
