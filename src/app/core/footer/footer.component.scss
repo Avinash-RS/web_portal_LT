@@ -1,0 +1,41 @@
+.footer-container {
+  position: absolute;
+  height: 200px;
+  width: 100%;
+  color: white;
+  background-color: #1f3777 !important;
+  bottom: 0;
+  padding: 20px 50px 10px 50px;
+
+  .content-title {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+
+    .footer-content {
+      width: 15%;
+      .content-header {
+        font-size: 14px;
+        padding-bottom: 5px;
+        padding-left: 30px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #7888b3;
+      }
+      .content {
+        font-size: 10px;
+        color: #c2cbe2;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .copyright-header {
+    display: flex;
+    justify-content: flex-end;
+    color: #c2cbe2;
+    font-size: 10px;
+    .copyright-title {
+        margin-left: 100px;
+    }
+  }
+}
