@@ -114,7 +114,7 @@ get f() { return this.otpForm.controls; }
   })
   }
   correctotp(){
-    this.showverify = true;
+    // this.showverify = true;
   }
   get_user_detail(email){
     try {

@@ -1,5 +1,7 @@
 @import "assets/variable";
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* Add application styles & imports to this file! */
 @import '~ngx-bar-rating/themes/br-default-theme.css';
@@ -20,6 +22,8 @@
   font-weight: 400;
 }
 
+.mat-progress-bar-buffer {
+    background: #bec5d6;
 .f_wt_500 {
   font-weight: 500;
 }
@@ -204,9 +208,11 @@ body {
   margin: 8px;
 }
 
-.mat-progress-bar-buffer {
-  background: #8f9bbb;
-}
+
+// .br-default .br-unit:after {
+//   content: "\2605";
+//   color: #d2d2d2;
+// }
 
 .br-default .br-selected:after {
   color: $color-yellow !important;
@@ -350,5 +356,19 @@ label {
 
 .head {
   text-align: center;
+  color: #1F3777 !important;   
+}
+.mand{
+  color: red !important;
+}
+mat-icon{
+  cursor: pointer;
+  color: #1F3777;
+}
+// .header{
+//   .mat-menu-content {
+//     background-color: #1F3777 !important;
+// }
+// }
   color: #1F3777;
 }
