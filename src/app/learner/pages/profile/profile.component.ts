@@ -47,10 +47,11 @@ export class ProfileComponent implements OnInit {
   languageList: any;
   isenable:boolean = true;
   userData:any = {};
- 
+  showdeletedicon:boolean = false;
   uniValue: void;
+  url:String = '';
   // countryDetails: any = [];
-
+  selectfile = null;
 
   constructor(
     private alert: AlertServiceService,
@@ -165,7 +166,7 @@ export class ProfileComponent implements OnInit {
       console.log('userdata',this.userData)
     })
   }
-  addnewQual() {
+  addnewQual(index) {
     this.qual.push({
       level: '',
       board: '',
@@ -175,11 +176,35 @@ export class ProfileComponent implements OnInit {
       year: '',
       percentage: ''
     });
+    return true;  
   }
+  removelastQual(index){
+    if(this.qual.length == 1){
+      this.alert.openAlert("Can't delete the row when there is only one row", null);  
+      return false;  
+    }else{
+      this.qual.splice(index, 1);   
+      return true;  
+    }
+  
+  }
+
   addnewLink() {
     this.links.push({
       certificate: ''
     })
+    return true;
+  }
+
+  removenewLink(index){
+    if(this.links.length == 1){
+      this.alert.openAlert("Can't delete  when there is only one row", null);  
+      return false;  
+    }else{
+      this.links.splice(index, 1);   
+      return true;  
+    }
+  
   }
 
   updateProfile() {
@@ -262,4 +287,24 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+  
+
+  onSelectFile(event) {
+     this.selectfile = <File>event.target.files[0];
+     console.log( this.selectfile)
+     if(this.selectfile.type != 'image/png'){
+       this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null)
+     } 
+     else if (this.selectfile.size > 1000){
+      this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null)
+     } 
+     else {
+       const fb = new FormData();
+       fb.append('image',this.selectfile,this.selectfile.name)
+       this.service.imageupload(fb).subscribe(data =>{
+           console.log(data)
+       })
+     }
+  }
+   
 }

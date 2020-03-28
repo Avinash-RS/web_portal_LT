@@ -18,20 +18,22 @@ padding-left: -39px;
   margin-top: -24px;
 }
 .subbtn{
-background-color: #1F3777;
-color: white;
-width: 13%;
+background-color:  $color-blue;
+color: $color-white;
+width: 20%;
 border: solid;
+height: 50px;
 }
 .bt{
   text-align: center;
 }
 .popupbtns{
   text-align: center;
-  background-color: #1F3777;
-color: white;
+  background-color: $color-blue;
+color: $color-white;
 width: 85%;
 border: solid;
+height: 50px;
 }
 .avatar {
   vertical-align: middle;
@@ -83,6 +85,9 @@ border: solid;
   z-index: 0;
 }
 .plusicon{
+  margin-top: 7px;
+}
+.plusicon2{
   margin-top: 7px;
 }
 .inputs{
@@ -156,3 +161,9 @@ label{
 }
 
 
+
+.col-sm-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding: 6px;
+}
