@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+// import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-coursedetails',
@@ -11,16 +11,15 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class CoursedetailsComponent implements OnInit {
 
-  title = 'angularowlslider';
+  course: any;
   customOptions1: any = {
-    
     loop: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
     dots: true,
     navSpeed: 700,
-    navText: ['<','>'],
+    navText: ['<', '>'],
     responsive: {
       400: {
         items: 1
@@ -29,11 +28,29 @@ export class CoursedetailsComponent implements OnInit {
     nav: true
   }
 
-  imageObject: {}[];
-  course: any;
+  customOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      }
+    },
+    nav: true
+  }
+
   wishlist: any = [];
   syllabus: {}[];
   open: boolean = false;
+  ins: {}[];
 
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
@@ -42,9 +59,16 @@ export class CoursedetailsComponent implements OnInit {
     this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
-        console.log(this.wishlist)
+        // console.log(this.wishlist)
       }
     });
+    this.service.list_content().subscribe((list_content: any) => {
+      console.log(list_content)
+      if (list_content.data.list_content.success) {
+        this.syllabus = list_content.data.list_content.data
+      }
+    });
+
     this.router.params.subscribe(params => {
       // this.service.viewCurseByID(params.id).subscribe((viewCourse: any) => {
       //   if (viewCourse.data.view_wishlist && viewCourse.data.view_wishlist.success) {
@@ -52,90 +76,104 @@ export class CoursedetailsComponent implements OnInit {
       //   }
       // });
     });
-    this.imageObject = [{
-      image: '../../../../assets/learner/lens.jpg',
-      thumbImage: '../../../../assets/learner/lens.jpg'
-      // }, {
-      //   image: '../../../../assets/learner/1.jpg',
-      //   thumbImage: '../../../../assets/learner/1.jpg'
-      // }, {
-      //   image: '../../../../assets/learner/lens.jpg',
-      //   thumbImage: '../../../../assets/learner/lens.jpg'
-    }]
-    this.syllabus = [{
-      "title": "Lorem ipsum dolor sit ame,",
-      "subtitle": [{
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      }
-      ],
-    },
-    {
-      "title": "Lorem ipsum dolor sit ame,",
-      "subtitle": [{
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      }
-      ],
-    },
-    {
-      "title": "Lorem ipsum dolor sit ame,",
-      "subtitle": [{
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      },
-      {
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" },
-          { "name": "Lorem ipsum dolor sit ame" }
-        ]
-      }
-      ],
+
+    // this.syllabus = [{
+    //   "title": "Lorem ipsum dolor sit ame,",
+    //   "subtitle": [{
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   }
+    //   ],
+    // },
+    // {
+    //   "title": "Lorem ipsum dolor sit ame,",
+    //   "subtitle": [{
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   }
+    //   ],
+    // },
+    // {
+    //   "title": "Lorem ipsum dolor sit ame,",
+    //   "subtitle": [{
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   },
+    //   {
+    //     "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,", "content": [
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" },
+    //       { "name": "Lorem ipsum dolor sit ame" }
+    //     ]
+    //   }
+    //   ],
+    // },
+    // ]
+
+    this.ins = [{
+      "name": "Loe",
+      "img": "../../../../assets/learner/lens.jpg",
+      "content": " mport RoutingModule and Routes into AppModule unless they are imported       Import BrowserAnimationsModule into AppModule unless it is imported.    Import BrowserAnimationsModule into AppModule unless it is imported.     Import CarouselModule into a module which declares a component intended to have a carousel."
+    }, {
+      "name": "Lowwww",
+      "img": "../../../../assets/learner/lens.jpg",
+      "content": " mport RoutingModule and Routes into AppModule unless they are imported       Import BrowserAnimationsModule into AppModule unless it is imported.    Import BrowserAnimationsModule into AppModule unless it is imported.     Import CarouselModule into a module which declares a component intended to have a carousel."
+    }, {
+      "name": "Lsdfsdoe",
+      "img": "../../../../assets/learner/lens.jpg",
+      "content": " mport RoutingModule and Routes into AppModule unless they are imported       Import BrowserAnimationsModule into AppModule unless it is imported.    Import BrowserAnimationsModule into AppModule unless it is imported.     Import CarouselModule into a module which declares a component intended to have a carousel."
+    }, {
+      "name": "asfs",
+      "img": "../../../../assets/learner/lens.jpg",
+      "content": "lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    }, {
+      "name": "masf",
+      "img": "../../../../assets/learner/lens.jpg",
+      "content": "lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     },
     ]
   }
@@ -145,43 +183,16 @@ export class CoursedetailsComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  coursePlay() {
-
+  playCourse(i) {
+    console.log(i);
+    this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
+      console.log(viewCourse)
+    });
   }
+
   openb() {
     console.log(this.open)
     this.open = !this.open
     console.log(this.open)
   }
-
-
-
-  slideIndex = 1;
-  // showSlides(slideIndex);
-
-  //  plusSlides(n) {
-  //   this.showSlides(this.slideIndex += n);
-  // }
-
-  // currentSlide(n) {
-  //   this.showSlides(this.slideIndex = n);
-  // }
-
-  // showSlides(n) {
-  //   var i;
-  //   var slides = document.getElementsByClassName("mySlides");
-  //   var dots = document.getElementsByClassName("dot");
-  //   if (n > slides.length) {this.slideIndex = 1}    
-  //   if (n < 1) {this.slideIndex = slides.length}
-  //   for (i = 0; i < slides.length; i++) {
-  //       slides[i].style.display = "none";  
-  //   }
-  //   for (i = 0; i < dots.length; i++) {
-  //       dots[i].className = dots[i].className.replace(" active", "");
-  //   }
-  //   slides[slideIndex-1].style.display = "block";  
-  //   dots[slideIndex-1].className += " active";
-  // }
-
-
 }

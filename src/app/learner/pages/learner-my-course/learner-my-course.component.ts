@@ -28,7 +28,6 @@ export class LearnerMyCourseComponent implements OnInit {
     this.service.getMyCourse(this.userDetailes._id).subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
-          console.log(getMyCourse.data.get_course_by_user)
           this.myCoursesList = getMyCourse.data.get_course_by_user.message
         }
       }

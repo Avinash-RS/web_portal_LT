@@ -26,7 +26,6 @@ export class WishlistCoursesComponent implements OnInit {
     this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
-        console.log(this.wishlist)
       }
     });
   }

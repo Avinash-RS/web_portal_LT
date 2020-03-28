@@ -68,7 +68,8 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    var id = course.course_id;
+    console.log(course)
+    // var id = course.course_id;
     // this.router.navigate(['/Learner/courseDetail',id])
     this.router.navigate(['/Learner/courseDetail'])
   }
