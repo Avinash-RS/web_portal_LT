@@ -20,6 +20,9 @@ import {
   MatAutocompleteModule,
   MatExpansionModule
 } from '@angular/material';
+import { FooterComponent } from '@core/core/footer/footer.component';
+import { HeaderComponent } from './core/header/header.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -39,7 +42,8 @@ import {
     MatTooltipModule,
     MatProgressBarModule,
     MatAutocompleteModule,
-    MatExpansionModule
+    MatExpansionModule,
+    CommonModule
   ],
   exports: [
     MatButtonModule,
@@ -58,7 +62,9 @@ import {
     MatTabsModule,
     MatProgressBarModule,
     MatAutocompleteModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HeaderComponent,
+    FooterComponent
   ],
   providers: [
     {
@@ -66,6 +72,9 @@ import {
       useValue: {}
     },
   ],
-  declarations: [],
+  declarations: [
+    HeaderComponent,
+    FooterComponent
+  ]
 })
 export class MaterialModule { }
