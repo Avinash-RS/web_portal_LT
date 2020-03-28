@@ -243,6 +243,9 @@ success
 //   mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,){
 //     update_profile(
 //       user_id: $user_id,
+//       profile_img: $profile_img,
+//       year_of_birth: $year_of_birth,
+//       doj_lxp: $doj_lxp
 //     ) {
 
 //     }
@@ -257,12 +260,23 @@ mutation update_mobile_onprofile{
 }
 }
 `;
-export const update_verifyotp_mobile_onprofile = gql`
-  mutation update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
+export const  update_verifyotp_mobile_onprofile = gql`
+  mutation  update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
     update_verifyotp_mobile_onprofile(
       user_id: $user_id,
       mobile_number: $mobile_number,
       otp: $otp
+    ) {
+      success
+      message
+    }
+  }
+`;
+export const update_email_onprofile = gql`
+  mutation update_email_onprofile($user_id: String, $email: String){
+    update_email_onprofile(
+      user_id: $user_id,
+      email: $email
     ) {
       message
       success

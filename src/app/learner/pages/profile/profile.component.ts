@@ -47,6 +47,8 @@ export class ProfileComponent implements OnInit {
   languageList: any;
   isenable:boolean = true;
   userData:any = {};
+ 
+  uniValue: void;
   // countryDetails: any = [];
 
 
@@ -62,9 +64,12 @@ export class ProfileComponent implements OnInit {
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     this.getprofileDetails(this.currentUser.user_id);
+    // this.getprofileDetails();
+    this.getAllLevels();
     this.getAllcountry();
     this.getAllLanguage();
     this.getBoardsUniv();
+    this.getInstitute();
     this.getDiscipline();
     this.getSpec();
     this.mailForm = this.formBuilder.group({
@@ -99,24 +104,30 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-  // getAllLevels(){
-  //   this.service.get_qualification_details().subscribe(level => {
-  //     this.levelValue = level.data[' get_qualification_details'].data;
-  //     if(this.levelValue == null){
-  //       this.alert.openAlert(level.data['get_qualification_details'].message, null);
-  //     }
-  //     console.log('level',this.levelValue)
-  //   })
-  // }
+  getAllLevels(){
+    this.service.get_qualification_details().subscribe(level => {
+      console.log('level',level)
+      this.levelValue = level.data['get_qualification_details'].data;
+      if(this.levelValue == null){
+        this.alert.openAlert(level.data['get_qualification_details'].message, null);
+      }
+      
+    })
+  }
   getBoardsUniv(){
     this.service.get_board_university_details().subscribe(boards => {
-      this.boardValue = boards.data['get_board_university_details'].data;
+      console.log('b',boards)
+      this.boardValue = boards.data['get_board_university_details'].data['board'];
+      this.uniValue = boards.data['get_board_university_details'].data['university'];
       console.log('board', this.boardValue);
+      console.log('uni', this.uniValue);
     })
   }
   getInstitute(){
     this.service.get_institute_details().subscribe(institute => {
+      console.log('firstins',institute)
       this.institutes = institute.data['get_institute_details'].data;
+      console.log('ins',this.institutes)
     })
   }
 
@@ -212,7 +223,9 @@ export class ProfileComponent implements OnInit {
   //Verify OTP
   otpverify(){
     this.otp = this.mailForm.value.otp1+this.mailForm.value.otp2+this.mailForm.value.otp3+this.mailForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otp,this.mailForm.value.mobile).subscribe(data => {
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile,this.otp,).subscribe(data => {
+      console.log('mob',this.mailForm.value.mobile)
+      console.log('data',data);
           if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
             this.alert.openAlert(data.data['uupdate_verifyotp_mobile_onprofile'].message,null)
             this.showotp = true;
@@ -229,4 +242,13 @@ export class ProfileComponent implements OnInit {
   //     this.updatePass = password.data['get_change_password_updateprofile'].data;
   //   })
   // }
+  updateEmail(){
+    this.service.update_email_onprofile(this.currentUser.user_id,this.currentUser.email).subscribe(data => {
+      if(data.data['update_email_onprofile']['success'] == 'true'){
+        this.alert.openAlert(data.data['update_email_onprofile'].message, null);
+      } else {
+        this.alert.openAlert(data.data['update_email_onprofile'].message, null)
+      }
+    })
+  }
 }
