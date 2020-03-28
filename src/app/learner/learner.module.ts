@@ -84,6 +84,7 @@ const routes: Routes = [
     MaterialModule,
     NgxMaskModule.forChild(),
     FormsModule,
+    NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule
