@@ -97,7 +97,7 @@
                   <img [src]="url ? url : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
                   <div style="margin-top: -43%;" >
                     <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
-                    <mat-icon for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
+                    <mat-icon class="camera" for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
                   </div>
                 </div>
                 <div class="col-sm-4"><br>
