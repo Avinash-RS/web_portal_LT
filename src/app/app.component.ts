@@ -1,8 +1,8 @@
-import { Component, HostListener } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-// import { CookieService } from 'ngx-cookie-service';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-// import { CookieModule, CookieService } from 'ngx-cookie';
+import { GlobalServiceService } from '././core/services/handlers/global-service.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,15 +10,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   ipAddress = '';
+  title = 'Lxpfrontend';
   constructor(private router: Router,
-    // private cookieService: CookieService,
-    private http: HttpClient
+    private gs: GlobalServiceService,
+    private http: HttpClient,
   ) {
     this.getIPAddress();
   }
 
   ngOnInit() {
     this.getIPAddress();
+    var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
+    var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
+    var login = localStorage.getItem('login') ? localStorage.getItem('login') : null;
+    console.log(login, typeof login, login == 'true',)
+    var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
+    var ps = atob(psd)
+    if (cookie == 'true' && login == 'true') {
+      if ((name || psd) == null) {
+        this.router.navigate(["/Learner/login"]);
+      }
+    } else {
+      localStorage.clear();
+    }
   }
 
   getIPAddress() {
@@ -26,23 +40,6 @@ export class AppComponent {
       this.ipAddress = res.ip;
       localStorage.setItem('Systemip', this.ipAddress)
     });
-  }
-
-  changeOfRoutes() {
-    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    console.log(userDetailes,this.router.url)
-
-    var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
-    var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-    var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
-    var ps = atob(psd)
-    if (cookie == 'true') {
-      if ((name || psd) == null) {
-        this.router.navigate(["/Learner/login"]);
-      } else {
-        this.router.navigate(["/Learner"]);
-      }
-    }
   }
 
 }

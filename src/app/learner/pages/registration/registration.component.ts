@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '../../../common/globals'; 
+import * as myGlobals from '@core/globals'; 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          username: new FormControl('', myGlobals.fullnameVal),
+         fullname: new FormControl('', myGlobals.fullnameVal),
           email: new FormControl('',myGlobals.emailVal),
           termsandconditions: new FormControl('', [])
       }, {
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 
   Submit() {
     this.loader.show();
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.username,this.registerForm.value.termsandconditions)
+   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.fullname,this.registerForm.value.termsandconditions)
     .subscribe(data => {
         
           if (data.data['user_registration']['success'] == 'true') {

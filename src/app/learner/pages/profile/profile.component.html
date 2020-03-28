@@ -1,83 +1,400 @@
 <app-header></app-header>
+<div class="profile">
 <div class="limiter">
   <div class="container-reg200 p-t-77">
-    <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
-      <div class="row">
-        <div class="col-sm-6 label">
-          <label>Information about you</label>
-          <div class="row">
-            <textarea></textarea>
-          </div><br>
-          <div class="row ">
-            <div class="col-sm-2 label">
-              <label>Gender</label><span class="mand">*</span>
+    <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30"><br>
+      <div class="overAll">
+        <div>
+          <form #createForm="ngForm">
+      <mat-grid-list class="masterGrid" cols="2" rowHeight="2:1">
+        <mat-grid-tile class="grid1">
+          <form>
+            <div class="row">
+              <mat-label>Information about you</mat-label>
             </div>
-            <div class="col-sm-6">
-              <mat-radio-group>
-                <mat-radio-button value="M">M</mat-radio-button>
-                <mat-radio-button value="F">F</mat-radio-button>
-                <mat-radio-button value="O">Rather not say</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2 label">
-              <label>I am a</label><span class="mand">*</span>
-            </div>
-            <div class="col-sm-6">
-            <mat-radio-group>
-              <mat-radio-button value="student">Student</mat-radio-button>
-              <mat-radio-button value="professional">Professional</mat-radio-button>
-            </mat-radio-group>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-            <label>Language Known</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-            <mat-select>
-              <mat-option>Tamil</mat-option>
-              <mat-option>English</mat-option>
-              <mat-option>Hindi</mat-option>
-            </mat-select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <label>Location</label><span class="mand">*</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <mat-select>
-                <mat-option selected>Tamil</mat-option>
-                <mat-option>English</mat-option>
-                <mat-option>Hindi</mat-option>
-              </mat-select>
+            <!-- <div class="form-group">
+              <textarea class="form-control inputs" placeholder="500 characters"  formControlName="info"
+                maxlength="500" [ngClass]="{ 'is-invalid': f.info.touched && f.info.errors }"> </textarea>
+                <div *ngIf="f.info.touched && f.info.errors" class="invalid-feedback">
+                <div *ngIf="f.info.errors.maxlength">Full Name must be 500 maximum of characters</div>
               </div>
-              <div class="col-sm-2">
-                <mat-select>
-                  <mat-option>Tamil</mat-option>
-                  <mat-option>English</mat-option>
-                  <mat-option>Hindi</mat-option>
-                </mat-select>
+             
+              </div><br> -->
+              <div class="row">
+                <textarea class="inputs" placeholder="500 characters" maxlength="500" 
+                [(ngModel)]="info" name="info"></textarea>
+              </div><br>
+              <div class="row">
+                <mat-label >Gender</mat-label><span class="text-danger">*</span>
+                <div class="col">
+                  <mat-radio-group [(ngModel)]="profileDetails.gender" name="gender" required>
+                    <mat-radio-button value="M">M</mat-radio-button>
+                    <mat-radio-button value="F">F</mat-radio-button>
+                    <mat-radio-button value="O">Rather not say</mat-radio-button>
+                  </mat-radio-group>
                 </div>
-                <div class="col-sm-2">
-                  <mat-select>
-                    <mat-option>Tamil</mat-option>
-                    <mat-option>English</mat-option>
-                    <mat-option>Hindi</mat-option>
+              </div>
+              <div class="row space5">
+                <mat-label>I am a</mat-label><span class="text-danger">*</span>
+                <div class="col studentradio">
+                  <mat-radio-group [(ngModel)]="profileDetails.profession" name="profession" required>
+                    <mat-radio-button value="student">Student</mat-radio-button>
+                    <mat-radio-button value="professional">Professional</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="row space5">
+                <mat-label>Language Known</mat-label><br>
+              </div>
+              <div class="row language">
+                <mat-select multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language">
+                  <mat-option *ngFor="let item of languageList" [value]="item._id">
+                    {{item.languagename}}
+                  </mat-option>
+                </mat-select>
+              </div><br>
+              <div class="row">
+                <mat-label>Location</mat-label><span class="text-danger">*</span><br>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <mat-select class="selectinputs" placeholder="Country" [(ngModel)]="profileDetails.country" name="country" 
+                    (selectionChange)="getAllState($event)" required>
+                      <mat-option [value]="country._id" *ngFor="let country of countryValue">
+                        {{country.countryname}}
+                      </mat-option>
+                    </mat-select>
+                </div>
+                <div class="col">
+                  <mat-select class="selectinputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" 
+                  (selectionChange)="getDistrict($event)" required>
+                    <mat-option [value]="state._id" *ngFor="let state of stateValue">
+                      {{state.statename}}
+                    </mat-option>
                   </mat-select>
+                </div>
+                <div class="col">
+                  <mat-select class="selectinputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
+                    <mat-option [value]="city._id" *ngFor="let city of cityValue">
+                      {{city.districtname}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+          </form>
+        </mat-grid-tile>
+        <!----------------------------Profile--------------------->
+        <mat-grid-tile>
+          <form style="margin-left: 62%;">
+            <!-- <div class=""><br><br> -->
+              <div class="row myprofile">
+                <label >My Profile</label>
+                <mat-icon class="createicon">create</mat-icon>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <img [src]="url ? url : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
+                  <div style="margin-top: -43%;" >
+                    <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+                    <mat-icon class="camera" for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
                   </div>
+                </div>
+                <div class="col-sm-4"><br>
+                  <mat-label>{{userData.full_name}}</mat-label><br>
+                  <mat-label>Username</mat-label><br>
+                  <mat-label>DOJlxp</mat-label>
+              </div>
+              </div>
+
+
+           
+
+              <div class="row">
+                <!-- <div class="col"> -->
+               
+                <!-- </div><br> -->
+               
+                <div class="col">
+                  <md-button class="profilecomplete">10% </md-button>
+                  <section class="example-section">
+                    <mat-progress-bar class="example-margin" mode="determinate" value="10">
+                    </mat-progress-bar>
+                  </section>
+                </div>
+              
+              </div>
+             
+
+              <div class="Edit">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-label>Password</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editPassword(passwordDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-sm-3" >
+                    <mat-label *ngIf="userData.user_mobile">{{userData.user_mobile.mobile_number}}</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editmobno(mobDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-label>{{userData.email}}</mat-label>
+                  </div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
+                    <mat-icon class="createicon" (click)="editEmail(emailDialog)">create</mat-icon>
+                  </div>
+                </div><br>
+              </div>
+            <!-- </div> -->
+          </form>
+        </mat-grid-tile>
+      </mat-grid-list><br><br>
+      <!-----------------------Profile End----------------------->
+      <div class="qual">
+      <div class="row">
+        <mat-label>Qualification</mat-label><span class="text-danger">*</span>
+      </div>
+      <div class="row" *ngFor="let qualification of qual; let i = index;">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level" required>
+                <mat-option [value]="level.level_id" *ngFor="let level of levelValue">
+                  {{level.level_name}}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-sm-3">
+              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" 
+               required>
+                <mat-option [value]="board.Board_Id" *ngFor="let board of boardValue, let univ of uniValue">
+                  {{board.Board_Name}}
+                  {{univ.University_Name}}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-sm-3">
+              <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute" required>
+                <mat-option [value]="item.institute_id" *ngFor="let item of institutes">
+                  {{item.institute_name}}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-sm-3">
+              <mat-select class="inputs" [(ngModel)]="qualification.discipline" name="discipline"
+                placeholder="Discipline" required>
+                <mat-option [value]="item.discipline_id" *ngFor="let item of dis">
+                  {{item.discipline_name}}
+                </mat-option>
+              </mat-select>
+            </div>
           </div>
         </div>
-        <div class="col-sm-6 label" style="text-align:right">
-          <label>My Profile</label><span></span>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-3">
+              <mat-select class="inputs" [(ngModel)]="qualification.spec" name="spec" placeholder="Specification" required>
+                <mat-option [value]="item.specification_id" *ngFor="let item of specValue">
+                  {{item.specification_name}}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-sm-3">
+              <input type="text"  class="inputs" placeholder="Year of Passing"  mask="0000" [(ngModel)]="qualification.year"
+                name="year" maxlength="4" minlength="4" required>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="inputs" placeholder="Percentage" mask="00.00" [(ngModel)]="qualification.percentage" name="percentage" required>
+            </div>
+            <div class="col-sm-3 plusicon">
+              <mat-icon  (click)="addnewQual(i)">add_circle_outline</mat-icon>
+              <mat-icon   (click)="removelastQual(i)">delete</mat-icon>
+            </div>
+          </div><br>
         </div>
+      </div> 
+      </div><br>
+      <div>
+      <div class="row certificate" *ngFor="let link of links; let i = index;">
+        <div class="col-sm-2">
+          <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
+        </div>
+        <div class="col-sm-2 plusicon2">
+          <mat-icon (click)="addnewLink(i)">add_circle_outline</mat-icon>
+          <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
+        </div>
+      </div><br>
       </div>
+      <div class="row certificate">
+        <div class="col-sm-2">
+          <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
+        </div>
+      </div><br>
+      <div *ngIf="profileDetails.profession == 'professional'">
+        <div class="row">
+          <mat-label>Experience</mat-label><span class="text-danger">*</span>
+        </div>
+        <div class="row experirnce">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-4">
+                <input type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.totExp"
+                  name="totExp" maxlength="2" required>
+              </div>
+              <div class="col-sm-4">
+                  <input class="inputs" placeholder="Current Organisation"
+                  [(ngModel)]="profileDetails.currentOrg" name="currentOrg" minlength="4" maxlength="16" required>
+                </div>
+              <div class="col-sm-4">
+                <input class="inputs" placeholder="Current role" [(ngMdel)]="currentRole"
+                  name="profileDetails.currentRole" required>
+              </div>
+            </div>
+          </div>
+        </div><br>
+      </div>
+
+      <div class="bt">
+        <button class="subbtn" (click)="updateProfile()">Submit</button>
+      </div><br>
+    </form>
+      </div>
+    
+      <!------------------------------Change Email Dialog---------------------->
+      <ng-template #emailDialog>
+        <h1 class="head">Change the Mail ID</h1>
+        <mat-dialog-content>
+          <form [formGroup]="mailForm">
+            <div class="form-group">
+              <label>Enter new mail id</label>
+              <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
+                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
+              <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
+                <div *ngIf="f.mailid.errors.required">Email is required</div>
+                <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
+              </div>
+            </div>
+          </form><br>
+        </mat-dialog-content>
+        <mat-dialog-actions class="bt"> 
+            <button class="popupbtns" (click)="updateEmail()">
+              Submit
+            </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
+      <!------------------------------Change mobno Dialog---------------------->
+      <ng-template #mobDialog>
+        <h1 class="head">Change the Mobile No</h1>
+        <mat-dialog-content>
+          <form [formGroup]="mailForm">
+            <div class="form-group">
+              <label>Enter new mobile no</label>
+              <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control"
+                pattern="[0-9]{10}" [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
+              <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
+                <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
+                </div>
+              </div>
+            </div>
+            <p class="head">OTP will be send to this number</p>
+            <div *ngIf="showotp"><br>
+              <p class="head">OTP Code</p>
+
+              <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
+                formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+
+              <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
+                formControlName="otp2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+
+              <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
+                formControlName="otp3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+
+              <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
+                formControlName="otp4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+              <br><br>
+            </div>
+            <div *ngIf="showotp">
+              <button class="popupbtns" (click)="otpverify()">Verify</button>
+            </div><br>
+            <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
+          </form>
+        </mat-dialog-content>
+        <mat-dialog-actions *ngIf="isenable">
+          <button class="popupbtns" (click)="otpverification()">
+            Verification
+          </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
+      <!---------------------------------Password Dialog--------------------------------->
+      <ng-template #passwordDialog>
+        <h1 class="head">Change the Password</h1>
+        <mat-dialog-content>
+          <form [formGroup]="mailForm">
+            <div class="form-group">
+              <label>Enter the current password</label>
+              <input type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" />
+              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
+                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
+                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture
+                  of uppercase and lowercase letters.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Enter the new password</label>
+              <input type="password" formControlName="newpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
+              <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.newpassword.errors.required">New Password is required</div>
+                <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 6 characters</div>
+                <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture
+                  of uppercase and lowercase letters.</div>
+                <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div>
+            <p class="head">The password should not be last password</p>
+            <div class="form-group">
+              <label>Confirm the new password</label>
+              <input type="password" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Confirm Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
+              <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
+                <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture of uppercase and lowercase letters.</div>
+                <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div>
+          </form><br>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+          <button class="popupbtns" (click)="updatePassword()">
+            Submit
+          </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
+    </div>
     </div>
   </div>
-</div>
+  </div>

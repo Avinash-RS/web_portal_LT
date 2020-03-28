@@ -128,3 +128,187 @@ export const get_forgot_password_byresetpassword = gql`
     }
   }
 `;
+export const view_profile = gql`
+  mutation view_profile($user_id: String) {
+    view_profile(user_id:$user_id) 
+    {
+      message {
+full_name
+email,
+user_id
+user_mobile{
+mobile_number,
+
+}
+user_profile{
+_id
+qualification{
+qualification
+institute
+discipline
+year_of_passing
+percentage
+
+}
+social_media{
+link
+img
+}
+languages_known
+about_you
+certificate
+user_id
+profile_img
+year_of_birth
+created_on
+progress
+is_active
+gender
+country
+state
+city_town
+student
+last_login
+created_by
+updated_on
+updated_by
+updated_by_ip
+
+}
+}
+success
+  }
+}
+`;
+
+export const get_state_details = gql`
+    mutation   get_state_details($_id: String){
+      get_state_details(
+        _id: $_id
+      ) {
+        message
+    success
+    data{
+      _id
+      statename
+      stateshortcode
+      country
+      created_by
+      created_on
+      created_by_ip
+      updated_on
+      updated_by
+      updated_by_ip
+      is_active
+    }
+      }
+    }
+    `;
+
+export const get_district_details = gql`
+mutation get_district_details($country: String,$state: String){
+	get_district_details(
+	country: $country,
+	state: $state) {
+	  message
+    success
+    data{
+       _id
+      districtname
+      state
+      country
+      created_by
+      created_on
+      created_by_ip
+      updated_on
+      updated_by
+      updated_by_ip
+      is_active
+    }
+} 
+}
+`;
+export const get_change_password_updateprofile = gql`
+mutation get_change_password_updateprofile($username: String, $old_password: String $password: String){
+  get_change_password_updateprofile(
+    username: $username,
+    old_password: $old_password,
+    password: $password
+  ) {
+    message
+success
+  }
+}
+`;
+export const update_profile = gql`
+  mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: String,
+    $social_media: String, $is_active: Boolean, $progress: String, $gender: String, $languages_known: String,
+    $country: String, $state: String, $city_town: String, $about_you: String, $certificate: String, $student: String,
+    $professional: String, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
+    $updated_by_ip: String, $updated_on: String, $updated_by: String){
+    update_profile(
+      user_id: $user_id,
+      profile_img: $profile_img,
+      year_of_birth: $year_of_birth,
+      doj_lxp: $doj_lxp,
+      qualification: $qualification,
+      social_media: $social_media,
+      is_active: $is_active,
+      progress: $progress,
+      gender: $gender,
+      languages_known: $languages_known,
+      country: $country,
+      state: $state,
+      city_town: $city_town,
+      about_you: $about_you,
+      certificate: $certificate,
+      student: $student,
+      professional: $professional,
+      last_login: $last_login,
+      created_by_ip: created_by_ip,
+      created_by: $created_by,
+      created_on: $created_on,
+      updated_by_ip: $updated_by_ip,
+      updated_on: $updated_on,
+      updated_by: $updated_by
+    ) {
+      success
+      message
+
+    }
+  }
+`;
+export const update_mobile_onprofile = gql`
+mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
+	update_mobile_onprofile(
+    user_id: $user_id,
+    mobile_number: $mobile_number,
+    ) {
+	    message
+    success
+}
+}
+`;
+export const  update_verifyotp_mobile_onprofile = gql`
+  mutation  update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
+    update_verifyotp_mobile_onprofile(
+      user_id: $user_id,
+      mobile_number: $mobile_number,
+      otp: $otp
+    ) {
+      success
+      message
+    }
+  }
+`;
+export const update_email_onprofile = gql`
+  mutation update_email_onprofile($user_id: String, $email: String){
+    update_email_onprofile(
+      user_id: $user_id,
+      email: $email
+    ) {
+      message
+      success
+    }
+  }
+`;

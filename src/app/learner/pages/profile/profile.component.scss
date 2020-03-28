@@ -1,29 +1,173 @@
-.container-reg200 {
-    width: 100%;
-    height: 100vh !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color:white;
+@import "../../../../assets/variable.scss";
+.overAll{
+  margin-left: 6px;
+  margin-top: 6px;
 }
-.wrap-reg {
-    width: 90%;
-    height: auto;
-    background: #fff !important;
-    border-radius: 3px;
-    overflow: hidden;
-    background-color:skyblue !important;
-    box-shadow: blue;
-  }
-.simple-card {
-    max-width: 400px !important;
-  }
-  textarea {
-    width: 314px;
+textarea {
+  width: 314px;
+  border-radius: 4px;
 }
 .mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+margin-left: 25px;
+}
+figure.mat-figure {
+padding-left: -39px;
+}
+.profilegrid{
+  margin-left: 451px;
+  margin-top: -24px;
+}
+.subbtn{
+background-color:  $color-blue;
+color: $color-white;
+width: 20%;
+border: solid;
+height: 50px;
+}
+.bt{
+  text-align: center;
+}
+.popupbtns{
+  text-align: center;
+  background-color: $color-blue;
+color: $color-white;
+width: 85%;
+border: solid;
+height: 50px;
+}
+.avatar {
+  vertical-align: middle;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-left: -73px;
+
+}
+.camera{
+  background-color: #f8f9fa;
+  border-radius: 50%;
+}
+
+
+
+.mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+  background: $color-blue !important;
+}
+
+.masterGrid{
+  margin-top: -4%;
+}
+.createicon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  font-size: 17px;
+  color: $color-blue !important;
+  margin-top: -1px;
+  margin-left: 10px;
+}
+
+.Edit{
+  margin-left: -59px;
+  margin-top: 21px;
+}
+.certificate{
+  margin-left: -30px;
+}
+.myprofile{
+  margin-left: 50px;
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  color:$color-blue;
+  margin-top: 37%;
+}
+.cameraicon{
+  margin-left: -47px;
+  margin-top: 97px;
+  font-size: 20px;
+  color: $color-blue;
+  z-index: 0;
+}
+.plusicon{
+  margin-top: 7px;
+}
+.plusicon2{
+  margin-top: 7px;
+}
+.inputs{
+  border: 1px solid;
+  padding: 8px !important;
+  border-radius: 5px;
+  color: $color-blue;
+  width: 100%;
+}
+
+.selectinputs{
+  border: 1px solid;
+  padding: 8px !important;
+  border-radius: 5px;
+  color: $color-blue;
+  width: 105px
+}
+
+.grid1 {
+  left: 0px;
+  width: 50%;
+  margin-top: -51px;
+  padding-top: 27%;
+  margin-left: -12%;
+}
+
+.language{
+   padding-left: 18px;
+}
+.doj{
+  margin-left: 54px;
+  margin-top: -111px;
+}
+.example-section {
+  margin-left: -88px;
+  margin-right: 8%;
+  margin-top: 0%;
+  height: 0px;
+}
+.example-margin {
+  margin: 0 10px;
+  color:$color-white;
+  border: 2px solid;
+  border-radius: 16px;
+  height: 8px;
+  width: 100%;
+}
+.studentradio {
+  margin-left: 5px;
+}
+.experirnce{
+  margin-left: -33px;
+}
+.space5{
+  margin-top: 5px;
+}
+
+.profilelabe{
+  font-size: 10px
+}
+.profilecomplete{
+  color: $color-blue;
+  margin-left: 50px;
+  text-align: center !important;
+}
+label{
+  color: #1F3777;
+}
+.qual{
+  margin-left: 6px;
+}
+
+
+
+.col-sm-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding: 6px;
 }
