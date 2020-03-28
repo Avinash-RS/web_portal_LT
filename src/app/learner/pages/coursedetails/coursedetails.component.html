@@ -20,7 +20,8 @@
                     <i class="fa fa-share"
                         style="-webkit-text-stroke-color: #db3137;  font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true"></i>Share</button>
-                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300" (click)="selectWishlist(course)" >
+                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300"
+                    (click)="selectWishlist(course)">
                     <i class="fa fa-heart"
                         style="-webkit-text-stroke-color: #db3137; font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true" *ngIf="course.wishlisted == false"></i>
@@ -406,4 +407,4 @@
     <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
 </div> -->
 </div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
