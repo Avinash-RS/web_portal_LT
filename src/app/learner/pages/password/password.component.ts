@@ -12,7 +12,9 @@ import * as myGlobals from '@core/globals';
   templateUrl: './password.component.html',
   styleUrls: ['./password.component.scss']
 })
+
 export class PasswordComponent implements OnInit {
+  
   currentUser: any = [];
   usersuggestion:any =[];
   passwordForm: FormGroup;
@@ -27,6 +29,8 @@ export class PasswordComponent implements OnInit {
     public service : LearnerServicesService) { }
 
   ngOnInit() {
+    
+    
     var user = localStorage.getItem('UserDetails')
     this.systemip = localStorage.getItem('Systemip')
     this.currentUser = JSON.parse(user);
@@ -34,10 +38,11 @@ export class PasswordComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
             username: new FormControl('', myGlobals.usernameVal),
             password: new FormControl('', myGlobals.passwordVal),
-            confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+            // confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
   }, {
     validator: MustMatch('password', 'confirmpassword'),
   });
+  
   }
   get pf() { return this.passwordForm.controls; }
   submit(){
