@@ -6,8 +6,8 @@ COPY package*.json ./
 
 RUN npm install
 RUN npm install ngx-bar-rating
-RUN npm i ngx-spinner
 RUN npm i ngx-mask
+RUN npm install ngx-owl-carousel-o
 
 COPY . .
 
