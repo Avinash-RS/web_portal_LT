@@ -3,13 +3,15 @@ import { Apollo } from "apollo-angular";
 
 import { login,get_course_by_user ,get_country_details,get_qualification_details,
   get_board_university_details,get_discipline_details,get_specification_details,
-  get_institute_details ,get_language_details,get_user_detail} from "./operations/learner_query";
+  get_institute_details ,get_language_details,get_user_detail,list_content,syllabus_of_particular_scorm } from "./operations/learner_query";
 
 import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
   get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
   update_verifyotp_mobile_onprofile,update_email_onprofile} from "./operations/learner_mutation"
+
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
   providedIn: 'root'
 })
@@ -238,4 +240,22 @@ export class LearnerServicesService {
       }
     })
   }
+  list_content(){
+    return this.Apollo.query({
+      query:list_content,
+      variables:{
+        
+      }
+    })
+  }
+  syllabus_of_particular_scorm(contentid){
+    return this.Apollo.query({
+      query:syllabus_of_particular_scorm,
+      variables:{
+        contentid:contentid
+      }
+    })
+}
 };
+  
+

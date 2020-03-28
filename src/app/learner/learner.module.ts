@@ -6,8 +6,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from "ngx-bar-rating";
-// import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxMaskModule } from 'ngx-mask'
+import { HttpClientModule } from '@angular/common/http';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 //local
 import { HeaderComponent } from '@core/core/header/header.component';
 import { LoginComponent } from '@learner/pages/login/login.component';
@@ -28,6 +30,7 @@ import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
+import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 //others
 
 const routes: Routes = [
@@ -42,7 +45,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  {path :  "terms",component:TermsconditionsComponent}
+  {path :  "terms",component:TermsconditionsComponent},
+  { path: 'scorm', component: ScormplayerComponent },
 ];
 
 @NgModule({
@@ -64,14 +68,15 @@ const routes: Routes = [
     WishlistCoursesComponent,
     LearnerMyCourseComponent,
     ResetpasswordComponent,
-    TermsconditionsComponent
+    TermsconditionsComponent,
+    ScormplayerComponent
   ],
 
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
   imports: [
-    // NgImageSliderModule,
+    CarouselModule,
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
@@ -80,10 +85,10 @@ const routes: Routes = [
     NgxMaskModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
-
-
+    HttpClientModule,
+    ApolloModule
   ],
-  providers: [],
+  providers: [Apollo],
   entryComponents: []
 })
 export class LearnerModule { }
