@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
@@ -20,7 +20,6 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClient,
         ReactiveFormsModule,
         FormsModule,
         MatButtonModule,
@@ -38,7 +37,7 @@ describe('LoginComponent', () => {
         MatTooltipModule,
         HttpClientModule,
         ApolloModule,
-        Apollo,
+        RouterModule.forRoot([]),
         HttpLinkModule],
       declarations: [LoginComponent],
       schemas: [
@@ -65,7 +64,7 @@ describe('LoginComponent', () => {
     expect(component.loginForm.valid).toBeFalsy();
   });
 
-  it('email field validity', () => {
+  it('username field validity', () => {
 
     let errors = {};
     let uname = component.loginForm.controls['username'];
@@ -79,15 +78,36 @@ describe('LoginComponent', () => {
     expect(errors['required']).toBeFalsy();
     expect(errors['pattern']).toBeTruthy();
 
+    uname.setValue("te");
+    errors = uname.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['minlength']).toBeTruthy();
+
+    uname.setValue("test5test10test16test");
+    errors = uname.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['maxlength']).toBeTruthy();
+
     uname.setValue("test");
     errors = uname.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
 
     uname.setValue("test123");
     errors = uname.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+
+    uname.setValue("123");
+    errors = uname.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
   });
 
   it('password field validity', () => {
@@ -118,16 +138,6 @@ describe('LoginComponent', () => {
     component.loginForm.controls['username'].setValue("test");
     component.loginForm.controls['password'].setValue("123Aa!@#");
     expect(component.loginForm.valid).toBeTruthy();
-
-    // let user: User;
-    // // Subscribe to the Observable and store the user in a local variable.
-    // component.loggedIn.subscribe((value) => user = value);
-
-    // Trigger the login function
     component.login();
-
-    // Now we can check to make sure the emitted value is correct
-    // expect(user.email).toBe("test@test.com");
-    // expect(user.password).toBe("123456789");
   });
 });

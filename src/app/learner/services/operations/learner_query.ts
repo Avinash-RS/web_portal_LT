@@ -11,6 +11,7 @@ export const login = gql`
         is_active
         username
         token
+        user_id
       }
     }
   }`;
