@@ -28,6 +28,7 @@ import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
+import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 //others
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  {path :  "terms",component:TermsconditionsComponent}
+  {path :  "terms",component:TermsconditionsComponent},
+  { path: 'scorm', component: ScormplayerComponent },
 ];
 
 @NgModule({
@@ -64,7 +66,8 @@ const routes: Routes = [
     WishlistCoursesComponent,
     LearnerMyCourseComponent,
     ResetpasswordComponent,
-    TermsconditionsComponent
+    TermsconditionsComponent,
+    ScormplayerComponent
   ],
 
 
