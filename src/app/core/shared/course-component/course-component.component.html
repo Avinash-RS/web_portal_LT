@@ -14,15 +14,15 @@
       <strong class="price">Rs {{course.price | number }}</strong></span>
   </p>
 
-  <!-- <button mat-raised-button class="status" block
+   <button mat-raised-button class="status" block (click) = "goTocourse(course.text || 'Start')"
     [ngStyle]="{'background-color':course.text === 'Start' ? 
-    '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '028514' : '#1f3777' }">{{course.text}}</button>
+    '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '028514' : '#1f3777' }">{{course.text || 'Start'}}</button>
   <br>
   <small class="progressBar">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
   <mat-progress-bar *ngIf="course.text === 'Resume'" mode="determinate" value="{{course.statusValue}}">
-  </mat-progress-bar> -->
-  <button *ngIf="from == 'myCourse'" mat-raised-button class="status" block
-    style="background-color:#1f3777 ;">Start</button>
+  </mat-progress-bar> 
+  <!-- <button *ngIf="from == 'myCourse'" mat-raised-button class="status" block
+    style="background-color:#1f3777 ;">Start</button> -->
 
   <div class="content">
     <div class="text">

@@ -22,15 +22,16 @@ export class AppComponent {
     this.getIPAddress();
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
     var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-    // var login = localStorage.getItem('true') ? localStorage.getItem('true') : null;
+    var login = localStorage.getItem('login') ? localStorage.getItem('login') : null;
+    console.log(login, typeof login, login == 'true',)
     var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
     var ps = atob(psd)
-    if (cookie == 'true' ) {
+    if (cookie == 'true' && login == 'true') {
       if ((name || psd) == null) {
         this.router.navigate(["/Learner/login"]);
       }
     } else {
-      // localStorage.clear();
+      localStorage.clear();
     }
   }
 

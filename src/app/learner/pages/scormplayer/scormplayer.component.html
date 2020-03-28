@@ -7,6 +7,11 @@
 
 
 
+ 
+
+    </mat-tab>
+
+    <mat-tab label="Syllabus">
       <span  *ngFor="let item of products">
         <li ><a href="/scormPlayer.html?contentID={{item}}">{{item}}</a></li>
       </span>
@@ -16,8 +21,9 @@
       <div class="right" id="contentNav" *ngFor="let navtree of syllabus">
         {{navtree.title}}
         <!--this is for particular course syllabus-->
-        <div *ngFor="let child of navtree.children" >
-          <li class="subNav"><a class="navLink" href="http://192.168.0.103:8080{{child.link}}" >{{child.title}}</a></li>
+        <div *ngFor="let child of navtree.children" >http://40.76.47.212{{child.link}}
+
+          <li class="subNav"><a class="navLink" href="http://40.76.47.212/{{child.link}}" >{{child.title}}</a></li>
         
         </div>
         
@@ -28,10 +34,6 @@
       </div>
 
       <!-- <h1 class="space">About the course</h1> -->
-
-    </mat-tab>
-
-    <mat-tab label="Syllabus">
 
     </mat-tab>
 

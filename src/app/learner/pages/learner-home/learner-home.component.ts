@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service'
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-learner-home',
@@ -13,7 +14,8 @@ export class LearnerHomeComponent implements OnInit {
   userDetailes: any;
   panelOpenState = false;
   
-  constructor(public service: LearnerServicesService,private router:Router,private gs: GlobalServiceService,) { }
+  constructor(public service: LearnerServicesService,private router:Router,private gs: GlobalServiceService,
+    private loader: Ng4LoadingSpinnerService,) { }
 
   ngOnInit() {
     // if (this.gs.checkLogout()) {

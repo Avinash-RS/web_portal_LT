@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -12,7 +13,8 @@ export class LearnerMyCourseComponent implements OnInit {
   userDetailes: any;
   open: boolean = true;
 
-  constructor(public service: LearnerServicesService, private gs: GlobalServiceService) { }
+    
+    constructor(public service: LearnerServicesService, private gs: GlobalServiceService,private loader: Ng4LoadingSpinnerService,) { }
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
@@ -25,10 +27,12 @@ export class LearnerMyCourseComponent implements OnInit {
 
   }
   viewMycourse() {
+this.loader.show()
     this.service.getMyCourse(this.userDetailes._id).subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
-          this.myCoursesList = getMyCourse.data.get_course_by_user.message
+          this.myCoursesList = getMyCourse.data.get_course_by_user.message;
+          this.loader.hide
         }
       }
     });

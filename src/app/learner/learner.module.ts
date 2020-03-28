@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 //local
-import { HeaderComponent } from '@core/core/header/header.component';
 import { LoginComponent } from '@learner/pages/login/login.component';
 import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from '@learner/pages/registration/registration.component';
@@ -51,7 +50,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HeaderComponent,
     LoginComponent,
     LearnerHomeComponent,
     CoursedetailsComponent,
@@ -87,7 +85,8 @@ const routes: Routes = [
     //NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ApolloModule
+    ApolloModule,
+    MaterialModule
   ],
   providers: [Apollo],
   entryComponents: []
