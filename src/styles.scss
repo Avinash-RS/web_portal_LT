@@ -207,6 +207,16 @@ body {
 .mat-progress-bar-buffer {
   background: #8f9bbb;
 }
+.mat-progress-bar-fill::after {
+  background-color: #ffcf01;
+}
+.br-default .br-selected:after {
+  color: #ffcf05 !important;
+}
+// .br-default .br-unit:after {
+//   content: "\2605";
+//   color: #d2d2d2;
+// }
 
 .br-default .br-selected:after {
   color: $color-yellow !important;
@@ -350,7 +360,7 @@ label {
 
 .head {
   text-align: center;
-  color: #1F3777;   
+  color: #1F3777 !important;   
 }
 .mand{
   color: red !important;

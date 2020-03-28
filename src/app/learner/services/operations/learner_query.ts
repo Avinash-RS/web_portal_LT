@@ -60,9 +60,9 @@ export const   get_qualification_details = gql`
 	message
     success
     data{
-      _id
-     levelname
-      levelcode
+      level_name
+      level_code
+      level_id
       is_active
     }
 }

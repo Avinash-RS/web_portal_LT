@@ -139,7 +139,7 @@
             </div>
           </form>
         </mat-grid-tile>
-      </mat-grid-list><br><br>
+      </mat-grid-list>
       <!-----------------------Profile End----------------------->
       <div class="row">
         <mat-label>Qualification</mat-label><span class="text-danger">*</span>
@@ -149,23 +149,23 @@
           <div class="row">
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level" required>
-                <mat-option *ngFor="let level of levelValue">
-                  {{level.levelname}}
+                <mat-option [value]="level.level_id" *ngFor="let level of levelValue">
+                  {{level.level_name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" 
-              (selectionChange)="getInstitute($event)" required>
-                <mat-option [value]="board.Board_Id" *ngFor="let board of boards">
+               required>
+                <mat-option [value]="board.Board_Id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
-                  {{board.University_Name}}
+                  {{univ.University_Name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
               <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute" required>
-                <mat-option [value]="item.institute_id" *ngFor="let item of insValue">
+                <mat-option [value]="item.institute_id" *ngFor="let item of institutes">
                   {{item.institute_name}}
                 </mat-option>
               </mat-select>
@@ -196,7 +196,7 @@
             <div class="col-sm-3">
               <input class="inputs" placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage" required>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 plusicon">
               <mat-icon (click)="addnewQual()">add_circle_outline</mat-icon>
             </div>
           </div>
@@ -206,7 +206,7 @@
         <div class="col-sm-2">
           <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 plusicon">
           <mat-icon (click)="addnewLink()">add_circle_outline</mat-icon>
         </div>
       </div><br>
@@ -259,7 +259,7 @@
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions>
-          <button class="btn">
+          <button color="primary" mat-raised-button (click)="updateEmail()">
             Submit
           </button><br><br>
         </mat-dialog-actions>
