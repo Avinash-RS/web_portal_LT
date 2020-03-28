@@ -18,7 +18,20 @@ padding-left: -39px;
   margin-top: -24px;
 }
 .subbtn{
-text-align: center;
+background-color: #1F3777;
+color: white;
+width: 13%;
+border: solid;
+}
+.bt{
+  text-align: center;
+}
+.popupbtns{
+  text-align: center;
+  background-color: #1F3777;
+color: white;
+width: 85%;
+border: solid;
 }
 .avatar {
 vertical-align: middle;
@@ -108,6 +121,9 @@ margin-left: -47px;
 }
 label{
   color: #1F3777;
+}
+.qual{
+  margin-left: 6px;
 }
 
 

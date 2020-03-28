@@ -4,9 +4,11 @@
   <div class="container-reg200 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30"><br>
       <div class="overAll">
+        <div>
+          <form #createForm="ngForm">
       <mat-grid-list class="masterGrid" cols="2" rowHeight="2:1">
         <mat-grid-tile class="grid1">
-          <form #createForm="ngForm">
+          <form>
             <div class="row">
               <mat-label>Information about you</mat-label>
             </div>
@@ -141,6 +143,7 @@
         </mat-grid-tile>
       </mat-grid-list>
       <!-----------------------Profile End----------------------->
+      <div class="qual">
       <div class="row">
         <mat-label>Qualification</mat-label><span class="text-danger">*</span>
       </div>
@@ -199,9 +202,11 @@
             <div class="col-sm-3 plusicon">
               <mat-icon (click)="addnewQual()">add_circle_outline</mat-icon>
             </div>
-          </div>
+          </div><br>
         </div>
-      </div> <br>
+      </div> 
+      </div><br>
+      <div>
       <div class="row certificate" *ngFor="let link of links">
         <div class="col-sm-2">
           <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
@@ -210,6 +215,7 @@
           <mat-icon (click)="addnewLink()">add_circle_outline</mat-icon>
         </div>
       </div><br>
+      </div>
       <div class="row certificate">
         <div class="col-sm-2">
           <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
@@ -239,9 +245,12 @@
         </div><br>
       </div>
 
-      <div class="subbtn">
-        <button mat-raised-button color="primary" (click)="updateProfile()">Submit</button>
+      <div class="bt">
+        <button class="subbtn" [disabled]="createForm.invalid" (click)="updateProfile()">Submit</button>
       </div><br>
+    </form>
+      </div>
+    
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <h1 class="head">Change the Mail ID</h1>
@@ -258,10 +267,10 @@
             </div>
           </form><br>
         </mat-dialog-content>
-        <mat-dialog-actions>
-          <button color="primary" mat-raised-button (click)="updateEmail()">
-            Submit
-          </button><br><br>
+        <mat-dialog-actions class="bt"> 
+            <button class="popupbtns" (click)="updateEmail()">
+              Submit
+            </button><br><br>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobno Dialog---------------------->
@@ -298,13 +307,13 @@
               <br><br>
             </div>
             <div *ngIf="showotp">
-              <button class="btn" (click)="otpverify()">Verify</button>
+              <button class="popupbtns" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
           </form>
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
-          <button class="btn" (click)="otpverification()">
+          <button class="popupbtns" (click)="otpverification()">
             Verification
           </button><br><br>
         </mat-dialog-actions>
@@ -355,11 +364,10 @@
                 <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
               </div>
             </div>
-
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions>
-          <button class="btn" (click)="updatePassword()">
+          <button class="popupbtns" (click)="updatePassword()">
             Submit
           </button><br><br>
         </mat-dialog-actions>
