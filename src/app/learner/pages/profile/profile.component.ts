@@ -68,7 +68,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if(params["status"]){
-        this.alert.openAlert(params.message, null);
+        
+        this.alert.openAlert(params['msg'], null);
       }
     });
     var user = localStorage.getItem('UserDetails')
