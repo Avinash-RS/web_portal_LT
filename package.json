@@ -38,6 +38,7 @@
     "ng4-loading-spinner": "^1.2.3",
     "ngx-bar-rating": "^1.1.0",
     "ngx-mask": "^8.1.7",
+    "ngx-password-toggle": "^1.0.3",
     "ngx-spinner": "^7.2.0",
     "node-sass": "^4.13.1",
     "rxjs": "~6.3.3",

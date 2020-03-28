@@ -8,6 +8,7 @@ RUN npm install
 RUN npm install ngx-bar-rating
 RUN npm i ngx-spinner
 RUN npm i ngx-mask
+run npm i ngx-password-toggle
 
 COPY . .
 

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from "ngx-bar-rating";
+import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 // import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxMaskModule } from 'ngx-mask'
 //local
@@ -79,6 +80,7 @@ const routes: Routes = [
     MaterialModule,
     NgxMaskModule.forChild(),
     FormsModule,
+    NgxPasswordToggleModule,
     ReactiveFormsModule,
 
 
