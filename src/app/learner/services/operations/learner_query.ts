@@ -11,6 +11,7 @@ export const login = gql`
         is_active
         username
         token
+        user_id
       }
     }
   }`;
@@ -174,5 +175,29 @@ export const get_user_detail = gql`
         user_id
       }
       success
+  }
+}`;
+export const list_content = gql`
+query list_content{
+  list_content {
+    message,
+    success,
+    data
+  }
+}
+`;
+
+export const syllabus_of_particular_scorm = gql`
+query syllabus_of_particular_scorm($contentid:String){
+  syllabus_of_particular_scorm(contentid:$contentid) {
+    message,
+    success,
+    data{
+      title,
+      children{
+      title,
+        link
+    }
+    }
   }
 }`;
