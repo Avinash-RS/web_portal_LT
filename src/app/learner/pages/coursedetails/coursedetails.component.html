@@ -151,83 +151,85 @@
         </div>
     </div>
     <br> <br>
-    <div #Take_away>
-        <h2 class="m-l-5"> Takeaways</h2><br>
-        <div style="width: 100%;height: 600px;">
-            <owl-carousel-o [options]="customOptions1" class="takeway">
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg"></ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-            </owl-carousel-o>
-        </div>
-    </div><br>
-</div>
-    <h2 class="m-l-10"> A Step Towards</h2><br>
-    <div #Instructor style=" width: 100%;">
-        <h2 class="m-l-5"> Instructor details</h2><br>
-        <div style="width: 100%;height: auto;">
-            <owl-carousel-o [options]="customOptions1">
-                <ng-template carouselSlide>kkkkkkkkkkk
-                </ng-template>
-                <ng-template carouselSlide>uinooui</ng-template>
-                <ng-template carouselSlide>
-                </ng-template>
-                <ng-template carouselSlide>
-                </ng-template>
-                <ng-template carouselSlide>
-                </ng-template>
-            </owl-carousel-o>
-        </div>
-    </div><br>
-    <div class="display_flex">
-        <div #Syllabus class="width_40 m-r-5">
-            <h2> Course Outline</h2><br>
-            <mat-accordion>
-                <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
-                        <mat-panel-title>
-                            {{i.title}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-expansion-panel *ngFor="let it of i.subtitle">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                {{it.name}}
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <table>
-                            <tr *ngFor="let item of it.content">
-                                <td style="width: 90%;"><i class="fa fa-circle"
-                                        style="background-color: transparent;font-size: 10px;color: black;box-shadow:none;border:none"
-                                        aria-hidden="true"></i>{{item.name}}</td>
-                                <td><i class="fa fa-play" aria-hidden="true"
-                                        style="font-size:10px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
-                                </td>
-                                <td>20.00</td>
-                            </tr>
-                        </table>
-                        <!-- <div class="width_100 display_flex">
-                            <span style="width: 90%;" ></span>
-                             style="float: right;"></i>
-                        </div> -->
-                    </mat-expansion-panel>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-        <div class="width_40 m-l-5">
-            <h2>Learning Paths</h2><br>
-            <img src="../../../../assets/learner/lens.jpg" width="100%">
-        </div>
+    <div #Take_away> </div>
+    <h2 class="m-l-5"> Takeaways</h2><br>
+    <div style="width: 100%;height: 600px;z-index: -1 !important;">
+        <owl-carousel-o [options]="customOptions1" style="z-index:-1 !important" class="takeway">
+            <ng-template carouselSlide style="z-index:-1"><img height="500px" style="z-index:-1 !important
+                    " src="../../../../assets/learner/lens.jpg">
+            </ng-template>
+            <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg"></ng-template>
+            <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
+            </ng-template>
+            <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
+            </ng-template>
+            <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
+            </ng-template>
+        </owl-carousel-o>
     </div>
+    <br>
+</div>
+<h2 class="m-l-5"> A Step Towards</h2>
+<p class="m-l-10">A career in photography</p>
+<br>
 
+<div #Instructor style=" width: 100%;background-color: rgb(192, 191, 189);"><br>
+    <p class="m-l-10 f_wt_500 f_size_18"> Instructor details</p><br><br>
+    <div class="width_100 Instructor_dtl">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let i of ins" style="height: 40vh;">
+                <div class="display_flex width_70 m-l-15" style="height: 20vh;">
+                    <img src="{{i.img}}">
+                    <div class="m-l-5">
+                        <p> <strong>{{i.name}} </strong></p>
+                        <p> {{i.content}}</p>
+                    </div>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div><br><br>
 
-<br><br><br>
+<div class="display_flex wrap_content">
+    <div #Syllabus class="width_50">
+        <h2> Course Outline</h2><br>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
+                <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
+                    <mat-panel-title>
+                        {{i}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <!-- <mat-expansion-panel *ngFor="let it of i.subtitle">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{it.name}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header> -->
+                     <br>
+                    <table>
+                        <tr>
+                            <td width="96%"><i class="fa fa-circle"
+                                    style="background-color: transparent;font-size: 10px;color: black;box-shadow:none;border:none"
+                                    aria-hidden="true"></i>{{i}}</td>
+                            <td (click) ="playCourse(i)"><i class="fa fa-play" aria-hidden="true"
+                                    style="font-size:11px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
+                            </td>
+                            <!-- <td>20.00</td> -->
+                        </tr>
+                    </table>
+                <!-- </mat-expansion-panel> -->
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="width_40 m-l-5">
+        <h2>Learning Paths</h2><br>
+        <img src="../../../../assets/learner/lens.jpg" width="100%">
+    </div>
+</div>
+
+<br><br><br><br><br>
+
 <mat-card>
     <div #Review class="display_flex m-l-5">
         <br><br><br>

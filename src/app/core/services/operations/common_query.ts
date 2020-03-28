@@ -83,7 +83,28 @@ export const view_wishlist = gql`
   }`;
 
 
+  export const list_content = gql`
+    query list_content{
+      list_content {
+        success
+        data
+        message
+      }
+  }`;
+  
+  export const syllabus_of_particular_scorm = gql`
+  query syllabus_of_particular_scorm($contentid: String){
+    syllabus_of_particular_scorm(contentid: $contentid) {
+      success
+      message
+      data{
+        title
+        children{
+          title
+          link
+        }
+      }
+    }
+  }`;
 
-
-
-
+  

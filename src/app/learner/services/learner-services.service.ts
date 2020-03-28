@@ -13,7 +13,6 @@ export class LearnerServicesService {
   constructor(private Apollo: Apollo,) { }
 
   login(username, password, is_admin) {
-    console.log('inside services', username, password,is_admin)
     return this.Apollo.query({
       query: login,
       variables: {
@@ -37,7 +36,6 @@ export class LearnerServicesService {
 
 
   submit_otp(user_id,_id,mobile,email) {
-    console.log(user_id,_id,mobile)
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
       variables: {
@@ -86,7 +84,6 @@ export class LearnerServicesService {
   }
   
   forgotPasswordByUsername(username){
-    console.log(username)
     return this.Apollo.query({
       query: get_forgot_password_byusername,
       variables: {
@@ -95,7 +92,6 @@ export class LearnerServicesService {
     });
   }
   getMyCourse(user_id) {
-    console.log('inside services', user_id)
     return this.Apollo.query({
       query: get_course_by_user,
       variables: {

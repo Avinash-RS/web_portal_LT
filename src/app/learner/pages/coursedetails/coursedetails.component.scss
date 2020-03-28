@@ -1,9 +1,17 @@
 @import "../../assets/variable.scss";
+p,span, div,h1,h2,h3,small,strong {
+    letter-spacing: 1px;
+    }
 
 .m-l-2 {
     margin-left: 2%;
 }
-
+.m-l-20 {
+    margin-left: 20%;
+}
+.m-l-15 {
+    margin-left: 15%;
+}
 .section_1 {
     background: url('../../../../assets/learner/lens.jpg') !important;
     height: 60vh;
@@ -178,7 +186,6 @@ mat-card {
     border: 0.5px solid lightgray;
     z-index: -1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
-    // box-shadow: 0 6px 1px -1px rgba(227, 226, 226, 0.2), 0 1px 5px 0 rgba(227, 226, 226, 0.2), 0 2px 4px 0 rgba(0,0,0,.12);
 }
 
 .faq_border {
@@ -212,37 +219,51 @@ mat-card {
     font-size: 3rem;
     color: rgb(111, 113, 114);
     text-align: center;
-    // margin-left: 30%;
 }
 
 h2 {
     color: black;
 }
 
+::ng-deep  .owl-theme .owl-nav [class*='owl-'] {
+    color: #FFF;
+    font-size: 20px !important;
+    background: rgb(136, 136, 136);
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px !important;
+    border-radius: 50px !important;
+    width: 40px;
+    z-index: -1 !important;
+}
 
+::ng-deep .takeway .owl-carousel .owl-nav .owl-prev {
+    margin-top: -20% !important;
+    position: absolute !important;
+    margin-left: -55% !important;
+}
 
+::ng-deep .takeway .owl-carousel .owl-nav .owl-next {
+    margin-top: -20% !important;
+    position: absolute !important;
+    margin-left: 52% !important;
+}
+::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-prev {
+    margin-top: -15vh !important;
+    position: absolute !important;
+    margin-left: -47% !important;
+}
 
-    ::ng-deep .takeway .owl-theme .owl-nav [class*='owl-'] {
-        color: #FFF;
-        font-size: 20px !important;
-        background: rgb(180, 179, 179);
-        display: inline-block;
-        cursor: pointer;
-        padding: 10px !important;
-        border-radius: 50px !important;
-        width: 40px;
-        z-index: -1 !important;
-    }
-    
-    ::ng-deep .takeway .owl-carousel .owl-nav .owl-prev {
-        margin-top: -20% !important;
-        position: absolute !important;
-        margin-left: -55% !important;
-    }
-    
-    ::ng-deep .takeway .owl-carousel .owl-nav .owl-next {
-        margin-top: -20% !important;
-        position: absolute !important;
-        margin-left: 52% !important;
-    }
+::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-next {
+    margin-top: -15vh !important;
+    position: absolute !important;
+    margin-left: 45% !important;
+}
 
+::ng-deep .Instructor_dtl .owl-carousel .owl-item img {
+    width: 25% !important;
+}
+
+::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+background-color: $color-maroon !important;
+}
