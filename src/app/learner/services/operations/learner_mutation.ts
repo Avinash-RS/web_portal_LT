@@ -132,54 +132,52 @@ export const view_profile = gql`
   mutation view_profile($user_id: String) {
     view_profile(user_id:$user_id) 
     {
-      success
-         message {
-            full_name
-            email
-            user_id
-              user_mobile {
-                 mobile_number
-                        }
-                        user_profile {
-                             _id
-                                qualification {
-                                   qualification
-                                    institute
-                                    board_university
-                                    discipline
-                                    specification
-                                    year_of_passing
-                                    percentage
-                                              }
-                                                social_media {
-                                                          link
-                                                          img
-                                                                }
-                                                                languages_known
-                                                                about_you
-                                                                certificate
-                                                                user_id
-                                                                profile_img
-                                                                year_of_birth
-                                                                doj_lxp
-                                                                progress
-                                                                is_active
-                                                                gender
-                                                                country
-                                                                state
-                                                                city_town
-                                                                student
-                                                                last_login
-                                                                created_by_ip
-                                                                created_by
-                                                                created_on
-                                                                updated_by_ip
-                                                                updated_on
-                                                                updated_by
-                                                }
-                                }
+      message {
+full_name
+email,
+user_id
+user_mobile{
+mobile_number,
 
-    }
+}
+user_profile{
+_id
+qualification{
+qualification
+institute
+discipline
+year_of_passing
+percentage
+
+}
+social_media{
+link
+img
+}
+languages_known
+about_you
+certificate
+user_id
+profile_img
+year_of_birth
+created_on
+progress
+is_active
+gender
+country
+state
+city_town
+student
+last_login
+created_by
+updated_on
+updated_by
+updated_by_ip
+
+}
+}
+success
+  }
 }
 `;
 

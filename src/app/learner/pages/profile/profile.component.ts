@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
   institutes: any;
   languageList: any;
   isenable:boolean = true;
-  userData: any;
+  userData:any = {};
   // countryDetails: any = [];
 
 
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
-    // this.getprofileDetails();
+    this.getprofileDetails(this.currentUser.user_id);
     this.getAllcountry();
     this.getAllLanguage();
     this.getBoardsUniv();
@@ -146,14 +146,14 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-//View Profile
-  // getprofileDetails() {
-  //   this.service.view_profile(this.currentUser.user_id).subscribe(data => {
-  //     console.log('user',this.currentUser.user_id);
-  //     this.userData = data.data['view_profile'].message;
-  //     console.log('userdata',this.userData)
-  //   })
-  // }
+// View Profile
+  getprofileDetails(userid) {
+    this.service.view_profile(userid).subscribe(data => {
+      console.log('user',this.currentUser.user_id);
+      this.userData = data.data['view_profile'].message[0];
+      console.log('userdata',this.userData)
+    })
+  }
   addnewQual() {
     this.qual.push({
       level: '',

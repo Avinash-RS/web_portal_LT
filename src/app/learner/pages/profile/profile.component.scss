@@ -21,12 +21,20 @@ padding-left: -39px;
 text-align: center;
 }
 .avatar {
-vertical-align: middle;
-width: 70px;
-height: 70px;
-border-radius: 50%;
-margin-left: -47px;
+  vertical-align: middle;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-left: -73px;
+
 }
+
+
+
+.mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+  background: $color-blue !important;
+}
+
 .masterGrid{
   margin-top: -4%;
 }
@@ -34,20 +42,12 @@ margin-left: -47px;
   background-repeat: no-repeat;
   display: inline-block;
   fill: currentColor;
-  font-size: 20px;
-  color: #1F3777 !important;
-  height: 24px;
-  width: 24px;
-  margin-top: -6px;
+  font-size: 17px;
+  color: $color-blue !important;
+  margin-top: -1px;
   margin-left: 10px;
 }
-.grid1{
-    left: 0px;
-    width: 50%;
-    margin-top: -51px;
-    padding-top: 23%;
-    margin-left: -13%;
-}
+
 .Edit{
   margin-left: -59px;
   margin-top: 21px;
@@ -56,22 +56,41 @@ margin-left: -47px;
   margin-left: -30px;
 }
 .myprofile{
-  margin-left: 76px;
+  margin-left: 50px;
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  color:$color-blue;
+  margin-top: 10%;
 }
 .cameraicon{
-  margin-left: -59px;
-  margin-top: 48px;
+  margin-left: -47px;
+  margin-top: 97px;
   font-size: 20px;
-  // color: darkslateblue;
-  color: black;
+  color: $color-blue;
   z-index: 0;
 }
 .inputs{
   border: 1px solid;
   padding: 8px !important;
   border-radius: 5px;
-  color: #1F3777;
+  color: $color-blue;
   width: 100%;
+}
+
+.selectinputs{
+  border: 1px solid;
+  padding: 8px !important;
+  border-radius: 5px;
+  color: $color-blue;
+  width: 105px
+}
+
+.grid1 {
+  left: 0px;
+  width: 50%;
+  margin-top: -51px;
+  padding-top: 27%;
+  margin-left: -12%;
 }
 
 .language{
@@ -79,30 +98,38 @@ margin-left: -47px;
 }
 .doj{
   margin-left: 54px;
-    margin-top: -86px;
+  margin-top: -111px;
 }
 .example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 5px;
-  margin-left: -48px;
-  margin-top: 26px;
+  margin-left: -88px;
+  margin-right: 8%;
+  margin-top: 0%;
+  height: 0px;
 }
 .example-margin {
   margin: 0 10px;
-  color: white;
+  color:$color-white;
   border: 2px solid;
   border-radius: 16px;
   height: 8px;
   width: 100%;
 }
 .studentradio {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .experirnce{
   margin-left: -33px;
 }
+.space5{
+  margin-top: 5px;
+}
 
-
+.profilelabe{
+  font-size: 10px
+}
+.profilecomplete{
+  color: $color-blue;
+  margin-left: 50px;
+  text-align: center !important;
+}
 

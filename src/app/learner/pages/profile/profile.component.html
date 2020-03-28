@@ -15,7 +15,7 @@
                 [(ngModel)]="info" name="info" maxlength="1000"></textarea>
               </div><br>
               <div class="row">
-                <mat-label>Gender</mat-label><span class="text-danger">*</span>
+                <mat-label >Gender</mat-label><span class="text-danger">*</span>
                 <div class="col">
                   <mat-radio-group [(ngModel)]="profileDetails.gender" name="gender" required>
                     <mat-radio-button value="M">M</mat-radio-button>
@@ -24,8 +24,8 @@
                   </mat-radio-group>
                 </div>
               </div>
-              <div class="row">
-                <mat-label>Iam a</mat-label><span class="text-danger">*</span>
+              <div class="row space5">
+                <mat-label>I am a</mat-label><span class="text-danger">*</span>
                 <div class="col studentradio">
                   <mat-radio-group [(ngModel)]="profileDetails.profession" name="profession" required>
                     <mat-radio-button value="student">Student</mat-radio-button>
@@ -33,8 +33,8 @@
                   </mat-radio-group>
                 </div>
               </div>
-              <div class="row">
-                <mat-label>Language Known</mat-label>
+              <div class="row space5">
+                <mat-label>Language Known</mat-label><br>
               </div>
               <div class="row language">
                 <mat-select multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language">
@@ -44,11 +44,11 @@
                 </mat-select>
               </div><br>
               <div class="row">
-                <mat-label>Location</mat-label><span class="text-danger">*</span>
+                <mat-label>Location</mat-label><span class="text-danger">*</span><br>
               </div>
               <div class="row">
                 <div class="col">
-                    <mat-select class="inputs" placeholder="Country" [(ngModel)]="profileDetails.country" name="country" 
+                    <mat-select class="selectinputs" placeholder="Country" [(ngModel)]="profileDetails.country" name="country" 
                     (selectionChange)="getAllState($event)" required>
                       <mat-option [value]="country._id" *ngFor="let country of countryValue">
                         {{country.countryname}}
@@ -56,7 +56,7 @@
                     </mat-select>
                 </div>
                 <div class="col">
-                  <mat-select class="inputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" 
+                  <mat-select class="selectinputs" [(ngModel)]="profileDetails.state" name="state" placeholder="State" 
                   (selectionChange)="getDistrict($event)" required>
                     <mat-option [value]="state._id" *ngFor="let state of stateValue">
                       {{state.statename}}
@@ -64,7 +64,7 @@
                   </mat-select>
                 </div>
                 <div class="col">
-                  <mat-select class="inputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
+                  <mat-select class="selectinputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
                     <mat-option [value]="city._id" *ngFor="let city of cityValue">
                       {{city.districtname}}
                     </mat-option>
@@ -75,35 +75,46 @@
         </mat-grid-tile>
         <!----------------------------Profile--------------------->
         <mat-grid-tile>
-          <form>
-            <div class="profilegrid">
+          <form style="    margin-left: 62%;">
+            <!-- <div class=""><br><br> -->
               <div class="row myprofile">
-                <label>My Profile</label>
+                <label >My Profile</label>
                 <mat-icon class="createicon">create</mat-icon>
               </div>
+
               <div class="row">
                 <div class="col-sm-4">
                   <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
+                  <div style="    margin-top: -43%;">
+                    <mat-icon>camera_alt</mat-icon>
+                  </div>
                 </div>
-                <div class="cameraicon">
-                  <mat-icon>camera_alt</mat-icon>
-                </div>
-              </div><br>
-              <div class="row doj">
-                <div class="col">
-                  <mat-label>Full Name</mat-label>
-                </div>
-                <div class="col">
-                  <mat-label>Username</mat-label>
-                </div>
-                <div class="col">
-                  <mat-label>DOJ lxp</mat-label>
-                </div>
+                <div class="col-sm-4"><br>
+                  <mat-label>{{userData.full_name}}</mat-label><br>
+                  <mat-label>Username</mat-label><br>
+                  <mat-label>DOJlxp</mat-label>
               </div>
-              <section class="example-section">
-              <mat-progress-bar class="example-margin" mode="determinate" value="10">
-              </mat-progress-bar>
-            </section>
+              </div>
+
+
+           
+
+              <div class="row">
+                <!-- <div class="col"> -->
+               
+                <!-- </div><br> -->
+               
+                <div class="col">
+                  <md-button class="profilecomplete">10% </md-button>
+                  <section class="example-section">
+                    <mat-progress-bar class="example-margin" mode="determinate" value="10">
+                    </mat-progress-bar>
+                  </section>
+                </div>
+              
+              </div>
+             
+
               <div class="Edit">
                 <div class="row">
                   <div class="col-sm-3">
@@ -116,8 +127,8 @@
                   </div>
                 </div><br>
                 <div class="row">
-                  <div class="col-sm-3">
-                    <mat-label>Mobileno</mat-label>
+                  <div class="col-sm-3" >
+                    <mat-label *ngIf="userData.user_mobile">{{userData.user_mobile.mobile_number}}</mat-label>
                   </div>
                   <div class="col-sm-3"></div>
                   <div class="col-sm-3"></div>
@@ -127,7 +138,7 @@
                 </div><br>
                 <div class="row">
                   <div class="col-sm-3">
-                    <mat-label>Example@gmail.com</mat-label>
+                    <mat-label>{{userData.email}}</mat-label>
                   </div>
                   <div class="col-sm-3"></div>
                   <div class="col-sm-3"></div>
@@ -136,7 +147,7 @@
                   </div>
                 </div><br>
               </div>
-            </div>
+            <!-- </div> -->
           </form>
         </mat-grid-tile>
       </mat-grid-list><br><br>

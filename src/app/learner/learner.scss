@@ -56,7 +56,7 @@
         border: 1px outset white;
         overflow: hidden;
         background-color: white !important;
-        box-shadow: 0 2px 11px 0 rgba(0,0,0,2);
+        box-shadow: 0 2px 11px #00000057;
         margin-top: 50px;
         margin-bottom: 30px;
       }
@@ -77,6 +77,10 @@
         border-radius: 10px;
         margin-left: -18px;
       }
+
+      .mat-select-placeholder {
+       color: $color-blue !important;
+    }
   }
   
 
