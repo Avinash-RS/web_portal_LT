@@ -269,7 +269,7 @@ export class LearnerServicesService {
     })
 }
 
-update_profile(user_id,profile_img,year_of_birth,doj_lxp,qualification,social_media,is_active,
+update_profile(user_id,profile_img,doj_lxp,qualification,social_media,is_active,
   progress,gender,languages_known,country,state,city_town,certificate,about_you,student,
   professional){
   return this.Apollo.query({
@@ -277,7 +277,6 @@ update_profile(user_id,profile_img,year_of_birth,doj_lxp,qualification,social_me
     variables:{
       user_id: user_id,
       profile_img: profile_img,
-      year_of_birth: year_of_birth,
       doj_lxp: doj_lxp,
       qualification: qualification,
       social_media: social_media,

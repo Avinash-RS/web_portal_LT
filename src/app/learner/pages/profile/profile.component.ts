@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
   //Declarations
   currentUser: any = [];
   otp: any;
+  info: any;
+  language: any;
   profileDetails: any = [];
   fieldArray: Array<any> = [];
   newAttribute: any = {};
@@ -208,7 +210,10 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-    // this.service.update_profile(this.currentUser.user_id,).subscribe(data => {
+    console.log(this.formBuilder)
+    // this.service.update_profile(this.currentUser.user_id,this.qual,this.links,this.profileDetails.country,
+    //   this.profileDetails.state,this.profileDetails.city,this.profileDetails.gender,
+    //   this.info,this.language,this.profileDetails.profession).subscribe(data => {
 
     // })
     
