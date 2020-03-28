@@ -55,19 +55,18 @@ export class CoursedetailsComponent implements OnInit {
   userDetail: any;
 
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router, private loader: Ng4LoadingSpinnerService,private alert: AlertServiceService) { }
+    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) { }
 
   ngOnInit() {
     this.loader.show();
-   
     var userdetail = this.gs.checkLogout();
     var id = this.router.snapshot.paramMap.get('id');
     this.service.viewCurseByID(id).subscribe((viewCourse: any) => {
       // var wishlist = 
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
-        this.course.wishlisted = Boolean(this.router.snapshot.paramMap.get('wishlist')) || false;
-        this.course.wishlisted =Boolean(this.course.wishlisted)
+        this.course.wishlisted = JSON.parse(this.router.snapshot.paramMap.get('wishlist')) || false;
+        this.course.wishlist_id = this.router.snapshot.paramMap.get('wishlist_id')
         console.log(this.course)
         this.loader.hide();
       } else
@@ -213,15 +212,18 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   selectWishlist(course) {
+    this.loader.show()
     if (this.gs.checkLogout()) {
+      console.log(this.course.wishlisted)
       if (this.course.wishlisted == false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
           if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
             this.course.wishlisted = !this.course.wishlisted;
             console.log(this.course.wishlisted)
             this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
-            this.alert.openAlert("Success !", "Added to wishlist")
+            // this.alert.openAlert("Success !", "Added to wishlist")
             this.gs.canCallWishlist(true)
+            this.loader.hide()
           }
         });
       } else {
@@ -230,8 +232,9 @@ export class CoursedetailsComponent implements OnInit {
             this.course.wishlisted = !this.course.wishlisted;
             course.wishlist_id = null;
             console.log(this.course.wishlisted)
-            this.alert.openAlert("Success !", "Removed from wishlist")
+            // this.alert.openAlert("Success !", "Removed from wishlist")
             this.gs.canCallWishlist(true)
+            this.loader.hide()
           }
         });
       }

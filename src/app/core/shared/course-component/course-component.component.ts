@@ -36,6 +36,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
+    this.loader.show();
     if (this.gs.checkLogout()) {
       if (this.course.wishlisted == false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
@@ -43,8 +44,9 @@ export class CourseComponentComponent implements OnInit {
             this.course.wishlisted = !this.course.wishlisted;
             console.log(this.course.wishlisted)
             this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
-            this.alert.openAlert("Success !", "Added to wishlist")
-            this.gs.canCallWishlist(true)
+            // this.alert.openAlert("Success !", "Added to wishlist")
+            this.gs.canCallWishlist(true);
+            this.loader.hide();
           }
         });
       } else {
@@ -53,8 +55,9 @@ export class CourseComponentComponent implements OnInit {
             this.course.wishlisted = !this.course.wishlisted;
             course.wishlist_id = null;
             console.log(this.course.wishlisted)
-            this.alert.openAlert("Success !", "Removed from wishlist")
-            this.gs.canCallWishlist(true)
+            // this.alert.openAlert("Success !", "Removed from wishlist")
+            this.gs.canCallWishlist(true);
+            this.loader.hide();
           }
         });
       }
@@ -71,7 +74,7 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     console.log(course,this.course)
     var id = this.course.course_id;
-    this.router.navigate(['/Learner/courseDetail',{id : id,wishlist :this.course.wishlisted }])
+    this.router.navigate(['/Learner/courseDetail',{id : id,wishlist :this.course.wishlisted,wishlist_id : this.course.wishlist_id }])
   }
 
   goTocourse(status) {
