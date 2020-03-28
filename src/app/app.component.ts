@@ -31,7 +31,9 @@ export class AppComponent {
         this.router.navigate(["/Learner/login"]);
       }
     } else {
-      localStorage.clear();
+      //commented by rajesh because whenever i will reload the page it clearing my localstorage
+      
+      // localStorage.clear();
     }
   }
 
