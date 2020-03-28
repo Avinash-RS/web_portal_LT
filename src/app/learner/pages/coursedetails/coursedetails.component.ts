@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 
 @Component({
   selector: 'app-coursedetails',
@@ -10,7 +12,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 })
 export class CoursedetailsComponent implements OnInit {
 
-  course: any;
+  course: any = null;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -50,18 +52,26 @@ export class CoursedetailsComponent implements OnInit {
   syllabus: {}[];
   open: boolean = false;
   ins: {}[];
+  userDetail: any;
 
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router) { }
+    public route: Router, private loader: Ng4LoadingSpinnerService,private alert: AlertServiceService) { }
 
   ngOnInit() {
+    this.loader.show();
+   
     var userdetail = this.gs.checkLogout();
     var id = this.router.snapshot.paramMap.get('id');
     this.service.viewCurseByID(id).subscribe((viewCourse: any) => {
+      // var wishlist = 
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-        this.course = viewCourse.data.viewcourse.message
+        this.course = viewCourse.data.viewcourse.message[0];
+        this.course.wishlisted = Boolean(this.router.snapshot.paramMap.get('wishlist')) || false;
+        this.course.wishlisted =Boolean(this.course.wishlisted)
         console.log(this.course)
-      }
+        this.loader.hide();
+      } else
+        this.loader.hide();
     });
 
     this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
@@ -155,7 +165,10 @@ export class CoursedetailsComponent implements OnInit {
     //   ],
     // },
     // ]
-
+    if (this.gs.checkLogout()) {
+      this.userDetail = this.gs.checkLogout()
+      // this.viewWishList(this.course);
+    }
     this.ins = [{
       "name": "Loe",
       "img": "../../../../assets/learner/lens.jpg",
@@ -198,4 +211,31 @@ export class CoursedetailsComponent implements OnInit {
     this.open = !this.open
     console.log(this.open)
   }
+
+  selectWishlist(course) {
+    if (this.gs.checkLogout()) {
+      if (this.course.wishlisted == false) {
+        this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
+          if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
+            this.course.wishlisted = !this.course.wishlisted;
+            console.log(this.course.wishlisted)
+            this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
+            this.alert.openAlert("Success !", "Added to wishlist")
+            this.gs.canCallWishlist(true)
+          }
+        });
+      } else {
+        this.service.removeWishlist(course.wishlist_id).subscribe((addWishlist: any) => {
+          if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
+            this.course.wishlisted = !this.course.wishlisted;
+            course.wishlist_id = null;
+            console.log(this.course.wishlisted)
+            this.alert.openAlert("Success !", "Removed from wishlist")
+            this.gs.canCallWishlist(true)
+          }
+        });
+      }
+    }
+  }
+
 }

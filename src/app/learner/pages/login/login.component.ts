@@ -53,9 +53,11 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/Learner'])
             }
           } else {
+            this.loginForm.reset();
             this.alert.openAlert(loginresult.data.login.error_msg, null)
           }
         } else {
+          this.loginForm.reset();
           this.alert.openAlert("Please try again later", null)
         }
       });

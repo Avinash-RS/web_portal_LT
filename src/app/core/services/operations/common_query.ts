@@ -13,49 +13,255 @@ export const viewcourse = gql`
   query viewcourse($course_id: String){
     viewcourse(course_id: $course_id) {
       success
-      error_msg
-      message{
-        course_id
-        course_description
-        course_name
-        version
-        location
-        course_start_datetime
-        course_end_datetime
-        advertised_start
-        course_img_url
-        social_sharing_url
-        certificate_display_behaviour
-        certificates_show_before_end
-        certificate_html_view_enabled
-        has_any_active_web_certificate
-        certificate_name
-        lowest_passing_grade
-        mobile_available
-        visible_to_staff_only
-        pre_requisite
-        enrollment_start
-        enrollment_end
-        invitation_only
-        max_student_enrollments_allowed
-        announcement
-        catalog_visibility
-        course_video_url
-        short_description
-        self_paced
-        marketing_url
-        course_language
-        certificate_available_date
-        author_name
-        author_description
-        course_content_details
-        article_count
-        downloadable_resource_count
-        course_level
-        step_towards
-        rating
-        price
-      }
+error_msg
+message{
+course_id
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+people_also_viewed{
+course_id
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+}
+}
+frequently_bought_together{
+course_id
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+}
+}
+review_and_faq{
+_id
+user_id
+user_name
+course_id
+rating
+review
+created_on
+updated_on
+is_active
+faq{
+_id
+is_active
+course_id
+qa{
+question
+answer
+}
+}
+}
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+}
+}
     }
   }`;
 
@@ -83,7 +289,7 @@ export const view_wishlist = gql`
   }`;
 
 
-  export const list_content = gql`
+export const list_content = gql`
     query list_content{
       list_content {
         success
@@ -91,8 +297,8 @@ export const view_wishlist = gql`
         message
       }
   }`;
-  
-  export const syllabus_of_particular_scorm = gql`
+
+export const syllabus_of_particular_scorm = gql`
   query syllabus_of_particular_scorm($contentid: String){
     syllabus_of_particular_scorm(contentid: $contentid) {
       success
@@ -107,4 +313,3 @@ export const view_wishlist = gql`
     }
   }`;
 
-  

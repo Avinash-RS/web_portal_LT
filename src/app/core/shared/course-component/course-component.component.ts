@@ -4,6 +4,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-course-component',
@@ -16,7 +17,7 @@ export class CourseComponentComponent implements OnInit {
   userDetail: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
-    private router: Router) {
+    private router: Router, private loader: Ng4LoadingSpinnerService,) {
 
   }
 
@@ -70,7 +71,7 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     console.log(course,this.course)
     var id = this.course.course_id;
-    this.router.navigate(['/Learner/courseDetail',{id : id}])
+    this.router.navigate(['/Learner/courseDetail',{id : id,wishlist :this.course.wishlisted }])
   }
 
   goTocourse(status) {
