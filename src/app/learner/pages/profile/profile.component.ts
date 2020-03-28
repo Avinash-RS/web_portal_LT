@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as myGlobals from '@core/globals';
@@ -58,16 +59,21 @@ export class ProfileComponent implements OnInit {
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
+    private activeroute: ActivatedRoute,
     private dialog: MatDialog,
     private loader:Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.activeroute.queryParams.subscribe(params => {
+      if(params["status"]){
+        this.alert.openAlert(params.message, null);
+      }
+    });
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     this.getprofileDetails(this.currentUser.user_id);
-    // this.getprofileDetails();
     this.getAllLevels();
     this.getAllcountry();
     this.getAllLanguage();
@@ -285,7 +291,7 @@ export class ProfileComponent implements OnInit {
   }
   //Update Email
   updateEmail(){
-    this.service.update_email_onprofile(this.currentUser.user_id,this.currentUser.email).subscribe(data => {
+    this.service.update_email_onprofile(this.currentUser.user_id,this.mailForm.value.mailid).subscribe(data => {
       if(data.data['update_email_onprofile']['success'] == 'true'){
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
       } else {
