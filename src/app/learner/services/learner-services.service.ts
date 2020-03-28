@@ -10,12 +10,13 @@ import {user_registration,user_registration_mobile_otp_send,user_registration_mo
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
   get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
   update_verifyotp_mobile_onprofile,update_email_onprofile} from "./operations/learner_mutation"
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class LearnerServicesService {
 
-  constructor(private Apollo: Apollo, ) { }
+  constructor(private Apollo: Apollo,private http: HttpClient, ) { }
 
   login(username, password, is_admin) {
     console.log('inside services', username, password, is_admin)
@@ -28,6 +29,11 @@ export class LearnerServicesService {
       }
     });
   }
+
+  imageupload(fb) {
+    return this.http.post<any[]>(`http://40.76.47.212:3001/upload/image`,fb);
+}
+
 
   user_registration(email, full_name, termsandconditions) {
     return this.Apollo.query({

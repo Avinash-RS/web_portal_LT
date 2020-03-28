@@ -14,7 +14,7 @@
             </div>
             <div class="row">
               <textarea class="inputs" placeholder="500 characters"
-                [(ngModel)]="info" name="info" maxlength="1000"></textarea>
+                [(ngModel)]="info" name="info" maxlength="500"></textarea>
               </div><br>
               <div class="row">
                 <mat-label >Gender</mat-label><span class="text-danger">*</span>
@@ -86,9 +86,10 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <img src="../../../../assets/learner/avatar2.png" alt="Avatar" class="avatar">
-                  <div style="    margin-top: -43%;">
-                    <mat-icon>camera_alt</mat-icon>
+                  <img [src]="url ? url : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
+                  <div style="margin-top: -43%;" >
+                    <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+                    <mat-icon for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
                   </div>
                 </div>
                 <div class="col-sm-4"><br>
@@ -204,26 +205,28 @@
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <input type="tel" class="inputs" placeholder="Year of Passing" [(ngModel)]="qualification.year"
+              <input type="text"  class="inputs" placeholder="Year of Passing"  mask="0000" [(ngModel)]="qualification.year"
                 name="year" maxlength="4" minlength="4" required>
             </div>
             <div class="col-sm-3">
-              <input class="inputs" placeholder="Percentage" [(ngModel)]="qualification.percentage" name="percentage" required>
+              <input type="text" class="inputs" placeholder="Percentage" mask="00.00" [(ngModel)]="qualification.percentage" name="percentage" required>
             </div>
             <div class="col-sm-3 plusicon">
-              <mat-icon (click)="addnewQual()">add_circle_outline</mat-icon>
+              <mat-icon  (click)="addnewQual(i)">add_circle_outline</mat-icon>
+              <mat-icon   (click)="removelastQual(i)">delete</mat-icon>
             </div>
           </div><br>
         </div>
       </div> 
       </div><br>
       <div>
-      <div class="row certificate" *ngFor="let link of links">
+      <div class="row certificate" *ngFor="let link of links; let i = index;">
         <div class="col-sm-2">
           <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
         </div>
-        <div class="col-sm-2 plusicon">
-          <mat-icon (click)="addnewLink()">add_circle_outline</mat-icon>
+        <div class="col-sm-2 plusicon2">
+          <mat-icon (click)="addnewLink(i)">add_circle_outline</mat-icon>
+          <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
         </div>
       </div><br>
       </div>
@@ -268,7 +271,7 @@
         <mat-dialog-content>
           <form [formGroup]="mailForm">
             <div class="form-group">
-              <label>Enter new mailid</label>
+              <label>Enter new mail id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
                 [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
