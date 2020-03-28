@@ -35,3 +35,37 @@ export const login = gql`
     }
   }
 }`;
+
+export const get_user_detail = gql`
+  query get_user_detail($email: String){
+    get_user_detail(email: $email) {
+      message{
+        user_id
+      }
+      success
+  }
+}`;
+export const list_content = gql`
+query list_content{
+  list_content {
+    message,
+    success,
+    data
+  }
+}
+`;
+
+export const syllabus_of_particular_scorm = gql`
+query syllabus_of_particular_scorm($contentid:String){
+  syllabus_of_particular_scorm(contentid:$contentid) {
+    message,
+    success,
+    data{
+      title,
+      children{
+      title,
+        link
+    }
+    }
+  }
+}`;
