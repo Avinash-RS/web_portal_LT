@@ -20,7 +20,7 @@ import {
   MatAutocompleteModule,
   MatExpansionModule
 } from '@angular/material';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from '@core/core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { CommonModule } from '@angular/common';
 
