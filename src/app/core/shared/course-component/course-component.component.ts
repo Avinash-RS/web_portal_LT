@@ -16,7 +16,7 @@ export class CourseComponentComponent implements OnInit {
   userDetail: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
-    private router: Router ) {
+    private router: Router) {
 
   }
 
@@ -68,9 +68,12 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    console.log(course)
-    // var id = course.course_id;
-    // this.router.navigate(['/Learner/courseDetail',id])
-    this.router.navigate(['/Learner/courseDetail'])
+    console.log(course,this.course)
+    var id = this.course.course_id;
+    this.router.navigate(['/Learner/courseDetail',{id : id}])
+  }
+
+  goTocourse(status) {
+    console.log(status)
   }
 }

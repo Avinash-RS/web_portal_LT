@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-// import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-coursedetails',
@@ -52,10 +51,19 @@ export class CoursedetailsComponent implements OnInit {
   open: boolean = false;
   ins: {}[];
 
-  constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService, ) { }
+  constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
+    public route: Router) { }
 
   ngOnInit() {
-    var userdetail = this.gs.checkLogout()
+    var userdetail = this.gs.checkLogout();
+    var id = this.router.snapshot.paramMap.get('id');
+    this.service.viewCurseByID(id).subscribe((viewCourse: any) => {
+      if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+        this.course = viewCourse.data.viewcourse.message
+        console.log(this.course)
+      }
+    });
+
     this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
@@ -69,13 +77,7 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
 
-    this.router.params.subscribe(params => {
-      // this.service.viewCurseByID(params.id).subscribe((viewCourse: any) => {
-      //   if (viewCourse.data.view_wishlist && viewCourse.data.view_wishlist.success) {
-      //     this.course = viewCourse.data.view_wishlist.message
-      //   }
-      // });
-    });
+
 
     // this.syllabus = [{
     //   "title": "Lorem ipsum dolor sit ame,",
@@ -185,6 +187,7 @@ export class CoursedetailsComponent implements OnInit {
 
   playCourse(i) {
     console.log(i);
+    this.route.navigate(["/Learner/scorm", { id: i }]);
     this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
       console.log(viewCourse)
     });
