@@ -22,7 +22,7 @@
               </div><br> -->
               <div class="row">
                 <textarea  [disabled]='showdeletedicon' class="inputs" placeholder="500 characters" maxlength="500" 
-                [(ngModel)]="profileDetails.info" name="info"></textarea>
+                [(ngModel)]="profileDetails.about_you" name="info"></textarea>
               </div><br>
               <div class="row">
                 <mat-label >Gender</mat-label><span class="text-danger">*</span>
@@ -47,7 +47,7 @@
                 <mat-label>Language Known</mat-label><br>
               </div>
               <div class="row language">
-                <mat-select  [disabled]='showdeletedicon' multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language" >
+                <mat-select  [disabled]='showdeletedicon' multiple class="inputs" placeholder="Language" [(ngModel)]="profileDetails.languages_known" name="language" >
                   <mat-option *ngFor="let item of languageList" [value]="item._id">
                     {{item.languagename}}
                   </mat-option>
@@ -74,7 +74,7 @@
                   </mat-select>
                 </div>
                 <div class="col">
-                  <mat-select  [disabled]='showdeletedicon' class="selectinputs" [(ngModel)]="profileDetails.city" name="city" placeholder="City" required>
+                  <mat-select  [disabled]='showdeletedicon' class="selectinputs" [(ngModel)]="profileDetails.city_town" name="city" placeholder="City" required>
                     <mat-option [value]="city._id" *ngFor="let city of cityValue">
                       {{city.districtname}}
                     </mat-option>
@@ -94,7 +94,7 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <img [src]="url ? url : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
+                  <img [src]="'profileDetails.profile_img' ? url : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
                   <div style="margin-top: -43%;" >
                     <input   style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
                     <mat-icon class="camera" for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
@@ -113,9 +113,9 @@
                 <!-- </div><br> -->
                
                 <div class="col">
-                  <md-button class="profilecomplete">10% </md-button>
+                  <md-button class="profilecomplete">{{profileDetails.progress}} </md-button>
                   <section class="example-section">
-                    <mat-progress-bar class="example-margin" mode="determinate" value="10">
+                    <mat-progress-bar class="example-margin" mode="determinate" value="profileDetails.progress">
                     </mat-progress-bar>
                   </section>
                 </div>
@@ -237,7 +237,7 @@
       </div>
       <div class="row">
         <div class="col-sm-2">
-          <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link" [(ngModel)]="profileDetails.socialMedia" name="socialMedia">
+          <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link" [(ngModel)]="profileDetails.social_media" name="socialMedia">
         </div>
         <div class="col-sm-3">
         <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
@@ -251,15 +251,15 @@
           <div class="col-sm-6">
             <div class="row">
               <div class="col-sm-4">
-                <input [disabled]='showdeletedicon' type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.totExp"
+                <input [disabled]='showdeletedicon' type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.professional.total_experience"
                   name="totExp" maxlength="2" required>
               </div>
               <div class="col-sm-4">
                   <input [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
-                  [(ngModel)]="profileDetails.currentOrg" name="currentOrg" minlength="4" maxlength="16" required>
+                  [(ngModel)]="profileDetails.professional.organization" name="currentOrg" minlength="4" maxlength="16" required>
                 </div>
               <div class="col-sm-4">
-                <input  [disabled]='showdeletedicon' class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.currentRole"
+                <input  [disabled]='showdeletedicon' class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.professional.job_role"
                   name="currentRole" required>
               </div>
             </div>
@@ -268,8 +268,8 @@
       </div>
 
       <div class="bt">
-        <button class="subbtn" [disabled]="enable" (click)="updateProfile(language,profileDetails.country,
-        profileDetails.state,profileDetails.city,profileDetails.socialMedia,profileDetails.info,profileDetails.totExp,profileDetails.currentOrg,profileDetails.currentRole)">Submit</button>
+        <button class="subbtn" [disabled]="enable" (click)="updateProfile(profileDetails.languages_known,profileDetails.country,
+        profileDetails.state,profileDetails.city_town,profileDetails.social_media,profileDetails.about_you,profileDetails.professional.total_experience,profileDetails.professional.organization,profileDetails.professional.job_role)">Submit</button>
       </div><br>
     </form>
       </div>

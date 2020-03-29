@@ -55,6 +55,7 @@ export class ProfileComponent implements OnInit {
   languageList: any;
   isenable:boolean = true;
   userData:any = {};
+  qualification:any = {};
   showdeletedicon:boolean = true;
   uniValue: void;
   url:String = '';
@@ -169,6 +170,10 @@ export class ProfileComponent implements OnInit {
   getprofileDetails(userid) {
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
+      this.profileDetails = this.userData.user_profile[0];
+      this.qualification = this.userData.qualification[0];
+      console.log( this.profileDetails,' this.profileDetails')
+      console.log( this.qualification,' this.data')
     })
   }
   addnewQual(index) {
@@ -212,6 +217,8 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(language,country,state,city,social,about_you,exp,org,role) {
+    // role = 'aaaasd';
+    console.log(language,country,state,city,social,about_you,exp,org,role)
     if(this.profileDetails.profession == 'student') {
       if(this.profileDetails.gender  && this.profileDetails.country  &&
         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
@@ -225,9 +232,9 @@ export class ProfileComponent implements OnInit {
         }
     } else if(this.profileDetails.profession == 'professional'){
       // return false;
-      if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
-       this.profileDetails.currentRole  && this.profileDetails.country  &&
-        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+      if(this.profileDetails.gender  && exp  && org  &&
+        role  && this.profileDetails.country  &&
+        this.profileDetails.state  && city  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
           this.profileDetailCheck = true;
@@ -266,6 +273,10 @@ export class ProfileComponent implements OnInit {
       progress='100%'
     }
 
+    for (const iterator of this.words2) {
+        this.certificate.push(iterator.value)
+      } 
+
     var professional={
       total_experience:exp,
       organization:org,
@@ -284,9 +295,9 @@ export class ProfileComponent implements OnInit {
       state:state,
       city_town:city,
       qualification:this.qual,
-     certificate:this.words2,
+     certificate:this.certificate,
      social_media:social_media,
-     about_you:about_you ,
+     about_you:about_you[0] ,
      professional:professional,
      progress:progress,
      created_by_ip:localStorage.getItem('Systemip')
@@ -415,6 +426,7 @@ export class ProfileComponent implements OnInit {
       profile_img:img
      }
          this.service.update_profile(jsonData).subscribe(data => {
+           console.log(data,'profileUpdateData')
     })
     
     if(this.profileDetails.gender === undefined){
