@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  { path: "terms", component: TermsconditionsComponent },
+  { path : "terms",component:TermsconditionsComponent},
   { path: 'scorm', component: ScormplayerComponent },
 ];
 

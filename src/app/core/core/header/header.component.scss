@@ -9,6 +9,11 @@
         color: white !important;
     }
 }
+.smallmenu{
+    font-size: 18px;
+    margin-left: 14px;
+    padding-top: 30px;
+}
 .drop{
     font-size: 18px;
     margin-top: 28px;
@@ -36,16 +41,14 @@ a{
     font-weight: lighter;
 }
 .bg-dark {
-    background-color:#1F3777!important;
+    background-color: $color-blue!important;
 }
 .logo{
     height: 42px;
 }
-.menubar{
-    
-}
+
 .mat-menu-panel{
-    background-color: #1F3777 !important;
+    background-color:  $color-blue !important;
     color: $color-white;
 }
 
@@ -56,6 +59,7 @@ mat-icon{
     display: block;
     width: 196px;
     height: calc(1.5em + .75rem + 2px);
+    color: white;
 }
 .bellicon{
     font-size: 21px;

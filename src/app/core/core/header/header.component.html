@@ -1,14 +1,12 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-
   <img class="logo" src="../../assets/images/logo.png">
   <a class="navbar-brand edutech" href="#">EDUTECH</a>
-
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
+  <!-- id="navbarCollapse" -->
+  <div class="collapse navbar-collapse" >
     <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
       <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
@@ -27,7 +25,7 @@
     </ul>
 
 
-    <div class="input-group" id="navbarCollapse">
+    <div class="input-group">
       <input class="form-control border-right-0" placeholder="  Search courses  ">
       <span class="input-group-append bg-white border-left-0">
         <span class="input-group-text bg-transparent">
@@ -36,7 +34,7 @@
       </span>
     </div>
 
-    <div class="" id="navbarCollapse">
+    <div class="">
       <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
         <ul class="navbar-nav mr-auto">
           <li>
@@ -61,7 +59,8 @@
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
         <button mat-menu-item>
-          <label routerLink="/Learner/profile">Profile</label>
+          <a routerLink="[/Learner/profile]"></a>
+          <label> Profile</label>
         </button>
         <button mat-menu-item>
           <label>My Course</label>
@@ -80,12 +79,48 @@
         </button>
       </mat-menu>
     </div>
-
-    <button mat-icon-button aria-label class="login" *ngIf="userDetailes == null">
-      <a routerLink="[/Learner/login]">Login</a>
-    </button>
-    <!-- <button mat-icon-button aria-label class="login" *ngIf="userDetailes == null">
-      Register
-    </button> -->
   </div>
+  
+<div class="collapse navbar-collapse" id="navbarCollapse">
+  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
+    <ul class="navbar-nav mr-auto">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+          All Courses
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- <li><a href="#">Link</a></li>
+                      <li><a href="#">Link</a></li>
+                      <li><a href="#">Link</a></li> -->
+        </ul>
+      </li>
+      <li class="smallmenu">
+        <a href="#" >
+          Search
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#" >
+          Notifications
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#" >
+          My Cart
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#" >
+          Profile
+        </a>
+      </li>
+    </ul>
+    
+  </ul>
+
+</div>
 </nav>
