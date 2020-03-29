@@ -14,6 +14,7 @@ import { Certificate } from 'crypto';
 })
 export class ProfileComponent implements OnInit {
   mailForm: FormGroup;
+  enabel:Boolean=true
   public qual: any[] = [{
     qualification: '',
     board_university: '',
@@ -67,7 +68,9 @@ export class ProfileComponent implements OnInit {
     private dialog: MatDialog,
     private loader:Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
-  ) { }
+  ) { 
+    this.enabel=false
+  }
 
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
@@ -224,18 +227,27 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(language,country,state,city,social,about_you,exp,org,role) {
-      
- 
     var social_media =[{
       link:social,
       img:""
     }]
+    var progress;
+    console.log(this.words2.length,'  ',social_media.length)
+    if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined&&localStorage.getItem('user_img')==undefined&&localStorage.getItem('user_img')==null){
+      progress='60%'
+    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined &&localStorage.getItem('user_img')&&language==undefined&&this.words2.length==1&&social_media.length==1){
+      progress='90%'
+    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined 
+      &&localStorage.getItem('user_img')&&language!=undefined&&this.words2!=undefined&& social!=undefined){
+      progress='100%'
+    }
+
     var professional={
       total_experience:exp,
       organization:org,
       job_role:role
     }
-    var profileImg
+
     
     var jsonData={
       user_id:this.currentUser.user_id,
@@ -252,10 +264,10 @@ export class ProfileComponent implements OnInit {
      social_media:social_media,
      about_you:about_you ,
      professional:professional,
+     progress:progress,
      created_by_ip:localStorage.getItem('Systemip')
     }
    
-    console.log(jsonData)
     this.loader.show();
     this.service.update_profile(jsonData).subscribe(data => {
       console.log(data)
