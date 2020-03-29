@@ -18,12 +18,6 @@ export class HeaderComponent implements OnInit {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
   }
 
-  navigateProfile(){
-
-this.router.navigate(['/Learner/profile'])
-
-  }
-
   logout() {
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
       console.log(logout.data.logout)
@@ -35,7 +29,7 @@ this.router.navigate(['/Learner/profile'])
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)
       else
-      this.alert.openAlert('Please try again later',null)
+        this.alert.openAlert('Please try again later', null)
     });
   }
 }
