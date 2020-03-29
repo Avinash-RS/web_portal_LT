@@ -17,7 +17,7 @@ export class CourseComponentComponent implements OnInit {
   userDetail: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
-    private router: Router, private loader: Ng4LoadingSpinnerService,) {
+    private router: Router, private loader: Ng4LoadingSpinnerService, ) {
 
   }
 
@@ -73,12 +73,14 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    console.log(course,this.course)
+    console.log(course, this.course)
     var id = this.course.course_id;
-    this.router.navigate(['/Learner/courseDetail',{id : id,wishlist :this.course.wishlisted,wishlist_id : this.course.wishlist_id }])
+    this.router.navigate(['/Learner/courseDetail', { id: id, wishlist: this.course.wishlisted, wishlist_id: this.course.wishlist_id }])
   }
 
   goTocourse(status) {
     console.log(status)
+    // if (status == 'start')
+    this.router.navigate(["/Learner/scorm", { id: 'FSL' }]);
   }
 }
