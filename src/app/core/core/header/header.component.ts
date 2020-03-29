@@ -18,6 +18,12 @@ export class HeaderComponent implements OnInit {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
   }
 
+  navigateProfile(){
+
+this.router.navigate(['/Learner/profile'])
+
+  }
+
   logout() {
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
       console.log(logout.data.logout)

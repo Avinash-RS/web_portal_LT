@@ -57,21 +57,21 @@
     </button>
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
-        <button mat-menu-item>
-          <a routerLink="[/Learner/profile]"></a>
-          <label> Profile</label>
+        <button mat-menu-item (click)="navigateProfile()">
+          <!-- <a routerLink="[/Learner/profile]"></a> -->
+          <label>Profile</label>
         </button>
         <button mat-menu-item>
           <label>My Course</label>
         </button>
         <button mat-menu-item>
-          <label>Dashboard</label>
+          <label >Dashboard</label>
         </button>
         <button mat-menu-item>
-          <label>Wishlist</label>
+          <label >Wishlist</label>
         </button>
         <button mat-menu-item>
-          <label>Certificate</label>
+          <label style="color: #fff;">Certificate</label>
         </button>
       </mat-menu>
     </div>
