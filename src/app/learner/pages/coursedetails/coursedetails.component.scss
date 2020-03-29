@@ -44,7 +44,8 @@ p,span, div,h1,h2,h3,small,strong {
     height: 7vh;
     width: 60%;
     opacity: 1 !important;
-    border-radius: none;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     color: white;
     font-size: 20px;
     font-weight: 200;
@@ -98,6 +99,7 @@ p,span, div,h1,h2,h3,small,strong {
     .course_name {
         font-size: 2.3rem;
         line-height: 2rem;
+        font-weight: 400;
     }
 
     .course_desc {
@@ -225,6 +227,7 @@ mat-card {
 }
 .space_5 {
     margin-top: 2%;
+    font-weight: 500;
 }
 
 .rating_number {
@@ -316,3 +319,6 @@ background-color: $color-maroon !important;
        
     }
   }
+.day_left{
+    font-size: 18px;
+}
