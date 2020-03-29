@@ -168,8 +168,10 @@ export class ProfileComponent implements OnInit {
 
 // View Profile
   getprofileDetails(userid) {
+    this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
+      this.loader.hide();
       this.profileDetails = this.userData.user_profile[0];
       this.qualification = this.userData.qualification[0];
       console.log( this.profileDetails,' this.profileDetails')
