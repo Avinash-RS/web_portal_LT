@@ -228,19 +228,23 @@
       </div> 
       </div><br>
       <div>
-        <div class="row certificate" *ngFor="let word2 of words2; let in=index" class="col-sm-3">
-          <div class="form-group">
-            <input type="text" [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
-            <button (click)="add()">Add input</button>
-            <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
+        <div class="row" *ngFor="let word2 of words2; let in=index">
+          <div class="col-sm-2">
+            <input class="input" type="text" placeholder="Certificate Link" [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
           </div>
-         
-          <br />
+            <div class="col-sm-3 plusicon">
+            <mat-icon (click)="add()">add_circle_outline</mat-icon>
+            <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
+           
+          </div>
       </div><br>
       </div>
-      <div class="row certificate">
+      <div class="row">
         <div class="col-sm-2">
           <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="profileDetails.socialMedia" name="socialMedia">
+        </div>
+        <div class="col-sm-3">
+        <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
         </div>
       </div><br>
       <div *ngIf="profileDetails.profession == 'professional'">
