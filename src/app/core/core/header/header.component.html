@@ -6,7 +6,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <!-- id="navbarCollapse" -->
-  <div class="collapse navbar-collapse" >
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
       <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
@@ -23,7 +23,6 @@
         </li>
       </ul>
     </ul>
-
 
     <div class="input-group">
       <input class="form-control border-right-0" placeholder="  Search courses  ">
@@ -56,20 +55,21 @@
       *ngIf="userDetailes != null">
       <mat-icon>more_vert</mat-icon>
     </button>
+
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
         <!-- added routerLink - Mythreyi -->
-        <button class="backgroundcol" routerLink="/Learner/profile"  mat-menu-item >
+        <button class="backgroundcol" routerLink="/Learner/profile" mat-menu-item>
           <label>Profile</label>
         </button>
-        <button class="backgroundcol" routerLink="/Learner/MyCourse"  mat-menu-item>
+        <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
           <label>My Course</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
-          <label >Dashboard</label>
+          <label>Dashboard</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
-          <label >Wishlist</label>
+          <label>Wishlist</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
           <label style="color: #fff;">Certificate</label>
@@ -80,8 +80,12 @@
       </mat-menu>
     </div>
   </div>
-</nav>
+<div class="login_btn"  *ngIf="userDetailes == null">
+  <button class="backgroundcol" routerLink="/Learner/login" >Login</button>
+  <button class="backgroundcol" routerLink="/Learner/register" >Register</button>
+</div>
 
+</nav>
 
 <div class="collapse navbar-collapse" id="navbarCollapse">
   <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null" id="navbarCollapse">
@@ -95,30 +99,31 @@
         </ul>
       </li>
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Search
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Notifications
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           My Cart
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Profile
         </a>
       </li><br><br>
     </ul>
-    
+
   </ul>
 
 </div>
+

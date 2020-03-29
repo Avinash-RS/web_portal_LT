@@ -9,7 +9,7 @@
     margin-top: 8px;
 
     #dropdown.a {
-        color:  $color-white !important;
+        color: $color-white !important;
     }
 }
 
@@ -26,7 +26,7 @@
 }
 
 a {
-    color:  $color-white !important;
+    color: $color-white !important;
 }
 
 .coursesmenu {
@@ -36,7 +36,7 @@ a {
 
 .box {
     font-size: 26px;
-    color:  $color-white;
+    color: $color-white;
     margin-top: 6px;
     margin-left: 12px;
 }
@@ -64,26 +64,26 @@ a {
 }
 
 mat-icon {
-    color:  $color-white;
+    color: $color-white;
 }
 
 .form-control {
     display: block;
     width: 196px;
     height: calc(1.5em + .75rem + 2px);
-    color:  $color-white;
+    color: $color-white;
 }
 
 .bellicon {
     font-size: 21px;
-    color:  $color-white;
+    color: $color-white;
     padding-right: 36px;
     margin-top: 4px;
 }
 
 .carticon {
     font-size: 21px;
-    color:  $color-white;
+    color: $color-white;
     padding-right: 36px;
     margin-top: 4px;
 }
@@ -117,13 +117,13 @@ input[type=text] {
 }
 
 ::placeholder {
-    color:  $color-white;
+    color: $color-white;
     opacity: 1;
 }
 
 .bg-transparent {
     background-color: $color-blue !important;
-    color:  $color-white;
+    color: $color-white;
 }
 
 .login {
@@ -131,6 +131,7 @@ input[type=text] {
     font-size: 16px !important;
     margin-right: 5px;
 }
+
 .navbar-collapse {
     background-color: $color-blue;
 }
@@ -139,10 +140,11 @@ input[type=text] {
     margin-top: 60px;
 
     #dropdown.a {
-        color:  $color-white !important;
+        color: $color-white !important;
     }
 }
-.backgroundcol{
+
+.backgroundcol {
     cursor: pointer;
     background-color: $color-blue !important;
 }
@@ -152,12 +154,20 @@ label {
     background: $color-blue;
     cursor: pointer;
 }
+
 .mat-menu-panel {
     background: $color-blue !important;
-  }
+}
 
-  .mat-menu-content:not(:empty) {
+.mat-menu-content:not(:empty) {
     padding-top: 8px;
     padding-bottom: 8px;
     background: $color-blue !important;
-  }
+}
+
+.login_btn button {
+    margin-right: 7px;
+    color: white;
+    border: none;
+    font-size: 15px;
+}
