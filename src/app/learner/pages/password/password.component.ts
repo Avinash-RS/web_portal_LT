@@ -38,7 +38,7 @@ export class PasswordComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
             username: new FormControl('', myGlobals.usernameVal),
             password: new FormControl('', myGlobals.passwordVal),
-            // confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+            confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
   }, {
     validator: MustMatch('password', 'confirmpassword'),
   });

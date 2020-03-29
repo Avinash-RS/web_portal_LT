@@ -22,7 +22,7 @@
               </div><br> -->
               <div class="row">
                 <textarea class="inputs" placeholder="500 characters" maxlength="500" 
-                [(ngModel)]="info" name="info"></textarea>
+                [(ngModel)]="profileDetails.info" name="info"></textarea>
               </div><br>
               <div class="row">
                 <mat-label >Gender</mat-label><span class="text-danger">*</span>
@@ -47,7 +47,7 @@
                 <mat-label>Language Known</mat-label><br>
               </div>
               <div class="row language">
-                <mat-select multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language">
+                <mat-select multiple class="inputs" placeholder="Language" [(ngModel)]="language" name="language" >
                   <mat-option *ngFor="let item of languageList" [value]="item._id">
                     {{item.languagename}}
                   </mat-option>
@@ -168,35 +168,36 @@
         <mat-label>Qualification</mat-label><span class="text-danger">*</span>
       </div>
       <div class="row" *ngFor="let qualification of qual; let i = index;">
+
         <div class="col-sm-6">
           <div class="row">
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.level" name="level" placeholder="Level" required>
-                <mat-option [value]="level.level_id" *ngFor="let level of levelValue">
+              <mat-select class="inputs" [(ngModel)]="qual[i].qualification" name="qualification{i}}" #name="ngModel" placeholder="Level" required>
+                <mat-option [value]="level._id" *ngFor="let level of levelValue">
                   {{level.level_name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.board" name="board" placeholder="Board/University" 
+              <mat-select class="inputs" [(ngModel)]="qual[i].board_university" name="board_university{{i}}" #name="ngModel" placeholder="Board/University" 
                required>
-                <mat-option [value]="board.Board_Id" *ngFor="let board of boardValue, let univ of uniValue">
+                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.institute" name="institute" placeholder="Institute" required>
-                <mat-option [value]="item.institute_id" *ngFor="let item of institutes">
+              <mat-select class="inputs" [(ngModel)]="qual[i].institute" name="institute{{i}}" #name="ngModel" placeholder="Institute" required>
+                <mat-option [value]="item._id" *ngFor="let item of institutes">
                   {{item.institute_name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.discipline" name="discipline"
+              <mat-select class="inputs" [(ngModel)]="qual[i].discipline" name="discipline{{i}}" #name="ngModel" 
                 placeholder="Discipline" required>
-                <mat-option [value]="item.discipline_id" *ngFor="let item of dis">
+                <mat-option [value]="item._id" *ngFor="let item of dis">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
@@ -206,18 +207,17 @@
         <div class="col-sm-6">
           <div class="row">
             <div class="col-sm-3">
-              <mat-select class="inputs" [(ngModel)]="qualification.spec" name="spec" placeholder="Specification" required>
-                <mat-option [value]="item.specification_id" *ngFor="let item of specValue">
+              <mat-select class="inputs" [(ngModel)]="qual[i].specification" name="specification{{i}}" #name="ngModel" placeholder="Specification" required>
+                <mat-option [value]="item._id" *ngFor="let item of specValue">
                   {{item.specification_name}}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-sm-3">
-              <input type="text"  class="inputs" placeholder="Year of Passing"  mask="0000" [(ngModel)]="qualification.year"
-                name="year" maxlength="4" minlength="4" required>
+              <input type="text"  class="inputs" placeholder="Year of Passing"  mask="0000" [(ngModel)]="qual[i].year_of_passing" name="year_of_passing{{i}}" #name="ngModel" maxlength="4" minlength="4" required>
             </div>
             <div class="col-sm-3">
-              <input type="text" class="inputs" placeholder="Percentage" mask="00.00" [(ngModel)]="qualification.percentage" name="percentage" required>
+              <input type="text" class="inputs" placeholder="Percentage" mask="00.00" [(ngModel)]="qual[i].percentage" name="percentage{{i}}"  #name="ngModel" required>
             </div>
             <div class="col-sm-3 plusicon">
               <mat-icon  (click)="addnewQual(i)">add_circle_outline</mat-icon>
@@ -228,19 +228,23 @@
       </div> 
       </div><br>
       <div>
-      <div class="row certificate" *ngFor="let link of links; let i = index;">
-        <div class="col-sm-2">
-          <input class="inputs" placeholder="Certificate Link" [(ngModel)]="link.certificate" name="certificate">
-        </div>
-        <div class="col-sm-2 plusicon2">
-          <mat-icon (click)="addnewLink(i)">add_circle_outline</mat-icon>
-          <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
-        </div>
+        <div class="row" *ngFor="let word2 of words2; let in=index">
+          <div class="col-sm-2">
+            <input class="input" type="text" placeholder="Certificate Link" [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
+          </div>
+            <div class="col-sm-3 plusicon">
+            <mat-icon (click)="add()">add_circle_outline</mat-icon>
+            <mat-icon   (click)="removenewLink(i)">delete</mat-icon>
+           
+          </div>
       </div><br>
       </div>
-      <div class="row certificate">
+      <div class="row">
         <div class="col-sm-2">
-          <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="socialMedia" name="socialMedia">
+          <input class="inputs" placeholder="Socialmedia Link" [(ngModel)]="profileDetails.socialMedia" name="socialMedia">
+        </div>
+        <div class="col-sm-3">
+        <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
         </div>
       </div><br>
       <div *ngIf="profileDetails.profession == 'professional'">
@@ -259,8 +263,8 @@
                   [(ngModel)]="profileDetails.currentOrg" name="currentOrg" minlength="4" maxlength="16" required>
                 </div>
               <div class="col-sm-4">
-                <input class="inputs" placeholder="Current role" [(ngMdel)]="currentRole"
-                  name="profileDetails.currentRole" required>
+                <input class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.currentRole"
+                  name="currentRole" required>
               </div>
             </div>
           </div>
@@ -268,7 +272,8 @@
       </div>
 
       <div class="bt">
-        <button class="subbtn" (click)="updateProfile()">Submit</button>
+        <button class="subbtn" [disabled]="enable" (click)="updateProfile(language,profileDetails.country,
+        profileDetails.state,profileDetails.city,profileDetails.socialMedia,profileDetails.info,profileDetails.totExp,profileDetails.currentOrg,profileDetails.currentRole)">Submit</button>
       </div><br>
     </form>
       </div>

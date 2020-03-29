@@ -79,7 +79,7 @@ height: 50px;
   font-size: 22px !important;
   font-weight: 500 !important;
   color:$color-blue;
-  margin-top: 37%;
+  margin-top: 15%;
 }
 .cameraicon{
   margin-left: -47px;
@@ -100,8 +100,24 @@ height: 50px;
   border-radius: 5px;
   color: $color-blue;
   width: 100%;
+  background-color: none !important;
 }
 
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 9px 20px;
+  margin: 1px 0;
+  background: white;
+  display: inline-block;
+  border: 1px solid $color-blue;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.linkedin{
+  font-size: 35px;
+  margin-top: 8px;
+}
 .selectinputs{
   border: 1px solid;
   padding: 8px !important;
