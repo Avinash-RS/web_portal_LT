@@ -127,8 +127,10 @@ p,span, div,h1,h2,h3,small,strong {
 }
 
 .course_preview {
-    margin-left: 12vh;
-    margin-top: -9.5vh;
+    // margin-left: 12vh;
+    // margin-top: -9.5vh;
+    margin-left: 15vh;
+    margin-top: -11.5vh;
 }
 
 
@@ -283,4 +285,13 @@ background-color: $color-maroon !important;
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
+}
+.whitefont{
+    color: #fff !important;
+}
+.tabstyle{
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #e8e5e5;
 }

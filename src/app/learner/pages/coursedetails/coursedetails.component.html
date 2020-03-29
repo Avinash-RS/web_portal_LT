@@ -64,7 +64,7 @@
                 </td>
             </tr>
             <tr>
-                <td> <span class="background-maroon border-radius-5 p-5px">Last updated
+                <td> <span class="background-maroon whitefont border-radius-5 p-5px">Last updated
                         {{course.updated_at | date}}</span></td>
                 <!-- <td> Last updated {{course.updated_on}}</td> -->
                 <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
@@ -75,7 +75,7 @@
         <!-- <button style="background-color: transparent;"> -->
         <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
-        width: 10%;
+        /* width: 10%; */
         border-radius: 50px; 
         padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
         <!-- </button> -->
@@ -92,7 +92,7 @@
     </div>
 
     <div class="wrap_content">
-        <div class="tabs width_60">
+        <div class="tabs width_60 tabstyle">
             <button mat-raised-button>About</button>
             <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
             <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
