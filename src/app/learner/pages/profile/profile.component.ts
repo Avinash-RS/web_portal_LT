@@ -275,7 +275,7 @@ for (const iterator of this.words2) {
       console.log(data)
       if(data.data['update_profile']['success'] == 'true'){
         this.loader.hide();
-        this.alert.openAlert(data.data['update_profile'].message,null)
+        this.alert.openAlert('Profile updated successfully.',null)
       
       } else{
         this.alert.openAlert(data.data['update_profile'].message,null)
