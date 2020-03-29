@@ -24,7 +24,7 @@
             <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div><br>
             <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
             <div>
-                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
+                <!-- <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
                     <i class="fa fa-share"
                         style="-webkit-text-stroke-color: #db3137;  font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true"></i>Share</button>
@@ -36,7 +36,14 @@
                     <i class="fa fa-heart"
                         style="-webkit-text-stroke-color: #db3137; color: #db3137;font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true" *ngIf="course.wishlisted == true"></i>
-                    Wishlist</button>
+                    Wishlist</button> -->
+                    
+<span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"></i>  Share</span>
+<span  class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)" >
+    <i class="fa fa-heart" *ngIf="course.wishlisted == false"></i> 
+    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i> 
+    
+    Whilelist</span>
             </div>
         </mat-card-content>
         <br><br>

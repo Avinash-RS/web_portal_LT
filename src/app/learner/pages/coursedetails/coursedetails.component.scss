@@ -295,3 +295,28 @@ background-color: $color-maroon !important;
     width: 100%;
     border-bottom: 1px solid #e8e5e5;
 }
+.btn2 {
+    background-color: #fff !important;
+    border: none;
+    color: red !important;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid red;
+    cursor: pointer;
+    width: 45%;
+    margin: 2%;
+    padding: 4px;
+    i{
+        border: 0px;
+        color: none !important;
+        box-shadow: none;
+        border: red !important;
+        -webkit-text-stroke-color: red !important;
+       
+    }
+  }
+  
+  /* Darker background on mouse-over */
+  .btn2:hover {
+    background-color: RoyalBlue;
+  }
