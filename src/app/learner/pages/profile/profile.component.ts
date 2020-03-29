@@ -247,7 +247,9 @@ export class ProfileComponent implements OnInit {
       organization:org,
       job_role:role
     }
-
+for (const iterator of this.words2) {
+  this.certificate.push(iterator.value)
+}
     
     var jsonData={
       user_id:this.currentUser.user_id,
@@ -260,14 +262,14 @@ export class ProfileComponent implements OnInit {
       state:state,
       city_town:city,
       qualification:this.qual,
-     certificate:this.words2,
+     certificate:this.certificate,
      social_media:social_media,
      about_you:about_you ,
      professional:professional,
      progress:progress,
      created_by_ip:localStorage.getItem('Systemip')
     }
-   
+   console.log(jsonData)
     this.loader.show();
     this.service.update_profile(jsonData).subscribe(data => {
       console.log(data)
