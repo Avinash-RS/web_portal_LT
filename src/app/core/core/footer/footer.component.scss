@@ -7,6 +7,12 @@
   bottom: 0;
   padding: 20px 50px 10px 50px;
 
+  .icon {
+    font-size: 20px;
+    margin-left: 15px;
+
+  }
+
   .content-title {
     height: 150px;
     display: flex;
@@ -36,7 +42,7 @@
     display: flex;
     justify-content: flex-end;
     color: #c2cbe2;
-    font-size: 10px;
+    font-size: 11px;
 
     .copyright-title {
       margin-left: 100px;
