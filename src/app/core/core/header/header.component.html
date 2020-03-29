@@ -80,19 +80,18 @@
       </mat-menu>
     </div>
   </div>
-  
+</nav>
+
+
 <div class="collapse navbar-collapse" id="navbarCollapse">
-  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
-    <ul class="navbar-nav mr-auto">
-      <li class="dropdown">
+  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto" id="navbarCollapse">
+      <li class="dropdownsmall">
         <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
           All Courses
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <!-- <li><a href="#">Link</a></li>
-                      <li><a href="#">Link</a></li>
-                      <li><a href="#">Link</a></li> -->
         </ul>
       </li>
       <li class="smallmenu">
@@ -117,10 +116,9 @@
         <a href="#" >
           Profile
         </a>
-      </li>
+      </li><br><br>
     </ul>
     
   </ul>
 
 </div>
-</nav>

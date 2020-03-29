@@ -113,3 +113,15 @@ input[type=text]{
     font-size: 16px !important;
     margin-right: 5px;
 }
+.navbar-collapse {
+ 
+    background-color: $color-blue;
+    // margin-top: 13%;
+    // padding-bottom: 20px;
+}
+.dropdownsmall{
+    margin-top: 60px;
+    #dropdown.a{
+        color: white !important;
+    }
+}
