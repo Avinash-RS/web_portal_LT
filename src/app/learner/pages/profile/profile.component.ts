@@ -14,6 +14,8 @@ import { Certificate } from 'crypto';
 })
 export class ProfileComponent implements OnInit {
   mailForm: FormGroup;
+  otpForm: FormGroup;
+  passwordForm: FormGroup;
   enabel:Boolean=true
   public qual: any[] = [{
     qualification: '',
@@ -61,6 +63,7 @@ export class ProfileComponent implements OnInit {
   urlImage:any
   socialMedia:{}
   certificate:any=[]
+  profileDetailCheck: boolean = false;
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -75,7 +78,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if(params["status"]){
-        
         this.alert.openAlert(params['msg'], null);
       }
     });
@@ -89,22 +91,17 @@ export class ProfileComponent implements OnInit {
     this.getInstitute();
     this.getDiscipline();
     this.getSpec();
-    this.mailForm = this.formBuilder.group({
-      // info: new FormControl('', myGlobals.fullnameVal),
-      mailid: new FormControl('', myGlobals.emailVal),
-      mobile: new FormControl('', myGlobals.mobileVal),
-          otp1: new FormControl("", []),
-          otp2: new FormControl("", []),
-          otp3: new FormControl("", []),
-          otp4: new FormControl("", []),
-      currentpassword: new FormControl('', myGlobals.passwordVal),  
-      newpassword: new FormControl('', myGlobals.passwordVal),  
-      confirmpassword: new FormControl('', myGlobals.passwordVal),  
-    }, {
-    });
+    
   }
-  get f() { 
-    return this.mailForm.controls; 
+  get f() {
+    if(this.mailForm) {
+      return this.mailForm.controls; 
+    } else if(this.otpForm) {
+      return this.otpForm.controls; 
+    }else if(this.passwordForm) {
+      return this.passwordForm.controls;
+    }
+    
   }
   //Country List
   getAllcountry() {
@@ -124,27 +121,21 @@ export class ProfileComponent implements OnInit {
   }
   getAllLevels(){
     this.service.get_qualification_details().subscribe(level => {
-      
       this.levelValue = level.data['get_qualification_details'].data;
       if(this.levelValue == null){
         this.alert.openAlert(level.data['get_qualification_details'].message, null);
       }
-      
     })
   }
   getBoardsUniv(){
     this.service.get_board_university_details().subscribe(boards => {
-      
       this.boardValue = boards.data['get_board_university_details'].data['board'];
       this.uniValue = boards.data['get_board_university_details'].data['university'];
-
     })
   }
   getInstitute(){
     this.service.get_institute_details().subscribe(institute => {
-      
       this.institutes = institute.data['get_institute_details'].data;
-      
     })
   }
 
@@ -152,34 +143,28 @@ export class ProfileComponent implements OnInit {
     let stateId = city.value;
     this.service.get_district_details(this.countryId,stateId).subscribe(city => {
       this.cityValue = city.data['get_district_details'].data;
-      
     })
   }
   getDiscipline(){
     this.service.get_discipline_details().subscribe(discipline => {
       this.dis =discipline.data['get_discipline_details'].data;
-      
     })
   }
   getSpec(){
     this.service.get_specification_details().subscribe(spec => {
       this.specValue =spec.data['get_specification_details'].data;
-      
     })
   }
   getAllLanguage(){
     this.service.get_language_details().subscribe(language => {
       this.languageList = language.data['get_language_details'].data;
-      
     })
   }
 
 // View Profile
   getprofileDetails(userid) {
     this.service.view_profile(userid).subscribe(data => {
-      
       this.userData = data.data['view_profile'].message[0];
-      
     })
   }
   addnewQual(index) {
@@ -192,7 +177,6 @@ export class ProfileComponent implements OnInit {
       year_of_passing: '',
       percentage: ''
     });
-    console.log(this.qual)
     return true;  
   }
   removelastQual(index){
@@ -203,15 +187,12 @@ export class ProfileComponent implements OnInit {
       this.qual.splice(index, 1);   
       return true;  
     }
-  
   }
 
   addnewLink() {
-
     this.links.push({
       certificate: ''
     })
-    console.log(this.links,'lllllllllllllllllllllllll')
     // return true;
   }
 
@@ -227,12 +208,51 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(language,country,state,city,social,about_you,exp,org,role) {
+    if(this.profileDetails.profession == 'student') {
+      if(this.profileDetails.gender  && this.profileDetails.country  &&
+        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
+        } else {
+          this.loader.hide();
+          this.profileDetailCheck = false;
+          this.alert.openAlert('Please fill all required fields', null);
+        }
+    } else if(this.profileDetails.profession == 'professional'){
+      // return false;
+      if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
+       this.profileDetails.currentRole  && this.profileDetails.country  &&
+        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
+         
+        } else {
+          this.loader.hide();
+          this.profileDetailCheck = false;
+          this.alert.openAlert('Please fill all required fields', null);
+        }
+    } else {
+      if(this.profileDetails.gender  && this.profileDetails.profession  
+          && this.profileDetails.country  &&
+         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
+         } else {
+           this.loader.hide();
+           this.profileDetailCheck = false;
+           this.alert.openAlert('Please fill all required fields', null);
+         }
+    }
+     if(this.profileDetailCheck === true){
+        
     var social_media =[{
       link:social,
       img:""
     }]
     var progress;
-    console.log(this.words2.length,'  ',social_media.length)
     if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined&&localStorage.getItem('user_img')==undefined&&localStorage.getItem('user_img')==null){
       progress='60%'
     }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined &&localStorage.getItem('user_img')&&language==undefined&&this.words2.length==1&&social_media.length==1){
@@ -270,7 +290,6 @@ export class ProfileComponent implements OnInit {
    
     this.loader.show();
     this.service.update_profile(jsonData).subscribe(data => {
-      console.log(data)
       if(data.data['update_profile']['success'] == 'true'){
         this.loader.hide();
         this.alert.openAlert(data.data['update_profile'].message,null)
@@ -279,24 +298,39 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_profile'].message,null)
       }
     })
-    
+  }
     
   }
 
   editEmail(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
+    this.mailForm = this.formBuilder.group({
+      mailid: new FormControl('', myGlobals.emailVal)
+    });
   }
 
   editmobno(mobRef: TemplateRef<any>) {
     this.dialog.open(mobRef);
+    this.otpForm = this.formBuilder.group({
+      mobile: new FormControl('', myGlobals.mobileVal),
+          otp1: new FormControl("", []),
+          otp2: new FormControl("", []),
+          otp3: new FormControl("", []),
+          otp4: new FormControl("", []),
+    })
   }
   editPassword(passRef: TemplateRef<any>) {
     this.dialog.open(passRef);
+    this.passwordForm = this.formBuilder.group({
+      currentpassword: new FormControl('', myGlobals.passwordVal),  
+      newpassword: new FormControl('', myGlobals.passwordVal),  
+      confirmpassword: new FormControl('', myGlobals.passwordVal),  
+     });
   }
   //Update Mobile
   otpverification(){
     this.loader.show();
-    this.service.update_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile).subscribe(data => {
+    this.service.update_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile).subscribe(data => {
       
       if(data.data['update_mobile_onprofile']['success'] == 'true'){
         this.loader.hide();
@@ -311,8 +345,8 @@ export class ProfileComponent implements OnInit {
   }
   //Verify OTP
   otpverify(){
-    this.otp = this.mailForm.value.otp1+this.mailForm.value.otp2+this.mailForm.value.otp3+this.mailForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile,this.otp,).subscribe(data => {
+    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile,this.otp,).subscribe(data => {
   
           if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
             this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
@@ -327,7 +361,7 @@ export class ProfileComponent implements OnInit {
   updatePassword(){
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
-    this.service.get_change_password_updateprofile(this.currentUser.username,ps,this.mailForm.value.newpassword).subscribe(password => {
+    this.service.get_change_password_updateprofile(this.currentUser.username,ps,this.passwordForm.value.newpassword).subscribe(password => {
       
       if(password.data['get_change_password_updateprofile']['success'] == 'true'){
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
@@ -376,9 +410,7 @@ export class ProfileComponent implements OnInit {
       user_id:this.currentUser.user_id,
       profile_img:img
      }
-     console.log(jsonData)
          this.service.update_profile(jsonData).subscribe(data => {
-        console.log(data)
     })
     
     if(this.profileDetails.gender === undefined){
@@ -394,6 +426,5 @@ export class ProfileComponent implements OnInit {
    words2 = [{value: ''}];
    add() {
     this.words2.push({value: ''});
-    console.log(this.words2)
   }
 }
