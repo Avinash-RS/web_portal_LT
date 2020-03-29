@@ -142,13 +142,14 @@ input[type=text] {
     }
 }
 .backgroundcol{
-    
+    cursor: pointer;
     background-color: $color-blue !important;
 }
 
 label {
     color: $color-white;
     background: $color-blue;
+    cursor: pointer;
 }
 .mat-menu-panel {
     background: $color-blue !important;
