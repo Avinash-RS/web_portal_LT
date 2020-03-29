@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   userDetailes: any;
+  userimage: any;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
     private router: Router, ) { }
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userimage = localStorage.getItem('user_img')
   }
 
   logout() {

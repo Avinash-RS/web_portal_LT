@@ -82,6 +82,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(params['msg'], null);
       }
     });
+    this.urlImage = localStorage.getItem('user_img')
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     this.getprofileDetails(this.currentUser.user_id);

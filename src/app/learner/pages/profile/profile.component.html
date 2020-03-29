@@ -94,7 +94,7 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <img [src]="profileDetails.profile_img ? profileDetails.profile_img : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
+                  <img [src]="urlImage ? urlImage : '../../../../assets/learner/avatar2.png'" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar" class="avatar">
                   <div style="margin-top: -43%;" >
                     <input   style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
                     <mat-icon class="camera" for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
