@@ -35,7 +35,7 @@ import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component'
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'courseDetail', component: CoursedetailsComponent,canActivate: [AuthGuard] },
+  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegistrationComponent, },
   { path: 'otp', component: OtpComponent },
   { path: 'password', component: PasswordComponent },
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  {path :  "terms",component:TermsconditionsComponent},
+  { path: "terms", component: TermsconditionsComponent },
   { path: 'scorm', component: ScormplayerComponent },
 ];
 

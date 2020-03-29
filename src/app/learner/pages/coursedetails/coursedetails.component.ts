@@ -73,12 +73,12 @@ export class CoursedetailsComponent implements OnInit {
         this.loader.hide();
     });
 
-    this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
-      if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
-        this.wishlist = viewWishlist.data.view_wishlist.message;
-        // console.log(this.wishlist)
-      }
-    });
+    // this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+    //   if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
+    //     this.wishlist = viewWishlist.data.view_wishlist.message;
+    //     // console.log(this.wishlist)
+    //   }
+    // });
     this.service.list_content().subscribe((list_content: any) => {
       console.log(list_content)
       if (list_content.data.list_content.success) {

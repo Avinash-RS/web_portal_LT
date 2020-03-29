@@ -1,4 +1,4 @@
-<div class="example">
+<div class="example" style="z-index: -1;">
   <div class="wishlst" (change)="selectWishlist(course)">
     <!-- <img [ngStyle]="{'background-color':course.wishlisted === ture ? 'yellow' : 'black' }"
       src="../../../../assets/learner/key_down.svg"> -->
@@ -14,11 +14,11 @@
       <strong class="price">Rs {{course.price | number }}</strong></span>
   </p>
 
-   <button mat-raised-button class="status" block (click) = "goTocourse(course.text || 'Start')"
+   <button mat-raised-button *ngIf="from == 'myCourse'" class="status" block (click) = "goTocourse(course.text || 'Start')"
     [ngStyle]="{'background-color':course.text === 'Start' ? 
     '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '028514' : '#1f3777' }">{{course.text || 'Start'}}</button>
   <br>
-  <small class="progressBar">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
+  <small class="progressBar" *ngIf="from == 'myCourse'">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
   <mat-progress-bar *ngIf="course.text === 'Resume'" mode="determinate" value="{{course.statusValue}}">
   </mat-progress-bar> 
   <!-- <button *ngIf="from == 'myCourse'" mat-raised-button class="status" block

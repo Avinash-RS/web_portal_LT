@@ -1,12 +1,12 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Courses</a></li>
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Courses</a></li>
 
-      <li class="breadcrumb-item active" aria-current="page">Leadership: Practical Leadership Skills</li>
+        <li class="breadcrumb-item active" aria-current="page">Leadership: Practical Leadership Skills</li>
     </ol>
-  </nav>
+</nav>
 <div *ngIf="course != null">
     <div class="section_1"></div>
     <!-- <div class="section_1"></div> -->
@@ -37,13 +37,13 @@
                         style="-webkit-text-stroke-color: #db3137; color: #db3137;font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true" *ngIf="course.wishlisted == true"></i>
                     Wishlist</button> -->
-                    
-<span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"></i>  Share</span>
-<span  class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)" >
-    <i class="fa fa-heart" *ngIf="course.wishlisted == false"></i> 
-    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i> 
- Whilelist
-</span>
+
+                <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"></i> Share</span>
+                <span class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)">
+                    <i class="fa fa-heart" *ngIf="course.wishlisted == false"></i>
+                    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i>
+                    Whilelist
+                </span>
             </div>
         </mat-card-content>
         <br><br>
@@ -406,20 +406,8 @@
         </div>
     </div>
     <br><br><br>
-    <!-- <div class="width_90 m-l-5">
-    <h2>
-        Frequently bought together
-    </h2>
-    <br>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
-  
+
 </div>
-<div class="width_90 m-l-5">
-    <h2>
-        People Also Viewed
-    </h2>
-    <br>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
-</div> -->
-</div>
+
+
 <!-- <app-footer></app-footer> -->

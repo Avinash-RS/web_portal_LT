@@ -54,13 +54,14 @@
       </ul>
     </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+      *ngIf="userDetailes != null">
       <mat-icon>more_vert</mat-icon>
     </button>
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
         <button mat-menu-item>
-          <label  routerLink="/Learner/profile">Profile</label>
+          <label routerLink="/Learner/profile">Profile</label>
         </button>
         <button mat-menu-item>
           <label>My Course</label>
@@ -74,8 +75,17 @@
         <button mat-menu-item>
           <label>Certificate</label>
         </button>
+        <button mat-menu-item (click)="logout()">
+          <label>Logout</label>
+        </button>
       </mat-menu>
     </div>
 
+    <button mat-icon-button aria-label class="login" *ngIf="userDetailes == null">
+      <a routerLink="[/Learner/login]">Login</a>
+    </button>
+    <!-- <button mat-icon-button aria-label class="login" *ngIf="userDetailes == null">
+      Register
+    </button> -->
   </div>
 </nav>
