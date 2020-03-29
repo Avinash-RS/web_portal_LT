@@ -141,7 +141,21 @@ input[type=text] {
         color:  $color-white !important;
     }
 }
+.backgroundcol{
+    
+    background-color: $color-blue !important;
+}
 
 label {
     color: $color-white;
+    background: $color-blue;
 }
+.mat-menu-panel {
+    background: $color-blue !important;
+  }
+
+  .mat-menu-content:not(:empty) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: $color-blue !important;
+  }

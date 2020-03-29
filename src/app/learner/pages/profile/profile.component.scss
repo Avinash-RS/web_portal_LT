@@ -191,3 +191,9 @@ label{
 .mat-menu-panel {
   background: $color-blue !important;
 }
+
+.mat-menu-content:not(:empty) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background: $color-blue !important;
+}
