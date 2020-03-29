@@ -58,11 +58,11 @@
     </button>
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
-        <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
-          <!-- <a routerLink="[/Learner/profile]"></a> -->
+        <!-- added routerLink - Mythreyi -->
+        <button class="backgroundcol" routerLink="/Learner/profile"  mat-menu-item >
           <label>Profile</label>
         </button>
-        <button class="backgroundcol" mat-menu-item>
+        <button class="backgroundcol" routerLink="/Learner/MyCourse"  mat-menu-item>
           <label>My Course</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
