@@ -20,13 +20,13 @@ p,span, div,h1,h2,h3,small,strong {
     background-repeat: no-repeat !important;
     background-size: cover;
     padding: 0px;
-    margin-top: 1vh;
-    opacity: 0.4;
+    // margin-top: 1vh;
+    opacity: 0.2;
 }
 
 .section_1_card_1 {
     width: 30%;
-    top: 13%;
+    top: 21%;
     float: right;
     right: 5%;
     height: 50vh;
@@ -84,8 +84,12 @@ p,span, div,h1,h2,h3,small,strong {
 
 
 .section_1_a {
-    top: 8%;
-    padding: 4%;
+    // top: 8%;
+    // padding: 4%;
+    // width: 60%;
+    // color: black !important;
+    top: 22%;
+    padding: 0 4%;
     width: 60%;
     color: black !important;
 }
@@ -272,4 +276,11 @@ h2 {
 
 ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
 background-color: $color-maroon !important;
+}
+.coursebreadcrumb{
+    padding-top: 16px;
+    ol{
+        margin-bottom: 0 !important;
+        background-color: #fff !important;
+    }
 }
