@@ -7,8 +7,25 @@
 @import '~ngx-bar-rating/themes/br-default-theme.css';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
 
+$color-red: #FF0000;
+$color-green: #00FF00;
+$color-blue: #1F3777;
+$color-yellow: #ffcf01;
+$color-maroon : #db3137;
+$color-darkGrey : #5e5e5e;
+$color-icon : #ed989b;
+$color-white : #ffffff;
 
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px
+// );
 
 .f_wt_200 {
   font-weight: 300;
