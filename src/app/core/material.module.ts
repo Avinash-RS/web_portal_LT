@@ -20,8 +20,7 @@ import {
   MatAutocompleteModule,
   MatExpansionModule
 } from '@angular/material';
-import { FooterComponent } from '@core/core/footer/footer.component';
-import { HeaderComponent } from './core/header/header.component';
+
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -63,8 +62,7 @@ import { CommonModule } from '@angular/common';
     MatProgressBarModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    HeaderComponent,
-    FooterComponent
+   
   ],
   providers: [
     {
@@ -73,8 +71,7 @@ import { CommonModule } from '@angular/common';
     },
   ],
   declarations: [
-    HeaderComponent,
-    FooterComponent
+ 
   ]
 })
 export class MaterialModule { }

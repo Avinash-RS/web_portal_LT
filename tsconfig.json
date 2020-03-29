@@ -9,7 +9,8 @@
       "@admin/*": ["src/app/admin/*"],
       "@core/*": ["src/app/core/*"],
       "@learner/*": ["src/app/learner/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@env/*": ["src/environments/*"],
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
