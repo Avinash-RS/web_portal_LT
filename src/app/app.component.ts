@@ -33,7 +33,8 @@ export class AppComponent {
     } else {
       // commented by rajesh because whenever i will reload the page it clearing my localstorage
       // yeah Rajesh, u need to enable remember mer for this
-      localStorage.clear();
+      //if i am first time register i don't have remember me its giving lot of problem  :: ankit
+      // localStorage.clear();
     }
   }
 
