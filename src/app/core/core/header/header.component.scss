@@ -125,6 +125,11 @@ input[type=text] {
     color:  $color-white;
 }
 
+.login {
+    color: white !important;
+    font-size: 16px !important;
+    margin-right: 5px;
+}
 .navbar-collapse {
     background-color: $color-blue;
 }
