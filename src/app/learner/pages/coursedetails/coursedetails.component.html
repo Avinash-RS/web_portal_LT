@@ -1,4 +1,12 @@
 <app-header></app-header>
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Courses</a></li>
+
+      <li class="breadcrumb-item active" aria-current="page">Leadership: Practical Leadership Skills</li>
+    </ol>
+  </nav>
 <div *ngIf="course != null">
     <div class="section_1"></div>
     <!-- <div class="section_1"></div> -->
@@ -16,7 +24,7 @@
             <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div><br>
             <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
             <div>
-                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
+                <!-- <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
                     <i class="fa fa-share"
                         style="-webkit-text-stroke-color: #db3137;  font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true"></i>Share</button>
@@ -28,7 +36,14 @@
                     <i class="fa fa-heart"
                         style="-webkit-text-stroke-color: #db3137; color: #db3137;font-size: 15px; background-color: transparent;box-shadow:none;border:none "
                         aria-hidden="true" *ngIf="course.wishlisted == true"></i>
-                    Wishlist</button>
+                    Wishlist</button> -->
+                    
+<span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"></i>  Share</span>
+<span  class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)" >
+    <i class="fa fa-heart" *ngIf="course.wishlisted == false"></i> 
+    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i> 
+    
+    Whilelist</span>
             </div>
         </mat-card-content>
         <br><br>
@@ -56,7 +71,7 @@
                 </td>
             </tr>
             <tr>
-                <td> <span class="background-maroon border-radius-5 p-5px">Last updated
+                <td> <span class="background-maroon whitefont border-radius-5 p-5px">Last updated
                         {{course.updated_at | date}}</span></td>
                 <!-- <td> Last updated {{course.updated_on}}</td> -->
                 <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
@@ -67,7 +82,7 @@
         <!-- <button style="background-color: transparent;"> -->
         <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
-        width: 10%;
+        /* width: 10%; */
         border-radius: 50px; 
         padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
         <!-- </button> -->
@@ -84,7 +99,7 @@
     </div>
 
     <div class="wrap_content">
-        <div class="tabs width_60">
+        <div class="tabs width_60 tabstyle">
             <button mat-raised-button>About</button>
             <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
             <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
