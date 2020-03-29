@@ -414,10 +414,9 @@ export class ProfileComponent implements OnInit {
        const fb = new FormData();
        fb.append('image',this.selectfile,this.selectfile.name)
        this.service.imageupload(fb).subscribe(data =>{
-         
+           
            this.urlImage=data
-           console.log('https://rajeshkumarranjan.blob.core.windows.net/'+this.urlImage.path)
-           localStorage.setItem('user_img','https://rajeshkumarranjan.blob.core.windows.net/'+this.urlImage.path)
+           localStorage.setItem('user_img',this.urlImage.url)
            //this.profileUpdateData(this.urlImage.url)
        })
       }
