@@ -27,6 +27,10 @@ $color-white : #ffffff;
 //   xl: 1200px
 // );
 
+.container {
+  max-width: 100% !important;
+}
+
 .f_wt_200 {
   font-weight: 300;
 }
