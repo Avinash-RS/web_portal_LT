@@ -1,69 +1,81 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-  <!-- <a class="navbar-brand" href="#">Angular Bootstrap Demo</a> -->
-  <img class="logo" src="../../assets/images/logo.png" >
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-    aria-expanded="false" aria-label="Toggle navigation">
+
+  <img class="logo" src="../../assets/images/logo.png">
+  <a class="navbar-brand edutech" href="#">EDUTECH</a>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto" *ngIf = "userDetailes != null">
-
-      <li class="nav-item">
-        <!-- <a class="nav-link" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/contact-list">Contacts</a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link" (click) = "logout()">Logout</a>
-      </li>
+    <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
+      <ul class="navbar-nav mr-auto">
+        <i class="fa fa-th box" aria-hidden="true"></i>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            All Courses
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li> -->
+          </ul>
+        </li>
+      </ul>
     </ul>
 
-    <ul class="navbar-nav mr-auto" *ngIf = "userDetailes == null">
 
-      <li class="nav-item">
-        <!-- <a class="nav-link" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/contact-list">Contacts</a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Learner/login">Login</a>
-      </li>
-    </ul>
+    <div class="input-group" id="navbarCollapse">
+      <input class="form-control border-right-0" placeholder="  Search courses  ">
+      <span class="input-group-append bg-white border-left-0">
+        <span class="input-group-text bg-transparent">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
+
+    <div class="" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <i class="fa fa-bell bellicon" aria-hidden="true"></i>
+          </li>
+          <li>
+            <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+          </li>
+
+          <li>
+            <img class="profileimg" [src]="url ? url : '../../../../assets/learner/avatar2.png'">
+          </li>
+
+        </ul>
+      </ul>
+    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <div class="header">
+      <mat-menu class="menubar" #menu="matMenu">
+        <button mat-menu-item>
+          <label  routerLink="/Learner/profile">Profile</label>
+        </button>
+        <button mat-menu-item>
+          <label>My Course</label>
+        </button>
+        <button mat-menu-item>
+          <label>Dashboard</label>
+        </button>
+        <button mat-menu-item>
+          <label>Wishlist</label>
+        </button>
+        <button mat-menu-item>
+          <label>Certificate</label>
+        </button>
+      </mat-menu>
+    </div>
 
   </div>
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <div class="header">
-  <mat-menu class="menu" #menu="matMenu">
-    <button mat-menu-item>
-     <!-- <label>Profile</label> -->
-     <a class="nav-link" routerLink="/Learner/profile">Profile</a>
-    </button>
-    <button mat-menu-item>
-      <label>My Course</label>
-    </button>
-    <button mat-menu-item>
-      <label>Dashboard</label>
-    </button>
-    <button mat-menu-item>
-      <label>Wishlist</label>
-    </button>
-    <button mat-menu-item>
-      <label>Certificate</label>
-    </button>
-    <button mat-menu-item>
-      <label>Logout</label>
-    </button>
-  </mat-menu>
-  </div>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Learner/register">Register</a>
-      </li>
-    <!-- </ul>
-
-  </div> -->
 </nav>
-<br><br><br>
