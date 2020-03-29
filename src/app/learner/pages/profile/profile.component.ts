@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
   languageList: any;
   isenable:boolean = true;
   userData:any = {};
-  showdeletedicon:boolean = false;
+  showdeletedicon:boolean = true;
   uniValue: void;
   url:String = '';
   // countryDetails: any = [];
@@ -92,6 +92,10 @@ export class ProfileComponent implements OnInit {
     this.getDiscipline();
     this.getSpec();
     
+  }
+
+  enableedit(){
+    this.showdeletedicon = false;
   }
   get f() {
     if(this.mailForm) {
