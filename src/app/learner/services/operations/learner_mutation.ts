@@ -132,51 +132,125 @@ export const view_profile = gql`
   mutation view_profile($user_id: String) {
     view_profile(user_id:$user_id) 
     {
-      message {
-full_name
-email,
-user_id
-user_mobile{
-mobile_number,
+      success
+                                message {
+                                                full_name
+                                                email
+                                                user_id
+                                                user_dtl {
+                                                                is_admin
+                                                                user_id
+                                                                username
+                                                                password
+                                                                created_by_ip
+                                                }
+                                                user_mobile {
+                                                                mobile_number
+                                                }
+                                                user_profile {
+                                                                _id
+                                                                languages_known
+                                                                about_you
+                                                                certificate
+                                                                user_id
+                                                                profile_img
+                                                                year_of_birth
+                                                                doj_lxp
+                                                                progress
+                                                                is_active
+                                                                gender
+                                                                country
+                                                                state
+                                                                city_town
+                                                                student
+                                                                professional {
+                                                                                total_experience
+                                                                                organization
+                                                                                job_role
+                                                                }
+                                                                social_media {
+                                                                                link
+                                                                                img
+                                                                }
+                                                                last_login
+                                                                created_by_ip
+                                                                created_by
+                                                                created_on
+                                                                updated_by_ip
+                                                                updated_on
+                                                                updated_by
+                                                }
+                                                country_detail {
+                                                                _id
+                                                                countryname
+                                                                countryshortcode
+                                                                is_active
+                                                }
+                                                state_detail {
+                                                                _id
+                                                                statename
+                                                                stateshortcode
+                                                                country
+                                                                is_active
+                                                }
+                                                district_detail {
+                                                                _id
+                                                                districtname
+                                                                country
+                                                                state
+                                                                is_active
+                                                }
+                                                qualification {
+                                                                board {
+                                                                                _id
+                                                                                Board_Id
+                                                                                Board_Name
+                                                                                is_active
+                                                                }
+                                                                discipline {
+                                                                                _id
+                                                                                discipline_id
+                                                                                discipline_name
+                                                                                discipline_code
+                                                                                is_active
+                                                                }
+                                                                institute_detail {
+                                                                                _id
+                                                                                institute_id
+                                                                                institute_name
+                                                                                institute_code
+                                                                                is_active
+                                                                }
+                                                                level_detail {
+                                                                                _id
+                                                                                level_id
+                                                                                level_name
+                                                                                level_code
+                                                                                is_active
+                                                                }
+                                                                specification_detail {
+                                                                                _id
+                                                                                specification_id
+                                                                                specification_name
+                                                                                specification_code
+                                                                                is_active
+                                                                }
+                                                                university {
+                                                                                _id
+                                                                                University_Id
+                                                                                University_Name
+                                                                                is_active
+                                                                }
+                                                }
+                                                language_detail {
+                                                                _id
+                                                                is_active
+                                                                languagecode
+                                                                languagename
+                                                }
+                                                progress
+                                }
 
-}
-user_profile{
-_id
-qualification{
-qualification
-institute
-discipline
-year_of_passing
-percentage
-
-}
-social_media{
-link
-img
-}
-languages_known
-about_you
-certificate
-user_id
-profile_img
-year_of_birth
-created_on
-progress
-is_active
-gender
-country
-state
-city_town
-student
-last_login
-created_by
-updated_on
-updated_by
-updated_by_ip
-
-}
-}
-success
   }
 }
 `;
