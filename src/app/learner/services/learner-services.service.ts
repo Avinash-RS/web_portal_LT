@@ -267,28 +267,10 @@ export class LearnerServicesService {
     })
 }
 
-update_profile(user_id,profile_img,doj_lxp,qualification,social_media,is_active,
-  progress,gender,languages_known,country,state,city_town,certificate,about_you,student,
-  professional){
+update_profile(userData){
   return this.Apollo.query({
     query: update_profile,
-    variables:{
-      user_id: user_id,
-      profile_img: profile_img,
-      doj_lxp: doj_lxp,
-      qualification: qualification,
-      social_media: social_media,
-      progress: progress,
-      gender: gender,
-      languages_known: languages_known,
-      country: country,
-      state: state,
-      city_town: city_town,
-      certificate: certificate,
-      about_you: about_you,
-      student: student,
-      professional: professional
-    }
+    variables:userData
   })
 }
 };

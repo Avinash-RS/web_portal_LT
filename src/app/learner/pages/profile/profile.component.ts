@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as myGlobals from '@core/globals';
+import { Certificate } from 'crypto';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,12 +15,12 @@ import * as myGlobals from '@core/globals';
 export class ProfileComponent implements OnInit {
   mailForm: FormGroup;
   public qual: any[] = [{
-    level: '',
-    board: '',
+    qualification: '',
+    board_university: '',
     institute: '',
     discipline: '',
-    spec: '',
-    year: '',
+    specification: '',
+    year_of_passing: '',
     percentage: ''
   }];
   public links: any[] = [{
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   }];
 
   //Declarations
+  selectedDay:any;
   currentUser: any = [];
   otp: any;
   info: any;
@@ -37,7 +39,7 @@ export class ProfileComponent implements OnInit {
   countryValue: any;
   countryId: any;
   showotp: boolean = false;
-  qualification: any;
+
   // country: any = {};
   stateValue: any;
   levelValue: any;
@@ -55,7 +57,9 @@ export class ProfileComponent implements OnInit {
   url:String = '';
   // countryDetails: any = [];
   selectfile = null;
-
+  urlImage:any
+  socialMedia:{}
+  certificate:any=[]
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -117,7 +121,7 @@ export class ProfileComponent implements OnInit {
   }
   getAllLevels(){
     this.service.get_qualification_details().subscribe(level => {
-      console.log('level',level)
+      
       this.levelValue = level.data['get_qualification_details'].data;
       if(this.levelValue == null){
         this.alert.openAlert(level.data['get_qualification_details'].message, null);
@@ -127,18 +131,17 @@ export class ProfileComponent implements OnInit {
   }
   getBoardsUniv(){
     this.service.get_board_university_details().subscribe(boards => {
-      console.log('b',boards)
+      
       this.boardValue = boards.data['get_board_university_details'].data['board'];
       this.uniValue = boards.data['get_board_university_details'].data['university'];
-      console.log('board', this.boardValue);
-      console.log('uni', this.uniValue);
+
     })
   }
   getInstitute(){
     this.service.get_institute_details().subscribe(institute => {
-      console.log('firstins',institute)
+      
       this.institutes = institute.data['get_institute_details'].data;
-      console.log('ins',this.institutes)
+      
     })
   }
 
@@ -146,46 +149,47 @@ export class ProfileComponent implements OnInit {
     let stateId = city.value;
     this.service.get_district_details(this.countryId,stateId).subscribe(city => {
       this.cityValue = city.data['get_district_details'].data;
-      console.log('city',this.cityValue)
+      
     })
   }
   getDiscipline(){
     this.service.get_discipline_details().subscribe(discipline => {
       this.dis =discipline.data['get_discipline_details'].data;
-      console.log('dis',this.dis)
+      
     })
   }
   getSpec(){
     this.service.get_specification_details().subscribe(spec => {
       this.specValue =spec.data['get_specification_details'].data;
-      console.log('spec',this.specValue);
+      
     })
   }
   getAllLanguage(){
     this.service.get_language_details().subscribe(language => {
       this.languageList = language.data['get_language_details'].data;
-      console.log('lang',this.languageList)
+      
     })
   }
 
 // View Profile
   getprofileDetails(userid) {
     this.service.view_profile(userid).subscribe(data => {
-      console.log('user',this.currentUser.user_id);
+      
       this.userData = data.data['view_profile'].message[0];
-      console.log('userdata',this.userData)
+      
     })
   }
   addnewQual(index) {
     this.qual.push({
-      level: '',
-      board: '',
+      qualification: '',
+      board_university: '',
       institute: '',
       discipline: '',
-      spec: '',
-      year: '',
+      specification: '',
+      year_of_passing: '',
       percentage: ''
     });
+    console.log(this.qual)
     return true;  
   }
   removelastQual(index){
@@ -200,40 +204,71 @@ export class ProfileComponent implements OnInit {
   }
 
   addnewLink() {
+
     this.links.push({
       certificate: ''
     })
-    return true;
+    console.log(this.links,'lllllllllllllllllllllllll')
+    // return true;
   }
 
   removenewLink(index){
-    if(this.links.length == 1){
+    if(this.words2.length == 1){
       this.alert.openAlert("Can't delete  when there is only one row", null);  
       return false;  
     }else{
-      this.links.splice(index, 1);   
+      this.words2.splice(index, 1);   
       return true;  
     }
   
   }
 
-  updateProfile() {
-    console.log(this.formBuilder)
-    // this.service.update_profile(this.currentUser.user_id,this.qual,this.links,this.profileDetails.country,
-    //   this.profileDetails.state,this.profileDetails.city,this.profileDetails.gender,
-    //   this.info,this.language,this.profileDetails.profession).subscribe(data => {
-
-    // })
+  updateProfile(language,country,state,city,social,about_you,exp,org,role) {
+      
+ 
+    var social_media =[{
+      link:social,
+      img:""
+    }]
+    var professional={
+      total_experience:exp,
+      organization:org,
+      job_role:role
+    }
+    var profileImg
     
-    // if(this.profileDetails.gender === undefined){
-    //   this.alert.openAlert('Select a value for gender', null)
-    // }
-    // if(this.profileDetails.profession === undefined){
-    //   this.alert.openAlert('Select a value for profession', null)
-    // }
-    // if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
-    //   this.alert.openAlert('Select values for all fields in location', null)
-    // }
+    var jsonData={
+      user_id:this.currentUser.user_id,
+      gender:this.profileDetails.gender,
+      year_of_birth: "05-08-1998",
+      profile_img:localStorage.getItem('user_img'),
+      profession:this.profileDetails.profession,
+      languages_known:language,
+      country:country,
+      state:state,
+      city_town:city,
+      qualification:this.qual,
+     certificate:this.words2,
+     social_media:social_media,
+     about_you:about_you ,
+     professional:professional,
+     created_by_ip:localStorage.getItem('Systemip')
+    }
+   
+    console.log(jsonData)
+    this.loader.show();
+    this.service.update_profile(jsonData).subscribe(data => {
+      console.log(data)
+      if(data.data['update_profile']['success'] == 'true'){
+        this.loader.hide();
+        this.alert.openAlert(data.data['update_profile'].message,null)
+      
+      } else{
+        this.alert.openAlert(data.data['update_profile'].message,null)
+      }
+    })
+    
+    
   }
 
   editEmail(templateRef: TemplateRef<any>) {
@@ -250,7 +285,7 @@ export class ProfileComponent implements OnInit {
   otpverification(){
     this.loader.show();
     this.service.update_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile).subscribe(data => {
-      console.log('mob',this.mailForm.value.mobile);
+      
       if(data.data['update_mobile_onprofile']['success'] == 'true'){
         this.loader.hide();
         this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
@@ -266,8 +301,7 @@ export class ProfileComponent implements OnInit {
   otpverify(){
     this.otp = this.mailForm.value.otp1+this.mailForm.value.otp2+this.mailForm.value.otp3+this.mailForm.value.otp4
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.mailForm.value.mobile,this.otp,).subscribe(data => {
-      console.log('mob',this.mailForm.value.mobile)
-      console.log('data',data);
+  
           if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
             this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
             this.showotp = true;
@@ -282,7 +316,7 @@ export class ProfileComponent implements OnInit {
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
     this.service.get_change_password_updateprofile(this.currentUser.username,ps,this.mailForm.value.newpassword).subscribe(password => {
-      console.log('password',this.mailForm.value.newpassword);
+      
       if(password.data['get_change_password_updateprofile']['success'] == 'true'){
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       } else{
@@ -304,20 +338,50 @@ export class ProfileComponent implements OnInit {
 
   onSelectFile(event) {
      this.selectfile = <File>event.target.files[0];
-     console.log( this.selectfile)
-     if(this.selectfile.type != 'image/png'){
+
+     if( this.selectfile && this.selectfile.type != 'image/png' && this.selectfile.type!='image/jpeg'){
        this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null)
      } 
-     else if (this.selectfile.size > 1000){
+     else if (this.selectfile && this.selectfile.size > 100000){
+
       this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null)
      } 
      else {
+       if(this.selectfile){
        const fb = new FormData();
        fb.append('image',this.selectfile,this.selectfile.name)
        this.service.imageupload(fb).subscribe(data =>{
-           console.log(data)
+           
+           this.urlImage=data
+           localStorage.setItem('user_img',this.urlImage.url)
+           //this.profileUpdateData(this.urlImage.url)
        })
+      }
      }
   }
-   
+   profileUpdateData(img){
+     var jsonData={
+      user_id:this.currentUser.user_id,
+      profile_img:img
+     }
+     console.log(jsonData)
+         this.service.update_profile(jsonData).subscribe(data => {
+        console.log(data)
+    })
+    
+    if(this.profileDetails.gender === undefined){
+      this.alert.openAlert('Select a value for gender', null)
+    }
+    if(this.profileDetails.profession === undefined){
+      this.alert.openAlert('Select a value for profession', null)
+    }
+    if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
+      this.alert.openAlert('Select values for all fields in location', null)
+    }
+   }
+   words2 = [{value: ''}];
+   add() {
+    this.words2.push({value: ''});
+    console.log(this.words2)
+  }
 }
