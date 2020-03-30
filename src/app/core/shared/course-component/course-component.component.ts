@@ -37,13 +37,13 @@ export class CourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
+    console.log(course)
     this.loader.show();
     if (this.gs.checkLogout()) {
       if (this.course.wishlisted == false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
           if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
             this.course.wishlisted = !this.course.wishlisted;
-            console.log(this.course.wishlisted)
             this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
             // this.alert.openAlert("Success !", "Added to wishlist")
             this.gs.canCallWishlist(true);
@@ -55,7 +55,6 @@ export class CourseComponentComponent implements OnInit {
           if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
             this.course.wishlisted = !this.course.wishlisted;
             course.wishlist_id = null;
-            console.log(this.course.wishlisted)
             // this.alert.openAlert("Success !", "Removed from wishlist")
             this.gs.canCallWishlist(true);
             this.loader.hide();
@@ -66,6 +65,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.course)
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
