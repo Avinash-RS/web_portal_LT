@@ -5,11 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+//others
 import { BarRatingModule } from "ngx-bar-rating";
 import { NgxMaskModule } from 'ngx-mask'
-import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 //local
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
@@ -67,6 +69,7 @@ const routes: Routes = [
 
   imports: [
     CoreModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
     BarRatingModule,
