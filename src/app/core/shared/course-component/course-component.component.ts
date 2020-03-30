@@ -73,9 +73,13 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    console.log(course, this.course)
-    var id = this.course.course_id;
-    this.router.navigate(['/Learner/courseDetail', { id: id, wishlist: this.course.wishlisted, wishlist_id: this.course.wishlist_id }])
+    let detail = {
+      id :  this.course.course_id,
+      wishlist: this.course.wishlisted,
+      wishlist_id:this.course.wishlist_id 
+    }
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    // this.router.navigate(['/Learner/courseDetail',{ state: { id: id, wishlist: this.course.wishlisted, wishlist_id: this.course.wishlist_id }}])
   }
 
   goTocourse(status) {

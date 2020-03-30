@@ -12,7 +12,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 })
 export class CoursedetailsComponent implements OnInit {
 
-  course: any = null;
+  course: any = {};
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -55,38 +55,31 @@ export class CoursedetailsComponent implements OnInit {
   userDetail: any;
 
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) { }
-
-  ngOnInit() {
+    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
     this.loader.show();
-    var userdetail = this.gs.checkLogout();
-    var id = this.router.snapshot.paramMap.get('id');
-    this.service.viewCurseByID(id).subscribe((viewCourse: any) => {
-      // var wishlist = 
+    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    console.log(detail, detail.id)
+    this.service.viewCurseByID(detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
-        this.course.wishlisted = JSON.parse(this.router.snapshot.paramMap.get('wishlist')) || false;
-        this.course.wishlist_id = this.router.snapshot.paramMap.get('wishlist_id')
+        this.course.wishlisted = detail.wishlisted || false;
+        this.course.wishlist_id = detail.wishlist_id || null;
         console.log(this.course)
         this.loader.hide();
       } else
         this.loader.hide();
     });
 
-    // this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
-    //   if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
-    //     this.wishlist = viewWishlist.data.view_wishlist.message;
-    //     // console.log(this.wishlist)
-    //   }
-    // });
+  }
+
+  ngOnInit() {
     this.service.list_content().subscribe((list_content: any) => {
       console.log(list_content)
       if (list_content.data.list_content.success) {
         this.syllabus = list_content.data.list_content.data
       }
     });
-
-
 
     // this.syllabus = [{
     //   "title": "Lorem ipsum dolor sit ame,",
@@ -166,7 +159,6 @@ export class CoursedetailsComponent implements OnInit {
     // ]
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
-      // this.viewWishList(this.course);
     }
     this.ins = [{
       "name": "Loe",
