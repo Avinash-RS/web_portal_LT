@@ -1,17 +1,12 @@
 @import "../../assets/variable.scss";
-//  .passwordmodel mat-dialog-container {
-//   display: block;
-//   padding: 34;
-//   border-radius: 4px;
-//   box-sizing: border-box;
-//   overflow: auto;
-//   outline: 0;
-//   width: 60% !important;
-//   height: 100%;
-//   min-height: inherit;
-//   max-height: inherit;
-// }
-
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + .75rem);
+  background-image: none !important;
+  background-repeat: no-repeat;
+  background-position: right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
 .custom-modalbox {
   .mat-dialog-actions {
     justify-content: center;

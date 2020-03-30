@@ -364,26 +364,35 @@
       <!---------------------------------Password Dialog--------------------------------->
       <ng-template  #passwordDialog>
         <h1 class="head">Change the Password</h1>
-        <mat-dialog-content style="width: 285px;margin-top: 24px;" >
+        <mat-dialog-content style="width: 300px;margin-top: 24px;" >
           <form   [formGroup]="passwordForm">
-            <div class="form-group">
-              <label class="title">Enter the current password</label>
-              <input class="inputbox" type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
-                [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" />
+            <label class="title">Enter the current password</label>
+            <div class="input-group">
+              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+              onDrop="return false" onPaste="return false" placeholder="Password"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
+              <span class="input-group-append bg-white border-left-0">
+                <span class="input-group-text bg-transparent">
+                  <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
+                </span>
+              </span>
               <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
                 <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
                 <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture
-                  of uppercase and lowercase letters.</div>
+                  mixture of uppercase and lowercase letters.</div>
               </div>
             </div>
-            <div class="form-group">
-              <label  class="title">Enter the new password</label>
-              <input type="password" formControlName="newpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+
+            <label  class="title">Enter the new password</label>
+            <div class="input-group">
+              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="newpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password"
                 [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
+                <span class="input-group-append bg-white border-left-0">
+                  <span class="input-group-text bg-transparent">
+                    <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
+                  </span>
+                </span>
               <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.newpassword.errors.required">New Password is required</div>
                 <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 6 characters</div>
@@ -394,11 +403,17 @@
               </div>
             </div>
             <p class="head">The password should not be last password</p>
-            <div class="form-group">
-              <label  class="title">Confirm the new password</label>
-              <input type="password" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false" placeholder="Confirm Password" class="form-control"
+            <label  class="title">Confirm the new password</label>
+            <div class="input-group">
+             
+              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Confirm Password" 
                 [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
+                <span class="input-group-append bg-white border-left-0">
+                  <span class="input-group-text bg-transparent">
+                    <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
+                  </span>
+                </span>
               <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
                 <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
@@ -418,3 +433,18 @@
     </div>
     </div>
   </div>
+
+
+    <!-- <div class="form-group">
+              
+              <input class="inputbox" type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+                onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
+                [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" id=password/>
+              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
+                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
+                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture
+                  of uppercase and lowercase letters.</div>
+              </div>
+            </div> -->
