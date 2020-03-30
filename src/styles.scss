@@ -10,15 +10,6 @@
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 
-$color-red: #FF0000;
-$color-green: #00FF00;
-$color-blue: #1F3777;
-$color-yellow: #ffcf01;
-$color-maroon : #db3137;
-$color-darkGrey : #5e5e5e;
-$color-icon : #ed989b;
-$color-white : #ffffff;
-
 // $grid-breakpoints: (
 //   xs: 0,
 //   sm: 576px,
@@ -36,7 +27,7 @@ $color-white : #ffffff;
 }
 
 .f_wt_300 {
-  font-weight: 300;
+  font-weight: 300 !important;
 }
 
 .f_wt_400 {
@@ -150,11 +141,12 @@ $color-white : #ffffff;
 .float_right {
   float: right;
   text-align: right;
+  text-align: end ;
 }
 
 .float_left {
   float: left;
-  text-align: left;
+  text-align: left ;
 }
 
 .center_align {
@@ -208,6 +200,13 @@ td {
 .no_border {
   border: none;
   box-shadow: none;
+}
+
+.color_blue {
+  color: $color-blue !important;
+}
+.color_white {
+  color: #fff !important;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -350,6 +349,9 @@ body {
 
 .p-b-30 {
   padding-bottom: 30px !important;
+}
+.p-10px {
+  padding: 10px !important;
 }
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,

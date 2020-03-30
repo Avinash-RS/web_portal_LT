@@ -1,4 +1,4 @@
-<mat-accordion *ngIf="from != 'cd'">
+<!-- <mat-accordion *ngIf="from != 'cd'">
   <mat-expansion-panel>
     <mat-expansion-panel-header (click)="viewWishlist()">
       <mat-panel-title class="top_course">
@@ -19,6 +19,45 @@
 
   </mat-expansion-panel>
 </mat-accordion>
+
+<mat-card style="text-align: center;border: none;box-shadow: none;z-index: -1; height: 40vh;" *ngIf="from == 'cd'">
+  <mat-grid-list cols="4">
+    <mat-grid-tile *ngFor="let course of wishlist" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+      <app-course-component [course]="course" [from]="'wishlist'"> </app-course-component>
+    </mat-grid-tile>
+    <h2 *ngIf="wishlist && wishlist.length == 0">
+      No courses yet
+    </h2>
+  </mat-grid-list>
+</mat-card> -->
+
+
+
+<div class="container wrap-body" *ngIf="from != 'cd'">
+  <div class="row">
+      <div class="col-md-12">
+          <mat-accordion>
+              <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header>
+                      <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                        Wish List
+                      </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-card style="text-align: center;">
+                      <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2" >
+                          <mat-grid-tile *ngFor="let course of wishlist" [style.border]="'none'">
+                              <app-course-component [course]="course" [from]="'wishlist'"> </app-course-component>
+                          </mat-grid-tile>
+                      </mat-grid-list>
+                      <h2 *ngIf="wishlist && wishlist.length == 0">
+                        No courses yet
+                      </h2>
+                  </mat-card>
+              </mat-expansion-panel>
+          </mat-accordion>
+      </div>
+  </div>
+</div>
 
 <mat-card style="text-align: center;border: none;box-shadow: none;z-index: -1; height: 40vh;" *ngIf="from == 'cd'">
   <mat-grid-list cols="4">
