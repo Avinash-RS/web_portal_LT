@@ -180,6 +180,7 @@ export class ProfileComponent implements OnInit {
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
+      console.log('ud',this.userData)
       this.loader.hide();
       // if(this.profileDetails){
         // this.profileDetails = this.userData.user_profile[0];
@@ -233,10 +234,10 @@ export class ProfileComponent implements OnInit {
 
   updateProfile(language,country,state,city,social,about_you,exp,org,role) {
     // role = 'aaaasd';
-    console.log(language,country,state,city,social,about_you,exp,org,role)
-    if(this.profileDetails.profession == 'student') {
+    // console.log(language,country,state,city,social,about_you,exp,org,role)
+    if(this.profileDetails.profession === 'student') {
       if(this.profileDetails.gender  && this.profileDetails.country  &&
-        this.profileDetails.state  && city  && this.qual[0].qualification != '' &&
+        this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
           this.profileDetailCheck = true;
@@ -247,9 +248,12 @@ export class ProfileComponent implements OnInit {
         }
     } else if(this.profileDetails.profession == 'professional'){
       // return false;
-      if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
-       this.profileDetails.currentRole  && this.profileDetails.country  &&
-        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+      console.log(this.profileDetails.profession)
+      console.log(this.profileDetails);
+      console.log(this.qual)
+      if(this.profileDetails.gender  && this.profileDetails.total_experience  && this.profileDetails.organization  &&
+       this.profileDetails.job_role  && this.profileDetails.country  &&
+        this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
           this.profileDetailCheck = true;
@@ -262,7 +266,7 @@ export class ProfileComponent implements OnInit {
     } else {
       if(this.profileDetails.gender  && this.profileDetails.profession  
           && this.profileDetails.country  &&
-         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+         this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
          this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
          && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
           this.profileDetailCheck = true;
@@ -386,7 +390,19 @@ export class ProfileComponent implements OnInit {
             this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
           }
       })
-
+      this.dialog.closeAll();
+  }
+  Resendcode(){
+    this.loader.show();
+    this.service.submit_otp(this.currentUser.user_id,'this.currentUser._id',this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+      this.otp = '';
+      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.loader.hide();
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+        this.showotp = true;
+      } 
+  })
+  this.dialog.closeAll();
   }
   //Update Password
   updatePassword(){
@@ -400,6 +416,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
+    this.dialog.closeAll();
   }
   //Update Email
   updateEmail(){
@@ -410,6 +427,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
+    this.dialog.closeAll();
   }
   
 

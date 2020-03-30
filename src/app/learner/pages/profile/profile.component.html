@@ -12,16 +12,8 @@
             <div class="row">
               <mat-label>Information about you</mat-label>
             </div>
-            <!-- <div class="form-group">
-              <textarea class="form-control inputs" placeholder="500 characters"  formControlName="info"
-                maxlength="500" [ngClass]="{ 'is-invalid': f.info.touched && f.info.errors }"> </textarea>
-                <div *ngIf="f.info.touched && f.info.errors" class="invalid-feedback">
-                <div *ngIf="f.info.errors.maxlength">Full Name must be 500 maximum of characters</div>
-              </div>
-             
-              </div><br> -->
-              <div class="row"  >
-                <textarea   [disabled]='showdeletedicon' class="inputs" placeholder="500 characters" maxlength="500" 
+              <div class="row">
+                <textarea style="resize: none;"   [disabled]='showdeletedicon' class="inputs" placeholder="500 characters" maxlength="500" 
                 [(ngModel)]="profileDetails.about_you" name="info"></textarea>
               </div><br>
               <div class="row" >
@@ -226,7 +218,7 @@
       <div>
         <div class="row" *ngFor="let word2 of words2; let in=index">
           <div class="col-sm-2">
-            <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link" [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
+            <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link" [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" />
           </div>
             <div class="col-sm-3 plusicon">
             <mat-icon (click)="add()">add_circle_outline</mat-icon>
@@ -259,7 +251,7 @@
                   [(ngModel)]="profileDetails.organization" name="currentOrg" minlength="4" maxlength="30" required>
                 </div>
               <div class="col-sm-4">
-                <input  [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.job_role"
+                <input  [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs" placeholder="Current role" [(ngModel)]="profileDetails.job_role"
                   name="currentRole" required>
               </div>
             </div>

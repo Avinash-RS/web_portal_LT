@@ -3,10 +3,11 @@
   margin-left: 6px;
   margin-top: 6px;
 }
-textarea {
-  width: 314px;
-  border-radius: 4px;
-}
+// textarea {
+//   // width: 314px;
+//   // border-radius: 4px;
+//   height: auto;
+// }
 .mat-radio-button ~ .mat-radio-button {
 margin-left: 25px;
 }
@@ -58,6 +59,7 @@ height: 50px;
 
 .masterGrid{
   margin-top: -4%;
+  // height: 24em;
 }
 .createicon {
   background-repeat: no-repeat;
@@ -81,7 +83,8 @@ height: 50px;
   font-size: 22px !important;
   font-weight: 500 !important;
   color:$color-blue;
-  margin-top: 15%;
+  margin-top: 20%;
+  // height: 30em;
 }
 .cameraicon{
   margin-left: -47px;
