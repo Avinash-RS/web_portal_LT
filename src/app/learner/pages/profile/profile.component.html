@@ -277,10 +277,10 @@
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <h1 class="head">Change the Mail ID</h1>
-        <mat-dialog-content>
+        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
           <form [formGroup]="mailForm">
             <div class="form-group">
-              <label>Enter new mail id</label>
+              <label class="title">Enter new mail id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
                 [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
@@ -288,23 +288,24 @@
                 <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
               </div>
             </div>
-          </form><br>
-        </mat-dialog-content>
-        <mat-dialog-actions class="bt"> 
             <button class="popupbtns" (click)="updateEmail()">
               Submit
             </button><br><br>
+          </form><br>
+        </mat-dialog-content>
+        <mat-dialog-actions class="bt"> 
+          <div class="account">Don't receive link?<b (click)="Resendlink()">Resend link</b></div>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobno Dialog---------------------->
       <ng-template #mobDialog>
         <h1 class="head">Change the Mobile No</h1>
-        <mat-dialog-content>
+        <mat-dialog-content style="width: 285px;margin-top: 24px;">
           <form [formGroup]="otpForm">
             <div class="form-group">
-              <label>Enter new mobile no</label>
-              <input type="tel" formControlName="mobile" placeholder="+91" maxlength="10" class="form-control"
-                pattern="[0-9]{10}" [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
+              <label class="title">Enter new mobile no</label>
+              <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control"
+                [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
               <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
                 <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
                 <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
@@ -312,9 +313,9 @@
                 </div>
               </div>
             </div>
-            <p class="head">OTP will be send to this number</p>
+            <p class="otphead">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
-              <p class="head">OTP Code</p>
+              <p class="otphead">OTP Code</p>
 
               <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
                 formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
@@ -342,13 +343,13 @@
         </mat-dialog-actions>
       </ng-template>
       <!---------------------------------Password Dialog--------------------------------->
-      <ng-template #passwordDialog>
+      <ng-template  #passwordDialog>
         <h1 class="head">Change the Password</h1>
-        <mat-dialog-content>
-          <form [formGroup]="passwordForm">
+        <mat-dialog-content style="width: 285px;margin-top: 24px;" >
+          <form   [formGroup]="passwordForm">
             <div class="form-group">
-              <label>Enter the current password</label>
-              <input type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+              <label class="title">Enter the current password</label>
+              <input class="inputbox" type="password" formControlName="currentpassword" onCopy="return false" onDrag="return false"
                 onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
                 [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }" />
               <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
@@ -360,7 +361,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Enter the new password</label>
+              <label  class="title">Enter the new password</label>
               <input type="password" formControlName="newpassword" onCopy="return false" onDrag="return false"
                 onDrop="return false" onPaste="return false" placeholder="Password" class="form-control"
                 [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
@@ -375,7 +376,7 @@
             </div>
             <p class="head">The password should not be last password</p>
             <div class="form-group">
-              <label>Confirm the new password</label>
+              <label  class="title">Confirm the new password</label>
               <input type="password" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
                 onDrop="return false" onPaste="return false" placeholder="Confirm Password" class="form-control"
                 [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />

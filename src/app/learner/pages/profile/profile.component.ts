@@ -248,7 +248,7 @@ export class ProfileComponent implements OnInit {
     } else if(this.profileDetails.profession == 'professional'){
       // return false;
       if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
-       this.profileDetails.currentRole  && this.profileDetails.country  &&
+       role  && this.profileDetails.country  &&
         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){

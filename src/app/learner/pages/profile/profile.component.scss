@@ -30,12 +30,14 @@ height: 50px;
 .popupbtns{
   text-align: center;
   background-color: $color-blue;
-color: $color-white;
-width: 85%;
-margin-left: 17%;
-margin-right: 17%;
-border: solid;
-height: 50px;
+  color: $color-white;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  border: solid;
+  font-size: 18px;
+  height: 46px;
 }
 .avatar {
   vertical-align: middle;
@@ -104,9 +106,11 @@ height: 50px;
   width: 100%;
   background-color: none !important;
 }
-
-input[type=text],
-input[type=password] {
+.passwordmodel{
+  width: 150px !important;
+}
+input[type=text]
+{
   width: 100%;
   padding: 9px 20px;
   margin: 1px 0;
@@ -115,6 +119,10 @@ input[type=password] {
   border: 1px solid $color-blue;
   box-sizing: border-box;
   border-radius: 5px;
+}
+
+.inputbox[type=password]{
+  background: $color-blue !important;
 }
 .linkedin{
   font-size: 35px;
@@ -198,4 +206,43 @@ label{
   padding-top: 8px;
   padding-bottom: 8px;
   background: $color-blue !important;
+}
+.head{
+  font-weight: lighter !important;
+}
+
+.title{
+
+  font-size: 16px;
+  font-weight: 500;
+}
+div.account{
+  color: $color-blue;
+  word-break: break-all !important;
+  text-align: center !important;
+  margin-left: 15px;
+}
+.otphead{
+  color: $color-blue;
+  text-align: left;
+  font-weight: 500 !important;
+}
+
+.otp {
+  margin: 0 4px;
+  text-align: center;
+  font-size: 27px;
+  height: 50px;
+  border: none;
+  border-radius: 9px;
+  background-color: #94b5f1 !important;
+  
+  &:focus {
+    border-color: #94b5f1;
+    box-shadow: 0 0 5px #94b5f1 inset;
+  }
+  
+  &::selection {
+    background: transparent;
+  }
 }
