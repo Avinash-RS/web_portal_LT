@@ -1,5 +1,4 @@
 
-<app-header></app-header>
 
 <div class="limiter">
   <mat-tab-group style="margin-top: 10px;">
@@ -23,7 +22,7 @@
         <!--this is for particular course syllabus-->
         <div *ngFor="let child of navtree.children" >http://40.76.47.212{{child.link}}
 
-          <li class="subNav"><a class="navLink" href="http://40.76.47.212/{{child.link}}" >{{child.title}}</a></li>
+          <li class="subNav"><a class="navLink" href="http://40.76.47.212:8080/{{child.link}}" >{{child.title}}</a></li>
         
         </div>
         
