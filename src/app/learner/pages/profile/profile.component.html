@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="profile">
+<div class="profile" >
 <div class="limiter">
   <div class="container-reg200 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30"><br>
@@ -20,11 +20,11 @@
               </div>
              
               </div><br> -->
-              <div class="row">
-                <textarea  [disabled]='showdeletedicon' class="inputs" placeholder="500 characters" maxlength="500" 
+              <div class="row"  >
+                <textarea   [disabled]='showdeletedicon' class="inputs" placeholder="500 characters" maxlength="500" 
                 [(ngModel)]="profileDetails.about_you" name="info"></textarea>
               </div><br>
-              <div class="row">
+              <div class="row" >
                 <mat-label >Gender</mat-label><span class="text-danger">*</span>
                 <div class="col">
                   <mat-radio-group [disabled]='showdeletedicon' [(ngModel)]="profileDetails.gender" name="gender" required>
@@ -36,7 +36,7 @@
               </div>
               <div class="row space5">
                 <mat-label>I am a</mat-label><span class="text-danger">*</span>
-                <div class="col studentradio">
+                <div class="col studentradio" >
                   <mat-radio-group   [disabled]='showdeletedicon' [(ngModel)]="profileDetails.profession" name="profession" required>
                     <mat-radio-button value="student">Student</mat-radio-button>
                     <mat-radio-button value="professional">Professional</mat-radio-button>
@@ -113,9 +113,9 @@
                 <!-- </div><br> -->
                
                 <div class="col">
-                  <md-button class="profilecomplete">{{profileDetails.progress}} </md-button>
+                  <md-button class="profilecomplete">{{userData.progress}} </md-button>
                   <section class="example-section">
-                    <mat-progress-bar class="example-margin" mode="determinate" value="profileDetails.progress">
+                    <mat-progress-bar class="example-margin" mode="determinate" value="userData.progress">
                     </mat-progress-bar>
                   </section>
                 </div>
@@ -144,12 +144,12 @@
                   </div>
                 </div><br>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-3">
                     <span>{{userData.email}}</span>
                   </div>
-                  <!-- <div class="col-sm-3"></div>
-                  <div class="col-sm-3"></div> -->
-                  <div class="col-sm-6">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3">
                     <mat-icon class="createicon" (click)="editEmail(emailDialog)">create</mat-icon>
                   </div>
                 </div><br>
@@ -251,15 +251,15 @@
           <div class="col-sm-6">
             <div class="row">
               <div class="col-sm-4">
-                <input [disabled]='showdeletedicon' type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.professional.total_experience"
+                <input [disabled]='showdeletedicon' type="tel" class="inputs" placeholder="Total Experience" [(ngModel)]="profileDetails.total_experience"
                   name="totExp" maxlength="2" required>
               </div>
               <div class="col-sm-4">
                   <input [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
-                  [(ngModel)]="profileDetails.professional.organization" name="currentOrg" minlength="4" maxlength="16" required>
+                  [(ngModel)]="profileDetails.organization" name="currentOrg" minlength="4" maxlength="16" required>
                 </div>
               <div class="col-sm-4">
-                <input  [disabled]='showdeletedicon' class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.professional.job_role"
+                <input  [disabled]='showdeletedicon' class="inputs" placeholder="Current role" [(ngMdel)]="profileDetails.job_role"
                   name="currentRole" required>
               </div>
             </div>
@@ -269,7 +269,7 @@
 
       <div class="bt">
         <button class="subbtn" [disabled]="enable" (click)="updateProfile(profileDetails.languages_known,profileDetails.country,
-        profileDetails.state,profileDetails.city_town,profileDetails.social_media,profileDetails.about_you,profileDetails.professional.total_experience,profileDetails.professional.organization,profileDetails.professional.job_role)">Submit</button>
+        profileDetails.state,profileDetails.city_town,profileDetails.social_media,profileDetails.about_you,profileDetails.total_experience,profileDetails.organization,profileDetails.job_role)">Submit</button>
       </div><br>
     </form>
       </div>
