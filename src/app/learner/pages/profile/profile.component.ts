@@ -43,7 +43,8 @@ export class ProfileComponent implements OnInit {
   countryValue: any;
   countryId: any;
   showotp: boolean = false;
-
+  show_button: Boolean = false;
+  show_eye: Boolean = false;
   // country: any = {};
   stateValue: any;
   levelValue: any;
@@ -82,7 +83,10 @@ export class ProfileComponent implements OnInit {
     this.enabel = false
 
   }
-
+  showPassword() {
+    this.show_button = !this.show_button;
+    this.show_eye = !this.show_eye;
+  }
   ngOnInit() {
     if (localStorage.getItem('UserDetails')) {
 

@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
     </div>
-    <div class=" col-lg-5 col-md-5 m-t-15 col-sm-5 col-5"> <strong>Rs {{course.price | number }}</strong>
+    <div class=" col-lg-5 col-md-5 m-t-15 col-sm-5 col-5" *ngIf="from != 'myCourse'"> <strong>Rs {{course.price | number }}</strong>
     </div>
   </div>
   <br>
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <div class="overlay" (click)="gotoDescription()">
+  <div class="overlay" (click)="gotoDescription()" *ngIf="from != 'myCourse'">
     <br>
     <div class="row" (click)="gotoDescription()">
       <div class="col-md-12">
