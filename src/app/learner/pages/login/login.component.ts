@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
+    // this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
+    this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
