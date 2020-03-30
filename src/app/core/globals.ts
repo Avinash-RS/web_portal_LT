@@ -25,6 +25,7 @@ export const emailVal: any = [
     Validators.minLength(6), 
     Validators.maxLength(64), 
     Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+    // /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 ]
 // not accpect start and end space 
 export const fullnameVal: any = [
