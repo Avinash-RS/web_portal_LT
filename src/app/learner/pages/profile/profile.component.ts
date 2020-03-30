@@ -308,7 +308,7 @@ export class ProfileComponent implements OnInit {
       qualification:this.qual,
      certificate:this.certificate,
      social_media:social_media,
-     about_you:about_you[0] ,
+     about_you:about_you ,
      professional:professional,
      progress:progress,
      created_by_ip:localStorage.getItem('Systemip')
