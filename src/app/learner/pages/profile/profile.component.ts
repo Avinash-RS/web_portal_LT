@@ -72,11 +72,16 @@ export class ProfileComponent implements OnInit {
     private dialog: MatDialog,
     private loader:Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) { 
     this.enabel=false
+   
   }
 
   ngOnInit() {
+    if(localStorage.getItem('UserDetails')){
+      
+    
     this.activeroute.queryParams.subscribe(params => {
       if(params["status"]){
         this.alert.openAlert(params['msg'], null);
@@ -93,6 +98,9 @@ export class ProfileComponent implements OnInit {
     this.getInstitute();
     this.getDiscipline();
     this.getSpec();
+  }else{
+    this.router.navigate(['/Learner/login'])
+  }
     
   }
 
