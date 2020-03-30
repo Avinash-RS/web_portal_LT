@@ -65,7 +65,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.course)
+    this.getcourserStatus()
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
@@ -85,6 +85,12 @@ export class CourseComponentComponent implements OnInit {
   goTocourse(status) {
     console.log(status)
     // if (status == 'start')
-    this.router.navigate(["/Learner/scorm", { id: 'FSL' }]);
+    this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition' }]);
+  }
+  getcourserStatus(){
+    var user_id='1'
+    this.service.getPlayerStatus(user_id).subscribe((data: any) => {
+    console.log(data,'rajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
+    });
   }
 }
