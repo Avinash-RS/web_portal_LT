@@ -134,11 +134,9 @@ export class ProfileComponent implements OnInit {
   }
   //State List
   getAllState(country) {
-    console.log(country)
     let countryId = country.value;
     this.service.get_state_details(countryId).subscribe(stateDetails => {
       this.stateValue = stateDetails.data['get_state_details'].data;
-      console.log('state', this.stateValue)
       if (this.stateValue == null) {
         this.alert.openAlert(stateDetails.data['get_state_details'].message, null);
       }
@@ -147,7 +145,6 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
-      console.log(this.levelValue)
       if (this.levelValue == null) {
         this.alert.openAlert(level.data['get_qualification_details'].message, null);
       }
@@ -166,11 +163,9 @@ export class ProfileComponent implements OnInit {
   }
 
   getDistrict(city) {
-    console.log(city)
     let stateId = city.value;
     this.service.get_district_details(this.countryId, stateId).subscribe(city => {
       this.cityValue = city.data['get_district_details'].data;
-      console.log(this.cityValue)
     })
   }
   getDiscipline() {
@@ -200,6 +195,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.userData)
       // if(this.profileDetails){
       this.profileDetails = this.userData.user_profile[0];
+      this.urlImage = this.userData.user_profile[0].profile_img
       this.getAllState(this.profileDetails.country);
       this.getDistrict(this.profileDetails.state)
       //added mythreyi
