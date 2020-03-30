@@ -25,7 +25,6 @@ export class AppComponent {
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
     var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
     var login = localStorage.getItem('login') ? localStorage.getItem('login') : null;
-    console.log(login, typeof login, login == 'true')
     var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
     var ps = atob(psd)
     if (login == 'true') {

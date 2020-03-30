@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   mailForm: FormGroup;
   otpForm: FormGroup;
   passwordForm: FormGroup;
-  enabel:Boolean=true
+  enabel: Boolean = true
   public qual: any[] = [{
     qualification: '',
     board_university: '',
@@ -24,14 +24,15 @@ export class ProfileComponent implements OnInit {
     discipline: '',
     specification: '',
     year_of_passing: '',
-    percentage: ''
+    percentage: '',
+    level_detail : ''
   }];
   public links: any[] = [{
     certificate: ''
   }];
 
   //Declarations
-  selectedDay:any;
+  selectedDay: any;
   currentUser: any = [];
   otp: any;
   info: any;
@@ -53,69 +54,77 @@ export class ProfileComponent implements OnInit {
   specValue: any;
   institutes: any;
   languageList: any;
-  isenable:boolean = true;
-  userData:any = {};
-  qualification:any = {};
-  showdeletedicon:boolean = true;
+  isenable: boolean = true;
+  userData: any = {};
+  qualification: any = {};
+  showdeletedicon: boolean = true;
   uniValue: void;
-  url:String = '';
+  url: String = '';
   // countryDetails: any = [];
   selectfile = null;
-  urlImage:any
-  socialMedia:{}
-  certificate:any=[]
+  urlImage: any
+  socialMedia: {}
+  certificate: any = []
   profileDetailCheck: boolean = false;
+
+
+  progress: number = 0;
+
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
     private activeroute: ActivatedRoute,
     private dialog: MatDialog,
-    private loader:Ng4LoadingSpinnerService,
+    private loader: Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { 
-    this.enabel=false
-   
+  ) {
+    this.enabel = false
+
   }
 
   ngOnInit() {
-    if(localStorage.getItem('UserDetails')){
-      
-    
-    this.activeroute.queryParams.subscribe(params => {
-      if(params["status"]){
-        this.alert.openAlert(params['msg'], null);
-      }
-    });
-    this.urlImage = localStorage.getItem('user_img')
-    var user = localStorage.getItem('UserDetails')
-    this.currentUser = JSON.parse(user);
-    this.getprofileDetails(this.currentUser.user_id);
-    this.getAllLevels();
-    this.getAllcountry();
-    this.getAllLanguage();
-    this.getBoardsUniv();
-    this.getInstitute();
-    this.getDiscipline();
-    this.getSpec();
-  }else{
-    this.router.navigate(['/Learner/login'])
-  }
-    
+    if (localStorage.getItem('UserDetails')) {
+
+
+      this.activeroute.queryParams.subscribe(params => {
+        if (params["status"]) {
+          this.alert.openAlert(params['msg'], null);
+        }
+      });
+      this.urlImage = localStorage.getItem('user_img')
+      var user = localStorage.getItem('UserDetails')
+      this.currentUser = JSON.parse(user);
+      this.getprofileDetails(this.currentUser.user_id);
+      this.getAllLevels();
+      this.getAllcountry();
+      this.getAllLanguage();
+      this.getBoardsUniv();
+      this.getInstitute();
+      this.getDiscipline();
+      this.getSpec();
+
+     
+
+
+    } else {
+      this.router.navigate(['/Learner/login'])
+    }
+
   }
 
-  enableedit(){
+  enableedit() {
     this.showdeletedicon = false;
   }
   get f() {
-    if(this.mailForm) {
-      return this.mailForm.controls; 
-    } else if(this.otpForm) {
-      return this.otpForm.controls; 
-    }else if(this.passwordForm) {
+    if (this.mailForm) {
+      return this.mailForm.controls;
+    } else if (this.otpForm) {
+      return this.otpForm.controls;
+    } else if (this.passwordForm) {
       return this.passwordForm.controls;
     }
-    
+
   }
   //Country List
   getAllcountry() {
@@ -124,71 +133,87 @@ export class ProfileComponent implements OnInit {
     })
   }
   //State List
-  getAllState(country){
+  getAllState(country) {
+    console.log(country)
     let countryId = country.value;
     this.service.get_state_details(countryId).subscribe(stateDetails => {
       this.stateValue = stateDetails.data['get_state_details'].data;
-      if(this.stateValue == null){
+      console.log('state', this.stateValue)
+      if (this.stateValue == null) {
         this.alert.openAlert(stateDetails.data['get_state_details'].message, null);
       }
     })
   }
-  getAllLevels(){
+  getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
-      if(this.levelValue == null){
+      console.log(this.levelValue)
+      if (this.levelValue == null) {
         this.alert.openAlert(level.data['get_qualification_details'].message, null);
       }
     })
   }
-  getBoardsUniv(){
+  getBoardsUniv() {
     this.service.get_board_university_details().subscribe(boards => {
       this.boardValue = boards.data['get_board_university_details'].data['board'];
       this.uniValue = boards.data['get_board_university_details'].data['university'];
     })
   }
-  getInstitute(){
+  getInstitute() {
     this.service.get_institute_details().subscribe(institute => {
       this.institutes = institute.data['get_institute_details'].data;
     })
   }
 
-  getDistrict(city){
+  getDistrict(city) {
+    console.log(city)
     let stateId = city.value;
-    this.service.get_district_details(this.countryId,stateId).subscribe(city => {
+    this.service.get_district_details(this.countryId, stateId).subscribe(city => {
       this.cityValue = city.data['get_district_details'].data;
+      console.log(this.cityValue)
     })
   }
-  getDiscipline(){
+  getDiscipline() {
     this.service.get_discipline_details().subscribe(discipline => {
-      this.dis =discipline.data['get_discipline_details'].data;
+      this.dis = discipline.data['get_discipline_details'].data;
     })
   }
-  getSpec(){
+  getSpec() {
     this.service.get_specification_details().subscribe(spec => {
-      this.specValue =spec.data['get_specification_details'].data;
+      this.specValue = spec.data['get_specification_details'].data;
     })
   }
-  getAllLanguage(){
+  getAllLanguage() {
     this.service.get_language_details().subscribe(language => {
       this.languageList = language.data['get_language_details'].data;
     })
   }
 
-// View Profile
+  // View Profile
   getprofileDetails(userid) {
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
+      // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
       this.loader.hide();
+      // this.profileDetails.about_you 
+      console.log(this.userData)
       // if(this.profileDetails){
-        // this.profileDetails = this.userData.user_profile[0];
-        // if(this.profileDetails)
-        // this.qualification = this.userData.qualification[0];
-        // console.log( this.profileDetails,' this.profileDetails')
-        // console.log( this.qualification,' this.data')
+      this.profileDetails = this.userData.user_profile[0];
+      this.getAllState(this.profileDetails.country);
+      this.getDistrict(this.profileDetails.state)
+      //added mythreyi
+      var p = this.userData.progress.slice(0, -1);
+      this.progress = Number(p);
+      this.levelValue = this.userData.qualification[0].level_detail
+      //end - mythreyi
+
+      // if(this.profileDetails)
+      // this.qualification = this.userData.qualification[0];
+      // console.log( this.profileDetails,' this.profileDetails')
+      // console.log( this.qualification,' this.data')
       // }
-     
+
     })
   }
   addnewQual(index) {
@@ -201,15 +226,15 @@ export class ProfileComponent implements OnInit {
       year_of_passing: '',
       percentage: ''
     });
-    return true;  
+    return true;
   }
-  removelastQual(index){
-    if(this.qual.length == 1){
-      this.alert.openAlert("Can't delete the row when there is only one row", null);  
-      return false;  
-    }else{
-      this.qual.splice(index, 1);   
-      return true;  
+  removelastQual(index) {
+    if (this.qual.length == 1) {
+      this.alert.openAlert("Can't delete the row when there is only one row", null);
+      return false;
+    } else {
+      this.qual.splice(index, 1);
+      return true;
     }
   }
 
@@ -220,117 +245,119 @@ export class ProfileComponent implements OnInit {
     // return true;
   }
 
-  removenewLink(index){
-    if(this.words2.length == 1){
-      this.alert.openAlert("Can't delete  when there is only one row", null);  
-      return false;  
-    }else{
-      this.words2.splice(index, 1);   
-      return true;  
+  removenewLink(index) {
+    if (this.words2.length == 1) {
+      this.alert.openAlert("Can't delete  when there is only one row", null);
+      return false;
+    } else {
+      this.words2.splice(index, 1);
+      return true;
     }
-  
+
   }
 
-  updateProfile(language,country,state,city,social,about_you,exp,org,role) {
+  updateProfile(language, country, state, city, social, about_you, exp, org, role) {
     // role = 'aaaasd';
-    console.log(language,country,state,city,social,about_you,exp,org,role)
-    if(this.profileDetails.profession == 'student') {
-      if(this.profileDetails.gender  && this.profileDetails.country  &&
-        this.profileDetails.state  && city  && this.qual[0].qualification != '' &&
+    console.log(language, country, state, city, social, about_you, exp, org, role)
+    if (this.profileDetails.profession == 'student') {
+      if (this.profileDetails.gender && this.profileDetails.country &&
+        this.profileDetails.state && city && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
-          this.profileDetailCheck = true;
-        } else {
-          this.loader.hide();
-          this.profileDetailCheck = false;
-          this.alert.openAlert('Please fill all required fields', null);
-        }
-    } else if(this.profileDetails.profession == 'professional'){
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+        this.profileDetailCheck = true;
+      } else {
+        this.loader.hide();
+        this.profileDetailCheck = false;
+        this.alert.openAlert('Please fill all required fields', null);
+      }
+    } else if (this.profileDetails.profession == 'professional') {
       // return false;
       if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
        role  && this.profileDetails.country  &&
         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
-          this.profileDetailCheck = true;
-         
-        } else {
-          this.loader.hide();
-          this.profileDetailCheck = false;
-          this.alert.openAlert('Please fill all required fields', null);
-        }
-    } else {
-      if(this.profileDetails.gender  && this.profileDetails.profession  
-          && this.profileDetails.country  &&
-         this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
-         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
-          this.profileDetailCheck = true;
-         } else {
-           this.loader.hide();
-           this.profileDetailCheck = false;
-           this.alert.openAlert('Please fill all required fields', null);
-         }
-    }
-     if(this.profileDetailCheck === true){
-        
-    var social_media =[{
-      link:social,
-      img:""
-    }]
-    var progress;
-    if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined&&localStorage.getItem('user_img')==undefined&&localStorage.getItem('user_img')==null){
-      progress='60%'
-    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined &&localStorage.getItem('user_img')&&language==undefined&&this.words2.length==1&&social_media.length==1){
-      progress='90%'
-    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined 
-      &&localStorage.getItem('user_img')&&language!=undefined&&this.words2!=undefined&& social!=undefined){
-      progress='100%'
-    }
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+        this.profileDetailCheck = true;
 
-    for (const iterator of this.words2) {
-        this.certificate.push(iterator.value)
-      } 
-
-    var professional={
-      total_experience:exp,
-      organization:org,
-      job_role:role
-    }
-
-    
-    var jsonData={
-      user_id:this.currentUser.user_id,
-      gender:this.profileDetails.gender,
-      year_of_birth: "05-08-1998",
-      profile_img:localStorage.getItem('user_img'),
-      profession:this.profileDetails.profession,
-      languages_known:language,
-      country:country,
-      state:state,
-      city_town:city,
-      qualification:this.qual,
-     certificate:this.certificate,
-     social_media:social_media,
-     about_you:about_you ,
-     professional:professional,
-     progress:progress,
-     created_by_ip:localStorage.getItem('Systemip')
-    }
-   
-    this.loader.show();
-    this.service.update_profile(jsonData).subscribe(data => {
-      if(data.data['update_profile']['success'] == 'true'){
+      } else {
         this.loader.hide();
-        this.alert.openAlert(data.data['update_profile'].message,null)
-        this.showdeletedicon = true;
-      
-      } else{
-        this.alert.openAlert(data.data['update_profile'].message,null)
+        this.profileDetailCheck = false;
+        this.alert.openAlert('Please fill all required fields', null);
       }
-    })
-  }
-    
+    } else {
+      if (this.profileDetails.gender && this.profileDetails.profession
+        && this.profileDetails.country &&
+        this.profileDetails.state && this.profileDetails.city && this.qual[0].qualification != '' &&
+        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+        this.profileDetailCheck = true;
+      } else {
+        this.loader.hide();
+        this.profileDetailCheck = false;
+        this.alert.openAlert('Please fill all required fields', null);
+      }
+    }
+    if (this.profileDetailCheck === true) {
+
+      var social_media = [{
+        link: social,
+        img: ""
+      }]
+      var progress;
+      if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') == undefined && localStorage.getItem('user_img') == null) {
+        progress = '60%'
+      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social_media.length == 1) {
+        progress = '90%'
+      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined
+        && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
+        progress = '100%'
+      }
+
+      for (const iterator of this.words2) {
+        this.certificate.push(iterator.value)
+      }
+
+      var professional = {
+        total_experience: exp,
+        organization: org,
+        job_role: role
+      }
+
+
+      var jsonData = {
+        user_id: this.currentUser.user_id,
+        gender: this.profileDetails.gender,
+        year_of_birth: "05-08-1998",
+        profile_img: localStorage.getItem('user_img'),
+        profession: this.profileDetails.profession,
+        languages_known: language,
+        country: country,
+        state: state,
+        city_town: city,
+        qualification: this.qual,
+        certificate: this.certificate,
+        social_media: social_media,
+        about_you: about_you,
+        professional: professional,
+        progress: progress,
+        created_by_ip: localStorage.getItem('Systemip')
+      }
+
+      this.loader.show();
+      this.service.update_profile(jsonData).subscribe(data => {
+        if (data.data['update_profile']['success'] == 'true') {
+          this.loader.hide();
+          this.alert.openAlert(data.data['update_profile'].message, null)
+          this.showdeletedicon = true;
+
+          console.log(data.data['update_profile'])
+
+        } else {
+          this.alert.openAlert(data.data['update_profile'].message, null)
+        }
+      })
+    }
+
   }
 
   editEmail(templateRef: TemplateRef<any>) {
@@ -344,118 +371,118 @@ export class ProfileComponent implements OnInit {
     this.dialog.open(mobRef);
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
-          otp1: new FormControl("", []),
-          otp2: new FormControl("", []),
-          otp3: new FormControl("", []),
-          otp4: new FormControl("", []),
+      otp1: new FormControl("", []),
+      otp2: new FormControl("", []),
+      otp3: new FormControl("", []),
+      otp4: new FormControl("", []),
     })
   }
   editPassword(passRef: TemplateRef<any>) {
     this.dialog.open(passRef);
     this.passwordForm = this.formBuilder.group({
-      currentpassword: new FormControl('', myGlobals.passwordVal),  
-      newpassword: new FormControl('', myGlobals.passwordVal),  
-      confirmpassword: new FormControl('', myGlobals.passwordVal),  
-     });
+      currentpassword: new FormControl('', myGlobals.passwordVal),
+      newpassword: new FormControl('', myGlobals.passwordVal),
+      confirmpassword: new FormControl('', myGlobals.passwordVal),
+    });
   }
   //Update Mobile
-  otpverification(){
+  otpverification() {
     this.loader.show();
-    this.service.update_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile).subscribe(data => {
-      
-      if(data.data['update_mobile_onprofile']['success'] == 'true'){
+    this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
+
+      if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
+        this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         this.isenable = false;
         this.showotp = true;
-      } else{
-        this.alert.openAlert(data.data['update_mobile_onprofile'].message,null)
+      } else {
+        this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
       }
     })
-  
+
   }
   //Verify OTP
-  otpverify(){
-    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile,this.otp,).subscribe(data => {
-  
-          if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
-            this.showotp = true;
-          } else{
-            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
-          }
-      })
+  otpverify() {
+    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
+
+      if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        this.showotp = true;
+      } else {
+        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+      }
+    })
 
   }
   //Update Password
-  updatePassword(){
+  updatePassword() {
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
-    this.service.get_change_password_updateprofile(this.currentUser.username,ps,this.passwordForm.value.newpassword).subscribe(password => {
-      
-      if(password.data['get_change_password_updateprofile']['success'] == 'true'){
+    this.service.get_change_password_updateprofile(this.currentUser.username, ps, this.passwordForm.value.newpassword).subscribe(password => {
+
+      if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
-      } else{
+      } else {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
   }
   //Update Email
-  updateEmail(){
-    this.service.update_email_onprofile(this.currentUser.user_id,this.mailForm.value.mailid).subscribe(data => {
-      if(data.data['update_email_onprofile']['success'] == 'true'){
+  updateEmail() {
+    this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
+      if (data.data['update_email_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
   }
-  
+
 
   onSelectFile(event) {
-     this.selectfile = <File>event.target.files[0];
+    this.selectfile = <File>event.target.files[0];
 
-     if( this.selectfile && this.selectfile.type != 'image/png' && this.selectfile.type!='image/jpeg'){
-       this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null)
-     } 
-     else if (this.selectfile && this.selectfile.size > 100000){
+    if (this.selectfile && this.selectfile.type != 'image/png' && this.selectfile.type != 'image/jpeg') {
+      this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null)
+    }
+    else if (this.selectfile && this.selectfile.size > 100000) {
 
       this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null)
-     } 
-     else {
-       if(this.selectfile){
-       const fb = new FormData();
-       fb.append('image',this.selectfile,this.selectfile.name)
-       this.service.imageupload(fb).subscribe(data =>{
-           
-           this.urlImage=data
-           localStorage.setItem('user_img','https://rajeshkumarranjan.blob.core.windows.net/'+this.urlImage.path)
-           //this.profileUpdateData(this.urlImage.url)
-       })
+    }
+    else {
+      if (this.selectfile) {
+        const fb = new FormData();
+        fb.append('image', this.selectfile, this.selectfile.name)
+        this.service.imageupload(fb).subscribe(data => {
+
+          this.urlImage = data
+          localStorage.setItem('user_img', 'https://rajeshkumarranjan.blob.core.windows.net/' + this.urlImage.path)
+          //this.profileUpdateData(this.urlImage.url)
+        })
       }
-     }
+    }
   }
-   profileUpdateData(img){
-     var jsonData={
-      user_id:this.currentUser.user_id,
-      profile_img:img
-     }
-         this.service.update_profile(jsonData).subscribe(data => {
+  profileUpdateData(img) {
+    var jsonData = {
+      user_id: this.currentUser.user_id,
+      profile_img: img
+    }
+    this.service.update_profile(jsonData).subscribe(data => {
     })
-    
-    if(this.profileDetails.gender === undefined){
+
+    if (this.profileDetails.gender === undefined) {
       this.alert.openAlert('Select a value for gender', null)
     }
-    if(this.profileDetails.profession === undefined){
+    if (this.profileDetails.profession === undefined) {
       this.alert.openAlert('Select a value for profession', null)
     }
-    if(this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined){
+    if (this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined) {
       this.alert.openAlert('Select values for all fields in location', null)
     }
-   }
-   words2 = [{value: ''}];
-   add() {
-    this.words2.push({value: ''});
+  }
+  words2 = [{ value: '' }];
+  add() {
+    this.words2.push({ value: '' });
   }
 }

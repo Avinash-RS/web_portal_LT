@@ -43,16 +43,21 @@ img {
 .wishlist {
     position: absolute;
     z-index: 1;
-    margin-left: 12px;
+    margin-left: -5px;
     margin-top: 5px;
 
     .wishlist_btn {
         background: rgb(41, 41, 41);
-        opacity: 0.8;
+        // opacity: 0.9;
     }
 }
 
+.mat-mini-fab {
+    width: 33px;
+    height: 35px;
+}
 mat-icon {
+    font-size: 18px;
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: red;
 }

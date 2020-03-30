@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 //local
 import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
@@ -16,6 +17,7 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     AlertComponentComponent,
   ],
   imports: [
+    Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
     BrowserAnimationsModule,
