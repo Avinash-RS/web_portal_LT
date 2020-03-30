@@ -191,10 +191,11 @@ export class ProfileComponent implements OnInit {
 
   // View Profile
   getprofileDetails(userid) {
+    console.log('inside getprofile')
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
-      // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
+      console.log('ud',this.userData)
       this.loader.hide();
       // this.profileDetails.about_you 
       console.log(this.userData)
@@ -256,109 +257,112 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  updateProfile(language, country, state, city, social, about_you, exp, org, role) {
+  updateProfile(language,country,state,city,social,about_you,exp,org,role) {
     // role = 'aaaasd';
-    console.log(language, country, state, city, social, about_you, exp, org, role)
-    if (this.profileDetails.profession == 'student') {
-      if (this.profileDetails.gender && this.profileDetails.country &&
-        this.profileDetails.state && city && this.qual[0].qualification != '' &&
+    // console.log(language,country,state,city,social,about_you,exp,org,role)
+    if(this.profileDetails.profession === 'student') {
+      if(this.profileDetails.gender  && this.profileDetails.country  &&
+        this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
-        this.profileDetailCheck = true;
-      } else {
-        this.loader.hide();
-        this.profileDetailCheck = false;
-        this.alert.openAlert('Please fill all required fields', null);
-      }
-    } else if (this.profileDetails.profession == 'professional') {
-      // return false;
-      if(this.profileDetails.gender  && this.profileDetails.totExp  && this.profileDetails.currentOrg  &&
-       role  && this.profileDetails.country  &&
-        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
-        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
-        this.profileDetailCheck = true;
-
-      } else {
-        this.loader.hide();
-        this.profileDetailCheck = false;
-        this.alert.openAlert('Please fill all required fields', null);
-      }
-    } else {
-      if (this.profileDetails.gender && this.profileDetails.profession
-        && this.profileDetails.country &&
-        this.profileDetails.state && this.profileDetails.city && this.qual[0].qualification != '' &&
-        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
-        this.profileDetailCheck = true;
-      } else {
-        this.loader.hide();
-        this.profileDetailCheck = false;
-        this.alert.openAlert('Please fill all required fields', null);
-      }
-    }
-    if (this.profileDetailCheck === true) {
-
-      var social_media = [{
-        link: social,
-        img: ""
-      }]
-      var progress;
-      if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') == undefined && localStorage.getItem('user_img') == null) {
-        progress = '60%'
-      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social_media.length == 1) {
-        progress = '90%'
-      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined
-        && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
-        progress = '100%'
-      }
-
-      for (const iterator of this.words2) {
-        this.certificate.push(iterator.value)
-      }
-
-      var professional = {
-        total_experience: exp,
-        organization: org,
-        job_role: role
-      }
-
-
-      var jsonData = {
-        user_id: this.currentUser.user_id,
-        gender: this.profileDetails.gender,
-        year_of_birth: "05-08-1998",
-        profile_img: localStorage.getItem('user_img'),
-        profession: this.profileDetails.profession,
-        languages_known: language,
-        country: country,
-        state: state,
-        city_town: city,
-        qualification: this.qual,
-        certificate: this.certificate,
-        social_media: social_media,
-        about_you: about_you,
-        professional: professional,
-        progress: progress,
-        created_by_ip: localStorage.getItem('Systemip')
-      }
-
-      this.loader.show();
-      this.service.update_profile(jsonData).subscribe(data => {
-        if (data.data['update_profile']['success'] == 'true') {
-          this.loader.hide();
-          this.alert.openAlert(data.data['update_profile'].message, null)
-          this.showdeletedicon = true;
-
-          console.log(data.data['update_profile'])
-
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
         } else {
-          this.alert.openAlert(data.data['update_profile'].message, null)
+          this.loader.hide();
+          this.profileDetailCheck = false;
+          this.alert.openAlert('Please fill all required fields', null);
         }
-      })
+    } else if(this.profileDetails.profession == 'professional'){
+      // return false;
+      console.log(this.profileDetails.profession)
+      console.log(this.profileDetails);
+      console.log(this.qual)
+      if(this.profileDetails.gender  && this.profileDetails.total_experience  && this.profileDetails.organization  &&
+       this.profileDetails.job_role  && this.profileDetails.country  &&
+        this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
+        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
+         
+        } else {
+          this.loader.hide();
+          this.profileDetailCheck = false;
+          this.alert.openAlert('Please fill all required fields', null);
+        }
+    } else {
+      if(this.profileDetails.gender  && this.profileDetails.profession  
+          && this.profileDetails.country  &&
+         this.profileDetails.state  && this.profileDetails.city_town  && this.qual[0].qualification != '' &&
+         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
+         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
+          this.profileDetailCheck = true;
+         } else {
+           this.loader.hide();
+           this.profileDetailCheck = false;
+           this.alert.openAlert('Please fill all required fields', null);
+         }
+    }
+     if(this.profileDetailCheck === true){
+        
+    var social_media =[{
+      link:social,
+      img:""
+    }]
+    var progress;
+    if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined&&localStorage.getItem('user_img')==undefined&&localStorage.getItem('user_img')==null){
+      progress='60%'
+    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined &&localStorage.getItem('user_img')&&language==undefined&&this.words2.length==1&&social_media.length==1){
+      progress='90%'
+    }else if(this.profileDetails.gender!=undefined&&this.profileDetails.profession!=undefined&&country!=undefined&&this.qual!=undefined 
+      &&localStorage.getItem('user_img')&&language!=undefined&&this.words2!=undefined&& social!=undefined){
+      progress='100%'
     }
 
+    for (const iterator of this.words2) {
+        this.certificate.push(iterator.value)
+      } 
+
+    var professional={
+      total_experience:exp,
+      organization:org,
+      job_role:role
+    }
+
+    
+    var jsonData={
+      user_id:this.currentUser.user_id,
+      gender:this.profileDetails.gender,
+      year_of_birth: "05-08-1998",
+      profile_img:localStorage.getItem('user_img'),
+      profession:this.profileDetails.profession,
+      languages_known:language,
+      country:country,
+      state:state,
+      city_town:city,
+      qualification:this.qual,
+     certificate:this.certificate,
+     social_media:social_media,
+     about_you:about_you ,
+     professional:professional,
+     progress:progress,
+     created_by_ip:localStorage.getItem('Systemip')
+    }
+   
+    this.loader.show();
+    this.service.update_profile(jsonData).subscribe(data => {
+      if(data.data['update_profile']['success'] == 'true'){
+        this.loader.hide();
+        this.alert.openAlert(data.data['update_profile'].message,null)
+        this.showdeletedicon = true;
+      
+      } else{
+        this.alert.openAlert(data.data['update_profile'].message,null)
+      }
+    })
   }
+    
+  }
+
+
 
   editEmail(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
@@ -402,18 +406,30 @@ export class ProfileComponent implements OnInit {
 
   }
   //Verify OTP
-  otpverify() {
-    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
-
-      if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+  otpverify(){
+    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile,this.otp,).subscribe(data => {
+  
+          if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
+            this.showotp = true;
+          } else{
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
+          }
+      })
+      this.dialog.closeAll();
+  }
+  Resendcode(){
+    this.loader.show();
+    this.service.submit_otp(this.currentUser.user_id,'this.currentUser._id',this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+      this.otp = '';
+      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.loader.hide();
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
         this.showotp = true;
-      } else {
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-      }
-    })
-
+      } 
+  })
+  this.dialog.closeAll();
   }
   //Update Password
   updatePassword() {
@@ -427,6 +443,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
+    this.dialog.closeAll();
   }
   //Update Email
   updateEmail() {
@@ -437,6 +454,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
+    this.dialog.closeAll();
   }
 
 
