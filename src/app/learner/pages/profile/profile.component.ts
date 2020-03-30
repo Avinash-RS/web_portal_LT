@@ -181,10 +181,14 @@ export class ProfileComponent implements OnInit {
     this.service.view_profile(userid).subscribe(data => {
       this.userData = data.data['view_profile'].message[0];
       this.loader.hide();
-      this.profileDetails = this.userData.user_profile[0];
-      this.qualification = this.userData.qualification[0];
-      console.log( this.profileDetails,' this.profileDetails')
-      console.log( this.qualification,' this.data')
+      // if(this.profileDetails){
+        // this.profileDetails = this.userData.user_profile[0];
+        // if(this.profileDetails)
+        // this.qualification = this.userData.qualification[0];
+        // console.log( this.profileDetails,' this.profileDetails')
+        // console.log( this.qualification,' this.data')
+      // }
+     
     })
   }
   addnewQual(index) {
@@ -232,7 +236,7 @@ export class ProfileComponent implements OnInit {
     console.log(language,country,state,city,social,about_you,exp,org,role)
     if(this.profileDetails.profession == 'student') {
       if(this.profileDetails.gender  && this.profileDetails.country  &&
-        this.profileDetails.state  && this.profileDetails.city  && this.qual[0].qualification != '' &&
+        this.profileDetails.state  && city  && this.qual[0].qualification != '' &&
         this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
         && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != ''){
           this.profileDetailCheck = true;
@@ -319,6 +323,7 @@ export class ProfileComponent implements OnInit {
       if(data.data['update_profile']['success'] == 'true'){
         this.loader.hide();
         this.alert.openAlert(data.data['update_profile'].message,null)
+        this.showdeletedicon = true;
       
       } else{
         this.alert.openAlert(data.data['update_profile'].message,null)
