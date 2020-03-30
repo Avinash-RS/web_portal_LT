@@ -6,7 +6,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <!-- id="navbarCollapse" -->
-  <div class="collapse navbar-collapse" >
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
       <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
@@ -62,14 +62,18 @@
           <!-- <a routerLink="[/Learner/profile]"></a> -->
           <label>Profile</label>
         </button>
-        <button class="backgroundcol" mat-menu-item>
+        <!-- added routerLink - Mythreyi -->
+        <!-- <button class="backgroundcol" routerLink="/Learner/profile" mat-menu-item>
+          <label>Profile</label>
+        </button> -->
+        <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
           <label>My Course</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
-          <label >Dashboard</label>
+          <label>Dashboard</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
-          <label >Wishlist</label>
+          <label>Wishlist</label>
         </button>
         <button class="backgroundcol" mat-menu-item>
           <label style="color: #fff;">Certificate</label>
@@ -95,30 +99,30 @@
         </ul>
       </li>
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Search
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Notifications
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           My Cart
         </a>
       </li>
 
       <li class="smallmenu">
-        <a href="#" >
+        <a href="#">
           Profile
         </a>
       </li><br><br>
     </ul>
-    
+
   </ul>
 
 </div>
