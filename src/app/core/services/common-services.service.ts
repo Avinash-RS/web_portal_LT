@@ -74,7 +74,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: getPlayerStatus,
       variables: {
-        
+        user_id:id
       }
     });
   }
