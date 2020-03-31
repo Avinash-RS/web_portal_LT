@@ -70,9 +70,14 @@ export class ProfileComponent implements OnInit {
   socialMedia: {}
   certificate: any = []
   profileDetailCheck: boolean = false;
-
-
   progress: number = 0;
+  show_button: Boolean = false;
+  show_eye: Boolean = false;
+  showNewButton: Boolean = false;
+  showNewEyes: Boolean = false;
+  showconButton: Boolean = false;
+  showconEyes: Boolean = false;
+
 
   constructor(
     private alert: AlertServiceService,
@@ -86,6 +91,20 @@ export class ProfileComponent implements OnInit {
     this.enabel = false
 
   }
+  showPassword() {
+    this.show_button = !this.show_button;
+    this.show_eye = !this.show_eye;
+  }
+
+  shownewPassword(){
+    this.showNewButton = !this.showNewButton;
+    this.showNewEyes = !this.showNewEyes;
+  }
+  showconPassword(){
+    this.showconButton = !this.showconButton;
+    this.showconEyes = !this.showconEyes;
+  }
+
 
   ngOnInit() {
     if (localStorage.getItem('UserDetails')) {
@@ -191,6 +210,7 @@ export class ProfileComponent implements OnInit {
 
   // View Profile
   getprofileDetails(userid) {
+    console.log('inside getprofile')
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       if (data.data['view_profile']) {
@@ -210,6 +230,16 @@ export class ProfileComponent implements OnInit {
         this.qual = this.userData.qualification;
         console.log(this.qual)
         this.words2 = this.userData.user_profile[0].certificate
+        this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
+          qualification: s.qualification,
+          institute: s.institute,
+          board_university : s.board_university,
+          discipline  :s.discipline,
+          specification : s.specification,
+          year_of_passing : s.year_of_passing,
+          percentage : s.percentage
+        }));
+        console.log(this.qualification_obj)
         //end - mythreyi
 
         // if(this.profileDetails)
@@ -366,20 +396,20 @@ export class ProfileComponent implements OnInit {
         created_by_ip: localStorage.getItem('Systemip')
       }
       console.log(jsonData)
-      debugger
-      // this.loader.show();
-      // this.service.update_profile(jsonData).subscribe(data => {
-      //   if (data.data['update_profile']['success'] == 'true') {
-      //     this.loader.hide();
-      //     this.alert.openAlert(data.data['update_profile'].message, null)
-      //     this.showdeletedicon = true;
+      // debugger
+      this.loader.show();
+      this.service.update_profile(jsonData).subscribe(data => {
+        if (data.data['update_profile']['success'] == 'true') {
+          this.loader.hide();
+          this.alert.openAlert(data.data['update_profile'].message, null)
+          this.showdeletedicon = true;
 
-      //     console.log(data.data['update_profile'])
+          console.log(data.data['update_profile'])
 
-      //   } else {
-      //     this.alert.openAlert(data.data['update_profile'].message, null)
-      //   }
-      // })
+        } else {
+          this.alert.openAlert(data.data['update_profile'].message, null)
+        }
+      })
     }
 
   }
@@ -426,18 +456,30 @@ export class ProfileComponent implements OnInit {
 
   }
   //Verify OTP
-  otpverify() {
-    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
-
-      if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+  otpverify(){
+    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile,this.otp,).subscribe(data => {
+  
+          if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
+            this.showotp = true;
+          } else{
+            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
+          }
+      })
+      this.dialog.closeAll();
+  }
+  Resendcode(){
+    this.loader.show();
+    this.service.submit_otp(this.currentUser.user_id,'this.currentUser._id',this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+      this.otp = '';
+      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
+        this.loader.hide();
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
         this.showotp = true;
-      } else {
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-      }
-    })
-
+      } 
+  })
+  this.dialog.closeAll();
   }
   //Update Password
   updatePassword() {
@@ -451,6 +493,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
+    this.dialog.closeAll();
   }
   //Update Email
   updateEmail() {
@@ -461,6 +504,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
+    this.dialog.closeAll();
   }
 
 

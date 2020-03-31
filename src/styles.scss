@@ -17,6 +17,9 @@
 //   lg: 992px,
 //   xl: 1200px
 // );
+button:disabled:hover {
+  cursor: not-allowed;
+}
 
 .container {
   max-width: 100% !important;
@@ -322,7 +325,7 @@ body {
 
 .wrap-reg {
   width: 350px;
-  height: 525px;
+  height: auto;
   background: #fff !important;
   border-radius: 3px;
   overflow: hidden;
@@ -364,7 +367,7 @@ input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: #94b5f1;
+  background:$color-light-blue;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;

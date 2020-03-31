@@ -24,6 +24,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['Learner/profile']);
   }
 
+  navigateWishlist(){
+    this.router.navigate(['Learner/MyCourse']);
+  }
+
   logout() {
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
       console.log(logout.data.logout)

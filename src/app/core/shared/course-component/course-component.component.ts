@@ -15,7 +15,9 @@ export class CourseComponentComponent implements OnInit {
   @Input('course') course: any;
   @Input('from') from: any;
   userDetail: any;
-
+  recorded_data: any;
+  final_full_data: any;
+  final_status: any = null;
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
 
@@ -65,26 +67,48 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.course)
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
+      this.getcourserStatus()
     }
   }
 
   gotoDescription(course) {
     let detail = {
-      id :  this.course.course_id,
+      id: this.course.course_id,
       wishlist: this.course.wishlisted,
-      wishlist_id:this.course.wishlist_id 
+      wishlist_id: this.course.wishlist_id
     }
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    // this.router.navigate(['/Learner/courseDetail',{ state: { id: id, wishlist: this.course.wishlisted, wishlist_id: this.course.wishlist_id }}])
   }
 
   goTocourse(status) {
-    console.log(status)
-    // if (status == 'start')
-    this.router.navigate(["/Learner/scorm", { id: 'FSL' }]);
+    if (this.final_status != 'Completed') {
+      let detail1 = {
+        id: 'SequencingRandomTest_SCORM20043rdEdition', 
+        user: this.userDetail.user_id
+      }
+      console.log(detail1)
+      this.router.navigateByUrl('/Learner/scorm', {state: { detail: detail1 }});
+    }
+  }
+
+  getcourserStatus() {
+    //check with user id 2,3 ,ramu
+    this.service.getPlayerStatus(this.userDetail.user_id).subscribe((data: any) => {
+      if (data.data['getPlayerStatus']) {
+        this.recorded_data = data
+        this.final_full_data = this.recorded_data.data.getPlayerStatus.message
+        console.log(this.final_full_data)
+        if (this.final_full_data && this.final_full_data.status) {
+          if (this.final_full_data.status == 'completed') {
+            this.final_status = 'Completed'
+          } else if (this.final_full_data.status == 'incomplete') {
+            this.final_status = 'Resume'
+          }
+        }
+      }
+    });
   }
 }

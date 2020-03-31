@@ -1,6 +1,12 @@
 @import "../../assets/variable.scss";
-
-
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + .75rem);
+  background-image: none !important;
+  background-repeat: no-repeat;
+  background-position: right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
 .custom-modalbox {
   .mat-dialog-actions {
     justify-content: center;
@@ -203,7 +209,7 @@ mat-icon {
   padding: 15px;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background: url('../../assets/learner/download.jpg');
+  background: url('../../assets/learner/background.jpg');
 }
 
 .btn {
@@ -235,7 +241,7 @@ mat-icon {
 
 .wrap-reg {
   width: 350px;
-  height: 525px;
+  height: auto;
   background: #fff !important;
   border-radius: 3px;
   overflow: hidden;
@@ -253,7 +259,7 @@ input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: #94b5f1;
+  background: $color-light-blue;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -281,17 +287,6 @@ input[type=password] {
   background-color: $color-blue;
 }
 
-input[type=text],
-input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 1px 0;
-  background: #94b5f1;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
 
 label {
   color: #1F3777;
@@ -310,6 +305,9 @@ label {
 mat-icon {
   cursor: pointer;
   color: #1F3777;
+}
+button:disabled:hover {
+  cursor: not-allowed;
 }
 
 // .header{

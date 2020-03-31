@@ -24,7 +24,8 @@ export const emailVal: any = [
     Validators.required, 
     Validators.minLength(6), 
     Validators.maxLength(64), 
-    Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+    Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,4}$/)
+    //  old pattern Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
 ]
 // not accpect start and end space 
 export const fullnameVal: any = [
@@ -33,3 +34,8 @@ export const fullnameVal: any = [
      Validators.minLength(3),
       Validators.maxLength(50)
 ]
+
+export  var lowerCaseLetters = /[a-z]/g;
+export  var upperCaseLetters = /[A-Z]/g;
+export  var numbers = /[0-9]/g;
+export  var specialchar = /[^\w\s]/g;

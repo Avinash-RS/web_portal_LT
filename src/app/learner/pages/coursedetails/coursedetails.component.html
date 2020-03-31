@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
         <li class="breadcrumb-item"><a href="/Learner/MyCourse">Courses</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Leadership: Practical Leadership Skills</li>
+        <li class="breadcrumb-item active" aria-current="page">{{course.course_name}}</li>
     </ol>
 </nav>
 <div *ngIf="course != null">
@@ -109,10 +109,11 @@
 
         <br>
         <div class="float_right m-r-5">
-            <button mat-mini-fab>
-                <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
-            margin-right: 0px;padding: 0px;background: transparent;box-shadow:none;border:none'>
-                </i>
+            <button mat-mini-fab class="iconmat">
+                <!-- <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
+            margin-right: 0px;padding: 0px;background: transparent;box-shadow:none;border:none'> -->
+            <img src="../../../../assets/images/icon_chat.png">
+                <!-- </i> -->
             </button>
         </div>
 
@@ -137,7 +138,11 @@
                     <tr>
                         <td class="width_15 f_size_16 f_wt_500">Course Description</td>
                         <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">{{course.course_description}}</td>
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;" ><div [ngClass]="{'show-less': showShortDesciption}">{{course.course_description }}</div>
+                        <span (click)="alterDescriptionText()" class="viewtxt">{{ showShortDesciption  ? 'View More > ': 'View Less' }}</span>
+                        </td>
+                        
+                       
                         <td class="width_10"></td>
                     </tr>
                 </table>
@@ -278,13 +283,16 @@
                     </div>
                     <div class="width_15">
                         <strong>{{r.user_name}}</strong><br>
-                        <small>{{r.updated_on}}</small><br>
+                        <small>7 days before</small><br>
                         <small>{{r.course_id}} years of experience</small>
                     </div>
                     <div class="width_60">
                         {{r.review}}
                     </div>
                 </div>
+                <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+               
+              
                 <br>
                 <!-- <div class="display_flex width_100">
                 <div class="width_10">
@@ -410,6 +418,7 @@
                     industry's standard dummy text ever since the 1500s,
                 </mat-expansion-panel>
             </mat-accordion>
+            <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
         </div>
     </div>
     <br><br><br>
