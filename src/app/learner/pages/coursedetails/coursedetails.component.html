@@ -139,6 +139,7 @@
                         <td class="width_15 f_size_16 f_wt_500">Course Description</td>
                         <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
                         <td class="width_40 f_size_16 f_wt_400" style="color: grey;">{{course.course_description}}</td>
+                        View More >
                         <td class="width_10"></td>
                     </tr>
                 </table>
@@ -273,13 +274,16 @@
                     </div>
                     <div class="width_15">
                         <strong>{{r.user_name}}</strong><br>
-                        <small>{{r.updated_on}}</small><br>
+                        <small>7 days before</small><br>
                         <small>{{r.course_id}} years of experience</small>
                     </div>
                     <div class="width_60">
                         {{r.review}}
                     </div>
                 </div>
+                <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+               
+              
                 <br>
                 <!-- <div class="display_flex width_100">
                 <div class="width_10">
@@ -403,6 +407,7 @@
                     industry's standard dummy text ever since the 1500s,
                 </mat-expansion-panel>
             </mat-accordion>
+            <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
         </div>
     </div>
     <br><br><br>
