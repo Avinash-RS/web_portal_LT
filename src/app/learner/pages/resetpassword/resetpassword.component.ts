@@ -16,6 +16,10 @@ export class ResetpasswordComponent implements OnInit {
   currentUser:any = [];
   user:any;
   username:any;
+  lowercase: boolean = false;
+  uppercase: boolean = false;
+  number: boolean = false;
+  spicalcharacter: boolean = false;
   constructor(
     private loader : Ng4LoadingSpinnerService,
     private router:Router, 
@@ -47,6 +51,31 @@ validator: MustMatch('password', 'confirmpassword'),
 });
   }
   get f() { return this.resetForm.controls; }
+
+  change(event) {
+    if (event.target.value.match(myGlobals.lowerCaseLetters)) {
+      this.lowercase = true;
+    } else {
+      this.lowercase = false;
+    }
+    if (event.target.value.match(myGlobals.upperCaseLetters)) {
+      this.uppercase = true;
+    } else {
+      this.uppercase = false;
+    }
+    if (event.target.value.match(myGlobals.numbers)) {
+      this.number = true;
+    } else {
+      this.number = false;
+    }
+    if (event.target.value.match(myGlobals.specialchar)) {
+      this.spicalcharacter = true;
+    } else {
+      this.spicalcharacter = false;
+    }
+
+  }
+
 
   resetpassword(){
     this.loader.show();

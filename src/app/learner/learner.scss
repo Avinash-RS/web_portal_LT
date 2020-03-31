@@ -209,7 +209,7 @@ mat-icon {
   padding: 15px;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background: url('../../assets/learner/download.jpg');
+  background: url('../../assets/learner/background.jpg');
 }
 
 .btn {
@@ -241,7 +241,7 @@ mat-icon {
 
 .wrap-reg {
   width: 350px;
-  height: 525px;
+  height: auto;
   background: #fff !important;
   border-radius: 3px;
   overflow: hidden;
@@ -259,7 +259,7 @@ input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: #94b5f1;
+  background: $color-light-blue;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -287,17 +287,6 @@ input[type=password] {
   background-color: $color-blue;
 }
 
-input[type=text],
-input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 1px 0;
-  background: #94b5f1;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
 
 label {
   color: #1F3777;

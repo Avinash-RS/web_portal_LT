@@ -369,7 +369,7 @@
             <label class="title">Enter the current password</label>
             <div class="input-group">
               <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-              onDrop="return false" onPaste="return false" placeholder="Password"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
+              onDrop="return false" onPaste="return false"   [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
               <span class="input-group-append bg-white border-left-0">
                 <span class="input-group-text bg-transparent">
                   <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
@@ -386,7 +386,7 @@
             <label  class="title">Enter the new password</label>
             <div class="input-group">
               <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="newpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false" placeholder="Password"
+                onDrop="return false" onPaste="return false"
                 [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
                 <span class="input-group-append bg-white border-left-0">
                   <span class="input-group-text bg-transparent">
@@ -407,7 +407,7 @@
             <div class="input-group">
              
               <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false" placeholder="Confirm Password" 
+                onDrop="return false" onPaste="return false"  
                 [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
                 <span class="input-group-append bg-white border-left-0">
                   <span class="input-group-text bg-transparent">
