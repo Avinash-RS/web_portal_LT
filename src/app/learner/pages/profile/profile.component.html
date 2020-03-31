@@ -21,7 +21,7 @@
              
               </div><br> -->
                     <div class="row">
-                      <textarea [disabled]='showdeletedicon' class="inputs" placeholder="1000 characters" maxlength="1000"
+                      <textarea style="resize: none;" [disabled]='showdeletedicon' class="inputs" placeholder="1000 characters" maxlength="1000"
                         [(ngModel)]="profileDetails.about_you" name="info"></textarea>
                     </div><br>
                     <div class="row">
@@ -89,7 +89,7 @@
                   </form>
                 </mat-grid-tile>
                 <!----------------------------Profile--------------------->
-                <mat-grid-tile>
+                <mat-grid-tile style="height: 23em;">
                   <form style="margin-left: 62%;">
                     <!-- <div class=""><br><br> -->
                     <div class="row myprofile">
@@ -289,7 +289,7 @@
                           maxlength="30" required>
                       </div>
                       <div class="col-sm-4">
-                        <input [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
+                        <input type="text" [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
                           placeholder="Current role" [(ngModel)]="profileDetails.professional.job_role"
                           name="currentRole" required>
                       </div>
