@@ -17,6 +17,9 @@ export class CourseComponentComponent implements OnInit {
   userDetail: any;
   user_id_dtl:any;
   user_id_data:any;
+  recorded_data:any;
+  final_full_data:any;
+  final_status:any;
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
      
@@ -93,8 +96,20 @@ export class CourseComponentComponent implements OnInit {
   getcourserStatus(){
     //check with user id 2,3 ,ramu
     this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
-    this.service.getPlayerStatus(this.user_id_dtl.user_id).subscribe((data: any) => {
-    console.log(data,'rajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
+    this.service.getPlayerStatus('2').subscribe((data: any) => {
+      if(data.data['getPlayerStatus']){
+        this.recorded_data=data
+        this.final_full_data=this.recorded_data.data.getPlayerStatus.message
+        console.log(this.final_full_data)
+        if(this.final_full_data && this.final_full_data.status){
+          if(this.final_full_data.status=='completed'){
+            this.final_status='Completed'
+          }else if(this.final_full_data.status=='incomplete'){
+            this.final_status='Resume'
+          }
+            
+        }
+      }
     });
   }
 }
