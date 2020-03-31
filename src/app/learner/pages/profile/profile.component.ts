@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   otpForm: FormGroup;
   passwordForm: FormGroup;
   enabel: Boolean = true
+  
   public qual: any[] = [{
 
     board: [],
@@ -222,32 +223,40 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you 
         console.log(this.userData)
         // if(this.profileDetails){
-        this.profileDetails = this.userData.user_profile[0];
-        this.urlImage = this.userData.user_profile[0].profile_img
-        this.getAllState(this.profileDetails.country);
-        this.getDistrict(this.profileDetails.state)
+        if(this.userData.user_profile.length!=0){
+          this.profileDetails = this.userData.user_profile[0];
+          this.urlImage = this.userData.user_profile[0].profile_img
+          this.getAllState(this.profileDetails.country);
+          this.getDistrict(this.profileDetails.state);
+          this.qual = this.userData.qualification;
+          //if (this.userData.user_profile.length!=0 && this.userData.user_profile[0].certificate.length!=0 && this.userData.user_profile[0].certificate.length[0].value!=""){
+            this.words2 = this.userData.user_profile[0].certificate.map(s => ({
+              value: s
+            }));
+         // }
+          console.log(this.words2)
+          this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
+            qualification: s.qualification,
+            institute: s.institute,
+            board_university: s.board_university,
+            discipline: s.discipline,
+            specification: s.specification,
+            year_of_passing: s.year_of_passing,
+            percentage: s.percentage
+          }));
+
+          this.prof = this.userData.user_profile[0].professional
+          }
+        
         //added mythreyi
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
-        this.qual = this.userData.qualification;
+        
 
         // this.words2 = this.userData.user_profile[0].certificate
 
-        this.words2 = this.userData.user_profile[0].certificate.map(s => ({
-          value: s
-        }));
-        console.log(this.words2)
-        this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
-          qualification: s.qualification,
-          institute: s.institute,
-          board_university: s.board_university,
-          discipline: s.discipline,
-          specification: s.specification,
-          year_of_passing: s.year_of_passing,
-          percentage: s.percentage
-        }));
-
-        this.prof = this.userData.user_profile[0].professional
+        
+        
         //end - mythreyi
 
         // if(this.profileDetails)
@@ -320,7 +329,7 @@ export class ProfileComponent implements OnInit {
       return obj.value;
     });
     
-    debugger
+
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
@@ -362,6 +371,7 @@ export class ProfileComponent implements OnInit {
     if (this.profileDetailCheck === true) {
       console.log(social)
       if(social) {
+
         var social_media = social.map(s => ({
           link: s.link,
           img: s.img
