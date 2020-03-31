@@ -1,17 +1,18 @@
-
+@import "../../../../assets/variable.scss";
 div.terms{
-    color: #1F3777;
+    color: $color-blue;
     word-break: break-all !important;
     font-size: 12px;
     font-weight: 500;
+    margin-top: 10px;
 }
 .account{
-    color: #1F3777;
+    color:  $color-blue;
     word-break: break-all !important;
     text-align: center !important;
 }
 .sign_up, .remember_me,mat-card-title , a{
-    color: #3f548b;
+    color: $color-blue;
 }
 .alert{
     color: red;
@@ -19,4 +20,5 @@ div.terms{
     font-size: 12px;
     font-weight: 500;
 }
+
 
