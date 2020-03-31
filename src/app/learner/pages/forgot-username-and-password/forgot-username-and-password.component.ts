@@ -67,7 +67,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.loader.show();
     this.service.forgotUsernameandPassword(this.type,this.subtype,this.forgotUsername.value.mobile,this.forgotUsername.value.email)
     .subscribe(data => {
-       
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
             this.loader.hide();
@@ -81,6 +80,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
 
   getUserDetails(){
     this.loader.show();
+    this.recoveryTypes = [];
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
       if (data.data['get_forgot_password_byusername']['success'] == 'true') {
         this.loader.hide();

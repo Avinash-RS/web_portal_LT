@@ -81,6 +81,8 @@ export class ProfileComponent implements OnInit {
   showconEyes: Boolean = false;
   prof: any = {}
     ;
+  sosocialMediaLinkc: any;
+  socialMediaLink: any;
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -251,7 +253,8 @@ export class ProfileComponent implements OnInit {
         //added mythreyi
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
-        
+        this.qual = this.userData.qualification;
+        this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
 
         // this.words2 = this.userData.user_profile[0].certificate
 
@@ -323,13 +326,13 @@ export class ProfileComponent implements OnInit {
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
     // console.log(this.qual);
-    console.log(this.profileDetails, exp,this.prof)
+    console.log(this.profileDetails, exp, this.prof)
     console.log(this.words2)
     var certificate = this.words2.map(function (obj) {
       return obj.value;
     });
-    
 
+    // debugger
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
@@ -370,14 +373,17 @@ export class ProfileComponent implements OnInit {
     }
     if (this.profileDetailCheck === true) {
       console.log(social)
-      if(social) {
+      // if(social) {
+      //   var social_media = social.map(s => ({
+      //     link: s.link,
+      //     img: s.img
+      //   }));
+      // }
 
-        var social_media = social.map(s => ({
-          link: s.link,
-          img: s.img
-        }));
-      }
-  
+      var social_media = [{
+        link: this.socialMediaLink,
+        img: 'null'
+      }]
       var progress;
       // if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
       //   country != undefined && this.qualification_obj != undefined && localStorage.getItem('user_img') == undefined &&
@@ -401,7 +407,11 @@ export class ProfileComponent implements OnInit {
         progress = '100%'
       }
 
-  
+var prof = {
+  total_experience : this.prof.total_experience,
+  organization : this.prof.organization,
+  job_role : this.prof.job_role
+}
       // for (const iterator of this.words2) {
       //     this.certificate.push(iterator.value)
       //   } 
@@ -422,7 +432,7 @@ export class ProfileComponent implements OnInit {
         certificate: certificate,
         social_media: social_media,
         about_you: about_you,
-        professional: this.prof,
+        professional: prof,
         progress: progress,
         created_by_ip: localStorage.getItem('Systemip')
       }
