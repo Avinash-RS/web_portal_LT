@@ -91,8 +91,9 @@ export class CourseComponentComponent implements OnInit {
     this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition',user:this.user_id_dtl.user_id }]);
   }
   getcourserStatus(){
-    var user_id='1'
-    this.service.getPlayerStatus(user_id).subscribe((data: any) => {
+    //check with user id 2,3 ,ramu
+    this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
+    this.service.getPlayerStatus(this.user_id_dtl.user_id).subscribe((data: any) => {
     console.log(data,'rajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
     });
   }

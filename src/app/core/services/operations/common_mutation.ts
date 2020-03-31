@@ -28,5 +28,6 @@ export const getPlayerStatus = gql`
           status
           user_id
         }
+        success
     }
 }`; 
