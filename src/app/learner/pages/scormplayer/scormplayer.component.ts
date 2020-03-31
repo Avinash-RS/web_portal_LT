@@ -20,11 +20,17 @@ export class ScormplayerComponent implements OnInit {
   user_id:any
   // state$: Observable<object>;
 
-  constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, public service: LearnerServicesService, public route: Router) { }
+  constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, 
+    public service: LearnerServicesService, public route: Router) { 
+      var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      console.log(detail)
+      this.contentid = detail.id;
+      this.user_id = detail.user;
+    }
 
   ngOnInit() {
-    this.contentid = this.activatedRoute.snapshot.paramMap.get('id')
-    this.user_id=this.activatedRoute.snapshot.paramMap.get('user')
+    console.log(this.contentid,this.user_id)
     this.url='http://40.76.47.212:8080/scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }

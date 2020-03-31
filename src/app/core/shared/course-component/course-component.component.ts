@@ -15,14 +15,12 @@ export class CourseComponentComponent implements OnInit {
   @Input('course') course: any;
   @Input('from') from: any;
   userDetail: any;
-  user_id_dtl:any;
-  user_id_data:any;
-  recorded_data:any;
-  final_full_data:any;
-  final_status:any = null;
+  recorded_data: any;
+  final_full_data: any;
+  final_status: any = null;
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-     
+
   }
 
   viewWishList(course) {
@@ -69,42 +67,45 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getcourserStatus()
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
+      this.getcourserStatus()
     }
   }
 
   gotoDescription(course) {
     let detail = {
-      id :  this.course.course_id,
+      id: this.course.course_id,
       wishlist: this.course.wishlisted,
-      wishlist_id:this.course.wishlist_id 
+      wishlist_id: this.course.wishlist_id
     }
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
   }
 
   goTocourse(status) {
-    if(this.final_status != 'Completed') {
-      this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
-      this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition',user:this.user_id_dtl.user_id }]);
+    if (this.final_status != 'Completed') {
+      let detail1 = {
+        id: 'SequencingRandomTest_SCORM20043rdEdition', 
+        user: this.userDetail.user_id
+      }
+      console.log(detail1)
+      this.router.navigateByUrl('/Learner/scorm', {state: { detail: detail1 }});
     }
   }
 
-  getcourserStatus(){
+  getcourserStatus() {
     //check with user id 2,3 ,ramu
-    this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
-    this.service.getPlayerStatus('123').subscribe((data: any) => {
-      if(data.data['getPlayerStatus']){
-        this.recorded_data=data
-        this.final_full_data=this.recorded_data.data.getPlayerStatus.message
+    this.service.getPlayerStatus(this.userDetail.user_id).subscribe((data: any) => {
+      if (data.data['getPlayerStatus']) {
+        this.recorded_data = data
+        this.final_full_data = this.recorded_data.data.getPlayerStatus.message
         console.log(this.final_full_data)
-        if(this.final_full_data && this.final_full_data.status){
-          if(this.final_full_data.status=='completed'){
-            this.final_status='Completed'
-          }else if(this.final_full_data.status=='incomplete'){
-            this.final_status='Resume'
+        if (this.final_full_data && this.final_full_data.status) {
+          if (this.final_full_data.status == 'completed') {
+            this.final_status = 'Completed'
+          } else if (this.final_full_data.status == 'incomplete') {
+            this.final_status = 'Resume'
           }
         }
       }
