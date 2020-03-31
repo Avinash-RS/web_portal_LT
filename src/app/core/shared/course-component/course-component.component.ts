@@ -19,7 +19,7 @@ export class CourseComponentComponent implements OnInit {
   user_id_data:any;
   recorded_data:any;
   final_full_data:any;
-  final_status:any;
+  final_status:any = null;
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
      
@@ -69,7 +69,6 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-   
     this.getcourserStatus()
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
@@ -84,19 +83,19 @@ export class CourseComponentComponent implements OnInit {
       wishlist_id:this.course.wishlist_id 
     }
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    // this.router.navigate(['/Learner/courseDetail',{ state: { id: id, wishlist: this.course.wishlisted, wishlist_id: this.course.wishlist_id }}])
   }
 
   goTocourse(status) {
-    this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
-    
-    
-    this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition',user:this.user_id_dtl.user_id }]);
+    if(this.final_status != 'Completed') {
+      this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
+      this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition',user:this.user_id_dtl.user_id }]);
+    }
   }
+
   getcourserStatus(){
     //check with user id 2,3 ,ramu
     this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
-    this.service.getPlayerStatus('2').subscribe((data: any) => {
+    this.service.getPlayerStatus('123').subscribe((data: any) => {
       if(data.data['getPlayerStatus']){
         this.recorded_data=data
         this.final_full_data=this.recorded_data.data.getPlayerStatus.message
@@ -107,7 +106,6 @@ export class CourseComponentComponent implements OnInit {
           }else if(this.final_full_data.status=='incomplete'){
             this.final_status='Resume'
           }
-            
         }
       }
     });

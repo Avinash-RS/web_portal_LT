@@ -82,20 +82,20 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <button mat-flat-button *ngIf="from == 'myCourse'" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
-        (click)="goTocourse(course.text || 'Start')" [ngStyle]="{'background-color':course.text === 'Start' ? 
-        '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '#028514' : '#1f3777' }">
-        {{course.text || 'Start'}}</button>
+      <button mat-flat-button *ngIf="from == 'myCourse'" disabled = "{{final_status === 'Completed'}}" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
+        (click)="final_status != 'Completed' && goTocourse(final_status || 'Start')" [ngStyle]="{'background-color':final_status === null ? 
+        '#1f3777' : final_status === 'Resume' ? '#2661ff' : final_status === 'Completed' ? '#028514' : '#1f3777' }">
+        {{final_status || 'Start'}}</button>
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <small *ngIf="from == 'myCourse'">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
-      <mat-progress-bar *ngIf="course.text === 'Resume'" mode="determinate" value="{{course.statusValue}}">
+      <small *ngIf="from == 'myCourse'">{{final_status === 'Resume' && course.statusValue + '%' || null}}</small>
+      <mat-progress-bar *ngIf="final_status === 'Resume'" mode="determinate" value="{{course.statusValue}}">
       </mat-progress-bar>
     </div>
-  </div>
+  </div> -->
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="from != 'myCourse'">
     <br>
