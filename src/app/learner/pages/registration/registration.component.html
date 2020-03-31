@@ -26,7 +26,7 @@
                     <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email is required</div>
                         <div *ngIf="f.email.errors.pattern">Email pattern is invalid</div>
-                    </div>
+                    </div><br>
 
                     <mat-checkbox class="" formControlName="termsandconditions" required>
                         <div class="terms">I agree to the <a [routerLink]="['/Learner/terms']">"Terms and

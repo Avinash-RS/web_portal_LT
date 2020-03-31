@@ -181,16 +181,16 @@
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.level_detail && qualification.level_detail[0] && qualification.level_detail[0]._id"
-                          name="level_detail{i}}" #name="ngModel" placeholder="Level" required>
-                          <mat-option [value]="level._id" *ngFor="let level of levelValue" (click)="getLevel(level,i)">
-                            {{level.level_name}}
+                          name="level_detail{{i}}" #lvl="ngModel" placeholder="Level" required>
+                          <mat-option [value]="lv._id" *ngFor="let lv of levelValue" (click)="getLevel(lv,i)">
+                            {{lv.level_name}}
                           </mat-option>
                         </mat-select>
                       </div>
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.board && qualification.board[0] && qualification.board[0]._id"
-                          name="board{{i}}" #name="ngModel" placeholder="Board/University" required>
+                          name="board{{i}}" #brd="ngModel" placeholder="Board/University" required>
                           <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue"
                             (click)="getboard(board,i)">
                             {{board.Board_Name}}
@@ -201,7 +201,7 @@
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.institute_detail && qualification.institute_detail[0] && qualification.institute_detail[0]._id"
-                          name="institute_detail{{i}}" #name="ngModel" placeholder="Institute" required>
+                          name="institute_detail{{i}}" #ind="ngModel" placeholder="Institute" required>
                           <mat-option [value]="item._id" *ngFor="let item of institutes" (click)="getIns(item,i)">
                             {{item.institute_name}}
                           </mat-option>
@@ -210,7 +210,7 @@
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.discipline && qualification.discipline[0] && qualification.discipline[0]._id"
-                          name="discipline{{i}}" #name="ngModel" placeholder="Discipline" required>
+                          name="discipline{{i}}" #t="ngModel" placeholder="Discipline" required>
                           <mat-option [value]="item._id" *ngFor="let item of dis" (click)="getdis(item,i)">
                             {{item.discipline_name}}
                           </mat-option>
@@ -223,7 +223,7 @@
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification && qualification.specification_detail && qualification.specification_detail[0] && qualification.specification_detail[0]._id"
-                          name="specification_detail{{i}}" #name="ngModel" placeholder="Specification" required>
+                          name="specification_detail{{i}}" #spec="ngModel" placeholder="Specification" required>
                           <mat-option [value]="item._id" *ngFor="let item of specValue"
                             (click)="getspecicification(item,i)">
                             {{item.specification_name}}
@@ -253,19 +253,23 @@
                 <div class="row" *ngFor="let word2 of words2; let in=index">
                   <div class="col-sm-2">
                     <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
-                      [(ngModel)]="word2" name="name{{in}}" #name="ngModel" required />
+                    [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
+                    <!-- <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
+                    [(ngModel)]="words2[in]" name="name{{in}}" #name="ngModel" required /> -->
                   </div>
                   <div class="col-sm-3 plusicon">
-                    <mat-icon (click)="add()">add_circle_outline</mat-icon>
-                    <mat-icon (click)="removenewLink(i)">delete</mat-icon>
+                    <mat-icon (click)="add()" [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
+                    <mat-icon (click)="removenewLink(i)" [disabled]='showdeletedicon'>delete</mat-icon>
                     <!-- <mat-icon (click)="test()">delete</mat-icon> -->
                   </div>
                 </div><br>
               </div>
               <div class="row">
                 <div class="col-sm-2">
-                  <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
-                    [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia">
+                  <!-- <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
+                    [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia"> -->
+                    <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
+                    [(ngModel)]="socialMediaLink" name="socialMedia">
                 </div>
                 <div class="col-sm-3">
                   <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
@@ -280,17 +284,17 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' type="text" mask="00" class="inputs"
-                          placeholder="Total Experience" [(ngModel)]="profileDetails.professional.total_experience"
+                          placeholder="Total Experience" [(ngModel)]="prof.total_experience"
                           name="totExp" maxlength="2" required>
                       </div>
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
-                          [(ngModel)]="profileDetails.professional.organization" name="currentOrg" minlength="4"
+                          [(ngModel)]="prof.organization" name="currentOrg" minlength="4"
                           maxlength="30" required>
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
-                          placeholder="Current role" [(ngModel)]="profileDetails.professional.job_role"
+                        <input [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
+                          placeholder="Current role" [(ngModel)]="prof.job_role"
                           name="currentRole" required>
                       </div>
                     </div>
@@ -301,7 +305,7 @@
               <div class="bt">
                 <button class="subbtn" [disabled]="enable"
                   (click)="updateProfile(profileDetails.languages_known,profileDetails.country,
-        profileDetails.state,profileDetails.city_town,profileDetails.social_media,profileDetails.about_you,profileDetails.professional)">Submit</button>
+        profileDetails.state,profileDetails.city_town,profileDetails.socialMediaLink,profileDetails.about_you,prof)">Submit</button>
               </div><br>
             </form>
           </div>

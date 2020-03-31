@@ -23,13 +23,14 @@ export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
   enabel: Boolean = true
   public qual: any[] = [{
-    level_detail: [],
+
     board: [],
     institute: [],
     discipline: [],
     specification_detail: [],
     year_of_passing: [],
     percentage: [],
+    level_detail: [],
   }];
   public links: any[] = [{
     certificate: ''
@@ -77,8 +78,10 @@ export class ProfileComponent implements OnInit {
   showNewEyes: Boolean = false;
   showconButton: Boolean = false;
   showconEyes: Boolean = false;
-
-
+  prof: any = {}
+    ;
+  sosocialMediaLinkc: any;
+  socialMediaLink: any;
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -96,11 +99,11 @@ export class ProfileComponent implements OnInit {
     this.show_eye = !this.show_eye;
   }
 
-  shownewPassword(){
+  shownewPassword() {
     this.showNewButton = !this.showNewButton;
     this.showNewEyes = !this.showNewEyes;
   }
-  showconPassword(){
+  showconPassword() {
     this.showconButton = !this.showconButton;
     this.showconEyes = !this.showconEyes;
   }
@@ -195,6 +198,7 @@ export class ProfileComponent implements OnInit {
   getDiscipline() {
     this.service.get_discipline_details().subscribe(discipline => {
       this.dis = discipline.data['get_discipline_details'].data;
+      console.log(this.dis)
     })
   }
   getSpec() {
@@ -228,18 +232,25 @@ export class ProfileComponent implements OnInit {
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
         this.qual = this.userData.qualification;
-        console.log(this.qual)
-        this.words2 = this.userData.user_profile[0].certificate
+        this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
+
+        // this.words2 = this.userData.user_profile[0].certificate
+
+        this.words2 = this.userData.user_profile[0].certificate.map(s => ({
+          value: s
+        }));
+        console.log(this.words2)
         this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
           qualification: s.qualification,
           institute: s.institute,
-          board_university : s.board_university,
-          discipline  :s.discipline,
-          specification : s.specification,
-          year_of_passing : s.year_of_passing,
-          percentage : s.percentage
+          board_university: s.board_university,
+          discipline: s.discipline,
+          specification: s.specification,
+          year_of_passing: s.year_of_passing,
+          percentage: s.percentage
         }));
-        console.log(this.qualification_obj)
+
+        this.prof = this.userData.user_profile[0].professional
         //end - mythreyi
 
         // if(this.profileDetails)
@@ -296,11 +307,23 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  addcertificate(item, i) {
+    // this.words2.push(item);
+    console.log(this.words2)
+    if (item != null)
+      this.words2.splice(i, 0, item)
+    console.log(this.words2)
+  }
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
     // console.log(this.qual);
-    // console.log(this.profileDetails)
-    console.log(language, country, state, city, social, about_you, exp)
+    console.log(this.profileDetails, exp, this.prof)
+    console.log(this.words2)
+    var certificate = this.words2.map(function (obj) {
+      return obj.value;
+    });
+
+    debugger
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
@@ -314,8 +337,8 @@ export class ProfileComponent implements OnInit {
       }
     } else if (this.profileDetails.is_student_or_professional == 'professional') {
       // return false;
-      if (this.profileDetails.gender && this.profileDetails.professional.total_experience && this.profileDetails.professional.organization &&
-        this.profileDetails.professional.job_role && this.profileDetails.country &&
+      if (this.profileDetails.gender && this.prof.total_experience && this.prof.organization &&
+        this.prof.job_role && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj[0].qualification != '' &&
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
@@ -341,10 +364,17 @@ export class ProfileComponent implements OnInit {
     }
     if (this.profileDetailCheck === true) {
       console.log(social)
-      var social_media = social.map(s => ({
-        link: s.link,
-        img: s.img
-      }));
+      // if(social) {
+      //   var social_media = social.map(s => ({
+      //     link: s.link,
+      //     img: s.img
+      //   }));
+      // }
+
+      var social_media = [{
+        link: this.socialMediaLink,
+        img: 'null'
+      }]
       var progress;
       // if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
       //   country != undefined && this.qualification_obj != undefined && localStorage.getItem('user_img') == undefined &&
@@ -358,25 +388,27 @@ export class ProfileComponent implements OnInit {
       //   progress = '100%'
       // }
       if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
-        country != undefined && this.qualification_obj != undefined ) {
+        country != undefined && this.qualification_obj != undefined) {
         progress = '60%'
-      }  if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && 
+      } if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
         country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social.length == 1) {
         progress = '90%'
-      }  if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
+      } if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
         && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
         progress = '100%'
       }
 
-      var prof = {
-        total_experience : this.profileDetails.professional.total_experience,
-        organization : this.profileDetails.professional.organization,
-        job_role : this.profileDetails.professional.job_role
-      }
-      for (const iterator of this.words2) {
-        this.certificate.push(iterator)
-      }
-
+var prof = {
+  total_experience : this.prof.total_experience,
+  organization : this.prof.organization,
+  job_role : this.prof.job_role
+}
+      // for (const iterator of this.words2) {
+      //     this.certificate.push(iterator.value)
+      //   } 
+      //  for (const iterator of this.words2) {
+      //         this.certificate.push(iterator)
+      //       } 
       var jsonData = {
         user_id: this.currentUser.user_id,
         gender: this.profileDetails.gender,
@@ -388,7 +420,7 @@ export class ProfileComponent implements OnInit {
         state: state,
         city_town: city,
         qualification: this.qualification_obj,
-        certificate: this.certificate,
+        certificate: certificate,
         social_media: social_media,
         about_you: about_you,
         professional: prof,
@@ -456,29 +488,29 @@ export class ProfileComponent implements OnInit {
 
   }
   //Verify OTP
-  otpverify(){
-    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id,this.otpForm.value.mobile,this.otp,).subscribe(data => {
-  
-          if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
-            this.showotp = true;
-          } else{
-            this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message,null)
-          }
-      })
-      this.dialog.closeAll();
+  otpverify() {
+    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
+
+      if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        this.showotp = true;
+      } else {
+        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+      }
+    })
+    this.dialog.closeAll();
   }
-  Resendcode(){
+  Resendcode() {
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id,'this.currentUser._id',this.otpForm.value.mobile,this.currentUser.email).subscribe(data => {
+    this.service.submit_otp(this.currentUser.user_id, 'this.currentUser._id', this.otpForm.value.mobile, this.currentUser.email).subscribe(data => {
       this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
+        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
         this.showotp = true;
-      } 
-  })
+      }
+    })
   }
   //Update Password
   updatePassword() {
@@ -549,6 +581,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   words2 = [{ value: '' }];
+
   add() {
     this.words2.push({ value: '' });
   }
@@ -574,13 +607,13 @@ export class ProfileComponent implements OnInit {
     }
     // console.log(index, q, qual, this.qual)
     this.qual.push({
-      level_detail: '',
       board: '',
       institute_detail: '',
       discipline: '',
       specification_detail: '',
       year_of_passing: '',
-      percentage: ''
+      percentage: '',
+      level_detail: '',
     });
     return true;
   }
