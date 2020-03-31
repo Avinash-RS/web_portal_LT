@@ -17,6 +17,9 @@
 //   lg: 992px,
 //   xl: 1200px
 // );
+button:disabled:hover {
+  cursor: not-allowed;
+}
 
 .container {
   max-width: 100% !important;
