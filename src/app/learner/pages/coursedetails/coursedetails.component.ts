@@ -53,7 +53,7 @@ export class CoursedetailsComponent implements OnInit {
   open: boolean = false;
   ins: {}[];
   userDetail: any;
-
+  showShortDesciption = true;
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
     this.loader.show();
@@ -73,6 +73,10 @@ export class CoursedetailsComponent implements OnInit {
 
   }
 
+
+  alterDescriptionText() {
+     this.showShortDesciption = !this.showShortDesciption
+  }
   ngOnInit() {
     this.service.list_content().subscribe((list_content: any) => {
       console.log(list_content)
