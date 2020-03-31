@@ -1,7 +1,10 @@
-<!-- <div class="login"> -->
-  <mat-card >
+<div class="limiter">
+  <div class="container-reg100 p-t-77">
+    <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
+  <!-- <mat-card > -->
+    <mat-card-title style="text-align: center;"> Admin Sign In </mat-card-title> <br>
     <form [formGroup]="loginForm"><br><br>
-      <mat-card-title style="text-align: center;"> Sign In </mat-card-title> <br>
+    
       <mat-card-content>
         <div class="form-group">
           <label>User Name</label><span style="color: red;"> *</span>
@@ -28,14 +31,15 @@
           </div>
         </div>
         <div class="forgot_ps">
-          <mat-label  ><a [routerLink]="['/Learner/recover']"><strong>Forgot password/username?</strong></a></mat-label>
+          <!-- <mat-label  ><a [routerLink]="['/Learner/recover']"><strong>Forgot password/username?</strong></a></mat-label> -->
           <!-- recover -->
         </div>
-        <br />
-        <mat-checkbox class="remember_me" formControlName="remember_me">
+        <!-- <br /> -->
+        <!-- <mat-checkbox class="remember_me" formControlName="remember_me">
           Remember Me
-        </mat-checkbox>
-        <br><br><br>
+        </mat-checkbox> -->
+        <br><br>
+        <!-- <br> -->
 
         <button id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">Sign
           in</button>
@@ -44,5 +48,8 @@
               up</strong></a> </div><br><br> -->
       </mat-card-content>
     </form>
-  </mat-card>
+  <!-- </mat-card> -->
+  </div>
+  </div>
+  </div>
 <!-- </div> -->
