@@ -17,20 +17,16 @@ export class ScormplayerComponent implements OnInit {
   name = 'Set iframe source';
   url: string 
   urlSafe: SafeResourceUrl;
-
+  user_id:any
   // state$: Observable<object>;
 
   constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, public service: LearnerServicesService, public route: Router) { }
 
   ngOnInit() {
     this.contentid = this.activatedRoute.snapshot.paramMap.get('id')
-    console.log(this.contentid)
-    this.url='http://40.76.47.212:8080/scormPlayer.html?contentID='+this.contentid
-    // this.getcontent();
+    this.user_id=this.activatedRoute.snapshot.paramMap.get('user')
+    this.url='http://40.76.47.212:8080/scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-    
-   // this.getcoursedetail();
-
   }
   /*getcontent() {
     this.service.list_content().subscribe(data => {

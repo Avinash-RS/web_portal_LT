@@ -15,10 +15,11 @@ export class CourseComponentComponent implements OnInit {
   @Input('course') course: any;
   @Input('from') from: any;
   userDetail: any;
-
+  user_id_dtl:any;
+  user_id_data:any;
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-
+     
   }
 
   viewWishList(course) {
@@ -65,6 +66,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+   
     this.getcourserStatus()
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
@@ -83,9 +85,10 @@ export class CourseComponentComponent implements OnInit {
   }
 
   goTocourse(status) {
-    console.log(status)
-    // if (status == 'start')
-    this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition' }]);
+    this.user_id_dtl=JSON.parse( localStorage.getItem('UserDetails'))
+    
+    
+    this.router.navigate(["/Learner/scorm", { id: 'SequencingRandomTest_SCORM20043rdEdition',user:this.user_id_dtl.user_id }]);
   }
   getcourserStatus(){
     var user_id='1'
