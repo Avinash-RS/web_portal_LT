@@ -24,6 +24,11 @@ export class PasswordComponent implements OnInit {
   uppercase: boolean = false;
   number: boolean = false;
   spicalcharacter: boolean = false;
+  showpassbutton: Boolean = false;
+  showpsseye: Boolean = false;
+  showconpassbutton: Boolean = false;
+  showconpsseye: Boolean = false;
+
   constructor(private router: Router,
     private loader: Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
@@ -45,6 +50,15 @@ export class PasswordComponent implements OnInit {
 
   }
   get pf() { return this.passwordForm.controls; }
+
+  showPassword() {
+    this.showpassbutton = !this.showpassbutton;
+    this.showpsseye = !this.showpsseye;
+  }
+  showconPassword(){
+    this.showconpassbutton = !this.showconpassbutton;
+    this.showconpsseye = !this.showconpsseye;
+  }
   change(event) {
     if (event.target.value.match(myGlobals.lowerCaseLetters)) {
       this.lowercase = true;
