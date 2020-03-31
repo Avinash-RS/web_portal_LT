@@ -479,7 +479,6 @@ export class ProfileComponent implements OnInit {
         this.showotp = true;
       } 
   })
-  this.dialog.closeAll();
   }
   //Update Password
   updatePassword() {
