@@ -43,8 +43,7 @@ export class ProfileComponent implements OnInit {
   countryValue: any;
   countryId: any;
   showotp: boolean = false;
-  show_button: Boolean = false;
-  show_eye: Boolean = false;
+
   // country: any = {};
   stateValue: any;
   levelValue: any;
@@ -68,6 +67,13 @@ export class ProfileComponent implements OnInit {
   certificate: any = []
   profileDetailCheck: boolean = false;
   progress: number = 0;
+  show_button: Boolean = false;
+  show_eye: Boolean = false;
+  showNewButton: Boolean = false;
+  showNewEyes: Boolean = false;
+  showconButton: Boolean = false;
+  showconEyes: Boolean = false;
+
 
   constructor(
     private alert: AlertServiceService,
@@ -85,6 +91,17 @@ export class ProfileComponent implements OnInit {
     this.show_button = !this.show_button;
     this.show_eye = !this.show_eye;
   }
+
+  shownewPassword(){
+    this.showNewButton = !this.showNewButton;
+    this.showNewEyes = !this.showNewEyes;
+  }
+  showconPassword(){
+    this.showconButton = !this.showconButton;
+    this.showconEyes = !this.showconEyes;
+  }
+
+
   ngOnInit() {
     if (localStorage.getItem('UserDetails')) {
 
