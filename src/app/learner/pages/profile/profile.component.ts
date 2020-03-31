@@ -374,7 +374,7 @@ export class ProfileComponent implements OnInit {
         job_role : this.profileDetails.professional.job_role
       }
       for (const iterator of this.words2) {
-        this.certificate.push(iterator.value)
+        this.certificate.push(iterator)
       }
 
       var jsonData = {
