@@ -231,6 +231,23 @@ export const view_profile = gql`
           updated_on
   
           updated_by
+          qualification {                           
+
+            qualification
+  
+            institute
+  
+            board_university
+  
+            discipline
+  
+            specification
+  
+            year_of_passing
+  
+            percentage
+  
+          }                 
   
         }
   
