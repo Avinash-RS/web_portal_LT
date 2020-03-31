@@ -92,7 +92,12 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       }
   })
   }
-  
+  change(event){
+    console.log(event.target.value)
+    if(event.target.value.length > 0){
+      this.recoveryTypes = [];
+    }
+  }
   
 
   forgotPassword(recovertype){
