@@ -496,9 +496,8 @@ console.log(this.words2)
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
         this.showotp = true;
-      }
-    })
-    this.dialog.closeAll();
+      } 
+  })
   }
   //Update Password
   updatePassword() {
