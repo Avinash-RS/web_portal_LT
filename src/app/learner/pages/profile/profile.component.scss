@@ -166,7 +166,9 @@ input[type=password] {
 .space5{
   margin-top: 5px;
 }
-
+textarea {
+  resize: none;
+}
 .profilelabe{
   font-size: 10px
 }

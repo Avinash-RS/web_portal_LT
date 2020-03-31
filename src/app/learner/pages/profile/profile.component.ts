@@ -13,19 +13,23 @@ import { Certificate } from 'crypto';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+
+  //my3
+  qualification_obj: any = [];
+  //
   mailForm: FormGroup;
   otpForm: FormGroup;
   passwordForm: FormGroup;
   enabel: Boolean = true
   public qual: any[] = [{
-    qualification: '',
-    board_university: '',
-    institute: '',
-    discipline: '',
-    specification: '',
-    year_of_passing: '',
-    percentage: '',
-    level_detail : ''
+    level_detail: [],
+    board: [],
+    institute: [],
+    discipline: [],
+    specification_detail: [],
+    year_of_passing: [],
+    percentage: [],
   }];
   public links: any[] = [{
     certificate: ''
@@ -104,7 +108,7 @@ export class ProfileComponent implements OnInit {
       this.getDiscipline();
       this.getSpec();
 
-     
+
 
 
     } else {
@@ -142,6 +146,7 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
@@ -188,41 +193,50 @@ export class ProfileComponent implements OnInit {
   getprofileDetails(userid) {
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
-      this.userData = data.data['view_profile'].message[0];
-      // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
-      this.loader.hide();
-      // this.profileDetails.about_you 
-      console.log(this.userData)
-      // if(this.profileDetails){
-      this.profileDetails = this.userData.user_profile[0];
-      this.urlImage = this.userData.user_profile[0].profile_img
-      this.getAllState(this.profileDetails.country);
-      this.getDistrict(this.profileDetails.state)
-      //added mythreyi
-      var p = this.userData.progress.slice(0, -1);
-      this.progress = Number(p);
-      this.levelValue = this.userData.qualification[0].level_detail
-      //end - mythreyi
+      if (data.data['view_profile']) {
+        this.userData = data.data['view_profile'].message[0];
+        // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
+        this.loader.hide();
+        // this.profileDetails.about_you 
+        console.log(this.userData)
+        // if(this.profileDetails){
+        this.profileDetails = this.userData.user_profile[0];
+        this.urlImage = this.userData.user_profile[0].profile_img
+        this.getAllState(this.profileDetails.country);
+        this.getDistrict(this.profileDetails.state)
+        //added mythreyi
+        var p = this.userData.progress.slice(0, -1);
+        this.progress = Number(p);
+        this.qual = this.userData.qualification;
+        console.log(this.qual)
+        this.words2 = this.userData.user_profile[0].certificate
+        //end - mythreyi
 
-      // if(this.profileDetails)
-      // this.qualification = this.userData.qualification[0];
-      // console.log( this.profileDetails,' this.profileDetails')
-      // console.log( this.qualification,' this.data')
-      // }
+        // if(this.profileDetails)
 
+        // console.log( this.profileDetails,' this.profileDetails')
+        // console.log( this.qualification,' this.data')
+        // }
+      }
     })
   }
-  addnewQual(index) {
-    this.qual.push({
-      qualification: '',
-      board_university: '',
-      institute: '',
-      discipline: '',
-      specification: '',
-      year_of_passing: '',
-      percentage: ''
-    });
-    return true;
+  // addnewQual(index) {
+  //   console.log(index,q)
+  //   this.qual.push({
+  //     qualification: '',
+  //     board_university: '',
+  //     institute: '',
+  //     discipline: '',
+  //     specification: '',
+  //     year_of_passing: '',
+  //     percentage: ''
+  //   });
+  //   return true;
+  // }
+
+
+  getAllLEvel(e) {
+    console.log(e)
   }
   removelastQual(index) {
     if (this.qual.length == 1) {
@@ -252,27 +266,29 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  updateProfile(language, country, state, city, social, about_you, exp, org, role) {
+  updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
-    console.log(language, country, state, city, social, about_you, exp, org, role)
-    if (this.profileDetails.profession == 'student') {
+    // console.log(this.qual);
+    // console.log(this.profileDetails)
+    console.log(language, country, state, city, social, about_you, exp)
+    if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
-        this.profileDetails.state && city && this.qual[0].qualification != '' &&
-        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+        this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
+        this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
+        && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
         this.profileDetailCheck = true;
       } else {
         this.loader.hide();
         this.profileDetailCheck = false;
         this.alert.openAlert('Please fill all required fields', null);
       }
-    } else if (this.profileDetails.profession == 'professional') {
+    } else if (this.profileDetails.is_student_or_professional == 'professional') {
       // return false;
-      if (this.profileDetails.gender && this.profileDetails.totExp && this.profileDetails.currentOrg &&
-        this.profileDetails.currentRole && this.profileDetails.country &&
-        this.profileDetails.state && this.profileDetails.city && this.qual[0].qualification != '' &&
-        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+      if (this.profileDetails.gender && this.profileDetails.professional.total_experience && this.profileDetails.professional.organization &&
+        this.profileDetails.professional.job_role && this.profileDetails.country &&
+        this.profileDetails.state && city && this.qualification_obj[0].qualification != '' &&
+        this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
+        && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
         this.profileDetailCheck = true;
 
       } else {
@@ -281,11 +297,11 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert('Please fill all required fields', null);
       }
     } else {
-      if (this.profileDetails.gender && this.profileDetails.profession
+      if (this.profileDetails.gender && this.profileDetails.is_student_or_professional
         && this.profileDetails.country &&
         this.profileDetails.state && this.profileDetails.city && this.qual[0].qualification != '' &&
-        this.qual[0].board_university != '' && this.qual[0].institute != '' && this.qual[0].discipline != ''
-        && this.qual[0].specification != '' && this.qual[0].year_of_passing != '' && this.qual[0].percentage != '') {
+        this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
+        && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
         this.profileDetailCheck = true;
       } else {
         this.loader.hide();
@@ -294,64 +310,76 @@ export class ProfileComponent implements OnInit {
       }
     }
     if (this.profileDetailCheck === true) {
-
-      var social_media = [{
-        link: social,
-        img: ""
-      }]
+      console.log(social)
+      var social_media = social.map(s => ({
+        link: s.link,
+        img: s.img
+      }));
       var progress;
-      if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') == undefined && localStorage.getItem('user_img') == null) {
+      // if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
+      //   country != undefined && this.qualification_obj != undefined && localStorage.getItem('user_img') == undefined &&
+      //   localStorage.getItem('user_img') == null) {
+      //   progress = '60%'
+      // } else if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && 
+      //   country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social.length == 1) {
+      //   progress = '90%'
+      // } else if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
+      //   && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
+      //   progress = '100%'
+      // }
+      if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
+        country != undefined && this.qualification_obj != undefined ) {
         progress = '60%'
-      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social_media.length == 1) {
+      }  if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && 
+        country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social.length == 1) {
         progress = '90%'
-      } else if (this.profileDetails.gender != undefined && this.profileDetails.profession != undefined && country != undefined && this.qual != undefined
+      }  if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
         && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
         progress = '100%'
       }
 
+      var prof = {
+        total_experience : this.profileDetails.professional.total_experience,
+        organization : this.profileDetails.professional.organization,
+        job_role : this.profileDetails.professional.job_role
+      }
       for (const iterator of this.words2) {
         this.certificate.push(iterator.value)
       }
-
-      var professional = {
-        total_experience: exp,
-        organization: org,
-        job_role: role
-      }
-
 
       var jsonData = {
         user_id: this.currentUser.user_id,
         gender: this.profileDetails.gender,
         year_of_birth: "05-08-1998",
         profile_img: localStorage.getItem('user_img'),
-        profession: this.profileDetails.profession,
+        is_student_or_professional: this.profileDetails.is_student_or_professional,
         languages_known: language,
         country: country,
         state: state,
         city_town: city,
-        qualification: this.qual,
+        qualification: this.qualification_obj,
         certificate: this.certificate,
         social_media: social_media,
         about_you: about_you,
-        professional: professional,
+        professional: prof,
         progress: progress,
         created_by_ip: localStorage.getItem('Systemip')
       }
+      console.log(jsonData)
+      debugger
+      // this.loader.show();
+      // this.service.update_profile(jsonData).subscribe(data => {
+      //   if (data.data['update_profile']['success'] == 'true') {
+      //     this.loader.hide();
+      //     this.alert.openAlert(data.data['update_profile'].message, null)
+      //     this.showdeletedicon = true;
 
-      this.loader.show();
-      this.service.update_profile(jsonData).subscribe(data => {
-        if (data.data['update_profile']['success'] == 'true') {
-          this.loader.hide();
-          this.alert.openAlert(data.data['update_profile'].message, null)
-          this.showdeletedicon = true;
+      //     console.log(data.data['update_profile'])
 
-          console.log(data.data['update_profile'])
-
-        } else {
-          this.alert.openAlert(data.data['update_profile'].message, null)
-        }
-      })
+      //   } else {
+      //     this.alert.openAlert(data.data['update_profile'].message, null)
+      //   }
+      // })
     }
 
   }
@@ -470,7 +498,7 @@ export class ProfileComponent implements OnInit {
     if (this.profileDetails.gender === undefined) {
       this.alert.openAlert('Select a value for gender', null)
     }
-    if (this.profileDetails.profession === undefined) {
+    if (this.profileDetails.is_student_or_professional === undefined) {
       this.alert.openAlert('Select a value for profession', null)
     }
     if (this.profileDetails.country || this.profileDetails.state || this.profileDetails.city === undefined) {
@@ -480,5 +508,213 @@ export class ProfileComponent implements OnInit {
   words2 = [{ value: '' }];
   add() {
     this.words2.push({ value: '' });
+  }
+
+
+
+
+  //ADDED BY MYTHREYI
+
+  addnewQual(index, q, qual) {
+    console.log(this.qualification_obj, this.qual)
+    if (this.qual && this.qual[0] && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      console.log(this.qualification_obj)
+      this.qualification_obj[0].qualification = this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qual[0].level_detail[0]._id || null;
+      this.qualification_obj[0].board_university = this.qual[0].board && this.qual[0].board.length == 1 && this.qual[0].board[0]._id || null;
+      this.qualification_obj[0].institute = this.qual[0].institute_detail && this.qual[0].institute_detail[0]._id || null;
+      this.qualification_obj[0].discipline = this.qual[0].discipline && this.qual[0].discipline[0]._id || null;
+      this.qualification_obj[0].specification = this.qual[0].specification_detail && this.qual[0].specification_detail[0]._id || null;
+      this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing || null;
+      this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage) || null;
+      // console.log(this.qualification_obj)
+    }
+    // console.log(index, q, qual, this.qual)
+    this.qual.push({
+      level_detail: '',
+      board: '',
+      institute_detail: '',
+      discipline: '',
+      specification_detail: '',
+      year_of_passing: '',
+      percentage: ''
+    });
+    return true;
+  }
+
+  getLevel(l, i) {
+    // console.log(l, i)
+    // if(this.qual[0].level_detail && this.qual[0].level_detail.length == 1) {
+    //   console.log(this.qualification_obj)
+    //   //workaround 2 - little complex
+    //   // this.qualification_obj.push({});
+    //   // this.qualification_obj[0].qualification = this.qual[0].level_detail[0];
+    //   //end
+    // }
+    // //workaround 1 - simple
+    // // this.qual[i].level_detail = []
+    // // this.qual[i].level_detail.push(l)
+    // //end
+    // //workaround 2
+    // this.qualification_obj.push({});
+    // this.qualification_obj[i].qualification = l;
+    // console.log(this.qualification_obj)
+    //end
+
+    //woraround 3 - complex
+    if (this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].qualification = this.qual[0].level_detail[0]._id;
+      // console.log(this.qualification_obj)
+    }
+
+    if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].qualification == undefined) {
+        this.qualification_obj[0].qualification = l._id;
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].qualification = l._id;
+      console.log(this.qualification_obj)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].qualification = l._id;
+      console.log(this.qualification_obj)
+    }
+
+  }
+  getboard(l, i) {
+    // if (this.qual[0].board && this.qual[0].board.length == 1) {
+    //   this.qual[0].board_university = {};
+    //   this.qual[0].board_university = this.qual[0].board[0]
+    // }
+    // // this.qual[i].board = []
+    // // this.qual[i].board.push(l)
+    // this.qual[i].board_university = {}
+    // this.qual[i].board_university = l;
+    // // console.log(this.qual)
+    //woraround 3
+    if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].board_university = this.qual[0].board[0]._id
+      // console.log(this.qualification_obj)
+    }
+    if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].board_university == undefined) {
+        this.qualification_obj[0].board_university = l._id;
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].board_university = l._id;
+      // console.log(this.qualification_obj)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].board_university = l._id;
+      // console.log(this.qualification_obj)
+    }
+  }
+
+  getIns(l, i) {
+    if (this.qual[0].institute_detail && this.qual[0].institute_detail.length == 1 && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].institute = this.qual[0].institute_detail[0]._id
+      // console.log(this.qualification_obj)
+    }
+    if (this.qual[0].institute_detail && this.qual[0].institute_detail.length == 1 && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].institute == undefined) {
+        this.qualification_obj[0].institute = l._id;
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].institute = l._id;
+      // console.log(this.qualification_obj)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].institute = l._id;
+      // console.log(this.qualification_obj)
+    }
+  }
+
+  getdis(l, i) {
+    if (this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].discipline = this.qual[0].discipline[0]._id
+      // console.log(this.qualification_obj)
+    }
+    if (this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].discipline == undefined) {
+        this.qualification_obj[0].discipline = l._id;
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].discipline = l._id;
+      // console.log(this.qualification_obj)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].discipline = l._id;
+      // console.log(this.qualification_obj)
+    }
+  }
+  getspecicification(l, i) {
+    if (this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].specification = this.qual[0].specification_detail[0]._id
+      // console.log(this.qualification_obj)
+    }
+    if (this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].specification == undefined) {
+        this.qualification_obj[0].specification = l._id;
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].specification = l._id;
+      // console.log(this.qualification_obj)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].specification = l._id;
+      // console.log(this.qualification_obj)
+    }
+  }
+
+  getYOP(item, i) {
+    if (this.qual[0].year_of_passing && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing
+    }
+    if (this.qual[0].year_of_passing && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].year_of_passing == undefined) {
+        this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].year_of_passing = item
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].year_of_passing = item
+    }
+  }
+
+  getPerccent(item, i) {
+    if (this.qual[0].percentage && this.qualification_obj.length == 0) {
+      this.qualification_obj.push({});
+      this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage)
+    }
+    if (this.qual[0].percentage && this.qualification_obj.length > 0) {
+      if (this.qualification_obj[0].percentage == undefined) {
+        this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage)
+      }
+    }
+    if (this.qualification_obj[i] == undefined) {
+      this.qualification_obj.push({});
+      this.qualification_obj[i].percentage = parseFloat(item)
+    } else if (this.qualification_obj[i] != undefined) {
+      this.qualification_obj[i].percentage = parseFloat(item)
+    }
+  }
+
+
+  test() {
+    console.log(this.qualification_obj)
+
   }
 }

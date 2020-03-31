@@ -40,11 +40,11 @@ const routes: Routes = [
   { path: 'password', component: PasswordComponent },
   { path: 'recover', component: ForgotUsernameAndPasswordComponent },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
   { path: 'resetpassword', component: ResetpasswordComponent },
   { path : "terms",component:TermsconditionsComponent},
-  { path: 'scorm', component: ScormplayerComponent },
+  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard]},
 ];
 
 @NgModule({

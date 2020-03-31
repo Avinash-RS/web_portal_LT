@@ -133,122 +133,252 @@ export const view_profile = gql`
     view_profile(user_id:$user_id) 
     {
       success
-                                message {
-                                                full_name
-                                                email
-                                                user_id
-                                                user_dtl {
-                                                                is_admin
-                                                                user_id
-                                                                username
-                                                                password
-                                                                created_by_ip
-                                                }
-                                                user_mobile {
-                                                                mobile_number
-                                                }
-                                                user_profile {
-                                                                _id
-                                                                languages_known
-                                                                about_you
-                                                                certificate
-                                                                user_id
-                                                                profile_img
-                                                                year_of_birth
-                                                                doj_lxp
-                                                                progress
-                                                                is_active
-                                                                gender
-                                                                country
-                                                                state
-                                                                city_town
-                                                                student
-                                                                professional {
-                                                                                total_experience
-                                                                                organization
-                                                                                job_role
-                                                                }
-                                                                social_media {
-                                                                                link
-                                                                                img
-                                                                }
-                                                                last_login
-                                                                created_by_ip
-                                                                created_by
-                                                                created_on
-                                                                updated_by_ip
-                                                                updated_on
-                                                                updated_by
-                                                }
-                                                country_detail {
-                                                                _id
-                                                                countryname
-                                                                countryshortcode
-                                                                is_active
-                                                }
-                                                state_detail {
-                                                                _id
-                                                                statename
-                                                                stateshortcode
-                                                                country
-                                                                is_active
-                                                }
-                                                district_detail {
-                                                                _id
-                                                                districtname
-                                                                country
-                                                                state
-                                                                is_active
-                                                }
-                                                qualification {
-                                                                board {
-                                                                                _id
-                                                                                Board_Id
-                                                                                Board_Name
-                                                                                is_active
-                                                                }
-                                                                discipline {
-                                                                                _id
-                                                                                discipline_id
-                                                                                discipline_name
-                                                                                discipline_code
-                                                                                is_active
-                                                                }
-                                                                institute_detail {
-                                                                                _id
-                                                                                institute_id
-                                                                                institute_name
-                                                                                institute_code
-                                                                                is_active
-                                                                }
-                                                                level_detail {
-                                                                                _id
-                                                                                level_id
-                                                                                level_name
-                                                                                level_code
-                                                                                is_active
-                                                                }
-                                                                specification_detail {
-                                                                                _id
-                                                                                specification_id
-                                                                                specification_name
-                                                                                specification_code
-                                                                                is_active
-                                                                }
-                                                                university {
-                                                                                _id
-                                                                                University_Id
-                                                                                University_Name
-                                                                                is_active
-                                                                }
-                                                }
-                                                language_detail {
-                                                                _id
-                                                                is_active
-                                                                languagecode
-                                                                languagename
-                                                }
-                                                progress
+
+      message {
+  
+        full_name
+  
+       
+  
+        email
+  
+        user_id
+  
+        user_dtl {
+  
+          is_admin
+  
+          user_id
+  
+          username
+  
+          password
+  
+          created_by_ip
+  
+        }
+  
+        user_mobile {
+  
+          mobile_number
+  
+        }
+  
+        user_profile {
+  
+          _id
+  
+          languages_known
+  
+          is_student_or_professional
+  
+          about_you
+  
+          certificate
+  
+          user_id
+  
+          profile_img
+  
+          year_of_birth
+  
+          doj_lxp
+  
+          progress
+  
+          is_active
+  
+          gender
+  
+          country
+  
+          state
+  
+          city_town
+  
+          student
+  
+          professional {
+  
+            total_experience
+  
+            organization
+  
+            job_role
+  
+          }
+  
+         
+  
+          social_media {
+  
+            link
+  
+            img
+  
+          }
+  
+          last_login
+  
+          created_by_ip
+  
+          created_by
+  
+          created_on
+  
+          updated_by_ip
+  
+          updated_on
+  
+          updated_by
+  
+        }
+  
+        country_detail {
+  
+          _id
+  
+          countryname
+  
+          countryshortcode
+  
+          is_active
+  
+        }
+  
+        state_detail {
+  
+          _id
+  
+          statename
+  
+          stateshortcode
+  
+          country
+  
+          is_active
+  
+        }
+  
+        district_detail {
+  
+          _id
+  
+          districtname
+  
+          country
+  
+          state
+  
+          is_active
+  
+        }
+  
+        qualification {
+  
+          board {
+  
+            _id
+  
+            Board_Id
+  
+            Board_Name
+  
+            is_active
+  
+          }
+  
+          discipline {
+  
+            _id
+  
+            discipline_id
+  
+            discipline_name
+  
+            discipline_code
+  
+            is_active
+  
+          }
+  
+          institute_detail {
+  
+            _id
+  
+            institute_id
+  
+            institute_name
+  
+            institute_code
+  
+            is_active
+  
+          }
+  
+          level_detail {
+  
+            _id
+  
+            level_id
+  
+            level_name
+  
+            level_code
+  
+            is_active
+  
+          }
+  
+          specification_detail {
+  
+            _id
+  
+            specification_id
+  
+            specification_name
+  
+            specification_code
+  
+            is_active
+  
+          }
+  
+          university {
+  
+            _id
+  
+            University_Id
+  
+            University_Name
+  
+            is_active
+  
+          }
+  
+          year_of_passing
+  
+          percentage
+  
+         
+  
+        }
+  
+        language_detail {
+  
+          _id
+  
+          is_active
+  
+          languagecode
+  
+          languagename
+  
+        }
+  
+       
+  
+        progress
                                 }
 
   }
@@ -315,7 +445,7 @@ success
 }
 `;
 export const update_profile = gql`
-  mutation update_profile($user_id: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
+  mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
@@ -336,6 +466,7 @@ export const update_profile = gql`
       city_town: $city_town,
       about_you: $about_you,
       certificate: $certificate,
+      is_student_or_professional: $is_student_or_professional,
       student: $student,
       professional: $professional,
       last_login: $last_login,
@@ -363,7 +494,7 @@ mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
 }
 }
 `;
-export const  update_verifyotp_mobile_onprofile = gql`
+export const update_verifyotp_mobile_onprofile = gql`
   mutation  update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
     update_verifyotp_mobile_onprofile(
       user_id: $user_id,

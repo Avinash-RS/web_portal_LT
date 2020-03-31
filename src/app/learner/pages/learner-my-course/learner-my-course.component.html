@@ -23,6 +23,9 @@
                                 <app-course-component [course]="course" [from]="'myCourse'"> </app-course-component>
                             </mat-grid-tile>
                         </mat-grid-list>
+                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
+                            No courses yet
+                          </h2>
                     </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>

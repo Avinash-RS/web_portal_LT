@@ -24,7 +24,8 @@ export class AuthGuard implements CanActivate {
         return true;
     }
     else if (userDetailes == null) {
-      if (state.url == '/Learner/MyCourse') {
+      if (state.url == '/Learner/MyCourse' || state.url == '/Learner/courseDetail' || state.url == '/Learner/courseDetail'
+        || state.url == '/Learner/profile' || state.url == '/Learner/scorm') {
         this.router.navigate(["/Learner"])
         return false;
       } else

@@ -185,8 +185,9 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    console.log(el)
-    el.scrollIntoView();
+    console.log(el);
+    el.scrollTop = 0;       
+    el.scrollIntoView({behavior: 'smooth'});
   }
 
   playCourse(i) {
