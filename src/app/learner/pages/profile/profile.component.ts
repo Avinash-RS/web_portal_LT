@@ -323,7 +323,7 @@ export class ProfileComponent implements OnInit {
       return obj.value;
     });
 
-    debugger
+    // debugger
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
