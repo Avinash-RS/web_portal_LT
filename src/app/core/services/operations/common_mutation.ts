@@ -18,3 +18,16 @@ export const delete_wishlist = gql`
       error_msg
     }
 }`; 
+
+
+export const getPlayerStatus = gql`
+  mutation getPlayerStatus($user_id: String){
+    getPlayerStatus(user_id: $user_id) {
+      message{
+        location
+          status
+          user_id
+        }
+        success
+    }
+}`; 

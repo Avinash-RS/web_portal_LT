@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { map, filter } from 'rxjs/operators';
 @Component({
   selector: 'app-scormplayer',
@@ -12,20 +14,27 @@ export class ScormplayerComponent implements OnInit {
   contentid: any;
   content: any;
   syllabus: any;
- 
+  name = 'Set iframe source';
+  url: string 
+  urlSafe: SafeResourceUrl;
+  user_id:any
   // state$: Observable<object>;
 
-  constructor(public activatedRoute: ActivatedRoute, public service: LearnerServicesService, public route: Router) { }
+  constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, 
+    public service: LearnerServicesService, public route: Router) { 
+      var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      console.log(detail)
+      this.contentid = detail.id;
+      this.user_id = detail.user;
+    }
 
   ngOnInit() {
-    // this.getcontent();
-   
-    this.contentid = this.activatedRoute.snapshot.paramMap.get('id')
-    console.log(this.contentid)
-    this.getcoursedetail();
-
+    console.log(this.contentid,this.user_id)
+    this.url='http://40.76.47.212:8080/scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
-  getcontent() {
+  /*getcontent() {
     this.service.list_content().subscribe(data => {
       // console.log(data)
 
@@ -39,5 +48,5 @@ export class ScormplayerComponent implements OnInit {
       this.syllabus = this.content.syllabus_of_particular_scorm.data
       // console.log(this.syllabus)
     })
-  }
+  }*/
 }
