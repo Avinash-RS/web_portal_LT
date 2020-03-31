@@ -67,8 +67,6 @@ export class ProfileComponent implements OnInit {
   socialMedia: {}
   certificate: any = []
   profileDetailCheck: boolean = false;
-
-
   progress: number = 0;
 
   constructor(
