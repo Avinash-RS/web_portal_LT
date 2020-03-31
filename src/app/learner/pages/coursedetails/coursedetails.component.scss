@@ -325,3 +325,18 @@ background-color: $color-maroon !important;
 .iconmat .mat-button-wrapper{
     padding:0 !important;
 }
+.mat-card-footer{
+    text-align: center;
+    color: #db3137;
+    font-size: 11px;
+}
+.show-less {
+    height: 4rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+.viewtxt{
+    text-align: right;
+    font-size: 11px;
+    color: red;
+}

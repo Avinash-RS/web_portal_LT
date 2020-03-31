@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<mat-card style="text-align: center;border: none;box-shadow: none;z-index: -1; height: 40vh;" *ngIf="from == 'cd'">
+<mat-card style="text-align: center;border: none;box-shadow: none;z-index: -1; " *ngIf="from == 'cd'">
   <mat-grid-list cols="4">
     <mat-grid-tile *ngFor="let course of wishlist" [style.border]="'none'" [colspan]="1" [rowspan]="1">
       <app-course-component [course]="course" [from]="'wishlist'"> </app-course-component>
