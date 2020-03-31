@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
   enabel: Boolean = true
   public qual: any[] = [{
-   
+
     board: [],
     institute: [],
     discipline: [],
@@ -78,8 +78,10 @@ export class ProfileComponent implements OnInit {
   showNewEyes: Boolean = false;
   showconButton: Boolean = false;
   showconEyes: Boolean = false;
-
-
+  prof: any = {}
+    ;
+  sosocialMediaLinkc: any;
+  socialMediaLink: any;
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -230,13 +232,14 @@ export class ProfileComponent implements OnInit {
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
         this.qual = this.userData.qualification;
+        this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
 
         // this.words2 = this.userData.user_profile[0].certificate
 
         this.words2 = this.userData.user_profile[0].certificate.map(s => ({
-          value : s
+          value: s
         }));
-console.log(this.words2)
+        console.log(this.words2)
         this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
           qualification: s.qualification,
           institute: s.institute,
@@ -246,6 +249,8 @@ console.log(this.words2)
           year_of_passing: s.year_of_passing,
           percentage: s.percentage
         }));
+
+        this.prof = this.userData.user_profile[0].professional
         //end - mythreyi
 
         // if(this.profileDetails)
@@ -312,11 +317,12 @@ console.log(this.words2)
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
     // console.log(this.qual);
-    // console.log(this.profileDetails)
+    console.log(this.profileDetails, exp, this.prof)
     console.log(this.words2)
     var certificate = this.words2.map(function (obj) {
       return obj.value;
     });
+
     debugger
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
@@ -331,8 +337,8 @@ console.log(this.words2)
       }
     } else if (this.profileDetails.is_student_or_professional == 'professional') {
       // return false;
-      if (this.profileDetails.gender && this.profileDetails.professional.total_experience && this.profileDetails.professional.organization &&
-        this.profileDetails.professional.job_role && this.profileDetails.country &&
+      if (this.profileDetails.gender && this.prof.total_experience && this.prof.organization &&
+        this.prof.job_role && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj[0].qualification != '' &&
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
@@ -358,10 +364,17 @@ console.log(this.words2)
     }
     if (this.profileDetailCheck === true) {
       console.log(social)
-      var social_media = social.map(s => ({
-        link: s.link,
-        img: s.img
-      }));
+      // if(social) {
+      //   var social_media = social.map(s => ({
+      //     link: s.link,
+      //     img: s.img
+      //   }));
+      // }
+
+      var social_media = [{
+        link: this.socialMediaLink,
+        img: 'null'
+      }]
       var progress;
       // if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
       //   country != undefined && this.qualification_obj != undefined && localStorage.getItem('user_img') == undefined &&
@@ -385,17 +398,17 @@ console.log(this.words2)
         progress = '100%'
       }
 
-      var prof = {
-        total_experience: this.profileDetails.professional.total_experience,
-        organization: this.profileDetails.professional.organization,
-        job_role: this.profileDetails.professional.job_role
-      }
+var prof = {
+  total_experience : this.prof.total_experience,
+  organization : this.prof.organization,
+  job_role : this.prof.job_role
+}
       // for (const iterator of this.words2) {
       //     this.certificate.push(iterator.value)
       //   } 
-  //  for (const iterator of this.words2) {
-  //         this.certificate.push(iterator)
-  //       } 
+      //  for (const iterator of this.words2) {
+      //         this.certificate.push(iterator)
+      //       } 
       var jsonData = {
         user_id: this.currentUser.user_id,
         gender: this.profileDetails.gender,
@@ -496,8 +509,8 @@ console.log(this.words2)
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
         this.showotp = true;
-      } 
-  })
+      }
+    })
   }
   //Update Password
   updatePassword() {

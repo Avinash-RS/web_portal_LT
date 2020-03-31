@@ -181,7 +181,7 @@
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.level_detail && qualification.level_detail[0] && qualification.level_detail[0]._id"
-                          name="level_detail{i}}" #lvl="ngModel" placeholder="Level" required>
+                          name="level_detail{{i}}" #lvl="ngModel" placeholder="Level" required>
                           <mat-option [value]="lv._id" *ngFor="let lv of levelValue" (click)="getLevel(lv,i)">
                             {{lv.level_name}}
                           </mat-option>
@@ -266,8 +266,10 @@
               </div>
               <div class="row">
                 <div class="col-sm-2">
-                  <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
-                    [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia">
+                  <!-- <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
+                    [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia"> -->
+                    <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
+                    [(ngModel)]="socialMediaLink" name="socialMedia">
                 </div>
                 <div class="col-sm-3">
                   <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
@@ -282,17 +284,17 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' type="text" mask="00" class="inputs"
-                          placeholder="Total Experience" [(ngModel)]="profileDetails.professional.total_experience"
+                          placeholder="Total Experience" [(ngModel)]="prof.total_experience"
                           name="totExp" maxlength="2" required>
                       </div>
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
-                          [(ngModel)]="profileDetails.professional.organization" name="currentOrg" minlength="4"
+                          [(ngModel)]="prof.organization" name="currentOrg" minlength="4"
                           maxlength="30" required>
                       </div>
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
-                          placeholder="Current role" [(ngModel)]="profileDetails.professional.job_role"
+                          placeholder="Current role" [(ngModel)]="prof.job_role"
                           name="currentRole" required>
                       </div>
                     </div>
@@ -303,7 +305,7 @@
               <div class="bt">
                 <button class="subbtn" [disabled]="enable"
                   (click)="updateProfile(profileDetails.languages_known,profileDetails.country,
-        profileDetails.state,profileDetails.city_town,profileDetails.social_media,profileDetails.about_you,profileDetails.professional)">Submit</button>
+        profileDetails.state,profileDetails.city_town,profileDetails.socialMediaLink,profileDetails.about_you,prof)">Submit</button>
               </div><br>
             </form>
           </div>
