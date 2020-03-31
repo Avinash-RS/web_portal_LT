@@ -225,7 +225,9 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you 
         console.log(this.userData)
         // if(this.profileDetails){
-        if(this.userData.user_profile.length!=0){
+          if(this.userData.user_profile.length==0){
+            this.userData.user_profile[0].about_you=null
+          }
           this.profileDetails = this.userData.user_profile[0];
           this.urlImage = this.userData.user_profile[0].profile_img
           this.getAllState(this.profileDetails.country);
@@ -248,14 +250,15 @@ export class ProfileComponent implements OnInit {
           }));
 
           this.prof = this.userData.user_profile[0].professional
-          }
+        
         
         //added mythreyi
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
         this.qual = this.userData.qualification;
-        this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
-
+        if(this.userData.user_profile.length!=0){
+          this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
+        }
         // this.words2 = this.userData.user_profile[0].certificate
 
         
