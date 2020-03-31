@@ -329,8 +329,10 @@ export class ProfileComponent implements OnInit {
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
     // console.log(this.qual);
-    console.log(this.profileDetails, exp, this.prof)
-    console.log(this.words2)
+   if(!localStorage.getItem('user_img')){
+    this.alert.openAlert('Please choose profile image.', null);
+    return false
+   }
     var certificate = this.words2.map(function (obj) {
       return obj.value;
     });
@@ -443,6 +445,7 @@ var prof = {
       // debugger
       this.loader.show();
       this.service.update_profile(jsonData).subscribe(data => {
+        debugger
         if (data.data['update_profile']['success'] == 'true') {
           this.loader.hide();
           this.alert.openAlert(data.data['update_profile'].message, null)
