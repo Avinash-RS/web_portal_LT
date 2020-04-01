@@ -254,7 +254,8 @@ export class ProfileComponent implements OnInit {
           localStorage.setItem('username',this.userData.user_dtl.username)
         
           this.profileDetails = this.userData.user_profile[0];
-          // this.urlImage = this.userData.user_profile[0].profile_img
+          this.urlImage = this.userData.user_profile[0].profile_img;
+          localStorage.setItem('user_img',this.urlImage)
           this.getAllState(this.profileDetails.country);
           this.getDistrict(this.profileDetails.state);
           this.qual = this.userData.qualification;
@@ -564,6 +565,8 @@ var prof = {
 
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
+        localStorage.clear();
+        this.router.navigate(['/Learner/login'])
       } else {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
