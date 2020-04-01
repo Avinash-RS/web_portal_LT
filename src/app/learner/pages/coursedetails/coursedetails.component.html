@@ -37,9 +37,11 @@
                         aria-hidden="true" *ngIf="course.wishlisted == true"></i>
                     Wishlist</button> -->
 
-                <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"></i> Share</span>
+                <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"
+                        style="-webkit-text-stroke-width: 2px;"></i> Share</span>
                 <span class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)">
-                    <i class="fa fa-heart" *ngIf="course.wishlisted == false"></i>
+                    <i class="fa fa-heart" *ngIf="course.wishlisted == false"
+                        style="-webkit-text-stroke-width: 2px;"></i>
                     <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i>
                     Wishlist
                 </span>
@@ -51,7 +53,7 @@
         <p class="course_name f_wt_500 capitalize">{{course.course_name}} </p>
         <div class="display_flex">
             <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
-            <strong class="f_size_20 space_5">{{course.rating}} ({{course.max_student_enrollments_allowed}})</strong>
+            <strong class="f_size_23 space_5">{{course.rating}} ({{course.max_student_enrollments_allowed}})</strong>
         </div>
 
         <!-- <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur
@@ -91,9 +93,9 @@
         </div>
 
         <div class="partner_image_div">
-            <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right  m-l-2 border-radius-5">
-            <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right  m-l-2 border-radius-5">
-            <img src="../../../../assets/learner/1.jpg" width="10%" class="float_right border-radius-5">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5">
         </div>
     </div>
 
@@ -112,13 +114,13 @@
             <button mat-mini-fab class="iconmat">
                 <!-- <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
             margin-right: 0px;padding: 0px;background: transparent;box-shadow:none;border:none'> -->
-            <img src="../../../../assets/images/icon_chat.png">
+                <img src="../../../../assets/images/icon_chat.png">
                 <!-- </i> -->
             </button>
         </div>
 
         <div #About class="about_tab" class="display_flex m-l-5">
-            <div class="width_70">
+            <div class="width_70"><br>
                 <h2>Details About Course</h2>
                 <table>
                     <tr>
@@ -138,11 +140,13 @@
                     <tr>
                         <td class="width_15 f_size_16 f_wt_500">Course Description</td>
                         <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;" ><div [ngClass]="{'show-less': showShortDesciption}">{{course.course_description }}</div>
-                        <span (click)="alterDescriptionText()" class="viewtxt">{{ showShortDesciption  ? 'View More > ': 'View Less' }}</span>
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
+                            <div [ngClass]="{'show-less': showShortDesciption}">{{course.course_description }}</div>
+                            <span (click)="alterDescriptionText()"
+                                class="viewtxt">{{ showShortDesciption  ? 'View More > ': 'View Less' }}</span>
                         </td>
-                        
-                       
+
+
                         <td class="width_10"></td>
                     </tr>
                 </table>
@@ -179,21 +183,51 @@
 
         <div #Take_away> </div>
         <br> <br><br><br>
-        <h2 class="m-l-5"> Takeaways</h2><br>
-        <div style="width: 100%;height: 600px;z-index: -1 !important;">
-            <owl-carousel-o [options]="customOptions1" style="z-index:-1 !important" class="takeway">
-                <ng-template carouselSlide style="z-index:-1"><img height="500px" style="z-index:-1 !important
-                    " src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg"></ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-            </owl-carousel-o>
-        </div>
+        <h2 class="m-l-5"> Takeaways</h2>
+        <div style="width: 100%;height: 600px;">
+            <mat-tab-group>
+                <mat-tab label="Media" style="color:red">
+                    <owl-carousel-o [options]="customOptions1" style="z-index:-1 !important" class="takeway">
+                        <ng-template carouselSlide style="z-index:-1"><img height="500px"  src="../../../../assets/learner/lens.jpg">
+                        </ng-template>
+                        <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
+                        </ng-template>
+                        <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
+                        </ng-template>
+                    </owl-carousel-o>
+                </mat-tab>
+                <mat-tab label="Text" style="color:red">
+                    <br>
+                    <ul>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor </li>
+                    </ul>
+                </mat-tab>
+            </mat-tab-group>
+        </div><br>
+
         <br>
     </div>
     <h2 class="m-l-5"> A Step Towards</h2>
@@ -208,14 +242,14 @@
         <div class="width_100 Instructor_dtl">
             <owl-carousel-o [options]="customOptions">
                 <ng-template carouselSlide *ngFor="let i of course.author_details" style="height: 45vh;">
-                    <div class="display_flex width_70 m-l-15" style="height: 20vh;">
+                    <div class="display_flex width_70 m-l-15" style="height: 18vh;">
                         <img src=" ../../../../assets/learner/lens.jpg">
                         <div class="m-l-5">
                             <p> <strong>{{i.author_name}} </strong></p>
                             <p> {{i.description}}</p>
                         </div>
                     </div>
-                    <br>
+                    <br><br>
                 </ng-template>
             </owl-carousel-o>
         </div>
@@ -291,8 +325,8 @@
                     </div>
                 </div>
                 <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
-               
-              
+
+
                 <br>
                 <!-- <div class="display_flex width_100">
                 <div class="width_10">
@@ -436,4 +470,6 @@
     </h2>
     <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
 </div>
+
+<br><br><br><br><br>
 <app-footer></app-footer>
