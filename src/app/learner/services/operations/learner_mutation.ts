@@ -155,6 +155,7 @@ export const view_profile = gql`
           password
   
           created_by_ip
+          created_on
   
         }
   
