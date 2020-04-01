@@ -14,7 +14,7 @@ p,span, div,h1,h2,h3,small,strong {
 }
 .section_1 {
     background: url('../../../../assets/learner/lens.jpg') !important;
-    height: 60vh;
+    height: 65vh;
     background-size: cover !important;
     background-position: center;
     background-repeat: no-repeat !important;
@@ -369,3 +369,13 @@ ul li:before {
  ::ng-deep  .mat-tab-body-content {
    overflow: hidden !important;
 }
+
+
+
+
+::ng-deep  .owl-item {
+    display: inline-block !important;
+     }
+     ::ng-deep  .owl-carousel{
+        overflow:hidden !important;
+         }

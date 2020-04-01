@@ -126,7 +126,7 @@
                     <tr>
                         <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
                         <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
-                            {{course.author_details[0].author_name}}</td>
+                            {{course.author_details && course.author_details[0].author_name}}</td>
                         <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
                         <td class="width_10"></td>
 
@@ -183,50 +183,57 @@
 
         <div #Take_away> </div>
         <br> <br><br><br>
+      <div class="display_flex">
         <h2 class="m-l-5"> Takeaways</h2>
-        <div style="width: 100%;height: 600px;">
-            <mat-tab-group>
-                <mat-tab label="Media" style="color:red">
-                    <owl-carousel-o [options]="customOptions1" style="z-index:-1 !important" class="takeway">
-                        <ng-template carouselSlide style="z-index:-1"><img height="500px"  src="../../../../assets/learner/lens.jpg">
-                        </ng-template>
-                        <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                        </ng-template>
-                        <ng-template carouselSlide><img height="500px" src="../../../../assets/learner/lens.jpg">
-                        </ng-template>
-                    </owl-carousel-o>
-                </mat-tab>
-                <mat-tab label="Text" style="color:red">
-                    <br>
-                    <ul>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                        <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor </li>
-                    </ul>
-                </mat-tab>
-            </mat-tab-group>
-        </div><br>
+        <button mat-raised-button (click)="clickedT('media')" style="border: none;
+        box-shadow: none;color : red;margin-left: 10px;">Media</button>
+        <button mat-raised-button (click)="clickedT('text')" style = "border: none;
+        box-shadow: none;color : red">Text</button>
+      </div>  
+        <!-- <mat-tab-group>{{clicked}} -->
+        <!-- <mat-tab label="Media" style="color:red"> -->
+        <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
+            <owl-carousel-o [options]="customOptions1" class="takeway">
+                <ng-template carouselSlide [id]="1"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+                <ng-template carouselSlide [id]="2"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+                <ng-template carouselSlide [id]="3"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+        <!-- </mat-tab>
+                <mat-tab label="Text" style="color:red"> -->
+        <br>
+        <ul *ngIf="clicked == 'text'">
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+        </ul>
+        <!-- </mat-tab>
+            </mat-tab-group> -->
+        <br>
 
         <br>
     </div>

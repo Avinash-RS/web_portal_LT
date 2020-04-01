@@ -54,6 +54,7 @@ export class CoursedetailsComponent implements OnInit {
   ins: {}[];
   userDetail: any;
   showShortDesciption = true;
+  clicked: any = 'media';
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
     this.loader.show();
@@ -73,6 +74,9 @@ export class CoursedetailsComponent implements OnInit {
 
   }
 
+  clickedT(i) {
+    this.clicked = i
+  }
 
   alterDescriptionText() {
      this.showShortDesciption = !this.showShortDesciption
