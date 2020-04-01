@@ -1,6 +1,6 @@
 .footer-container {
   // position: absolute;
-  height: 200px;
+  height: 300px;
   width: 100%;
   color: white;
   background-color: #1f3777 !important;
@@ -24,18 +24,17 @@
       width: 15%;
 
       .content-header {
-        font-size: 14px;
-        padding-bottom: 5px;
-        // padding-left: 30px;
+        font-size: 18px;
+        padding-bottom: 10px;
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-bottom: 1px solid #7888b3;
       }
 
       .content {
-        font-size: 12px;
+        font-size: 15px;
         color: #c2cbe2;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         padding-left: 18px;
       }
     }
@@ -45,10 +44,10 @@
     display: flex;
     justify-content: flex-end;
     color: #c2cbe2;
-    font-size: 11px;
+    font-size: 15px;
 
     .copyright-title {
-      margin-left: 100px;
+      margin-left: 22px;
     }
   }
   .footertext{
