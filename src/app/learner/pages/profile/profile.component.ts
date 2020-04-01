@@ -533,7 +533,8 @@ var prof = {
 
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-        this.showotp = true;
+        this.showotp = false;
+        this.isenable = true;
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
       }
