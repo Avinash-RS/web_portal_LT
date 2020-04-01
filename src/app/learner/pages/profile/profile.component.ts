@@ -229,7 +229,7 @@ export class ProfileComponent implements OnInit {
             this.userData.user_profile[0].about_you=null
           }
           this.profileDetails = this.userData.user_profile[0];
-          this.urlImage = this.userData.user_profile[0].profile_img
+          // this.urlImage = this.userData.user_profile[0].profile_img
           this.getAllState(this.profileDetails.country);
           this.getDistrict(this.profileDetails.state);
           this.qual = this.userData.qualification;
@@ -569,13 +569,17 @@ var prof = {
         const fb = new FormData();
         fb.append('image', this.selectfile, this.selectfile.name)
         this.service.imageupload(fb).subscribe(data => {
-
           this.urlImage = data
           localStorage.setItem('user_img', 'https://rajeshkumarranjan.blob.core.windows.net/' + this.urlImage.path)
+          this.urlImage = localStorage.getItem('user_img')
           //this.profileUpdateData(this.urlImage.url)
         })
       }
     }
+  }
+
+  uploadFile(){
+    console.log('in')
   }
   profileUpdateData(img) {
     var jsonData = {
