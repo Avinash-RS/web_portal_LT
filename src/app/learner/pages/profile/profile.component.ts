@@ -381,6 +381,10 @@ export class ProfileComponent implements OnInit {
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
         this.profileDetailCheck = true;
+        if(this.prof.total_experience > 70){
+          this.alert.openAlert('Total experience should be less than or equal to 70 years',null);
+          this.profileDetailCheck = false;
+        }
 
       } else {
         this.loader.hide();
