@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { Certificate } from 'crypto';
+import { MustMatch } from '@core/services/_helpers/must-match.validator';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -516,7 +517,10 @@ var prof = {
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
       confirmpassword: new FormControl('', myGlobals.passwordVal),
+    }, {
+      validator: MustMatch('newpassword', 'confirmpassword'),
     });
+
   }
   //Update Mobile
   otpverification() {

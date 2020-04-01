@@ -333,8 +333,12 @@
           <div class="account">Don't receive link?<b (click)="updateEmail()">Resend link</b></div>
         </mat-dialog-actions>
       </ng-template>
-      <!------------------------------Change mobno Dialog---------------------->
+      <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
+        <span>
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </span>
+     
         <h1 class="head">Change the Mobile No</h1>
         <mat-dialog-content style="width: 285px;margin-top: 24px;">
           <form [formGroup]="otpForm">
@@ -394,9 +398,9 @@
               </span>
               <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
-                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 6 characters</div>
+                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
                 <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture of uppercase and lowercase letters.</div>
+                  mixture of Special characters, uppercase and lowercase letters.</div>
               </div>
             </div>
 
@@ -414,10 +418,9 @@
                 </span>
               <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.newpassword.errors.required">New Password is required</div>
-                <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 6 characters</div>
+                <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 8 characters</div>
                 <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture
-                  of uppercase and lowercase letters.</div>
+                  mixture of Special characters, uppercase and lowercase letters.</div>
                 <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
               </div>
             </div><br>
@@ -449,11 +452,11 @@
                   </span>
                 </span>
               <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
-                <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
+                <!-- <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 8 characters</div>
                 <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture of uppercase and lowercase letters.</div>
-                <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
+                  mixture of Special characters, uppercase and lowercase letters.</div> -->
+                <div *ngIf="f.confirmpassword.errors.mustMatch">Should be same as password</div>
               </div>
             </div>
           </form><br>
