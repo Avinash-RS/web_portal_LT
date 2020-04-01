@@ -228,6 +228,7 @@ export class ProfileComponent implements OnInit {
           if(this.userData.user_profile.length==0){
             this.userData.user_profile[0].about_you=null
           }
+          localStorage.setItem('username',this.userData.user_dtl.username)
           this.profileDetails = this.userData.user_profile[0];
           this.urlImage = this.userData.user_profile[0].profile_img
           this.getAllState(this.profileDetails.country);
@@ -529,9 +530,10 @@ var prof = {
   }
   //Update Password
   updatePassword() {
+    //console.log(this.currentUser.username, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword)
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
-    this.service.get_change_password_updateprofile(this.currentUser.username, ps, this.passwordForm.value.newpassword).subscribe(password => {
+    this.service.get_change_password_updateprofile(localStorage.getItem('username'), this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
 
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
