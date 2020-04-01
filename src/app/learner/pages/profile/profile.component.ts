@@ -361,7 +361,7 @@ export class ProfileComponent implements OnInit {
       return obj.value;
     });
 
-    // debugger
+   
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
@@ -466,10 +466,10 @@ var prof = {
         created_by_ip: localStorage.getItem('Systemip')
       }
       console.log(jsonData)
-      // debugger
+     
       this.loader.show();
       this.service.update_profile(jsonData).subscribe(data => {
-        debugger
+     
         if (data.data['update_profile']['success'] == 'true') {
           this.loader.hide();
           this.alert.openAlert(data.data['update_profile'].message, null)
