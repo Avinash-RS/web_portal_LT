@@ -60,11 +60,11 @@ export class CoursedetailsComponent implements OnInit {
     this.loader.show();
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    console.log(detail, detail.id)
+    console.log('iuhiuuiiouou',detail, detail.id)
     this.service.viewCurseByID(detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
-        this.course.wishlisted = detail.wishlisted || false;
+        this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
         console.log(this.course)
         this.loader.hide();
