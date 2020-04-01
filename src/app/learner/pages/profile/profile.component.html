@@ -386,7 +386,7 @@
             <label class="title">Enter the current password</label>
             <div class="input-group">
               <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-              onDrop="return false" onPaste="return false"   [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
+              onDrop="return false" onPaste="return false"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
               <span class="input-group-append bg-white border-left-0">
                 <span class="input-group-text bg-transparent">
                   <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
@@ -400,11 +400,13 @@
               </div>
             </div>
 
+          
+
             <label  class="title">Enter the new password</label>
             <div class="input-group">
               <input class="form-control border-right-0" [type]="showNewButton ? 'text' : 'password'" formControlName="newpassword" onCopy="return false" onDrag="return false"
                 onDrop="return false" onPaste="return false"
-                [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }" />
+                [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }"   (keyup)="change($event)" />
                 <span class="input-group-append bg-white border-left-0">
                   <span class="input-group-text bg-transparent">
                     <i [class]="showNewEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="shownewPassword()" aria-hidden="true"></i>
@@ -418,7 +420,22 @@
                   of uppercase and lowercase letters.</div>
                 <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
               </div>
+            </div><br>
+            <div class="box" id="message">
+              <div class="row">
+                <div class="col">
+                  <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Uppercase</p>
+                  <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Lowercase</p>
+                </div>
+                <div class="col">
+                  <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Special character</p>
+                  <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Number</p>
+                </div>
+              </div>
             </div>
+
+
+
             <p class="head">The password should not be last password</p>
             <label  class="title">Confirm the new password</label>
             <div class="input-group">

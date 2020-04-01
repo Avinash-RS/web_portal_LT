@@ -79,10 +79,13 @@ export class ProfileComponent implements OnInit {
   showNewEyes: Boolean = false;
   showconButton: Boolean = false;
   showconEyes: Boolean = false;
-  prof: any = {}
-    ;
+  prof: any = {};
   sosocialMediaLinkc: any;
   socialMediaLink: any;
+  lowercase: boolean = false;
+  uppercase: boolean = false;
+  number: boolean = false;
+  spicalcharacter: boolean = false;
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -109,7 +112,29 @@ export class ProfileComponent implements OnInit {
     this.showconEyes = !this.showconEyes;
   }
 
+  change(event) {
+    if (event.target.value.match(myGlobals.lowerCaseLetters)) {
+      this.lowercase = true;
+    } else {
+      this.lowercase = false;
+    }
+    if (event.target.value.match(myGlobals.upperCaseLetters)) {
+      this.uppercase = true;
+    } else {
+      this.uppercase = false;
+    }
+    if (event.target.value.match(myGlobals.numbers)) {
+      this.number = true;
+    } else {
+      this.number = false;
+    }
+    if (event.target.value.match(myGlobals.specialchar)) {
+      this.spicalcharacter = true;
+    } else {
+      this.spicalcharacter = false;
+    }
 
+  }
   ngOnInit() {
     if (localStorage.getItem('UserDetails')) {
 
