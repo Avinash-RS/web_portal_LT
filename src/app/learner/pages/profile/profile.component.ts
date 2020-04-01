@@ -137,8 +137,6 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit() {
     if (localStorage.getItem('UserDetails')) {
-
-
       this.activeroute.queryParams.subscribe(params => {
         if (params["status"]) {
           this.alert.openAlert(params['msg'], null);
@@ -537,7 +535,9 @@ var prof = {
 
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-        this.showotp = true;
+        this.showotp = false;
+        this.isenable = true;
+        this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
       }
@@ -575,6 +575,7 @@ var prof = {
     this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
       if (data.data['update_email_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
+        this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
