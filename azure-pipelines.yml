@@ -20,8 +20,8 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: CopyPublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
   inputs:
-    Contents: '**'
-    ArtifactName: 'webportal'
-    ArtifactType: 'Container'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+
