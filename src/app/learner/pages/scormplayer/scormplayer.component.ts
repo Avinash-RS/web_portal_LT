@@ -3,7 +3,7 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { map, filter } from 'rxjs/operators';
 @Component({
   selector: 'app-scormplayer',
