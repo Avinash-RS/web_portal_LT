@@ -1,16 +1,12 @@
-@import "../../assets/variable.scss";
-button {
-    color: $color-blue !important;
-}
-.my_course_btn {
-    margin-left: 3%;
-    margin-bottom: 2%;
-    font-weight: 600;
-}
-mat-card {
-    padding: 2% !important;
-}
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 2px 1px 1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-}
+@import "../../../../assets/variable.scss";
 
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+.coursebreadcrumb{
+    padding-top: 60px;
+    ol{
+        margin-bottom: 0 !important;
+        background-color: #fff !important;
+    }
+}

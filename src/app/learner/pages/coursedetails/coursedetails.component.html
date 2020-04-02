@@ -1,3 +1,482 @@
-
-
 <app-header></app-header>
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Learner/MyCourse">Courses</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{course.course_name}}</li>
+    </ol>
+</nav>
+<div *ngIf="course != null">
+    <div class="section_1"></div>
+    <!-- <div class="section_1"></div> -->
+    <mat-card class="section_1_card_1 opacity absolute" style="z-index: 1;"></mat-card>
+    <mat-card class="section_1_card_1 background_trans absolute" style="z-index: 1;">
+        <mat-card-title>
+            <span class="icon f_wt_400 f_size_23">₹ {{course.price}}</span>
+            <span class="f_wt_200 strike_text f_size_16">Rs {{course.price}}</span>
+            <span class="f_wt_200 f_size_16"> {{course.rating}}%Off </span>
+        </mat-card-title>
+        <mat-card-content>
+            <p class="day_left"><i class="fa fa-hourglass"
+                    style="background-color: transparent;border: none;box-shadow: none;" aria-hidden="true"></i>
+                {{course.certificate_html_view_enabled}} day left at this price</p>
+            <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div><br>
+            <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
+            <div>
+                <!-- <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
+                    <i class="fa fa-share"
+                        style="-webkit-text-stroke-color: #db3137;  font-size: 15px; background-color: transparent;box-shadow:none;border:none "
+                        aria-hidden="true"></i>Share</button>
+                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300"
+                    (click)="selectWishlist(course)">
+                    <i class="fa fa-heart"
+                        style="-webkit-text-stroke-color: #db3137; font-size: 15px; background-color: transparent;box-shadow:none;border:none "
+                        aria-hidden="true" *ngIf="course.wishlisted == false"></i>
+                    <i class="fa fa-heart"
+                        style="-webkit-text-stroke-color: #db3137; color: #db3137;font-size: 15px; background-color: transparent;box-shadow:none;border:none "
+                        aria-hidden="true" *ngIf="course.wishlisted == true"></i>
+                    Wishlist</button> -->
+
+                <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"
+                        style="-webkit-text-stroke-width: 2px;"></i> Share</span>
+                <span class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)">
+                    <i class="fa fa-heart" *ngIf="course.wishlisted == false"
+                        style="-webkit-text-stroke-width: 2px;"></i>
+                    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i>
+                    Wishlist
+                </span>
+            </div>
+        </mat-card-content>
+        <br><br>
+    </mat-card>
+    <div class="section_1_a absolte width_60 absolute">
+        <p class="course_name f_wt_500 capitalize">{{course.course_name}} </p>
+        <div class="display_flex">
+            <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
+            <strong class="f_size_23 space_5">{{course.rating}} ({{course.max_student_enrollments_allowed}})</strong>
+        </div>
+
+        <!-- <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur
+        the
+        background image</p> -->
+        <p class="course_desc">{{course.short_description}}</p>
+        <table class="width_90">
+            <tr>
+                <!-- <td> Already enrolled</td> -->
+                <td>{{course.max_student_enrollments_allowed}} Already enrolled</td>
+                <td>
+                    <i class="fa fa-id-card-o" style="background-color: #ebebeb;box-shadow: none;"></i> Certificate
+                </td>
+                <td>
+                    <i class="fa fa-book" style="background-color: #ebebeb;box-shadow: none;"></i>Self Placed
+                </td>
+            </tr>
+            <tr>
+                <td> <span class="background-maroon whitefont border-radius-5 p-5px">Last updated
+                        {{course.updated_at | date}}</span></td>
+                <!-- <td> Last updated {{course.updated_on}}</td> -->
+                <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
+                    {{course.course_language}}</td>
+                <!-- English</td> -->
+            </tr>
+        </table>
+        <!-- <button style="background-color: transparent;"> -->
+        <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
+        /* width: 10%; */
+        border-radius: 50px; 
+        padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
+        <!-- </button> -->
+
+        <div class="course_preview" (click)="coursePlay()">
+            <h2>Course <br> Preview</h2>
+        </div>
+
+        <div class="partner_image_div">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5">
+        </div>
+    </div>
+
+    <div class="wrap_content">
+        <div class="tabs width_60 tabstyle">
+            <button mat-raised-button>About</button>
+            <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
+            <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
+            <button mat-raised-button (click)="scroll(Review)">Review</button>
+            <button mat-raised-button (click)="scroll(Instructor)">Instructor</button>
+            <button mat-raised-button (click)="scroll(FAQ)">FAQ</button>
+        </div>
+
+        <br>
+        <div class="float_right m-r-5">
+            <button mat-mini-fab class="iconmat">
+                <!-- <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
+            margin-right: 0px;padding: 0px;background: transparent;box-shadow:none;border:none'> -->
+                <img src="../../../../assets/images/icon_chat.png">
+                <!-- </i> -->
+            </button>
+        </div>
+
+        <div #About class="about_tab" class="display_flex m-l-5">
+            <div class="width_70"><br>
+                <h2>Details About Course</h2>
+                <table>
+                    <tr>
+                        <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
+                            {{course.author_details && course.author_details[0].author_name}}</td>
+                        <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
+                        <td class="width_10"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
+                        <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">{{course.pre_requisite}}</td>
+                        <td class="width_10"></td>
+                    </tr>
+                    <tr>
+                        <td class="width_15 f_size_16 f_wt_500">Course Description</td>
+                        <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
+                            <div [ngClass]="{'show-less': showShortDesciption}">{{course.course_description }}</div>
+                            <span (click)="alterDescriptionText()"
+                                class="viewtxt">{{ showShortDesciption  ? 'View More > ': 'View Less' }}</span>
+                        </td>
+
+
+                        <td class="width_10"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="width_30">
+                <h2>This Course Includes</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-film"></i>
+                        </td>
+                        <!-- <td>20 hrs on-demand video</td> -->
+                        <td>{{course.article_count}} hrs on-demand video</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-file"></i></td>
+                        <td>{{course.downloadable_resource_count}} downloadable resources</td>
+                        <!-- <td> downloadable resources</td> -->
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-pause"></i></td>
+                        <!-- <td>Level in Analytics</td> -->
+                        <td>{{course.course_level}} Level in Analytics</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-circle" style="color: rgb(28, 28, 156);"></i></td>
+                        <!-- <td>Level in Analytics</td> -->
+                        <td>{{course.article_count}} members from Organization/ Institute have enrolled in this course
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div #Take_away> </div>
+        <br> <br><br><br>
+      <div class="display_flex">
+        <h2 class="m-l-5"> Takeaways</h2>
+        <button mat-raised-button (click)="clickedT('media')" style="border: none;
+        box-shadow: none;color : red;margin-left: 10px;">Media</button>
+        <button mat-raised-button (click)="clickedT('text')" style = "border: none;
+        box-shadow: none;color : red">Text</button>
+      </div>  
+        <!-- <mat-tab-group>{{clicked}} -->
+        <!-- <mat-tab label="Media" style="color:red"> -->
+        <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
+            <owl-carousel-o [options]="customOptions1" class="takeway">
+                <ng-template carouselSlide [id]="1"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+                <ng-template carouselSlide [id]="2"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+                <ng-template carouselSlide [id]="3"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+        <!-- </mat-tab>
+                <mat-tab label="Text" style="color:red"> -->
+        <br>
+        <ul *ngIf="clicked == 'text'">
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+        </ul>
+        <!-- </mat-tab>
+            </mat-tab-group> -->
+        <br>
+
+        <br>
+    </div>
+    <h2 class="m-l-5"> A Step Towards</h2>
+    <p class="m-l-10">{{course.step_towards}}</p>
+
+
+    <div #Instructor></div>
+    <br>
+    <br>
+    <div style=" width: 100%;background-color: rgb(192, 191, 189);"><br>
+        <p class="m-l-10 f_wt_500 f_size_18"> Instructor details</p><br><br>
+        <div class="width_100 Instructor_dtl">
+            <owl-carousel-o [options]="customOptions">
+                <ng-template carouselSlide *ngFor="let i of course.author_details" style="height: 45vh;">
+                    <div class="display_flex width_70 m-l-15" style="height: 18vh;">
+                        <img src=" ../../../../assets/learner/lens.jpg">
+                        <div class="m-l-5">
+                            <p> <strong>{{i.author_name}} </strong></p>
+                            <p> {{i.description}}</p>
+                        </div>
+                    </div>
+                    <br><br>
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+    </div>
+
+    <div #Syllabus> </div><br><br><br>
+    <div class="display_flex wrap_content">
+        <div class="width_50">
+            <br>
+            <h2> Course Outline</h2><br>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
+                        <mat-panel-title>
+                            {{i}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- <mat-expansion-panel *ngFor="let it of i.subtitle">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{it.name}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header> -->
+                    <br>
+                    <table>
+                        <tr>
+                            <td width="96%"><i class="fa fa-circle"
+                                    style="background-color: transparent;font-size: 10px;color: black;box-shadow:none;border:none"
+                                    aria-hidden="true"></i>{{i}}</td>
+                            <td (click)="playCourse(i)"><i class="fa fa-play" aria-hidden="true"
+                                    style="font-size:11px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
+                            </td>
+                            <!-- <td>20.00</td> -->
+                        </tr>
+                    </table>
+                    <!-- </mat-expansion-panel> -->
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <br>
+        <div class="width_40 m-l-5">
+            <h2>Learning Paths</h2><br>
+            <img src="../../../../assets/learner/lens.jpg" width="100%">
+        </div>
+    </div>
+
+    <div #Review></div><br><br><br><br><br>
+
+    <mat-card>
+        <div class="display_flex m-l-5">
+            <br><br><br>
+            <div class="width_60 float_left">
+                <h2 class="float_left m-l-5">Reviews</h2>
+                <br><br><br>
+                <div class="display_flex width_100" *ngFor="let r of course.review_and_faq">
+                    <div class="width_10">
+                        <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
+                            style="border-radius: 50px;">
+                        <br>
+                        <p class="display_flex">
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="r.rating" [max]="5"></bar-rating>
+                            <strong>{{r.rating}}</strong>
+                        </p>
+
+                    </div>
+                    <div class="width_15">
+                        <strong>{{r.user_name}}</strong><br>
+                        <small>7 days before</small><br>
+                        <small>{{r.course_id}} years of experience</small>
+                    </div>
+                    <div class="width_60">
+                        {{r.review}}
+                    </div>
+                </div>
+                <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+
+
+                <br>
+                <!-- <div class="display_flex width_100">
+                <div class="width_10">
+                    <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
+                        style="border-radius: 50px;">
+                    <br>
+                    <p class="display_flex">
+                        <bar-rating class="no_margin" [readOnly]="true" [rate]="5" [max]="5"></bar-rating>
+                        <strong>5</strong>
+                    </p>
+
+                </div>
+                <div class="width_15">
+                    <strong>Anurag</strong><br>
+                    <small>1 week ago</small><br>
+                    <small>2 years of experience</small>
+                </div>
+                <div class="width_50" style="color: rgb(61, 61, 61)">
+                    ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                    in voluptate velit esse cillum dolore eu
+                </div>
+            </div> -->
+
+                <!-- <button mat-raised-button style="color: red;text-align: center;border: none;" (click)="openb()" >Read more..</button> -->
+                <!-- {{open}} -->
+                <div class="display_flex width_100" *ngIf="open">
+                    <div class="width_10">
+                        <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
+                            style="border-radius: 50px;">
+                        <br>
+                        <p class="display_flex">
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
+                            <strong>1</strong>
+                        </p>
+
+                    </div>
+                    <div class="width_15">
+                        <strong>Ankit</strong><br>
+                        <small>1 week ago</small><br>
+                        <small>2 years of experience</small>
+                    </div>
+                    <div class="width_50" style="color: rgb(61, 61, 61)">
+                        ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit
+                        in voluptate velit esse cillum dolore eu
+                    </div>
+                </div>
+
+            </div>
+            <div class="width_40 float_left">
+                <h2>Students Feedback</h2><br>
+                <div class="display_flex ">
+
+                    <div class="width_25 center_align">
+                        <br>
+                        <span class="rating_number f_wt_600">{{course.rating}}</span>
+                        <!-- <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating> -->
+                        <p>Course ratings</p>
+                    </div>
+                    <div class="width_50">
+                        <div class="display_flex">
+                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="70">
+                            </mat-progress-bar>
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
+                            <span class="f_wt_500 f_size_15 m-l-2">4.5</span>
+                        </div>
+                        <br>
+                        <div class="display_flex">
+                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="30">
+                            </mat-progress-bar>
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
+                            <span class="f_wt_500 f_size_15 m-l-2">4.0</span>
+                        </div><br>
+                        <div class="display_flex">
+                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="90">
+                            </mat-progress-bar>
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="4" [max]="5"></bar-rating>
+                            <span class="f_wt_500 f_size_15 m-l-2">3.5</span>
+                        </div><br>
+                        <div class="display_flex">
+                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="50">
+                            </mat-progress-bar>
+                            <bar-rating class="no_margin" [readOnly]="true" [rate]="2" [max]="5"></bar-rating>
+                            <span class="f_wt_500 f_size_15 m-l-2">3.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <div #FAQ></div>
+    <br><br><br>
+    <div class="wrap_content">
+        <div class="width_60">
+            <h2>FAQ</h2>
+            <mat-accordion>
+                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+        </div>
+    </div>
+    <br><br><br>
+
+</div>
+
+<div style="z-index: -1;">
+    <h2 class=" m-l-5">
+        Frequently bought together
+    </h2>
+    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+
+    <h2 class="m-l-5">
+        People Also Viewed
+    </h2>
+    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+</div>
+
+<br><br><br><br><br>
+<app-footer></app-footer>

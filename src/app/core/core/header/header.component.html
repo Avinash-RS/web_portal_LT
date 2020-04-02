@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <img class="logo" src="../../assets/images/logo.png">
+  <a class="navbar-brand edutech" href="/Learner">EDUTECH</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- id="navbarCollapse" -->
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
+      <ul class="navbar-nav mr-auto">
+        <i class="fa fa-th box" aria-hidden="true"></i>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            All Courses
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </ul>
+
+
+    <div class="input-group">
+      <input class="form-control border-right-0" placeholder="  Search courses  ">
+      <span class="input-group-append bg-white border-left-0">
+        <span class="input-group-text bg-transparent">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
+
+    <div class="">
+      <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <i class="fa fa-bell bellicon" aria-hidden="true"></i>
+          </li>
+          <li>
+            <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+          </li>
+
+          <li (click)="navigateProfile()">
+            <img class="profileimg" [src]="userimage ? userimage : '../../../../assets/learner/avatar2.png'">
+          </li>
+
+        </ul>
+      </ul>
+    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+      *ngIf="userDetailes != null">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <div class="header">
+      <mat-menu class="menubar" #menu="matMenu">
+        <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
+          <!-- <a routerLink="[/Learner/profile]"></a> -->
+          <label>Profile</label>
+        </button>
+        <!-- added routerLink - Mythreyi -->
+        <!-- <button class="backgroundcol" routerLink="/Learner/profile" mat-menu-item>
+          <label>Profile</label>
+        </button> -->
+        <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
+          <label>My Course</label>
+        </button>
+        <button class="backgroundcol" mat-menu-item>
+          <label>Dashboard</label>
+        </button>
+        <button class="backgroundcol" mat-menu-item (click)="navigateWishlist()">
+          <label>Wishlist</label>
+        </button>
+        <button class="backgroundcol" mat-menu-item>
+          <label style="color: #fff;">Certificate</label>
+        </button>
+        <button class="backgroundcol" mat-menu-item (click)="logout()">
+          <label>Logout</label>
+        </button>
+      </mat-menu>
+    </div>
+  
+  
+  </div>
+  <div class="login_btn"  *ngIf="userDetailes == null">
+    <button class="backgroundcol" routerLink="/Learner/login" >Login</button>
+    <button class="backgroundcol" routerLink="/Learner/register" >Register</button>
+  </div>
+</nav>
+
+
+<div class="collapse navbar-collapse" id="navbarCollapse">
+  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto" id="navbarCollapse">
+      <li class="dropdownsmall">
+        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+          All Courses
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+      <li class="smallmenu">
+        <a href="#">
+          Search
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#">
+          Notifications
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#">
+          My Cart
+        </a>
+      </li>
+
+      <li class="smallmenu">
+        <a href="#">
+          Profile
+        </a>
+      </li><br><br>
+    </ul>
+
+  </ul>
+
+</div>

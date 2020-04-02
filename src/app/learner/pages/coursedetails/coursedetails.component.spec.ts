@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursedetailsComponent } from './coursedetails.component';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('CoursedetailsComponent', () => {
   let component: CoursedetailsComponent;
   let fixture: ComponentFixture<CoursedetailsComponent>;
