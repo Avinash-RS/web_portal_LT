@@ -257,8 +257,8 @@ export class ProfileComponent implements OnInit {
             localStorage.setItem('user_img',this.userData.user_profile[0].profile_img)
           }
           this.profileDetails = this.userData.user_profile[0];
-          this.urlImage = this.userData.user_profile[0].profile_img;
-          localStorage.setItem('user_img',this.urlImage)
+          // this.urlImage = this.userData.user_profile[0].profile_img;
+          // localStorage.setItem('user_img',this.urlImage)
           this.getAllState(this.profileDetails.country);
           this.getDistrict(this.profileDetails.state);
           this.qual = this.userData.qualification;
@@ -358,10 +358,11 @@ export class ProfileComponent implements OnInit {
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
     // console.log(this.qual);
-    if(!localStorage.getItem('user_img')){
+    //profile imgg is not mandatory because of that 
+    /*if(!localStorage.getItem('user_img')){
       this.alert.openAlert('Please update profile image.', null);
       return
-    }
+    }*/
     var certificate = this.words2.map(function (obj) {
       return obj.value;
     });
