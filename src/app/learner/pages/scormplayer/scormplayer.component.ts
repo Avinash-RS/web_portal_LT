@@ -3,7 +3,7 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
+import { environment } from '../../environments/environment';
 import { map, filter } from 'rxjs/operators';
 @Component({
   selector: 'app-scormplayer',
@@ -31,7 +31,7 @@ export class ScormplayerComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.contentid,this.user_id)
-    this.url='http://40.76.47.212:8080/scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
+    this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
   /*getcontent() {
