@@ -12,6 +12,7 @@ import {user_registration,user_registration_mobile_otp_send,user_registration_mo
   update_verifyotp_mobile_onprofile,update_email_onprofile,update_profile} from "./operations/learner_mutation"
  
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
@@ -34,7 +35,7 @@ export class LearnerServicesService {
   }
 
   imageupload(fb) {
-    return this.http.post<any[]>(`http://40.76.47.212:3001/upload/image`,fb);
+    return this.http.post<any[]>(environment.apiUrlImg+`upload/image`,fb);
 }
 
 
