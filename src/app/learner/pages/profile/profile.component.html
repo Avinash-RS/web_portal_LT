@@ -320,13 +320,13 @@
             <div class="form-group">
               <label class="title">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
+                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
                 <div *ngIf="f.mailid.errors.required">Email is required</div>
-                <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
+                <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div>
-            <button class="popupbtns" (click)="updateEmail()">
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
               Submit
             </button><br><br>
           </form><br>
@@ -337,10 +337,6 @@
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
-        <span>
-          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-        </span>
-     
         <h1 class="head">Change the Mobile No</h1>
         <mat-dialog-content style="width: 285px;margin-top: 24px;">
           <form [formGroup]="otpForm">

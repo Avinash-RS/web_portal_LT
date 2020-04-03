@@ -155,6 +155,7 @@ export class ProfileComponent implements OnInit {
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
+      this.closedialogbox();
 
 
 
@@ -248,7 +249,11 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
         this.loader.hide();
         // this.profileDetails.about_you 
-        this.userData.progress = this.userData.user_profile[0].progress
+        if(this.userData.user_profile.length!=0){
+        this.userData.progress=this.userData.user_profile[0].progress
+        }else{
+          this.userData.progress=this.userData.progress
+        }
         // if(this.profileDetails){
         if (this.userData.user_profile.length == 0) {
           this.userData.user_profile[0].about_you = null
@@ -579,15 +584,20 @@ export class ProfileComponent implements OnInit {
   updateEmail() {
     this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
       if (data.data['update_email_onprofile']['success'] == 'true') {
+        console.log(data.data['update_email_onprofile'].message)
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-        this.ngOnInit();
+        setTimeout( ()=>{
+          this.ngOnInit();
+          }, 3000)
+        
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
-    this.dialog.closeAll();
   }
-
+   closedialogbox(){
+    this.dialog.closeAll();
+   }
 
   onSelectFile(event) {
     this.selectfile = <File>event.target.files[0];
