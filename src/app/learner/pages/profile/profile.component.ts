@@ -248,7 +248,11 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
         this.loader.hide();
         // this.profileDetails.about_you 
+        if(this.userData.user_profile.length!=0){
         this.userData.progress=this.userData.user_profile[0].progress
+        }else{
+          this.userData.progress=this.userData.progress
+        }
         // if(this.profileDetails){
           if(this.userData.user_profile.length==0){
             this.userData.user_profile[0].about_you=null
