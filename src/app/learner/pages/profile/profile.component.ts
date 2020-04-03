@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   otpForm: FormGroup;
   passwordForm: FormGroup;
   enabel: Boolean = true
-  
+
   public qual: any[] = [{
 
     board: [],
@@ -87,6 +87,7 @@ export class ProfileComponent implements OnInit {
   uppercase: boolean = false;
   number: boolean = false;
   spicalcharacter: boolean = false;
+
   constructor(
     private alert: AlertServiceService,
     public service: LearnerServicesService,
@@ -224,7 +225,7 @@ export class ProfileComponent implements OnInit {
   getDiscipline() {
     this.service.get_discipline_details().subscribe(discipline => {
       this.dis = discipline.data['get_discipline_details'].data;
-      console.log(this.dis)
+      // console.log(this.dis)
     })
   }
   getSpec() {
@@ -240,7 +241,7 @@ export class ProfileComponent implements OnInit {
 
   // View Profile
   getprofileDetails(userid) {
-    console.log('inside getprofile')
+    // console.log('inside getprofile')
     this.loader.show();
     this.service.view_profile(userid).subscribe(data => {
       if (data.data['view_profile']) {
@@ -254,49 +255,49 @@ export class ProfileComponent implements OnInit {
           this.userData.progress=this.userData.progress
         }
         // if(this.profileDetails){
-          if(this.userData.user_profile.length==0){
-            this.userData.user_profile[0].about_you=null
-          }
-          localStorage.setItem('username',this.userData.user_dtl.username)
-          if(this.userData.user_profile.length!=0){
-            localStorage.setItem('user_img',this.userData.user_profile[0].profile_img)
-          }
-          this.profileDetails = this.userData.user_profile[0];
-          // this.urlImage = this.userData.user_profile[0].profile_img;
-          // localStorage.setItem('user_img',this.urlImage)
-          this.getAllState(this.profileDetails.country);
-          this.getDistrict(this.profileDetails.state);
-          this.qual = this.userData.qualification;
-          //if (this.userData.user_profile.length!=0 && this.userData.user_profile[0].certificate.length!=0 && this.userData.user_profile[0].certificate.length[0].value!=""){
-            this.words2 = this.userData.user_profile[0].certificate.map(s => ({
-              value: s
-            }));
-         // }
-          console.log(this.words2)
-          this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
-            qualification: s.qualification,
-            institute: s.institute,
-            board_university: s.board_university,
-            discipline: s.discipline,
-            specification: s.specification,
-            year_of_passing: s.year_of_passing,
-            percentage: s.percentage
-          }));
+        if (this.userData.user_profile.length == 0) {
+          this.userData.user_profile[0].about_you = null
+        }
+        localStorage.setItem('username', this.userData.user_dtl.username)
+        if (this.userData.user_profile.length != 0) {
+          localStorage.setItem('user_img', this.userData.user_profile[0].profile_img)
+        }
+        this.profileDetails = this.userData.user_profile[0];
+        // this.urlImage = this.userData.user_profile[0].profile_img;
+        // localStorage.setItem('user_img',this.urlImage)
+        
+        // }
+        // console.log(this.words2)
+        this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
+          qualification: s.qualification,
+          institute: s.institute,
+          board_university: s.board_university,
+          discipline: s.discipline,
+          specification: s.specification,
+          year_of_passing: s.year_of_passing,
+          percentage: s.percentage
+        }));
+        this.getAllState(this.profileDetails.country);
+        this.getDistrict(this.profileDetails.state);
+        this.qual = this.userData.qualification;
+        //if (this.userData.user_profile.length!=0 && this.userData.user_profile[0].certificate.length!=0 && this.userData.user_profile[0].certificate.length[0].value!=""){
+        this.words2 = this.userData.user_profile[0].certificate.map(s => ({
+          value: s
+        }));
+        this.prof = this.userData.user_profile[0].professional
 
-          this.prof = this.userData.user_profile[0].professional
-        
-        
-        //added mythreyi
+
+        //newly added mythreyi
         var p = this.userData.progress.slice(0, -1);
         this.progress = Number(p);
         this.qual = this.userData.qualification;
-        if(this.userData.user_profile.length!=0){
+        if (this.userData.user_profile.length != 0) {
           this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
         }
         // this.words2 = this.userData.user_profile[0].certificate
 
-        
-        
+
+
         //end - mythreyi
 
         // if(this.profileDetails)
@@ -342,23 +343,14 @@ export class ProfileComponent implements OnInit {
     // return true;
   }
 
-  removenewLink(index) {
-    if (this.words2.length == 1) {
-      this.alert.openAlert("Can't delete  when there is only one row", null);
-      return false;
-    } else {
-      this.words2.splice(index, 1);
-      return true;
-    }
 
-  }
 
   addcertificate(item, i) {
     // this.words2.push(item);
-    console.log(this.words2)
+    // console.log(this.words2)
     if (item != null)
       this.words2.splice(i, 0, item)
-    console.log(this.words2)
+    // console.log(this.words2)
   }
   updateProfile(language, country, state, city, social, about_you, exp) {
     // role = 'aaaasd';
@@ -372,7 +364,7 @@ export class ProfileComponent implements OnInit {
       return obj.value;
     });
 
-   
+
     if (this.profileDetails.is_student_or_professional == 'student') {
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
@@ -392,8 +384,8 @@ export class ProfileComponent implements OnInit {
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
         this.profileDetailCheck = true;
-        if(this.prof.total_experience > 70){
-          this.alert.openAlert('Total experience should be less than or equal to 70 years',null);
+        if (this.prof.total_experience > 70) {
+          this.alert.openAlert('Total experience should be less than or equal to 70 years', null);
           this.profileDetailCheck = false;
         }
 
@@ -451,11 +443,11 @@ export class ProfileComponent implements OnInit {
         progress = '100%'
       }
 
-var prof = {
-  total_experience : this.prof.total_experience,
-  organization : this.prof.organization,
-  job_role : this.prof.job_role
-}
+      var prof = {
+        total_experience: this.prof.total_experience,
+        organization: this.prof.organization,
+        job_role: this.prof.job_role
+      }
       // for (const iterator of this.words2) {
       //     this.certificate.push(iterator.value)
       //   } 
@@ -481,10 +473,10 @@ var prof = {
         created_by_ip: localStorage.getItem('Systemip')
       }
       console.log(jsonData)
-     
+
       this.loader.show();
       this.service.update_profile(jsonData).subscribe(data => {
-     
+
         if (data.data['update_profile']['success'] == 'true') {
           this.loader.hide();
           this.alert.openAlert(data.data['update_profile'].message, null)
@@ -631,7 +623,7 @@ var prof = {
     }
   }
 
-  uploadFile(){
+  uploadFile() {
     console.log('in')
   }
   profileUpdateData(img) {
@@ -654,39 +646,74 @@ var prof = {
   }
   words2 = [{ value: '' }];
 
-  add() {
-    this.words2.push({ value: '' });
+  add(i) {
+    console.log(i, this.words2)
+    if (this.words2[i].value == "") {
+      this.alert.openAlert('Certificate link cannot be empty', null)
+    } else
+      this.words2.push({ value: '' });
+    console.log(this.words2, i)
   }
 
+  removenewLink(index) {
+    if (this.words2.length == 1) {
+      this.alert.openAlert("Can't delete  when there is only one row", null);
+      return false;
+    } else {
+      this.words2.splice(index, 1);
+      return true;
+    }
 
+  }
 
 
   //ADDED BY MYTHREYI
 
   addnewQual(index, q, qual) {
-    console.log(this.qualification_obj, this.qual)
+    console.log(index, this.qual, this.qualification_obj)
     if (this.qual && this.qual[0] && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
-      console.log(this.qualification_obj)
       this.qualification_obj[0].qualification = this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qual[0].level_detail[0]._id || null;
       this.qualification_obj[0].board_university = this.qual[0].board && this.qual[0].board.length == 1 && this.qual[0].board[0]._id || null;
       this.qualification_obj[0].institute = this.qual[0].institute_detail && this.qual[0].institute_detail[0]._id || null;
-      this.qualification_obj[0].discipline = this.qual[0].discipline && this.qual[0].discipline[0]._id || null;
-      this.qualification_obj[0].specification = this.qual[0].specification_detail && this.qual[0].specification_detail[0]._id || null;
+      this.qualification_obj[0].discipline = this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qual[0].discipline[0]._id || null;
+      this.qualification_obj[0].specification = this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qual[0].specification_detail[0]._id || null;
       this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing || null;
       this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage) || null;
       // console.log(this.qualification_obj)
     }
     // console.log(index, q, qual, this.qual)
-    this.qual.push({
-      board: '',
-      institute_detail: '',
-      discipline: '',
-      specification_detail: '',
-      year_of_passing: '',
-      percentage: '',
-      level_detail: '',
-    });
+
+    if (this.qualification_obj[index].qualification == null ||
+      this.qualification_obj[index].board_university == null ||
+      this.qualification_obj[index].institute == null ||
+      this.qualification_obj[index].discipline == null ||
+      this.qualification_obj[index].percentage == null ||
+      this.qualification_obj[index].specification == null ||
+      this.qualification_obj[index].year_of_passing == null)
+      this.alert.openAlert('Please fill all details', null)
+    else {
+      this.qual.push({
+        board: '',
+        institute_detail: '',
+        discipline: '',
+        specification_detail: '',
+        year_of_passing: '',
+        percentage: '',
+        level_detail: '',
+      });
+      this.qualification_obj.push({
+        qualification : null,
+        board_university : null,
+        institute : null,
+        discipline : null,
+        percentage : null,
+        specification : null,
+        year_of_passing : null
+      })
+    }
+      
+    console.log(this.qual, index, this.qualification_obj)
     return true;
   }
 
@@ -724,10 +751,10 @@ var prof = {
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
       this.qualification_obj[i].qualification = l._id;
-      console.log(this.qualification_obj)
+      // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
       this.qualification_obj[i].qualification = l._id;
-      console.log(this.qualification_obj)
+      // console.log(this.qualification_obj)
     }
 
   }

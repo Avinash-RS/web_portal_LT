@@ -33,7 +33,6 @@
             },
             "styles": [
               "src/styles.scss",
-              "src/styles-app-loading.scss",
               "src/app/learner/learner.scss",
               "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"

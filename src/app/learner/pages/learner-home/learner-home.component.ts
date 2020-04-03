@@ -20,17 +20,10 @@ export class LearnerHomeComponent implements OnInit {
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) { 
     }
   ngOnInit() {
-    // if (this.gs.checkLogout()) {
-    //   this.userDetailes = this.gs.checkLogout()
-    //   console.log('hi',this.userDetailes)
-    // }
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    // console.log(this.router.getCurrentNavigation().extras.state.hello);
-    this.state$ = this.activatedRoute.paramMap
-      .pipe(filter(e => e instanceof NavigationStart),
-        map(() => this.router.getCurrentNavigation().extras.state.hello)
-      )
-    console.log(this.state$)
+    if (this.gs.checkLogout()) {
+      this.userDetailes = this.gs.checkLogout()
+      console.log('hi',this.userDetailes)
+    }
   }
   myCourses() {
 
