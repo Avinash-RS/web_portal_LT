@@ -476,18 +476,14 @@ export class ProfileComponent implements OnInit {
         progress: progress,
         created_by_ip: localStorage.getItem('Systemip')
       }
-      console.log(jsonData)
 
       this.loader.show();
       this.service.update_profile(jsonData).subscribe(data => {
-
         if (data.data['update_profile']['success'] == 'true') {
           this.loader.hide();
           this.alert.openAlert(data.data['update_profile'].message, null)
           this.showdeletedicon = true;
-
-          console.log(data.data['update_profile'])
-
+          this.router.navigate(['/Learner/MyCourse']);
         } else {
           this.alert.openAlert(data.data['update_profile'].message, null)
         }
@@ -528,7 +524,6 @@ export class ProfileComponent implements OnInit {
   otpverification() {
     this.loader.show();
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
-
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
@@ -544,7 +539,6 @@ export class ProfileComponent implements OnInit {
   otpverify() {
     this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
-
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.dialog.closeAll();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
@@ -570,7 +564,6 @@ export class ProfileComponent implements OnInit {
   }
   //Update Password
   updatePassword() {
-    //console.log(this.currentUser.username, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword)
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
     this.service.get_change_password_updateprofile(localStorage.getItem('username'), this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
@@ -622,14 +615,13 @@ export class ProfileComponent implements OnInit {
           this.urlImage = data
           localStorage.setItem('user_img', 'https://rajeshkumarranjan.blob.core.windows.net/' + this.urlImage.path)
           this.urlImage = localStorage.getItem('user_img')
-          //this.profileUpdateData(this.urlImage.url)
         })
       }
     }
   }
 
   uploadFile() {
-    console.log('in')
+
   }
   profileUpdateData(img) {
     var jsonData = {
