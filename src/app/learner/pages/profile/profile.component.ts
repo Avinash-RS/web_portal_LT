@@ -1,10 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from "@angular/material";
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, NgModel } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
 
 
   //my3
+  @ViewChild('lvl') private lvl: NgModel;
   qualification_obj: any = [];
   //
   user_id_data:any;
@@ -763,9 +764,8 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else {
-          this.alert.openAlert('Fill other lever', null);
-          // l.id = null;
-          // l.level_name = null;
+          this.alert.openAlert('Fill other level', null);
+          // this.lvl.reset(null)
         }
       }
       else
@@ -776,9 +776,8 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else{
-          this.alert.openAlert('Fill other lever', null);
-          // l.id = null;
-          // l.level_name = null;
+          this.alert.openAlert('Fill other level', null);
+          // this.lvl.reset(null)
         }
       }
       else
@@ -953,8 +952,31 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { year_of_passing: item })) {
+          this.qualification_obj[i].year_of_passing = item
+        }
+        else {
+          console.log(this.qual,i)
+          this.qual[i].year_of_passing = null
+          this.alert.openAlert('Fill other year', null);
+        }
+      }
+      else
       this.qualification_obj[i].year_of_passing = item
+      // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { year_of_passing: item })) {
+          this.qualification_obj[i].year_of_passing = item
+        }
+        else {
+          console.log(this.qual,i)
+          this.qual[i].year_of_passing = null
+          this.alert.openAlert('Fill other year', null);
+        }
+      }
+      else
       this.qualification_obj[i].year_of_passing = item
     }
   }
