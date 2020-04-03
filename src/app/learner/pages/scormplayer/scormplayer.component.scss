@@ -1,0 +1,34 @@
+.player {
+    margin-top: 2%;
+    align-items: center;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+    height: 635px;
+    border: 1px solid lightgray;
+} 
+
+.space{
+    // color: ;
+}
+
+// .mat-ink-bar {
+//     position: absolute;
+//     bottom: 0;
+//     height: 2px;
+//     background-color: #ffc107 !important;
+//     transition: .5s cubic-bezier(.35,0,.25,1);
+// }
+
+// .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+//     background-color: #ffc107 !important;
+// }
+
+.mat {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: #1f3777 !important;
+    font-weight: 900 !important;
+}

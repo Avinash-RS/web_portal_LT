@@ -1,0 +1,127 @@
+<!-- class="col-lg-12 col-md-12 col-sm-12 col-xs-12" -->
+<!-- <div class="example" style="z-index: -1;">
+  <div class="wishlst" (change)="selectWishlist(course)">
+    <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:red;"></i>
+    <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
+  </div>
+  <img *ngIf="course.course_img_url != 'null'" src="{{course.course_img_url}}">
+  <img *ngIf="course.course_img_url == 'null'" src="../../../../assets/learner/1.jpg">
+  <p class="title">{{course.course_name}}...</p>
+  <p class="rating">
+    <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
+    <span class="details"><strong>{{course.rating}}</strong> {{course.max_student_enrollments_allowed | number}}
+      <strong class="price">Rs {{course.price | number }}</strong></span>
+  </p>
+
+  <button mat-raised-button *ngIf="from == 'myCourse'" class="status" block (click)="goTocourse(course.text || 'Start')"
+    [ngStyle]="{'background-color':course.text === 'Start' ? 
+      '#1f3777' : course.text === 'Resume' ? '#2661ff' : course.text === 'Completed' ? '028514' : '#1f3777' }">{{course.text || 'Start'}}</button>
+  <br>
+  <small class="progressBar"
+    *ngIf="from == 'myCourse'">{{course.text === 'Resume' && course.statusValue + '%' || null}}</small>
+  <mat-progress-bar *ngIf="course.text === 'Resume'" mode="determinate" value="{{course.statusValue}}">
+  </mat-progress-bar>
+
+  <div class="content">
+    <div class="text">
+      <button (click)="selectWishlist(course)" class="wishlstinContent">
+        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == true" style="color:red;"></i>
+        <i class="fa fa-heart" aria-hidden="true" *ngIf="course.wishlisted == false" style=" color: transparent;"></i>
+      </button>
+      <p (click)="gotoDescription()">
+        Description
+      </p>
+      <p class="course_description" (click)="gotoDescription(course)">
+        {{course.short_description}}
+      </p>
+      <div class="bottomButtons">
+        <button id="buy_now" mat-raised-button class="buy_now" (click)="login()">Buy Now
+        </button>
+        <button id="add_to_cart" mat-raised-button class="buy_now" (click)="login()">Add
+          to cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <!-- <br> -->
+  <div class="row wishlist">
+    <div class="col-md-9 col-sm-9 col-9"></div>
+    <div class="col-md-2 col-sm-2 col-2">
+      <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn">
+        <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
+        <mat-icon *ngIf="course.wishlisted == false" style="color:transparent;">favorite</mat-icon>
+      </button>
+    </div>
+    <div class="col-md-1 col-sm-1 col-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <img *ngIf="course.course_img_url != 'null'" src="{{course.course_img_url}}">
+      <img *ngIf="course.course_img_url == 'null'" src="../../../../assets/learner/1.jpg">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 f_wt_400 f_sz_14 float_left">
+      {{course.course_name}}
+    </div>
+  </div>
+  <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
+  <div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-5 col-5 display_flex">
+      <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
+        class="m-t-15 m-l-5">{{course.rating}}</strong>
+    </div>
+    <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
+    </div>
+    <div class=" col-lg-5 col-md-5 m-t-15 col-sm-5 col-5" *ngIf="from != 'myCourse'"> <strong>Rs {{course.price | number }}</strong>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
+      <button mat-flat-button *ngIf="from == 'myCourse'" disabled = "{{final_status === 'Completed'}}" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
+        (click)="final_status != 'Completed' && goTocourse(final_status || 'Start')" [ngStyle]="{'background-color':final_status === null ? 
+        '#1f3777' : final_status === 'Resume' ? '#2661ff' : final_status === 'Completed' ? '#028514' : '#1f3777' }">
+        {{final_status || 'Start'}}</button>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
+      <small *ngIf="from == 'myCourse'">{{final_status === 'Resume' && course.statusValue + '%' || null}}</small>
+      <mat-progress-bar *ngIf="final_status === 'Resume'" mode="determinate" value="{{course.statusValue}}">
+      </mat-progress-bar>
+    </div>
+  </div> -->
+
+  <div class="overlay" (click)="gotoDescription()" *ngIf="from != 'myCourse'">
+    <br><br>
+    <div class="row" (click)="gotoDescription()">
+      <div class="col-md-12" style="text-align: center;">
+        Description
+      </div>
+    </div>
+    <br>
+    <div class="row" (click)="gotoDescription()">
+      <div class="col-md-12">
+        <p class="course_description">
+          {{course.short_description}}
+        </p>
+      </div>
+    </div>
+    <div class="row bottomButtons"  *ngIf="from != 'myCourse'">
+      <div class="col-md-5 col-lg-5 col-sm-5 col-5">
+        <button id="buy_now" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Buy Now
+        </button>
+      </div>
+      <div class="col-md-7 col-lg-7 col-sm-7 col-7">
+        <button id="add_to_cart" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Add
+          to cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

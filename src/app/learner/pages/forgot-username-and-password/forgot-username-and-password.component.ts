@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertServiceService } from 'src/app/common/services/handlers/alert-service.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import * as myGlobals from '../../../common/globals'; 
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import * as myGlobals from '@core/globals'; 
 @Component({
   selector: 'app-forgot-username-and-password',
   templateUrl: './forgot-username-and-password.component.html',
@@ -29,6 +29,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
 
   ngOnInit() {
+    var user = localStorage.getItem('UserDetails')
+    this.currentUser = JSON.parse(user);
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('',myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),
@@ -65,7 +67,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.loader.show();
     this.service.forgotUsernameandPassword(this.type,this.subtype,this.forgotUsername.value.mobile,this.forgotUsername.value.email)
     .subscribe(data => {
-       
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
             this.loader.hide();
@@ -79,6 +80,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
 
   getUserDetails(){
     this.loader.show();
+    this.recoveryTypes = [];
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
       if (data.data['get_forgot_password_byusername']['success'] == 'true') {
         this.loader.hide();
@@ -90,7 +92,12 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       }
   })
   }
-  
+  change(event){
+    console.log(event.target.value)
+    if(event.target.value.length > 0){
+      this.recoveryTypes = [];
+    }
+  }
   
 
   forgotPassword(recovertype){
@@ -106,7 +113,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
           })
     }else{
       this.type = "password"
-      this.service.forgotUsernameandPassword(this.type,recovertype.type,this.forgotUsername.value.mobile,this.forgotUsername.value.email)
+      this.service.forgotUsernameandPassword(this.type,recovertype.type,this.forgotUsername.value.mobile,recovertype.value)
       .subscribe(data => {
             this.loader.show();
             if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {

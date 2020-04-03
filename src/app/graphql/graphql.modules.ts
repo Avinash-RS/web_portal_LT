@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule,isDevMode  } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { DefaultOptions } from 'apollo-client/ApolloClient';
+import { environment } from '../../environments/environment';
+// import { environment } from '@env/environment'
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -25,10 +27,15 @@ const defaultOptions: DefaultOptions = {
 
 export class GraphqlModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
-    apollo.create({
-      link: httpLink.create({ uri: 'http://40.76.47.212:3000/graphql'}),
-      cache: new InMemoryCache(),
-      defaultOptions: defaultOptions,
-    });
+    if (isDevMode()) {
+      apollo.create({
+        link: httpLink.create({ uri: environment.apiUrl + 'graphql'}),
+        cache: new InMemoryCache(),
+        defaultOptions: defaultOptions,
+      });
+    } else {
+      
+    }
+   
   }
 }
