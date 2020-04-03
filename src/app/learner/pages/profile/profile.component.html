@@ -371,7 +371,7 @@
             <div *ngIf="showotp">
               <button class="popupbtns" (click)="otpverify()">Verify</button>
             </div><br>
-            <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
+            <div *ngIf="showotp" class="account">Don't get code?<button class="resendbtn" (click)="Resendcode()">Resend code</button></div>
           </form>
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
