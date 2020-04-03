@@ -237,6 +237,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+
   // View Profile
   getprofileDetails(userid) {
     console.log('inside getprofile')
@@ -369,6 +370,9 @@ export class ProfileComponent implements OnInit {
 
    
     if (this.profileDetails.is_student_or_professional == 'student') {
+      // this.prof.total_experience = '';
+      // this.prof.organization = '';
+      // this.prof.job_role = '';
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
@@ -545,6 +549,7 @@ var prof = {
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
 
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
+        this.dialog.closeAll();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.showotp = false;
         this.isenable = true;
@@ -553,7 +558,7 @@ var prof = {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
       }
     })
-    this.dialog.closeAll();
+    
   }
   Resendcode() {
     this.loader.show();

@@ -288,12 +288,12 @@
                           name="totExp" maxlength="2" required>
                       </div>
                       <div class="col-sm-4">
-                        <input [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
+                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
                           [(ngModel)]="prof.organization" name="currentOrg" minlength="4"
-                          maxlength="30" required>
+                          maxlength="16" required>
                       </div>
                       <div class="col-sm-4">
-                        <input [disabled]='showdeletedicon' minlength="4" maxlength="30" class="inputs"
+                        <input type="text"  mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' minlength="4" maxlength="16" class="inputs"
                           placeholder="Current role" [(ngModel)]="prof.job_role"
                           name="currentRole" required>
                       </div>
