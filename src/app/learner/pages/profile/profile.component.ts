@@ -8,6 +8,8 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
+import * as _ from "lodash";
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -87,6 +89,7 @@ export class ProfileComponent implements OnInit {
   uppercase: boolean = false;
   number: boolean = false;
   spicalcharacter: boolean = false;
+  undefinedCheck: boolean;
 
   constructor(
     private alert: AlertServiceService,
@@ -249,10 +252,10 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
         this.loader.hide();
         // this.profileDetails.about_you 
-        if(this.userData.user_profile.length!=0){
-        this.userData.progress=this.userData.user_profile[0].progress
-        }else{
-          this.userData.progress=this.userData.progress
+        if (this.userData.user_profile.length != 0) {
+          this.userData.progress = this.userData.user_profile[0].progress
+        } else {
+          this.userData.progress = this.userData.progress
         }
         // if(this.profileDetails){
         if (this.userData.user_profile.length == 0) {
@@ -586,18 +589,18 @@ export class ProfileComponent implements OnInit {
       if (data.data['update_email_onprofile']['success'] == 'true') {
         console.log(data.data['update_email_onprofile'].message)
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-        setTimeout( ()=>{
+        setTimeout(() => {
           this.ngOnInit();
-          }, 3000)
-        
+        }, 3000)
+
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
   }
-   closedialogbox(){
+  closedialogbox() {
     this.dialog.closeAll();
-   }
+  }
 
   onSelectFile(event) {
     this.selectfile = <File>event.target.files[0];
@@ -647,10 +650,14 @@ export class ProfileComponent implements OnInit {
   words2 = [{ value: '' }];
 
   add(i) {
-    console.log(i, this.words2)
+    console.log(i, this.words2.length -1,this.words2.length-1 != i)
     if (this.words2[i].value == "") {
       this.alert.openAlert('Certificate link cannot be empty', null)
-    } else
+    } 
+    // else if (this.words2.length > 1 && this.words2.length-1 != i && _.find(this.words2, { value :this.words2[i].value})) {
+    //   this.alert.openAlert('Certificate link already present', null)
+    // } 
+    else
       this.words2.push({ value: '' });
     console.log(this.words2, i)
   }
@@ -703,16 +710,16 @@ export class ProfileComponent implements OnInit {
         level_detail: '',
       });
       this.qualification_obj.push({
-        qualification : null,
-        board_university : null,
-        institute : null,
-        discipline : null,
-        percentage : null,
-        specification : null,
-        year_of_passing : null
+        qualification: null,
+        board_university: null,
+        institute: null,
+        discipline: null,
+        percentage: null,
+        specification: null,
+        year_of_passing: null
       })
     }
-      
+
     console.log(this.qual, index, this.qualification_obj)
     return true;
   }
@@ -737,6 +744,8 @@ export class ProfileComponent implements OnInit {
     //end
 
     //woraround 3 - complex
+
+
     if (this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].qualification = this.qual[0].level_detail[0]._id;
@@ -750,11 +759,31 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      this.qualification_obj[i].qualification = l._id;
-      // console.log(this.qualification_obj)
+      console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { qualification: l._id })) {
+          this.qualification_obj[i].qualification = l._id;
+        } else {
+          this.alert.openAlert('Fill other lever', null);
+          // l.id = null;
+          // l.level_name = null;
+        }
+      }
+      else
+        this.qualification_obj[i].qualification = l._id;
     } else if (this.qualification_obj[i] != undefined) {
-      this.qualification_obj[i].qualification = l._id;
-      // console.log(this.qualification_obj)
+      console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { qualification: l._id })) {
+          this.qualification_obj[i].qualification = l._id;
+        } else{
+          this.alert.openAlert('Fill other lever', null);
+          // l.id = null;
+          // l.level_name = null;
+        }
+      }
+      else
+        this.qualification_obj[i].qualification = l._id;
     }
 
   }
@@ -781,14 +810,28 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      this.qualification_obj[i].board_university = l._id;
-      // console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { board_university: l._id })) {
+          this.qualification_obj[i].board_university = l._id;
+        } else {
+          this.alert.openAlert('Fill other lever', null);
+        }
+      }
+      else
+        this.qualification_obj[i].board_university = l._id;
     } else if (this.qualification_obj[i] != undefined) {
-      this.qualification_obj[i].board_university = l._id;
-      // console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { board_university: l._id })) {
+          this.qualification_obj[i].board_university = l._id;
+        }
+        else {
+          this.alert.openAlert('Fill other board', null);
+        }
+      }
+      else
+        this.qualification_obj[i].board_university = l._id;
     }
   }
-
   getIns(l, i) {
     if (this.qual[0].institute_detail && this.qual[0].institute_detail.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
@@ -802,11 +845,27 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      this.qualification_obj[i].institute = l._id;
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { institute: l._id })) {
+          this.qualification_obj[i].institute = l._id;
+        } else {
+          this.alert.openAlert('Fill other institute', null);
+        }
+      }
+      else
+        this.qualification_obj[i].institute = l._id;
       // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
-      this.qualification_obj[i].institute = l._id;
-      // console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { institute: l._id })) {
+          this.qualification_obj[i].institute = l._id;
+        }
+        else {
+          this.alert.openAlert('Fill other institute', null);
+        }
+      }
+      else
+        this.qualification_obj[i].institute = l._id;
     }
   }
 
@@ -823,11 +882,25 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      this.qualification_obj[i].discipline = l._id;
-      // console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { discipline: l._id })) {
+          this.qualification_obj[i].discipline = l._id;
+        } else {
+          this.alert.openAlert('Fill other discipline', null);
+        }
+      }
+      else
+        this.qualification_obj[i].discipline = l._id;
     } else if (this.qualification_obj[i] != undefined) {
-      this.qualification_obj[i].discipline = l._id;
-      // console.log(this.qualification_obj)
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { discipline: l._id })) {
+          this.qualification_obj[i].discipline = l._id;
+        } else {
+          this.alert.openAlert('Fill other discipline', null);
+        }
+      }
+      else
+        this.qualification_obj[i].discipline = l._id;
     }
   }
   getspecicification(l, i) {
@@ -843,10 +916,28 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      this.qualification_obj[i].specification = l._id;
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { specification: l._id })) {
+          this.qualification_obj[i].specification = l._id;
+        }
+        else {
+          this.alert.openAlert('Fill other specification', null);
+        }
+      }
+      else
+        this.qualification_obj[i].specification = l._id;
       // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
-      this.qualification_obj[i].specification = l._id;
+      if (this.qualification_obj.length > 1) {
+        if (!_.find(this.qualification_obj, { specification: l._id })) {
+          this.qualification_obj[i].specification = l._id;
+        }
+        else {
+          this.alert.openAlert('Fill other specification', null);
+        }
+      }
+      else
+        this.qualification_obj[i].specification = l._id;
       // console.log(this.qualification_obj)
     }
   }

@@ -178,12 +178,13 @@
                       <!-- {{qual | json}}<br>{{qual.length}}<br>{{qualification.institute_detail | json}}<br>
                       {{qualification.institute_detail[0]._id}} -->
                       <!-- {{level_detail[i]}} -->
+                      
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.level_detail && qualification.level_detail[0] && qualification.level_detail[0]._id"
                           name="level_detail{{i}}" #lvl="ngModel" placeholder="Level" required>
                           <mat-option [value]="lv._id" *ngFor="let lv of levelValue" (click)="getLevel(lv,i)">
-                            {{lv.level_name}}
+                            {{lv.level_name}} 
                           </mat-option>
                         </mat-select>
                       </div>
