@@ -238,11 +238,12 @@
                       </div>
                       <div class="col-sm-3">
                         <input [disabled]='showdeletedicon' type="text" class="inputs" placeholder="Percentage"
-                          mask="00.00" [(ngModel)]="qualification.percentage" name="percentage{{i}}"
+                          mask="00.00" [(ngModel)]="qualification.percentage" suffix="%" name="percentage{{i}}"
                           (focusout)="getPerccent(qualification.percentage,i)" #name="ngModel" required>
                       </div>
                       <div class="col-sm-3 plusicon">
-                        <mat-icon (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
+                        <!-- {{i}} {{qual.length}} {{qual.length-1}} -->
+                        <mat-icon *ngIf = "i == qual.length-1 && qual.length < 15" (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
                         <mat-icon (click)="removelastQual(i)">delete</mat-icon>
                       </div>
                     </div><br>
@@ -258,8 +259,9 @@
                     [(ngModel)]="words2[in]" name="name{{in}}" #name="ngModel" required /> -->
                   </div>
                   <div class="col-sm-3 plusicon">
-                    <mat-icon (click)="add()" [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
-                    <mat-icon (click)="removenewLink(i)" [disabled]='showdeletedicon'>delete</mat-icon>
+
+                    <mat-icon *ngIf = "in == words2.length-1 && words2.length < 15" (click)="add(in)" [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
+                    <mat-icon (click)="removenewLink(in)" [disabled]='showdeletedicon'>delete</mat-icon>
                     <!-- <mat-icon (click)="test()">delete</mat-icon> -->
                   </div>
                 </div><br>
@@ -318,10 +320,10 @@
             <div class="form-group">
               <label class="title">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
+                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
                 <div *ngIf="f.mailid.errors.required">Email is required</div>
-                <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
+                <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div>
             <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
@@ -335,10 +337,6 @@
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
-        <span>
-          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-        </span>
-     
         <h1 class="head">Change the Mobile No</h1>
         <mat-dialog-content style="width: 285px;margin-top: 24px;">
           <form [formGroup]="otpForm">
@@ -373,7 +371,7 @@
             <div *ngIf="showotp">
               <button class="popupbtns" (click)="otpverify()">Verify</button>
             </div><br>
-            <div *ngIf="showotp" class="account">Don't get code?<b (click)="Resendcode()">Resend code</b></div>
+            <div *ngIf="showotp" class="account">Don't get code?<button class="resendbtn" (click)="Resendcode()">Resend code</button></div>
           </form>
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
