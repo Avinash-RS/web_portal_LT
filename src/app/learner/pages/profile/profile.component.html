@@ -238,7 +238,7 @@
                       </div>
                       <div class="col-sm-3">
                         <input [disabled]='showdeletedicon' type="text" class="inputs" placeholder="Percentage"
-                          mask="00.00" [(ngModel)]="qualification.percentage" name="percentage{{i}}"
+                          mask="00.00" [(ngModel)]="qualification.percentage" suffix="%" name="percentage{{i}}"
                           (focusout)="getPerccent(qualification.percentage,i)" #name="ngModel" required>
                       </div>
                       <div class="col-sm-3 plusicon">
