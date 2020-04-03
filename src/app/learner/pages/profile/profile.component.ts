@@ -763,7 +763,7 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else {
-          this.alert.openAlert('Fill other lever', null);
+          this.alert.openAlert('Fill other level', null);
           // l.id = null;
           // l.level_name = null;
         }
@@ -776,7 +776,7 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else{
-          this.alert.openAlert('Fill other lever', null);
+          this.alert.openAlert('Fill other level', null);
           // l.id = null;
           // l.level_name = null;
         }
