@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   //my3
   qualification_obj: any = [];
   //
+  user_id_data:any;
   mailForm: FormGroup;
   otpForm: FormGroup;
   passwordForm: FormGroup;
@@ -575,7 +576,8 @@ var prof = {
     //console.log(this.currentUser.username, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword)
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
-    this.service.get_change_password_updateprofile(localStorage.getItem('username'), this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
+    this.user_id_data=JSON.parse(localStorage.getItem( 'UserDetails'))
+    this.service.get_change_password_updateprofile(this.user_id_data.user_id, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
 
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
