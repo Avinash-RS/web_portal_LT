@@ -155,6 +155,7 @@ export class ProfileComponent implements OnInit {
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
+      this.closedialogbox();
 
 
 
@@ -593,15 +594,20 @@ var prof = {
   updateEmail() {
     this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
       if (data.data['update_email_onprofile']['success'] == 'true') {
+        console.log(data.data['update_email_onprofile'].message)
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-        this.ngOnInit();
+        setTimeout( ()=>{
+          this.ngOnInit();
+          }, 3000)
+        
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
     })
-    this.dialog.closeAll();
   }
-
+   closedialogbox(){
+    this.dialog.closeAll();
+   }
 
   onSelectFile(event) {
     this.selectfile = <File>event.target.files[0];
