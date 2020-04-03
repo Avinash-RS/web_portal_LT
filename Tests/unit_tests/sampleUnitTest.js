@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var http = require('http');
  
-describe('sampleUnitTests', function () {
+describe('sampleUnitTest', function () {
     before(function () {
     });
   
