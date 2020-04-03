@@ -590,10 +590,7 @@ export class ProfileComponent implements OnInit {
       if (data.data['update_email_onprofile']['success'] == 'true') {
         console.log(data.data['update_email_onprofile'].message)
         this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-        setTimeout(() => {
           this.ngOnInit();
-        }, 3000)
-
       } else {
         this.alert.openAlert(data.data['update_email_onprofile'].message, null)
       }
