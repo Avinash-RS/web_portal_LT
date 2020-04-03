@@ -160,7 +160,7 @@ export class ProfileComponent implements OnInit {
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
-      this.closedialogbox();
+      // this.closedialogbox();
 
 
 
@@ -582,7 +582,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
-    this.dialog.closeAll();
+    // this.dialog.closeAll();
   }
   //Update Email
   updateEmail() {
