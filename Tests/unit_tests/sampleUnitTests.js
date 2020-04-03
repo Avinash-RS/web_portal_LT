@@ -1,5 +1,4 @@
 var assert = require('assert');
-var app = require('../../Application/app');
 var http = require('http');
  
 describe('sampleUnitTests', function () {
@@ -7,7 +6,7 @@ describe('sampleUnitTests', function () {
     });
   
     after(function () {
-        app.close();
+       
     });
 
     it('Should return 200', function (done) {
