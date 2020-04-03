@@ -1,4 +1,6 @@
 @import "../../../../assets/variable.scss";
+
+
 .overAll{
   margin-left: 6px;
   margin-top: 6px;
@@ -298,4 +300,8 @@ div.account{
   color:$color-blue;
   font-size: 10px;
   font-weight: 600;
+}
+
+.mat-dialog-content{
+  overflow: hidden !important;
 }

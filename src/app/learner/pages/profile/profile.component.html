@@ -324,7 +324,7 @@
                 <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
               </div>
             </div>
-            <button class="popupbtns" (click)="updateEmail()">
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
               Submit
             </button><br><br>
           </form><br>
