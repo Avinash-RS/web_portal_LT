@@ -318,10 +318,10 @@
             <div class="form-group">
               <label class="title">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }">
+                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
               <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
                 <div *ngIf="f.mailid.errors.required">Email is required</div>
-                <div *ngIf="f.mailid.errors.pattern">Email pattern is invalid</div>
+                <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div>
             <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
