@@ -506,6 +506,8 @@ export class ProfileComponent implements OnInit {
 
   editmobno(mobRef: TemplateRef<any>) {
     this.dialog.open(mobRef);
+    this.isenable = true;
+    this.showotp=false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       otp1: new FormControl("", []),
@@ -559,7 +561,6 @@ export class ProfileComponent implements OnInit {
   Resendcode() {
     this.loader.show();
     this.service.submit_otp(this.currentUser.user_id, 'this.currentUser._id', this.otpForm.value.mobile, this.currentUser.email).subscribe(data => {
-      this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
