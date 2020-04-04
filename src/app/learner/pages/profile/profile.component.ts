@@ -397,6 +397,14 @@ export class ProfileComponent implements OnInit {
           this.alert.openAlert('Total experience should be less than or equal to 70 years', null);
           this.profileDetailCheck = false;
         }
+        if(this.prof.organization.length < 4){
+          this.alert.openAlert('Current Organization must have minimum 4 characters length',null);
+          this.profileDetailCheck = false;
+        }
+        if(this.prof.job_role.length < 4){
+          this.alert.openAlert('Current role must have minimum 4 characters length', null);
+          this.profileDetailCheck = false;
+        }
 
       } else {
         this.loader.hide();
