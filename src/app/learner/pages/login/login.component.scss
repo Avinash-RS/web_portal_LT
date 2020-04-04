@@ -36,11 +36,17 @@ mat-form-field {
 mat-card-title {
     font-weight: 400;
 }
+.fa {
+    cursor: pointer;
+    font-size: 16px;
+}
 
-// mat-error {
-//     float: left;
-//     margin-left: 10%;
-//     margin-top: -5%;
-// }
-
+.errspan {
+    float: right;
+    margin-right: 10px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+    color: black;
+}
  

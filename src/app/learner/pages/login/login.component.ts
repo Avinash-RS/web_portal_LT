@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, Output, EventEmitter, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,11 @@ import * as myGlobals from '@core/globals';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
+  capsOn;
+  show : boolean = false;
+
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
@@ -73,5 +77,19 @@ export class LoginComponent implements OnInit {
     // this.router.navigate(['/Learner'])
 
 
+  }
+}
+
+@Directive({ selector: '[capsLock]' })
+export class TrackCapsDirective {
+  @Output('capsLock') capsLock = new EventEmitter<Boolean>();
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    this.capsLock.emit(event.getModifierState && event.getModifierState('CapsLock'));
+  }
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+    this.capsLock.emit(event.getModifierState && event.getModifierState('CapsLock'));
   }
 }
