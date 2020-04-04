@@ -586,16 +586,22 @@ export class ProfileComponent implements OnInit {
     // this.dialog.closeAll();
   }
   //Update Email
-  updateEmail() {
-    this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
-      if (data.data['update_email_onprofile']['success'] == 'true') {
-        console.log(data.data['update_email_onprofile'].message)
-        this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-          this.ngOnInit();
-      } else {
-        this.alert.openAlert(data.data['update_email_onprofile'].message, null)
-      }
-    })
+  updateEmail(mailForm) {
+    console.log(mailForm)
+    if(mailForm == false){
+        this.alert.openAlert('Email Id is invalid',null)
+    }else{
+      this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
+        if (data.data['update_email_onprofile']['success'] == 'true') {
+          console.log(data.data['update_email_onprofile'].message)
+          this.alert.openAlert(data.data['update_email_onprofile'].message, null);
+            this.ngOnInit();
+        } else {
+          this.alert.openAlert(data.data['update_email_onprofile'].message, null)
+        }
+      })
+    }
+   
   }
   closedialogbox() {
     this.dialog.closeAll();

@@ -330,13 +330,13 @@
                 <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div>
-            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
               Submit
             </button><br><br>
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="bt"> 
-          <div class="account">Don't receive link?<button class="resendbtn" (click)="updateEmail()">Resend link</button></div>
+          <div class="account">Don't receive link?<button class="resendbtn" (click)="updateEmail(mailForm.valid)">Resend link</button></div>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
