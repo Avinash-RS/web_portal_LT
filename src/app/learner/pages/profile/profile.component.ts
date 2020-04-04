@@ -554,6 +554,7 @@ export class ProfileComponent implements OnInit {
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
         this.showotp = false;
         this.isenable = true;
       }
@@ -562,12 +563,9 @@ export class ProfileComponent implements OnInit {
   }
 //Resend OTP
   Resendcode() {
-    this.otp = '';
-    this.loader.show();
+    this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
-      console.log('otp',this.otp)
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
-            this.loader.hide();
             this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
             this.showotp = true;
           }
