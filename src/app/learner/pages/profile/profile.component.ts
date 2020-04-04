@@ -547,25 +547,30 @@ export class ProfileComponent implements OnInit {
     this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-        this.dialog.closeAll();
+        this.closedialogbox();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.showotp = false;
         this.isenable = true;
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        this.showotp = false;
+        this.isenable = true;
       }
     })
     
   }
+//Resend OTP
   Resendcode() {
+    this.otp = '';
     this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id, 'this.currentUser._id', this.otpForm.value.mobile, this.currentUser.email).subscribe(data => {
-      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
-        this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
-        this.showotp = true;
-      }
+    this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
+      console.log('otp',this.otp)
+      if (data.data['resend_otp_onprofile']['success'] == 'true') {
+            this.loader.hide();
+            this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
+            this.showotp = true;
+          }
     })
   }
   //Update Password

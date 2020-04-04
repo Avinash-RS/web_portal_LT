@@ -9,7 +9,7 @@ import {user_registration,user_registration_mobile_otp_send,user_registration_mo
   get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
   view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
   get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
-  update_verifyotp_mobile_onprofile,update_email_onprofile,update_profile} from "./operations/learner_mutation"
+  update_verifyotp_mobile_onprofile,update_email_onprofile,update_profile,resend_otp_onprofile} from "./operations/learner_mutation"
  
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -274,6 +274,15 @@ update_profile(userData){
     variables:userData
   })
 }
+resend_otp_onprofile(user_id){
+  return this.Apollo.query({
+    query: resend_otp_onprofile,
+    variables: {
+      user_id: user_id
+    }
+  })
+}
 };
+
   
 
