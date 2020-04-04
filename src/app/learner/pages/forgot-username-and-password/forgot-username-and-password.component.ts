@@ -96,6 +96,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     console.log(event.target.value)
     if(event.target.value.length > 0  || event.target.value.length == ''){
       this.recoveryTypes = [];
+      this.isenable= false
     }
   }
   
