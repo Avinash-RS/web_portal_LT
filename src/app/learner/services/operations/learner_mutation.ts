@@ -535,3 +535,13 @@ export const update_email_onprofile = gql`
     }
   }
 `;
+export const resend_otp_onprofile = gql`
+  mutation resend_otp_onprofile($user_id: String) {
+    resend_otp_onprofile(
+      user_id:$user_id
+    ) {
+      message
+      success
+    }
+  }
+`;

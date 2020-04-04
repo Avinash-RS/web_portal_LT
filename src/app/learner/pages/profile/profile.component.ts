@@ -160,7 +160,7 @@ export class ProfileComponent implements OnInit {
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
-      this.closedialogbox();
+      // this.closedialogbox();
 
 
 
@@ -397,6 +397,14 @@ export class ProfileComponent implements OnInit {
           this.alert.openAlert('Total experience should be less than or equal to 70 years', null);
           this.profileDetailCheck = false;
         }
+        if(this.prof.organization.length < 4){
+          this.alert.openAlert('Current Organization must have minimum 4 characters length',null);
+          this.profileDetailCheck = false;
+        }
+        if(this.prof.job_role.length < 4){
+          this.alert.openAlert('Current role must have minimum 4 characters length', null);
+          this.profileDetailCheck = false;
+        }
 
       } else {
         this.loader.hide();
@@ -506,6 +514,8 @@ export class ProfileComponent implements OnInit {
 
   editmobno(mobRef: TemplateRef<any>) {
     this.dialog.open(mobRef);
+    this.isenable = true;
+    this.showotp=false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       otp1: new FormControl("", []),
@@ -545,26 +555,28 @@ export class ProfileComponent implements OnInit {
     this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-        this.dialog.closeAll();
+        this.closedialogbox();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.showotp = false;
         this.isenable = true;
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+        this.showotp = false;
+        this.isenable = true;
       }
     })
     
   }
+//Resend OTP
   Resendcode() {
-    this.loader.show();
-    this.service.submit_otp(this.currentUser.user_id, 'this.currentUser._id', this.otpForm.value.mobile, this.currentUser.email).subscribe(data => {
-      this.otp = '';
-      if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
-        this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
-        this.showotp = true;
-      }
+    this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+    this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
+      if (data.data['resend_otp_onprofile']['success'] == 'true') {
+            this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
+            this.showotp = true;
+          }
     })
   }
   //Update Password
@@ -582,22 +594,25 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
       }
     })
-    this.dialog.closeAll();
+    // this.dialog.closeAll();
   }
   //Update Email
-  updateEmail() {
-    this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
-      if (data.data['update_email_onprofile']['success'] == 'true') {
-        console.log(data.data['update_email_onprofile'].message)
-        this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000)
-
-      } else {
-        this.alert.openAlert(data.data['update_email_onprofile'].message, null)
-      }
-    })
+  updateEmail(mailForm) {
+    console.log(mailForm)
+    if(mailForm == false){
+        this.alert.openAlert('Email Id is invalid',null)
+    }else{
+      this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
+        if (data.data['update_email_onprofile']['success'] == 'true') {
+          console.log(data.data['update_email_onprofile'].message)
+          this.alert.openAlert(data.data['update_email_onprofile'].message, null);
+            this.ngOnInit();
+        } else {
+          this.alert.openAlert(data.data['update_email_onprofile'].message, null)
+        }
+      })
+    }
+   
   }
   closedialogbox() {
     this.dialog.closeAll();

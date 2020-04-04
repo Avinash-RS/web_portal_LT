@@ -315,6 +315,9 @@
 
          <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
+        <span class="close">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
         <h1 class="head">Change the Email ID</h1>
         <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
           <form [formGroup]="mailForm">
@@ -327,25 +330,28 @@
                 <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div>
-            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail()">
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
               Submit
             </button><br><br>
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="bt"> 
-          <div class="account">Don't receive link?<b (click)="updateEmail()">Resend link</b></div>
+          <div class="account">Don't receive link?<button class="resendbtn" (click)="updateEmail(mailForm.valid)">Resend link</button></div>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
+        <span class="close">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
         <h1 class="head">Change the Mobile No</h1>
         <mat-dialog-content style="width: 285px;margin-top: 24px;">
           <form [formGroup]="otpForm">
             <div class="form-group">
               <label class="title">Enter new mobile no</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control"
-                [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
-              <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid':  f.mobile.errors}" required />
+              <div *ngIf="f.mobile.errors" class="invalid-feedback">
                 <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
                 <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
                 <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
@@ -383,6 +389,9 @@
       </ng-template>
       <!---------------------------------Password Dialog--------------------------------->
       <ng-template  #passwordDialog>
+        <span class="close">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
         <h1 class="head">Change the Password</h1>
         <mat-dialog-content style="width: 300px;margin-top: 24px;" >
           <form   [formGroup]="passwordForm">
