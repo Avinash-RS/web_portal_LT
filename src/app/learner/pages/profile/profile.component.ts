@@ -692,7 +692,6 @@ export class ProfileComponent implements OnInit {
   //ADDED BY MYTHREYI
 
   addnewQual(index, q, qual) {
-    console.log(index, this.qual, this.qualification_obj)
     if (this.qual && this.qual[0] && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].qualification = this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qual[0].level_detail[0]._id || null;
@@ -702,10 +701,7 @@ export class ProfileComponent implements OnInit {
       this.qualification_obj[0].specification = this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qual[0].specification_detail[0]._id || null;
       this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing || null;
       this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage) || null;
-      // console.log(this.qualification_obj)
     }
-    // console.log(index, q, qual, this.qual)
-
     if (this.qualification_obj[index].qualification == null ||
       this.qualification_obj[index].board_university == null ||
       this.qualification_obj[index].institute == null ||
@@ -734,8 +730,6 @@ export class ProfileComponent implements OnInit {
         year_of_passing: null
       })
     }
-
-    console.log(this.qual, index, this.qualification_obj)
     return true;
   }
 
@@ -749,8 +743,9 @@ export class ProfileComponent implements OnInit {
     //   //end
     // }
     // //workaround 1 - simple
-    // // this.qual[i].level_detail = []
-    // // this.qual[i].level_detail.push(l)
+    this.qual[i].level_detail = []
+    this.qual[i].level_detail.push(l)
+    // console.log(this.qual)
     // //end
     // //workaround 2
     // this.qualification_obj.push({});
@@ -764,7 +759,6 @@ export class ProfileComponent implements OnInit {
     if (this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].qualification = this.qual[0].level_detail[0]._id;
-      // console.log(this.qualification_obj)
     }
 
     if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length > 0) {
@@ -774,24 +768,24 @@ export class ProfileComponent implements OnInit {
     }
     if (this.qualification_obj[i] == undefined) {
       this.qualification_obj.push({});
-      console.log(this.qualification_obj)
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else {
-          this.alert.openAlert('Fill other level', null);
+          this.alert.openAlert('Duplicate level', null);
+          this.qual[i].level_detail = null
           // this.lvl.reset(null)
         }
       }
       else
         this.qualification_obj[i].qualification = l._id;
     } else if (this.qualification_obj[i] != undefined) {
-      console.log(this.qualification_obj)
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
         } else{
-          this.alert.openAlert('Fill other level', null);
+          this.alert.openAlert('Duplicate level', null);
+          this.qual[i].level_detail = null
           // this.lvl.reset(null)
         }
       }
@@ -805,8 +799,8 @@ export class ProfileComponent implements OnInit {
     //   this.qual[0].board_university = {};
     //   this.qual[0].board_university = this.qual[0].board[0]
     // }
-    // // this.qual[i].board = []
-    // // this.qual[i].board.push(l)
+    this.qual[i].board = []
+    this.qual[i].board.push(l)
     // this.qual[i].board_university = {}
     // this.qual[i].board_university = l;
     // // console.log(this.qual)
@@ -814,7 +808,6 @@ export class ProfileComponent implements OnInit {
     if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].board_university = this.qual[0].board[0]._id
-      // console.log(this.qualification_obj)
     }
     if (this.qual[0].board && this.qual[0].board.length == 1 && this.qualification_obj.length > 0) {
       if (this.qualification_obj[0].board_university == undefined) {
@@ -827,7 +820,8 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { board_university: l._id })) {
           this.qualification_obj[i].board_university = l._id;
         } else {
-          this.alert.openAlert('Fill other lever', null);
+          this.alert.openAlert('Duplicate lever', null);
+          this.qual[i].board = null
         }
       }
       else
@@ -838,7 +832,8 @@ export class ProfileComponent implements OnInit {
           this.qualification_obj[i].board_university = l._id;
         }
         else {
-          this.alert.openAlert('Fill other board', null);
+          this.alert.openAlert('Duplicate board', null);
+          this.qual[i].board = null
         }
       }
       else
@@ -846,10 +841,11 @@ export class ProfileComponent implements OnInit {
     }
   }
   getIns(l, i) {
+    this.qual[i].institute_detail = []
+    this.qual[i].institute_detail.push(l)
     if (this.qual[0].institute_detail && this.qual[0].institute_detail.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].institute = this.qual[0].institute_detail[0]._id
-      // console.log(this.qualification_obj)
     }
     if (this.qual[0].institute_detail && this.qual[0].institute_detail.length == 1 && this.qualification_obj.length > 0) {
       if (this.qualification_obj[0].institute == undefined) {
@@ -862,19 +858,20 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { institute: l._id })) {
           this.qualification_obj[i].institute = l._id;
         } else {
-          this.alert.openAlert('Fill other institute', null);
+          this.alert.openAlert('Duplicate institute', null);
+          this.qual[i].institute_detail = null;
         }
       }
       else
         this.qualification_obj[i].institute = l._id;
-      // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { institute: l._id })) {
           this.qualification_obj[i].institute = l._id;
         }
         else {
-          this.alert.openAlert('Fill other institute', null);
+          this.alert.openAlert('Duplicate institute', null);
+          this.qual[i].institute_detail = null;
         }
       }
       else
@@ -883,10 +880,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getdis(l, i) {
+    this.qual[i].discipline = []
+    this.qual[i].discipline.push(l)
     if (this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].discipline = this.qual[0].discipline[0]._id
-      // console.log(this.qualification_obj)
     }
     if (this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qualification_obj.length > 0) {
       if (this.qualification_obj[0].discipline == undefined) {
@@ -899,7 +897,8 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { discipline: l._id })) {
           this.qualification_obj[i].discipline = l._id;
         } else {
-          this.alert.openAlert('Fill other discipline', null);
+          this.alert.openAlert('Duplicate discipline', null);
+          this.qual[i].discipline = null
         }
       }
       else
@@ -909,7 +908,8 @@ export class ProfileComponent implements OnInit {
         if (!_.find(this.qualification_obj, { discipline: l._id })) {
           this.qualification_obj[i].discipline = l._id;
         } else {
-          this.alert.openAlert('Fill other discipline', null);
+          this.alert.openAlert('Duplicate discipline', null);
+          this.qual[i].discipline = null
         }
       }
       else
@@ -917,10 +917,11 @@ export class ProfileComponent implements OnInit {
     }
   }
   getspecicification(l, i) {
+    this.qual[i].specification_detail = []
+    this.qual[i].specification_detail.push(l)
     if (this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qualification_obj.length == 0) {
       this.qualification_obj.push({});
       this.qualification_obj[0].specification = this.qual[0].specification_detail[0]._id
-      // console.log(this.qualification_obj)
     }
     if (this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qualification_obj.length > 0) {
       if (this.qualification_obj[0].specification == undefined) {
@@ -934,24 +935,24 @@ export class ProfileComponent implements OnInit {
           this.qualification_obj[i].specification = l._id;
         }
         else {
-          this.alert.openAlert('Fill other specification', null);
+          this.alert.openAlert('Duplicate specification', null);
+          this.qual[i].specification_detail = null
         }
       }
       else
         this.qualification_obj[i].specification = l._id;
-      // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { specification: l._id })) {
           this.qualification_obj[i].specification = l._id;
         }
         else {
-          this.alert.openAlert('Fill other specification', null);
+          this.alert.openAlert('Duplicate specification', null);
+          this.qual[i].specification_detail = null
         }
       }
       else
         this.qualification_obj[i].specification = l._id;
-      // console.log(this.qualification_obj)
     }
   }
 
@@ -972,23 +973,20 @@ export class ProfileComponent implements OnInit {
           this.qualification_obj[i].year_of_passing = item
         }
         else {
-          console.log(this.qual,i)
           this.qual[i].year_of_passing = null
-          this.alert.openAlert('Fill other year', null);
+          this.alert.openAlert('Duplicate year', null);
         }
       }
       else
       this.qualification_obj[i].year_of_passing = item
-      // console.log(this.qualification_obj)
     } else if (this.qualification_obj[i] != undefined) {
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { year_of_passing: item })) {
           this.qualification_obj[i].year_of_passing = item
         }
         else {
-          console.log(this.qual,i)
           this.qual[i].year_of_passing = null
-          this.alert.openAlert('Fill other year', null);
+          this.alert.openAlert('Duplicate year', null);
         }
       }
       else
@@ -1012,11 +1010,5 @@ export class ProfileComponent implements OnInit {
     } else if (this.qualification_obj[i] != undefined) {
       this.qualification_obj[i].percentage = parseFloat(item)
     }
-  }
-
-
-  test() {
-    console.log(this.qualification_obj)
-
   }
 }
