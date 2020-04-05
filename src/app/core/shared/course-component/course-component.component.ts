@@ -86,7 +86,7 @@ export class CourseComponentComponent implements OnInit {
   goTocourse(status) {
     if (this.final_status != 'Completed') {
       let detail1 = {
-        id: 'SequencingRandomTest_SCORM20043rdEdition', 
+        id: 'Scaffolding', 
         user: this.userDetail.user_id
       }
       console.log(detail1)
