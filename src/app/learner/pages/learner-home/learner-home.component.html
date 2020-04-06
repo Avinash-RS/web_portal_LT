@@ -1,4 +1,5 @@
 <app-header></app-header>
+<div class="limiter">
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
@@ -19,16 +20,79 @@
 
 
  <!-- <------------ Streams------------->
+  <h1 class="head">Streams</h1>
+    <mat-grid-list [cols]="breakpoint" rowHeight="2:1.7" (window:resize)="onResize($event)">
+      <mat-grid-tile>
+        <div class="card">
+          <div class="small-box bg-red">
+            <div class="icon">
+              <i class="fa fa-star-o "></i>
+            </div>
+          </div>
+          <div class="profileimg">
+            <img class="svgimg" src="../../../../assets/images/vocational.svg">
+          </div>
+         
+          <div class="container">
+            <h4 class="title">Vocational Institute</h4>
+          </div>
+        </div>
+      </mat-grid-tile>
 
 
-
+      <mat-grid-tile>
+        <div class="card">
+          <div class="small-box bg-blue">
+            <div class="icon">
+              <i class="fa fa-star-o "></i>
+            </div>
+          </div>
+          <div class="profileimg bg-blue">
+            <img class="svgimg" src="../../../../assets/images/College.svg">
+          </div>
+          <div class="container">
+            <h4 class="title">College/University</h4>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="card">
+          <div class="small-box bg-yellow">
+            <div class="icon">
+              <i class="fa fa-star-o "></i>
+            </div>
+          </div>
+          <div class="profileimg bg-yellow">
+            <img class="svgimg" src="../../../../assets/images/student.svg">
+          </div>
+          <div class="container">
+            <h4 class="title">Student</h4>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="card">
+          <div class="small-box bg-green">
+            <div class="icon">
+              <i class="fa fa-star-o "></i>
+            </div>
+          </div>
+          <div class="profileimg bg-green">
+            <img class="svgimg" src="../../../../assets/images/government.svg">
+          </div>
+          <div class="container">
+            <h4 class="title">Government</h4>
+          </div>
+        </div>
+      </mat-grid-tile>
+  
+    </mat-grid-list>
 <!-- <------------End Streams-------------> 
 
 
 
   <!-- <------------ Popular categorires------------->
-
-
+  <h1 class="head">Popular categorires</h1>
 
 <!-- <------------End Popular categorires------------->  
 
@@ -84,3 +148,4 @@
 
 
 <!-- <------------End Footer------------->  
+</div>
