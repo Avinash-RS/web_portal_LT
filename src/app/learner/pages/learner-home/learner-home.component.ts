@@ -79,14 +79,17 @@ export class LearnerHomeComponent implements OnInit {
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
 
-    this.bannerImg = [{
-      src: '../../../../assets/learner/home1.jpg'
-    }, {
-      src: '../../../../assets/learner/home2.jpg'
-    },
-    {
-      src: '../../../../assets/learner/lens.jpg'
-    }]
+    this.bannerImg = [
+      {
+        src: '../../../../assets/learner/home3.jpg'
+      }, {
+        src: '../../../../assets/learner/home1.jpg'
+      }, {
+        src: '../../../../assets/learner/home2.jpg'
+      },
+      {
+        src: '../../../../assets/learner/lens.jpg'
+      }]
 
     this.partnerImg = [{
       src: '../../../../assets/learner/vit.png'
@@ -97,8 +100,8 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
+      src: '../../../../assets/learner/gla.jpg'
+    }, {
       src: '../../../../assets/learner/vit.png'
     }, {
       src: '../../../../assets/learner/saveetha.png'
@@ -107,8 +110,8 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
+      src: '../../../../assets/learner/kl.jpg'
+    }, {
       src: '../../../../assets/learner/vit.png'
     }, {
       src: '../../../../assets/learner/saveetha.png'
@@ -117,29 +120,20 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
-      src: '../../../../assets/learner/vit.png'
-    }, {
-      src: '../../../../assets/learner/saveetha.png'
-    },
-    {
-      src: '../../../../assets/learner/srm.png'
-    },
-    {
-      src: '../../../../assets/learner/8.jpg'
-    },]
+      src: '../../../../assets/learner/psit.jpg'
+    }
+    ]
 
     this.service.getMyCourse('5e7f5125dba4466d9707629c').subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
           this.myCoursesList = getMyCourse.data.get_course_by_user.message;
-          // this.loader.hide
         }
       }
     });
 
   }
+  
   myCourses() {
 
   }

@@ -12,11 +12,20 @@
 </div> -->
 
 <!-- <------------ Banner------------->
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <owl-carousel-o [options]="bannerOptions" class="banner">
+        <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</div>
 
-<owl-carousel-o [options]="bannerOptions" class="banner">
-  <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
-  </ng-template>
-</owl-carousel-o>
+
+
 
 <!-- <------------End Banner------------->
 
@@ -69,12 +78,23 @@
 <!-- <------------ Our Partners------------->
 
 <br><br>
-<h1>Our Partners</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Our Partners</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <owl-carousel-o [options]="partnerOptions" class="partner">
+        <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</div>
 <br>
-<owl-carousel-o [options]="partnerOptions" class="partner">
-  <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
-  </ng-template>
-</owl-carousel-o>
+
 
 <!-- <------------End  Our Partners------------->
 
