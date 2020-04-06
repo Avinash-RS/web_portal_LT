@@ -11,7 +11,7 @@
 <owl-carousel-o [options]="bannerOptions" class="banner">
   <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
   </ng-template>
-</owl-carousel-o>
+</owl-carousel-o><br>
 
 <!-- <------------End Banner------------->
 
@@ -86,13 +86,22 @@
     </mat-grid-list>
 <!-- <------------End Streams-------------> 
 
-<!-- <------------End Streams------------->
-
-
   <!-- <------------ Popular categorires------------->
-  <h1 class="head">Popular categorires</h1>
+  <h1 class="head">Popular categorires</h1><br><br>
 
+  <owl-carousel-o [options]="popularCategorires" class="partner">
+    <ng-template carouselSlide *ngFor="let pop of popularCourses"   >
+      <div class="card1">
+       
+        <img src="{{pop.img}}" alt="Snow" style="width: 100%; opacity: 53%;height: 92px;;">
+       
+        <div class="centered">{{pop.name}}</div>
+        <span class="info-box-icon">
 
+        </span>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
 <!-- <------------End Popular categorires------------->
 
 

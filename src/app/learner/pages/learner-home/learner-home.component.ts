@@ -69,9 +69,34 @@ export class LearnerHomeComponent implements OnInit {
     },
     nav: true
   }
+
+  popularCategorires: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 5
+      }
+    },
+    nav: true
+  }
   partnerImg: {}[];
 
-
+  popularCourses:{}[];
 
 
 
@@ -83,7 +108,30 @@ export class LearnerHomeComponent implements OnInit {
       this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
       this.userDetailes =JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.popularCourses = [{
+      img: '../../../../assets/images/shutterstock_131655707.jpg',
+      name:'Business'
+    }, {
+      img: '../../../../assets/images/shutterstock_345349079.jpg',
+      name:'IT & Software'
+    },
+    {
+      img: '../../../../assets/images/shutterstock_393692671.jpg',
+      name:'Personal Development'
+    },{
+      img: '../../../../assets/images/shutterstock_746652751.jpg',
+      name:'Photography'
+    },{
+      img: '../../../../assets/images/shutterstock_746652751.jpg',
+      name:'Development'
+    },{
+      img: '../../../../assets/images/shutterstock_746652751.jpg',
+      name:'Soft Skill'
+    },
+    
+    
 
+  ]
     this.bannerImg = [{
       src: '../../../../assets/learner/home1.jpg'
     }, {
