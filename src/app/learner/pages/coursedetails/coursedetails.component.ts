@@ -47,7 +47,7 @@ export class CoursedetailsComponent implements OnInit {
     },
     nav: true
   }
-
+  // open : boolean = false;
   wishlist: any = [];
   syllabus: {}[];
   open: boolean = false;
@@ -215,12 +215,6 @@ export class CoursedetailsComponent implements OnInit {
     this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
       console.log(viewCourse)
     });
-  }
-
-  openb() {
-    console.log(this.open)
-    this.open = !this.open
-    console.log(this.open)
   }
 
   selectWishlist(course) {

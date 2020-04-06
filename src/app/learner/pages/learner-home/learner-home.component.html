@@ -1,22 +1,19 @@
 <app-header></app-header>
 <div class="limiter">
-<nav aria-label="breadcrumb" class="coursebreadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">Welcome to Lxp </li>
-    </ol>
-  </nav>
-<div class="wrap-body" *ngIf="userDetailes != null">
-    <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/MyCourse']">My courses</button>
-</div>
+
+
+<!-- <div class="wrap-body" *ngIf="userDetailes != null">
+  <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/MyCourse']">My courses</button>
+</div> -->
 
 <!-- <------------ Banner------------->
 
-
+<owl-carousel-o [options]="bannerOptions" class="banner">
+  <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
+  </ng-template>
+</owl-carousel-o>
 
 <!-- <------------End Banner------------->
-
 
 
  <!-- <------------ Streams------------->
@@ -89,62 +86,77 @@
     </mat-grid-list>
 <!-- <------------End Streams-------------> 
 
+<!-- <------------End Streams------------->
 
 
   <!-- <------------ Popular categorires------------->
   <h1 class="head">Popular categorires</h1>
 
-<!-- <------------End Popular categorires------------->  
+
+<!-- <------------End Popular categorires------------->
 
 
 
-  <!-- <------------ Trending Courses------------->
+<!-- <------------ Trending Courses------------->
+<!-- <br>
+<h1>Trending Courses</h1>
+<br>
+<owl-carousel-o [options]="trendingOptions" class="">
+  <ng-template carouselSlide>
+    <app-top-courses [from]="'cd'" [CourseList] = "myCoursesList" [showCartBtn] = "false" [showWishlist] = "false" [canNavigate]="false" [showStatus] = "false"></app-top-courses>
+  </ng-template>
+</owl-carousel-o> -->
+
+<!-- <------------End Trending Courses------------->
 
 
 
-<!-- <------------End Trending Courses------------->  
-
-
-  
-  <!-- <------------ Learning path------------->
+<!-- <------------ Learning path------------->
 
 
 
-<!-- <------------End Learning path------------->  
+<!-- <------------End Learning path------------->
 
 
-    <!-- <------------ What's New------------->
-
-
-
-<!-- <------------End What's New------------->  
-
-
-    <!-- <------------ Our Partners------------->
+<!-- <------------ What's New------------->
 
 
 
-<!-- <------------End  Our Partners------------->  
+<!-- <------------End What's New------------->
 
 
-      <!-- <------------ Happy customers------------->
+<!-- <------------ Our Partners------------->
+
+<br><br>
+<h1>Our Partners</h1>
+<br>
+<owl-carousel-o [options]="partnerOptions" class="partner">
+  <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
+  </ng-template>
+</owl-carousel-o>
+
+<!-- <------------End  Our Partners------------->
+
+
+<!-- <------------ Happy customers------------->
 
 
 
-<!-- <------------End  Happy customers------------->  
+<!-- <------------End  Happy customers------------->
 
 
 
-  
-      <!-- <------------ Take me to Expert------------->
+
+<!-- <------------ Take me to Expert------------->
 
 
 
-<!-- <------------End   Take me to Expert------------->  
+<!-- <------------End   Take me to Expert------------->
 
 
 <!-- <------------Footer------------->
 
+<app-footer></app-footer>
 
 
 <!-- <------------End Footer------------->  

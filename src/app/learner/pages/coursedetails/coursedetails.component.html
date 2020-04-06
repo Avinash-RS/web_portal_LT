@@ -38,7 +38,7 @@
                             {{course.course_language}}</td>
                     </tr>
                 </table>
-                <i class="fa fa-play course_preview_icon" aria-hidden="true" (click)="coursePlay()"></i>
+                <i class="fa fa-play course_preview_icon pointer" aria-hidden="true" (click)="coursePlay()"></i>
                 <div class="course_preview" (click)="coursePlay()">
                     <h2>Course <br> Preview</h2>
                 </div>
@@ -66,9 +66,9 @@
                         <br>
                         <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
                         <div>
-                            <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"
+                            <span class="btn btn-primary btn-primary btn2 pointer"><i class="fa fa-share"
                                     style="-webkit-text-stroke-width: 2px;"></i> Share</span>
-                            <span class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)">
+                            <span class="btn btn-primary btn-primary btn2 pointer" (click)="selectWishlist(course)">
                                 <i class="fa fa-heart" *ngIf="course.wishlisted == false"
                                     style="-webkit-text-stroke-width: 2px;"></i>
                                 <i class="fa fa-heart" *ngIf="course.wishlisted == true"
@@ -444,8 +444,28 @@
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s,
                 </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+
             </mat-accordion>
-            <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+            <mat-card-footer *ngIf="course.review_and_faq" class="pointer" (click) = "open = !open">{{open ? 'View Less >' : 'View More >' }}</mat-card-footer>
         </div>
     </div>
     <br><br><br>
@@ -456,12 +476,12 @@
     <h2 class=" m-l-5">
         Frequently bought together
     </h2>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+    <app-top-courses [from]="'cd'" [CourseList] = "course.frequently_bought_together" [showCartBtn] = "true" [showWishlist] = "true" [canNavigate]="true" [showStatus] = "false"></app-top-courses>
 
     <h2 class="m-l-5">
         People Also Viewed
     </h2>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+    <app-top-courses [from]="'cd'" [CourseList] = "course.people_also_viewed" [showCartBtn] = "true" [showWishlist] = "true" [canNavigate]="true" [showStatus] = "false"></app-top-courses>
 </div>
 
 <br><br><br><br><br>

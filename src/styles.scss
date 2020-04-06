@@ -133,6 +133,9 @@ button:disabled:hover {
   width: 10%;
 }
 
+.pointer {
+  cursor: pointer;
+}
 .capitalize {
   text-transform: capitalize;
 }
@@ -264,7 +267,7 @@ body {
 }
 
 .button {
-  margin-top: 25px;
+  // margin-top: 25px;
 }
 
 .column2 {

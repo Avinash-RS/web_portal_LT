@@ -13,7 +13,11 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 export class CourseComponentComponent implements OnInit {
   @Input('course') course: any;
-  @Input('from') from: any;
+  @Input('canNavigate') canNavigate: boolean;
+  @Input('showCartBtn') showCartBtn: boolean;
+  @Input('showWishlist') showWishlist: boolean;
+  @Input('showStatus') showStatus: boolean;
+
   userDetail: any;
   recorded_data: any;
   final_full_data: any;
