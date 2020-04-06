@@ -55,12 +55,13 @@ export class CoursedetailsComponent implements OnInit {
   userDetail: any;
   showShortDesciption = true;
   clicked: any = 'media';
+
   constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
     this.loader.show();
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    console.log('iuhiuuiiouou',detail, detail.id)
+    console.log('course',detail, detail.id)
     this.service.viewCurseByID(detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
@@ -71,6 +72,16 @@ export class CoursedetailsComponent implements OnInit {
       } else
         this.loader.hide();
     });
+    // this.service.viewCurseByID('1').subscribe((viewCourse: any) => {
+    //   if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+    //     this.course = viewCourse.data.viewcourse.message[0];
+    //     this.course.wishlisted = false;
+    //     this.course.wishlist_id =  null;
+    //     console.log(this.course)
+    //     this.loader.hide();
+    //   } else
+    //     this.loader.hide();
+    // });
 
   }
 

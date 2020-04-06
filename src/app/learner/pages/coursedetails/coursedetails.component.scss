@@ -1,35 +1,70 @@
 @import "../../assets/variable.scss";
-p,span, div,h1,h2,h3,small,strong {
+
+p,
+span,
+div,
+h1,
+h2,
+h3,
+small,
+strong {
     letter-spacing: 1px;
-    }
+}
 
 .m-l-2 {
     margin-left: 2%;
 }
+
 .m-l-20 {
     margin-left: 20%;
 }
+
 .m-l-15 {
     margin-left: 15%;
 }
+
 .section_1 {
-    background: url('../../../../assets/learner/lens.jpg') !important;
-    height: 65vh;
     background-size: cover !important;
     background-position: center;
     background-repeat: no-repeat !important;
     background-size: cover;
     padding: 0px;
-    // margin-top: 1vh;
-    opacity: 0.2;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(238, 238, 238, 0.774) !important;
+    background-blend-mode: color;
 }
 
 .section_1_card_1 {
-    width: 30%;
-    top: 21%;
-    float: right;
-    right: 5%;
-    height: 50vh;
+    z-index: 1;
+    width: 90%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 5%;
+}
+
+.section_1_card_1:before {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #f8f9fa !important;
+    background-blend-mode: color;
+    opacity: 0.5 !important;
+}
+
+.section_1_a {
+    margin-top: 5%;
+    padding: 0 4%;
+    width: 80%;
+    color: black !important;
+}
+
+.section_1 .section_1_card_1 {
+    height: auto;
 }
 
 .opacity {
@@ -75,7 +110,6 @@ p,span, div,h1,h2,h3,small,strong {
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
-    // background-color: #ebebeb;
     border-radius: 50px;
     border: 0.5px solid rgb(236, 236, 236);
     padding: 7px;
@@ -83,17 +117,18 @@ p,span, div,h1,h2,h3,small,strong {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 }
 
-
-.section_1_a {
-    // top: 8%;
-    // padding: 4%;
-    // width: 60%;
-    // color: black !important;
-    top: 19%;
-    padding: 0 4%;
-    width: 60%;
-    color: black !important;
+.course_preview_icon {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    color: black;
+    font-size: 50px;
+    background-color: #f8f9fa;
+    border-radius: 50px;
+    padding: 15px 15px 15px 27px;
+    margin-top: 3% !important;
 }
+
+
 
 .section_1_a {
     .course_name {
@@ -133,6 +168,7 @@ p,span, div,h1,h2,h3,small,strong {
     // margin-top: -9.5vh;
     margin-left: 15vh;
     margin-top: -9.5vh;
+    cursor: pointer;
 }
 
 
@@ -153,16 +189,17 @@ p,span, div,h1,h2,h3,small,strong {
     height: 11vh;
     border: 0.5px solid rgb(245, 245, 245);
     margin-top: 2vh;
-    -webkit-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    -moz-box-shadow: 1px 1px 1px 1px rgb(245, 245, 245);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    margin: 0;
+    // width: 100%;
+    border-bottom: 1px solid #e8e5e5;
 
     button {
         margin-left: 3%;
         border: none;
         box-shadow: none;
         height: 9vh;
-        font-size: 1.3em;
+        font-size: 1.4em;
     }
 
     button:active,
@@ -197,6 +234,7 @@ mat-card {
     z-index: -1;
     // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
 }
+
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
@@ -222,14 +260,17 @@ mat-card {
     width: 10px !important;
     font-size: 16px;
 }
+
 ::ng-deep .c_r .br-default .br-unit {
     width: 25px !important;
     font-size: 25px;
 }
+
 .m-l-2 {
     margin-top: -1px;
     margin-left: 2%;
 }
+
 .space_5 {
     margin-top: 2%;
     font-weight: 500;
@@ -245,7 +286,7 @@ h2 {
     color: black;
 }
 
-::ng-deep  .owl-theme .owl-nav [class*='owl-'] {
+::ng-deep .owl-theme .owl-nav [class*='owl-'] {
     color: #FFF;
     font-size: 20px !important;
     background: rgb(136, 136, 136);
@@ -288,24 +329,29 @@ h2 {
 }
 
 ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
-background-color: $color-maroon !important;
+    background-color: $color-maroon !important;
 }
-.coursebreadcrumb{
+
+.coursebreadcrumb {
     padding-top: 60px;
-    ol{
+
+    ol {
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
 }
-.whitefont{
+
+.whitefont {
     color: #fff !important;
 }
-.tabstyle{
-    box-shadow: none;
-    margin: 0;
-    width: 100%;
-    border-bottom: 1px solid #e8e5e5;
+
+.tabstyle {
+    // box-shadow: none;
+    // margin: 0;
+    // width: 100%;
+    // border-bottom: 1px solid #e8e5e5;
 }
+
 .btn2 {
     background-color: transparent !important;
     border: none;
@@ -317,33 +363,39 @@ background-color: $color-maroon !important;
     width: 24%;
     margin: 2%;
     padding: 11px 10px;
-    i{
+
+    i {
         box-shadow: none;
         border: red !important;
         -webkit-text-stroke-color: red !important;
         font-size: 14px !important;
         margin: 0 !important;
         padding: 0 !important;
-       
+
     }
-  }
-.day_left{
+}
+
+.day_left {
     font-size: 18px;
 }
-.iconmat .mat-button-wrapper{
-    padding:0 !important;
+
+.iconmat .mat-button-wrapper {
+    padding: 0 !important;
 }
-.mat-card-footer{
+
+.mat-card-footer {
     text-align: center;
     color: #db3137;
     font-size: 11px;
 }
+
 .show-less {
     height: 4rem;
     overflow: hidden;
     padding: 1rem 1rem 1rem 0
 }
-.viewtxt{
+
+.viewtxt {
     text-align: right;
     font-size: 11px;
     color: red;
@@ -352,30 +404,33 @@ background-color: $color-maroon !important;
 
 ul {
     list-style: none;
- }
+}
+
 ul li:before {
     content: "•";
-    font-size: 40px; /* or whatever */
+    font-size: 40px;
+    /* or whatever */
     padding-right: 15px;
     color: $color-blue;
     vertical-align: bottom;
     overflow: hidden;
- }
+}
 
- ::ng-deep .mat-tab-label .mat-tab-label-content {
-     color: red;
- }
+::ng-deep .mat-tab-label .mat-tab-label-content {
+    color: red;
+}
 
- ::ng-deep  .mat-tab-body-content {
-   overflow: hidden !important;
+::ng-deep .mat-tab-body-content {
+    overflow: hidden !important;
 }
 
 
 
 
-::ng-deep  .owl-item {
+::ng-deep .owl-item {
     display: inline-block !important;
-     }
-     ::ng-deep  .owl-carousel{
-        overflow:hidden !important;
-         }
+}
+
+::ng-deep .owl-carousel {
+    overflow: hidden !important;
+}
