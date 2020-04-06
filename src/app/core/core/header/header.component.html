@@ -24,9 +24,35 @@
       </ul>
     </ul>
 
+    <ul class="navbar-nav mr-auto" *ngIf="userDetailes == null">
+      <ul class="navbar-nav mr-auto">
+        <i class="fa fa-th box" aria-hidden="true"></i>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            Categories
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </ul>
 
-    <div class="input-group">
+
+    <div class="input-group"  *ngIf="userDetailes != null">
       <input class="form-control border-right-0" placeholder="  Search courses  ">
+      <span class="input-group-append bg-white border-left-0">
+        <span class="input-group-text bg-transparent">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
+
+    <div class="input-group" *ngIf="userDetailes == null">
+      <input class="form-control border-right-0" placeholder="  Search   ">
       <span class="input-group-append bg-white border-left-0">
         <span class="input-group-text bg-transparent">
           <i class="fa fa-search" aria-hidden="true"></i>
@@ -59,13 +85,8 @@
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
         <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
-          <!-- <a routerLink="[/Learner/profile]"></a> -->
           <label>Profile</label>
         </button>
-        <!-- added routerLink - Mythreyi -->
-        <!-- <button class="backgroundcol" routerLink="/Learner/profile" mat-menu-item>
-          <label>Profile</label>
-        </button> -->
         <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
           <label>My Course</label>
         </button>
@@ -83,13 +104,35 @@
         </button>
       </mat-menu>
     </div>
-  
-  
+
+    <div class="login_btn"   *ngIf="userDetailes == null">
+      <!-- 
+       -->
+      <ul class="navbar-nav mr-auto">
+        <li class="smallmenu2">
+          <button class="backgroundcol" routerLink="/Learner/register" >Register</button>
+         
+        </li>
+
+        <li class="smallmenu2">
+          <button class="backgroundcol" routerLink="/Learner/login" >Log in</button>
+        </li>
+
+      <li class="dropdown1">
+        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+          Help
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- <li><a href="#">Link</a></li>
+                      <li><a href="#">Link</a></li>
+                      <li><a href="#">Link</a></li> -->
+        </ul>
+      </li>
+      </ul>
+    </div>
   </div>
-  <div class="login_btn"  *ngIf="userDetailes == null">
-    <button class="backgroundcol" routerLink="/Learner/login" >Login</button>
-    <button class="backgroundcol" routerLink="/Learner/register" >Register</button>
-  </div>
+
 </nav>
 
 
@@ -128,7 +171,47 @@
         </a>
       </li><br><br>
     </ul>
+  </ul>
+</div>
+
+
+
+
+<div class="collapse navbar-collapse" id="navbarCollapse"  *ngIf="userDetailes == null">
+  <ul class="navbar-nav mr-auto" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto" id="navbarCollapse">
+      <li class="dropdownsmall">
+        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+         Categories
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+      <li class="smallmenu">
+        <a href="#">
+          Search
+        </a>
+      </li><br>
+
+      <li class="smallmenu2"  *ngIf="userDetailes == null">
+        <button class="backgroundcol2" routerLink="/Learner/register" >Register</button>
+      </li><br>
+
+      <li class="smallmenu2"  *ngIf="userDetailes == null">
+        <button class="backgroundcol2" routerLink="/Learner/login" >Login</button>
+        
+      </li><br>
+    </ul>
 
   </ul>
 
 </div>
+
+
+
+
+
+
+
+
