@@ -43,14 +43,14 @@
 
   <!-- <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <small *ngIf="from == 'myCourse'">{{final_status === 'Resume' && course.statusValue + '%' || null}}</small>
+      <small *ngIf="showStatus">{{final_status === 'Resume' && course.statusValue + '%' || null}}</small>
       <mat-progress-bar *ngIf="final_status === 'Resume'" mode="determinate" value="{{course.statusValue}}">
       </mat-progress-bar>
     </div>
   </div> -->
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
-    <br><br>
+    <br>
     <div class="row" (click)="gotoDescription()">
       <div class="col-md-12" style="text-align: center;">
         Description

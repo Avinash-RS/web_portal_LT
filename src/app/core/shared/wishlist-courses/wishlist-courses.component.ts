@@ -10,6 +10,10 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 export class WishlistCoursesComponent implements OnInit {
   wishlist: any = [];
   @Input('from') from: any;
+  @Input('showCartBtn') showCartBtn: boolean;
+  @Input('showWishlist') showWishlist: boolean; 
+  @Input('canNavigate') canNavigate: boolean;
+  @Input('showStatus') showStatus: boolean;
   breakpoint: number;
 
   constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }

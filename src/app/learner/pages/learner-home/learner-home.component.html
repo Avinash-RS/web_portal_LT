@@ -2,7 +2,7 @@
 <div class="limiter">
 
 
-<!-- <div class="wrap-body" *ngIf="userDetailes != null">
+  <!-- <div class="wrap-body" *ngIf="userDetailes != null">
   <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/MyCourse']">My courses</button>
 </div> -->
 
@@ -34,57 +34,58 @@
             <h4 class="title">Vocational Institute</h4>
           </div>
         </div>
-      </mat-grid-tile>
-
-
-      <mat-grid-tile>
-        <div class="card">
-          <div class="small-box bg-blue">
-            <div class="icon">
-              <i class="fa fa-star-o "></i>
-            </div>
-          </div>
-          <div class="profileimg bg-blue">
-            <img class="svgimg" src="../../../../assets/images/College.svg">
-          </div>
-          <div class="container">
-            <h4 class="title">College/University</h4>
-          </div>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div class="card">
-          <div class="small-box bg-yellow">
-            <div class="icon">
-              <i class="fa fa-star-o "></i>
-            </div>
-          </div>
-          <div class="profileimg bg-yellow">
-            <img class="svgimg" src="../../../../assets/images/student.svg">
-          </div>
-          <div class="container">
-            <h4 class="title">Student</h4>
-          </div>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div class="card">
-          <div class="small-box bg-green">
-            <div class="icon">
-              <i class="fa fa-star-o "></i>
-            </div>
-          </div>
-          <div class="profileimg bg-green">
-            <img class="svgimg" src="../../../../assets/images/government.svg">
-          </div>
-          <div class="container">
-            <h4 class="title">Government</h4>
-          </div>
-        </div>
-      </mat-grid-tile>
+    </mat-grid-tile>
   
-    </mat-grid-list>
-<!-- <------------End Streams-------------> 
+
+
+    <mat-grid-tile>
+      <div class="card">
+        <div class="small-box bg-blue">
+          <div class="icon">
+            <i class="fa fa-star-o "></i>
+          </div>
+        </div>
+        <div class="profileimg bg-blue">
+          <img class="svgimg" src="../../../../assets/images/College.svg">
+        </div>
+        <div class="container">
+          <h4 class="title">College/University</h4>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="card">
+        <div class="small-box bg-yellow">
+          <div class="icon">
+            <i class="fa fa-star-o "></i>
+          </div>
+        </div>
+        <div class="profileimg bg-yellow">
+          <img class="svgimg" src="../../../../assets/images/student.svg">
+        </div>
+        <div class="container">
+          <h4 class="title">Student</h4>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="card">
+        <div class="small-box bg-green">
+          <div class="icon">
+            <i class="fa fa-star-o "></i>
+          </div>
+        </div>
+        <div class="profileimg bg-green">
+          <img class="svgimg" src="../../../../assets/images/government.svg">
+        </div>
+        <div class="container">
+          <h4 class="title">Government</h4>
+        </div>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <!-- <------------End Streams------------->
 
   <!-- <------------ Popular categorires------------->
   <h1 class="head">Popular categorires</h1><br><br>
@@ -106,8 +107,8 @@
 
 
 
-<!-- <------------ Trending Courses------------->
-<!-- <br>
+  <!-- <------------ Trending Courses------------->
+  <!-- <br>
 <h1>Trending Courses</h1>
 <br>
 <owl-carousel-o [options]="trendingOptions" class="">
@@ -116,57 +117,63 @@
   </ng-template>
 </owl-carousel-o> -->
 
-<!-- <------------End Trending Courses------------->
+  <!-- <------------End Trending Courses------------->
 
 
 
-<!-- <------------ Learning path------------->
+  <!-- <------------ Learning path------------->
 
 
 
-<!-- <------------End Learning path------------->
+  <!-- <------------End Learning path------------->
 
 
-<!-- <------------ What's New------------->
-
-
-
-<!-- <------------End What's New------------->
-
-
-<!-- <------------ Our Partners------------->
-
-<br><br>
-<h1>Our Partners</h1>
-<br>
-<owl-carousel-o [options]="partnerOptions" class="partner">
-  <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
-  </ng-template>
-</owl-carousel-o>
-
-<!-- <------------End  Our Partners------------->
-
-
-<!-- <------------ Happy customers------------->
+  <!-- <------------ What's New------------->
 
 
 
-<!-- <------------End  Happy customers------------->
+  <!-- <------------End What's New------------->
+
+
+  <!-- <------------ Our Partners------------->
+
+  <br><br>
+  <div class="container">
+    <p class="f_size_30 color_blue center_align p-5px f_wt_500">
+      Our Partners
+    </p>
+    <div class="row">
+      <div class="col-md-12">
+        <owl-carousel-o [options]="partnerOptions" class="partner">
+          <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- <------------End  Our Partners------------->
+
+
+  <!-- <------------ Happy customers------------->
+
+
+
+  <!-- <------------End  Happy customers------------->
 
 
 
 
-<!-- <------------ Take me to Expert------------->
+  <!-- <------------ Take me to Expert------------->
 
 
 
-<!-- <------------End   Take me to Expert------------->
+  <!-- <------------End   Take me to Expert------------->
 
 
-<!-- <------------Footer------------->
-
-<app-footer></app-footer>
-
-
-<!-- <------------End Footer------------->  
+  <!-- <------------Footer------------->
+<br><br><br>
+  <app-footer></app-footer>
+  <!-- <------------End Footer------------->
 </div>

@@ -12,7 +12,7 @@ export class TopCoursesComponent implements OnInit {
   @Input('showCartBtn') showCartBtn: boolean;
   @Input('showWishlist') showWishlist: boolean; 
   @Input('canNavigate') canNavigate: boolean;
-  @Input('showStatus') showStatus: boolean
+  @Input('showStatus') showStatus: boolean;
   @Input('CourseList') CourseList: any = [];
 
   constructor() { }

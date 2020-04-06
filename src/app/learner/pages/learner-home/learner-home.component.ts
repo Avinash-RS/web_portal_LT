@@ -12,13 +12,11 @@ import { map, filter } from 'rxjs/operators';
 })
 export class LearnerHomeComponent implements OnInit {
 
-  tiles: any = [];
   userDetailes: any;
-  panelOpenState = false;
-  state$: any;
   breakpoint: number;
   bannerImg: {}[];
   myCoursesList: any;
+  partnerImg: {}[];
 
   bannerOptions: any = {
     loop: true,
@@ -94,7 +92,6 @@ export class LearnerHomeComponent implements OnInit {
     },
     nav: true
   }
-  partnerImg: {}[];
 
   popularCourses:{}[];
 
@@ -104,9 +101,9 @@ export class LearnerHomeComponent implements OnInit {
   constructor(public service: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) {
   }
+
   ngOnInit() {
-      this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
-      this.userDetailes =JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.popularCourses = [{
       img: '../../../../assets/images/shutterstock_131655707.jpg',
@@ -127,19 +124,21 @@ export class LearnerHomeComponent implements OnInit {
     },{
       img: '../../../../assets/images/shutterstock_746652751.jpg',
       name:'Soft Skill'
-    },
     
+  }]
     
 
-  ]
-    this.bannerImg = [{
-      src: '../../../../assets/learner/home1.jpg'
-    }, {
-      src: '../../../../assets/learner/home2.jpg'
-    },
-    {
-      src: '../../../../assets/learner/lens.jpg'
-    }]
+    this.bannerImg = [
+      {
+        src: '../../../../assets/learner/home3.jpg'
+      }, {
+        src: '../../../../assets/learner/home1.jpg'
+      }, {
+        src: '../../../../assets/learner/home2.jpg'
+      },
+      {
+        src: '../../../../assets/learner/lens.jpg'
+      }]
 
     this.partnerImg = [{
       src: '../../../../assets/learner/vit.png'
@@ -150,8 +149,8 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
+      src: '../../../../assets/learner/gla.jpg'
+    }, {
       src: '../../../../assets/learner/vit.png'
     }, {
       src: '../../../../assets/learner/saveetha.png'
@@ -160,8 +159,8 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
+      src: '../../../../assets/learner/kl.jpg'
+    }, {
       src: '../../../../assets/learner/vit.png'
     }, {
       src: '../../../../assets/learner/saveetha.png'
@@ -170,29 +169,20 @@ export class LearnerHomeComponent implements OnInit {
       src: '../../../../assets/learner/srm.png'
     },
     {
-      src: '../../../../assets/learner/8.jpg'
-    },{
-      src: '../../../../assets/learner/vit.png'
-    }, {
-      src: '../../../../assets/learner/saveetha.png'
-    },
-    {
-      src: '../../../../assets/learner/srm.png'
-    },
-    {
-      src: '../../../../assets/learner/8.jpg'
-    },]
+      src: '../../../../assets/learner/psit.jpg'
+    }
+    ]
 
     this.service.getMyCourse('5e7f5125dba4466d9707629c').subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
           this.myCoursesList = getMyCourse.data.get_course_by_user.message;
-          // this.loader.hide
         }
       }
     });
 
   }
+
   myCourses() {
 
   }

@@ -21,6 +21,12 @@ button:disabled:hover {
   cursor: not-allowed;
 }
 
+@media (min-width: 300px) {
+  .col-md-12 {
+    padding: 0px !important;
+  }
+}
+
 .container {
   max-width: 100% !important;
   overflow: hidden;
@@ -49,6 +55,7 @@ button:disabled:hover {
 .f_wt_initial {
   font-weight: initial
 }
+
 .f_size_12 {
   font-size: 12px;
 }
@@ -87,6 +94,10 @@ button:disabled:hover {
 
 .f_size_25 {
   font-size: 25px;
+}
+
+.f_size_30 {
+  font-size: 30px;
 }
 
 .width_100 {
@@ -136,6 +147,7 @@ button:disabled:hover {
 .pointer {
   cursor: pointer;
 }
+
 .capitalize {
   text-transform: capitalize;
 }
@@ -151,12 +163,12 @@ button:disabled:hover {
 .float_right {
   float: right;
   text-align: right;
-  text-align: end ;
+  text-align: end;
 }
 
 .float_left {
   float: left;
-  text-align: left ;
+  text-align: left;
 }
 
 .center_align {
@@ -215,6 +227,7 @@ td {
 .color_blue {
   color: $color-blue !important;
 }
+
 .color_white {
   color: #fff !important;
 }
@@ -236,12 +249,6 @@ body {
   margin: 8px;
 }
 
-
-// .br-default .br-unit:after {
-//   content: "\2605";
-//   color: #d2d2d2;
-// }
-
 .br-default .br-selected:after {
   color: $color-yellow !important;
 }
@@ -256,8 +263,6 @@ body {
 .example-full-width {
   width: 100%;
 }
-
-
 
 .parentcontent {
   display: flex;
@@ -360,6 +365,7 @@ body {
 .p-b-30 {
   padding-bottom: 30px !important;
 }
+
 .p-10px {
   padding: 10px !important;
 }
@@ -374,7 +380,7 @@ input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background:$color-light-blue;
+  background: $color-light-blue;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -388,18 +394,20 @@ label {
 
 .head {
   text-align: center;
-  color: #1F3777 !important;   
+  color: #1F3777 !important;
 }
-.mand{
+
+.mand {
   color: red !important;
 }
-mat-icon{
+
+mat-icon {
   cursor: pointer;
   color: #1F3777;
 }
+
 // .header{
 //   .mat-menu-content {
 //     background-color: #1F3777 !important;
 // }
 // }
-  
