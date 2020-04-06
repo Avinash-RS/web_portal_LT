@@ -1,12 +1,103 @@
 @import "../../../../assets/variable.scss";
 
-.mat-form-field + .mat-form-field {
+.mat-form-field+.mat-form-field {
     margin-left: 8px;
 }
-.coursebreadcrumb{
+
+.coursebreadcrumb {
     padding-top: 60px;
-    ol{
+
+    ol {
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
+}
+
+h1 {
+    color: $color-blue;
+    text-align: center;
+    font-weight: 500;
+    font-size: 27px;
+}
+
+::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
+    color: wheat;
+    font-size: 40px !important;
+    background: rgb(46, 46, 46);
+    display: inline-block;
+    cursor: pointer !important;
+    padding: 15px !important;
+    border-radius: 50px !important;
+    // width: 50px;
+    z-index: -1 !important;
+    opacity: 0.7;
+}
+
+::ng-deep .banner .owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    top: 300px;
+    z-index: 1 !important;
+    left: 30px;
+}
+
+::ng-deep .banner .owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    top: 300px;
+    z-index: 1 !important;
+    right: 30px;
+}
+
+::ng-deep .banner .owl-theme .owl-dots {
+    position: absolute;
+    top: 600px;
+    left: 48%;
+}
+
+::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+    background-color: black !important;
+}
+
+::ng-deep .owl-theme .owl-dots .owl-dot span {
+    background-color: rgb(110, 109, 109) !important;
+}
+
+::ng-deep .partner .owl-carousel .owl-item img {
+    width: 80%;
+}
+
+::ng-deep .partner .owl-carousel .owl-stage-outer {
+    width: 90%;
+    margin-left: 5%;
+}
+
+::ng-deep .partner .owl-carousel.owl-drag .owl-item {
+    text-align: -webkit-center;
+    width: 170.6px
+}
+
+::ng-deep .partner .owl-theme .owl-nav [class*='owl-'] {
+    color: wheat;
+    font-size: 30px !important;
+    background: rgb(46, 46, 46);
+    display: inline-block;
+    cursor: pointer !important;
+    padding: 10px !important;
+    border-radius: 50px !important;
+    width: 40px;
+    z-index: -1 !important;
+    opacity: 0.7;
+}
+
+::ng-deep .partner .owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    top: 20px;
+    z-index: 1 !important;
+    left: 30px;
+}
+
+::ng-deep .partner .owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    top: 20px;
+    z-index: 1 !important;
+    right: 30px;
 }

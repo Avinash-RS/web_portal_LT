@@ -1,25 +1,17 @@
 @import "../../../../assets/variable.scss";
-mat-card {
-    padding: 2% !important;
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+::ng-deep .mat-expansion-indicator {
+    margin-right: 25px !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    padding: 7px !important;
+    color: $color-blue;
 }
 .mat-card:not([class*=mat-elevation-z]) {
-   border: 0.5px solid lightgrey;
-}
-.top_course {
-    font-size: 15px;
-    font-weight: 600;
-    margin-left: 3%;
-}
-::ng-deep .mat-grid-tile .mat-figure, mat-grid-tile {
-    display: block !important;
-}
-.key_down {
-    text-align: end !important;
-}
-.top_course {
-    color: $color-blue !important;
-}
-img {
-    width: 7%;
-    margin-right: 3%;
+    box-shadow: 0 0 10px rgb(170, 170, 170) ;
 }
