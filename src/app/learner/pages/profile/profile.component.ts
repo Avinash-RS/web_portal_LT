@@ -634,7 +634,7 @@ export class ProfileComponent implements OnInit {
         fb.append('image', this.selectfile, this.selectfile.name)
         this.service.imageupload(fb).subscribe(data => {
           this.urlImage = data
-          localStorage.setItem('user_img', 'https://rajeshkumarranjan.blob.core.windows.net/' + this.urlImage.path)
+          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.urlImage.path)
           this.urlImage = localStorage.getItem('user_img')
         })
       }

@@ -97,6 +97,7 @@ get f() { return this.otpForm.controls; }
             localStorage.setItem("key",this.userid)
             this.router.navigate(['Learner/password']);
           } else{
+            this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
           }
       })
