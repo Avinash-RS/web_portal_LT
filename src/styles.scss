@@ -23,6 +23,7 @@ button:disabled:hover {
 
 .container {
   max-width: 100% !important;
+  overflow: hidden;
 }
 
 .f_wt_200 {
@@ -45,6 +46,9 @@ button:disabled:hover {
   font-weight: 600;
 }
 
+.f_wt_initial {
+  font-weight: initial
+}
 .f_size_12 {
   font-size: 12px;
 }
