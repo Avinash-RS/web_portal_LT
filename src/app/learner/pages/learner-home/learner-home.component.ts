@@ -20,10 +20,7 @@ export class LearnerHomeComponent implements OnInit {
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) { 
     }
   ngOnInit() {
-    if (this.gs.checkLogout()) {
-      this.userDetailes = this.gs.checkLogout()
-      console.log('hi',this.userDetailes)
-    }
+      this.userDetailes =JSON.parse(localStorage.getItem('UserDetails')) || null;
   }
   myCourses() {
 
