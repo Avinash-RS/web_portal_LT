@@ -6,36 +6,36 @@
   <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/MyCourse']">My courses</button>
 </div> -->
 
-<!-- <------------ Banner------------->
+  <!-- <------------ Banner------------->
+  <br><br>
+  <owl-carousel-o [options]="bannerOptions" class="banner">
+    <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
+    </ng-template>
+  </owl-carousel-o><br>
 
-<owl-carousel-o [options]="bannerOptions" class="banner">
-  <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
-  </ng-template>
-</owl-carousel-o><br>
-
-<!-- <------------End Banner------------->
+  <!-- <------------End Banner------------->
 
 
- <!-- <------------ Streams------------->
+  <!-- <------------ Streams------------->
   <h1 class="head">Streams</h1>
-    <mat-grid-list [cols]="breakpoint" rowHeight="2:1.7" (window:resize)="onResize($event)">
-      <mat-grid-tile>
-        <div class="card">
-          <div class="small-box bg-red">
-            <div class="icon">
-              <i class="fa fa-star-o "></i>
-            </div>
-          </div>
-          <div class="profileimg">
-            <img class="svgimg" src="../../../../assets/images/vocational.svg">
-          </div>
-         
-          <div class="container">
-            <h4 class="title">Vocational Institute</h4>
+  <mat-grid-list [cols]="breakpoint" rowHeight="2:1.7" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+      <div class="card">
+        <div class="small-box bg-red">
+          <div class="icon">
+            <i class="fa fa-star-o "></i>
           </div>
         </div>
+        <div class="profileimg">
+          <img class="svgimg" src="../../../../assets/images/vocational.svg">
+        </div>
+
+        <div class="container">
+          <h4 class="title">Vocational Institute</h4>
+        </div>
+      </div>
     </mat-grid-tile>
-  
+
 
 
     <mat-grid-tile>
@@ -91,11 +91,11 @@
   <h1 class="head">Popular categorires</h1><br><br>
 
   <owl-carousel-o [options]="popularCategorires" class="partner">
-    <ng-template carouselSlide *ngFor="let pop of popularCourses"   >
+    <ng-template carouselSlide *ngFor="let pop of popularCourses">
       <div class="card1">
-       
+
         <img src="{{pop.img}}" alt="Snow" style="width: 100%; opacity: 53%;height: 92px;;">
-       
+
         <div class="centered">{{pop.name}}</div>
         <span class="info-box-icon">
 
@@ -103,19 +103,20 @@
       </div>
     </ng-template>
   </owl-carousel-o>
-<!-- <------------End Popular categorires------------->
+  <!-- <------------End Popular categorires------------->
 
 
 
   <!-- <------------ Trending Courses------------->
-  <!-- <br>
-<h1>Trending Courses</h1>
-<br>
-<owl-carousel-o [options]="trendingOptions" class="">
-  <ng-template carouselSlide>
-    <app-top-courses [from]="'cd'" [CourseList] = "myCoursesList" [showCartBtn] = "false" [showWishlist] = "false" [canNavigate]="false" [showStatus] = "false"></app-top-courses>
-  </ng-template>
-</owl-carousel-o> -->
+  <br><br><br> <br><br><br>
+  <h1>Trending Courses</h1>
+  <br>
+  <owl-carousel-o [options]="trendingCategorires" class="trending">
+    <ng-template carouselSlide *ngFor="let course of myCoursesList">
+      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false" [showWishlist]="false"
+        [showStatus]="false"> </app-course-component>
+    </ng-template>
+  </owl-carousel-o>
 
   <!-- <------------End Trending Courses------------->
 
@@ -137,7 +138,7 @@
 
   <!-- <------------ Our Partners------------->
 
-  <br><br>
+  <br><br><br><br>
   <div class="container">
     <p class="f_size_30 color_blue center_align p-5px f_wt_500">
       Our Partners

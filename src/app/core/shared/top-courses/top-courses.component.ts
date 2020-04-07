@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-top-courses',
@@ -15,6 +16,32 @@ export class TopCoursesComponent implements OnInit {
   @Input('showStatus') showStatus: boolean;
   @Input('CourseList') CourseList: any = [];
 
+  customOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+
+
   constructor() { }
 
   ngOnInit() {
@@ -25,7 +52,7 @@ export class TopCoursesComponent implements OnInit {
     //   { text: 'Completed', cols: 65671, rows: 1567, rating : 1, img : "../../../../assets/learner/4.jpg"},
     // ];
 
-
+console.log(this.CourseList)
 
     if (window.innerWidth <= 480)
       this.breakpoint = 1;
