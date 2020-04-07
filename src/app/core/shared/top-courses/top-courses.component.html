@@ -22,10 +22,9 @@
 </div>
 
 <div class="container" *ngIf="from == 'cd'">
-    <div class="col-md-12">
-      <mat-grid-list cols="4" rowHeight="3:2">
-        <mat-grid-tile *ngFor="let course of CourseList" [style.border]="'none'"
-          [colspan]="1" [rowspan]="1">
+    <div class="col-md-12 center_align">
+      <mat-grid-list cols="4" rowHeight="2.3:2">
+        <mat-grid-tile *ngFor="let course of CourseList" [style.border]="'none'" >
           <app-course-component [course]="course" [canNavigate]="canNavigate" [showCartBtn] = "showCartBtn" [showWishlist] = "showWishlist" [showStatus] = "showStatus"> </app-course-component>
         </mat-grid-tile>
       </mat-grid-list>

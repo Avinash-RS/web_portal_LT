@@ -1,7 +1,7 @@
 @import "../../../../assets/variable.scss";
 
 img {
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(199, 198, 198);
     height: auto;
     width: 100%;
 }
@@ -9,6 +9,10 @@ img {
 .row {
     width: 90%;
     margin: auto;
+}
+
+.m-t-10 {
+    margin-top: 10px;
 }
 
 ::ng-deep .br-default .br-unit {
@@ -95,7 +99,7 @@ mat-icon {
 .bottomButtons {
     position: absolute;
     bottom: 2vh !important;
-    width: 100%;
+    left: 8%;
 }
 
 .buy_now {
