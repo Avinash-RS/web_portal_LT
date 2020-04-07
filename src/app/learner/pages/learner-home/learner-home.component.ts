@@ -14,11 +14,14 @@ export class LearnerHomeComponent implements OnInit {
 
   userDetailes: any;
   breakpoint: number;
-  Learningbreakpoint:number;
+  Learningbreakpoint: number;
   bannerImg: {}[];
   myCoursesList: any;
   partnerImg: {}[];
-  WhatsNew:number;
+  WhatsNew: number;
+  popularCourses: {}[];
+  whatsnewartical: {}[];
+
   bannerOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -88,14 +91,38 @@ export class LearnerHomeComponent implements OnInit {
         items: 3
       },
       940: {
-        items: 5
+        items: 4
       }
     },
     nav: true
   }
 
-  popularCourses:{}[];
-  whatsnewartical:{}[];
+  trendingCategorires: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      300: {
+        items: 2
+      },
+      540: {
+        items: 3
+      },
+      740: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+
+
   constructor(public service: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) {
   }
@@ -108,38 +135,37 @@ export class LearnerHomeComponent implements OnInit {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.popularCourses = [{
       img: '../../../../assets/images/shutterstock_131655707.jpg',
-      name:'Business'
+      name: 'Business'
     }, {
       img: '../../../../assets/images/shutterstock_345349079.jpg',
-      name:'IT & Software'
+      name: 'IT & Software'
     },
     {
       img: '../../../../assets/images/shutterstock_393692671.jpg',
-      name:'Personal Development'
-    },{
+      name: 'Personal Development'
+    }, {
       img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name:'Photography'
-    },{
+      name: 'Photography'
+    }, {
       img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name:'Development'
-    },{
+      name: 'Development'
+    }, {
       img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name:'Soft Skill'
-    
-  }]
-    
+      name: 'Soft Skill'
 
-  this.whatsnewartical = [{
-     message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-  }, {
-    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-  },
-  {
-    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-  },{
-    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-  
-}]
+    }]
+
+    this.whatsnewartical = [{
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+    }, {
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+    },
+    {
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+    }, {
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+
+    }]
 
     this.bannerImg = [
       {
@@ -201,7 +227,7 @@ export class LearnerHomeComponent implements OnInit {
   }
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
-    this.Learningbreakpoint =(event.target.innerWidth <= 400) ? 1 : 2;
+    this.Learningbreakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
     this.WhatsNew = (event.target.innerWidth <= 400) ? 1 : 4;
   }
 

@@ -43,7 +43,6 @@ export class CourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
-    console.log(course)
     this.loader.show();
     if (this.gs.checkLogout()) {
       if (this.course.wishlisted == false) {
@@ -93,7 +92,6 @@ export class CourseComponentComponent implements OnInit {
         id: 'Scaffolding', 
         user: this.userDetail.user_id
       }
-      console.log(detail1)
       this.router.navigateByUrl('/Learner/scorm', {state: { detail: detail1 }});
     }
   }
@@ -104,7 +102,6 @@ export class CourseComponentComponent implements OnInit {
       if (data.data['getPlayerStatus']) {
         this.recorded_data = data
         this.final_full_data = this.recorded_data.data.getPlayerStatus.message
-        console.log(this.final_full_data)
         if (this.final_full_data && this.final_full_data.status) {
           if (this.final_full_data.status == 'completed') {
             this.final_status = 'Completed'

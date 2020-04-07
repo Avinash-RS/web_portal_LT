@@ -1,5 +1,7 @@
 @import "../../assets/variable.scss";
-.form-control.is-invalid, .was-validated .form-control:invalid {
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + .75rem);
   background-image: none !important;
@@ -7,6 +9,7 @@
   background-position: right calc(.375em + .1875rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+
 .custom-modalbox {
   .mat-dialog-actions {
     justify-content: center;
@@ -94,25 +97,7 @@
   }
 }
 
-.space5 {
-  margin-top: 5%;
-}
 
-.space10 {
-  margin-top: 10%;
-}
-
-.space20 {
-  margin-top: 20%;
-}
-
-.space30 {
-  margin-top: 30%;
-}
-
-.space40 {
-  margin-top: 40%;
-}
 
 
 [data-tip] {
@@ -199,8 +184,9 @@ mat-icon {
 }
 
 .bg-transparent {
-  background-color: $color-light-blue!important;
+  background-color: $color-light-blue !important;
 }
+
 .head {
   text-align: center;
   color: #1F3777 !important;
@@ -325,12 +311,7 @@ mat-icon {
   cursor: pointer;
   color: #1F3777;
 }
+
 button:disabled:hover {
   cursor: not-allowed;
 }
-
-// .header{
-//   .mat-menu-content {
-//     background-color: #1F3777 !important;
-// }
-// }

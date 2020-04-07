@@ -5,13 +5,14 @@
         <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
             <mat-panel-title class="f_wt_500 f_size_18 color_blue">
-             Recomended Courses
+              Recomended Courses
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-card style="text-align: center;">
             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
               <mat-grid-tile *ngFor="let course of CourseList" [style.border]="'none'">
-                <app-course-component [course]="course" [canNavigate]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false"> </app-course-component>
+                <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="true"
+                  [showStatus]="false"> </app-course-component>
               </mat-grid-tile>
             </mat-grid-list>
           </mat-card>
