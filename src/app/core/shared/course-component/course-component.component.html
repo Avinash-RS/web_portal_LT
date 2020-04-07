@@ -16,19 +16,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 f_wt_500 f_sz_14 float_left">
+    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10">
       {{course.course_name}}
     </div>
   </div>
   <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
   <div class="row">
-    <div class="col-lg-5 col-md-5 col-sm-5 col-5 display_flex">
+    <div class="col-md-5 col-sm-5 col-5 display_flex">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
         class="m-t-15 m-l-5">{{course.rating}}</strong>
     </div>
     <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
     </div>
-    <div class=" col-lg-5 col-md-5 m-t-15 col-sm-5 col-5" *ngIf="showCartBtn"> <strong>Rs {{course.price | number }}</strong>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showCartBtn"> <strong>Rs {{course.price | number }}</strong>
     </div>
   </div>
   <br>
@@ -65,11 +65,11 @@
       </div>
     </div>
     <div class="row bottomButtons"  *ngIf="showCartBtn">
-      <div class="col-md-5 col-lg-5 col-sm-5 col-5">
+      <div class="col-md-5 col-sm-5 col-5 center_align">
         <button id="buy_now" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Buy Now
         </button>
       </div>
-      <div class="col-md-7 col-lg-7 col-sm-7 col-7">
+      <div class="col-md-7 center_align  col-sm-7 col-7">
         <button id="add_to_cart" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Add
           to cart
         </button>
