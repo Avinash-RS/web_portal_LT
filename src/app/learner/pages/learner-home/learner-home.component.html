@@ -89,16 +89,12 @@
 
   <!-- <------------ Popular categorires------------->
   <h1 class="head">Popular categorires</h1><br><br>
-
   <owl-carousel-o [options]="popularCategorires" class="partner">
     <ng-template carouselSlide *ngFor="let pop of popularCourses"   >
       <div class="card1">
-       
         <img src="{{pop.img}}" alt="Snow" style="width: 100%; opacity: 53%;height: 92px;;">
-       
         <div class="centered">{{pop.name}}</div>
         <span class="info-box-icon">
-
         </span>
       </div>
     </ng-template>
@@ -121,8 +117,8 @@
 
     
   <!-- <------------ Learning path------------->
-  <h1 class="head">Learning Paths</h1>
-  <mat-grid-list cols="2" rowHeight="2:1">
+  <h1 class="head">Learning Paths</h1><br>
+  <mat-grid-list [cols]="Learningbreakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
     <mat-grid-tile>
       <div class="card2">
         <div class="smallPMP bg-green">
@@ -137,12 +133,27 @@
       <img src="assets/images/larningpath.jpg" style="height: 328px;" alt="Snow">
     </mat-grid-tile>
   </mat-grid-list>
-
+  <div style="text-align:center;">
+    <button class="btn">Explore all</button>
+  </div><br><br>
   <!-- <------------End Learning path------------->
 
 
   <!-- <------------ What's New------------->
-
+  <mat-card style="text-align: center;margin-left: 1%;margin-right: 1%;">
+    <mat-grid-list [cols]="WhatsNew"  (window:resize)="onResize($event)" rowHeight="1:0.7">
+        <mat-grid-tile [style.border]="'none'" *ngFor="let newArtical of whatsnewartical">
+         <p style="margin-bottom: 53px;">{{newArtical.message}}</p><br><br>
+        
+         <mat-grid-tile-footer>
+          <div style="text-align:center;">
+            <button class="footerbtn">View Article</button>
+          </div>
+         </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+</mat-card>
 
 
   <!-- <------------End What's New------------->

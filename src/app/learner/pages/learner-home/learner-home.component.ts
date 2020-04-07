@@ -14,10 +14,11 @@ export class LearnerHomeComponent implements OnInit {
 
   userDetailes: any;
   breakpoint: number;
+  Learningbreakpoint:number;
   bannerImg: {}[];
   myCoursesList: any;
   partnerImg: {}[];
-
+  WhatsNew:number;
   bannerOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -94,16 +95,16 @@ export class LearnerHomeComponent implements OnInit {
   }
 
   popularCourses:{}[];
-
-
-
-
+  whatsnewartical:{}[];
   constructor(public service: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    //for responsive layout
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
+    this.Learningbreakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.WhatsNew = (window.innerWidth <= 400) ? 1 : 4;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.popularCourses = [{
       img: '../../../../assets/images/shutterstock_131655707.jpg',
@@ -127,6 +128,18 @@ export class LearnerHomeComponent implements OnInit {
     
   }]
     
+
+  this.whatsnewartical = [{
+     message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+  }, {
+    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+  },
+  {
+    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+  },{
+    message:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
+  
+}]
 
     this.bannerImg = [
       {
@@ -188,5 +201,8 @@ export class LearnerHomeComponent implements OnInit {
   }
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
+    this.Learningbreakpoint =(event.target.innerWidth <= 400) ? 1 : 2;
+    this.WhatsNew = (event.target.innerWidth <= 400) ? 1 : 4;
   }
+
 }

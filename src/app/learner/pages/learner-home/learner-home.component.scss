@@ -9,7 +9,7 @@
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        background-color: $color-white !important;
     }
 }
 // Ankit
@@ -65,7 +65,7 @@
     z-index: 1;
     border-radius: 50%;
     border: 1px solid $color-white;
-    background-color: #ec8185;
+    background-color: $color-light-pink;
     cursor: pointer;
 
 }
@@ -87,6 +87,11 @@
     padding: 10px;
 }
 
+.mat-grid-tile .mat-grid-tile-footer {
+    color: $color-white;
+    background: transparent;
+
+}
 //Removed by Mythreyi - used reusable classes
 .head {
     // text-align: center;
@@ -97,23 +102,23 @@
 }
 
 .bg-red {
-    background-color: #ec8185 !important;
-    color: #fff;
+    background-color: $color-light-pink !important;
+    color: $color-white;
 }
 
 .bg-yellow {
-    background-color: #fad553 !important;
-    color: #fff;
+    background-color: $color-yellow !important;
+    color:  $color-white;
 }
 
 .bg-green {
-    background-color: #00d2b9 !important;
-    color: #fff;
+    background-color: $color-light-green !important;
+    color:  $color-white;
 }
 
 .bg-blue {
-    background-color: #00afd4 !important;
-    color: #fff;
+    background-color: $color-light-blue !important;
+    color:  $color-white;
 }
 
 .card {
@@ -147,7 +152,22 @@ h1 {
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+.btn{
+    width: 15%;
+    height: 55px;
+}
+.footerbtn{
+    width: 120px;
+    height: 55px;
+    background-color: $color-blue;
+    color: $color-white;
+    text-align: center !important;
+    margin-left: 86px;
+}
 
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+}
 // End of Ankit
 
 
