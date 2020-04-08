@@ -148,6 +148,26 @@ button:disabled:hover {
   width: 10%;
 }
 
+.space5 {
+  margin-top: 5%;
+}
+
+.space10 {
+  margin-top: 10%;
+}
+
+.space20 {
+  margin-top: 20%;
+}
+
+.space30 {
+  margin-top: 30%;
+}
+
+.space40 {
+  margin-top: 40%;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -236,6 +256,7 @@ td {
   color: #fff !important;
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 
 body {
@@ -273,10 +294,6 @@ body {
   justify-content: center;
   margin-top: 176px;
   height: 198px;
-}
-
-.button {
-  // margin-top: 25px;
 }
 
 .column2 {
