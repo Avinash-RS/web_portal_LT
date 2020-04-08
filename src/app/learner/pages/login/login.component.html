@@ -16,7 +16,7 @@
               <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div>
             </div>
           </div>
-          <div class="form-group" (capsLock)="capsOn=$event">
+          <div class="form-group" appCapslock (capsLock)="capsOn=$event">
             <label>Password</label><span style="color: red;"> *</span>
             <div *ngIf="capsOn">Caps Lock is On !</div>
             <input [type]="show ? 'text' : 'password'" name="password" formControlName="password" onCopy="return false"
