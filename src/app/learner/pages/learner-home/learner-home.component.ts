@@ -129,6 +129,7 @@ export class LearnerHomeComponent implements OnInit {
 
   ngOnInit() {
     //for responsive layout
+    this.gs.checkProfileFilled();
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
     this.Learningbreakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.WhatsNew = (window.innerWidth <= 400) ? 1 : 4;
