@@ -26,7 +26,7 @@
               <i class="fa fa-star-o "></i>
             </div>
           </div>
-          <div class="profileimg bg-blue">
+          <div class="profileimg bg-red">
             <img class="svgimg" src="assets/images/vocational.svg">
           </div>
           <div class="container">
@@ -87,19 +87,15 @@
   <!-- <------------End Streams------------->
 
   <!-- <------------ Popular categorires------------->
-  <h1 class="head">Popular categorires</h1><br><br>
+  <h1 class="head">Popular Categorires</h1><br><br>
   <owl-carousel-o [options]="popularCategorires" class="partner">
     <ng-template carouselSlide *ngFor="let pop of popularCourses"  >
-      <!-- <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
-        <mat-grid-tile  > -->
       <div class="card1">
         <img src="{{pop.img}}" alt="Snow" style="width: 100%; opacity: 53%;height: 92px;;">
         <div class="centered">{{pop.name}}</div>
         <span class="info-box-icon">
         </span>
       </div>
-      <!-- </mat-grid-tile>
-      </mat-grid-list> -->
     </ng-template>
   </owl-carousel-o>
   <!-- <------------End Popular categorires------------->
@@ -179,15 +175,36 @@
       </div>
     </div>
   </div>
-  <br>
+  <br><br>
 
   <!-- <------------End  Our Partners------------->
 
 
   <!-- <------------ Happy customers------------->
-  <h1 class="head">Happy Customers</h1><br>
-
-
+  <h1 class="head">Happy Customers</h1>
+  <mat-grid-list [cols]="Learningbreakpoint" rowHeight="1.2:1" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+      <img src="assets/images/Group1400.png" style="height: 450px;" alt="Snow">
+    </mat-grid-tile>
+    <mat-grid-tile>
+     <p style="margin-left: 15px;">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+       when an unknown printer took a galley of type and scrambled it to make a type specimen 
+       book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+       remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+       sheets containing Lorem Ipsum passages, and more recently with
+       desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br><br>
+       Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen 
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+        sheets containing Lorem Ipsum passages, and more recently with
+        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+     </p>
+    </mat-grid-tile>
+  </mat-grid-list>
   <!-- <------------End  Happy customers------------->
 
 
@@ -195,6 +212,20 @@
 
   <!-- <------------ Take me to Expert------------->
 
+  <mat-grid-list cols="2" rowHeight="1.2:1" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+
+          <!-- <h1 class="head">To get exceptional knowledge experience</h1>
+      <div>
+        <button class="footerbtn">Talk to an Expert</button>
+      </div>
+         -->
+           
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <img src="assets/images/Group1406.png" style="height: 450px;" alt="Snow">
+    </mat-grid-tile>
+  </mat-grid-list>
 
 
   <!-- <------------End   Take me to Expert------------->
