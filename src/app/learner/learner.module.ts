@@ -16,7 +16,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { TrackCapsDirective,LoginComponent } from '@learner/pages/login/login.component';
+import { LoginComponent } from '@learner/pages/login/login.component';
 import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from '@learner/pages/registration/registration.component';
 import { OtpComponent } from '@learner/pages/otp/otp.component';
@@ -50,7 +50,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    TrackCapsDirective,
     LearnerHomeComponent,
     CoursedetailsComponent,
     RegistrationComponent,
