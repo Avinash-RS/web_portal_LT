@@ -1,9 +1,9 @@
 Feature: Login Feature
 
-Scenario: Login as a Learner
+Scenario: Login with a Learner
 
 Given : I am in login page
-When :  Enter "mythreyi" and "123Aa!@#" for a particular user role 
+When :  Enter "Bobby" and "Test@123" for a particular user role 
 Then : Click on log in button 
 
 

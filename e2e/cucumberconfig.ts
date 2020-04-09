@@ -1,6 +1,11 @@
 import {Config} from 'protractor';
-//import * as reporter from 'cucumber-html-reporter';
+import * as report from 'cucumber-html-reporter';
 
+
+
+//var {setDefaultTimeout} = require('cucumber');
+
+//setDefaultTimeout(60 * 1000);
 var reporter = require('cucumber-html-reporter');
 
 export let config: Config = {
@@ -21,14 +26,14 @@ export let config: Config = {
   //},
 
     // Spec patterns are relative to this directory.
-    specs: ['../Features/ViewProfileTest.feature'],
+    specs: ['../Features/WishlistCourseTest.feature'],//
 
     cucumberOpts: {
-      require: './StepDefinitions/ViewProfileSteps.js',
+      require: './StepDefinitions/WishlistCourseSteps.js',//
       
     // tags: false,
-      //format:'json:/cucumberreport.json', 
-      /*onComplete: () =>
+      format:'json:/cucumberreport.json', 
+      onComplete: () =>
       {
         var options = {
           theme: 'bootstrap',
@@ -49,7 +54,7 @@ export let config: Config = {
       reporter.generate(options);
     // profile: false,
     // 'no-source': true
-    },*/
+    },
     //tags: ['@Smoketest', '@contact'] ,   
     directConnect: true  
   },
