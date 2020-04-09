@@ -55,7 +55,7 @@ export class PasswordComponent implements OnInit {
     this.showpassbutton = !this.showpassbutton;
     this.showpsseye = !this.showpsseye;
   }
-  showconPassword(){
+  showconPassword() {
     this.showconpassbutton = !this.showconpassbutton;
     this.showconpsseye = !this.showconpsseye;
   }
@@ -87,10 +87,40 @@ export class PasswordComponent implements OnInit {
     this.userid = localStorage.getItem('key')
     this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip).subscribe(data => {
       if (data.data['user_registration_done']['success'] == 'true') {
-        this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_done'].message, null)
-        localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
-        this.router.navigate(['/Learner/profile']);
+
+        //Added by Mythreyi
+        this.service.login(this.passwordForm.value.username, this.passwordForm.value.password, false)
+          .subscribe((loginresult: any) => {
+            if (loginresult.data.login) {
+              if (loginresult.data.login.success) {
+                localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+                localStorage.setItem('uname', this.passwordForm.value.username);
+                localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
+                var ps = btoa(this.passwordForm.value.password);
+                localStorage.setItem('ps', ps);
+                this.loader.hide();
+                //if false, then need to update profile
+                if (loginresult.data.login.message.is_profile_updated)
+                  this.router.navigate(['/Learner'])
+                else {
+                  this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
+                  this.router.navigate(['/Learner/profile'])
+                }
+              }
+            } else {
+              this.loader.hide();
+              this.passwordForm.reset();
+              this.alert.openAlert(loginresult.data.login.error_msg, null)
+            }
+          });
+
+
+
+
+
+        // this.alert.openAlert(data.data['user_registration_done'].message, null)
+        // localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
+        // this.router.navigate(['/Learner/profile']);
       } else {
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_done'].message, null)

@@ -21,8 +21,9 @@
              
               </div><br> -->
                     <div class="row">
-                      <textarea style="resize: none;" [disabled]='showdeletedicon' class="inputs" placeholder="1000 characters" maxlength="1000"
-                        [(ngModel)]="profileDetails.about_you" name="info"></textarea>
+                      <textarea style="resize: none;" [disabled]='showdeletedicon' class="inputs"
+                        placeholder="1000 characters" maxlength="1000" [(ngModel)]="profileDetails.about_you"
+                        name="info"></textarea>
                     </div><br>
                     <div class="row">
                       <mat-label>Gender</mat-label><span class="text-danger">*</span>
@@ -111,7 +112,8 @@
                       <div class="col-sm-6" *ngIf="userData"><br>
                         <mat-label>{{userData.full_name}}</mat-label><br>
                         <mat-label *ngIf="userData.user_dtl">{{userData.user_dtl.username}}</mat-label><br>
-                        <mat-label *ngIf="userData.user_dtl">{{userData.user_dtl.created_on | date : "dd.MM.y"}}</mat-label>
+                        <mat-label *ngIf="userData.user_dtl">{{userData.user_dtl.created_on | date : "dd.MM.y"}}
+                        </mat-label>
                       </div>
                     </div>
 
@@ -121,14 +123,13 @@
                       <!-- </div><br> -->
 
                       <div class="col">
-                        <md-button class="profilecomplete">{{userData.progress}} </md-button>
+                        <md-button class="profilecomplete">{{progress}}% </md-button> 
                         <section class="example-section">
                           <mat-progress-bar class="example-margin" mode="determinate" value="{{progress}}">
                           </mat-progress-bar>
                         </section>
                       </div>
                     </div>
-
 
                     <div class="Edit">
                       <div class="row">
@@ -141,7 +142,8 @@
                           <mat-icon class="createicon" (click)="editPassword(passwordDialog)">create</mat-icon>
                         </div>
                       </div><br>
-                      <div class="row">
+                      <!-- //added validation - Mythreyi -->
+                      <div class="row" *ngIf="userData.user_mobile">
                         <div class="col-sm-3">
                           <mat-label *ngIf="userData.user_mobile">{{userData.user_mobile.mobile_number}}</mat-label>
                         </div>
@@ -151,7 +153,7 @@
                           <mat-icon class="createicon" (click)="editmobno(mobDialog)">create</mat-icon>
                         </div>
                       </div><br>
-                      <div class="row">
+                      <div class="row" *ngIf="userData.email">
                         <div class="col-sm-3">
                           <span>{{userData.email}}</span>
                         </div>
@@ -178,13 +180,13 @@
                       <!-- {{qual | json}}<br>{{qual.length}}<br>{{qualification.institute_detail | json}}<br>
                       {{qualification.institute_detail[0]._id}} -->
                       <!-- {{level_detail[i]}} -->
-                      
+
                       <div class="col-sm-3">
                         <mat-select [disabled]='showdeletedicon' class="inputs"
                           [(ngModel)]="qualification.level_detail && qualification.level_detail[0] && qualification.level_detail[0]._id"
                           name="level_detail{{i}}" #lvl="ngModel" placeholder="Level" required>
                           <mat-option [value]="lv._id" *ngFor="let lv of levelValue" (click)="getLevel(lv,i)">
-                            {{lv.level_name}} 
+                            {{lv.level_name}}
                           </mat-option>
                         </mat-select>
                       </div>
@@ -244,7 +246,8 @@
                       </div>
                       <div class="col-sm-3 plusicon">
                         <!-- {{i}} {{qual.length}} {{qual.length-1}} -->
-                        <mat-icon *ngIf = "i == qual.length-1 && qual.length < 15" (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
+                        <mat-icon *ngIf="i == qual.length-1 && qual.length < 15"
+                          (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
                         <mat-icon (click)="removelastQual(i)">delete</mat-icon>
                       </div>
                     </div><br>
@@ -255,13 +258,14 @@
                 <div class="row" *ngFor="let word2 of words2; let in=index">
                   <div class="col-sm-2">
                     <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
-                    [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
+                      [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
                     <!-- <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
                     [(ngModel)]="words2[in]" name="name{{in}}" #name="ngModel" required /> -->
                   </div>
                   <div class="col-sm-3 plusicon">
 
-                    <mat-icon *ngIf = "in == words2.length-1 && words2.length < 15" (click)="add(in)" [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
+                    <mat-icon *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
+                      [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
                     <mat-icon (click)="removenewLink(in)" [disabled]='showdeletedicon'>delete</mat-icon>
                     <!-- <mat-icon (click)="test()">delete</mat-icon> -->
                   </div>
@@ -271,7 +275,7 @@
                 <div class="col-sm-2">
                   <!-- <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
                     [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia"> -->
-                    <input [disabled]='showdeletedicon' class="inputs" placeholder="linkedin Link"
+                  <input [disabled]='showdeletedicon' class="inputs" placeholder="linkedin Link"
                     [(ngModel)]="socialMediaLink" name="socialMedia">
                 </div>
                 <div class="col-sm-3">
@@ -287,17 +291,17 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <input [disabled]='showdeletedicon' type="text" mask="00" class="inputs"
-                          placeholder="Total Experience" [(ngModel)]="prof.total_experience"
-                          name="totExp" maxlength="2" required>
+                          placeholder="Total Experience" [(ngModel)]="prof.total_experience" name="totExp" maxlength="2"
+                          required>
                       </div>
                       <div class="col-sm-4">
-                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' class="inputs" placeholder="Current Organisation"
-                          [(ngModel)]="prof.organization" name="currentOrg" minlength="4"
-                          maxlength="16" required>
+                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' class="inputs"
+                          placeholder="Current Organisation" [(ngModel)]="prof.organization" name="currentOrg"
+                          minlength="4" maxlength="16" required>
                       </div>
                       <div class="col-sm-4">
-                        <input type="text"  mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' minlength="4" maxlength="16" class="inputs"
-                          placeholder="Current role" [(ngModel)]="prof.job_role"
+                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' minlength="4"
+                          maxlength="16" class="inputs" placeholder="Current role" [(ngModel)]="prof.job_role"
                           name="currentRole" required>
                       </div>
                     </div>
@@ -313,57 +317,59 @@
             </form>
           </div>
 
-         <!------------------------------Change Email Dialog---------------------->
-      <ng-template #emailDialog>
-        <span class="close">
-          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-        </span>
-        <h1 class="head">Change the Email ID</h1>
-        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
-          <form [formGroup]="mailForm">
-            <div class="form-group">
-              <label class="title">Enter new email id</label>
-              <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
-              <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
-                <div *ngIf="f.mailid.errors.required">Email is required</div>
-                <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
-              </div>
-            </div>
-            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
-              Submit
-            </button><br><br>
-          </form><br>
-        </mat-dialog-content>
-        <mat-dialog-actions class="bt"> 
-          <div class="account">Don't receive link?<button class="resendbtn" (click)="updateEmail(mailForm.valid)">Resend link</button></div>
-        </mat-dialog-actions>
-      </ng-template>
-      <!------------------------------Change mobileno Dialog---------------------->
-      <ng-template #mobDialog>
-        <span class="close">
-          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-        </span>
-        <h1 class="head">Change the Mobile No</h1>
-        <mat-dialog-content style="width: 285px;margin-top: 24px;">
-          <form [formGroup]="otpForm">
-            <div class="form-group">
-              <label class="title">Enter new mobile no</label>
-              <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control"
-                [ngClass]="{ 'is-invalid':  f.mobile.errors}" required />
-              <div *ngIf="f.mobile.errors" class="invalid-feedback">
-                <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
-                <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
-                <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
+          <!------------------------------Change Email Dialog---------------------->
+          <ng-template #emailDialog>
+            <span class="close">
+              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+            </span>
+            <h1 class="head">Change the Email ID</h1>
+            <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
+              <form [formGroup]="mailForm">
+                <div class="form-group">
+                  <label class="title">Enter new email id</label>
+                  <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
+                  <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
+                    <div *ngIf="f.mailid.errors.required">Email is required</div>
+                    <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <p class="otphead">OTP will be send to this number</p>
-            <div *ngIf="showotp"><br>
-              <p class="otphead">OTP Code</p>
+                <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
+                  Submit
+                </button><br><br>
+              </form><br>
+            </mat-dialog-content>
+            <mat-dialog-actions class="bt">
+              <div class="account">Don't receive link?<button class="resendbtn"
+                  (click)="updateEmail(mailForm.valid)">Resend link</button></div>
+            </mat-dialog-actions>
+          </ng-template>
+          <!------------------------------Change mobileno Dialog---------------------->
+          <ng-template #mobDialog>
+            <span class="close">
+              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+            </span>
+            <h1 class="head">Change the Mobile No</h1>
+            <mat-dialog-content style="width: 285px;margin-top: 24px;">
+              <form [formGroup]="otpForm">
+                <div class="form-group">
+                  <label class="title">Enter new mobile no</label>
+                  <input type="text" formControlName="mobile" placeholder="+91" maxlength="10"
+                    pattern="[1-9]{1}[0-9]{9}" mask="0000000000" class="form-control"
+                    [ngClass]="{ 'is-invalid':  f.mobile.errors}" required />
+                  <div *ngIf="f.mobile.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                    <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
+                    <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
+                    </div>
+                  </div>
+                </div>
+                <p class="otphead">OTP will be send to this number</p>
+                <div *ngIf="showotp"><br>
+                  <p class="otphead">OTP Code</p>
 
                   <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
-                    formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0"  pattern="[0-9]{1}" />
+                    formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
 
                   <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
                     formControlName="otp2" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
@@ -371,110 +377,123 @@
                   <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
                     formControlName="otp3" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
 
-              <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
-                formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
-              <br><br>
-            </div>
-            <div *ngIf="showotp">
-              <button class="popupbtns" (click)="otpverify()">Verify</button>
-            </div><br>
-            <div *ngIf="showotp" class="account">Don't get code?<button class="resendbtn" (click)="Resendcode()">Resend code</button></div>
-          </form>
-        </mat-dialog-content>
-        <mat-dialog-actions *ngIf="isenable">
-          <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
-            Verification
-          </button><br><br>
-        </mat-dialog-actions>
-      </ng-template>
-      <!---------------------------------Password Dialog--------------------------------->
-      <ng-template  #passwordDialog>
-        <span class="close">
-          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-        </span>
-        <h1 class="head">Change the Password</h1>
-        <mat-dialog-content style="width: 300px;margin-top: 24px;" >
-          <form   [formGroup]="passwordForm">
-            <label class="title">Enter the current password</label>
-            <div class="input-group">
-              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-              onDrop="return false" onPaste="return false"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
-              <span class="input-group-append bg-white border-left-0">
-                <span class="input-group-text bg-transparent">
-                  <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
-                </span>
-              </span>
-              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
-                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
-                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
-                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture of Special characters, uppercase and lowercase letters.</div>
-              </div>
-            </div>
-
-          
-
-            <label  class="title">Enter the new password</label>
-            <div class="input-group">
-              <input class="form-control border-right-0" [type]="showNewButton ? 'text' : 'password'" formControlName="newpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false"
-                [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }"   (keyup)="change($event)" />
-                <span class="input-group-append bg-white border-left-0">
-                  <span class="input-group-text bg-transparent">
-                    <i [class]="showNewEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="shownewPassword()" aria-hidden="true"></i>
-                  </span>
-                </span>
-              <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
-                <div *ngIf="f.newpassword.errors.required">New Password is required</div>
-                <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 8 characters</div>
-                <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture of Special characters, uppercase and lowercase letters.</div>
-                <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
-              </div>
-            </div><br>
-            <div class="box" id="message">
-              <div class="row">
-                <div class="col">
-                  <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Uppercase</p>
-                  <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Lowercase</p>
+                  <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
+                    formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
+                  <br><br>
                 </div>
-                <div class="col">
-                  <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Special character</p>
-                  <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i>  Number</p>
-                </div>
-              </div>
-            </div>
-
-
-
-            <p class="head">The password should not be last password</p>
-            <label  class="title">Confirm the new password</label>
-            <div class="input-group">
-             
-              <input class="form-control border-right-0" [type]="showconButton ? 'text' : 'password'" formControlName="confirmpassword" onCopy="return false" onDrag="return false"
-                onDrop="return false" onPaste="return false"  
-                [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
-                <span class="input-group-append bg-white border-left-0">
-                  <span class="input-group-text bg-transparent">
-                    <i [class]="showconEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showconPassword()" aria-hidden="true"></i>
+                <div *ngIf="showotp">
+                  <button class="popupbtns" (click)="otpverify()">Verify</button>
+                </div><br>
+                <div *ngIf="showotp" class="account">Don't get code?<button class="resendbtn"
+                    (click)="Resendcode()">Resend code</button></div>
+              </form>
+            </mat-dialog-content>
+            <mat-dialog-actions *ngIf="isenable">
+              <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
+                Verification
+              </button><br><br>
+            </mat-dialog-actions>
+          </ng-template>
+          <!---------------------------------Password Dialog--------------------------------->
+          <ng-template #passwordDialog>
+            <span class="close">
+              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+            </span>
+            <h1 class="head">Change the Password</h1>
+            <mat-dialog-content style="width: 300px;margin-top: 24px;">
+              <form [formGroup]="passwordForm">
+                <label class="title">Enter the current password</label>
+                <div class="input-group">
+                  <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'"
+                    formControlName="currentpassword" onCopy="return false" onDrag="return false" onDrop="return false"
+                    onPaste="return false"
+                    [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
+                  <span class="input-group-append bg-white border-left-0">
+                    <span class="input-group-text bg-transparent">
+                      <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"
+                        aria-hidden="true"></i>
+                    </span>
                   </span>
-                </span>
-              <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
-                <!-- <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
+                  <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
+                    <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
+                    <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and
+                      have a
+                      mixture of Special characters, uppercase and lowercase letters.</div>
+                  </div>
+                </div>
+
+
+
+                <label class="title">Enter the new password</label>
+                <div class="input-group">
+                  <input class="form-control border-right-0" [type]="showNewButton ? 'text' : 'password'"
+                    formControlName="newpassword" onCopy="return false" onDrag="return false" onDrop="return false"
+                    onPaste="return false" [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }"
+                    (keyup)="change($event)" />
+                  <span class="input-group-append bg-white border-left-0">
+                    <span class="input-group-text bg-transparent">
+                      <i [class]="showNewEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="shownewPassword()"
+                        aria-hidden="true"></i>
+                    </span>
+                  </span>
+                  <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.newpassword.errors.required">New Password is required</div>
+                    <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 8 characters</div>
+                    <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
+                      mixture of Special characters, uppercase and lowercase letters.</div>
+                    <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
+                  </div>
+                </div><br>
+                <div class="box" id="message">
+                  <div class="row">
+                    <div class="col">
+                      <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                        Uppercase</p>
+                      <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                        Lowercase</p>
+                    </div>
+                    <div class="col">
+                      <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check"
+                          aria-hidden="true"></i> Special character</p>
+                      <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i> Number
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <p class="head">The password should not be last password</p>
+                <label class="title">Confirm the new password</label>
+                <div class="input-group">
+
+                  <input class="form-control border-right-0" [type]="showconButton ? 'text' : 'password'"
+                    formControlName="confirmpassword" onCopy="return false" onDrag="return false" onDrop="return false"
+                    onPaste="return false"
+                    [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
+                  <span class="input-group-append bg-white border-left-0">
+                    <span class="input-group-text bg-transparent">
+                      <i [class]="showconEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showconPassword()"
+                        aria-hidden="true"></i>
+                    </span>
+                  </span>
+                  <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
                 <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 8 characters</div>
                 <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
                   mixture of Special characters, uppercase and lowercase letters.</div> -->
-                <div *ngIf="f.confirmpassword.errors.mustMatch">Should be same as password</div>
-              </div>
-            </div>
-          </form><br>
-        </mat-dialog-content>
-        <mat-dialog-actions>
-          <button class="popupbtns"[disabled]="passwordForm.invalid" (click)="updatePassword()">
-            Submit
-          </button><br><br>
-        </mat-dialog-actions>
-      </ng-template>
+                    <div *ngIf="f.confirmpassword.errors.mustMatch">Should be same as password</div>
+                  </div>
+                </div>
+              </form><br>
+            </mat-dialog-content>
+            <mat-dialog-actions>
+              <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
+                Submit
+              </button><br><br>
+            </mat-dialog-actions>
+          </ng-template>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
