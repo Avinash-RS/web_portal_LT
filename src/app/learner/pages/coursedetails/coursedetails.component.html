@@ -12,7 +12,7 @@
         <!-- <div class="row section_1" [style.background]="'url('+course.course_img_url+')'"> -->
         <div class="row section_1" [style.background]="'url(../../../../assets/learner/lens.jpg)'">
             <div class="col-md-8 section_1_a">
-                <p class="course_name f_wt_500 capitalize">{{course.course_name}} </p>
+                <p class="course_name f_wt_500 ">{{course.course_name | titlecase }} </p>
                 <div class="display_flex">
                     <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
                     <strong class="f_size_23 space_5">{{course.rating}}

@@ -3,12 +3,13 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MatDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { FormControl, FormGroup, FormBuilder, NgModel } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import * as _ from "lodash";
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,12 +18,10 @@ import * as _ from "lodash";
 })
 export class ProfileComponent implements OnInit {
 
-
   //my3
-  @ViewChild('lvl') private lvl: NgModel;
   qualification_obj: any = [];
   //
-  user_id_data:any;
+  user_id_data: any;
   mailForm: FormGroup;
   otpForm: FormGroup;
   passwordForm: FormGroup;
@@ -100,7 +99,8 @@ export class ProfileComponent implements OnInit {
     private dialog: MatDialog,
     private loader: Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private gs: GlobalServiceService
   ) {
     this.enabel = false
 
@@ -143,15 +143,17 @@ export class ProfileComponent implements OnInit {
 
   }
   ngOnInit() {
-    if (localStorage.getItem('UserDetails')) {
+    if (this.gs.checkLogout()) {
       this.activeroute.queryParams.subscribe(params => {
         if (params["status"]) {
           this.alert.openAlert(params['msg'], null);
         }
       });
       this.urlImage = localStorage.getItem('user_img')
-      var user = localStorage.getItem('UserDetails')
-      this.currentUser = JSON.parse(user);
+      // var user = this.gs.checkLogout()
+      this.currentUser = this.gs.checkLogout()
+      if (!this.currentUser.is_profile_updated)
+        this.gs.preventBackButton()
       this.getprofileDetails(this.currentUser.user_id);
       this.getAllLevels();
       this.getAllcountry();
@@ -257,8 +259,22 @@ export class ProfileComponent implements OnInit {
         // this.profileDetails.about_you 
         if (this.userData.user_profile.length != 0) {
           this.userData.progress = this.userData.user_profile[0].progress
+          var p = this.userData.progress.slice(0, -1);
+          this.progress = Number(p);
+          if (this.progress >= 60) {
+         
+          } else {
+            this.gs.preventBackButton
+          }
         } else {
-          this.userData.progress = this.userData.progress
+          this.userData.progress = this.userData.progress;
+          var p = this.userData.progress.slice(0, -1);
+          this.progress = Number(p);
+          if (this.progress >= 60) {
+         
+          } else {
+            this.gs.preventBackButton
+          }
         }
         // if(this.profileDetails){
         if (this.userData.user_profile.length == 0) {
@@ -271,7 +287,7 @@ export class ProfileComponent implements OnInit {
         this.profileDetails = this.userData.user_profile[0];
         // this.urlImage = this.userData.user_profile[0].profile_img;
         // localStorage.setItem('user_img',this.urlImage)
-        
+
         // }
         // console.log(this.words2)
         this.qualification_obj = this.userData.user_profile[0].qualification.map(s => ({
@@ -294,8 +310,7 @@ export class ProfileComponent implements OnInit {
 
 
         //newly added mythreyi
-        var p = this.userData.progress.slice(0, -1);
-        this.progress = Number(p);
+
         this.qual = this.userData.qualification;
         if (this.userData.user_profile.length != 0) {
           this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
@@ -397,11 +412,11 @@ export class ProfileComponent implements OnInit {
           this.alert.openAlert('Total experience should be less than or equal to 70 years', null);
           this.profileDetailCheck = false;
         }
-        if(this.prof.organization.length < 4){
-          this.alert.openAlert('Current Organization must have minimum 4 characters length',null);
+        if (this.prof.organization.length < 4) {
+          this.alert.openAlert('Current Organization must have minimum 4 characters length', null);
           this.profileDetailCheck = false;
         }
-        if(this.prof.job_role.length < 4){
+        if (this.prof.job_role.length < 4) {
           this.alert.openAlert('Current role must have minimum 4 characters length', null);
           this.profileDetailCheck = false;
         }
@@ -450,21 +465,26 @@ export class ProfileComponent implements OnInit {
       //   progress = '100%'
       // }
       if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
-        country != undefined && this.qualification_obj != undefined) {
+        country != undefined && state != undefined && city != undefined && this.qualification_obj != undefined) {
         progress = '60%'
+        this.progress = 60;
       } if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
-        country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social.length == 1) {
-        progress = '90%'
+        country != undefined && this.qual != undefined  && language != undefined &&  this.words2.length == 1 && this.socialMediaLink) {
+        progress = '90%';
+        this.progress = 90;
       } if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
         && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
-        progress = '100%'
+        progress = '100%';
+        this.progress = 100;
       }
-
-      var prof = {
+      if(this.prof)
+      {
+        var prof = {
         total_experience: this.prof.total_experience,
         organization: this.prof.organization,
         job_role: this.prof.job_role
       }
+    }
       // for (const iterator of this.words2) {
       //     this.certificate.push(iterator.value)
       //   } 
@@ -494,9 +514,11 @@ export class ProfileComponent implements OnInit {
       this.service.update_profile(jsonData).subscribe(data => {
         if (data.data['update_profile']['success'] == 'true') {
           this.loader.hide();
+          this.currentUser.is_profile_updated = true;
+          localStorage.setItem('UserDetails', JSON.stringify(this.currentUser))
           this.alert.openAlert(data.data['update_profile'].message, null)
           this.showdeletedicon = true;
-          this.router.navigate(['/Learner/MyCourse']);
+          // this.router.navigate(['/Learner/MyCourse']);
         } else {
           this.alert.openAlert(data.data['update_profile'].message, null)
         }
@@ -515,7 +537,7 @@ export class ProfileComponent implements OnInit {
   editmobno(mobRef: TemplateRef<any>) {
     this.dialog.open(mobRef);
     this.isenable = true;
-    this.showotp=false;
+    this.showotp = false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       otp1: new FormControl("", []),
@@ -562,28 +584,28 @@ export class ProfileComponent implements OnInit {
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-        this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+        this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
         this.showotp = false;
         this.isenable = true;
       }
     })
-    
+
   }
-//Resend OTP
+  //Resend OTP
   Resendcode() {
-    this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+    this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
-            this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
-            this.showotp = true;
-          }
+        this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
+        this.showotp = true;
+      }
     })
   }
   //Update Password
   updatePassword() {
     var psd = localStorage.getItem('ps');
     var ps = atob(psd)
-    this.user_id_data=JSON.parse(localStorage.getItem( 'UserDetails'))
+    this.user_id_data = this.gs.checkLogout()
     this.service.get_change_password_updateprofile(this.user_id_data.user_id, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
 
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
@@ -599,20 +621,20 @@ export class ProfileComponent implements OnInit {
   //Update Email
   updateEmail(mailForm) {
     console.log(mailForm)
-    if(mailForm == false){
-        this.alert.openAlert('Email Id is invalid',null)
-    }else{
+    if (mailForm == false) {
+      this.alert.openAlert('Email Id is invalid', null)
+    } else {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
         if (data.data['update_email_onprofile']['success'] == 'true') {
           console.log(data.data['update_email_onprofile'].message)
           this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-            this.ngOnInit();
+          this.ngOnInit();
         } else {
           this.alert.openAlert(data.data['update_email_onprofile'].message, null)
         }
       })
     }
-   
+
   }
   closedialogbox() {
     this.dialog.closeAll();
@@ -665,10 +687,10 @@ export class ProfileComponent implements OnInit {
   words2 = [{ value: '' }];
 
   add(i) {
-    console.log(i, this.words2.length -1,this.words2.length-1 != i)
+    console.log(i, this.words2.length - 1, this.words2.length - 1 != i)
     if (this.words2[i].value == "") {
       this.alert.openAlert('Certificate link cannot be empty', null)
-    } 
+    }
     // else if (this.words2.length > 1 && this.words2.length-1 != i && _.find(this.words2, { value :this.words2[i].value})) {
     //   this.alert.openAlert('Certificate link already present', null)
     // } 
@@ -783,7 +805,7 @@ export class ProfileComponent implements OnInit {
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { qualification: l._id })) {
           this.qualification_obj[i].qualification = l._id;
-        } else{
+        } else {
           this.alert.openAlert('Duplicate level', null);
           this.qual[i].level_detail = null
           // this.lvl.reset(null)
@@ -978,7 +1000,7 @@ export class ProfileComponent implements OnInit {
         }
       }
       else
-      this.qualification_obj[i].year_of_passing = item
+        this.qualification_obj[i].year_of_passing = item
     } else if (this.qualification_obj[i] != undefined) {
       if (this.qualification_obj.length > 1) {
         if (!_.find(this.qualification_obj, { year_of_passing: item })) {
@@ -990,7 +1012,7 @@ export class ProfileComponent implements OnInit {
         }
       }
       else
-      this.qualification_obj[i].year_of_passing = item
+        this.qualification_obj[i].year_of_passing = item
     }
   }
 
@@ -1012,3 +1034,30 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Bofore resturucting - total lines  - 1028
