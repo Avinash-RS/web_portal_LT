@@ -29,6 +29,7 @@ import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learn
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 //others
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
+    NgOtpInputModule
   ],
   providers: [Apollo],
   entryComponents: []

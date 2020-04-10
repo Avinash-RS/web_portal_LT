@@ -46,14 +46,14 @@ export class OtpComponent implements OnInit {
 
   @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
-    allowNumbersOnly: false,
-    length: 5,
+    allowNumbersOnly: true,
+    length: 4,
     isPasswordInput: false,
     disableAutoFocus: false,
     placeholder:'',
     inputStyles: {
-      'width': '50px',
-      'height': '50px'
+      'width': '60px',
+      'height': '60px'
     }
   };
 
@@ -63,10 +63,10 @@ export class OtpComponent implements OnInit {
   this.systemip = localStorage.getItem('Systemip')
   this.otpForm = this.formBuilder.group({
           mobile: new FormControl('', myGlobals.mobileVal),
-          otp1: new FormControl("", []),
-          otp2: new FormControl("", []),
-          otp3: new FormControl("", []),
-          otp4: new FormControl("", [])
+          otp: new FormControl("", []),
+          // otp2: new FormControl("", []),
+          // otp3: new FormControl("", []),
+          // otp4: new FormControl("", [])
 }, {
 
 });
@@ -84,21 +84,21 @@ get f() { return this.otpForm.controls; }
       })
   
   }
-  // onOtpChange(otp) {
-  //   this.otp = otp;
-
-  // }
+  onOtpChange(otp) {
+    this.otp = otp;
+  }
   otpverify(){
-    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile,).subscribe(data => {
+    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
             localStorage.setItem("key",this.userid)
             this.router.navigate(['Learner/password']);
           } else{
-            this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+            this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            this.showotp = false;
+            this.isenable = true;
           }
       })
 
