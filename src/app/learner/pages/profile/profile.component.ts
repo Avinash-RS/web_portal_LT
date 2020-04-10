@@ -17,6 +17,17 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  config = {
+    allowNumbersOnly: true,
+    length: 4,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder:'',
+    inputStyles: {
+      'width': '50px',
+      'height': '50px'
+    }
+  };
 
   //my3
   qualification_obj: any = [];
@@ -540,10 +551,10 @@ export class ProfileComponent implements OnInit {
     this.showotp = false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
-      otp1: new FormControl("", []),
-      otp2: new FormControl("", []),
-      otp3: new FormControl("", []),
-      otp4: new FormControl("", []),
+      otp: new FormControl("", []),
+      // otp2: new FormControl("", []),
+      // otp3: new FormControl("", []),
+      // otp4: new FormControl("", []),
     })
   }
   editPassword(passRef: TemplateRef<any>) {
@@ -572,9 +583,12 @@ export class ProfileComponent implements OnInit {
     })
 
   }
+  onOtpChange(otp) {
+    this.otp = otp;
+  }
   //Verify OTP
   otpverify() {
-    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
+    // this.otp = this.otpForm.value.otp
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.closedialogbox();
@@ -584,7 +598,7 @@ export class ProfileComponent implements OnInit {
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-        this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
+        this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
         this.showotp = false;
         this.isenable = true;
       }
@@ -593,7 +607,7 @@ export class ProfileComponent implements OnInit {
   }
   //Resend OTP
   Resendcode() {
-    this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
+    this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
