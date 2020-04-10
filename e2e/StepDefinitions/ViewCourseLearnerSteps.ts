@@ -3,15 +3,19 @@ import {LoginPage} from "../PageObject/LoginPage";
 import {ViewCourseLearnerPage} from "../PageObject/ViewCourseLearnerPage";
 import { browser } from "protractor";
 
-let lgn=new LoginPage();
+var {setDefaultTimeout} = require('cucumber');
+setDefaultTimeout(60 * 1000);
+
+//let lgn=new LoginPage();
 let vcl=new ViewCourseLearnerPage();
 
 Given(': I am in my courses page', async ()=> {
-    await browser.get('http://40.76.47.212/Learner/login');
+    browser.waitForAngularEnabled(false);
+    await browser.get('http://52.171.134.188/Learner/login');
     await browser.manage().window().maximize();
-    await lgn.Username.sendKeys('mythreyi');
-    await lgn.Password.sendKeys('123Aa!@#');
-    await lgn.LoginButton.click(); 
+    await vcl.Username.sendKeys('Bobby');
+    await vcl.Password.sendKeys('Test@123');
+    await vcl.LoginButton.click(); 
 });
 
   When(': I click on my course link', async ()=> {
@@ -19,5 +23,5 @@ Given(': I am in my courses page', async ()=> {
 });
 
   Then(': I can view all the purchased courses arranged in chronological order', async ()=> {
-    console.log("EndTest");
+    console.log("User is in ViewCourseLearnerPage");
 });

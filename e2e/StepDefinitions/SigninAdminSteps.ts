@@ -2,10 +2,14 @@ import {Given,When,Then} from "cucumber";
 import {browser} from "protractor";
 import { SigninAdminPage } from "../PageObject/SigninAdminPage";
 
+var {setDefaultTimeout} = require('cucumber');
+setDefaultTimeout(60 * 1000);
+
 let algn = new SigninAdminPage();
 
 Given(': I am in admin login page', async ()=> {
-    await browser.get('http://40.76.47.212/Learner/login');
+    browser.waitForAngularEnabled(false);
+    await browser.get('http://52.171.134.188/Learner/login');
     await browser.manage().window().maximize();
 });
 
@@ -19,5 +23,5 @@ When(': Enter user name and password for a particular user role', async ()=> {
 });
 
 Then(': land in my respective homepage', async ()=> {
-    await expect("AdminPage").toEqual("AdminPage");
+    console.log("Admin Login Success");
 });

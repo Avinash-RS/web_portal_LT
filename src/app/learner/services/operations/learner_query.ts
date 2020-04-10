@@ -12,6 +12,9 @@ export const login = gql`
         username
         token
         user_id
+        is_blocked
+        is_profile_updated
+        message      
       }
     }
   }`;

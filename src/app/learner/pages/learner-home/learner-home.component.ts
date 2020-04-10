@@ -129,6 +129,7 @@ export class LearnerHomeComponent implements OnInit {
 
   ngOnInit() {
     //for responsive layout
+    this.gs.checkProfileFilled();
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
     this.Learningbreakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.WhatsNew = (window.innerWidth <= 400) ? 1 : 4;
@@ -167,17 +168,16 @@ export class LearnerHomeComponent implements OnInit {
 
     }]
 
-    this.bannerImg = [
-      {
-        src: '../../../../assets/learner/home3.jpg'
-      }, {
-        src: '../../../../assets/learner/home1.jpg'
-      }, {
-        src: '../../../../assets/learner/home2.jpg'
-      },
-      {
-        src: '../../../../assets/learner/lens.jpg'
-      }]
+    this.bannerImg = [{
+      src: '../../../../assets/learner/home3.jpg'
+    }, {
+      src: '../../../../assets/learner/home1.jpg'
+    }, {
+      src: '../../../../assets/learner/home2.jpg'
+    },
+    {
+      src: '../../../../assets/learner/lens.jpg'
+    }]
 
     this.partnerImg = [{
       src: '../../../../assets/learner/vit.png'
@@ -209,8 +209,7 @@ export class LearnerHomeComponent implements OnInit {
     },
     {
       src: '../../../../assets/learner/psit.jpg'
-    }
-    ]
+    }]
 
     this.service.getMyCourse('5e7f5125dba4466d9707629c').subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
@@ -225,6 +224,7 @@ export class LearnerHomeComponent implements OnInit {
   myCourses() {
 
   }
+  
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
     this.Learningbreakpoint = (event.target.innerWidth <= 400) ? 1 : 2;

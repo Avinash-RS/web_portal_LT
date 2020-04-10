@@ -4,15 +4,19 @@ import { LoginPage } from "../PageObject/LoginPage";
 import { ViewCourseLearnerPage } from "../PageObject/ViewCourseLearnerPage";
 import { ViewProfilePage } from "../PageObject/ViewProfilePage";
 
-let lgn=new LoginPage();
+var {setDefaultTimeout} = require('cucumber');
+setDefaultTimeout(60 * 1000);
+
+//let lgn=new LoginPage();
 let vpp=new ViewProfilePage();
 
 Given(': I am successfully logged into my account', async ()=> {
+    browser.waitForAngularEnabled(false);
     await browser.get('http://40.76.47.212/Learner/login');
     await browser.manage().window().maximize();
-    await lgn.Username.sendKeys("mythreyi");
-    await lgn.Password.sendKeys("123Aa!@#");
-    await lgn.LoginButton.click(); 
+    await vpp.Username.sendKeys("mythreyi");
+    await vpp.Password.sendKeys("123Aa!@#");
+    await vpp.LoginButton.click(); 
 });
 
 When(': I click on my profile page', async ()=> {

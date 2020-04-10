@@ -5,7 +5,7 @@ export class LoginPage
     Username:ElementFinder;
     Password:ElementFinder;
     LoginButton:ElementFinder;
-
+    
     constructor()
     {
         this.Username=element(by.name('username'));
