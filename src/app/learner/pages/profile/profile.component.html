@@ -377,52 +377,46 @@
                   <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
                     formControlName="otp3" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
 
-                  <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
-                    formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
-                  <br><br>
-                </div>
-                <div *ngIf="showotp">
-                  <button class="popupbtns" (click)="otpverify()">Verify</button>
-                </div><br>
-                <div *ngIf="showotp" class="account">Don't get code?<button class="resendbtn"
-                    (click)="Resendcode()">Resend code</button></div>
-              </form>
-            </mat-dialog-content>
-            <mat-dialog-actions *ngIf="isenable">
-              <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
-                Verification
-              </button><br><br>
-            </mat-dialog-actions>
-          </ng-template>
-          <!---------------------------------Password Dialog--------------------------------->
-          <ng-template #passwordDialog>
-            <span class="close">
-              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-            </span>
-            <h1 class="head">Change the Password</h1>
-            <mat-dialog-content style="width: 300px;margin-top: 24px;">
-              <form [formGroup]="passwordForm">
-                <label class="title">Enter the current password</label>
-                <div class="input-group">
-                  <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'"
-                    formControlName="currentpassword" onCopy="return false" onDrag="return false" onDrop="return false"
-                    onPaste="return false"
-                    [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
-                  <span class="input-group-append bg-white border-left-0">
-                    <span class="input-group-text bg-transparent">
-                      <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"
-                        aria-hidden="true"></i>
-                    </span>
-                  </span>
-                  <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
-                    <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
-                    <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and
-                      have a
-                      mixture of Special characters, uppercase and lowercase letters.</div>
-                  </div>
-                </div>
-
+              <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
+                formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
+              <br><br>
+            </div>
+            <div *ngIf="showotp">
+              <button class="popupbtns" (click)="otpverify()">Verify</button>
+            </div><br>
+            <div *ngIf="showotp" class="account">Didn't get OTP?<button class="resendbtn" (click)="Resendcode()">Resend OTP</button></div>
+          </form>
+        </mat-dialog-content>
+        <mat-dialog-actions *ngIf="isenable">
+          <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
+            Verification
+          </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
+      <!---------------------------------Password Dialog--------------------------------->
+      <ng-template  #passwordDialog>
+        <span class="close">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
+        <h1 class="head">Change the Password</h1>
+        <mat-dialog-content style="width: 300px;margin-top: 24px;" >
+          <form   [formGroup]="passwordForm">
+            <label class="title">Enter the current password</label>
+            <div class="input-group">
+              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
+              onDrop="return false" onPaste="return false"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
+              <span class="input-group-append bg-white border-left-0">
+                <span class="input-group-text bg-transparent">
+                  <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
+                </span>
+              </span>
+              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
+                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
+                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
+                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture of Special characters, uppercase and lowercase letters.</div>
+              </div>
+            </div>
 
 
                 <label class="title">Enter the new password</label>
