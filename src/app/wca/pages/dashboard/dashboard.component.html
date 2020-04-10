@@ -1,7 +1,90 @@
 
 <div><app-wca></app-wca></div>
-<p>hai</p>
-<p>hai</p>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">My Courses</li>
+    </ol>
+</nav>
+
+<div>
+    <button class="backgroundcol2" routerLink="/Learner/register" >Create a Course</button>
+</div> 
+  
+
+<div class="container wrap-body">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Published Courses <span style="float: right;font-size: small; font-weight: bold;">View all</span>
+                        </mat-panel-title>
+                    
+                    <mat-card style="text-align: center;">
+                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
+                            No courses yet
+                          </h2>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Courses created by me <span style="font-style: normal;font-size: initial;
+                            color: #6f6c6c">(Yet to publish)</span> <span style="float: right;font-size: small; font-weight: bold;">View all</span>
+                        </mat-panel-title>
+                    
+                    <mat-card style="text-align: center;">
+                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
+                            No courses yet
+                          </h2>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Draft <span style="font-style: normal;font-size: initial;
+                            color: #6f6c6c">(Work in progress)</span><span style="float: right;font-size: small; font-weight: bold;">View all</span>
+                        </mat-panel-title>
+                   
+                    <mat-card style="text-align: center;">
+                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
+                            No courses yet
+                          </h2>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
 
 
 <div><app-footer></app-footer></div>

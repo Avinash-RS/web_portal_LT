@@ -28,6 +28,8 @@ import { WcaComponent } from './pages/wca/wca.component';
 const routes: Routes = [
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] },
+
  
 ];
 
