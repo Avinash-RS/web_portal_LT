@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'Admin',
     loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
+    path: 'Wca',
+    loadChildren: './wca/wca.module#WcaModule'
   }
 
 ];
