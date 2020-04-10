@@ -15,6 +15,7 @@ button:disabled:hover {
 }
 
 @media (min-width: 300px) {
+
   .col-md-12,
   .col-md-11,
   .col-md-10,
@@ -34,6 +35,10 @@ button:disabled:hover {
 .container {
   max-width: 100% !important;
   overflow: hidden;
+}
+
+.contentTop {
+  margin-top: 58px !important;
 }
 
 .f_wt_200 {

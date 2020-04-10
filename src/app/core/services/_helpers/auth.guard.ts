@@ -16,23 +16,24 @@ export class AuthGuard implements CanActivate {
 
   //Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) : JSON.parse(localStorage.getItem('adminDetails')) || null;
+    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
+      JSON.parse(localStorage.getItem('adminDetails')) || null;
     var role = localStorage.getItem('role');
 
-    if (userDetailes != null) {
-      if (userDetailes.is_profile_updated && state.url == '/Learner/login' || state.url == '/Admin/login') {
-        this.router.navigate(["/Learner"]);
+    if (userDetailes != null) { // userdetail is present // authenticated user
+      if (((role == 'learner' && userDetailes.is_profile_updated) || (role == 'admin')) &&
+        state.url == '/Learner/login' || state.url == '/Admin/login') {
+        this.router.navigate([role == 'admin' ? "/Admin/userManagement":  "/Learner"]);
         return false;
       }
-      if (!userDetailes.is_profile_updated) {
-        if (state.url != '/Learner/profile') {
+      if (role == 'learner' && !userDetailes.is_profile_updated) {
+        if (state.url != '/Learner/profile') { //if profile not updated and trying to access other screens, redirect to profile
           this.router.navigate(["/Learner/profile"]);
           this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
-
           return false;
-        } else
+        } else //if url is profile
           return true
-      }
+      } 
       else
         return true;
     }

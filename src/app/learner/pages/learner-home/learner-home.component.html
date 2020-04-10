@@ -1,13 +1,7 @@
 <app-header></app-header>
-<div class="limiter">
-
-
-  <!-- <div class="wrap-body" *ngIf="userDetailes != null">
-  <button mat-raised-button class="my_course_btn" [routerLink]="['/Learner/MyCourse']">My courses</button>
-</div> -->
+<div class="limiter contentTop">
 
   <!-- <------------ Banner------------->
-  <br><br>
   <owl-carousel-o [options]="bannerOptions" class="banner">
     <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
     </ng-template>
@@ -19,8 +13,6 @@
   <!-- <------------ Streams------------->
   <h1 class="head">Streams</h1>
   <mat-grid-list [cols]="breakpoint" rowHeight="2:1.7" (window:resize)="onResize($event)">
-
-
     <mat-grid-tile>
       <div class="card">
         <div class="small-box bg-red">

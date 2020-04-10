@@ -95,6 +95,7 @@ export class PasswordComponent implements OnInit {
               if (loginresult.data.login.success) {
                 localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
                 localStorage.setItem('uname', this.passwordForm.value.username);
+                localStorage.setItem('role','learner')
                 localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
                 var ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);
