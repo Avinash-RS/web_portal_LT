@@ -91,6 +91,7 @@ export class PasswordComponent implements OnInit {
         this.alert.openAlert(data.data['user_registration_done'].message, null)
         localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
         this.router.navigate(['/Learner/profile']);
+        localStorage.setItem('role','learner')
       } else {
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_done'].message, null)

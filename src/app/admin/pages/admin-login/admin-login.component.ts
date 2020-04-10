@@ -37,18 +37,19 @@ export class AdminLoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            if (loginresult.data.login && this.loginForm.value.remember_me === true) {
-              localStorage.setItem('uname', this.loginForm.value.username);
-              localStorage.setItem('remember_me', 'true');
-              var ps = btoa(this.loginForm.value.password);
-              localStorage.setItem('ps', ps);
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-              this.router.navigate(['/Learner'])
-            } else {
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-              localStorage.setItem('remember_me', 'false');
-              this.router.navigate(['/Learner'])
-            }
+            // if (loginresult.data.login && this.loginForm.value.remember_me === true) {
+              // localStorage.setItem('uname', this.loginForm.value.username);
+              // localStorage.setItem('remember_me', 'true');
+              // var ps = btoa(this.loginForm.value.password);
+              // localStorage.setItem('ps', ps);
+              localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
+              this.router.navigate(['/Admin/userManagement'])
+              localStorage.setItem('role','admin')
+            // } else {
+            //   localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+            //   localStorage.setItem('remember_me', 'false');
+            //   this.router.navigate(['/Learner'])
+            // }
           } else
             this.alert.openAlert("Invalid login. Please try again", null)
         } else

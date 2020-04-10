@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role','learner')
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Learner'])
             } else {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('learner', 'true');
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role','learner')
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               this.router.navigate(['/Learner'])

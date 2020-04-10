@@ -14,8 +14,10 @@ export class AuthGuard implements CanActivate {
 
   //Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    if (userDetailes != null) {
+    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) : JSON.parse(localStorage.getItem('adminDetails')) || null;
+    var role = localStorage.getItem('role');
+
+    if (userDetailes != null) { // userdetail is present in local storage
       if (state.url == '/Learner/login' || state.url == '/Admin/login') {
         this.router.navigate(["/Learner"]);
         return false;
@@ -23,13 +25,14 @@ export class AuthGuard implements CanActivate {
       else
         return true;
     }
-    else if (userDetailes == null) {
-      if (state.url == '/Learner/MyCourse' || state.url == '/Learner/courseDetail' || state.url == '/Learner/courseDetail'
-        || state.url == '/Learner/profile' || state.url == '/Learner/scorm') {
+    else if (userDetailes == null) { //user detail is not present in local storage
+      if (state.url == '/Learner' || state.url == '/Learner/login' || state.url == '/Admin/login'
+        || state.url == '/Learner/register') {
+        return true;
+      } else {
         this.router.navigate(["/Learner"])
         return false;
-      } else
-        return true;
+      }
     }
     else
       return true;

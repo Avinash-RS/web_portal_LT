@@ -6,13 +6,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 const routes: Routes = [
   { path: 'login', component: AdminLoginComponent,canActivate:[AuthGuard]  },
+  { path: 'userManagement', component: UserManagementComponent,canActivate:[AuthGuard]  },
 ];
 
+
 @NgModule({
-  declarations: [AdminLoginComponent],
+  declarations: [AdminLoginComponent, UserManagementComponent],
   imports: [
     CommonModule,
     MaterialModule,
