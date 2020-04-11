@@ -1,0 +1,89 @@
+
+<div><app-wca></app-wca></div>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+    </ol>
+</nav>
+
+
+  
+
+
+<div class="container wrap-body">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Create a Course
+                        </mat-panel-title>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                                <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
+                                    <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                            
+                            <div class="form-group">
+                               
+                                <div class="col-md-8"><input type="text"  placeholder="Enter the course name"  
+                                   required /></div>
+                                   <div class="col-md-8"> <textarea class="inputs" style="resize: none;"  
+                                    placeholder="enter the course description ( 1000 Characters)" maxlength="1000" 
+                                    name="info"></textarea></div>
+                                  <div class="col-md-5" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the instructor"
+                                     name="language">
+                                    <mat-option *ngFor="let item of languageList" [value]="item._id">
+                                      {{item.languagename}}
+                                    </mat-option>
+                                  </mat-select>
+                                </div>
+
+
+                                
+                                <div class="col-md-3"> <textarea class="inputs" style="resize: none;"  
+                                    placeholder="Description" maxlength="1000" 
+                                    name="info"></textarea></div>
+
+
+                                 
+                              
+                                    <div class="col-md-5" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the takeways"
+                                        name="language">
+                                       <mat-option *ngFor="let item of languageList" [value]="item._id">
+                                         {{item.languagename}}
+                                       </mat-option>
+                                     </mat-select>
+                                   </div>
+
+
+
+                                   <div class="col-md-3"> <textarea class="inputs" style="resize: none;"  
+                                    placeholder="Description" maxlength="1000" 
+                                    name="info"></textarea></div>
+                
+                                    <button class="backgroundcol2" routerLink="/Wca/create" >Save & Continue</button>
+                                   
+                                    
+                                </div>
+
+                          
+                              
+                          
+                            
+                        </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+<div><app-footer></app-footer></div>

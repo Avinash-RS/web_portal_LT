@@ -36,111 +36,11 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: 0px 46px 0px 0px;
-    border-radius: 15px 17px 15px 15px;
+    margin: -35px 625px 0px 0px;
+  
 }
 
 
-
-
-::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
-    color: wheat;
-    font-size: 50px !important;
-    background: rgb(46, 46, 46);
-    display: inline-block;
-    cursor: pointer !important;
-    padding: 22px !important;
-    border-radius: 50px !important;
-    z-index: -1 !important;
-    opacity: 0.7;
-}
-
-::ng-deep .banner .owl-carousel .owl-nav .owl-prev {
-    position: absolute;
-    top: 300px;
-    z-index: 1 !important;
-    left: 30px;
-}
-
-::ng-deep .banner .owl-carousel .owl-nav .owl-next {
-    position: absolute;
-    top: 300px;
-    z-index: 1 !important;
-    right: 30px;
-}
-
-::ng-deep .banner .owl-theme .owl-dots {
-    position: absolute;
-    top: 600px;
-    left: 48%;
-}
-
-::ng-deep .owl-theme .owl-dots .owl-dot.active span {
-    background-color: black !important;
-}
-
-::ng-deep .owl-theme .owl-dots .owl-dot span {
-    background-color: rgb(110, 109, 109) !important;
-}
-
-::ng-deep .partner .owl-carousel .owl-item img {
-    width: 80%;
-}
-
-::ng-deep .partner .owl-carousel .owl-stage-outer {
-    width: 90%;
-    margin-left: 5%;
-}
-
-::ng-deep .partner .owl-carousel.owl-drag .owl-item {
-    text-align: -webkit-center;
-    width: 170.6px
-}
-
-::ng-deep .partner .owl-theme .owl-nav [class*='owl-'] {
-    color: wheat;
-    font-size: 30px !important;
-    background: rgb(46, 46, 46);
-    display: inline-block;
-    cursor: pointer !important;
-    padding: 10px !important;
-    border-radius: 50px !important;
-    width: 40px;
-    z-index: -1 !important;
-    opacity: 0.7;
-}
-
-::ng-deep .partner .owl-carousel .owl-nav .owl-prev {
-    position: absolute;
-    top: 36px;
-    z-index: 1 !important;
-    left: -40px;
-}
-
-::ng-deep .partner .owl-carousel .owl-nav .owl-next {
-    position: absolute;
-    top: 36px;
-    z-index: 1 !important;
-    right: -40px;
-}
-
-::ng-deep .trending .owl-carousel {
-    width: 86%;
-    margin-left: 7%;
-}
-
-::ng-deep .trending .owl-theme .owl-nav [class*='owl-'] {
-    color: wheat;
-    font-size: 30px !important;
-    background: rgb(46, 46, 46);
-    display: inline-block;
-    cursor: pointer !important;
-    padding: 10px !important;
-    border-radius: 50px !important;
-    width: 40px;
-    z-index: -1 !important;
-    opacity: 0.7;
-}
 
 
 
@@ -347,3 +247,25 @@ h1 {
     line-height: 90px;
     background: rgb(247, 27, 88);
 }
+
+input[type=text]
+{
+  width: 100%;
+  padding: 9px 20px;
+  margin: 10px 0;
+  background: white;
+  display: inline-block;
+  border: 1px solid $color-blue;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.inputs{
+    border: 1px solid;
+    padding: 8px !important;
+    border-radius: 5px;
+    color: $color-blue;
+    width: 100%;
+    background-color: none !important;
+    margin: 10px 0;
+  }

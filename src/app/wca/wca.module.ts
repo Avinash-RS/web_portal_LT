@@ -20,6 +20,8 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WcaComponent } from './pages/wca/wca.component';
+import { CreateCourseComponent } from './pages/create-course/create-course.component';
+import { CreateModuleComponent } from './pages/create-module/create-module.component';
 
 
 
@@ -28,7 +30,7 @@ import { WcaComponent } from './pages/wca/wca.component';
 const routes: Routes = [
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] },
+  { path: 'create', component: CreateCourseComponent, canActivate: [AuthGuard] },
 
  
 ];
@@ -36,7 +38,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [DashboardComponent, WcaComponent],
+  declarations: [DashboardComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
