@@ -20,6 +20,9 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WcaComponent } from './pages/wca/wca.component';
+import { CreateTemplateComponent } from './pages/create-template/create-template.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material';
 
 
 
@@ -29,14 +32,14 @@ const routes: Routes = [
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] },
-
+  { path: 'ct', component: CreateTemplateComponent}
  
 ];
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, WcaComponent],
+  declarations: [DashboardComponent, WcaComponent, CreateTemplateComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
@@ -53,6 +56,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
+    DragDropModule,
+    MatListModule
   ],
   providers: [Apollo],
   entryComponents: []
