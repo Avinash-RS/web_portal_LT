@@ -32,28 +32,33 @@
                             
                             <div class="form-group">
                                
-                                <div class="col-md-8"><input type="text"  placeholder="Enter the course name"  
-                                   required /></div>
-                                   <div class="col-md-8"> <textarea class="inputs" style="resize: none;"  
+
+                                <div class="row">
+                                <div class="col-md-8">
+                                <div class="col-md-12"><input type="text"  placeholder="Enter the course name"  
+                                   required /> </div>
+
+                                   <div class="col-md-12">   <textarea class="inputs" style="resize: none;"  
                                     placeholder="enter the course description ( 1000 Characters)" maxlength="1000" 
                                     name="info"></textarea></div>
-                                  <div class="col-md-5" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the instructor"
-                                     name="language">
-                                    <mat-option *ngFor="let item of languageList" [value]="item._id">
-                                      {{item.languagename}}
-                                    </mat-option>
-                                  </mat-select>
-                                </div>
 
 
-                                
-                                <div class="col-md-3"> <textarea class="inputs" style="resize: none;"  
+                                    <div class="col-md-5" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the instructor"
+                                        name="language">
+                                       <mat-option *ngFor="let item of languageList" [value]="item._id">
+                                         {{item.languagename}}
+                                       </mat-option>
+                                     </mat-select>
+                                   </div>
+
+                                   <div class="row">
+                                   <div class="col-md-3"> <textarea class="inputs1" style="resize: none;"  
                                     placeholder="Description" maxlength="1000" 
                                     name="info"></textarea></div>
 
-
-                                 
-                              
+                                    <div class="col-md-2">   <img class="img2" src="../../../../assets/images/image_upload.svg"></div>
+                                   </div>
+                       
                                     <div class="col-md-5" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the takeways"
                                         name="language">
                                        <mat-option *ngFor="let item of languageList" [value]="item._id">
@@ -67,8 +72,15 @@
                                    <div class="col-md-3"> <textarea class="inputs" style="resize: none;"  
                                     placeholder="Description" maxlength="1000" 
                                     name="info"></textarea></div>
-                
+
                                     <button class="backgroundcol2" routerLink="/Wca/create" >Save & Continue</button>
+                                 </div>
+
+
+
+      <div class="col-md-4">   <img class="img1" src="../../../../assets/images/image_upload.svg"></div>
+
+                                 </div>
                                    
                                     
                                 </div>

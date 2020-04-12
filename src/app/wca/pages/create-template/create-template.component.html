@@ -1,0 +1,85 @@
+<div>
+  <app-wca></app-wca>
+</div>
+
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+    <li class="breadcrumb-item" aria-current="page">Create Course</li>
+
+    <li class="breadcrumb-item" aria-current="page">Create Module</li>
+
+    <li class="breadcrumb-item active" aria-current="page">Create Template</li>
+  </ol>
+</nav>
+
+<div>
+  <mat-panel-title class="f_wt_500 f_size_18 color_blue" style="margin-left: 20px;">
+    Module Name <span class="material-icons"><a href="/">edit</a></span>
+  </mat-panel-title>
+</div>
+
+<div style="margin-top: 10px;">
+  <mat-panel-title routerLink="" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
+    Choose a template
+  </mat-panel-title>
+
+  <mat-panel-title class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;  border-bottom-style: solid;
+border-bottom-width: thick;border-bottom-color: gold;">
+    Create a template
+  </mat-panel-title>
+</div>
+
+<div class="container wrap-body">
+  <div class="row">
+    <div class="col-md-10" style="margin-top: 30px;">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-card style="text-align: center;">
+            <fieldset cdkDropList id="drop-list" (cdkDropListDropped)="itemDropped($event)">
+              <legend>Fields</legend>
+              <mat-toolbar *ngFor="let field of fields; let fieldIndex = index; trackBy: trackByIndex" cdkDrag>
+                <span>{{field}}</span>
+              </mat-toolbar>
+            </fieldset>
+
+            <div class="login_btn">
+              <div class="smallmenu1">
+                <button class="backgroundcol" [disabled]="fields.length==0" routerLink="" >Create</button>
+                <button class="backgroundcol" routerLink="">Cancel</button>
+              </div>
+            </div>
+
+          </mat-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+
+    <div class="col-md-2" style="margin-top: 30px;">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-card style="text-align: center;">
+
+            <mat-list>
+              <mat-list-item cdkDrag cdkDropList cdkDropListConnectedTo="drop-list" *ngFor="let type of types"
+                [cdkDragData]="type" (cdkDragStarted)="dragStart($event)" (cdkDragMoved)="moved($event)">
+                {{ type }}
+                <div *cdkDragPlaceholder class="field-placeholder"></div>
+              </mat-list-item>
+            </mat-list>
+
+          </mat-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+  </div>
+</div>
+
+
+<div>
+  <app-footer></app-footer>
+</div>

@@ -15,26 +15,31 @@
   
 
 
-<div class="container wrap-body">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                     
-                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
-                            Published Courses <span style="float: right;font-size: small; font-weight: bold;">View all</span>
-                        </mat-panel-title>
-                    
+                    <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                        Published Courses <span style="float: right;font-size: small; font-weight: bold;">View all</span>
+                    </mat-panel-title>
+
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
-                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
-                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
-                            </mat-grid-tile>
+                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+
+                            <owl-carousel-o [options]="popularCategorires" class="partner">
+                                <ng-template carouselSlide *ngFor="let course of wishlist">
+
+                            <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
+                              [showWishlist]="false" [showStatus]="false"> </app-course-component>
+                            </ng-template>
+                        </owl-carousel-o>
                         </mat-grid-list>
-                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
-                            No courses yet
-                          </h2>
-                    </mat-card>
+                        <h2 *ngIf="wishlist && wishlist.length == 0">
+                          No courses yet
+                        </h2>
+                      </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
@@ -47,16 +52,21 @@
                             color: #6f6c6c">(Yet to publish)</span> <span style="float: right;font-size: small; font-weight: bold;">View all</span>
                         </mat-panel-title>
                     
-                    <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
-                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
-                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
-                            No courses yet
-                          </h2>
-                    </mat-card>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+    
+                                <owl-carousel-o [options]="popularCategorires" class="partner">
+                                    <ng-template carouselSlide *ngFor="let course of wishlist">
+    
+                                <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
+                                  [showWishlist]="false" [showStatus]="false"> </app-course-component>
+                                </ng-template>
+                            </owl-carousel-o>
+                            </mat-grid-list>
+                            <h2 *ngIf="wishlist && wishlist.length == 0">
+                              No courses yet
+                            </h2>
+                          </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
@@ -69,16 +79,21 @@
                             color: #6f6c6c">(Work in progress)</span><span style="float: right;font-size: small; font-weight: bold;">View all</span>
                         </mat-panel-title>
                    
-                    <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
-                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
-                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
-                            No courses yet
-                          </h2>
-                    </mat-card>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+    
+                                <owl-carousel-o [options]="popularCategorires" class="partner">
+                                    <ng-template carouselSlide *ngFor="let course of wishlist">
+    
+                                <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
+                                  [showWishlist]="false" [showStatus]="false"> </app-course-component>
+                                </ng-template>
+                            </owl-carousel-o>
+                            </mat-grid-list>
+                            <h2 *ngIf="wishlist && wishlist.length == 0">
+                              No courses yet
+                            </h2>
+                          </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>

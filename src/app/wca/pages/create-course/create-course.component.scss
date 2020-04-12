@@ -36,8 +36,24 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: -35px 625px 0px 0px;
+    margin: 19px 188px 0px 0px;
   
+}
+
+
+.img1 {
+    border-style: groove;
+    vertical-align: middle;
+    width: 207px;
+    border-color: #d4dcea;
+}
+
+.img2{
+    
+    vertical-align: middle;
+    width: 101px;
+    border-color: #d4dcea;
+    margin: -9px 4px -2px 58px;
 }
 
 
@@ -252,7 +268,7 @@ input[type=text]
 {
   width: 100%;
   padding: 9px 20px;
-  margin: 10px 0;
+  margin: 10px 10px;
   background: white;
   display: inline-block;
   border: 1px solid $color-blue;
@@ -267,5 +283,16 @@ input[type=text]
     color: $color-blue;
     width: 100%;
     background-color: none !important;
-    margin: 10px 0;
+    margin: 10px 10px;
+  }
+
+
+  .inputs1{
+    border: 1px solid;
+    padding: 8px !important;
+    border-radius: 5px;
+    color: $color-blue;
+    width: 100%;
+    background-color: none !important;
+    margin: 10px 30px;
   }
