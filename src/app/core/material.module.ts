@@ -18,7 +18,8 @@ import {
   MatTabsModule,
   MatProgressBarModule,
   MatAutocompleteModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTableModule
 } from '@angular/material';
 
 import { CommonModule } from '@angular/common';
@@ -42,7 +43,8 @@ import { CommonModule } from '@angular/common';
     MatProgressBarModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    CommonModule
+    CommonModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -62,7 +64,7 @@ import { CommonModule } from '@angular/common';
     MatProgressBarModule,
     MatAutocompleteModule,
     MatExpansionModule,
-   
+    MatTableModule
   ],
   providers: [
     {

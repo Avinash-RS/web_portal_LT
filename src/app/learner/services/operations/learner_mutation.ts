@@ -5,7 +5,7 @@ export const user_registration = gql`
     user_registration(
       full_name: $full_name
       email: $email,
-      term_condition:$term_condition
+      term_condition: $term_condition
     ) {
       message
       success

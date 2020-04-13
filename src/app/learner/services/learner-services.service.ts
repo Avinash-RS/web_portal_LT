@@ -48,7 +48,7 @@ export class LearnerServicesService {
       variables: {
         full_name: full_name,
         email: email,
-        term_condition: termsandconditions
+        term_condition: termsandconditions,
       }
     });
   }
