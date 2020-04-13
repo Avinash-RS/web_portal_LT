@@ -53,7 +53,8 @@ export class OtpComponent implements OnInit {
     placeholder:'',
     inputStyles: {
       'width': '60px',
-      'height': '60px'
+      'height': '60px',
+      'background': '#B8D0FF'
     }
   };
 

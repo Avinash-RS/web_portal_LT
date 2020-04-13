@@ -25,7 +25,8 @@ export class ProfileComponent implements OnInit {
     placeholder:'',
     inputStyles: {
       'width': '50px',
-      'height': '50px'
+      'height': '50px',
+      'background': '#B8D0FF'
     }
   };
 
@@ -398,9 +399,9 @@ export class ProfileComponent implements OnInit {
 
 
     if (this.profileDetails.is_student_or_professional == 'student') {
-      // this.prof.total_experience = '';
-      // this.prof.organization = '';
-      // this.prof.job_role = '';
+      this.prof.total_experience = '';
+      this.prof.organization = '';
+      this.prof.job_role = '';
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
