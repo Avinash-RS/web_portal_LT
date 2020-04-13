@@ -1,35 +1,315 @@
-@import "../../../../assets/variable";
+@import "../../../../assets/variable.scss";
 
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+::ng-deep .mat-expansion-indicator {
+    margin-right: 25px !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    padding: 7px !important;
+    color: $color-blue;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+}
 .coursebreadcrumb {
     padding-top: 60px;
 
-    ol { 
+    ol {
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
 }
 
-.smallmenu1{
-    // font-size: 18px;
-    margin-left: 14px;
-    text-align: center; 
-}
-
-.backgroundcol {
-    background-color: $color-blue !important;
-    color: white;
-    font-size: 15px;   
-}
-
-
-.login_btn button {
-    margin-right: 7px;
-    color: white;
-    font-size: 15px;
+.backgroundcol2{
+    cursor: pointer;
+    background-color: #1F3777 !important;
     white-space: nowrap;
-    border: 1px solid;
+    border: 1px solid !important;
     padding-top: 8px;
+    color: #ffffff;
     padding-bottom: 8px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 9px;
+    float: right;
+    margin: 190px 343px 12px -288px;
+  
 }
+.backgroundcol1{
+    cursor: pointer;
+    background-color:  #ffffff !important;
+    white-space: nowrap;
+    border: 1px solid !important;
+    padding-top: 8px;
+    color: #1F3777;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 9px;
+    float: right;
+    margin: 190px 343px 12px -288px;
+  
+}
+
+
+.img1 {
+    border-style: groove;
+    vertical-align: middle;
+    width: 207px;
+    border-color: #d4dcea;
+}
+
+.img2{
+    
+    vertical-align: middle;
+    width: 101px;
+    border-color: #d4dcea;
+    margin: -9px 4px -2px 58px;
+}
+
+
+
+
+
+@import "../../../../assets/variable.scss";
+
+.mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+.coursebreadcrumb {
+    padding-top: 60px;
+
+    ol {
+        margin-bottom: 0 !important;
+        background-color: $color-white !important;
+    }
+}
+
+// Ankit
+.title {
+    text-align: center;
+    margin-top: 9px;
+    font-size: 22px;
+    color: $color-blue;
+}
+
+.backimage {
+    height: 88px;
+}
+
+.small-box {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-bottom: 20px;
+    width: 260px;
+    height: 95px;
+    margin-top: 0%;
+    position: relative;
+}
+
+.smallPMP {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-bottom: 20px;
+    width: 272px;
+    height: 65px;
+    position: relative;
+}
+
+.small-box .icon>i {
+    font-size: 90px;
+    position: absolute;
+    right: -20px;
+    margin-top: -20px;
+    transition: all .3s linear;
+}
+
+.svgimg {
+    width: 42px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.profileimg {
+    margin-left: 95px;
+    width: 65px;
+    height: 65px;
+    margin-top: -50px;
+    z-index: 1;
+    border-radius: 50%;
+    border: 1px solid $color-white;
+    background-color: $color-light-pink;
+    cursor: pointer;
+
+}
+
+.ion {
+    display: inline-block;
+}
+
+.col-lg-3 {
+    -ms-flex: 0 0 25% !important;
+    flex: 0 0 25% !important;
+    position: relative;
+    width: 100%;
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+}
+
+.small-box>.inner {
+    padding: 10px;
+}
+
+.mat-grid-tile .mat-grid-tile-footer {
+    color: $color-white;
+    background: transparent;
+
+}
+
+
+
+.bg-red {
+    background-color: $color-light-pink !important;
+    color: $color-white;
+}
+
+.bg-yellow {
+    background-color: $color-yellow !important;
+    color: $color-white;
+}
+
+.bg-green {
+    background-color: $color-light-green !important;
+    color: $color-white;
+}
+
+.bg-blue {
+    background-color: $color-light-blue !important;
+    color: $color-white;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 78%;
+}
+
+.card1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 68%;
+    background-color: #000;
+}
+
+.card2 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    height: 60%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: $color-blue;
+    text-align: center;
+    font-weight: 500;
+    font-size: 27px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+    width: 15%;
+    height: 55px;
+}
+
+.footerbtn {
+    width: 120px;
+    height: 55px;
+    background-color: $color-blue;
+    color: $color-white;
+    text-align: center !important;
+    margin-left: 86px;
+}
+.whatnewcard {
+    text-align: center;
+    margin-left: 1%;
+    margin-right: 1%; 
+    border: hidden;
+
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    margin: 21px -5px 12px 31px;
+    height:320px
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    color: $color-white;
+    font-weight: 500;
+    transform: translate(-50%, -50%);
+}
+
+.info-box-icon {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: inline-block;
+    height: 184px;
+    width: 7px;
+    margin-left: 17px;
+    text-align: center;
+    margin-bottom: -184px;
+    font-size: 45px;
+    transform: translate(-50%, -50%);
+    line-height: 90px;
+    background: rgb(247, 27, 88);
+}
+
+input[type=text]
+{
+  width: 100%;
+  padding: 9px 20px;
+  margin: 10px 10px;
+  background: white;
+  display: inline-block;
+  border: 1px solid $color-blue;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.inputs{
+    border: 1px solid;
+    padding: 8px !important;
+    border-radius: 5px;
+    color: $color-blue;
+    width: 100%;
+    background-color: none !important;
+    margin: 10px 10px;
+  }
+
+
+  .inputs1{
+    border: 1px solid;
+    padding: 8px !important;
+    border-radius: 5px;
+    color: $color-blue;
+    width: 100%;
+    background-color: none !important;
+    margin: 10px 30px;
+  }

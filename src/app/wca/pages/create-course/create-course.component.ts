@@ -12,4 +12,19 @@ export class CreateCourseComponent implements OnInit {
   ngOnInit() {
   }
 
+  words2 = [{ value: '' }];
+  add(i) {
+    
+      this.words2.push({ value: '' });
+  
+  }
+
+  removenewLink(index) {
+   
+      this.words2.splice(index, 1);
+    
+  
+
+  }
+
 }

@@ -9,7 +9,7 @@
 
         <li class="breadcrumb-item active" aria-current="page">Create Module</li>
 
-        <li class="breadcrumb-item active" aria-current="page">Create Template</li>
+        <li class="breadcrumb-item active" aria-current="page">Choose a Template</li>
     </ol>
 </nav>
 
@@ -24,25 +24,25 @@
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                    
-                  <mat-panel-title routerLink="" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
-                    Choose a template
-                  </mat-panel-title>
-                
+
                   <mat-panel-title class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;  border-bottom-style: solid;
-                border-bottom-width: thick;border-bottom-color: gold;">
+                  border-bottom-width: thick;border-bottom-color: gold;">
+                      Choose a template
+                    </mat-panel-title>
+
+                  <mat-panel-title routerLink="" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
                     Create a template
                   </mat-panel-title>
+                
+                  
 
-<div class="row">
-
-<div class="col-md-9">
 
                         <mat-card style="text-align: center;">
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
     
 
                               <div>
-                                <button class="backgroundcol1" routerLink="">Cancel</button>
+                              
                                   <button class="backgroundcol2" routerLink="" >Create</button>
                                   
                                 </div>
@@ -52,19 +52,7 @@
                             </mat-grid-list>
                         </mat-card>
 
-                      </div>
-                      <div class="col-md-3">
-
-                        <mat-card style="text-align: center;">
-                          <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
-  
-
-                          </mat-grid-list>
-                      </mat-card>
-
-                      </div>
-
-                    </div>
+                     
                 </mat-expansion-panel>
             </mat-accordion>
         </div>

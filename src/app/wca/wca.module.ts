@@ -20,14 +20,15 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WcaComponent } from './pages/wca/wca.component';
-<<<<<<< HEAD
+import { CreateTemplateComponent } from './pages/create-template/create-template.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
-=======
-import { CreateTemplateComponent } from './pages/create-template/create-template.component';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatListModule } from '@angular/material';
->>>>>>> ce7bc4d39deaf33ce5550bf32cf3039d1768cbd0
+import { ViewModuleComponent } from './pages/view-module/view-module.component';
+import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
+
 
 
 
@@ -36,24 +37,19 @@ import { MatListModule } from '@angular/material';
 const routes: Routes = [
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-<<<<<<< HEAD
-  { path: 'create', component: CreateCourseComponent, canActivate: [AuthGuard] },
-
-=======
   { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] },
-  { path: 'ct', component: CreateTemplateComponent}
->>>>>>> ce7bc4d39deaf33ce5550bf32cf3039d1768cbd0
+  { path: 'addcourse', component: CreateCourseComponent, canActivate: [AuthGuard] },
+  { path: 'viewmodule', component: ViewModuleComponent, canActivate: [AuthGuard] },
+  { path: 'addmodule', component: CreateModuleComponent, canActivate: [AuthGuard] },
+  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard]},
+  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard]}
  
 ];
 
 
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [DashboardComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent],
-=======
-  declarations: [DashboardComponent, WcaComponent, CreateTemplateComponent],
->>>>>>> ce7bc4d39deaf33ce5550bf32cf3039d1768cbd0
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
