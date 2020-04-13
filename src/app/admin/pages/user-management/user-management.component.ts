@@ -97,7 +97,7 @@ export class UserManagementComponent implements OnInit {
       this.admin
     ).subscribe((result: any) => {
       console.log(result.data.user_registration.message);
-      if (result.data.user_registration.success)
+      if (result.data.user_registration.success  == 'true')
         this.alert.openAlert("Success !", "User registered successfully")
       else
         this.alert.openAlert(result.data.user_registration.message, null)
