@@ -3,7 +3,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule  } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 //others
@@ -29,6 +29,7 @@ import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learn
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 //others
 
 const routes: Routes = [
@@ -62,7 +63,8 @@ const routes: Routes = [
     LearnerMyCourseComponent,
     ResetpasswordComponent,
     TermsconditionsComponent,
-    ScormplayerComponent
+    ScormplayerComponent,
+    
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -78,10 +80,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
+    ReactiveFormsModule    ,                    
     //NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
+    NgOtpInputModule
   ],
   providers: [Apollo],
   entryComponents: []

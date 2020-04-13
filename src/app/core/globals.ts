@@ -1,6 +1,6 @@
 'use strict';
 import { Validators } from "@angular/forms";
-// 'use strict';
+
 export const usernameVal: any = [
     Validators.required,
     Validators.minLength(3),
@@ -16,26 +16,30 @@ export const passwordVal: any = [
 
 export const mobileVal: any = [
     Validators.required,
-    Validators.minLength(10), 
-    Validators.maxLength(10), 
+    Validators.minLength(10),
+    Validators.maxLength(10),
     Validators.pattern(/^[6-9][0-9]{9}$/)
 ]
 export const emailVal: any = [
-    Validators.required, 
-    Validators.minLength(6), 
-    Validators.maxLength(64), 
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(64),
     Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,4}$/)
     //  old pattern Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
 ]
 // not accpect start and end space 
 export const fullnameVal: any = [
-    Validators.required, 
+    Validators.required,
     Validators.pattern(/^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/),
-     Validators.minLength(3),
-      Validators.maxLength(50)
+    Validators.minLength(3),
+    Validators.maxLength(50)
 ]
 
-export  var lowerCaseLetters = /[a-z]/g;
-export  var upperCaseLetters = /[A-Z]/g;
-export  var numbers = /[0-9]/g;
-export  var specialchar = /[^\w\s]/g;
+export const req: any = [
+    Validators.required
+]
+
+export var lowerCaseLetters = /[a-z]/g;
+export var upperCaseLetters = /[A-Z]/g;
+export var numbers = /[0-9]/g;
+export var specialchar = /[^\w\s]/g;

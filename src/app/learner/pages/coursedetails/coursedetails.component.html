@@ -6,101 +6,87 @@
         <li class="breadcrumb-item active" aria-current="page">{{course.course_name}}</li>
     </ol>
 </nav>
+
 <div *ngIf="course != null">
-    <div class="section_1"></div>
-    <!-- <div class="section_1"></div> -->
-    <mat-card class="section_1_card_1 opacity absolute" style="z-index: 1;"></mat-card>
-    <mat-card class="section_1_card_1 background_trans absolute" style="z-index: 1;">
-        <mat-card-title>
-            <span class="icon f_wt_400 f_size_23">₹ {{course.price}}</span>
-            <span class="f_wt_200 strike_text f_size_16">Rs {{course.price}}</span>
-            <span class="f_wt_200 f_size_16"> {{course.rating}}%Off </span>
-        </mat-card-title>
-        <mat-card-content>
-            <p class="day_left"><i class="fa fa-hourglass"
-                    style="background-color: transparent;border: none;box-shadow: none;" aria-hidden="true"></i>
-                {{course.certificate_html_view_enabled}} day left at this price</p>
-            <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div><br>
-            <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
-            <div>
-                <!-- <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300">
-                    <i class="fa fa-share"
-                        style="-webkit-text-stroke-color: #db3137;  font-size: 15px; background-color: transparent;box-shadow:none;border:none "
-                        aria-hidden="true"></i>Share</button>
-                <button mat-raised-button class="share_text background_trans width_25 f_size_14 f_wt_300"
-                    (click)="selectWishlist(course)">
-                    <i class="fa fa-heart"
-                        style="-webkit-text-stroke-color: #db3137; font-size: 15px; background-color: transparent;box-shadow:none;border:none "
-                        aria-hidden="true" *ngIf="course.wishlisted == false"></i>
-                    <i class="fa fa-heart"
-                        style="-webkit-text-stroke-color: #db3137; color: #db3137;font-size: 15px; background-color: transparent;box-shadow:none;border:none "
-                        aria-hidden="true" *ngIf="course.wishlisted == true"></i>
-                    Wishlist</button> -->
+    <div class="container">
+        <!-- <div class="row section_1" [style.background]="'url('+course.course_img_url+')'"> -->
+        <div class="row section_1" [style.background]="'url(../../../../assets/learner/lens.jpg)'">
+            <div class="col-md-8 section_1_a">
+                <p class="course_name f_wt_500 ">{{course.course_name | titlecase }} </p>
+                <div class="display_flex">
+                    <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
+                    <strong class="f_size_23 space_5">{{course.rating}}
+                        ({{course.max_student_enrollments_allowed}})</strong>
+                </div>
+                <p class="course_desc">{{course.short_description}}</p>
+                <table class="width_90">
+                    <tr>
+                        <td>{{course.max_student_enrollments_allowed}} Already enrolled</td>
+                        <td>
+                            <i class="fa fa-id-card-o" style="background-color: #ebebeb;box-shadow: none;"></i>
+                            Certificate
+                        </td>
+                        <td>
+                            <i class="fa fa-book" style="background-color: #ebebeb;box-shadow: none;"></i>Self
+                            Placed
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <span class="background-maroon whitefont border-radius-5 p-5px f_wt_initial">Last updated
+                                {{course.updated_at | date}}</span></td>
+                        <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
+                            {{course.course_language}}</td>
+                    </tr>
+                </table>
+                <i class="fa fa-play course_preview_icon pointer" aria-hidden="true" (click)="coursePlay()"></i>
+                <div class="course_preview" (click)="coursePlay()">
+                    <h2>Course <br> Preview</h2>
+                </div>
 
-                <span class="btn btn-primary btn-primary btn2"><i class="fa fa-share"
-                        style="-webkit-text-stroke-width: 2px;"></i> Share</span>
-                <span class="btn btn-primary btn-primary btn2" (click)="selectWishlist(course)">
-                    <i class="fa fa-heart" *ngIf="course.wishlisted == false"
-                        style="-webkit-text-stroke-width: 2px;"></i>
-                    <i class="fa fa-heart" *ngIf="course.wishlisted == true" style="color: #db3137 !important;"></i>
-                    Wishlist
-                </span>
+                <div class="partner_image_div">
+                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
+                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5">
+                </div>
+                <!-- </div> -->
             </div>
-        </mat-card-content>
-        <br><br>
-    </mat-card>
-    <div class="section_1_a absolte width_60 absolute">
-        <p class="course_name f_wt_500 capitalize">{{course.course_name}} </p>
-        <div class="display_flex">
-            <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
-            <strong class="f_size_23 space_5">{{course.rating}} ({{course.max_student_enrollments_allowed}})</strong>
-        </div>
-
-        <!-- <p class="course_desc f_wt_500">I'm trying to blur the background image, but the main content is blurred too blur
-        the
-        background image</p> -->
-        <p class="course_desc">{{course.short_description}}</p>
-        <table class="width_90">
-            <tr>
-                <!-- <td> Already enrolled</td> -->
-                <td>{{course.max_student_enrollments_allowed}} Already enrolled</td>
-                <td>
-                    <i class="fa fa-id-card-o" style="background-color: #ebebeb;box-shadow: none;"></i> Certificate
-                </td>
-                <td>
-                    <i class="fa fa-book" style="background-color: #ebebeb;box-shadow: none;"></i>Self Placed
-                </td>
-            </tr>
-            <tr>
-                <td> <span class="background-maroon whitefont border-radius-5 p-5px">Last updated
-                        {{course.updated_at | date}}</span></td>
-                <!-- <td> Last updated {{course.updated_on}}</td> -->
-                <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
-                    {{course.course_language}}</td>
-                <!-- English</td> -->
-            </tr>
-        </table>
-        <!-- <button style="background-color: transparent;"> -->
-        <i class="fa fa-play" aria-hidden="true" style="-webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: black; color : black;font-size: 50px;background-color: #f8f9fa;
-        /* width: 10%; */
-        border-radius: 50px; 
-        padding: 15px 15px 15px 27px;margin-top: 3% !important;" (click)="coursePlay()"></i>
-        <!-- </button> -->
-
-        <div class="course_preview" (click)="coursePlay()">
-            <h2>Course <br> Preview</h2>
-        </div>
-
-        <div class="partner_image_div">
-            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-            <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5">
+            <div class="col-md-4">
+                <mat-card class="section_1_card_1 background_trans">
+                    <mat-card-title>
+                        <span class="icon f_wt_400 f_size_23">₹ {{course.price}}</span>
+                        <span class="f_wt_200 strike_text f_size_16">Rs {{course.price}}</span>
+                        <span class="f_wt_200 f_size_16"> {{course.rating}}%Off </span>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <p class="day_left"><i class="fa fa-hourglass"
+                                style="background-color: transparent;border: none;box-shadow: none;"
+                                aria-hidden="true"></i>
+                            {{course.certificate_html_view_enabled}} day left at this price</p>
+                        <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div>
+                        <br>
+                        <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
+                        <div>
+                            <span class="btn btn-primary btn-primary btn2 pointer"><i class="fa fa-share"
+                                    style="-webkit-text-stroke-width: 2px;"></i> Share</span>
+                            <span class="btn btn-primary btn-primary btn2 pointer" (click)="selectWishlist(course)">
+                                <i class="fa fa-heart" *ngIf="course.wishlisted == false"
+                                    style="-webkit-text-stroke-width: 2px;"></i>
+                                <i class="fa fa-heart" *ngIf="course.wishlisted == true"
+                                    style="color: #db3137 !important;"></i>
+                                Wishlist
+                            </span>
+                        </div>
+                    </mat-card-content>
+                    <br><br>
+                </mat-card>
+            </div>
         </div>
     </div>
 
+
+
     <div class="wrap_content">
-        <div class="tabs width_60 tabstyle">
+        <div class="tabs width_70">
             <button mat-raised-button>About</button>
             <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
             <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
@@ -183,13 +169,13 @@
 
         <div #Take_away> </div>
         <br> <br><br><br>
-      <div class="display_flex">
-        <h2 class="m-l-5"> Takeaways</h2>
-        <button mat-raised-button (click)="clickedT('media')" style="border: none;
+        <div class="display_flex">
+            <h2 class="m-l-5"> Takeaways</h2>
+            <button mat-raised-button (click)="clickedT('media')" style="border: none;
         box-shadow: none;color : red;margin-left: 10px;">Media</button>
-        <button mat-raised-button (click)="clickedT('text')" style = "border: none;
+            <button mat-raised-button (click)="clickedT('text')" style="border: none;
         box-shadow: none;color : red">Text</button>
-      </div>  
+        </div>
         <!-- <mat-tab-group>{{clicked}} -->
         <!-- <mat-tab label="Media" style="color:red"> -->
         <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
@@ -394,7 +380,7 @@
                         <p>Course ratings</p>
                     </div>
                     <div class="width_50">
-                        <div class="display_flex">
+                        <div class="display_flex m-t-s">
                             <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="70">
                             </mat-progress-bar>
                             <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
@@ -458,24 +444,55 @@
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s,
                 </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            It has roots in a piece of classical Latin literature from 45 BC, making
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                </mat-expansion-panel>
+
             </mat-accordion>
-            <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
+            <mat-card-footer *ngIf="course.review_and_faq" class="pointer" (click)="open = !open">
+                {{open ? 'View Less >' : 'View More >' }}</mat-card-footer>
         </div>
     </div>
     <br><br><br>
 
 </div>
 
-<div style="z-index: -1;">
-    <h2 class=" m-l-5">
-        Frequently bought together
+<div style="z-index: -1;" *ngIf="course">
+    <h2 class=" m-l-5" *ngIf="course.frequently_bought_together">
+        Frequently bought together 
     </h2>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+    <!-- <owl-carousel-o [options]="slideOptions">
+        <ng-template  carouselSlide>Slide 1</ng-template>
+        <ng-template carouselSlide>Slide 2</ng-template>
+        <ng-template carouselSlide>Slide 3</ng-template>
+    </owl-carousel-o> -->
+    <app-top-courses *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0"
+        [from]="'cd'" [CourseList]="course.frequently_bought_together" [showCartBtn]="true" [showWishlist]="true"
+        [canNavigate]="true" [showStatus]="false"></app-top-courses>
+    
 
-    <h2 class="m-l-5">
+    <h2 class="m-l-5" *ngIf="course.people_also_viewed">
         People Also Viewed
     </h2>
-    <app-wishlist-courses [from]="'cd'"></app-wishlist-courses>
+    <app-top-courses [from]="'cd'" *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0"
+        [CourseList]="course.people_also_viewed" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
+        [showStatus]="false"></app-top-courses>
 </div>
 
 <br><br><br><br><br>

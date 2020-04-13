@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, Output, EventEmitter, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
@@ -10,11 +10,17 @@ import * as myGlobals from '@core/globals';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
+  capsOn;
+  show: boolean = false;
+
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private alert: AlertServiceService, private service: LearnerServicesService) { }
+    private alert: AlertServiceService, private service: LearnerServicesService) { 
+      console.log('2')
+    }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -36,22 +42,34 @@ export class LoginComponent implements OnInit {
           if (loginresult.data.login.success) {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
-              localStorage.setItem('learner', 'true');
               localStorage.setItem('remember_me', 'true');
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role','learner')
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-              this.router.navigate(['/Learner'])
+              //if false, then need to update profile
+              if (loginresult.data.login.message.is_profile_updated)
+                this.router.navigate(['/Learner'])
+              else {
+                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
+                this.router.navigate(['/Learner/profile'])
+              }
             } else {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('uname', this.loginForm.value.username);
-              localStorage.setItem('learner', 'true');
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role','learner')
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
-              this.router.navigate(['/Learner'])
+              //if false, then need to update profile
+              if (loginresult.data.login.message.is_profile_updated)
+                this.router.navigate(['/Learner'])
+              else {
+                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
+                this.router.navigate(['/Learner/profile'])
+              }
             }
           } else {
             this.loginForm.reset();

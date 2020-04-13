@@ -1,5 +1,7 @@
 @import "../../assets/variable.scss";
-.form-control.is-invalid, .was-validated .form-control:invalid {
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + .75rem);
   background-image: none !important;
@@ -7,6 +9,7 @@
   background-position: right calc(.375em + .1875rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+
 .custom-modalbox {
   .mat-dialog-actions {
     justify-content: center;
@@ -95,25 +98,6 @@
 }
 
 
-.space5 {
-  margin-top: 5%;
-}
-
-.space10 {
-  margin-top: 10%;
-}
-
-.space20 {
-  margin-top: 20%;
-}
-
-.space30 {
-  margin-top: 30%;
-}
-
-.space40 {
-  margin-top: 40%;
-}
 
 
 [data-tip] {
@@ -180,6 +164,27 @@ mat-icon {
 
 .br-default .br-selected:after {
   color: #ffcf05 !important;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 12px 11px 10px 1px;
+  margin-bottom: 0;
+  height: 38px;
+  margin-top: 1px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+}
+
+.bg-transparent {
+  background-color: $color-light-blue !important;
 }
 
 .head {
@@ -254,18 +259,6 @@ mat-icon {
   }
 }
 
-input[type=text],
-input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 1px 0;
-  background: $color-light-blue;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
-
 .p-l-50 {
   padding-left: 40px !important;
 }
@@ -306,12 +299,7 @@ mat-icon {
   cursor: pointer;
   color: #1F3777;
 }
+
 button:disabled:hover {
   cursor: not-allowed;
 }
-
-// .header{
-//   .mat-menu-content {
-//     background-color: #1F3777 !important;
-// }
-// }

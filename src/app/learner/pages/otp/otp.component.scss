@@ -1,6 +1,15 @@
 @import "../../../../assets/variable.scss";
 
-     
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  background: $color-light-blue;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
   .otp {
     margin: 0 5px;
     text-align: center;
@@ -22,6 +31,7 @@
     color: $color-blue;
     word-break: break-all !important;
     text-align: center !important;
+    cursor: pointer;
 }
   
   

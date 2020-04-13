@@ -1,7 +1,7 @@
 @import "../../../../assets/variable.scss";
 
 img {
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(141, 141, 141);
     height: auto;
     width: 100%;
 }
@@ -11,14 +11,19 @@ img {
     margin: auto;
 }
 
+.m-t-10 {
+    margin-top: 10px;
+}
+
 ::ng-deep .br-default .br-unit {
-    font-size: 18px;
+    font-size: 16px;
     height: 18px;
-    width: 9px;
+    width: 8px;
+    margin-top: -10px !important;
 }
 
 .m-t-15 {
-    margin-top: 17px;
+    margin-top: 7px;
 }
 
 .m-l-5 {
@@ -28,7 +33,6 @@ img {
 .status {
     letter-spacing: 1px;
     border-radius: 0px;
-    // height: 8vh;
 }
 
 .mat-progress-bar {
@@ -43,12 +47,11 @@ img {
 .wishlist {
     position: absolute;
     z-index: 1;
-    margin-left: -5px;
-    margin-top: 5px;
+    // margin-left: -5px;
+    margin-top: 10px;
 
     .wishlist_btn {
         background: rgb(41, 41, 41);
-        // opacity: 0.9;
     }
 }
 
@@ -56,6 +59,7 @@ img {
     width: 33px;
     height: 35px;
 }
+
 mat-icon {
     font-size: 18px;
     -webkit-text-stroke-width: 3px;
@@ -63,24 +67,23 @@ mat-icon {
 }
 
 .container {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-}
+    width: 96%;
+    margin-left: 2%;
 
-.container .overlay {
-    height: 100%;
-    width: 70%;
-    position: absolute;
-    overflow: hidden;
-    top: -2vh;
-    left: 0;
-    opacity: 0;
-    margin-left: 15%;
-    filter: alpha(opacity=0);
-    background-color: $color-blue !important;
-    color: white;
-    cursor: pointer;
+    .overlay {
+        height: 80%;
+        width: 76%;
+        position: absolute;
+        overflow: hidden;
+        top: 2vh;
+        left: 0;
+        opacity: 0;
+        margin-left: 12%;
+        filter: alpha(opacity=0);
+        background-color: $color-blue !important;
+        color: white;
+        cursor: pointer;
+    }
 }
 
 .container:hover .overlay {
@@ -97,131 +100,9 @@ mat-icon {
 .bottomButtons {
     position: absolute;
     bottom: 2vh !important;
-    width: 100%;
+    left: 8%;
 }
 
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
-    // margin-left: 5px;
-    // margin-right: 5px;
 }
-
-// .title {
-//     font-size: 14px;
-//     margin-top: 10px;
-//     font-weight: 500 !important;
-//     text-align: justify;
-//     width: 76%;
-//     text-align: initial;
-//     height: 3vh;
-//     margin-left: 12%;
-//     text-overflow: ellipsis;
-//     word-wrap: break-word;
-//     overflow: hidden;
-//     line-height: 1.8em;
-// }
-
-
-
-// .rating {
-//     margin-top: -3vh;
-//     display: flex;
-//     font-size: 13px;
-//     margin-left: 12%;
-// }
-
-// ::ng-deep .br-default .br-unit {
-//     width: 6px !important;
-//     font-size: 20px;
-// }
-
-// .details {
-//     margin-top: 6.3%;
-//     width: 60%;
-//     font-size: 13.5px;
-// }
-
-// strong {
-//     margin-left: 5%;
-//     margin-right: 10%;
-// }
-
-// .price {
-//     float: right;
-//     margin-right: 0% !important;
-// }
-
-// .example {
-//     display: inline;
-// }
-
-// .content {
-//     opacity: 0;
-//     font-size: 40px;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     color: white;
-//     background-color: $color-blue !important;
-//     width: 72%;
-//     margin-left: 14%;
-//     height: 35vh;
-// }
-
-// .example .content:hover {
-//     opacity: 1;
-// }
-
-// .example .content .text {
-//     height: 0;
-//     opacity: 1;
-// }
-
-// .example .content:hover .text {
-//     opacity: 1;
-//     margin-top: 10px;
-// }
-
-// .text {
-//     font-size: 11.5px;
-// }
-
-
-
-
-
-
-
-// .wishlst {
-//     position: absolute;
-//     left: 76%;
-//     top: 1vh;
-// }
-
-// .wishlst i,
-// .wishlstinContent i {
-//     border-radius: 50px;
-//     width: 100%;
-//     background-color: rgb(41, 41, 41);
-//     opacity: 0.7;
-//     border: none;
-//     padding: 7px;
-// }
-
-// .wishlstinContent {
-//     position: absolute;
-//     left: 84%;
-//     top: 1vh;
-//     border: none;
-//     background-color: transparent;
-// }
-
-// .fa {
-//     -webkit-text-stroke-width: 3px;
-//     -webkit-text-stroke-color: red;
-//     font-size: 20px;
-// }
-
-// ::ng-deep .mat-progress-bar-fill::after {
-//     background-color: $color-yellow;
-// }

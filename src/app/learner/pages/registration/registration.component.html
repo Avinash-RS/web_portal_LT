@@ -25,7 +25,7 @@
                         class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
                     <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.pattern">Email pattern is invalid</div>
+                        <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
                     </div><br>
 
                     <mat-checkbox class="" formControlName="termsandconditions" required>
