@@ -35,7 +35,8 @@
               "src/styles.scss",
               "src/app/learner/learner.scss",
               "src/app/admin/admin.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/videogular2/fonts/videogular.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

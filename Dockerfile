@@ -8,8 +8,10 @@ RUN npm install
 RUN npm install ngx-bar-rating
 RUN npm install ngx-mask
 RUN npm install ngx-owl-carousel-o
-run npm install ngx-password-toggle
+RUN npm install ngx-password-toggle
 RUN npm install ng4-loading-spinner
+RUN npm install videogular2 --save
+RUN npm install @types/core-js --save-dev
 
 COPY . .
 
