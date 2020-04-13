@@ -114,7 +114,6 @@ export class ProfileComponent implements OnInit {
     private gs: GlobalServiceService
   ) {
     this.enabel = false
-
   }
   showPassword() {
     this.show_button = !this.show_button;
@@ -166,13 +165,14 @@ export class ProfileComponent implements OnInit {
       if (!this.currentUser.is_profile_updated)
         this.gs.preventBackButton()
       this.getprofileDetails(this.currentUser.user_id);
-      this.getAllLevels();
+    
       this.getAllcountry();
       this.getAllLanguage();
       this.getBoardsUniv();
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
+      this.getAllLevels();
       // this.closedialogbox();
 
 
@@ -529,7 +529,7 @@ export class ProfileComponent implements OnInit {
           localStorage.setItem('UserDetails', JSON.stringify(this.currentUser))
           this.alert.openAlert(data.data['update_profile'].message, null)
           this.showdeletedicon = true;
-          // this.router.navigate(['/Learner/MyCourse']);
+          this.router.navigate(['/Learner/MyCourse']);
         } else {
           this.alert.openAlert(data.data['update_profile'].message, null)
         }
