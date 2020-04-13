@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { get_user_group } from "./operations/admin_query"
-import { map_user_group } from "./operations/admin_mutation"
+import { get_user_group } from "./operations/admin_query";
+import { user_registration } from "./operations/admin_mutation"
 @Injectable({
   providedIn: 'root'
 })
@@ -15,16 +15,18 @@ export class AdminServicesService {
     });
   }
 
-  postUserGroup(user_id, admin, group_name,group_id) {
+  user_registration(email, full_name, termsandconditions,group_id?,group_name?,admin?) {
+    console.log(email, full_name, termsandconditions,group_id,group_name,admin)
     return this.Apollo.query({
-      query: map_user_group,
+      query: user_registration,
       variables: {
-        user_id: user_id,
-        admin: admin,
+        full_name: full_name,
+        email: email,
+        term_condition: termsandconditions,
+        group_id: group_id,
         group_name: group_name,
-        group_id: group_id
+        admin: admin
       }
     });
   }
-
 }

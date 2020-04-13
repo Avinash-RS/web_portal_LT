@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'Admin',
     loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
+    path:'Player',
+    loadChildren: './core/core.module#CoreModule'
   }
 
 ];
