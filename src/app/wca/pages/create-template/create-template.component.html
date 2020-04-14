@@ -24,7 +24,7 @@
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                    
-                  <mat-panel-title routerLink="" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
+                  <mat-panel-title routerLink="/Wca/choosetemplate" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
                     Choose a template
                   </mat-panel-title>
                 
@@ -40,6 +40,17 @@
                         <mat-card style="text-align: center;">
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
     
+
+                              <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box1" *ngFor="let item of done" cdkDrag>
+    <img class="img1" src="{{item.image}}"></div>
+  </div>
 
                               <div>
                                 <button class="backgroundcol1" routerLink="">Cancel</button>
@@ -58,6 +69,28 @@
                         <mat-card style="text-align: center;">
                           <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
   
+                            <div
+                            cdkDropList
+                            #todoList="cdkDropList"
+                            [cdkDropListData]="todo"
+                            [cdkDropListConnectedTo]="[doneList]"
+                            class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                           
+                           
+
+                            
+                            <div class="example-box" *ngFor="let item of todo" cdkDrag>
+                           
+                              <img class="img2" src="{{item.image}}">
+                             
+                              {{item.name}}
+
+
+
+                            </div>
+                          </div>
+                        
 
                           </mat-grid-list>
                       </mat-card>

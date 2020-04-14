@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                
 
-                                    <div class="row">
+                                  <div class="row">
                                     <div class="col-md-8">
                                     <div class="col-md-12"><input type="text"  placeholder="Enter the course name"  
                                        required /> </div>
@@ -45,8 +45,8 @@
                                        
     
                                        <div>
-                                        <div class="row" *ngFor="let word2 of words2; let in=index">
-                                          <div class="col-sm-5">
+                                        <div class="row" *ngFor="let word1 of words1; let in=index">
+                                          <div class="col-sm-6">
 
 
                                             <div class="col-md-12" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the instructor"
@@ -66,9 +66,9 @@
                                            </div>
                                        
                                           </div>
-                                          <div class="col-sm-3 plusicon">
+                                          <div class="col-sm-6 plusicon">
                         
-                                            <mat-icon *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
+                                            <mat-icon  (click)="add(in)"
                                               >add_circle_outline</mat-icon>
                                             <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
                                             <!-- <mat-icon (click)="test()">delete</mat-icon> -->
@@ -76,41 +76,6 @@
                                         </div><br>
                                       </div>
     
-                                      
-
-
-                                        <div>
-                                            <div class="row" *ngFor="let word2 of words2; let in=index">
-                                              <div class="col-sm-5">
-
-
-                                                <div class="col-md-12" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the takeways"
-                                                    name="language">
-                                                   <mat-option *ngFor="let item of languageList" [value]="item._id">
-                                                     {{item.languagename}}
-                                                   </mat-option>
-                                                 </mat-select>
-                                               </div>
-
-                                               <div class="col-md-8"> <textarea class="inputs" style="resize: none;"  
-                                                placeholder="Description" maxlength="1000" 
-                                                name="info"></textarea></div>
-
-                                           
-                                              </div>
-                                              <div class="col-sm-3 plusicon">
-                            
-                                                <mat-icon *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
-                                                  >add_circle_outline</mat-icon>
-                                                <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
-                                                <!-- <mat-icon (click)="test()">delete</mat-icon> -->
-                                              </div>
-                                            </div><br>
-                                          </div>
-
-
-    
-                                        <button class="backgroundcol2" routerLink="/Wca/viewmodule" >Save & Continue</button>
                                      </div>
     
           <div class="col-md-4">   <img class="img1" src="../../../../assets/images/image_upload.svg"></div>
@@ -118,8 +83,66 @@
                                      </div>
                                        
                                         
+                                    
+
+                                    <div>
+                                      <div class="row" *ngFor="let word2 of words2; let in=index">
+                                        <div class="col-sm-8">
+
+<div class="row">
+                                          
+  
+  <div class="col-md-6">
+  <div class="col-md-11" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Select the takeways"
+                                              name="language">
+                                             <mat-option *ngFor="let item of languageList" [value]="item._id">
+                                               {{item.languagename}}
+                                             </mat-option>
+                                           </mat-select>
+                                         </div>
+
+                                         <div class="col-md-11"> <textarea class="inputs2" style="resize: none;"  
+                                          placeholder="Description" maxlength="1000" 
+                                          name="info"></textarea></div>
+                                        </div>
+
+                                                             
+                                      <div class="col-md-6">
+
+
+                                        <div class="col-md-11" > <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Pre-Requisite"
+                                          name="language">
+                                         <mat-option *ngFor="let item of languageList" [value]="item._id">
+                                           {{item.languagename}}
+                                         </mat-option>
+                                       </mat-select>
+                                     </div>
+
+                                     <div class="col-md-11"> <textarea class="inputs2" style="resize: none;"  
+                                      placeholder="Description" maxlength="1000" 
+                                      name="info"></textarea></div>
                                     </div>
 
+                                  </div>
+                                        
+                                        </div>    
+                                        <div class="col-sm-4 plusicon">
+                      
+                                          <mat-icon  (click)="add1(in)"
+                                            >add_circle_outline</mat-icon>
+                                          <mat-icon (click)="removenewLink1(in)" >delete</mat-icon>
+                                          <!-- <mat-icon (click)="test()">delete</mat-icon> -->
+                                        </div>
+
+
+                                      </div>
+
+                                      <div>  <button class="backgroundcol2" routerLink="/Wca/viewmodule" >Save & Continue</button></div> 
+
+
+                                    </div>
+
+                                  </div>
 
                             </mat-grid-list>
                         </mat-card>

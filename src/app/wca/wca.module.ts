@@ -29,6 +29,9 @@ import { MatListModule } from '@angular/material';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 
+import { WcaService } from "./services/wca.service";
+
+
 
 
 
@@ -69,7 +72,7 @@ const routes: Routes = [
     DragDropModule,
     MatListModule
   ],
-  providers: [Apollo],
+  providers: [WcaService],
   entryComponents: []
 })
 export class WcaModule { }

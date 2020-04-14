@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router'
+
 
 @Component({
   selector: 'app-view-module',
@@ -6,16 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-module.component.scss']
 })
 export class ViewModuleComponent implements OnInit {
+  
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  words2 = [{ value: '' }];
-  add(i) {
+  
+  add() {
     
-      this.words2.push({ value: '' });
+    this.router.navigate(["choosetemplate"])
   
   }
 

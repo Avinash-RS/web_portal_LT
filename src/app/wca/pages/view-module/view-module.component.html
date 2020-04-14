@@ -29,37 +29,50 @@
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
     
 <div class="row">
-                          <div class="col-md-2">   <img class="img" src="../../../../assets/images/image_upload.svg"></div>
-                          <div class="col-md-10">   
-                            
-                            
-                              <tr>
-                                <td>
-                            <mat-panel-title class="f_wt_500 f_size_18 color_blue">Course Name
-                          </mat-panel-title>
-                        </td>
-                        <td><mat-panel-title class="f_wt_500 f_size_18 color_blue">HTML
-                        </mat-panel-title></td>
-                        </tr>
-                        <tr>
-                          <td>
-                      <mat-panel-title class="f_wt_500 f_size_18 color_blue">Course Description
-                    </mat-panel-title>
-                  </td>
-                  <td>                      <mat-panel-title class="f_wt_500 f_size_18 color_blue">This is Good</mat-panel-title>
-                  </td>
-                  </tr>
-                  <tr>
-<td> <button class="backgroundcol2" routerLink="/Wca/viewmodule" >Module Name</button></td>
-
-                  </tr>
+                          <div class="col-md-2">   <img class="img" src="../../../../assets/images/image_upload.svg">
+                        <br><span>Course Name</span>
                         
-                     <tr><td>
-                   
-                    </td></tr>   
+                        </div>
+                          <div class="col-md-3">   
+                          
+                           
 
+                           <div class="wrapper_1"> <mat-icon  routerLink="/Wca/choosetemplate"
+                            >add_circle_outline</mat-icon></div>
+                         <div style="margin: -28px 97px 0px 0px">   <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                Add Module
+                            </mat-panel-title></div>
+                        
                         </div>
 
+                        <div class="col-md-3">   
+                    
+                            
+                <button class="backgroundcol2" routerLink="/Wca/viewmodule" >
+                    
+                   <span style="padding: 2px 176px 13px 16px;" >Upload a SCROM Course </span>
+
+                    <mat-icon (click)="add(in)" style="margin:2px -156px 7px -157px;"
+                    >file_upload</mat-icon>
+                    
+                  
+
+                   
+
+                </button>
+
+                           
+<!-- <button  class="backgroundcol2">
+                            <div> <mat-icon (click)="add(in)" style="margin:59px -353px -70px -218px;"
+                                >file_upload</mat-icon></div>
+
+                                <div style="margin: -28px 97px 0px 0px">   <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                    Add a SCROM Course
+                                </mat-panel-title></div>
+                            </button> -->
+                             
+                        </div>
+                        
 
                         </div>
                             </mat-grid-list>

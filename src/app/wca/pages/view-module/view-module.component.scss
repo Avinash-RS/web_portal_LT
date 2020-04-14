@@ -26,30 +26,43 @@
 
 .backgroundcol2{
     cursor: pointer;
-    background-color: $color-blue !important;
+    background-color: #bac9f1 !important;
     white-space: nowrap;
-    border: 1px solid !important;
-    padding-top: 8px;
-    color: $color-white;
-    padding-bottom: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 9px;
+    /* border: 1px solid !important; */
+    color: #343777;
+    padding-bottom: 4px;
+    padding-left: -19px;
+    padding-right: 161px;
+    padding-top: 0px;
     float: right;
-    margin: 0px 31px 0px 0px
+    margin: 49px 54px -15px 22px;
+    border-radius: 10px 10px 10px 10px;
   
 }
 
 
+.wrapper_1 {
+   
+    float: center;
+    
+  }
+  
+  .wrapper_1:after {
+    content: "";
+    background-color: #b9b5b5;
+    position: absolute;
+    width: 1px;
+    height: 89px;
+    top: 22px;
+    left: 76%;
+    display: block;
+  }
 
 
-.color_blue {
-    color: #101010 !important;
-}
-
-td {
-    padding: 10px 18px 9px 35px;
-    text-align: left;
+mat-icon {
+    cursor: pointer;
+    color: #1F3777;
+    margin: 59px 26px -70px -218px
 }
 
 

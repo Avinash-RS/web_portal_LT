@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+
+import{WcaService} from '../../services/wca.service'
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,6 +18,9 @@ export class DashboardComponent implements OnInit {
   @Input('showWishlist') showWishlist: boolean; 
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
+  @Input('showPrice') showPrice: boolean;
+  @Input('showCount') showCount: boolean;
+  @Input('showRating') showRating: boolean;
   breakpoint: number;
 
   popularCategorires: any = {
@@ -69,11 +75,12 @@ export class DashboardComponent implements OnInit {
  
   
 
-  constructor(public service: CommonServicesService, private gs: GlobalServiceService) { }
+  constructor(public service: WcaService) { }
 
   ngOnInit() {
 
-    this.viewWishlist()
+    this.getPublishedCourses();
+    
     if (window.innerWidth <= 480)
       this.breakpoint = 1;
     else if (window.innerWidth >= 480 && window.innerWidth <= 768)
@@ -98,25 +105,14 @@ export class DashboardComponent implements OnInit {
       this.breakpoint = 4;
   }
 
-  viewWishlist() {
-    var userdetail = this.gs.checkLogout()
-    this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+  getPublishedCourses() {
 
-      if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
-        
+    this.service.getPublishedCourse().subscribe((data: any) => {
 
-        for(let i=0 ;i<viewWishlist.data.view_wishlist.message.length;i++){
-
-
-          this.wishlist[i]=viewWishlist.data.view_wishlist.message[i];
-          this.wishlist[3]=viewWishlist.data.view_wishlist.message[i];
-          this.wishlist[4]=viewWishlist.data.view_wishlist.message[i];
-          this.wishlist[5]=viewWishlist.data.view_wishlist.message[i];
-
-
-        }
+     
+      console.log(data)  
   
-      }
+      
     });
   }
 }
