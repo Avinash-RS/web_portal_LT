@@ -69,6 +69,7 @@ export class CreateTemplateComponent implements OnInit {
   items2: any[]
 
   done = [
+
     
   ];
 

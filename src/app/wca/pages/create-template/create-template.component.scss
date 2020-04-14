@@ -36,8 +36,7 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: 190px 343px 12px -288px;
-  
+    margin: 74px 253px 12px -288px  
 }
 .backgroundcol1{
     cursor: pointer;
@@ -51,8 +50,7 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: 190px 343px 12px -288px;
-  
+    margin: 74px 255px 9px -243px  
 }
 
 
@@ -259,6 +257,16 @@ h1 {
     padding: 16px;
     margin: 5px 0px 14px 11px;
     border-radius: 4px;
+     height: 100%;
+  }
+
+  .mat-card1 {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    margin: 5px 0px 14px 11px;
+    border-radius: 4px;
     height: 100%;
   }
 
@@ -332,7 +340,7 @@ input[type=text]
   }
   
   .example-list {
-    border: solid 1px #ccc;
+    border: solid 1px #f8f9fa;
     min-height: 60px;
     background: white;
     border-radius: 4px;
