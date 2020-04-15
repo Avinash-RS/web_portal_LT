@@ -1,3 +1,5 @@
+@import "../../../../assets/variable.scss";
+
 .wrap-reg {
     width: 100%;
     height: auto;
@@ -5,7 +7,7 @@
     border-radius: 3px;
     overflow: hidden;
     // background-color:skyblue !important;
-    box-shadow: blue;
+    box-shadow: $color-blue;
   }
 
   .head{

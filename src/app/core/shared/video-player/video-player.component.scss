@@ -1,14 +1,14 @@
-
+@import "../../../../assets/variable.scss";
   .previous {
     font-size: 24px;
-    color: white;
+    color: $color-white ;
     background-color: transparent;
     border: 0px;
   }
   
   .next {
     font-size: 24px;
-    color: white;
+    color: $color-white;
     background-color: transparent;
     border: 0px;
   }

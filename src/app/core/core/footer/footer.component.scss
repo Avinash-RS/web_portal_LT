@@ -1,9 +1,11 @@
+@import "../../../../assets/variable";
+
 .footer-container {
   // position: absolute;
   height: 300px;
   width: 100%;
-  color: white;
-  background-color: #1f3777 !important;
+  color: $color-white ;
+  background-color: $color-blue !important;
   bottom: 0;
   padding: 20px 50px 10px 50px;
   

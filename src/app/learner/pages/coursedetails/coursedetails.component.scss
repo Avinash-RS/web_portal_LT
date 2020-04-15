@@ -60,7 +60,7 @@ strong {
     margin-top: 5%;
     padding: 0 4%;
     width: 80%;
-    color: black !important;
+    color:$color-blank !important;
 }
 
 .section_1 .section_1_card_1 {
@@ -81,7 +81,7 @@ strong {
     opacity: 1 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    color: white;
+    color: $color-white;
     font-size: 20px;
     font-weight: 200;
 }
@@ -106,7 +106,7 @@ strong {
 
 .fa {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: $color-blank;
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
@@ -119,8 +119,8 @@ strong {
 
 .course_preview_icon {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    color: black;
+    -webkit-text-stroke-color: $color-blank;
+    color: $color-blank;
     font-size: 50px;
     background-color: #f8f9fa;
     border-radius: 50px;
@@ -222,7 +222,7 @@ img {
 
 .mat-mini-fab {
     position: fixed;
-    background-color: white;
+    background-color: $color-white;
     border: 0.5px solid gainsboro;
     float: inline-end;
     margin-left: 7%;
@@ -288,7 +288,7 @@ h2 {
 }
 
 ::ng-deep .owl-theme .owl-nav [class*='owl-'] {
-    color: #FFF;
+    color: $color-white;
     font-size: 20px !important;
     background: rgb(136, 136, 136);
     display: inline-block;
@@ -338,12 +338,12 @@ h2 {
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        background-color: $color-white !important;
     }
 }
 
 .whitefont {
-    color: #fff !important;
+    color: $color-white !important;
 }
 
 .tabstyle {
@@ -356,18 +356,18 @@ h2 {
 .btn2 {
     background-color: transparent !important;
     border: none;
-    color: red !important;
+    color: $color-red !important;
     padding: 12px 16px;
     font-size: 14px;
-    border: 1px solid red;
+    border: 1px solid $color-red;
     width: 24%;
     margin: 2%;
     padding: 11px 10px;
 
     i {
         box-shadow: none;
-        border: red !important;
-        -webkit-text-stroke-color: red !important;
+        border: $color-red !important;
+        -webkit-text-stroke-color: $color-red !important;
         font-size: 14px !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -385,7 +385,7 @@ h2 {
 
 .mat-card-footer {
     text-align: center;
-    color: #db3137;
+    color: $color-red;
     font-size: 11px;
 }
 
@@ -398,7 +398,7 @@ h2 {
 .viewtxt {
     text-align: right;
     font-size: 11px;
-    color: red;
+    color: $color-red;
 }
 
 
@@ -417,7 +417,7 @@ ul li:before {
 }
 
 ::ng-deep .mat-tab-label .mat-tab-label-content {
-    color: red;
+    color: $color-red;
 }
 
 ::ng-deep .mat-tab-body-content {

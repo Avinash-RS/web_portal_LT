@@ -1,3 +1,6 @@
+
+@import "../../../../assets/variable.scss";
+
 .player {
     margin-top: 2%;
     align-items: center;
@@ -29,6 +32,6 @@
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    color: #1f3777 !important;
+    color: $color-blue !important;
     font-weight: 900 !important;
 }
