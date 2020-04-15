@@ -90,7 +90,8 @@ export class CourseComponentComponent implements OnInit {
     if (this.final_status != 'Completed') {
       let detail1 = {
         id: 'Scaffolding', 
-        user: this.userDetail.user_id
+        user: this.userDetail.user_id,
+        course_id: this.course.course_id
       }
       this.router.navigateByUrl('/Learner/scorm', {state: { detail: detail1 }});
     }
