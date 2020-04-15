@@ -261,11 +261,13 @@ export class LearnerServicesService {
       }
     })
   }
-  syllabus_of_particular_scorm(contentid) {
+  syllabus_of_particular_scorm(contentid,user_id,course_id) {
     return this.Apollo.query({
       query: syllabus_of_particular_scorm,
       variables: {
-        contentid: contentid
+        contentid: contentid,
+        user_id:user_id,
+        course_id:course_id
       }
     })
   }
