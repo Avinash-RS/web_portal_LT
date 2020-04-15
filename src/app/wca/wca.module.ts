@@ -30,6 +30,8 @@ import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 
 import { WcaService } from "./services/wca.service";
+import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
+import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
 
 
 
@@ -45,14 +47,18 @@ const routes: Routes = [
   { path: 'viewmodule', component: ViewModuleComponent, canActivate: [AuthGuard] },
   { path: 'addmodule', component: CreateModuleComponent, canActivate: [AuthGuard] },
   { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard]},
-  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard]}
+  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard]},
+  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard]},
+
+  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard]}
+
  
 ];
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

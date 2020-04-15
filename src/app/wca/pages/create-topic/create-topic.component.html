@@ -1,0 +1,60 @@
+
+<div><app-wca></app-wca></div>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Template</li>
+    </ol>
+</nav>
+
+
+  
+
+
+<div class="container wrap-body">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                
+                        <mat-card  style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+    
+
+                              <div class="example-list">
+    <div class="example-box1" *ngFor="let item of done" >
+    <img class="img1" src="{{item.image}}"></div>
+  
+
+                              <div>
+                                <button class="backgroundcol1" routerLink="" >Cancel</button>
+                                <button class="backgroundcol1" routerLink="" >Continue without saving</button>
+                                <button class="backgroundcol2" routerLink="">Save template & continue</button>
+
+
+                                  
+                                </div>
+                            
+</div>
+
+                            </mat-grid-list>
+                        </mat-card>
+
+                    
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+<div><app-footer></app-footer></div>
