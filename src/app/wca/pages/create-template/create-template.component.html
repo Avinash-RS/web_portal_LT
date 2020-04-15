@@ -49,7 +49,11 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)">
     <div class="example-box1" *ngFor="let item of done" cdkDrag>
-    <img class="img1" src="{{item.image}}"></div>
+    <img class="img1" src="{{item.image}}">
+    <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
+
+  
+  </div>
   </div>
 
                               <div>

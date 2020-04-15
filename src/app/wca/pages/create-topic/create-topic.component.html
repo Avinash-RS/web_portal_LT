@@ -31,13 +31,16 @@
 
                               <div class="example-list">
     <div class="example-box1" *ngFor="let item of done" >
-    <img class="img1" src="{{item.image}}"></div>
+    <img class="img1" src="{{item.image}}">
+    <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
+  
+  </div>
   
 
                               <div>
                                 <button class="backgroundcol1" routerLink="" >Cancel</button>
-                                <button class="backgroundcol1" routerLink="" >Continue without saving</button>
-                                <button class="backgroundcol2" routerLink="">Save template & continue</button>
+                                <button class="backgroundcol1" routerLink="" >Create</button>
+                                <button class="backgroundcol2" routerLink="">Save as a draft</button>
 
 
                                   

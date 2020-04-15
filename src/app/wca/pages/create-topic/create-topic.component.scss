@@ -56,9 +56,9 @@
 
 .img1 {
     vertical-align: middle;
-    width: 141px;
+    width: 115px;
     border-color: #d4dcea;
-    margin: -12px -245px -7px 511px;
+    margin: -16px -243px 1px 396px;
     float: left;
     padding: -39px 28px 4px 11px;
 }
@@ -74,7 +74,14 @@
 }
 
 
-
+.mat-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+    margin: -12px 12px 3px 631px;
+}
 
 
 @import "../../../../assets/variable.scss";
@@ -255,7 +262,7 @@ h1 {
     display: block;
     position: relative;
     padding: 16px;
-    margin: 5px 0px 14px 11px;
+    margin: 4px 168px 14px 107px;;
     border-radius: 4px;
      height: 100%;
   }
@@ -265,7 +272,7 @@ h1 {
     display: block;
     position: relative;
     padding: 16px;
-    margin: 5px 0px 14px 11px;
+    margin: 4px 168px 14px 107px;;
     border-radius: 4px;
     height: 100%;
   }
