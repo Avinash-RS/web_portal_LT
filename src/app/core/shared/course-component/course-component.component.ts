@@ -75,6 +75,9 @@ export class CourseComponentComponent implements OnInit {
       this.viewWishList(this.course);
       this.getcourserStatus()
     }
+    if(this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'incomplete') this.course.coursePlayerStatus.status = 'Resume'
+    else if(this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'complete') this.course.coursePlayerStatus.status = 'Completed'
+    else if(this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') this.course.coursePlayerStatus.status = 'Pause'
   }
 
   gotoDescription(course) {
@@ -91,7 +94,8 @@ export class CourseComponentComponent implements OnInit {
       let detail1 = {
         id: 'Scaffolding', 
         user: this.userDetail.user_id,
-        course_id: this.course.course_id
+        course_id: this.course.course_id,
+        user_obj_id: this.userDetail._id
       }
       this.router.navigateByUrl('/Learner/scorm', {state: { detail: detail1 }});
     }
@@ -111,6 +115,7 @@ export class CourseComponentComponent implements OnInit {
           }
         }
       }
+      console.log(data)
     });
   }
 }
