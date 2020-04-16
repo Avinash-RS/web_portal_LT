@@ -44,6 +44,7 @@ export const login = gql`
       success
     error_msg
     message{
+
       course_id
       course_description
       course_name
@@ -53,7 +54,11 @@ export const login = gql`
       short_description
       rating,
       price
-
+      coursePlayerStatus{
+        status
+        location
+        course_id
+      }
     }
   }
 }`;
