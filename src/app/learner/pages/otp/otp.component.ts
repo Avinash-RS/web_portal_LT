@@ -38,7 +38,7 @@ export class OtpComponent implements OnInit {
       public service : LearnerServicesService,
       private activeroute: ActivatedRoute) { 
         this.activeroute.queryParams.subscribe(params => {
-          this.email = params["email"]
+          this.email = params["code"]
           this.get_user_detail(this.email)
         })
       }
