@@ -32,6 +32,7 @@ import { ChooseTemplateComponent } from './pages/choose-template/choose-template
 import { WcaService } from "./services/wca.service";
 import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
 import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
+import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
 
 
 
@@ -50,7 +51,10 @@ const routes: Routes = [
   { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard]},
   { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard]},
 
-  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard]}
+  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard]},
+  { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard]},
+  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard]}
+
 
  
 ];
@@ -58,7 +62,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
