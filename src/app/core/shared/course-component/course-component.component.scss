@@ -63,7 +63,7 @@ img {
 mat-icon {
     font-size: 18px;
     -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: red;
+    -webkit-text-stroke-color: $color-red ;
 }
 
 .container {
@@ -81,7 +81,7 @@ mat-icon {
         margin-left: 12%;
         filter: alpha(opacity=0);
         background-color: $color-blue !important;
-        color: white;
+        color: $color-white ;
         cursor: pointer;
     }
 }

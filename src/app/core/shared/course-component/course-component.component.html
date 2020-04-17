@@ -32,12 +32,14 @@
     </div>
   </div>
   <br>
+
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <button mat-flat-button *ngIf="showStatus" disabled = "{{final_status === 'Completed'}}" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
-        (click)="final_status != 'Completed' && goTocourse(final_status || 'Start')" [ngStyle]="{'background-color':final_status === null ? 
-        '#1f3777' : final_status === 'Resume' ? '#2661ff' : final_status === 'Completed' ? '#028514' : '#1f3777' }">
-        {{final_status || 'Start'}}</button>
+      <button mat-flat-button *ngIf="showStatus" disabled = "{{course?.coursePlayerStatus?.status === 'Completed'}}" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
+        (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')" [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
+        '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
+        {{course?.coursePlayerStatus?.status || 'Start'}}</button>
+
     </div>
   </div>
 

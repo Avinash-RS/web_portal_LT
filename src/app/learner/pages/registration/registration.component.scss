@@ -15,7 +15,7 @@ div.terms{
     color: $color-blue;
 }
 .alert{
-    color: red;
+    color: $color-red;
     text-align: center;
     font-size: 12px;
     font-weight: 500;
@@ -26,7 +26,7 @@ input[type=text] {
     margin: 1px 0;
     background: $color-light-blue;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid $color-border;
     box-sizing: border-box;
     border-radius: 5px;
 }

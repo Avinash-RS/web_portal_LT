@@ -18,6 +18,7 @@ export class ScormplayerComponent implements OnInit {
   url: string 
   urlSafe: SafeResourceUrl;
   user_id:any
+  course_id:any;
   // state$: Observable<object>;
 
   constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, 
@@ -27,12 +28,14 @@ export class ScormplayerComponent implements OnInit {
       console.log(detail)
       this.contentid = detail.id;
       this.user_id = detail.user;
+      this.course_id=detail.course_id
     }
 
   ngOnInit() {
-    console.log(this.contentid,this.user_id)
-    this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id
+    this.contentid='dfdfd'
+    this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    console.log(window.localStorage.getItem('course_status'))
   }
   /*getcontent() {
     this.service.list_content().subscribe(data => {
@@ -41,12 +44,17 @@ export class ScormplayerComponent implements OnInit {
     })
   }
   getcoursedetail() {
-    // this.contentid = 'FSL'
-    this.service.syllabus_of_particular_scorm(this.contentid).subscribe(data => {
+    this.contentid = 'Golf Explained - Sequencing Random Test'
+    this.service.syllabus_of_particular_scorm(this.contentid,'vd4mr3',"1").subscribe(data => {
 
       this.content = data.data
-      this.syllabus = this.content.syllabus_of_particular_scorm.data
-      // console.log(this.syllabus)
+      if(this.content&&this.content.syllabus_of_particular_scorm&&this.content.syllabus_of_particular_scorm.success){
+        this.syllabus = this.content.syllabus_of_particular_scorm.data[0].scorm_dtl_user_map
+        console.log(this.syllabus)
+      }else{
+        console.log('no record')
+      }
+      
     })
   }*/
 }

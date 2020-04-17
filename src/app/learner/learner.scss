@@ -2,7 +2,7 @@
 
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
-  border-color: #dc3545;
+  border-color: $color-maroon;
   padding-right: calc(1.5em + .75rem);
   background-image: none !important;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 
   button {
     background: $color-blue !important;
-    color: white;
+    color: $color-white;
   }
 
   .mat-dialog-title {
@@ -27,22 +27,22 @@
 }
 
 .label {
-  color: blue;
+  color:  $color-blue;
 }
 
 .mand {
-  color: red;
+  color:  $color-red;
 }
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
-  color: rgb(199, 199, 199)
+  color:$color-white
 }
 
 .wrap-body {
   padding: 3% !important;
 
   .star {
-    color: red;
+    color:  $color-red;
   }
 }
 
@@ -55,36 +55,36 @@
     padding: 15px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: white;
+    background-color:$color-white;
   }
 
   .wrap-reg {
     width: 100%;
     height: auto;
-    background: #fff !important;
+    background: $color-white !important;
     border-radius: 25px;
-    border: 1px outset white;
+    border: 1px outset $color-white;
     overflow: hidden;
-    background-color: white !important;
-    box-shadow: 0 2px 11px #00000057;
+    background-color: $color-white !important;
+    box-shadow: 0 2px 11px $color-blank;
     margin-top: 50px;
     margin-bottom: 30px;
   }
 
   mat-label {
-    color: #1F3777;
+    color:  $color-blue;
   }
 
   .mat-radio-outer-circle {
     height: 16px !important;
     width: 16px !important;
-    border-color: #1F3777 !important;
+    border-color:  $color-blue !important;
   }
 
   .mat-radio-inner-circle {
     height: 16px !important;
     width: 16px !important;
-    background-color: #1F3777 !important;
+    background-color:  $color-blue !important;
   }
 
   mat-select {
@@ -132,7 +132,7 @@
   left: 0px;
   padding: 5px 8px;
   background: $color-blue;
-  color: #fff;
+  color: $color-white;
   z-index: 9;
   font-size: 0.75em;
   height: auto;
@@ -151,11 +151,11 @@
 
 mat-icon {
   cursor: pointer;
-  color: #1F3777;
+  color:  $color-blue;
 }
 
 .mat-progress-bar-buffer {
-  background: #d1d6e2;
+  background: $color-white;
 }
 
 .mat-progress-bar-fill::after {
@@ -189,7 +189,7 @@ mat-icon {
 
 .head {
   text-align: center;
-  color: #1F3777 !important;
+  color:  $color-blue !important;
 }
 
 .continer {
@@ -199,7 +199,7 @@ mat-icon {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
   padding: 10px;
-  background: white;
+  background: $color-white;
   display: flex;
   justify-content: center;
   height: 277px;
@@ -220,7 +220,7 @@ mat-icon {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #ffffff !important;
+  color: $color-white !important;
   text-align: center;
   vertical-align: middle !important;
   cursor: pointer;
@@ -228,14 +228,11 @@ mat-icon {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #1F3777 !important;
-  // padding: .375rem .75rem;
+  background-color:  $color-blue !important;
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
-  // margin-left: 15px;
-  // margin-right: 25px;
 
 }
 
@@ -282,22 +279,22 @@ mat-icon {
 
 
 label {
-  color: #1F3777;
+  color:  $color-blue;
   font-weight: 500;
 }
 
 .head {
   text-align: center;
-  color: #1F3777 !important;
+  color:  $color-blue !important;
 }
 
 .mand {
-  color: red !important;
+  color:  $color-red !important;
 }
 
 mat-icon {
   cursor: pointer;
-  color: #1F3777;
+  color:  $color-blue;
 }
 
 button:disabled:hover {
