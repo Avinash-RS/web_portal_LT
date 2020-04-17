@@ -28,7 +28,7 @@ export class CreateTemplateComponent implements OnInit {
     },
     {
       name:"PPT",
-      image:"../../../../assets/images/image.svg"
+      image:"../../../../assets/images/ppt.svg"
     },
     {
       name:"Image",
@@ -44,15 +44,15 @@ export class CreateTemplateComponent implements OnInit {
     },
     {
       name:"SCROM",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/scrom.svg"
     },
     {
       name:"Knowledge Check",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/quiz.svg"
     },
     {
       name:"Feedback",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/feedback.svg"
     },
  
 

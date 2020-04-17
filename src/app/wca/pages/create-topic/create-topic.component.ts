@@ -16,24 +16,24 @@ export class CreateTopicComponent implements OnInit {
   done = [
     {
       name:"PDF",
-      image:"../../../../assets/images/image_upload.svg"
-    },
-    {
-      name:"Excel",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/pdf.svg"
     },
     {
       name:"Word",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/word.svg"
     },
     {
       name:"PPT",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/ppt.svg"
     },
     {
       name:"Image",
-      image:"../../../../assets/images/image_upload.svg"
-    }
+      image:"../../../../assets/images/image.svg"
+    },
+    {
+      name:"Video",
+      image:"../../../../assets/images/video.svg"
+    },
     
  
 
