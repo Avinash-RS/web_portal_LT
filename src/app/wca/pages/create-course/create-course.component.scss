@@ -4,13 +4,38 @@
     box-shadow: none;
 }
 
+.mat-checkbox {
+    display: inline-block;
+    height: 24px;
+    line-height: 0;
+    margin: 14px 5px 17px -633px;
+    margin-right: 8px;
+    order: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 22px;
+    flex-shrink: 0;
+}
+
 .mat-icon {
     background-repeat: no-repeat;
     display: inline-block;
     fill: currentColor;
     height: 24px;
     width: 24px;
-   margin: 9px 176px 9px -165px;
+    margin: 8px 213px 8px -205px;
+}
+
+
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 18%;
+    padding: 9px 8px -1px 4px;
+    margin: 16px 18px -45px 49px;
+    align-items: left;
+    text-align: left;
 }
 
 ::ng-deep .mat-expansion-indicator {
@@ -52,19 +77,17 @@
 
 
 .img1 {
- //   border-style: groove;
     vertical-align: middle;
-    width: 207px;
+    width: 150px;
     border-color: #d4dcea;
+    margin: 50px 11px 9px 5px;
 }
 
 
     .img2 {
-      //  border: 1px solid #ddd;
-      //  border-radius: 4px;
         padding: 5px;
-        width: 101px;
-        margin: -13px 37px -23px 39px
+        width: 75px;
+        margin: -1px -12px -23px -259px;
       }
       
      
@@ -286,24 +309,24 @@ h1 {
 
 input[type=text]
 {
-  width: 100%;
-  padding: 9px 11px;
-  margin: 5px 14px;
-  background: white;
-  display: inline-block;
-  border: 1px solid $color-blue;
-  box-sizing: border-box;
-  border-radius: 5px;
+    width: 90%;
+    padding: 9px 13px;
+    margin: 3px 37px 16px 6px;
+    background: white;
+    display: inline-block;
+    border: 1px solid #1F3777;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .inputs{
     border: 1px solid;
-    padding: 8px !important;
+    padding: 16px 0px 2px 8px;
     border-radius: 5px;
-    color: $color-blue;
-    width: 100%;
+    color: #1F3777;
+    width: 90%;
     background-color: none !important;
-    margin: 5px 14px;
+    margin: 0px 15px 10px -16px;
 }  
 
 
@@ -328,3 +351,116 @@ input[type=text]
 }
 
 
+.wrapper_1 {
+   
+    float: center;
+    
+  }
+  
+  .wrapper_1:after {
+    content: "";
+    background-color: #b9b5b5;
+    position: absolute;
+    width: 1149px;
+    height: 2px;
+    top: 376px;
+    left: 4%;
+    display: block;
+  }
+
+
+  .wrapper_2 {
+   
+    float: center;
+    
+  }
+  
+  .wrapper_2:after {
+    
+        content: "";
+        background-color: #b9b5b5;
+        position: absolute;
+        width: 1162px;
+        height: 2px;
+        top: 556px;
+        left: 2%;
+        display: block;
+    }
+
+
+    .wrapper_3 {
+   
+        float: center;
+        
+      }
+      
+      .wrapper_3:after {
+        
+            content: "";
+            background-color: #b9b5b5;
+            position: absolute;
+            width: 1162px;
+            height: 2px;
+            top: 672px;
+            left: 2%;
+            display: block;
+        }
+
+        .wrapper_4 {
+   
+            float: center;
+            
+          }
+          
+          .wrapper_4:after {
+            
+                content: "";
+                background-color: #b9b5b5;
+                position: absolute;
+                width: 1162px;
+                height: 2px;
+                top: 780px;
+                left: 2%;
+                display: block;
+            }
+  
+  .inputs2 {
+    padding: 8px 3px 9px 8px;
+    border-radius: 5px;
+    color: #1F3777;
+    width: 83%;
+    background-color: none !important;
+    margin: 0px 1px 15px -220px;
+  }
+
+  .inputs3 {
+    border: 1px solid;
+    padding: 11px 5px 0px 7px;
+    border-radius: 5px;
+    color: #1F3777;
+    width: 103%;
+    background-color: none !important;
+    margin: -1px 41px 18px -360px;
+}
+
+.inputs4 {
+    border: 1px solid;
+    padding: 8px 3px 9px 8px;
+    border-radius: 5px;
+    color: #1F3777;
+    width: 107%;
+    background-color: none !important;
+    margin: 0px 1px 15px -5px;
+}
+
+.img3 {
+    padding: 7px;
+    width: 61px;
+    margin: -5px -146px -23px -259px;
+}
+
+.img5 {
+    padding: 7px;
+    width: 61px;
+    margin: -5px -396px 8px -259px;
+}

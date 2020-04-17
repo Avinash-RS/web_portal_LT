@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiUrl: 'http://40.76.47.212:3000/',
   scormUrl:'http://40.76.47.212:8080/',
-  apiUrlImg:'http://40.76.47.212:3001/'
+  apiUrlImg:'http://40.76.47.212:3001/',
+  wcaapiurl:'http://40.76.47.212',
 };
 
 /*

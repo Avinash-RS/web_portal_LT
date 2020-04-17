@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-course',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-course.component.scss']
 })
 export class CreateCourseComponent implements OnInit {
+
+  mode = new FormControl(true)
 
   constructor() { }
 

@@ -20,38 +20,30 @@ export class CreateTemplateComponent implements OnInit {
   todo = [
     {
       name:"PDF",
-      image:"../../../../assets/images/image_upload.svg"
-    },
-    {
-      name:"Excel",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/pdf.svg"
     },
     {
       name:"Word",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/word.svg"
     },
     {
       name:"PPT",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/image.svg"
     },
     {
       name:"Image",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/image.svg"
     },
     {
       name:"Video",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/video.svg"
     },
     {
       name:"Audio",
-      image:"../../../../assets/images/image_upload.svg"
+      image:"../../../../assets/images/audio.svg"
     },
     {
       name:"SCROM",
-      image:"../../../../assets/images/image_upload.svg"
-    },
-    {
-      name:"Refrence Files",
       image:"../../../../assets/images/image_upload.svg"
     },
     {
