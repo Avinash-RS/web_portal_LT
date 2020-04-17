@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "webdriver-update": "node_modules/bin/webdriver-manager update"
   },
   "private": true,
   "dependencies": {
@@ -43,18 +44,31 @@
     "node-sass": "^4.13.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "videogular2": "^7.0.1",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "@types/cucumber": "^6.0.1",
+    "@types/jasmine": "^2.8.16",
+    "@types/jasminewd2": "^2.0.8",
+    "@types/node": "^10.17.19",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "^6.0.5",
+    "cucumber-html-reporter": "^5.2.0",
+    "jasmine": "~3.3.1",
+    "protractor": "^5.4.3",
+    "protractor-cucumber-framework": "^6.2.1",
+    "ts-node": "7.0.1",
+    "typescript": "^3.8.3",
+    "xhr2": "^0.2.0"
+    
   },
   "devDependencies": {
     "@angular/cli": "~7.3.9",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@nguniversal/express-engine": "^9.0.2",
-    "@types/core-js": "^2.5.3",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^8.10.60",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -66,6 +80,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.1.6"
   }
 }
