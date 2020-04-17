@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
 
   getPublishedCourse() {
     return this.http.get(this.url);
+  }
+
+  getAllTemplates() {
+    return this.http.get( environment.wcaapiurl + "api/template/getalltemplates");
   }
 
 
