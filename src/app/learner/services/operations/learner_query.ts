@@ -14,6 +14,7 @@ export const login = gql`
         user_id
         is_blocked
         is_profile_updated
+        group_id                  
         message      
       }
     }
