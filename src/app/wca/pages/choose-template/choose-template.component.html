@@ -46,7 +46,10 @@
                                 <div *ngFor="let tlist of templateList;let i = index">
                                     <mat-grid-tile
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplateId,'selected-grid-tile': tlist.template_id == selectedTemplateId}"
-                                        (click)="selectTemplate(tlist.template_id)">
+                                        (click)="selectTemplate(tlist.template_id)"
+                                        [matTooltip]='"updated on "+tlist.created_on+"\ncreated by "+tlist.createdby_name'
+                                        matTooltipPosition="right"
+                                        matTooltipClass="allow-cr">
 
                                         <div>
                                             <div class="tick-icon" *ngIf="tlist.template_id == selectedTemplateId">
