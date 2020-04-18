@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PasswordComponent } from './password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatSelectModule, MatDialogModule } from '@angular/material';
@@ -64,4 +63,13 @@ describe('PasswordComponent', () => {
       expect(password.invalid).toBeFalsy();
     }
   }
+
+
+  it('submitting a form emits a user', () => {
+    expect(component.passwordForm.valid).toBeFalsy();
+    component.passwordForm.controls['username'].setValue("test");
+    component.passwordForm.controls['password'].setValue("123Aa!@#");
+    expect(component.passwordForm.valid).toBeTruthy();
+    component.submit();
+  });
 });
