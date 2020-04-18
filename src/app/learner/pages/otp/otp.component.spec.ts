@@ -44,4 +44,87 @@ describe('OtpComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('form invalid when empty', () => {
+    expect(component.otpForm.valid).toBeFalsy();
+  });
+  it('mobile field validity', () => {
+
+    let errors = {};
+    let mobile = component.otpForm.controls['mobile'];
+    expect(mobile.valid).toBeFalsy();
+
+    errors = mobile.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    mobile.setValue("9843567643");
+    errors = mobile.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeTruthy();
+
+    mobile.setValue("054345");
+    errors = mobile.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+
+    mobile.setValue("0978954");
+    errors = mobile.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+
+    mobile.setValue("12376867867");
+    errors = mobile.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+  });
+
+
+  it('otp field validity', () => {
+
+    let errors = {};
+    let otp = component.otpForm.controls['otp'];
+    expect(otp.valid).toBeFalsy();
+
+    errors = otp.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    otp.setValue("9840");
+    errors = otp.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeTruthy();
+
+    otp.setValue("054345");
+    errors = otp.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+
+    otp.setValue("097");
+    errors = otp.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+
+    otp.setValue("12376867867");
+    errors = otp.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['minlength']).toBeFalsy();
+    expect(errors['maxlength']).toBeFalsy();
+  });
+  it('submitting a form emits a user', () => {
+    expect(component.otpForm.valid).toBeFalsy();
+    component.otpForm.controls['mobile'].setValue("7737924803");
+    component.otpForm.controls['otp'].setValue("1234");
+    expect(component.otpForm.valid).toBeTruthy();
+    component.otpverify();
+  });
 });
