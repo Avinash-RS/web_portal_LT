@@ -1,35 +1,134 @@
-
 <app-header></app-header>
 <div class="limiter">
-  <mat-tab-group style="margin-top: 60px;">
-    <mat-tab class="mat" label="About"><br>
-    </mat-tab>
+  <div class="container wrap-body">
+    <h1 class="head">Online Photography Course</h1>
+    <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
 
-    <mat-tab label="Syllabus">
-     
-      <div class="left">
-          <iframe class="player"  [src]="urlSafe" ></iframe>
-         
+        <li class="breadcrumb-item active" aria-current="page">Online Photography</li>
+      </ol>
+    </nav>
+
+    <div class="left">
+      <iframe class="player" [src]="urlSafe"></iframe>
+
+    </div>
+
+    <h1 class="subhead">Details about course</h1>
+    <p style="margin-left: 10.8%;font-size: 16px; font-weight: 500;">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a type specimen
+      book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with
+    </p><br>
+    <p style="margin-left: 10.8%;font-size: 16px;">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a type specimen
+      book.
+    </p><br>
+    <div class="row">
+      <div class="col-md-4">
+        <h2 style="margin-left: 34.6%;">Course Description</h2>
       </div>
 
+      <div class="col-md-8">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+      </div>
+      <div class="col-md-2">
+        <a href=""><b>View More ></b></a>
+      </div>
+
+    </div>
+    <h1 class="subhead">Resources</h1>
+
+    <section class="accordion">
+      <input type="checkbox" name="collapse" id="handle5">
+      <h2 class="handle">
+        <label for="handle5"><b>Module 1 : Welcome _ Course Introduction</b> <i class="fa fa-file-text-o doc"> <b
+              style="padding-left: 18px;"> 7 Documents</b></i> </label>
+      </h2>
+      <div class="content">
+        <p> </p>
+        <ol class="submod">
+          <li>Welcome</li>
+          <li>About the Photography </li>
+        </ol>
+      </div>
+    </section>
 
 
-    </mat-tab>
+    <section class="accordion">
+      <input type="checkbox" name="collapse" id="handle1">
+      <h2 class="handle">
+        <label for="handle1"><b>Module 2 : What will learn from in this course?</b> <i class="fa fa-file-text-o doc"> <b
+              style="padding-left: 18px;"> 7 Documents</b></i> </label>
+      </h2>
+      <div class="content">
+        <p> </p>
+        <ol class="submod">
+          <li>Welcome</li>
+          <li>About the Photography </li>
+        </ol>
+      </div>
+    </section>
+    <div style="text-align:center;">
+      <button class="btn1 success">12 more section</button>
+    </div>
+    <br><br>
 
-    <mat-tab label="Review">
+    <div class="card">
+      <h1 class="title">Instructors</h1>
+      <mat-grid-list [cols]="breakpoint" rowHeight="3:1">
+        <mat-grid-tile>
+          <div class="box">
+            <div class="row">
+              <div class="col-md-4">
+                <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
+              </div>
 
-    </mat-tab>
+              <div class="col-md-8">
+                <div class="cardhead"><b>Alexa</b></div><br><br>
+                <div style="float: left;">Lecturer </div><br>
+                <div style="float: left;">School of Information</div><br><br>
+                <div class="info">
+                  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At ver</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-grid-tile>
 
-    <mat-tab label="Instructor">
+        <mat-grid-tile>
+          <div class="box">
+            <div class="row">
+              <div class="col-md-4">
+                <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
+              </div>
 
-    </mat-tab>
+              <div class="col-md-8">
+                <div class="cardhead"><b>Alexa</b></div><br><br>
+                <div style="float: left;">Lecturer </div><br>
+                <div style="float: left;">School of Information</div><br><br>
+                <div class="info">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                  invidunt ut
+                  labore et dolore magna aliquyam erat, sed diam voluptua. At ver</div>
+              </div>
+            </div>
+          </div>
+        </mat-grid-tile>
 
-    <mat-tab label="FAQ">
-
-    </mat-tab>
-  </mat-tab-group>
-
+      </mat-grid-list>
+    </div>
+    <br><br>
+  </div>
 </div>
-
-
-
