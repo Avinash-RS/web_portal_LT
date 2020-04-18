@@ -464,3 +464,16 @@ input[type=text]
     width: 61px;
     margin: -5px -396px 8px -259px;
 }
+
+::ng-deep .mat-form-field-underline {
+    display: none !important;
+}
+
+
+.matchipsbrder{
+    width: 100%;
+    display: block;
+    border: 1px solid;
+    border-radius: 6px;
+    padding-left: 10px;
+}
