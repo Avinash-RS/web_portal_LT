@@ -25,6 +25,7 @@ export class OtpComponent implements OnInit {
   otpForm: FormGroup;
   systemip:String;
   otp: any;
+  isLinkActive: boolean = false;
   showotp: boolean = false;
   isenable:boolean = true;
   showverify: boolean = false;
@@ -122,10 +123,9 @@ get f() { return this.otpForm.controls; }
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
-        this.userid =this.useridData.get_user_detail.message[0].user_id
-        
-      })
-      
+        this.userid =this.useridData.get_user_detail.message[0].user_id; 
+        this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
+      })  
     } catch (error) {
         throw error 
     }
