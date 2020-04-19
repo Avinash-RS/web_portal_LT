@@ -1,7 +1,7 @@
 import { Component, OnInit ,Input } from '@angular/core';
 import { Observable ,  Observer } from 'rxjs';
 @Component({
-    selector: 'cdk-dashcard',
+    selector: 'lxp-dashcard',
     templateUrl: './dashcard.component.html',
     styleUrls: ['./dashcard.component.scss']
 })

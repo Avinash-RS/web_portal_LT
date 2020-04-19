@@ -5,39 +5,37 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 import { CoreModule } from '@core/core.module';
-import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-// import { UserManagementComponent } from './pages/user-management/user-management.component';
 
-import { LazyLoadModule } from './lazy-load/lazy-load.module';
+import { AdminLoginModule } from './admin-login/admin-login.module';
+
 import { AdminCoreModule } from './core/admin-core.module';
 import { AuthModule } from './auth/auth.module';
-// import { AuthComponent } from './auth/auth.component';
-// import { DashboardComponent } from './dashboard/dashboard.component';
+
+
 
 
 const routes: Routes = [
-  { path: 'login', component: AdminLoginComponent,canActivate:[AuthGuard]  },
-  // { path: 'userManagement', component: UserManagementComponent,canActivate:[AuthGuard]  },
-  {path: 'auth', loadChildren: '../auth/auth.module#AuthModule',canActivate:[AuthGuard] },
-  {
-    path: '',
-    redirectTo: 'auth',
-   
- }
+  
+  {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
+
+  {path: 'auth', loadChildren: './auth/auth.module#AuthModule',canActivate:[AuthGuard] },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
-  declarations: [AdminLoginComponent],
+  declarations: [],
   imports: [
     CoreModule,
+    AdminLoginModule,
     CommonModule,
     AuthModule,
     MaterialModule,
-    FormsModule,
+    FormsModule,  
     ReactiveFormsModule,
-    LazyLoadModule,
+
     AdminCoreModule,
     RouterModule.forChild(routes),
   ],

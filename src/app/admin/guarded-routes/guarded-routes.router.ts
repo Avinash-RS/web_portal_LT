@@ -37,7 +37,7 @@ export class CanActivateTeam implements CanActivate {
 
 export const routes: Routes = [{
 		path: '', component: GuardedRoutesComponent,
-		children: [{ path: 'example', component: RouterComponent },
+		children: [{ path: 'login', component: RouterComponent },
 		{ path: 'ex', component: RouterDeactivateComponent, canActivate: [CanActivateTeam] },]
 	},
 	

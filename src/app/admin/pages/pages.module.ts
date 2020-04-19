@@ -12,11 +12,11 @@ import {
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { PagesRouterModule } from './pages.routes';
 
 
 
-import { ServicesComponent } from './services/services.component';
+
+
 import { AdminCoreModule } from '../core/admin-core.module';
 
 @NgModule({
@@ -32,12 +32,11 @@ import { AdminCoreModule } from '../core/admin-core.module';
         MatCheckboxModule,
         MatListModule,
         MatChipsModule,
-        AdminCoreModule,
-        PagesRouterModule ],
+        AdminCoreModule ],
     declarations: [   
 
 
-        ServicesComponent
+       
     ],
     exports: [
     ],

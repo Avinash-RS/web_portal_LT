@@ -1,14 +1,21 @@
-
-
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
 <div class="contentTop">
   <button mat-stroked-button (click)="openAddUser = !openAddUser">Add User</button>
   <br>
+  <!-- <cdk-filter-table></cdk-filter-table> -->
 
   <div class="container">
     <div class="row">
       <div class="col-md-2 col-sm-2 col-2">
       </div>
       <div class="col-md-2 col-sm-5 col-5" *ngIf="openAddUser">
+  
         <form [formGroup]="addUserForm">
           <div class="form-group">
             <label>User Name</label><span style="color: red;"> *</span>
@@ -33,7 +40,7 @@
           <mat-form-field>
             <mat-label>Institute Name</mat-label>
             <mat-select formControlName="group">
-              <mat-option *ngFor="let grp of groups" [value]="grp">
+                    <mat-option *ngFor="let grp of groups" [value]="grp">
                 {{grp.group_name}}
               </mat-option>
             </mat-select>
@@ -45,7 +52,7 @@
     </div>
 
     <br>
-<!-- 
+
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
@@ -105,6 +112,6 @@
       </table>
 
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div> -->
-  </div>
+    </div> 
 </div>
+</div> 

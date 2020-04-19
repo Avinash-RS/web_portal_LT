@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login.component';
+import { AdminLoginComponent } from './admin-login.component';
 import { 
         MatCardModule,
         MatButtonModule,
@@ -12,9 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 
-const routes: Routes = [
-    {path: '', component: LoginComponent},
-  ];
+
 @NgModule({
     imports: [
         MatCardModule,
@@ -26,10 +24,10 @@ const routes: Routes = [
         MatToolbarModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule.forChild(routes)
+    
     ],
     declarations: [   
-        LoginComponent,
+        AdminLoginComponent,
     ],
     exports: [
         RouterModule
@@ -37,5 +35,5 @@ const routes: Routes = [
     providers: [
     ]
 })
-export class LoginModule {
+export class AdminLoginModule {
 }

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
-import { DashboardWidgetModule } from '../dashboard-widget/dashboard-widget.module';
+
 
 export const appRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -16,7 +16,7 @@ export const appRoutes: Routes = [
     RouterModule.forChild(appRoutes),
     FlexLayoutModule,
     MatCardModule,
-    DashboardWidgetModule
+   
   ],
   declarations: [DashboardComponent],
   exports: [ ]

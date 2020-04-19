@@ -15,7 +15,7 @@ export const menus = [
         'sub': [
             {
                 'name': 'Add New Learners',
-                'link': 'tables/responsive',
+                'link': 'userManagement',
                 'icon': 'widgets',
                 'chip': false,
                 'open': true,

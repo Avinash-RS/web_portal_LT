@@ -24,7 +24,7 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     MaterialModule,
     GraphqlModule,
    
-    
+
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
