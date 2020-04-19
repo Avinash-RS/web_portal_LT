@@ -4,6 +4,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 //local
 import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
@@ -21,6 +23,11 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     MaterialModule,
     GraphqlModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right'
+    }),
+    NgxSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     GraphqlModule,
