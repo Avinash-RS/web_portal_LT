@@ -3,6 +3,10 @@ import {FormBuilder, FormGroup, Validators,FormArray, FormControl } from '@angul
 import {WcaService} from '../../services/wca.service';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -28,6 +32,7 @@ export class CreateCourseComponent implements OnInit {
   AllCertifyDetails = [];
 
 
+
   createItem(): FormGroup {
     this.preview2.push(null)
     return this.formBuilder.group({
@@ -47,16 +52,22 @@ export class CreateCourseComponent implements OnInit {
   }
 
   createItem2(): FormGroup {
-    this.preview4.push(null)
     return this.formBuilder.group({
       text: '',
-      media: '',
+      media: this.formBuilder.array([ this.createMedia()]),
       description: ''
     });
   }
+  createMedia() : FormControl{
+    this.preview4.push(null)
+    return this.formBuilder.control("")
+  }
   constructor(
     public formBuilder: FormBuilder,
-    public wcaService:WcaService
+    public wcaService:WcaService,
+    public spinner: NgxSpinnerService,
+    public toast: ToastrService,
+    public router: Router,
 
   ) { }
   
@@ -64,7 +75,7 @@ export class CreateCourseComponent implements OnInit {
     this.courseForm = this.formBuilder.group({
       name:[null,Validators.compose([Validators.required])],
       description:[null,Validators.compose([])],
-      image:[null,Validators.compose([])],
+      image:[null,Validators.compose([Validators.required])],
       prerequisit_details:[this.preRequisites,Validators.compose([])],
       preview_video:[null,Validators.compose([])],
       instructure_details:this.formBuilder.array([ this.createItem()]),
@@ -110,9 +121,9 @@ export class CreateCourseComponent implements OnInit {
   }
 
   add3(): void {
-    this.takeway_details = this.courseForm.get('takeway_details') as FormArray;
+    this.takeway_details = this.courseForm.get('takeway_details').get(String(0)).get("media") as FormArray;
     console.log(this.takeway_details)
-    this.takeway_details.push(this.createItem2());
+    this.takeway_details.push(this.createMedia());
   
   }
 
@@ -123,7 +134,8 @@ export class CreateCourseComponent implements OnInit {
   }
 
   
-  onSelectFile(fileInput:any,type,index,item:FormControl) {
+  onSelectFile(fileInput:any,type,index,j=null) {
+    this.spinner.show();
     var imagepath;
     if (fileInput && fileInput.target && fileInput.target.files[0]) {
       console.log(index);
@@ -131,12 +143,10 @@ export class CreateCourseComponent implements OnInit {
       this.imageView = fileInput.target.files[0];
       const formData = new FormData();
       this.imageView.type === 'file';
-      console.log(this.imageView);
        formData.append('image',this.imageView);
        this.wcaService.uploadImage(formData).subscribe((data: any) => {
            imagepath =  'https://edutechstorage.blob.core.windows.net/'+ data.path;
-       console.log(imagepath);
-       console.log(type);
+           this.spinner.hide();
        reader.addEventListener("load", ()=> {
         // convert image file to base64 string
         if (type === 'img1') {
@@ -149,8 +159,8 @@ export class CreateCourseComponent implements OnInit {
           this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(imagepath)
           this.preview3[index]= reader.result;
          } else if (type === 'img4') {
-          this.courseForm.get('takeway_details').get(String(index)).get('media').setValue(imagepath)
-          this.preview4[index]= reader.result;
+          this.courseForm.get('takeway_details').get(String(index)).get('media').get(String(j)).setValue(imagepath)
+          this.preview4[j]= reader.result;
        }
       }, false);
   
@@ -158,6 +168,8 @@ export class CreateCourseComponent implements OnInit {
         reader.readAsDataURL( this.imageView );
       }
 
+       }, err => {
+         this.spinner.hide();
        });
   
     }
@@ -176,11 +188,21 @@ export class CreateCourseComponent implements OnInit {
 
 
     if (this.courseForm.valid) {
+      this.spinner.show();
       this.submitted = false;
       console.log(this.courseForm.value);
       this.wcaService.createCourse(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
+        this.spinner.hide();
+        if (data && data.Message === 'Success') {
+         this.toast.success('Course Created Successfully !!!');
+         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) } });
+        }
+      }, err => {
+        this.spinner.hide();
       })
+    } else {
+      this.toast.warning('Course Name and Course image is Required !!!');
     }
   } 
 
@@ -252,5 +274,7 @@ export class CreateCourseComponent implements OnInit {
       console.log(this.AllTakeawayDetails);
      }) 
   }
+
+ 
 
 }
