@@ -17,7 +17,8 @@ const routes: Routes = [
   {
     path:'Player',
     loadChildren: './core/core.module#CoreModule'
-  }
+  },
+  
 
 ];
 
