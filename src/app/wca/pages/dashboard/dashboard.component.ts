@@ -12,6 +12,10 @@ import{WcaService} from '../../services/wca.service'
 export class DashboardComponent implements OnInit {
   popularCourses: { img: string; name: string; }[];
 
+  publishedCourses:any;
+  createdCourses:any;
+  draftCourses:any;
+
   wishlist: any = [];
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;
@@ -21,6 +25,8 @@ export class DashboardComponent implements OnInit {
   @Input('showPrice') showPrice: boolean;
   @Input('showCount') showCount: boolean;
   @Input('showRating') showRating: boolean;
+  @Input('showDate') showDate: boolean;
+
   breakpoint: number;
 
   popularCategorires: any = {
@@ -80,6 +86,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
     this.getPublishedCourses();
+    this.getCreatedCourses();
+    this.getDraftCourses();
     
     if (window.innerWidth <= 480)
       this.breakpoint = 1;
@@ -109,10 +117,28 @@ export class DashboardComponent implements OnInit {
 
     this.service.getPublishedCourse().subscribe((data: any) => {
 
-     
-      console.log(data)  
-  
-      
+     this.publishedCourses=data.Result;
+
+     console.log(this.publishedCourses[0])
+       
+    });
+  }
+
+  getCreatedCourses() {
+
+    this.service.getCreatedCourse().subscribe((data: any) => {
+
+     this.createdCourses=data.Result;
+
+    });
+  }
+
+  getDraftCourses() {
+
+    this.service.getDraftCourse().subscribe((data: any) => {
+
+     this.draftCourses=data.Result;
+
     });
   }
 }

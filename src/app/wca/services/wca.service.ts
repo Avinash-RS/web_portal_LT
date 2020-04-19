@@ -12,7 +12,13 @@ url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
   constructor(private http: HttpClient) { }
 
   getPublishedCourse() {
-    return this.http.get(this.url);
+    return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");
+  }
+  getCreatedCourse() {
+    return this.http.get(environment.wcaapiurl + "api/courses/getcreatedcourse");
+  }
+  getDraftCourse() {
+    return this.http.get(environment.wcaapiurl + "api/courses/getdraftcourse");
   }
 
   getAllTemplates() {

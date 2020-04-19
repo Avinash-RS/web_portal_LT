@@ -23,6 +23,7 @@ export class ChooseTemplateComponent implements OnInit {
       this.templateList = res.Result;
     })
   }
+  
   selectTemplate(templateId) {
     this.selectedTemplateId = templateId;
   }

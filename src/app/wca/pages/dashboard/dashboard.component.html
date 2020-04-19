@@ -29,14 +29,14 @@
                         <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
-                                <ng-template carouselSlide *ngFor="let course of wishlist">
+                                <ng-template carouselSlide *ngFor="let course of publishedCourses">
 
                             <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                              [showWishlist]="false" [showStatus]="false" [showCount]="true" [showRating]="true"> </app-course-component>
+                              [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true" [showRating]="true"> </app-course-component>
                             </ng-template>
                         </owl-carousel-o>
                         </mat-grid-list>
-                        <h2 *ngIf="wishlist && wishlist.length == 0">
+                        <h2 *ngIf="publishedCourses && publishedCourses.length == 0">
                           No courses yet
                         </h2>
                       </mat-card>
@@ -56,14 +56,14 @@
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
     
                                 <owl-carousel-o [options]="popularCategorires" class="partner">
-                                    <ng-template carouselSlide *ngFor="let course of wishlist">
+                                    <ng-template carouselSlide *ngFor="let course of createdCourses">
     
-                                <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                                  [showWishlist]="false" [showStatus]="false"> </app-course-component>
+                                <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
+                                [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="false" [showRating]="false"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                             </mat-grid-list>
-                            <h2 *ngIf="wishlist && wishlist.length == 0">
+                            <h2 *ngIf="createdCourses && createdCourses.length == 0">
                               No courses yet
                             </h2>
                           </mat-card>
@@ -83,14 +83,14 @@
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
     
                                 <owl-carousel-o [options]="popularCategorires" class="partner">
-                                    <ng-template carouselSlide *ngFor="let course of wishlist">
+                                    <ng-template carouselSlide *ngFor="let course of draftCourses">
     
-                                <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                                  [showWishlist]="false" [showStatus]="false"> </app-course-component>
+                                <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
+                                [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="false" [showRating]="false"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                             </mat-grid-list>
-                            <h2 *ngIf="wishlist && wishlist.length == 0">
+                            <h2 *ngIf="draftCourses && draftCourses.length == 0">
                               No courses yet
                             </h2>
                           </mat-card>
@@ -102,6 +102,3 @@
 
 
 
-<!-- <app-mycreated-course></app-mycreated-course> -->
-
-<div><app-footer></app-footer></div>

@@ -33,6 +33,12 @@
     <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>Rs {{course.price | number }}</strong>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10" *ngIf="showDate">
+      {{course.publishedOn}}
+    </div>
+  </div>
   <br>
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
