@@ -17,6 +17,18 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  config = {
+    allowNumbersOnly: true,
+    length: 4,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder:'',
+    inputStyles: {
+      'width': '50px',
+      'height': '50px',
+      'background': '#B8D0FF'
+    }
+  };
 
   //my3
   qualification_obj: any = [];
@@ -65,6 +77,7 @@ export class ProfileComponent implements OnInit {
   institutes: any;
   languageList: any;
   isenable: boolean = true;
+  enable: boolean = true;
   userData: any = {};
   qualification: any = {};
   showdeletedicon: boolean = true;
@@ -103,7 +116,6 @@ export class ProfileComponent implements OnInit {
     private gs: GlobalServiceService
   ) {
     this.enabel = false
-
   }
   showPassword() {
     this.show_button = !this.show_button;
@@ -155,13 +167,14 @@ export class ProfileComponent implements OnInit {
       if (!this.currentUser.is_profile_updated)
         this.gs.preventBackButton()
       this.getprofileDetails(this.currentUser.user_id);
-      this.getAllLevels();
+    
       this.getAllcountry();
       this.getAllLanguage();
       this.getBoardsUniv();
       this.getInstitute();
       this.getDiscipline();
       this.getSpec();
+      this.getAllLevels();
       // this.closedialogbox();
 
 
@@ -175,6 +188,7 @@ export class ProfileComponent implements OnInit {
 
   enableedit() {
     this.showdeletedicon = false;
+    this.enable = false;
   }
   get f() {
     if (this.mailForm) {
@@ -387,9 +401,10 @@ export class ProfileComponent implements OnInit {
 
 
     if (this.profileDetails.is_student_or_professional == 'student') {
-      // this.prof.total_experience = '';
-      // this.prof.organization = '';
-      // this.prof.job_role = '';
+      console.log('obj',this.qualification_obj);
+      this.prof.total_experience = '';
+      this.prof.organization = '';
+      this.prof.job_role = '';
       if (this.profileDetails.gender && this.profileDetails.country &&
         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
@@ -518,7 +533,7 @@ export class ProfileComponent implements OnInit {
           localStorage.setItem('UserDetails', JSON.stringify(this.currentUser))
           this.alert.openAlert(data.data['update_profile'].message, null)
           this.showdeletedicon = true;
-          // this.router.navigate(['/Learner/MyCourse']);
+          this.router.navigate(['/Learner/MyCourse']);
         } else {
           this.alert.openAlert(data.data['update_profile'].message, null)
         }
@@ -540,10 +555,10 @@ export class ProfileComponent implements OnInit {
     this.showotp = false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
-      otp1: new FormControl("", []),
-      otp2: new FormControl("", []),
-      otp3: new FormControl("", []),
-      otp4: new FormControl("", []),
+      otp: new FormControl("", []),
+      // otp2: new FormControl("", []),
+      // otp3: new FormControl("", []),
+      // otp4: new FormControl("", []),
     })
   }
   editPassword(passRef: TemplateRef<any>) {
@@ -572,9 +587,12 @@ export class ProfileComponent implements OnInit {
     })
 
   }
+  onOtpChange(otp) {
+    this.otp = otp;
+  }
   //Verify OTP
   otpverify() {
-    this.otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4
+    // this.otp = this.otpForm.value.otp
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.closedialogbox();
@@ -584,7 +602,7 @@ export class ProfileComponent implements OnInit {
         this.ngOnInit();
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
-        this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
+        this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
         this.showotp = false;
         this.isenable = true;
       }
@@ -593,7 +611,7 @@ export class ProfileComponent implements OnInit {
   }
   //Resend OTP
   Resendcode() {
-    this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp1: '', otp2: '', otp3: '', otp4: '' })
+    this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
@@ -611,6 +629,7 @@ export class ProfileComponent implements OnInit {
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
         localStorage.clear();
+        this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);

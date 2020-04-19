@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private alert: AlertServiceService, private service: LearnerServicesService) { 
-      console.log('2')
-    }
+    private alert: AlertServiceService, private service: LearnerServicesService) {
+    console.log('2')
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -46,10 +46,11 @@ export class LoginComponent implements OnInit {
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role', 'learner')
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               //if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated)
-                this.router.navigate(['/Learner'])
+                this.router.navigate(['/Learner/MyCourse'])
               else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
                 this.router.navigate(['/Learner/profile'])
@@ -59,11 +60,12 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
+              localStorage.setItem('role', 'learner')
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               //if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated)
-                this.router.navigate(['/Learner'])
+                this.router.navigate(['/Learner/MyCourse'])
               else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
                 this.router.navigate(['/Learner/profile'])

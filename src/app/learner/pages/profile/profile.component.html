@@ -367,18 +367,21 @@
                 <p class="otphead">OTP will be send to this number</p>
                 <div *ngIf="showotp"><br>
                   <p class="otphead">OTP Code</p>
+                  <ng-otp-input [config]="config"
+                  [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
+                  formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
+                  </ng-otp-input>
+                  <!-- <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
+                    formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" /> -->
 
-                  <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
-                    formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
-
-                  <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
+                  <!-- <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
                     formControlName="otp2" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
 
                   <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
                     formControlName="otp3" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
 
               <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
-                formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
+                formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" /> -->
               <br><br>
             </div>
             <div *ngIf="showotp">
@@ -416,7 +419,7 @@
                 <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
                   mixture of Special characters, uppercase and lowercase letters.</div>
               </div>
-            </div>
+            </div><br>
 
 
                 <label class="title">Enter the new password</label>
@@ -481,7 +484,7 @@
                   </div>
                 </div>
               </form><br>
-            </mat-dialog-content>
+            </mat-dialog-content><br>
             <mat-dialog-actions>
               <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
                 Submit

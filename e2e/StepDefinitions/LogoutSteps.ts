@@ -13,10 +13,10 @@ setDefaultTimeout(60 * 1000);
 
 Given(': User is already logged in the system', async ()=> {
     browser.waitForAngularEnabled(false);
-    await browser.get('http://40.76.47.212/Learner/login');
+    await browser.get(browser.params.login.url);
     await browser.manage().window().maximize();
-    await lout.Username.sendKeys("Bobby");
-    await lout.Password.sendKeys("Test@123");
+    await lout.Username.sendKeys(browser.params.login.user);
+    await lout.Password.sendKeys(browser.params.login.pwd);
 });
 
 
@@ -26,6 +26,7 @@ Given(': Remember me checked during log in', async ()=> {
 });
 
 When(': clicks on log out option', async ()=> {
+    await browser.sleep(5000);
     await lout.LogoutMenu.click();
     await lout.Logout.click();
 });

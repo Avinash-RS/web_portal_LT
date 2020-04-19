@@ -11,10 +11,10 @@ let vcl=new ViewCourseLearnerPage();
 
 Given(': I am in my courses page', async ()=> {
     browser.waitForAngularEnabled(false);
-    await browser.get('http://52.171.134.188/Learner/login');
+    await browser.get(browser.params.login.url);
     await browser.manage().window().maximize();
-    await vcl.Username.sendKeys('Bobby');
-    await vcl.Password.sendKeys('Test@123');
+    await vcl.Username.sendKeys(browser.params.login.user);
+    await vcl.Password.sendKeys(browser.params.login.pwd);
     await vcl.LoginButton.click(); 
 });
 

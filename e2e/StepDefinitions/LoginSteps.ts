@@ -7,19 +7,21 @@ setDefaultTimeout(60 * 1000);
 
 let lgn=new LoginPage();
 
-  Given(': I am in login page', async ()=> {
+  Given(': User is in login page', async ()=> {
     browser.waitForAngularEnabled(false);
-    await browser.get('http://52.171.134.188/Learner/login');
+    await browser.get(browser.params.login.url);
     //QA env : 52.171.134.188 [ Bobby / Test@123 ]
     //Dev env: 40.76.47.212 [ mythreyi / 123Aa!@# ]
-    await browser.manage().window().maximize();
+    //await browser.manage().window().maximize();
   });
 
-  When(':  Enter {string} and {string} for a particular user role', async (string, string2)=> {        
-    await lgn.Username.sendKeys(string);
-    await lgn.Password.sendKeys(string2);
+  When(':  Enter usrname and pwd for a particular user roles', async ()=> {
+    await lgn.Username.sendKeys(browser.params.login.user);
+    //await browser.sleep(3000);
+    await lgn.Password.sendKeys(browser.params.login.pwd);
+    //await browser.sleep(3000);
   });
 
-  Then(': Click on log in button', async ()=> {
+  Then(': User Click on log in button', async ()=> {
     await lgn.LoginButton.click(); 
   }); 

@@ -1,6 +1,4 @@
 @import "../../../../assets/variable.scss";
-// @import "@assets/variable.scss";
-// @import "@assets/variable";
 
 h2 {
     color: $color-blue;
@@ -14,10 +12,11 @@ mat-card{
 
 button {
     background: $color-blue !important;
-    color: white ;
+    color: $color-white ;
     width: 70%;
     margin-left: 15%;
 }
+
 mat-form-field {
     width: 80%;
     // height: 10vh !important;
@@ -28,18 +27,28 @@ mat-form-field {
 .forgot_ps {
     text-align: end;
     width: 90%;
-    color: #3f548b;
+    color: $color-blue;
     font-weight: 500;
 }
 .sign_up, .remember_me,mat-card-title , a{
-    color: #3f548b;
+    color: $color-blue;
     text-align: center !important;
 }
 .mat-checkbox .mat-checkbox-frame {
-    border-color: black;
+    border-color: $color-blank;
     background-color: #dddddd
 }
 mat-card-title {
     font-weight: 400;
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 1px 0;
+    background: $color-light-blue;
+    display: inline-block;
+    border: 1px solid $color-border;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
  

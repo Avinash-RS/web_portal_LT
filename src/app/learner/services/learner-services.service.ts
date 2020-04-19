@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 
-import { login,get_course_by_user ,get_country_details,get_qualification_details,
-  get_board_university_details,get_discipline_details,get_specification_details,
-  get_institute_details ,get_language_details,get_user_detail,list_content,syllabus_of_particular_scorm } from "./operations/learner_query";
+import {
+  login, get_course_by_user, get_country_details, get_qualification_details,
+  get_board_university_details, get_discipline_details, get_specification_details,
+  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm
+} from "./operations/learner_query";
 
-import {user_registration,user_registration_mobile_otp_send,user_registration_mobile_otp_verify,
-  get_forgot_username_mobile_email,get_forgot_password_byusername,user_registration_username_suggestion,
-  view_profile, get_state_details,user_registration_done,get_forgot_password_byresetpassword,
-  get_district_details,get_change_password_updateprofile, update_mobile_onprofile ,
-  update_verifyotp_mobile_onprofile,update_email_onprofile,update_profile,resend_otp_onprofile} from "./operations/learner_mutation"
- 
+import {
+  user_registration, user_registration_mobile_otp_send, user_registration_mobile_otp_verify,
+  get_forgot_username_mobile_email, get_forgot_password_byusername, user_registration_username_suggestion,
+  view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
+  get_district_details, get_change_password_updateprofile, update_mobile_onprofile,
+  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile
+} from "./operations/learner_mutation"
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -20,7 +24,7 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class LearnerServicesService {
 
-  constructor(private Apollo: Apollo,private http: HttpClient, ) { }
+  constructor(private Apollo: Apollo, private http: HttpClient, ) { }
 
   login(username, password, is_admin) {
     console.log('inside services', username, password, is_admin)
@@ -35,9 +39,8 @@ export class LearnerServicesService {
   }
 
   imageupload(fb) {
-    return this.http.post<any[]>(environment.apiUrlImg+`upload/image`,fb);
-}
-
+    return this.http.post<any[]>(environment.apiUrlImg + `upload/image`, fb);
+  }
 
   user_registration(email, full_name, termsandconditions) {
     return this.Apollo.query({
@@ -45,31 +48,30 @@ export class LearnerServicesService {
       variables: {
         full_name: full_name,
         email: email,
-        term_condition: termsandconditions
+        term_condition: termsandconditions,
       }
     });
   }
 
-
-  submit_otp(user_id,_id,mobile,email) {
+  submit_otp(user_id, _id, mobile, email) {
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
       variables: {
         user_id: user_id,
         user: _id,
-        mobile_number:mobile,
-        email:email,
+        mobile_number: mobile,
+        email: email,
       }
     });
   }
 
-  user_registration_verify(otp,mobile_number){
+  user_registration_verify(otp, mobile_number) {
     return this.Apollo.query({
       query: user_registration_mobile_otp_verify,
       variables: {
         otp: otp,
         mobile_number: mobile_number
-       
+
       }
     });
   }
@@ -123,7 +125,7 @@ export class LearnerServicesService {
   //       user_id:user_id,
   //       user:_id,
 
-  userNamesuggestion(userId){
+  userNamesuggestion(userId) {
     return this.Apollo.query({
       query: user_registration_username_suggestion,
       variables: {
@@ -161,30 +163,30 @@ export class LearnerServicesService {
       }
     });
   }
-  get_qualification_details(){
+  get_qualification_details() {
     return this.Apollo.query({
-    query:  get_qualification_details,
-  })
+      query: get_qualification_details,
+    })
   }
-  get_board_university_details(){
+  get_board_university_details() {
     return this.Apollo.query({
-    query:get_board_university_details,
-  });
-  }
-
-  get_district_details(country, state){
-    return this.Apollo.query({
-    query: get_district_details,
-    variables: {
-    country: country,
-    state: state
-  }
-  });
+      query: get_board_university_details,
+    });
   }
 
-  get_change_password_updateprofile(username,old_password, password){
+  get_district_details(country, state) {
     return this.Apollo.query({
-      query:  get_change_password_updateprofile,
+      query: get_district_details,
+      variables: {
+        country: country,
+        state: state
+      }
+    });
+  }
+
+  get_change_password_updateprofile(username, old_password, password) {
+    return this.Apollo.query({
+      query: get_change_password_updateprofile,
       variables: {
         username: username,
         old_password: old_password,
@@ -192,30 +194,30 @@ export class LearnerServicesService {
       }
     })
   }
-  get_discipline_details(){
+  get_discipline_details() {
     return this.Apollo.query({
       query: get_discipline_details,
     })
   }
-  get_specification_details(){
+  get_specification_details() {
     return this.Apollo.query({
       query: get_specification_details,
     })
   }
-  get_institute_details(){
+  get_institute_details() {
     return this.Apollo.query({
       query: get_institute_details,
     })
   }
-  get_language_details(){
+  get_language_details() {
     return this.Apollo.query({
       query: get_language_details,
     })
   }
 
-  update_mobile_onprofile (user_id,mobile_number){
+  update_mobile_onprofile(user_id, mobile_number) {
     return this.Apollo.query({
-      query: update_mobile_onprofile ,
+      query: update_mobile_onprofile,
       variables: {
         user_id: user_id,
         mobile_number: mobile_number
@@ -223,9 +225,9 @@ export class LearnerServicesService {
     })
   }
 
-  update_verifyotp_mobile_onprofile(user_id,mobile_number,otp){
+  update_verifyotp_mobile_onprofile(user_id, mobile_number, otp) {
     return this.Apollo.query({
-      query:  update_verifyotp_mobile_onprofile,
+      query: update_verifyotp_mobile_onprofile,
       variables: {
         user_id: user_id,
         mobile_number: mobile_number,
@@ -233,16 +235,16 @@ export class LearnerServicesService {
       }
     })
   }
-  get_user_detail(email){
+  get_user_detail(email) {
     return this.Apollo.query({
       query: get_user_detail,
       variables: {
-        email:email
+        email: email
       }
     });
   }
 
-  update_email_onprofile(user_id,email){
+  update_email_onprofile(user_id, email) {
     return this.Apollo.query({
       query: update_email_onprofile,
       variables: {
@@ -251,38 +253,40 @@ export class LearnerServicesService {
       }
     })
   }
-  list_content(){
+  list_content() {
     return this.Apollo.query({
-      query:list_content,
-      variables:{
-        
+      query: list_content,
+      variables: {
+
       }
     })
   }
-  syllabus_of_particular_scorm(contentid){
+  syllabus_of_particular_scorm(contentid,user_id,course_id) {
     return this.Apollo.query({
-      query:syllabus_of_particular_scorm,
-      variables:{
-        contentid:contentid
+      query: syllabus_of_particular_scorm,
+      variables: {
+        contentid: contentid,
+        user_id:user_id,
+        course_id:course_id
       }
     })
-}
+  }
 
-update_profile(userData){
-  return this.Apollo.query({
-    query: update_profile,
-    variables:userData
-  })
-}
-resend_otp_onprofile(user_id){
-  return this.Apollo.query({
-    query: resend_otp_onprofile,
-    variables: {
-      user_id: user_id
-    }
-  })
-}
+  update_profile(userData) {
+    return this.Apollo.query({
+      query: update_profile,
+      variables: userData
+    })
+  }
+  resend_otp_onprofile(user_id) {
+    return this.Apollo.query({
+      query: resend_otp_onprofile,
+      variables: {
+        user_id: user_id
+      }
+    })
+  }
 };
 
-  
+
 
