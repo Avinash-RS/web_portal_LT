@@ -13,6 +13,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,8 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
+   
+
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -32,6 +37,7 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
     AppRoutingModule,
     GraphqlModule,
     BrowserAnimationsModule,
+
   ],
   providers: [AlertComponentComponent],
   bootstrap: [AppComponent],
