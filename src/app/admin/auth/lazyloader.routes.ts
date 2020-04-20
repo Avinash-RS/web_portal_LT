@@ -2,11 +2,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserManagementComponent } from '../pages/user-management/user-management.component';
+import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
         { path: 'dashboard', component: DashboardComponent },
-        { path: 'userManagement', component: UserManagementComponent},
+        { path: 'userManagement', component: UserManagementComponent },
+        { path: 'addUser', component: AddUserComponent },
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },

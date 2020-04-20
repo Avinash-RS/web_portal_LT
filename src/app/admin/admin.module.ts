@@ -13,15 +13,13 @@ import { AdminLoginModule } from './admin-login/admin-login.module';
 
 import { AdminCoreModule } from './core/admin-core.module';
 import { AuthModule } from './auth/auth.module';
-
-
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 
 const routes: Routes = [
-  
-  {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
-
-  {path: 'auth', loadChildren: './auth/auth.module#AuthModule',canActivate:[AuthGuard] },
+  // {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
+  { path: 'login', component: AdminLoginComponent },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule', canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 
@@ -33,12 +31,11 @@ const routes: Routes = [
     CommonModule,
     AuthModule,
     MaterialModule,
-    FormsModule,  
+    FormsModule,
     ReactiveFormsModule,
-
     AdminCoreModule,
     RouterModule.forChild(routes),
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AdminModule { }

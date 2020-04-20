@@ -13,11 +13,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
-
-
-
 import { AdminCoreModule } from '../core/admin-core.module';
+import { AddUserComponent } from './add-user/add-user.component';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
     imports: [
@@ -32,12 +31,14 @@ import { AdminCoreModule } from '../core/admin-core.module';
         MatCheckboxModule,
         MatListModule,
         MatChipsModule,
-        AdminCoreModule ],
+        AdminCoreModule,
+        RouterModule
+         ],
     declarations: [   
 
 
        
-    ],
+    AddUserComponent],
     exports: [
     ],
     providers: [

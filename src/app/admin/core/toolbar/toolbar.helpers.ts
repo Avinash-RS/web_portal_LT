@@ -1,3 +1,4 @@
+var admin = JSON.parse(localStorage.getItem('adminDetails')) || null;
 export const ToolbarHelpers = {
 	notifications: [
   		{
@@ -22,6 +23,6 @@ export const ToolbarHelpers = {
 
 	currentUser: {
 		photoURL: 'assets/profile.jpg',
-		currentUserName: 'Afser Ali'
+		currentUserName: admin.username
 	}
 };
