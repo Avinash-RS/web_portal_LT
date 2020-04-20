@@ -213,25 +213,3 @@
 
 <!-- ////ADMIN///////// -->
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" *ngIf ="role=='admin' && userDetailes != null">
-  <img class="logo" src="../../assets/images/logo.png">
-  <a class="navbar-brand edutech" href="/Admin/userManagement">EDUTECH</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <!-- id="navbarCollapse" -->
-  <div class="collapse navbar-collapse">
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-      *ngIf="userDetailes != null">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <div class="header">
-      <mat-menu class="menubar" #menu="matMenu">
-        <button class="backgroundcol" mat-menu-item (click)="logout()">
-          <label>Logout</label>
-        </button>
-      </mat-menu>
-    </div>
-  </div>
-</nav>

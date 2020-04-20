@@ -110,7 +110,7 @@ button:disabled:hover {
 }
 
 .width_100 {
-  width: 100%;
+  width: 100% !important;
 }
 
 .width_90 {
@@ -200,6 +200,11 @@ button:disabled:hover {
   text-align: center;
 }
 
+.center {
+  margin: auto;
+  display: block;
+}
+
 .background_trans {
   background: transparent !important;
  
@@ -230,7 +235,7 @@ button:disabled:hover {
 }
 
 .background-maroon {
-  background-color: $color-maroon;
+  background-color: $color-maroon !important;
 }
 
 td {
@@ -258,6 +263,9 @@ td {
   color: $color-white !important;
 }
 
+.color_black {
+  color : $color-blank !important;
+}
 
 ////////////////////////////////////////////////////////////////////////
 

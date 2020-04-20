@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { get_user_group, search_user } from "./operations/admin_query";
+import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user } from "./operations/admin_query";
 import { user_registration } from "./operations/admin_mutation"
 @Injectable({
   providedIn: 'root'
@@ -40,4 +40,33 @@ export class AdminServicesService {
     });
   }
 
+  deActivate_And_reActivate_User(user_id,is_active) {
+    return this.Apollo.query({
+      query: deactivate_reactivate_user,
+      variables: {
+        user_id: user_id,
+        is_active: is_active,
+      }
+    });
+  }
+
+  getAllUsers(pagenumber ,sort) {
+    return this.Apollo.query({
+      query: get_all_user,
+      variables: {
+        pagenumber : pagenumber ,
+        sort: sort,
+      }
+    });
+  }
+
+  blockUser(user_id,is_blocked) {
+    return this.Apollo.query({
+      query: block_user,
+      variables: {
+        user_id: user_id,
+        is_blocked: is_blocked,
+      }
+    });
+  }
 }
