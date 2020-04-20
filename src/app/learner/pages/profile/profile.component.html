@@ -248,7 +248,7 @@
                         <!-- {{i}} {{qual.length}} {{qual.length-1}} -->
                         <mat-icon *ngIf="i == qual.length-1 && qual.length < 15"
                           (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
-                        <mat-icon (click)="removelastQual(i)">delete</mat-icon>
+                        <mat-icon (click)="removelastQual(qualification)">delete</mat-icon>
                       </div>
                     </div><br>
                   </div>
