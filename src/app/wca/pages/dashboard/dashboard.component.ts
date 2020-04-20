@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import{WcaService} from '../../services/wca.service'
 
@@ -81,13 +82,17 @@ export class DashboardComponent implements OnInit {
  
   
 
-  constructor(public service: WcaService) { }
+  constructor(public service: WcaService,public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
+    this.spinner.show();
 
     this.getPublishedCourses();
     this.getCreatedCourses();
     this.getDraftCourses();
+
+    
     
     if (window.innerWidth <= 480)
       this.breakpoint = 1;
@@ -138,6 +143,7 @@ export class DashboardComponent implements OnInit {
     this.service.getDraftCourse().subscribe((data: any) => {
 
      this.draftCourses=data.Result;
+     this.spinner.hide();
 
     });
   }
