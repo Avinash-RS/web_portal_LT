@@ -134,7 +134,7 @@
              <div [formGroupName]="i">
               <div class="col-md-12" > <mat-select  [disabled]='showdeletedicon'  formControlName="name" class="inputs2" placeholder="Select the instructor"
                   name="language">
-                 <mat-option *ngFor="let k of AllInstructors | filter_matselect:selected" [disabled]="k.disabled" [value]="k.name" >
+                 <mat-option *ngFor="let k of AllInstructors | filter_matselect:selected" [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change(k,i)">
                    {{k?.name}}
                  </mat-option>
                </mat-select>
@@ -238,7 +238,7 @@
                  <div class="row">
                  <div class="col-md-11"> <mat-select [disabled]='showdeletedicon' formControlName="name"  class="inputs4" placeholder="Select the institute"
                 name="language">
-                <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1" [disabled]="k.disabled" [value]="k.name">
+                <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1" [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change1(k,i)">
                   {{k?.name}}
                 </mat-option>
              </mat-select>

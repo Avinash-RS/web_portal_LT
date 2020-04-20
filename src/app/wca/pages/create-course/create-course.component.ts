@@ -6,7 +6,6 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
-import {FilterPipeforselect} from '../../../pipes/filterSelect'
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -30,7 +29,6 @@ export class CreateCourseComponent implements OnInit {
   AllTakeawayDetails = [];
   AllPrerequisitDetails = [];
   AllCertifyDetails = [];
-  filterValue = '';
 
 
 
@@ -197,7 +195,7 @@ export class CreateCourseComponent implements OnInit {
         this.spinner.hide();
         if (data && data.Message === 'Success') {
          this.toast.success('Course Created Successfully !!!');
-         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) } });
+         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.image} });
         }
       }, err => {
         this.spinner.hide();
@@ -285,10 +283,20 @@ export class CreateCourseComponent implements OnInit {
 
   get selected1(){
     return this.courseForm.get('coursepartner_details').value.map(i=>{
-      console.log(i.name);
       return i.name 
     })
   }
 
-  
+  change(option,index){
+  console.log(option);
+  this.courseForm.get('instructure_details').get(String(index)).get('name').setValue(option.name);
+  this.courseForm.get('instructure_details').get(String(index)).get('description').setValue(option.description);
+  this.courseForm.get('instructure_details').get(String(index)).get('image').setValue(option.image);
+  }
+
+  change1(option,index){
+    console.log(option);
+    this.courseForm.get('coursepartner_details').get(String(index)).get('name').setValue(option.name);
+    this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(option.image);
+    }
 }
