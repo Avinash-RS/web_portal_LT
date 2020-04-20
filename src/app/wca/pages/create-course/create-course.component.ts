@@ -6,7 +6,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {FilterPipeforselect} from '../../../pipes/filterSelect'
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -30,6 +30,7 @@ export class CreateCourseComponent implements OnInit {
   AllTakeawayDetails = [];
   AllPrerequisitDetails = [];
   AllCertifyDetails = [];
+  filterValue = '';
 
 
 
@@ -275,6 +276,19 @@ export class CreateCourseComponent implements OnInit {
      }) 
   }
 
- 
 
+  get selected(){
+    return this.courseForm.get('instructure_details').value.map(i=>{
+      return i.name 
+    })
+  }
+
+  get selected1(){
+    return this.courseForm.get('coursepartner_details').value.map(i=>{
+      console.log(i.name);
+      return i.name 
+    })
+  }
+
+  
 }

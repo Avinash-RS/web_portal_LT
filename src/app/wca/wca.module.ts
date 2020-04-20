@@ -35,6 +35,7 @@ import { UploadFilesComponent } from './pages/upload-files/upload-files.componen
 import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
 
 
+import { PipeModule } from '../pipes/pipe.module';
 
 
 
@@ -71,6 +72,7 @@ const routes: Routes = [
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
+    PipeModule,
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
