@@ -18,6 +18,7 @@ export class ScormplayerComponent implements OnInit {
   url: string 
   urlSafe: SafeResourceUrl;
   user_id:any
+  breakpoint: number;
   course_id:any;
   // state$: Observable<object>;
 
@@ -32,10 +33,10 @@ export class ScormplayerComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-    console.log(window.localStorage.getItem('course_status'))
   }
   /*getcontent() {
     this.service.list_content().subscribe(data => {
@@ -57,4 +58,9 @@ export class ScormplayerComponent implements OnInit {
       
     })
   }*/
+
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
+  }
 }

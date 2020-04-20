@@ -1,4 +1,4 @@
-<div class="limiter">
+<div *ngIf="!isLinkActive" class="limiter">
   <div class="container-reg100 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
       <h1 class="head">Enter the mobile number</h1>
@@ -51,8 +51,16 @@
           <button class="btn" [disabled]=""  (click)="otpverify()">Verify</button>
         </div><br>
         <!--  -->
-        <div  *ngIf="showotp" class="account">Didn't get OTP?<b (click)="Resendcode()">Resend OTP</b></div>
+        <div class="account">Didn't get OTP?<b (click)="Resendcode()">&nbsp;&nbsp;Resend OTP</b></div>
       </form>
     </div>
   </div>
+</div>
+
+
+<div *ngIf="isLinkActive">
+  <br>
+  <br>
+  <img src="../../../../assets/images/forbidden.jpg">
+  <h1>This Link has already expired and email is registered..</h1>
 </div>

@@ -1,0 +1,348 @@
+
+<div><app-wca></app-wca></div>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+    </ol>
+</nav>
+
+
+  
+
+<div class="container wrap-body">
+  <form [formGroup]="courseForm" (ngSubmit)="createcourseForm()">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Create a Course
+                        </mat-panel-title>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                               
+
+                                <div class="form-group">
+                            
+                                  <div class="row">
+                                    <div class="col-md-9">
+
+                                      <div>
+                                 
+                                       
+                                        <div class="row">
+                                          <div class="col-md-3"><span style="font-weight: bold;">Course Details</span></div>
+                                          <div class="col-md-9"  style="visibility:collapse;">  <mat-checkbox   formControlName="course_mode">Self placed</mat-checkbox></div>
+                                          </div>
+                                    
+                                    <div class="row">
+                                    <div class="col-md-3">Course Name<span style="color: red;">*</span></div>
+                                    <div class="col-md-9"><input type="text"  placeholder="Enter the course name" formControlName="name" 
+                                    required /> </div>
+                                    </div>
+                                   
+
+                                    <div class="row">
+                                      <div class="col-md-3">Course Description</div>
+                                      <div class="col-md-9"><textarea class="inputs" style="resize: none;"  formControlName="description"
+                                        placeholder="Enter the course description" maxlength="1000" 
+                                        name="info"></textarea></div>
+                                      </div>
+
+                                      <div class="row">
+                                        <div class="col-md-3">Pre-Requisite</div>
+                                        <div class="col-md-9">
+                                          <!-- <textarea class="inputs" style="resize: none;"  formControlName="prerequisit_details"
+                                          placeholder="Enter the course description (200 Characters)" maxlength="1000" 
+                                          name="info"></textarea> -->
+
+                                          <mat-form-field class="matchipsbrder">
+                                            <mat-chip-list #preReqList>
+                                                <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
+                                                    matTooltip={{req?.name}}>
+                                                    {{req?.name}}
+                                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                                </mat-chip>
+                                                <input placeholder="Add Details" (keydown.space)="$event.preventDefault()" [matChipInputAddOnBlur]="true"
+                                                    [matChipInputFor]="preReqList" 
+                                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                    (matChipInputTokenEnd)="addrequest($event)">
+                
+                                            </mat-chip-list>
+                
+                                        </mat-form-field>
+                                        </div>
+                                        </div>
+
+                                        <div class="row">
+                                          <div class="col-md-3">Mode</div>
+                                          <div class="col-md-9" >  <mat-checkbox formControlName="course_mode" >Self placed</mat-checkbox></div>
+                                          </div>
+
+                                      
+
+                                        <div class="row">
+                                          <div class="col-md-3">Preview Video</div>
+                                          <div class="col-md-9"><input type="text"  placeholder="URL"  formControlName="preview_video"
+                                          required /> </div>
+                                          </div>
+                                   
+                                      </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                    <div class="mainImage">
+                                      <span>
+                                        <input style="display: none;" id="fileInput" type='file' #fileInput 
+                                        (change)="onSelectFile($event,'img1')">  <img class="img1"  (click)="fileInput.click()" [src]="preview1 ? preview1 : '../../../../assets/images/image_upload.svg'">
+                                      </span>
+
+                                      <span>Upload the Course Image <span style="color: red;">*</span></span>
+                                      <span>(.jpg,.JPEG,.PNG)</span>
+                                      <span><small>size should not exceed more than 500 kb</small></span>
+                                    </div>
+
+                                    </div>
+
+                                  </div>
+
+                                  <div class="btmUnderline"></div>
+<!-- --------------------------------------------------------------------------------------------- -->
+ <div >
+<div class="row">
+
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-3"><span style="font-weight: bold;">Instructor Details</span></div>
+      <div class="col-md-9"  style="visibility:collapse;">  <mat-checkbox  formControlName="course_mode">Self placed</mat-checkbox></div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-md-3">Instructor Name</div>
+        <div class="col-md-9"> 
+        
+          <div class="row" >
+            <div class="col-sm-10" formArrayName="instructure_details" *ngFor="let item of courseForm.get('instructure_details').controls; let i = index;" >
+             <div [formGroupName]="i">
+              <div class="col-md-12" > <mat-select  [disabled]='showdeletedicon'  formControlName="name" class="inputs2" placeholder="Select the instructor"
+                  name="language">
+                 <mat-option *ngFor="let k of AllInstructors" [value]="k.name">
+                   {{k?.name}}
+                 </mat-option>
+               </mat-select>
+             </div>
+
+             <div class="row">
+
+              <div class="col-md-4">
+                 <input style="display: none;" id="fileInput1" type='file' #fileInput1 
+                (change)="onSelectFile($event,'img2',i)">
+                <img class="img2"for="fileInput1" 
+                 (click)="fileInput1.click()"
+                   [src]="preview2[i] ? preview2[i] : '../../../../assets/images/image_upload.svg'">
+                  </div>
+            
+
+             <div class="col-md-8"> <textarea class="inputs3" style="resize: none;"  formControlName="description"
+              placeholder="Description" maxlength="1000" 
+              name="info"></textarea></div>
+           
+              
+             </div>
+            </div>
+            </div>
+            <div class="col-sm-2 plusicon">
+
+              <mat-icon  (click)="add1()"
+                >add_circle_outline</mat-icon>
+              <mat-icon (click)="removenewLink1()" >delete</mat-icon>
+              <!-- <mat-icon (click)="test()">delete</mat-icon> -->
+            </div>
+
+
+          </div>
+        
+        
+        </div>
+        </div></div>
+
+
+      </div>
+    </div>
+
+    <div class="btmUnderline"></div>
+    <!-- --------------------------------------------------------------------------------------------- -->
+
+    <div >
+      <div class="row">
+      
+        <div class="col-md-12">
+      
+          <div class="row">
+            <div class="col-md-3"><span style="font-weight: bold;">Certification</span></div>
+            <div class="col-md-9"  style="visibility:collapse;">  <mat-checkbox   formControlName="course_mode">Self placed</mat-checkbox></div>
+            </div>
+      
+      
+      
+            <div class="row">
+              <div class="col-md-3">Certificate</div>
+              <div class="col-md-9"> 
+              
+              
+                    <div class="col-md-9" > <mat-select [disabled]='showdeletedicon'  formControlName="certification" class="inputs5" placeholder="No Certificate"
+                        name="language">
+                       <mat-option *ngFor="let k of AllCertifyDetails" [value]="k.name">
+                         {{k?.name}}
+                       </mat-option>
+                     </mat-select>
+                   </div>
+      
+                       </div>
+          </div>
+          </div>
+          </div>
+    </div>
+
+    <div class="btmUnderline"></div>
+    <!-- --------------------------------------------------------------------------------------------- -->
+
+    
+ <div >
+  <div class="row">
+  
+    <div class="col-md-12">
+  
+      <div class="row">
+        <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
+        <div class="col-md-9"  style="visibility:collapse;">  <mat-checkbox   formControlName="course_mode">Self placed</mat-checkbox></div>
+        </div>
+  
+  
+  
+        <div class="row" >
+          <div class="col-md-3">Institute Name</div>
+          <div class="col-md-9"> 
+          
+            <div class="row" >
+              <div class="col-sm-8" formArrayName="coursepartner_details" *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;" >
+                <div [formGroupName]="i">
+                 <div class="row">
+                 <div class="col-md-11"> <mat-select [disabled]='showdeletedicon' formControlName="name"  class="inputs4" placeholder="Select the institute"
+                name="language">
+                <mat-option *ngFor="let k of AllTakeawayDetails" [value]="k.name">
+                  {{k?.name}}
+                </mat-option>
+             </mat-select>
+            </div>
+
+             <div class="col-md-1 flxCls"> 
+               <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,'img3',i)">
+              <img class="img3"for="fileInput3" (click)="fileInput3.click()" [src]="preview3[i] ? preview3[i] : '../../../../assets/images/image_upload.svg'">
+               
+            </div>
+         
+               </div>
+              </div>
+              </div>
+              <div class="col-sm-2 pdleft">
+                  <mat-icon style="margin: 0;"  (click)="add2(in)">add_circle_outline</mat-icon>
+                  <mat-icon style="margin: 0;padding-left: 6px;" (click)="removenewLink2(in)" >delete</mat-icon>
+              </div>
+            </div>
+          
+          
+          </div>
+          </div></div>
+  
+  
+        </div>
+      </div>
+      
+
+      <div class="btmUnderline"></div>
+      <!-- --------------------------------------------------------------------------------------------- -->
+
+
+      <div>
+        <div class="row">
+        
+          <div class="col-md-9">
+        
+            <div class="row" >
+              <div class="col-md-3"><span style="font-weight: bold;">learners Takeaway</span></div>
+              <div class="col-md-9"  style="visibility:collapse;">  <mat-checkbox  formControlName="course_mode">Self placed</mat-checkbox></div>
+              </div>
+
+              <div formArrayName="takeway_details" *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
+              <div [formGroupName]="i">
+                <div class="row" >
+                  <div class="col-md-3">Text</div>
+                  <div class="col-md-9"><input type="text"  placeholder="Enter the text"  formControlName="text"
+                     />  </div>
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-md-3">Media</div>
+                    <div class="col-md-1" >  
+                      <div formArrayName="media" *ngFor="let item of courseForm.get('takeway_details').controls[i].get('media').controls; let j = index;">
+
+                      <div class="row">
+  
+                        <div class="col-md-2">
+                          <input style="display: none;" id="fileInput4" type='file' #fileInput4 
+                (change)="onSelectFile($event,'img4',i,j)"><img class="img5"for="fileInput4" (click)="fileInput4.click()" [src]="preview4[j] ? preview4[j] : '../../../../assets/images/image_upload.svg'">
+                        </div>          
+                  </div>
+                      </div>
+                  </div>
+
+                  <div  class="col-md-1 mrgnpad">
+                    <mat-icon style="margin:0;" (click)="add3()" >add_circle_outline</mat-icon>
+                  <mat-icon style="margin:0;" (click)="removenewLink3()" >delete</mat-icon>
+                </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-3">A Step Towards</div>
+                      <div class="col-md-9" ><textarea class="inputs" style="resize: none;"  formControlName="description"
+                        placeholder="Enter the course description" maxlength="1000" 
+                        name="info"></textarea> </div>
+                      </div>
+                    </div>
+              </div>
+             
+
+                  </div>
+            </div>
+      </div>
+
+
+          <div class="marginsection">  <button class="backgroundcol2" type="submit" >Save & Continue</button></div> 
+
+
+          <!-- routerLink="/Wca/viewmodule" -->
+
+      
+       </div>
+
+                            </mat-grid-list>
+                        </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+  </form>
+  </div>
+
+
+
+<div><app-footer></app-footer></div>

@@ -17,6 +17,10 @@ export class CourseComponentComponent implements OnInit {
   @Input('showCartBtn') showCartBtn: boolean;
   @Input('showWishlist') showWishlist: boolean;
   @Input('showStatus') showStatus: boolean;
+  @Input('showPrice') showPrice: boolean;
+  @Input('showCount') showCount: boolean;
+  @Input('showRating') showRating: boolean;
+  @Input('showDate') showDate: boolean;
 
   userDetail: any;
   recorded_data: any;

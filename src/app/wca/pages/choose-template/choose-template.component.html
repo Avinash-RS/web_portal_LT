@@ -1,0 +1,100 @@
+<div class="choose-template-container">
+    <div>
+        <app-wca></app-wca>
+    </div>
+
+    <nav aria-label="breadcrumb" class="coursebreadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+
+            <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+
+            <li class="breadcrumb-item active" aria-current="page">Choose a Template</li>
+        </ol>
+    </nav>
+
+
+
+
+
+    <div class="container wrap-body">
+        <div class="row">
+
+            <div class="col-md-12">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="true">
+
+
+                        <mat-panel-title class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;  border-bottom-style: solid;
+                  border-bottom-width: thick;border-bottom-color: gold;">
+                            Choose a template
+                        </mat-panel-title>
+
+                        <mat-panel-title routerLink="/Wca/addtemplate" class="f_wt_500 f_size_18 color_black"
+                            style="margin-left: 20px;">
+                            Create a template
+                        </mat-panel-title>
+
+
+
+
+                        <mat-card style="text-align: center;">
+
+                            <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1" class="custom-grid-list">
+                                <div *ngFor="let tlist of templateList;let i = index">
+                                    <mat-grid-tile
+                                        [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplateId,'selected-grid-tile': tlist.template_id == selectedTemplateId}"
+                                        (click)="selectTemplate(tlist.template_id)"
+                                        [matTooltip]='"updated on "+tlist.created_on+"\ncreated by "+tlist.createdby_name'
+                                        matTooltipPosition="right"
+                                        matTooltipClass="allow-cr">
+
+                                        <div>
+                                            <div class="tick-icon" *ngIf="tlist.template_id == selectedTemplateId">
+                                                <mat-icon class="green-icon">check_circle_outline</mat-icon>
+                                            </div>
+                                            <div
+                                                class="{{tlist.template_id == selectedTemplateId ? 'selected-grid-heading' : 'grid-heading' }} ">
+                                                Consist of
+                                            </div>
+                                            <div class="grid-list">
+                                                <ul>
+                                                    <li *ngFor="let template of tlist.template_details"
+                                                        class="list-items">
+                                                        {{template.name}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="template-name">Template {{i + 1}}</div>
+
+                                    </mat-grid-tile>
+
+                                </div>
+                            </mat-grid-list>
+                            <mat-card-footer>
+                                <div>
+                                    <button mat-flat-button [disabled]='selectedTemplateId == undefined' color="primary"
+                                        class="submit-btn">Continue</button>
+                                </div>
+                            </mat-card-footer>
+                        </mat-card>
+
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div>
+        <app-footer></app-footer>
+    </div>
+</div>

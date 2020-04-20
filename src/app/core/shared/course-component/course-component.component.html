@@ -22,13 +22,21 @@
   </div>
   <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
   <div class="row">
-    <div class="col-md-5 col-sm-5 col-5 display_flex">
+    <div class="col-md-5 col-sm-5 col-5 display_flex"  *ngIf="showRating">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
         class="m-t-15 m-l-5">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
     </div>
-    <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
+    <div class="col-md-2 m-t-15 col-sm-2 col-2"  *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
     </div>
     <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showCartBtn"> <strong>Rs {{course.price | number }}</strong>
+    </div>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>Rs {{course.price | number }}</strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10" *ngIf="showDate">
+      {{course.publishedOn}}
     </div>
   </div>
   <br>

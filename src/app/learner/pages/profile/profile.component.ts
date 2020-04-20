@@ -77,6 +77,7 @@ export class ProfileComponent implements OnInit {
   institutes: any;
   languageList: any;
   isenable: boolean = true;
+  enable: boolean = true;
   userData: any = {};
   qualification: any = {};
   showdeletedicon: boolean = true;
@@ -187,6 +188,7 @@ export class ProfileComponent implements OnInit {
 
   enableedit() {
     this.showdeletedicon = false;
+    this.enable = false;
   }
   get f() {
     if (this.mailForm) {
@@ -359,12 +361,26 @@ export class ProfileComponent implements OnInit {
   getAllLEvel(e) {
     console.log(e)
   }
-  removelastQual(index) {
+  removelastQual(qualificationData) {
     if (this.qual.length == 1) {
       this.alert.openAlert("Can't delete the row when there is only one row", null);
       return false;
     } else {
-      this.qual.splice(index, 1);
+      this.loader.show();
+      let jsonData = {
+        user_id : this.currentUser.user_id,
+        qualification : qualificationData._id
+      }
+      console.log(jsonData)
+      this.service.delete_qualification(jsonData).subscribe(data => {
+        if (data.data['delete_qualification']['success'] == 'true') {
+          this.loader.hide();
+          this.alert.openAlert(data.data['delete_qualification'].message, null)
+          this.getprofileDetails(this.currentUser.user_id);
+        } else {
+          this.alert.openAlert(data.data['delete_qualification'].message, null)
+        }
+      })
       return true;
     }
   }
@@ -497,6 +513,13 @@ export class ProfileComponent implements OnInit {
         job_role: this.prof.job_role
       }
     }
+    if(this.qualification_obj) {
+      this.qualification_obj.forEach(element => {
+        element.is_active = true;
+      });
+    }
+    console.log('obj',this.qualification_obj);
+
       // for (const iterator of this.words2) {
       //     this.certificate.push(iterator.value)
       //   } 
@@ -626,6 +649,7 @@ export class ProfileComponent implements OnInit {
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
         localStorage.clear();
+        this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else {
         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
