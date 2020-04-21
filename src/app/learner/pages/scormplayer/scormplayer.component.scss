@@ -52,9 +52,13 @@
     max-width: 900px;
     margin: 0 auto;
 }
+
+.content{
+    overflow: auto !important;
+}
 .accordion .content {
     background: $color-light-grey;;
-    overflow: hidden;
+   
     height: 0;
     transition: 0.5s;
     border: 1px solid $color-darkGrey;
@@ -141,7 +145,14 @@
     cursor: pointer;
     width: 30% !important;
 }
+ul li:before {
+    content: none;
+    list-style: none !important;
 
+}
+ol{
+    list-style: none !important;
+}
 .card {
     // text-align: center;
     margin-left: 1%;
