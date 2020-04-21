@@ -36,6 +36,7 @@ import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-cou
 import { ReferenceFileComponent } from './pages/reference-file/reference-file.component';
 
 
+import { PipeModule } from '../pipes/pipe.module';
 
 
 
@@ -73,6 +74,7 @@ const routes: Routes = [
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
+    PipeModule,
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,

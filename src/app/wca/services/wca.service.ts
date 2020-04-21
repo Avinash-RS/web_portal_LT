@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 
@@ -8,6 +8,8 @@ import { environment } from '@env/environment';
 export class WcaService {
 
 url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
+
+location1 = new EventEmitter<any>();
 
   constructor(private http: HttpClient) { }
 
