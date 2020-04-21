@@ -1,0 +1,152 @@
+.reference-file-container {
+    background-color: #f3f3f3;
+
+    .mat-form-field {
+        font-size: 14px;
+        width: 15%;
+        margin-left: 83%;
+    }
+}
+
+.breadcrump-container {
+    display: flex;
+    justify-content: space-between;
+    .reference-heading {
+        color: #213978;
+        font-size: 18px;
+        padding: 75px 0 0 50px;
+        font-weight: 500;
+    }
+    .coursebreadcrumb {
+        padding-top: 60px;
+
+        ol {
+            margin-bottom: 0 !important;
+            background-color: #f3f3f3 !important;
+        }
+    }
+}
+
+.main-section {
+    display: flex;
+    width: 95%;
+    margin: 0 30px 0 50px;
+}
+
+.file-selection {
+    width: 18.5%;
+
+    .mat-card:not([class*="mat-elevation-z"]) {
+        box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+        height: 350px;
+    }
+}
+.file-list {
+    width: 79.5%;
+    margin-left: 20px;
+    .mat-card:not([class*="mat-elevation-z"]) {
+        height: 500px;
+        box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    }
+}
+
+table {
+    width: 100%;
+    max-height: 500px;
+}
+
+.customWidthClass {
+    width: 160px;
+    font-weight: bold;
+    color: black;
+}
+
+.customNameClass {
+    font-weight: bold;
+    color: black;
+    width: 250px;
+}
+
+.customActionClass {
+    font-weight: bold;
+    color: black;
+    width: 100px;
+}
+
+.del-icon {
+    font-size: 18px !important;
+    padding-left: 90px;
+    padding-top: 5px;
+}
+
+.mat-header-row {
+    height: 40px !important;
+    background: #dce8ff !important;
+}
+
+tr.mat-row {
+    height: 40px !important;
+}
+
+.select {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.file-selection .mat-form-field{
+    width: 100% !important;
+    margin-left: unset !important;
+}
+
+.file-size {
+    padding: 3% 16%;
+}
+
+.ref-input input{
+    height: 30px;
+    padding: 12px 3px !important;
+}
+
+.upload-icon {
+    font-size: 16px !important;
+    padding-left: 3em;
+    color: grey;
+}
+
+.ref-icon {
+    font-size: 16px !important;
+    padding-left: 6.5em;
+    color: grey;
+}
+
+.upload {
+    cursor: pointer;
+    cursor: pointer;
+    background: #B8D0FF;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 30px;
+    padding: 5px 67px 0px 4px;
+    color: grey;
+    font-weight: 400;
+    margin: 5px 0 5px 0;
+ }
+ 
+ #upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
+
+ .submit-btn {
+    height: 30px;
+    margin-left: 35%;
+    background-color: #1f3777 !important;
+    color: white !important;
+    font-size: 14px;
+ }
+
+ .ref-link {
+     margin: 5px 0;
+ }
