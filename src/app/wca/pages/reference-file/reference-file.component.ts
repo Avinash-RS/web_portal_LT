@@ -22,6 +22,7 @@ export class ReferenceFileComponent implements OnInit {
   referenceName: string;
   selectedOption: string;
   referenceLink: string;
+  uploadedFile = new FormData();
   displayedColumns: string[] = ['name', 'module', 'topic', 'type', 'dateAdded', 'Action'];
   dataSource = new MatTableDataSource(this.referenceFileList);
   @ViewChild(MatSort) sort: MatSort;
@@ -66,9 +67,9 @@ export class ReferenceFileComponent implements OnInit {
   }
 
 
-  uploadDoc(files: File[]){
-    var formData = new FormData();
-    Array.from(files).forEach(f => formData.append('file',f))
+  uploadDoc(files){
+    this.uploadedFile.append(files,'referenceFile');
+    debugger
   }
 
   saveReferenceFile() {
