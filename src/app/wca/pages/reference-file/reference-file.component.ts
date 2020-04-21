@@ -71,10 +71,10 @@ this.uploadMsg = "Upload the document"
     var formData = new FormData();
     Array.from(files).forEach(f => formData.append('file',f));
     let tempData: any = formData.get("file");
-    if(tempData.size > 10240){
+    if((tempData.size/1000) > 10240){
       this.uploadMsg = "Upload the document";
     }
-    else{
+    else {
       this.uploadMsg = tempData.name;
     }
   }
