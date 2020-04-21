@@ -28,8 +28,11 @@ export class ScormplayerComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
       console.log(detail)
       this.contentid = detail.id;
+      
       this.user_id = detail.user;
       this.course_id=detail.course_id
+      localStorage.setItem('scorm_user_id',this.user_id)
+      localStorage.setItem('course_id',this.course_id)
     }
 
   ngOnInit() {
@@ -37,8 +40,9 @@ export class ScormplayerComponent implements OnInit {
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    this.getcoursedetail()
   }
-  /*getcontent() {
+  getcontent() {
     this.service.list_content().subscribe(data => {
       // console.log(data)
 
@@ -46,7 +50,7 @@ export class ScormplayerComponent implements OnInit {
   }
   getcoursedetail() {
     this.contentid = 'Golf Explained - Sequencing Random Test'
-    this.service.syllabus_of_particular_scorm(this.contentid,'vd4mr3',"1").subscribe(data => {
+    this.service.syllabus_of_particular_scorm(this.contentid,'3qpai7',"1").subscribe(data => {
 
       this.content = data.data
       if(this.content&&this.content.syllabus_of_particular_scorm&&this.content.syllabus_of_particular_scorm.success){
@@ -57,7 +61,7 @@ export class ScormplayerComponent implements OnInit {
       }
       
     })
-  }*/
+  }
 
 
   onResize(event) {
