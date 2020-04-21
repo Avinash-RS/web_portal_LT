@@ -24,19 +24,20 @@ export class ScormplayerComponent implements OnInit {
 
   constructor(public sanitizer: DomSanitizer,public activatedRoute: ActivatedRoute, 
     public service: LearnerServicesService, public route: Router) { 
-      var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      console.log(detail)
-      this.contentid = detail.id;
-      this.user_id = detail.user;
-      this.course_id=detail.course_id
+      // var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+      // this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      // console.log(detail)
+      // this.contentid = detail.id;
+      // this.user_id = detail.user;
+      // this.course_id=detail.course_id
     }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
-    this.contentid='dfdfd'
-    this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+
+    // this.contentid='dfdfd'
+    // this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
+    // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
   /*getcontent() {
     this.service.list_content().subscribe(data => {
@@ -61,6 +62,7 @@ export class ScormplayerComponent implements OnInit {
 
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+  
   }
 }

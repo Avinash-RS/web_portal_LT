@@ -57,11 +57,26 @@
               style="padding-left: 18px;"> 7 Documents</b></i> </label>
       </h2>
       <div class="content">
-        <p> </p>
-        <ol class="submod">
-          <li>Welcome</li>
-          <li>About the Photography </li>
-        </ol>
+        <div class="row">
+          <div class="col-md-6">
+            <ol class="submod">
+              <li>Welcome</li>
+              <li>About the Photography </li>
+            </ol>
+          </div>
+          <div class="col-md-4">
+            <div style="text-align: right;">
+              <mat-form-field>
+                <mat-icon matPrefix>mic</mat-icon>
+                <mat-select>
+                    <mat-option value="value">
+                        Resources
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -87,7 +102,7 @@
 
     <div class="card">
       <h1 class="title">Instructors</h1>
-      <mat-grid-list [cols]="breakpoint" rowHeight="3:1">
+      <mat-grid-list [cols]="breakpoint"rowHeight="1:0.3" (window:resize)="onResize($event)">
         <mat-grid-tile>
           <div class="box">
             <div class="row">
