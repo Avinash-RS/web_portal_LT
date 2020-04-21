@@ -9,7 +9,7 @@ import { WcaService } from '../../services/wca.service';
 })
 export class CreateTopicComponent implements OnInit {
   queryData:any;
-
+  active
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -18,15 +18,23 @@ export class CreateTopicComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.APIService.location1.subscribe((data1: any) => {
-     this.queryData = data1;
+    this.APIService.bSubject.subscribe(value => {
+    this.queryData = value;
+     })
 
-  console.log("fhghgfhgfhgfhg",this.queryData);
-
-    });
   }
+ 
+  entireCard(item) {
+    console.log(item);
+    if(item) {
+    item.enableborder = true;
+    } else {
 
-
+    }
+  }
+  activate(item){
+    this.active=item
+  }
  
 
 }

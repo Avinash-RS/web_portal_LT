@@ -37,7 +37,7 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log( this.selectedTemplate );
-    this.APIService.location1.emit(this.selectedTemplate);
-    this.router.navigate(['./Wca/addtopic']);
+    this.APIService.bSubject.next(this.selectedTemplate);
+        this.router.navigate(['./Wca/addtopic']);
   }
 }

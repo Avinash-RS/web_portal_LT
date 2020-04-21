@@ -29,10 +29,37 @@
 
                               <div class="example-list" >
                                   <div *ngIf="queryData">
-    <div class="example-box1" *ngFor="let item of queryData.template_details" >
-    <img class="img1" src="{{item.image}}">
-   
-  
+    <div class="example-box1"  *ngFor="let item of queryData.template_details" >
+     <div (click)="activate(item)" class="clickBcg bcgBorder" [class.active]="item?.name==active?.name">
+        <div class="dspFlx">
+            <span class="restictWidth"> <mat-form-field class="matWidth">
+             <mat-label class="clrLabel">Topic Name</mat-label>
+             <input (keydown)="_handleKeydown($event)" matInput >
+             <mat-icon class="penSize" matSuffix>create</mat-icon>
+             <mat-error > </mat-error>
+           </mat-form-field></span>
+           <span class="example-spacer"></span>
+           <span style="display: none;">
+               <mat-icon>save</mat-icon>
+               <mat-icon>delete</mat-icon>
+           </span>
+         </div>
+ <div class="colView" >
+    <span><img class="img1" src="{{item?.image}}"></span> 
+      <span class="padTop">{{item?.name}}</span>
+      <span class="padTop1"> <small>content is empty Double Click to edit</small></span>
+     <span class="previewAndTime" [class.active]="item?.name==active?.name">
+         <span><button mat-raised-button class="btnprev">preview</button></span>
+         <span>
+             <small class="spanTime">  Time required to complete the topic </small>
+             <mat-card class="matcardTime">
+                 00:00
+             </mat-card>
+           </span>
+     </span>
+ </div>   
+     </div>
+ 
   </div>
 </div>
   
