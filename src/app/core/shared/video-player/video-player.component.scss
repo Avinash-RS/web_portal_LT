@@ -1,0 +1,23 @@
+@import "../../../../assets/variable.scss";
+  .previous {
+    font-size: 20px;
+    color: $color-white ;
+    background-color: transparent;
+    border: 0px;
+  }
+  
+  .next {
+    font-size: 20px;
+    color: $color-white;
+    background-color: transparent;
+    border: 0px;
+  }
+
+  .time{
+    background: transparent;
+    
+  }
+  vg-controls {
+    background-color: rgba(42, 59, 142, 0.46) !important;
+
+}

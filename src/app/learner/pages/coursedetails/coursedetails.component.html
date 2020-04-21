@@ -257,7 +257,7 @@
                 <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
                     <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
                         <mat-panel-title>
-                            {{i}}
+                            {{i?.package}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <!-- <mat-expansion-panel *ngFor="let it of i.subtitle">
@@ -271,7 +271,7 @@
                         <tr>
                             <td width="96%"><i class="fa fa-circle"
                                     style="background-color: transparent;font-size: 10px;color: black;box-shadow:none;border:none"
-                                    aria-hidden="true"></i>{{i}}</td>
+                                    aria-hidden="true"></i>{{i?.package_dec}}</td>
                             <td (click)="playCourse(i)"><i class="fa fa-play" aria-hidden="true"
                                     style="font-size:11px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
                             </td>

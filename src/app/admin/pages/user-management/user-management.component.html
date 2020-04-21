@@ -1,0 +1,94 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">View Users</li>
+  </ol>
+</nav>
+
+<div class="p-5px">
+  <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+    <mat-icon>add</mat-icon>Add User
+  </button>
+  <!-- <cdk-filter-table></cdk-filter-table> -->
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="resultsLength == null" style="height:100%">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> User_id </th>
+        <td mat-cell *matCellDef="let element"> {{element.user_id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> User Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Email ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.email || 'NA'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Mobile No </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobile_number || 'NA'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="element.is_active ? 'green' : 'red'"> {{element.is_active ? 'Active' : 'Inactive'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="blocked">
+        <th mat-header-cell *matHeaderCellDef> Blocked Status</th>
+        <td mat-cell *matCellDef="let element" [ngClass]="element.is_blocked ? 'red' : 'black'"> {{element.is_blocked}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deactivate">
+        <th mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">Activate/ De-activate(All)</th>
+        <td mat-cell *matCellDef="let element">
+          <!-- <mat-icon (click)="deActivate(element)">remove</mat-icon> -->
+            <button mat-stroked-button (click)="deActivate(element)"> {{element.is_active ? 'De-activate' : 'Activate'}}</button>
+            <!-- {{element.is_active ? 'De-activate' : 'Activate'}} -->
+      </ng-container>
+
+      <ng-container matColumnDef="block">
+        <th mat-header-cell *matHeaderCellDef (click)="block()"> Block (All)</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon (click)="block(element)">remove_circle</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+      </tr>
+    </table>
+<!-- 
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)" [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons> -->
+      
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)"
+    showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

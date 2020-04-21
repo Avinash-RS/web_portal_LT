@@ -135,9 +135,8 @@
 
 </nav>
 
-
-<div class="collapse navbar-collapse" id="navbarCollapse">
-  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null" id="navbarCollapse">
+<div class="collapse navbar-collapse" id="navbarCollapse" >
+  <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null && role == 'learner'" id="navbarCollapse">
     <ul class="navbar-nav mr-auto" id="navbarCollapse">
       <li class="dropdownsmall">
         <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
@@ -181,9 +180,6 @@
   </ul>
 </div>
 
-
-
-
 <div class="collapse navbar-collapse" id="navbarCollapse"  *ngIf="userDetailes == null">
   <ul class="navbar-nav mr-auto" id="navbarCollapse">
     <ul class="navbar-nav mr-auto" id="navbarCollapse">
@@ -215,10 +211,5 @@
 
 </div>
 
-
-
-
-
-
-
+<!-- ////ADMIN///////// -->
 

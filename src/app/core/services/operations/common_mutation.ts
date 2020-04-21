@@ -24,10 +24,11 @@ export const getPlayerStatus = gql`
   mutation getPlayerStatus($user_id: String){
     getPlayerStatus(user_id: $user_id) {
       message{
-        location
+        course_dtl{
+          location
           status
-          user_id
         }
-        success
+      }
+      success
     }
 }`; 

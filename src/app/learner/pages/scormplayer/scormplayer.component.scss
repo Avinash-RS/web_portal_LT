@@ -1,3 +1,5 @@
+@import "../../../../assets/variable.scss";
+
 .player {
     margin-top: 2%;
     align-items: center;
@@ -5,30 +7,197 @@
     margin-right: 2%;
     width: 96%;
     height: 635px;
-    border: 1px solid lightgray;
-} 
-
-.space{
-    // color: ;
+    border: 1px solid $color-darkGrey;;
 }
 
-// .mat-ink-bar {
-//     position: absolute;
-//     bottom: 0;
-//     height: 2px;
-//     background-color: #ffc107 !important;
-//     transition: .5s cubic-bezier(.35,0,.25,1);
-// }
-
-// .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-//     background-color: #ffc107 !important;
-// }
-
-.mat {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    color: #1f3777 !important;
-    font-weight: 900 !important;
+.limiter {
+    display: flex !important;
 }
+
+
+.contentTop {
+    margin-top: 0px !important;
+}
+
+.wrap-body {
+    padding: 1% !important;
+}
+
+.breadcrumb {
+    background-color: transparent !important;
+    padding: 1px !important;
+}
+
+.subhead {
+    padding: 10px;
+    font-size: 30px;
+    margin-left: 10%;
+    margin-top: 2%;
+    font-weight: 500;
+    color: $color-subhead;
+}
+
+.head {
+    text-align: left !important;
+    color: $color-orange !important;
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 56px;
+}
+.accordion>input[name="collapse"] {
+    display: none;
+}
+.accordion label,
+.accordion .content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content{
+    overflow: auto !important;
+}
+.accordion .content {
+    background: $color-light-grey;;
+   
+    height: 0;
+    transition: 0.5s;
+    border: 1px solid $color-darkGrey;
+    border-top-color: transparent;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    height: 380px;
+    transition: height 0.5s;
+}
+.accordion label {
+    display: block;
+}
+/* For Desktop */
+@media only screen and (min-width: 620px) {
+    .accordion>input[name="collapse"]:checked~.content {
+        height: 220px;
+    }
+}
+.accordion {
+    margin-bottom: 1em;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    border-top: 0;
+    transition: 0.3s;
+}
+.accordion .handle {
+    margin: 0;
+    font-size: 16px;
+}
+.accordion label {
+    color: $color-darkGrey;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 10px;
+    user-select: none;
+    border: 1px solid $color-darkGrey;
+    border-bottom-color: transparent;
+
+}
+.accordion label:hover,
+.accordion label:focus {
+    background: $color-light-grey;
+}
+.accordion .handle label:before {
+    font-family: FontAwesome;
+    content: "\f067";
+    display: inline-block;
+    margin-right: 21px;
+    margin-left: 20px;
+    font-size: 1.5em;
+    color: $color-subhead;
+    line-height: 1.556em;
+    vertical-align: middle;
+    transition: 0.4s;
+}
+.accordion>input[name="collapse"]:checked~.handle label:before {
+    content: "\f068";
+    transform-origin: center;
+    transition: 0.4s;
+    color: $color-subhead;
+}
+.doc {
+    float: right;
+    padding: 10px;
+}
+.submod {
+    margin-left: 13px;
+    font-size: 18px;
+}
+.submod li {
+    padding: 15px;
+    font-weight: 500;
+    margin-left: 35px;
+    color: $color-darkGrey;
+}
+.btn1 {
+    border: 1px solid $color-darkGrey;
+    background-color: $color-light-grey !important;
+    color: $color-darkGrey;
+    padding: 14px 28px;
+    font-weight: 500;
+    font-size: 21px;
+    border-radius: 50px !important;
+    cursor: pointer;
+    width: 30% !important;
+}
+ul li:before {
+    content: none;
+    list-style: none !important;
+
+}
+ol{
+    list-style: none !important;
+}
+.card {
+    // text-align: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    border: hidden;
+    height: 18%;
+    border-radius: 1px;
+    background-color: #e1e1dd;
+    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+}
+.title{
+    color: $color-blank !important;
+    font-size: 30px;
+    padding: 20px;
+    margin-top: 12px;
+    margin-left: 8%;
+    text-align: left;
+    font-weight: 500;
+}
+.box{
+    width: 720px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+    height: 170px;
+    background-color: $color-white !important;
+    box-shadow: 0 0 10px $color-light-grey !important;
+    position: relative;
+}
+.image{
+    width: 156px;
+    height: 170px;
+}
+.cardhead{
+    float: left; 
+    font-size: 22px;
+    margin-top: 8px;
+}
+.info{
+    float: left;
+    white-space: normal;
+    word-break: normal;
+    margin-right: 20px;
+}
+
+// mat-grid-tile {
+//     background: lightblue;
+//   }

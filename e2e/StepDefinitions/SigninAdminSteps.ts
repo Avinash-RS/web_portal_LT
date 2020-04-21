@@ -9,13 +9,13 @@ let algn = new SigninAdminPage();
 
 Given(': I am in admin login page', async ()=> {
     browser.waitForAngularEnabled(false);
-    await browser.get('http://52.171.134.188/Learner/login');
+    await browser.get(browser.params.login.url);
     await browser.manage().window().maximize();
 });
 
 When(': Enter user name and password for a particular user role', async ()=> {
-    await algn.Username.sendKeys("rahulsaivishnu1");
-    await algn.Password.sendKeys("123Aa!@#");
+    await algn.Username.sendKeys(browser.params.login.adminuser);
+    await algn.Password.sendKeys(browser.params.login.adminpwd);
 });
 
  When(': Click on log in button', async ()=> {

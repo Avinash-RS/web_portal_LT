@@ -11,20 +11,24 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   userDetailes: any;
   userimage: any;
+  role: string;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
     private router: Router, ) { }
 
   ngOnInit() {
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
+      JSON.parse(localStorage.getItem('adminDetails')) || null;
+    this.role = localStorage.getItem('role');
+    console.log(this.userDetailes,this.role)
     this.userimage = localStorage.getItem('user_img')
   }
 
-  navigateProfile(){
+  navigateProfile() {
     this.router.navigate(['Learner/profile']);
   }
 
-  navigateWishlist(){
+  navigateWishlist() {
     this.router.navigate(['Learner/MyCourse']);
   }
 

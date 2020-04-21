@@ -6,6 +6,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals'; 
+///////decrypt
+ 
+import SimpleCrypto from "simple-crypto-js";
+var _secretKey = "myTotalySecretKey";
+var simpleCrypto = new SimpleCrypto(_secretKey);
+
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
@@ -35,8 +41,9 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
 
     this.activeroute.queryParams.subscribe(params => {
-      if(params["user_id"]){
-        this.user = params["user_id"];
+      if(params["code"]){
+        const decryptedString = simpleCrypto.decrypt(params["code"]);
+        this.user = decryptedString;
         console.log(this.user)
       }
      else{
