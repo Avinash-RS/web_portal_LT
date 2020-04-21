@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="limiter">
   <div class="container wrap-body">
-    <h1 class="head">Online Photography Course</h1>
+    <h1 class="head">{{syllabus[0].title}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
@@ -51,53 +51,22 @@
     </div>
     <h1 class="subhead">Resources</h1>
 
-    <section class="accordion">
-      <input type="checkbox" name="collapse" id="handle5">
-      <h2 class="handle">
-        <label for="handle5"><b>Module 1 : Welcome _ Course Introduction</b> <i class="fa fa-file-text-o doc"> <b
-              style="padding-left: 18px;"> 7 Documents</b></i> </label>
-      </h2>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-6">
-            <ol class="submod">
-              <li>Welcome</li>
-              <li>About the Photography </li>
-            </ol>
-          </div>
-          <div class="col-md-4">
-            <div style="text-align: right;">
-              <mat-form-field>
-                <mat-icon matPrefix>mic</mat-icon>
-                <mat-select>
-                    <mat-option value="value">
-                        Resources
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
-    <section class="accordion">
-      <input type="checkbox" name="collapse" id="handle1">
-      <h2 class="handle">
-        <label for="handle1"><b>Module 2 : What will learn from in this course?</b> <i class="fa fa-file-text-o doc"> <b
-              style="padding-left: 18px;"> 7 Documents</b></i> </label>
+    <section class="accordion" *ngFor=" let module of modules; let i of index">
+      <input type="checkbox" name="collapse" [id]="module.title">
+      <h2 class="handle" >
+        <label [for]="module.title"><b>{{module.title}}</b><i class="fa fa-file-text-o doc"> <b style="padding-left: 18px;"> 7 Documents</b></i> </label>
       </h2>
       <div class="content">
-        <p> </p>
-        <ol class="submod">
+        <!-- <ol class="submod">
           <li>Welcome</li>
           <li>About the Photography </li>
-        </ol>
+        </ol> -->
       </div>
     </section>
     <div style="text-align:center;">
-      <button class="btn1 success">12 more section</button>
+      <button class="btn1 success">{{modules.length}} more section</button>
     </div>
     <br><br>
 
