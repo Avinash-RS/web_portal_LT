@@ -46,16 +46,38 @@ export class UserManagementComponent implements OnInit {
 
   getAllUser(pagenumber) {
     this.resultsLength = null;
-    this.service.getAllUsers(pagenumber, 1)
+    this.service.getAllUsers(0, 1)
       .subscribe((result: any) => {
         console.log(result.data)
         this.ELEMENT_DATA = (result.data.get_all_user.message);
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
         this.selection = new SelectionModel<PeriodicElement>(true, []);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
-        this.resultsLength = 20;
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+        // console.log(this.dataSource);
+        // this.resultsLength = 16;
+        this.service.getAllUsers(1, 1)
+        .subscribe((result: any) => {
+          console.log(result.data)
+          Array.prototype.push.apply(this.ELEMENT_DATA,result.data.get_all_user.message)
+          this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+          this.selection = new SelectionModel<PeriodicElement>(true, []);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+          // console.log(this.dataSource);
+          // this.resultsLength = 16;
+          this.service.getAllUsers(2, 1)
+          .subscribe((result: any) => {
+            console.log(result.data)
+            Array.prototype.push.apply(this.ELEMENT_DATA,result.data.get_all_user.message)
+            this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+            this.selection = new SelectionModel<PeriodicElement>(true, []);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+            console.log(this.dataSource);
+            this.resultsLength = this.ELEMENT_DATA.length;
+          });
+        });
       });
   }
 
@@ -195,7 +217,7 @@ export class UserManagementComponent implements OnInit {
 
   next(e) {
     console.log(e)
-    this.getAllUser(e.pageIndex)
+    // this.getAllUser(e.pageIndex)
   }
 }
 
