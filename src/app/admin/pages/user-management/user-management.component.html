@@ -83,9 +83,12 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
       </tr>
     </table>
-
-    <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+<!-- 
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)" [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons> -->
-    <!-- </mat-paginator> -->
+      
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)"
+    showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>

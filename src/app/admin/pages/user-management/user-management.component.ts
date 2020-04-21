@@ -40,46 +40,22 @@ export class UserManagementComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService,
   ) {
-
-    this.getAllUser()
-
+    this.getAllUser(0)
   }
 
 
-  getAllUser() {
+  getAllUser(pagenumber) {
     this.resultsLength = null;
-    this.service.getAllUsers(0, 1)
+    this.service.getAllUsers(pagenumber, 1)
       .subscribe((result: any) => {
         console.log(result.data)
         this.ELEMENT_DATA = (result.data.get_all_user.message);
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
         this.selection = new SelectionModel<PeriodicElement>(true, []);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         console.log(this.dataSource);
-        this.service.getAllUsers(1, 1)
-          .subscribe((result: any) => {
-            console.log(result.data)
-            Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message)
-            this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-            this.selection = new SelectionModel<PeriodicElement>(true, []);
-            console.log(this.dataSource);
-            this.service.getAllUsers(2, 1)
-              .subscribe((result: any) => {
-                console.log(result.data)
-                Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message)
-                this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-                this.selection = new SelectionModel<PeriodicElement>(true, []);
-                console.log(this.dataSource);
-                this.service.getAllUsers(3, 1)
-                  .subscribe((result: any) => {
-                    console.log(result.data)
-                    Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message)
-                    this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-                    this.selection = new SelectionModel<PeriodicElement>(true, []);
-                    console.log(this.dataSource);
-                    this.resultsLength = this.ELEMENT_DATA.length
-                  });
-              });
-          });
+        this.resultsLength = 20;
       });
   }
 
@@ -90,9 +66,6 @@ export class UserManagementComponent implements OnInit {
       email: new FormControl("", myGlobals.emailVal),
       group: ['', myGlobals.req]
     });
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   get f() {
@@ -106,7 +79,6 @@ export class UserManagementComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
-
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -154,7 +126,7 @@ export class UserManagementComponent implements OnInit {
                 .subscribe((result: any) => {
                   console.log(result.data)
                   if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                    this.getAllUser()
+                    this.getAllUser(0)
                   else
                     this.alert.openAlert('Sorry, Please try again later', 'null')
                 });
@@ -169,7 +141,7 @@ export class UserManagementComponent implements OnInit {
           this.service.deActivate_And_reActivate_User(result, false)
             .subscribe((result: any) => {
               if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                this.getAllUser()
+                this.getAllUser(0)
               else
                 this.alert.openAlert('Sorry, Please try again later', 'null')
             });
@@ -194,10 +166,10 @@ export class UserManagementComponent implements OnInit {
               this.service.blockUser(result, !element.is_blocked)
                 .subscribe((result: any) => {
                   if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                  this.getAllUser()
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
-              });
+                    this.getAllUser(0)
+                  else
+                    this.alert.openAlert('Sorry, Please try again later', 'null')
+                });
             }
           })
     } else if (this.selection.selected && this.selection.selected.length > 0) {
@@ -207,18 +179,23 @@ export class UserManagementComponent implements OnInit {
           let result = this.selection.selected.map((item: any) => item.user_id);
           console.log('this', this.selection.selected, result)
           this.service.deActivate_And_reActivate_User(result, true)
-          .subscribe((result: any) => {
-            if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-            this.getAllUser()
-          else
-            this.alert.openAlert('Sorry, Please try again later', 'null')
-        });
+            .subscribe((result: any) => {
+              if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
+                this.getAllUser(0)
+              else
+                this.alert.openAlert('Sorry, Please try again later', 'null')
+            });
         }
       })
     } else {
       this.alert.openAlert("Please select any record to block", null)
     }
 
+  }
+
+  next(e) {
+    console.log(e)
+    this.getAllUser(e.pageIndex)
   }
 }
 
