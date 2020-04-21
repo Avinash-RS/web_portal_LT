@@ -13,7 +13,6 @@ export class FilterPipeforselect implements PipeTransform {
  Filters the array with args
  */
   transform(list: any, args: string[]): string {
-     console.log(args);
     if (!args.length) {
       return list;
     }

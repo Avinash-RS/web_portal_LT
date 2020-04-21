@@ -134,44 +134,53 @@ export class CreateCourseComponent implements OnInit {
 
   
   onSelectFile(fileInput:any,type,index,j=null) {
-    this.spinner.show();
     var imagepath;
-    if (fileInput && fileInput.target && fileInput.target.files[0]) {
-      console.log(index);
-      const reader =new FileReader()
-      this.imageView = fileInput.target.files[0];
-      const formData = new FormData();
-      this.imageView.type === 'file';
-       formData.append('image',this.imageView);
-       this.wcaService.uploadImage(formData).subscribe((data: any) => {
-           imagepath =  'https://edutechstorage.blob.core.windows.net/'+ data.path;
+    var filePath = fileInput.target.files[0].name;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
+        fileInput.value = '';
+        return false;
+    }else{
+      if (fileInput && fileInput.target && fileInput.target.files[0]) {
+        this.spinner.show();
+        console.log(index);
+        const reader =new FileReader()
+        this.imageView = fileInput.target.files[0];
+        const formData = new FormData();
+        this.imageView.type === 'file';
+         formData.append('image',this.imageView);
+         this.wcaService.uploadImage(formData).subscribe((data: any) => {
+             imagepath =  'https://edutechstorage.blob.core.windows.net/'+ data.path;
+             this.spinner.hide();
+         reader.addEventListener("load", ()=> {
+          // convert image file to base64 string
+          if (type === 'img1') {
+            this.preview1= reader.result;
+            this.courseForm.get('image').setValue(imagepath);
+          } else if (type === 'img2') {
+            this.courseForm.get('instructure_details').get(String(index)).get('image').setValue(imagepath)
+            this.preview2[index]= reader.result;
+          } else if (type === 'img3') {
+            this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(imagepath)
+            this.preview3[index]= reader.result;
+           } else if (type === 'img4') {
+            this.courseForm.get('takeway_details').get(String(index)).get('media').get(String(j)).setValue(imagepath)
+            this.preview4[j]= reader.result;
+         }
+        }, false);
+    
+        if (this.imageView) {
+          reader.readAsDataURL( this.imageView );
+        }
+  
+         }, err => {
            this.spinner.hide();
-       reader.addEventListener("load", ()=> {
-        // convert image file to base64 string
-        if (type === 'img1') {
-          this.preview1= reader.result;
-          this.courseForm.get('image').setValue(imagepath);
-        } else if (type === 'img2') {
-          this.courseForm.get('instructure_details').get(String(index)).get('image').setValue(imagepath)
-          this.preview2[index]= reader.result;
-        } else if (type === 'img3') {
-          this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(imagepath)
-          this.preview3[index]= reader.result;
-         } else if (type === 'img4') {
-          this.courseForm.get('takeway_details').get(String(index)).get('media').get(String(j)).setValue(imagepath)
-          this.preview4[j]= reader.result;
-       }
-      }, false);
-  
-      if (this.imageView) {
-        reader.readAsDataURL( this.imageView );
+         });
+    
       }
-
-       }, err => {
-         this.spinner.hide();
-       });
-  
     }
+   
   }
 
 
