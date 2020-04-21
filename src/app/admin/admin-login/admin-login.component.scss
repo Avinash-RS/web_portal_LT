@@ -1,0 +1,54 @@
+@import "../../../assets/variable.scss";
+
+h2 {
+    color: $color-blue;
+}
+mat-card{
+    width: 24%;
+    margin: auto;
+    margin-top: 5%;
+    border: 0.5px solid lightgrey;
+}
+
+button {
+    background: $color-blue !important;
+    color: $color-white ;
+    width: 70%;
+    margin-left: 15%;
+}
+
+mat-form-field {
+    width: 80%;
+    // height: 10vh !important;
+}
+.remember_me {
+    float: left;
+}
+.forgot_ps {
+    text-align: end;
+    width: 90%;
+    color: $color-blue;
+    font-weight: 500;
+}
+.sign_up, .remember_me,mat-card-title , a{
+    color: $color-blue;
+    text-align: center !important;
+}
+.mat-checkbox .mat-checkbox-frame {
+    border-color: $color-blank;
+    background-color: #dddddd
+}
+mat-card-title {
+    font-weight: 400;
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 1px 0;
+    background: $color-light-blue;
+    display: inline-block;
+    border: 1px solid $color-border;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+ 

@@ -6,7 +6,7 @@ import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
   styleUrls: ['./video-player.component.scss']
 })
 export class VideoPlayerComponent {
-  title = 'videoplayer2';
+  title = 'videoplayer';
   sources: Array<Object>;
     controls: boolean = false;
     autoplay: boolean = false;
