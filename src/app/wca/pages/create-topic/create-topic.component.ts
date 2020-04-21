@@ -9,7 +9,8 @@ import { WcaService } from '../../services/wca.service';
 })
 export class CreateTopicComponent implements OnInit {
   queryData:any;
-  active
+  active:any;
+
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -24,14 +25,7 @@ export class CreateTopicComponent implements OnInit {
 
   }
  
-  entireCard(item) {
-    console.log(item);
-    if(item) {
-    item.enableborder = true;
-    } else {
-
-    }
-  }
+ 
   activate(item){
     this.active=item
   }

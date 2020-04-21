@@ -41,5 +41,5 @@ bSubject = new BehaviorSubject({});
 
   getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
 
-
+  createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate',arraydata); }
 }

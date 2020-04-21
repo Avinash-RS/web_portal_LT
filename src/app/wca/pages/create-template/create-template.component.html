@@ -58,10 +58,10 @@
 
                               <div>
                                 <button class="backgroundcol1" routerLink="" >Cancel</button>
-                                <button class="backgroundcol1" routerLink="/Wca/addtopic" >Continue without saving</button>
-                                <button class="backgroundcol2" routerLink="/Wca/addtopic">Save template & continue</button>
+                                <button class="backgroundcol1" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
+                                <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template & continue</button>
 
-
+                                <!-- /Wca/addtopic -->
                                   
                                 </div>
                             
@@ -87,11 +87,11 @@
                            
 
                             
-                            <div class="example-box" *ngFor="let item of todo" cdkDrag>
+                            <div class="example-box" *ngFor="let i of todo" cdkDrag>
                            
-                              <img class="img2" src="{{item.image}}">
+                              <img class="img2" src="{{i.image}}">
                              
-                              {{item.name}}
+                              {{i.name}}
 
 
 
