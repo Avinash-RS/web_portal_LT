@@ -22,7 +22,7 @@ export class ReferenceFileComponent implements OnInit {
   referenceName: string;
   selectedOption: string;
   referenceLink: string;
-  uploadedFile = new FormData();
+  uploadMsg: string;
   displayedColumns: string[] = ['name', 'module', 'topic', 'type', 'dateAdded', 'Action'];
   dataSource = new MatTableDataSource(this.referenceFileList);
   @ViewChild(MatSort) sort: MatSort;
@@ -32,7 +32,7 @@ export class ReferenceFileComponent implements OnInit {
   ngOnInit() {
     this.selectedOption = 'document';
     this.referenceLink = "http://";
-
+this.uploadMsg = "Upload the document"
     this.getTableData();
     this.moduleList = [
       {
@@ -67,9 +67,16 @@ export class ReferenceFileComponent implements OnInit {
   }
 
 
-  uploadDoc(files){
-    this.uploadedFile.append(files,'referenceFile');
-    debugger
+  uploadDoc(files: File[]){
+    var formData = new FormData();
+    Array.from(files).forEach(f => formData.append('file',f));
+    let tempData: any = formData.get("file");
+    if(tempData.size > 10240){
+      this.uploadMsg = "Upload the document";
+    }
+    else{
+      this.uploadMsg = tempData.name;
+    }
   }
 
   saveReferenceFile() {

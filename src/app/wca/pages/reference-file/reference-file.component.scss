@@ -121,7 +121,6 @@ tr.mat-row {
 
 .upload {
     cursor: pointer;
-    cursor: pointer;
     background: #B8D0FF;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -131,6 +130,10 @@ tr.mat-row {
     color: grey;
     font-weight: 400;
     margin: 5px 0 5px 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
  }
  
  #upload-photo {
