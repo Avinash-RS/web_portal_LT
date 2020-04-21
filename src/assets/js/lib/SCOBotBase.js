@@ -1,4 +1,6 @@
 let jsonDataKnowledge={}
+var ser=require('../../../app/learner/services/learner-services.service')
+//import { LearnerServicesService } from '../../../app/learner/services/learner-services.service';
 /*global window, alert, console, SCOBotUtil, debug, scorm, SCOBot_API_1484_11 */
 /*jslint devel: true, browser: true */
 /**
@@ -1563,104 +1565,85 @@ function SCOBotBase(options) {
     this.init();
 }
 function startResumeEvent(params){
-    
-    async function startResumeEventDataRec(params){
-        let startResumeEventDataRec=await startResumeEventData(params)
-    }
-    startResumeEventDataRec(params)
-}
-let startResumeEventData=async(params)=>{
-    //console.log('pause and location',params)
-    var rec_status,jsonData
-    user_id=window.localStorage.getItem('scorm_user_id');
-    course_id=window.localStorage.getItem('course_id');
-    str=params
-    var strSplit = str.split(' ');
-    /////knowledge material
-    let score_raw,score_min,score_max,score_scaled,score_success_status
-    const scoreRaw = strSplit.find(element => element === 'cmi.score.raw');
-    if(scoreRaw){
-        score_raw=strSplit[4]
-        jsonDataKnowledge.score_raw=score_raw
-    }
-    const scoreMin = strSplit.find(element => element === 'cmi.score.min');
-    if(scoreMin){
-        score_min=strSplit[4]
-        jsonDataKnowledge.score_min=score_min
-    }
-    const scoreMax = strSplit.find(element => element === 'cmi.score.max');
-    if(scoreMax){
-        score_max=strSplit[4]
-        jsonDataKnowledge.score_max=score_max
-    }
-    const scoreScaled = strSplit.find(element => element === 'cmi.score.scaled');
-    if(scoreScaled){
-        score_scaled=strSplit[4]
-        jsonDataKnowledge.score_scaled=score_scaled
-    }
-    const scoreSuccessStatus = strSplit.find(element => element === 'cmi.success_status');
-    if(scoreSuccessStatus){
-        score_success_status=strSplit[4]
-        jsonDataKnowledge.score_success_status=score_success_status
-    }
-    if(jsonDataKnowledge.score_raw&&jsonDataKnowledge.score_min&&jsonDataKnowledge.score_max&&jsonDataKnowledge.score_scaled&&jsonDataKnowledge.score_success_status){
-        console.log(jsonDataKnowledge,'lllllllllllllllllllllllll')
-    }
-    /////end of knowledge material
-    const foundInCom = strSplit.find(element => element === 'incomplete');
-    const foundCom = strSplit.find(element => element === 'completed');
-    const foundPause = strSplit.find(element => element === 'suspend');
-    if(foundCom){
-        rec_status=foundCom
+    console.log(params)
+     //console.log('pause and location',params)
+     var rec_status,jsonData
+     user_id=window.localStorage.getItem('scorm_user_id');
+     course_id=window.localStorage.getItem('course_id');
+     str=params
+     var strSplit = str.split(' ');
+     /////knowledge material
+     let score_raw,score_min,score_max,score_scaled,score_success_status
+     const scoreRaw = strSplit.find(element => element === 'cmi.score.raw');
+     if(scoreRaw){
+         score_raw=strSplit[4]
+         jsonDataKnowledge.score_raw=score_raw
+     }
+     const scoreMin = strSplit.find(element => element === 'cmi.score.min');
+     if(scoreMin){
+         score_min=strSplit[4]
+         jsonDataKnowledge.score_min=score_min
+     }
+     const scoreMax = strSplit.find(element => element === 'cmi.score.max');
+     if(scoreMax){
+         score_max=strSplit[4]
+         jsonDataKnowledge.score_max=score_max
+     }
+     const scoreScaled = strSplit.find(element => element === 'cmi.score.scaled');
+     if(scoreScaled){
+         score_scaled=strSplit[4]
+         jsonDataKnowledge.score_scaled=score_scaled
+     }
+     const scoreSuccessStatus = strSplit.find(element => element === 'cmi.success_status');
+     if(scoreSuccessStatus){
+         score_success_status=strSplit[4]
+         jsonDataKnowledge.score_success_status=score_success_status
+     }
+     if(jsonDataKnowledge.score_raw&&jsonDataKnowledge.score_min&&jsonDataKnowledge.score_max&&jsonDataKnowledge.score_scaled&&jsonDataKnowledge.score_success_status){
+         console.log(jsonDataKnowledge,'lllllllllllllllllllllllll')
+     }
+     /////end of knowledge material
+     const foundInCom = strSplit.find(element => element === 'incomplete');
+     const foundCom = strSplit.find(element => element === 'completed');
+     const foundPause = strSplit.find(element => element === 'suspend');
+     if(foundCom){
+         rec_status=foundCom
+          jsonData={
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id
+             }
+          
+             
+         }
+     }
+     if(foundInCom){
+         rec_status=foundInCom
          jsonData={
-            user_id:user_id,
-            course_dtl:{
-                location:'',
-                status:rec_status,
-                course_id:course_id
-            }
-         
-            
-        }
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id
+             }
+         }
+     }
+     if(foundPause){
+         rec_status=foundPause
+         jsonData={
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id
+             }
+         }
+     }
+     if(rec_status){
+        window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
+        var d=ser.syllabus_of_particular_scorm('1','1','1')
+        console.log(d,'llllllllllllllllllllllllllllllllllllllll')
     }
-    if(foundInCom){
-        rec_status=foundInCom
-        jsonData={
-            user_id:user_id,
-            course_dtl:{
-                location:'',
-                status:rec_status,
-                course_id:course_id
-            }
-        }
-    }
-    if(foundPause){
-        rec_status=foundPause
-        jsonData={
-            user_id:user_id,
-            course_dtl:{
-                location:'',
-                status:rec_status,
-                course_id:course_id
-            }
-        }
-    }
-if(rec_status){
-    let scorm_data_rec=await userAction(jsonData)
-}
-}
-const userAction = async (params) => {
-    window.localStorage.setItem('scorm_player_result',JSON.stringify(params));
-    // const response = await fetch('http://localhost:3001/coursestatus', {
-    //   method: 'POST',
-    //   body:JSON.stringify(params), // string or object
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
-    // const myJson = await response.json(); //extract JSON from the http response
-    // // do something with myJson
-  }
-module.exports={
-    startResumeEventData
 }
