@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort, ThemePalette } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, ThemePalette, MatDialog } from '@angular/material'
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { Form } from '@angular/forms';
 
 export interface PeriodicElement {
   user_id: string;
@@ -21,7 +21,7 @@ export interface PeriodicElement {
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-
+  profileForm: Form;
   adminDetails: any;
   ELEMENT_DATA: PeriodicElement[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,18 +31,17 @@ export class UserManagementComponent implements OnInit {
   selection = new SelectionModel(true, []);
   resultsLength: number = null;
   selectedArray: any = [];
+  profileDetails: {};
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
+  constructor(private router: Router, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
+    private dialog: MatDialog,
   ) {
     this.getAllUser(0)
   }
 
   getAllUser(pagenumber) {
-    // this.service.getAllLearner(0, 1)
-    //   .subscribe((result: any) => {
-    //     console.log(result.data)
-    //   })
+
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
@@ -59,7 +58,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'))
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));    
   }
 
   gotoAddUser() {
@@ -88,6 +87,22 @@ export class UserManagementComponent implements OnInit {
   //   }
   //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   // }
+
+  viewDetail(element,templateRef : TemplateRef<any>) {
+    this.service.getLearnerDetail(element.user_id)
+    .subscribe((result: any) => {
+      this.profileDetails = result.data.get_all_learner_detail.message[0];
+      console.log(result.data.get_all_learner_detail.message[0],this.profileDetails)
+      this.dialog.open(templateRef);
+      // this.mailForm = this.formBuilder.group({
+      //   mailid: new FormControl('', myGlobals.emailVal)
+      // });
+    })
+  }
+
+  closedialogbox() {
+    this.dialog.closeAll();
+  }
 
   checkboxLabel(row?) {
     if (row.isChecked == undefined) {

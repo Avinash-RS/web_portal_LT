@@ -77,21 +77,21 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">
           Actions <br *ngIf="selectedArray && selectedArray.length > 0">
-          <button *ngIf="selectedArray && selectedArray.length > 0" mat-stroked-button
-            (click)="deActivate('Activate')">
+          <button *ngIf="selectedArray && selectedArray.length > 0" mat-stroked-button (click)="deActivate('Activate')">
             Activate</button>
           <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
             (click)="deActivate('De-activate')">
             De-activate</button>
-          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
-            (click)="block('Block')">
+          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
             Block</button>
-          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
-            (click)="block('Unblock')">
+          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Unblock')">
             Un-block</button>
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <span class="mobile-label">Actions</span>
+          <button mat-icon-button (click)="viewDetail(element,viewDialog)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
           <button *ngIf="!element.is_blocked" mat-stroked-button
             [disabled]="(selectedArray && selectedArray.length > 0)"
             (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
@@ -99,6 +99,7 @@
           <button mat-stroked-button [disabled]="(selectedArray && selectedArray.length > 0)"
             (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
             {{element.is_blocked ? 'Unblock' : 'Block'}}</button>
+          <!-- <button mat-icon-button (click) = "viewDetail(element)"> <mat-icon>block</mat-icon> -->
         </mat-cell>
       </ng-container>
 
@@ -110,5 +111,112 @@
 
   <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
   </mat-paginator>
-<br><br>
+
+
+  <ng-template #viewDialog>
+    <span class="close">
+      <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+    </span>
+    <h3 class="center_align">View Details</h3>
+    <br>
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <div class="row">
+            <!-- //////FIrst section left part//////// -->
+            <div class="col-md-6 col-sm-12 col-12 left">
+              <!-- ////// Info about you//////// -->
+              <div class="form-group">
+                <label>Information about you</label>
+                <textarea style="resize: none;" readonly [disabled]='cannotEdit' rows="3"
+                  class="inputs border-radius-5 color_blue background_trans width_100"
+                  [(ngModel)]="profileDetails.userObjects[0].about_you" name="info"></textarea>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-12 right float_right">
+              <img
+                [src]="profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : '../../../../assets/learner/avatar2.png'"
+                id="imageUpload" alt="Avatar" class="avatar">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <!-- //////userName  +++ full name +++ Phone//////// -->
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Username : {{profileDetails.userObjects[0].username}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Full Name : {{profileDetails.userObjects[0].full_name}} </label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Mobile : {{profileDetails.userObjects[0].mobile_number}}</label>
+            </div>
+          </div>
+
+          <!-- ////// Email ++ gender ++ Iam a//////// -->
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Eamil : {{profileDetails.userObjects[0].email}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Gender : {{profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                  'Female' : 'Rather not specify'}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>I'm a : {{profileDetails.userObjects[0].is_student_or_professional}} </label>
+            </div>
+          </div>
+
+          <!-- //////Language known//////// -->
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Languages known : </label><br>
+              <div *ngIf="profileDetails.language.length >0">
+                <div *ngFor="let lang of profileDetails.language" class="display_flex">
+                  {{lang}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Location : {{profileDetails.userObjects[0].state_name}},
+                {{profileDetails.userObjects[0].country_name}} </label>
+            </div>
+          </div>
+          <br>
+          <div class="row" style="overflow-x:auto;">
+            <div class="col-md-12 col-sm-12 col-12">
+              <table class="profileTable">
+                <tr>
+                  <th>Board</th>
+                  <th>Discipline</th>
+                  <th>Institute</th>
+                  <th>Level</th>
+                  <th>Specification</th>
+                  <th>Year of Passing</th>
+                  <th>Percentage</th>
+                </tr>
+                <tr *ngFor="let qual of profileDetails.qualification">
+                  <td>{{qual.Board_Name}}</td>
+                  <td>{{qual.discipline_name}}</td>
+                  <td>{{qual.institute_name}}</td>
+                  <td>{{qual.level_name}}</td>
+                  <td>{{qual.specification_name}}</td>
+                  <td>{{qual.year_of_passing}}</td>
+                  <td>{{qual.percentage}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <!--Button code-->
+    </mat-dialog-actions>
+  </ng-template>
+
+  <br><br>
 </div>

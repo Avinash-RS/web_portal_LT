@@ -62,12 +62,11 @@ export class AdminServicesService {
     });
   }
 
-  getAllLearner(pagenumber ,sort) {
+  getLearnerDetail(user_id) {
     return this.Apollo.query({
       query: get_all_learner_detail,
       variables: {
-        pagenumber : pagenumber ,
-        sort: sort,
+        user_id : user_id ,
       }
     });
   }

@@ -76,10 +76,9 @@ export const deactivate_reactivate_user = gql`
   }`;
 
   export const get_all_learner_detail = gql`
-  query get_all_learner_detail($pagenumber: Int!, $sort: Int!){
-    get_all_learner_detail(pagenumber: $pagenumber, sort: $sort) {
+  query get_all_learner_detail($user_id: String!){
+    get_all_learner_detail(user_id: $user_id) {
       success
-      learner_count
       message{
         _id
         language
