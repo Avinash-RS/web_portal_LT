@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -11,12 +11,15 @@ import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit  {
+ 
+ 
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -104,6 +107,10 @@ export class ProfileComponent implements OnInit {
   number: boolean = false;
   spicalcharacter: boolean = false;
   undefinedCheck: boolean;
+  timeLeft: number = 60;
+  interval;
+  status: string;
+  
 
   constructor(
     private alert: AlertServiceService,
@@ -581,12 +588,22 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         this.isenable = false;
         this.showotp = true;
+        //Timer
+       this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 0;
+        // this.finish();
+      }
+    },1000)
       } else {
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
       }
     })
 
   }
+
   onOtpChange(otp) {
     this.otp = otp;
   }
@@ -616,6 +633,14 @@ export class ProfileComponent implements OnInit {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
         this.showotp = true;
+        // this.interval = setInterval(() => {
+        //   if(this.timeLeft > 0) {
+        //     this.timeLeft--;
+        //   } else {
+        //     this.timeLeft = 0;
+        //     // this.finish();
+        //   }
+        // },1000)
       }
     })
   }
@@ -1052,6 +1077,11 @@ export class ProfileComponent implements OnInit {
       this.qualification_obj[i].percentage = parseFloat(item)
     }
   }
+  // finish(){
+  //   this.status="finished";
+  //   console.log('stat',this.status);
+  // }
+   
 }
 
 

@@ -371,6 +371,7 @@
                   [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
                   formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
                   </ng-otp-input>
+                  <p>00:{{timeLeft}}</p> 
                   <!-- <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
                     formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" /> -->
 
