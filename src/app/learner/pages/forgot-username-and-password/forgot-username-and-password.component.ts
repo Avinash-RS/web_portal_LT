@@ -69,7 +69,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     .subscribe(data => {
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
-            this.router.navigate(['Learner/login']);
+            this.router.navigate(['Learner']);
             this.loader.hide();
          
           } else{

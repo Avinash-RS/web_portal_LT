@@ -244,11 +244,15 @@
                           mask="00.00" [(ngModel)]="qualification.percentage" suffix="%" name="percentage{{i}}"
                           (focusout)="getPerccent(qualification.percentage,i)" #name="ngModel" required>
                       </div>
-                      <div class="col-sm-3 plusicon">
+                      <div class="col-sm-3">
                         <!-- {{i}} {{qual.length}} {{qual.length-1}} -->
-                        <mat-icon *ngIf="i == qual.length-1 && qual.length < 15"
-                          (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
-                        <mat-icon (click)="removelastQual(i)">delete</mat-icon>
+                        <button mat-icon-button [disabled]='showdeletedicon' *ngIf="i == qual.length-1 && qual.length < 15"
+                        (click)="addnewQual(i,qualification,qual)">
+                          <mat-icon >add_circle_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button [disabled]='showdeletedicon' (click)="removelastQual(i)">
+                          <mat-icon >delete</mat-icon>
+                        </button>
                       </div>
                     </div><br>
                   </div>
@@ -262,11 +266,14 @@
                     <!-- <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
                     [(ngModel)]="words2[in]" name="name{{in}}" #name="ngModel" required /> -->
                   </div>
-                  <div class="col-sm-3 plusicon">
-
-                    <mat-icon *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
-                      [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
-                    <mat-icon (click)="removenewLink(in)" [disabled]='showdeletedicon'>delete</mat-icon>
+                  <div class="col-sm-3">
+                    <button mat-icon-button *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
+                    [disabled]='showdeletedicon'>
+                    <mat-icon >add_circle_outline</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="removenewLink(in)" [disabled]='showdeletedicon'>
+                      <mat-icon >delete</mat-icon>
+                    </button>
                     <!-- <mat-icon (click)="test()">delete</mat-icon> -->
                   </div>
                 </div><br>

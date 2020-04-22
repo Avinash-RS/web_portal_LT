@@ -14,9 +14,9 @@
               [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
             <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors.required">User Name is required</div>
-              <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
+              <!-- <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
               <div *ngIf="f.username.errors.minlength">User Name must be minimum of 3 characters </div>
-              <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div>
+              <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div> -->
             </div>
           </div>
           <div class="form-group" appCapslock (capsLock)="capsOn=$event">
@@ -29,9 +29,9 @@
               aria-hidden="true"></i>
             <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+              <!-- <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
               <div *ngIf="f.password.errors.maxlength">Password must be 20 maximum of characters</div>
-              <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div>
+              <div *ngIf="f.password.errors.pattern">Your password pattern is invalid.</div> -->
               <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
             </div>
           </div>
