@@ -1613,7 +1613,8 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
           
              
@@ -1626,7 +1627,8 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
          }
      }
@@ -1637,21 +1639,25 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
          }
      }
      if(rec_status){
         window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
-        // var d=ser.syllabus_of_particular_scorm('1','1','1')
-       // console.log(d,'llllllllllllllllllllllllllllllllllllllll')
+        getcourse(jsonData).then(data=> console.log(data,"data course"))
+    }
+
+    async function getcourse(jsonData) {
        const response = await fetch('http://localhost:3001/coursestatus', {
         method: 'POST',
-        body:JSON.stringify(params), // string or object
+        body:JSON.stringify(jsonData), // string or object
         headers: {
           'Content-Type': 'application/json'
         }
       });
       const myJson = await response.json(); //extract JSON from the http response
+      return myJson;
     }
 }
