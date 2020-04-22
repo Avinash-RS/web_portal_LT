@@ -9,16 +9,31 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ChooseTemplateComponent implements OnInit {
 
-
+  queryData:any;
   templateList: any;
   selectedTemplate: any;
 
   constructor(
     private APIService: WcaService,
     public router: Router,
+    public route:ActivatedRoute
     ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      let flag = 0;
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          flag = 1;
+        }
+      }
+      if (flag) {
+      this.queryData = params;
+      console.log(this.queryData)
+      }
+    });
+
+
     this.selectedTemplate={
       template_id:""
     }
@@ -39,5 +54,9 @@ export class ChooseTemplateComponent implements OnInit {
     console.log( this.selectedTemplate );
     this.APIService.bSubject.next(this.selectedTemplate);
         this.router.navigate(['./Wca/addtopic']);
+  }
+
+  navCreateTemp() {
+    this.router.navigate(['./Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
   }
 }

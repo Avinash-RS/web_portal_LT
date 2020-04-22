@@ -186,6 +186,10 @@ export class CreateCourseComponent implements OnInit {
 
   createcourseForm() {
     console.log(this.courseForm.value);
+    console.log(this.courseForm.valid);
+    console.log(this.courseForm);
+
+
       this.submitted = true;
 
       // dummy data
@@ -195,7 +199,17 @@ export class CreateCourseComponent implements OnInit {
       this.courseForm.value.user_name = 'Sathish';
 
 
-    if (this.courseForm.valid) {
+      if (!this.courseForm.value.name) {
+        this.toast.warning('Course Name is Required !!!');
+        return false;
+      }
+ 
+      if (!this.courseForm.value.image) {
+        this.toast.warning('Course Image is Required !!!');
+        return false;
+      }
+
+    if (this.courseForm.value.name && this.courseForm.value.image) {
       this.spinner.show();
       this.submitted = false;
       console.log(this.courseForm.value);
@@ -204,13 +218,13 @@ export class CreateCourseComponent implements OnInit {
         this.spinner.hide();
         if (data && data.Message === 'Success') {
          this.toast.success('Course Created Successfully !!!');
-         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.image} });
+         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.image,courseName:this.courseForm.value.name}});
         }
       }, err => {
         this.spinner.hide();
       })
     } else {
-      this.toast.warning('Course Name and Course image is Required !!!');
+      this.toast.warning('Something Went Wrong !!!');
     }
   } 
 

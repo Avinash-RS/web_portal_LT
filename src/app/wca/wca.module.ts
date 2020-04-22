@@ -41,7 +41,6 @@ import { PipeModule } from '../pipes/pipe.module';
 
 
 
-
 const routes: Routes = [
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -78,7 +77,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
-    ReactiveFormsModule    ,                    
     //NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,

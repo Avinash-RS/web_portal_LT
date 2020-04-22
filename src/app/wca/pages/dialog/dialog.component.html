@@ -1,0 +1,30 @@
+<ng-container *ngIf="dialogdata?.type === 'CreateTemplate'">
+    <form [formGroup]="templateForm" (ngSubmit)="templateName()">
+
+        <div class="dialogClose">
+            <span (click)="dialogClose()"> <img class="dialogClose1" src="assets\images\dialog close.svg"> </span>
+        </div>
+
+        <div>
+          <div class="tempBody">
+                <span class="tempName"> Enter Template Name </span>
+                <mat-form-field style="width:53%;">
+                    <input class="noBcg" maxlength="35" matInput type="text" formControlName="tempName">
+                    <mat-error *ngIf="formControls?.tempName?.errors?.required">
+                        Template Name Required !!!
+                    </mat-error>
+                    <!-- <mat-error *ngIf="tempformControls?.otpvalue?.errors?.pattern">
+                        Invalid OTP !!!
+                    </mat-error> -->
+                </mat-form-field>
+
+            </div>
+        </div>
+      
+        
+        <div class="row btnDiv" >
+            <button class="btnCSS" type="button" (click)="templateName()" [disabled]="submitted && templateForm.invalid" small mat-raised-button>Submit</button>
+        </div>
+    </form>
+
+</ng-container>
