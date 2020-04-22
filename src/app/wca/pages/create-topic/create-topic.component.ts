@@ -21,6 +21,7 @@ export class CreateTopicComponent implements OnInit {
   ngOnInit() {
     this.APIService.bSubject.subscribe(value => {
     this.queryData = value;
+    console.log(this.queryData);
      })
 
   }
