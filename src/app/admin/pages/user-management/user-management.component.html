@@ -1,94 +1,222 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item">Home</li>
     <li class="breadcrumb-item active" aria-current="page">View Users</li>
   </ol>
 </nav>
 
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="resultsLength == null" style="height:100%">
+  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
+
 <div class="p-5px">
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
   <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
     <mat-icon>add</mat-icon>Add User
   </button>
-  <!-- <cdk-filter-table></cdk-filter-table> -->
 
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
-
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="resultsLength == null" style="height:100%">
-    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
-</div>
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
 
       <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+        <mat-header-cell *matHeaderCellDef>
+          <!-- <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+          </mat-checkbox> -->
+          Select
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span class="mobile-label">Select</span>
+          <mat-checkbox (click)="checkboxLabel(row)">
           </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
+        </mat-cell>
+        <!-- <td mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
             [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
           </mat-checkbox>
-        </td>
+        </td> -->
       </ng-container>
-      
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> User_id </th>
-        <td mat-cell *matCellDef="let element"> {{element.user_id}} </td>
+
+      <ng-container matColumnDef="user_id">
+        <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">User Id</span>
+          {{element.user_id}}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> User Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="mobile-label">User Name</span>{{element.username}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Email ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.email || 'NA'}} </td>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"><span class="mobile-label">Email ID</span> {{element.email || 'NA'}}
+        </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Mobile No </th>
-        <td mat-cell *matCellDef="let element"> {{element.mobile_number || 'NA'}} </td>
+      <ng-container matColumnDef="mobile">
+        <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+          {{element.mobile_number || 'NA'}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="active">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element" [ngClass]="element.is_active ? 'green' : 'red'"> {{element.is_active ? 'Active' : 'Inactive'}} </td>
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"
+          [ngClass]="element.is_blocked ? 'red' : element.is_active ? 'green' : 'black'">
+          <span class="mobile-label">Status</span>
+          {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="blocked">
-        <th mat-header-cell *matHeaderCellDef> Blocked Status</th>
-        <td mat-cell *matCellDef="let element" [ngClass]="element.is_blocked ? 'red' : 'black'"> {{element.is_blocked}} </td>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">
+          Actions <br *ngIf="selectedArray && selectedArray.length > 0">
+          <button *ngIf="selectedArray && selectedArray.length > 0" mat-stroked-button (click)="deActivate('Activate')">
+            Activate</button>
+          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
+            (click)="deActivate('De-activate')">
+            De-activate</button>
+          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
+            Block</button>
+          <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Unblock')">
+            Un-block</button>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Actions</span>
+          <button mat-icon-button (click)="viewDetail(element,viewDialog)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button *ngIf="!element.is_blocked" mat-stroked-button
+            [disabled]="(selectedArray && selectedArray.length > 0)"
+            (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
+            {{element.is_active ? 'De-activate' : 'Activate'}}</button>
+          <button mat-stroked-button [disabled]="(selectedArray && selectedArray.length > 0)"
+            (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
+            {{element.is_blocked ? 'Unblock' : 'Block'}}</button>
+          <!-- <button mat-icon-button (click) = "viewDetail(element)"> <mat-icon>block</mat-icon> -->
+        </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="deactivate">
-        <th mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">Activate/ De-activate(All)</th>
-        <td mat-cell *matCellDef="let element">
-          <!-- <mat-icon (click)="deActivate(element)">remove</mat-icon> -->
-            <button mat-stroked-button (click)="deActivate(element)"> {{element.is_active ? 'De-activate' : 'Activate'}}</button>
-            <!-- {{element.is_active ? 'De-activate' : 'Activate'}} -->
-      </ng-container>
-
-      <ng-container matColumnDef="block">
-        <th mat-header-cell *matHeaderCellDef (click)="block()"> Block (All)</th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon (click)="block(element)">remove_circle</mat-icon>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-      </tr>
-    </table>
-<!-- 
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)" [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons> -->
-      
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page) = "next($event)"
-    showFirstLastButtons>
-    </mat-paginator>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+      </mat-row>
+    </mat-table>
   </div>
+
+  <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+  </mat-paginator>
+
+
+  <ng-template #viewDialog>
+    <span class="close">
+      <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+    </span>
+    <h3 class="center_align">View Details</h3>
+    <br>
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <div class="row">
+            <!-- //////FIrst section left part//////// -->
+            <div class="col-md-6 col-sm-12 col-12 left">
+              <!-- ////// Info about you//////// -->
+              <div class="form-group">
+                <label>Information about you</label>
+                <textarea style="resize: none;" readonly [disabled]='cannotEdit' rows="3"
+                  class="inputs border-radius-5 color_blue background_trans width_100"
+                  [(ngModel)]="profileDetails.userObjects[0].about_you" name="info"></textarea>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-12 right float_right">
+              <img
+                [src]="profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : '../../../../assets/learner/avatar2.png'"
+                id="imageUpload" alt="Avatar" class="avatar">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <!-- //////userName  +++ full name +++ Phone//////// -->
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Username : {{profileDetails.userObjects[0].username}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Full Name : {{profileDetails.userObjects[0].full_name}} </label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Mobile : {{profileDetails.userObjects[0].mobile_number}}</label>
+            </div>
+          </div>
+
+          <!-- ////// Email ++ gender ++ Iam a//////// -->
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Eamil : {{profileDetails.userObjects[0].email}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Gender : {{profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                  'Female' : 'Rather not specify'}}</label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>I'm a : {{profileDetails.userObjects[0].is_student_or_professional}} </label>
+            </div>
+          </div>
+
+          <!-- //////Language known//////// -->
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Languages known : </label><br>
+              <div *ngIf="profileDetails.language.length >0">
+                <div *ngFor="let lang of profileDetails.language" class="display_flex">
+                  {{lang}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Location : {{profileDetails.userObjects[0].state_name}},
+                {{profileDetails.userObjects[0].country_name}} </label>
+            </div>
+          </div>
+          <br>
+          <div class="row" style="overflow-x:auto;">
+            <div class="col-md-12 col-sm-12 col-12">
+              <table class="profileTable">
+                <tr>
+                  <th>Board</th>
+                  <th>Discipline</th>
+                  <th>Institute</th>
+                  <th>Level</th>
+                  <th>Specification</th>
+                  <th>Year of Passing</th>
+                  <th>Percentage</th>
+                </tr>
+                <tr *ngFor="let qual of profileDetails.qualification">
+                  <td>{{qual.Board_Name}}</td>
+                  <td>{{qual.discipline_name}}</td>
+                  <td>{{qual.institute_name}}</td>
+                  <td>{{qual.level_name}}</td>
+                  <td>{{qual.specification_name}}</td>
+                  <td>{{qual.year_of_passing}}</td>
+                  <td>{{qual.percentage}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <!--Button code-->
+    </mat-dialog-actions>
+  </ng-template>
+
+  <br><br>
 </div>

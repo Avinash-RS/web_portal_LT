@@ -17,11 +17,13 @@ import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist
 import { CapslockDirective } from '@core/services/directives/capslock.directive';
 import { VideoPlayerComponent } from '@core/shared/video-player/video-player.component';
 import { AudioPlayerComponent } from '@core/shared/audio-player/audio-player.component';
+import { DataTableComponent } from './shared/data-table/data-table.component';
 //Video and Audio Player
 import { VgCoreModule } from 'videogular2/compiled/core';
 import { VgControlsModule } from 'videogular2/compiled/controls';
 import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { VgBufferingModule } from "videogular2/compiled/buffering";
+
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent,canActivate:[AuthGuard]  },
   { path: 'audio', component: AudioPlayerComponent,canActivate:[AuthGuard]  },
@@ -37,6 +39,7 @@ const routes: Routes = [
     WishlistCoursesComponent,
     VideoPlayerComponent,
     AudioPlayerComponent,
+    DataTableComponent,
   ],
 
   imports: [
@@ -62,6 +65,7 @@ const routes: Routes = [
     TopCoursesComponent,
     RecomendedCoursesComponent,
     WishlistCoursesComponent,
-    CapslockDirective]
+    CapslockDirective,
+    DataTableComponent]
 })
 export class CoreModule { }

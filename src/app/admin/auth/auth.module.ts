@@ -16,6 +16,8 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
 
+import { CoreModule } from '@core/core.module';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
 };
@@ -29,6 +31,7 @@ import { from } from 'rxjs';
 @NgModule({
     imports: [
         CommonModule,
+        CoreModule,
         RouterModule,
         RouterModule.forChild(appRoutes),
         MatToolbarModule,
@@ -65,6 +68,9 @@ import { from } from 'rxjs';
 
 
     ],
+
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+
     declarations: [AuthComponent,UserManagementComponent,AddUserComponent],
     providers: [
         {
