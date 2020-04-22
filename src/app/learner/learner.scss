@@ -1,4 +1,13 @@
 @import "../../assets/variable.scss";
+.my-panel {
+  background: $color-blue !important;
+  height: 100px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 70px !important;
+  }
+
 
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
