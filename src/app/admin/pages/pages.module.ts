@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { 
         MatCardModule,
         MatButtonModule,
@@ -39,6 +39,7 @@ import { RouterModule } from '@angular/router';
 
        
     AddUserComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],
     providers: [

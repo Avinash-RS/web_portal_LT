@@ -14,7 +14,7 @@ import { AdminLoginModule } from './admin-login/admin-login.module';
 import { AdminCoreModule } from './core/admin-core.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-
+import {  DndDirective } from './core/dnd.directive';
 
 const routes: Routes = [
   // {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [DndDirective],
   imports: [
     CoreModule,
     AdminLoginModule,
