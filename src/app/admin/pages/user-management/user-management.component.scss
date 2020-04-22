@@ -18,6 +18,7 @@
   color: $color-red;
   font-weight: 500;
 }
+
 .black {
   color: $color-blank;
   font-weight: 500;
@@ -40,26 +41,64 @@ mat-header-cell {
 }
 
 
+::ng-deep .cdk-overlay-pane {
+  width: 65% !important;
+  max-width: 65% !important;
+}
 
+.avatar {
+  width: 20%;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
 
+.profileTable {
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd !important;
+  }
+}
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd !important;
+}
 
+@media screen and (max-width:765px) {
+  .profile {
+    justify-content: space-between;
+  }
 
+  .left {
+    order: 2;
+  }
+
+  .right {
+    order: 1;
+  }
+}
 
 .example-container {
   display: flex;
   flex-direction: column;
   max-height: 600px;
   min-width: 300px;
+
   .mat-stroked-button {
     font-size: 12px;
     cursor: pointer;
     line-height: 20px;
     padding: 0 0px;
-    margin:1px;
+    margin: 1px;
   }
+
   .mat-header-cell:last-of-type {
-    padding-top : 10px;
+    padding-top: 10px;
     padding-bottom: 10px;
     display: initial;
     text-align: center;
@@ -81,9 +120,11 @@ mat-header-cell {
     display: inline-block;
     font-weight: bold;
   }
+
   mat-cell:first-of-type {
     padding-left: 0px;
   }
+
   .mat-header-row {
     display: none;
   }
