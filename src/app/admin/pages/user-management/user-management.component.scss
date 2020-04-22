@@ -1,6 +1,8 @@
-table {
-  width: 100%;
-}
+@import "../../../../assets/variable.scss";
+
+// table {
+//   width: 100%;
+// }
 
 .mat-form-field {
   font-size: 14px;
@@ -8,12 +10,16 @@ table {
 }
 
 .green {
-  color: #0aca0a;
+  color: $color-dark-green;
   font-weight: 500;
 }
 
 .red {
-  color: red;
+  color: $color-red;
+  font-weight: 500;
+}
+.black {
+  color: $color-blank;
   font-weight: 500;
 }
 
@@ -25,4 +31,66 @@ table {
   position: absolute !important;
   top: 50% !important;
   left: 45% !important;
+}
+
+mat-header-cell {
+  // text-align: center;
+  font-size: 14px;
+  color: #3c3c3c;
+}
+
+
+
+
+
+
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  min-width: 300px;
+  .mat-stroked-button {
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0 0px;
+    margin:1px;
+  }
+  .mat-header-cell:last-of-type {
+    padding-top : 10px;
+    padding-bottom: 10px;
+    display: initial;
+    text-align: center;
+  }
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 560px) {
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+    font-weight: bold;
+  }
+  mat-cell:first-of-type {
+    padding-left: 0px;
+  }
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
 }

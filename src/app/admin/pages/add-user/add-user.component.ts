@@ -6,6 +6,15 @@ import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as myGlobals from '@core/globals';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
+
+
+export interface PeriodicElement {
+  fname: string;
+  studendID: number;
+  weight: number;
+  symbol: string;
+}
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -56,6 +65,30 @@ export class AddUserComponent implements OnInit {
       else
         this.alert.openAlert(result.data.user_registration.message, null)
     });
+  }
+
+
+
+
+  columnHeader = ['studendID', 'fname', 'weight', 'symbol','select'];
+
+  tableData: PeriodicElement[] = [
+    {studendID: 1, fname: 'Hydrogen', weight: 1.0079, symbol: 'H',},
+    {studendID: 2, fname: 'Helium', weight: 4.0026, symbol: 'He'},
+    {studendID: 3, fname: 'Lithium', weight: 6.941, symbol: 'Li'},
+    {studendID: 4, fname: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+    {studendID: 5, fname: 'Boron', weight: 10.811, symbol: 'B'},
+   
+  ];
+
+  next(e) {
+    this.tableData = [{studendID: 6, fname: 'Carbon', weight: 12.0107, symbol: 'C'},
+    {studendID: 7, fname: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+    {studendID: 8, fname: 'Oxygen', weight: 15.9994, symbol: 'O'},
+    {studendID: 9, fname: 'Fluorine', weight: 18.9984, symbol: 'F'},
+    ]
+
+    console.log(this.tableData)
   }
 
 }

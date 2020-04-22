@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item">Home</li>
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">User</a></li>
     <li class="breadcrumb-item active" aria-current="page">Add User</li>
   </ol>
@@ -45,7 +45,8 @@
                 </mat-select>
               </mat-form-field>
             </div><br>
-            <button id="addUser" mat-stroked-button [disabled]="addUserForm.invalid" class="width_70 center" (click)="addUser()">Add
+            <button id="addUser" mat-stroked-button [disabled]="addUserForm.invalid" class="width_70 center"
+              (click)="addUser()">Add
               User</button>
             <br>
           </form>
@@ -53,5 +54,16 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Add Multiple Users"> </mat-tab>
+  <mat-tab label="Add Multiple Users">
+    <!-- <app-data-table [tableData]="tableData" [columnHeader]="columnHeader"></app-data-table>
+    {{tableData | json}}
+    <mat-paginator #paginator [length]="9" [pageSize]="5" (page)="next()" showFirstLastButtons>
+    </mat-paginator> -->
+
+    <!-- //Maniyarasi  -  add your code here -->
+
+
+     <!-- //Maniyarasi  - end of your code -->
+  </mat-tab>
+
 </mat-tab-group>

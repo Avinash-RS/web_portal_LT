@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user } from "./operations/admin_query";
+import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user,get_all_learner_detail } from "./operations/admin_query";
 import { user_registration } from "./operations/admin_mutation"
 @Injectable({
   providedIn: 'root'
@@ -53,6 +53,16 @@ export class AdminServicesService {
   getAllUsers(pagenumber ,sort) {
     return this.Apollo.query({
       query: get_all_user,
+      variables: {
+        pagenumber : pagenumber ,
+        sort: sort,
+      }
+    });
+  }
+
+  getAllLearner(pagenumber ,sort) {
+    return this.Apollo.query({
+      query: get_all_learner_detail,
       variables: {
         pagenumber : pagenumber ,
         sort: sort,
