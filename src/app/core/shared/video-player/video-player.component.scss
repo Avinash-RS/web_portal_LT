@@ -30,16 +30,16 @@ vg-controls vg-scrub-bar-buffering-time {
 
 
 ::ng-deep.mat-option-text {
-    color: aliceblue !important;
+    color: $color-white !important;
 }
 
 ::ng-deep .mat-select-value-text {
   white-space: nowrap;
-  color: aliceblue !important;
+  color: $color-white !important;
 }
 
 ::ng-deep .mat-select-value {
-  color: white !important;
+  color: $color-white !important;
 }
 
 ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline  {
