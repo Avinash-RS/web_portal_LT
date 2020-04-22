@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user,get_all_learner_detail } from "./operations/admin_query";
 import { user_registration } from "./operations/admin_mutation"
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServicesService {
 
-  constructor(private Apollo: Apollo, ) { }
+  constructor(private Apollo: Apollo, private http: HttpClient ) { }
 
   getUserGroup() {
     return this.Apollo.query({
@@ -78,5 +80,9 @@ export class AdminServicesService {
         is_blocked: is_blocked,
       }
     });
+  }
+
+  bulkuserupload(fb) {
+    return this.http.post<any[]>(environment.apiUrlImg + `upload/excel`, fb);
   }
 }
