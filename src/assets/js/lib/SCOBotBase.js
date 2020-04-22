@@ -1643,7 +1643,15 @@ function startResumeEvent(params){
      }
      if(rec_status){
         window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
-        var d=ser.syllabus_of_particular_scorm('1','1','1')
-        console.log(d,'llllllllllllllllllllllllllllllllllllllll')
+        // var d=ser.syllabus_of_particular_scorm('1','1','1')
+       // console.log(d,'llllllllllllllllllllllllllllllllllllllll')
+       const response = await fetch('http://localhost:3001/coursestatus', {
+        method: 'POST',
+        body:JSON.stringify(params), // string or object
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const myJson = await response.json(); //extract JSON from the http response
     }
 }
