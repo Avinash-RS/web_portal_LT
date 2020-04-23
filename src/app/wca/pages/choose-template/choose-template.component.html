@@ -60,12 +60,13 @@
                                                 Consist of
                                             </div>
                                             <div class="grid-list">
-                                                <ul>
+                                                <ol>
                                                     <li *ngFor="let template of tlist.template_details"
                                                         class="list-items">
+                                                    <img class="template-img" src="{{template.image}}">
                                                         {{template.name}}
                                                     </li>
-                                                </ul>
+                                                </ol>
                                             </div>
                                         </div>
                                         <div class="template-name">Template {{i + 1}}</div>

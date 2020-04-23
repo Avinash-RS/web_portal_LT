@@ -339,7 +339,9 @@ input[type="text"] {
 }
 
 .list-items {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: 500;
 }
 
 .tick-icon { 
@@ -358,4 +360,10 @@ input[type="text"] {
     position: absolute;
     bottom: 10px;
     left: 35px;
+}
+
+.template-img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
 }
