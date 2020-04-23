@@ -12,17 +12,18 @@ let vpp=new ViewProfilePage();
 
 Given(': I am successfully logged into my account', async ()=> {
     browser.waitForAngularEnabled(false);
-    await browser.get('http://40.76.47.212/Learner/login');
+    await browser.get(browser.params.login.url);
     await browser.manage().window().maximize();
-    await vpp.Username.sendKeys("mythreyi");
-    await vpp.Password.sendKeys("123Aa!@#");
+    await vpp.Username.sendKeys(browser.params.login.user);
+    await vpp.Password.sendKeys(browser.params.login.pwd);
     await vpp.LoginButton.click(); 
 });
 
 When(': I click on my profile page', async ()=> {
+    await browser.sleep(5000);
     await vpp.ProfileImage.click();
 });
 
 Then(': User should be in view profile page', async ()=> {
-    await expect('ViewProfilePage').toEqual('ViewProfilePage');       
+    console.log("User landed into ViewProfile Page");     
 });

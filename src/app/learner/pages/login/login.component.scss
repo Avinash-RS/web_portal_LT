@@ -1,41 +1,62 @@
 @import "../../../../assets/variable.scss";
 
-mat-card{
+mat-card {
     width: 22%;
     margin: auto;
     top: 10%;
 }
 
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 1px 0;
+    background: $color-light-blue;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
 button {
     background: $color-blue !important;
-    color: white ;
+    color: white;
     width: 70%;
     margin-left: 15%;
 }
+
 mat-form-field {
     width: 80%;
     // height: 10vh !important;
 }
+
 .remember_me {
     float: left;
 }
+
 .forgot_ps {
     text-align: end;
     width: 90%;
     color: #3f548b;
     font-weight: 500;
 }
-.sign_up, .remember_me,mat-card-title , a{
+
+.sign_up,
+.remember_me,
+mat-card-title,
+a {
     color: #3f548b;
     text-align: center !important;
 }
+
 .mat-checkbox .mat-checkbox-frame {
     border-color: black;
     background-color: #dddddd
 }
+
 mat-card-title {
     font-weight: 400;
 }
+
 .fa {
     cursor: pointer;
     font-size: 16px;
@@ -49,4 +70,3 @@ mat-card-title {
     z-index: 2;
     color: black;
 }
- 

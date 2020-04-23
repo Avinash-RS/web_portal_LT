@@ -88,13 +88,14 @@ export class PasswordComponent implements OnInit {
     this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip).subscribe(data => {
       if (data.data['user_registration_done']['success'] == 'true') {
 
-        //Added by Mythreyi
+        //Added by Mythreyi - for user story 19 first time login
         this.service.login(this.passwordForm.value.username, this.passwordForm.value.password, false)
           .subscribe((loginresult: any) => {
             if (loginresult.data.login) {
               if (loginresult.data.login.success) {
                 localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
                 localStorage.setItem('uname', this.passwordForm.value.username);
+                localStorage.setItem('role','learner')
                 localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
                 var ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);

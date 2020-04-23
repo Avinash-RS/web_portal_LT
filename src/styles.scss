@@ -15,6 +15,7 @@ button:disabled:hover {
 }
 
 @media (min-width: 300px) {
+
   .col-md-12,
   .col-md-11,
   .col-md-10,
@@ -34,6 +35,10 @@ button:disabled:hover {
 .container {
   max-width: 100% !important;
   overflow: hidden;
+}
+
+.contentTop {
+  margin-top: 58px !important;
 }
 
 .f_wt_200 {
@@ -105,7 +110,7 @@ button:disabled:hover {
 }
 
 .width_100 {
-  width: 100%;
+  width: 100% !important;
 }
 
 .width_90 {
@@ -195,6 +200,11 @@ button:disabled:hover {
   text-align: center;
 }
 
+.center {
+  margin: auto;
+  display: block;
+}
+
 .background_trans {
   background: transparent !important;
 }
@@ -224,7 +234,7 @@ button:disabled:hover {
 }
 
 .background-maroon {
-  background-color: $color-maroon;
+  background-color: $color-maroon !important;
 }
 
 td {
@@ -249,7 +259,11 @@ td {
 }
 
 .color_white {
-  color: #fff !important;
+  color: $color-white !important;
+}
+
+.color_black {
+  color : $color-blank !important;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -305,29 +319,16 @@ body {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   padding: 10px;
-  background: white;
+  background: $color-white;
   display: flex;
   justify-content: center;
   height: 277px;
 }
 
-// .container-reg100 {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 15px;
-//   background-size: cover !important;
-//   background-position: center !important;
-//   background-repeat: no-repeat !important;
-//   height: 100vh !important;
-//   background: url('./assets/learner/download.jpg') !important;
-// }
-
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #ffffff !important;
+  color: $color-white !important;
   text-align: center;
   vertical-align: middle !important;
   cursor: pointer;
@@ -335,14 +336,11 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #1f3777 !important;
-  // padding: .375rem .75rem;
+  background-color: $color-blue !important;
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
-  // margin-left: 15px;
-  // margin-right: 25px;
 }
 
 .limiter {
@@ -353,7 +351,7 @@ body {
 .wrap-reg {
   width: 350px;
   height: auto;
-  background: #fff !important;
+  background: $color-white !important;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -390,8 +388,8 @@ body {
   background-color: $color-blue;
 }
 
-input[type="text"],
-input[type="password"] {
+// input[type=text],
+input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
@@ -403,22 +401,22 @@ input[type="password"] {
 }
 
 label {
-  color: #1f3777;
+  color: $color-blue;
   font-weight: 500;
 }
 
 .head {
   text-align: center;
-  color: #1f3777 !important;
+  color: $color-blue!important;
 }
 
 .mand {
-  color: red !important;
+  color: $color-red !important;
 }
 
 mat-icon {
   cursor: pointer;
-  color: #1f3777;
+  color: $color-blue;
 }
 
 // .header{

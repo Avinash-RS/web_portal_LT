@@ -17,6 +17,9 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
+   
+
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -39,6 +44,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     ReactiveFormsModule,
     GraphqlModule,
     BrowserAnimationsModule,
+
   ],
   providers: [AlertComponentComponent,    
   { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
