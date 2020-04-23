@@ -43,14 +43,22 @@
                         <mat-card style="text-align: center;">
 
                             <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1" class="custom-grid-list">
-                                <div *ngFor="let tlist of templateList;let i = index">
+                                <div *ngFor="let tlist of templateList;let i = index" (mouseout)="onhoverLeave()"
+                                (mouseover)="onHover(tlist.template_id)">
                                     <mat-grid-tile
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
-                                        (click)="selectTemplate(tlist)"
-                                        [matTooltip]='"updated on "+tlist.created_on+"\ncreated by "+tlist.createdby_name'
-                                        matTooltipPosition="right" matTooltipClass="allow-cr">
+                                        (click)="selectTemplate(tlist)">
 
-                                        <div>
+                                        <div style="color: grey;" (click)="selectTemplate(tlist)" class="overlay"
+                                            *ngIf="isHover && hoverId == tlist.template_id">
+                                            <div>
+                                                {{"Updated on "+tlist.created_on}}
+                                            </div>
+                                            <div>
+                                                {{"created by "+ tlist.createdby_name}}
+                                            </div>
+                                        </div>
+                                        <div style="width: 200px;">
                                             <div class="tick-icon"
                                                 *ngIf="tlist.template_id == selectedTemplate.template_id">
                                                 <mat-icon class="green-icon">check_circle_outline</mat-icon>
@@ -60,7 +68,7 @@
                                                 Consist of
                                             </div>
                                             <div class="grid-list">
-                                                <ol>
+                                                <ol class="order-list">
                                                     <li *ngFor="let template of tlist.template_details"
                                                         class="list-items">
                                                         <span>
@@ -71,7 +79,8 @@
                                                 </ol>
                                             </div>
                                         </div>
-                                        <div class="template-name">Template {{i + 1}}</div>
+                                        <div class="template-name">Template {{i + 1}}
+                                        </div>
 
                                     </mat-grid-tile>
 
@@ -95,8 +104,6 @@
 
 
     </div>
-
-
 
     <div>
         <app-footer></app-footer>

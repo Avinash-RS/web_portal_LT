@@ -12,6 +12,8 @@ export class ChooseTemplateComponent implements OnInit {
   queryData:any;
   templateList: any;
   selectedTemplate: any;
+  hoverId: any;
+  isHover: boolean;
 
   constructor(
     private APIService: WcaService,
@@ -56,7 +58,17 @@ export class ChooseTemplateComponent implements OnInit {
         this.router.navigate(['./Wca/addtopic']);
   }
 
+  onHover(id) {
+    this.hoverId = id;
+    this.isHover = true;
+  }
+  onhoverLeave(){
+    this.isHover = false;
+    this.hoverId = '';
+  }
+
   navCreateTemp() {
     this.router.navigate(['./Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
   }
+
 }
