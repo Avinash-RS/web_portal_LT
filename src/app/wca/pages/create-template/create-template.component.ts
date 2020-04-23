@@ -46,19 +46,22 @@ export class CreateTemplateComponent implements OnInit {
   todo = [
     {
       name:"PDF",
-      image:"../../../../assets/images/pdf.svg"
+      image:"../../../../assets/images/pdf.svg",
+      accept:"/(\.pdf)$/i"
     },
     {
       name:"Word",
-      image:"../../../../assets/images/word.svg"
+      image:"../../../../assets/images/word.svg",
+      accept:"/(\.doc|\.docx)$/i"
     },
-    {
+    { 
       name:"PPT",
       image:"../../../../assets/images/ppt.svg"
     },
     {
       name:"Image",
-      image:"../../../../assets/images/image.svg"
+      image:"../../../../assets/images/image.svg",
+      accept:"/(\.jpg|\.jpeg|\.png)$/i"
     },
     {
       name:"Video",
@@ -161,7 +164,9 @@ savedTemplates(type) {
 
 }
   
-
+removenewLink(i) {
+   this.done.splice(i);
+}
  
 
 }

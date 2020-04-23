@@ -48,19 +48,18 @@
     [cdkDropListConnectedTo]="[todoList]"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box1" *ngFor="let item of done" cdkDrag>
+    <div class="example-box1" *ngFor="let item of done;let i =index" cdkDrag>
     <img class="img1" src="{{item.image}}">
-    <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
+    <mat-icon (click)="removenewLink(i)" >delete</mat-icon>
 
   
   </div>
   </div>
 
-                              <div>
-                                <button class="backgroundcol1" routerLink="" >Cancel</button>
-                                <button class="backgroundcol1" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
+                              <div class="alnCenter">
                                 <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template & continue</button>
-
+                                <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
+                                <button class="backgroundcol1" routerLink="" >Cancel</button>
                                 <!-- /Wca/addtopic -->
                                   
                                 </div>

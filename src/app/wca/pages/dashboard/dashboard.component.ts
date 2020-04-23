@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit {
     this.service.getPublishedCourse().subscribe((data: any) => {
 
       this.publishedCourses = data.Result;
-      debugger
+      // debugger
       console.log(this.publishedCourses[0])
 
     });

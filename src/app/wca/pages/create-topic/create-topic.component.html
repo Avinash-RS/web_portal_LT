@@ -32,10 +32,9 @@
     <div class="example-box1"  *ngFor="let item of queryData.template_details" >
      <div (click)="activate(item)" class="clickBcg bcgBorder" [class.active]="item?.name==active?.name">
         <div class="dspFlx">
-            <span class="restictWidth"> <mat-form-field class="matWidth">
+            <span class="restictWidth"> <mat-form-field class="matWidth" appearance="outline">
              <mat-label class="clrLabel">Topic Name</mat-label>
-             <input (keydown)="_handleKeydown($event)" matInput >
-             <mat-icon class="penSize" matSuffix>create</mat-icon>
+             <input (keydown)="_handleKeydown($event)" matInput  style="color:black;">
              <mat-error > </mat-error>
            </mat-form-field></span>
            <span class="example-spacer"></span>
