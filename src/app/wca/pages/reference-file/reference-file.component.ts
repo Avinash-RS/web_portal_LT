@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-
+import { WcaService } from '@wca/services/wca.service';
+//import { LearnerServicesService } from '@wc';
 @Component({
   selector: 'app-reference-file',
   templateUrl: './reference-file.component.html',
@@ -27,9 +28,12 @@ export class ReferenceFileComponent implements OnInit {
   dataSource = new MatTableDataSource(this.referenceFileList);
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(public service: WcaService) { 
+    this.getAllRefDoc()
+  }
 
   ngOnInit() {
+   
     this.selectedOption = 'document';
     this.referenceLink = "http://";
 this.uploadMsg = "Upload the document"
@@ -87,5 +91,14 @@ this.uploadMsg = "Upload the document"
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+removeDoc(){
+  this.service.remove_doc_ref('5ea1598d5c7d4f34181511e3').subscribe(data => {
 
+  })
+}
+getAllRefDoc(){
+  this.service.getallrefdoc().subscribe(data => {
+    console.log(data)
+  })
+}
 }
