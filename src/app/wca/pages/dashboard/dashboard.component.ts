@@ -126,8 +126,6 @@ export class DashboardComponent implements OnInit {
     this.service.getPublishedCourse().subscribe((data: any) => {
 
       this.publishedCourses = data.Result;
-      // debugger
-      console.log(this.publishedCourses[0])
 
     },err => {
       this.spinner.hide();

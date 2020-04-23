@@ -316,13 +316,15 @@ input[type="text"] {
 }
 
 .choose-template-container .grid-heading {
-    margin: 30px 0 10px 20px;
+    margin: 20px 24px 25px 0px;
     font-weight: 500;
+    font-size: 18px;
 }
 
 .choose-template-container .selected-grid-heading {
-    margin: 0px 0 10px 20px;
+    margin: 20px 0 25px 0px;
     font-weight: 500;
+    font-size: 18px;
 }
 
 .choose-template-container .grid-list {
@@ -345,13 +347,15 @@ input[type="text"] {
 }
 
 .tick-icon { 
-    position: relative;
-    left: 125px;
-    top: 5px
+   float: right;
 }
 
 .green-icon {
     color: #00c213;
+}
+
+.order-list {
+    padding-left: 20px;
 }
 
 .template-name {
@@ -367,4 +371,26 @@ input[type="text"] {
     height: 15px;
     margin-right: 5px;
     margin-bottom: 2px;
+}
+
+.overlay {
+    height: 70%;
+    width: 85%;
+    position: absolute;
+    overflow: hidden;
+    top: 2vh;
+    left: 0;
+    margin-left: 5%;
+    background-color: white;
+    color: #000000;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #aaaaaa !important;
+}
+
+.temp-info {
+    color: grey;
+    position: absolute;
+    margin-left: 40px;
+    font-size: 20px;
 }
