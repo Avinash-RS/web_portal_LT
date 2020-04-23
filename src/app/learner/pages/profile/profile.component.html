@@ -320,6 +320,7 @@
               <ng-otp-input [config]="config" [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
                 formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
               </ng-otp-input>
+              <p>00:{{timeLeft}}</p>
               <br><br>
             </div>
             <div *ngIf="showotp">
