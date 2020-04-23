@@ -453,8 +453,20 @@ mat-icon {
   border-color: #213998 !important;
 }
 
-.reference-file-container .file-selection .mat-radio-label-content {
-  color: grey !important;
+.reference-file-container {
+  .file-selection .mat-radio-label-content {
+    color: grey !important;
+  }
+  .file-selection {
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: unset !important;
+    }
+    .mat-form-field-flex {
+      background: #b8d0ff !important;
+      border-radius: 5px;
+
+    }
+  }
 }
 
 .save-btn {

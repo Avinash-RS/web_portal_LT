@@ -64,5 +64,6 @@ describe('ChooseTemplateComponent', () => {
       created_on: "4/17/2020, 10:09:36 AM"
     }
     component.selectTemplate(template);
+    expect(component.selectedTemplate._id).toBe(template._id);
   })
 });
