@@ -262,13 +262,10 @@ td {
   color: $color-white !important;
 }
 
-<<<<<<< HEAD
-=======
 .color_black {
   color : $color-blank !important;
 }
 
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
 ////////////////////////////////////////////////////////////////////////
 
 body {
@@ -339,22 +336,11 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-<<<<<<< HEAD
-  background-color: #1f3777 !important;
-  // padding: .375rem .75rem;
-=======
   background-color: $color-blue !important;
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
-<<<<<<< HEAD
-  // margin-left: 15px;
-  // margin-right: 25px;
-=======
-
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
 }
 
 .limiter {
@@ -402,13 +388,8 @@ body {
   background-color: $color-blue;
 }
 
-<<<<<<< HEAD
-input[type="text"],
-input[type="password"] {
-=======
 // input[type=text],
 input[type=password] {
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
@@ -420,21 +401,13 @@ input[type=password] {
 }
 
 label {
-<<<<<<< HEAD
-  color: #1f3777;
-=======
   color: $color-blue;
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
   font-weight: 500;
 }
 
 .head {
   text-align: center;
-<<<<<<< HEAD
-  color: #1f3777 !important;
-=======
   color: $color-blue!important;
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
 }
 
 .mand {
@@ -443,11 +416,7 @@ label {
 
 mat-icon {
   cursor: pointer;
-<<<<<<< HEAD
-  color: #1f3777;
-=======
   color: $color-blue;
->>>>>>> a9009ebf5a194863c8c0126f6965db8811b8d9dd
 }
 
 // .header{
