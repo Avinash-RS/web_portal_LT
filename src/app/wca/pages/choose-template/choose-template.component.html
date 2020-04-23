@@ -48,11 +48,11 @@
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
                                         (click)="selectTemplate(tlist)"
                                         [matTooltip]='"updated on "+tlist.created_on+"\ncreated by "+tlist.createdby_name'
-                                        matTooltipPosition="right"
-                                        matTooltipClass="allow-cr">
+                                        matTooltipPosition="right" matTooltipClass="allow-cr">
 
                                         <div>
-                                            <div class="tick-icon" *ngIf="tlist.template_id == selectedTemplate.template_id">
+                                            <div class="tick-icon"
+                                                *ngIf="tlist.template_id == selectedTemplate.template_id">
                                                 <mat-icon class="green-icon">check_circle_outline</mat-icon>
                                             </div>
                                             <div
@@ -63,8 +63,10 @@
                                                 <ol>
                                                     <li *ngFor="let template of tlist.template_details"
                                                         class="list-items">
-                                                    <img class="template-img" src="{{template.image}}">
-                                                        {{template.name}}
+                                                        <span>
+                                                            <img class="template-img" src="{{template.image}}">
+                                                            {{template.name}}
+                                                        </span>
                                                     </li>
                                                 </ol>
                                             </div>
@@ -77,7 +79,8 @@
                             </mat-grid-list>
                             <mat-card-footer>
                                 <div>
-                                    <button type="button" (click)="templateParse(tlist)"  mat-flat-button [disabled]='selectedTemplate.template_id == undefined' color="primary"
+                                    <button type="button" (click)="templateParse(tlist)" mat-flat-button
+                                        [disabled]='selectedTemplate.template_id == undefined' color="primary"
                                         class="submit-btn">Continue</button>
                                 </div>
                             </mat-card-footer>

@@ -301,11 +301,11 @@ input[type="text"] {
 
 .custom-grid-tile {
     border: 1px solid #a8a8a8;
-    width: 200px !important;
+    width: 210px !important;
 }
 
 .selected-grid-tile {
-    width: 200px !important;
+    width: 210px !important;
     border-style: dashed;
     border: 1px dashed #00c213;
 }
@@ -366,4 +366,5 @@ input[type="text"] {
     width: 15px;
     height: 15px;
     margin-right: 5px;
+    margin-bottom: 2px;
 }
