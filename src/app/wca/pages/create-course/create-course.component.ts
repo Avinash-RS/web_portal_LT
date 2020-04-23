@@ -200,6 +200,7 @@ export class CreateCourseComponent implements OnInit {
 
 
       if (!this.courseForm.value.name) {
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         this.toast.warning('Course Name is Required !!!');
         return false;
       }
