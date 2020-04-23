@@ -24,7 +24,7 @@
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                    
-                  <mat-panel-title routerLink="/Wca/choosetemplate" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
+                  <mat-panel-title (click)="routeTo()" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
                     Choose a template
                   </mat-panel-title>
                 
@@ -48,7 +48,7 @@
     [cdkDropListConnectedTo]="[todoList]"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box1" *ngFor="let item of done;let i =index" cdkDrag>
+    <div class="example-box1" *ngFor="let item of done;let i = index" cdkDrag>
     <img class="img1" src="{{item.image}}">
     <mat-icon (click)="removenewLink(i)" >delete</mat-icon>
 

@@ -8,7 +8,7 @@
         <div>
           <div class="tempBody">
                 <span class="tempName"> Enter Template Name </span>
-                <mat-form-field style="width:53%;">
+                <mat-form-field style="width:53%;" appearance="outline">
                     <input class="noBcg" maxlength="35" matInput type="text" formControlName="tempName">
                     <mat-error *ngIf="formControls?.tempName?.errors?.required">
                         Template Name Required !!!
