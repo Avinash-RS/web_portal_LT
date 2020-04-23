@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChooseTemplateComponent } from './choose-template.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { ApolloModule } from 'apollo-angular';
+import { RouterModule } from '@angular/router';
+import { HttpLinkModule } from 'apollo-angular-link-http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ChooseTemplateComponent', () => {
   let component: ChooseTemplateComponent;
@@ -8,9 +15,33 @@ describe('ChooseTemplateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChooseTemplateComponent ]
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatCardModule,
+        MatGridListModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatDialogModule,
+        MatTooltipModule,
+        HttpClientModule,
+        ApolloModule,
+        RouterModule.forRoot([]),
+        HttpLinkModule],
+      declarations: [ChooseTemplateComponent],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +53,16 @@ describe('ChooseTemplateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should select template', () => {
+    let template = {
+      _id: "5e99334428ac5638acff9279",
+      template_id: "TMP0001",
+      name: "test1",
+      createdby_id: "001",
+      createdby_name: "test1",
+      created_on: "4/17/2020, 10:09:36 AM"
+    }
+    component.selectTemplate(template);
+  })
 });
