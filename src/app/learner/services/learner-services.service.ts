@@ -27,7 +27,6 @@ export class LearnerServicesService {
   constructor(private Apollo: Apollo, private http: HttpClient, ) { }
 
   login(username, password, is_admin) {
-    console.log('inside services', username, password, is_admin)
     return this.Apollo.query({
       query: login,
       variables: {
@@ -88,7 +87,6 @@ export class LearnerServicesService {
     });
   }
   view_profile(user_id) {
-    console.log('view', user_id)
     return this.Apollo.query({
       query: view_profile,
       variables: {
