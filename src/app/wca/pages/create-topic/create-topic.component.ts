@@ -37,19 +37,26 @@ export class CreateTopicComponent implements OnInit {
     this.active=item
   }
  
-  onSelectFile(fileInput:any,type,index,j=null) {
+  onSelectFile(fileInput:any,item) {
+    console.log(item);
     var imagepath;
     var filePath = fileInput.target.files[0].name;
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-    if(!allowedExtensions.exec(filePath)){
-        this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
-        fileInput.value = '';
-        return false;
-    }else{
-      if (fileInput && fileInput.target && fileInput.target.files[0]) { 
-      }
-    }
+    // var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    // if(!allowedExtensions.exec(filePath)){
+    //     this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
+    //     fileInput.value = '';
+    //     return false;
+    // }else{
+    //   if (fileInput && fileInput.target && fileInput.target.files[0]) { 
+    //   }
+    // }
   }
 
+
+
+
+
+
+  
 
 }

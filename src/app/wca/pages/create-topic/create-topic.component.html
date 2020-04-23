@@ -44,8 +44,8 @@
            </span>
          </div>
  <div class="colView" >
-    <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,'img3',i)">
-    <span (dblclick)="fileInput3.dblclick()"><img class="img1" src="{{item?.image}}"></span> 
+    <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,item)">
+    <span (dblclick)="fileInput3.click()"><img class="img1" src="{{item?.image}}"></span> 
       <span class="padTop">{{item?.name}}</span>
       <span class="padTop1"> <small>content is empty Double Click to edit</small></span>
      <span class="previewAndTime" [class.active]="item?.name==active?.name">
