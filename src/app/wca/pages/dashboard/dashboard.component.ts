@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
-import{WcaService} from '../../services/wca.service'
+import { WcaService } from '../../services/wca.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -12,14 +13,14 @@ import{WcaService} from '../../services/wca.service'
 export class DashboardComponent implements OnInit {
   popularCourses: { img: string; name: string; }[];
 
-  publishedCourses:any;
-  createdCourses:any;
-  draftCourses:any;
+  publishedCourses: any;
+  createdCourses: any;
+  draftCourses: any;
 
   wishlist: any = [];
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;
-  @Input('showWishlist') showWishlist: boolean; 
+  @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
   @Input('showPrice') showPrice: boolean;
@@ -78,17 +79,24 @@ export class DashboardComponent implements OnInit {
     },
     nav: true
   }
- 
-  
 
-  constructor(public service: WcaService) { }
+
+
+  constructor(public service: WcaService, public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
+    this.spinner.show();
 
     this.getPublishedCourses();
     this.getCreatedCourses();
     this.getDraftCourses();
-    
+
+    this.getWindowSize();
+
+
+  }
+  getWindowSize() {
     if (window.innerWidth <= 480)
       this.breakpoint = 1;
     else if (window.innerWidth >= 480 && window.innerWidth <= 768)
@@ -117,28 +125,33 @@ export class DashboardComponent implements OnInit {
 
     this.service.getPublishedCourse().subscribe((data: any) => {
 
-     this.publishedCourses=data.Result;
+      this.publishedCourses = data.Result;
 
-     console.log(this.publishedCourses[0])
-       
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getCreatedCourses() {
 
     this.service.getCreatedCourse().subscribe((data: any) => {
 
-     this.createdCourses=data.Result;
+      this.createdCourses = data.Result;
 
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getDraftCourses() {
 
     this.service.getDraftCourse().subscribe((data: any) => {
 
-     this.draftCourses=data.Result;
+      this.draftCourses = data.Result;
+      this.spinner.hide();
 
+    },err => {
+      this.spinner.hide();
     });
   }
 }

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { environment } from '@env/environment';
 export class WcaService {
 
 url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
+
+bSubject = new BehaviorSubject({}); 
 
   constructor(private http: HttpClient) { }
 
@@ -38,5 +41,5 @@ url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
 
   getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
 
-
+  createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate',arraydata); }
 }

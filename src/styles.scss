@@ -1,14 +1,14 @@
 @import "assets/variable";
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 /* Add application styles & imports to this file! */
-@import '~ngx-bar-rating/themes/br-default-theme.css';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-@import '~bootstrap/scss/bootstrap-reboot';
-@import '~bootstrap/scss/bootstrap-grid';
+@import "~ngx-bar-rating/themes/br-default-theme.css";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
 
 button:disabled:hover {
   cursor: not-allowed;
@@ -62,7 +62,7 @@ button:disabled:hover {
 }
 
 .f_wt_initial {
-  font-weight: initial
+  font-weight: initial;
 }
 
 .f_size_12 {
@@ -207,7 +207,6 @@ button:disabled:hover {
 
 .background_trans {
   background: transparent !important;
- 
 }
 
 .m-l-10 {
@@ -272,7 +271,6 @@ td {
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
- 
 }
 
 .basic-container {
@@ -293,7 +291,7 @@ body {
   content: "\2605";
   color: transparent;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: $color-yellow
+  -webkit-text-stroke-color: $color-yellow;
 }
 
 .example-full-width {
@@ -318,8 +316,8 @@ body {
   margin-top: 50px;
   position: relative;
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   padding: 10px;
   background: $color-white;
   display: flex;
@@ -343,7 +341,6 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
-
 }
 
 .limiter {
@@ -432,7 +429,6 @@ mat-icon {
   justify-content: unset !important;
   margin: 0px 0 0 10px;
   align-items: unset !important;
-
 }
 
 .allow-cr {
@@ -441,4 +437,42 @@ mat-icon {
   background: white !important;
   box-shadow: 0 0 5px #aaaaaa !important;
   font-size: 16px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">" !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #213998 !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #213998 !important;
+}
+
+.reference-file-container {
+  .file-selection .mat-radio-label-content {
+    color: grey !important;
+  }
+  .file-selection {
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: unset !important;
+    }
+    .mat-form-field-flex {
+      background: #b8d0ff !important;
+      border-radius: 5px;
+
+    }
+  }
+}
+
+.save-btn {
+  width: 70px;
+  height: 30px;
+  background-color: #1f3777 !important;
+  /* margin: 20px 0px; */
+  color: white !important;
+  font-size: 14px;
+  padding-bottom: 23px;
 }
