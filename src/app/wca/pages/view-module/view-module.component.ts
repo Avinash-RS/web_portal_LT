@@ -39,5 +39,9 @@ export class ViewModuleComponent implements OnInit {
   
   }
 
+  navViewModule() {
+    this.router.navigate(['./Wca/viewmodule'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+  }
+
 
 }

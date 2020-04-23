@@ -127,8 +127,10 @@ export class DashboardComponent implements OnInit {
 
       this.publishedCourses = data.Result;
 
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getCreatedCourses() {
 
@@ -136,8 +138,10 @@ export class DashboardComponent implements OnInit {
 
       this.createdCourses = data.Result;
 
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getDraftCourses() {
 
@@ -146,6 +150,8 @@ export class DashboardComponent implements OnInit {
       this.draftCourses = data.Result;
       this.spinner.hide();
 
+    },err => {
+      this.spinner.hide();
     });
   }
 }

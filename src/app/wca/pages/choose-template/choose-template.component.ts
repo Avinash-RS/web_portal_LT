@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WcaService } from '../../services/wca.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-choose-template',
@@ -18,7 +19,8 @@ export class ChooseTemplateComponent implements OnInit {
   constructor(
     private APIService: WcaService,
     public router: Router,
-    public route:ActivatedRoute
+    public route:ActivatedRoute,
+    public spinner: NgxSpinnerService
     ) { }
 
   ngOnInit() {
@@ -43,8 +45,12 @@ export class ChooseTemplateComponent implements OnInit {
   }
 
   getTemplates() {
+    this.spinner.show();
     this.APIService.getAllTemplates().subscribe((res: any) => {
       this.templateList = res.Result;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
     })
   }
   
