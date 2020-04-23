@@ -28,16 +28,16 @@
                         <mat-card style="text-align: center;">
                             <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
     
-<div class="row">
-                          <div class="col-md-2">   <img class="img" src="../../../../assets/images/image_upload.svg">
-                        <br><span>Course Name</span>
+                              <div class="row">
+                          <div class="col-md-2">   <img class="img" [src]="queryData?.image ? queryData?.image : '../../../../assets/images/image_upload.svg'">
+                        <br><span>{{queryData?.courseName}}</span>
                         
                         </div>
                           <div class="col-md-3">   
                           
                            
 
-                           <div class="wrapper_1"> <mat-icon  routerLink="/Wca/choosetemplate"
+                           <div class="wrapper_1"> <mat-icon  (click)="navChooseTemp()"
                             >add_circle_outline</mat-icon></div>
                          <div style="margin: -28px 97px 0px 0px">   <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                                 Add Module
@@ -46,9 +46,9 @@
                         </div>
 
                         <div class="col-md-3">   
-                    
+                            <!-- routerLink="/Wca/viewmodule" -->
                             
-                <button class="backgroundcol2" routerLink="/Wca/viewmodule" >
+                <button class="backgroundcol2"  (click)="navViewModule()">
                     
                    <span style="padding: 2px 176px 13px 16px;" >Upload a SCROM Course </span>
 
@@ -86,4 +86,3 @@
 
 
 
-<div><app-footer></app-footer></div>
