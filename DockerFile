@@ -17,7 +17,7 @@ RUN npm i file-saver
 RUN npm i xlsx
 
 COPY . .
-RUN ng serve
+#RUN ng serve
 RUN npm run build
 
 ### STAGE 2: Run ###
