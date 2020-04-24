@@ -434,3 +434,9 @@ mat-icon {
   box-shadow: 0 0 5px #aaaaaa !important;
   font-size: 16px;
 }
+.forgotusername{
+  .mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    overflow: hidden !important;
+  }
+}
+
