@@ -1089,6 +1089,7 @@ export class ProfileComponent implements OnInit {
   showotp: boolean;
   isenable: boolean;
   timeLeft: number = 60;
+  resendtimeLeft: number = 60;
   interval;
   status: string;
   config = {
@@ -1100,10 +1101,14 @@ export class ProfileComponent implements OnInit {
     inputStyles: {
       'width': '50px',
       'height': '50px',
-      'background': '#B8D0FF'
+      'background': '#B8D0FF',
+      // 'margin-top': '24px'
     }
   };
   otp: any;
+  verifybutton: Boolean = false;
+  resendOtp: Boolean = false;
+  sendOtp: Boolean = false;
 
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1420,6 +1425,8 @@ export class ProfileComponent implements OnInit {
 
   otpverification() {
     this.loader.show();
+    this.resendOtp = false;
+    this.sendOtp = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
@@ -1433,6 +1440,7 @@ export class ProfileComponent implements OnInit {
         } else {
           this.timeLeft = 0;
           // this.finish();
+          this.verifybutton = true;
         }
       },1000)
       } else
@@ -1464,19 +1472,22 @@ export class ProfileComponent implements OnInit {
   }
 
   Resendcode() {
+    this.resendOtp = true;
+    this.sendOtp = false;
     this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
         this.showotp = true;
-        // this.interval = setInterval(() => {
-        //   if(this.timeLeft > 0) {
-        //     this.timeLeft--;
-        //   } else {
-        //     this.timeLeft = 0;
-        //     // this.finish();
-        //   }
-        // },1000)
+        this.interval = setInterval(() => {
+          // this.resendtimeLeft = 60;
+          if(this.resendtimeLeft > 0) {
+            this.resendtimeLeft--;
+          } else {
+            this.resendtimeLeft = 0;
+            // this.finish();
+          }
+        },1000)
       }
     })
   }

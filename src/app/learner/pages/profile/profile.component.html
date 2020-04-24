@@ -353,14 +353,21 @@
             <p class="f_wt_500 color_blue float_left">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
               <p class="f_wt_500 color_blue float_left">OTP Code</p>
-              <ng-otp-input [config]="config"
+              <div class="otp">
+                <ng-otp-input [config]="config"
                 formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
               </ng-otp-input>
-              <p>00:{{timeLeft}}</p>
+              </div><br>
+              <div *ngIf="sendOtp">
+                <p>00:{{timeLeft}}</p>
+              </div>
+              <div *ngIf="resendOtp">
+                <p>00:{{resendtimeLeft}}</p>
+              </div>
               <br><br>
             </div>
             <div *ngIf="showotp">
-              <button class="popupbtns" (click)="otpverify()">Verify</button>
+              <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
                 class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend
