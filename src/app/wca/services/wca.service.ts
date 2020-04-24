@@ -1,10 +1,9 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
-
 import {remove_doc_ref,getallrefdoc} from "./operations/wca_query";
 
 //import {} from "./operations/learner_mutation"
@@ -49,6 +48,9 @@ bSubject = new BehaviorSubject({});
   getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
 
   createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate',arraydata); }
+
+  refDocUpload(fromdata){ return this.http.post(environment.apiUrl+ 'wca/refdocupload',fromdata)}
+
   remove_doc_ref(id) {
     return this.Apollo.query({
       query: remove_doc_ref,
@@ -58,10 +60,11 @@ bSubject = new BehaviorSubject({});
       }
     });
   }
-  getallrefdoc(){
+  getallrefdoc(pagenumber){
     return this.Apollo.query({
       query: getallrefdoc,
       variables: {
+        pagenumber:pagenumber
 
       }
     });

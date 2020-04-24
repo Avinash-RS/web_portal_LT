@@ -9,16 +9,19 @@ export const remove_doc_ref = gql`
   }`;
 
   export const getallrefdoc = gql`
-  query getallrefdoc{
-    getallrefdoc {
-        message{
-            _id
-          type
-          type_name
-          path
-          doc_type
-        }
-          success
+  query getallrefdoc($pagenumber:String){
+    getallrefdoc(pagenumber:$pagenumber) {
+      data{
+      module_id
+    _id
+      type
+      type_name
+      path
+      doc_type
+      created_on
+    }
+    success
+    message
         }
     
   }`;
