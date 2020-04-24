@@ -1109,6 +1109,8 @@ export class ProfileComponent implements OnInit {
   verifybutton: Boolean = false;
   resendOtp: Boolean = false;
   sendOtp: Boolean = false;
+  levelCode: any;
+  check: any;
 
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1323,7 +1325,9 @@ export class ProfileComponent implements OnInit {
   //Country List
   getAllcountry() {
     this.service.get_country_details().subscribe(countryDetails => {
-      this.countryValue = countryDetails.data['get_country_details'].data;
+      this.countryValue = countryDetails.data['get_country_details'].data.filter(cnt =>
+        cnt.countryname === 'India'
+        );
     })
   }
   //State List
@@ -1346,6 +1350,13 @@ export class ProfileComponent implements OnInit {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
     })
+  }
+
+  
+  checkLevel(event,level){
+    if(event.source.selected) {
+      this.check = level.level_code;
+    }
   }
 
   getBoardsUniv() {
