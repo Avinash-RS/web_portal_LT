@@ -165,8 +165,14 @@ savedTemplates(type) {
 }
   
 removenewLink(i) {
-   this.done.splice(i);
+   this.done.splice(i,1);
 }
  
+
+routeTo() {
+  this.router.navigate(['./Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+
+}
+
 
 }
