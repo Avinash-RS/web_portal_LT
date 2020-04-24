@@ -1,9 +1,9 @@
-<div class="limiter">
+<div *ngIf="!isLinkActive" class="limiter">
   <div class="container-reg100 p-t-77">
     <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
       <h1 class="head">Enter the mobile number</h1>
       <form [formGroup]="otpForm">
-        <label>Mobile number</label><span style="color: red;"> *</span>
+        <label>Mobile number</label><span class="star"> *</span>
         <div class="form-group">
         <input type="text"  formControlName="mobile" placeholder="+91"   maxlength="10" minlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control" 
           [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
@@ -23,6 +23,7 @@
           [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
           formControlName="otp" min="0" max="9" (onInputChange)="onOtpChange($event)"  pattern="[0-9]{1}">
           </ng-otp-input>
+          <p>00:{{timeLeft}}</p> 
           <br><br>
         </div>
         <!-- *ngIf="showotp" -->
@@ -51,8 +52,16 @@
           <button class="btn" [disabled]=""  (click)="otpverify()">Verify</button>
         </div><br>
         <!--  -->
-        <div  *ngIf="showotp" class="account">Didn't get OTP?<b (click)="Resendcode()">Resend OTP</b></div>
+        <div class="account">Didn't get OTP?<b (click)="Resendcode()">&nbsp;&nbsp;Resend OTP</b></div>
       </form>
     </div>
   </div>
+</div>
+
+
+<div *ngIf="isLinkActive">
+  <br>
+  <br>
+  <img src="../../../../assets/images/forbidden.jpg">
+  <h1>This Link has already expired and email is registered..</h1>
 </div>

@@ -25,12 +25,16 @@ export class OtpComponent implements OnInit {
   otpForm: FormGroup;
   systemip:String;
   otp: any;
+  isLinkActive: boolean = false;
   showotp: boolean = false;
   isenable:boolean = true;
   showverify: boolean = false;
   email:any;
   useridData:any;
   userid:any;
+  timeLeft: number = 60;
+  interval;
+  status: string;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -81,6 +85,15 @@ get f() { return this.otpForm.controls; }
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.isenable = false;
             this.showotp = true;
+            //Timer
+              this.interval = setInterval(() => {
+          if(this.timeLeft > 0) {
+            this.timeLeft--;
+          } else {
+            this.timeLeft = 0;
+            // this.finish();
+          }
+        },1000)
           } 
       })
   
@@ -122,10 +135,9 @@ get f() { return this.otpForm.controls; }
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
-        this.userid =this.useridData.get_user_detail.message[0].user_id
-        
-      })
-      
+        this.userid =this.useridData.get_user_detail.message[0].user_id; 
+        this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
+      })  
     } catch (error) {
         throw error 
     }

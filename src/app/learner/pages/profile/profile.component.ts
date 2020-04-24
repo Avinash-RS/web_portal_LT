@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -10,6 +10,7 @@ import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -1102,6 +1103,7 @@ export class ProfileComponent implements OnInit {
       'background': '#B8D0FF'
     }
   };
+  otp: any;
 
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1181,6 +1183,9 @@ export class ProfileComponent implements OnInit {
       return this.otpForm.controls;
     else if (this.passwordForm)
       return this.passwordForm.controls;
+  }
+  edit(){
+    this.cannotEdit = false;
   }
 
   getprofileDetails(userid) {
@@ -1439,11 +1444,12 @@ export class ProfileComponent implements OnInit {
 
   onOtpChange(otp) {
     // this.otpForm.value.otp = otp;
+    this.otp = otp;
     console.log(otp)
   }
 
   otpverify() {
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otpForm.value.otp).subscribe(data => {
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.closedialogbox();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
@@ -1465,6 +1471,14 @@ export class ProfileComponent implements OnInit {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
         this.showotp = true;
+        // this.interval = setInterval(() => {
+        //   if(this.timeLeft > 0) {
+        //     this.timeLeft--;
+        //   } else {
+        //     this.timeLeft = 0;
+        //     // this.finish();
+        //   }
+        // },1000)
       }
     })
   }

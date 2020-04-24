@@ -1,0 +1,40 @@
+
+<div><app-wca></app-wca></div>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+    </ol>
+</nav>
+
+
+  
+
+
+<div class="container wrap-body">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            
+                        </mat-panel-title>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+    
+
+                            </mat-grid-list>
+                        </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+<div><app-footer></app-footer></div>

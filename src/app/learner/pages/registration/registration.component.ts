@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '@core/globals'; 
+import * as myGlobals from '@core/globals';
+import { TermsconditionsComponent } from '../termsconditions/termsconditions.component';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -17,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   userDetails: any;
   platform: string;
   is_staff: boolean;
+  fullname: any;
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
@@ -25,6 +28,7 @@ export class RegistrationComponent implements OnInit {
       // private loader : NgxSpinnerService,
       // private cookieService: CookieService,
       public service : LearnerServicesService,
+      public dialog: MatDialog
   ) {
   }
 
@@ -42,7 +46,8 @@ export class RegistrationComponent implements OnInit {
 
   Submit() {
     this.loader.show();
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.fullname,this.registerForm.value.termsandconditions)
+    this.fullname=this.registerForm.value.fullname.trim();
+   this.service.user_registration(this.registerForm.value.email,this.fullname,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           if (data.data['user_registration']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration'].message,null)
@@ -66,4 +71,12 @@ export class RegistrationComponent implements OnInit {
   signIn(){
     
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TermsconditionsComponent, {
+      width: '550px',
+      height: '450px',
+      data: {component: TermsconditionsComponent}
+    });
+  }
+
 }

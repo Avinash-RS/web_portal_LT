@@ -12,7 +12,9 @@ import { NgxMaskModule } from 'ngx-mask'
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 //local
+import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -64,6 +66,7 @@ const routes: Routes = [
     ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
+    MaskingPipePipe
     
   ],
 

@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
         this.userDetailes = null;
-        this.router.navigate(['/Learner/login'])
+        this.router.navigate(['/Learner'])
       }
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)

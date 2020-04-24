@@ -73,11 +73,9 @@ describe('RegistrationComponent', () => {
 
 it('submitting a form emits a user', () => {
   expect(component.registerForm.valid).toBeFalsy();
-  component.registerForm.controls.fullname.setValue("ankit");
-  component.registerForm.controls.email.setValue("test@test.com");
+  component.registerForm.controls['fullname'].setValue("test");
+  component.registerForm.controls['email'].setValue("test@test.com");
   expect(component.registerForm.valid).toBeTruthy();
-  // Now we can check to make sure the emitted value is correct
-  // expect(component.registerForm.controls.fullname).toBe("Ankit");
-  // expect(component.registerForm.controls.email).toBe("test@test.com");
+  component.Submit();
 });
 });

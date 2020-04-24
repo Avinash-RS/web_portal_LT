@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit , Inject} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({
   selector: 'app-termsconditions',
   templateUrl: './termsconditions.component.html',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsconditionsComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<TermsconditionsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+  //   this.dialogRef.keydownEvents().subscribe(event => {
+  //     if (event.key === "Escape") {
+  //         this.onCancel();
+  //     }
+  // });
+  }
+//   onCancel(): void {
+//     this.data.cancel = true;
+//     this.dialogRef.close(this.data);
+// }
+  closedialogbox() {
+    this.dialog.closeAll();
   }
 
 }

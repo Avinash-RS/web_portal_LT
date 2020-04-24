@@ -361,10 +361,10 @@ label {
   margin-top: 0px;
 }
 
-.head{
-  font-weight: lighter !important;
-  margin-top: 9%;
-}
+// .head{
+//   font-weight: lighter !important;
+//   margin-top: 9%;
+// }
 
 .invalid-feedback {
   font-size: 90%;
@@ -397,6 +397,23 @@ div.account{
 
 .p-b-10px {
   padding-bottom: 10px;
+}
+.head{
+  font-weight: lighter !important;
+  // margin-top: 9%;
+}
+
+.title{
+
+  font-size: 18px;
+  font-weight: 430;
+}
+div.account{
+  color: $color-blue;
+  word-break: break-all !important;
+  text-align: center !important;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 .m-l-10px {
@@ -444,6 +461,11 @@ div.account{
   width: 80%;
 }
 
+.mat-dialog-content{
+  overflow: hidden !important;
+  max-height: 100% !important;
+  // resize: both;
+}
 .percent {
   margin-left: 38%;
 }
