@@ -3,8 +3,9 @@ import { Apollo } from "apollo-angular";
 import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user,get_all_learner_detail,
 get_user_session_detail } from "./operations/admin_query";
 import { user_registration } from "./operations/admin_mutation"
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -83,7 +84,10 @@ export class AdminServicesService {
   }
 
   bulkuserupload(fb) {
-    return this.http.post<any[]>(environment.apiUrlImg + `upload/excel`, fb);
+     const httpOptions = {
+      headers: new HttpHeaders({ 'Authorization' : 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+    };
+     return this.http.post<any[]>(environment.apiUrlImg + 'bulkuserupload' , fb, httpOptions );
   }
 
   getUserSession(user_id) {

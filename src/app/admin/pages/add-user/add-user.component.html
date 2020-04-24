@@ -74,7 +74,7 @@
         <img  src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64" >
         
         <h3>Drag and drop file here</h3>
-        <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs )</h4>
+        <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
         <h3>or</h3>
         <label for="fileDropRef">Browse for file</label>
       </div>
@@ -106,8 +106,6 @@
       </div>
       
       <button type="button"  *ngIf="selectedfile " (click)="saveexcel(group)" class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
-      
-
   </mat-tab>
 
 </mat-tab-group>
