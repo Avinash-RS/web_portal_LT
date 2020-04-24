@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Ppt2Component } from './ppt2/ppt2.component';
+import { Ppt1Component } from './ppt1/ppt1.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,15 @@ const routes: Routes = [
   {
     path:'Wca',
     loadChildren: './wca/wca.module#WcaModule'
+  },
+  {
+    path:'ppt1',
+    component: Ppt1Component,
+  }
+  ,
+  {
+    path:'ppt2',
+    component: Ppt2Component
   }
 
 ];
