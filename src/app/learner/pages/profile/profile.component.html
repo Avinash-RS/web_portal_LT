@@ -352,6 +352,7 @@
               <ng-otp-input [config]="config" [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
                 formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
               </ng-otp-input>
+              <p>00:{{timeLeft}}</p>
               <br><br>
             </div>
             <div *ngIf="showotp">
@@ -439,7 +440,7 @@
                 <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as password</div>
               </div>
             </div>
-          </form><br>
+          </form>
         </mat-dialog-content><br>
         <mat-dialog-actions>
           <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">

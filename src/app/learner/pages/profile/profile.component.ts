@@ -1087,6 +1087,9 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
+  timeLeft: number = 60;
+  interval;
+  status: string;
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -1418,6 +1421,15 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         this.isenable = false;
         this.showotp = true;
+         //Timer
+       this.interval = setInterval(() => {
+        if(this.timeLeft > 0) {
+          this.timeLeft--;
+        } else {
+          this.timeLeft = 0;
+          // this.finish();
+        }
+      },1000)
       } else
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
     })
