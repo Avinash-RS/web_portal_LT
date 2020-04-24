@@ -17,6 +17,9 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
+import { Ppt2Component } from './ppt2/ppt2.component';
+import { Ppt1Component } from './ppt1/ppt1.component';
+
 
 
 
@@ -24,7 +27,11 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    DialogComponent
+    DialogComponent,
+
+    Ppt2Component,
+
+    Ppt1Component
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
