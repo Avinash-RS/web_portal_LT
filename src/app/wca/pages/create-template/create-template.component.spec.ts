@@ -98,8 +98,7 @@ describe('CreateTemplateComponent', () => {
   it('Check route To', () => {
     component.queryData = {
       viewingModule: 'Test module',
-      courseName: "Test name",
-      image: "img.jpg"
+      courseName: "Test name"
     }
     component.routeTo();
 
