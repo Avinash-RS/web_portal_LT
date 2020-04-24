@@ -17,7 +17,7 @@
               <!-- ////// Info about you//////// -->
               <div class="form-group">
                 <label>Information about you</label>
-                <textarea style="resize: none;" [disabled]="cannotEdit" rows="3"
+                <textarea style="resize: none;" [attr.disabled]="cannotEdit" rows="3"
                   class="inputs border-radius-5 color_blue background_trans width_100"
                   [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" placeholder="1000 characters"
                   formControlName="about_you" name="about_you"></textarea>
@@ -196,15 +196,16 @@
                   </mat-option>
                 </mat-select>
                 <input type="tel" mask="0000" class="inputs border-radius-5 color_blue background_trans width_80"
-                  placeholder="Year of Passing" [disabled]='cannotEdit' formControlName="year_of_passing">
+                  placeholder="Year of Passing" [attr.disabled]='cannotEdit' formControlName="year_of_passing">
               </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <input type="tel" mask="00" suffix="%"
                   class="inputs border-radius-5 width_50 color_blue background_trans m-l-10px" placeholder="Percentage"
-                  [disabled]='cannotEdit' formControlName="percentage">
+                  [attr.disabled]='cannotEdit' formControlName="percentage">
                 <mat-icon (click)="addQualification()"
-                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15" class="p-5px">add_circle_outline
+                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
+                  class="p-5px">add_circle_outline
                 </mat-icon>
                 <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
                   (click)="removeQualification(in)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon>
@@ -218,13 +219,12 @@
             *ngFor="let certificate of certificate.controls; let i=index">
             <div class="col-md-2 col-sm-4 col-8 display_flex">
               <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                placeholder="Certificate Link" [disabled]="cannotEdit" formControlName="{{i}}">
+                placeholder="Certificate Link" [attr.disabled]="cannotEdit" formControlName="{{i}}">
               <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15"
-                class="p-5px">add_circle_outline
+              profileForm.value.certificate.length < 15" class="p-5px">add_circle_outline
               </mat-icon>
               <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-                class="p-5px" [disabled]='cannotEdit'>delete</mat-icon>
+                class="p-5px">delete</mat-icon>
             </div>
           </div>
           <br>
@@ -233,7 +233,7 @@
             *ngFor="let social of social_media.controls; let ind=index">
             <div class="col-md-2 col-sm-4 col-8 display_flex" [formGroupName]="ind">
               <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                placeholder="Social Media Link" [disabled]='cannotEdit' formControlName="link">
+                placeholder="Social Media Link" [attr.disabled]='cannotEdit' formControlName="link">
               <i class="fa fa-linkedin-square linkedin m-l-10px" aria-hidden="true"></i>
               <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
               </mat-icon>
@@ -250,6 +250,7 @@
                   [disabled]="cannotEdit"
                   [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
                   placeholder="Total Experience" formControlName="total_experience">
+                <!-- {{f.professional.controls.total_experience.value }},{{f.professional.controls.total_experience.value > 70}} -->
                 <div class="invalid-feedback" *ngIf="f.professional.controls.total_experience.touched && 
                   f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
                 </div>
@@ -257,6 +258,9 @@
                   *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors"
                   class="invalid-feedback">
                   <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
+                  </div>
+                  <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less
+                    than 70
                   </div>
                 </div>
               </div>
@@ -280,7 +284,7 @@
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
                   [disabled]="cannotEdit" placeholder="Job role" formControlName="job_role"
                   [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
-                  <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
+                <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
                   class="invalid-feedback">
                   <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
                   </div>
@@ -298,7 +302,7 @@
           <div class="row" *ngIf="!cannotEdit">
             <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
               (click)="updateProfile()">Submit</button>
-              <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
+            <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
               (click)="updateProfile()">Submit</button> -->
           </div>
         </div>
@@ -342,7 +346,7 @@
             <div class="form-group">
               <label class="f_size_20 f_wt_400">Enter new mobile no</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
-                mask="0000000000" class="form-control" [ngClass]="{ 'is-invalid':  c.mobile.errors}" required />
+                mask="0000000000" class="form-control" [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}" required />
               <div *ngIf="c.mobile.errors" class="invalid-feedback">
                 <div *ngIf="c.mobile.errors.required">Mobile Number is required</div>
                 <div *ngIf="c.mobile.errors.pattern">Mobile Number is invalid</div>
