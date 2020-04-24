@@ -102,9 +102,8 @@ export class AddUserComponent implements OnInit {
   downloadsampleexceltemplate() {
     const json: any = [{
       Full_Name: null,
-      Email: null,
-      Institute_Name: null
-    }];
+      Email: null
+        }];
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
@@ -131,9 +130,15 @@ export class AddUserComponent implements OnInit {
    */
   bulkuserupload(event) {
     this.selectedfile = '';
-    const excelheaders = ['Full_Name', 'Email', 'Institute_Name'];
+    const excelheaders = ['Full_Name', 'Email'];
     const ext = event[0].name.split('.').pop();
     if (event.length === 1 && ext === 'csv' || ext === 'xlsx' || ext === 'xls') {
+      const File = event[0];
+      const str = event[0].name.split('.');
+      Object.defineProperty(File, 'name', {
+        writable: true,
+        value: str[0] + '.csv'
+      });
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
         /* read workbook */
@@ -154,7 +159,6 @@ export class AddUserComponent implements OnInit {
         }
       };
       reader.readAsBinaryString(event[0]);
-      console.log(event[0])
     } else {
       this.alert.openAlert('Warning !', 'Invalid File Type');
     }
@@ -169,23 +173,27 @@ export class AddUserComponent implements OnInit {
     if (this.selectedfile && group) {
       const exceldata: any = [];
       this.exceljson.forEach(element => {
-        exceldata.push({
-          full_name: element.Full_Name, email: element.Email, term_condition: 'true', admin: this.adminDetails._id,
-          group_id: group._id,
-          group_name: group.group_name
-        });
+        exceldata.push({full_name: element.Full_Name , email: element.Email, term_condition : 'true', admin: this.adminDetails._id,
+         group_id: group._id,
+        group_name: group.group_name });
       });
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exceldata);
       const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
       const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([excelBuffer], {
-        type: EXCEL_TYPE
+        type: EXCEL_TYPE,
       });
       const fb = new FormData();
-      fb.append('excel', data, this.selectedfile.name);
-      this.service.bulkuserupload(fb).subscribe(result => {
-        this.selectedfile = '';
+      fb.append('csv', data, this.selectedfile.name);
+      this.service.bulkuserupload(fb).subscribe((result: any) => {
+        console.log(result);
+        if (result.success === true) {
+          this.alert.openAlert('Success !', 'Uploaded Successfully');
+          this.selectedfile = '';
+        } else {
+          this.alert.openAlert('Warning !', result.message);
+        }
       });
     } else {
       this.alert.openAlert('Warning !', 'Please Select Group');

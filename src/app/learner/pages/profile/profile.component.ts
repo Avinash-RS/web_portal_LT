@@ -534,10 +534,10 @@ export class ProfileComponent implements OnInit  {
       //         this.certificate.push(iterator)
       //       } 
       var jsonData = {
-        user_id: this.currentUser.user_id,
-        gender: this.profileDetails.gender,
         year_of_birth: "05-08-1998",
         profile_img: localStorage.getItem('user_img'),
+        user_id: this.currentUser.user_id,
+        gender: this.profileDetails.gender,
         is_student_or_professional: this.profileDetails.is_student_or_professional,
         languages_known: language,
         country: country,

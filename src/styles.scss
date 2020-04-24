@@ -50,7 +50,7 @@ button:disabled:hover {
 }
 
 .f_wt_400 {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .f_wt_500 {
@@ -185,6 +185,9 @@ button:disabled:hover {
   position: absolute !important;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
 .float_right {
   float: right;
   text-align: right;
