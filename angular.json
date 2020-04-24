@@ -151,5 +151,8 @@
       }
     }
   },
-  "defaultProject": "lxpfrontend"
+  "defaultProject": "lxpfrontend",
+  "cli": {
+    "analytics": false
+  }
 }
