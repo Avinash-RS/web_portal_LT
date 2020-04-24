@@ -353,7 +353,7 @@
             <p class="f_wt_500 color_blue float_left">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
               <p class="f_wt_500 color_blue float_left">OTP Code</p>
-              <ng-otp-input [config]="config" [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
+              <ng-otp-input [config]="config"
                 formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
               </ng-otp-input>
               <p>00:{{timeLeft}}</p>

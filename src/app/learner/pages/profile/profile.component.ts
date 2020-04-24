@@ -1103,6 +1103,7 @@ export class ProfileComponent implements OnInit {
       'background': '#B8D0FF'
     }
   };
+  otp: any;
 
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1441,11 +1442,12 @@ export class ProfileComponent implements OnInit {
 
   onOtpChange(otp) {
     // this.otpForm.value.otp = otp;
+    this.otp = otp;
     console.log(otp)
   }
 
   otpverify() {
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otpForm.value.otp).subscribe(data => {
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.closedialogbox();
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
