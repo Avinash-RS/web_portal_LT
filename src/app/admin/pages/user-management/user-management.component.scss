@@ -40,12 +40,19 @@ mat-header-cell {
   color: #3c3c3c;
 }
 
+::ng-deep .mat-tab-label {
+  width: 50% !important;
+  font-weight: 600;
+  font-size: medium;
+}
 
-::ng-deep .cdk-overlay-pane {
+::ng-deep .dialogPopup .cdk-overlay-pane {
   width: 65% !important;
   max-width: 65% !important;
 }
-
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
 .avatar {
   width: 20%;
   border-radius: 50%;
