@@ -62,13 +62,13 @@ describe('CreateTemplateComponent', () => {
     expect(component.queryData).toBe(undefined);
   })
 
-  it('Clears the data',()=>{
+  it('Check Reset List',()=>{
     component.resetList();
     expect(component.items2.length).toBe(0);
     debugger;
   })
 
-  it('Cannot Drop items in module',()=>{
+  it('Check Drop Else',()=>{
     var event;
     event = {
       previousContainer : 1,
@@ -79,7 +79,7 @@ describe('CreateTemplateComponent', () => {
     debugger;
   })
 
-  xit('Drop items in module',()=>{
+  xit('Check Drop If',()=>{
     var event;
     event = {
       previousContainer : 2,
@@ -90,11 +90,19 @@ describe('CreateTemplateComponent', () => {
     debugger;
   })
 
-  fit('Delete a Data',()=>{
+  it('Check Remove New Link',()=>{
     component.removenewLink(1)
     expect(component.items2.length).toBe(0);
   })
 
-    
+  it('Check route To', () => {
+    component.queryData = {
+      viewingModule: 'Test module',
+      courseName: "Test name",
+      image: "img.jpg"
+    }
+    component.routeTo();
+
+  })  
   
 });
