@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { WcaService } from '@wca/services/wca.service';
+import { WcaService } from '../../services/wca.service';
 //import { LearnerServicesService } from '@wc';
 @Component({
   selector: 'app-reference-file',
@@ -29,7 +29,7 @@ export class ReferenceFileComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public service: WcaService) { 
-    this.getAllRefDoc()
+    // this.getAllRefDoc()
   }
 
   ngOnInit() {

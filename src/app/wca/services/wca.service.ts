@@ -59,9 +59,11 @@ bSubject = new BehaviorSubject({});
     });
   }
   getallrefdoc(){
-
     return this.Apollo.query({
       query: getallrefdoc,
+      variables: {
+
+      }
     });
   }
 }
