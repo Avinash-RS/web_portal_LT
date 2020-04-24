@@ -24,7 +24,7 @@
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                    
-                  <mat-panel-title routerLink="/Wca/choosetemplate" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
+                  <mat-panel-title (click)="routeTo()" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
                     Choose a template
                   </mat-panel-title>
                 
@@ -48,20 +48,19 @@
     [cdkDropListConnectedTo]="[todoList]"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box1" *ngFor="let item of done" cdkDrag>
+    <div class="example-box1" *ngFor="let item of done;let i = index" cdkDrag>
     <img class="img1" src="{{item.image}}">
-    <mat-icon (click)="removenewLink(in)" >delete</mat-icon>
+    <mat-icon (click)="removenewLink(i)" >delete</mat-icon>
 
   
   </div>
   </div>
 
-                              <div>
+                              <div class="alnCenter">
+                                <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template & continue</button>
+                                <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
                                 <button class="backgroundcol1" routerLink="" >Cancel</button>
-                                <button class="backgroundcol1" routerLink="/Wca/addtopic" >Continue without saving</button>
-                                <button class="backgroundcol2" routerLink="/Wca/addtopic">Save template & continue</button>
-
-
+                                <!-- /Wca/addtopic -->
                                   
                                 </div>
                             
@@ -87,11 +86,11 @@
                            
 
                             
-                            <div class="example-box" *ngFor="let item of todo" cdkDrag>
+                            <div class="example-box" *ngFor="let i of todo" cdkDrag>
                            
-                              <img class="img2" src="{{item.image}}">
+                              <img class="img2" src="{{i.image}}">
                              
-                              {{item.name}}
+                              {{i.name}}
 
 
 
@@ -113,4 +112,3 @@
 
 
 
-<div><app-footer></app-footer></div>

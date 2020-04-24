@@ -1,18 +1,19 @@
 <vg-player style="height: 50px;">
   <vg-controls>
+    <vg-buffering></vg-buffering>
       <vg-play-pause></vg-play-pause>
-      <!-- <vg-playback-button></vg-playback-button> -->
-
+     
+      <button class="time" mat-raised-button matTooltip="Time Elapsed">
       <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
+</button>
       <vg-scrub-bar>
           <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
           <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
-
-      <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+      <button class="time" mat-raised-button matTooltip="Total Time">
+      <!-- <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
       <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
+</button>
       <vg-mute></vg-mute>
       <vg-volume></vg-volume>
   </vg-controls>

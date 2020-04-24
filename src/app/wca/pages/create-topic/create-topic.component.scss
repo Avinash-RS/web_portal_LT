@@ -58,9 +58,6 @@
     vertical-align: middle;
     width: 57px;
     border-color: #d4dcea;
-    margin: 2px -187px 20px 395px;
-    float: left;
-    padding: -39px 28px 4px 11px;
 }
 
 .img2{
@@ -80,7 +77,7 @@
     fill: currentColor;
     height: 24px;
     width: 24px;
-    margin: -12px 12px 3px 631px;
+    // margin: -12px 12px 3px 631px;
 }
 
 
@@ -375,18 +372,19 @@ input[type=text]
   padding: 18px 11px;
     color: rgb(210, 216, 230);
     display: flex;
-    flex-direction: inherit;
+    flex-direction: column;
     align-items: left;
     justify-content: left;
     box-sizing: border-box;
-    cursor: move;
+    cursor: pointer;
     background: white;
     font-size: 14px;
     margin: 0px 0px 9px 0px;
     border-style: inherit;
     border-width: 1px
-
+   
 }
+
   
   .cdk-drag-preview {
     box-sizing: border-box;
@@ -408,7 +406,94 @@ input[type=text]
     border: none;
   }
   
+.example-spacer {
+    flex: 1 1 auto;
+  }
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
   
+
+  .bcgBorder{
+    border: 3px solid;
+}
+
+
+.colView{
+display: flex;
+flex-direction: column;
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: -webkit-fill-available;
+    padding-bottom: 21px;
+}
+
+.padTop{
+    padding-top: 4px;
+    color: $color-blue;
+}
+.padTop1{
+    padding-top: 4px;
+    color: $color-darkGrey;
+}
+
+.penSize{
+    font-size: 13px;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none !important;
+}
+
+
+
+
+.clrLabel{
+    color: $color-blue !important;
+    font-weight: 500;
+    font-size: larger;
+}
+
+.dspFlx{
+display: flex;
+padding-top: 8px;
+padding-left: 15px;
+}
+
+.restictWidth{
+width: 113px;
+}
+
+.matWidth{
+    width: 100%;
+}
+
+.clickBcg.active{
+   background:  $color-field;
+   border:none
+}
+.spanTime{
+    color: $color-darkGrey;
+}
+.btnprev{
+    border-radius: 40px;
+    background:  $color-blue;
+    color: white;
+    outline: none;
+    font-size: smaller;
+    padding: 0px;
+}
+.previewAndTime{
+ display: none;
+}
+
+.previewAndTime.active{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+.matcardTime{
+    height: 1px;
+    padding: 2px 5px 19px 1px;
+}

@@ -1,3 +1,5 @@
+let jsonDataKnowledge={}
+//import { LearnerServicesService } from '../../../app/learner/services/learner-services.service';
 /*global window, alert, console, SCOBotUtil, debug, scorm, SCOBot_API_1484_11 */
 /*jslint devel: true, browser: true */
 /**
@@ -48,6 +50,7 @@
  */
 function SCOBotBase(options) {
     // Constructor ////////////
+   // console.log('rajesh.........................................................',options)
     "use strict";
     // Please edit run time options or override them when you instantiate this object.
     var Utl      = SCOBotUtil,
@@ -122,6 +125,7 @@ function SCOBotBase(options) {
      * @param lvl {Number} 1=Error, 2=Warning, 3=Log, 4=Info
      */
     function debug(msg, lvl) {
+        // console.log(msg,lvl,'msg and lvl')
         if (settings.debug) {// default is false
             if (!window.console) {// IE 7 probably 6 was throwing a error if 'console undefined'
                 window.console = {};
@@ -140,6 +144,8 @@ function SCOBotBase(options) {
                 break;
             case 4:
                 console.info(msg);
+                window.localStorage.setItem('course_status',msg);
+                startResumeEvent(msg)
                 break;
             case 3:
                 console.log(msg);
@@ -162,6 +168,7 @@ function SCOBotBase(options) {
      * @param win {object} Window level
      */
     function findSCORM2004(win) {
+        //console.log('20004.................................................................')
         var attempts = 0,
             limit = 500;
         while ((!win.API_1484_11) && (win.parent) && (win.parent !== win) && (attempts <= limit)) {
@@ -699,7 +706,7 @@ function SCOBotBase(options) {
                 case "cmi.credit":
                     nn = "cmi.core.credit";
                     break;
-                case "cmi.location":
+                case "cmi.location1":
                     nn = "cmi.core.lesson_location";
                     break;
                 case "cmi.entry":
@@ -911,7 +918,7 @@ function SCOBotBase(options) {
                         }
                         nn = "cmi.comments"; // may need to add option to append or delimit
                         break;
-                    case "cmi.location":
+                    case "cmi.location1":
                         if (v.length > 255) {
                             debug(settings.prefix + ": Warning, your bookmark is over the limit!!", 2);
                         }
@@ -1064,7 +1071,7 @@ function SCOBotBase(options) {
                 API.mode = API.mode === "" ? lms.GetValue('cmi.mode') : API.mode;
                 //if (API.mode === "normal") { // Whether or not an LMS persists any of the data sent by the SCO, while in a mode of review or browse, is outside the scope of the SCORM.
                     switch (n) {
-                    case "cmi.location":
+                    case "cmi.location1":
                         if (v.length > 1000) {
                             debug(settings.prefix + ": Warning, your bookmark is over the limit!!", 2);
                         }
@@ -1555,4 +1562,101 @@ function SCOBotBase(options) {
     this.debug = debug;
     // Self Initialize, note you could make this call outside, but later I decided to do it by default.
     this.init();
+}
+function startResumeEvent(params){
+    console.log(params)
+     //console.log('pause and location',params)
+     var rec_status,jsonData
+     user_id=window.localStorage.getItem('scorm_user_id');
+     course_id=window.localStorage.getItem('course_id');
+     str=params
+     var strSplit = str.split(' ');
+     /////knowledge material
+     let score_raw,score_min,score_max,score_scaled,score_success_status
+     const scoreRaw = strSplit.find(element => element === 'cmi.score.raw');
+     if(scoreRaw){
+         score_raw=strSplit[4]
+         jsonDataKnowledge.score_raw=score_raw
+     }
+     const scoreMin = strSplit.find(element => element === 'cmi.score.min');
+     if(scoreMin){
+         score_min=strSplit[4]
+         jsonDataKnowledge.score_min=score_min
+     }
+     const scoreMax = strSplit.find(element => element === 'cmi.score.max');
+     if(scoreMax){
+         score_max=strSplit[4]
+         jsonDataKnowledge.score_max=score_max
+     }
+     const scoreScaled = strSplit.find(element => element === 'cmi.score.scaled');
+     if(scoreScaled){
+         score_scaled=strSplit[4]
+         jsonDataKnowledge.score_scaled=score_scaled
+     }
+     const scoreSuccessStatus = strSplit.find(element => element === 'cmi.success_status');
+     if(scoreSuccessStatus){
+         score_success_status=strSplit[4]
+         jsonDataKnowledge.score_success_status=score_success_status
+     }
+     if(jsonDataKnowledge.score_raw&&jsonDataKnowledge.score_min&&jsonDataKnowledge.score_max&&jsonDataKnowledge.score_scaled&&jsonDataKnowledge.score_success_status){
+         console.log(jsonDataKnowledge,'lllllllllllllllllllllllll')
+     }
+     /////end of knowledge material
+     const foundInCom = strSplit.find(element => element === 'incomplete');
+     const foundCom = strSplit.find(element => element === 'completed');
+     const foundPause = strSplit.find(element => element === 'suspend');
+     if(foundCom){
+         rec_status=foundCom
+          jsonData={
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
+             }
+          
+             
+         }
+     }
+     if(foundInCom){
+         rec_status=foundInCom
+         jsonData={
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
+             }
+         }
+     }
+     if(foundPause){
+         rec_status=foundPause
+         jsonData={
+             user_id:user_id,
+             course_dtl:{
+                 location:'',
+                 status:rec_status,
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
+             }
+         }
+     }
+     if(rec_status){
+        window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
+        getcourse(jsonData).then(data=> console.log(data,"data course"))
+    }
+
+    async function getcourse(jsonData) {
+       const response = await fetch('http://40.76.47.212:3000/course/coursestatus', {
+        method: 'POST',
+        body:JSON.stringify(jsonData), // string or object
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const myJson = await response.json(); //extract JSON from the http response
+      return myJson;
+    }
 }

@@ -232,7 +232,7 @@ export const view_profile = gql`
           updated_on
   
           updated_by
-          qualification {                           
+          qualification {   
 
             qualification
   
@@ -462,6 +462,20 @@ success
   }
 }
 `;
+
+export const delete_qualification = gql`
+ mutation delete_qualification($user_id: String,$qualification: String){
+  delete_qualification(
+    user_id: $user_id,
+    qualification: $qualification
+    ) {
+      success
+      message
+    }
+  }
+`;
+
+
 export const update_profile = gql`
   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
