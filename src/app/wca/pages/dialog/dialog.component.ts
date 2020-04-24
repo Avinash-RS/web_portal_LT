@@ -40,7 +40,7 @@ export class DialogComponent implements OnInit {
       this.submitted = false;
     this.dialogRef.close(this.templateForm.value);
     } else {
-      console.log("@@@@@@@@@@@@@@")
+      this.toast.warning('Template Name Required !!!');
     }
   }
 

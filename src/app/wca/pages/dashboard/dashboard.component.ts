@@ -126,11 +126,11 @@ export class DashboardComponent implements OnInit {
     this.service.getPublishedCourse().subscribe((data: any) => {
 
       this.publishedCourses = data.Result;
-      // debugger
-      console.log(this.publishedCourses[0])
 
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getCreatedCourses() {
 
@@ -138,8 +138,10 @@ export class DashboardComponent implements OnInit {
 
       this.createdCourses = data.Result;
 
+    },err => {
+      this.spinner.hide();
     });
-  }
+    }
 
   getDraftCourses() {
 
@@ -148,6 +150,8 @@ export class DashboardComponent implements OnInit {
       this.draftCourses = data.Result;
       this.spinner.hide();
 
+    },err => {
+      this.spinner.hide();
     });
   }
 }
