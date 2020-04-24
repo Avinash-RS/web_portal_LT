@@ -1155,8 +1155,8 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
         if (is_student_or_professional === 'professional') {
-          job_role.setValidators([Validators.required, Validators.minLength(4)])
-          org.setValidators([Validators.required, Validators.minLength(4)])
+          job_role.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
+          org.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
           totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3)])
         } else {
           job_role.setValidators(null)

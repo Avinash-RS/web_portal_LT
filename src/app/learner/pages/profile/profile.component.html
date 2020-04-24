@@ -264,10 +264,12 @@
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
                   [disabled]="cannotEdit"
                   [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
-                  mask="SSSSSSSSSSSSSSSS" placeholder="Organization" formControlName="organization">
+                  placeholder="Organization" formControlName="organization">
                 <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
                   class="invalid-feedback">
                   <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
+                  </div>
+                  <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
                   </div>
                   <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
                     {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
@@ -276,11 +278,13 @@
               </div>
               <div class="col-md-2 col-sm-4 col-8">
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                  [disabled]="cannotEdit" mask="SSSSSSSSSSSSSSSS" placeholder="Job role" formControlName="job_role"
+                  [disabled]="cannotEdit" placeholder="Job role" formControlName="job_role"
                   [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
                   <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
                   class="invalid-feedback">
                   <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
+                  </div>
+                  <div *ngIf="f.professional.controls.job_role.errors.pattern">Job role is invalid
                   </div>
                   <div *ngIf="f.professional.controls.job_role.errors.minlength">Job Role must be minimum of
                     {{f.professional.controls.job_role.errors.minlength.requiredLength}} characters
@@ -292,10 +296,10 @@
           <br>
           <!-- //.Button -Submit -->
           <div class="row" *ngIf="!cannotEdit">
-            <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
-              (click)="updateProfile()">Submit</button> -->
-              <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
+            <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
               (click)="updateProfile()">Submit</button>
+              <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
+              (click)="updateProfile()">Submit</button> -->
           </div>
         </div>
       </form>
