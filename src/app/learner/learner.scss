@@ -52,7 +52,7 @@
     height: 100vh !important;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 35px;
     background-size: cover;
     background-repeat: no-repeat;
     background-color:$color-white;
@@ -60,14 +60,14 @@
 
   .wrap-reg {
     width: 100%;
+    padding: 30px;
     height: auto;
     background: $color-white !important;
     border-radius: 25px;
-    border: 1px outset $color-white;
+    border: none !important;
+    box-shadow: 0 2px 11px #b0d4dfb5;
     overflow: hidden;
     background-color: $color-white !important;
-    box-shadow: 0 2px 11px $color-blank;
-    margin-top: 50px;
     margin-bottom: 30px;
   }
 
@@ -79,6 +79,7 @@
     height: 16px !important;
     width: 16px !important;
     border-color:  $color-blue !important;
+    border-width: 1px !important;
   }
 
   .mat-radio-inner-circle {
@@ -87,10 +88,10 @@
     background-color:  $color-blue !important;
   }
 
-  mat-select {
-    border-radius: 10px;
-    margin-left: -18px;
-  }
+  // mat-select {
+  //   border-radius: 10px;
+  //   margin-left: -18px;
+  // }
 
   .mat-select-placeholder {
     color: $color-blue !important;
@@ -154,9 +155,7 @@ mat-icon {
   color:  $color-blue;
 }
 
-.mat-progress-bar-buffer {
-  background: $color-white;
-}
+
 
 .mat-progress-bar-fill::after {
   background-color: #ffcf01 !important;
@@ -299,4 +298,13 @@ mat-icon {
 
 button:disabled:hover {
   cursor: not-allowed;
+}
+
+.coursebreadcrumb {
+  padding-top: 60px;
+
+  ol {
+      margin-bottom: 0 !important;
+      background-color: $color-white !important;
+  }
 }
