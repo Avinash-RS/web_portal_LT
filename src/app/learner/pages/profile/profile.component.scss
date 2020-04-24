@@ -456,11 +456,6 @@ div.account{
   letter-spacing: 1px;
 }
 
-.fa {
-  cursor: pointer;
-  font-size: 16px;
-}
-
 .errspan {
   float: right;
   margin-right: 10px;
@@ -470,7 +465,7 @@ div.account{
   color: black;
 }
 input[type=text] {
-  width: 100%;
+  // width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
   background: $color-light-blue;
@@ -478,4 +473,10 @@ input[type=text] {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+.fa {
+  cursor: pointer;
 }

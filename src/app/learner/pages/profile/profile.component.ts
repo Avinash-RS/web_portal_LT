@@ -1146,17 +1146,23 @@ export class ProfileComponent implements OnInit {
       })
     });
 
+    const job_role = this.profileForm.get('professional.job_role');
+    const org = this.profileForm.get('professional.organization');
+    const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
         if (is_student_or_professional === 'professional') {
-          this.profileForm.get('professional.job_role').setValidators(Validators.required)
-          this.profileForm.get('professional.organization').setValidators(Validators.required)
-          this.profileForm.get('professional.total_experience').setValidators(Validators.required)
+          job_role.setValidators([Validators.required, Validators.minLength(4)])
+          org.setValidators([Validators.required, Validators.minLength(4)])
+          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3)])
         } else {
-          this.profileForm.get('professional.job_role').setValidators(null)
-          this.profileForm.get('professional.organization').setValidators(null)
-          this.profileForm.get('professional.total_experience').setValidators(null)
+          job_role.setValidators(null)
+          org.setValidators(null)
+          totalExp.setValidators(null)
         }
+        job_role.updateValueAndValidity();
+        org.updateValueAndValidity();
+        totalExp.updateValueAndValidity();
       })
   }
 
@@ -1210,6 +1216,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+    console.log(this.profileForm.get('professional'))
     if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional && this.profileForm.value.country && this.profileForm.value.state
       && this.profileForm.value.city_town)
       this.profileForm.controls['progress'].setValue(60);
@@ -1240,7 +1247,7 @@ export class ProfileComponent implements OnInit {
     return this.profileForm.get('certificate') as FormArray;
   }
 
-  addCertificates() {
+  addCertificates(c, i) {
     this.certificate.push(this.formBuilder.control(''));
   }
 

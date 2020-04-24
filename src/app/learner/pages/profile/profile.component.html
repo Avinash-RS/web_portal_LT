@@ -39,7 +39,7 @@
               </div>
               <!-- //////I'm a//////// -->
               <div class="form-group display_flex">
-                <label>I'm a</label><span style="color: red;"> *</span>
+                <label>I'm a</label><span style="color: red;"> * &nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
                   name="is_student_or_professional">
                   <mat-radio-button value="student">Student</mat-radio-button>
@@ -204,7 +204,7 @@
                   class="inputs border-radius-5 width_50 color_blue background_trans m-l-10px" placeholder="Percentage"
                   [disabled]='cannotEdit' formControlName="percentage">
                 <mat-icon (click)="addQualification()"
-                  *ngIf="!cannotEdit && profileForm.value.qualification.length < 15" class="p-5px">add_circle_outline
+                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15" class="p-5px">add_circle_outline
                 </mat-icon>
                 <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
                   (click)="removeQualification(in)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon>
@@ -219,7 +219,8 @@
             <div class="col-md-2 col-sm-4 col-8 display_flex">
               <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
                 placeholder="Certificate Link" [disabled]="cannotEdit" formControlName="{{i}}">
-              <mat-icon (click)="addCertificates()" *ngIf="!cannotEdit && profileForm.value.certificate.length < 15"
+              <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
+              profileForm.value.certificate.length < 15"
                 class="p-5px">add_circle_outline
               </mat-icon>
               <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
@@ -246,23 +247,54 @@
             <div class="row p-b-10px" formGroupName="professional">
               <div class="col-md-2 col-sm-4 col-8">
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                  [disabled]="cannotEdit" placeholder="Total Experience" formControlName="total_experience">
+                  [disabled]="cannotEdit"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
+                  placeholder="Total Experience" formControlName="total_experience">
+                <div class="invalid-feedback" *ngIf="f.professional.controls.total_experience.touched && 
+                  f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
+                </div>
+                <div
+                  *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
+                  </div>
+                </div>
               </div>
               <div class="col-md-2 col-sm-4 col-8">
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                  [disabled]="cannotEdit" mask="SSSSSSSSSSSSSSSS" placeholder="Organization"
-                  formControlName="organization">
+                  [disabled]="cannotEdit"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
+                  mask="SSSSSSSSSSSSSSSS" placeholder="Organization" formControlName="organization">
+                <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
+                  </div>
+                  <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
+                    {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
+                  </div>
+                </div>
               </div>
               <div class="col-md-2 col-sm-4 col-8">
                 <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                  [disabled]="cannotEdit" mask="SSSSSSSSSSSSSSSS" placeholder="Job role" formControlName="job_role">
+                  [disabled]="cannotEdit" mask="SSSSSSSSSSSSSSSS" placeholder="Job role" formControlName="job_role"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
+                  <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
+                  </div>
+                  <div *ngIf="f.professional.controls.job_role.errors.minlength">Job Role must be minimum of
+                    {{f.professional.controls.job_role.errors.minlength.requiredLength}} characters
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <br>
           <!-- //.Button -Submit -->
           <div class="row" *ngIf="!cannotEdit">
-            <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+            <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+              (click)="updateProfile()">Submit</button> -->
+              <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
               (click)="updateProfile()">Submit</button>
           </div>
         </div>
@@ -344,7 +376,7 @@
         <h1 class="head">Change the Password</h1>
         <mat-dialog-content style="width: 300px;margin-top: 24px;">
           <form [formGroup]="passwordForm">
-            <label class="f_size_18 f_wt_400">Enter the current password</label>
+            <label class="f_size_19 f_wt_400">Enter the current password</label>
             <div class="form-group">
               <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
@@ -362,7 +394,7 @@
             </div><br>
 
 
-            <label class="f_size_18 f_wt_400">Enter the new password</label>
+            <label class="f_size_19 f_wt_400">Enter the new password</label>
             <div class="form-group">
               <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
@@ -395,14 +427,14 @@
               </div>
             </div>
             <p class="head f_size_17">The password should not be last password</p>
-            <label class="f_size_18 f_wt_400">Confirm the new password</label>
+            <label class="f_size_19 f_wt_400">Confirm the new password</label>
             <div class="form-group">
               <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
-              onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-              class="form-control border-right-0"
-              [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
-            <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showConNew = !showConNew"
-              aria-hidden="true"></i>
+                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                class="form-control border-right-0"
+                [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
+              <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
+                (click)="showConNew = !showConNew" aria-hidden="true"></i>
               <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
                 <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as password</div>
               </div>
