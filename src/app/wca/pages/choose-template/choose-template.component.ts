@@ -36,8 +36,6 @@ export class ChooseTemplateComponent implements OnInit {
       console.log(this.queryData)
       }
     });
-
-
     this.selectedTemplate={
       template_id:""
     }
