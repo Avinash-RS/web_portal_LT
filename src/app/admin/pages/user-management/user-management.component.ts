@@ -32,7 +32,8 @@ export class UserManagementComponent implements OnInit {
   resultsLength: number = null;
   selectedArray: any = [];
   profileDetails: {};
-
+  trackDetails: any;
+  loader  :boolean  = false;
   constructor(private router: Router, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
     private dialog: MatDialog,
@@ -41,7 +42,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   getAllUser(pagenumber) {
-
+this.loader = true;
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
@@ -54,11 +55,12 @@ export class UserManagementComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.resultsLength = result.data.get_all_user.learner_count;
+        this.loader = false;
       });
   }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));    
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
   }
 
   gotoAddUser() {
@@ -88,15 +90,21 @@ export class UserManagementComponent implements OnInit {
   //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   // }
 
-  viewDetail(element,templateRef : TemplateRef<any>) {
-    this.service.getLearnerDetail(element.user_id)
-    .subscribe((result: any) => {
-      this.profileDetails = result.data.get_all_learner_detail.message[0];
-      console.log(result.data.get_all_learner_detail.message[0],this.profileDetails)
-      this.dialog.open(templateRef);
-      // this.mailForm = this.formBuilder.group({
-      //   mailid: new FormControl('', myGlobals.emailVal)
-      // });
+  viewDetail(element, templateRef: TemplateRef<any>) {
+    // this.loader = true;
+    this.service.getUserSession(element._id).subscribe((track: any) => {
+      this.trackDetails = track.data.get_user_session_detail.message[0]
+      console.log(this.trackDetails);
+      this.service.getLearnerDetail(element.user_id)
+        .subscribe((result: any) => {
+          this.profileDetails = result.data.get_all_learner_detail.message[0];
+          // console.log(result.data.get_all_learner_detail.message[0], this.profileDetails)
+          this.dialog.open(templateRef);
+          // this.loader = false;
+          // this.mailForm = this.formBuilder.group({
+          //   mailid: new FormControl('', myGlobals.emailVal)
+          // });
+        })
     })
   }
 
@@ -128,7 +136,7 @@ export class UserManagementComponent implements OnInit {
           if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message, length > 0)
             Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
           else
-            this.alert.openAlert("Sorry", 'No records found with "' + filterValue + '.."')
+            this.alert.openAlert("Sorry", 'No user exists with "' + filterValue + '.."')
           // this.toast.warning('Course Name and Course image is Required !!!');
         });
     }
