@@ -1649,7 +1649,7 @@ function startResumeEvent(params){
     }
 
     async function getcourse(jsonData) {
-       const response = await fetch('http://localhost:3004/coursestatus', {
+       const response = await fetch('http://localhost:3000/course/coursestatus', {
         method: 'POST',
         body:JSON.stringify(jsonData), // string or object
         headers: {
