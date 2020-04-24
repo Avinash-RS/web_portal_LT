@@ -1,0 +1,21 @@
+<ng-container *ngIf="dialogdata?.type === 'CreateTemplate'">
+    <form [formGroup]="templateForm" (ngSubmit)="templateName()">
+
+        <div class="dialogClose">
+            <span (click)="dialogClose()"> <img class="dialogClose1" src="assets\images\dialog close.svg"> </span>
+        </div>
+
+        <div>
+          <div class="tempBody">
+                <input class="Bcg" placeholder="Enter the Template Name" maxlength="35"  type="text" formControlName="tempName">
+
+            </div>
+        </div>
+      
+        
+        <div class="row btnDiv" >
+            <button class="btnCSS" type="button" (click)="templateName()" [disabled]="submitted && templateForm.invalid" small mat-raised-button>Submit</button>
+        </div>
+    </form>
+
+</ng-container>

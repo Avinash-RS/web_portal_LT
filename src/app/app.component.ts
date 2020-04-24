@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service'
+import { WcaService } from '../app/wca/services/wca.service';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class AppComponent {
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
+    private APIService: WcaService,
+
   ) {
     this.getIPAddress();
   }

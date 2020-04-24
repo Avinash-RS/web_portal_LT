@@ -25,7 +25,7 @@ import { CreateCourseComponent } from './pages/create-course/create-course.compo
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatTableModule } from '@angular/material';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 
@@ -33,9 +33,10 @@ import { WcaService } from "./services/wca.service";
 import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
 import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
 import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
+import { ReferenceFileComponent } from './pages/reference-file/reference-file.component';
 
 
-
+import { PipeModule } from '../pipes/pipe.module';
 
 
 
@@ -53,7 +54,8 @@ const routes: Routes = [
 
   { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard]},
   { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard]},
-  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard]}
+  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard]},
+  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard]}
 
 
  
@@ -62,7 +64,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
@@ -71,16 +73,17 @@ const routes: Routes = [
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
+    PipeModule,
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
-    ReactiveFormsModule    ,                    
     //NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
     DragDropModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   providers: [WcaService],
   entryComponents: []
