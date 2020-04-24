@@ -599,7 +599,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 //         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
 //         this.showotp = false;
 //         this.isenable = true;
-//         this.ngOnInit();
+//          this.getprofileDetails(this.currentUser.user_id)
 //       } else {
 //         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
 //         this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
@@ -646,7 +646,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 //         if (data.data['update_email_onprofile']['success'] == 'true') {
 //           console.log(data.data['update_email_onprofile'].message)
 //           this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-//           this.ngOnInit();
+//            this.getprofileDetails(this.currentUser.user_id)
 //         } else {
 //           this.alert.openAlert(data.data['update_email_onprofile'].message, null)
 //         }
@@ -1164,7 +1164,7 @@ export class ProfileComponent implements OnInit {
         if (is_student_or_professional === 'professional') {
           job_role.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
           org.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
-          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3)])
+          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3),Validators.pattern(/^[0-6][0-9]{1}$/)])
         } else {
           job_role.setValidators(null)
           org.setValidators(null)
@@ -1196,7 +1196,8 @@ export class ProfileComponent implements OnInit {
   getprofileDetails(userid) {
     this.loader.show();
     this.service.view_profile(userid).subscribe((data: any) => {
-      let profileDetails = data.data.view_profile.message[0].user_profile[0];
+      if(data.data.view_profile.success) {
+        let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
       this.userData = data.data.view_profile.message[0];
       if (profileDetails) {
         profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(v => delete v.__typename);
@@ -1225,6 +1226,7 @@ export class ProfileComponent implements OnInit {
         this.loader.hide();
       } else
         this.loader.hide();
+      }
     })
   }
 
@@ -1377,10 +1379,10 @@ export class ProfileComponent implements OnInit {
   }
 
   editEmail(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
     this.mailForm = this.formBuilder.group({
       mailid: new FormControl('', myGlobals.emailVal)
     });
+    this.dialog.open(templateRef);
   }
 
   updateEmail(mailForm) {
@@ -1392,7 +1394,7 @@ export class ProfileComponent implements OnInit {
         if (data.data['update_email_onprofile']['success'] == 'true') {
           console.log(data.data['update_email_onprofile'].message)
           this.alert.openAlert(data.data['update_email_onprofile'].message, null);
-          this.ngOnInit();
+          this.getprofileDetails(this.currentUser.user_id)
         } else {
           this.alert.openAlert(data.data['update_email_onprofile'].message, null)
         }
@@ -1402,17 +1404,16 @@ export class ProfileComponent implements OnInit {
   }
 
   editmobno(mobRef: TemplateRef<any>) {
-    this.dialog.open(mobRef);
     this.isenable = true;
     this.showotp = false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       otp: new FormControl("", []),
     })
+    this.dialog.open(mobRef);
   }
 
   editPassword(passRef: TemplateRef<any>) {
-    this.dialog.open(passRef);
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
@@ -1420,6 +1421,7 @@ export class ProfileComponent implements OnInit {
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
+    this.dialog.open(passRef);
     console.log(this.passwordForm)
   }
 
@@ -1461,7 +1463,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.showotp = false;
         this.isenable = true;
-        this.ngOnInit();
+         this.getprofileDetails(this.currentUser.user_id)
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
