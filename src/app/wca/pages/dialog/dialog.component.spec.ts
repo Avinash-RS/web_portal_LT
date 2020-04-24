@@ -41,4 +41,18 @@ describe('DialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('Close the Dialog Box', () => {
+    component.templateName()
+    expect(component.templateForm.valid).toBeTruthy();
+    debugger;
+  });
+
+  it('Template Name Required', () => {
+    component.templateName()
+    expect(component.templateForm.valid).toBeFalsy();
+  });
+
+  
+
 });

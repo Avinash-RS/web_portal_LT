@@ -95,7 +95,7 @@ export class CreateTemplateComponent implements OnInit {
   ];
 
 
-  private resetList() {
+  resetList() {
     this.items2 = [];
     setTimeout(() => {
       this.items2 = this.todo.slice();
