@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort ,MatPaginator} from '@angular/material';
 import { WcaService } from '../../services/wca.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 export interface PeriodicElement {
   name: string;
   module: string;
@@ -32,13 +33,14 @@ export class ReferenceFileComponent implements OnInit {
   getdocData: any;
   currentUser: any;
 
-  constructor(public service: WcaService, public fb: FormBuilder,) { 
+  constructor(public service: WcaService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
 
   ngOnInit() {
     this.getAllRefDoc(1);
     this.dataSource.sort = this.sort;
+     this.dataSource.paginator = this.paginator;
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     this.selectedOption = 'document';
@@ -77,16 +79,11 @@ export class ReferenceFileComponent implements OnInit {
 
   }
 
-
-  deleteReferenceFile(data) {
- 
-  }
-
-
   uploadDoc(files: File[]){
     var formData = new FormData();
     Array.from(files).forEach(f => formData.append('file',f));
     let tempData: any = formData.get("file");
+    console.log(tempData)
     if((tempData.size/1000) > 10240){
       this.uploadMsg = "Upload the document";
     }
@@ -102,37 +99,46 @@ export class ReferenceFileComponent implements OnInit {
     payload.append("module_id", this.referenceLinkForm.value.module);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
-    payload.append("user_id",this.currentUser._id);
+    payload.append("user_id",this.currentUser.user_id);
     payload.append('reffile', this.uploadMsg);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
     
     this.service.refDocUpload(payload).subscribe(data => {
-      console.log(data)
+      if(data['success'] == true){
+        this.alert.openAlert(data['message'],null)
+        this.getAllRefDoc(1)
+      }else{
+        this.alert.openAlert('Somethink went wrong Please try again',null)
+      }
     })
-    console.log(payload)
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-removeDoc(){
-  this.service.remove_doc_ref('5ea1598d5c7d4f34181511e3').subscribe(data => {
-
+removeDoc(data){
+  this.service.remove_doc_ref(data._id).subscribe(data => {
+    if(data.data['remove_doc_ref']['success'] == true){
+      this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
+      this.getAllRefDoc(1)
+    } else {
+      this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
+      this.getAllRefDoc(1)
+    }
   })
 }
 getAllRefDoc(pagenumber){
+  console.log(pagenumber)
   // var pagenumber = 1
-  this.service.getallrefdoc(pagenumber).subscribe(data => {
-    this.getdocData = data.data['getallrefdoc']['message']
+  this.service.getallrefdoc(1).subscribe(data => {
+    this.getdocData = data.data['getallrefdoc']['data']
     Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    console.log(this.ELEMENT_DATA)
-    console.log(this.dataSource)
   })
 }
 
