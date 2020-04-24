@@ -31,24 +31,20 @@
         <div class="select">
           Select
         </div>
-        <mat-form-field>
-          <mat-label>Module Name</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let module of moduleList" [value]="module.id">
-              {{module.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-select  class="selectinputs" placeholder="Module Name">
+          <mat-option *ngFor="let module of moduleList" [value]="module.id">
+            {{module.name}}
+          </mat-option>
+        </mat-select>
 
-        <mat-form-field>
-          <mat-label>Topic Name</mat-label>
-          <mat-select>
+       
+          <mat-select  class="selectinputs" placeholder="Topic Name">
             <mat-option *ngFor="let topic of topicList" [value]="topic.id">
               {{topic.name}}
             </mat-option>
           </mat-select>
-        </mat-form-field>
 
+<div class="space-10">
         <mat-radio-group [(ngModel)]="selectedOption">
           <mat-radio-button value="document">Upload Document
             <mat-icon class="upload-icon">add</mat-icon>
@@ -57,12 +53,15 @@
             <mat-icon class="ref-icon">add</mat-icon>
           </mat-radio-button>
         </mat-radio-group>
-
+      </div>
         <div class="ref-input" *ngIf="selectedOption == 'document'">
-          <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName">
+          <input  type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName">
           <label for="upload-photo" class="upload">{{uploadMsg}}</label>
           <input type="file" name="photo" id="upload-photo" (change)="uploadDoc($event.target.files)" />
+          
         </div>
+
+        
 
         <div class="ref-input" *ngIf="selectedOption == 'link'">
           <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName">

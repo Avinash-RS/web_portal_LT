@@ -8,6 +8,15 @@
     }
 }
 
+.selectinputs{
+    padding: 8px !important;
+    border-radius: 5px;
+    color: #000;
+    width: 100%;
+    background: #b8d0ff;
+    margin-top: 10px;
+  }
+
 .breadcrump-container {
     display: flex;
     justify-content: space-between;
@@ -103,8 +112,12 @@ tr.mat-row {
 }
 
 .ref-input input{
-    height: 30px;
-    padding: 12px 3px !important;
+    height: 35px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    background: #b8d0ff;
+    padding: 10px !important;
 }
 
 .upload-icon {
@@ -122,11 +135,10 @@ tr.mat-row {
 .upload {
     cursor: pointer;
     background: #B8D0FF;
-    border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 5px;
-    height: 30px;
-    padding: 5px 0 0px 4px;
+    height: 35px;
+    padding: 8px;
     color: grey;
     font-weight: 400;
     margin: 5px 0 5px 0;
@@ -161,4 +173,25 @@ tr.mat-row {
     color: white !important;
     font-size: 14px;
     width: 10%;
+    
  }
+
+ .space-10{
+     margin-top: 10px;
+ }
+ .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 12px 11px 10px 1px;
+    margin-bottom: 0;
+    height: 38px;
+    margin-top: 1px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #495057;
+    border-radius: 7px;
+  }
