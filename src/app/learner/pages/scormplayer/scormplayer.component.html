@@ -49,18 +49,6 @@
 
     </div>
     <h1 class="subhead">Resources</h1>
-    <!-- <section class="accordion" >
-      <input type="checkbox" name="collapse"   *ngIf="syllabus[0]" [id]="syllabus[0].title">
-      <h2 class="handle" *ngIf="syllabus[0]">
-        <label [for]="syllabus[0].title"><b>{{syllabus[0].title}}</b><i class="fa fa-file-text-o doc"> <b style="padding-left: 18px;"> 7 Documents</b></i> </label>
-      </h2>
-      <div class="content">
-        <ol class="submod" *ngFor="let module of modules; let i = index">
-          <li>{{i+1}}  . {{module.title}}</li>
-        </ol>
-      </div>
-    </section> -->
-
     <section class="accordion" *ngFor="let res of content?.coursedetails">
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
@@ -68,10 +56,24 @@
            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
       </h2>
       <div class="content">
-        <ol class="submod"  *ngFor="let mod of res?.moduledetails; let i = index">
-          <li>{{i+1}} {{mod?.topicname}}</li>
-          <!-- <a href="{{mod?.topicimages[0]}}"></a> -->
-        </ol>
+        <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+          <div class="col-8">
+            <ol class="submod"  >
+              <li>{{i+1}} {{mod?.topicname}}</li>
+            </ol>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field style="text-align: right;">
+              <mat-icon matPrefix>mic</mat-icon>
+              <mat-select  placeholder="Resourse">
+                  <mat-option  *ngIf="mod.resourse != null" >
+                      <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          </div>
+    </div>
       </div>
     </section>
 
