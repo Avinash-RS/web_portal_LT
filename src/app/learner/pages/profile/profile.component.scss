@@ -502,3 +502,7 @@ textarea:focus, input:focus{
 .fa {
   cursor: pointer;
 }
+
+.dis {
+  pointer-events: none !important;
+}

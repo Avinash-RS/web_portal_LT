@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -1157,9 +1157,9 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
         if (is_student_or_professional === 'professional') {
-          job_role.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
-          org.setValidators([Validators.required, Validators.minLength(4),Validators.pattern(/^[A-Za-z]*$/)])
-          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3),Validators.pattern(/^[0-6][0-9]{1}$/)])
+          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
+          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
+          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[0-6][0-9]{1}$/)])
         } else {
           job_role.setValidators(null)
           org.setValidators(null)
@@ -1184,43 +1184,44 @@ export class ProfileComponent implements OnInit {
     else if (this.passwordForm)
       return this.passwordForm.controls;
   }
-  edit(){
-    this.cannotEdit = false;
-  }
+
+  // edit(){
+  //   this.cannotEdit = false;
+  // }
 
   getprofileDetails(userid) {
     this.loader.show();
     this.service.view_profile(userid).subscribe((data: any) => {
-      if(data.data.view_profile.success) {
+      if (data.data.view_profile.success) {
         let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
-      this.userData = data.data.view_profile.message[0];
-      if (profileDetails) {
-        profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(v => delete v.__typename);
-        profileDetails.social_media.length > 0 && profileDetails.social_media.forEach(v => delete v.__typename);
-        if (profileDetails.progress.includes("%"))
-          profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
-        else
-          profileDetails.progress = Number(profileDetails.progress);
-        if (profileDetails.progress <= 60)
-          this.gs.preventBackButton
-        const qualification = this.profileForm.get('qualification') as FormArray;
-        const certificate = this.profileForm.get('certificate') as FormArray;
-        while (qualification.length) {
-          qualification.removeAt(0);
-        }
-        // localStorage.setItem('user_img',this.urlImage)
-        while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
-          certificate.removeAt(0);
-        }
-        this.profileForm.patchValue(profileDetails);
-        this.getAllState();
-        this.getDistrict();
-        profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(qual => qualification.push(this.formBuilder.group(qual)));
-        profileDetails.certificate && profileDetails.certificate.length > 0 && profileDetails.certificate.forEach(certif => certificate.push(this.formBuilder.control(certif)));
-        console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
-        this.loader.hide();
-      } else
-        this.loader.hide();
+        this.userData = data.data.view_profile.message[0];
+        if (profileDetails) {
+          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(v => delete v.__typename);
+          profileDetails.social_media.length > 0 && profileDetails.social_media.forEach(v => delete v.__typename);
+          if (profileDetails.progress.includes("%"))
+            profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
+          else
+            profileDetails.progress = Number(profileDetails.progress);
+          if (profileDetails.progress <= 60)
+            this.gs.preventBackButton
+          const qualification = this.profileForm.get('qualification') as FormArray;
+          const certificate = this.profileForm.get('certificate') as FormArray;
+          while (qualification.length) {
+            qualification.removeAt(0);
+          }
+          // localStorage.setItem('user_img',this.urlImage)
+          while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
+            certificate.removeAt(0);
+          }
+          this.profileForm.patchValue(profileDetails);
+          this.getAllState();
+          this.getDistrict();
+          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(qual => qualification.push(this.formBuilder.group(qual)));
+          profileDetails.certificate && profileDetails.certificate.length > 0 && profileDetails.certificate.forEach(certif => certificate.push(this.formBuilder.control(certif)));
+          console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
+          this.loader.hide();
+        } else
+          this.loader.hide();
       }
     })
   }
@@ -1258,11 +1259,21 @@ export class ProfileComponent implements OnInit {
   }
 
   addCertificates(c, i) {
-    this.certificate.push(this.formBuilder.control(''));
+    console.log(c, i, this.certificate)
+    var arrayT = this.certificate.value.filter(i => i === c);
+    console.log(arrayT)
+    if (arrayT.length > 1) {
+      this.alert.openAlert("This certificate link is already filled", null)
+      this.certificate.removeAt(i);;
+    }
+    else if (c[0] == '')
+      this.alert.openAlert("Please enter certificate", null)
+    else
+      this.certificate.push(this.formBuilder.control(['']));
   }
 
   removeCertificates(i) {
-    this.certificate.removeAt(i);;
+    this.certificate.removeAt(i);
   }
 
   createQualItem(): FormGroup {
@@ -1428,15 +1439,15 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         this.isenable = false;
         this.showotp = true;
-         //Timer
-       this.interval = setInterval(() => {
-        if(this.timeLeft > 0) {
-          this.timeLeft--;
-        } else {
-          this.timeLeft = 0;
-          // this.finish();
-        }
-      },1000)
+        //Timer
+        this.interval = setInterval(() => {
+          if (this.timeLeft > 0) {
+            this.timeLeft--;
+          } else {
+            this.timeLeft = 0;
+            // this.finish();
+          }
+        }, 1000)
       } else
         this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
     })
@@ -1455,7 +1466,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.showotp = false;
         this.isenable = true;
-         this.getprofileDetails(this.currentUser.user_id)
+        this.getprofileDetails(this.currentUser.user_id)
       } else {
         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
         this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
