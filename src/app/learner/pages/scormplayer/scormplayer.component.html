@@ -1,12 +1,12 @@
 <app-header></app-header>
 <div class="limiter" >
   <div class="container wrap-body">
-    <h1 class="head" *ngIf="courseDeatils">{{courseDeatils.course_name}}</h1>
+    <h1 class="head" *ngIf="courseDeatils">{{content?.coursename}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">{{courseDeatils.course_name}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{content?.coursename}}</li>
       </ol>
     </nav>
 
@@ -49,7 +49,7 @@
 
     </div>
     <h1 class="subhead">Resources</h1>
-    <section class="accordion" >
+    <!-- <section class="accordion" >
       <input type="checkbox" name="collapse"   *ngIf="syllabus[0]" [id]="syllabus[0].title">
       <h2 class="handle" *ngIf="syllabus[0]">
         <label [for]="syllabus[0].title"><b>{{syllabus[0].title}}</b><i class="fa fa-file-text-o doc"> <b style="padding-left: 18px;"> 7 Documents</b></i> </label>
@@ -59,9 +59,25 @@
           <li>{{i+1}}  . {{module.title}}</li>
         </ol>
       </div>
+    </section> -->
+
+    <section class="accordion" *ngFor="let res of content?.coursedetails">
+      <input type="checkbox" name="collapse">
+      <h2 class="handle">
+        <label><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+           <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+      </h2>
+      <div class="content" *ngFor="let mod of res?.moduledetails; let i = index">
+        <ol class="submod">
+          <li>{{i+1}} {{mod?.topicname}}</li>
+          <a href="{{mod?.topicimages[0]}}"></a>
+        </ol>
+      </div>
     </section>
+
+
     <div style="text-align:center;">
-      <button class="btn1 success">{{modules.length}} more section</button>
+      <button class="btn1 success">{{modules?.length}} more section</button>
     </div>
     <br><br>
 

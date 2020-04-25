@@ -4,7 +4,8 @@ import { Apollo } from "apollo-angular";
 import {
   login, get_course_by_user, get_country_details, get_qualification_details,
   get_board_university_details, get_discipline_details, get_specification_details,
-  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm
+  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
+  getModuleData
 } from "./operations/learner_query";
 
 import {
@@ -268,6 +269,14 @@ export class LearnerServicesService {
         contentid: contentid,
         user_id:user_id,
         course_id:course_id
+      }
+    })
+  }
+  getModuleData(course_id) {
+    return this.Apollo.query({
+      query: getModuleData,
+      variables: {
+        courseid:course_id
       }
     })
   }

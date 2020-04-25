@@ -216,3 +216,36 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
     }
   }
 }`;
+
+export const getModuleData = gql`
+query getModuleData($courseid:String){
+  getModuleData(courseid:$courseid) {
+    data {
+      courseid
+      _id
+      coursename
+      coursefile
+      coursestatus
+      coursecreated_on
+      coursedetails{
+      modulename
+      modulestatus
+      modulecreated_on
+      moduledetails{
+      topicname
+      topicstatus
+      topiccreated_on
+      topicimages
+      resourse{
+      type
+      path
+      doc_type
+      type_name
+      }
+      }
+      }
+      }
+      message
+      success
+  }
+}`;
