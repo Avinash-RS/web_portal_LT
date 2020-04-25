@@ -497,3 +497,22 @@ width: 113px;
     height: 1px;
     padding: 2px 5px 19px 1px;
 }
+
+.firstSpan{
+    display: flex;
+    align-items: center;
+}
+.dspFlx{
+    display: flex;
+    justify-content: center;
+}
+
+.Bcg{
+    background: #B8D0FF;
+    width: 100%;
+    padding-left: 17px;
+    height: 38px;
+    border-radius: 11px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    outline: none;  
+  }
