@@ -10,6 +10,7 @@ import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -1111,7 +1112,7 @@ export class ProfileComponent implements OnInit {
   sendOtp: Boolean = false;
   levelCode: any;
   check: any;
-
+  
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1135,6 +1136,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl("", myGlobals.req),
@@ -1231,7 +1233,16 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-
+  yearOfpassing(){
+    this.profileForm.value.qualification.forEach(element => {
+      if(element.year_of_passing > moment().year()){
+        this.alert.openAlert('Invalid year', null);
+        this.cannotEdit = true;
+      } else{
+        this.cannotEdit = false;
+      }
+    });
+  }
   updateProfile() {
     console.log(this.profileForm.get('professional'))
     if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional && this.profileForm.value.country && this.profileForm.value.state
@@ -1246,6 +1257,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['created_by_ip'].setValue(ip);
 
     console.log('jsonData', this.profileForm.value)
+    
     this.service.update_profile(this.profileForm.value).subscribe(data => {
       if (data.data['update_profile']['success'] == 'true') {
         this.loader.hide();

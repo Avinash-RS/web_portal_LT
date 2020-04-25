@@ -206,7 +206,7 @@
                   </mat-option>
                 </mat-select>
                 <input type="tel" mask="0000" class="inputs border-radius-5 color_blue background_trans width_80"
-                  placeholder="Year of Passing" [attr.disabled]='cannotEdit' formControlName="year_of_passing">
+                  (change)="yearOfpassing()" placeholder="Year of Passing" [attr.disabled]='cannotEdit' formControlName="year_of_passing">
               </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
