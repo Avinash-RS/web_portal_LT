@@ -32,6 +32,7 @@ export class ReferenceFileComponent implements OnInit {
   @ViewChild (MatSort) sort: MatSort;
   getdocData: any;
   currentUser: any;
+  selectfile: File;
 
   constructor(public service: WcaService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
@@ -79,33 +80,36 @@ export class ReferenceFileComponent implements OnInit {
 
   }
 
-  uploadDoc(files: File[]){
-    var formData = new FormData();
-    Array.from(files).forEach(f => formData.append('file',f));
-    let tempData: any = formData.get("file");
-    console.log(tempData)
-    if((tempData.size/1000) > 10240){
-      this.uploadMsg = "Upload the document";
-    }
-    else {
-      this.uploadMsg = tempData.name;
-      console.log(this.uploadMsg,'this.uploadMsg')
-    }
+  uploadDoc(event){
+    this.selectfile = <File>event.target.files[0];
+    const fb = new FormData();
+    fb.append('image', this.selectfile, this.selectfile.name)
+    // var formData = new FormData();
+    // Array.from(files).forEach(f => formData.append('file',f));
+    // let tempData: any = formData.get("file");
+    // console.log(tempData)
+    // if((tempData.size/1000) > 10240){
+    //   this.uploadMsg = "Upload the document";
+    // }    
+    // else {
+    //   this.uploadMsg = tempData.name;
+    //   console.log(this.uploadMsg,'this.uploadMsg')
+    // }
   }
 
   saveReferenceFile() {
     var payload = new FormData();
-    console.log(this.referenceLinkForm)
     payload.append("module_id", this.referenceLinkForm.value.module);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
     payload.append("user_id",this.currentUser.user_id);
-    payload.append('reffile', this.uploadMsg);
+    payload.append('files', this.selectfile.name);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
     
     this.service.refDocUpload(payload).subscribe(data => {
+      console.log(data)
       if(data['success'] == true){
         this.alert.openAlert(data['message'],null)
         this.getAllRefDoc(1)
@@ -132,7 +136,7 @@ removeDoc(data){
 }
 getAllRefDoc(pagenumber){
   console.log(pagenumber)
-  // var pagenumber = 1
+    //  pagenumber = 1
   this.service.getallrefdoc(1).subscribe(data => {
     this.getdocData = data.data['getallrefdoc']['data']
     Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);

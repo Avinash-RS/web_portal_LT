@@ -209,3 +209,11 @@ label {
     padding-left: 25px;
     padding-right: 25px;
 }
+
+@media screen and  (max-width:1043px) {
+    .border-right-0{
+        flex: 1 !important;
+        margin-left: 0 !important;
+    }
+    
+}
