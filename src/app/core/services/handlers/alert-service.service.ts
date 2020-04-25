@@ -5,14 +5,31 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
   providedIn: 'root'
 })
 export class AlertServiceService {
-
   constructor(public matDialog: MatDialog) { }
 
   public openAlert(title, msg) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { title: title, msg: msg ? msg : null };
-    dialogConfig.width= '30%',
-    dialogConfig.panelClass= 'custom-modalbox'
-    this.matDialog.open(AlertComponentComponent, dialogConfig);
+    if (this.matDialog.openDialogs.length == 0) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'showClose' };
+      dialogConfig.width = '30%',
+        dialogConfig.panelClass = 'custom-modalbox',
+        dialogConfig.hasBackdrop = true;
+      const dialogRef = this.matDialog.open(AlertComponentComponent, dialogConfig);
+    }
+  }
+
+  public openConfirmAlert(title, msg) {
+    if (this.matDialog.openDialogs.length == 0) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'confirmAlert' };
+      dialogConfig.width = '30%',
+        dialogConfig.panelClass = 'custom-modalbox';
+      const dialogRef = this.matDialog.open(AlertComponentComponent, dialogConfig);
+      return new Promise((resolve) => {
+        dialogRef.afterClosed().subscribe(result => {
+          resolve(result);
+        });
+      });
+    }
   }
 }

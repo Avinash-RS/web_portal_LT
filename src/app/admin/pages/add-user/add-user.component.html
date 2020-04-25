@@ -1,0 +1,111 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">User</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+  </ol>
+</nav>
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Add a user">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-4">
+        </div>
+        <div class="col-md-3 col-sm-5 col-6"><br>
+          <form [formGroup]="addUserForm">
+            <div class="form-group">
+              <label>User Name</label><span style="color: red;"> *</span>
+              <input type="text" formControlName="username" class="form-control"
+                [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
+              <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">User Name is required</div>
+                <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
+                <div *ngIf="f.username.errors.minlength">User Name must be minimum of 3 characters </div>
+                <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label><span style="color: red;"> *</span>
+              <input type="email" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" />
+              <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.pattern">Your email pattern is invalid.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Group Name</label><span style="color: red;"> *</span><br>
+              <mat-form-field class="width_100 ">
+                <!-- <mat-label>Institute Name</mat-label> -->
+                <mat-select formControlName="group">
+                  <mat-option *ngFor="let grp of groups" [value]="grp">
+                    {{grp.group_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div><br>
+            <button id="addUser" mat-stroked-button [disabled]="addUserForm.invalid" class="width_70 center"
+              (click)="addUser()">Add
+              User</button>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Add Multiple Users">
+    <!-- <app-data-table [tableData]="tableData" [columnHeader]="columnHeader"></app-data-table>
+    {{tableData | json}}
+    <mat-paginator #paginator [length]="9" [pageSize]="5" (page)="next()" showFirstLastButtons>
+    </mat-paginator> -->
+
+    <!-- //Maniyarasi  -  add your code here -->
+
+
+     <!-- //Maniyarasi  - end of your code -->
+     <div  class="downloadbutton">
+      <button  (click)="downloadsampleexceltemplate()">  Download Sample
+      </button>
+      </div>
+      
+      <div class="filecontainer b_middle"  style="text-align:center;"  *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)" >
+        <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+        <img  src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64" >
+        
+        <h3>Drag and drop file here</h3>
+        <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
+        <h3>or</h3>
+        <label for="fileDropRef">Browse for file</label>
+      </div>
+      
+      <div *ngIf="selectedfile" class="files-list">
+        <div class="single-file" >
+          <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png" class="file-icon" style="width: 50px">
+      
+          <div class="info">
+            <h4 class="name">
+              {{ selectedfile?.name }}
+            </h4>
+            <p class="size">
+              {{ formatBytes(selectedfile?.size) }}
+            </p>
+          </div>
+         <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()" style="width: 30px" > 
+        </div>
+      </div>
+      <div   class="downloadbutton" >
+        <mat-form-field >
+          <mat-label>Institute Name</mat-label>
+          <mat-select name="group" [(ngModel)]="group" >
+            <mat-option *ngFor="let grp of groups" [value]="grp">
+              {{grp.group_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <button type="button"  *ngIf="selectedfile " (click)="saveexcel(group)" class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+  </mat-tab>
+
+</mat-tab-group>

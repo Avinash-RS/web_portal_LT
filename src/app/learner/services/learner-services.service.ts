@@ -4,7 +4,8 @@ import { Apollo } from "apollo-angular";
 import {
   login, get_course_by_user, get_country_details, get_qualification_details,
   get_board_university_details, get_discipline_details, get_specification_details,
-  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm
+  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
+  getmoduleData
 } from "./operations/learner_query";
 
 import {
@@ -12,7 +13,7 @@ import {
   get_forgot_username_mobile_email, get_forgot_password_byusername, user_registration_username_suggestion,
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile,
-  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile
+  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,delete_qualification
 } from "./operations/learner_mutation"
 
 import { HttpClient } from '@angular/common/http';
@@ -269,6 +270,14 @@ export class LearnerServicesService {
       }
     })
   }
+  getModuleData(course_id) {
+    return this.Apollo.query({
+      query: getmoduleData,
+      variables: {
+        courseid:course_id
+      }
+    })
+  }
 
   update_profile(userData) {
     return this.Apollo.query({
@@ -276,6 +285,16 @@ export class LearnerServicesService {
       variables: userData
     })
   }
+
+  delete_qualification(qualificationData) {
+    return this.Apollo.query({
+      query: delete_qualification,
+      variables: qualificationData
+    })
+  }
+  
+
+
   resend_otp_onprofile(user_id) {
     return this.Apollo.query({
       query: resend_otp_onprofile,

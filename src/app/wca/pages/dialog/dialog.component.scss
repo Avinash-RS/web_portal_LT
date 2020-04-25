@@ -1,0 +1,42 @@
+@import "../../../../assets/variable.scss";
+
+.dialogClose{
+    position: relative;
+    height: 20px;
+}
+.dialogClose1{
+    position: absolute;
+    cursor: pointer;
+    top: -6px;
+    right: -12px
+  }
+  .tempBody{
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+     }
+     .tempName{
+        padding-top: 30px;
+          padding-right: 13px;
+      }
+
+      .btnDiv{
+        padding-top: 31px;
+        justify-content: center;
+    }
+
+    .btnCSS{
+        background-color: $color-blue;
+        color: white;
+        border-radius: 25px;
+        outline: none;
+    }
+    .Bcg{
+      background: #B8D0FF;
+      width: 100%;
+      padding-left: 17px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      outline: none;  
+    }

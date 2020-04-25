@@ -31,8 +31,8 @@
                   border-bottom-width: thick;border-bottom-color: gold;">
                             Choose a template
                         </mat-panel-title>
-
-                        <mat-panel-title routerLink="/Wca/addtemplate" class="f_wt_500 f_size_18 color_black"
+                        <!-- routerLink="/Wca/addtemplate" -->
+                        <mat-panel-title (click)="navCreateTemp()" class="f_wt_500 f_size_18 color_black"
                             style="margin-left: 20px;">
                             Create a template
                         </mat-panel-title>
@@ -45,30 +45,45 @@
                             <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1" class="custom-grid-list">
                                 <div *ngFor="let tlist of templateList;let i = index">
                                     <mat-grid-tile
-                                        [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplateId,'selected-grid-tile': tlist.template_id == selectedTemplateId}"
-                                        (click)="selectTemplate(tlist.template_id)"
-                                        [matTooltip]='"updated on "+tlist.created_on+"\ncreated by "+tlist.createdby_name'
-                                        matTooltipPosition="right"
-                                        matTooltipClass="allow-cr">
+                                        [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
+                                        (click)="selectTemplate(tlist)">
 
-                                        <div>
-                                            <div class="tick-icon" *ngIf="tlist.template_id == selectedTemplateId">
+                                        <div style="color: grey;" (click)="selectTemplate(tlist)" class="overlay"
+                                            *ngIf="isHover && hoverId == tlist.template_id">
+                                            <div>
+                                                {{"Updated on "+tlist.created_on}}
+                                            </div>
+                                            <div>
+                                                {{"created by "+ tlist.createdby_name}}
+                                            </div>
+                                        </div>
+                                        <div style="width: 200px;">
+                                            <div class="tick-icon"
+                                                *ngIf="tlist.template_id == selectedTemplate.template_id">
                                                 <mat-icon class="green-icon">check_circle_outline</mat-icon>
                                             </div>
                                             <div
-                                                class="{{tlist.template_id == selectedTemplateId ? 'selected-grid-heading' : 'grid-heading' }} ">
+                                                class="{{tlist.template_id == selectedTemplate.template_id ? 'selected-grid-heading' : 'grid-heading' }} ">
                                                 Consist of
                                             </div>
                                             <div class="grid-list">
-                                                <ul>
+                                                <ol class="order-list">
                                                     <li *ngFor="let template of tlist.template_details"
                                                         class="list-items">
-                                                        {{template.name}}
+                                                        <span style="margin-left: 28px;">
+                                                            <img class="template-img" src="{{template.image}}">
+                                                            <span>
+                                                                {{template.name}}
+                                                            </span>
+                                                        </span>
                                                     </li>
-                                                </ul>
+                                                </ol>
                                             </div>
                                         </div>
-                                        <div class="template-name">Template {{i + 1}}</div>
+                                        <div class="template-name">Template {{i + 1}}
+                                            <mat-icon class="temp-info" (mouseout)="onhoverLeave()"
+                                                (mouseover)="onHover(tlist.template_id)">info</mat-icon>
+                                        </div>
 
                                     </mat-grid-tile>
 
@@ -76,7 +91,8 @@
                             </mat-grid-list>
                             <mat-card-footer>
                                 <div>
-                                    <button mat-flat-button [disabled]='selectedTemplateId == undefined' color="primary"
+                                    <button type="button" (click)="templateParse(tlist)" mat-flat-button
+                                        [disabled]='selectedTemplate.template_id == undefined' color="primary"
                                         class="submit-btn">Continue</button>
                                 </div>
                             </mat-card-footer>
@@ -92,9 +108,5 @@
 
     </div>
 
-
-
-    <div>
-        <app-footer></app-footer>
-    </div>
+ 
 </div>

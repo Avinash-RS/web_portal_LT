@@ -350,7 +350,7 @@
 }
 
 .inputs {
-  border: 1.5px solid $color-blue !important;
+  border: 1.0px solid $color-blue !important;
   padding: 8px !important;
 }
 
@@ -505,4 +505,7 @@ textarea:focus, input:focus{
 
 .dis {
   pointer-events: none !important;
+}
+.otp{
+  margin-top: 49px;
 }

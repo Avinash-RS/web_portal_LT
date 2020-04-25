@@ -160,8 +160,8 @@
             <div class="row p-b-10px" [formGroupName]="in">
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
-                  name="qualification_{{in}}">
-                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [value]="item._id">
+                  name="qualification">
+                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [value]="item._id" (onSelectionChange)="checkLevel($event,lv)">
                     {{lv.level_name}}
                   </mat-option>
                 </mat-select>
@@ -187,6 +187,16 @@
                     {{item.discipline_name}}
                   </mat-option>
                 </mat-select>
+              </div>
+              <div class="col-md-3 col-sm-12 col-12 display_flex" *ngIf="checkk == '10'">
+                <!-- <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
+                  name="institute">
+                  <mat-option [value]="item._id" *ngFor="let item of institutes">
+                    {{item.institute_name}}
+                  </mat-option>
+                </mat-select> -->
+                <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
+                placeholder="Institute" [attr.disabled]="cannotEdit" formControlName="institute">
               </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
@@ -362,14 +372,22 @@
             </div>
             <p class="f_wt_500 color_blue float_left">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
-              <p class="f_wt_500 color_blue float_left">OTP Code</p> <br><br>
-              <ng-otp-input [config]="config" formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
+              <p class="f_wt_500 color_blue float_left">OTP Code</p>
+              <div class="otp">
+                <ng-otp-input [config]="config"
+                formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
               </ng-otp-input>
-              <p>00:{{timeLeft}}</p>
+              </div><br>
+              <div *ngIf="sendOtp">
+                <p>00:{{timeLeft}}</p>
+              </div>
+              <div *ngIf="resendOtp">
+                <p>00:{{resendtimeLeft}}</p>
+              </div>
               <br><br>
             </div>
             <div *ngIf="showotp">
-              <button class="popupbtns" (click)="otpverify()">Verify</button>
+              <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
                 class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend
