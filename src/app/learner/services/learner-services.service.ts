@@ -4,7 +4,8 @@ import { Apollo } from "apollo-angular";
 import {
   login, get_course_by_user, get_country_details, get_qualification_details,
   get_board_university_details, get_discipline_details, get_specification_details,
-  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm
+  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
+  get_user_detail_username,check_existing_user
 } from "./operations/learner_query";
 
 import {
@@ -133,6 +134,18 @@ export class LearnerServicesService {
       }
     });
   }
+
+  // checks for existing user or not
+  check_existing_user(name) {
+    return this.Apollo.query({
+      query: check_existing_user,
+      variables: {
+        username: name
+      }
+    });
+  }
+
+
   forgotUsernameandPassword(type, subtype, mobile_number, email) {
     return this.Apollo.query({
       query: get_forgot_username_mobile_email,
@@ -243,6 +256,16 @@ export class LearnerServicesService {
       }
     });
   }
+
+  get_user_detail_username(username) {
+    return this.Apollo.query({
+      query: get_user_detail_username,
+      variables: {
+        username: username
+      }
+    });
+  }
+  
 
   update_email_onprofile(user_id, email) {
     return this.Apollo.query({

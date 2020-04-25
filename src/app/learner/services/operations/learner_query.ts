@@ -190,6 +190,15 @@ export const get_user_detail = gql`
       success
   }
 }`;
+
+export const get_user_detail_username = gql`
+  query get_user_detail_username($username: String){
+    get_user_detail_username(username: $username) {
+      message
+      success
+  }
+}`;
+
 export const list_content = gql`
 query list_content{
   list_content {
@@ -216,3 +225,12 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
     }
   }
 }`;
+
+export const check_existing_user = gql`
+  query check_existing_user($username: String){
+    check_existing_user(username: $username) {
+      message
+      success
+  }
+}`;
+
