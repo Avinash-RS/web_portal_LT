@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   userDetails: any;
   platform: string;
   is_staff: boolean;
+  fullname: any;
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
@@ -45,7 +46,8 @@ export class RegistrationComponent implements OnInit {
 
   Submit() {
     this.loader.show();
-   this.service.user_registration(this.registerForm.value.email,this.registerForm.value.fullname,this.registerForm.value.termsandconditions)
+    this.fullname=this.registerForm.value.fullname.trim();
+   this.service.user_registration(this.registerForm.value.email,this.fullname,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           if (data.data['user_registration']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration'].message,null)

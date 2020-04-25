@@ -86,7 +86,7 @@ button:disabled:hover {
 }
 
 .f_size_17 {
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 .f_size_18 {
@@ -94,7 +94,7 @@ button:disabled:hover {
 }
 
 .f_size_20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .f_size_23 {
@@ -130,7 +130,7 @@ button:disabled:hover {
 }
 
 .width_50 {
-  width: 50%;
+  width: 50% !important;
 }
 
 .width_40 {
@@ -154,7 +154,7 @@ button:disabled:hover {
 }
 
 .space5 {
-  margin-top: 5%;
+  margin-top: 5% !important;
 }
 
 .space10 {
@@ -190,13 +190,13 @@ button:disabled:hover {
 }
 .float_right {
   float: right;
-  text-align: right;
-  text-align: end;
+  text-align: right !important;
+  text-align: end !important;
 }
 
 .float_left {
   float: left;
-  text-align: left;
+  text-align: left !important;
 }
 
 .center_align {
@@ -229,7 +229,7 @@ button:disabled:hover {
 }
 
 .p-5px {
-  padding: 5px;
+  padding: 5px !important;
 }
 
 .border-radius-5 {
@@ -253,7 +253,7 @@ td {
 }
 
 .no_border {
-  border: none;
+  border: none !important;
   box-shadow: none;
 }
 
@@ -441,6 +441,12 @@ mat-icon {
   box-shadow: 0 0 5px #aaaaaa !important;
   font-size: 16px;
 }
+.forgotusername{
+  .mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    overflow: hidden !important;
+  }
+}
+
 
 .breadcrumb-item + .breadcrumb-item::before {
   content: ">" !important;
