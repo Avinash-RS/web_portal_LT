@@ -1266,9 +1266,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addCertificates(c, i) {
-    console.log(c, i, this.certificate)
     var arrayT = this.certificate.value.filter(i => i === c);
-    console.log(arrayT)
     if (arrayT.length > 1) {
       this.alert.openAlert("This certificate link is already filled", null)
       this.certificate.removeAt(i);;
@@ -1362,7 +1360,6 @@ export class ProfileComponent implements OnInit {
       this.levelValue = level.data['get_qualification_details'].data;
     })
   }
-
   
   checkLevel(event,level){
     if(event.source.selected) {
@@ -1408,13 +1405,11 @@ export class ProfileComponent implements OnInit {
   }
 
   updateEmail(mailForm) {
-    console.log(mailForm)
     if (mailForm == false) {
       this.alert.openAlert('Email Id is invalid', null)
     } else {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
         if (data.data['update_email_onprofile']['success'] == 'true') {
-          console.log(data.data['update_email_onprofile'].message)
           this.alert.openAlert(data.data['update_email_onprofile'].message, null);
           this.getprofileDetails(this.currentUser.user_id)
         } else {
