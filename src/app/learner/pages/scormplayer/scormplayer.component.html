@@ -62,15 +62,15 @@
     </section> -->
 
     <section class="accordion" *ngFor="let res of content?.coursedetails">
-      <input type="checkbox" name="collapse">
+      <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
-        <label><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+        <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
       </h2>
-      <div class="content" *ngFor="let mod of res?.moduledetails; let i = index">
-        <ol class="submod">
+      <div class="content">
+        <ol class="submod"  *ngFor="let mod of res?.moduledetails; let i = index">
           <li>{{i+1}} {{mod?.topicname}}</li>
-          <a href="{{mod?.topicimages[0]}}"></a>
+          <!-- <a href="{{mod?.topicimages[0]}}"></a> -->
         </ol>
       </div>
     </section>
@@ -81,7 +81,7 @@
     </div>
     <br><br>
 
-    <div class="card">
+    <!-- <div class="card">
       <h1 class="title">Instructors</h1>
       <mat-grid-list [cols]="breakpoint"rowHeight="1:0.3" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let author of authorDetails">
@@ -101,7 +101,7 @@
               </div>
             </div>
           </div>
-        </mat-grid-tile>
+        </mat-grid-tile> -->
 
         <!-- <mat-grid-tile>
           <div class="box">
@@ -122,8 +122,8 @@
           </div>
         </mat-grid-tile> -->
 
-      </mat-grid-list>
-    </div>
+      <!-- </mat-grid-list>
+    </div> -->
     <br><br>
   </div>
 </div>

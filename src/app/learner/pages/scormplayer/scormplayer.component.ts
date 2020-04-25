@@ -64,31 +64,36 @@ export class ScormplayerComponent implements OnInit {
     this.service.list_content().subscribe(data => {
     })
   }
-  getcoursedetail() {
-    this.contentid = 'Golf Explained - Sequencing Random Test'
-    this.service.syllabus_of_particular_scorm(this.contentid,'3qpai7',"1").subscribe(data => {
+  // getcoursedetail() {
+  //   this.contentid = 'Golf Explained - Sequencing Random Test'
+  //   this.service.syllabus_of_particular_scorm(this.contentid,'3qpai7',"1").subscribe(data => {
 
-      this.content = data.data
-      if(this.content&&this.content.syllabus_of_particular_scorm&&this.content.syllabus_of_particular_scorm.success){
-        this.syllabus = this.content.syllabus_of_particular_scorm.data[0].scorm_dtl_user_map
-        this.modules = this.syllabus[0].children;
-        console.log( this.modules)
-      }else{
-        console.log('no record')
-      }
+  //     this.content = data.data
+  //     if(this.content&&this.content.syllabus_of_particular_scorm&&this.content.syllabus_of_particular_scorm.success){
+  //       this.syllabus = this.content.syllabus_of_particular_scorm.data[0].scorm_dtl_user_map
+  //       this.modules = this.syllabus[0].children;
+  //       console.log( this.modules)
+  //     }else{
+  //       console.log('no record')
+  //     }
       
-    })
-  }
+  //   })
+  // }
 
 
   // this.course_id
   getModuleData() {
     this.service.getModuleData("1").subscribe(data => {
       console.log(data)
-      this.content = data.data
-      if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
-         this.content = this.content.getModuleData.data[0]
-      }   
+      // if(data.data['getmoduleData']['success'] == true){
+      
+        this.content = data.data['getmoduleData']['data'][0]
+        console.log( this.content)
+      // }
+     
+      // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
+      //    this.content = this.content.getModuleData.data[0]
+      // }   
     })
   }
 
