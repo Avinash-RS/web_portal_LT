@@ -36,18 +36,18 @@ import { NgOtpInputModule } from 'ng-otp-input';
 
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegistrationComponent, },
-  { path: 'otp', component: OtpComponent },
-  { path: 'password', component: PasswordComponent },
-  { path: 'recover', component: ForgotUsernameAndPasswordComponent },
-  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
-  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
-  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
-  { path: 'resetpassword', component: ResetpasswordComponent },
-  { path : "terms",component:TermsconditionsComponent},
-  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] ,data : {title:'Learner Login'}},
+  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard],data : {title:'Course details'} },
+  { path: 'register', component: RegistrationComponent,data : {title:'Learner  Registration'} },
+  { path: 'otp', component: OtpComponent ,data : {title:'Learner  Registration OTP'} },
+  { path: 'password', component: PasswordComponent ,data : {title:'Learner  Registration Username/Password'} },
+  { path: 'recover', component: ForgotUsernameAndPasswordComponent ,data : {title:'Learner  Forget Password'}},
+  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent  ,data : {title:'Learner  Forget Password OTP'}},
+  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] ,data : {title:'Learner  Profile'}},
+  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] ,data : {title:'Learner  MyCourse'}},
+  { path: 'resetpassword', component: ResetpasswordComponent ,data : {title:'Learner   Reset password'}},
+  { path : "terms",component:TermsconditionsComponent,data : {title:'Terms and conditions'}},
+  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard],data : {title:'Course Player'}},
 ];
 
 @NgModule({
