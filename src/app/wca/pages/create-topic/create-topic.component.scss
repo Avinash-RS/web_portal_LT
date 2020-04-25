@@ -36,7 +36,6 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: 75px 367px 12px -288px; 
 }
 .backgroundcol1{
     cursor: pointer;
@@ -50,7 +49,6 @@
     padding-right: 15px;
     padding-top: 9px;
     float: right;
-    margin: 75px 367px 9px -356px; 
 }
 
 
@@ -473,6 +471,11 @@ width: 113px;
    background:  $color-field;
    border:none
 }
+
+.showCon.active{
+    display: none;
+}
+
 .spanTime{
     color: $color-darkGrey;
 }
@@ -501,6 +504,7 @@ width: 113px;
 .firstSpan{
     display: flex;
     align-items: center;
+    padding-left: 8%;
 }
 .dspFlx{
     display: flex;
@@ -515,4 +519,7 @@ width: 113px;
     border-radius: 11px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     outline: none;  
+  }
+  .padTwoSides{
+    padding: 0px 14px;
   }

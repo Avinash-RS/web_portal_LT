@@ -56,7 +56,11 @@
   </div>
   </div>
 
-                              <div class="alnCenter">
+<div *ngIf="!done?.length" class="alnCenter">
+ <span style="color: red;">Drag and Drop the Template Please !!!</span>
+</div>
+
+                              <div class="alnCenter" *ngIf="done?.length">
                                 <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template & continue</button>
                                 <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
                                 <button class="backgroundcol1" routerLink="" >Cancel</button>
