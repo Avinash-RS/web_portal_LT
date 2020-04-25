@@ -6,11 +6,11 @@ import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'userManagement', component: UserManagementComponent },
-        { path: 'addUser', component: AddUserComponent },
+        { path: 'dashboard', component: DashboardComponent , data : {title:'Admin Dashboard'}},
+        { path: 'userManagement', component: UserManagementComponent , data : {title:'Learner Management'}},
+        { path: 'addUser', component: AddUserComponent , data : {title:'Add New Learner'}},
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
-        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
+        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         // { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },
         // { path: 'chats', loadChildren: '../chats/chat.module#ChatsModule' }, // fix this

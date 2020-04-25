@@ -29,18 +29,18 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 import { PipeModule } from '../pipes/pipe.module';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] },
-  { path: 'addcourse', component: CreateCourseComponent, canActivate: [AuthGuard] },
-  { path: 'viewmodule', component: ViewModuleComponent, canActivate: [AuthGuard] },
-  { path: 'addmodule', component: CreateModuleComponent, canActivate: [AuthGuard] },
-  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard]},
-  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard]},
-  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard]},
-  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard]},
-  { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard]},
-  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard]},
-  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard]}
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] , data : {title:'Web Content Authoring Dashboard'}},
+  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] , data : {title:'Web Content Authoring Dashboard'}},
+  { path: 'addcourse', component: CreateCourseComponent, canActivate: [AuthGuard] , data : {title:'Add new Course'}},
+  { path: 'viewmodule', component: ViewModuleComponent, canActivate: [AuthGuard] , data : {title:'View Module'} },
+  { path: 'addmodule', component: CreateModuleComponent, canActivate: [AuthGuard] , data : {title:'Create Module'}},
+  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard], data : {title:'Create Template'}},
+  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard], data : {title:'Choose Template'}},
+  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard], data : {title:'Create Topic'}},
+  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard], data : {title:'Upload Files'}},
+  { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard], data : {title:'My created Course'}},
+  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard], data : {title:'Choose Template'}},
+  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard], data : {title:'Reference File'}}
 
 ];
 
