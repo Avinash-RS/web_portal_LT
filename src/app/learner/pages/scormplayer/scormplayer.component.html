@@ -1,12 +1,12 @@
 <app-header></app-header>
 <div class="limiter" >
   <div class="container wrap-body">
-    <h1 class="head" *ngIf="courseDeatils">{{courseDeatils.course_name}}</h1>
+    <h1 class="head" *ngIf="courseDeatils">{{content?.coursename}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">{{courseDeatils.course_name}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{content?.coursename}}</li>
       </ol>
     </nav>
 
@@ -49,23 +49,41 @@
 
     </div>
     <h1 class="subhead">Resources</h1>
-    <section class="accordion" >
-      <input type="checkbox" name="collapse"   *ngIf="syllabus[0]" [id]="syllabus[0].title">
-      <h2 class="handle" *ngIf="syllabus[0]">
-        <label [for]="syllabus[0].title"><b>{{syllabus[0].title}}</b><i class="fa fa-file-text-o doc"> <b style="padding-left: 18px;"> 7 Documents</b></i> </label>
+    <section class="accordion" *ngFor="let res of content?.coursedetails">
+      <input type="checkbox" name="collapse" [id]="res?.modulename">
+      <h2 class="handle">
+        <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+           <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
       </h2>
       <div class="content">
-        <ol class="submod" *ngFor="let module of modules; let i = index">
-          <li>{{i+1}}  . {{module.title}}</li>
-        </ol>
+        <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+          <div class="col-8">
+            <ol class="submod"  >
+              <li>{{i+1}} {{mod?.topicname}}</li>
+            </ol>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field style="text-align: right;">
+              <mat-icon matPrefix>mic</mat-icon>
+              <mat-select  placeholder="Resourse">
+                  <mat-option  *ngIf="mod.resourse != null" >
+                      <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          </div>
+    </div>
       </div>
     </section>
+
+
     <div style="text-align:center;">
-      <button class="btn1 success">{{modules.length}} more section</button>
+      <button class="btn1 success">{{modules?.length}} more section</button>
     </div>
     <br><br>
 
-    <div class="card">
+    <!-- <div class="card">
       <h1 class="title">Instructors</h1>
       <mat-grid-list [cols]="breakpoint"rowHeight="1:0.3" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let author of authorDetails">
@@ -85,7 +103,7 @@
               </div>
             </div>
           </div>
-        </mat-grid-tile>
+        </mat-grid-tile> -->
 
         <!-- <mat-grid-tile>
           <div class="box">
@@ -106,8 +124,8 @@
           </div>
         </mat-grid-tile> -->
 
-      </mat-grid-list>
-    </div>
+      <!-- </mat-grid-list>
+    </div> -->
     <br><br>
   </div>
 </div>
