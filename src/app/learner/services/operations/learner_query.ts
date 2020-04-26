@@ -253,7 +253,9 @@ query getmoduleData($courseid:String!){
           }
         }
       }
-    }`;
+    }
+  }
+}`;
 export const check_existing_user = gql`
   query check_existing_user($username: String){
     check_existing_user(username: $username) {
