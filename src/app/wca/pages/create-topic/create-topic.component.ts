@@ -314,8 +314,8 @@ export class CreateTopicComponent implements OnInit {
     if (images && images.value && images.value.topicimages) {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'previewImages', images: images.value.topicimages },
-        height: 'auto',
-        width: 'auto',
+        height: '80%',
+        width: '80%',
         closeOnNavigation: true,
         disableClose: true,
       });

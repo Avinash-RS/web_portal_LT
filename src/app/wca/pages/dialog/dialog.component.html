@@ -23,6 +23,7 @@
     
     
     <ng-container *ngIf="dialogdata?.type === 'previewImages'">
+       <div>
         <div class="dialogClose">
             <span (click)="dialogClose()"> <img class="dialogClose2"  src="assets\images\dialog close.svg"> </span>
         </div>
@@ -32,5 +33,6 @@
              <img height="100%" width="100%" [src]="i">
         </mat-card>
     </div>
+       </div>
     </ng-container>
 </div>
