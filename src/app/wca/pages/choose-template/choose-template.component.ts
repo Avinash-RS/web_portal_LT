@@ -36,8 +36,6 @@ export class ChooseTemplateComponent implements OnInit {
       console.log(this.queryData)
       }
     });
-
-
     this.selectedTemplate={
       template_id:""
     }
@@ -60,8 +58,7 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log( this.selectedTemplate );
-    this.APIService.bSubject.next(this.selectedTemplate);
-        this.router.navigate(['./Wca/addtopic']);
+        this.router.navigate(['./Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
   }
 
   onHover(id) {
