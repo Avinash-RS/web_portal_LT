@@ -13,7 +13,7 @@
 
 
 
-<div class="container wrap-body">
+<div class="container create-course wrap-body">
   <form [formGroup]="courseForm" (ngSubmit)="createcourseForm()">
     <div class="row">
 
@@ -104,7 +104,7 @@
                       <div class="mainImage">
                         <span>
                           <input style="display: none;" id="fileInput" type='file' #fileInput
-                            (change)="onSelectFile($event,'img1')"> <img class="img1" (click)="fileInput.click()"
+                            (change)="onSelectFile($event,'img1')"> <img class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
                             [src]="preview1 ? preview1 : '../../../../assets/images/image_upload.svg'">
                         </span>
                           <span *ngIf="!this.preview1">Upload the Course Image <span style="color: red;">*</span></span>
