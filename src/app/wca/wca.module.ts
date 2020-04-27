@@ -29,18 +29,18 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 import { PipeModule } from '../pipes/pipe.module';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] , data : {title:'Web Content Authoring Dashboard'}},
-  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard] , data : {title:'Web Content Authoring Dashboard'}},
-  { path: 'addcourse', component: CreateCourseComponent, canActivate: [AuthGuard] , data : {title:'Add new Course'}},
-  { path: 'viewmodule', component: ViewModuleComponent, canActivate: [AuthGuard] , data : {title:'View Module'} },
-  { path: 'addmodule', component: CreateModuleComponent, canActivate: [AuthGuard] , data : {title:'Create Module'}},
-  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard], data : {title:'Create Template'}},
-  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard], data : {title:'Choose Template'}},
-  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard], data : {title:'Create Topic'}},
-  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard], data : {title:'Upload Files'}},
-  { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard], data : {title:'My created Course'}},
-  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard], data : {title:'Choose Template'}},
-  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard], data : {title:'Reference File'}}
+  { path: '', component: DashboardComponent, data : {title:'Web Content Authoring Dashboard'}},
+  { path: 'wca', component: WcaComponent, data : {title:'Web Content Authoring Dashboard'}},
+  { path: 'addcourse', component: CreateCourseComponent,  data : {title:'Add new Course'}},
+  { path: 'viewmodule', component: ViewModuleComponent,  data : {title:'View Module'} },
+  { path: 'addmodule', component: CreateModuleComponent,  data : {title:'Create Module'}},
+  { path: 'addtemplate', component: CreateTemplateComponent, data : {title:'Create Template'}},
+  { path: 'choosetemplate', component: ChooseTemplateComponent, data : {title:'Choose Template'}},
+  { path: 'addtopic', component: CreateTopicComponent, data : {title:'Create Topic'}},
+  { path: 'addfile', component: UploadFilesComponent, data : {title:'Upload Files'}},
+  { path: 'mycourse', component: MycreatedCourseComponent, data : {title:'My created Course'}},
+  { path: 'ct', component: ChooseTemplateComponent,data : {title:'Choose Template'}},
+  { path: 'rf', component: ReferenceFileComponent, data : {title:'Reference File'}}
 
 ];
 

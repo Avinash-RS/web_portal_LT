@@ -79,10 +79,20 @@
 .img1 {
     vertical-align: middle;
     width: 150px;
+    height: 115px;
     border-color: #d4dcea;
-    margin: 50px 11px 9px 5px;
+    margin: 20px 11px 10px 5px;
     background: $color-field;
 
+}
+
+.img1-uploaded {
+    vertical-align: middle;
+    width: 180px;
+    height: 175px;
+    border-color: #d4dcea;
+    margin: 20px 11px 10px 5px;
+    background: #e3ecff;
 }
 
 
