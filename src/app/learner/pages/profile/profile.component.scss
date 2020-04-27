@@ -391,9 +391,9 @@ div.account{
 
 }
 
-::ng-deep .mat-select-panel {
-  overflow: hidden !important;
-}
+// ::ng-deep .mat-select-panel {
+//   overflow: hidden !important;
+// }
 
 .p-b-10px {
   padding-bottom: 10px;
@@ -501,6 +501,10 @@ textarea:focus, input:focus{
 }
 .fa {
   cursor: pointer;
+}
+
+.dis {
+  pointer-events: none !important;
 }
 .otp{
   margin-top: 49px;
