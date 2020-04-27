@@ -6,7 +6,6 @@ import { Directive, Output, EventEmitter, HostListener } from '@angular/core';
 export class CapslockDirective {
 
   constructor() {
-    console.log('hi')
  }
 
   @Output('capsLock') capsLock = new EventEmitter<Boolean>();

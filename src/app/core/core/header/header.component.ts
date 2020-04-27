@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
-      console.log(logout.data.logout)
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
         this.userDetailes = null;
