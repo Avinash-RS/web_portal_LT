@@ -143,7 +143,7 @@ savedTemplates(type) {
           this.spinner.hide();
           if (data && data.Message === 'Success') {
             this.toast.success('Template Saved successfully !!!');
-            this.router.navigate(['./Wca/addtopic'],{queryParams:{template:data.Result}});
+            this.router.navigate(['./Wca/addtopic'],{queryParams:{template:data.Result,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
           }
          },err => {
            this.spinner.hide();
@@ -152,7 +152,7 @@ savedTemplates(type) {
       });
     } else {
       this.wcaService.bSubject.next({template_details:this.done});
-      this.router.navigate(['./Wca/addtopic'],{queryParams:{temp:'noTempID'}});
+      this.router.navigate(['./Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
     }
    } else {
      this.toast.warning('Atleast One Template is Required !!!');
