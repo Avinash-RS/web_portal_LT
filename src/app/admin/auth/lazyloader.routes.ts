@@ -3,12 +3,13 @@ import { AuthComponent } from './auth.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserManagementComponent } from '../pages/user-management/user-management.component';
 import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
+import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
         { path: 'dashboard', component: DashboardComponent , data : {title:'Admin Dashboard'}},
-        { path: 'userManagement', component: UserManagementComponent , data : {title:'Learner Management'}},
-        { path: 'addUser', component: AddUserComponent , data : {title:'Add New Learner'}},
+        { path: 'userManagement', component: UserManagementComponent , data : {title:'Learner Management'},canActivate: [AuthGuard]},
+        { path: 'addUser', component: AddUserComponent , data : {title:'Add New Learner'},canActivate: [AuthGuard]},
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },

@@ -136,7 +136,7 @@ this.loader = true;
           if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message, length > 0)
             Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
           else
-            this.alert.openAlert("Sorry", 'No user exists with "' + filterValue + '.."')
+            this.alert.openAlert("Sorry", 'User doesnt exists')
           // this.toast.warning('Course Name and Course image is Required !!!');
         });
     }
