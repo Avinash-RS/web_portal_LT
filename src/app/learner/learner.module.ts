@@ -32,7 +32,9 @@ import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpasswo
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component'
+import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
+import { NgxPaginationModule} from 'ngx-pagination';
+
 //others
 
 const routes: Routes = [
@@ -92,7 +94,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    NgxPaginationModule
   ],
   providers: [Apollo],
   entryComponents: []

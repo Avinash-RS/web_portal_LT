@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+declare var $: any;
 
 @Component({
   selector: 'app-view-all-courses',
@@ -13,6 +14,7 @@ export class ViewAllCoursesComponent implements OnInit {
   type: any;
   subcategories: any;
   allcourses: any;
+  showdesc = true;
   pagenumber = 0;
   constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) { }
 
@@ -29,9 +31,9 @@ export class ViewAllCoursesComponent implements OnInit {
   getcoursecategories() {
     console.log(this.userDetailes);
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
-      console.log(result)
-    console.log(result.data.get_all_category.message);
-    this.categories = result.data.get_all_category.message;
+      console.log(result);
+      console.log(result.data.get_all_category.message);
+      this.categories = result.data.get_all_category.message;
     });
   }
 
@@ -48,11 +50,11 @@ export class ViewAllCoursesComponent implements OnInit {
  }
 
  getcourses(category) {
-  category.type = this.type;
-  category._id = category.category_id ? category.category_id : category.sub_category_id;
-  category.pagenumber = this.pagenumber;
-  console.log(category)
-  this.learnerservice.getcourse(category).subscribe((result: any) => {
+   this.pagenumber = 0;
+   category.type = this.type;
+   category._id = category.category_id ? category.category_id : category.sub_category_id;
+   category.pagenumber = this.pagenumber;
+   this.learnerservice.getcourse(category).subscribe((result: any) => {
     console.log(result.data.get_course_by_subcategory.message);
     this.allcourses = result.data.get_course_by_subcategory.message;
     // this.allcourses = result.data.get_a
@@ -66,14 +68,25 @@ export class ViewAllCoursesComponent implements OnInit {
  });
  }
 
-
+ test() {
+  $('.option__button').on('click', function() {
+    $('.option__button').removeClass('selected');
+    $(this).addClass('selected');
+    if ($(this).hasClass('option--grid')) {
+      $('.results-section').attr('class', 'results-section results--grid');
+    } else if ($(this).hasClass('option--list')) {
+      $('.results-section').attr('class', 'results-section results--list');
+    }
+  });
+  }
   /**
    * Determines whether scroll down on
    */
-  onScrollDown() {
+  next(event) {
+    console.log(event);
     this.pagenumber = this.pagenumber + 15;
-    console.log(this.userDetailes.group_id[0]);
-    this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
+    console.log(this.userDetailes);
+    this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
      console.log(result.data.get_all_course_by_usergroup.message);
      this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });

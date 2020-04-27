@@ -357,6 +357,7 @@ export class LearnerServicesService {
   }
 
   getallcourses(groupid, pagenumber) {
+    console.log(groupid,pagenumber)
     return this.Apollo.query({
       query: get_all_course_by_usergroup,
       variables: {
