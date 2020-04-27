@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { get_user_group, search_user, deactivate_reactivate_user, get_all_user,block_user,get_all_learner_detail,
-get_user_session_detail } from "./operations/admin_query";
-import { user_registration } from "./operations/admin_mutation"
+get_user_session_detail, get_user_group_hierarchy, getgroup } from "./operations/admin_query";
+import { user_registration ,createusergroup} from "./operations/admin_mutation"
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -98,4 +98,35 @@ export class AdminServicesService {
       }
     });
   }
+
+  
+  gethierarchies() {
+    return this.Apollo.query({
+      query: get_user_group_hierarchy,
+    });
+  }
+
+  getgroup(data) {
+    return this.Apollo.query({
+      query: getgroup,
+      variables: {
+        input_id: data.input_id, type: data.type, pagenumber: data.pagenumber
+      }
+    });
+  }
+
+  creategroup(group) {
+    console.log(group)
+    return this.Apollo.query({
+      query: createusergroup,
+      variables: {
+        group_name: group.group_name, group_type: group.group_type,
+        parent_group_id: group.parent_group_id, hierarchy_id: group.hierarchy_id,
+        admin_id: group.admin_id}
+    });
+  }
 }
+
+
+
+

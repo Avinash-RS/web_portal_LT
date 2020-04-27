@@ -1,0 +1,366 @@
+<app-header></app-header>
+<input class="variation" id="bluepurple" type="radio" value="1" name="color" checked="checked"/>
+<main id="bluepurple">
+  <section class="results-header">
+
+      <div class="sortby">
+        <label class="label-form">Sort by :</label>
+        <select type="text" >
+            <option value="1">Featured</option>
+            <option value="2">Popular</option>
+          </select>
+      </div>
+
+    <div class="results-header__option">
+    
+      <div class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="option__button option--list"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="main">
+  
+        <!-- Actual search box -->
+        <div class="form-group has-search">
+          <span class="fa fa-search form-control-feedback"></span>
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+         
+      </div>
+  </section>
+ 
+  <div class="filter-section__wrapper">
+    <section class="filter-section">
+      <h6>Filters</h6>
+      <div class="filters">
+        <h5 class="filters__title">Category</h5>
+        <div class="filters__item" *ngFor ="let cat of categories;let ind = index">
+          <div class="checkbox">
+            <input  name="check" id="customCheck"
+            [(ngModel)]="check" type="checkbox"/>
+            <label (click)="getcourses(cat)"for="customCheck">{{cat.category_name}}<span class="box"></span>
+            </label> 
+          </div><span class="badge status-primary">10</span>
+        </div>
+        <!-- <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-2" type="checkbox" checked="checked"/>
+            <label for="checkbox-2">Business<span class="box"></span></label>
+          </div><span class="badge status-primary">5</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-3" type="checkbox"/>
+            <label for="checkbox-3">Finance & Accounting<span class="box"></span></label>
+          </div><span class="badge status-primary">20</span>
+        </div> -->
+        <!-- <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-4" type="checkbox"/>
+            <label for="checkbox-4">IT & Software<span class="box"></span></label>
+          </div><span class="badge status-primary">8</span>
+        </div> -->
+        <!-- <div class="filters__item">
+            <div class="checkbox">
+              <input id="checkbox-4" type="checkbox"/>
+              <label for="checkbox-4">Office Productivity<span class="box"></span></label>
+            </div><span class="badge status-primary">8</span>
+          </div> -->
+      </div>
+      <div class="filters">
+        <h5 class="filters__title">Enrollments</h5>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-5" type="checkbox"/>
+            <label for="checkbox-5">0-100<span class="box"></span></label>
+          </div><span class="badge status-primary">9</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-6" type="checkbox" checked="checked"/>
+            <label for="checkbox-6">101-200<span class="box"></span></label>
+          </div><span class="badge status-primary">12</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-7" type="checkbox"/>
+            <label for="checkbox-7">201-500<span class="box"></span></label>
+          </div><span class="badge status-primary">17</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-8" type="checkbox"/>
+            <label for="checkbox-8">501-1000<span class="box"></span></label>
+          </div><span class="badge status-primary">3</span>
+        </div>
+        <div class="filters__item">
+            <div class="checkbox">
+              <input id="checkbox-9" type="checkbox"/>
+              <label for="checkbox-9">> 1000<span class="box"></span></label>
+            </div><span class="badge status-primary">3</span>
+          </div>
+      </div>
+      <div class="filters">
+        <h5 class="filters__title">Instructor Name</h5>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-10" type="checkbox"/>
+            <label for="checkbox-10">Fernado<span class="box"></span></label>
+          </div><span class="badge status-primary">9</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-11" type="checkbox" checked="checked"/>
+            <label for="checkbox-11">Example<span class="box"></span></label>
+          </div><span class="badge status-primary">12</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-12" type="checkbox"/>
+            <label for="checkbox-12">Peter<span class="box"></span></label>
+          </div><span class="badge status-primary">17</span>
+        </div>
+        <div class="filters__item">
+          <div class="checkbox">
+            <input id="checkbox-13" type="checkbox"/>
+            <label for="checkbox-13">Joseph<span class="box"></span></label>
+          </div><span class="badge status-primary">3</span>
+        </div>
+        <div class="filters__item">
+            <div class="checkbox">
+              <input id="checkbox-14" type="checkbox"/>
+              <label for="checkbox-14">John<span class="box"></span></label>
+            </div><span class="badge status-primary">3</span>
+          </div>
+      </div>
+      <div class="filters__item">
+      <a class="button">Clear</a>
+      </div>
+    </section>
+  </div>
+  <section class="results-section results--grid">
+
+    <div class="profile" *ngFor ="let c of allcourses">
+      <div class="profile__image"><img src="{{c?.course_img_url}}" alt="Course Image"/></div>
+      <div class="overlayinn">
+        <h2>Description</h2>
+        <p>{{c?.course_description}}</p>
+    </div>
+      <div class="profile__info">
+        <h3>{{c?.course_name}}</h3>
+        <!-- <div class="box red"></div> -->
+        <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+      </div>
+      <div class="profile__stats">
+       <i class="fa fa-users fa-2x"></i>
+      </div>
+      <p class="profile__stats__title">2,900 learners</p>   
+      <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+    </div>
+
+    <div class="profile">
+        <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Course Image"/></div>
+        <div class="overlayinn">
+          <h2>Description</h2>
+          <p>Description</p>
+      </div>
+        <div class="profile__info">
+          <h3>Doggo Dogg</h3>
+          <!-- <div class="box red"></div> -->
+          <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+        </div>
+        <div class="profile__stats">
+         <i class="fa fa-users fa-2x"></i>
+  
+         
+  
+        </div>
+        <p class="profile__stats__title">2,900 learners</p>   
+        <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+      </div>
+      <div class="profile">
+        <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Course Image"/></div>
+        <div class="overlayinn">
+          <h2>Description</h2>
+          <p>Description</p>
+      </div>
+        <div class="profile__info">
+          <h3>Doggo Dogg</h3>
+          <!-- <div class="box red"></div> -->
+          <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+        </div>
+        <div class="profile__stats">
+         <i class="fa fa-users fa-2x"></i>
+  
+         
+  
+        </div>
+        <p class="profile__stats__title">2,900 learners</p>   
+        <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+      </div>
+
+      <div class="profile">
+        <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Course Image"/></div>
+        <div class="overlayinn">
+          <h2>Description</h2>
+          <p>Description</p>
+      </div>
+        <div class="profile__info">
+          <h3>Doggo Dogg</h3>
+          <!-- <div class="box red"></div> -->
+          <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+        </div>
+        <div class="profile__stats">
+         <i class="fa fa-users fa-2x"></i>
+  
+         
+  
+        </div>
+        <p class="profile__stats__title">2,900 learners</p>   
+        <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+      </div>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="profile">
+          <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Course Image"/></div>
+          <div class="overlayinn">
+            <h2>Description</h2>
+            <p>Description</p>
+        </div>
+          <div class="profile__info">
+            <h3>Doggo Dogg</h3>
+            <!-- <div class="box red"></div> -->
+            <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+          </div>
+          <div class="profile__stats">
+           <i class="fa fa-users fa-2x"></i>
+    
+           
+    
+          </div>
+          <p class="profile__stats__title">2,900 learners</p>   
+          <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+        </div>
+        <div class="profile">
+          <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Course Image"/></div>
+          <div class="overlayinn">
+            <h2>Description</h2>
+            <p>Description</p>
+        </div>
+          <div class="profile__info">
+            <h3>Doggo Dogg</h3>
+            <!-- <div class="box red"></div> -->
+            <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
+          </div>
+          <div class="profile__stats">
+           <i class="fa fa-users fa-2x"></i>
+    
+           
+    
+          </div>
+          <p class="profile__stats__title">2,900 learners</p>   
+          <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
+        </div>
+  
+  </section>
+</main>
+
+
+
+
+
+<!-- <div *ngIf="type=='category'" class="section">
+    <div class="container">
+        <h1 class="heading-primary">Categories</h1>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let cat of categories">
+                <div class="card profile-card-2" (click)="getcoursesubcategories(cat)">
+                    <div class="card-img-block">
+                        <img class="img-fluid" src="{{cat.category_image}}" alt="Card image cap" />
+                    </div>
+                    <div class="card-body pt-5">
+                        <h5 class="card-title">{{cat?.category_name}}</h5>
+                        <p class="card-text">{{cat?.category_description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="error-wrapper" *ngIf="!categories?.length">
+            <div class="man-icon"></div>
+            <img class="img-fluid" src="../../assets/learner/norecord.png" alt="Card image cap" />
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="type=='subcategory'" class="section">
+    <div class="container">
+        <h1 class="heading-primary">    Sub Categories        </h1>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" (click)="loadcategoryandcourses();" class="backbutton">Back</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let cat of subcategories">
+                <div class="card profile-card-2">
+                    <div class="card-img-block">
+                        <img class="img-fluid" src="{{cat.sub_category_image}}" alt="Card image cap" />
+                    </div>
+                    <div class="card-body pt-5">
+                        <h5 class="card-title">{{cat.sub_category_name}}</h5>
+                        <p class="card-text">{{cat.sub_category_description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="error-wrapper" *ngIf="!subcategories?.length">
+            <div class="man-icon"></div>
+            <img class="img-fluid" src="../../assets/learner/norecord.png" alt="Card image cap" />
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="section">
+    <div class="container">
+        <h1 class="heading-primary">  Courses   </h1>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"  infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+            (scrolled)="onScrollDown()" *ngFor="let cou of allcourses">
+                <div class="card profile-card-2">
+                    <div class="card-img-block">
+                        <img class="img-fluid" src="{{cat?.course_img_url}}" alt="Card image cap" />
+                    </div>
+                    <div class="card-body pt-5">
+                        <h5 class="card-title">{{cou?.course_name}}</h5>
+                        <p class="card-text">{{cat?.course_description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="error-wrapper" *ngIf="!allcourses?.length">
+                <div class="man-icon"></div>
+                <img class="img-responsive" src="../../assets/learner/norecord.png" alt="Card image cap" />
+        </div>
+
+    </div>
+</div> -->

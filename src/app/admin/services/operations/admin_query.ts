@@ -182,3 +182,43 @@ export const get_all_learner_detail = gql`
     }
   }`;
 
+
+export const getgroup = gql`
+  query getgroup ($input_id: String!, $type: String!, $pagenumber: Int!){
+    getgroup(input_id: $input_id, type: $type, pagenumber: $pagenumber) {
+        success
+        error_msg
+        message{
+              _id
+              group_name
+              group_type
+              admin_id
+              created_on
+              updated_on
+              created_by
+              is_active
+              group_id
+              hierarchy_id
+              parent_group_id
+        }
+    }
+}`;
+
+export const get_user_group_hierarchy = gql`
+query get_user_group_hierarchy{
+  get_user_group_hierarchy {
+      success
+      error_msg
+      message{
+        _id
+        hierarchy_id
+        hierarchy_name
+        hierarchy_level
+        created_on
+        updated_on
+        created_by
+        admin_id
+        is_active
+      }
+  }
+  }`;
