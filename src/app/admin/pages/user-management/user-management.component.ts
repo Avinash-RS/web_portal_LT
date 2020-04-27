@@ -33,7 +33,7 @@ export class UserManagementComponent implements OnInit {
   selectedArray: any = [];
   profileDetails: {};
   trackDetails: any;
-  loader  :boolean  = false;
+  loader: boolean = false;
   constructor(private router: Router, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
     private dialog: MatDialog,
@@ -42,7 +42,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   getAllUser(pagenumber) {
-this.loader = true;
+    this.loader = true;
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
@@ -126,21 +126,35 @@ this.loader = true;
   }
 
   applyFilter(filterValue: string) {
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (filterValue.trim().toLowerCase().length > 3) {
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+    setTimeout(() => {
+      if (filterValue.trim().toLowerCase().length > 3) {
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+        this.ELEMENT_DATA = []
+        this.service.searchUser(filterValue.trim().toLowerCase(), 0, 1)
+          .subscribe((result: any) => {
+            if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
+              Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
+              this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+              console.log(this.ELEMENT_DATA);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.resultsLength = 10;
+            }
+            else
+              this.alert.openAlert("Sorry", 'User doesnt exists');
+            // this.getAllUser(0)
+            // this.toast.warning('Course Name and Course image is Required !!!');
+          });
+      } else if(filterValue.trim().toLowerCase().length == 0) {
+        // setTimeout(() => {
+        //   this.ELEMENT_DATA = []
+        //   console.log('inside')
+          this.getAllUser(0)
+        // }, 700);
       }
-      this.service.searchUser(filterValue.trim().toLowerCase(), 0, 1)
-        .subscribe((result: any) => {
-          if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message, length > 0)
-            Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
-          else
-            this.alert.openAlert("Sorry", 'User doesnt exists')
-          // this.toast.warning('Course Name and Course image is Required !!!');
-        });
-    }
-
+    }, 300);
   }
 
   deActivate(status, element?) {

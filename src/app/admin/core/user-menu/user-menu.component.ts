@@ -46,7 +46,7 @@ export class UserMenuComponent implements OnInit {
 			if (logout.data.logout && logout.data.logout.success) {
 				localStorage.clear();
 				this.userDetailes = null;
-				this.router.navigate(['/Learner/login'])
+				this.router.navigate(['/Admin/login'])
 			}
 			else if (logout.data.logout && !logout.data.logout.success)
 				this.alert.openAlert(logout.data.logout.message, null)

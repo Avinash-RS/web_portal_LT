@@ -1256,6 +1256,7 @@ export class ProfileComponent implements OnInit {
 
     var ip = localStorage.getItem('Systemip');
     this.profileForm.controls['created_by_ip'].setValue(ip);
+    this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
     console.log('jsonData', this.profileForm.value)
     
