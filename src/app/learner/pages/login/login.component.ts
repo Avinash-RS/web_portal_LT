@@ -14,12 +14,10 @@ import * as myGlobals from '@core/globals';
 export class LoginComponent implements OnInit {
   capsOn;
   show: boolean = false;
-
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     private alert: AlertServiceService, private service: LearnerServicesService) {
-    console.log('2')
   }
 
   ngOnInit() {
@@ -35,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
@@ -83,16 +80,5 @@ export class LoginComponent implements OnInit {
           this.alert.openAlert("Please try again later", null)
         }
       });
-
-
-
-    // localStorage.setItem('uname', this.loginForm.value.username);
-    // localStorage.setItem('remember_me', 'false');
-    // var ps = btoa(this.loginForm.value.password);
-    // localStorage.setItem('ps', ps);
-    // localStorage.setItem('UserDetails', '{}')
-    // this.router.navigate(['/Learner'])
-
-
   }
 }

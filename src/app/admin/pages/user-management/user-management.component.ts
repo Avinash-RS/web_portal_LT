@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort, ThemePalette, MatDialog } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Form } from '@angular/forms';

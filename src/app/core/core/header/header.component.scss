@@ -167,9 +167,7 @@ input[type=text] {
 .backgroundcol {
     background-color: $color-blue !important;
     color: $color-white;
-    font-size: 15px;
-
-    
+    font-size: 15px; 
 }
 
 .backgroundcol2{
@@ -210,4 +208,12 @@ label {
     padding-bottom: 8px;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+@media screen and  (max-width:1043px) {
+    .border-right-0{
+        flex: 1 !important;
+        margin-left: 0 !important;
+    }
+    
 }

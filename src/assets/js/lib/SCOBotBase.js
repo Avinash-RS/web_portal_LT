@@ -1,5 +1,4 @@
 let jsonDataKnowledge={}
-var ser=require('../../../app/learner/services/learner-services.service')
 //import { LearnerServicesService } from '../../../app/learner/services/learner-services.service';
 /*global window, alert, console, SCOBotUtil, debug, scorm, SCOBot_API_1484_11 */
 /*jslint devel: true, browser: true */
@@ -1650,7 +1649,7 @@ function startResumeEvent(params){
     }
 
     async function getcourse(jsonData) {
-       const response = await fetch('http://localhost:3001/coursestatus', {
+       const response = await fetch('http://40.76.47.212:3000/course/coursestatus', {
         method: 'POST',
         body:JSON.stringify(jsonData), // string or object
         headers: {

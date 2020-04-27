@@ -7,11 +7,11 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'userManagement', component: UserManagementComponent,canActivate: [AuthGuard] },
-        { path: 'addUser', component: AddUserComponent,canActivate: [AuthGuard]  },
+        { path: 'dashboard', component: DashboardComponent , data : {title:'Admin Dashboard'}},
+        { path: 'userManagement', component: UserManagementComponent , data : {title:'Learner Management'},canActivate: [AuthGuard]},
+        { path: 'addUser', component: AddUserComponent , data : {title:'Add New Learner'},canActivate: [AuthGuard]},
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
-        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
+        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         // { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },
         // { path: 'chats', loadChildren: '../chats/chat.module#ChatsModule' }, // fix this

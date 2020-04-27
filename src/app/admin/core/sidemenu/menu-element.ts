@@ -14,7 +14,7 @@ export const menus = [
         'open': false,
         'sub': [
             {
-                'name': 'Add New Learners',
+                'name': 'Learners',
                 'link': 'userManagement',
                 'icon': 'widgets',
                 'chip': false,

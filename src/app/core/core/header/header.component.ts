@@ -18,9 +18,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
-      JSON.parse(localStorage.getItem('adminDetails')) || null;
     this.role = localStorage.getItem('role');
-    console.log(this.userDetailes,this.role)
     this.userimage = localStorage.getItem('user_img')
   }
 
