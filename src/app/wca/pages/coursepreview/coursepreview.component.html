@@ -177,7 +177,7 @@
      
         </div>
         <div class="line"></div>
-        <br><br><br>
+        <br><br>
         <div class="row">
           <h1>A Step towards</h1>
         </div>
@@ -192,21 +192,19 @@
         <div class="row">
           <h1>Instrutor deatils</h1>
         </div>
-        <div class="row">
+        <div class="row" *ngFor="let i of course.author_details">
           <div class="col-md-2 col-sm-12 col-12">
               <img class="sm-img" src="../../../../assets/images/shutterstock_345349079.jpg">
           
           </div>
           <div class="col-md-4 col-sm-12 col-12">
-            <div class="cardhead"><b>Ankit</b></div>
+            <div class="cardhead"><b>{{i.author_name}}</b></div>
            
-              <p>Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod temporLorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor</p>
+              <p>{{i.description}}</p>
             
           </div>
 
-          <div class="col-md-2 col-sm-12 col-12">
+          <!-- <div class="col-md-2 col-sm-12 col-12">
             
             <img class="sm-img" src="../../../../assets/images/shutterstock_345349079.jpg">
           </div>
@@ -215,10 +213,10 @@
             <p>Lorem ipsum dolor sit amet, consectetur
               adipiscing elit, sed do eiusmod temporLorem ipsum dolor sit amet, consectetur
               adipiscing elit, sed do eiusmod tempor</p>
-          </div>
-        </div>
+          </div> -->
+        </div><br><br>
 
-        <div class="line"></div>
+        <div class="line"></div><br><br>
         <h1>Resources</h1>
         <div class="row">
           <section class="accordion" *ngFor="let res of content?.coursedetails">

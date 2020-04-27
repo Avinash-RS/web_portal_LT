@@ -82,7 +82,7 @@
   .sd{
     text-align: left;
     color: $color-blank;
-    margin-top: 5%;
+    margin-top: 3%;
     font-size: 18px;
   }
   h4{
@@ -141,8 +141,7 @@
 }
 .line{
   width: 90%;
-  height: 47px;
-  border-top: 1px solid $color-blank;
+  border-top: 1px solid $color-light-grey;
   position: absolute;
   }
 
@@ -237,3 +236,9 @@
   .sm-img {
     width: 95% !important;
     }
+
+    h1{
+      color: $color-blank;
+    }
+      
+    
