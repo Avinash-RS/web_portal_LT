@@ -41,6 +41,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration_mobile_otp_verify'].data[0]))
+            localStorage.setItem('role', 'learner')
             this.router.navigate(['Learner/resetpassword']);
           } else{
             this.loader.hide();

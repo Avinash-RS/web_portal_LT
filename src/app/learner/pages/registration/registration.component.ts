@@ -45,6 +45,10 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminDetails');
     this.loader.show();
     this.fullname=this.registerForm.value.fullname.trim();
    this.service.user_registration(this.registerForm.value.email,this.fullname,this.registerForm.value.termsandconditions)
@@ -52,6 +56,7 @@ export class RegistrationComponent implements OnInit {
           if (data.data['user_registration']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration'].message,null)
             localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
+            localStorage.setItem('role', 'learner')
             this.loader.hide();
             this.registerForm.reset();
           } else{

@@ -21,12 +21,12 @@ export class AuthGuard implements CanActivate {
     var role = localStorage.getItem('role') || null;
     //  console.log('role-----',role)
     //for learner ------> 1
+    // debugger
     if (userDetailes != null && role == 'learner' && state.url != '/Admin/auth/userManagement' &&
       state.url != '/Admin/auth/addUser') {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg 
-      
       if ((state.url == '/Learner/login' || state.url == '/Admin/login' || state.url == '/Learner/register')) {
         this.router.navigate(["/Learner"]);
         return false;
