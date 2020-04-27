@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-coursepreview',
@@ -27,9 +27,11 @@ export class CoursepreviewComponent implements OnInit {
   }
   course: any;
   content: any;
-  constructor( public service: CommonServicesService, public learnerservice: LearnerServicesService,private loader: Ng4LoadingSpinnerService,) {
-   
+  breakpoint: number;
+  constructor( public service: CommonServicesService, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
+    this.loader.show();
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
+    
           console.log(viewCourse,"detail")
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
@@ -41,6 +43,7 @@ export class CoursepreviewComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.getModuleData()
   }
   clickedT(i) {
@@ -59,5 +62,10 @@ export class CoursepreviewComponent implements OnInit {
       //    this.content = this.content.getModuleData.data[0]
       // }   
     })
+  }
+
+  onResize(event) {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+  
   }
 }

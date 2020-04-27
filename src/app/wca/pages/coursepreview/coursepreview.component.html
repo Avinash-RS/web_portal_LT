@@ -29,7 +29,7 @@
         <!-- left side -->
         <div class="col-md-4 col-sm-12 col-12">
           <div style="width: 60%; ">
-            <img class="image" src="{{course.course_img_url}}">
+            <img class="image" src="{{course?.course_img_url}}">
           </div>
           <div class="info">
             <div class="grid-item">
@@ -41,13 +41,13 @@
               </button>
             </div>
             <div class="grid-item fadetext">Course ID</div>  
-            <div class="grid-item">: {{course.course_id}}</div>
+            <div class="grid-item">: {{course?.course_id}}</div>
             <div class="grid-item fadetext">Version number</div>
-            <div class="grid-item">: {{course.version}}</div>  
+            <div class="grid-item">: {{course?.version}}</div>  
             <div class="grid-item fadetext">Published on</div>
-            <div class="grid-item">: 23 Nov 2020</div>
+            <div class="grid-item">: {{course?.published_on | date }}</div>
             <div class="grid-item fadetext">Published by</div>  
-            <div class="grid-item">: Ram</div>  
+            <div class="grid-item">: {{course?.published_by}}</div>  
           </div>
         </div>
      <!-- left side end -->
@@ -56,15 +56,15 @@
         <div class="col-md-8 col-sm-12 col-12">
           <h1 class="sd">Short Description</h1>
           <div *ngIf="course">
-            <h4 style="text-align: left;">{{course.short_description}}</h4>
+            <h4 style="text-align: left;">{{course?.short_description}}</h4>
           </div>
           <div class="enroll">
           <div class="grid-item "><b>Learners Enrolled</b></div>  
-          <div class="grid-item fadetext">: 2234</div>
+          <div class="grid-item fadetext">: {{course?.learner_count}}</div>
           <div class="grid-item "><b>Language</b></div>
-          <div class="grid-item fadetext">: {{course.course_language}}</div>  
+          <div class="grid-item fadetext">: {{course?.course_language}}</div>  
           <div class="grid-item "><b>Mode</b></div>
-          <div class="grid-item fadetext">: Self placed</div>
+          <div class="grid-item fadetext">: {{course?.course_mode}}</div>
           </div>
 
           <div class="enroll">
@@ -92,10 +92,10 @@
       <br><br><br>
       <!-- line -->
       <div class="line"></div>
-      <br><br><br>
+      <br><br>
       <div class="row">
         <h1>Deatils about Course</h1>
-      </div>
+      </div><br>
       
       <div class="row">
         <!-- left side -->
@@ -104,7 +104,7 @@
           </div>
 
           <div class="col-md-4 col-sm-12 col-12">
-              <h3>Ankit</h3>
+              <h3 class="fadetext">Ankit</h3>
             </div>
       </div>
       <div class="row">
@@ -113,7 +113,7 @@
             </div>
   
             <div class="col-md-4 col-sm-12 col-12">
-                <h3>{{course.pre_requisite}}</h3>
+                <h3 class="fadetext">{{course?.pre_requisite}}</h3>
               </div>
       </div>
 
@@ -123,7 +123,7 @@
               </div>
     
               <div class="col-md-4 col-sm-12 col-12">
-                  <h3>{{course.course_description}}</h3>
+                  <h3 class="fadetext">{{course?.course_description}}</h3>
                 </div>
         </div>
         <div class="line"></div>
@@ -192,51 +192,50 @@
         <div class="row">
           <h1>Instrutor deatils</h1>
         </div>
-        <div class="row" *ngFor="let i of course.author_details">
-          <div class="col-md-2 col-sm-12 col-12">
-              <img class="sm-img" src="../../../../assets/images/shutterstock_345349079.jpg">
-          
-          </div>
-          <div class="col-md-4 col-sm-12 col-12">
-            <div class="cardhead"><b>{{i.author_name}}</b></div>
-           
-              <p>{{i.description}}</p>
-            
-          </div>
 
-          <!-- <div class="col-md-2 col-sm-12 col-12">
-            
-            <img class="sm-img" src="../../../../assets/images/shutterstock_345349079.jpg">
-          </div>
-          <div class="col-md-4 col-sm-12 col-12">
-            <div class="cardhead"><b>Ankit</b></div>
-            <p>Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit, sed do eiusmod temporLorem ipsum dolor sit amet, consectetur
-              adipiscing elit, sed do eiusmod tempor</p>
-          </div> -->
-        </div><br><br>
+
+        <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" (window:resize)="onResize($event)">
+          <mat-grid-tile *ngFor="let author of course?.author_details">
+              <div class="row">
+                <div class="col-md-4 col-sm-12 col-12">
+                  <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
+                </div>
+                <div class="col-md-8 col-sm-12 col-12">
+                  <div class="cardhead"><b>{{author.author_name}}</b></div><br>
+                  <div style="margin-left: 5%;">
+                    <p >{{author.description}}</p>
+                  </div>
+                </div>
+              </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <br><br>
+
+
 
         <div class="line"></div><br><br>
         <h1>Resources</h1>
-        <div class="row">
+
+        <!-- <div class="row"> -->
           <section class="accordion" *ngFor="let res of content?.coursedetails">
             <input type="checkbox" name="collapse" [id]="res?.modulename">
             <h2 class="handle">
               <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-                 <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+                 <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
             </h2>
             <div class="content">
               <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
-                <div class="col-8">
+                <div class="col-8"><br>
                   <ol class="submod"  >
-                    <li>{{i+1}} {{mod?.topicname}}</li>
+                    <li><b>{{i+1}} . {{mod?.topicname}}</b></li>
                   </ol>
                 </div>
       
                 <div class="col-4">
-                  <mat-form-field style="text-align: right;">
-                    <mat-icon matPrefix>mic</mat-icon>
-                    <mat-select  placeholder="Resourse">
+                  <mat-form-field style="text-align: right;margin-top: 5%;">
+                    <mat-label>Resourse</mat-label>
+                    <mat-icon matPrefix>folder</mat-icon>
+                    <mat-select  >
                         <mat-option  *ngIf="mod.resourse != null" >
                             <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
                         </mat-option>
@@ -246,6 +245,6 @@
           </div>
             </div>
           </section>
-        </div>
+        <!-- </div> -->
     </div>
  </div>

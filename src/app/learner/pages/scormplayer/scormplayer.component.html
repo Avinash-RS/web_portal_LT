@@ -65,9 +65,10 @@
           </div>
 
           <div class="col-4">
-            <mat-form-field style="text-align: right;">
-              <mat-icon matPrefix>mic</mat-icon>
-              <mat-select  placeholder="Resourse">
+            <mat-form-field style="text-align: right;margin-top: 5%;">
+              <mat-label>Resourse</mat-label>
+              <mat-icon matPrefix>folder</mat-icon>
+              <mat-select>
                   <mat-option  *ngIf="mod.resourse != null" >
                     <span *ngFor="let file of mod.resourse.files">
 
