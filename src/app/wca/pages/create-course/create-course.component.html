@@ -54,7 +54,7 @@
                           <div class="col-md-3">Course Description</div>
                           <div class="col-md-9"><textarea class="inputs" style="resize: none;"
                               formControlName="description" placeholder="Enter the course description" maxlength="1000"
-                              name="info"></textarea></div>
+                              name="info" (keydown)="_handleKeydown($event)"></textarea></div>
                         </div>
 
                         <div class="row">
@@ -71,7 +71,7 @@
                                   {{req?.name}}
                                   <mat-icon matChipRemove>cancel</mat-icon>
                                 </mat-chip>
-                                <input placeholder="Add Details" (keydown.space)="$event.preventDefault()"
+                                <input placeholder="Add Details"  (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
                                   [matChipInputAddOnBlur]="true" [matChipInputFor]="preReqList"
                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                   (matChipInputTokenEnd)="addrequest($event)">
@@ -93,7 +93,7 @@
 
                         <div class="row">
                           <div class="col-md-3">Preview Video</div>
-                          <div class="col-md-9"><input type="text" placeholder="URL" formControlName="preview_video"
+                          <div class="col-md-9"><input type="text" placeholder="URL" (keydown)="_handleKeydown($event)" formControlName="preview_video"
                               required /> </div>
                         </div>
 
@@ -161,7 +161,7 @@
 
 
                                     <div class="col-md-8"> <textarea class="inputs3" style="resize: none;"
-                                        formControlName="description" placeholder="Description" maxlength="1000"
+                                        formControlName="description" (keydown)="_handleKeydown($event)" placeholder="Description" maxlength="1000"
                                         name="info"></textarea></div>
 
 
@@ -310,7 +310,7 @@
                           <div [formGroupName]="i">
                             <div class="row">
                               <div class="col-md-3">Text</div>
-                              <div class="col-md-9"><input type="text" placeholder="Enter the text"
+                              <div class="col-md-9"><input type="text"  (keydown)="_handleKeydown($event)" placeholder="Enter the text"
                                   formControlName="text" /> </div>
                             </div>
 
@@ -340,7 +340,7 @@
 
                             <div class="row">
                               <div class="col-md-3">A Step Towards</div>
-                              <div class="col-md-9"><textarea class="inputs" style="resize: none;"
+                              <div class="col-md-9"><textarea class="inputs" (keydown)="_handleKeydown($event)" style="resize: none;"
                                   formControlName="description" placeholder="Enter the course description"
                                   maxlength="1000" name="info"></textarea> </div>
                             </div>
