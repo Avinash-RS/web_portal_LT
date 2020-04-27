@@ -153,7 +153,20 @@ createForm(){
           }, err=> {
             this.spinner.hide();
           })
-        } else if (item.name === 'PDF') {
+        } else if (item.name === 'PPT') {
+          this.spinner.hide();
+        }  else if (item.name === 'Word') {
+          this.spinner.hide();
+        }  else if (item.name === 'Video') {
+          this.spinner.hide();
+        }  else if (item.name === 'Audio') {
+          this.spinner.hide();
+        }  else if (item.name === 'SCROM') {
+          this.spinner.hide();
+        }  else if (item.name === 'Knowledge Check') {
+          this.spinner.hide();
+        } else if (item.name === 'Feedback') {
+          this.spinner.hide();
         }
       }
     }
@@ -259,6 +272,11 @@ createForm(){
 
   addTopicFrom() {
     console.log(this.courseform().value);
+    console.log(this.courseform())
+  }
+
+  previewimages(images) {
+    console.log(images.value);
   }
 
 }
