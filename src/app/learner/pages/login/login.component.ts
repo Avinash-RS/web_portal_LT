@@ -21,6 +21,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", myGlobals.usernameValforLogin),
       password: new FormControl("", myGlobals.passwordValforLogin),
@@ -44,6 +48,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner')
+              localStorage.setItem('token',loginresult.data.login.message.token)
+              // localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWZzZXIiLCJyb2xlIjoibGVhcm5lciIsImlhdCI6MTU4NzgxMDY2OCwiZXhwIjoxNTg3ODI1MDY4LCJpc3MiOiJodHRwczovL3d3dy5sYXJzZW50b3Vicm8uY29tLyJ9.0PaYNjWpbeibE0OJSqOKOc8BpcXYbLP0LcvzXUbDXoM')
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               //if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated)
@@ -57,7 +63,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
-              localStorage.setItem('role', 'learner')
+              localStorage.setItem('role', 'learner');
+              localStorage.setItem('token',loginresult.data.login.message.token)
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               //if false, then need to update profile

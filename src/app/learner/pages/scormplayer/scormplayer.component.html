@@ -69,7 +69,11 @@
               <mat-icon matPrefix>mic</mat-icon>
               <mat-select  placeholder="Resourse">
                   <mat-option  *ngIf="mod.resourse != null" >
-                      <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
+                    <span *ngFor="let file of mod.resourse.files">
+
+                      <a  href="{{file.path}}" download>{{file.path}}</a>
+                    </span>
+                      
                   </mat-option>
               </mat-select>
           </mat-form-field>

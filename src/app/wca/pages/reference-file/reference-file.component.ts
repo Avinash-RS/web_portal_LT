@@ -4,6 +4,7 @@ import { MatSort ,MatPaginator} from '@angular/material';
 import { WcaService } from '../../services/wca.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 export interface PeriodicElement {
   name: string;
   module: string;
@@ -33,13 +34,18 @@ export class ReferenceFileComponent implements OnInit {
   getdocData: any;
   currentUser: any;
   selectfile: File;
+  content: any;
+  modulemenu: any = [];
+  topicmenu: void;
+  pagenumber :number = 1;
 
-  constructor(public service: WcaService, public fb: FormBuilder, private alert: AlertServiceService,) { 
+  constructor(public service: WcaService,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
 
   ngOnInit() {
-    this.getAllRefDoc(1);
+    this.getAllRefDoc(this.pagenumber);
+    this.getModuleData();
     this.dataSource.sort = this.sort;
      this.dataSource.paginator = this.paginator;
     var user = localStorage.getItem('UserDetails')
@@ -51,50 +57,38 @@ export class ReferenceFileComponent implements OnInit {
       name:  new FormControl(''),
       module:  new FormControl(''),
       topic:  new FormControl(''),
-      // referenceLink: new FormControl(''),
-      // referenceName: new FormControl(''),
-      // selectedOptions: new FormControl(''),
 
     })
-    this.moduleList = [
-      {
-        id:1,
-        name:"module name01"
-      },
-      {
-        id:2,
-        name:"module name02"
-      }
-    ]
+  }
 
-    this.topicList = [
-      {
-        id:11,
-        name:"topic name01"
-      },
-      {
-        id:12,
-        name:"topic name02"
-      }
-    ]
 
+  getModuleData() {
+    this.learnerservice.getModuleData(1).subscribe(data => {
+      console.log(data)
+      // if(data.data['getmoduleData']['success'] == true){
+        this.modulemenu = data.data['getmoduleData']['data'][0]
+        this.topicmenu = this.modulemenu.coursedetails[0];
+      // }else{
+        // this.alert.openAlert('Something went wrong please try after sometime',null)
+      // } 
+    })
   }
 
   uploadDoc(event){
     this.selectfile = <File>event.target.files[0];
     const fb = new FormData();
-    fb.append('image', this.selectfile, this.selectfile.name)
+    fb.append('reffile', this.selectfile)
     // var formData = new FormData();
     // Array.from(files).forEach(f => formData.append('file',f));
-    // let tempData: any = formData.get("file");
+    let tempData: any = fb.get("reffile");
     // console.log(tempData)
-    // if((tempData.size/1000) > 10240){
-    //   this.uploadMsg = "Upload the document";
-    // }    
-    // else {
-    //   this.uploadMsg = tempData.name;
-    //   console.log(this.uploadMsg,'this.uploadMsg')
-    // }
+    if((tempData.size/1000) > 10240){
+      this.uploadMsg = "Upload the document";
+    }    
+    else {
+      this.uploadMsg = tempData.name;
+      console.log(this.uploadMsg,'this.uploadMsg')
+    }
   }
 
   saveReferenceFile() {
@@ -103,7 +97,8 @@ export class ReferenceFileComponent implements OnInit {
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
     payload.append("user_id",this.currentUser.user_id);
-    payload.append('files', this.selectfile.name);
+   // payload.append('files', this.selectfile.name);
+    payload.append('reffile', this.selectfile, this.selectfile.name)
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
@@ -127,17 +122,15 @@ removeDoc(data){
   this.service.remove_doc_ref(data._id).subscribe(data => {
     if(data.data['remove_doc_ref']['success'] == true){
       this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-      this.getAllRefDoc(1)
+      this.getAllRefDoc(this.pagenumber)
     } else {
       this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-      this.getAllRefDoc(1)
+      this.getAllRefDoc(this.pagenumber)
     }
   })
 }
 getAllRefDoc(pagenumber){
-  console.log(pagenumber)
-    //  pagenumber = 1
-  this.service.getallrefdoc(1).subscribe(data => {
+  this.service.getallrefdoc(pagenumber).subscribe(data => {
     this.getdocData = data.data['getallrefdoc']['data']
     Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
@@ -147,7 +140,6 @@ getAllRefDoc(pagenumber){
 }
 
 next(e) {
-  console.log(e)
   this.getAllRefDoc(e.pageIndex)
 }
 }
