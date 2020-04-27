@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,TemplateRef} from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: 'app-coursepreview',
@@ -28,7 +29,7 @@ export class CoursepreviewComponent implements OnInit {
   course: any;
   content: any;
   breakpoint: number;
-  constructor( public service: CommonServicesService, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
+  constructor( public service: CommonServicesService,private dialog: MatDialog, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
     this.loader.show();
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
     
@@ -62,6 +63,11 @@ export class CoursepreviewComponent implements OnInit {
       //    this.content = this.content.getModuleData.data[0]
       // }   
     })
+  }
+
+  previewcourse(templateRef: TemplateRef<any>) {
+    console.log(templateRef)
+    this.dialog.open(templateRef);
   }
 
   onResize(event) {

@@ -14,7 +14,7 @@
         <button class="smallbtn3">
           Edit course
          </button>
-        <button class="smallbtn2">
+        <button class="smallbtn2" (click)="previewcourse(previewDialog)">
           Preview course
          </button>
    
@@ -35,8 +35,8 @@
             <div class="grid-item">
               <b>Course Name</b>
             </div>
-            <div class="grid-item">
-              <button class="smallbtn">
+            <div class="grid-item" >
+              <button class="smallbtn" >
                Published
               </button>
             </div>
@@ -246,5 +246,16 @@
             </div>
           </section>
         <!-- </div> -->
+
+        <ng-template #previewDialog>
+          <!-- <span class="f_size_18 color_blue float_right">
+            <i class="fa fa-times-circle-o fa-4x" aria-hidden="true" (click)="closedialogbox()"></i>
+          </span> -->
+          <mat-dialog-content style="width: 80em;height: 600px;">
+            <iframe style="width: 75em; height: 420px; border:none" src="../../../../assets/SequencingRandomTest_SCORM20043rdEdition/shared/launchpage.html?content=playing " ></iframe> 
+          </mat-dialog-content>
+        </ng-template>
     </div>
+
+
  </div>
