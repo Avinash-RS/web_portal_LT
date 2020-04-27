@@ -143,6 +143,7 @@ export class CreateTopicComponent implements OnInit {
       allowedExtensions = this.fileValidations[item.name];
       if (!allowedExtensions.exec(filePath)) {
         this.toast.warning('Please upload file having extensions ' + allowedExtensions + 'only.');
+        this.spinner.hide();
         fileInput.value = '';
         return false;
       } else {
@@ -267,7 +268,7 @@ export class CreateTopicComponent implements OnInit {
         formData.append('image', file);
         this.wcaService.uploadImage(formData).subscribe((data: any) => {
           // console.log(data)
-          resolve(data.path);
+          resolve('https://edutechstorage.blob.core.windows.net/' + data.path);
         }, err => {
           this.spinner.hide();
         })
@@ -283,7 +284,8 @@ export class CreateTopicComponent implements OnInit {
      this.courseForm.value.createdby_id = '0001';
      this.courseForm.value.createdby_role = 'Sathish';
 
-    console.log(this.courseForm.value);
+    console.log(this.courseForm);
+    return
     this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
        console.log(data);
        if (data && data.Message === 'Success') {
@@ -294,7 +296,9 @@ export class CreateTopicComponent implements OnInit {
     })
   }
 
-  previewimages(images, event) {
+  previewimages(images, event,item) {
+    console.log(item);
+    console.log(images);
     event.stopPropagation();
     console.log(images.value.topicimages);
     if (images && images.value && images.value.topicimages) {
