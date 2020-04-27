@@ -13,7 +13,7 @@
 
     <div class="left">
       <!-- <iframe class="player" [src]="urlSafe"></iframe> -->
-      <iframe src="../../../../assets/SequencingRandomTest_SCORM20043rdEdition/shared/launchpage.html?content=assessment3" width="100%" height="600px"></iframe> 
+      <iframe src="../../../../assets/FSL/index_scorm.html" width="100%" height="600px"></iframe> 
 
     </div>
 
@@ -69,7 +69,11 @@
               <mat-icon matPrefix>mic</mat-icon>
               <mat-select  placeholder="Resourse">
                   <mat-option  *ngIf="mod.resourse != null" >
-                      <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
+                    <span *ngFor="let file of mod.resourse.files">
+
+                      <a  href="{{file.path}}" download>{{file.path}}</a>
+                    </span>
+                      
                   </mat-option>
               </mat-select>
           </mat-form-field>

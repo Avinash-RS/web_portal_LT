@@ -145,4 +145,19 @@ export class PasswordComponent implements OnInit {
     })
   }
 
+  /* function that checks for existing user or not on blur event in username field */
+  checkForExistingUser() {
+    if(this.passwordForm.value.username) {
+      try {
+        this.service.check_existing_user(this.passwordForm.value.username).subscribe((data: any) => {
+          console.log(data)
+          if(data.data.check_existing_user && data.data.check_existing_user.message === 'Username already exists') {
+            this.alert.openAlert(data.data['check_existing_user'].message, null)
+          }
+        })  
+      } catch (error) {
+          throw error 
+      }
+    }
+  }
 }

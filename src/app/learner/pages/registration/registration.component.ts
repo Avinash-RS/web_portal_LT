@@ -50,7 +50,7 @@ export class RegistrationComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
     this.loader.show();
-    this.fullname=this.registerForm.value.fullname.trim();
+    this.fullname=this.registerForm.value.fullname.trimLeft();
    this.service.user_registration(this.registerForm.value.email,this.fullname,this.registerForm.value.termsandconditions)
     .subscribe(data => {
           if (data.data['user_registration']['success'] == 'true') {

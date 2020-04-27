@@ -30,6 +30,7 @@ export class ResetpasswordComponent implements OnInit {
   showpsseye: Boolean = false;
   showconpassbutton: Boolean = false;
   showconpsseye: Boolean = false;
+  isLinkActive: Boolean = true;
   constructor(
     private loader : Ng4LoadingSpinnerService,
     private router:Router, 
@@ -45,6 +46,7 @@ export class ResetpasswordComponent implements OnInit {
         const decryptedString = simpleCrypto.decrypt(params["code"]);
         this.user = decryptedString;
         console.log(this.user)
+        this.get_user_detail_username(this.user)
       }
      else{
       var userdetails= localStorage.getItem('UserDetails')
@@ -109,4 +111,17 @@ validator: MustMatch('password', 'confirmpassword'),
       }
   })
   }
+
+  get_user_detail_username(name){
+    try {
+      this.service.get_user_detail_username(name).subscribe((data: any) => {
+        console.log(data)
+        this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
+          true : false;
+      })  
+    } catch (error) {
+        throw error 
+    }
+  }
+
 }
