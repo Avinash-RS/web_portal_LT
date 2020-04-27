@@ -14,15 +14,20 @@
 </nav>
 
 
-  
+  <span *ngIf="createTopicForm?.controls">
 <form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()">
     <div class="container wrap-body" >
-        <div class="dspFlx">
-            <span class="firstSpan"> Enter Module Name : </span>
-            <span>
+        <div style="display: flex;" >
+            <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
+            <span *ngIf="queryData?.template_details">
                 <input class="Bcg" type="text"  placeholder="Enter the Name" formControlName="modulename"  required />
             </span>
         </div>
+
+        <div *ngIf="!queryData?.template_details"  class="dspFlx">
+            <span style="color: red;">Go Back and Chooose or Create the Template Please !!!</span>
+        </div>
+<span *ngIf="createTopicForm?.get('moduledetails')?.controls">
         <div class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
           
             <div class="col-md-12">
@@ -34,8 +39,9 @@
     
                                   <div class="example-list" >
                                       <div *ngIf="queryData">
-        <div class="example-box1"  *ngFor="let item of queryData.template_details" >
-         <div (click)="activate(item)" class="clickBcg bcgBorder" [class.active]="item?.name==active?.name">
+                                        <!-- *ngFor="let item of queryData.template_details; let m = index" -->
+        <div class="example-box1"   >
+         <div (click)="activate(queryData?.template_details[i])" class="clickBcg bcgBorder" [class.active]="queryData?.template_details[i].name === active?.name">
             <div class="dspFlx" [formGroupName]="i">
                 <span class="restictWidth"> <mat-form-field class="matWidth" appearance="outline">
                  <mat-label class="clrLabel">Topic Name</mat-label>
@@ -49,12 +55,13 @@
                </span>
              </div>
      <div class="colView" >
-        <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,item,j)">
-        <span (dblclick)="fileInput3.click()"><img class="img1" src="{{item?.image}}"></span> 
-          <span class="padTop">{{item?.name}}</span>
-          <span class="padTop1"> <small>content is empty Double Click to edit</small></span>
-         <span class="previewAndTime" [class.active]="item?.name==active?.name">
-             <span><button mat-raised-button class="btnprev">preview</button></span>
+        <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+        <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i].image}}"></span> 
+          <span class="padTop">{{queryData?.template_details[i].name}}</span>
+          <span class="padTop1 showCon" [class.active]="queryData?.template_details[i].name === active?.name"> <small>content is empty Double Click to edit</small></span>
+          <span class="padTop1" [class.active]="queryData?.template_details[i].name === active?.name"> <small>{{fileType}}</small></span>
+         <span class="previewAndTime" [class.active]="queryData?.template_details[i].name==active?.name">
+             <span><button mat-raised-button class="btnprev" (click)="previewimages(j)">preview</button></span>
              <span>
                  <small class="spanTime">  Time required to complete the topic </small>
                  <mat-card class="matcardTime">
@@ -69,14 +76,7 @@
     </div>
       
     
-                                  <div>
-                                    <button class="backgroundcol1" (click)="pdftest()" >Cancel</button>
-                                    <button class="backgroundcol1" type="submit" >Create</button>
-                                    <button class="backgroundcol2" routerLink="">Save as a draft</button>
-    
-    
-                                      
-                                    </div>
+                                
                                 
     </div>
     
@@ -88,8 +88,17 @@
                 </mat-accordion>
             </div>
         </div>
+    </span>
+        <div *ngIf="queryData?.template_details" class="dspFlx">
+            <button class="backgroundcol2"   type="submit">Save as a draft</button>
+           <span class="padTwoSides"> <button class="backgroundcol1" type="button">Create</button></span>
+            <button class="backgroundcol1"  type="button" >Cancel</button>
+
+            </div>
     </div>
 </form>
+</span>
+
 
 
 
