@@ -35,8 +35,8 @@ export class CreateTopicComponent implements OnInit {
 
   courseform(): FormGroup {
     return this.formBuilder.group({
-      coursename: "test",
-      courseid: "001",
+      coursename: [null,Validators.compose([Validators.required])],
+      courseid: [null,Validators.compose([Validators.required])],
       coursedetails: this.formBuilder.array([this.createTopicForm])
     });
   }
@@ -44,7 +44,7 @@ export class CreateTopicComponent implements OnInit {
 
   topicItem(): FormGroup {
     return this.formBuilder.group({
-      topicname: '',
+      topicname: [null,Validators.compose([Validators.required])],
       topicimages: this.formBuilder.array([this.topicImages()])
     });
   }
@@ -75,10 +75,13 @@ export class CreateTopicComponent implements OnInit {
       }
       if (flag) {
         const query = params;
+        // this.courseform().get('coursename').patchValue(query.courseName);
+        // this.courseform().get('courseid').patchValue(query.viewingModule);
         console.log(query)
         if (query && query.temp) {
           this.wcaService.bSubject.subscribe(value => {
             this.queryData = value;
+          this.createForm()
             console.log(this.queryData);
           })
         } else {
@@ -87,15 +90,17 @@ export class CreateTopicComponent implements OnInit {
       }
     });
 
-    this.createTopicForm = this.formBuilder.group({
-      modulename: [null, Validators.compose([Validators.required])],
-      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map( data =>
-        this.topicItem()
-       ) : [])
-    })
+
 
   }
-
+createForm(){
+  this.createTopicForm = this.formBuilder.group({
+    modulename: [null, Validators.compose([Validators.required])],
+    moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map( data =>
+      this.topicItem()
+     ) : [])
+  })
+}
  
 
   initialCall(data) {
@@ -103,8 +108,9 @@ export class CreateTopicComponent implements OnInit {
     console.log(data.template);
     this.wcaService.getsingleTemplate(data.template).subscribe((data: any) => {
       this.spinner.hide();
-      console.log(data);
       this.queryData = data.Result;
+      this.createForm()
+      console.log(this.queryData);
     }, err => {
       this.spinner.hide();
     })

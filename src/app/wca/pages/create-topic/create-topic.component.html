@@ -14,10 +14,10 @@
 </nav>
 
 
-  
+  <span *ngIf="createTopicForm?.controls">
 <form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()">
     <div class="container wrap-body" >
-        <div style="display: flex;">
+        <div style="display: flex;" >
             <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
             <span *ngIf="queryData?.template_details">
                 <input class="Bcg" type="text"  placeholder="Enter the Name" formControlName="modulename"  required />
@@ -27,7 +27,7 @@
         <div *ngIf="!queryData?.template_details"  class="dspFlx">
             <span style="color: red;">Go Back and Chooose or Create the Template Please !!!</span>
         </div>
-
+<span *ngIf="createTopicForm?.get('moduledetails')?.controls">
         <div class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
           
             <div class="col-md-12">
@@ -88,6 +88,7 @@
                 </mat-accordion>
             </div>
         </div>
+    </span>
         <div *ngIf="queryData?.template_details" class="dspFlx">
             <button class="backgroundcol2"   type="submit">Save as a draft</button>
            <span class="padTwoSides"> <button class="backgroundcol1" type="button">Create</button></span>
@@ -96,6 +97,8 @@
             </div>
     </div>
 </form>
+</span>
+
 
 
 

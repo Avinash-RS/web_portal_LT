@@ -58,7 +58,7 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log( this.selectedTemplate );
-        this.router.navigate(['./Wca/addtopic'],{queryParams:{template:this.selectedTemplate.template_id}});
+        this.router.navigate(['./Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
   }
 
   onHover(id) {
