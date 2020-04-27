@@ -103,7 +103,8 @@ export class ReferenceFileComponent implements OnInit {
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
     payload.append("user_id",this.currentUser.user_id);
-    payload.append('files', this.selectfile.name);
+   // payload.append('files', this.selectfile.name);
+    payload.append('reffile', this.selectfile, this.selectfile.name)
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
