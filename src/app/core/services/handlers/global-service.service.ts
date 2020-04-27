@@ -36,7 +36,6 @@ export class GlobalServiceService {
       this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
       return false;
     }
-     
     else
       return true;
   }

@@ -21,6 +21,10 @@ export class AdminLoginComponent implements OnInit {
     private alert: AlertServiceService, private service: LearnerServicesService, ) { }
 
   ngOnInit() {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('adminDetails');
+    localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", myGlobals.usernameVal),
       password: new FormControl("", myGlobals.passwordVal),
