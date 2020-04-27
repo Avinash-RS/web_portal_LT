@@ -39,17 +39,17 @@
         <div class="select">
           Select
         </div>
-        <form [formGroup]="referenceLinkForm" >
+        <form [formGroup]="referenceLinkForm"  >
         <mat-select class="selectinputs" placeholder="Module Name"  formControlName="module">
-          <mat-option *ngFor="let module of moduleList" [value]="module.name">
-            {{module.name}}
+          <mat-option *ngFor="let res of modulemenu?.coursedetails" [value]="res?.modulename">
+            {{res?.modulename}}
           </mat-option>
         </mat-select>
 
 
         <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic">
-          <mat-option *ngFor="let topic of topicList" [value]="topic.name">
-            {{topic.name}}
+          <mat-option *ngFor="let topic of topicmenu?.moduledetails" [value]="topic?.topicname">
+            {{topic?.topicname}}
           </mat-option>
         </mat-select>
 

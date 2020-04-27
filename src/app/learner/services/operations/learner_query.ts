@@ -247,7 +247,10 @@ query getmoduleData($courseid:String!){
           topicimages
           resourse{
             type
-            path
+            files{
+              doc_type
+              path
+            }
             doc_type
             type_name
           }
