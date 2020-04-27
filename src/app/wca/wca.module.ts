@@ -27,6 +27,7 @@ import { UploadFilesComponent } from './pages/upload-files/upload-files.componen
 import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
 import { ReferenceFileComponent } from './pages/reference-file/reference-file.component';
 import { PipeModule } from '../pipes/pipe.module';
+import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] , data : {title:'Web Content Authoring Dashboard'}},
@@ -40,12 +41,13 @@ const routes: Routes = [
   { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard], data : {title:'Upload Files'}},
   { path: 'mycourse', component: MycreatedCourseComponent,canActivate: [AuthGuard], data : {title:'My created Course'}},
   { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard], data : {title:'Choose Template'}},
-  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard], data : {title:'Reference File'}}
-
+  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard], data : {title:'Reference File'}},
+  { path: 'previewcourse', component: CoursepreviewComponent,canActivate: [AuthGuard], data : {title:'Courses Preview'}}
+  
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

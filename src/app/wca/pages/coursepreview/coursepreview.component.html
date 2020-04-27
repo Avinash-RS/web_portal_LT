@@ -1,0 +1,244 @@
+<app-header></app-header>
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Course</li>
+  </ol>
+</nav>
+
+
+<div class="profile">
+    <div class="wrap-reg"><br>
+     <div class="row">
+      <div class="col-md-12 col-sm-12 col-12">
+        <button class="smallbtn3">
+          Edit course
+         </button>
+        <button class="smallbtn2">
+          Preview course
+         </button>
+   
+        </div>
+       
+     </div>
+
+         
+    
+    
+      <div class="row">
+        <!-- left side -->
+        <div class="col-md-4 col-sm-12 col-12">
+          <div style="width: 60%; ">
+            <img class="image" src="../../../../assets/images/shutterstock_746652751.jpg">
+          </div>
+          <div class="info">
+            <div class="grid-item">
+              <b>Course Name</b>
+            </div>
+            <div class="grid-item">
+              <button class="smallbtn">
+               Published
+              </button>
+            </div>
+            <div class="grid-item fadetext">Course ID</div>  
+            <div class="grid-item">: 1172</div>
+            <div class="grid-item fadetext">Version number</div>
+            <div class="grid-item">: 1172</div>  
+            <div class="grid-item fadetext">Published on</div>
+            <div class="grid-item">: 23 Nov 2020</div>
+            <div class="grid-item fadetext">Published by</div>  
+            <div class="grid-item">: Ram</div>  
+          </div>
+        </div>
+     <!-- left side end -->
+
+      <!-- Right side  -->
+        <div class="col-md-8 col-sm-12 col-12">
+          <h1 class="sd">Short Description</h1>
+          <div>
+            <h4 style="text-align: left;"> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+              when an unknown printer took a galley of type and scrambled it to make a type specimen</h4>
+          </div>
+          <div class="enroll">
+          <div class="grid-item "><b>Learners Enrolled</b></div>  
+          <div class="grid-item fadetext">: 2234</div>
+          <div class="grid-item "><b>Language</b></div>
+          <div class="grid-item fadetext">: English</div>  
+          <div class="grid-item "><b>Mode</b></div>
+          <div class="grid-item fadetext">: Self placed</div>
+          </div>
+
+          <div class="enroll">
+            <div class="grid-item ">
+            <i class="fa fa-play course_preview_icon pointer" aria-hidden="true"></i>
+            </div>
+
+            <div class="grid-item ">
+              <div class="course_preview">
+                <h2>Course <br> Preview</h2>
+            </div>
+            </div>
+
+            <div class="grid-item ">
+            <div class="partner_image">
+              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
+              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
+              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
+          </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right side end -->
+      </div>
+      <br><br><br>
+      <!-- line -->
+      <div class="line"></div>
+      <br><br><br>
+      <h1>Deatils about Course</h1>
+      <div class="row">
+        <!-- left side -->
+        <div class="col-md-4 col-sm-12 col-12">
+            <h3><b>Course Instructor</b></h3>
+          </div>
+
+          <div class="col-md-4 col-sm-12 col-12">
+              <h3>Ankit</h3>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <h3><b>Pre-Requisite</b></h3>
+            </div>
+  
+            <div class="col-md-4 col-sm-12 col-12">
+                <h3> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen</h3>
+              </div>
+      </div>
+
+      <div class="row">
+              <div class="col-md-4 col-sm-12 col-12">
+                <h3><b>Course descriptions</b></h3>
+              </div>
+    
+              <div class="col-md-4 col-sm-12 col-12">
+                  <h3> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen</h3>
+                </div>
+        </div>
+        <div class="line"></div>
+        <br><br><br>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-12">
+            <div class="display_flex">
+                <h2 class=""> Takeaways</h2>
+                <button mat-raised-button (click)="clickedT('media')"  class="tabbtn">Media</button>
+                <button mat-raised-button (click)="clickedT('text')" class="tabbtn" >Text</button>
+            </div>
+
+            <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
+              <owl-carousel-o [options]="customOptions1" class="takeway">
+                  <ng-template carouselSlide [id]="1"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                  </ng-template>
+                  <ng-template carouselSlide [id]="2"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                  </ng-template>
+                  <ng-template carouselSlide [id]="3"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                  </ng-template>
+              </owl-carousel-o>
+          </div>
+
+          <ul *ngIf="clicked == 'text'">
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor </li>
+        </ul>
+          </div>
+     
+        </div>
+        <div class="line"></div>
+        <br><br><br>
+        <h1>A Step towards</h1>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-12">
+            <h3>A Career in Photography</h3>
+          </div>
+        </div>
+        <div class="line"></div>
+        <br>
+        <div class="row">
+          <div style=" width: 100%;background-color: rgb(192, 191, 189);"><br>
+            <p class="m-l-10 f_wt_500 f_size_18"> Instructor details</p><br><br>
+            <div class="width_100 Instructor_dtl">
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide *ngFor="let i of course.author_details" style="height: 45vh;">
+                        <div class="display_flex width_70 m-l-15" style="height: 18vh;">
+                            <img src=" ../../../../assets/learner/lens.jpg">
+                            <div class="m-l-5">
+                                <p> <strong>{{i.author_name}} </strong></p>
+                                <p> {{i.description}}</p>
+                            </div>
+                        </div>
+                        <br><br>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+        </div>
+        </div>
+
+        <div class="line"></div>
+        <h1>Resources</h1>
+        <div class="row">
+          <section class="accordion" *ngFor="let res of content?.coursedetails">
+            <input type="checkbox" name="collapse" [id]="res?.modulename">
+            <h2 class="handle">
+              <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+                 <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+            </h2>
+            <div class="content">
+              <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+                <div class="col-8">
+                  <ol class="submod"  >
+                    <li>{{i+1}} {{mod?.topicname}}</li>
+                  </ol>
+                </div>
+      
+                <div class="col-4">
+                  <mat-form-field style="text-align: right;">
+                    <mat-icon matPrefix>mic</mat-icon>
+                    <mat-select  placeholder="Resourse">
+                        <mat-option  *ngIf="mod.resourse != null" >
+                            <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+          </div>
+            </div>
+          </section>
+        </div>
+    </div>
+ </div>
