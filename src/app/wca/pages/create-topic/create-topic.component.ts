@@ -15,6 +15,7 @@ import { MatList, MatDialog } from '@angular/material';
 })
 export class CreateTopicComponent implements OnInit {
   queryData: any;
+  submitted = false;
   active: any;
   createTopicForm: FormGroup;
   imageView: File;
@@ -109,14 +110,14 @@ export class CreateTopicComponent implements OnInit {
   }
 
 
-  initialCall(data) {
+  initialCall(data1) {
     this.spinner.show();
-    console.log(data.template);
-    this.wcaService.getsingleTemplate(data.template).subscribe((data: any) => {
+    console.log(data1);
+    this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
       this.spinner.hide();
       this.queryData = data.Result;
       this.courseForm = this.courseform()
-      this.courseForm.patchValue({ coursename:data.courseName, courseid:data.viewingModule});
+      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
       console.log(this.queryData);
     }, err => {
       this.spinner.hide();
@@ -279,21 +280,30 @@ export class CreateTopicComponent implements OnInit {
 
 
   addTopicFrom() {
+    this.submitted = true;
     // dummy data
      this.courseForm.value.createdby_name = 'Admin';
      this.courseForm.value.createdby_id = '0001';
      this.courseForm.value.createdby_role = 'Sathish';
 
     console.log(this.courseForm);
-    return
-    this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
-       console.log(data);
-       if (data && data.Message === 'Success') {
-         this.toast.success('Draft Created Successfully !!!');
-       }
-    }, err => {
-      this.spinner.hide();
-    })
+    if(this.courseForm.valid) {
+      this.submitted = false;
+
+      this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
+        console.log(data);
+        if (data && data.Message === 'Success') {
+          this.toast.success('Draft Created Successfully !!!');
+        }
+     }, err => {
+       this.spinner.hide();
+     })
+
+    } else {
+      this.submitted = true;
+    }
+  
+   
   }
 
   previewimages(images, event,item) {
