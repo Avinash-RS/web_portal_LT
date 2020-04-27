@@ -181,12 +181,12 @@
                     {{item.institute_name}}
                   </mat-option>
                 </mat-select>
-                <div class="col-md-3 col-sm-12 col-12 display_flex" *ngIf="check == '10'">
+                <!-- <div class="col-md-3 col-sm-12 col-12 display_flex" *ngIf="check == '10'">
                   <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
                 placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_100' :
                 'inputs border-radius-5 color_blue background_trans width_100'"
                  formControlName="institute">
-                 </div>
+                 </div> -->
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Dsicipline" formControlName="discipline"
                   name="discipline">
                   <mat-option [value]="item._id" *ngFor="let item of disciplines">
