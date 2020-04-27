@@ -45,4 +45,15 @@ bSubject = new BehaviorSubject({});
 
   getsingleTemplate(template) { return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates?template_id='+template); }
 
+  handleKeydown(event) {
+    // tslint:disable-next-line: deprecation
+    if (event.keyCode === 32) {
+      // do not propagate spaces to MatSelect, as this would select the currently active option
+      event.stopPropagation();
+    }
+    if (event.which === 32 && event.target.selectionStart === 0) {
+      return false;
+    }
+  }
+
 }

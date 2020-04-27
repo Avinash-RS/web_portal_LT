@@ -19,3 +19,12 @@
     </form>
 
 </ng-container>
+
+
+<ng-container *ngIf="dialogdata?.type === 'previewImages'">
+    <div class="prew1">
+        <mat-card class="prew2" *ngFor="let i of dialogdata.images">
+         <!-- <img [src]="i?."> -->
+    </mat-card>
+</div>
+</ng-container>

@@ -3,10 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-// import * as PDFJS from 'pdfjs';
 import * as PDFJS from 'pdfjs-dist/build/pdf';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatList, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-create-topic',
@@ -31,6 +31,12 @@ export class CreateTopicComponent implements OnInit {
     Image: "(.jpg .jpeg .png) are Allowed !!!",
     PDF: "(.pdf) are Allowed !!!" ,
     Word: "(.doc .docx) are Allowed !!!",
+    PPT: "are Allowed !!!",
+    Video: " are Allowed !!!",
+    Audio: "are Allowed !!!",
+    SCROM: " are Allowed !!!",
+    "Knowledge Check": " are Allowed !!!",
+    Feedback: " are Allowed !!!"
   }
 
   courseform(): FormGroup {
@@ -61,7 +67,7 @@ export class CreateTopicComponent implements OnInit {
     public route: ActivatedRoute,
     private wcaService: WcaService,
     public formBuilder: FormBuilder,
-
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -275,8 +281,24 @@ createForm(){
     console.log(this.courseform())
   }
 
-  previewimages(images) {
+  previewimages(images,event) {
+    event.stopPropagation();
     console.log(images.value);
+    if (images && images.value && images.value.topicimages) {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        data: { type: 'previewImages',images:images.value.topicimages},
+        height: 'auto',
+        width: 'auto',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+      dialogRef.afterClosed().subscribe(res1 => {
+        console.log(res1);
+      })
+    } else {
+      this.toast.warning('Something Went Wrong While Displaying Images !!!');
+    }
+  
   }
 
 }

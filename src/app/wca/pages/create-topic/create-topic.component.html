@@ -61,7 +61,7 @@
           <span class="padTop1 showCon" [class.active]="queryData?.template_details[i].name === active?.name"> <small>content is empty Double Click to edit</small></span>
           <span class="padTop1" [class.active]="queryData?.template_details[i].name === active?.name"> <small>{{fileType}}</small></span>
          <span class="previewAndTime" [class.active]="queryData?.template_details[i].name==active?.name">
-             <span><button mat-raised-button class="btnprev" (click)="previewimages(j)">preview</button></span>
+             <span><button *ngIf="j?.value?.topicimages[0]" mat-raised-button class="btnprev" type="button" (click)="previewimages(j,$event)">preview</button></span>
              <span>
                  <small class="spanTime">  Time required to complete the topic </small>
                  <mat-card class="matcardTime">

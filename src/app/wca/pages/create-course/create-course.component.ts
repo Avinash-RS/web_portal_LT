@@ -323,4 +323,9 @@ export class CreateCourseComponent implements OnInit {
     this.courseForm.get('coursepartner_details').get(String(index)).get('name').setValue(option.name);
     this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(option.image);
     }
+
+    _handleKeydown(event) {
+      return this.wcaService.handleKeydown(event);
+    }
+  
 }
