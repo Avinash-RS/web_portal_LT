@@ -24,18 +24,17 @@ export class CoursepreviewComponent implements OnInit {
     },
     nav: true
   }
+  course: any;
   constructor( public service: CommonServicesService,private loader: Ng4LoadingSpinnerService,) {
 
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
           console.log(viewCourse,"detail")
-    //   if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-    //     this.course = viewCourse.data.viewcourse.message[0];
-    //     this.course.wishlisted = detail.wishlist || false;
-    //     this.course.wishlist_id = detail.wishlist_id || null;
-    //     console.log(this.course)
-    //     this.loader.hide();
-    //   } else
-    //     this.loader.hide();
+      if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+        this.course = viewCourse.data.viewcourse.message[0];
+        console.log(this.course)
+        this.loader.hide();
+      } else
+        this.loader.hide();
     });
    }
 
