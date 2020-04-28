@@ -11,6 +11,7 @@ import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -1245,7 +1246,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {
-    console.log(this.profileForm.get('professional'))
+    console.log(this.profileForm)
     if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional && this.profileForm.value.country && this.profileForm.value.state
       && this.profileForm.value.city_town)
       this.profileForm.controls['progress'].setValue(60);
@@ -1363,7 +1364,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getDistrict() {
-    this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.State).subscribe(city => {
+    this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.state).subscribe(city => {
       this.cityValue = city.data['get_district_details'].data;
     })
   }
@@ -1419,14 +1420,14 @@ export class ProfileComponent implements OnInit {
 
   updateEmail(mailForm) {
     if (mailForm == false) {
-      this.alert.openAlert('Email Id is invalid', null)
+      Swal.fire('Email Id is invalid')
     } else {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
         if (data.data['update_email_onprofile']['success'] == 'true') {
-          this.alert.openAlert(data.data['update_email_onprofile'].message, null);
+          Swal.fire(data.data['update_email_onprofile'].message);
           this.getprofileDetails(this.currentUser.user_id)
         } else {
-          this.alert.openAlert(data.data['update_email_onprofile'].message, null)
+          Swal.fire(data.data['update_email_onprofile'].message)
         }
       })
     }
@@ -1462,7 +1463,8 @@ export class ProfileComponent implements OnInit {
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
+        // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
+        Swal.fire(data.data['update_mobile_onprofile'].message);
         this.isenable = false;
         this.showotp = true;
         //Timer
@@ -1476,7 +1478,8 @@ export class ProfileComponent implements OnInit {
           }
         }, 1000)
       } else
-        this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
+        // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
+        Swal.fire(data.data['update_mobile_onprofile'].message);
     })
   }
 
@@ -1490,12 +1493,12 @@ export class ProfileComponent implements OnInit {
     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
         this.closedialogbox();
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        Swal.fire(data.data['update_verifyotp_mobile_onprofile'].message)
         this.showotp = false;
         this.isenable = true;
         this.getprofileDetails(this.currentUser.user_id)
       } else {
-        this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
+        Swal.fire(data.data['update_verifyotp_mobile_onprofile'].message)
         this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
         this.showotp = false;
         this.isenable = true;
@@ -1509,7 +1512,7 @@ export class ProfileComponent implements OnInit {
     this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
-        this.alert.openAlert(data.data['resend_otp_onprofile']['message'], null)
+        Swal.fire(data.data['resend_otp_onprofile']['message'])
         this.showotp = true;
         this.interval = setInterval(() => {
           // this.resendtimeLeft = 60;
@@ -1527,12 +1530,12 @@ export class ProfileComponent implements OnInit {
   updatePassword() {
     this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
-        this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
+        Swal.fire(password.data['get_change_password_updateprofile'].message);
         localStorage.clear();
         this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else
-        this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
+      Swal.fire(password.data['get_change_password_updateprofile'].message);
     })
   }
 

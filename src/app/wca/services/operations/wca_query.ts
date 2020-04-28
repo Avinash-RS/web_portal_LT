@@ -13,10 +13,14 @@ export const remove_doc_ref = gql`
     getallrefdoc(pagenumber:$pagenumber) {
       data{
       module_id
+      topic_id
       _id
       type
       type_name
-      path
+      files{
+        path
+        doc_type
+      }
       doc_type
       created_on
     }
