@@ -1,139 +1,214 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
-// import { LearnerServicesService } from '@learner/services/learner-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Form } from '@angular/forms';
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  user_id: string;
+  name: number;
+  email: string;
+  mobile: string;
 }
-
-
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-
-  addUserForm: FormGroup;
-  openAddUser: boolean = false;
-  groups: any = [];
-  admin: any = [];
+  profileForm: Form;
   adminDetails: any;
-
-  ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    // { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    // { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-    // { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-    // { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-    // { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-    // { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-    // { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-    // { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-    // { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-    // { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-    // { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-    // { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
-  ];
+  ELEMENT_DATA: PeriodicElement[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'deactivate', 'block'];
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
-
-  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService,
-    // private learnerService: LearnerServicesService
-  ) { }
-
-  ngOnInit() {
-    // this.gs.checkLogout();
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'))
-    this.admin.push(this.adminDetails._id)
-    this.addUserForm = this.formBuilder.group({
-      username: new FormControl("", myGlobals.usernameVal),
-      email: new FormControl("", myGlobals.emailVal),
-      group: ['', myGlobals.req]
-    });
-
-    this.service.getUserGroup()
-      .subscribe((result: any) => {
-        console.log(result.data.get_user_group.message)
-        this.groups = result.data.get_user_group.message
-      });
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  selection = new SelectionModel(true, []);
+  resultsLength: number = null;
+  selectedArray: any = [];
+  profileDetails: {};
+  trackDetails: any;
+  loader: boolean = false;
+  constructor(private router: Router, private gs: GlobalServiceService,
+    private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
+    private dialog: MatDialog,
+  ) {
+    this.getAllUser(0)
   }
 
-  get f() {
-    return this.addUserForm.controls;
+  getAllUser(pagenumber) {
+    this.loader = true;
+    this.resultsLength = null;
+    if (pagenumber == 0)
+      this.ELEMENT_DATA = []
+    this.service.getAllUsers(pagenumber, 1)
+      .subscribe((result: any) => {
+        Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+        console.log(this.ELEMENT_DATA)
+        this.selection = new SelectionModel(true, []);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.resultsLength = result.data.get_all_user.learner_count;
+        this.loader = false;
+      });
+  }
+
+  ngOnInit() {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+  }
+
+  gotoAddUser() {
+    this.router.navigate(['Admin/auth/addUser']);
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
 
-  addUser() {
-    console.log(this.addUserForm.value)
-    this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-      true, this.addUserForm.value.group._id, this.addUserForm.value.group.group_name,
-      this.admin
-    ).subscribe((result: any) => {
-      console.log(result.data.user_registration.message);
-      if (result.data.user_registration.success  == 'true')
-        this.alert.openAlert("Success !", "User registered successfully")
-      else
-        this.alert.openAlert(result.data.user_registration.message, null)
-    });
+  // isAllSelected() {
+  //   const numSelected = this.selection.selected.length;
+  //   const numRows = this.dataSource.data.length;
+  //   return numSelected === numRows;
+  // }
+
+  // masterToggle() {
+  //   this.isAllSelected() ?
+  //     this.selection.clear() :
+  //     this.dataSource.data.forEach(row => this.selection.select(row));
+  // }
+
+  // checkboxLabel(row?): string {
+  //   if (!row) {
+  //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  //   }
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  // }
+
+  viewDetail(element, templateRef: TemplateRef<any>) {
+    // this.loader = true;
+    this.service.getUserSession(element._id).subscribe((track: any) => {
+      this.trackDetails = track.data.get_user_session_detail.message[0]
+      console.log(this.trackDetails);
+      this.service.getLearnerDetail(element.user_id)
+        .subscribe((result: any) => {
+          this.profileDetails = result.data.get_all_learner_detail.message[0];
+          // console.log(result.data.get_all_learner_detail.message[0], this.profileDetails)
+          this.dialog.open(templateRef);
+          // this.loader = false;
+          // this.mailForm = this.formBuilder.group({
+          //   mailid: new FormControl('', myGlobals.emailVal)
+          // });
+        })
+    })
   }
 
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    // console.log(numSelected,numRows)
-    return numSelected === numRows;
+  closedialogbox() {
+    this.dialog.closeAll();
   }
 
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  checkboxLabel(row?) {
+    if (row.isChecked == undefined) {
+      row.isChecked = true;
+      this.selectedArray.push(row);
+      console.log(this.selectedArray)
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    else {
+      row.isChecked = !row.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== row);
+      console.log(this.selectedArray)
+    }
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    setTimeout(() => {
+      if (filterValue.trim().toLowerCase().length > 3) {
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+        this.ELEMENT_DATA = []
+        this.service.searchUser(filterValue.trim().toLowerCase(), 0, 1)
+          .subscribe((result: any) => {
+            if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
+              Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
+              this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+              console.log(this.ELEMENT_DATA);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.resultsLength = 10;
+            }
+            else
+              this.alert.openAlert("Sorry", 'User doesnt exists');
+            // this.getAllUser(0)
+            // this.toast.warning('Course Name and Course image is Required !!!');
+          });
+      } else if(filterValue.trim().toLowerCase().length == 0) {
+        // setTimeout(() => {
+        //   this.ELEMENT_DATA = []
+        //   console.log('inside')
+          this.getAllUser(0)
+        // }, 700);
+      }
+    }, 300);
+  }
+
+  deActivate(status, element?) {
+    let count = element ? 1 : this.selectedArray.length;
+    // setTimeout(() => {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count + ' users ?' :
+        'Are you sure you want to activate ' + count + ' users ?').then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.service.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
+    }
+    // }, 500);
+  }
+
+  block(status, element?) {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      let count = element ? 1 : this.selectedArray.length
+      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count + ' users ?' :
+        'Are you sure you want to un-block ' + count + ' users ?').then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.service.blockUser(result, status == 'Block' ? true : false)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
     }
   }
 
-  deActivate(e?: any) {
-    console.log(e);
-    console.log('this', this.selection.selected)
+  next(e) {
+    console.log(e)
+    this.getAllUser(e.pageIndex)
   }
 }

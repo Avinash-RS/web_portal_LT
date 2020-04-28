@@ -5,26 +5,37 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 import { CoreModule } from '@core/core.module';
-import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { UserManagementComponent } from './pages/user-management/user-management.component';
+
+import { AdminLoginModule } from './admin-login/admin-login.module';
+
+import { AdminCoreModule } from './core/admin-core.module';
+import { AuthModule } from './auth/auth.module';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import {  DndDirective } from './core/dnd.directive';
 
 const routes: Routes = [
-  { path: 'login', component: AdminLoginComponent,canActivate:[AuthGuard]  },
-  { path: 'userManagement', component: UserManagementComponent,canActivate:[AuthGuard]  },
+  // {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
+  { path: 'login', component: AdminLoginComponent,canActivate: [AuthGuard] },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule', canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
-  declarations: [AdminLoginComponent, UserManagementComponent],
+  declarations: [DndDirective],
   imports: [
     CoreModule,
+    AdminLoginModule,
     CommonModule,
+    AuthModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    AdminCoreModule,
     RouterModule.forChild(routes),
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AdminModule { }

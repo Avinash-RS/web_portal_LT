@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 //others
 import { BarRatingModule } from "ngx-bar-rating";
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
@@ -14,8 +14,20 @@ import { CourseComponentComponent } from '@core/shared/course-component/course-c
 import { TopCoursesComponent } from '@core/shared/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from '@core/shared/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist-courses.component';
-import { CapslockDirective } from '@core/services/directives/capslock.directive'
+import { CapslockDirective } from '@core/services/directives/capslock.directive';
+import { VideoPlayerComponent } from '@core/shared/video-player/video-player.component';
+import { AudioPlayerComponent } from '@core/shared/audio-player/audio-player.component';
+import { DataTableComponent } from './shared/data-table/data-table.component';
+//Video and Audio Player
+import { VgCoreModule } from 'videogular2/compiled/core';
+import { VgControlsModule } from 'videogular2/compiled/controls';
+import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
+import { VgBufferingModule } from "videogular2/compiled/buffering";
 
+const routes: Routes = [
+  { path: 'video', component: VideoPlayerComponent,canActivate:[AuthGuard]  },
+  { path: 'audio', component: AudioPlayerComponent,canActivate:[AuthGuard]  },
+];
 @NgModule({
   declarations: [
     CapslockDirective,
@@ -24,7 +36,11 @@ import { CapslockDirective } from '@core/services/directives/capslock.directive'
     CourseComponentComponent,
     TopCoursesComponent,
     RecomendedCoursesComponent,
-    WishlistCoursesComponent,],
+    WishlistCoursesComponent,
+    VideoPlayerComponent,
+    AudioPlayerComponent,
+    DataTableComponent,
+  ],
 
   imports: [
     MaterialModule,
@@ -33,6 +49,11 @@ import { CapslockDirective } from '@core/services/directives/capslock.directive'
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),
+    RouterModule.forChild(routes),
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -44,6 +65,7 @@ import { CapslockDirective } from '@core/services/directives/capslock.directive'
     TopCoursesComponent,
     RecomendedCoursesComponent,
     WishlistCoursesComponent,
-    CapslockDirective]
+    CapslockDirective,
+    DataTableComponent]
 })
 export class CoreModule { }

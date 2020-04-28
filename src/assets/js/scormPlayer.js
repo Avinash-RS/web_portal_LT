@@ -26,25 +26,25 @@ $(document).ready(function () {
    var urlParams = getQueryParameters(document.location.search);
    var contentID = urlParams.contentID;
    
-   // $.get('/navTree',{contentID:contentID},function (navData) {
-   //    console.log(JSON.stringify(navData));
-   //    createNavList(navData);
-   //    // Note: comment createNavList and uncomment the line below to auto run the first SCO
-   //    // $("#content").attr('src', navData[0].children[0].link);
-   // })
+   $.get('/navTree',{contentID:contentID},function (navData) {
+      console.log(JSON.stringify(navData));
+      createNavList(navData);
+      // Note: comment createNavList and uncomment the line below to auto run the first SCO
+      // $("#content").attr('src', navData[0].children[0].link);
+   })
 });
 
-// var createNavList = function (navData) {
-//    var contentNavList = $("<ul/>").appendTo('#contentNav');
-//    navData.forEach(function (entry) {
-//       contentNavList.append(`<li class="mainNav">${entry.title}</li>`);
-//       var subList = $(`<ul/>`)
-//       entry.children.forEach(function (child) {
-//          subList.append(`<li class="subNav"><a class="navLink" href="${child.link}">${child.title}</a></li>`);
-//       });
-//       contentNavList.append(subList);
-//    });
-// };
+var createNavList = function (navData) {
+   var contentNavList = $("<ul/>").appendTo('#contentNav');
+   navData.forEach(function (entry) {
+      contentNavList.append(`<li class="mainNav">${entry.title}</li>`);
+      var subList = $(`<ul/>`)
+      entry.children.forEach(function (child) {
+         subList.append(`<li class="subNav"><a class="navLink" href="${child.link}">${child.title}</a></li>`);
+      });
+      contentNavList.append(subList);
+   });
+};
 
 var getQueryParameters = function (queryString) {
    queryString = queryString.split('+').join(' ');

@@ -18,9 +18,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
-      JSON.parse(localStorage.getItem('adminDetails')) || null;
     this.role = localStorage.getItem('role');
-    console.log(this.userDetailes,this.role)
     this.userimage = localStorage.getItem('user_img')
   }
 
@@ -34,11 +32,10 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
-      console.log(logout.data.logout)
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
         this.userDetailes = null;
-        this.router.navigate(['/Learner/login'])
+        this.router.navigate(['/Learner'])
       }
       else if (logout.data.logout && !logout.data.logout.success)
         this.alert.openAlert(logout.data.logout.message, null)

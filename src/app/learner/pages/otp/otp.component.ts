@@ -25,12 +25,16 @@ export class OtpComponent implements OnInit {
   otpForm: FormGroup;
   systemip:String;
   otp: any;
+  isLinkActive: boolean = false;
   showotp: boolean = false;
   isenable:boolean = true;
   showverify: boolean = false;
   email:any;
   useridData:any;
   userid:any;
+  timeLeft: number = 60;
+  interval;
+  status: string;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -38,7 +42,7 @@ export class OtpComponent implements OnInit {
       public service : LearnerServicesService,
       private activeroute: ActivatedRoute) { 
         this.activeroute.queryParams.subscribe(params => {
-          this.email = params["email"]
+          this.email = params["code"]
           this.get_user_detail(this.email)
         })
       }
@@ -46,14 +50,15 @@ export class OtpComponent implements OnInit {
 
   @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
-    allowNumbersOnly: false,
-    length: 5,
+    allowNumbersOnly: true,
+    length: 4,
     isPasswordInput: false,
     disableAutoFocus: false,
     placeholder:'',
     inputStyles: {
-      'width': '50px',
-      'height': '50px'
+      'width': '60px',
+      'height': '60px',
+      'background': '#B8D0FF'
     }
   };
 
@@ -63,10 +68,10 @@ export class OtpComponent implements OnInit {
   this.systemip = localStorage.getItem('Systemip')
   this.otpForm = this.formBuilder.group({
           mobile: new FormControl('', myGlobals.mobileVal),
-          otp1: new FormControl("", []),
-          otp2: new FormControl("", []),
-          otp3: new FormControl("", []),
-          otp4: new FormControl("", [])
+          otp: new FormControl("", []),
+          // otp2: new FormControl("", []),
+          // otp3: new FormControl("", []),
+          // otp4: new FormControl("", [])
 }, {
 
 });
@@ -80,25 +85,34 @@ get f() { return this.otpForm.controls; }
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.isenable = false;
             this.showotp = true;
+            //Timer
+              this.interval = setInterval(() => {
+          if(this.timeLeft > 0) {
+            this.timeLeft--;
+          } else {
+            this.timeLeft = 0;
+            // this.finish();
+          }
+        },1000)
           } 
       })
   
   }
-  // onOtpChange(otp) {
-  //   this.otp = otp;
-
-  // }
+  onOtpChange(otp) {
+    this.otp = otp;
+  }
   otpverify(){
-    this.otp = this.otpForm.value.otp1+this.otpForm.value.otp2+this.otpForm.value.otp3+this.otpForm.value.otp4
-    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile,).subscribe(data => {
+    this.service.user_registration_verify(this.otp,this.otpForm.value.mobile).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
             this.showotp = true;
             localStorage.setItem("key",this.userid)
             this.router.navigate(['Learner/password']);
           } else{
-            this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp1: '',otp2:'',otp3:'',otp4:''})
+            this.otpForm.setValue({mobile:this.otpForm.value.mobile,otp: ''})
             this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            this.showotp = false;
+            this.isenable = true;
           }
       })
 
@@ -121,10 +135,9 @@ get f() { return this.otpForm.controls; }
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
-        this.userid =this.useridData.get_user_detail.message[0].user_id
-        
-      })
-      
+        this.userid =this.useridData.get_user_detail.message[0].user_id; 
+        this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
+      })  
     } catch (error) {
         throw error 
     }

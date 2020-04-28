@@ -1,14 +1,14 @@
 @import "assets/variable";
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 /* Add application styles & imports to this file! */
-@import '~ngx-bar-rating/themes/br-default-theme.css';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-@import '~bootstrap/scss/bootstrap-reboot';
-@import '~bootstrap/scss/bootstrap-grid';
+@import "~ngx-bar-rating/themes/br-default-theme.css";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
 
 button:disabled:hover {
   cursor: not-allowed;
@@ -50,7 +50,7 @@ button:disabled:hover {
 }
 
 .f_wt_400 {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .f_wt_500 {
@@ -62,7 +62,7 @@ button:disabled:hover {
 }
 
 .f_wt_initial {
-  font-weight: initial
+  font-weight: initial;
 }
 
 .f_size_12 {
@@ -86,7 +86,7 @@ button:disabled:hover {
 }
 
 .f_size_17 {
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 .f_size_18 {
@@ -94,7 +94,7 @@ button:disabled:hover {
 }
 
 .f_size_20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .f_size_23 {
@@ -110,11 +110,11 @@ button:disabled:hover {
 }
 
 .width_100 {
-  width: 100%;
+  width: 100% !important;
 }
 
 .width_90 {
-  width: 100%;
+  width: 90% !important;
 }
 
 .width_80 {
@@ -126,11 +126,11 @@ button:disabled:hover {
 }
 
 .width_70 {
-  width: 70%;
+  width: 70% !important;
 }
 
 .width_50 {
-  width: 50%;
+  width: 50% !important;
 }
 
 .width_40 {
@@ -154,7 +154,7 @@ button:disabled:hover {
 }
 
 .space5 {
-  margin-top: 5%;
+  margin-top: 5% !important;
 }
 
 .space10 {
@@ -185,19 +185,27 @@ button:disabled:hover {
   position: absolute !important;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
 .float_right {
   float: right;
-  text-align: right;
-  text-align: end;
+  text-align: right !important;
+  text-align: end !important;
 }
 
 .float_left {
   float: left;
-  text-align: left;
+  text-align: left !important;
 }
 
 .center_align {
   text-align: center;
+}
+
+.center {
+  margin: auto !important;
+  display: block !important;
 }
 
 .background_trans {
@@ -221,7 +229,7 @@ button:disabled:hover {
 }
 
 .p-5px {
-  padding: 5px;
+  padding: 5px !important;
 }
 
 .border-radius-5 {
@@ -229,7 +237,7 @@ button:disabled:hover {
 }
 
 .background-maroon {
-  background-color: $color-maroon;
+  background-color: $color-maroon !important;
 }
 
 td {
@@ -245,7 +253,7 @@ td {
 }
 
 .no_border {
-  border: none;
+  border: none !important;
   box-shadow: none;
 }
 
@@ -254,9 +262,12 @@ td {
 }
 
 .color_white {
-  color: #fff !important;
+  color: $color-white !important;
 }
 
+.color_black {
+  color : $color-blank !important;
+}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -283,7 +294,7 @@ body {
   content: "\2605";
   color: transparent;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: $color-yellow
+  -webkit-text-stroke-color: $color-yellow;
 }
 
 .example-full-width {
@@ -308,32 +319,19 @@ body {
   margin-top: 50px;
   position: relative;
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   padding: 10px;
-  background: white;
+  background: $color-white;
   display: flex;
   justify-content: center;
   height: 277px;
 }
 
-// .container-reg100 {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 15px;
-//   background-size: cover !important;
-//   background-position: center !important;
-//   background-repeat: no-repeat !important;
-//   height: 100vh !important;
-//   background: url('./assets/learner/download.jpg') !important;
-// }
-
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #ffffff !important;
+  color: $color-white !important;
   text-align: center;
   vertical-align: middle !important;
   cursor: pointer;
@@ -341,15 +339,11 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #1F3777 !important;
-  // padding: .375rem .75rem;
+  background-color: $color-blue !important;
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
   width: 100%;
-  // margin-left: 15px;
-  // margin-right: 25px;
-
 }
 
 .limiter {
@@ -360,7 +354,7 @@ body {
 .wrap-reg {
   width: 350px;
   height: auto;
-  background: #fff !important;
+  background: $color-white !important;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -410,22 +404,22 @@ input[type=password] {
 }
 
 label {
-  color: #1F3777;
+  color: $color-blue;
   font-weight: 500;
 }
 
 .head {
   text-align: center;
-  color: #1F3777 !important;
+  color: $color-blue!important;
 }
 
 .mand {
-  color: red !important;
+  color: $color-red !important;
 }
 
 mat-icon {
   cursor: pointer;
-  color: #1F3777;
+  color: $color-blue;
 }
 
 // .header{
@@ -433,3 +427,74 @@ mat-icon {
 //     background-color: #1F3777 !important;
 // }
 // }
+
+.choose-template-container .mat-grid-tile .mat-figure {
+  justify-content: unset !important;
+  margin: 0px 0 0 10px;
+  align-items: unset !important;
+}
+
+.allow-cr {
+  white-space: pre;
+  color: #5e5e5e !important;
+  background: white !important;
+  box-shadow: 0 0 5px #aaaaaa !important;
+  font-size: 16px;
+}
+.forgotusername{
+  .mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    overflow: hidden !important;
+  }
+}
+
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">" !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #213998 !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #213998 !important;
+}
+
+.reference-file-container {
+  .file-selection .mat-radio-label-content {
+    color: grey !important;
+  }
+  .file-selection {
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: unset !important;
+    }
+    .mat-form-field-flex {
+      background: #b8d0ff !important;
+      border-radius: 5px;
+
+    }
+  }
+}
+
+.save-btn {
+  width: 70px;
+  height: 30px;
+  background-color: #1f3777 !important;
+  /* margin: 20px 0px; */
+  color: white !important;
+  font-size: 14px;
+  padding-bottom: 23px;
+}
+.mat-header-row{
+background: #d7e7ff !important;
+min-height: 40px !important;
+}
+
+h1{
+  color: #0e3877;
+  font-weight: 500 !important;
+}
+
+.create-course .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #1F3777 !important;
+}

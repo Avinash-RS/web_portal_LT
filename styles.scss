@@ -3,6 +3,7 @@
 @import'~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* Add application styles & imports to this file! */
 @import '~ngx-bar-rating/themes/br-default-theme.css';
+@import '~@sweetalert2/theme-material-ui/material-ui.scss';
 // @import '~ngx-bar-rating/themes/br-horizontal-theme.css';
 body 
 
@@ -55,7 +56,7 @@ body
     -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     padding: 10px;
-    background: white;
+    background: $color-white;
     display: flex;
     justify-content: center;
     height: 277px;
@@ -76,7 +77,7 @@ body
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #ffffff !important;
+  color: $color-whitec !important;
   text-align: center;
   vertical-align: middle !important;
   cursor: pointer;
@@ -84,7 +85,7 @@ body
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #1F3777 !important;
+  background-color: $color-blue !important;
   // padding: .375rem .75rem;
   border-radius: 0px !important;
   font-size: 1rem;
@@ -102,7 +103,7 @@ body
 .wrap-reg {
   width: 350px;
   height: auto;
-  background: #fff !important;
+  background: $color-white !important;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -132,10 +133,14 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 label{
-  color: #1F3777;
+  color: $color-blue;
   font-weight: 500;
 }
 .head{
   text-align: center;
-  color: #1F3777;   
+  color: $color-blue;   
+}
+.swal2-popup {
+  width: 27% !important;
+  height: 35% !important;
 }

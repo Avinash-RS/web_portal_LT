@@ -12,7 +12,9 @@ import { NgxMaskModule } from 'ngx-mask'
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 //local
+import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -29,22 +31,23 @@ import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learn
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 //others
 
 const routes: Routes = [
   { path: '', component: LearnerHomeComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegistrationComponent, },
-  { path: 'otp', component: OtpComponent },
-  { path: 'password', component: PasswordComponent },
-  { path: 'recover', component: ForgotUsernameAndPasswordComponent },
-  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent },
-  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
-  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] },
-  { path: 'resetpassword', component: ResetpasswordComponent },
-  { path : "terms",component:TermsconditionsComponent},
-  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] ,data : {title:'Learner Login'}},
+  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard],data : {title:'Course details'} },
+  { path: 'register', component: RegistrationComponent,data : {title:'Learner  Registration'} },
+  { path: 'otp', component: OtpComponent ,data : {title:'Learner  Registration OTP'} },
+  { path: 'password', component: PasswordComponent ,data : {title:'Learner  Registration Username/Password'} },
+  { path: 'recover', component: ForgotUsernameAndPasswordComponent ,data : {title:'Learner  Forget Password'}},
+  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent  ,data : {title:'Learner  Forget Password OTP'}},
+  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] ,data : {title:'Learner  Profile'}},
+  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] ,data : {title:'Learner  MyCourse'}},
+  { path: 'resetpassword', component: ResetpasswordComponent ,data : {title:'Learner   Reset password'}},
+  { path : "terms",component:TermsconditionsComponent,data : {title:'Terms and conditions'}},
+  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard],data : {title:'Course Player'}},
 ];
 
 @NgModule({
@@ -63,6 +66,7 @@ const routes: Routes = [
     ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
+    MaskingPipePipe
     
   ],
 
@@ -84,6 +88,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
+    NgOtpInputModule
   ],
   providers: [Apollo],
   entryComponents: []

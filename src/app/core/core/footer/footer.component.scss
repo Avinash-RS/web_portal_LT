@@ -1,13 +1,15 @@
+@import "../../../../assets/variable";
+
 .footer-container {
   // position: absolute;
   height: 300px;
-  width: 100%;
-  color: white;
-  background-color: #1f3777 !important;
-  bottom: 0;
-  padding: 20px 50px 10px 50px;
-  
-  margin-top: 50px;
+    width: 100%;
+    color: $color-white ;
+    background-color: $color-blue !important;
+    bottom: 0;
+    padding: 20px 50px 10px 50px;
+    
+    margin-top: 50px;
 
   .icon {
     font-size: 20px;
@@ -54,4 +56,30 @@
     text-align: center;
     margin-right: 225px;
   }
+}
+
+@media screen and  (max-width: 768px) {
+  .footer-content  {
+    // position: absolute;
+  
+    width: 100% !important;
+    
+  }
+  
+}
+@media screen and  (max-width:655px) {
+  .footer-container{
+    height:100% !important;
+    .content-title{ display: block !important;
+      height:100% !important;}
+   
+  }
+  .footertext{
+    margin-right:0 !important;
+  }
+  .copyright-header{
+    margin-right:0 !important;
+
+  }
+  
 }

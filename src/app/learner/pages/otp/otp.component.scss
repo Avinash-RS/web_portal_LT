@@ -6,7 +6,7 @@ input[type=text] {
   margin: 1px 0;
   background: $color-light-blue;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid $color-border;
   box-sizing: border-box;
   border-radius: 5px;
 }
@@ -33,5 +33,7 @@ input[type=text] {
     text-align: center !important;
     cursor: pointer;
 }
-  
+.star{
+  color: $color-red;
+} 
   

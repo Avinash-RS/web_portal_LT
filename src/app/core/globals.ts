@@ -1,11 +1,19 @@
 'use strict';
 import { Validators } from "@angular/forms";
+export const usernameValforLogin: any = [
+    Validators.required
+]
+
+export const passwordValforLogin: any = [
+    Validators.required
+]
 
 export const usernameVal: any = [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(20),
-    Validators.pattern(/^[A-Za-z0-9]*$/)]
+    Validators.pattern(/^[A-Za-z0-9]*$/)
+]
 
 export const passwordVal: any = [
     Validators.required,
@@ -24,13 +32,14 @@ export const emailVal: any = [
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(64),
-    Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,4}$/)
+    // Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,4}$/)
+    Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
     //  old pattern Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
 ]
 // not accpect start and end space 
 export const fullnameVal: any = [
     Validators.required,
-    Validators.pattern(/^[-a-zA-Z-()]+(\s+[-a-zA-Z-()]+)*$/),
+    Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/),
     Validators.minLength(3),
     Validators.maxLength(50)
 ]

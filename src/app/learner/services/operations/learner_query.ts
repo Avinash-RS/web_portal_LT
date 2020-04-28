@@ -14,6 +14,7 @@ export const login = gql`
         user_id
         is_blocked
         is_profile_updated
+        group_id                  
         message      
       }
     }
@@ -44,6 +45,7 @@ export const login = gql`
       success
     error_msg
     message{
+
       course_id
       course_description
       course_name
@@ -53,7 +55,11 @@ export const login = gql`
       short_description
       rating,
       price
-
+      coursePlayerStatus{
+        status
+        location
+        course_id
+      }
     }
   }
 }`;
@@ -177,10 +183,22 @@ export const get_user_detail = gql`
     get_user_detail(email: $email) {
       message{
         user_id
+        email_verify{
+          flag
+        }
       }
       success
   }
 }`;
+
+export const get_user_detail_username = gql`
+  query get_user_detail_username($username: String){
+    get_user_detail_username(username: $username) {
+      message
+      success
+  }
+}`;
+
 export const list_content = gql`
 query list_content{
   list_content {
@@ -192,16 +210,59 @@ query list_content{
 `;
 
 export const syllabus_of_particular_scorm = gql`
-query syllabus_of_particular_scorm($contentid:String){
-  syllabus_of_particular_scorm(contentid:$contentid) {
+query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:String){
+  syllabus_of_particular_scorm(contentid:$contentid,user_id:$user_id,course_id:$course_id) {
     message,
     success,
-    data{
-      title,
-      children{
-      title,
-        link
+    data {
+      scorm_dtl_user_map{
+        title
+        children{
+          title
+          link
+        }
+      }
     }
+  }
+}`;
+
+export const getmoduleData = gql`
+query getmoduleData($courseid:String!){
+  getmoduleData(courseid:$courseid) {
+    data {
+      courseid
+      _id
+      coursename
+      coursefile
+      coursestatus
+      coursecreated_on
+      coursedetails{
+        modulename
+        modulestatus
+        modulecreated_on
+        moduledetails{
+          topicname
+          topicstatus
+          topiccreated_on
+          topicimages
+          resourse{
+            type
+            files{
+              doc_type
+              path
+            }
+            doc_type
+            type_name
+          }
+        }
+      }
     }
+  }
+}`;
+export const check_existing_user = gql`
+  query check_existing_user($username: String){
+    check_existing_user(username: $username) {
+      message
+      success
   }
 }`;

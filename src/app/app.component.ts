@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service'
+import { WcaService } from '../app/wca/services/wca.service';
+import { Title } from '@angular/platform-browser';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -15,11 +18,26 @@ export class AppComponent {
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private APIService: WcaService,
+    private titleService: Title 
+
   ) {
     this.getIPAddress();
   }
 
   ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+    )
+    .subscribe(() => {
+
+      var rt = this.getChild(this.activatedRoute)
+
+      rt.data.subscribe(data => {
+        console.log(data);
+        this.titleService.setTitle(data.title)})
+    })
 
     this.getIPAddress();
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
@@ -43,11 +61,22 @@ export class AppComponent {
 
   }
 
+  getChild(activatedRoute: ActivatedRoute) {
+    if (activatedRoute.firstChild) {
+      return this.getChild(activatedRoute.firstChild);
+    } else {
+      return activatedRoute;
+    }
+ 
+  }
+
   getIPAddress() {
     this.http.get("http://api.ipify.org/?format=json").subscribe((res: any) => {
       this.ipAddress = res.ip;
       localStorage.setItem('Systemip', this.ipAddress)
     });
   }
+
+
 
 }

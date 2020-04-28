@@ -293,8 +293,12 @@ export const list_content = gql`
     query list_content{
       list_content {
         success
-        data
         message
+        data{
+          scorm_id_mstr
+          package
+          package_dec
+        }
       }
   }`;
 

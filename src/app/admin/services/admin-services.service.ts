@@ -1,18 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-<<<<<<< Updated upstream
 import { user_registration } from "./operations/admin_mutation"
-import {
-  get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
+import { get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, get_course_published
 } from "./operations/admin_query";
-=======
-import {
-  get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, get_course_published
-} from "./operations/admin_query";
-import { user_registration } from "./operations/admin_mutation"
->>>>>>> Stashed changes
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -64,11 +55,11 @@ export class AdminServicesService {
     });
   }
 
-  getAllUsers(pagenumber, sort) {
+  getAllUsers(pagenumber ,sort) {
     return this.Apollo.query({
       query: get_all_user,
       variables: {
-        pagenumber: pagenumber,
+        pagenumber : pagenumber ,
         sort: sort,
       }
     });
@@ -78,7 +69,7 @@ export class AdminServicesService {
     return this.Apollo.query({
       query: get_all_learner_detail,
       variables: {
-        user_id: user_id,
+        user_id : user_id ,
       }
     });
   }
@@ -94,10 +85,10 @@ export class AdminServicesService {
   }
 
   bulkuserupload(fb) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+     const httpOptions = {
+      headers: new HttpHeaders({ 'Authorization' : 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
     };
-    return this.http.post<any[]>(environment.apiUrlImg + 'bulkuserupload', fb, httpOptions);
+     return this.http.post<any[]>(environment.apiUrlImg + 'bulkuserupload' , fb, httpOptions );
   }
 
   getUserSession(user_id) {

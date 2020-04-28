@@ -31,18 +31,22 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(["/Learner"]);
         return false;
       }
-      if (role == 'learner' && !userDetailes.is_profile_updated) {
-        if (state.url != '/Learner/profile') { //if profile not updated and trying to access other screens, redirect to profile
+      else if (!userDetailes.is_profile_updated) {
+        //if profile not updated and trying to access other screens, redirect to profile
+        if (state.url != '/Learner/profile') {
           this.router.navigate(["/Learner/profile"]);
           this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
           return false;
-        } else //if url is profile
+        }
+        else//if url is profile or anything
           return true
-      } 
+      }
       else
-        return true;
+        return true
+      //end of url navigations for logged in learner ------> 1
     }
-    else if (userDetailes == null) { //user detail is not present in local storage
+    //if none of the role users logged in
+    else if ((userDetailes == null || adminDetails == null) && role == null) { //user detail is not present in local storage
       if (state.url == '/Learner' || state.url == '/Learner/login' || state.url == '/Admin/login'
         || state.url == '/Learner/register') {
         return true;

@@ -6,6 +6,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals'; 
+///////decrypt
+ 
+import SimpleCrypto from "simple-crypto-js";
+var _secretKey = "myTotalySecretKey";
+var simpleCrypto = new SimpleCrypto(_secretKey);
+
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
@@ -24,6 +30,7 @@ export class ResetpasswordComponent implements OnInit {
   showpsseye: Boolean = false;
   showconpassbutton: Boolean = false;
   showconpsseye: Boolean = false;
+  isLinkActive: Boolean = true;
   constructor(
     private loader : Ng4LoadingSpinnerService,
     private router:Router, 
@@ -35,9 +42,11 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
 
     this.activeroute.queryParams.subscribe(params => {
-      if(params["user_id"]){
-        this.user = params["user_id"];
+      if(params["code"]){
+        const decryptedString = simpleCrypto.decrypt(params["code"]);
+        this.user = decryptedString;
         console.log(this.user)
+        this.get_user_detail_username(this.user)
       }
      else{
       var userdetails= localStorage.getItem('UserDetails')
@@ -102,4 +111,17 @@ validator: MustMatch('password', 'confirmpassword'),
       }
   })
   }
+
+  get_user_detail_username(name){
+    try {
+      this.service.get_user_detail_username(name).subscribe((data: any) => {
+        console.log(data)
+        this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
+          true : false;
+      })  
+    } catch (error) {
+        throw error 
+    }
+  }
+
 }

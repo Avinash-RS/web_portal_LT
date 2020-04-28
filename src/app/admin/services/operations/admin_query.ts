@@ -14,7 +14,7 @@ export const get_user_group = gql`
   }`;
 
 export const search_user = gql`
-  query search_user($search_string: String, $pagination: Int, $sort: Int){
+  query search_user($search_string: String!, $pagination: Int!, $sort: Int!){
     search_user(search_string: $search_string, pagination: $pagination, sort: $sort) {
       success
       error_msg
@@ -119,7 +119,6 @@ export const get_user_session_detail = gql`
       }    
     }
   }`;
-
 
 export const get_all_learner_detail = gql`
   query get_all_learner_detail($user_id: String!){

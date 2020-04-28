@@ -1,0 +1,88 @@
+
+<div><app-wca></app-wca></div>
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+    </ol>
+</nav>
+
+
+  
+
+
+<div class="container wrap-body">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                   
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            
+                        </mat-panel-title>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+    
+                              <div class="row">
+                          <div class="col-md-2">   <img class="img" [src]="queryData?.image ? queryData?.image : '../../../../assets/images/image_upload.svg'">
+                        <br><span>{{queryData?.courseName}}</span>
+                        
+                        </div>
+                          <div class="col-md-3">   
+                          
+                           
+
+                           <div class="wrapper_1"> <mat-icon  (click)="navChooseTemp()"
+                            >add_circle_outline</mat-icon></div>
+                         <div style="margin: -28px 97px 0px 0px">   <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                Add Module
+                            </mat-panel-title></div>
+                        
+                        </div>
+
+                        <div class="col-md-3">   
+                            <!-- routerLink="/Wca/viewmodule" -->
+                            
+                <button class="backgroundcol2"  (click)="navViewModule()">
+                    
+                   <span style="padding: 2px 176px 13px 16px;" >Upload a SCROM Course </span>
+
+                    <mat-icon (click)="add(in)" style="margin:2px -156px 7px -157px;"
+                    >file_upload</mat-icon>
+                    
+                  
+
+                   
+
+                </button>
+
+                           
+<!-- <button  class="backgroundcol2">
+                            <div> <mat-icon (click)="add(in)" style="margin:59px -353px -70px -218px;"
+                                >file_upload</mat-icon></div>
+
+                                <div style="margin: -28px 97px 0px 0px">   <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                    Add a SCROM Course
+                                </mat-panel-title></div>
+                            </button> -->
+                             
+                        </div>
+                        
+
+                        </div>
+                            </mat-grid-list>
+                        </mat-card>
+                        
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
+

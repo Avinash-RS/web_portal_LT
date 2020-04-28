@@ -13,10 +13,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// import { AdminCoreModule } from '../core/admin-core.module';
-// import { AddUserComponent } from './add-user/add-user.component';
+import { AdminCoreModule } from '../core/admin-core.module';
+import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
-import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 
 
 @NgModule({
@@ -32,18 +31,12 @@ import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
         MatCheckboxModule,
         MatListModule,
         MatChipsModule,
-        // AdminCoreModule,
+        AdminCoreModule,
         RouterModule
          ],
     declarations: [   
+    AddUserComponent],
 
-
-       
-<<<<<<< Updated upstream
-     AdminCoursesComponent],
-=======
-    AddUserComponent, AdminCoursesComponent],
->>>>>>> Stashed changes
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],

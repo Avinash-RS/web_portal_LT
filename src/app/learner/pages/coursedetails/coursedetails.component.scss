@@ -51,7 +51,7 @@ strong {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: #f8f9fa !important;
+    background-color:  $color-white !important;
     background-blend-mode: color;
     opacity: 0.5 !important;
 }
@@ -60,7 +60,7 @@ strong {
     margin-top: 5%;
     padding: 0 4%;
     width: 80%;
-    color: black !important;
+    color:$color-blank !important;
 }
 
 .section_1 .section_1_card_1 {
@@ -81,7 +81,7 @@ strong {
     opacity: 1 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    color: white;
+    color: $color-white;
     font-size: 20px;
     font-weight: 200;
 }
@@ -106,23 +106,23 @@ strong {
 
 .fa {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: $color-blank;
     color: transparent;
     margin-right: 3px;
     margin-bottom: 3px;
     border-radius: 50px;
-    border: 0.5px solid rgb(236, 236, 236);
+    border: 0.5px solid $color-white;
     padding: 7px;
     font-size: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
+    box-shadow: 0 4px 8px 0 $color-blank;
 }
 
 .course_preview_icon {
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    color: black;
+    -webkit-text-stroke-color: $color-blank;
+    color: $color-blank;
     font-size: 50px;
-    background-color: #f8f9fa;
+    background-color: $color-white;
     border-radius: 50px;
     padding: 15px 15px 15px 27px;
     margin-top: 3% !important;
@@ -188,12 +188,12 @@ img {
 }
 .tabs {
     height: 11vh;
-    border: 0.5px solid rgb(245, 245, 245);
+    border: 0.5px solid $color-white;
     margin-top: 2vh;
     box-shadow: none;
     margin: 0;
     // width: 100%;
-    border-bottom: 1px solid #e8e5e5;
+    border-bottom: 1px solid  $color-white;
 
     button {
         margin-left: 3%;
@@ -207,7 +207,7 @@ img {
     button:hover,
     button:visited,
     button:focus {
-        border-bottom: 6px solid yellow !important;
+        border-bottom: 6px solid $color-yellow !important;
     }
 
     .about_tab {
@@ -222,7 +222,7 @@ img {
 
 .mat-mini-fab {
     position: fixed;
-    background-color: white;
+    background-color: $color-white;
     border: 0.5px solid gainsboro;
     float: inline-end;
     margin-left: 7%;
@@ -237,7 +237,7 @@ mat-card {
 }
 
 .mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    box-shadow: 0 0 10px $color-darkGrey !important;
 }
 
 .faq_border {
@@ -279,18 +279,18 @@ mat-card {
 
 .rating_number {
     font-size: 3rem;
-    color: rgb(111, 113, 114);
+    color:$color-darkGrey;
     text-align: center;
 }
 
 h2 {
-    color: black;
+    color: $color-blank;
 }
 
 ::ng-deep .owl-theme .owl-nav [class*='owl-'] {
-    color: #FFF;
+    color: $color-white;
     font-size: 20px !important;
-    background: rgb(136, 136, 136);
+    background: $color-darkGrey;
     display: inline-block;
     cursor: pointer !important;
     padding: 10px !important;
@@ -338,12 +338,12 @@ h2 {
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        background-color: $color-white !important;
     }
 }
 
 .whitefont {
-    color: #fff !important;
+    color: $color-white !important;
 }
 
 .tabstyle {
@@ -356,18 +356,18 @@ h2 {
 .btn2 {
     background-color: transparent !important;
     border: none;
-    color: red !important;
+    color: $color-red !important;
     padding: 12px 16px;
     font-size: 14px;
-    border: 1px solid red;
+    border: 1px solid $color-red;
     width: 24%;
     margin: 2%;
     padding: 11px 10px;
 
     i {
         box-shadow: none;
-        border: red !important;
-        -webkit-text-stroke-color: red !important;
+        border: $color-red !important;
+        -webkit-text-stroke-color: $color-red !important;
         font-size: 14px !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -385,7 +385,7 @@ h2 {
 
 .mat-card-footer {
     text-align: center;
-    color: #db3137;
+    color: $color-red;
     font-size: 11px;
 }
 
@@ -398,7 +398,7 @@ h2 {
 .viewtxt {
     text-align: right;
     font-size: 11px;
-    color: red;
+    color: $color-red;
 }
 
 
@@ -417,7 +417,7 @@ ul li:before {
 }
 
 ::ng-deep .mat-tab-label .mat-tab-label-content {
-    color: red;
+    color: $color-red;
 }
 
 ::ng-deep .mat-tab-body-content {

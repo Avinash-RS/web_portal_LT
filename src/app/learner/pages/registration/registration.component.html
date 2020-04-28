@@ -4,7 +4,7 @@
             <h1 class="head">Create an account </h1>
             <form [formGroup]="registerForm">
                 <div class="form-group">
-                    <label>Full Name</label><span style="color: red;"> *</span>
+                    <label>Full Name</label><span class="star"> *</span>
                     <input type="text" id="fullname" #fullname formControlName="fullname" placeholder="Full Name"
                         minlength="3" maxlength="64" class="form-control"
                         [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
@@ -20,7 +20,7 @@
 
 
                 <div class="form-group space5">
-                    <label>Email ID</label><span style="color: red;"> *</span>
+                    <label>Email ID</label><span class="star"> *</span>
                     <input type="text" id="email" #email formControlName="email" placeholder="Email" maxlength="64"
                         class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
                     <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
@@ -29,13 +29,12 @@
                     </div><br>
 
                     <mat-checkbox class="" formControlName="termsandconditions" required>
-                        <div class="terms">I agree to the <a [routerLink]="['/Learner/terms']">"Terms and
+                        <div class="terms">I agree to the <a (click)="openDialog()">"Terms and
                                 Conditions"</a> and <br> privacy policy by clicking on register</div>
                     </mat-checkbox><br><br>
                     <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                         Register
                     </button><br><br>
-                    <!-- <div class="account"> <b (click)="signIn()">Sign In</b></div>  -->
                     <div class="account">Already have an account?
                         <a [routerLink]="['/Learner/login']"><strong>Sign
                                 In</strong></a>
