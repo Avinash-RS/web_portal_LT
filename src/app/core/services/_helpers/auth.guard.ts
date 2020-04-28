@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     //for learner ------> 1
     // debugger
     if (userDetailes != null && role == 'learner' && state.url != '/Admin/auth/userManagement' &&
-      state.url != '/Admin/auth/addUser') {
+      state.url != '/Admin/auth/addUser' && state.url != "/Admin/auth/listCourses") {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg 
@@ -59,7 +59,8 @@ export class AuthGuard implements CanActivate {
     if (role == 'admin' && adminDetails && (state.url != 'Learner' && state.url != 'Wca')) {
       if (state.url == '/Admin/login')
         return false
-      else if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser')
+      else if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser' 
+      || state.url != "/Admin/auth/listCourses")
         return true
     }
     else {

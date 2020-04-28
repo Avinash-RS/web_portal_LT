@@ -32,6 +32,9 @@ import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpasswo
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
+import { NgxPaginationModule} from 'ngx-pagination';
+
 //others
 
 const routes: Routes = [
@@ -48,6 +51,8 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetpasswordComponent ,data : {title:'Learner   Reset password'}},
   { path : "terms",component:TermsconditionsComponent,data : {title:'Terms and conditions'}},
   { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard],data : {title:'Course Player'}},
+  { path:  'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard]}
+
 ];
 
 @NgModule({
@@ -66,8 +71,9 @@ const routes: Routes = [
     ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
-    MaskingPipePipe
-    
+    MaskingPipePipe,
+    ViewAllCoursesComponent
+
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -88,7 +94,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    NgxPaginationModule
   ],
   providers: [Apollo],
   entryComponents: []
