@@ -100,6 +100,18 @@ price
 what_will_you_learn
 course_category
 course_type
+  learner_count
+  course_mode
+  published_on
+  published_by
+  coursepartner_details{
+      course_partner_id
+  }
+  takeway_details{
+        name
+  description
+  image
+  }
 course_content_details{
 name
 type
@@ -176,6 +188,18 @@ price
 what_will_you_learn
 course_category
 course_type
+  learner_count
+  course_mode
+  published_on
+  published_by
+  coursepartner_details{
+      course_partner_id
+  }
+  takeway_details{
+        name
+  description
+  image
+  }
 course_content_details{
 name
 type
@@ -257,9 +281,23 @@ file_url
 }
 }
 }
+  learner_count
+  course_mode
+  published_on
+  published_by
+  coursepartner_details{
+      course_partner_id
+  }
+  takeway_details{
+        name
+  description
+  image
+  }
+  
 author_details{
 author_name
 description
+
 }
 }
     }

@@ -323,3 +323,39 @@ button:disabled:hover {
       background-color: $color-white !important;
   }
 }
+
+.outlinebtn{
+  background-color: $color-white  !important;
+  color: $color-blue;
+  border: none;
+  font-size: 12px;
+  border: 1px solid;
+  height: 30px;
+  width: 100px;
+  border-radius: 6px;
+  float: right;
+  margin-left: 10px;
+}
+
+.fillsmallbtn{
+  background-color: $color-blue !important;
+  color: $color-white;
+  border: none;
+  font-size: 12px;
+  width: 108px;
+  border-radius: 6px;
+  height: 30px;
+  float: right;
+}
+
+.fillgreenbtn{
+  background-color: $light-green !important;
+  color: $color-white;
+  border: none;
+  width: 108px;
+  font-size: 12px;
+  border-radius: 6px;
+  height: 31px;
+  float: right;
+  margin-right: 10px;
+}
