@@ -69,11 +69,11 @@ export class CoursepreviewComponent implements OnInit {
       name : ""  
     }
 
-    this.route.navigateByUrl('/Admin/auth/Wca/listCourses ', { state: { detail: detail } });
+    this.route.navigateByUrl('/Wca/listCourses ', { state: { detail: detail } });
   }
 
   editResource(){
-    this.route.navigateByUrl('/Admin/auth/Wca/rf');
+    this.route.navigateByUrl('/Wca/rf');
   }
   clickedT(i) {
     this.clicked = i
