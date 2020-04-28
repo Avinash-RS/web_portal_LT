@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row wishlist" *ngIf = "showWishlist">
+  <div class="row wishlist" *ngIf="showWishlist">
     <div class="col-md-9 col-sm-9 col-9"></div>
     <div class="col-md-2 col-sm-2 col-2">
       <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn">
@@ -22,29 +22,30 @@
   </div>
   <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
   <div class="row">
-    <div class="col-md-5 col-sm-5 col-5 display_flex"  *ngIf="showRating">
+    <div class="col-md-5 col-sm-5 col-5 display_flex" *ngIf="showRating">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
         class="m-t-15 m-l-5">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
     </div>
-    <div class="col-md-2 m-t-15 col-sm-2 col-2"  *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
+    <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
     </div>
-    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showCartBtn"> <strong>₹ {{course.price | number }}</strong>
-    </div>
-    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>₹ {{course.price | number }}</strong>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>Rs
+        {{course.price | number }}</strong>
     </div>
   </div>
 
-  <div class="row">
-    <div class="{{!showRating ? 'col-md-12 f_wt_500 f_sz_14 float_left m-t-10': 'col-md-12 f_wt_500 f_sz_14 float_left'}}" *ngIf="showDate">
-      {{course.publishedOn}}
+  <div class="row" *ngIf="showDate">
+    <div class="col-md-12 f_wt_400 f_sz_14 float_left color-grey">
+      Published On : {{course.publishedOn}}
     </div>
   </div>
   <br>
 
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <button mat-flat-button *ngIf="showStatus" disabled = "{{course?.coursePlayerStatus?.status === 'Completed'}}" class="status color_white f_size_16 f_wt_400 width_100 p-10px"
-        (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')" [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
+      <button mat-flat-button *ngIf="showStatus" disabled="{{course?.coursePlayerStatus?.status === 'Completed'}}"
+        class="status color_white f_size_16 f_wt_400 width_100 p-10px"
+        (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
+        [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
         '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
         {{course?.coursePlayerStatus?.status || 'Start'}}</button>
 
@@ -74,7 +75,7 @@
         </p>
       </div>
     </div>
-    <div class="row bottomButtons"  *ngIf="showCartBtn">
+    <div class="row bottomButtons" *ngIf="showCartBtn">
       <div class="col-md-5 col-sm-5 col-5 center_align">
         <button id="buy_now" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Buy Now
         </button>
@@ -87,3 +88,4 @@
     </div>
   </div>
 </div>
+<br><br>

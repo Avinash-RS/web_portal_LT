@@ -1,0 +1,12 @@
+   
+/* @import "../../../../assets/variable.scss"; */
+
+.mat-grid-list {
+    top : 15px !important;
+}
+
+h2 {
+    color: #1F3777;
+    text-transform: capitalize;
+    margin-left: 15px;
+}
