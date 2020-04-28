@@ -45,7 +45,7 @@ bSubject = new BehaviorSubject({});
 
   getsingleTemplate(template) { return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates?template_id='+template); }
 
-  createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/scorm/createscrom',draft);}
+  createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/courses/createscrom',draft);}
 
 
   handleKeydown(event) {
