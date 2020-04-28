@@ -1,7 +1,9 @@
-<app-header></app-header>
+<div>
+  <app-wca></app-wca>
+</div>
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Course</li>
   </ol>
 </nav>
@@ -18,7 +20,8 @@
           Preview course
          </button>
 
-         <button class="fillgreenbtn" *ngIf="isshow" (click)="published()">
+         <button class="fillgreenbtn" *ngIf="isshowPublish" (click)="published()">
+          
           Publish
          </button>
    
@@ -40,7 +43,7 @@
               <b>Course Name</b>
             </div>
             <div class="grid-item" >
-              <button class="smallbtn" >
+              <button class="smallbtn" *ngIf="!isshowPublish" >
                Published
               </button>
             </div>
@@ -54,7 +57,7 @@
             <div class="grid-item">: {{course?.published_by}}</div>  
           </div>
 
-          <div class="row cls" *ngIf="isshow">
+          <div class="row cls" *ngIf="isshowPublish">
             <div class="col-md-4 col-sm-12 col-12">
               <button class="btn">
                 Edit Course Details
