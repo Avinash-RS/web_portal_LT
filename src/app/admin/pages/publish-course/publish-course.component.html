@@ -1,0 +1,33 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item"><a href="#">Created by me</a></li>
+    <li class="breadcrumb-item active" aria-current="page"></li>
+  </ol>
+</nav>
+
+<div class="p-5px">
+  <h2>Publish</h2>
+  <div class="container">
+    <div class="col-md-12">
+      <mat-card style="text-align: left;box-shadow: 0 2px 10px #6c757d;">
+        <h3>
+          Select the catalog to publish the course
+        </h3>
+        <button mat-raised-button>Basic</button>
+        <hr>
+        <h3>
+          Selected Catalogue
+        </h3>
+        <p>
+          Catalogue/Category/Sub Category
+        </p>
+        <br><br><br>
+        <div class="row">
+          <button mat-raised-button color="primary" (click) = "publishCourse()">Publish</button>
+          <button mat-raised-button (click) = "draftCourse()">Cancel</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
