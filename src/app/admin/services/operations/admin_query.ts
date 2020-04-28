@@ -182,3 +182,25 @@ export const get_all_learner_detail = gql`
     }
   }`;
 
+
+
+  export const getnotificationreports = gql`
+  query getnotificationreports($admin_id: String!){
+    getnotificationreports(admin_id: $admin_id) {
+      success
+        error_msg
+        message{
+            _id
+            upload_url
+            report_url
+            is_active
+            report_id
+            admin_id
+            report_info{
+                created_on
+                updated_on
+                created_by
+            }
+    }
+  }`;
+

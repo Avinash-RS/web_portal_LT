@@ -24,7 +24,9 @@ export class ToolbarNotificationComponent implements OnInit {
   	constructor(private elementRef: ElementRef) { }
 
   	ngOnInit() {
-  	}
+    }
+    
+ 
 
   	select() {
     	

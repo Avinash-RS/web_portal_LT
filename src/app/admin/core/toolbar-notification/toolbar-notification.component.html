@@ -19,9 +19,12 @@ You have {{ notifications?.length }} new notifications</div>
         	</button>
       	</div>
       	<div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;"></div>
-      	<div class="footer" fxLayout="row" fxLayoutAlign="center center">
+      	<div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" fxLayoutAlign="center center">
         	<div class="action">Mark all as read</div>
-    	</div>
+      </div>
+      <!-- <div *ngIf="notifications?.length === 0;" class="footer" fxLayout="row" fxLayoutAlign="center center">
+        <div class="action">No new notifications</div>
+    </div> -->
     </div>
 
 	</div>
@@ -34,8 +37,8 @@ You have {{ notifications?.length }} new notifications</div>
       <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
         <mat-icon class="icon">notifications</mat-icon>
         <div class="title" fxLayout="column">
-          <div class="name">{{ notification.title }}</div>
-          <div class="time">{{ notification.lastTime }}</div>
+          <div class="name">{{ notification.notification_msg }}</div>
+          <div class="time">{{ notification.time_ago }}</div>
         </div>
         <span fxFlex></span>
         <button type="button" mat-icon-button (click)="delete(notification)">
