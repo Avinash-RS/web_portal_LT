@@ -17,6 +17,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { CoreModule } from '@core/core.module';
+import { WcaModule } from '../../wca/wca.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -63,7 +64,8 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatProgressBarModule,
         MatAutocompleteModule,
         MatExpansionModule,
-        MatTableModule
+        MatTableModule,
+        WcaModule
 
 
 

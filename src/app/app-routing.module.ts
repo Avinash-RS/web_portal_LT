@@ -24,11 +24,7 @@ const routes: Routes = [
     loadChildren: './core/core.module#CoreModule',
     data : {title:'Player'}
   },
-  {
-    path:'Wca',
-    loadChildren: './wca/wca.module#WcaModule',
-    data : {title:'Web Content Authoring'}
-  },
+ 
   {
     path:'ppt1',
     component: Ppt1Component,

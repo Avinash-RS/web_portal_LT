@@ -89,6 +89,7 @@ export class LearnerServicesService {
     });
   }
   view_profile(user_id) {
+   
     return this.Apollo.query({
       query: view_profile,
       variables: {
