@@ -88,8 +88,13 @@ export class CourseComponentComponent implements OnInit {
 
   gotoDescription(course) {
     if (this.isDraft) {
-      let id = this.course.courseid
-      this.router.navigate(['/Wca/addmodule', { courseId: id }]);
+      let courseDetails = {
+        courseId: this.course.courseid,
+        courseImage: this.course.course_img_url,
+        courseName: this.course.course_name
+      }
+      this.router.navigate(['/Wca/addmodule',{courseId: this.course.courseid, courseImage: this.course.course_img_url,courseName: this.course.course_name}]);
+
     }
     else {
       let detail = {

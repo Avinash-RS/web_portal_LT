@@ -12,26 +12,34 @@ import { id } from '@swimlane/ngx-charts/release/utils';
 export class AddModuleComponent implements OnInit {
   queryData: any;
   courseDetails: any;
+  routedCourseDetails: any;
   noOfModules: number = 0;
 
   constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
-    this.queryData = this.route.snapshot.paramMap.get('courseId');
-  // this.queryData = 1
-    if (this.queryData) {
+    this.routedCourseDetails = {
+      courseId: this.route.snapshot.paramMap.get('courseId'),
+      courseImage: this.route.snapshot.paramMap.get('courseImage'),
+      courseName: this.route.snapshot.paramMap.get('courseName'),
+    }
+    this.route.snapshot.paramMap.get('courseDetails');
+    // this.queryData = 1
+    if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
     }
   }
 
   getCourseDetails() {
-    this.apiService.getCourseDetails(this.queryData).subscribe((data: any) => {
+    this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      this.courseDetails.coursedetails.forEach((data) => {
-        if (data.modulestatus !== 'false') {
-          ++this.noOfModules;
-        }
-      });
+      if (this.courseDetails && this.courseDetails.coursedetails.length) {
+        this.courseDetails.coursedetails.forEach((data) => {
+          if (data.modulestatus !== 'false') {
+            ++this.noOfModules;
+          }
+        });
+      }
     })
   }
 
