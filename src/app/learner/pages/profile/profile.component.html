@@ -161,7 +161,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
                   name="qualification">
-                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [value]="item._id" (onSelectionChange)="checkLevel($event,lv)">
+                  <mat-option [value]="lv" *ngFor="let lv of levelValue">
                     {{lv.level_name}}
                   </mat-option>
                 </mat-select>
@@ -175,50 +175,48 @@
               </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
+              <!-- <mat-form-field *ngIf=""> -->
+                <ng-container 
+                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
+              <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
                   name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
                     {{item.institute_name}}
                   </mat-option>
                 </mat-select>
-                <!-- <div class="col-md-3 col-sm-12 col-12 display_flex" *ngIf="check == '10'">
-                  <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_100' :
-                'inputs border-radius-5 color_blue background_trans width_100'"
+              </ng-container>
+        <!------------------------Institute textbox for 10th and 12th--------------------->
+                <ng-container class="col-md-3 col-sm-12 col-12 display_flex" 
+                *ngIf="(qual?.value?.qualification?.level_code == '10') || (qual?.value?.qualification?.level_code == '12')">
+                  <input type="text" class="institute"
+                placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'"
                  formControlName="institute">
-                 </div> -->
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Dsicipline" formControlName="discipline"
+                 </ng-container>
+                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Discipline" formControlName="discipline"
                   name="discipline">
                   <mat-option [value]="item._id" *ngFor="let item of disciplines">
                     {{item.discipline_name}}
                   </mat-option>
                 </mat-select>
               </div>
-            <!---------------------10th Level--------------->
-              <!-- <div class="col-md-3 col-sm-12 col-12 display_flex" *ngIf="check == '10'">
-                  <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_100' :
-                'inputs border-radius-5 color_blue background_trans width_100'"
-                 formControlName="institute"> -->
-                 <!-- <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Dsicipline" formControlName="discipline"
-                  name="discipline">
-                  <mat-option [value]="item._id" *ngFor="let item of disciplines">
-                    {{item.discipline_name}}
-                  </mat-option>
-                </mat-select> -->
-              <!-- </div> -->
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
+                <ng-container
+                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
                   formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">
                     {{item.specification_name}}
                   </mat-option>
                 </mat-select>
-                <input type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+              </ng-container>
+              <ng-container>
+                <input  class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
                 'inputs border-radius-5 color_blue background_trans width_80'" placeholder="Year of Passing"
                   formControlName="year_of_passing" (change)="yearOfpassing()">
-              </div>
+                </ng-container>
+                </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <input type="tel" mask="00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
