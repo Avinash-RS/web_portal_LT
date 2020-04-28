@@ -37,6 +37,7 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 
 
 import { PipeModule } from '../pipes/pipe.module';
+import { AddModuleComponent } from './pages/add-module/add-module.component';
 
 
 
@@ -55,7 +56,8 @@ const routes: Routes = [
   { path: 'addfile', component: UploadFilesComponent,},
   { path: 'mycourse', component: MycreatedCourseComponent,},
   { path: 'ct', component: ChooseTemplateComponent,},
-  { path: 'rf', component: ReferenceFileComponent,}
+  { path: 'rf', component: ReferenceFileComponent,},
+  {path:'am',component:AddModuleComponent}
 
 
  
@@ -64,7 +66,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, AddModuleComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

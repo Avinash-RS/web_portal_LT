@@ -47,6 +47,7 @@ bSubject = new BehaviorSubject({});
 
   createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/scorm/createscrom',draft);}
 
+  getCourseDetails(id) {return this.http.get(environment.wcaapiurl +  'api/courses/getscrommodules?courseid='+id); }
 
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation
