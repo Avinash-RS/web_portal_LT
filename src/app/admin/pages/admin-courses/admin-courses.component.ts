@@ -13,6 +13,7 @@ export class AdminCoursesComponent implements OnInit {
   breakpoint: number;
   type: any;
   goto: any;
+  showPublishedDate: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -23,13 +24,15 @@ export class AdminCoursesComponent implements OnInit {
       this.service.getAllCourseCreated('1234ab', 0).subscribe((res: any) => {
         console.log(res);
         this.courseList = res.data.get_course_createdby_admin.message;
-        this.goto = 'create'
+        this.goto = 'create';
+        this.showPublishedDate = false
       })
     }
     else if (this.type == 'published')
       this.service.getAllCoursePublished('1234ab', 0).subscribe((res: any) => {
         this.courseList = res.data.get_course_published.message;
-        this.goto = 'publish'
+        this.goto = 'publish';
+        this.showPublishedDate = true
       })
   }
 

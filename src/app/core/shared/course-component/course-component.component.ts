@@ -110,6 +110,9 @@ export class CourseComponentComponent implements OnInit {
       let detail = { type: 'draft', id: this.course.course_id }
       this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
     }
+    // console.log(detail,'detaildetaildetail')
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
   }
 
   goTocourse(status) {

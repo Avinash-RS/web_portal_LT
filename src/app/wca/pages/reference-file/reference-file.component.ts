@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort ,MatPaginator} from '@angular/material';
+import { MatPaginator} from '@angular/material';
+import {MatSort} from '@angular/material/sort';
 import { WcaService } from '../../services/wca.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 export interface PeriodicElement {
-  name: string;
+  type_name: string;
   module: string;
   topic: string;
   type: string;
@@ -28,7 +29,7 @@ export class ReferenceFileComponent implements OnInit {
   selectedOption: string;
   referenceLink: string;
   uploadMsg: string;
-  displayedColumns: string[] = ['name', 'module', 'topic', 'type', 'dateAdded', 'Action'];
+  displayedColumns: string[] = ['type_name', 'module_id', 'topic_id', 'type', 'created_on', 'Action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild (MatSort) sort: MatSort;
   getdocData: any;
@@ -44,10 +45,12 @@ export class ReferenceFileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllRefDoc(this.pagenumber);
-    this.getModuleData();
     this.dataSource.sort = this.sort;
+    this.getAllRefDoc(1);
+    this.getModuleData();
+  
      this.dataSource.paginator = this.paginator;
+     console.log(this.dataSource)
     var user = localStorage.getItem('UserDetails')
     this.currentUser = JSON.parse(user);
     this.selectedOption = 'document';
@@ -78,10 +81,7 @@ export class ReferenceFileComponent implements OnInit {
     this.selectfile = <File>event.target.files[0];
     const fb = new FormData();
     fb.append('reffile', this.selectfile)
-    // var formData = new FormData();
-    // Array.from(files).forEach(f => formData.append('file',f));
     let tempData: any = fb.get("reffile");
-    // console.log(tempData)
     if((tempData.size/1000) > 10240){
       this.uploadMsg = "Upload the document";
     }    
@@ -112,6 +112,8 @@ export class ReferenceFileComponent implements OnInit {
       console.log(data)
       if(data['success'] == true){
         this.alert.openAlert(data['message'],null)
+        this.referenceLinkForm.reset();
+        this.clear();
         this.getAllRefDoc(1)
       }else{
         this.alert.openAlert('Somethink went wrong Please try again',null)
@@ -125,20 +127,22 @@ export class ReferenceFileComponent implements OnInit {
   }
 removeDoc(data){
   this.service.remove_doc_ref(data._id).subscribe(data => {
-    if(data.data['remove_doc_ref']['success'] == true){
+    if(data.data['remove_doc_ref']['success'] === 'true'){
       this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-      this.getAllRefDoc(this.pagenumber)
+      this.getAllRefDoc(1)
     } else {
-      this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-      this.getAllRefDoc(this.pagenumber)
+      this.alert.openAlert('Please try after sometime',null)
     }
   })
 }
 getAllRefDoc(pagenumber){
+  if (pagenumber == 1)
+  this.ELEMENT_DATA = []
   this.service.getallrefdoc(pagenumber).subscribe(data => {
-    this.getdocData = data.data['getallrefdoc']['data']
+    this.getdocData = data.data['getallrefdoc']['data'];
     Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+    console.log(this.ELEMENT_DATA,'this.ELEMENT_DATA')
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   })
@@ -146,5 +150,11 @@ getAllRefDoc(pagenumber){
 
 next(e) {
   this.getAllRefDoc(e.pageIndex)
+}
+
+clear(){
+  this.referenceLink = '';
+  this.referenceName = '';
+  this.uploadMsg = "Upload the document";
 }
 }

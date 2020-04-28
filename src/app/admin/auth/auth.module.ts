@@ -18,6 +18,7 @@ import { appRoutes } from './lazyloader.routes';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
+import { WcaModule } from '../../wca/wca.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -27,6 +28,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
+import { GroupManagementComponent } from '../pages/group-management/group-management.component';
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { from } from 'rxjs';
         MatProgressBarModule,
         MatAutocompleteModule,
         MatExpansionModule,
-        MatTableModule
+        MatTableModule,
+       
 
 
 
@@ -72,7 +75,7 @@ import { from } from 'rxjs';
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent, UserManagementComponent, AddUserComponent, AdminCoursesComponent,PublishCourseComponent],
+    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
