@@ -1,6 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item"><a href="/Wca">Wca</a></li>
     <li class="breadcrumb-item active" aria-current="page">View {{type}} Courses</li>
   </ol>
 </nav>
@@ -13,7 +14,7 @@
         <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
           <mat-grid-tile *ngFor="let course of courseList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
             <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false" [showWishlist]="false"
-              [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true" [showDate]="true"
+              [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true" [showDate]="showPublishedDate"
               [goto]="goto">
             </app-course-component>
           </mat-grid-tile>
