@@ -253,9 +253,9 @@
                     <mat-label>Resourse</mat-label>
                     <mat-icon matPrefix>folder</mat-icon>
                     <mat-select  >
-                        <mat-option  *ngIf="mod.resourse != null" >
-                            <a  href="{{mod.resourse.path}}" download>{{mod.resourse.path}}</a>
-                        </mat-option>
+                        <mat-option *ngFor="let file of mod.resourse?.files">
+                          <a  href="{{file.path}}" download>{{file.path}}</a>
+                      </mat-option>
                     </mat-select>
                 </mat-form-field>
                 </div>
@@ -265,7 +265,7 @@
         <!-- </div> -->
         
         <ng-template #previewDialog>
-          <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+          <button mat-icon-button class="close-button" [mat-dialog-close]="true" (click)="closedialogbox()">
             <mat-icon class="close-icon" color="warn">close</mat-icon>
           </button>
           <!-- <span class="f_size_18 color_blue float_right">

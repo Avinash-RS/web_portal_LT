@@ -54,6 +54,10 @@ export class CoursepreviewComponent implements OnInit {
     this.getModuleData()
   }
 
+  closedialogbox(){
+    this.dialog.closeAll();
+  }
+
   editResource(){
     this.route.navigateByUrl('/Wca/rf');
   }
