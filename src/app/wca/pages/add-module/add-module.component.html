@@ -1,0 +1,49 @@
+<div>
+  <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+      <li class="breadcrumb-item active" aria-current="page">Course created by me</li>
+
+      <li class="breadcrumb-item active" aria-current="page">Course name</li>
+    </ol>
+  </nav>
+
+
+  <div class="add-module-section">
+    <mat-card style="text-align: center;">
+      <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+
+        <div class="row">
+          <div class="col-md-2"> <img class="img"
+              [src]="courseDetails?.image ? queryData?.image : '../../../../assets/images/image_upload.svg'">
+            <br>
+            <span>{{courseDetails?.coursename}}</span>
+            <span>{{courseDetails.coursedetails.length + ' modules'}}</span>
+          </div>
+          <div class="col-md-3">
+
+
+
+            <div class="wrapper_1">
+              <mat-icon (click)="navChooseTemp()">add_circle_outline</mat-icon>
+            </div>
+            <div style="margin: -28px 97px 0px 0px">
+              <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                Add Module
+              </mat-panel-title>
+            </div>
+
+          </div>
+
+
+        </div>
+      </mat-grid-list>
+    </mat-card>
+
+
+  </div>
+
+
+
+</div>
