@@ -21,13 +21,7 @@ const routes: Routes = [
   // {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
   { path: 'login', component: AdminLoginComponent,canActivate: [AuthGuard] },
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule', canActivate: [AuthGuard] },
-  {
-    path:'Wca',
-    loadChildren: '../../wca/wca.module#WcaModule'
-    , canActivate: [AuthGuard] ,
-    data : {title:'Web Content Authoring'}
-
-  },
+ 
   { path: '**', redirectTo: 'login' }
 ];
 
