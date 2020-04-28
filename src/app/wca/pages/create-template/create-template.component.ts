@@ -47,12 +47,10 @@ export class CreateTemplateComponent implements OnInit {
     {
       name:"PDF",
       image:"../../../../assets/images/pdf.svg",
-      accept:"/(\.pdf)$/i"
     },
     {
       name:"Word",
       image:"../../../../assets/images/word.svg",
-      accept:"/(\.doc|\.docx)$/i"
     },
     { 
       name:"PPT",
@@ -61,7 +59,6 @@ export class CreateTemplateComponent implements OnInit {
     {
       name:"Image",
       image:"../../../../assets/images/image.svg",
-      accept:"/(\.jpg|\.jpeg|\.png)$/i"
     },
     {
       name:"Video",
@@ -95,7 +92,7 @@ export class CreateTemplateComponent implements OnInit {
   ];
 
 
-  private resetList() {
+  resetList() {
     this.items2 = [];
     setTimeout(() => {
       this.items2 = this.todo.slice();
@@ -125,7 +122,7 @@ savedTemplates(type) {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'CreateTemplate' },
         height: 'auto',
-        width: 'auto',
+        width: '400px',
         closeOnNavigation: true,
         disableClose: true,
       });
@@ -146,8 +143,7 @@ savedTemplates(type) {
           this.spinner.hide();
           if (data && data.Message === 'Success') {
             this.toast.success('Template Saved successfully !!!');
-            this.wcaService.bSubject.next({template_details:this.done});
-            this.router.navigate(['./Wca/addtopic']);
+            this.router.navigate(['./Wca/addtopic'],{queryParams:{template:data.Result,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
           }
          },err => {
            this.spinner.hide();
@@ -156,7 +152,7 @@ savedTemplates(type) {
       });
     } else {
       this.wcaService.bSubject.next({template_details:this.done});
-      this.router.navigate(['./Wca/addtopic']);
+      this.router.navigate(['./Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
     }
    } else {
      this.toast.warning('Atleast One Template is Required !!!');
