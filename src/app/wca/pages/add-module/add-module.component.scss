@@ -53,14 +53,6 @@
     display: block;
 }
 
-mat-icon {
-    cursor: pointer;
-    color: #1f3777;
-    margin: 59px 26px -70px -218px;
-}
-
-@import "../../../../assets/variable.scss";
-
 .mat-form-field + .mat-form-field {
     margin-left: 8px;
 }
@@ -304,3 +296,66 @@ img:hover {
 .add-module-section {
     margin: 15px;
 }
+
+.course-name {
+    text-align: left;
+    margin: 5% 0 0 16%;
+    font-weight: 500;
+}
+
+.submit-btn {
+    height: 30px;
+    margin: 5% 0 0 16%;
+    background-color: #1f3777 !important;
+    color: white !important;
+    width: 150px;
+ }
+
+ .reference-btn {
+    height: 30px;
+    margin: 5% 0 0 16%;
+    color: #1f3777 !important;
+    width: 150px;
+ }
+
+ .module-list {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+ }
+
+ .child-item {
+    color: #1f3777 !important;
+    margin: 4px;
+    width: 120px;
+    height: 25px;
+    padding-top: 3px;
+    background: #dbe7ff;
+    border-radius: 3px;
+  }
+
+ .del-icon {
+    position: absolute;
+    font-size: 16px;
+    bottom: 22px;
+    text-align: right;
+    width: 8.3%;
+  }
+
+  .add-module-btn {
+    text-align: left;
+    height: 55px;
+  }
+  
+  .add-module-icon {
+    position: relative;
+    top: 4px;
+  }
+
+  .continue-btn {
+    height: 35px;
+    margin-bottom: 20px;
+    background-color: #1f3777 !important;
+    color: white !important;
+    width: 150px;
+ }

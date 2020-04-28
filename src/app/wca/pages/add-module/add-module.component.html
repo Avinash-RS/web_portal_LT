@@ -18,27 +18,42 @@
           <div class="col-md-2"> <img class="img"
               [src]="courseDetails?.image ? queryData?.image : '../../../../assets/images/image_upload.svg'">
             <br>
-            <span>{{courseDetails?.coursename}}</span>
-            <span>{{courseDetails.coursedetails.length + ' modules'}}</span>
-          </div>
-          <div class="col-md-3">
-
-
-
-            <div class="wrapper_1">
-              <mat-icon (click)="navChooseTemp()">add_circle_outline</mat-icon>
+            <div class="course-name">{{courseDetails?.coursename}}</div>
+            <div class="course-name">{{noOfModules + ' Modules'}}</div>
+            <div style="text-align: left;">
+              <button mat-flat-button color="primary" class="submit-btn">Course Details</button>
+              <button mat-stroked-button color="primary" class="reference-btn">Reference file</button>
             </div>
-            <div style="margin: -28px 97px 0px 0px">
-              <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+          </div>
+          <div class="col-md-8">
+            <div class="add-module-btn">
+              <mat-icon class="add-module-icon">add_circle_outline</mat-icon>
+              <span style="font-size: 24px;color: #1f3777;">
                 Add Module
-              </mat-panel-title>
+              </span>
             </div>
+            <div class="module-list">
 
+              <ng-container *ngFor="let module of courseDetails.coursedetails">
+                <div class="child-item" *ngIf="module.modulestatus == 'true'">
+                  <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
+                  <span>
+                    {{module.modulename}}
+                  </span>
+                </div>
+              </ng-container>
+
+            </div>
           </div>
-
-
         </div>
       </mat-grid-list>
+
+      <mat-card-footer>
+        <div>
+          <button type="button" mat-flat-button color="primary" class="continue-btn">Create</button>
+        </div>
+      </mat-card-footer>
+
     </mat-card>
 
 

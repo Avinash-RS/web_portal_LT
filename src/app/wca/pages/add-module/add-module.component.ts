@@ -10,6 +10,7 @@ import { WcaService } from '../../services/wca.service';
 export class AddModuleComponent implements OnInit {
   queryData: any;
   courseDetails: any;
+  noOfModules: number = 0;
 
   constructor(private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
@@ -22,18 +23,32 @@ export class AddModuleComponent implements OnInit {
         }
       }
       if (flag) {
-       // this.queryData = params;
-      // this.getCourseDetails();
+        // this.queryData = params;
+        // this.getCourseDetails();
       }
     });
     this.queryData = 1;
     this.getCourseDetails();
   }
 
-  getCourseDetails(){
+  getCourseDetails() {
     this.apiService.getCourseDetails(this.queryData).subscribe((data: any) => {
-      this.courseDetails = data.result[0].coursedetails;
+      this.courseDetails = data.Result[0];
+      this.courseDetails.coursedetails.forEach((data) => {
+        if (data.modulestatus == 'true') {
+          ++this.noOfModules;
+        }
+      });
     })
+  }
+
+  deleteModule(moduleName) {
+    this.courseDetails.flag = "false";
+    this.courseDetails.coursedetails.forEach((data) => {
+      if (data.modulename == moduleName) {
+        data.modulestatus = "false";
+      }
+    });
   }
 
 }
