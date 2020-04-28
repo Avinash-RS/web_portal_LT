@@ -26,7 +26,11 @@
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
         class="m-t-15 m-l-5">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
     </div>
+<<<<<<< Updated upstream
     <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
+=======
+    <div class="col-md-2 m-t-15 col-sm-2 col-2"  *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
+>>>>>>> Stashed changes
     </div>
     <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>Rs {{course.price | number }}</strong>
     </div>

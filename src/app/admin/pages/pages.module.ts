@@ -39,7 +39,11 @@ import { AdminCoursesComponent } from './admin-courses/admin-courses.component';
 
 
        
+<<<<<<< Updated upstream
      AdminCoursesComponent],
+=======
+    AddUserComponent, AdminCoursesComponent],
+>>>>>>> Stashed changes
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],
