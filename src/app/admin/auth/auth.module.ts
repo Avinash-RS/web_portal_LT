@@ -65,7 +65,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatAutocompleteModule,
         MatExpansionModule,
         MatTableModule,
-        WcaModule
+       
 
 
 
