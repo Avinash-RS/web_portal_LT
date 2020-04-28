@@ -11,22 +11,25 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any = 'published';
+  type: any;
+  goto: any;
 
   constructor(public route: Router, private service: AdminServicesService) {
-    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
-    // console.log(this.type)
+    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
+    console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'ceated') {
       this.service.getAllCourseCreated('1234ab', 0).subscribe((res: any) => {
         console.log(res);
-        this.courseList = res.data.get_course_createdby_admin.message
+        this.courseList = res.data.get_course_createdby_admin.message;
+        this.goto = 'create'
       })
     }
     else if (this.type == 'published')
       this.service.getAllCoursePublished('1234ab', 0).subscribe((res: any) => {
-        this.courseList = res.data.get_course_published.message
+        this.courseList = res.data.get_course_published.message;
+        this.goto = 'publish'
       })
   }
 
