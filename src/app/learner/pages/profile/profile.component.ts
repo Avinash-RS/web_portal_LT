@@ -1112,7 +1112,6 @@ export class ProfileComponent implements OnInit {
   resendOtp: Boolean = false;
   sendOtp: Boolean = false;
   levelCode: any;
-  check: any;
   
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1242,10 +1241,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.value.qualification.forEach(element => {
       if(element.year_of_passing > moment().year()){
         this.alert.openAlert('Invalid year', null);
-        this.cannotEdit = true;
-      } else{
-        this.cannotEdit = false;
-      }
+        // this.cannotEdit = true;
+      } 
+      // else{
+      //   this.cannotEdit = false;
+      // }
     });
   }
   updateProfile() {
@@ -1263,7 +1263,13 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
     console.log('jsonData', this.profileForm.value)
-    
+    if(this.profileForm.value && this.profileForm.value.qualification) {
+      this.profileForm.value.qualification.forEach(element => {
+        if(element.qualification!={}) {element.qualification = element.qualification._id}
+      });
+    }
+    console.log('jsonData', this.profileForm.value)
+
     this.service.update_profile(this.profileForm.value).subscribe(data => {
       if (data.data['update_profile']['success'] == 'true') {
         this.loader.hide();
@@ -1376,12 +1382,6 @@ export class ProfileComponent implements OnInit {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
     })
-  }
-  
-  checkLevel(event,level){
-    if(event.source.selected) {
-      this.check = level.level_code;
-    }
   }
 
   getBoardsUniv() {
