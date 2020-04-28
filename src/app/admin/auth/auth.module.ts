@@ -26,6 +26,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
+import { GroupManagementComponent } from '../pages/group-management/group-management.component';
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { from } from 'rxjs';
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent, UserManagementComponent, AddUserComponent, AdminCoursesComponent],
+    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

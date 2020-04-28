@@ -22,7 +22,7 @@ export const menus = [
             },
             {
                 'name': 'User Groups',
-                'link': 'tables/responsive',
+                'link': 'usergroup',
                 'icon': 'list',
                 'chip': false,
                 'open': true,
