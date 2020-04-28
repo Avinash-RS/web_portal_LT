@@ -20,11 +20,11 @@ export const appRoutes: Routes = [{
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
         { path : 'usergroup' , component: GroupManagementComponent,data: { title: 'User Group creation' }},
         { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
-        {
-            path:'Wca',
-            loadChildren: './wca/wca.module#WcaModule',
-            data : {title:'Web Content Authoring'}
-          },
+        // {
+        //     path:'Wca',
+        //     loadChildren: './wca/wca.module#WcaModule',
+        //     data : {title:'Web Content Authoring'}
+        //   },
         //   { path: 'Wca', component: WcaComponent,  data : {title:'Web Content Authoring Dashboard'}},
           
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
