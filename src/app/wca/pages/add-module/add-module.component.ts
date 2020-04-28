@@ -33,6 +33,7 @@ export class AddModuleComponent implements OnInit {
   getCourseDetails() {
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
+      this.noOfModules = 0;
       if (this.courseDetails && this.courseDetails.coursedetails.length) {
         this.courseDetails.coursedetails.forEach((data) => {
           if (data.modulestatus !== 'false') {
