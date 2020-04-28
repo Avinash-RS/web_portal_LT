@@ -31,15 +31,19 @@ export class CoursepreviewComponent implements OnInit {
   content: any;
   breakpoint: number;
   detail: any;
-  isshow : boolean = false;
+  isshowPublish : boolean = false;
   constructor( public service: CommonServicesService,private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
-     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+    this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
-    console.log(this.detail)
+    console.log( this.detail)
+    if(this.detail?.type === "create"){
+        this.isshowPublish = true
+    }else{
+      this.isshowPublish = false
+    }
+
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
-    
-          console.log(viewCourse,"detail")
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
         console.log(this.course)
@@ -56,6 +60,16 @@ export class CoursepreviewComponent implements OnInit {
 
   closedialogbox(){
     this.dialog.closeAll();
+  }
+
+  published(){
+    let detail ={ 
+      type: 'create', 
+      id:this.detail._id,
+      name : ""  
+    }
+
+    this.route.navigateByUrl('/Admin/auth/Wca/listCourses ', { state: { detail: detail } });
   }
 
   editResource(){

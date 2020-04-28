@@ -22,7 +22,7 @@ export class CourseComponentComponent implements OnInit {
   @Input('showRating') showRating: boolean;
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
-
+//here type will come now we need to navigate to your page
 
   userDetail: any;
   recorded_data: any;
@@ -87,6 +87,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
+    console.log(course,'course')
     if (!this.goto) {
       let detail = {
         id: this.course.course_id,
@@ -96,19 +97,19 @@ export class CourseComponentComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     } else if (this.goto == 'publish') {
       let detail = {
-        type: 'publish', id: this.course.course_id
+        type: 'publish', id: this.course._id || this.course.course_id 
       }
-      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
     }
     else if (this.goto == 'create') {
       let detail =
-        { type: 'create', id: this.course.course_id }
+        { type: 'create', id: this.course._id || this.course.course_id }
 
-      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
     }
     else if (this.goto == 'draft') {
-      let detail = { type: 'draft', id: this.course.course_id }
-      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+      let detail = { type: 'draft', id: this.course._id || this.course.course_id }
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
     }
     // console.log(detail,'detaildetaildetail')
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
