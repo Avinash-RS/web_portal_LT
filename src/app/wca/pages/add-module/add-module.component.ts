@@ -33,15 +33,19 @@ export class AddModuleComponent implements OnInit {
   getCourseDetails() {
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      this.noOfModules = 0;
-      if (this.courseDetails && this.courseDetails.coursedetails.length) {
-        this.courseDetails.coursedetails.forEach((data) => {
-          if (data.modulestatus !== 'false') {
-            ++this.noOfModules;
-          }
-        });
-      }
+      this.updateCourseDetails();
     })
+  }
+
+  updateCourseDetails() {
+    this.noOfModules = 0;
+    if (this.courseDetails && this.courseDetails.coursedetails.length) {
+      this.courseDetails.coursedetails.forEach((data) => {
+        if (data.modulestatus !== 'false') {
+          ++this.noOfModules;
+        }
+      });
+    }
   }
 
   deleteModule(moduleName) {
@@ -51,13 +55,15 @@ export class AddModuleComponent implements OnInit {
         data.modulestatus = "false";
       }
     });
+    this.updateCourseDetails();
+  }
 
+  onCreate() {
     this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
       if (res.Code == 200) {
         this.getCourseDetails();
-        this.toast.success('Module deleted successfully');
+        this.toast.success('Module updated successfully');
       }
     })
   }
-
 }
