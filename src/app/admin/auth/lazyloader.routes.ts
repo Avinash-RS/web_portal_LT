@@ -5,15 +5,17 @@ import { UserManagementComponent } from '../pages/user-management/user-managemen
 import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { GroupManagementComponent } from '@admin/pages/group-management/group-management.component';
+import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: DashboardComponent , data : {title:'Admin Dashboard'}},
-        { path: 'userManagement', component: UserManagementComponent , data : {title:'Learner Management'},canActivate: [AuthGuard]},
-        { path: 'addUser', component: AddUserComponent , data : {title:'Add New Learner'},canActivate: [AuthGuard]},
+        { path: 'dashboard', component: DashboardComponent, data: { title: 'Admin Dashboard' } },
+        { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
+        { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
-        { path : 'usergroup' , component: GroupManagementComponent}
+        { path : 'usergroup' , component: GroupManagementComponent,data: { title: 'User Group creation' }},
+        { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
 
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         // { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },

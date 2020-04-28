@@ -4,6 +4,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { WcaService } from '../../services/wca.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,15 +19,15 @@ export class DashboardComponent implements OnInit {
   draftCourses: any;
 
   wishlist: any = [];
-  @Input('from') from: any;
-  @Input('showCartBtn') showCartBtn: boolean;
-  @Input('showWishlist') showWishlist: boolean;
-  @Input('canNavigate') canNavigate: boolean;
-  @Input('showStatus') showStatus: boolean;
-  @Input('showPrice') showPrice: boolean;
-  @Input('showCount') showCount: boolean;
-  @Input('showRating') showRating: boolean;
-  @Input('showDate') showDate: boolean;
+  // @Input('from') from: any;
+  // @Input('showCartBtn') showCartBtn: boolean;
+  // @Input('showWishlist') showWishlist: boolean;
+  // @Input('canNavigate') canNavigate: boolean;
+  // @Input('showStatus') showStatus: boolean;
+  // @Input('showPrice') showPrice: boolean;
+  // @Input('showCount') showCount: boolean;
+  // @Input('showRating') showRating: boolean;
+  // @Input('showDate') showDate: boolean;
 
   breakpoint: number;
 
@@ -82,7 +83,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(public service: WcaService, public spinner: NgxSpinnerService) { }
+  constructor(public service: WcaService, public spinner: NgxSpinnerService, private router: Router, ) { }
 
   ngOnInit() {
 
@@ -127,10 +128,10 @@ export class DashboardComponent implements OnInit {
 
       this.publishedCourses = data.Result;
 
-    },err => {
+    }, err => {
       this.spinner.hide();
     });
-    }
+  }
 
   getCreatedCourses() {
 
@@ -138,10 +139,10 @@ export class DashboardComponent implements OnInit {
 
       this.createdCourses = data.Result;
 
-    },err => {
+    }, err => {
       this.spinner.hide();
     });
-    }
+  }
 
   getDraftCourses() {
 
@@ -150,8 +151,13 @@ export class DashboardComponent implements OnInit {
       this.draftCourses = data.Result;
       this.spinner.hide();
 
-    },err => {
+    }, err => {
       this.spinner.hide();
     });
+  }
+
+  //Added by Mythreyi
+  goToViewCourse(type) {
+    this.router.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
   }
 }

@@ -25,6 +25,8 @@ export class DialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.dialogdata);
+    
     this.templateForm = this.formbuilder.group({
       tempName: [null,Validators.compose([Validators.required])]
     });

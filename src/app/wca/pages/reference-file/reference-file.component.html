@@ -98,23 +98,23 @@
         <!-- Name Column -->
         <ng-container matColumnDef="module">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module </th>
-          <td mat-cell *matCellDef="let data"> {{data.module}} </td>
+          <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="topic">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic </th>
-          <td mat-cell *matCellDef="let data"> {{data.topic}} </td>
+          <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="type">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Type </th>
-          <td mat-cell *matCellDef="let data"> {{data.doc_type}} </td>
+          <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
         </ng-container>
         <ng-container matColumnDef="dateAdded">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
-          <td mat-cell *matCellDef="let data"> {{data.dateAdded}}
+          <td mat-cell *matCellDef="let data"> {{data.created_on}}
           </td>
         </ng-container>
 
