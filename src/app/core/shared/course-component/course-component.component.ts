@@ -94,7 +94,7 @@ export class CourseComponentComponent implements OnInit {
     }
     console.log(detail,'detaildetaildetail')
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
   }
 
   goTocourse(status) {
