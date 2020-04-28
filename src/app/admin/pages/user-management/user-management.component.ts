@@ -135,7 +135,8 @@ export class UserManagementComponent implements OnInit {
         this.service.searchUser(filterValue.trim().toLowerCase(), 0, 1)
           .subscribe((result: any) => {
             if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
-              Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
+              // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
+              this.ELEMENT_DATA = result.data.search_user.message
               this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
               console.log(this.ELEMENT_DATA);
               this.dataSource.paginator = this.paginator;
@@ -154,7 +155,7 @@ export class UserManagementComponent implements OnInit {
           this.getAllUser(0)
         // }, 700);
       }
-    }, 300);
+    }, 500);
   }
 
   deActivate(status, element?) {
@@ -209,6 +210,7 @@ export class UserManagementComponent implements OnInit {
 
   next(e) {
     console.log(e)
-    this.getAllUser(e.pageIndex)
+    this.getAllUser(e.pageIndex);
+    this.selectedArray = [];
   }
 }
