@@ -1200,8 +1200,11 @@ export class ProfileComponent implements OnInit {
   // }
 
   getprofileDetails(userid) {
+   
     this.loader.show();
+    console.log('data.data'+userid)
     this.service.view_profile(userid).subscribe((data: any) => {
+      console.log('data.data'+data.data)
       if (data.data.view_profile.success) {
         let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];

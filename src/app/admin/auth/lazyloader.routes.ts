@@ -5,6 +5,7 @@ import { UserManagementComponent } from '../pages/user-management/user-managemen
 import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
+import { WcaModule } from '../../wca/wca.module';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
@@ -14,6 +15,11 @@ export const appRoutes: Routes = [{
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data: { title: 'Admin Dashboard' } },
         { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
+        {
+            path:'Wca',
+            loadChildren: '../../wca/wca.module#WcaModule',
+            data : {title:'Web Content Authoring'}
+          },
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         // { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },
         // { path: 'chats', loadChildren: '../chats/chat.module#ChatsModule' }, // fix this
