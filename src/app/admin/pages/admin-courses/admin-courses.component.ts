@@ -21,7 +21,7 @@ export class AdminCoursesComponent implements OnInit {
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
-      this.service.getAllCourseCreated('1234ab', 0).subscribe((res: any) => {
+      this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
         console.log(res);
         this.courseList = res.data.get_course_createdby_admin.message;
         this.goto = 'create';
@@ -29,9 +29,15 @@ export class AdminCoursesComponent implements OnInit {
       })
     }
     else if (this.type == 'published')
-      this.service.getAllCoursePublished('1234ab', 0).subscribe((res: any) => {
+      this.service.getAllCoursePublished(this.adminDetails.user_id, 0).subscribe((res: any) => {
         this.courseList = res.data.get_course_published.message;
         this.goto = 'publish';
+        this.showPublishedDate = true
+      })
+      else if (this.type == 'draft')
+      this.service.getAllDrafted(this.adminDetails.user_id, 0).subscribe((res: any) => {
+        this.courseList = res.data.get_course_published.message;
+        this.goto = 'draft';
         this.showPublishedDate = true
       })
   }
