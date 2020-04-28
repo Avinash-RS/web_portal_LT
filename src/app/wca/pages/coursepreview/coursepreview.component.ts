@@ -3,6 +3,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from "@angular/material";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coursepreview',
@@ -29,8 +30,13 @@ export class CoursepreviewComponent implements OnInit {
   course: any;
   content: any;
   breakpoint: number;
-  constructor( public service: CommonServicesService,private dialog: MatDialog, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
+  detail: any;
+  isshow : boolean = false;
+  constructor( public service: CommonServicesService,private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
+    //  this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+    // this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
+    // console.log(this.detail)
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
     
           console.log(viewCourse,"detail")
@@ -46,6 +52,10 @@ export class CoursepreviewComponent implements OnInit {
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.getModuleData()
+  }
+
+  editResource(){
+    this.route.navigateByUrl('/Wca/rf');
   }
   clickedT(i) {
     this.clicked = i

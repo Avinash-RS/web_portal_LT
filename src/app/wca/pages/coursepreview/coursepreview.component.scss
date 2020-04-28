@@ -85,15 +85,6 @@
     grid-template-columns: 150px auto;
   }
 
-.smallbtn2{
-  background-color: $color-blue !important;
-  color: $color-white;
-  border: none;
-  font-size: 12px;
-  border-radius: 6px;
-  height: 30px;
-  float: right;
-}
 .course_preview_icon {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: $color-blank;
@@ -107,17 +98,7 @@
     margin-top: 1% !important;
 }
 
-.smallbtn3{
-  background-color: $color-white  !important;
-  color: $color-blue;
-  border: none;
-  font-size: 15px;
-  border: 1px solid;
-  height: 30px;
-  border-radius: 6px;
-  float: right;
-  margin-left: 10px;
-}
+
 .course_preview{
   margin-left: 23px;
 }
@@ -234,7 +215,7 @@
   }
 
   button:focus {
-    border-bottom:3px solid $color-red;
+    // border-bottom:3px solid $color-red;
     outline: none;
     background: transparent;
   }
@@ -287,4 +268,46 @@ ol{
   border-radius: 4px;
   margin-top: 50px !important;
 
+}
+.cls{
+  display: block !important;
+  margin-left: 9px;
+}
+.btn{
+  width: 170px !important;
+  font-size: 14px !important;
+}
+
+.outline{
+  background-color: $color-white  !important;
+  color: $color-blue;
+  border: none;
+  font-size: 14px;
+  border: 1px solid;
+  height: 32px;
+  width: 170px;
+  margin-top: 10px;
+
+}
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  border: 2px solid var(--white);
+  padding: -3px;
+  font-weight: bolder;
+  width: 30px;
+  font-size: 22px;
+  background: #00000075;
+  height: 30px;
+  border-radius: 50px;
+  color: var(--white);
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
 }

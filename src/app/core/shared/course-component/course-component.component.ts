@@ -90,6 +90,7 @@ export class CourseComponentComponent implements OnInit {
       wishlist: this.course.wishlisted,
       wishlist_id: this.course.wishlist_id
     }
+    console.log(detail,'detaildetaildetail')
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
   }
