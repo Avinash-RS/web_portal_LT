@@ -1,5 +1,4 @@
 
-<div><app-wca></app-wca></div>
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
@@ -21,6 +20,8 @@
             <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
             <span *ngIf="queryData?.template_details">
                 <input class="Bcg" type="text"  placeholder="Enter the Name" formControlName="modulename"  required />
+            </span>
+            <span class="validmodule"> <small  *ngIf="createTopicForm?.controls?.modulename?.errors?.required && submitted">Module Name Required !!!</small>
             </span>
         </div>
 
@@ -47,7 +48,10 @@
                  <mat-label class="clrLabel">Topic Name</mat-label>
                  <input  matInput  style="color:black;" formControlName="topicname">
                  <mat-error > </mat-error>
-               </mat-form-field></span>
+               </mat-form-field>
+               <span class="validmodule"> <small style="font-weight:590" *ngIf="createTopicForm?.controls?.topicname?.errors?.required && submitted">Topic Name Required !!!</small>
+               </span>
+            </span>
                <span class="example-spacer"></span>
                <span style="display: none;">
                    <mat-icon>save</mat-icon>
@@ -69,6 +73,7 @@
                  </mat-card>
                </span>
          </span>
+         <span *ngIf="!j?.value?.topicimages[i] && submitted"><small class="FileuploadValid">FileUpload Required !!!</small></span>
      </div>   
          </div>
      
@@ -90,9 +95,9 @@
         </div>
     </span>
         <div *ngIf="queryData?.template_details" class="dspFlx">
-            <button class="backgroundcol2"   type="submit">Save as a draft</button>
-           <span class="padTwoSides"> <button class="backgroundcol1" type="button">Create</button></span>
-            <button class="backgroundcol1"  type="button" >Cancel</button>
+            <button class="backgroundcol2"  (click)="addTopicFrom($event,'draft')"   type="button">Save as a draft</button>
+           <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')" type="button">Create</button></span>
+            <button class="backgroundcol1" [routerLink]="['/Wca']"  type="button" >Cancel</button>
 
             </div>
     </div>
