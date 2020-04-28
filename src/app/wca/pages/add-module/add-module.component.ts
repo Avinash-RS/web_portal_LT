@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-module',
@@ -12,7 +13,7 @@ export class AddModuleComponent implements OnInit {
   courseDetails: any;
   noOfModules: number = 0;
 
-  constructor(private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
+  constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -49,6 +50,13 @@ export class AddModuleComponent implements OnInit {
         data.modulestatus = "false";
       }
     });
+
+    this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
+      if (res.Code == 200) {
+        this.getCourseDetails();
+        this.toast.success('Module deleted successfully');
+      }
+    })
   }
 
 }

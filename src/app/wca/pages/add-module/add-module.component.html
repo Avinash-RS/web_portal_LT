@@ -35,7 +35,7 @@
             <div class="module-list">
 
               <ng-container *ngFor="let module of courseDetails.coursedetails">
-                <div class="child-item" *ngIf="module.modulestatus == 'true'">
+                <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                   <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
                   <span>
                     {{module.modulename}}
