@@ -127,12 +127,11 @@ export class ReferenceFileComponent implements OnInit {
   }
 removeDoc(data){
   this.service.remove_doc_ref(data._id).subscribe(data => {
-    if(data.data['remove_doc_ref']['success'] == true){
+    if(data.data['remove_doc_ref']['success'] === 'true'){
       this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-     
       this.getAllRefDoc(1)
     } else {
-      this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
+      this.alert.openAlert('Please try after sometime',null)
     }
   })
 }
