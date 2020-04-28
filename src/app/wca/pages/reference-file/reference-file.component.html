@@ -64,10 +64,13 @@
           </mat-radio-group>
         </div>
         <div class="space-10"></div>
+
+
+
         <div class="ref-input" *ngIf="selectedOption == 'document'">
           <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"  [ngModelOptions]="{standalone: true}">
           <label for="upload-photo" class="upload">{{uploadMsg}}</label>
-          <input type="file" name="photo" id="upload-photo" (change)="uploadDoc($event)" />
+          <input type="file" placeholder="Upload the document" name="photo" id="upload-photo" (change)="uploadDoc($event)" />
         </div>
 
         <div class="ref-input" *ngIf="selectedOption == 'link'">

@@ -33,10 +33,10 @@ export class CoursepreviewComponent implements OnInit {
   detail: any;
   isshow : boolean = false;
   constructor( public service: CommonServicesService,private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
-    //  this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-    // this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
-    // console.log(this.detail)
+    console.log(this.detail)
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
     
           console.log(viewCourse,"detail")
