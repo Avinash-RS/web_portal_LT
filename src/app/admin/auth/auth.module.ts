@@ -17,6 +17,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { CoreModule } from '@core/core.module';
+import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 import { WcaModule } from '../../wca/wca.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -74,7 +75,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent],
+    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

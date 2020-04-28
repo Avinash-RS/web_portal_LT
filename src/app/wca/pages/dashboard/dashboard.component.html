@@ -42,7 +42,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
-                                        [showRating]="true"> </app-course-component>
+                                        [showRating]="true" [goto] ="'publish'"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -80,7 +80,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [showCount]="false" [showRating]="false"> </app-course-component>
+                                        [showCount]="false" [showRating]="false" [goto] ="'create'"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -121,7 +121,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [showCount]="false" [showRating]="false"> </app-course-component>
+                                        [showCount]="false" [showRating]="false" [goto] ="'draft'"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>

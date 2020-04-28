@@ -31,16 +31,16 @@ export const createusergroup = gql`
       success
       error_msg
       message{
-            _id
-            group_name
-            group_type
-            admin_id
-            created_on
-            updated_on
-            created_by
-            is_active
-            group_id
-            parent_id
+        _id
+        group_name
+        group_type
+        admin_id
+        created_on
+        updated_on
+        created_by
+        is_active
+        group_id
+        parent_id
       }
   }
 }
