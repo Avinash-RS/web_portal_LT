@@ -28,7 +28,13 @@
     </div>
     <div class="col-md-2 m-t-15 col-sm-2 col-2">{{course.max_student_enrollments_allowed | number}}
     </div>
-    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showCartBtn"> <strong>Rs {{course.price | number }}</strong>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice"> <strong>Rs {{course.price | number }}</strong>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDate">
+    <div class="col-md-12 f_wt_400 f_sz_14 float_left color-grey" >
+     Published On : {{course.publishedOn}}
     </div>
   </div>
   <br>
@@ -77,3 +83,4 @@
     </div>
   </div>
 </div>
+<br><br>

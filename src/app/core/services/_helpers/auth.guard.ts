@@ -16,14 +16,19 @@ export class AuthGuard implements CanActivate {
 
   //Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
-      JSON.parse(localStorage.getItem('adminDetails')) || null;
-    var role = localStorage.getItem('role');
-
-    if (userDetailes != null) { // userdetail is present // authenticated user
-      if (((role == 'learner' && userDetailes.is_profile_updated) || (role == 'admin')) &&
-        state.url == '/Learner/login' || state.url == '/Admin/login') {
-        this.router.navigate([role == 'admin' ? "/Admin/userManagement":  "/Learner"]);
+    var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
+    var role = localStorage.getItem('role') || null;
+    //  console.log('role-----',role)
+    //for learner ------> 1
+    // debugger
+    if (userDetailes != null && role == 'learner' && state.url != '/Admin/auth/userManagement' &&
+      state.url != '/Admin/auth/addUser' && state.url != "/Admin/auth/listCourses") {
+      // userdetail is present // authenticated user
+      // url should not start from admin - can be /Larner or anything
+      // if profile updated and trying to go login/reg 
+      if ((state.url == '/Learner/login' || state.url == '/Admin/login' || state.url == '/Learner/register')) {
+        this.router.navigate(["/Learner"]);
         return false;
       }
       if (role == 'learner' && !userDetailes.is_profile_updated) {
@@ -46,7 +51,17 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     }
-    else
-      return true;
+    //if admin logged in
+    if (role == 'admin' && adminDetails && (state.url != 'Learner' && state.url != 'Wca')) {
+      if (state.url == '/Admin/login')
+        return false
+      else if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser' 
+      || state.url != "/Admin/auth/listCourses")
+        return true
+    }
+    else {
+      this.router.navigate(["/Learner"])
+      return false;
+    }
   }
 }
