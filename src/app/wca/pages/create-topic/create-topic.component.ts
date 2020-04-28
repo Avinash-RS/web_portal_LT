@@ -54,7 +54,7 @@ export class CreateTopicComponent implements OnInit {
   topicItem(): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array([this.topicImages()]),
+      topicimages: this.formBuilder.array([],Validators.compose([Validators.required])),
       topicstatus:['true']
     });
   }
@@ -164,6 +164,8 @@ export class CreateTopicComponent implements OnInit {
               this.spinner.hide();
             })
           } else if (item.name === 'PPT') {
+
+
             this.spinner.hide();
           } else if (item.name === 'Word') {
             this.spinner.hide();
@@ -289,7 +291,8 @@ export class CreateTopicComponent implements OnInit {
      this.courseForm.value.createdby_role = 'Sathish';
      this.courseForm.value.flag = 'true';
 
-    console.log(this.courseForm.value);
+    console.log(this.courseForm);
+    return
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
