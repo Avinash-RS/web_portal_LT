@@ -400,6 +400,7 @@ query get_course_published($admin_id: String!, $pagenumber: Int!){
         description
       }
     }
+  }
   }`;
 
   export const publishcourse = gql`
