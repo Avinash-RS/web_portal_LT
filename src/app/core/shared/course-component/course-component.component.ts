@@ -87,35 +87,43 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    let detail = {
-      id: this.course.course_id,
-      wishlist: this.course.wishlisted,
-      wishlist_id: this.course.wishlist_id
+    if (!this.goto) {
+      let detail = {
+        id: this.course.course_id,
+        wishlist: this.course.wishlisted,
+        wishlist_id: this.course.wishlist_id
+      }
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    } else if (this.goto == 'publish') {
+      let detail = {
+        type: 'publish', id: this.course.course_id
+      }
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
     }
-    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    else if (this.goto == 'create') {
+      let detail =
+        { type: 'create', id: this.course.course_id }
+
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    }
+    else if (this.goto == 'draft') {
+      let detail = { type: 'draft', id: this.course.course_id }
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    }
   }
 
   goTocourse(status) {
-    if (!this.goto) {
-      if (this.final_status != 'Completed') {
-        let detail1 = {
-          id: 'Scaffolding',
-          user: this.userDetail.user_id,
-          course_id: this.course.course_id,
-          user_obj_id: this.userDetail._id
-        }
-        this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+
+    if (this.final_status != 'Completed') {
+      let detail1 = {
+        id: 'Scaffolding',
+        user: this.userDetail.user_id,
+        course_id: this.course.course_id,
+        user_obj_id: this.userDetail._id
       }
-      else if (this.goto == 'publish') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'publish', id: this.course.course_id } });
-      }
-      else if (this.goto == 'create') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'create', id: this.course.course_id } });
-      }
-      else if (this.goto == 'draft') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'draft', id: this.course.course_id } });
-      }
+      this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
     }
+
   }
 
   getcourserStatus() {

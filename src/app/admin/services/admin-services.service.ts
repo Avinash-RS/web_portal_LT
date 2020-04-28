@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { user_registration } from "./operations/admin_mutation"
 import { get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, get_course_published
+  get_user_session_detail, get_course_createdby_admin, get_course_published, publishcourse
 } from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -116,6 +116,16 @@ export class AdminServicesService {
       variables: {
         admin_id: user_id,
         pagenumber: pagenumber
+      }
+    });
+  }
+
+  publishCourse(course_id, is_published) {
+    return this.Apollo.query({
+      query: publishcourse,
+      variables: {
+        course_id: course_id,
+        is_published: is_published
       }
     });
   }

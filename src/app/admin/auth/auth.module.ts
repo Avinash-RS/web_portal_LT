@@ -17,6 +17,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { CoreModule } from '@core/core.module';
+import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -71,7 +72,7 @@ import { from } from 'rxjs';
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent, UserManagementComponent, AddUserComponent, AdminCoursesComponent],
+    declarations: [AuthComponent, UserManagementComponent, AddUserComponent, AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

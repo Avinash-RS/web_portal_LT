@@ -19,7 +19,7 @@ export class AdminCoursesComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
-    if (this.type == 'ceated') {
+    if (this.type == 'created') {
       this.service.getAllCourseCreated('1234ab', 0).subscribe((res: any) => {
         console.log(res);
         this.courseList = res.data.get_course_createdby_admin.message;

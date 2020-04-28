@@ -362,3 +362,13 @@ export const get_course_published = gql`
         }
     }
   }`;
+
+  export const publishcourse = gql`
+  query publishcourse($course_id: String!, $is_published: Boolean!){
+    publishcourse(course_id: $course_id, is_published: $is_published) {
+      success
+      message
+      error_msg
+    }
+  }`;
+  

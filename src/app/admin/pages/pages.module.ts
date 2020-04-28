@@ -18,6 +18,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
     imports: [
         MatCardModule,
@@ -35,7 +36,7 @@ import { RouterModule } from '@angular/router';
         RouterModule
          ],
     declarations: [   
-    AddUserComponent],
+    AddUserComponent, ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
