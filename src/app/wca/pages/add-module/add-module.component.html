@@ -34,14 +34,22 @@
             </div>
             <div class="module-list">
 
-              <ng-container *ngFor="let module of courseDetails.coursedetails">
-                <div class="child-item" *ngIf="module.modulestatus !== 'false'">
-                  <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
-                  <span>
-                    {{module.modulename}}
-                  </span>
-                </div>
+              <ng-container *ngIf="noOfModules !== 0; else noMod">
+                <ng-container *ngFor="let module of courseDetails.coursedetails">
+                  <div class="child-item" *ngIf="module.modulestatus !== 'false'">
+                    <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
+                    <span>
+                      {{module.modulename}}
+                    </span>
+                  </div>
+                </ng-container>
               </ng-container>
+
+              <ng-template #noMod>
+                <div class="no-module">
+                No Modules
+              </div>
+              </ng-template>
 
             </div>
           </div>

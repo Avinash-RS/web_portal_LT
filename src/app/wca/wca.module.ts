@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'wca', component: WcaComponent,  },
   { path: 'addcourse', component: CreateCourseComponent,  },
   { path: 'viewmodule', component: ViewModuleComponent,  },
-  { path: 'addmodule', component: CreateModuleComponent,  },
+  { path: 'viewmodule', component: CreateModuleComponent,  },
   { path: 'addtemplate', component: CreateTemplateComponent,},
   { path: 'choosetemplate', component: ChooseTemplateComponent,},
   { path: 'addtopic', component: CreateTopicComponent,},
@@ -57,7 +57,7 @@ const routes: Routes = [
   { path: 'mycourse', component: MycreatedCourseComponent,},
   { path: 'ct', component: ChooseTemplateComponent,},
   { path: 'rf', component: ReferenceFileComponent,},
-  {path:'am',component:AddModuleComponent}
+  {path:'addmodule',component:AddModuleComponent}
 
 
  

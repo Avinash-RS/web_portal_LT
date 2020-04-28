@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
+import { id } from '@swimlane/ngx-charts/release/utils';
 
 @Component({
   selector: 'app-add-module',
@@ -16,20 +17,11 @@ export class AddModuleComponent implements OnInit {
   constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      let flag = 0;
-      for (const key in params) {
-        if (params.hasOwnProperty(key)) {
-          flag = 1;
-        }
-      }
-      if (flag) {
-        // this.queryData = params;
-        // this.getCourseDetails();
-      }
-    });
-    this.queryData = 1;
-    this.getCourseDetails();
+    this.queryData = this.route.snapshot.paramMap.get('courseId');
+  // this.queryData = 1
+    if (this.queryData) {
+      this.getCourseDetails();
+    }
   }
 
   getCourseDetails() {
