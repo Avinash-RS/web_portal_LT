@@ -17,18 +17,23 @@
     </div>
   </div>
 
-  <!-- <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input matInput (keyup)="applyFilter($event)">
-  </mat-form-field> -->
-  <div class="input-group search" >
-    <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
-    <span class="input-group-append bg-white border-left-0">
-      <span class="input-group-text bg-transparent">
-        <i class="fa fa-search searchicon" aria-hidden="true"></i>
-      </span>
-    </span>
+<div class="row">
+  <div class="col-md-4 col-sm-12 col-12">
+  <h4 style="text-align: end;">Showing 10 out of {{ELEMENT_DATA.length}}</h4>
   </div>
+
+  <div class="col-md-8 col-sm-12 col-12">
+    <div class="input-group search" >
+      <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
+      <span class="input-group-append bg-white border-left-0">
+        <span class="input-group-text bg-transparent">
+          <i class="fa fa-search searchicon" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+ 
 
   <div class="main-section">
     <div class="file-selection">
@@ -95,7 +100,7 @@
             <button mat-flat-button color="primary" class="submit-btn" (click)="saveReferenceFile()" >Save</button>
           </div>
           <div class="file-size">
-            Minimum file size: 10 MB
+            Maximum file size: 10 MB
           </div>
         </mat-card-footer>
 </form>
@@ -144,7 +149,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator #paginator [length]="resultsLength" [pageSize]="5" (page)="next($event)" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons></mat-paginator>
     </div>
   </div>
   <div style="text-align: center;">

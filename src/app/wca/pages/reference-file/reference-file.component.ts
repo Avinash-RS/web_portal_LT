@@ -107,7 +107,6 @@ export class ReferenceFileComponent implements OnInit {
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
     payload.append("user_id",this.currentUser.user_id);
-    // payload.append('reffile', this.selectfile, this.selectfile.name)
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
@@ -146,7 +145,6 @@ getAllRefDoc(pagenumber){
     this.getdocData = data.data['getallrefdoc']['data'];
     Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-    console.log(this.ELEMENT_DATA,'this.ELEMENT_DATA')
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   })
@@ -160,12 +158,14 @@ clear(){
   this.referenceLink = '';
   this.referenceName = '';
   this.uploadMsg = "Upload the document";
+  this.referenceLink = "http://";
 }
 //get module name
 get_module_topic(){
   this.learnerservice.get_module_topic().subscribe(data => {
      if(data['data']['get_module_topic'].success){
        this.moduleListData=data['data']
+       console.log( this.moduleListData)
        this.modulenamelist=this.moduleListData.get_module_topic.data
        console.log(this.modulenamelist)
   }
