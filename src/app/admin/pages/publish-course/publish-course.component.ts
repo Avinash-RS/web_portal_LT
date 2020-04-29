@@ -16,6 +16,7 @@ export class PublishCourseComponent implements OnInit {
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService, private alert: AlertServiceService, ) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      console.log(this.course)
   }
 
   ngOnInit() {
@@ -24,12 +25,13 @@ export class PublishCourseComponent implements OnInit {
   publishCourse() {
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data: Boolean) => {
       if (data) {
-        this.service.publishCourse(this.course._id, true).subscribe((res: any) => {
+        this.service.publishCourse(this.course.id, true).subscribe((res: any) => {
           console.log(res)
           if(res.data.publishcourse.success) 
           this.alert.openAlert("Success !", "Published course successfully")
           else
-          this.alert.openAlert("Published course failed",null)
+          this.alert.openAlert(res.data.publishcourse.message == ""? res.data.publishcourse.error_msg : 
+          res.data.publishcourse.message ,null)
         })
       }
     })
