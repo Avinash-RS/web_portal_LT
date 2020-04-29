@@ -45,3 +45,12 @@ export const createusergroup = gql`
   }
 }
 `;
+
+export const update_notification = gql`
+mutation update_notification($report_id: String!){
+  update_notification(report_id: $report_id) {
+    success
+    error_msg
+    message
+}
+}`

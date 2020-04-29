@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { user_registration ,createusergroup} from "./operations/admin_mutation"
+import { user_registration ,createusergroup,update_notification} from "./operations/admin_mutation"
 import { get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, publishcourse,get_course_published,getgroup,get_user_group_hierarchy,get_draft_course
-} from "./operations/admin_query";
+  get_user_session_detail, get_course_createdby_admin, publishcourse,get_course_published,getgroup,get_user_group_hierarchy
+,getnotificationreports,get_draft_course} from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -100,6 +100,24 @@ export class AdminServicesService {
     });
   }
 
+  getNotificationData(admin_id){
+    return this.Apollo.query({
+      query: getnotificationreports,
+      variables: {
+        admin_id : admin_id,
+      }
+
+    })
+  }
+  removeNotificationData(report_id){
+    return this.Apollo.query({
+      query: update_notification,
+      variables: {
+        report_id : report_id,
+      }
+
+    })
+  }
   getAllCourseCreated(user_id, pagenumber) {
     return this.Apollo.query({
       query: get_course_createdby_admin,
