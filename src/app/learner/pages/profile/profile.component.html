@@ -228,7 +228,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <input type="tel" mask="00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
                 'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
-                  formControlName="percentage">
+                  formControlName="percentage" (blur)='setTwoNumberDecimal($event)' maxlength="2">
                 <mat-icon (click)="addQualification()"
                   *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
                   class="p-5px">add_circle_outline
