@@ -161,7 +161,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
                   name="qualification">
-                  <mat-option [value]="lv" *ngFor="let lv of levelValue">
+                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue">
                     {{lv.level_name}}
                   </mat-option>
                 </mat-select>
@@ -177,7 +177,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
               <!-- <mat-form-field *ngIf=""> -->
                 <ng-container 
-                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
               <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
                   name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
@@ -187,7 +187,7 @@
               </ng-container>
         <!------------------------Institute textbox for 10th and 12th--------------------->
                 <ng-container class="col-md-3 col-sm-12 col-12 display_flex" 
-                *ngIf="(qual?.value?.qualification?.level_code == '10') || (qual?.value?.qualification?.level_code == '12')">
+                *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
                   <input type="text" class="institute"
                 placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
                 'inputs border-radius-5 color_blue background_trans width_80'"
@@ -203,7 +203,7 @@
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <ng-container
-                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
                   formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">

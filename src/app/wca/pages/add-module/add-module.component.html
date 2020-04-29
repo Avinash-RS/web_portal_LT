@@ -1,0 +1,74 @@
+<div>
+  <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+
+      <li class="breadcrumb-item active" aria-current="page">Course created by me</li>
+
+      <li class="breadcrumb-item active" aria-current="page">Course name</li>
+    </ol>
+  </nav>
+
+
+  <div class="add-module-section">
+    <mat-card style="text-align: center;">
+      <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+
+        <div class="row">
+          <div class="col-md-2"> <img class="img"
+              [src]="routedCourseDetails?.courseImage ? routedCourseDetails?.courseImage : '../../../../assets/images/image_upload.svg'">
+            <br>
+            <div class="course-name">{{routedCourseDetails?.courseName}}</div>
+            <div class="course-name">{{noOfModules + ' Modules'}}</div>
+            <div style="text-align: left;">
+              <button mat-flat-button color="primary" class="submit-btn">Course Details</button>
+              <button mat-stroked-button color="primary" class="reference-btn">Reference file</button>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="add-module-btn">
+              <mat-icon class="add-module-icon">add_circle_outline</mat-icon>
+              <span style="font-size: 24px;color: #1f3777;">
+                Add Module
+              </span>
+            </div>
+            <div class="module-list">
+
+              <ng-container *ngIf="noOfModules !== 0; else noMod">
+                <ng-container *ngFor="let module of courseDetails.coursedetails">
+                  <div class="child-item" *ngIf="module.modulestatus !== 'false'">
+                    <span class="del-icon-container">
+                    <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
+                    </span>
+                    <span>
+                      {{module.modulename}}
+                    </span>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <ng-template #noMod>
+                <div class="no-module">
+                No Modules found
+              </div>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+      </mat-grid-list>
+
+      <mat-card-footer>
+        <div>
+          <button type="button" mat-flat-button color="primary" (click)="onCreate()" class="continue-btn">Create</button>
+        </div>
+      </mat-card-footer>
+
+    </mat-card>
+
+
+  </div>
+
+
+
+</div>
