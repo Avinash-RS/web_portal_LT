@@ -40,10 +40,9 @@ You have {{ notifications?.length }} new notifications</div>
           <div class="name">{{ notification.notification_msg }}</div>
           <div class="time">{{ notification.time_ago }}</div>
         </div>
-        <span fxFlex></span>
-        
+        <span fxFlex></span>        
         <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon>
-        <mat-icon class="close" (click)="removeNotification(notification)">close</mat-icon>
+        <mat-icon class="close" (click)="removeNotification(notification.report_id)">close</mat-icon>
         <!-- <button type="button" mat-icon-button>
         </button> -->
       </div>

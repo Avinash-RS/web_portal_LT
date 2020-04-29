@@ -22,13 +22,11 @@ export class ToolbarComponent implements OnInit {
 
   	ngOnInit() {
 			var admin_details =JSON.parse(localStorage.getItem('adminDetails')) 
-			console.log(admin_details)
 			this.feedNotificationData(admin_details._id);
   	}
 		feedNotificationData(admin_id){
       this.adminService.getNotificationData(admin_id).subscribe((result: any) => {
 			 this.toolbarHelpers.notifications = result.data['getnotificationreports'].message
-			 console.log(this.toolbarHelpers);
       })
     }
 }
