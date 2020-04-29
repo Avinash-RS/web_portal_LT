@@ -16,6 +16,7 @@ RUN npm i ngx-toastr@10.1.0
 RUN npm i xlsx
 RUN npm i file-saver
 RUN npm i ngx-pagination
+RUN npm i ngx-infinite-scroll
 
 COPY . .
 #RUN ng serve

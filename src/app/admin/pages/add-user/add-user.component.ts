@@ -34,10 +34,7 @@ export class AddUserComponent implements OnInit {
     private alert: AlertServiceService, private service: AdminServicesService, ) { }
 
   ngOnInit() {
-    // this.alert.openAlert('ok',null)
-    // this.alert.openConfirmAlert('De-activation Confirmation', 'Are you sure you want to de-activate selected user ?').then((data: Boolean) => {
-    //   console.log(data)
-    // })
+
     this.addUserForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.usernameVal),
       email: new FormControl('', myGlobals.emailVal),
@@ -186,7 +183,7 @@ export class AddUserComponent implements OnInit {
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         console.log(result);
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Uploaded Successfully');
+          this.alert.openAlert('Success !', 'Uploaded in Progress ...');
           this.selectedfile = '';
         } else {
           this.alert.openAlert('Warning !', result.message);

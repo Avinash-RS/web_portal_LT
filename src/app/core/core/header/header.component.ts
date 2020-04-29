@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     private router: Router, ) { }
 
   ngOnInit() {
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) ? JSON.parse(localStorage.getItem('UserDetails')) :
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img')
   }

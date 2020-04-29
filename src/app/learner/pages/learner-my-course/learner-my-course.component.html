@@ -20,7 +20,7 @@
                     <mat-card style="text-align: center;">
                         <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
                             <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
-                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "true" > </app-course-component>
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn] = "false" [showWishlist] = "false" [showStatus] = "true" > </app-course-component>
                             </mat-grid-tile>
                         </mat-grid-list>
                         <h2 *ngIf="myCoursesList && myCoursesList.length == 0">

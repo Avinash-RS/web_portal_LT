@@ -36,7 +36,7 @@
         <h5 class="filters__title">Category</h5>
         <div class="filters__item" *ngFor ="let cat of categories;let ind = index">
           <div class="checkbox">
-            <input  name="check" id="{{ind+1}}" (change)="getcourses(cat)"
+            <input  name="check"  id="{{ind+1}}" [checked]="selected === ind" (change)="selected = ind" (change)="getcourses(cat)"
                  type="checkbox"/>
             <label (click)="getcourses(cat)" for="{{ind+1}}">{{cat.category_name}}<span class="box"></span>
             </label> 
@@ -110,7 +110,7 @@
           </div>
       </div>
       <div class="filters__item">
-      <a class="button" (click)="loadcategoryandcourses()">Clear</a>
+      <a class="button" (click)="loadcategoryandcourses();check=false">Clear</a>
       </div>
     </section>
   </div>
