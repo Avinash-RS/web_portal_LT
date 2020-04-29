@@ -17,6 +17,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { CoreModule } from '@core/core.module';
+import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -66,13 +67,18 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatExpansionModule,
         MatTableModule,
         MatTreeModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        WcaModule
+       
+
+
+
 
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent],
+    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

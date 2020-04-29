@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogComponent } from './dialog.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatDialogModule } from '@angular/material';
+import { MatFormFieldModule, MatDialogModule, MatCardModule } from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
@@ -21,7 +21,8 @@ describe('DialogComponent', () => {
         HttpClientModule,
         ToastrModule.forRoot(),
         RouterModule.forRoot([]),
-        MatDialogModule
+        MatDialogModule,
+        MatCardModule
     ],  
       declarations: [ DialogComponent ],
       providers: [

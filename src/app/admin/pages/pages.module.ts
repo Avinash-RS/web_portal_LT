@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
 import { GroupManagementComponent } from './group-management/group-management.component';
 
 
+
 @NgModule({
     imports: [
         CdkTreeModule,
@@ -42,10 +43,8 @@ import { GroupManagementComponent } from './group-management/group-management.co
         RouterModule
          ],
     declarations: [   
+    AddUserComponent, ],
 
-
-       
-    AddUserComponent, GroupManagementComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],

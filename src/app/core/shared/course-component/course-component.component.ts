@@ -22,6 +22,8 @@ export class CourseComponentComponent implements OnInit {
   @Input('showRating') showRating: boolean;
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
+//here type will come now we need to navigate to your page
+  @Input('isDraft') isDraft: boolean;
 
 
   userDetail: any;
@@ -87,37 +89,58 @@ export class CourseComponentComponent implements OnInit {
   }
 
   gotoDescription(course) {
-    let detail = {
-      id: this.course.course_id,
-      wishlist: this.course.wishlisted,
-      wishlist_id: this.course.wishlist_id
-    }
-    console.log(detail,'detaildetaildetail')
-    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
-  }
-
-  goTocourse(status) {
+    console.log(course,'course')
     if (!this.goto) {
-      if (this.final_status != 'Completed') {
-        let detail1 = {
-          id: 'Scaffolding',
-          user: this.userDetail.user_id,
-          course_id: this.course.course_id,
-          user_obj_id: this.userDetail._id
-        }
-        this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+    if (this.isDraft) {
+      let courseDetails = {
+        courseId: this.course.courseid,
+        courseImage: this.course.course_img_url,
+        courseName: this.course.course_name
       }
-      else if (this.goto == 'publish') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'publish', id: this.course.course_id } });
-      }
-      else if (this.goto == 'create') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'create', id: this.course.course_id } });
-      }
-      else if (this.goto == 'draft') {
-        this.router.navigateByUrl('/Wca/previewcourse', { state: { type: 'draft', id: this.course.course_id } });
-      }
+      this.router.navigate(['/Wca/addmodule',{courseId: this.course.courseid, courseImage: this.course.course_img_url,courseName: this.course.course_name}]);
+
     }
+    else {
+      let detail = {
+        id: this.course.course_id,
+        wishlist: this.course.wishlisted,
+        wishlist_id: this.course.wishlist_id
+      }
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    }
+    } else if (this.goto == 'publish') {
+      let detail = {
+        type: 'publish', id: this.course._id || this.course.course_id 
+      }
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    }
+    else if (this.goto == 'create') {
+      let detail =
+        { type: 'create', id: this.course._id || this.course.course_id }
+
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    }
+    else if (this.goto == 'draft') {
+      let detail = { type: 'draft', id: this.course._id || this.course.course_id }
+      this.router.navigateByUrl('/Wca/previewcourse', { state: { detail: detail } });
+    }
+    // console.log(detail,'detaildetaildetail')
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+    // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+    }
+  
+  goTocourse(status) {
+
+    if (this.final_status != 'Completed') {
+      let detail1 = {
+        id: 'Scaffolding',
+        user: this.userDetail.user_id,
+        course_id: this.course.course_id,
+        user_obj_id: this.userDetail._id
+      }
+      this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+    }
+
   }
 
   getcourserStatus() {
@@ -134,7 +157,6 @@ export class CourseComponentComponent implements OnInit {
           }
         }
       }
-      console.log(data)
     });
   }
 }

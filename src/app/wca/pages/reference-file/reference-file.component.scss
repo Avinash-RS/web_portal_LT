@@ -43,7 +43,7 @@
 }
 
 .file-selection {
-    width: 18.5%;
+    width: 19.5%;
 
     .mat-card:not([class*="mat-elevation-z"]) {
         box-shadow: 0 0 10px rgb(170, 170, 170) !important;
@@ -115,7 +115,8 @@ tr.mat-row {
 }
 
 .file-size {
-    padding: 3% 16%;
+    text-align: center;
+    margin-top: 5px;
 }
 
 .ref-input input{

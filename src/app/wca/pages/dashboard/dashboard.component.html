@@ -1,7 +1,4 @@
 
-<div>
-    <app-wca></app-wca>
-</div>
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
@@ -42,7 +39,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
-                                        [showRating]="true"> </app-course-component>
+                                        [showRating]="true" [goto] ="'publish'"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -80,7 +77,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [showCount]="false" [showRating]="false"> </app-course-component>
+                                        [showCount]="false" [showRating]="false" [goto] ="'create'"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -110,7 +107,7 @@
                         <ng-template #nodraftcourse>
                             (0 Courses)
                         </ng-template>
-                        <span style="float: right;font-size: small; font-weight: bold;"(click) = "goToViewCourse(draft)">View all</span>
+                        <span style="float: right;font-size: small; font-weight: bold;"(click) = "goToViewCourse('draft')">View all</span>
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
@@ -121,7 +118,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [showCount]="false" [showRating]="false"> </app-course-component>
+                                        [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>

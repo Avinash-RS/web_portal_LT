@@ -89,9 +89,16 @@
             <!-- //////FIrst section Right part//////// -->
             <div class="col-md-8 col-sm-12 col-12 right">
               <div class="row float_right">
+                <!-- <p ></p> -->
                 <label class="f_size_20 f_wt_400">My Profile</label>
-                <mat-icon (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                <ng-container *ngIf="cannotEdit">
+                  <mat-icon  matTooltip="Click here to change profile details" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                  </mat-icon>
+                </ng-container>
+                <ng-container *ngIf="!cannotEdit">
+                <mat-icon  matTooltip="You can start editing" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
                 </mat-icon>
+                </ng-container>
               </div>
               <br><br><br>
               <div class=row>
@@ -161,7 +168,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
                   name="qualification">
-                  <mat-option [value]="lv" *ngFor="let lv of levelValue">
+                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue">
                     {{lv.level_name}}
                   </mat-option>
                 </mat-select>
@@ -177,7 +184,7 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
               <!-- <mat-form-field *ngIf=""> -->
                 <ng-container 
-                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
               <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
                   name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
@@ -187,7 +194,7 @@
               </ng-container>
         <!------------------------Institute textbox for 10th and 12th--------------------->
                 <ng-container class="col-md-3 col-sm-12 col-12 display_flex" 
-                *ngIf="(qual?.value?.qualification?.level_code == '10') || (qual?.value?.qualification?.level_code == '12')">
+                *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
                   <input type="text" class="institute"
                 placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
                 'inputs border-radius-5 color_blue background_trans width_80'"
@@ -203,7 +210,7 @@
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <ng-container
-                *ngIf="(qual?.value?.qualification?.level_code !== '10') && (qual?.value?.qualification?.level_code !== '12')">
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
                   formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">
@@ -335,7 +342,7 @@
           <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h1 class="head">Change the Email ID</h1>
-        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
+        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 200px;">
           <form [formGroup]="mailForm">
             <div class="form-group">
               <label class="f_size_20 f_wt_400">Enter new email id</label>
@@ -345,10 +352,10 @@
                 <div *ngIf="c.mailid.errors.required">Email is required</div>
                 <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
               </div>
-            </div>
+            </div><br><br>
             <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
               Submit
-            </button><br><br>
+            </button>
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">

@@ -156,7 +156,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //Added by Mythreyi
   goToViewCourse(type) {
     this.router.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
   }
