@@ -26,6 +26,10 @@ export class PublishCourseComponent implements OnInit {
       if (data) {
         this.service.publishCourse(this.course._id, true).subscribe((res: any) => {
           console.log(res)
+          if(res.data.publishcourse.success) 
+          this.alert.openAlert("Success !", "Published course successfully")
+          else
+          this.alert.openAlert("Published course failed",null)
         })
       }
     })
