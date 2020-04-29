@@ -49,9 +49,11 @@ export class CreateTopicComponent implements OnInit {
       coursefile: [null],
       coursestatus: ['true'],
       courseid: [null, Validators.compose([Validators.required])],
-      coursedetails:this.formBuilder.array(this.courseArray.length ? this.courseArray.map((data,index) =>
-      this.createForm()
-    ) : [this.createForm()])
+      coursedetails:this.formBuilder.array(this.courseArray.length ? this.courseArray.map((data,index) => {
+        // if (data.modulestatus === 'true') {
+         return this.createForm()
+        // }
+      }) : [this.createForm()])
     });
   }
 
@@ -97,7 +99,8 @@ export class CreateTopicComponent implements OnInit {
            if (value) {
             this.queryData = null;
             this.queryData = value;
-            this.courseForm = this.courseform()
+            this.courseForm = this.courseform();
+            this.createTopicForm = this.courseForm.get("coursedetails").get(String(0)) as FormGroup;
             this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
             console.log(this.queryData);
            }
@@ -110,6 +113,7 @@ export class CreateTopicComponent implements OnInit {
            console.log(this.courseArray);
           this.queryData = value1.courseDetails.coursedetails[value1.index];
           this.courseForm = this.courseform()
+          this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
           this.courseForm.patchValue(value1.courseDetails);
           // this.createTopicForm.patchValue(this.queryData)
          } else {
@@ -126,16 +130,18 @@ export class CreateTopicComponent implements OnInit {
 
   }
   createForm() {
-    console.log(this.queryData)
-   return this.createTopicForm = this.formBuilder.group({
+   return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
       template_details:[this.queryData.template_details],
-      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map((data,index) =>
+      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details && this.queryData.template_details ? this.queryData.template_details.map((data,index) =>
         this.topicItem(index)
       ) : [])
     })
+
   }
+  // createTopicForm => 
+   
 
 
   initialCall(data1) {
@@ -146,6 +152,7 @@ export class CreateTopicComponent implements OnInit {
       this.queryData = data.Result;
       this.courseForm = this.courseform()
       console.log(this.courseForm)
+      this.createTopicForm = this.courseForm.get("coursedetails").get(String(0)) as FormGroup;
       this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
       console.log(this.queryData);
     }, err => {
@@ -153,11 +160,23 @@ export class CreateTopicComponent implements OnInit {
     })
   }
 
+  DeleteTopic(jform,event) {
+    event.stopPropagation();
+    // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
+    //  allModuleDetails.removeAt(jform);
+  this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
+  this.queryData.template_details.splice(jform,1);
+  this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
+  }
+
+
+
   activate(item) {
     console.log(item);
-    this.active = item
-    this.fileType = this.fileValidations1[item.name];
-
+if (item) {
+  this.active = item
+  this.fileType = this.fileValidations1[item.name];
+}
   }
 
   onSelectFile(fileInput: any, item, formdata: FormGroup, index) {
