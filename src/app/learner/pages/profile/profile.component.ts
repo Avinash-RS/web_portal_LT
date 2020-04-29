@@ -1149,7 +1149,7 @@ export class ProfileComponent implements OnInit {
       certificate: this.formBuilder.array([new FormControl("")]),
       qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth: [],
+      year_of_birth:  "05-08-1998",
       profile_img: [],
       user_id: [],
       created_by_ip: [],
@@ -1209,8 +1209,11 @@ export class ProfileComponent implements OnInit {
   // }
 
   getprofileDetails(userid) {
+   
     this.loader.show();
+    console.log('data.data'+userid)
     this.service.view_profile(userid).subscribe((data: any) => {
+      console.log('data.data'+data.data)
       if (data.data.view_profile.success) {
         let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
@@ -1388,14 +1391,20 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
+      
     })
   }
 
   getBoardsUniv() {
-    this.service.get_board_university_details().subscribe(boards => {
-      this.boardValue = boards.data['get_board_university_details'].data['board'];
-      this.uniValue = boards.data['get_board_university_details'].data['university'];
+    this.service.get_institute_details().subscribe(institute => {
+      this.boardValue = institute.data['get_institute_details'].data;
+      this.uniValue= institute.data['get_institute_details'].data;
     })
+    // this.service.get_board_university_details().subscribe(boards => {
+    //   // this.boardValue = boards.data['get_board_university_details'].data['board'];
+    //   // this.uniValue = boards.data['get_board_university_details'].data['university'];
+     
+    // })
   }
 
   getInstitute() {
@@ -1411,9 +1420,13 @@ export class ProfileComponent implements OnInit {
   }
 
   getSpec() {
-    this.service.get_specification_details().subscribe(spec => {
-      this.specValue = spec.data['get_specification_details'].data;
+    this.service.get_institute_details().subscribe(institute => {
+     
+      this.specValue= institute.data['get_institute_details'].data;
     })
+    // this.service.get_specification_details().subscribe(spec => {
+    //   // this.specValue = spec.data['get_specification_details'].data;
+    // })
   }
 
   //All dialogs

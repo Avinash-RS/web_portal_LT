@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
+import { GroupManagementComponent } from './group-management/group-management.component';
+
 
 
 @NgModule({
@@ -35,10 +37,8 @@ import { RouterModule } from '@angular/router';
         RouterModule
          ],
     declarations: [   
+    AddUserComponent, ],
 
-
-       
-    AddUserComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],

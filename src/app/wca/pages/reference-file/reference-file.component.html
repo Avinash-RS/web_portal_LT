@@ -2,13 +2,10 @@
   <div>
     <app-wca></app-wca>
   </div>
-  <nav aria-label="breadcrumb" style="margin-top:5%">
+  <nav aria-label="breadcrumb"  style="margin-top: 5%;">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
-
-      <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
-
-      <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+      <li class="breadcrumb-item active" aria-current="page"> Add Reference file</li>
     </ol>
   </nav>
   <div class="breadcrump-container">
@@ -64,10 +61,13 @@
           </mat-radio-group>
         </div>
         <div class="space-10"></div>
+
+
+
         <div class="ref-input" *ngIf="selectedOption == 'document'">
           <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"  [ngModelOptions]="{standalone: true}">
           <label for="upload-photo" class="upload">{{uploadMsg}}</label>
-          <input type="file" name="photo" id="upload-photo" (change)="uploadDoc($event)" />
+          <input type="file" placeholder="Upload the document" name="photo" id="upload-photo" (change)="uploadDoc($event)" />
         </div>
 
         <div class="ref-input" *ngIf="selectedOption == 'link'">
@@ -87,22 +87,22 @@
       </mat-card>
     </div>
     <div class="file-list">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
 
         <!-- Position Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="type_name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Name </th>
           <td mat-cell *matCellDef="let data"> {{data.type_name}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="module">
+        <ng-container matColumnDef="module_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module </th>
           <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="topic">
+        <ng-container matColumnDef="topic_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic </th>
           <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
         </ng-container>
@@ -112,7 +112,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Type </th>
           <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
         </ng-container>
-        <ng-container matColumnDef="dateAdded">
+        <ng-container matColumnDef="created_on">
           <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
           <td mat-cell *matCellDef="let data"> {{data.created_on}}
           </td>
@@ -129,7 +129,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="5" (page)="next($event)" showFirstLastButtons></mat-paginator>
     </div>
   </div>
   <div style="text-align: center;">

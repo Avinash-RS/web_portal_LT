@@ -13,12 +13,12 @@
 
     <div class="left">
       <!-- <iframe class="player" [src]="urlSafe"></iframe> -->
-      <iframe src="../../../../assets/FSL/index_scorm.html" width="100%" height="600px"></iframe> 
+      <iframe src="../../../../assets/SequencingRandomTest_SCORM20043rdEdition/shared/launchpage.html?content=playing" width="100%" height="600px"></iframe> 
 
     </div>
 
-    <h1 class="subhead">Details about course</h1>
-    <p style="margin-left: 10.8%;font-size: 16px; font-weight: 500;">
+    <!-- <h1 class="subhead">Details about course</h1> -->
+    <!-- <p style="margin-left: 10.8%;font-size: 16px; font-weight: 500;">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
       when an unknown printer took a galley of type and scrambled it to make a type specimen
@@ -46,9 +46,9 @@
       </div>
       <div class="col-md-2">
         <a href=""><b>View More ></b></a>
-      </div>
+      </div> -->
 
-    </div>
+    <!-- </div> -->
     <h1 class="subhead">Resources</h1>
     <section class="accordion" *ngFor="let res of content?.coursedetails">
       <input type="checkbox" name="collapse" [id]="res?.modulename">
@@ -65,15 +65,14 @@
           </div>
 
           <div class="col-4">
-            <mat-form-field style="text-align: right;">
-              <mat-icon matPrefix>mic</mat-icon>
-              <mat-select  placeholder="Resourse">
-                  <mat-option  *ngIf="mod.resourse != null" >
-                    <span *ngFor="let file of mod.resourse.files">
-
+            <mat-form-field style="text-align: right;margin-top: 5%;">
+              <mat-label>Resourse</mat-label>
+              <mat-icon matPrefix>folder</mat-icon>
+              <mat-select>
+                  <mat-option *ngFor="let file of mod.resourse?.files">
+                   
                       <a  href="{{file.path}}" download>{{file.path}}</a>
-                    </span>
-                      
+                  
                   </mat-option>
               </mat-select>
           </mat-form-field>

@@ -64,15 +64,12 @@ export class AddUserComponent implements OnInit {
     ).subscribe((result: any) => {
       console.log(result.data.user_registration.message);
       if (result.data.user_registration.success === 'true') {
-        this.alert.openAlert('Success !', 'User registered successfully');
+        this.alert.openAlert('Success !', 'User added successfully');
       } else {
         this.alert.openAlert(result.data.user_registration.message, null);
       }
     });
   }
-
-
-
 
   columnHeader = ['studendID', 'fname', 'weight', 'symbol', 'select'];
 

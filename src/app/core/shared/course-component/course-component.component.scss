@@ -64,7 +64,7 @@ img {
 mat-icon {
     font-size: 18px;
     -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: $color-red ;
+    -webkit-text-stroke-color: $color-red;
 }
 
 .container {
@@ -82,7 +82,7 @@ mat-icon {
         margin-left: 12%;
         filter: alpha(opacity=0);
         background-color: $color-blue !important;
-        color: $color-white ;
+        color: $color-white;
         cursor: pointer;
     }
 }
@@ -106,4 +106,8 @@ mat-icon {
 
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
+}
+
+.color-grey {
+    color: #363738;
 }
