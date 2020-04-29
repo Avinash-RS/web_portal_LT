@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 
 
-export class MockAuthService extends WcaService {
+export class MockWcaService extends WcaService {
 
     dashboardData = require("../../../assets/mockdata/wca/dashboard.json");
 

@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { WcaService } from '../../services/wca.service';
-import { MockAuthService } from '../../services/wca.mock.service';
+import { MockWcaService } from '../../services/wca.mock.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -44,7 +44,7 @@ describe('DashboardComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       providers: [
-        { provide: WcaService, useClass: MockAuthService },
+        { provide: WcaService, useClass: MockWcaService },
       ]
     })
       .compileComponents();
@@ -102,7 +102,7 @@ describe('DashboardComponent', () => {
     expect(component.breakpoint).toBe(4);
   })
 
-  it('test service', () => {
+  it('Check get created courses', () => {
     component.getCreatedCourses();
     expect(component.createdCourses).toBe(dashboardData.createdCourse.Result);
   })
