@@ -1396,15 +1396,15 @@ export class ProfileComponent implements OnInit {
   }
 
   getBoardsUniv() {
-    this.service.get_institute_details().subscribe(institute => {
-      this.boardValue = institute.data['get_institute_details'].data;
-      this.uniValue= institute.data['get_institute_details'].data;
-    })
-    // this.service.get_board_university_details().subscribe(boards => {
-    //   // this.boardValue = boards.data['get_board_university_details'].data['board'];
-    //   // this.uniValue = boards.data['get_board_university_details'].data['university'];
-     
+    // this.service.get_institute_details().subscribe(institute => {
+    //   this.boardValue = institute.data['get_institute_details'].data;
+    //   this.uniValue= institute.data['get_institute_details'].data;
     // })
+    this.service.get_board_university_details().subscribe(boards => {
+      this.boardValue = boards.data['get_board_university_details'].data['board'];
+      this.uniValue = boards.data['get_board_university_details'].data['university'];
+     
+    })
   }
 
   getInstitute() {
@@ -1420,13 +1420,13 @@ export class ProfileComponent implements OnInit {
   }
 
   getSpec() {
-    this.service.get_institute_details().subscribe(institute => {
+    // this.service.get_institute_details().subscribe(institute => {
      
-      this.specValue= institute.data['get_institute_details'].data;
-    })
-    // this.service.get_specification_details().subscribe(spec => {
-    //   // this.specValue = spec.data['get_specification_details'].data;
+    //   this.specValue= institute.data['get_institute_details'].data;
     // })
+    this.service.get_specification_details().subscribe(spec => {
+      this.specValue = spec.data['get_specification_details'].data;
+    })
   }
 
   //All dialogs

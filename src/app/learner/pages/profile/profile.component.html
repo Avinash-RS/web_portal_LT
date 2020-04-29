@@ -89,9 +89,16 @@
             <!-- //////FIrst section Right part//////// -->
             <div class="col-md-8 col-sm-12 col-12 right">
               <div class="row float_right">
+                <!-- <p ></p> -->
                 <label class="f_size_20 f_wt_400">My Profile</label>
-                <mat-icon (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                <ng-container *ngIf="cannotEdit">
+                  <mat-icon  matTooltip="Click here to change profile details" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                  </mat-icon>
+                </ng-container>
+                <ng-container *ngIf="!cannotEdit">
+                <mat-icon  matTooltip="You can start editing" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
                 </mat-icon>
+                </ng-container>
               </div>
               <br><br><br>
               <div class=row>
