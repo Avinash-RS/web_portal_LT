@@ -773,3 +773,10 @@ button.active {
   background-color: #1f3777 !important;
   border-radius: 7px;
  }
+ .containerShadow{
+   padding: 20px;
+   -webkit-box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.2);
+   -moz-box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.2);
+   box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.2);
+  margin-top: 20px;
+ }
