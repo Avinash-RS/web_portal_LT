@@ -1090,8 +1090,8 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
-  timeLeft: number = 60;
-  resendtimeLeft: number = 60;
+  timeLeft: number = 120;
+  resendtimeLeft: number = 120;
   interval;
   status: string;
   config = {
@@ -1149,7 +1149,7 @@ export class ProfileComponent implements OnInit {
       certificate: this.formBuilder.array([new FormControl("")]),
       qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth: [],
+      year_of_birth:  "05-08-1998",
       profile_img: [],
       user_id: [],
       created_by_ip: [],
@@ -1178,6 +1178,16 @@ export class ProfileComponent implements OnInit {
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       })
+      // const specification = this.profileForm.get('in.specification');
+      // this.profileForm.get('qualification').valueChanges
+      // .subscribe(qualification => {
+      //   if(qualification.level_code !=='10'){
+      //     specification.setValidators(['', myGlobals.req])
+      //   } else {
+      //     specification.setValidators(null)
+      //   }
+      //   specification.updateValueAndValidity();
+      // });
   }
 
   //to get controls for validation
@@ -1235,7 +1245,7 @@ export class ProfileComponent implements OnInit {
         } else
           this.loader.hide();
       }
-    })
+    }) 
   }
   yearOfpassing(){
     this.profileForm.value.qualification.forEach(element => {
@@ -1263,11 +1273,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
     console.log('jsonData', this.profileForm.value)
-    if(this.profileForm.value && this.profileForm.value.qualification) {
-      this.profileForm.value.qualification.forEach(element => {
-        if(element.qualification!={}) {element.qualification = element.qualification._id}
-      });
-    }
+    // if(this.profileForm.value && this.profileForm.value.qualification) {
+    //   this.profileForm.value.qualification.forEach(element => {
+    //     if(element.qualification!={}) {element.qualification = element.qualification._id}
+    //   });
+    // }
     console.log('jsonData', this.profileForm.value)
 
     this.service.update_profile(this.profileForm.value).subscribe(data => {
@@ -1381,14 +1391,20 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
+      
     })
   }
 
   getBoardsUniv() {
-    this.service.get_board_university_details().subscribe(boards => {
-      this.boardValue = boards.data['get_board_university_details'].data['board'];
-      this.uniValue = boards.data['get_board_university_details'].data['university'];
+    this.service.get_institute_details().subscribe(institute => {
+      this.boardValue = institute.data['get_institute_details'].data;
+      this.uniValue= institute.data['get_institute_details'].data;
     })
+    // this.service.get_board_university_details().subscribe(boards => {
+    //   // this.boardValue = boards.data['get_board_university_details'].data['board'];
+    //   // this.uniValue = boards.data['get_board_university_details'].data['university'];
+     
+    // })
   }
 
   getInstitute() {
@@ -1404,9 +1420,13 @@ export class ProfileComponent implements OnInit {
   }
 
   getSpec() {
-    this.service.get_specification_details().subscribe(spec => {
-      this.specValue = spec.data['get_specification_details'].data;
+    this.service.get_institute_details().subscribe(institute => {
+     
+      this.specValue= institute.data['get_institute_details'].data;
     })
+    // this.service.get_specification_details().subscribe(spec => {
+    //   // this.specValue = spec.data['get_specification_details'].data;
+    // })
   }
 
   //All dialogs
