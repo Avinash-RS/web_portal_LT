@@ -172,19 +172,31 @@
   </button>
 </div>
 <!-- grid -->
+<div class="container">
 <div class="row" *ngIf="displayMode === 1">
-<app-grid-container *ngFor='let product of productsList' [product]="product"></app-grid-container>
+  <ng-container *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
+<div class="col-lg-3">
+  <app-course-component [course]="c" [canNavigate]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false" > </app-course-component>
+</div>
+</ng-container>
+
+
+
 
 </div>
-<!-- List -->
-<div class="row" *ngIf="displayMode === 2" >
-<app-list-container *ngFor='let product of productsList' [product]="product"></app-list-container>
+
+
+<div class="row" *ngIf="displayMode === 2">
+  <ng-container *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
+<div class="col-lg-12">
+  <app-course-component [course]="c" [canNavigate]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false" > </app-course-component>
+</div>
+</ng-container>
+
+
+
 
 </div>
-
-
-
-
 </div>
 
 </div>
