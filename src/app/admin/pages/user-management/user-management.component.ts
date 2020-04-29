@@ -113,7 +113,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   checkboxLabel(row?) {
-    if (row.isChecked == undefined) {
+    console.log(row)
+    if (row.isChecked == undefined || row.isChecked == false) {
       row.isChecked = true;
       this.selectedArray.push(row);
       console.log(this.selectedArray)

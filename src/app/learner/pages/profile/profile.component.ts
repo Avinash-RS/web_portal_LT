@@ -1090,7 +1090,7 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
-  timeLeft: number = 60;
+  timeLeft: number;
   resendtimeLeft: number = 60;
   interval;
   status: string;
@@ -1149,7 +1149,7 @@ export class ProfileComponent implements OnInit {
       certificate: this.formBuilder.array([new FormControl("")]),
       qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth: [],
+      year_of_birth:  "05-08-1998",
       profile_img: [],
       user_id: [],
       created_by_ip: [],
@@ -1178,6 +1178,16 @@ export class ProfileComponent implements OnInit {
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       })
+      // const specification = this.profileForm.get('in.specification');
+      // this.profileForm.get('qualification').valueChanges
+      // .subscribe(qualification => {
+      //   if(qualification.level_code !=='10'){
+      //     specification.setValidators([Validators.required])
+      //   } else {
+      //     specification.setValidators(null)
+      //   }
+      //   specification.updateValueAndValidity();
+      // });
   }
 
   //to get controls for validation
@@ -1235,16 +1245,16 @@ export class ProfileComponent implements OnInit {
         } else
           this.loader.hide();
       }
-    })
+    }) 
   }
   yearOfpassing(){
     this.profileForm.value.qualification.forEach(element => {
       if(element.year_of_passing > moment().year()){
         this.alert.openAlert('Invalid year', null);
-        // this.cannotEdit = true;
+        // this.cannotEdit = false;
       } 
       // else{
-      //   this.cannotEdit = false;
+      //   this.cannotEdit = true;
       // }
     });
   }
@@ -1263,11 +1273,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
     console.log('jsonData', this.profileForm.value)
-    if(this.profileForm.value && this.profileForm.value.qualification) {
-      this.profileForm.value.qualification.forEach(element => {
-        if(element.qualification!={}) {element.qualification = element.qualification._id}
-      });
-    }
+    // if(this.profileForm.value && this.profileForm.value.qualification) {
+    //   this.profileForm.value.qualification.forEach(element => {
+    //     if(element.qualification!={}) {element.qualification = element.qualification._id}
+    //   });
+    // }
     console.log('jsonData', this.profileForm.value)
 
     this.service.update_profile(this.profileForm.value).subscribe(data => {
@@ -1381,13 +1391,19 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
+      
     })
   }
 
   getBoardsUniv() {
+    // this.service.get_institute_details().subscribe(institute => {
+    //   this.boardValue = institute.data['get_institute_details'].data;
+    //   this.uniValue= institute.data['get_institute_details'].data;
+    // })
     this.service.get_board_university_details().subscribe(boards => {
       this.boardValue = boards.data['get_board_university_details'].data['board'];
       this.uniValue = boards.data['get_board_university_details'].data['university'];
+     
     })
   }
 
@@ -1404,6 +1420,10 @@ export class ProfileComponent implements OnInit {
   }
 
   getSpec() {
+    // this.service.get_institute_details().subscribe(institute => {
+     
+    //   this.specValue= institute.data['get_institute_details'].data;
+    // })
     this.service.get_specification_details().subscribe(spec => {
       this.specValue = spec.data['get_specification_details'].data;
     })
@@ -1471,6 +1491,7 @@ export class ProfileComponent implements OnInit {
         this.isenable = false;
         this.showotp = true;
         //Timer
+        this.timeLeft = 60;
         this.interval = setInterval(() => {
           if (this.timeLeft > 0) {
             this.timeLeft--;
