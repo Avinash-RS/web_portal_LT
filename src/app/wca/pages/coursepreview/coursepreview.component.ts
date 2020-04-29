@@ -1,4 +1,4 @@
-import { Component, OnInit ,TemplateRef} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -31,47 +31,47 @@ export class CoursepreviewComponent implements OnInit {
   content: any;
   breakpoint: number;
   detail: any;
-  isshowPublish : boolean = false;
-  constructor( public service: CommonServicesService,private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,private loader: NgxSpinnerService,) {
-    this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+  isshowPublish: boolean = false;
+  constructor(public service: CommonServicesService, private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
+    this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
-    console.log( this.detail)
-    if(this.detail?.type === "create"){
-        this.isshowPublish = true
-    }else{
+    console.log(this.detail)
+    if (this.detail?.type === "create") {
+      this.isshowPublish = true
+    } else {
       this.isshowPublish = false
     }
 
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
-        console.log(this.course ,'course')
+        console.log(this.course, 'course')
         this.loader.hide();
       } else
         this.loader.hide();
     });
-   }
+  }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.getModuleData()
   }
 
-  closedialogbox(){
+  closedialogbox() {
     this.dialog.closeAll();
   }
 
-  published(){
-    let detail ={ 
-      id:this.course.course_id,
-      name : this.course.course_name 
+  published() {
+    let detail = {
+      id: this.course.course_id,
+      name: this.course.course_name
     }
 
-    this.route.navigateByUrl('/Wca/listCourses ', { state: { detail: detail } });
+    this.route.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
   }
 
-  editResource(){
+  editResource() {
     this.route.navigateByUrl('/Wca/rf');
   }
   clickedT(i) {
@@ -81,11 +81,11 @@ export class CoursepreviewComponent implements OnInit {
     this.learnerservice.getModuleData(1).subscribe(data => {
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
-      
-        this.content = data.data['getmoduleData']['data'][0]
-        console.log( this.content,"contenyt")
+
+      this.content = data.data['getmoduleData']['data'][0]
+      console.log(this.content, "contenyt")
       // }
-     
+
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
@@ -99,6 +99,6 @@ export class CoursepreviewComponent implements OnInit {
 
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
-  
+
   }
 }

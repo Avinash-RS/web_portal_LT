@@ -10,3 +10,8 @@ h2 {
     text-transform: capitalize;
     margin-left: 15px;
 }
+::ng-deep .mat-progress-spinner {
+    position: absolute !important;
+    top: 50% !important;
+    left: 45% !important;
+  }

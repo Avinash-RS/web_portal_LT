@@ -2,31 +2,30 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item">Home</li>
     <li class="breadcrumb-item"><a href="/Wca">Wca</a></li>
-    <li class="breadcrumb-item active" aria-current="page"></li>
+    <li class="breadcrumb-item active" aria-current="page">{{course && course.name}}</li>
   </ol>
 </nav>
 
 <div class="p-5px">
-  <h2>Publish</h2>
+  <h2>Publish {{course && course.name}} </h2>
   <div class="container">
     <mat-card style="text-align: left;box-shadow: 0 2px 10px #6c757d;">
       <h3>
         Select the catalog to publish the course
       </h3>
       <div class="row m-l-5 ht-80px">
-        <div class="col-md-2">
+        <div class="col-md-3 col-sm-6 col-11">
           <button mat-raised-button (click)="show = !show">Associate to Catalogue</button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4  col-sm-6 col-11">
           <ol class="tree" *ngIf="show">
             <li>
               <input type="checkbox" disabled checked id="menu-1" />
-              <label for="menu-1">Category</label>
-
+              <label for="menu-1">It & Software</label>
               <ol>
                 <li>
                   <input type="checkbox" disabled checked id="menu-1-1" />
-                  <label for="menu-1-1">Sub Category</label>
+                  <label for="menu-1-1">Machine Learning</label>
 
                 </li>
               </ol>

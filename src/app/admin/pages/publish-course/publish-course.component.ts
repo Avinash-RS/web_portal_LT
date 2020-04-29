@@ -11,7 +11,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 })
 export class PublishCourseComponent implements OnInit {
   course: any;
-show :boolean = false;
+  show: boolean = false;
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService, private alert: AlertServiceService, ) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -25,8 +25,13 @@ show :boolean = false;
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data: Boolean) => {
       if (data) {
         this.service.publishCourse(this.course._id, true).subscribe((res: any) => {
+          console.log(res)
         })
       }
     })
+  }
+
+  draftCourse() {
+    this.route.navigate(['/Wca']);
   }
 }

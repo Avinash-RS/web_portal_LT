@@ -3,13 +3,13 @@ import gql from "graphql-tag";
 export const get_user_group = gql`
   query get_user_group{
     get_user_group {
-        success
-        message{
-            _id
-            group_name
-            group_type
-            is_active
-        }
+      success
+      message{
+          _id
+          group_name
+          group_type
+          is_active
+      }
     }
   }`;
 
@@ -23,10 +23,11 @@ export const search_user = gql`
         is_admin
         is_active
         user_id
+        username
         is_blocked
         email
-        full_name 
-        username     
+        full_name
+        mobile_number
       }
     }
   }`;
