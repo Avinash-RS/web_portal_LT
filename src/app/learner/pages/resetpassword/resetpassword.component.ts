@@ -30,7 +30,7 @@ export class ResetpasswordComponent implements OnInit {
   showpsseye: Boolean = false;
   showconpassbutton: Boolean = false;
   showconpsseye: Boolean = false;
-  isLinkActive: Boolean = true;
+  isLinkActive: Boolean;
   constructor(
     private loader : Ng4LoadingSpinnerService,
     private router:Router, 
