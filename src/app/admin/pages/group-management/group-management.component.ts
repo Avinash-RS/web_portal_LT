@@ -1,35 +1,15 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
-/**
- * Node for to-do item
- */
-export class TodoItemNode {
-  children: TodoItemNode[];
-  item: string;
-  group_id: string
-  hierarchy_id: string
-}
-
-/** Flat to-do item node with expandable and level information */
-export class TodoItemFlatNode {
-  item: string;
-  level: number;
-  expandable: boolean;
-  group_id: string;
-  hierarchy_id: string;
-  children: TodoItemNode[];
-}
-
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-group-management',
   templateUrl: './group-management.component.html',
-  styleUrls: ['./group-management.component.scss']
+  styleUrls: ['./group-management.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class GroupManagementComponent implements OnInit {
@@ -37,34 +17,9 @@ export class GroupManagementComponent implements OnInit {
   adminDetails: any;
   currentpath = null;
   pagenumber = 0;
-  dataChange = new BehaviorSubject<TodoItemNode[]>([]);
-  get data(): TodoItemNode[] { return this.dataChange.value; }
-  /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
-
-  /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap = new Map<TodoItemNode, TodoItemFlatNode>();
-
-  /** A selected parent node to be inserted */
-  selectedParent: TodoItemFlatNode | null = null;
-
-  /** The new item's name */
-  newItemName = '';
-
-  treeControl: FlatTreeControl<TodoItemFlatNode>;
-
-  treeFlattener: MatTreeFlattener<TodoItemNode, TodoItemFlatNode>;
-
-  dataSource: MatTreeFlatDataSource<TodoItemNode, TodoItemFlatNode>;
-
-  /** The selection for checklist */
-  checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
-
   constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
-      this.isExpandable, this.getChildren);
-    this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.treeSource = new MatTreeNestedDataSource<any>();
+    this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
@@ -77,22 +32,40 @@ export class GroupManagementComponent implements OnInit {
     this.adminservice.getgroup(data).subscribe((result: any) => {
       console.log(result);
       this.groups = result.data.getgroup.message;
-      console.log(this.groups);
-      const array = [];
-      this.groups.forEach(element => {
-        const node = new TodoItemNode();
-        node.item = element.group_name;
-        node.group_id = element.group_id;
-        node.hierarchy_id= element.hierarchy_id;
-        array.push(node);
-      });
-      this.dataSource.data = array;
+      this.treeSource.data = null;
+      this.treeSource.data = this.groups;
+      this.dataSource$.next(this.groups);
     });
   }
 
-    /**
-     * Determines whether scroll down on
-     */
+  /** sub group */
+  loadsubgroup(node?: any) {
+    const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
+    this.adminservice.getgroup(data).subscribe((result: any) => {
+      const group = result.data.getgroup.message;
+      console.log(group);
+      if (node) {
+        // node.children = [
+        //   ...(node.children || []),
+        //   group
+        // ];
+        node.children = group;
+        // if (!this.treeControl.isExpanded(node)) {
+        this.treeControl.expand(node);
+        // }
+      } else {
+        this.dataSource$.next([
+          ...this.dataSource$.value, group[0]]);
+      }
+      const array = this.treeSource.data;
+      this.treeSource.data = null;
+      this.treeSource.data = array;
+    });
+  }
+
+  /**
+   * Determines whether scroll down on
+   */
   onScrollDown(event) {
     console.log(event);
     this.pagenumber = this.pagenumber + 10;
@@ -101,50 +74,22 @@ export class GroupManagementComponent implements OnInit {
       console.log(result);
       this.groups = result.data.getgroup.message;
       this.groups.push(...result.data.getgroup.message);
-
       console.log(this.groups);
-      const array = [];
-      this.groups.forEach(element => {
-        const node = new TodoItemNode();
-        node.item = element.group_name;
-        node.group_id = element.group_id;
-        node.hierarchy_id= element.hierarchy_id;
-        array.push(node);
-      });
-      this.dataSource.data = array;
+      let array: any;
+      array = this.treeSource.data.push(...result.data.getgroup.message);
+      this.treeSource.data = null;
+      this.treeSource.data = array;
     });
   }
 
-  /** Loads sub group */
-  loadsubgroup(node1) {
-    const index = this.dataSource.data.findIndex(x => x.group_id === node1.group_id);
-    const data = { input_id: node1.group_id, type: 'group', pagenumber: 0 };
-    this.adminservice.getgroup(data).subscribe((result: any) => {
-      const group = result.data.getgroup.message;
-      if (group.length) {
-        group.forEach(element => {
-          const node = new TodoItemNode();
-          node.item = element.group_name;
-          node.group_id = element.group_id;
-          node.hierarchy_id= element.hierarchy_id;
-          if (node1.children) {
-            node1.children.push(node);
-          } else {
-            node1.children = [];
-            node1.children.push(node);
-          }
-        });
-      }
-      let array = [];
-      array = node1;
-      this.dataChange.next(this.data);
-      let array1 = [];
-      array1 = this.dataSource.data;
-      array1[index] = array;
-      this.dataChange.next(this.data);
-      this.dataSource.data = array1;
-    });
-  }
+
+  /** tree source stuff */
+  readonly dataSource$: BehaviorSubject<any[]>;
+  readonly treeSource: MatTreeNestedDataSource<any>;
+  /** tree control */
+  readonly treeControl = new NestedTreeControl<any>(node => node.children);
+
+  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   selectgroup(node) {
     console.log(node);
@@ -156,7 +101,7 @@ export class GroupManagementComponent implements OnInit {
   }
   savegroup(form) {
     console.log(this.currentpath);
-    let hierarchy ;
+    let hierarchy;
     if (form.valid) {
       if (this.currentpath.hierarchy_id) {
         const str = this.currentpath.hierarchy_id.split('h');
@@ -182,53 +127,4 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  getLevel = (node: TodoItemFlatNode) => node.level;
-
-  isExpandable = (node: TodoItemFlatNode) => node.expandable;
-
-  getChildren = (node: TodoItemNode): TodoItemNode[] => node.children;
-
-  hasChild = (_: number, _nodeData: TodoItemFlatNode) => _nodeData.expandable;
-
-  hasNoContent = (_: number, _nodeData: TodoItemFlatNode) => _nodeData.item === '';
-
-  /**
-   * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
-   */
-  transformer = (node: TodoItemNode, level: number) => {
-    const existingNode = this.nestedNodeMap.get(node);
-    const flatNode = existingNode && existingNode.item === node.item
-      ? existingNode
-      : new TodoItemFlatNode();
-    flatNode.item = node.item;
-    flatNode.level = level;
-    flatNode.group_id = node.group_id;
-    flatNode.expandable = !!node.children;
-    flatNode.children = node.children;
-    flatNode.hierarchy_id = node.hierarchy_id;
-    this.flatNodeMap.set(flatNode, node);
-    this.nestedNodeMap.set(node, flatNode);
-    return flatNode;
-  }
-
-  /** Whether all the descendants of the node are selected */
-  descendantsAllSelected(node: TodoItemFlatNode): boolean {
-    const descendants = this.treeControl.getDescendants(node);
-    return descendants.every(child => this.checklistSelection.isSelected(child));
-  }
-
-  /** Whether part of the descendants are selected */
-  descendantsPartiallySelected(node: TodoItemFlatNode): boolean {
-    const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some(child => this.checklistSelection.isSelected(child));
-    return result && !this.descendantsAllSelected(node);
-  }
-
-  todoItemSelectionToggle(node: TodoItemFlatNode): void {
-    this.checklistSelection.toggle(node);
-    const descendants = this.treeControl.getDescendants(node);
-    this.checklistSelection.isSelected(node)
-      ? this.checklistSelection.select(...descendants)
-      : this.checklistSelection.deselect(...descendants);
-  }
 }
