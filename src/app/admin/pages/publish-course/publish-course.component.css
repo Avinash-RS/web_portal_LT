@@ -1,0 +1,12 @@
+h2,
+h3 {
+    color: #1F3777;
+    
+}
+
+h2 {
+    text-transform: capitalize;
+}
+h2,h3,p,button {
+    margin-left: 15px;
+}

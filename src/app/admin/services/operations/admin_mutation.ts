@@ -23,3 +23,25 @@ export const user_registration = gql`
     }
   }
 `;
+
+export const createusergroup = gql`
+  mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!, $admin_id: String!) {
+  createusergroup(group_name: $group_name,group_type: $group_type,
+  parent_group_id: $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $admin_id) {
+      success
+      error_msg
+      message{
+        _id
+        group_name
+        group_type
+        admin_id
+        created_on
+        updated_on
+        created_by
+        is_active
+        group_id
+        parent_id
+      }
+  }
+}
+`;

@@ -271,6 +271,9 @@ td {
 
 ////////////////////////////////////////////////////////////////////////
 
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color: $color-blue !important;
+}
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
