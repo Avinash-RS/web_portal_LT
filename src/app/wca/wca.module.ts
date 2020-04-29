@@ -11,14 +11,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
-import { AuthGuard } from '@core/services/_helpers/auth.guard';
+// import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WcaComponent } from './pages/wca/wca.component';
 import { CreateTemplateComponent } from './pages/create-template/create-template.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatListModule, MatTableModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatSortModule } from '@angular/material';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 import { WcaService } from "./services/wca.service";
@@ -27,10 +27,11 @@ import { UploadFilesComponent } from './pages/upload-files/upload-files.componen
 import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
 import { ReferenceFileComponent } from './pages/reference-file/reference-file.component';
 import { PipeModule } from '../pipes/pipe.module';
+import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, data : {title:'Web Content Authoring Dashboard'}},
-  { path: 'wca', component: WcaComponent, data : {title:'Web Content Authoring Dashboard'}},
+  { path: 'wca', component: WcaComponent,  data : {title:'Web Content Authoring Dashboard'}},
   { path: 'addcourse', component: CreateCourseComponent,  data : {title:'Add new Course'}},
   { path: 'viewmodule', component: ViewModuleComponent,  data : {title:'View Module'} },
   { path: 'addmodule', component: CreateModuleComponent,  data : {title:'Create Module'}},
@@ -39,13 +40,14 @@ const routes: Routes = [
   { path: 'addtopic', component: CreateTopicComponent, data : {title:'Create Topic'}},
   { path: 'addfile', component: UploadFilesComponent, data : {title:'Upload Files'}},
   { path: 'mycourse', component: MycreatedCourseComponent, data : {title:'My created Course'}},
-  { path: 'ct', component: ChooseTemplateComponent,data : {title:'Choose Template'}},
-  { path: 'rf', component: ReferenceFileComponent, data : {title:'Reference File'}}
-
+  { path: 'ct', component: ChooseTemplateComponent, data : {title:'Choose Template'}},
+  { path: 'rf', component: ReferenceFileComponent, data : {title:'Reference File'}},
+  { path: 'previewcourse', component: CoursepreviewComponent, data : {title:'Courses Preview'}}
+  
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),
@@ -64,6 +66,7 @@ const routes: Routes = [
     ApolloModule,
     DragDropModule,
     MatListModule,
+    MatSortModule,
     MatTableModule
   ],
   providers: [Apollo],

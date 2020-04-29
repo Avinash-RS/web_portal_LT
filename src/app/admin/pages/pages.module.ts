@@ -8,10 +8,13 @@ import {
         MatIconModule,
         MatCheckboxModule,
         MatListModule,
+        MatTreeModule
        } from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -21,6 +24,9 @@ import { GroupManagementComponent } from './group-management/group-management.co
 
 @NgModule({
     imports: [
+        CdkTreeModule,
+        MatTreeModule,
+        CdkTableModule,
         MatCardModule,
         CommonModule,
         FlexLayoutModule,

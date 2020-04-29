@@ -32,10 +32,12 @@ export const menus = [
     {
         'name': 'Course Management',
         'icon': 'list',
-        'link': false,
-        'open': false,
+        'link': 'Wca',
+        'chip': false,
+        'open': true,
         
     }
+    
    
   
 ];
