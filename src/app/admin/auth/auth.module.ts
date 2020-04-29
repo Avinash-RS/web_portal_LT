@@ -68,7 +68,6 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatTreeModule,
         InfiniteScrollModule
 
-
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
