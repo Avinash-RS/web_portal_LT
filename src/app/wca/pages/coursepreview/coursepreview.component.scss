@@ -252,7 +252,7 @@
 }
 ::ng-deep mat-icon {
   cursor: pointer;
-  color: $color-darkGrey;
+  color:#5e5e5e96;
 }
 ul li:before {
   content: none;
@@ -310,6 +310,8 @@ ol{
   border-radius: 50px;
   color: var(--white);
 }
+
+
 
 .close-icon:hover {
   transform: rotate(180deg);

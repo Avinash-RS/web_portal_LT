@@ -150,10 +150,12 @@ tr.mat-row {
     color: $color-darkGrey;
     font-weight: 400;
     margin: 5px 0 5px 0;
-    width: 100%;
+    width: 170px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
  }
 
   .mat-select-placeholder {
@@ -165,6 +167,8 @@ tr.mat-row {
     position: absolute;
     z-index: -1;
  }
+
+ 
 
  .submit-btn {
     height: 30px;
@@ -212,13 +216,12 @@ tr.mat-row {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: stretch;
-    width: 15%;
-    float: right;
-    margin-right: 24px;
+
+    
 }
 
 .searchicon{
- color: $color-blank;
+ color: $icon-color;
 }
 .input-group>.input-group-append>.input-group-text{
     margin-bottom: 7px;
@@ -227,5 +230,22 @@ tr.mat-row {
   .breadcrumb{
     background-color: transparent;
   }
+.search{
+    width: 15% !important;
+    float: right;
+    margin-right: 24px;
+}
 
-  
+.paperclip{
+    color: $icon-color;
+    margin-right: 5px;
+}
+.bg{
+    margin-top: 5px;
+    border: 0px solid !important;
+    background-color: $color-light-blue;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    height: 35px !important;
+}
+
