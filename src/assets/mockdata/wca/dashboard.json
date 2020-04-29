@@ -1,0 +1,19 @@
+{
+    "createdCourse": {
+        "Code": 2001,
+        "Message": "Success",
+        "Result": [
+            {
+                "_id": "5e9a96f4989ce6fcc7165d80",
+                "courseid": "CRS00013",
+                "course_name": "Thermodynamics",
+                "rating": 2,
+                "max_student_enrollments_allowed": 400,
+                "price": 450,
+                "course_img_url": "https://edutechstorage.blob.core.windows.net/container1/images/621874479379863-chennai-tamil-nadu%20(2).jpg",
+                "short_description": "Intruduction to Thermodynamics",
+                "publishedOn": "4/18/2020, 10:51:22 AM"
+            }
+        ]
+    }
+}

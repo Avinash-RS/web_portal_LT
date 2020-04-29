@@ -137,7 +137,7 @@ export class DashboardComponent implements OnInit {
     this.service.getCreatedCourse().subscribe((data: any) => {
 
       this.createdCourses = data.Result;
-
+      debugger
     },err => {
       this.spinner.hide();
     });
