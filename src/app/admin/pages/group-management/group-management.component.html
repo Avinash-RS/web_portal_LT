@@ -1,7 +1,18 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Group/Sub Group</li>
+  </ol>
+</nav>
+
+<div class="container">
+
 <h1> Group Management</h1>
+
+<div class="container margin20">
 <div class="row">
   <div class="card col-3">
-    <h1>Select Group/Sub Group</h1>
+    <h3>Select Group/Sub Group</h3>
     <button mat-button [matMenuTriggerFor]="menu" (click)="getgroups()">Group List</button>
   <mat-menu #menu="matMenu">
    <button mat-menu-item style="min-width: 300px ;min-height: 500px;"   infiniteScroll
@@ -55,7 +66,7 @@
     
 
   </div>
-  <div class="col-8">
+  <div class="col-9">
     <div class="tab_container">
       <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
       <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
@@ -87,4 +98,6 @@
       </section>
     </div>
   </div>
+</div>
+</div>
 </div>
