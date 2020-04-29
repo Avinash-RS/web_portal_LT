@@ -1,5 +1,5 @@
 <app-header></app-header>
-<br>
+<!-- <br>
 <br>
 <input class="variation" id="bluepurple" type="radio" value="1" name="color" checked="checked"/>
 <main id="bluepurple">
@@ -19,8 +19,7 @@
       <div (click)="test();showdesc=false" class="option__button option--list"><span></span><span></span><span></span><span></span></div>
     </div>
     <div class="main">
-  
-        <!-- Actual search box -->
+
         <div class="form-group has-search">
           <span class="fa fa-search form-control-feedback"></span>
           <input type="text" class="form-control" placeholder="Search">
@@ -36,7 +35,7 @@
         <h5 class="filters__title">Category</h5>
         <div class="filters__item" *ngFor ="let cat of categories;let ind = index">
           <div class="checkbox">
-            <input  name="check" id="{{ind+1}}" (change)="getcourses(cat)"
+            <input  name="check"  id="{{ind+1}}" [checked]="selected === ind" (change)="selected = ind" (change)="getcourses(cat)"
                  type="checkbox"/>
             <label (click)="getcourses(cat)" for="{{ind+1}}">{{cat.category_name}}<span class="box"></span>
             </label> 
@@ -110,7 +109,7 @@
           </div>
       </div>
       <div class="filters__item">
-      <a class="button" (click)="loadcategoryandcourses()">Clear</a>
+      <a class="button" (click)="loadcategoryandcourses();check=false">Clear</a>
       </div>
     </section>
   </div>
@@ -119,12 +118,12 @@
     <div class="profile" *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
       <div class="profile__image"><img src="{{c?.course_img_url}}" alt="Course Image"/></div>
       <div *ngIf="showdesc" class="overlayinn">
-        <!-- <h2>Description</h2> -->
+    
         <h6>{{c?.course_description}}</h6>
     </div>
       <div class="profile__info">
         <h3>{{c?.course_name}}</h3>
-        <!-- <div class="box red"></div> -->
+     
         <p *ngIf="!showdesc" class="profile__info__extra">{{c?.course_description}}</p>
       </div>
       <div class="profile__stats">
@@ -142,4 +141,50 @@
   </section>
 </main>
 <br>
-<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event" ></pagination-controls>
+<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event" ></pagination-controls> -->
+
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+     
+      <li class="breadcrumb-item active" aria-current="page">All Courses</li>
+  </ol>
+</nav>
+
+
+<div class="container">
+<div class="btn-group pull-right">
+  <!-- <button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
+  [ngClass]="{'btn-primary active': displayMode === 1}" >
+  <i class="fa fa-search"></i>
+</button> -->
+<button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
+ >
+<i class="fa fa-filter"></i>
+</button>
+  <button class="icon_fnt" type="button"(click)="onDisplayModeChange(1)"
+      [ngClass]="{'btn-primary active': displayMode === 1}" >
+      <i class="fa fa-th"></i>
+  </button>
+  <button class="icon_fnt" type="button"  (click)="onDisplayModeChange(2)"
+      [ngClass]="{'btn-primary active': displayMode === 2}" >
+      <i class="fa fa-list"></i>
+  </button>
+</div>
+<!-- grid -->
+<div class="row" *ngIf="displayMode === 1">
+<app-grid-container *ngFor='let product of productsList' [product]="product"></app-grid-container>
+
+</div>
+<!-- List -->
+<div class="row" *ngIf="displayMode === 2" >
+<app-list-container *ngFor='let product of productsList' [product]="product"></app-list-container>
+
+</div>
+
+
+
+
+</div>
+
+</div>

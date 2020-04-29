@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule,MatTreeModule } from '@angular/material';
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule, MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -19,6 +19,7 @@ import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.
 import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 import { WcaModule } from '../../wca/wca.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -61,11 +62,12 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatDialogModule,
         MatTooltipModule,
         MatPaginatorModule,
-
         MatProgressBarModule,
         MatAutocompleteModule,
         MatExpansionModule,
         MatTableModule,
+        MatTreeModule,
+        InfiniteScrollModule,
         WcaModule
        
 

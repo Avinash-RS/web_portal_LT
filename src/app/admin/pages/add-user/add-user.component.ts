@@ -183,7 +183,7 @@ export class AddUserComponent implements OnInit {
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         console.log(result);
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Uploaded Successfully');
+          this.alert.openAlert('Success !', 'Uploaded in Progress ...');
           this.selectedfile = '';
         } else {
           this.alert.openAlert('Warning !', result.message);
