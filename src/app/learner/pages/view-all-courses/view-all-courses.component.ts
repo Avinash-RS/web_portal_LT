@@ -16,7 +16,7 @@ export class ViewAllCoursesComponent implements OnInit {
   allcourses: any;
   showdesc = true;
   pagenumber = 0;
-  displayMode: number;
+  displayMode: number =1;
   constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) { }
 
   ngOnInit() {
