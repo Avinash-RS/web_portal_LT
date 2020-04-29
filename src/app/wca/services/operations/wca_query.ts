@@ -29,4 +29,13 @@ export const remove_doc_ref = gql`
         }
     
   }`;
-  
+  export const get_module_topic = gql`
+  query remove_doc_ref{
+    remove_doc_ref {
+      data{
+        data{
+          modulename
+        }
+      }
+    }
+  }`;
