@@ -1090,8 +1090,8 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
-  timeLeft: number = 60;
-  resendtimeLeft: number = 60;
+  timeLeft: number = 120;
+  resendtimeLeft: number = 120;
   interval;
   status: string;
   config = {
@@ -1178,6 +1178,16 @@ export class ProfileComponent implements OnInit {
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       })
+      // const specification = this.profileForm.get('in.specification');
+      // this.profileForm.get('qualification').valueChanges
+      // .subscribe(qualification => {
+      //   if(qualification.level_code !=='10'){
+      //     specification.setValidators(['', myGlobals.req])
+      //   } else {
+      //     specification.setValidators(null)
+      //   }
+      //   specification.updateValueAndValidity();
+      // });
   }
 
   //to get controls for validation
@@ -1235,7 +1245,7 @@ export class ProfileComponent implements OnInit {
         } else
           this.loader.hide();
       }
-    })
+    }) 
   }
   yearOfpassing(){
     this.profileForm.value.qualification.forEach(element => {
@@ -1263,11 +1273,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
     console.log('jsonData', this.profileForm.value)
-    if(this.profileForm.value && this.profileForm.value.qualification) {
-      this.profileForm.value.qualification.forEach(element => {
-        if(element.qualification!={}) {element.qualification = element.qualification._id}
-      });
-    }
+    // if(this.profileForm.value && this.profileForm.value.qualification) {
+    //   this.profileForm.value.qualification.forEach(element => {
+    //     if(element.qualification!={}) {element.qualification = element.qualification._id}
+    //   });
+    // }
     console.log('jsonData', this.profileForm.value)
 
     this.service.update_profile(this.profileForm.value).subscribe(data => {
