@@ -72,7 +72,7 @@ mat-icon {
     margin-left: 2%;
 
     .overlay {
-        height: 80%;
+        height: 70%;
         width: 76%;
         position: absolute;
         overflow: hidden;
@@ -107,7 +107,10 @@ mat-icon {
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
 }
-
+.enroll{
+    background-color: #1f3777;
+    color: #fff;
+}
 .color-grey {
     color: #363738;
 }

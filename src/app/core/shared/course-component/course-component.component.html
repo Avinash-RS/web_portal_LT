@@ -59,6 +59,16 @@
       </mat-progress-bar>
     </div>
   </div> -->
+  <div class="row" *ngIf="showEnroll">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-12 text-center ">
+    <div class="col-md-6 col-lg-6 col-sm-6" ><i class="fa fa-users"></i> 232323</div> <div class="col-md-6 col-lg-6 col-sm-6" ><bar-rating [(rate)]="rate" [max]="5"></bar-rating>
+      </div>
+    
+   
+      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300" (click)="login()">ENROLL NOW
+      </button>
+    </div>
+  </div>
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
     <br>

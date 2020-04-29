@@ -24,7 +24,10 @@ export class CourseComponentComponent implements OnInit {
   @Input('goto') goto: string;
 //here type will come now we need to navigate to your page
   @Input('isDraft') isDraft: boolean;
+  @Input('showEnroll') showEnroll: boolean =false;
 
+  
+  currentRate;
 
   userDetail: any;
   recorded_data: any;
