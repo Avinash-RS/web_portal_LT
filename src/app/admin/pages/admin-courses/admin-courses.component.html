@@ -12,7 +12,7 @@
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
   </div>
 
-  <div class="container">
+  <div class="container" *ngIf = "!loader">
     <div class="col-md-12">
       <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
         <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">

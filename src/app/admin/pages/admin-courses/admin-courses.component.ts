@@ -11,14 +11,14 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any = 'published';
+  type: any ;
   goto: any;
   showPublishedDate: boolean;
   loader: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
-    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
+    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
@@ -37,7 +37,7 @@ export class AdminCoursesComponent implements OnInit {
         this.courseList = res.data.get_course_published.message;
         this.goto = 'publish';
         this.showPublishedDate = true;
-        // this.loader = false;
+        this.loader = false;
       })
     }
     else if (this.type == 'draft') {
