@@ -16,8 +16,7 @@ export class ToolbarComponent implements OnInit {
 	@Input() matDrawerShow;
   
 	searchOpen: boolean = false;
-	toolbarHelpers : any;
-		// toolbarHelpers = ToolbarHelpers;
+		toolbarHelpers = ToolbarHelpers;
 		
   	constructor(private adminService: AdminServicesService) { }
 
@@ -27,8 +26,8 @@ export class ToolbarComponent implements OnInit {
 			this.feedNotificationData(admin_details._id);
   	}
 		feedNotificationData(admin_id){
-      this.adminService.getNotificationData(admin_id).subscribe((data: any) => {
-			 this.toolbarHelpers = data.getnotificationreports.message;
+      this.adminService.getNotificationData(admin_id).subscribe((result: any) => {
+			 this.toolbarHelpers.notifications = result.data['getnotificationreports'].message
 			 console.log(this.toolbarHelpers);
       })
     }
