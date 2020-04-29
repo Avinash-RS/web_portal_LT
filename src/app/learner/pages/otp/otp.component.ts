@@ -35,6 +35,8 @@ export class OtpComponent implements OnInit {
   timeLeft: number = 60;
   interval;
   status: string;
+  minutes: number;
+  seconds: number;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -88,15 +90,20 @@ get f() { return this.otpForm.controls; }
             this.isenable = false;
             this.showotp = true;
             //Timer
+            this.timeLeft = 120;
+            // if(this.timeLeft > 60){
               this.interval = setInterval(() => {
-          if(this.timeLeft > 0) {
-            this.timeLeft--;
-          } else {
-            this.timeLeft = 0;
-            // this.finish();
-          }
-        },1000)
-          } 
+                if (this.timeLeft > 0) {
+                  this.timeLeft--;
+                   this.minutes = Math.floor(this.timeLeft/60);
+                  this.seconds = this.timeLeft -this.minutes * 60;
+    
+                } else {
+                  this.timeLeft = 0;
+                  // this.verifybutton = true;
+                }
+              }, 1000)
+            } 
       })
   
   }

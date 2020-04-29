@@ -48,7 +48,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
   focusout(e){
-    if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 0){
+    console.log('e',e.target.value)
+    if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 9){
       this.forgotUsername.controls['email'].disable();
       this.isshow = false;
     }

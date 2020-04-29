@@ -1090,8 +1090,8 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
-  timeLeft: number;
-  resendtimeLeft: number = 60;
+  timeLeft: number = 120;
+  resendtimeLeft: number = 120;
   interval;
   status: string;
   config = {
@@ -1112,6 +1112,8 @@ export class ProfileComponent implements OnInit {
   resendOtp: Boolean = false;
   sendOtp: Boolean = false;
   levelCode: any;
+  minutes: number;
+  seconds: number;
   
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -1491,16 +1493,20 @@ export class ProfileComponent implements OnInit {
         this.isenable = false;
         this.showotp = true;
         //Timer
-        this.timeLeft = 60;
-        this.interval = setInterval(() => {
-          if (this.timeLeft > 0) {
-            this.timeLeft--;
-          } else {
-            this.timeLeft = 0;
-            // this.finish();
-            this.verifybutton = true;
-          }
-        }, 1000)
+        this.timeLeft = 120;
+        // if(this.timeLeft > 60){
+          this.interval = setInterval(() => {
+            if (this.timeLeft > 0) {
+              this.timeLeft--;
+               this.minutes = Math.floor(this.timeLeft/60);
+              this.seconds = this.timeLeft -this.minutes * 60;
+
+            } else {
+              // this.minutes = 0;
+              this.verifybutton = true;
+            }
+          }, 1000)
+      
       } else
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         Swal.fire(data.data['update_mobile_onprofile'].message);
@@ -1539,14 +1545,16 @@ export class ProfileComponent implements OnInit {
         Swal.fire(data.data['resend_otp_onprofile']['message'])
         this.showotp = true;
         this.interval = setInterval(() => {
-          // this.resendtimeLeft = 60;
-          if(this.resendtimeLeft > 0) {
+          if (this.resendtimeLeft > 0) {
             this.resendtimeLeft--;
+             this.minutes = Math.floor(this.resendtimeLeft/60);
+            this.seconds = this.resendtimeLeft -this.minutes * 60;
+
           } else {
-            this.resendtimeLeft = 0;
-            // this.finish();
+            this.minutes = 0;
+            this.verifybutton = true;
           }
-        },1000)
+        }, 1000)
       }
     })
   }
