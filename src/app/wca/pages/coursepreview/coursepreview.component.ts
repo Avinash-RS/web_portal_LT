@@ -46,7 +46,7 @@ export class CoursepreviewComponent implements OnInit {
     this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
-        console.log(this.course)
+        console.log(this.course ,'course')
         this.loader.hide();
       } else
         this.loader.hide();
@@ -64,9 +64,8 @@ export class CoursepreviewComponent implements OnInit {
 
   published(){
     let detail ={ 
-      type: 'create', 
-      id:this.detail._id,
-      name : ""  
+      id:this.course.course_id,
+      name : this.course.course_name 
     }
 
     this.route.navigateByUrl('/Wca/listCourses ', { state: { detail: detail } });
