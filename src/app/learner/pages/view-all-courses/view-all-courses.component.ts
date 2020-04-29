@@ -21,6 +21,10 @@ export class ViewAllCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = this.globalservice.checkLogout();
+    if(!this.userDetailes.group_id){
+      this.userDetailes.group_id ='1';
+    }
+
     this.loadcategoryandcourses();
   }
   loadcategoryandcourses() {
@@ -30,7 +34,7 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getallcourses();
   }
   getcoursecategories() {
-    console.log(this.userDetailes);
+    // console.log(this.userDetailes);
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
       console.log(result);
       console.log(result.data.get_all_category.message);
@@ -65,8 +69,11 @@ export class ViewAllCoursesComponent implements OnInit {
  }
 
  getallcourses() {
-  this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
-    console.log(result);
+   if(this.userDetailes.group_id){
+
+   }
+  this.learnerservice.getallcourses(this.userDetailes.group_id, this.pagenumber).subscribe((result: any) => {
+    console.log('-----'+result);
     this.allcourses = result.data.get_all_course_by_usergroup.message;
  });
  }
