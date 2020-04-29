@@ -36,9 +36,9 @@ export class PasswordComponent implements OnInit {
     public service: LearnerServicesService) { }
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
+    // var user = localStorage.getItem('UserDetails')
     this.systemip = localStorage.getItem('Systemip')
-    this.currentUser = JSON.parse(user);
+    // this.currentUser = JSON.parse(user);
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.usernameVal),
