@@ -6,7 +6,22 @@
   </ol>
 </nav>
 <div class="p-5px">
-  <h2>{{type}} Courses ({{courseList.length}})</h2>
+  <div class="row">
+    <div class="col-md-6">
+        <h2 class="font-display">{{type}} Courses ({{courseList.length}})</h2>
+    </div>
+    <div class="col-md-6">
+          <mat-card class="float-right view-button-background">
+              <button class="float-right button-view" mat-raised-button>
+                  <i class="material-icons app-toolbar-menu">menu </i>
+              </button>
+              <button class=" float-right" mat-raised-button>
+                  <i class="material-icons app-toolbar-menu">apps </i>
+              </button>
+            </mat-card>     
+    </div>
+  </div>
+  <!-- <div style="float:right">hi</div> -->
 
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>

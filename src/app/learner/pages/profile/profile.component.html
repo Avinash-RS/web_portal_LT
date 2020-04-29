@@ -393,10 +393,10 @@
               </ng-otp-input>
               </div><br>
               <div *ngIf="sendOtp">
-                <p>00:{{timeLeft}}</p>
+                <p>{{minutes}}:{{seconds}}</p>
               </div>
               <div *ngIf="resendOtp">
-                <p>00:{{resendtimeLeft}}</p>
+                <p>{{minutes}}:{{seconds}}</p>
               </div>
               <br><br>
             </div>
