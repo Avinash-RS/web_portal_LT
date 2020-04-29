@@ -49,7 +49,8 @@ const routes: Routes = [
   { path: 'mycourse', component: MycreatedCourseComponent,},
   { path: 'ct', component: ChooseTemplateComponent,},
   { path: 'rf', component: ReferenceFileComponent,},
-  {path:'addmodule',component:AddModuleComponent}
+  {path:'addmodule',component:AddModuleComponent},
+  {path:'previewcourse',component:CoursepreviewComponent}
 
 
  
