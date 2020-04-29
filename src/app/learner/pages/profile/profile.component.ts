@@ -1610,4 +1610,8 @@ export class ProfileComponent implements OnInit {
     else
       this.spicalcharacter = false;
   }
+  //Percentage
+  public setTwoNumberDecimal($event) {
+    $event.target.value = parseFloat($event.target.value).toFixed(2);
+}
 }
