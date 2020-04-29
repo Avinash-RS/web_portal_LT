@@ -37,8 +37,8 @@
           Select
         </div>
         <form [formGroup]="referenceLinkForm"  >
-        <mat-select class="selectinputs" placeholder="Module Name"  formControlName="module">
-          <mat-option *ngFor="let res of modulemenu?.coursedetails" [value]="res?.modulename">
+        <mat-select class="selectinputs" placeholder="Module Name"  formControlName="module" (selectionChange)="gettopicdetail()">
+          <mat-option *ngFor="let res of modulenamelist" [value]="res">
             {{res?.modulename}}
           </mat-option>
         </mat-select>

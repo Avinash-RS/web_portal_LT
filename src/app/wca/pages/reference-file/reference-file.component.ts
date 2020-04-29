@@ -103,7 +103,7 @@ export class ReferenceFileComponent implements OnInit {
       console.log('fil..........',this.referenceLink)
     }
    
-    payload.append("module_id", this.referenceLinkForm.value.module);
+    payload.append("module_id", this.referenceLinkForm.value.module.modulename);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append('path', this.referenceLink);
     payload.append("user_id",this.currentUser.user_id);
@@ -172,7 +172,8 @@ get_module_topic(){
   })
 }
 gettopicdetail(){
-  this.learnerservice.gettopicdetail("5ea675143824a677e882d01e","test1").subscribe(data => {
+  console.log(this.referenceLinkForm.value)
+  this.learnerservice.gettopicdetail(this.referenceLinkForm.value.module._id,this.referenceLinkForm.value.module.modulename).subscribe(data => {
     if(data['data']['gettopicdetail'].success){
       this.topicListData=data['data']
       this.topicnamelist=this.topicListData.gettopicdetail.data
