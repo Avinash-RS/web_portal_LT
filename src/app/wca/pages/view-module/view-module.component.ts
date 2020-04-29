@@ -35,7 +35,7 @@ export class ViewModuleComponent implements OnInit {
   
   navChooseTemp() {
     
-    this.router.navigate(['./Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+    this.router.navigate(['./Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
   
   }
 

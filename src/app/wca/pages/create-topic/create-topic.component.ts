@@ -15,6 +15,8 @@ import { MatList, MatDialog } from '@angular/material';
 })
 export class CreateTopicComponent implements OnInit {
   queryData: any;
+  courseArray = [];
+  query:any;
   submitted = false;
   active: any;
   createTopicForm: FormGroup;
@@ -26,6 +28,7 @@ export class CreateTopicComponent implements OnInit {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
+    PPT: /(\.ppt)$/i,
   }
 
   fileValidations1 = {
@@ -46,15 +49,19 @@ export class CreateTopicComponent implements OnInit {
       coursefile: [null],
       coursestatus: ['true'],
       courseid: [null, Validators.compose([Validators.required])],
-      coursedetails: this.formBuilder.array([this.createForm()])
+      coursedetails:this.formBuilder.array(this.courseArray && this.courseArray ? this.courseArray.map((data,index) =>
+      this.createForm()
+    ) : [])
     });
   }
 
 
-  topicItem(): FormGroup {
+  topicItem(i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array([],Validators.compose([Validators.required])),
+      topicimages: this.formBuilder.array(this.queryData && this.queryData.moduledetails ? this.queryData.moduledetails[i].topicimages.map(data =>
+        this.topicImages()
+      ) : [],Validators.compose([Validators.required])),
       topicstatus:['true']
     });
   }
@@ -82,21 +89,38 @@ export class CreateTopicComponent implements OnInit {
         }
       }
       if (flag) {
-        const query = params;
-        console.log(query)
-        if (query && query.temp) {
+         this.query = null;
+         this.query = params;
+        console.log(this.query)
+        if (this.query && this.query.temp) {
           this.wcaService.bSubject.subscribe(value => {
+           if (value) {
             this.queryData = value;
             this.courseForm = this.courseform()
-            this.courseForm.patchValue({ coursename:query.courseName, courseid:query.viewingModule});
+            this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
             console.log(this.queryData);
+           }
           })
-        } else {
-          this.initialCall(query);
+        } else if (this.query.edit) {
+          this.wcaService.bSubject1.subscribe((value1:any) => {
+          console.log(value1);
+         if(value1 && value1.courseDetails) {
+           this.courseArray = value1.courseDetails.coursedetails;
+           console.log(this.courseArray);
+          this.queryData = value1.courseDetails.coursedetails[value1.index];
+          this.courseForm = this.courseform()
+          this.courseForm.patchValue(value1.courseDetails);
+          // this.createTopicForm.patchValue(this.queryData)
+         } else {
+           this.queryData = {};
+         }
+          })
+        }
+        else {
+          this.initialCall(this.query);
         }
       }
     });
-
 
 
   }
@@ -104,8 +128,9 @@ export class CreateTopicComponent implements OnInit {
    return this.createTopicForm = this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
-      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map(data =>
-        this.topicItem()
+      template_details:[this.queryData.template_details],
+      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map((data,index) =>
+        this.topicItem(index)
       ) : [])
     })
   }
@@ -144,27 +169,37 @@ export class CreateTopicComponent implements OnInit {
       console.log(fileInput.target.files[0])
       allowedExtensions = this.fileValidations[item.name];
       if (!allowedExtensions.exec(filePath)) {
-        this.toast.warning('Please upload file having extensions ' + allowedExtensions + 'only.');
+        this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
         this.spinner.hide();
         fileInput.value = '';
         return false;
       } else {
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$")
         if (fileInput && fileInput.target && fileInput.target.files[0]) {
+          this.imageView = null;
+          this.imageView = fileInput.target.files[0];
+          this.imageView.type === 'file';
           if (item.name === 'Image') {
-            console.log(formdata);
-            this.imageView = fileInput.target.files[0];
             const formData = new FormData();
-            this.imageView.type === 'file';
             formData.append('image', this.imageView);
             this.wcaService.uploadImage(formData).subscribe((data: any) => {
               imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
-              formdata.get('topicimages').get(String(0)).setValue(imagepath);
-              this.spinner.hide();
+              if (!formdata.get('topicimages').get(String(0))) {
+                (formdata.get('topicimages') as FormArray).push(this.topicImages());
+              }
+              formdata.get('topicimages').get(String(0)).setValue(imagepath);             
+               this.spinner.hide();
             }, err => {
               this.spinner.hide();
             })
           } else if (item.name === 'PPT') {
+            const formData1 = new FormData();
+            formData1.append('ppt', this.imageView);
+           this.wcaService.excelUpload(formData1).subscribe((data:any) => {
+           console.log(data);
+           },err => {
 
+           })
 
             this.spinner.hide();
           } else if (item.name === 'Word') {
@@ -184,7 +219,6 @@ export class CreateTopicComponent implements OnInit {
       }
 
       reader.addEventListener("load", () => {
-        console.log(reader.result);
         if (item.name === 'PDF') {
           this.demo(reader.result, formdata, index)
         }
@@ -289,10 +323,14 @@ export class CreateTopicComponent implements OnInit {
      this.courseForm.value.createdby_name = 'Admin';
      this.courseForm.value.createdby_id = '0001';
      this.courseForm.value.createdby_role = 'Sathish';
-     this.courseForm.value.flag = 'true';
+      if (this.query.edit) {
+        this.courseForm.value.flag = 'false';
 
+      } else {
+        this.courseForm.value.flag = 'true';
+
+      }
     console.log(this.courseForm);
-    return
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
@@ -301,11 +339,14 @@ export class CreateTopicComponent implements OnInit {
         console.log(data);
         if (data && data.Message === 'Success') {
           this.toast.success('Draft Created Successfully !!!');
-          if(type === 'draft') {
-            this.router.navigate(['./Wca/viewmodule']);
-          } else {
-            this.router.navigate(['./Wca']);
-          }
+                      this.router.navigate(['./Wca']);
+
+          // if(type === 'draft') {
+          //   this.router.navigate(['/Wca/addmodule',{courseId:this.query.viewingModule, courseImage: this.query.image,courseName:this.query.courseName}]);
+
+          // } else {
+          //   this.router.navigate(['./Wca']);
+          // }
         }
         this.spinner.hide();
      }, err => {
