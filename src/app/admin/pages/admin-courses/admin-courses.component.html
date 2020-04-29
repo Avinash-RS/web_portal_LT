@@ -8,14 +8,18 @@
 <div class="p-5px">
   <h2>{{type}} Courses ({{courseList.length}})</h2>
 
-  <div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
+    <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+  </div>
+
+  <div class="container" *ngIf = "!loader">
     <div class="col-md-12">
       <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
         <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
           <mat-grid-tile *ngFor="let course of courseList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
-            <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false" [showWishlist]="false"
-              [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true" [showDate]="showPublishedDate"
-              [goto]="goto">
+            <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
+              [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true"
+              [showDate]="showPublishedDate" [goto]="goto">
             </app-course-component>
           </mat-grid-tile>
           <h2 *ngIf="courseList && courseList.length == 0">
@@ -26,4 +30,7 @@
       </mat-card>
     </div>
   </div>
+
+
+
 </div>
