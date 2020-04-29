@@ -292,7 +292,7 @@ export class CreateTopicComponent implements OnInit {
      this.courseForm.value.flag = 'true';
 
     console.log(this.courseForm);
-    return
+    
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
