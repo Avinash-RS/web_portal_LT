@@ -16,6 +16,7 @@ export class ViewAllCoursesComponent implements OnInit {
   allcourses: any;
   showdesc = true;
   pagenumber = 0;
+  displayMode: number;
   constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) { }
 
   ngOnInit() {
@@ -36,7 +37,9 @@ export class ViewAllCoursesComponent implements OnInit {
       this.categories = result.data.get_all_category.message;
     });
   }
-
+  onDisplayModeChange(mode: number): void {
+    this.displayMode = mode;
+}
   getcoursesubcategories(category) {
     this.type = 'subcategory';
     console.log(category);

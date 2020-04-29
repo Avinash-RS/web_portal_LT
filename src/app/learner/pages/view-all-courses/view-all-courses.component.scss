@@ -756,3 +756,20 @@ input.variation+label {
     margin-left: 2em;
   }
 }
+
+button.active {
+  color: green;
+ }
+ .icon_fnt{
+  font-size: 22px;
+  color: #1f3777;
+ }
+ .icon_clr{
+  color: #1f3777;
+
+ }
+ .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle
+ {
+  background-color: #1f3777 !important;
+  border-radius: 7px;
+ }
