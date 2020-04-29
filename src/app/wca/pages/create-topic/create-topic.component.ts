@@ -49,9 +49,9 @@ export class CreateTopicComponent implements OnInit {
       coursefile: [null],
       coursestatus: ['true'],
       courseid: [null, Validators.compose([Validators.required])],
-      coursedetails:this.formBuilder.array(this.courseArray && this.courseArray ? this.courseArray.map((data,index) =>
+      coursedetails:this.formBuilder.array(this.courseArray.length ? this.courseArray.map((data,index) =>
       this.createForm()
-    ) : [])
+    ) : [this.createForm()])
     });
   }
 
@@ -95,6 +95,7 @@ export class CreateTopicComponent implements OnInit {
         if (this.query && this.query.temp) {
           this.wcaService.bSubject.subscribe(value => {
            if (value) {
+            this.queryData = null;
             this.queryData = value;
             this.courseForm = this.courseform()
             this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
@@ -125,6 +126,7 @@ export class CreateTopicComponent implements OnInit {
 
   }
   createForm() {
+    console.log(this.queryData)
    return this.createTopicForm = this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
@@ -143,6 +145,7 @@ export class CreateTopicComponent implements OnInit {
       this.spinner.hide();
       this.queryData = data.Result;
       this.courseForm = this.courseform()
+      console.log(this.courseForm)
       this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
       console.log(this.queryData);
     }, err => {
