@@ -1090,8 +1090,8 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean;
-  timeLeft: number = 120;
-  resendtimeLeft: number = 120;
+  timeLeft: number;
+  resendtimeLeft: number = 60;
   interval;
   status: string;
   config = {
@@ -1182,7 +1182,7 @@ export class ProfileComponent implements OnInit {
       // this.profileForm.get('qualification').valueChanges
       // .subscribe(qualification => {
       //   if(qualification.level_code !=='10'){
-      //     specification.setValidators(['', myGlobals.req])
+      //     specification.setValidators([Validators.required])
       //   } else {
       //     specification.setValidators(null)
       //   }
@@ -1248,10 +1248,10 @@ export class ProfileComponent implements OnInit {
     this.profileForm.value.qualification.forEach(element => {
       if(element.year_of_passing > moment().year()){
         this.alert.openAlert('Invalid year', null);
-        // this.cannotEdit = true;
+        // this.cannotEdit = false;
       } 
       // else{
-      //   this.cannotEdit = false;
+      //   this.cannotEdit = true;
       // }
     });
   }
@@ -1478,6 +1478,7 @@ export class ProfileComponent implements OnInit {
         this.isenable = false;
         this.showotp = true;
         //Timer
+        this.timeLeft = 60;
         this.interval = setInterval(() => {
           if (this.timeLeft > 0) {
             this.timeLeft--;
