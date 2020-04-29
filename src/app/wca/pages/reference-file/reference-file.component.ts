@@ -39,12 +39,16 @@ export class ReferenceFileComponent implements OnInit {
   modulemenu: any = [];
   topicmenu: void;
   pagenumber :number = 1;
-
+  moduleListData:any;
+  modulenamelist:any;
+  topicListData:any;
+  topicnamelist:any;
   constructor(public service: WcaService,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
 
   ngOnInit() {
+    this.get_module_topic()
     this.dataSource.sort = this.sort;
     this.getAllRefDoc(1);
     this.getModuleData();
@@ -156,5 +160,24 @@ clear(){
   this.referenceLink = '';
   this.referenceName = '';
   this.uploadMsg = "Upload the document";
+}
+//get module name
+get_module_topic(){
+  this.learnerservice.get_module_topic().subscribe(data => {
+     if(data['data']['get_module_topic'].success){
+       this.moduleListData=data['data']
+       this.modulenamelist=this.moduleListData.get_module_topic.data
+       console.log(this.modulenamelist)
+  }
+  })
+}
+gettopicdetail(){
+  this.learnerservice.gettopicdetail("5ea675143824a677e882d01e","test1").subscribe(data => {
+    if(data['data']['gettopicdetail'].success){
+      this.topicListData=data['data']
+      this.topicnamelist=this.topicListData.gettopicdetail.data
+      console.log(this.topicnamelist)
+    }
+  })
 }
 }

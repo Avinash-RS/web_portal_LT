@@ -480,3 +480,14 @@ export const get_all_course_by_usergroup = gql`
     }
     }
     }`;
+    export const get_module_topic = gql`
+    query get_module_topic{
+      get_module_topic {
+    
+        data{
+          _id
+          modulename
+        }
+        success
+      }
+    }`;
