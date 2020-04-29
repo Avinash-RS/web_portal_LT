@@ -1401,8 +1401,8 @@ export class ProfileComponent implements OnInit {
       this.uniValue= institute.data['get_institute_details'].data;
     })
     // this.service.get_board_university_details().subscribe(boards => {
-    //   // this.boardValue = boards.data['get_board_university_details'].data['board'];
-    //   // this.uniValue = boards.data['get_board_university_details'].data['university'];
+    //   this.boardValue = boards.data['get_board_university_details'].data['board'];
+    //   this.uniValue = boards.data['get_board_university_details'].data['university'];
      
     // })
   }
