@@ -8,9 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WcaService {
 
-url="http://127.0.0.1:9001/api/courses/getpublishedcourse"
+url="http://localhost:9001/api/upload/uploadExcel"
 
 bSubject = new BehaviorSubject({}); 
+bSubject1 = new BehaviorSubject({}); 
+
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +50,9 @@ bSubject = new BehaviorSubject({});
   createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/courses/createscrom',draft);}
 
   getCourseDetails(id) {return this.http.get(environment.wcaapiurl +  'api/courses/getscrommodules?courseid='+id); }
+
+  excelUpload(excel) {console.log("hiiiiiiiii"); return this.http.post(this.url,excel);}
+
 
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation

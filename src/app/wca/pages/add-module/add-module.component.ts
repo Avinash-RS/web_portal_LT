@@ -18,6 +18,20 @@ export class AddModuleComponent implements OnInit {
   constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
+
+    this.route.queryParams.subscribe(params => {
+      let flag = 0;
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          flag = 1;
+        }
+      }
+      if (flag) {
+      this.queryData = params;
+      console.log(this.queryData)
+      }
+    });
+
     this.routedCourseDetails = {
       courseId: this.route.snapshot.paramMap.get('courseId'),
       courseImage: this.route.snapshot.paramMap.get('courseImage'),
@@ -33,6 +47,7 @@ export class AddModuleComponent implements OnInit {
   getCourseDetails() {
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
+      console.log(this.courseDetails)
       this.updateCourseDetails();
     })
   }
@@ -65,5 +80,12 @@ export class AddModuleComponent implements OnInit {
         this.toast.success('Module updated successfully');
       }
     })
+  }
+
+  addTopic(value,index) {
+    console.log(index);
+    console.log(this.courseDetails);
+    this.apiService.bSubject1.next({index:index,courseDetails:this.courseDetails});
+      this.router.navigate(['./Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
   }
 }
