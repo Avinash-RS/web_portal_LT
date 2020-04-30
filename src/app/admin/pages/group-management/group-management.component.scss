@@ -161,7 +161,9 @@ input {
 	font-size: 1em;
 }
 
-
+.mat-tree-node{
+  min-height: 35px;
+}
 mat-tree {
 	ul, li {
 	  margin-top: 0;
