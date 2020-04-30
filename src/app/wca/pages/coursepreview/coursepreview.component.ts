@@ -32,12 +32,13 @@ export class CoursepreviewComponent implements OnInit {
   breakpoint: number;
   detail: any;
   isshowPublish: boolean = false;
+  courseType: string;
   constructor(public service: CommonServicesService, private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
-    console.log(this.detail)
-    if (this.detail?.type === "create") {
+    this.courseType = localStorage.getItem('courseType')
+    if (this.courseType === "create") {
       this.isshowPublish = true
     } else {
       this.isshowPublish = false
