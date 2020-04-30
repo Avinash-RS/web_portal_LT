@@ -196,13 +196,20 @@ height: 500px !important ;}
     width: 22px;
    
   }
-  mat-checkbox{
-    .mat-checkbox-layout{
-      margin: 0px !important;
-    }
-  }
+ 
 
 }
-.mat-checkbox-layout{
+::ng-deep mat-checkbox .mat-checkbox-layout{
   margin: 0px !important;
+}
+
+::ng-deep mat-checkbox .mat-checkbox-frame{
+  border: 0px;
+  background-color:  rgb(197, 215, 252) !important;;
+  
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+background-color: #437891 !important;
+
 }
