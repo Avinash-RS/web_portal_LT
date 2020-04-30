@@ -11,7 +11,7 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any ;
+  type: any;
   // type: any = 'published';
   goto: any;
   showPublishedDate: boolean;
