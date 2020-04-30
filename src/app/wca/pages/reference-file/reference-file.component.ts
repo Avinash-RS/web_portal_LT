@@ -44,6 +44,7 @@ export class ReferenceFileComponent implements OnInit {
   modulenamelist:any;
   topicListData:any;
   topicnamelist:any;
+  count: any;
   constructor(public service: WcaService,public route: Router,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
@@ -51,7 +52,7 @@ export class ReferenceFileComponent implements OnInit {
   ngOnInit() {
     this.get_module_topic()
     this.dataSource.sort = this.sort;
-    this.getAllRefDoc(1);
+    this.getAllRefDoc(0);
     this.getModuleData();
   
      this.dataSource.paginator = this.paginator;
@@ -120,7 +121,7 @@ export class ReferenceFileComponent implements OnInit {
         this.alert.openAlert(data['message'],null)
         this.referenceLinkForm.reset();
         this.clear();
-        this.getAllRefDoc(1)
+        this.getAllRefDoc(0)
       }else{
         this.alert.openAlert(data['message'],null)
       }
@@ -138,7 +139,7 @@ removeDoc(recordID){
               this.service.remove_doc_ref(recordID._id).subscribe(data => {
                 if(data.data['remove_doc_ref']['success'] === 'true'){
                   this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-                  this.getAllRefDoc(1)
+                  this.getAllRefDoc(0)
                 } else {
                   this.alert.openAlert('Please try after sometime',null)
                 }
@@ -148,11 +149,12 @@ removeDoc(recordID){
 }
 
 getAllRefDoc(pagenumber){
-  if (pagenumber == 1)
+  if (pagenumber == 0)
   this.ELEMENT_DATA = []
   this.service.getallrefdoc(pagenumber).subscribe(data => {
     this.getdocData = data.data['getallrefdoc']['data'];
-    Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
+    this.count = data.data['getallrefdoc']['count'];
+   Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -192,8 +194,6 @@ gettopicdetail(){
 }
 
 back(){
-
   this.route.navigateByUrl('/Admin/auth/Wca/previewcourse');
-  
 }
 }

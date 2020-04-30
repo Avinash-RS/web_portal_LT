@@ -93,7 +93,7 @@
     <div class="col-md-9 col-sm-12 col-12">
       <div class="row">
         <div class="col-md-3 col-sm-12 col-12">
-          <h4 style="text-align: start;margin-left: 15px;">Showing 10 out of {{ELEMENT_DATA.length}}</h4>
+          <h4 style="text-align: start;margin-left: 15px;">Showing 10 out of {{count}}</h4>
         </div>
         <div class="col-md-9 col-sm-12 col-12">
           <div class="input-group search">
@@ -151,7 +151,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+        <mat-paginator #paginator [length]="count" [pageSize]="9" (page)="next($event)" showFirstLastButtons>
         </mat-paginator>
       </div>
     </div>
