@@ -72,7 +72,7 @@ mat-icon {
     margin-left: 2%;
 
     .overlay {
-        height: 70%;
+        height: 55%;
         width: 76%;
         position: absolute;
         overflow: hidden;
@@ -113,4 +113,9 @@ mat-icon {
 }
 .color-grey {
     color: #363738;
+}
+.iconClr{
+    color: #777777;
+    font-size: 12px;
+    font-weight: 400;
 }
