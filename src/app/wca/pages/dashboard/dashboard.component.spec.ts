@@ -106,4 +106,15 @@ describe('DashboardComponent', () => {
     component.getCreatedCourses();
     expect(component.createdCourses).toBe(dashboardData.createdCourse.Result);
   })
+
+  it('Check get published courses', () => {
+    component.getCreatedCourses();
+    expect(component.publishedCourses).toBe(dashboardData.publishedCourse.Result);
+  })
+
+  it('Check get draft courses', () => {
+    component.getDraftCourses();
+    expect(component.draftCourses).toBe(dashboardData.draftCourse.Result);
+  })
+
 });
