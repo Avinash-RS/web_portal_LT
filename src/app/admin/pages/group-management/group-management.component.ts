@@ -37,7 +37,6 @@ export class GroupManagementComponent implements OnInit {
   getgroups() {
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
-      console.log(result);
       this.groups = result.data.getgroup.message;
       this.treeSource.data = null;
       this.treeSource.data = this.groups;
@@ -50,7 +49,6 @@ export class GroupManagementComponent implements OnInit {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       const group = result.data.getgroup.message;
-      console.log(group);
       if (node) {
         // node.children = [
         //   ...(node.children || []),
@@ -77,7 +75,6 @@ export class GroupManagementComponent implements OnInit {
     this.pagenumber = this.pagenumber + 10;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: this.pagenumber };
     this.adminservice.getgroup(data).subscribe((result: any) => {
-      console.log(result);
       const resultdata = result.data.getgroup.message;
       if (resultdata.length) {
         let array: any;
@@ -93,7 +90,6 @@ export class GroupManagementComponent implements OnInit {
 
 
   selectgroup(node) {
-    console.log(node);
     if (node.checkbox === true) {
       this.currentpath = node;
     } else {
@@ -101,7 +97,6 @@ export class GroupManagementComponent implements OnInit {
     }
   }
   savegroup(form) {
-    console.log(this.currentpath);
     let hierarchy;
     if (form.valid) {
       if (this.currentpath) {
@@ -114,9 +109,7 @@ export class GroupManagementComponent implements OnInit {
         hierarchy_id: this.currentpath ? hierarchy : 'h1',
         admin_id: this.adminDetails._id
       };
-      console.log(data);
       this.adminservice.creategroup(data).subscribe((result: any) => {
-        console.log(result);
         if (result.data.createusergroup.success === true) {
           this.alert.openAlert('Success !', 'Group Created Successfully');
           form.reset();
