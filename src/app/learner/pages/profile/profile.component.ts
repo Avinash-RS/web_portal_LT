@@ -1641,4 +1641,16 @@ changed(value,index) {
       // push current type with its status
     });
   }
+
+  test(a, b, c, d) {
+    console.log(a, b, c, d);
+    c = this.profileForm.get('qualification');
+    const specification = c.controls[b].controls.specification;
+    if (d.level_code !== '10')
+      specification.setValidators([Validators.required]);
+    else
+      specification.setValidators(null)
+    specification.updateValueAndValidity();
+    console.log(specification)
+  }
 }
