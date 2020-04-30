@@ -15,9 +15,9 @@
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-            <li class="mat-tree-node" renderDebug>
+            <li class="mat-tree-node newstyle" renderDebug>
               <!-- use a disabled button to provide padding for tree leaf -->
-              <button mat-icon-button matTreeNodeToggle (click)="loadsubgroup(node)"
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
                 [attr.aria-label]="'toggle ' + node.name">
                 <mat-icon class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}

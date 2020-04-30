@@ -190,3 +190,19 @@ height: 500px !important ;}
   height: 300px;
 }
 
+
+.newstyle{
+  .btnClassicon{
+    width: 22px;
+   
+  }
+  mat-checkbox{
+    .mat-checkbox-layout{
+      margin: 0px !important;
+    }
+  }
+
+}
+.mat-checkbox-layout{
+  margin: 0px !important;
+}
