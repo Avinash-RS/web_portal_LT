@@ -20,12 +20,10 @@ export class AdminCoursesComponent implements OnInit {
   constructor(public route: Router, private service: AdminServicesService) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
-    console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
       this.loader = true;
       this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
-        console.log(res);
         this.courseList = res.data.get_course_createdby_admin.message;
         this.goto = 'create';
         this.showPublishedDate = false;
