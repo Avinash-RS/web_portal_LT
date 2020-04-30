@@ -400,10 +400,12 @@ img:hover {
 .horizontalView{
 display: flex;
 flex-wrap: wrap;
+font-weight: bold;
+color: #1f3777;
 }
 
   .example-box1{
-  padding: 18px 11px;
+  padding: 9px 7px;
     color: rgb(210, 216, 230);
     display: flex;
     flex-direction: inherit;
