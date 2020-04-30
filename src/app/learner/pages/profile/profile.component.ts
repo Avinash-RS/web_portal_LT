@@ -1642,11 +1642,11 @@ changed(value,index) {
     });
   }
 
-  test(a, b, c, d) {
-    console.log(a, b, c, d);
-    c = this.profileForm.get('qualification');
-    const specification = c.controls[b].controls.specification;
-    if (d.level_code !== '10')
+  checkSpec(a, spec, quali, level) {
+    // console.log(a, b, c, d);
+    quali = this.profileForm.get('qualification');
+    const specification = quali.controls[spec].controls.specification;
+    if (level.level_code !== '10' && level.level_code !== '12')
       specification.setValidators([Validators.required]);
     else
       specification.setValidators(null)

@@ -168,7 +168,8 @@
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
                   name="qualification" (selectionChange)="changed($event.value,in)">
-                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'">
+                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
+                  (click) = "checkSpec(qual,in,profileForm.qualification,lv)">
                     {{lv.level_name}}
                   </mat-option>
                 </mat-select>
@@ -226,7 +227,7 @@
                 </div>
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <input type="tel" mask="00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
+                <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
                 'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
                   formControlName="percentage" (blur)='setTwoNumberDecimal($event)' maxlength="2">
                 <mat-icon (click)="addQualification()"
@@ -496,9 +497,9 @@
     </div>
   </div>
 </div>
-
-<!-- DEBUG -->
-<!-- <br><br><br>VALID : <br>
+<!-- 
+DEBUG
+<br><br><br>VALID : <br>
 <pre>about_you : {{profileForm.get('about_you').valid}}</pre>
 <pre>gender : {{profileForm.get('gender').valid}}</pre>
 <pre>is_student_or_professional : {{profileForm.get('is_student_or_professional').valid}}</pre>
@@ -511,6 +512,6 @@
 <pre>qualification : {{profileForm.get('qualification').valid}}</pre>
 <pre>social_media : {{profileForm.get('social_media').valid}}</pre>
 <pre>professional : {{profileForm.get('professional').valid}}</pre>
-<br>
+<br> -->
 
-{{profileForm.value | json}} -->
+<!-- {{profileForm.value | json}} -->
