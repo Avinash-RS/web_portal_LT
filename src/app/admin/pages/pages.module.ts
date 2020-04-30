@@ -19,12 +19,12 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
-import { GroupManagementComponent } from './group-management/group-management.component';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
     imports: [
+        InfiniteScrollModule,
         CdkTreeModule,
         MatTreeModule,
         CdkTableModule,

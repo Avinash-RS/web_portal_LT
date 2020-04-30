@@ -17,6 +17,13 @@ export class GroupManagementComponent implements OnInit {
   adminDetails: any;
   currentpath = null;
   pagenumber = 0;
+
+  /** tree source stuff */
+  readonly dataSource$: BehaviorSubject<any[]>;
+  readonly treeSource: MatTreeNestedDataSource<any>;
+  /** tree control */
+  readonly treeControl = new NestedTreeControl<any>(node => node.children);
+  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
@@ -66,30 +73,24 @@ export class GroupManagementComponent implements OnInit {
   /**
    * Determines whether scroll down on
    */
-  onScrollDown(event) {
-    console.log(event);
+  onScrollDown() {
     this.pagenumber = this.pagenumber + 10;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: this.pagenumber };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       console.log(result);
-      this.groups = result.data.getgroup.message;
-      this.groups.push(...result.data.getgroup.message);
-      console.log(this.groups);
-      let array: any;
-      array = this.treeSource.data.push(...result.data.getgroup.message);
-      this.treeSource.data = null;
-      this.treeSource.data = array;
+      const resultdata = result.data.getgroup.message;
+      if (resultdata.length) {
+        let array: any;
+        array = resultdata;
+        this.groups = this.treeSource.data;
+        array.push(...this.groups);
+        this.treeSource.data = null;
+        this.treeSource.data = array;
+      }
     });
   }
 
 
-  /** tree source stuff */
-  readonly dataSource$: BehaviorSubject<any[]>;
-  readonly treeSource: MatTreeNestedDataSource<any>;
-  /** tree control */
-  readonly treeControl = new NestedTreeControl<any>(node => node.children);
-
-  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   selectgroup(node) {
     console.log(node);
@@ -103,7 +104,7 @@ export class GroupManagementComponent implements OnInit {
     console.log(this.currentpath);
     let hierarchy;
     if (form.valid) {
-      if (this.currentpath.hierarchy_id) {
+      if (this.currentpath) {
         const str = this.currentpath.hierarchy_id.split('h');
         hierarchy = 'h' + (Number(str[1]) + Number(1));
       }
