@@ -397,6 +397,11 @@ img:hover {
    
   }
 
+.horizontalView{
+display: flex;
+flex-wrap: wrap;
+}
+
   .example-box1{
   padding: 18px 11px;
     color: rgb(210, 216, 230);
