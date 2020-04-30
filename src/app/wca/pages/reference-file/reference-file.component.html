@@ -1,8 +1,8 @@
 <div class="reference-file-container">
   <div>
-    <app-wca></app-wca>
+    <!-- <app-wca></app-wca> -->
   </div>
-  <nav aria-label="breadcrumb"  style="margin-top: 5%;">
+  <nav aria-label="breadcrumb" >
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page"> Add Reference file</li>
@@ -16,142 +16,154 @@
 
     </div>
   </div>
-
-<div class="row">
-  <div class="col-md-4 col-sm-12 col-12">
-  <h4 style="text-align: end;">Showing 10 out of {{ELEMENT_DATA.length}}</h4>
-  </div>
-
-  <div class="col-md-8 col-sm-12 col-12">
-    <div class="input-group search" >
-      <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
-      <span class="input-group-append bg-white border-left-0">
-        <span class="input-group-text bg-transparent">
-          <i class="fa fa-search searchicon" aria-hidden="true"></i>
-        </span>
-      </span>
-    </div>
-  </div>
-</div>
- 
-
   <div class="main-section">
-    <div class="file-selection">
-      <mat-card>
-        <div class="select">
-          Select
-        </div>
-        <form [formGroup]="referenceLinkForm"  >
-        <mat-select class="selectinputs" placeholder="Module Name"  formControlName="module" (selectionChange)="gettopicdetail()">
-          <mat-option *ngFor="let res of modulenamelist" [value]="res">
-            {{res?.modulename}}
-          </mat-option>
-        </mat-select>
-
-
-        <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic">
-          <mat-option *ngFor="let topic of topicmenu?.moduledetails" [value]="topic?.topicname">
-            {{topic?.topicname}}
-          </mat-option>
-        </mat-select>
-
-        <div class="space-10">
-          <mat-radio-group  [(ngModel)]="selectedOption"  [ngModelOptions]="{standalone: true}">
-            <mat-radio-button value="document">Upload Document
-              <!-- <mat-icon class="upload-icon">add</mat-icon> -->
-            </mat-radio-button>
-            <mat-radio-button value="link">Add Link
-              <!-- <mat-icon class="ref-icon">add</mat-icon> -->
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <div class="space-10"></div>
-
-        <div class="ref-input" *ngIf="selectedOption == 'document'">
-        <input type="text" id="ref_link" placeholder="Enter the name"   [(ngModel)]="referenceName"  [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="input-group back" *ngIf="selectedOption == 'document'" >
-          <input class="form-control border-right-0" type='file' id="upload-photo"   #fileInput (change)="uploadDoc($event)">
-         
-          <!-- <input style="display: none;" id="upload-photo" type='file'  class="form-control border-right-0"  placeholder="Upload the document" > -->
-          <span class="input-group-append bg-white border-left-0">
-            <label for="upload-photo" class="upload">{{uploadMsg}}</label>  </span>
-            <span class="input-group-text  bg">
-              <i class="fa fa-paperclip paperclip" aria-hidden="true"   (click)="fileInput.click()" ></i>
-              <i class="fa fa-upload searchicon" aria-hidden="true"></i>
-            </span>
-        
-        </div>
-
-        <!-- <div class="ref-input" *ngIf="selectedOption == 'document'">
-          <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"  [ngModelOptions]="{standalone: true}">
-          <label for="upload-photo" class="upload">{{uploadMsg}}</label>
-          <input type="file" placeholder="Upload the document" name="photo" id="upload-photo" (change)="uploadDoc($event)" />
-        </div> -->
-
-        <div class="ref-input" *ngIf="selectedOption == 'link'">
-          <input type="text" id="ref_link" placeholder="Enter the name"  [(ngModel)]="referenceName" [ngModelOptions]="{standalone: true}">
-          <input type="text" id="ref_link" class="ref-link"  [(ngModel)]="referenceLink" [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <mat-card-footer>
-          <div>
-            <button mat-flat-button color="primary" class="submit-btn" (click)="saveReferenceFile()" >Save</button>
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-12">
+     
+      <div class="file-selection">
+        <mat-card>
+          <div class="select">
+            Select
           </div>
-          <div class="file-size">
-            Maximum file size: 10 MB
-          </div>
-        </mat-card-footer>
-</form>
-      </mat-card>
+          <form [formGroup]="referenceLinkForm">
+            <mat-select class="selectinputs" placeholder="Module Name" formControlName="module"
+              (selectionChange)="gettopicdetail()" required>
+              <mat-option *ngFor="let res of modulenamelist" [value]="res">
+                {{res?.modulename}}
+              </mat-option>
+            </mat-select>
+  
+  
+            <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic" required>
+              <mat-option *ngFor="let topic of topicmenu?.moduledetails" [value]="topic?.topicname" >
+                {{topic?.topicname}}
+              </mat-option>
+            </mat-select>
+  
+            <div class="space-10">
+              <mat-radio-group [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button value="document">Upload Document
+                </mat-radio-button>
+                <mat-radio-button value="link">Add Link
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="space-10"></div>
+  
+            <div class="ref-input" *ngIf="selectedOption == 'document'">
+              <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
+                [ngModelOptions]="{standalone: true}" required>
+            </div>
+  
+            <div class="input-group back" *ngIf="selectedOption == 'document'">
+              <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput
+                (change)="uploadDoc($event)">
+              <span class="input-group-append bg-white border-left-0">
+                <label for="upload-photo" class="upload">{{uploadMsg}}</label> </span>
+              <span class="input-group-text  bg">
+                <i class="fa fa-paperclip paperclip" aria-hidden="true" (click)="fileInput.click()"></i>
+                <i class="fa fa-upload searchicon" aria-hidden="true"></i>
+              </span>
+  
+            </div>
+            <div class="ref-input" *ngIf="selectedOption == 'link'">
+              <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
+                [ngModelOptions]="{standalone: true}">
+              <input type="text" id="ref_link" class="ref-link" [(ngModel)]="referenceLink"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+  
+            <mat-card-footer>
+              <div style="text-align: center;">
+                <button class="submit-btn" [disabled]="!referenceLinkForm.valid"
+                  (click)="saveReferenceFile()">Save</button>
+              </div>
+              <div class="file-size">
+                Maximum file size: 10 MB
+              </div>
+            </mat-card-footer>
+          </form>
+        </mat-card>
+  
+  
+      </div>
     </div>
-    <div class="file-list">
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="type_name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Name </th>
-          <td mat-cell *matCellDef="let data"> {{data.type_name}} </td>
-        </ng-container>
+    <div class="col-md-9 col-sm-12 col-12">
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-12">
+          <h4 style="text-align: start;margin-left: 15px;">Showing 10 out of {{ELEMENT_DATA.length}}</h4>
+        </div>
+        <div class="col-md-9 col-sm-12 col-12">
+          <div class="input-group search">
+            <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
+            <span class="input-group-append bg-white border-left-0">
+              <span class="input-group-text bg-transparent">
+                <i class="fa fa-search searchicon" aria-hidden="true"></i>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+     
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="module_id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module </th>
-          <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
-        </ng-container>
+      <div class="file-list">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="type_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Name </th>
+            <td mat-cell *matCellDef="let data"> {{data.type_name}} </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="module_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module </th>
+            <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
+          </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="topic_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic </th>
+            <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customtypeClass'"> Type </th>
+            <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
+          </ng-container>
+          <ng-container matColumnDef="created_on">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
+            <td mat-cell *matCellDef="let data"> {{data.created_on |  date :'MMM d, y, h:mm:ss a'}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef [ngClass]="'customActionClass'"> </th>
+            <td mat-cell *matCellDef="let data">
+              <!-- <mat-icon class="del-icon" (click)="deleteReferenceFile(data)">delete</mat-icon> -->
+              <i class="fa fa-trash-o del-icon" aria-hidden="true" (click)="removeDoc(data)"></i>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="topic_id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic </th>
-          <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Type </th>
-          <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
-        </ng-container>
-        <ng-container matColumnDef="created_on">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
-          <td mat-cell *matCellDef="let data"> {{data.created_on}}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef  [ngClass]="'customActionClass'"> </th>
-          <td mat-cell *matCellDef="let data">
-            <!-- <mat-icon class="del-icon" (click)="deleteReferenceFile(data)">delete</mat-icon> -->
-            <i class="fa fa-trash-o del-icon" aria-hidden="true" (click)="removeDoc(data)"></i>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons></mat-paginator>
     </div>
   </div>
+
+
+
+    
+
+  </div>
+
+
   <div style="text-align: center;">
     <button mat-flat-button color="primary" class="back-btn">Back</button>
 
