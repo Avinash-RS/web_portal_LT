@@ -35,12 +35,12 @@ export class ViewModuleComponent implements OnInit {
   
   navChooseTemp() {
     
-    this.router.navigate(['./Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+    this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
   
   }
 
   navViewModule() {
-    this.router.navigate(['./Wca/viewmodule'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+    this.router.navigate(['/Admin/auth/Wca/viewmodule'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
   }
 
 

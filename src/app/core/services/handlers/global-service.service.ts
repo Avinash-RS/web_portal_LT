@@ -18,9 +18,12 @@ export class GlobalServiceService {
   ) { }
 
   checkLogout() {
+    // console.log('----inside-----')
     if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner') {
+      var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
+      var role = localStorage.getItem('role') || null;
       var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-      if (userDetail)
+      if (userDetail == null || adminDetails == null) 
         return userDetail
       else {
         this.alert.openAlert("Logged Out!", "You have been logged out. Please login to continue");
@@ -36,7 +39,6 @@ export class GlobalServiceService {
       this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
       return false;
     }
-     
     else
       return true;
   }

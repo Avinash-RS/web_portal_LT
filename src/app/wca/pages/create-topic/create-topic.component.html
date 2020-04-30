@@ -2,7 +2,7 @@
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
 
@@ -29,7 +29,7 @@
             <span style="color: red;">Go Back and Chooose or Create the Template Please !!!</span>
         </div>
 <span *ngIf="createTopicForm?.get('moduledetails')?.controls">
-        <div class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
+        <div [hidden]="j?.value?.topicstatus === 'false'" class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
           
             <div class="col-md-12">
                 <mat-accordion>
@@ -42,7 +42,7 @@
                                       <div *ngIf="queryData">
                                         <!-- *ngFor="let item of queryData.template_details; let m = index" -->
         <div class="example-box1"   >
-         <div (click)="activate(queryData?.template_details[i])" class="clickBcg bcgBorder" [class.active]="queryData?.template_details[i].name === active?.name">
+         <div (click)="activate(queryData?.template_details[i])" class="clickBcg bcgBorder" [class.active]="queryData?.template_details[i]?.name === active?.name">
             <div class="dspFlx" [formGroupName]="i">
                 <span class="restictWidth"> <mat-form-field class="matWidth" appearance="outline">
                  <mat-label class="clrLabel">Topic Name</mat-label>
@@ -53,18 +53,18 @@
                </span>
             </span>
                <span class="example-spacer"></span>
-               <span style="display: none;">
-                   <mat-icon>save</mat-icon>
-                   <mat-icon>delete</mat-icon>
+               <span  *ngIf="query?.edit">
+                   <mat-icon style="display: none;">save</mat-icon>
+                   <mat-icon (click)="DeleteTopic(i,$event)">delete</mat-icon>
                </span>
              </div>
      <div class="colView" >
         <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
-        <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i].image}}"></span> 
-          <span class="padTop">{{queryData?.template_details[i].name}}</span>
-          <span class="padTop1 showCon" [class.active]="queryData?.template_details[i].name === active?.name"> <small>content is empty Double Click to edit</small></span>
-          <span class="padTop1" [class.active]="queryData?.template_details[i].name === active?.name"> <small>{{fileType}}</small></span>
-         <span class="previewAndTime" [class.active]="queryData?.template_details[i].name==active?.name">
+        <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span> 
+          <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
+          <span class="padTop1 showCon" *ngIf="!j?.value?.topicimages[0]" [class.active]="queryData?.template_details[i]?.name === active?.name"> <small>content is empty Double Click to edit</small></span>
+          <span class="padTop1" [class.active]="queryData?.template_details[i]?.name === active?.name"> <small>{{fileType}}</small></span>
+         <span class="previewAndTime" [class.active]="queryData?.template_details[i]?.name==active?.name">
              <span><button *ngIf="j?.value?.topicimages[0]" mat-raised-button class="btnprev" type="button" (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
              <span>
                  <small class="spanTime">  Time required to complete the topic </small>

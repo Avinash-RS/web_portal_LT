@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { 
         MatCardModule,
         MatButtonModule,
@@ -8,18 +8,26 @@ import {
         MatIconModule,
         MatCheckboxModule,
         MatListModule,
+        MatTreeModule
        } from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
+import { GroupManagementComponent } from './group-management/group-management.component';
+
 
 
 @NgModule({
     imports: [
+        CdkTreeModule,
+        MatTreeModule,
+        CdkTableModule,
         MatCardModule,
         CommonModule,
         FlexLayoutModule,
@@ -35,10 +43,9 @@ import { RouterModule } from '@angular/router';
         RouterModule
          ],
     declarations: [   
+    AddUserComponent, ],
 
-
-       
-    AddUserComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
     ],
     providers: [

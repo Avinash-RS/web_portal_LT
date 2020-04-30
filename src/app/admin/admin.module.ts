@@ -13,23 +13,26 @@ import { AdminLoginModule } from './admin-login/admin-login.module';
 
 import { AdminCoreModule } from './core/admin-core.module';
 import { AuthModule } from './auth/auth.module';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import {  DndDirective } from './core/dnd.directive';
 
 const routes: Routes = [
   // {path: 'login', loadChildren: './admin-login/admin-login.module#AdminLoginModule',canActivate:[AuthGuard]},
-  { path: 'login', component: AdminLoginComponent },
+  { path: 'login', component: AdminLoginComponent,canActivate: [AuthGuard] },
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule', canActivate: [AuthGuard] },
+ 
   { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [DndDirective],
   imports: [
     CoreModule,
     AdminLoginModule,
     CommonModule,
     AuthModule,
+
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,

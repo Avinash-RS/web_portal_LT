@@ -1,7 +1,7 @@
 @import "../../../../assets/variable.scss";
 
 input[type=text] {
-  width: 100%;
+  width: 105%;
   padding: 12px 20px;
   margin: 1px 0;
   background: $color-light-blue;
@@ -33,5 +33,7 @@ input[type=text] {
     text-align: center !important;
     cursor: pointer;
 }
-  
+.star{
+  color: $color-red;
+} 
   

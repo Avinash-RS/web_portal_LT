@@ -1,8 +1,14 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
+//change rajesh ranjan
+import { Apollo } from "apollo-angular";
+import {remove_doc_ref,getallrefdoc,get_module_topic} from "./operations/wca_query";
 
+//import {} from "./operations/learner_mutation"
+
+//change rajesh ranjan
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +20,7 @@ bSubject = new BehaviorSubject({});
 bSubject1 = new BehaviorSubject({}); 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private Apollo: Apollo,) { }
 
   getPublishedCourse() {
     return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");
@@ -45,6 +51,26 @@ bSubject1 = new BehaviorSubject({});
 
   createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate',arraydata); }
 
+  refDocUpload(fromdata){ return this.http.post(environment.apiUrl+ 'wca/refdocupload',fromdata)}
+
+  remove_doc_ref(id) {
+    return this.Apollo.query({
+      query: remove_doc_ref,
+      variables: {
+        doc_id:id
+
+      }
+    });
+  }
+  getallrefdoc(pagenumber){
+    return this.Apollo.query({
+      query: getallrefdoc,
+      variables: {
+        pagenumber:pagenumber
+
+      }
+    });
+  }
   getsingleTemplate(template) { return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates?template_id='+template); }
 
   createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/courses/createscrom',draft);}
@@ -64,5 +90,9 @@ bSubject1 = new BehaviorSubject({});
       return false;
     }
   }
-
+  get_module_topic(){
+    return this.Apollo.query({
+      query: get_module_topic
+    });
+  }
 }

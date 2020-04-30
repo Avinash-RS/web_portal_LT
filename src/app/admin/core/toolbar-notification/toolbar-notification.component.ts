@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { AdminServicesService } from '@admin/services/admin-services.service';
+
 
 @Component({
   selector: 'lxp-toolbar-notification',
@@ -21,17 +23,24 @@ export class ToolbarNotificationComponent implements OnInit {
     //     }
     // }
   	
-  	constructor(private elementRef: ElementRef) { }
+  	constructor(private elementRef: ElementRef,private adminService: AdminServicesService) { }
 
   	ngOnInit() {
-  	}
+    }
+    
+    downloadDoc(url){
+      window.location.href = url;
+    }
 
   	select() {
     	
   	}
 
-  	delete(notification) {
-    
-  	}
-
+		removeNotification(reportId){
+      this.adminService.removeNotificationData(reportId).subscribe((result: any) => {
+			 if(result.data['update_notification'].success == true){
+            this.notifications = this.notifications.filter((data) => data.report_id !== reportId)
+       }
+      })
+    }
 }

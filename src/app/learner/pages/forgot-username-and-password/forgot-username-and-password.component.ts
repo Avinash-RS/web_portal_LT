@@ -48,7 +48,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
   focusout(e){
-    if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 0){
+    console.log('e',e.target.value)
+    if( e.target.id === 'mobile' && e.target.value != "" && e.target.value.length > 9){
       this.forgotUsername.controls['email'].disable();
       this.isshow = false;
     }
@@ -69,7 +70,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     .subscribe(data => {
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
-            this.router.navigate(['Learner/login']);
+            this.router.navigate(['Learner']);
             this.loader.hide();
          
           } else{

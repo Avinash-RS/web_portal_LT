@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { id } from '@swimlane/ngx-charts/release/utils';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-add-module',
@@ -18,6 +20,8 @@ export class AddModuleComponent implements OnInit {
   constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
+
+    this.resetList()
 
     this.route.queryParams.subscribe(params => {
       let flag = 0;
@@ -43,6 +47,36 @@ export class AddModuleComponent implements OnInit {
       this.getCourseDetails();
     }
   }
+
+
+  items2: any[]
+
+  done = [
+
+    
+  ];
+
+  resetList() {
+ 
+    setTimeout(() => {
+      this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
+    }, 0);    
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      this.courseDetails.coursedetails.push(this.courseDetails.coursedetails[event.previousIndex]);
+
+      // transferArrayItem(event.previousContainer.data,
+      //                   event.container.data,
+      //                   event.previousIndex,
+      //                   event.currentIndex);
+    }
+  }
+  
 
   getCourseDetails() {
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {

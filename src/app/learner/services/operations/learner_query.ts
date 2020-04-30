@@ -190,6 +190,15 @@ export const get_user_detail = gql`
       success
   }
 }`;
+
+export const get_user_detail_username = gql`
+  query get_user_detail_username($username: String){
+    get_user_detail_username(username: $username) {
+      message
+      success
+  }
+}`;
+
 export const list_content = gql`
 query list_content{
   list_content {
@@ -216,3 +225,269 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
     }
   }
 }`;
+
+export const getmoduleData = gql`
+query getmoduleData($courseid:String!){
+  getmoduleData(courseid:$courseid) {
+    data {
+      courseid
+      _id
+      coursename
+      coursefile
+      coursestatus
+      coursecreated_on
+      coursedetails{
+        modulename
+        modulestatus
+        modulecreated_on
+        moduledetails{
+          topicname
+          topicstatus
+          topiccreated_on
+          topicimages
+          resourse{
+            type
+            files{
+              doc_type
+              path
+            }
+            doc_type
+            type_name
+          }
+        }
+      }
+    }
+  }
+}`;
+export const check_existing_user = gql`
+  query check_existing_user($username: String){
+    check_existing_user(username: $username) {
+      message
+      success
+  }
+}`;
+
+export const get_all_category = gql`
+query get_all_category($group_id: [String]!){
+  get_all_category(group_id:$group_id){
+  success
+  error_msg
+  message{
+        _id
+  category_name
+  category_id
+  category_description
+  language_code
+  created_on
+  updated_on
+  created_by
+  creator_id
+  is_active
+  category_image
+  }
+  }
+}`;
+
+export const get_sub_category = gql`
+query get_sub_category($category_id: Int!){
+  get_sub_category(category_id: $category_id){
+  success
+  message{
+  _id
+  sub_category_id
+  sub_category_name
+  sub_category_description
+  language_code
+  created_on
+  updated_on
+  created_by
+  creator_id
+  is_active
+  sub_category_image
+  parent_category_id
+  }
+  error_msg
+  }
+}`;
+
+
+export const get_course_by_subcategory = gql`
+query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenumber: Int!){
+  get_course_by_subcategory(input_id: $input_id,input_type: $input_type ,pagenumber: $pagenumber) {
+  success
+  error_msg
+  message{
+  course_id
+  course_description
+  course_name
+  created_at
+  updated_at
+  version
+  location
+  course_start_datetime
+  course_end_datetime
+  advertised_start
+  course_img_url
+  social_sharing_url
+  certificate_display_behaviour
+  certificates_show_before_end
+  certificate_html_view_enabled
+  has_any_active_web_certificate
+  certificate_name
+  lowest_passing_grade
+  mobile_available
+  visible_to_staff_only
+  pre_requisite
+  enrollment_start
+  enrollment_end
+  invitation_only
+  max_student_enrollments_allowed
+  announcement
+  catalog_visibility
+  course_video_url
+  short_description
+  self_paced
+  marketing_url
+  course_language
+  certificate_available_date
+  article_count
+  downloadable_resource_count
+  course_level
+  step_towards
+  rating
+  price
+  what_will_you_learn
+  course_category
+  course_type
+  course_content_details{
+  name
+  type
+  is_active
+  parent_id
+  description
+  sub_section_id
+  file_content{
+  video_url
+  image_url
+  audio_url
+  file_url
+  }
+  unit{
+  name
+  type
+  is_active
+  parent_id
+  description
+  sub_section_id
+  file_content{
+  video_url
+  image_url
+  audio_url
+  file_url
+  }
+  }
+  }
+  author_details{
+  author_name
+  description
+  }
+  }
+  }
+  }`;
+
+
+
+export const get_all_course_by_usergroup = gql`
+  query($group_id: String!,$pagenumber: Int!){
+    get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber){
+    success
+    error_msg
+    message{
+    course_id
+    course_description
+    course_name
+    created_at
+    updated_at
+    version
+    location
+    course_start_datetime
+    course_end_datetime
+    advertised_start
+    course_img_url
+    social_sharing_url
+    certificate_display_behaviour
+    certificates_show_before_end
+    certificate_html_view_enabled
+    has_any_active_web_certificate
+    certificate_name
+    lowest_passing_grade
+    mobile_available
+    visible_to_staff_only
+    pre_requisite
+    enrollment_start
+    enrollment_end
+    invitation_only
+    max_student_enrollments_allowed
+    announcement
+    catalog_visibility
+    course_video_url
+    short_description
+    self_paced
+    marketing_url
+    course_language
+    certificate_available_date
+    article_count
+    downloadable_resource_count
+    course_level
+    step_towards
+    rating
+    price
+    what_will_you_learn
+    course_category
+    course_type
+    course_content_details{
+    name
+    type
+    is_active
+    parent_id
+    description
+    sub_section_id
+    file_content{
+    video_url
+    image_url
+    audio_url
+    file_url
+    }
+    unit{
+    name
+    type
+    is_active
+    parent_id
+    description
+    sub_section_id
+    file_content{
+    video_url
+    image_url
+    audio_url
+    file_url
+    }
+    }
+    }
+    author_details{
+    author_name
+    description
+    }
+    }
+    }
+    }`;
+    export const get_module_topic = gql`
+    query get_module_topic{
+      get_module_topic {
+    
+        data{
+          _id
+          modulename
+        }
+        success
+      }
+    }`;

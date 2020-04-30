@@ -9,6 +9,7 @@
       "@admin/*": ["src/app/admin/*"],
       "@core/*": ["src/app/core/*"],
       "@learner/*": ["src/app/learner/*"],
+      "@wca/*": ["src/app/wca/*"],
       "@assets/*": ["src/assets/*"],
       "@env/*": ["src/environments/*"],
     },
@@ -21,6 +22,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],

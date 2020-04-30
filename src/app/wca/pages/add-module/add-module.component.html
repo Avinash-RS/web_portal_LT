@@ -1,9 +1,9 @@
 <div>
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
-      <li class="breadcrumb-item active" aria-current="page">Course created by me</li>
+      <li class="breadcrumb-item" aria-current="page">Course created by me</li>
 
       <li class="breadcrumb-item active" aria-current="page">Course name</li>
     </ol>
@@ -35,7 +35,19 @@
             <div class="module-list">
 
               <ng-container *ngIf="noOfModules !== 0; else noMod">
-                <ng-container *ngFor="let module of courseDetails.coursedetails;let n = index">
+
+                <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="courseDetails.coursedetails"
+                [cdkDropListConnectedTo]="[todoList]"
+                class=""
+                (cdkDropListDropped)="drop($event)">
+
+                <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
+
+
+                <!-- <ng-container class="example-box1" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag> -->
                   <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                     <span class="del-icon-container">
                     <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
@@ -44,7 +56,10 @@
                       {{module.modulename}}
                     </span>
                   </div>
-                </ng-container>
+                <!-- </ng-container> -->
+                </div>
+
+              </div>
               </ng-container>
 
               <ng-template #noMod>

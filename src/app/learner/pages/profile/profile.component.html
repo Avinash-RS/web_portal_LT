@@ -1,393 +1,412 @@
 <app-header></app-header>
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
+
 <div class="profile">
-  <div class="limiter">
-    <div class="container-reg200 p-t-77">
-      <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30"><br>
-        <div class="overAll">
-          <div>
-            <form #createForm="ngForm">
-              <mat-grid-list class="masterGrid" cols="2" rowHeight="2:1">
-                <mat-grid-tile class="grid1">
-                  <form>
-                    <div class="row">
-                      <mat-label>Information about you</mat-label>
-                    </div>
-                    <!-- <div class="form-group">
-              <textarea class="form-control inputs" placeholder="500 characters"  formControlName="info"
-                maxlength="500" [ngClass]="{ 'is-invalid': f.info.touched && f.info.errors }"> </textarea>
-                <div *ngIf="f.info.touched && f.info.errors" class="invalid-feedback">
-                <div *ngIf="f.info.errors.maxlength">Full Name must be 500 maximum of characters</div>
-              </div>
-             
-              </div><br> -->
-                    <div class="row">
-                      <textarea style="resize: none;" [disabled]='showdeletedicon' class="inputs"
-                        placeholder="1000 characters" maxlength="1000" [(ngModel)]="profileDetails.about_you"
-                        name="info"></textarea>
-                    </div><br>
-                    <div class="row">
-                      <mat-label>Gender</mat-label><span class="text-danger">*</span>
-                      <div class="col">
-                        <mat-radio-group [disabled]='showdeletedicon' [(ngModel)]="profileDetails.gender" name="gender"
-                          required>
-                          <mat-radio-button value="M">M</mat-radio-button>
-                          <mat-radio-button value="F">F</mat-radio-button>
-                          <mat-radio-button value="O">Rather not say</mat-radio-button>
-                        </mat-radio-group>
-                      </div>
-                    </div>
-                    <div class="row space5">
-                      <mat-label>I am a</mat-label><span class="text-danger">*</span>
-                      <div class="col studentradio">
-                        <mat-radio-group [disabled]='showdeletedicon'
-                          [(ngModel)]="profileDetails.is_student_or_professional" name="profession" required>
-                          <mat-radio-button value="student">Student</mat-radio-button>
-                          <mat-radio-button value="professional">Professional</mat-radio-button>
-                        </mat-radio-group>
-                      </div>
-                    </div>
-                    <div class="row space5">
-                      <mat-label>Language Known</mat-label><br>
-                    </div>
-                    <div class="row language">
-                      <mat-select [disabled]='showdeletedicon' multiple class="inputs" placeholder="Language"
-                        [(ngModel)]="profileDetails.languages_known" name="language">
-                        <mat-option *ngFor="let item of languageList" [value]="item._id">
-                          {{item.languagename}}
-                        </mat-option>
-                      </mat-select>
-                    </div><br>
-                    <div class="row">
-                      <mat-label>Location</mat-label><span class="text-danger">*</span><br>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <mat-select [disabled]='showdeletedicon' class="selectinputs" placeholder="Country"
-                          [(ngModel)]="profileDetails.country" name="country" (selectionChange)="getAllState($event)"
-                          required>
-                          <mat-option [value]="country._id" *ngFor="let country of countryValue">
-                            {{country.countryname}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col">
-                        <mat-select [disabled]='showdeletedicon' class="selectinputs" [(ngModel)]="profileDetails.state"
-                          name="state" placeholder="State" (selectionChange)="getDistrict($event)" required>
-                          <mat-option [value]="state._id" *ngFor="let state of stateValue">
-                            {{state.statename}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col">
-                        <mat-select [disabled]='showdeletedicon' class="selectinputs"
-                          [(ngModel)]="profileDetails.city_town" name="city" placeholder="City" required>
-                          <mat-option [value]="city._id" *ngFor="let city of cityValue">
-                            {{city.districtname}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                    </div>
-                  </form>
-                </mat-grid-tile>
-                <!----------------------------Profile--------------------->
-                <mat-grid-tile style="height: 23em;">
-                  <form style="margin-left: 62%;">
-                    <!-- <div class=""><br><br> -->
-                    <div class="row myprofile">
-                      <label>My Profile</label>
-                      <mat-icon (click)="enableedit()" class="createicon">create</mat-icon>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <img [src]="urlImage ? urlImage : '../../../../assets/learner/avatar2.png'" id="imageUpload"
-                          accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" alt="Avatar"
-                          class="avatar">
-                        <div style="margin-top: -43%;">
-                          <input style="display: none;" id="fileInput" type='file' #fileInput
-                            (change)="onSelectFile($event)">
-                          <mat-icon class="camera" for="fileInput" (click)="fileInput.click()">camera_alt</mat-icon>
-                        </div>
-                      </div>
-                      <div class="col-sm-6" *ngIf="userData"><br>
-                        <mat-label>{{userData.full_name}}</mat-label><br>
-                        <mat-label *ngIf="userData.user_dtl">{{userData.user_dtl.username}}</mat-label><br>
-                        <mat-label *ngIf="userData.user_dtl">{{userData.user_dtl.created_on | date : "dd.MM.y"}}
-                        </mat-label>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <!-- <div class="col"> -->
-
-                      <!-- </div><br> -->
-
-                      <div class="col">
-                        <md-button class="profilecomplete">{{progress}}% </md-button> 
-                        <section class="example-section">
-                          <mat-progress-bar class="example-margin" mode="determinate" value="{{progress}}">
-                          </mat-progress-bar>
-                        </section>
-                      </div>
-                    </div>
-
-                    <div class="Edit">
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <mat-label>Password</mat-label>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3">
-                          <mat-icon class="createicon" (click)="editPassword(passwordDialog)">create</mat-icon>
-                        </div>
-                      </div><br>
-                      <!-- //added validation - Mythreyi -->
-                      <div class="row" *ngIf="userData.user_mobile">
-                        <div class="col-sm-3">
-                          <mat-label *ngIf="userData.user_mobile">{{userData.user_mobile.mobile_number}}</mat-label>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3">
-                          <mat-icon class="createicon" (click)="editmobno(mobDialog)">create</mat-icon>
-                        </div>
-                      </div><br>
-                      <div class="row" *ngIf="userData.email">
-                        <div class="col-sm-3">
-                          <span>{{userData.email}}</span>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3">
-                          <mat-icon class="createicon" (click)="editEmail(emailDialog)">create</mat-icon>
-                        </div>
-                      </div><br>
-                    </div>
-                    <!-- </div> -->
-                  </form>
-                </mat-grid-tile>
-              </mat-grid-list><br><br>
-              <!-----------------------Profile End----------------------->
-              <div class="qual">
-                <div class="row">
-                  <mat-label>Qualification</mat-label><span class="text-danger">*</span>
+  <div class="container-reg200">
+    <div class="wrap-reg"><br>
+      <form [formGroup]="profileForm">
+        <div class="container">
+          <div class="row">
+            <!-- //////FIrst section left part//////// -->
+            <div class="col-md-4 col-sm-12 col-12 left">
+              <!-- ////// Info about you//////// -->
+              <div class="form-group">
+                <label>Information about you</label>
+                <textarea style="resize: none;" rows="3" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_100' :
+                  'inputs border-radius-5 color_blue background_trans width_100'"
+                  [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" placeholder="1000 characters"
+                  formControlName="about_you" name="about_you"></textarea>
+                <div *ngIf="f.about_you.touched && f.about_you.errors" class="invalid-feedback">
+                  <div *ngIf="f.about_you.errors.minlength">Information about you must be minimum of
+                    {{f.about_you.errors.minlength.requiredLength}} characters </div>
+                  <div *ngIf="f.about_you.errors.maxlength">Information about you must be
+                    {{f.about_you.errors.maxlength.requiredLength}} maximum of characters</div>
                 </div>
-                <div class="row" *ngFor="let qualification of qual; let i = index;">
-
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <!-- {{qual | json}}<br>{{qual.length}}<br>{{qualification.institute_detail | json}}<br>
-                      {{qualification.institute_detail[0]._id}} -->
-                      <!-- {{level_detail[i]}} -->
-
-                      <div class="col-sm-3">
-                        <mat-select [disabled]='showdeletedicon' class="inputs"
-                          [(ngModel)]="qualification.level_detail && qualification.level_detail[0] && qualification.level_detail[0]._id"
-                          name="level_detail{{i}}" #lvl="ngModel" placeholder="Level" required>
-                          <mat-option [value]="lv._id" *ngFor="let lv of levelValue" (click)="getLevel(lv,i)">
-                            {{lv.level_name}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col-sm-3">
-                        <mat-select [disabled]='showdeletedicon' class="inputs"
-                          [(ngModel)]="qualification.board && qualification.board[0] && qualification.board[0]._id"
-                          name="board{{i}}" #brd="ngModel" placeholder="Board/University" required>
-                          <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue"
-                            (click)="getboard(board,i)">
-                            {{board.Board_Name}}
-                            {{univ.University_Name}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col-sm-3">
-                        <mat-select [disabled]='showdeletedicon' class="inputs"
-                          [(ngModel)]="qualification.institute_detail && qualification.institute_detail[0] && qualification.institute_detail[0]._id"
-                          name="institute_detail{{i}}" #ind="ngModel" placeholder="Institute" required>
-                          <mat-option [value]="item._id" *ngFor="let item of institutes" (click)="getIns(item,i)">
-                            {{item.institute_name}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col-sm-3">
-                        <mat-select [disabled]='showdeletedicon' class="inputs"
-                          [(ngModel)]="qualification.discipline && qualification.discipline[0] && qualification.discipline[0]._id"
-                          name="discipline{{i}}" #t="ngModel" placeholder="Discipline" required>
-                          <mat-option [value]="item._id" *ngFor="let item of dis" (click)="getdis(item,i)">
-                            {{item.discipline_name}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <mat-select [disabled]='showdeletedicon' class="inputs"
-                          [(ngModel)]="qualification && qualification.specification_detail && qualification.specification_detail[0] && qualification.specification_detail[0]._id"
-                          name="specification_detail{{i}}" #spec="ngModel" placeholder="Specification" required>
-                          <mat-option [value]="item._id" *ngFor="let item of specValue"
-                            (click)="getspecicification(item,i)">
-                            {{item.specification_name}}
-                          </mat-option>
-                        </mat-select>
-                      </div>
-                      <div class="col-sm-3">
-                        <input [disabled]='showdeletedicon' type="text" class="inputs" placeholder="Year of Passing"
-                          mask="0000" [(ngModel)]="qualification.year_of_passing"
-                          (focusout)="getYOP(qualification.year_of_passing,i)" name="year_of_passing{{i}}"
-                          #name="ngModel" maxlength="4" minlength="4" required>
-                      </div>
-                      <div class="col-sm-3">
-                        <input [disabled]='showdeletedicon' type="text" class="inputs" placeholder="Percentage"
-                          mask="00.00" [(ngModel)]="qualification.percentage" suffix="%" name="percentage{{i}}"
-                          (focusout)="getPerccent(qualification.percentage,i)" #name="ngModel" required>
-                      </div>
-                      <div class="col-sm-3 plusicon">
-                        <!-- {{i}} {{qual.length}} {{qual.length-1}} -->
-                        <mat-icon *ngIf="i == qual.length-1 && qual.length < 15"
-                          (click)="addnewQual(i,qualification,qual)">add_circle_outline</mat-icon>
-                        <mat-icon (click)="removelastQual(qualification)">delete</mat-icon>
-                      </div>
-                    </div><br>
-                  </div>
-                </div>
-              </div><br>
-              <div>
-                <div class="row" *ngFor="let word2 of words2; let in=index">
-                  <div class="col-sm-2">
-                    <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
-                      [(ngModel)]="words2[in].value" name="name{{in}}" #name="ngModel" required />
-                    <!-- <input [disabled]='showdeletedicon' class="input" type="text" placeholder="Certificate Link"
-                    [(ngModel)]="words2[in]" name="name{{in}}" #name="ngModel" required /> -->
-                  </div>
-                  <div class="col-sm-3 plusicon">
-
-                    <mat-icon *ngIf="in == words2.length-1 && words2.length < 15" (click)="add(in)"
-                      [disabled]='showdeletedicon'>add_circle_outline</mat-icon>
-                    <mat-icon (click)="removenewLink(in)" [disabled]='showdeletedicon'>delete</mat-icon>
-                    <!-- <mat-icon (click)="test()">delete</mat-icon> -->
-                  </div>
-                </div><br>
               </div>
+              <!-- //////Gender part//////// -->
+              <div class="form-group display_flex">
+                <label>Gender</label><span style="color: red;"> *</span>
+                <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
+                  <mat-radio-button value="M">M</mat-radio-button>
+                  <mat-radio-button value="F">F</mat-radio-button>
+                  <mat-radio-button value="O">Rather not say</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <!-- //////I'm a//////// -->
+              <div class="form-group display_flex">
+                <label>I'm a</label><span style="color: red;"> * &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
+                  name="is_student_or_professional">
+                  <mat-radio-button value="student">Student</mat-radio-button>
+                  <mat-radio-button value="professional">Professional</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <!-- //////Language known//////// -->
+              <div class="form-group">
+                <label>Languages known</label><br>
+                <mat-select [disabled]='cannotEdit' multiple class="inputs col-md-6 col-sm-12 col-12"
+                  placeholder="Language" formControlName="languages_known" name="language">
+                  <mat-option *ngFor="let item of languageList" [value]="item._id">
+                    {{item.languagename}}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <!-- //////Location//////// -->
+              <label>Location</label><span style="color: red;"> *</span><br>
+              <div class="form-group row">
+                <div class="col-md-4 col-sm-12 col-12">
+                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Country" formControlName="country"
+                    name="country" (selectionChange)="getAllState()">
+                    <mat-option [value]="country._id" *ngFor="let country of countryValue">
+                      {{country.countryname}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-md-4 col-sm-12 col-12">
+                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="State" formControlName="state"
+                    name="state" (selectionChange)="getDistrict()">
+                    <mat-option [value]="state._id" *ngFor="let state of stateValue">
+                      {{state.statename}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-md-4 col-sm-12 col-12">
+                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="District" formControlName="city_town"
+                    name="City">
+                    <mat-option [value]="city._id" *ngFor="let city of cityValue">
+                      {{city.districtname}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+            <!-- //////////End of first section left part/////////// -->
+            <!-- //////FIrst section Right part//////// -->
+            <div class="col-md-8 col-sm-12 col-12 right">
+              <div class="row float_right">
+                <!-- <p ></p> -->
+                <label class="f_size_20 f_wt_400">My Profile</label>
+                <ng-container *ngIf="cannotEdit">
+                  <mat-icon  matTooltip="Click here to change profile details" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                  </mat-icon>
+                </ng-container>
+                <ng-container *ngIf="!cannotEdit">
+                <mat-icon  matTooltip="You can start editing" (click)="cannotEdit = !cannotEdit;" class="m-l-10px f_size_20">create
+                </mat-icon>
+                </ng-container>
+              </div>
+              <br><br><br>
+              <div class=row>
+                <div class="col-md-8"></div>
+                <div class="col-md-2 col-sm-6 col-6 float_right">
+                  <img
+                    [src]="profileForm.value.profile_img ? profileForm.value.profile_img : '../../../../assets/learner/avatar2.png'"
+                    id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" class="avatar">
+                  <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+                  <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
+                  </mat-icon>
+                </div>
+                <div class="col-md-2 col-sm-6 col-6" *ngIf="userData && userData != null">
+                  <label class="f_wt_400 m-l-10px space5">{{userData.full_name}}</label><br>
+                  <label class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.username}}</label><br>
+                  <label
+                    class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.created_on | date : "dd.MM.y"}}</label>
+                </div>
+              </div>
+              <br>
               <div class="row">
-                <div class="col-sm-2">
-                  <!-- <input [disabled]='showdeletedicon' class="inputs" placeholder="Socialmedia Link"
-                    [(ngModel)]="profileDetails.social_media && profileDetails.social_media[0].link" name="socialMedia"> -->
-                  <input [disabled]='showdeletedicon' class="inputs" placeholder="linkedin Link"
-                    [(ngModel)]="socialMediaLink" name="socialMedia">
+                <div class="col-md-8"> </div>
+                <div class="col-md-4">
+                  <span class="percent color_blue">{{profileForm.value.progress}}%</span>
+                  <mat-progress-bar class="border-radius-5" mode="determinate" [value]="profileForm.value.progress">
+                  </mat-progress-bar>
                 </div>
-                <div class="col-sm-3">
-                  <i class="fa fa-linkedin-square linkedin" aria-hidden="true"></i>
+              </div>
+              <br>
+              <div class="row" *ngIf="userData">
+                <div class="col-md-8"> </div>
+                <div class="col-md-3 col-sm-8 col-8">
+                  <span class="color_blue">Password</span>
                 </div>
-              </div><br>
-              <div *ngIf="profileDetails.is_student_or_professional == 'professional'">
-                <div class="row">
-                  <mat-label>Experience</mat-label><span class="text-danger">*</span>
+                <div class="col-md-1 col-sm-4 col-4">
+                  <mat-icon class="f_size_17" (click)="editPassword(passwordDialog)">create</mat-icon>
                 </div>
-                <div class="row experirnce">
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <input [disabled]='showdeletedicon' type="text" mask="00" class="inputs"
-                          placeholder="Total Experience" [(ngModel)]="prof.total_experience" name="totExp" maxlength="2"
-                          required>
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' class="inputs"
-                          placeholder="Current Organisation" [(ngModel)]="prof.organization" name="currentOrg"
-                          minlength="4" maxlength="16" required>
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" mask="SSSSSSSSSSSSSSSS" [disabled]='showdeletedicon' minlength="4"
-                          maxlength="16" class="inputs" placeholder="Current role" [(ngModel)]="prof.job_role"
-                          name="currentRole" required>
-                      </div>
-                    </div>
-                  </div>
-                </div><br>
+              </div>
+              <br>
+              <div class="row" *ngIf="userData.user_mobile">
+                <div class="col-md-8"> </div>
+                <div class="col-md-3 col-sm-8 col-8">
+                  <span class="color_blue">{{userData.user_mobile.mobile_number}}</span>
+                </div>
+                <div class="col-md-1 col-sm-4 col-4">
+                  <mat-icon class="f_size_17" (click)="editmobno(mobDialog)">create</mat-icon>
+                </div>
+              </div>
+              <br>
+              <div class="row" *ngIf="userData.email">
+                <div class="col-md-8"> </div>
+                <div class="col-md-3 col-sm-8 col-8">
+                  <span class="color_blue">{{userData.email}}</span>
+                </div>
+                <div class="col-md-1 col-sm-4 col-4">
+                  <mat-icon class="f_size_17" (click)="editEmail(emailDialog)">create</mat-icon>
+                </div>
+              </div>
+              <br><br>
+            </div>
+
+          </div>
+          <!-- ////////////Qualification row////////////// -->
+          <label>Qualification</label><span style="color: red;"> *</span><br>
+          <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
+            <div class="row p-b-10px" [formGroupName]="in">
+              <div class="col-md-3 col-sm-12 col-12 display_flex">
+                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
+                  name="qualification">
+                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue">
+                    {{lv.level_name}}
+                  </mat-option>
+                </mat-select>
+                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Board/University"
+                  formControlName="board_university" name="board_university">
+                  <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
+                    {{board.Board_Name}}
+                    {{univ.University_Name}}
+                  </mat-option>
+                </mat-select>
               </div>
 
-              <div class="bt">
-                <button class="subbtn" [disabled]="enable"
-                  (click)="updateProfile(profileDetails.languages_known,profileDetails.country,
-        profileDetails.state,profileDetails.city_town,profileDetails.socialMediaLink,profileDetails.about_you,prof)">Submit</button>
-              </div><br>
-            </form>
+              <div class="col-md-3 col-sm-12 col-12 display_flex">
+              <!-- <mat-form-field *ngIf=""> -->
+                <ng-container 
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+              <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
+                  name="institute">
+                  <mat-option [value]="item._id" *ngFor="let item of institutes">
+                    {{item.institute_name}}
+                  </mat-option>
+                </mat-select>
+              </ng-container>
+        <!------------------------Institute textbox for 10th and 12th--------------------->
+                <ng-container class="col-md-3 col-sm-12 col-12 display_flex" 
+                *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                  <input type="text" class="institute"
+                placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'"
+                 formControlName="institute">
+                 </ng-container>
+                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Discipline" formControlName="discipline"
+                  name="discipline">
+                  <mat-option [value]="item._id" *ngFor="let item of disciplines">
+                    {{item.discipline_name}}
+                  </mat-option>
+                </mat-select>
+              </div>
+
+              <div class="col-md-3 col-sm-12 col-12 display_flex">
+                <ng-container
+                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
+                  formControlName="specification" name="specification">
+                  <mat-option [value]="item._id" *ngFor="let item of specValue">
+                    {{item.specification_name}}
+                  </mat-option>
+                </mat-select>
+              </ng-container>
+              <ng-container>
+                <input  class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'" placeholder="Year of Passing"
+                  formControlName="year_of_passing" (change)="yearOfpassing()">
+                </ng-container>
+                </div>
+
+              <div class="col-md-3 col-sm-12 col-12 display_flex">
+                
+                <input type="tel" mask="00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
+                'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
+                  formControlName="percentage">
+                <mat-icon (click)="addQualification()"
+                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
+                  class="p-5px">add_circle_outline
+                </mat-icon>
+                <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
+                  (click)="removeQualification(in)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon>
+              </div>
+            </div>
+
           </div>
-
-          <!------------------------------Change Email Dialog---------------------->
-          <ng-template #emailDialog>
-            <span class="close">
-              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-            </span>
-            <h1 class="head">Change the Email ID</h1>
-            <mat-dialog-content style="width: 270px;margin-top: 24px; height: 350px;">
-              <form [formGroup]="mailForm">
-                <div class="form-group">
-                  <label class="title">Enter new email id</label>
-                  <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
-                    [ngClass]="{ 'is-invalid': f.mailid.touched && f.mailid.errors }" required>
-                  <div *ngIf="f.mailid.touched && f.mailid.errors" class="invalid-feedback">
-                    <div *ngIf="f.mailid.errors.required">Email is required</div>
-                    <div *ngIf="f.mailid.errors.pattern">Email Id is invalid</div>
+          <br>
+          <!-- ////////////Certificate row////////////// -->
+          <div formArrayName="certificate" class="row p-b-10px"
+            *ngFor="let certificate of certificate.controls; let i=index">
+            <div class="col-md-2 col-sm-4 col-8 display_flex">
+              <input type="text"
+                [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80': 'inputs border-radius-5 color_blue background_trans width_80 ena'"
+                placeholder="Certificate Link" formControlName="{{i}}">
+              <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
+              profileForm.value.certificate.length < 15" class="p-5px">add_circle_outline
+              </mat-icon>
+              <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
+                class="p-5px">delete</mat-icon>
+            </div>
+          </div>
+          <br>
+          <!-- ////////////Social Link row////////////// -->
+          <div formArrayName="social_media" class="row p-b-10px"
+            *ngFor="let social of social_media.controls; let ind=index">
+            <div [ngClass]="cannotEdit ? 'dis col-md-2 col-sm-4 col-8 display_flex' :
+            'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
+              <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
+                placeholder="Social Media Link" formControlName="link">
+              <i class="fa fa-linkedin-square linkedin m-l-10px" aria-hidden="true"></i>
+              <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
+              </mat-icon>
+              <mat-icon (click)="removeMediaLink(ind)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon> -->
+            </div>
+          </div>
+          <!-- /////If professional////// -->
+          <br>
+          <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
+            <label>Experience</label><span style="color: red;"> *</span><br>
+            <div class="row p-b-10px" formGroupName="professional">
+              <div class="col-md-2 col-sm-4 col-8">
+                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
+                  placeholder="Total Experience" formControlName="total_experience">
+                <!-- {{f.professional.controls.total_experience.value }},{{f.professional.controls.total_experience.value > 70}} -->
+                <div class="invalid-feedback" *ngIf="f.professional.controls.total_experience.touched && 
+                  f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
+                </div>
+                <div
+                  *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
+                  </div>
+                  <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less
+                    than 70
                   </div>
                 </div>
-                <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
-                  Submit
-                </button><br><br>
-              </form><br>
-            </mat-dialog-content>
-            <mat-dialog-actions class="bt">
-              <div class="account">Don't receive link?<button class="resendbtn"
-                  (click)="updateEmail(mailForm.valid)">Resend link</button></div>
-            </mat-dialog-actions>
-          </ng-template>
-          <!------------------------------Change mobileno Dialog---------------------->
-          <ng-template #mobDialog>
-            <span class="close">
-              <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
-            </span>
-            <h1 class="head">Change the Mobile No</h1>
-            <mat-dialog-content style="width: 285px;margin-top: 24px;">
-              <form [formGroup]="otpForm">
-                <div class="form-group">
-                  <label class="title">Enter new mobile no</label>
-                  <input type="text" formControlName="mobile" placeholder="+91" maxlength="10"
-                    pattern="[1-9]{1}[0-9]{9}" mask="0000000000" class="form-control"
-                    [ngClass]="{ 'is-invalid':  f.mobile.errors}" required />
-                  <div *ngIf="f.mobile.errors" class="invalid-feedback">
-                    <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
-                    <div *ngIf="f.mobile.errors.pattern">Mobile Number is invalid</div>
-                    <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits
-                    </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-8">
+                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
+                  placeholder="Organization" formControlName="organization">
+                <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
+                  </div>
+                  <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
+                  </div>
+                  <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
+                    {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
                   </div>
                 </div>
-                <p class="otphead">OTP will be send to this number</p>
-                <div *ngIf="showotp"><br>
-                  <p class="otphead">OTP Code</p>
-                  <ng-otp-input [config]="config"
-                  [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
-                  formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
-                  </ng-otp-input>
-                  <!-- <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="tel"
-                    formControlName="otp1" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" /> -->
-
-                  <!-- <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="tel"
-                    formControlName="otp2" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
-
-                  <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="tel"
-                    formControlName="otp3" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" />
-
-              <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="tel"
-                formControlName="otp4" maxLength="1" size="1" min="0" max="9" mask="0" pattern="[0-9]{1}" /> -->
+              </div>
+              <div class="col-md-2 col-sm-4 col-8">
+                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
+                'inputs border-radius-5 color_blue background_trans width_80'" placeholder="Job role"
+                  formControlName="job_role"
+                  [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
+                <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
+                  </div>
+                  <div *ngIf="f.professional.controls.job_role.errors.pattern">Job role is invalid
+                  </div>
+                  <div *ngIf="f.professional.controls.job_role.errors.minlength">Job Role must be minimum of
+                    {{f.professional.controls.job_role.errors.minlength.requiredLength}} characters
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- //.Button -Submit -->
+          <div class="row" *ngIf="!cannotEdit">
+            <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+              (click)="updateProfile()">Submit</button>
+            <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
+              (click)="updateProfile()">Submit</button> -->
+          </div>
+        </div>
+      </form>
+      <!------------------------------Change Email Dialog---------------------->
+      <ng-template #emailDialog>
+        <span class="f_size_18 color_blue float_right">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
+        <h1 class="head">Change the Email ID</h1>
+        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 200px;">
+          <form [formGroup]="mailForm">
+            <div class="form-group">
+              <label class="f_size_20 f_wt_400">Enter new email id</label>
+              <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
+                [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
+              <div *ngIf="c.mailid.touched && c.mailid.errors" class="invalid-feedback">
+                <div *ngIf="c.mailid.errors.required">Email is required</div>
+                <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
+              </div>
+            </div><br><br>
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
+              Submit
+            </button>
+          </form><br>
+        </mat-dialog-content>
+        <mat-dialog-actions class="center_align">
+          <div class="account">Don't receive link?<button class="no_border f_wt_500 background_trans color_blue"
+              (click)="updateEmail(mailForm.valid)">Resend
+              link</button></div>
+        </mat-dialog-actions>
+      </ng-template>
+      <!------------------------------Change mobileno Dialog---------------------->
+      <ng-template #mobDialog>
+        <span class="f_size_18 color_blue float_right">
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+        </span>
+        <h1 class="head">Change the Mobile No</h1>
+        <mat-dialog-content style="width: 285px;margin-top: 24px;">
+          <form [formGroup]="otpForm">
+            <div class="form-group">
+              <label class="f_size_20 f_wt_400">Enter new mobile no</label>
+              <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
+                mask="0000000000" class="form-control" [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}"
+                required />
+              <div *ngIf="c.mobile.errors" class="invalid-feedback">
+                <div *ngIf="c.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="c.mobile.errors.pattern">Mobile Number is invalid</div>
+                <div *ngIf="c.mobile.errors.minlength || c.mobile.errors.maxlength">Mobile Number must be 10 digits
+                </div>
+              </div>
+            </div>
+            <p class="f_wt_500 color_blue float_left">OTP will be send to this number</p>
+            <div *ngIf="showotp"><br>
+              <p class="f_wt_500 color_blue float_left">OTP Code</p>
+              <div class="otp">
+                <ng-otp-input [config]="config"
+                formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
+              </ng-otp-input>
+              </div><br>
+              <div *ngIf="sendOtp">
+                <p>{{minutes}}:{{seconds}}</p>
+              </div>
+              <div *ngIf="resendOtp">
+                <p>{{minutes}}:{{seconds}}</p>
+              </div>
               <br><br>
             </div>
             <div *ngIf="showotp">
-              <button class="popupbtns" (click)="otpverify()">Verify</button>
+              <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
-            <div *ngIf="showotp" class="account">Didn't get OTP?<button class="resendbtn" (click)="Resendcode()">Resend OTP</button></div>
+            <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
+                class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend
+                OTP</button></div>
           </form>
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
@@ -397,100 +416,102 @@
         </mat-dialog-actions>
       </ng-template>
       <!---------------------------------Password Dialog--------------------------------->
-      <ng-template  #passwordDialog>
-        <span class="close">
+      <ng-template #passwordDialog>
+        <span class="f_size_18 color_blue float_right">
           <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h1 class="head">Change the Password</h1>
-        <mat-dialog-content style="width: 300px;margin-top: 24px;" >
-          <form   [formGroup]="passwordForm">
-            <label class="title">Enter the current password</label>
-            <div class="input-group">
-              <input class="form-control border-right-0" [type]="show_button ? 'text' : 'password'" formControlName="currentpassword" onCopy="return false" onDrag="return false"
-              onDrop="return false" onPaste="return false"  [ngClass]="{ 'is-invalid': f.currentpassword.touched && f.currentpassword.errors }">
-              <span class="input-group-append bg-white border-left-0">
-                <span class="input-group-text bg-transparent">
-                  <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()" aria-hidden="true"></i>
-                </span>
-              </span>
-              <div *ngIf="f.currentpassword.touched && f.currentpassword.errors" class="invalid-feedback">
-                <div *ngIf="f.currentpassword.errors.required">Current Password is required</div>
-                <div *ngIf="f.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
-                <div *ngIf="f.currentpassword.errors.pattern">Your password must contain at least one number and have a
+        <mat-dialog-content style="width: 300px;margin-top: 24px;">
+          <form [formGroup]="passwordForm">
+            <label class="f_size_19 f_wt_400">Enter the current password</label>
+            <div class="form-group">
+              <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
+                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                class="form-control border-right-0"
+                [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
+              <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
+                aria-hidden="true"></i>
+              <div *ngIf="c.currentpassword.touched && c.currentpassword.errors" class="invalid-feedback">
+                <div *ngIf="c.currentpassword.errors.required">Current Password is required</div>
+                <div *ngIf="c.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
+                <div *ngIf="c.currentpassword.errors.pattern">Your password must contain at least one number and
+                  have a
                   mixture of Special characters, uppercase and lowercase letters.</div>
               </div>
             </div><br>
 
 
-                <label class="title">Enter the new password</label>
-                <div class="input-group">
-                  <input class="form-control border-right-0" [type]="showNewButton ? 'text' : 'password'"
-                    formControlName="newpassword" onCopy="return false" onDrag="return false" onDrop="return false"
-                    onPaste="return false" [ngClass]="{ 'is-invalid': f.newpassword.touched && f.newpassword.errors }"
-                    (keyup)="change($event)" />
-                  <span class="input-group-append bg-white border-left-0">
-                    <span class="input-group-text bg-transparent">
-                      <i [class]="showNewEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="shownewPassword()"
-                        aria-hidden="true"></i>
-                    </span>
-                  </span>
-                  <div *ngIf="f.newpassword.touched && f.newpassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.newpassword.errors.required">New Password is required</div>
-                    <div *ngIf="f.newpassword.errors.minlength">New Password must be at least 8 characters</div>
-                    <div *ngIf="f.newpassword.errors.pattern">Your password must contain at least one number and have a
-                      mixture of Special characters, uppercase and lowercase letters.</div>
-                    <div *ngIf="f.newpassword.errors.mustMatch"> Passwords must be same</div>
-                  </div>
-                </div><br>
-                <div class="box" id="message">
-                  <div class="row">
-                    <div class="col">
-                      <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
-                        Uppercase</p>
-                      <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
-                        Lowercase</p>
-                    </div>
-                    <div class="col">
-                      <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check"
-                          aria-hidden="true"></i> Special character</p>
-                      <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i> Number
-                      </p>
-                    </div>
-                  </div>
+            <label class="f_size_19 f_wt_400">Enter the new password</label>
+            <div class="form-group">
+              <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
+                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                class="form-control border-right-0"
+                [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)" />
+              <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
+                aria-hidden="true"></i>
+              <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
+                <div *ngIf="c.newpassword.errors.required">New Password is required</div>
+                <div *ngIf="c.newpassword.errors.minlength">New Password must be at least 8 characters</div>
+                <div *ngIf="c.newpassword.errors.pattern">Your password must contain at least one number and have a
+                  mixture of Special characters, uppercase and lowercase letters.</div>
+                <div *ngIf="c.newpassword.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div><br>
+            <div class="box" id="message">
+              <div class="row">
+                <div class="col">
+                  <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                    Uppercase</p>
+                  <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                    Lowercase</p>
                 </div>
-
-
-
-                <p class="head">The password should not be last password</p>
-                <label class="title">Confirm the new password</label>
-                <div class="input-group">
-
-                  <input class="form-control border-right-0" [type]="showconButton ? 'text' : 'password'"
-                    formControlName="confirmpassword" onCopy="return false" onDrag="return false" onDrop="return false"
-                    onPaste="return false"
-                    [ngClass]="{ 'is-invalid': f.confirmpassword.touched && f.confirmpassword.errors }" />
-                  <span class="input-group-append bg-white border-left-0">
-                    <span class="input-group-text bg-transparent">
-                      <i [class]="showconEyes ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showconPassword()"
-                        aria-hidden="true"></i>
-                    </span>
-                  </span>
-                  <div *ngIf="f.confirmpassword.touched && f.confirmpassword.errors" class="invalid-feedback">
-                    <!-- <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
-                <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 8 characters</div>
-                <div *ngIf="f.confirmpassword.errors.pattern">Your password must contain at least one number and have a
-                  mixture of Special characters, uppercase and lowercase letters.</div> -->
-                    <div *ngIf="f.confirmpassword.errors.mustMatch">Should be same as password</div>
-                  </div>
+                <div class="col">
+                  <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check"
+                      aria-hidden="true"></i> Special character</p>
+                  <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i> Number
+                  </p>
                 </div>
-              </form><br>
-            </mat-dialog-content><br>
-            <mat-dialog-actions>
-              <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
-                Submit
-              </button><br><br>
-            </mat-dialog-actions>
-          </ng-template>
-        </div>
-      </div>
+              </div>
+            </div>
+            <p class="head f_size_17">The password should not be last password</p>
+            <label class="f_size_19 f_wt_400">Confirm the new password</label>
+            <div class="form-group">
+              <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
+                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
+                class="form-control border-right-0"
+                [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
+              <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
+                (click)="showConNew = !showConNew" aria-hidden="true"></i>
+              <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
+                <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as password</div>
+              </div>
+            </div>
+          </form>
+        </mat-dialog-content><br>
+        <mat-dialog-actions>
+          <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
+            Submit
+          </button><br><br>
+        </mat-dialog-actions>
+      </ng-template>
     </div>
+  </div>
+</div>
+
+<!-- DEBUG -->
+<!-- <br><br><br>VALID : <br>
+<pre>about_you : {{profileForm.get('about_you').valid}}</pre>
+<pre>gender : {{profileForm.get('gender').valid}}</pre>
+<pre>is_student_or_professional : {{profileForm.get('is_student_or_professional').valid}}</pre>
+<pre>languages_known : {{profileForm.get('languages_known').valid}}</pre>
+<pre>country : {{profileForm.get('country').valid}}</pre>
+<pre>state : {{profileForm.get('state').valid}}</pre>
+<pre>city_town : {{profileForm.get('city_town').valid}}</pre>
+<pre>progress : {{profileForm.get('progress').valid}}</pre>
+<pre>certificate : {{profileForm.get('certificate').valid}}</pre>
+<pre>qualification : {{profileForm.get('qualification').valid}}</pre>
+<pre>social_media : {{profileForm.get('social_media').valid}}</pre>
+<pre>professional : {{profileForm.get('professional').valid}}</pre>
+<br>
+
+{{profileForm.value | json}} -->

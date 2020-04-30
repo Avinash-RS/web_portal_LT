@@ -1,5 +1,4 @@
 let jsonDataKnowledge={}
-var ser=require('../../../app/learner/services/learner-services.service')
 //import { LearnerServicesService } from '../../../app/learner/services/learner-services.service';
 /*global window, alert, console, SCOBotUtil, debug, scorm, SCOBot_API_1484_11 */
 /*jslint devel: true, browser: true */
@@ -1613,7 +1612,8 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
           
              
@@ -1626,7 +1626,8 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
          }
      }
@@ -1637,13 +1638,25 @@ function startResumeEvent(params){
              course_dtl:{
                  location:'',
                  status:rec_status,
-                 course_id:course_id
+                 course_id:course_id,
+                 knowledge_data:jsonDataKnowledge
              }
          }
      }
      if(rec_status){
         window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
-        var d=ser.syllabus_of_particular_scorm('1','1','1')
-        console.log(d,'llllllllllllllllllllllllllllllllllllllll')
+        getcourse(jsonData).then(data=> console.log(data,"data course"))
+    }
+
+    async function getcourse(jsonData) {
+       const response = await fetch('http://loclhost:3000/course/coursestatus', {
+        method: 'POST',
+        body:JSON.stringify(jsonData), // string or object
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const myJson = await response.json(); //extract JSON from the http response
+      return myJson;
     }
 }
