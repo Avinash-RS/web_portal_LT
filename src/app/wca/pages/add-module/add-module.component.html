@@ -41,7 +41,7 @@
                 #doneList="cdkDropList"
                 [cdkDropListData]="courseDetails.coursedetails"
                 [cdkDropListConnectedTo]="[todoList]"
-                class=""
+                class="horizontalView"
                 (cdkDropListDropped)="drop($event)">
 
                 <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
