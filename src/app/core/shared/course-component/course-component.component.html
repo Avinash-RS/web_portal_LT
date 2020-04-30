@@ -38,7 +38,6 @@
       Published On : {{course.publishedOn || course.updated_at | date}}
     </div>
   </div>
-  <br>
 
   <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
@@ -71,13 +70,11 @@
   </div>
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
-    <br>
     <div class="row" (click)="gotoDescription()">
       <div class="col-md-12" style="text-align: center;">
         Description
       </div>
     </div>
-    <br>
     <div class="row" (click)="gotoDescription()">
       <div class="col-md-12">
         <p class="course_description">
@@ -98,4 +95,3 @@
     </div>
   </div>
 </div>
-<br><br>
