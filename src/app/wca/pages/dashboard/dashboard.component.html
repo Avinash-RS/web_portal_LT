@@ -1,18 +1,15 @@
 
-<div>
-    <app-wca></app-wca>
-</div>
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">My Courses</li>
     </ol>
 </nav>
 
 <div>
-    <button class="backgroundcol2" routerLink="/Wca/addcourse" >Create a Course</button>
+    <button class="backgroundcol2" routerLink="/Admin/auth/Wca/addcourse" >Create a Course</button>
 </div> 
   
 
@@ -110,7 +107,7 @@
                         <ng-template #nodraftcourse>
                             (0 Courses)
                         </ng-template>
-                        <span style="float: right;font-size: small; font-weight: bold;"(click) = "goToViewCourse(draft)">View all</span>
+                        <span style="float: right;font-size: small; font-weight: bold;"(click) = "goToViewCourse('draft')">View all</span>
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
@@ -121,7 +118,7 @@
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                         [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [showCount]="false" [showRating]="false" [goto] ="'draft'"> </app-course-component>
+                                        [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>

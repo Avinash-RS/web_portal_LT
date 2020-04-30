@@ -28,26 +28,36 @@ import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-cou
 import { ReferenceFileComponent } from './pages/reference-file/reference-file.component';
 import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
+import { AddModuleComponent } from './pages/add-module/add-module.component';
+
+
+
+
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, data : {title:'Web Content Authoring Dashboard'}},
-  { path: 'wca', component: WcaComponent,  data : {title:'Web Content Authoring Dashboard'}},
-  { path: 'addcourse', component: CreateCourseComponent,  data : {title:'Add new Course'}},
-  { path: 'viewmodule', component: ViewModuleComponent,  data : {title:'View Module'} },
-  { path: 'addmodule', component: CreateModuleComponent,  data : {title:'Create Module'}},
-  { path: 'addtemplate', component: CreateTemplateComponent, data : {title:'Create Template'}},
-  { path: 'choosetemplate', component: ChooseTemplateComponent, data : {title:'Choose Template'}},
-  { path: 'addtopic', component: CreateTopicComponent, data : {title:'Create Topic'}},
-  { path: 'addfile', component: UploadFilesComponent, data : {title:'Upload Files'}},
-  { path: 'mycourse', component: MycreatedCourseComponent, data : {title:'My created Course'}},
-  { path: 'ct', component: ChooseTemplateComponent, data : {title:'Choose Template'}},
-  { path: 'rf', component: ReferenceFileComponent, data : {title:'Reference File'}},
-  { path: 'previewcourse', component: CoursepreviewComponent, data : {title:'Courses Preview'}}
-  
+
+  { path: '', component: DashboardComponent,  },
+  { path: 'wca', component: WcaComponent,  },
+  { path: 'addcourse', component: CreateCourseComponent,  },
+  { path: 'viewmodule', component: ViewModuleComponent,  },
+  { path: 'viewmodule', component: CreateModuleComponent,  },
+  { path: 'addtemplate', component: CreateTemplateComponent,},
+  { path: 'choosetemplate', component: ChooseTemplateComponent,},
+  { path: 'addtopic', component: CreateTopicComponent,},
+
+  { path: 'addfile', component: UploadFilesComponent,},
+  { path: 'mycourse', component: MycreatedCourseComponent,},
+  { path: 'ct', component: ChooseTemplateComponent,},
+  { path: 'rf', component: ReferenceFileComponent,},
+  {path:'addmodule',component:AddModuleComponent},
+  {path:'previewcourse',component:CoursepreviewComponent}
+
+
+ 
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent,AddModuleComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ReactiveFormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 //local
 import { MaterialModule } from '@core/material.module';
@@ -37,7 +37,7 @@ import { Ppt1Component } from './ppt1/ppt1.component';
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
-   
+
 
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -53,11 +53,11 @@ import { Ppt1Component } from './ppt1/ppt1.component';
     BrowserAnimationsModule,
 
   ],
-  providers: [AlertComponentComponent,    
-  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
+  providers: [AlertComponentComponent,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  entryComponents: [AlertComponentComponent,DialogComponent]
+  entryComponents: [AlertComponentComponent, DialogComponent]
 })
 export class AppModule { }

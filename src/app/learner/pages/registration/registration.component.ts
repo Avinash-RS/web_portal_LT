@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
     .subscribe(data => {
           if (data.data['user_registration']['success'] == 'true') {
             this.alert.openAlert(data.data['user_registration'].message,null)
-            localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
+            // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
             localStorage.setItem('role', 'learner')
             this.loader.hide();
             this.registerForm.reset();

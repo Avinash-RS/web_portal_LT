@@ -1,33 +1,56 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item"><a href="#">Created by me</a></li>
-    <li class="breadcrumb-item active" aria-current="page"></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Wca</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{course && course.name}}</li>
   </ol>
 </nav>
 
 <div class="p-5px">
-  <h2>Publish</h2>
+  <h2>Publish {{course && course.name}} </h2>
   <div class="container">
-    <div class="col-md-12">
-      <mat-card style="text-align: left;box-shadow: 0 2px 10px #6c757d;">
-        <h3>
-          Select the catalog to publish the course
-        </h3>
-        <button mat-raised-button>Basic</button>
-        <hr>
-        <h3>
-          Selected Catalogue
-        </h3>
-        <p>
-          Catalogue/Category/Sub Category
-        </p>
-        <br><br><br>
-        <div class="row">
-          <button mat-raised-button color="primary" (click) = "publishCourse()">Publish</button>
-          <button mat-raised-button (click) = "draftCourse()">Cancel</button>
+    <mat-card style="text-align: left;box-shadow: 0 2px 10px #6c757d;">
+      <h3>
+        Select the catalog to publish the course
+      </h3>
+      <div class="row m-l-5 ht-80px">
+        <div class="col-md-3 col-sm-6 col-11">
+          <button mat-raised-button (click)="show = !show">Associate to Catalogue</button>
         </div>
-      </mat-card>
-    </div>
+        <div class="col-md-4  col-sm-6 col-11">
+          <ol class="tree" *ngIf="show">
+            <li>
+              <input type="checkbox" disabled checked id="menu-1" />
+              <label for="menu-1">It & Software</label>
+              <ol>
+                <li>
+                  <input type="checkbox" disabled checked id="menu-1-1" />
+                  <label for="menu-1-1">Machine Learning</label>
+
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </div>
+     
+
+      <hr>
+      <h3>
+        Selected Catalogue
+      </h3>
+      <p class="m-l-5">
+        Catalogue/IT & Software/<strong>Machine Learning</strong>
+      </p>
+      <br><br>
+      <div class="row">
+        <div class="col-md-6 float_right ">
+          <button mat-raised-button class="background-blue color_white" (click)="publishCourse()">Publish</button>
+        </div>
+        <div class="col-md-6 float_left">
+          <button mat-raised-button (click)="draftCourse()">Cancel</button>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </div>

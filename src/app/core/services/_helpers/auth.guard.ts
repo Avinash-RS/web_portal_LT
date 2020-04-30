@@ -56,11 +56,9 @@ export class AuthGuard implements CanActivate {
       }
     }
     //if admin logged in
-    if (role == 'admin' && adminDetails && (state.url != 'Learner' && state.url != 'Wca')) {
-      if (state.url == '/Admin/login')
-        return false
-      else if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser' 
-      || state.url != "/Admin/auth/listCourses")
+    if (role == 'admin' && adminDetails) {
+      if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser'
+        || state.url != "/Admin/auth/listCourses")
         return true
     }
     else {

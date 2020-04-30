@@ -54,7 +54,7 @@ export class CreateTopicComponent implements OnInit {
   topicItem(): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array([this.topicImages()]),
+      topicimages: this.formBuilder.array([],Validators.compose([Validators.required])),
       topicstatus:['true']
     });
   }
@@ -103,6 +103,7 @@ export class CreateTopicComponent implements OnInit {
   createForm() {
    return this.createTopicForm = this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
+      modulestatus:['true'],
       moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details ? this.queryData.template_details.map(data =>
         this.topicItem()
       ) : [])
@@ -163,6 +164,8 @@ export class CreateTopicComponent implements OnInit {
               this.spinner.hide();
             })
           } else if (item.name === 'PPT') {
+
+
             this.spinner.hide();
           } else if (item.name === 'Word') {
             this.spinner.hide();
@@ -279,22 +282,32 @@ export class CreateTopicComponent implements OnInit {
 
 
 
-  addTopicFrom() {
+  addTopicFrom(event,type) {
+    event.stopPropagation();
     this.submitted = true;
     // dummy data
      this.courseForm.value.createdby_name = 'Admin';
      this.courseForm.value.createdby_id = '0001';
      this.courseForm.value.createdby_role = 'Sathish';
+     this.courseForm.value.flag = 'true';
 
     console.log(this.courseForm);
+    
     if(this.courseForm.valid) {
+      this.spinner.show();
       this.submitted = false;
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
         if (data && data.Message === 'Success') {
           this.toast.success('Draft Created Successfully !!!');
+          if(type === 'draft') {
+            this.router.navigate(['/Admin/auth/Wca/viewmodule']);
+          } else {
+            this.router.navigate(['/Admin/auth/Wca']);
+          }
         }
+        this.spinner.hide();
      }, err => {
        this.spinner.hide();
      })

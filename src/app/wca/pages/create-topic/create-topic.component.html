@@ -1,9 +1,8 @@
 
-<div><app-wca></app-wca></div>
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
 
@@ -96,9 +95,9 @@
         </div>
     </span>
         <div *ngIf="queryData?.template_details" class="dspFlx">
-            <button class="backgroundcol2"   type="submit">Save as a draft</button>
-           <span class="padTwoSides"> <button class="backgroundcol1" type="button">Create</button></span>
-            <button class="backgroundcol1"  type="button" >Cancel</button>
+            <button class="backgroundcol2"  (click)="addTopicFrom($event,'draft')"   type="button">Save as a draft</button>
+           <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')" type="button">Create</button></span>
+            <button class="backgroundcol1" [routerLink]="['/Wca']"  type="button" >Cancel</button>
 
             </div>
     </div>

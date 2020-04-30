@@ -39,11 +39,13 @@ a {
 /*Fun begins*/
 .tab_container {
   text-align: center;
-	width: 95%;
-	margin:  auto;
+	width: 100%;
+	// margin:  auto;
 	// padding-top: 70px;
   position: relative;
-  overflow:auto
+  overflow:auto;
+  	margin: 0;
+	padding: 0;
 }
 
  section {
@@ -57,17 +59,18 @@ a {
 }
 
 .tab-class {
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 15px;
   display: block;
   float: left;
-  width: 20%;
-  padding: 1.5em;
+  width: 50%;
+  padding: 10px;
   color: #757575;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
   background: #f0f0f0;
+  margin: 0px;
 }
 
 #tab1:checked ~ #content1,
@@ -94,11 +97,11 @@ a {
 
 .tab_container [id^="tab"]:checked + label {
   background: #fff;
-  box-shadow: inset 0 3px #0CE;
+  box-shadow: inset 0 3px #1d3f72;
 }
 
 .tab_container [id^="tab"]:checked + label .fa {
-  color: #0CE;
+  color: #a3b4c9;
 }
 
 label .fa {
@@ -130,21 +133,21 @@ label .fa {
   }
 }
 
-// for tree
+// // for tree
 
 .card {
     background: #fff;
     border-radius: 2px;
     display: inline-block;
     height: auto;
-    margin: 0.5rem;
+    // margin: 0.5rem;
     position: relative;
     width: auto;
   }
-* {
-	margin: 0;
-	padding: 0;
-}
+// * {
+// 	margin: 0;
+// 	padding: 0;
+// }
 body {
 	padding: 100px;
 	background: #929292;
@@ -154,71 +157,19 @@ body {
 input {
 	font-size: 1em;
 }
-ol.tree {
-	padding-left: 30px;
-}
-li {
-	list-style-type: none;
-	color: #fff;
-	position: relative;
-	margin-left: -15px;
-	label {
-		padding-left: 20px;
-		cursor: pointer;
-		// background: url("https://www.thecssninja.com/demo/css_tree/folder-horizontal.png") no-repeat 15px 2px;
-		display: block;
-	}
-	input {
-		width: 1em;
-		height: 1em;
-		position: absolute;
-		left: -0.5em;
-		top: 0;
-		opacity: 0;
-		cursor: pointer;
-
-		+ {
-			ol {
-				height: 1em;
-                margin: -16px 0 0 -44px;
-                // background: url("https://www.thecssninja.com/demo/css_tree/toggle-small-expand.png") no-repeat 40px 0;
-				background: url("https://www.thecssninja.com/demo/css_tree/toggle-small-expand.png") no-repeat 40px 0;
-				>li {
-					display: none;
-					margin-left: -14px !important;
-					padding-left: 1px;
-					
-				}
-			}
-		}
-		&:checked {
-			+ {
-				ol {
-					height: auto;
-					margin: -21px 0 0 -44px;
-					padding: 25px 0 0 80px;
-					background: url("https://www.thecssninja.com/demo/css_tree/toggle-small.png") no-repeat 40px 5px;
-					>li {
-						display: block;
-						margin: 0 0 0.063em;
-						&:first-child {
-							margin: 0 0 0.125em;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-li.file {
-	margin-left: -1px !important;
-	a {
-		display: inline-block;
-		padding-left: 21px;
-		color: #fff;
-		text-decoration: none;
-		background: url("https://www.thecssninja.com/demo/css_tree/document.png") no-repeat 0 0;
-	}
-}
 
 
+mat-tree {
+	ul, li {
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  list-style-type: none;
+	}
+  }
+  
+  .children-invisible {
+	display: none;
+  }
+  .margin20{
+    margin-top: 20px;
+  }

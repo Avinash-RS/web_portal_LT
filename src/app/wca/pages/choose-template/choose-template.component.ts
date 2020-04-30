@@ -58,7 +58,7 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log( this.selectedTemplate );
-        this.router.navigate(['./Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
+        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
   }
 
   onHover(id) {
@@ -71,7 +71,7 @@ export class ChooseTemplateComponent implements OnInit {
   }
 
   navCreateTemp() {
-    this.router.navigate(['./Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+    this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
   }
 
 }

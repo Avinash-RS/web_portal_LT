@@ -11,29 +11,45 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any;
+  // type: any ;
+  type: any = 'published';
   goto: any;
   showPublishedDate: boolean;
+  loader: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
-    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
+    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
-      this.service.getAllCourseCreated('1234ab', 0).subscribe((res: any) => {
+      this.loader = true;
+      this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
         console.log(res);
         this.courseList = res.data.get_course_createdby_admin.message;
         this.goto = 'create';
-        this.showPublishedDate = false
+        this.showPublishedDate = false;
+        this.loader = false;
       })
     }
-    else if (this.type == 'published')
-      this.service.getAllCoursePublished('1234ab', 0).subscribe((res: any) => {
+    else if (this.type == 'published') {
+      this.loader = true;
+      this.service.getAllCoursePublished("undefined", 0).subscribe((res: any) => {
         this.courseList = res.data.get_course_published.message;
         this.goto = 'publish';
-        this.showPublishedDate = true
+        this.showPublishedDate = true;
+        this.loader = false;
       })
+    }
+    else if (this.type == 'draft') {
+      this.loader = true;
+      this.service.getAllDrafted("undefined", 0).subscribe((res: any) => {
+        this.courseList = res.data.get_draft_course.message;
+        this.goto = 'draft';
+        this.showPublishedDate = true;
+        this.loader = false;
+      })
+    }
   }
 
   ngOnInit() {

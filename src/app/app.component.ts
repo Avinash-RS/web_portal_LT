@@ -20,7 +20,7 @@ export class AppComponent {
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private APIService: WcaService,
-    private titleService: Title 
+    private titleService: Title
 
   ) {
     this.getIPAddress();
@@ -30,14 +30,15 @@ export class AppComponent {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     )
-    .subscribe(() => {
+      .subscribe(() => {
 
-      var rt = this.getChild(this.activatedRoute)
+        var rt = this.getChild(this.activatedRoute)
 
-      rt.data.subscribe(data => {
-        console.log(data);
-        this.titleService.setTitle(data.title)})
-    })
+        rt.data.subscribe(data => {
+          console.log(data);
+          this.titleService.setTitle(data.title)
+        })
+      })
 
     this.getIPAddress();
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
@@ -67,7 +68,7 @@ export class AppComponent {
     } else {
       return activatedRoute;
     }
- 
+
   }
 
   getIPAddress() {

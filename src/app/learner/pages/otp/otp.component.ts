@@ -65,8 +65,8 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-  var user = localStorage.getItem('UserDetails')
-  this.currentUser = JSON.parse(user);
+  // var user = localStorage.getItem('UserDetails')
+  // this.currentUser = JSON.parse(user);
   this.systemip = localStorage.getItem('Systemip')
   this.otpForm = this.formBuilder.group({
           mobile: new FormControl('', myGlobals.mobileVal),

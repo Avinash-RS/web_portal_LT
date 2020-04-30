@@ -4,7 +4,7 @@ import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
-import {remove_doc_ref,getallrefdoc} from "./operations/wca_query";
+import {remove_doc_ref,getallrefdoc,get_module_topic} from "./operations/wca_query";
 
 //import {} from "./operations/learner_mutation"
 
@@ -71,8 +71,9 @@ bSubject = new BehaviorSubject({});
   }
   getsingleTemplate(template) { return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates?template_id='+template); }
 
-  createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/scorm/createscrom',draft);}
+  createDraft(draft) {return this.http.post(environment.wcaapiurl + 'api/courses/createscrom',draft);}
 
+  getCourseDetails(id) {return this.http.get(environment.wcaapiurl +  'api/courses/getscrommodules?courseid='+id); }
 
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation
@@ -84,5 +85,9 @@ bSubject = new BehaviorSubject({});
       return false;
     }
   }
-
+  get_module_topic(){
+    return this.Apollo.query({
+      query: get_module_topic
+    });
+  }
 }

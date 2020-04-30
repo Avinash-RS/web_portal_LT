@@ -1,15 +1,13 @@
 <div class="choose-template-container">
-    <div>
-        <app-wca></app-wca>
-    </div>
+    
 
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
-            <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+            <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">Create Courses</a></li>
 
-            <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+            <li class="breadcrumb-item " aria-current="page">Create Module</li>
 
             <li class="breadcrumb-item active" aria-current="page">Choose a Template</li>
         </ol>
@@ -31,7 +29,7 @@
                   border-bottom-width: thick;border-bottom-color: gold;">
                             Choose a template
                         </mat-panel-title>
-                        <!-- routerLink="/Wca/addtemplate" -->
+                        <!-- routerLink="/Admin/auth/Wca/addtemplate" -->
                         <mat-panel-title (click)="navCreateTemp()" class="f_wt_500 f_size_18 color_black"
                             style="margin-left: 20px;">
                             Create a template

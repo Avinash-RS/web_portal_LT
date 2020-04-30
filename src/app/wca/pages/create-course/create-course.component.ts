@@ -219,7 +219,7 @@ export class CreateCourseComponent implements OnInit {
         this.spinner.hide();
         if (data && data.Message === 'Success') {
          this.toast.success('Course Created Successfully !!!');
-         this.router.navigate(['./Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.image,courseName:this.courseForm.value.name}});
+         this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.image,courseName:this.courseForm.value.name}});
         }
       }, err => {
         this.spinner.hide();
