@@ -143,6 +143,9 @@ label .fa {
     // margin: 0.5rem;
     position: relative;
     width: auto;
+    overflow: auto;
+    max-height: 450px;
+
   }
 // * {
 // 	margin: 0;
@@ -158,7 +161,9 @@ input {
 	font-size: 1em;
 }
 
-
+.mat-tree-node{
+  min-height: 35px;
+}
 mat-tree {
 	ul, li {
 	  margin-top: 0;
@@ -173,3 +178,31 @@ mat-tree {
   .margin20{
     margin-top: 20px;
   }
+
+.cdk-overlay-pane {height: 500px;}
+.mat-menu-panel  {height: 500px;}
+
+button.mat-menu-item {
+width: 100% !important ;
+height: 500px !important ;}
+
+::ng-deep .customize {
+  height: 300px;
+}
+
+
+.newstyle{
+  .btnClassicon{
+    width: 22px;
+   
+  }
+  mat-checkbox{
+    .mat-checkbox-layout{
+      margin: 0px !important;
+    }
+  }
+
+}
+.mat-checkbox-layout{
+  margin: 0px !important;
+}
