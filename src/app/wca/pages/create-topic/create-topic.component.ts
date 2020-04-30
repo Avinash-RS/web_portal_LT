@@ -16,6 +16,7 @@ import { MatList, MatDialog } from '@angular/material';
 export class CreateTopicComponent implements OnInit {
   queryData: any;
   courseArray = [];
+  courseDetails:any;
   query:any;
   submitted = false;
   active: any;
@@ -94,7 +95,7 @@ export class CreateTopicComponent implements OnInit {
          this.query = null;
          this.query = params;
         console.log(this.query)
-        if (this.query && this.query.temp) {
+        if (this.query && this.query.temp && !this.query.addModule) {
           this.wcaService.bSubject.subscribe(value => {
            if (value) {
             this.queryData = null;
@@ -112,6 +113,7 @@ export class CreateTopicComponent implements OnInit {
            this.courseArray = value1.courseDetails.coursedetails;
            console.log(this.courseArray);
           this.queryData = value1.courseDetails.coursedetails[value1.index];
+          console.log(this.queryData)
           this.courseForm = this.courseform()
           this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
           this.courseForm.patchValue(value1.courseDetails);
@@ -120,8 +122,12 @@ export class CreateTopicComponent implements OnInit {
            this.queryData = {};
          }
           })
-        }
-        else {
+        } else if(this.query && this.query.template && this.query.addModule) 
+        {
+          this.initialCal2(this.query);
+
+        } else if(this.query && this.query.template && !this.query.addModule) 
+        {
           this.initialCall(this.query);
         }
       }
@@ -129,7 +135,7 @@ export class CreateTopicComponent implements OnInit {
 
 
   }
-  createForm() {
+  createForm() :FormGroup{
    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
@@ -156,6 +162,33 @@ export class CreateTopicComponent implements OnInit {
       this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
       console.log(this.queryData);
     }, err => {
+      this.spinner.hide();
+    })
+  }
+
+  initialCal2(data1) {
+    this.spinner.show();
+    console.log(data1);
+      this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
+        this.courseDetails = data.Result[0];
+        this.courseArray =  this.courseDetails.coursedetails;
+        console.log(this.courseArray);
+        this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
+          this.queryData = data.Result;
+          console.log(this.queryData);
+        this.spinner.hide();
+        console.log(this.courseDetails)
+        this.courseForm = this.courseform()
+        this.createTopicForm = this.createForm();
+        (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
+        this.courseForm.patchValue(this.courseDetails);
+        // this.courseForm.updateValueAndValidity();
+        console.log(this.courseForm)
+       
+      }, err => {
+        this.spinner.hide();
+      })
+  }, err => {
       this.spinner.hide();
     })
   }
@@ -345,7 +378,7 @@ if (item) {
      this.courseForm.value.createdby_name = 'Admin';
      this.courseForm.value.createdby_id = '0001';
      this.courseForm.value.createdby_role = 'Sathish';
-      if (this.query.edit) {
+      if (this.query.edit || this.query.addModule) {
         this.courseForm.value.flag = 'false';
 
       } else {
@@ -353,8 +386,8 @@ if (item) {
 
       }
     console.log(this.courseForm);
-    
-    if(this.courseForm.valid) {
+  
+    if(1) {
       this.spinner.show();
       this.submitted = false;
 
@@ -362,11 +395,12 @@ if (item) {
         console.log(data);
         if (data && data.Message === 'Success') {
           this.toast.success('Draft Created Successfully !!!');
-          if(type === 'draft') {
-            this.router.navigate(['/Admin/auth/Wca/viewmodule']);
-          } else {
-            this.router.navigate(['/Admin/auth/Wca']);
-          }
+          // if(type === 'draft') {
+          //   this.router.navigate(['/Admin/auth/Wca/viewmodule']);
+          // } else {
+          //   this.router.navigate(['/Admin/auth/Wca']);
+          // }
+          this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner.hide();
      }, err => {

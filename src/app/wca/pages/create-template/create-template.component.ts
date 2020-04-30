@@ -166,7 +166,12 @@ removenewLink(i) {
  
 
 routeTo() {
-  this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+  if(this.queryData && this.queryData.addModule) 
+    {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { addModule:true,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,image: this.queryData.image}});
+    }else {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,image: this.queryData.image}});
+    }
 
 }
 

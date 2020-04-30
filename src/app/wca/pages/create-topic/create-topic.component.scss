@@ -483,6 +483,14 @@ width: 113px;
 .previewAndTime{
  display: none;
 }
+.bcgClrSync{
+    background-color:#e9ecef;
+}
+
+.formHeight{
+    height: 80%;
+    overflow: auto;
+}
 
 .previewAndTime.active{
     display: flex;

@@ -58,9 +58,11 @@ export class AddModuleComponent implements OnInit {
 
   resetList() {
  
-    setTimeout(() => {
-      this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
-    }, 0);    
+    // setTimeout(() => {
+      if(this.courseDetails && this.courseDetails.coursedetails) {
+        this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
+      }
+    // }, 0);    
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -121,5 +123,10 @@ export class AddModuleComponent implements OnInit {
     console.log(this.courseDetails);
     this.apiService.bSubject1.next({index:index,courseDetails:this.courseDetails});
       this.router.navigate(['./Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+  }
+
+  navChooseTemp() {
+    this.router.navigate(['./Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+  
   }
 }

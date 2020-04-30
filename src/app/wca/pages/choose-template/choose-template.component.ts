@@ -58,7 +58,12 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log( this.selectedTemplate );
-        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
+    if(this.queryData && this.queryData.addModule) 
+    {
+      this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{addModule:true,courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
+    }else {
+      this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{courseName:this.queryData.courseName,viewingModule: this.queryData.viewingModule,template:this.selectedTemplate.template_id}});
+    }
   }
 
   onHover(id) {
@@ -71,7 +76,12 @@ export class ChooseTemplateComponent implements OnInit {
   }
 
   navCreateTemp() {
-    this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+    if(this.queryData && this.queryData.addModule) 
+    {
+      this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { addModule:true,viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+    }else {
+      this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+    }
   }
 
 }
