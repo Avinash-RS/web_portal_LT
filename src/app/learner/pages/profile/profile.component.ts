@@ -1393,7 +1393,9 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
-      
+      this.levelValue.forEach(element => {
+        element.allowed = 'Y';
+      });
     })
   }
 
@@ -1609,5 +1611,46 @@ export class ProfileComponent implements OnInit {
       this.spicalcharacter = true;
     else
       this.spicalcharacter = false;
+  }
+  //Percentage
+//   public setTwoNumberDecimal($event) {
+//     $event.target.value = parseFloat($event.target.value).toFixed(2);
+// }
+
+
+duplicateValueCheck = []
+changed(value,index) {
+  console.log(value)
+    this.duplicateValueCheck[index] = value;
+    this.checkFunction();
+}
+
+  /**
+   * The method which form all option types according to chosen values
+   */
+  checkFunction() {
+    // For all types check if they were chosen
+    this.levelValue.forEach((type) => {
+      console.log(type)
+      // if current type in array of chosen
+      if(type.level_code == '10' || type.level_code == '12'){
+        let selected = this.duplicateValueCheck.includes(type._id);
+        if(selected) type.allowed = 'N'
+      }
+     
+      // push current type with its status
+    });
+  }
+
+  checkSpec(a, spec, quali, level) {
+    // console.log(a, b, c, d);
+    quali = this.profileForm.get('qualification');
+    const specification = quali.controls[spec].controls.specification;
+    if (level.level_code !== '10' && level.level_code !== '12')
+      specification.setValidators([Validators.required]);
+    else
+      specification.setValidators(null)
+    specification.updateValueAndValidity();
+    console.log(specification)
   }
 }
