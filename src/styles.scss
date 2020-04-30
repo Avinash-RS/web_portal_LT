@@ -50,7 +50,7 @@ button:disabled:hover {
 }
 
 .f_wt_400 {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .f_wt_500 {
@@ -86,7 +86,7 @@ button:disabled:hover {
 }
 
 .f_size_17 {
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 .f_size_18 {
@@ -94,7 +94,7 @@ button:disabled:hover {
 }
 
 .f_size_20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .f_size_23 {
@@ -114,7 +114,7 @@ button:disabled:hover {
 }
 
 .width_90 {
-  width: 100%;
+  width: 90% !important;
 }
 
 .width_80 {
@@ -126,11 +126,11 @@ button:disabled:hover {
 }
 
 .width_70 {
-  width: 70%;
+  width: 70% !important;
 }
 
 .width_50 {
-  width: 50%;
+  width: 50% !important;
 }
 
 .width_40 {
@@ -154,7 +154,7 @@ button:disabled:hover {
 }
 
 .space5 {
-  margin-top: 5%;
+  margin-top: 5% !important;
 }
 
 .space10 {
@@ -185,15 +185,18 @@ button:disabled:hover {
   position: absolute !important;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
 .float_right {
   float: right;
-  text-align: right;
-  text-align: end;
+  text-align: right !important;
+  text-align: end !important;
 }
 
 .float_left {
   float: left;
-  text-align: left;
+  text-align: left !important;
 }
 
 .center_align {
@@ -201,8 +204,8 @@ button:disabled:hover {
 }
 
 .center {
-  margin: auto;
-  display: block;
+  margin: auto !important;
+  display: block !important;
 }
 
 .background_trans {
@@ -226,7 +229,7 @@ button:disabled:hover {
 }
 
 .p-5px {
-  padding: 5px;
+  padding: 5px !important;
 }
 
 .border-radius-5 {
@@ -235,6 +238,10 @@ button:disabled:hover {
 
 .background-maroon {
   background-color: $color-maroon !important;
+}
+
+.background-blue {
+  background-color: $color-blue !important;
 }
 
 td {
@@ -250,7 +257,7 @@ td {
 }
 
 .no_border {
-  border: none;
+  border: none !important;
   box-shadow: none;
 }
 
@@ -268,6 +275,9 @@ td {
 
 ////////////////////////////////////////////////////////////////////////
 
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color: $color-blue !important;
+}
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
@@ -438,6 +448,12 @@ mat-icon {
   box-shadow: 0 0 5px #aaaaaa !important;
   font-size: 16px;
 }
+.forgotusername{
+  .mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    overflow: hidden !important;
+  }
+}
+
 
 .breadcrumb-item + .breadcrumb-item::before {
   content: ">" !important;
@@ -475,6 +491,15 @@ mat-icon {
   color: white !important;
   font-size: 14px;
   padding-bottom: 23px;
+}
+.mat-header-row{
+background: #d7e7ff !important;
+min-height: 40px !important;
+}
+
+h1{
+  color: #0e3877;
+  font-weight: 500 !important;
 }
 
 .create-course .mat-checkbox-checked.mat-accent .mat-checkbox-background {

@@ -21,6 +21,10 @@ export class AdminLoginComponent implements OnInit {
     private alert: AlertServiceService, private service: LearnerServicesService, ) { }
 
   ngOnInit() {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('adminDetails');
+    localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", myGlobals.usernameVal),
       password: new FormControl("", myGlobals.passwordVal),
@@ -39,7 +43,8 @@ export class AdminLoginComponent implements OnInit {
           if (loginresult.data.login.success) {
               localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Admin/auth/userManagement'])
-              localStorage.setItem('role','admin')
+              localStorage.setItem('role','admin');
+              localStorage.setItem('token',loginresult.data.login.message.token)
           } else
             this.alert.openAlert("Invalid login. Please try again", null)
         } else

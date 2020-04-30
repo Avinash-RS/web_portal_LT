@@ -36,9 +36,9 @@ export class PasswordComponent implements OnInit {
     public service: LearnerServicesService) { }
 
   ngOnInit() {
-    var user = localStorage.getItem('UserDetails')
+    // var user = localStorage.getItem('UserDetails')
     this.systemip = localStorage.getItem('Systemip')
-    this.currentUser = JSON.parse(user);
+    // this.currentUser = JSON.parse(user);
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.usernameVal),
@@ -95,7 +95,8 @@ export class PasswordComponent implements OnInit {
               if (loginresult.data.login.success) {
                 localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
                 localStorage.setItem('uname', this.passwordForm.value.username);
-                localStorage.setItem('role','learner')
+                localStorage.setItem('role','learner');
+                localStorage.setItem('token',loginresult.data.login.message.token)
                 localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token))
                 var ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);
@@ -144,4 +145,19 @@ export class PasswordComponent implements OnInit {
     })
   }
 
+  /* function that checks for existing user or not on blur event in username field */
+  checkForExistingUser() {
+    if(this.passwordForm.value.username) {
+      try {
+        this.service.check_existing_user(this.passwordForm.value.username).subscribe((data: any) => {
+          console.log(data)
+          if(data.data.check_existing_user && data.data.check_existing_user.message === 'Username already exists') {
+            this.alert.openAlert(data.data['check_existing_user'].message, null)
+          }
+        })  
+      } catch (error) {
+          throw error 
+      }
+    }
+  }
 }

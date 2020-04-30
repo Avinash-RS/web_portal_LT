@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
+export interface playback {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss']
 })
+
 export class VideoPlayerComponent {
-  title = 'videoplayer';
-  sources: Array<Object>;
+    sources: Array<Object>;
     controls: boolean = false;
     autoplay: boolean = false;
     loop: boolean = false;
@@ -15,7 +19,13 @@ export class VideoPlayerComponent {
     api: VgAPI;
     fsAPI: VgFullscreenAPI;
     nativeFs: boolean = true;
-
+    playback = '1.0';
+    playbackRate: playback[] = [
+      {value: '0.5', viewValue: '0.5'},
+      {value: '1.0', viewValue: '1x'},
+      {value: '2.0', viewValue: '2x'}
+    ];
+    
     constructor() {
         this.sources = [
             {
@@ -52,5 +62,9 @@ export class VideoPlayerComponent {
         this.fsAPI.nativeFullscreen = this.nativeFs;
         
     }
+ // to speed up and speed down 
+    playbackValues(playbackValue){
+      this.api.playbackRate = playbackValue.value
+    } 
 
 }

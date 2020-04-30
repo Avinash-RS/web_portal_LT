@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ViewAllCoursesComponent } from './view-all-courses.component';
+
+describe('ViewAllCoursesComponent', () => {
+  let component: ViewAllCoursesComponent;
+  let fixture: ComponentFixture<ViewAllCoursesComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ViewAllCoursesComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ViewAllCoursesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

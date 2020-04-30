@@ -1,97 +1,66 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
-// import { LearnerServicesService } from '@learner/services/learner-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort, ThemePalette } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Form } from '@angular/forms';
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  user_id: string;
+  name: number;
+  email: string;
+  mobile: string;
 }
-
-
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-
-  addUserForm: FormGroup;
+  profileForm: Form;
   adminDetails: any;
-
   ELEMENT_DATA: PeriodicElement[] = [];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'active', 'blocked', 'deactivate', 'block'];
-
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  selection = new SelectionModel(true, []);
   resultsLength: number = null;
-
-  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService,
+  selectedArray: any = [];
+  profileDetails: {};
+  trackDetails: any;
+  loader: boolean = false;
+  constructor(private router: Router, private gs: GlobalServiceService,
+    private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
+    private dialog: MatDialog,
   ) {
     this.getAllUser(0)
   }
 
-
   getAllUser(pagenumber) {
+    this.loader = true;
     this.resultsLength = null;
-    this.service.getAllUsers(0, 1)
+    if (pagenumber == 0)
+      this.ELEMENT_DATA = []
+    this.service.getAllUsers(pagenumber, 1)
       .subscribe((result: any) => {
-        console.log(result.data)
-        this.ELEMENT_DATA = (result.data.get_all_user.message);
+        Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-        this.selection = new SelectionModel<PeriodicElement>(true, []);
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
-        // console.log(this.dataSource);
-        // this.resultsLength = 16;
-        this.service.getAllUsers(1, 1)
-        .subscribe((result: any) => {
-          console.log(result.data)
-          Array.prototype.push.apply(this.ELEMENT_DATA,result.data.get_all_user.message)
-          this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-          this.selection = new SelectionModel<PeriodicElement>(true, []);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
-          // console.log(this.dataSource);
-          // this.resultsLength = 16;
-          this.service.getAllUsers(2, 1)
-          .subscribe((result: any) => {
-            console.log(result.data)
-            Array.prototype.push.apply(this.ELEMENT_DATA,result.data.get_all_user.message)
-            this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-            this.selection = new SelectionModel<PeriodicElement>(true, []);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            console.log(this.dataSource);
-            this.resultsLength = this.ELEMENT_DATA.length;
-          });
-        });
+        console.log(this.ELEMENT_DATA)
+        this.selection = new SelectionModel(true, []);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.resultsLength = result.data.get_all_user.learner_count;
+        this.loader = false;
       });
   }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'))
-    this.addUserForm = this.formBuilder.group({
-      username: new FormControl("", myGlobals.usernameVal),
-      email: new FormControl("", myGlobals.emailVal),
-      group: ['', myGlobals.req]
-    });
-  }
-
-  get f() {
-    return this.addUserForm.controls;
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
   }
 
   gotoAddUser() {
@@ -102,125 +71,147 @@ export class UserManagementComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+  // isAllSelected() {
+  //   const numSelected = this.selection.selected.length;
+  //   const numRows = this.dataSource.data.length;
+  //   return numSelected === numRows;
+  // }
+
+  // masterToggle() {
+  //   this.isAllSelected() ?
+  //     this.selection.clear() :
+  //     this.dataSource.data.forEach(row => this.selection.select(row));
+  // }
+
+  // checkboxLabel(row?): string {
+  //   if (!row) {
+  //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  //   }
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  // }
+
+  viewDetail(element, templateRef: TemplateRef<any>) {
+    // this.loader = true;
+    this.service.getUserSession(element._id).subscribe((track: any) => {
+      this.trackDetails = track.data.get_user_session_detail.message[0]
+      console.log(this.trackDetails);
+      this.service.getLearnerDetail(element.user_id)
+        .subscribe((result: any) => {
+          this.profileDetails = result.data.get_all_learner_detail.message[0];
+          // console.log(result.data.get_all_learner_detail.message[0], this.profileDetails)
+          this.dialog.open(templateRef);
+          // this.loader = false;
+          // this.mailForm = this.formBuilder.group({
+          //   mailid: new FormControl('', myGlobals.emailVal)
+          // });
+        })
+    })
   }
 
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+  closedialogbox() {
+    this.dialog.closeAll();
   }
 
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  checkboxLabel(row?) {
+    console.log(row)
+    if (row.isChecked == undefined || row.isChecked == false) {
+      row.isChecked = true;
+      this.selectedArray.push(row);
+      console.log(this.selectedArray)
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    else {
+      row.isChecked = !row.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== row);
+      console.log(this.selectedArray)
+    }
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
-    // this.service.searchUser(this.dataSource.filter, 0, 1)
-    //   .subscribe((result: any) => {
-    //     console.log(result.data)
-    //   });
-
+    setTimeout(() => {
+      if (filterValue.trim().toLowerCase().length > 3) {
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+        this.ELEMENT_DATA = []
+        this.service.searchUser(filterValue.trim().toLowerCase(), 0, 1)
+          .subscribe((result: any) => {
+            if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
+              // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
+              this.ELEMENT_DATA = result.data.search_user.message
+              this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+              console.log(this.ELEMENT_DATA);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              this.resultsLength = 10;
+            }
+            else
+              this.alert.openAlert("Sorry", 'User doesnt exists');
+            // this.getAllUser(0)
+            // this.toast.warning('Course Name and Course image is Required !!!');
+          });
+      } else if(filterValue.trim().toLowerCase().length == 0) {
+        // setTimeout(() => {
+        //   this.ELEMENT_DATA = []
+        //   console.log('inside')
+          this.getAllUser(0)
+        // }, 700);
+      }
+    }, 500);
   }
 
-  deActivate(element?) {
-    if (element) {
-      console.log(element)
-      this.selection.selected.push(element)
-      this.alert.openConfirmAlert('De-activation Confirmation',
-        element.is_active ? 'Are you sure you want to de-activate selected user ?' :
-          'Are you sure you want to activate selected user ?').then((data: Boolean) => {
-            console.log(data, this.selection)
-            if (data) {
-              let result = this.selection.selected.map((item: any) => item.user_id);
-              console.log('this', this.selection.selected, result)
-              this.service.deActivate_And_reActivate_User(result, !element.is_active)
-                .subscribe((result: any) => {
-                  console.log(result.data)
-                  if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                    this.getAllUser(0)
-                  else
-                    this.alert.openAlert('Sorry, Please try again later', 'null')
-                });
-            }
-          })
-    } else if (this.selection.selected && this.selection.selected.length > 0) {
-      this.alert.openConfirmAlert('De-activation Confirmation', 'Are you sure you want to de-activate selected user ?').then((data: Boolean) => {
-        console.log(data, this.selection)
-        if (data) {
-          let result = this.selection.selected.map((item: any) => item.user_id);
-          console.log('this', this.selection.selected, result)
-          this.service.deActivate_And_reActivate_User(result, false)
-            .subscribe((result: any) => {
-              if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                this.getAllUser(0)
-              else
-                this.alert.openAlert('Sorry, Please try again later', 'null')
-            });
-        }
-      })
+  deActivate(status, element?) {
+    let count = element ? 1 : this.selectedArray.length;
+    // setTimeout(() => {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count + ' users ?' :
+        'Are you sure you want to activate ' + count + ' users ?').then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.service.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
     } else {
-      this.alert.openAlert("Please select any record to de-activate", null)
+      this.alert.openAlert("Please select any record", null)
     }
+    // }, 500);
   }
 
-  block(element?) {
-    if (element) {
-      console.log(element)
-      this.selection.selected.push(element)
-      this.alert.openConfirmAlert('Block Confirmation',
-        element.is_blocked ? 'Are you sure you want to un-block selected user ?' :
-          'Are you sure you want to block selected user ?').then((data: Boolean) => {
-            console.log(data, this.selection)
-            if (data) {
-              let result = this.selection.selected.map((item: any) => item.user_id);
-              console.log('this', this.selection.selected, result)
-              this.service.blockUser(result, !element.is_blocked)
-                .subscribe((result: any) => {
-                  if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                    this.getAllUser(0)
-                  else
-                    this.alert.openAlert('Sorry, Please try again later', 'null')
-                });
-            }
-          })
-    } else if (this.selection.selected && this.selection.selected.length > 0) {
-      this.alert.openConfirmAlert('Block Confirmation', 'Are you sure you want to block selected user ?').then((data: Boolean) => {
-        console.log(data, this.selection)
-        if (data) {
-          let result = this.selection.selected.map((item: any) => item.user_id);
-          console.log('this', this.selection.selected, result)
-          this.service.deActivate_And_reActivate_User(result, true)
-            .subscribe((result: any) => {
-              if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                this.getAllUser(0)
-              else
-                this.alert.openAlert('Sorry, Please try again later', 'null')
-            });
-        }
-      })
+  block(status, element?) {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      let count = element ? 1 : this.selectedArray.length
+      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count + ' users ?' :
+        'Are you sure you want to un-block ' + count + ' users ?').then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.service.blockUser(result, status == 'Block' ? true : false)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
     } else {
-      this.alert.openAlert("Please select any record to block", null)
+      this.alert.openAlert("Please select any record", null)
     }
-
   }
 
   next(e) {
     console.log(e)
-    // this.getAllUser(e.pageIndex)
+    this.getAllUser(e.pageIndex);
+    this.selectedArray = [];
   }
 }
-
-// export class ProgressSpinnerConfigurableExample {
-//   color: ThemePalette = 'primary';
-// }

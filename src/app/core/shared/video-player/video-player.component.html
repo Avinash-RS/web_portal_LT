@@ -1,13 +1,17 @@
 <vg-player (onPlayerReady)="onPlayerReady($event)">
   <vg-overlay-play></vg-overlay-play>
   <vg-buffering></vg-buffering>
-  <vg-controls *ngIf="!controls" [vgAutohide]="true" [vgAutohideTime]="1.5">
+  <vg-controls  *ngIf="!controls" [vgAutohide]="true" [vgAutohideTime]="1.5">
       <vg-play-pause></vg-play-pause>
-      <vg-playback-button></vg-playback-button>
+      <mat-form-field style="max-width:50px;text-align: center;">
+        <mat-select #mySelect panelClass="my-panel"  [(value)]="playback"  disableOptionCentering (selectionChange)="playbackValues($event)">
+       <mat-option  *ngFor="let playback of playbackRate" [value]="playback.value">
+        {{playback.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
       <button  class="next round" (click)="previous(api.currentTime)"><i class="fa fa-backward" aria-hidden="true"></i></button>
       <button  class="previous round" (click)="next(api.currentTime)"><i class="fa fa-forward" aria-hidden="true"></i></button>
-     
-
       <button class="time"   mat-raised-button matTooltip="Time Elapsed">
       <vg-time-display  vgProperty="current" vgFormat="mm:ss"></vg-time-display>
       </button>
@@ -16,13 +20,11 @@
           <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
           <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
- 
-      
-      <!-- <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
+
       <button class="time" mat-raised-button matTooltip="Total Time">
         <vg-time-display  vgProperty="total" vgFormat="mm:ss">
         </vg-time-display>
-    </button>
+      </button>
 
       <vg-track-selector></vg-track-selector>
       <vg-mute></vg-mute>
@@ -34,7 +36,6 @@
       <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
           <track kind="subtitles" label="English" src="assets/subs/pale-blue-dot.vtt" srclang="en" >
           <track kind="subtitles" label="Español" src="assets/subs/pale-blue-dot-es.vtt" srclang="es">
+            
   </video>
-
- 
 </vg-player> 

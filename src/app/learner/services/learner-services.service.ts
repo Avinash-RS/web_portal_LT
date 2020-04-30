@@ -4,15 +4,17 @@ import { Apollo } from "apollo-angular";
 import {
   login, get_course_by_user, get_country_details, get_qualification_details,
   get_board_university_details, get_discipline_details, get_specification_details,
-  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm
+  get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
+  getmoduleData,get_user_detail_username, check_existing_user,  get_all_category, get_sub_category,get_course_by_subcategory,get_all_course_by_usergroup,get_module_topic
 } from "./operations/learner_query";
+
 
 import {
   user_registration, user_registration_mobile_otp_send, user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email, get_forgot_password_byusername, user_registration_username_suggestion,
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile,
-  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,delete_qualification
+  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,delete_qualification,gettopicdetail
 } from "./operations/learner_mutation"
 
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +29,6 @@ export class LearnerServicesService {
   constructor(private Apollo: Apollo, private http: HttpClient, ) { }
 
   login(username, password, is_admin) {
-    console.log('inside services', username, password, is_admin)
     return this.Apollo.query({
       query: login,
       variables: {
@@ -88,7 +89,7 @@ export class LearnerServicesService {
     });
   }
   view_profile(user_id) {
-    console.log('view', user_id)
+   
     return this.Apollo.query({
       query: view_profile,
       variables: {
@@ -133,6 +134,18 @@ export class LearnerServicesService {
       }
     });
   }
+
+  // checks for existing user or not
+  check_existing_user(name) {
+    return this.Apollo.query({
+      query: check_existing_user,
+      variables: {
+        username: name
+      }
+    });
+  }
+
+
   forgotUsernameandPassword(type, subtype, mobile_number, email) {
     return this.Apollo.query({
       query: get_forgot_username_mobile_email,
@@ -244,6 +257,16 @@ export class LearnerServicesService {
     });
   }
 
+  get_user_detail_username(username) {
+    return this.Apollo.query({
+      query: get_user_detail_username,
+      variables: {
+        username: username
+      }
+    });
+  }
+  
+
   update_email_onprofile(user_id, email) {
     return this.Apollo.query({
       query: update_email_onprofile,
@@ -271,6 +294,14 @@ export class LearnerServicesService {
       }
     })
   }
+  getModuleData(course_id) {
+    return this.Apollo.query({
+      query: getmoduleData,
+      variables: {
+        courseid:course_id
+      }
+    })
+  }
 
   update_profile(userData) {
     return this.Apollo.query({
@@ -295,6 +326,61 @@ export class LearnerServicesService {
         user_id: user_id
       }
     })
+  }
+
+  
+  getcoursecategory( groupid: any) {
+    return this.Apollo.query({
+      query: get_all_category,
+      variables: {
+        group_id: groupid,
+      }
+    });
+  }
+
+  getcoursesubcategory(categoryid) {
+    return this.Apollo.query({
+      query: get_sub_category,
+      variables: {
+        category_id: categoryid,
+      }
+    });
+  }
+  getcourse(subcategory) {
+    return this.Apollo.query({
+      query: get_course_by_subcategory,
+      variables: {
+        input_id: subcategory._id,
+        input_type: subcategory.type,
+        pagenumber: subcategory.pagenumber
+      }
+    });
+  }
+
+  getallcourses(groupid, pagenumber) {
+    console.log(groupid,pagenumber)
+    return this.Apollo.query({
+      query: get_all_course_by_usergroup,
+      variables: {
+        group_id: groupid,
+        pagenumber: pagenumber
+      }
+    });
+  }
+  get_module_topic(){
+    return this.Apollo.query({
+      query: get_module_topic
+    });
+  }
+  gettopicdetail(_id, modulename) {
+    return this.Apollo.query({
+      query: gettopicdetail,
+      variables: {
+        _id: _id,
+        module_name: modulename
+      }
+    });
+    
   }
 };
 

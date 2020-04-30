@@ -11,6 +11,7 @@ export class CommonServicesService {
   constructor(private Apollo: Apollo) { }
 
   logout(user_id, is_admin) {
+    // this.Apollo.getClient().resetStore();
     return this.Apollo.query({
       query: logout,
       variables: {

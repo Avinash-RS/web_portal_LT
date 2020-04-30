@@ -353,6 +353,7 @@ if (item) {
 
       }
     console.log(this.courseForm);
+    
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
@@ -361,14 +362,11 @@ if (item) {
         console.log(data);
         if (data && data.Message === 'Success') {
           this.toast.success('Draft Created Successfully !!!');
-                      this.router.navigate(['./Wca']);
-
-          // if(type === 'draft') {
-          //   this.router.navigate(['/Wca/addmodule',{courseId:this.query.viewingModule, courseImage: this.query.image,courseName:this.query.courseName}]);
-
-          // } else {
-          //   this.router.navigate(['./Wca']);
-          // }
+          if(type === 'draft') {
+            this.router.navigate(['/Admin/auth/Wca/viewmodule']);
+          } else {
+            this.router.navigate(['/Admin/auth/Wca']);
+          }
         }
         this.spinner.hide();
      }, err => {

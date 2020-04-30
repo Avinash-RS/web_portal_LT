@@ -559,3 +559,17 @@ export const resend_otp_onprofile = gql`
     }
   }
 `;
+
+export const gettopicdetail = gql`
+  mutation gettopicdetail($_id: String,$module_name:String) {
+    gettopicdetail(
+      _id:$_id,module_name:$module_name
+    ) {
+      data{
+        topicname
+      }
+      success
+    }
+    
+  }
+`;

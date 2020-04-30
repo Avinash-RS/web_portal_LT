@@ -14,7 +14,7 @@ export const menus = [
         'open': false,
         'sub': [
             {
-                'name': 'Add New Learners',
+                'name': 'Learners',
                 'link': 'userManagement',
                 'icon': 'widgets',
                 'chip': false,
@@ -22,7 +22,7 @@ export const menus = [
             },
             {
                 'name': 'User Groups',
-                'link': 'tables/responsive',
+                'link': 'usergroup',
                 'icon': 'list',
                 'chip': false,
                 'open': true,
@@ -32,10 +32,12 @@ export const menus = [
     {
         'name': 'Course Management',
         'icon': 'list',
-        'link': false,
-        'open': false,
+        'link': 'Wca',
+        'chip': false,
+        'open': true,
         
     }
+    
    
   
 ];

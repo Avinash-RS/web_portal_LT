@@ -14,18 +14,20 @@ import * as myGlobals from '@core/globals';
 export class LoginComponent implements OnInit {
   capsOn;
   show: boolean = false;
-
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     private alert: AlertServiceService, private service: LearnerServicesService) {
-    console.log('2')
   }
 
   ngOnInit() {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
-      username: new FormControl("", myGlobals.usernameVal),
-      password: new FormControl("", myGlobals.passwordVal),
+      username: new FormControl("", myGlobals.usernameValforLogin),
+      password: new FormControl("", myGlobals.passwordValforLogin),
       remember_me: new FormControl("", [])
     });
   }
@@ -35,7 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, false)
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
@@ -47,6 +48,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner')
+              localStorage.setItem('token',loginresult.data.login.message.token)
+              // localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWZzZXIiLCJyb2xlIjoibGVhcm5lciIsImlhdCI6MTU4NzgxMDY2OCwiZXhwIjoxNTg3ODI1MDY4LCJpc3MiOiJodHRwczovL3d3dy5sYXJzZW50b3Vicm8uY29tLyJ9.0PaYNjWpbeibE0OJSqOKOc8BpcXYbLP0LcvzXUbDXoM')
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
               //if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated)
@@ -60,7 +63,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
-              localStorage.setItem('role', 'learner')
+              localStorage.setItem('role', 'learner');
+              localStorage.setItem('token',loginresult.data.login.message.token)
               var ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               //if false, then need to update profile
@@ -80,16 +84,5 @@ export class LoginComponent implements OnInit {
           this.alert.openAlert("Please try again later", null)
         }
       });
-
-
-
-    // localStorage.setItem('uname', this.loginForm.value.username);
-    // localStorage.setItem('remember_me', 'false');
-    // var ps = btoa(this.loginForm.value.password);
-    // localStorage.setItem('ps', ps);
-    // localStorage.setItem('UserDetails', '{}')
-    // this.router.navigate(['/Learner'])
-
-
   }
 }

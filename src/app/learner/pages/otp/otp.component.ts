@@ -32,6 +32,11 @@ export class OtpComponent implements OnInit {
   email:any;
   useridData:any;
   userid:any;
+  timeLeft: number = 60;
+  interval;
+  status: string;
+  minutes: number;
+  seconds: number;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -60,8 +65,8 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-  var user = localStorage.getItem('UserDetails')
-  this.currentUser = JSON.parse(user);
+  // var user = localStorage.getItem('UserDetails')
+  // this.currentUser = JSON.parse(user);
   this.systemip = localStorage.getItem('Systemip')
   this.otpForm = this.formBuilder.group({
           mobile: new FormControl('', myGlobals.mobileVal),
@@ -75,14 +80,30 @@ export class OtpComponent implements OnInit {
 }
 get f() { return this.otpForm.controls; }
   otpverification(){
+    this.get_user_detail(this.email)
+    console.log('ddddddddddddddddddddddddddddd'+this.userid+this.currentUser._id+this.otpForm.value.mobile+this.email)
     this.loader.show();
-    this.service.submit_otp(this.userid,'this.currentUser._id',this.otpForm.value.mobile,this.email).subscribe(data => {
+    this.service.submit_otp(this.userid,this.currentUser._id,this.otpForm.value.mobile,this.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
             this.isenable = false;
             this.showotp = true;
-          } 
+            //Timer
+            this.timeLeft = 120;
+            // if(this.timeLeft > 60){
+              this.interval = setInterval(() => {
+                if (this.timeLeft > 0) {
+                  this.timeLeft--;
+                   this.minutes = Math.floor(this.timeLeft/60);
+                  this.seconds = this.timeLeft -this.minutes * 60;
+    
+                } else {
+                  this.timeLeft = 0;
+                  // this.verifybutton = true;
+                }
+              }, 1000)
+            } 
       })
   
   }
@@ -120,10 +141,13 @@ get f() { return this.otpForm.controls; }
     // this.showverify = true;
   }
   get_user_detail(email){
+    console.log('email'+email)
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
+        // console.log('email'+this.useridData.get_user_detail.message[0])
         this.userid =this.useridData.get_user_detail.message[0].user_id; 
+        // this.userid= 'm6siev';
         this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
       })  
     } catch (error) {
