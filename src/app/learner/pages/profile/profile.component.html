@@ -228,7 +228,7 @@
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 
-                <input type="tel" mask="00.00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
+                <input type="tel"  suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
                 'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
                   formControlName="percentage">
                 <mat-icon (click)="addQualification()"
@@ -498,7 +498,7 @@
     </div>
   </div>
 </div>
-<!-- 
+
 DEBUG
 <br><br><br>VALID : <br>
 <pre>about_you : {{profileForm.get('about_you').valid}}</pre>
@@ -513,6 +513,6 @@ DEBUG
 <pre>qualification : {{profileForm.get('qualification').valid}}</pre>
 <pre>social_media : {{profileForm.get('social_media').valid}}</pre>
 <pre>professional : {{profileForm.get('professional').valid}}</pre>
-<br> -->
+<br>
 
 <!-- {{profileForm.value | json}} -->
