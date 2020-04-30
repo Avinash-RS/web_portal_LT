@@ -83,6 +83,9 @@ export class PasswordComponent implements OnInit {
 
   }
   submit() {
+    localStorage.removeItem('userDetails');
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key')
     this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip).subscribe(data => {
