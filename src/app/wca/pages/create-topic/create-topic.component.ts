@@ -172,12 +172,14 @@ export class CreateTopicComponent implements OnInit {
       this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
         this.courseDetails = data.Result[0];
         this.courseArray =  this.courseDetails.coursedetails;
+        
         console.log(this.courseArray);
         this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
           this.queryData = data.Result;
-          console.log(this.queryData);
         this.spinner.hide();
         console.log(this.courseDetails)
+        this.queryData.moduledetails = this.courseArray[0].moduledetails;
+        console.log(this.queryData);
         this.courseForm = this.courseform()
         this.createTopicForm = this.createForm();
         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
@@ -387,7 +389,7 @@ if (item) {
       }
     console.log(this.courseForm);
   
-    if(1) {
+    if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
 
