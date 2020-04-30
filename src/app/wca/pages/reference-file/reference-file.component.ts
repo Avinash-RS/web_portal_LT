@@ -99,14 +99,16 @@ export class ReferenceFileComponent implements OnInit {
   saveReferenceFile() {
     var payload = new FormData();
     if(this.selectfile){
-        payload.append('reffile', this.selectfile, this.selectfile.name)
+        payload.append('reffile', this.selectfile, this.selectfile.name);
+        payload.append('path', this.referenceLink + 'www');
     }else{
-      console.log('fil..........',this.referenceLink)
+      console.log('fil..........',this.referenceLink);
+      payload.append('path', this.referenceLink);
     }
    
     payload.append("module_id", this.referenceLinkForm.value.module.modulename);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
-    payload.append('path', this.referenceLink);
+   
     payload.append("user_id",this.currentUser.user_id);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
@@ -120,7 +122,7 @@ export class ReferenceFileComponent implements OnInit {
         this.clear();
         this.getAllRefDoc(1)
       }else{
-        this.alert.openAlert('Please fill all fields for successful upload',null)
+        this.alert.openAlert(data['message'],null)
       }
     })
   }
