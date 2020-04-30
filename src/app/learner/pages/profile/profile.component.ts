@@ -1613,9 +1613,9 @@ export class ProfileComponent implements OnInit {
       this.spicalcharacter = false;
   }
   //Percentage
-  public setTwoNumberDecimal($event) {
-    $event.target.value = parseFloat($event.target.value).toFixed(2);
-}
+//   public setTwoNumberDecimal($event) {
+//     $event.target.value = parseFloat($event.target.value).toFixed(2);
+// }
 
 
 duplicateValueCheck = []
