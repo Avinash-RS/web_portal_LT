@@ -96,6 +96,7 @@ export class UserManagementComponent implements OnInit {
       this.service.getLearnerDetail(element.user_id)
         .subscribe((result: any) => {
           this.profileDetails = result.data.get_all_learner_detail.message[0];
+          this.dialog.open(templateRef);
           // this.loader = false;
           // this.mailForm = this.formBuilder.group({
           //   mailid: new FormControl('', myGlobals.emailVal)
