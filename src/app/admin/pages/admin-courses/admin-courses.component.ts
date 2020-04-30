@@ -11,15 +11,15 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  // type: any ;
-  type: any = 'published';
+  type: any;
+  // type: any = 'published';
   goto: any;
   showPublishedDate: boolean;
   loader: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
-    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
+    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
