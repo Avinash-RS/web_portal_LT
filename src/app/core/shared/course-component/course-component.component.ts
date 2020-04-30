@@ -115,17 +115,22 @@ export class CourseComponentComponent implements OnInit {
       let detail = {
         type: 'publish', id: this.course._id || this.course.course_id 
       }
+      localStorage.setItem('courseType',detail.type)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+
     }
     else if (this.goto == 'create') {
       let detail =
         { type: 'create', id: this.course._id || this.course.course_id }
-
+        localStorage.setItem('courseType',detail.type)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+     
     }
     else if (this.goto == 'draft') {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
+      localStorage.setItem('courseType',detail.type)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+
     }
     // console.log(detail,'detaildetaildetail')
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });

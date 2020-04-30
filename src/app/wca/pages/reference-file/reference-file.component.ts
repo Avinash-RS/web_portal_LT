@@ -6,6 +6,7 @@ import { WcaService } from '../../services/wca.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Router } from '@angular/router';
 export interface PeriodicElement {
   type_name: string;
   module: string;
@@ -43,7 +44,7 @@ export class ReferenceFileComponent implements OnInit {
   modulenamelist:any;
   topicListData:any;
   topicnamelist:any;
-  constructor(public service: WcaService,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
+  constructor(public service: WcaService,public route: Router,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
 
@@ -98,14 +99,16 @@ export class ReferenceFileComponent implements OnInit {
   saveReferenceFile() {
     var payload = new FormData();
     if(this.selectfile){
-        payload.append('reffile', this.selectfile, this.selectfile.name)
+        payload.append('reffile', this.selectfile, this.selectfile.name);
+        payload.append('path', this.referenceLink + 'www');
     }else{
-      console.log('fil..........',this.referenceLink)
+      console.log('fil..........',this.referenceLink);
+      payload.append('path', this.referenceLink);
     }
    
     payload.append("module_id", this.referenceLinkForm.value.module.modulename);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
-    payload.append('path', this.referenceLink);
+   
     payload.append("user_id",this.currentUser.user_id);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
@@ -119,7 +122,7 @@ export class ReferenceFileComponent implements OnInit {
         this.clear();
         this.getAllRefDoc(1)
       }else{
-        this.alert.openAlert('Somethink went wrong Please try again',null)
+        this.alert.openAlert(data['message'],null)
       }
     })
   }
@@ -128,16 +131,22 @@ export class ReferenceFileComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-removeDoc(data){
-  this.service.remove_doc_ref(data._id).subscribe(data => {
-    if(data.data['remove_doc_ref']['success'] === 'true'){
-      this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
-      this.getAllRefDoc(1)
-    } else {
-      this.alert.openAlert('Please try after sometime',null)
-    }
-  })
+
+removeDoc(recordID){
+  this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to remove the record ?').then((data: Boolean) => {
+          if (data === true) {
+              this.service.remove_doc_ref(recordID._id).subscribe(data => {
+                if(data.data['remove_doc_ref']['success'] === 'true'){
+                  this.alert.openAlert(data.data['remove_doc_ref']['message'],null)
+                  this.getAllRefDoc(1)
+                } else {
+                  this.alert.openAlert('Please try after sometime',null)
+                }
+              })
+            } 
+  });
 }
+
 getAllRefDoc(pagenumber){
   if (pagenumber == 1)
   this.ELEMENT_DATA = []
@@ -180,5 +189,11 @@ gettopicdetail(){
       console.log(this.topicnamelist)
     }
   })
+}
+
+back(){
+
+  this.route.navigateByUrl('/Admin/auth/Wca/previewcourse');
+  
 }
 }
