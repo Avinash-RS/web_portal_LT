@@ -40,7 +40,7 @@
 
                         <mat-card style="text-align: center;">
 
-                            <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1" class="custom-grid-list">
+                            <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1.5" class="custom-grid-list">
                                 <div *ngFor="let tlist of templateList;let i = index">
                                     <mat-grid-tile
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
