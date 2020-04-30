@@ -36,7 +36,7 @@
   
   
             <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic" required>
-              <mat-option *ngFor="let topic of topicmenu?.moduledetails" [value]="topic?.topicname" >
+              <mat-option *ngFor="let topic of topicnamelist" [value]="topic?.topicname" >
                 {{topic?.topicname}}
               </mat-option>
             </mat-select>

@@ -93,7 +93,7 @@ export class ReferenceFileComponent implements OnInit {
     }    
     else {
       this.uploadMsg = tempData.name;
-      console.log(this.uploadMsg,'this.uploadMsg')
+     // console.log(this.uploadMsg,'this.uploadMsg')
     }
   }
 
@@ -103,7 +103,7 @@ export class ReferenceFileComponent implements OnInit {
         payload.append('reffile', this.selectfile, this.selectfile.name);
         payload.append('path', this.referenceLink + 'www');
     }else{
-      console.log('fil..........',this.referenceLink);
+     // console.log('fil..........',this.referenceLink);
       payload.append('path', this.referenceLink);
     }
    
@@ -116,7 +116,7 @@ export class ReferenceFileComponent implements OnInit {
     payload.append('created_on', this.myDate.toString());
     
     this.service.refDocUpload(payload).subscribe(data => {
-      console.log(data)
+     // console.log(data)
       if(data['success'] == true){
         this.alert.openAlert(data['message'],null)
         this.referenceLinkForm.reset();
@@ -176,14 +176,14 @@ get_module_topic(){
   this.learnerservice.get_module_topic().subscribe(data => {
      if(data['data']['get_module_topic'].success){
        this.moduleListData=data['data']
-       console.log( this.moduleListData)
+      // console.log( this.moduleListData)
        this.modulenamelist=this.moduleListData.get_module_topic.data
-       console.log(this.modulenamelist)
+      // console.log(this.modulenamelist)
   }
   })
 }
 gettopicdetail(){
-  console.log(this.referenceLinkForm.value)
+  //console.log(this.referenceLinkForm.value)
   this.learnerservice.gettopicdetail(this.referenceLinkForm.value.module._id,this.referenceLinkForm.value.module.modulename).subscribe(data => {
     if(data['data']['gettopicdetail'].success){
       this.topicListData=data['data']
