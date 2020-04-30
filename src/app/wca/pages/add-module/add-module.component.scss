@@ -297,7 +297,7 @@ img:hover {
 
 .submit-btn {
     height: 30px;
-    margin: 5% 0 0 16%;
+    margin: 5% 0 0 0;
     background-color: #1f3777 !important;
     color: white !important;
     width: 150px;
@@ -305,7 +305,7 @@ img:hover {
 
  .reference-btn {
     height: 30px;
-    margin: 5% 0 0 16%;
+    margin: 5% 0 0 0;
     color: #1f3777 !important;
     width: 150px;
  }
@@ -400,10 +400,12 @@ img:hover {
 .horizontalView{
 display: flex;
 flex-wrap: wrap;
+font-weight: bold;
+color: #1f3777;
 }
 
   .example-box1{
-  padding: 18px 11px;
+  padding: 9px 7px;
     color: rgb(210, 216, 230);
     display: flex;
     flex-direction: inherit;
