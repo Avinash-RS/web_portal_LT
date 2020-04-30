@@ -23,7 +23,7 @@ export class AlertServiceService {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'confirmAlert' };
       dialogConfig.width = '30%',
-        dialogConfig.panelClass = 'custom-modalbox';
+      dialogConfig.panelClass = 'custom-modalbox';
       const dialogRef = this.matDialog.open(AlertComponentComponent, dialogConfig);
       return new Promise((resolve) => {
         dialogRef.afterClosed().subscribe(result => {
