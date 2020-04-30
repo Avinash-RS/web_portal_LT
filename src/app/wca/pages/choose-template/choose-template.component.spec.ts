@@ -55,6 +55,8 @@ describe('ChooseTemplateComponent', () => {
     fixture = TestBed.createComponent(ChooseTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.queryData = chooseTemplateData.queryData;
+
   });
 
   it('should create', () => {
@@ -79,7 +81,7 @@ describe('ChooseTemplateComponent', () => {
     expect(component.templateList).toBe(chooseTemplateData.getTemplate.Result)
   })
 
-  fit('Should parse templates', () => {
+  it('Should parse templates', () => {
     let template = {
       _id: "5e99334428ac5638acff9279",
       template_id: "TMP0001",
@@ -88,6 +90,7 @@ describe('ChooseTemplateComponent', () => {
       createdby_name: "test1",
       created_on: "4/17/2020, 10:09:36 AM"
     }
+    component.selectedTemplate.template_id = "5e99334428ac5638acff9279";
     component.templateParse(template);
 
   })
