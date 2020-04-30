@@ -16,7 +16,7 @@
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
 .coursebreadcrumb {
-    padding-top: 60px;
+    padding-top: 0px;
 
     ol {
         margin-bottom: 0 !important;
@@ -66,14 +66,7 @@
     margin-left: 8px;
 }
 
-.coursebreadcrumb {
-    padding-top: 60px;
 
-    ol {
-        margin-bottom: 0 !important;
-        background-color: $color-white !important;
-    }
-}
 
 // Ankit
 .title {

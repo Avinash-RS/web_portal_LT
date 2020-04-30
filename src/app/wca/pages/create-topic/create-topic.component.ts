@@ -302,9 +302,9 @@ export class CreateTopicComponent implements OnInit {
         if (data && data.Message === 'Success') {
           this.toast.success('Draft Created Successfully !!!');
           if(type === 'draft') {
-            this.router.navigate(['./Wca/viewmodule']);
+            this.router.navigate(['/Admin/auth/Wca/viewmodule']);
           } else {
-            this.router.navigate(['./Wca']);
+            this.router.navigate(['/Admin/auth/Wca']);
           }
         }
         this.spinner.hide();
