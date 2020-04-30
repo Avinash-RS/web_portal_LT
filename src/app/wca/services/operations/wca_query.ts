@@ -25,6 +25,7 @@ export const remove_doc_ref = gql`
       created_on
     }
     success
+    count
     message
         }
     
