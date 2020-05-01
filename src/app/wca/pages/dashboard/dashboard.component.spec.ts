@@ -9,10 +9,12 @@ import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { WcaService } from '../../services/wca.service';
+import { MockWcaService } from '../../services/wca.mock.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let dashboardData = require("../../../../assets/mockdata/wca/dashboard.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -36,13 +38,16 @@ describe('DashboardComponent', () => {
         ApolloModule,
         RouterModule.forRoot([]),
         HttpLinkModule],
-      declarations: [ DashboardComponent ],
+      declarations: [DashboardComponent],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
+      providers: [
+        { provide: WcaService, useClass: MockWcaService },
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -59,11 +64,11 @@ describe('DashboardComponent', () => {
   it('Check for the windows inner width above 992', () => {
     expect(component.breakpoint).toBe(4);
   })
- 
+
   it('Check for resize width below 480', () => {
     let event = {
       target: {
-        innerWidth:400
+        innerWidth: 400
       }
     }
     component.onResize(event);
@@ -72,7 +77,7 @@ describe('DashboardComponent', () => {
   it('Check for the windows inner width between 480 and 768', () => {
     let event = {
       target: {
-        innerWidth:500
+        innerWidth: 500
       }
     }
     component.onResize(event);
@@ -81,7 +86,7 @@ describe('DashboardComponent', () => {
   it('Check for the windows inner width between 768 and 992', () => {
     let event = {
       target: {
-        innerWidth:800
+        innerWidth: 800
       }
     }
     component.onResize(event);
@@ -90,10 +95,26 @@ describe('DashboardComponent', () => {
   it('Check for the windows inner width above 992', () => {
     let event = {
       target: {
-        innerWidth:1200
+        innerWidth: 1200
       }
     }
     component.onResize(event);
     expect(component.breakpoint).toBe(4);
   })
+
+  it('Check get created courses', () => {
+    component.getCreatedCourses();
+    expect(component.createdCourses).toBe(dashboardData.createdCourse.Result);
+  })
+
+  it('Check get published courses', () => {
+    component.getCreatedCourses();
+    expect(component.publishedCourses).toBe(dashboardData.publishedCourse.Result);
+  })
+
+  it('Check get draft courses', () => {
+    component.getDraftCourses();
+    expect(component.draftCourses).toBe(dashboardData.draftCourse.Result);
+  })
+
 });

@@ -28,11 +28,21 @@
             <span (click)="dialogClose()"> <img class="dialogClose2"  src="assets\images\dialog close.svg"> </span>
         </div>
     
-        <div class="prew1">
-            <mat-card class="prew2" *ngFor="let i of dialogdata.images">
+
+        <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="dialogdata.images"
+        [cdkDropListConnectedTo]="[todoList]"
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)">
+
+        <div class="prew1 ">
+            <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
              <img height="100%" width="100%" [src]="i">
         </mat-card>
     </div>
        </div>
+    </div>
     </ng-container>
 </div>

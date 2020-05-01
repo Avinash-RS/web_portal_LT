@@ -9,9 +9,13 @@ import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
+import { WcaService } from '../../services/wca.service';
+import { MockWcaService } from '../../services/wca.mock.service';
+
 describe('ChooseTemplateComponent', () => {
   let component: ChooseTemplateComponent;
   let fixture: ComponentFixture<ChooseTemplateComponent>;
+  let chooseTemplateData = require("../../../../assets/mockdata/wca/choose-template.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,6 +44,9 @@ describe('ChooseTemplateComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
+      providers: [
+        { provide: WcaService, useClass: MockWcaService },
+      ]
     })
       .compileComponents();
   }));
@@ -48,6 +55,8 @@ describe('ChooseTemplateComponent', () => {
     fixture = TestBed.createComponent(ChooseTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.queryData = chooseTemplateData.queryData;
+
   });
 
   it('should create', () => {
@@ -69,6 +78,7 @@ describe('ChooseTemplateComponent', () => {
 
   it('should get all the templates',() => {
     component.getTemplates();
+    expect(component.templateList).toBe(chooseTemplateData.getTemplate.Result)
   })
 
   it('Should parse templates', () => {
@@ -80,6 +90,7 @@ describe('ChooseTemplateComponent', () => {
       createdby_name: "test1",
       created_on: "4/17/2020, 10:09:36 AM"
     }
+    component.selectedTemplate.template_id = "5e99334428ac5638acff9279";
     component.templateParse(template);
 
   })
