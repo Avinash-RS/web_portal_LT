@@ -1114,7 +1114,7 @@ export class ProfileComponent implements OnInit {
   levelCode: any;
   minutes: number;
   seconds: number;
-  
+
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1151,7 +1151,7 @@ export class ProfileComponent implements OnInit {
       certificate: this.formBuilder.array([new FormControl("")]),
       qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth:  "05-08-1998",
+      year_of_birth: "05-08-1998",
       profile_img: [],
       user_id: [],
       created_by_ip: [],
@@ -1180,16 +1180,16 @@ export class ProfileComponent implements OnInit {
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       })
-      // const specification = this.profileForm.get('in.specification');
-      // this.profileForm.get('qualification').valueChanges
-      // .subscribe(qualification => {
-      //   if(qualification.level_code !=='10'){
-      //     specification.setValidators([Validators.required])
-      //   } else {
-      //     specification.setValidators(null)
-      //   }
-      //   specification.updateValueAndValidity();
-      // });
+    // const specification = this.profileForm.get('in.specification');
+    // this.profileForm.get('qualification').valueChanges
+    // .subscribe(qualification => {
+    //   if(qualification.level_code !=='10'){
+    //     specification.setValidators([Validators.required])
+    //   } else {
+    //     specification.setValidators(null)
+    //   }
+    //   specification.updateValueAndValidity();
+    // });
   }
 
   //to get controls for validation
@@ -1211,11 +1211,8 @@ export class ProfileComponent implements OnInit {
   // }
 
   getprofileDetails(userid) {
-   
     this.loader.show();
-    console.log('data.data'+userid)
     this.service.view_profile(userid).subscribe((data: any) => {
-      console.log('data.data'+data.data)
       if (data.data.view_profile.success) {
         let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
@@ -1242,26 +1239,26 @@ export class ProfileComponent implements OnInit {
           this.getDistrict();
           profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(qual => qualification.push(this.formBuilder.group(qual)));
           profileDetails.certificate && profileDetails.certificate.length > 0 && profileDetails.certificate.forEach(certif => certificate.push(this.formBuilder.control(certif)));
-          console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
+          // console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
           this.loader.hide();
         } else
           this.loader.hide();
       }
-    }) 
+    })
   }
-  yearOfpassing(){
+  yearOfpassing() {
     this.profileForm.value.qualification.forEach(element => {
-      if(element.year_of_passing > moment().year()){
+      if (element.year_of_passing > moment().year()) {
         this.alert.openAlert('Invalid year', null);
         // this.cannotEdit = false;
-      } 
+      }
       // else{
       //   this.cannotEdit = true;
       // }
     });
   }
   updateProfile() {
-    console.log(this.profileForm)
+    // /console.log(this.profileForm)
     if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional && this.profileForm.value.country && this.profileForm.value.state
       && this.profileForm.value.city_town)
       this.profileForm.controls['progress'].setValue(60);
@@ -1274,7 +1271,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls['created_by_ip'].setValue(ip);
     this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
 
-    console.log('jsonData', this.profileForm.value)
+    // console.log('jsonData', this.profileForm.value)
     // if(this.profileForm.value && this.profileForm.value.qualification) {
     //   this.profileForm.value.qualification.forEach(element => {
     //     if(element.qualification!={}) {element.qualification = element.qualification._id}
@@ -1371,7 +1368,7 @@ export class ProfileComponent implements OnInit {
     this.service.get_country_details().subscribe(countryDetails => {
       this.countryValue = countryDetails.data['get_country_details'].data.filter(cnt =>
         cnt.countryname === 'India'
-        );
+      );
     })
   }
   //State List
@@ -1393,7 +1390,9 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe(level => {
       this.levelValue = level.data['get_qualification_details'].data;
-      
+      this.levelValue.forEach(element => {
+        element.allowed = 'Y';
+      });
     })
   }
 
@@ -1405,7 +1404,7 @@ export class ProfileComponent implements OnInit {
     this.service.get_board_university_details().subscribe(boards => {
       this.boardValue = boards.data['get_board_university_details'].data['board'];
       this.uniValue = boards.data['get_board_university_details'].data['university'];
-     
+
     })
   }
 
@@ -1423,7 +1422,7 @@ export class ProfileComponent implements OnInit {
 
   getSpec() {
     // this.service.get_institute_details().subscribe(institute => {
-     
+
     //   this.specValue= institute.data['get_institute_details'].data;
     // })
     this.service.get_specification_details().subscribe(spec => {
@@ -1478,7 +1477,6 @@ export class ProfileComponent implements OnInit {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
     this.dialog.open(passRef);
-    console.log(this.passwordForm)
   }
 
   otpverification() {
@@ -1495,18 +1493,18 @@ export class ProfileComponent implements OnInit {
         //Timer
         this.timeLeft = 120;
         // if(this.timeLeft > 60){
-          this.interval = setInterval(() => {
-            if (this.timeLeft > 0) {
-              this.timeLeft--;
-               this.minutes = Math.floor(this.timeLeft/60);
-              this.seconds = this.timeLeft -this.minutes * 60;
+        this.interval = setInterval(() => {
+          if (this.timeLeft > 0) {
+            this.timeLeft--;
+            this.minutes = Math.floor(this.timeLeft / 60);
+            this.seconds = this.timeLeft - this.minutes * 60;
 
-            } else {
-              // this.minutes = 0;
-              this.verifybutton = true;
-            }
-          }, 1000)
-      
+          } else {
+            // this.minutes = 0;
+            this.verifybutton = true;
+          }
+        }, 1000)
+
       } else
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         Swal.fire(data.data['update_mobile_onprofile'].message);
@@ -1516,7 +1514,6 @@ export class ProfileComponent implements OnInit {
   onOtpChange(otp) {
     // this.otpForm.value.otp = otp;
     this.otp = otp;
-    console.log(otp)
   }
 
   otpverify() {
@@ -1547,8 +1544,8 @@ export class ProfileComponent implements OnInit {
         this.interval = setInterval(() => {
           if (this.resendtimeLeft > 0) {
             this.resendtimeLeft--;
-             this.minutes = Math.floor(this.resendtimeLeft/60);
-            this.seconds = this.resendtimeLeft -this.minutes * 60;
+            this.minutes = Math.floor(this.resendtimeLeft / 60);
+            this.seconds = this.resendtimeLeft - this.minutes * 60;
 
           } else {
             this.minutes = 0;
@@ -1567,7 +1564,7 @@ export class ProfileComponent implements OnInit {
         this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else
-      Swal.fire(password.data['get_change_password_updateprofile'].message);
+        Swal.fire(password.data['get_change_password_updateprofile'].message);
     })
   }
 
@@ -1609,5 +1606,45 @@ export class ProfileComponent implements OnInit {
       this.spicalcharacter = true;
     else
       this.spicalcharacter = false;
+  }
+  //Percentage
+  //   public setTwoNumberDecimal($event) {
+  //     $event.target.value = parseFloat($event.target.value).toFixed(2);
+  // }
+
+
+  duplicateValueCheck = []
+  changed(value, index) {
+    this.duplicateValueCheck[index] = value;
+    this.checkFunction();
+  }
+
+  /**
+   * The method which form all option types according to chosen values
+   */
+  checkFunction() {
+    // For all types check if they were chosen
+    this.levelValue.forEach((type) => {
+      console.log(type)
+      // if current type in array of chosen
+      if (type.level_code == '10' || type.level_code == '12') {
+        let selected = this.duplicateValueCheck.includes(type._id);
+        if (selected) type.allowed = 'N'
+      }
+
+      // push current type with its status
+    });
+  }
+
+  checkSpec(a, spec, quali, level) {
+    // console.log(a, b, c, d);
+    quali = this.profileForm.get('qualification');
+    const specification = quali.controls[spec].controls.specification;
+    if (level.level_code !== '10' && level.level_code !== '12')
+      specification.setValidators([Validators.required]);
+    else
+      specification.setValidators(null)
+    specification.updateValueAndValidity();
+    console.log(specification)
   }
 }

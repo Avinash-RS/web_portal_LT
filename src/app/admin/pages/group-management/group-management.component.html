@@ -15,9 +15,9 @@
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-            <li class="mat-tree-node" renderDebug>
+            <li class="mat-tree-node newstyle" renderDebug>
               <!-- use a disabled button to provide padding for tree leaf -->
-              <button mat-icon-button matTreeNodeToggle (click)="loadsubgroup(node)"
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
                 [attr.aria-label]="'toggle ' + node.name">
                 <mat-icon class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
@@ -51,7 +51,9 @@
 
       </div>
       <div class="col-9">
+
         <div class="tab_container">
+
           <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
           <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
 
@@ -59,12 +61,16 @@
           <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label>
 
           <section id="content1" class=" tab-content">
-            <b>{{currentpath?.group_name}} -> New Group</b>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+            {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
             <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
-              <br>
-              <span>Group Name&nbsp;<b class="text-danger">*</b></span>&nbsp;&nbsp;
+
+              <div class="col-12 mt-4">
+              <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
               <mat-form-field class="field px-2">
-                <input type="text" placeholder="Enter Group/Sub Group Name" matInput ngModel name="group_name"
+                <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
                   #groupname1="ngModel" required>
                 <mat-error *ngIf="groupname1.errors">
                   <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
@@ -73,10 +79,23 @@
                   Should Be Numbers and max Size 15 only</div> -->
                 </mat-error>
               </mat-form-field>
-              <br>
+              </div>
+              <div class="col-12" *ngIf="currentpath">
+                <!-- [(ngModel)]="checked" -->
+              <mat-slide-toggle  
+              class="example-margin"
+              [color]="color"
+              [checked] ="!currentpath?.is_active"
+              (change)="changegroupstatus()"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
+              </div>
+              <div class="col-12 mt-4">
               <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
               <button mat-raised-button color="primary" type="reset">Cancel</button>
+            </div>
             </form>
+          </div>
+          </div>
+          </div>
           </section>
           <section id="content2" class="tab-content">
           </section>

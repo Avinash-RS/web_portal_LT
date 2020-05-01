@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatProgressSpinnerModule,MatTreeModule } from '@angular/material';
+import { MatProgressSpinnerModule,MatTreeModule, MatSlideToggleModule } from '@angular/material';
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule, MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -67,6 +67,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatExpansionModule,
         MatTableModule,
         MatTreeModule,
+        MatSlideToggleModule,
         InfiniteScrollModule,
         // WcaModule
        

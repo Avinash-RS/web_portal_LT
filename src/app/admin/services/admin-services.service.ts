@@ -185,6 +185,14 @@ export class AdminServicesService {
       }
     });
   }
+
+  changegroupstatus() {
+    return this.Apollo.query({
+      query: createusergroup,
+      variables: {
+      }
+    });
+  }
 }
 
 

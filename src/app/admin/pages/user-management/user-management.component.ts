@@ -50,7 +50,6 @@ export class UserManagementComponent implements OnInit {
       .subscribe((result: any) => {
         Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-        console.log(this.ELEMENT_DATA)
         this.selection = new SelectionModel(true, []);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -94,11 +93,9 @@ export class UserManagementComponent implements OnInit {
     // this.loader = true;
     this.service.getUserSession(element._id).subscribe((track: any) => {
       this.trackDetails = track.data.get_user_session_detail.message[0]
-      console.log(this.trackDetails);
       this.service.getLearnerDetail(element.user_id)
         .subscribe((result: any) => {
           this.profileDetails = result.data.get_all_learner_detail.message[0];
-          // console.log(result.data.get_all_learner_detail.message[0], this.profileDetails)
           this.dialog.open(templateRef);
           // this.loader = false;
           // this.mailForm = this.formBuilder.group({
@@ -113,16 +110,13 @@ export class UserManagementComponent implements OnInit {
   }
 
   checkboxLabel(row?) {
-    console.log(row)
     if (row.isChecked == undefined || row.isChecked == false) {
       row.isChecked = true;
       this.selectedArray.push(row);
-      console.log(this.selectedArray)
     }
     else {
       row.isChecked = !row.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== row);
-      console.log(this.selectedArray)
     }
   }
 
@@ -139,7 +133,6 @@ export class UserManagementComponent implements OnInit {
               // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.search_user.message);
               this.ELEMENT_DATA = result.data.search_user.message
               this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-              console.log(this.ELEMENT_DATA);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
               this.resultsLength = 10;
@@ -152,7 +145,6 @@ export class UserManagementComponent implements OnInit {
       } else if(filterValue.trim().toLowerCase().length == 0) {
         // setTimeout(() => {
         //   this.ELEMENT_DATA = []
-        //   console.log('inside')
           this.getAllUser(0)
         // }, 700);
       }
@@ -210,7 +202,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   next(e) {
-    console.log(e)
     this.getAllUser(e.pageIndex);
     this.selectedArray = [];
   }

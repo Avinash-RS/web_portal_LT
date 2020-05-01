@@ -4,7 +4,8 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
-
+import {MatSlideToggleModule} from '@angular/material';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-group-management',
   templateUrl: './group-management.component.html',
@@ -17,7 +18,7 @@ export class GroupManagementComponent implements OnInit {
   adminDetails: any;
   currentpath = null;
   pagenumber = 0;
-
+  // checked = 'Deactivate';
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -35,10 +36,11 @@ export class GroupManagementComponent implements OnInit {
   }
 
   getgroups() {
+    this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
-      console.log(result);
       this.groups = result.data.getgroup.message;
+      console.log(this.groups);
       this.treeSource.data = null;
       this.treeSource.data = this.groups;
       this.dataSource$.next(this.groups);
@@ -50,7 +52,6 @@ export class GroupManagementComponent implements OnInit {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       const group = result.data.getgroup.message;
-      console.log(group);
       if (node) {
         // node.children = [
         //   ...(node.children || []),
@@ -74,10 +75,11 @@ export class GroupManagementComponent implements OnInit {
    * Determines whether scroll down on
    */
   onScrollDown() {
-    this.pagenumber = this.pagenumber + 10;
+    this.pagenumber = this.pagenumber + 1;
+    console.log(this.pagenumber);
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: this.pagenumber };
     this.adminservice.getgroup(data).subscribe((result: any) => {
-      console.log(result);
+      console.log(result.data.getgroup.message);
       const resultdata = result.data.getgroup.message;
       if (resultdata.length) {
         let array: any;
@@ -93,7 +95,6 @@ export class GroupManagementComponent implements OnInit {
 
 
   selectgroup(node) {
-    console.log(node);
     if (node.checkbox === true) {
       this.currentpath = node;
     } else {
@@ -101,7 +102,6 @@ export class GroupManagementComponent implements OnInit {
     }
   }
   savegroup(form) {
-    console.log(this.currentpath);
     let hierarchy;
     if (form.valid) {
       if (this.currentpath) {
@@ -114,9 +114,7 @@ export class GroupManagementComponent implements OnInit {
         hierarchy_id: this.currentpath ? hierarchy : 'h1',
         admin_id: this.adminDetails._id
       };
-      console.log(data);
       this.adminservice.creategroup(data).subscribe((result: any) => {
-        console.log(result);
         if (result.data.createusergroup.success === true) {
           this.alert.openAlert('Success !', 'Group Created Successfully');
           form.reset();
@@ -127,5 +125,28 @@ export class GroupManagementComponent implements OnInit {
       });
     }
   }
-
+  changegroupstatus() {
+    const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
+    Swal.fire({
+      title: 'Are you sure want to ' + status +
+      ' the group  ' + this.currentpath.group_name + '?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+        // this.adminservice.changegroupstatus().subscribe(( result : any) => {
+        //   this.getgroups();
+        //   Swal.fire(
+        //      status,
+        //     'Group  has been ' + status + 'd',
+        //     'success'
+        //   );
+        // });
+      }
+    });
+    // this.checked ="Deactivate"
+  }
 }
