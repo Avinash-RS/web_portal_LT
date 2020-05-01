@@ -6,6 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 import { Apollo } from "apollo-angular";
 import {remove_doc_ref,getallrefdoc,get_module_topic} from "./operations/wca_query";
 
+import { HttpHeaders } from '@angular/common/http';
+
+
 //import {} from "./operations/learner_mutation"
 
 //change rajesh ranjan
@@ -20,12 +23,23 @@ bSubject = new BehaviorSubject({});
 bSubject1 = new BehaviorSubject({}); 
 
 
-  constructor(private http: HttpClient,private Apollo: Apollo,) { }
+token:String;
+
+
+  constructor(private http: HttpClient,private Apollo: Apollo,) {
+
+
+  
+   }
+
+
+  
 
   getPublishedCourse() {
     return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");
   }
   getCreatedCourse() {
+
     return this.http.get(environment.wcaapiurl + "api/courses/getcreatedcourse");
   }
   getDraftCourse() {
@@ -39,7 +53,18 @@ bSubject1 = new BehaviorSubject({});
 
   uploadImage(image) {return this.http.post(environment.apiUrlImg + 'upload/image', image); }
 
-  createCourse(course) { return this.http.post(environment.createCourseApi + '/coursecreation', course); }
+  createCourse(course) {
+    
+    var headers = new HttpHeaders()
+            .set("Authorization","Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
+  
+    // httpOptions.headers.append('Authorization', 'Bearer ' + this.token);
+    // httpOptions.headers.append('Content-Type' , 'application/json');
+
+    // console.log(httpOptions)
+    
+    
+    return this.http.post(environment.createCourseApi + 'coursecreation',course,{headers}); }
 
   getAllInstructors() { return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails'); }
 
