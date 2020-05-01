@@ -39,7 +39,7 @@ bSubject1 = new BehaviorSubject({});
 
   uploadImage(image) {return this.http.post(environment.apiUrlImg + 'upload/image', image); }
 
-  createCourse(course) { return this.http.post(environment.wcaapiurl + 'api/courses/savecourse', course); }
+  createCourse(course) { return this.http.post(environment.createCourseApi + '/coursecreation', course); }
 
   getAllInstructors() { return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails'); }
 
