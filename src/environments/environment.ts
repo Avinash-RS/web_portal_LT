@@ -7,6 +7,7 @@ export const environment = {
   apiUrl: 'http://40.76.47.212:3000/',
   scormUrl:'http://40.76.47.212:8080/',
   apiUrlImg:'http://40.76.47.212:3001/',
+  createCourseApi:'http://40.76.47.212:3002/',
   wcaapiurl:'http://edutech.eastus.cloudapp.azure.com/',
     // apiUrl: 'http://20.44.41.200:3000/',
   // scormUrl:'http://20.44.41.200:8080/',

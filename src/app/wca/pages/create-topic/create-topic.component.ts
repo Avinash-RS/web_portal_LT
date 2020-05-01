@@ -106,7 +106,7 @@ export class CreateTopicComponent implements OnInit {
             console.log(this.queryData);
            }
           })
-        } else if (this.query.edit) {
+        } else if (this.query.edit && !this.query.addModule) {
           this.wcaService.bSubject1.subscribe((value1:any) => {
           console.log(value1);
          if(value1 && value1.courseDetails) {
@@ -129,7 +129,10 @@ export class CreateTopicComponent implements OnInit {
         } else if(this.query && this.query.template && !this.query.addModule) 
         {
           this.initialCall(this.query);
-        }
+        } else if(this.query && this.query.temp && this.query.addModule) 
+        {
+          this.initialCall3(this.query);
+        } 
       }
     });
 
@@ -194,6 +197,33 @@ export class CreateTopicComponent implements OnInit {
       this.spinner.hide();
     })
   }
+
+  initialCall3(data1){
+    console.log(data1);
+    this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
+      this.courseDetails = data.Result[0];
+      this.courseArray =  this.courseDetails.coursedetails;
+      console.log(this.courseArray);
+      this.wcaService.bSubject.subscribe(value => {
+        if (value) {
+         this.queryData = null;
+         this.queryData = value;
+         this.spinner.hide();
+         console.log(this.courseDetails)
+         this.queryData.moduledetails = this.courseArray[0].moduledetails;
+         console.log(this.queryData);
+         this.courseForm = this.courseform()
+         this.createTopicForm = this.createForm();
+         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
+         this.courseForm.patchValue(this.courseDetails);
+         // this.courseForm.updateValueAndValidity();
+         console.log(this.courseForm)
+        }
+        });
+    }, err => {
+      this.spinner.hide();
+    })
+    }
 
   DeleteTopic(jform,event) {
     event.stopPropagation();
