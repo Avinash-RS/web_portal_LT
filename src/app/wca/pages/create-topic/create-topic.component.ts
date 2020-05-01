@@ -52,17 +52,17 @@ export class CreateTopicComponent implements OnInit {
       courseid: [null, Validators.compose([Validators.required])],
       coursedetails:this.formBuilder.array(this.courseArray.length ? this.courseArray.map((data,index) => {
         // if (data.modulestatus === 'true') {
-         return this.createForm()
+         return this.createForm(data,index)
         // }
-      }) : [this.createForm()])
+      }) : [this.createForm(this.queryData)])
     });
   }
 
 
-  topicItem(i): FormGroup {
+  topicItem(mod_index,i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array(this.queryData && this.queryData.moduledetails ? this.queryData.moduledetails[i].topicimages.map(data =>
+      topicimages: this.formBuilder.array(this.courseArray && mod_index && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         this.topicImages()
       ) : [],Validators.compose([Validators.required])),
       topicstatus:['true']
@@ -117,6 +117,7 @@ export class CreateTopicComponent implements OnInit {
           this.courseForm = this.courseform()
           this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
           this.courseForm.patchValue(value1.courseDetails);
+          console.log(this.courseForm)
           // this.createTopicForm.patchValue(this.queryData)
          } else {
            this.queryData = {};
@@ -138,13 +139,15 @@ export class CreateTopicComponent implements OnInit {
 
 
   }
-  createForm() :FormGroup{
+  createForm(mod,mod_index=null) :FormGroup{
+
+    console.log(mod)
    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
       template_details:[this.queryData.template_details],
-      moduledetails: this.formBuilder.array(this.queryData && this.queryData.template_details && this.queryData.template_details ? this.queryData.template_details.map((data,index) =>
-        this.topicItem(index)
+      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details ? mod.template_details.map((data,index) =>
+        this.topicItem(mod_index,index)
       ) : [])
     })
 
@@ -173,6 +176,7 @@ export class CreateTopicComponent implements OnInit {
     this.spinner.show();
     console.log(data1);
       this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
+        console.log(data);
         this.courseDetails = data.Result[0];
         this.courseArray =  this.courseDetails.coursedetails;
         
@@ -181,10 +185,10 @@ export class CreateTopicComponent implements OnInit {
           this.queryData = data.Result;
         this.spinner.hide();
         console.log(this.courseDetails)
-        this.queryData.moduledetails = this.courseArray[0].moduledetails;
+        // this.queryData.moduledetails = this.courseArray[0].moduledetails;
         console.log(this.queryData);
         this.courseForm = this.courseform()
-        this.createTopicForm = this.createForm();
+        this.createTopicForm = this.createForm(this.queryData);
         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
         this.courseForm.patchValue(this.courseDetails);
         // this.courseForm.updateValueAndValidity();
@@ -210,10 +214,10 @@ export class CreateTopicComponent implements OnInit {
          this.queryData = value;
          this.spinner.hide();
          console.log(this.courseDetails)
-         this.queryData.moduledetails = this.courseArray[0].moduledetails;
+        //  this.queryData.moduledetails = this.courseArray[0].moduledetails;
          console.log(this.queryData);
          this.courseForm = this.courseform()
-         this.createTopicForm = this.createForm();
+         this.createTopicForm = this.createForm(this.queryData);
          (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
          this.courseForm.patchValue(this.courseDetails);
          // this.courseForm.updateValueAndValidity();

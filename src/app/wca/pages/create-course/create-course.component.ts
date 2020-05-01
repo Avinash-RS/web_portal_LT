@@ -268,9 +268,10 @@ export class CreateCourseComponent implements OnInit {
       this.wcaService.createCourse(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
         this.spinner.hide();
-        if (data && data.Message === 'Success') {
+        if (data && data.course_id) {
          this.toast.success('Course Created Successfully !!!');
-         this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule: encodeURIComponent(data.Result) ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
+         console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
+         this.router.navigate(['../Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
         }
       }, err => {
         this.spinner.hide();
