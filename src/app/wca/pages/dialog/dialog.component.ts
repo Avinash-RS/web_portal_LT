@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { WcaService } from '../../services/wca.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-dialog',
@@ -26,6 +28,9 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.dialogdata);
+
+    this.resetList()
+
     
     this.templateForm = this.formbuilder.group({
       tempName: [null,Validators.compose([Validators.required])]
@@ -33,6 +38,30 @@ export class DialogComponent implements OnInit {
   }
   get formControls() { return this.templateForm.controls; }
 
+
+
+  resetList() {
+ 
+    // setTimeout(() => {
+      if(this.dialogdata && this.dialogdata.images) {
+        this.dialogdata.images = this.dialogdata.images.slice();
+      }
+    // }, 0);    
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      this.dialogdata.images.push(this.dialogdata.images[event.previousIndex]);
+
+      // transferArrayItem(event.previousContainer.data,
+      //                   event.container.data,
+      //                   event.previousIndex,
+      //                   event.currentIndex);
+    }
+  }
 
   templateName() {
     console.log(this.templateForm);
@@ -47,7 +76,7 @@ export class DialogComponent implements OnInit {
   }
 
   dialogClose() {
-    this.dialogRef.close('noData')
+    this.dialogRef.close(this.dialogdata.images)
   }
 
 }

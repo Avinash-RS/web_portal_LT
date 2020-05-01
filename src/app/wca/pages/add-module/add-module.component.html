@@ -44,10 +44,12 @@
                 class="horizontalView"
                 (cdkDropListDropped)="drop($event)">
 
-                <div class="example-box1" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
+                <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
 
 
-                <!-- <ng-container class="example-box1" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag> -->
+                <!-- <ng-container class="example-box1" *ngFor="lets module of courseDetails.coursedetails;let n = index" cdkDrag> -->
+                 
+                  <div class="prew1">
                   <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                     <span class="del-icon-container">
                     <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
@@ -55,6 +57,7 @@
                     <span (click)="addTopic(module,n)">
                       {{module.modulename}}
                     </span>
+                  </div>
                   </div>
                 <!-- </ng-container> -->
                 </div>
