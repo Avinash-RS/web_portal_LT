@@ -38,7 +38,7 @@ export class GroupManagementComponent implements OnInit {
   loader: boolean = false;
   ELEMENT_DATA: PeriodicElement[] = [];
   resultsLength: number = null;
-  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   /** tree source stuff */
@@ -253,5 +253,8 @@ toggle(event: MatSlideToggleChange) {
         this.resultsLength = result.data.get_all_user.learner_count;
         this.loader = false;
       });
+  }
+  next(e) {
+    this.getAllUser(e.pageIndex);
   }
 }
