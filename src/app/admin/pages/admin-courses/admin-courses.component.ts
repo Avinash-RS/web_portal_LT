@@ -11,14 +11,15 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any ;
+  type: any = 'published';
   goto: any;
   showPublishedDate: boolean;
   loader: boolean;
+  btnType: any;
 
   constructor(public route: Router, private service: AdminServicesService) {
-    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
+    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
     console.log(this.type)
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
@@ -29,6 +30,7 @@ export class AdminCoursesComponent implements OnInit {
         this.goto = 'create';
         this.showPublishedDate = false;
         this.loader = false;
+        this.btnType = 'Publish'
       })
     }
     else if (this.type == 'published') {
@@ -38,6 +40,7 @@ export class AdminCoursesComponent implements OnInit {
         this.goto = 'publish';
         this.showPublishedDate = true;
         this.loader = false;
+        this.btnType = 'Publish'
       })
     }
     else if (this.type == 'draft') {
@@ -47,6 +50,7 @@ export class AdminCoursesComponent implements OnInit {
         this.goto = 'draft';
         this.showPublishedDate = true;
         this.loader = false;
+        this.btnType = 'Publish'
       })
     }
   }

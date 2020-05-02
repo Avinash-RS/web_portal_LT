@@ -22,7 +22,8 @@ import {
   MatExpansionModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule,MatTreeModule
+  MatPaginatorModule, MatTreeModule,
+  MatDividerModule
 } from '@angular/material';
 
 import { CommonModule } from '@angular/common';
@@ -51,7 +52,8 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTreeModule
+    MatTreeModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -75,7 +77,9 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTreeModule
+    MatTreeModule,
+    MatDividerModule
+
   ],
   providers: [
     {
@@ -84,7 +88,7 @@ import { CommonModule } from '@angular/common';
     },
   ],
   declarations: [
-  
+
   ]
 })
 export class MaterialModule { }
