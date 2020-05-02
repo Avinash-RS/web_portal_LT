@@ -79,6 +79,7 @@ export class CoursepreviewComponent implements OnInit {
     this.clicked = i
   }
   getModuleData() {
+    this.loader.show();
     this.learnerservice.getModuleData(1).subscribe(data => {
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
@@ -90,6 +91,9 @@ export class CoursepreviewComponent implements OnInit {
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
+      this.loader.hide();
+    }, err => {
+      this.loader.hide();
     })
   }
 
