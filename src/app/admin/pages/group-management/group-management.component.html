@@ -131,6 +131,27 @@
         </mat-tab>
          
         <mat-tab label="View User" [disabled]="disabled">
+          <div class="row">
+          <div class="col-md-6">
+          <ng-container *ngIf="currentpath?.group_name">
+         
+          <div class="card-header">
+            {{currentpath?.group_name}}'s User list
+         </div>
+        </ng-container>
+        <ng-container *ngIf="!currentpath?.group_name">
+         
+          <div class="card-header">
+           All User list
+         </div>
+        </ng-container>
+      </div>
+      <div class="col-md-6">
+        <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+          <mat-icon>add</mat-icon>Add User
+        </button>
+      </div>
+    </div>
           <div class="example-container mat-elevation-z8">
           <mat-table #table [dataSource]="dataSource">
 
@@ -178,7 +199,7 @@
                 {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
             </ng-container>
       
-            <!-- <ng-container matColumnDef="actions">
+           <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">
                 Actions <br *ngIf="selectedArray && selectedArray.length > 0">
                 <button *ngIf="selectedArray && selectedArray.length > 0" mat-stroked-button (click)="deActivate('Activate')">
@@ -204,7 +225,7 @@
                   (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
                   {{element.is_blocked ? 'Unblock' : 'Block'}}</button>
               </mat-cell>
-            </ng-container> -->
+            </ng-container> 
       
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
