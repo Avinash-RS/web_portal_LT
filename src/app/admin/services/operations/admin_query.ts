@@ -185,7 +185,7 @@ export const get_all_learner_detail = gql`
 
 
 
-  export const getnotificationreports = gql`
+export const getnotificationreports = gql`
   query getnotificationreports($admin_id: String!){
     getnotificationreports(admin_id: $admin_id) {
       success
