@@ -20,6 +20,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+
 
 
 
@@ -37,6 +40,7 @@ import { Ppt1Component } from './ppt1/ppt1.component';
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
+    DragDropModule,
 
 
     BrowserAnimationsModule,

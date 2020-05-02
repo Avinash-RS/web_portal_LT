@@ -87,6 +87,19 @@ mat-icon {
     }
 }
 
+.margLeft{
+    margin-left: -10px;
+}
+
+.dspFlx{
+display: flex;
+justify-content: space-evenly;
+}
+.dspFlx1{
+    display: flex;
+    align-items: center;
+}
+
 .container:hover .overlay {
     opacity: 1;
     filter: alpha(opacity=100);

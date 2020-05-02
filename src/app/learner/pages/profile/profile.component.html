@@ -128,8 +128,8 @@
               <div class="row">
                 <div class="col-md-8"> </div>
                 <div class="col-md-4">
-                  <span class="percent color_blue">{{profileForm.value.progress}}%</span>
-                  <mat-progress-bar class="border-radius-5" mode="determinate" [value]="profileForm.value.progress">
+                  <span class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
+                  <mat-progress-bar class="border-radius-5" mode="determinate" [value]="profileForm.value.progress || 10">
                   </mat-progress-bar>
                 </div>
               </div>
@@ -234,7 +234,7 @@
 
               <div class="col-md-3 col-sm-12 col-12 display_flex">
                 
-                <input type="tel"  suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
+                <input type="tel" mask="00" suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
                 'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
                   formControlName="percentage">
                 <mat-icon (click)="addQualification()"
@@ -505,7 +505,7 @@
   </div>
 </div>
 
-DEBUG
+<!-- DEBUG
 <br><br><br>VALID : <br>
 <pre>about_you : {{profileForm.get('about_you').valid}}</pre>
 <pre>gender : {{profileForm.get('gender').valid}}</pre>
@@ -519,6 +519,6 @@ DEBUG
 <pre>qualification : {{profileForm.get('qualification').valid}}</pre>
 <pre>social_media : {{profileForm.get('social_media').valid}}</pre>
 <pre>professional : {{profileForm.get('professional').valid}}</pre>
-<br>
+<br> -->
 
 <!-- {{profileForm.value | json}} -->

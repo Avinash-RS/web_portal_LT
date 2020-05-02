@@ -43,7 +43,6 @@ export class AddUserComponent implements OnInit {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.service.getUserGroup()
       .subscribe((result: any) => {
-        console.log(result.data.get_user_group.message)
         this.groups = result.data.get_user_group.message
       });
   }
@@ -53,13 +52,11 @@ export class AddUserComponent implements OnInit {
   }
 
   addUser() {
-    console.log(this.addUserForm.value);
     var admin = []
     admin.push(this.adminDetails._id);
     this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
       true, this.addUserForm.value.group._id, this.addUserForm.value.group.group_name, admin
     ).subscribe((result: any) => {
-      console.log(result.data.user_registration.message);
       if (result.data.user_registration.success === 'true') {
         this.alert.openAlert('Success !', 'User added successfully');
       } else {
@@ -86,7 +83,6 @@ export class AddUserComponent implements OnInit {
     { studendID: 9, fname: 'Fluorine', weight: 18.9984, symbol: 'F' },
     ]
 
-    console.log(this.tableData)
   }
 
 
@@ -181,7 +177,6 @@ export class AddUserComponent implements OnInit {
       const fb = new FormData();
       fb.append('csv', data, this.selectedfile.name);
       this.service.bulkuserupload(fb).subscribe((result: any) => {
-        console.log(result);
         if (result.success === true) {
           this.alert.openAlert('Success !', 'Uploaded in Progress ...');
           this.selectedfile = '';
