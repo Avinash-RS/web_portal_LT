@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatSlideToggleModule } from '@angular/material';
 
 export interface PeriodicElement {
   user_id: string;
@@ -46,6 +47,7 @@ export class GroupManagementComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  checked: any = 'Deactivate';
   constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);

@@ -29,15 +29,12 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-    )
-      .subscribe(() => {
-
-        var rt = this.getChild(this.activatedRoute)
-
-        rt.data.subscribe(data => {
-          this.titleService.setTitle(data.title)
-        })
+    ).subscribe(() => {
+      var rt = this.getChild(this.activatedRoute)
+      rt.data.subscribe(data => {
+        this.titleService.setTitle(data.title)
       })
+    })
 
     this.getIPAddress();
     var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
@@ -58,7 +55,6 @@ export class AppComponent {
         localStorage.clear();
       }
     }
-
   }
 
   getChild(activatedRoute: ActivatedRoute) {
@@ -76,7 +72,4 @@ export class AppComponent {
       localStorage.setItem('Systemip', this.ipAddress)
     });
   }
-
-
-
 }

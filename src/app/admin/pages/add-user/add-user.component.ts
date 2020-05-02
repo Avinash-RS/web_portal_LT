@@ -36,7 +36,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
 
     this.addUserForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.usernameVal),
+      username: new FormControl('', myGlobals.fullnameVal),
       email: new FormControl('', myGlobals.emailVal),
       group: ['', myGlobals.req]
     });
@@ -57,11 +57,15 @@ export class AddUserComponent implements OnInit {
     this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
       true, this.addUserForm.value.group._id, this.addUserForm.value.group.group_name, admin
     ).subscribe((result: any) => {
-      if (result.data.user_registration.success === 'true') {
-        this.alert.openAlert('Success !', 'User added successfully');
-      } else {
-        this.alert.openAlert(result.data.user_registration.message, null);
-      }
+      if (result.data && result.data.user_registration) {
+        if (result.data.user_registration.success === 'true') {
+          this.addUserForm.reset();
+          this.alert.openAlert('Success !', 'User added successfully');
+        } else {
+          this.alert.openAlert(result.data.user_registration.message, null);
+        }
+      } else
+        this.alert.openAlert("Please try again later", null)
     });
   }
 
@@ -93,7 +97,7 @@ export class AddUserComponent implements OnInit {
     const json: any = [{
       Full_Name: null,
       Email: null
-        }];
+    }];
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
@@ -163,9 +167,11 @@ export class AddUserComponent implements OnInit {
     if (this.selectedfile && group) {
       const exceldata: any = [];
       this.exceljson.forEach(element => {
-        exceldata.push({full_name: element.Full_Name , email: element.Email, term_condition : 'true', admin: this.adminDetails._id,
-         group_id: group._id,
-        group_name: group.group_name });
+        exceldata.push({
+          full_name: element.Full_Name, email: element.Email, term_condition: 'true', admin: this.adminDetails._id,
+          group_id: group._id,
+          group_name: group.group_name
+        });
       });
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exceldata);
       const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -207,7 +213,7 @@ export class AddUserComponent implements OnInit {
    * Delete csv file
    */
   deleteFile() {
- this.selectedfile = '';
+    this.selectedfile = '';
   }
 
   /**

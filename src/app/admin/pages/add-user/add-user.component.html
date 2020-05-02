@@ -15,14 +15,14 @@
         <div class="col-md-3 col-sm-5 col-6"><br>
           <form [formGroup]="addUserForm">
             <div class="form-group">
-              <label>User Name</label><span style="color: red;"> *</span>
+              <label>Full Name</label><span style="color: red;"> *</span>
               <input type="text" formControlName="username" class="form-control"
                 [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
               <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">User Name is required</div>
-                <div *ngIf="f.username.errors.pattern">User Name is invalid</div>
-                <div *ngIf="f.username.errors.minlength">User Name must be minimum of 3 characters </div>
-                <div *ngIf="f.username.errors.maxlength">User Name must be 20 maximum of characters</div>
+                <div *ngIf="f.username.errors.required">Full Name is required</div>
+                <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
+                <div *ngIf="f.username.errors.minlength">Full Name must be minimum of {{f.username.errors.maxlength.requiredLength}} characters </div>
+                <div *ngIf="f.username.errors.maxlength">Full Name must be {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
               </div>
             </div>
             <div class="form-group">

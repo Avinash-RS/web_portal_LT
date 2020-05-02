@@ -32,7 +32,7 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of publishedCourses">
@@ -70,7 +70,7 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of createdCourses">
@@ -111,7 +111,7 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of draftCourses">
