@@ -1114,6 +1114,7 @@ export class ProfileComponent implements OnInit {
   levelCode: any;
   minutes: number;
   seconds: number;
+  // lang: Boolean = false;
   
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
