@@ -24,28 +24,37 @@ export class AdminCoursesComponent implements OnInit {
     if (this.type == 'created') {
       this.loader = true;
       this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
-        this.courseList = res.data.get_course_createdby_admin.message;
-        this.goto = 'create';
-        this.showPublishedDate = false;
-        this.loader = false;
+        if (res.data && res.data.get_course_createdby_admin) {
+          this.courseList = res.data.get_course_createdby_admin.message;
+          this.goto = 'create';
+          this.showPublishedDate = false;
+          this.loader = false;
+        } else
+          this.loader = false;
       })
     }
     else if (this.type == 'published') {
       this.loader = true;
       this.service.getAllCoursePublished("undefined", 0).subscribe((res: any) => {
-        this.courseList = res.data.get_course_published.message;
-        this.goto = 'publish';
-        this.showPublishedDate = true;
-        this.loader = false;
+        if (res.data && res.data.get_course_published) {
+          this.courseList = res.data.get_course_published.message;
+          this.goto = 'publish';
+          this.showPublishedDate = true;
+          this.loader = false;
+        } else
+          this.loader = false;
       })
     }
     else if (this.type == 'draft') {
       this.loader = true;
       this.service.getAllDrafted("undefined", 0).subscribe((res: any) => {
-        this.courseList = res.data.get_draft_course.message;
-        this.goto = 'draft';
-        this.showPublishedDate = true;
-        this.loader = false;
+        if (res.data && res.data.get_draft_course) {
+          this.courseList = res.data.get_draft_course.message;
+          this.goto = 'draft';
+          this.showPublishedDate = false;
+          this.loader = false;
+        } else
+          this.loader = false;
       })
     }
   }

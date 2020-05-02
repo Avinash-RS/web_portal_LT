@@ -39,7 +39,7 @@ export class AdminLoginComponent implements OnInit {
   login() {
     this.service.login(this.loginForm.value.username.toLowerCase(), this.loginForm.value.password, true)
       .subscribe((loginresult: any) => {
-        if (loginresult.data.login) {
+        if (loginresult.data && loginresult.data.login) {
           if (loginresult.data.login.success) {
               localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Admin/auth/userManagement'])

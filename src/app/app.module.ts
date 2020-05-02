@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MAT_TABS_CONFIG } from '@angular/material';
 
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
@@ -24,16 +25,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponentComponent,
     DialogComponent,
-
     Ppt2Component,
-
     Ppt1Component
   ],
   imports: [
@@ -41,8 +38,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MaterialModule,
     GraphqlModule,
     DragDropModule,
-
-
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -55,10 +50,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     GraphqlModule,
     BrowserAnimationsModule,
-
   ],
   providers: [AlertComponentComponent,
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
+    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

@@ -10,7 +10,7 @@
       "@core/*": ["src/app/core/*"],
       "@learner/*": ["src/app/learner/*"],
       "@wca/*": ["src/app/wca/*"],
-      "@assets/*": ["src/assets/*"],
+      "assets/*": ["src/assets/*"],
       "@env/*": ["src/environments/*"],
     },
     "outDir": "./dist/out-tsc",
