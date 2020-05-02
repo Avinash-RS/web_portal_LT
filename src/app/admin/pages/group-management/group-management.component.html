@@ -29,7 +29,7 @@
                 </mat-icon>
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}1</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -44,7 +44,7 @@
                   </mat-icon>
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}3</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -121,7 +121,7 @@
                         <div class="col-6 mt-4">
                         <button *ngIf ="editstatus" mat-raised-button color="primary" type="submit">Save</button> &nbsp;
                         <button *ngIf ="!editstatus" mat-raised-button color="primary" (click)="changegroupstatus()" type="button">Update</button> &nbsp;
-                        <button mat-raised-button color="primary" type="reset">Cancel</button>
+                        <button mat-raised-button color="primary" (click)="reset();getgroups()"  type="reset">Cancel</button>
                       </div>
                       </form>
                     </div>
