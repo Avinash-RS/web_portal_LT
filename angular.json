@@ -28,7 +28,7 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/app/assets"
+                "src/assets"
               ]
             },
             "styles": [
@@ -39,7 +39,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
               "src/theme/theme.scss",
-              "src/theme/typography.scss"
+              "src/theme/typography.scss",
+              "src/assets/variable.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
