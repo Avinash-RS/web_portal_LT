@@ -33,7 +33,7 @@
         <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="2.3:2">
           <mat-grid-tile *ngFor="let course of courseList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
             <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
-              [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true"
+              [showStatus]="false" [showRating]="showRating" [showCount]="showCount" [showPrice]="showPrice"
               [showDate]="showPublishedDate" [goto]="goto">
             </app-course-component>
           </mat-grid-tile>
@@ -46,14 +46,14 @@
     </div>
   </div>
   <!-- list-view-course-component here -->
-  <br><br><br>
+  <br><br>
   <div class="container" *ngIf="!loader && viewType == 'list'">
     <!-- <div class="col-md-1"></div> -->
     <div class="col-md-12 width_90 center" *ngFor="let course of courseList">
       <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
 
-        <app-list-view-course-component [course]="course" [showRating]="true" [btnType]="btnType" [showCount]="true"
-          [goto]="goto">
+        <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
+          [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate">
         </app-list-view-course-component>
 
       </mat-card>
