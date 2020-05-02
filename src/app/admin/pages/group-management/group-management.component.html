@@ -5,13 +5,16 @@
   </ol>
 </nav>
 
-<div class="container">
+<div class="container pb-5">
   <h1> Group Management</h1>
   <div class="container margin20">
     <div class="row">
       <div class="card col-3" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
-        [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
-        <h2>Select Group/Sub Group</h2>
+      [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+      <div class="card-header">
+         Select Group/Sub Group
+      </div>
+     
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -50,57 +53,79 @@
         </mat-tree>
 
       </div>
-      <div class="col-9">
+      <div class="col-9 bg-white">
 
-        <div class="tab_container">
+        <!-- <div class="tab_container"> -->
 
-          <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
+          <!-- <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
           <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
 
           <input id="tab2" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs">
-          <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label>
+          <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label> -->
 
-          <section id="content1" class=" tab-content">
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-            {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
-            <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
 
-              <div class="col-12 mt-4">
-              <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
-              <mat-form-field class="field px-2">
-                <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
-                  #groupname1="ngModel" required>
-                <mat-error *ngIf="groupname1.errors">
-                  <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
-                    required</div>
-                  <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">Group  Number
-                  Should Be Numbers and max Size 15 only</div> -->
-                </mat-error>
-              </mat-form-field>
-              </div>
-              <div class="col-12" *ngIf="currentpath">
-                <!-- [(ngModel)]="checked" -->
-              <mat-slide-toggle  
-              class="example-margin"
-              [color]="color"
-              [checked] ="!currentpath?.is_active"
-              (change)="changegroupstatus()"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
-              </div>
-              <div class="col-12 mt-4">
-              <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
-              <button mat-raised-button color="primary" type="reset">Cancel</button>
-            </div>
-            </form>
-          </div>
-          </div>
-          </div>
-          </section>
-          <section id="content2" class="tab-content">
-          </section>
+
+          <div class="col-9 bg-white">
+
+          <mat-tab-group>
+            <mat-tab label="Group details" >
+
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                      {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
+                      <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
+          
+                        <div class="col-12 mt-4">
+                        <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
+                        <mat-form-field class="field px-2">
+                          <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
+                            #groupname1="ngModel" required>
+                          <mat-error *ngIf="groupname1.errors">
+                            <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
+                              required</div>
+                            <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">Group  Number
+                            Should Be Numbers and max Size 15 only</div> -->
+                          </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="col-12" *ngIf="currentpath">
+                          <!-- [(ngModel)]="checked" -->
+                        <mat-slide-toggle  
+                        class="example-margin"
+                        [color]="color"
+                        [checked] ="!currentpath?.is_active"
+                        (change)="changegroupstatus()"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
+                        </div>
+                        <div class="col-12 mt-4">
+                        <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
+                        <button mat-raised-button color="primary" type="reset">Cancel</button>
+                      </div>
+                      </form>
+                    </div>
+                    </div>
+                    </div>
+
+        </mat-tab>
+         
+        <mat-tab label="View User" [disabled]="disabled">
+         
+        </mat-tab>
+      </mat-tab-group>
+          <!-- <section id="content1" class=" tab-content"> -->
+
+          <!-- <section id="content2" class="tab-content">
+          </section> -->
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div>
 </div>
+
+
+
+
+
+  
