@@ -18,6 +18,9 @@ export class AdminCoursesComponent implements OnInit {
   loader: boolean;
   btnType: any;
   viewType: string = 'grid';
+  showCount: boolean;
+  showRating: boolean;
+  showPrice: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -31,7 +34,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'create';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish'
+          this.btnType = 'Publish';
+          this.showCount = false;
+          this.showRating = false;
+          this.showPrice = false;
         } else
           this.loader = false;
       })
@@ -44,7 +50,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'publish';
           this.showPublishedDate = true;
           this.loader = false;
-          this.btnType = null
+          this.btnType = null;
+          this.showCount = true;
+          this.showRating = true;
+          this.showPrice = true;
         } else
           this.loader = false;
       })
@@ -57,7 +66,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'draft';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish'
+          this.btnType = 'Publish';
+          this.showCount = false;
+          this.showRating = false;
+          this.showPrice = false;
         } else
           this.loader = false;
       })

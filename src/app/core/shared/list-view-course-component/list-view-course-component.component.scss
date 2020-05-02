@@ -7,11 +7,15 @@
     margin-top: 20px;
 }
 
-.course_description {
-    text-align: initial;
-    text-align: justify;
-
+.m-t-10 {
+    margin-top: 10px;
 }
+
+// .course_description {
+//     text-align: initial;
+//     text-align: justify;
+
+// }
 
 .bottomButtons {
     position: absolute;
@@ -56,10 +60,7 @@ mat-icon {
     margin-right: 30px;
 }
 
-// .btnEnroll {
-//     margin-right: 15px;
 
-// }
 
 .bg {
     background-color: yellow;
@@ -77,28 +78,36 @@ mat-icon {
     right: 30px;
 }
 
+.learner-count {
+    padding-bottom: 5px;
+}
+
+
 
 
 @media screen and (max-width: 768px) {
 
     .course_description {
         text-align: left;
-        padding-left: 20px;
+        padding-left: 40px;
+        padding-bottom: 40px;
+
     }
 
-    .course_title {
+    .course_name {
         text-align: left;
-        padding-left: 20px;
+        padding-left: 40px;
     }
 
     .learner-count {
         position: relative;
-        padding-left: 20px;
+        padding-left: 40px;
     }
 
-    .user-rating {
+    .user_rating {
         float: left;
         position: relative;
+
 
     }
 
