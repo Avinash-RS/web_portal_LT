@@ -155,7 +155,7 @@
      
       height: 0;
       transition: 0.5s;
-      border: 1px solid $color-darkGrey;
+      border: 1px solid $color-light-grey;
       border-top-color: transparent;
   }
   .accordion>input[name="collapse"]:checked~.content {
@@ -188,7 +188,7 @@
       font-weight: normal;
       padding: 10px;
       user-select: none;
-      border: 1px solid $color-darkGrey;
+      border: 1px solid $color-light-grey;
       border-bottom-color: transparent;
   
   }
