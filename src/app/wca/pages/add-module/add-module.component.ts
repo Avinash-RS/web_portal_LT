@@ -4,6 +4,7 @@ import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { id } from '@swimlane/ngx-charts/release/utils';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AddModuleComponent implements OnInit {
   routedCourseDetails: any;
   noOfModules: number = 0;
 
-  constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
+  constructor(    public spinner: NgxSpinnerService,
+    public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
 
@@ -46,6 +48,7 @@ export class AddModuleComponent implements OnInit {
     if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
     }
+    this.startup1();
   }
 
 
@@ -81,10 +84,16 @@ export class AddModuleComponent implements OnInit {
   
 
   getCourseDetails() {
+    this.spinner.show();
+    console.log(this.routedCourseDetails.courseId)
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
+      console.log(data);
       this.courseDetails = data.Result[0];
       console.log(this.courseDetails)
       this.updateCourseDetails();
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
     })
   }
 
@@ -110,11 +119,15 @@ export class AddModuleComponent implements OnInit {
   }
 
   onCreate() {
+    this.spinner.show();
     this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
       if (res.Code == 200) {
         this.getCourseDetails();
         this.toast.success('Module updated successfully');
       }
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
     })
   }
 
@@ -128,5 +141,23 @@ export class AddModuleComponent implements OnInit {
   navChooseTemp() {
     this.router.navigate(['./Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
   
+  }
+
+
+  startup1() {
+  if(this.routedCourseDetails && this.routedCourseDetails.courseId) {
+    this.spinner.show();
+    const obj = {
+      course_id : this.routedCourseDetails.courseId
+    }
+    this.apiService.getcourseDetails(obj).subscribe((data:any) => {
+    this.courseDetails = [];
+    this.courseDetails = data;
+    console.log(this.courseDetails);
+    this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+    })
+  }
   }
 }
