@@ -433,10 +433,14 @@ if (item) {
 
       }
     console.log(this.courseForm);
+
+    console.log("hai1")
   
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
+
+      console.log("hai")
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
