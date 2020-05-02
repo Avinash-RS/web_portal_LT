@@ -93,6 +93,11 @@ export class CoursepreviewComponent implements OnInit {
     })
   }
 
+  editModules(){
+    this.route.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, 
+      courseImage: this.course.course_img_url,courseName: this.course.course_name
+    }]); 
+  }
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(templateRef)
     this.dialog.open(templateRef);

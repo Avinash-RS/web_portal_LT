@@ -35,7 +35,11 @@ certificate_name
 lowest_passing_grade
 mobile_available
 visible_to_staff_only
-pre_requisite
+pre_requisite{
+      name
+      image
+  }
+
 enrollment_start
 enrollment_end
 invitation_only
@@ -78,7 +82,11 @@ certificate_name
 lowest_passing_grade
 mobile_available
 visible_to_staff_only
-pre_requisite
+pre_requisite{
+      name
+      image
+  }
+
 enrollment_start
 enrollment_end
 invitation_only
@@ -166,7 +174,11 @@ certificate_name
 lowest_passing_grade
 mobile_available
 visible_to_staff_only
-pre_requisite
+pre_requisite{
+      name
+      image
+  }
+
 enrollment_start
 enrollment_end
 invitation_only
