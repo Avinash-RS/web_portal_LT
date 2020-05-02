@@ -11,8 +11,8 @@
     <div class="wrap-reg"><br>
      <div class="row">
       <div class="col-md-12 col-sm-12 col-12">
-        <button class="outlinebtn">
-          Edit course
+        <button class="outlinebtn" (click)="editModules()">
+          Edit modules
          </button>
         <button class="fillsmallbtn"  (click)="previewcourse(previewDialog)">
           Preview course
@@ -256,6 +256,9 @@
                     <mat-select  >
                         <mat-option *ngFor="let file of mod.resourse?.files">
                           <a  href="{{file.path}}" download>{{file.path}}</a>
+                      </mat-option>
+                      <mat-option style="text-align: center;">
+                        <button class="btn">Download all</button>
                       </mat-option>
                     </mat-select>
                 </mat-form-field>

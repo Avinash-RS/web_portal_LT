@@ -20,7 +20,7 @@
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        // background-color: #fff !important;
     }
 }
 
@@ -482,6 +482,14 @@ width: 113px;
 }
 .previewAndTime{
  display: none;
+}
+.bcgClrSync{
+    background-color:#e9ecef;
+}
+
+.formHeight{
+    height: 80%;
+    overflow: auto;
 }
 
 .previewAndTime.active{

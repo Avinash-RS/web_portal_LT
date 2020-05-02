@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <ng-container *ngIf="publishedCourses && publishedCourses.length > 0; else nopublishcourse">
@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <span style="margin-right: 5px">
@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <span style="margin-right: 5px">
@@ -116,9 +116,11 @@
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of draftCourses">
 
+                                  <span>
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                                        [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
+                                    [showWishlist]="false" [showStatus]="false" [showDate]="true"
+                                    [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
+                                  </span>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -128,6 +130,8 @@
                     </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
+            <br>
+            <br>
         </div>
     </div>
 </div>

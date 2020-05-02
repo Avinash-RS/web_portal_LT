@@ -20,7 +20,7 @@
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        // background-color: #fff !important;
     }
 }
 
@@ -55,6 +55,10 @@
     cursor: pointer;
 }
 
+
+.bcgClrSync{
+    background-color:#e9ecef;
+}
 
 // ::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
 //     color: wheat;

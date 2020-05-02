@@ -21,6 +21,9 @@ import { MAT_TABS_CONFIG } from '@angular/material';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { Ppt1Component } from './ppt1/ppt1.component';
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     GraphqlModule,
+    DragDropModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
