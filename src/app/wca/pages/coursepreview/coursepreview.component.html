@@ -212,7 +212,7 @@
         </div>
 
 
-        <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" (window:resize)="onResize($event)">
+        <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" >
           <mat-grid-tile *ngFor="let author of course?.author_details">
               <div class="row">
                 <div class="col-md-4 col-sm-12 col-12">

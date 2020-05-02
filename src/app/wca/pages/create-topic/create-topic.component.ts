@@ -285,7 +285,7 @@ if (item) {
             })
           } else if (item.name === 'PPT') {
             const formData1 = new FormData();
-            formData1.append('ppt', this.imageView);
+            formData1.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData1).subscribe((data:any) => {
            console.log(data);
            },err => {

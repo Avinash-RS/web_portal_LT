@@ -30,7 +30,7 @@
   <div class="container" *ngIf = "!loader">
     <div class="col-md-12">
       <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
-        <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+        <mat-grid-list cols="4" [cols]="breakpoint"  rowHeight="2.3:2">
           <mat-grid-tile *ngFor="let course of courseList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
             <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
               [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true"
