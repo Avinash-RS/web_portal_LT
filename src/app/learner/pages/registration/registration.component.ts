@@ -6,7 +6,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import * as myGlobals from '@core/globals';
 import { TermsconditionsComponent } from '../termsconditions/termsconditions.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -21,24 +21,24 @@ export class RegistrationComponent implements OnInit {
   is_staff: boolean;
   fullname: any;
   constructor(
-      private formBuilder: FormBuilder,
-      private router: Router,
-      private loader: Ng4LoadingSpinnerService,
-      private alert: AlertServiceService,
-      // private loader : NgxSpinnerService,
-      // private cookieService: CookieService,
-      public service : LearnerServicesService,
-      public dialog: MatDialog
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loader: Ng4LoadingSpinnerService,
+    private alert: AlertServiceService,
+    // private loader : NgxSpinnerService,
+    // private cookieService: CookieService,
+    public service: LearnerServicesService,
+    public dialog: MatDialog
   ) {
   }
 
   ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-         fullname: new FormControl('', myGlobals.fullnameVal),
-          email: new FormControl('',myGlobals.emailVal),
-          termsandconditions: new FormControl('', [])
-      }, {
-      });
+    this.registerForm = this.formBuilder.group({
+      fullname: new FormControl('', myGlobals.fullnameVal),
+      email: new FormControl('', myGlobals.emailVal),
+      termsandconditions: new FormControl('', [])
+    }, {
+    });
   }
 
   // convenience getter for easy access to form fields///---/^[6-9]\d{9}\1*$/-------\\1{5}
@@ -50,37 +50,37 @@ export class RegistrationComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
     this.loader.show();
-    this.fullname=this.registerForm.value.fullname.trimLeft();
-   this.service.user_registration(this.registerForm.value.email,this.fullname,this.registerForm.value.termsandconditions)
-    .subscribe(data => {
-          if (data.data['user_registration']['success'] == 'true') {
-            this.alert.openAlert(data.data['user_registration'].message,null)
-            // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
-            localStorage.setItem('role', 'learner')
-            this.loader.hide();
-            this.registerForm.reset();
-          } else{
-            this.alert.openAlert(data.data['user_registration'].message,null)
-            this.loader.hide();
-          }
+    this.fullname = this.registerForm.value.fullname.trimLeft();
+    this.service.user_registration(this.registerForm.value.email, this.fullname, this.registerForm.value.termsandconditions)
+      .subscribe(data => {
+        if (data.data['user_registration']['success'] == 'true') {
+          this.alert.openAlert(data.data['user_registration'].message, null)
+          // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
+          // localStorage.setItem('role', 'learner')
+          this.loader.hide();
+          this.registerForm.reset();
+        } else {
+          this.alert.openAlert(data.data['user_registration'].message, null)
+          this.loader.hide();
+        }
       })
   }
 
   onSubmit() {
     console.log(this.registerForm.value.termsandconditions)
-      if (this.registerForm.valid) {
-          this.Submit();
-      } 
+    if (this.registerForm.valid) {
+      this.Submit();
+    }
   }
 
-  signIn(){
-    
+  signIn() {
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(TermsconditionsComponent, {
       width: '550px',
       height: '450px',
-      data: {component: TermsconditionsComponent}
+      data: { component: TermsconditionsComponent }
     });
   }
 

@@ -5,13 +5,18 @@
   </ol>
 </nav>
 
-<div class="container">
+<div class="container pb-5">
   <h1> Group Management</h1>
   <div class="container margin20">
     <div class="row">
+
       <div class="card col-3" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
-        [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
-        <h2>Select Group/Sub Group</h2>
+      [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+      <div class="card-header">
+         Select Group/Sub Group
+      </div>
+
+      
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -40,6 +45,7 @@
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+
                 <!-- {{node.group_name}}2 -->
               </div>
             </li>
@@ -50,55 +56,178 @@
         </mat-tree>
 
       </div>
-      <div class="col-9">
+      <div class="col-9 bg-white">
 
-        <div class="tab_container">
-
-          <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
-          <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
-
-          <input id="tab2" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs">
-          <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label>
-
-          <section id="content1" class=" tab-content">
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-            {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
-            <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
-
-              <div class="col-12 mt-4">
-              <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
-              <mat-form-field class="field px-2">
-                <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
-                  #groupname1="ngModel" required>
-                <mat-error *ngIf="groupname1.errors">
-                  <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
-                    required</div>
-                  <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">Group  Number
-                  Should Be Numbers and max Size 15 only</div> -->
-                </mat-error>
-              </mat-form-field>
-              </div>
+ 
+          <mat-tab-group>
+            <mat-tab label="Group details" >
+          <div class="container">
+            <div class="row">
               <div class="col-12">
-              <mat-slide-toggle  [(ngModel)]="checked"
-              class="example-margin"
-              [color]="color"
-              (change)="changed()"></mat-slide-toggle> {{checked}}  
-              </div>
-              <div class="col-12 mt-4">
-              <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
-              <button mat-raised-button color="primary" type="reset">Cancel</button>
-            </div>
-            </form>
-          </div>
-          </div>
-          </div>
-          </section>
-          <section id="content2" class="tab-content">
-          </section>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+
+                    <span class="mt-0 mb-1 text-capitalize">  {{currentpath?.group_name}} 
+                      <ng-container *ngIf="editstatus">
+                      <ng-container *ngIf="currentpath?.group_name"> /</ng-container> 
+                      Create New 
+                      <ng-container *ngIf="currentpath?.group_name"> Sub</ng-container>
+                         Group
+                        </ng-container>
+                        </span>  
+                  </div>
+                  <div class="col-md-6">
+                    <ng-container *ngIf="currentpath?.group_name && !editstatus">
+                    <button type="button" class="btn col-md-4 float-right addnewBtn" (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add Sub Group</button>
+                   </ng-container>
+                   <ng-container *ngIf="currentpath?.group_name && editstatus">
+                    <button type="button" class="btn col-md-4 float-right addnewBtn" (click)="edit(true,currentpath.group_name)"><i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit Selected </button>
+                   </ng-container>
+                  </div>
+                    
+                    </div>
+                     
+                     <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm" class=" border border-light p-5">
+            
+                          <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">
+                              <ng-container *ngIf="editstatus">
+                              Enter 
+                              <ng-container *ngIf="currentpath?.group_name">Sub </ng-container> 
+                              </ng-container>
+                              Group Name
+                            </label>
+                          <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
+                      
+                            <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel name="group_name"
+                              #groupname1="ngModel" [required] = editstatus value="{{editgroupname}}">
+                              <div *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
+                              class="error-message" >
+                              <div *ngIf="groupname1.errors.required"  class="error-message">
+                                Group Name is required.
+                              </div>
+                              </div>
+
+                        </div>
+                        <div class="col-12" *ngIf="currentpath && !editstatus">
+                          <!-- [(ngModel)]="checked" -->
+                        <mat-slide-toggle  
+                        class="example-margin"
+                        [color]="color"
+                        (change)="toggle($event)"
+                        [checked] ="!currentpath?.is_active"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
+                        </div>
+                        <div class="col-6 mt-4">
+                        <button *ngIf ="editstatus" mat-raised-button color="primary" type="submit">Save</button> &nbsp;
+                        <button *ngIf ="!editstatus" mat-raised-button color="primary" (click)="changegroupstatus()" type="button">Update</button> &nbsp;
+                        <button mat-raised-button color="primary" (click)="reset();getgroups()"  type="reset">Cancel</button>
+                      </div>
+                      </form>
+                    </div>
+                    </div>
+                    </div>
+
+        </mat-tab>
+         
+        <mat-tab label="View User" [disabled]="disabled">
+          <div class="example-container mat-elevation-z8">
+          <mat-table #table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef>
+                Select
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <span class="mobile-label">Select</span>
+                <mat-checkbox  (change)="checkboxLabel(row)">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="user_id">
+              <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">User Id</span>
+                {{element.user_id}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <span class="mobile-label">User Name</span>{{element.username}} </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"><span class="mobile-label">Email ID</span> {{element.email || 'NA'}}
+              </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="mobile">
+              <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+                {{element.mobile_number || 'NA'}} </mat-cell>
+            </ng-container>
+      
+            <ng-container matColumnDef="active">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let element"
+                [ngClass]="element.is_blocked ? 'red' : element.is_active ? 'green' : 'black'">
+                <span class="mobile-label">Status</span>
+                {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
+            </ng-container>
+      
+            <!-- <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef (click)="deActivate()" class="pointer">
+                Actions <br *ngIf="selectedArray && selectedArray.length > 0">
+                <button *ngIf="selectedArray && selectedArray.length > 0" mat-stroked-button (click)="deActivate('Activate')">
+                  Activate</button>
+                <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
+                  (click)="deActivate('De-activate')">
+                  De-activate</button>
+                <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
+                  Block</button>
+                <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Unblock')">
+                  Un-block</button>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">Actions</span>
+                <button mat-icon-button (click)="viewDetail(element,viewDialog)">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <button *ngIf="!element.is_blocked" mat-stroked-button
+                  [disabled]="(selectedArray && selectedArray.length > 0)"
+                  (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
+                  {{element.is_active ? 'De-activate' : 'Activate'}}</button>
+                <button mat-stroked-button [disabled]="(selectedArray && selectedArray.length > 0)"
+                  (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
+                  {{element.is_blocked ? 'Unblock' : 'Block'}}</button>
+              </mat-cell>
+            </ng-container> -->
+      
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </mat-row>
+          </mat-table>
         </div>
+        <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)">
+        </mat-paginator>
+        </mat-tab>
+      </mat-tab-group>
+
+
+
+
+    
+
+          <!-- <section id="content1" class=" tab-content"> -->
+
+          <!-- <section id="content2" class="tab-content">
+          </section> 
+        </div>-->
       </div>
     </div>
+    <!-- </div> -->
   </div>
 </div>
