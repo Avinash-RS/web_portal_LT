@@ -12,7 +12,7 @@
 
   <div class="add-module-section">
     <mat-card style="text-align: center;">
-      <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+      <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
 
         <div class="row">
           <div class="col-md-2"> <img class="img"
@@ -20,14 +20,14 @@
             <br>
             <div class="course-name">{{routedCourseDetails?.courseName}}</div>
             <div class="course-name">{{noOfModules + ' Modules'}}</div>
-            <div style="text-align: left;">
+            <div style="text-align: center;">
               <button mat-flat-button color="primary" class="submit-btn">Course Details</button>
               <button mat-stroked-button color="primary" class="reference-btn">Reference file</button>
             </div>
           </div>
           <div class="col-md-10">
             <div class="add-module-btn">
-              <mat-icon class="add-module-icon">add_circle_outline</mat-icon>
+              <mat-icon (click)="navChooseTemp()" class="add-module-icon">add_circle_outline</mat-icon>
               <span style="font-size: 24px;color: #1f3777;">
                 Add Module
               </span>
@@ -35,16 +35,34 @@
             <div class="module-list">
 
               <ng-container *ngIf="noOfModules !== 0; else noMod">
-                <ng-container *ngFor="let module of courseDetails.coursedetails">
+
+                <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="courseDetails.coursedetails"
+                [cdkDropListConnectedTo]="[todoList]"
+                class="horizontalView"
+                (cdkDropListDropped)="drop($event)">
+
+                <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
+
+
+                <!-- <ng-container class="example-box1" *ngFor="lets module of courseDetails.coursedetails;let n = index" cdkDrag> -->
+                 
+                  <div class="prew1">
                   <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                     <span class="del-icon-container">
                     <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
                     </span>
-                    <span>
+                    <span (click)="addTopic(module,n)">
                       {{module.modulename}}
                     </span>
                   </div>
-                </ng-container>
+                  </div>
+                <!-- </ng-container> -->
+                </div>
+
+              </div>
               </ng-container>
 
               <ng-template #noMod>

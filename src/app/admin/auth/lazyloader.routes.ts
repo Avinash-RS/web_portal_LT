@@ -17,7 +17,7 @@ export const appRoutes: Routes = [{
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
-        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} },
+        { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard] },
         { path : 'usergroup' , component: GroupManagementComponent,data: { title: 'User Group creation' }},
         { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
         {
@@ -28,7 +28,7 @@ export const appRoutes: Routes = [{
         //   { path: 'Wca', component: WcaComponent,  data : {title:'Web Content Authoring Dashboard'}},
           
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
-        // { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },
+        { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard]  },
         // { path: 'chats', loadChildren: '../chats/chat.module#ChatsModule' }, // fix this
         //{ path: 'mail', loadChildren: '../mail/mail.module#MailModule' }, // fix this
         // { path: 'pages', loadChildren: '../pages/pages.module#PagesModule' },

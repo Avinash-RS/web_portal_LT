@@ -4,6 +4,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material';
 
 @Component({
   selector: 'app-group-management',
@@ -24,6 +25,7 @@ export class GroupManagementComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  checked: any = 'Deactivate';
   constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
@@ -110,15 +112,21 @@ export class GroupManagementComponent implements OnInit {
         admin_id: this.adminDetails._id
       };
       this.adminservice.creategroup(data).subscribe((result: any) => {
-        if (result.data.createusergroup.success === true) {
-          this.alert.openAlert('Success !', 'Group Created Successfully');
-          form.reset();
-          this.getgroups();
-        } else {
-          this.alert.openAlert(result.data.createusergroup.message, null);
-        }
+        if (result.data && result.data.createusergroup) {
+          if (result.data.createusergroup.success === true) {
+            this.alert.openAlert('Success !', 'Group Created Successfully');
+            form.reset();
+            this.getgroups();
+          } else {
+            this.alert.openAlert(result.data.createusergroup.message, null);
+          }
+        } else
+          this.alert.openAlert("Please try again later", null)
       });
     }
   }
-
+  changed() {
+    this.checked = "Deactivate"
+    console.log(this.checked)
+  }
 }

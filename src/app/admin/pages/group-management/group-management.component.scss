@@ -26,8 +26,8 @@ h3 {
 	text-align: center;
 }
 span{
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 14px;
 
 }
 a {
@@ -79,9 +79,10 @@ a {
 #tab4:checked ~ #content4,
 #tab5:checked ~ #content5 {
   display: block;
-  padding: 20px;
+  // padding: 20px;
   background: #fff;
-  color: #999;
+  color: #000;
+  font-weight: 200;
   border-bottom: 2px solid #f0f0f0;
 }
 
@@ -181,7 +182,12 @@ mat-tree {
 
 .cdk-overlay-pane {height: 500px;}
 .mat-menu-panel  {height: 500px;}
-
+button.mat-raised-button{
+  background: #1F3777 !important;
+  color: #ffffff;
+  width: 30%;
+  margin-left: 15%;
+}
 button.mat-menu-item {
 width: 100% !important ;
 height: 500px !important ;}
@@ -196,13 +202,43 @@ height: 500px !important ;}
     width: 22px;
    
   }
-  mat-checkbox{
-    .mat-checkbox-layout{
-      margin: 0px !important;
-    }
-  }
+ 
 
 }
-.mat-checkbox-layout{
+::ng-deep mat-checkbox .mat-checkbox-layout{
   margin: 0px !important;
+}
+
+::ng-deep mat-checkbox .mat-checkbox-frame{
+  border: 0px;
+  background-color:  rgb(197, 215, 252) !important;
+  
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+background-color: #437891 !important;
+
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  background: rgb(197, 215, 252) !important;;
+  display: inline-block;
+  border: 1px solid rgb(197, 215, 252) !important;;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix{
+  padding: 0 0 !important;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb
+, .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb
+{
+  background-color: #ffffff;
+  border: 1px solid #1f3777;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+  background-color: #1f3777;
+  // border: 1px solid #1f3777;
 }

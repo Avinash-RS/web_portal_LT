@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 img {
     border: 1px solid rgb(141, 141, 141);
@@ -85,6 +85,19 @@ mat-icon {
         color: $color-white;
         cursor: pointer;
     }
+}
+
+.margLeft{
+    margin-left: -10px;
+}
+
+.dspFlx{
+display: flex;
+justify-content: space-evenly;
+}
+.dspFlx1{
+    display: flex;
+    align-items: center;
 }
 
 .container:hover .overlay {

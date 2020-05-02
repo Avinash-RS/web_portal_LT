@@ -1,4 +1,4 @@
-@import "../../assets/variable.scss";
+@import "variable";
 .my-panel {
   background: $color-blue !important;
   height: 100px ;
@@ -322,7 +322,7 @@ button:disabled:hover {
 
   ol {
       margin-bottom: 0 !important;
-      background-color: $color-white !important;
+      // background-color: $color-white !important;
   }
 }
 
