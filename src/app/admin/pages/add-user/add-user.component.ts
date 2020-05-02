@@ -144,17 +144,17 @@ export class AddUserComponent implements OnInit {
           return element === headerNames[index];
         });
         if (is_same === false) {
-          this.alert.openAlert('Warning !', 'Invalid Excel headers');
+          this.alert.openAlert('Invalid Excel headers', 'Please choose the file to be uploaded');
         } else if (this.exceljson.length === 0) {
-          this.alert.openAlert('Warning !', 'Excel Sheet is Empty');
+          this.alert.openAlert('Excel Sheet is Empty', null);
         } else {
           this.selectedfile = <File>event[0];
-          this.alert.openAlert('Success !', 'Uploaded Successfully');
+          this.alert.openAlert( 'Uploaded Successfully', null);
         }
       };
       reader.readAsBinaryString(event[0]);
     } else {
-      this.alert.openAlert('Warning !', 'Invalid File Type');
+      this.alert.openAlert('Invalid File Type', null);
     }
     // }
   }
@@ -187,11 +187,12 @@ export class AddUserComponent implements OnInit {
           this.alert.openAlert('Success !', 'Upload in Progress ...');
           this.selectedfile = '';
         } else {
-          this.alert.openAlert('Warning !', result.message);
+          this.selectedfile = '';
+          this.alert.openAlert(result.message, null);
         }
       });
     } else {
-      this.alert.openAlert('Warning !', 'Please Select Group');
+      this.alert.openAlert('Please Select Group', null);
     }
   }
 

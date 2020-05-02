@@ -12,8 +12,9 @@
   </div>
 
   <div class="p-5px">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-label>Search</mat-label><br>
+    <mat-form-field class="search">
+      <input matInput (keyup)="applyFilter($event.target.value)">
     </mat-form-field>
 
     <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
@@ -42,9 +43,9 @@
         </ng-container>
 
         <ng-container matColumnDef="user_id">
-          <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User Id</span>
+            <span class="mobile-label">User ID</span>
             {{element.user_id}}
           </mat-cell>
         </ng-container>
@@ -134,13 +135,13 @@
                       <label>Information about you</label>
                       <textarea style="resize: none;" readonly [disabled]='cannotEdit' rows="3"
                         class="inputs border-radius-5 color_blue background_trans width_100"
-                        [(ngModel)]="profileDetails.userObjects[0].about_you" name="info"></textarea>
+                        [(ngModel)]="profileDetails.userObjects && profileDetails.userObjects[0].about_you" name="info"></textarea>
                     </div>
                   </div>
 
                   <div class="col-md-6 col-sm-12 col-12 right float_right">
                     <img
-                      [src]="profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : 'assets/learner/avatar2.png'"
+                      [src]="profileDetails.userObjects && profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : 'assets/learner/avatar2.png'"
                       id="imageUpload" alt="Avatar" class="avatar">
                   </div>
                 </div>
@@ -149,16 +150,16 @@
                   <!-- //////userName  +++ full name +++ Phone//////// -->
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Username : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].username}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Full Name : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].full_name}}
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name}}
                       </label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Mobile : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].mobile_number}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number}}</label></label>
                   </div>
                 </div>
 
@@ -166,15 +167,15 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Email : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].email}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                    <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
                       'Female' : 'Rather not specify'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>I'm a : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects[0].is_student_or_professional}}</label> </label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional}}</label> </label>
                   </div>
                 </div>
 
@@ -190,8 +191,8 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-12">
                     <label>Location : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects[0].state_name}},
-                        {{profileDetails.userObjects[0].country_name}} </label></label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name}},
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name}} </label></label>
                   </div>
                 </div>
                 <br>

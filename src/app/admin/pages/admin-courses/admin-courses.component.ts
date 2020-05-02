@@ -69,7 +69,8 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     else if (window.innerWidth >= 600 && window.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
+    else if (window.innerWidth >= 768 && window.innerWidth <= 1024) 
+    this.breakpoint = 3;
     // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
     //   this.breakpoint = 4;
     else
@@ -82,7 +83,7 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
+    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
       this.breakpoint = 3;
     // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
     //   this.breakpoint = 4;
