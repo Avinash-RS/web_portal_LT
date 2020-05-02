@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 img {
     border: 1px solid rgb(141, 141, 141);
@@ -72,7 +72,7 @@ mat-icon {
     margin-left: 2%;
 
     .overlay {
-        height: 80%;
+        height: 55%;
         width: 76%;
         position: absolute;
         overflow: hidden;
@@ -85,6 +85,19 @@ mat-icon {
         color: $color-white;
         cursor: pointer;
     }
+}
+
+.margLeft{
+    margin-left: -10px;
+}
+
+.dspFlx{
+display: flex;
+justify-content: space-evenly;
+}
+.dspFlx1{
+    display: flex;
+    align-items: center;
 }
 
 .container:hover .overlay {
@@ -107,7 +120,16 @@ mat-icon {
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
 }
-
+.enroll{
+    background-color: #1f3777;
+    color: #fff;
+    font-weight: 500 !important;
+}
 .color-grey {
     color: #363738;
+}
+.iconClr{
+    color: #777777;
+    font-size: 12px;
+    font-weight: 400;
 }

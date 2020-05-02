@@ -1,5 +1,5 @@
    
-/* @import "../../../../assets/variable.scss"; */
+/* @import "variable"; */
 
 .mat-grid-list {
     top : 15px !important;
@@ -15,3 +15,18 @@ h2 {
     top: 50% !important;
     left: 45% !important;
   }
+
+::ng-deep .mat-raised-button{
+    margin: 2px !important;
+    min-width: 39px !important;
+    padding: 0px 8px 0px !important;
+    line-height: 29px !important;
+}
+.font-display{
+    margin-left: 36px;
+}
+.view-button-background{
+    padding: 3px !important;
+    margin-right: 30px !important;
+    margin-bottom: 7px !important;
+}

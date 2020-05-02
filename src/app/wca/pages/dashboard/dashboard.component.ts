@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { WcaService } from '../../services/wca.service'
 import { Router } from '@angular/router';
+import { AdminServicesService } from '@admin/services/admin-services.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -83,7 +84,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(public service: WcaService, public spinner: NgxSpinnerService, private router: Router, ) { }
+  constructor(public service: WcaService,  private adminService: AdminServicesService,public spinner: NgxSpinnerService, private router: Router, ) { }
 
   ngOnInit() {
 
@@ -124,10 +125,9 @@ export class DashboardComponent implements OnInit {
 
   getPublishedCourses() {
 
-    this.service.getPublishedCourse().subscribe((data: any) => {
+    this.adminService.getAllCoursePublished("undefined",0).subscribe((data: any) => {
 
-      this.publishedCourses = data.Result;
-
+      this.publishedCourses = data.data.get_course_published.message;
     }, err => {
       this.spinner.hide();
     });
@@ -135,9 +135,8 @@ export class DashboardComponent implements OnInit {
 
   getCreatedCourses() {
 
-    this.service.getCreatedCourse().subscribe((data: any) => {
-
-      this.createdCourses = data.Result;
+    this.adminService.getAllCourseCreated("undefined", 0).subscribe((data: any) => {
+      this.createdCourses = data.data.get_course_createdby_admin.message;
 
     }, err => {
       this.spinner.hide();
@@ -146,9 +145,9 @@ export class DashboardComponent implements OnInit {
 
   getDraftCourses() {
 
-    this.service.getDraftCourse().subscribe((data: any) => {
+    this.adminService.getAllDrafted("undefined", 0).subscribe((data: any) => {
 
-      this.draftCourses = data.Result;
+      this.draftCourses = data.data.get_draft_course.message;
       this.spinner.hide();
 
     }, err => {

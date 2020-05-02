@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 .dialogClose{
     position: relative;
@@ -59,4 +59,78 @@
   display: inline-block;
   margin: 25px;
   padding:22px;
+}
+
+.example-box {
+  padding: 18px 11px;
+  color: #1f3777;
+  display: flex;
+  flex-direction: inherit;
+  align-items: left;
+  justify-content: left;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+  margin: 0px 0px 0px 0px;
+  font-weight: bold;
+ 
+}
+
+.horizontalView{
+display: flex;
+flex-wrap: wrap;
+font-weight: bold;
+color: #1f3777;
+}
+
+.example-box1{
+padding: 9px 7px;
+  color: rgb(210, 216, 230);
+  display: flex;
+  flex-direction: inherit;
+  align-items: left;
+  justify-content: left;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+  margin: 0px 0px 9px 0px;
+  border-style: inherit;
+  border-width: 1px
+
+}
+
+//   .cdk-drag-preview {
+//     // box-sizing: border-box;
+//     // border-radius: 4px;
+//     // box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+//     //             0 8px 10px 1px rgba(0, 0, 0, 0.14),
+//     //             0 3px 14px 2px rgba(0, 0, 0, 0.12);
+//   }
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.alnCenter{
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.margbtwBtn{
+  margin: 0px 7px 0px 12px;
 }

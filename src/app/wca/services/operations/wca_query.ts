@@ -25,8 +25,18 @@ export const remove_doc_ref = gql`
       created_on
     }
     success
+    count
     message
         }
     
   }`;
-  
+  export const get_module_topic = gql`
+  query remove_doc_ref{
+    remove_doc_ref {
+      data{
+        data{
+          modulename
+        }
+      }
+    }
+  }`;

@@ -1,4 +1,4 @@
-@import "../../assets/variable.scss";
+@import "variable";
 .reference-file-container {
     background-color: $color-white;
 
@@ -37,25 +37,24 @@
 }
 
 .main-section {
-    display: flex;
-    width: 95%;
-    margin: 0 30px 0 50px;
+    display: grid;
+    width: 96%;
+    margin: 0 0px 0 20px;
+}
+
+
+ col-md-3 {
+    flex: 0 0 25%;
+    max-width: 23%;
 }
 
 .file-selection {
-    width: 19.5%;
+    width: 250px;
+    margin-top: 43px;
 
     .mat-card:not([class*="mat-elevation-z"]) {
         box-shadow: 0 0 10px rgb(170, 170, 170) !important;
         height: 375px;
-    }
-}
-.file-list {
-    width: 79.5%;
-    margin-left: 20px;
-    .mat-card:not([class*="mat-elevation-z"]) {
-        height: 500px;
-        box-shadow: 0 0 10px rgb(170, 170, 170) !important;
     }
 }
 
@@ -64,22 +63,31 @@ table {
     max-height: 500px;
 }
 
+
+
 .customWidthClass {
     width: 160px;
     font-weight: bold;
-    color: $color-blank;;
+    color: $color-blank;
+
 }
 
 .customNameClass {
     font-weight: bold;
     color: $color-blank;;
-    width: 250px;
+    width: 170px;
 }
 
 .customActionClass {
     font-weight: bold;
     color: $color-blank;;
     width: 100px;
+}
+
+.customtypeClass{
+    font-weight: bold;
+    color: $color-blank;;
+    width: 100px !important;
 }
 
 .del-icon {
@@ -172,10 +180,15 @@ tr.mat-row {
 
  .submit-btn {
     height: 30px;
-    margin-left: 35%;
+    width: 100px;
     background-color: $color-blue !important;
     color:  $color-white !important;
     font-size: 14px;
+    border: none;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: none;
+
  }
 
  .ref-link {
@@ -231,9 +244,9 @@ tr.mat-row {
     background-color: transparent;
   }
 .search{
-    width: 15% !important;
+    width: 24% !important;
     float: right;
-    margin-right: 24px;
+    margin-right: 32px;
 }
 
 .paperclip{
@@ -248,4 +261,25 @@ tr.mat-row {
     border-bottom-left-radius: 0px !important;
     height: 35px !important;
 }
+
+::ng-deep .mat-sort-header-stem {
+ background: fixed !important; 
+    height: 10px;
+    color: $color-blank;
+    width: 2px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.mat-elevation-z8 {
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
 

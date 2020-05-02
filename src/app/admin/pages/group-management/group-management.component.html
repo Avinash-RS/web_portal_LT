@@ -1,64 +1,104 @@
-<h1> Group Management</h1>
-<div class="row">
-  <div class="card col-3">
-    <h1>Select Group/Sub Group</h1>
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
-    (scrolled)="onScrollDown()">
-      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-        <!-- <button mat-icon-button disabled></button> -->
-        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename"
-          (click)="loadsubgroup(node)">
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-          </mat-icon>
-        </button>
-        <mat-checkbox class="checklist-leaf-node" [checked]="selected === node" (change)="selected = node"
-          name="checkbox" [(ngModel)]="node.checkbox" [checked]="checklistSelection.isSelected(node)"
-          (change)="checklistSelection.toggle(node);selectgroup(node)">{{node.item}}</mat-checkbox>
-      </mat-tree-node>
-      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-          </mat-icon>
-        </button>
-        <mat-checkbox [checked]="descendantsAllSelected(node)" [checked]="selected === node" (change)="selected = node"
-          name="checkbox" [(ngModel)]="node.checkbox" [indeterminate]="descendantsPartiallySelected(node)"
-          (change)="todoItemSelectionToggle(node);selectgroup(node)">{{node.item}}</mat-checkbox>
-      </mat-tree-node>
-    </mat-tree>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Group/Sub Group</li>
+  </ol>
+</nav>
 
-  </div>
-  <div class=" col-8">
-    <div class="tab_container">
-      <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
-      <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
+<div class="container">
+  <h1> Group Management</h1>
+  <div class="container margin20">
+    <div class="row">
+      <div class="card col-3" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
+        [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+        <h2>Select Group/Sub Group</h2>
+        <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+            <li class="mat-tree-node newstyle" renderDebug>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
+                [attr.aria-label]="'toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
 
-      <input id="tab2" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs">
-      <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label>
+            </li>
+          </mat-tree-node>
 
-      <section id="content1" class="tab-content">
-        <b>{{currentpath?.item}} -> New Group</b>
-        <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
-          <br>
-          <span>Group Name&nbsp;<b class="text-danger">*</b></span>&nbsp;&nbsp;
-          <mat-form-field class="field px-2">
-            <input type="text" placeholder="Enter Group/Sub Group Name" matInput ngModel name="group_name"
-              #groupname1="ngModel" required>
-            <mat-error *ngIf="groupname1.errors">
-              <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
-                required</div>
-              <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">License  Number
+          <!-- node with children -->
+          <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+            <li class="mat-tree-node" renderDebug>
+              <div class="mat-tree-node">
+                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                <!-- {{node.group_name}}2 -->
+              </div>
+            </li>
+            <ul [class.children-invisible]="!treeControl.isExpanded(node)">
+              <ng-container matTreeNodeOutlet></ng-container>
+            </ul>
+          </mat-nested-tree-node>
+        </mat-tree>
+
+      </div>
+      <div class="col-9">
+
+        <div class="tab_container">
+
+          <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
+          <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
+
+          <input id="tab2" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs">
+          <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label>
+
+          <section id="content1" class=" tab-content">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+            {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
+            <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
+
+              <div class="col-12 mt-4">
+              <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
+              <mat-form-field class="field px-2">
+                <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
+                  #groupname1="ngModel" required>
+                <mat-error *ngIf="groupname1.errors">
+                  <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
+                    required</div>
+                  <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">Group  Number
                   Should Be Numbers and max Size 15 only</div> -->
-            </mat-error>
-          </mat-form-field>
-          <br>
-          <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
-          <button mat-raised-button color="primary" type="reset">Cancel</button>
-        </form>
-      </section>
-      <section id="content2" class="tab-content">
-      </section>
+                </mat-error>
+              </mat-form-field>
+              </div>
+              <div class="col-12">
+              <mat-slide-toggle  [(ngModel)]="checked"
+              class="example-margin"
+              [color]="color"
+              (change)="changed()"></mat-slide-toggle> {{checked}}  
+              </div>
+              <div class="col-12 mt-4">
+              <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
+              <button mat-raised-button color="primary" type="reset">Cancel</button>
+            </div>
+            </form>
+          </div>
+          </div>
+          </div>
+          </section>
+          <section id="content2" class="tab-content">
+          </section>
+        </div>
+      </div>
     </div>
   </div>
 </div>

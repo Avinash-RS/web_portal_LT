@@ -32,12 +32,13 @@ export class CoursepreviewComponent implements OnInit {
   breakpoint: number;
   detail: any;
   isshowPublish: boolean = false;
+  courseType: string;
   constructor(public service: CommonServicesService, private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
-    console.log(this.detail)
-    if (this.detail?.type === "create") {
+    this.courseType = localStorage.getItem('courseType')
+    if (this.courseType === "create") {
       this.isshowPublish = true
     } else {
       this.isshowPublish = false
@@ -72,7 +73,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.route.navigateByUrl('/Wca/rf');
+    this.route.navigateByUrl('/Admin/auth/Wca/rf');
   }
   clickedT(i) {
     this.clicked = i
@@ -92,6 +93,11 @@ export class CoursepreviewComponent implements OnInit {
     })
   }
 
+  editModules(){
+    this.route.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, 
+      courseImage: this.course.course_img_url,courseName: this.course.course_name
+    }]); 
+  }
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(templateRef)
     this.dialog.open(templateRef);

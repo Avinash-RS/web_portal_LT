@@ -24,12 +24,17 @@ export class PublishCourseComponent implements OnInit {
   publishCourse() {
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data: Boolean) => {
       if (data) {
-        this.service.publishCourse(this.course._id, true).subscribe((res: any) => {
-          console.log(res)
-          if(res.data.publishcourse.success) 
-          this.alert.openAlert("Success !", "Published course successfully")
-          else
-          this.alert.openAlert("Published course failed",null)
+        this.service.publishCourse(this.course.id, true).subscribe((res: any) => {
+          if (res.data && res.data.publishcourse) {
+            if (res.data.publishcourse.success) {
+              this.alert.openAlert("Success !", "Published course successfully")
+              this.route.navigate(['/Wca']);
+            }
+            else
+              this.alert.openAlert(res.data.publishcourse.message == "" ? res.data.publishcourse.error_msg :
+                res.data.publishcourse.message, null)
+          } else
+            this.alert.openAlert("Please try again later", null)
         })
       }
     })

@@ -93,7 +93,6 @@ export class CoursedetailsComponent implements OnInit {
         this.course = viewCourse.data.viewcourse.message[0];
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
-        console.log(this.course)
         this.loader.hide();
       } else
         this.loader.hide();
@@ -104,7 +103,6 @@ export class CoursedetailsComponent implements OnInit {
     //     this.course.wishlisted = false;
     //     this.course.wishlist_id =  null;
     //     this.loader.hide();
-    //     console.log(this.course)
     //   } else
     //     this.loader.hide();
     // });

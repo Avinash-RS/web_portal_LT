@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { id } from '@swimlane/ngx-charts/release/utils';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-add-module',
@@ -18,6 +20,22 @@ export class AddModuleComponent implements OnInit {
   constructor(public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
+
+    this.resetList()
+
+    this.route.queryParams.subscribe(params => {
+      let flag = 0;
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          flag = 1;
+        }
+      }
+      if (flag) {
+      this.queryData = params;
+      console.log(this.queryData)
+      }
+    });
+
     this.routedCourseDetails = {
       courseId: this.route.snapshot.paramMap.get('courseId'),
       courseImage: this.route.snapshot.paramMap.get('courseImage'),
@@ -30,9 +48,42 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
+
+  items2: any[]
+
+  done = [
+
+    
+  ];
+
+  resetList() {
+ 
+    // setTimeout(() => {
+      if(this.courseDetails && this.courseDetails.coursedetails) {
+        this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
+      }
+    // }, 0);    
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      this.courseDetails.coursedetails.push(this.courseDetails.coursedetails[event.previousIndex]);
+
+      // transferArrayItem(event.previousContainer.data,
+      //                   event.container.data,
+      //                   event.previousIndex,
+      //                   event.currentIndex);
+    }
+  }
+  
+
   getCourseDetails() {
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
+      console.log(this.courseDetails)
       this.updateCourseDetails();
     })
   }
@@ -65,5 +116,17 @@ export class AddModuleComponent implements OnInit {
         this.toast.success('Module updated successfully');
       }
     })
+  }
+
+  addTopic(value,index) {
+    console.log(index);
+    console.log(this.courseDetails);
+    this.apiService.bSubject1.next({index:index,courseDetails:this.courseDetails});
+      this.router.navigate(['./Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+  }
+
+  navChooseTemp() {
+    this.router.navigate(['./Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+  
   }
 }

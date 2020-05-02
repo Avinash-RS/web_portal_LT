@@ -26,8 +26,8 @@ h3 {
 	text-align: center;
 }
 span{
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 14px;
 
 }
 a {
@@ -39,11 +39,13 @@ a {
 /*Fun begins*/
 .tab_container {
   text-align: center;
-	width: 95%;
-	margin:  auto;
+	width: 100%;
+	// margin:  auto;
 	// padding-top: 70px;
   position: relative;
-  overflow:auto
+  overflow:auto;
+  	margin: 0;
+	padding: 0;
 }
 
  section {
@@ -58,16 +60,17 @@ a {
 
 .tab-class {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   display: block;
   float: left;
   width: 50%;
-  padding: 1.5em;
+  padding: 10px;
   color: #757575;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
   background: #f0f0f0;
+  margin: 0px;
 }
 
 #tab1:checked ~ #content1,
@@ -76,9 +79,10 @@ a {
 #tab4:checked ~ #content4,
 #tab5:checked ~ #content5 {
   display: block;
-  padding: 20px;
+  // padding: 20px;
   background: #fff;
-  color: #999;
+  color: #000;
+  font-weight: 200;
   border-bottom: 2px solid #f0f0f0;
 }
 
@@ -94,11 +98,11 @@ a {
 
 .tab_container [id^="tab"]:checked + label {
   background: #fff;
-  box-shadow: inset 0 3px #0CE;
+  box-shadow: inset 0 3px #1d3f72;
 }
 
 .tab_container [id^="tab"]:checked + label .fa {
-  color: #0CE;
+  color: #a3b4c9;
 }
 
 label .fa {
@@ -130,21 +134,24 @@ label .fa {
   }
 }
 
-// for tree
+// // for tree
 
 .card {
     background: #fff;
     border-radius: 2px;
     display: inline-block;
     height: auto;
-    margin: 0.5rem;
+    // margin: 0.5rem;
     position: relative;
     width: auto;
+    overflow: auto;
+    max-height: 450px;
+
   }
-* {
-	margin: 0;
-	padding: 0;
-}
+// * {
+// 	margin: 0;
+// 	padding: 0;
+// }
 body {
 	padding: 100px;
 	background: #929292;
@@ -155,4 +162,83 @@ input {
 	font-size: 1em;
 }
 
+.mat-tree-node{
+  min-height: 35px;
+}
+mat-tree {
+	ul, li {
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  list-style-type: none;
+	}
+  }
+  
+  .children-invisible {
+	display: none;
+  }
+  .margin20{
+    margin-top: 20px;
+  }
 
+.cdk-overlay-pane {height: 500px;}
+.mat-menu-panel  {height: 500px;}
+button.mat-raised-button{
+  background: #1F3777 !important;
+  color: #ffffff;
+  width: 30%;
+  margin-left: 15%;
+}
+button.mat-menu-item {
+width: 100% !important ;
+height: 500px !important ;}
+
+::ng-deep .customize {
+  height: 300px;
+}
+
+
+.newstyle{
+  .btnClassicon{
+    width: 22px;
+   
+  }
+ 
+
+}
+::ng-deep mat-checkbox .mat-checkbox-layout{
+  margin: 0px !important;
+}
+
+::ng-deep mat-checkbox .mat-checkbox-frame{
+  border: 0px;
+  background-color:  rgb(197, 215, 252) !important;
+  
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+background-color: #437891 !important;
+
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  background: rgb(197, 215, 252) !important;;
+  display: inline-block;
+  border: 1px solid rgb(197, 215, 252) !important;;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix{
+  padding: 0 0 !important;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb
+, .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb
+{
+  background-color: #ffffff;
+  border: 1px solid #1f3777;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+  background-color: #1f3777;
+  // border: 1px solid #1f3777;
+}

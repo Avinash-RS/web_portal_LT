@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 p {
     text-align: center;
 }
@@ -19,7 +19,9 @@ p {
 .mat-button, .mat-stroked-button, .mat-flat-button {
     min-width: 38%;
     margin: auto;
+    background-color: $color-blue !important;
 }
 .background-darkGrey {
-    background-color: $color-light-blue !important;
+    background-color: $color-blue !important;
+    color: $color-white !important;
   }

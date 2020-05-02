@@ -20,7 +20,7 @@ export const login = gql`
     }
   }`;
 
-  export const get_country_details = gql`
+export const get_country_details = gql`
     query get_country_details{
       get_country_details{
         message
@@ -39,7 +39,7 @@ export const login = gql`
     }
       }
     }`;
-  export const get_course_by_user = gql`
+export const get_course_by_user = gql`
   query get_course_by_user($user_id: String){
     get_course_by_user(user_id: $user_id) {
       success
@@ -64,7 +64,7 @@ export const login = gql`
   }
 }`;
 
-export const   get_qualification_details = gql`
+export const get_qualification_details = gql`
 	query   get_qualification_details{
 		  get_qualification_details{
 	message
@@ -80,7 +80,7 @@ export const   get_qualification_details = gql`
 }
 `;
 
-export const get_board_university_details= gql`
+export const get_board_university_details = gql`
 query get_board_university_details{
   get_board_university_details{
         message
@@ -115,7 +115,7 @@ data{
   }
 }`;
 
-export const   get_discipline_details = gql`
+export const get_discipline_details = gql`
   query   get_discipline_details{
     get_discipline_details{
       message
@@ -131,8 +131,8 @@ export const   get_discipline_details = gql`
   }
 `;
 
-export const  get_specification_details = gql`
-  query    get_specification_details{
+export const get_specification_details = gql`
+  query get_specification_details{
     get_specification_details{
       message
       success
@@ -147,7 +147,7 @@ export const  get_specification_details = gql`
   }
 `;
 
-export const  get_institute_details = gql`
+export const get_institute_details = gql`
   query    get_institute_details{
     get_institute_details{
       message
@@ -163,7 +163,7 @@ export const  get_institute_details = gql`
   }
 `;
 
-export const  get_language_details = gql`
+export const get_language_details = gql`
   query    get_language_details{
     get_language_details{
       message
@@ -337,7 +337,10 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
   lowest_passing_grade
   mobile_available
   visible_to_staff_only
-  pre_requisite
+  pre_requisite{
+    name
+    image
+}
   enrollment_start
   enrollment_end
   invitation_only
@@ -423,7 +426,10 @@ export const get_all_course_by_usergroup = gql`
     lowest_passing_grade
     mobile_available
     visible_to_staff_only
-    pre_requisite
+    pre_requisite{
+      name
+      image
+  }
     enrollment_start
     enrollment_end
     invitation_only
@@ -479,4 +485,15 @@ export const get_all_course_by_usergroup = gql`
     }
     }
     }
+    }`;
+export const get_module_topic = gql`
+    query get_module_topic{
+      get_module_topic {
+    
+        data{
+          _id
+          modulename
+        }
+        success
+      }
     }`;

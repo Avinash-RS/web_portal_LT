@@ -11,46 +11,55 @@ export class AdminCoursesComponent implements OnInit {
   adminDetails: any;
   courseList: any = [];
   breakpoint: number;
-  type: any = 'published';
+  type: any;
+  // type: any = 'published';
   goto: any;
   showPublishedDate: boolean;
   loader: boolean;
   btnType: any;
+  viewType: string = 'grid';
 
   constructor(public route: Router, private service: AdminServicesService) {
-    // this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type);
-    console.log(this.type)
+    this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type) || 'published';
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
       this.loader = true;
       this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
-        console.log(res);
-        this.courseList = res.data.get_course_createdby_admin.message;
-        this.goto = 'create';
-        this.showPublishedDate = false;
-        this.loader = false;
-        this.btnType = 'Publish'
+        if (res.data && res.data.get_course_createdby_admin) {
+          this.courseList = res.data.get_course_createdby_admin.message;
+          this.goto = 'create';
+          this.showPublishedDate = false;
+          this.loader = false;
+          this.btnType = 'Publish'
+        } else
+          this.loader = false;
       })
     }
     else if (this.type == 'published') {
       this.loader = true;
       this.service.getAllCoursePublished("undefined", 0).subscribe((res: any) => {
-        this.courseList = res.data.get_course_published.message;
-        this.goto = 'publish';
-        this.showPublishedDate = true;
-        this.loader = false;
-        this.btnType = 'Publish'
+        if (res.data && res.data.get_course_published) {
+          this.courseList = res.data.get_course_published.message;
+          this.goto = 'publish';
+          this.showPublishedDate = true;
+          this.loader = false;
+          this.btnType = null
+        } else
+          this.loader = false;
       })
     }
     else if (this.type == 'draft') {
       this.loader = true;
       this.service.getAllDrafted("undefined", 0).subscribe((res: any) => {
-        this.courseList = res.data.get_draft_course.message;
-        this.goto = 'draft';
-        this.showPublishedDate = true;
-        this.loader = false;
-        this.btnType = 'Publish'
+        if (res.data && res.data.get_draft_course) {
+          this.courseList = res.data.get_draft_course.message;
+          this.goto = 'draft';
+          this.showPublishedDate = false;
+          this.loader = false;
+          this.btnType = 'Publish'
+        } else
+          this.loader = false;
       })
     }
   }

@@ -143,7 +143,12 @@ savedTemplates(type) {
           this.spinner.hide();
           if (data && data.Message === 'Success') {
             this.toast.success('Template Saved successfully !!!');
-            this.router.navigate(['./Wca/addtopic'],{queryParams:{template:data.Result,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+            if(this.queryData && this.queryData.addModule) 
+            {
+              this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{addModule:true,template:data.Result,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+            } else {
+              this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{template:data.Result,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+            }
           }
          },err => {
            this.spinner.hide();
@@ -152,7 +157,12 @@ savedTemplates(type) {
       });
     } else {
       this.wcaService.bSubject.next({template_details:this.done});
-      this.router.navigate(['./Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+      if(this.queryData && this.queryData.addModule) 
+      {
+        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{addModule:true,temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+      }else {
+        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+      }
     }
    } else {
      this.toast.warning('Atleast One Template is Required !!!');
@@ -166,7 +176,12 @@ removenewLink(i) {
  
 
 routeTo() {
-  this.router.navigate(['./Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+  if(this.queryData && this.queryData.addModule) 
+    {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { addModule:true,viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,image: this.queryData.image}});
+    }else {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,image: this.queryData.image}});
+    }
 
 }
 

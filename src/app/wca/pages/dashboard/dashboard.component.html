@@ -2,14 +2,14 @@
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Wca">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">My Courses</li>
     </ol>
 </nav>
 
 <div>
-    <button class="backgroundcol2" routerLink="/Wca/addcourse" >Create a Course</button>
+    <button class="backgroundcol2" routerLink="/Admin/auth/Wca/addcourse" >Create a Course</button>
 </div> 
   
 
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <ng-container *ngIf="publishedCourses && publishedCourses.length > 0; else nopublishcourse">
@@ -32,7 +32,7 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of publishedCourses">
@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <span style="margin-right: 5px">
@@ -70,7 +70,7 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of createdCourses">
@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <span style="margin-right: 5px">
@@ -111,14 +111,16 @@
                     </mat-panel-title>
 
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+                        <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
 
                             <owl-carousel-o [options]="popularCategorires" class="partner">
                                 <ng-template carouselSlide *ngFor="let course of draftCourses">
 
+                                  <span>
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                                        [showWishlist]="false" [showStatus]="false" [showDate]="true"
-                                        [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
+                                    [showWishlist]="false" [showStatus]="false" [showDate]="true"
+                                    [isDraft]="true" [showCount]="false" [showRating]="false"> </app-course-component>
+                                  </span>
                                 </ng-template>
                             </owl-carousel-o>
                         </mat-grid-list>
@@ -128,6 +130,8 @@
                     </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
+            <br>
+            <br>
         </div>
     </div>
 </div>
