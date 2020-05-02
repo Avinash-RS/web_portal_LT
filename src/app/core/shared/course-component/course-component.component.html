@@ -23,13 +23,12 @@
   <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
   <div class="dspFlx margLeft">
     <!-- <div class="col-md-5 col-sm-5 col-5 display_flex" *ngIf="showRating"> -->
-      <span *ngIf="showRating" class="dspFlx1">
-           <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
-          &nbsp;&nbsp;  <strong>{{course.rating | number:'1.1-1'}}</strong>
-      </span>
-        <span class="dspFlx1" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}</span>
-        <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
-
+    <span *ngIf="showRating" class="dspFlx1">
+      <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
+      &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
+    </span>
+    <span class="dspFlx1" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}</span>
+    <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
     <!-- </div> -->
     <!-- <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount"> -->
     <!-- </div> -->
@@ -64,17 +63,16 @@
   </div> -->
   <div class="row" *ngIf="showEnroll">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 text-center ">
-      <div >
-    
-     <div class="col-md-12 col-lg-12 col-sm-12 display_flex" >
-        <strong
-     class="m-t-15 m-l-5 iconClr"> <i class="fa fa-users iconClr"></i> &nbsp;232323 Learners</strong>  &nbsp;&nbsp;
-       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> 
-       <strong
-        class="m-t-15 m-l-5 iconClr">&nbsp;{{course.rating | number:'1.1-1'}} &nbsp;</strong>
+      <div>
+
+        <div class="col-md-12 col-lg-12 col-sm-12 display_flex">
+          <strong class="m-t-15 m-l-5 iconClr"> <i class="fa fa-users iconClr"></i> &nbsp;232323 Learners</strong>
+          &nbsp;&nbsp;
+          <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
+          <strong class="m-t-15 m-l-5 iconClr">&nbsp;{{course.rating | number:'1.1-1'}} &nbsp;</strong>
+        </div>
       </div>
-    </div>
-   
+
       <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300" (click)="login()">ENROLL NOW
       </button>
     </div>

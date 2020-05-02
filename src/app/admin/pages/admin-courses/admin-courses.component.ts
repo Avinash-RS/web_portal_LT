@@ -18,6 +18,9 @@ export class AdminCoursesComponent implements OnInit {
   loader: boolean;
   btnType: any;
   viewType: string = 'grid';
+  showCount: boolean;
+  showRating: boolean;
+  showPrice: boolean;
 
   constructor(public route: Router, private service: AdminServicesService) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -31,7 +34,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'create';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish'
+          this.btnType = 'Publish';
+          this.showCount = false;
+          this.showRating = false;
+          this.showPrice = false;
         } else
           this.loader = false;
       })
@@ -44,7 +50,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'publish';
           this.showPublishedDate = true;
           this.loader = false;
-          this.btnType = null
+          this.btnType = null;
+          this.showCount = true;
+          this.showRating = true;
+          this.showPrice = true;
         } else
           this.loader = false;
       })
@@ -57,7 +66,10 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'draft';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish'
+          this.btnType = 'Publish';
+          this.showCount = false;
+          this.showRating = false;
+          this.showPrice = false;
         } else
           this.loader = false;
       })
@@ -69,7 +81,8 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     else if (window.innerWidth >= 600 && window.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
+    else if (window.innerWidth >= 768 && window.innerWidth <= 1024) 
+    this.breakpoint = 3;
     // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
     //   this.breakpoint = 4;
     else
@@ -82,7 +95,7 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
+    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
       this.breakpoint = 3;
     // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
     //   this.breakpoint = 4;

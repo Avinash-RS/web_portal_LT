@@ -33,6 +33,40 @@ export class ListViewCourseComponentComponent implements OnInit {
 
   login(v) {
     console.log(v)
+    if (this.btnType == 'Publish') {
+      let detail = {
+        id: this.course.course_id,
+        name: this.course.course_name
+      }
+      console.log(detail)
+      this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
+    }
   }
 
+  gotoDescription(course) {
+    if (this.goto == 'publish') {
+      let detail = {
+        type: 'publish', id: this.course._id || this.course.course_id
+      }
+      localStorage.setItem('courseType', detail.type)
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+
+    }
+    else if (this.goto == 'create') {
+      let detail =
+        { type: 'create', id: this.course._id || this.course.course_id }
+      localStorage.setItem('courseType', detail.type)
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+
+    }
+    else if (this.goto == 'draft') {
+      let detail = { type: 'draft', id: this.course._id || this.course.course_id }
+      localStorage.setItem('courseType', detail.type)
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+
+    }
+  }
 }
+
+
+
