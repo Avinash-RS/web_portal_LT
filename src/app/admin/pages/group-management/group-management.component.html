@@ -9,12 +9,14 @@
   <h1> Group Management</h1>
   <div class="container margin20">
     <div class="row">
+
       <div class="card col-3" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
       [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
       <div class="card-header">
          Select Group/Sub Group
       </div>
-     
+
+      
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -43,6 +45,7 @@
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+
                 <!-- {{node.group_name}}2 -->
               </div>
             </li>
@@ -55,42 +58,62 @@
       </div>
       <div class="col-9 bg-white">
 
-        <!-- <div class="tab_container"> -->
-
-          <!-- <input id="tab1" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs" checked>
-          <label class="tab-class" for="tab1"><i class="fa fa-pencil-square-o"></i><span>Create Group</span></label>
-
-          <input id="tab2" style="clear: both;padding-top: 10px;display: none;" type="radio" name="tabs">
-          <label class="tab-class" for="tab2"><i class="fa fa-pencil-square-o"></i><span>View User</span></label> -->
-
-
-
-          <div class="col-9 bg-white">
-
+ 
           <mat-tab-group>
             <mat-tab label="Group details" >
-
-
           <div class="container">
             <div class="row">
               <div class="col-12">
-                      {{currentpath?.group_name}} <ng-container *ngIf="currentpath?.group_name"> /</ng-container> New Group
-                      <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm">
-          
-                        <div class="col-12 mt-4">
-                        <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp;
-                        <mat-form-field class="field px-2">
-                          <input type="text" placeholder="Enter group name" matInput ngModel name="group_name"
-                            #groupname1="ngModel" required>
-                          <mat-error *ngIf="groupname1.errors">
-                            <div *ngIf="groupname1.errors?.required" class="text-danger">Group Name is
-                              required</div>
-                            <!-- <div *ngIf="groupname1.errors?.pattern" class="text-danger">Group  Number
-                            Should Be Numbers and max Size 15 only</div> -->
-                          </mat-error>
-                        </mat-form-field>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+
+                    <span class="mt-0 mb-1 text-capitalize">  {{currentpath?.group_name}} 
+                      <ng-container *ngIf="editstatus">
+                      <ng-container *ngIf="currentpath?.group_name"> /</ng-container> 
+                      Create New 
+                      <ng-container *ngIf="currentpath?.group_name"> Sub</ng-container>
+                         Group
+                        </ng-container>
+                        </span>  
+                  </div>
+                  <div class="col-md-6">
+                    <ng-container *ngIf="currentpath?.group_name && !editstatus">
+                    <button type="button" class="btn col-md-4 float-right addnewBtn" (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add Sub Group</button>
+                   </ng-container>
+                   <ng-container *ngIf="currentpath?.group_name && editstatus">
+                    <button type="button" class="btn col-md-4 float-right addnewBtn" (click)="edit(true,currentpath.group_name)"><i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit Selected </button>
+                   </ng-container>
+                  </div>
+                    
+                    </div>
+                     
+                     <form (ngSubmit)="savegroup(groupform)" #groupform="ngForm" class=" border border-light p-5">
+            
+                          <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">
+                              <ng-container *ngIf="editstatus">
+                              Enter 
+                              <ng-container *ngIf="currentpath?.group_name">Sub </ng-container> 
+                              </ng-container>
+                              Group Name
+                            </label>
+                          <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
+                      
+                            <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel name="group_name"
+                              #groupname1="ngModel" required value="{{editgroupname}}">
+                              <div *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched)"
+                              class="error-message" >
+                              <div *ngIf="groupname1.errors?.required"  class="error-message">
+                                Group Name is required.
+                              </div>
+                              </div>
+                            
+ 
+           
+
                         </div>
-                        <div class="col-12" *ngIf="currentpath">
+                        <div class="col-12" *ngIf="currentpath && !editstatus">
                           <!-- [(ngModel)]="checked" -->
                         <mat-slide-toggle  
                         class="example-margin"
@@ -98,7 +121,7 @@
                         [checked] ="!currentpath?.is_active"
                         (change)="changegroupstatus()"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
                         </div>
-                        <div class="col-12 mt-4">
+                        <div class="col-6 mt-4">
                         <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
                         <button mat-raised-button color="primary" type="reset">Cancel</button>
                       </div>
@@ -116,16 +139,10 @@
           <!-- <section id="content1" class=" tab-content"> -->
 
           <!-- <section id="content2" class="tab-content">
-          </section> -->
-        </div>
+          </section> 
+        </div>-->
       </div>
     </div>
     <!-- </div> -->
   </div>
 </div>
-
-
-
-
-
-  

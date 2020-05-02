@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
@@ -17,14 +17,17 @@ export class GroupManagementComponent implements OnInit {
   groups: any;
   adminDetails: any;
   currentpath = null;
+  editstatus:any =true;
   pagenumber = 0;
-  // checked = 'Deactivate';
+  @Input()
+  disabled: boolean =true;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  editgroupname: string;
   constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
@@ -97,17 +100,30 @@ export class GroupManagementComponent implements OnInit {
   selectgroup(node) {
     if (node.checkbox === true) {
       this.currentpath = node;
+      this.disabled =false;
+      this.editstatus =false;
+      this.editgroupname =node.group_name;
     } else {
+      this.disabled =true;
+      this.editstatus =true;
       this.currentpath = null;
+      this.editgroupname="";
     }
   }
   savegroup(form) {
     let hierarchy;
+    let str;
     if (form.valid) {
       if (this.currentpath) {
-        const str = this.currentpath.hierarchy_id.split('h');
+        str = this.currentpath.hierarchy_id.split('h');
         hierarchy = 'h' + (Number(str[1]) + Number(1));
       }
+          
+      if(Number(str[1]) >= 7 ){
+      
+        this.alert.openAlert('Error !', 'Reached Maximum level');
+      }else{
+  
       const data = {
         group_name: form.value.group_name, group_type: 'new',
         parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
@@ -116,7 +132,9 @@ export class GroupManagementComponent implements OnInit {
       };
       this.adminservice.creategroup(data).subscribe((result: any) => {
         if (result.data.createusergroup.success === true) {
+          this.reset();
           this.alert.openAlert('Success !', 'Group Created Successfully');
+
           form.reset();
           this.getgroups();
         } else {
@@ -124,7 +142,11 @@ export class GroupManagementComponent implements OnInit {
         }
       });
     }
+          
   }
+}
+
+
   changegroupstatus() {
     const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
@@ -148,5 +170,26 @@ export class GroupManagementComponent implements OnInit {
       }
     });
     // this.checked ="Deactivate"
+  }
+  edit(data:boolean,group_name){
+    console.log('---'+group_name)
+    if(data){
+      this.editstatus =false;
+      
+      this.editgroupname = group_name;
+     
+    }else{
+      this.editstatus =true;
+      this.editgroupname = "";
+
+    }
+
+  }
+  reset(){
+    this.editstatus =true;
+    this.editgroupname="";
+    this.disabled =true;
+    this.currentpath.group_name = null;
+    console.log('currentpath'+this.currentpath.group_name)
   }
 }
