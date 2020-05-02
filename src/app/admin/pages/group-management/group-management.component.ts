@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, Input,ChangeDetectorRef  } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
@@ -6,11 +6,12 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material';
 import Swal from 'sweetalert2';
+import { MatSlideToggleChange } from '@angular/material';
+
 @Component({
   selector: 'app-group-management',
   templateUrl: './group-management.component.html',
   styleUrls: ['./group-management.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class GroupManagementComponent implements OnInit {
@@ -19,8 +20,10 @@ export class GroupManagementComponent implements OnInit {
   currentpath = null;
   editstatus:any =true;
   pagenumber = 0;
+  formsubmitted = false;
   @Input()
   disabled: boolean =true;
+  toggleevent:any;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -28,7 +31,7 @@ export class GroupManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   editgroupname: string;
-  constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
+  constructor(private alert: AlertServiceService, private cdr:ChangeDetectorRef, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -107,22 +110,23 @@ export class GroupManagementComponent implements OnInit {
       this.currentpath = null;
       this.editgroupname="";
     }
+    console.log(this.currentpath);
   }
 
   savegroup(form) {
     let hierarchy;
     let str;
+    this.formsubmitted = true;
+    console.log(form.valid)
     if (form.valid) {
+      this.formsubmitted = false;
       if (this.currentpath) {
         str = this.currentpath.hierarchy_id.split('h');
         hierarchy = 'h' + (Number(str[1]) + Number(1));
       }
-          
-      if(Number(str[1]) >= 7 ){
-      
+      if (Number(str[1]) >= 7 ){
         this.alert.openAlert('Error !', 'Reached Maximum level');
-      }else{
-  
+      } else {
       const data = {
         group_name: form.value.group_name, group_type: 'new',
         parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
@@ -145,8 +149,18 @@ export class GroupManagementComponent implements OnInit {
   }
 }
 
+toggle(event: MatSlideToggleChange){
+  console.log(event.checked);
+  this.toggleevent = event.checked;
+  this.currentpath.is_active = !event.checked;
+  console.log(this.currentpath.is_active);
+}
 
   changegroupstatus() {
+    console.log("current",!this.currentpath.is_active)
+    var value :any;
+     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
+    console.log(value);
     const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
       title: 'Are you sure want to ' + status +
@@ -158,14 +172,27 @@ export class GroupManagementComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        // this.adminservice.changegroupstatus().subscribe(( result : any) => {
-        //   this.getgroups();
-        //   Swal.fire(
-        //      status,
-        //     'Group  has been ' + status + 'd',
-        //     'success'
-        //   );
-        // });
+        this.adminservice.changegroupstatus(this.currentpath.group_id , value).subscribe(( result : any) => {
+          console.log(result);
+          if (result.data.groupstatus.success === true) {
+            this.editstatus = true;
+            this.currentpath = null;
+            this.editgroupname = "";
+            this.getgroups();
+            this.cdr.detectChanges();
+            Swal.fire(
+               status,
+              'Group  has been ' + status + 'd',
+              'success'
+            );
+           } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: result.data.groupstatus.message,
+            });
+          }
+        });
       }
     });
     // this.checked ="Deactivate"

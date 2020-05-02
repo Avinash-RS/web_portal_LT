@@ -101,16 +101,13 @@
                           <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
                       
                             <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel name="group_name"
-                              #groupname1="ngModel" required value="{{editgroupname}}">
-                              <div *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched)"
+                              #groupname1="ngModel" [required] = editstatus value="{{editgroupname}}">
+                              <div *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
                               class="error-message" >
-                              <div *ngIf="groupname1.errors?.required"  class="error-message">
+                              <div *ngIf="groupname1.errors.required"  class="error-message">
                                 Group Name is required.
                               </div>
                               </div>
-                            
- 
-           
 
                         </div>
                         <div class="col-12" *ngIf="currentpath && !editstatus">
@@ -118,11 +115,12 @@
                         <mat-slide-toggle  
                         class="example-margin"
                         [color]="color"
-                        [checked] ="!currentpath?.is_active"
-                        (change)="changegroupstatus()"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
+                        (change)="toggle($event)"
+                        [checked] ="!currentpath?.is_active"></mat-slide-toggle> {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
                         </div>
                         <div class="col-6 mt-4">
-                        <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
+                        <button *ngIf ="editstatus" mat-raised-button color="primary" type="submit">Save</button> &nbsp;
+                        <button *ngIf ="!editstatus" mat-raised-button color="primary" (click)="changegroupstatus()" type="button">Update</button> &nbsp;
                         <button mat-raised-button color="primary" type="reset">Cancel</button>
                       </div>
                       </form>
