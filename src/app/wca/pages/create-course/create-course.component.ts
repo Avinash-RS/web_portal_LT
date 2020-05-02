@@ -238,7 +238,7 @@ export class CreateCourseComponent implements OnInit {
       this.courseForm.value.category_id = [];
       this.courseForm.value.created_by = '';
       this.courseForm.value.updated_by = '';
-      this.courseForm.value.admin_id = '';
+      this.courseForm.value.admin_id = userDetails.user_id ? userDetails.user_id : '';
       this.courseForm.value.is_published = null;
       this.courseForm.value.learner_count = null;
       this.courseForm.value.is_active = 0;
