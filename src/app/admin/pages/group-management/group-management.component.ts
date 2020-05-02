@@ -1,13 +1,20 @@
-import { Component, OnInit, Input,ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef  } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
-import {MatSlideToggleModule} from '@angular/material';
 import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
+import { SelectionModel } from '@angular/cdk/collections';
 
+export interface PeriodicElement {
+  user_id: string;
+  name: number;
+  email: string;
+  mobile: string;
+}
 @Component({
   selector: 'app-group-management',
   templateUrl: './group-management.component.html',
@@ -15,23 +22,31 @@ import { MatSlideToggleChange } from '@angular/material';
 })
 
 export class GroupManagementComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   groups: any;
   adminDetails: any;
   currentpath = null;
-  editstatus:any =true;
+  editstatus: any = true;
   pagenumber = 0;
   formsubmitted = false;
   @Input()
-  disabled: boolean =true;
-  toggleevent:any;
+  disabled: boolean = false;
+  toggleevent: any;
+  editgroupname: string;
+  loader: boolean = false;
+  ELEMENT_DATA: PeriodicElement[] = [];
+  resultsLength: number = null;
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
+  dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+  selection = new SelectionModel(true, []);
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
-  editgroupname: string;
-  constructor(private alert: AlertServiceService, private cdr:ChangeDetectorRef, private adminservice: AdminServicesService) {
+  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -39,6 +54,7 @@ export class GroupManagementComponent implements OnInit {
   ngOnInit() {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.getgroups();
+    this.getAllUser(0);
   }
 
   getgroups() {
@@ -101,14 +117,14 @@ export class GroupManagementComponent implements OnInit {
   selectgroup(node) {
     if (node.checkbox === true) {
       this.currentpath = node;
-      this.disabled =false;
-      this.editstatus =false;
-      this.editgroupname =node.group_name;
+      this.disabled = false;
+      this.editstatus = false;
+      this.editgroupname = node.group_name;
     } else {
-      this.disabled =true;
-      this.editstatus =true;
+      this.disabled = true;
+      this.editstatus = true;
       this.currentpath = null;
-      this.editgroupname="";
+      this.editgroupname = '';
     }
     console.log(this.currentpath);
   }
@@ -117,7 +133,7 @@ export class GroupManagementComponent implements OnInit {
     let hierarchy;
     let str;
     this.formsubmitted = true;
-    console.log(form.valid)
+    console.log(form.valid);
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
@@ -145,11 +161,10 @@ export class GroupManagementComponent implements OnInit {
         }
       });
     }
-          
   }
 }
 
-toggle(event: MatSlideToggleChange){
+toggle(event: MatSlideToggleChange) {
   console.log(event.checked);
   this.toggleevent = event.checked;
   this.currentpath.is_active = !event.checked;
@@ -157,9 +172,9 @@ toggle(event: MatSlideToggleChange){
 }
 
   changegroupstatus() {
-    console.log("current",!this.currentpath.is_active)
-    var value :any;
-     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
+    console.log('current', !this.currentpath.is_active)
+    let value: any;
+    value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
     console.log(value);
     const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
@@ -197,25 +212,44 @@ toggle(event: MatSlideToggleChange){
     });
     // this.checked ="Deactivate"
   }
-  edit(data:boolean,group_name){
-    console.log('---'+group_name)
-    if(data){
-      this.editstatus =false;
+  edit(data: boolean, group_name){
+    console.log('---' + group_name)
+    if (data){
+      this.editstatus = false;
       
       this.editgroupname = group_name;
      
     }else{
-      this.editstatus =true;
+      this.editstatus = true;
       this.editgroupname = "";
 
     }
 
   }
   reset(){
-    this.editstatus =true;
-    this.editgroupname="";
-    this.disabled =true;
+    this.editstatus = true;
+    this.editgroupname = '';
+    this.disabled = true;
     this.currentpath.group_name = null;
-    console.log('currentpath'+this.currentpath.group_name)
+    console.log('currentpath' + this.currentpath.group_name);
+  }
+
+
+  getAllUser(pagenumber) {
+    this.loader = true;
+    this.resultsLength = null;
+    if (pagenumber === 0) {
+    this.ELEMENT_DATA = [];
+    }
+    this.adminservice.getAllUsers(pagenumber, 1)
+      .subscribe((result: any) => {
+        Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+        this.selection = new SelectionModel(true, []);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.resultsLength = result.data.get_all_user.learner_count;
+        this.loader = false;
+      });
   }
 }

@@ -263,3 +263,39 @@ input[type=text] {
 ::ng-deep ul {
   padding-left: 25px !important;
 }
+
+// for table
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  min-width: 300px;
+
+  .mat-stroked-button {
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0 0px;
+    margin: 1px;
+  }
+
+  .mat-header-cell:last-of-type {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: initial;
+    text-align: center;
+  }
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 350px;
+  max-width: 700px;
+  overflow-x: scroll;
+}
+
+
+.mobile-label {
+  display: none;
+}
