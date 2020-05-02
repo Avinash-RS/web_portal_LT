@@ -121,8 +121,8 @@
             <h3><b>Course Instructor</b></h3>
           </div>
 
-          <div class="col-md-4 col-sm-12 col-12">
-              <h3 class="fadetext">Ankit</h3>
+          <div class="col-md-4 col-sm-12 col-12" >
+              <span *ngFor="let author of course?.author_details" class="fadetext">  {{author.author_name}}</span>
             </div>
       </div>
       <div class="row">
@@ -202,7 +202,7 @@
         
         <div class="row">
           <div class="col-md-12 col-sm-12 col-12">
-            <h3>A Career in Photography</h3>
+            <h3>{{course?.step_towards}}</h3>
           </div>
         </div>
         <div class="line"></div>
@@ -212,7 +212,7 @@
         </div>
 
 
-        <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" (window:resize)="onResize($event)">
+        <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" >
           <mat-grid-tile *ngFor="let author of course?.author_details">
               <div class="row">
                 <div class="col-md-4 col-sm-12 col-12">
@@ -250,15 +250,15 @@
                 </div>
       
                 <div class="col-4">
-                  <mat-form-field style="text-align: right;margin-top: 5%;">
+                  <mat-form-field style="text-align: right;margin-top: 5%;" >
                     <mat-label>Resourse</mat-label>
                     <mat-icon matPrefix>folder</mat-icon>
                     <mat-select  >
-                        <mat-option *ngFor="let file of mod.resourse?.files">
-                          <a  href="{{file.path}}" download>{{file.path}}</a>
+                        <mat-option *ngFor="let file of mod.resourse?.files" >
+                          <a  href="{{file.path}}" download >{{file.path}}</a>
                       </mat-option>
-                      <mat-option style="text-align: center;">
-                        <button class="btn">Download all</button>
+                      <mat-option style="text-align: center;"  (click)="downloadAll(mod.resourse?.files)">
+                        <button class="btn"  >Download all</button>
                       </mat-option>
                     </mat-select>
                 </mat-form-field>

@@ -9,7 +9,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-card style="text-align: center;">
-            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+            <mat-grid-list [cols]="breakpoint"  rowHeight="2.3:2">
               <mat-grid-tile *ngFor="let course of CourseList" [style.border]="'none'">
                 <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="true"
                   [showStatus]="false"> </app-course-component>

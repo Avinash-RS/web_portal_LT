@@ -13,10 +13,10 @@
     <div class="col-md-6">
       <mat-card class="float-right view-button-background">
         <button class="float-right button-view" mat-raised-button>
-          <i class="material-icons app-toolbar-menu">menu </i>
+          <i class="material-icons app-toolbar-menu" (click)="viewType = 'list'">menu </i>
         </button>
         <button class=" float-right" mat-raised-button>
-          <i class="material-icons app-toolbar-menu">apps </i>
+          <i class="material-icons app-toolbar-menu" (click)="viewType = 'grid'">apps </i>
         </button>
       </mat-card>
     </div>
@@ -27,10 +27,10 @@
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
   </div>
 
-  <div class="container" *ngIf="!loader">
+  <div class="container" *ngIf="!loader && viewType == 'grid'">
     <div class="col-md-12">
       <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
-        <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="2.3:2">
+        <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="2.3:2">
           <mat-grid-tile *ngFor="let course of courseList" [style.border]="'none'" [colspan]="1" [rowspan]="1">
             <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
               [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="true"
@@ -45,7 +45,22 @@
       </mat-card>
     </div>
   </div>
+  <!-- list-view-course-component here -->
+  <br><br><br>
+  <div class="container" *ngIf="!loader && viewType == 'list'">
+    <!-- <div class="col-md-1"></div> -->
+    <div class="col-md-12 width_90 center" *ngFor="let course of courseList">
+      <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
 
+        <app-list-view-course-component [course]="course" [showRating]="true" [btnType]="btnType" [showCount]="true"
+          [goto]="goto">
+        </app-list-view-course-component>
+
+      </mat-card>
+      <br><br>
+    </div>
+    <!-- <div class="col-md-1"></div> -->
+  </div>
 
 
 </div>

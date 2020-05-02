@@ -11,6 +11,7 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { FooterComponent } from '@core/core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { CourseComponentComponent } from '@core/shared/course-component/course-component.component';
+import { ListViewCourseComponentComponent } from '@core/shared/list-view-course-component/list-view-course-component.component'
 import { TopCoursesComponent } from '@core/shared/top-courses/top-courses.component';
 import { RecomendedCoursesComponent } from '@core/shared/recomended-courses/recomended-courses.component';
 import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist-courses.component';
@@ -25,8 +26,8 @@ import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { VgBufferingModule } from "videogular2/compiled/buffering";
 
 const routes: Routes = [
-  { path: 'video', component: VideoPlayerComponent,canActivate:[AuthGuard]  },
-  { path: 'audio', component: AudioPlayerComponent,canActivate:[AuthGuard]  },
+  { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
+  { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ const routes: Routes = [
     VideoPlayerComponent,
     AudioPlayerComponent,
     DataTableComponent,
+    ListViewCourseComponentComponent
   ],
 
   imports: [
@@ -66,6 +68,7 @@ const routes: Routes = [
     RecomendedCoursesComponent,
     WishlistCoursesComponent,
     CapslockDirective,
-    DataTableComponent]
+    DataTableComponent,
+    ListViewCourseComponentComponent]
 })
 export class CoreModule { }
