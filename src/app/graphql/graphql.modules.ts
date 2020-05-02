@@ -4,9 +4,9 @@ import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { DefaultOptions } from 'apollo-client/ApolloClient';
-import { environment } from '../../environments/environment';
+// import { environment } from '../../environments/environment';
 import { ApolloLink } from 'apollo-link';
-// import { environment } from '@env/environment';
+import { environment } from '@env/environment';
 import { GlobalServiceService} from '@core/services/handlers/global-service.service';
 import { onError } from "apollo-link-error";
 
