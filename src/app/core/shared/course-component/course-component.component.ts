@@ -107,7 +107,7 @@ export class CourseComponentComponent implements OnInit {
     }
     } else if (this.goto == 'publish') {
       let detail = {
-        type: 'publish', id: this.course._id || this.course.course_id 
+        type: 'publish', id: this.course.course_id 
       }
       localStorage.setItem('courseType',detail.type)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
@@ -115,7 +115,7 @@ export class CourseComponentComponent implements OnInit {
     }
     else if (this.goto == 'create') {
       let detail =
-        { type: 'create', id: this.course._id || this.course.course_id }
+        { type: 'create', id:  this.course.course_id }
         localStorage.setItem('courseType',detail.type)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
      
