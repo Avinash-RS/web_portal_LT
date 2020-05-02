@@ -102,7 +102,7 @@ token:String;
 
   getCourseDetails(id) {return this.http.get(environment.wcaapiurl +  'api/courses/getscrommodules?courseid='+id); }
 
-  excelUpload(excel) {console.log("hiiiiiiiii"); return this.http.post(this.url,excel);}
+  excelUpload(excel) {return this.http.post(environment.apiUrl + 'wca/uploaddocument',excel);}
 
 
   handleKeydown(event) {
