@@ -8,13 +8,13 @@ export const menus = [
         
     },
     {
-        'name': 'Learner Management',
+        'name': 'User Management',
         'icon': 'widgets',
         'link': false,
         'open': false,
         'sub': [
             {
-                'name': 'Learners',
+                'name': 'Users',
                 'link': 'userManagement',
                 'icon': 'widgets',
                 'chip': false,
