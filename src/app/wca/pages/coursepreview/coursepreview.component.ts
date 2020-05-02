@@ -81,12 +81,7 @@ export class CoursepreviewComponent implements OnInit {
     this.clicked = i
   }
   getModuleData() {
-<<<<<<< HEAD
-    this.loader.show();
-    this.learnerservice.getModuleData(1).subscribe(data => {
-=======
     this.learnerservice.getModuleData(this.detail.id).subscribe(data => {
->>>>>>> ff75e41229d8136b7a6d9484b23fc8f129994f58
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
 
