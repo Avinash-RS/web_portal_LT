@@ -85,14 +85,12 @@ export class GroupManagementComponent implements OnInit {
         let array: any;
         array = resultdata;
         this.groups = this.treeSource.data;
-        array.push(...this.groups);
+        this.groups.push(...array);
         this.treeSource.data = null;
-        this.treeSource.data = array;
+        this.treeSource.data = this.groups;
       }
     });
   }
-
-
 
   selectgroup(node) {
     if (node.checkbox === true) {
@@ -101,6 +99,7 @@ export class GroupManagementComponent implements OnInit {
       this.currentpath = null;
     }
   }
+
   savegroup(form) {
     let hierarchy;
     if (form.valid) {
