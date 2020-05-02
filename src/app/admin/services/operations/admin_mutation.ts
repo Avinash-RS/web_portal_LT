@@ -54,3 +54,12 @@ mutation update_notification($report_id: String!){
     message
 }
 }`
+
+export const groupstatus = gql`
+mutation groupstatus($group_id: String!, $is_active: Boolean!){
+  groupstatus(group_id : $group_id,is_active: $is_active){
+      success
+      message
+      error_msg
+  }
+}`

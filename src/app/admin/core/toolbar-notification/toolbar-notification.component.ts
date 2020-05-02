@@ -9,7 +9,8 @@ import { AdminServicesService } from '@admin/services/admin-services.service';
 })
 export class ToolbarNotificationComponent implements OnInit {
 	cssPrefix = 'toolbar-notification';
-  	isOpen: boolean = false;
+    isOpen: boolean = false;
+    read : boolean = false;
   	@Input() notifications = [];
 
     // @HostListener('document:click', ['$event', '$event.target'])

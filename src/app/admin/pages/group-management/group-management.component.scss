@@ -26,8 +26,9 @@ h3 {
 	text-align: center;
 }
 span{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
+  color: #000;
 
 }
 a {
@@ -98,7 +99,7 @@ a {
 
 .tab_container [id^="tab"]:checked + label {
   background: #fff;
-  box-shadow: inset 0 3px #1d3f72;
+  box-shadow: inset 0 1px #c5d7fc;
 }
 
 .tab_container [id^="tab"]:checked + label .fa {
@@ -145,7 +146,7 @@ label .fa {
     position: relative;
     width: auto;
     overflow: auto;
-    max-height: 450px;
+    max-height: 400px;
 
   }
 // * {
@@ -185,8 +186,8 @@ mat-tree {
 button.mat-raised-button{
   background: #1F3777 !important;
   color: #ffffff;
-  width: 30%;
-  margin-left: 15%;
+  width: 45%;
+  // margin-left: 15%;
 }
 button.mat-menu-item {
 width: 100% !important ;
@@ -241,4 +242,60 @@ input[type=text] {
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
   background-color: #1f3777;
   // border: 1px solid #1f3777;
+}
+::ng-deep .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple{
+  height: 0 !important;
+}
+::ng-deep .mat-form-field-ripple{
+  height: 0 !important;
+}
+.addnewBtn{
+  font-size: 12px;
+    padding: 8px !important;
+}
+.error-message {
+  color: #cc0033;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 5px 0 0;
+}
+::ng-deep ul {
+  padding-left: 25px !important;
+}
+
+// for table
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  min-width: 300px;
+
+  .mat-stroked-button {
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0 0px;
+    margin: 1px;
+  }
+
+  .mat-header-cell:last-of-type {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: initial;
+    text-align: center;
+  }
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 300px;
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+
+.mobile-label {
+  display: none;
 }

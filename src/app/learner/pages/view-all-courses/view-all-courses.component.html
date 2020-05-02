@@ -158,19 +158,25 @@
 </button> -->
   <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)">
     <i class="fa fa-filter"></i>
+<<<<<<< HEAD
   </button>
   <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)"
     [ngClass]="{'btn-primary active': displayMode === 1}">
     <i class="fa fa-th"></i>
   </button>
+=======
+  </button>
+  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)"
+    [ngClass]="{'btn-primary active': displayMode === 1}">
+    <i class="fa fa-th"></i>
+  </button>
+>>>>>>> origin/userstory31_listview
   <button class="icon_fnt" type="button" (click)="onDisplayModeChange(2)"
     [ngClass]="{'btn-primary active': displayMode === 2}">
     <i class="fa fa-list"></i>
   </button>
 </div>
 <div class="container">
-
-
   <br>
   <br>
   <!-- grid -->
@@ -181,13 +187,8 @@
         <div class="col-lg-3">
           <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
             [showWishlist]="true" [showStatus]="false"> </app-course-component>
-
         </div>
       </ng-container>
-
-
-
-
     </div>
 
 
@@ -202,9 +203,11 @@
         </div>
       </ng-container>
 
+      <!-- <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event">
+      </pagination-controls> -->
+
       <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event">
       </pagination-controls>
-
 
     </div>
   </div>
