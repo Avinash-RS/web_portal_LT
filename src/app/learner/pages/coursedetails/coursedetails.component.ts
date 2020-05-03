@@ -90,7 +90,7 @@ export class CoursedetailsComponent implements OnInit {
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail) ;
     this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-        this.course = viewCourse.data.viewcourse.message[0];
+        this.course = viewCourse.data.viewcourse.message;
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
         this.loader.hide();

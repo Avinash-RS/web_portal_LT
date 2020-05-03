@@ -91,15 +91,15 @@ export class DashboardComponent implements OnInit {
     var role = localStorage.getItem('role') || null;
     console.log(adminDetails.user_id+'----'+role)
 
-    // this.adminService.getAllCourseCreated(adminDetails.user_id, 0).subscribe((data: any) => {
-    //   this.createdCourses = data.data.get_course_createdby_admin.message;
+    this.adminService.getAllCourseCreated(adminDetails.user_id, 0).subscribe((data: any) => {
+      this.createdCourses = data.data.get_course_createdby_admin.message;
 
     // }, err => {
     //   this.spinner.hide();
     // });
-    this.adminService.getAllDrafted(adminDetails.user_id, 0).subscribe((data: any) => {
+    // this.adminService.getAllDrafted(adminDetails.user_id, 0).subscribe((data: any) => {
 
-      this.createdCourses = data.data.get_draft_course.message;
+    //   this.createdCourses = data.data.get_draft_course.message;
       this.spinner = false;
 
     }, err => {
