@@ -81,6 +81,7 @@ export class DashboardComponent implements OnInit {
     },
     nav: true
   }
+  adminDetails: any;
 
 
 
@@ -93,7 +94,7 @@ export class DashboardComponent implements OnInit {
     this.getPublishedCourses();
     this.getCreatedCourses();
     this.getDraftCourses();
-
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.getWindowSize();
 
 
@@ -135,7 +136,7 @@ export class DashboardComponent implements OnInit {
 
   getCreatedCourses() {
 
-    this.adminService.getAllCourseCreated("undefined", 0).subscribe((data: any) => {
+    this.adminService.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((data: any) => {
       this.createdCourses = data.data.get_course_createdby_admin.message;
 
     }, err => {
