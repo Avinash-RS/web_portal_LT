@@ -51,12 +51,13 @@ export class CoursepreviewComponent implements OnInit {
 
     this.loader.show();
     this.service.viewCurseByID(this.detail.id).subscribe((viewCourse: any) => {
-      if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-        this.course = viewCourse.data.viewcourse.message[0];
+      console.log(viewCourse.data.viewcourse,'viewCourse')
+      // if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+        this.course = viewCourse.data.viewcourse.message;
         console.log(this.course, 'course')
         this.loader.hide();
-      } else
-        this.loader.hide();
+      // } else
+      //   this.loader.hide();
     });
   }
 
