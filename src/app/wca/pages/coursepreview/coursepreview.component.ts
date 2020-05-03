@@ -92,6 +92,9 @@ export class CoursepreviewComponent implements OnInit {
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
+      this.loader.hide();
+    }, err => {
+      this.loader.hide();
     })
   }
 

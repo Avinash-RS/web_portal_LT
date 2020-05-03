@@ -184,7 +184,7 @@ export class AddUserComponent implements OnInit {
       fb.append('csv', data, this.selectedfile.name);
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Uploaded in Progress ...');
+          this.alert.openAlert('Success !', 'Upload in Progress ...');
           this.selectedfile = '';
         } else {
           this.selectedfile = '';
