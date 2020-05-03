@@ -11,11 +11,22 @@
     margin-top: 10px;
 }
 
-// .course_description {
-//     text-align: initial;
-//     text-align: justify;
-
+// .m-l-10 {
+//     padding-left: 5px;
 // }
+
+.course_description {
+    margin-right: inherit;
+
+
+}
+
+.course_name {
+    // text-align: left;
+    padding-left: 17px;
+}
+
+
 
 .bottomButtons {
     position: absolute;
@@ -48,6 +59,7 @@
 img {
     width: inherit;
     padding: 20px;
+    height: 160px;
 }
 
 mat-icon {
@@ -60,6 +72,10 @@ mat-icon {
     margin-right: 30px;
 }
 
+
+.m-left-5 {
+    margin-left: 10px !important;
+}
 
 
 .bg {
@@ -89,19 +105,22 @@ mat-icon {
 
     .course_description {
         text-align: left;
-        padding-left: 40px;
+        padding-left: 20px;
         padding-bottom: 40px;
-
+        margin-left: 20px;
+        text-align: justify;
     }
 
     .course_name {
         text-align: left;
+        margin-left: 20px;
         padding-left: 40px;
+
     }
 
     .learner-count {
         position: relative;
-        padding-left: 40px;
+        padding-left: 20px;
     }
 
     .user_rating {

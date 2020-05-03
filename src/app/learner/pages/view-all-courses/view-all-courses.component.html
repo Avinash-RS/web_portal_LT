@@ -184,15 +184,17 @@
     </div>
 
 
-    <div class="row" *ngIf="displayMode === 2">
+    <div class="row  width_90 center" *ngIf="displayMode === 2">
       <ng-container
         *ngFor="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
-        <div class="col-lg-12">
+        <div class="col-md-12 width_80 center">
           <!-- <app-course-component [course]="c" [canNavigate]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false" > </app-course-component> -->
           <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-            [showWishlist]="true" [showStatus]="false">
+            [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+            [goto]="goto" [showDate]="true">
           </app-list-view-course-component>
         </div>
+        <br> <br>
       </ng-container>
 
       <!-- <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event">
