@@ -30,7 +30,8 @@ export class CreateCourseComponent implements OnInit {
   AllPrerequisitDetails = [];
   AllCertifyDetails = [];
   languages=['English']
-
+  queryData:any;
+  courseEditDetails:any;
 
   createItem(): FormGroup {
     this.preview2.push(null)
@@ -69,10 +70,28 @@ export class CreateCourseComponent implements OnInit {
     public spinner: NgxSpinnerService,
     public toast: ToastrService,
     public router: Router,
+    public route: ActivatedRoute,
 
   ) { }
   
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      let flag = 0;
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          flag = 1;
+        }
+      }
+      if (flag) {
+      this.queryData = params;
+      console.log(this.queryData)
+      if (this.queryData.edit) {
+        this.updateFormCourse(this.queryData.viewingModule)
+      }
+      }
+    });
+
+
     this.courseForm = this.formBuilder.group({
       course_name:[null,Validators.compose([Validators.required])],
       course_description:[null,Validators.compose([])],
@@ -382,4 +401,25 @@ export class CreateCourseComponent implements OnInit {
       return this.wcaService.handleKeydown(event);
     }
   
+
+    updateFormCourse(courseid) {
+      if(courseid) {
+        this.spinner.show();
+        const obj = {
+          course_id : courseid,
+        }
+        this.wcaService.getcourseDetails(obj).subscribe((data:any) => {
+          console.log(data);
+          if (data && data.message) {
+         this.courseEditDetails = null;
+         this.courseEditDetails = data.message;
+         console.log(this.courseEditDetails);
+         this.courseForm.patchValue(this.courseEditDetails);
+          }
+        this.spinner.hide();
+        }, err => {
+          this.spinner.hide();
+        })
+      }
+      }
 }

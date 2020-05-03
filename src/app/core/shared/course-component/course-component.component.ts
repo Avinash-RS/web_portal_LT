@@ -94,6 +94,7 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     if (!this.goto) {
     if (this.isDraft) {
+      console.log(course);
       this.router.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, courseImage: this.course.course_img_url,courseName: this.course.course_name}]);
 
     }
