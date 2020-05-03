@@ -8,7 +8,7 @@
 
       <div class="col-md-6  col-sm-9 col-9 float_left m-t-20" (click)="gotoDescription()">
         <div class="row ">
-          <div class="f_wt_500 f_sz_14 float_left m-left-5 course_name">{{course.course_name}}</div>
+          <div class="f_wt_500 f_size_16 float_left m-left-5 course_name">{{course.course_name}}</div>
         </div>
         <div class="row m-t-10 m-left-5  course_description ">
           {{course.short_description}}
@@ -25,7 +25,8 @@
         <div class="row float_right" *ngIf="showRating" (click)="gotoDescription()">
           <!-- <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> -->
           <div class="display_flex m-r-30 bg m-t-20 user_rating">
-            <strong class="m-t-15">&nbsp;{{course.rating | number:'1.1-1'}}</strong><span class="material-icons"
+            <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
+            <span class="material-icons"
               style="vertical-align: middle;" *ngIf="showRating">
               star_border
             </span>
