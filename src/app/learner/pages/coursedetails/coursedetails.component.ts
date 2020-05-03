@@ -87,8 +87,8 @@ export class CoursedetailsComponent implements OnInit {
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
     this.loader.show();
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    this.service.viewCurseByID(detail.id).subscribe((viewCourse: any) => {
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail) ;
+    this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
         this.course.wishlisted = detail.wishlist || false;
