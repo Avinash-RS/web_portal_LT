@@ -57,8 +57,8 @@ export const block_user = gql`
   }`;
 
 export const get_all_user = gql`
-  query get_all_user($pagenumber: Int!, $sort: Int!){
-    get_all_user(pagenumber: $pagenumber, sort: $sort) {
+  query get_all_user($pagenumber: Int!, $sort: Int!, $group_name: String!){
+    get_all_user(pagenumber: $pagenumber, sort: $sort, group_name: $group_name) {
       success
       error_msg
       learner_count
@@ -256,6 +256,7 @@ query get_course_createdby_admin($admin_id: String!, $pagenumber: Int!){
   get_course_createdby_admin(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
     error_msg
+    course_count      
     message{
       course_id
       course_description
@@ -349,6 +350,7 @@ export const get_course_published = gql`
 query get_course_published($admin_id: String!, $pagenumber: Int!){
   get_course_published(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
+    course_count
     message{
       course_id
       course_description
@@ -442,6 +444,7 @@ export const get_draft_course = gql`
 query get_draft_course($admin_id: String!, $pagenumber: Int!){
   get_draft_course(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
+    course_count
     message{
       course_id
       course_description
@@ -556,4 +559,3 @@ export const publishcourse = gql`
       error_msg
     }
   }`;
-

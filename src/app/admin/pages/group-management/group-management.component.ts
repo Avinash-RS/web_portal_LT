@@ -9,6 +9,7 @@ import { MatSlideToggleChange } from '@angular/material';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   user_id: string;
@@ -32,7 +33,7 @@ export class GroupManagementComponent implements OnInit {
   pagenumber = 0;
   formsubmitted = false;
   @Input()
-  disabled: boolean = false;
+  disabled: boolean = true;
   toggleevent: any;
   editgroupname: string;
   loader: boolean = false;
@@ -49,7 +50,8 @@ export class GroupManagementComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
   selectedArray: any = [];
-  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService) {
+  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
+    private router: Router,) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -57,7 +59,6 @@ export class GroupManagementComponent implements OnInit {
   ngOnInit() {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.getgroups();
-    this.getAllUser(0);
   }
 
   getgroups() {
@@ -65,7 +66,6 @@ export class GroupManagementComponent implements OnInit {
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       this.groups = result.data.getgroup.message;
-      console.log(this.groups);
       this.treeSource.data = null;
       this.treeSource.data = this.groups;
       this.dataSource$.next(this.groups);
@@ -101,10 +101,8 @@ export class GroupManagementComponent implements OnInit {
    */
   onScrollDown() {
     this.pagenumber = this.pagenumber + 1;
-    console.log(this.pagenumber);
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: this.pagenumber };
     this.adminservice.getgroup(data).subscribe((result: any) => {
-      console.log(result.data.getgroup.message);
       const resultdata = result.data.getgroup.message;
       if (resultdata.length) {
         let array: any;
@@ -123,13 +121,13 @@ export class GroupManagementComponent implements OnInit {
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
+      this.getAllUser(0);
     } else {
       this.disabled = true;
       this.editstatus = true;
       this.currentpath = null;
       this.editgroupname = '';
     }
-    console.log(this.currentpath);
   }
 
   savegroup(form) {
@@ -137,11 +135,9 @@ export class GroupManagementComponent implements OnInit {
     let str;
     let strvalue;
     this.formsubmitted = true;
-    console.log(form.valid);
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
-        
         if(this.currentpath.hierarchy_id){
           str = this.currentpath.hierarchy_id.split('h');
           strvalue =Number(str[1]);
@@ -151,9 +147,7 @@ export class GroupManagementComponent implements OnInit {
         }
        
       }
-    
-      
-      if (strvalue >= 7 ) {
+      if ( this.currentpath && Number(str[1]) >= 7 ) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
       } else {
         const data = {
@@ -178,17 +172,13 @@ export class GroupManagementComponent implements OnInit {
   }
 
   toggle(event: MatSlideToggleChange) {
-    console.log(event.checked);
     this.toggleevent = event.checked;
     this.currentpath.is_active = !event.checked;
-    console.log(this.currentpath.is_active);
   }
 
   changegroupstatus() {
-    console.log('current', !this.currentpath.is_active)
     let value: any;
     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
-    console.log(value);
     const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
       title: 'Are you sure want to ' + status +
@@ -201,7 +191,6 @@ export class GroupManagementComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result: any) => {
-          console.log(result);
           if (result.data.groupstatus.success === true) {
             this.editstatus = true;
             this.currentpath = null;
@@ -226,7 +215,6 @@ export class GroupManagementComponent implements OnInit {
     // this.checked ="Deactivate"
   }
   edit(data: boolean, group_name) {
-    console.log('---' + group_name)
     if (data) {
       this.editstatus = false;
 
@@ -243,20 +231,19 @@ export class GroupManagementComponent implements OnInit {
     this.editstatus = true;
     this.editgroupname = '';
     this.disabled = true;
-    
-   if(this.currentpath){
-    this.currentpath.group_name =null;
-   }
-    // console.log('currentpath' + this.currentpath.group_name);
+    this.currentpath = null;
   }
 
+  gotoAddUser() {
+    this.router.navigate(['Admin/auth/addUser']);
+  }
 
   getAllUser(pagenumber) {
     this.loader = true;
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
-    this.adminservice.getAllUsers(pagenumber, 1)
+    this.adminservice.getAllUsers(pagenumber, 1,this.currentpath.group_name)
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
@@ -268,7 +255,6 @@ export class GroupManagementComponent implements OnInit {
           this.loader = false;
         } else
           this.alert.openAlert("Please try again later", null)
-
       });
   }
 
@@ -332,5 +318,12 @@ export class GroupManagementComponent implements OnInit {
   }
   next(e) {
     this.getAllUser(e.pageIndex);
+  }
+
+  tabClick(event) {
+    if (event.index === 1) {
+     const pagenumber = 0;
+     this.getAllUser(pagenumber) ;
+    }
   }
 }

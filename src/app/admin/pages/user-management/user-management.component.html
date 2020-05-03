@@ -211,7 +211,8 @@
                   </div>
                 </div>
                 <br>
-                <div class="row" style="overflow-x:auto;">
+                <!-- commented till profile structure fix -->
+                <!-- <div class="row" style="overflow-x:auto;">
                   <div class="col-md-12 col-sm-12 col-12">
                     <table class="profileTable">
                       <tr>
@@ -234,7 +235,7 @@
                       </tr>
                     </table>
                   </div>
-                </div>
+                </div> -->
               </div>
             </form>
           </mat-dialog-content>
@@ -250,11 +251,11 @@
               <!-- //////userName  +++ full name +++ Phone//////// -->
               <div class="col-md-6 col-sm-12 col-12">
                 <label>No. of courses enrolled : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails.enrolled_course_count || 0}}</label></label>
+                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
                 <label>No. of Wishlisted courses : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails.wishlist_count || 0}}</label> </label>
+                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label> </label>
               </div>
             </div>
             <br>
@@ -262,12 +263,12 @@
             <div class="row">
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Last login time : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails.last_login[0]  || 'NA'}}
+                    {{trackDetails && trackDetails.last_login[0]  || 'NA'}}
                   </label> </label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Registered On : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails.userObjects[0].registered_date | date:short}}
+                    {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
                   </label> </label>
               </div>
             </div>

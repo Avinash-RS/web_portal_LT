@@ -56,12 +56,13 @@ export class AdminServicesService {
     });
   }
 
-  getAllUsers(pagenumber, sort) {
+  getAllUsers(pagenumber, sort, groupname?) {
     return this.Apollo.query({
       query: get_all_user,
       variables: {
         pagenumber: pagenumber,
         sort: sort,
+        group_name: groupname
       }
     });
   }

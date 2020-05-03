@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 
@@ -12,31 +12,30 @@ export class ReportManagementComponent implements OnInit {
   report_data;
   total_count;
 
-  
   constructor(public route: Router) {
     this.report_data = this.route.getCurrentNavigation().extras.state.type
-      // && this.route.getCurrentNavigation().extras.state.detail
-      console.log(this.report_data)
-      this.total_count = parseInt(this.report_data.duplicate_count) + parseInt(this.report_data.failure_count) + parseInt(this.report_data.success_count)
-      console.log("total",this.total_count)
+    // && this.route.getCurrentNavigation().extras.state.detail
+    console.log(this.report_data)
+    this.total_count = parseInt(this.report_data.duplicate_count) + parseInt(this.report_data.failure_count) + parseInt(this.report_data.success_count)
+    console.log("total", this.total_count)
 
-   }
-
-  ngOnInit() {
-    setTimeout(()=>{
-      this.drawChart()
-    },1000)
   }
 
-  drawChart(){
+  ngOnInit() {
+    setTimeout(() => {
+      this.drawChart()
+    }, 1000)
+  }
+
+  drawChart() {
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
-        labels: ['Successfully uploaded','Email format is incorrect','Already Exists'],
+        labels: ['Successfully uploaded', 'Email format is incorrect', 'Already Exists'],
         datasets: [
-          { 
-            data: [parseInt(this.report_data.success_count),parseInt(this.report_data.failure_count),parseInt(this.report_data.duplicate_count)],
-            backgroundColor: ["#008000", "#ff0000","#ffa500"],
+          {
+            data: [parseInt(this.report_data.success_count), parseInt(this.report_data.failure_count), parseInt(this.report_data.duplicate_count)],
+            backgroundColor: ["#008000", "#ff0000", "#ffa500"],
             fill: false
           },
         ]
@@ -46,13 +45,13 @@ export class ReportManagementComponent implements OnInit {
           position: 'right',
           maxWidth: 100,
         },
-        tooltips:{
-          enabled:true
+        tooltips: {
+          enabled: true
         }
       }
     })
-}
-downloadDoc(url){
-  window.location.href = url;
-}
+  }
+  downloadDoc(url) {
+    window.location.href = url;
+  }
 }
