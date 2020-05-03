@@ -4,7 +4,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from "@angular/material";
 import { Router } from '@angular/router';
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-coursepreview',
   templateUrl: './coursepreview.component.html',
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class CoursepreviewComponent implements OnInit {
   public isCollapsed = false;
   clicked: any = 'media';
+  urlSafe: SafeResourceUrl;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -35,7 +36,7 @@ export class CoursepreviewComponent implements OnInit {
   isshowPublish: boolean = false;
   courseType: string;
   modulength: any;
-  constructor(public service: CommonServicesService, private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
+  constructor(public service: CommonServicesService,public sanitizer: DomSanitizer,  private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
@@ -108,7 +109,8 @@ export class CoursepreviewComponent implements OnInit {
     }]); 
   }
   previewcourse(templateRef: TemplateRef<any>) {
-    console.log(templateRef)
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+    console.log(this.content.url)
     this.dialog.open(templateRef);
   }
 
