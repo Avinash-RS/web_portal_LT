@@ -41,6 +41,6 @@ export class PublishCourseComponent implements OnInit {
   }
 
   draftCourse() {
-    this.route.navigate(['/Wca']);
+    this.route.navigate(['/Admin/auth/Wca']);
   }
 }
