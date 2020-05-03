@@ -431,10 +431,8 @@ hyphens: auto;
  .cardheight{
    height: 430px !important;
  }
- .mat-tab-body-content{
+ ::ng-deep .mat-tab-body-content{
+  width:100% !important;
    overflow: hidden !important;
 
  }
- .mat-tab-body-content{
-  width:100% !important;
-}
