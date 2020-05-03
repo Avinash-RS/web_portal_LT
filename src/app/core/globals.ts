@@ -7,6 +7,10 @@ export const usernameValforLogin: any = [
 export const passwordValforLogin: any = [
     Validators.required
 ]
+export const percentageVal: any = [
+    Validators.required,
+    Validators.pattern(/[0-9]?[0-9]?(\.[0-9][0-9]?)?/)
+]
 
 export const usernameVal: any = [
     Validators.required,
