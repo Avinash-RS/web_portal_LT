@@ -8,7 +8,7 @@
 <div class="p-5px">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="font-display">{{type}} Courses ({{courseList.length}})</h2>
+      <h2 class="font-display">{{type}} Courses ({{course_count}})</h2>
     </div>
     <div class="col-md-6">
       <mat-card class="float-right view-button-background">
@@ -25,58 +25,49 @@
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
   </div>
-  <!-- grid-view-course-component here -->
-  <div class="container" *ngIf="!loader && viewType == 'grid'">
-    <div class="col-md-12">
-      <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
-        <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="2.3:2">
-          <!-- <tr *ngFor="let i of guestCandidates|  paginate: { totalItems: totalCount,itemsPerPage: perpage, currentPage: page }; let c=index;"> -->
 
-          <mat-grid-tile *ngFor="let course of courseList  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;" [style.border]="'none'" [colspan]="1" [rowspan]="1">
-            <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
-              [showStatus]="false" [showRating]="showRating" [showCount]="showCount" [showPrice]="showPrice"
-              [showDate]="showPublishedDate" [goto]="goto">
-            </app-course-component>
-          </mat-grid-tile>
-          <h2 *ngIf="courseList && courseList.length == 0">
-            No courses yet
-          </h2>
-          <br>
-        </mat-grid-list>
+  <div class="container" *ngIf="!loader">
+    <!-- grid-view-course-component here -->
+    <div class="row" *ngIf="viewType == 'grid'">
+      <div class="col-md-11 center">
+        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
+          <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="2.3:2">
+            <mat-grid-tile
+              *ngFor="let course of courseList  | paginate: { totalItems: course_count,itemsPerPage: 12, currentPage: paginationpgno } ;"
+              [style.border]="'none'" [colspan]="1" [rowspan]="1">
+              <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
+                [showStatus]="false" [showRating]="showRating" [showCount]="showCount" [showPrice]="showPrice"
+                [showDate]="showPublishedDate" [goto]="goto">
+              </app-course-component>
+            </mat-grid-tile>
+            <h2 *ngIf="courseList && courseList.length == 0">
+              No courses yet
+            </h2>
+          </mat-grid-list>
+        </mat-card>
+      </div>
+    </div>
+    <!-- end of grid-view-course-component here -->
+    <!-- list-view-course-component here -->
+    <div class="row" *ngIf="viewType == 'list'">
+      <div class="col-md-12 width_90 center"
+        *ngFor="let course of courseList | paginate: { totalItems: course_count,itemsPerPage: 12, currentPage: paginationpgno } ;">
+        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
+          <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
+            [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate">
+          </app-list-view-course-component>
+        </mat-card>
         <br>
-        <div class="col-md-12">
-          <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)" ></pagination-controls>
-        </div>
-      </mat-card>
-      <br>
+      </div>
     </div>
+    <!-- end of list-view-course-component here -->
+    <br><br><br>
+    <div class="row">
+      <div class="col-md-12">
+        <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
+        </pagination-controls>
+      </div>
+    </div><br><br><br><br>
   </div>
-  <!-- end of grid-view-course-component here -->
-  <br><br>
-  <!-- list-view-course-component here -->
-  <div class="container" *ngIf="!loader && viewType == 'list'">
-    <!-- <div class="col-md-1"></div> -->
-    <div class="col-md-12 width_90 center" *ngFor="let course of courseList  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;">
-      <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
-        <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
-          [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate">
-        </app-list-view-course-component>
-      </mat-card>
-      <br><br>
-    </div>
-    <div class="col-md-12">
-      Pagenation code here;
-
-
-      <!-- <br><br> -->
-    </div>
-
-  </div>
-  <!-- end of list-view-course-component here -->
-
-
 
 </div>
-
-
-

@@ -56,9 +56,10 @@ export class UserManagementComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.resultsLength = result.data.get_all_user.learner_count;
           this.loader = false;
-        } else
-          this.alert.openAlert("Please try again later", null)
-
+        } else {
+          this.alert.openAlert("Please try again later", null);
+          this.loader = false;
+        }
       });
   }
 

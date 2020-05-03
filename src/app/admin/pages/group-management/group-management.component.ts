@@ -237,7 +237,6 @@ export class GroupManagementComponent implements OnInit {
     console.log('currentpath' + this.currentpath.group_name);
   }
 
-
   getAllUser(pagenumber) {
     this.loader = true;
     this.resultsLength = null;
