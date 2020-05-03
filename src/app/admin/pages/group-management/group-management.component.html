@@ -59,7 +59,7 @@
       <div class="col-9 bg-white">
 
 
-        <mat-tab-group>
+        <mat-tab-group  (selectedTabChange)="tabClick($event)">
           <mat-tab label="Group details">
             <div class="container">
               <div class="row">
@@ -105,12 +105,15 @@
                       <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
 
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel
-                        name="group_name" #groupname1="ngModel" [required]=editstatus value="{{editgroupname}}">
+                        name="group_name" #groupname1="ngModel" [required]=editstatus pattern="^[a-zA-Z0-9]+$" value="{{editgroupname}}">
                       <div
                         *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
                         class="error-message">
                         <div *ngIf="groupname1.errors.required" class="error-message">
                           Group Name is required.
+                        </div>
+                        <div *ngIf="groupname1.errors.pattern" class="error-message">
+                          Group Name is Invalid.
                         </div>
                       </div>
 
@@ -135,7 +138,7 @@
 
           </mat-tab>
 
-          <mat-tab label="View User" [disabled]="disabled">
+          <mat-tab label="View User" [disabled]="disabled" >
             <div class="row">
               <div class="col-md-6">
                 <ng-container *ngIf="currentpath?.group_name">

@@ -57,8 +57,8 @@ export const block_user = gql`
   }`;
 
 export const get_all_user = gql`
-  query get_all_user($pagenumber: Int!, $sort: Int!){
-    get_all_user(pagenumber: $pagenumber, sort: $sort) {
+  query get_all_user($pagenumber: Int!, $sort: Int!, $group_name: String!){
+    get_all_user(pagenumber: $pagenumber, sort: $sort, group_name: $group_name) {
       success
       error_msg
       learner_count

@@ -32,7 +32,7 @@ export class GroupManagementComponent implements OnInit {
   pagenumber = 0;
   formsubmitted = false;
   @Input()
-  disabled: boolean = false;
+  disabled: boolean = true;
   toggleevent: any;
   editgroupname: string;
   loader: boolean = false;
@@ -57,7 +57,6 @@ export class GroupManagementComponent implements OnInit {
   ngOnInit() {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.getgroups();
-    this.getAllUser(0);
   }
 
   getgroups() {
@@ -123,6 +122,7 @@ export class GroupManagementComponent implements OnInit {
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
+      this.getAllUser(0);
     } else {
       this.disabled = true;
       this.editstatus = true;
@@ -143,7 +143,7 @@ export class GroupManagementComponent implements OnInit {
         str = this.currentpath.hierarchy_id.split('h');
         hierarchy = 'h' + (Number(str[1]) + Number(1));
       }
-      if (Number(str[1]) >= 7) {
+      if ( this.currentpath && Number(str[1]) >= 7 ) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
       } else {
         const data = {
@@ -233,8 +233,8 @@ export class GroupManagementComponent implements OnInit {
     this.editstatus = true;
     this.editgroupname = '';
     this.disabled = true;
-    this.currentpath.group_name = null;
-    console.log('currentpath' + this.currentpath.group_name);
+    this.currentpath = null;
+    console.log('currentpath' + this.currentpath);
   }
 
 
@@ -243,8 +243,9 @@ export class GroupManagementComponent implements OnInit {
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
-    this.adminservice.getAllUsers(pagenumber, 1)
+    this.adminservice.getAllUsers(pagenumber, 1,this.currentpath.group_name)
       .subscribe((result: any) => {
+        console.log(result);
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
@@ -320,4 +321,14 @@ export class GroupManagementComponent implements OnInit {
   next(e) {
     this.getAllUser(e.pageIndex);
   }
+
+  tabClick(event) {
+    console.log(event);
+    if (event.index === 1) {
+     const pagenumber = 0;
+     console.log("sxds")
+     this.getAllUser(pagenumber) ;
+    }
+  }
+
 }
