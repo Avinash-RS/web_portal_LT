@@ -58,7 +58,7 @@
 
   .info {
     display: grid;
-    grid-template-columns: 150px auto;
+    grid-template-columns: 138px auto;
   }
 
   .grid-item {
@@ -119,15 +119,31 @@
 }
 .line{
   width: 90%;
-  border-top: 1px solid #b3b3aac7;
+  border-top: 1px solid transparent;
   position: absolute;
   }
+
+  .btn1 {
+    border: 1px solid $color-darkGrey;
+    background-color: $color-light-grey !important;
+    color: $color-darkGrey;
+    padding: 14px 28px;
+    font-weight: 500;
+    font-size: 21px;
+    border-radius: 50px !important;
+    cursor: pointer;
+    width: 30% !important;
+}
+.cent{
+  float: none !important;
+  margin-left: 3px !important;
+}
 
   .tabbtn{
     border: none;
     box-shadow: none;
     color : $color-blank;
-    margin-left: 10px;
+    margin-left: 30px;
     margin-bottom: 10px;
   }
   .sm-img {
@@ -220,6 +236,14 @@
     font-size: 20px;
   }
 
+  .head1{
+    margin-left: 2.3% !important;
+    color: $color-blue;
+    font-size: 24pt !important;
+    font-weight: 500 !important
+    ;
+  }
+
   button:focus {
     // border-bottom:3px solid $color-red;
     outline: none;
@@ -264,7 +288,7 @@ ul li:before {
 }
 ol{
   list-style: none !important;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 
