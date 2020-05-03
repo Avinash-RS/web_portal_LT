@@ -28,7 +28,7 @@ export class PublishCourseComponent implements OnInit {
           if (res.data && res.data.publishcourse) {
             if (res.data.publishcourse.success) {
               this.alert.openAlert("Success !", "Published course successfully")
-              this.route.navigate(['/Wca']);
+              this.route.navigate(['/Admin/auth/Wca']);
             }
             else
               this.alert.openAlert(res.data.publishcourse.message == "" ? res.data.publishcourse.error_msg :

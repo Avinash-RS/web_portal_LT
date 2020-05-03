@@ -9,6 +9,7 @@ import { MatSlideToggleChange } from '@angular/material';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   user_id: string;
@@ -49,7 +50,8 @@ export class GroupManagementComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
   selectedArray: any = [];
-  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService) {
+  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
+    private router: Router,) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -230,6 +232,10 @@ export class GroupManagementComponent implements OnInit {
     this.editgroupname = '';
     this.disabled = true;
     this.currentpath = null;
+  }
+
+  gotoAddUser() {
+    this.router.navigate(['Admin/auth/addUser']);
   }
 
   getAllUser(pagenumber) {

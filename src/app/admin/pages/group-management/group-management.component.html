@@ -59,7 +59,7 @@
       <div class="col-9 bg-white">
 
 
-        <mat-tab-group  (selectedTabChange)="tabClick($event)">
+        <mat-tab-group (selectedTabChange)="tabClick($event)">
           <mat-tab label="Group details">
             <div class="container">
               <div class="row">
@@ -105,7 +105,8 @@
                       <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
 
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel
-                        name="group_name" #groupname1="ngModel" [required]=editstatus pattern="^[a-zA-Z0-9]+$" value="{{editgroupname}}">
+                        name="group_name" #groupname1="ngModel" [required]=editstatus pattern="^[a-zA-Z0-9]+$"
+                        value="{{editgroupname}}">
                       <div
                         *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
                         class="error-message">
@@ -138,7 +139,7 @@
 
           </mat-tab>
 
-          <mat-tab label="View User" [disabled]="disabled" >
+          <mat-tab label="View User" [disabled]="disabled">
             <div class="row">
               <div class="col-md-6">
                 <ng-container *ngIf="currentpath?.group_name">
@@ -160,7 +161,7 @@
                 </button>
               </div>
             </div>
-            <div class="example-container mat-elevation-z8">
+            <div class="example-container mat-elevation-z8" *ngIf="ELEMENT_DATA && ELEMENT_DATA.length > 0">
               <mat-table #table [dataSource]="dataSource">
 
                 <ng-container matColumnDef="select">
@@ -234,9 +235,10 @@
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
                       {{element.is_active ? 'De-activate' : 'Activate'}}</button>
-                    <button mat-stroked-button *ngIf = "!element.is_blocked" [disabled]="(selectedArray && selectedArray.length > 0)"
+                    <button mat-stroked-button *ngIf="!element.is_blocked"
+                      [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
-                     Un-block</button>
+                      Un-block</button>
                   </mat-cell>
                 </ng-container>
 
@@ -245,8 +247,13 @@
                 </mat-row>
               </mat-table>
             </div>
-            <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)">
+            <mat-paginator #paginator *ngIf="ELEMENT_DATA && ELEMENT_DATA.length > 0" [length]="resultsLength"
+              [pageSize]="10" (page)="next($event)">
             </mat-paginator>
+            <div *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
+              <br><br>
+             <h3 class="center"> No Users in this group</h3>
+            </div>
           </mat-tab>
         </mat-tab-group>
 

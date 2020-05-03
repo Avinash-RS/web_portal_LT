@@ -34,6 +34,7 @@ export class UserManagementComponent implements OnInit {
   profileDetails: {};
   trackDetails: any;
   loader: boolean = false;
+  
   constructor(private router: Router, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
     private dialog: MatDialog,
