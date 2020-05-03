@@ -1162,7 +1162,8 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl("")
       })
     });
-
+    console.log('form',this.profileForm);
+    console.log('stud', this.profileForm.get('is_student_or_professional'))
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
@@ -1452,7 +1453,8 @@ export class ProfileComponent implements OnInit {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
         if (data.data['update_email_onprofile']['success'] == 'true') {
           Swal.fire(data.data['update_email_onprofile'].message);
-          this.getprofileDetails(this.currentUser.user_id)
+          this.getprofileDetails(this.currentUser.user_id);
+          this.mailForm.reset();
         } else {
           Swal.fire(data.data['update_email_onprofile'].message)
         }
@@ -1472,6 +1474,9 @@ export class ProfileComponent implements OnInit {
   }
 
   editPassword(passRef: TemplateRef<any>) {
+    this.dialog.open(passRef,{
+      panelClass: 'myClass'
+    })
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
@@ -1479,7 +1484,7 @@ export class ProfileComponent implements OnInit {
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
-    this.dialog.open(passRef);
+   ;
   }
 
   otpverification() {
