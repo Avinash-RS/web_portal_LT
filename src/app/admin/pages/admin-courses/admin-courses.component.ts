@@ -116,9 +116,9 @@ onpagination(event) {
   console.log("called");
   if (this.type == 'created') {
     this.loader = true;
-    this.service.getAllCourseCreated(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {
-      if (res.data && res.data.get_course_createdby_admin) {
-        this.courseList.push(...res.data.get_course_createdby_admin.message);
+    this.service.getAllDrafted(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {
+      if (res.data && res.data.get_draft_course) {
+        this.courseList.push(...res.data.get_draft_course.message);
         // this.courseList = res.data.get_course_createdby_admin.message;
         this.goto = 'create';
         this.showPublishedDate = false;
