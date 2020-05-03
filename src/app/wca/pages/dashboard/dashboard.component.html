@@ -78,7 +78,7 @@
                                 <ng-template carouselSlide *ngFor="let course of createdCourses">
 
                                     <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                                        [showWishlist]="false" [showStatus]="false" [showDate]="true"
+                                        [showWishlist]="false" [showStatus]="false" [showDate]="false"
                                         [showCount]="false" [showRating]="false" [goto]="'create'">
                                     </app-course-component>
                                 </ng-template>
@@ -122,7 +122,7 @@
 
                                     <span>
                                         <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                                            [showWishlist]="false" [showStatus]="false" [showDate]="true"
+                                            [showWishlist]="false" [showStatus]="false" [showDate]="false"
                                             [isDraft]="true" [showCount]="false" [showRating]="false">
                                         </app-course-component>
                                     </span>
