@@ -26,7 +26,8 @@ export class ScormplayerComponent implements OnInit {
   breakpoint: number;
   course_id:any;
   courseDeatils: any;
-
+  modulength: any;
+  public isCollapsed = false;
   constructor(public sanitizer: DomSanitizer,    public spinner: NgxSpinnerService,public activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router,public commonService : CommonServicesService,) { 
       var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
@@ -68,7 +69,9 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
+
         this.content = data.data['getmoduleData']['data'][0]
+        this.modulength =  this.content['coursedetails'].length
       // }
      
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
@@ -76,7 +79,14 @@ export class ScormplayerComponent implements OnInit {
       // }   
     })
   }
-
+  moresection(vale){
+    console.log(vale,'vale')
+  if (vale == true){
+    this.isCollapsed = false
+  }else{
+    this.isCollapsed = true
+  }
+  }
 
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./coursepreview.component.scss']
 })
 export class CoursepreviewComponent implements OnInit {
+  public isCollapsed = false;
   clicked: any = 'media';
   customOptions1: any = {
     loop: true,
@@ -33,6 +34,7 @@ export class CoursepreviewComponent implements OnInit {
   detail: any;
   isshowPublish: boolean = false;
   courseType: string;
+  modulength: any;
   constructor(public service: CommonServicesService, private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService, private loader: NgxSpinnerService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -45,7 +47,7 @@ export class CoursepreviewComponent implements OnInit {
     } else {
       this.isshowPublish = false
     }
-    
+
     this.loader.show();
     this.service.viewCurseByID(this.detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -87,15 +89,16 @@ export class CoursepreviewComponent implements OnInit {
       // if(data.data['getmoduleData']['success'] == true){
 
       this.content = data.data['getmoduleData']['data'][0]
+      this.modulength =  this.content['coursedetails'].length
       console.log(this.content, "contenyt")
       // }
 
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
-      this.loader.hide();
+      
     }, err => {
-      this.loader.hide();
+    
     })
   }
 
@@ -112,6 +115,15 @@ export class CoursepreviewComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
 
+  }
+
+  moresection(vale){
+    console.log(vale,'vale')
+  if (vale == true){
+    this.isCollapsed = false
+  }else{
+    this.isCollapsed = true
+  }
   }
 
   downloadAll(urls) {

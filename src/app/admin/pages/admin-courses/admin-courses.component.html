@@ -50,13 +50,11 @@
     <!-- end of grid-view-course-component here -->
     <!-- list-view-course-component here -->
     <div class="row" *ngIf="viewType == 'list'">
-      <div class="col-md-12 width_90 center"
-        *ngFor="let course of courseList | paginate: { totalItems: course_count,itemsPerPage: 12, currentPage: paginationpgno } ;">
-        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
-          <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
-            [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate">
-          </app-list-view-course-component>
-        </mat-card>
+      <div class="col-md-12 width_80 center"
+        *ngFor="let course of courseList  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;">
+        <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
+          [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate">
+        </app-list-view-course-component>
         <br>
       </div>
     </div>
