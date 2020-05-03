@@ -1090,8 +1090,8 @@ export class ProfileComponent implements OnInit {
   selectfile: File;
   showotp: boolean;
   isenable: boolean = true;
-  timeLeft: number = 120;
-  resendtimeLeft: number = 120;
+  timeLeft: number;
+  resendtimeLeft: number = 60;
   interval;
   status: string;
   config = {
@@ -1499,7 +1499,7 @@ export class ProfileComponent implements OnInit {
         this.isenable = false;
         this.showotp = true;
         //Timer
-        this.timeLeft = 120;
+        this.timeLeft = 60;
         // if(this.timeLeft > 60){
         this.interval = setInterval(() => {
           if (this.timeLeft > 0) {
