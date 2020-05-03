@@ -72,7 +72,7 @@ export class ViewAllCoursesComponent implements OnInit {
    if(this.userDetailes.group_id){
 
    }
-  this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
+  this.learnerservice.getallcourses(this.userDetailes.group_id, this.pagenumber).subscribe((result: any) => {
     console.log('-----'+result);
     this.allcourses = result.data.get_all_course_by_usergroup.message;
  });
