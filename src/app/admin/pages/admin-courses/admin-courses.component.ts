@@ -28,9 +28,12 @@ export class AdminCoursesComponent implements OnInit {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     if (this.type == 'created') {
       this.loader = true;
-      this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
-        if (res.data && res.data.get_course_createdby_admin) {
-          this.courseList = res.data.get_course_createdby_admin.message;
+      // this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
+        this.service.getAllDrafted(this.adminDetails.user_id, 0).subscribe((res: any) => {
+        // if (res.data && res.data.get_course_createdby_admin) {
+          if (res.data && res.data.get_draft_course) {
+          // this.courseList = res.data.get_course_createdby_admin.message;
+          this.courseList = res.data.get_draft_course.message
           this.goto = 'create';
           this.showPublishedDate = false;
           this.loader = false;
