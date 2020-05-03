@@ -37,7 +37,7 @@ You have {{ notifications?.length }} new notifications</div>
       <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
         <mat-icon class="icon">notifications</mat-icon>
         <div class="title" fxLayout="column">
-          <div class="name">{{ notification.notification_msg }}</div>
+          <a class="name" (click)="moveToReport(notification)">{{ notification.notification_msg }}</a>
           <div class="time">{{ notification.time_ago }}</div>
         </div>
         <span fxFlex></span>        

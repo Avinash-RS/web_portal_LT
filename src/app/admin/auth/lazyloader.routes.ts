@@ -7,6 +7,7 @@ import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { GroupManagementComponent } from '@admin/pages/group-management/group-management.component';
 import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
+import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
 import { WcaModule } from '../../wca/wca.module';
 import { WcaComponent } from '../../wca/pages/wca/wca.component';
 
@@ -16,6 +17,7 @@ export const appRoutes: Routes = [{
         { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
+        { path: 'viewReport', component: ReportManagementComponent, data: { title: 'Report Management' }, canActivate: [AuthGuard] },
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard] },
         { path : 'usergroup' , component: GroupManagementComponent,data: { title: 'User Group creation' }},

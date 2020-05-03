@@ -198,6 +198,10 @@ export const get_all_learner_detail = gql`
             report_id
             admin_id
             time_ago
+            success_count
+            failure_count
+            updated_count
+            duplicate_count
             notification_msg
             report_info{
                 created_on
