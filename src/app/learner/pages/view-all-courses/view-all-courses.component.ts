@@ -23,6 +23,7 @@ export class ViewAllCoursesComponent implements OnInit {
   showRating: boolean;
   displayMode: number = 1;
   paginationpgno: any;
+  loader: boolean;
   
   constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) {
     this.btnType = "Enroll Now"
@@ -36,6 +37,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
     this.loadcategoryandcourses();
   }
+
   loadcategoryandcourses() {
     this.type = 'category';
     this.pagenumber = 0;
@@ -62,6 +64,7 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   getcourses(category) {
+    this.loader = true;
     this.pagenumber = 0;
     category.type = this.type;
     category._id = category.category_id ? category.category_id : category.sub_category_id;
@@ -69,6 +72,7 @@ export class ViewAllCoursesComponent implements OnInit {
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.allcourses = result.data.get_course_by_subcategory.message;
       // this.allcourses = result.data.get_a
+      this.loader = false;
     });
   }
 
