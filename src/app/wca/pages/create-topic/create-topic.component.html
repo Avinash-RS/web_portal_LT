@@ -1,5 +1,3 @@
-
-
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
@@ -59,7 +57,7 @@
                </span>
              </div>
      <div class="colView" >
-        <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+        <input style="display: none;" [id]="'fileInput3'+i" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
         <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span> 
           <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
           <span class="padTop1 showCon" *ngIf="!j?.value?.topicimages[0]" > <small>content is empty Double Click to edit</small></span>
@@ -97,15 +95,9 @@
         <div *ngIf="queryData?.template_details" class="dspFlx">
             <button class="backgroundcol2"  (click)="addTopicFrom($event,'draft')"   type="button">Save as a draft</button>
            <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')" type="button">Create</button></span>
-            <button class="backgroundcol1" [routerLink]="['/Wca']"  type="button" >Cancel</button>
+            <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']"  type="button" >Cancel</button>
 
             </div>
     </div>
 </form>
 </span>
-
-
-
-
-
-
