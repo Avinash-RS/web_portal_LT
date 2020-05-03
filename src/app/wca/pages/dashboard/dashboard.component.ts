@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
       this.breakpoint = 1;
     else if (window.innerWidth >= 480 && window.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
+    // else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
     else
       this.breakpoint = 4;
   }
@@ -72,8 +72,8 @@ export class DashboardComponent implements OnInit {
       this.breakpoint = 1;
     else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768)
       this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
-      this.breakpoint = 3;
+    // else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
+    //   this.breakpoint = 3;
     else
       this.breakpoint = 4;
   }
