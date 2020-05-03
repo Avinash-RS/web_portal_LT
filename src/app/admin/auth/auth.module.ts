@@ -21,6 +21,7 @@ import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -70,6 +71,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatTreeModule,
         MatSlideToggleModule,
         InfiniteScrollModule,
+        NgxPaginationModule
         // WcaModule
        
 
