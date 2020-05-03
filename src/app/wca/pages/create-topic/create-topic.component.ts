@@ -29,14 +29,14 @@ export class CreateTopicComponent implements OnInit {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
-    PPT: /(\.ppt)$/i,
+    PPT: /(\.ppt|\.pptx)$/i,
   }
 
   fileValidations1 = {
     Image: "(.jpg .jpeg .png) are Allowed !!!",
     PDF: "(.pdf) are Allowed !!!",
     Word: "(.doc .docx) are Allowed !!!",
-    PPT: "are Allowed !!!",
+    PPT: "(.ppt .pptx) are Allowed !!!",
     Video: " are Allowed !!!",
     Audio: "are Allowed !!!",
     SCROM: " are Allowed !!!",
@@ -60,11 +60,14 @@ export class CreateTopicComponent implements OnInit {
 
 
   topicItem(mod_index,i): FormGroup {
+    console.log(this.courseArray,mod_index,i)
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array(this.courseArray && mod_index && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
-        this.topicImages()
-      ) : [],Validators.compose([Validators.required])),
+      topicimages: this.formBuilder.array(this.courseArray && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
+        {
+          console.log(data)
+          return this.topicImages()
+        }) : [],Validators.compose([Validators.required])),
       topicstatus:['true']
     });
   }
@@ -139,8 +142,7 @@ export class CreateTopicComponent implements OnInit {
 
 
   }
-  createForm(mod,mod_index=null) :FormGroup{
-
+  createForm(mod,mod_index=-1) :FormGroup{
     console.log(mod)
    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
@@ -288,11 +290,22 @@ if (item) {
             formData1.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData1).subscribe((data:any) => {
            console.log(data);
+           this.spinner.hide();
+           if(data && data.success) {
+            this.clearFormArray(formdata.get("topicimages") as FormArray)
+            console.log(data.message)
+            for (var m = 0; m < data.message.length; m++) {
+              let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+              if (!formdata.get('topicimages').get(String(m))) {
+                (formdata.get('topicimages') as FormArray).push(this.topicImages());
+              }
+              formdata.get('topicimages').get(String(m)).setValue(path);
+            }
+           }
+          
            },err => {
-
-           })
-
             this.spinner.hide();
+           })
           } else if (item.name === 'Word') {
             this.spinner.hide();
           } else if (item.name === 'Video') {
@@ -422,10 +435,14 @@ if (item) {
 
       }
     console.log(this.courseForm);
+
+    console.log("hai1")
   
     if(this.courseForm.valid) {
       this.spinner.show();
       this.submitted = false;
+
+      console.log("hai")
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
         console.log(data);

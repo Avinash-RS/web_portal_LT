@@ -1,0 +1,56 @@
+.Report-label{
+    padding:10px 0px 0px 10px
+}
+
+.Report-label label{
+    width: 200px;
+}
+.report-card{
+    margin-top: 15px;
+    padding-left: 30px;
+}
+
+.report-card span{
+    color: #0e3877
+}
+
+.report-icon{
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    font-size: 18px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 50%;
+    background: #0e3877;
+    color: white; 
+}
+
+.Report-label a {
+    color: #0e3877;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: black;
+    text-decoration: underline;
+}
+
+.report-table{
+    width: 95%
+}
+
+.icon-container{
+    display: inline-block;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.chart-container{
+    width: 280px;
+    height: 280px;
+}
+
+.report-chart{
+    margin-top: 10px;
+    width: 60%;
+    height: 40%;
+}

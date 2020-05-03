@@ -45,7 +45,8 @@ export class CoursepreviewComponent implements OnInit {
     } else {
       this.isshowPublish = false
     }
-
+    
+    this.loader.show();
     this.service.viewCurseByID(this.detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
@@ -92,6 +93,9 @@ export class CoursepreviewComponent implements OnInit {
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
+      this.loader.hide();
+    }, err => {
+      this.loader.hide();
     })
   }
 

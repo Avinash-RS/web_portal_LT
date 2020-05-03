@@ -1,4 +1,8 @@
 @import "variable";
+.coursebreadcrumb{
+    padding-top: 0px;
+
+}
 
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
@@ -12,19 +16,27 @@
     padding: 7px !important;
     color: $color-blue;
 }
+
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
-.coursebreadcrumb {
-    padding-top: 0px;
 
-    ol {
-        margin-bottom: 0 !important;
-        // background-color: #fff !important;
-    }
+// .coursebreadcrumb {
+//     padding-top: 0px;
+
+//     ol {
+//         margin-bottom: 0 !important;
+//         // background-color: #fff !important;
+//     }
+// }
+
+::ng-deep .mat-progress-spinner {
+    position: absolute !important;
+    top: 50% !important;
+    left: 45% !important;
 }
 
-.backgroundcol2{
+.backgroundcol2 {
     cursor: pointer;
     background-color: $color-blue !important;
     white-space: nowrap;
@@ -56,8 +68,8 @@
 }
 
 
-.bcgClrSync{
-    background-color:#e9ecef;
+.bcgClrSync {
+    background-color: #e9ecef;
 }
 
 // ::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
@@ -104,10 +116,10 @@
 //     width: 80%;
 // }
 
-// ::ng-deep .partner .owl-carousel .owl-stage-outer {
-//     width: 90%;
-//     margin-left: 5%;
-// }
+::ng-deep .partner .owl-carousel .owl-stage-outer {
+    width: 97%;
+    // margin-left: 5%;
+}
 
 // ::ng-deep .partner .owl-carousel.owl-drag .owl-item {
 //     text-align: -webkit-center;
@@ -115,30 +127,30 @@
 // }
 
 ::ng-deep .partner .owl-theme .owl-nav [class*='owl-'] {
-    color: wheat;
+    color: #343333;
     font-size: 30px !important;
-    background: rgb(46, 46, 46);
+    background: #eeeef1;
     display: inline-block;
     cursor: pointer !important;
     padding: 10px !important;
     border-radius: 50px !important;
     width: 40px;
     z-index: -1 !important;
-    opacity: 0.7;
+    // opacity: 0.7;
 }
 
 ::ng-deep .partner .owl-carousel .owl-nav .owl-prev {
     position: absolute;
-    top: 65px;
+    top: 94px;
     z-index: 1 !important;
-    left: -40px;
+    left: -18px;
 }
 
 ::ng-deep .partner .owl-carousel .owl-nav .owl-next {
     position: absolute;
-    top: 65px;
+    top: 94px;
     z-index: 1 !important;
-    right: -40px;
+    right: -18px;
 }
 
 // ::ng-deep .trending .owl-carousel {
@@ -318,10 +330,11 @@ h1 {
     text-align: center !important;
     margin-left: 86px;
 }
+
 .whatnewcard {
     text-align: center;
     margin-left: 1%;
-    margin-right: 1%; 
+    margin-right: 1%;
     border: hidden;
 
 }

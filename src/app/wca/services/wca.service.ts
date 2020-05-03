@@ -33,7 +33,10 @@ token:String;
    }
 
 
-  
+  getcourseDetails(courseID) { 
+    var headers = new HttpHeaders()
+            .set("Authorization","Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
+    return this.http.post(environment.createCourseApi + 'viewcourse',courseID,{headers}); }
 
   getPublishedCourse() {
     return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");

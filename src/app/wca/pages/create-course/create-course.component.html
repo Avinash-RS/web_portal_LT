@@ -37,7 +37,7 @@
                         <div class="row crs1 padBot20px">
                           <div class="col-md-3"><span style="font-weight: bold;">Course Details</span></div>
                           <div class="col-md-9" style="visibility:collapse;">
-                            <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
+                            <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
                           </div>
                         </div>
 
@@ -83,7 +83,7 @@
                         <div class="row crs1 pad18px">
                           <div class="col-md-3">Mode</div>
                           <div class="col-md-9 modeFlx">
-                            <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
+                            <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
                           </div>
                         </div>
 
@@ -101,8 +101,8 @@
                           <div class="col-md-9">                           
                              <span class="width88">
                             <mat-select [disabled]='showdeletedicon' formControlName="course_language" class="inputs2 inputmainWidth"
-                            placeholder="Select the Language" name="language">
-                            <mat-option [value] ="English" >English</mat-option>
+                            placeholder="Select the Language">
+                            <mat-option *ngFor="let m of languages" [value]="m" >{{m}}</mat-option>
                           </mat-select>
                              </span>
                             </div>

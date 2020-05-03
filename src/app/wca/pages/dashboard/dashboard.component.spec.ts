@@ -104,17 +104,17 @@ describe('DashboardComponent', () => {
 
   it('Check get created courses', () => {
     component.getCreatedCourses();
-    expect(component.createdCourses).toBe(dashboardData.createdCourse.Result);
+    expect(component.createdCourses).toBe(dashboardData.createdCourse.data.get_course_createdby_admin.message);
   })
 
   it('Check get published courses', () => {
-    component.getCreatedCourses();
-    expect(component.publishedCourses).toBe(dashboardData.publishedCourse.Result);
+    component.getPublishedCourses();
+    expect(component.publishedCourses).toBe(dashboardData.publishedCourse.data.get_course_published.message);
   })
 
   it('Check get draft courses', () => {
     component.getDraftCourses();
-    expect(component.draftCourses).toBe(dashboardData.draftCourse.Result);
+    expect(component.draftCourses).toBe(dashboardData.draftCourse.data.get_draft_course.message);
   })
 
 });

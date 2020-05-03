@@ -3,9 +3,15 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Admin/auth/Wca">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Course</li>
+    <li class="breadcrumb-item active" aria-current="page">{{course?.course_name}}</li>
   </ol>
 </nav>
 
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-12">
+   <h1 class="head1">{{course?.course_name}}</h1>
+  </div>
+</div>
 
 <div class="profile">
     <div class="wrap-reg"><br>
@@ -37,14 +43,13 @@
             <img class="image" src="{{course?.course_img_url}}">
           </div>
           <div class="info">
-            <div class="grid-item">
-              <b>Course Name</b>
-            </div>
-            <div class="grid-item" >
-              <button class="smallbtn" *ngIf="!isshowPublish" >
+            <div class="grid-item fadetext"><b>Course Name</b></div>
+            <!-- <div class="grid-item" > -->
+              <div class="grid-item">: {{course?.course_name}}</div>
+              <!-- <button class="smallbtn" *ngIf="!isshowPublish" >
                Published
-              </button>
-            </div>
+              </button> -->
+            <!-- </div> -->
             <div class="grid-item fadetext">Course ID</div>  
             <div class="grid-item">: {{course?.course_id}}</div>
             <div class="grid-item fadetext">Version number</div>
@@ -106,6 +111,7 @@
           </div>
         </div>
         <!-- Right side end -->
+          <div class="line"></div>
       </div>
       <br><br><br>
       <!-- line -->
@@ -122,7 +128,7 @@
           </div>
 
           <div class="col-md-4 col-sm-12 col-12" >
-              <span *ngFor="let author of course?.author_details" class="fadetext">  {{author.author_name}}</span>
+              <span *ngFor="let author of course?.author_details" class="fadetext">  {{author.author_name}} </span>
             </div>
       </div>
       <div class="row">
@@ -130,8 +136,8 @@
               <h3><b>Pre-Requisite</b></h3>
             </div>
   
-            <div class="col-md-4 col-sm-12 col-12">
-                <h3 class="fadetext">{{course?.pre_requisite}}</h3>
+            <div class="col-md-6 col-sm-12 col-12" >
+                <button *ngFor = "let preque of course?.pre_requisite" class="outlinebtn cent"> {{preque.name ? preque.name : 'none'}}</button>
               </div>
       </div>
 
@@ -208,7 +214,7 @@
         <div class="line"></div>
         <br>
         <div class="row">
-          <h1>Instrutor deatils</h1>
+          <h1>Instrutor details</h1>
         </div>
 
 
@@ -266,15 +272,16 @@
           </div>
             </div>
           </section>
-        <!-- </div> -->
+          
+       
+          <div style="text-align:center;">
+            <button class="btn1 success" name="collapse" >{{moduledetails?.length}} more section</button>
+          </div>
         
         <ng-template #previewDialog>
           <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
             <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close</mat-icon>
           </button>
-          <!-- <span class="f_size_18 color_blue float_right">
-            <i class="fa fa-times-circle-o fa-4x" aria-hidden="true" (click)="closedialogbox()"></i>
-          </span> -->
           <mat-dialog-content style="width: 80em;height: 600px;">
             <iframe style="width: 75em; height: 420px; border:none" src="../../../../assets/Scaffolding/index_lms.html" ></iframe> 
           </mat-dialog-content>
