@@ -21,6 +21,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReportManagementComponent } from './report-management/report-management.component';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ReportManagementComponent } from './report-management/report-management
         MatListModule,
         MatChipsModule,
         AdminCoreModule,
-        RouterModule
+        RouterModule,
+        NgxPaginationModule
          ],
     declarations: [   
     AddUserComponent, ReportManagementComponent, ],
