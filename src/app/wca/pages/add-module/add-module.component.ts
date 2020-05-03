@@ -151,9 +151,9 @@ export class AddModuleComponent implements OnInit {
       course_id : this.routedCourseDetails.courseId
     }
     this.apiService.getcourseDetails(obj).subscribe((data:any) => {
-    this.courseDetails = [];
-    this.courseDetails = data;
-    console.log(this.courseDetails);
+    // this.courseDetails = [];
+    // this.courseDetails = data;
+    // console.log(this.courseDetails);
     this.spinner.hide();
     }, err => {
       this.spinner.hide();
