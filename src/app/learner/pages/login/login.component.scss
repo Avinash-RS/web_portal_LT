@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 mat-card {
     width: 22%;
@@ -69,4 +69,8 @@ mat-card-title {
     position: relative;
     z-index: 2;
     color: black;
+}
+
+.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
+    color: #d2d1d1;
 }

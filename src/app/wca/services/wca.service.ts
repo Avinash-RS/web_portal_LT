@@ -33,7 +33,10 @@ token:String;
    }
 
 
-  
+  getcourseDetails(courseID) { 
+    var headers = new HttpHeaders()
+            .set("Authorization","Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
+    return this.http.post(environment.createCourseApi + 'viewcourse',courseID,{headers}); }
 
   getPublishedCourse() {
     return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");
@@ -102,7 +105,7 @@ token:String;
 
   getCourseDetails(id) {return this.http.get(environment.wcaapiurl +  'api/courses/getscrommodules?courseid='+id); }
 
-  excelUpload(excel) {console.log("hiiiiiiiii"); return this.http.post(this.url,excel);}
+  excelUpload(excel) {return this.http.post(environment.apiUrl + 'wca/uploaddocument',excel);}
 
 
   handleKeydown(event) {

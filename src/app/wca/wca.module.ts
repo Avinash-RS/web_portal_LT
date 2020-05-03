@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'wca', component: WcaComponent,  },
   { path: 'addcourse', component: CreateCourseComponent,  },
   { path: 'viewmodule', component: ViewModuleComponent,  },
-  { path: 'viewmodule', component: CreateModuleComponent,  },
+  { path: 'createmodule', component: CreateModuleComponent,  },
   { path: 'addtemplate', component: CreateTemplateComponent,},
   { path: 'choosetemplate', component: ChooseTemplateComponent,},
   { path: 'addtopic', component: CreateTopicComponent,},

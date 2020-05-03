@@ -759,27 +759,32 @@ input.variation+label {
 
 button.active {
   color: green;
- }
- .icon_fnt{
+}
+
+.icon_fnt {
   font-size: 22px;
   color: #1f3777;
- }
- .icon_clr{
+}
+
+.icon_clr {
   color: #1f3777;
 
 
- }
- .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle
- {
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
   background-color: #1f3777 !important;
   border-radius: 7px;
   padding: 12px;
 
- }
- .containerShadow{
-   padding: 20px;
-   -webkit-box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.09);
-   -moz-box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.09);
-   box-shadow: 3px 3px 24px 13px rgba(0,0,0,0.09);
+}
+
+.containerShadow {
+  padding: 20px;
+  -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+  -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+  box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
   margin-top: 20px;
- }
+}

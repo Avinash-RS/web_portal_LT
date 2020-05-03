@@ -37,6 +37,8 @@ export class CoursepreviewComponent implements OnInit {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
+
+    console.log(this.detail,'course_id')
     this.courseType = localStorage.getItem('courseType')
     if (this.courseType === "create") {
       this.isshowPublish = true
@@ -44,7 +46,7 @@ export class CoursepreviewComponent implements OnInit {
       this.isshowPublish = false
     }
 
-    this.service.viewCurseByID(1).subscribe((viewCourse: any) => {
+    this.service.viewCurseByID(this.detail.id).subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message[0];
         console.log(this.course, 'course')
@@ -79,7 +81,7 @@ export class CoursepreviewComponent implements OnInit {
     this.clicked = i
   }
   getModuleData() {
-    this.learnerservice.getModuleData(1).subscribe(data => {
+    this.learnerservice.getModuleData(this.detail.id).subscribe(data => {
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
 
@@ -90,9 +92,17 @@ export class CoursepreviewComponent implements OnInit {
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
       //    this.content = this.content.getModuleData.data[0]
       // }   
+      this.loader.hide();
+    }, err => {
+      this.loader.hide();
     })
   }
 
+  editModules(){
+    this.route.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, 
+      courseImage: this.course.course_img_url,courseName: this.course.course_name
+    }]); 
+  }
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(templateRef)
     this.dialog.open(templateRef);
@@ -102,4 +112,29 @@ export class CoursepreviewComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
 
   }
+
+  downloadAll(urls) {
+    //  console.log(urls)
+    //  var arr: any = [];
+    //  debugger
+    //  urls.forEach(element => {
+    //    console.log(element.path)
+    //    arr.push(element.path);
+ 
+    //   });
+    //    var link = document.createElement('a');
+    //    link.setAttribute('download', null);
+    //    link.style.display = 'none';
+    //    document.body.appendChild(link);
+     
+    //    for (var i = 0; i < arr.path.lenth; i++) {
+         
+    //      link.setAttribute('href', arr[i]);
+    //      console.log(arr[i],'arr[i]')
+    //      link.click();
+    //    }
+    //    document.body.removeChild(link); 
+    
+
+}
 }

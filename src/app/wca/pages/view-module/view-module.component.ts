@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { RouterLink } from '@angular/router';
 import { Router, ActivatedRoute } from '@angular/router';
+import { WcaService } from '../../services/wca.service';
 
 
 @Component({
@@ -11,10 +12,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ViewModuleComponent implements OnInit {
   queryData:any;
-
+  courseDetails:any;
   constructor(
     private router: Router,
-    public route:ActivatedRoute
+    public route:ActivatedRoute,
+    private wcaService: WcaService,
+
     ) { }
 
   ngOnInit() {

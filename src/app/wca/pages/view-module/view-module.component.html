@@ -19,13 +19,13 @@
       
         <div class="col-md-12">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
                    
                         <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                             
                         </mat-panel-title>
                         <mat-card style="text-align: center;">
-                            <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="1.70:2">
+                            <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
     
                               <div class="row">
                           <div class="col-md-2">   <img class="img" [src]="queryData?.image ? queryData?.image : '../../../../assets/images/image_upload.svg'">

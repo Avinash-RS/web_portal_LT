@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
@@ -20,10 +20,12 @@
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        // background-color: #fff !important;
     }
 }
-
+.bcgClrSync{
+    background-color:#e9ecef;
+}
 .backgroundcol2{
     cursor: pointer;
     background-color: #bac9f1 !important;
@@ -66,7 +68,7 @@ mat-icon {
 }
 
 
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 .mat-form-field+.mat-form-field {
     margin-left: 8px;

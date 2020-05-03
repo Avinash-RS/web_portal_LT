@@ -191,14 +191,16 @@ export class CreateCourseComponent implements OnInit {
     console.log(this.courseForm.valid);
     console.log(this.courseForm);
 
-
+    const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));
+    console.log(userDetails);
+    console.log(localStorage.getItem('role'))
       this.submitted = true;
 
       // dummy data
       this.courseForm.value.course_mode = 'self-placed';
-      this.courseForm.value.user_role = 'Admin';
-      this.courseForm.value.user_id = '0001';
-      this.courseForm.value.user_name = 'Sathish';
+      this.courseForm.value.user_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
+      this.courseForm.value.user_id = userDetails.user_id ? userDetails.user_id : '';
+      this.courseForm.value.user_name = userDetails.username ? userDetails.username : '';
       this.courseForm.value.version = '';
       this.courseForm.value.location = '';
       this.courseForm.value.course_start_datetime = null;
@@ -236,7 +238,7 @@ export class CreateCourseComponent implements OnInit {
       this.courseForm.value.category_id = [];
       this.courseForm.value.created_by = '';
       this.courseForm.value.updated_by = '';
-      this.courseForm.value.admin_id = '';
+      this.courseForm.value.admin_id = userDetails.user_id ? userDetails.user_id : '';
       this.courseForm.value.is_published = null;
       this.courseForm.value.learner_count = null;
       this.courseForm.value.is_active = 0;
@@ -261,7 +263,7 @@ export class CreateCourseComponent implements OnInit {
       }
       console.log(this.courseForm.value);
 
-    if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
+      if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
       this.spinner.show();
       this.submitted = false;
       console.log(this.courseForm.value);
@@ -271,7 +273,7 @@ export class CreateCourseComponent implements OnInit {
         if (data && data.course_id) {
          this.toast.success('Course Created Successfully !!!');
          console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
-         this.router.navigate(['../Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
+         this.router.navigate(['/Admin/auth//Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
         }
       }, err => {
         this.spinner.hide();

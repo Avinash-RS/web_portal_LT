@@ -1089,7 +1089,7 @@ export class ProfileComponent implements OnInit {
   spicalcharacter: boolean;
   selectfile: File;
   showotp: boolean;
-  isenable: boolean;
+  isenable: boolean = true;
   timeLeft: number = 120;
   resendtimeLeft: number = 120;
   interval;
@@ -1114,7 +1114,8 @@ export class ProfileComponent implements OnInit {
   levelCode: any;
   minutes: number;
   seconds: number;
-
+  startYear: number;
+  endYear: number;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1246,15 +1247,17 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-  yearOfpassing() {
+  yearOfpassing(index) {
+    this.startYear = moment().year() - 60;
+    this.endYear = moment().year() + 3;
+ 
     this.profileForm.value.qualification.forEach(element => {
-      if (element.year_of_passing > moment().year()) {
+      if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
         this.alert.openAlert('Invalid year', null);
-        // this.cannotEdit = false;
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators([Validators.required, Validators.minLength(4)]);
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').updateValueAndValidity();
       }
-      // else{
-      //   this.cannotEdit = true;
-      // }
     });
   }
   updateProfile() {

@@ -1,4 +1,4 @@
-@import "../../../../assets/variable.scss";
+@import "variable";
 
 .mat-expansion-panel:not([class*="mat-elevation-z"]) {
     box-shadow: none;
@@ -20,7 +20,7 @@
 
     ol {
         margin-bottom: 0 !important;
-        background-color: #fff !important;
+        // background-color: #fff !important;
     }
 }
 

@@ -29,14 +29,14 @@ export class CreateTopicComponent implements OnInit {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
-    PPT: /(\.ppt)$/i,
+    PPT: /(\.ppt|\.pptx)$/i,
   }
 
   fileValidations1 = {
     Image: "(.jpg .jpeg .png) are Allowed !!!",
     PDF: "(.pdf) are Allowed !!!",
     Word: "(.doc .docx) are Allowed !!!",
-    PPT: "are Allowed !!!",
+    PPT: "(.ppt .pptx) are Allowed !!!",
     Video: " are Allowed !!!",
     Audio: "are Allowed !!!",
     SCROM: " are Allowed !!!",
@@ -285,14 +285,25 @@ if (item) {
             })
           } else if (item.name === 'PPT') {
             const formData1 = new FormData();
-            formData1.append('ppt', this.imageView);
+            formData1.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData1).subscribe((data:any) => {
            console.log(data);
+           this.spinner.hide();
+           if(data && data.success) {
+            this.clearFormArray(formdata.get("topicimages") as FormArray)
+            console.log(data.message)
+            for (var m = 0; m < data.message.length; m++) {
+              let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+              if (!formdata.get('topicimages').get(String(m))) {
+                (formdata.get('topicimages') as FormArray).push(this.topicImages());
+              }
+              formdata.get('topicimages').get(String(m)).setValue(path);
+            }
+           }
+          
            },err => {
-
-           })
-
             this.spinner.hide();
+           })
           } else if (item.name === 'Word') {
             this.spinner.hide();
           } else if (item.name === 'Video') {

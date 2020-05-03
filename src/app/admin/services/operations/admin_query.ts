@@ -185,7 +185,7 @@ export const get_all_learner_detail = gql`
 
 
 
-  export const getnotificationreports = gql`
+export const getnotificationreports = gql`
   query getnotificationreports($admin_id: String!){
     getnotificationreports(admin_id: $admin_id) {
       success
@@ -277,7 +277,10 @@ query get_course_createdby_admin($admin_id: String!, $pagenumber: Int!){
       lowest_passing_grade
       mobile_available
       visible_to_staff_only
-      pre_requisite
+      pre_requisite{
+        name
+        image
+      }
       enrollment_start
       enrollment_end
       invitation_only
@@ -367,7 +370,10 @@ query get_course_published($admin_id: String!, $pagenumber: Int!){
       lowest_passing_grade
       mobile_available
       visible_to_staff_only
-      pre_requisite
+      pre_requisite{
+        name
+        image
+      }
       enrollment_start
       enrollment_end
       invitation_only
@@ -457,7 +463,10 @@ query get_draft_course($admin_id: String!, $pagenumber: Int!){
       lowest_passing_grade
       mobile_available
       visible_to_staff_only
-      pre_requisite
+      pre_requisite{
+        name
+        image
+      }
       enrollment_start
       enrollment_end
       invitation_only
