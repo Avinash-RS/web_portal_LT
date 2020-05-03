@@ -29,7 +29,7 @@ export class CreateCourseComponent implements OnInit {
   AllTakeawayDetails = [];
   AllPrerequisitDetails = [];
   AllCertifyDetails = [];
-
+  languages=['English']
 
 
   createItem(): FormGroup {
@@ -273,7 +273,7 @@ export class CreateCourseComponent implements OnInit {
         if (data && data.course_id) {
          this.toast.success('Course Created Successfully !!!');
          console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
-         this.router.navigate(['/Admin/auth//Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
+         this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
         }
       }, err => {
         this.spinner.hide();

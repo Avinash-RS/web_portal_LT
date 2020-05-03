@@ -135,11 +135,19 @@ export class AddModuleComponent implements OnInit {
     console.log(index);
     console.log(this.courseDetails);
     this.apiService.bSubject1.next({index:index,courseDetails:this.courseDetails});
+<<<<<<< HEAD
       this.router.navigate(['./Admin/auth/Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
   }
 
   navChooseTemp() {
     this.router.navigate(['./Admin/auth/Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+=======
+      this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+  }
+
+  navChooseTemp() {
+    this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+>>>>>>> 144a129a13b74810ef8ff17b31d050a7cfc01af4
   
   }
 
