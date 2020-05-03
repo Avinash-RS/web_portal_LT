@@ -46,7 +46,7 @@ export class UserManagementComponent implements OnInit {
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
-    this.service.getAllUsers(pagenumber, 1)
+    this.service.getAllUsers(pagenumber, 1,'undefined')
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
