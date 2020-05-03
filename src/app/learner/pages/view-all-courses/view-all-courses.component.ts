@@ -17,6 +17,7 @@ export class ViewAllCoursesComponent implements OnInit {
   showdesc = true;
   pagenumber = 0;
   displayMode: number =1;
+  paginationpgno: any;
   constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) { }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class ViewAllCoursesComponent implements OnInit {
   loadcategoryandcourses() {
     this.type = 'category';
     this.pagenumber = 0;
+    this.paginationpgno = 0;
     this.getcoursecategories();
     this.getallcourses();
   }
@@ -92,8 +94,9 @@ export class ViewAllCoursesComponent implements OnInit {
   /**
    * Determines whether scroll down on
    */
-  next(event) {
+  onpagination(event) {
     console.log(event);
+    this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
     console.log(this.userDetailes);
     this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
