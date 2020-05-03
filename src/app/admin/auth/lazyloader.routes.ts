@@ -27,7 +27,6 @@ export const appRoutes: Routes = [{
             loadChildren: '../../wca/wca.module#WcaModule',
             data : {title:'Web Content Authoring'}
           },
-        //   { path: 'Wca', component: WcaComponent,  data : {title:'Web Content Authoring Dashboard'}},
           
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard]  },

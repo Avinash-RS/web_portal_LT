@@ -22,12 +22,14 @@ export class AdminCoursesComponent implements OnInit {
   showRating: boolean;
   showPrice: boolean;
   pagenumber: any;
+  paginationpgno: any;
   constructor(public route: Router, private service: AdminServicesService) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type) || 'published';
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     
     this.pagenumber = 0;
+    this.paginationpgno = 0;
     if (this.type == 'created') {
       this.loader = true;
       this.service.getAllCourseCreated(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {
@@ -107,6 +109,7 @@ export class AdminCoursesComponent implements OnInit {
 
 onpagination(event) {
   this.pagenumber = this.pagenumber + 1;
+  this.paginationpgno = event
   console.log("called");
   if (this.type == 'created') {
     this.loader = true;
