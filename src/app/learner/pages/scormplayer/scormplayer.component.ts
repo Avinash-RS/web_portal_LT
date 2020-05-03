@@ -57,7 +57,7 @@ export class ScormplayerComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    
     this.getModuleData();
   }
   getcontent() {
@@ -71,7 +71,8 @@ export class ScormplayerComponent implements OnInit {
       // if(data.data['getmoduleData']['success'] == true){
 
         this.content = data.data['getmoduleData']['data'][0]
-        this.modulength =  this.content['coursedetails'].length
+        this.modulength =  this.content['coursedetails'].length;
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
       // }
      
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
