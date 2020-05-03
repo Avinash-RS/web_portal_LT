@@ -17,7 +17,6 @@ export class AddModuleComponent implements OnInit {
   courseDetails: any;
   routedCourseDetails: any;
   noOfModules: number = 0;
-
   constructor(    public spinner: NgxSpinnerService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
@@ -48,7 +47,6 @@ export class AddModuleComponent implements OnInit {
     if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
     }
-    this.startup1();
   }
 
 
@@ -143,21 +141,8 @@ export class AddModuleComponent implements OnInit {
   
   }
 
-
-  startup1() {
-  if(this.routedCourseDetails && this.routedCourseDetails.courseId) {
-    this.spinner.show();
-    const obj = {
-      course_id : this.routedCourseDetails.courseId
-    }
-    this.apiService.getcourseDetails(obj).subscribe((data:any) => {
-    // this.courseDetails = [];
-    // this.courseDetails = data;
-    // console.log(this.courseDetails);
-    this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-    })
-  }
+  crsDetails()
+  {
+    this.router.navigate(['/Admin/auth/Wca/addcourse'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid}});
   }
  }
