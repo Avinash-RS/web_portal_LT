@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
 
-      <li class="breadcrumb-item" aria-current="page">Course created by me</li>
+      <li class="breadcrumb-item" aria-current="page">Course drafted by me</li>
 
       <li class="breadcrumb-item active" aria-current="page">Course name</li>
     </ol>
@@ -21,7 +21,7 @@
             <div class="course-name">{{routedCourseDetails?.courseName}}</div>
             <div class="course-name">{{noOfModules + ' Modules'}}</div>
             <div style="text-align: center;">
-              <button mat-flat-button color="primary" class="submit-btn">Course Details</button>
+              <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
               <button mat-stroked-button color="primary" class="reference-btn">Reference file</button>
             </div>
           </div>
@@ -78,7 +78,7 @@
 
       <mat-card-footer>
         <div>
-          <button type="button" mat-flat-button color="primary" (click)="onCreate()" class="continue-btn">Create</button>
+          <button type="button" mat-flat-button color="primary" (click)="onCreate()" class="continue-btn">Save</button>
         </div>
       </mat-card-footer>
 

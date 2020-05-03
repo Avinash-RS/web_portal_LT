@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { UserManagementComponent } from '../pages/user-management/user-management.component';
+import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
 import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -69,6 +71,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatTreeModule,
         MatSlideToggleModule,
         InfiniteScrollModule,
+        NgxPaginationModule
         // WcaModule
        
 
@@ -79,7 +82,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [AuthComponent,UserManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
+    declarations: [AuthComponent,UserManagementComponent,ReportManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

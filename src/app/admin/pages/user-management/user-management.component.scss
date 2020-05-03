@@ -93,18 +93,21 @@ table {
 }
 
 .mat-table {
-  overflow: hidden;
+  overflow: auto;
   max-height: 650px;
-}
-
-.mobile-label {
-  display: none;
 }
 
 .mat-cell,
 .mat-header-cell {
   padding-left: 5px;
   padding-right: 5px;
+  word-break: break-all;
+}
+
+.search {
+  .mat-form-field {
+    width: 25% !important;
+  }
 }
 
 .mat-cell:first-of-type,
@@ -112,13 +115,122 @@ table {
   padding-left: 15px !important;
 }
 
-@media screen and (min-width:765px) and (max-width:1240px) {
+@media screen and (min-width:765px) {
   .mat-cell {
     flex-wrap: wrap;
   }
+
+  .mobile-label,
+  .mobile-data {
+    display: none;
+  }
+
+  .mat-column-email {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-select {
+    flex: 0 0 75px !important;
+  }
+
+  .mat-column-name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-emailid {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-user_id {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 10% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-active {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 8% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-actions {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 }
 
-@media screen and (max-width:765px) {
+@media screen and (min-width: 320px) and (max-width:765px) {
+  /deep/ .mat-paginator-container {
+    min-height: 120px !important;
+  }
+
   .profile {
     justify-content: space-between;
   }
@@ -132,22 +244,61 @@ table {
   }
 
   .mobile-label {
-    width: 100px;
+    width: 100px !important;
+    word-break: break-all;
     display: inline-block;
     font-weight: bold;
   }
 
-  mat-cell:first-of-type {
-    padding-left: 0px;
+  .desktop-data {
+    display: none;
+  }
+
+  .mobile-data {
+    width: 58%; 
+    display: inline-block;
+    font-weight: normal;
   }
 
   .mat-header-row {
     display: none;
   }
 
+  mat-cell:first-of-type {
+    padding-left: 0px;
+  }
+
   .mat-row {
     flex-direction: column;
     align-items: start;
     padding: 8px 24px;
+  }
+
+  .mat-column-email {
+    width: 100% !important;
+  }
+
+  .mat-column-select {
+    flex: 0 0 75px !important;
+  }
+
+  .mat-column-name {
+    width: 100% !important;
+  }
+
+  .mat-column-emailid {
+    width: 100% !important;
+  }
+
+  .mat-column-user_id {
+    width: 100% !important;
+  }
+
+  .mat-column-active {
+    width: 100% !important;
+  }
+
+  .mat-column-actions {
+    width: 100% !important;
   }
 }

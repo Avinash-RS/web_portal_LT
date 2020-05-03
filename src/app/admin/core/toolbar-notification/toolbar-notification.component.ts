@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { AdminServicesService } from '@admin/services/admin-services.service';
 })
 export class ToolbarNotificationComponent implements OnInit {
 	cssPrefix = 'toolbar-notification';
-  	isOpen: boolean = false;
+    isOpen: boolean = false;
+    read : boolean = false;
   	@Input() notifications = [];
 
     // @HostListener('document:click', ['$event', '$event.target'])
@@ -23,7 +25,7 @@ export class ToolbarNotificationComponent implements OnInit {
     //     }
     // }
   	
-  	constructor(private elementRef: ElementRef,private adminService: AdminServicesService) { }
+  	constructor(private elementRef: ElementRef,private adminService: AdminServicesService,private router:Router) { }
 
   	ngOnInit() {
     }
@@ -42,5 +44,10 @@ export class ToolbarNotificationComponent implements OnInit {
             this.notifications = this.notifications.filter((data) => data.report_id !== reportId)
        }
       })
+    }
+
+    moveToReport(value){
+      this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
+      this.isOpen = false;      
     }
 }

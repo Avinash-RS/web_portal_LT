@@ -70,16 +70,18 @@ export class UserManagementComponent implements OnInit {
     this.router.navigate(['Admin/auth/addUser']);
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator
+  // }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.service.getUserSession(element._id).subscribe((track: any) => {
-      this.trackDetails = track.data.get_user_session_detail.message[0]
+      this.trackDetails = track.data && track.data.get_user_session_detail &&
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
       this.service.getLearnerDetail(element.user_id)
         .subscribe((result: any) => {
-          this.profileDetails = result.data.get_all_learner_detail.message[0];
+          this.profileDetails = result.data && result.data.get_all_learner_detail &&
+            result.data.get_all_learner_detail.message && result.data.get_all_learner_detail.message[0];
           this.dialog.open(templateRef);
         })
     })
