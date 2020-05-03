@@ -20,6 +20,8 @@ import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ReportManagementComponent } from './report-management/report-management.component';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -40,10 +42,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         MatListModule,
         MatChipsModule,
         AdminCoreModule,
-        RouterModule
+        RouterModule,
+        NgxPaginationModule
          ],
     declarations: [   
-    AddUserComponent, ],
+    AddUserComponent, ReportManagementComponent, ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

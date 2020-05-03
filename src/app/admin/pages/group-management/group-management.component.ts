@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
@@ -38,7 +38,7 @@ export class GroupManagementComponent implements OnInit {
   loader: boolean = false;
   ELEMENT_DATA: PeriodicElement[] = [];
   resultsLength: number = null;
-  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active'];
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   /** tree source stuff */
@@ -48,6 +48,7 @@ export class GroupManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
+  selectedArray: any = [];
   constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
@@ -142,36 +143,36 @@ export class GroupManagementComponent implements OnInit {
         str = this.currentpath.hierarchy_id.split('h');
         hierarchy = 'h' + (Number(str[1]) + Number(1));
       }
-      if (Number(str[1]) >= 7 ){
+      if (Number(str[1]) >= 7) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
       } else {
-      const data = {
-        group_name: form.value.group_name, group_type: 'new',
-        parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
-        hierarchy_id: this.currentpath ? hierarchy : 'h1',
-        admin_id: this.adminDetails._id
-      };
-      this.adminservice.creategroup(data).subscribe((result: any) => {
-        if (result.data.createusergroup.success === true) {
-          this.reset();
-          this.alert.openAlert('Success !', 'Group Created Successfully');
+        const data = {
+          group_name: form.value.group_name, group_type: 'new',
+          parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
+          hierarchy_id: this.currentpath ? hierarchy : 'h1',
+          admin_id: this.adminDetails._id
+        };
+        this.adminservice.creategroup(data).subscribe((result: any) => {
+          if (result.data.createusergroup.success === true) {
+            this.reset();
+            this.alert.openAlert('Success !', 'Group Created Successfully');
 
-          form.reset();
-          this.getgroups();
-        } else {
-          this.alert.openAlert(result.data.createusergroup.message, null);
-        }
-      });
+            form.reset();
+            this.getgroups();
+          } else {
+            this.alert.openAlert(result.data.createusergroup.message, null);
+          }
+        });
+      }
     }
   }
-}
 
-toggle(event: MatSlideToggleChange) {
-  console.log(event.checked);
-  this.toggleevent = event.checked;
-  this.currentpath.is_active = !event.checked;
-  console.log(this.currentpath.is_active);
-}
+  toggle(event: MatSlideToggleChange) {
+    console.log(event.checked);
+    this.toggleevent = event.checked;
+    this.currentpath.is_active = !event.checked;
+    console.log(this.currentpath.is_active);
+  }
 
   changegroupstatus() {
     console.log('current', !this.currentpath.is_active)
@@ -181,7 +182,7 @@ toggle(event: MatSlideToggleChange) {
     const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
       title: 'Are you sure want to ' + status +
-      ' the group  ' + this.currentpath.group_name + '?',
+        ' the group  ' + this.currentpath.group_name + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -189,7 +190,7 @@ toggle(event: MatSlideToggleChange) {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        this.adminservice.changegroupstatus(this.currentpath.group_id , value).subscribe(( result : any) => {
+        this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result: any) => {
           console.log(result);
           if (result.data.groupstatus.success === true) {
             this.editstatus = true;
@@ -198,11 +199,11 @@ toggle(event: MatSlideToggleChange) {
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(
-               status,
+              status,
               'Group  has been ' + status + 'd',
               'success'
             );
-           } else {
+          } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -214,21 +215,21 @@ toggle(event: MatSlideToggleChange) {
     });
     // this.checked ="Deactivate"
   }
-  edit(data: boolean, group_name){
+  edit(data: boolean, group_name) {
     console.log('---' + group_name)
-    if (data){
+    if (data) {
       this.editstatus = false;
-      
+
       this.editgroupname = group_name;
-     
-    }else{
+
+    } else {
       this.editstatus = true;
       this.editgroupname = "";
 
     }
 
   }
-  reset(){
+  reset() {
     this.editstatus = true;
     this.editgroupname = '';
     this.disabled = true;
@@ -240,19 +241,81 @@ toggle(event: MatSlideToggleChange) {
   getAllUser(pagenumber) {
     this.loader = true;
     this.resultsLength = null;
-    if (pagenumber === 0) {
-    this.ELEMENT_DATA = [];
-    }
+    if (pagenumber == 0)
+      this.ELEMENT_DATA = []
     this.adminservice.getAllUsers(pagenumber, 1)
       .subscribe((result: any) => {
-        Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
-        this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-        this.selection = new SelectionModel(true, []);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.resultsLength = result.data.get_all_user.learner_count;
-        this.loader = false;
+        if (result.data && result.data.get_all_user) {
+          Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
+          this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+          this.selection = new SelectionModel(true, []);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.resultsLength = result.data.get_all_user.learner_count;
+          this.loader = false;
+        } else
+          this.alert.openAlert("Please try again later", null)
+
       });
+  }
+
+  checkboxLabel(row?) {
+    if (row.isChecked == undefined || row.isChecked == false) {
+      row.isChecked = true;
+      this.selectedArray.push(row);
+    }
+    else {
+      row.isChecked = !row.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== row);
+    }
+  }
+
+  deActivate(status, element?) {
+    let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count :
+        'Are you sure you want to activate ' + count).then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.adminservice.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
+    }
+  }
+
+  block(status, element?) {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count :
+        'Are you sure you want to un-block ' + count).then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.adminservice.blockUser(result, status == 'Block' ? true : false)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
+    }
   }
   next(e) {
     this.getAllUser(e.pageIndex);

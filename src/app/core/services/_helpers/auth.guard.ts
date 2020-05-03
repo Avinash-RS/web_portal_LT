@@ -22,8 +22,17 @@ export class AuthGuard implements CanActivate {
     //  console.log('role-----',role)
     //for learner ------> 1
     // debugger
-    if (userDetailes != null && role == 'learner' && state.url != '/Admin/auth/userManagement' &&
-      state.url != '/Admin/auth/addUser' && state.url != "/Admin/auth/listCourses") {
+    if (userDetailes != null && role == 'learner' &&
+      (state.url != '/Admin/auth/userManagement' && state.url != '/Admin/auth/addUser' &&
+        state.url != "/Admin/auth/listCourses" && state.url != "/Admin/auth/viewReport" &&
+        state.url != "/Admin/auth/publishCourse" && state.url != "/Admin/auth/Wca" &&
+        state.url != "/Admin/auth/Wca/addcourse" && state.url != '/Admin/auth/Wca/wca' && state.url != '/Admin/auth/Wca/viewmodule' &&
+        state.url != "/Admin/auth/Wca/createmodule" && state.url != "/Admin/auth/Wca/addmodule" &&
+        state.url != "/Admin/auth/Wca/choosetemplate" && state.url != "/Admin/auth/Wca/previewcourse" &&
+        state.url != "/Admin/auth/Wca/rf" &&  state.url != "/Admin/auth/Wca/addtemplate" && 
+        state.url != "/Admin/auth/Wca/addtopic" &&        state.url != "/Admin/auth/Wca/ct" && 
+        state.url != "/Admin/auth/Wca/addfile" &&
+        state.url != "/Admin/auth/Wca/mycourse")) {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg 
@@ -58,7 +67,14 @@ export class AuthGuard implements CanActivate {
     //if admin logged in
     if (role == 'admin' && adminDetails) {
       if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser'
-        || state.url != "/Admin/auth/listCourses")
+        || state.url == "/Admin/auth/listCourses" || state.url == "/Admin/auth/viewReport" || state.url == "/Admin/auth/publishCourse"
+        || state.url == "/Admin/auth/usergroup" || state.url == '/Admin/auth/Wca/wca' || state.url == '/Admin/auth/Wca/addcourse'
+        || state.url == '/Admin/auth/Wca/viewmodule' || state.url == '/Admin/auth/Wca/createmodule'
+        || state.url == '/Admin/auth/Wca/addtemplate' || state.url == '/Admin/auth/Wca/choosetemplate'
+        || state.url == '/Admin/auth/Wca/addtopic' || state.url == '/Admin/auth/Wca/rf'
+        || state.url == '/Admin/auth/Wca/addfile' || state.url == '/Admin/auth/Wca/addmodule'
+        || state.url == '/Admin/auth/Wca/mycourse' || state.url == '/Admin/auth/Wca/previewcourse'
+        || state.url == '/Admin/auth/Wca/ct')
         return true
     }
     else {

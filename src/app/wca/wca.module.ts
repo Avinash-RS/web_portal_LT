@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { ReactiveFormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BarRatingModule } from "ngx-bar-rating";
@@ -36,28 +36,28 @@ import { AddModuleComponent } from './pages/add-module/add-module.component';
 
 const routes: Routes = [
 
-  { path: '', component: DashboardComponent,  },
-  { path: 'wca', component: WcaComponent,  },
-  { path: 'addcourse', component: CreateCourseComponent,  },
-  { path: 'viewmodule', component: ViewModuleComponent,  },
-  { path: 'createmodule', component: CreateModuleComponent,  },
-  { path: 'addtemplate', component: CreateTemplateComponent,},
-  { path: 'choosetemplate', component: ChooseTemplateComponent,},
-  { path: 'addtopic', component: CreateTopicComponent,},
+  { path: '', component: DashboardComponent, },
+  { path: 'wca', component: WcaComponent, },
+  { path: 'addcourse', component: CreateCourseComponent, },
+  { path: 'viewmodule', component: ViewModuleComponent, },
+  { path: 'createmodule', component: CreateModuleComponent, },
+  { path: 'addtemplate', component: CreateTemplateComponent, },
+  { path: 'choosetemplate', component: ChooseTemplateComponent, },
+  { path: 'addtopic', component: CreateTopicComponent, },
 
-  { path: 'addfile', component: UploadFilesComponent,},
-  { path: 'mycourse', component: MycreatedCourseComponent,},
-  { path: 'ct', component: ChooseTemplateComponent,},
-  { path: 'rf', component: ReferenceFileComponent,},
-  {path:'addmodule',component:AddModuleComponent},
-  {path:'previewcourse',component:CoursepreviewComponent}
+  { path: 'addfile', component: UploadFilesComponent, },
+  { path: 'mycourse', component: MycreatedCourseComponent, },
+  { path: 'ct', component: ChooseTemplateComponent, },
+  { path: 'rf', component: ReferenceFileComponent, },
+  { path: 'addmodule', component: AddModuleComponent },
+  { path: 'previewcourse', component: CoursepreviewComponent }
 
 
- 
+
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent,WcaComponent,CreateCourseComponent,CreateModuleComponent,CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent,AddModuleComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

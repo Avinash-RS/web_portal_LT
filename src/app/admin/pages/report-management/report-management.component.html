@@ -1,0 +1,66 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Reports</li>
+  </ol>
+</nav>
+<div class="container">
+  <h1>Report Management</h1>
+  <mat-card class="report-card">
+    <div class="row">
+      <div class="col-md-6">
+          <h1 style="font-size: 16px;">Report</h1>
+          <div class="Report-label">
+              <label>Total number of leaners</label><span>{{total_count}}</span>
+          </div>
+          <div class="Report-label">
+              <label>Already exists</label><span>{{report_data.duplicate_count}}</span>
+          </div>
+          <div class="Report-label">
+              <label>Email format is incorrect</label><span>{{report_data.failure_count}}</span>
+          </div>
+          <div class="Report-label">
+              <label style="font-weight: bold">Successfully uploaded</label><span>{{report_data.success_count}}</span>
+              <div class="icon-container" style="" (click)="downloadDoc(report_data.report_url)">
+                  <mat-icon class="report-icon">get_app</mat-icon>
+                  <a>Download the report</a>
+              </div>
+          </div>
+          <mat-card class="report-chart mat-elevation-z8">
+            <label>Report chart</label>
+            <div class="chart-container">
+                <canvas id="canvas"></canvas>
+            </div>
+            
+          </mat-card>
+      </div>
+      <!-- <div class="col-md-7">
+          <div class="report-table mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="s_no">
+                  <mat-header-cell *matHeaderCellDef> S.No</mat-header-cell>
+                  <mat-cell *matCellDef="let reportValue">
+                    {{reportValue.sno}}
+                  </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="full_Name">
+                  <mat-header-cell *matHeaderCellDef> Full Name </mat-header-cell>
+                  <mat-cell *matCellDef="let reportValue">{{reportValue.name}}</mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="group_name">
+                  <mat-header-cell *matHeaderCellDef> Group Name</mat-header-cell>
+                  <mat-cell *matCellDef="let reportValue"> {{reportValue.group}}
+                  </mat-cell>
+                </ng-container>                                   
+                <mat-header-row *matHeaderRowDef="reportColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: reportColumns;">
+                </mat-row>
+              </mat-table>
+              <mat-paginator #paginator [pageSize]="pageSize"></mat-paginator>
+            </div>
+      </div> -->
+    </div>
+  </mat-card>
+</div>
