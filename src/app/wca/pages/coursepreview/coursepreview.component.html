@@ -87,7 +87,7 @@
           <div class="grid-item "><b>Language</b></div>
           <div class="grid-item fadetext">: {{course?.course_language}}</div>  
           <div class="grid-item "><b>Mode</b></div>
-          <div class="grid-item fadetext">: {{course?.course_mode}}</div>
+          <div class="grid-item fadetext">: {{course?.course_mode == 'self-placed' ? 'Self paced' : course?.course_mode }}</div>
           </div>
 
           <div class="enroll">
@@ -102,10 +102,8 @@
             </div>
 
             <div class="grid-item ">
-            <div class="partner_image">
-              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
-              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
-              <img src="../../../../assets/learner/8.jpg" width="15%" class="left">
+            <div class="partner_image" >
+              <img *ngFor="let coursePartner of course?.coursepartner_details" [src]=" coursePartner.image ?  coursePartner.image : '../../../../assets/learner/8.jpg'" width="15%" class="left">
           </div>
             </div>
           </div>
@@ -118,7 +116,7 @@
       <div class="line"></div>
       <br><br>
       <div class="row">
-        <h1>Deatils about Course</h1>
+        <h1>Details about the Course</h1>
       </div><br>
       
       <div class="row">
@@ -143,7 +141,7 @@
 
       <div class="row">
               <div class="col-md-4 col-sm-12 col-12">
-                <h3><b>Course descriptions</b></h3>
+                <h3><b>Course description</b></h3>
               </div>
     
               <div class="col-md-4 col-sm-12 col-12">
@@ -161,41 +159,17 @@
             </div>
 
             <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
-              <owl-carousel-o [options]="customOptions1" class="takeway">
-                  <ng-template carouselSlide [id]="1"><img height="500px" src="../../../../assets/learner/lens.jpg">
+              <owl-carousel-o [options]="customOptions1" class="takeway" >
+                  <ng-template  carouselSlide [id]="1">
+                    <img *ngFor="let img of course?.takeway_details[0].media" [src]="img.image ? img.image : '../../../../assets/learner/lens.jpg' " height="500px" >
                   </ng-template>
-                  <ng-template carouselSlide [id]="2"><img height="500px" src="../../../../assets/learner/lens.jpg">
-                  </ng-template>
-                  <ng-template carouselSlide [id]="3"><img height="500px" src="../../../../assets/learner/lens.jpg">
-                  </ng-template>
+           
               </owl-carousel-o>
           </div>
 
-          <ul *ngIf="clicked == 'text'">
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
+          <ul *ngIf="clicked == 'text'"  >
+            <li class="f_size_17" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">{{text.text}}</li>
+   
         </ul>
           </div>
      
@@ -216,18 +190,18 @@
         <div class="row">
           <h1>Instrutor details</h1>
         </div>
-
+        <br><br>
 
         <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3" >
           <mat-grid-tile *ngFor="let author of course?.author_details">
               <div class="row">
                 <div class="col-md-4 col-sm-12 col-12">
-                  <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
+                  <img class="image" [src]="author.author_img ? author.author_img : '../../../../assets/learner/avatar2.png'">
                 </div>
                 <div class="col-md-8 col-sm-12 col-12">
                   <div class="cardhead"><b>{{author.author_name}}</b></div><br>
                   <div style="margin-left: 5%;">
-                    <p >{{author.description}}</p>
+                    <p style="word-break: normal;" >{{author.description}}</p>
                   </div>
                 </div>
               </div>
@@ -239,7 +213,7 @@
 
         <div class="line"></div><br><br>
         <h1>Resources</h1>
-
+        <br><br>
         <!-- <div class="row"> -->
           <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
             <input type="checkbox" name="collapse" [id]="res?.modulename">
@@ -318,7 +292,7 @@
             <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close</mat-icon>
           </button>
           <mat-dialog-content style="width: 80em;height: 600px;">
-            <iframe style="width: 75em; height: 420px; border:none" src="../../../../assets/Scaffolding/index_lms.html" ></iframe> 
+            <iframe style="width: 75em; height: 420px; border:none" [src]="urlSafe" ></iframe> 
           </mat-dialog-content>
         </ng-template>
     </div>

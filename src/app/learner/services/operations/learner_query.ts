@@ -232,6 +232,7 @@ query getmoduleData($courseid:String!){
     data {
       courseid
       _id
+      url
       coursename
       coursefile
       coursestatus
@@ -245,6 +246,7 @@ query getmoduleData($courseid:String!){
           topicstatus
           topiccreated_on
           topicimages
+          url
           resourse{
             type
             files{
@@ -393,6 +395,7 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
   author_details{
   author_name
   description
+  image
   }
   }
   }
@@ -482,6 +485,7 @@ export const get_all_course_by_usergroup = gql`
     author_details{
     author_name
     description
+    image
     }
     }
     }

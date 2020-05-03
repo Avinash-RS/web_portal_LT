@@ -36,10 +36,9 @@ lowest_passing_grade
 mobile_available
 visible_to_staff_only
 pre_requisite{
-      name
-      image
-  }
-
+name
+image
+}
 enrollment_start
 enrollment_end
 invitation_only
@@ -83,10 +82,9 @@ lowest_passing_grade
 mobile_available
 visible_to_staff_only
 pre_requisite{
-      name
-      image
-  }
-
+name
+image
+}
 enrollment_start
 enrollment_end
 invitation_only
@@ -108,18 +106,6 @@ price
 what_will_you_learn
 course_category
 course_type
-  learner_count
-  course_mode
-  published_on
-  published_by
-  coursepartner_details{
-      course_partner_id
-  }
-  takeway_details{
-        name
-  description
-  image
-  }
 course_content_details{
 name
 type
@@ -151,6 +137,7 @@ file_url
 author_details{
 author_name
 description
+image
 }
 }
 frequently_bought_together{
@@ -175,10 +162,9 @@ lowest_passing_grade
 mobile_available
 visible_to_staff_only
 pre_requisite{
-      name
-      image
-  }
-
+name
+image
+}
 enrollment_start
 enrollment_end
 invitation_only
@@ -200,18 +186,6 @@ price
 what_will_you_learn
 course_category
 course_type
-  learner_count
-  course_mode
-  published_on
-  published_by
-  coursepartner_details{
-      course_partner_id
-  }
-  takeway_details{
-        name
-  description
-  image
-  }
 course_content_details{
 name
 type
@@ -293,23 +267,30 @@ file_url
 }
 }
 }
-  learner_count
-  course_mode
-  published_on
-  published_by
-  coursepartner_details{
-      course_partner_id
-  }
-  takeway_details{
-        name
-  description
-  image
-  }
-  
 author_details{
 author_name
 description
-
+}
+coursePlayerStatus{
+status
+location
+course_id
+}
+learner_count
+course_mode
+published_on
+published_by
+coursepartner_details{
+name
+image
+}
+takeway_details{
+text
+description
+media{
+image
+}
+what_will_you_learn
 }
 }
     }
