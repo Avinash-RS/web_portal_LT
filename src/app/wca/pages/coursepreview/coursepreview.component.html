@@ -128,7 +128,7 @@
           </div>
 
           <div class="col-md-4 col-sm-12 col-12" >
-              <span *ngFor="let author of course?.author_details" class="fadetext">  {{author.author_name}} </span>
+              <span *ngFor="let author of course?.author_details" class="fadetext">  {{author.author_name}} , </span>
             </div>
       </div>
       <div class="row">
@@ -241,7 +241,7 @@
         <h1>Resources</h1>
 
         <!-- <div class="row"> -->
-          <section class="accordion" *ngFor="let res of content?.coursedetails">
+          <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
             <input type="checkbox" name="collapse" [id]="res?.modulename">
             <h2 class="handle">
               <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
@@ -272,11 +272,46 @@
           </div>
             </div>
           </section>
-          
-       
-          <div style="text-align:center;">
-            <button class="btn1 success" name="collapse" >{{moduledetails?.length}} more section</button>
+
+          <div  *ngIf="isCollapsed">
+                <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
+                  <input type="checkbox" name="collapse" [id]="res?.modulename">
+                  <h2 class="handle">
+                    <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+                       <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+                  </h2>
+                  <div class="content">
+                    <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+                      <div class="col-8"><br>
+                        <ol class="submod"  >
+                          <li><b>{{i+1}} : {{mod?.topicname}}</b></li>
+                        </ol>
+                      </div>
+            
+                      <div class="col-4">
+                        <mat-form-field style="text-align: right;margin-top: 5%;" >
+                          <mat-label>Resourse</mat-label>
+                          <mat-icon matPrefix>folder</mat-icon>
+                          <mat-select  >
+                              <mat-option *ngFor="let file of mod.resourse?.files" >
+                                <a  href="{{file.path}}" download >{{file.path}}</a>
+                            </mat-option>
+                            <mat-option style="text-align: center;"  (click)="downloadAll(mod.resourse?.files)">
+                              <button class="btn"  >Download all</button>
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      </div>
+                </div>
+                  </div>
+                </section>
+              </div>
+          <div style="text-align:center;" *ngIf="modulength >= 5">
+            <button class="btn1 success" (click)="moresection(isCollapsed)"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">{{modulength / 2}} more section</button>
           </div>
+
+        
         
         <ng-template #previewDialog>
           <button mat-icon-button class="close-button" [mat-dialog-close]="true" >
