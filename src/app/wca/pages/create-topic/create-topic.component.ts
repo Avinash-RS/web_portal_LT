@@ -60,11 +60,14 @@ export class CreateTopicComponent implements OnInit {
 
 
   topicItem(mod_index,i): FormGroup {
+    console.log(this.courseArray,mod_index,i)
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array(this.courseArray && mod_index && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
-        this.topicImages()
-      ) : [],Validators.compose([Validators.required])),
+      topicimages: this.formBuilder.array(this.courseArray && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
+        {
+          console.log(data)
+          return this.topicImages()
+        }) : [],Validators.compose([Validators.required])),
       topicstatus:['true']
     });
   }
@@ -139,8 +142,7 @@ export class CreateTopicComponent implements OnInit {
 
 
   }
-  createForm(mod,mod_index=null) :FormGroup{
-
+  createForm(mod,mod_index=-1) :FormGroup{
     console.log(mod)
    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],

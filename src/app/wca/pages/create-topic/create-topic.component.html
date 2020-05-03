@@ -59,7 +59,7 @@
                </span>
              </div>
      <div class="colView" >
-        <input style="display: none;" id="fileInput3" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+        <input style="display: none;" [id]="'fileInput3'+i" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
         <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span> 
           <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
           <span class="padTop1 showCon" *ngIf="!j?.value?.topicimages[0]" > <small>content is empty Double Click to edit</small></span>
