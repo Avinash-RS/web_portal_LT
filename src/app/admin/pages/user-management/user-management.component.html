@@ -104,7 +104,8 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
-            <button mat-icon-button (click)="viewDetail(element,viewDialog)">
+            <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top" 
+            title="View {{element.username}}'s details">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button
