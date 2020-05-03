@@ -135,13 +135,21 @@ export class GroupManagementComponent implements OnInit {
   savegroup(form) {
     let hierarchy;
     let str;
+    let strvalue;
     this.formsubmitted = true;
     console.log(form.valid);
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
-        str = this.currentpath.hierarchy_id.split('h');
-        hierarchy = 'h' + (Number(str[1]) + Number(1));
+        
+        if(this.currentpath.hierarchy_id){
+          str = this.currentpath.hierarchy_id.split('h');
+          strvalue =Number(str[1]);
+          hierarchy = 'h' + (Number(str[1]) + Number(1));
+        }else{
+          strvalue =0;
+        }
+       
       }
       if ( this.currentpath && Number(str[1]) >= 7 ) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
