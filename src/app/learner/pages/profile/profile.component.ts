@@ -1141,6 +1141,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('user',this.currentUser.is_profile_updated);
+    if (this.currentUser.is_profile_updated){
+      this.cannotEdit = true;
+    }
+    else{
+      this.cannotEdit = false;
+    }
     moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
@@ -1640,5 +1647,10 @@ export class ProfileComponent implements OnInit {
       specification.setValidators(null)
     specification.updateValueAndValidity();
     console.log(specification)
+  }
+  formatPercentage(index){
+    let val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
+    let per = parseFloat(val).toFixed(2);
+    this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
   }
 }
