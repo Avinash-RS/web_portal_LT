@@ -1,5 +1,6 @@
 <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
   <div class="container">
+
     <div class="row">
       <div class="col-md-3 col-sm-12" (click)="gotoDescription()">
         <img *ngIf="course.course_img_url != 'null'" class="img_size" src="{{course.course_img_url}}">
@@ -24,10 +25,20 @@
       <div class="col-md-3 col-sm-12 col-12 f_wt_500 float_right  border-left-color">
         <div class="row float_right" *ngIf="showRating" (click)="gotoDescription()">
           <!-- <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating> -->
+          <div class=" wishlist m-r-10 m-t-20" *ngIf="showWishlist">
+            <div class="col-md-1 col-sm-1 col-"></div>
+            <div class="col-md-2 col-sm-2 col-2">
+              <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn"
+                style="vertical-align: middle;">
+                <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
+                <mat-icon *ngIf="course.wishlisted == false" style="color:transparent;">favorite</mat-icon>
+              </button>
+            </div>
+            <div class="col-md-9 col-sm-9 col-9"></div>
+          </div>
           <div class="display_flex m-r-30 bg m-t-20 user_rating">
             <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
-            <span class="material-icons"
-              style="vertical-align: middle;" *ngIf="showRating">
+            <span class="material-icons" style="vertical-align: middle;" *ngIf="showRating">
               star_border
             </span>
           </div>
