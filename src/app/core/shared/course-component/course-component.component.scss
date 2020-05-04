@@ -16,6 +16,10 @@ img {
     margin-top: 10px;
 }
 
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
 ::ng-deep .br-default .br-unit {
     font-size: 16px;
     height: 18px;
@@ -87,15 +91,16 @@ mat-icon {
     }
 }
 
-.margLeft{
+.margLeft {
     margin-left: -10px;
 }
 
-.dspFlx{
-display: flex;
-justify-content: space-evenly;
+.dspFlx {
+    display: flex;
+    justify-content: space-evenly;
 }
-.dspFlx1{
+
+.dspFlx1 {
     display: flex;
     align-items: center;
 }
@@ -120,19 +125,23 @@ justify-content: space-evenly;
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
 }
-.enroll{
+
+.enroll {
     background-color: #1f3777;
     color: #fff;
     font-weight: 500 !important;
 }
+
 .color-grey {
     color: #363738;
 }
-.iconClr{
+
+.iconClr {
     color: #777777;
     font-size: 12px;
     font-weight: 400;
 }
-.heightname{
-    height:30px;
+
+.heightname {
+    height: 30px;
 }
