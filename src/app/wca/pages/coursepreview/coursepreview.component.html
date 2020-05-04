@@ -47,7 +47,7 @@
 
         <div class="row cls" *ngIf="isshowPublish">
           <div class="col-md-4 col-sm-12 col-12">
-            <button class="btn">
+            <button class="btn" (click)="crsDetails()">
               Edit Course Details
             </button>
           </div>
@@ -62,13 +62,13 @@
 
       <!-- Right side  -->
       <div class="col-md-8 col-sm-12 col-12">
-        <h1 class="sd">Short Description</h1>
+        <!-- <h1 class="sd">Short Description</h1> -->
         <div *ngIf="course">
           <h4 style="text-align: left;">{{course?.short_description}}</h4>
         </div>
         <div class="enroll">
-          <div class="grid-item "><b>Learners Enrolled</b></div>
-          <div class="grid-item fadetext">: {{course?.learner_count}}</div>
+          <div class="grid-item " *ngIf="courseType === 'publish'"><b>Learners Enrolled</b></div>
+          <div class="grid-item fadetext" *ngIf="courseType === 'publish'">: NA</div>
           <div class="grid-item "><b>Language</b></div>
           <div class="grid-item fadetext">: {{course?.course_language}}</div>
           <div class="grid-item "><b>Mode</b></div>
@@ -126,7 +126,7 @@
       <div class="col-md-4 col-sm-12 col-12">
         <h3><b>Course description</b></h3>
       </div>
-      <div class="col-md-4 col-sm-12 col-12">
+      <div class="col-md-8 col-sm-12 col-12">
         <h3 class="fadetext">{{course?.course_description}}</h3>
       </div>
     </div>
@@ -170,17 +170,17 @@
     <div class="line"></div>
     <br>
     <div class="row">
-      <h1>Instrutor details</h1>
+      <h1>Instructor details</h1>
     </div>
     <br><br>
 
     <mat-grid-list [cols]="breakpoint" rowHeight="1:0.3">
       <mat-grid-tile *ngFor="let author of course?.author_details">
         <div class="row">
-          <div class="col-md-4 col-sm-12 col-12">
+          <div class="col-md-4 ">
             <img class="image" [src]="author.author_img ? author.author_img : '../../../../assets/learner/avatar2.png'">
           </div>
-          <div class="col-md-8 col-sm-12 col-12">
+          <div class="col-md-8 ">
             <div class="cardhead"><b>{{author.author_name}}</b></div><br>
             <div style="margin-left: 5%;">
               <p style="word-break: normal;">{{author.description}}</p>
@@ -189,6 +189,7 @@
         </div>
       </mat-grid-tile>
     </mat-grid-list>
+
     <br><br>
 
     <div class="line"></div><br>
