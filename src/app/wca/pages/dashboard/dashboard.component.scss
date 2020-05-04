@@ -160,6 +160,10 @@ h2 {
     right: -18px;
 }
 
+mat-label {
+    color: $color-blue;
+    cursor: pointer;
+}
 // ::ng-deep .arrow .owl-carousel , .owl-carousel .owl-stage-outer{
 //     width: 96% !important;
 //     margin-left: 2%;
