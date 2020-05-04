@@ -28,7 +28,7 @@ export class CourseComponentComponent implements OnInit {
 
   
   currentRate;
-
+  
   userDetail: any;
   recorded_data: any;
   final_full_data: any;
@@ -94,7 +94,6 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     if (!this.goto) {
     if (this.isDraft) {
-      console.log(course);
       this.router.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, courseImage: this.course.course_img_url,courseName: this.course.course_name}]);
 
     }
@@ -111,6 +110,7 @@ export class CourseComponentComponent implements OnInit {
         type: 'publish', id: this.course.course_id 
       }
       localStorage.setItem('courseType',detail.type)
+      localStorage.setItem('courseid',detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
@@ -118,12 +118,14 @@ export class CourseComponentComponent implements OnInit {
       let detail =
         { type: 'create', id:  this.course.course_id }
         localStorage.setItem('courseType',detail.type)
+        localStorage.setItem('courseid',detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
      
     }
     else if (this.goto == 'draft') {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
       localStorage.setItem('courseType',detail.type)
+      localStorage.setItem('courseid',detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
