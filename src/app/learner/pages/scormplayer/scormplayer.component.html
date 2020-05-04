@@ -70,10 +70,12 @@
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">
-                   
                       <a  href="{{file.path}}" download>{{file.path}}</a>
-                  
                   </mat-option>
+                  <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                    <button class="btn">Download all</button>
+                  </mat-option>
+
               </mat-select>
           </mat-form-field>
           </div>
