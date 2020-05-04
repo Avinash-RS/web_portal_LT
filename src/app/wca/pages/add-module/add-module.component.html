@@ -54,9 +54,9 @@
                     <span class="del-icon-container">
                     <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
                     </span>
-                    <span (click)="addTopic(module,n)">
+                    <div (click)="addTopic(module,n)" class="module-name">
                       {{module.modulename}}
-                    </span>
+                    </div>
                   </div>
                   </div>
                 <!-- </ng-container> -->

@@ -85,9 +85,7 @@ export class AddModuleComponent implements OnInit {
     this.spinner.show();
     console.log(this.routedCourseDetails.courseId)
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
-      console.log(data);
       this.courseDetails = data.Result[0];
-      console.log(this.courseDetails)
       this.updateCourseDetails();
       this.spinner.hide();
     }, err => {

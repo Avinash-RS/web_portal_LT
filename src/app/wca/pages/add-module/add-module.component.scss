@@ -318,9 +318,9 @@ img:hover {
 
  .child-item {
     color: #1f3777 !important;
-    margin: 15px 43px;
-    width: 120px;
-    height: 25px;
+    margin: 15px 30px;
+    min-width: 120px;
+    min-height: 25px;
     padding-top: 3px;
     background: #dbe7ff;
     border-radius: 3px;
@@ -488,4 +488,9 @@ color: #1f3777;
     font-size: 14px;
     flex-grow: 1;
     flex-basis: 0;
+  }
+
+  .module-name {
+    text-align: left;
+    margin-left: 10px;
   }
