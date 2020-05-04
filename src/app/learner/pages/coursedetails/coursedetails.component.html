@@ -120,7 +120,11 @@
                     <tr>
                         <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
                         <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">{{course.pre_requisite}}</td>
+                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
+                            <button *ngFor="let preque of course?.pre_requisite">
+                                {{preque.name ? preque.name : 'none'}}
+                            </button>
+                        </td>
                         <td class="width_10"></td>
                     </tr>
                     <tr>
@@ -180,43 +184,18 @@
         <!-- <mat-tab label="Media" style="color:red"> -->
         <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
             <owl-carousel-o [options]="customOptions1" class="takeway">
-                <ng-template carouselSlide [id]="1"><img height="500px" src="../../../../assets/learner/lens.jpg">
+                <ng-template carouselSlide [id]="dex"  *ngFor="let img of course?.takeway_details[0].media;let dex = index">
+                  <img [src]="img.image ? img.image : '../../../../assets/learner/lens.jpg' " height="500px">
                 </ng-template>
-                <ng-template carouselSlide [id]="2"><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-                <ng-template carouselSlide [id]="3"><img height="500px" src="../../../../assets/learner/lens.jpg">
-                </ng-template>
-            </owl-carousel-o>
+              </owl-carousel-o>
         </div>
         <!-- </mat-tab>
                 <mat-tab label="Text" style="color:red"> -->
         <br>
         <ul *ngIf="clicked == 'text'">
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-            <li class="f_size_17" style="margin-bottom: 12px;">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor </li>
-        </ul>
+            <li class="f_size_17" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">{{text.text ? text.text : text.description }}
+            </li>
+            </ul>
         <!-- </mat-tab>
             </mat-tab-group> -->
         <br>
@@ -475,7 +454,7 @@
 
 <div style="z-index: -1;" *ngIf="course">
     <h2 class=" m-l-5" *ngIf="course.frequently_bought_together">
-        Frequently bought together 
+        Frequently bought together
     </h2>
     <!-- <owl-carousel-o [options]="slideOptions">
         <ng-template  carouselSlide>Slide 1</ng-template>
@@ -485,7 +464,7 @@
     <app-top-courses *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0"
         [from]="'cd'" [CourseList]="course.frequently_bought_together" [showCartBtn]="true" [showWishlist]="true"
         [canNavigate]="true" [showStatus]="false"></app-top-courses>
-    
+
 
     <h2 class="m-l-5" *ngIf="course.people_also_viewed">
         People Also Viewed

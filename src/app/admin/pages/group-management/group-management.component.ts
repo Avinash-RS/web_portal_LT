@@ -6,7 +6,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
 import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
 import { Router } from '@angular/router';
@@ -116,6 +116,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   selectgroup(node) {
+    console.log(node);
     if (node.checkbox === true) {
       this.currentpath = node;
       this.disabled = false;
@@ -138,14 +139,13 @@ export class GroupManagementComponent implements OnInit {
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
-        if(this.currentpath.hierarchy_id){
+        if (this.currentpath.hierarchy_id) {
           str = this.currentpath.hierarchy_id.split('h');
-          strvalue =Number(str[1]);
+          strvalue = Number(str[1]);
           hierarchy = 'h' + (Number(str[1]) + Number(1));
-        }else{
-          strvalue =0;
+        } else {
+          strvalue = 0;
         }
-       
       }
       if ( this.currentpath && Number(str[1]) >= 7 ) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
@@ -190,11 +190,11 @@ export class GroupManagementComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result: any) => {
-          if (result.data.groupstatus.success === true) {
+        this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result1: any) => {
+          if (result1.data.groupstatus.success === true) {
             this.editstatus = true;
             this.currentpath = null;
-            this.editgroupname = "";
+            this.editgroupname = '';
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(
@@ -206,7 +206,7 @@ export class GroupManagementComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: result.data.groupstatus.message,
+              text: result1.data.groupstatus.message,
             });
           }
         });
@@ -214,15 +214,15 @@ export class GroupManagementComponent implements OnInit {
     });
     // this.checked ="Deactivate"
   }
-  edit(data: boolean, group_name) {
+  edit(data: boolean, groupname) {
     if (data) {
       this.editstatus = false;
 
-      this.editgroupname = group_name;
+      this.editgroupname = groupname;
 
     } else {
       this.editstatus = true;
-      this.editgroupname = "";
+      this.editgroupname = '';
 
     }
 
@@ -241,10 +241,12 @@ export class GroupManagementComponent implements OnInit {
   getAllUser(pagenumber) {
     this.loader = true;
     this.resultsLength = null;
-    if (pagenumber == 0)
-      this.ELEMENT_DATA = []
-    this.adminservice.getAllUsers(pagenumber, 1,this.currentpath.group_name)
+    if (pagenumber === 0) {
+      this.ELEMENT_DATA = [];
+    }
+    this.adminservice.getAllUsers(pagenumber, 1, this.currentpath.group_id)
       .subscribe((result: any) => {
+        console.log(result.data.get_all_user.message);
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
