@@ -1,66 +1,21 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-02T11:19:10" id="0" hostname="user-PC" tests="0" errors="1" failures="0" time="0">
+<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-03T23:58:33" id="0" hostname="edu1-lap" tests="5" errors="1" failures="0" time="1.488">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"/>
   </properties>
+  <testcase name="LoginComponent should create" time="0.472" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent form invalid when empty" time="0.289" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent username field validity" time="0.231" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent password field validity" time="0.241" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent submitting a form emits a user" time="0.255" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
   <system-out>
-    <![CDATA[Browser {
-  id: '26055951',
-  fullName: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
-    'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-    'Chrome/81.0.4044.129 Safari/537.36',
-  name: 'Chrome 81.0.4044 (Windows 10.0.0)',
-  state: 'CONNECTED',
-  lastResult: [BrowserResult],
-  disconnectsCount: 0,
-  activeSockets: [Array],
-  noActivityTimeout: 30000,
-  collection: [BrowserCollection],
-  emitter: [Server],
-  socket: [Socket],
-  timer: [Object],
-  disconnectDelay: 2000,
-  log: [Logger],
-  noActivityTimeoutId: null,
-  pendingDisconnect: null
-} ERROR
+    <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) ERROR
+  DisconnectedClient disconnected from CONNECTED state (transport error)
+,Chrome 81.0.4044 (Windows 10.0.0) ERROR
   {
-    "message": "You need to include some adapter that implements __karma__.start method!",
-    "str": "You need to include some adapter that implements __karma__.start method!"
+    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
+    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
   }
-,Browser {
-  id: '26055951',
-  fullName: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
-    'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-    'Chrome/81.0.4044.129 Safari/537.36',
-  name: 'Chrome 81.0.4044 (Windows 10.0.0)',
-  state: 'DISCONNECTED',
-  lastResult: [BrowserResult],
-  disconnectsCount: 1,
-  activeSockets: [Array],
-  noActivityTimeout: 30000,
-  collection: [BrowserCollection],
-  emitter: [Server],
-  socket: [Socket],
-  timer: [Object],
-  disconnectDelay: 2000,
-  log: [Logger],
-  noActivityTimeoutId: Timeout {
-    _idleTimeout: 30000,
-    _idlePrev: null,
-    _idleNext: null,
-    _idleStart: 137273,
-    _onTimeout: [Function],
-    _timerArgs: undefined,
-    _repeat: null,
-    _destroyed: false,
-    [Symbol(refed)]: true,
-    [Symbol(asyncId)]: 52347,
-    [Symbol(triggerId)]: 52342
-  },
-  pendingDisconnect: null
-} ERROR
-  Disconnected, because no message in 30000 ms.
 
 ]]>
   </system-out>

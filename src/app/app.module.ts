@@ -1,6 +1,7 @@
 //angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
@@ -22,6 +23,10 @@ import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+export function getBaseHref(platformLocation: PlatformLocation): string {
+  return platformLocation.getBaseHrefFromDOM();
+}
 
 
 
@@ -52,6 +57,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BrowserAnimationsModule,
   ],
   providers: [AlertComponentComponent,
+    {
+      provide: APP_BASE_HREF,
+      useFactory: getBaseHref,
+      deps: [PlatformLocation]
+  },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
   ],
