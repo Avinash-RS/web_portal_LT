@@ -12,7 +12,7 @@
 
   <div class="add-module-section">
     <mat-card style="text-align: center;">
-      <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
+      <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
 
         <div class="row">
           <div class="col-md-2"> <img class="img"
@@ -22,7 +22,7 @@
             <div class="course-name">{{noOfModules + ' Modules'}}</div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
-              <button mat-stroked-button color="primary" class="reference-btn">Reference file</button>
+              <button mat-stroked-button color="primary" (click)="onRefernceBtnClick()"  class="reference-btn">Reference file</button>
             </div>
           </div>
           <div class="col-md-10">
@@ -36,39 +36,44 @@
 
               <ng-container *ngIf="noOfModules !== 0; else noMod">
 
-                <div
-                cdkDropList
-                #doneList="cdkDropList"
-                [cdkDropListData]="courseDetails.coursedetails"
-                [cdkDropListConnectedTo]="[todoList]"
-                class="horizontalView"
-                (cdkDropListDropped)="drop($event)">
+                <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="courseDetails.coursedetails"
+                  [cdkDropListConnectedTo]="[todoList]" class="horizontalView" (cdkDropListDropped)="drop($event)">
 
-                <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
+                  <div class="" *ngFor="let module of courseDetails.coursedetails;let n = index" cdkDrag>
 
 
-                <!-- <ng-container class="example-box1" *ngFor="lets module of courseDetails.coursedetails;let n = index" cdkDrag> -->
-                 
-                  <div class="prew1">
-                  <div class="child-item" *ngIf="module.modulestatus !== 'false'">
-                    <span class="del-icon-container">
-                    <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
-                    </span>
-                    <div (click)="addTopic(module,n)" class="module-name">
-                      {{module.modulename}}
+                    <!-- <ng-container class="example-box1" *ngFor="lets module of courseDetails.coursedetails;let n = index" cdkDrag> -->
+
+                    <div class="prew1">
+                      <div class="child-item" *ngIf="module.modulestatus !== 'false'">
+                        <span class="del-icon-container">
+                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()"
+                          (mouseover)="onHover(module.modulename)">info</mat-icon>
+                          <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
+                         
+                        </span>
+                        <div (click)="addTopic(module,n)" class="module-name">
+                          {{module.modulename}}
+
+                        </div>
+                        <div style="color: grey;" *ngIf="isHover && module.modulename == hoverName" class="overlay">
+                          <div *ngFor="let template of module.template_details">
+                            {{template.name}}
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
+                    <!-- </ng-container> -->
                   </div>
-                  </div>
-                <!-- </ng-container> -->
-                </div>
 
-              </div>
+                </div>
               </ng-container>
 
               <ng-template #noMod>
                 <div class="no-module">
-                No Modules found
-              </div>
+                  No Modules found
+                </div>
               </ng-template>
 
             </div>
@@ -86,7 +91,5 @@
 
 
   </div>
-
-
 
 </div>

@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { id } from '@swimlane/ngx-charts/release/utils';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { debug } from 'util';
 
 
 @Component({
@@ -17,7 +18,10 @@ export class AddModuleComponent implements OnInit {
   courseDetails: any;
   routedCourseDetails: any;
   noOfModules: number = 0;
-  constructor(    public spinner: NgxSpinnerService,
+  hoverName: string;
+  isHover: boolean;
+  isDrag: boolean;
+  constructor(public spinner: NgxSpinnerService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
@@ -32,8 +36,8 @@ export class AddModuleComponent implements OnInit {
         }
       }
       if (flag) {
-      this.queryData = params;
-      console.log(this.queryData)
+        this.queryData = params;
+        console.log(this.queryData)
       }
     });
 
@@ -54,20 +58,20 @@ export class AddModuleComponent implements OnInit {
 
   done = [
 
-    
+
   ];
 
   resetList() {
- 
+
     // setTimeout(() => {
-      if(this.courseDetails && this.courseDetails.coursedetails) {
-        this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
-      }
+    if (this.courseDetails && this.courseDetails.coursedetails) {
+      this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
+    }
     // }, 0);    
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    
+    //this.isDrag = false;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -79,7 +83,7 @@ export class AddModuleComponent implements OnInit {
       //                   event.currentIndex);
     }
   }
-  
+
 
   getCourseDetails() {
     this.spinner.show();
@@ -127,20 +131,32 @@ export class AddModuleComponent implements OnInit {
     })
   }
 
-  addTopic(value,index) {
+  addTopic(value, index) {
     console.log(index);
     console.log(this.courseDetails);
-    this.apiService.bSubject1.next({index:index,courseDetails:this.courseDetails});
-      this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
+    this.apiService.bSubject1.next({ index: index, courseDetails: this.courseDetails });
+    this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
   }
 
   navChooseTemp() {
-    this.router.navigate(['/Admin/auth/Wca/choosetemplate'],{queryParams: {addModule:true, viewingModule: this.courseDetails.courseid ,courseName:this.courseDetails.coursename,image: this.routedCourseDetails.courseImage}});
-  
+    this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
+
   }
 
-  crsDetails()
-  {
-    this.router.navigate(['/Admin/auth/Wca/addcourse'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid}});
+  crsDetails() {
+    this.router.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid } });
   }
- }
+
+  onhoverLeave() {
+    this.isHover = false;
+    this.hoverName = '';
+  }
+
+  onHover(moduleName) {
+    this.isHover = true;
+    this.hoverName = moduleName;
+  }
+  onRefernceBtnClick() {
+    this.router.navigate(['/Admin/auth/Wca/rf']);
+  }
+}
