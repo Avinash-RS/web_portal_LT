@@ -1116,6 +1116,7 @@ export class ProfileComponent implements OnInit {
   seconds: number;
   startYear: number;
   endYear: number;
+  editpopup: Boolean = true;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1474,9 +1475,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editPassword(passRef: TemplateRef<any>) {
-    this.dialog.open(passRef,{
-      panelClass: 'myClass'
-    })
+    this.dialog.open(passRef)
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
