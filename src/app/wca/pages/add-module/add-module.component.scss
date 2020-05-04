@@ -508,3 +508,22 @@ img:hover {
     z-index: 999;
     width: 20%;
 }
+
+@media only screen and (max-width: 600px) {
+    .submit-btn {
+        height: 30px;
+        margin: 5% 5% 0 0;
+        background-color: #1f3777 !important;
+        color: white !important;
+        width: 150px;
+    }
+
+    .add-module-btn {
+        text-align: left;
+        height: 40px;
+        margin-top: 5%;
+    }
+    .mat-card {
+        margin-bottom: 20%;
+    }
+}
