@@ -22,17 +22,18 @@ export class CourseComponentComponent implements OnInit {
   @Input('showRating') showRating: boolean;
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
-//here type will come now we need to navigate to your page
+  //here type will come now we need to navigate to your page
   @Input('isDraft') isDraft: boolean;
-  @Input('showEnroll') showEnroll: boolean =false;
+  @Input('showEnroll') showEnroll: boolean = false;
 
-  
+
   currentRate;
-  
+
   userDetail: any;
   recorded_data: any;
   final_full_data: any;
   final_status: any = null;
+
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
 
@@ -93,46 +94,46 @@ export class CourseComponentComponent implements OnInit {
 
   gotoDescription(course) {
     if (!this.goto) {
-    if (this.isDraft) {
-      this.router.navigate(['/Admin/auth/Wca/addmodule',{courseId: this.course.course_id, courseImage: this.course.course_img_url,courseName: this.course.course_name}]);
+      if (this.isDraft) {
+        this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }]);
 
-    }
-    else {
-      let detail = {
-        id: this.course.course_id,
-        wishlist: this.course.wishlisted,
-        wishlist_id: this.course.wishlist_id
       }
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    }
+      else {
+        let detail = {
+          id: this.course.course_id,
+          wishlist: this.course.wishlisted,
+          wishlist_id: this.course.wishlist_id
+        }
+        this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
+      }
     } else if (this.goto == 'publish') {
       let detail = {
-        type: 'publish', id: this.course.course_id 
+        type: 'publish', id: this.course.course_id
       }
-      localStorage.setItem('courseType',detail.type)
-      localStorage.setItem('courseid',detail.id)
+      localStorage.setItem('courseType', detail.type)
+      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
     else if (this.goto == 'create') {
       let detail =
-        { type: 'create', id:  this.course.course_id }
-        localStorage.setItem('courseType',detail.type)
-        localStorage.setItem('courseid',detail.id)
+        { type: 'create', id: this.course.course_id }
+      localStorage.setItem('courseType', detail.type)
+      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
-     
+
     }
     else if (this.goto == 'draft') {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
-      localStorage.setItem('courseType',detail.type)
-      localStorage.setItem('courseid',detail.id)
+      localStorage.setItem('courseType', detail.type)
+      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
-    }
-  
+  }
+
   goTocourse(status) {
 
     if (this.final_status != 'Completed') {

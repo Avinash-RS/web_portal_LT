@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   wishlist: any = [];
   breakpoint: number;
 
-  popularCategorires: any = {
+   trendingCategorires: any = {
     loop: true,
     mouseDrag: true,
     touchDrag: true,
@@ -36,6 +36,9 @@ export class DashboardComponent implements OnInit {
       },
       940: {
         items: 4
+      },
+      1200 :{
+        items : 4
       }
     },
     nav: true
