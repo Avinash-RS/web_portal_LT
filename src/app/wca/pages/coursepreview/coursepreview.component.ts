@@ -127,7 +127,9 @@ export class CoursepreviewComponent implements OnInit {
 
   }
 
-  moresection(vale){
+  moresection(vale,modelenght){
+    this.modulength = modelenght - 5;
+
   if (vale == true){
     this.isCollapsed = false
   }else{
