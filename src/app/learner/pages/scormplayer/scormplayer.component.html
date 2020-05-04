@@ -121,7 +121,7 @@
 
 
     <div style="text-align:center;"  *ngIf="modulength >= 5">
-      <button class="btn1 success"  (click)="moresection(isCollapsed)"
+      <button class="btn1 success"  (click)="moresection(isCollapsed,modulength)"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">{{modulength / 2}} more section</button>
     </div>
     <br><br>
