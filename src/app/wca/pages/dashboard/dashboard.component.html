@@ -23,7 +23,7 @@
 
                     <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                         <ng-container *ngIf="publishedCourses && publishedCourses.length > 0; else nopublishcourse">
-                            {{'Published Courses ('+ publishedCourses.length+' Courses)'}}
+                            {{'Published Courses ('+ publishedCourseLength+' Courses)'}}
                         </ng-container>
 
                         <ng-template #nopublishcourse>
@@ -62,7 +62,7 @@
                             color: #6f6c6c">(Yet to publish)</span>
 
                         <ng-container *ngIf="createdCourses && createdCourses.length > 0; else nocreatedcourse">
-                            {{'('+ createdCourses.length+' Courses)'}}
+                            {{'('+ createdCourseLength+' Courses)'}}
                         </ng-container>
 
                         <ng-template #nocreatedcourse>
@@ -104,7 +104,7 @@
 
 
                         <ng-container *ngIf="draftCourses && draftCourses.length > 0; else nodraftcourse">
-                            {{'('+ draftCourses.length+' Courses)'}}
+                            {{'('+ createdCourseLength+' Courses)'}}
                         </ng-container>
 
                         <ng-template #nodraftcourse>
