@@ -1,13 +1,13 @@
 <div class="container m-t-15">
   <div class="row wishlist" *ngIf="showWishlist">
-    <div class="col-md-9 col-sm-9 col-9"></div>
+    <div class="col-md-8 col-sm-8 col-8"></div>
     <div class="col-md-2 col-sm-2 col-2">
       <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn">
         <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
         <mat-icon *ngIf="course.wishlisted == false" style="color:transparent;">favorite</mat-icon>
       </button>
     </div>
-    <div class="col-md-1 col-sm-1 col-1"></div>
+    <div class="col-md-2 col-sm-2 col-2"></div>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10 heightname">
+    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 heightname">
       {{course.course_name}}
     </div>
   </div>
@@ -80,12 +80,12 @@
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
     <div class="row" (click)="gotoDescription()">
-      <div class="col-md-12" style="text-align: center;">
+      <div class="col-md-12 m-b-10" style="text-align: center;">
         Description
       </div>
     </div>
     <div class="row" (click)="gotoDescription()">
-      <div class="col-md-12">
+      <div class="col-md-12 m-t-25">
         <p class="course_description">
           {{course.short_description}}
         </p>
