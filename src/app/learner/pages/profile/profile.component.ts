@@ -1116,6 +1116,8 @@ export class ProfileComponent implements OnInit {
   seconds: number;
   startYear: number;
   endYear: number;
+  editpopup: Boolean = true;
+  resendLabel: Boolean = false;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1474,9 +1476,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editPassword(passRef: TemplateRef<any>) {
-    this.dialog.open(passRef,{
-      panelClass: 'myClass'
-    })
+    this.dialog.open(passRef)
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
@@ -1491,6 +1491,7 @@ export class ProfileComponent implements OnInit {
     this.loader.show();
     this.resendOtp = false;
     this.sendOtp = true;
+    this.resendLabel = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
@@ -1627,20 +1628,13 @@ export class ProfileComponent implements OnInit {
     this.checkFunction();
   }
 
-  /**
-   * The method which form all option types according to chosen values
-   */
   checkFunction() {
-    // For all types check if they were chosen
     this.levelValue.forEach((type) => {
-      console.log(type)
-      // if current type in array of chosen
       if (type.level_code == '10' || type.level_code == '12') {
         let selected = this.duplicateValueCheck.includes(type._id);
         if (selected) type.allowed = 'N'
+        else type.allowed = 'Y'
       }
-
-      // push current type with its status
     });
   }
 
