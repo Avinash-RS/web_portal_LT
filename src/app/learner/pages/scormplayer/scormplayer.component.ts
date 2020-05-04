@@ -80,6 +80,22 @@ export class ScormplayerComponent implements OnInit {
       // }   
     })
   }
+
+  downloadAll(urls) {
+    var arr: any = [];
+    urls.forEach(element => {
+      arr.push(element.path);
+     });
+      var link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      for (var i = 0; i < arr.length; i++) {
+       link.href = arr[i];
+        link.click();
+      }
+      document.body.removeChild(link); 
+}
   moresection(vale){
     console.log(vale,'vale')
   if (vale == true){

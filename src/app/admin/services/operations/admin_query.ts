@@ -9,6 +9,7 @@ export const get_user_group = gql`
           group_name
           group_type
           is_active
+          group_id
       }
     }
   }`;
