@@ -139,9 +139,12 @@
                 <div class="col-md-3 col-sm-8 col-8">
                   <span class="color_blue">Password</span>
                 </div>
-                <div class="col-md-1 col-sm-4 col-4">
-                  <mat-icon class="f_size_17" (click)="editPassword(passwordDialog)">create</mat-icon>
+                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
+                  <mat-icon class="f_size_17"  matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">create</mat-icon>
                 </div>
+                <!-- <div class="col-md-1 col-sm-4 col-4" *ngIf="!editpopup">
+                  <mat-icon class="f_size_17" matTooltip="You can start editing" (click)="editPassword(passwordDialog)">create</mat-icon>
+                </div> -->
               </div>
               <br>
               <div class="row" *ngIf="userData.user_mobile">
@@ -149,8 +152,8 @@
                 <div class="col-md-3 col-sm-8 col-8">
                   <span class="color_blue">{{userData.user_mobile.mobile_number}}</span>
                 </div>
-                <div class="col-md-1 col-sm-4 col-4">
-                  <mat-icon class="f_size_17" (click)="editmobno(mobDialog)">create</mat-icon>
+                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
+                  <mat-icon class="f_size_17" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">create</mat-icon>
                 </div>
               </div>
               <br>
@@ -159,8 +162,8 @@
                 <div class="col-md-3 col-sm-8 col-8">
                   <span class="color_blue">{{userData.email}}</span>
                 </div>
-                <div class="col-md-1 col-sm-4 col-4">
-                  <mat-icon class="f_size_17" (click)="editEmail(emailDialog)">create</mat-icon>
+                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
+                  <mat-icon class="f_size_17" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">create</mat-icon>
                 </div>
               </div>
               <br><br>
@@ -367,7 +370,7 @@
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
-          <div class="account">Don't receive link?<button class="no_border f_wt_500 background_trans color_blue"
+          <div class="account" *ngIf="resendLabel">Don't receive link?<button class="no_border f_wt_500 background_trans color_blue"
               (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
         </mat-dialog-actions>
@@ -418,7 +421,7 @@
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
           <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
-            Verification
+            Verify
           </button><br><br>
         </mat-dialog-actions>
       </ng-template>
