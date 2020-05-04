@@ -17,11 +17,17 @@
               <label>Already exists</label><span>{{report_data.existing_count}}</span>
           </div>
           <div class="Report-label">
+              <label>Updated</label><span>{{report_data.updated_count}}</span>
+          </div>
+          <div class="Report-label">
+            <label>Repeated</label><span>{{report_data.duplicate_count}}</span>
+        </div>
+          <div class="Report-label">
               <label>Email format is incorrect</label><span>{{report_data.failure_count}}</span>
           </div>
           <div class="Report-label">
               <label style="font-weight: bold">Successfully uploaded</label><span>{{report_data.success_count}}</span>
-              <div class="icon-container" style="" (click)="downloadDoc(report_data.report_url)">
+              <div class="icon-container" (click)="downloadDoc(report_data.report_url)">
                   <mat-icon class="report-icon">get_app</mat-icon>
                   <a>Download the report</a>
               </div>
