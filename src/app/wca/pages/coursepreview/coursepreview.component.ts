@@ -52,12 +52,12 @@ export class CoursepreviewComponent implements OnInit {
     this.loader.show();
     this.service.viewCurseByID(this.detail.id).subscribe((viewCourse: any) => {
       console.log(viewCourse.data.viewcourse,'viewCourse')
-      // if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+      if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         console.log(this.course, 'course')
         this.loader.hide();
-      // } else
-      //   this.loader.hide();
+      } else
+        this.loader.hide();
     });
   }
 
@@ -130,27 +130,18 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   downloadAll(urls) {
-    //  console.log(urls)
-    //  var arr: any = [];
-    //  debugger
-    //  urls.forEach(element => {
-    //    console.log(element.path)
-    //    arr.push(element.path);
- 
-    //   });
-    //    var link = document.createElement('a');
-    //    link.setAttribute('download', null);
-    //    link.style.display = 'none';
-    //    document.body.appendChild(link);
-     
-    //    for (var i = 0; i < arr.path.lenth; i++) {
-         
-    //      link.setAttribute('href', arr[i]);
-    //      console.log(arr[i],'arr[i]')
-    //      link.click();
-    //    }
-    //    document.body.removeChild(link); 
-    
-
+     var arr: any = [];
+     urls.forEach(element => {
+       arr.push(element.path);
+      });
+       var link = document.createElement('a');
+       link.target = '_blank';
+       link.style.display = 'none';
+       document.body.appendChild(link);
+       for (var i = 0; i < arr.length; i++) {
+        link.href = arr[i];
+         link.click();
+       }
+       document.body.removeChild(link); 
 }
 }

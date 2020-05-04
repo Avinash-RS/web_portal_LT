@@ -118,9 +118,9 @@
   box-shadow: 0 2px 11px #80808061;
 }
 .line{
-  width: 90%;
-  border-top: 1px solid transparent;
-  position: absolute;
+  width: 100%;
+  border-top: 1px solid $color-border;
+  position: static;
   }
 
   .btn1 {
@@ -137,6 +137,8 @@
 .cent{
   float: none !important;
   margin-left: 3px !important;
+  height: auto !important;
+  width: auto !important;
 }
 
   .tabbtn{
