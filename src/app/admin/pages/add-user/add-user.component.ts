@@ -55,7 +55,7 @@ export class AddUserComponent implements OnInit {
     var admin = []
     admin.push(this.adminDetails._id);
     this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-      true, this.addUserForm.value.group._id, this.addUserForm.value.group.group_name, admin
+      true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
     ).subscribe((result: any) => {
       if (result.data && result.data.user_registration) {
         if (result.data.user_registration.success === 'true') {
@@ -169,7 +169,7 @@ export class AddUserComponent implements OnInit {
       this.exceljson.forEach(element => {
         exceldata.push({
           full_name: element.Full_Name, email: element.Email, term_condition: 'true', admin: this.adminDetails._id,
-          group_id: group._id,
+          group_id: group.group_id,
           group_name: group.group_name
         });
       });

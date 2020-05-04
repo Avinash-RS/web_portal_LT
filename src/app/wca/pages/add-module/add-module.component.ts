@@ -145,4 +145,8 @@ export class AddModuleComponent implements OnInit {
   {
     this.router.navigate(['/Admin/auth/Wca/addcourse'],{queryParams:{edit:true,viewingModule: this.courseDetails.courseid}});
   }
+
+  editResource() {
+    this.router.navigate(['/Admin/auth/Wca/rf']);
+  }
  }
