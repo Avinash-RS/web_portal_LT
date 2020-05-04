@@ -29,22 +29,22 @@
                 </mat-icon>
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}1</mat-checkbox>
 
             </li>
           </mat-tree-node>
 
           <!-- node with children -->
           <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-            <li class="mat-tree-node" renderDebug>
+            <li class="mat-tree-node newstyle"  renderDebug>
               <div class="mat-tree-node">
-                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                <button mat-icon-button matTreeNodeToggle class="btnClassicon" [attr.aria-label]="'toggle ' + node.name">
                   <mat-icon class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}2</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
