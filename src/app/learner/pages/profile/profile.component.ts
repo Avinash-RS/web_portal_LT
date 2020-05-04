@@ -1148,7 +1148,7 @@ export class ProfileComponent implements OnInit {
     else{
       this.cannotEdit = false;
     }
-    moment().year();
+    // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl("", myGlobals.req),
@@ -1250,8 +1250,10 @@ export class ProfileComponent implements OnInit {
     })
   }
   yearOfpassing(index) {
-    this.startYear = moment().year() - 60;
-    this.endYear = moment().year() + 3;
+       this.startYear = 2020- 60;
+    this.endYear = 2020 + 3;
+    // this.startYear = moment().year() - 60;
+    // this.endYear = moment().year() + 3;
 
     this.profileForm.value.qualification.forEach(element => {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
