@@ -18,7 +18,7 @@ import { CreateTemplateComponent } from './pages/create-template/create-template
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatListModule, MatTableModule, MatSortModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatSortModule,MatChipsModule } from '@angular/material';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 import { WcaService } from "./services/wca.service";
@@ -77,7 +77,8 @@ const routes: Routes = [
     DragDropModule,
     MatListModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatChipsModule
   ],
   providers: [Apollo],
   entryComponents: [],
