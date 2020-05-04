@@ -42,7 +42,10 @@ export class DashboardComponent implements OnInit {
   }
   adminDetails: any;
   spinner: boolean = false;
-
+  publishedCourseLength: number;
+  createdCourseLength: number;
+  draftCourseLength : number;
+  
   constructor(public service: WcaService,
     private adminService: AdminServicesService,
     //  public spinner: NgxSpinnerService, 
@@ -81,6 +84,7 @@ export class DashboardComponent implements OnInit {
   getPublishedCourses() {
     this.adminService.getAllCoursePublished("undefined", 0).subscribe((data: any) => {
       this.publishedCourses = data.data && data.data.get_course_published && data.data.get_course_published.message;
+      this.publishedCourseLength = data.data.get_course_published.course_count;
     }, err => {
       this.spinner = false;
     });
@@ -93,7 +97,7 @@ export class DashboardComponent implements OnInit {
 
     this.adminService.getAllCourseCreated(adminDetails.user_id, 0).subscribe((data: any) => {
       this.createdCourses = data.data.get_course_createdby_admin.message;
-
+      this.createdCourseLength = data.data.get_course_createdby_admin.course_count;
     // }, err => {
     //   this.spinner.hide();
     // });
@@ -111,6 +115,7 @@ export class DashboardComponent implements OnInit {
     this.adminService.getAllDrafted("undefined", 0).subscribe((data: any) => {
       this.draftCourses = data.data.get_draft_course.message;
       this.spinner = false;
+      this.draftCourseLength = data.data.get_draft_course.course_count;
     }, err => {
       this.spinner = false;
     });
