@@ -370,7 +370,7 @@
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
-          <div class="account">Don't receive link?<button class="no_border f_wt_500 background_trans color_blue"
+          <div class="account" *ngIf="resendLabel">Don't receive link?<button class="no_border f_wt_500 background_trans color_blue"
               (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
         </mat-dialog-actions>
@@ -421,7 +421,7 @@
         </mat-dialog-content>
         <mat-dialog-actions *ngIf="isenable">
           <button class="popupbtns" [disabled]="!otpForm.valid" (click)="otpverification()">
-            Verification
+            Verify
           </button><br><br>
         </mat-dialog-actions>
       </ng-template>
