@@ -20,8 +20,10 @@
               <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Full Name is required</div>
                 <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
-                <div *ngIf="f.username.errors.minlength">Full Name must be minimum of {{f.username.errors.maxlength.requiredLength}} characters </div>
-                <div *ngIf="f.username.errors.maxlength">Full Name must be {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
+                <div *ngIf="f.username.errors.minlength">Full Name must be minimum of
+                  {{f.username.errors.maxlength.requiredLength}} characters </div>
+                <div *ngIf="f.username.errors.maxlength">Full Name must be
+                  {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
               </div>
             </div>
             <div class="form-group">
@@ -63,52 +65,64 @@
     <!-- //Maniyarasi  -  add your code here -->
 
 
-     <!-- //Maniyarasi  - end of your code -->
-     <div  class="downloadbutton">
-      <button  (click)="downloadsampleexceltemplate()"  *ngIf="!selectedfile">  Download Excel
+    <!-- //Maniyarasi  - end of your code -->
+    <div class="downloadbutton">
+      <button (click)="downloadsampleexceltemplate()" *ngIf="!selectedfile"> Download Excel
       </button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle" style="text-align:center;"
+        *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
+        <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
+          (change)="fileBrowseHandler($event.target.files)" />
+        <img src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64">
+
+        <h3>Drag and drop file here</h3>
+        <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
+        <h3>or</h3>
+        <button for="fileDropRef" class="browse pointer">Browse for file</button>
       </div>
-      
-      <div class="row"> 
-        <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle"  style="text-align:center;"  *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)" >
-          <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
-          <img  src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64" >
-          
-          <h3>Drag and drop file here</h3>
-          <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
-          <h3>or</h3>
-          <button for="fileDropRef" class="browse pointer">Browse for file</button>
-        </div>
-      </div>
-   
-      
-      <div *ngIf="selectedfile" class="files-list">
-        <div class="single-file" >
-          <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png" class="file-icon" style="width: 50px">
-      
-          <div class="info">
-            <h4 class="name">
-              {{ selectedfile?.name }}
-            </h4>
-            <p class="size">
-              {{ formatBytes(selectedfile?.size) }}
-            </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 center col-sm-11 col-11">
+        <div *ngIf="selectedfile" class="files-list">
+          <div class="single-file">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png"
+              class="file-icon" style="width: 50px">
+
+            <div class="info">
+              <h4 class="name">
+                {{ selectedfile?.name }}
+              </h4>
+              <p class="size">
+                {{ formatBytes(selectedfile?.size) }}
+              </p>
+            </div>
+            <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()"
+              style="width: 30px">
           </div>
-         <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()" style="width: 30px" > 
+        </div>
+        <div class="downloadbutton">
+          <mat-form-field>
+            <mat-label>Group Name</mat-label>
+            <mat-select name="group" [(ngModel)]="group">
+              <mat-option *ngFor="let grp of groups" [value]="grp">
+                {{grp.group_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
-      <div class="downloadbutton" >
-        <mat-form-field >
-          <mat-label>Group Name</mat-label>
-          <mat-select name="group" [(ngModel)]="group" >
-            <mat-option *ngFor="let grp of groups" [value]="grp">
-              {{grp.group_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      
-      <button type="button"  *ngIf="selectedfile " (click)="saveexcel(group)" class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+    </div>
+
+    <div class="row">
+      <button type="button" *ngIf="selectedfile " (click)="saveexcel(group)"
+        class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+    </div>
+    <br>
   </mat-tab>
 
 </mat-tab-group>

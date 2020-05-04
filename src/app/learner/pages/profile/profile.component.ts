@@ -1116,6 +1116,8 @@ export class ProfileComponent implements OnInit {
   seconds: number;
   startYear: number;
   endYear: number;
+  editpopup: Boolean = true;
+  resendLabel: Boolean = false;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,
@@ -1162,13 +1164,14 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl("")
       })
     });
-    console.log('form',this.profileForm);
+    console.log('form', this.profileForm);
     console.log('stud', this.profileForm.get('is_student_or_professional'))
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
+        console.log('inside')
         if (is_student_or_professional === 'professional') {
           job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
           org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
@@ -1181,17 +1184,8 @@ export class ProfileComponent implements OnInit {
         job_role.updateValueAndValidity();
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
+        console.log(this.profileForm.get('professional'))
       })
-    // const specification = this.profileForm.get('in.specification');
-    // this.profileForm.get('qualification').valueChanges
-    // .subscribe(qualification => {
-    //   if(qualification.level_code !=='10'){
-    //     specification.setValidators([Validators.required])
-    //   } else {
-    //     specification.setValidators(null)
-    //   }
-    //   specification.updateValueAndValidity();
-    // });
   }
 
   //to get controls for validation
@@ -1251,7 +1245,7 @@ export class ProfileComponent implements OnInit {
   yearOfpassing(index) {
     this.startYear = moment().year() - 60;
     this.endYear = moment().year() + 3;
- 
+
     this.profileForm.value.qualification.forEach(element => {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
         this.alert.openAlert('Invalid year', null);
@@ -1474,9 +1468,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editPassword(passRef: TemplateRef<any>) {
-    this.dialog.open(passRef,{
-      panelClass: 'myClass'
-    })
+    this.dialog.open(passRef)
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
@@ -1484,13 +1476,14 @@ export class ProfileComponent implements OnInit {
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
-   ;
+    ;
   }
 
   otpverification() {
     this.loader.show();
     this.resendOtp = false;
     this.sendOtp = true;
+    this.resendLabel = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
         this.loader.hide();
@@ -1627,20 +1620,13 @@ export class ProfileComponent implements OnInit {
     this.checkFunction();
   }
 
-  /**
-   * The method which form all option types according to chosen values
-   */
   checkFunction() {
-    // For all types check if they were chosen
     this.levelValue.forEach((type) => {
-      console.log(type)
-      // if current type in array of chosen
       if (type.level_code == '10' || type.level_code == '12') {
         let selected = this.duplicateValueCheck.includes(type._id);
         if (selected) type.allowed = 'N'
+        else type.allowed = 'Y'
       }
-
-      // push current type with its status
     });
   }
 

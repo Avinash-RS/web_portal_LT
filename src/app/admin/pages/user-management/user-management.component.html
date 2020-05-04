@@ -104,8 +104,8 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
-            <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top" 
-            title="View {{element.username}}'s details">
+            <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
+              title="View {{element.username}}'s details">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button
@@ -210,7 +210,7 @@
                         {{profileDetails.userObjects && profileDetails.userObjects[0].country_name}} </label></label>
                   </div>
                 </div>
-                <br>
+                <br><br>
                 <!-- commented till profile structure fix -->
                 <!-- <div class="row" style="overflow-x:auto;">
                   <div class="col-md-12 col-sm-12 col-12">
@@ -255,7 +255,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-12">
                 <label>No. of Wishlisted courses : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label> </label>
+                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
+                </label>
               </div>
             </div>
             <br>
