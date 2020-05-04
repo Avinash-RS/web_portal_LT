@@ -47,7 +47,9 @@ export class ToolbarNotificationComponent implements OnInit {
     }
 
     moveToReport(value){
-      this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
+      this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } }));
+      // this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
       this.isOpen = false;      
     }
 }

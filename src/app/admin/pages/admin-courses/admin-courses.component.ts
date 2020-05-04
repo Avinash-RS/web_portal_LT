@@ -77,7 +77,7 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'draft';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish';
+          this.btnType = null;
           this.showCount = false;
           this.showRating = false;
           this.showPrice = false;

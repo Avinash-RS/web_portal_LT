@@ -203,6 +203,8 @@ export const getnotificationreports = gql`
             failure_count
             updated_count
             duplicate_count
+            existing_count
+            total_count
             notification_msg
             report_info{
                 created_on
