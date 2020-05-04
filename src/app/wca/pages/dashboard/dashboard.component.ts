@@ -28,20 +28,17 @@ export class DashboardComponent implements OnInit {
       0: {
         items: 1
       },
-      300: {
-        items: 1
-      },
-      540: {
+      400: {
         items: 2
       },
       740: {
-        items: 5
+        items: 3
       },
       940: {
-        items: 5
+        items: 4
       },
-      1200 : {
-        items: 6
+      1200 :{
+        items : 5
       }
     },
     nav: true

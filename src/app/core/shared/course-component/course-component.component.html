@@ -20,20 +20,25 @@
       {{course.course_name}}
     </div>
   </div>
-  <!-- col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
-  <div class="dspFlx margLeft">
-    <!-- <div class="col-md-5 col-sm-5 col-5 display_flex" *ngIf="showRating"> -->
+
+  <!-- <div class="dspFlx margLeft">
     <span *ngIf="showRating" class="dspFlx1">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
       &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
     </span>
     <span class="dspFlx1" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}</span>
     <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
-    <!-- </div> -->
-    <!-- <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount"> -->
-    <!-- </div> -->
-    <!-- <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice">  -->
-    <!-- </div> -->
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-5 col-sm-5 col-5 display_flex">
+      <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
+        class="m-t-15 m-l-5">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
+    </div>
+    <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
+    </div>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice && course.price"> <strong>Rs {{course.price | number }}</strong>
+    </div>
   </div>
 
   <div class="row" *ngIf="showDate">
@@ -80,7 +85,7 @@
 
   <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
     <div class="row" (click)="gotoDescription()">
-      <div class="col-md-12 m-b-10" style="text-align: center;">
+      <div class="col-md-12 m-b-10 m-t-10" style="text-align: center;">
         Description
       </div>
     </div>
