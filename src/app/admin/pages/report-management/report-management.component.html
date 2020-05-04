@@ -27,7 +27,7 @@
           </div>
           <div class="Report-label">
               <label style="font-weight: bold">Successfully uploaded</label><span>{{report_data.success_count}}</span>
-              <div class="icon-container" style="" (click)="downloadDoc(report_data.report_url)">
+              <div class="icon-container" (click)="downloadDoc(report_data.report_url)">
                   <mat-icon class="report-icon">get_app</mat-icon>
                   <a>Download the report</a>
               </div>
