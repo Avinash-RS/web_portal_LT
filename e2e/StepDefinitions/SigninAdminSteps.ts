@@ -8,9 +8,9 @@ setDefaultTimeout(60 * 1000);
 let algn = new SigninAdminPage();
 
 Given(': I am in admin login page', async ()=> {
-    browser.waitForAngularEnabled(false);
-    await browser.get(browser.params.login.url);
-    await browser.manage().window().maximize();
+    await browser.waitForAngularEnabled(false);
+    await browser.get(browser.params.login.adminurl);
+    //await browser.manage().window().maximize();
 });
 
 When(': Enter user name and password for a particular user role', async ()=> {

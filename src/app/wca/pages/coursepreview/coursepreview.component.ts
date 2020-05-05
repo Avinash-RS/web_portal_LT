@@ -96,16 +96,10 @@ export class CoursepreviewComponent implements OnInit {
   getModuleData() {
     this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
       console.log(data)
-      // if(data.data['getmoduleData']['success'] == true){
-
-      this.content = data.data['getmoduleData']['data'][0]
+      this.content = data.data['getmoduleData']['data'][0];
+      
       this.modulength = this.content['coursedetails'].length
-      console.log(this.content, "contenyt")
-      // }
-
-      // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
-      //    this.content = this.content.getModuleData.data[0]
-      // }   
+      console.log(this.content, "contenyt") 
 
     }, err => {
 

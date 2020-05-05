@@ -1,5 +1,6 @@
 Feature: Wishlist Functionality
 
+@sprint1
 Scenario: Add the courses to wishlist
 
 Given :Learner is in my course page

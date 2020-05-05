@@ -1,5 +1,6 @@
 Feature: Login Feature
 
+@sprint1
 Scenario: Login with a Learner
 
 Given : User is in login page
