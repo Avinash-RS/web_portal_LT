@@ -29,6 +29,7 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 import { AddModuleComponent } from './pages/add-module/add-module.component';
+import { AuthGuard } from '@core/services/_helpers';
 
 
 
@@ -36,21 +37,21 @@ import { AddModuleComponent } from './pages/add-module/add-module.component';
 
 const routes: Routes = [
 
-  { path: '', component: DashboardComponent, },
-  { path: 'wca', component: WcaComponent, },
-  { path: 'addcourse', component: CreateCourseComponent, },
-  { path: 'viewmodule', component: ViewModuleComponent, },
-  { path: 'createmodule', component: CreateModuleComponent, },
-  { path: 'addtemplate', component: CreateTemplateComponent, },
-  { path: 'choosetemplate', component: ChooseTemplateComponent, },
-  { path: 'addtopic', component: CreateTopicComponent, },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard]},
+  { path: 'addcourse', component: CreateCourseComponent,canActivate: [AuthGuard] },
+  { path: 'viewmodule', component: ViewModuleComponent,canActivate: [AuthGuard] },
+  { path: 'createmodule', component: CreateModuleComponent,canActivate: [AuthGuard] },
+  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard] },
+  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard] },
+  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard] },
 
-  { path: 'addfile', component: UploadFilesComponent, },
-  { path: 'mycourse', component: MycreatedCourseComponent, },
-  { path: 'ct', component: ChooseTemplateComponent, },
-  { path: 'rf', component: ReferenceFileComponent, },
-  { path: 'addmodule', component: AddModuleComponent },
-  { path: 'previewcourse', component: CoursepreviewComponent }
+  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard] },
+  { path: 'mycourse', component: MycreatedCourseComponent, canActivate: [AuthGuard]},
+  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard] },
+  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard] },
+  { path: 'addmodule', component: AddModuleComponent ,canActivate: [AuthGuard]},
+  { path: 'previewcourse', component: CoursepreviewComponent,canActivate: [AuthGuard] }
 
 
 

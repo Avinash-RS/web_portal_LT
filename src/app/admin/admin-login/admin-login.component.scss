@@ -14,8 +14,10 @@ mat-card {
 button {
     background: $color-blue !important;
     color: $color-white;
-    width: 70%;
-    margin-left: 15%;
+    width: 80%;
+    // margin-left: 15%;
+    margin: auto;
+    display: block;
 }
 
 mat-form-field {

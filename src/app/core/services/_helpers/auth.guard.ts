@@ -68,7 +68,7 @@ export class AuthGuard implements CanActivate {
     if (role == 'admin' && adminDetails) {
       if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser'
         || state.url == "/Admin/auth/listCourses" || state.url == "/Admin/auth/viewReport" || state.url == "/Admin/auth/publishCourse"
-        || state.url == "/Admin/auth/usergroup" || state.url == '/Admin/auth/Wca/wca' || state.url == '/Admin/auth/Wca/addcourse'
+        || state.url == "/Admin/auth/usergroup" || state.url == '/Admin/auth/Wca' || state.url == '/Admin/auth/Wca/addcourse'
         || state.url == '/Admin/auth/Wca/viewmodule' || state.url == '/Admin/auth/Wca/createmodule'
         || state.url == '/Admin/auth/Wca/addtemplate' || state.url == '/Admin/auth/Wca/choosetemplate'
         || state.url == '/Admin/auth/Wca/addtopic' || state.url == '/Admin/auth/Wca/rf'

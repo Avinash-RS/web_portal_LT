@@ -6,6 +6,7 @@ import { id } from '@swimlane/ngx-charts/release/utils';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { debug } from 'util';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 
 @Component({
@@ -22,10 +23,11 @@ export class AddModuleComponent implements OnInit {
   isHover: boolean;
   isDrag: boolean;
   constructor(public spinner: NgxSpinnerService,
-    public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
+    public toast: ToastrService, private gs: GlobalServiceService,private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
-
+    localStorage.setItem('role','admin');
+    this.gs.checkLogout();
     this.resetList()
 
     this.route.queryParams.subscribe(params => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WcaService } from '../../services/wca.service'
 import { Router } from '@angular/router';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,10 +53,14 @@ export class DashboardComponent implements OnInit {
   constructor(public service: WcaService,
     private adminService: AdminServicesService,
     //  public spinner: NgxSpinnerService, 
-    private router: Router, ) { }
+    private gs: GlobalServiceService,
+    private router: Router, ) {
+      localStorage.setItem('role', 'admin');
+     }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
+    console.log(this.adminDetails)
     this.spinner = true;
     this.getPublishedCourses();
     this.getCreatedCourses();

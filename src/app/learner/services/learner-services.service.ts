@@ -19,7 +19,6 @@ import {
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
   providedIn: 'root'
@@ -159,7 +158,6 @@ export class LearnerServicesService {
     });
   }
   forgotPasswordByUsername(username) {
-    console.log(username)
     return this.Apollo.query({
       query: get_forgot_password_byusername,
       variables: {
@@ -358,7 +356,6 @@ export class LearnerServicesService {
   }
 
   getallcourses(groupid, pagenumber) {
-    console.log(groupid,pagenumber)
     return this.Apollo.query({
       query: get_all_course_by_usergroup,
       variables: {

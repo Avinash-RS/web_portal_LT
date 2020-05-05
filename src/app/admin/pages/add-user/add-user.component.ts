@@ -34,13 +34,14 @@ export class AddUserComponent implements OnInit {
     private alert: AlertServiceService, private service: AdminServicesService, ) { }
 
   ngOnInit() {
-
+    localStorage.setItem('role','admin');
     this.addUserForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.fullnameVal),
       email: new FormControl('', myGlobals.emailVal),
       group: ['', myGlobals.req]
     });
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
     this.service.getUserGroup()
       .subscribe((result: any) => {
         this.groups = result.data.get_user_group.message

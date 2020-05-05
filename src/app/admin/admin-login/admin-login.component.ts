@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -17,7 +18,7 @@ export class AdminLoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder,
+  constructor(private router: Router, private formBuilder: FormBuilder,private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: LearnerServicesService, ) { }
 
   ngOnInit() {
@@ -44,6 +45,7 @@ export class AdminLoginComponent implements OnInit {
               localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Admin/auth/userManagement'])
               localStorage.setItem('role','admin');
+              this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
               localStorage.setItem('token',loginresult.data.login.message.token)
           } else
             this.alert.openAlert("Invalid login. Please try again", null)
