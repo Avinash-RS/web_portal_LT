@@ -72,7 +72,7 @@ export class ScormplayerComponent implements OnInit {
 
         this.content = data.data['getmoduleData']['data'][0]
         this.modulength =  this.content['coursedetails'].length;
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url);
       // }
      
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
