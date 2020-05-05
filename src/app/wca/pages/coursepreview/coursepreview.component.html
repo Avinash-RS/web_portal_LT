@@ -39,10 +39,14 @@
           <div class="grid-item">: {{course?.course_id}}</div>
           <div class="grid-item fadetext">Version number</div>
           <div class="grid-item">: {{course?.version}}</div>
-          <div class="grid-item fadetext">Published on</div>
-          <div class="grid-item">: {{course?.published_on | date }}</div>
-          <div class="grid-item fadetext">Published by</div>
-          <div class="grid-item">: {{course?.published_by}}</div>
+          <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created on</div>
+          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_at | date}}</div>
+          <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created by</div>
+          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_by}}</div>
+          <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published on</div>
+          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_on | date }}</div>
+          <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published by</div>
+          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_by}}</div>
         </div>
 
         <div class="row cls" *ngIf="isshowPublish">
@@ -212,7 +216,7 @@
 
           <div class="col-4">
             <mat-form-field style="text-align: right;margin-top: 5%;">
-              <mat-label>Resourse</mat-label>
+              <mat-label>Resources</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
