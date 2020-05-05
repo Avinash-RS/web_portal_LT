@@ -39,7 +39,7 @@
           <div class="grid-item fadetext">Course ID</div>
           <div class="grid-item">: {{course?.course_id}}</div>
           <div class="grid-item fadetext">Version number</div>
-          <div class="grid-item">: {{course?.version}}</div>
+          <div class="grid-item">: {{courseType != 'publish' ? 'NA'  : course?.version}}</div>
           <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created on</div>
           <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_at | date}}</div>
           <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created by</div>
@@ -169,7 +169,7 @@
 
     <div class="row">
       <div class="col-md-12 col-sm-12 col-12">
-        <h3>{{course?.step_towards}}</h3>
+        <h3>{{course?.takeway_details[0].description}}</h3>
       </div>
     </div><br>
     <div class="line"></div>
@@ -216,7 +216,7 @@
           </div>
 
           <div class="col-4">
-            <mat-form-field style="text-align: right;margin-top: 5%;">
+            <mat-form-field style="text-align: right;margin-top: 5%;" *ngIf="mod.resourse?.files.length > 0">
               <mat-label>Resources</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
