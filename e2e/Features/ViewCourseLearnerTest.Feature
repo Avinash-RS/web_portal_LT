@@ -1,5 +1,6 @@
 Feature: ViewCourseLearner
 
+@sprint2
 Scenario: ViewCourseLearner Functionality
 
 Given : I am in my courses page

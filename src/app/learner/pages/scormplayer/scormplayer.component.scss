@@ -18,7 +18,7 @@
     padding-top: 0 !important
 }
 .contentTop {
-    margin-top: 0px !important;
+    margin-top: 10px !important;
 }
 
 .wrap-body {
@@ -42,9 +42,9 @@
 .head {
     text-align: left !important;
     color: $color-orange !important;
-    font-size: 30px;
-    font-weight: 600;
-    margin-top: 56px;
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    margin-top: 5%!important;
 }
 .accordion>input[name="collapse"] {
     display: none;

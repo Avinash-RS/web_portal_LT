@@ -14,16 +14,15 @@ let wlc=new WishlistCoursePage();
 Given(':Learner is in my course page', async () => {
 browser.waitForAngularEnabled(false);
 await browser.get(browser.params.login.url);
-await browser.manage().window().maximize();
 await wlc.Username.sendKeys(browser.params.login.user);
-await wlc.Password.sendKeys(browser.params.login.password);
+await wlc.Password.sendKeys(browser.params.login.pwd);
 await wlc.LoginButton.click(); 
 });
 
 When(':Learner selects wishlist icon on the course', async ()=> {
 await browser.sleep(5000);
 await wlc.Wishlistmenu.click();
-await wlc.Wishlistmenu.click();
+await wlc.Wishlist.click();
   //await wlc.Favorite.click();      
 });
 

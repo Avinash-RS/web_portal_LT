@@ -13,9 +13,10 @@ let vpp=new ViewProfilePage();
 Given(': I am successfully logged into my account', async ()=> {
     browser.waitForAngularEnabled(false);
     await browser.get(browser.params.login.url);
-    await browser.manage().window().maximize();
+    //await browser.manage().window().maximize();
     await vpp.Username.sendKeys(browser.params.login.user);
     await vpp.Password.sendKeys(browser.params.login.pwd);
+    await browser.sleep(2000);
     await vpp.LoginButton.click(); 
 });
 

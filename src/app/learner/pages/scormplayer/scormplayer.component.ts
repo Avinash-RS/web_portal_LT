@@ -41,9 +41,9 @@ export class ScormplayerComponent implements OnInit {
       this.spinner.show();
       this.commonService.viewCurseByID (this.course_id).subscribe(data => {
         if(data.data['viewcourse'].success == true){
-          this.courseDeatils = data.data['viewcourse']['message'][0];
-          console.log(this.courseDeatils )
-          this.authorDetails  =  this.courseDeatils.author_details;
+          this.courseDeatils = data.data['viewcourse']['message'];
+          console.log(this.courseDeatils ,'courseDeatils')
+          // this.authorDetails  =  this.courseDeatils.author_details;
           this.spinner.hide();
         }else{
           this.spinner.hide();

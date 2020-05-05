@@ -13,9 +13,10 @@ let cdp=new CourseDetailsPage();
 Given(': I am on purchased courses page', async ()=> {
     browser.waitForAngularEnabled(false);
     await browser.get(browser.params.login.url);
-    await browser.manage().window().maximize();
+    //await browser.manage().window().maximize();
     await cdp.Username.sendKeys(browser.params.login.user);
     await cdp.Password.sendKeys(browser.params.login.pwd);
+    //await browser.sleep(5000);
     await cdp.LoginButton.click();     
 });
 
