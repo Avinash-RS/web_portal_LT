@@ -132,4 +132,8 @@ export class DashboardComponent implements OnInit {
   goToViewCourse(type) {
     this.router.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
   }
+
+  createCourseNav() {
+    this.router.navigate(['/Admin/auth/Wca/addcourse'],{queryParams:{noEditable:false}});
+  }
 }
