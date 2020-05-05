@@ -16,30 +16,32 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10 m-b-10 heightname">
+    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 heightname">
       {{course.course_name}}
     </div>
   </div>
 
-  <!-- <div class="dspFlx margLeft">
+  <div class="dspFlx margLeft">
     <span *ngIf="showRating" class="dspFlx1">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
       &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
     </span>
     <span class="dspFlx1" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}</span>
     <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
-  </div> -->
+  </div>
 
-  <div class="row" *ngIf = "showRating || showCount || showPrice">
+  <!-- <div class="row" *ngIf="showRating || showCount || showPrice">
     <div class="col-md-5 col-sm-5 col-5 display_flex">
       <bar-rating *ngIf="showRating" [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
-        class="m-t-15 m-l-5">&nbsp;<ng-container *ngIf="showRating">{{showRating && course.rating | number:'1.1-1'}}</ng-container></strong>
+        class="m-t-15 m-l-5">&nbsp;<ng-container *ngIf="showRating">{{showRating && course.rating | number:'1.1-1'}}
+        </ng-container></strong>
     </div>
     <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
     </div>
-    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice && course.price"> <strong>Rs {{course.price | number }}</strong>
+    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice && course.price"> <strong>Rs
+        {{course.price | number }}</strong>
     </div>
-  </div>
+  </div> -->
 
   <div class="row" *ngIf="showDate">
     <div class="col-md-12 f_wt_400 f_sz_14 float_left color-grey">
@@ -49,7 +51,7 @@
 
   <div class="row" *ngIf="showStatus">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <button mat-flat-button  disabled="{{course?.coursePlayerStatus?.status === 'Completed'}}"
+      <button mat-flat-button disabled="{{course?.coursePlayerStatus?.status === 'Completed'}}"
         class="status color_white f_size_16 f_wt_400 width_100 p-10px"
         (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
         [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
