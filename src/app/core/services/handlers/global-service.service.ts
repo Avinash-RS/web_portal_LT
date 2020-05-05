@@ -13,23 +13,39 @@ export class GlobalServiceService {
   private $callWishlist = new BehaviorSubject(false);
   callWishlist = this.$callWishlist.asObservable();
 
+  private $adminName = new BehaviorSubject('admin');
+  adminName = this.$callWishlist.asObservable();
 
   constructor(public route: Router, public alert: AlertServiceService, private locationStrategy: LocationStrategy,
   ) { }
 
   checkLogout() {
-    // console.log('----inside-----')
-    if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner') {
+    // if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner') {
+    //   var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
+    //   var role = localStorage.getItem('role') || null;
+    //   var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    //   if (userDetail == null || adminDetails == null) 
+    //     return userDetail
+    //   else {
+    //     this.alert.openAlert("Logged Out!", "You have been logged out. Please login to continue");
+    //     this.route.navigate(['/Learner/login'])
+    //   }
+    // }
+
+    if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner' && this.route.url != '/Admin/login') {
       var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
       var role = localStorage.getItem('role') || null;
       var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-      if (userDetail == null || adminDetails == null) 
+      if ((userDetail != null || userDetail != undefined ) && role == 'learner')
         return userDetail
+      else if ((adminDetails != null|| adminDetails != undefined) && role == 'admin')
+        return adminDetails
       else {
         this.alert.openAlert("Logged Out!", "You have been logged out. Please login to continue");
         this.route.navigate(['/Learner/login'])
       }
     }
+
   }
 
   checkProfileFilled() {
@@ -45,6 +61,10 @@ export class GlobalServiceService {
 
   canCallWishlist(callWishlist: boolean) {
     this.$callWishlist.next(callWishlist)
+  }
+
+  getAdminName(name : string) {
+    this.$adminName.next(name)
   }
 
   preventBackButton() {

@@ -33,6 +33,7 @@ export class UserMenuComponent implements OnInit {
 
 	constructor(private elementRef: ElementRef, public services: CommonServicesService, private alert: AlertServiceService,
 		private router: Router, ) {
+			// getAdminName
 		this.userDetailes =
 			JSON.parse(localStorage.getItem('adminDetails')) || null;
 		// this.currentUser = this.userDetailes.username;

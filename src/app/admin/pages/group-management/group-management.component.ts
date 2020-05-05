@@ -10,6 +10,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
 import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 export interface PeriodicElement {
   user_id: string;
@@ -50,14 +51,16 @@ export class GroupManagementComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
   selectedArray: any = [];
-  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
+  constructor(private alert: AlertServiceService, private gs: GlobalServiceService,private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
     private router: Router,) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    localStorage.setItem('role','admin');
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
     this.getgroups();
   }
 
@@ -116,7 +119,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   selectgroup(node) {
-    console.log(node);
     if (node.checkbox === true) {
       this.currentpath = node;
       this.disabled = false;
@@ -246,7 +248,6 @@ export class GroupManagementComponent implements OnInit {
     }
     this.adminservice.getAllUsers(pagenumber, 1, this.currentpath.group_id)
       .subscribe((result: any) => {
-        console.log(result.data.get_all_user.message);
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);

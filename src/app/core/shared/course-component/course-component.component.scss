@@ -81,18 +81,18 @@ mat-icon {
 }
 
 .container {
-    width: 94%;
-    margin-left: 3%;
+    width: 90%;
+    margin-left: 5%;
 
     .overlay {
         height: 65%;
-        width: 76%;
+        width: 70%;
         position: absolute;
         overflow: hidden;
         top: 0vh;
         left: 0;
         opacity: 0;
-        margin-left: 12%;
+        margin-left: 15%;
         filter: alpha(opacity=0);
         background-color: $color-blue !important;
         color: $color-white;
