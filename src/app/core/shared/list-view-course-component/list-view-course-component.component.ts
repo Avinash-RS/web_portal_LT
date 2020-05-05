@@ -56,7 +56,6 @@ export class ListViewCourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
-    console.log(course)
     this.loader.show();
     if (this.gs.checkLogout()) {
       if (this.course.wishlisted == false) {
@@ -84,7 +83,6 @@ export class ListViewCourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log("It works", this.course);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
@@ -96,13 +94,11 @@ export class ListViewCourseComponentComponent implements OnInit {
   }
 
   login(v) {
-    console.log(v)
     if (this.btnType == 'Publish') {
       let detail = {
         id: this.course.course_id,
         name: this.course.course_name
       }
-      console.log(detail)
       this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
     }
   }

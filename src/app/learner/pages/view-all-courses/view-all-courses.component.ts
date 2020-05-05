@@ -46,7 +46,6 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getallcourses();
   }
   getcoursecategories() {
-    // console.log(this.userDetailes);
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
       this.categories = result.data.get_all_category.message;
     });
@@ -99,12 +98,9 @@ export class ViewAllCoursesComponent implements OnInit {
    * Determines whether scroll down on
    */
   onpagination(event) {
-    console.log(event);
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    console.log(this.userDetailes);
     this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
-      console.log(result.data.get_all_course_by_usergroup.message);
       this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });
   }
