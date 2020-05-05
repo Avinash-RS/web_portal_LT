@@ -240,14 +240,17 @@
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
                       Un-block</button>
-                    <mat-form-field class="width_100 ">
+                    <button *ngIf="!element.is_blocked" mat-stroked-button
+                      [disabled]="(selectedArray && selectedArray.length > 0)" (click)="changeGroup(changeDialog,element)">
+                      Change Group</button>
+                    <!-- <mat-form-field class="width_100 ">
                       <mat-label>Change Group</mat-label>
                       <mat-select name="Change Group">
                         <mat-option *ngFor="let grp of groups" [value]="grp">
                           {{grp.group_name}}
                         </mat-option>
                       </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
                   </mat-cell>
                 </ng-container>
 
@@ -280,4 +283,34 @@
     </div>
     <!-- </div> -->
   </div>
+
+  <ng-template #changeDialog>
+    <span class="f_size_18 color_blue float_right">
+      <i class="fa fa-times-circle-o close" aria-hidden="true" (click)="closedialogbox()"></i>
+    </span>
+    <h1 class="head">Change user group</h1>
+    <mat-dialog-content style="width: 380px;">
+      <br><br>
+      <form [formGroup]="changeGrpForm">
+        <div class="form-group">
+          <label>Group Name</label><span style="color: red;"> *</span><br>
+          <mat-form-field class="width_100 ">
+            <!-- <mat-label>Institute Name</mat-label> -->
+            <mat-select formControlName="group">
+              <mat-option *ngFor="let grp of groups" [value]="grp">
+                {{grp.group_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div><br>
+      </form>
+      <br><br>
+    </mat-dialog-content><br>
+    <mat-dialog-actions>
+      <button mat-raised-button class="center" [disabled]="changeGrpForm.invalid" (click)="updateGroup()">
+        Update Group
+      </button><br><br>
+    </mat-dialog-actions>
+  </ng-template>
+
 </div>
