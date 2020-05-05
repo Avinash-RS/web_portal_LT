@@ -96,8 +96,8 @@ export class ScormplayerComponent implements OnInit {
       }
       document.body.removeChild(link); 
 }
-  moresection(vale){
-    console.log(vale,'vale')
+  moresection(vale,modelenght){
+    this.modulength = modelenght - 5;
   if (vale == true){
     this.isCollapsed = false
   }else{

@@ -29,11 +29,8 @@
                 <div class="form-group">
 
                   <div class="row">
-                    <div class="col-md-9">
-
+                    <div class="col-md-8">
                       <div>
-
-
                         <div class="row crs1 padBot20px">
                           <div class="col-md-3"><span style="font-weight: bold;">Course Details</span></div>
                           <div class="col-md-9" style="visibility:collapse;">
@@ -41,7 +38,7 @@
                           </div>
                         </div>
 
-                        <div class="row crs1 pad18px">
+                        <div class="row crs1">
                           <div class="col-md-3">Course Name<span style="color: red;">*</span></div>
                           <div class="col-md-9"><input class="inputmainWidth" (keydown)="_handleKeydown($event)" type="text" placeholder="Enter the course name"
                               formControlName="course_name" required /> </div>
@@ -55,21 +52,21 @@
                               name="info" (keydown)="_handleKeydown($event)"></textarea></div>
                         </div>
 
-                        <div class="row crs1">
+                        <div class="row crs1 margTop7px">
                           <div class="col-md-3">Pre-Requisite</div>
                           <div class="col-md-9">
                             <!-- <textarea class="inputs" style="resize: none;"  formControlName="prerequisit_details"
                                           placeholder="Enter the course description (200 Characters)" maxlength="1000" 
                                           name="info"></textarea> -->
 
-                            <mat-form-field class="matchipsbrder">
+                            <mat-form-field class="matchipsbrder" >
                               <mat-chip-list #preReqList>
                                 <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
                                   matTooltip={{req?.name}}>
                                   {{req?.name}}
                                   <mat-icon matChipRemove>cancel</mat-icon>
                                 </mat-chip>
-                                <input placeholder="Add Details"  (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
+                                <input  (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
                                   [matChipInputAddOnBlur]="true" [matChipInputFor]="preReqList"
                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                   (matChipInputTokenEnd)="addrequest($event)">
@@ -81,9 +78,9 @@
                         </div>
 
                         <div class="row crs1 pad18px">
-                          <div class="col-md-3">Mode</div>
+                          <div class="col-md-3 margTop6px">Mode</div>
                           <div class="col-md-9 modeFlx">
-                            <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
+                            <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
                           </div>
                         </div>
 
@@ -111,12 +108,12 @@
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="mainImage">
                         <span>
                           <input style="display: none;" id="fileInput" type='file' #fileInput
                             (change)="onSelectFile($event,'img1')"> <img class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
-                            [src]="preview1 ? preview1 : '../../../../assets/images/image_upload.svg'">
+                            [src]="courseForm?.value?.course_img_url ? courseForm?.value?.course_img_url : '../../../../assets/images/image_upload.svg'">
                         </span>
                           <span *ngIf="!this.preview1">Upload the Course Image <span style="color: red;">*</span></span>
                           <span *ngIf="!this.preview1">(.JPG,.JPEG,.PNG)</span>
@@ -132,7 +129,7 @@
                   <div>
                     <div class="row">
 
-                      <div class="col-md-12">
+                      <div class="col-md-11">
 
                         <div class="row crs1 padBot20px">
                           <div class="col-md-3"><span style="font-weight: bold;">Instructor Details</span></div>
@@ -150,10 +147,10 @@
                             <ng-container formArrayName="author_details" *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
                               <ng-container [formGroupName]="i">
                             <span class="width88">
-                              <mat-select [disabled]='showdeletedicon' formControlName="author_name" class="inputs2"
+                              <mat-select [disabled]='showdeletedicon' formControlName="author_name"  (selectionChange)="change($event.value,i)"  class="inputs2"
                                                                   placeholder="Select the instructor" name="language">
                                                                   <mat-option *ngFor="let k of AllInstructors | filter_matselect:selected"
-                                                                    [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change(k,i)">
+                                                                    [disabled]="k.disabled" [value]="k.name" >
                                                                     {{k?.name}}
                                                                   </mat-option>
                                                                 </mat-select>
@@ -165,7 +162,7 @@
                               <input style="display: none;" id="fileInput1" type='file' #fileInput1
                               (change)="onSelectFile($event,'img2',i)">
                             <img class="img2" for="fileInput1" (click)="fileInput1.click()"
-                              [src]="preview2[i] ? preview2[i] : '../../../../assets/images/image_upload.svg'">
+                              [src]="courseForm?.value?.author_details[i]?.image ? courseForm?.value?.author_details[i]?.image : '../../../../assets/images/image_upload.svg'">
                             </span>
                             <span class="spanandWidth">
                               <textarea class="inputs3" style="resize: none;"
@@ -237,19 +234,19 @@
                   <div>
                     <div class="row">
 
-                      <div class="col-md-12">
+                      <div class="col-md-11">
 
-                        <div class="row">
-                          <div class="col-md-3"><span style="font-weight: bold;">Certification</span></div>
+                        <!-- <div class="row">
+                          <div class="col-md-3"><span style="font-weight: bold;"></span></div>
                           <div class="col-md-9" style="visibility:collapse;">
                             <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
                           </div>
-                        </div>
+                        </div> -->
 
 
 
-                        <div class="row">
-                          <div class="col-md-3">Certificate</div>
+                        <div class="row padtp25px">
+                          <div class="col-md-3">Certification</div>
                           <div class="col-md-9 margLeft41px">
 
 
@@ -275,7 +272,7 @@
                   <div>
                     <div class="row">
 
-                      <div class="col-md-12">
+                      <div class="col-md-11">
 
                         <div class="row">
                           <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
@@ -292,17 +289,17 @@
                          <ng-container formArrayName="coursepartner_details" *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
                           <ng-container [formGroupName]="i">
                            <span class="width100full">
-                            <mat-select [disabled]='showdeletedicon' formControlName="name" class="inputs4 hgt39"
+                            <mat-select [disabled]='showdeletedicon' formControlName="name" (selectionChange)="change1($event.value,i)" class="inputs4 hgt39"
                             placeholder="Select the institute" name="language">
                             <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
-                              [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change1(k,i)">
+                              [disabled]="k.disabled" [value]="k.name" >
                               {{k?.name}}
                             </mat-option>
                           </mat-select>
                             <input style="display: none;" id="fileInput3" type='file' #fileInput3
                             (change)="onSelectFile($event,'img3',i)">
                               <img class="img3 img3marg" for="fileInput3" (click)="fileInput3.click()"
-                            [src]="preview3[i] ? preview3[i] : '../../../../assets/images/image_upload.svg'">
+                            [src]="courseForm?.value?.coursepartner_details[i]?.image ? courseForm?.value?.coursepartner_details[i]?.image : '../../../../assets/images/image_upload.svg'">
                            </span>
                            
                          </ng-container>
@@ -366,10 +363,10 @@
                   <div>
                     <div class="row">
 
-                      <div class="col-md-9">
+                      <div class="col-md-8">
 
                         <div class="row margbtm">
-                          <div class="col-md-3"><span style="font-weight: bold;">learners Takeaway</span></div>
+                          <div class="col-md-3"><span style="font-weight: bold;">Learners Takeaway</span></div>
                           <div class="col-md-9" style="visibility:collapse;">
                             <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
                           </div>
@@ -396,7 +393,7 @@
                                       <input style="display: none;" id="fileInput4" type='file' #fileInput4
                                         (change)="onSelectFile($event,'img4',i,j)"><img class="img5" for="fileInput4"
                                         (click)="fileInput4.click()"
-                                        [src]="preview4[j] ? preview4[j] : '../../../../assets/images/image_upload.svg'">
+                                        [src]="courseForm?.value?.takeway_details[j]?.media[j] ? courseForm?.value?.takeway_details[j]?.media[j] : '../../../../assets/images/image_upload.svg'">
                                     </div>
                                   </div>
                                 </div>

@@ -1141,7 +1141,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    moment().year();
+    console.log('user',this.currentUser.is_profile_updated);
+    if (this.currentUser.is_profile_updated){
+      this.cannotEdit = true;
+    }
+    else{
+      this.cannotEdit = false;
+    }
+    // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl("", myGlobals.req),
@@ -1164,13 +1171,14 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl("")
       })
     });
-    console.log('form',this.profileForm);
+    console.log('form', this.profileForm);
     console.log('stud', this.profileForm.get('is_student_or_professional'))
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
+        console.log('inside')
         if (is_student_or_professional === 'professional') {
           job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
           org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
@@ -1183,17 +1191,8 @@ export class ProfileComponent implements OnInit {
         job_role.updateValueAndValidity();
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
+        console.log(this.profileForm.get('professional'))
       })
-    // const specification = this.profileForm.get('in.specification');
-    // this.profileForm.get('qualification').valueChanges
-    // .subscribe(qualification => {
-    //   if(qualification.level_code !=='10'){
-    //     specification.setValidators([Validators.required])
-    //   } else {
-    //     specification.setValidators(null)
-    //   }
-    //   specification.updateValueAndValidity();
-    // });
   }
 
   //to get controls for validation
@@ -1251,9 +1250,11 @@ export class ProfileComponent implements OnInit {
     })
   }
   yearOfpassing(index) {
-    this.startYear = moment().year() - 60;
-    this.endYear = moment().year() + 3;
- 
+       this.startYear = 2020- 60;
+    this.endYear = 2020 + 3;
+    // this.startYear = moment().year() - 60;
+    // this.endYear = moment().year() + 3;
+
     this.profileForm.value.qualification.forEach(element => {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
         this.alert.openAlert('Invalid year', null);
@@ -1484,7 +1485,7 @@ export class ProfileComponent implements OnInit {
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
-   ;
+    ;
   }
 
   otpverification() {
@@ -1648,5 +1649,10 @@ export class ProfileComponent implements OnInit {
       specification.setValidators(null)
     specification.updateValueAndValidity();
     console.log(specification)
+  }
+  formatPercentage(index){
+    let val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
+    let per = parseFloat(val).toFixed(2);
+    this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
   }
 }

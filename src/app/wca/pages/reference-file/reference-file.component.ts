@@ -53,11 +53,11 @@ export class ReferenceFileComponent implements OnInit {
     this.get_module_topic()
     this.dataSource.sort = this.sort;
     this.getAllRefDoc(0);
-    this.getModuleData();
+   // this.getModuleData();
   
      this.dataSource.paginator = this.paginator;
      console.log(this.dataSource)
-    var user = localStorage.getItem('UserDetails')
+    var user = localStorage.getItem('adminDetails')
     this.currentUser = JSON.parse(user);
     this.selectedOption = 'document';
     this.referenceLink = "http://";
@@ -71,17 +71,17 @@ export class ReferenceFileComponent implements OnInit {
   }
 
 
-  getModuleData() {
-    this.learnerservice.getModuleData(1).subscribe(data => {
-      console.log(data)
-      // if(data.data['getmoduleData']['success'] == true){
-        this.modulemenu = data.data['getmoduleData']['data'][0]
-        this.topicmenu = this.modulemenu.coursedetails[0];
-      // }else{
-        // this.alert.openAlert('Something went wrong please try after sometime',null)
-      // } 
-    })
-  }
+  // getModuleData() {
+  //   this.learnerservice.getModuleData(1).subscribe(data => {
+  //     console.log(data)
+  //     // if(data.data['getmoduleData']['success'] == true){
+  //       this.modulemenu = data.data['getmoduleData']['data'][0]
+  //       this.topicmenu = this.modulemenu.coursedetails[0];
+  //     // }else{
+  //       // this.alert.openAlert('Something went wrong please try after sometime',null)
+  //     // } 
+  //   })
+  // }
 
   uploadDoc(event){
     this.selectfile = <File>event.target.files[0];

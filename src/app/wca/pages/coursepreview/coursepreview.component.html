@@ -26,7 +26,7 @@
       <div class="col-md-4 col-sm-12 col-12">
         <div style="width: 60%; ">
           <img class="image" src="{{course?.course_img_url}}">
-        </div>
+        </div><br>
         <div class="info">
           <div class="grid-item fadetext"><b>Course Name</b></div>
           <!-- <div class="grid-item" > -->
@@ -63,9 +63,9 @@
       <!-- Right side  -->
       <div class="col-md-8 col-sm-12 col-12">
         <!-- <h1 class="sd">Short Description</h1> -->
-        <div *ngIf="course">
+        <!-- <div *ngIf="course">
           <h4 style="text-align: left;">{{course?.short_description}}</h4>
-        </div>
+        </div> -->
         <div class="enroll">
           <div class="grid-item " *ngIf="courseType === 'publish'"><b>Learners Enrolled</b></div>
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">: NA</div>
@@ -142,8 +142,8 @@
 
         <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media'">
           <owl-carousel-o [options]="customOptions1" class="takeway">
-            <ng-template carouselSlide [id]="1">
-              <img *ngFor="let img of course?.takeway_details[0].media"[src]="img.image ? img.image : '../../../../assets/learner/lens.jpg' " height="500px">
+            <ng-template carouselSlide [id]="img" *ngFor="let img of course?.takeway_details[0].media"> 
+              <img [src]="img ? img : '../../../../assets/learner/lens.jpg' " height="500px">
             </ng-template>
           </owl-carousel-o>
         </div>
@@ -178,7 +178,7 @@
       <mat-grid-tile *ngFor="let author of course?.author_details">
         <div class="row">
           <div class="col-md-4 ">
-            <img class="image" [src]="author.author_img ? author.author_img : '../../../../assets/learner/avatar2.png'">
+            <img class="image" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'">
           </div>
           <div class="col-md-8 ">
             <div class="cardhead"><b>{{author.author_name}}</b></div><br>
@@ -262,8 +262,8 @@
       </section>
     </div>
     <div style="text-align:center;" *ngIf="modulength >= 5">
-      <button class="btn1 success" (click)="moresection(isCollapsed)" [attr.aria-expanded]="!isCollapsed"
-        aria-controls="collapseExample">{{modulength / 2}} more section</button>
+      <button class="btn1 success" (click)="moresection(isCollapsed,modulength)" [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample">{{modulength - 5}} more section</button>
     </div>
 
      <!-- Course preview dialogbox -->

@@ -1,7 +1,7 @@
 @import "variable";
 
 .m-t-20 {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .m-t-10 {
@@ -27,9 +27,23 @@
 }
 
 #enroll_now {
-    background-color: $color-dark-green !important;
+    background-color: #1f3777;
+    color: #fff;
+    font-weight: 500 !important;
     width: 125px
 }
+
+.wishlist {
+    position: relative;
+    z-index: 1;
+    // margin-left: -5px;
+    margin-top: 10px;
+
+    .wishlist_btn {
+        background: white //  rgb(41, 41, 41);
+    }
+}
+
 
 @media screen and (max-width:845px) {
     .border-left-color {
@@ -55,6 +69,10 @@ mat-icon {
 
 .m-r-30 {
     margin-right: 30px;
+}
+
+.m-r-10 {
+    margin-right: 10px;
 }
 
 

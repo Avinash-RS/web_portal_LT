@@ -16,6 +16,14 @@ img {
     margin-top: 10px;
 }
 
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
 ::ng-deep .br-default .br-unit {
     font-size: 16px;
     height: 18px;
@@ -27,9 +35,14 @@ img {
     margin-top: 7px;
 }
 
+.m-t-25 {
+    margin-top: 25px;
+}
+
 .m-l-5 {
     margin-left: 5px !important;
 }
+
 
 .status {
     letter-spacing: 1px;
@@ -68,15 +81,15 @@ mat-icon {
 }
 
 .container {
-    width: 96%;
-    margin-left: 2%;
+    width: 94%;
+    margin-left: 3%;
 
     .overlay {
-        height: 55%;
+        height: 65%;
         width: 76%;
         position: absolute;
         overflow: hidden;
-        top: 2vh;
+        top: 0vh;
         left: 0;
         opacity: 0;
         margin-left: 12%;
@@ -87,15 +100,16 @@ mat-icon {
     }
 }
 
-.margLeft{
+.margLeft {
     margin-left: -10px;
 }
 
-.dspFlx{
-display: flex;
-justify-content: space-evenly;
+.dspFlx {
+    display: flex;
+    justify-content: space-evenly;
 }
-.dspFlx1{
+
+.dspFlx1 {
     display: flex;
     align-items: center;
 }
@@ -120,19 +134,23 @@ justify-content: space-evenly;
 .buy_now {
     border: 0.5px solid rgb(211, 210, 210);
 }
-.enroll{
+
+.enroll {
     background-color: #1f3777;
     color: #fff;
     font-weight: 500 !important;
 }
+
 .color-grey {
     color: #363738;
 }
-.iconClr{
+
+.iconClr {
     color: #777777;
     font-size: 12px;
     font-weight: 400;
 }
-.heightname{
-    height:30px;
+
+.heightname {
+    height: 30px;
 }
