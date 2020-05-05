@@ -1,5 +1,6 @@
 @import "variable";
 
+
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
@@ -12,6 +13,7 @@
     padding: 7px !important;
     color: $color-blue;
 }
+
 .mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 0 10px rgb(170, 170, 170) ;
+    box-shadow: 0 0 10px rgb(170, 170, 170);
 }
