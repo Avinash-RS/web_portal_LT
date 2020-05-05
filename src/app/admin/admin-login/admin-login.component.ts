@@ -45,7 +45,7 @@ export class AdminLoginComponent implements OnInit {
               localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
               this.router.navigate(['/Admin/auth/userManagement'])
               localStorage.setItem('role','admin');
-              this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
+              // this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
               localStorage.setItem('token',loginresult.data.login.message.token)
           } else
             this.alert.openAlert("Invalid login. Please try again", null)
