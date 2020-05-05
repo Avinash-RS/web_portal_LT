@@ -32,6 +32,9 @@ export class CreateCourseComponent implements OnInit {
   languages=['English']
   queryData:any;
   courseEditDetails:any;
+  authorLengthArray=[];
+  courseLengthArray=[];
+  TakeAwayLengthArray=[]
 
   createItem(): FormGroup {
     this.preview2.push(null)
@@ -54,7 +57,9 @@ export class CreateCourseComponent implements OnInit {
   createItem2(): FormGroup {
     return this.formBuilder.group({
       text: '',
-      media: this.formBuilder.array([ this.createMedia()]),
+      media: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] && this.courseEditDetails.takeway_details[0].media ? this.courseEditDetails.takeway_details[0].media.map((data,index) => {
+        return this.createMedia();
+      }) : [this.createMedia()]),
       description: '',
       what_will_you_learn:''
 
@@ -87,29 +92,42 @@ export class CreateCourseComponent implements OnInit {
       console.log(this.queryData)
       if ( this.queryData && this.queryData.edit) {
         this.updateFormCourse(this.queryData.viewingModule)
+      } else {
+        console.log('#################')
+        this.courseForm = this.mainFormCreation()
+        this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
       }
+      } else {
+        console.log('%%%%%%%%%%')
       }
     });
 
 
-    this.courseForm = this.formBuilder.group({
+   
+  
+    // console.log(this.courseForm.value)
+
+    this.startup();
+  }
+
+  mainFormCreation() : FormGroup{
+    return this.formBuilder.group({
       course_name:[null,Validators.compose([Validators.required])],
       course_description:[null,Validators.compose([])],
       course_img_url:[null,Validators.compose([Validators.required])],
       pre_requisite:[this.preRequisites,Validators.compose([])],
       preview_video:[null,Validators.compose([])],
-      author_details:this.formBuilder.array([ this.createItem()]),
-      coursepartner_details:this.formBuilder.array([ this.createItem1()]),
+      author_details:this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.author_details && this.courseEditDetails.author_details.length ? this.courseEditDetails.author_details.map((data,index) => {
+        return this.createItem();
+      }) : [this.createItem()]),
+      coursepartner_details:this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.coursepartner_details && this.courseEditDetails.coursepartner_details.length ? this.courseEditDetails.coursepartner_details.map((data,index) => {
+        return this.createItem1();
+      }) : [this.createItem1()]),
       takeway_details:this.formBuilder.array([ this.createItem2()]),
       certificate_name:[null,Validators.compose([])],
       course_mode:[true],
       course_language:[null],
     });
-    this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
-  
-    // console.log(this.courseForm.value)
-
-    this.startup();
   }
   
   get formControls() { return this.courseForm.controls; }
@@ -289,13 +307,14 @@ export class CreateCourseComponent implements OnInit {
         this.courseForm.value.course_id = this.queryData.viewingModule;
         this.wcaService.updateCourse(this.courseForm.value).subscribe((data:any) => {
           console.log(data);
-          // if (0) {
-          //   this.toast.success('Course Updated Successfully !!!');
-          //   console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
-          //   this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
-          // } else {
-          //   this.toast.error('Something Went Wrong While Updating !!!');
-          // }
+          if (data && data.success === true) {
+            this.toast.success('Course Updated Successfully !!!');
+            console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
+            // this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
+            this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId:this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name }]);
+          } else {
+            this.toast.error('Something Went Wrong While Updating !!!');
+          }
          
           this.spinner.hide();
         }, err => {
@@ -450,6 +469,7 @@ export class CreateCourseComponent implements OnInit {
           if (data && data.message) {
          this.courseEditDetails = null;
          this.courseEditDetails = data.message;
+         this.courseForm = this.mainFormCreation()
          console.log(this.courseEditDetails);
          console.log(this.courseForm);
          this.preRequisites = this.courseEditDetails.pre_requisite;
