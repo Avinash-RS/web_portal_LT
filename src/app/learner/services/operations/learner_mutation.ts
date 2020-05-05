@@ -92,13 +92,14 @@ export const get_forgot_password_byusername = gql`
     get_forgot_password_byusername(
       username:$username,
     ) {
+      message
+      success
+      user_id
       data{
         value
         type
       }
-      message
-      success
-        
+     
     }
   }
 `;

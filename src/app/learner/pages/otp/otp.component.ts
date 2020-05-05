@@ -55,7 +55,6 @@ export class OtpComponent implements OnInit {
       }
 
 
-  @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -158,11 +157,9 @@ get f() { return this.otpForm.controls; }
     // this.showverify = true;
   }
   get_user_detail(email){
-    console.log('email'+email)
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
-        // console.log('email'+this.useridData.get_user_detail.message[0])
         this.userid =this.useridData.get_user_detail.message[0].user_id; 
         // this.userid= 'm6siev';
         this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
