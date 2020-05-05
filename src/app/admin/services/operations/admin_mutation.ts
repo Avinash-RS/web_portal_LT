@@ -24,6 +24,15 @@ export const user_registration = gql`
   }
 `;
 
+export const update_group = gql`
+mutation update_group($_id: String!, $group_name: String!, $group_id: String!){
+  update_group(_id: $_id,group_name: $group_name, group_id: $group_id) {
+    success
+    error_msg
+    message
+}
+}`
+
 export const createusergroup = gql`
   mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!, $admin_id: String!) {
   createusergroup(group_name: $group_name,group_type: $group_type,

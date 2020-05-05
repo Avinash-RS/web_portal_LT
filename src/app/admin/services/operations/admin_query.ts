@@ -73,6 +73,8 @@ export const get_all_user = gql`
         full_name
         email
         mobile_number
+        group_name
+        group_id
       }
     }
   }`;

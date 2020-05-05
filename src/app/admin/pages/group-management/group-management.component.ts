@@ -11,6 +11,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { FormBuilder, FormControl } from '@angular/forms';
+import * as myGlobals from '@core/globals';
 
 export interface PeriodicElement {
   user_id: string;
@@ -53,14 +55,17 @@ export class GroupManagementComponent implements OnInit {
   selectedArray: any = [];
   trackDetails: any;
   profileDetails: any;
-  constructor(private alert: AlertServiceService, private gs: GlobalServiceService,private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
-    private router: Router,private dialog: MatDialog,) {
+  changeGrpForm: any;
+  userGroupChange: any;
+  constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
+    private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
+    private router: Router, private dialog: MatDialog, ) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
-    localStorage.setItem('role','admin');
+    localStorage.setItem('role', 'admin');
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.adminDetails = this.gs.checkLogout();
     this.getgroups();
@@ -68,9 +73,9 @@ export class GroupManagementComponent implements OnInit {
 
   getgroups() {
     this.adminservice.getUserGroup()
-    .subscribe((result: any) => {
-      this.groups = result.data.get_user_group.message
-    });
+      .subscribe((result: any) => {
+        this.groups = result.data.get_user_group.message
+      });
 
     this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
@@ -81,6 +86,7 @@ export class GroupManagementComponent implements OnInit {
       this.dataSource$.next(this.groups);
     });
   }
+
 
   /** sub group */
   loadsubgroup(node?: any) {
@@ -156,7 +162,34 @@ export class GroupManagementComponent implements OnInit {
   closedialogbox() {
     this.dialog.closeAll();
   }
-  
+  changeGroup(passRef: TemplateRef<any>,element) {
+    this.userGroupChange = null;
+    this.userGroupChange = element;
+    console.log(passRef);
+    this.changeGrpForm = this.formBuilder.group({
+      group: ['', myGlobals.req]
+    })
+    this.dialog.open(passRef)
+  }
+  get f() {
+    return this.changeGrpForm.controls;
+  }
+  updateGroup() {
+    console.log(this.changeGrpForm);
+    // this.getAllUser(0);
+    this.adminservice.updateGroup(this.userGroupChange._id,this.changeGrpForm.value.group.group_name,this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
+      console.log(result);
+      if(result.data.update_group.success) {
+        this.getAllUser(0);
+        this.alert.openAlert('User Group Updated Successfully', null);
+        this.dialog.closeAll();
+      } else {
+        this.alert.openAlert(result.data.update_group.message, null);
+        this.dialog.closeAll();
+      }
+
+    });
+  }
   savegroup(form) {
     let hierarchy;
     let str;
@@ -173,7 +206,7 @@ export class GroupManagementComponent implements OnInit {
           strvalue = 0;
         }
       }
-      if ( this.currentpath && Number(str[1]) >= 7 ) {
+      if (this.currentpath && Number(str[1]) >= 7) {
         this.alert.openAlert('Error !', 'Reached Maximum level');
       } else {
         const data = {
@@ -349,8 +382,8 @@ export class GroupManagementComponent implements OnInit {
 
   tabClick(event) {
     if (event.index === 1) {
-     const pagenumber = 0;
-     this.getAllUser(pagenumber) ;
+      const pagenumber = 0;
+      this.getAllUser(pagenumber);
     }
   }
 }

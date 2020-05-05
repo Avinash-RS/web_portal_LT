@@ -44,15 +44,16 @@
                 </div>
 
                 <div class="partner_image_div">
+                    <!-- <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
                     <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5">
+                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5"> -->
+                    <img class="m-l-30 border-radius-5" width="15%" src="{{course?.course_img_url}}">
                 </div>
                 <!-- </div> -->
             </div>
             <div class="col-md-4">
                 <mat-card class="section_1_card_1 background_trans">
-                    <mat-card-title>
+                    <mat-card-title *ngIf="course.price">
                         <span class="icon f_wt_400 f_size_23">₹ {{course.price}}</span>
                         <span class="f_wt_200 strike_text f_size_16">Rs {{course.price}}</span>
                         <span class="f_wt_200 f_size_16"> {{course.rating}}%Off </span>
@@ -62,9 +63,9 @@
                                 style="background-color: transparent;border: none;box-shadow: none;"
                                 aria-hidden="true"></i>
                             {{course.certificate_html_view_enabled}} day left at this price</p>
-                        <div> <button mat-raised-button class="add_to_cart background-maroon">ADD TO CART</button></div>
+                        <div> <button mat-raised-button class="add_to_cart background-maroon">ENROLL</button></div>
                         <br>
-                        <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br>
+                        <!-- <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br> -->
                         <div>
                             <span class="btn btn-primary btn-primary btn2 pointer"><i class="fa fa-share"
                                     style="-webkit-text-stroke-width: 2px;"></i> Share</span>
@@ -172,27 +173,43 @@
         </div>
 
         <div #Take_away> </div>
-        <br> <br><br><br>
-        <div class="display_flex">
-            <h2 class="m-l-5"> Takeaways</h2>
+        <div
+            *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
+        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '') ||
+        course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''; else noTakeaway">
+            <br> <br><br><br>
+        </div>
+        <ng-template #noTakeaway>
+            <br> <br><br><br>
+            <h2>No Takeaways</h2>
+        </ng-template>
+        <div class="display_flex" *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
+        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '') ||
+        course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">
+            <h2 class="m-l-5">
+                Takeaways</h2>
             <button mat-raised-button (click)="clickedT('media')" style="border: none;
-        box-shadow: none;color : red;margin-left: 10px;">Media</button>
+        box-shadow: none;color : red;margin-left: 10px;" *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
+            course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '')">Media</button>
             <button mat-raised-button (click)="clickedT('text')" style="border: none;
-        box-shadow: none;color : red">Text</button>
+        box-shadow: none;color : red"
+                *ngIf="course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">Text</button>
         </div>
         <!-- <mat-tab-group>{{clicked}} -->
         <!-- <mat-tab label="Media" style="color:red"> -->
-        <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media' && course">
+        <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media' && course && course && course.takeway_details && course.takeway_details[0] &&
+        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != ''">
             <owl-carousel-o [options]="customOptions1" class="takeway">
                 <ng-template carouselSlide [id]="img" *ngFor="let img of course?.takeway_details[0].media">
-                    <img [src]="img ? img : '../../../../assets/learner/lens.jpg' " height="500px">
+                    <img [src]="img" height="500px">
                 </ng-template>
             </owl-carousel-o>
         </div>
         <!-- </mat-tab>
                 <mat-tab label="Text" style="color:red"> -->
         <br>
-        <ul *ngIf="clicked == 'text'">
+        <ul
+            *ngIf="clicked == 'text' && course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">
             <li class="f_size_17" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">
                 {{text.text ? text.text : text.description  }}
             </li>
@@ -233,20 +250,14 @@
         <div class="width_50">
             <br>
             <h2> Course Outline</h2><br>
-            <mat-accordion>
+            <!-- <mat-accordion>
                 <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
                     <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
                         <mat-panel-title>
                             {{i?.package}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <!-- <mat-expansion-panel *ngFor="let it of i.subtitle">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{it.name}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header> -->
-                    <br>
+                                      <br>
                     <table>
                         <tr>
                             <td width="96%"><i class="fa fa-circle"
@@ -255,18 +266,88 @@
                             <td (click)="playCourse(i)"><i class="fa fa-play" aria-hidden="true"
                                     style="font-size:11px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
                             </td>
-                            <!-- <td>20.00</td> -->
+                          
                         </tr>
                     </table>
-                    <!-- </mat-expansion-panel> -->
+            
                 </mat-expansion-panel>
-            </mat-accordion>
+            </mat-accordion> -->
+       
+            <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
+                <input type="checkbox" name="collapse" [id]="res?.modulename">
+                <h2 class="handle">
+                  <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+                      <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+                </h2>
+                <div class="content">
+                  <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
+                    <div class="col-8">
+                      <ol class="submod">
+                        <li>{{i+1}} : {{mod?.topicname}}</li>
+                      </ol>
+                    </div>
+          
+                    <div class="col-4">
+                      <mat-form-field style="text-align: right;margin-top: 5%;">
+                        <mat-label>Resourse</mat-label>
+                        <mat-icon matPrefix>folder</mat-icon>
+                        <mat-select>
+                          <mat-option *ngFor="let file of mod.resourse?.files">
+                            <a href="{{file.path}}" download>{{file.path}}</a>
+                          </mat-option>
+                          <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;"
+                            (click)="downloadAll(mod.resourse?.files)">
+                            <button class="btn">Download all</button>
+                          </mat-option>
+          
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <div *ngIf="isCollapsed">
+                <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
+                  <input type="checkbox" name="collapse" [id]="res?.modulename">
+                  <h2 class="handle">
+                    <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+                        <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+                  </h2>
+                  <div class="content">
+                    <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
+                      <div class="col-8"><br>
+                        <ol class="submod">
+                          <li><b>{{i+1}} : {{mod?.topicname}}</b></li>
+                        </ol>
+                      </div>
+          
+                      <div class="col-4">
+                        <mat-form-field style="text-align: right;margin-top: 5%;">
+                          <mat-label>Resourse</mat-label>
+                          <mat-icon matPrefix>folder</mat-icon>
+                          <mat-select>
+                            <mat-option *ngFor="let file of mod.resourse?.files">
+                              <a href="{{file.path}}" download>{{file.path}}</a>
+                            </mat-option>
+                            <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                              <button class="btn">Download all</button>
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+          
+       
+       
         </div>
         <br>
-        <div class="width_40 m-l-5">
+        <!-- <div class="width_40 m-l-5">
             <h2>Learning Paths</h2><br>
             <img src="../../../../assets/learner/lens.jpg" width="100%">
-        </div>
+        </div> -->
     </div>
 
     <div #Review></div><br><br><br><br><br>
@@ -464,9 +545,9 @@
     </owl-carousel-o> -->
     <owl-carousel-o [options]="trendingCategorires" class="arrow">
         <ng-template carouselSlide *ngFor="let course of course.frequently_bought_together">
-            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                [showWishlist]="true" [showStatus]="false" [showDate]="false" [isDraft]="false"
-                [showCount]="false" [showRating]="true" [showCartBtn]="true">
+            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
+                [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
+                [showCartBtn]="true">
             </app-course-component>
         </ng-template>
     </owl-carousel-o>
@@ -480,9 +561,9 @@
     </h2>
     <owl-carousel-o [options]="trendingCategorires" class="arrow">
         <ng-template carouselSlide *ngFor="let course of course.people_also_viewed">
-            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                [showWishlist]="true" [showStatus]="false" [showDate]="false" [isDraft]="false"
-                [showCount]="false" [showRating]="true" [showCartBtn]="true">
+            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
+                [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
+                [showCartBtn]="true">
             </app-course-component>
         </ng-template>
     </owl-carousel-o>
@@ -491,5 +572,5 @@
         [showStatus]="false"></app-top-courses>
 </div> -->
 
-<br><br><br><br><br>
-<app-footer></app-footer>
+    <br><br><br><br><br>
+    <app-footer></app-footer>
