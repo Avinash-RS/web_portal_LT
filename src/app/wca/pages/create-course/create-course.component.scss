@@ -37,11 +37,15 @@ margin-left: -16px;
 }
 .instructDSPFlx{
     padding-top:14px;
-    display:flex
+    display:flex;
+    padding-bottom: 12px;
+}
+.padtp25px{
+    padding-top: 25px;
 }
 .spanandWidth{
-    width: 92%;
-    margin-left: -41px;
+    width: 72%;
+    padding-left: 12px;
 }
 .margLeft41px{
     margin-left: -41px;   
@@ -498,7 +502,7 @@ width: 100%;
     margin: -11px 0px 0px 12px;
 }
 .width88{
-    width:88%;
+    width:85%;
 }
 .hgt39{
     height: 39px;
@@ -511,13 +515,14 @@ width: 100%;
 }
   .width100full{
     display: flex;
- width: 100%;
+ width: 99%;
   }
   .inputs5 {
     padding: 8px 3px 9px 8px;
     border-radius: 5px;
     // color: #1F3777;
-    width: 91%;
+    width: 88%;
+    margin-left: -16px;
     background: $color-field;
     // margin: 0px -78px 15px -220px;
     // border: 1px solid;
@@ -529,7 +534,7 @@ width: 100%;
     padding: 11px 5px 0px 7px;
     border-radius: 5px;
     background: $color-field;
-    width: 80%;
+    width:100%;
     // background-color: none !important;
     // margin: -1px 41px 18px -360px;
     border: none;
@@ -594,6 +599,7 @@ width: 100%;
     align-items: center;
     background: $color-field;
     border-radius: 13px;
+    margin: 45px;
 }
 .mrgnpad{
     margin: 9px 33px;
@@ -601,4 +607,10 @@ width: 100%;
 .crs1{
 margin: none;
 flex-wrap: nowrap;
+}
+.margTop7px{
+    margin-top: -7px;
+}
+.margTop6px{
+    margin-top: 6px;
 }

@@ -32,6 +32,9 @@ export class CreateCourseComponent implements OnInit {
   languages=['English']
   queryData:any;
   courseEditDetails:any;
+  authorLengthArray=[];
+  courseLengthArray=[];
+  TakeAwayLengthArray=[]
 
   createItem(): FormGroup {
     this.preview2.push(null)
@@ -54,7 +57,9 @@ export class CreateCourseComponent implements OnInit {
   createItem2(): FormGroup {
     return this.formBuilder.group({
       text: '',
-      media: this.formBuilder.array([ this.createMedia()]),
+      media: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] && this.courseEditDetails.takeway_details[0].media ? this.courseEditDetails.takeway_details[0].media.map((data,index) => {
+        return this.createMedia();
+      }) : [this.createMedia()]),
       description: '',
       what_will_you_learn:''
 
@@ -85,31 +90,44 @@ export class CreateCourseComponent implements OnInit {
       if (flag) {
       this.queryData = params;
       console.log(this.queryData)
-      if (this.queryData.edit) {
+      if ( this.queryData && this.queryData.edit) {
         this.updateFormCourse(this.queryData.viewingModule)
+      } else {
+        console.log('#################')
+        this.courseForm = this.mainFormCreation()
+        this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
       }
+      } else {
+        console.log('%%%%%%%%%%')
       }
     });
 
 
-    this.courseForm = this.formBuilder.group({
+   
+  
+    // console.log(this.courseForm.value)
+
+    this.startup();
+  }
+
+  mainFormCreation() : FormGroup{
+    return this.formBuilder.group({
       course_name:[null,Validators.compose([Validators.required])],
       course_description:[null,Validators.compose([])],
       course_img_url:[null,Validators.compose([Validators.required])],
       pre_requisite:[this.preRequisites,Validators.compose([])],
       preview_video:[null,Validators.compose([])],
-      author_details:this.formBuilder.array([ this.createItem()]),
-      coursepartner_details:this.formBuilder.array([ this.createItem1()]),
+      author_details:this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.author_details && this.courseEditDetails.author_details.length ? this.courseEditDetails.author_details.map((data,index) => {
+        return this.createItem();
+      }) : [this.createItem()]),
+      coursepartner_details:this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.coursepartner_details && this.courseEditDetails.coursepartner_details.length ? this.courseEditDetails.coursepartner_details.map((data,index) => {
+        return this.createItem1();
+      }) : [this.createItem1()]),
       takeway_details:this.formBuilder.array([ this.createItem2()]),
       certificate_name:[null,Validators.compose([])],
       course_mode:[true],
       course_language:[null],
     });
-    this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
-  
-    // console.log(this.courseForm.value)
-
-    this.startup();
   }
   
   get formControls() { return this.courseForm.controls; }
@@ -255,7 +273,7 @@ export class CreateCourseComponent implements OnInit {
       this.courseForm.value.course_type = '';
       this.courseForm.value.parent_sub_category_id = [];
       this.courseForm.value.category_id = [];
-      this.courseForm.value.created_by = '';
+      this.courseForm.value.created_by = userDetails.username ? userDetails.username : '';
       this.courseForm.value.updated_by = '';
       this.courseForm.value.admin_id = userDetails.user_id ? userDetails.user_id : '';
       this.courseForm.value.is_published = null;
@@ -285,11 +303,42 @@ export class CreateCourseComponent implements OnInit {
       if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
       this.spinner.show();
       this.submitted = false;
-      console.log(this.courseForm.value);
+      if (this.queryData && this.queryData.edit) {
+        this.courseForm.value.course_id = this.queryData.viewingModule;
+        this.wcaService.updateCourse(this.courseForm.value).subscribe((data:any) => {
+          console.log(data);
+          if (data && data.success === true) {
+            this.toast.success('Course Updated Successfully !!!');
+            console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
+            // this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
+            this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId:this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name }]);
+          } else {
+            this.toast.error('Something Went Wrong While Updating !!!');
+          }
+         
+          this.spinner.hide();
+        }, err => {
+          this.spinner.hide();
+        })  
+    } else {
       this.wcaService.createCourse(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
         this.spinner.hide();
         if (data && data.course_id) {
+          const obj = {
+            coursename: this.courseForm.value.course_name,
+            coursefile: null,
+            coursestatus: 'true',
+            courseid:data.course_id,
+            coursedetails: [],
+            createdby_name: this.courseForm.value.user_name,
+            createdby_id: this.courseForm.value.user_id,
+            createdby_role: this.courseForm.value.user_role
+            }
+            console.log
+          this.wcaService.createDraft(obj).subscribe((data:any) => {
+            console.log(data);
+          });
          this.toast.success('Course Created Successfully !!!');
          console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
          this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
@@ -297,6 +346,7 @@ export class CreateCourseComponent implements OnInit {
       }, err => {
         this.spinner.hide();
       })
+    }
     } else {
       this.toast.warning('Something Went Wrong !!!');
     }
@@ -316,10 +366,13 @@ export class CreateCourseComponent implements OnInit {
   addrequest(event: MatChipInputEvent) {
     const input = event.input;
     const value = event.value;
+    console.log(input);
+    console.log(value)
     if ((value.trim() !== '')) {
       this.courseForm.controls.pre_requisite.setErrors(null);   // 1
       const tempprerequisits = this.courseForm.controls.pre_requisite.value; // 2
       tempprerequisits.push({name:value.trim()});
+      console.log(tempprerequisits)
       this.courseForm.controls.pre_requisite.setValue(tempprerequisits);
       if (this.courseForm.controls.pre_requisite.valid) {              // 4
         this.courseForm.controls.pre_requisite.markAsDirty();
@@ -374,25 +427,29 @@ export class CreateCourseComponent implements OnInit {
 
   get selected(){
     return this.courseForm.get('author_details').value.map(i=>{
+      // console.log(i)
       return i.author_name 
     })
   }
 
   get selected1(){
     return this.courseForm.get('coursepartner_details').value.map(i=>{
+      // console.log(i)
       return i.name 
     })
   }
 
-  change(option,index){
+  change(name,index){
+  let option = this.AllInstructors.find(i=> i.name===name)
   console.log(option);
-  this.courseForm.get('author_details').get(String(index)).get('author_name').setValue(option.author_name);
+  this.courseForm.get('author_details').get(String(index)).get('author_name').setValue(option.name);
   this.courseForm.get('author_details').get(String(index)).get('description').setValue(option.description);
   this.courseForm.get('author_details').get(String(index)).get('image').setValue(option.image);
   }
 
-  change1(option,index){
-    console.log(option);
+ 
+  change1(name,index){
+    let option = this.AllTakeawayDetails.find(i=> i.name===name)
     this.courseForm.get('coursepartner_details').get(String(index)).get('name').setValue(option.name);
     this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(option.image);
     }
@@ -409,11 +466,15 @@ export class CreateCourseComponent implements OnInit {
           course_id : courseid,
         }
         this.wcaService.getcourseDetails(obj).subscribe((data:any) => {
-          console.log(data);
           if (data && data.message) {
          this.courseEditDetails = null;
          this.courseEditDetails = data.message;
+         this.courseForm = this.mainFormCreation()
          console.log(this.courseEditDetails);
+         console.log(this.courseForm);
+         this.preRequisites = this.courseEditDetails.pre_requisite;
+         console.log(this.preRequisites)
+         this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
          this.courseForm.patchValue(this.courseEditDetails);
           }
         this.spinner.hide();

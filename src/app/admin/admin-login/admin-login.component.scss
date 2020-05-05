@@ -3,7 +3,8 @@
 h2 {
     color: $color-blue;
 }
-mat-card{
+
+mat-card {
     width: 24%;
     margin: auto;
     margin-top: 5%;
@@ -12,7 +13,7 @@ mat-card{
 
 button {
     background: $color-blue !important;
-    color: $color-white ;
+    color: $color-white;
     width: 70%;
     margin-left: 15%;
 }
@@ -21,26 +22,35 @@ mat-form-field {
     width: 80%;
     // height: 10vh !important;
 }
+
 .remember_me {
     float: left;
 }
+
 .forgot_ps {
     text-align: end;
     width: 90%;
     color: $color-blue;
     font-weight: 500;
 }
-.sign_up, .remember_me,mat-card-title , a{
+
+.sign_up,
+.remember_me,
+mat-card-title,
+a {
     color: $color-blue;
     text-align: center !important;
 }
+
 .mat-checkbox .mat-checkbox-frame {
     border-color: $color-blank;
     background-color: #dddddd
 }
+
 mat-card-title {
     font-weight: 400;
 }
+
 input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -51,4 +61,7 @@ input[type=text] {
     box-sizing: border-box;
     border-radius: 5px;
 }
- 
+
+.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
+    color: #d2d1d1;
+}

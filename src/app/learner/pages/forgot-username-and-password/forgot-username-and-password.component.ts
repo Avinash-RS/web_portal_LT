@@ -70,7 +70,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     .subscribe(data => {
           if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
             this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
-            this.router.navigate(['Learner']);
+            this.router.navigate(['Learner/login']);
             this.loader.hide();
          
           } else{
@@ -133,4 +133,18 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
 
   }
   
+
+  resetForm(val){
+    if(val == 'mobile') {
+      this.forgotUsername.get('mobile').reset();
+      this.forgotUsername.get('mobile').setValidators(myGlobals.mobileVal);
+      this.forgotUsername.get('mobile').updateValueAndValidity();
+      this.forgotUsername.controls['email'].enable();
+    } else if(val == 'email') {
+        this.forgotUsername.get('email').reset();
+        this.forgotUsername.get('email').setValidators(myGlobals.emailVal);
+        this.forgotUsername.get('email').updateValueAndValidity();
+        this.forgotUsername.controls['mobile'].enable();
+    }
+  }
 }

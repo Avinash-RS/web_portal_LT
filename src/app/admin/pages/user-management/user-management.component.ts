@@ -34,6 +34,7 @@ export class UserManagementComponent implements OnInit {
   profileDetails: {};
   trackDetails: any;
   loader: boolean = false;
+  
   constructor(private router: Router, private gs: GlobalServiceService,
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
     private dialog: MatDialog,
@@ -46,7 +47,7 @@ export class UserManagementComponent implements OnInit {
     this.resultsLength = null;
     if (pagenumber == 0)
       this.ELEMENT_DATA = []
-    this.service.getAllUsers(pagenumber, 1)
+    this.service.getAllUsers(pagenumber, 1,'undefined')
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
@@ -56,9 +57,10 @@ export class UserManagementComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.resultsLength = result.data.get_all_user.learner_count;
           this.loader = false;
-        } else
-          this.alert.openAlert("Please try again later", null)
-
+        } else {
+          this.alert.openAlert("Please try again later", null);
+          this.loader = false;
+        }
       });
   }
 
@@ -70,16 +72,18 @@ export class UserManagementComponent implements OnInit {
     this.router.navigate(['Admin/auth/addUser']);
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator
+  // }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.service.getUserSession(element._id).subscribe((track: any) => {
-      this.trackDetails = track.data.get_user_session_detail.message[0]
+      this.trackDetails = track.data && track.data.get_user_session_detail &&
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
       this.service.getLearnerDetail(element.user_id)
         .subscribe((result: any) => {
-          this.profileDetails = result.data.get_all_learner_detail.message[0];
+          this.profileDetails = result.data && result.data.get_all_learner_detail &&
+            result.data.get_all_learner_detail.message && result.data.get_all_learner_detail.message[0];
           this.dialog.open(templateRef);
         })
     })

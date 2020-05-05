@@ -32,11 +32,16 @@ export class OtpComponent implements OnInit {
   email:any;
   useridData:any;
   userid:any;
-  timeLeft: number = 60;
+  timeLeft: number;
   interval;
   status: string;
   minutes: number;
   seconds: number;
+  verifybutton: Boolean = false;
+  resendtimeLeft: number = 60;
+  resendOtp: Boolean = false;
+  sendOtp: Boolean = false;
+  resendLabel: Boolean = false;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -80,6 +85,9 @@ export class OtpComponent implements OnInit {
 }
 get f() { return this.otpForm.controls; }
   otpverification(){
+    this.resendOtp = false;
+    this.sendOtp = true;
+    this.resendLabel = true;
     this.get_user_detail(this.email)
     console.log('ddddddddddddddddddddddddddddd'+this.userid+this.currentUser._id+this.otpForm.value.mobile+this.email)
     this.loader.show();
@@ -90,8 +98,7 @@ get f() { return this.otpForm.controls; }
             this.isenable = false;
             this.showotp = true;
             //Timer
-            this.timeLeft = 120;
-            // if(this.timeLeft > 60){
+            this.timeLeft = 60;
               this.interval = setInterval(() => {
                 if (this.timeLeft > 0) {
                   this.timeLeft--;
@@ -99,8 +106,7 @@ get f() { return this.otpForm.controls; }
                   this.seconds = this.timeLeft -this.minutes * 60;
     
                 } else {
-                  this.timeLeft = 0;
-                  // this.verifybutton = true;
+                  this.verifybutton = true;
                 }
               }, 1000)
             } 
@@ -127,6 +133,8 @@ get f() { return this.otpForm.controls; }
 
   }
   Resendcode(){
+    this.resendOtp = true;
+    this.sendOtp = false;
     this.loader.show();
     this.service.submit_otp(this.userid,'this.currentUser._id',this.otpForm.value.mobile,this.email).subscribe(data => {
       this.otp = '';
@@ -134,6 +142,16 @@ get f() { return this.otpForm.controls; }
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
         this.showotp = true;
+        this.interval = setInterval(() => {
+          if (this.resendtimeLeft > 0) {
+            this.resendtimeLeft--;
+            this.minutes = Math.floor(this.resendtimeLeft / 60);
+            this.seconds = this.resendtimeLeft - this.minutes * 60;
+
+          } else {
+            this.verifybutton = true;
+          }
+        }, 1000)
       } 
   })
   }

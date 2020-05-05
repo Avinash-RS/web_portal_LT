@@ -112,6 +112,7 @@ export class CreateTopicComponent implements OnInit {
         } else if (this.query.edit && !this.query.addModule) {
           this.wcaService.bSubject1.subscribe((value1:any) => {
           console.log(value1);
+          console.log(this.queryData)
          if(value1 && value1.courseDetails) {
            this.courseArray = value1.courseDetails.coursedetails;
            console.log(this.courseArray);
@@ -418,15 +419,20 @@ if (item) {
     })
   }
 
+  private markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
 
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
 
   addTopicFrom(event,type) {
     event.stopPropagation();
     this.submitted = true;
-    // dummy data
-     this.courseForm.value.createdby_name = 'Admin';
-     this.courseForm.value.createdby_id = '0001';
-     this.courseForm.value.createdby_role = 'Sathish';
+    this.markFormGroupTouched(this.courseForm);
       if (this.query.edit || this.query.addModule) {
         this.courseForm.value.flag = 'false';
 
@@ -439,6 +445,12 @@ if (item) {
     console.log("hai1")
   
     if(this.courseForm.valid) {
+      const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));
+      console.log(userDetails);
+      console.log(localStorage.getItem('role'))
+       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
+       this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
+       this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
       this.spinner.show();
       this.submitted = false;
 
@@ -447,7 +459,14 @@ if (item) {
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
         if (data && data.Message === 'Success') {
-          this.toast.success('Draft Created Successfully !!!');
+          const obj ={
+            course_id:this.query.viewingModule,
+            is_active:0
+          }
+          this.wcaService.updateCourse(obj).subscribe((data:any) => {
+            console.log(data); 
+          });        
+             this.toast.success('Draft Created Successfully !!!');
           // if(type === 'draft') {
           //   this.router.navigate(['/Admin/auth/Wca/viewmodule']);
           // } else {

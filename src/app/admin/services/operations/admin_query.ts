@@ -9,6 +9,7 @@ export const get_user_group = gql`
           group_name
           group_type
           is_active
+          group_id
       }
     }
   }`;
@@ -57,8 +58,8 @@ export const block_user = gql`
   }`;
 
 export const get_all_user = gql`
-  query get_all_user($pagenumber: Int!, $sort: Int!){
-    get_all_user(pagenumber: $pagenumber, sort: $sort) {
+  query get_all_user($pagenumber: Int!, $sort: Int!, $group_name: String!){
+    get_all_user(pagenumber: $pagenumber, sort: $sort, group_name: $group_name) {
       success
       error_msg
       learner_count
@@ -185,7 +186,7 @@ export const get_all_learner_detail = gql`
 
 
 
-  export const getnotificationreports = gql`
+export const getnotificationreports = gql`
   query getnotificationreports($admin_id: String!){
     getnotificationreports(admin_id: $admin_id) {
       success
@@ -198,6 +199,12 @@ export const get_all_learner_detail = gql`
             report_id
             admin_id
             time_ago
+            success_count
+            failure_count
+            updated_count
+            duplicate_count
+            existing_count
+            total_count
             notification_msg
             report_info{
                 created_on
@@ -252,92 +259,112 @@ query get_course_createdby_admin($admin_id: String!, $pagenumber: Int!){
   get_course_createdby_admin(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
     error_msg
+    course_count      
     message{
       course_id
-      course_description
-      course_name
-      created_at
-      updated_at
-      version
-      location
-      course_start_datetime
-      course_end_datetime
-      advertised_start
-      course_img_url
-      social_sharing_url
-      certificate_display_behaviour
-      certificates_show_before_end
-      certificate_html_view_enabled
-      has_any_active_web_certificate
-      certificate_name
-      lowest_passing_grade
-      mobile_available
-      visible_to_staff_only
-      pre_requisite{
-        name
-        image
-      }
-      enrollment_start
-      enrollment_end
-      invitation_only
-      max_student_enrollments_allowed
-      announcement
-      catalog_visibility
-      course_video_url
-      short_description
-      self_paced
-      marketing_url
-      course_language
-      certificate_available_date
-      article_count
-      downloadable_resource_count
-      course_level
-      step_towards
-      rating
-      price
-      what_will_you_learn
-      course_category
-      course_type
-      parent_sub_category_id
-      category_id
-      groupid
-      created_by
-      updated_by
-      admin_id
-      is_published
-      course_content_details{
-        name
-        type
-        is_active
-        parent_id
-        description
-        sub_section_id
-        file_content{
-          video_url
-          image_url
-          audio_url
-          file_url
-        }
-        unit{
-          name
-          type
-          is_active
-          parent_id
-          description
-          sub_section_id
-          file_content{
-            video_url
-            image_url
-            audio_url
-            file_url
-          }
-        }
-      }
-      author_details{
-        author_name
-        description
-      }
-    }
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite{
+name
+image
+}
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+parent_sub_category_id
+category_id
+groupid
+created_by
+updated_by
+admin_id
+is_published
+    course_mode
+preview_video
+learner_count
+is_active
+published_by
+publisher_id
+updated_by_id
+published_on
+takeway_details{
+    text
+    description
+    what_will_you_learn
+    media
+}
+coursepartner_details{
+  name
+  image
+}
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+image
+}
+}
   }
 } `;
 
@@ -345,92 +372,112 @@ export const get_course_published = gql`
 query get_course_published($admin_id: String!, $pagenumber: Int!){
   get_course_published(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
+    course_count
     message{
       course_id
-      course_description
-      course_name
-      created_at
-      updated_at
-      version
-      location
-      course_start_datetime
-      course_end_datetime
-      advertised_start
-      course_img_url
-      social_sharing_url
-      certificate_display_behaviour
-      certificates_show_before_end
-      certificate_html_view_enabled
-      has_any_active_web_certificate
-      certificate_name
-      lowest_passing_grade
-      mobile_available
-      visible_to_staff_only
-      pre_requisite{
-        name
-        image
-      }
-      enrollment_start
-      enrollment_end
-      invitation_only
-      max_student_enrollments_allowed
-      announcement
-      catalog_visibility
-      course_video_url
-      short_description
-      self_paced
-      marketing_url
-      course_language
-      certificate_available_date
-      article_count
-      downloadable_resource_count
-      course_level
-      step_towards
-      rating
-      price
-      what_will_you_learn
-      course_category
-      course_type
-      parent_sub_category_id
-      category_id
-      groupid
-      created_by
-      updated_by
-      admin_id
-      is_published
-      course_content_details{
-        name
-        type
-        is_active
-        parent_id
-        description
-        sub_section_id
-        file_content{
-          video_url
-          image_url
-          audio_url
-          file_url
-        }
-        unit{
-          name
-          type
-          is_active
-          parent_id
-          description
-          sub_section_id
-          file_content{
-            video_url
-            image_url
-            audio_url
-            file_url
-          }
-        }
-      }
-      author_details{
-        author_name
-        description
-      }
-    }
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite{
+name
+image
+}
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+parent_sub_category_id
+category_id
+groupid
+created_by
+updated_by
+admin_id
+is_published
+course_mode
+preview_video
+learner_count
+is_active
+published_by
+publisher_id
+updated_by_id
+published_on
+takeway_details{
+    text
+    description
+    what_will_you_learn
+    media
+}
+coursepartner_details{
+  name
+  image
+}
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+image
+}
+}
   }
 }`;
 
@@ -438,109 +485,112 @@ export const get_draft_course = gql`
 query get_draft_course($admin_id: String!, $pagenumber: Int!){
   get_draft_course(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
+    course_count
     message{
       course_id
-      course_description
-      course_name
-      created_at
-      updated_at
-      version
-      location
-      course_start_datetime
-      course_end_datetime
-      advertised_start
-      course_img_url
-      social_sharing_url
-      certificate_display_behaviour
-      certificates_show_before_end
-      certificate_html_view_enabled
-      has_any_active_web_certificate
-      certificate_name
-      lowest_passing_grade
-      mobile_available
-      visible_to_staff_only
-      pre_requisite{
-        name
-        image
-      }
-      enrollment_start
-      enrollment_end
-      invitation_only
-      max_student_enrollments_allowed
-      announcement
-      catalog_visibility
-      course_video_url
-      short_description
-      self_paced
-      marketing_url
-      course_language
-      certificate_available_date
-      article_count
-      downloadable_resource_count
-      course_level
-      step_towards
-      rating
-      price
-      what_will_you_learn
-      course_category
-      course_type
-      parent_sub_category_id
-      category_id
-      groupid
-      created_by
-      updated_by
-      admin_id
-      is_published
-      course_mode
-      preview_video
-      learner_count
-      is_active
-      published_by
-      publisher_id
-      updated_by_id
-      published_on
-      takeway_details{
-        name
-        description
-        image
-      }
-      coursepartner_details{
-        name
-        image
-      }
-      course_content_details{
-        name
-        type
-        is_active
-        parent_id
-        description
-        sub_section_id
-        file_content{
-          video_url
-          image_url
-          audio_url
-          file_url
-        }
-        unit{
-          name
-          type
-          is_active
-          parent_id
-          description
-          sub_section_id
-          file_content{
-            video_url
-            image_url
-            audio_url
-            file_url
-          }
-        }
-      }
-      author_details{
-        author_name
-        description
-      }
-    }
+course_description
+course_name
+created_at
+updated_at
+version
+location
+course_start_datetime
+course_end_datetime
+advertised_start
+course_img_url
+social_sharing_url
+certificate_display_behaviour
+certificates_show_before_end
+certificate_html_view_enabled
+has_any_active_web_certificate
+certificate_name
+lowest_passing_grade
+mobile_available
+visible_to_staff_only
+pre_requisite{
+name
+image
+}
+enrollment_start
+enrollment_end
+invitation_only
+max_student_enrollments_allowed
+announcement
+catalog_visibility
+course_video_url
+short_description
+self_paced
+marketing_url
+course_language
+certificate_available_date
+article_count
+downloadable_resource_count
+course_level
+step_towards
+rating
+price
+what_will_you_learn
+course_category
+course_type
+parent_sub_category_id
+category_id
+groupid
+created_by
+updated_by
+admin_id
+is_published
+    course_mode
+preview_video
+learner_count
+is_active
+published_by
+publisher_id
+updated_by_id
+published_on
+takeway_details{
+    text
+    description
+    what_will_you_learn
+    media
+}
+coursepartner_details{
+  name
+  image
+}
+course_content_details{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+unit{
+name
+type
+is_active
+parent_id
+description
+sub_section_id
+file_content{
+video_url
+image_url
+audio_url
+file_url
+}
+}
+}
+author_details{
+author_name
+description
+image
+}
+}
   }
 }`;
 
@@ -552,4 +602,3 @@ export const publishcourse = gql`
       error_msg
     }
   }`;
-

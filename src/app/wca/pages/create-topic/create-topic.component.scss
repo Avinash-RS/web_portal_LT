@@ -250,7 +250,7 @@ h1 {
     display: block;
     position: relative;
     padding: 16px;
-    margin: 4px 168px 14px 107px;;
+    // margin: 4px 168px 14px 107px;;
     border-radius: 4px;
      height: 100%;
   }
@@ -411,8 +411,6 @@ input[type=text]
 
 
 .colView{
-display: flex;
-flex-direction: column;
    display: flex;
     flex-direction: column;
     align-items: center;
@@ -453,7 +451,7 @@ padding-left: 15px;
 }
 
 .restictWidth{
-width: 113px;
+    width: 167px;
 }
 
 .matWidth{
@@ -471,6 +469,7 @@ width: 113px;
 
 .spanTime{
     color: $color-darkGrey;
+    padding-right: 22px;
 }
 .btnprev{
     border-radius: 40px;
@@ -491,6 +490,10 @@ width: 113px;
     height: 80%;
     overflow: auto;
 }
+.dspFlxinside{
+display: flex;
+}
+
 
 .previewAndTime.active{
     display: flex;

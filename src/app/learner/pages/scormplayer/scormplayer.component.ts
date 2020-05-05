@@ -26,7 +26,8 @@ export class ScormplayerComponent implements OnInit {
   breakpoint: number;
   course_id:any;
   courseDeatils: any;
-
+  modulength: any;
+  public isCollapsed = false;
   constructor(public sanitizer: DomSanitizer,    public spinner: NgxSpinnerService,public activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router,public commonService : CommonServicesService,) { 
       var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
@@ -56,7 +57,7 @@ export class ScormplayerComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    
     this.getModuleData();
   }
   getcontent() {
@@ -68,7 +69,10 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       console.log(data)
       // if(data.data['getmoduleData']['success'] == true){
+
         this.content = data.data['getmoduleData']['data'][0]
+        this.modulength =  this.content['coursedetails'].length;
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
       // }
      
       // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
@@ -77,6 +81,29 @@ export class ScormplayerComponent implements OnInit {
     })
   }
 
+  downloadAll(urls) {
+    var arr: any = [];
+    urls.forEach(element => {
+      arr.push(element.path);
+     });
+      var link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      for (var i = 0; i < arr.length; i++) {
+       link.href = arr[i];
+        link.click();
+      }
+      document.body.removeChild(link); 
+}
+  moresection(vale,modelenght){
+    this.modulength = modelenght - 5;
+  if (vale == true){
+    this.isCollapsed = false
+  }else{
+    this.isCollapsed = true
+  }
+  }
 
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;

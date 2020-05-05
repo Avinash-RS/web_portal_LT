@@ -12,8 +12,9 @@
   </div>
 
   <div class="p-5px">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-label>Search</mat-label><br>
+    <mat-form-field class="search">
+      <input matInput (keyup)="applyFilter($event.target.value)">
     </mat-form-field>
 
     <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
@@ -42,29 +43,38 @@
         </ng-container>
 
         <ng-container matColumnDef="user_id">
-          <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User Id</span>
-            {{element.user_id}}
+            <span class="mobile-label">User ID</span>
+            <span class="desktop-data"> {{element.user_id}}</span>
+            <span class="mobile-data"> {{element.user_id}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <span class="mobile-label">User Name</span>{{element.username}}
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">User Name</span>
+            <span class="desktop-data"> {{element.username}}</span>
+            <span class="mobile-data"> {{element.username}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
-          <mat-cell *matCellDef="let element"><span class="mobile-label">Email ID</span> {{element.email || 'NA'}}
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">Email ID</span>
+            <span class="desktop-data"> {{element.email || 'NA'}}</span>
+            <span class="mobile-data"> {{element.email || 'NA'}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="mobile">
           <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
           <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
-            {{element.mobile_number || 'NA'}} </mat-cell>
+            <span class="desktop-data"> {{element.mobile_number || 'NA'}}</span>
+            <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="active">
@@ -72,7 +82,10 @@
           <mat-cell *matCellDef="let element"
             [ngClass]="element.is_blocked ? 'red f_wt_500' : element.is_active ? 'green f_wt_500' : 'black f_wt_500'">
             <span class="mobile-label">Status</span>
-            {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
+            <span class="desktop-data">
+              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span>
+            <span class="mobile-data">
+              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -91,7 +104,8 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
-            <button mat-icon-button (click)="viewDetail(element,viewDialog)">
+            <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
+              title="View {{element.username}}'s details">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button
@@ -104,7 +118,7 @@
           </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
         </mat-row>
       </mat-table>
@@ -134,13 +148,14 @@
                       <label>Information about you</label>
                       <textarea style="resize: none;" readonly [disabled]='cannotEdit' rows="3"
                         class="inputs border-radius-5 color_blue background_trans width_100"
-                        [(ngModel)]="profileDetails.userObjects[0].about_you" name="info"></textarea>
+                        [(ngModel)]="profileDetails.userObjects && profileDetails.userObjects[0].about_you"
+                        name="info"></textarea>
                     </div>
                   </div>
 
                   <div class="col-md-6 col-sm-12 col-12 right float_right">
                     <img
-                      [src]="profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : 'assets/learner/avatar2.png'"
+                      [src]="profileDetails.userObjects && profileDetails.userObjects[0].profile_img ? profileDetails.userObjects[0].profile_img : 'assets/learner/avatar2.png'"
                       id="imageUpload" alt="Avatar" class="avatar">
                   </div>
                 </div>
@@ -149,16 +164,16 @@
                   <!-- //////userName  +++ full name +++ Phone//////// -->
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Username : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].username}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Full Name : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].full_name}}
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name}}
                       </label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Mobile : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].mobile_number}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number}}</label></label>
                   </div>
                 </div>
 
@@ -166,15 +181,16 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Email : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].email}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                    <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
                       'Female' : 'Rather not specify'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>I'm a : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects[0].is_student_or_professional}}</label> </label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional}}</label>
+                    </label>
                   </div>
                 </div>
 
@@ -190,12 +206,13 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-12">
                     <label>Location : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects[0].state_name}},
-                        {{profileDetails.userObjects[0].country_name}} </label></label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name}},
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name}} </label></label>
                   </div>
                 </div>
-                <br>
-                <div class="row" style="overflow-x:auto;">
+                <br><br>
+                <!-- commented till profile structure fix -->
+                <!-- <div class="row" style="overflow-x:auto;">
                   <div class="col-md-12 col-sm-12 col-12">
                     <table class="profileTable">
                       <tr>
@@ -218,7 +235,7 @@
                       </tr>
                     </table>
                   </div>
-                </div>
+                </div> -->
               </div>
             </form>
           </mat-dialog-content>
@@ -228,17 +245,18 @@
         </mat-tab>
 
         <mat-tab label="Track Details">
-          <br> <br> 
+          <br> <br>
           <div class="container profile">
             <div class="row">
               <!-- //////userName  +++ full name +++ Phone//////// -->
               <div class="col-md-6 col-sm-12 col-12">
                 <label>No. of courses enrolled : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails.enrolled_course_count || 0}}</label></label>
+                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
                 <label>No. of Wishlisted courses : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails.wishlist_count || 0}}</label> </label>
+                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
+                </label>
               </div>
             </div>
             <br>
@@ -246,12 +264,12 @@
             <div class="row">
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Last login time : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails.last_login[0]  || 'NA'}}
+                    {{trackDetails && trackDetails.last_login[0]  || 'NA'}}
                   </label> </label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Registered On : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails.userObjects[0].registered_date | date:short}}
+                    {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
                   </label> </label>
               </div>
             </div>

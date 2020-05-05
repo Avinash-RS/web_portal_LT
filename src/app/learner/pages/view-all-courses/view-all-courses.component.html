@@ -145,62 +145,74 @@
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
-     
-      <li class="breadcrumb-item active" aria-current="page">All Courses</li>
+    <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+
+    <li class="breadcrumb-item active" aria-current="page">All Courses</li>
   </ol>
 </nav>
+
+
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
+  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>
 
 <div class="btn-group pull-right">
   <!-- <button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
   [ngClass]="{'btn-primary active': displayMode === 1}" >
   <i class="fa fa-search"></i>
 </button> -->
-<button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
- >
-<i class="fa fa-filter"></i>
-</button>
-  <button class="icon_fnt" type="button"(click)="onDisplayModeChange(1)"
-      [ngClass]="{'btn-primary active': displayMode === 1}" >
-      <i class="fa fa-th"></i>
+  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)">
+    <i class="fa fa-filter"></i>
   </button>
-  <button class="icon_fnt" type="button"  (click)="onDisplayModeChange(2)"
-      [ngClass]="{'btn-primary active': displayMode === 2}" >
-      <i class="fa fa-list"></i>
+  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)"
+    [ngClass]="{'btn-primary active': displayMode === 1}">
+    <i class="fa fa-th"></i>
+  </button>
+  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(2)"
+    [ngClass]="{'btn-primary active': displayMode === 2}">
+    <i class="fa fa-list"></i>
   </button>
 </div>
 <div class="container">
+  <br>
+  <br>
+  <!-- grid -->
+  <div class="container containerShadow">
+    <div class="row" *ngIf="displayMode === 1">
+      <ng-container
+        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+        <div class="col-lg-3">
+          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+            [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+        </div>
+      </ng-container>
+      <br>
+    </div>
 
 
+    <div class="row" *ngIf="displayMode === 2">
+      <!-- <div class="col-md-12 width_90 center" *ngFor="let c of allcourses   | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
+          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+          [showWishlist]="true" [showStatus]="false"> </app-course-component>
+        </mat-card>
+        <br><br>
+      </div> -->
+
+      <ng-container
+        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+        <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+          <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+            [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+            [goto]="goto" [showDate]="true">
+          </app-list-view-course-component>
+          <br>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
 <br>
-<br>
-<!-- grid -->
-<div class="container containerShadow">
-<div class="row" *ngIf="displayMode === 1">
-  <ng-container *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
-<div class="col-lg-3">
-  <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false" > </app-course-component>
-
-</div>
-</ng-container>
-
-
-
-
-</div>
-
-
-<div class="row" *ngIf="displayMode === 2">
-  <ng-container *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
-<div class="col-lg-12">
-  <app-course-component [course]="c" [canNavigate]="true" [showCartBtn] = "false" [showWishlist] = "true" [showStatus] = "false" > </app-course-component>
-</div>
-</ng-container>
-
-<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event" ></pagination-controls> 
-
-
-</div>
-</div>
-
+  <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
+  </pagination-controls>
 </div>

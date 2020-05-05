@@ -55,7 +55,7 @@ export class AddUserComponent implements OnInit {
     var admin = []
     admin.push(this.adminDetails._id);
     this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-      true, this.addUserForm.value.group._id, this.addUserForm.value.group.group_name, admin
+      true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
     ).subscribe((result: any) => {
       if (result.data && result.data.user_registration) {
         if (result.data.user_registration.success === 'true') {
@@ -144,17 +144,17 @@ export class AddUserComponent implements OnInit {
           return element === headerNames[index];
         });
         if (is_same === false) {
-          this.alert.openAlert('Warning !', 'Invalid Excel headers');
+          this.alert.openAlert('Invalid Excel headers', 'Please choose the file to be uploaded');
         } else if (this.exceljson.length === 0) {
-          this.alert.openAlert('Warning !', 'Excel Sheet is Empty');
+          this.alert.openAlert('Excel Sheet is Empty', null);
         } else {
           this.selectedfile = <File>event[0];
-          this.alert.openAlert('Success !', 'Uploaded Successfully');
+          this.alert.openAlert( 'Uploaded Successfully', null);
         }
       };
       reader.readAsBinaryString(event[0]);
     } else {
-      this.alert.openAlert('Warning !', 'Invalid File Type');
+      this.alert.openAlert('Invalid File Type', null);
     }
     // }
   }
@@ -169,7 +169,7 @@ export class AddUserComponent implements OnInit {
       this.exceljson.forEach(element => {
         exceldata.push({
           full_name: element.Full_Name, email: element.Email, term_condition: 'true', admin: this.adminDetails._id,
-          group_id: group._id,
+          group_id: group.group_id,
           group_name: group.group_name
         });
       });
@@ -184,14 +184,15 @@ export class AddUserComponent implements OnInit {
       fb.append('csv', data, this.selectedfile.name);
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Uploaded in Progress ...');
+          this.alert.openAlert('Success !', 'Upload in Progress ...');
           this.selectedfile = '';
         } else {
-          this.alert.openAlert('Warning !', result.message);
+          this.selectedfile = '';
+          this.alert.openAlert(result.message, null);
         }
       });
     } else {
-      this.alert.openAlert('Warning !', 'Please Select Group');
+      this.alert.openAlert('Please Select Group', null);
     }
   }
 

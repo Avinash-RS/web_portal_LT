@@ -123,6 +123,13 @@ export class AddModuleComponent implements OnInit {
     this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
       if (res.Code == 200) {
         this.getCourseDetails();
+        const obj ={
+          course_id:this.routedCourseDetails.courseId,
+          is_active:0
+        }
+        this.apiService.updateCourse(obj).subscribe((data:any) => {
+          console.log(data); 
+        });  
         this.toast.success('Module updated successfully');
       }
       this.spinner.hide();
@@ -159,4 +166,8 @@ export class AddModuleComponent implements OnInit {
   onRefernceBtnClick() {
     this.router.navigate(['/Admin/auth/Wca/rf']);
   }
-}
+
+  editResource() {
+    this.router.navigate(['/Admin/auth/Wca/rf']);
+  }
+ }

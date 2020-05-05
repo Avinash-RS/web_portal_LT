@@ -1,24 +1,47 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material';
+import Swal from 'sweetalert2';
+import { MatSlideToggleChange } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatSlideToggleModule } from '@angular/material';
+import { Router } from '@angular/router';
 
+export interface PeriodicElement {
+  user_id: string;
+  name: number;
+  email: string;
+  mobile: string;
+}
 @Component({
   selector: 'app-group-management',
   templateUrl: './group-management.component.html',
   styleUrls: ['./group-management.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class GroupManagementComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   groups: any;
   adminDetails: any;
   currentpath = null;
+  editstatus: any = true;
   pagenumber = 0;
-
+  formsubmitted = false;
+  @Input()
+  disabled: boolean = true;
+  toggleevent: any;
+  editgroupname: string;
+  loader: boolean = false;
+  ELEMENT_DATA: PeriodicElement[] = [];
+  resultsLength: number = null;
+  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
+  dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+  selection = new SelectionModel(true, []);
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -26,7 +49,9 @@ export class GroupManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
-  constructor(private alert: AlertServiceService, private adminservice: AdminServicesService) {
+  selectedArray: any = [];
+  constructor(private alert: AlertServiceService, private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
+    private router: Router,) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -37,6 +62,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   getgroups() {
+    this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       this.groups = result.data.getgroup.message;
@@ -74,7 +100,7 @@ export class GroupManagementComponent implements OnInit {
    * Determines whether scroll down on
    */
   onScrollDown() {
-    this.pagenumber = this.pagenumber + 10;
+    this.pagenumber = this.pagenumber + 1;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: this.pagenumber };
     this.adminservice.getgroup(data).subscribe((result: any) => {
       const resultdata = result.data.getgroup.message;
@@ -82,51 +108,224 @@ export class GroupManagementComponent implements OnInit {
         let array: any;
         array = resultdata;
         this.groups = this.treeSource.data;
-        array.push(...this.groups);
+        this.groups.push(...array);
         this.treeSource.data = null;
-        this.treeSource.data = array;
+        this.treeSource.data = this.groups;
       }
     });
   }
 
-
-
   selectgroup(node) {
+    console.log(node);
     if (node.checkbox === true) {
       this.currentpath = node;
+      this.disabled = false;
+      this.editstatus = false;
+      this.editgroupname = node.group_name;
+      this.getAllUser(0);
     } else {
+      this.disabled = true;
+      this.editstatus = true;
       this.currentpath = null;
+      this.editgroupname = '';
     }
   }
+
   savegroup(form) {
     let hierarchy;
+    let str;
+    let strvalue;
+    this.formsubmitted = true;
     if (form.valid) {
+      this.formsubmitted = false;
       if (this.currentpath) {
-        const str = this.currentpath.hierarchy_id.split('h');
-        hierarchy = 'h' + (Number(str[1]) + Number(1));
+        if (this.currentpath.hierarchy_id) {
+          str = this.currentpath.hierarchy_id.split('h');
+          strvalue = Number(str[1]);
+          hierarchy = 'h' + (Number(str[1]) + Number(1));
+        } else {
+          strvalue = 0;
+        }
       }
-      const data = {
-        group_name: form.value.group_name, group_type: 'new',
-        parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
-        hierarchy_id: this.currentpath ? hierarchy : 'h1',
-        admin_id: this.adminDetails._id
-      };
-      this.adminservice.creategroup(data).subscribe((result: any) => {
-        if (result.data && result.data.createusergroup) {
+      if ( this.currentpath && Number(str[1]) >= 7 ) {
+        this.alert.openAlert('Error !', 'Reached Maximum level');
+      } else {
+        const data = {
+          group_name: form.value.group_name, group_type: 'new',
+          parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
+          hierarchy_id: this.currentpath ? hierarchy : 'h1',
+          admin_id: this.adminDetails._id
+        };
+        this.adminservice.creategroup(data).subscribe((result: any) => {
           if (result.data.createusergroup.success === true) {
+            this.reset();
             this.alert.openAlert('Success !', 'Group Created Successfully');
+
             form.reset();
             this.getgroups();
           } else {
             this.alert.openAlert(result.data.createusergroup.message, null);
           }
+        });
+      }
+    }
+  }
+
+  toggle(event: MatSlideToggleChange) {
+    this.toggleevent = event.checked;
+    this.currentpath.is_active = !event.checked;
+  }
+
+  changegroupstatus() {
+    let value: any;
+    value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
+    const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
+    Swal.fire({
+      title: 'Are you sure want to ' + status +
+        ' the group  ' + this.currentpath.group_name + '?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+        this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result1: any) => {
+          if (result1.data.groupstatus.success === true) {
+            this.editstatus = true;
+            this.currentpath = null;
+            this.editgroupname = '';
+            this.getgroups();
+            this.cdr.detectChanges();
+            Swal.fire(
+              status,
+              'Group  has been ' + status + 'd',
+              'success'
+            );
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: result1.data.groupstatus.message,
+            });
+          }
+        });
+      }
+    });
+    // this.checked ="Deactivate"
+  }
+  edit(data: boolean, groupname) {
+    if (data) {
+      this.editstatus = false;
+
+      this.editgroupname = groupname;
+
+    } else {
+      this.editstatus = true;
+      this.editgroupname = '';
+
+    }
+
+  }
+  reset() {
+    this.editstatus = true;
+    this.editgroupname = '';
+    this.disabled = true;
+    this.currentpath = null;
+  }
+
+  gotoAddUser() {
+    this.router.navigate(['Admin/auth/addUser']);
+  }
+
+  getAllUser(pagenumber) {
+    this.loader = true;
+    this.resultsLength = null;
+    if (pagenumber === 0) {
+      this.ELEMENT_DATA = [];
+    }
+    this.adminservice.getAllUsers(pagenumber, 1, this.currentpath.group_id)
+      .subscribe((result: any) => {
+        console.log(result.data.get_all_user.message);
+        if (result.data && result.data.get_all_user) {
+          Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
+          this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+          this.selection = new SelectionModel(true, []);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.resultsLength = result.data.get_all_user.learner_count;
+          this.loader = false;
         } else
           this.alert.openAlert("Please try again later", null)
       });
+  }
+
+  checkboxLabel(row?) {
+    if (row.isChecked == undefined || row.isChecked == false) {
+      row.isChecked = true;
+      this.selectedArray.push(row);
+    }
+    else {
+      row.isChecked = !row.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== row);
     }
   }
-  changed() {
-    this.checked = "Deactivate"
-    console.log(this.checked)
+
+  deActivate(status, element?) {
+    let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count :
+        'Are you sure you want to activate ' + count).then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.adminservice.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
+    }
+  }
+
+  block(status, element?) {
+    if (element || (this.selectedArray && this.selectedArray.length > 0)) {
+      let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count :
+        'Are you sure you want to un-block ' + count).then((data: Boolean) => {
+          if (data) {
+            let result = this.selectedArray && this.selectedArray.length > 0 ?
+              this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
+            this.adminservice.blockUser(result, status == 'Block' ? true : false)
+              .subscribe((result: any) => {
+                this.selectedArray = []
+                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
+                  this.getAllUser(0)
+                else
+                  this.alert.openAlert('Sorry, Please try again later', 'null')
+              });
+          }
+        })
+    } else {
+      this.alert.openAlert("Please select any record", null)
+    }
+  }
+  next(e) {
+    this.getAllUser(e.pageIndex);
+  }
+
+  tabClick(event) {
+    if (event.index === 1) {
+     const pagenumber = 0;
+     this.getAllUser(pagenumber) ;
+    }
   }
 }

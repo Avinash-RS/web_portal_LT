@@ -16,7 +16,7 @@ export class SunburstChartComponent implements OnInit {
 			chart: {
 				type: 'sunburstChart',
 				height: 300,
-				color: d3.scale.category20c(),
+				color: "",//d3.scale.category20c(),
 				duration: 250
 			}
 		}

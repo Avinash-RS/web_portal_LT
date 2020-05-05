@@ -15,7 +15,7 @@
         </div>
         <div *ngIf="isenable"><br>
           <p class="head">OTP will be sent to this number</p>
-          <button class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Verification</button>
+          <button class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Verify</button>
         </div>
         <div *ngIf="showotp"><br>
           <p class="otphead">OTP Code</p>
@@ -23,7 +23,12 @@
           [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
           formControlName="otp" min="0" max="9" (onInputChange)="onOtpChange($event)"  pattern="[0-9]{1}">
           </ng-otp-input>
-          <p>{{minutes}}:{{seconds}}</p> 
+          <div *ngIf="sendOtp">
+            <p>{{minutes}}:{{seconds}}</p>
+          </div>
+          <div *ngIf="resendOtp">
+            <p>{{minutes}}:{{seconds}}</p>
+          </div> 
           <br><br>
         </div>
         <!-- *ngIf="showotp" -->
@@ -49,10 +54,10 @@
             <div *ngIf="f.otp.errors.maxlength">OTP must have only 4 numbers</div>
           </div> -->
         <div   *ngIf="showotp">
-          <button class="btn" [disabled]=""  (click)="otpverify()">Verify</button>
+          <button class="btn" [disabled]="verifybutton"  (click)="otpverify()">Verify</button>
         </div><br>
         <!--  -->
-        <div class="account">Didn't get OTP?<b (click)="Resendcode()">&nbsp;&nbsp;Resend OTP</b></div>
+        <div class="account" *ngIf="resendLabel">Didn't get OTP?<b (click)="Resendcode()">&nbsp;&nbsp;Resend OTP</b></div>
       </form>
     </div>
   </div>
@@ -63,5 +68,5 @@
   <br>
   <br>
   <img src="../../../../assets/images/forbidden.jpg">
-  <h1>This Link has already expired and email is registered..</h1>
+  <h1>The account has already activated and email is already registered..</h1>
 </div>

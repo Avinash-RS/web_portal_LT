@@ -7,11 +7,11 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
-  selector: 'app-course-component',
-  templateUrl: './course-component.component.html',
-  styleUrls: ['./course-component.component.scss']
+  selector: 'app-list-view-course-component',
+  templateUrl: './list-view-course-component.component.html',
+  styleUrls: ['./list-view-course-component.component.scss']
 })
-export class CourseComponentComponent implements OnInit {
+export class ListViewCourseComponentComponent implements OnInit {
   @Input('course') course: any;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showCartBtn') showCartBtn: boolean;
@@ -22,9 +22,11 @@ export class CourseComponentComponent implements OnInit {
   @Input('showRating') showRating: boolean;
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
-  //here type will come now we need to navigate to your page
+  @Input('btnType') btnType: any;
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll: boolean = false;
+
+
 
 
   currentRate;
@@ -35,9 +37,8 @@ export class CourseComponentComponent implements OnInit {
   final_status: any = null;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
-    private router: Router, private loader: Ng4LoadingSpinnerService, ) {
+    private router: Router, private loader: Ng4LoadingSpinnerService, ) { }
 
-  }
 
   viewWishList(course) {
     this.course.wishlisted = false;
@@ -55,6 +56,7 @@ export class CourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
+    console.log(course)
     this.loader.show();
     if (this.gs.checkLogout()) {
       if (this.course.wishlisted == false) {
@@ -82,86 +84,55 @@ export class CourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    // console.log("It works", this.course);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
       this.viewWishList(this.course);
-      this.getcourserStatus()
     }
     if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'incomplete') this.course.coursePlayerStatus.status = 'Resume'
     else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'complete') this.course.coursePlayerStatus.status = 'Completed'
     else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') this.course.coursePlayerStatus.status = 'Pause'
+
+  }
+
+  login(v) {
+    console.log(v)
+    if (this.btnType == 'Publish') {
+      let detail = {
+        id: this.course.course_id,
+        name: this.course.course_name
+      }
+      console.log(detail)
+      this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
+    }
   }
 
   gotoDescription(course) {
-    if (!this.goto) {
-      if (this.isDraft) {
-        this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }]);
-
-      }
-      else {
-        let detail = {
-          id: this.course.course_id,
-          wishlist: this.course.wishlisted,
-          wishlist_id: this.course.wishlist_id
-        }
-        this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-      }
-    } else if (this.goto == 'publish') {
+    if (this.goto == 'publish') {
       let detail = {
-        type: 'publish', id: this.course.course_id
+        type: 'publish', id: this.course._id || this.course.course_id
       }
       localStorage.setItem('courseType', detail.type)
-      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
     else if (this.goto == 'create') {
       let detail =
-        { type: 'create', id: this.course.course_id }
+        { type: 'create', id: this.course._id || this.course.course_id }
       localStorage.setItem('courseType', detail.type)
-      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
     else if (this.goto == 'draft') {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
       localStorage.setItem('courseType', detail.type)
-      localStorage.setItem('courseid', detail.id)
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
 
     }
-    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
-    // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
   }
 
-  goTocourse(status) {
-
-    if (this.final_status != 'Completed') {
-      let detail1 = {
-        id: 'Scaffolding',
-        user: this.userDetail.user_id,
-        course_id: this.course.course_id,
-        user_obj_id: this.userDetail._id
-      }
-      this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
-    }
-
-  }
-
-  getcourserStatus() {
-    //check with user id 2,3 ,ramu
-    this.service.getPlayerStatus(this.userDetail.user_id).subscribe((data: any) => {
-      if (data.data['getPlayerStatus']) {
-        this.recorded_data = data
-        this.final_full_data = this.recorded_data.data.getPlayerStatus.message
-        if (this.final_full_data && this.final_full_data.status) {
-          if (this.final_full_data.status == 'completed') {
-            this.final_status = 'Completed'
-          } else if (this.final_full_data.status == 'incomplete') {
-            this.final_status = 'Resume'
-          }
-        }
-      }
-    });
-  }
 }
+
+
+
+

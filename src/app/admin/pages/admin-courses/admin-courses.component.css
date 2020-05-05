@@ -14,7 +14,7 @@ h2 {
     position: absolute !important;
     top: 50% !important;
     left: 45% !important;
-  }
+}
 
 ::ng-deep .mat-raised-button{
     margin: 2px !important;
