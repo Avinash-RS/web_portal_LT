@@ -55,7 +55,6 @@ export class OtpComponent implements OnInit {
       }
 
 
-  @ViewChild('ngOtpInput') ngOtpInput: any;
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -89,7 +88,6 @@ get f() { return this.otpForm.controls; }
     this.sendOtp = true;
     this.resendLabel = true;
     this.get_user_detail(this.email)
-    console.log('ddddddddddddddddddddddddddddd'+this.userid+this.currentUser._id+this.otpForm.value.mobile+this.email)
     this.loader.show();
     this.service.submit_otp(this.userid,this.currentUser._id,this.otpForm.value.mobile,this.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
@@ -159,11 +157,9 @@ get f() { return this.otpForm.controls; }
     // this.showverify = true;
   }
   get_user_detail(email){
-    console.log('email'+email)
     try {
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
-        // console.log('email'+this.useridData.get_user_detail.message[0])
         this.userid =this.useridData.get_user_detail.message[0].user_id; 
         // this.userid= 'm6siev';
         this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
