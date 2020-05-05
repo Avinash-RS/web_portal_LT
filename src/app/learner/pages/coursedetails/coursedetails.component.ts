@@ -4,6 +4,8 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { DomSanitizer } from '@angular/platform-browser';
 // import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -85,6 +87,9 @@ export class CoursedetailsComponent implements OnInit {
   userDetail: any;
   showShortDesciption = true;
   clicked: any = 'media';
+  content: any;
+  modulength: any;
+  urlSafe: any;
 
 
   // slideOptions: any = {
@@ -112,8 +117,9 @@ export class CoursedetailsComponent implements OnInit {
   //   nav: true
   // }
   
-  constructor(private router: ActivatedRoute, public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService) {
+  constructor(private router: ActivatedRoute,public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
+    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
+    public sanitizer: DomSanitizer) {
     this.loader.show();
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail) ;
@@ -126,6 +132,21 @@ export class CoursedetailsComponent implements OnInit {
       } else
         this.loader.hide();
     });
+
+    this.Lservice.getModuleData(detail && detail.id ).subscribe(data => {
+      console.log(data)
+      // if(data.data['getmoduleData']['success'] == true){
+
+        this.content = data.data['getmoduleData'] && data.data['getmoduleData']['data'] && data.data['getmoduleData']['data'][0]
+        this.modulength =  this.content['coursedetails'].length;
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+      // }
+     
+      // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
+      //    this.content = this.content.getModuleData.data[0]
+      // }   
+    })
+
     // this.service.viewCurseByID('1').subscribe((viewCourse: any) => {
     //   if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
     //     this.course = viewCourse.data.viewcourse.message[0];

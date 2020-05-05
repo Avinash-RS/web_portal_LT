@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="limiter" >
+<div class="limiter">
   <div class="container wrap-body">
     <h1 class="head" *ngIf="courseDeatils">{{content?.coursename}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
@@ -54,12 +54,12 @@
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
         <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-           <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
       </h2>
       <div class="content">
-        <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+        <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
           <div class="col-8">
-            <ol class="submod"  >
+            <ol class="submod">
               <li>{{i+1}} : {{mod?.topicname}}</li>
             </ol>
           </div>
@@ -69,49 +69,50 @@
               <mat-label>Resourse</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
-                  <mat-option *ngFor="let file of mod.resourse?.files">
-                      <a  href="{{file.path}}" download>{{file.path}}</a>
-                  </mat-option>
-                  <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
-                    <button class="btn">Download all</button>
-                  </mat-option>
+                <mat-option *ngFor="let file of mod.resourse?.files">
+                  <a href="{{file.path}}" download>{{file.path}}</a>
+                </mat-option>
+                <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;"
+                  (click)="downloadAll(mod.resourse?.files)">
+                  <button class="btn">Download all</button>
+                </mat-option>
 
               </mat-select>
-          </mat-form-field>
+            </mat-form-field>
           </div>
-    </div>
+        </div>
       </div>
     </section>
-    <div  *ngIf="isCollapsed">
+    <div *ngIf="isCollapsed">
       <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
           <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-             <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+              <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
         </h2>
         <div class="content">
-          <div class="row"  *ngFor="let mod of res?.moduledetails; let i = index">
+          <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
             <div class="col-8"><br>
-              <ol class="submod"  >
+              <ol class="submod">
                 <li><b>{{i+1}} : {{mod?.topicname}}</b></li>
               </ol>
             </div>
-  
+
             <div class="col-4">
-              <mat-form-field style="text-align: right;margin-top: 5%;" >
+              <mat-form-field style="text-align: right;margin-top: 5%;">
                 <mat-label>Resourse</mat-label>
                 <mat-icon matPrefix>folder</mat-icon>
-                <mat-select  >
-                    <mat-option *ngFor="let file of mod.resourse?.files" >
-                      <a  href="{{file.path}}" download >{{file.path}}</a>
+                <mat-select>
+                  <mat-option *ngFor="let file of mod.resourse?.files">
+                    <a href="{{file.path}}" download>{{file.path}}</a>
                   </mat-option>
-                  <mat-option style="text-align: center;"  (click)="downloadAll(mod.resourse?.files)">
-                    <button class="btn"  >Download all</button>
+                  <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                    <button class="btn">Download all</button>
                   </mat-option>
                 </mat-select>
-            </mat-form-field>
+              </mat-form-field>
             </div>
-      </div>
+          </div>
         </div>
       </section>
     </div>
@@ -120,9 +121,9 @@
 
 
 
-    <div style="text-align:center;"  *ngIf="modulength >= 5">
-      <button class="btn1 success"  (click)="moresection(isCollapsed,modulength)"
-      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">{{modulength / 2}} more section</button>
+    <div style="text-align:center;" *ngIf="modulength >= 5">
+      <button class="btn1 success" (click)="moresection(isCollapsed,modulength)" [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample">{{modulength / 2}} more section</button>
     </div>
     <br><br>
 
@@ -148,7 +149,7 @@
           </div>
         </mat-grid-tile> -->
 
-        <!-- <mat-grid-tile>
+    <!-- <mat-grid-tile>
           <div class="box">
             <div class="row">
               <div class="col-md-4">
@@ -167,7 +168,7 @@
           </div>
         </mat-grid-tile> -->
 
-      <!-- </mat-grid-list>
+    <!-- </mat-grid-list>
     </div> -->
     <br><br>
   </div>
