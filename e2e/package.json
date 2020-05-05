@@ -4,15 +4,15 @@
   "description": "User Learning Experience Platform",
   "main": "index.js",
   "scripts": {
-    "test": "protractor ConJSFiles/Configuration.js",
     "pretest": "tsc",
     "cucumbertest": "protractor ConJSFiles/cucumberconfig.js",
     "protractor": "./node_modules/protractor/built/cli.js",
     "webdriver-update": "./node_modules/bin/webdriver-manager update"
   },
-  "author": "Tamil",
+  "author": "QATeam",
   "license": "ISC",
   "dependencies": {
+    "@types/chai": "^4.2.11",
     "@types/cucumber": "^6.0.1",
     "@types/jasmine": "^2.8.16",
     "@types/jasminewd2": "^2.0.8",
