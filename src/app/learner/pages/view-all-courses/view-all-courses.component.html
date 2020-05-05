@@ -181,7 +181,7 @@
     <div class="row" *ngIf="displayMode === 1">
       <ng-container
         *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <div class="col-lg-3">
+        <div class="col-md-6 col-lg-3 col-sm-12">
           <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
             [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
         </div>
@@ -212,7 +212,7 @@
     </div>
 
   </div>
-<br>
+  <br>
   <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
   </pagination-controls>
 </div>
