@@ -29,33 +29,33 @@ vg-controls vg-scrub-bar-buffering-time {
 }
 
 
-::ng-deep.mat-option-text {
+:host ::ng-deep.mat-option-text {
     color: $color-white !important;
 }
 
-::ng-deep .mat-select-value-text {
+:host ::ng-deep .mat-select-value-text {
   white-space: nowrap;
   color: $color-white !important;
 }
 
-::ng-deep .mat-select-value {
+:host ::ng-deep .mat-select-value {
   color: $color-white !important;
 }
 
-::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline  {
+:host ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline  {
   background-color: transparent;
 }
-::ng-deep .mat-select-arrow {
+:host ::ng-deep .mat-select-arrow {
   color: transparent;
 }
-::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow   {
+:host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow   {
   color: transparent;
 }
-::ng-deep .mat-form-field.mat-focused.mat-primary .mat-form-field-underline{
+:host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-form-field-underline{
   color: transparent !important;
 }
 
-::ng-deep.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+:host ::ng-deep.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: transparent !important;
 }
 button:focus {

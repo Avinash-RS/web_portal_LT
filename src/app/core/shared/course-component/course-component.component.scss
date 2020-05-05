@@ -29,7 +29,7 @@ img {
 }
 
 
-::ng-deep .br-default .br-unit {
+:host ::ng-deep .br-default .br-unit {
     font-size: 16px;
     height: 18px;
     width: 8px;
