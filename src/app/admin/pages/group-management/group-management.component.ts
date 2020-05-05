@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, TemplateRef } from '@angular/core';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { BehaviorSubject } from 'rxjs';
@@ -51,8 +51,10 @@ export class GroupManagementComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
   selectedArray: any = [];
+  trackDetails: any;
+  profileDetails: any;
   constructor(private alert: AlertServiceService, private gs: GlobalServiceService,private cdr: ChangeDetectorRef, private adminservice: AdminServicesService,
-    private router: Router,) {
+    private router: Router,private dialog: MatDialog,) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -65,6 +67,11 @@ export class GroupManagementComponent implements OnInit {
   }
 
   getgroups() {
+    this.adminservice.getUserGroup()
+    .subscribe((result: any) => {
+      this.groups = result.data.get_user_group.message
+    });
+
     this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data).subscribe((result: any) => {
@@ -133,6 +140,23 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
+  viewDetail(element, templateRef: TemplateRef<any>) {
+    this.adminservice.getUserSession(element._id).subscribe((track: any) => {
+      this.trackDetails = track.data && track.data.get_user_session_detail &&
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+      this.adminservice.getLearnerDetail(element.user_id)
+        .subscribe((result: any) => {
+          this.profileDetails = result.data && result.data.get_all_learner_detail &&
+            result.data.get_all_learner_detail.message && result.data.get_all_learner_detail.message[0];
+          this.dialog.open(templateRef);
+        })
+    })
+  }
+
+  closedialogbox() {
+    this.dialog.closeAll();
+  }
+  
   savegroup(form) {
     let hierarchy;
     let str;
