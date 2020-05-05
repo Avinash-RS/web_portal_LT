@@ -437,3 +437,118 @@ ul li:before {
 ::ng-deep .owl-carousel {
     overflow: hidden !important;
 }
+
+
+
+.accordion>input[name="collapse"] {
+    display: none;
+}
+.accordion label,
+.accordion .content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content{
+    overflow: auto !important;
+}
+.accordion .content {
+    background: $color-light-grey;;
+   
+    height: 0;
+    transition: 0.5s;
+    border: 1px solid $color-darkGrey;
+    border-top-color: transparent;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    height: 380px;
+    transition: height 0.5s;
+}
+.accordion label {
+    display: block;
+}
+/* For Desktop */
+@media only screen and (min-width: 620px) {
+    .accordion>input[name="collapse"]:checked~.content {
+        height: 220px;
+    }
+}
+.accordion {
+    margin-bottom: 1em;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    border-top: 0;
+    transition: 0.3s;
+}
+.accordion .handle {
+    margin: 0;
+    font-size: 16px;
+}
+.accordion label {
+    color: $color-darkGrey;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 10px;
+    user-select: none;
+    border: 1px solid $color-darkGrey;
+    border-bottom-color: transparent;
+
+}
+.accordion label:hover,
+.accordion label:focus {
+    background: $color-light-grey;
+}
+.accordion .handle label:before {
+    font-family: FontAwesome;
+    content: "\f067";
+    display: inline-block;
+    margin-right: 21px;
+    margin-left: 20px;
+    font-size: 1.5em;
+    color: $color-subhead;
+    line-height: 1.556em;
+    vertical-align: middle;
+    transition: 0.4s;
+}
+.accordion>input[name="collapse"]:checked~.handle label:before {
+    content: "\f068";
+    transform-origin: center;
+    transition: 0.4s;
+    color: $color-subhead;
+}
+
+.doc {
+    float: right;
+    padding: 10px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $color-border;
+     color: $color-border; 
+    margin-right: 3px;
+    /* margin-bottom: 3px; */
+    /* border-radius: 50px; */
+     border: none; 
+    padding: 7px;
+    font-size: 20px;
+    font-weight: lighter;
+     box-shadow:none; 
+
+}
+.submod {
+    margin-left: 13px;
+    font-size: 18px;
+}
+.submod li {
+    padding: 15px;
+    font-weight: 500;
+    margin-left: 35px;
+    color: $color-darkGrey;
+}
+
+ul li:before {
+    content: none;
+    list-style: none !important;
+
+}
+ol{
+    list-style: none !important;
+}

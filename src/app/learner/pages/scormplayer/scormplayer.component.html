@@ -2,12 +2,12 @@
 
 <div class="limiter">
   <div class="container wrap-body">
-    <h1 class="head" *ngIf="courseDeatils">{{content?.coursename}}</h1>
+    <h1 class="head" >{{courseDeatils?.course_name}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">{{content?.coursename}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{courseDeatils?.course_name}}</li>
       </ol>
     </nav>
 
@@ -70,13 +70,11 @@
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
-                  <a href="{{file.path}}" download>{{file.path}}</a>
+                  <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                 </mat-option>
-                <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;"
-                  (click)="downloadAll(mod.resourse?.files)">
+                <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                   <button class="btn">Download all</button>
                 </mat-option>
-
               </mat-select>
             </mat-form-field>
           </div>
@@ -104,9 +102,9 @@
                 <mat-icon matPrefix>folder</mat-icon>
                 <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">
-                    <a href="{{file.path}}" download>{{file.path}}</a>
+                    <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                   </mat-option>
-                  <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                  <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                     <button class="btn">Download all</button>
                   </mat-option>
                 </mat-select>

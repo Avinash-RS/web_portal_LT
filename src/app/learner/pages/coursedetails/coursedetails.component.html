@@ -247,7 +247,7 @@
 
     <div #Syllabus> </div><br><br><br>
     <div class="display_flex wrap_content">
-        <div class="width_50">
+        <div class="width_80">
             <br>
             <h2> Course Outline</h2><br>
             <!-- <mat-accordion>
@@ -273,7 +273,7 @@
                 </mat-expansion-panel>
             </mat-accordion> -->
        
-            <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
+            <section class="accordion" *ngFor="let res of content?.coursedetails">
                 <input type="checkbox" name="collapse" [id]="res?.modulename">
                 <h2 class="handle">
                   <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
@@ -287,7 +287,7 @@
                       </ol>
                     </div>
           
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                       <mat-form-field style="text-align: right;margin-top: 5%;">
                         <mat-label>Resourse</mat-label>
                         <mat-icon matPrefix>folder</mat-icon>
@@ -302,43 +302,11 @@
           
                         </mat-select>
                       </mat-form-field>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </section>
-              <div *ngIf="isCollapsed">
-                <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
-                  <input type="checkbox" name="collapse" [id]="res?.modulename">
-                  <h2 class="handle">
-                    <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-                        <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
-                  </h2>
-                  <div class="content">
-                    <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
-                      <div class="col-8"><br>
-                        <ol class="submod">
-                          <li><b>{{i+1}} : {{mod?.topicname}}</b></li>
-                        </ol>
-                      </div>
-          
-                      <div class="col-4">
-                        <mat-form-field style="text-align: right;margin-top: 5%;">
-                          <mat-label>Resourse</mat-label>
-                          <mat-icon matPrefix>folder</mat-icon>
-                          <mat-select>
-                            <mat-option *ngFor="let file of mod.resourse?.files">
-                              <a href="{{file.path}}" download>{{file.path}}</a>
-                            </mat-option>
-                            <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
-                              <button class="btn">Download all</button>
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
+   
           
        
        

@@ -253,9 +253,10 @@ query getmoduleData($courseid:String!){
               doc_type
               path
               type_name
+              size
             }
             doc_type
-            
+            count
           }
         }
       }

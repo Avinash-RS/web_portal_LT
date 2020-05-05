@@ -2,7 +2,6 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
     <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My Courses</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Course</li>
     <li class="breadcrumb-item active" aria-current="page">{{course?.course_name}}</li>
   </ol>
 </nav>
@@ -205,7 +204,7 @@
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
         <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-            <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+            <b style="text-align: right;" > {{res?.moduledetails.length}} Documents</b></i> </label>
       </h2>
       <div class="content">
         <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
@@ -221,7 +220,7 @@
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
-                  <a href="{{file.path}}" download>{{file.path}}</a>
+                  <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                 </mat-option>
                 <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                   <button class="btn">Download all</button>
@@ -254,9 +253,9 @@
                 <mat-icon matPrefix>folder</mat-icon>
                 <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">
-                    <a href="{{file.path}}" download>{{file.path}}</a>
+                    <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                   </mat-option>
-                  <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                  <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                     <button class="btn">Download all</button>
                   </mat-option>
                 </mat-select>
