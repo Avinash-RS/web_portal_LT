@@ -89,7 +89,6 @@ get f() { return this.otpForm.controls; }
     this.sendOtp = true;
     this.resendLabel = true;
     this.get_user_detail(this.email)
-    console.log('ddddddddddddddddddddddddddddd'+this.userid+this.currentUser._id+this.otpForm.value.mobile+this.email)
     this.loader.show();
     this.service.submit_otp(this.userid,this.currentUser._id,this.otpForm.value.mobile,this.email).subscribe(data => {
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {

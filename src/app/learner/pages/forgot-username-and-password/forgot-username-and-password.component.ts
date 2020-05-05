@@ -14,7 +14,7 @@ import * as myGlobals from '@core/globals';
 export class ForgotUsernameAndPasswordComponent implements OnInit {
   forgotUsername: FormGroup;
   forgotPasswordform: FormGroup;
-  currentUser: any = []
+  currentUser: any = [] ;
   recoveryType: string;
   recoveryTypes: any = [] ;
   type: string;
@@ -37,7 +37,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       username: new FormControl('', myGlobals.usernameVal),
     }, {
       
-  });}
+  });
+  }
 
 
   get f() { return this.forgotUsername.controls; }
@@ -106,7 +107,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   forgotPassword(recovertype){
     if(recovertype.type === "mobile"){
       this.loader.show();
-        this.service.submit_otp(this.currentUser.user_id,this.currentUser._id,recovertype.value,this.forgotUsername.value.email).subscribe(data => {
+        this.service.submit_otp(this.currentUser.user_id,'this.currentUser._id',recovertype.value,this.forgotUsername.value.email).subscribe(data => {
               if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
                 console.log(data.data['user_registration_mobile_otp_send'])
                 this.loader.hide();
@@ -122,7 +123,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
             if (data.data['get_forgot_username_mobile_email']['success'] == 'true') {
               this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
               this.loader.hide();
-           
+              this.router.navigate(['Learner/login'])
             } else{
               this.alert.openAlert(data.data['get_forgot_username_mobile_email'].message,null)
               this.loader.hide();
