@@ -252,9 +252,10 @@ query getmoduleData($courseid:String!){
             files{
               doc_type
               path
+              type_name
             }
             doc_type
-            type_name
+            
           }
         }
       }
