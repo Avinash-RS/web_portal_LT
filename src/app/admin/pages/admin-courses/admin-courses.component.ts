@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -25,11 +26,12 @@ export class AdminCoursesComponent implements OnInit {
   paginationpgno: any;
   course_count: number;
 
-  constructor(public route: Router, private service: AdminServicesService) {
+  constructor(public route: Router, private service: AdminServicesService,private gs: GlobalServiceService,) {
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type) || 'published';
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
-    
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    localStorage.setItem('role','admin');
+    this.adminDetails = this.gs.checkLogout();
     this.pagenumber = 0;
     this.paginationpgno = 0;
     if (this.type == 'created') {
@@ -118,7 +120,6 @@ export class AdminCoursesComponent implements OnInit {
 onpagination(event) {
   this.pagenumber = this.pagenumber + 1;
   this.paginationpgno = event
-  console.log("called");
   if (this.type == 'created') {
     this.loader = true;
     this.service.getAllDrafted(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {

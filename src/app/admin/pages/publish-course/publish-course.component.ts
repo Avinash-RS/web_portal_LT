@@ -16,9 +16,13 @@ export class PublishCourseComponent implements OnInit {
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService, private alert: AlertServiceService, ) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    if (!this.course)
+      this.route.navigate(['/Admin/auth/Wca']);
   }
 
   ngOnInit() {
+    localStorage.setItem('role','admin');
+    this.gs.checkLogout();
   }
 
   publishCourse() {
@@ -27,7 +31,7 @@ export class PublishCourseComponent implements OnInit {
         this.service.publishCourse(this.course.id, true).subscribe((res: any) => {
           if (res.data && res.data.publishcourse) {
             if (res.data.publishcourse.success) {
-              this.alert.openAlert("Success !", "Published course successfully")
+              this.alert.openAlert("Course published successfully", null)
               this.route.navigate(['/Admin/auth/Wca']);
             }
             else

@@ -39,7 +39,8 @@ export class UserManagementComponent implements OnInit {
     private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
     private dialog: MatDialog,
   ) {
-    this.getAllUser(0)
+    localStorage.setItem('role','admin');
+    this.getAllUser(0);
   }
 
   getAllUser(pagenumber) {
@@ -65,11 +66,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
+    console.log(this.adminDetails)
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
   }
 
   gotoAddUser() {
     this.router.navigate(['Admin/auth/addUser']);
+    
   }
 
   // ngAfterViewInit() {

@@ -37,7 +37,7 @@
             <div class="col-md-9 col-sm-9 col-9"></div>
           </div>
           <div class="display_flex m-r-30 bg m-t-20 user_rating">
-            <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
+            <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1' || 1.0}}</strong>
             <span class="material-icons" style="vertical-align: middle;" *ngIf="showRating">
               star_border
             </span>

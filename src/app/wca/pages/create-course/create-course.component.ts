@@ -6,6 +6,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -71,8 +72,11 @@ export class CreateCourseComponent implements OnInit {
     public toast: ToastrService,
     public router: Router,
     public route: ActivatedRoute,
-
-  ) { }
+    private gs: GlobalServiceService,
+  ) { 
+    localStorage.setItem('role', 'admin');
+    this.gs.checkLogout();
+  }
   
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -210,7 +214,7 @@ export class CreateCourseComponent implements OnInit {
     console.log(this.courseForm.valid);
     console.log(this.courseForm);
 
-    const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));
+    const userDetails  = this.gs.checkLogout();
     console.log(userDetails);
     console.log(localStorage.getItem('role'))
       this.submitted = true;
