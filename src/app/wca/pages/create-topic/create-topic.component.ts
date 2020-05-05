@@ -112,6 +112,7 @@ export class CreateTopicComponent implements OnInit {
         } else if (this.query.edit && !this.query.addModule) {
           this.wcaService.bSubject1.subscribe((value1:any) => {
           console.log(value1);
+          console.log(this.queryData)
          if(value1 && value1.courseDetails) {
            this.courseArray = value1.courseDetails.coursedetails;
            console.log(this.courseArray);
