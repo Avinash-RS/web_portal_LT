@@ -37,21 +37,21 @@ import { AuthGuard } from '@core/services/_helpers';
 
 const routes: Routes = [
 
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'wca', component: WcaComponent, canActivate: [AuthGuard]},
-  { path: 'addcourse', component: CreateCourseComponent,canActivate: [AuthGuard] },
-  { path: 'viewmodule', component: ViewModuleComponent,canActivate: [AuthGuard] },
-  { path: 'createmodule', component: CreateModuleComponent,canActivate: [AuthGuard] },
-  { path: 'addtemplate', component: CreateTemplateComponent,canActivate: [AuthGuard] },
-  { path: 'choosetemplate', component: ChooseTemplateComponent,canActivate: [AuthGuard] },
-  { path: 'addtopic', component: CreateTopicComponent,canActivate: [AuthGuard] },
+  { path: '', component: DashboardComponent, },
+  { path: 'wca', component: WcaComponent, },
+  { path: 'addcourse', component: CreateCourseComponent, },
+  { path: 'viewmodule', component: ViewModuleComponent, },
+  { path: 'createmodule', component: CreateModuleComponent, },
+  { path: 'addtemplate', component: CreateTemplateComponent, },
+  { path: 'choosetemplate', component: ChooseTemplateComponent, },
+  { path: 'addtopic', component: CreateTopicComponent, },
 
-  { path: 'addfile', component: UploadFilesComponent,canActivate: [AuthGuard] },
-  { path: 'mycourse', component: MycreatedCourseComponent, canActivate: [AuthGuard]},
-  { path: 'ct', component: ChooseTemplateComponent,canActivate: [AuthGuard] },
-  { path: 'rf', component: ReferenceFileComponent,canActivate: [AuthGuard] },
-  { path: 'addmodule', component: AddModuleComponent ,canActivate: [AuthGuard]},
-  { path: 'previewcourse', component: CoursepreviewComponent,canActivate: [AuthGuard] }
+  { path: 'addfile', component: UploadFilesComponent, },
+  { path: 'mycourse', component: MycreatedCourseComponent, },
+  { path: 'ct', component: ChooseTemplateComponent, },
+  { path: 'rf', component: ReferenceFileComponent, },
+  { path: 'addmodule', component: AddModuleComponent ,},
+  { path: 'previewcourse', component: CoursepreviewComponent, }
 
 
 
