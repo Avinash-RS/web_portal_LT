@@ -60,7 +60,7 @@ export class CreateCourseComponent implements OnInit {
       media: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] && this.courseEditDetails.takeway_details[0].media ? this.courseEditDetails.takeway_details[0].media.map((data,index) => {
         return this.createMedia();
       }) : [this.createMedia()]),
-      step_towards: '',
+      description: '',
       what_will_you_learn:''
 
     });
@@ -266,13 +266,14 @@ export class CreateCourseComponent implements OnInit {
       this.courseForm.value.article_count = null;
       this.courseForm.value.downloadable_resource_count = null;
       this.courseForm.value.course_level = '';
+      this.courseForm.value.step_towards = '';
       this.courseForm.value.rating = '';
       this.courseForm.value.price = '';
       this.courseForm.value.course_category = '';
       this.courseForm.value.course_type = '';
       this.courseForm.value.parent_sub_category_id = [];
       this.courseForm.value.category_id = [];
-      this.courseForm.value.created_by = userDetails.user_id ? userDetails.user_id : '';
+      this.courseForm.value.created_by = userDetails.username ? userDetails.username : '';
       this.courseForm.value.updated_by = '';
       this.courseForm.value.admin_id = userDetails.user_id ? userDetails.user_id : '';
       this.courseForm.value.is_published = null;
