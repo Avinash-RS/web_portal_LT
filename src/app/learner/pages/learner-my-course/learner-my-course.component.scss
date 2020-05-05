@@ -12,9 +12,11 @@
     padding: 7px !important;
     color: $color-blue;
 }
+
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
+
 .coursebreadcrumb {
     padding-top: 10px;
 
@@ -22,4 +24,8 @@
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
+}
+
+img {
+    width: 275px !important;
 }

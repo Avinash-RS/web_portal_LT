@@ -93,7 +93,7 @@ export class ListViewCourseComponentComponent implements OnInit {
 
   }
 
-  login(v) {
+  gotopublishcourse(course) {
     if (this.btnType == 'Publish') {
       let detail = {
         id: this.course.course_id,
