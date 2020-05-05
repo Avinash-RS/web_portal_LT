@@ -262,7 +262,7 @@ tr.mat-row {
     height: 35px !important;
 }
 
-::ng-deep .mat-sort-header-stem {
+:host ::ng-deep .mat-sort-header-stem {
  background: fixed !important; 
     height: 10px;
     color: $color-blank;

@@ -12,7 +12,7 @@
   height: 30px;
 }
 
-::ng-deep .mat-progress-spinner {
+:host ::ng-deep .mat-progress-spinner {
   position: absolute !important;
   top: 50% !important;
   left: 45% !important;

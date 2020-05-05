@@ -4,17 +4,19 @@
     box-shadow: none;
 }
 
-::ng-deep .mat-expansion-indicator {
+:host ::ng-deep .mat-expansion-indicator {
     margin-right: 25px !important;
 }
 
-::ng-deep .mat-expansion-indicator::after {
+:host ::ng-deep .mat-expansion-indicator::after {
     padding: 7px !important;
     color: $color-blue;
 }
+
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
+
 .coursebreadcrumb {
     padding-top: 10px;
 
@@ -22,4 +24,8 @@
         margin-bottom: 0 !important;
         background-color: #fff !important;
     }
+}
+
+img {
+    width: 275px !important;
 }

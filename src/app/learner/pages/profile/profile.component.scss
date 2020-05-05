@@ -380,7 +380,7 @@ div.account{
   margin-left: 15px;
 }
 
-::ng-deep .mat-radio-outer-circle {
+:host ::ng-deep .mat-radio-outer-circle {
   border-width: 1px !important;
 }
 
@@ -391,7 +391,7 @@ div.account{
 
 }
 
-// ::ng-deep .mat-select-panel {
+// :host ::ng-deep .mat-select-panel {
 //   overflow: hidden !important;
 // }
 

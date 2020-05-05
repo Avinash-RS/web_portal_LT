@@ -216,7 +216,7 @@ h1 {
 
 
 //Mythreyi
-::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
+:host ::ng-deep .banner .owl-theme .owl-nav [class*='owl-'] {
     color: $color-white;
     font-size: 50px !important;
     background: rgb(46, 46, 46);
@@ -228,49 +228,49 @@ h1 {
     opacity: 0.7;
 }
 
-::ng-deep .banner .owl-carousel .owl-nav .owl-prev {
+:host ::ng-deep .banner .owl-carousel .owl-nav .owl-prev {
     position: absolute;
     top: 300px;
     z-index: 1 !important;
     left: 30px;
 }
 
-::ng-deep .banner .owl-carousel .owl-nav .owl-next {
+:host ::ng-deep .banner .owl-carousel .owl-nav .owl-next {
     position: absolute;
     top: 300px;
     z-index: 1 !important;
     right: 30px;
 }
 
-::ng-deep .banner .owl-theme .owl-dots {
+:host ::ng-deep .banner .owl-theme .owl-dots {
     position: absolute;
     top: 600px;
     left: 48%;
 }
 
-::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+:host ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
     background-color: $color-blank !important;
 }
 
-::ng-deep .owl-theme .owl-dots .owl-dot span {
+:host ::ng-deep .owl-theme .owl-dots .owl-dot span {
     background-color: rgb(110, 109, 109) !important;
 }
 
-::ng-deep .partner .owl-carousel .owl-item img {
+:host ::ng-deep .partner .owl-carousel .owl-item img {
     width: 80%;
 }
 
-::ng-deep .partner .owl-carousel .owl-stage-outer {
+:host ::ng-deep .partner .owl-carousel .owl-stage-outer {
     width: 90%;
     margin-left: 5%;
 }
 
-::ng-deep .partner .owl-carousel.owl-drag .owl-item {
+:host ::ng-deep .partner .owl-carousel.owl-drag .owl-item {
     text-align: -webkit-center;
     width: 170.6px
 }
 
-::ng-deep .partner .owl-theme .owl-nav [class*='owl-'] {
+:host ::ng-deep .partner .owl-theme .owl-nav [class*='owl-'] {
     color: $color-white;
     font-size: 30px !important;
     background: rgb(46, 46, 46);
@@ -283,26 +283,26 @@ h1 {
     opacity: 0.7;
 }
 
-::ng-deep .partner .owl-carousel .owl-nav .owl-prev {
+:host ::ng-deep .partner .owl-carousel .owl-nav .owl-prev {
     position: absolute;
     top: 20px;
     z-index: 1 !important;
     left: 30px;
 }
 
-::ng-deep .partner .owl-carousel .owl-nav .owl-next {
+:host ::ng-deep .partner .owl-carousel .owl-nav .owl-next {
     position: absolute;
     top: 20px;
     z-index: 1 !important;
     right: 30px;
 }
 
-::ng-deep .trending .owl-carousel {
+:host ::ng-deep .trending .owl-carousel {
     width: 86%;
     margin-left: 7%;
 }
 
-::ng-deep .trending .owl-theme .owl-nav [class*='owl-'] {
+:host ::ng-deep .trending .owl-theme .owl-nav [class*='owl-'] {
     color: $color-white;
     font-size: 30px !important;
     background: rgb(46, 46, 46);
@@ -315,14 +315,14 @@ h1 {
     opacity: 0.7;
 }
 
-::ng-deep .trending .owl-carousel .owl-nav .owl-prev {
+:host ::ng-deep .trending .owl-carousel .owl-nav .owl-prev {
     position: absolute;
     top: 20%;
     z-index: 1 !important;
     left: -5%;
 }
 
-::ng-deep .trending .owl-carousel .owl-nav .owl-next {
+:host ::ng-deep .trending .owl-carousel .owl-nav .owl-next {
     position: absolute;
     top: 20%;
     z-index: 1 !important;

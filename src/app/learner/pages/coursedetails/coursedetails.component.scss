@@ -74,7 +74,7 @@ strong {
     opacity: 0.6 !important;
 }
 
-::ng-deep .mat-card-title {
+:host ::ng-deep .mat-card-title {
     margin-top: 7% !important;
 }
 
@@ -145,7 +145,7 @@ strong {
     }
 }
 
-::ng-deep .br-default .br-unit {
+:host ::ng-deep .br-default .br-unit {
     // background: gray !important;
     border-radius: 6px;
     width: 21px;
@@ -247,7 +247,7 @@ mat-card {
     border: 1px solid rgb(128, 134, 190);
 }
 
-::ng-deep .mat-progress-bar-fill::after {
+:host ::ng-deep .mat-progress-bar-fill::after {
     background-color: $color-maroon !important;
 }
 
@@ -260,12 +260,12 @@ mat-card {
     margin-bottom: -18px;
 }
 
-::ng-deep .br-default .br-unit {
+:host ::ng-deep .br-default .br-unit {
     width: 10px !important;
     font-size: 16px;
 }
 
-::ng-deep .c_r .br-default .br-unit {
+:host ::ng-deep .c_r .br-default .br-unit {
     width: 25px !important;
     font-size: 25px;
 }
@@ -290,7 +290,7 @@ h2 {
     color: $color-blank;
 }
 
-::ng-deep .owl-theme .owl-nav [class*='owl-'] {
+:host ::ng-deep .owl-theme .owl-nav [class*='owl-'] {
     color: $color-white;
     font-size: 20px !important;
     background: $color-darkGrey;
@@ -302,37 +302,37 @@ h2 {
     z-index: -1 !important;
 }
 
-::ng-deep .takeway .owl-carousel .owl-nav .owl-prev {
+:host ::ng-deep .takeway .owl-carousel .owl-nav .owl-prev {
     margin-top: -20%;
     position: absolute;
     z-index: 1 !important;
     margin-left: -75vh;
 }
 
-::ng-deep .takeway .owl-carousel .owl-nav .owl-next {
+:host ::ng-deep .takeway .owl-carousel .owl-nav .owl-next {
     margin-top: -20%;
     position: absolute;
     z-index: 1 !important;
     margin-left: 72vh;
 }
 
-::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-prev {
+:host ::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-prev {
     margin-top: -20vh !important;
     position: absolute !important;
     margin-left: -47% !important;
 }
 
-::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-next {
+:host ::ng-deep .Instructor_dtl .owl-carousel .owl-nav .owl-next {
     margin-top: -25vh !important;
     position: absolute !important;
     margin-left: 45% !important;
 }
 
-::ng-deep .Instructor_dtl .owl-carousel .owl-item img {
+:host ::ng-deep .Instructor_dtl .owl-carousel .owl-item img {
     width: 25% !important;
 }
 
-::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+:host ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
     background-color: $color-maroon !important;
 }
 
@@ -419,22 +419,22 @@ ul li:before {
     overflow: hidden;
 }
 
-::ng-deep .mat-tab-label .mat-tab-label-content {
+:host ::ng-deep .mat-tab-label .mat-tab-label-content {
     color: $color-red;
 }
 
-::ng-deep .mat-tab-body-content {
+:host ::ng-deep .mat-tab-body-content {
     overflow: hidden !important;
 }
 
 
 
 
-::ng-deep .owl-item {
+:host ::ng-deep .owl-item {
     display: inline-block !important;
 }
 
-::ng-deep .owl-carousel {
+:host ::ng-deep .owl-carousel {
     overflow: hidden !important;
 }
 

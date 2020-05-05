@@ -180,9 +180,9 @@ export class GroupManagementComponent implements OnInit {
     this.adminservice.updateGroup(this.userGroupChange._id,this.changeGrpForm.value.group.group_name,this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
       console.log(result);
       if(result.data.update_group.success) {
-        this.getAllUser(0);
         this.alert.openAlert('User Group Updated Successfully', null);
         this.dialog.closeAll();
+        this.getAllUser(0);
       } else {
         this.alert.openAlert(result.data.update_group.message, null);
         this.dialog.closeAll();
