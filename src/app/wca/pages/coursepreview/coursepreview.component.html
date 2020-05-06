@@ -42,7 +42,7 @@
           <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created on</div>
           <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_at | date}}</div>
           <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created by</div>
-          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_by}}</div>
+          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_by == 'admin' ? 'Admin' : course?.created_by }}</div>
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published on</div>
           <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_on | date }}</div>
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published by</div>
@@ -113,7 +113,7 @@
         <h3><b>Course Instructor</b></h3>
       </div>
       <div class="col-md-4 col-sm-12 col-12">
-        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}} , </span>
+        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}}  </span>
       </div>
     </div>
     <div class="row">
@@ -204,9 +204,9 @@
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
         <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-            <b style="text-align: right;" > {{res?.moduledetails.length}} Documents</b></i> </label>
+            <b style="text-align: right;" > {{countofdoc}} Documents</b></i> </label>
       </h2>
-      <div class="content">
+      <div class="content" >
         <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
           <div class="col-8"><br>
             <ol class="submod">
@@ -214,7 +214,7 @@
             </ol>
           </div>
 
-          <div class="col-4">
+          <div class="col-4" >
             <mat-form-field style="text-align: right;margin-top: 5%;" *ngIf="mod.resourse?.files.length > 0">
               <mat-label>Resources</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
@@ -237,7 +237,7 @@
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
           <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-              <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+              <b style="text-align: right;"> {{countofdoc}} Documents</b></i> </label>
         </h2>
         <div class="content">
           <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
