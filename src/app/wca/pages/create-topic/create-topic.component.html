@@ -10,6 +10,10 @@
     </ol>
 </nav>
 
+<div *ngIf="!queryData?.template_details || queryData === undefined"  class="dspFlx">
+    <span style="color: red;">Go Back and Choose or Create the Template Please !!!</span>
+</div>
+
 
   <span *ngIf="createTopicForm?.controls">
 <form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()" class="formHeight">
@@ -23,9 +27,7 @@
             </span>
         </div>
 
-        <div *ngIf="!queryData?.template_details"  class="dspFlx">
-            <span style="color: red;">Go Back and Chooose or Create the Template Please !!!</span>
-        </div>
+        
 <span *ngIf="createTopicForm?.get('moduledetails')?.controls">
         <div [hidden]="j?.value?.topicstatus === 'false'" class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
           
@@ -45,10 +47,9 @@
                 <span class="restictWidth"> <mat-form-field class="matWidth" appearance="outline">
                  <mat-label class="clrLabel">Topic Name</mat-label>
                  <input  matInput  style="color:black;" formControlName="topicname">
-                 <mat-error > </mat-error>
+                 <mat-error *ngIf="(!j?.value?.topicname) && submitted">Topic Name Required !!! </mat-error>
                </mat-form-field>
-               <span class="validmodule"> <small style="font-weight:590" *ngIf="createTopicForm?.controls?.topicname?.errors?.required && submitted">Topic Name Required !!!</small>
-               </span>
+             
             </span>
                <span class="example-spacer"></span>
                <span  *ngIf="query?.edit">
@@ -61,10 +62,10 @@
         <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span> 
           <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
           <span class="padTop1 showCon" *ngIf="!j?.value?.topicimages[0]" > <small>content is empty Double Click to edit</small></span>
-          <span class="padTop1" > <small>{{fileType}}</small></span>
-         <span class="previewAndTime" [class.active]="queryData?.template_details[i]?.name==active?.name">
-             <span><button *ngIf="j?.value?.topicimages[0]" mat-raised-button class="btnprev" type="button" (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
-             <span>
+          <span class="padTop1" *ngIf="queryData?.template_details[i].name===active?.name" >  <small>{{fileType}}</small></span>
+         <span *ngIf="j?.value?.topicimages[0]" class="previewAndTime" [class.active]="queryData?.template_details[i]?.name==active?.name">
+             <span><button  mat-raised-button class="btnprev" type="button" (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
+             <span class="dspFlxinside">
                  <small class="spanTime">  Time required to complete the topic </small>
                  <mat-card class="matcardTime">
                      00:00

@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { WcaService } from '../../services/wca.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Component, OnInit } from "@angular/core";
+import { WcaService } from "../../services/wca.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-choose-template',
-  templateUrl: './choose-template.component.html',
-  styleUrls: ['./choose-template.component.scss']
+  selector: "app-choose-template",
+  templateUrl: "./choose-template.component.html",
+  styleUrls: ["./choose-template.component.scss"],
 })
 export class ChooseTemplateComponent implements OnInit {
-
   queryData: any;
   templateList: any;
   selectedTemplate: any;
@@ -18,18 +17,15 @@ export class ChooseTemplateComponent implements OnInit {
   isHover: boolean;
 
   constructor(
-    private gs: GlobalServiceService,
     private APIService: WcaService,
     public router: Router,
     public route: ActivatedRoute,
-    public spinner: NgxSpinnerService
-  ) {
-    localStorage.setItem('role', 'admin');
-    this.gs.checkLogout();
-  }
+    public spinner: NgxSpinnerService,
+    public toast: ToastrService
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       let flag = 0;
       for (const key in params) {
         if (params.hasOwnProperty(key)) {
@@ -38,23 +34,26 @@ export class ChooseTemplateComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
-        console.log(this.queryData)
+        console.log(this.queryData);
       }
     });
     this.selectedTemplate = {
-      template_id: ""
-    }
+      template_id: "",
+    };
     this.getTemplates();
   }
 
   getTemplates() {
     this.spinner.show();
-    this.APIService.getAllTemplates().subscribe((res: any) => {
-      this.templateList = res.Result;
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-    })
+    this.APIService.getAllTemplates().subscribe(
+      (res: any) => {
+        this.templateList = res.Result;
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
   }
 
   selectTemplate(template) {
@@ -63,10 +62,27 @@ export class ChooseTemplateComponent implements OnInit {
 
   templateParse(tlist) {
     console.log(this.selectedTemplate);
-    if (this.queryData && this.queryData.addModule) {
-      this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { addModule: true, courseName: this.queryData.courseName, viewingModule: this.queryData.viewingModule, template: this.selectedTemplate.template_id } });
+    if (this.selectedTemplate && this.selectedTemplate.template_id) {
+      if (this.queryData && this.queryData.addModule) {
+        this.router.navigate(["/Admin/auth/Wca/addtopic"], {
+          queryParams: {
+            addModule: true,
+            courseName: this.queryData.courseName,
+            viewingModule: this.queryData.viewingModule,
+            template: this.selectedTemplate.template_id,
+          },
+        });
+      } else {
+        this.router.navigate(["/Admin/auth/Wca/addtopic"], {
+          queryParams: {
+            courseName: this.queryData.courseName,
+            viewingModule: this.queryData.viewingModule,
+            template: this.selectedTemplate.template_id,
+          },
+        });
+      }
     } else {
-      this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { courseName: this.queryData.courseName, viewingModule: this.queryData.viewingModule, template: this.selectedTemplate.template_id } });
+      this.toast.warning('Aleast One Template is Required !!!');
     }
   }
 
@@ -76,15 +92,15 @@ export class ChooseTemplateComponent implements OnInit {
   }
   onhoverLeave() {
     this.isHover = false;
-    this.hoverId = '';
+    this.hoverId = "";
   }
 
   navCreateTemp() {
-    if (this.queryData && this.queryData.addModule) {
-      this.router.navigate(['/Admin/auth/Wca/addtemplate'], { queryParams: { addModule: true, viewingModule: this.queryData.viewingModule, image: this.queryData.image, courseName: this.queryData.courseName } });
-    } else {
-      this.router.navigate(['/Admin/auth/Wca/addtemplate'], { queryParams: { viewingModule: this.queryData.viewingModule, image: this.queryData.image, courseName: this.queryData.courseName } });
+    if(this.queryData && this.queryData.addModule)
+    {
+      this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { addModule:true,viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
+    }else {
+      this.router.navigate(['/Admin/auth/Wca/addtemplate'],{queryParams: { viewingModule: this.queryData.viewingModule ,image: this.queryData.image,courseName:this.queryData.courseName}});
     }
   }
-
 }
