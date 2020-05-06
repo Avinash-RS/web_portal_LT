@@ -23,7 +23,7 @@
             <label>Password</label><span style="color: red;"> *</span>
             <div *ngIf="capsOn">Caps Lock is On !</div>
             <input [type]="show ? 'text' : 'password'" name="password" formControlName="password" onCopy="return false"
-              onDrag="return false" onDrop="return false" onPaste="return false" class="form-control border-right-0"
+              onDrag="return false" onDrop="return false" onPaste="return false" class="form-control"
               [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
             <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
               aria-hidden="true"></i>
@@ -42,7 +42,7 @@
           </div>
           <br />
           <mat-checkbox class="remember_me" formControlName="remember_me">
-            Remember Me 
+            Remember Me
           </mat-checkbox>
           <br><br><br>
 
