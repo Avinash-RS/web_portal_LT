@@ -48,8 +48,8 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2">
-                            <mat-grid-tile *ngFor="let course of wishlist" [style.border]="'none'">
+                        <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)">
+                            <mat-grid-tile *ngFor=" let course of wishlist" [style.border]="'none'">
                                 <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
                                     [showWishlist]="true" [showStatus]="false" [showRating]="true" [showCount]="true"
                                     [showPrice]="true"> </app-course-component>
