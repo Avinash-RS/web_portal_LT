@@ -32,3 +32,11 @@ export const getPlayerStatus = gql`
       success
     }
 }`; 
+export const geturl = gql`
+mutation geturl($courseid: String!) {
+    geturl(courseid: $courseid) {
+      message
+      success
+    }
+  }
+`;

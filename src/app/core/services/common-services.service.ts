@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { logout, viewcourse, view_wishlist,list_content, syllabus_of_particular_scorm} from "@core/services/operations/common_query";
-import { add_to_wishlist, delete_wishlist,getPlayerStatus } from "@core/services/operations/common_mutation";
+import { add_to_wishlist, delete_wishlist,getPlayerStatus,geturl } from "@core/services/operations/common_mutation";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +76,15 @@ export class CommonServicesService {
       query: getPlayerStatus,
       variables: {
         user_id:id
+      }
+    });
+  }
+
+  geturl(courseid) {
+    return this.Apollo.query({
+      query: geturl,
+      variables: {
+        courseid: courseid
       }
     });
   }
