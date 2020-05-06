@@ -46,7 +46,7 @@
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published on</div>
           <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_on | date }}</div>
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published by</div>
-          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_by}}</div>
+          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_by == 'admin' ? 'Admin' : course?.published_by }}</div>
         </div>
 
         <div class="row cls" *ngIf="isshowPublish">
