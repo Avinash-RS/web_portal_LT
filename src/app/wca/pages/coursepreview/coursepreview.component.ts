@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+
 @Component({
   selector: 'app-coursepreview',
   templateUrl: './coursepreview.component.html',
@@ -75,6 +76,7 @@ export class CoursepreviewComponent implements OnInit {
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.passCourseId();
     this.getModuleData()
   }
 
@@ -112,7 +114,11 @@ export class CoursepreviewComponent implements OnInit {
     })
   }
 
- 
+     passCourseId(){
+      this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe(data => {
+        console.log(data)
+      })
+     }
 
   crsDetails() {
     this.route.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.course.course_id } });

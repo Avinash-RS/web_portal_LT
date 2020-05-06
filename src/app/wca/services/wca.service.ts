@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
 import {remove_doc_ref,getallrefdoc,get_module_topic} from "./operations/wca_query";
-
 import { HttpHeaders } from '@angular/common/http';
 
 
@@ -129,4 +128,6 @@ token:String;
       query: get_module_topic
     });
   }
+
+
 }
