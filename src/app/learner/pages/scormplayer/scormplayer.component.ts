@@ -28,6 +28,7 @@ export class ScormplayerComponent implements OnInit {
   courseDeatils: any;
   modulength: any;
   public isCollapsed = false;
+  countofdoc: any;
   constructor(public sanitizer: DomSanitizer,    public spinner: NgxSpinnerService,public activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router,public commonService : CommonServicesService,) { 
       var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
@@ -67,17 +68,17 @@ export class ScormplayerComponent implements OnInit {
 
   getModuleData() {
     this.service.getModuleData(this.course_id).subscribe(data => {
-      console.log(data)
-      // if(data.data['getmoduleData']['success'] == true){
-
         this.content = data.data['getmoduleData']['data'][0]
         this.modulength =  this.content['coursedetails'].length;
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url);
-      // }
-     
-      // if(this.content&&this.content.getModuleData&&this.content.getModuleData.success){
-      //    this.content = this.content.getModuleData.data[0]
-      // }   
+        this.content.coursedetails.forEach(moduledetails => {
+          moduledetails.moduledetails.forEach(element => {
+            this.countofdoc = element.resourse.count;
+             return true
+           });
+        });
+        var url='../../../../assets/scormContent'+this.content.url
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        //this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
     })
   }
 
