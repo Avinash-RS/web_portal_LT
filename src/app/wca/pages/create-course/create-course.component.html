@@ -59,7 +59,7 @@
                                           placeholder="Enter the course description (200 Characters)" maxlength="1000" 
                                           name="info"></textarea> -->
 
-                            <mat-form-field class="matchipsbrder" >
+                            <mat-form-field class="matchipsbrder" [class.active]="preRequisites?.length">
                               <mat-chip-list #preReqList>
                                 <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
                                   matTooltip={{req?.name}}>
