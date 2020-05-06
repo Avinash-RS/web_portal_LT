@@ -495,7 +495,7 @@ if (item) {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'previewImages', images: images.value.topicimages },
         height: '80%',
-        width: '80%',
+        width: '84%',
         closeOnNavigation: true,
         disableClose: true,
       });

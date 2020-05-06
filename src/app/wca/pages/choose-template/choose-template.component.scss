@@ -354,9 +354,13 @@ input[type="text"] {
 .template-name {
     font-size: 18px;
     color: #868686;
-    position: absolute;
-    bottom: 10px;
-    left: 35px;
+    text-align: center;
+    width: 90%;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .template-img {
