@@ -164,16 +164,16 @@
                   <!-- //////userName  +++ full name +++ Phone//////// -->
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Username : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username || 'NA'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Full Name : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name}}
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name || 'NA'}}
                       </label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Mobile : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number || 'NA'}}</label></label>
                   </div>
                 </div>
 
@@ -181,7 +181,7 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Email : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email || 'NA'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
@@ -189,7 +189,7 @@
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>I'm a : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional}}</label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional  || 'NA'}}</label>
                     </label>
                   </div>
                 </div>
@@ -203,11 +203,15 @@
                         {{lang}}
                       </div>
                     </div>
+                    <div *ngIf="profileDetails.language.length == 0" class="color_black">
+                      NA
+                    </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-12">
                     <label>Location : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name}},
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name}} </label></label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
+                       }} </label></label>
                   </div>
                 </div>
                 <br><br>
