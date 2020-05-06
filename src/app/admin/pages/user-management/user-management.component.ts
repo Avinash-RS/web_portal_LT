@@ -154,8 +154,7 @@ export class UserManagementComponent implements OnInit {
                 else
                   this.alert.openAlert('Sorry, Please try again later', 'null')
               });
-          } else
-            this.selectedArray = []
+          } 
         })
     } else {
       this.alert.openAlert("Please select any record", null)
@@ -180,8 +179,6 @@ export class UserManagementComponent implements OnInit {
                   this.alert.openAlert('Sorry, Please try again later', 'null')
               });
           }
-          else
-            this.selectedArray = []
         })
     } else {
       this.alert.openAlert("Please select any record", null)
