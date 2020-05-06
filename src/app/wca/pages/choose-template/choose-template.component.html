@@ -4,12 +4,21 @@
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
+                </a></li>
+            <li class="breadcrumb-item">
+                <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
+                    Courses</a></li>
+            <li class="breadcrumb-item">
+                <ng-container *ngIf="queryData.addModule; else createModule">
+                    <a href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add Module</a>
+                </ng-container>
+                <ng-template #createModule>
+                    <a href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create Module</a>
+                </ng-template>
 
-            <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">Create Courses</a></li>
-
-            <li class="breadcrumb-item " aria-current="page">Create Module</li>
-
-            <li class="breadcrumb-item active" aria-current="page">Choose a Template</li>
+            </li>
+            <li class="breadcrumb-item active">Choose a template</li>
         </ol>
     </nav>
 
