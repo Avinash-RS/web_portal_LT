@@ -62,7 +62,7 @@
                                                 {{"created by "+ tlist.createdby_name}}
                                             </div>
                                         </div>
-                                        <div style="width: 200px;">
+                                        <div style="width: 200px; height: 85.5%;">
                                             <div class="tick-icon"
                                                 *ngIf="tlist.template_id == selectedTemplate.template_id">
                                                 <mat-icon class="green-icon">check_circle_outline</mat-icon>
@@ -87,7 +87,7 @@
                                             <mat-icon class="temp-info" (mouseout)="onhoverLeave()"
                                                 (mouseover)="onHover(tlist.template_id)">info</mat-icon>
                                         </div>
-                                        <div class="template-name">Template {{i + 1}}
+                                        <div class="template-name">{{tlist.name}}
 
                                         </div>
 
