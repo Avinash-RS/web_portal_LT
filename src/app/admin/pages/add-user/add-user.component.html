@@ -6,7 +6,7 @@
   </ol>
 </nav>
 
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)">
   <mat-tab label="Add a user">
     <div class="container">
       <div class="row">
@@ -21,7 +21,7 @@
                 <div *ngIf="f.username.errors.required">Full Name is required</div>
                 <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
                 <div *ngIf="f.username.errors.minlength">Full Name must be minimum of
-                  {{f.username.errors.maxlength.requiredLength}} characters </div>
+                  {{f.username.errors.minlength.requiredLength}} characters </div>
                 <div *ngIf="f.username.errors.maxlength">Full Name must be
                   {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
               </div>
@@ -106,6 +106,7 @@
           </div>
         </div>
         <div class="downloadbutton">
+          <form #bulkuserform="ngForm">
           <mat-form-field>
             <mat-label>Group Name</mat-label>
             <mat-select name="group" [(ngModel)]="group">
@@ -114,11 +115,12 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </form>
         </div>
       <!-- </dS -->
 
     <!-- <div class="row"> -->
-      <button type="button" (click)="saveexcel(group)"
+      <button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
         class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
     <!-- </div> -->
     <br>   <br>   <br>
