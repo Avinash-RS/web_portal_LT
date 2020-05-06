@@ -7,7 +7,7 @@ import * as myGlobals from '@core/globals';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
   fname: string;
@@ -223,7 +223,18 @@ export class AddUserComponent implements OnInit {
    * Delete csv file
    */
   deleteFile() {
-    this.selectedfile = '';
+    Swal.fire({
+      title: 'Are you sure want to delete the uploaded file ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+     }).then((result) => {
+      if (result.value) {
+        this.selectedfile = '';
+      }
+    });
   }
 
   /**
@@ -242,4 +253,10 @@ export class AddUserComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  tabClick(event, form) {
+    if (event.index === 0) {
+     form.reset();
+     this.selectedfile = '';
+    }
+  }
 }
