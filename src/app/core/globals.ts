@@ -38,9 +38,8 @@ export const emailVal: any = [
     Validators.maxLength(64),
     // Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-a-z0-9-]+\.[A-Za-z]{2,4}$/)
     // Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4}$/), // old
-    //Working in all scenarios
+    //Working in all scenarios - asok@gmail.co.in.co.in.co.in - able to enter
     Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)
-
     //  old pattern Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
 ]
 // not accpect start and end space 
