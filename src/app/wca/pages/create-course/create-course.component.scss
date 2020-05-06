@@ -39,12 +39,13 @@ margin-left: -16px;
     padding-top:14px;
     display:flex;
     padding-bottom: 12px;
+    margin-left: 30px;
 }
 .padtp25px{
     padding-top: 25px;
 }
 .spanandWidth{
-    width: 72%;
+    width: 82%;
     padding-left: 12px;
 }
 .margLeft41px{
@@ -515,7 +516,8 @@ width: 100%;
 }
   .width100full{
     display: flex;
- width: 99%;
+    width: 100%;
+    margin-left: 5%;
   }
   .inputs5 {
     padding: 8px 3px 9px 8px;
@@ -581,6 +583,10 @@ width: 100%;
     border: none;
 }
 
+.matchipsbrder.active{
+    background: none;
+}
+
 .marginsection{
     margin: 11px 0px 41px;
     display: flex;
@@ -614,3 +620,53 @@ flex-wrap: nowrap;
 .margTop6px{
     margin-top: 6px;
 }
+
+.instructorIcon{
+    margin: 14%;
+    margin-left: 20%;
+}
+
+.collapaseIcon{
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .inputmainWidth{
+        width: 80% !important;
+        margin-top: 15px !important;
+    }
+
+    mat-form-field {
+         width: 65% !important;
+        margin-top: 20px !important;
+      }
+
+      .instructorWidth{
+        margin-left: 55% !important;
+        width: 60% !important;
+        margin-top: 10px !important;
+      }
+
+      .spanandWidth{
+          width: 50% !important;
+      }
+      .instructorIcon{
+          display: none !important;
+      }
+
+      .collapaseIcon{
+        display: block !important;
+        margin-left: 12% !important;
+        margin-top: 5% !important;
+    }
+    .width100full{
+        display: contents;
+    }   
+    .learnerIcon{
+        margin-left: 20%;
+    }
+    .img3marg{
+        margin-top: 10px;
+    }
+
+    }
