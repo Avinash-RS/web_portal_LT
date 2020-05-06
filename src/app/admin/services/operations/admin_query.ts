@@ -111,6 +111,27 @@ export const get_user_session_detail = gql`
           is_profile_updated
           registered_date
           mobile_number
+          email
+          full_name   
+          profile_img
+          year_of_birth
+          progress
+          gender
+          about_you
+          is_student_or_professional
+          country_name
+          state_name
+          professional{
+            total_experience
+            organization
+            job_role
+          }
+          social_media{
+            _id
+            link
+            img
+          }
+          user_profile
         }
         player_detail{
           _id
@@ -120,7 +141,7 @@ export const get_user_session_detail = gql`
         }
         last_login
         language
-      }    
+      }  
     }
   }`;
 
