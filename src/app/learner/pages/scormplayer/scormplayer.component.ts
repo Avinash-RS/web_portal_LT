@@ -77,6 +77,7 @@ export class ScormplayerComponent implements OnInit {
            });
         });
         var url='../../../../assets/scormContent'+this.content.url
+        console.log(url)
         this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
         //this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
     })

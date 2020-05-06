@@ -321,6 +321,8 @@ input[type=text] {
     line-height: 20px;
     padding: 0 1px 0 1px;
     margin: 1px;
+    word-break: break-all;
+    white-space: normal;
   }
 
   .mat-header-cell:last-of-type {

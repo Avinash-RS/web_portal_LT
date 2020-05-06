@@ -252,6 +252,7 @@ export class GroupManagementComponent implements OnInit {
             this.editstatus = true;
             this.currentpath = null;
             this.editgroupname = '';
+            this.disabled = true;
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(
@@ -383,7 +384,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   tabClick(event) {
-    if (event.index === 1) {
+    if (event.index === 1 && this.currentpath) {
       const pagenumber = 0;
       this.getAllUser(pagenumber);
     }
