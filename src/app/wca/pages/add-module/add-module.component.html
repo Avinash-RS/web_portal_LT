@@ -2,9 +2,11 @@
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">My Courses</a></li>
-      <li class="breadcrumb-item" aria-current="page">Course drafted by me</li>
-      <li class="breadcrumb-item active" aria-current="page">Course name</li>
+      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
+        </a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+
+      <li class="breadcrumb-item" aria-current="page">Add Module</li>
     </ol>
   </nav>
 
@@ -20,7 +22,8 @@
             <div class="course-name">{{noOfModules + ' Modules'}}</div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
-              <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference file</button>
+              <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference
+                file</button>
             </div>
           </div>
           <div class="col-md-10">
@@ -46,9 +49,9 @@
                       <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                         <span class="del-icon-container">
                           <mat-icon class="info-icon" (mouseout)="onhoverLeave()"
-                          (mouseover)="onHover(module.modulename)">info</mat-icon>
+                            (mouseover)="onHover(module.modulename)">info</mat-icon>
                           <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
-                         
+
                         </span>
                         <div (click)="addTopic(module,n)" class="module-name">
                           {{module.modulename}}

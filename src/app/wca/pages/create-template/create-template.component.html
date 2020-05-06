@@ -1,117 +1,117 @@
-
-
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
+      </a></li>
+    <li class="breadcrumb-item">
+      <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
+        Courses</a></li>
+    <li class="breadcrumb-item">
+      <ng-container *ngIf="queryData.addModule; else createModule">
+        <a
+          href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
+          Module</a>
+      </ng-container>
+      <ng-template #createModule>
+        <a
+          href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create
+          Module</a>
+      </ng-template>
 
-        <li class="breadcrumb-item active" aria-current="page"><a href="/Admin/auth/Wca">Create Courses</a></li>
-
-        <li class="breadcrumb-item active" aria-current="page">Create Module</li>
-
-        <li class="breadcrumb-item active" aria-current="page">Create Template</li>
-    </ol>
+    </li>
+    <li class="breadcrumb-item active">Create a template</li>
+  </ol>
 </nav>
 
 
-  
+
 
 
 <div class="container wrap-body">
-    <div class="row">
-      
-        <div class="col-md-12">
-            <mat-accordion>
-                <mat-expansion-panel [expanded]="true" class="bcgClrSync">
-                   
-                  <mat-panel-title (click)="routeTo()" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
-                    Choose a template
-                  </mat-panel-title>
-                
-                  <mat-panel-title class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;  border-bottom-style: solid;
+  <div class="row">
+
+    <div class="col-md-12">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true" class="bcgClrSync">
+
+          <mat-panel-title (click)="routeTo()" class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;">
+            Choose a template
+          </mat-panel-title>
+
+          <mat-panel-title class="f_wt_500 f_size_18 color_black" style="margin-left: 20px;  border-bottom-style: solid;
                 border-bottom-width: thick;border-bottom-color: gold;">
-                    Create a template
-                  </mat-panel-title>
+            Create a template
+          </mat-panel-title>
 
-<div class="row">
+          <div class="row">
 
-<div class="col-md-9">
+            <div class="col-md-9">
 
-                        <mat-card  style="text-align: center;">
-                            <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
-    
-
-                              <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box1" *ngFor="let item of done;let i = index" cdkDrag>
-    <img class="img1" src="{{item.image}}">
-    <mat-icon (click)="removenewLink(i)" >delete</mat-icon>
-
-  
-  </div>
-  </div>
-
-<div *ngIf="!done?.length" class="alnCenter">
- <span style="color: red;">Drag and Drop the Template Please !!!</span>
-</div>
-
-                              <div class="alnCenter" *ngIf="done?.length">
-                                <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template & continue</button>
-                                <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue without saving</button>
-                                <button class="backgroundcol1" routerLink="" >Cancel</button>
-                                <!-- /Wca/addtopic -->
-                                  
-                                </div>
-                            
+              <mat-card style="text-align: center;">
+                <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
 
 
-                            </mat-grid-list>
-                        </mat-card>
+                  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+                    [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div class="example-box1" *ngFor="let item of done;let i = index" cdkDrag>
+                      <img class="img1" src="{{item.image}}">
+                      <mat-icon (click)="removenewLink(i)">delete</mat-icon>
 
-                      </div>
-                      <div class="col-md-3">
-
-                        <mat-card style="text-align: center;">
-                          <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
-  
-                            <div
-                            cdkDropList
-                            #todoList="cdkDropList"
-                            [cdkDropListData]="todo"
-                            [cdkDropListConnectedTo]="[doneList]"
-                            class="example-list"
-                            (cdkDropListDropped)="drop($event)">
-                           
-                           
-
-                            
-                            <div class="example-box" *ngFor="let i of todo" cdkDrag>
-                           
-                              <img class="img2" src="{{i.image}}">
-                             
-                              {{i.name}}
-
-
-
-                            </div>
-                          </div>
-                        
-
-                          </mat-grid-list>
-                      </mat-card>
-
-                      </div>
 
                     </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
+                  </div>
+
+                  <div *ngIf="!done?.length" class="alnCenter">
+                    <span style="color: red;">Drag and Drop the Template Please !!!</span>
+                  </div>
+
+                  <div class="alnCenter" *ngIf="done?.length">
+                    <button class="backgroundcol2" (click)="savedTemplates('saveTemplate')">Save template &
+                      continue</button>
+                    <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue
+                      without saving</button>
+                    <button class="backgroundcol1" routerLink="">Cancel</button>
+                    <!-- /Wca/addtopic -->
+
+                  </div>
+
+
+
+                </mat-grid-list>
+              </mat-card>
+
+            </div>
+            <div class="col-md-3">
+
+              <mat-card style="text-align: center;">
+                <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+
+                  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                    [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+
+
+
+
+                    <div class="example-box" *ngFor="let i of todo" cdkDrag>
+
+                      <img class="img2" src="{{i.image}}">
+
+                      {{i.name}}
+
+
+
+                    </div>
+                  </div>
+
+
+                </mat-grid-list>
+              </mat-card>
+
+            </div>
+
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
+  </div>
 </div>
-
-
-
