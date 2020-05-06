@@ -117,8 +117,10 @@ export class CoursepreviewComponent implements OnInit {
     }]);
   }
   previewcourse(templateRef: TemplateRef<any>) {
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url);
-    console.log(this.content.url)
+    console.log(this.content.url,'lllllllllllllllllllllllllllllllllllllllllllll')
+    var url='../../../../assets/scormContent'+this.content.url
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    //console.log(this.content.url)
     this.dialog.open(templateRef);
   }
 
