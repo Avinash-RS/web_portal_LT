@@ -38,6 +38,7 @@ export class CoursepreviewComponent implements OnInit {
   courseType: string;
   modulength: any;
   courseid: string;
+  countofdoc: any;
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
     private loader: NgxSpinnerService, ) {
@@ -95,16 +96,20 @@ export class CoursepreviewComponent implements OnInit {
   }
   getModuleData() {
     this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-      console.log(data)
       this.content = data.data['getmoduleData']['data'][0];
-      
-      this.modulength = this.content['coursedetails'].length
-      console.log(this.content, "contenyt") 
-
+      this.modulength = this.content['coursedetails'].length;
+      this.content.coursedetails.forEach(moduledetails => {
+        moduledetails.moduledetails.forEach(element => {
+          this.countofdoc = element.resourse.count;
+           return true
+         });
+      });
     }, err => {
 
     })
   }
+
+ 
 
   crsDetails() {
     this.route.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.course.course_id } });
