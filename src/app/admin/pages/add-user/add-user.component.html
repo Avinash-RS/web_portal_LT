@@ -21,7 +21,7 @@
                 <div *ngIf="f.username.errors.required">Full Name is required</div>
                 <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
                 <div *ngIf="f.username.errors.minlength">Full Name must be minimum of
-                  {{f.username.errors.maxlength.requiredLength}} characters </div>
+                  {{f.username.errors.minlength.requiredLength}} characters </div>
                 <div *ngIf="f.username.errors.maxlength">Full Name must be
                   {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
               </div>
