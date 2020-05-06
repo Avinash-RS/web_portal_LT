@@ -6,7 +6,7 @@
   </ol>
 </nav>
 
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)">
   <mat-tab label="Add a user">
     <div class="container">
       <div class="row">
@@ -106,6 +106,7 @@
           </div>
         </div>
         <div class="downloadbutton">
+          <form #bulkuserform="ngForm">
           <mat-form-field>
             <mat-label>Group Name</mat-label>
             <mat-select name="group" [(ngModel)]="group">
@@ -114,11 +115,12 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </form>
         </div>
       <!-- </dS -->
 
     <!-- <div class="row"> -->
-      <button type="button" (click)="saveexcel(group)"
+      <button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
         class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
     <!-- </div> -->
     <br>   <br>   <br>
