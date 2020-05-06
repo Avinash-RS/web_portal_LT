@@ -39,6 +39,7 @@ export class CoursepreviewComponent implements OnInit {
   modulength: any;
   courseid: string;
   countofdoc: any;
+  authorinfo: any;
   url:any;
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
@@ -64,6 +65,7 @@ export class CoursepreviewComponent implements OnInit {
       console.log(viewCourse.data.viewcourse, 'viewCourse')
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
+        // this.authorinfo = this.course.author_details
         console.log(this.course, 'course')
         this.loader.hide();
       } else

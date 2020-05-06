@@ -7,7 +7,7 @@ import * as myGlobals from '@core/globals';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
   fname: string;
@@ -34,7 +34,7 @@ export class AddUserComponent implements OnInit {
     private alert: AlertServiceService, private service: AdminServicesService, ) { }
 
   ngOnInit() {
-    localStorage.setItem('role','admin');
+    localStorage.setItem('role', 'admin');
     this.addUserForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.fullnameVal),
       email: new FormControl('', myGlobals.emailVal),
@@ -53,21 +53,29 @@ export class AddUserComponent implements OnInit {
   }
 
   addUser() {
-    var admin = []
-    admin.push(this.adminDetails._id);
-    this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-      true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
-    ).subscribe((result: any) => {
-      if (result.data && result.data.user_registration) {
-        if (result.data.user_registration.success === 'true') {
-          this.addUserForm.reset();
-          this.alert.openAlert('Success !', 'User added successfully');
-        } else {
-          this.alert.openAlert(result.data.user_registration.message, null);
-        }
+    var fullname = this.addUserForm.value.username.trimLeft();
+    console.log(fullname);
+    if (fullname != "") {
+      if (fullname.length >= 3) {
+        var admin = [];
+        admin.push(this.adminDetails._id);
+        this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
+          true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
+        ).subscribe((result: any) => {
+          if (result.data && result.data.user_registration) {
+            if (result.data.user_registration.success === 'true') {
+              this.addUserForm.reset();
+              this.alert.openAlert('Success !', 'User added successfully');
+            } else {
+              this.alert.openAlert(result.data.user_registration.message, null);
+            }
+          } else
+            this.alert.openAlert("Please try again later", null)
+        });
       } else
-        this.alert.openAlert("Please try again later", null)
-    });
+        this.alert.openAlert("Full name must be minimum of 3 characters long", null)
+    } else
+      this.alert.openAlert("Please enter full name", null)
   }
 
   columnHeader = ['studendID', 'fname', 'weight', 'symbol', 'select'];
@@ -150,7 +158,7 @@ export class AddUserComponent implements OnInit {
           this.alert.openAlert('Excel Sheet is Empty', null);
         } else {
           this.selectedfile = <File>event[0];
-          this.alert.openAlert( 'Uploaded Successfully', null);
+          this.alert.openAlert('Uploaded Successfully', null);
         }
       };
       reader.readAsBinaryString(event[0]);
@@ -215,7 +223,18 @@ export class AddUserComponent implements OnInit {
    * Delete csv file
    */
   deleteFile() {
-    this.selectedfile = '';
+    Swal.fire({
+      title: 'Are you sure want to delete the uploaded file ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+        this.selectedfile = '';
+      }
+    });
   }
 
   /**
@@ -234,4 +253,13 @@ export class AddUserComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  tabClick(event, form) {
+    if (event.index === 0) {
+      form.reset();
+      this.selectedfile = '';
+    }
+    if (event.index === 1) {
+      this.addUserForm.reset();
+    }
+  }
 }
