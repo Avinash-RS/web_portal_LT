@@ -39,6 +39,7 @@ export class CoursepreviewComponent implements OnInit {
   modulength: any;
   courseid: string;
   countofdoc: any;
+  url:any;
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
     private loader: NgxSpinnerService, ) {
@@ -123,8 +124,8 @@ export class CoursepreviewComponent implements OnInit {
   }
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(this.content.url,'lllllllllllllllllllllllllllllllllllllllllllll')
-    var url='../../../../assets/scormContent'+this.content.url
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    this.url='../../../../assets/scormContent'+this.content.url
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     //console.log(this.content.url)
     this.dialog.open(templateRef);
   }
