@@ -175,10 +175,8 @@ export class GroupManagementComponent implements OnInit {
     return this.changeGrpForm.controls;
   }
   updateGroup() {
-    console.log(this.changeGrpForm);
     // this.getAllUser(0);
     this.adminservice.updateGroup(this.userGroupChange._id,this.changeGrpForm.value.group.group_name,this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
-      console.log(result);
       if(result.data.update_group.success) {
         this.alert.openAlert('User Group Updated Successfully', null);
         this.dialog.closeAll();
@@ -306,6 +304,10 @@ export class GroupManagementComponent implements OnInit {
     this.adminservice.getAllUsers(pagenumber, 1, this.currentpath.group_id)
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
+          if (pagenumber === 0) {
+            this.ELEMENT_DATA = [];
+            this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+          }
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           this.selection = new SelectionModel(true, []);
