@@ -76,10 +76,10 @@ export class ScormplayerComponent implements OnInit {
              return true
            });
         });
-        var url='../../../../assets/scormContent'+this.content.url
-        console.log(url)
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        //this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
+        // var url='../../../../assets/scormContent'+this.content.url
+        // console.log(url)
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
     })
   }
 
