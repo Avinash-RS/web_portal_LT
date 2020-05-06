@@ -54,7 +54,7 @@
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
         <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+            <b style="padding-left: 18px;"> {{countofdoc}} Documents</b></i> </label>
       </h2>
       <div class="content">
         <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
@@ -86,7 +86,7 @@
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
           <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-              <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+              <b style="text-align: right;"> {{countofdoc}} Documents</b></i> </label>
         </h2>
         <div class="content">
           <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
