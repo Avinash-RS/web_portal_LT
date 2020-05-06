@@ -56,7 +56,7 @@ export class AddUserComponent implements OnInit {
     var fullname = this.addUserForm.value.username.trimLeft();
     console.log(fullname);
     if (fullname != "") {
-      if(fullname.length >= 3 ) {
+      if (fullname.length >= 3) {
         var admin = [];
         admin.push(this.adminDetails._id);
         this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
@@ -73,7 +73,7 @@ export class AddUserComponent implements OnInit {
             this.alert.openAlert("Please try again later", null)
         });
       } else
-      this.alert.openAlert("Full name must be minimum of 3 characters long", null)
+        this.alert.openAlert("Full name must be minimum of 3 characters long", null)
     } else
       this.alert.openAlert("Please enter full name", null)
   }
@@ -230,7 +230,7 @@ export class AddUserComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
-     }).then((result) => {
+    }).then((result) => {
       if (result.value) {
         this.selectedfile = '';
       }
@@ -255,8 +255,11 @@ export class AddUserComponent implements OnInit {
 
   tabClick(event, form) {
     if (event.index === 0) {
-     form.reset();
-     this.selectedfile = '';
+      form.reset();
+      this.selectedfile = '';
+    }
+    if (event.index === 1) {
+      this.addUserForm.reset();
     }
   }
 }
