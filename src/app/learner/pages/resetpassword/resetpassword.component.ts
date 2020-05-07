@@ -101,9 +101,14 @@ validator: MustMatch('password', 'confirmpassword'),
     this.service.resetPassword( this.user,this.resetForm.value.password).subscribe(data => {
       if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
-        
+        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null);
+        localStorage.removeItem('Username');
+        localStorage.removeItem('Details_user');
+        localStorage.removeItem('UserDetails');
+        localStorage.removeItem('role');
+
         this.router.navigate(['/Learner/login']);
+
       } else{
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)

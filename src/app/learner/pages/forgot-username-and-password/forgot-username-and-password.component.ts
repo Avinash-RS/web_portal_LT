@@ -86,7 +86,12 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
         this.loader.hide();
         this.recoveryTypes = data.data['get_forgot_password_byusername'].data;
         this.currentUser =  data.data['get_forgot_password_byusername'].user_id;
+        let obj = {
+          data: this.recoveryTypes,
+          user_id:  this.currentUser
+        }
         localStorage.setItem('Username', this.forgotUsername.value.username);
+        localStorage.setItem('Details_user',JSON.stringify(obj));
         this.isenable = true;
       } else{
         this.loader.hide();

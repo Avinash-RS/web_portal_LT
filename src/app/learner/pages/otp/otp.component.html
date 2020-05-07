@@ -23,12 +23,9 @@
           [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
           formControlName="otp" min="0" max="9" (onInputChange)="onOtpChange($event)"  pattern="[0-9]{1}">
           </ng-otp-input>
-          <div *ngIf="sendOtp">
+          <div>
             <p>{{minutes}}:{{seconds}}</p>
           </div>
-          <div *ngIf="resendOtp">
-            <p>{{minutes}}:{{seconds}}</p>
-          </div> 
           <br><br>
         </div>
         <!-- *ngIf="showotp" -->
