@@ -94,7 +94,8 @@
     <div class="row" (click)="gotoDescription()">
       <div class="col-md-12 m-t-25">
         <p class="course_description">
-          {{course.short_description}}
+          {{ (course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+        
         </p>
       </div>
     </div>

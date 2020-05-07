@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+
 @Component({
   selector: 'app-coursepreview',
   templateUrl: './coursepreview.component.html',
@@ -40,6 +41,7 @@ export class CoursepreviewComponent implements OnInit {
   courseid: string;
   countofdoc: any;
   authorinfo: any;
+  url:any;
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
     private loader: NgxSpinnerService, ) {
@@ -74,6 +76,7 @@ export class CoursepreviewComponent implements OnInit {
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.passCourseId();
     this.getModuleData()
   }
 
@@ -111,22 +114,28 @@ export class CoursepreviewComponent implements OnInit {
     })
   }
 
- 
+     passCourseId(){
+      this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe(data => {
+        console.log(data)
+      })
+     }
 
   crsDetails() {
     this.route.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.course.course_id } });
   }
 
   editModules() {
-    this.route.navigate(['/Admin/auth/Wca/addmodule', {
-      courseId: this.course.course_id,
-      courseImage: this.course.course_img_url, courseName: this.course.course_name
-    }]);
+    this.route.navigate(['/Admin/auth/Wca/addmodule'],
+    { queryParams: {courseId:this.course.course_id, 
+      courseImage: this.course.course_img_url, 
+      courseName: this.course.course_name
+    }});
   }
+  
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(this.content.url,'lllllllllllllllllllllllllllllllllllllllllllll')
-    var url='../../../../assets/scormContent'+this.content.url
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    // this.url='../../../../assets/scormContent'+this.content.url
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
     //console.log(this.content.url)
     this.dialog.open(templateRef);
   }

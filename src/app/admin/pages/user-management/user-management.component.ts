@@ -81,15 +81,15 @@ export class UserManagementComponent implements OnInit {
   // }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
-    this.service.getLearnerDetail(element.user_id)
-      .subscribe((result: any) => {
+    // this.service.getLearnerDetail(element.user_id)
+      // .subscribe((result: any) => {
         this.service.getUserSession(element._id).subscribe((track: any) => {
           this.trackDetails = track.data && track.data.get_user_session_detail &&
             track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
-          this.profileDetails = result.data && result.data.get_all_learner_detail &&
-            result.data.get_all_learner_detail.message && result.data.get_all_learner_detail.message[0];
+          this.profileDetails = track.data && track.data.get_user_session_detail &&
+          track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
           this.dialog.open(templateRef);
-        })
+        // })
       })
   }
 
@@ -186,6 +186,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   next(e) {
+    console.log(e)
     this.getAllUser(e.pageIndex);
     this.selectedArray = [];
   }

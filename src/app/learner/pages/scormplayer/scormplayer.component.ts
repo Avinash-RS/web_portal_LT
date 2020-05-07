@@ -56,6 +56,7 @@ export class ScormplayerComponent implements OnInit {
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.passCourseId();
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
     
@@ -65,10 +66,20 @@ export class ScormplayerComponent implements OnInit {
     this.service.list_content().subscribe(data => {
     })
   }
+  passCourseId(){
+    this.commonService.geturl(this.course_id).subscribe(data => {
+      console.log(data)
+    })
+   }
 
   getModuleData() {
     this.service.getModuleData(this.course_id).subscribe(data => {
-        this.content = data.data['getmoduleData']['data'][0]
+        this.content = data.data['getmoduleData']['data'][0];
+        //var url='../../../../assets/scormContent'+this.content.url;
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        // console.log(url)
+        console.log(this.content.url,'this.content.url')
+        // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.modulength =  this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
           moduledetails.moduledetails.forEach(element => {
@@ -76,9 +87,10 @@ export class ScormplayerComponent implements OnInit {
              return true
            });
         });
-        var url='../../../../assets/scormContent'+this.content.url
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        //this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
+        // var url='../../../../assets/scormContent'+this.content.url
+        // console.log(url)
+      
+        // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
     })
   }
 
