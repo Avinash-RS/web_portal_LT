@@ -67,17 +67,21 @@ export class ChooseTemplateComponent implements OnInit {
         this.router.navigate(["/Admin/auth/Wca/addtopic"], {
           queryParams: {
             addModule: true,
+            isChooseTemp: true,
             courseName: this.queryData.courseName,
             viewingModule: this.queryData.viewingModule,
+            image: this.queryData.image,
             template: this.selectedTemplate.template_id,
           },
         });
       } else {
         this.router.navigate(["/Admin/auth/Wca/addtopic"], {
           queryParams: {
+            isChooseTemp: true,
             courseName: this.queryData.courseName,
             viewingModule: this.queryData.viewingModule,
             template: this.selectedTemplate.template_id,
+            image: this.queryData.image
           },
         });
       }
