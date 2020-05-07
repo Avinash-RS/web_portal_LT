@@ -125,11 +125,13 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editModules() {
-    this.route.navigate(['/Admin/auth/Wca/addmodule', {
-      courseId: this.course.course_id,
-      courseImage: this.course.course_img_url, courseName: this.course.course_name
-    }]);
+    this.route.navigate(['/Admin/auth/Wca/addmodule'],
+    { queryParams: {courseId:this.course.course_id, 
+      courseImage: this.course.course_img_url, 
+      courseName: this.course.course_name
+    }});
   }
+  
   previewcourse(templateRef: TemplateRef<any>) {
     console.log(this.content.url,'lllllllllllllllllllllllllllllllllllllllllllll')
     // this.url='../../../../assets/scormContent'+this.content.url
