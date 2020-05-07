@@ -1,4 +1,5 @@
 @import "../../../../assets/variable.scss";
+
 p {
     text-align: center;
 }
@@ -16,12 +17,30 @@ p {
     min-height: inherit;
     max-height: inherit;
 }
-.mat-button, .mat-stroked-button, .mat-flat-button {
+
+.mat-button,
+.mat-stroked-button,
+.mat-flat-button {
     min-width: 38%;
     margin: auto;
     background-color: $color-blue !important;
 }
+
 .background-darkGrey {
     background-color: $color-blue !important;
     color: $color-white !important;
-  }
+}
+
+@media screen and (max-width: 600px) {
+
+    p {
+        font-size: 8px;
+    }
+
+    h2 {
+        font-size: 10px;
+        font-weight: bolder;
+
+    }
+
+}

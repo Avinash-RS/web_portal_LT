@@ -406,7 +406,7 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
 
 
 export const get_all_course_by_usergroup = gql`
-  query($group_id: String!,$pagenumber: Int!){
+  query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!){
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber){
     success
     error_msg
