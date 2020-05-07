@@ -1,9 +1,9 @@
-
-
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
+      </a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
     <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
   </ol>
 </nav>
@@ -23,7 +23,7 @@
               Create a Course
             </mat-panel-title>
             <mat-card style="text-align: center;">
-              <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
+              <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
 
 
                 <div class="form-group">
@@ -40,16 +40,17 @@
 
                         <div class="row crs1">
                           <div class="col-md-3">Course Name<span style="color: red;">*</span></div>
-                          <div class="col-md-9"><input class="inputmainWidth" (keydown)="_handleKeydown($event)" type="text" placeholder="Enter the course name"
-                              formControlName="course_name" required /> </div>
+                          <div class="col-md-9"><input class="inputmainWidth" (keydown)="_handleKeydown($event)"
+                              type="text" placeholder="Enter the course name" formControlName="course_name" required />
+                          </div>
                         </div>
 
 
                         <div class="row crs1 pad18px">
                           <div class="col-md-3">Course Description</div>
                           <div class="col-md-9"><textarea class="inputs inputmainWidth" style="resize: none;"
-                              formControlName="course_description" placeholder="Enter the course description" maxlength="1000"
-                              name="info" (keydown)="_handleKeydown($event)"></textarea></div>
+                              formControlName="course_description" placeholder="Enter the course description"
+                              maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea></div>
                         </div>
 
                         <div class="row crs1 margTop7px">
@@ -59,14 +60,14 @@
                                           placeholder="Enter the course description (200 Characters)" maxlength="1000" 
                                           name="info"></textarea> -->
 
-                            <mat-form-field class="matchipsbrder" >
+                            <mat-form-field class="matchipsbrder" [class.active]="preRequisites?.length">
                               <mat-chip-list #preReqList>
                                 <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
                                   matTooltip={{req?.name}}>
                                   {{req?.name}}
                                   <mat-icon matChipRemove>cancel</mat-icon>
                                 </mat-chip>
-                                <input  (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
+                                <input (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
                                   [matChipInputAddOnBlur]="true" [matChipInputFor]="preReqList"
                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                   (matChipInputTokenEnd)="addrequest($event)">
@@ -88,21 +89,21 @@
 
                         <div class="row crs1 margbtm">
                           <div class="col-md-3">Preview Video</div>
-                          <div class="col-md-9"><input class="inputmainWidth" type="text" placeholder="URL" (keydown)="_handleKeydown($event)" formControlName="preview_video"
-                              required /> </div>
+                          <div class="col-md-9"><input class="inputmainWidth" type="text" placeholder="URL"
+                              (keydown)="_handleKeydown($event)" formControlName="preview_video" required /> </div>
                         </div>
 
 
                         <div class="row crs1">
                           <div class="col-md-3">Language</div>
-                          <div class="col-md-9">                           
-                             <span class="width88">
-                            <mat-select [disabled]='showdeletedicon' formControlName="course_language" class="inputs2 inputmainWidth"
-                            placeholder="Select the Language">
-                            <mat-option *ngFor="let m of languages" [value]="m" >{{m}}</mat-option>
-                          </mat-select>
-                             </span>
-                            </div>
+                          <div class="col-md-9">
+                            <span class="width88">
+                              <mat-select [disabled]='showdeletedicon' formControlName="course_language"
+                                class="inputs2 inputmainWidth" placeholder="Select the Language">
+                                <mat-option *ngFor="let m of languages" [value]="m">{{m}}</mat-option>
+                              </mat-select>
+                            </span>
+                          </div>
                         </div>
 
                       </div>
@@ -112,12 +113,14 @@
                       <div class="mainImage">
                         <span>
                           <input style="display: none;" id="fileInput" type='file' #fileInput
-                            (change)="onSelectFile($event,'img1')"> <img class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
+                            (change)="onSelectFile($event,'img1')"> <img
+                            class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
                             [src]="courseForm?.value?.course_img_url ? courseForm?.value?.course_img_url : '../../../../assets/images/image_upload.svg'">
                         </span>
-                          <span *ngIf="!this.preview1">Upload the Course Image <span style="color: red;">*</span></span>
-                          <span *ngIf="!this.preview1">(.JPG,.JPEG,.PNG)</span>
-                          <span *ngIf="!this.preview1" class="padMainImg"><small>size should not exceed more than 2 mb</small></span>
+                        <span *ngIf="!this.preview1">Upload the Course Image <span style="color: red;">*</span></span>
+                        <span *ngIf="!this.preview1">(.JPG,.JPEG,.PNG)</span>
+                        <span *ngIf="!this.preview1" class="padMainImg"><small>size should not exceed more than 2
+                            mb</small></span>
                       </div>
 
                     </div>
@@ -399,7 +402,8 @@
                           <div [formGroupName]="i">
                             <div class="row crs1 margbtm">
                               <div class="col-md-3">Text</div>
-                              <div class="col-md-9"><input type="text" class="inputmainWidth"  (keydown)="_handleKeydown($event)" placeholder="Enter the text"
+                              <div class="col-md-9"><input type="text" class="inputmainWidth"
+                                  (keydown)="_handleKeydown($event)" placeholder="Enter the text"
                                   formControlName="text" /> </div>
                             </div>
 
@@ -428,14 +432,16 @@
 
                             <div class="row crs1 margbtm">
                               <div class="col-md-3">A Step Towards</div>
-                              <div class="col-md-9"><textarea class="inputs inputmainWidth" (keydown)="_handleKeydown($event)" style="resize: none;"
-                                  formControlName="description" placeholder="Enter the course description"
-                                  maxlength="1000" name="info"></textarea> </div>
+                              <div class="col-md-9"><textarea class="inputs inputmainWidth"
+                                  (keydown)="_handleKeydown($event)" style="resize: none;" formControlName="description"
+                                  placeholder="Enter the course description" maxlength="1000" name="info"></textarea>
+                              </div>
                             </div>
 
                             <div class="row crs1 margbtm">
                               <div class="col-md-3">Course Milestone</div>
-                              <div class="col-md-9"><input type="text" class="inputmainWidth"  (keydown)="_handleKeydown($event)" placeholder="Enter the Milestone"
+                              <div class="col-md-9"><input type="text" class="inputmainWidth"
+                                  (keydown)="_handleKeydown($event)" placeholder="Enter the Milestone"
                                   formControlName="what_will_you_learn" /> </div>
                             </div>
 

@@ -37,15 +37,16 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
+        this.routedCourseDetails = {
+          courseId: params.courseId,
+          courseImage: params.courseImage,
+          courseName: params.courseName,
+        }
         console.log(this.queryData)
       }
     });
 
-    this.routedCourseDetails = {
-      courseId: this.route.snapshot.paramMap.get('courseId'),
-      courseImage: this.route.snapshot.paramMap.get('courseImage'),
-      courseName: this.route.snapshot.paramMap.get('courseName'),
-    }
+  
     this.route.snapshot.paramMap.get('courseDetails');
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
