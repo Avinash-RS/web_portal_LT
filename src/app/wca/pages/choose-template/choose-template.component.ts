@@ -3,6 +3,7 @@ import { WcaService } from "../../services/wca.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: "app-choose-template",
@@ -15,14 +16,22 @@ export class ChooseTemplateComponent implements OnInit {
   selectedTemplate: any;
   hoverId: any;
   isHover: boolean;
+  public isMobile: boolean = false;
 
   constructor(
     private APIService: WcaService,
     public router: Router,
     public route: ActivatedRoute,
     public spinner: NgxSpinnerService,
-    public toast: ToastrService
-  ) {}
+    public toast: ToastrService,
+    breakpointObserver: BreakpointObserver
+  ) {
+    breakpointObserver.observe([
+      Breakpoints.Handset
+    ]).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
