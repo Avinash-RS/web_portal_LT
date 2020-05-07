@@ -517,10 +517,9 @@ width: 100%;
 .margbtm{
     margin-bottom: 20px;
 }
-  .width100full{
+.width100full{
     display: flex;
-    width: 100%;
-    margin-left: 5%;
+ width: 96%;
   }
   .inputs5 {
     padding: 8px 3px 9px 8px;
@@ -539,7 +538,8 @@ width: 100%;
     padding: 11px 5px 0px 7px;
     border-radius: 5px;
     background: $color-field;
-    width:100%;
+    width:99%;
+    height: 58px;
     // background-color: none !important;
     // margin: -1px 41px 18px -360px;
     border: none;
@@ -554,6 +554,7 @@ width: 100%;
     background: $color-field;
     // margin: -4px 28px 19px -23px;
     border: none;
+    margin-left: -9px;
 }
 
 .img3 {

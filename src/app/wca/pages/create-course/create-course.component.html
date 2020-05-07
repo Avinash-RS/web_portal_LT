@@ -193,7 +193,7 @@
                       <div class="row crs1 padtp25px">
                         <div class="col-md-3">Certification</div>
                         <div class="col-md-9">
-                          <mat-select [disabled]='showdeletedicon' formControlName="certificate_name" class="inputs5 inputmainWidth"
+                          <mat-select [disabled]='showdeletedicon' formControlName="certificate_name" class="inputs2 inputmainWidth"
                           placeholder="No Certificate" name="language">
                           <mat-option *ngFor="let k of AllCertifyDetails" [value]="k.name">
                             {{k?.name}}
@@ -206,7 +206,95 @@
  
                   <div class="btmUnderline"></div>
                   <!-- --------------------------------------------------------------------------------------------- -->
-                  <div class="row">
+                  <div>
+                    <div class="row">
+
+                      <div class="col-md-11">
+
+                        <div class="row">
+                          <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
+                          <div class="col-md-9" style="visibility:collapse;">
+                            <mat-checkbox formControlName="course_mode">Self Paced</mat-checkbox>
+                          </div>
+                        </div>
+
+
+
+                        <div class="row">
+                          <div class="col-md-3">Institute Name</div>
+                          <div class="col-md-7 width_margin">
+                         <ng-container formArrayName="coursepartner_details" *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
+                          <ng-container [formGroupName]="i">
+                           <span class="width100full">
+                            <mat-select [disabled]='showdeletedicon' formControlName="name" (selectionChange)="change1($event.value,i)" class="inputs4 hgt39"
+                            placeholder="Select the institute" name="language">
+                            <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
+                              [disabled]="k.disabled" [value]="k.name" >
+                              {{k?.name}}
+                            </mat-option>
+                          </mat-select>
+                            <input style="display: none;" id="fileInput3" type='file' #fileInput3
+                            (change)="onSelectFile($event,'img3',i)">
+                              <img class="img3 img3marg" for="fileInput3" (click)="fileInput3.click()"
+                            [src]="courseForm?.value?.coursepartner_details[i]?.image ? courseForm?.value?.coursepartner_details[i]?.image : '../../../../assets/images/image_upload.svg'">
+                           </span>
+                           
+                         </ng-container>
+                         </ng-container>
+                            <!-- <div class="row">
+                              <div class="col-sm-8" formArrayName="coursepartner_details"
+                                *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
+                                <div [formGroupName]="i">
+                                  <div class="row">
+                                    <div class="col-md-11">
+                                      <mat-select [disabled]='showdeletedicon' formControlName="name" class="inputs4"
+                                        placeholder="Select the institute" name="language">
+                                        <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
+                                          [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change1(k,i)">
+                                          {{k?.name}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </div>
+
+                                    <div class="col-md-1 flxCls">
+                                      <input style="display: none;" id="fileInput3" type='file' #fileInput3
+                                        (change)="onSelectFile($event,'img3',i)">
+                                      <img class="img3" for="fileInput3" (click)="fileInput3.click()"
+                                        [src]="preview3[i] ? preview3[i] : '../../../../assets/images/image_upload.svg'">
+
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-2 pdleft">
+                                <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
+                                <mat-icon style="margin: 0;padding-left: 6px;" (click)="removenewLink2(in)">delete
+                                </mat-icon>
+                              </div>    <div class="col-sm-2 pdleft">
+                                <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
+                                <mat-icon style="margin: 0;padding-left: 6px;" (click)="removenewLink2(in)">delete
+                                </mat-icon>
+                              </div>
+                            </div> -->
+
+
+                          </div>
+                          <div class="col-sm-2">
+                            <div style="float: left;margin-left: -24px;">
+                              <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
+                              <mat-icon style="margin: 0;" (click)="removenewLink2(in)">delete
+                              </mat-icon>  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+                  <!-- <div class="row">
                     <div class="col-md-8">
                       <div class="row padBot20px crs1">
                         <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
@@ -238,7 +326,7 @@
                              </span>
                              
                            </ng-container>
-                           </ng-container>
+                           </ng-container> -->
 
                          <!-- comment start -->
                           <!-- <div class="row">
@@ -278,7 +366,7 @@
                               </div>
                             </div> -->
                          <!-- comment end -->
-                        </div>
+                        <!-- </div>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -287,7 +375,7 @@
                           <mat-icon (click)="removenewLink2(in)">delete</mat-icon>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="btmUnderline"></div>
                   <!-- --------------------------------------------------------------------------------------------- -->
