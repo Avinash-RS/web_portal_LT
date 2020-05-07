@@ -657,7 +657,9 @@ flex-wrap: nowrap;
       .instructorIcon{
           display: none !important;
       }
-
+      .removeIcon{
+        display: none !important;
+      }
       .collapaseIcon{
         display: block !important;
         margin-left: 12% !important;
@@ -671,6 +673,7 @@ flex-wrap: nowrap;
     }
     .img3marg{
         margin-top: 10px;
+        margin-left: 65%;
     }
     .instructDSPFlx{
         margin-left: 23px;
@@ -682,4 +685,10 @@ flex-wrap: nowrap;
     .inputs5{
         margin-left: 2px;
     }
+
+    .inputs4{
+        width: 52% !important;
+        margin-left: 46% !important;
+    }
+
     }

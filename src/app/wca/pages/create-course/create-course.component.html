@@ -213,6 +213,10 @@
 
                         <div class="row">
                           <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
+                          <div class="col-md-9 collapaseIcon">
+                            <mat-icon (click)="add2(in)">add_circle_outline</mat-icon>
+                            <mat-icon (click)="removenewLink2(in)">delete</mat-icon>
+                          </div>
                           <div class="col-md-9" style="visibility:collapse;">
                             <mat-checkbox formControlName="course_mode">Self Paced</mat-checkbox>
                           </div>
@@ -281,7 +285,7 @@
 
                           </div>
                           <div class="col-sm-2">
-                            <div style="float: left;margin-left: -24px;">
+                            <div style="float: left;margin-left: -24px;" class="removeIcon">
                               <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
                               <mat-icon style="margin: 0;" (click)="removenewLink2(in)">delete
                               </mat-icon>  
