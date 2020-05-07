@@ -7,14 +7,25 @@
             <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
                 </a></li>
             <li class="breadcrumb-item">
-                <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
-                    Courses</a></li>
+                <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">
+                    <ng-container *ngIf="queryData.addModule; else isEdit">
+                        Edit Course
+                    </ng-container>
+                    <ng-template #isEdit>
+                        Create Course
+                    </ng-template>
+                </a></li>
+
             <li class="breadcrumb-item">
                 <ng-container *ngIf="queryData.addModule; else createModule">
-                    <a href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add Module</a>
+                    <a
+                        href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
+                        Module</a>
                 </ng-container>
                 <ng-template #createModule>
-                    <a href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create Module</a>
+                    <a
+                        href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create
+                        Module</a>
                 </ng-template>
 
             </li>

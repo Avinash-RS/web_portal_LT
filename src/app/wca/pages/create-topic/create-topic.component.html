@@ -1,104 +1,172 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/auth/Wca">Course Management</a></li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{query.viewingModule}}">
+                <ng-container *ngIf="!query.addModule; else isEditCourse">
+                    Create Course
+                </ng-container>
+                <ng-template #isEditCourse>
+                    Edit Courses
+                </ng-template>
 
-        <li class="breadcrumb-item active" aria-current="page">Create Courses</li>
+            </a></li>
+        <ng-container *ngIf="query.addModule == 'true'; else createModule">
+            <li class="breadcrumb-item">
+                <a
+                    href="/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}">Add
+                    Module</a>
+            </li>
+        </ng-container>
+        <ng-template #createModule>
+            <li class="breadcrumb-item">
+                <a
+                    href="/Admin/auth/Wca/viewmodule?viewingModule={{query.viewingModule}}&image={{query.image}}&courseName={{query.courseName}}">Create
+                    Module</a>
+            </li>
+        </ng-template>
 
-        <li class="breadcrumb-item active" aria-current="page">Create Module</li>
-
-        <li class="breadcrumb-item active" aria-current="page">Create Template</li>
+        <li *ngIf="query.isCreateTemp" class="breadcrumb-item">
+            <a
+                href="/Admin/auth/Wca/addtemplate?addModule={{query.addModule}}&viewingModule={{query.viewingModule}}&image={{query.image}}&courseName={{query.courseName}}">
+                Create template
+            </a>
+        </li>
+        <li *ngIf="query.isChooseTemp" class="breadcrumb-item">
+            <a
+                href="/Admin/auth/Wca/choosetemplate?addModule={{query.addModule}}&viewingModule={{query.viewingModule}}&image={{query.image}}&courseName={{query.courseName}}">
+                Choose template
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            <ng-container *ngIf="query.edit; else isNoEdit">
+                Edit Topic
+            </ng-container>
+            <ng-template #isNoEdit>
+                Add Topic
+            </ng-template>
+        </li>
     </ol>
 </nav>
 
-<div *ngIf="!queryData?.template_details || queryData === undefined"  class="dspFlx">
+<div *ngIf="!queryData?.template_details || queryData === undefined" class="dspFlx">
     <span style="color: red;">Go Back and Choose or Create the Template Please !!!</span>
 </div>
 
 
-  <span *ngIf="createTopicForm?.controls">
-<form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()" class="formHeight">
-    <div class="container wrap-body" >
-        <div style="display: flex;" >
-            <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
-            <span *ngIf="queryData?.template_details">
-                <input class="Bcg" type="text"  placeholder="Enter the Name" formControlName="modulename"  required />
-            </span>
-            <span class="validmodule"> <small  *ngIf="createTopicForm?.controls?.modulename?.errors?.required && submitted">Module Name Required !!!</small>
-            </span>
-        </div>
+<span *ngIf="createTopicForm?.controls">
+    <form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()" class="formHeight">
+        <div class="container wrap-body">
+            <div style="display: flex;">
+                <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
+                <span *ngIf="queryData?.template_details">
+                    <input class="Bcg" type="text" placeholder="Enter the Name" formControlName="modulename" required />
+                </span>
+                <span class="validmodule"> <small
+                        *ngIf="createTopicForm?.controls?.modulename?.errors?.required && submitted">Module Name
+                        Required !!!</small>
+                </span>
+            </div>
 
-        
-<span *ngIf="createTopicForm?.get('moduledetails')?.controls">
-        <div [hidden]="j?.value?.topicstatus === 'false'" class="row" formArrayName="moduledetails" *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
-          
-            <div class="col-md-12">
-                <mat-accordion>
-                    <mat-expansion-panel [expanded]="true" class="bcgClrSync">
-                       
-                            <mat-card  style="text-align: center;">
-                                <mat-grid-list [cols]="breakpoint"  rowHeight="1.70:2">
-    
-                                  <div class="example-list" >
-                                      <div *ngIf="queryData">
-                                        <!-- *ngFor="let item of queryData.template_details; let m = index" -->
-        <div class="example-box1"   >
-         <div (click)="activate(queryData?.template_details[i])" class="clickBcg bcgBorder" [class.active]="queryData?.template_details[i]?.name === active?.name">
-            <div class="dspFlx" [formGroupName]="i">
-                <span class="restictWidth"> <mat-form-field class="matWidth" appearance="outline">
-                 <mat-label class="clrLabel">Topic Name</mat-label>
-                 <input  matInput  style="color:black;" formControlName="topicname">
-                 <mat-error *ngIf="(!j?.value?.topicname) && submitted">Topic Name Required !!! </mat-error>
-               </mat-form-field>
-             
+
+            <span *ngIf="createTopicForm?.get('moduledetails')?.controls">
+                <div [hidden]="j?.value?.topicstatus === 'false'" class="row" formArrayName="moduledetails"
+                    *ngFor="let j of createTopicForm.get('moduledetails').controls; let i = index;">
+
+                    <div class="col-md-12">
+                        <mat-accordion>
+                            <mat-expansion-panel [expanded]="true" class="bcgClrSync">
+
+                                <mat-card style="text-align: center;">
+                                    <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+
+                                        <div class="example-list">
+                                            <div *ngIf="queryData">
+                                                <!-- *ngFor="let item of queryData.template_details; let m = index" -->
+                                                <div class="example-box1">
+                                                    <div (click)="activate(queryData?.template_details[i])"
+                                                        class="clickBcg bcgBorder"
+                                                        [class.active]="queryData?.template_details[i]?.name === active?.name">
+                                                        <div class="dspFlx" [formGroupName]="i">
+                                                            <span class="restictWidth">
+                                                                <mat-form-field class="matWidth" appearance="outline">
+                                                                    <mat-label class="clrLabel">Topic Name</mat-label>
+                                                                    <input matInput style="color:black;"
+                                                                        formControlName="topicname">
+                                                                    <mat-error
+                                                                        *ngIf="(!j?.value?.topicname) && submitted">
+                                                                        Topic Name Required !!! </mat-error>
+                                                                </mat-form-field>
+
+                                                            </span>
+                                                            <span class="example-spacer"></span>
+                                                            <span *ngIf="query?.edit">
+                                                                <mat-icon style="display: none;">save</mat-icon>
+                                                                <mat-icon (click)="DeleteTopic(i,$event)">delete
+                                                                </mat-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="colView">
+                                                            <input style="display: none;" [id]="'fileInput3'+i"
+                                                                type='file' #fileInput3
+                                                                (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                            <span (dblclick)="fileInput3.click()"><img class="img1"
+                                                                    src="{{queryData?.template_details[i]?.image}}"></span>
+                                                            <span
+                                                                class="padTop">{{queryData?.template_details[i]?.name}}</span>
+                                                            <span class="padTop1 showCon"
+                                                                *ngIf="!j?.value?.topicimages[0]"> <small>content is
+                                                                    empty Double Click to edit</small></span>
+                                                            <span class="padTop1"
+                                                                *ngIf="queryData?.template_details[i].name===active?.name">
+                                                                <small>{{fileType}}</small></span>
+                                                            <span *ngIf="j?.value?.topicimages[0]"
+                                                                class="previewAndTime"
+                                                                [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <span><button mat-raised-button class="btnprev"
+                                                                        type="button"
+                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
+                                                                <span class="dspFlxinside">
+                                                                    <small class="spanTime"> Time required to complete
+                                                                        the topic </small>
+                                                                    <mat-card class="matcardTime">
+                                                                        00:00
+                                                                    </mat-card>
+                                                                </span>
+                                                            </span>
+                                                            <span *ngIf="!j?.value?.topicimages[0] && submitted"><small
+                                                                    class="FileuploadValid">FileUpload Required
+                                                                    !!!</small></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </mat-grid-list>
+                                </mat-card>
+
+
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
             </span>
-               <span class="example-spacer"></span>
-               <span  *ngIf="query?.edit">
-                   <mat-icon style="display: none;">save</mat-icon>
-                   <mat-icon (click)="DeleteTopic(i,$event)">delete</mat-icon>
-               </span>
-             </div>
-     <div class="colView" >
-        <input style="display: none;" [id]="'fileInput3'+i" type='file' #fileInput3  (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
-        <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span> 
-          <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
-          <span class="padTop1 showCon" *ngIf="!j?.value?.topicimages[0]" > <small>content is empty Double Click to edit</small></span>
-          <span class="padTop1" *ngIf="queryData?.template_details[i].name===active?.name" >  <small>{{fileType}}</small></span>
-         <span *ngIf="j?.value?.topicimages[0]" class="previewAndTime" [class.active]="queryData?.template_details[i]?.name==active?.name">
-             <span><button  mat-raised-button class="btnprev" type="button" (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
-             <span class="dspFlxinside">
-                 <small class="spanTime">  Time required to complete the topic </small>
-                 <mat-card class="matcardTime">
-                     00:00
-                 </mat-card>
-               </span>
-         </span>
-         <span *ngIf="!j?.value?.topicimages[0] && submitted"><small class="FileuploadValid">FileUpload Required !!!</small></span>
-     </div>   
-         </div>
-     
-      </div>
-    </div>
-      
-    
-                                
-                                
-    </div>
-    
-                                </mat-grid-list>
-                            </mat-card>
-    
-                        
-                    </mat-expansion-panel>
-                </mat-accordion>
+            <div *ngIf="queryData?.template_details" class="dspFlx">
+                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as a
+                    draft</button>
+                <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
+                        type="button">Create</button></span>
+                <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']" type="button">Cancel</button>
+
             </div>
         </div>
-    </span>
-        <div *ngIf="queryData?.template_details" class="dspFlx">
-            <button class="backgroundcol2"  (click)="addTopicFrom($event,'draft')"   type="button">Save as a draft</button>
-           <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')" type="button">Create</button></span>
-            <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']"  type="button" >Cancel</button>
-
-            </div>
-    </div>
-</form>
+    </form>
 </span>
