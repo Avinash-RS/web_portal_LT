@@ -516,7 +516,7 @@ width: 100%;
 }
   .width100full{
     display: flex;
-    width: 100%;
+    width: 103%;
     margin-left: 5%;
   }
   .inputs5 {
@@ -536,7 +536,8 @@ width: 100%;
     padding: 11px 5px 0px 7px;
     border-radius: 5px;
     background: $color-field;
-    width:100%;
+    width:99%;
+    height: 58px;
     // background-color: none !important;
     // margin: -1px 41px 18px -360px;
     border: none;
