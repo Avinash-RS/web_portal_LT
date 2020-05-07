@@ -13,10 +13,20 @@
   color: $color-red;
 }
 
+.mat-tab-group {
+  height: 420px !important;
+}
+
+:host ::ng-deep  .mat-tab-body-content {
+  height: 370px  !important;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+
 .black {
   color: $color-blank;
 }
-
+.mat-tab-group-dynamic-height .mat-tab-body-content{overflow:hidden}
 :host ::ng-deep {
   .mat-stroked-button {
     width: 40%;
@@ -37,8 +47,9 @@
 
   .mat-tab-body-content {
     overflow: hidden !important;
-    min-height: 350px !important;
-    max-height: 350px !important;
+    overflow-x: hidden !important;
+    // min-height: 350px !important;
+    // max-height: 350px !important;
     // min-width: 70% !important;
   }
 }
