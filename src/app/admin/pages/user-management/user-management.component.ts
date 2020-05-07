@@ -46,14 +46,16 @@ export class UserManagementComponent implements OnInit {
   getAllUser(pagenumber) {
     this.loader = true;
     this.resultsLength = null;
-    if (pagenumber == 0)
-      this.ELEMENT_DATA = []
+
     this.service.getAllUsers(pagenumber, 1, 'undefined')
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
+          if (pagenumber == 0) {
+            this.ELEMENT_DATA = [];
+          }
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-          this.selection = new SelectionModel(true, []);
+          // this.selection = new SelectionModel(true, []);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.resultsLength = result.data.get_all_user.learner_count;
@@ -82,15 +84,15 @@ export class UserManagementComponent implements OnInit {
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     // this.service.getLearnerDetail(element.user_id)
-      // .subscribe((result: any) => {
-        this.service.getUserSession(element._id).subscribe((track: any) => {
-          this.trackDetails = track.data && track.data.get_user_session_detail &&
-            track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
-          this.profileDetails = track.data && track.data.get_user_session_detail &&
-          track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
-          this.dialog.open(templateRef);
-        // })
-      })
+    // .subscribe((result: any) => {
+    this.service.getUserSession(element._id).subscribe((track: any) => {
+      this.trackDetails = track.data && track.data.get_user_session_detail &&
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+      this.profileDetails = track.data && track.data.get_user_session_detail &&
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+      this.dialog.open(templateRef);
+      // })
+    })
   }
 
   closedialogbox() {
@@ -121,20 +123,21 @@ export class UserManagementComponent implements OnInit {
               this.ELEMENT_DATA = [];
               this.ELEMENT_DATA = result.data.search_user.message;
               this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+              console.log(this.ELEMENT_DATA);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
               this.resultsLength = 10;
             }
             else {
-              this.getAllUser(0)
+              this.getAllUser(0);
               this.alert.openAlert("Sorry", 'User doesnt exists');
             }
 
           });
       } else if (filterValue.trim().toLowerCase().length == 0) {
-        this.getAllUser(0)
+        this.getAllUser(0);
       }
-    }, 800);
+    }, 1000);
   }
 
   deActivate(status, element?) {
@@ -154,7 +157,7 @@ export class UserManagementComponent implements OnInit {
                 else
                   this.alert.openAlert('Sorry, Please try again later', 'null')
               });
-          } 
+          }
         })
     } else {
       this.alert.openAlert("Please select any record", null)
