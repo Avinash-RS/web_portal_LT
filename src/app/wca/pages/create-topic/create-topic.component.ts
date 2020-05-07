@@ -45,16 +45,18 @@ export class CreateTopicComponent implements OnInit {
   }
 
   courseform(): FormGroup {
+    console.log(this.courseArray)
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
       coursefile: [null],
       coursestatus: ['true'],
       courseid: [null, Validators.compose([Validators.required])],
-      coursedetails:this.formBuilder.array(this.courseArray.length ? this.courseArray.map((data,index) => {
+      coursedetails:this.formBuilder.array(this.courseArray && this.courseArray.length ? this.courseArray.map((data,index) => {
         // if (data.modulestatus === 'true') {
          return this.createForm(data,index)
         // }
-      }) : [this.createForm(this.queryData)])
+      }) : [])
+    // }) : [this.createForm(this.queryData)])
     });
   }
 
@@ -63,7 +65,7 @@ export class CreateTopicComponent implements OnInit {
     console.log(this.courseArray,mod_index,i)
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      topicimages: this.formBuilder.array(this.courseArray && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
+      topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
           console.log(data)
           return this.topicImages()
@@ -149,7 +151,7 @@ export class CreateTopicComponent implements OnInit {
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
       template_details:[this.queryData.template_details],
-      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details ? mod.template_details.map((data,index) =>
+      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length && mod.template_details ? mod.template_details.map((data,index) =>
         this.topicItem(mod_index,index)
       ) : [])
     })
