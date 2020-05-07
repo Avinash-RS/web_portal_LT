@@ -17,16 +17,14 @@
   height: 420px !important;
 }
 
-:host ::ng-deep  .mat-tab-body-content {
+.mat-tab-body-content {
   height: 370px  !important;
-  overflow: hidden !important;
-  overflow-x: hidden !important;
 }
 
 .black {
   color: $color-blank;
 }
-.mat-tab-group-dynamic-height .mat-tab-body-content{overflow:hidden}
+
 :host ::ng-deep {
   .mat-stroked-button {
     width: 40%;
@@ -43,14 +41,6 @@
     width: 50% !important;
     font-weight: 600;
     font-size: medium;
-  }
-
-  .mat-tab-body-content {
-    overflow: hidden !important;
-    overflow-x: hidden !important;
-    // min-height: 350px !important;
-    // max-height: 350px !important;
-    // min-width: 70% !important;
   }
 }
 
@@ -132,6 +122,7 @@ table {
 @media screen and (min-width:765px) {
   /deep/ .mat-tab-body-content {
     width: 900px !important;
+    overflow: hidden !important;
   }
 
   .mat-cell {
