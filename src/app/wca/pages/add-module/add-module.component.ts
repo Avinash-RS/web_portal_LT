@@ -45,6 +45,8 @@ export class AddModuleComponent implements OnInit {
           courseName: params.courseName,
         }
         console.log(this.queryData)
+        // added by ankit 
+        localStorage.setItem('courseid',this.routedCourseDetails.courseId)
       }
     });
 
