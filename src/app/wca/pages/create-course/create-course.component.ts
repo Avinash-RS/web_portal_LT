@@ -314,8 +314,8 @@ export class CreateCourseComponent implements OnInit {
           if (data && data.success === true) {
             this.toast.success('Course Updated Successfully !!!');
             console.log(data.course_id,this.courseForm.value.course_img_url,this.courseForm.value.course_name)
-            // this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
-            this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId:this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name }]);
+             this.router.navigate(['/Admin/auth/Wca/addmodule'],{ queryParams: {courseId:this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name}});
+         //   this.router.navigate(['/Admin/auth/Wca/addmodule', { courseId:this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name }]);
           } else {
             this.toast.error('Something Went Wrong While Updating !!!');
           }
