@@ -267,7 +267,7 @@
             <div class="row">
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Last login time : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails && trackDetails.last_login[0]  || 'NA'}}
+                    {{trackDetails && trackDetails.last_login[0] | date:short }}
                   </label> </label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
