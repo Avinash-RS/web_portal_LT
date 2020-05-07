@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   breakpoint: number;
 
    trendingCategorires: any = {
-    loop: true,
+    loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
