@@ -1109,8 +1109,6 @@ export class ProfileComponent implements OnInit {
   };
   otp: any;
   verifybutton: Boolean = false;
-  resendOtp: Boolean = false;
-  sendOtp: Boolean = false;
   levelCode: any;
   minutes: number;
   seconds: number;
@@ -1490,8 +1488,6 @@ export class ProfileComponent implements OnInit {
 
   otpverification() {
     this.loader.show();
-    this.resendOtp = false;
-    this.sendOtp = true;
     this.resendLabel = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
@@ -1544,13 +1540,12 @@ export class ProfileComponent implements OnInit {
   }
 
   Resendcode() {
-    this.resendOtp = true;
-    this.sendOtp = false;
     this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         Swal.fire(data.data['resend_otp_onprofile']['message'])
         this.showotp = true;
+        clearTimeout(this.interval);
         this.interval = setInterval(() => {
           if (this.resendtimeLeft > 0) {
             this.resendtimeLeft--;

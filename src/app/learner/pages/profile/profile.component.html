@@ -402,12 +402,9 @@
                 <ng-otp-input [config]="config" formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
                 </ng-otp-input>
               </div><br>
-              <div *ngIf="sendOtp">
+              <div>
                 <p>{{minutes}}:{{seconds}}</p>
-              </div>
-              <div *ngIf="resendOtp">
-                <p>{{minutes}}:{{seconds}}</p>
-              </div>
+                </div>
               <br><br>
             </div>
             <div *ngIf="showotp">
