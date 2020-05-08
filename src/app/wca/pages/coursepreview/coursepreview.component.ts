@@ -52,7 +52,6 @@ export class CoursepreviewComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.loader.show();
 
-    console.log(this.detail, 'course_id')
     this.courseType = localStorage.getItem('courseType');
     this.courseid = localStorage.getItem('courseid');
     if (this.courseType === "create") {
@@ -66,8 +65,6 @@ export class CoursepreviewComponent implements OnInit {
       console.log(viewCourse.data.viewcourse, 'viewCourse')
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
-        // this.authorinfo = this.course.author_details
-        console.log(this.course, 'course')
         this.loader.hide();
       } else
         this.loader.hide();
@@ -101,22 +98,21 @@ export class CoursepreviewComponent implements OnInit {
   }
   getModuleData() {
     this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-      this.content = data.data['getmoduleData']['data'][0];
-      this.modulength = this.content['coursedetails'].length;
-      this.content.coursedetails.forEach(moduledetails => {
-        moduledetails.moduledetails.forEach(element => {
-          this.countofdoc = element.resourse.count;
-           return true
-         });
-      });
-    }, err => {
-
+      if(data.data['getmoduleData']['success'] === 'true'){
+        this.content = data.data['getmoduleData']['data'][0];
+        this.modulength = this.content['coursedetails'].length;
+        this.content.coursedetails.forEach(moduledetails => {
+          moduledetails.moduledetails.forEach(element => {
+            this.countofdoc = element.resourse.count;
+             return true
+           });
+        });
+      }
     })
   }
 
      passCourseId(){
       this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-        console.log(data)
       })
      }
 
@@ -133,10 +129,7 @@ export class CoursepreviewComponent implements OnInit {
   }
   
   previewcourse(templateRef: TemplateRef<any>) {
-    console.log(this.content.url,'lllllllllllllllllllllllllllllllllllllllllllll')
-    // this.url='../../../../assets/scormContent'+this.content.url
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
-    //console.log(this.content.url)
     this.dialog.open(templateRef);
   }
 

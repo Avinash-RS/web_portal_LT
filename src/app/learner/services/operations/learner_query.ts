@@ -229,6 +229,7 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
 export const getmoduleData = gql`
 query getmoduleData($courseid:String!){
   getmoduleData(courseid:$courseid) {
+    success
     data {
       courseid
       _id

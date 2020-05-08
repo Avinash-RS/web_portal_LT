@@ -33,7 +33,6 @@ export class ScormplayerComponent implements OnInit {
     public service: LearnerServicesService, public route: Router,public commonService : CommonServicesService,) { 
       var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      console.log(detail)
       this.contentid = detail.id;
       this.user_id = detail.user;
       this.course_id=detail.course_id
@@ -43,8 +42,6 @@ export class ScormplayerComponent implements OnInit {
       this.commonService.viewCurseByID (this.course_id).subscribe(data => {
         if(data.data['viewcourse'].success == true){
           this.courseDeatils = data.data['viewcourse']['message'];
-          console.log(this.courseDeatils ,'courseDeatils')
-          // this.authorDetails  =  this.courseDeatils.author_details;
           this.spinner.hide();
         }else{
           this.spinner.hide();
@@ -59,7 +56,6 @@ export class ScormplayerComponent implements OnInit {
     this.passCourseId();
     this.contentid='dfdfd'
     this.url=environment.scormUrl+'scormPlayer.html?contentID='+this.contentid+'&user_id='+this.user_id+'&course_id='+this.course_id
-    
     this.getModuleData();
   }
   getcontent() {
@@ -68,18 +64,14 @@ export class ScormplayerComponent implements OnInit {
   }
   passCourseId(){
     this.commonService.geturl(this.course_id).subscribe(data => {
-      console.log(data)
     })
    }
 
   getModuleData() {
     this.service.getModuleData(this.course_id).subscribe(data => {
+      if(data.data['getmoduleData']['success'] === 'true'){
         this.content = data.data['getmoduleData']['data'][0];
-        //var url='../../../../assets/scormContent'+this.content.url;
         this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
-        // console.log(url)
-        console.log(this.content.url,'this.content.url')
-        // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.modulength =  this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
           moduledetails.moduledetails.forEach(element => {
@@ -87,10 +79,7 @@ export class ScormplayerComponent implements OnInit {
              return true
            });
         });
-        // var url='../../../../assets/scormContent'+this.content.url
-        // console.log(url)
-      
-        // this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent'+this.content.url); 
+      }
     })
   }
 
