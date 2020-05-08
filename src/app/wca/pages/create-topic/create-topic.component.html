@@ -3,6 +3,8 @@
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
         <li class="breadcrumb-item">
             <a href="/Admin/auth/Wca">Course Management</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+
         <li class="breadcrumb-item">
             <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{query.viewingModule}}">
                 <ng-container *ngIf="!query.addModule; else isEditCourse">
@@ -13,7 +15,7 @@
                 </ng-template>
 
             </a></li>
-        <ng-container *ngIf="query.addModule == 'true'; else createModule">
+        <ng-container *ngIf="query.addModule == 'true' || query.edit; else createModule">
             <li class="breadcrumb-item">
                 <a
                     href="/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}">Add
