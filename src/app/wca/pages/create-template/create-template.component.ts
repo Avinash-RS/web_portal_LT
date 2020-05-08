@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {WcaService} from '../../services/wca.service';
 import { DialogComponent } from '../dialog/dialog.component';
 
+
 @Component({
   selector: 'app-create-template',
   templateUrl: './create-template.component.html',
@@ -15,14 +16,18 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class CreateTemplateComponent implements OnInit {
   queryData:any;
 
+
   constructor(
     public wcaService:WcaService,
     public spinner: NgxSpinnerService,
     public toast: ToastrService,
     public router: Router,
     public dialog: MatDialog,
-    public route:ActivatedRoute
-  ) { }
+    public route:ActivatedRoute,
+    
+  ) {
+
+   }
 
   ngOnInit() {
 
@@ -159,9 +164,9 @@ savedTemplates(type) {
       this.wcaService.bSubject.next({template_details:this.done});
       if(this.queryData && this.queryData.addModule) 
       {
-        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{addModule:true,temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{addModule:true,temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,isCreateTemp:true}});
       }else {
-        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName}});
+        this.router.navigate(['/Admin/auth/Wca/addtopic'],{queryParams:{temp:'noTempID',viewingModule: this.queryData.viewingModule ,courseName:this.queryData.courseName,isCreateTemp: true}});
       }
     }
    } else {

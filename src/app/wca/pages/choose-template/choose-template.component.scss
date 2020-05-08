@@ -393,3 +393,16 @@ input[type="text"] {
     bottom: 5px;
     left: 130px;
 }
+
+
+@media (max-width: 480px) {
+    .mat-expansion-panel-header-title{
+        font-size: 17px !important;
+      }
+    .mat-card{
+        margin: 21px -5px 12px 0px !important;
+    }
+    .custom-grid-list{
+        margin-left: 17%;
+    }
+}

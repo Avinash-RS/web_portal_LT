@@ -3,6 +3,8 @@
     <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
     <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
       </a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+
     <li class="breadcrumb-item">
       <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
         Courses</a></li>
@@ -43,7 +45,7 @@
             Create a template
           </mat-panel-title>
 
-          <div class="row">
+          <div class="row" style="margin-top: 1%;">
 
             <div class="col-md-9">
 
@@ -61,7 +63,7 @@
                     </div>
                   </div>
 
-                  <div *ngIf="!done?.length" class="alnCenter">
+                  <div *ngIf="!done?.length" class="textCenter">
                     <span style="color: red;">Drag and Drop the Template Please !!!</span>
                   </div>
 
@@ -70,7 +72,7 @@
                       continue</button>
                     <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue
                       without saving</button>
-                    <button class="backgroundcol1" routerLink="">Cancel</button>
+                    <button class="backgroundcol3 cancelAdjacent" routerLink="">Cancel</button>
                     <!-- /Wca/addtopic -->
 
                   </div>

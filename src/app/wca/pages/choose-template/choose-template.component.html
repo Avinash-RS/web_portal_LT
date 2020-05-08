@@ -6,15 +6,28 @@
             <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
             <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
                 </a></li>
+            <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+
             <li class="breadcrumb-item">
-                <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
-                    Courses</a></li>
+                <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">
+                    <ng-container *ngIf="queryData.addModule; else isEdit">
+                        Edit Course
+                    </ng-container>
+                    <ng-template #isEdit>
+                        Create Course
+                    </ng-template>
+                </a></li>
+
             <li class="breadcrumb-item">
                 <ng-container *ngIf="queryData.addModule; else createModule">
-                    <a href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add Module</a>
+                    <a
+                        href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
+                        Module</a>
                 </ng-container>
                 <ng-template #createModule>
-                    <a href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create Module</a>
+                    <a
+                        href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create
+                        Module</a>
                 </ng-template>
 
             </li>
@@ -47,7 +60,7 @@
 
                         <mat-card style="text-align: center;">
 
-                            <mat-grid-list [gutterSize]="'20px'" cols="4" rowHeight="1:1.5" class="custom-grid-list">
+                            <mat-grid-list [gutterSize]="'20px'" [cols]="isMobile ? 1 : 4" rowHeight="1:1.5" class="custom-grid-list">
                                 <div *ngFor="let tlist of templateList;let i = index">
                                     <mat-grid-tile
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
@@ -97,9 +110,9 @@
                             </mat-grid-list>
                             <mat-card-footer>
                                 <div>
-                                    <button type="button" (click)="templateParse(tlist)" mat-flat-button
+                                    <button type="button"  (click)="templateParse(tlist)" mat-flat-button
                                         [disabled]='selectedTemplate.template_id == undefined' color="primary"
-                                        class="submit-btn">Continue</button>
+                                        class="submit-btn show_button">Continue</button>
                                 </div>
                             </mat-card-footer>
                         </mat-card>
