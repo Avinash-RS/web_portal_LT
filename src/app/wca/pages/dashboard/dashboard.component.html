@@ -157,7 +157,7 @@
                 <!-- <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)"> -->
                     <owl-carousel-o [options]="trendingCategorires" class="arrow">
                         <ng-template carouselSlide *ngFor="let course of publishedCourses">
-                            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
+                            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
                                 [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
                                 [showRating]="true" [goto]="'publish'"> </app-course-component>
                         </ng-template>
