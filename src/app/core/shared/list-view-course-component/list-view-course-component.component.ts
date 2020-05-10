@@ -122,7 +122,8 @@ export class ListViewCourseComponentComponent implements OnInit {
     else if (this.goto == 'draft') {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
       localStorage.setItem('courseType', detail.type)
-      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+      // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
 
     }
   }

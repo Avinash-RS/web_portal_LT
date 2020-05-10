@@ -1,5 +1,7 @@
 @import "variable";
-
+.coursebreadcrumb{
+    padding-top: 0px;
+}
 :host ::ng-deep .mat-progress-spinner {
     position: absolute !important;
     top: 50% !important;

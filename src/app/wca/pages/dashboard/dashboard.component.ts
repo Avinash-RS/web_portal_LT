@@ -18,11 +18,12 @@ export class DashboardComponent implements OnInit {
   breakpoint: number;
 
    trendingCategorires: any = {
-    loop: false,
+    loop: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoHeight:true,
     navSpeed: 700,
     navText: ['<', '>'],
     responsive: {
@@ -33,13 +34,16 @@ export class DashboardComponent implements OnInit {
         items: 2
       },
       740: {
-        items: 3
+        items: 3,
+        autoHeight:true,
       },
       940: {
-        items: 4
+        items: 3,
+        autoHeight:true,
       },
       1200 :{
-        items : 4
+        items : 4,
+        autoHeight:true,
       }
     },
     nav: true

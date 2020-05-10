@@ -503,6 +503,9 @@ if (item) {
       });
       dialogRef.afterClosed().subscribe(res1 => {
         console.log(res1);
+
+        images.value.topicimages=res1;
+
       })
     } else {
       this.toast.warning('Something Went Wrong While Displaying Images !!!');
