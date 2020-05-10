@@ -165,7 +165,6 @@ export class GroupManagementComponent implements OnInit {
   changeGroup(passRef: TemplateRef<any>,element) {
     this.userGroupChange = null;
     this.userGroupChange = element;
-    console.log(passRef);
     this.changeGrpForm = this.formBuilder.group({
       group: ['', myGlobals.req]
     })

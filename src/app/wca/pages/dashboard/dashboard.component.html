@@ -154,15 +154,13 @@
     <div class="row">
         <div class="col-md-12">
             <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                <!-- <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)"> -->
-                    <owl-carousel-o [options]="trendingCategorires" class="arrow">
-                        <ng-template carouselSlide *ngFor="let course of publishedCourses">
-                            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                                [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
-                                [showRating]="true" [goto]="'publish'"> </app-course-component>
-                        </ng-template>
-                    </owl-carousel-o>
-                <!-- </mat-grid-list> -->
+                <owl-carousel-o [options]="trendingCategorires"  [ngClass] = "{ 'widthClass': publishedCourseLength < 3 }" class="arrow">
+                    <ng-template carouselSlide *ngFor="let course of publishedCourses">
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
+                            [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
+                            [showRating]="true" [goto]="'publish'"> </app-course-component>
+                    </ng-template>
+                </owl-carousel-o>
                 <h2 *ngIf="publishedCourses && publishedCourses.length == 0">
                     No courses yet
                 </h2>
@@ -185,14 +183,14 @@
         <div class="col-md-12">
             <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                 <!-- <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)"> -->
-                    <owl-carousel-o [options]="trendingCategorires" class="arrow">
-                        <ng-template carouselSlide *ngFor="let course of createdCourses">
-                            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                                [showWishlist]="false" [showStatus]="false" [showDate]="false" [showCount]="false"
-                                [showRating]="false" [goto]="'create'">
-                            </app-course-component>
-                        </ng-template>
-                    </owl-carousel-o>
+                <owl-carousel-o [options]="trendingCategorires" class="arrow">
+                    <ng-template carouselSlide *ngFor="let course of createdCourses">
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
+                            [showWishlist]="false" [showStatus]="false" [showDate]="false" [showCount]="false"
+                            [showRating]="false" [goto]="'create'">
+                        </app-course-component>
+                    </ng-template>
+                </owl-carousel-o>
                 <!-- </mat-grid-list> -->
                 <h2 *ngIf="createdCourses && createdCourses.length == 0">
                     No courses yet
