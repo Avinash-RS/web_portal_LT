@@ -127,8 +127,9 @@ export class CourseComponentComponent implements OnInit {
       let detail = { type: 'draft', id: this.course._id || this.course.course_id }
       localStorage.setItem('courseType', detail.type)
       localStorage.setItem('courseid', detail.id)
-      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
-
+      //addmodule?courseId=3nqyd01b&courseImage=https:%2F%2Fedutechstorage.blob.core.windows.net%2Fcontainer1%2Fimages%2F7304826460633593-raj-1.png&courseName=HTMLCSS
+      //this.router.navigateByUrl('/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}', { state: { detail: detail } });
+      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
     }
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
