@@ -69,8 +69,6 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit() {
     this.adminDetails = this.gs.checkLogout();
-    console.log(this.adminDetails)
-    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
   }
 
   gotoAddUser() {
@@ -123,7 +121,6 @@ export class UserManagementComponent implements OnInit {
               this.ELEMENT_DATA = [];
               this.ELEMENT_DATA = result.data.search_user.message;
               this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-              console.log(this.ELEMENT_DATA);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
               this.resultsLength = 10;
@@ -189,7 +186,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   next(e) {
-    console.log(e)
     this.getAllUser(e.pageIndex);
     this.selectedArray = [];
   }

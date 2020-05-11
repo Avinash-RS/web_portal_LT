@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="dspFlx margLeft">
+  <div class="dspFlx">
     <span *ngIf="showRating" class="dspFlx1">
       <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
       &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>

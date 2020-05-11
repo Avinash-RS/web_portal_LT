@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
     },
     nav: true
   }
+
   adminDetails: any;
   spinner: boolean = false;
   publishedCourseLength: number;
@@ -64,7 +65,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.adminDetails = this.gs.checkLogout();
-    console.log(this.adminDetails)
     this.spinner = true;
     this.getPublishedCourses();
     this.getCreatedCourses();
@@ -104,20 +104,10 @@ export class DashboardComponent implements OnInit {
 
   getCreatedCourses() {
     var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-    var role = localStorage.getItem('role') || null;
-    console.log(adminDetails.user_id+'----'+role)
-
     this.adminService.getAllCourseCreated(adminDetails.user_id, 0).subscribe((data: any) => {
       this.createdCourses = data.data.get_course_createdby_admin.message;
       this.createdCourseLength = data.data.get_course_createdby_admin.course_count;
-    // }, err => {
-    //   this.spinner.hide();
-    // });
-    // this.adminService.getAllDrafted(adminDetails.user_id, 0).subscribe((data: any) => {
-
-    //   this.createdCourses = data.data.get_draft_course.message;
       this.spinner = false;
-
     }, err => {
       this.spinner = false;
     });

@@ -1,8 +1,90 @@
 @import "variable";
 .coursebreadcrumb{
     padding-top: 0px;
-
 }
+:host ::ng-deep .mat-progress-spinner {
+    position: absolute !important;
+    top: 50% !important;
+    left: 45% !important;
+}
+
+.backgroundcol2 {
+    cursor: pointer;
+    background-color: $color-blue !important;
+    white-space: nowrap;
+    border: 1px solid !important;
+    padding-top: 8px;
+    color: $color-white;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 9px;
+    float: right;
+    margin: 0px 46px 20px 0px;
+    border-radius: 15px 17px 15px 15px;
+}
+
+h2 {
+    color: $color-blue;
+
+    span {
+        font-weight: 400;
+        color: $color-darkGrey;
+    }
+}
+
+:host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
+    width: 320px !important;
+}
+
+:host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    color: #fff;
+    font-size: 30px !important;
+    background: #252525;
+    display: inline-block;
+    cursor: pointer !important;
+    padding: 10px !important;
+    border-radius: 50px !important;
+    width: 40px;
+    z-index: -1 !important;
+    opacity: 0.7;
+}
+
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    top: 40%;
+    z-index: 1 !important;
+    left: -18px;
+}
+
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    top: 40%;
+    z-index: 1 !important;
+    right: -18px;
+}
+
+mat-label {
+    color: $color-blue;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//OLD CODE
+// .coursebreadcrumb{
+//     padding-top: 0px;
+
+// }
 
 // .mat-expansion-panel:not([class*=mat-elevation-z]) {
 //     box-shadow: none;
@@ -30,35 +112,35 @@
 // //     }
 // // }
 
-:host ::ng-deep .mat-progress-spinner {
-    position: absolute !important;
-    top: 50% !important;
-    left: 45% !important;
-}
+// :host ::ng-deep .mat-progress-spinner {
+//     position: absolute !important;
+//     top: 50% !important;
+//     left: 45% !important;
+// }
 
-.backgroundcol2 {
-    cursor: pointer;
-    background-color: $color-blue !important;
-    white-space: nowrap;
-    border: 1px solid !important;
-    padding-top: 8px;
-    color: $color-white;
-    padding-bottom: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 9px;
-    float: right;
-    margin: 0px 46px 20px 0px;
-    border-radius: 15px 17px 15px 15px;
-}
+// .backgroundcol2 {
+//     cursor: pointer;
+//     background-color: $color-blue !important;
+//     white-space: nowrap;
+//     border: 1px solid !important;
+//     padding-top: 8px;
+//     color: $color-white;
+//     padding-bottom: 8px;
+//     padding-left: 15px;
+//     padding-right: 15px;
+//     padding-top: 9px;
+//     float: right;
+//     margin: 0px 46px 20px 0px;
+//     border-radius: 15px 17px 15px 15px;
+// }
 
-h2 {
-    color : $color-blue;
-    span {
-        font-weight: 400;
-        color: $color-darkGrey;
-    }
-}
+// h2 {
+//     color : $color-blue;
+//     span {
+//         font-weight: 400;
+//         color: $color-darkGrey;
+//     }
+// }
 // .container[_ngcontent-lsg-c8] .overlay[_ngcontent-lsg-c8] {
 //     height: 85%;
 //     width: 78%;
@@ -128,67 +210,67 @@ h2 {
 //     // margin-left: 5%;
 // }
 
-:host ::ng-deep .arrow .owl-carousel.owl-drag .owl-item {
-    text-align: -webkit-center;
-    width:320px !important;
-}
-
-:host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-    color: #fff;
-    font-size: 30px !important;
-    background: #252525;
-    display: inline-block;
-    cursor: pointer !important;
-    padding: 10px !important;
-    border-radius: 50px !important;
-    width: 40px;
-    z-index: -1 !important;
-    opacity: 0.7;
-}
-
-:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
-    position: absolute;
-    top: 40%;
-    z-index: 1 !important;
-    left: -18px;
-}
-
-:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
-    position: absolute;
-    top: 40%;
-    z-index: 1 !important;
-    right: -18px;
-}
-
-mat-label {
-    color: $color-blue;
-    cursor: pointer;
-}
-// :host ::ng-deep .arrow .owl-carousel , .owl-carousel .owl-stage-outer{
-//     width: 96% !important;
-//     margin-left: 2%;
-// }
-// .owl-carousel {
-//     width: 96% !important;
-//     margin-left: 2%;
+// :host ::ng-deep .arrow .owl-carousel.owl-drag .owl-item {
+//     text-align: -webkit-center;
+//     width:320px !important;
 // }
 
-// // :host ::ng-deep .trending .owl-theme .owl-nav [class*='owl-'] {
-// //     color: wheat;
-// //     font-size: 30px !important;
-// //     background: rgb(46, 46, 46);
-// //     display: inline-block;
-// //     cursor: pointer !important;
-// //     padding: 10px !important;
-// //     border-radius: 50px !important;
-// //     width: 40px;
-// //     z-index: -1 !important;
-// //     opacity: 0.7;
+// :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+//     color: #fff;
+//     font-size: 30px !important;
+//     background: #252525;
+//     display: inline-block;
+//     cursor: pointer !important;
+//     padding: 10px !important;
+//     border-radius: 50px !important;
+//     width: 40px;
+//     z-index: -1 !important;
+//     opacity: 0.7;
+// }
+
+// :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+//     position: absolute;
+//     top: 40%;
+//     z-index: 1 !important;
+//     left: -18px;
+// }
+
+// :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+//     position: absolute;
+//     top: 40%;
+//     z-index: 1 !important;
+//     right: -18px;
+// }
+
+// mat-label {
+//     color: $color-blue;
+//     cursor: pointer;
+// }
+// // :host ::ng-deep .arrow .owl-carousel , .owl-carousel .owl-stage-outer{
+// //     width: 96% !important;
+// //     margin-left: 2%;
+// // }
+// // .owl-carousel {
+// //     width: 96% !important;
+// //     margin-left: 2%;
 // // }
 
+// // // :host ::ng-deep .trending .owl-theme .owl-nav [class*='owl-'] {
+// // //     color: wheat;
+// // //     font-size: 30px !important;
+// // //     background: rgb(46, 46, 46);
+// // //     display: inline-block;
+// // //     cursor: pointer !important;
+// // //     padding: 10px !important;
+// // //     border-radius: 50px !important;
+// // //     width: 40px;
+// // //     z-index: -1 !important;
+// // //     opacity: 0.7;
+// // // }
 
 
-// @import "variable";
+
+// // @import "variable";
 
 // .mat-form-field+.mat-form-field {
 //     margin-left: 8px;

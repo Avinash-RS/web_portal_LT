@@ -54,7 +54,6 @@ export class AddUserComponent implements OnInit {
 
   addUser() {
     var fullname = this.addUserForm.value.username.trimLeft();
-    console.log(fullname);
     if (fullname != "") {
       if (fullname.length >= 3) {
         var admin = [];
