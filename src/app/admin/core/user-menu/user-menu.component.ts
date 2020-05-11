@@ -33,7 +33,7 @@ export class UserMenuComponent implements OnInit {
 
 	constructor(private elementRef: ElementRef, public services: CommonServicesService, private alert: AlertServiceService,
 		private router: Router, ) {
-			// getAdminName
+		// getAdminName
 		this.userDetailes =
 			JSON.parse(localStorage.getItem('adminDetails')) || null;
 		// this.currentUser = this.userDetailes.username;
@@ -41,16 +41,21 @@ export class UserMenuComponent implements OnInit {
 	}
 
 	logout() {
-
 		this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
-			console.log(logout.data.logout)
 			if (logout.data.logout && logout.data.logout.success) {
 				localStorage.clear();
 				this.userDetailes = null;
 				this.router.navigate(['/Admin/login'])
 			}
-			else if (logout.data.logout && !logout.data.logout.success)
-				this.alert.openAlert(logout.data.logout.message, null)
+			else if (logout.data.logout && !logout.data.logout.success) {
+				if (logout.data.logout.error_msg == "Authentication error. Token required.") {
+					localStorage.clear();
+					this.userDetailes = null;
+					this.router.navigate(['/Admin/login'])
+				}
+				else
+					this.alert.openAlert(logout.data.logout.message, null);
+			}
 			else
 				this.alert.openAlert('Please try again later', null)
 		});
