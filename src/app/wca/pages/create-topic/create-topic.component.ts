@@ -105,8 +105,9 @@ export class CreateTopicComponent implements OnInit {
            if (value) {
             this.queryData = null;
             this.queryData = value;
-            this.courseForm = this.courseform();
-            this.createTopicForm = this.courseForm.get("coursedetails").get(String(0)) as FormGroup;
+            this.courseForm = this.courseform()
+            this.createTopicForm = this.createForm(this.queryData);
+            (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
             this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
             console.log(this.queryData);
            }
@@ -151,7 +152,7 @@ export class CreateTopicComponent implements OnInit {
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
       template_details:[this.queryData.template_details],
-      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length && mod.template_details ? mod.template_details.map((data,index) =>
+      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length ? mod.template_details.map((data,index) =>
         this.topicItem(mod_index,index)
       ) : [])
     })
@@ -168,10 +169,11 @@ export class CreateTopicComponent implements OnInit {
       this.spinner.hide();
       this.queryData = data.Result;
       this.courseForm = this.courseform()
-      console.log(this.courseForm)
-      this.createTopicForm = this.courseForm.get("coursedetails").get(String(0)) as FormGroup;
+      this.createTopicForm = this.createForm(this.queryData);
+      (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
       this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
       console.log(this.queryData);
+      console.log(this.courseForm)
     }, err => {
       this.spinner.hide();
     })
