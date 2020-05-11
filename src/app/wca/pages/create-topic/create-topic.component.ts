@@ -67,7 +67,6 @@ export class CreateTopicComponent implements OnInit {
       topicname: [null, Validators.compose([Validators.required])],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
-          console.log(data)
           return this.topicImages()
         }) : [],Validators.compose([Validators.required])),
       topicstatus:['true']
@@ -125,7 +124,6 @@ export class CreateTopicComponent implements OnInit {
           this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
           this.courseForm.patchValue(value1.courseDetails);
           console.log(this.courseForm)
-          // this.createTopicForm.patchValue(this.queryData)
          } else {
            this.queryData = {};
          }
@@ -196,7 +194,7 @@ export class CreateTopicComponent implements OnInit {
         console.log(this.queryData);
         this.courseForm = this.courseform()
         this.createTopicForm = this.createForm(this.queryData);
-        (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
+        (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
         this.courseForm.patchValue(this.courseDetails);
         // this.courseForm.updateValueAndValidity();
         console.log(this.courseForm)
@@ -225,7 +223,7 @@ export class CreateTopicComponent implements OnInit {
          console.log(this.queryData);
          this.courseForm = this.courseform()
          this.createTopicForm = this.createForm(this.queryData);
-         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm )
+         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
          this.courseForm.patchValue(this.courseDetails);
          // this.courseForm.updateValueAndValidity();
          console.log(this.courseForm)
@@ -241,8 +239,8 @@ export class CreateTopicComponent implements OnInit {
     // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
     //  allModuleDetails.removeAt(jform);
   this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
-  this.queryData.template_details.splice(jform,1);
-  this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
+  // this.queryData.template_details.splice(jform,1);
+  // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
 
