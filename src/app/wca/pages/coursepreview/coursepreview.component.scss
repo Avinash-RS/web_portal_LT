@@ -147,6 +147,11 @@
     margin-bottom: 10px;
 
   }
+
+  .disabled {
+    opacity: 0.65 !important; 
+    cursor: not-allowed;
+  }
 .link{
   color: $color-blue;
 }
