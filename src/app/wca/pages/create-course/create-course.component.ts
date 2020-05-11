@@ -419,6 +419,7 @@ this.startup3();
 
 startup3() {
 this.wcaService.getAllTakeawayDetails().subscribe((data: any) => {
+    console.log(data);
 this.AllTakeawayDetails = [];
 this.AllTakeawayDetails = data.Result;
 console.log(this.AllTakeawayDetails);
