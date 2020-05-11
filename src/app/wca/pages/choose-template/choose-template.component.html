@@ -60,7 +60,8 @@
 
                         <mat-card style="text-align: center;">
 
-                            <mat-grid-list [gutterSize]="'20px'" [cols]="isMobile ? 1 : 4" rowHeight="1:1.5" class="custom-grid-list">
+                            <mat-grid-list [gutterSize]="'20px'" [cols]="isMobile ? 1 : 4" rowHeight="1:1.5"
+                                class="custom-grid-list">
                                 <div *ngFor="let tlist of templateList;let i = index">
                                     <mat-grid-tile
                                         [ngClass]="{'custom-grid-tile': tlist.template_id !== selectedTemplate.template_id,'selected-grid-tile': tlist.template_id == selectedTemplate.template_id}"
@@ -82,7 +83,15 @@
                                             </div>
                                             <div
                                                 class="{{tlist.template_id == selectedTemplate.template_id ? 'selected-grid-heading' : 'grid-heading' }} ">
-                                                Consist of
+                                                <ng-container
+                                                    *ngIf="tlist.template_details && tlist.template_details.length > 1; else multiTempDetails">
+                                                    Consists of
+                                                </ng-container>
+                                                <ng-template #multiTempDetails>
+                                                    Consist of
+
+                                                </ng-template>
+
                                             </div>
                                             <div class="grid-list">
                                                 <ol class="order-list">
@@ -110,7 +119,7 @@
                             </mat-grid-list>
                             <mat-card-footer>
                                 <div>
-                                    <button type="button"  (click)="templateParse(tlist)" mat-flat-button
+                                    <button type="button" (click)="templateParse(tlist)" mat-flat-button
                                         [disabled]='selectedTemplate.template_id == undefined' color="primary"
                                         class="submit-btn show_button">Continue</button>
                                 </div>
