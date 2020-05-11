@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
     },
     nav: true
   }
+
   adminDetails: any;
   spinner: boolean = false;
   publishedCourseLength: number;
