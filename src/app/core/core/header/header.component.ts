@@ -37,8 +37,16 @@ export class HeaderComponent implements OnInit {
         this.userDetailes = null;
         this.router.navigate(['/Learner'])
       }
-      else if (logout.data.logout && !logout.data.logout.success)
-        this.alert.openAlert(logout.data.logout.message, null)
+      else if (logout.data.logout && !logout.data.logout.success) {
+        if (logout.data.logout.error_msg == "Authentication error. Token required.") {
+          localStorage.clear();
+          this.userDetailes = null;
+          this.router.navigate(['/Learner'])
+        }
+        else
+          this.alert.openAlert(logout.data.logout.message, null);
+      }
+
       else
         this.alert.openAlert('Please try again later', null)
     });
