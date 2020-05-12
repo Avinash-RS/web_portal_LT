@@ -48,12 +48,22 @@
                                         </mat-panel-title>
                                     </div>
 
+                                    <div class="wrapper_1">
+                                        <mat-icon>add_circle_outline</mat-icon>
+                                    </div>
+                                    <div style="margin: -28px 0px 0px 30px">
+                                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                            Add Module from repository
+                                        </mat-panel-title>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-md-3">
                                     <!-- routerLink="/Admin/auth/Wca/viewmodule" -->
-
-                                    <button mat-stroked-button class="upload-btn" (click)="navViewModule()">
+                                    <input type="file" accept="application/zip" #file (change)="uploadDoc(file.files)" hidden>
+                                    <button for="upload-photo" mat-stroked-button class="upload-btn"
+                                        (click)="file.click()">
 
                                         <span style="padding: 2px 176px 13px 0px;">Upload a SCORM Course </span>
 
