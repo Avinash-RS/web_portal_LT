@@ -17,6 +17,7 @@ RUN npm i xlsx
 RUN npm i file-saver
 RUN npm i ngx-pagination
 RUN npm i ngx-infinite-scroll
+RUN npm install apollo-client
 
 COPY . .
 #RUN ng serve
