@@ -34,7 +34,13 @@ export class GraphqlModule {
   constructor(apollo: Apollo, httpLink: HttpLink, private gs : GlobalServiceService) {
     const http = httpLink.create({ uri: environment.apiUrl + 'graphql' });
     const middleware = new ApolloLink((operation, forward) => {
+      const link = middleware.concat(http);
 
+      apollo.create({
+        link: Errlink.concat(link),
+        cache: new InMemoryCache(),
+        defaultOptions: defaultOptions,
+      });
       // Check for token
       const token = localStorage.getItem('token');
       if (!token) return forward(operation);
@@ -64,13 +70,7 @@ export class GraphqlModule {
       if (networkError) console.log(`[Network error]: ${networkError}`);
     });
 
-    const link = middleware.concat(http);
-
-    apollo.create({
-      link: Errlink.concat(link),
-      cache: new InMemoryCache(),
-      defaultOptions: defaultOptions,
-    });
+   
   }
 }
 

@@ -13,6 +13,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { MockServiceService } from '@learner/services/mockService/mock-service.service';
+import { By } from '@angular/platform-browser';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -44,15 +46,17 @@ describe('LoginComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
-      ], 
-      providers: [Apollo, AlertComponentComponent,LearnerServicesService],
+      ],
+      providers: [Apollo, AlertComponentComponent, LearnerServicesService
+      ],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      declarations: [LoginComponent],
+      providers: [{ provide: LearnerServicesService, useClass: MockServiceService }]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -66,7 +70,6 @@ describe('LoginComponent', () => {
     expect(component.loginForm.controls['username']).toBeDefined();
     expect(component.loginForm.controls['password']).toBeDefined();
     expect(loginBtnContainer).toBeDefined();
-    console.log(loginBtnContainer)
   });
 
   it('form invalid when empty', () => {
@@ -74,7 +77,6 @@ describe('LoginComponent', () => {
   });
 
   it('username field validity', () => {
-
     let errors = {};
     let uname = component.loginForm.controls['username'];
     expect(uname.valid).toBeFalsy();
@@ -85,69 +87,37 @@ describe('LoginComponent', () => {
     uname.setValue("test");
     errors = uname.errors || {};
     expect(errors['required']).toBeFalsy();
-
-    // uname.setValue("te");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeTruthy();
-
-    // uname.setValue("test5test10test16test");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['maxlength']).toBeTruthy();
-
-    // uname.setValue("test");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
-
-    // uname.setValue("test123");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
-
-    // uname.setValue("123");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
   });
 
   it('password field validity', () => {
     let errors = {};
     let password = component.loginForm.controls['password'];
 
-  //   // Email field is required
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
 
-  //   // Set email to something
     password.setValue("123456");
     errors = password.errors || {};
     expect(errors['required']).toBeFalsy();
-  //   expect(errors['minlength']).toBeTruthy();
-  //   expect(errors['pattern']).toBeTruthy();
-
-  //   // Set email to something correct
-  //   password.setValue("123Aa!@#");
-  //   errors = password.errors || {};
-  //   expect(errors['required']).toBeFalsy();
-  //   expect(errors['minlength']).toBeFalsy();
-  //   expect(errors['pattern']).toBeFalsy();
   });
 
   it('submitting a form emits a user', () => {
+    let service: MockServiceService;
     expect(component.loginForm.valid).toBeFalsy();
     component.loginForm.controls['username'].setValue("test");
     component.loginForm.controls['password'].setValue("123Aa!@#");
     expect(component.loginForm.valid).toBeTruthy();
-    component.login();
-    // component.loginForm.controls['username'].setValue("test");
-    // component.loginForm.controls['password'].setValue("123Aa!@#"");
+
+    fixture.detectChanges();
+
+    service = TestBed.get(MockServiceService);
+
+    // spyOn(component,'login').and.callThrough();
+    debugger
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    button.click();
+    expect(component.login())
+    console.log(service.login);
+
   });
 });

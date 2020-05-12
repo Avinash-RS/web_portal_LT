@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log('inside')
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
