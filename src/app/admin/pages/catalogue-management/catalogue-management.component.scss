@@ -39,7 +39,7 @@
 }
 
 .header-line {
-    margin-left: 100px;
+    margin-left: 20px;
     margin-right: 20px;
 }
 
@@ -79,18 +79,22 @@ hr {
     padding-right: 5px;
 }
 
-.landing-text {
+.landing-background {
     background-color: #f5f5f5;
-    margin-left: 40px;
+    margin-left: 20px;
     padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
 
 }
 
-.landing-text .material-icons {
+.landing-text {
+    margin-left: 40px;
+}
+
+.landing-background .material-icons {
     font-size: 40px;
     color: #00C851;
-    padding-right: 40px;
+    padding-right: 80px;
     vertical-align: middle;
 }
