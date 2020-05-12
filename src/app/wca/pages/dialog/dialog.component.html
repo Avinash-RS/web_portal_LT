@@ -39,7 +39,7 @@
 
         <div class="prew1 ">
             <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
-             <img height="100%" width="100%" [src]="i">
+             <img height="100%" width="100%" [src]="i?.image">
         </mat-card>
     </div>
        </div>

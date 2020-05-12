@@ -50,6 +50,7 @@ export class CreateTopicComponent implements OnInit {
       coursename: [null, Validators.compose([Validators.required])],
       coursefile: [null],
       coursestatus: ['true'],
+      coursetype:[null],
       courseid: [null, Validators.compose([Validators.required])],
       coursedetails:this.formBuilder.array(this.courseArray && this.courseArray.length ? this.courseArray.map((data,index) => {
         // if (data.modulestatus === 'true') {
@@ -69,7 +70,8 @@ export class CreateTopicComponent implements OnInit {
         {
           return this.topicImages()
         }) : [],Validators.compose([Validators.required])),
-      topicstatus:['true']
+      topicstatus:['true'],
+      topictype:[null]
     });
   }
 
@@ -280,10 +282,16 @@ if (item) {
             formData.append('image', this.imageView);
             this.wcaService.uploadImage(formData).subscribe((data: any) => {
               imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
+              let obj1 = {
+                name:'',
+                image:imagepath,
+                file:''
+              }
               if (!formdata.get('topicimages').get(String(0))) {
                 (formdata.get('topicimages') as FormArray).push(this.topicImages());
               }
-              formdata.get('topicimages').get(String(0)).setValue(imagepath);             
+              formdata.get('topicimages').get(String(0)).setValue(obj1);   
+              formdata.get('topictype').setValue(item.name);          
                this.spinner.hide();
             }, err => {
               this.spinner.hide();
@@ -299,10 +307,16 @@ if (item) {
             console.log(data.message)
             for (var m = 0; m < data.message.length; m++) {
               let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+              let obj2 = {
+                name:'',
+                image:path,
+                file:''
+              }
               if (!formdata.get('topicimages').get(String(m))) {
                 (formdata.get('topicimages') as FormArray).push(this.topicImages());
               }
-              formdata.get('topicimages').get(String(m)).setValue(path);
+              formdata.get('topicimages').get(String(m)).setValue(obj2);
+              formdata.get('topictype').setValue(item.name);          
             }
            }
           
@@ -380,10 +394,16 @@ if (item) {
             console.log(pages)
             for (var m = 0; m < pages.length; m++) {
               let path = await this.imagedata_to_image(pages[m]);
+              let obj3 = {
+                name:'',
+                image:path,
+                file:''
+              }
               if (!formdata.get('topicimages').get(String(m))) {
                 (formdata.get('topicimages') as FormArray).push(this.topicImages());
               }
-              formdata.get('topicimages').get(String(m)).setValue(path);
+              formdata.get('topicimages').get(String(m)).setValue(obj3);
+              formdata.get('topictype').setValue('PDF');          
             }
             this.spinner.hide();
           }
