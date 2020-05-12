@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { RouterLink } from '@angular/router';
-import { Router, ActivatedRoute } from '@angular/router';
-import { WcaService } from '../../services/wca.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { WcaService } from '../../services/wca.service';
 
 @Component({
   selector: 'app-view-module',
