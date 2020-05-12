@@ -47,8 +47,8 @@ export class GraphqlModule {
       return forward(operation);
     });
 
-    const Errlink = onError(({ graphQLErrors, networkError,response }) => {
-      console.log(response)
+    const Errlink = onError(({ graphQLErrors, networkError,response ,operation }) => {
+      console.log(operation)
       if (graphQLErrors)
         graphQLErrors.forEach(({ message, locations, path }) =>
          { console.log(
