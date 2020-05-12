@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { NgxPaginationModule} from 'ngx-pagination';
+import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { NgxPaginationModule} from 'ngx-pagination';
         NgxPaginationModule
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent, ],
+    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
