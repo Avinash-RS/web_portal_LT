@@ -36,6 +36,14 @@ export const menus = [
         'chip': false,
         'open': true,
         
+    },
+    {
+        'name': 'Catalogue Management',
+        'icon': 'library_books',
+        'link': 'catalogue',
+        'chip': false,
+        'open': true,
+        
     }
     
    

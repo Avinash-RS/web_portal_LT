@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-03T23:58:33" id="0" hostname="edu1-lap" tests="5" errors="1" failures="0" time="1.488">
+<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-12T10:29:34" id="0" hostname="DESKTOP-HTI0BOT" tests="5" errors="1" failures="0" time="3.625">
   <properties>
-    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"/>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"/>
   </properties>
-  <testcase name="LoginComponent should create" time="0.472" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent form invalid when empty" time="0.289" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent username field validity" time="0.231" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent password field validity" time="0.241" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent submitting a form emits a user" time="0.255" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent should create" time="0.996" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent form invalid when empty" time="0.754" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent username field validity" time="0.62" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent password field validity" time="0.597" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent submitting a form emits a user" time="0.658" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
   <system-out>
     <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) ERROR
-  DisconnectedClient disconnected from CONNECTED state (transport error)
+  DisconnectedClient disconnected from CONNECTED state (ping timeout)
+,Chrome 81.0.4044 (Windows 10.0.0) LOG: <button _ngcontent-a-c0="" id="login" mat-raised-button="" class="mat-raised-button" ng-reflect-disabled="true" disabled=""><span class="mat-button-wrapper">Sign in</span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="true" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"></div></button>
 ,Chrome 81.0.4044 (Windows 10.0.0) ERROR
   {
     "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",

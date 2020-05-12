@@ -1,11 +1,12 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloLink } from 'apollo-link';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { DefaultOptions } from 'apollo-client/ApolloClient';
 // import { environment } from '../../environments/environment';
-import { ApolloLink } from 'apollo-link';
+
 import { environment } from '@env/environment';
 import { GlobalServiceService} from '@core/services/handlers/global-service.service';
 import { onError } from "apollo-link-error";

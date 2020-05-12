@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';

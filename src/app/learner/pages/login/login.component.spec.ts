@@ -12,6 +12,7 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -43,8 +44,8 @@ describe('LoginComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
-      ],
-      providers: [Apollo, AlertComponentComponent],
+      ], 
+      providers: [Apollo, AlertComponentComponent,LearnerServicesService],
     })
       .compileComponents();
   }));
@@ -61,6 +62,11 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    let loginBtnContainer = fixture.debugElement.nativeElement.querySelector('#login');
+    expect(component.loginForm.controls['username']).toBeDefined();
+    expect(component.loginForm.controls['password']).toBeDefined();
+    expect(loginBtnContainer).toBeDefined();
+    console.log(loginBtnContainer)
   });
 
   it('form invalid when empty', () => {
@@ -74,12 +80,11 @@ describe('LoginComponent', () => {
     expect(uname.valid).toBeFalsy();
 
     errors = uname.errors || {};
-    expect(errors['required']).toBeTruthy();
+    expect(errors['required']).toBe(true);
 
-    // uname.setValue("test!@");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeTruthy();
+    uname.setValue("test");
+    errors = uname.errors || {};
+    expect(errors['required']).toBeFalsy();
 
     // uname.setValue("te");
     // errors = uname.errors || {};
@@ -117,23 +122,23 @@ describe('LoginComponent', () => {
     let errors = {};
     let password = component.loginForm.controls['password'];
 
-    // Email field is required
+  //   // Email field is required
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
 
-    // // Set email to something
-    // password.setValue("123456");
-    // errors = password.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeTruthy();
-    // expect(errors['pattern']).toBeTruthy();
+  //   // Set email to something
+    password.setValue("123456");
+    errors = password.errors || {};
+    expect(errors['required']).toBeFalsy();
+  //   expect(errors['minlength']).toBeTruthy();
+  //   expect(errors['pattern']).toBeTruthy();
 
-    // // Set email to something correct
-    // password.setValue("123Aa!@#");
-    // errors = password.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
+  //   // Set email to something correct
+  //   password.setValue("123Aa!@#");
+  //   errors = password.errors || {};
+  //   expect(errors['required']).toBeFalsy();
+  //   expect(errors['minlength']).toBeFalsy();
+  //   expect(errors['pattern']).toBeFalsy();
   });
 
   it('submitting a form emits a user', () => {
@@ -142,5 +147,7 @@ describe('LoginComponent', () => {
     component.loginForm.controls['password'].setValue("123Aa!@#");
     expect(component.loginForm.valid).toBeTruthy();
     component.login();
+    // component.loginForm.controls['username'].setValue("test");
+    // component.loginForm.controls['password'].setValue("123Aa!@#"");
   });
 });
