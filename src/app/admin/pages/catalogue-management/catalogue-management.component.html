@@ -26,20 +26,17 @@ navigate by url -- Admin/auth/catalogue -->
 
         <mat-toolbar color="primary">
           <span class="navigation-buttons"></span>
-          <button mat-raised-button class="add-btn toolbar-btn">
+          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd()">
             <span class="material-icons" style="vertical-align: middle;">add</span>Add
           </button>
           <button mat-raised-button class="edit-btn toolbar-btn">
-            <span class="material-icons" style="vertical-align: middle;">create</span>Edit
+            <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
           </button>
           <button mat-raised-button class="delete-btn toolbar-btn">
-            <span class="material-icons" style="vertical-align: middle;">delete</span>Delete
+            <span class="material-icons" style="vertical-align: middle;" (click)="gotoDelete()">delete</span>Delete
           </button>
         </mat-toolbar>
-
-        <br>
-        <br>
-        <br>
+        <br><br><br>
         <div class="landing-background">
           <div class="landing-text">
             <p>

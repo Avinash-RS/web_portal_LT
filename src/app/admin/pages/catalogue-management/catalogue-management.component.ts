@@ -25,7 +25,17 @@ export class CatalogueManagementComponent implements OnInit {
   ngOnInit() {
 
   }
+  gotoAdd() {
+    console.log("Add works")
+  }
 
+  gotoEdit() {
+    console.log("Edit works")
+  }
+
+  gotoDelete() {
+    console.log("Delete works")
+  }
 
   // gotoedit() {
   //   console.log(this.userDetailes.group_id[0])
