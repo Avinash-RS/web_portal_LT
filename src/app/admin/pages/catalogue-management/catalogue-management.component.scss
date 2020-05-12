@@ -24,13 +24,22 @@
     margin-top: 20px;
 }
 
+.m-r-20 {
+    margin-top: 20px;
+}
+
+.p-30 {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
 .card-shadow {
     box-shadow: 0 2px 10px #6c757d;
     padding: 0px !important;
 }
 
 .header-line {
-    margin-left: 100px;
+    margin-left: 20px;
     margin-right: 20px;
 }
 
@@ -38,4 +47,54 @@ hr {
 
     height: 1px;
     background-color: darkgray;
+}
+
+.navigation-buttons {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+
+}
+
+.toolbar-btn {
+    color: white;
+    width: 100px;
+    margin: 0px 5px;
+}
+
+.add-btn {
+    background-color: #00C851;
+}
+
+.edit-btn {
+    background-color: #0d47a1;
+}
+
+.delete-btn {
+    background-color: #CC0000;
+}
+
+.material-icons {
+    font-size: inherit;
+    padding-right: 5px;
+}
+
+.landing-background {
+    background-color: #f5f5f5;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.landing-text {
+    margin-left: 40px;
+}
+
+.landing-background .material-icons {
+    font-size: 40px;
+    color: #00C851;
+    padding-right: 80px;
+    vertical-align: middle;
 }
