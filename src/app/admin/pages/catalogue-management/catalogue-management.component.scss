@@ -24,6 +24,15 @@
     margin-top: 20px;
 }
 
+.m-r-20 {
+    margin-top: 20px;
+}
+
+.p-30 {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
 .card-shadow {
     box-shadow: 0 2px 10px #6c757d;
     padding: 0px !important;
@@ -38,4 +47,36 @@ hr {
 
     height: 1px;
     background-color: darkgray;
+}
+
+.navigation-buttons {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+
+}
+
+.toolbar-btn {
+    color: white;
+    width: 100px;
+}
+
+.add-btn {
+    background-color: #00C851;
+    margin: 0px 10px;
+}
+
+.edit-btn {
+    background-color: #0d47a1;
+    margin: 0px 10px;
+}
+
+.delete-btn {
+    background-color: #CC0000;
+    margin: 0px 10px;
+}
+
+.material-icons {
+    font-size: inherit;
+    padding-right: 5px;
 }
