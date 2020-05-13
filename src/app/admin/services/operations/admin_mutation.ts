@@ -30,8 +30,37 @@ mutation update_group($_id: String!, $group_name: String!, $group_id: String!){
     success
     error_msg
     message
-}
+  }
 }`
+
+// export const create_catelogue = gql`
+// mutation create_catelogue($input_name: String, $input_description: String, $input_image: String,
+//   $creator_id: String, $level: Number, $input_image: String, $apply_all_courses: Boolean, $course_id: [String],
+//   $parent_category_id: String, $parent_sub_category_id: String){
+//   create_catelogue(input_name: $input_name,group_name: $group_name, group_id: $group_id) {
+//     success
+//     error_msg
+//     message
+//   }
+// }`
+
+// mutation{
+//   create_catelogue(
+//     input_name : "Civil And Structural Framework",
+//     input_description : "All the Civil And Structural Framework related courses will be under this category",
+//     input_image : "https://3.imimg.com/data3/EO/IQ/MY-10638644/civil-and-structural-design-detailing-250x250.png",
+//     creator_id : "5e69f4ad139c79bbf14adc8a",
+//     level : 2,
+//     apply_all_courses : false,
+//     course_id : ["1mfku71m", "2ae80xyq"],
+//     parent_category_id : "hjkjswv5g",
+//     parent_sub_category_id : "null"
+//   ){
+//     success
+//     error_msg
+//     message
+//   }
+// }
 
 export const createusergroup = gql`
   mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!, $admin_id: String!) {

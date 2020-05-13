@@ -13,15 +13,18 @@ import * as myGlobals from '@core/globals';
   styleUrls: ['./catalogue-management.component.scss']
 })
 export class CatalogueManagementComponent implements OnInit {
-  adminDetails: any;
-  showAddCat: boolean = false;
-  showAddSubCat: boolean = true;
-  showHome: boolean = false;
+
   addCategoryForm: any;
-  addSubCategoryForm : any;
+  addSubCategoryForm: any;
+  adminDetails: any;
+  showHome: boolean = true;
+  showAddCatForm: boolean = false;
+  showAddSubCatForm: boolean = false;
+  selectedCategory: any = null;
+  selectedSubCategory : any = null;
+
   // userDetailes: any;
   // allcourses: any;
-
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService, public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router) {
     this.adminDetails = this.gs.checkLogout();
@@ -29,40 +32,36 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addCategoryForm = this.formBuilder.group({
-      categoryName: new FormControl('', myGlobals.req),
-      categoryDescription: new FormControl('', myGlobals.req),
-      categoryImage: ['', myGlobals.req]
-    });
-    this.addSubCategoryForm = this.formBuilder.group({
-      subCategoryName: new FormControl('', myGlobals.req),
-      subCategoryDescription: new FormControl('', myGlobals.req),
-      subCategoryImage: ['', myGlobals.req]
-    });
   }
 
   gotoAdd() {
-    this.addCategoryForm = this.formBuilder.group({
-      categoryName: new FormControl('', myGlobals.req),
-      categoryDescription: new FormControl('', myGlobals.req),
-      categoryImage: ['', myGlobals.req]
-    });
-    this.addSubCategoryForm = this.formBuilder.group({
-      subCategoryName: new FormControl('', myGlobals.req),
-      subCategoryDescription: new FormControl('', myGlobals.req),
-      subCategoryImage: ['', myGlobals.req]
-    });
-    console.log("Add works");
-    this.showAddCat = !this.showAddCat;
-    this.showAddSubCat = !this.showAddSubCat;
-    this.showHome = false;
+    if (this.selectedCategory == null) {
+      this.addCategoryForm = this.formBuilder.group({
+        categoryName: new FormControl('', myGlobals.req),
+        categoryDescription: new FormControl('', myGlobals.req),
+        categoryImage: ['', myGlobals.req]
+      });
+      this.showAddCatForm = true;
+      this.showAddSubCatForm = false;
+      this.showHome = false;
+    } 
+    else if (this.selectedSubCategory == null) {
+      this.addSubCategoryForm = this.formBuilder.group({
+        subCategoryName: new FormControl('', myGlobals.req),
+        subCategoryDescription: new FormControl('', myGlobals.req),
+        subCategoryImage: ['', myGlobals.req]
+      });
+      this.showAddCatForm = false;
+      this.showAddSubCatForm = true;
+      this.showHome = false;
+    }
   }
 
   get f() {
-    if(this.showAddCat == true){
+    if (this.showAddCatForm == true) {
       return this.addCategoryForm.controls;
     }
-    else if(this.showAddSubCat == true){
+    else if (this.showAddSubCatForm == true) {
       return this.addSubCategoryForm.controls;
     }
   }
@@ -79,7 +78,7 @@ export class CatalogueManagementComponent implements OnInit {
       // }
       else {
         if (selectfile) {
-          console.log(selectfile,selectfile.name)
+          console.log(selectfile, selectfile.name)
           const fb = new FormData();
           // fb.append('image', this.selectfile, this.selectfile.name)
           // this.service.imageupload(fb).subscribe(data => {
@@ -100,6 +99,9 @@ export class CatalogueManagementComponent implements OnInit {
     console.log("Delete works")
   }
 
+  addCategory() {
+    console.log(this.addCategoryForm.value)
+  }
   // gotoedit() {
   //   console.log(this.userDetailes.group_id[0])
   //   this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
