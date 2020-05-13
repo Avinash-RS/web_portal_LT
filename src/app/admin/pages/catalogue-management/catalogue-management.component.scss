@@ -220,3 +220,11 @@ mat-tree {
 :host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
     background-color: #437891 !important;
 }
+.dialogPopup {
+    height: 420px;
+    width: 700px;
+    .border {
+        border: solid 1px $color-border;
+    }
+}
+

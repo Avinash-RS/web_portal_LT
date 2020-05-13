@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
@@ -8,7 +8,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material';
+import { MatTreeNestedDataSource, MatDialog } from '@angular/material';
 @Component({
   selector: 'app-catalogue-management',
   templateUrl: './catalogue-management.component.html',
@@ -38,7 +38,7 @@ export class CatalogueManagementComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router,
+    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     console.log(this.adminDetails)
@@ -116,8 +116,8 @@ export class CatalogueManagementComponent implements OnInit {
   getallcategories() {
     this.treeSource.data = null;
     this.pagenumber = 0;
-    this.adminservice.getcategories(this.pagenumber).subscribe((result: any ) => {
-console.log(result.data);
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
+      console.log(result.data);
     });
     // this.treeSource.data = this.categories;
     // this.dataSource$.next(this.categories);
@@ -257,5 +257,18 @@ console.log(result.data);
       this.selectedArray = this.selectedArray.filter(i => i !== c);
     }
     console.log(this.selectedArray)
+  }
+
+  openMoveTo(templateRef: TemplateRef<any>) {
+    console.log(templateRef);
+    this.selectedCategory = this.formBuilder.group({
+      category: new FormControl('', myGlobals.mobileVal),
+      subCategory: new FormControl("", []),
+      subSubCategory: new FormControl("", []),
+    })
+    this.dialog.open(templateRef);
+  }
+  closedialogbox() {
+    this.dialog.closeAll();
   }
 }
