@@ -113,11 +113,12 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3 m-l-5 inputs border-radius-5" appDnd  (click)="fileInput.click()" (fileDropped)="uploadFile($event)" >
+              <div class="col-md-3 m-l-5 inputs border-radius-5" appDnd (click)="fileInput.click()"
+                (fileDropped)="uploadFile($event)">
                 <div class="row">
                   <div class="col-md-5 pointer">
-                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg" id="fileInput" 
-                    type='file' >
+                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg"
+                      id="fileInput" type='file'>
                     <img class="img1 marginClass" [src]="'assets/images/image_upload.svg'">
                   </div>
                   <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
@@ -134,9 +135,8 @@ navigate by url -- Admin/auth/catalogue -->
             <div class="row">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addUser" mat-stroked-button [disabled]="addCategoryForm.invalid" 
-                class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="addUser()">Save</button>
+                <button id="addUser" mat-stroked-button [disabled]="addCategoryForm.invalid"
+                  class="width_80 border-radius-5 background-blue color_white center" (click)="addUser()">Save</button>
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="addUser" mat-stroked-button class="width_80 border-radius-5 center"
@@ -149,6 +149,9 @@ navigate by url -- Admin/auth/catalogue -->
         </div>
         <!-- end of Add Catagory code  -->
 
+        <!-- start of Add Sub Catagory code  -->
+
+        <!-- end of Add Sub Catagory code  -->
 
         <!-- start of view courses -->
 
