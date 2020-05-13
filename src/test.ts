@@ -15,7 +15,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-//  const context = require.context('./app/learner/pages/login', false, /login.component\.spec\.ts$/);
+//  const context = require.context('./app/learner/pages/login', true, /login.component\.spec\.ts$/);
 
  // const context = require.context('./app/admin/pages/admin-courses', false, /admin-courses.component\.spec\.ts$/);
 const context = require.context('./app/learner/pages/learner-my-course', false, /learner-my-course.component\.spec\.ts$/);

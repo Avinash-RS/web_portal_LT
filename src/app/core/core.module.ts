@@ -24,6 +24,7 @@ import { VgCoreModule } from 'videogular2/compiled/core';
 import { VgControlsModule } from 'videogular2/compiled/controls';
 import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { VgBufferingModule } from "videogular2/compiled/buffering";
+import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -41,7 +42,8 @@ const routes: Routes = [
     VideoPlayerComponent,
     AudioPlayerComponent,
     DataTableComponent,
-    ListViewCourseComponentComponent
+    ListViewCourseComponentComponent,
+    DragDropImageDirective
   ],
 
   imports: [

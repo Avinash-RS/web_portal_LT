@@ -1,0 +1,325 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/catalogue">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Catagory Management</li>
+  </ol>
+</nav>
+
+<!-- Remember to sigin to admin before hitting this url
+navigate by url -- Admin/auth/catalogue -->
+<div class="container  p-30 ">
+  <div class="container m-t-20 card-shadow ">
+    <div class="row card-shadow">
+      <!-- Mat tree code here ( left hand side) -->
+      <div class="card col-3 cardheight">
+
+        <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+            <li class="mat-tree-node newstyle" renderDebug>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
+                [attr.aria-label]="'toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+
+            </li>
+          </mat-tree-node>
+
+          <!-- node with children -->
+          <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+            <li class="mat-tree-node newstyle" renderDebug>
+              <div class="mat-tree-node">
+                <button mat-icon-button matTreeNodeToggle class="btnClassicon"
+                  [attr.aria-label]="'toggle ' + node.name">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+
+                <!-- {{node.group_name}}2 -->
+              </div>
+            </li>
+            <ul [class.children-invisible]="!treeControl.isExpanded(node)">
+              <ng-container matTreeNodeOutlet></ng-container>
+            </ul>
+          </mat-nested-tree-node>
+        </mat-tree>
+        <!-- view category and sub category -->
+      </div>
+      <!-- end of Mat tree code here ( left hand side) -->
+
+      <!-- start of right hand side card view -->
+
+      <div class="card col-9 cardheight">
+
+        <!-- start of navigations ( engineering > electronics > nano electronics) -->
+
+        <ol class="breadcrumb category-nav m-b-0 m-l-20">
+          <li class="breadcrumb-item">{{selectedCategory || 'Category'}}</li>
+          <li class="breadcrumb-item">{{selectedSubCategory || 'SubCategory' }}</li>
+          <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li>
+        </ol>
+
+        <!-- end of navigations ( engineering > electronics > nano electronics) -->
+
+        <!-- <hr> -->
+        <hr class="header-line m-r-20 m-l-20">
+        <!-- start of buttons (add, edit, dlt) -->
+        <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey"> Nano Electronics
+              <span class="material-icons" style="vertical-align: middle;" matTooltip="Click here to change profile details">info_outline</span></span>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-12 col-12">
+            <div class="row">
+              <div class="col-lg-4"></div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="background-blue width_90 color_white" (click)="gotoAdd()">
+                  <span class="material-icons" style="vertical-align: middle;">domain</span>Edit
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="add-btn width_90 color_white" (click)="gotoAdd()">
+                  <span class="material-icons" style="vertical-align: middle;">add</span>Add
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="edit-btn width_90 color_white">
+                  <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="delete-btn width_90 color_white">
+                  <span class="material-icons" style="vertical-align: middle;"
+                    (click)="gotoDelete()">delete</span>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of buttons (add, edit, dlt) -->
+
+
+        <!-- start of landing 3 line rules -->
+        <br>
+        <div class="m-l-20" *ngIf="showHome">
+          <br><br>
+          <div class="landing-text landing-background">
+            <p>
+              <mat-icon class="m-b-10">done</mat-icon>Add categories upto 3 levels
+            </p>
+            <br>
+            <p>
+              <mat-icon class="m-b-10">done</mat-icon>Edit existing category name and description
+            </p>
+            <br>
+            <p>
+              <mat-icon class="m-b-10">done</mat-icon>Delete a category after removing all courses and subcategories
+              associated with it
+            </p>
+          </div>
+        </div>
+
+
+        <!-- start of navigations ( engineering > electronics > nano electronics) -->
+
+        <!-- end of navigations ( engineering > electronics > nano electronics) -->
+
+        <!-- <hr> -->
+
+        <!-- start of buttons (add, edit, dlt) -->
+
+        <!-- end of buttons (add, edit, dlt) -->
+
+
+        <!-- start of landing 3 line rules -->
+
+        <!-- end of landing 3 line rules -->
+
+
+        <!-- start of Add Catagory code  -->
+        <div *ngIf="showAddCatForm">
+          <form [formGroup]="addCategoryForm">
+            <div class="row">
+              <div class="col-md-4 col-sm-10 col-10 m-l-5">
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category *"
+                  [ngClass]="{ 'is-invalid': f.categoryName.touched && f.categoryName.errors }"
+                  formControlName="categoryName">
+                <div *ngIf="f.categoryName.touched && f.categoryName.errors" class="invalid-feedback">
+                  <div *ngIf="f.categoryName.errors.required">* Category Name is required</div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-11 m-l-5 col-sm-10 col-10">
+                <div class="form-group">
+                  <textarea style="resize: none;" rows="5"
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
+                    [ngClass]="{ 'is-invalid': f.categoryDescription.touched && f.categoryDescription.errors }"
+                    placeholder="Description *" formControlName="categoryDescription"
+                    name="categoryDescription"></textarea>
+                  <div *ngIf="f.categoryDescription.touched && f.categoryDescription.errors" class="error_msg">
+                    <div *ngIf="f.categoryDescription.errors.required">* Category Description is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 h_100px m-l-5 inputs border-radius-5">
+                <mat-label class="color_grey"
+                  *ngIf="addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == ''">
+                  Category Image *</mat-label>
+                <div class="row" appDnd (click)="fileInput.click()" (fileDropped)="uploadFile($event)"
+                  *ngIf="addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == ''">
+                  <div class="spinner-container" *ngIf="loading">
+                    <mat-spinner diameter="30"></mat-spinner>
+                  </div>
+                  <div class="col-md-5 pointer">
+                    <input hidden #fileInput (change)="uploadFile($event)" accept=".png,.jpg,.jpeg" id="fileInput"
+                      type='file'>
+                    <img class="img1 verticle_middle marginClass" [src]="'assets/images/image_upload.svg'">
+                  </div>
+                  <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
+                    Click here <br> Or <br> Drag and drop here
+                  </div>
+                </div>
+                <div class="row"
+                  *ngIf="!(addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == '')">
+                  <img class="center width_80" [src]="addCategoryForm.value.categoryImage">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
+              <div class="col-md-8"></div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
+                  class="width_80 border-radius-5 background-blue color_white center"
+                  (click)="addCategory()">Save</button>
+              </div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="selectedCategory">
+              <div class="col-md-2 m-l-5 col-sm-6 col-6">
+                <br>
+                <button id="addUser" mat-stroked-button
+                  class="width_80 border-radius-5 background-blue color_white center" (click)="viewCourses()">View
+                  Courses</button>
+              </div>
+            </div>
+            <br>
+          </form>
+        </div>
+        <!-- end of Add Catagory code  -->
+
+        <!-- start of Add Sub Catagory code  -->
+        <div *ngIf="showAddSubCatForm">
+          <form [formGroup]="addSubCategoryForm">
+            <div class="row">
+              <div class="col-md-4 col-sm-10 col-10 m-l-5">
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory*"
+                  [ngClass]="{ 'is-invalid': f.subCategoryName.touched && f.subCategoryName.errors }"
+                  formControlName="subCategoryName">
+                <div *ngIf="f.subCategoryName.touched && f.subCategoryName.errors" class="invalid-feedback">
+                  <div *ngIf="f.subCategoryName.errors.required">* Sub Category Name is required</div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-11 m-l-5 col-sm-10 col-10">
+                <div class="form-group">
+                  <textarea style="resize: none;" rows="5"
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
+                    [ngClass]="{ 'is-invalid': f.subCategoryDescription.touched && f.subCategoryDescription.errors }"
+                    placeholder="Description *" formControlName="subCategoryDescription"
+                    name="subCategoryDescription"></textarea>
+                  <div *ngIf="f.subCategoryDescription.touched && f.subCategoryDescription.errors" class="error_msg">
+                    <div *ngIf="f.subCategoryDescription.errors.required">* Sub Category Description is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
+              <div class="col-md-8"></div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid"
+                  class="width_80  border-radius-5 background-blue color_white center"
+                  (click)="addCategory()">Save</button>
+              </div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addUser" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="selectedCategory">
+              <div class="col-md-2 m-l-5 col-sm-6 col-6">
+                <br>
+                <button id="addUser" mat-stroked-button
+                  class="width_80 border-radius-5 background-blue color_white center" (click)="viewCourses()">View
+                  Courses</button>
+              </div>
+            </div>
+            <br>
+          </form>
+        </div>
+        <!-- end of Add Sub Catagory code  -->
+
+        <!-- start of view courses -->
+        <div *ngIf="showCourses">
+          <div class="row m-r-20">
+
+            <div class="col-3">
+              <button id="Hide Courses" mat-stroked-button
+                class="width_80 float-left border-radius-5 background-blue color_white center"
+                (click)="hideCourses()">Hide Courses</button>
+            </div>
+            <div class="col-9"></div>
+          </div>
+          <div class="row m-r-20">
+            <div class="col-9">
+              <h3 class="font-display m-b-0">295 courses > </h3>
+              <!-- <h2 class="font-display">{{course_count}} Courses > </h2> -->
+            </div>
+            <div class="col-3 p-r-0">
+              <button id="selectAll" mat-stroked-button
+                class="width_80 float-right border-radius-5 background-blue color_white center"
+                (click)="selectAll()">Select All</button>
+            </div>
+          </div>
+          <!-- <div class="row"> -->
+          <div class="m-r-20 m-l-20">
+            <mat-grid-list cols="4" rowheight="2:1.7" gutterSize="30px">
+              <mat-grid-tile *ngFor="let courses of courses;" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+                <mat-card class="course-card  font-display">
+                  <img mat-card-image src="{{ courses.src }}" alt="">
+                  <mat-card-content class="course-name">
+                    <p>{{courses.name}}</p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- hide courses
+        select all -->
+
+        <!-- end of view courses -->
+
+
+        <!-- end of right hand side card view -->
+      </div>
+    </div>
+  </div>
+</div>

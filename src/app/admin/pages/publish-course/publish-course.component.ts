@@ -7,7 +7,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 @Component({
   selector: 'app-publish-course',
   templateUrl: './publish-course.component.html',
-  styleUrls: ['./publish-course.component.css']
+  styleUrls: ['./publish-course.component.scss']
 })
 export class PublishCourseComponent implements OnInit {
   course: any;
@@ -21,7 +21,7 @@ export class PublishCourseComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('role','admin');
+    localStorage.setItem('role', 'admin');
     this.gs.checkLogout();
   }
 
