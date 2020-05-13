@@ -149,6 +149,20 @@ hr {
     padding-left: 0;
 }
 
+.course-card {
+    box-shadow: none !important;
+}
+
+.course-name {
+    text-align: center;
+
+}
+
+.font-display {
+    color: $color-blue;
+    font-weight: bolder;
+}
+
 .spinner-container {
     position: absolute;
     top: 0;
