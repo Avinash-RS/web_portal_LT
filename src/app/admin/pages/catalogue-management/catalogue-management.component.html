@@ -154,6 +154,44 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- end of Add Sub Catagory code  -->
 
         <!-- start of view courses -->
+        <div *ngIf="showCourses">
+          <div class="row m-r-20">
+
+            <div class="col-3">
+              <button id="Hide Courses" mat-stroked-button
+                class="width_80 border-radius-5 background-blue color_white center m-r-0 p-r-0"
+                (click)="hideCourses()">Hide Courses</button>
+            </div>
+            <div class="col-9"></div>
+          </div>
+          <div class="row m-r-20">
+            <div class="col-9">
+              <h3 class="font-display">295 courses > </h3>
+              <!-- <h2 class="font-display">{{course_count}} Courses > </h2> -->
+            </div>
+            <div class="col-3">
+              <button id="selectAll" mat-stroked-button
+                class="width_80 border-radius-5 background-blue color_white center m-r-0 p-r-0"
+                (click)="selectAll()">Select All</button>
+            </div>
+          </div>
+          <!-- <div class="row"> -->
+          <div class="m-r-20 m-l-20">
+            <mat-grid-list cols="4" rowheight="2:1.7" gutterSize="20px">
+              <mat-grid-tile *ngFor="let courses of courses;" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+                <mat-card class="course-card">
+                  <img mat-card-image src="{{ courses.src }}" alt="">
+                  <mat-card-content style="text-align: center">
+                    <p>{{courses.name}}</p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- hide courses
+        select all -->
 
         <!-- end of view courses -->
 

@@ -14,9 +14,11 @@ import * as myGlobals from '@core/globals';
 })
 export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
-  showAddCat: boolean = true;
+  showAddCat: boolean = false;
   showHome: boolean = false;
+  showCourses: boolean = true;
   addCategoryForm: any;
+  courses: any;
   // userDetailes: any;
   // allcourses: any;
 
@@ -24,6 +26,58 @@ export class CatalogueManagementComponent implements OnInit {
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService, public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router) {
     this.adminDetails = this.gs.checkLogout();
     console.log(this.adminDetails)
+
+    this.courses = [
+      {
+        name: "Web Development",
+        src: "assets/courses/1.jpg",
+      },
+      {
+        name: "Business Analyst",
+        src: "assets/courses/2.jpg",
+      },
+      {
+        name: "Photography",
+        src: "assets/courses/3.jpg",
+      },
+      {
+        name: "Code study",
+        src: "assets/courses/4.jpg",
+      },
+      {
+        name: "Web Development",
+        src: "assets/courses/1.jpg",
+      },
+      {
+        name: "Business Analyst",
+        src: "assets/courses/2.jpg",
+      },
+      {
+        name: "Photography",
+        src: "assets/courses/3.jpg",
+      },
+      {
+        name: "Code study",
+        src: "assets/courses/4.jpg",
+      },
+      {
+        name: "Web Development",
+        src: "assets/courses/1.jpg",
+      },
+      {
+        name: "Business Analyst",
+        src: "assets/courses/2.jpg",
+      },
+      {
+        name: "Photography",
+        src: "assets/courses/3.jpg",
+      },
+      {
+        name: "Code study",
+        src: "assets/courses/4.jpg",
+      },
+
+    ];
   }
 
   ngOnInit() {
@@ -61,7 +115,7 @@ export class CatalogueManagementComponent implements OnInit {
       // }
       else {
         if (selectfile) {
-          console.log(selectfile,selectfile.name)
+          console.log(selectfile, selectfile.name)
           const fb = new FormData();
           // fb.append('image', this.selectfile, this.selectfile.name)
           // this.service.imageupload(fb).subscribe(data => {
@@ -80,6 +134,14 @@ export class CatalogueManagementComponent implements OnInit {
 
   gotoDelete() {
     console.log("Delete works")
+  }
+
+  selectAll() {
+    console.log("select all courses")
+  }
+
+  hideCourses() {
+    console.log("Hide all courses works")
   }
 
   // gotoedit() {
