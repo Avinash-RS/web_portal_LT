@@ -26,10 +26,10 @@ navigate by url -- Admin/auth/catalogue -->
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
                 [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
-  
+
             </li>
           </mat-tree-node>
-  
+
           <!-- node with children -->
           <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
             <li class="mat-tree-node newstyle" renderDebug>
@@ -42,7 +42,7 @@ navigate by url -- Admin/auth/catalogue -->
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
-  
+
                 <!-- {{node.group_name}}2 -->
               </div>
             </li>
@@ -72,36 +72,57 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- <hr> -->
         <hr class="header-line m-r-20 m-l-20">
         <!-- start of buttons (add, edit, dlt) -->
-        <mat-toolbar color="primary">
-          <span class="navigation-buttons"></span>
-          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd()">
-            <span class="material-icons" style="vertical-align: middle;">add</span>Add
-          </button>
-          <button mat-raised-button class="edit-btn toolbar-btn">
-            <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
-          </button>
-          <button mat-raised-button class="delete-btn toolbar-btn">
-            <span class="material-icons" style="vertical-align: middle;" (click)="gotoDelete()">delete</span>Delete
-          </button>
-        </mat-toolbar>
+        <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey"> Nano Electronics
+              <span class="material-icons" style="vertical-align: middle;" matTooltip="Click here to change profile details">info_outline</span></span>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-12 col-12">
+            <div class="row">
+              <div class="col-lg-4"></div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="background-blue width_90 color_white" (click)="gotoAdd()">
+                  <span class="material-icons" style="vertical-align: middle;">domain</span>Edit
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="add-btn width_90 color_white" (click)="gotoAdd()">
+                  <span class="material-icons" style="vertical-align: middle;">add</span>Add
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="edit-btn width_90 color_white">
+                  <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-sm-5 center col-5">
+                <button mat-raised-button class="delete-btn width_90 color_white">
+                  <span class="material-icons" style="vertical-align: middle;"
+                    (click)="gotoDelete()">delete</span>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- end of buttons (add, edit, dlt) -->
 
 
         <!-- start of landing 3 line rules -->
         <br>
-        <div class="landing-background m-l-20" *ngIf="showHome">
+        <div class="m-l-20" *ngIf="showHome">
           <br><br>
-          <div class="landing-text">
+          <div class="landing-text landing-background">
             <p>
-              <mat-icon>done</mat-icon>Add categories upto 3 levels
+              <mat-icon class="m-b-10">done</mat-icon>Add categories upto 3 levels
             </p>
             <br>
             <p>
-              <mat-icon>done</mat-icon>Edit existing category name and description
+              <mat-icon class="m-b-10">done</mat-icon>Edit existing category name and description
             </p>
             <br>
             <p>
-              <mat-icon>done</mat-icon>Delete a category after removing all courses and subcategories associated with it
+              <mat-icon class="m-b-10">done</mat-icon>Delete a category after removing all courses and subcategories
+              associated with it
             </p>
           </div>
         </div>
@@ -128,7 +149,7 @@ navigate by url -- Admin/auth/catalogue -->
           <form [formGroup]="addCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
-                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category*"
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category *"
                   [ngClass]="{ 'is-invalid': f.categoryName.touched && f.categoryName.errors }"
                   formControlName="categoryName">
                 <div *ngIf="f.categoryName.touched && f.categoryName.errors" class="invalid-feedback">
@@ -152,8 +173,10 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <div class="row">
-
-              <div class="col-md-3 m-l-5 inputs border-radius-5">
+              <div class="col-md-3 h_100px m-l-5 inputs border-radius-5">
+                <mat-label class="color_grey"
+                  *ngIf="addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == ''">
+                  Category Image *</mat-label>
                 <div class="row" appDnd (click)="fileInput.click()" (fileDropped)="uploadFile($event)"
                   *ngIf="addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == ''">
                   <div class="spinner-container" *ngIf="loading">
@@ -162,7 +185,7 @@ navigate by url -- Admin/auth/catalogue -->
                   <div class="col-md-5 pointer">
                     <input hidden #fileInput (change)="uploadFile($event)" accept=".png,.jpg,.jpeg" id="fileInput"
                       type='file'>
-                    <img class="img1 marginClass" [src]="'assets/images/image_upload.svg'">
+                    <img class="img1 verticle_middle marginClass" [src]="'assets/images/image_upload.svg'">
                   </div>
                   <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
                     Click here <br> Or <br> Drag and drop here
@@ -170,7 +193,7 @@ navigate by url -- Admin/auth/catalogue -->
                 </div>
                 <div class="row"
                   *ngIf="!(addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == '')">
-                  <img class="img1 marginClass" [src]="addCategoryForm.value.categoryImage">
+                  <img class="center width_80" [src]="addCategoryForm.value.categoryImage">
                 </div>
               </div>
             </div>

@@ -1,16 +1,23 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-13T09:18:13" id="0" hostname="DESKTOP-HTI0BOT" tests="6" errors="1" failures="0" time="2.939">
+<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-13T12:55:33" id="0" hostname="DESKTOP-HTI0BOT" tests="6" errors="1" failures="0" time="1.954">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"/>
   </properties>
-  <testcase name="LoginComponent should create and identify components" time="1.04" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent form invalid when empty" time="0.357" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent should click remember me change value" time="0.312" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent username field validity" time="0.462" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent password field validity" time="0.45" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent submitting a form emits a user while remeber me is true" time="0.318" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent should create and identify components" time="0.56" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent form invalid when empty" time="0.311" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent should click remember me change value" time="0.28" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent username field validity" time="0.259" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent password field validity" time="0.259" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent submitting a form emits a user while remeber me is true" time="0.285" classname="Chrome_81_0_4044_(Windows_10_0_0).LoginComponent"/>
   <system-out>
-    <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside comp'
+    <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) ERROR
+  {
+    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
+    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
+  }
+,Chrome 81.0.4044 (Windows 10.0.0) ERROR
+  Disconnected, because no message in 30000 ms.
+,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside comp'
 ,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside comp'
 ,Chrome 81.0.4044 (Windows 10.0.0) LOG: Object{data: Object{login: Object{success: ..., error_msg: ..., message: ..., __typename: ...}}}
 ,Chrome 81.0.4044 (Windows 10.0.0) ERROR

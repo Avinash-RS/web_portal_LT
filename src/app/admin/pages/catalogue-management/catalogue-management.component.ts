@@ -27,7 +27,7 @@ export class CatalogueManagementComponent implements OnInit {
   loading: boolean;
   categories: any;
   courses: any;
-  showCourses: boolean = true;
+  showCourses: boolean = false;
   // userDetailes: any;
   // allcourses: any;
 
@@ -172,7 +172,9 @@ export class CatalogueManagementComponent implements OnInit {
           const fb = new FormData();
           fb.append('image', selectfile, selectfile.name)
           this.learnerservice.imageupload(fb).subscribe((data: any) => {
-            this.addCategoryForm.controls['categoryImage'].setValue(data.url);
+            var split_url = data.url.split('/');
+            var upload_url =  split_url[0] + "//" + split_url[1] + split_url[2] + '/' + data.path
+            this.addCategoryForm.controls['categoryImage'].setValue(upload_url);
             this.loading = false;
           })
         }
