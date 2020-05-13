@@ -1,3 +1,31 @@
-.repo-table {
-    width: 100%;
+.module-repo-container {
+    .repo-table {
+        width: 100%;
+        tr {
+            height: 40px !important;
+        }
+    }
+    .table-container {
+        margin: 1.5%;
+    }
+    .header-class {
+        font-weight: bolder;
+        width: 20%;
+        font-size: 14px;
+    }
+
+    .action-header {
+        width: 10%;
+    }
+    .select-btn {
+        height: 30px;
+        margin: 10px 0;
+        background-color: #1f3777 !important;
+        color: white !important;
+        border-radius: 0px;
+    }
+    .rep-title {
+        margin:0 0 0 1.5% !important;
+        color: #1f3777;
+    }
 }
