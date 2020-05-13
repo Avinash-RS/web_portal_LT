@@ -178,7 +178,7 @@ navigate by url -- Admin/auth/catalogue -->
             <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addCategory" mat-stroked-button [disabled]="addCategory.invalid"
+                <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="addCategory()">Save</button>
               </div>

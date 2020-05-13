@@ -119,7 +119,7 @@ export class CatalogueManagementComponent implements OnInit {
           const fb = new FormData();
           fb.append('image', selectfile, selectfile.name)
           this.learnerservice.imageupload(fb).subscribe((data : any)=> {
-            this.addCategoryForm.controls['categoryImage'].setValue(data.path);
+            this.addCategoryForm.controls['categoryImage'].setValue(data.url);
             this.loading = false;
           })
         }
@@ -156,12 +156,13 @@ export class CatalogueManagementComponent implements OnInit {
       level: 1,
       apply_all_courses: false,
       course_id: [],
-      parent_category_id: this.selectedCategory.id || "hjkjswv5g",
-      parent_sub_category_id: this.selectedSubCategory.id || "null",
+      parent_category_id:  "null",
+      parent_sub_category_id:  "null",
     }
-    this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      console.log()
-    });
+    console.log(category)
+    // this.adminservice.createCatalogue(category).subscribe((result: any) => {
+    //   console.log()
+    // });
   }
   // gotoedit() {
   //   console.log(this.userDetailes.group_id[0])
