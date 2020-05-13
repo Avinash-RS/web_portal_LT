@@ -1,3 +1,5 @@
+@import "variable";
+
 :root {
   --canvasColor: #f9f9f9;
 }
@@ -228,7 +230,7 @@ input:disabled~* {
 
 .checkbox input:disabled:checked~label:before,
 .checkbox input:disabled:checked~label:after {
-  background: black;
+  background: $color-blank;
 }
 
 /*buttons & links*/
@@ -764,16 +766,16 @@ input.variation+label {
 }
 
 button.active {
-  color: green;
+  color: $color-green;
 }
 
 .icon_fnt {
   font-size: 22px;
-  color: #1f3777;
+  color: $color-blue;
 }
 
 .icon_clr {
-  color: #1f3777;
+  color: $color-blue;
 
 
 }
@@ -781,7 +783,7 @@ button.active {
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
-  background-color: #1f3777 !important;
+  background-color:$color-blue !important;
   border-radius: 7px;
   padding: 12px;
 
