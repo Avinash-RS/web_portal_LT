@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
 
-  // apiUrl: 'http://40.76.47.212:3000/', old dev now uat
- 
-  apiUrl: ' http://20.44.36.44:3000/', //new dev
-  scormUrl:'http://40.76.47.212:8080/',
-  apiUrlImg:'http://40.76.47.212:3000/',
-  createCourseApi:'http://40.76.47.212:3002/',
-  wcaapiurl:'http://edutech.eastus.cloudapp.azure.com/',
-    // apiUrl: 'http://20.44.41.200:3000/',
+  apiUrl: 'http://40.76.47.212:3000/', // old dev now uat
+
+  // apiUrl: ' http://20.44.36.44:3000/', //new dev
+  scormUrl: 'http://40.76.47.212:8080/',
+  apiUrlImg: 'http://40.76.47.212:3000/',
+  createCourseApi: 'http://40.76.47.212:3002/',
+  wcaapiurl: 'http://edutech.eastus.cloudapp.azure.com/',
+  // apiUrl: 'http://20.44.41.200:3000/',
   // scormUrl:'http://20.44.41.200:8080/',
   // apiUrlImg:'http://20.44.41.200:3001/',
   // wcaapiurl:'http://20.44.41.200:9001/'
