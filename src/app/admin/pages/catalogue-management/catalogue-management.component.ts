@@ -21,12 +21,15 @@ export class CatalogueManagementComponent implements OnInit {
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
   selectedCategory: any = null;
-  selectedSubCategory : any = null;
+  selectedSubCategory: any = null;
+  loading: boolean;
 
   // userDetailes: any;
   // allcourses: any;
 
-  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService, public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
+    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router,
+  ) {
     this.adminDetails = this.gs.checkLogout();
     console.log(this.adminDetails)
   }
@@ -44,7 +47,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.showAddCatForm = true;
       this.showAddSubCatForm = false;
       this.showHome = false;
-    } 
+    }
     else if (this.selectedSubCategory == null) {
       this.addSubCategoryForm = this.formBuilder.group({
         subCategoryName: new FormControl('', myGlobals.req),
@@ -67,11 +70,14 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   uploadFile(fileInput: any) {
+    this.loading = true;
     console.log(fileInput)
+    debugger
     if (fileInput && fileInput.target && fileInput.target.files[0]) {
       var selectfile = <File>fileInput.target.files[0];
       if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
         this.alert.openAlert('Image should only be Jpeg or png format', null)
+        this.loading = false;
       }
       // else if (selectfile && selectfile.size > 100000) {
       //   this.alert.openAlert('Image should be less than 1 MB', null)
@@ -80,12 +86,11 @@ export class CatalogueManagementComponent implements OnInit {
         if (selectfile) {
           console.log(selectfile, selectfile.name)
           const fb = new FormData();
-          // fb.append('image', this.selectfile, this.selectfile.name)
-          // this.service.imageupload(fb).subscribe(data => {
-          //   this.profileForm.controls['profile_img'].setValue(data);
-          //   localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path)
-          //   this.profileForm.controls['profile_img'].setValue(localStorage.getItem('user_img'))
-          // })
+          fb.append('image', selectfile, selectfile.name)
+          this.learnerservice.imageupload(fb).subscribe((data : any)=> {
+            this.addCategoryForm.controls['categoryImage'].setValue(data.path);
+            this.loading = false;
+          })
         }
       }
     }
@@ -100,7 +105,32 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   addCategory() {
+    // input_name : "Civil And Structural Framework",
+    // input_description : "All the Civil And Structural Framework related courses will be under this category",
+    // input_image : "https://3.imimg.com/data3/EO/IQ/MY-10638644/civil-and-structural-design-detailing-250x250.png",
+    // creator_id : "5e69f4ad139c79bbf14adc8a",
+    // level : 2,
+    // apply_all_courses : false,
+    // course_id : ["1mfku71m", "2ae80xyq"],
+    // parent_category_id : "hjkjswv5g",
+    // parent_sub_category_id : "null"
+
     console.log(this.addCategoryForm.value)
+    var value = this.addCategoryForm.value;
+    let category = {
+      input_name: value.categoryName,
+      input_description: value.categoryDescription,
+      input_image: value.categoryImage,
+      creator_id: this.adminDetails._id,
+      level: 1,
+      apply_all_courses: false,
+      course_id: [],
+      parent_category_id: this.selectedCategory.id || "hjkjswv5g",
+      parent_sub_category_id: this.selectedSubCategory.id || "null",
+    }
+    this.adminservice.createCatalogue(category).subscribe((result: any) => {
+      console.log()
+    });
   }
   // gotoedit() {
   //   console.log(this.userDetailes.group_id[0])
