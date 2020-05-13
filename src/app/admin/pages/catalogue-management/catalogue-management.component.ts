@@ -19,33 +19,28 @@ export class CatalogueManagementComponent implements OnInit {
   addCategoryForm: any;
   addSubCategoryForm: any;
   adminDetails: any;
-  showHome: boolean = true;
+  loading: boolean = false;
+  showHome: boolean = false;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
+  showCourses: boolean = true;
   selectedCategory: any = null;
   selectedSubCategory: any = null;
-  loading: boolean;
   categories: any;
   courses: any;
-  showCourses: boolean = false;
-  // userDetailes: any;
-  // allcourses: any;
-
+  selectedArray: any = [];
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
-  // userDetailes: any;
-  // allcourses: any;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router,
   ) {
     this.adminDetails = this.gs.checkLogout();
     console.log(this.adminDetails)
-
     this.courses = [
       {
         name: "Web Development",
@@ -97,6 +92,8 @@ export class CatalogueManagementComponent implements OnInit {
       },
 
     ];
+
+    console.log(this.courses)
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -173,7 +170,7 @@ export class CatalogueManagementComponent implements OnInit {
           fb.append('image', selectfile, selectfile.name)
           this.learnerservice.imageupload(fb).subscribe((data: any) => {
             var split_url = data.url.split('/');
-            var upload_url =  split_url[0] + "//" + split_url[1] + split_url[2] + '/' + data.path
+            var upload_url = split_url[0] + "//" + split_url[1] + split_url[2] + '/' + data.path
             this.addCategoryForm.controls['categoryImage'].setValue(upload_url);
             this.loading = false;
           })
@@ -235,4 +232,17 @@ export class CatalogueManagementComponent implements OnInit {
   // }
 
   // 5eb3b5f50d03e1bc320162cd id 
+
+  selectCourse(c, id) {
+    console.log(c, id);
+    if (c.isChecked == undefined || c.isChecked == false) {
+      c.isChecked = true;
+      this.selectedArray.push(c);
+    }
+    else {
+      c.isChecked = !c.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== c);
+    }
+    console.log(this.selectedArray)
+  }
 }
