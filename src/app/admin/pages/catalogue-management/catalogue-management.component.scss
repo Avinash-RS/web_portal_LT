@@ -148,6 +148,20 @@ hr {
     padding-left: 0;
 }
 
+.course-card {
+    box-shadow: none !important;
+}
+
+.course-name {
+    text-align: center;
+
+}
+
+.font-display {
+    color: $color-blue;
+    font-weight: bolder;
+}
+
 .spinner-container {
     position: absolute;
     top: 0;
@@ -158,45 +172,45 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
 //tree
 .mat-tree-node {
     min-height: 35px;
-  }
-  
-  mat-tree {
-  
+}
+
+mat-tree {
+
     ul,
     li {
-      margin-top: 0;
-      margin-bottom: 0;
-      list-style-type: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        list-style-type: none;
     }
-  }
-  
-  .children-invisible {
+}
+
+.children-invisible {
     display: none;
-  }
+}
 
-  .newstyle {
+.newstyle {
     .btnClassicon {
-      width: 22px; 
+        width: 22px;
     }
-  }
+}
 
-  :host ::ng-deep mat-checkbox .mat-checkbox-layout {
+:host ::ng-deep mat-checkbox .mat-checkbox-layout {
     margin: 0px !important;
-  }
-  
-  :host ::ng-deep mat-checkbox .mat-checkbox-frame {
+}
+
+:host ::ng-deep mat-checkbox .mat-checkbox-frame {
     border: 0px;
     background-color: rgb(197, 215, 252) !important;
-  
-  }
-  
-  :host ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
-  :host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+
+}
+
+:host ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+:host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
     background-color: #437891 !important;
-  
-  }
-  
+
+}
