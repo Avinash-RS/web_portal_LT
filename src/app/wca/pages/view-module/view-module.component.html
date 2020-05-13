@@ -48,7 +48,7 @@
                                         </mat-panel-title>
                                     </div>
 
-                                    <div class="wrapper_1">
+                                    <div class="wrapper_1" (click)="navModuleRepository()">
                                         <mat-icon>add_circle_outline</mat-icon>
                                     </div>
                                     <div style="margin: -28px 0px 0px 30px">
@@ -61,7 +61,7 @@
 
                                 <div class="col-md-3">
                                     <!-- routerLink="/Admin/auth/Wca/viewmodule" -->
-                                    <input type="file" accept="application/zip" #file (change)="uploadDoc(file.files)" hidden>
+                                    <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                                     <button for="upload-photo" mat-stroked-button class="upload-btn"
                                         (click)="file.click()">
 
