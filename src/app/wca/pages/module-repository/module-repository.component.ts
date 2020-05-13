@@ -5,7 +5,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-module-repository',
   templateUrl: './module-repository.component.html',
-  styleUrls: ['./module-repository.component.css']
+  styleUrls: ['./module-repository.component.scss']
 })
 export class ModuleRepositoryComponent implements OnInit {
 
