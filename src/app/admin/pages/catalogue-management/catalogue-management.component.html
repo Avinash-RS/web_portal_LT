@@ -13,10 +13,9 @@ navigate by url -- Admin/auth/catalogue -->
 
       <!-- Mat tree code here ( left hand side) -->
       <div class="card col-3 cardheight">
+        <!-- view category and sub category -->
       </div>
-
       <!-- end of Mat tree code here ( left hand side) -->
-
 
       <!-- start of right hand side card view -->
 
@@ -26,7 +25,7 @@ navigate by url -- Admin/auth/catalogue -->
 
         <mat-toolbar color="primary">
           <span class="navigation-buttons"></span>
-          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd()">
+          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd();">
             <span class="material-icons" style="vertical-align: middle;">add</span>Add
           </button>
           <button mat-raised-button class="edit-btn toolbar-btn">
@@ -71,7 +70,9 @@ navigate by url -- Admin/auth/catalogue -->
 
 
       <!-- start of Add Catagory code  -->
-
+      <div *ngIf="showAddCat">
+        Add category works
+      </div>
       <!-- end of Add Catagory code  -->
 
 

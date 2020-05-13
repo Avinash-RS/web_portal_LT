@@ -13,6 +13,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
+  showAddCat : boolean = false;
   // userDetailes: any;
   // allcourses: any;
 
@@ -26,7 +27,8 @@ export class CatalogueManagementComponent implements OnInit {
 
   }
   gotoAdd() {
-    console.log("Add works")
+    console.log("Add works");
+    this.showAddCat = !this.showAddCat;
   }
 
   gotoEdit() {
