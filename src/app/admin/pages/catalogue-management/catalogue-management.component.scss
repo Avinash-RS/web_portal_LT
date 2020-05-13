@@ -1,7 +1,34 @@
 @import "variable";
 
+.row {
+    margin: 0px;
+}
 
+textarea:focus,
+input:focus {
+    outline: none;
+}
 
+.inputs {
+    border: 1.0px solid $color-blue !important;
+    padding: 8px !important;
+}
+
+.error_msg {
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.img1 {
+    vertical-align: middle;
+    width: 75px;
+    border-color: $color-field;
+    background: $color-field;
+}
+
+.marginClass {
+    margin: 20px 11px 10px 5px !important;
+}
 .card {
     background: #fff;
     border-radius: 2px;
@@ -17,7 +44,7 @@
 
 
 .cardheight {
-    height: 470px !important;
+    height: 600px !important;
 }
 
 .m-t-20 {

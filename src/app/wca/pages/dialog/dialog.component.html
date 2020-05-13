@@ -1,48 +1,45 @@
 <div>
     <ng-container *ngIf="dialogdata?.type === 'CreateTemplate'">
         <form [formGroup]="templateForm" (ngSubmit)="templateName()">
-    
+
             <div class="dialogClose">
                 <span (click)="dialogClose()"> <img class="dialogClose1" src="assets\images\dialog close.svg"> </span>
             </div>
-    
+
             <div>
-              <div class="tempBody">
-                    <input class="Bcg" placeholder="Enter the Template Name" maxlength="35"  type="text" formControlName="tempName">
-    
+                <div class="tempBody">
+                    <input class="Bcg" placeholder="Enter the Template Name" maxlength="35" type="text"
+                        formControlName="tempName">
+
                 </div>
             </div>
-          
-            
-            <div class="row btnDiv" >
-                <button class="btnCSS" type="button" (click)="templateName()"  small mat-raised-button>Submit</button>
+
+
+            <div class="row btnDiv">
+                <button class="btnCSS" type="button" (click)="templateName()" small mat-raised-button>Submit</button>
             </div>
         </form>
-    
+
     </ng-container>
-    
-    
+
+
     <ng-container *ngIf="dialogdata?.type === 'previewImages'">
-       <div>
-        <div class="dialogClose">
-            <span (click)="dialogClose()"> <img class="dialogClose2"  src="assets\images\dialog close.svg"> </span>
+        <div>
+            <div class="dialogClose">
+                <span (click)="dialogClose()"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
+            </div>
+
+
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dialogdata.images"
+                [cdkDropListConnectedTo]="[todoList]" cdkDropListOrientation="horizontal"
+                (cdkDropListDropped)="drop($event)">
+
+                <div class="prew1 ">
+                    <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
+                        <img height="100%" width="100%" [src]="i">
+                    </mat-card>
+                </div>
+            </div>
         </div>
-    
-
-        <div
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="dialogdata.images"
-        [cdkDropListConnectedTo]="[todoList]"
-        cdkDropListOrientation="horizontal"
-        (cdkDropListDropped)="drop($event)">
-
-        <div class="prew1 ">
-            <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
-             <img height="100%" width="100%" [src]="i">
-        </mat-card>
-    </div>
-       </div>
-    </div>
     </ng-container>
 </div>

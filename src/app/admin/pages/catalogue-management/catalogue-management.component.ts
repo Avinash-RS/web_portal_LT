@@ -4,7 +4,8 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
+import * as myGlobals from '@core/globals';
 
 @Component({
   selector: 'app-catalogue-management',
@@ -13,7 +14,9 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
-  showAddCat : boolean = false;
+  showAddCat: boolean = false;
+  showHome: boolean = true;
+  addCategoryForm: any;
   // userDetailes: any;
   // allcourses: any;
 
@@ -24,11 +27,26 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.addCategoryForm = this.formBuilder.group({
+      categoryName: new FormControl('', myGlobals.req),
+      categoryDescription: new FormControl('', myGlobals.req),
+      categoryImage: ['', myGlobals.req]
+    });
   }
+
   gotoAdd() {
+    this.addCategoryForm = this.formBuilder.group({
+      categoryName: new FormControl('', myGlobals.req),
+      categoryDescription: new FormControl('', myGlobals.req),
+      categoryImage: ['', myGlobals.req]
+    });
     console.log("Add works");
     this.showAddCat = !this.showAddCat;
+    this.showHome = false;
+  }
+
+  get f() {
+    return this.addCategoryForm.controls;
   }
 
   gotoEdit() {

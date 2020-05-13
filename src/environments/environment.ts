@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
 
-  // apiUrl: 'http://40.76.47.212:3000/', old dev now uat
+  apiUrl: 'http://40.76.47.212:3000/', //old dev now uat
  
-  apiUrl: ' http://20.44.36.44:3000/', //new dev
+  // apiUrl: 'http://20.44.41.200:3000/', //new dev
   scormUrl:'http://40.76.47.212:8080/',
   apiUrlImg:'http://40.76.47.212:3000/',
   createCourseApi:'http://40.76.47.212:3002/',

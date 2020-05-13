@@ -25,7 +25,7 @@ navigate by url -- Admin/auth/catalogue -->
 
         <mat-toolbar color="primary">
           <span class="navigation-buttons"></span>
-          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd();">
+          <button mat-raised-button class="add-btn toolbar-btn" (click)="gotoAdd()">
             <span class="material-icons" style="vertical-align: middle;">add</span>Add
           </button>
           <button mat-raised-button class="edit-btn toolbar-btn">
@@ -36,7 +36,7 @@ navigate by url -- Admin/auth/catalogue -->
           </button>
         </mat-toolbar>
         <br><br><br>
-        <div class="landing-background">
+        <div class="landing-background" *ngIf="showHome">
           <div class="landing-text">
             <p>
               <mat-icon>done</mat-icon>Add categories upto 3 levels
@@ -51,38 +51,88 @@ navigate by url -- Admin/auth/catalogue -->
             </p>
           </div>
         </div>
+
+
+        <!-- start of navigations ( engineering > electronics > nano electronics) -->
+
+        <!-- end of navigations ( engineering > electronics > nano electronics) -->
+
+        <!-- <hr> -->
+
+        <!-- start of buttons (add, edit, dlt) -->
+
+        <!-- end of buttons (add, edit, dlt) -->
+
+
+        <!-- start of landing 3 line rules -->
+
+        <!-- end of landing 3 line rules -->
+
+
+        <!-- start of Add Catagory code  -->
+        <div *ngIf="showAddCat">
+          <form [formGroup]="addCategoryForm">
+            <div class="row">
+              <div class="col-md-4 col-sm-10 col-10 m-l-5">
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category*"
+                  [ngClass]="{ 'is-invalid': f.categoryName.touched && f.categoryName.errors }"
+                  formControlName="categoryName">
+                <div *ngIf="f.categoryName.touched && f.categoryName.errors" class="invalid-feedback">
+                  <div *ngIf="f.categoryName.errors.required">* Category Name is required</div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-11 m-l-5 col-sm-10 col-10">
+                <div class="form-group">
+                  <textarea style="resize: none;" rows="5"
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
+                    [ngClass]="{ 'is-invalid': f.categoryDescription.touched && f.categoryDescription.errors }"
+                    placeholder="Description *" formControlName="categoryDescription"
+                    name="categoryDescription"></textarea>
+                  <div *ngIf="f.categoryDescription.touched && f.categoryDescription.errors" class="error_msg">
+                    <div *ngIf="f.categoryDescription.errors.required">* Category Description is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 m-l-5 inputs border-radius-5">
+                <div class="row">
+                  <div class="col-md-5">
+                    <input style="display: none;" id="fileInput" type='file' #fileInput
+                      (change)="onSelectFile($event,'img1')" placeholder="Category Image*">
+                    <img class="img1 marginClass" (click)="fileInput.click()" [src]="'assets/images/image_upload.svg'">
+                  </div>
+                  <div class="col-md-7 center f_size_12">
+                    Click here
+                    <br>
+                    Or
+                    <br>
+                    Drag and drop here
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <button id="addUser" mat-stroked-button [disabled]="addCategoryForm.invalid" class="width_70 center"
+              (click)="addUser()">Add
+              User</button>
+            <br>
+          </form>
+        </div>
+        <!-- end of Add Catagory code  -->
+
+
+        <!-- start of view courses -->
+
+        <!-- end of view courses -->
+
+
+        <!-- end of right hand side card view -->
       </div>
-
-      <!-- start of navigations ( engineering > electronics > nano electronics) -->
-
-      <!-- end of navigations ( engineering > electronics > nano electronics) -->
-
-      <!-- <hr> -->
-
-      <!-- start of buttons (add, edit, dlt) -->
-
-      <!-- end of buttons (add, edit, dlt) -->
-
-
-      <!-- start of landing 3 line rules -->
-
-      <!-- end of landing 3 line rules -->
-
-
-      <!-- start of Add Catagory code  -->
-      <div *ngIf="showAddCat">
-        Add category works
-      </div>
-      <!-- end of Add Catagory code  -->
-
-
-      <!-- start of view courses -->
-
-      <!-- end of view courses -->
-
-
-      <!-- end of right hand side card view -->
-
     </div>
   </div>
 </div>
