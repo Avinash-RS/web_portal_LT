@@ -6,7 +6,7 @@ import {
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
-  , getnotificationreports, get_draft_course
+  , getnotificationreports, get_draft_course, getcategoryadmin
 } from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -242,6 +242,17 @@ export class AdminServicesService {
       }
     });
   }
+
+getcategories(pgnumber) {
+  console.log(pgnumber);
+  return this.Apollo.query({
+    query: getcategoryadmin,
+    variables: {
+    pagenumber : pgnumber
+    }
+  });
+}
+
   // $input_name: String,
   // $input_description: String,
   // $input_image: String,

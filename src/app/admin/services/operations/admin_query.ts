@@ -627,3 +627,25 @@ export const publishcourse = gql`
       error_msg
     }
   }`;
+
+export const getcategoryadmin = gql`
+   query getcategoryadmin($pagenumber: Int!) {
+    getcategoryadmin(pagenumber: $pagenumber){
+        success
+        error_msg
+        message{
+              _id
+              creator_id
+              level
+              created_on
+              updated_on
+              created_by
+              language_code
+              is_active
+              category_id
+              category_name
+              category_image
+              category_description
+        }
+    }
+}`;

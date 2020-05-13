@@ -29,6 +29,7 @@ export class CatalogueManagementComponent implements OnInit {
   categories: any;
   courses: any;
   selectedArray: any = [];
+  pagenumber = 0;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -114,9 +115,20 @@ export class CatalogueManagementComponent implements OnInit {
 
   getallcategories() {
     this.treeSource.data = null;
+    this.pagenumber = 0;
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any ) => {
+console.log(result.data);
+    });
     // this.treeSource.data = this.categories;
     // this.dataSource$.next(this.categories);
 
+  }
+
+  /**
+   * on file drop handler
+   */
+  onFileDropped($event) {
+    console.log($event)
   }
 
   gotoAdd() {
@@ -154,6 +166,7 @@ export class CatalogueManagementComponent implements OnInit {
   uploadFile(fileInput: any) {
     this.loading = true;
     console.log(fileInput)
+    debugger
     if (fileInput && fileInput.target && fileInput.target.files[0]) {
       var selectfile = <File>fileInput.target.files[0];
       if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
