@@ -23,6 +23,7 @@ import { PublishCourseComponent } from '@admin/pages/publish-course/publish-cour
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
+import {  DndDirective } from '../core/dnd.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -83,7 +84,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [CatalogueManagementComponent,AuthComponent,UserManagementComponent,ReportManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
+    declarations: [DndDirective,CatalogueManagementComponent,AuthComponent,UserManagementComponent,ReportManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
