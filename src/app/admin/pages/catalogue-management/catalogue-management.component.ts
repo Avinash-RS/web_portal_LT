@@ -6,7 +6,9 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-
+import { BehaviorSubject } from 'rxjs';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material';
 @Component({
   selector: 'app-catalogue-management',
   templateUrl: './catalogue-management.component.html',
@@ -23,7 +25,16 @@ export class CatalogueManagementComponent implements OnInit {
   selectedCategory: any = null;
   selectedSubCategory: any = null;
   loading: boolean;
+  categories: any;
+  // userDetailes: any;
+  // allcourses: any;
 
+ /** tree source stuff */
+ readonly dataSource$: BehaviorSubject<any[]>;
+ readonly treeSource: MatTreeNestedDataSource<any>;
+ /** tree control */
+ readonly treeControl = new NestedTreeControl<any>(node => node.children);
+ readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   // userDetailes: any;
   // allcourses: any;
 
@@ -32,9 +43,29 @@ export class CatalogueManagementComponent implements OnInit {
   ) {
     this.adminDetails = this.gs.checkLogout();
     console.log(this.adminDetails)
+    this.treeSource = new MatTreeNestedDataSource<any>();
+    this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
+    this.addCategoryForm = this.formBuilder.group({
+      categoryName: new FormControl('', myGlobals.req),
+      categoryDescription: new FormControl('', myGlobals.req),
+      categoryImage: ['', myGlobals.req]
+    });
+    this.addSubCategoryForm = this.formBuilder.group({
+      subCategoryName: new FormControl('', myGlobals.req),
+      subCategoryDescription: new FormControl('', myGlobals.req),
+      subCategoryImage: ['', myGlobals.req]
+    });
+    this.getallcategories();
+  }
+
+  getallcategories() {
+    this.treeSource.data = null;
+    // this.treeSource.data = this.categories;
+    // this.dataSource$.next(this.categories);
+
   }
 
   gotoAdd() {

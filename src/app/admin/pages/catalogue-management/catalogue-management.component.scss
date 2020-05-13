@@ -151,3 +151,44 @@ hr {
     align-items: center;
     justify-content: center;
   }
+//tree
+.mat-tree-node {
+    min-height: 35px;
+  }
+  
+  mat-tree {
+  
+    ul,
+    li {
+      margin-top: 0;
+      margin-bottom: 0;
+      list-style-type: none;
+    }
+  }
+  
+  .children-invisible {
+    display: none;
+  }
+
+  .newstyle {
+    .btnClassicon {
+      width: 22px; 
+    }
+  }
+
+  :host ::ng-deep mat-checkbox .mat-checkbox-layout {
+    margin: 0px !important;
+  }
+  
+  :host ::ng-deep mat-checkbox .mat-checkbox-frame {
+    border: 0px;
+    background-color: rgb(197, 215, 252) !important;
+  
+  }
+  
+  :host ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+  :host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+    background-color: #437891 !important;
+  
+  }
+  
