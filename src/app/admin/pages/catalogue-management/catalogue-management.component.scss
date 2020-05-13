@@ -52,7 +52,7 @@ input:focus {
 }
 
 .m-r-20 {
-    margin-top: 20px;
+    margin-right: 20px;
 }
 
 .p-30 {
@@ -68,6 +68,7 @@ input:focus {
 .header-line {
     margin-left: 20px;
     margin-right: 20px;
+    padding-top: 0;
 }
 
 hr {
@@ -125,3 +126,8 @@ hr {
     padding-right: 80px;
     vertical-align: middle;
 }
+
+// .category-nav {
+//     background-color: none !important;
+
+// }
