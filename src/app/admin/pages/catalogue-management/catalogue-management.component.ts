@@ -160,9 +160,9 @@ export class CatalogueManagementComponent implements OnInit {
       parent_sub_category_id:  "null",
     }
     console.log(category)
-    // this.adminservice.createCatalogue(category).subscribe((result: any) => {
-    //   console.log()
-    // });
+    this.adminservice.createCatalogue(category).subscribe((result: any) => {
+      console.log()
+    });
   }
   // gotoedit() {
   //   console.log(this.userDetailes.group_id[0])
