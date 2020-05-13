@@ -120,7 +120,7 @@
                     <div class="col-md-4">
                       <div class="mainImage">
                         <span>
-                          <input style="display: none;" id="fileInput" type='file' #fileInput
+                          <input hidden id="fileInput" type='file' #fileInput
                             (change)="onSelectFile($event,'img1')"> <img
                             class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
                             [src]="courseForm?.value?.course_img_url ? courseForm?.value?.course_img_url : '../../../../assets/images/image_upload.svg'">

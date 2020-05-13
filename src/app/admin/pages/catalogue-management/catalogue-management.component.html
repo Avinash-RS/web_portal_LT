@@ -112,14 +112,14 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3 m-l-5 inputs border-radius-5">
+              <div class="col-md-3 m-l-5 inputs border-radius-5" appDnd  (click)="fileInput.click()" (fileDropped)="uploadFile($event)" >
                 <div class="row">
-                  <div class="col-md-5">
-                    <input style="display: none;" id="fileInput" type='file' #fileInput
-                      (change)="onSelectFile($event,'img1')" placeholder="Category Image*">
-                    <img class="img1 marginClass" (click)="fileInput.click()" [src]="'assets/images/image_upload.svg'">
+                  <div class="col-md-5 pointer">
+                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg" id="fileInput" 
+                    type='file' >
+                    <img class="img1 marginClass" [src]="'assets/images/image_upload.svg'">
                   </div>
-                  <div class="col-md-7 center f_size_12">
+                  <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
                     Click here
                     <br>
                     Or
@@ -129,11 +129,20 @@ navigate by url -- Admin/auth/catalogue -->
                 </div>
               </div>
             </div>
-
             <br>
-            <!-- <button id="addUser" mat-stroked-button [disabled]="addCategoryForm.invalid" class="width_70 center"
-              (click)="addUser()">Add
-              User</button> -->
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addUser" mat-stroked-button [disabled]="addCategoryForm.invalid" 
+                class="width_80 border-radius-5 background-blue color_white center"
+                  (click)="addUser()">Save</button>
+              </div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addUser" mat-stroked-button class="width_80 border-radius-5 center"
+                  (click)="addUser()">Cancel</button>
+              </div>
+            </div>
+
             <br>
           </form>
         </div>

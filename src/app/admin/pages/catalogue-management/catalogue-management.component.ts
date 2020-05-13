@@ -14,8 +14,8 @@ import * as myGlobals from '@core/globals';
 })
 export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
-  showAddCat: boolean = false;
-  showHome: boolean = true;
+  showAddCat: boolean = true;
+  showHome: boolean = false;
   addCategoryForm: any;
   // userDetailes: any;
   // allcourses: any;
@@ -47,6 +47,31 @@ export class CatalogueManagementComponent implements OnInit {
 
   get f() {
     return this.addCategoryForm.controls;
+  }
+
+  uploadFile(fileInput: any) {
+    console.log(fileInput)
+    if (fileInput && fileInput.target && fileInput.target.files[0]) {
+      var selectfile = <File>fileInput.target.files[0];
+      if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
+        this.alert.openAlert('Image should only be Jpeg or png format', null)
+      }
+      // else if (selectfile && selectfile.size > 100000) {
+      //   this.alert.openAlert('Image should be less than 1 MB', null)
+      // }
+      else {
+        if (selectfile) {
+          console.log(selectfile,selectfile.name)
+          const fb = new FormData();
+          // fb.append('image', this.selectfile, this.selectfile.name)
+          // this.service.imageupload(fb).subscribe(data => {
+          //   this.profileForm.controls['profile_img'].setValue(data);
+          //   localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path)
+          //   this.profileForm.controls['profile_img'].setValue(localStorage.getItem('user_img'))
+          // })
+        }
+      }
+    }
   }
 
   gotoEdit() {
