@@ -1,5 +1,5 @@
-@import "variable";
-
+// @import "variable";
+@import "../../../../assets/variable.scss";
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
