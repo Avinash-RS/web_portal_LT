@@ -13,9 +13,9 @@ export class ViewModuleComponent implements OnInit {
   queryData: any;
   courseDetails: any;
   isFileContent = false;
-  scormCourse: any;
-  scormPath: string;
+  scormPath: string = '';
   @ViewChild('file') fileUploaded;
+  userDetails: any;
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -36,6 +36,7 @@ export class ViewModuleComponent implements OnInit {
         this.queryData = params;
       }
     });
+    this.userDetails = JSON.parse(localStorage.getItem('adminDetails'))
   }
 
 
@@ -55,7 +56,6 @@ export class ViewModuleComponent implements OnInit {
 
   onUploadDoc(fileList: FileList): void {
     let file = fileList[0];
-    this.scormCourse = '';
     let fileReader: FileReader = new FileReader();
     let that = this;
     that.isFileContent = false;
@@ -73,15 +73,35 @@ export class ViewModuleComponent implements OnInit {
   }
 
   uploadDoc(file) {
-    this.scormCourse = file;
+    let scormCourse = file;
     const formData = new FormData();
-    formData.append('file', this.scormCourse);
+    formData.append('scrom', scormCourse);
     this.wcaService.uploadScromCourse(formData).subscribe((data: any) => {
-      this.scormPath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
-      debugger
+      this.scormPath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
     }, error => {
+      this.scormPath = '';
       this.fileUploaded.nativeElement.value = '';
       this.toast.warning('oops someting went wrong. Try again!!!')
+    })
+  }
+
+  onCreate() {
+    let data = {
+      "coursename": this.queryData.courseName,
+      "coursefile": this.scormPath,
+      "coursestatus": "true",
+      "courseid": this.queryData.viewingModule,
+      "coursetype": "SCORM",
+      "coursedetails": [],
+      "createdby_name": this.userDetails.username,
+      "createdby_id": this.userDetails.user_id,
+      "createdby_role": localStorage.getItem('role')
+    }
+
+    this.wcaService.createDraft(data).subscribe((res: any) => {
+      if (res.Code == 200) {
+        this.router.navigate(['/Admin/auth/Wca']);
+      }
     })
   }
 
