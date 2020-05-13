@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '../../services/wca.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-view-module',
@@ -78,6 +79,9 @@ export class ViewModuleComponent implements OnInit {
     this.wcaService.uploadScromCourse(formData).subscribe((data: any) => {
       this.scormPath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
       debugger
+    }, error => {
+      this.fileUploaded.nativeElement.value = '';
+      this.toast.warning('oops someting went wrong. Try again!!!')
     })
   }
 
