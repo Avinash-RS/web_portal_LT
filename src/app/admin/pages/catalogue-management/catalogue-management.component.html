@@ -150,7 +150,68 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- end of Add Catagory code  -->
 
         <!-- start of Add Sub Catagory code  -->
+        <div *ngIf="showAddSubCat">
+          <form [formGroup]="addSubCategoryForm">
+            <div class="row">
+              <div class="col-md-4 col-sm-10 col-10 m-l-5">
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory*"
+                  [ngClass]="{ 'is-invalid': f.subCategoryName.touched && f.subCategoryName.errors }"
+                  formControlName="subCategoryName">
+                <div *ngIf="f.subCategoryName.touched && f.subCategoryName.errors" class="invalid-feedback">
+                  <div *ngIf="f.subCategoryName.errors.required">* Sub Category Name is required</div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-11 m-l-5 col-sm-10 col-10">
+                <div class="form-group">
+                  <textarea style="resize: none;" rows="5"
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
+                    [ngClass]="{ 'is-invalid': f.subCategoryDescription.touched && f.subCategoryDescription.errors }"
+                    placeholder="Description *" formControlName="subCategoryDescription"
+                    name="subCategoryDescription"></textarea>
+                  <div *ngIf="f.subCategoryDescription.touched && f.subCategoryDescription.errors" class="error_msg">
+                    <div *ngIf="f.subCategoryDescription.errors.required">* Sub Category Description is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 m-l-5 inputs border-radius-5" appDnd (click)="fileInput.click()"
+                (fileDropped)="uploadFile($event)">
+                <div class="row">
+                  <div class="col-md-5 pointer">
+                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg"
+                      id="fileInput" type='file'>
+                    <img class="img1 marginClass" [src]="'assets/images/image_upload.svg'">
+                  </div>
+                  <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
+                    Click here
+                    <br>
+                    Or
+                    <br>
+                    Drag and drop here
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid"
+                  class="width_80 border-radius-5 background-blue color_white center" (click)="addSubCategory()">Save</button>
+              </div>
+              <div class="col-md-2 center col-sm-6 col-6">
+                <button id="addUser" mat-stroked-button class="width_80 border-radius-5 center"
+                  (click)="addSubCategory()">Cancel</button>
+              </div>
+            </div>
 
+            <br>
+          </form>
+        </div>
         <!-- end of Add Sub Catagory code  -->
 
         <!-- start of view courses -->

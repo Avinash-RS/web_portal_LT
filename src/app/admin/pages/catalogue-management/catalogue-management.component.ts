@@ -14,9 +14,11 @@ import * as myGlobals from '@core/globals';
 })
 export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
-  showAddCat: boolean = true;
+  showAddCat: boolean = false;
+  showAddSubCat: boolean = true;
   showHome: boolean = false;
   addCategoryForm: any;
+  addSubCategoryForm : any;
   // userDetailes: any;
   // allcourses: any;
 
@@ -32,6 +34,11 @@ export class CatalogueManagementComponent implements OnInit {
       categoryDescription: new FormControl('', myGlobals.req),
       categoryImage: ['', myGlobals.req]
     });
+    this.addSubCategoryForm = this.formBuilder.group({
+      subCategoryName: new FormControl('', myGlobals.req),
+      subCategoryDescription: new FormControl('', myGlobals.req),
+      subCategoryImage: ['', myGlobals.req]
+    });
   }
 
   gotoAdd() {
@@ -40,13 +47,24 @@ export class CatalogueManagementComponent implements OnInit {
       categoryDescription: new FormControl('', myGlobals.req),
       categoryImage: ['', myGlobals.req]
     });
+    this.addSubCategoryForm = this.formBuilder.group({
+      subCategoryName: new FormControl('', myGlobals.req),
+      subCategoryDescription: new FormControl('', myGlobals.req),
+      subCategoryImage: ['', myGlobals.req]
+    });
     console.log("Add works");
     this.showAddCat = !this.showAddCat;
+    this.showAddSubCat = !this.showAddSubCat;
     this.showHome = false;
   }
 
   get f() {
-    return this.addCategoryForm.controls;
+    if(this.showAddCat == true){
+      return this.addCategoryForm.controls;
+    }
+    else if(this.showAddSubCat == true){
+      return this.addSubCategoryForm.controls;
+    }
   }
 
   uploadFile(fileInput: any) {
