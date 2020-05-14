@@ -59,7 +59,8 @@ navigate by url -- Admin/auth/catalogue -->
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
-          <li class="breadcrumb-item"  *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;else">{{selectedCategory?.category_name || 'Category'}}</li>
+          <li class="breadcrumb-item" *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;else">
+            {{selectedCategory?.category_name || 'Category'}}</li>
           <li *ngIf="selectedSubCategory" class="breadcrumb-item">{{selectedSubCategory.sub_category_name}}</li>
           <!-- <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li> -->
         </ol>
@@ -72,7 +73,8 @@ navigate by url -- Admin/auth/catalogue -->
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
             <span class="f_size_16 f_wt_500 m-l-5 color_grey">
               {{selectedCategory?.category_name}}
-              <span class="material-icons none" style="vertical-align: middle;" *ngIf="selectedCategory?.category_description != undefined"
+              <span class="material-icons none" style="vertical-align: middle;"
+                *ngIf="selectedCategory?.category_description != undefined"
                 matTooltip="{{selectedCategory?.category_description || 'Category Description'}}">info_outline</span>
             </span>
 
@@ -266,7 +268,7 @@ navigate by url -- Admin/auth/catalogue -->
             </div>
             <br>
           </form>
-        </div> 
+        </div>
         <!-- end of Add Sub Catagory code  -->
 
         <!-- start of view courses -->
@@ -297,11 +299,14 @@ navigate by url -- Admin/auth/catalogue -->
               <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
                 [rowspan]="1">
                 <mat-card class="course-card  font-display">
-                  <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
-                    src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <!-- select image overlay -->
+                  <div class="container-fluid">
+                    <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
+                      src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
+                    <!-- select image overlay -->
+                  </div>
                   <div class="overlay">
-                    <mat-icon class="Select-image">done</mat-icon>
+                    <mat-icon class="Select-image" style="text-align: center; color: azure; font-size: larger;">done
+                    </mat-icon>
                   </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>
