@@ -168,16 +168,19 @@
   <button class="submit" (click)="getCategory(getCategoryDialog)" > Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <button class="submit"  > Filter
+    <button class="submit" (click)="filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
-
-    <button class="submit" (click)="sorting()"  > Sort       
+    <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort
       <i class="fa fa-chevron-down colrr"></i>
     </button>
+    <mat-menu #Sort="matMenu">
+      <button mat-menu-item (click)="sorting('A-Z')">A-Z</button>
+      <button mat-menu-item (click)="sorting('Z-A')">Z-A</button>
+    </mat-menu>
+
     </div>
     <div class="col-md-2 col-sm-12 col-12">
-
       <button class="icon_fnt" mat-button (click)="onDisplayModeChange(1)">
         <mat-icon class="icon">view_module</mat-icon>
     </button>
@@ -185,10 +188,23 @@
     <button class="icon_fnt" mat-button (click)="onDisplayModeChange(2)"> 
       <mat-icon>menu</mat-icon>
   </button>
-    <!-- <button class="icon_fnt"  (click)="onDisplayModeChange(2)"
-      [ngClass]="{'btn-primary active': displayMode === 2}">
-      <i class="fa fa-list colr"></i>
-    </button> -->
+    </div>
+  </div>
+  <br>
+
+  <div class="row box" *ngIf = "showAppliedFiltre">
+    <div class="col-2">
+      <h3 class="text">Applied Filters : </h3>
+    </div>
+
+    <div class="col-8">
+      
+    </div>
+
+    <div class="col-2">
+      <div class = "smallline"></div> 
+      <h3 class="text2"> Clear All Filters </h3>
+     
     </div>
   </div>
 
@@ -197,61 +213,55 @@
 
 <div class="container">
   <br>
-  <!-- grid -->
-  <!-- <div class="row">
-    <div class="col-4">
 
+  <div class="row">
+    <div class="col-3"  *ngIf="showAppliedFiltre" >
+      <div class="container1 containerShadow">
+        <h3>Language</h3>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of checklist">
+            <label class="container1">
+            <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
+            {{item.value}}
+            <span class="checkmark"></span></label>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <div class="col-8">
-      
-    </div>
-  </div> -->
-
-
-  <div class="container containerShadow">
-    <div class="row" *ngIf="displayMode === 1">
-      <ng-container
-        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <div class="col-md-6 col-lg-3 col-sm-12">
-          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-            [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
-        </div>
-      </ng-container>
-      <br>
-    </div>
-
-
-    <div class="row" *ngIf="displayMode === 2">
-      <!-- <div class="col-md-12 width_90 center" *ngFor="let c of allcourses   | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
-          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-          [showWishlist]="true" [showStatus]="false"> </app-course-component>
-        </mat-card>
-        <br><br>
-      </div> -->
-
-      <ng-container
-        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
-          <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-            [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
-            [goto]="goto" [showDate]="true">
-          </app-list-view-course-component>
+    <div class="col-9">
+      <div class="container containerShadow">
+        <div class="row" *ngIf="displayMode === 1">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-md-6 col-lg-3 col-sm-12">
+              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+            </div>
+          </ng-container>
           <br>
         </div>
-      </ng-container>
+        <div class="row" *ngIf="displayMode === 2">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+                [goto]="goto" [showDate]="true">
+              </app-list-view-course-component>
+              <br>
+            </div>
+          </ng-container>
+        </div>
+    
+      </div>
     </div>
-
   </div>
+
   <br>
   <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
   </pagination-controls>
 
   <ng-template #getCategoryDialog>
-    <!-- <button mat-icon-button >
-      <mat-icon style="text-align:right" (click)="closedialogbox()">close</mat-icon>
-    </button> -->
     <mat-dialog-content >
     <div class="row">
       <div class="col-4">
@@ -265,16 +275,13 @@
           <div class="col-md-8">
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of checklist">
-                    <label class="container">
+                    <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
                     {{item.value}}
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
           </div>
-          <!-- <div class="col-md-6">
-             
-          </div> -->
       </div>
 
       </div>
