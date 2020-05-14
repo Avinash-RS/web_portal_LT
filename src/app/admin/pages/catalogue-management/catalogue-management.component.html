@@ -365,10 +365,11 @@ navigate by url -- Admin/auth/catalogue -->
                     <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
                       src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
                     <!-- select image overlay -->
-                  </div>
-                  <div class="overlay">
-                    <!-- <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
+
+                    <div class="overlay">
+                      <!-- <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
                     </mat-icon> -->
+                    </div>
                   </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>
