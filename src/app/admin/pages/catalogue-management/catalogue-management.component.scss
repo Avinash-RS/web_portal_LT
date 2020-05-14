@@ -63,6 +63,7 @@ input:focus {
 .imgHt {
     height: 90px;
 }
+
 .m-t-20 {
     margin-top: 20px;
 }
@@ -172,6 +173,9 @@ hr {
 
 .course-card {
     box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
 }
 
 .font-display {
@@ -215,6 +219,9 @@ hr {
 }
 
 // select image overlay
+
+
+
 .overlay {
     position: absolute;
     bottom: 0;
@@ -223,8 +230,10 @@ hr {
     width: 100%;
     height: 100%;
     opacity: 0.3;
-}
+    margin: 0 !important;
+    padding: 0 !important;
 
+}
 
 .spinner-container {
     position: absolute;

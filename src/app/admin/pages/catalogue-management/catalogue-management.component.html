@@ -299,11 +299,14 @@ navigate by url -- Admin/auth/catalogue -->
               <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
                 [rowspan]="1">
                 <mat-card class="course-card  font-display">
-                  <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
-                    src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <!-- select image overlay -->
+                  <div class="container-fluid">
+                    <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
+                      src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
+                    <!-- select image overlay -->
+                  </div>
                   <div class="overlay">
-                    <mat-icon class="Select-image">done</mat-icon>
+                    <mat-icon class="Select-image" style="text-align: center; color: azure; font-size: larger;">done
+                    </mat-icon>
                   </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>
