@@ -24,7 +24,7 @@ navigate by url -- Admin/auth/catalogue -->
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+              <mat-checkbox [multiple]="false" [checked]="selected === node" (change)="selected = node" name="checkbox"
                 [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}}
                 {{node?.sub_category_name}}</mat-checkbox>
 
@@ -63,9 +63,9 @@ navigate by url -- Admin/auth/catalogue -->
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
-          <li *ngIf="selectedCategory" class="breadcrumb-item">{{selectedCategory.category_name}}</li>
+          <li class="breadcrumb-item">{{selectedCategory?.category_name || 'Category'}}</li>
           <li *ngIf="selectedSubCategory" class="breadcrumb-item">{{selectedSubCategory.sub_category_name}}</li>
-          <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li>
+          <!-- <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li> -->
         </ol>
         <!-- end of navigations ( engineering > electronics > nano electronics) -->
 
@@ -74,15 +74,17 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- start of buttons (add, edit, dlt) -->
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
-            <span *ngIf="selectedcategory" class="f_size_16 f_wt_500 m-l-5 color_grey">
-              {{selectedCategory?.category_description}}
-              <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="Click here to change profile details">info_outline</span></span>
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey">
+              {{selectedCategory?.category_name}}
+              <span class="material-icons none" style="vertical-align: middle;" 
+                matTooltip="{{selectedCategory?.category_description}}">info_outline</span>
+            </span>
 
-            <span *ngIf="selectedSubCategory" class="f_size_16 f_wt_500 m-l-5 color_grey">
-              {{selectedSubCategory ?.sub_category_description}}
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey">
+              {{selectedSubCategory ?.sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="Click here to change profile details">info_outline</span></span>
+                matTooltip="{{selectedSubCategory ?.sub_category_description}}">info_outline</span>
+            </span>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
