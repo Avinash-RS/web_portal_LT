@@ -139,7 +139,7 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- start of landing 3 line rules -->
        
         <div class="m-l-20" *ngIf="showHome">
-          <br><br>
+          <br><br><br><br>
           <div class="landing-text landing-background">
             <p>
               <mat-icon class="m-b-10">done</mat-icon>Add categories upto 3 levels
@@ -405,7 +405,7 @@ navigate by url -- Admin/auth/catalogue -->
                 </div> -->
 
                 <img class="pointer m-b-10" src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <div class="overlay" *ngIf="courses.isChecked">
+                  <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
                     <img src="assets/courses/selectimagefull.png" width="100%" height="97%">
                   </div>
                 <div class="row m-b-10 color_blue width_80 f_wt_500 center_align center">
@@ -437,7 +437,7 @@ navigate by url -- Admin/auth/catalogue -->
       <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox()"></i>
     </span>
     <h2>Move {{selectedArray.length}} courses</h2>
-    <mat-dialog-content style="width: 850px; height: 350px;">
+    <mat-dialog-content style="width: 850px;">
       <div class="row ">
         <div class="col-md-3 m-b-10" *ngFor="let courseName of selectedArray;let j = index">
           <div class="center width_90 p-5px border border-radius-5">

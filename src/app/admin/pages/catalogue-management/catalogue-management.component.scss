@@ -188,7 +188,10 @@ hr {
 //     border-radius: 5px;
 //     margin-left: 5px;
 // }
-:host /deep/  .mat-form-field-flex {
+/deep/ .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex,
+.mat-form-field-flex,
+.mat-form-field-appearance-legacy .mat-form-field-infix,
+.mat-form-field-infix {
     cursor: pointer;
     background: aliceblue !important;
     border-radius: 5px !important;
@@ -198,9 +201,10 @@ hr {
 .width_35 {
     width: 35% !important;
 }
+
 .alert-btn {
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     right: 0;
 }
 
@@ -353,6 +357,7 @@ mat-tree {
 
 
 .containerOverlay {
+
     // width: 100%;
     .overlay {
         height: 80%;
