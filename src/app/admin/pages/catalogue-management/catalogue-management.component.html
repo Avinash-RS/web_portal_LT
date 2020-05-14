@@ -73,19 +73,26 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- start of buttons (add, edit, dlt) -->
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
-            <span class="f_size_16 f_wt_500 m-l-5 color_grey">
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey" *ngIf = "selectedCategory?.category_name != undefined && 
+            selectedSubCategory ?.sub_category_name == undefined && selectedSuperSubCategory ?.super_sub_category_name == undefined">
               {{selectedCategory?.category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
                 *ngIf="selectedCategory?.category_description != undefined"
                 matTooltip="{{selectedCategory?.category_description || 'Category Description'}}">info_outline</span>
             </span>
-
-            <!-- //commented for releasing category add -->
-            <!-- <span class="f_size_16 f_wt_500 m-l-5 color_grey">
-              {{selectedSubCategory ?.sub_category_name}}
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey" *ngIf = "selectedCategory?.category_name != undefined && 
+            selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name == undefined">
+              {{selectedSubCategory?.sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedSubCategory ?.sub_category_description}}">info_outline</span>
-            </span> -->
+                matTooltip="{{selectedSubCategory ?.sub_category_description || 'Sub Category Description'}}">info_outline</span>
+            </span>
+            <span class="f_size_16 f_wt_500 m-l-5 color_grey" *ngIf = "selectedCategory?.category_name != undefined && 
+            selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name != undefined">
+              {{selectedSuperSubCategory?.super_sub_category_name}}
+              <span class="material-icons none" style="vertical-align: middle;"
+                matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub Category Description'}}">info_outline</span>
+            </span>
+
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
@@ -104,8 +111,7 @@ navigate by url -- Admin/auth/catalogue -->
                 && !selectedCategory?.category_name) ||
                  (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' || addSubCategoryForm?.value?.sub_category_description != '')
                   && !selectedSubCategory?.sub_category_name) || 
-                  (addSuperSubCategoryForm && (addSuperSubCategoryForm?.value?.super_sub_category_name != '' ||
-                addSuperSubCategoryForm?.value?.super_sub_category_description != '') && !selectedSuperSubCategory?.super_sub_category_name)"
+                  (addSuperSubCategoryForm )"
                   class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add</button>
               </div>
