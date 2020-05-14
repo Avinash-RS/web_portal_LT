@@ -96,12 +96,13 @@ navigate by url -- Admin/auth/catalogue -->
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses || (addCategoryForm && (addCategoryForm?.value?.category_name != '' ||
+                <button mat-raised-button
+                  [disabled]="showCourses || (addCategoryForm && (addCategoryForm?.value?.category_name != '' ||
                 addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != '') 
                 && !selectedCategory?.category_name) || (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' ||
                 addCategoryForm?.value?.sub_category_description != '' && !selectedSubCategory?.category_name)) || (addSuperSubCategoryForm && (addSuperSubCategoryForm?.value?.super_sub_category_name != '' ||
                 addSuperSubCategoryForm?.value?.super_sub_category_description != ''  && !selectedSuperSubCategory?.category_name))"
-                class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
+                  class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add
                 </button>
               </div>
@@ -358,7 +359,7 @@ navigate by url -- Admin/auth/catalogue -->
             <mat-grid-list cols="4" rowheight="2:1.7" gutterSize="30px">
               <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
                 [rowspan]="1">
-                <mat-card class="course-card  font-display">
+                <mat-card class="course-card  font-display" (click)="selectCourse(courses,i+'c')">
                   <div class="container-fluid">
                     <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
                       src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">

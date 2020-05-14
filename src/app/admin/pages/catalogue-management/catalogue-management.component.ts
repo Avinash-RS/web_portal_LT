@@ -23,11 +23,11 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = true;
+  showHome: boolean = false;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
   showAddSuperSubCatForm : boolean = false;
-  showCourses: boolean = false;
+  showCourses: boolean = true;
   selectedCategory: any = {};
   selectedSubCategory: any = {};
   selectedSuperSubCategory: any = {};
