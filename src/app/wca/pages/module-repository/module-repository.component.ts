@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { WcaService } from '@wca/services/wca.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 
 @Component({
   selector: 'app-module-repository',
@@ -8,18 +10,27 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
   styleUrls: ['./module-repository.component.scss']
 })
 export class ModuleRepositoryComponent implements OnInit {
-  routeData: any; 
-  displayedColumns: string[] = ['modueName', 'courseName', 'createrName', 'createdOn','view','select'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+  routeData: any;
+  savedModules: any[] = [];
+  displayedColumns: string[] = ['modulename', 'coursename', 'createdby', 'createdon', 'view', 'select'];
+  dataSource = new MatTableDataSource<any>(this.savedModules);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private apiService: WcaService,
+    private alertService: AlertServiceService
   ) { }
 
   ngOnInit() {
+    this.savedModules = [{
+      coursename: "cname",
+      modulename: "name",
+      createdby: "",
+      createdon: "Date"
+    }];
     this.dataSource.paginator = this.paginator;
     this.route.queryParams.subscribe(params => {
       let flag = 0;
@@ -30,15 +41,28 @@ export class ModuleRepositoryComponent implements OnInit {
       }
       if (flag) {
         this.routeData = params;
+        this.getModules();
       }
     });
+
+  }
+
+  getModules() {
+    this.apiService.repositoryModules().subscribe((data: any) => {
+      data.Result.forEach((val) => {
+        val.createdon = val.createdon ? new Date(val.createdon) : '';
+      })
+      this.savedModules = data.Result;
+      this.dataSource = new MatTableDataSource<any>(this.savedModules);
+
+    })
+  }
+
+  onModuleSelection(selectedModule) {
+
+    this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
+      if (data) {
+      }
+    })
   }
 }
-  
-const ELEMENT_DATA: any[] = [
-  {modueName: "module01", courseName: 'course01', createrName: 'asok', createdOn: '28 Apr,2020'},
-  {modueName: "module02", courseName: 'course2', createrName: 'vijay', createdOn: '29 Apr,2020'},
-  {modueName: "module03", courseName: 'course2', createrName: 'pagal', createdOn: '1 Apr,2020'},
-  {modueName: "module04", courseName: 'course2', createrName: 'naren', createdOn: '2 Apr,2020'},
-  {modueName: "module05", courseName: 'course2', createrName: "rajesh", createdOn: '22 Apr,2020'}
-];

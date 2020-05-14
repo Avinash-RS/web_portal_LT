@@ -121,6 +121,10 @@ export class WcaService {
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
 
+  repositoryModules() {
+    return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
+  }
+
 
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation
