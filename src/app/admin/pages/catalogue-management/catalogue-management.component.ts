@@ -22,7 +22,7 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = false;
+  showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
   showCourses: boolean = false;
@@ -102,9 +102,9 @@ export class CatalogueManagementComponent implements OnInit {
 
   ngOnInit() {
     this.addCategoryForm = this.formBuilder.group({
-      categoryName: new FormControl('', myGlobals.req),
-      categoryDescription: new FormControl('', myGlobals.req),
-      categoryImage: ['', myGlobals.req]
+      category_name: new FormControl('', myGlobals.req),
+      category_description: new FormControl('', myGlobals.req),
+      category_image: ['', myGlobals.req]
     });
     this.addSubCategoryForm = this.formBuilder.group({
       subCategoryName: new FormControl('', myGlobals.req),
@@ -173,12 +173,16 @@ export class CatalogueManagementComponent implements OnInit {
 
 
     }
-   }
+  }
 
   selectedcategory(category) {
     if (category.checkbox === true) {
       if (category.category_id) {
         this.selectedCategory = category;
+        this.addCategoryForm.patchValue(this.selectedCategory);
+        this.showAddCatForm = true;
+        this.showAddSubCatForm = false;
+        this.showHome = false;
       } else {
         this.selectedSubCategory = category;
       }
@@ -192,9 +196,9 @@ export class CatalogueManagementComponent implements OnInit {
     console.log(this.selectedCategory)
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
-        categoryName: new FormControl('', myGlobals.req),
-        categoryDescription: new FormControl('', myGlobals.req),
-        categoryImage: ['', myGlobals.req]
+        category_name: new FormControl('', myGlobals.req),
+        category_description: new FormControl('', myGlobals.req),
+        category_image: ['', myGlobals.req]
       });
       this.showAddCatForm = true;
       this.showAddSubCatForm = false;
@@ -239,7 +243,7 @@ export class CatalogueManagementComponent implements OnInit {
           this.learnerservice.imageupload(fb).subscribe((data: any) => {
             var split_url = data.url.split('/');
             var upload_url = split_url[0] + "//" + split_url[1] + split_url[2] + '/' + data.path
-            this.addCategoryForm.controls['categoryImage'].setValue(upload_url);
+            this.addCategoryForm.controls['category_image'].setValue(upload_url);
             this.loading = false;
           })
         }
@@ -272,9 +276,9 @@ export class CatalogueManagementComponent implements OnInit {
 
     var value = this.addCategoryForm.value;
     let category = {
-      input_name: value.categoryName,
-      input_description: value.categoryDescription,
-      input_image: value.categoryImage,
+      input_name: value.category_name,
+      input_description: value.category_description,
+      input_image: value.category_image,
       creator_id: this.adminDetails._id,
       level: 1,
       apply_all_courses: false,
