@@ -24,10 +24,8 @@ navigate by url -- Admin/auth/catalogue -->
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}}
-                {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
-
+              <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">
+                {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
             </li>
           </mat-tree-node>
 
@@ -41,10 +39,8 @@ navigate by url -- Admin/auth/catalogue -->
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}}
-                  {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
-
+                <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">
+                  {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
                 <!-- {{node.group_name}}2 -->
               </div>
             </li>
