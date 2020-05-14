@@ -163,7 +163,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoAdd() {
-    if (this.selectedCategory == null) {
+    console.log(this.selectedCategory)
+    if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         categoryName: new FormControl('', myGlobals.req),
         categoryDescription: new FormControl('', myGlobals.req),

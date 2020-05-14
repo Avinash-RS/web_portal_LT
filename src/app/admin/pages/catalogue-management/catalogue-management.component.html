@@ -192,7 +192,7 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <br>
-            <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
+            <div class="row" *ngIf="selectedCategory == {}">
               <div class="col-lg-8 col-md-6"></div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
                 <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
@@ -203,7 +203,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
-            <div class="row" *ngIf="selectedCategory">
+            <div class="row" *ngIf="selectedCategory?.category_name">
               <div class="col-md-2 m-l-5 col-sm-6 col-6">
                 <br>
                 <button id="viewCourse" mat-stroked-button
