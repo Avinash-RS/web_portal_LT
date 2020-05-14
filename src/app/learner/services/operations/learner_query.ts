@@ -315,6 +315,30 @@ query get_sub_category($category_id: String!){
   }
 }`;
 
+export const getsupersubcategory = gql`
+query  getsupersubcategory($sub_category_id: String!){
+  getsupersubcategory(sub_category_id: $sub_category_id){
+      success
+      error_msg
+      message{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            super_sub_category_id
+            super_sub_category_name
+            super_sub_category_image
+            super_sub_category_description
+            parent_sub_category_id
+            parent_category_id
+      }
+  }
+}`;
+
 
 export const get_course_by_subcategory = gql`
 query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenumber: Int!){
