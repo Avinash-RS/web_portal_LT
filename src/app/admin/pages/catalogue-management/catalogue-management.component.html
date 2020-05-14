@@ -18,14 +18,14 @@ navigate by url -- Admin/auth/catalogue -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
             <li class="mat-tree-node newstyle" renderDebug>
               <!-- use a disabled button to provide padding for tree leaf -->
-              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubcategory(node)"
                 [attr.aria-label]="'toggle ' + node.name">
                 <mat-icon class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}} {{node?.sub_category_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -41,7 +41,7 @@ navigate by url -- Admin/auth/catalogue -->
                   </mat-icon>
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                  [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}} {{node?.sub_category_name}} </mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -60,10 +60,9 @@ navigate by url -- Admin/auth/catalogue -->
       <div class="card col-9 cardheight">
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
-
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
-          <li class="breadcrumb-item">{{selectedCategory || 'Category'}}</li>
-          <li class="breadcrumb-item">{{selectedSubCategory || 'SubCategory' }}</li>
+          <li *ngIf="selectedCategory" class="breadcrumb-item">{{selectedCategory.category_name}}</li>
+          <li *ngIf="selectedSubCategory" class="breadcrumb-item">{{selectedSubCategory.sub_category_name}}</li>
           <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li>
         </ol>
 
@@ -74,9 +73,13 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- start of buttons (add, edit, dlt) -->
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
-            <span class="f_size_16 f_wt_500 m-l-5 color_grey"> Nano Electronics
+            <span *ngIf="selectedcategory" class="f_size_16 f_wt_500 m-l-5 color_grey"> {{selectedCategory?.category_description}}
               <span class="material-icons" style="vertical-align: middle;"
                 matTooltip="Click here to change profile details">info_outline</span></span>
+
+                <span *ngIf="selectedSubCategory"class="f_size_16 f_wt_500 m-l-5 color_grey"> {{selectedSubCategory ?.sub_category_description}}
+                  <span class="material-icons" style="vertical-align: middle;"
+                    matTooltip="Click here to change profile details">info_outline</span></span>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
