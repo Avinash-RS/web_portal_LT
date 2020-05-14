@@ -41,7 +41,7 @@ export class CatalogueManagementComponent implements OnInit {
 
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     this.courses = [
@@ -172,8 +172,11 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   selectedcategory(category) {
+    console.log(category)
     if (category.category_id) {
       if (category.checkbox === true) {
+        let oldcategory = null;
+        oldcategory = this.selectedCategory;
         this.selectedCategory = category;
         this.addCategoryForm = this.formBuilder.group({
           category_name: new FormControl('', myGlobals.req),
@@ -183,6 +186,13 @@ export class CatalogueManagementComponent implements OnInit {
         this.addCategoryForm.patchValue(this.selectedCategory);
         this.showAddCatForm = true;
         this.showAddSubCatForm = this.showHome = this.showCourses = false;
+        if (oldcategory?.category_id) {
+          const value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
+          this.treeSource._data.value[value].checkbox = false;
+          this.treeSource._data.value[value]?.children?.forEach(element => {
+               element.checkbox = false;
+        });
+      }
       } else {
         this.selectedCategory = {};
         this.addCategoryForm.reset();
@@ -191,14 +201,14 @@ export class CatalogueManagementComponent implements OnInit {
       if (category.checkbox === true) {
         this.selectedSubCategory = category;
         this.addSubCategoryForm = this.formBuilder.group({
-          subCategoryName: new FormControl('', myGlobals.req),
-          subCategoryDescription: new FormControl('', myGlobals.req),
+          sub_category_name: new FormControl('', myGlobals.req),
+          sub_category_description: new FormControl('', myGlobals.req),
         });
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
         this.showAddSubCatForm = true;
         this.showAddCatForm = this.showHome = this.showCourses = false;
       } else {
-        this.selectedSubCategory = null;
+        this.selectedSubCategory = {};
       }
     } else {
       if (category.checkbox === true) {
@@ -211,7 +221,6 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoAdd() {
-    console.log(this.selectedCategory)
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
@@ -223,10 +232,10 @@ export class CatalogueManagementComponent implements OnInit {
       // this.showHome = false;
       // this.showCourses = false;
     }
-    else if (this.selectedSubCategory == null) {
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
-        subCategoryName: new FormControl('', myGlobals.req),
-        subCategoryDescription: new FormControl('', myGlobals.req),
+        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl('', myGlobals.req),
       });
       this.showAddSubCatForm = true;
       this.showAddCatForm = this.showHome = this.showCourses = false;
@@ -304,7 +313,6 @@ export class CatalogueManagementComponent implements OnInit {
   // 5eb3b5f50d03e1bc320162cd id 
 
   selectCourse(c, id) {
-    console.log(c, id);
     if (c.isChecked == undefined || c.isChecked == false) {
       c.isChecked = true;
       this.selectedArray.push(c);
@@ -313,7 +321,6 @@ export class CatalogueManagementComponent implements OnInit {
       c.isChecked = !c.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== c);
     }
-    console.log(this.selectedArray)
   }
 
   openMoveTo(templateRef: TemplateRef<any>) {
