@@ -227,7 +227,6 @@ export class AdminServicesService {
 
   // Catalogue Management
   createCatalogue(category) {
-    console.log(category)
     return this.Apollo.query({
       query: create_catelogue,
       variables: {
@@ -245,7 +244,6 @@ export class AdminServicesService {
   }
 
   getcategories(pgnumber) {
-    console.log(pgnumber);
     return this.Apollo.query({
       query: getcategoryadmin,
       variables: {

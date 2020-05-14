@@ -38,7 +38,7 @@ mutation create_catelogue(
   $input_description: String!,
   $input_image: String!,
   $creator_id: String!,
-  $level: Number!,
+  $level: Int!,
   $apply_all_courses: Boolean!,
   $course_id: [String]!,
   $parent_category_id: String!,

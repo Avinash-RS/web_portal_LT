@@ -59,7 +59,7 @@ navigate by url -- Admin/auth/catalogue -->
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
-          <li class="breadcrumb-item">{{selectedCategory?.category_name || 'Category'}}</li>
+          <li class="breadcrumb-item"  *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;else">{{selectedCategory?.category_name || 'Category'}}</li>
           <li *ngIf="selectedSubCategory" class="breadcrumb-item">{{selectedSubCategory.sub_category_name}}</li>
           <!-- <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li> -->
         </ol>
@@ -72,15 +72,16 @@ navigate by url -- Admin/auth/catalogue -->
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
             <span class="f_size_16 f_wt_500 m-l-5 color_grey">
               {{selectedCategory?.category_name}}
-              <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedCategory?.category_description}}">info_outline</span>
+              <span class="material-icons none" style="vertical-align: middle;" *ngIf="selectedCategory?.category_description != undefined"
+                matTooltip="{{selectedCategory?.category_description || 'Category Description'}}">info_outline</span>
             </span>
 
-            <span class="f_size_16 f_wt_500 m-l-5 color_grey">
+            <!-- //commented for releasing category add -->
+            <!-- <span class="f_size_16 f_wt_500 m-l-5 color_grey">
               {{selectedSubCategory ?.sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
                 matTooltip="{{selectedSubCategory ?.sub_category_description}}">info_outline</span>
-            </span>
+            </span> -->
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
@@ -93,8 +94,8 @@ navigate by url -- Admin/auth/catalogue -->
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses && (addCategoryForm.value.category_name != '' ||
-                addCategoryForm.value.category_description != '' || addCategoryForm.value.category_image != '')"
+                <button mat-raised-button [disabled]="showCourses || (addCategoryForm && (addCategoryForm?.value?.category_name != '' ||
+                addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != ''))"
                   class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add
                 </button>
@@ -184,7 +185,7 @@ navigate by url -- Admin/auth/catalogue -->
                 </div>
                 <div class="row"
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
-                  <img class="center width_80" [src]="addCategoryForm.value.category_image">
+                  <img class="center width_80 imgHt" [src]="addCategoryForm.value.category_image">
                 </div>
               </div>
             </div>
@@ -215,7 +216,7 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- end of Add Catagory code  -->
 
         <!-- start of Add Sub Catagory code  -->
-        <!-- <div *ngIf="showAddSubCatForm">
+        <div *ngIf="showAddSubCatForm">
           <form [formGroup]="addSubCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
@@ -265,7 +266,7 @@ navigate by url -- Admin/auth/catalogue -->
             </div>
             <br>
           </form>
-        </div> -->
+        </div> 
         <!-- end of Add Sub Catagory code  -->
 
         <!-- start of view courses -->
