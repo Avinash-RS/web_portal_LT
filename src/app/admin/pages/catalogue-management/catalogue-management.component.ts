@@ -22,10 +22,10 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = true;
+  showHome: boolean = false;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
-  showCourses: boolean = false;
+  showCourses: boolean = true;
   selectedCategory: any = null;
   selectedSubCategory: any = null;
   categories: any;
@@ -117,7 +117,7 @@ export class CatalogueManagementComponent implements OnInit {
   getallcategories() {
     this.treeSource.data = null;
     this.pagenumber = 0;
-    this.adminservice.getcategories(this.pagenumber).subscribe((result: any ) => {
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
       console.log(result.data);
       this.categories = result.data.getcategoryadmin.message;
       this.treeSource.data = this.categories;
@@ -147,20 +147,20 @@ export class CatalogueManagementComponent implements OnInit {
       this.treeSource.data = null;
       this.treeSource.data = array;
     });
-   }
+  }
 
-     selectedcategory(category) {
-       if(category.checkbox === true) {
-        if (category.category_id) {
-          this.selectedCategory = category;
-         } else {
-          this.selectedSubCategory = category;
-         }
-       } else {
-        this.selectedCategory = null;
-        this.selectedSubCategory = null;
-       }
+  selectedcategory(category) {
+    if (category.checkbox === true) {
+      if (category.category_id) {
+        this.selectedCategory = category;
+      } else {
+        this.selectedSubCategory = category;
       }
+    } else {
+      this.selectedCategory = null;
+      this.selectedSubCategory = null;
+    }
+  }
 
   gotoAdd() {
     if (this.selectedCategory == null) {
