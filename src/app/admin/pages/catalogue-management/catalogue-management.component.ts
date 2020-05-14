@@ -22,7 +22,7 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = true;
+  showHome: boolean = false;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
   showCourses: boolean = false;
@@ -127,27 +127,53 @@ export class CatalogueManagementComponent implements OnInit {
 
   loadsubcategory(node) {
     console.log(node);
-    this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
-      console.log(result.data);
-      const category = result.data.get_sub_category.message;
-      if (node) {
-        // node.children = [
-        //   ...(node.children || []),
-        //   group
-        // ];
-        node.children = category;
-        // if (!this.treeControl.isExpanded(node)) {
-        this.treeControl.expand(node);
-        // }
-      } else {
-        this.dataSource$.next([
-          ...this.dataSource$.value, category[0]]);
-      }
-      const array = this.treeSource.data;
-      this.treeSource.data = null;
-      this.treeSource.data = array;
-    });
-  }
+
+    if (node.category_id) {
+      this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
+        console.log(result.data);
+        const category = result.data.get_sub_category.message;
+        if (node) {
+          // node.children = [
+          //   ...(node.children || []),
+          //   group
+          // ];
+          node.children = category;
+          // if (!this.treeControl.isExpanded(node)) {
+          this.treeControl.expand(node);
+          // }
+        } else {
+          this.dataSource$.next([
+            ...this.dataSource$.value, category[0]]);
+        }
+        const array = this.treeSource.data;
+        this.treeSource.data = null;
+        this.treeSource.data = array;
+      });
+    } else {
+      this.learnerservice.getsupersubcategory(node.sub_category_id).subscribe((result: any) => {
+        console.log(result.data);
+        const category = result.data.getsupersubcategory.message;
+        if (node) {
+          // node.children = [
+          //   ...(node.children || []),
+          //   group
+          // ];
+          node.children = category;
+          // if (!this.treeControl.isExpanded(node)) {
+          this.treeControl.expand(node);
+          // }
+        } else {
+          this.dataSource$.next([
+            ...this.dataSource$.value, category[0]]);
+        }
+        const array = this.treeSource.data;
+        this.treeSource.data = null;
+        this.treeSource.data = array;
+      });
+
+
+    }
+   }
 
   selectedcategory(category) {
     if (category.checkbox === true) {

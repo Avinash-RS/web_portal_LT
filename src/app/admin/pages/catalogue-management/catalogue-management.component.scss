@@ -72,6 +72,10 @@ input:focus {
     margin-bottom: 10px;
 }
 
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
 .m-r-20 {
     margin-right: 20px;
 }
@@ -176,18 +180,29 @@ hr {
     background: $color-light-blue;
     border-radius: 5px;
     margin-left: 5px;
-    padding-bottom: 0 !important;
 }
 
-.mat-form-field-infix {
-    margin-left: 10px !important;
+.alert-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
 }
 
-.no-padding {
-    .mat-form-field-wrapper {
-        padding-bottom: 0 !important;
-    }
-}
+
+
+// mat-form-field:last-child div {
+//     padding-bottom: 0;
+// }
+
+// .mat-form-field-infix {
+//     margin-left: 10px !important;
+// }
+
+// .no-padding {
+//     .mat-form-field-wrapper {
+//         padding-bottom: 0 !important;
+//     }
+// }
 
 .overlayClass {
     opacity: 0.3;

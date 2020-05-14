@@ -20,13 +20,12 @@ navigate by url -- Admin/auth/catalogue -->
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubcategory(node)"
                 [attr.aria-label]="'toggle ' + node.name">
-                <mat-icon class="mat-icon-rtl-mirror">
+                <mat-icon *ngIf="!node?.super_sub_category_name" class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <mat-checkbox [multiple]="false" [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}}
-                {{node?.sub_category_name}}</mat-checkbox>
+              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -37,13 +36,12 @@ navigate by url -- Admin/auth/catalogue -->
               <div class="mat-tree-node">
                 <button mat-icon-button matTreeNodeToggle class="btnClassicon"
                   [attr.aria-label]="'toggle ' + node.name">
-                  <mat-icon class="mat-icon-rtl-mirror">
+                  <mat-icon *ngIf="!node?.super_sub_category_name"  class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}}
-                  {{node?.sub_category_name}} </mat-checkbox>
+                <mat-checkbox  [checked]="selected === node" (change)="selected = node" name="checkbox"
+                  [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">{{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -343,10 +341,10 @@ navigate by url -- Admin/auth/catalogue -->
       <mat-label>
         Choose Category
       </mat-label>
-      <form [formGroup]="selectCategoryForm">
+      <form [formGroup]="selectCategoryForm" class="m-t-20">
         <div class="row">
           <div class="form-group">
-            <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+            <mat-form-field appearance="outline fill" class="width_100 category-label">
               <mat-label class="m-l-20">Category *</mat-label>
               <mat-select formControlName="category">
                 <mat-option *ngFor="let cat of selectedArray" [value]="cat">
@@ -359,7 +357,7 @@ navigate by url -- Admin/auth/catalogue -->
         <div class="row">
           <div class="col-md-4" *ngIf="selectedArray.length > 0">
             <div class="form-group width_90">
-              <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+              <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subCategory">
                   <mat-option *ngFor="let subcat of selectedArray" [value]="subcat">
@@ -371,7 +369,7 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
           <div class="col-md-4" *ngIf="selectedArray.length > 0">
             <div class="form-group width_90">
-              <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+              <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subSubCategory">
                   <mat-option *ngFor="let ssubcat of selectedArray" [value]="ssubcat">
@@ -384,7 +382,7 @@ navigate by url -- Admin/auth/catalogue -->
           <div class="col-md-2"></div>
           <div class="col-md-2">
             <button id="moveTo" mat-stroked-button [disabled]="selectCategoryForm.invalid"
-              class="width_80 background-blue color_white center" (click)="moveCourses()">
+              class="width_80 background-blue color_white center alert-btn" (click)="moveCourses()">
               <span class="material-icons" style="vertical-align: middle;">domain</span> Move
             </button>
           </div>
