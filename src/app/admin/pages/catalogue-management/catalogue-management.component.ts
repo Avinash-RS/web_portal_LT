@@ -232,7 +232,7 @@ export class CatalogueManagementComponent implements OnInit {
       // this.showHome = false;
       // this.showCourses = false;
     }
-    else if (this.selectedSubCategory == null) {
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
         sub_category_description: new FormControl('', myGlobals.req),
