@@ -294,7 +294,7 @@ query get_all_category($group_id: [String]!){
 }`;
 
 export const get_sub_category = gql`
-query get_sub_category($category_id: Int!){
+query get_sub_category($category_id: String!){
   get_sub_category(category_id: $category_id){
   success
   message{

@@ -35,9 +35,14 @@ export class AdminCoursesComponent implements OnInit {
     this.adminDetails = this.gs.checkLogout();
     this.pagenumber = 0;
     this.paginationpgno = 0;
+    this.getCourses();
+  }
+
+  getCourses() {
+    console.log('inside get courses')
     if (this.type == 'created') {
       this.loader = true;
-      this.service.getAllCourseCreated(this.adminDetails.user_id, 0).subscribe((res: any) => {
+      this.service.getAllCourseCreated(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {
         // this.service.getAllDrafted(this.adminDetails.user_id, 0).subscribe((res: any) => {
         if (res.data && res.data.get_course_createdby_admin) {
           // if (res.data && res.data.get_draft_course) {
@@ -56,6 +61,7 @@ export class AdminCoursesComponent implements OnInit {
       })
     }
     else if (this.type == 'published') {
+      console.log('inside published to test test cases - Jasper')
       this.loader = true;
       this.service.getAllCoursePublished("undefined", this.pagenumber).subscribe((res: any) => {
         if (res.data && res.data.get_course_published) {

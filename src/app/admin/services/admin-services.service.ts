@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue} from './operations/admin_mutation'
+  create_catelogue
+} from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
@@ -231,37 +232,27 @@ export class AdminServicesService {
       query: create_catelogue,
       variables: {
         input_name: category.input_name,
-        input_description:  category.input_description,
-        input_image:  category.input_image,
-        creator_id:  category.creator_id,
-        level:  category.level,
-        apply_all_courses:  category.apply_all_courses,
-        course_id:  category.course_id,
-        parent_category_id:  category.parent_category_id,
-        parent_sub_category_id :  category.parent_sub_category_id,
+        input_description: category.input_description,
+        input_image: category.input_image,
+        creator_id: category.creator_id,
+        level: category.level,
+        apply_all_courses: category.apply_all_courses,
+        course_id: category.course_id,
+        parent_category_id: category.parent_category_id,
+        parent_sub_category_id: category.parent_sub_category_id,
       }
     });
   }
 
-getcategories(pgnumber) {
-  console.log(pgnumber);
-  return this.Apollo.query({
-    query: getcategoryadmin,
-    variables: {
-    pagenumber : pgnumber
-    }
-  });
-}
-
-  // $input_name: String,
-  // $input_description: String,
-  // $input_image: String,
-  // $creator_id: String,
-  // $level: Number,
-  // $apply_all_courses: Boolean,
-  // $course_id: [String],
-  // $parent_category_id: String,
-  // $parent_sub_category_id: String
+  getcategories(pgnumber) {
+    console.log(pgnumber);
+    return this.Apollo.query({
+      query: getcategoryadmin,
+      variables: {
+        pagenumber: pgnumber
+      }
+    });
+  }
 
   // End of Catalogue Management
 }

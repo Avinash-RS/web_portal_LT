@@ -7,10 +7,12 @@
 .h_100px {
     height: 120px !important;
 }
+
 .color_grey {
     color: $color-darkGrey;
 }
 
+button,
 textarea:focus,
 input:focus {
     outline: none;
@@ -62,6 +64,10 @@ input:focus {
     margin-top: 20px;
 }
 
+.m-t-10 {
+    margin-top: 10px;
+}
+
 .m-b-10 {
     margin-bottom: 10px;
 }
@@ -91,6 +97,10 @@ input:focus {
     padding-right: 0;
 }
 
+.p-l-20 {
+    padding-left: 20;
+}
+
 .card-shadow {
     box-shadow: 0 2px 10px #6c757d;
     padding: 0px !important;
@@ -116,6 +126,10 @@ hr {
 
 .delete-btn {
     background-color: $color-maroon;
+}
+
+.textWrap {
+    white-space: normal;
 }
 
 .material-icons {
@@ -153,14 +167,33 @@ hr {
     box-shadow: none !important;
 }
 
-.course-name {
-    text-align: center;
-
-}
-
 .font-display {
     color: $color-blue;
     font-weight: bolder;
+}
+
+.category-label {
+    background: $color-light-blue;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-bottom: 0 !important;
+}
+
+.mat-form-field-infix {
+    margin-left: 10px !important;
+}
+
+.no-padding {
+    .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+    }
+}
+
+.overlayClass {
+    opacity: 0.3;
+    z-index: -1;
+    background-color: $color-blue !important; //not-working
+    background-blend-mode: color; //not-working
 }
 
 .spinner-container {
@@ -212,4 +245,56 @@ mat-tree {
 :host ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
 :host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
     background-color: #437891 !important;
+}
+
+.dialogPopup {
+    height: 420px;
+    width: 700px;
+
+    .border {
+        border: solid 1px $color-border;
+    }
+}
+
+.mat-raised-button[disabled] {
+    color: $color-border;
+}
+
+.pos_bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 10px
+}
+
+@media screen and (min-width: 320px) and (max-width:1024px) {
+
+    .add-btn,
+    .edit-btn,
+    .delete-btn,
+    .moveTo-btn,
+    #addCategory,
+    #cancel {
+        width: 100% !important;
+    }
+
+    .marginClass {
+        margin: auto !important;
+        display: block;
+    }
+
+    .none {
+        display: none !important;
+    }
+
+    // .left {
+    //     order: 2;
+    // }
+
+    // .profile {
+    //     justify-content: space-between;
+    // }
+
+    // .right {
+    //     order: 1;
+    // }
 }

@@ -16,11 +16,11 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 describe('AdminCoursesComponent', () => {
   let component: AdminCoursesComponent;
   let fixture: ComponentFixture<AdminCoursesComponent>;
-  let admincourse = require("../../../../assets/mockdata/wca/admin-course.json");
+  let admincourse = require("assets/mockdata/wca/admin-courses.json");
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -61,9 +61,9 @@ describe('AdminCoursesComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       providers: [Apollo],
-      declarations: [ AdminCoursesComponent ]
+      declarations: [AdminCoursesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -116,8 +116,10 @@ describe('AdminCoursesComponent', () => {
   })
 
   it('Check get published courses', () => {
-    let pagenumber = 0;
-    component.onpagination(event) ;
-    expect(component.type == 'published').toBe(admincourse.get_course_published.message);
+    component.pagenumber = 0;
+    expect(component.type = 'published')
+    expect(component.getCourses());
+    console.log(admincourse,'admincourse')
+    expect(component.courseList).toBe(admincourse.data.get_course_published.message);
   })
 });
