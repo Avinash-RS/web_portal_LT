@@ -176,15 +176,25 @@ export class CatalogueManagementComponent implements OnInit {
    }
 
   selectedcategory(category) {
-    if (category.checkbox === true) {
-      if (category.category_id) {
+    if (category.category_id) {
+      if (category.checkbox === true) {
         this.selectedCategory = category;
       } else {
+        this.selectedCategory = null;
+      }
+    } else if (category.sub_category_id) {
+      if (category.checkbox === true) {
         this.selectedSubCategory = category;
+      } else {
+        this.selectedSubCategory = null;
       }
     } else {
-      this.selectedCategory = null;
-      this.selectedSubCategory = null;
+      if (category.checkbox === true) {
+
+      } else {
+
+      }
+
     }
   }
 
