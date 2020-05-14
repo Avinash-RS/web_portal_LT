@@ -344,8 +344,8 @@ navigate by url -- Admin/auth/catalogue -->
       <form [formGroup]="selectCategoryForm">
         <div class="row">
           <div class="form-group">
-            <mat-form-field class="width_100 ">
-              <mat-label>Category *</mat-label>
+            <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+              <mat-label class="m-l-20">Category *</mat-label>
               <mat-select formControlName="category">
                 <mat-option *ngFor="let cat of selectedArray" [value]="cat">
                   {{cat.name}}
@@ -357,8 +357,8 @@ navigate by url -- Admin/auth/catalogue -->
         <div class="row">
           <div class="col-md-4" *ngIf="selectedArray.length > 0">
             <div class="form-group width_90">
-              <mat-form-field class="width_100 ">
-                <mat-label>Sub Category</mat-label>
+              <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+                <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subCategory">
                   <mat-option *ngFor="let subcat of selectedArray" [value]="subcat">
                     {{subcat.name}}
@@ -369,8 +369,8 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
           <div class="col-md-4" *ngIf="selectedArray.length > 0">
             <div class="form-group width_90">
-              <mat-form-field class="width_100 ">
-                <mat-label>Sub Category</mat-label>
+              <mat-form-field appearance="outline fill" class="width_100 category-label no-padding">
+                <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subSubCategory">
                   <mat-option *ngFor="let ssubcat of selectedArray" [value]="ssubcat">
                     {{ssubcat.name}}
