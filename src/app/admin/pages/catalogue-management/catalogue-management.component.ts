@@ -19,19 +19,23 @@ export class CatalogueManagementComponent implements OnInit {
 
   addCategoryForm: any; // cat add from
   addSubCategoryForm: any; // sub cat add form
+  addSuperSubCategoryForm: any; // sub cat add form
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
   showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
+  showAddSuperSubCatForm: boolean = false;
   showCourses: boolean = false;
   selectedCategory: any = {};
   selectedSubCategory: any = {};
+  selectedSuperSubCategory: any = {};
   categories: any;
   courses: any;
   selectedArray: any = [];
   pagenumber = 0;
+  breakpoint: number;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -41,7 +45,7 @@ export class CatalogueManagementComponent implements OnInit {
 
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     this.courses = [
@@ -102,6 +106,30 @@ export class CatalogueManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getallcategories();
+
+    if (window.innerWidth <= 600)
+      this.breakpoint = 1;
+    else if (window.innerWidth >= 600 && window.innerWidth <= 768)
+      this.breakpoint = 2;
+    else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
+      this.breakpoint = 3;
+    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
+    //   this.breakpoint = 4;
+    else
+      this.breakpoint = 4;
+  }
+
+  onResize(event) {
+    if (event.target.innerWidth <= 600)
+      this.breakpoint = 1;
+    else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
+      this.breakpoint = 2;
+    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
+      this.breakpoint = 3;
+    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
+    //   this.breakpoint = 4;
+    else
+      this.breakpoint = 4;
   }
 
   get f() {
@@ -110,6 +138,9 @@ export class CatalogueManagementComponent implements OnInit {
     }
     else if (this.showAddSubCatForm == true) {
       return this.addSubCategoryForm.controls;
+    }
+    else if (this.showAddSuperSubCatForm == true) {
+      return this.addSuperSubCategoryForm.controls;
     }
   }
 
@@ -180,19 +211,19 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedCategory = category;
         this.addCategoryForm = this.formBuilder.group({
           category_name: new FormControl('', myGlobals.req),
-          category_description: new FormControl('', myGlobals.req),
+          category_description: new FormControl([]),
           category_image: ['', myGlobals.req]
         });
         this.addCategoryForm.patchValue(this.selectedCategory);
         this.showAddCatForm = true;
-        this.showAddSubCatForm = this.showHome = this.showCourses = false;
+        this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
         if (oldcategory?.category_id) {
           const value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
           this.treeSource._data.value[value].checkbox = false;
           this.treeSource._data.value[value]?.children?.forEach(element => {
-               element.checkbox = false;
-        });
-      }
+            element.checkbox = false;
+          });
+        }
       } else {
         this.selectedCategory = {};
         this.addCategoryForm.reset();
@@ -202,21 +233,29 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedSubCategory = category;
         this.addSubCategoryForm = this.formBuilder.group({
           sub_category_name: new FormControl('', myGlobals.req),
-          sub_category_description: new FormControl('', myGlobals.req),
+          sub_category_description: new FormControl([]),
         });
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
         this.showAddSubCatForm = true;
-        this.showAddCatForm = this.showHome = this.showCourses = false;
+        this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
       } else {
         this.selectedSubCategory = {};
+        this.addSubCategoryForm.reset();
       }
     } else {
       if (category.checkbox === true) {
-
+        this.selectedSuperSubCategory = category;
+        this.addSuperSubCategoryForm = this.formBuilder.group({
+          super_sub_category_name: new FormControl('', myGlobals.req),
+          super_sub_category_description: new FormControl([]),
+        });
+        this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
+        this.showAddSuperSubCatForm = true;
+        this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
       } else {
-
+        this.selectedSuperSubCategory = {};
+        this.addSuperSubCategoryForm.reset();
       }
-
     }
   }
 
@@ -224,27 +263,65 @@ export class CatalogueManagementComponent implements OnInit {
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl('', myGlobals.req),
+        category_description: new FormControl([]),
         category_image: ['', myGlobals.req]
       });
       this.showAddCatForm = true;
-      this.showAddSubCatForm = this.showHome = this.showCourses = false;
+      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
       // this.showHome = false;
       // this.showCourses = false;
     }
-    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.category_name == undefined) {
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl([]),
       });
       this.showAddSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showCourses = false;
+      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
       // this.showHome = false;
+    }
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name != undefined
+      && this.selectedSuperSubCategory.super_sub_category_name == undefined) {
+      this.addSuperSubCategoryForm = this.formBuilder.group({
+        super_sub_category_name: new FormControl('', myGlobals.req),
+        super_sub_category_description: new FormControl(''),
+      });
+      this.showAddSuperSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
+    }
+  }
+
+  changeNav(formType) {
+    if (formType == 'addCategoryForm') {
+      this.addCategoryForm = this.formBuilder.group({
+        category_name: new FormControl('', myGlobals.req),
+        category_description: new FormControl([]),
+        category_image: ['', myGlobals.req]
+      });
+      this.addCategoryForm.patchValue(this.selectedCategory);
+      this.showAddCatForm = true;
+      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    } else  if (formType == 'addSubCategoryForm') {
+      this.addSubCategoryForm = this.formBuilder.group({
+        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl([]),
+      });
+      this.addSubCategoryForm.patchValue(this.selectedSubCategory);
+      this.showAddSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    }
+    else  if (formType == 'addSuperSubCategoryForm') {
+      this.addSuperSubCategoryForm = this.formBuilder.group({
+        super_sub_category_name: new FormControl('', myGlobals.req),
+        super_sub_category_description: new FormControl(''),
+      });
+      this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
+      this.showAddSuperSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
     }
   }
 
   uploadFile(fileInput: any) {
-    debugger
     this.loading = true;
     if (fileInput) {
       var selectfile = <File>fileInput[0];
@@ -268,7 +345,7 @@ export class CatalogueManagementComponent implements OnInit {
         }
       }
     } else
-    this.loading = false
+      this.loading = false
   }
 
   gotoEdit() {
@@ -283,23 +360,25 @@ export class CatalogueManagementComponent implements OnInit {
   hideCourses() {
   }
 
-  addCategory() {
-    var value = this.addCategoryForm.value;
+  addCategory(formType) {
+    var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
+      this.addSuperSubCategoryForm.value;
     let category = {
-      input_name: value.category_name,
-      input_description: value.category_description,
-      input_image: value.category_image,
+      input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
+      input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
+      input_image: value.category_image || "null",
       creator_id: this.adminDetails._id,
-      level: 1,
+      level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
       apply_all_courses: false,
       course_id: [],
-      parent_category_id: "null",
-      parent_sub_category_id: "null",
+      parent_category_id: this.selectedCategory?.category_id || "null",
+      parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
     }
     console.log(category)
     this.adminservice.createCatalogue(category).subscribe((result: any) => {
       console.log(result);
-      this.addCategoryForm.reset();
+      formType == 'category' ? this.addCategoryForm.reset() : (formType == 'subcategory') ? this.addSubCategoryForm.reset() :
+        this.addSuperSubCategoryForm.reset();
       if (result?.data?.create_catelogue?.success)
         this.getallcategories();
       else
