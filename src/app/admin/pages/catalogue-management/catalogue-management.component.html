@@ -7,11 +7,11 @@
 
 <!-- Remember to sigin to admin before hitting this url
 navigate by url -- Admin/auth/catalogue -->
-<div class="container  p-30 ">
+<div class="container profile p-30">
   <div class="container m-t-20 card-shadow ">
     <div class="row card-shadow">
       <!-- Mat tree code here ( left hand side) -->
-      <div class="card col-3 cardheight">
+      <div class="card col-3 cardheight left">
 
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
@@ -57,49 +57,49 @@ navigate by url -- Admin/auth/catalogue -->
 
       <!-- start of right hand side card view -->
 
-      <div class="card col-9 cardheight">
+      <div class="card col-9 cardheight right">
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
-
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
           <li class="breadcrumb-item">{{selectedCategory || 'Category'}}</li>
           <li class="breadcrumb-item">{{selectedSubCategory || 'SubCategory' }}</li>
           <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li>
         </ol>
-
         <!-- end of navigations ( engineering > electronics > nano electronics) -->
 
-        <!-- <hr> -->
         <hr class="header-line m-r-20 m-l-20">
+
         <!-- start of buttons (add, edit, dlt) -->
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
             <span class="f_size_16 f_wt_500 m-l-5 color_grey"> Nano Electronics
-              <span class="material-icons" style="vertical-align: middle;"
-                matTooltip="Click here to change profile details">info_outline</span></span>
+              <span class="material-icons none" style="vertical-align: middle;"
+                matTooltip="Click here to change profile details">info_outline
+              </span>
+            </span>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
               <!-- <div class="col-lg-2"></div> -->
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button *ngIf="showCourses" class="textWrap background-blue width_80 color_white"
+                <button mat-raised-button *ngIf="showCourses" class="background-blue width_80 m-b-10 moveTo-btn color_white"
                   (click)="openMoveTo(viewDialog)" [disabled]="selectedArray.length == 0">
                   <span class="material-icons" style="vertical-align: middle;">domain</span>Move To
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses" class="textWrap add-btn width_80 color_white"
+                <button mat-raised-button [disabled]="showCourses" class="add-btn width_80 m-b-10 color_white"
                   (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses" class="textWrap edit-btn width_80 color_white">
+                <button mat-raised-button [disabled]="showCourses" class="edit-btn width_80 m-b-10 color_white">
                   <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses" class="textWrap delete-btn width_80 color_white">
+                <button mat-raised-button [disabled]="showCourses" class="delete-btn width_80 m-b-10 color_white">
                   <span class="material-icons" style="vertical-align: middle;"
                     (click)="gotoDelete()">delete</span>Delete
                 </button>
@@ -108,7 +108,6 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
         </div>
         <!-- end of buttons (add, edit, dlt) -->
-
 
         <!-- start of landing 3 line rules -->
         <br>
@@ -130,28 +129,11 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
         </div>
 
-
-        <!-- start of navigations ( engineering > electronics > nano electronics) -->
-
-        <!-- end of navigations ( engineering > electronics > nano electronics) -->
-
-        <!-- <hr> -->
-
-        <!-- start of buttons (add, edit, dlt) -->
-
-        <!-- end of buttons (add, edit, dlt) -->
-
-
-        <!-- start of landing 3 line rules -->
-
-        <!-- end of landing 3 line rules -->
-
-
         <!-- start of Add Catagory code  -->
         <div *ngIf="showAddCatForm">
           <form [formGroup]="addCategoryForm">
             <div class="row">
-              <div class="col-md-4 col-sm-10 col-10 m-l-5">
+              <div class="col-md-4 col-lg-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category *"
                   [ngClass]="{ 'is-invalid': f.categoryName.touched && f.categoryName.errors }"
                   formControlName="categoryName">
@@ -162,7 +144,7 @@ navigate by url -- Admin/auth/catalogue -->
             </div>
             <br>
             <div class="row">
-              <div class="col-md-11 m-l-5 col-sm-10 col-10">
+              <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
                     [ngClass]="'inputs border-radius-5 background_trans width_100'"
@@ -176,7 +158,7 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3 h_100px m-l-5 inputs border-radius-5">
+              <div class="col-md-3 col-lg-3 h_100px col-sm-10 col-10 m-l-5 inputs border-radius-5">
                 <mat-label class="color_grey"
                   *ngIf="addCategoryForm.value.categoryImage == null || addCategoryForm.value.categoryImage == ''">
                   Category Image *</mat-label>
@@ -185,12 +167,12 @@ navigate by url -- Admin/auth/catalogue -->
                   <div class="spinner-container" *ngIf="loading">
                     <mat-spinner diameter="30"></mat-spinner>
                   </div>
-                  <div class="col-md-5 pointer">
+                  <div class="col-md-5 col-sm-12 col-12 pointer">
                     <input hidden #fileInput (change)="uploadFile($event)" accept=".png,.jpg,.jpeg" id="fileInput"
                       type='file'>
                     <img class="img1 verticle_middle marginClass" [src]="'assets/images/image_upload.svg'">
                   </div>
-                  <div class="col-md-7 pointer center f_size_12" (change)="uploadFile($event)">
+                  <div class="col-md-7 col-sm-0 col-0 pointer center f_size_12 none" (change)="uploadFile($event)">
                     Click here <br> Or <br> Drag and drop here
                   </div>
                 </div>
@@ -202,13 +184,13 @@ navigate by url -- Admin/auth/catalogue -->
             </div>
             <br>
             <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
-              <div class="col-md-8"></div>
-              <div class="col-md-2 center col-sm-6 col-6">
+              <div class="col-lg-8 col-md-6"></div>
+              <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
                 <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="addCategory()">Save</button>
               </div>
-              <div class="col-md-2 center col-sm-6 col-6">
+              <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
                 <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -320,14 +302,11 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
         </div>
 
-        <div class="row pos_bottom" *ngIf="!showCourses">
-          <button id="viewCourse" mat-stroked-button
-            class=" border-radius-5 background-blue color_white center "
+        <div class="row pos_bottom" *ngIf="!showCourses && !showHome && !showAddCatForm">
+          <button id="viewCourse" mat-stroked-button class=" border-radius-5 background-blue color_white center "
             (click)="showCourses = !showCourses">View
             Courses</button>
         </div>
-        <!-- hide courses
-        select all -->
 
         <!-- end of view courses -->
       </div>
