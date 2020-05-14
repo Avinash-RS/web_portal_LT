@@ -101,16 +101,6 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addCategoryForm = this.formBuilder.group({
-      category_name: new FormControl('', myGlobals.req),
-      category_description: new FormControl('', myGlobals.req),
-      category_image: ['', myGlobals.req]
-    });
-    this.addSubCategoryForm = this.formBuilder.group({
-      subCategoryName: new FormControl('', myGlobals.req),
-      subCategoryDescription: new FormControl('', myGlobals.req),
-      subCategoryImage: ['', myGlobals.req]
-    });
     this.getallcategories();
   }
 
@@ -170,8 +160,6 @@ export class CatalogueManagementComponent implements OnInit {
         this.treeSource.data = null;
         this.treeSource.data = array;
       });
-
-
     }
   }
 
@@ -179,12 +167,18 @@ export class CatalogueManagementComponent implements OnInit {
     if (category.category_id) {
       if (category.checkbox === true) {
         this.selectedCategory = category;
+        this.addCategoryForm = this.formBuilder.group({
+          category_name: new FormControl('', myGlobals.req),
+          category_description: new FormControl('', myGlobals.req),
+          category_image: ['', myGlobals.req]
+        });
         this.addCategoryForm.patchValue(this.selectedCategory);
         this.showAddCatForm = true;
         this.showAddSubCatForm = false;
         this.showHome = false;
       } else {
-        this.selectedCategory = null;
+        this.selectedCategory = {};
+        this.addCategoryForm.reset();
       }
     } else if (category.sub_category_id) {
       if (category.checkbox === true) {
@@ -298,7 +292,12 @@ export class CatalogueManagementComponent implements OnInit {
     }
     console.log(category)
     this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      console.log(result)
+      console.log(result);
+      this.addCategoryForm.reset();
+      if (result?.data?.create_catelogue?.success)
+        this.getallcategories();
+      else
+        this.alert.openAlert(result?.data?.create_catelogue?.message, null)
     });
   }
   // gotoedit() {
