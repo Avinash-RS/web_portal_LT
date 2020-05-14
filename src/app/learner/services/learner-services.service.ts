@@ -356,12 +356,13 @@ export class LearnerServicesService {
     });
   }
 
-  getallcourses(groupid, pagenumber) {
+  getallcourses(groupid, pagenumber,sort_type) {
     return this.Apollo.query({
       query: get_all_course_by_usergroup,
       variables: {
         group_id: groupid,
-        pagenumber: pagenumber
+        pagenumber: pagenumber,
+        sort_type:sort_type
       }
     });
   }
