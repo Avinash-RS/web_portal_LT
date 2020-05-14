@@ -51,6 +51,12 @@ export class ModuleRepositoryComponent implements OnInit {
     this.apiService.repositoryModules().subscribe((data: any) => {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
+        val.isSelect = false;
+        this.routeData.moduleList.forEach((data) => {
+          if(val.moduleid == data) {
+            val.isSelect = true;
+          }
+        })
       })
       this.savedModules = data.Result;
       this.dataSource = new MatTableDataSource<any>(this.savedModules);

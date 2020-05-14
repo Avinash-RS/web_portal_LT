@@ -21,6 +21,7 @@ export class AddModuleComponent implements OnInit {
   hoverName: string;
   isHover: boolean;
   isDrag: boolean;
+  moduleList = [];
   constructor(public spinner: NgxSpinnerService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
@@ -46,7 +47,7 @@ export class AddModuleComponent implements OnInit {
       }
     });
 
-  
+
     this.route.snapshot.paramMap.get('courseDetails');
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
@@ -124,13 +125,13 @@ export class AddModuleComponent implements OnInit {
     this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
       if (res.Code == 200) {
         this.getCourseDetails();
-        const obj ={
-          course_id:this.routedCourseDetails.courseId,
-          is_active:0
+        const obj = {
+          course_id: this.routedCourseDetails.courseId,
+          is_active: 0
         }
-        this.apiService.updateCourse(obj).subscribe((data:any) => {
-          console.log(data); 
-        });  
+        this.apiService.updateCourse(obj).subscribe((data: any) => {
+          console.log(data);
+        });
         this.toast.success('Module updated successfully');
       }
       this.spinner.hide();
@@ -149,6 +150,11 @@ export class AddModuleComponent implements OnInit {
   navChooseTemp() {
     this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
 
+  }
+
+  addModuleRepos() {
+    this.moduleList = ['MDL0001','MDL0002'];
+    this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
   }
 
   crsDetails() {
@@ -171,4 +177,4 @@ export class AddModuleComponent implements OnInit {
   editResource() {
     this.router.navigate(['/Admin/auth/Wca/rf']);
   }
- }
+}
