@@ -360,7 +360,8 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
           <!-- <div class="row"> -->
           <div class="m-r-20 m-l-20">
-            <mat-grid-list cols="4" rowheight="2:1.7" gutterSize="30px">
+            <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowheight="2:1.7"
+              gutterSize="30px">
               <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
                 [rowspan]="1">
                 <mat-card class="course-card  font-display" (click)="selectCourse(courses,i+'c')">
@@ -368,10 +369,11 @@ navigate by url -- Admin/auth/catalogue -->
                     <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
                       src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
                     <!-- select image overlay -->
-                  </div>
-                  <div class="overlay">
-                    <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
-                    </mat-icon>
+
+                    <div class="overlay">
+                      <!-- <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
+                    </mat-icon> -->
+                    </div>
                   </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>
