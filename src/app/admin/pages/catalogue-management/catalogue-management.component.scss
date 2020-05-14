@@ -183,12 +183,21 @@ hr {
 //     font-weight: bolder;
 // }
 
-.category-label {
-    background: $color-light-blue;
-    border-radius: 5px;
-    margin-left: 5px;
+// .category-label {
+//     background: $color-light-blue;
+//     border-radius: 5px;
+//     margin-left: 5px;
+// }
+:host /deep/  .mat-form-field-flex {
+    cursor: pointer;
+    background: aliceblue !important;
+    border-radius: 5px !important;
+    padding: 0px 5px 7px 0px !important;
 }
 
+.width_35 {
+    width: 35% !important;
+}
 .alert-btn {
     position: absolute;
     bottom: 10px;
