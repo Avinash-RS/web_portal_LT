@@ -299,6 +299,10 @@ navigate by url -- Admin/auth/catalogue -->
                 <mat-card class="course-card  font-display">
                   <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
                     src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
+                  <!-- select image overlay -->
+                  <div class="overlay">
+                    <mat-icon class="Select-image">done</mat-icon>
+                  </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>
                   </mat-card-content>
