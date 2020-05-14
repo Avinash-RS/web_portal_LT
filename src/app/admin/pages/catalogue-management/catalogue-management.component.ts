@@ -244,9 +244,10 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   uploadFile(fileInput: any) {
+    debugger
     this.loading = true;
-    if (fileInput && fileInput.target && fileInput.target.files[0]) {
-      var selectfile = <File>fileInput.target.files[0];
+    if (fileInput) {
+      var selectfile = <File>fileInput[0];
       if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
         this.alert.openAlert('Image should only be Jpeg or png format', null)
         this.loading = false;
@@ -266,7 +267,8 @@ export class CatalogueManagementComponent implements OnInit {
           })
         }
       }
-    }
+    } else
+    this.loading = false
   }
 
   gotoEdit() {
