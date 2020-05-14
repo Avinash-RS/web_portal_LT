@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", myGlobals.usernameValforLogin),
       password: new FormControl("", myGlobals.passwordValforLogin),
-      remember_me: new FormControl("", [])
+      remember_me: new FormControl(false, [])
     });
   }
 
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log('inside comp')
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {

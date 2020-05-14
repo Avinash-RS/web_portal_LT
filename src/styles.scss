@@ -186,7 +186,7 @@ html {
 }
 
 .width_60 {
-  width: 60%;
+  width: 60% !important;
 }
 
 .width_70 {
@@ -302,7 +302,7 @@ html {
 }
 
 .border-radius-5 {
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 .background-maroon {
@@ -342,6 +342,9 @@ td {
   color: $color-blank !important;
 }
 
+.pos_fxd {
+  position: fixed !important;
+}
 ////////////////////////////////////////////////////////////////////////
 
 .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
@@ -593,4 +596,13 @@ h1 {
   height: 100%;
   min-height: inherit;
   max-height: inherit;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
