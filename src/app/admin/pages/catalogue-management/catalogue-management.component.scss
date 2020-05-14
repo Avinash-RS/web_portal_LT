@@ -171,17 +171,17 @@ hr {
     padding-left: 0;
 }
 
-.course-card {
-    box-shadow: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+// .course-card {
+//     box-shadow: none !important;
+//     margin: 0 !important;
+//     padding: 0 !important;
 
-}
+// }
 
-.font-display {
-    color: $color-blue;
-    font-weight: bolder;
-}
+// .font-display {
+//     color: $color-blue;
+//     font-weight: bolder;
+// }
 
 .category-label {
     background: $color-light-blue;
@@ -211,30 +211,30 @@ hr {
 //     }
 // }
 
-.overlayClass {
-    opacity: 0.3;
-    z-index: -1;
-    background-color: $color-blue !important; //not-working
-    background-blend-mode: color; //not-working
-}
+// .overlayClass {
+//     opacity: 0.3;
+//     z-index: -1;
+//     background-color: $color-blue !important; //not-working
+//     background-blend-mode: color; //not-working
+// }
 
-// select image overlay
+// // select image overlay
 
-.overlay {
-    position: absolute;
-    bottom: 0;
-    background-image: Url('assets/courses/selectimagefull.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    // background: $color-blue;
-    // background-blend-mode: color;
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    margin: 0 !important;
-    padding: 0 !important;
+// .overlay {
+//     position: absolute;
+//     bottom: 0;
+//     background-image: Url('assets/courses/selectimagefull.png');
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     // background: $color-blue;
+//     // background-blend-mode: color;
+//     width: 100%;
+//     height: 100%;
+//     opacity: 0.5;
+//     margin: 0 !important;
+//     padding: 0 !important;
 
-}
+// }
 
 .spinner-container {
     position: absolute;
@@ -337,4 +337,26 @@ mat-tree {
     // .right {
     //     order: 1;
     // }
+}
+
+
+
+
+
+.containerOverlay {
+    // width: 100%;
+    .overlay {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        overflow: hidden;
+        top: 0vh;
+        left: 10%;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .pointer {
+        width: 80% !important;
+    }
 }
