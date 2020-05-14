@@ -150,33 +150,65 @@
     <li class="breadcrumb-item active" aria-current="page">All Courses</li>
   </ol>
 </nav>
-
-
 <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
   <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
 </div>
-
-<div class="btn-group pull-right">
+<br> <br>
+<!-- <div class="btn-group pull-right"> -->
   <!-- <button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
   [ngClass]="{'btn-primary active': displayMode === 1}" >
   <i class="fa fa-search"></i>
 </button> -->
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)">
+  <!-- <button class="icon_fnt"  (click)="onDisplayModeChange(1)">
     <i class="fa fa-filter"></i>
+  </button> -->
+<!-- </div> -->
+  <div class="row">
+    <div class="col-md-10 col-sm-12 col-12">
+  <button class="submit" (click)="getCategory(getCategoryDialog)" > Category
+      <i class="fa fa-chevron-down colr"></i>
+    </button>
+    <button class="submit"  > Filter
+      <i class="fa fa-filter colrr"></i>
+    </button>
+
+    <button class="submit" (click)="sorting()"  > Sort       
+      <i class="fa fa-chevron-down colrr"></i>
+    </button>
+    </div>
+    <div class="col-md-2 col-sm-12 col-12">
+
+      <button class="icon_fnt" mat-button (click)="onDisplayModeChange(1)">
+        <mat-icon class="icon">view_module</mat-icon>
+    </button>
+
+    <button class="icon_fnt" mat-button (click)="onDisplayModeChange(2)"> 
+      <mat-icon>menu</mat-icon>
   </button>
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)"
-    [ngClass]="{'btn-primary active': displayMode === 1}">
-    <i class="fa fa-th"></i>
-  </button>
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(2)"
-    [ngClass]="{'btn-primary active': displayMode === 2}">
-    <i class="fa fa-list"></i>
-  </button>
-</div>
+    <!-- <button class="icon_fnt"  (click)="onDisplayModeChange(2)"
+      [ngClass]="{'btn-primary active': displayMode === 2}">
+      <i class="fa fa-list colr"></i>
+    </button> -->
+    </div>
+  </div>
+
+
+
+
 <div class="container">
   <br>
-  <br>
   <!-- grid -->
+  <!-- <div class="row">
+    <div class="col-4">
+
+    </div>
+
+    <div class="col-8">
+      
+    </div>
+  </div> -->
+
+
   <div class="container containerShadow">
     <div class="row" *ngIf="displayMode === 1">
       <ng-container
@@ -215,4 +247,59 @@
   <br>
   <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
   </pagination-controls>
+
+  <ng-template #getCategoryDialog>
+    <!-- <button mat-icon-button >
+      <mat-icon style="text-align:right" (click)="closedialogbox()">close</mat-icon>
+    </button> -->
+    <mat-dialog-content >
+    <div class="row">
+      <div class="col-4">
+        <h2>Level 1 : Category</h2>
+        <mat-form-field class="example-full-width">
+          <mat-icon matPrefix>search</mat-icon>
+           <input type="search" matInput placeholder="Search">
+         </mat-form-field>
+
+         <div class="row">
+          <div class="col-md-8">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let item of checklist">
+                    <label class="container">
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
+                    {{item.value}}
+                    <span class="checkmark"></span></label>
+                  </li>
+                </ul>
+          </div>
+          <!-- <div class="col-md-6">
+             
+          </div> -->
+      </div>
+
+      </div>
+      <div class = "vertical"></div> 
+      <div class="col-4" >
+        <h2>Level 2 : Category</h2>
+        <mat-form-field class="example-full-width">
+          <mat-icon matPrefix>search</mat-icon>
+           <input type="search" matInput placeholder="Search">
+         </mat-form-field>
+      </div>
+      <div class = "vertical1"></div> 
+      <div class="col-4">
+        <h2>Level 3 : Category</h2>
+        <mat-form-field class="example-full-width">
+          <mat-icon matPrefix>search</mat-icon>
+           <input type="search" matInput placeholder="Search">
+         </mat-form-field>
+      </div>
+    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+     <button class="roundbtn" (click)="applyFilter()">Apply</button>
+    </mat-dialog-actions>
+  </ng-template>
+
+
 </div>
