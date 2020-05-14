@@ -172,6 +172,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   selectedcategory(category) {
+    console.log(category)
     if (category.category_id) {
       if (category.checkbox === true) {
         let oldcategory = null;
