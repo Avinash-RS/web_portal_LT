@@ -168,7 +168,7 @@
   <button class="submit" (click)="getCategory(getCategoryDialog)" > Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <button class="submit"  > Filter
+    <button class="submit" (click)="filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
 
@@ -177,7 +177,6 @@
     </button>
     </div>
     <div class="col-md-2 col-sm-12 col-12">
-
       <button class="icon_fnt" mat-button (click)="onDisplayModeChange(1)">
         <mat-icon class="icon">view_module</mat-icon>
     </button>
@@ -189,6 +188,23 @@
       [ngClass]="{'btn-primary active': displayMode === 2}">
       <i class="fa fa-list colr"></i>
     </button> -->
+    </div>
+  </div>
+  <br>
+
+  <div class="row box" *ngIf = "showAppliedFiltre">
+    <div class="col-2">
+      <h3 class="text">Applied Filters : </h3>
+    </div>
+
+    <div class="col-8">
+      
+    </div>
+
+    <div class="col-2">
+      <div class = "smallline"></div> 
+      <h3 class="text2"> Clear All Filters </h3>
+     
     </div>
   </div>
 

@@ -28,7 +28,8 @@ export class ViewAllCoursesComponent implements OnInit {
   masterSelected:boolean;
   checklist:any;
   checkedList:any;
-  sort_type:any = 'A-Z';
+  sort_type:any = "";
+  showAppliedFiltre :boolean = false;
 
   constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
     this.btnType = "Enroll Now"
@@ -78,6 +79,13 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getCheckedItemList();
   }
 
+  filter(){
+      this.showAppliedFiltre = true;
+  }
+  sorting(){
+    this.showAppliedFiltre = false;
+  }
+
   loadcategoryandcourses() {
     this.type = 'category';
     this.pagenumber = 0;
@@ -86,6 +94,7 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getallcourses();
   }
   getcoursecategories() {
+    
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
       this.categories = result.data.get_all_category.message;
     });
@@ -118,8 +127,9 @@ export class ViewAllCoursesComponent implements OnInit {
   getallcourses() {
     if (this.userDetailes.group_id)
     console.log(this.userDetailes.group_id[0])
-    this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber).subscribe((result: any) => {
+    this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,this.sort_type).subscribe((result: any) => {
       this.allcourses = result.data.get_all_course_by_usergroup.message;
+      console.log(this.allcourses)
     });
   }
 
@@ -140,12 +150,13 @@ export class ViewAllCoursesComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
+    this.learnerservice.getallcourses('1', this.pagenumber,this.sort_type).subscribe((result: any) => {
       this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });
   }
 
   getCategory(templateRef: TemplateRef<any>) {
+    this.showAppliedFiltre = false;
     this.dialog.open(templateRef);
   }
   closedialogbox(){
