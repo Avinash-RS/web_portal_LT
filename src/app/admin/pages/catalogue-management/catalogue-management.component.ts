@@ -41,7 +41,7 @@ export class CatalogueManagementComponent implements OnInit {
 
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     this.courses = [
@@ -163,38 +163,49 @@ export class CatalogueManagementComponent implements OnInit {
     }
   }
 
-  selectedcategory(category) {
+  
+
+selectedcategory(category) {
     if (category.category_id) {
-      if (category.checkbox === true) {
-        this.selectedCategory = category;
-        this.addCategoryForm = this.formBuilder.group({
+    if (category.checkbox === true) {
+      let oldcategory = null;
+      oldcategory = this.selectedCategory;
+      this.selectedCategory = category;
+      this.addCategoryForm = this.formBuilder.group({
           category_name: new FormControl('', myGlobals.req),
           category_description: new FormControl('', myGlobals.req),
           category_image: ['', myGlobals.req]
         });
-        this.addCategoryForm.patchValue(this.selectedCategory);
-        this.showAddCatForm = true;
-        this.showAddSubCatForm = false;
-        this.showHome = false;
-      } else {
-        this.selectedCategory = {};
-        this.addCategoryForm.reset();
-      }
-    } else if (category.sub_category_id) {
-      if (category.checkbox === true) {
-        this.selectedSubCategory = category;
-      } else {
-        this.selectedSubCategory = null;
+      this.addCategoryForm.patchValue(this.selectedCategory);
+      this.showAddCatForm = true;
+      this.showAddSubCatForm = false;
+      this.showHome = false;
+      if (oldcategory?.category_id) {
+        const value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
+        this.treeSource._data.value[value].checkbox = false;
+        this.treeSource._data.value[value]?.children?.forEach(element => {
+             element.checkbox = false;
+      });
       }
     } else {
-      if (category.checkbox === true) {
+      this.selectedCategory = {};
+      this.addCategoryForm.reset();
+    }
+  } else if (category.sub_category_id) {
+    if (category.checkbox === true) {
+      this.selectedSubCategory = category;
+    } else {
+      this.selectedSubCategory = null;
+    }
+  } else {
+    if (category.checkbox === true) {
 
-      } else {
-
-      }
+    } else {
 
     }
+
   }
+}
 
   gotoAdd() {
     console.log(this.selectedCategory)
