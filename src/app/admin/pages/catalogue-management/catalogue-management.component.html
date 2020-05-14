@@ -59,10 +59,12 @@ navigate by url -- Admin/auth/catalogue -->
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
-          <li class="breadcrumb-item" *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;else">
+          <li class="breadcrumb-item" (click)="selectedCategory?.category_name != undefined && changeNav('addCategoryForm')" *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;">
             {{selectedCategory?.category_name || 'Category'}}</li>
-          <li *ngIf="selectedSubCategory" class="breadcrumb-item">{{selectedSubCategory.sub_category_name}}</li>
-          <!-- <li class="breadcrumb-item active" aria-current="page">Sub-Subcategory</li> -->
+          <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined" 
+          (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')" aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category'}}</li>
+          <li class="breadcrumb-item active" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
+          changeNav('addSuperSubCategoryForm')" *ngIf="selectedSuperSubCategory?.super_sub_category_name != undefined" aria-current="page">{{selectedSuperSubCategory.super_sub_category_name}}</li>
         </ol>
         <!-- end of navigations ( engineering > electronics > nano electronics) -->
 
@@ -97,14 +99,15 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
                 <button mat-raised-button
-                  [disabled]="showCourses || (addCategoryForm && (addCategoryForm?.value?.category_name != '' ||
-                addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != '') 
-                && !selectedCategory?.category_name) || (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' ||
-                addCategoryForm?.value?.sub_category_description != '' && !selectedSubCategory?.category_name)) || (addSuperSubCategoryForm && (addSuperSubCategoryForm?.value?.super_sub_category_name != '' ||
-                addSuperSubCategoryForm?.value?.super_sub_category_description != ''  && !selectedSuperSubCategory?.category_name))"
+                  [disabled]="showCourses ||
+                   (addCategoryForm && (addCategoryForm?.value?.category_name != '' || addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != '') 
+                && !selectedCategory?.category_name) ||
+                 (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' || addSubCategoryForm?.value?.sub_category_description != '')
+                  && !selectedSubCategory?.sub_category_name) || 
+                  (addSuperSubCategoryForm && (addSuperSubCategoryForm?.value?.super_sub_category_name != '' ||
+                addSuperSubCategoryForm?.value?.super_sub_category_description != '') && !selectedSuperSubCategory?.super_sub_category_name)"
                   class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
-                  <span class="material-icons" style="vertical-align: middle;">add</span>Add
-                </button>
+                  <span class="material-icons" style="vertical-align: middle;">add</span>Add</button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
                 <button mat-raised-button [disabled]="true" class="edit-btn width_80 m-b-10 color_white">
@@ -162,7 +165,7 @@ navigate by url -- Admin/auth/catalogue -->
                   <textarea style="resize: none;" rows="5"
                     [ngClass]="'inputs border-radius-5 background_trans width_100'"
                     [ngClass]="{ 'is-invalid': f.category_description.touched && f.category_description.errors }"
-                    placeholder="Description *" formControlName="category_description"
+                    placeholder="Description" formControlName="category_description"
                     name="category_description"></textarea>
                   <!-- <div *ngIf="f.category_description.touched && f.category_description.errors" class="error_msg">
                     <div *ngIf="f.category_description.errors.required">* Category Description is required</div>
@@ -227,7 +230,7 @@ navigate by url -- Admin/auth/catalogue -->
           <form [formGroup]="addSubCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
-                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory*"
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory *"
                   [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors }"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
@@ -242,7 +245,7 @@ navigate by url -- Admin/auth/catalogue -->
                   <textarea style="resize: none;" rows="5"
                     [ngClass]="'inputs border-radius-5 background_trans width_100'"
                     [ngClass]="{ 'is-invalid': f.sub_category_description.touched && f.sub_category_description.errors }"
-                    placeholder="Description *" formControlName="sub_category_description"
+                    placeholder="Description" formControlName="sub_category_description"
                     name="sub_category_description"></textarea>
                   <!-- <div *ngIf="f.sub_category_description.touched && f.sub_category_description.errors"
                     class="error_msg">
@@ -282,7 +285,7 @@ navigate by url -- Admin/auth/catalogue -->
           <form [formGroup]="addSuperSubCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
-                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory*"
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory *"
                   [ngClass]="{ 'is-invalid': f.super_sub_category_name.touched && f.super_sub_category_name.errors }"
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
@@ -298,7 +301,7 @@ navigate by url -- Admin/auth/catalogue -->
                   <textarea style="resize: none;" rows="5"
                     [ngClass]="'inputs border-radius-5 background_trans width_100'"
                     [ngClass]="{ 'is-invalid': f.super_sub_category_description.touched && f.super_sub_category_description.errors }"
-                    placeholder="Description *" formControlName="super_sub_category_description"
+                    placeholder="Description" formControlName="super_sub_category_description"
                     name="super_sub_category_description"></textarea>
                   <!-- <div *ngIf="f.super_sub_category_description.touched && f.super_sub_category_description.errors"
                             class="error_msg">
@@ -308,6 +311,7 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <br>
+            
             <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">

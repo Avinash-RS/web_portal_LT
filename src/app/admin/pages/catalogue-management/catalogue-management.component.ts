@@ -23,11 +23,11 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = false;
+  showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
-  showAddSuperSubCatForm : boolean = false;
-  showCourses: boolean = true;
+  showAddSuperSubCatForm: boolean = false;
+  showCourses: boolean = false;
   selectedCategory: any = {};
   selectedSubCategory: any = {};
   selectedSuperSubCategory: any = {};
@@ -114,6 +114,9 @@ export class CatalogueManagementComponent implements OnInit {
     else if (this.showAddSubCatForm == true) {
       return this.addSubCategoryForm.controls;
     }
+    else if (this.showAddSuperSubCatForm == true) {
+      return this.addSuperSubCategoryForm.controls;
+    }
   }
 
   getallcategories() {
@@ -183,7 +186,7 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedCategory = category;
         this.addCategoryForm = this.formBuilder.group({
           category_name: new FormControl('', myGlobals.req),
-          category_description: new FormControl(''),
+          category_description: new FormControl([]),
           category_image: ['', myGlobals.req]
         });
         this.addCategoryForm.patchValue(this.selectedCategory);
@@ -205,7 +208,7 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedSubCategory = category;
         this.addSubCategoryForm = this.formBuilder.group({
           sub_category_name: new FormControl('', myGlobals.req),
-          sub_category_description: new FormControl(''),
+          sub_category_description: new FormControl([]),
         });
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
         this.showAddSubCatForm = true;
@@ -219,11 +222,11 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedSuperSubCategory = category;
         this.addSuperSubCategoryForm = this.formBuilder.group({
           super_sub_category_name: new FormControl('', myGlobals.req),
-          super_sub_category_description: new FormControl(''),
+          super_sub_category_description: new FormControl([]),
         });
-        this.addSuperSubCategoryForm.patchValue(this.selectedSubCategory);
+        this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
         this.showAddSuperSubCatForm = true;
-        this.showAddCatForm = this.showHome = this.showAddSubCatForm =  this.showCourses = false;
+        this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
       } else {
         this.selectedSuperSubCategory = {};
         this.addSuperSubCategoryForm.reset();
@@ -235,7 +238,7 @@ export class CatalogueManagementComponent implements OnInit {
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl('', myGlobals.req),
+        category_description: new FormControl([]),
         category_image: ['', myGlobals.req]
       });
       this.showAddCatForm = true;
@@ -243,23 +246,53 @@ export class CatalogueManagementComponent implements OnInit {
       // this.showHome = false;
       // this.showCourses = false;
     }
-    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.category_name == undefined) {
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl([]),
       });
       this.showAddSubCatForm = true;
       this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
       // this.showHome = false;
     }
-    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.category_name != undefined
+    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name != undefined
       && this.selectedSuperSubCategory.super_sub_category_name == undefined) {
       this.addSuperSubCategoryForm = this.formBuilder.group({
         super_sub_category_name: new FormControl('', myGlobals.req),
         super_sub_category_description: new FormControl(''),
       });
       this.showAddSuperSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSubCatForm =  this.showCourses = false;
+      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
+    }
+  }
+
+  changeNav(formType) {
+    if (formType == 'addCategoryForm') {
+      this.addCategoryForm = this.formBuilder.group({
+        category_name: new FormControl('', myGlobals.req),
+        category_description: new FormControl([]),
+        category_image: ['', myGlobals.req]
+      });
+      this.addCategoryForm.patchValue(this.selectedCategory);
+      this.showAddCatForm = true;
+      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    } else  if (formType == 'addSubCategoryForm') {
+      this.addSubCategoryForm = this.formBuilder.group({
+        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl([]),
+      });
+      this.addSubCategoryForm.patchValue(this.selectedSubCategory);
+      this.showAddSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    }
+    else  if (formType == 'addSuperSubCategoryForm') {
+      this.addSuperSubCategoryForm = this.formBuilder.group({
+        super_sub_category_name: new FormControl('', myGlobals.req),
+        super_sub_category_description: new FormControl(''),
+      });
+      this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
+      this.showAddSuperSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
     }
   }
 
@@ -306,7 +339,7 @@ export class CatalogueManagementComponent implements OnInit {
     var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
       this.addSuperSubCategoryForm.value;
     let category = {
-      input_name: value.category_name || value.sub_category_name,
+      input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
       input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
       input_image: value.category_image || "null",
       creator_id: this.adminDetails._id,
@@ -320,7 +353,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.adminservice.createCatalogue(category).subscribe((result: any) => {
       console.log(result);
       formType == 'category' ? this.addCategoryForm.reset() : (formType == 'subcategory') ? this.addSubCategoryForm.reset() :
-        this.addSuperSubCategoryForm.reset;
+        this.addSuperSubCategoryForm.reset();
       if (result?.data?.create_catelogue?.success)
         this.getallcategories();
       else
