@@ -178,11 +178,12 @@ navigate by url -- Admin/auth/catalogue -->
                     <mat-spinner diameter="30"></mat-spinner>
                   </div>
                   <div class="col-md-5 col-sm-12 col-12 pointer">
-                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg" id="fileInput"
-                      type='file'>
+                    <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg"
+                      id="fileInput" type='file'>
                     <img class="img1 verticle_middle marginClass" [src]="'assets/images/image_upload.svg'">
                   </div>
-                  <div class="col-md-7 col-sm-0 col-0 pointer center f_size_12 none" (change)="uploadFile($event.target.files)">
+                  <div class="col-md-7 col-sm-0 col-0 pointer center f_size_12 none"
+                    (change)="uploadFile($event.target.files)">
                     Click here <br> Or <br> Drag and drop here
                   </div>
                 </div>
@@ -296,7 +297,8 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
           <!-- <div class="row"> -->
           <div class="m-r-20 m-l-20">
-            <mat-grid-list cols="4" rowheight="2:1.7" gutterSize="30px">
+            <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowheight="2:1.7"
+              gutterSize="30px">
               <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
                 [rowspan]="1">
                 <mat-card class="course-card  font-display">
@@ -306,8 +308,8 @@ navigate by url -- Admin/auth/catalogue -->
                     <!-- select image overlay -->
                   </div>
                   <div class="overlay">
-                    <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
-                    </mat-icon>
+                    <!-- <mat-icon class="Select-image" style="text-align: center; color: white; font-size: 500px">done
+                    </mat-icon> -->
                   </div>
                   <mat-card-content class="center_align">
                     <p>{{courses.name}}</p>

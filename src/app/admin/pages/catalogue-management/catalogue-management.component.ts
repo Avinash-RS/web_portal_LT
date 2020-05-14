@@ -32,6 +32,7 @@ export class CatalogueManagementComponent implements OnInit {
   courses: any;
   selectedArray: any = [];
   pagenumber = 0;
+  breakpoint: number;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -41,7 +42,7 @@ export class CatalogueManagementComponent implements OnInit {
 
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     this.courses = [
@@ -102,6 +103,30 @@ export class CatalogueManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getallcategories();
+
+    if (window.innerWidth <= 600)
+      this.breakpoint = 1;
+    else if (window.innerWidth >= 600 && window.innerWidth <= 768)
+      this.breakpoint = 2;
+    else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
+      this.breakpoint = 3;
+    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
+    //   this.breakpoint = 4;
+    else
+      this.breakpoint = 4;
+  }
+
+  onResize(event) {
+    if (event.target.innerWidth <= 600)
+      this.breakpoint = 1;
+    else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
+      this.breakpoint = 2;
+    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
+      this.breakpoint = 3;
+    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
+    //   this.breakpoint = 4;
+    else
+      this.breakpoint = 4;
   }
 
   get f() {
@@ -190,9 +215,9 @@ export class CatalogueManagementComponent implements OnInit {
           const value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
           this.treeSource._data.value[value].checkbox = false;
           this.treeSource._data.value[value]?.children?.forEach(element => {
-               element.checkbox = false;
-        });
-      }
+            element.checkbox = false;
+          });
+        }
       } else {
         this.selectedCategory = {};
         this.addCategoryForm.reset();
@@ -268,7 +293,7 @@ export class CatalogueManagementComponent implements OnInit {
         }
       }
     } else
-    this.loading = false
+      this.loading = false
   }
 
   gotoEdit() {
