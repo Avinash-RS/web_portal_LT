@@ -34,15 +34,15 @@ mutation update_group($_id: String!, $group_name: String!, $group_id: String!){
 
 export const create_catelogue = gql`
 mutation create_catelogue(
-  $input_name: String,
-  $input_description: String,
-  $input_image: String,
-  $creator_id: String,
-  $level: Number,
-  $apply_all_courses: Boolean,
-  $course_id: [String],
-  $parent_category_id: String,
-  $parent_sub_category_id: String){
+  $input_name: String!,
+  $input_description: String!,
+  $input_image: String!,
+  $creator_id: String!,
+  $level: Int!,
+  $apply_all_courses: Boolean!,
+  $course_id: [String]!,
+  $parent_category_id: String!,
+  $parent_sub_category_id: String!){
   create_catelogue(input_name: $input_name,input_description: $input_description, input_image: $input_image,
     creator_id : $creator_id,parent_sub_category_id: $parent_sub_category_id,level: $level, course_id: $course_id,
     apply_all_courses : $apply_all_courses, parent_category_id: $parent_category_id) {
