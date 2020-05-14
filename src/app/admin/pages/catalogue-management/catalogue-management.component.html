@@ -244,7 +244,7 @@ navigate by url -- Admin/auth/catalogue -->
               </div>
             </div>
             <br>
-            <div class="row" *ngIf="selectedCategory == null || selectedCategory == ''">
+            <div class="row" *ngIf="selectedSubCategory?.sub_category_name == undefined">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid"
