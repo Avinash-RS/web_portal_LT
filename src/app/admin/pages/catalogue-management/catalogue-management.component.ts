@@ -25,9 +25,9 @@ export class CatalogueManagementComponent implements OnInit {
   showHome: boolean = false;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
-  showCourses: boolean = true;
-  selectedCategory: any = null;
-  selectedSubCategory: any = null;
+  showCourses: boolean = false;
+  selectedCategory: any = {};
+  selectedSubCategory: any = {};
   categories: any;
   courses: any;
   selectedArray: any = [];

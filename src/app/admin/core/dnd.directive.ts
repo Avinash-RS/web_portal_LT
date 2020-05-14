@@ -12,7 +12,6 @@ import {
 })
 export class DndDirective {
   constructor() {
-    console.log('hiiii')
   }
   @HostBinding('class.fileover') fileOver: boolean;
   @Output() fileDropped = new EventEmitter<any>();
