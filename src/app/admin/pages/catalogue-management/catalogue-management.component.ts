@@ -16,8 +16,9 @@ import { MatTreeNestedDataSource, MatDialog } from '@angular/material';
 })
 export class CatalogueManagementComponent implements OnInit {
 
-  addCategoryForm: any;
-  addSubCategoryForm: any;
+  addCategoryForm: any; // cat add from
+  addSubCategoryForm: any; // sub cat add form
+  selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
   showHome: boolean = false;
@@ -37,11 +38,11 @@ export class CatalogueManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
+
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
-    console.log(this.adminDetails)
     this.courses = [
       {
         name: "Web Development",
@@ -94,7 +95,6 @@ export class CatalogueManagementComponent implements OnInit {
 
     ];
 
-    console.log(this.courses)
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -128,7 +128,6 @@ export class CatalogueManagementComponent implements OnInit {
    * on file drop handler
    */
   onFileDropped($event) {
-    console.log($event)
   }
 
   gotoAdd() {
@@ -165,8 +164,6 @@ export class CatalogueManagementComponent implements OnInit {
 
   uploadFile(fileInput: any) {
     this.loading = true;
-    console.log(fileInput)
-    debugger
     if (fileInput && fileInput.target && fileInput.target.files[0]) {
       var selectfile = <File>fileInput.target.files[0];
       if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
@@ -178,7 +175,6 @@ export class CatalogueManagementComponent implements OnInit {
       // }
       else {
         if (selectfile) {
-          console.log(selectfile, selectfile.name)
           const fb = new FormData();
           fb.append('image', selectfile, selectfile.name)
           this.learnerservice.imageupload(fb).subscribe((data: any) => {
@@ -193,19 +189,15 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoEdit() {
-    console.log("Edit works")
   }
 
   gotoDelete() {
-    console.log("Delete works")
   }
 
   selectAll() {
-    console.log("select all courses")
   }
 
   hideCourses() {
-    console.log("Hide all courses works")
   }
 
   addCategory() {
@@ -219,7 +211,6 @@ export class CatalogueManagementComponent implements OnInit {
     // parent_category_id : "hjkjswv5g",
     // parent_sub_category_id : "null"
 
-    console.log(this.addCategoryForm.value)
     var value = this.addCategoryForm.value;
     let category = {
       input_name: value.categoryName,
@@ -234,11 +225,10 @@ export class CatalogueManagementComponent implements OnInit {
     }
     console.log(category)
     this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      console.log()
+      console.log(result)
     });
   }
   // gotoedit() {
-  //   console.log(this.userDetailes.group_id[0])
   //   this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
   //     this.allcourses = result.data.get_all_course_by_usergroup.message;
   //   });
@@ -260,9 +250,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   openMoveTo(templateRef: TemplateRef<any>) {
-    console.log(templateRef);
-    this.selectedCategory = this.formBuilder.group({
-      category: new FormControl('', myGlobals.mobileVal),
+    this.selectCategoryForm = this.formBuilder.group({
+      category: new FormControl('', myGlobals.req),
       subCategory: new FormControl("", []),
       subSubCategory: new FormControl("", []),
     })
@@ -270,5 +259,9 @@ export class CatalogueManagementComponent implements OnInit {
   }
   closedialogbox() {
     this.dialog.closeAll();
+  }
+
+  moveCourses() {
+    console.log(this.selectCategoryForm)
   }
 }

@@ -124,6 +124,10 @@ hr {
     background-color: $color-maroon;
 }
 
+.textWrap {
+    white-space: normal;
+}
+
 .material-icons {
     font-size: inherit;
     padding-right: 5px;
@@ -167,9 +171,10 @@ hr {
 .overlayClass {
     opacity: 0.3;
     z-index: -1;
-    background-color:  $color-blue !important; //not-working
-    background-blend-mode: color;//not-working
+    background-color: $color-blue !important; //not-working
+    background-blend-mode: color; //not-working
 }
+
 .spinner-container {
     position: absolute;
     top: 0;
@@ -220,11 +225,22 @@ mat-tree {
 :host ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
     background-color: #437891 !important;
 }
+
 .dialogPopup {
     height: 420px;
     width: 700px;
+
     .border {
         border: solid 1px $color-border;
     }
 }
 
+.mat-raised-button[disabled] {
+    color: $color-border;
+}
+
+.pos_bottom {
+    position: absolute;
+    bottom: 10px;
+    left : 10px
+}
