@@ -9,6 +9,7 @@ import * as myGlobals from '@core/globals';
 import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatDialog } from '@angular/material';
+import { nodeChildrenAsMap } from '@angular/router/src/utils/tree';
 @Component({
   selector: 'app-catalogue-management',
   templateUrl: './catalogue-management.component.html',
@@ -21,10 +22,10 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  showHome: boolean = false;
+  showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
-  showCourses: boolean = true;
+  showCourses: boolean = false;
   selectedCategory: any = null;
   selectedSubCategory: any = null;
   categories: any;
@@ -116,19 +117,50 @@ export class CatalogueManagementComponent implements OnInit {
   getallcategories() {
     this.treeSource.data = null;
     this.pagenumber = 0;
-    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any ) => {
       console.log(result.data);
+      this.categories = result.data.getcategoryadmin.message;
+      this.treeSource.data = this.categories;
+      this.dataSource$.next(this.categories);
     });
-    // this.treeSource.data = this.categories;
-    // this.dataSource$.next(this.categories);
-
   }
 
-  /**
-   * on file drop handler
-   */
-  onFileDropped($event) {
-  }
+  loadsubcategory(node) {
+    console.log(node);
+    this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
+      console.log(result.data);
+      const category = result.data.get_sub_category.message;
+      if (node) {
+        // node.children = [
+        //   ...(node.children || []),
+        //   group
+        // ];
+        node.children = category;
+        // if (!this.treeControl.isExpanded(node)) {
+        this.treeControl.expand(node);
+        // }
+      } else {
+        this.dataSource$.next([
+          ...this.dataSource$.value, category[0]]);
+      }
+      const array = this.treeSource.data;
+      this.treeSource.data = null;
+      this.treeSource.data = array;
+    });
+   }
+
+     selectedcategory(category) {
+       if(category.checkbox === true) {
+        if (category.category_id) {
+          this.selectedCategory = category;
+         } else {
+          this.selectedSubCategory = category;
+         }
+       } else {
+        this.selectedCategory = null;
+        this.selectedSubCategory = null;
+       }
+      }
 
   gotoAdd() {
     if (this.selectedCategory == null) {

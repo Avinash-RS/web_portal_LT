@@ -265,3 +265,36 @@ mat-tree {
     bottom: 10px;
     left: 10px
 }
+
+@media screen and (min-width: 320px) and (max-width:1024px) {
+
+    .add-btn,
+    .edit-btn,
+    .delete-btn,
+    .moveTo-btn,
+    #addCategory,
+    #cancel {
+        width: 100% !important;
+    }
+
+    .marginClass {
+        margin: auto !important;
+        display: block;
+    }
+
+    .none {
+        display: none !important;
+    }
+
+    // .left {
+    //     order: 2;
+    // }
+
+    // .profile {
+    //     justify-content: space-between;
+    // }
+
+    // .right {
+    //     order: 1;
+    // }
+}
