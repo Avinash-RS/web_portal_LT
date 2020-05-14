@@ -192,14 +192,14 @@ export class CatalogueManagementComponent implements OnInit {
       if (category.checkbox === true) {
         this.selectedSubCategory = category;
         this.addSubCategoryForm = this.formBuilder.group({
-          subCategoryName: new FormControl('', myGlobals.req),
-          subCategoryDescription: new FormControl('', myGlobals.req),
+          sub_category_name: new FormControl('', myGlobals.req),
+          sub_category_description: new FormControl('', myGlobals.req),
         });
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
         this.showAddSubCatForm = true;
         this.showAddCatForm = this.showHome = this.showCourses = false;
       } else {
-        this.selectedSubCategory = null;
+        this.selectedSubCategory = {};
       }
     } else {
       if (category.checkbox === true) {
@@ -212,7 +212,6 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoAdd() {
-    console.log(this.selectedCategory)
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
@@ -226,8 +225,8 @@ export class CatalogueManagementComponent implements OnInit {
     }
     else if (this.selectedSubCategory == null) {
       this.addSubCategoryForm = this.formBuilder.group({
-        subCategoryName: new FormControl('', myGlobals.req),
-        subCategoryDescription: new FormControl('', myGlobals.req),
+        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl('', myGlobals.req),
       });
       this.showAddSubCatForm = true;
       this.showAddCatForm = this.showHome = this.showCourses = false;
@@ -305,7 +304,6 @@ export class CatalogueManagementComponent implements OnInit {
   // 5eb3b5f50d03e1bc320162cd id 
 
   selectCourse(c, id) {
-    console.log(c, id);
     if (c.isChecked == undefined || c.isChecked == false) {
       c.isChecked = true;
       this.selectedArray.push(c);
@@ -314,7 +312,6 @@ export class CatalogueManagementComponent implements OnInit {
       c.isChecked = !c.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== c);
     }
-    console.log(this.selectedArray)
   }
 
   openMoveTo(templateRef: TemplateRef<any>) {
