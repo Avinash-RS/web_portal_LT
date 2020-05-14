@@ -10,6 +10,7 @@ import { PublishCourseComponent } from '@admin/pages/publish-course/publish-cour
 import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
 import { WcaModule } from '../../wca/wca.module';
 import { WcaComponent } from '../../wca/pages/wca/wca.component';
+import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [{
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard] },
         { path : 'usergroup' , component: GroupManagementComponent,data: { title: 'User Group creation' }},
         { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
+        { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'View Courses' }, },
         {
             path:'Wca',
             loadChildren: '../../wca/wca.module#WcaModule',

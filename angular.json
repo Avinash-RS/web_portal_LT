@@ -100,14 +100,27 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "codeCoverage": true,
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [],
             "assets": [
-              "src/favicon.png",
+              "src/fav.png",
               "src/assets"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets"
+              ]
+            },
+            "styles": [
+              "src/styles.scss",
+              "src/app/learner/learner.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/app/admin/admin.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/videogular2/fonts/videogular.css",
+              "src/theme/theme.scss",
+              "src/theme/typography.scss",
+              "src/assets/variable.scss"
+            ],
+            "scripts": []
           }
         },
         "lint": {

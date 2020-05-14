@@ -12,6 +12,10 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { MockServiceService } from '@learner/services/mockService/mock-service.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LearnerMyCourseComponent } from '../learner-my-course/learner-my-course.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -44,14 +48,25 @@ describe('LoginComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Apollo, AlertComponentComponent],
+      providers: [Apollo, AlertComponentComponent, LearnerServicesService
+      ],
     })
       .compileComponents();
   }));
 
+  const routerSpy = { navigate: jasmine.createSpy('navigate') };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      declarations: [LoginComponent],
+      providers: [
+        { provide: Router, useValue: routerSpy }
+      ],
+      // imports: [RouterTestingModule.withRoutes([
+      //   { path: 'Learner/MyCourse', component: LearnerMyCourseComponent }
+      // ])],
+      imports: [RouterTestingModule],
+      // providers: [{ provide: LearnerServicesService, useClass: MockServiceService }]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -59,88 +74,112 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  beforeAll(() => {
+    localStorage.removeItem('UserDetails');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminDetails');
+  })
+
+  it('should create and identify components', () => {
     expect(component).toBeTruthy();
+    let loginBtnContainer = fixture.debugElement.nativeElement.querySelector('#login');
+    expect(component.loginForm.controls['username']).toBeDefined();
+    expect(component.loginForm.controls['password']).toBeDefined();
+    expect(loginBtnContainer).toBeDefined();
   });
 
   it('form invalid when empty', () => {
     expect(component.loginForm.valid).toBeFalsy();
   });
 
-  it('username field validity', () => {
+  it('should click remember me change value', () => {
+    let myCheckboxControl = component.loginForm.controls['remember_me'];
+    expect(myCheckboxControl.value).toEqual(false);
+    //set checkbox state to true
+    myCheckboxControl.setValue(true);
+    fixture.detectChanges();
+  });
 
+  it('username field validity', () => {
     let errors = {};
     let uname = component.loginForm.controls['username'];
     expect(uname.valid).toBeFalsy();
-
     errors = uname.errors || {};
-    expect(errors['required']).toBeTruthy();
-
-    // uname.setValue("test!@");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeTruthy();
-
-    // uname.setValue("te");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeTruthy();
-
-    // uname.setValue("test5test10test16test");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['maxlength']).toBeTruthy();
-
-    // uname.setValue("test");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
-
-    // uname.setValue("test123");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
-
-    // uname.setValue("123");
-    // errors = uname.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['maxlength']).toBeFalsy();
+    expect(errors['required']).toBe(true);
+    uname.setValue("test");
+    errors = uname.errors || {};
+    expect(errors['required']).toBeFalsy();
   });
 
   it('password field validity', () => {
     let errors = {};
     let password = component.loginForm.controls['password'];
-
-    // Email field is required
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
-
-    // // Set email to something
-    // password.setValue("123456");
-    // errors = password.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeTruthy();
-    // expect(errors['pattern']).toBeTruthy();
-
-    // // Set email to something correct
-    // password.setValue("123Aa!@#");
-    // errors = password.errors || {};
-    // expect(errors['required']).toBeFalsy();
-    // expect(errors['minlength']).toBeFalsy();
-    // expect(errors['pattern']).toBeFalsy();
+    password.setValue("123456");
+    errors = password.errors || {};
+    expect(errors['required']).toBeFalsy();
   });
 
-  it('submitting a form emits a user', () => {
+  it('submitting a form emits a user while remeber me is true', () => {
+    let router: Router;
+    let location: Location;
+    let service: MockServiceService;
     expect(component.loginForm.valid).toBeFalsy();
     component.loginForm.controls['username'].setValue("test");
+    component.loginForm.controls['remember_me'].setValue(true);
     component.loginForm.controls['password'].setValue("123Aa!@#");
     expect(component.loginForm.valid).toBeTruthy();
-    component.login();
+
+    fixture.detectChanges();
+
+    service = TestBed.get(MockServiceService);
+    const button = fixture.debugElement.nativeElement.querySelector('#login');
+    button.click();
+    expect(component.login())
+    let loginresult;
+    loginresult = service.login();
+    console.log(loginresult);
+    if (loginresult.data.login) {
+      if (loginresult.data.login.success) {
+        if (loginresult.data.login && component.loginForm.value.remember_me === true) {
+          localStorage.setItem('uname', component.loginForm.value.username);
+          localStorage.setItem('remember_me', 'true');
+          var ps = btoa(component.loginForm.value.password);
+          localStorage.setItem('ps', ps);
+          localStorage.setItem('login', 'true');
+          localStorage.setItem('role', 'learner')
+          localStorage.setItem('token', loginresult.data.login.message.token)
+          localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+          if (loginresult.data.login.message.is_profile_updated) {
+            // expect(routerSpy.navigate).toHaveBeenCalled();
+            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
+          }
+          else {
+            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/profile']);
+          }
+        } else {
+          localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+          localStorage.setItem('remember_me', 'false');
+          localStorage.setItem('uname', component.loginForm.value.username);
+          localStorage.setItem('login', 'true');
+          localStorage.setItem('role', 'learner');
+          localStorage.setItem('token', loginresult.data.login.message.token)
+          var ps = btoa(component.loginForm.value.password);
+          localStorage.setItem('ps', ps);
+          // if (loginresult.data.login.message.is_profile_updated)
+          //   router.navigate(['/Learner/MyCourse'])
+          //   // expect(location.path()).toBe('/home');
+          // else {
+          //   router.navigate(['/Learner/profile'])
+          // }
+        }
+      } else {
+        component.loginForm.reset();
+      }
+    } else {
+      component.loginForm.reset();
+    }
   });
 });
