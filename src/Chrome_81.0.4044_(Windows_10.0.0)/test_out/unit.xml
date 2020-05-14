@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-14T04:42:27" id="0" hostname="DESKTOP-HTI0BOT" tests="6" errors="1" failures="1" time="4.056">
+<testsuite name="Chrome 81.0.4044 (Windows 10.0.0)" package="" timestamp="2020-05-14T04:56:41" id="0" hostname="DESKTOP-HTI0BOT" tests="6" errors="1" failures="1" time="2.681">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"/>
   </properties>
-  <testcase name="AdminCoursesComponent should create" time="1.004" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
-  <testcase name="AdminCoursesComponent Check for resize width below 600" time="0.743" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
-  <testcase name="AdminCoursesComponent Check for the windows inner width between 600 and 768" time="0.539" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
-  <testcase name="AdminCoursesComponent Check for the windows inner width between 768 and 1024" time="0.577" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
-  <testcase name="AdminCoursesComponent Check for the windows inner width above 1024" time="0.557" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
-  <testcase name="AdminCoursesComponent Check get published courses" time="0.636" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent">
+  <testcase name="AdminCoursesComponent should create" time="0.629" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
+  <testcase name="AdminCoursesComponent Check for resize width below 600" time="0.494" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
+  <testcase name="AdminCoursesComponent Check for the windows inner width between 600 and 768" time="0.354" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
+  <testcase name="AdminCoursesComponent Check for the windows inner width between 768 and 1024" time="0.383" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
+  <testcase name="AdminCoursesComponent Check for the windows inner width above 1024" time="0.38" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent"/>
+  <testcase name="AdminCoursesComponent Check get published courses" time="0.441" classname="Chrome_81_0_4044_(Windows_10_0_0).AdminCoursesComponent">
     <failure type="">Expected [  ] to be [ Object({ admin_id: '1234ab', advertised_start: '', announcement: '', article_count: null, author_details: [ Object({ author_name: 'Arun Prakash', description: 'Good', image: 'https://edutechstorage.blob.core.windows.net/container1/images/5344796724521732-CourseInstructor.jpg', __typename: 'authorinfo' }) ], certificate_available_date: '', certificate_display_behaviour: '', certificate_html_view_enabled: null, certificate_name: null, certificates_show_before_end: '', course_category: '', course_content_details: [  ], course_description: 'This course is about the design and modelling', course_end_datetime: null, course_id: '4p53song', course_img_url: 'https://edutechstorage.blob.core.windows.net/container1/images/7984558259026076-Fabrication and Fitting.jpg', course_language: 'English', course_level: '', course_mode: 'self-placed', course_name: 'Fabrication and fitting Course', course_start_datetime: null, course_type: '', course_video_url: '', coursepartner_details: [ Object({ image:  ....
     at UserContext.&lt;anonymous&gt; (src/app/admin/pages/admin-courses/admin-courses.component.spec.ts:123:34)
     at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:391:1)
@@ -17,7 +17,14 @@
 </failure>
   </testcase>
   <system-out>
-    <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside get courses'
+    <![CDATA[Chrome 81.0.4044 (Windows 10.0.0) ERROR
+  {
+    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
+    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
+  }
+,Chrome 81.0.4044 (Windows 10.0.0) ERROR
+  Disconnected, because no message in 30000 ms.
+,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside get courses'
 ,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside published to test test cases - Jasper'
 ,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside get courses'
 ,Chrome 81.0.4044 (Windows 10.0.0) LOG: 'inside published to test test cases - Jasper'
