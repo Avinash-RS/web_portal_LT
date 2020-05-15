@@ -23,7 +23,7 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
-  loadingCategory : boolean = false;
+  loadingCategory: boolean = false;
   showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
@@ -39,7 +39,6 @@ export class CatalogueManagementComponent implements OnInit {
   subCategoryArray: any = [];
   superSubCatArray: any = [];
   pagenumber = 0;
-  breakpoint: number;
   level: number;
 
   /** tree source stuff */
@@ -48,63 +47,64 @@ export class CatalogueManagementComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  course_count: any;
 
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
-    this.courses = [
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
+    // this.courses = [
+    //   {
+    //     name: "Web Development",
+    //     src: "assets/courses/1.jpg",
+    //   },
+    //   {
+    //     name: "Business Analyst",
+    //     src: "assets/courses/2.jpg",
+    //   },
+    //   {
+    //     name: "Photography",
+    //     src: "assets/courses/3.jpg",
+    //   },
+    //   {
+    //     name: "Code study",
+    //     src: "assets/courses/4.jpg",
+    //   },
+    //   {
+    //     name: "Web Development",
+    //     src: "assets/courses/1.jpg",
+    //   },
+    //   {
+    //     name: "Business Analyst",
+    //     src: "assets/courses/2.jpg",
+    //   },
+    //   {
+    //     name: "Photography",
+    //     src: "assets/courses/3.jpg",
+    //   },
+    //   {
+    //     name: "Code study",
+    //     src: "assets/courses/4.jpg",
+    //   },
+    //   {
+    //     name: "Web Development",
+    //     src: "assets/courses/1.jpg",
+    //   },
+    //   {
+    //     name: "Business Analyst",
+    //     src: "assets/courses/2.jpg",
+    //   },
+    //   {
+    //     name: "Photography",
+    //     src: "assets/courses/3.jpg",
+    //   },
+    //   {
+    //     name: "Code study",
+    //     src: "assets/courses/4.jpg",
+    //   },
 
-    ];
+    // ];
 
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
@@ -112,30 +112,6 @@ export class CatalogueManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getallcategories();
-
-    // if (window.innerWidth <= 600)
-    //   this.breakpoint = 1;
-    // else if (window.innerWidth >= 600 && window.innerWidth <= 768)
-    //   this.breakpoint = 2;
-    // else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
-    //   this.breakpoint = 3;
-    // // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
-    // //   this.breakpoint = 4;
-    // else
-    //   this.breakpoint = 4;
-  }
-
-  onResize(event) {
-    if (event.target.innerWidth <= 600)
-      this.breakpoint = 1;
-    else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
-      this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
-      this.breakpoint = 3;
-    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
-      this.breakpoint = 4;
   }
 
   get f() {
@@ -154,9 +130,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.loadingCategory = true;
     this.treeSource.data = null;
     this.pagenumber = 0;
-    console.log("called");
     this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
-      console.log(result.data);
       this.treeSource.data = null;
       this.categories = result.data.getcategoryadmin.message;
       this.treeSource.data = this.categories;
@@ -166,10 +140,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   loadsubcategory(node) {
-    console.log(node);
     if (node.category_id) {
       this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
-        console.log(result.data);
         const category = result.data.get_sub_category.message;
         // this.subCategoryArray =  result.data.get_sub_category.message;
         if (node) {
@@ -191,9 +163,7 @@ export class CatalogueManagementComponent implements OnInit {
       });
     } else {
       this.learnerservice.getsupersubcategory(node.sub_category_id).subscribe((result: any) => {
-        console.log(result.data);
         const category = result.data.getsupersubcategory.message;
-        // this.superSubCatArray = result.data.getsupersubcategory.message;
         if (node) {
           // node.children = [
           //   ...(node.children || []),
@@ -216,19 +186,16 @@ export class CatalogueManagementComponent implements OnInit {
 
   loadsubcategoryDropDown() {
     this.learnerservice.getcoursesubcategory(this.selectCategoryForm.value?.category.category_id).subscribe((result: any) => {
-      console.log(result.data);
       this.subCategoryArray = result.data.get_sub_category.message;
     });
   }
   loadSupersubcategoryDropDown() {
     this.learnerservice.getsupersubcategory(this.selectCategoryForm.value?.subCategory?.sub_category_id).subscribe((result: any) => {
-      console.log(result.data);
       this.superSubCatArray = result.data.getsupersubcategory.message;
     });
   }
 
   selectedcategory(category) {
-    console.log(category);
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
@@ -275,8 +242,14 @@ export class CatalogueManagementComponent implements OnInit {
           }
         }
       } else {
+        this.selectedSubCategory = {};
+        this.addSubCategoryForm.reset();
         this.selectedCategory = {};
         this.addCategoryForm.reset();
+        this.selectedSuperSubCategory = {};
+        this.addSuperSubCategoryForm.reset();
+        this.showHome = true;
+        this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
       }
     } else if (category.sub_category_id) {
       if (category.checkbox === true) {
@@ -333,6 +306,26 @@ export class CatalogueManagementComponent implements OnInit {
       } else {
         this.selectedSubCategory = {};
         this.addSubCategoryForm.reset();
+        if (this.selectedCategory?.category_name != undefined) {
+          this.addCategoryForm = this.formBuilder.group({
+            category_name: new FormControl('', myGlobals.req),
+            category_description: new FormControl([]),
+            category_image: ['', myGlobals.req]
+          });
+          this.addCategoryForm.patchValue(this.selectedCategory);
+          this.showAddCatForm = true;
+          this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+        }
+        else {
+          this.selectedSubCategory = {};
+          this.addSubCategoryForm.reset();
+          this.selectedCategory = {};
+          this.addCategoryForm.reset();
+          this.selectedSuperSubCategory = {};
+          this.addSuperSubCategoryForm.reset();
+          this.showHome = true;
+          this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
+        }
       }
     } else {
       if (category.checkbox === true) {
@@ -392,6 +385,34 @@ export class CatalogueManagementComponent implements OnInit {
       } else {
         this.selectedSuperSubCategory = {};
         this.addSuperSubCategoryForm.reset();
+        if (this.selectedSubCategory?.sub_category_name != undefined) {
+          this.addSubCategoryForm = this.formBuilder.group({
+            sub_category_name: new FormControl('', myGlobals.req),
+            sub_category_description: new FormControl([]),
+          });
+          this.addSubCategoryForm.patchValue(this.selectedSubCategory);
+          this.showAddSubCatForm = true;
+          this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+        } else if (this.selectedCategory?.category_name != undefined) {
+          this.addCategoryForm = this.formBuilder.group({
+            category_name: new FormControl('', myGlobals.req),
+            category_description: new FormControl([]),
+            category_image: ['', myGlobals.req]
+          });
+          this.addCategoryForm.patchValue(this.selectedCategory);
+          this.showAddCatForm = true;
+          this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+        }
+        else {
+          this.selectedSubCategory = {};
+          this.addSubCategoryForm.reset();
+          this.selectedCategory = {};
+          this.addCategoryForm.reset();
+          this.selectedSuperSubCategory = {};
+          this.addSuperSubCategoryForm.reset();
+          this.showHome = true;
+          this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
+        }
       }
     }
   }
@@ -405,8 +426,6 @@ export class CatalogueManagementComponent implements OnInit {
       });
       this.showAddCatForm = true;
       this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      // this.showHome = false;
-      // this.showCourses = false;
     }
     else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
@@ -415,7 +434,6 @@ export class CatalogueManagementComponent implements OnInit {
       });
       this.showAddSubCatForm = true;
       this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      // this.showHome = false;
     }
     else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name != undefined
       && this.selectedSuperSubCategory.super_sub_category_name == undefined) {
@@ -511,9 +529,7 @@ export class CatalogueManagementComponent implements OnInit {
       parent_category_id: this.selectedCategory?.category_id || "null",
       parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
     }
-    console.log(category)
     this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      console.log(result);
       formType == 'category' ? this.addCategoryForm.reset() : (formType == 'subcategory') ? this.addSubCategoryForm.reset() :
         this.addSuperSubCategoryForm.reset();
       if (result?.data?.create_catelogue?.success)
@@ -524,22 +540,22 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getcourses(formType) {
-    console.log(formType);
     this.showCourses = true;
     this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
     this.pagenumber = 0;
     const value = formType == 'category' ? this.selectedCategory : (formType == 'subcategory') ? this.selectedSubCategory :
-       this.selectedSuperSubCategory;
-       console.log(value);
-    const category = { type : formType, _id : value.category_id || value.sub_category_id || value.super_sub_category_id ,
-      pagenumber : this.pagenumber};
+      this.selectedSuperSubCategory;
+    const category = {
+      type: formType, _id: value.category_id || value.sub_category_id || value.super_sub_category_id,
+      pagenumber: this.pagenumber
+    };
     // category.type = formType;
     // category._id = value.category_id || value.sub_category_id || value.super_sub_category_id;
     // category.pagenumber = this.pagenumber;
-    console.log(category);
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.courses = result?.data?.get_course_by_subcategory?.message;
-      console.log(result);
+      this.course_count = result?.data?.get_course_by_subcategory?.course_count || 10;
+      console.log(this.courses)
     });
   }
 
@@ -570,15 +586,13 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
-    console.log(this.selectCategoryForm);
     let level = this.selectCategoryForm?.value?.category != undefined &&
       this.selectCategoryForm?.value?.subCategory == undefined && this.selectCategoryForm?.value?.subSubCategory == undefined && 1;
     level = this.selectCategoryForm?.value?.category != undefined &&
       this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory == undefined && 2;
     level = this.selectCategoryForm?.value?.category != undefined &&
       this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory != undefined && 3;
-    console.log(level);
-    this.selectedArray.map((item: any) => item.course_id)
+    !this.selectedArray && this.selectedArray.map((item: any) => item.course_id)
     // old_level: course.old_level,
     // old_category_id: course.old_category_id,
     // old_sub_category_id: course.old_sub_category_id,
@@ -596,7 +610,7 @@ export class CatalogueManagementComponent implements OnInit {
       old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id,
       level: level,
       apply_all_courses: this.applyAllCourses || false,
-      course_id: this.selectedArray,
+      course_id: this.selectedArray || [],
       category_id: this.selectCategoryForm.value.category?.category_id,
       sub_category_id: this.selectCategoryForm.value.subCategory?.sub_category_id || "null",
       super_sub_category_id: this.selectCategoryForm.value.subSubCategory?.super_sub_category_id || "null",
@@ -607,4 +621,50 @@ export class CatalogueManagementComponent implements OnInit {
     //   console.log(result)
     // });
   }
+  onScrollDown() {
+    this.pagenumber = this.pagenumber + 1;
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
+      const resultdata = result?.data?.getcategoryadmin?.message;
+      if (resultdata.length) {
+        let array: any;
+        array = resultdata;
+        this.categories = this.treeSource.data;
+        this.categories.push(...array);
+        this.treeSource.data = null;
+        this.treeSource.data = this.categories;
+      }
+    });
+  }
+
 }
+
+
+
+
+
+
+
+
+// onResize(event) {
+//   if (event.target.innerWidth <= 600)
+//     this.breakpoint = 1;
+//   else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
+//     this.breakpoint = 2;
+//   else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
+//     this.breakpoint = 3;
+//   // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
+//   //   this.breakpoint = 4;
+//   else
+//     this.breakpoint = 4;
+// }
+
+    // if (window.innerWidth <= 600)
+    //   this.breakpoint = 1;
+    // else if (window.innerWidth >= 600 && window.innerWidth <= 768)
+    //   this.breakpoint = 2;
+    // else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
+    //   this.breakpoint = 3;
+    // // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
+    // //   this.breakpoint = 4;
+    // else
+    //   this.breakpoint = 4;
