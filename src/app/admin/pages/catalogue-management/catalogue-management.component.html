@@ -9,7 +9,9 @@
   <div class="container m-t-20">
     <div class="row">
       <!-- Mat tree code here ( left hand side) -->
-      <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left">
+      <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
+      [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+
         <div class="spinner-container" *ngIf="loadingCategory">
           <mat-spinner diameter="40"></mat-spinner>
         </div>

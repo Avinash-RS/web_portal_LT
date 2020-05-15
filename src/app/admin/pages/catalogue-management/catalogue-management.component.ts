@@ -621,6 +621,21 @@ export class CatalogueManagementComponent implements OnInit {
     //   console.log(result)
     // });
   }
+  onScrollDown() {
+    this.pagenumber = this.pagenumber + 1;
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
+      const resultdata = result?.data?.getcategoryadmin?.message;
+      if (resultdata.length) {
+        let array: any;
+        array = resultdata;
+        this.categories = this.treeSource.data;
+        this.categories.push(...array);
+        this.treeSource.data = null;
+        this.treeSource.data = this.categories;
+      }
+    });
+  }
+
 }
 
 
