@@ -13,6 +13,10 @@ navigate by url -- Admin/auth/catalogue -->
       <!-- Mat tree code here ( left hand side) -->
       <div class="card col-3 cardheight left">
 
+        <div class="spinner-container" *ngIf="loadingCategory">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -62,7 +66,7 @@ navigate by url -- Admin/auth/catalogue -->
           <li class="breadcrumb-item"
             (click)="selectedCategory?.category_name != undefined && changeNav('addCategoryForm')"
             *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;">
-            {{selectedCategory?.category_name || 'Category'}}</li>
+            {{selectedCategory?.category_name || 'Category >'}}</li>
           <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined"
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
             aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category'}}</li>
@@ -369,7 +373,7 @@ navigate by url -- Admin/auth/catalogue -->
             <div class="col-3 p-r-0 m-b-10">
               <button id="selectAll" mat-flat-button
                 class="width_70 float-right border-radius-5 background-blue color_white center"
-                (click)="selectAll()">Select All</button>
+                (click)="applyAllCourses = true && moveCourses()">Select All</button>
             </div>
           </div>
           <!-- <div class="row"> -->
@@ -455,34 +459,34 @@ navigate by url -- Admin/auth/catalogue -->
           <div class="form-group width_35">
             <mat-form-field appearance="outline fill" class="width_100 category-label">
               <mat-label class="m-l-20">Category *</mat-label>
-              <mat-select formControlName="category">
-                <mat-option *ngFor="let cat of selectedArray" [value]="cat">
-                  {{cat.name}}
+              <mat-select formControlName="category" (selectionChange)="loadsubcategoryDropDown()">
+                <mat-option *ngFor="let cat of categories" [value]="cat">
+                  {{cat.category_name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4" *ngIf="selectedArray.length > 0">
-            <div class="form-group width_90">
+          <div class="col-md-4" >
+            <div class="form-group width_90" *ngIf="subCategoryArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
-                <mat-select formControlName="subCategory">
-                  <mat-option *ngFor="let subcat of selectedArray" [value]="subcat">
-                    {{subcat.name}}
+                <mat-select formControlName="subCategory" (selectionChange)="loadSupersubcategoryDropDown()">
+                  <mat-option *ngFor="let subcat of subCategoryArray" [value]="subcat">
+                    {{subcat.sub_category_name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
-          <div class="col-md-4" *ngIf="selectedArray.length > 0">
-            <div class="form-group width_90">
+          <div class="col-md-4">
+            <div class="form-group width_90"  *ngIf="superSubCatArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subSubCategory">
-                  <mat-option *ngFor="let ssubcat of selectedArray" [value]="ssubcat">
-                    {{ssubcat.name}}
+                  <mat-option *ngFor="let ssubcat of superSubCatArray" [value]="ssubcat">
+                    {{ssubcat.super_sub_category_name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

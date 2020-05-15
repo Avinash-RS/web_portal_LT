@@ -23,19 +23,25 @@ export class CatalogueManagementComponent implements OnInit {
   selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
   loading: boolean = false;
+  loadingCategory : boolean = false;
   showHome: boolean = true;
   showAddCatForm: boolean = false;
   showAddSubCatForm: boolean = false;
   showAddSuperSubCatForm: boolean = false;
   showCourses: boolean = false;
+  applyAllCourses: boolean = false;
   selectedCategory: any = {};
   selectedSubCategory: any = {};
   selectedSuperSubCategory: any = {};
   categories: any;
   courses: any;
   selectedArray: any = [];
+  subCategoryArray: any = [];
+  superSubCatArray: any = [];
   pagenumber = 0;
   breakpoint: number;
+  level: number;
+
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -145,6 +151,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getallcategories() {
+    this.loadingCategory = true;
     this.treeSource.data = null;
     this.pagenumber = 0;
     this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
@@ -152,6 +159,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.categories = result.data.getcategoryadmin.message;
       this.treeSource.data = this.categories;
       this.dataSource$.next(this.categories);
+      this.loadingCategory = false;
     });
   }
 
@@ -161,6 +169,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
         console.log(result.data);
         const category = result.data.get_sub_category.message;
+        // this.subCategoryArray =  result.data.get_sub_category.message;
         if (node) {
           // node.children = [
           //   ...(node.children || []),
@@ -182,6 +191,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.learnerservice.getsupersubcategory(node.sub_category_id).subscribe((result: any) => {
         console.log(result.data);
         const category = result.data.getsupersubcategory.message;
+        // this.superSubCatArray = result.data.getsupersubcategory.message;
         if (node) {
           // node.children = [
           //   ...(node.children || []),
@@ -200,6 +210,19 @@ export class CatalogueManagementComponent implements OnInit {
         this.treeSource.data = array;
       });
     }
+  }
+
+  loadsubcategoryDropDown() {
+    this.learnerservice.getcoursesubcategory(this.selectCategoryForm.value?.category.category_id).subscribe((result: any) => {
+      console.log(result.data);
+      this.subCategoryArray = result.data.get_sub_category.message;
+    });
+  }
+  loadSupersubcategoryDropDown() {
+    this.learnerservice.getsupersubcategory(this.selectCategoryForm.value?.subCategory?.sub_category_id).subscribe((result: any) => {
+      console.log(result.data);
+      this.superSubCatArray = result.data.getsupersubcategory.message;
+    });
   }
 
   selectedcategory(category) {
@@ -541,6 +564,41 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
-    console.log(this.selectCategoryForm)
+    console.log(this.selectCategoryForm);
+    let level = this.selectCategoryForm?.value?.category != undefined &&
+      this.selectCategoryForm?.value?.subCategory == undefined && this.selectCategoryForm?.value?.subSubCategory == undefined && 1;
+    level = this.selectCategoryForm?.value?.category != undefined &&
+      this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory == undefined && 2;
+    level = this.selectCategoryForm?.value?.category != undefined &&
+      this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory != undefined && 3;
+    console.log(level);
+    this.selectedArray.map((item: any) => item.course_id)
+    // old_level: course.old_level,
+    // old_category_id: course.old_category_id,
+    // old_sub_category_id: course.old_sub_category_id,
+    // old_super_sub_category_id: course.old_super_sub_category_id,
+    // level: course.level,
+    // apply_all_courses: course.apply_all_courses,
+    // course_id: course.course_id,
+    // category_id: course.category_id,
+    // sub_category_id: course.sub_category_id,
+    // super_sub_category_id: course.super_sub_category_id
+    let course = {
+      old_level: this.level,
+      old_category_id: this.selectedCategory?.category_id,
+      old_sub_category_id: this.selectedSubCategory?.sub_category_id,
+      old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id,
+      level: level,
+      apply_all_courses: this.applyAllCourses || false,
+      course_id: this.selectedArray,
+      category_id: this.selectCategoryForm.value.category?.category_id,
+      sub_category_id: this.selectCategoryForm.value.subCategory?.sub_category_id || "null",
+      super_sub_category_id: this.selectCategoryForm.value.subSubCategory?.super_sub_category_id || "null",
+    }
+    console.log(course)
+    // this.adminservice.reAssignCourses(course).subscribe((result: any) => {
+    //   // this.courses = result?.data?.get_course_by_subcategory?.message;
+    //   console.log(result)
+    // });
   }
 }
