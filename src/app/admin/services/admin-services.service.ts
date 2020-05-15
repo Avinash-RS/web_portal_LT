@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue
+  create_catelogue,reassigncourse
 } from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
@@ -248,6 +248,24 @@ export class AdminServicesService {
       query: getcategoryadmin,
       variables: {
         pagenumber: pgnumber
+      }
+    });
+  }
+
+  reAssignCourses(course) {
+    return this.Apollo.query({
+      query: reassigncourse,
+      variables: {
+        old_level: course.old_level,
+        old_category_id: course.old_category_id,
+        old_sub_category_id: course.old_sub_category_id,
+        old_super_sub_category_id: course.old_super_sub_category_id,
+        level: course.level,
+        apply_all_courses: course.apply_all_courses,
+        course_id: course.course_id,
+        category_id: course.category_id,
+        sub_category_id: course.sub_category_id,
+        super_sub_category_id: course.super_sub_category_id
       }
     });
   }

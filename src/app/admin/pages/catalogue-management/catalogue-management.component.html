@@ -5,14 +5,16 @@
   </ol>
 </nav>
 
-<!-- Remember to sigin to admin before hitting this url
-navigate by url -- Admin/auth/catalogue -->
 <div class="container profile p-30">
-  <div class="container m-t-20 card-shadow ">
-    <div class="row card-shadow">
+  <div class="container m-t-20">
+    <div class="row">
       <!-- Mat tree code here ( left hand side) -->
-      <div class="card col-3 cardheight left">
+      <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
+        [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
 
+        <div class="spinner-container" *ngIf="loadingCategory">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -28,7 +30,6 @@ navigate by url -- Admin/auth/catalogue -->
                 {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
             </li>
           </mat-tree-node>
-
           <!-- node with children -->
           <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
             <li class="mat-tree-node newstyle" renderDebug>
@@ -41,7 +42,6 @@ navigate by url -- Admin/auth/catalogue -->
                 </button>
                 <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">
                   {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}</mat-checkbox>
-                <!-- {{node.group_name}}2 -->
               </div>
             </li>
             <ul [class.children-invisible]="!treeControl.isExpanded(node)">
@@ -52,17 +52,14 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- view category and sub category -->
       </div>
       <!-- end of Mat tree code here ( left hand side) -->
-
       <!-- start of right hand side card view -->
-
-      <div class="card col-9 cardheight right">
-
+      <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 cardheight right">
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
           <li class="breadcrumb-item"
             (click)="selectedCategory?.category_name != undefined && changeNav('addCategoryForm')"
             *ngIf="showAddCatForm || selectedCategory?.category_name != undefined;">
-            {{selectedCategory?.category_name || 'Category'}}</li>
+            {{selectedCategory?.category_name || 'Category >'}}</li>
           <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined"
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
             aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category'}}</li>
@@ -71,9 +68,7 @@ navigate by url -- Admin/auth/catalogue -->
             aria-current="page">{{selectedSuperSubCategory.super_sub_category_name}}</li>
         </ol>
         <!-- end of navigations ( engineering > electronics > nano electronics) -->
-
         <hr class="header-line m-r-20 m-l-20">
-
         <!-- start of buttons (add, edit, dlt) -->
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-12 col-12">
@@ -99,15 +94,13 @@ navigate by url -- Admin/auth/catalogue -->
               <span class="material-icons none" style="vertical-align: middle;"
                 matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub Category Description'}}">info_outline</span>
             </span>
-
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
-              <!-- <div class="col-lg-2"></div> -->
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
                 <button mat-raised-button *ngIf="showCourses"
                   class="background-blue width_80 m-b-10 moveTo-btn color_white" (click)="openMoveTo(viewDialog)"
-                  [disabled]="selectedArray.length == 0">
+                  [disabled]="!applyAllCourses && selectedArray?.length == 0">
                   <span class="material-icons" style="vertical-align: middle;">domain</span>Move To
                 </button>
               </div>
@@ -135,27 +128,24 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
         </div>
         <!-- end of buttons (add, edit, dlt) -->
-
         <!-- start of landing 3 line rules -->
-       
         <div class="m-l-20" *ngIf="showHome">
           <br><br><br><br>
           <div class="landing-text landing-background">
-            <p>
+            <p class="landing-text">
               <mat-icon class="m-b-10">done</mat-icon>Add categories upto 3 levels
             </p>
             <br>
-            <p>
+            <p class="landing-text">
               <mat-icon class="m-b-10">done</mat-icon>Edit existing category name and description
             </p>
             <br>
-            <p>
+            <p class="landing-text">
               <mat-icon class="m-b-10">done</mat-icon>Delete a category after removing all courses and subcategories
               associated with it
             </p>
           </div>
         </div>
-
         <!-- start of Add Catagory code  -->
         <div *ngIf="showAddCatForm">
           <br>
@@ -175,13 +165,8 @@ navigate by url -- Admin/auth/catalogue -->
               <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
-                    [ngClass]="{ 'is-invalid': f.category_description.touched && f.category_description.errors }"
-                    placeholder="Description" formControlName="category_description"
-                    name="category_description"></textarea>
-                  <!-- <div *ngIf="f.category_description.touched && f.category_description.errors" class="error_msg">
-                    <div *ngIf="f.category_description.errors.required">* Category Description is required</div>
-                  </div> -->
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
+                    formControlName="category_description" name="category_description"></textarea>
                 </div>
               </div>
             </div>
@@ -220,7 +205,8 @@ navigate by url -- Admin/auth/catalogue -->
                   (click)="addCategory('category')">Save</button>
               </div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel" (click)="addCategoryForm.reset()" mat-stroked-button
+                  class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
             <div class="row" *ngIf="selectedCategory?.category_name">
@@ -228,7 +214,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('category')">View
                   Courses</button>
               </div>
             </div>
@@ -236,7 +222,6 @@ navigate by url -- Admin/auth/catalogue -->
           </form>
         </div>
         <!-- end of Add Catagory code  -->
-
         <!-- start of Add Sub Catagory code  -->
         <div *ngIf="showAddSubCatForm">
           <br>
@@ -256,14 +241,8 @@ navigate by url -- Admin/auth/catalogue -->
               <div class="col-md-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
-                    [ngClass]="{ 'is-invalid': f.sub_category_description.touched && f.sub_category_description.errors }"
-                    placeholder="Description" formControlName="sub_category_description"
-                    name="sub_category_description"></textarea>
-                  <!-- <div *ngIf="f.sub_category_description.touched && f.sub_category_description.errors"
-                    class="error_msg">
-                    <div *ngIf="f.sub_category_description.errors.required">* Sub Category Description is required</div>
-                  </div> -->
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
+                    formControlName="sub_category_description" name="sub_category_description"></textarea>
                 </div>
               </div>
             </div>
@@ -276,7 +255,8 @@ navigate by url -- Admin/auth/catalogue -->
                   (click)="addCategory('subcategory')">Save</button>
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel" (click)="addSubCategoryForm.reset()" mat-stroked-button
+                  class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
             <div class="row" *ngIf="selectedSubCategory?.sub_category_name">
@@ -284,7 +264,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('subcategory')">View
                   Courses</button>
               </div>
             </div>
@@ -292,7 +272,6 @@ navigate by url -- Admin/auth/catalogue -->
           </form>
         </div>
         <!-- end of Add Sub Catagory code  -->
-
         <!-- start of Add Sub Catagory code  -->
         <div *ngIf="showAddSuperSubCatForm">
           <br>
@@ -313,19 +292,12 @@ navigate by url -- Admin/auth/catalogue -->
               <div class="col-md-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'"
-                    [ngClass]="{ 'is-invalid': f.super_sub_category_description.touched && f.super_sub_category_description.errors }"
-                    placeholder="Description" formControlName="super_sub_category_description"
-                    name="super_sub_category_description"></textarea>
-                  <!-- <div *ngIf="f.super_sub_category_description.touched && f.super_sub_category_description.errors"
-                            class="error_msg">
-                            <div *ngIf="f.super_sub_category_description.errors.required">* Sub Category Description is required</div>
-                          </div> -->
+                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
+                    formControlName="super_sub_category_description" name="super_sub_category_description"></textarea>
                 </div>
               </div>
             </div>
             <br>
-
             <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
@@ -334,7 +306,8 @@ navigate by url -- Admin/auth/catalogue -->
                   (click)="addCategory('supersubcategory')">Save</button>
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="cancel" mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel" (click)="showAddSuperSubCatForm.reset()" mat-stroked-button
+                  class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
             <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name">
@@ -342,7 +315,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('supersubcategory')">View
                   Courses</button>
               </div>
             </div>
@@ -350,99 +323,66 @@ navigate by url -- Admin/auth/catalogue -->
           </form>
         </div>
         <!-- end of Add Sub Catagory code  -->
-
         <!-- start of view courses -->
         <div *ngIf="showCourses">
-          <div class="row m-r-20">
-            <div class="col-3">
-              <button id="Hide_Courses" mat-flat-button
-                class="width_70 float-left border-radius-5 background-blue color_white center"
+          <div class="row m-r-20 m-l-20">
+            <div class="col-lg-3 col-md-3 col-sm-9 col-9">
+              <button id="Hide_Courses" mat-raised-button class="width_70 float-left background-blue color_white center"
                 (click)="hideCourses();showCourses = !showCourses">Hide Courses</button>
             </div>
-            <div class="col-9"></div>
+            <div class="col-lg-9 col-md-9 col-sm-3 col-3"></div>
           </div>
           <div class="row m-t-10 m-r-20">
-            <div class="col-9">
-              <h3 class="font-display m-b-0">295 courses > </h3>
-              <!-- <h2 class="font-display">{{course_count}} Courses > </h2> -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+              <!-- <h3 class="font-display m-b-0">295 courses > </h3> -->
+              <h3 class="font-display m-b-0 m-l-20">{{course_count}} Courses > </h3>
             </div>
-            <div class="col-3 p-r-0 m-b-10">
-              <button id="selectAll" mat-flat-button
-                class="width_70 float-right border-radius-5 background-blue color_white center"
-                (click)="selectAll()">Select All</button>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
+              <button id="selectAll" mat-raised-button class="width_70 float-right background-blue color_white center"
+              (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
             </div>
           </div>
-          <!-- <div class="row"> -->
           <div class="m-r-20 m-l-20">
-            <!-- <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowheight="2:1.7"
-              gutterSize="30px">
-              <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
-                [rowspan]="1"> -->
-            <!-- <mat-card class="course-card  font-display" (click)="selectCourse(courses,i+'c')">
-                  <div class="container-fluid">
-                    <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
-                      src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                    <div class="overlay">
-                    </div>
-                  </div>
-                  <mat-card-content class="center_align">
-                    <p>{{courses.name}}</p>
-                  </mat-card-content>
-                </mat-card> -->
-            <!-- </mat-grid-tile>
-            </mat-grid-list> -->
-            <!-- </div> -->
-
             <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 col-12 center_align center width_80 containerOverlay"
+              <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
                 *ngFor="let courses of courses; let i = index">
-                <!-- <div class="row">containerOverlay
-                  <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
-                    src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <div class="overlay">
-                    <img src="assets/courses/selectimagefull.png" width="100%">
-                  </div>
-                </div> -->
-
-                <img class="pointer m-b-10" src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
-                    <img src="assets/courses/selectimagefull.png" width="100%" height="97%">
-                  </div>
-                <div class="row m-b-10 color_blue width_80 f_wt_500 center_align center">
-                  {{courses.name}}
+                <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
+                  (click)="selectCourse(courses,i+'c')">
+                <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
+                  <img src="assets/courses/selectimagefull.png" width="100%" height="94%">
+                </div>
+                <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 ">
+                  {{courses.course_name}}
                 </div>
               </div>
-            
             </div>
           </div>
         </div>
-
         <div class="row pos_bottom"
           *ngIf="!showCourses && !showHome && !showAddCatForm && !selectedCategory.category_name == undefined">
           <button id="viewCourse" mat-stroked-button class=" border-radius-5 background-blue color_white center "
             (click)="showCourses = !showCourses">View
             Courses</button>
         </div>
-
         <!-- end of view courses -->
       </div>
       <!-- end of right hand side card view -->
     </div>
+    <br><br>
   </div>
-
-
+  <br><br>
   <!-- start of popup -->
   <ng-template #viewDialog class="dialogPopup">
     <span class="close">
       <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox()"></i>
     </span>
-    <h2>Move {{selectedArray.length}} courses</h2>
+    <h2>Move {{selectedArray?.length || course_count}} courses</h2>
     <mat-dialog-content style="width: 850px;">
-      <div class="row ">
+      <div class="row" *ngIf ="selectedArray && selectedArray.length > 0">
         <div class="col-md-3 m-b-10" *ngFor="let courseName of selectedArray;let j = index">
           <div class="center width_90 p-5px border border-radius-5">
             <span class="material-icons pointer" style="vertical-align: middle;" *ngIf="selectedArray.length > 1"
-              (click)="selectCourse(courseName,j)">close</span> {{courseName.name}}
+              (click)="selectCourse(courseName,j)">close</span> {{courseName.course_name}}
           </div>
         </div>
       </div>
@@ -455,34 +395,34 @@ navigate by url -- Admin/auth/catalogue -->
           <div class="form-group width_35">
             <mat-form-field appearance="outline fill" class="width_100 category-label">
               <mat-label class="m-l-20">Category *</mat-label>
-              <mat-select formControlName="category">
-                <mat-option *ngFor="let cat of selectedArray" [value]="cat">
-                  {{cat.name}}
+              <mat-select formControlName="category" (selectionChange)="loadsubcategoryDropDown()">
+                <mat-option *ngFor="let cat of categories" [value]="cat">
+                  {{cat.category_name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4" *ngIf="selectedArray.length > 0">
-            <div class="form-group width_90">
+          <div class="col-md-4">
+            <div class="form-group width_90" *ngIf="subCategoryArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
-                <mat-select formControlName="subCategory">
-                  <mat-option *ngFor="let subcat of selectedArray" [value]="subcat">
-                    {{subcat.name}}
+                <mat-select formControlName="subCategory" (selectionChange)="loadSupersubcategoryDropDown()">
+                  <mat-option *ngFor="let subcat of subCategoryArray" [value]="subcat">
+                    {{subcat.sub_category_name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
-          <div class="col-md-4" *ngIf="selectedArray.length > 0">
-            <div class="form-group width_90">
+          <div class="col-md-4">
+            <div class="form-group width_90" *ngIf="superSubCatArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subSubCategory">
-                  <mat-option *ngFor="let ssubcat of selectedArray" [value]="ssubcat">
-                    {{ssubcat.name}}
+                  <mat-option *ngFor="let ssubcat of superSubCatArray" [value]="ssubcat">
+                    {{ssubcat.super_sub_category_name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -500,5 +440,26 @@ navigate by url -- Admin/auth/catalogue -->
     </mat-dialog-content>
     <br>
   </ng-template>
-
 </div>
+
+
+
+
+<!-- <mat-grid-list cols="4" [cols]="breakpoint" (window:resize)="onResize($event)" rowheight="2:1.7"
+              gutterSize="30px">
+              <mat-grid-tile *ngFor="let courses of courses; let i = index" [style.border]="'none'" [colspan]="1"
+                [rowspan]="1"> -->
+<!-- <mat-card class="course-card  font-display" (click)="selectCourse(courses,i+'c')">
+                  <div class="container-fluid">
+                    <img mat-card-image class="pointer" [ngClass]="{'overlayClass' : courses.isChecked || false}"
+                      src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
+                    <div class="overlay">
+                    </div>
+                  </div>
+                  <mat-card-content class="center_align">
+                    <p>{{courses.name}}</p>
+                  </mat-card-content>
+                </mat-card> -->
+<!-- </mat-grid-tile>
+            </mat-grid-list> -->
+<!-- </div> -->
