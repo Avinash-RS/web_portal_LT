@@ -53,6 +53,7 @@ export class CatalogueManagementComponent implements OnInit {
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
+    // this.alert.openAlert('<strong>hi</strong>',null)
     this.adminDetails = this.gs.checkLogout();
     // this.courses = [
     //   {
@@ -631,8 +632,8 @@ export class CatalogueManagementComponent implements OnInit {
       this.selectedArray = [];
      
       if(result?.data?.reassigncourse?.success) {
-       
-        this.alert.openAlert('Re-assigned courses successfully', null);
+      //  let msg = '<strong>' + 
+        this.alert.openAlert('Selected Courses Successfully moved' , null);
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
        
       } else {
