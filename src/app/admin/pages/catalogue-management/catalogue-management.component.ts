@@ -596,6 +596,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
+
     this.closedialogbox();
     let level = this.selectCategoryForm?.value?.category != "" &&
       this.selectCategoryForm?.value?.subCategory == "" && this.selectCategoryForm?.value?.subSubCategory == "" ? 1 :
@@ -628,16 +629,16 @@ export class CatalogueManagementComponent implements OnInit {
     }
     console.log(course)
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
-
-
       if (result?.data?.reassigncourse?.success) {
         let msg1 = this.selectCategoryForm?.value.category.category_name;
-        let msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' + this.selectedSubCategory?.sub_category_name : ' ';
-        let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectedSuperSubCategory?.super_sub_category_name : ' ';
-        this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 +' '+ msg3, null);
+        let msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
+        let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
+        this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 + ' ' + msg3, null);
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
         this.selectCategoryForm.reset();
         this.selectedArray = [];
+        this.subCategoryArray = [];
+        this.superSubCatArray = [];
       } else {
         this.alert.openAlert(result?.data?.reassigncourse?.message, null)
       }
