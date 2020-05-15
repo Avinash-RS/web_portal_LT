@@ -60,7 +60,6 @@ export class ViewAllCoursesComponent implements OnInit {
       id:category._id,
       level:category.level
     })
-    console.log(this.allLvlCatId)
   }
 
   isAllSelected() {
@@ -76,8 +75,6 @@ export class ViewAllCoursesComponent implements OnInit {
       if(this.checklist[i].isSelected)
       this.checkedList.push(this.checklist[i]);
     }
-    // this.checkedList = JSON.stringify(this.checkedList);
-    console.log(this.checkedList)
   }
 
   removeFilterVal(val,index){
@@ -154,7 +151,6 @@ export class ViewAllCoursesComponent implements OnInit {
     category.pagenumber = this.pagenumber;
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.allcourses = result.data.get_course_by_subcategory.message;
-      // this.allcourses = result.data.get_a
       this.loader = false;
     });
   }
@@ -163,25 +159,10 @@ export class ViewAllCoursesComponent implements OnInit {
     if (this.userDetailes.group_id)
     console.log(this.userDetailes.group_id[0])
     this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,this.sort_type).subscribe((result: any) => {
-      this.allcourses = result.data.get_all_course_by_usergroup.message;
-      console.log(this.allcourses)
+    this.allcourses = result.data.get_all_course_by_usergroup.message;
     });
   }
 
-  // test() {
-  //   $('.option__button').on('click', function () {
-  //     $('.option__button').removeClass('selected');
-  //     $(this).addClass('selected');
-  //     if ($(this).hasClass('option--grid')) {
-  //       $('.results-section').attr('class', 'results-section results--grid');
-  //     } else if ($(this).hasClass('option--list')) {
-  //       $('.results-section').attr('class', 'results-section results--list');
-  //     }
-  //   });
-  // }
-  /**
-   * Determines whether scroll down on
-   */
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
@@ -199,11 +180,8 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   getthreeLevelCat(){
-    
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
-      this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
-      console.log(this.allLvlCategory)
-      
+      this.allLvlCategory = result['data']['getLevelCategoryData']['data']; 
     })
   }
 }
