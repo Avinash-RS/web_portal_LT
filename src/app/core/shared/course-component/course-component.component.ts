@@ -36,7 +36,6 @@ export class CourseComponentComponent implements OnInit {
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-     console.log(this.course)
   }
 
   viewWishList(course) {

@@ -28,7 +28,7 @@ export class ViewAllCoursesComponent implements OnInit {
   masterSelected:boolean;
   checklist:any;
   checkedList:any;
-  sort_type:any = "";
+  sort_type:any = "A-Z";
   showAppliedFiltre :boolean = false;
 
   constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
@@ -39,6 +39,10 @@ export class ViewAllCoursesComponent implements OnInit {
       {id:2,value:'Caden Kunze',isSelected:false},
       {id:3,value:'Ms. Hortense Zulauf',isSelected:false},
       {id:4,value:'Grady Reichert',isSelected:false},
+      {id:5,value:'Dejon Olson',isSelected:false},
+      {id:6,value:'Jamir Pfannerstill',isSelected:false},
+      {id:7,value:'Aracely Renner DVM',isSelected:false},
+      {id:8,value:'Genoveva Luettgen',isSelected:false},
       {id:5,value:'Dejon Olson',isSelected:false},
       {id:6,value:'Jamir Pfannerstill',isSelected:false},
       {id:7,value:'Aracely Renner DVM',isSelected:false},
@@ -82,8 +86,13 @@ export class ViewAllCoursesComponent implements OnInit {
   filter(){
       this.showAppliedFiltre = true;
   }
-  sorting(){
+  sorting(sortval){
     this.showAppliedFiltre = false;
+    if (this.userDetailes.group_id)
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,sortval).subscribe((result: any) => {
+        this.allcourses = result.data.get_all_course_by_usergroup.message;
+      });
+   
   }
 
   loadcategoryandcourses() {
