@@ -595,6 +595,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
+    this.closedialogbox();
     let level = this.selectCategoryForm?.value?.category != "" &&
       this.selectCategoryForm?.value?.subCategory == "" && this.selectCategoryForm?.value?.subSubCategory == "" ? 1 :
       this.selectCategoryForm?.value?.category != "" &&
@@ -628,7 +629,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
       this.selectCategoryForm.reset();
       this.selectedArray = [];
-      this.closedialogbox();
+     
       if(result?.data?.reassigncourse?.success) {
        
         this.alert.openAlert('Re-assigned courses successfully', null);
