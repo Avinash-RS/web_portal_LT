@@ -113,16 +113,16 @@ export class CatalogueManagementComponent implements OnInit {
   ngOnInit() {
     this.getallcategories();
 
-    // if (window.innerWidth <= 600)
-    //   this.breakpoint = 1;
-    // else if (window.innerWidth >= 600 && window.innerWidth <= 768)
-    //   this.breakpoint = 2;
-    // else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
-    //   this.breakpoint = 3;
-    // // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
-    // //   this.breakpoint = 4;
-    // else
+    if (window.innerWidth <= 600)
+      this.breakpoint = 1;
+    else if (window.innerWidth >= 600 && window.innerWidth <= 768)
+      this.breakpoint = 2;
+    else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
+      this.breakpoint = 3;
+    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
     //   this.breakpoint = 4;
+    else
+      this.breakpoint = 4;
   }
 
   onResize(event) {
@@ -607,4 +607,19 @@ export class CatalogueManagementComponent implements OnInit {
     //   console.log(result)
     // });
   }
+  onScrollDown() {
+    this.pagenumber = this.pagenumber + 1;
+    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
+      const resultdata = result?.data?.getcategoryadmin?.message;
+      if (resultdata.length) {
+        let array: any;
+        array = resultdata;
+        this.categories = this.treeSource.data;
+        this.categories.push(...array);
+        this.treeSource.data = null;
+        this.treeSource.data = this.categories;
+      }
+    });
+  }
+
 }
