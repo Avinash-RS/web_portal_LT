@@ -2,6 +2,8 @@ import { Component, OnInit,TemplateRef } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
+import {SearchPipe} from '../../../pipes/search.pipe';
+import { from } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -27,11 +29,13 @@ export class ViewAllCoursesComponent implements OnInit {
   loader: boolean;
   masterSelected:boolean;
   checklist:any;
-  checkedList:any;
+  checkedList:any = [];
   sort_type:any = "A-Z";
   showAppliedFiltre :boolean = false;
-
+  allLvlCategory: any;
+  allLvlCatId : any = []
   constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
+
     this.btnType = "Enroll Now"
     this.masterSelected = false;
     this.checklist = [
@@ -51,6 +55,13 @@ export class ViewAllCoursesComponent implements OnInit {
     
   }
 
+  getCategoryId(category){
+    this.allLvlCatId.push({
+      id:category._id,
+      level:category.level
+    })
+    console.log(this.allLvlCatId)
+  }
 
   isAllSelected() {
     this.masterSelected = this.checklist.every(function(item:any) {
@@ -65,8 +76,22 @@ export class ViewAllCoursesComponent implements OnInit {
       if(this.checklist[i].isSelected)
       this.checkedList.push(this.checklist[i]);
     }
-    this.checkedList = JSON.stringify(this.checkedList);
+    // this.checkedList = JSON.stringify(this.checkedList);
     console.log(this.checkedList)
+  }
+
+  removeFilterVal(val,index){
+    console.log(val,index)
+    console.log(val,'val')
+    // this.checkedList = this.checkedList.remove(index);
+    // console.log( this.checkedList,'afser remove')
+    
+  //   this.masterSelected = this.checklist.every(function(item:any) {
+  //     console.log(item)
+  //     return item.isSelected === false;
+  //   })
+  // this.getCheckedItemList();
+    
   }
 
 
@@ -75,12 +100,14 @@ export class ViewAllCoursesComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.getthreeLevelCat();
     this.userDetailes = this.globalservice.checkLogout();
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
     this.loadcategoryandcourses();
     this.getCheckedItemList();
+  
   }
 
   filter(){
@@ -103,7 +130,6 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getallcourses();
   }
   getcoursecategories() {
-    
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
       this.categories = result.data.get_all_category.message;
     });
@@ -170,5 +196,14 @@ export class ViewAllCoursesComponent implements OnInit {
   }
   closedialogbox(){
     this.dialog.closeAll();
+  }
+
+  getthreeLevelCat(){
+    
+    this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
+      this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
+      console.log(this.allLvlCategory)
+      
+    })
   }
 }
