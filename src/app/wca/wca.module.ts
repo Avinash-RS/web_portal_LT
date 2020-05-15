@@ -18,7 +18,7 @@ import { CreateTemplateComponent } from './pages/create-template/create-template
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatListModule, MatTableModule, MatSortModule,MatChipsModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatSortModule, MatChipsModule } from '@angular/material';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 import { WcaService } from "./services/wca.service";
@@ -29,6 +29,7 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 import { AddModuleComponent } from './pages/add-module/add-module.component';
+import { ModuleRepositoryComponent } from './pages/module-repository/module-repository.component';
 
 
 
@@ -50,14 +51,15 @@ const routes: Routes = [
   { path: 'ct', component: ChooseTemplateComponent, },
   { path: 'rf', component: ReferenceFileComponent, },
   { path: 'addmodule', component: AddModuleComponent },
-  { path: 'previewcourse', component: CoursepreviewComponent }
+  { path: 'previewcourse', component: CoursepreviewComponent },
+  { path: 'modulerepository', component: ModuleRepositoryComponent }
 
 
 
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent],
   imports: [
     CoreModule,
     Ng4LoadingSpinnerModule.forRoot(),

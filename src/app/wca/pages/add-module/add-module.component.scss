@@ -509,6 +509,13 @@ img:hover {
     width: 20%;
 }
 
+.add-modulerepo-icon {
+    position: relative;
+    top: 4px;
+    border-left: 1px solid grey;
+    padding-left: 5px;
+}
+
 @media only screen and (max-width: 600px) {
     .submit-btn {
         height: 30px;

@@ -48,7 +48,7 @@
                                         </mat-panel-title>
                                     </div>
 
-                                    <div class="wrapper_1">
+                                    <div class="wrapper_1" (click)="navModuleRepository()">
                                         <mat-icon>add_circle_outline</mat-icon>
                                     </div>
                                     <div style="margin: -28px 0px 0px 30px">
@@ -61,11 +61,14 @@
 
                                 <div class="col-md-3">
                                     <!-- routerLink="/Admin/auth/Wca/viewmodule" -->
-                                    <input type="file" accept="application/zip" #file (change)="uploadDoc(file.files)" hidden>
+                                    <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)"
+                                        hidden>
                                     <button for="upload-photo" mat-stroked-button class="upload-btn"
                                         (click)="file.click()">
 
-                                        <span style="padding: 2px 176px 13px 0px;">Upload a SCORM Course </span>
+                                        <span *ngIf="this.scormPath.length == 0" style="padding: 2px 176px 13px 0px;">Upload a SCORM Package </span>
+
+                                     <span *ngIf="this.scormPath.length > 0" style="padding: 2px 176px 13px 0px;">SCORM Package uploaded</span>
 
                                         <mat-icon (click)="add(in)" style="margin:2px -156px 3px -157px;">file_upload
                                         </mat-icon>
@@ -91,6 +94,14 @@
 
                             </div>
                         </mat-grid-list>
+
+                        <mat-card-footer>
+                            <div>
+                                <button type="button" mat-flat-button color="primary" (click)="onCreate()"
+                                    class="continue-btn" [disabled]="this.scormPath.length == 0">Create</button>
+                            </div>
+                        </mat-card-footer>
+
                     </mat-card>
 
                 </mat-expansion-panel>
