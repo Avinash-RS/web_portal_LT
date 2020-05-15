@@ -192,16 +192,18 @@
   </div>
   <br>
 
-  <div class="row box" *ngIf = "showAppliedFiltre">
-    <div class="col-2">
+  <div class="row box" *ngIf ="showAppliedFiltre">
+    <div class="col-2 width-10 ">
       <h3 class="text">Applied Filters : </h3>
     </div>
 
-    <div class="col-8">
-      
+    <div class="col-8"  >
+        <span class="cover" *ngFor="let item of checkedList; let i = index" >{{item.value}} 
+        <mat-icon class="clear-icon" (click)="removeFilterVal(item,i)">clear</mat-icon>
+        </span>
     </div>
 
-    <div class="col-2">
+    <div class="col-2 ">
       <div class = "smallline"></div> 
       <h3 class="text2"> Clear All Filters </h3>
      
@@ -211,12 +213,12 @@
 
 
 
-<div class="container">
+<!-- <div class="container"> -->
   <br>
 
   <div class="row">
     <div class="col-3"  *ngIf="showAppliedFiltre" >
-      <div class="container1 containerShadow">
+      <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3>Language</h3>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let item of checklist">
@@ -268,16 +270,16 @@
         <h2>Level 1 : Category</h2>
         <mat-form-field class="example-full-width">
           <mat-icon matPrefix>search</mat-icon>
-           <input type="search" matInput placeholder="Search">
+           <input type="search"  [(ngModel)]="lvl1Search" matInput placeholder="Search">
          </mat-form-field>
 
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of checklist">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level1 | search : lvl1Search ">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
-                    {{item.value}}
+                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    {{item.category_name}}
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -290,16 +292,41 @@
         <h2>Level 2 : Category</h2>
         <mat-form-field class="example-full-width">
           <mat-icon matPrefix>search</mat-icon>
-           <input type="search" matInput placeholder="Search">
+           <input type="search" [(ngModel)]="lvl2Search"  matInput placeholder="Search">
          </mat-form-field>
+         <div class="row">
+          <div class="col-md-8">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level2 | search : lvl2Search">
+                    <label class="container1">
+                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    {{item.sub_category_name}}
+                    <span class="checkmark"></span></label>
+                  </li>
+                </ul>
+          </div>
+      </div>
       </div>
       <div class = "vertical1"></div> 
       <div class="col-4">
         <h2>Level 3 : Category</h2>
         <mat-form-field class="example-full-width">
           <mat-icon matPrefix>search</mat-icon>
-           <input type="search" matInput placeholder="Search">
+           <input type="search" [(ngModel)]="lvl3Search"  matInput placeholder="Search">
          </mat-form-field>
+
+         <div class="row">
+          <div class="col-md-8">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level3 | search : lvl3Search">
+                    <label class="container1">
+                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    {{item.super_sub_category_name}}
+                    <span class="checkmark"></span></label>
+                  </li>
+                </ul>
+          </div>
+      </div>
       </div>
     </div>
     </mat-dialog-content>
@@ -309,4 +336,4 @@
   </ng-template>
 
 
-</div>
+<!-- </div> -->

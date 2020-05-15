@@ -528,3 +528,37 @@ export const get_module_topic = gql`
         success
       }
     }`;
+
+
+export const getLevelCategoryData = gql`
+    query getLevelCategoryData{
+      getLevelCategoryData {
+        success
+         message
+        data{
+      level1{
+        _id
+        category_name
+        category_id
+        level
+      }
+      level2{
+        _id
+        sub_category_id
+        sub_category_name
+        parent_category_id
+        level
+      }
+      level3{
+        _id
+        parent_category_id
+        parent_sub_category_id
+        level
+        language_code
+        super_sub_category_id
+        super_sub_category_name
+      }
+    }
+  }
+
+}`;

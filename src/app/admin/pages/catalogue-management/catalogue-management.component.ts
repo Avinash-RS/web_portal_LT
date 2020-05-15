@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatDialog } from '@angular/material';
 import { nodeChildrenAsMap } from '@angular/router/src/utils/tree';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-catalogue-management',
   templateUrl: './catalogue-management.component.html',
@@ -53,7 +54,6 @@ export class CatalogueManagementComponent implements OnInit {
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
-    // this.alert.openAlert('<strong>hi</strong>',null)
     this.adminDetails = this.gs.checkLogout();
     // this.courses = [
     //   {
@@ -633,7 +633,12 @@ export class CatalogueManagementComponent implements OnInit {
         let msg1 = this.selectCategoryForm?.value.category.category_name;
         let msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
         let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
-        this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 + ' ' + msg3, null);
+
+        Swal.fire({
+          html:
+            'Selected Courses Successfully moved to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
+        })
+        // this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 + ' ' + msg3, null);
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
         this.selectCategoryForm.reset();
         this.selectedArray = [];
