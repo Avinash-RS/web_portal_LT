@@ -596,6 +596,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
+
     this.closedialogbox();
     let level = this.selectCategoryForm?.value?.category != "" &&
       this.selectCategoryForm?.value?.subCategory == "" && this.selectCategoryForm?.value?.subSubCategory == "" ? 1 :
@@ -621,21 +622,23 @@ export class CatalogueManagementComponent implements OnInit {
       old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id || "null",
       level: level,
       apply_all_courses: this.applyAllCourses || false,
-      course_id: arra|| [],
+      course_id: arra || [],
       category_id: this.selectCategoryForm.value.category?.category_id,
       sub_category_id: this.selectCategoryForm.value.subCategory?.sub_category_id || "null",
       super_sub_category_id: this.selectCategoryForm.value.subSubCategory?.super_sub_category_id || "null",
     }
     console.log(course)
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
-      this.selectCategoryForm.reset();
-      this.selectedArray = [];
-     
-      if(result?.data?.reassigncourse?.success) {
-      //  let msg = '<strong>' + 
-        this.alert.openAlert('Selected Courses Successfully moved' , null);
+      if (result?.data?.reassigncourse?.success) {
+        let msg1 = this.selectCategoryForm?.value.category.category_name;
+        let msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
+        let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
+        this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 + ' ' + msg3, null);
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
-       
+        this.selectCategoryForm.reset();
+        this.selectedArray = [];
+        this.subCategoryArray = [];
+        this.superSubCatArray = [];
       } else {
         this.alert.openAlert(result?.data?.reassigncourse?.message, null)
       }
