@@ -109,8 +109,8 @@
                    (addCategoryForm && (addCategoryForm?.value?.category_name != '' || addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != '') 
                 && !selectedCategory?.category_name) ||
                  (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' || addSubCategoryForm?.value?.sub_category_description != '')
-                  && !selectedSubCategory?.sub_category_name) || 
-                  (addSuperSubCategoryForm )" class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
+                && !selectedSubCategory?.sub_category_name) && !selectedCategory?.category_name || 
+                  (showAddSuperSubCatForm )" class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add</button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
@@ -339,7 +339,7 @@
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
               <button id="selectAll" mat-raised-button class="width_70 float-right background-blue color_white center"
-              (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
+                (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
             </div>
           </div>
           <div class="m-r-20 m-l-20">
@@ -378,7 +378,7 @@
     </span>
     <h2>Move {{selectedArray?.length || course_count}} courses</h2>
     <mat-dialog-content style="width: 850px;">
-      <div class="row" *ngIf ="selectedArray && selectedArray.length > 0">
+      <div class="row" *ngIf="selectedArray && selectedArray.length > 0">
         <div class="col-md-3 m-b-10" *ngFor="let courseName of selectedArray;let j = index">
           <div class="center width_90 p-5px border border-radius-5">
             <span class="material-icons pointer" style="vertical-align: middle;" *ngIf="selectedArray.length > 1"
