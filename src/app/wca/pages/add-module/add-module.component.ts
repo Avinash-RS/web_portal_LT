@@ -43,7 +43,6 @@ export class AddModuleComponent implements OnInit {
           courseImage: params.courseImage,
           courseName: params.courseName,
         }
-        console.log(this.queryData)
       }
     });
 
@@ -89,9 +88,18 @@ export class AddModuleComponent implements OnInit {
 
   getCourseDetails() {
     this.spinner.show();
+    this.moduleList = [];
     console.log(this.routedCourseDetails.courseId)
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
+      data.Result[0].coursedetails.forEach((data) => {
+        if (data.moduleid) {
+          this.moduleList.push(data.moduleid)
+        }
+      })
+      if (this.queryData.isRepo) {
+        this.getRepoModules();
+      }
       this.updateCourseDetails();
       this.spinner.hide();
     }, err => {
@@ -141,8 +149,6 @@ export class AddModuleComponent implements OnInit {
   }
 
   addTopic(value, index) {
-    console.log(index);
-    console.log(this.courseDetails);
     this.apiService.bSubject1.next({ index: index, courseDetails: this.courseDetails });
     this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
   }
@@ -153,7 +159,6 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModuleRepos() {
-    this.moduleList = ['MDL0001','MDL0002'];
     this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
   }
 
@@ -176,5 +181,23 @@ export class AddModuleComponent implements OnInit {
 
   editResource() {
     this.router.navigate(['/Admin/auth/Wca/rf']);
+  }
+
+  getRepoModules() {
+    this.apiService.repositoryModules().subscribe((data: any) => {
+      let moduleList = data.Result;
+      moduleList.forEach((val) => {
+        if (val.moduleid == this.queryData.selectedModule) {
+          let mod = {
+            moduleid: val.moduleid,
+            modulename: val.modulename,
+            moduledetails: val.moduledetails,
+            modulestatus: 'true',
+            template_details: val.template_details
+          }
+          this.courseDetails.coursedetails.push(mod);
+        }
+      })
+    })
   }
 }

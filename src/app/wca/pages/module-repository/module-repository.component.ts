@@ -52,11 +52,11 @@ export class ModuleRepositoryComponent implements OnInit {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
         val.isSelect = false;
-        this.routeData.moduleList.forEach((data) => {
-          if(val.moduleid == data) {
+        this.routeData.moduleList ? this.routeData.moduleList.forEach((data) => {
+          if (val.moduleid == data) {
             val.isSelect = true;
           }
-        })
+        }) : ''
       })
       this.savedModules = data.Result;
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
@@ -65,9 +65,29 @@ export class ModuleRepositoryComponent implements OnInit {
   }
 
   onModuleSelection(selectedModule) {
+    let modDetails = {
+      "moduleid": selectedModule.moduleid,
+      "coursename": selectedModule.coursename,
+      "createdby": selectedModule.createdby
+    }
 
     this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
       if (data) {
+        this.router.navigate(['/Admin/auth/Wca/addmodule'],
+          {
+            queryParams: {
+              isRepo: true,
+              courseId: this.routeData.viewingModule,
+              courseImage: this.routeData.image,
+              courseName: this.routeData.courseName,
+              selectedModule: selectedModule.moduleid
+            }
+          });
+        this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
+          if (res.Code == 200) {
+
+          }
+        })
       }
     })
   }
