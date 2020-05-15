@@ -202,175 +202,174 @@ export class CatalogueManagementComponent implements OnInit {
     }
   }
 
-
-selectedcategory(category) {
-  console.log(category);
-  let oldcategory; let oldsubcategory; let oldsupersubcategory;
-  if (category.category_id) {
-    if (category.checkbox === true) {
-      oldcategory = null;
-      oldcategory = this.selectedCategory; oldsubcategory = this.selectedSubCategory; oldsupersubcategory = this.selectedSuperSubCategory;
-      this.selectedCategory = category;
-      this.addCategoryForm = this.formBuilder.group({
-        category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl([]),
-        category_image: ['', myGlobals.req]
-      });
-      this.addCategoryForm.patchValue(this.selectedCategory);
-      this.showAddCatForm = true;
-      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      let value; let value1; let value2;
-      if (oldcategory?.category_id) {
-        value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
-        if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
-           this.treeSource._data.value[value].checkbox = false;
-          } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]){
-          this.treeSource._data.value[value].checkbox = true;
-        } else {
-           this.selectedSuperSubCategory = {}; this.selectedSubCategory = {}; this.treeSource._data.value[value].checkbox = false;
-        }
-      }
-      if (oldsubcategory.sub_category_id) {
-        value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
-        if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].checkbox = false;
-        } else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].checkbox = true;
+  selectedcategory(category) {
+    console.log(category);
+    let oldcategory; let oldsubcategory; let oldsupersubcategory;
+    if (category.category_id) {
+      if (category.checkbox === true) {
+        oldcategory = null;
+        oldcategory = this.selectedCategory; oldsubcategory = this.selectedSubCategory; oldsupersubcategory = this.selectedSuperSubCategory;
+        this.selectedCategory = category;
+        this.addCategoryForm = this.formBuilder.group({
+          category_name: new FormControl('', myGlobals.req),
+          category_description: new FormControl([]),
+          category_image: ['', myGlobals.req]
+        });
+        this.addCategoryForm.patchValue(this.selectedCategory);
+        this.showAddCatForm = true;
+        this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+        let value; let value1; let value2;
+        if (oldcategory?.category_id) {
+          value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
+          if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
+            this.treeSource._data.value[value].checkbox = false;
+          } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]) {
+            this.treeSource._data.value[value].checkbox = true;
           } else {
-          this.treeSource._data.value[value].children[value1].checkbox = false;
+            this.selectedSuperSubCategory = {}; this.selectedSubCategory = {}; this.treeSource._data.value[value].checkbox = false;
+          }
         }
-      }
-      if (oldsupersubcategory.super_sub_category_id) {
-        value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
-        if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
-        } else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
+        if (oldsubcategory.sub_category_id) {
+          value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
+          if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          } else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = true;
           } else {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          }
         }
-      }
-    } else {
-      this.selectedCategory = {};
-      this.addCategoryForm.reset();
-    }
-  } else if (category.sub_category_id) {
-    if (category.checkbox === true) {
-      oldsubcategory = null;
-      oldsubcategory = this.selectedSubCategory;
-      oldcategory = this.selectedCategory;
-      oldsupersubcategory = this.selectedSuperSubCategory;
-      this.selectedSubCategory = category;
-      this.addSubCategoryForm = this.formBuilder.group({
-        sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl([]),
-      });
-      this.addSubCategoryForm.patchValue(this.selectedSubCategory);
-      this.showAddSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      if (this.selectedSubCategory?.sub_category_id) {
-        const value = this.treeSource._data.value.findIndex(x => x.category_id === this.selectedSubCategory?.parent_category_id[0]);
-        this.treeSource._data.value[value].checkbox = true;
-        this.selectedCategory = this.treeSource._data.value[value];
-      }
-      let value; let value1; let value2;
-      if (oldcategory?.category_id) {
-        value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
-        if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
-          this.selectedSuperSubCategory = {};
-          this.treeSource._data.value[value].checkbox = false;
-        } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]){
-          this.treeSource._data.value[value].checkbox = true;
-        } else {
-         this.treeSource._data.value[value].checkbox = false;
-       }
-      }
-      if (oldsubcategory.sub_category_id) {
-        value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
-        if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].checkbox = false;
-        }  else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].checkbox = true;
+        if (oldsupersubcategory.super_sub_category_id) {
+          value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
+          if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+          } else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
           } else {
-          this.treeSource._data.value[value].children[value1].checkbox = false;
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+          }
         }
-      }
-      if (oldsupersubcategory.super_sub_category_id) {
-        value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
-        if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
-        this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
-        } else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
-          } else {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
-          this.selectedSuperSubCategory = {};
-        }
-      }
-    } else {
-      this.selectedSubCategory = {};
-      this.addSubCategoryForm.reset();
-    }
-  } else {
-    if (category.checkbox === true) {
-      oldsubcategory = this.selectedSubCategory;
-      oldcategory = this.selectedCategory;
-      oldsupersubcategory = this.selectedSuperSubCategory;
-      this.selectedSuperSubCategory = category;
-      this.addSuperSubCategoryForm = this.formBuilder.group({
-        super_sub_category_name: new FormControl('', myGlobals.req),
-        super_sub_category_description: new FormControl([]),
-      });
-      this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
-      this.showAddSuperSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
-
-      if (this.selectedSuperSubCategory?.super_sub_category_id) {
-        const value1 = this.treeSource._data.value.findIndex(x => x.category_id === this.selectedSuperSubCategory?.parent_category_id[0]);
-        const value: any = this.treeSource._data.value[value1].children.findIndex(x => x.sub_category_id === this.selectedSuperSubCategory?.parent_sub_category_id[0]);
-        this.treeSource._data.value[value1].checkbox = true;
-        this.treeSource._data.value[value1].children[value].checkbox = true;
-        oldcategory = this.selectedCategory;
-        oldsubcategory = this.selectedSubCategory;
-        this.selectedCategory = this.treeSource._data.value[value1];
-        this.selectedSubCategory = this.treeSource._data.value[value1].children[value];
-      }
-      let value; let value1; let value2;
-      if (oldcategory?.category_id) {
-        value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
-        if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
-          this.treeSource._data.value[value].checkbox = false;
-       } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]){
-        this.treeSource._data.value[value].checkbox = true;
       } else {
-         this.treeSource._data.value[value].checkbox = false;
-       }
+        this.selectedCategory = {};
+        this.addCategoryForm.reset();
       }
-      if (oldsubcategory.sub_category_id) {
-        value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
-        if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
-        this.treeSource._data.value[value].children[value1].checkbox = false;
-        } else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].checkbox = true;
-          } else {
-          this.treeSource._data.value[value].children[value1].checkbox = false;
+    } else if (category.sub_category_id) {
+      if (category.checkbox === true) {
+        oldsubcategory = null;
+        oldsubcategory = this.selectedSubCategory;
+        oldcategory = this.selectedCategory;
+        oldsupersubcategory = this.selectedSuperSubCategory;
+        this.selectedSubCategory = category;
+        this.addSubCategoryForm = this.formBuilder.group({
+          sub_category_name: new FormControl('', myGlobals.req),
+          sub_category_description: new FormControl([]),
+        });
+        this.addSubCategoryForm.patchValue(this.selectedSubCategory);
+        this.showAddSubCatForm = true;
+        this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+        if (this.selectedSubCategory?.sub_category_id) {
+          const value = this.treeSource._data.value.findIndex(x => x.category_id === this.selectedSubCategory?.parent_category_id[0]);
+          this.treeSource._data.value[value].checkbox = true;
+          this.selectedCategory = this.treeSource._data.value[value];
         }
-      }
-      if (oldsupersubcategory.super_sub_category_id) {
-        value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
-        if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
-        this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
-        }else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
+        let value; let value1; let value2;
+        if (oldcategory?.category_id) {
+          value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
+          if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
+            this.selectedSuperSubCategory = {};
+            this.treeSource._data.value[value].checkbox = false;
+          } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]) {
+            this.treeSource._data.value[value].checkbox = true;
           } else {
-          this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+            this.treeSource._data.value[value].checkbox = false;
+          }
         }
+        if (oldsubcategory.sub_category_id) {
+          value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
+          if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          } else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = true;
+          } else {
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          }
+        }
+        if (oldsupersubcategory.super_sub_category_id) {
+          value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
+          if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+          } else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
+          } else {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+            this.selectedSuperSubCategory = {};
+          }
+        }
+      } else {
+        this.selectedSubCategory = {};
+        this.addSubCategoryForm.reset();
       }
     } else {
-      this.selectedSuperSubCategory = {};
-      this.addSuperSubCategoryForm.reset();
+      if (category.checkbox === true) {
+        oldsubcategory = this.selectedSubCategory;
+        oldcategory = this.selectedCategory;
+        oldsupersubcategory = this.selectedSuperSubCategory;
+        this.selectedSuperSubCategory = category;
+        this.addSuperSubCategoryForm = this.formBuilder.group({
+          super_sub_category_name: new FormControl('', myGlobals.req),
+          super_sub_category_description: new FormControl([]),
+        });
+        this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
+        this.showAddSuperSubCatForm = true;
+        this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
+
+        if (this.selectedSuperSubCategory?.super_sub_category_id) {
+          const value1 = this.treeSource._data.value.findIndex(x => x.category_id === this.selectedSuperSubCategory?.parent_category_id[0]);
+          const value: any = this.treeSource._data.value[value1].children.findIndex(x => x.sub_category_id === this.selectedSuperSubCategory?.parent_sub_category_id[0]);
+          this.treeSource._data.value[value1].checkbox = true;
+          this.treeSource._data.value[value1].children[value].checkbox = true;
+          oldcategory = this.selectedCategory;
+          oldsubcategory = this.selectedSubCategory;
+          this.selectedCategory = this.treeSource._data.value[value1];
+          this.selectedSubCategory = this.treeSource._data.value[value1].children[value];
+        }
+        let value; let value1; let value2;
+        if (oldcategory?.category_id) {
+          value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
+          if (category.parent_category_id && oldcategory.category_id !== category?.parent_category_id[0]) {
+            this.treeSource._data.value[value].checkbox = false;
+          } else if (category.parent_category_id && oldcategory.category_id === category?.parent_category_id[0]) {
+            this.treeSource._data.value[value].checkbox = true;
+          } else {
+            this.treeSource._data.value[value].checkbox = false;
+          }
+        }
+        if (oldsubcategory.sub_category_id) {
+          value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
+          if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          } else if (category.parent_sub_category_id && oldsubcategory.sub_category_id === category.parent_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].checkbox = true;
+          } else {
+            this.treeSource._data.value[value].children[value1].checkbox = false;
+          }
+        }
+        if (oldsupersubcategory.super_sub_category_id) {
+          value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
+          if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+          } else if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
+          } else {
+            this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
+          }
+        }
+      } else {
+        this.selectedSuperSubCategory = {};
+        this.addSuperSubCategoryForm.reset();
+      }
     }
   }
-}
 
   gotoAdd() {
     if (this.selectedCategory.category_name == undefined) {
@@ -414,7 +413,7 @@ selectedcategory(category) {
       this.addCategoryForm.patchValue(this.selectedCategory);
       this.showAddCatForm = true;
       this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-    } else  if (formType == 'addSubCategoryForm') {
+    } else if (formType == 'addSubCategoryForm') {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
         sub_category_description: new FormControl([]),
@@ -423,7 +422,7 @@ selectedcategory(category) {
       this.showAddSubCatForm = true;
       this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
     }
-    else  if (formType == 'addSuperSubCategoryForm') {
+    else if (formType == 'addSuperSubCategoryForm') {
       this.addSuperSubCategoryForm = this.formBuilder.group({
         super_sub_category_name: new FormControl('', myGlobals.req),
         super_sub_category_description: new FormControl(''),
@@ -498,11 +497,22 @@ selectedcategory(category) {
         this.alert.openAlert(result?.data?.create_catelogue?.message, null)
     });
   }
-  // gotoedit() {
-  //   this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
-  //     this.allcourses = result.data.get_all_course_by_usergroup.message;
-  //   });
-  // }
+
+  getcourses(formType) {
+    this.showCourses = true;
+    this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
+    this.pagenumber = 0;
+    var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
+      this.addSuperSubCategoryForm.value;
+    let category
+    category.type = formType;
+    category._id = value.category_id || value.sub_category_id || value.super_sub_category_id;
+    category.pagenumber = this.pagenumber;
+    this.learnerservice.getcourse(category).subscribe((result: any) => {
+      // this.courses = result?.data?.get_course_by_subcategory?.message;
+      console.log(result)
+    });
+  }
 
   // 5eb3b5f50d03e1bc320162cd id 
 

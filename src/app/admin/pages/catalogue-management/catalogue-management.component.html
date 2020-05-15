@@ -228,7 +228,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('category')">View
                   Courses</button>
               </div>
             </div>
@@ -284,7 +284,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('subcategory')">View
                   Courses</button>
               </div>
             </div>
@@ -342,7 +342,7 @@ navigate by url -- Admin/auth/catalogue -->
                 <br>
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="showCourses = !showCourses">View
+                  (click)="getcourses('supersubcategory')">View
                   Courses</button>
               </div>
             </div>
