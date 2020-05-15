@@ -113,16 +113,16 @@ export class CatalogueManagementComponent implements OnInit {
   ngOnInit() {
     this.getallcategories();
 
-    if (window.innerWidth <= 600)
-      this.breakpoint = 1;
-    else if (window.innerWidth >= 600 && window.innerWidth <= 768)
-      this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
-      this.breakpoint = 3;
-    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
+    // if (window.innerWidth <= 600)
+    //   this.breakpoint = 1;
+    // else if (window.innerWidth >= 600 && window.innerWidth <= 768)
+    //   this.breakpoint = 2;
+    // else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
+    //   this.breakpoint = 3;
+    // // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
+    // //   this.breakpoint = 4;
+    // else
     //   this.breakpoint = 4;
-    else
-      this.breakpoint = 4;
   }
 
   onResize(event) {
@@ -154,8 +154,10 @@ export class CatalogueManagementComponent implements OnInit {
     this.loadingCategory = true;
     this.treeSource.data = null;
     this.pagenumber = 0;
+    console.log("called");
     this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
       console.log(result.data);
+      this.treeSource.data = null;
       this.categories = result.data.getcategoryadmin.message;
       this.treeSource.data = this.categories;
       this.dataSource$.next(this.categories);
@@ -522,18 +524,22 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getcourses(formType) {
+    console.log(formType);
     this.showCourses = true;
     this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
     this.pagenumber = 0;
-    var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
-      this.addSuperSubCategoryForm.value;
-    let category
-    category.type = formType;
-    category._id = value.category_id || value.sub_category_id || value.super_sub_category_id;
-    category.pagenumber = this.pagenumber;
+    const value = formType == 'category' ? this.selectedCategory : (formType == 'subcategory') ? this.selectedSubCategory :
+       this.selectedSuperSubCategory;
+       console.log(value);
+    const category = { type : formType, _id : value.category_id || value.sub_category_id || value.super_sub_category_id ,
+      pagenumber : this.pagenumber};
+    // category.type = formType;
+    // category._id = value.category_id || value.sub_category_id || value.super_sub_category_id;
+    // category.pagenumber = this.pagenumber;
+    console.log(category);
     this.learnerservice.getcourse(category).subscribe((result: any) => {
-      // this.courses = result?.data?.get_course_by_subcategory?.message;
-      console.log(result)
+      this.courses = result?.data?.get_course_by_subcategory?.message;
+      console.log(result);
     });
   }
 

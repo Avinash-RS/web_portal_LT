@@ -199,7 +199,7 @@ hr {
 }
 
 /deep/ .mat-select-value {
-    padding-left : 7px !important;
+    padding-left: 7px !important;
 }
 
 .width_35 {
@@ -332,6 +332,10 @@ mat-tree {
     #addCategory,
     #cancel {
         width: 100% !important;
+    }
+
+    .cardheight {
+        margin-bottom: 10px;
     }
 
     .marginClass {

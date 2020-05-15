@@ -8,10 +8,10 @@
 <!-- Remember to sigin to admin before hitting this url
 navigate by url -- Admin/auth/catalogue -->
 <div class="container profile p-30">
-  <div class="container m-t-20 card-shadow ">
+  <div class="container m-t-20 card-shadow">
     <div class="row card-shadow">
       <!-- Mat tree code here ( left hand side) -->
-      <div class="card col-3 cardheight left">
+      <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left">
 
         <div class="spinner-container" *ngIf="loadingCategory">
           <mat-spinner diameter="40"></mat-spinner>
@@ -59,7 +59,7 @@ navigate by url -- Admin/auth/catalogue -->
 
       <!-- start of right hand side card view -->
 
-      <div class="card col-9 cardheight right">
+      <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 cardheight right">
 
         <!-- start of navigations ( engineering > electronics > nano electronics) -->
         <ol class="breadcrumb category-nav m-b-0 m-l-20">
@@ -141,7 +141,7 @@ navigate by url -- Admin/auth/catalogue -->
         <!-- end of buttons (add, edit, dlt) -->
 
         <!-- start of landing 3 line rules -->
-       
+
         <div class="m-l-20" *ngIf="showHome">
           <br><br><br><br>
           <div class="landing-text landing-background">
@@ -409,14 +409,14 @@ navigate by url -- Admin/auth/catalogue -->
                 </div> -->
 
                 <img class="pointer m-b-10" src="{{ courses.src }}" alt="" (click)="selectCourse(courses,i+'c')">
-                  <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
-                    <img src="assets/courses/selectimagefull.png" width="100%" height="97%">
-                  </div>
+                <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
+                  <img src="assets/courses/selectimagefull.png" width="100%" height="97%">
+                </div>
                 <div class="row m-b-10 color_blue width_80 f_wt_500 center_align center">
                   {{courses.name}}
                 </div>
               </div>
-            
+
             </div>
           </div>
         </div>
@@ -430,10 +430,13 @@ navigate by url -- Admin/auth/catalogue -->
 
         <!-- end of view courses -->
       </div>
+
+
       <!-- end of right hand side card view -->
     </div>
+    <!-- <br><br> -->
   </div>
-
+  <br><br>
 
   <!-- start of popup -->
   <ng-template #viewDialog class="dialogPopup">
@@ -468,7 +471,7 @@ navigate by url -- Admin/auth/catalogue -->
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4" >
+          <div class="col-md-4">
             <div class="form-group width_90" *ngIf="subCategoryArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
@@ -481,7 +484,7 @@ navigate by url -- Admin/auth/catalogue -->
             </div>
           </div>
           <div class="col-md-4">
-            <div class="form-group width_90"  *ngIf="superSubCatArray.length > 0">
+            <div class="form-group width_90" *ngIf="superSubCatArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
                 <mat-label class="m-l-20">Sub Category</mat-label>
                 <mat-select formControlName="subSubCategory">
