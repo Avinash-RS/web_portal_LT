@@ -90,3 +90,44 @@ mutation groupstatus($group_id: String!, $is_active: Boolean!){
       error_msg
   }
 }`;
+
+export const reassigncourse = gql`
+mutation reassigncourse(
+  $old_level:  Int!,
+  $old_category_id: String!,
+  $old_sub_category_id: String!,
+  $old_super_sub_category_id: String!,
+  $level: Int!,
+  $apply_all_courses: Boolean!,
+  $course_id: [String]!,
+  $category_id: String!,
+  $sub_category_id: String!,
+  $super_sub_category_id: String!){
+    reassigncourse(old_level: $old_level,old_category_id: $old_category_id, old_sub_category_id: $old_sub_category_id,
+      old_super_sub_category_id : $old_super_sub_category_id,level: $level,apply_all_courses: $apply_all_courses, course_id: $course_id,
+      category_id : $category_id, sub_category_id: $sub_category_id, super_sub_category_id: $super_sub_category_id) {
+    success
+    error_msg
+    message
+  }
+}`;
+
+
+// mutation{
+//   (
+//       level:3,
+//       apply_all_courses:false,
+//       course_id:["ypqh7xcq", "yyo7wfkc"],
+//       category_id:"k3db7m7tt",
+//       sub_category_id:"f7avfx29x",
+//       super_sub_category_id:"nn4mow28u",
+//       old_level : 3,                                                                            
+//       old_category_id : "null",
+//       old_sub_category_id : "null",
+//       old_super_sub_category_id : "nn4mow28u"
+//       ){
+//           success
+//           error_msg
+//           message
+//       }
+// }
