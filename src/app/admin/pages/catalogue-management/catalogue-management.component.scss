@@ -111,9 +111,11 @@ input:focus {
     z-index: 1 !important;
     box-shadow: 0px 0px 12px #6c757d
 }
+
 .right {
     box-shadow: 0px 0px 7px #6c757d;
 }
+
 .header-line {
     padding-top: 0;
     margin-top: 0;
@@ -154,6 +156,10 @@ hr {
 
 .landing-text {
     margin-left: 40px;
+    justify-content: stretch;
+    text-align: justify;
+    display: block;
+
 }
 
 .landing-background .material-icons {
@@ -213,6 +219,7 @@ hr {
 }
 
 mat-tree {
+
     ul,
     li {
         margin-top: 0;
@@ -274,6 +281,7 @@ mat-tree {
     #cancel {
         width: 95% !important;
     }
+
     @media screen and (max-width:766px) {
         .cardheight {
             margin-bottom: 10px;
@@ -301,6 +309,7 @@ mat-tree {
         opacity: 0.7;
         cursor: pointer;
     }
+
     .pointer {
         width: 80% !important;
     }
