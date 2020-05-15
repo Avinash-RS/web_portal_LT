@@ -7,6 +7,9 @@ import * as PDFJS from 'pdfjs-dist/build/pdf';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatList, MatDialog } from '@angular/material';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { MatSlideToggleChange } from '@angular/material';
+declare var $: any;
 
 @Component({
   selector: 'app-create-topic',
@@ -25,12 +28,22 @@ export class CreateTopicComponent implements OnInit {
   pdfImages = [];
   fileType: any;
   courseForm: FormGroup;
+  displaySlides:any;
+  questionPreData:any;
+  subTitleVal = false;
+  transcriptVal = false;
+  showSubupload = false;
+  showTransupload = false;
+  subtitles = [0];
+  transcripts = [0]
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
+    "Knowledge Check" : /(\.csv)$/i, 
   }
+
 
   fileValidations1 = {
     Image: "(.jpg .jpeg .png) are Allowed !!!",
@@ -40,12 +53,37 @@ export class CreateTopicComponent implements OnInit {
     Video: " are Allowed !!!",
     Audio: "are Allowed !!!",
     SCROM: " are Allowed !!!",
-    "Knowledge Check": " are Allowed !!!",
+    "Knowledge Check": " (.csv) are Allowed !!!",
     Feedback: " are Allowed !!!"
   }
 
+
+KnowledgeOptions: any = {
+  loop: true,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: true,
+  dots: false,
+  navSpeed: 700,
+  navText: ['<', '>'],
+  responsive: {
+    0: {
+      items: 1
+    },
+    400: {
+      items: 1
+    },
+    740: {
+      items: 1
+    },
+    940: {
+      items: 1
+    }
+  },
+  nav: true
+}
+
   courseform(): FormGroup {
-    console.log(this.courseArray)
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
       coursefile: [null],
@@ -62,8 +100,7 @@ export class CreateTopicComponent implements OnInit {
   }
 
 
-  topicItem(mod_index,i): FormGroup {
-    console.log(this.courseArray,mod_index,i)
+  topicItem(mod_index,i): FormGroup {    
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
@@ -100,7 +137,6 @@ export class CreateTopicComponent implements OnInit {
       if (flag) {
          this.query = null;
          this.query = params;
-        console.log(this.query)
         if (this.query && this.query.temp && !this.query.addModule) {
           this.wcaService.bSubject.subscribe(value => {
            if (value) {
@@ -110,22 +146,16 @@ export class CreateTopicComponent implements OnInit {
             this.createTopicForm = this.createForm(this.queryData);
             (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
             this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
-            console.log(this.queryData);
            }
           })
         } else if (this.query.edit && !this.query.addModule) {
-          this.wcaService.bSubject1.subscribe((value1:any) => {
-          console.log(value1);
-          console.log(this.queryData)
+          this.wcaService.bSubject1.subscribe((value1:any) => {          
          if(value1 && value1.courseDetails) {
            this.courseArray = value1.courseDetails.coursedetails;
-           console.log(this.courseArray);
           this.queryData = value1.courseDetails.coursedetails[value1.index];
-          console.log(this.queryData)
           this.courseForm = this.courseform()
           this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
-          this.courseForm.patchValue(value1.courseDetails);
-          console.log(this.courseForm)
+          this.courseForm.patchValue(value1.courseDetails);          
          } else {
            this.queryData = {};
          }
@@ -147,7 +177,6 @@ export class CreateTopicComponent implements OnInit {
 
   }
   createForm(mod,mod_index=-1) :FormGroup{
-    console.log(mod)
    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus:['true'],
@@ -163,43 +192,33 @@ export class CreateTopicComponent implements OnInit {
 
 
   initialCall(data1) {
-    this.spinner.show();
-    console.log(data1);
+    this.spinner.show();    
     this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
       this.spinner.hide();
       this.queryData = data.Result;
       this.courseForm = this.courseform()
       this.createTopicForm = this.createForm(this.queryData);
       (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});
-      console.log(this.queryData);
-      console.log(this.courseForm)
+      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});      
     }, err => {
       this.spinner.hide();
     })
   }
 
   initialCal2(data1) {
-    this.spinner.show();
-    console.log(data1);
-      this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
-        console.log(data);
+    this.spinner.show();    
+      this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {        
         this.courseDetails = data.Result[0];
         this.courseArray =  this.courseDetails.coursedetails;
-        
-        console.log(this.courseArray);
         this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
           this.queryData = data.Result;
         this.spinner.hide();
-        console.log(this.courseDetails)
         // this.queryData.moduledetails = this.courseArray[0].moduledetails;
-        console.log(this.queryData);
         this.courseForm = this.courseform()
         this.createTopicForm = this.createForm(this.queryData);
         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
         this.courseForm.patchValue(this.courseDetails);
         // this.courseForm.updateValueAndValidity();
-        console.log(this.courseForm)
        
       }, err => {
         this.spinner.hide();
@@ -210,25 +229,20 @@ export class CreateTopicComponent implements OnInit {
   }
 
   initialCall3(data1){
-    console.log(data1);
     this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
       this.courseArray =  this.courseDetails.coursedetails;
-      console.log(this.courseArray);
       this.wcaService.bSubject.subscribe(value => {
         if (value) {
          this.queryData = null;
          this.queryData = value;
          this.spinner.hide();
-         console.log(this.courseDetails)
         //  this.queryData.moduledetails = this.courseArray[0].moduledetails;
-         console.log(this.queryData);
          this.courseForm = this.courseform()
          this.createTopicForm = this.createForm(this.queryData);
          (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
          this.courseForm.patchValue(this.courseDetails);
-         // this.courseForm.updateValueAndValidity();
-         console.log(this.courseForm)
+         // this.courseForm.updateValueAndValidity();         
         }
         });
     }, err => {
@@ -248,23 +262,19 @@ export class CreateTopicComponent implements OnInit {
 
 
   activate(item) {
-    console.log(item);
 if (item) {
   this.active = item
   this.fileType = this.fileValidations1[item.name];
 }
   }
 
-  onSelectFile(fileInput: any, item, formdata: FormGroup, index) {
-    console.log(item);
+  onSelectFile(fileInput: any, item, formdata: FormGroup, index) {    
     if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
       this.spinner.show();
       var imagepath;
       var allowedExtensions;
       var filePath = fileInput.target.files[0].name;
-      const reader = new FileReader()
-
-      console.log(fileInput.target.files[0])
+      const reader = new FileReader()      
       allowedExtensions = this.fileValidations[item.name];
       if (!allowedExtensions.exec(filePath)) {
         this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
@@ -272,7 +282,7 @@ if (item) {
         fileInput.value = '';
         return false;
       } else {
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        debugger;
         if (fileInput && fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
@@ -300,11 +310,9 @@ if (item) {
             const formData1 = new FormData();
             formData1.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData1).subscribe((data:any) => {
-           console.log(data);
            this.spinner.hide();
            if(data && data.success) {
-            this.clearFormArray(formdata.get("topicimages") as FormArray)
-            console.log(data.message)
+            this.clearFormArray(formdata.get("topicimages") as FormArray)            
             for (var m = 0; m < data.message.length; m++) {
               let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
               let obj2 = {
@@ -324,14 +332,36 @@ if (item) {
             this.spinner.hide();
            })
           } else if (item.name === 'Word') {
+            const formData3 = new FormData();
+            formData3.append('PPT', this.imageView);
+           this.wcaService.excelUpload(formData3).subscribe((data:any) => {
+            console.log('word',data)
             this.spinner.hide();
+           })
           } else if (item.name === 'Video') {
             this.spinner.hide();
           } else if (item.name === 'Audio') {
             this.spinner.hide();
           } else if (item.name === 'SCROM') {
             this.spinner.hide();
-          } else if (item.name === 'Knowledge Check') {
+          } else if (item.name === 'Knowledge Check') {            
+            const formData2 = new FormData();
+            formData2.append('excel', this.imageView);
+            this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data:any) => {
+              this.spinner.hide();
+              if(data && data.Message =="Success") {
+               this.clearFormArray(formdata.get("topicimages") as FormArray)
+               let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+               let obj2 = {
+                name:'',
+                image:path2,
+                file:''
+              }
+              this.previewKnowledgeCheck(path2,formdata,obj2);
+            }
+              },err => {
+               this.spinner.hide();
+              })
             this.spinner.hide();
           } else if (item.name === 'Feedback') {
             this.spinner.hide();
@@ -366,18 +396,15 @@ if (item) {
 
 
     let getPage = (pdf) => {
-      pdf.getPage(currentPage).then((page) => {
-        console.log("Printing " + currentPage);
+      pdf.getPage(currentPage).then((page) => {        
         var viewport = page.getViewport({ scale });
         var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
         var renderContext = { canvasContext: ctx, viewport: viewport };
 
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        console.log('asdf')
 
         page.render(renderContext).promise.then(async () => {
-          console.log('asdf')
           pages.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
 
           heights.push(height);
@@ -391,7 +418,6 @@ if (item) {
           else {
 
             this.clearFormArray(formdata.get("topicimages") as FormArray)
-            console.log(pages)
             for (var m = 0; m < pages.length; m++) {
               let path = await this.imagedata_to_image(pages[m]);
               let obj3 = {
@@ -432,7 +458,6 @@ if (item) {
         const formData = new FormData();
         formData.append('image', file);
         this.wcaService.uploadImage(formData).subscribe((data: any) => {
-          // console.log(data)
           resolve('https://edutechstorage.blob.core.windows.net/' + data.path);
         }, err => {
           this.spinner.hide();
@@ -462,31 +487,22 @@ if (item) {
         this.courseForm.value.flag = 'true';
 
       }
-    console.log(this.courseForm);
-
-    console.log("hai1")
   
     if(this.courseForm.valid) {
-      const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));
-      console.log(userDetails);
-      console.log(localStorage.getItem('role'))
+      const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
        this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
        this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
        this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
       this.spinner.show();
-      this.submitted = false;
-
-      console.log("hai")
+      this.submitted = false;      
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
-        console.log(data);
         if (data && data.Message === 'Success') {
           const obj ={
             course_id:this.query.viewingModule,
             is_active:0
           }
           this.wcaService.updateCourse(obj).subscribe((data:any) => {
-            console.log(data); 
           });        
              this.toast.success('Draft Created Successfully !!!');
           // if(type === 'draft') {
@@ -508,11 +524,8 @@ if (item) {
    
   }
 
-  previewimages(images, event,item) {
-    console.log(item);
-    console.log(images);
-    event.stopPropagation();
-    console.log(images.value.topicimages);
+  previewimages(images, event,item) {    
+    event.stopPropagation();    
     if (images && images.value && images.value.topicimages) {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'previewImages', images: images.value.topicimages },
@@ -522,7 +535,6 @@ if (item) {
         disableClose: true,
       });
       dialogRef.afterClosed().subscribe(res1 => {
-        console.log(res1);
 
         images.value.topicimages=res1;
 
@@ -533,4 +545,67 @@ if (item) {
 
   }
 
+  openPreviewModal(){
+    this.displaySlides = false;
+    $('#knowlegeCheckModal').modal('show');
+    $('#knowlegeCheckModal').appendTo("body");
+    setTimeout(()=>{
+      this.displaySlides = true
+    },1000)
+  }
+
+  sampleDownload(){
+    window.location.href = "https://edutechstorage.blob.core.windows.net/container1/knowledgecheck/408209727260479-MCQ Template.csv";
+  }
+
+  previewKnowledgeCheck(path,formdata,obj2){
+    this.wcaService.getPreviewData(path).subscribe((value)=>{     
+      this.questionPreData = value['Result'];
+      if (!formdata.get('topicimages').get(String(0))) {
+        (formdata.get('topicimages') as FormArray).push(this.topicImages());
+      }
+      formdata.get('topicimages').get(String(0)).setValue(this.questionPreData);
+      formdata.get('topictype').setValue('KnowledgeCheck'); 
+    })
+  }
+
+  toggle_sub_trans(event,value){
+    if(value == "subtitle"){
+      if(event.checked){
+        this.showSubupload = true
+      }
+      else{
+        this.showSubupload = false
+      }
+    }
+    else{
+      if(event.checked){
+        this.showTransupload = true
+      }
+      else{
+        this.showTransupload = false
+      }
+    }
+  }
+
+  addSubTile(value){
+    if(value == 'sub'){
+      this.subtitles.push(this.subtitles.length)
+    }
+    else{
+      this.transcripts.push(this.transcripts.length)
+    }
+
+  }
+  removeSubTile(index,value){
+    
+    if(value == 'sub'){      
+      this.subtitles.splice(index, 1);
+    }
+    else{
+      this.transcripts.splice(index, 1);
+    }
+    
+  }
+  
 }

@@ -539,3 +539,218 @@ display: flex;
    font-weight: 590;
    color: red;
   }
+
+  .UploadBlock{
+    display: none;
+  }
+
+  .UploadBlock.active{
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
+    margin-left: 20%;
+  }
+  .knowledgeIcon{
+    border: 1px solid #c3c3c3;
+    border-radius: 15px;
+    line-height: 13px;
+    background: #f6f6f6;
+    padding-top: 6px;
+    width: 43px;
+    margin-top: -1px;
+    margin-right: 8px;
+    vertical-align: middle;
+    box-shadow: 0 0 5px #aaaaaa !important;
+  }
+
+
+  .mLeft19{
+    margin-left: 19%;
+  }
+  .mleft3{
+    margin-left: 3%;
+  }
+
+  .fsize12{
+    font-size: 12px;
+  }
+
+  #knowlegeCheckModal .modal-header{
+    display: block !important;
+    border-bottom: 0px !important;
+  }
+
+  #knowlegeCheckModal .modal-backdrop {
+    z-index: 1040 !important;
+}
+#knowlegeCheckModal .modal-dialog {
+    margin: 2px auto;
+    z-index: 1100 !important;
+}
+
+#knowlegeCheckModal .modal-body{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.collapseLabel{
+    display: block;
+    width: 100%;
+    vertical-align: middle;
+    border-style: none;
+
+}
+
+.questionContainer{
+    background: #B8D0FF;
+    border-radius: 5px;
+    padding: 30px 40px;
+    margin: 9%;
+}
+
+.queValue{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.queOptions {
+    padding: 10px 0px;
+  }
+
+  .queAnswer{
+    padding-bottom: 10px;
+  }
+
+ 
+  ::ng-deep .questionList .owl-theme .owl-nav [class*='owl-'] {
+    width: 25px;
+    font-size: 22px;
+    position: absolute;
+    top: 40%;
+    display: block !important;
+    color: #ffffff;
+    padding: 4px 7px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 30px;
+    background: black;
+}
+
+::ng-deep .questionList .owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    z-index: 1 !important;
+    left: -10px;
+}
+
+::ng-deep .questionList .owl-carousel .owl-nav .owl-next {
+    position: absolute;    
+    z-index: 1 !important;
+    right: -10px;
+}
+
+.mright34{
+    margin-right: 34%;
+}
+
+.cancelBtn{
+    margin-left: 12px;
+    padding-bottom: 6px;
+}
+
+.UploadVidBlock{
+    width: 100%; 
+}
+
+.subTitleUpload{
+    display: flex;
+    margin-left: 38%;
+    margin-top: 4%;
+    margin-bottom: 6%;
+}
+
+.subSelect{
+    border: 1px solid #b5b5b5;
+    width: 150px;
+    border-radius: 5px;
+    line-height: 24px;
+    height: 30px;
+    box-shadow: 0 0 10px #aaaaaa !important;
+}
+
+.chooseFile{
+    margin-left: 15px;
+    padding-top: 3px;
+}
+
+.subButton{
+    border-radius: 5px;
+    width: 100px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color:$color-blue!important;    
+    border: 1px solid !important;
+    color: #ffffff;
+}
+
+.addSub{
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: 7px;
+}
+
+.h30{
+    height: 30px !important;
+}
+
+::ng-deep .vidCol1 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+background-color: $color-blue!important;
+}
+
+::ng-deep .vidCol1 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+    background-color: #1f37774d!important;
+}
+
+.subTitle{
+    margin-left: -15px;
+    margin-bottom: 10px;
+}
+
+.input-container{
+    margin-top: 10px;
+    display: flex;
+    background: white !important;
+    height: 34px;
+    border-radius: 11px;
+    border: 1px solid $color-blue;
+    width: 95% !important;    
+}
+.input-container input:focus, .input-container input:active {
+    outline: none;
+}
+.input-container input {
+    border: none;
+    // background: #B8D0FF !important;
+}
+
+.input-container button {
+    float: right;
+    cursor: pointer;
+    background-color: $color-blue !important;
+    border: 1px solid $color-blue!important;
+    color: #ffffff;
+    width: 135px;
+    border-radius: 8px;
+    margin-bottom: -1px;
+    margin-top: -1px;
+    margin-right: -1px;
+}
+
+.vidCol3{
+    margin-top: 4%;
+    margin-left: 19%;
+}
+
+.vidCol1{
+    margin-left: -78%;
+}
