@@ -63,10 +63,10 @@
             {{selectedCategory?.category_name || 'Category >'}}</li>
           <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined"
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
-            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category'}}</li>
+            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}</li>
           <li class="breadcrumb-item active" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
           changeNav('addSuperSubCategoryForm')" *ngIf="selectedSuperSubCategory?.super_sub_category_name != undefined"
-            aria-current="page">{{selectedSuperSubCategory.super_sub_category_name}}</li>
+            aria-current="page">{{selectedSuperSubCategory.super_sub_category_name || 'Sub Category >'}}</li>
         </ol>
         <!-- end of navigations ( engineering > electronics > nano electronics) -->
         <hr class="header-line m-r-20 m-l-20">
