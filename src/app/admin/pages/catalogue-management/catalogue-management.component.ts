@@ -39,7 +39,7 @@ export class CatalogueManagementComponent implements OnInit {
   subCategoryArray: any = [];
   superSubCatArray: any = [];
   pagenumber = 0;
-  level: number;
+  level: number = null;
 
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
@@ -199,6 +199,7 @@ export class CatalogueManagementComponent implements OnInit {
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
+        this.level = 1;
         oldcategory = null;
         oldcategory = this.selectedCategory; oldsubcategory = this.selectedSubCategory; oldsupersubcategory = this.selectedSuperSubCategory;
         this.selectedCategory = category;
@@ -242,6 +243,7 @@ export class CatalogueManagementComponent implements OnInit {
           }
         }
       } else {
+        this.level = null;
         this.selectedSubCategory = {};
         this.addSubCategoryForm.reset();
         this.selectedCategory = {};
@@ -253,6 +255,7 @@ export class CatalogueManagementComponent implements OnInit {
       }
     } else if (category.sub_category_id) {
       if (category.checkbox === true) {
+        this.level = 2;
         oldsubcategory = null;
         oldsubcategory = this.selectedSubCategory;
         oldcategory = this.selectedCategory;
@@ -312,11 +315,13 @@ export class CatalogueManagementComponent implements OnInit {
             category_description: new FormControl([]),
             category_image: ['', myGlobals.req]
           });
+          this.level = 1;
           this.addCategoryForm.patchValue(this.selectedCategory);
           this.showAddCatForm = true;
           this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
         }
         else {
+          this.level = null;
           this.selectedSubCategory = {};
           this.addSubCategoryForm.reset();
           this.selectedCategory = {};
@@ -329,6 +334,7 @@ export class CatalogueManagementComponent implements OnInit {
       }
     } else {
       if (category.checkbox === true) {
+        this.level = 3;
         oldsubcategory = this.selectedSubCategory;
         oldcategory = this.selectedCategory;
         oldsupersubcategory = this.selectedSuperSubCategory;
@@ -390,6 +396,7 @@ export class CatalogueManagementComponent implements OnInit {
             sub_category_name: new FormControl('', myGlobals.req),
             sub_category_description: new FormControl([]),
           });
+          this.level = 1;
           this.addSubCategoryForm.patchValue(this.selectedSubCategory);
           this.showAddSubCatForm = true;
           this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
@@ -399,11 +406,13 @@ export class CatalogueManagementComponent implements OnInit {
             category_description: new FormControl([]),
             category_image: ['', myGlobals.req]
           });
+          this.level = 2;
           this.addCategoryForm.patchValue(this.selectedCategory);
           this.showAddCatForm = true;
           this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
         }
         else {
+          this.level = null;
           this.selectedSubCategory = {};
           this.addSubCategoryForm.reset();
           this.selectedCategory = {};
@@ -554,7 +563,7 @@ export class CatalogueManagementComponent implements OnInit {
     // category.pagenumber = this.pagenumber;
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.courses = result?.data?.get_course_by_subcategory?.message;
-      this.course_count = result?.data?.get_course_by_subcategory?.course_count || 10;
+      this.course_count = result?.data?.get_course_by_subcategory?.course_count || this.courses.length;
       console.log(this.courses)
     });
   }
@@ -592,7 +601,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory == undefined && 2;
     level = this.selectCategoryForm?.value?.category != undefined &&
       this.selectCategoryForm?.value?.subCategory != undefined && this.selectCategoryForm?.value?.subSubCategory != undefined && 3;
-    !this.selectedArray && this.selectedArray.map((item: any) => item.course_id)
+    !this.applyAllCourses && this.selectedArray.map((item: any) => item.course_id)
     // old_level: course.old_level,
     // old_category_id: course.old_category_id,
     // old_sub_category_id: course.old_sub_category_id,
@@ -606,8 +615,8 @@ export class CatalogueManagementComponent implements OnInit {
     let course = {
       old_level: this.level,
       old_category_id: this.selectedCategory?.category_id,
-      old_sub_category_id: this.selectedSubCategory?.sub_category_id,
-      old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id,
+      old_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
+      old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id || "null",
       level: level,
       apply_all_courses: this.applyAllCourses || false,
       course_id: this.selectedArray || [],
@@ -616,10 +625,10 @@ export class CatalogueManagementComponent implements OnInit {
       super_sub_category_id: this.selectCategoryForm.value.subSubCategory?.super_sub_category_id || "null",
     }
     console.log(course)
-    // this.adminservice.reAssignCourses(course).subscribe((result: any) => {
-    //   // this.courses = result?.data?.get_course_by_subcategory?.message;
-    //   console.log(result)
-    // });
+    this.adminservice.reAssignCourses(course).subscribe((result: any) => {
+      // this.courses = result?.data?.get_course_by_subcategory?.message;
+      console.log(result)
+    });
   }
   onScrollDown() {
     this.pagenumber = this.pagenumber + 1;

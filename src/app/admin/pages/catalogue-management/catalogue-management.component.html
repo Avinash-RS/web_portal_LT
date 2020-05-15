@@ -100,7 +100,7 @@
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
                 <button mat-raised-button *ngIf="showCourses"
                   class="background-blue width_80 m-b-10 moveTo-btn color_white" (click)="openMoveTo(viewDialog)"
-                  [disabled]="!applyAllCourses && selectedArray.length == 0">
+                  [disabled]="!applyAllCourses && selectedArray?.length == 0">
                   <span class="material-icons" style="vertical-align: middle;">domain</span>Move To
                 </button>
               </div>
@@ -335,13 +335,13 @@
           </div>
           <div class="row m-t-10 m-r-20">
             <div class="col-9">
-              <h3 class="font-display m-b-0">295 courses > </h3>
-              <!-- <h2 class="font-display">{{course_count}} Courses > </h2> -->
+              <!-- <h3 class="font-display m-b-0">295 courses > </h3> -->
+              <h3 class="font-display m-b-0">{{course_count}} Courses > </h3>
             </div>
             <div class="col-3 p-r-0 m-b-10">
               <button id="selectAll" mat-flat-button
                 class="width_70 float-right border-radius-5 background-blue color_white center"
-                (click)="applyAllCourses = true && selectedArray = [] && openMoveTo(viewDialog)">Select All</button>
+                (click)="applyAllCourses = true; selectedArray = []; openMoveTo(viewDialog)">Select All</button>
             </div>
           </div>
           <div class="m-r-20 m-l-20">
@@ -377,9 +377,9 @@
     <span class="close">
       <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox()"></i>
     </span>
-    <h2>Move {{selectedArray.length || course_count}} courses</h2>
+    <h2>Move {{selectedArray?.length || course_count}} courses</h2>
     <mat-dialog-content style="width: 850px;">
-      <div class="row" *ngIf ="selectedArray.length > 0">
+      <div class="row" *ngIf ="selectedArray && selectedArray.length > 0">
         <div class="col-md-3 m-b-10" *ngFor="let courseName of selectedArray;let j = index">
           <div class="center width_90 p-5px border border-radius-5">
             <span class="material-icons pointer" style="vertical-align: middle;" *ngIf="selectedArray.length > 1"
