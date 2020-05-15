@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { MatDialog } from '@angular/material';
 declare var $: any;
 
 @Component({
@@ -24,18 +25,74 @@ export class ViewAllCoursesComponent implements OnInit {
   displayMode: number = 1;
   paginationpgno: any;
   loader: boolean;
-  
-  constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) {
+  masterSelected:boolean;
+  checklist:any;
+  checkedList:any;
+  sort_type:any = "A-Z";
+  showAppliedFiltre :boolean = false;
+
+  constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
     this.btnType = "Enroll Now"
+    this.masterSelected = false;
+    this.checklist = [
+      {id:1,value:'Elenor Anderson',isSelected:false},
+      {id:2,value:'Caden Kunze',isSelected:false},
+      {id:3,value:'Ms. Hortense Zulauf',isSelected:false},
+      {id:4,value:'Grady Reichert',isSelected:false},
+      {id:5,value:'Dejon Olson',isSelected:false},
+      {id:6,value:'Jamir Pfannerstill',isSelected:false},
+      {id:7,value:'Aracely Renner DVM',isSelected:false},
+      {id:8,value:'Genoveva Luettgen',isSelected:false},
+      {id:5,value:'Dejon Olson',isSelected:false},
+      {id:6,value:'Jamir Pfannerstill',isSelected:false},
+      {id:7,value:'Aracely Renner DVM',isSelected:false},
+      {id:8,value:'Genoveva Luettgen',isSelected:false}
+    ];
+    
   }
+
+
+  isAllSelected() {
+    this.masterSelected = this.checklist.every(function(item:any) {
+        return item.isSelected == true;
+      })
+    this.getCheckedItemList();
+  }
+
+  getCheckedItemList(){
+    this.checkedList = [];
+    for (var i = 0; i < this.checklist.length; i++) {
+      if(this.checklist[i].isSelected)
+      this.checkedList.push(this.checklist[i]);
+    }
+    this.checkedList = JSON.stringify(this.checkedList);
+    console.log(this.checkedList)
+  }
+
+
+  applyFilter() { 
+
+   }
 
   ngOnInit() {
     this.userDetailes = this.globalservice.checkLogout();
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
-
     this.loadcategoryandcourses();
+    this.getCheckedItemList();
+  }
+
+  filter(){
+      this.showAppliedFiltre = true;
+  }
+  sorting(sortval){
+    this.showAppliedFiltre = false;
+    if (this.userDetailes.group_id)
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,sortval).subscribe((result: any) => {
+        this.allcourses = result.data.get_all_course_by_usergroup.message;
+      });
+   
   }
 
   loadcategoryandcourses() {
@@ -46,6 +103,7 @@ export class ViewAllCoursesComponent implements OnInit {
     this.getallcourses();
   }
   getcoursecategories() {
+    
     this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
       this.categories = result.data.get_all_category.message;
     });
@@ -76,11 +134,11 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   getallcourses() {
-    if (this.userDetailes.group_id) {
-    }
+    if (this.userDetailes.group_id)
     console.log(this.userDetailes.group_id[0])
-    this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
+    this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,this.sort_type).subscribe((result: any) => {
       this.allcourses = result.data.get_all_course_by_usergroup.message;
+      console.log(this.allcourses)
     });
   }
 
@@ -101,8 +159,16 @@ export class ViewAllCoursesComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
+    this.learnerservice.getallcourses('1', this.pagenumber,this.sort_type).subscribe((result: any) => {
       this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });
+  }
+
+  getCategory(templateRef: TemplateRef<any>) {
+    this.showAppliedFiltre = false;
+    this.dialog.open(templateRef);
+  }
+  closedialogbox(){
+    this.dialog.closeAll();
   }
 }

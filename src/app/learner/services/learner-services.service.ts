@@ -5,7 +5,9 @@ import {
   login, get_course_by_user, get_country_details, get_qualification_details,
   get_board_university_details, get_discipline_details, get_specification_details,
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
-  getmoduleData,get_user_detail_username, check_existing_user,  get_all_category, get_sub_category,get_course_by_subcategory,get_all_course_by_usergroup,get_module_topic
+  getmoduleData,get_user_detail_username, check_existing_user,  get_all_category,
+  get_sub_category,get_course_by_subcategory,get_all_course_by_usergroup, get_module_topic,
+  getsupersubcategory
 } from "./operations/learner_query";
 
 
@@ -337,6 +339,7 @@ export class LearnerServicesService {
   }
 
   getcoursesubcategory(categoryid) {
+    console.log(categoryid);
     return this.Apollo.query({
       query: get_sub_category,
       variables: {
@@ -344,6 +347,15 @@ export class LearnerServicesService {
       }
     });
   }
+  getsupersubcategory(subcategoryid){
+    return this.Apollo.query({
+      query: getsupersubcategory,
+      variables: {
+        sub_category_id: subcategoryid,
+      }
+    });
+  }
+
   getcourse(subcategory) {
     return this.Apollo.query({
       query: get_course_by_subcategory,
@@ -355,12 +367,13 @@ export class LearnerServicesService {
     });
   }
 
-  getallcourses(groupid, pagenumber) {
+  getallcourses(groupid, pagenumber,sort_type) {
     return this.Apollo.query({
       query: get_all_course_by_usergroup,
       variables: {
         group_id: groupid,
-        pagenumber: pagenumber
+        pagenumber: pagenumber,
+        sort_type:sort_type
       }
     });
   }

@@ -294,7 +294,7 @@ query get_all_category($group_id: [String]!){
 }`;
 
 export const get_sub_category = gql`
-query get_sub_category($category_id: Int!){
+query get_sub_category($category_id: String!){
   get_sub_category(category_id: $category_id){
   success
   message{
@@ -312,6 +312,30 @@ query get_sub_category($category_id: Int!){
   parent_category_id
   }
   error_msg
+  }
+}`;
+
+export const getsupersubcategory = gql`
+query  getsupersubcategory($sub_category_id: String!){
+  getsupersubcategory(sub_category_id: $sub_category_id){
+      success
+      error_msg
+      message{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            super_sub_category_id
+            super_sub_category_name
+            super_sub_category_image
+            super_sub_category_description
+            parent_sub_category_id
+            parent_category_id
+      }
   }
 }`;
 
@@ -407,8 +431,8 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
 
 
 export const get_all_course_by_usergroup = gql`
-  query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!){
-    get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber){
+  query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
+    get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
     error_msg
     message{

@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM node:12.7-alpine AS build
+FROM node:10.20.1 AS build
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN npm config set registry http://registry.npmjs.org/ 
@@ -17,6 +17,7 @@ RUN npm i xlsx
 RUN npm i file-saver
 RUN npm i ngx-pagination
 RUN npm i ngx-infinite-scroll
+RUN npm install apollo-client
 
 COPY . .
 #RUN ng serve
