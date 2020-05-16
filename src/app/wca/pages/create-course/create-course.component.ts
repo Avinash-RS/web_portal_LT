@@ -337,7 +337,7 @@ export class CreateCourseComponent implements OnInit {
                             createdby_id: this.courseForm.value.user_id,
                             createdby_role: this.courseForm.value.user_role
                         }
-                        console.log
+                       // console.log
                         this.wcaService.createDraft(obj).subscribe((data: any) => {
                             console.log(data);
                         });

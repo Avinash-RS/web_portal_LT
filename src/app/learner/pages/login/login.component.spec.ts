@@ -152,13 +152,13 @@ describe('LoginComponent', () => {
           localStorage.setItem('role', 'learner')
           localStorage.setItem('token', loginresult.data.login.message.token)
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-          if (loginresult.data.login.message.is_profile_updated) {
-            // expect(routerSpy.navigate).toHaveBeenCalled();
-            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
-          }
-          else {
-            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/profile']);
-          }
+          // if (loginresult.data.login.message.is_profile_updated) {
+          //   // expect(routerSpy.navigate).toHaveBeenCalled();
+          //   // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
+          // }
+          // else {
+          //   // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/profile']);
+          // }
         } else {
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
           localStorage.setItem('remember_me', 'false');
