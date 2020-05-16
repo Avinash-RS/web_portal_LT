@@ -2,17 +2,25 @@
 
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+      <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
       <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
         </a></li>
       <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+      <li class="breadcrumb-item">
+        <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{courseDetails?.courseid}}">
+          Edit Course
+        </a></li>
 
-      <!-- <li class="breadcrumb-item">
-            <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{this.queryData.viewingModule}}">Create
-                Courses</a></li>
-        <li class="breadcrumb-item active">Create Module</li> -->
+      <li class="breadcrumb-item">
+        <a
+          href="/Admin/auth/Wca/addmodule?courseId={{routeData.viewingModule}}&courseImage={{routeData.image}}&courseName={{routeData.courseName}}">
+          Add Module
+        </a></li>
+      <li class="breadcrumb-item" aria-current="page">Module Repository</li>
+
     </ol>
   </nav>
+
   <h2 class="rep-title">
     Repository
   </h2>
@@ -53,7 +61,7 @@
         <td mat-cell *matCellDef="let element">
           <span class="{{element.isSelect ? 'disable-select-btn' : ''}}">
             <button type="button" mat-button color="primary" (click)="onModuleSelection(element)"
-             [disabled]='element.isSelect' class="select-btn">Select</button>
+              [disabled]='element.isSelect' class="select-btn">Select</button>
           </span>
         </td>
       </ng-container>
