@@ -21,6 +21,7 @@ export class AddModuleComponent implements OnInit {
   hoverName: string;
   isHover: boolean;
   isDrag: boolean;
+  isRepo = 'false';
   moduleList = [];
   constructor(public spinner: NgxSpinnerService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
@@ -38,6 +39,7 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
+        this.isRepo = (this.queryData.isRepo == 'true') ? 'true' : 'false'
         this.routedCourseDetails = {
           courseId: params.courseId,
           courseImage: params.courseImage,
@@ -87,23 +89,31 @@ export class AddModuleComponent implements OnInit {
 
 
   getCourseDetails() {
-    this.spinner.show();
+    //this.spinner.show();
     this.moduleList = [];
     console.log(this.routedCourseDetails.courseId)
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      data.Result[0].coursedetails.forEach((data) => {
-        if (data.moduleid) {
-          this.moduleList.push(data.moduleid)
-        }
-      })
-      if (this.queryData.isRepo) {
+      if (this.isRepo == 'true') {
         this.getRepoModules();
+        this.updateCourseDetails();
+        this.isRepo = 'false';
       }
-      this.updateCourseDetails();
+      else {
+        this.updateModList();
+        this.updateCourseDetails();
+      }
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
+    })
+  }
+
+  updateModList() {
+    this.courseDetails.coursedetails.forEach((data) => {
+      if (data.moduleid) {
+        this.moduleList.push(data.moduleid)
+      }
     })
   }
 
@@ -198,6 +208,7 @@ export class AddModuleComponent implements OnInit {
           this.courseDetails.coursedetails.push(mod);
         }
       })
+      this.updateModList();
     })
   }
 }

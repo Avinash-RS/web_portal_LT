@@ -480,6 +480,7 @@ if (item) {
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
         console.log(data);
+        debugger
         if (data && data.Message === 'Success') {
           const obj ={
             course_id:this.query.viewingModule,
