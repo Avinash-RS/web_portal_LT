@@ -1,0 +1,42 @@
+@import "../../../../assets/variable";
+
+.input-group>.custom-file,
+.input-group>.custom-select,
+.input-group>.form-control,
+.input-group>.form-control-plaintext {
+    flex: 0 0 45%;
+    margin-left: 44%;
+    background-color: $color-blue;
+
+}
+.form-control {
+    display: block;
+    width: 196px;
+    height: calc(1.5em + .75rem + 2px);
+    color: $color-white !important;
+}
+.input-group-text {
+   
+    height: 38px !important; 
+    margin-top: 0px !important; 
+   //  border-radius: .25rem !important;
+
+}
+.navbar-collapse {
+    background-color: $color-blue;
+}
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    width: 780px !important;
+}
+.bg-transparent {
+    background-color: $color-blue !important;
+    color: $color-white;
+}
+::placeholder {
+    color: $color-white;
+    opacity: 1;
+}
