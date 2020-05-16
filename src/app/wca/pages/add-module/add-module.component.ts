@@ -91,7 +91,6 @@ export class AddModuleComponent implements OnInit {
   getCourseDetails() {
     //this.spinner.show();
     this.moduleList = [];
-    console.log(this.routedCourseDetails.courseId)
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
       if (this.isRepo == 'true') {
@@ -148,7 +147,6 @@ export class AddModuleComponent implements OnInit {
           is_active: 0
         }
         this.apiService.updateCourse(obj).subscribe((data: any) => {
-          console.log(data);
         });
         this.toast.success('Module updated successfully');
       }
