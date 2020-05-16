@@ -42,13 +42,14 @@
     </ul>
 
 
-    <div class="input-group"  *ngIf="userDetailes != null">
-      <input class="form-control border-right-0" placeholder="  Search courses  ">
+    <div *ngIf="userDetailes != null">
+      <!-- <input class="form-control border-right-0" placeholder="  Search courses  ">
       <span class="input-group-append bg-white border-left-0">
         <span class="input-group-text bg-transparent">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
-      </span>
+      </span> -->
+    <app-search></app-search>
     </div>
 
     <div class="input-group" *ngIf="userDetailes == null">
