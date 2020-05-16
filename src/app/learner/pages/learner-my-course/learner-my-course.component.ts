@@ -61,7 +61,7 @@ export class LearnerMyCourseComponent implements OnInit {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
           this.myCoursesList = getMyCourse.data.get_course_by_user.message;
-          this.loader.hide
+          this.loader.hide();
         }
       }
     });
