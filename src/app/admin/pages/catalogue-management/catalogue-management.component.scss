@@ -47,14 +47,20 @@ input:focus {
     border-radius: 2px;
     display: inline-block;
     height: auto;
-    // margin: 0.5rem;
     position: relative;
     width: auto;
     overflow: auto;
-    box-shadow: 0 2px 10px #6c757d;
     padding: 0px !important;
 }
-
+ /deep/ .swal2-styled.swal2-confirm {
+    background-color: $color-blue !important;
+}
+ /deep/ .swal2-popup.swal2-modal.swal2-show {
+    width: 32% !important;
+}
+:host /deep/ .mat-checkbox-layout .mat-checkbox-label {
+    white-space: normal;
+}
 
 .cardheight {
     height: 600px !important;
@@ -73,7 +79,7 @@ input:focus {
 }
 
 .m-b-10 {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 .m-b-20 {
@@ -86,6 +92,10 @@ input:focus {
 
 .m-l-20 {
     margin-left: 20px;
+}
+
+.m-l-5 {
+    margin-left: 5px;
 }
 
 .p-30 {
@@ -105,13 +115,31 @@ input:focus {
     padding-right: 0;
 }
 
+.p-l-10 {
+    padding-left: 10;
+}
+
 .p-l-20 {
     padding-left: 20;
 }
 
-.card-shadow {
-    box-shadow: 0 2px 10px #6c757d;
-    padding: 0px !important;
+.left {
+    z-index: 1 !important;
+    box-shadow: 0px 0px 12px #6c757d
+}
+
+.right {
+    box-shadow: 0px 0px 7px #6c757d;
+
+    // html {
+    //     overflow: scroll;
+    //     overflow-x: hidden !important;
+    // }
+
+    // ::-webkit-scrollbar {
+    //     width: 0px;
+    //     background: transparent !important;
+    // }
 }
 
 .header-line {
@@ -154,6 +182,10 @@ hr {
 
 .landing-text {
     margin-left: 40px;
+    justify-content: stretch;
+    text-align: justify;
+    display: block;
+
 }
 
 .landing-background .material-icons {
@@ -171,69 +203,28 @@ hr {
     padding-left: 0;
 }
 
-.course-card {
-    box-shadow: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-
+/deep/ .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex,
+.mat-form-field-flex,
+.mat-form-field-appearance-legacy .mat-form-field-infix,
+.mat-form-field-infix {
+    cursor: pointer;
+    background: aliceblue !important;
+    border-radius: 5px !important;
+    padding: 0px 5px 7px 0px !important;
 }
 
-.font-display {
-    color: $color-blue;
-    font-weight: bolder;
+/deep/ .mat-select-value {
+    padding-left: 7px !important;
 }
 
-.category-label {
-    background: $color-light-blue;
-    border-radius: 5px;
-    margin-left: 5px;
+.width_35 {
+    width: 35% !important;
 }
 
 .alert-btn {
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     right: 0;
-}
-
-
-
-// mat-form-field:last-child div {
-//     padding-bottom: 0;
-// }
-
-// .mat-form-field-infix {
-//     margin-left: 10px !important;
-// }
-
-// .no-padding {
-//     .mat-form-field-wrapper {
-//         padding-bottom: 0 !important;
-//     }
-// }
-
-.overlayClass {
-    opacity: 0.3;
-    z-index: -1;
-    background-color: $color-blue !important; //not-working
-    background-blend-mode: color; //not-working
-}
-
-// select image overlay
-
-.overlay {
-    position: absolute;
-    bottom: 0;
-    background-image: Url('assets/courses/selectimagefull.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    // background: $color-blue;
-    // background-blend-mode: color;
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    margin: 0 !important;
-    padding: 0 !important;
-
 }
 
 .spinner-container {
@@ -287,6 +278,10 @@ mat-tree {
     background-color: #437891 !important;
 }
 
+:host ::ng-deep .mat-checkbox-label {
+    color: $color-darkGrey !important;
+}
+
 .dialogPopup {
     height: 420px;
     width: 700px;
@@ -314,7 +309,13 @@ mat-tree {
     .moveTo-btn,
     #addCategory,
     #cancel {
-        width: 100% !important;
+        width: 95% !important;
+    }
+
+    @media screen and (max-width:766px) {
+        .cardheight {
+            margin-bottom: 10px;
+        }
     }
 
     .marginClass {
@@ -325,16 +326,32 @@ mat-tree {
     .none {
         display: none !important;
     }
+}
 
-    // .left {
-    //     order: 2;
-    // }
+.containerOverlay {
+    .overlay {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        overflow: hidden;
+        top: 0vh;
+        left: 10%;
+        opacity: 0.7;
+        cursor: pointer;
+    }
 
-    // .profile {
-    //     justify-content: space-between;
-    // }
+    .pointer {
+        width: 80% !important;
+    }
+}
 
-    // .right {
-    //     order: 1;
-    // }
+.course-image {
+    height: 100px;
+    object-fit: cover;
+}
+
+.list-title {
+    background-color: $color-light-blue !important;
+    border-radius: 5px;
+    padding-left: 10px;
 }
