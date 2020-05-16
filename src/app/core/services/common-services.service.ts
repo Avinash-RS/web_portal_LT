@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import {Subject} from 'rxjs/Subject';
 import { logout, viewcourse, view_wishlist,list_content, syllabus_of_particular_scorm,getCoursesByName} from "@core/services/operations/common_query";
 import { add_to_wishlist, delete_wishlist,getPlayerStatus,geturl } from "@core/services/operations/common_mutation";
