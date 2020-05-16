@@ -11,8 +11,8 @@ export class AlertServiceService {
     if (this.matDialog.openDialogs.length == 0) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'showClose' };
-      dialogConfig.width = '30%',
-        dialogConfig.panelClass = 'custom-modalbox',
+      dialogConfig.width = '30%';
+        dialogConfig.panelClass = 'custom-modalbox';
         dialogConfig.hasBackdrop = true;
         dialogConfig.disableClose = true;
       const dialogRef = this.matDialog.open(AlertComponentComponent, dialogConfig);
