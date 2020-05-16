@@ -18,6 +18,7 @@ RUN npm i file-saver
 RUN npm i ngx-pagination
 RUN npm i ngx-infinite-scroll
 RUN npm install apollo-client
+RUN npm i ng5-slider
 
 COPY . .
 #RUN ng serve

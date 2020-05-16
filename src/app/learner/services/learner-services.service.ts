@@ -7,7 +7,7 @@ import {
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData,get_user_detail_username, check_existing_user,  get_all_category,
   get_sub_category,get_course_by_subcategory,get_all_course_by_usergroup, get_module_topic,
-  getsupersubcategory,getLevelCategoryData
+  getsupersubcategory,getLevelCategoryData,getDetailsCount
 } from "./operations/learner_query";
 
 
@@ -15,8 +15,9 @@ import {
   user_registration, user_registration_mobile_otp_send, user_registration_mobile_otp_verify,
   get_forgot_username_mobile_email, get_forgot_password_byusername, user_registration_username_suggestion,
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
-  get_district_details, get_change_password_updateprofile, update_mobile_onprofile,
-  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,delete_qualification,gettopicdetail
+  get_district_details, get_change_password_updateprofile, update_mobile_onprofile,getLevelSubCategoryData,
+  update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
+  delete_qualification,gettopicdetail,getCourseCategorySearch
 } from "./operations/learner_mutation"
 
 import { HttpClient } from '@angular/common/http';
@@ -392,15 +393,44 @@ export class LearnerServicesService {
     });
     
   }
-
+   // Getting all 3 level Category data
   getLevelCategoryData(){
     return this.Apollo.query({
       query: getLevelCategoryData
     });
   }
+  // After selection category in category level filter
+  getLevelSubCategoryData(level1 : any, level2 : any) {
+    return this.Apollo.query({
+      query: getLevelSubCategoryData,
+      variables: {
+        level1: level1,
+        level2: level2
+      }
+    });
+  }
 
-  
-};
+// Get guideline search for geeting all filter values
+  getGuidelineSearch(){
+    return this.Apollo.query({
+      query: getDetailsCount
+    });
+  }
+
+// Guildeline selected filter value and getting courses
+  postGuildelineSearchData(category: any,sub_category: any,super_sub_category: any ,pagenumber,perPage){
+    return this.Apollo.query({
+      query: getCourseCategorySearch,
+      variables: {
+        category: category,
+        sub_category: sub_category,
+        super_sub_category:super_sub_category,
+        pagenumber:pagenumber,
+        perPage:perPage
+      }
+    });
+  }
+}
 
 
 
