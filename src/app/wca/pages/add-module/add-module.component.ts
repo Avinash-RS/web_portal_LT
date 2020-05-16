@@ -95,7 +95,6 @@ export class AddModuleComponent implements OnInit {
       this.courseDetails = data.Result[0];
       if (this.isRepo == 'true') {
         this.getRepoModules();
-        this.updateCourseDetails();
         this.isRepo = 'false';
       }
       else {
@@ -206,6 +205,7 @@ export class AddModuleComponent implements OnInit {
           this.courseDetails.coursedetails.push(mod);
         }
       })
+      this.updateCourseDetails();
       this.updateModList();
     })
   }
