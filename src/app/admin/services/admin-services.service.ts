@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue,reassigncourse
+  create_catelogue,reassigncourse,delete_catalogue
 } from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
@@ -268,6 +268,17 @@ export class AdminServicesService {
         super_sub_category_id: course.super_sub_category_id
       }
     });
+  }
+
+  deletecatalogue(inputid,Level) {
+    return this.Apollo.query({
+      query: delete_catalogue,
+      variables: {
+        input_id: inputid,
+        level: Level,
+      }
+    });
+
   }
 
   // End of Catalogue Management

@@ -223,7 +223,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.selectedSuperSubCategory = {}; this.selectedSubCategory = {}; this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -233,7 +233,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -286,7 +286,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -296,7 +296,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -369,7 +369,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -379,7 +379,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -517,6 +517,39 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoDelete() {
+    const inputid = this.level === 1 ? this.selectedCategory.category_id  : this.level === 2 ?
+    this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
+    const type = this.level === 1 ? 'Category' : this.level === 2 ?
+    'SubCategory' : 'SuperSubCategory';
+    Swal.fire({
+      title: 'Are you sure want to delete ' + type + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+       this.adminservice.deletecatalogue(inputid, this.level).subscribe(( results: any) => {
+            if (results.data.delete_catalogue.success === false) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Move/Delete Subcategory/Supersubcategory/Courses associated to delete this ' + type ,
+              });
+            } else if (results.data.delete_catalogue.success === true) {
+              Swal.fire(
+                'Deleted!',
+                 type + '   has been deleted.',
+                'success'
+              );
+              this.showHome = true; this.showCourses = false;
+              this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
+              this.getallcategories();
+            }
+         });
+      }
+    });
   }
 
   selectAll() {
