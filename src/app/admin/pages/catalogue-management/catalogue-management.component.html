@@ -63,7 +63,8 @@
             {{selectedCategory?.category_name || 'Category >'}}</li>
           <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined"
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
-            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}</li>
+            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}
+          </li>
           <li class="breadcrumb-item active" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
           changeNav('addSuperSubCategoryForm')" *ngIf="selectedSuperSubCategory?.super_sub_category_name != undefined"
             aria-current="page">{{selectedSuperSubCategory.super_sub_category_name || 'Sub Category >'}}</li>
@@ -113,7 +114,7 @@
                   && !selectedSubCategory?.sub_category_name && !selectedCategory?.category_name &&  showAddSubCatForm) || 
                   (showAddSuperSubCatForm )" class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add
-               </button>
+                </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
                 <button mat-raised-button [disabled]="true" class="edit-btn width_80 m-b-10 color_white">
@@ -351,9 +352,9 @@
                 <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
                   (click)="selectCourse(courses,i+'c')">
                 <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
-                  <img src="assets/courses/selectimagefull.png" width="100%" height="94%">
+                  <img src="assets/courses/selectimagefull.png" width="100%" height="100px">
                 </div>
-                <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 ">
+                <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 m-t-10">
                   {{courses.course_name}}
                 </div>
               </div>

@@ -52,12 +52,15 @@ input:focus {
     overflow: auto;
     padding: 0px !important;
 }
- /deep/ .swal2-styled.swal2-confirm {
+
+/deep/ .swal2-styled.swal2-confirm {
     background-color: $color-blue !important;
 }
- /deep/ .swal2-popup.swal2-modal.swal2-show {
+
+/deep/ .swal2-popup.swal2-modal.swal2-show {
     width: 32% !important;
 }
+
 :host /deep/ .mat-checkbox-layout .mat-checkbox-label {
     white-space: normal;
 }
@@ -75,7 +78,7 @@ input:focus {
 }
 
 .m-t-10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 .m-b-10 {
