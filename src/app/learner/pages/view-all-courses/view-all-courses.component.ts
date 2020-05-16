@@ -1,7 +1,8 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit ,TemplateRef} from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
+import { CommonServicesService } from '@core/services/common-services.service';
 import {SearchPipe} from '../../../pipes/search.pipe';
 import { from } from 'rxjs';
 declare var $: any;
@@ -12,6 +13,7 @@ declare var $: any;
   styleUrls: ['./view-all-courses.component.scss']
 })
 export class ViewAllCoursesComponent implements OnInit {
+  
   userDetailes: any;
   categories: any;
   type: any;
@@ -34,7 +36,8 @@ export class ViewAllCoursesComponent implements OnInit {
   showAppliedFiltre :boolean = false;
   allLvlCategory: any;
   allLvlCatId : any = []
-  constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
+  constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService,
+    public CommonServices: CommonServicesService) {
 
     this.btnType = "Enroll Now"
     this.masterSelected = false;
@@ -52,7 +55,6 @@ export class ViewAllCoursesComponent implements OnInit {
       {id:7,value:'Aracely Renner DVM',isSelected:false},
       {id:8,value:'Genoveva Luettgen',isSelected:false}
     ];
-    
   }
 
   getCategoryId(category){
@@ -102,6 +104,15 @@ export class ViewAllCoursesComponent implements OnInit {
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
+
+    this.CommonServices.globalSearch.subscribe((data: any) => {
+      if(data.length > 0) {
+        this.allcourses = data;
+      } else {
+        this.ngOnInit();
+      }
+    })
+    
     this.loadcategoryandcourses();
     this.getCheckedItemList();
   
