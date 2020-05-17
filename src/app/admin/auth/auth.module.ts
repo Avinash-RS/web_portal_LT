@@ -2,8 +2,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { UserManagementComponent } from '../pages/user-management/user-management.component';
-import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
-import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
+// import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
+// import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,7 +22,7 @@ import { PublishCourseComponent } from '@admin/pages/publish-course/publish-cour
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule} from 'ngx-pagination';
-import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
+// import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 import {  DndDirective } from '../core/dnd.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -84,7 +84,12 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective,CatalogueManagementComponent,AuthComponent,UserManagementComponent,ReportManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
+    declarations: [DndDirective,
+        // CatalogueManagementComponent,
+        AuthComponent,UserManagementComponent,
+        // ReportManagementComponent,
+        // AddUserComponent,
+        GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

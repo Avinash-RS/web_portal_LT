@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     var userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
     var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
     var role = localStorage.getItem('role') || null;
-    //  console.log('role-----',role)
+      // console.log('role-----',role)
     //for learner ------> 1
     // debugger
     if (userDetailes != null && role == 'learner' &&
@@ -66,6 +66,7 @@ export class AuthGuard implements CanActivate {
     }
     //if admin logged in
     if (role == 'admin' && adminDetails) {
+      console.log('role--2222---',state.url)
       if (state.url == '/Admin/auth/userManagement' || state.url == '/Admin/auth/addUser'
         || state.url == "/Admin/auth/listCourses" || state.url == "/Admin/auth/viewReport" || state.url == "/Admin/auth/publishCourse"
         || state.url == "/Admin/auth/usergroup" || state.url == '/Admin/auth/Wca' || state.url == '/Admin/auth/Wca/addcourse'
@@ -74,10 +75,15 @@ export class AuthGuard implements CanActivate {
         || state.url == '/Admin/auth/Wca/addtopic' || state.url == '/Admin/auth/Wca/rf'
         || state.url == '/Admin/auth/Wca/addfile' || state.url == '/Admin/auth/Wca/addmodule'
         || state.url == '/Admin/auth/Wca/mycourse' || state.url == '/Admin/auth/Wca/previewcourse'
-        || state.url == '/Admin/auth/Wca/ct')
+        || state.url == '/Admin/auth/Wca/ct'  || state.url == '/Learner/login')
         return true
+    }else if(role == 'admin' && !adminDetails){
+      // console.log('role--3333---',role)
+      localStorage.clear();
+
     }
     else {
+      // console.log('role--33334444---',role)
       this.router.navigate(["/Learner"])
       return false;
     }
