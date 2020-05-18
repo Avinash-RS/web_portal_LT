@@ -8,9 +8,8 @@
 <div class="row width_90 center m-t-20">
 
   <div class="card col-12 col-lg-12 col-md-12 col-sm-12 cardheight">
-
     <!-- start of button - add catalogue ( row ) -->
-    <div class="row m-t-20 m-r-20">
+    <div class="row m-t-20">
       <div class="col-lg-9 col-md-8"> </div>
       <div class="col-lg-3 col-md-4 col-sm-11 col-11 center p-r-0 p-b-0">
         <button mat-raised-button [disabled]="false" class="addcat-btn width_90 m-b-10 color_white float-right"
@@ -20,16 +19,17 @@
       </div>
     </div>
 
-    <hr class="header-line m-r-20">
-
+    <hr class="header-line">
     <!-- end of button add catalogue -->
 
     <!-- start of Viw List Catalogue - Jasper -->
+    <div class="overflow-auto">
 
+    </div>
     <!-- End of View List Catalogue - Jasper -->
 
     <!-- start of Add new Catalogue - Kani -->
-    <div *ngIf="showAddCatalogueForm">
+    <div  class="overflow-auto" *ngIf="showAddCatalogueForm">
       <br>
       <form [formGroup]="addCatalogueForm">
         <div class="row">

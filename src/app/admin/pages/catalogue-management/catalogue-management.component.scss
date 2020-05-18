@@ -20,14 +20,10 @@ html {
     }
 }
 
-.pos_fixed {
-    position: fixed;
-}
-
 .cardheight {
     height: 600px !important;
     box-shadow: 2px 0px 10px #6c757d;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .header-line {
