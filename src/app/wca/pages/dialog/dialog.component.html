@@ -40,5 +40,25 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+    
+
+        <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="dialogdata.images"
+        [cdkDropListConnectedTo]="[todoList]"
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)">
+
+        <div class="prew1 ">
+            <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
+             <img height="100%" width="100%" [src]="i?.image">
+        </mat-card>
+    </div>
+       </div>
+    </div>
+>>>>>>> 69cccb1c9967004ac65116bcc36871b1484e929b
     </ng-container>
 </div>

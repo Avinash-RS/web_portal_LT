@@ -598,6 +598,7 @@ h1 {
   max-height: inherit;
 }
 
+<<<<<<< HEAD
 // html {
 //   overflow: scroll;
 //   overflow-x: hidden;
@@ -606,3 +607,14 @@ h1 {
 //   width: 0px;  /* Remove scrollbar space */
 //   background: transparent;  /* Optional: just make scrollbar invisible */
 // }
+=======
+.view-course-container {
+  min-height: 30em;
+  max-height: 35em !important;
+
+  .mat-dialog-container {
+    margin-top: unset !important;
+    padding: 0.5em 1.5em !important;
+  }
+}
+>>>>>>> 69cccb1c9967004ac65116bcc36871b1484e929b
