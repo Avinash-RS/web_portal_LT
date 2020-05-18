@@ -198,14 +198,14 @@
     </div>
 
     <div class="col-8"  >
-        <span class="cover" *ngFor="let item of checkedList; let i = index" >{{item.value}} 
+        <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item.name}}
         <mat-icon class="clear-icon" (click)="removeFilterVal(item,i)">clear</mat-icon>
         </span>
     </div>
 
     <div class="col-2 ">
       <div class = "smallline"></div> 
-      <h3 class="text2"> Clear All Filters </h3>
+      <h3 class="text2" (click)="clearAll()"> Clear All Filters </h3>
      
     </div>
   </div>
@@ -217,13 +217,13 @@
   <br>
 
   <div class="row">
-    <div class="col-3"  *ngIf="showAppliedFiltre" >
+    <div class="col-3"  *ngIf="showAppliedFiltre">
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3><b>Language</b></h3><br>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')" />
             <div class="row">
               <div class="col-10 pading">
                 {{language.course_language}} 
@@ -247,7 +247,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" />
             <div class="row">
               <div class="col-10 pading">
                 {{authors.authordetails}} 
@@ -271,7 +271,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')" />
             <div class="row">
               <div class="col-10 pading">
                 {{courseMode.course_mode}} 
@@ -306,7 +306,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  />
             <div class="row">
               <div class="col-10 pading">
                 {{coursepartner.coursepartnerdetails}} 
@@ -374,7 +374,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected"  name="list_name"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -395,7 +395,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory.level2   | search : lvl2Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name2" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name2" (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -417,7 +417,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory.level3 | search : lvl3Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name3" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.super_sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>

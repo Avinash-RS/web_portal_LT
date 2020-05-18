@@ -48,6 +48,14 @@ export class ViewAllCoursesComponent implements OnInit {
   Lvl3CatId : any = [];
   guidelineSearchVal: any = [];
   allLvlCategoryFilterVal : any = [];
+  selectedlang : any = [];
+  coursepartners: any = [];
+  coursemode :any = [];
+  authordetails : any = [];
+  selectedFilter: any = [];
+
+  commonCatIsSelectValue : any = [];
+ lvl1selectedcat: any = [];
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
      private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
 
@@ -68,18 +76,42 @@ export class ViewAllCoursesComponent implements OnInit {
       {id:8,value:'Genoveva Luettgen',isSelected:false}
     ];
   }
-
-  getCategoryId(category){
-    console.log(category,'category')
-    if(category.level == 1){
-      // this.Lvl1CatId = [];
-      this.Lvl1CatId.push(category.category_id);
-    }else if (category.level == 2){
-      this.Lvl2CatId = [];
-      this.Lvl2CatId.push(category.sub_category_id);
+  isSelected(s:any) {
+    if(s.level == 1){
+      return this.Lvl1CatId.findIndex((item) => item.category_id === s.category_id) > -1 ? true : false;
+    }else if (s.level == 2){
+      return this.Lvl2CatId.findIndex((item) => item.sub_category_id === s.sub_category_id) > -1 ? true : false;
     }else{
-      this.Lvl3CatId = [];
-      this.Lvl3CatId.push(category.super_sub_category_id);
+      return this.Lvl3CatId.findIndex((item) => item.super_sub_category_id === s.super_sub_category_id) > -1 ? true : false;
+    }
+   }
+ 
+  getCategoryId(category){
+    if(category.level == 1){
+      this.isSelected(category)
+      this.Lvl1CatId.find((item) => item.category_id === category.category_id) ? 
+      this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== category.category_id) 
+      : this.Lvl1CatId.push(category);
+      
+    //   this.Lvl1CatId.forEach(element => {
+    //     debugger
+    //     if(element.isSelected === true)
+    //     this.lvl1selectedcat.push(element.category_id);
+    //   });
+    //   console.log( this.Lvl1CatId)
+    //  console.log( this.lvl1selectedcat)
+    }else if (category.level == 2){
+      this.isSelected(category)
+      this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? 
+      this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) :
+      this.Lvl2CatId.push(category);
+      console.log( this.Lvl2CatId,' this.Lvl2CatId')
+    }else{
+      this.isSelected(category)
+      this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? 
+      this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) :
+      this.Lvl3CatId.push(category);
+      console.log( this.Lvl3CatId,' this.Lvl3CatId')
     }
      this.learnerservice.getLevelSubCategoryData(this.Lvl1CatId,this.Lvl2CatId).subscribe((result: any) => {
       console.log(result)
@@ -90,12 +122,14 @@ export class ViewAllCoursesComponent implements OnInit {
       }
     });
   }
+
+  getsubcatlevel(){
+    
+  }
  
 
-
-
   isAllSelected() {
-    this.masterSelected = this.checklist.every(function(item:any) {
+    this.masterSelected =  this.Lvl1CatId.every(function(item:any) {
         return item.isSelected == true;
       })
     this.getCheckedItemList();
@@ -108,12 +142,40 @@ export class ViewAllCoursesComponent implements OnInit {
       this.checkedList.push(this.checklist[i]);
     }
   }
+  checkedVal(event,val,type){
+    console.log('value',event.target.checked, val);
+
+    if (event.target.checked) {
+
+     if(type==='language') 
+     this.selectedlang.push(val.course_language);
+     if(type==='Instructor') 
+     this.authordetails.push(val.authordetails);
+     if(type==='courseMode') 
+     this.coursemode.push(val.course_mode);
+     if(type==='coursepartner') 
+     this.coursepartners.push(val.coursepartnerdetails);
+     var perPage = "10";
+     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.selectedlang,this.coursemode,
+      this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
+       console.log(result)
+     })
+    } 
+    
+    // if (!event.target.checked) { but it didn't wrk wait
+    //   let index = this.selectedFilter.indexOf(val);
+    //   if (index > -1) {
+    //     this.selectedFilter.splice(index, 1);
+    //   }
+    // }
+    // console.log('array',this.selectedFilter);
+  }
 
   removeFilterVal(val,index){
     console.log(val,index)
-    console.log(val,'val')
-    // this.checkedList = this.checkedList.remove(index);
-    // console.log( this.checkedList,'afser remove')
+    // console.log(val,'val')
+    // this.selectedFilter = this.selectedFilter.splice(index);
+    // console.log('after remove',this.selectedFilter)
     
   //   this.masterSelected = this.checklist.every(function(item:any) {
   //     console.log(item)
@@ -122,7 +184,10 @@ export class ViewAllCoursesComponent implements OnInit {
   // this.getCheckedItemList();
     
   }
-
+  clearAll(){
+    // this.selectedFilter = [];
+    console.log('cleared');
+  }
 
   applyFilter(category) { 
     console.log(category)
@@ -131,9 +196,9 @@ export class ViewAllCoursesComponent implements OnInit {
     console.log(this.Lvl3CatId)
     console.log(this.pagenumber)
     var perPage = "10";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
-      console.log(result)
-    })
+    // this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
+    //   console.log(result)
+    // })
    }
 
   ngOnInit() {
