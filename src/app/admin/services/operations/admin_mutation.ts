@@ -113,8 +113,10 @@ export const reassigncourse = gql`
   }`;
 
 export const update_catalogue = gql`
-  mutation update_catalogue($input_id: String!, $input_name: String!,$input_description: String!, $input_image: String!,$level: Int!){
-    update_catalogue(group_id : $group_id,is_active: $is_active){
+  mutation update_catalogue($input_id: String!, $input_name: String!,$input_description: String,
+     $input_image: String,$level: Int!){
+    update_catalogue(input_id : $input_id,input_name: $input_name,input_description: $input_description,
+      input_image: $input_image,level: $level){
       success
       message
       error_msg

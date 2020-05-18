@@ -140,13 +140,16 @@ export class CatagoryManagementComponent implements OnInit {
       this.treeSource.data = this.categories;
       this.dataSource$.next(this.categories);
       this.loadingCategory = false;
+      console.log(this.treeSource.data)
     });
   }
 
   loadsubcategory(node) {
+    console.log(node);
     if (node.category_id) {
       this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
         const category = result.data.get_sub_category.message;
+        console.log(category);
         // this.subCategoryArray =  result.data.get_sub_category.message;
         if (node) {
           // node.children = [
@@ -611,11 +614,12 @@ export class CatagoryManagementComponent implements OnInit {
         input_image: value.category_image || '',
         level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
       }
-      console.log(category)
       this.adminservice.updateCatalogue(category).subscribe((result: any) => {
         formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
-        if (result?.data?.update_catelogue?.success)
+          this.showHome = true;
+          this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
+        if (result?.data?.update_catalogue?.success)
           this.getallcategories();
         else
           this.alert.openAlert(result?.data?.create_catelogue?.message, null)

@@ -45,11 +45,9 @@ input:focus {
 .card {
     background: #fff;
     border-radius: 2px;
-    display: inline-block;
     height: auto;
-    position: relative;
     width: auto;
-    overflow: auto;
+    overflow: hidden;
     padding: 0px !important;
 }
 
@@ -65,9 +63,11 @@ input:focus {
     white-space: normal;
     text-transform: capitalize;
 }
+
 .dis {
     pointer-events: none !important;
-  }
+}
+
 .cardheight {
     height: 600px !important;
 }
@@ -131,21 +131,21 @@ input:focus {
 
 .left {
     z-index: 1 !important;
-    box-shadow: 0px 0px 12px #6c757d
+    box-shadow: 0px 0px 12px #6c757d;
+    overflow : auto !important
 }
 
 .right {
     box-shadow: 0px 0px 7px #6c757d;
+    html {
+        overflow: scroll;
+        overflow-x: hidden !important;
+    }
 
-    // html {
-    //     overflow: scroll;
-    //     overflow-x: hidden !important;
-    // }
-
-    // ::-webkit-scrollbar {
-    //     width: 0px;
-    //     background: transparent !important;
-    // }
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent !important;
+    }
 }
 
 .header-line {
