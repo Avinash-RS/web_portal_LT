@@ -63,9 +63,11 @@ export class AdminCoursesComponent implements OnInit {
     else if (this.type == 'published') {
       console.log('inside published to test test cases - Jasper')
       this.loader = true;
-      this.service.getAllCoursePublished("undefined", this.pagenumber).subscribe((res: any) => {
-        if (res.data && res.data.get_course_published) {
-          this.courseList = res.data.get_course_published.message;
+      this.service.getAllCoursePublished("undefined", this.pagenumber).subscribe((admincourse: any) => {
+        console.log(this.courseList,'inside comp')
+        if (admincourse.data && admincourse.data.get_course_published) {
+          this.courseList = admincourse.data.get_course_published.message;
+          console.log(this.courseList,'inside comp')
           this.goto = 'publish';
           this.rowHeight = '2.3:2.5';
           this.showPublishedDate = true;
@@ -74,7 +76,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = true;
           this.showRating = true;
           this.showPrice = true;
-          this.course_count = res.data.get_course_published.course_count
+          this.course_count = admincourse.data.get_course_published.course_count
         } else
           this.loader = false;
       })

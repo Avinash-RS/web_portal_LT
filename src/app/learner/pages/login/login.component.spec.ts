@@ -20,12 +20,14 @@ import { LearnerMyCourseComponent } from '../learner-my-course/learner-my-course
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
         FormsModule,
+        RouterTestingModule,
         MatButtonModule,
         MatMenuModule,
         MatInputModule,
@@ -48,38 +50,31 @@ describe('LoginComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Apollo, AlertComponentComponent, LearnerServicesService
+      providers: [Apollo, AlertComponentComponent, LearnerServicesService,
       ],
     })
       .compileComponents();
   }));
 
-  const routerSpy = { navigate: jasmine.createSpy('navigate') };
-
+ 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      providers: [
-        { provide: Router, useValue: routerSpy }
-      ],
-      // imports: [RouterTestingModule.withRoutes([
-      //   { path: 'Learner/MyCourse', component: LearnerMyCourseComponent }
-      // ])],
-      imports: [RouterTestingModule],
+      providers: [ ],
+      imports: [  RouterTestingModule.withRoutes([]),],
       // providers: [{ provide: LearnerServicesService, useClass: MockServiceService }]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+    router = TestBed.get(Router);
     component.ngOnInit();
-    fixture.detectChanges();
-  });
-
-  beforeAll(() => {
     localStorage.removeItem('UserDetails');
     localStorage.removeItem('role');
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
-  })
+    fixture.detectChanges();
+  });
+ 
 
   it('should create and identify components', () => {
     expect(component).toBeTruthy();
@@ -123,9 +118,11 @@ describe('LoginComponent', () => {
   });
 
   it('submitting a form emits a user while remeber me is true', () => {
-    let router: Router;
-    let location: Location;
     let service: MockServiceService;
+
+    const component = fixture.componentInstance;
+    const navigateSpy = spyOn(router, 'navigate');
+    
     expect(component.loginForm.valid).toBeFalsy();
     component.loginForm.controls['username'].setValue("test");
     component.loginForm.controls['remember_me'].setValue(true);
@@ -133,9 +130,10 @@ describe('LoginComponent', () => {
     expect(component.loginForm.valid).toBeTruthy();
 
     fixture.detectChanges();
-
     service = TestBed.get(MockServiceService);
+
     const button = fixture.debugElement.nativeElement.querySelector('#login');
+    
     button.click();
     expect(component.login())
     let loginresult;
@@ -152,12 +150,13 @@ describe('LoginComponent', () => {
           localStorage.setItem('role', 'learner')
           localStorage.setItem('token', loginresult.data.login.message.token)
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+          debugger
           if (loginresult.data.login.message.is_profile_updated) {
-            // expect(routerSpy.navigate).toHaveBeenCalled();
-            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
+            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
+            // expect(navigateSpy).toHaveBeenCalledWith(['/Learner/MyCourse']);
           }
           else {
-            // expect(routerSpy.navigate).toHaveBeenCalledWith(['/Learner/profile']);
+            // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/profile']);
           }
         } else {
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))

@@ -63,7 +63,8 @@
             {{selectedCategory?.category_name || 'Category >'}}</li>
           <li *ngIf="showAddSubCatForm || selectedSubCategory?.sub_category_name != undefined"
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
-            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}</li>
+            aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}
+          </li>
           <li class="breadcrumb-item active" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
           changeNav('addSuperSubCategoryForm')" *ngIf="selectedSuperSubCategory?.super_sub_category_name != undefined"
             aria-current="page">{{selectedSuperSubCategory.super_sub_category_name || 'Sub Category >'}}</li>
@@ -113,15 +114,23 @@
                   && !selectedSubCategory?.sub_category_name && !selectedCategory?.category_name &&  showAddSubCatForm) || 
                   (showAddSuperSubCatForm )" class="add-btn width_80 m-b-10 color_white" (click)="gotoAdd()">
                   <span class="material-icons" style="vertical-align: middle;">add</span>Add
-               </button>
-              </div>
-              <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="true" class="edit-btn width_80 m-b-10 color_white">
-                  <span class="material-icons" style="vertical-align: middle;" (click)="gotoEdit()">create</span>Edit
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="true" class="delete-btn width_80 m-b-10 color_white">
+                <button mat-raised-button (click)="canotEdit = false; edit = true" [disabled]="showCourses || showHome ||
+                (showAddCatForm && addCategoryForm && selectedCategory?.category_name == undefined) ||
+                (showAddSubCatForm && showAddSubCatForm && selectedSubCategory?.sub_category_name == undefined) ||
+                (showAddSuperSubCatForm && addSuperSubCategoryForm && selectedSuperSubCategory?.super_sub_category_name == undefined)
+                " class="edit-btn width_80 m-b-10 color_white">
+                  <span class="material-icons" style="vertical-align: middle;">create</span>Edit
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
+                <button (click)="gotoDelete()" mat-raised-button [disabled]="showCourses || showHome ||
+                (showAddCatForm && addCategoryForm && selectedCategory?.category_name == undefined) ||
+                (showAddSubCatForm && showAddSubCatForm && selectedSubCategory?.sub_category_name == undefined) ||
+                (showAddSuperSubCatForm && addSuperSubCategoryForm && selectedSuperSubCategory?.super_sub_category_name == undefined)
+                " class="delete-btn width_80 m-b-10 color_white">
                   <span class="material-icons" style="vertical-align: middle;"
                     (click)="gotoDelete()">delete</span>Delete
                 </button>
@@ -155,7 +164,7 @@
             <div class="row">
               <div class="col-md-4 col-lg-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Category *"
-                  [ngClass]="{ 'is-invalid': f.category_name.touched && f.category_name.errors }"
+                  [ngClass]="{ 'is-invalid': f.category_name.touched && f.category_name.errors , 'dis' : canotEdit}"
                   formControlName="category_name">
                 <div *ngIf="f.category_name.touched && f.category_name.errors" class="invalid-feedback">
                   <div *ngIf="f.category_name.errors.required">* Category Name is required</div>
@@ -167,8 +176,9 @@
               <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
-                    formControlName="category_description" name="category_description"></textarea>
+                    [ngClass]="canotEdit ? 'dis inputs border-radius-5 background_trans width_100' : 'inputs border-radius-5 background_trans width_100'"
+                    placeholder="Description" formControlName="category_description"
+                    name="category_description"></textarea>
                 </div>
               </div>
             </div>
@@ -195,23 +205,25 @@
                 <div class="row"
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
                   <img class="center width_80 imgHt" [src]="addCategoryForm.value.category_image">
+                  <mat-icon *ngIf="!canotEdit" style="position: absolute;top:0;"
+                    (click)="addCategoryForm.controls['category_image'].reset();">cancel</mat-icon>
                 </div>
               </div>
             </div>
             <br>
-            <div class="row" *ngIf="selectedCategory?.category_name == undefined">
+            <div class="row" *ngIf="selectedCategory?.category_name == undefined || !canotEdit">
               <div class="col-lg-8 col-md-6"></div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
                 <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
                   class="width_80 border-radius-5 background-blue color_white center"
-                  (click)="addCategory('category')">Save</button>
+                  (click)="addCategory('category')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="cancel" (click)="addCategoryForm.reset()" mat-stroked-button
-                  class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel" (click)="addCategoryForm.reset();showAddCatForm = false; showHome = true"
+                  mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
-            <div class="row" *ngIf="selectedCategory?.category_name">
+            <div class="row" *ngIf="selectedCategory?.category_name && canotEdit">
               <div class="col-md-2 m-l-5 col-sm-6 col-6">
                 <br>
                 <button id="viewCourse" mat-stroked-button
@@ -231,7 +243,7 @@
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory *"
-                  [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors }"
+                  [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors , 'dis' : canotEdit}"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
                   <div *ngIf="f.sub_category_name.errors.required">* Sub Category Name is required</div>
@@ -243,25 +255,27 @@
               <div class="col-md-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
-                    formControlName="sub_category_description" name="sub_category_description"></textarea>
+                    [ngClass]="canotEdit ? 'dis inputs border-radius-5 background_trans width_100' : 'inputs border-radius-5 background_trans width_100'"
+                    placeholder="Description" formControlName="sub_category_description"
+                    name="sub_category_description"></textarea>
                 </div>
               </div>
             </div>
             <br>
-            <div class="row" *ngIf="selectedSubCategory?.sub_category_name == undefined">
+            <div class="row" *ngIf="selectedSubCategory?.sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid"
                   class="width_80  border-radius-5 background-blue color_white center"
-                  (click)="addCategory('subcategory')">Save</button>
+                  (click)="addCategory('subcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="cancel" (click)="addSubCategoryForm.reset()" mat-stroked-button
-                  class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel"
+                  (click)="addSubCategoryForm.reset();showAddSubCatForm = false; showAddCatForm = true;showHome = false;showCourses = false"
+                  mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
-            <div class="row" *ngIf="selectedSubCategory?.sub_category_name">
+            <div class="row" *ngIf="selectedSubCategory?.sub_category_name && canotEdit">
               <div class="col-md-2 m-l-5 col-sm-6 col-6">
                 <br>
                 <button id="viewCourse" mat-stroked-button
@@ -281,7 +295,7 @@
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory *"
-                  [ngClass]="{ 'is-invalid': f.super_sub_category_name.touched && f.super_sub_category_name.errors }"
+                  [ngClass]="{ 'is-invalid': f.super_sub_category_name.touched && f.super_sub_category_name.errors ,'dis' : canotEdit}"
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
                   class="invalid-feedback">
@@ -294,25 +308,27 @@
               <div class="col-md-11 m-l-5 col-sm-10 col-10">
                 <div class="form-group">
                   <textarea style="resize: none;" rows="5"
-                    [ngClass]="'inputs border-radius-5 background_trans width_100'" placeholder="Description"
-                    formControlName="super_sub_category_description" name="super_sub_category_description"></textarea>
+                    [ngClass]="canotEdit ? 'dis inputs border-radius-5 background_trans width_100' : 'inputs border-radius-5 background_trans width_100'"
+                    placeholder="Description" formControlName="super_sub_category_description"
+                    name="super_sub_category_description"></textarea>
                 </div>
               </div>
             </div>
             <br>
-            <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined">
+            <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="addSubCategory" mat-stroked-button [disabled]="addSuperSubCategoryForm.invalid"
                   class="width_80  border-radius-5 background-blue color_white center"
-                  (click)="addCategory('supersubcategory')">Save</button>
+                  (click)="addCategory('supersubcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="cancel" (click)="showAddSuperSubCatForm.reset()" mat-stroked-button
-                  class="width_80 border-radius-5 center">Cancel</button>
+                <button id="cancel"
+                  (click)="addSuperSubCategoryForm.reset();showAddSuperSubCatForm = false;showAddSubCatForm = true; showAddCatForm = false;showHome = false;showCourses = false"
+                  mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
-            <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name">
+            <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name && canotEdit">
               <div class="col-md-2 m-l-5 col-sm-6 col-6">
                 <br>
                 <button id="viewCourse" mat-stroked-button
@@ -337,10 +353,12 @@
           <div class="row m-t-10 m-r-20">
             <div class="col-lg-9 col-md-9 col-sm-12 col-12">
               <!-- <h3 class="font-display m-b-0">295 courses > </h3> -->
-              <h3 class="font-display m-b-0 m-l-20">{{course_count}} Courses > </h3>
+              <h3 class="font-display m-b-0 m-l-20">{{course_count}} {{course_count <= 1  ? 'Course > ' : 'Courses >'}}
+              </h3>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
-              <button id="selectAll" mat-raised-button class="width_70 float-right background-blue color_white center"
+              <button id="selectAll" [disabled]="courses?.length == 0" mat-raised-button
+                class="width_70 float-right background-blue color_white center"
                 (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
             </div>
           </div>
@@ -351,9 +369,9 @@
                 <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
                   (click)="selectCourse(courses,i+'c')">
                 <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
-                  <img src="assets/courses/selectimagefull.png" width="100%" height="94%">
+                  <img src="assets/courses/selectimagefull.png" width="100%" height="100px">
                 </div>
-                <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 ">
+                <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 m-t-10">
                   {{courses.course_name}}
                 </div>
               </div>

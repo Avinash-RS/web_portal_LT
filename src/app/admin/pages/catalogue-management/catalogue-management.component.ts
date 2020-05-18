@@ -41,7 +41,8 @@ export class CatalogueManagementComponent implements OnInit {
   superSubCatArray: any = [];
   pagenumber = 0;
   level: number = null;
-
+  canotEdit: boolean = true;
+  edit: boolean = false;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -128,6 +129,9 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getallcategories() {
+    this.selectedCategory = {};
+    this.selectedSubCategory = {};
+    this.selectedSuperSubCategory = {};
     this.loadingCategory = true;
     this.treeSource.data = null;
     this.pagenumber = 0;
@@ -197,6 +201,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   selectedcategory(category) {
+    this.canotEdit = true;
+    this.edit = false;
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
@@ -206,7 +212,7 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedCategory = category;
         this.addCategoryForm = this.formBuilder.group({
           category_name: new FormControl('', myGlobals.req),
-          category_description: new FormControl([]),
+          category_description: new FormControl(''),
           category_image: ['', myGlobals.req]
         });
         this.addCategoryForm.patchValue(this.selectedCategory);
@@ -223,7 +229,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.selectedSuperSubCategory = {}; this.selectedSubCategory = {}; this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -233,7 +239,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -246,11 +252,11 @@ export class CatalogueManagementComponent implements OnInit {
       } else {
         this.level = null;
         this.selectedSubCategory = {};
-        this.addSubCategoryForm.reset();
+        this.addSubCategoryForm?.reset();
         this.selectedCategory = {};
-        this.addCategoryForm.reset();
+        this.addCategoryForm?.reset();
         this.selectedSuperSubCategory = {};
-        this.addSuperSubCategoryForm.reset();
+        this.addSuperSubCategoryForm?.reset();
         this.showHome = true;
         this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
       }
@@ -264,7 +270,7 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedSubCategory = category;
         this.addSubCategoryForm = this.formBuilder.group({
           sub_category_name: new FormControl('', myGlobals.req),
-          sub_category_description: new FormControl([]),
+          sub_category_description: new FormControl(''),
         });
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
         this.showAddSubCatForm = true;
@@ -286,7 +292,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -296,7 +302,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -309,11 +315,11 @@ export class CatalogueManagementComponent implements OnInit {
         }
       } else {
         this.selectedSubCategory = {};
-        this.addSubCategoryForm.reset();
+        this.addSubCategoryForm?.reset();
         if (this.selectedCategory?.category_name != undefined) {
           this.addCategoryForm = this.formBuilder.group({
             category_name: new FormControl('', myGlobals.req),
-            category_description: new FormControl([]),
+            category_description: new FormControl(''),
             category_image: ['', myGlobals.req]
           });
           this.level = 1;
@@ -324,11 +330,11 @@ export class CatalogueManagementComponent implements OnInit {
         else {
           this.level = null;
           this.selectedSubCategory = {};
-          this.addSubCategoryForm.reset();
+          this.addSubCategoryForm?.reset();
           this.selectedCategory = {};
-          this.addCategoryForm.reset();
+          this.addCategoryForm?.reset();
           this.selectedSuperSubCategory = {};
-          this.addSuperSubCategoryForm.reset();
+          this.addSuperSubCategoryForm?.reset();
           this.showHome = true;
           this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
         }
@@ -342,7 +348,7 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectedSuperSubCategory = category;
         this.addSuperSubCategoryForm = this.formBuilder.group({
           super_sub_category_name: new FormControl('', myGlobals.req),
-          super_sub_category_description: new FormControl([]),
+          super_sub_category_description: new FormControl(''),
         });
         this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
         this.showAddSuperSubCatForm = true;
@@ -369,7 +375,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].checkbox = false;
           }
         }
-        if (oldsubcategory.sub_category_id) {
+        if (oldsubcategory?.sub_category_id) {
           value1 = this.treeSource._data.value[value].children.findIndex(x => x.sub_category_id === oldsubcategory?.sub_category_id);
           if (category.parent_sub_category_id && oldsubcategory.sub_category_id !== category.parent_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].checkbox = false;
@@ -379,7 +385,7 @@ export class CatalogueManagementComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].checkbox = false;
           }
         }
-        if (oldsupersubcategory.super_sub_category_id) {
+        if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x => x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -391,11 +397,11 @@ export class CatalogueManagementComponent implements OnInit {
         }
       } else {
         this.selectedSuperSubCategory = {};
-        this.addSuperSubCategoryForm.reset();
+        this.addSuperSubCategoryForm?.reset();
         if (this.selectedSubCategory?.sub_category_name != undefined) {
           this.addSubCategoryForm = this.formBuilder.group({
             sub_category_name: new FormControl('', myGlobals.req),
-            sub_category_description: new FormControl([]),
+            sub_category_description: new FormControl(''),
           });
           this.level = 1;
           this.addSubCategoryForm.patchValue(this.selectedSubCategory);
@@ -404,7 +410,7 @@ export class CatalogueManagementComponent implements OnInit {
         } else if (this.selectedCategory?.category_name != undefined) {
           this.addCategoryForm = this.formBuilder.group({
             category_name: new FormControl('', myGlobals.req),
-            category_description: new FormControl([]),
+            category_description: new FormControl(''),
             category_image: ['', myGlobals.req]
           });
           this.level = 2;
@@ -415,11 +421,11 @@ export class CatalogueManagementComponent implements OnInit {
         else {
           this.level = null;
           this.selectedSubCategory = {};
-          this.addSubCategoryForm.reset();
+          this.addSubCategoryForm?.reset();
           this.selectedCategory = {};
-          this.addCategoryForm.reset();
+          this.addCategoryForm?.reset();
           this.selectedSuperSubCategory = {};
-          this.addSuperSubCategoryForm.reset();
+          this.addSuperSubCategoryForm?.reset();
           this.showHome = true;
           this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
         }
@@ -431,18 +437,20 @@ export class CatalogueManagementComponent implements OnInit {
     if (this.selectedCategory.category_name == undefined) {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl([]),
+        category_description: new FormControl(''),
         category_image: ['', myGlobals.req]
       });
       this.showAddCatForm = true;
+      this.canotEdit = false;
       this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
     }
     else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name == undefined) {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl([]),
+        sub_category_description: new FormControl(''),
       });
       this.showAddSubCatForm = true;
+      this.canotEdit = false;
       this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
     }
     else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name != undefined
@@ -452,6 +460,7 @@ export class CatalogueManagementComponent implements OnInit {
         super_sub_category_description: new FormControl(''),
       });
       this.showAddSuperSubCatForm = true;
+      this.canotEdit = false;
       this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
     }
   }
@@ -460,7 +469,7 @@ export class CatalogueManagementComponent implements OnInit {
     if (formType == 'addCategoryForm') {
       this.addCategoryForm = this.formBuilder.group({
         category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl([]),
+        category_description: new FormControl(''),
         category_image: ['', myGlobals.req]
       });
       this.addCategoryForm.patchValue(this.selectedCategory);
@@ -469,7 +478,7 @@ export class CatalogueManagementComponent implements OnInit {
     } else if (formType == 'addSubCategoryForm') {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl([]),
+        sub_category_description: new FormControl(''),
       });
       this.addSubCategoryForm.patchValue(this.selectedSubCategory);
       this.showAddSubCatForm = true;
@@ -517,36 +526,122 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   gotoDelete() {
+    const inputid = this.level === 1 ? this.selectedCategory.category_id  : this.level === 2 ?
+    this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
+    const type = this.level === 1 ? 'Category' : this.level === 2 ?
+    'SubCategory' : 'SuperSubCategory';
+    Swal.fire({
+      title: 'Are you sure want to delete ' + type + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+       this.adminservice.deletecatalogue(inputid, this.level).subscribe(( results: any) => {
+            if (results.data.delete_catalogue.success === false) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Move/Delete Subcategory/Supersubcategory/Courses associated to delete this ' + type ,
+              });
+            } else if (results.data.delete_catalogue.success === true) {
+              Swal.fire(
+                'Deleted!',
+                 type + '   has been deleted.',
+                'success'
+              );
+              this.showHome = true; this.showCourses = false;
+              this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
+              this.getallcategories();
+            }
+         });
+      }
+    });
   }
 
   selectAll() {
   }
 
   hideCourses() {
+    if (this.selectedCategory?.category_name != undefined && this.selectedSubCategory?.sub_category_name == undefined &&
+      this.selectedSuperSubCategory?.super_sub_category_name == undefined) {
+      this.addCategoryForm = this.formBuilder.group({
+        category_name: new FormControl('', myGlobals.req),
+        category_description: new FormControl(''),
+        category_image: ['', myGlobals.req]
+      });
+      this.addCategoryForm.patchValue(this.selectedCategory);
+      this.showAddCatForm = true;
+      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    } else if (this.selectedCategory?.category_name != undefined && this.selectedSubCategory?.sub_category_name != undefined &&
+      this.selectedSuperSubCategory?.super_sub_category_name == undefined) {
+      this.addSubCategoryForm = this.formBuilder.group({
+        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_description: new FormControl(''),
+      });
+      this.addSubCategoryForm.patchValue(this.selectedSubCategory);
+      this.showAddSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
+    } else {
+      this.addSuperSubCategoryForm = this.formBuilder.group({
+        super_sub_category_name: new FormControl('', myGlobals.req),
+        super_sub_category_description: new FormControl(''),
+      });
+      this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
+      this.showAddSuperSubCatForm = true;
+      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
+    }
   }
 
   addCategory(formType) {
     var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
       this.addSuperSubCategoryForm.value;
-    let category = {
-      input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
-      input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
-      input_image: value.category_image || "null",
-      creator_id: this.adminDetails._id,
-      level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
-      apply_all_courses: false,
-      course_id: [],
-      parent_category_id: this.selectedCategory?.category_id || "null",
-      parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
+    if (this.edit) {
+      // input_id: category.category_id,
+      // input_name: category.category_name,
+      // input_description: category.category_description,
+      // input_image: category.category_image,
+      // level: category.level,
+      let category = {
+        input_id: formType == 'category' ? this.selectedCategory.category_id : (formType == 'subcategory') ?
+          this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id,
+        input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
+        input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
+        input_image: value.category_image || '',
+        level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
+      }
+      console.log(category)
+      this.adminservice.updateCatalogue(category).subscribe((result: any) => {
+        formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
+          this.addSuperSubCategoryForm?.reset();
+        if (result?.data?.update_catelogue?.success)
+          this.getallcategories();
+        else
+          this.alert.openAlert(result?.data?.create_catelogue?.message, null)
+      });
+    } else {
+      let category = {
+        input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
+        input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
+        input_image: value.category_image || "null",
+        creator_id: this.adminDetails._id,
+        level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
+        apply_all_courses: false,
+        course_id: [],
+        parent_category_id: this.selectedCategory?.category_id || "null",
+        parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
+      }
+      this.adminservice.createCatalogue(category).subscribe((result: any) => {
+        formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
+          this.addSuperSubCategoryForm?.reset();
+        if (result?.data?.create_catelogue?.success)
+          this.getallcategories();
+        else
+          this.alert.openAlert(result?.data?.create_catelogue?.message, null)
+      });
     }
-    this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      formType == 'category' ? this.addCategoryForm.reset() : (formType == 'subcategory') ? this.addSubCategoryForm.reset() :
-        this.addSuperSubCategoryForm.reset();
-      if (result?.data?.create_catelogue?.success)
-        this.getallcategories();
-      else
-        this.alert.openAlert(result?.data?.create_catelogue?.message, null)
-    });
   }
 
   getcourses(formType) {
@@ -559,17 +654,11 @@ export class CatalogueManagementComponent implements OnInit {
       type: formType, _id: value.category_id || value.sub_category_id || value.super_sub_category_id,
       pagenumber: this.pagenumber
     };
-    // category.type = formType;
-    // category._id = value.category_id || value.sub_category_id || value.super_sub_category_id;
-    // category.pagenumber = this.pagenumber;
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.courses = result?.data?.get_course_by_subcategory?.message;
       this.course_count = result?.data?.get_course_by_subcategory?.course_count || this.courses.length;
-      console.log(this.courses)
     });
   }
-
-  // 5eb3b5f50d03e1bc320162cd id 
 
   selectCourse(c, id) {
     if (c.isChecked == undefined || c.isChecked == false) {
@@ -596,7 +685,6 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   moveCourses() {
-
     this.closedialogbox();
     let level = this.selectCategoryForm?.value?.category != "" &&
       this.selectCategoryForm?.value?.subCategory == "" && this.selectCategoryForm?.value?.subSubCategory == "" ? 1 :
@@ -605,16 +693,6 @@ export class CatalogueManagementComponent implements OnInit {
         this.selectCategoryForm?.value?.category != "" &&
         this.selectCategoryForm?.value?.subCategory != "" && this.selectCategoryForm?.value?.subSubCategory != "" && 3;
     let arra = !this.applyAllCourses && this.selectedArray.map((item: any) => item.course_id)
-    // old_level: course.old_level,
-    // old_category_id: course.old_category_id,
-    // old_sub_category_id: course.old_sub_category_id,
-    // old_super_sub_category_id: course.old_super_sub_category_id,
-    // level: course.level,
-    // apply_all_courses: course.apply_all_courses,
-    // course_id: course.course_id,
-    // category_id: course.category_id,
-    // sub_category_id: course.sub_category_id,
-    // super_sub_category_id: course.super_sub_category_id
     let course = {
       old_level: this.level,
       old_category_id: this.selectedCategory?.category_id,
@@ -627,28 +705,23 @@ export class CatalogueManagementComponent implements OnInit {
       sub_category_id: this.selectCategoryForm.value.subCategory?.sub_category_id || "null",
       super_sub_category_id: this.selectCategoryForm.value.subSubCategory?.super_sub_category_id || "null",
     }
-    console.log(course)
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
       if (result?.data?.reassigncourse?.success) {
         let msg1 = this.selectCategoryForm?.value.category.category_name;
         let msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
         let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
-
         Swal.fire({
           html:
             'Selected Courses Successfully moved to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
         })
-        // this.alert.openAlert('Selected Courses Successfully moved to ' + msg1 + ' ' + msg2 + ' ' + msg3, null);
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
-        this.selectCategoryForm.reset();
+        this.selectCategoryForm?.reset();
         this.selectedArray = [];
         this.subCategoryArray = [];
         this.superSubCatArray = [];
       } else {
         this.alert.openAlert(result?.data?.reassigncourse?.message, null)
       }
-      // this.courses = result?.data?.get_course_by_subcategory?.message;
-      console.log(result)
     });
   }
   onScrollDown() {
@@ -665,7 +738,6 @@ export class CatalogueManagementComponent implements OnInit {
       }
     });
   }
-
 }
 
 
