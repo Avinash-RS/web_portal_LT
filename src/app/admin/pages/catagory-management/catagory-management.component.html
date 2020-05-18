@@ -23,7 +23,7 @@
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubcategory(node)"
                 [attr.aria-label]="'toggle ' + node.name">
-                <mat-icon *ngIf="!node?.super_sub_category_name" class="mat-icon-rtl-mirror">
+                <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
@@ -37,7 +37,7 @@
               <div class="mat-tree-node">
                 <button mat-icon-button matTreeNodeToggle class="btnClassicon"
                   [attr.aria-label]="'toggle ' + node.name">
-                  <mat-icon *ngIf="!node?.super_sub_category_name" class="mat-icon-rtl-mirror">
+                  <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
@@ -206,7 +206,10 @@
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
                   <img class="center width_80 imgHt" [src]="addCategoryForm.value.category_image">
                   <mat-icon *ngIf="!canotEdit" style="position: absolute;top:0;"
-                    (click)="addCategoryForm.controls['category_image'].reset();">cancel</mat-icon>
+                    (click)="addCategoryForm.controls['category_image'].reset();selectedCategory && selectedCategory = {};
+                    selectedSubCategory && selectedSubCategory = {};
+                    selectedSuperSubCategory && selectedSuperSubCategory = {};canotEdit = true;
+                    ">cancel</mat-icon>
                 </div>
               </div>
             </div>
@@ -219,7 +222,9 @@
                   (click)="addCategory('category')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="cancel" (click)="addCategoryForm.reset();showAddCatForm = false; showHome = true"
+                <button id="cancel" (click)="addCategoryForm.reset();showAddCatForm = false; showHome = true;selectedCategory && selectedCategory = {};
+                selectedSubCategory && selectedSubCategory = {};canotEdit = true;
+                selectedSuperSubCategory && selectedSuperSubCategory = {};"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -271,7 +276,10 @@
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="cancel"
-                  (click)="addSubCategoryForm.reset();showAddSubCatForm = false; showAddCatForm = true;showHome = false;showCourses = false"
+                  (click)="addSubCategoryForm.reset();showAddSubCatForm = false; showAddCatForm = true;showHome = false;
+                  showCourses = false;
+                  selectedSubCategory && selectedSubCategory = {};canotEdit = true;
+                  selectedSuperSubCategory && selectedSuperSubCategory = {};"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -324,7 +332,9 @@
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="cancel"
-                  (click)="addSuperSubCategoryForm.reset();showAddSuperSubCatForm = false;showAddSubCatForm = true; showAddCatForm = false;showHome = false;showCourses = false"
+                  (click)="addSuperSubCategoryForm.reset();showAddSuperSubCatForm = false;showAddSubCatForm = true;
+                   showAddCatForm = false;showHome = false;showCourses = false;canotEdit = true;
+                   selectedSuperSubCategory && selectedSuperSubCategory = {};"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -346,7 +356,7 @@
           <div class="row m-r-20 m-l-20">
             <div class="col-lg-3 col-md-3 col-sm-9 col-9">
               <button id="Hide_Courses" mat-raised-button class="width_70 float-left background-blue color_white center"
-                (click)="hideCourses();showCourses = !showCourses">Hide Courses</button>
+                (click)="hideCourses();showCourses = false">Hide Courses</button>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-3 col-3"></div>
           </div>

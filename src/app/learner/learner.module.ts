@@ -35,6 +35,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
 import { NgxPaginationModule} from 'ngx-pagination';
 import {SearchPipe} from '../pipes/search.pipe';
+import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 
 //others
 
@@ -52,7 +53,10 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetpasswordComponent ,data : {title:'Learner   Reset password'}},
   { path : "terms",component:TermsconditionsComponent,data : {title:'Terms and conditions'}},
   { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard],data : {title:'Course Player'}},
-  { path:  'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard]}
+  { path:  'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard]},
+  { path:  'Dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard]},
+
+  
 
 ];
 
@@ -74,7 +78,8 @@ const routes: Routes = [
     ScormplayerComponent,
     MaskingPipePipe,
     ViewAllCoursesComponent,
-    SearchPipe
+    SearchPipe,
+    LearnerDashboardComponent
 
   ],
 
