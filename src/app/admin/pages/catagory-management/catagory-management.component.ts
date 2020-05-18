@@ -614,6 +614,8 @@ export class CatagoryManagementComponent implements OnInit {
       this.adminservice.updateCatalogue(category).subscribe((result: any) => {
         formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
+          this.showHome = true;
+          this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
         if (result?.data?.update_catalogue?.success)
           this.getallcategories();
         else
