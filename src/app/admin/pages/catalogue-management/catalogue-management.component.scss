@@ -1,24 +1,29 @@
 @import "variable";
 
 html {
-  overflow: scroll;
-  overflow-x: hidden;
-}
-::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-@media screen and (min-width: 320px) and (max-width:1024px) {
+::-webkit-scrollbar {
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
 }
+
+@media screen and (min-width: 320px) and (max-width:1024px) {}
+
 @media screen and (min-width:1024px) {
     .addcat-btn {
         width: 70% !important;
     }
 }
+
 .pos_fixed {
     position: fixed;
 }
+
 .cardheight {
     height: 600px !important;
     box-shadow: 2px 0px 10px #6c757d;
