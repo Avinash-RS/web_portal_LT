@@ -20,12 +20,30 @@ export class CatalogueManagementComponent implements OnInit {
   addCatalogueForm: any;
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
+  courses = [
+    {
+      cataloguename: "Web Development",
+      numberofcourses: "10",
+    },
+    {
+      name: "Business Analyst",
+      numberofcourses: "30",
+    },
+    
+    {
+      cataloguename: "Code study",
+      numberofcourses: "35",
+    },
+
+
+
+  ];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
-    this.adminDetails = this.gs.checkLogout();
+    // this.adminDetails = this.gs.checkLogout();
   }
 
   ngOnInit() {
