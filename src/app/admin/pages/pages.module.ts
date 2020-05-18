@@ -23,6 +23,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
+import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { CatalogueManagementComponent } from './catalogue-management/catalogue-m
         NgxPaginationModule
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, ],
+    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, CatagoryManagementComponent, ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
