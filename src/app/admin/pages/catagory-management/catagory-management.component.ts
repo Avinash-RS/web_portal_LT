@@ -611,11 +611,10 @@ export class CatagoryManagementComponent implements OnInit {
         input_image: value.category_image || '',
         level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
       }
-      console.log(category)
       this.adminservice.updateCatalogue(category).subscribe((result: any) => {
         formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
-        if (result?.data?.update_catelogue?.success)
+        if (result?.data?.update_catalogue?.success)
           this.getallcategories();
         else
           this.alert.openAlert(result?.data?.create_catelogue?.message, null)
