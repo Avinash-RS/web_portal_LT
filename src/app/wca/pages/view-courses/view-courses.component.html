@@ -1,0 +1,44 @@
+<div class="view-course-container">
+
+  <!-- <h2 class="rep-title">
+    {{this.moduleData.modulename}}
+  </h2> -->
+
+  <div class="mat-card-container">
+    <mat-card style="text-align: center;">
+      <div class="module-name">
+        {{moduleData.modulename}}
+      </div>
+      <div style="text-align: left;margin-bottom: 5px;">
+        {{"Created by Ashok"}}
+      </div>
+      <div style="text-align: left;">
+        Created on {{moduleData.createdon | date: 'dd MMM, yyyy' }}
+      </div>
+    </mat-card>
+  </div>
+  <div class="course-details">
+    <div class="course-title">
+      Associated Courses
+      <span style="float: right;margin: -3px;">
+      <mat-icon (click)="closeDialog()">close</mat-icon>
+    </span>
+    </div>
+    <div class="course-list">
+      <div *ngFor="let course of moduleData.coursedetails" class="course-names">
+        <div class="course-heading">
+          {{course.name}}
+        </div>
+        <div>
+          {{"Created by " + course.createdby}}
+        </div>
+        <div>
+          Created on {{course.createdon | date: 'dd MMM, yyyy' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

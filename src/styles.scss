@@ -594,3 +594,13 @@ h1 {
   min-height: inherit;
   max-height: inherit;
 }
+
+.view-course-container {
+  min-height: 30em;
+  max-height: 35em !important;
+
+  .mat-dialog-container {
+    margin-top: unset !important;
+    padding: 0.5em 1.5em !important;
+  }
+}
