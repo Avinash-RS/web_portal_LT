@@ -40,8 +40,11 @@ export class LoginComponent implements OnInit {
     console.log('inside comp')
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
+        console.log('ads')
         if (loginresult.data.login) {
+          console.log('inside')
           if (loginresult.data.login.success) {
+            console.log('inside aaa')
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');

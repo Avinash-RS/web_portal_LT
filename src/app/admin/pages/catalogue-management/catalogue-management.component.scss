@@ -60,8 +60,11 @@ input:focus {
 }
 :host /deep/ .mat-checkbox-layout .mat-checkbox-label {
     white-space: normal;
+    text-transform: capitalize;
 }
-
+.dis {
+    pointer-events: none !important;
+  }
 .cardheight {
     height: 600px !important;
 }
