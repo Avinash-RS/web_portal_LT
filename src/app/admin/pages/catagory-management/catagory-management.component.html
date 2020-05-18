@@ -23,7 +23,7 @@
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubcategory(node)"
                 [attr.aria-label]="'toggle ' + node.name">
-                <mat-icon *ngIf="!node?.super_sub_category_name" class="mat-icon-rtl-mirror">
+                <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
@@ -37,7 +37,7 @@
               <div class="mat-tree-node">
                 <button mat-icon-button matTreeNodeToggle class="btnClassicon"
                   [attr.aria-label]="'toggle ' + node.name">
-                  <mat-icon *ngIf="!node?.super_sub_category_name" class="mat-icon-rtl-mirror">
+                  <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
