@@ -37,15 +37,28 @@ export const menus = [
         'open': true,
         
     },
+
     {
         'name': 'Catalogue Management',
-        'icon': 'library_books',
-        'link': 'catalogue',
-        'chip': false,
-        'open': true,
-        
-    }
-    
-   
+        'icon': 'widgets',
+        'link': false,
+        'open': false,
+        'sub': [
+            {
+                'name': 'Categories',
+                'link': 'catagory',
+                'icon': 'widgets',
+                'chip': false,
+                'open': true,
+            },
+            {
+                'name': 'Catalogues',
+                'link': 'catalogue',
+                'icon': 'list',
+                'chip': false,
+                'open': true,
+            }
+        ]
+    }, 
   
 ];

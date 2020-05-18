@@ -219,15 +219,111 @@
   <div class="row">
     <div class="col-3"  *ngIf="showAppliedFiltre" >
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
-        <h3>Language</h3>
+        <h3><b>Language</b></h3><br>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let item of checklist">
+          <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
             <label class="container1">
-            <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
-            {{item.value}}
-            <span class="checkmark"></span></label>
+            <input  type="checkbox"  name="language"  />
+            <div class="row">
+              <div class="col-10 pading">
+                {{language.course_language}} 
+              </div>
+              <div class="col-2">
+                <span >{{language.count}}</span>
+              </div>
+            </div>
+            <span class="checkmark">
+            </span>
+          </label>
+          </li>
+        </ul><br>
+        <div style="text-align: right;">
+          <span class="showmore"> + Show more</span>
+        </div><br>
+     
+        <div class="borderline"></div>
+        <br>
+        <h3><b>Instructor Name</b></h3><br>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
+            <label class="container1">
+            <input  type="checkbox"  name="language"  />
+            <div class="row">
+              <div class="col-10 pading">
+                {{authors.authordetails}} 
+              </div>
+              <div class="col-2">
+                <span >{{authors.count}}</span>
+              </div>
+            </div>
+            <span class="checkmark">
+            </span>
+          </label>
+          </li>
+        </ul><br>
+        <div style="text-align: right;">
+          <span class="showmore"> + Show more</span>
+        </div><br>
+        <div class="borderline"></div><br>
+
+
+        <h3><b>Learning pace</b></h3><br>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
+            <label class="container1">
+            <input  type="checkbox"  name="language"  />
+            <div class="row">
+              <div class="col-10 pading">
+                {{courseMode.course_mode}} 
+              </div>
+              <div class="col-2">
+                <span >{{courseMode.count}}</span>
+              </div>
+            </div>
+            <span class="checkmark">
+            </span>
+          </label>
+          </li>
+        </ul><br>
+        <div style="text-align: right;">
+          <span class="showmore"> + Show more</span>
+        </div><br>
+        <div class="borderline"></div><br>
+
+        <h3><b>Hours of content </b></h3><br>
+        <ul class="list-group">
+          <li class="list-group-item" >
+            <label class="container1">
+              <div class="range-control range">
+                <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+              </div>
+          </label>
           </li>
         </ul>
+        <div class="borderline"></div><br>
+
+        <h3><b>Partners search</b></h3><br>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
+            <label class="container1">
+            <input  type="checkbox"  name="language"  />
+            <div class="row">
+              <div class="col-10 pading">
+                {{coursepartner.coursepartnerdetails}} 
+              </div>
+              <div class="col-2">
+                <span >{{coursepartner.count}}</span>
+              </div>
+            </div>
+            <span class="checkmark">
+            </span>
+          </label>
+          </li>
+        </ul><br>
+        <div style="text-align: right;">
+          <span class="showmore"> + Show more</span>
+        </div><br>
+        <div class="borderline"></div>
       </div>
     </div>
     <div class="col-9">
@@ -276,7 +372,7 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level1 | search : lvl1Search ">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
                     {{item.category_name}}
@@ -297,14 +393,15 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level2 | search : lvl2Search">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory.level2   | search : lvl2Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name2" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
                     {{item.sub_category_name}}
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
           </div>
+          <!-- <span class="errormsg" *ngIf="errormsg"> Level 2 Category not found </span> -->
       </div>
       </div>
       <div class = "vertical1"></div> 
@@ -318,14 +415,15 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategory.level3 | search : lvl3Search">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory.level3 | search : lvl3Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name3" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
                     {{item.super_sub_category_name}}
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
           </div>
+          <!-- <span class="errormsg" *ngIf="errormsg"> Level 3 Category not found </span> -->
       </div>
       </div>
     </div>

@@ -562,3 +562,40 @@ export const getLevelCategoryData = gql`
   }
 
 }`;
+
+// Guildline Search
+export const getDetailsCount = gql`
+    query getDetailsCount{
+      getDetailsCount {
+        success
+         error_msg
+        message{
+          course_data{
+            course_language
+            count
+          }
+      author_data{
+        authordetails
+        count
+      }
+      coursepartner_data{
+        coursepartnerdetails
+        count
+      }
+      coursemode_data{
+        course_mode
+        count
+      }
+      other_data{
+        fieldCount
+        affectedRows
+        insertId
+        serverStatus
+        warningCount
+        message
+        protocol41
+        changedRows
+      }
+    }
+      }
+  }`;

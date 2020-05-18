@@ -17,9 +17,13 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminMockService } from '@admin/services/mock-services/admin-mock.service';
+import { AdminServicesService } from '@admin/services/admin-services.service';
+
 describe('AdminCoursesComponent', () => {
   let component: AdminCoursesComponent;
   let fixture: ComponentFixture<AdminCoursesComponent>;
+  let service: AdminMockService;
   let admincourse = require("assets/mockdata/wca/admin-courses.json");
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -60,13 +64,14 @@ describe('AdminCoursesComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Apollo],
+      providers: [Apollo, AdminServicesService],
       declarations: [AdminCoursesComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
+    service = TestBed.get(AdminMockService);
     fixture = TestBed.createComponent(AdminCoursesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -115,11 +120,69 @@ describe('AdminCoursesComponent', () => {
     expect(component.breakpoint).toBe(4);
   })
 
-  // it('Check get published courses', () => {
-  //   component.pagenumber = 0;
-  //   expect(component.type = 'published')
-  //   // expect(component.getCourses());
-  //   // console.log(admincourse,'admincourse')
-  //   expect(component.courseList).toBe(admincourse.data.get_course_published.message);
-  // })
+  it('Check get published courses', () => {
+    // let service: AdminMockService;
+
+    fixture.detectChanges();
+    // service = TestBed.get(AdminMockService);
+
+    component.pagenumber = 0;
+    expect(component.type = 'published')
+    component.getCourses();
+    debugger
+    // expect(service.getAllCoursePublished("undefined", component.pagenumber)).toBe(admincourse.data.get_course_published.message);
+    // let admincourse;
+    // expect(admincourse = service.getAllCoursePublished("undefined", component.pagenumber))
+    console.log(admincourse)
+    // admincourse = service.getAllCoursePublished("undefined", component.pagenumber);
+
+    debugger
+    expect(service.getAllCoursePublished("undefined", component.pagenumber));
+    fixture.detectChanges();
+    service.getAllCoursePublished("undefined", component.pagenumber).subscribe(admincourse => {
+      // expect(value).toBe('observable value');
+      fixture.detectChanges();
+      console.log(admincourse);
+      expect(admincourse.data && admincourse.data.get_course_published.status == true)
+      fixture.detectChanges();
+      expect(component.courseList = admincourse.data.get_course_published.message);
+      expect(component.goto = 'publish')
+      expect(component.showPublishedDate = true)
+      expect(component.loader = false)
+      expect(component.btnType = null)
+      expect(component.showCount = true)
+      expect(component.showRating = true)
+      expect(component.showPrice = true)
+      expect(component.course_count = 1)
+      expect(component.viewType = 'grid')
+      expect(component.breakpoint = 4)
+      console.log(admincourse.data.get_course_published.message, 'admincourses :', component.courseList)
+    });
+
+    // let service = fixture.debugElement.injector.get(AdminMockService);
+    // spyOn(service, 'getAllCoursePublished').and.returnValue({
+    //   subscribe: (v) => {
+    //     console.log(v)
+    //   }
+    // });
+    debugger
+    // fixture.componentInstance.getCourses();
+    // fixture.detectChanges();
+    // expect(service.getAllCoursePublished).toHaveBeenCalled();
+    // fixture.detectChanges();
+    // // expect(component.courseList).toEqual(admincourse);
+    // console.log(admincourse)
+    // expect(component.courseList).toEqual(response);
+
+    //   spyOn(userService, 'getUsers').and.returnValue(of(response))
+
+    // homeComponent.getUsers();
+
+    // fixture.detectChanges();
+
+    // expect(homeComponent.listOfUsers).toEqual(response);
+
+
+   
+  })
 });

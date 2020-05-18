@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatProgressSpinnerModule,MatTreeModule, MatSlideToggleModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@angular/material';
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule, MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -21,9 +21,10 @@ import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
-import {  DndDirective } from '../core/dnd.directive';
+import { DndDirective } from '../core/dnd.directive';
+import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -75,7 +76,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         InfiniteScrollModule,
         NgxPaginationModule
         // WcaModule
-       
+
 
 
 
@@ -84,12 +85,10 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective,
-        CatalogueManagementComponent,
-        AuthComponent,UserManagementComponent,
-        ReportManagementComponent,
-        AddUserComponent,
-        GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
+    declarations: [DndDirective, CatalogueManagementComponent,
+        AuthComponent, UserManagementComponent, ReportManagementComponent,
+        AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
+        CatagoryManagementComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
