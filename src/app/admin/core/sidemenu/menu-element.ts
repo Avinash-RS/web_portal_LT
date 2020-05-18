@@ -40,21 +40,21 @@ export const menus = [
 
     {
         'name': 'Catalogue Management',
-        'icon': 'widgets',
+        'icon': 'business',
         'link': false,
         'open': false,
         'sub': [
             {
                 'name': 'Categories',
                 'link': 'catagory',
-                'icon': 'widgets',
+                'icon': 'view_quilt',
                 'chip': false,
                 'open': true,
             },
             {
                 'name': 'Catalogues',
                 'link': 'catalogue',
-                'icon': 'list',
+                'icon': 'assignment',
                 'chip': false,
                 'open': true,
             }
