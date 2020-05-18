@@ -615,8 +615,8 @@ export const getLevelSubCategoryData = gql`
 
 
 export const getCourseCategorySearch = gql`
-  mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,$pagenumber:String!,$perPage: String! ) {
-    getCourseCategorySearch(category:$category,levesub_categoryl2:$sub_category,super_sub_category:$super_sub_category,pagenumber:$pagenumber,perPage:$perPage) {
+  mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,$pagenumber:Int!,$perPage: Int! ) {
+    getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,pagenumber:$pagenumber,perPage:$perPage) {
       success
       message
     data{
