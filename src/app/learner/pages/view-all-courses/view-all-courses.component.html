@@ -198,14 +198,14 @@
     </div>
 
     <div class="col-8"  >
-        <span class="cover" *ngFor="let item of checkedList; let i = index" >{{item.value}} 
+        <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item.name}}
         <mat-icon class="clear-icon" (click)="removeFilterVal(item,i)">clear</mat-icon>
         </span>
     </div>
 
     <div class="col-2 ">
       <div class = "smallline"></div> 
-      <h3 class="text2"> Clear All Filters </h3>
+      <h3 class="text2" (click)="clearAll()"> Clear All Filters </h3>
      
     </div>
   </div>
@@ -217,13 +217,13 @@
   <br>
 
   <div class="row">
-    <div class="col-3"  *ngIf="showAppliedFiltre" >
+    <div class="col-3"  *ngIf="showAppliedFiltre">
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3><b>Language</b></h3><br>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')" />
             <div class="row">
               <div class="col-10 pading">
                 {{language.course_language}} 
@@ -247,7 +247,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" />
             <div class="row">
               <div class="col-10 pading">
                 {{authors.authordetails}} 
@@ -271,7 +271,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')" />
             <div class="row">
               <div class="col-10 pading">
                 {{courseMode.course_mode}} 
@@ -306,7 +306,7 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  />
             <div class="row">
               <div class="col-10 pading">
                 {{coursepartner.coursepartnerdetails}} 
