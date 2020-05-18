@@ -310,6 +310,7 @@ query get_sub_category($category_id: String!){
   is_active
   sub_category_image
   parent_category_id
+  is_child
   }
   error_msg
   }
