@@ -48,6 +48,12 @@ export class ViewAllCoursesComponent implements OnInit {
   Lvl3CatId : any = [];
   guidelineSearchVal: any = [];
   allLvlCategoryFilterVal : any = [];
+  selectedlang : any = [];
+  coursepartners: any = [];
+  coursemode :any = [];
+  authordetails : any = [];
+  selectedFilter: any = [];
+
   commonCatIsSelectValue : any = [];
  lvl1selectedcat: any = [];
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
@@ -136,12 +142,40 @@ export class ViewAllCoursesComponent implements OnInit {
       this.checkedList.push(this.checklist[i]);
     }
   }
+  checkedVal(event,val,type){
+    console.log('value',event.target.checked, val);
+
+    if (event.target.checked) {
+
+     if(type==='language') 
+     this.selectedlang.push(val.course_language);
+     if(type==='Instructor') 
+     this.authordetails.push(val.authordetails);
+     if(type==='courseMode') 
+     this.coursemode.push(val.course_mode);
+     if(type==='coursepartner') 
+     this.coursepartners.push(val.coursepartnerdetails);
+     var perPage = "10";
+     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.selectedlang,this.coursemode,
+      this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
+       console.log(result)
+     })
+    } 
+    
+    // if (!event.target.checked) { but it didn't wrk wait
+    //   let index = this.selectedFilter.indexOf(val);
+    //   if (index > -1) {
+    //     this.selectedFilter.splice(index, 1);
+    //   }
+    // }
+    // console.log('array',this.selectedFilter);
+  }
 
   removeFilterVal(val,index){
     console.log(val,index)
-    console.log(val,'val')
-    // this.checkedList = this.checkedList.remove(index);
-    // console.log( this.checkedList,'afser remove')
+    // console.log(val,'val')
+    // this.selectedFilter = this.selectedFilter.splice(index);
+    // console.log('after remove',this.selectedFilter)
     
   //   this.masterSelected = this.checklist.every(function(item:any) {
   //     console.log(item)
@@ -150,7 +184,10 @@ export class ViewAllCoursesComponent implements OnInit {
   // this.getCheckedItemList();
     
   }
-
+  clearAll(){
+    // this.selectedFilter = [];
+    console.log('cleared');
+  }
 
   applyFilter(category) { 
     console.log(category)
@@ -159,9 +196,9 @@ export class ViewAllCoursesComponent implements OnInit {
     console.log(this.Lvl3CatId)
     console.log(this.pagenumber)
     var perPage = "10";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
-      console.log(result)
-    })
+    // this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
+    //   console.log(result)
+    // })
    }
 
   ngOnInit() {
