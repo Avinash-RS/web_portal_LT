@@ -21,6 +21,7 @@ export class AddModuleComponent implements OnInit {
   hoverName: string;
   isHover: boolean;
   isDrag: boolean;
+  isRepo = 'false';
   moduleList = [];
   constructor(public spinner: NgxSpinnerService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
@@ -38,12 +39,12 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
+        this.isRepo = (this.queryData.isRepo == 'true') ? 'true' : 'false'
         this.routedCourseDetails = {
           courseId: params.courseId,
           courseImage: params.courseImage,
           courseName: params.courseName,
         }
-        console.log(this.queryData)
       }
     });
 
@@ -88,14 +89,29 @@ export class AddModuleComponent implements OnInit {
 
 
   getCourseDetails() {
-    this.spinner.show();
-    console.log(this.routedCourseDetails.courseId)
+    //this.spinner.show();
+    this.moduleList = [];
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      this.updateCourseDetails();
+      if (this.isRepo == 'true') {
+        this.getRepoModules();
+        this.isRepo = 'false';
+      }
+      else {
+        this.updateModList();
+        this.updateCourseDetails();
+      }
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
+    })
+  }
+
+  updateModList() {
+    this.courseDetails.coursedetails.forEach((data) => {
+      if (data.moduleid) {
+        this.moduleList.push(data.moduleid)
+      }
     })
   }
 
@@ -130,7 +146,6 @@ export class AddModuleComponent implements OnInit {
           is_active: 0
         }
         this.apiService.updateCourse(obj).subscribe((data: any) => {
-          console.log(data);
         });
         this.toast.success('Module updated successfully');
       }
@@ -141,8 +156,6 @@ export class AddModuleComponent implements OnInit {
   }
 
   addTopic(value, index) {
-    console.log(index);
-    console.log(this.courseDetails);
     this.apiService.bSubject1.next({ index: index, courseDetails: this.courseDetails });
     this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
   }
@@ -153,7 +166,6 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModuleRepos() {
-    this.moduleList = ['MDL0001','MDL0002'];
     this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
   }
 
@@ -176,5 +188,25 @@ export class AddModuleComponent implements OnInit {
 
   editResource() {
     this.router.navigate(['/Admin/auth/Wca/rf']);
+  }
+
+  getRepoModules() {
+    this.apiService.repositoryModules().subscribe((data: any) => {
+      let moduleList = data.Result;
+      moduleList.forEach((val) => {
+        if (val.moduleid == this.queryData.selectedModule) {
+          let mod = {
+            moduleid: val.moduleid,
+            modulename: val.modulename,
+            moduledetails: val.moduledetails,
+            modulestatus: 'true',
+            template_details: val.template_details
+          }
+          this.courseDetails.coursedetails.push(mod);
+        }
+      })
+      this.updateCourseDetails();
+      this.updateModList();
+    })
   }
 }

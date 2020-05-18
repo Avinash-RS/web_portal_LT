@@ -128,6 +128,11 @@ export class WcaService {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }
 
+  updatecoursetomudules(data) {
+    return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
+  }
+  
+
 
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation
