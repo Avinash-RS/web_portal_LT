@@ -374,7 +374,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected"  name="list_name"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -395,7 +395,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory.level2   | search : lvl2Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name2" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name2" (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -417,7 +417,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory.level3 | search : lvl3Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name3" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.super_sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
