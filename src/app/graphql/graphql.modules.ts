@@ -4,11 +4,7 @@ import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloLink } from 'apollo-link';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-<<<<<<< HEAD
 import { DefaultOptions } from 'apollo-client';
-=======
-import { DefaultOptions } from 'apollo-client/src/ApolloClient';
->>>>>>> 69cccb1c9967004ac65116bcc36871b1484e929b
 // import { environment } from '../../environments/environment';
 
 import { environment } from '@env/environment';

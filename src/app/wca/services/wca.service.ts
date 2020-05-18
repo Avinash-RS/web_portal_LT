@@ -4,12 +4,8 @@ import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
-<<<<<<< HEAD
-import {remove_doc_ref,getallrefdoc,get_module_topic} from "./operations/wca_query";
-=======
 import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca_query";
 
->>>>>>> 69cccb1c9967004ac65116bcc36871b1484e929b
 import { HttpHeaders } from '@angular/common/http';
 
 
