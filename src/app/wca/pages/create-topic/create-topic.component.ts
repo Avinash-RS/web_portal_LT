@@ -44,7 +44,6 @@ export class CreateTopicComponent implements OnInit {
     "Knowledge Check" : /(\.csv)$/i, 
   }
 
-
   fileValidations1 = {
     Image: "(.jpg .jpeg .png) are Allowed !!!",
     PDF: "(.pdf) are Allowed !!!",
@@ -54,10 +53,24 @@ export class CreateTopicComponent implements OnInit {
     Audio: "are Allowed !!!",
     SCROM: " are Allowed !!!",
     "Knowledge Check": " (.csv) are Allowed !!!",
-    Feedback: " are Allowed !!!"
+    Feedback: ""
   }
 
-
+  feedBackFormHeading = ['','Very unsatisfied','Unsatisfied','Neutral','Satisfied','Very satisfied']
+  feedBackForm = [{
+   'title':'Content',
+   'star': ['1','2','3','4','5']
+  },
+  {
+    'title':'Relevance',
+    'star': ['1','2','3','4','5']
+   },{
+    'title':'Ease of understanding',
+    'star': ['1','2','3','4','5']
+   },{
+    'title':'Duration',
+    'star': ['1','2','3','4','5']
+   }]
 KnowledgeOptions: any = {
   loop: true,
   mouseDrag: true,
@@ -171,8 +184,8 @@ KnowledgeOptions: any = {
         {
           this.initialCall3(this.query);
         } 
-      }
-    });
+      }      
+    })
 
 
   }
@@ -190,7 +203,6 @@ KnowledgeOptions: any = {
   // createTopicForm => 
    
 
-
   initialCall(data1) {
     this.spinner.show();    
     this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
@@ -199,7 +211,7 @@ KnowledgeOptions: any = {
       this.courseForm = this.courseform()
       this.createTopicForm = this.createForm(this.queryData);
       (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});      
+      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});          
     }, err => {
       this.spinner.hide();
     })
@@ -217,7 +229,7 @@ KnowledgeOptions: any = {
         this.courseForm = this.courseform()
         this.createTopicForm = this.createForm(this.queryData);
         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-        this.courseForm.patchValue(this.courseDetails);
+        this.courseForm.patchValue(this.courseDetails); 
         // this.courseForm.updateValueAndValidity();
        
       }, err => {
@@ -281,8 +293,7 @@ if (item) {
         this.spinner.hide();
         fileInput.value = '';
         return false;
-      } else {
-        debugger;
+      } else {        
         if (fileInput && fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
@@ -307,6 +318,7 @@ if (item) {
               this.spinner.hide();
             })
           } else if (item.name === 'PPT') {
+            this.spinner.show();
             const formData1 = new FormData();
             formData1.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData1).subscribe((data:any) => {
@@ -335,7 +347,6 @@ if (item) {
             const formData3 = new FormData();
             formData3.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData3).subscribe((data:any) => {
-            console.log('word',data)
             this.spinner.hide();
            })
           } else if (item.name === 'Video') {
@@ -364,7 +375,7 @@ if (item) {
               })
             this.spinner.hide();
           } else if (item.name === 'Feedback') {
-            this.spinner.hide();
+           
           }
         }
       }
@@ -487,7 +498,15 @@ if (item) {
         this.courseForm.value.flag = 'true';
 
       }
-  
+      (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][0]['controls']['moduledetails']['controls']).forEach(control => {
+        if(control.value.topictype == null){
+          if (!control.get('topicimages').get(String(0))) {
+            (control.get('topicimages') as FormArray).push(this.topicImages());
+          }
+          control.get('topicimages').get(String(0)).setValue("");   
+          control.get('topictype').setValue("Feedback");
+        }
+      });
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
        this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
@@ -497,8 +516,6 @@ if (item) {
       this.submitted = false;      
 
       this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
-        console.log(data);
-        debugger
         if (data && data.Message === 'Success') {
           const obj ={
             course_id:this.query.viewingModule,
@@ -547,7 +564,15 @@ if (item) {
 
   }
 
-  openPreviewModal(){
+  openPreviewModal(value){
+    if(value.moduledetails){
+      value.moduledetails.forEach((data)=>{
+        if(data.topictype == "KnowledgeCheck"){
+          this.questionPreData = data.topicimages[0]
+        }
+      })      
+    }
+    console.log(value)
     this.displaySlides = false;
     $('#knowlegeCheckModal').modal('show');
     $('#knowlegeCheckModal').appendTo("body");
@@ -568,6 +593,7 @@ if (item) {
       }
       formdata.get('topicimages').get(String(0)).setValue(this.questionPreData);
       formdata.get('topictype').setValue('KnowledgeCheck'); 
+      this.spinner.hide();
     })
   }
 
@@ -610,4 +636,8 @@ if (item) {
     
   }
   
+  openFeedback(){
+    $('#feedbackModal').modal('show');
+    $('#feedbackModal').appendTo("body");
+  }
 }

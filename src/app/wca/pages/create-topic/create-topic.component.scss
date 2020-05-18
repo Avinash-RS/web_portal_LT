@@ -575,20 +575,20 @@ display: flex;
     font-size: 12px;
   }
 
-  #knowlegeCheckModal .modal-header{
+.preivewodal .modal-header{
     display: block !important;
     border-bottom: 0px !important;
   }
 
-  #knowlegeCheckModal .modal-backdrop {
+.preivewodal .modal-backdrop {
     z-index: 1040 !important;
 }
-#knowlegeCheckModal .modal-dialog {
+.preivewodal .modal-dialog {
     margin: 2px auto;
     z-index: 1100 !important;
 }
 
-#knowlegeCheckModal .modal-body{
+.preivewodal .modal-body{
     padding-top: 0px;
     padding-bottom: 0px;
 }
@@ -755,3 +755,34 @@ background-color: $color-blue!important;
 .vidCol1{
     margin-left: -78%;
 }
+
+.starRating{
+    font-size:25px;
+    cursor:pointer;
+    color: #7d7d7d;
+}
+
+.starRating:hover{
+    color: orange;
+}
+
+.mar3{
+    margin: 3%;
+}
+
+#feedbackModal .table{
+    border: 1px solid #dee2e6 !important;
+}
+
+#feedbackModal .table td{
+    text-align: center;
+}
+
+#feedbackModal .table td:first-child{
+    text-align: inherit !important;
+}
+
+
+ #feedbackModal tbody tr:last-child {  
+     border: 1px solid #dee2e6 !important;
+     }
