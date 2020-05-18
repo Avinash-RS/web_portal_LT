@@ -375,7 +375,7 @@
                   <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
-                    {{item.category_name}}
+                    <spn style="padding-left: 35px;">{{item.category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -396,7 +396,7 @@
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory.level2   | search : lvl2Search">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name2" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
-                    {{item.sub_category_name}}
+                    <spn style="padding-left: 35px;">{{item.sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -418,7 +418,7 @@
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory.level3 | search : lvl3Search">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name3" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
-                    {{item.super_sub_category_name}}
+                    <spn style="padding-left: 35px;">{{item.super_sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -429,7 +429,7 @@
     </div>
     </mat-dialog-content>
     <mat-dialog-actions align="center">
-     <button class="roundbtn" (click)="applyFilter()">Apply</button>
+     <button class="roundbtn" (click)="applyFilter(item)">Apply</button>
     </mat-dialog-actions>
   </ng-template>
 

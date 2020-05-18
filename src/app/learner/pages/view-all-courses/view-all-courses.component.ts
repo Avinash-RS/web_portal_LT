@@ -70,8 +70,9 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   getCategoryId(category){
+    console.log(category,'category')
     if(category.level == 1){
-      this.Lvl1CatId = [];
+      // this.Lvl1CatId = [];
       this.Lvl1CatId.push(category.category_id);
     }else if (category.level == 2){
       this.Lvl2CatId = [];
@@ -84,11 +85,6 @@ export class ViewAllCoursesComponent implements OnInit {
       console.log(result)
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
-        // if(this.allLvlCategoryFilterVal.level2.length == 0){
-        //    this.errormsg = true;
-        // }else if(this.allLvlCategoryFilterVal.level3.length == 0){
-        //   this.errormsg = true;
-        // } 
       }else{
         this.alert.openAlert('No Category Found',null)
       }
@@ -128,8 +124,16 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
 
-  applyFilter() { 
-
+  applyFilter(category) { 
+    console.log(category)
+    console.log(this.Lvl1CatId)
+    console.log(this.Lvl2CatId)
+    console.log(this.Lvl3CatId)
+    console.log(this.pagenumber)
+    var perPage = "10";
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
+      console.log(result)
+    })
    }
 
   ngOnInit() {
