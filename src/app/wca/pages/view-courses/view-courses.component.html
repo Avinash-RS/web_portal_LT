@@ -6,11 +6,15 @@
 
   <div class="mat-card-container">
     <mat-card style="text-align: center;">
-      <div class="module-name">
+      <div class="module-name text-overflow">
         {{moduleData.modulename}}
       </div>
-      <div style="text-align: left;margin-bottom: 5px;">
-        {{"Created by Ashok"}}
+      <div style="text-align: left;margin-bottom: 5px;" class="text-overflow">
+        <!-- <ng-container *ngIf="moduleData.createdby; else noName">
+
+        </ng-container> -->
+        
+        {{ moduleData.createdby? "Created by " + moduleData.createdby : 'Created by '}} 
       </div>
       <div style="text-align: left;">
         Created on {{moduleData.createdon | date: 'dd MMM, yyyy' }}
@@ -26,14 +30,14 @@
     </div>
     <div class="course-list">
       <div *ngFor="let course of moduleData.coursedetails" class="course-names">
-        <div class="course-heading">
+        <div class="course-heading text-overflow">
           {{course.name}}
         </div>
-        <div>
+        <div class="creater-name text-overflow">
           {{"Created by " + course.createdby}}
         </div>
         <div>
-          Created on {{course.createdon | date: 'dd MMM, yyyy' }}
+          Created on 28 Apr, 1994 {{course.createdon | date: 'dd MMM, yyyy' }}
         </div>
       </div>
     </div>
