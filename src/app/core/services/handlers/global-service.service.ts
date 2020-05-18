@@ -14,24 +14,12 @@ export class GlobalServiceService {
   callWishlist = this.$callWishlist.asObservable();
 
   private $adminName = new BehaviorSubject('admin');
-  adminName = this.$callWishlist.asObservable();
+  adminName = this.$adminName.asObservable();
 
   constructor(public route: Router, public alert: AlertServiceService, private locationStrategy: LocationStrategy,
   ) { }
 
   checkLogout() {
-    // if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner') {
-    //   var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-    //   var role = localStorage.getItem('role') || null;
-    //   var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    //   if (userDetail == null || adminDetails == null) 
-    //     return userDetail
-    //   else {
-    //     this.alert.openAlert("Logged Out!", "You have been logged out. Please login to continue");
-    //     this.route.navigate(['/Learner/login'])
-    //   }
-    // }
-
     if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner' && this.route.url != '/Admin/login') {
       var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
       var role = localStorage.getItem('role') || null;
@@ -63,7 +51,7 @@ export class GlobalServiceService {
     this.$callWishlist.next(callWishlist)
   }
 
-  getAdminName(name : string) {
+  getAdminName(name : any) {
     this.$adminName.next(name)
   }
 
