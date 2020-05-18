@@ -1,7 +1,108 @@
-.cardheight {
-    height: 600px !important;
+@import "variable";
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-.m-t-5 {
-    margin-top: 5% !important;
+::-webkit-scrollbar {
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+
+
+
+}
+
+@media screen and (min-width: 320px) and (max-width:1024px) {}
+
+@media screen and (min-width:1024px) {
+    .addcat-btn {
+        width: 70% !important;
+    }
+}
+
+.cardheight {
+    height: 600px !important;
+    box-shadow: 2px 0px 10px #6c757d;
+    overflow: hidden;
+}
+
+.header-line {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+hr {
+    height: 1px;
+    background-color: $box-shadow;
+}
+
+.m-r-20 {
+    margin-right: 20px;
+}
+
+.m-l-20 {
+    margin-left: 20px;
+}
+
+.m-l-55 {
+    margin-left: 55px;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.m-t-10 {
+    margin-top: 10px !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0 !important;
+}
+
+.m-b-10 {
+    margin-bottom: 10px !important;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.p-r-0 {
+    padding-right: 0;
+}
+
+.p-l-10 {
+    padding-left: 10;
+}
+
+.p-l-20 {
+    padding-left: 20;
+}
+
+.p-b-0 {
+    padding-bottom: 0;
+}
+
+.addcat-btn {
+    background-color: $color-dark-green;
+}
+
+button,
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.inputs {
+    border: 1.0px solid $color-blue !important;
+    padding: 8px !important;
+}
+
+.error_msg {
+    font-size: 80%;
+    color: #dc3545;
 }
