@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import {  MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-catalogue-management',
@@ -14,11 +14,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./catalogue-management.component.scss']
 })
 export class CatalogueManagementComponent implements OnInit {
+
+
   adminDetails: any;
-  
-  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, 
+  addCatalogueForm: any;
+  showAddCatalogueForm: boolean = false;
+  showListCatalogue: boolean = true;
+
+  constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
@@ -26,4 +31,19 @@ export class CatalogueManagementComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  get f() {
+    if (this.showAddCatalogueForm == true) {
+      return this.addCatalogueForm.controls;
+    }
+  }
+  gotoAdd() {
+    this.showListCatalogue = false;
+    this.showAddCatalogueForm = true;
+    this.addCatalogueForm = this.formBuilder.group({
+      catalogue_name: new FormControl('', myGlobals.req),
+      catalogue_description: new FormControl(''),
+    });
+  }
 }
