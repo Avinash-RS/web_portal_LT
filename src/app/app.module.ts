@@ -5,6 +5,7 @@ import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //others
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { Ng5SliderModule } from 'ng5-slider';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -44,6 +45,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,
+    Ng5SliderModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right'

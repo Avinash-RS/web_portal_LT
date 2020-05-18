@@ -1,9 +1,12 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit ,TemplateRef} from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
+import { CommonServicesService } from '@core/services/common-services.service';
 import {SearchPipe} from '../../../pipes/search.pipe';
 import { from } from 'rxjs';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { Options } from 'ng5-slider';
 declare var $: any;
 
 @Component({
@@ -12,6 +15,12 @@ declare var $: any;
   styleUrls: ['./view-all-courses.component.scss']
 })
 export class ViewAllCoursesComponent implements OnInit {
+   value: number = 0;
+  highValue: number = 20;
+  options: Options = {
+    floor: 2,
+    ceil: 24
+  };
   userDetailes: any;
   categories: any;
   type: any;
@@ -32,9 +41,15 @@ export class ViewAllCoursesComponent implements OnInit {
   checkedList:any = [];
   sort_type:any = "A-Z";
   showAppliedFiltre :boolean = false;
+  errormsg:boolean = false;
   allLvlCategory: any;
-  allLvlCatId : any = []
-  constructor(public learnerservice: LearnerServicesService, private dialog: MatDialog, private globalservice: GlobalServiceService) {
+  Lvl1CatId : any = [];
+  Lvl2CatId : any = [];
+  Lvl3CatId : any = [];
+  guidelineSearchVal: any = [];
+  allLvlCategoryFilterVal : any = [];
+  constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
+     private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
 
     this.btnType = "Enroll Now"
     this.masterSelected = false;
@@ -52,15 +67,36 @@ export class ViewAllCoursesComponent implements OnInit {
       {id:7,value:'Aracely Renner DVM',isSelected:false},
       {id:8,value:'Genoveva Luettgen',isSelected:false}
     ];
-    
   }
 
   getCategoryId(category){
-    this.allLvlCatId.push({
-      id:category._id,
-      level:category.level
-    })
+    if(category.level == 1){
+      this.Lvl1CatId = [];
+      this.Lvl1CatId.push(category.category_id);
+    }else if (category.level == 2){
+      this.Lvl2CatId = [];
+      this.Lvl2CatId.push(category.sub_category_id);
+    }else{
+      this.Lvl3CatId = [];
+      this.Lvl3CatId.push(category.super_sub_category_id);
+    }
+     this.learnerservice.getLevelSubCategoryData(this.Lvl1CatId,this.Lvl2CatId).subscribe((result: any) => {
+      console.log(result)
+      if(result['data']['getLevelSubCategoryData'].success == true){
+        this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
+        // if(this.allLvlCategoryFilterVal.level2.length == 0){
+        //    this.errormsg = true;
+        // }else if(this.allLvlCategoryFilterVal.level3.length == 0){
+        //   this.errormsg = true;
+        // } 
+      }else{
+        this.alert.openAlert('No Category Found',null)
+      }
+    });
   }
+ 
+
+
 
   isAllSelected() {
     this.masterSelected = this.checklist.every(function(item:any) {
@@ -102,6 +138,15 @@ export class ViewAllCoursesComponent implements OnInit {
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
+
+    this.CommonServices.globalSearch.subscribe((data: any) => {
+      if(data.length > 0) {
+        this.allcourses = data;
+      } else {
+        this.ngOnInit();
+      }
+    })
+    
     this.loadcategoryandcourses();
     this.getCheckedItemList();
   
@@ -109,14 +154,23 @@ export class ViewAllCoursesComponent implements OnInit {
 
   filter(){
       this.showAppliedFiltre = true;
+        this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
+           console.log(result)
+           if(result['data']['getDetailsCount']['success'] == 'true'){
+            this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
+            console.log(this.guidelineSearchVal)
+           }else{
+            //  this.alert.openAlert('Filter not found',null)
+           }
+        })
   }
+
   sorting(sortval){
     this.showAppliedFiltre = false;
     if (this.userDetailes.group_id)
       this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,sortval).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
-   
   }
 
   loadcategoryandcourses() {

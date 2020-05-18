@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { logout, viewcourse, view_wishlist,list_content, syllabus_of_particular_scorm} from "@core/services/operations/common_query";
+import { Observable } from 'rxjs';
+import {Subject} from 'rxjs/Subject';
+import { logout, viewcourse, view_wishlist,list_content, syllabus_of_particular_scorm,getCoursesByName} from "@core/services/operations/common_query";
 import { add_to_wishlist, delete_wishlist,getPlayerStatus,geturl } from "@core/services/operations/common_mutation";
 
 @Injectable({
@@ -10,6 +12,10 @@ export class CommonServicesService {
 
   constructor(private Apollo: Apollo) { }
 
+  globalSearch$ = new Subject<any>();
+  globalSearch = this.globalSearch$.asObservable();
+  
+  
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
     return this.Apollo.query({
@@ -85,6 +91,15 @@ export class CommonServicesService {
       query: geturl,
       variables: {
         courseid: courseid
+      }
+    });
+  }
+
+  getCoursesByName(courseName) {
+    return this.Apollo.query({
+      query: getCoursesByName,
+      variables: {
+        courseName: courseName,
       }
     });
   }
