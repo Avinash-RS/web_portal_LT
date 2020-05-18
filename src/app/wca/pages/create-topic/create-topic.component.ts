@@ -333,7 +333,7 @@ if (item) {
            })
           } else if (item.name === 'Word') {
             const formData3 = new FormData();
-            formData3.append('PPT', this.imageView);
+            formData3.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData3).subscribe((data:any) => {
             console.log('word',data)
             this.spinner.hide();
