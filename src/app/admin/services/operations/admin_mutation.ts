@@ -120,3 +120,13 @@ export const update_catalogue = gql`
       error_msg
     }
   }`;
+
+export const delete_catalogue = gql`
+mutation delete_catalogue($input_id: String! ,$level: Int!) {
+  delete_catalogue(input_id: $input_id,level: $level){
+    success
+    error_msg
+    message
+  }
+}`;
+
