@@ -121,6 +121,9 @@ export class WcaService {
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
 
+  uploadKnowledgeCheck(fileData){ return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData)}
+
+  getPreviewData(path){return this.http.post(environment.wcaapiurl + 'api/module/getquestions',  { file: path })}
   repositoryModules() {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }

@@ -69,10 +69,10 @@ export class CreateTemplateComponent implements OnInit {
       name:"Video",
       image:"../../../../assets/images/video.svg"
     },
-    {
-      name:"Audio",
-      image:"../../../../assets/images/audio.svg"
-    },
+    // {
+    //   name:"Audio",
+    //   image:"../../../../assets/images/audio.svg"
+    // },
     {
       name:"SCROM",
       image:"../../../../assets/images/scrom.svg"

@@ -19,6 +19,7 @@ import { CreateCourseComponent } from './pages/create-course/create-course.compo
 import { CreateModuleComponent } from './pages/create-module/create-module.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatListModule, MatTableModule, MatSortModule, MatChipsModule } from '@angular/material';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
 import { WcaService } from "./services/wca.service";
@@ -30,6 +31,8 @@ import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 import { AddModuleComponent } from './pages/add-module/add-module.component';
 import { ModuleRepositoryComponent } from './pages/module-repository/module-repository.component';
+import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -59,9 +62,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent],
   imports: [
     CoreModule,
+    MatDialogModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
@@ -80,10 +84,11 @@ const routes: Routes = [
     MatListModule,
     MatSortModule,
     MatTableModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSlideToggleModule
   ],
   providers: [Apollo],
-  entryComponents: [],
+  entryComponents: [ViewCoursesComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }

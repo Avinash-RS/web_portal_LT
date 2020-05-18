@@ -53,7 +53,10 @@
 
       <ng-container matColumnDef="view">
         <th mat-header-cell class="action-header" *matHeaderCellDef> </th>
-        <td mat-cell style="color: #1f3777;font-weight: 500;" *matCellDef="let element"> View </td>
+        <td mat-cell style="color: #1f3777;font-weight: 500;" *matCellDef="let element">
+          <span style="cursor: pointer;" (click)="viewModule(element)">View
+          </span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="select">
