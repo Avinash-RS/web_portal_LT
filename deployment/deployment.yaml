@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webportal
-          image: lxpacrazure.azurecr.io/webportal:latest
+          image: lxpacrazure.azurecr.io/webportal
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
