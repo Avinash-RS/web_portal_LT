@@ -646,6 +646,7 @@ export const getcategoryadmin = gql`
         category_name
         category_image
         category_description
+        is_child
       }
     }
 }`;

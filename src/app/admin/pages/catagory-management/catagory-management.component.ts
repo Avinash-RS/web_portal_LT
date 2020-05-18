@@ -140,13 +140,16 @@ export class CatagoryManagementComponent implements OnInit {
       this.treeSource.data = this.categories;
       this.dataSource$.next(this.categories);
       this.loadingCategory = false;
+      console.log(this.treeSource.data)
     });
   }
 
   loadsubcategory(node) {
+    console.log(node);
     if (node.category_id) {
       this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
         const category = result.data.get_sub_category.message;
+        console.log(category);
         // this.subCategoryArray =  result.data.get_sub_category.message;
         if (node) {
           // node.children = [
