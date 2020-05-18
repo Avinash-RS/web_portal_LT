@@ -206,9 +206,7 @@
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
                   <img class="center width_80 imgHt" [src]="addCategoryForm.value.category_image">
                   <mat-icon *ngIf="!canotEdit" style="position: absolute;top:0;"
-                    (click)="addCategoryForm.controls['category_image'].reset();selectedCategory && selectedCategory = {};
-                    selectedSubCategory && selectedSubCategory = {};
-                    selectedSuperSubCategory && selectedSuperSubCategory = {};canotEdit = true;
+                    (click)="addCategoryForm.controls['category_image'].reset();
                     ">cancel</mat-icon>
                 </div>
               </div>

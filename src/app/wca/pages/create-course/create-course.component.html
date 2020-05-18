@@ -327,9 +327,9 @@
                           <div [formGroupName]="i">
                             <div class="row crs1 margbtm">
                               <div class="col-md-3">Text</div>
-                              <div class="col-md-9"><input type="text" class="inputmainWidth"
+                              <div class="col-md-9"><textarea type="text" class="inputs inputmainWidth" style="resize: none;"
                                   (keydown)="_handleKeydown($event)" placeholder="Enter the text"
-                                  formControlName="text" /> </div>
+                                  formControlName="text"></textarea> </div>
                             </div>
 
                             <div class="row crs1 margbtm">
@@ -365,9 +365,9 @@
 
                             <div class="row crs1 margbtm">
                               <div class="col-md-3">Course Milestone</div>
-                              <div class="col-md-9"><input type="text" class="inputmainWidth"
+                              <div class="col-md-9"><textarea type="text" style="resize: none;" class="inputs inputmainWidth"
                                   (keydown)="_handleKeydown($event)" placeholder="Enter the Milestone"
-                                  formControlName="what_will_you_learn" /> </div>
+                                  formControlName="what_will_you_learn"></textarea> </div>
                             </div>
 
                           </div>
