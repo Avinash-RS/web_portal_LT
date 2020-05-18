@@ -14,9 +14,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./catalogue-management.component.scss']
 })
 export class CatalogueManagementComponent implements OnInit {
+
+
   adminDetails: any;
   addCatalogueForm: any;
   showAddCatalogueForm: boolean = false;
+  showListCatalogue: boolean = true;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -28,4 +31,15 @@ export class CatalogueManagementComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  get f() {
+    if (this.showAddCatalogueForm == true) {
+      return this.addCatalogueForm.controls;
+    }
+  }
+  gotoAdd() {
+    this.showListCatalogue = false;
+    this.showAddCatalogueForm = true
+  }
 }
