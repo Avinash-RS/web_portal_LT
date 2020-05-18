@@ -10,6 +10,9 @@ html {
     /* Remove scrollbar space */
     background: transparent;
     /* Optional: just make scrollbar invisible */
+
+
+
 }
 
 @media screen and (min-width: 320px) and (max-width:1024px) {}
@@ -46,6 +49,10 @@ hr {
 
 .m-l-20 {
     margin-left: 20px;
+}
+
+.m-l-55 {
+    margin-left: 55px;
 }
 
 .m-t-20 {
@@ -86,4 +93,20 @@ hr {
 
 .addcat-btn {
     background-color: $color-dark-green;
+}
+
+button,
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.inputs {
+    border: 1.0px solid $color-blue !important;
+    padding: 8px !important;
+}
+
+.error_msg {
+    font-size: 80%;
+    color: #dc3545;
 }

@@ -40,6 +40,10 @@ export class CatalogueManagementComponent implements OnInit {
   }
   gotoAdd() {
     this.showListCatalogue = false;
-    this.showAddCatalogueForm = true
+    this.showAddCatalogueForm = true;
+    this.addCatalogueForm = this.formBuilder.group({
+      catalogue_name: new FormControl('', myGlobals.req),
+      catalogue_description: new FormControl(''),
+    });
   }
 }
