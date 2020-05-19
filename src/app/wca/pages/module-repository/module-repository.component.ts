@@ -95,12 +95,16 @@ export class ModuleRepositoryComponent implements OnInit {
   }
 
   viewModule(module) {
-    this.dialog.open(ViewCoursesComponent, {
+   let dg =  this.dialog.open(ViewCoursesComponent, {
       data: {
         module: module
       },
       width: '95%',
       panelClass: ['view-course-container']
     });
+
+    dg.afterClosed().subscribe((data) => {
+        this.getModules();
+    })
 }
 }

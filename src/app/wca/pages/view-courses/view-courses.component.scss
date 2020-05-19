@@ -40,7 +40,7 @@
         }
     }
     .mat-card {
-        height: 35%;
+        height: 40%;
         box-shadow: 0 0 10px rgb(170, 170, 170) !important;
     }
     .course-title {
@@ -55,5 +55,13 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+    }
+
+    .tool-tip {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 0 10px #aaaaaa !important;
+        padding: 5px 10px;
+        border-radius: 3px;
     }
 }
