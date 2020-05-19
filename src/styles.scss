@@ -607,3 +607,12 @@ h1 {
     padding: 0.5em 1.5em !important;
   }
 }
+
+.create-course, .view-course-container {
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color:$color-light-grey !important;
+  }
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: $color-blue !important;
+  }
+}
