@@ -6,18 +6,20 @@
 
   <div class="mat-card-container">
     <mat-card style="text-align: center;">
-      <div class="module-name text-overflow">
+      <div class="module-name text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
         {{moduleData.modulename}}
       </div>
-      <div style="text-align: left;margin-bottom: 5px;" class="text-overflow">
-        <!-- <ng-container *ngIf="moduleData.createdby; else noName">
+      <div style="text-align: left;margin-bottom: 5px;" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)"
+        class="text-overflow">
 
-        </ng-container> -->
-        
-        {{ moduleData.createdby? "Created by " + moduleData.createdby : 'Created by '}} 
+        {{ moduleData.createdby? "Created by " + moduleData.createdby : 'Created by '}}
       </div>
       <div style="text-align: left;">
         Created on {{moduleData.createdon | date: 'dd MMM, yyyy' }}
+      </div>
+      <div style="margin-top: 10px;text-align: left;">
+        <mat-slide-toggle (change)="deactivateModule($event)">
+          Deactivate Module</mat-slide-toggle>
       </div>
     </mat-card>
   </div>
@@ -25,24 +27,29 @@
     <div class="course-title">
       Associated Courses
       <span style="float: right;margin: -3px;">
-      <mat-icon (click)="closeDialog()">close</mat-icon>
-    </span>
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+      </span>
     </div>
     <div class="course-list">
       <div *ngFor="let course of moduleData.coursedetails" class="course-names">
-        <div class="course-heading text-overflow">
+        <div class="course-heading text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
           {{course.name}}
         </div>
-        <div class="creater-name text-overflow">
+        <div class="creater-name text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
           {{"Created by " + course.createdby}}
         </div>
         <div>
-          Created on 28 Apr, 1994 {{course.createdon | date: 'dd MMM, yyyy' }}
+          Created on {{course.createdon | date: 'dd MMM, yyyy' }}
         </div>
       </div>
     </div>
   </div>
 
 
+  <ng-container *ngIf="isHover">
+    <span class="tool-tip" [style.top.px]="currentTop.top" [style.left.px]="currentTop.left">
+      {{currentText}}
+    </span>
+  </ng-container>
 
 </div>
