@@ -55,58 +55,6 @@ export class CatagoryManagementComponent implements OnInit {
     public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
-    // this.courses = [
-    //   {
-    //     name: "Web Development",
-    //     src: "assets/courses/1.jpg",
-    //   },
-    //   {
-    //     name: "Business Analyst",
-    //     src: "assets/courses/2.jpg",
-    //   },
-    //   {
-    //     name: "Photography",
-    //     src: "assets/courses/3.jpg",
-    //   },
-    //   {
-    //     name: "Code study",
-    //     src: "assets/courses/4.jpg",
-    //   },
-    //   {
-    //     name: "Web Development",
-    //     src: "assets/courses/1.jpg",
-    //   },
-    //   {
-    //     name: "Business Analyst",
-    //     src: "assets/courses/2.jpg",
-    //   },
-    //   {
-    //     name: "Photography",
-    //     src: "assets/courses/3.jpg",
-    //   },
-    //   {
-    //     name: "Code study",
-    //     src: "assets/courses/4.jpg",
-    //   },
-    //   {
-    //     name: "Web Development",
-    //     src: "assets/courses/1.jpg",
-    //   },
-    //   {
-    //     name: "Business Analyst",
-    //     src: "assets/courses/2.jpg",
-    //   },
-    //   {
-    //     name: "Photography",
-    //     src: "assets/courses/3.jpg",
-    //   },
-    //   {
-    //     name: "Code study",
-    //     src: "assets/courses/4.jpg",
-    //   },
-
-    // ];
-
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -526,10 +474,10 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   gotoDelete() {
-    const inputid = this.level === 1 ? this.selectedCategory.category_id  : this.level === 2 ?
-    this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
+    const inputid = this.level === 1 ? this.selectedCategory.category_id : this.level === 2 ?
+      this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
     const type = this.level === 1 ? 'Category' : this.level === 2 ?
-    'SubCategory' : 'SuperSubCategory';
+      'SubCategory' : 'SuperSubCategory';
     Swal.fire({
       title: 'Are you sure want to delete ' + type + ' ?',
       icon: 'warning',
@@ -539,24 +487,24 @@ export class CatagoryManagementComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-       this.adminservice.deletecatalogue(inputid, this.level).subscribe(( results: any) => {
-            if (results.data.delete_catalogue.success === false) {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Move/Delete Subcategory/Supersubcategory/Courses associated to delete this ' + type ,
-              });
-            } else if (results.data.delete_catalogue.success === true) {
-              Swal.fire(
-                'Deleted!',
-                 type + '   has been deleted.',
-                'success'
-              );
-              this.showHome = true; this.showCourses = false;
-              this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
-              this.getallcategories();
-            }
-         });
+        this.adminservice.deleteCategory(inputid, this.level).subscribe((results: any) => {
+          if (results.data.delete_catalogue.success === false) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Move/Delete Subcategory/Supersubcategory/Courses associated to delete this ' + type,
+            });
+          } else if (results.data.delete_catalogue.success === true) {
+            Swal.fire(
+              'Deleted!',
+              type + '   has been deleted.',
+              'success'
+            );
+            this.showHome = true; this.showCourses = false;
+            this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
+            this.getallcategories();
+          }
+        });
       }
     });
   }
@@ -612,11 +560,11 @@ export class CatagoryManagementComponent implements OnInit {
         input_image: value.category_image || '',
         level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
       }
-      this.adminservice.updateCatalogue(category).subscribe((result: any) => {
+      this.adminservice.updateCatagory(category).subscribe((result: any) => {
         formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
-          this.showHome = true;
-          this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
+        this.showHome = true;
+        this.showAddSubCatForm = this.showAddCatForm = this.showAddSuperSubCatForm = this.showCourses = false;
         if (result?.data?.update_catalogue?.success)
           this.getallcategories();
         else
@@ -634,7 +582,7 @@ export class CatagoryManagementComponent implements OnInit {
         parent_category_id: this.selectedCategory?.category_id || "null",
         parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
       }
-      this.adminservice.createCatalogue(category).subscribe((result: any) => {
+      this.adminservice.createCategory(category).subscribe((result: any) => {
         formType == 'category' ? this.addCategoryForm?.reset() : (formType == 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
         if (result?.data?.create_catelogue?.success)
