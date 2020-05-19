@@ -20,7 +20,7 @@ export class CatalogueManagementComponent implements OnInit {
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
   catalogueList = [];
-  pagenumber: number;
+  pagenumber: number = 0;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -65,8 +65,11 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getNextCattalogue() {
-    this.pagenumber = +this.pagenumber;
-    console.log(this.pagenumber)
+    console.log(++this.pagenumber);
+    this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
+      this.catalogueList.push(...result?.data?.getallcatalogue?.message)
+      console.log(this.catalogueList)
+    });
   }
 
   get f() {
