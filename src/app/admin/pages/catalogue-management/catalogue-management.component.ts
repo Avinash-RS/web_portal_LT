@@ -35,7 +35,8 @@ export class CatalogueManagementComponent implements OnInit {
 
   getListCatalogue() {
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
-      console.log(result)
+      console.log(result?.data?.getallcatalogue?.message)
+      this.catalogueList = result?.data?.getallcatalogue?.message
     });
     // this.catalogueList = [{
     //   cataloguename: "Web Development",
@@ -62,10 +63,12 @@ export class CatalogueManagementComponent implements OnInit {
     //   numberofcourses: "35",
     // },]
   }
+
   getNextCattalogue() {
     this.pagenumber = +this.pagenumber;
     console.log(this.pagenumber)
   }
+
   get f() {
     if (this.showAddCatalogueForm == true) {
       return this.addCatalogueForm.controls;
