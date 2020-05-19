@@ -3,10 +3,9 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
-import {SearchPipe} from '../../../pipes/search.pipe';
-import { from } from 'rxjs';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Options } from 'ng5-slider';
+import * as _ from 'lodash';
 declare var $: any;
 
 @Component({
@@ -36,9 +35,6 @@ export class ViewAllCoursesComponent implements OnInit {
   displayMode: number = 1;
   paginationpgno: any;
   loader: boolean;
-  masterSelected:boolean;
-  checklist:any;
-  checkedList:any = [];
   sort_type:any = "A-Z";
   showAppliedFiltre :boolean = false;
   errormsg:boolean = false;
@@ -52,30 +48,32 @@ export class ViewAllCoursesComponent implements OnInit {
   coursepartners: any = [];
   coursemode :any = [];
   authordetails : any = [];
-  selectedFilter: any = [];
+  level1selectedID: any = [];
+  level2selectedID: any = [];
+  level3selectedID: any = [];
 
-  commonCatIsSelectValue : any = [];
- lvl1selectedcat: any = [];
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
      private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
-
     this.btnType = "Enroll Now"
-    this.masterSelected = false;
-    this.checklist = [
-      {id:1,value:'Elenor Anderson',isSelected:false},
-      {id:2,value:'Caden Kunze',isSelected:false},
-      {id:3,value:'Ms. Hortense Zulauf',isSelected:false},
-      {id:4,value:'Grady Reichert',isSelected:false},
-      {id:5,value:'Dejon Olson',isSelected:false},
-      {id:6,value:'Jamir Pfannerstill',isSelected:false},
-      {id:7,value:'Aracely Renner DVM',isSelected:false},
-      {id:8,value:'Genoveva Luettgen',isSelected:false},
-      {id:5,value:'Dejon Olson',isSelected:false},
-      {id:6,value:'Jamir Pfannerstill',isSelected:false},
-      {id:7,value:'Aracely Renner DVM',isSelected:false},
-      {id:8,value:'Genoveva Luettgen',isSelected:false}
-    ];
   }
+
+  ngOnInit() {
+    this.getthreeLevelCat();
+    this.userDetailes = this.globalservice.checkLogout();
+    if (!this.userDetailes.group_id) {
+      this.userDetailes.group_id = '1';
+    }
+    // this.CommonServices.globalSearch.subscribe((data: any) => {
+    //   if(data.length > 0) {
+    //     this.allcourses = data;
+    //   } else {
+    //     this.ngOnInit();
+    //   }
+    // })
+    this.loadcategoryandcourses();
+  }
+
+
   isSelected(s:any) {
     if(s.level == 1){
       return this.Lvl1CatId.findIndex((item) => item.category_id === s.category_id) > -1 ? true : false;
@@ -90,146 +88,76 @@ export class ViewAllCoursesComponent implements OnInit {
     if(category.level == 1){
       this.isSelected(category)
       this.Lvl1CatId.find((item) => item.category_id === category.category_id) ? 
-      this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== category.category_id) 
-      : this.Lvl1CatId.push(category);
-      
-    //   this.Lvl1CatId.forEach(element => {
-    //     debugger
-    //     if(element.isSelected === true)
-    //     this.lvl1selectedcat.push(element.category_id);
-    //   });
-    //   console.log( this.Lvl1CatId)
-    //  console.log( this.lvl1selectedcat)
+      this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== category.category_id) : this.Lvl1CatId.push(category);
+      this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id)
     }else if (category.level == 2){
       this.isSelected(category)
-      this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? 
-      this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) :
-      this.Lvl2CatId.push(category);
-      console.log( this.Lvl2CatId,' this.Lvl2CatId')
-    }else{
+      this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) : this.Lvl2CatId.push(category);
+      this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id)
+    }else if ((category.level == 3)){
       this.isSelected(category)
-      this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? 
-      this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) :
-      this.Lvl3CatId.push(category);
-      console.log( this.Lvl3CatId,' this.Lvl3CatId')
+      this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) : this.Lvl3CatId.push(category);
+      this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id)
+    }else{
+      this. getthreeLevelCat();
     }
-     this.learnerservice.getLevelSubCategoryData(this.Lvl1CatId,this.Lvl2CatId).subscribe((result: any) => {
-      console.log(result)
+
+    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.Lvl2CatId).subscribe((result: any) => {
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
-      }else{
-        this.alert.openAlert('No Category Found',null)
       }
     });
   }
 
-  getsubcatlevel(){
-    
-  }
- 
-
-  isAllSelected() {
-    this.masterSelected =  this.Lvl1CatId.every(function(item:any) {
-        return item.isSelected == true;
-      })
-    this.getCheckedItemList();
-  }
-
-  getCheckedItemList(){
-    this.checkedList = [];
-    for (var i = 0; i < this.checklist.length; i++) {
-      if(this.checklist[i].isSelected)
-      this.checkedList.push(this.checklist[i]);
-    }
-  }
   checkedVal(event,val,type){
-    console.log('value',event.target.checked, val);
+    // if (event.target.checked) {
+     if(type==='language') {
+      this.selectedlang.push(val.course_language);
+     }
+   
+     else if(type==='Instructor') {
+      this.authordetails.push(val.authordetails);
+     }
 
-    if (event.target.checked) {
-
-     if(type==='language') 
-     this.selectedlang.push(val.course_language);
-     if(type==='Instructor') 
-     this.authordetails.push(val.authordetails);
-     if(type==='courseMode') 
-     this.coursemode.push(val.course_mode);
-     if(type==='coursepartner') 
-     this.coursepartners.push(val.coursepartnerdetails);
+     else if(type==='courseMode') {
+      this.coursemode.push(val.course_mode);
+     }
+   
+    else if(type==='coursepartner') {
+      this.coursepartners.push(val.coursepartnerdetails);
+    }else{
+      this.getallcourses();
+    }
      var perPage = "10";
      this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.selectedlang,this.coursemode,
       this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
-       console.log(result)
+        if(result['data']['getCourseCategorySearch'].success == true)
+       this.allcourses = result['data']['getCourseCategorySearch']['data'];
      })
-    } 
-    
-    // if (!event.target.checked) { but it didn't wrk wait
-    //   let index = this.selectedFilter.indexOf(val);
-    //   if (index > -1) {
-    //     this.selectedFilter.splice(index, 1);
-    //   }
-    // }
-    // console.log('array',this.selectedFilter);
   }
 
   removeFilterVal(val,index){
-    console.log(val,index)
-    // console.log(val,'val')
-    // this.selectedFilter = this.selectedFilter.splice(index);
-    // console.log('after remove',this.selectedFilter)
-    
-  //   this.masterSelected = this.checklist.every(function(item:any) {
-  //     console.log(item)
-  //     return item.isSelected === false;
-  //   })
-  // this.getCheckedItemList();
-    
   }
   clearAll(){
     // this.selectedFilter = [];
-    console.log('cleared');
   }
 
-  applyFilter(category) { 
-    console.log(category)
-    console.log(this.Lvl1CatId)
-    console.log(this.Lvl2CatId)
-    console.log(this.Lvl3CatId)
-    console.log(this.pagenumber)
+  applyFilter() { 
     var perPage = "10";
-    // this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
-    //   console.log(result)
-    // })
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID,this.level2selectedID,this.level3selectedID,this.selectedlang,this.coursemode,
+      this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
+        if(result['data']['getCourseCategorySearch'].success == true)
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.dialog.closeAll();
+    })
    }
 
-  ngOnInit() {
-    this.getthreeLevelCat();
-    this.userDetailes = this.globalservice.checkLogout();
-    if (!this.userDetailes.group_id) {
-      this.userDetailes.group_id = '1';
-    }
-
-    this.CommonServices.globalSearch.subscribe((data: any) => {
-      if(data.length > 0) {
-        this.allcourses = data;
-      } else {
-        this.ngOnInit();
-      }
-    })
-    
-    this.loadcategoryandcourses();
-    this.getCheckedItemList();
-  
-  }
 
   filter(){
       this.showAppliedFiltre = true;
         this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
-           console.log(result)
            if(result['data']['getDetailsCount']['success'] == 'true'){
             this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
-            console.log(this.guidelineSearchVal)
-           }else{
-            //  this.alert.openAlert('Filter not found',null)
            }
         })
   }
