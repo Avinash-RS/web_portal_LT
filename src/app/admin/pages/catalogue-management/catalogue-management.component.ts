@@ -73,6 +73,7 @@ export class CatalogueManagementComponent implements OnInit {
 
   addNewCatalogue() {
     console.log(this.addCatalogueForm)
+    console.log(this.adminDetails)
     this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name, this.addCatalogueForm.value.catalogue_description,
       this.adminDetails._id).subscribe((result: any) => {
         // this.subCategoryArray = result.data.get_sub_category.message;
