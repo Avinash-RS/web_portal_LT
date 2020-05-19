@@ -21,6 +21,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner'
 describe('LearnerMyCourseComponent', () => {
   let component: LearnerMyCourseComponent;
   let fixture: ComponentFixture<LearnerMyCourseComponent>;
+  let mycourse = require("../../../../assets/mockdata/wca/learner-my-course.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -111,5 +112,15 @@ describe('LearnerMyCourseComponent', () => {
     }
     component.onResize(event);
     expect(component.breakpoint).toBe(4);
+  })
+
+  it('Check get mycourse', () => {
+    component.viewMycourse();
+    expect(component.myCoursesList).toBe(mycourse.data.get_course_by_user.message.course_img_url);
+  })
+
+  it('Check get wishlist', () => {
+    component. viewWishlist();
+    expect(component.wishlist).toBe(mycourse.publishedCourse.data.get_course_published.message);
   })
 });
