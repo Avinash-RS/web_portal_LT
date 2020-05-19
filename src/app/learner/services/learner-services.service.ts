@@ -416,6 +416,12 @@ export class LearnerServicesService {
     });
   }
 
+
+
+  postCategoryFilter(data) {
+    return this.http.post<any[]>(environment.apiUrl + `getsublevelcategories`, data);
+  }
+
 // Guildeline selected filter value and getting courses
   postGuildelineSearchData(category: any,sub_category: any,super_sub_category: any ,course_language:any,course_mode:any,
     author_details:any,partner_details:any,
