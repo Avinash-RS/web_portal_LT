@@ -300,4 +300,12 @@ h2{
   // content: "\f078";
   margin-left: -9px !important;
 }
+.col-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+.diffcol-9{
+  flex: 0 0 100%;
+  max-width: 100%;
+}
 
