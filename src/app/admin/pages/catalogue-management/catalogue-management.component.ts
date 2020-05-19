@@ -25,7 +25,19 @@ export class CatalogueManagementComponent implements OnInit {
       numberofcourses: "10",
     },
     {
-      name: "Business Analyst",
+      cataloguename: "Business Analyst",
+      numberofcourses: "30",
+    },
+    {
+      cataloguename: "Code study",
+      numberofcourses: "35",
+    },
+    {
+      cataloguename: "Web Development",
+      numberofcourses: "10",
+    },
+    {
+      cataloguename: "Business Analyst",
       numberofcourses: "30",
     },
     {

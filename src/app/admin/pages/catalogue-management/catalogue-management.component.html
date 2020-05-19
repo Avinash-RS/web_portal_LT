@@ -27,36 +27,18 @@
       <!-- /////JASPER -->
       <h4 class="heading">List of catalogue</h4>
 
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let courses of courses; let i = index">
-          <div class="grid-container">
-            <!-- <div class="avc"> {{courses.cataloguenamecourses.cataloguename}}</div> -->
-            <div class="avc"> {{courses.cataloguename}}</div>
-            <!-- <div class="avc">{{courses.cataloguename}}</div> -->
-            <!-- <div class="avc">{{courses.cataloguename}}</div> -->
+      <div class="row no_margin">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let course of courses; let i = index">
+          <div>
+            {{course.cataloguename}}
           </div>
-  
-          <!-- <div class="grid-container">
-          <div>1 of 4</div>
-          <div>2 of 4</div>
-          <div>3 of 4</div>
-          <div>4 of 4</div>
-        </div>
-    
-        <div class="grid-container">
-          <div>1 of 4</div>
-          <div>2 of 4</div>
-          <div>3 of 4</div>
-          <div>4 of 4</div>
-        </div> -->
+          <div>
+            {{course.numberofcourses}}
+          </div>
         </div>
       </div>
-      <!-- <button type="button" class="bot"><span class="material-icons" style="vertical-align: middle;">sort</span>sort</button> -->
      
-      <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="
-  margin-top: 39px;
-">
-
+      <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="bottom: 0;">
       </button>
 
     </div>
