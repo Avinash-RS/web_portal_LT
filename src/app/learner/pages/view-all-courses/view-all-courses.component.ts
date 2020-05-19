@@ -98,23 +98,19 @@ export class ViewAllCoursesComponent implements OnInit {
     //     if(element.isSelected === true)
     //     this.lvl1selectedcat.push(element.category_id);
     //   });
-    //   console.log( this.Lvl1CatId)
-    //  console.log( this.lvl1selectedcat)
+    //
     }else if (category.level == 2){
       this.isSelected(category)
       this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? 
       this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) :
       this.Lvl2CatId.push(category);
-      console.log( this.Lvl2CatId,' this.Lvl2CatId')
     }else{
       this.isSelected(category)
       this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? 
       this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) :
       this.Lvl3CatId.push(category);
-      console.log( this.Lvl3CatId,' this.Lvl3CatId')
     }
      this.learnerservice.getLevelSubCategoryData(this.Lvl1CatId,this.Lvl2CatId).subscribe((result: any) => {
-      console.log(result)
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
       }else{
@@ -144,98 +140,102 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   checkedVal(event,val,type){
-    if (event.target.checked) {
-         if(type==='language') {
-          this.selectedlang.push(val.course_language);
-         }
-       
-         else if(type==='Instructor') {
-          this.authordetails.push(val.authordetails);
-         }
-    
-         else if(type==='courseMode') {
-          this.coursemode.push(val.course_mode);
-         }
-       
-        else if(type==='coursepartner') {
-          this.coursepartners.push(val.coursepartnerdetails);
-        }else{
-          this.getallcourses();
-        }
-        
-         var perPage = "10";
-         this.pagenumber = 1;
-         this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.selectedlang,this.coursemode,
-          this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
-           this.allcourses = result['data']['getCourseCategorySearch']['data'];
-           console.log( this.allcourses,'guildesearch')
-         })
-         } 
-        // else{
-        //   this.getallcourses();
-        // }
-        
-        else {
-            if(type==='language') {
-               let index = this.selectedlang.indexOf(val.course_language);
-           if (index > -1) {
-             this.selectedlang.splice(index, 1);
-           }
-             }
-             else if(type==='Instructor') {
-          let index = this.authordetails.indexOf(val.authordetails);
-           if (index > -1) {
-             this.authordetails.splice(index, 1);
-           }
-             }
-             else if(type==='courseMode') {
-          let index = this.coursemode.indexOf(val.course_mode);
-                 if (index > -1) {
-                   this.coursemode.splice(index, 1);
-                 }
-             }
-           
-            else if(type==='coursepartner') {
-          let index = this.coursepartners.indexOf(val.coursepartnerdetails);
-                 if (index > -1) {
-                   this.coursepartners.splice(index, 1);
-                 }
-            }
-         }
-    // else{
-    //   this.getallcourses();
-    // }
-        // console.log('array',this.selectedFilter);
+    if (event.target.checked) {
+      if (type === 'language') {
+        this.selectedlang.push(val.course_language);
+      } else if (type === 'Instructor') {
+        this.authordetails.push(val.authordetails);
+      } else if (type === 'courseMode') {
+        this.coursemode.push(val.course_mode);
+      } else if (type === 'coursepartner') {
+        this.coursepartners.push(val.coursepartnerdetails);
+      }
+    }
+    else if (!event.target.checked) {
+      if (type === 'language') {
+        let index = this.selectedlang.indexOf(val.course_language);
+        if (index > -1) {
+          this.selectedlang.splice(index, 1);
+        }
+      }
+      else if (type === 'Instructor') {
+        let index = this.authordetails.indexOf(val.authordetails);
+        if (index > -1) {
+          this.authordetails.splice(index, 1);
+        }
+      }
+      else if (type === 'courseMode') {
+        let index = this.coursemode.indexOf(val.course_mode);
+        if (index > -1) {
+          this.coursemode.splice(index, 1);
+        }
+      }
+      else if (type === 'coursepartner') {
+        let index = this.coursepartners.indexOf(val.coursepartnerdetails);
+        if (index > -1) {
+          this.coursepartners.splice(index, 1);
+        }
+      }
+    }
+
+
+    var perPage = "10";
+    this.pagenumber = 1;
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+      })
     this.selectedFilter = [];
     this.selectedFilter = this.selectedFilter.concat(this.selectedlang);
     this.selectedFilter = this.selectedFilter.concat(this.authordetails);
     this.selectedFilter = this.selectedFilter.concat(this.coursemode);
     this.selectedFilter = this.selectedFilter.concat(this.coursepartners);
       } 
-  removeFilterVal(val,index){
-    console.log(val,index)
-    // console.log(val,'val')
-    // this.selectedFilter = this.selectedFilter.splice(index);
-    // console.log('after remove',this.selectedFilter)
-    
-  //   this.masterSelected = this.checklist.every(function(item:any) {
-  //     console.log(item)
-  //     return item.isSelected === false;
-  //   })
-  // this.getCheckedItemList();
-    
+  removeFilterVal(val){
+    let langIndex = this.selectedlang.indexOf(val);
+    let authorIndex = this.authordetails.indexOf(val);
+    let coursepartnersIndex = this.coursepartners.indexOf(val);
+    let coursemodeIndex = this.coursemode.indexOf(val);
+    if (langIndex > -1) {
+      this.selectedlang.splice(langIndex, 1);
+    }
+    else if (authorIndex > -1) {
+      this.authordetails.splice(authorIndex, 1);
+    }
+    else if (coursepartnersIndex > -1) {
+      this.coursepartners.splice(coursepartnersIndex, 1);
+    }
+    else if (coursemodeIndex > -1) {
+      this.coursemode.splice(coursemodeIndex, 1);
+    }
+    this.selectedFilter = [];
+    this.selectedFilter = this.selectedFilter.concat(this.selectedlang);
+    this.selectedFilter = this.selectedFilter.concat(this.authordetails);
+    this.selectedFilter = this.selectedFilter.concat(this.coursemode);
+    this.selectedFilter = this.selectedFilter.concat(this.coursepartners); 
+
+    var perPage = "10";
+    this.pagenumber = 1;
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+      })
   }
   clearAll(){
-    // this.selectedFilter = [];
-    console.log('cleared');
+    this.selectedFilter = [];
+    this.selectedlang = [];
+    this.authordetails = [];
+    this.coursemode = [];
+    this.coursepartners = [];
+    var perPage = "10";
+    this.pagenumber = 1;
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+      })
   }
 
   applyFilter(category) { 
-    console.log(category)
-    console.log(this.Lvl1CatId)
-    console.log(this.Lvl2CatId)
-    console.log(this.Lvl3CatId)
-    console.log(this.pagenumber)
     var perPage = "10";
     // this.learnerservice.postGuildelineSearchData(this.Lvl1CatId,this.Lvl2CatId,this.Lvl3CatId,this.pagenumber,perPage).subscribe((result: any) => {
     //   console.log(result)
@@ -265,10 +265,8 @@ export class ViewAllCoursesComponent implements OnInit {
   filter(){
       this.showAppliedFiltre = true;
         this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
-           console.log(result)
            if(result['data']['getDetailsCount']['success'] == 'true'){
             this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
-            console.log(this.guidelineSearchVal)
            }else{
             //  this.alert.openAlert('Filter not found',null)
            }
@@ -321,7 +319,6 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getallcourses() {
     if (this.userDetailes.group_id)
-    console.log(this.userDetailes.group_id[0])
     this.learnerservice.getallcourses(this.userDetailes.group_id[0],this.pagenumber,this.sort_type).subscribe((result: any) => {
     this.allcourses = result.data.get_all_course_by_usergroup.message;
     });
