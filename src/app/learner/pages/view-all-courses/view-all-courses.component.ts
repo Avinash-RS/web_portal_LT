@@ -63,13 +63,13 @@ export class ViewAllCoursesComponent implements OnInit {
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
-    // this.CommonServices.globalSearch.subscribe((data: any) => {
-    //   if(data.length > 0) {
-    //     this.allcourses = data;
-    //   } else {
-    //     this.ngOnInit();
-    //   }
-    // })
+    this.CommonServices.globalSearch.subscribe((data: any) => {
+      if(data.length > 0) {
+        this.allcourses = data;
+      } else {
+        this.ngOnInit();
+      }
+    })
     this.loadcategoryandcourses();
   }
 
