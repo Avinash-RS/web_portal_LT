@@ -1,126 +1,109 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.1",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
     "parameters": {
-        "clusterName": {
-            "type": "string",
-            "defaultValue":"[clusterName]",
-            "metadata": {
-                "description": "The name of the Managed Cluster resource."
-            }
+        "managedClusters_k8qacluster_name": {
+            "defaultValue": "k8qacluster",
+            "type": "String"
         },
-        "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-                "description": "The location of the Managed Cluster resource."
-            }
+        "workspaces_defaultworkspace_ab91d507_ad12_4399_b986_2d34a997c389_cin_externalid": {
+            "defaultValue": "/subscriptions/ab91d507-ad12-4399-b986-2d34a997c389/resourceGroups/defaultresourcegroup-cin/providers/microsoft.operationalinsights/workspaces/defaultworkspace-ab91d507-ad12-4399-b986-2d34a997c389-cin",
+            "type": "String"
         },
-        "dnsPrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Optional DNS prefix to use with hosted Kubernetes API server FQDN."
-            }
-        },
-        "osDiskSizeGB": {
-            "type": "int",
-            "defaultValue": 0,
-            "metadata": {
-                "description": "Disk size (in GB) to provision for each of the agent pool nodes. This value ranges from 0 to 1023. Specifying 0 will apply the default disk size for that agentVMSize."
-            },
-            "minValue": 0,
-            "maxValue": 1023
-        },
-        "agentCount": {
-            "type": "int",
-            "defaultValue": 3,
-            "metadata": {
-                "description": "The number of nodes for the cluster."
-            },
-            "minValue": 1,
-            "maxValue": 50
-        },
-        "agentVMSize": {
-            "type": "string",
-            "defaultValue": "Standard_DS2_v2",
-            "metadata": {
-                "description": "The size of the Virtual Machine."
-            }
-        },
-        "linuxAdminUsername": {
-            "type": "string",
-            "metadata": {
-                "description": "User name for the Linux Virtual Machines."
-            }
-        },
-        "sshRSAPublicKey": {
-            "type": "string",
-            "metadata": {
-                "description": "Configure all linux machines with the SSH RSA public key string. Your key should include three parts, for example 'ssh-rsa AAAAB...snip...UcyupgH azureuser@linuxvm'"
-            }
-        },
-        "servicePrincipalClientId": {
-            "metadata": {
-                "description": "Client ID (used by cloudprovider)"
-            },
-            "type": "securestring"
-        },
-        "servicePrincipalClientSecret": {
-            "metadata": {
-                "description": "The Service Principal Client Secret."
-            },
-            "type": "securestring"
-        },
-        "osType": {
-            "type": "string",
-            "defaultValue": "Linux",
-            "allowedValues": [
-                "Linux"
-            ],
-            "metadata": {
-                "description": "The type of operating system."
-            }
-        }        
+        "publicIPAddresses_bdbee365_1686_4b5c_8a70_e209a4ce5ff6_externalid": {
+            "defaultValue": "/subscriptions/ab91d507-ad12-4399-b986-2d34a997c389/resourceGroups/MC_Edutech_k8qacluster_southindia/providers/Microsoft.Network/publicIPAddresses/bdbee365-1686-4b5c-8a70-e209a4ce5ff6",
+            "type": "String"
+        }
     },
+    "variables": {},
     "resources": [
         {
-            "apiVersion": "2020-03-01",
             "type": "Microsoft.ContainerService/managedClusters",
-            "location": "[parameters('location')]",
-            "name": "[parameters('clusterName')]",
+            "apiVersion": "2020-03-01",
+            "name": "[parameters('managedClusters_k8qacluster_name')]",
+            "location": "southindia",
+            "sku": {
+                "name": "Basic",
+                "tier": "Free"
+            },
             "properties": {
-                "dnsPrefix": "[parameters('dnsPrefix')]",
+                "kubernetesVersion": "1.15.10",
+                "dnsPrefix": "[concat(parameters('managedClusters_k8qacluster_name'), '-dns')]",
                 "agentPoolProfiles": [
                     {
                         "name": "agentpool",
-                        "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
-                        "count": "[parameters('agentCount')]",
-                        "vmSize": "[parameters('agentVMSize')]",
-                        "osType": "[parameters('osType')]",
-                        "storageProfile": "ManagedDisks"
+                        "count": 3,
+                        "vmSize": "Standard_DS2_v2",
+                        "osDiskSizeGB": 100,
+                        "maxPods": 110,
+                        "type": "VirtualMachineScaleSets",
+                        "orchestratorVersion": "1.15.10",
+                        "nodeLabels": {},
+                        "mode": "System",
+                        "osType": "Linux"
                     }
                 ],
-                "linuxProfile": {
-                    "adminUsername": "[parameters('linuxAdminUsername')]",
-                    "ssh": {
-                        "publicKeys": [
-                            {
-                                "keyData": "[parameters('sshRSAPublicKey')]"
-                            }
-                        ]
+                "servicePrincipalProfile": {
+                    "clientId": "05f20918-776e-4d4d-b939-d81c986c8c9f"
+                },
+                "addonProfiles": {
+                    "httpapplicationrouting": {
+                        "enabled": true,
+                        "config": {
+                            "HTTPApplicationRoutingZoneName": "94da14883a004094bbd1.southindia.aksapp.io"
+                        }
+                    },
+                    "omsagent": {
+                        "enabled": true,
+                        "config": {
+                            "loganalyticsworkspaceresourceid": "[parameters('workspaces_defaultworkspace_ab91d507_ad12_4399_b986_2d34a997c389_cin_externalid')]"
+                        }
                     }
                 },
-                "servicePrincipalProfile": {
-                    "clientId": "[parameters('servicePrincipalClientId')]",
-                    "Secret": "[parameters('servicePrincipalClientSecret')]"
+                "nodeResourceGroup": "[concat('MC_Edutech_', parameters('managedClusters_k8qacluster_name'), '_southindia')]",
+                "enableRBAC": true,
+                "networkProfile": {
+                    "networkPlugin": "kubenet",
+                    "loadBalancerSku": "Standard",
+                    "loadBalancerProfile": {
+                        "managedOutboundIPs": {
+                            "count": 1
+                        },
+                        "effectiveOutboundIPs": [
+                            {
+                                "id": "[parameters('publicIPAddresses_bdbee365_1686_4b5c_8a70_e209a4ce5ff6_externalid')]"
+                            }
+                        ]
+                    },
+                    "podCidr": "10.244.0.0/16",
+                    "serviceCidr": "10.0.0.0/16",
+                    "dnsServiceIP": "10.0.0.10",
+                    "dockerBridgeCidr": "172.17.0.1/16",
+                    "outboundType": "loadBalancer"
+                },
+                "apiServerAccessProfile": {
+                    "enablePrivateCluster": false
                 }
             }
+        },
+        {
+            "type": "Microsoft.ContainerService/managedClusters/agentPools",
+            "apiVersion": "2020-03-01",
+            "name": "[concat(parameters('managedClusters_k8qacluster_name'), '/agentpool')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ContainerService/managedClusters', parameters('managedClusters_k8qacluster_name'))]"
+            ],
+            "properties": {
+                "count": 3,
+                "vmSize": "Standard_DS2_v2",
+                "osDiskSizeGB": 100,
+                "maxPods": 110,
+                "type": "VirtualMachineScaleSets",
+                "orchestratorVersion": "1.15.10",
+                "nodeLabels": {},
+                "mode": "System",
+                "osType": "Linux"
+            }
         }
-    ],
-    "outputs": {
-        "controlPlaneFQDN": {
-            "type": "string",
-            "value": "[reference(parameters('clusterName')).fqdn]"
-        }
-    }
+    ]
 }
