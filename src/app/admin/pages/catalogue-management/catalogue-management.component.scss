@@ -64,8 +64,21 @@ hr {
     margin-bottom: 20px;
 }
 
+.m-r-20 {
+    margin-right: 20px;
+}
+
+.m-l-20 {
+    margin-left: 20px;
+}
+
+
 .p-r-0 {
     padding-right: 0;
+}
+
+.p-b-0 {
+    padding-bottom: 0;
 }
 
 .p-l-10 {
@@ -74,10 +87,6 @@ hr {
 
 .p-l-20 {
     padding-left: 20;
-}
-
-.p-b-0 {
-    padding-bottom: 0;
 }
 
 .p-t-10 {
@@ -118,14 +127,6 @@ input:focus {
 //     margin-top: -36px; 
 // }
 
-
-.m-r-20 {
-    margin-right: 20px;
-}
-
-.m-l-20 {
-    margin-left: 20px;
-}
 
 .material-icons {
     font-size: inherit;
