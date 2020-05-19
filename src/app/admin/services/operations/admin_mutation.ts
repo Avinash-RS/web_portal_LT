@@ -132,3 +132,23 @@ mutation delete_catalogue($input_id: String! ,$level: Int!) {
   }
 }`;
 
+export const create_master_catalogue = gql`
+mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_description : String!,$creator_id: String!) {
+  create_master_catalogue(catalogue_name: $catalogue_name,catalogue_description: $catalogue_description,creator_id:$creator_id ){
+    success
+    error_msg
+    message
+  }
+}`;
+
+// mutation{
+//   create_master_catalogue(
+//     catalogue_name: "sample 1",
+//     catalogue_description : "sample catalogue number 1",
+//     creator_id : "5e69f4ad139c79bbf14adc8a"
+//   ){
+//     success
+//     error_msg
+//     message
+//   }
+// }

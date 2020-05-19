@@ -340,7 +340,6 @@ export class LearnerServicesService {
   }
 
   getcoursesubcategory(categoryid) {
-    console.log(categoryid);
     return this.Apollo.query({
       query: get_sub_category,
       variables: {
