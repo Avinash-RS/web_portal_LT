@@ -223,7 +223,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
             <label class="container1">
-            <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')" />
+            <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')"
+            [checked]="language.checked" />
             <div class="row">
               <div class="col-10 pading">
                 {{language.course_language}} 
@@ -247,7 +248,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
             <label class="container1">
-            <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" />
+            <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" 
+            [checked]="authors.checked"/>
             <div class="row">
               <div class="col-10 pading">
                 {{authors.authordetails}} 
@@ -271,7 +273,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
             <label class="container1">
-            <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')" />
+            <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')"
+            [checked]="courseMode.checked" />
             <div class="row">
               <div class="col-10 pading">
                 {{courseMode.course_mode}} 
@@ -306,7 +309,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
             <label class="container1">
-            <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  />
+            <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  
+            [checked]="coursepartner.checked"/>
             <div class="row">
               <div class="col-10 pading">
                 {{coursepartner.coursepartnerdetails}} 
@@ -326,10 +330,10 @@
         <div class="borderline"></div>
       </div>
     </div>
-
-    <div class="col-9"  >
-      <div class="container containerShadow"  *ngIf="showAppliedFiltre">
-        <div class="row"  *ngIf="displayMode === 1">
+    <ng-container *ngIf="showAppliedFiltre">
+    <div class="col-9">
+      <div class="container containerShadow">
+        <div class="row" *ngIf="displayMode === 1">
           <ng-container
             *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
             <div class="col-md-6 col-lg-3 col-sm-12">
@@ -354,35 +358,36 @@
     
       </div>
     </div>
-
-    <div class="container containerShadow" *ngIf="!showAppliedFiltre">
-      <div class="row"  *ngIf="displayMode === 1">
-        <ng-container
-          *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-          <div class="col-md-6 col-lg-3 col-sm-12">
-            <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-              [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
-          </div>
-        </ng-container>
-        <br>
-      </div>
-      <div class="row" *ngIf="displayMode === 2">
-        <ng-container
-          *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-          <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
-            <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-              [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
-              [goto]="goto" [showDate]="true">
-            </app-list-view-course-component>
-            <br>
-          </div>
-        </ng-container>
-      </div>
-  
-    </div>
-
-
+    </ng-container>
+    <ng-container *ngIf="!showAppliedFiltre">
+    <div class="diffcol-9">
+      <div class="container containerShadow">
+        <div class="row" *ngIf="displayMode === 1">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-md-6 col-lg-3 col-sm-12">
+              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+            </div>
+          </ng-container>
+          <br>
+        </div>
+        <div class="row" *ngIf="displayMode === 2">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+                [goto]="goto" [showDate]="true">
+              </app-list-view-course-component>
+              <br>
+            </div>
+          </ng-container>
+        </div>
     
+      </div>
+    </div>
+    </ng-container>
   </div>
 
   <br>
