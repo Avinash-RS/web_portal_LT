@@ -34,17 +34,17 @@
           <div class="grid-container">
           <div class="avc">
           <div class="col">
-            {{course.cataloguename}}
+            {{course.catalogue_name}}
           </div>
           <div class="colomn">
-            {{course.numberofcourses}}
+            {{course.numberofcourses || 33}}
           </div>
           </div>
           </div>
         </div>
       </div>
 
-      <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="bottom: 0;">
+      <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="bottom: 0;" (click)="getNextCattalogue()">
       </button>
 
     </div>
@@ -82,8 +82,8 @@
           </div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 m-r-20">
             <br>
-            <button id="cancel" mat-stroked-button
-              class="width_80 border-radius-5 background-blue color_white center">Cancel</button>
+            <button id="cancel" mat-stroked-button class="width_80 border-radius-5 background-blue color_white center"
+              (click)="addCatalogueForm.reset();showAddCatalogueForm = false; showListCatalogue = true;">Cancel</button>
           </div>
           <!-- <div class="col-md-4 col-sm-12"></div> -->
         </div>

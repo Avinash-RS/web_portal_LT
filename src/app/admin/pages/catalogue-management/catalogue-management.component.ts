@@ -20,6 +20,7 @@ export class CatalogueManagementComponent implements OnInit {
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
   catalogueList = [];
+  pagenumber: number;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -33,31 +34,41 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getListCatalogue() {
-    this.catalogueList = [{
-      cataloguename: "Web Development",
-      numberofcourses: "10",
-    },
-    {
-      cataloguename: "Business Analyst",
-      numberofcourses: "30",
-    },
-    {
-      cataloguename: "Code study",
-      numberofcourses: "35",
-    },
-    {
-      cataloguename: "Web Development",
-      numberofcourses: "10",
-    },
-    {
-      cataloguename: "Business Analyst",
-      numberofcourses: "30",
-    },
-    {
-      cataloguename: "Code study",
-      numberofcourses: "35",
-    },]
+    this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
+      console.log(result?.data?.getallcatalogue?.message)
+      this.catalogueList = result?.data?.getallcatalogue?.message
+    });
+    // this.catalogueList = [{
+    //   cataloguename: "Web Development",
+    //   numberofcourses: "10",
+    // },
+    // {
+    //   cataloguename: "Business Analyst",
+    //   numberofcourses: "30",
+    // },
+    // {
+    //   cataloguename: "Code study",
+    //   numberofcourses: "35",
+    // },
+    // {
+    //   cataloguename: "Web Development",
+    //   numberofcourses: "10",
+    // },
+    // {
+    //   cataloguename: "Business Analyst",
+    //   numberofcourses: "30",
+    // },
+    // {
+    //   cataloguename: "Code study",
+    //   numberofcourses: "35",
+    // },]
   }
+
+  getNextCattalogue() {
+    this.pagenumber = +this.pagenumber;
+    console.log(this.pagenumber)
+  }
+
   get f() {
     if (this.showAddCatalogueForm == true) {
       return this.addCatalogueForm.controls;
@@ -74,11 +85,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   addNewCatalogue() {
-    console.log(this.addCatalogueForm)
-    console.log(this.adminDetails)
     this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name, this.addCatalogueForm.value.catalogue_description,
       this.adminDetails._id).subscribe((result: any) => {
-        console.log(result)
         this.addCatalogueForm.reset();
         if (result && result.data) {
           if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {

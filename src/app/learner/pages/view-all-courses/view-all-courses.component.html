@@ -171,7 +171,7 @@
     <button class="submit" (click)="filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
-    <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort
+    <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
     <mat-menu #Sort="matMenu">
@@ -199,7 +199,7 @@
 
     <div class="col-8"  >
         <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item}}
-        <mat-icon class="clear-icon" (click)="removeFilterVal(item,i)">clear</mat-icon>
+        <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
         </span>
     </div>
 
