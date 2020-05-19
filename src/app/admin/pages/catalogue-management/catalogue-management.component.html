@@ -26,17 +26,17 @@
     <div class="overflow-auto">
       <!-- /////JASPER -->
       <h4 class="heading">List of catalogue</h4>
-    
+
       <!-- <button type="button" class="bot"><span class="material-icons" style="vertical-align: middle;">sort</span>sort</button> -->
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12"  *ngFor="let courses of courses; let i = index" >
-      <div class="grid-container">
-        <div class="avc"> {{courses.cataloguenamecourses.cataloguename}}</div>
-        <div class="avc"> {{courses.cataloguename}}</div>
-        <div class="avc">{{courses.cataloguename}}</div>
-        <div class="avc">{{courses.cataloguename}}</div>
-      </div>
-  
-      <!-- <div class="grid-container">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let courses of courses; let i = index">
+        <div class="grid-container">
+          <div class="avc"> {{courses.cataloguenamecourses.cataloguename}}</div>
+          <div class="avc"> {{courses.cataloguename}}</div>
+          <div class="avc">{{courses.cataloguename}}</div>
+          <div class="avc">{{courses.cataloguename}}</div>
+        </div>
+
+        <!-- <div class="grid-container">
         <div>1 of 4</div>
         <div>2 of 4</div>
         <div>3 of 4</div>
@@ -49,13 +49,13 @@
         <div>3 of 4</div>
         <div>4 of 4</div>
       </div> -->
-    </div>
-  <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="
+      </div>
+      <button type="button" class="dropdown-toggle" data-toggle="dropdown" style="
   margin-top: 39px;
 ">
-    
-  </button>
-      
+
+      </button>
+
     </div>
     <!-- End of View List Catalogue - Jasper -->
 
@@ -76,8 +76,7 @@
         <div class="row">
           <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
             <div class="form-group">
-              <textarea style="resize: none;" rows="5"
-                [ngClass]="canotEdit ? 'dis inputs border-radius-5 background_trans width_100' : 'inputs border-radius-5 background_trans width_100'"
+              <textarea style="resize: none;" rows="5" class="inputs border-radius-5 background_trans width_100"
                 placeholder="Catalogue Description" formControlName="catalogue_description"
                 name="catalogue_description"></textarea>
             </div>
@@ -87,7 +86,7 @@
           <!-- <div class="col-md-4 col-sm-12"></div> -->
           <div class="col-md-2 m-l-5 col-sm-6 col-6 m-r-20">
             <br>
-            <button id="createCatalogue" mat-stroked-button
+            <button id="createCatalogue" mat-stroked-button (click)="addNewCatalogue()"
               class="width_80 border-radius-5 background-blue color_white center">Create</button>
           </div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 m-r-20">

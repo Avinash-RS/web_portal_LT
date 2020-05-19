@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue, reassigncourse, update_catalogue, delete_catalogue
+  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue
 } from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
@@ -223,7 +223,7 @@ export class AdminServicesService {
   }
   // end of COurse Management
 
-  // Catalogue Management
+  // Category Management
   createCatalogue(category) {
     return this.Apollo.query({
       query: create_catelogue,
@@ -291,7 +291,23 @@ export class AdminServicesService {
     });
   }
 
-  // End of Catalogue Management
+  // End of Category Management
+
+  // catalogue Management
+
+  addNewCatalogue(name, description, id) {
+    console.log(name, description, id);
+    return this.Apollo.query({
+      query: create_master_catalogue,
+      variables: {
+        catalogue_name: name,
+        catalogue_description: description,
+        creator_id: id,
+      }
+    });
+  }
+
+
 }
 
 

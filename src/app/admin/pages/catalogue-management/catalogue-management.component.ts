@@ -29,7 +29,7 @@ export class CatalogueManagementComponent implements OnInit {
       name: "Business Analyst",
       numberofcourses: "30",
     },
-    
+
     {
       cataloguename: "Code study",
       numberofcourses: "35",
@@ -43,7 +43,7 @@ export class CatalogueManagementComponent implements OnInit {
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
-    // this.adminDetails = this.gs.checkLogout();
+    this.adminDetails = this.gs.checkLogout();
   }
 
   ngOnInit() {
@@ -64,4 +64,14 @@ export class CatalogueManagementComponent implements OnInit {
       catalogue_description: new FormControl(''),
     });
   }
+
+  addNewCatalogue() {
+    console.log(this.addCatalogueForm)
+    this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name, this.addCatalogueForm.value.catalogue_description,
+      this.adminDetails._id).subscribe((result: any) => {
+        // this.subCategoryArray = result.data.get_sub_category.message;
+        console.log(result)
+      });
+  }
+
 }
