@@ -12,10 +12,11 @@ import { WcaModule } from '../../wca/wca.module';
 import { WcaComponent } from '../../wca/pages/wca/wca.component';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
+import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: DashboardComponent, data: { title: 'Admin Dashboard' } },
+        { path: 'dashboard', component: AdminDashboardComponent, data: { title: 'Admin Dashboard' } },
         { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
@@ -31,6 +32,9 @@ export const appRoutes: Routes = [{
             loadChildren: '../../wca/wca.module#WcaModule',
             data : {title:'Web Content Authoring'}
           },
+
+
+          
           
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
         { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule', data : {title:'Admin Dashboard'} , canActivate: [AuthGuard]  },

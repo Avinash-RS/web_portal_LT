@@ -35,7 +35,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
 import { GroupManagementComponent } from '../pages/group-management/group-management.component';
-
+import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
     imports: [
@@ -85,7 +85,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective, CatalogueManagementComponent,
+    declarations: [DndDirective, CatalogueManagementComponent,AdminDashboardComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
         CatagoryManagementComponent],
