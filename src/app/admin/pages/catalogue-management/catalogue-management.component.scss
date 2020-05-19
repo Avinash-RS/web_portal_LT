@@ -125,8 +125,8 @@ input:focus {
 // .material-icons{
 //     margin-left: 800px;
 //     margin-top: -36px; 
-// }.
-m-t-20 {
+// }
+.m-t-20 {
     margin-top: 20px;
 }
 
@@ -172,10 +172,10 @@ m-t-20 {
 //     -webkit-transform: rotate(45deg);
 //   }
 .bot {
-    border-radius: 8px, 0px, 0px, 8px !important;
+    border-radius: 3px;
     width: 80px;
     height: 30px;
-    margin-left: 800px;
+    margin-left: 850px;
     margin-top: -36px;
     // transform: rotate(45deg);
     //     -webkit-transform: rotate(45deg);
@@ -183,8 +183,8 @@ m-t-20 {
 
 .grid-container {
     margin-top: 40px;
-    margin-left: 60px;
-    margin-right: 111px;
+    margin-left: 40px;
+    margin-right: 40px;
     height: 70px;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -193,10 +193,11 @@ m-t-20 {
     // background-color: #2196F3;
     padding: 10px;
     border-radius: 15px;
+   
 }
 
 .grid-container>div {
-    background-color: #80808061;
+    background-color: $color-light-grey ;
     text-align: center;
     padding: 20px 0;
     font-size: 10px;
@@ -211,10 +212,18 @@ m-t-20 {
     background-color: white;
     border-bottom: white;
     border-right: white;
+    margin-top:100px;
 }
 
 .col {
-    background-color: #6c757d;
+    // background-color: #6c757d;
+//    font-weight: 15px;
+font-weight: 1000;
+   font-size: 14px;
+}
+.colomn {
+    color:#446bd4d1;
+    font-size: 16px;
 }
 
 // .row1{
@@ -224,4 +233,5 @@ m-t-20 {
 
 .avc {
     width: 200px;
+    // box-shadow: 0px 0px 5px #6c757d;
 }

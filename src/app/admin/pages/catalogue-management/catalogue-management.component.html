@@ -25,15 +25,21 @@
     <!-- start of Viw List Catalogue - Jasper -->
     <div class="overflow-auto" *ngIf="showListCatalogue">
       <!-- /////JASPER -->
+      <div class="row">
       <h4 class="heading">List of catalogue</h4>
-
+      <button type="button" class="bot"><span class="material-icons" style="vertical-align: middle;">sort</span>sort</button>
+      </div>
       <div class="row no_margin">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let course of catalogueList; let i = index">
-          <div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12"  *ngFor="let course of catalogueList; let i = index">
+          <div class="grid-container">
+          <div class="avc">
+          <div class="col">
             {{course.cataloguename}}
           </div>
-          <div>
+          <div class="colomn">
             {{course.numberofcourses}}
+          </div>
+          </div>
           </div>
         </div>
       </div>
