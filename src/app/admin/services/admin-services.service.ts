@@ -140,7 +140,6 @@ export class AdminServicesService {
   }
 
   creategroup(group) {
-    console.log(group)
     return this.Apollo.query({
       query: createusergroup,
       variables: {
@@ -152,7 +151,6 @@ export class AdminServicesService {
   }
 
   changegroupstatus(groupid, status) {
-    console.log(groupid)
     return this.Apollo.query({
       query: groupstatus,
       variables: {
