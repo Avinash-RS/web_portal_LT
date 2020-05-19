@@ -65,7 +65,7 @@
             (click)="selectedSubCategory?.sub_category_name != undefined && changeNav('addSubCategoryForm')"
             aria-current="page" class="breadcrumb-item">{{selectedSubCategory.sub_category_name || 'Sub Category > '}}
           </li>
-          <li class="breadcrumb-item active" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
+          <li class="breadcrumb-item" (click)="selectedSuperSubCategory?.super_sub_category_name != undefined && 
           changeNav('addSuperSubCategoryForm')" *ngIf="selectedSuperSubCategory?.super_sub_category_name != undefined"
             aria-current="page">{{selectedSuperSubCategory.super_sub_category_name || 'Sub Category >'}}</li>
         </ol>
@@ -199,7 +199,7 @@
                   </div>
                   <div class="col-md-7 col-sm-0 col-0 pointer center f_size_12 none"
                     (change)="uploadFile($event.target.files)">
-                    Click here <br> Or <br> Drag and drop here
+                    Click here <br> or <br> Drag & drop to upload
                   </div>
                 </div>
                 <div class="row"
@@ -220,9 +220,7 @@
                   (click)="addCategory('category')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="cancel" (click)="addCategoryForm.reset();showAddCatForm = false; showHome = true;selectedCategory && selectedCategory = {};
-                selectedSubCategory && selectedSubCategory = {};canotEdit = true;
-                selectedSuperSubCategory && selectedSuperSubCategory = {};"
+                <button id="cancel" (click)="cancel('category')"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -274,10 +272,7 @@
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="cancel"
-                  (click)="addSubCategoryForm.reset();showAddSubCatForm = false; showAddCatForm = true;showHome = false;
-                  showCourses = false;
-                  selectedSubCategory && selectedSubCategory = {};canotEdit = true;
-                  selectedSuperSubCategory && selectedSuperSubCategory = {};"
+                  (click)="cancel('subcategory')"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
@@ -300,7 +295,7 @@
           <form [formGroup]="addSuperSubCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
-                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="SubCategory *"
+                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Sub Category *"
                   [ngClass]="{ 'is-invalid': f.super_sub_category_name.touched && f.super_sub_category_name.errors ,'dis' : canotEdit}"
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
@@ -330,9 +325,7 @@
               </div>
               <div class="col-md-2 center col-sm-6 col-6">
                 <button id="cancel"
-                  (click)="addSuperSubCategoryForm.reset();showAddSuperSubCatForm = false;showAddSubCatForm = true;
-                   showAddCatForm = false;showHome = false;showCourses = false;canotEdit = true;
-                   selectedSuperSubCategory && selectedSuperSubCategory = {};"
+                  (click)="cancel('supersubcategory')"
                   mat-stroked-button class="width_80 border-radius-5 center">Cancel</button>
               </div>
             </div>
