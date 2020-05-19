@@ -30,7 +30,7 @@
       <!-- <button type="button" class="bot"><span class="material-icons"
           style="vertical-align: middle;">sort</span>sort</button> -->
     </div>
-    <div class="overflow-auto"  *ngIf="showListCatalogue">
+    <div class="overflow-auto" *ngIf="showListCatalogue">
       <div class="row no_margin">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let course of catalogueList; let i = index">
           <div class="grid-container">
@@ -46,11 +46,11 @@
         </div>
       </div>
       <br><br>
-      <div class="row" *ngIf="catalogueList && catalogueList.length > 0">
-        <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogue()">
-          <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
-        </button>
-      </div>
+    </div>
+    <div class="row" *ngIf="catalogueList && catalogueList.length > 0">
+      <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogue()">
+        <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
+      </button>
     </div>
     <!-- End of View List Catalogue - Jasper -->
 
