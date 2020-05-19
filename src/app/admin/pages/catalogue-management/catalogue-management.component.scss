@@ -10,9 +10,6 @@ html {
     /* Remove scrollbar space */
     background: transparent;
     /* Optional: just make scrollbar invisible */
-
-
-
 }
 
 @media screen and (min-width: 320px) and (max-width:1024px) {}
@@ -104,7 +101,7 @@ input:focus {
 
 .error_msg {
     font-size: 80%;
-    color: #dc3545;
+    color: $color-red;
 }
 
 
@@ -115,9 +112,10 @@ input:focus {
     padding-top: 70px;
 }
 
-.bot{
-    border-radius: 8px,0px,0px,8px !important;
-    width: 80px; height: 30px;
+.bot {
+    border-radius: 8px, 0px, 0px, 8px !important;
+    width: 80px;
+    height: 30px;
     margin-left: 800px;
     margin-top: -36px;
     // transform: rotate(45deg);
@@ -155,6 +153,7 @@ m-t-20 {
 .m-l-5 {
     margin-left: 5px;
 }
+
 .material-icons {
     font-size: inherit;
     padding-right: 5px;
@@ -167,19 +166,22 @@ m-t-20 {
     padding-left: 70px;
     padding-top: 10px;
 }
+
 // .down {
 //     transform: rotate(45deg);
 //     -webkit-transform: rotate(45deg);
 //   }
-.bot{
-    border-radius: 8px,0px,0px,8px !important;
-    width: 80px; height: 30px;
+.bot {
+    border-radius: 8px, 0px, 0px, 8px !important;
+    width: 80px;
+    height: 30px;
     margin-left: 800px;
     margin-top: -36px;
     // transform: rotate(45deg);
     //     -webkit-transform: rotate(45deg);
 }
-.grid-container{
+
+.grid-container {
     margin-top: 40px;
     margin-left: 60px;
     margin-right: 111px;
@@ -193,15 +195,15 @@ m-t-20 {
     border-radius: 15px;
 }
 
-.grid-container > div {
+.grid-container>div {
     background-color: #80808061;
     text-align: center;
     padding: 20px 0;
     font-size: 10px;
     border-radius: 8px;
-  }
+}
 
- .dropdown-toggle{
+.dropdown-toggle {
     margin-left: 39px;
     margin-left: 503px;
     margin-right: 504px;
@@ -209,16 +211,17 @@ m-t-20 {
     background-color: white;
     border-bottom: white;
     border-right: white;
-  }
-  .col{
-background-color: #6c757d;
-  }
+}
+
+.col {
+    background-color: #6c757d;
+}
+
 // .row1{
 //     height: 70px;
 //     margin-left: 4px;
 // }
 
-.avc{
-  width: 200px;
+.avc {
+    width: 200px;
 }
-
