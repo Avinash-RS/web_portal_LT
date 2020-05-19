@@ -19,32 +19,7 @@ export class CatalogueManagementComponent implements OnInit {
   addCatalogueForm: any;
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
-  courses = [
-    {
-      cataloguename: "Web Development",
-      numberofcourses: "10",
-    },
-    {
-      cataloguename: "Business Analyst",
-      numberofcourses: "30",
-    },
-    {
-      cataloguename: "Code study",
-      numberofcourses: "35",
-    },
-    {
-      cataloguename: "Web Development",
-      numberofcourses: "10",
-    },
-    {
-      cataloguename: "Business Analyst",
-      numberofcourses: "30",
-    },
-    {
-      cataloguename: "Code study",
-      numberofcourses: "35",
-    },
-  ];
+  catalogueList = [];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -54,8 +29,35 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getListCatalogue()
   }
 
+  getListCatalogue() {
+    this.catalogueList = [{
+      cataloguename: "Web Development",
+      numberofcourses: "10",
+    },
+    {
+      cataloguename: "Business Analyst",
+      numberofcourses: "30",
+    },
+    {
+      cataloguename: "Code study",
+      numberofcourses: "35",
+    },
+    {
+      cataloguename: "Web Development",
+      numberofcourses: "10",
+    },
+    {
+      cataloguename: "Business Analyst",
+      numberofcourses: "30",
+    },
+    {
+      cataloguename: "Code study",
+      numberofcourses: "35",
+    },]
+  }
   get f() {
     if (this.showAddCatalogueForm == true) {
       return this.addCatalogueForm.controls;
@@ -76,9 +78,18 @@ export class CatalogueManagementComponent implements OnInit {
     console.log(this.adminDetails)
     this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name, this.addCatalogueForm.value.catalogue_description,
       this.adminDetails._id).subscribe((result: any) => {
-        // this.subCategoryArray = result.data.get_sub_category.message;
         console.log(result)
+        this.addCatalogueForm.reset();
+        if (result && result.data) {
+          if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {
+            this.getListCatalogue();
+            this.alert.openAlert('Catalogue created successfully', null);
+            this.showAddCatalogueForm = false;
+            this.showListCatalogue = true;
+          } else
+            this.alert.openAlert(result.data.create_master_catalogue.message, null);
+        } else
+          this.alert.openAlert('Please try again later', null);
       });
   }
-
 }
