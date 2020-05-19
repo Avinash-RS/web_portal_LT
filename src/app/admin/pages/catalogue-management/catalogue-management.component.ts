@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 })
 export class CatalogueManagementComponent implements OnInit {
 
-
   adminDetails: any;
   addCatalogueForm: any;
   showAddCatalogueForm: boolean = false;
@@ -29,33 +28,28 @@ export class CatalogueManagementComponent implements OnInit {
       name: "Business Analyst",
       numberofcourses: "30",
     },
-    
     {
       cataloguename: "Code study",
       numberofcourses: "35",
     },
-
-
-
   ];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
-    // this.adminDetails = this.gs.checkLogout();
+    this.adminDetails = this.gs.checkLogout();
   }
 
   ngOnInit() {
   }
-
-
 
   get f() {
     if (this.showAddCatalogueForm == true) {
       return this.addCatalogueForm.controls;
     }
   }
+
   gotoAdd() {
     this.showListCatalogue = false;
     this.showAddCatalogueForm = true;
