@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/cor
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
 	selector: 'cdk-user-menu',
@@ -18,6 +19,7 @@ export class UserMenuComponent implements OnInit {
 	@Input() currentUser = null;
 	// currentUser = null;
 	userDetailes: any;
+	userName: string;
 	@HostListener('document:click', ['$event', '$event.target'])
 	onClick(event: MouseEvent, targetElement: HTMLElement) {
 		if (!targetElement) {
@@ -32,12 +34,17 @@ export class UserMenuComponent implements OnInit {
 
 
 	constructor(private elementRef: ElementRef, public services: CommonServicesService, private alert: AlertServiceService,
-		private router: Router, ) {
+		private router: Router, private gs: GlobalServiceService, ) {
 		// getAdminName
 		this.userDetailes =
 			JSON.parse(localStorage.getItem('adminDetails')) || null;
 		// this.currentUser = this.userDetailes.username;
 		// console.log(this.currentUser)
+
+
+		this.gs.adminName.subscribe(message =>
+				this.userName= message
+		)
 	}
 
 	logout() {

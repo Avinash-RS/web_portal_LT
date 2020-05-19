@@ -296,4 +296,8 @@ h2{
 .pading{
   padding-left: 46px;
 }
+.fa-chevron-down:before {
+  // content: "\f078";
+  margin-left: -9px !important;
+}
 
