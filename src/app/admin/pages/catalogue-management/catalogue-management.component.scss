@@ -188,6 +188,15 @@ input:focus {
 //     background-color: $color-subhead;
 // }
 
+.example-container {
+    height: 500px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
 .remove-btn {
     background-color: $color-maroon;
 }
