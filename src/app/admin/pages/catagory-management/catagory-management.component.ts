@@ -412,10 +412,10 @@ export class CatagoryManagementComponent implements OnInit {
   gotoDelete() {
     const inputid = this.level === 1 ? this.selectedCategory.category_id : this.level === 2 ?
       this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
-    const type = this.level === 1 ? 'category' : this.level === 2 ?
-      'subcategory' : 'supersubcategory';
+    const type = this.level === 1 ? 'Category' : this.level === 2 ?
+      'Subcategory' : 'Supersubcategory';
     Swal.fire({
-      title: 'Are you sure want to delete ' + type + ' ?',
+      title: 'Are you sure want to delete ' + type.toLowerCase() + ' ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -432,7 +432,7 @@ export class CatagoryManagementComponent implements OnInit {
           } else if (results.data.delete_catalogue.success === true) {
             Swal.fire(
               'Deleted!',
-              type + '   has been deleted.',
+               type + '   has been deleted.',
               'success'
             );
             this.showHome = true; this.showCourses = false;
