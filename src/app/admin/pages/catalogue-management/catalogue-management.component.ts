@@ -21,6 +21,7 @@ export class CatalogueManagementComponent implements OnInit {
   showListCatalogue = true;
   showCourses = false;
   showCatalogDetail = false;
+  showHeader = false;
   sortCatalogue = 'asc';
   catalogueList = [];
   pagenumber = 0;
@@ -192,7 +193,7 @@ export class CatalogueManagementComponent implements OnInit {
   goToCatalogDetail(c) {
     this.catalog = c;
     this.getCatalogDetail(c);
-    this.showCatalogDetail = true;
+    this.showCatalogDetail = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
   }
 
