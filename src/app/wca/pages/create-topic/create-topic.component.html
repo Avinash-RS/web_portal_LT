@@ -128,9 +128,10 @@
                                                             <span class="padTop1"
                                                                 *ngIf="queryData?.template_details[i]?.name===active?.name">
                                                                 <small>{{fileType}}</small></span>
+                                                                <!-- knowledge check -->
                                                                 <div class="UploadBlock" *ngIf="queryData?.template_details[i].name === 'Knowledge Check'" [class.active]="queryData?.template_details[i]?.name==active?.name">
                                                                     <div style="width:85px">
-                                                                    <button  *ngIf="j?.value?.topicimages[0]"  mat-raised-button class="btnprev" type="button" (click)="openPreviewModal(queryData)">preview</button></div>
+                                                                    <button  *ngIf="j?.value?.topicimages[0]"  mat-raised-button class="btnprev" type="button" (click)="openPreviewModal(createTopicForm,i)">preview</button></div>
                                                                     <div class="mLeft19"><mat-icon class="knowledgeIcon" (click)="sampleDownload()">get_app</mat-icon><label class="fsize12">Download question template</label></div>
                                                                     <div class="mleft3">
                                                                         <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
@@ -166,11 +167,12 @@
                                                                         </div>
                                                                         <div *ngIf="showSubupload">
                                                                             <div class="subTitleUpload" *ngFor="let no of subtitles;let i = index">                                                                                
-                                                                                    <mat-select class="subSelect" placeholder="Language">
-                                                                                        <mat-option class="h30" value="English">English</mat-option>                                                                                        
+                                                                                    <mat-select [(value)]="selected" class="subSelect" placeholder="Language">
+                                                                                        <mat-option *ngFor="let item of language" class="h30" [value]="item.name">{{item.name}}</mat-option>                                                                                        
                                                                                       </mat-select>                                                                                 
                                                                                 <div class="chooseFile">
-                                                                                    <button class="subButton" type="button">Choose file</button>
+                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                                                    <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
                                                                                 </div>
                                                                                   <div class="addSub">
                                                                                     <mat-icon *ngIf="i == 0" (click)="addSubTile('sub')">add_circle</mat-icon>
@@ -201,7 +203,7 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="input-container">
-                                                                        <input class="input-field" type="text" placeholder="Add url" required />
+                                                                        <input class="input-field" type="text" #urlValue placeholder="Add url" required />
                                                                         <button class="input-button" type="button">Browse</button>
                                                                     </div>
                                                                 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatList, MatDialog } from '@angular/material';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatSlideToggleChange } from '@angular/material';
+import * as JSZip from 'jszip';
 declare var $: any;
 
 @Component({
@@ -34,14 +35,20 @@ export class CreateTopicComponent implements OnInit {
   transcriptVal = false;
   showSubupload = false;
   showTransupload = false;
+  isFileContent = false;
+  videoUrl:any;
+  selected = 'English';
   subtitles = [0];
-  transcripts = [0]
+  transcripts = [0];
+  @ViewChild('urlValue') urlValue;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
     "Knowledge Check" : /(\.csv)$/i, 
+    SCROM: /(\.imsmanifest)$/i,
+    Video:/(\.vtt)$/i
   }
 
   fileValidations1 = {
@@ -49,9 +56,9 @@ export class CreateTopicComponent implements OnInit {
     PDF: "(.pdf) are Allowed !!!",
     Word: "(.doc .docx) are Allowed !!!",
     PPT: "(.ppt .pptx) are Allowed !!!",
-    Video: " are Allowed !!!",
+    Video: "(.vtt) are Allowed !!! ",
     Audio: "are Allowed !!!",
-    SCROM: " are Allowed !!!",
+    SCROM: "",
     "Knowledge Check": " (.csv) are Allowed !!!",
     Feedback: ""
   }
@@ -70,6 +77,11 @@ export class CreateTopicComponent implements OnInit {
    },{
     'title':'Duration',
     'star': ['1','2','3','4','5']
+   }]
+
+   language = [{
+     "code": "en",
+     "name": "English"
    }]
 KnowledgeOptions: any = {
   loop: true,
@@ -280,7 +292,21 @@ if (item) {
 }
   }
 
+  // To unzip SCROM files 
+  handleFile(f) {
+  JSZip.loadAsync(f)                                  
+  .then(function(zip) {
+      zip.forEach(function (data) { 
+      });
+  });
+  this.spinner.hide();
+  }
+
   onSelectFile(fileInput: any, item, formdata: FormGroup, index) {    
+    if(item == undefined || item == null){
+      item = {}
+      item.name = "Video"
+    }
     if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
       this.spinner.show();
       var imagepath;
@@ -288,12 +314,35 @@ if (item) {
       var filePath = fileInput.target.files[0].name;
       const reader = new FileReader()      
       allowedExtensions = this.fileValidations[item.name];
-      if (!allowedExtensions.exec(filePath)) {
-        this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
-        this.spinner.hide();
-        fileInput.value = '';
-        return false;
-      } else {        
+      if (item.name != 'SCROM' && !allowedExtensions.exec(filePath)) {
+          this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
+          this.spinner.hide();
+          fileInput.value = '';
+          return false;
+      } 
+      else if (item.name == 'SCROM'){
+        let file = fileInput.target.files[0];
+        let fileReader: FileReader = new FileReader();
+        let that = this;
+        that.isFileContent = false;
+        fileReader.onloadend = function (x) {
+          that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
+          if (!that.isFileContent) {
+            that.spinner.hide();
+            that.toast.warning('Kindly upload a valid SCROM file');
+          }
+          else {
+            // that.uploadDoc(file);
+            var files = fileInput.target.files;
+            for (var i = 0; i < files.length; i++) {
+                that.handleFile(files[i]);
+            }
+            
+          }
+        }
+        fileReader.readAsText(file);
+      }
+      else {        
         if (fileInput && fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
@@ -348,11 +397,27 @@ if (item) {
             formData3.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData3).subscribe((data:any) => {
             this.spinner.hide();
+            if(data && data.success) {
+              this.clearFormArray(formdata.get("topicimages") as FormArray)            
+              for (var m = 0; m < data.message.length; m++) {
+                let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                let obj3 = {
+                  name:'',
+                  image:path,
+                  file:''
+                }
+                if (!formdata.get('topicimages').get(String(m))) {
+                  (formdata.get('topicimages') as FormArray).push(this.topicImages());
+                }
+                formdata.get('topicimages').get(String(m)).setValue(obj3);
+                formdata.get('topictype').setValue(item.name);          
+              }
+             }
+           },err => {
+            this.spinner.hide();
            })
           } else if (item.name === 'Video') {
-            this.spinner.hide();
-          } else if (item.name === 'Audio') {
-            this.spinner.hide();
+            this.formVideo(formdata)
           } else if (item.name === 'SCROM') {
             this.spinner.hide();
           } else if (item.name === 'Knowledge Check') {            
@@ -487,6 +552,38 @@ if (item) {
     });
   }
 
+  vidObj = {
+    "file" : "",
+    "title" : []
+  }
+  formVideo(formdata){
+    const formData4 = new FormData();
+    formData4.append('excel', this.imageView);
+    this.spinner.show();
+    this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data:any) => {
+      this.spinner.show();
+      if(data && data.Message =="Success") {
+        this.clearFormArray(formdata.get("topicimages") as FormArray)
+        let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+        let valueFile = {
+          "code":"en",
+          "name":"English",
+          "file":path2
+        }
+        this.vidObj.file = this.urlValue.nativeElement.value
+        this.vidObj.title.push(valueFile)
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
+        formdata.get('topictype').setValue("Video");
+        this.spinner.hide();
+      }
+    },err => {
+       this.spinner.hide();
+      })
+  }
+
   addTopicFrom(event,type) {
     event.stopPropagation();
     this.submitted = true;
@@ -564,16 +661,9 @@ if (item) {
 
   }
 
-  openPreviewModal(value){
-    if(value.moduledetails){
-      value.moduledetails.forEach((data)=>{
-        if(data.topictype == "KnowledgeCheck"){
-          this.questionPreData = data.topicimages[0]
-        }
-      })      
-    }
-    console.log(value)
+  openPreviewModal(value,index){
     this.displaySlides = false;
+    this.questionPreData = value.value.moduledetails[index].topicimages[0]
     $('#knowlegeCheckModal').modal('show');
     $('#knowlegeCheckModal').appendTo("body");
     setTimeout(()=>{
