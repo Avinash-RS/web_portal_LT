@@ -20,10 +20,11 @@ export class CatalogueManagementComponent implements OnInit {
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
   showCourses: boolean = false;
-  showCatalogDetail: boolean = false;
+  showCatalogueDetail: boolean = false;
   catalogueList = [];
   pagenumber: number = 0;
   catalog: any;
+  showHeader: boolean = false;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -180,8 +181,9 @@ export class CatalogueManagementComponent implements OnInit {
   goToCatalogDetail(c) {
     this.catalog = c;
     this.getCatalogDetail(c);
-    this.showCatalogDetail = true;
+    this.showCatalogueDetail = true;
     this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false
+    this.showHeader = true;
     //add true false variable here - jasper
   }
 
