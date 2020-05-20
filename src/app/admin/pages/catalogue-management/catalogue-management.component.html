@@ -19,22 +19,38 @@
       </div>
     </div>
     <div class="row m-l-5 m-r-5 no_margin" *ngIf="showHeader && showCatalogueDetail">
-      <div class="col-lg-4 col-md-4 col-sm-6 col-6"></div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-12 space2">
-        <div class="cat-name-card width_90 m-l-5 border-radius-5 f_size_14">
+      <div class="col-lg-3 col-md-2 col-sm-6 col-6"></div>
+      <div class="col-lg-2 col-md-2 col-sm-6 col-12 m-r-5">
+        <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
           <strong>{{catalog.catalogue_name}}</strong>
         </div>
-        <!-- <span class="material-icons" style="vertical-align: middle;"
+      </div>
+      <!-- <div class="col-1 space10 ">
+        <mat-icon>info_outline</mat-icon>
+      </div> -->
+
+      <!-- <span class="material-icons" style="vertical-align: middle;"
           matTooltip="{{catalog.catalogue_description || 'Catalogue Description'}}">info_outline
         </span> -->
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-12 space2">
-        <div class="cat-name-card width_90 m-l-5 border-radius-5 f_size_14">
+
+      <div class="col-lg-2 col-md-2 col-sm-6 col-12 m-r-5">
+        <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
           <!-- <strong>{{catalog.user_group_name || User group name}}</strong> -->
           <strong>User group name</strong>
         </div>
       </div>
+      <div class="col-lg-3  col-md-3  col-sm-5 center col-5 space10">
+        <button mat-raised-button class="header-btn add-btn m-r-5 color_white border-radius-5"
+          (click)="getCoursesForCatalog()">
+          <span class="material-icons" style="vertical-align: middle;">add</span>Add
+        </button>
+        <button mat-raised-button class="header-btn remove-btn m-r-5 color_white border-radius-5"
+          (click)="getCoursesInCatalog()">
+          <span class="material-icons" style="vertical-align: middle;">delete</span>Remove
+        </button>
+      </div>
     </div>
+
 
     <hr class="header-line m-l-20 m-r-20 m-b-0">
     <!-- end of button add catalogue -->

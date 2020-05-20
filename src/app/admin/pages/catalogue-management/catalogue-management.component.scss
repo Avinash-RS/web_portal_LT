@@ -161,11 +161,27 @@ input:focus {
 }
 
 .cat-name-card {
-    // width: 90% !important;
     margin-bottom: 10% !important;
-    margin-top: 10% !important;
     border: 1.0px solid $color-blank !important;
     height: 50%;
     text-align: center;
     padding: 10px !important;
+}
+
+.add-btn {
+    background-color: $color-dark-green;
+}
+
+// .edit-btn {
+//     background-color: $color-subhead;
+// }
+
+.remove-btn {
+    background-color: $color-maroon;
+}
+
+.header-btn {
+    height: 30px;
+    font-size: 12px !important;
+    width: 100px;
 }
