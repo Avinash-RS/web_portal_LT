@@ -1,7 +1,9 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
+// tslint:disable-next-line:variable-name
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean,$group_id:String,$group_name: String,$admin: [String]) {
+  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean,$group_id:String,
+    $group_name: String,$admin: [String]) {
     user_registration(
       full_name: $full_name
       email: $email,
@@ -23,6 +25,7 @@ export const user_registration = gql`
     }
   }`;
 
+// tslint:disable-next-line:variable-name
 export const update_group = gql`
 mutation update_group($_id: String!, $group_name: String!, $group_id: String!){
   update_group(_id: $_id,group_name: $group_name, group_id: $group_id) {
@@ -32,6 +35,7 @@ mutation update_group($_id: String!, $group_name: String!, $group_id: String!){
   }
 }`;
 
+// tslint:disable-next-line:variable-name
 export const create_catelogue = gql`
 mutation create_catelogue(
   $input_name: String!,
@@ -53,7 +57,8 @@ mutation create_catelogue(
 }`;
 
 export const createusergroup = gql`
-  mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!, $admin_id: String!) {
+  mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!,
+     $admin_id: String!) {
   createusergroup(group_name: $group_name,group_type: $group_type,
   parent_group_id: $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $admin_id) {
     success
@@ -73,6 +78,7 @@ export const createusergroup = gql`
   }
 }`;
 
+// tslint:disable-next-line:variable-name
 export const update_notification = gql`
 mutation update_notification($report_id: String!){
   update_notification(report_id: $report_id) {
@@ -112,6 +118,7 @@ export const reassigncourse = gql`
     }
   }`;
 
+// tslint:disable-next-line:variable-name
 export const update_catalogue = gql`
   mutation update_catalogue($input_id: String!, $input_name: String!,$input_description: String,
      $input_image: String,$level: Int!){
@@ -123,6 +130,7 @@ export const update_catalogue = gql`
     }
   }`;
 
+// tslint:disable-next-line:variable-name
 export const delete_catalogue = gql`
 mutation delete_catalogue($input_id: String! ,$level: Int!) {
   delete_catalogue(input_id: $input_id,level: $level){
@@ -132,6 +140,7 @@ mutation delete_catalogue($input_id: String! ,$level: Int!) {
   }
 }`;
 
+// tslint:disable-next-line:variable-name
 export const create_master_catalogue = gql`
 mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_description : String!,$creator_id: String!) {
   create_master_catalogue(catalogue_name: $catalogue_name,catalogue_description: $catalogue_description,creator_id:$creator_id ){
@@ -141,14 +150,29 @@ mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_descripti
   }
 }`;
 
-// mutation{
-//   create_master_catalogue(
-//     catalogue_name: "sample 1",
-//     catalogue_description : "sample catalogue number 1",
-//     creator_id : "5e69f4ad139c79bbf14adc8a"
-//   ){
-//     success
-//     error_msg
-//     message
-//   }
-// }
+export const updatecatalogueinfo = gql`
+mutation  updatecatalogueinfo($catalogue_name: String! ,$catalogue_description : String!,$catalogue_id: String!) {
+  updatecatalogueinfo(catalogue_name: $catalogue_name,catalogue_description: $catalogue_description,catalogue_id:$catalogue_id ){
+    success
+    error_msg
+    message
+  }
+}`;
+
+export const coursecataloguemapping = gql`
+mutation coursecataloguemapping($catalogue_id: String! ,$course_id: [String]! , $select_all: Boolean!) {
+  coursecataloguemapping(catalogue_id: $catalogue_id,course_id: $course_id, select_all: $select_all){
+    success
+    error_msg
+    message
+  }
+}`;
+
+export const unmapcoursesfromcatalogue = gql`
+mutation unmapcoursesfromcatalogue($catalogue_id: String! ,$course_id: [String]! , $select_all: Boolean!) {
+  unmapcoursesfromcatalogue(catalogue_id: $catalogue_id,course_id: $course_id, select_all: $select_all ){
+    success
+    error_msg
+    message
+  }
+}`;

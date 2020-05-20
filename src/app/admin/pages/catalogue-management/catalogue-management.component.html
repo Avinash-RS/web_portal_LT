@@ -56,7 +56,7 @@
     <!-- end of button add catalogue -->
 
     <!-- start of Viw List Catalogue - Jasper -->
-    <div class="overflow-auto" *ngIf="showListCatalogue">
+    <div *ngIf="showListCatalogue" class="overflow-auto">
       <!-- /////JASPER -->
       <div class="row m-r-5 m-l-5 m-t-10">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_left">
@@ -64,33 +64,35 @@
         </div>
         <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-12"></div> -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right">
-          <button type="button" class="sort-btn">Sort<mat-icon style="vertical-align: middle;">
+          <button type="button" class="sort-btn" (click)="sort()">Sort
+            <mat-icon style="vertical-align: middle;" *ngIf="sortCatalogue == 'asc'">
               keyboard_arrow_down
-            </mat-icon></button>
+            </mat-icon>
+            <mat-icon style="vertical-align: middle;" *ngIf="sortCatalogue == 'dsc'">
+              keyboard_arrow_up
+            </mat-icon>
+          </button>
         </div>
       </div>
       <br><br>
       <div class="row m-l-5 m-r-5">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-12 pointer" *ngFor="let course of catalogueList; let i = index"
-          (click)="goToCatalogDetail(course)">
-          <div class="catalogue-card m-l-5 border-radius-5">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12"
+          *ngFor="let course of catalogueList | sort : sortCatalogue; let i = index">
+          <div class="catalogue-card m-l-5 border-radius-5 pointer" (click)="goToCatalogDetail(course)">
             <div class="f_size_14">
               <strong>{{course.catalogue_name}}</strong>
             </div>
             <div class="f_size_12 color_blue">
-              {{course.numberofcourses || 33}}
+              {{course.course_count || 0}} Courses
             </div>
           </div>
         </div>
       </div>
-      <br><br>
     </div>
-    <div class="row arrow-drop-down" *ngIf="showListCatalogue">
-      <div *ngIf="catalogueList && catalogueList.length > 0">
-        <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogue()">
-          <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
-        </button>
-      </div>
+    <div class="width_100 arrow-drop-down" *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">
+      <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
     </div>
     <!-- End of View List Catalogue - Jasper -->
 
@@ -99,7 +101,7 @@
 
       <form [formGroup]="addCatalogueForm">
         <div class="row m-l-20 m-r-20">
-          <p class="m-t-10">Create catalogue</p>
+          <p class="m-t-10 f_size_16">Create catalogue</p>
         </div>
         <br><br>
         <div class="row m-l-20 m-r-20">
@@ -112,7 +114,7 @@
         <div class="row m-l-20 m-r-20">
           <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
             <div class="form-group">
-              <textarea style="resize: none;" rows="7" class="inputs border-radius-5 background_trans width_80"
+              <textarea style="resize: none;" rows="7" class="inputs border-radius-5 background_trans width_90"
                 placeholder="Catalogue Description" formControlName="catalogue_description"
                 name="catalogue_description"></textarea>
             </div>
