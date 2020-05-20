@@ -6,6 +6,8 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
     selector: 'app-create-course',
     templateUrl: './create-course.component.html',
@@ -13,6 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateCourseComponent implements OnInit {
 
+    editor = ClassicEditor;
     courseForm: FormGroup;
     imageView: File;
     submitted = false;
