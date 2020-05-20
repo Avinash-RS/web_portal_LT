@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import { MatDialog, MatTableDataSource,MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import Swal from 'sweetalert2';
 
 export interface data {
@@ -25,12 +25,14 @@ export class CatalogueManagementComponent implements OnInit {
 
   adminDetails: any;
   addCatalogueForm: any;
-  showAddCatalogueForm: boolean = false;
-  showListCatalogue: boolean = true;
-  showCourses: boolean = false;
-  showCatalogDetail: boolean = false;
+  showAddCatalogueForm = false;
+  showListCatalogue = true;
+  showCourses = false;
+  showCatalogDetail = false;
+  showHeader = false;
+  sortCatalogue = 'asc';
   catalogueList = [];
-  pagenumber: number = 0;
+  pagenumber = 0;
   catalog: any;
   ELEMENT_DATA: data[] = [];
   // paginator: MatPaginator;
@@ -48,13 +50,13 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getListCatalogue()
+    this.getListCatalogue();
   }
 
   getListCatalogue() {
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
-      // console.log(result?.data?.getallcatalogue?.message)
-      this.catalogueList = result?.data?.getallcatalogue?.message
+      console.log(result?.data?.getallcatalogue?.message);
+      this.catalogueList.push(...result?.data?.getallcatalogue?.message);
     });
     // this.catalogueList = [{
     //   catalogue_name: "Web Development",
@@ -82,86 +84,95 @@ export class CatalogueManagementComponent implements OnInit {
     // },]
   }
 
-  getNextCattalogue() {
-    console.log(++this.pagenumber);
-    this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
-      this.catalogueList.push(...result?.data?.getallcatalogue?.message)
-      // console.log(this.catalogueList)
-    });
-    // this.catalogueList = [{
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // }, {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // }, {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },]
+  // getNextCattalogue() {
+  //   console.log(++this.pagenumber);
+  //   this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
+  //     this.catalogueList.push(...result?.data?.getallcatalogue?.message)
+  //     console.log(this.catalogueList)
+  //   });
+  // this.catalogueList = [{
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // }, {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // }, {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },]
+  // }
+
+  sort() {
+    console.log(this.sortCatalogue);
+    if (this.sortCatalogue === 'asc') {
+      this.sortCatalogue = 'dsc';
+    } else {
+      this.sortCatalogue = 'asc';
+    }
   }
 
   get f() {
-    if (this.showAddCatalogueForm == true) {
+    if (this.showAddCatalogueForm === true) {
       return this.addCatalogueForm.controls;
     }
   }
@@ -185,19 +196,20 @@ export class CatalogueManagementComponent implements OnInit {
             this.alert.openAlert('Catalogue created successfully', null);
             this.showAddCatalogueForm = false;
             this.showListCatalogue = true;
-          } else
+          } else {
             this.alert.openAlert(result.data.create_master_catalogue.message, null);
-        } else
+          }
+        } else {
           this.alert.openAlert('Please try again later', null);
+        }
       });
   }
 
   goToCatalogDetail(c) {
     this.catalog = c;
     this.getCatalogDetail(c);
-    this.showCatalogDetail = true;
-    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false
-    //add true false variable here - jasper
+    this.showCatalogDetail = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
@@ -265,8 +277,8 @@ export class CatalogueManagementComponent implements OnInit {
     this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
     // this.dataSource.paginator = this.paginator;
   }
-   
-  getNextCattalogueDetails(){
+
+  getNextCattalogueDetails() {
     var arr = [{
       sno: "1",
       courses: "Web Development",
@@ -337,4 +349,4 @@ export class CatalogueManagementComponent implements OnInit {
     this.ELEMENT_DATA.push(...arr);
     this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
   }
-  }
+}

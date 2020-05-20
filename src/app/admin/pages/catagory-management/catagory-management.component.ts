@@ -412,8 +412,8 @@ export class CatagoryManagementComponent implements OnInit {
   gotoDelete() {
     const inputid = this.level === 1 ? this.selectedCategory.category_id : this.level === 2 ?
       this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
-    const type = this.level === 1 ? 'Category' : this.level === 2 ?
-      'SubCategory' : 'SuperSubCategory';
+    const type = this.level === 1 ? 'category' : this.level === 2 ?
+      'subcategory' : 'supersubcategory';
     Swal.fire({
       title: 'Are you sure want to delete ' + type + ' ?',
       icon: 'warning',
@@ -427,7 +427,7 @@ export class CatagoryManagementComponent implements OnInit {
           if (results.data.delete_catalogue.success === false) {
             Swal.fire({
               icon: 'error',
-              text: 'Move/Remove the Sub Categories/Courses to delete this ' + type,
+              text: 'Move/Remove the subcategories/courses to delete this ' + type,
             });
           } else if (results.data.delete_catalogue.success === true) {
             Swal.fire(
@@ -572,7 +572,7 @@ export class CatagoryManagementComponent implements OnInit {
         let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
         Swal.fire({
           html:
-            'Selected Courses Successfully moved to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
+            'Selected courses successfully move to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
         })
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
         this.selectCategoryForm?.reset();
