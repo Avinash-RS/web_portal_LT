@@ -1,9 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-enrollment',
@@ -11,6 +13,8 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./enrollment.component.scss']
 })
 export class EnrollmentComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   selectiontype = 'group';
   selectedcheckbox = true;
   selectedcheckbox1 = true;
@@ -60,7 +64,12 @@ export class EnrollmentComponent implements OnInit {
    this.dataSource.data = this.ELEMENT_DATA1;
   }
 
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource1.paginator = this.paginator;
+    this.dataSource1.sort = this.sort;
+  }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -224,6 +233,11 @@ datachange(row, column, templateRef: TemplateRef<any>) {
 
 closedialogbox() {
   this.dialog.closeAll();
+}
+
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
 }
 
 }

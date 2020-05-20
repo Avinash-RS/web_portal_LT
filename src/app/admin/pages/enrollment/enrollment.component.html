@@ -13,7 +13,7 @@
   <label for="sizeDimensions">Individual</label>
 </div>
 <!-- <div class="common-search">
-  <input type="text" placeholder="search" [(ngModel)]="email" >
+  <input type="text" placeholder="search"  (keyup)="applyFilter($event)" [(ngModel)]="email" >
   <span class="material-icons search-icon">search</span>
 </div> -->
 
@@ -26,7 +26,7 @@
       <button [disabled]="selectedcheckbox" (click)="approve()" class="button button5">Approve</button>
     </div>
 
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource" matSort >
       <ng-container matColumnDef="selectall"> 
         <mat-header-cell *matHeaderCellDef>
           <mat-checkbox [(ngModel)] ="selectall"  (change)="selectallchange(selectall)">
@@ -48,7 +48,10 @@
         </mat-cell>
       </ng-container>
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-        <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+          
+          {{ column.header }}</mat-header-cell>
         <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -151,7 +154,7 @@
     <button [disabled]="selectedcheckbox1"   (click)="approve()" class="button button5">Approve</button>
   </div>
   <mat-dialog-content style="width: 1000px">
-    <mat-table #table  [dataSource]="dataSource1">
+    <mat-table #table  [dataSource]="dataSource1" matSort>
     <ng-container matColumnDef="selectall"> 
       <mat-header-cell *matHeaderCellDef>
         <mat-checkbox [(ngModel)] ="selectall1"  (change)="selectallchange1(selectall1)">
@@ -163,7 +166,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="sno"> 
-      <mat-header-cell *matHeaderCellDef>
+      <mat-header-cell *matHeaderCellDef >
        S.No
       </mat-header-cell>
       <mat-cell *matCellDef="let row;let i = index">
@@ -173,7 +176,7 @@
       </mat-cell>
     </ng-container>
     <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
-      <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
       <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
