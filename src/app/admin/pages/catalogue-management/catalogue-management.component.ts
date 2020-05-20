@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator,MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
 
 export interface data {
@@ -40,6 +40,7 @@ export class CatalogueManagementComponent implements OnInit {
 
   displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
   dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+  @ViewChild(MatSort) sort: MatSort
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
@@ -162,7 +163,7 @@ export class CatalogueManagementComponent implements OnInit {
   // },]
   // }
 
-  sort() {
+  sortt() {
     console.log(this.sortCatalogue);
     if (this.sortCatalogue === 'asc') {
       this.sortCatalogue = 'dsc';
@@ -239,29 +240,29 @@ export class CatalogueManagementComponent implements OnInit {
     var arr = [{
       sno: "1",
       courses: "Web Development",
-      category: "10",
+      category: "19",
       language: "english"
     },
     {
-      sno: "1",
+      sno: "2",
       courses: "Web Development",
-      category: "10",
+      category: "9",
       language: "english"
     },
     {
-      sno: "1",
+      sno: "13",
       courses: "Web Development",
-      category: "10",
+      category: "8",
       language: "english"
     },
     {
-      sno: "1",
+      sno: "4",
       courses: "Web Development",
-      category: "10",
+      category: "9",
       language: "english"
     },
     {
-      sno: "1",
+      sno: "5",
       courses: "Web Development",
       category: "10",
       language: "english"
@@ -275,6 +276,7 @@ export class CatalogueManagementComponent implements OnInit {
     ]
     this.ELEMENT_DATA.push(...arr);
     this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+    this.dataSource.sort = this.sort;
     // this.dataSource.paginator = this.paginator;
   }
 
@@ -348,5 +350,6 @@ export class CatalogueManagementComponent implements OnInit {
     ]
     this.ELEMENT_DATA.push(...arr);
     this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+    this.dataSource.sort = this.sort;
   }
 }
