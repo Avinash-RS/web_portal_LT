@@ -145,7 +145,7 @@ export class AdminServicesService {
       variables: {
         group_name: group.group_name, group_type: group.group_type,
         parent_group_id: group.parent_group_id, hierarchy_id: group.hierarchy_id,
-        admin_id: group.admin_id
+        admin_id: group.admin_id, catalogue_id: group.catalogue_id
       }
     });
   }
