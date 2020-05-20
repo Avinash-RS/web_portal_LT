@@ -35,7 +35,14 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueList = [];
   pagenumber = 0;
   catalog: any;
+<<<<<<< HEAD
   ELEMENT_DATA: Data[] = [];
+=======
+  selectedArray: any = [];
+  courseList: any = [];
+  pagenumberCourse: number;
+  ELEMENT_DATA: data[] = [];
+>>>>>>> 33854efbcf5f3d12862fce9afbcf715f0345ce78
   // paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -115,14 +122,19 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
-    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
-      // declare array
-    });
+    console.log("it works");
+    // this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+    // declare array
+    // });
   }
 
   getCoursesForCatalog() { // courses not mapped to catalog - when click add
-    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       // declare array
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      console.log("it adds", this.courseList);
     });
   }
 
@@ -250,4 +262,16 @@ export class CatalogueManagementComponent implements OnInit {
     // this.ELEMENT_DATA.push(...arr);
     // this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
   }
+
+  selectCourse(c, id) {
+    if (c.isChecked == undefined || c.isChecked == false) {
+      c.isChecked = true;
+      this.selectedArray.push(c);
+    }
+    else {
+      c.isChecked = !c.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== c);
+    }
+  }
+
 }

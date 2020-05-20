@@ -132,11 +132,12 @@ input:focus {
 .left {
     z-index: 1 !important;
     box-shadow: 0px 0px 12px #6c757d;
-    overflow : auto !important
+    overflow: auto !important
 }
 
 .right {
     box-shadow: 0px 0px 7px #6c757d;
+
     html {
         overflow: scroll;
         overflow-x: hidden !important;
@@ -174,11 +175,11 @@ hr {
     white-space: normal;
 }
 
-.material-icons {
-    font-size: inherit;
-    padding-right: 5px;
-    font-size: 16px;
-}
+// .material-icons {
+//     font-size: inherit;
+//     padding-right: 5px;
+//     font-size: 16px;
+// }
 
 .landing-background {
     background-color: #f5f5f5;

@@ -708,7 +708,8 @@ export const getcoursesincatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }
@@ -723,7 +724,8 @@ export const getcoursesforcatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }

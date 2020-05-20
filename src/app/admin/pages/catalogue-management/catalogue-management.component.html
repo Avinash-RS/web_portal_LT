@@ -20,9 +20,9 @@
         </button>
       </div>
     </div>
-    <div class="row m-l-5 m-r-5 no_margin" *ngIf="showHeader && showCatalogueDetail">
-      <div class="col-lg-3 col-md-2 col-sm-6 col-6"></div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-12 m-r-5">
+    <div class="row m-l-5 m-r-5 no_margin" *ngIf="showHeader && showCatalogDetail">
+      <div class="col-1"></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-12 m-r-5">
         <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
           <strong>{{catalog.catalogue_name}}</strong>
         </div>
@@ -35,7 +35,7 @@
           matTooltip="{{catalog.catalogue_description || 'Catalogue Description'}}">info_outline
         </span> -->
 
-      <div class="col-lg-2 col-md-2 col-sm-6 col-12 m-r-5">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-12 m-r-5">
         <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
           <!-- <strong>{{catalog.user_group_name || User group name}}</strong> -->
           <strong>User group name</strong>
@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div *ngIf="showCatalogueDetail">
+    <div *ngIf="showCatalogDetail">
 
     </div>
     <!-- End of List Course table-  -->
@@ -223,7 +223,7 @@
 
 </div>
 
-<div class="row" *ngIf="showCourses">
+<div class="row m-r-5 m-l-5 overflow-auto" *ngIf="showCourses">
   <!-- start of left hand side card view -->
   <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left">
   </div>
@@ -232,12 +232,84 @@
   <!-- start of right hand side card view -->
   <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 cardheight right">
     <!-- start of header row -->
+    <div class="row m-l-5 m-r-5 no_margin" *ngIf="showHeader && showCatalogDetail">
+      <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-6"></div> -->
+      <div class="col-1"></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-12 m-r-5">
+        <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
+          <strong>{{catalog.catalogue_name}}</strong>
+        </div>
+      </div>
+      <!-- <div class="col-1 space10 ">
+        <mat-icon>info_outline</mat-icon>
+      </div> -->
+
+      <!-- <span class="material-icons" style="vertical-align: middle;"
+          matTooltip="{{catalog.catalogue_description || 'Catalogue Description'}}">info_outline
+        </span> -->
+
+      <div class="col-lg-3 col-md-3 col-sm-6 col-12 m-r-5">
+        <div class="cat-name-card space10 width_90 m-l-5 border-radius-5 f_size_14">
+          <!-- <strong>{{catalog.user_group_name || User group name}}</strong> -->
+          <strong>User group name</strong>
+        </div>
+      </div>
+      <div class="col-lg-3  col-md-3  col-sm-5 center float_right col-5 space10">
+        <button mat-raised-button class="header-btn edit-btn m-r-5 color_white border-radius-5">
+          <span class="material-icons" style="vertical-align: middle;">edit</span>Edit
+        </button>
+      </div>
+    </div>
 
     <!-- end of  header row -->
 
     <!-- hr tag -->
 
+    <hr class="header-line m-l-20 m-r-20 m-b-0">
+
     <!-- start of view courses row -->
+
+    <div class="row m-l-5 m-r-5">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+        <h3 class="font-display m-b-0 color_blue">295 courses > </h3>
+        <!-- <h3 class="font-display color_blue m-b-0 m-l-20">{{course_count}} {{course_count <= 1  ? 'Course > ' : 'Courses >'}}
+          </h3> -->
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
+        <h4>Select All
+          <!-- <span class="material-icons">
+            check_box
+          </span> -->
+          <span class="material-icons" style="vertical-align: middle;">check_box_outline_blank</span>
+        </h4>
+      </div>
+    </div>
+    <div class="m-r-20 m-l-20">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
+          *ngFor="let courses of courseList; let i = index">
+          <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
+            (click)="selectCourse(courses,i+'c')">
+          <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
+            <img src="assets/courses/selectimagefull.png" width="100%" height="100px">
+          </div>
+          <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 m-t-10">
+            {{courses.course_name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-l-20 m-r-20">
+      <div class="col-md-4 col-sm-12"></div>
+      <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+        <button id="SaveCatalogue" mat-stroked-button
+          class="width_80 border-radius-5 background-blue color_white center">Save</button>
+      </div>
+      <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+        <button id="cancel" mat-stroked-button
+          class="width_80 border-radius-5 color_blue blue_border center">Cancel</button>
+      </div>
+    </div>
 
     <!-- end of  view courses row -->
 
