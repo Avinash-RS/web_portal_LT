@@ -122,11 +122,11 @@ input:focus {
     color: $color-red;
 }
 
-.material-icons {
-    font-size: inherit;
-    padding-right: 5px;
-    font-size: 16px;
-}
+// .material-icons {
+//     font-size: inherit;
+//     padding-right: 5px;
+//     font-size: 16px;
+// }
 
 .sort-btn {
     border-radius: 5px;
@@ -135,6 +135,7 @@ input:focus {
     border-width: thin;
     border-color: $color-blank;
     background-color: $color-light-grey;
+
     .mat-icon {
         font-size: 25px !important;
         color: $color-blank;
@@ -156,10 +157,12 @@ input:focus {
     position: absolute;
     bottom: 0px;
     background-color: $color-white;
+
     mat-icon {
         font-size: 40px;
     }
 }
+
 .cat-name-card {
     margin-bottom: 10% !important;
     border: 1.0px solid $color-blank !important;
@@ -172,9 +175,13 @@ input:focus {
     background-color: $color-dark-green;
 }
 
-// .edit-btn {
-//     background-color: $color-subhead;
-// }
+.edit-btn {
+    background-color: $color-subhead;
+
+    .material-icons {
+        font-size: 12px !important;
+    }
+}
 
 .remove-btn {
     background-color: $color-maroon;
@@ -184,4 +191,26 @@ input:focus {
     height: 35px;
     font-size: 12px !important;
     width: 100px;
+}
+
+.containerOverlay {
+    .overlay {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        overflow: hidden;
+        top: 0vh;
+        left: 10%;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .pointer {
+        width: 80% !important;
+    }
+}
+
+.course-image {
+    height: 100px;
+    object-fit: cover;
 }

@@ -26,10 +26,13 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueList = [];
   pagenumber = 0;
   catalog: any;
+  selectedArray: any = [];
+  courseList: any = [];
+  pagenumberCourse: number;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
-              private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-              private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
@@ -75,76 +78,76 @@ export class CatalogueManagementComponent implements OnInit {
   //     this.catalogueList.push(...result?.data?.getallcatalogue?.message)
   //     console.log(this.catalogueList)
   //   });
-    // this.catalogueList = [{
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // }, {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // }, {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },]
+  // this.catalogueList = [{
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // }, {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // }, {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },
+  // {
+  //   catalogue_name: "Web Development",
+  //   numberofcourses: "10",
+  // },
+  // {
+  //   catalogue_name: "Business Analyst",
+  //   numberofcourses: "30",
+  // },
+  // {
+  //   catalogue_name: "Code study",
+  //   numberofcourses: "35",
+  // },]
   // }
 
   sort() {
@@ -198,20 +201,37 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
-    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
-      // declare array
-    });
+    console.log("it works");
+    // this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+    // declare array
+    // });
   }
 
   getCoursesForCatalog() { // courses not mapped to catalog - when click add
-    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       // declare array
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      console.log("it adds", this.courseList);
     });
   }
 
-  getCatalogDetail(c) { // courses mapped to catalog - when click remove
+  getCatalogDetail(c) { // get catalog by id
     this.adminservice.getallcatalogueById(c.catalogue_id).subscribe((result: any) => {
       // declare array
     });
   }
+
+  selectCourse(c, id) {
+    if (c.isChecked == undefined || c.isChecked == false) {
+      c.isChecked = true;
+      this.selectedArray.push(c);
+    }
+    else {
+      c.isChecked = !c.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== c);
+    }
+  }
+
 }
