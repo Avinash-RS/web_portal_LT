@@ -255,8 +255,10 @@ h2{
 .showmore{
   text-align: right !important;
   color: $color-dark-green ;
+  cursor: pointer !important;
   font-size: 12px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 // silder css
@@ -317,4 +319,6 @@ h2{
   flex: 0 0 100%;
   max-width: 100%;
 }
-
+.close{
+  float: right !important;
+}
