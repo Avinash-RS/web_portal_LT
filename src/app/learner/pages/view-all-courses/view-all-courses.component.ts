@@ -93,6 +93,7 @@ export class ViewAllCoursesComponent implements OnInit {
     }else if (category.level == 2){
       this.isSelected(category)
       this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) : this.Lvl2CatId.push(category);
+      console.log(this.Lvl2CatId,'lvl2')
       this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id)
     }else if ((category.level == 3)){
       this.isSelected(category)
@@ -102,7 +103,7 @@ export class ViewAllCoursesComponent implements OnInit {
       this. getthreeLevelCat();
     }
 
-    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.Lvl2CatId).subscribe((result: any) => {
+    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.level2selectedID).subscribe((result: any) => {
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
       }
