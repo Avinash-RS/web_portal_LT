@@ -7,7 +7,7 @@ import {
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
-  , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id
+  , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcoursesforcatalogue, getcoursesincatalogue
 } from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -314,14 +314,33 @@ export class AdminServicesService {
     });
   }
 
-  getallcatalogue_by_id(id) {
+  getallcatalogueById(id) {
     return this.Apollo.query({
-      query: getallcatalogue,
+      query: getallcatalogue_by_id,
       variables: {
         catalogue_id: id,
       }
     });
   }
 
+  getCourseForCatalogue(catalogue_id, pagenumber) {
+    return this.Apollo.query({
+      query: getcoursesforcatalogue,
+      variables: {
+        catalogue_id: catalogue_id,
+        pagenumber: pagenumber
+      }
+    });
+  }
+
+  getCourseInCatalogue(catalogue_id, pagenumber) {
+    return this.Apollo.query({
+      query: getcoursesincatalogue,
+      variables: {
+        catalogue_id: catalogue_id,
+        pagenumber: pagenumber
+      }
+    });
+  }
   // End of Catalogue Management
 }

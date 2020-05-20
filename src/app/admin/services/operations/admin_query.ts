@@ -689,3 +689,33 @@ export const getallcatalogue = gql`
       }
     }
 }`;
+
+export const getcoursesincatalogue = gql`
+   query getcoursesincatalogue($catalogue_id: String!, $pagenumber: Int!) {
+    getcoursesincatalogue(catalogue_id: $catalogue_id, pagenumber: $pagenumber){
+      success
+      total_count
+      error_msg
+      message{
+        course_id
+        course_name
+        catalogue_description
+        course_img_url
+      }
+    }
+}`;
+
+export const getcoursesforcatalogue = gql`
+   query getcoursesforcatalogue($catalogue_id: String!, $pagenumber: Int!) {
+    getcoursesforcatalogue(catalogue_id: $catalogue_id, pagenumber: $pagenumber){
+      success
+      total_count
+      error_msg
+      message{
+        course_id
+        course_name
+        catalogue_description
+        course_img_url
+      }
+    }
+}`;

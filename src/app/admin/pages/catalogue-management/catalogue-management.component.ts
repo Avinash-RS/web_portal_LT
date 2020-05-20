@@ -19,6 +19,7 @@ export class CatalogueManagementComponent implements OnInit {
   addCatalogueForm: any;
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
+  showCourses: boolean = false;
   catalogueList = [];
   pagenumber: number = 0;
 
@@ -172,5 +173,28 @@ export class CatalogueManagementComponent implements OnInit {
         } else
           this.alert.openAlert('Please try again later', null);
       });
+  }
+
+  goToCatalogDetail(c) {
+    this.getCatalogDetail(c);
+    //add true false variable here - jasper
+  }
+
+  getCoursesInCatalog(catalog) { // courses mapped to catalog - when click remove
+    this.adminservice.getCourseInCatalogue(catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+      // declare array
+    });
+  }
+
+  getCoursesForCatalog(catalog) { // courses not mapped to catalog - when click add
+    this.adminservice.getCourseForCatalogue(catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+      // declare array
+    });
+  }
+
+  getCatalogDetail(c) { // courses mapped to catalog - when click remove
+    this.adminservice.getallcatalogueById(c.catalogue_id).subscribe((result: any) => {
+      // declare array
+    });
   }
 }

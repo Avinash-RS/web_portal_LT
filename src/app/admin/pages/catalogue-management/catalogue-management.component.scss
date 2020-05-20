@@ -7,9 +7,7 @@ html {
 
 ::-webkit-scrollbar {
     width: 0px;
-    /* Remove scrollbar space */
     background: transparent;
-    /* Optional: just make scrollbar invisible */
 }
 
 @media screen and (min-width: 320px) and (max-width:1024px) {
@@ -42,6 +40,16 @@ html {
 hr {
     height: 1px;
     background-color: $box-shadow;
+}
+
+.left {
+    z-index: 1 !important;
+    box-shadow: 0px 0px 12px $box-shadow;
+    overflow: auto !important
+}
+
+.right {
+    box-shadow: 0px 0px 7px $box-shadow;
 }
 
 // .m-t-20 {
@@ -115,12 +123,12 @@ input:focus {
     color: $color-red;
 }
 
-.heading {
-    color: #1F3777;
-    font-weight: 900;
-    padding-left: 70px;
-    padding-top: 10px;
-}
+// .heading {
+//     color: #1F3777;
+//     font-weight: 900;
+//     padding-left: 70px;
+//     padding-top: 10px;
+// }
 
 // .material-icons{
 //     margin-left: 800px;

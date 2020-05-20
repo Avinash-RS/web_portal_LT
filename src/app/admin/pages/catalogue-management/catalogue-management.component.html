@@ -5,7 +5,7 @@
   </ol>
 </nav>
 
-<div class="row width_90 center space2">
+<div class="row width_90 center space2" *ngIf="!showCourses">
 
   <div class="card col-12 col-lg-12 col-md-12 col-sm-12 cardheight">
     <!-- start of button - add catalogue ( row ) -->
@@ -38,7 +38,8 @@
       </div>
       <br><br>
       <div class="row m-l-5 m-r-5">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let course of catalogueList; let i = index">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12 pointer" *ngFor="let course of catalogueList; let i = index"
+        (click) = "goToCatalogDetail(course)">
           <div class="catalogue-card m-l-5 border-radius-5">
             <div class="f_size_14">
               <strong>{{course.catalogue_name}}</strong>
@@ -114,3 +115,27 @@
   </div>
 
 </div>
+
+
+<div class="row" *ngIf="showCourses">
+  <!-- start of left hand side card view -->
+  <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left">
+  </div>
+  <!-- end of left hand side card view -->
+
+  <!-- start of right hand side card view -->
+  <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 cardheight right">
+    <!-- start of header row -->
+
+    <!-- end of  header row -->
+
+    <!-- hr tag -->
+
+    <!-- start of view courses row -->
+
+    <!-- end of  view courses row -->
+
+  </div>
+  <!-- end of right hand side card view -->
+</div>
+<br><br>
