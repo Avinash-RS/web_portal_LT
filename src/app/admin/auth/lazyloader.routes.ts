@@ -12,8 +12,9 @@ import { WcaModule } from '../../wca/wca.module';
 import { WcaComponent } from '../../wca/pages/wca/wca.component';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
-
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
+import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
+
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
         { path: 'dashboard', component: DashboardComponent, data: { title: 'Admin Dashboard' } },
@@ -28,6 +29,7 @@ export const appRoutes: Routes = [{
         { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, },
         { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Catalogue Management' }, },
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, },
+        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Enrollment' }, },
 
         {
             path:'Wca',

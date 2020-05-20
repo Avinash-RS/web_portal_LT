@@ -5,21 +5,6 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material';
 
-export interface PeriodicElement {
-  course: string;
-  fullname: string;
-  date_received: string;
-  usergroup: string;
-  username: string;
-}
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: 'app-enrollment',
   templateUrl: './enrollment.component.html',
@@ -27,42 +12,59 @@ export interface PeriodicElement {
 })
 export class EnrollmentComponent implements OnInit {
   selectiontype = 'group';
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  selectedcheckbox = true;
+  selectedcheckbox1 = true;
+  selection = new SelectionModel<any>(true, []);
   ELEMENT_DATA1: any[] = [
-    {position1: 1, name: 'ffff', weight: 1.0079, symbol: 'H'},
-    {position1: 2, name: 'vvv', weight: 4.0026, symbol: 'He'},
-    {position1: 3, name: 'vv', weight: 6.941, symbol: 'Li'},
-    {position1: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position1: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position1: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position1: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position1: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position1: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position1: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+    {position: 1, name: 'ffff', weight: 1.0079, symbol: 'H'},
+    {position: 2, name: 'vvv', weight: 4.0026, symbol: 'He'},
+    {position: 3, name: 'vv', weight: 6.941, symbol: 'Li'},
+    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  ];
+
+  selectall: any;
+  ELEMENT_DATA2: any[] = [
+    {position1: 11, name1: 'ffff', weight: 1.0079, symbol: 'H', symbol1 : 'ee'},
+    {position1: 22, name1: 'vvv', weight: 4.0026, symbol: 'He' , symbol1 : 'ee'},
+    {position1: 3, name1: 'vv', weight: 6.941, symbol: 'Li',symbol1 : 'ee' },
+    {position1: 4, name1: 'Beryllium', weight: 9.0122, symbol: 'Be',symbol1 : 'ee'},
+    {position1: 5, name1: 'Boron', weight: 10.811, symbol: 'B',symbol1 : 'ee'},
+    {position1: 6, name1: 'Carbon', weight: 12.0107, symbol: 'C',symbol1 : 'ee'},
+    {position1: 7, name1: 'Nitrogen', weight: 14.0067, symbol: 'N',symbol1 : 'ee'},
+    {position1: 8, name1: 'Oxygen', weight: 15.9994, symbol: 'O',symbol1 : 'ee'},
+    {position1: 9, name1: 'Fluorine', weight: 18.9984, symbol: 'F',symbol1 : 'ee'},
+    {position1: 10, name1: 'Neon', weight: 20.1797, symbol: 'Ne',symbol1 : 'ee'},
   ];
 
   columns = [
     { columnDef: 'position', header: 'Date Received',    cell: (element: any) => `${element.position}` },
-    { columnDef: 'name',     header: 'Full Name',   cell: (element: any) => `${element.name}`     },
-    { columnDef: 'weight',   header: 'Course', cell: (element: any) => `${element.weight}`   },
+    { columnDef: 'name',     header: 'Course',   cell: (element: any) => `${element.name}`     },
+    { columnDef: 'weight',   header: 'Enrollments', cell: (element: any) => `${element.weight}`   },
     { columnDef: 'symbol',   header: 'User Group', cell: (element: any) => `${element.symbol}`   },
   ];
-
+  columns1: any;
+  displayedColumns1: any;
   displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
-  dataSource1 = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA1);
-
+  dataSource = new MatTableDataSource<any>();
+  dataSource1 = new MatTableDataSource<any>();
   constructor(private router: Router, private dialog: MatDialog) {
    }
 
   ngOnInit() {
-
+   this.dataSource.data = this.ELEMENT_DATA1;
   }
 
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource1.data.length;
+    const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
@@ -78,20 +80,33 @@ export class EnrollmentComponent implements OnInit {
   //   if (!row) {
   //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
   //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position1 + 1}`;
   // }
 
 radiobuttonchange() {
+  this.selectall = false;
+  this.selectedcheckbox = true ;
+  this.dataSource.data.forEach(element => { element.isChecked = false; })
   if (this.selectiontype === 'group') {
-  } else {
     this.columns = [
-      { columnDef: 'position1', header: 'Date Received',    cell: (element: any) => `${element.position}` },
+      { columnDef: 'position', header: 'Date Received',    cell: (element: any) => `${element.position}` },
       { columnDef: 'name',     header: 'Course',   cell: (element: any) => `${element.name}`     },
       { columnDef: 'weight',   header: 'Enrollments', cell: (element: any) => `${element.weight}`   },
       { columnDef: 'symbol',   header: 'User Group', cell: (element: any) => `${element.symbol}`   },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
-    this.dataSource1 = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA1);
+    this.dataSource.data = this.ELEMENT_DATA1;
+  } else {
+    this.columns = [
+      { columnDef: 'position1', header: 'Date Received',    cell: (element: any) => `${element.position1}` },
+      { columnDef: 'name1',     header: 'Full Name',   cell: (element: any) => `${element.name1}`     },
+      { columnDef: 'weight',   header: 'Course', cell: (element: any) => `${element.weight}`   },
+      { columnDef: 'symbol',   header: 'User Group', cell: (element: any) => `${element.symbol}`   },
+      { columnDef: 'symbol1',   header: 'User Name', cell: (element: any) => `${element.symbol}`   },
+    ];
+    this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
+    this.dataSource.data = this.ELEMENT_DATA2 ;
+    console.log(this.dataSource1);
   }
 
 }
@@ -99,25 +114,47 @@ radiobuttonchange() {
 
 selectallchange(value) {
   console.log(this.dataSource1);
-  this.ELEMENT_DATA1.forEach(element => {
+  this.dataSource.data.forEach(element => {
     element.isChecked = value;
   });
-  this.dataSource1 = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA1); }
+  if (value === true) { this.selectedcheckbox = false; } else { this.selectedcheckbox = true;}
+ }
 
 checkboxchange(row?) {
-  if (row.isChecked === undefined || row.isChecked === false) {
-    row.isChecked = true;
-    // this.selectedArray.push(row);
-  } else {
-    row.isChecked = !row.isChecked;
-    // this.selectedArray = this.selectedArray.filter(i => i !== row);
-  }
+  const result = this.dataSource.data.some(element => element.isChecked === true );
+  console.log(result);
+  if (result === true) {
+    this.selectedcheckbox = false;
+  } else {this.selectedcheckbox = true; }
+  // if (row.isChecked === undefined || row.isChecked === false) {
+  //   row.isChecked = true;
+  //   // this.selectedArray.push(row);
+  // } else {
+  //   row.isChecked = !row.isChecked;
+  //   // this.selectedArray = this.selectedArray.filter(i => i !== row);
+  // }
 }
 
 
+selectallchange1(value) {
+  console.log(this.dataSource1);
+  this.dataSource1.data.forEach(element => {
+    element.isChecked = value;
+  });
+  if (value === true) { this.selectedcheckbox1 = false; } else { this.selectedcheckbox1 = true;}
+ }
+
+checkboxchange1(row?) {
+  const result = this.dataSource1.data.some(element => element.isChecked === true );
+  console.log(result);
+  if (result === true) {
+    this.selectedcheckbox1 = false;
+  } else {this.selectedcheckbox1 = true; }
+}
+
 approve() {
   Swal.fire({
-    title: '<div style="background:yellow">Approval Confirmation</div>',
+    title: '<div>Approval Confirmation</div>',
     icon: 'warning',
     text: 'Are you sure want to proceed?',
     showCancelButton: true,
@@ -138,7 +175,7 @@ approve() {
 
 reject() {
   Swal.fire({
-    title: '<h2 style="background-color:yellow">Reason for Rejection</h2>',
+    title: '<div> Reason for Rejection</div>',
     // title: 'Reason for Rejection',
     input: 'textarea',
     showCancelButton: true,
@@ -164,10 +201,23 @@ datachange(row, column, templateRef: TemplateRef<any>) {
   if (column.columnDef === 'symbol') {
     this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: 'ga8umba' } });
   } else if (column.columnDef === 'course_name') {
-    this.router.navigateByUrl('/Admin/auth/userManagement', { state: { course_id: 'vv' } });
-  } else if (column.columnDef === 'fullname') {
-    this.router.navigateByUrl('/Admin/auth/userManagement', { state: { user_id: 'vv' } });
+    // let details = {
+    //   id: this.course.course_id,
+    //   wishlist: this.course.wishlisted,
+    //   wishlist_id: this.course.wishlist_id
+    // };
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
+  } else if (column.columnDef === 'name1') {
+    this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { user_id: 'vv' } });
   } else if (column.header === 'Enrollments') {
+    this.columns1 = [
+      { columnDef: 'name1',     header: 'Full Name',   cell: (element: any) => `${element.name1}`     },
+      { columnDef: 'weight',   header: 'Course', cell: (element: any) => `${element.weight}`   },
+      { columnDef: 'symbol',   header: 'User Group', cell: (element: any) => `${element.symbol}`   },
+      { columnDef: 'symbol1',   header: 'User Name', cell: (element: any) => `${element.symbol}`   },
+    ];
+    this.displayedColumns1 = (['selectall', 'sno']).concat(this.columns1.map(c => c.columnDef));
+    this.dataSource1.data = this.ELEMENT_DATA2;
     this.dialog.open(templateRef);
   }
 }

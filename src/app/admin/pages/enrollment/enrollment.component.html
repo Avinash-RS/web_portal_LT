@@ -2,6 +2,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Learner Management</li>
     <li class="breadcrumb-item active" aria-current="page">Course Enrollment</li>
   </ol>
 </nav>
@@ -21,11 +22,11 @@
 
 <div class="example-container mat-elevation-z8">
     <div class="buttons">
-      <span (click)="reject()" class="button button8">Reject</span>
-      <span (click)="approve()" class="button button5">Approve</span>
+      <button [disabled]="selectedcheckbox"  (click)="reject()" class="button button8">Reject</button>
+      <button [disabled]="selectedcheckbox" (click)="approve()" class="button button5">Approve</button>
     </div>
 
-    <mat-table #table [dataSource]="dataSource1">
+    <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="selectall"> 
         <mat-header-cell *matHeaderCellDef>
           <mat-checkbox [(ngModel)] ="selectall"  (change)="selectallchange(selectall)">
@@ -133,6 +134,9 @@
     </mat-row>
   </mat-table>  -->
 </div>
+
+<mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+</mat-paginator>
 </div>
 </div>
 
@@ -142,20 +146,19 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
  
-
-  <mat-dialog-content>
-    <div class="buttons">
-      <span (click)="reject()" class="button button8">Reject</span>
-      <span (click)="approve()" class="button button5">Approve</span>
-    </div>
-    <mat-table #table style="width: 1000px" [dataSource]="dataSource1">
+  <div class="buttons">
+    <button [disabled]="selectedcheckbox1"   (click)="reject()" class="button button8">Reject</button>
+    <button [disabled]="selectedcheckbox1"   (click)="approve()" class="button button5">Approve</button>
+  </div>
+  <mat-dialog-content style="width: 1000px">
+    <mat-table #table  [dataSource]="dataSource1">
     <ng-container matColumnDef="selectall"> 
       <mat-header-cell *matHeaderCellDef>
-        <mat-checkbox [(ngModel)] ="selectall"  (change)="selectallchange(selectall)">
-        </mat-checkbox>Select all
+        <mat-checkbox [(ngModel)] ="selectall1"  (change)="selectallchange1(selectall1)">
+        </mat-checkbox> <br>Select all
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+        <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange1(row)">
         </mat-checkbox>
       </mat-cell>
     </ng-container>
@@ -169,13 +172,15 @@
         <span class="mobile-data"> {{i+1}}</span>
       </mat-cell>
     </ng-container>
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+    <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
       <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
       <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row   *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+    <mat-row   *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
   </mat-table>
   </mat-dialog-content>
+  <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+  </mat-paginator>
   <br>
 </ng-template>

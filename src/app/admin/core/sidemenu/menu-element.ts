@@ -60,14 +60,26 @@ export const menus = [
             }
         ]
     }, 
+
+
+
     {
-        'name': 'Enrollment',
+        'name': 'Learner Management',
         'icon': 'list',
-        'link': 'enrollment',
+        'link': false,
         'open': false,
-        'chip': false,
-        
-    },
+        'sub': [
+            {
+                'name': 'Course Enrollment',
+                'icon': 'list',
+                'link': 'enrollment',
+                'open': false,
+                'chip': false,
+            },
+        ]
+    }, 
+
+  
 
   
 ];

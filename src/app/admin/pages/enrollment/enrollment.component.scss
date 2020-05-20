@@ -36,10 +36,10 @@
   }
 }
 
-mat-header-cell {
-  font-size: 14px;
-  color: $color-blank;
-}
+// mat-header-cell {
+//   font-size: 14px;
+//   color: $color-blank;
+// }
 
 .avatar {
   width: 25%;
@@ -47,16 +47,6 @@ mat-header-cell {
   border-radius: 50%;
   display: block;
   margin: auto;
-}
-
-.profileTable {
-
-  th,
-  td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ddd !important;
-  }
 }
 
 table {
@@ -81,12 +71,12 @@ table {
     margin: 1px;
   }
 
-  .mat-header-cell:last-of-type {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: initial;
-    text-align: center;
-  }
+  // .mat-header-cell:last-of-type {
+  //   padding-top: 10px;
+  //   padding-bottom: 10px;
+  //   display: initial;
+  //   text-align: center;
+  // }
 }
 
 .mat-table {
@@ -317,14 +307,6 @@ table {
 //     background-color:#007bff
 // }
 
-.mat-drawer-container {
-  background-color: none !important;
-  color: none !important;
-}
-.swal2-header{
-  background-color: yellow;
-}
-
 /* TOGGLE STYLING */
 .toggle {
   float: right;
@@ -447,7 +429,9 @@ table {
 .search-query:focus + button {
     z-index: 3;   
 }
-
+/deep/.swal2-header{
+  // background-color: yellow !important;
+}
 
 //   .common-search input{
 //     width: 50%;
