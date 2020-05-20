@@ -1,0 +1,181 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Course Enrollment</li>
+  </ol>
+</nav>
+<div   class="toggle" >
+  <input type="radio"  [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="group" id="sizeWeight" checked="checked" />
+  <label for="sizeWeight">User Group</label> <br>
+  <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="individual" id="sizeDimensions" />
+  <label for="sizeDimensions">Individual</label>
+</div>
+<!-- <div class="common-search">
+  <input type="text" placeholder="search" [(ngModel)]="email" >
+  <span class="material-icons search-icon">search</span>
+</div> -->
+
+<div class="container">
+  <div class="p-5px">
+
+<div class="example-container mat-elevation-z8">
+    <div class="buttons">
+      <span (click)="reject()" class="button button8">Reject</span>
+      <span (click)="approve()" class="button button5">Approve</span>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource1">
+      <ng-container matColumnDef="selectall"> 
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [(ngModel)] ="selectall"  (change)="selectallchange(selectall)">
+          </mat-checkbox>Select all
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="sno"> 
+        <mat-header-cell *matHeaderCellDef>
+         S.No
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row;let i = index">
+          <span class="mobile-label">S.No</span>
+          <span class="desktop-data"> {{i+1}}</span>
+          <span class="mobile-data"> {{i+1}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
+        <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row   *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+    </mat-table>
+
+  <!-- <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Selectall">
+      <mat-header-cell *matHeaderCellDef>
+        Select
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobile-label">Select</span>
+        <mat-checkbox (change)="checkboxchange(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="sno">
+      <mat-header-cell *matHeaderCellDef>
+        Select
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobile-label">Select</span>
+        <mat-checkbox (change)="checkboxchange(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="date_received">
+      
+
+      <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i> User ID
+ 
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">User ID</span> 
+
+        <span class="desktop-data"> {{element.date_received}}</span>
+        <span class="mobile-data"> {{element.date_received}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fullname">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">User Name</span>
+        <span class="desktop-data"> {{element.fullname}}</span>
+        <span class="mobile-data"> {{element.fullname}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+      <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Email ID</span>
+        <span class="desktop-data"> {{element.course || 'NA'}}</span>
+        <span class="mobile-data"> {{element.course || 'NA'}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="usergroup">
+      <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+        <span class="desktop-data"> {{element.usergroup || 'NA'}}</span>
+        <span class="mobile-data">&nbsp;&nbsp; {{element.usergroup || 'NA'}}</span>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+        <span class="desktop-data"> {{element.username || 'NA'}}</span>
+        <span class="mobile-data">&nbsp;&nbsp; {{element.username || 'NA'}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+    </mat-row>
+  </mat-table>  -->
+</div>
+</div>
+</div>
+
+
+<ng-template #enrolldialog   class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+ 
+
+  <mat-dialog-content>
+    <div class="buttons">
+      <span (click)="reject()" class="button button8">Reject</span>
+      <span (click)="approve()" class="button button5">Approve</span>
+    </div>
+    <mat-table #table style="width: 1000px" [dataSource]="dataSource1">
+    <ng-container matColumnDef="selectall"> 
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox [(ngModel)] ="selectall"  (change)="selectallchange(selectall)">
+        </mat-checkbox>Select all
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sno"> 
+      <mat-header-cell *matHeaderCellDef>
+       S.No
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index">
+        <span class="mobile-label">S.No</span>
+        <span class="desktop-data"> {{i+1}}</span>
+        <span class="mobile-data"> {{i+1}}</span>
+      </mat-cell>
+    </ng-container>
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
+      <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row   *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+  </mat-table>
+  </mat-dialog-content>
+  <br>
+</ng-template>

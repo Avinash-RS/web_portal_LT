@@ -34,8 +34,8 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
-import { GroupManagementComponent } from '../pages/group-management/group-management.component';
-
+import { GroupManagementComponent } from '@admin/pages/group-management/group-management.component';
+import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 
 @NgModule({
     imports: [
@@ -88,7 +88,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
     declarations: [DndDirective, CatalogueManagementComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
-        CatagoryManagementComponent],
+        CatagoryManagementComponent,EnrollmentComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

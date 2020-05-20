@@ -60,5 +60,14 @@ export const menus = [
             }
         ]
     }, 
+    {
+        'name': 'Enrollment',
+        'icon': 'list',
+        'link': 'enrollment',
+        'open': false,
+        'chip': false,
+        
+    },
+
   
 ];
