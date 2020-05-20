@@ -280,6 +280,7 @@
           <!-- <span class="material-icons">
             check_box
           </span> -->
+          <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
           <span class="material-icons" style="vertical-align: middle;">check_box_outline_blank</span>
         </h4>
       </div>
@@ -303,7 +304,7 @@
       <div class="col-md-4 col-sm-12"></div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="SaveCatalogue" mat-stroked-button
-          class="width_80 border-radius-5 background-blue color_white center">Save</button>
+          class="width_80 border-radius-5 background-blue color_white center" (click) = "saveCourse()">Save</button>
       </div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="cancel" mat-stroked-button

@@ -31,18 +31,16 @@ export class CatalogueManagementComponent implements OnInit {
   showCatalogDetail = false;
   showHeader = false;
   loadingCatalogue = false;
+  checked = false;
   sortCatalogue = 'asc';
   catalogueList = [];
   pagenumber = 0;
   catalog: any;
-<<<<<<< HEAD
-  ELEMENT_DATA: Data[] = [];
-=======
+  type: any;
   selectedArray: any = [];
   courseList: any = [];
   pagenumberCourse: number;
-  ELEMENT_DATA: data[] = [];
->>>>>>> 33854efbcf5f3d12862fce9afbcf715f0345ce78
+  ELEMENT_DATA: Data[] = [];
   // paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -122,32 +120,34 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
-    console.log("it works");
-    // this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
-    // declare array
-    // });
+    this.type = 'remove';
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      console.log('it adds', this.courseList);
+    });
   }
 
   getCoursesForCatalog() { // courses not mapped to catalog - when click add
+    this.type = 'add';
     this.showCourses = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
-      // declare array
       this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
-      console.log("it adds", this.courseList);
+      console.log('it adds', this.courseList);
     });
   }
 
   getCatalogDetail(c) { // courses mapped to catalog - when click remove
     this.adminservice.getallcatalogueById(c.catalogue_id).subscribe((result: any) => {
-    this.ELEMENT_DATA = [];
-    const arr = [];
-    arr.push(result.data.getallcatalogue_by_id.message);
-    this.ELEMENT_DATA.push(...arr);
-    Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
-    this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-
-    console.log('abcabc', this.ELEMENT_DATA);
+      this.ELEMENT_DATA = [];
+      const arr = [];
+      arr.push(result.data.getallcatalogue_by_id.message);
+      this.ELEMENT_DATA.push(...arr);
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
+      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      console.log('abcabc', this.ELEMENT_DATA);
     });
     // var arr = [{
     //   sno: "1",
@@ -264,13 +264,40 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   selectCourse(c, id) {
-    if (c.isChecked == undefined || c.isChecked == false) {
+    if (c.isChecked === undefined || c.isChecked === false) {
       c.isChecked = true;
       this.selectedArray.push(c);
-    }
-    else {
+    } else {
       c.isChecked = !c.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== c);
+    }
+  }
+
+  saveCourse() {
+    if (this.type === 'add') {
+      this.adminservice.addCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.coursecataloguemapping?.success) {
+            this.alert.openAlert('Courses added successfully', null);
+          } else {
+            this.alert.openAlert(result.data.coursecataloguemapping?.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+    } else {
+      this.adminservice.removeCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.unmapcoursesfromcatalogue?.success) {
+            this.alert.openAlert('Courses added successfully', null);
+          } else {
+            this.alert.openAlert(result.data.unmapcoursesfromcatalogue?.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
     }
   }
 
