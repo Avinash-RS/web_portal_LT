@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FilterPipe } from './filter.pipe';
 import { FilterPipeWithoutUnique } from './filterpipe_without_unique';
 import { FilterPipeforselect } from './filterSelect';
-// import {SearchPipe} from './search.pipe';
+import { SearchPipe } from './search.pipe';
+import { SortPipe } from './sort.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { FilterPipeforselect } from './filterSelect';
     FilterPipe,
     FilterPipeWithoutUnique,
     FilterPipeforselect,
-    // SearchPipe
+    // SearchPipe,
+    SortPipe
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { FilterPipeforselect } from './filterSelect';
     FilterPipe,
     FilterPipeWithoutUnique,
     FilterPipeforselect,
-    // SearchPipe
+    // SearchPipe,
+    SortPipe
   ],
 })
 export class PipeModule { }
