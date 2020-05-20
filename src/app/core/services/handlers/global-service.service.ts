@@ -52,7 +52,6 @@ export class GlobalServiceService {
   }
 
   getAdminName(name: any) {
-    console.log(name);
     this.$adminName.next(name);
   }
 
