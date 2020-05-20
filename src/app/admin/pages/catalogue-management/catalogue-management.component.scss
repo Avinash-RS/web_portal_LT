@@ -230,3 +230,55 @@ input:focus {
     bottom: 10px;
     left: 47%;
 }
+
+@media screen and (min-width:765px) {
+    /deep/ .mat-tab-body-content {
+        width: 900px !important;
+        overflow: hidden !important;
+    }
+
+    .mat-cell {
+        flex-wrap: wrap;
+    }
+
+    .mobile-label,
+    .mobile-data {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width:765px) {
+    /deep/ .mat-paginator-container {
+        min-height: 120px !important;
+    }
+
+    .mobile-label {
+        width: 100px !important;
+        word-break: break-all;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .desktop-data {
+        display: none;
+    }
+
+    .mobile-data {
+        width: 58%;
+        display: inline-block;
+        font-weight: normal;
+    }
+
+    .mat-header-row {
+        display: none;
+    }
+}
+
+.example-container {
+    height: 500px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
