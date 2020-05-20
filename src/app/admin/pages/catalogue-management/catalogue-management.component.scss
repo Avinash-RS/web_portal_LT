@@ -1,5 +1,17 @@
 @import "variable";
 
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -162,9 +174,35 @@ input:focus {
 }
 .cat-name-card {
     margin-bottom: 10% !important;
-    margin-top: 10% !important;
     border: 1.0px solid $color-blank !important;
     height: 50%;
     text-align: center;
     padding: 10px !important;
+}
+
+.add-btn {
+    background-color: $color-dark-green;
+}
+
+// .edit-btn {
+//     background-color: $color-subhead;
+// }
+
+.example-container {
+    height: 500px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.remove-btn {
+    background-color: $color-maroon;
+}
+
+.header-btn {
+    height: 35px;
+    font-size: 12px !important;
+    width: 100px;
 }
