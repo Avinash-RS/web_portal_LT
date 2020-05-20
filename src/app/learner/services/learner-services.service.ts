@@ -399,12 +399,13 @@ export class LearnerServicesService {
     });
   }
   // After selection category in category level filter
-  getLevelSubCategoryData(level1 : any, level2 : any) {
+  getLevelSubCategoryData(level1 : any, level2 : any ,level3 : any) {
     return this.Apollo.query({
       query: getLevelSubCategoryData,
       variables: {
         level1: level1,
-        level2: level2
+        level2: level2,
+        level3:level3
       }
     });
   }

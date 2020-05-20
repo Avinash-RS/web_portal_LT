@@ -63,13 +63,13 @@ export class ViewAllCoursesComponent implements OnInit {
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
-    this.CommonServices.globalSearch.subscribe((data: any) => {
-      if(data.length > 0) {
-        this.allcourses = data;
-      } else {
-        this.ngOnInit();
-      }
-    })
+    // this.CommonServices.globalSearch.subscribe((data: any) => {
+    //   if(data.length > 0) {
+    //     this.allcourses = data;
+    //   } else {
+    //     this.ngOnInit();
+    //   }
+    // })
     this.loadcategoryandcourses();
   }
 
@@ -102,7 +102,7 @@ export class ViewAllCoursesComponent implements OnInit {
       this. getthreeLevelCat();
     }
 
-    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.Lvl2CatId).subscribe((result: any) => {
+    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.level2selectedID,this.level3selectedID).subscribe((result: any) => {
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
       }
