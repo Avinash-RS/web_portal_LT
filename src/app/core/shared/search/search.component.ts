@@ -12,13 +12,13 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
   }
-  searchCourse(courseName){
-    console.log('val',courseName);
-    this.CommonServices.getCoursesByName(courseName).subscribe (data => {
+  searchCourse(courseName) {
+    console.log('val', courseName);
+    this.CommonServices.getCoursesByName(courseName).subscribe(data => {
       this.searchcourse = data.data['getCoursesByName'].message;
       this.CommonServices.globalSearch$.next(this.searchcourse);
-      console.log('name',this.searchcourse);
+      console.log('name', this.searchcourse);
     });
-    
+
   }
 }

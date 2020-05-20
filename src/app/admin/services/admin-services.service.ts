@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue, reassigncourse, update_catalogue, delete_catalogue
+  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue
 } from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
-  , getnotificationreports, get_draft_course, getcategoryadmin
+  , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id
 } from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -140,19 +140,17 @@ export class AdminServicesService {
   }
 
   creategroup(group) {
-    console.log(group)
     return this.Apollo.query({
       query: createusergroup,
       variables: {
         group_name: group.group_name, group_type: group.group_type,
         parent_group_id: group.parent_group_id, hierarchy_id: group.hierarchy_id,
-        admin_id: group.admin_id
+        admin_id: group.admin_id, catalogue_id: group.catalogue_id
       }
     });
   }
 
   changegroupstatus(groupid, status) {
-    console.log(groupid)
     return this.Apollo.query({
       query: groupstatus,
       variables: {
@@ -225,8 +223,8 @@ export class AdminServicesService {
   }
   // end of COurse Management
 
-  // Catalogue Management
-  createCatalogue(category) {
+  // Category Management
+  createCategory(category) {
     return this.Apollo.query({
       query: create_catelogue,
       variables: {
@@ -270,7 +268,7 @@ export class AdminServicesService {
     });
   }
 
-  updateCatalogue(category) {
+  updateCatagory(category) {
     return this.Apollo.query({
       query: update_catalogue,
       variables: {
@@ -283,7 +281,7 @@ export class AdminServicesService {
     });
   }
 
-  deletecatalogue(inputid, Level) {
+  deleteCategory(inputid, Level) {
     return this.Apollo.query({
       query: delete_catalogue,
       variables: {
@@ -293,7 +291,37 @@ export class AdminServicesService {
     });
   }
 
+  // End of Category Management
+
+  // catalogue Management
+  addNewCatalogue(name, description, id) {
+    return this.Apollo.query({
+      query: create_master_catalogue,
+      variables: {
+        catalogue_name: name,
+        catalogue_description: description,
+        creator_id: id,
+      }
+    });
+  }
+
+  getAllCatalogue(pg) {
+    return this.Apollo.query({
+      query: getallcatalogue,
+      variables: {
+        pagenumber: pg,
+      }
+    });
+  }
+
+  getallcatalogue_by_id(id) {
+    return this.Apollo.query({
+      query: getallcatalogue,
+      variables: {
+        catalogue_id: id,
+      }
+    });
+  }
+
   // End of Catalogue Management
 }
-
-

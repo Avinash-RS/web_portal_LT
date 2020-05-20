@@ -58,6 +58,7 @@ export class GroupManagementComponent implements OnInit {
   profileDetails: any;
   changeGrpForm: any;
   userGroupChange: any;
+  catalogueList: any;
   constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
               private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
               private router: Router, private dialog: MatDialog, ) {
@@ -74,6 +75,7 @@ export class GroupManagementComponent implements OnInit {
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.adminDetails = this.gs.checkLogout();
     this.getgroups();
+    this.getallcatelogue();
   }
 
   getgroups() {
@@ -97,7 +99,13 @@ export class GroupManagementComponent implements OnInit {
         });
       });
   }
-
+  getallcatelogue() {
+    const pagenumber = 0 ;
+    this.adminservice.getAllCatalogue(pagenumber).subscribe((result: any) => {
+      console.log(result?.data?.getallcatalogue?.message);
+      this.catalogueList = result?.data?.getallcatalogue?.message;
+    });
+  }
 
   /** sub group */
   loadsubgroup(node?: any) {
@@ -148,6 +156,7 @@ export class GroupManagementComponent implements OnInit {
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
+      // this.editcataloguename = node.
       this.getAllUser(0);
     } else {
       this.disabled = true;
@@ -221,7 +230,7 @@ export class GroupManagementComponent implements OnInit {
           group_name: form.value.group_name, group_type: 'new',
           parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
           hierarchy_id: this.currentpath ? hierarchy : 'h1',
-          admin_id: this.adminDetails._id
+          admin_id: this.adminDetails._id, catalogue_id: form.value.catelogue.catalogue_id
         };
         this.adminservice.creategroup(data).subscribe((result: any) => {
           if (result.data.createusergroup.success === true) {

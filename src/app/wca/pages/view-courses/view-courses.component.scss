@@ -1,0 +1,67 @@
+@import "../../../../assets/variable.scss";
+
+.view-course-container {
+    display: flex;
+    margin-top: 20px;
+    .course-details {
+        width: 80%;
+        margin-left: 2%;
+
+        .course-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            .course-names {
+                width: 25%;
+                border-right: 1px solid #efe7e7;
+                margin-left: 30px;
+                margin-bottom: 30px;
+                .course-heading {
+                    color: #1f3777;
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                .creater-name {
+                    padding-bottom: 5px;
+                }
+            }
+        }
+    }
+    .mat-card-container {
+        width: 18%;
+        .module-name {
+            background-color: $color-field;
+            font-size: 16px;
+            font-weight: 500;
+            padding-top: 5px;
+            height: 30px;
+            margin-bottom: 20%;
+        }
+    }
+    .mat-card {
+        height: 40%;
+        box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    }
+    .course-title {
+        background-color: $color-field;
+        height: 30px;
+        font-weight: 500;
+        padding: 6px;
+        font-size: 16px;
+    }
+
+    .text-overflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .tool-tip {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 0 10px #aaaaaa !important;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
+}

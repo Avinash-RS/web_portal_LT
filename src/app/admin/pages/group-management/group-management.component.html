@@ -17,7 +17,7 @@
           Select Group/Sub Group
         </div>
 
-
+<br>
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -122,36 +122,33 @@
 
                     </div>
 
-                    <div class="col-12">
-                      <label for="exampleInputEmail1">
-                        <ng-container *ngIf="editstatus">
+                    <div *ngIf="editstatus" class="form-group col-md-6">
+                      <label  for="exampleInputEmail1">
+                        <ng-container>
                           Select
-                          <ng-container *ngIf="currentpath?.group_name">Sub </ng-container>
                         </ng-container>
-                        Catelogue Name
+                        Catelogue 
                       </label>
                       <br>
-                      <mat-form-field>
-                        <mat-select name="group"  #catelogue1="ngModel"  [required]=editstatus  class="form-control" [(ngModel)]="group">
-                          <mat-option *ngFor="let grp of groups" [value]="grp">
-                            {{grp.group_name}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <!-- <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel
+                        <mat-form-field >
+                          <mat-select name="catelogue"  #catelogue1="ngModel"  [required]=editstatus  class="form-control" [(ngModel)]="catelogue">
+                            <mat-option *ngFor="let cat of catalogueList" [value]="cat">
+                              {{cat.catalogue_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <!-- <input *ngIf="currentpath" type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel
                         name="group_name" #groupname1="ngModel" [required]=editstatus [readonly]=!editstatus pattern="^[a-zA-Z0-9]+$"
-                        value="{{editgroupname}}"> -->
-                      <br>
-                      <div
-                        *ngIf="catelogue1.invalid && (catelogue1.dirty || catelogue1.touched) || formsubmitted && catelogue1.errors"
-                        class="error-message">
-                        <div *ngIf="catelogue1.errors.required" class="error-message">
-                          Catalogue  is required.
-                        </div>
+                        value="{{editgroupname}}">  -->
+                        <br>
+                      <div 
+                       *ngIf="catelogue1.invalid && (catelogue1.dirty || catelogue1.touched) || formsubmitted && catelogue1.errors"
+                       class="error-message">
+                       <div *ngIf="catelogue1.errors.required" class="error-message">
+                         Catalogue  is required.
+                       </div>
+                     </div> 
                       </div>
-                    </div>
-
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
                       <mat-slide-toggle class="example-margin" [color]="color" (change)="toggle($event)"

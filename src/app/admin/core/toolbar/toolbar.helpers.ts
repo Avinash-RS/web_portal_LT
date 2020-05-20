@@ -11,6 +11,6 @@ export const ToolbarHelpers = {
 
 	currentUser: {
 		photoURL: 'assets/profile.jpg',
-		currentUserName: admin && admin.username || 'Admin'
+		currentUserName: admin && admin.username || null
 	}
 };

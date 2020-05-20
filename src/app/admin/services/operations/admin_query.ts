@@ -650,3 +650,42 @@ export const getcategoryadmin = gql`
       }
     }
 }`;
+
+export const getallcatalogue_by_id = gql`
+   query getallcatalogue_by_id($catalogue_id: String!) {
+    getallcatalogue_by_id(catalogue_id: $catalogue_id){
+      success
+      error_msg
+      message{
+        _id
+        catalogue_name
+        catalogue_description
+        creator_id
+        catalogue_id
+        created_on
+        updated_on
+        created_by
+        is_active
+      }
+    }
+}`;
+
+export const getallcatalogue = gql`
+   query getallcatalogue($pagenumber: Int!) {
+    getallcatalogue(pagenumber: $pagenumber){
+      success
+      error_msg
+      total_count
+      message{
+        _id
+        catalogue_name
+        catalogue_description
+        creator_id
+        catalogue_id
+        created_on
+        updated_on
+        created_by
+        is_active
+      }
+    }
+}`;

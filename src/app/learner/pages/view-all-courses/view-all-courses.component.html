@@ -171,7 +171,7 @@
     <button class="submit" (click)="filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
-    <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort
+    <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
     <mat-menu #Sort="matMenu">
@@ -198,14 +198,14 @@
     </div>
 
     <div class="col-8"  >
-        <span class="cover" *ngFor="let item of checkedList; let i = index" >{{item.value}} 
-        <mat-icon class="clear-icon" (click)="removeFilterVal(item,i)">clear</mat-icon>
+        <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item}}
+        <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
         </span>
     </div>
 
     <div class="col-2 ">
       <div class = "smallline"></div> 
-      <h3 class="text2"> Clear All Filters </h3>
+      <h3 class="text2" (click)="clearAll()"> Clear All Filters </h3>
      
     </div>
   </div>
@@ -217,13 +217,14 @@
   <br>
 
   <div class="row">
-    <div class="col-3"  *ngIf="showAppliedFiltre" >
+    <div class="col-3"  *ngIf="showAppliedFiltre">
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3><b>Language</b></h3><br>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')"
+            [checked]="language.checked" />
             <div class="row">
               <div class="col-10 pading">
                 {{language.course_language}} 
@@ -247,7 +248,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" 
+            [checked]="authors.checked"/>
             <div class="row">
               <div class="col-10 pading">
                 {{authors.authordetails}} 
@@ -271,7 +273,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')"
+            [checked]="courseMode.checked" />
             <div class="row">
               <div class="col-10 pading">
                 {{courseMode.course_mode}} 
@@ -306,7 +309,8 @@
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
             <label class="container1">
-            <input  type="checkbox"  name="language"  />
+            <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  
+            [checked]="coursepartner.checked"/>
             <div class="row">
               <div class="col-10 pading">
                 {{coursepartner.coursepartnerdetails}} 
@@ -326,6 +330,7 @@
         <div class="borderline"></div>
       </div>
     </div>
+    <ng-container *ngIf="showAppliedFiltre">
     <div class="col-9">
       <div class="container containerShadow">
         <div class="row" *ngIf="displayMode === 1">
@@ -353,6 +358,36 @@
     
       </div>
     </div>
+    </ng-container>
+    <ng-container *ngIf="!showAppliedFiltre">
+    <div class="diffcol-9">
+      <div class="container containerShadow">
+        <div class="row" *ngIf="displayMode === 1">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-md-6 col-lg-3 col-sm-12">
+              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+            </div>
+          </ng-container>
+          <br>
+        </div>
+        <div class="row" *ngIf="displayMode === 2">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
+            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+                [goto]="goto" [showDate]="true">
+              </app-list-view-course-component>
+              <br>
+            </div>
+          </ng-container>
+        </div>
+    
+      </div>
+    </div>
+    </ng-container>
   </div>
 
   <br>
@@ -374,7 +409,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.id" name="list_name" value="{{item.id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected"  name="list_name"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -393,9 +428,9 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory.level2   | search : lvl2Search">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory?.level2   | search : lvl2Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name2" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name2" (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -415,9 +450,9 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory.level3 | search : lvl3Search">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory?.level3 | search : lvl3Search">
                     <label class="container1">
-                    <input  type="checkbox" [(ngModel)]="item.category_id" name="list_name3" value="{{item.category_id}}"  (change)="getCategoryId(item)"/>
+                    <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;">{{item.super_sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
@@ -429,7 +464,7 @@
     </div>
     </mat-dialog-content>
     <mat-dialog-actions align="center">
-     <button class="roundbtn" (click)="applyFilter(item)">Apply</button>
+     <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
     </mat-dialog-actions>
   </ng-template>
 

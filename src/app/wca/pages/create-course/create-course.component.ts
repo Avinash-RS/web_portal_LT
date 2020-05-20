@@ -90,23 +90,15 @@ export class CreateCourseComponent implements OnInit {
             }
             if (flag) {
                 this.queryData = params;
-                console.log(this.queryData)
                 if (this.queryData && this.queryData.edit) {
                     this.updateFormCourse(this.queryData.viewingModule)
                 } else {
-                    console.log('#################')
                     this.courseForm = this.mainFormCreation()
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
                 }
             } else {
-                console.log('%%%%%%%%%%')
             }
         });
-
-
-
-
-        // console.log(this.courseForm.value)
 
         this.startup();
     }
@@ -115,6 +107,7 @@ export class CreateCourseComponent implements OnInit {
         return this.formBuilder.group({
             course_name: [null, Validators.compose([Validators.required])],
             course_description: [null, Validators.compose([])],
+            course_long_description: [null, Validators.compose([])],
             course_img_url: [null, Validators.compose([Validators.required])],
             pre_requisite: [this.preRequisites, Validators.compose([])],
             preview_video: [null, Validators.compose([])],
@@ -128,6 +121,7 @@ export class CreateCourseComponent implements OnInit {
             certificate_name: [null, Validators.compose([])],
             course_mode: [true],
             course_language: [null],
+            feed_back: [false],
         });
     }
 
@@ -135,7 +129,6 @@ export class CreateCourseComponent implements OnInit {
 
     add1(): void {
         this.author_details = this.courseForm.get('author_details') as FormArray;
-        console.log(this.author_details)
         this.author_details.push(this.createItem());
 
     }
@@ -149,7 +142,6 @@ export class CreateCourseComponent implements OnInit {
 
     add2(): void {
         this.coursepartner_details = this.courseForm.get('coursepartner_details') as FormArray;
-        console.log(this.coursepartner_details)
         this.coursepartner_details.push(this.createItem1());
 
     }
@@ -162,7 +154,6 @@ export class CreateCourseComponent implements OnInit {
 
     add3(): void {
         this.takeway_details = this.courseForm.get('takeway_details').get(String(0)).get("media") as FormArray;
-        console.log(this.takeway_details)
         this.takeway_details.push(this.createMedia());
 
     }
@@ -185,7 +176,6 @@ export class CreateCourseComponent implements OnInit {
         } else {
             if (fileInput && fileInput.target && fileInput.target.files[0]) {
                 this.spinner.show();
-                console.log(index);
                 const reader = new FileReader()
                 this.imageView = fileInput.target.files[0];
                 const formData = new FormData();
@@ -226,12 +216,8 @@ export class CreateCourseComponent implements OnInit {
 
 
     createcourseForm() {
-        console.log(this.courseForm.valid);
-        console.log(this.courseForm);
 
         const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
-        console.log(userDetails);
-        console.log(localStorage.getItem('role'))
         this.submitted = true;
 
         // dummy data
@@ -290,7 +276,6 @@ export class CreateCourseComponent implements OnInit {
 
 
         if (!this.courseForm.value.course_name) {
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
             this.toast.warning('Course Name is Required !!!');
             return false;
         }
@@ -299,7 +284,6 @@ export class CreateCourseComponent implements OnInit {
             this.toast.warning('Course Image is Required !!!');
             return false;
         }
-        console.log(this.courseForm.value);
 
         if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
             this.spinner.show();
@@ -307,10 +291,8 @@ export class CreateCourseComponent implements OnInit {
             if (this.queryData && this.queryData.edit) {
                 this.courseForm.value.course_id = this.queryData.viewingModule;
                 this.wcaService.updateCourse(this.courseForm.value).subscribe((data: any) => {
-                    console.log(data);
                     if (data && data.success === true) {
                         this.toast.success('Course Updated Successfully !!!');
-                        console.log(data.course_id, this.courseForm.value.course_img_url, this.courseForm.value.course_name)
                         // this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
                         this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
 
@@ -324,25 +306,22 @@ export class CreateCourseComponent implements OnInit {
                 })
             } else {
                 this.wcaService.createCourse(this.courseForm.value).subscribe((data: any) => {
-                    console.log(data);
                     this.spinner.hide();
                     if (data && data.course_id) {
                         const obj = {
                             coursename: this.courseForm.value.course_name,
                             coursefile: null,
                             coursestatus: 'true',
+                            coursetype: '',
                             courseid: data.course_id,
                             coursedetails: [],
                             createdby_name: this.courseForm.value.user_name,
                             createdby_id: this.courseForm.value.user_id,
                             createdby_role: this.courseForm.value.user_role
                         }
-                        console.log
                         this.wcaService.createDraft(obj).subscribe((data: any) => {
-                            console.log(data);
                         });
                         this.toast.success('Course Created Successfully !!!');
-                        console.log(data.course_id, this.courseForm.value.course_img_url, this.courseForm.value.course_name)
                         this.router.navigate(['/Admin/auth/Wca/viewmodule'], { queryParams: { viewingModule: data.course_id, image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
                     }
                 }, err => {
@@ -368,13 +347,10 @@ export class CreateCourseComponent implements OnInit {
     addrequest(event: MatChipInputEvent) {
         const input = event.input;
         const value = event.value;
-        console.log(input);
-        console.log(value)
         if ((value.trim() !== '')) {
             this.courseForm.controls.pre_requisite.setErrors(null); // 1
             const tempprerequisits = this.courseForm.controls.pre_requisite.value; // 2
             tempprerequisits.push({ name: value.trim() });
-            console.log(tempprerequisits)
             this.courseForm.controls.pre_requisite.setValue(tempprerequisits);
             if (this.courseForm.controls.pre_requisite.valid) { // 4
                 this.courseForm.controls.pre_requisite.markAsDirty();
@@ -394,7 +370,6 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllPrerequisitDetails().subscribe((data: any) => {
             this.AllPrerequisitDetails = [];
             this.AllPrerequisitDetails = data.Result;
-            console.log(this.AllPrerequisitDetails);
         })
         this.startup1();
     }
@@ -403,7 +378,6 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllInstructors().subscribe((data: any) => {
             this.AllInstructors = [];
             this.AllInstructors = data.Result;
-            console.log(this.AllInstructors);
         })
         this.startup2();
     }
@@ -412,7 +386,6 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllCertifyDetails().subscribe((data: any) => {
             this.AllCertifyDetails = [];
             this.AllCertifyDetails = data.Result;
-            console.log(this.AllCertifyDetails);
 
         })
         this.startup3();
@@ -420,31 +393,26 @@ export class CreateCourseComponent implements OnInit {
 
     startup3() {
         this.wcaService.getAllTakeawayDetails().subscribe((data: any) => {
-            console.log(data);
             this.AllTakeawayDetails = [];
             this.AllTakeawayDetails = data.Result;
-            console.log(this.AllTakeawayDetails);
         })
     }
 
 
     get selected() {
         return this.courseForm.get('author_details').value.map(i => {
-            // console.log(i)
             return i.author_name
         })
     }
 
     get selected1() {
         return this.courseForm.get('coursepartner_details').value.map(i => {
-            // console.log(i)
             return i.name
         })
     }
 
     change(name, index) {
         let option = this.AllInstructors.find(i => i.name === name)
-        console.log(option);
         this.courseForm.get('author_details').get(String(index)).get('author_name').setValue(option.name);
         this.courseForm.get('author_details').get(String(index)).get('description').setValue(option.description);
         this.courseForm.get('author_details').get(String(index)).get('image').setValue(option.image);
@@ -473,10 +441,7 @@ export class CreateCourseComponent implements OnInit {
                     this.courseEditDetails = null;
                     this.courseEditDetails = data.message;
                     this.courseForm = this.mainFormCreation()
-                    console.log(this.courseEditDetails);
-                    console.log(this.courseForm);
                     this.preRequisites = this.courseEditDetails.pre_requisite;
-                    console.log(this.preRequisites)
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
                     this.courseForm.patchValue(this.courseEditDetails);
                 }

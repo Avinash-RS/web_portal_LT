@@ -38,7 +38,7 @@ main section {
 }
 
 .submit {
-  width: 12%;
+  width: 13%;
   border: none !important;
   background-color: $color-white;
   color: $color-blue;
@@ -122,8 +122,8 @@ h2{
   position: relative;
   // padding-left: 35px;
   width: 100%;
-  cursor: pointer;
-  font-size: 14px;
+  // cursor: pointer;
+  font-size: 12px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -193,6 +193,7 @@ h2{
   margin-top: 6px;
   text-align: right !important;
   color: $color-darkGrey;
+  cursor: pointer;
 }
 ::ng-deep .mat-typography h3 {
   margin: 5px 0px 5px !important;
@@ -294,5 +295,17 @@ h2{
 }
 .pading{
   padding-left: 46px;
+}
+.fa-chevron-down:before {
+  // content: "\f078";
+  margin-left: -9px !important;
+}
+.col-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+.diffcol-9{
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 

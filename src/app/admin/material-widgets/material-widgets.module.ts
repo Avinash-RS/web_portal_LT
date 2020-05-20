@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule,
          MatSelectModule,
          MatProgressBarModule,
          MatMenuModule,
+         MatTooltipModule,
 
  } from '@angular/material';
 
@@ -85,6 +86,7 @@ export function highlightJsFactory(): any {
     MatSliderModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatTooltipModule,
     MatProgressBarModule,
     HighlightJsModule.forRoot({
       provide: HIGHLIGHT_JS,

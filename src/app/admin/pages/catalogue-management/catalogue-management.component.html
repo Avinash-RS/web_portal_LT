@@ -9,60 +9,92 @@
 
   <div class="card col-12 col-lg-12 col-md-12 col-sm-12 cardheight">
     <!-- start of button - add catalogue ( row ) -->
-    <div class="row m-t-20">
+    <div class="row m-t-20 m-r-40">
       <div class="col-lg-9 col-md-8"> </div>
       <div class="col-lg-3 col-md-4 col-sm-11 col-11 center p-r-0 p-b-0">
-        <button mat-raised-button [disabled]="false" class="addcat-btn width_90 m-b-10 center color_white"
+        <button mat-raised-button [disabled]="false" class="addcat-btn width_70 m-b-10 center color_white"
           (click)="gotoAdd()">
           <span class="material-icons" style="vertical-align: middle;">add</span>New Catalogue
         </button>
       </div>
     </div>
 
-    <hr class="header-line">
+    <hr class="header-line m-l-20 m-r-20 m-b-0">
     <!-- end of button add catalogue -->
 
     <!-- start of Viw List Catalogue - Jasper -->
-    <div class="overflow-auto">
-
+    <div class="overflow-auto" *ngIf="showListCatalogue">
+      <!-- /////JASPER -->
+      <div class="row m-r-40">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_left">
+          <h4 class="heading">List of catalogue</h4>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-12"></div> -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right">
+          <button type="button" class="sort-btn m-t-10">Sort<mat-icon style="vertical-align: middle;">
+              keyboard_arrow_down
+            </mat-icon></button>
+        </div>
+      </div>
+      <div class="row m-l-40 m-r-40">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 " *ngFor="let course of catalogueList; let i = index">
+          <div class="catalogue-card">
+            <div class="catalogue-name">
+              {{course.catalogue_name}}
+            </div>
+            <div class="catalogue-count">
+              {{course.numberofcourses || 33}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+    </div>
+    <div class="row arrow-drop-down" *ngIf="showListCatalogue">
+      <div *ngIf="catalogueList && catalogueList.length > 0">
+        <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogue()">
+          <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
+        </button>
+      </div>
     </div>
     <!-- End of View List Catalogue - Jasper -->
 
     <!-- start of Add new Catalogue - Kani -->
-    <div  class="overflow-auto" *ngIf="showAddCatalogueForm">
-      <br>
+    <div class="overflow-auto" *ngIf="showAddCatalogueForm">
+
       <form [formGroup]="addCatalogueForm">
-        <div class="row">
-          <p class="m-t-10 m-l-55">Create catalogue</p>
+        <div class="row m-l-20 m-r-20">
+          <p class="m-t-10">Create catalogue</p>
         </div>
-        <div class="row">
+        <br>
+        <div class="row m-l-20 m-r-20">
           <div class="col-md-4 col-lg-4 col-sm-10 col-10 m-l-5">
-            <input type="text" class="inputs border-radius-5 background_trans width_100"
+            <input type="text" class="inputs border-radius-5 background_trans width_80"
               placeholder="Enter the catalogue name" formControlName="catalogue_name">
           </div>
         </div>
         <br><br>
-        <div class="row">
+        <div class="row m-l-20 m-r-20">
           <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
             <div class="form-group">
-              <textarea style="resize: none;" rows="5"
-                [ngClass]="canotEdit ? 'dis inputs border-radius-5 background_trans width_100' : 'inputs border-radius-5 background_trans width_100'"
+              <textarea style="resize: none;" rows="7" class="inputs border-radius-5 background_trans width_80"
                 placeholder="Catalogue Description" formControlName="catalogue_description"
                 name="catalogue_description"></textarea>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-2 m-l-5 col-sm-6 col-6 m-r-20">
-            <br>
-            <button id="createCatalogue" mat-stroked-button
+        <br><br>
+        <div class="row m-l-20 m-r-20">
+          <div class="col-md-4 col-sm-12"></div>
+          <div class="col-md-2 m-l-5 col-sm-6 col-6 m-0">
+            <button id="createCatalogue" mat-stroked-button (click)="addNewCatalogue()"
               class="width_80 border-radius-5 background-blue color_white center">Create</button>
           </div>
-          <div class="col-md-2 m-l-5 col-sm-6 col-6 m-r-20">
-            <br>
-            <button id="cancel" mat-stroked-button
-              class="width_80 border-radius-5 background-blue color_white center">Cancel</button>
+          <div class="col-md-2 m-l-5 col-sm-6 col-6 m-0">
+            <button id="cancel" mat-stroked-button class="width_80 border-radius-5 color_blue blue_border center"
+              (click)="addCatalogueForm.reset();showAddCatalogueForm = false; showListCatalogue = true;">Cancel</button>
           </div>
+          <!-- <div class="col-md-4 col-sm-12"></div> -->
         </div>
       </form>
     </div>
