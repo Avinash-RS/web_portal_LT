@@ -6,7 +6,9 @@
 </nav>
 
 <div class="row width_90 center space2" *ngIf="!showCourses">
-
+  <div class="spinner-container" *ngIf="loadingCatalogue">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
   <div class="card col-12 col-lg-12 col-md-12 col-sm-12 cardheight">
     <!-- start of button - add catalogue ( row ) -->
     <div class="row space2 m-r-5" *ngIf="!showHeader && (showListCatalogue || showAddCatalogueForm)">
@@ -88,6 +90,7 @@
           </div>
         </div>
       </div>
+      <br><br>
     </div>
     <div class="width_100 arrow-drop-down" *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">
       <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">

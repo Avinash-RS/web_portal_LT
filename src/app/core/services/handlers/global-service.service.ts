@@ -20,46 +20,45 @@ export class GlobalServiceService {
   ) { }
 
   checkLogout() {
-    if (this.route.url != '/' && this.route.url != '/Learner/login' && this.route.url != '/Learner' && this.route.url != '/Admin/login') {
-      var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-      var role = localStorage.getItem('role') || null;
-      var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-      if ((userDetail != null || userDetail != undefined ) && role == 'learner')
-        return userDetail
-      else if ((adminDetails != null|| adminDetails != undefined) && role == 'admin')
-        return adminDetails
-      else {
-        this.alert.openAlert("Logged Out!", "You have been logged out. Please login to continue");
-        this.route.navigate(['/Learner/login'])
+    if (this.route.url !== '/' && this.route.url !== '/Learner/login' && this.route.url !== '/Learner' &&
+      this.route.url !== '/Admin/login') {
+      const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
+      const role = localStorage.getItem('role') || null;
+      const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
+      if ((userDetail != null || userDetail !== undefined ) && role === 'learner') {
+        return userDetail;
+      } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
+        return adminDetails;
+           } else {
+        this.alert.openAlert('Logged Out!', 'You have been logged out. Please login to continue');
+        this.route.navigate(['/Learner/login']);
       }
     }
-
   }
 
   checkProfileFilled() {
-    var userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetail && !userDetail.is_profile_updated) {
-      this.route.navigate(['/Learner/profile'])
-      this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
+      this.route.navigate(['/Learner/profile']);
+      this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
       return false;
-    }
-    else
+    } else {
       return true;
+    }
   }
 
   canCallWishlist(callWishlist: boolean) {
-    this.$callWishlist.next(callWishlist)
+    this.$callWishlist.next(callWishlist);
   }
 
-  getAdminName(name : any) {
-    this.$adminName.next(name)
+  getAdminName(name: any) {
+    this.$adminName.next(name);
   }
 
   preventBackButton() {
     history.pushState(null, null, location.href);
     this.locationStrategy.onPopState(() => {
       history.pushState(null, null, location.href);
-    })
+    });
   }
-
 }
