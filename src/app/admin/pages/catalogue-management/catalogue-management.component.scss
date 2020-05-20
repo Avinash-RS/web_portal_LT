@@ -227,6 +227,9 @@ input:focus {
 
 .arrow-drop-down {
     position: absolute;
-    bottom: 10px;
-    left: 47%;
+    bottom: 0px;
+    background-color: $color-white;
+    mat-icon {
+        font-size: 40px;
+    }
 }

@@ -572,7 +572,7 @@ export class CatagoryManagementComponent implements OnInit {
         let msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
         Swal.fire({
           html:
-            'Selected Courses Successfully moved to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
+            'Selected courses successfully move to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 + '</p></b> '
         })
         this.getcourses(this.level == 1 ? 'category' : this.level == 2 ? 'subcategory' : 'supersubcategory');
         this.selectCategoryForm?.reset();

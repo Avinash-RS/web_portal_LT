@@ -8,21 +8,21 @@ export class AlertServiceService {
   constructor(public matDialog: MatDialog) { }
 
   public openAlert(title, msg) {
-    if (this.matDialog.openDialogs.length == 0) {
+    if (this.matDialog.openDialogs.length === 0) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'showClose' };
+      dialogConfig.data = { title, msg: msg ? msg : null, type: 'showClose' };
       dialogConfig.width = '30%',
-        dialogConfig.panelClass = 'custom-modalbox',
-        dialogConfig.hasBackdrop = true;
-        dialogConfig.disableClose = true;
+      dialogConfig.panelClass = 'custom-modalbox',
+      dialogConfig.hasBackdrop = true;
+      dialogConfig.disableClose = true;
       const dialogRef = this.matDialog.open(AlertComponentComponent, dialogConfig);
     }
   }
 
   public openConfirmAlert(title, msg) {
-    if (this.matDialog.openDialogs.length == 0) {
+    if (this.matDialog.openDialogs.length === 0) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = { title: title, msg: msg ? msg : null, type: 'confirmAlert' };
+      dialogConfig.data = { title, msg: msg ? msg : null, type: 'confirmAlert' };
       dialogConfig.width = '30%',
       dialogConfig.disableClose = true;
       dialogConfig.panelClass = 'custom-modalbox';

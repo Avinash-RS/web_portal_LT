@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue
+  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
+  updatecatalogueinfo
 } from './operations/admin_mutation'
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
@@ -301,6 +302,17 @@ export class AdminServicesService {
         catalogue_name: name,
         catalogue_description: description,
         creator_id: id,
+      }
+    });
+  }
+
+  updateCatalogDtl(name, description, id) {
+    return this.Apollo.query({
+      query: updatecatalogueinfo,
+      variables: {
+        catalogue_name: name,
+        catalogue_description: description,
+        catalogue_id: id,
       }
     });
   }

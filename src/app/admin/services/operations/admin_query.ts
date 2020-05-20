@@ -686,6 +686,7 @@ export const getallcatalogue = gql`
         updated_on
         created_by
         is_active
+        course_count
       }
     }
 }`;

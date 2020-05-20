@@ -141,14 +141,11 @@ mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_descripti
   }
 }`;
 
-// mutation{
-//   create_master_catalogue(
-//     catalogue_name: "sample 1",
-//     catalogue_description : "sample catalogue number 1",
-//     creator_id : "5e69f4ad139c79bbf14adc8a"
-//   ){
-//     success
-//     error_msg
-//     message
-//   }
-// }
+export const updatecatalogueinfo = gql`
+mutation  updatecatalogueinfo($catalogue_name: String! ,$catalogue_description : String!,$catalogue_id: String!) {
+  updatecatalogueinfo(catalogue_name: $catalogue_name,catalogue_description: $catalogue_description,catalogue_id:$catalogue_id ){
+    success
+    error_msg
+    message
+  }
+}`;
