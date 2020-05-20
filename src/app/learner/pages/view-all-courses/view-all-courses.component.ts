@@ -193,7 +193,6 @@ export class ViewAllCoursesComponent implements OnInit {
 
 
     var perPage = "10";
-    this.pagenumber = 0;
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -250,7 +249,6 @@ export class ViewAllCoursesComponent implements OnInit {
     this.selectedFilter = this.selectedFilter.concat(this.coursepartners); 
 
     var perPage = "10";
-    this.pagenumber = 1;
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -283,7 +281,6 @@ export class ViewAllCoursesComponent implements OnInit {
       });
     }
     var perPage = "10";
-    this.pagenumber = 1;
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -342,7 +339,6 @@ export class ViewAllCoursesComponent implements OnInit {
 
   loadcategoryandcourses() {
     this.type = 'category';
-    this.pagenumber = 0;
     this.paginationpgno = 0;
     this.getcoursecategories();
     this.getallcourses();
@@ -366,7 +362,6 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getcourses(category) {
     this.loader = true;
-    this.pagenumber = 0;
     category.type = this.type;
     category._id = category.category_id ? category.category_id : category.sub_category_id;
     category.pagenumber = this.pagenumber;
