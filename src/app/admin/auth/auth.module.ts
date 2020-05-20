@@ -11,7 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@angular/material';
-import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule, MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
+    MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule,
+    MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -25,6 +27,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 import { DndDirective } from '../core/dnd.directive';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
+import { PipeModule } from '../../pipes/pipe.module';
+import { SearchPipe } from '../../pipes/search.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -45,6 +49,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         RouterModule.forChild(appRoutes),
         MatToolbarModule,
         DashboardModule,
+        PipeModule,
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
@@ -76,11 +81,6 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         InfiniteScrollModule,
         NgxPaginationModule
         // WcaModule
-
-
-
-
-
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
