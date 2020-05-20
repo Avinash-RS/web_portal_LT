@@ -666,6 +666,14 @@ export const getallcatalogue_by_id = gql`
         updated_on
         created_by
         is_active
+        course_details{
+          course_id
+          course_description
+          course_name
+          course_category
+          course_type
+          course_language
+        }
       }
     }
 }`;
