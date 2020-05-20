@@ -20,8 +20,10 @@ export class CatalogueManagementComponent implements OnInit {
   showAddCatalogueForm: boolean = false;
   showListCatalogue: boolean = true;
   showCourses: boolean = false;
+  showCatalogDetail: boolean = false;
   catalogueList = [];
   pagenumber: number = 0;
+  catalog: any;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
@@ -176,18 +178,21 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   goToCatalogDetail(c) {
+    this.catalog = c;
     this.getCatalogDetail(c);
+    this.showCatalogDetail = true;
+    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false
     //add true false variable here - jasper
   }
 
-  getCoursesInCatalog(catalog) { // courses mapped to catalog - when click remove
-    this.adminservice.getCourseInCatalogue(catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+  getCoursesInCatalog() { // courses mapped to catalog - when click remove
+    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
       // declare array
     });
   }
 
-  getCoursesForCatalog(catalog) { // courses not mapped to catalog - when click add
-    this.adminservice.getCourseForCatalogue(catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
+  getCoursesForCatalog() { // courses not mapped to catalog - when click add
+    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
       // declare array
     });
   }
