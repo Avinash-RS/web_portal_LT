@@ -36,7 +36,7 @@ export class ViewAllCoursesComponent implements OnInit {
   paginationpgno: any;
   loader: boolean;
   sort_type:any = "A-Z";
-  showAppliedFiltre :boolean = false;
+  showAppliedFiltre :boolean;
   errormsg:boolean = false;
   allLvlCategory: any;
   Lvl1CatId : any = [];
@@ -52,6 +52,8 @@ export class ViewAllCoursesComponent implements OnInit {
   level2selectedID: any = [];
   level3selectedID: any = [];
   selectedFilter: any = [];
+  isCollapsed: Boolean;
+
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
      private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
     this.btnType = "Enroll Now"
@@ -67,7 +69,7 @@ export class ViewAllCoursesComponent implements OnInit {
       if(data.length > 0) {
         this.allcourses = data;
       } else {
-        this.ngOnInit();
+        this.alert.openAlert('No courses found', null);
       }
     })
     this.loadcategoryandcourses();
@@ -299,7 +301,6 @@ export class ViewAllCoursesComponent implements OnInit {
 
 
   filter(){
-      this.showAppliedFiltre = true;
         this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
            if(result['data']['getDetailsCount']['success'] == 'true'){
             this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
