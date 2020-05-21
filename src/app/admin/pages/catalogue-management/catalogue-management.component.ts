@@ -50,8 +50,8 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
-              private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-              private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
@@ -292,7 +292,7 @@ export class CatalogueManagementComponent implements OnInit {
       this.adminservice.removeCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
         if (result && result.data) {
           if (result.data.unmapcoursesfromcatalogue?.success) {
-            this.alert.openAlert('Courses added successfully', null);
+            this.alert.openAlert('Courses removed successfully', null);
           } else {
             this.alert.openAlert(result.data.unmapcoursesfromcatalogue?.message, null);
           }
