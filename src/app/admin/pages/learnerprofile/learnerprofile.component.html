@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li *ngIf ="userid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
@@ -16,9 +16,82 @@
   <mat-tab label="User Profile">
     <br>
    
-    <!-- <mat-dialog-actions> -->
-      <!--Button code-->
-    <!-- </mat-dialog-actions> -->
+    <mat-card>
+      <form>
+        <div class="row pt-3">
+          <div class="col-lg-2  col-sm-1  ">
+            <div class="form-group  m-0 " style="padding-left: inherit;">
+              <img src="https://cdn.3dnames.net/previews/cd45/250x250/h/cd45harsha3dxx.jpg" alt="Avatar">
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-lg-2 col-md-3 col-sm-1">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">Full name:</label>
+              <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+                Maniyarasi
+              <!-- </mat-form-field> -->
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">User name:</label>
+              <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+               Maniyarasi
+              <!-- </mat-form-field> -->
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">DOJ LXP</label>
+              <!-- <mat-form-field color="accent" appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+                DATE
+              <!-- </mat-form-field> -->
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-lg-2 col-md-3 col-sm-1">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12  ">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">Gender</label>dont knw
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">I am a :</label>
+              part of pms
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-5 col-sm-12 languages">
+            <div class="form-group  m-0">
+              <label class="col-sm-8 common-label1 languages">languages known</label>Skype
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-lg-2 col-md-3 col-sm-1">
+            <div class="form-group  m-0">
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">Qualification</label>chating with pms etc
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group  m-0">
+              <label class="col-sm-5 common-label1">Location</label>Testing Team
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  
   </mat-tab>
 
   <mat-tab label="Activities">

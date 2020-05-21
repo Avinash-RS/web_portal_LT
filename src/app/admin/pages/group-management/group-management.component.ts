@@ -100,8 +100,7 @@ export class GroupManagementComponent implements OnInit {
       });
   }
   getallcatelogue() {
-    const pagenumber = 0 ;
-    this.adminservice.getAllCatalogue(pagenumber).subscribe((result: any) => {
+    this.adminservice.getcatalogues().subscribe((result: any) => {
       console.log(result?.data?.getallcatalogue?.message);
       this.catalogueList = result?.data?.getallcatalogue?.message;
     });

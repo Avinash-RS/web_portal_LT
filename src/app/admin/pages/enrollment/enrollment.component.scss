@@ -310,24 +310,10 @@ table {
 /* TOGGLE STYLING */
 .toggle {
   float: right;
-  margin: 0 0 1rem;
-  box-sizing: border-box;
-  font-size: 0;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
   margin: 0 10px 0 10px;
 
 }
-.toggle input {
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -9999px;
-  margin: 0 10px 0 10px;
 
-}
 
 .toggle input + label {
   margin: 0 10px 0 10px;
@@ -437,28 +423,26 @@ table {
   color: black;
 }
 
-//   .common-search input{
-//     width: 50%;
-//     border-radius: 21px;
-//     padding: 3px 40px 3px 15px;
-//     &:focus {
-//         outline: none;
-//     }
-    
-// }
-// .common-search{
-//     padding-top: 3px;
-//     ::placeholder { 
-//         opacity: 1;
-//       }
-  
-// }
-// .search-icon{
-//     position: absolute;
-//     right: 28%;
-//     top: 7px;
-//     cursor: pointer; 
-//     display: block;
+input[type="radio"]{
+  visibility:hidden;
+} 
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
 
-   
-// }
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  flex: 1;
+}
+
+

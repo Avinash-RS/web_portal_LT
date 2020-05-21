@@ -69,6 +69,9 @@ export class EnrollmentComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource1.paginator = this.paginator;
     this.dataSource1.sort = this.sort;
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.name.toLowerCase().includes(filter) || data.symbol.toLowerCase().includes(filter) || data.position.toString().includes(filter);
+  };
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

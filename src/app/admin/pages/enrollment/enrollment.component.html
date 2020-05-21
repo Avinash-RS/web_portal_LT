@@ -11,6 +11,11 @@
   <label for="sizeWeight">User Group</label> <br>
   <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="individual" id="sizeDimensions" />
   <label for="sizeDimensions">Individual</label>
+
+  <div class="searchContainer">
+    <input class="searchBox" type="search" name="search" (keyup)="applyFilter($event)" placeholder="Search">
+    <i class="fa fa-search searchIcon"></i>
+  </div>
 </div>
 <!-- <div class="common-search">
   <input type="text" placeholder="search"  (keyup)="applyFilter($event)" [(ngModel)]="email" >

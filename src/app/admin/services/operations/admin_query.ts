@@ -689,3 +689,23 @@ export const getallcatalogue = gql`
       }
     }
 }`;
+
+export const getcatalogue = gql`
+   query getallcatalogue{
+    getallcatalogue{
+      success
+      error_msg
+      total_count
+      message{
+        _id
+        catalogue_name
+        catalogue_description
+        creator_id
+        catalogue_id
+        created_on
+        updated_on
+        created_by
+        is_active
+      }
+    }
+}`;
