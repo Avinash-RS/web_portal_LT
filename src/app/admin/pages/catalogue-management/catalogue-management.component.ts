@@ -33,6 +33,7 @@ export class CatalogueManagementComponent implements OnInit {
   loadingCatalogue = false;
   checked = false;
   sortCatalogue = 'asc';
+  reverse = false;
   pagenumber = 0;
   pagenumberCourse = 0;
   pagenumberTable = 0;
