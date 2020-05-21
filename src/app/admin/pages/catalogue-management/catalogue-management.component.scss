@@ -40,7 +40,7 @@ html {
 
 .cardheight {
     height: 600px !important;
-    box-shadow: 2px 0px 10px #6c757d;
+    box-shadow: 2px 0px 10px $box-shadow;
     overflow: hidden;
 }
 
@@ -61,7 +61,8 @@ hr {
 }
 
 .right {
-    box-shadow: 0px 0px 7px $box-shadow;
+    z-index: 1 !important;
+    box-shadow: 2px 10px 12px $box-shadow;
 }
 
 // .m-t-20 {
@@ -256,4 +257,10 @@ td.mat-cell {
 .course-image {
     height: 100px;
     object-fit: cover;
+}
+
+.btn-bar {
+    position: fixed;
+    bottom: 20px;
+
 }
