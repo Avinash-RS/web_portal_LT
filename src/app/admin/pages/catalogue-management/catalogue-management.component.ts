@@ -302,4 +302,37 @@ export class CatalogueManagementComponent implements OnInit {
     }
   }
 
+  closedialogbox() {
+    this.dialog.closeAll();
+  }
+
+  openEdit(templateRef: TemplateRef<any>) {
+    this.addCatalogueForm = this.formBuilder.group({
+      catalogue_name: new FormControl('', myGlobals.req),
+      catalogue_description: new FormControl(''),
+    });
+    this.addCatalogueForm.patchValue(this.catalog);
+    this.dialog.open(templateRef);
+  }
+
+  editCatalogue() {
+    this.addCatalogueForm.reset();
+    this.adminservice.updateCatalogDtl(this.addCatalogueForm.value.catalogue_name,
+      this.addCatalogueForm.value.catalogue_description,
+      this.catalog.catalogue_id).subscribe((result: any) => {
+        this.closedialogbox();
+        if (result && result.data) {
+          if (result.data.updatecatalogueinfo && result.data.updatecatalogueinfo.success) {
+            // this.getListCatalogue();
+            this.alert.openAlert('Catalogue updated successfully', null);
+            // this.showAddCatalogueForm = false;
+            // this.showListCatalogue = true;
+          } else {
+            this.alert.openAlert(result.data.updatecatalogueinfo.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+  }
 }

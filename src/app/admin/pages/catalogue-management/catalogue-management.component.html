@@ -256,7 +256,8 @@
         </div>
       </div>
       <div class="col-lg-3  col-md-3  col-sm-5 center float_right col-5 space10">
-        <button mat-raised-button class="header-btn edit-btn m-r-5 color_white border-radius-5">
+        <button mat-raised-button class="header-btn edit-btn m-r-5 color_white border-radius-5"
+          (click)="openEdit(editDialog)">
           <span class="material-icons" style="vertical-align: middle;">edit</span>Edit
         </button>
       </div>
@@ -316,5 +317,50 @@
 
   </div>
   <!-- end of right hand side card view -->
+
+
+  <ng-template #editDialog class="dialogPopup">
+    <mat-dialog-content style="width: 850px;">
+      <form [formGroup]="addCatalogueForm">
+        <div class="row m-l-20 m-r-20">
+          <p class="m-t-10 f_size_16">Edit catalogue</p>
+        </div>
+        <hr class="header-line m-l-20 m-r-20 m-b-0">
+        <br><br>
+        <div class="row m-l-20 m-r-20">
+          <div class="col-md-4 col-lg-4 col-sm-10 col-10 m-l-5">
+            <input type="text" class="inputs border-radius-5 background_trans width_80"
+              placeholder="Enter the catalogue name *" formControlName="catalogue_name">
+          </div>
+        </div>
+        <br><br>
+        <div class="row m-l-20 m-r-20">
+          <div class="col-md-11 col-lg-11 m-l-5 col-sm-10 col-10">
+            <div class="form-group">
+              <textarea style="resize: none;" rows="3" class="inputs border-radius-5 background_trans width_100"
+                placeholder="Catalogue Description" formControlName="catalogue_description"
+                name="catalogue_description"></textarea>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        <div class="row m-l-20 m-r-20">
+          <div class="col-md-4 col-sm-12"></div>
+          <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid" mat-stroked-button
+              (click)="editCatalogue()"
+              class="width_80 border-radius-5 background-blue color_white center">Update</button>
+          </div>
+          <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+            <button id="cancel" mat-stroked-button class="width_80 border-radius-5 color_blue blue_border center"
+              (click)="closedialogbox()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <br>
+  </ng-template>
+
+
 </div>
 <br><br>
