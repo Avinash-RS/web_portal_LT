@@ -39,6 +39,7 @@ export class CreateCourseComponent implements OnInit {
     courseLengthArray = [];
     TakeAwayLengthArray = []
 
+
     createItem(): FormGroup {
         this.preview2.push(null)
         return this.formBuilder.group({
