@@ -73,10 +73,10 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right">
           <button type="button" class="sort-btn" (click)="sortt()">Sort
-            <mat-icon style="vertical-align: middle;" *ngIf="sortCatalogue == 'asc'">
+            <mat-icon style="vertical-align: middle;" *ngIf="!reverse">
               keyboard_arrow_down
             </mat-icon>
-            <mat-icon style="vertical-align: middle;" *ngIf="sortCatalogue == 'dsc'">
+            <mat-icon style="vertical-align: middle;" *ngIf="reverse">
               keyboard_arrow_up
             </mat-icon>
           </button>
@@ -292,10 +292,10 @@
       </div>
     </div>
     <div class="row m-r-20 m-l-20">
-      <div class="col-md-4 col-sm-12 "></div>
-      <div class="col-lg-3 col-md-3 m-l-5 col-sm-6 col-6 no_margin">
-        <button id="SaveCatalogue" mat-stroked-button
-          class="width_70 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
+      <div class="col-md-4 col-sm-12"></div>
+      <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+        <button id="SaveCatalogue" mat-stroked-button [disabled]="selectedArray.length == 0 || !checked"
+          class="width_80 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
       </div>
       <div class="col-lg-3 col-md-3 m-l-5 col-sm-6 col-6 no_margin">
         <button id="cancel" mat-stroked-button class="width_70 border-radius-5 color_blue blue_border center"
