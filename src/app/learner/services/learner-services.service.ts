@@ -426,7 +426,7 @@ export class LearnerServicesService {
 // Guildeline selected filter value and getting courses
   postGuildelineSearchData(category: any,sub_category: any,super_sub_category: any ,course_language:any,course_mode:any,
     author_details:any,partner_details:any,
-    pagenumber,perPage){
+    pagenumber,perPage,publishedToDate,publishedFromDate){
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
@@ -439,7 +439,9 @@ export class LearnerServicesService {
         partner_details: partner_details,
        
         pagenumber:pagenumber,
-        perPage:perPage
+        perPage:perPage,
+        publishedFromDate:publishedFromDate,
+        publishedToDate:publishedToDate
       }
     });
   }
