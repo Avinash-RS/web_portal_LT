@@ -9,7 +9,7 @@ import * as myGlobals from '@core/globals';
 import { MatDialog, MatTableDataSource, MatPaginator,MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
 
-export interface data {
+export interface Data {
   courses: string;
   category: string;
   language: string;
@@ -31,22 +31,28 @@ export class CatalogueManagementComponent implements OnInit {
   showCatalogDetail = false;
   showHeader = false;
   loadingCatalogue = false;
+  checked = false;
   sortCatalogue = 'asc';
-  catalogueList = [];
   pagenumber = 0;
+  pagenumberCourse = 0;
+  pagenumberTable = 0;
   catalog: any;
-  ELEMENT_DATA: data[] = [];
+  type: string;
+  catalogueList = [];
+  selectedArray: any = [];
+  courseList: any = [];
+  ELEMENT_DATA: Data[] = [];
   // paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
-  dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
-    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+              private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+              private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
@@ -62,30 +68,6 @@ export class CatalogueManagementComponent implements OnInit {
       this.catalogueList.push(...result?.data?.getallcatalogue?.message);
       this.loadingCatalogue = false;
     });
-    // this.catalogueList = [{
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },
-    // {
-    //   catalogue_name: "Web Development",
-    //   numberofcourses: "10",
-    // },
-    // {
-    //   catalogue_name: "Business Analyst",
-    //   numberofcourses: "30",
-    // },
-    // {
-    //   catalogue_name: "Code study",
-    //   numberofcourses: "35",
-    // },]
   }
 
   // getNextCattalogue() {
@@ -191,7 +173,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   addNewCatalogue() {
-    this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name, this.addCatalogueForm.value.catalogue_description,
+    this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name,
+      this.addCatalogueForm.value.catalogue_description,
       this.adminDetails._id).subscribe((result: any) => {
         this.addCatalogueForm.reset();
         if (result && result.data) {
@@ -211,32 +194,81 @@ export class CatalogueManagementComponent implements OnInit {
 
   goToCatalogDetail(c) {
     this.catalog = c;
-    this.getCatalogDetail(c);
+    this.getCatalogDetail();
     this.showCatalogDetail = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
-    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
-      // declare array
+    this.type = 'remove';
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      console.log('it adds', this.courseList);
     });
   }
 
   getCoursesForCatalog() { // courses not mapped to catalog - when click add
-    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumber || 0).subscribe((result: any) => {
-      // declare array
+    this.type = 'add';
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      console.log('it adds', this.courseList);
     });
   }
 
-  getCatalogDetail(c) { // courses mapped to catalog - when click remove
-    // this.adminservice.getallcatalogueById(c.catalogue_id).subscribe((result: any) => {
-    // declare array
-    // this.ELEMENT_DATA = [];
-    // var arr = [];
-    // arr.push(result.data.getallcatalogue_by_id.message);
+  getCatalogDetail() { // courses mapped to catalog - when click remove
+    this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
+      this.ELEMENT_DATA = [];
+      // const arr = [];
+      // arr.push(result.data.getallcatalogue_by_id.message);
+      // this.ELEMENT_DATA.push(...arr);
+      // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
+      // this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      console.log('abcabc', this.ELEMENT_DATA, result);
+    });
+    // var arr = [{
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // }
+    // ]
     // this.ELEMENT_DATA.push(...arr);
-    // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
     // this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+
 
     // console.log("abcabc", this.ELEMENT_DATA)
     // });
@@ -278,81 +310,126 @@ export class CatalogueManagementComponent implements OnInit {
     }
     ]
     this.ELEMENT_DATA.push(...arr);
-    this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
+    this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
     this.dataSource.sort = this.sort;
+
+
     // this.dataSource.paginator = this.paginator;
   }
 
   getNextCattalogueDetails() {
-    var arr = [{
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    },
-    {
-      sno: "1",
-      courses: "Web Development",
-      category: "10",
-      language: "english"
-    }
-    ]
-    this.ELEMENT_DATA.push(...arr);
-    this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
-    this.dataSource.sort = this.sort;
+    // var arr = [{
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // },
+    // {
+    //   sno: "1",
+    //   courses: "Web Development",
+    //   category: "10",
+    //   language: "english"
+    // }
+    // ]
+    // this.ELEMENT_DATA.push(...arr);
+    // this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
   }
+
+  selectCourse(c, id) {
+    if (c.isChecked === undefined || c.isChecked === false) {
+      c.isChecked = true;
+      this.selectedArray.push(c);
+    } else {
+      c.isChecked = !c.isChecked;
+      this.selectedArray = this.selectedArray.filter(i => i !== c);
+    }
+    var arr = []
+    this.ELEMENT_DATA.push(...arr);
+    this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+    this.dataSource.sort = this.sort;
+
+  }
+
+  saveCourse() {
+    if (this.type === 'add') {
+      this.adminservice.addCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.coursecataloguemapping?.success) {
+            this.alert.openAlert('Courses added successfully', null);
+          } else {
+            this.alert.openAlert(result.data.coursecataloguemapping?.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+    } else {
+      this.adminservice.removeCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.unmapcoursesfromcatalogue?.success) {
+            this.alert.openAlert('Courses added successfully', null);
+          } else {
+            this.alert.openAlert(result.data.unmapcoursesfromcatalogue?.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+    }
+  }
+
 }

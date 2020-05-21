@@ -352,7 +352,7 @@
           <div class="row m-t-10 m-r-20">
             <div class="col-lg-9 col-md-9 col-sm-12 col-12">
               <!-- <h3 class="font-display m-b-0">295 courses > </h3> -->
-              <h3 class="font-display m-b-0 m-l-20">{{course_count}} {{course_count <= 1  ? 'Course > ' : 'Courses >'}}
+              <h3 class="font-display m-b-0 m-l-20">{{courseCount}} {{courseCount <= 1  ? 'Course > ' : 'Courses >'}}
               </h3>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
@@ -395,7 +395,7 @@
     <span class="close">
       <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox()"></i>
     </span>
-    <h2>Move {{selectedArray?.length || course_count}} {{ selectedArray?.length ==1 ? 'course' : 'courses' }}</h2>
+    <h2>Move {{selectedArray?.length || courseCount}} {{ selectedArray?.length ==1 ? 'course' : 'courses' }}</h2>
     <mat-dialog-content style="width: 850px;">
       <div class="row" *ngIf="selectedArray && selectedArray.length > 0">
         <div class="col-md-3 m-b-10" *ngFor="let courseName of selectedArray;let j = index">

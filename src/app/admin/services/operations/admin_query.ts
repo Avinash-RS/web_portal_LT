@@ -652,8 +652,8 @@ export const getcategoryadmin = gql`
 }`;
 // tslint:disable-next-line:variable-name
 export const getallcatalogue_by_id = gql`
-   query getallcatalogue_by_id($catalogue_id: String!) {
-    getallcatalogue_by_id(catalogue_id: $catalogue_id){
+   query getallcatalogue_by_id($catalogue_id: String!, $pagenumber: Int!) {
+    getallcatalogue_by_id(catalogue_id: $catalogue_id, pagenumber : $pagenumber){
       success
       error_msg
       message{
@@ -666,6 +666,14 @@ export const getallcatalogue_by_id = gql`
         updated_on
         created_by
         is_active
+        course_details{
+          course_id
+          course_description
+          course_name
+          course_category
+          course_type
+          course_language
+        }
       }
     }
 }`;
@@ -700,7 +708,8 @@ export const getcoursesincatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }
@@ -715,7 +724,8 @@ export const getcoursesforcatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }
