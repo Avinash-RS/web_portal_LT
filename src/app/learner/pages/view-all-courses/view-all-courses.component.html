@@ -327,7 +327,21 @@
         <div style="text-align: right;">
           <span class="showmore"> + Show more</span>
         </div><br>
-        <div class="borderline"></div>
+        <div class="borderline"></div><br>
+        <h3><b>Publish date</b></h3><br>
+        <!-- <div class="row padding">
+          <div class="col-10"> -->
+            <my-date-picker name="fromdate" [options]="myDatePickerOptions"
+            (dateChanged)="onDateChanged($event,'fromdate')"></my-date-picker>
+            <my-date-picker name="todate" [options]="myDatePickerOptions"
+            (dateChanged)="onDateChanged($event,'todate')"></my-date-picker>
+          <!-- </div> -->
+          <!-- <div class="col-4 dateBox">
+            <dp-date-picker theme="dp-material"
+                            [config]="datePickerConfig" required="true">
+            </dp-date-picker>
+          </div> -->
+        <!-- </div> -->
       </div>
     </div>
     <ng-container *ngIf="showAppliedFiltre">

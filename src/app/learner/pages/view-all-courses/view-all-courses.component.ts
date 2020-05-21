@@ -6,6 +6,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Options } from 'ng5-slider';
 import * as _ from 'lodash';
+import {FormControl} from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -53,6 +54,9 @@ export class ViewAllCoursesComponent implements OnInit {
   level3selectedID: any = [];
   selectedFilter: any = [];
   isCollapsed: Boolean;
+  myDatePickerOptions: any;
+  publishedToDate: String;
+  publishedFromDate: String;
 
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
      private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
@@ -60,6 +64,9 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myDatePickerOptions = {
+      dateFormat: 'yyyy-mm-dd'
+    }
     this.getthreeLevelCat();
     this.userDetailes = this.globalservice.checkLogout();
     if (!this.userDetailes.group_id) {
@@ -196,8 +203,9 @@ export class ViewAllCoursesComponent implements OnInit {
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
     this.selectedFilter = [];
     this.selectedFilter = this.selectedFilter.concat(this.selectedlang);
@@ -252,8 +260,9 @@ export class ViewAllCoursesComponent implements OnInit {
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
   }
   clearAll(){
@@ -284,17 +293,19 @@ export class ViewAllCoursesComponent implements OnInit {
     }
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage).subscribe((result: any) => {
+      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
   }
 
   applyFilter(category) { 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.level1selectedID,this.level2selectedID,this.level3selectedID,this.selectedlang,this.coursemode,
-      this.authordetails,this.coursepartners,this.pagenumber,perPage).subscribe((result: any) => {
+      this.authordetails,this.coursepartners,this.pagenumber,perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         if(result['data']['getCourseCategorySearch'].success == true)
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
         this.dialog.closeAll();
     })
    }
@@ -400,4 +411,44 @@ export class ViewAllCoursesComponent implements OnInit {
       this.allLvlCategory = result['data']['getLevelCategoryData']['data']; 
     })
   }
+  onDateChanged(event,name) {
+    if(name === 'fromdate'){
+      this.publishedFromDate = event.formatted;
+    }
+    if(name === 'todate'){
+      this.publishedToDate = event.formatted;
+    }
+    var perPage = "10";
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
+      })
+  }
+
+
+  countUpdate(count){
+
+    if(this.guidelineSearchVal && this.guidelineSearchVal.course_data){
+      this.guidelineSearchVal.course_data.forEach(element => {
+       if(element.checked) element.count = count;
+      });
+    }
+    if(this.guidelineSearchVal && this.guidelineSearchVal.author_data){
+      this.guidelineSearchVal.author_data.forEach(element => {
+        if(element.checked) element.count = count;
+      });
+    }
+    if(this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data){
+      this.guidelineSearchVal.coursemode_data.forEach(element => {
+        if(element.checked) element.count = count;
+      });
+    }
+    if(this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data){
+      this.guidelineSearchVal.coursepartner_data.forEach(element => {
+        if(element.checked) element.count = count;
+      });
+
+  }
+}
 }

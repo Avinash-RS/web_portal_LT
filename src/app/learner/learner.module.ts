@@ -13,6 +13,7 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
+import { MyDatePickerModule } from 'mydatepicker';
 // local
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
@@ -101,7 +102,8 @@ const routes: Routes = [
     HttpClientModule,
     ApolloModule,
     NgOtpInputModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MyDatePickerModule
   ],
   providers: [Apollo],
   entryComponents: []

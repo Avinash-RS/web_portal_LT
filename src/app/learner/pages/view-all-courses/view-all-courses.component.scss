@@ -307,6 +307,12 @@ h2{
 .pading{
   padding-left: 46px;
 }
+.padding{
+  padding-left: 20px;
+}
+// .topadding{
+//   padding-left: 20px;
+// }
 .fa-chevron-down:before {
   // content: "\f078";
   margin-left: -9px !important;
@@ -323,3 +329,13 @@ h2{
 .close{
   float: right !important;
 }
+.dateBox {
+  margin-left: 1%;
+  // width: 43.5%;
+  width: 70%;
+  height: 31px;
+  border: 2px solid #ccc;
+  border-radius: 7px;
+  color: #1F3777;
+}
+
