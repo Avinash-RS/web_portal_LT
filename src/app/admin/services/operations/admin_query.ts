@@ -673,6 +673,51 @@ export const getallcatalogue_by_id = gql`
           course_category
           course_type
           course_language
+          super_sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            super_sub_category_id
+            super_sub_category_name
+            super_sub_category_image
+            super_sub_category_description
+            parent_sub_category_id
+            parent_category_id
+          }
+          sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            sub_category_id
+            sub_category_name
+            sub_category_image
+            sub_category_description
+            parent_category_id
+          }
+          category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            category_id
+            category_name
+            category_image
+            category_description
+          }
         }
       }
     }

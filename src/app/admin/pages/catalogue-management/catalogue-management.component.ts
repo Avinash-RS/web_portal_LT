@@ -32,23 +32,21 @@ export class CatalogueManagementComponent implements OnInit {
   showHeader = false;
   loadingCatalogue = false;
   checked = false;
-  sortCatalogue = 'asc';
   reverse = false;
   pagenumber = 0;
   pagenumberCourse = 0;
   pagenumberTable = 0;
   totalCount: number;
-  catalog: any;
+  catalog: any = {};
   type: string;
   catalogueList = [];
   selectedArray: any = [];
   courseList: any = [];
   ELEMENT_DATA: Data[] = [];
-  // paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
   dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-  // @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatSort) sort: MatSort;
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
@@ -65,22 +63,12 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getListCatalogue() {
-    // this.loadingCatalogue = true;
+    this.loadingCatalogue = true;
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
       console.log(result?.data?.getallcatalogue?.message);
       this.catalogueList.push(...result?.data?.getallcatalogue?.message);
       this.loadingCatalogue = false;
     });
-  }
-
-  sortt() {
-    this.reverse = !this.reverse;
-    console.log(this.sortCatalogue);
-    if (this.sortCatalogue === 'asc') {
-      this.sortCatalogue = 'dsc';
-    } else {
-      this.sortCatalogue = 'asc';
-    }
   }
 
   get f() {
@@ -132,7 +120,6 @@ export class CatalogueManagementComponent implements OnInit {
     this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
       this.totalCount = result?.data?.getcoursesincatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
-      console.log('it adds', this.courseList);
     });
   }
 
@@ -143,18 +130,31 @@ export class CatalogueManagementComponent implements OnInit {
     this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
       this.totalCount = result?.data?.getcoursesforcatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
-      console.log('it adds', this.courseList);
     });
   }
 
   getCatalogDetail() { // courses mapped to catalog - when click remove
+    this.loadingCatalogue = true;
     this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
       if (this.pagenumberTable === 0) {
         this.ELEMENT_DATA = [];
       }
       Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
       this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-      console.log('abcabc', this.ELEMENT_DATA, result);
+      this.dataSource.sort = this.sort;
+      this.loadingCatalogue = false;
+    });
+  }
+
+  getNextCattalogueDetails() {
+    this.pagenumberTable = this.pagenumberTable + 1;
+    this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
+      if (this.pagenumberTable === 0) {
+        this.ELEMENT_DATA = [];
+      }
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -182,7 +182,7 @@ export class CatalogueManagementComponent implements OnInit {
           this.alert.openAlert('Please try again later', null);
         }
       });
-    } else {
+    } else if (this.type === 'remove') {
       this.adminservice.removeCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
         if (result && result.data) {
           if (result.data.unmapcoursesfromcatalogue?.success) {

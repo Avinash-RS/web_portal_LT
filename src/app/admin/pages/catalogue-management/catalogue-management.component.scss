@@ -11,7 +11,9 @@
     align-items: center;
     justify-content: center;
 }
-
+strong {
+    letter-spacing: 0.4px !important;
+}
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -32,7 +34,6 @@ html {
     .addcat-btn {
         width: 70% !important;
     }
-
     .catalogue-card {
         width: 70% !important;
     }
@@ -63,10 +64,6 @@ hr {
 .right {
     box-shadow: 0px 0px 7px $box-shadow;
 }
-
-// .m-t-20 {
-//     margin-top: 20px; replaced with space2
-// }
 
 .m-t-10 {
     margin-top: 10px !important;
@@ -129,17 +126,6 @@ input:focus {
     padding: 8px !important;
 }
 
-.error_msg {
-    font-size: 80%;
-    color: $color-red;
-}
-
-// .material-icons {
-//     font-size: inherit;
-//     padding-right: 5px;
-//     font-size: 16px;
-// }
-
 .sort-btn {
     border-radius: 5px;
     width: 80px;
@@ -157,8 +143,8 @@ input:focus {
 .catalogue-card {
     width: 90% !important;
     margin-bottom: 10% !important;
-    border: 1.0px solid $color-light-grey !important;
-    box-shadow: 0px 0px 5px $box-shadow;
+    border: 1.0px solid $color-border !important;
+    box-shadow: 0px 0px 6px $box-shadow;
     height: 70%;
     background-color: $color-lightest-grey;
     text-align: center;
@@ -168,6 +154,7 @@ input:focus {
 .arrow-drop-down {
     position: absolute;
     bottom: 0px;
+    padding-bottom: 10px;
     background-color: $color-white;
 
     mat-icon {
@@ -176,7 +163,6 @@ input:focus {
 }
 
 .cat-name-card {
-    // margin-bottom: 10% !important;
     border: 1.5px solid $box-shadow !important;
     height: 50%;
     text-align: center;
@@ -195,11 +181,6 @@ input:focus {
     }
 }
 
-// .example-container {
-//     // height: 400px;
-//     overflow: auto;
-// }
-
 table {
     width: 90%;
     margin-left: 50px;
@@ -208,7 +189,6 @@ table {
 
 th {
     color: black;
-    // size:f_size_14     
     font-size: 15px !important;
 
 }
@@ -219,13 +199,11 @@ th.mat-header-cell {
 
 .center {
     margin-top: -150px;
-
 }
 
 td.mat-cell {
     border-bottom-style: none;
     border-collapse: collapse !important;
-    ;
 }
 
 .remove-btn {
