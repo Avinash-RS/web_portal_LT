@@ -19,11 +19,15 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MAT_TABS_CONFIG } from '@angular/material';
-
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
-
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { FusionChartsModule } from "angular-fusioncharts";
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
@@ -42,6 +46,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
+    FusionChartsModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,

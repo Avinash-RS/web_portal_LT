@@ -29,6 +29,20 @@
     box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
 }
 
+.medbox{
+    margin-left: 7%;
+    margin-top: 5%;
+    height: 146px;
+    margin-bottom: 10px;
+    width: 80%;
+    color: $color-darkGrey ;
+    border-radius: 10px;
+    background-color: $color-white;
+    -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+}
+
 h2{
     padding-left: 20px;
     padding-top: 18px;
@@ -88,6 +102,9 @@ h3{
 .trendicon{
     margin-left: 30%;
 }
+.trendiconcourse{
+    margin-left: 16%;
+}
 .trendno{
     margin-left: 3px;
     color: $trend;
@@ -105,10 +122,67 @@ h3{
   .margintop{
       margin-top: 25%;
   }
+  .nL3Size{
+    width: 34px !important;
+    height: 36px !important;
+    margin-left: -3px !important;
+
+  }
+  .tabbutton{
+    height: 36px;
+    background: #f6f6f6;
+    border: none;
+    margin-left: 13px;
+    border-radius: 3px;
+    box-shadow: 0px 7px 5px 2px #0b0b0b17;
+  }
+  .fullScreen{
+    margin-left: 57%;
+    margin-top: 10px;
+  }
+  .tabbutton:focus {
+    border-top: 2px solid $newRegistericon;
+    outline: none;
+    box-shadow: none;
+    background-color: $color-light-blue ;
+    color: $color-blank;
+  }
+  table {
+    width: 96%;
+    margin-left: 2%;
+  }
+  ::ng-deep .mat-header-row {
+    background: #e3e3fe !important;
+    min-height: 40px !important;
+}
+  .courselistbox{
+    height: 62px !important;
+    border-left: 4px solid $newRegistericon;
+
+  }
+  .margin-to{
+    margin-top: 16%;
+    margin-bottom: 5px;
+  }
+  .top5{
+    font-size: 15px;
+    font-weight: 500;
+  }
   .fontSize{
     width: 22px !important;
     padding-left: 5px !important;
     margin-left: 2px !important;
+  }
+  .fontSize2{
+    width: 30px !important;
+    padding-left: 0px !important;
+    margin-left: 2px !important;
+  }
+  .md-charticon{
+    margin-top: 7px ;
+    margin-left: -5px ;
+    width: 32px ;
+    margin-bottom: 12px;
   }
   .nLSize{
     width: 25px !important;
@@ -123,6 +197,14 @@ h3{
 
   .newLerner{
     background: $newLearner !important;
+  }
+  .nL2Size{
+    width: 28px !important;
+    margin-left: 0px !important;
+  }
+  .bg-course-icon{
+    max-width: 47px !important;
+    max-height: 47px !important;
   }
 
   .bg-green{
@@ -168,7 +250,129 @@ h3{
   .margin{
       margin-top: 7%;
   }
+  .card{
+    background-color: #99939326;
+    border: none;
+  }
+ li {
+    padding: 10px;
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03);
+    margin-left: -51px;
+    width: 323px;
+    margin-top: 2px;
+    background-color: #fff;
+    list-style-type: none;
 
+ }
+
+ .arrow{
+    margin-left: 74%;
+    font-size: 18px;
+    margin-top: 2px;
+ }
+
+  .arrow1{
+    margin-left: 42%;
+    font-size: 18px;
+    margin-top: 2px;
+ }
+ .height{
+     height: 37px !important;
+ }
+ .customButton{
+    width: 100%;
+    margin-top: 20px !important;
+    height: 40px;
+    padding-left: 11px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: inherit;
+    color: #000000;
+    border-radius: 6px;
+    border: none;
+    background-color: #f6f6f6;
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03) !important;
+ }
+
+ button:focus {
+    border: none;
+    outline: none;
+  }
+  ::ng-deep mat-progress-bar.my-color .mat-progress-bar-fill::after {
+    background-color: #7cfc0061 !important;
+  }
+
+  ::ng-deep mat-progress-bar.my-color-red .mat-progress-bar-fill::after {
+    background-color: $color-red !important;
+  }
+
+  ::ng-deep mat-progress-bar.my-color-blue .mat-progress-bar-fill::after {
+    background-color: $newRegistericon !important;
+  }
+
+::ng-deep .mat-progress-bar {
+    height: 10px !important;
+    height: 10px !important;
+    margin-top: 4px !important;
+    width: 179px;
+    margin-left: -35px;
+}
+::ng-deep .mat-progress-bar-buffer {
+    background-color: $color-white !important;
+}
+
+
+
+
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+  }
   
-
-
+  .overlay-content {
+    position: relative;
+    top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 75%;
+    text-align: center;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay {overflow-y: auto;}
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
