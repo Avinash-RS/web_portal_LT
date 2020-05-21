@@ -127,7 +127,8 @@
         <div class="row m-l-20 m-r-20">
           <div class="col-md-4 col-sm-12"></div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-            <button id="createCatalogue" [disabled] = "addCatalogueForm.invalid" mat-stroked-button (click)="addNewCatalogue()"
+            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid" mat-stroked-button
+              (click)="addNewCatalogue()"
               class="width_80 border-radius-5 background-blue color_white center">Create</button>
           </div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
@@ -143,11 +144,11 @@
     <div class="overflow-auto" *ngIf="showCatalogDetail">
       <div class="example-container mat-elevation-z8">
         <!-- <mat-table #table [dataSource]="dataSource"> -->
-          <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource">
 
           <!-- <ng-container matColumnDef="sno">
             <mat-header-cell *matHeaderCellDef> sno </mat-header-cell> -->
-            <!-- <mat-cell *matCellDef="let element">
+          <!-- <mat-cell *matCellDef="let element">
               <span class="mobile-label">courses</span>
               <span class="desktop-data"> {{i+1}}</span>
               <span class="mobile-data"> {{i+1}}</span>
@@ -179,7 +180,7 @@
             </mat-cell> -->
             <th mat-header-cell *matHeaderCellDef> category </th>
             <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-           
+
           </ng-container>
 
           <ng-container matColumnDef="language">
@@ -194,18 +195,18 @@
           </ng-container>
           <!-- <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"> -->
-            
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           <!-- </mat-row> -->
         </table>
-      
+
       </div>
       <div class="row arrow-drop-down" *ngIf="showCatalogDetail">
         <!-- <div *ngIf="catalogueList && catalogueList.length > 0"> -->
-          <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogueDetails()">
-            <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
-          </button>
+        <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumberTable; getCatalogDetail()">
+          <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
+        </button>
         <!-- </div> -->
       </div>
     </div>
@@ -285,7 +286,7 @@
         </h4>
       </div>
     </div>
-    <div class="m-r-20 m-l-20">
+    <div class="m-r-20 m-l-20 overflow-auto">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
           *ngFor="let courses of courseList; let i = index">
@@ -300,18 +301,17 @@
         </div>
       </div>
     </div>
-    <div class="row m-l-20 m-r-20">
+    <div class="row m-r-20 m-l-20">
       <div class="col-md-4 col-sm-12"></div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="SaveCatalogue" mat-stroked-button
-          class="width_80 border-radius-5 background-blue color_white center" (click) = "saveCourse()">Save</button>
+          class="width_80 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
       </div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="cancel" mat-stroked-button
           class="width_80 border-radius-5 color_blue blue_border center">Cancel</button>
       </div>
     </div>
-
     <!-- end of  view courses row -->
 
   </div>

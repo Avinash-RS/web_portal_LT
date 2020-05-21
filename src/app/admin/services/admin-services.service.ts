@@ -335,11 +335,12 @@ export class AdminServicesService {
     });
   }
 
-  getallcatalogueById(id) {
+  getallcatalogueById(id, pagenumber) {
     return this.Apollo.query({
       query: getallcatalogue_by_id,
       variables: {
         catalogue_id: id,
+        pagenumber
       }
     });
   }
