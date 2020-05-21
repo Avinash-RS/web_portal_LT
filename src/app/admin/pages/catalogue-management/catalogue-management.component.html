@@ -12,7 +12,7 @@
 </nav>
 
 <!-- START OF CARD_1 -->
-<div class="row width_90 center space2" *ngIf="!showCourses">
+<div class="row width_95 center space2" *ngIf="!showCourses">
   <!-- spinner-container -->
   <div class="spinner-container" *ngIf="loadingCatalogue">
     <mat-spinner diameter="40"></mat-spinner>
@@ -203,14 +203,14 @@
 <!-- END OF CARD_1 -->
 
 <!-- START OF CARD_2 -->
-<div class="row m-r-5 m-l-5 overflow-auto" *ngIf="showCourses">
+<div class="row m-r-20 m-l-20 overflow-auto" *ngIf="showCourses">
   <!-- start of left hand side card view -->
-  <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left">
+  <div class="card col-12 col-lg-3 col-md-3 col-sm-12 left cardheight ">
   </div>
   <!-- end of left hand side card view -->
 
   <!-- start of right hand side card view -->
-  <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 cardheight right">
+  <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 right cardheight ">
     <!-- start of header row -->
     <div class="row p-5px m-r-20 m-l-20 ">
       <div class="col-lg-9 col-md-9 col-sm-12 col-12">
@@ -282,8 +282,8 @@
         <button id="SaveCatalogue" mat-stroked-button [disabled]="selectedArray.length == 0 || !checked"
           class="width_80 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
       </div>
-      <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-        <button id="cancel" mat-stroked-button class="width_80 border-radius-5 color_blue blue_border center"
+      <div class="col-lg-3 col-md-3 m-l-5 col-sm-6 col-6 no_margin">
+        <button id="cancel" mat-stroked-button class="width_70 border-radius-5 color_blue blue_border center"
           (click)="showCatalogDetail = showHeader = true; showAddCatalogueForm = showListCatalogue = showCourses = false;">Cancel</button>
       </div>
     </div>
