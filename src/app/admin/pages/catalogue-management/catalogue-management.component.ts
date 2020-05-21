@@ -33,6 +33,7 @@ export class CatalogueManagementComponent implements OnInit {
   loadingCatalogue = false;
   checked = false;
   sortCatalogue = 'asc';
+  reverse = false;
   pagenumber = 0;
   pagenumberCourse = 0;
   pagenumberTable = 0;
@@ -73,6 +74,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   sortt() {
+    this.reverse = !this.reverse;
     console.log(this.sortCatalogue);
     if (this.sortCatalogue === 'asc') {
       this.sortCatalogue = 'dsc';
