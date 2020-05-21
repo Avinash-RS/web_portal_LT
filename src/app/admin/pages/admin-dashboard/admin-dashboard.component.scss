@@ -51,7 +51,7 @@ h3{
 }
 
 .count{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     margin-left: 27px;
     color:$color-blank;
@@ -102,9 +102,39 @@ h3{
     border-radius: 11px;
     margin-left: 13px;
   }
+  .margintop{
+      margin-top: 25%;
+  }
+  .fontSize{
+    width: 22px !important;
+    padding-left: 5px !important;
+    margin-left: 2px !important;
+  }
+  .nLSize{
+    width: 25px !important;
+    margin-left: 2px !important; 
+  }
+  .bg-brown{
+      background-color: #af481161 !important;
+  }
+  .InactiveIcon{
+    margin-top: -7px !important;
+  }
+
+  .newLerner{
+    background: $newLearner !important;
+  }
+
+  .bg-green{
+      background-color: #7cfc0061;
+  }
+  .bg-yellow{
+      background-color: #ffc10759 !important;
+  }
   .iconImg{
-    padding-top: 12px;
-    width: 30px;
+    margin-left: 1px;
+    padding-top: 11px;
+    width: 26px;
     padding-left: 3px;
   }
   .charticon{

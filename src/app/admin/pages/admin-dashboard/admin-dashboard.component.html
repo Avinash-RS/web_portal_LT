@@ -37,24 +37,17 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>New Registrations</h3>
-              <span class="count">2,684</span>
+              <h3>Total Learners</h3>
+              <span class="count">50,864</span>
             </div>
     
-            <div class="col-md-4 icon">
+            <div class="col-md-4 icon newLerner">
               <div style="width: 60px;margin-left: 6px;">
-                <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
+                <img  class="iconImg nLSize"  src="../../../../assets/learner/TotalLearners.svg">
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
-              <img class="charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
-            </div>
-          </div><br>
-
-          <div class="row">
+          <div class="row margintop">
             <div class="col-md-4">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
               <span class="trendno">4%</span>
@@ -71,30 +64,30 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>New Registrations</h3>
-              <span class="count">2,684</span>
+              <h3>Active Learners</h3>
+              <span class="count">1820</span>
             </div>
     
-            <div class="col-md-4 icon">
+            <div class="col-md-4 icon bg-green">
               <div style="width: 60px;margin-left: 6px;">
-                <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
+                <img  class="iconImg fontSize"  src="../../../../assets/learner/ActiveLearners.svg">
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
-              <img class="charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            <div class="col-md-9">
+              <h3>Inactive Learners</h3>
             </div>
-          </div><br>
+            <div class="col-md-3">
+            </div>
+          </div>
 
           <div class="row">
-            <div class="col-md-4">
-              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+            <div class="col-md-9">
+              <span class="count">1820</span>
             </div>
-            <div class="col-md-8">
-              <span class="text">Up from Yesterday</span>
+            <div class="col-md-3">
+              <img class="charticon InactiveIcon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
             </div>
           </div>
         </div>
@@ -104,20 +97,20 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>New Registrations</h3>
-              <span class="count">2,684</span>
+              <h3>Available Courses</h3>
+              <span class="count">200</span>
             </div>
     
-            <div class="col-md-4 icon">
+            <div class="col-md-4 icon bg-yellow">
               <div style="width: 60px;margin-left: 6px;">
-                <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
+                <img  class="iconImg "  src="../../../../assets/learner/AvailableCourses.svg">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-3">
-              <img class="charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+              <img class="charticon" src="../../../../assets/learner/PieChartdisable.svg" onmouseover="this.src='../../../../assets/learner/PieChart.svg'"onmouseout="this.src='../../../../assets/learner/PieChartdisable.svg'"/>
             </div>
           </div><br>
 
@@ -137,13 +130,13 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>New Registrations</h3>
-              <span class="count">2,684</span>
+              <h3>Total Enrollments</h3>
+              <span class="count">72,684</span>
             </div>
     
-            <div class="col-md-4 icon">
+            <div class="col-md-4 icon bg-brown">
               <div style="width: 60px;margin-left: 6px;">
-                <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
+                <img  class="iconImg"  src="../../../../assets/learner/TotalEnrolments.svg">
               </div>
             </div>
           </div>
@@ -171,6 +164,9 @@
     
 
   </mat-tab>
-  <mat-tab label="Courses"> Courses </mat-tab>
+  <mat-tab label="Courses">
+    <div id="chart">
+    </div>
+ </mat-tab>
   <mat-tab label="Learner"> Learner </mat-tab>
 </mat-tab-group>
