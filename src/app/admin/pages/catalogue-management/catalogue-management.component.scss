@@ -176,8 +176,8 @@ input:focus {
 }
 
 .cat-name-card {
-    margin-bottom: 10% !important;
-    border: 1.0px solid $color-blank !important;
+    // margin-bottom: 10% !important;
+    border: 1.5px solid $box-shadow !important;
     height: 50%;
     text-align: center;
     padding: 10px !important;
@@ -205,22 +205,27 @@ table {
     margin-left: 50px;
     margin-top: 20px;
 }
+
 th {
-color: black;
-// size:f_size_14     
-font-size: 15px !important;
+    color: black;
+    // size:f_size_14     
+    font-size: 15px !important;
 
 }
-th.mat-header-cell{
+
+th.mat-header-cell {
     border-bottom-style: none;
 }
-.center{
+
+.center {
     margin-top: -150px;
 
 }
-td.mat-cell{
+
+td.mat-cell {
     border-bottom-style: none;
-    border-collapse: collapse !important;;
+    border-collapse: collapse !important;
+    ;
 }
 
 .remove-btn {
@@ -229,8 +234,6 @@ td.mat-cell{
 
 .header-btn {
     height: 35px;
-    font-size: 12px !important;
-    width: 100px;
 }
 
 .containerOverlay {

@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import { MatDialog, MatTableDataSource, MatPaginator,MatSort } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
 
 export interface Data {
@@ -63,7 +63,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getListCatalogue() {
-    this.loadingCatalogue = true;
+    // this.loadingCatalogue = true;
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
       console.log(result?.data?.getallcatalogue?.message);
       this.catalogueList.push(...result?.data?.getallcatalogue?.message);
