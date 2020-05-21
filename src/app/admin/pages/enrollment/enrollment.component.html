@@ -6,16 +6,22 @@
     <li class="breadcrumb-item active" aria-current="page">Course Enrollment</li>
   </ol>
 </nav>
-<div   class="toggle" >
+
+<div class="row">
+  <div class="col">
+    
+<div class="toggle" style="margin-left:87px;margin-top: -37px;margin-bottom: 37px;">
   <input type="radio"  [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="group" id="sizeWeight" checked="checked" />
-  <label for="sizeWeight">User Group</label> <br>
+  <label for="sizeWeight">User Group</label>
   <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="individual" id="sizeDimensions" />
   <label for="sizeDimensions">Individual</label>
-
+  &nbsp; &nbsp;
   <div class="searchContainer">
     <input class="searchBox" type="search" name="search" (keyup)="applyFilter($event)" placeholder="Search">
     <i class="fa fa-search searchIcon"></i>
   </div>
+</div>
+</div>
 </div>
 <!-- <div class="common-search">
   <input type="text" placeholder="search"  (keyup)="applyFilter($event)" [(ngModel)]="email" >
