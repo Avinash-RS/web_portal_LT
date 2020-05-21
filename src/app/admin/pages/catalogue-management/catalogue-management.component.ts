@@ -50,8 +50,8 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
-              private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-              private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
