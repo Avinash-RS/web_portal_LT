@@ -26,10 +26,10 @@ export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
   addCatalogueForm: any;
   showAddCatalogueForm = false;
-  showListCatalogue = false; //T
+  showListCatalogue = true;
   showCourses = false;
-  showCatalogDetail = true; //F
-  showHeader = true; //
+  showCatalogDetail = false;
+  showHeader = false;
   loadingCatalogue = false;
   checked = false;
   sortCatalogue = 'asc';
