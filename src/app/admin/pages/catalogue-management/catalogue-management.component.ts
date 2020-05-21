@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import { MatDialog, MatTableDataSource, MatPaginator,MatSort } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
 
 export interface Data {
@@ -26,9 +26,9 @@ export class CatalogueManagementComponent implements OnInit {
   adminDetails: any;
   addCatalogueForm: any;
   showAddCatalogueForm = false;
-  showListCatalogue = true;
+  showListCatalogue = false;
   showCourses = false;
-  showCatalogDetail = false;
+  showCatalogDetail = true;
   showHeader = false;
   loadingCatalogue = false;
   checked = false;
@@ -46,7 +46,7 @@ export class CatalogueManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
   dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-  @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatSort) sortT: MatSort
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
@@ -143,14 +143,103 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getCatalogDetail() { // courses mapped to catalog - when click remove
+    console.log(this.pagenumberTable)
     this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
       if (this.pagenumberTable === 0) {
         this.ELEMENT_DATA = [];
       }
       Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
       this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      this.dataSource.sort = this.sortT;
       console.log('abcabc', this.ELEMENT_DATA, result);
     });
+  }
+
+  getNext() {
+    // this.pagenumberTable = this.pagenumberTable + 1;
+    // this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable ).subscribe((result: any) => {
+    //   if (this.pagenumberTable === 0) {
+    //     this.ELEMENT_DATA = [];
+    //   }
+    //   Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+    //   this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+    //   console.log('abcabc', this.ELEMENT_DATA, result);
+    //   this.dataSource.sort = this.sortT;
+    // });
+    
+
+
+
+    var arr1 = [{
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    },
+    {
+      sno: "1",
+      courses: "Web Development",
+      category: "10",
+      language: "english"
+    }
+    ]
+    this.ELEMENT_DATA.push(...arr1);
+    this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+    this.dataSource.sort = this.sortT;
   }
 
   selectCourse(c, id) {

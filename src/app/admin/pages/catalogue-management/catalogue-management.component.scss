@@ -166,8 +166,9 @@ input:focus {
 }
 
 .arrow-drop-down {
-    position: absolute;
-    bottom: 0px;
+    // position: absolute;
+margin-top: 50%;
+    // bottom: 0px;
     background-color: $color-white;
 
     mat-icon {
@@ -213,6 +214,7 @@ font-size: 15px !important;
 }
 th.mat-header-cell{
     border-bottom-style: none;
+    padding-right: 64px;
 }
 .center{
     margin-top: -150px;
