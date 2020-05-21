@@ -50,8 +50,8 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
-    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
-    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+              private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+              private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
   }
@@ -275,8 +275,9 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   saveCourse() {
+    const arra = this.selectedArray.map((item: any) => item.course_id);
     if (this.type === 'add') {
-      this.adminservice.addCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+      this.adminservice.addCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
         if (result && result.data) {
           if (result.data.coursecataloguemapping?.success) {
             this.alert.openAlert('Courses added successfully', null);
@@ -288,7 +289,7 @@ export class CatalogueManagementComponent implements OnInit {
         }
       });
     } else {
-      this.adminservice.removeCourse(this.catalog.catalogue_id, this.selectedArray, this.checked).subscribe((result: any) => {
+      this.adminservice.removeCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
         if (result && result.data) {
           if (result.data.unmapcoursesfromcatalogue?.success) {
             this.alert.openAlert('Courses added successfully', null);
