@@ -168,7 +168,7 @@
   <button class="submit" (click)="getCategory(getCategoryDialog)" > Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <button class="submit" (click)="filter()" > Filter
+    <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre; filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
     <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort by
@@ -217,7 +217,7 @@
   <br>
 
   <div class="row">
-    <div class="col-3"  *ngIf="showAppliedFiltre">
+    <div class="col-3"   *ngIf="showAppliedFiltre">
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3><b>Language</b></h3><br>
         <ul class="list-group">
