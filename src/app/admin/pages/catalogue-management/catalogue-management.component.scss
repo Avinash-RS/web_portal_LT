@@ -11,9 +11,11 @@
     align-items: center;
     justify-content: center;
 }
+
 strong {
     letter-spacing: 0.4px !important;
 }
+
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -34,6 +36,7 @@ html {
     .addcat-btn {
         width: 70% !important;
     }
+
     .catalogue-card {
         width: 70% !important;
     }
@@ -56,16 +59,18 @@ hr {
 }
 
 .left {
-    z-index: 1 !important;
-    box-shadow: 0px 0px 12px $box-shadow;
+    z-index: 10 !important;
+    box-shadow: 0px 0px 12px #6c757d;
     overflow: auto !important
 }
 
 .right {
-    z-index: 1 !important;
-    box-shadow: 2px 10px 12px $box-shadow;
+    box-shadow: 0px 0px 7px #6c757d;
 }
 
+.shadow {
+    box-shadow: 0px 0px 12px #6c757d
+}
 .m-t-10 {
     margin-top: 10px !important;
 }
@@ -183,8 +188,8 @@ input:focus {
 }
 
 table {
-    width: 90%;
-    margin-left: 50px;
+    width: 95%;
+    margin: auto;
     margin-top: 20px;
 }
 
@@ -196,10 +201,6 @@ th {
 
 th.mat-header-cell {
     border-bottom-style: none;
-}
-
-.center {
-    margin-top: -150px;
 }
 
 td.mat-cell {
@@ -235,10 +236,4 @@ td.mat-cell {
 .course-image {
     height: 100px;
     object-fit: cover;
-}
-
-.btn-bar {
-    position: fixed;
-    bottom: 20px;
-
 }

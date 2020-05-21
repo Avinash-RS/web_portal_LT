@@ -2,9 +2,9 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
     <li class="breadcrumb-item pointer" (click)="showCourses = showHeader = showAddCatalogueForm = showCatalogDetail = false;
-    showListCatalogue=true">Catalogue Management</li>
+    showListCatalogue=true;catalog = {};">Catalogue Management</li>
     <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
-    showHeader = showCatalogDetail = true;catalog = {};type = null">{{catalog.catalogue_name}}</li>
+    showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null">{{catalog.catalogue_name}}</li>
     <li class="breadcrumb-item " *ngIf="showAddCatalogueForm">New catalogue</li>
     <li class="breadcrumb-item " *ngIf="type === 'add'">Add Courses</li>
     <li class="breadcrumb-item" *ngIf="type === 'remove'">Remove Courses</li>
@@ -48,13 +48,13 @@
         <div class="row">
           <div class=" col-lg-6 col-md-6 col-sm-6 col-6">
             <button mat-raised-button class="width_70 f_size_13 header-btn add-btn color_white border-radius-5"
-              (click)="getCoursesForCatalog()">
+              (click)="getCoursesForCatalog()" [disabled] = "ELEMENT_DATA.length == 0">
               <span class="material-icons f_size_18" style="vertical-align: middle;">add</span>Add
             </button>
           </div>
           <div class=" col-lg-6 col-md-6 col-sm-6 col-6">
             <button mat-raised-button class="width_70 f_size_13 header-btn remove-btn color_white border-radius-5"
-              (click)="getCoursesInCatalog()">
+              (click)="getCoursesInCatalog()" [disabled] = "ELEMENT_DATA.length == 0">
               <span class="material-icons f_size_18" style="vertical-align: middle;">delete</span>Remove
             </button>
           </div>
@@ -87,7 +87,7 @@
     </div>
     <div *ngIf="showListCatalogue" class="overflow-auto">
       <br>
-      <div class="row m-l-5 m-r-5">
+      <div class="row m-l-5 m-r-5" *ngIf="catalogueList && catalogueList.length > 0">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12"
           *ngFor="let course of catalogueList | sort: reverse : 'catalogue_name'; let i = index">
           <div class="catalogue-card m-l-5 border-radius-5 pointer" (click)="goToCatalogDetail(course)">
@@ -101,6 +101,9 @@
         </div>
       </div>
       <br><br>
+      <p class="center_align f_size_15" *ngIf="!loadingCatalogue && catalogueList.length == 0">
+        No Catalogues found
+      </p>
     </div>
     <div class="width_100 arrow-drop-down" *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">
       <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">
@@ -153,8 +156,9 @@
     <!-- End of Add new Catalogue  -->
 
     <!-- start of List Course TABLE -  -->
-    <div class="overflow-auto" *ngIf="showCatalogDetail">
-      <table mat-table *ngIf="!loadingCatalogue && ELEMENT_DATA.length > 0" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <div *ngIf="showCatalogDetail">
+      <table mat-table *ngIf="!loadingCatalogue && ELEMENT_DATA.length > 0" [dataSource]="dataSource" matSort 
+        class="overflow-auto m-t-10">
         <ng-container matColumnDef="sno">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
           <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
@@ -188,8 +192,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <p class="center" *ngIf="!loadingCatalogue && ELEMENT_DATA.length == 0">
-        No Catalog details found
+      <p class="center_align f_size_15" *ngIf="!loadingCatalogue && ELEMENT_DATA.length == 0">
+        No Catalogue details found
       </p>
       <div class="width_100 arrow-drop-down" *ngIf="showCatalogDetail && ELEMENT_DATA.length > 0">
         <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogueDetails()">
@@ -203,7 +207,7 @@
 <!-- END OF CARD_1 -->
 
 <!-- START OF CARD_2 -->
-<div class="row m-r-20 m-l-20 overflow-auto" *ngIf="showCourses">
+<div class="row m-r-20 m-l-20 overflow-auto shadow" *ngIf="showCourses">
   <!-- start of left hand side card view -->
   <div class="card col-12 col-lg-3 col-md-3 col-sm-12 left cardheight ">
   </div>
@@ -247,9 +251,9 @@
     <div class="row m-l-5 m-r-5">
       <div class="col-lg-2 col-md-2 col-sm-6 col-6">
         <!-- <h3 class="font-display m-b-0 color_blue">295 courses > </h3> -->
-        <h3 class="font-display color_blue m-b-0 m-l-20">{{totalCount}}
+        <div class="font-display color_blue m-l-10 m-b-0 f_size_16 f_wt_500">{{totalCount}}
           {{totalCount <= 1  ? 'Course > ' : 'Courses >'}}
-        </h3>
+        </div>
       </div>
       <div class="col-lg-7 col-md-7 col-sm-6 col-6 float_right">
         <!-- <app-search></app-search> -->
@@ -276,7 +280,7 @@
         </div>
       </div>
     </div>
-    <div class="row m-r-20 m-l-20">
+    <div class="row width_100 m-r-20 m-l-20 arrow-drop-down" >
       <div class="col-md-4 col-sm-12"></div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="SaveCatalogue" mat-stroked-button [disabled]="selectedArray.length == 0 || !checked"
@@ -318,7 +322,7 @@
           </div>
         </div>
         <br><br>
-        <div class="row m-l-20 m-r-20">
+        <div class="row width_100">
           <div class="col-md-4 col-sm-12"></div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
             <button id="createCatalogue" [disabled]="addCatalogueForm.invalid" mat-stroked-button

@@ -115,6 +115,7 @@ export class CatalogueManagementComponent implements OnInit {
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
     this.type = 'remove';
+    this.courseList = [];
     this.showCourses = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
@@ -125,6 +126,7 @@ export class CatalogueManagementComponent implements OnInit {
 
   getCoursesForCatalog() { // courses not mapped to catalog - when click add
     this.type = 'add';
+    this.courseList = [];
     this.showCourses = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
