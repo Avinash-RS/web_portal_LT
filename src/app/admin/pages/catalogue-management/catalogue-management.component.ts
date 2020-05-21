@@ -33,9 +33,11 @@ export class CatalogueManagementComponent implements OnInit {
   loadingCatalogue = false;
   checked = false;
   sortCatalogue = 'asc';
+  reverse = false;
   pagenumber = 0;
   pagenumberCourse = 0;
   pagenumberTable = 0;
+  totalCount: number;
   catalog: any;
   type: string;
   catalogueList = [];
@@ -46,7 +48,7 @@ export class CatalogueManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
   dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-  @ViewChild(MatSort) sort: MatSort
+  // @ViewChild(MatSort) sort: MatSort
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
@@ -72,6 +74,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   sortt() {
+    this.reverse = !this.reverse;
     console.log(this.sortCatalogue);
     if (this.sortCatalogue === 'asc') {
       this.sortCatalogue = 'dsc';
@@ -128,6 +131,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
+      this.totalCount = result?.data?.getcoursesincatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
       console.log('it adds', this.courseList);
     });
   }
@@ -138,6 +142,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
       this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      this.totalCount = result?.data?.getcoursesforcatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
       console.log('it adds', this.courseList);
     });
   }
