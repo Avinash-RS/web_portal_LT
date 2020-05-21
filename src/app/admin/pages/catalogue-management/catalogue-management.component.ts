@@ -73,6 +73,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   sortt() {
+    this.reverse = !this.reverse;
     console.log(this.sortCatalogue);
     if (this.sortCatalogue === 'asc') {
       this.sortCatalogue = 'dsc';
