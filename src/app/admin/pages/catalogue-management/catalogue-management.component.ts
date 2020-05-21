@@ -125,7 +125,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.showCourses = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = false;
     this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
-      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
       console.log('it adds', this.courseList);
     });
   }
