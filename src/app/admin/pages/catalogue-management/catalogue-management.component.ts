@@ -50,7 +50,9 @@ export class CatalogueManagementComponent implements OnInit {
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
+    // tslint:disable-next-line:align
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+    // tslint:disable-next-line:align
     private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
@@ -142,126 +144,13 @@ export class CatalogueManagementComponent implements OnInit {
 
   getCatalogDetail() { // courses mapped to catalog - when click remove
     this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
-      this.ELEMENT_DATA = [];
-      // const arr = [];
-      // arr.push(result.data.getallcatalogue_by_id.message);
-      // this.ELEMENT_DATA.push(...arr);
-      // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
-      // this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      if (this.pagenumberTable === 0) {
+        this.ELEMENT_DATA = [];
+      }
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
       console.log('abcabc', this.ELEMENT_DATA, result);
     });
-    // var arr = [{
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // }
-    // ]
-    // this.ELEMENT_DATA.push(...arr);
-    // this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
-    // this.dataSource.paginator = this.paginator;
-  }
-
-  getNextCattalogueDetails() {
-    // var arr = [{
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // },
-    // {
-    //   sno: "1",
-    //   courses: "Web Development",
-    //   category: "10",
-    //   language: "english"
-    // }
-    // ]
-    // this.ELEMENT_DATA.push(...arr);
-    // this.dataSource = new MatTableDataSource<data>(this.ELEMENT_DATA);
   }
 
   selectCourse(c, id) {
