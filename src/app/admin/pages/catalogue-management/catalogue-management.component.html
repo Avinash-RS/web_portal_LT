@@ -142,9 +142,9 @@
 
     <!-- start of List Course table -  -->
     <div class="overflow-auto" *ngIf="showCatalogDetail">
-      <div class="example-container mat-elevation-z8">
+      <!-- <div class="mat-elevation-z8"> -->
         <!-- <mat-table #table [dataSource]="dataSource"> -->
-          <table mat-table [dataSource]="dataSource" matSort>
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
 
           <!-- <ng-container matColumnDef="sno">
             <mat-header-cell *matHeaderCellDef> sno </mat-header-cell> -->
@@ -156,7 +156,7 @@
           <!-- </ng-container> -->
 
           <ng-container matColumnDef="sno">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> sno </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
             <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
           </ng-container>
 
@@ -201,7 +201,7 @@
           <!-- </mat-row> -->
         </table>
 
-      </div>
+      <!-- </div> -->
     
       <div class="width_100 arrow-drop-down" *ngIf="showCatalogDetail">
         <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogueDetails()">

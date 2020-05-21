@@ -195,13 +195,32 @@ input:focus {
     }
 }
 
-.example-container {
-    height: 400px;
-    overflow: auto;
-}
+// .example-container {
+//     // height: 400px;
+//     overflow: auto;
+// }
 
 table {
-    width: 100%;
+    width: 90%;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+th {
+color: black;
+// size:f_size_14     
+font-size: 15px !important;
+
+}
+th.mat-header-cell{
+    border-bottom-style: none;
+}
+.center{
+    margin-top: -150px;
+
+}
+td.mat-cell{
+    border-bottom-style: none;
+    border-collapse: collapse !important;;
 }
 
 .remove-btn {
