@@ -11,13 +11,15 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 })
 export class PublishCourseComponent implements OnInit {
   course: any;
-  show: boolean = false;
+  show = false;
 
-  constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService, private alert: AlertServiceService, ) {
+  constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService,
+              private alert: AlertServiceService, ) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    if (!this.course)
+    if (!this.course) {
       this.route.navigate(['/Admin/auth/Wca']);
+    }
   }
 
   ngOnInit() {
@@ -26,22 +28,25 @@ export class PublishCourseComponent implements OnInit {
   }
 
   publishCourse() {
-    this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data: Boolean) => {
+    this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data) => {
       if (data) {
         this.service.publishCourse(this.course.id, true).subscribe((res: any) => {
           if (res.data && res.data.publishcourse) {
             if (res.data.publishcourse.success) {
-              this.alert.openAlert("Course published successfully", null)
+              this.alert.openAlert('Course published successfully', null);
               this.route.navigate(['/Admin/auth/Wca']);
+            } else {
+              this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
+                res.data.publishcourse.message, null);
             }
-            else
-              this.alert.openAlert(res.data.publishcourse.message == "" ? res.data.publishcourse.error_msg :
-                res.data.publishcourse.message, null)
-          } else
-            this.alert.openAlert("Please try again later", null)
-        })
+          } else {
+            this.alert.openAlert('Please try again later', null);
+          }
+        });
+      } else {
+        this.route.navigateByUrl('/Admin/auth/Wca/previewcourse');
       }
-    })
+    });
   }
 
   draftCourse() {
