@@ -141,6 +141,34 @@ h3{
     margin-top: 7px;
     width: 26px !important;
   }
+
+  .containerShadow {
+    padding: 15px;
+    -webkit-box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    -moz-box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    margin-top: 20px;
+  }
+
+  .container{
+      width: 97.5%;
+      border-radius: 5px;
+      background-color: $color-white;
+      border: 1px solid #e3e3fe;
+  }
+  .bg-color{
+      background-color: #e3e3fe;
+      height: 44px;
+      margin-top: -20px;
+      border-radius: 3px;
+  }
+  .rounded{
+    background: #e3e3fe;
+  }
+  .margin{
+      margin-top: 7%;
+  }
+
   
 
 
