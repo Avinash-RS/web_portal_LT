@@ -204,7 +204,11 @@
       </div>
       <div class="row arrow-drop-down" *ngIf="showCatalogDetail">
         <!-- <div *ngIf="catalogueList && catalogueList.length > 0"> -->
+<<<<<<< HEAD
         <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogueDetails()">
+=======
+        <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumberTable; getCatalogDetail()">
+>>>>>>> e3cb51f207525f7a9d33cccc3b31f865db18a504
           <mat-icon style="font-size: 40px;">arrow_drop_down</mat-icon>
         </button>
         <!-- </div> -->
@@ -282,7 +286,7 @@
         </h4>
       </div>
     </div>
-    <div class="m-r-20 m-l-20">
+    <div class="m-r-20 m-l-20 overflow-auto">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
           *ngFor="let courses of courseList; let i = index">
@@ -297,7 +301,7 @@
         </div>
       </div>
     </div>
-    <div class="row m-l-20 m-r-20">
+    <div class="row m-r-20 m-l-20">
       <div class="col-md-4 col-sm-12"></div>
       <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
         <button id="SaveCatalogue" mat-stroked-button
@@ -308,7 +312,6 @@
           class="width_80 border-radius-5 color_blue blue_border center">Cancel</button>
       </div>
     </div>
-
     <!-- end of  view courses row -->
 
   </div>

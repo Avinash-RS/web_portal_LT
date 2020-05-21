@@ -652,8 +652,8 @@ export const getcategoryadmin = gql`
 }`;
 // tslint:disable-next-line:variable-name
 export const getallcatalogue_by_id = gql`
-   query getallcatalogue_by_id($catalogue_id: String!) {
-    getallcatalogue_by_id(catalogue_id: $catalogue_id){
+   query getallcatalogue_by_id($catalogue_id: String!, $pagenumber: Int!) {
+    getallcatalogue_by_id(catalogue_id: $catalogue_id, pagenumber : $pagenumber){
       success
       error_msg
       message{

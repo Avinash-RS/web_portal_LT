@@ -33,13 +33,14 @@ export class CatalogueManagementComponent implements OnInit {
   loadingCatalogue = false;
   checked = false;
   sortCatalogue = 'asc';
-  catalogueList = [];
   pagenumber = 0;
+  pagenumberCourse = 0;
+  pagenumberTable = 0;
   catalog: any;
-  type: any;
+  type: string;
+  catalogueList = [];
   selectedArray: any = [];
   courseList: any = [];
-  pagenumberCourse: number;
   ELEMENT_DATA: Data[] = [];
   // paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -114,7 +115,7 @@ export class CatalogueManagementComponent implements OnInit {
 
   goToCatalogDetail(c) {
     this.catalog = c;
-    this.getCatalogDetail(c);
+    this.getCatalogDetail();
     this.showCatalogDetail = this.showHeader = true;
     this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
   }
@@ -139,15 +140,15 @@ export class CatalogueManagementComponent implements OnInit {
     });
   }
 
-  getCatalogDetail(c) { // courses mapped to catalog - when click remove
-    this.adminservice.getallcatalogueById(c.catalogue_id).subscribe((result: any) => {
+  getCatalogDetail() { // courses mapped to catalog - when click remove
+    this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
       this.ELEMENT_DATA = [];
-      const arr = [];
-      arr.push(result.data.getallcatalogue_by_id.message);
-      this.ELEMENT_DATA.push(...arr);
-      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
-      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
-      console.log('abcabc', this.ELEMENT_DATA);
+      // const arr = [];
+      // arr.push(result.data.getallcatalogue_by_id.message);
+      // this.ELEMENT_DATA.push(...arr);
+      // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message);
+      // this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      console.log('abcabc', this.ELEMENT_DATA, result);
     });
     // var arr = [{
     //   sno: "1",
