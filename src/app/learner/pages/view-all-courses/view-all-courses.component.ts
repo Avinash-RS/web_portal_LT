@@ -112,11 +112,16 @@ export class ViewAllCoursesComponent implements OnInit {
       this. getthreeLevelCat();
     }
 
+    if(this.level1selectedID.length || this.level2selectedID.length || this.level3selectedID.length ) {
     this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.level2selectedID,this.level3selectedID).subscribe((result: any) => {
       if(result['data']['getLevelSubCategoryData'].success == true){
         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
       }
     });
+  }else{
+    this.allLvlCategoryFilterVal = [];
+    this. getthreeLevelCat();
+  }
   }
 
 
@@ -407,6 +412,7 @@ export class ViewAllCoursesComponent implements OnInit {
   }
   closedialogbox(){
     this.dialog.closeAll();
+    this.allLvlCategoryFilterVal = [];
     this.getthreeLevelCat();
   }
 
