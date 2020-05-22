@@ -32,6 +32,9 @@ export class EnrollmentComponent implements OnInit {
   dialogopened = false;
   selectedgroupid: any;
   enrollrequestdata: any;
+  resultsLength: any;
+  resultsLength1: any;
+
   constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
@@ -44,8 +47,9 @@ export class EnrollmentComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.username.toLowerCase().includes(filter) || data.full_name.toLowerCase().includes(filter) ||
-        data.course_name.toString().includes(filter) || data.group_name.toString().includes(filter);
+      return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
+        data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter) ||
+        data?.group_detail[0]?.group_name?.toString().includes(filter) || data?.group_detail[0]?.course_name?.toString().includes(filter) ;
     };
   }
   getenrolledcoursesindividual(data) {
@@ -76,6 +80,7 @@ export class EnrollmentComponent implements OnInit {
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       console.log(result.data);
+      this.resultsLength = result?.data?.get_all_enrolledcourses?.enroll_count;
       this.dataSource.data = result?.data?.get_all_enrolledcourses?.message;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -83,6 +88,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   getenrolledcoursesforgroup(data) {
+    console.log(data);
     this.columns1 = [
       { columnDef: 'full_name', header: 'Full Name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
@@ -92,6 +98,8 @@ export class EnrollmentComponent implements OnInit {
     this.displayedColumns1 = (['selectall', 'sno']).concat(this.columns1.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
       console.log(result.data);
+      this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
+
       this.dataSource1.data = result?.data?.getenrolledcourses?.message;
       this.dataSource1.paginator = this.paginator;
       this.dataSource1.sort = this.sort;
@@ -186,7 +194,7 @@ export class EnrollmentComponent implements OnInit {
         const array = [];
         tablevalue.forEach(element => {
           if (element.isChecked === true) {
-            if (this.selectiontype === 'user_group'){
+            if (this.selectiontype === 'user_group') {
               array.push({group_id: element.group_detail[0].group_id,
                 course_id: element.group_detail[0].course_id });
             } else {

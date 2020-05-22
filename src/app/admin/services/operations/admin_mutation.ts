@@ -190,9 +190,7 @@ mutation unmapcoursesfromcatalogue($catalogue_id: String! ,$course_id: [String]!
 
 export const rejectenrollment = gql`
 mutation reject_enrollment ($update_type: String!, $status_reason: String!,$enrollments: [enrollments_dtl]){
-  reject_enrollment(
-      update_type: $update_type,
-      status_reason: $status_reason, enrollments: $enrollments ){
+  reject_enrollment(update_type: $update_type, status_reason: $status_reason, enrollments: $enrollments ){
       success
       error_msg
       message

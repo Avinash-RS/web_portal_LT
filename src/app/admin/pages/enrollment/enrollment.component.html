@@ -105,7 +105,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next1($event)" showFirstLastButtons>
+  <mat-paginator #paginator [length]="resultsLength1" [pageSize]="10" (page)="next1($event)" showFirstLastButtons>
   </mat-paginator>
   <br>
 </ng-template>
