@@ -139,7 +139,7 @@ export class ListViewCourseComponentComponent implements OnInit {
             // this.alert.openAlert("User enrolled successfully for the course", null);
             Swal.fire("User enrolled successfully for the course")
           } else {
-            Swal.fire("enrollCourse.data.enrollcourse.message")
+            Swal.fire(enrollCourse.data.enrollcourse.message)
             // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
           }
         }
