@@ -28,8 +28,8 @@
 
     <div class="example-container mat-elevation-z8">
       <div class="buttons">
-        <button [disabled]="selectedcheckbox" (click)="reject()" class="button button8">Reject</button>
-        <button [disabled]="selectedcheckbox" (click)="approve()" class="button button5">Approve</button>
+        <button [disabled]="selectedcheckbox" (click)="reject(datasource.data)" class="button button8">Reject</button>
+        <button [disabled]="selectedcheckbox" (click)="approve(datasource.data)" class="button button5">Approve</button>
       </div>
       <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="selectall">
@@ -72,8 +72,8 @@
   </span>
 
   <div class="buttons">
-    <button [disabled]="selectedcheckbox1" (click)="reject()" class="button button8">Reject</button>
-    <button [disabled]="selectedcheckbox1" (click)="approve()" class="button button5">Approve</button>
+    <button [disabled]="selectedcheckbox1" (click)="reject(datasource1.data)" class="button button8">Reject</button>
+    <button [disabled]="selectedcheckbox1" (click)="approve(datasource1.data)" class="button button5">Approve</button>
   </div>
   <mat-dialog-content style="width: 1000px">
     <mat-table #table [dataSource]="dataSource1" matSort>
@@ -105,7 +105,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
     </mat-table>
   </mat-dialog-content>
-  <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+  <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next1($event)" showFirstLastButtons>
   </mat-paginator>
   <br>
 </ng-template>

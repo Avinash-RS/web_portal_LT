@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as moment from 'moment';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-enrollment',
@@ -29,6 +30,7 @@ export class EnrollmentComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   dataSource1 = new MatTableDataSource<any>();
   dialogopened = false;
+  selectedgroupid: any;
   constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
@@ -40,11 +42,9 @@ export class EnrollmentComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource1.paginator = this.paginator;
-    this.dataSource1.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.username.toLowerCase().includes(filter) || data.full_name.toLowerCase().includes(filter) ||
-        data.course_name.toString().includes(filter);
+        data.course_name.toString().includes(filter) || data.group_name.toString().includes(filter);
     };
   }
   getenrolledcoursesindividual(data) {
@@ -93,34 +93,11 @@ export class EnrollmentComponent implements OnInit {
     });
   }
 
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource1.data.forEach(row => this.selection.select(row));
-  }
-
-  // /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: PeriodicElement): string {
-  //   if (!row) {
-  //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-  //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position1 + 1}`;
-  // }
-
   radiobuttonchange() {
     this.selectall = false;
     this.selectedcheckbox = true;
-    this.dataSource.data.forEach(element => { element.isChecked = false; })
-    this.dataSource1.data = [];
+    this.dataSource?.data?.forEach(element => { element.isChecked = false; })
+    this.dataSource.data = [];
     if (this.selectiontype === 'group') {
       this.getenrolledcoursesgroup(0);
     } else {
@@ -129,7 +106,6 @@ export class EnrollmentComponent implements OnInit {
     }
 
   }
-
 
   selectallchange(value) {
     console.log(this.dataSource1);
@@ -145,13 +121,6 @@ export class EnrollmentComponent implements OnInit {
     if (result === true) {
       this.selectedcheckbox = false;
     } else { this.selectedcheckbox = true; }
-    // if (row.isChecked === undefined || row.isChecked === false) {
-    //   row.isChecked = true;
-    //   // this.selectedArray.push(row);
-    // } else {
-    //   row.isChecked = !row.isChecked;
-    //   // this.selectedArray = this.selectedArray.filter(i => i !== row);
-    // }
   }
 
 
@@ -171,7 +140,7 @@ export class EnrollmentComponent implements OnInit {
     } else { this.selectedcheckbox1 = true; }
   }
 
-  approve() {
+  approve(data) {
     Swal.fire({
       title: '<div>Approval Confirmation</div>',
       icon: 'warning',
@@ -183,16 +152,21 @@ export class EnrollmentComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+       const array = data.filter( element => element.isChecked === true);
+       Swal.fire(
+          'Successfully Approved',
+          'A Confirmation has been sent to the user Email ID',
           'success'
         );
+      //  Swal.fire({
+      //     icon: 'success',
+      //     title: 'A Confirmation has been sent to the user Email ID ',
+      //   });
       }
     });
   }
 
-  reject() {
+  reject(data) {
     Swal.fire({
       title: '<div> Reason for Rejection</div>',
       // title: 'Reason for Rejection',
@@ -204,10 +178,11 @@ export class EnrollmentComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log(result.value);
+        const array = data.filter( element => element.isChecked === true);
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
+          'Rejection',
+          'Rejection with the comments shared to the user mail ID',
+          'error'
         );
       }
     });
@@ -231,6 +206,7 @@ export class EnrollmentComponent implements OnInit {
       const userdetail = { user_id: row.user_id, _id: row._id };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
+      this.selectedgroupid = row.group_detail[0].group_id;
       const data = { group_id: row.group_detail[0].group_id, pagenumber: 0, is_individual: true };
       this.dialogopened = true;
       this.dataSource1.data = [];
@@ -248,6 +224,20 @@ export class EnrollmentComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  next(e) {
+    if (this.selectiontype === 'group') {
+      this.getenrolledcoursesgroup(e.pageIndex);
+    } else {
+      const data = { group_id: 'undefined', pagenumber: e.pageIndex, is_individual: false };
+      this.getenrolledcoursesindividual(data);
+    }
+  }
+
+  next1(e) {
+    const data = { group_id: this.selectedgroupid, pagenumber: e.pageIndex, is_individual: true };
+    this.getenrolledcoursesforgroup(data);
   }
 
 }
