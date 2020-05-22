@@ -3,8 +3,9 @@ import { Apollo } from 'apollo-angular';
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
   create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
-  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping
+  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping,rejectenrollment
 } from './operations/admin_mutation';
+
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
@@ -419,4 +420,16 @@ export class AdminServicesService {
   }
 
   // End of enrollment
+  // End of Catalogue Management
+
+  rejectenrollment(data) {
+    return this.Apollo.query({
+      query: rejectenrollment,
+      variables: {
+        update_type: data.update_type,
+        status_reason: data.status_reason,
+        enrollments: data.enrollments
+      }
+    });
+  }
 }

@@ -28,7 +28,7 @@ import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/
 import { DndDirective } from '../core/dnd.directive';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 import { PipeModule } from '../../pipes/pipe.module';
-import { SearchPipe } from '../../pipes/search.pipe';
+// import { SearchPipe } from '../../pipes/search.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

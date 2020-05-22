@@ -31,12 +31,13 @@ export class EnrollmentComponent implements OnInit {
   dataSource1 = new MatTableDataSource<any>();
   dialogopened = false;
   selectedgroupid: any;
+  enrollrequestdata: any;
   constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
   ngOnInit() {
-    const data = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
-    this.getenrolledcoursesindividual(data);
+    this.enrollrequestdata = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
+    this.getenrolledcoursesindividual(this.enrollrequestdata);
   }
 
   ngAfterViewInit() {
@@ -48,6 +49,7 @@ export class EnrollmentComponent implements OnInit {
     };
   }
   getenrolledcoursesindividual(data) {
+    console.log(data);
     this.columns = [
       { columnDef: 'lxp_joined_date', header: 'Date Received', cell: (element: any) => `${moment(element.lxp_joined_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full Name', cell: (element: any) => `${element.full_name}` },
@@ -59,9 +61,8 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
       console.log(result.data);
       this.dataSource.data = result?.data?.getenrolledcourses?.message;
-      if (this.dialogopened === true) {
-        this.dataSource1.data = result?.data?.getenrolledcourses?.message;
-      }
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -76,6 +77,8 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       console.log(result.data);
       this.dataSource.data = result?.data?.get_all_enrolledcourses?.message;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -90,19 +93,21 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
       console.log(result.data);
       this.dataSource1.data = result?.data?.getenrolledcourses?.message;
+      this.dataSource1.paginator = this.paginator;
+      this.dataSource1.sort = this.sort;
     });
   }
 
   radiobuttonchange() {
     this.selectall = false;
     this.selectedcheckbox = true;
-    this.dataSource?.data?.forEach(element => { element.isChecked = false; })
+    this.dataSource?.data?.forEach(element => { element.isChecked = false; });
     this.dataSource.data = [];
-    if (this.selectiontype === 'group') {
+    if (this.selectiontype === 'user_group') {
       this.getenrolledcoursesgroup(0);
     } else {
-      const data = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
-      this.getenrolledcoursesindividual(data);
+      console.log(this.dataSource.data);
+      this.getenrolledcoursesindividual(this.enrollrequestdata);
     }
 
   }
@@ -166,7 +171,8 @@ export class EnrollmentComponent implements OnInit {
     });
   }
 
-  reject(data) {
+  reject(tablevalue) {
+    console.log(tablevalue)
     Swal.fire({
       title: '<div> Reason for Rejection</div>',
       // title: 'Reason for Rejection',
@@ -177,13 +183,34 @@ export class EnrollmentComponent implements OnInit {
       confirmButtonText: 'Ok'
     }).then((result) => {
       if (result.value) {
-        console.log(result.value);
-        // const array = data.filter( element => element.isChecked === true);
-        Swal.fire(
-          'Rejection',
-          'Rejection with the comments shared to the user mail ID',
-          'error'
-        );
+        const array = [];
+        tablevalue.forEach(element => {
+          if (element.isChecked === true) {
+            if (this.selectiontype === 'user_group'){
+              array.push({group_id: element.group_detail[0].group_id,
+                course_id: element.group_detail[0].course_id });
+            } else {
+              array.push({group_id: element.group_id,
+                course_id: element.course_id , user_id: element.user_id });
+            }
+          }
+        });
+        const data = {  update_type: this.selectiontype,
+        status_reason: result.value,
+        enrollments: array};
+        console.log(data);
+        this.adminservice.rejectenrollment(data).subscribe(( response: any ) => {
+        console.log(response);
+        if (response?.data?.reject_enrollment?.success === true) {
+          this.dataSource.data = [];
+          this.radiobuttonchange();
+          Swal.fire(
+              'Rejection',
+              'Rejection with the comments shared to the user mail ID',
+              'error'
+            );
+        }
+        });
       }
     });
 
@@ -227,7 +254,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   next(e) {
-    if (this.selectiontype === 'group') {
+    if (this.selectiontype === 'user_group') {
       this.getenrolledcoursesgroup(e.pageIndex);
     } else {
       const data = { group_id: 'undefined', pagenumber: e.pageIndex, is_individual: false };

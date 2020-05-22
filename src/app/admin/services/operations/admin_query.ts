@@ -799,20 +799,26 @@ export const getcatalogue = gql`
 export const getenrolledcourses = gql`
 query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Boolean!,$course_id: String!){
   getenrolledcourses(group_id: $group_id,pagenumber: $pagenumber,is_individual: $is_individual,course_id: $course_id){
-      success
-      error_msg
-      enroll_count
-      message{
-            _id
-            user_id
-            course_id
-            lxp_joined_date
-            username
-            full_name
-            group_name
-            course_name
-            group_id
-      }
+    success
+    error_msg
+    enroll_count
+    message{
+          _id
+          user_id
+          course_id
+          enroll_date
+          lxp_joined_date
+          username
+          full_name
+          group_name
+          course_name
+          group_id
+          wish_list{
+                  wish_list_id
+                  created_on
+                  user_id
+          }
+    }
   }
 }`;
 
@@ -820,6 +826,7 @@ query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Bo
 export const get_all_enrolledcourses = gql`
 query get_all_enrolledcourses($pagenumber: Int!){
   get_all_enrolledcourses(pagenumber: $pagenumber){
+      enroll_count
       success
       error_msg
       message{
