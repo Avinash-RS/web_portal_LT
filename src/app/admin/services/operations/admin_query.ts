@@ -620,8 +620,12 @@ query get_draft_course($admin_id: String!, $pagenumber: Int!){
 }`;
 // tslint:disable-next-line:variable-name
 export const publishcourse = gql`
-  query publishcourse($course_id: String!, $is_published: Boolean!){
-    publishcourse(course_id: $course_id, is_published: $is_published) {
+  query publishcourse($course_id: String!, $is_published: Boolean!, $level : String!,
+  $category_id : String!,
+  $sub_category_id : String!,
+  $super_sub_category_id : String!,){
+    publishcourse(course_id: $course_id, is_published: $is_published, category_id : $category_id,
+      sub_category_id : $sub_category_id, super_sub_category_id : $super_sub_category_id) {
       success
       message
       error_msg
@@ -652,8 +656,8 @@ export const getcategoryadmin = gql`
 }`;
 // tslint:disable-next-line:variable-name
 export const getallcatalogue_by_id = gql`
-   query getallcatalogue_by_id($catalogue_id: String!) {
-    getallcatalogue_by_id(catalogue_id: $catalogue_id){
+   query getallcatalogue_by_id($catalogue_id: String!, $pagenumber: Int!) {
+    getallcatalogue_by_id(catalogue_id: $catalogue_id, pagenumber : $pagenumber){
       success
       error_msg
       message{
@@ -666,6 +670,71 @@ export const getallcatalogue_by_id = gql`
         updated_on
         created_by
         is_active
+        group_details{
+          _id
+          admin_id
+          catalogue_id
+          created_on
+          updated_on
+          created_by
+          is_active
+          group_id
+          group_name
+          category_id
+        }
+        course_details{
+          course_id
+          course_description
+          course_name
+          course_category
+          course_type
+          course_language
+          super_sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            super_sub_category_id
+            super_sub_category_name
+            super_sub_category_image
+            super_sub_category_description
+            parent_sub_category_id
+            parent_category_id
+          }
+          sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            sub_category_id
+            sub_category_name
+            sub_category_image
+            sub_category_description
+            parent_category_id
+          }
+          category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            category_id
+            category_name
+            category_image
+            category_description
+          }
+        }
       }
     }
 }`;
@@ -700,7 +769,8 @@ export const getcoursesincatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }
@@ -715,7 +785,8 @@ export const getcoursesforcatalogue = gql`
       message{
         course_id
         course_name
-        catalogue_description
+        course_description
+        short_description
         course_img_url
       }
     }

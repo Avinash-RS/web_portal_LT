@@ -12,6 +12,10 @@
     justify-content: center;
 }
 
+strong {
+    letter-spacing: 0.4px !important;
+}
+
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -40,7 +44,7 @@ html {
 
 .cardheight {
     height: 600px !important;
-    box-shadow: 2px 0px 10px #6c757d;
+    box-shadow: 2px 0px 10px $box-shadow;
     overflow: hidden;
 }
 
@@ -55,18 +59,18 @@ hr {
 }
 
 .left {
-    z-index: 1 !important;
-    box-shadow: 0px 0px 12px $box-shadow;
+    z-index: 10 !important;
+    box-shadow: 0px 0px 12px #6c757d;
     overflow: auto !important
 }
 
 .right {
-    box-shadow: 0px 0px 7px $box-shadow;
+    box-shadow: 0px 0px 7px #6c757d;
 }
 
-// .m-t-20 {
-//     margin-top: 20px; replaced with space2
-// }
+.shadow {
+    box-shadow: 0px 0px 12px #6c757d !important;
+}
 
 .m-t-10 {
     margin-top: 10px !important;
@@ -116,6 +120,8 @@ hr {
 .addcat-btn {
     background-color: $color-dark-green;
     margin-right: 0 !important;
+    display: flex;
+
 }
 
 button,
@@ -129,17 +135,6 @@ input:focus {
     padding: 8px !important;
 }
 
-.error_msg {
-    font-size: 80%;
-    color: $color-red;
-}
-
-.material-icons {
-    font-size: inherit;
-    padding-right: 5px;
-    font-size: 16px;
-}
-
 .sort-btn {
     border-radius: 5px;
     width: 80px;
@@ -147,6 +142,7 @@ input:focus {
     border-width: thin;
     border-color: $color-blank;
     background-color: $color-light-grey;
+
     .mat-icon {
         font-size: 25px !important;
         color: $color-blank;
@@ -156,8 +152,8 @@ input:focus {
 .catalogue-card {
     width: 90% !important;
     margin-bottom: 10% !important;
-    border: 1.0px solid $color-light-grey !important;
-    box-shadow: 0px 0px 5px $box-shadow;
+    border: 1.0px solid $color-border !important;
+    box-shadow: 0px 0px 6px $box-shadow;
     height: 70%;
     background-color: $color-lightest-grey;
     text-align: center;
@@ -167,34 +163,54 @@ input:focus {
 .arrow-drop-down {
     position: absolute;
     bottom: 0px;
+    padding-bottom: 10px;
     background-color: $color-white;
+
     mat-icon {
         font-size: 40px;
     }
 }
+
 .cat-name-card {
-    margin-bottom: 10% !important;
-    border: 1.0px solid $color-blank !important;
-    height: 50%;
+    border: 1.5px solid $box-shadow !important;
+    height: 55%;
     text-align: center;
     padding: 10px !important;
+    resize: both;
 }
 
 .add-btn {
     background-color: $color-dark-green;
 }
 
-// .edit-btn {
-//     background-color: $color-subhead;
-// }
+.edit-btn {
+    background-color: $color-subhead;
 
-.example-container {
-    height: 500px;
-    overflow: auto;
+    .material-icons {
+        font-size: 12px !important;
+    }
+}
+.width_95  {
+    width: 95% !important;
+}
+table {
+    width: 95%;
+    margin: auto;
 }
 
-table {
-    width: 100%;
+th {
+    color: $color-blank;
+    font-size: 15px !important;
+
+}
+
+th.mat-header-cell {
+    border-bottom-style: none;
+}
+
+td.mat-cell {
+    border-bottom-style: none;
+    border-collapse: collapse !important;
 }
 
 .remove-btn {
@@ -202,7 +218,36 @@ table {
 }
 
 .header-btn {
-    height: 35px;
-    font-size: 12px !important;
-    width: 100px;
+    height: 30px;
+
+}
+
+.m-w-100 {
+    max-width: 100px;
+}
+
+.m-10 {
+    margin: 10px;
+}
+
+.containerOverlay {
+    .overlay {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        overflow: hidden;
+        top: 0vh;
+        left: 10%;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .pointer {
+        width: 80% !important;
+    }
+}
+
+.course-image {
+    height: 100px;
+    object-fit: cover;
 }
