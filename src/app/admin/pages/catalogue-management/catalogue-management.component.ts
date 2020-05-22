@@ -71,6 +71,16 @@ export class CatalogueManagementComponent implements OnInit {
     });
   }
 
+  clickCatalog() {
+    this.showCourses = this.showHeader = this.showAddCatalogueForm = this.showCatalogDetail = false;
+    this.showListCatalogue = true;
+    this.catalog = {};
+    this.getListCatalogue();
+    this.type = null;
+    this.courseList = this.catalogueList = [];
+    this.totalCount = null;
+  }
+
   get f() {
     if (this.showAddCatalogueForm === true) {
       return this.addCatalogueForm.controls;

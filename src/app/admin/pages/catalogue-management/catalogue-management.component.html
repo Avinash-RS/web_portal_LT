@@ -1,8 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item pointer" (click)="showCourses = showHeader = showAddCatalogueForm = showCatalogDetail = false;
-    showListCatalogue=true;catalog = {};">Catalogue Management</li>
+    <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue Management</li>
     <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
     showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null">{{catalog.catalogue_name}}
     </li>
@@ -223,10 +222,10 @@
           <div class="col-lg-5 col-md-5 col-sm-6 col-6"></div>
           <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 m-t-10 ">
             <!-- <strong class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name}}</strong> -->
-            <strong class="cat-name-card  border-radius-5 color_blue">{{'catalogue name'}}</strong>
+            <strong class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name || 'Catalogue Name'}}</strong>
             <span class="material-icons none f_size_17" style="vertical-align: middle; color:darkGrey;"
               matTooltip="{{catalog?.catalogue_name || 'Catalogue Description'}}">info_outline</span>
-            <strong class="cat-name-card  m-l-20 border-radius-5 color_blue">{{'User group name'}}</strong>
+            <strong class="cat-name-card  m-l-20 border-radius-5 color_blue">{{catalog?.group_details?.group_name  || 'Group Name'}}</strong>
           </div>
         </div>
       </div>
@@ -283,8 +282,8 @@
       <br>
       <br><br>
     </div>
-    <div class="width_100 arrow-drop-down" *ngIf="totalCount > 12">
-      <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourses()">
+    <div class="width_100 arrow-drop-down">
+      <button mat-icon-button aria-label="More Icon" *ngIf="totalCount > 12" class="center" (click)="getNextCourses()">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
 
