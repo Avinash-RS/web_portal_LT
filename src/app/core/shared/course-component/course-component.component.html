@@ -80,7 +80,7 @@
         </div>
       </div>
 
-      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300" (click)="login()">ENROLL NOW
+      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300" (click)="enrollCourse()">ENROLL NOW
       </button>
     </div>
   </div>
@@ -95,7 +95,7 @@
       <div class="col-md-12 m-t-25">
         <p class="course_description">
           {{ (course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
-        
+
         </p>
       </div>
     </div>

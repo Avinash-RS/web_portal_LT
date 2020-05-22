@@ -50,16 +50,14 @@
           <div class="col-1"></div>
           <div class=" col-lg-5 col-md-5 col-sm-5 col-5 ">
             <button mat-raised-button class="width_95 f_size_12 header-btn m-w-100 add-btn color_white border-radius-5"
-              (click)="getCoursesForCatalog()">
-              <!-- [disabled]="ELEMENT_DATA.length == 0" -->
+              (click)="getCoursesForCatalog()" [disabled]="ELEMENT_DATA.length == 0">
               <span class="material-icons f_size_17" style="vertical-align: middle;">add</span>Add
             </button>
           </div>
           <div class=" col-lg-5 col-md-5 col-sm-5 col-5 float_right">
             <button mat-raised-button [disabled]="ELEMENT_DATA.length == 0"
               class="width_95 f_size_12 header-btn m-w-100 remove-btn color_white border-radius-5"
-              (click)="getCoursesInCatalog()">
-              <!--  -->
+              (click)="getCoursesInCatalog()" [disabled]="ELEMENT_DATA.length == 0">
               <span class="material-icons f_size_17" style="vertical-align: middle;">delete</span>Remove
             </button>
           </div>
