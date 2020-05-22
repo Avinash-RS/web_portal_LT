@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { enrollcourse } from '@core/services/operations/common_mutation';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-course-component',
@@ -94,7 +96,7 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     if (!this.goto) {
       if (this.isDraft) {
-        this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
+        this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name } });
 
       }
       else {
@@ -128,7 +130,7 @@ export class CourseComponentComponent implements OnInit {
       localStorage.setItem('courseid', detail.id)
       //addmodule?courseId=3nqyd01b&courseImage=https:%2F%2Fedutechstorage.blob.core.windows.net%2Fcontainer1%2Fimages%2F7304826460633593-raj-1.png&courseName=HTMLCSS
       //this.router.navigateByUrl('/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}', { state: { detail: detail } });
-      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
+      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name } });
     }
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
@@ -161,6 +163,25 @@ export class CourseComponentComponent implements OnInit {
             this.final_status = 'Resume'
           }
         }
+      }
+    });
+  }
+  enrollCourse() {
+    console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
+      console.log("working", enrollcourse)
+      if (enrollCourse.data) {
+        if (enrollCourse.data.enrollcourse.success) {
+          // this.alert.openAlert("User enrolled successfully for the course", null);
+          Swal.fire("User enrolled successfully for the course")
+        } else {
+          Swal.fire(enrollCourse.data.enrollcourse.message)
+          // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
+        }
+      }
+      else {
+        Swal.fire("Please try again later")
+        //this.alert.openAlert('Please try again later', null);
       }
     });
   }

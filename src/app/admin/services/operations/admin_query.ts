@@ -1,5 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
+// tslint:disable-next-line:variable-name
 export const get_user_group = gql`
   query get_user_group{
     get_user_group {
@@ -13,7 +14,7 @@ export const get_user_group = gql`
       }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const search_user = gql`
   query search_user($search_string: String!, $pagination: Int!, $sort: Int!){
     search_user(search_string: $search_string, pagination: $pagination, sort: $sort) {
@@ -32,7 +33,7 @@ export const search_user = gql`
       }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const deactivate_reactivate_user = gql`
   query deactivate_reactivate_user($user_id: [String]!, $is_active: Boolean!){
     deactivate_reactivate_user(user_id: $user_id, is_active: $is_active) {
@@ -40,11 +41,11 @@ export const deactivate_reactivate_user = gql`
       error_msg
       message {
         outdated_users
-        updated_users 
+        updated_users
       }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const block_user = gql`
   query block_user($user_id: [String]!, $is_blocked: Boolean!){
     block_user(user_id: $user_id, is_blocked: $is_blocked) {
@@ -52,11 +53,11 @@ export const block_user = gql`
       error_msg
       message {
         outdated_users
-        updated_users 
+        updated_users
       }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const get_all_user = gql`
   query get_all_user($pagenumber: Int!, $sort: Int!, $group_name: String!){
     get_all_user(pagenumber: $pagenumber, sort: $sort, group_name: $group_name) {
@@ -78,7 +79,7 @@ export const get_all_user = gql`
       }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const get_user_session_detail = gql`
   query get_user_session_detail($user_id: String!){
     get_user_session_detail(user_id: $user_id) {
@@ -112,7 +113,7 @@ export const get_user_session_detail = gql`
           registered_date
           mobile_number
           email
-          full_name   
+          full_name
           profile_img
           year_of_birth
           progress
@@ -141,10 +142,10 @@ export const get_user_session_detail = gql`
         }
         last_login
         language
-      }  
+      }
     }
   }`;
-
+// tslint:disable-next-line:variable-name
 export const get_all_learner_detail = gql`
   query get_all_learner_detail($user_id: String!){
     get_all_learner_detail(user_id: $user_id) {
@@ -207,8 +208,6 @@ export const get_all_learner_detail = gql`
     }
   }`;
 
-
-
 export const getnotificationreports = gql`
   query getnotificationreports($admin_id: String!){
     getnotificationreports(admin_id: $admin_id) {
@@ -259,7 +258,7 @@ export const getgroup = gql`
       }
     }
 }`;
-
+// tslint:disable-next-line:variable-name
 export const get_user_group_hierarchy = gql`
 query get_user_group_hierarchy{
   get_user_group_hierarchy {
@@ -278,12 +277,13 @@ query get_user_group_hierarchy{
     }
   }
 }`;
+// tslint:disable-next-line:variable-name
 export const get_course_createdby_admin = gql`
 query get_course_createdby_admin($admin_id: String!, $pagenumber: Int!){
   get_course_createdby_admin(admin_id: $admin_id, pagenumber: $pagenumber) {
     success
     error_msg
-    course_count      
+    course_count
     message{
       course_id
       course_description
@@ -392,7 +392,7 @@ query get_course_createdby_admin($admin_id: String!, $pagenumber: Int!){
   }
 }`;
 
-
+// tslint:disable-next-line:variable-name
 export const get_course_published = gql`
 query get_course_published($admin_id: String!, $pagenumber: Int!){
   get_course_published(admin_id: $admin_id, pagenumber: $pagenumber) {
@@ -505,7 +505,7 @@ query get_course_published($admin_id: String!, $pagenumber: Int!){
     }
   }
 }`;
-
+// tslint:disable-next-line:variable-name
 export const get_draft_course = gql`
 query get_draft_course($admin_id: String!, $pagenumber: Int!){
   get_draft_course(admin_id: $admin_id, pagenumber: $pagenumber) {
@@ -618,10 +618,14 @@ query get_draft_course($admin_id: String!, $pagenumber: Int!){
     }
   }
 }`;
-
+// tslint:disable-next-line:variable-name
 export const publishcourse = gql`
-  query publishcourse($course_id: String!, $is_published: Boolean!){
-    publishcourse(course_id: $course_id, is_published: $is_published) {
+  query publishcourse($course_id: String!, $is_published: Boolean!, $level : String!,
+  $category_id : String!,
+  $sub_category_id : String!,
+  $super_sub_category_id : String!,){
+    publishcourse(course_id: $course_id, is_published: $is_published, category_id : $category_id,
+      sub_category_id : $sub_category_id, super_sub_category_id : $super_sub_category_id) {
       success
       message
       error_msg
@@ -650,10 +654,10 @@ export const getcategoryadmin = gql`
       }
     }
 }`;
-
+// tslint:disable-next-line:variable-name
 export const getallcatalogue_by_id = gql`
-   query getallcatalogue_by_id($catalogue_id: String!) {
-    getallcatalogue_by_id(catalogue_id: $catalogue_id){
+   query getallcatalogue_by_id($catalogue_id: String!, $pagenumber: Int!) {
+    getallcatalogue_by_id(catalogue_id: $catalogue_id, pagenumber : $pagenumber){
       success
       error_msg
       message{
@@ -666,10 +670,75 @@ export const getallcatalogue_by_id = gql`
         updated_on
         created_by
         is_active
+        group_details{
+          _id
+          admin_id
+          catalogue_id
+          created_on
+          updated_on
+          created_by
+          is_active
+          group_id
+          group_name
+          category_id
+        }
+        course_details{
+          course_id
+          course_description
+          course_name
+          course_category
+          course_type
+          course_language
+          super_sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            super_sub_category_id
+            super_sub_category_name
+            super_sub_category_image
+            super_sub_category_description
+            parent_sub_category_id
+            parent_category_id
+          }
+          sub_category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            sub_category_id
+            sub_category_name
+            sub_category_image
+            sub_category_description
+            parent_category_id
+          }
+          category_details{
+            _id
+            creator_id
+            level
+            created_on
+            updated_on
+            created_by
+            language_code
+            is_active
+            category_id
+            category_name
+            category_image
+            category_description
+          }
+        }
       }
     }
 }`;
-
+// tslint:disable-next-line:variable-name
 export const getallcatalogue = gql`
    query getallcatalogue($pagenumber: Int!) {
     getallcatalogue(pagenumber: $pagenumber){
@@ -686,6 +755,23 @@ export const getallcatalogue = gql`
         updated_on
         created_by
         is_active
+        course_count
+      }
+    }
+}`;
+
+export const getcoursesincatalogue = gql`
+   query getcoursesincatalogue($catalogue_id: String!, $pagenumber: Int!) {
+    getcoursesincatalogue(catalogue_id: $catalogue_id, pagenumber: $pagenumber){
+      success
+      total_count
+      error_msg
+      message{
+        course_id
+        course_name
+        course_description
+        short_description
+        course_img_url
       }
     }
 }`;
@@ -730,6 +816,7 @@ query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Bo
   }
 }`;
 
+// tslint:disable-next-line:variable-name
 export const get_all_enrolledcourses = gql`
 query get_all_enrolledcourses($pagenumber: Int!){
   get_all_enrolledcourses(pagenumber: $pagenumber){
@@ -746,4 +833,19 @@ query get_all_enrolledcourses($pagenumber: Int!){
             }
       }
   }
+}`;
+export const getcoursesforcatalogue = gql`
+   query getcoursesforcatalogue($catalogue_id: String!, $pagenumber: Int!) {
+    getcoursesforcatalogue(catalogue_id: $catalogue_id, pagenumber: $pagenumber){
+      success
+      total_count
+      error_msg
+      message{
+        course_id
+        course_name
+        course_description
+        short_description
+        course_img_url
+      }
+    }
 }`;

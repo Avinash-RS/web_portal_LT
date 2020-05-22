@@ -168,7 +168,7 @@
   <button class="submit" (click)="getCategory(getCategoryDialog)" > Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <button class="submit" (click)="filter()" > Filter
+    <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre; filter()" > Filter
       <i class="fa fa-filter colrr"></i>
     </button>
     <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort by
@@ -217,7 +217,7 @@
   <br>
 
   <div class="row">
-    <div class="col-3"  *ngIf="showAppliedFiltre">
+    <div class="col-3"   *ngIf="showAppliedFiltre">
       <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
         <h3><b>Language</b></h3><br>
         <ul class="list-group">
@@ -244,7 +244,7 @@
      
         <div class="borderline"></div>
         <br>
-        <h3><b>Instructor Name</b></h3><br>
+        <h3><b>Instructor name</b></h3><br>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
             <label class="container1">
@@ -327,7 +327,24 @@
         <div style="text-align: right;">
           <span class="showmore"> + Show more</span>
         </div><br>
-        <div class="borderline"></div>
+        <div class="borderline"></div><br>
+        <h3><b>Publish date</b></h3><br>
+        <div class="row">
+          <div class="col-10 date">
+            <my-date-picker name="fromdate" [options]="myDatePickerOptions" placeholder="From date"
+            (dateChanged)="onDateChanged($event,'fromdate')"></my-date-picker>
+            </div>
+            <div class="col-6 todate">
+            <my-date-picker name="todate" [options]="myDatePickerOptions" placeholder="To date"
+            (dateChanged)="onDateChanged($event,'todate')"></my-date-picker>
+            </div>
+          <!-- </div> -->
+          <!-- <div class="col-4 dateBox">
+            <dp-date-picker theme="dp-material"
+                            [config]="datePickerConfig" required="true">
+            </dp-date-picker>
+          </div> -->
+        </div>
       </div>
     </div>
     <ng-container *ngIf="showAppliedFiltre">
@@ -395,7 +412,10 @@
   </pagination-controls>
 
   <ng-template #getCategoryDialog>
-    <mat-dialog-content >
+    <mat-dialog-title>
+      <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
+    </mat-dialog-title>
+    <mat-dialog-content>
     <div class="row">
       <div class="col-4">
         <h2>Level 1 : Category</h2>
@@ -407,10 +427,10 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level1 ? allLvlCategoryFilterVal?.level1 : allLvlCategory?.level1  | search : lvl1Search ">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.isSelected"  name="list_name"  (change)="getCategoryId(item)"/>
-                    <spn style="padding-left: 35px;">{{item.category_name}}</spn>
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -431,7 +451,7 @@
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory?.level2   | search : lvl2Search">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name2" (change)="getCategoryId(item)"/>
-                    <spn style="padding-left: 35px;">{{item.sub_category_name}}</spn>
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>
@@ -453,7 +473,7 @@
                   <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory?.level3 | search : lvl3Search">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"  (change)="getCategoryId(item)"/>
-                    <spn style="padding-left: 35px;">{{item.super_sub_category_name}}</spn>
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.super_sub_category_name}}</spn>
                     <span class="checkmark"></span></label>
                   </li>
                 </ul>

@@ -1,51 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from "apollo-angular";
+import { Apollo } from 'apollo-angular';
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
-  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue
-} from './operations/admin_mutation'
+  create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
+  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping
+} from './operations/admin_mutation';
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
   , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
-  getenrolledcourses,get_all_enrolledcourses
-} from "./operations/admin_query";
+  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue
+} from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { group } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServicesService {
 
+  // tslint:disable-next-line:no-shadowed-variable
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
-  //for add user - group dropdown
+  // for add user - group dropdown
   getUserGroup() {
     return this.Apollo.query({
       query: get_user_group,
     });
   }
 
-  //Add user flow
-  user_registration(email, full_name, termsandconditions, group_id?, group_name?, admin?) {
+  // Add user flow
+  // tslint:disable-next-line:variable-name
+  user_registration(email: any, full_name: any, termsandconditions: boolean, group_id?: any, group_name?: any, admin?: any[]) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
-        full_name: full_name,
-        email: email,
+        full_name,
+        email,
         term_condition: termsandconditions,
-        group_id: group_id,
-        group_name: group_name,
-        admin: admin
+        group_id,
+        group_name,
+        admin
       }
     });
   }
 
   bulkuserupload(fb) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+      headers: new HttpHeaders({ Authorization: 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
     };
     return this.http.post<any[]>(environment.apiUrlImg + 'bulkuserupload', fb, httpOptions);
   }
@@ -56,71 +58,76 @@ export class AdminServicesService {
     return this.Apollo.query({
       query: get_all_user,
       variables: {
-        pagenumber: pagenumber,
-        sort: sort,
+        pagenumber,
+        sort,
         group_name: groupname
       }
     });
   }
-  //api current;y not used
-  getLearnerDetail(user_id) {
+  // api current;y not used
+  // tslint:disable-next-line:variable-name
+  getLearnerDetail(user_id: any) {
     return this.Apollo.query({
       query: get_all_learner_detail,
       variables: {
-        user_id: user_id,
+        user_id,
       }
     });
   }
 
+  // tslint:disable-next-line:variable-name
   getUserSession(user_id) {
     return this.Apollo.query({
       query: get_user_session_detail,
       variables: {
-        user_id: user_id,
+        user_id,
       }
     });
   }
 
-  searchUser(search_string: String, pagination, sort) {
+  // tslint:disable-next-line:variable-name
+  searchUser(search_string, pagination, sort) {
     return this.Apollo.query({
       query: search_user,
       variables: {
-        search_string: search_string,
-        pagination: pagination,
-        sort: sort,
+        search_string,
+        pagination,
+        sort,
       }
     });
   }
 
+  // tslint:disable-next-line:variable-name
   deActivate_And_reActivate_User(user_id, is_active) {
     return this.Apollo.query({
       query: deactivate_reactivate_user,
       variables: {
-        user_id: user_id,
-        is_active: is_active,
+        user_id,
+        is_active,
       }
     });
   }
-
+  // tslint:disable-next-line:variable-name
   blockUser(user_id, is_blocked) {
     return this.Apollo.query({
       query: block_user,
       variables: {
-        user_id: user_id,
-        is_blocked: is_blocked,
+        user_id,
+        is_blocked,
       }
     });
   }
   // end of User Management
 
-  //Group Management
-  updateGroup(_id: String, group_name: String, group_id: String) {
+  // Group Management
+  // tslint:disable-next-line:variable-name
+  updateGroup(_id, group_name, group_id) {
     return this.Apollo.query({
       query: update_group,
       variables: {
-        _id: _id,
-        group_name: group_name,
-        group_id: group_id
+        _id,
+        group_name,
+        group_id
       }
     });
   }
@@ -162,63 +169,68 @@ export class AdminServicesService {
   }
   // end of Group Management
 
-  //Notifications
+  // Notifications
+  // tslint:disable-next-line:variable-name
   getNotificationData(admin_id) {
     return this.Apollo.query({
       query: getnotificationreports,
       variables: {
-        admin_id: admin_id,
+        admin_id,
       }
-    })
+    });
   }
-
+  // tslint:disable-next-line:variable-name
   removeNotificationData(report_id) {
     return this.Apollo.query({
       query: update_notification,
       variables: {
-        report_id: report_id,
+        report_id,
       }
-    })
+    });
   }
   // end of Notifications
 
-  //Course Management
+  // Course Management
+  // tslint:disable-next-line:variable-name
   getAllCourseCreated(user_id, pagenumber) {
     return this.Apollo.query({
       query: get_course_createdby_admin,
       variables: {
         admin_id: user_id,
-        pagenumber: pagenumber
+        pagenumber
       }
     });
   }
-
+  // tslint:disable-next-line:variable-name
   getAllCoursePublished(user_id, pagenumber) {
     return this.Apollo.query({
       query: get_course_published,
       variables: {
         admin_id: user_id,
-        pagenumber: pagenumber
+        pagenumber
       }
     });
   }
-
+  // tslint:disable-next-line:variable-name
   getAllDrafted(user_id, pagenumber) {
     return this.Apollo.query({
       query: get_draft_course,
       variables: {
         admin_id: user_id,
-        pagenumber: pagenumber
+        pagenumber
       }
     });
   }
-
-  publishCourse(course_id, is_published) {
+  // tslint:disable-next-line:variable-name
+  publishCourse(course_id, is_published, level, category_id, super_sub_category_id) {
     return this.Apollo.query({
       query: publishcourse,
       variables: {
-        course_id: course_id,
-        is_published: is_published
+        course_id,
+        is_published,
+        level,
+        category_id,
+        super_sub_category_id
       }
     });
   }
@@ -306,6 +318,17 @@ export class AdminServicesService {
     });
   }
 
+  updateCatalogDtl(name, description, id) {
+    return this.Apollo.query({
+      query: updatecatalogueinfo,
+      variables: {
+        catalogue_name: name,
+        catalogue_description: description,
+        catalogue_id: id,
+      }
+    });
+  }
+
   getAllCatalogue(pg) {
     return this.Apollo.query({
       query: getallcatalogue,
@@ -320,15 +343,60 @@ export class AdminServicesService {
     });
   }
 
-  getallcatalogue_by_id(id) {
+  getallcatalogueById(id, pagenumber) {
     return this.Apollo.query({
-      query: getallcatalogue,
+      query: getallcatalogue_by_id,
       variables: {
         catalogue_id: id,
+        pagenumber
+      }
+    });
+  }
+  // tslint:disable-next-line:variable-name
+  getCourseForCatalogue(catalogue_id, pagenumber) {
+    return this.Apollo.query({
+      query: getcoursesforcatalogue,
+      variables: {
+        catalogue_id,
+        pagenumber
+      }
+    });
+  }
+  // tslint:disable-next-line:variable-name
+  getCourseInCatalogue(catalogue_id, pagenumber) {
+    return this.Apollo.query({
+      query: getcoursesincatalogue,
+      variables: {
+        catalogue_id,
+        pagenumber
       }
     });
   }
 
+  addCourse(id, courseid, selectall) {
+    return this.Apollo.query({
+      query: coursecataloguemapping,
+      variables: {
+        catalogue_id: id,
+        course_id: courseid,
+        select_all: selectall
+      }
+    });
+  }
+
+  removeCourse(id, courseid, selectall) {
+    return this.Apollo.query({
+      query: unmapcoursesfromcatalogue,
+      variables: {
+        catalogue_id: id,
+        course_id: courseid,
+        select_all: selectall
+      }
+    });
+  }
+  // End of Catalogue Management
+
+  // Enrollment
   getenrolledcourses(data) {
     return this.Apollo.query({
       query: getenrolledcourses,
@@ -349,5 +417,6 @@ export class AdminServicesService {
       }
     });
   }
-  // End of Catalogue Management
+
+  // End of enrollment
 }

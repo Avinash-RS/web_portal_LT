@@ -1,5 +1,21 @@
 @import "variable";
 
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+strong {
+    letter-spacing: 0.4px !important;
+}
+
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -7,9 +23,7 @@ html {
 
 ::-webkit-scrollbar {
     width: 0px;
-    /* Remove scrollbar space */
     background: transparent;
-    /* Optional: just make scrollbar invisible */
 }
 
 @media screen and (min-width: 320px) and (max-width:1024px) {
@@ -30,7 +44,7 @@ html {
 
 .cardheight {
     height: 600px !important;
-    box-shadow: 2px 0px 10px #6c757d;
+    box-shadow: 2px 0px 10px $box-shadow;
     overflow: hidden;
 }
 
@@ -44,32 +58,18 @@ hr {
     background-color: $box-shadow;
 }
 
-.m-r-20 {
-    margin-right: 20px;
+.left {
+    z-index: 10 !important;
+    box-shadow: 0px 0px 12px #6c757d;
+    overflow: auto !important
 }
 
-.m-0 {
-    margin: 0 !important;
+.right {
+    box-shadow: 0px 0px 7px #6c757d;
 }
 
-.m-l-20 {
-    margin-left: 20px;
-}
-
-.m-r-40 {
-    margin-right: 40px;
-}
-
-.m-l-40 {
-    margin-left: 40px;
-}
-
-.m-l-55 {
-    margin-left: 55px;
-}
-
-.m-t-20 {
-    margin-top: 20px;
+.shadow {
+    box-shadow: 0px 0px 12px #6c757d !important;
 }
 
 .m-t-10 {
@@ -88,8 +88,20 @@ hr {
     margin-bottom: 20px;
 }
 
+.m-r-20 {
+    margin-right: 20px;
+}
+
+.m-l-20 {
+    margin-left: 20px;
+}
+
 .p-r-0 {
     padding-right: 0;
+}
+
+.p-b-0 {
+    padding-bottom: 0;
 }
 
 .p-l-10 {
@@ -100,10 +112,6 @@ hr {
     padding-left: 20;
 }
 
-.p-b-0 {
-    padding-bottom: 0;
-}
-
 .p-t-10 {
     padding-bottom: 10;
 
@@ -112,6 +120,8 @@ hr {
 .addcat-btn {
     background-color: $color-dark-green;
     margin-right: 0 !important;
+    display: flex;
+
 }
 
 button,
@@ -125,172 +135,119 @@ input:focus {
     padding: 8px !important;
 }
 
-.error_msg {
-    font-size: 80%;
-    color: $color-red;
-}
-
-
-.heading {
-    color: #1F3777;
-    font-weight: 900;
-    padding-left: 70px;
-    padding-top: 10px;
-}
-
-.bot {
-    border-radius: 8px, 0px, 0px, 8px !important;
-    width: 80px;
-    height: 30px;
-    margin-left: 800px;
-    margin-top: -36px;
-    // transform: rotate(45deg);
-    //     -webkit-transform: rotate(45deg);
-}
-
-// .material-icons{
-//     margin-left: 800px;
-//     margin-top: -36px; 
-// }
-.m-t-20 {
-    margin-top: 20px;
-}
-
-.m-t-10 {
-    margin-top: 10px !important;
-}
-
-.m-b-10 {
-    margin-bottom: 10px !important;
-}
-
-.m-b-20 {
-    margin-bottom: 20px;
-}
-
-.m-r-20 {
-    margin-right: 20px;
-}
-
-.m-l-20 {
-    margin-left: 20px;
-}
-
-.m-l-5 {
-    margin-left: 5px;
-}
-
-.material-icons {
-    font-size: inherit;
-    padding-right: 5px;
-    font-size: 16px;
-}
-
-.heading {
-    color: #1F3777;
-    font-weight: 900;
-    padding-left: 70px;
-    padding-top: 10px;
-}
-
-// .down {
-//     transform: rotate(45deg);
-//     -webkit-transform: rotate(45deg);
-//   }
 .sort-btn {
     border-radius: 5px;
     width: 80px;
     height: 30px;
     border-width: thin;
-    border-color: black;
+    border-color: $color-blank;
     background-color: $color-light-grey;
-
 
     .mat-icon {
         font-size: 25px !important;
-        color: black;
+        color: $color-blank;
     }
-
-    // transform: rotate(45deg);
-    //     -webkit-transform: rotate(45deg);
 }
-
-// .grid-container {
-//     margin-top: 40px;
-//     margin-left: 40px;
-//     margin-right: 40px;
-//     height: 70px;
-//     display: grid;
-//     grid-template-columns: auto auto auto auto;
-//     grid-row-gap: 30px;
-//     grid-column-gap: 30px;
-//     padding: 10px;
-//     border-radius: 15px;
-
-// }
-
-.grid-container>div {
-    background-color: $color-light-grey;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 10px;
-    border-radius: 8px;
-}
-
-.dropdown-toggle {
-    margin-left: 39px;
-    margin-left: 503px;
-    margin-right: 504px;
-    border-color: white;
-    background-color: white;
-    border-bottom: white;
-    border-right: white;
-    margin-top: 100px;
-}
-
-.catalogue-name {
-    // background-color: #6c757d;
-    //    font-weight: 15px;
-    font-weight: 1000;
-    font-size: 14px;
-}
-
-.catalogue-count {
-    color: #446bd4d1;
-    font-size: 16px;
-}
-
-// .row1{
-//     height: 70px;
-//     margin-left: 4px;
-// }
 
 .catalogue-card {
     width: 90% !important;
-    margin-left: 5%;
     margin-bottom: 10% !important;
-    border-width: thin;
-    border-color: black;
-    box-shadow: 0px 0px 5px #6c757d;
-    // margin-top: 40px;
-    // margin-left: 40px;
-    // margin-right: 40px;
-    // height: 70px;
-    // display: grid;
-    background-color: #f5f5f5;
+    border: 1.0px solid $color-border !important;
+    box-shadow: 0px 0px 6px $box-shadow;
+    height: 70%;
+    background-color: $color-lightest-grey;
     text-align: center;
     padding: 20px !important;
-    font-size: 10px;
-    border-radius: 8px;
-
-}
-
-.blue_border {
-    border: 1.0px solid $color-blue !important;
 }
 
 .arrow-drop-down {
     position: absolute;
-    bottom: 10px;
-    left: 47%;
+    bottom: 0px;
+    padding-bottom: 10px;
+    background-color: $color-white;
+
+    mat-icon {
+        font-size: 40px;
+    }
+}
+
+.cat-name-card {
+    border: 1.5px solid $box-shadow !important;
+    height: 55%;
+    text-align: center;
+    padding: 10px !important;
+    resize: both;
+}
+
+.add-btn {
+    background-color: $color-dark-green;
+}
+
+.edit-btn {
+    background-color: $color-subhead;
+
+    .material-icons {
+        font-size: 12px !important;
+    }
+}
+.width_95  {
+    width: 95% !important;
+}
+table {
+    width: 95%;
+    margin: auto;
+}
+
+th {
+    color: $color-blank;
+    font-size: 15px !important;
+
+}
+
+th.mat-header-cell {
+    border-bottom-style: none;
+}
+
+td.mat-cell {
+    border-bottom-style: none;
+    border-collapse: collapse !important;
+}
+
+.remove-btn {
+    background-color: $color-maroon;
+}
+
+.header-btn {
+    height: 30px;
+
+}
+
+.m-w-100 {
+    max-width: 100px;
+}
+
+.m-10 {
+    margin: 10px;
+}
+
+.containerOverlay {
+    .overlay {
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        overflow: hidden;
+        top: 0vh;
+        left: 10%;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .pointer {
+        width: 80% !important;
+    }
+}
+
+.course-image {
+    height: 100px;
+    object-fit: cover;
 }

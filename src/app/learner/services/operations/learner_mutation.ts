@@ -667,33 +667,35 @@ export const gettopicdetail = gql`
 
 
 export const getLevelSubCategoryData = gql`
-  mutation getLevelSubCategoryData($level1: [String],$level2:[String]) {
-    getLevelSubCategoryData(level1:$level1,level2:$level2) {
+  mutation getLevelSubCategoryData($level1: [String],$level2:[String],$level3:[String]) {
+    getLevelSubCategoryData(level1:$level1,level2:$level2,level3:$level3) {
       success
-    message,
+      message,
     data{
+      level1{
+        _id
+        category_id
+        category_name
+        category_description
+        level   
+      }
       level2{
        _id
         sub_category_id
+        isSelected
         sub_category_name
         parent_category_id
-        sub_category_description
-        sub_category_image
-        language_code
-        creator_id
         level
       }
       level3{
         _id
         parent_category_id
         parent_sub_category_id
+        isSelected
         creator_id
         level
-        language_code
         super_sub_category_id
         super_sub_category_name
-        super_sub_category_image
-        super_sub_category_description
       }
     }
     
@@ -707,10 +709,15 @@ export const getLevelSubCategoryData = gql`
 export const getCourseCategorySearch = gql`
   mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
     $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
-    $pagenumber:Int!,$perPage: Int! ) {
+    $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String ) {
     getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
       course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
-      pagenumber:$pagenumber,perPage:$perPage) {
+      pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
+       publishedFromDate:$publishedFromDate
+      ) {
+        count{
+          total_count
+        }
         success
         message
         data{
