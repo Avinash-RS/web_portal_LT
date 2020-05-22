@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { enrollcourse } from '@core/services/operations/common_mutation';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-course-component',
@@ -34,9 +35,6 @@ export class CourseComponentComponent implements OnInit {
   recorded_data: any;
   final_full_data: any;
   final_status: any = null;
-  id: any;
-  group_id: any;
-  course_id: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
@@ -170,8 +168,21 @@ export class CourseComponentComponent implements OnInit {
   }
   enrollCourse() {
     console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
-    this.service.enrollcourse(this.id, this.group_id, this.course_id).subscribe((enrollCourse: any) => {
-      console.log(enrollcourse)
+    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
+      console.log("working", enrollcourse)
+      if (enrollCourse.data) {
+        if (enrollCourse.data.enrollcourse.success) {
+          // this.alert.openAlert("User enrolled successfully for the course", null);
+          Swal.fire("User enrolled successfully for the course")
+        } else {
+          Swal.fire(enrollCourse.data.enrollcourse.message)
+          // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
+        }
+      }
+      else {
+        Swal.fire("Please try again later")
+        //this.alert.openAlert('Please try again later', null);
+      }
     });
   }
 }
