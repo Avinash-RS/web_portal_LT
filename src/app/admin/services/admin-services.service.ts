@@ -399,6 +399,7 @@ export class AdminServicesService {
 
   // Enrollment
   getenrolledcourses(data) {
+    console.log('called',)
     return this.Apollo.query({
       query: getenrolledcourses,
       variables: {
