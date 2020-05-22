@@ -14,11 +14,11 @@
         Select the category to publish the course
       </h3>
       <div class="row">
-        <div class="m-l-5 col-md-3 col-sm-6 col-11 float_right">
+        <div class="col-md-3 col-sm-6 col-11 float_right">
           <button mat-raised-button (click)="show = !show">Associate to Catagory</button>
         </div>
         <div class="card cardHeight col-lg-3 col-md-4 col-sm-6 col-11 float_left" *ngIf="show">
-          <div infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false" [infiniteScrollThrottle]="500"
+          <div style = "margin-left : 1%" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false" [infiniteScrollThrottle]="500"
             (scrolled)="onScrollDown()">
             <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
               <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div style="position: absolute; top: 100px; width : 100%;">
+      <div style="position: absolute; top: 200px; width : 100%;">
         <hr>
         <h3>
           Selected Category
@@ -69,7 +69,7 @@
         <p class="m-l-5">
           Catalogue/IT & Software/<strong>Machine Learning</strong>
         </p>
-        <br><br>
+        <br>
         <div class="row">
           <div class="col-md-6 col-sm-6 col-6 float_right ">
             <button mat-raised-button class="background-blue color_white" (click)="publishCourse()">Publish</button>
@@ -78,7 +78,7 @@
             <button mat-raised-button (click)="draftCourse()">Cancel</button>
           </div>
         </div>
-        <br><br>
+        <br>
       </div>
      
     </mat-card>
