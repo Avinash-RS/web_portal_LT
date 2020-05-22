@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { enrollcourse } from '@core/services/operations/common_mutation';
 
 @Component({
   selector: 'app-course-component',
@@ -33,6 +34,9 @@ export class CourseComponentComponent implements OnInit {
   recorded_data: any;
   final_full_data: any;
   final_status: any = null;
+  id: any;
+  group_id: any;
+  course_id: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
@@ -94,7 +98,7 @@ export class CourseComponentComponent implements OnInit {
   gotoDescription(course) {
     if (!this.goto) {
       if (this.isDraft) {
-        this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
+        this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name } });
 
       }
       else {
@@ -128,7 +132,7 @@ export class CourseComponentComponent implements OnInit {
       localStorage.setItem('courseid', detail.id)
       //addmodule?courseId=3nqyd01b&courseImage=https:%2F%2Fedutechstorage.blob.core.windows.net%2Fcontainer1%2Fimages%2F7304826460633593-raj-1.png&courseName=HTMLCSS
       //this.router.navigateByUrl('/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}', { state: { detail: detail } });
-      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
+      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name } });
     }
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
     // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
@@ -162,6 +166,12 @@ export class CourseComponentComponent implements OnInit {
           }
         }
       }
+    });
+  }
+  enrollCourse() {
+    console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    this.service.enrollcourse(this.id, this.group_id, this.course_id).subscribe((enrollCourse: any) => {
+      console.log(enrollcourse)
     });
   }
 }
