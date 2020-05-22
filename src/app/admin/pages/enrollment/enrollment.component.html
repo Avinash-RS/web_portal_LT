@@ -34,10 +34,10 @@
       <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="selectall">
           <mat-header-cell *matHeaderCellDef>
-            <mat-checkbox  *ngIf="dataSource?.data?.length" [(ngModel)]="selectall" (change)="selectallchange(selectall)">
+            <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource?.data?.length" [(ngModel)]="selectall" (change)="selectallchange(selectall)">
             </mat-checkbox>Select all </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+            <mat-checkbox style = "padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
             </mat-checkbox>
           </mat-cell>
         </ng-container>
