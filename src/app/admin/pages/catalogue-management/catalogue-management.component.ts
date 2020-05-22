@@ -273,10 +273,14 @@ export class CatalogueManagementComponent implements OnInit {
         if (result && result.data) {
           if (result.data.coursecataloguemapping?.success) {
             this.alert.openAlert('Courses added successfully', null);
+            this.getCoursesForCatalog();
+            this.selectedArray = [];
           } else {
+            this.selectedArray = [];
             this.alert.openAlert(result.data.coursecataloguemapping?.message, null);
           }
         } else {
+          this.selectedArray = [];
           this.alert.openAlert('Please try again later', null);
         }
       });
@@ -284,11 +288,15 @@ export class CatalogueManagementComponent implements OnInit {
       this.adminservice.removeCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
         if (result && result.data) {
           if (result.data.unmapcoursesfromcatalogue?.success) {
+            this.getCoursesInCatalog();
+            this.selectedArray = [];
             this.alert.openAlert('Courses removed successfully', null);
           } else {
+            this.selectedArray = [];
             this.alert.openAlert(result.data.unmapcoursesfromcatalogue?.message, null);
           }
         } else {
+          this.selectedArray = [];
           this.alert.openAlert('Please try again later', null);
         }
       });
