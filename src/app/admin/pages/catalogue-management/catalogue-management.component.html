@@ -280,6 +280,11 @@
         </div>
       </div>
     </div>
+    <div class="width_100 arrow-drop-down" *ngIf="totalCount > 12">
+      <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourses()">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
     <div class="row width_100 m-r-20 m-l-20 arrow-drop-down">
       <div class="col-md-4 col-sm-12"></div>
       <div class="col-lg-2 col-md-2 m-l-5 col-sm-6 col-6 no_margin">
