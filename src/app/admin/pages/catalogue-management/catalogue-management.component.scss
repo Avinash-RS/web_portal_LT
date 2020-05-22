@@ -120,6 +120,8 @@ hr {
 .addcat-btn {
     background-color: $color-dark-green;
     margin-right: 0 !important;
+    display: flex;
+
 }
 
 button,
@@ -171,9 +173,10 @@ input:focus {
 
 .cat-name-card {
     border: 1.5px solid $box-shadow !important;
-    height: 50%;
+    height: 55%;
     text-align: center;
     padding: 10px !important;
+    resize: both;
 }
 
 .add-btn {
@@ -195,7 +198,7 @@ table {
 }
 
 th {
-    color: black;
+    color: $color-blank;
     font-size: 15px !important;
 
 }
@@ -214,12 +217,16 @@ td.mat-cell {
 }
 
 .header-btn {
-    height: 35px;
+    height: 30px;
 
 }
 
-.m-w-150 {
-    max-width: 150px;
+.m-w-100 {
+    max-width: 100px;
+}
+
+.m-10 {
+    margin: 10px;
 }
 
 .containerOverlay {
