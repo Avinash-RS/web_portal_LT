@@ -1,7 +1,6 @@
 h2,
 h3 {
     color: #1F3777;
-
 }
 
 h2 {
@@ -14,17 +13,8 @@ p,
 button {
     margin-left: 15px;
 }
-
-li {
-    list-style-type: none;
-}
-
-.tree {
-    padding-top: 5px;
-    padding-left: 15px;
-    box-shadow: 0 2px 10px rgb(216, 216, 216);
-}
-
-.ht-80px {
-    height: 70px;
+.cardHeight {
+    height: 300px !important;
+    z-index: 1 !important;
+    overflow: auto !important;
 }

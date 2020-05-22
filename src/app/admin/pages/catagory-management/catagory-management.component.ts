@@ -17,23 +17,6 @@ import Swal from 'sweetalert2';
 })
 export class CatagoryManagementComponent implements OnInit {
 
-  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private dialog: MatDialog,
-  ) {
-    this.adminDetails = this.gs.checkLogout();
-    this.treeSource = new MatTreeNestedDataSource<any>();
-    this.dataSource$ = new BehaviorSubject<any[]>([]);
-  }
-
-  get f() {
-    if (this.showAddCatForm === true) {
-      return this.addCategoryForm.controls;
-    } else if (this.showAddSubCatForm === true) {
-      return this.addSubCategoryForm.controls;
-    } else if (this.showAddSuperSubCatForm === true) {
-      return this.addSuperSubCategoryForm.controls;
-    }
-  }
   addCategoryForm: any; // cat add from
   addSubCategoryForm: any; // sub cat add form
   addSuperSubCategoryForm: any; // sub cat add form
@@ -66,6 +49,24 @@ export class CatagoryManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   courseCount: any;
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+
+  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
+              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private dialog: MatDialog,
+  ) {
+    this.adminDetails = this.gs.checkLogout();
+    this.treeSource = new MatTreeNestedDataSource<any>();
+    this.dataSource$ = new BehaviorSubject<any[]>([]);
+  }
+
+  get f() {
+    if (this.showAddCatForm === true) {
+      return this.addCategoryForm.controls;
+    } else if (this.showAddSubCatForm === true) {
+      return this.addSubCategoryForm.controls;
+    } else if (this.showAddSuperSubCatForm === true) {
+      return this.addSuperSubCategoryForm.controls;
+    }
+  }
 
   ngOnInit() {
     this.getallcategories();
@@ -133,6 +134,7 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   selectedcategory(category) {
+    console.log('inside');
     this.canotEdit = true;
     this.edit = false;
     this.courses = [];

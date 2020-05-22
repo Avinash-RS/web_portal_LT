@@ -666,6 +666,18 @@ export const getallcatalogue_by_id = gql`
         updated_on
         created_by
         is_active
+        group_details{
+          _id
+          admin_id
+          catalogue_id
+          created_on
+          updated_on
+          created_by
+          is_active
+          group_id
+          group_name
+          category_id
+        }
         course_details{
           course_id
           course_description

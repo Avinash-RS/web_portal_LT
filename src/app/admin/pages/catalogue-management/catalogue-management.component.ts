@@ -156,87 +156,88 @@ export class CatalogueManagementComponent implements OnInit {
       if (this.pagenumberTable === 0) {
         this.ELEMENT_DATA = [];
       }
-      this.ELEMENT_DATA = [{
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: ' Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'peb Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'aeb Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'geb Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'beb Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'yeb Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      },
-      {
-        course_name: 'Web Dev',
-        category_details: [],
-        course_language: 'English'
-      }];
-      // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      // this.ELEMENT_DATA = [{
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: ' Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'peb Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'aeb Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'geb Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'beb Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'yeb Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // },
+      // {
+      //   course_name: 'Web Dev',
+      //   category_details: [],
+      //   course_language: 'English'
+      // }];
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.catalog = result.data.getallcatalogue_by_id.message;
       this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
       this.dataSource.sort = this.sort;
       this.loadingCatalogue = false;

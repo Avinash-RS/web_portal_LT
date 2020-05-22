@@ -378,6 +378,12 @@
           </div>
         </div>
         <div class="row pos_bottom"
+        *ngIf="courseCount > 10">
+        <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+      </div>
+        <div class="row pos_bottom"
           *ngIf="!showCourses && !showHome && !showAddCatForm && !selectedCategory.category_name == undefined">
           <button id="viewCourse" mat-stroked-button class=" border-radius-5 background-blue color_white center "
             (click)="showCourses = !showCourses">View
