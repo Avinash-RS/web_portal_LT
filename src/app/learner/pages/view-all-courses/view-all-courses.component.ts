@@ -6,7 +6,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Options } from 'ng5-slider';
 import * as _ from 'lodash';
-import {FormControl} from '@angular/forms';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -76,7 +76,8 @@ export class ViewAllCoursesComponent implements OnInit {
       if(data.length > 0) {
         this.allcourses = data;
       } else {
-        this.alert.openAlert('No courses found', null);
+        Swal.fire('No courses found');
+        this.allcourses = [];
       }
     })
     this.loadcategoryandcourses();
@@ -295,7 +296,9 @@ export class ViewAllCoursesComponent implements OnInit {
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
-        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
+        this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']);
+        this. filter();
+        console.log('count', this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']))
       })
   }
 
@@ -404,6 +407,7 @@ export class ViewAllCoursesComponent implements OnInit {
   }
   closedialogbox(){
     this.dialog.closeAll();
+    this.getthreeLevelCat();
   }
 
   getthreeLevelCat(){
