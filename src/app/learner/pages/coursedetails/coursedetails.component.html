@@ -63,7 +63,8 @@
                                 style="background-color: transparent;border: none;box-shadow: none;"
                                 aria-hidden="true"></i>
                             {{course.certificate_html_view_enabled}} day left at this price</p>
-                        <div> <button mat-raised-button class="add_to_cart background-maroon">ENROLL</button></div>
+                        <div> <button mat-raised-button class="add_to_cart background-maroon"
+                                (click)="enrollCourse()">ENROLL</button></div>
                         <br>
                         <!-- <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br> -->
                         <div>
@@ -183,7 +184,8 @@
             <br> <br><br><br>
             <h2>No Takeaways</h2>
         </ng-template>
-        <div class="display_flex" *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
+        <div class="display_flex"
+            *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
         course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '') ||
         course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">
             <h2 class="m-l-5">
@@ -272,22 +274,22 @@
             
                 </mat-expansion-panel>
             </mat-accordion> -->
-       
+
             <section class="accordion" *ngFor="let res of content?.coursedetails">
                 <input type="checkbox" name="collapse" [id]="res?.modulename">
                 <h2 class="handle">
-                  <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-                      <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+                    <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
+                            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
                 </h2>
                 <div class="content">
-                  <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
-                    <div class="col-8">
-                      <ol class="submod">
-                        <li>{{i+1}} : {{mod?.topicname}}</li>
-                      </ol>
-                    </div>
-          
-                    <!-- <div class="col-4">
+                    <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
+                        <div class="col-8">
+                            <ol class="submod">
+                                <li>{{i+1}} : {{mod?.topicname}}</li>
+                            </ol>
+                        </div>
+
+                        <!-- <div class="col-4">
                       <mat-form-field style="text-align: right;margin-top: 5%;">
                         <mat-label>Resourse</mat-label>
                         <mat-icon matPrefix>folder</mat-icon>
@@ -303,13 +305,13 @@
                         </mat-select>
                       </mat-form-field>
                     </div> -->
-                  </div>
+                    </div>
                 </div>
-              </section>
-   
-          
-       
-       
+            </section>
+
+
+
+
         </div>
         <br>
         <!-- <div class="width_40 m-l-5">
