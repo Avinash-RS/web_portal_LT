@@ -97,7 +97,7 @@
               <strong>{{course.catalogue_name}}</strong>
             </div>
             <div class="f_size_14 color_blue">
-              {{course.course_count || 0}} Courses
+              {{course.course_count || 0}} {{course.course_count > 1 ? 'Courses' : 'Course'}}
             </div>
           </div>
         </div>
@@ -158,20 +158,19 @@
     <!-- End of Add new Catalogue  -->
 
     <!-- start of List Course TABLE -  -->
-    <div *ngIf="showCatalogDetail">
-      <table mat-table *ngIf="!loadingCatalogue && ELEMENT_DATA.length > 0" [dataSource]="dataSource" matSort
-        class="overflow-auto m-t-10">
+    <div class="overflow-auto" *ngIf="showCatalogDetail">
+      <table mat-table *ngIf="!loadingCatalogue && ELEMENT_DATA.length > 0" [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="sno">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
+          <th mat-header-cell *matHeaderCellDef> S.No </th>
           <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="courses">
+        <ng-container matColumnDef="course_name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Courses </th>
           <td mat-cell *matCellDef="let element"> {{element.course_name}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="category">
+        <ng-container matColumnDef="category_details">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
           <td mat-cell *matCellDef="let element">
             <ng-container *ngFor="let cat of element.category_details; let ind = index">
@@ -185,7 +184,7 @@
 
         </ng-container>
 
-        <ng-container matColumnDef="language">
+        <ng-container matColumnDef="course_language">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
           <td mat-cell *matCellDef="let element"> {{element.course_language}} </td>
         </ng-container>

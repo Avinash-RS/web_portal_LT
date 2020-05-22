@@ -10,9 +10,9 @@ import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/m
 import Swal from 'sweetalert2';
 
 export interface Data {
-  courses: string;
-  category: string;
-  language: string;
+  course_name: string;
+  category_details: [];
+  course_language: string;
 }
 
 @Component({
@@ -44,7 +44,7 @@ export class CatalogueManagementComponent implements OnInit {
   courseList: any = [];
   ELEMENT_DATA: Data[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['sno', 'courses', 'category', 'language'];
+  displayedColumns: string[] = ['sno', 'course_name', 'category_details', 'course_language'];
   dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
@@ -135,13 +135,93 @@ export class CatalogueManagementComponent implements OnInit {
     });
   }
 
-  getCatalogDetail() { // courses mapped to catalog - when click remove
+  getCatalogDetail() { // courses mapped to catalog - Table view
     this.loadingCatalogue = true;
     this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
       if (this.pagenumberTable === 0) {
         this.ELEMENT_DATA = [];
       }
-      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.ELEMENT_DATA = [{
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : ' Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'peb Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'aeb Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'geb Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'beb Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'yeb Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      },
+      {
+        course_name : 'Web Dev',
+        category_details : [],
+        course_language : 'English'
+      } ];
+      // Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
       this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
       this.dataSource.sort = this.sort;
       this.loadingCatalogue = false;
