@@ -38,10 +38,10 @@
           <div class="col-lg-5 col-md-5 col-sm-6 col-6"></div>
           <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-t-10">
             <!-- <strong class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name}}</strong> -->
-            <strong class="cat-name-card  border-radius-5 color_blue">{{'catalogue name'}}</strong>
+            <strong class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name || 'Catalogue Name'}}</strong>
             <span class="material-icons none f_size_17" style="vertical-align: middle; color:darkGrey;"
-              matTooltip="{{catalog?.catalogue_name || 'Catalogue Description'}}">info_outline</span>
-            <strong class="cat-name-card  m-l-20 border-radius-5 color_blue">{{'User group name'}}</strong>
+              matTooltip="{{catalog?.catalogue_description || 'Catalogue Description'}}">info_outline</span>
+            <strong class="cat-name-card  m-l-20 border-radius-5 color_blue">{{catalog?.group_details?.group_name  || 'Group Name'}}</strong>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
             </button>
           </div>
           <div class=" col-lg-5 col-md-5 col-sm-5 col-5 float_right">
-            <button mat-raised-button
+            <button mat-raised-button [disabled]="ELEMENT_DATA.length == 0"
               class="width_95 f_size_12 header-btn m-w-100 remove-btn color_white border-radius-5"
               (click)="getCoursesInCatalog()" [disabled]="ELEMENT_DATA.length == 0">
               <span class="material-icons f_size_17" style="vertical-align: middle;">delete</span>Remove
@@ -280,21 +280,24 @@
           </div>
         </div>
       </div>
+      <br>
+      <br><br>
     </div>
     <div class="width_100 arrow-drop-down" *ngIf="totalCount > 12">
       <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourses()">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
-    </div>
-    <div class="row width_100 m-r-20 m-l-20 arrow-drop-down">
-      <div class="col-md-4 col-sm-12"></div>
-      <div class="col-lg-2 col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-        <button id="SaveCatalogue" mat-stroked-button [disabled]="selectedArray.length == 0 || !checked"
-          class="width_80 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
-      </div>
-      <div class="col-lg-2 col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-        <button id="cancel" mat-stroked-button class="width_80 border-radius-5 color_blue blue_border center"
-          (click)="showCatalogDetail = showHeader = true; showAddCatalogueForm = showListCatalogue = showCourses = false;">Cancel</button>
+
+      <div class="row width_100 m-r-20 m-l-20">
+        <div class="col-md-4 col-sm-12"></div>
+        <div class="col-lg-2 col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+          <button id="SaveCatalogue" mat-stroked-button [disabled]="selectedArray.length == 0 || !checked"
+            class="width_80 border-radius-5 background-blue color_white center" (click)="saveCourse()">Save</button>
+        </div>
+        <div class="col-lg-2 col-md-2 m-l-5 col-sm-6 col-6 no_margin">
+          <button id="cancel" mat-stroked-button class="width_80 border-radius-5 color_blue blue_border center"
+            (click)="showCatalogDetail = showHeader = true; showAddCatalogueForm = showListCatalogue = showCourses = false;type = null">Cancel</button>
+        </div>
       </div>
     </div>
     <!-- end of  view courses row -->

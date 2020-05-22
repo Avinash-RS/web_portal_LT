@@ -26,6 +26,7 @@ import { VgOverlayPlayModule } from 'videogular2/compiled/overlay-play';
 import { VgBufferingModule } from "videogular2/compiled/buffering";
 import { SearchComponent } from './shared/search/search.component';
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
+import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -45,7 +46,8 @@ const routes: Routes = [
     DataTableComponent,
     ListViewCourseComponentComponent,
     SearchComponent,
-    DragDropImageDirective
+    DragDropImageDirective,
+    GuidelineSearchComponent
   ],
 
   imports: [
@@ -73,6 +75,7 @@ const routes: Routes = [
     WishlistCoursesComponent,
     CapslockDirective,
     DataTableComponent,
-    ListViewCourseComponentComponent]
+    ListViewCourseComponentComponent,
+    GuidelineSearchComponent]
 })
 export class CoreModule { }
