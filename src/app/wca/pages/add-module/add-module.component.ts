@@ -126,12 +126,14 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
-  deleteModule(moduleName) {
+  deleteModule(idx) {
     this.courseDetails.flag = "false";
+    let count = 0;
     this.courseDetails.coursedetails.forEach((data) => {
-      if (data.modulename == moduleName) {
+      if (idx == count) {
         data.modulestatus = "false";
       }
+      ++count;
     });
     this.updateCourseDetails();
   }
@@ -149,6 +151,7 @@ export class AddModuleComponent implements OnInit {
           this.apiService.updateCourse(obj).subscribe((data: any) => {
           });
           this.toast.success('Module updated successfully');
+          // this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner.hide();
       }, err => {
@@ -190,9 +193,9 @@ export class AddModuleComponent implements OnInit {
     this.hoverName = '';
   }
 
-  onHover(moduleName) {
+  onHover(n) {
     this.isHover = true;
-    this.hoverName = moduleName;
+    this.hoverName = n;
   }
   onRefernceBtnClick() {
     this.router.navigate(['/Admin/auth/Wca/rf']);

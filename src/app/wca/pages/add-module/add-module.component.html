@@ -68,17 +68,17 @@
                       <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                         <span class="del-icon-container">
                           <mat-icon class="info-icon" (mouseout)="onhoverLeave()"
-                            (mouseover)="onHover(module.modulename)">info</mat-icon>
-                          <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
+                            (mouseover)="onHover(n)">info</mat-icon>
+                          <mat-icon class="del-icon" (click)="deleteModule(n)">delete</mat-icon>
 
                         </span>
                         <div (click)="addTopic(module,n)" class="module-name">
                           {{module.modulename}}
 
                         </div>
-                        <div style="color: grey;" *ngIf="isHover && module.modulename == hoverName" class="overlay">
+                        <div style="color: grey;" *ngIf="isHover && n == hoverName" class="overlay">
                           <div *ngFor="let template of module.template_details">
-                            {{template.name}}
+                            {{module.modulename}}
                           </div>
                         </div>
                       </div>
