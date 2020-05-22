@@ -44,7 +44,8 @@ export class UserMenuComponent implements OnInit {
 
 		this.gs.adminName.subscribe((message) => {
 			var msg = message.replace('"', '');
-			this.userName = msg;
+			var msg1 = msg.replace('"', '');
+			this.userName = msg1;
 		}
 		)
 	}

@@ -191,7 +191,7 @@ export class AdminServicesService {
   // end of Notifications
 
   // Course Management
-    // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:variable-name
   getAllCourseCreated(user_id, pagenumber) {
     return this.Apollo.query({
       query: get_course_createdby_admin,
@@ -335,11 +335,12 @@ export class AdminServicesService {
     });
   }
 
-  getallcatalogueById(id) {
+  getallcatalogueById(id, pagenumber) {
     return this.Apollo.query({
       query: getallcatalogue_by_id,
       variables: {
         catalogue_id: id,
+        pagenumber
       }
     });
   }
@@ -363,24 +364,27 @@ export class AdminServicesService {
       }
     });
   }
-  // addCourse(id, courseid,selectall) {
-  //   return this.Apollo.query({
-  //     query: getcoursesincatalogue,
-  //     variables: {
-  //       catalogue_id,
-  //       pagenumber
-  //     }
-  //   });
-  // }
 
-  // removeCourse(catalogue_id, pagenumber) {
-  //   return this.Apollo.query({
-  //     query: getcoursesincatalogue,
-  //     variables: {
-  //       catalogue_id,
-  //       pagenumber
-  //     }
-  //   });
-  // }
+  addCourse(id, courseid, selectall) {
+    return this.Apollo.query({
+      query: coursecataloguemapping,
+      variables: {
+        catalogue_id: id,
+        course_id: courseid,
+        select_all: selectall
+      }
+    });
+  }
+
+  removeCourse(id, courseid, selectall) {
+    return this.Apollo.query({
+      query: unmapcoursesfromcatalogue,
+      variables: {
+        catalogue_id: id,
+        course_id: courseid,
+        select_all: selectall
+      }
+    });
+  }
   // End of Catalogue Management
 }
