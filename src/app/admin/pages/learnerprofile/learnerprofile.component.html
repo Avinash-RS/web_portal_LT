@@ -87,7 +87,7 @@
           <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="form-group  m-0">
               <label class="col-sm-5 common-label1">Location</label> {{profiledetail?.country_detail[0]?.countryname}}
-              {{profiledetail?.state_detail[0]?.countryname}} {{profiledetail?.district_detail[0]?.countryname}}
+              {{profiledetail?.state_detail[0]?.statename}} {{profiledetail?.district_detail[0]?.districtname}}
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@
           <!-- <span class="mobile-data"> {{i+1}}</span> -->
         </mat-cell>
       </ng-container>
-      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
         <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
         <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
       </ng-container>

@@ -35,7 +35,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    const data = { group_id: 'undefined', pagenumber: 0, is_individual: false };
+    const data = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
     this.getenrolledcoursesindividual(data);
   }
 
@@ -101,7 +101,7 @@ export class EnrollmentComponent implements OnInit {
     if (this.selectiontype === 'group') {
       this.getenrolledcoursesgroup(0);
     } else {
-      const data = { group_id: 'undefined', pagenumber: 0, is_individual: false };
+      const data = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
       this.getenrolledcoursesindividual(data);
     }
 
@@ -152,7 +152,7 @@ export class EnrollmentComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-       const array = data.filter( element => element.isChecked === true);
+      //  const array = data.filter( element => element.isChecked === true);
        Swal.fire(
           'Successfully Approved',
           'A Confirmation has been sent to the user Email ID',
@@ -178,7 +178,7 @@ export class EnrollmentComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log(result.value);
-        const array = data.filter( element => element.isChecked === true);
+        // const array = data.filter( element => element.isChecked === true);
         Swal.fire(
           'Rejection',
           'Rejection with the comments shared to the user mail ID',
@@ -195,19 +195,19 @@ export class EnrollmentComponent implements OnInit {
     console.log(row);
     if (column.header === 'User Group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_detail[0].group_id } });
-    } else if (column.header === 'Course') {
-      // let details = {
-      //   id: this.course.course_id,
-      //   wishlist: this.course.wishlisted,
-      //   wishlist_id: this.course.wishlist_id
-      // };
+    } else if (column.header === 'Course' && this.selectiontype === 'individual') {
+      let details = {
+        id: row.course_id,
+        // wishlist: this.course.wishlisted,
+        // wishlist_id: this.course.wishlist_id
+      };
       // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
       const userdetail = { user_id: row.user_id, _id: row._id };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_detail[0].group_id;
-      const data = { group_id: row.group_detail[0].group_id, pagenumber: 0, is_individual: true };
+      const data = { group_id: row.group_detail[0].group_id, pagenumber: 0, is_individual: true, course_id: 'undefined' };
       this.dialogopened = true;
       this.dataSource1.data = [];
       this.getenrolledcoursesforgroup(data);

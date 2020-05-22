@@ -335,7 +335,8 @@ export class AdminServicesService {
       variables: {
         group_id: data.group_id,
         pagenumber: data.pagenumber,
-        is_individual: data.is_individual
+        is_individual: data.is_individual,
+        course_id: data.course_id
       }
     });
   }

@@ -711,10 +711,11 @@ export const getcatalogue = gql`
 }`;
 
 export const getenrolledcourses = gql`
-query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Boolean!){
-  getenrolledcourses(group_id: $group_id,pagenumber: $pagenumber,is_individual: $is_individual){
+query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Boolean!,$course_id: String!){
+  getenrolledcourses(group_id: $group_id,pagenumber: $pagenumber,is_individual: $is_individual,course_id: $course_id){
       success
       error_msg
+      enroll_count
       message{
             _id
             user_id
