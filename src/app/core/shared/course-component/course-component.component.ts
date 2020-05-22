@@ -56,7 +56,7 @@ export class CourseComponentComponent implements OnInit {
   selectWishlist(course) {
     this.loader.show();
     if (this.gs.checkLogout()) {
-      if (this.course.wishlisted == false) {
+      if (this.course.wishlisted === false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
           if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
             this.course.wishlisted = !this.course.wishlisted;
@@ -82,7 +82,7 @@ export class CourseComponentComponent implements OnInit {
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout()
+      this.userDetail = this.gs.checkLogout();
       this.viewWishList(this.course);
       this.getcourserStatus()
     }
