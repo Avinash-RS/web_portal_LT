@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-// import { Observable } from 'rxjs';
-import {Subject} from 'rxjs/Subject';
-import { logout, viewcourse, view_wishlist,list_content, syllabus_of_particular_scorm,getCoursesByName} from "@core/services/operations/common_query";
-import { add_to_wishlist, delete_wishlist,getPlayerStatus,geturl } from "@core/services/operations/common_mutation";
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm, getCoursesByName } from "@core/services/operations/common_query";
+import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse } from "@core/services/operations/common_mutation";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class CommonServicesService {
 
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
-  
-  
+
+
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
     return this.Apollo.query({
@@ -45,12 +45,12 @@ export class CommonServicesService {
     });
   }
 
-  addWishlist(course_id,user_id) {
+  addWishlist(course_id, user_id) {
     return this.Apollo.query({
       query: add_to_wishlist,
       variables: {
         course_id: course_id,
-        user_id : user_id
+        user_id: user_id
       }
     });
   }
@@ -68,7 +68,7 @@ export class CommonServicesService {
       query: list_content,
     });
   }
-  
+
   syllabus_of_particular_scorm(contentid) {
     return this.Apollo.query({
       query: syllabus_of_particular_scorm,
@@ -77,11 +77,11 @@ export class CommonServicesService {
       }
     });
   }
-  getPlayerStatus(id){
+  getPlayerStatus(id) {
     return this.Apollo.query({
       query: getPlayerStatus,
       variables: {
-        user_id:id
+        user_id: id
       }
     });
   }
@@ -100,6 +100,16 @@ export class CommonServicesService {
       query: getCoursesByName,
       variables: {
         courseName: courseName,
+      }
+    });
+  }
+  enrollcourse(id, group_id, course_id) {
+    return this.Apollo.query({
+      query: enrollcourse,
+      variables: {
+        user_id: id,
+        group_id: group_id,
+        course_id: course_id,
       }
     });
   }

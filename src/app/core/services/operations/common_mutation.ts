@@ -17,7 +17,7 @@ export const delete_wishlist = gql`
       message
       error_msg
     }
-}`; 
+}`;
 
 
 export const getPlayerStatus = gql`
@@ -31,7 +31,7 @@ export const getPlayerStatus = gql`
       }
       success
     }
-}`; 
+}`;
 export const geturl = gql`
 mutation geturl($courseid: String!) {
     geturl(courseid: $courseid) {
@@ -40,3 +40,13 @@ mutation geturl($courseid: String!) {
     }
   }
 `;
+export const enrollcourse = gql`
+mutation enrollcourse($user_id: String!, $group_id:String!, $course_id: String!) {
+    enrollcourse( user_id:$user_id, group_id:$group_id,course_id: $course_id) {
+      message
+      success
+      error_msg
+    }
+  }
+`;
+
