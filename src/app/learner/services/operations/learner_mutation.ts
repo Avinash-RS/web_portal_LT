@@ -582,6 +582,14 @@ export const getLevelSubCategoryData = gql`
       success
       message,
     data{
+      level1{
+        _id
+        category_id
+        isSelected
+        category_name
+        category_description
+        level   
+      }
       level2{
        _id
         sub_category_id

@@ -329,19 +329,22 @@
         </div><br>
         <div class="borderline"></div><br>
         <h3><b>Publish date</b></h3><br>
-        <!-- <div class="row padding">
-          <div class="col-10"> -->
-            <my-date-picker name="fromdate" [options]="myDatePickerOptions"
+        <div class="row">
+          <div class="col-10 date">
+            <my-date-picker name="fromdate" [options]="myDatePickerOptions" placeholder="From date"
             (dateChanged)="onDateChanged($event,'fromdate')"></my-date-picker>
-            <my-date-picker name="todate" [options]="myDatePickerOptions"
+            </div>
+            <div class="col-6 todate">
+            <my-date-picker name="todate" [options]="myDatePickerOptions" placeholder="To date"
             (dateChanged)="onDateChanged($event,'todate')"></my-date-picker>
+            </div>
           <!-- </div> -->
           <!-- <div class="col-4 dateBox">
             <dp-date-picker theme="dp-material"
                             [config]="datePickerConfig" required="true">
             </dp-date-picker>
           </div> -->
-        <!-- </div> -->
+        </div>
       </div>
     </div>
     <ng-container *ngIf="showAppliedFiltre">
@@ -409,9 +412,9 @@
   </pagination-controls>
 
   <ng-template #getCategoryDialog>
-    <!-- <mat-dialog-title>
+    <mat-dialog-title>
       <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
-    </mat-dialog-title> -->
+    </mat-dialog-title>
     <mat-dialog-content>
     <div class="row">
       <div class="col-4">
