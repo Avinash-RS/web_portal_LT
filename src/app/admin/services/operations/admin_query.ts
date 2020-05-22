@@ -620,8 +620,12 @@ query get_draft_course($admin_id: String!, $pagenumber: Int!){
 }`;
 // tslint:disable-next-line:variable-name
 export const publishcourse = gql`
-  query publishcourse($course_id: String!, $is_published: Boolean!){
-    publishcourse(course_id: $course_id, is_published: $is_published) {
+  query publishcourse($course_id: String!, $is_published: Boolean!, $level : String!,
+  $category_id : String!,
+  $sub_category_id : String!,
+  $super_sub_category_id : String!,){
+    publishcourse(course_id: $course_id, is_published: $is_published, category_id : $category_id,
+      sub_category_id : $sub_category_id, super_sub_category_id : $super_sub_category_id) {
       success
       message
       error_msg
