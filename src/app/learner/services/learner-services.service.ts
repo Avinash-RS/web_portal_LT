@@ -7,7 +7,7 @@ import {
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData,get_user_detail_username, check_existing_user,  get_all_category,
   get_sub_category,get_course_by_subcategory,get_all_course_by_usergroup, get_module_topic,
-  getsupersubcategory,getLevelCategoryData,getDetailsCount
+  getsupersubcategory,getLevelCategoryData,getDetailsCount, getlearnertrack
 } from "./operations/learner_query";
 
 
@@ -17,7 +17,7 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile,getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification,gettopicdetail,getCourseCategorySearch
+  delete_qualification,gettopicdetail,getCourseCategorySearch, view_profile1
 } from "./operations/learner_mutation"
 
 import { HttpClient } from '@angular/common/http';
@@ -439,6 +439,25 @@ export class LearnerServicesService {
        
         pagenumber:pagenumber,
         perPage:perPage
+      }
+    });
+  }
+
+  getlearnertrack(level1: any, level2: any) {
+    return this.Apollo.query({
+      query: getlearnertrack,
+      variables: {
+        user_id: level1,
+        _id: level2
+      }
+    });
+  }
+  view_profile1(user_id) {
+   
+    return this.Apollo.query({
+      query: view_profile1,
+      variables: {
+        user_id: user_id
       }
     });
   }

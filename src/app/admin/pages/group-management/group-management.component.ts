@@ -63,8 +63,7 @@ export class GroupManagementComponent implements OnInit {
               private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
               private router: Router, private dialog: MatDialog, ) {
 
-    this.groupid = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
-    this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.group_id);
+    this.groupid = (this.router.getCurrentNavigation().extras?.state?.group_id);
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
