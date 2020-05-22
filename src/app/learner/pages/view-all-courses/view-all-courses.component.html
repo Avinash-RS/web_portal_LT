@@ -427,7 +427,7 @@
          <div class="row">
           <div class="col-md-8">
                 <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let item of allLvlCategory?.level1 | search : lvl1Search ">
+                  <li class="list-group-item" *ngFor="let item of allLvlCategoryFilterVal?.level1 ? allLvlCategoryFilterVal?.level1 : allLvlCategory?.level1  | search : lvl1Search ">
                     <label class="container1">
                     <input  type="checkbox" [(ngModel)]="item.isSelected"  name="list_name"  (change)="getCategoryId(item)"/>
                     <spn style="padding-left: 35px;white-space: nowrap;">{{item.category_name}}</spn>

@@ -585,7 +585,6 @@ export const getLevelSubCategoryData = gql`
       level1{
         _id
         category_id
-        isSelected
         category_name
         category_description
         level   
