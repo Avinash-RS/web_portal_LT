@@ -57,6 +57,8 @@ export class ViewAllCoursesComponent implements OnInit {
   myDatePickerOptions: any;
   publishedToDate: String;
   publishedFromDate: String;
+  // fromdate: string;
+  // todate: string;
 
   constructor(public learnerservice: LearnerServicesService,  private alert: AlertServiceService,
      private dialog: MatDialog, private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
@@ -109,7 +111,7 @@ export class ViewAllCoursesComponent implements OnInit {
       this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) : this.Lvl3CatId.push(category);
       this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id)
     }else{
-      this. getthreeLevelCat();
+      this.getthreeLevelCat();
     }
 
     if(this.level1selectedID.length || this.level2selectedID.length || this.level3selectedID.length ) {
@@ -428,6 +430,10 @@ export class ViewAllCoursesComponent implements OnInit {
     if(name === 'todate'){
       this.publishedToDate = event.formatted;
     }
+    // if(this.publishedFromDate > this.publishedToDate){
+    //   Swal.fire('From date should not be greater than to date');
+    // }
+    // else{
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
@@ -435,6 +441,7 @@ export class ViewAllCoursesComponent implements OnInit {
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
   }
+// }
 
 
   countUpdate(count){
