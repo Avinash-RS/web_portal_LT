@@ -1,0 +1,135 @@
+<div class="row box">
+  <!-- <button class="submit" (click)="filter()" > Filter
+    <i class="fa fa-filter colrr"></i>
+  </button> -->
+<div class="col-2 width-10 ">
+    <h3 class="text">Applied Filters : </h3>
+  </div>
+
+  <div class="col-8"  >
+      <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item}}
+      <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
+      </span>
+  </div>
+
+  <div class="col-2 ">
+    <div class = "smallline"></div> 
+    <h3 class="text2" (click)="clearAll()"> Clear All Filters </h3>
+  </div>
+  </div>
+  <!--------------------------Filter------------------------>
+  <div class="row">
+      <div class="col-3">
+    <div class="container1 containerShadow">
+      <h3><b>Language</b></h3><br>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data">
+          <label class="container1">
+          <input  type="checkbox"  name="language" (change)="checkedVal($event,language,'language')"
+          [checked]="language.checked" />
+          <div class="row">
+            <div class="col-10 pading">
+              {{language.course_language}} 
+            </div>
+            <div class="col-2">
+              <span >{{language.count}}</span>
+            </div>
+          </div>
+          <span class="checkmark">
+          </span>
+        </label>
+        </li>
+      </ul><br>
+      <div style="text-align: right;">
+        <span class="showmore"> + Show more</span>
+      </div><br>
+   
+      <div class="borderline"></div>
+      <br>
+      <h3><b>Instructor name</b></h3><br>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data">
+          <label class="container1">
+          <input  type="checkbox"  name="authors" (change)="checkedVal($event,authors,'Instructor')" 
+          [checked]="authors.checked"/>
+          <div class="row">
+            <div class="col-10 pading">
+              {{authors.authordetails}} 
+            </div>
+            <div class="col-2">
+              <span >{{authors.count}}</span>
+            </div>
+          </div>
+          <span class="checkmark">
+          </span>
+        </label>
+        </li>
+      </ul><br>
+      <div style="text-align: right;">
+        <span class="showmore"> + Show more</span>
+      </div><br>
+      <div class="borderline"></div><br>
+
+
+      <h3><b>Learning pace</b></h3><br>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data">
+          <label class="container1">
+          <input  type="checkbox"  name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')"
+          [checked]="courseMode.checked" />
+          <div class="row">
+            <div class="col-10 pading">
+              {{courseMode.course_mode}} 
+            </div>
+            <div class="col-2">
+              <span >{{courseMode.count}}</span>
+            </div>
+          </div>
+          <span class="checkmark">
+          </span>
+        </label>
+        </li>
+      </ul><br>
+      <div style="text-align: right;">
+        <span class="showmore"> + Show more</span>
+      </div><br>
+      <div class="borderline"></div><br>
+
+      <h3><b>Hours of content </b></h3><br>
+      <ul class="list-group">
+        <li class="list-group-item" >
+          <label class="container1">
+            <div class="range-control range">
+              <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+            </div>
+        </label>
+        </li>
+      </ul>
+      <div class="borderline"></div><br>
+
+      <h3><b>Partners search</b></h3><br>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data">
+          <label class="container1">
+          <input  type="checkbox"  name="coursepartner"(change)="checkedVal($event,coursepartner,'coursepartner')"  
+          [checked]="coursepartner.checked"/>
+          <div class="row">
+            <div class="col-10 pading">
+              {{coursepartner.coursepartnerdetails}} 
+            </div>
+            <div class="col-2">
+              <span >{{coursepartner.count}}</span>
+            </div>
+          </div>
+          <span class="checkmark">
+          </span>
+        </label>
+        </li>
+      </ul><br>
+      <div style="text-align: right;">
+        <span class="showmore"> + Show more</span>
+      </div><br>
+      <div class="borderline"></div>
+    </div>
+  </div>
+  </div>

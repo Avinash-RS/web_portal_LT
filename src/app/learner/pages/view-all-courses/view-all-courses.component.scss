@@ -307,18 +307,49 @@ h2{
 .pading{
   padding-left: 46px;
 }
+.padding{
+  padding-left: 20px;
+}
+// .topadding{
+//   padding-left: 20px;
+// }
 .fa-chevron-down:before {
   // content: "\f078";
   margin-left: -9px !important;
 }
 .col-9 {
-  flex: 0 0 75%;
-  max-width: 75%;
+  flex: 0 0 73%;
+  max-width: 73%;
 }
 .diffcol-9{
   flex: 0 0 100%;
   max-width: 100%;
+  padding: 2.5%;
 }
 .close{
   float: right !important;
+  margin-top: -24px;
+  margin-right: -18px;
 }
+.dateBox {
+  margin-left: 1%;
+  // width: 43.5%;
+  width: 70%;
+  height: 31px;
+  border: 2px solid #ccc;
+  border-radius: 7px;
+  color: #1F3777;
+}
+.date{
+    padding: 61px;
+    margin-top: -66px;
+    margin-left: -49px;
+}
+.todate{
+  margin-left: 145px;
+  margin-top: -111px;
+  padding: 8px;
+}
+
+
+

@@ -582,6 +582,13 @@ export const getLevelSubCategoryData = gql`
       success
       message,
     data{
+      level1{
+        _id
+        category_id
+        category_name
+        category_description
+        level   
+      }
       level2{
        _id
         sub_category_id
@@ -612,10 +619,15 @@ export const getLevelSubCategoryData = gql`
 export const getCourseCategorySearch = gql`
   mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
     $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
-    $pagenumber:Int!,$perPage: Int! ) {
+    $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String ) {
     getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
       course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
-      pagenumber:$pagenumber,perPage:$perPage) {
+      pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
+       publishedFromDate:$publishedFromDate
+      ) {
+        count{
+          total_count
+        }
         success
         message
         data{
