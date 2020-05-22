@@ -321,6 +321,7 @@ if (item) {
           return false;
       } 
       else if (item.name == 'SCROM'){
+        this.spinner.show();
         let file = fileInput.target.files[0];
         let fileReader: FileReader = new FileReader();
         let that = this;
@@ -332,21 +333,32 @@ if (item) {
             that.toast.warning('Kindly upload a valid SCROM file');
           }
           else {
-            // that.uploadDoc(file);
-            var files = fileInput.target.files;
-            for (var i = 0; i < files.length; i++) {
-                that.handleFile(files[i]);
-            }
-            
+            that.imageView = fileInput.target.files[0];
+            const formData = new FormData();
+            formData.append('scrom', that.imageView);
+            that.wcaService.uploadScromCourse(formData).subscribe((data: any) => {
+              imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+              let obj1 = {
+                file:imagepath
+              }
+              if (!formdata.get('topicimages').get(String(0))) {
+                (formdata.get('topicimages') as FormArray).push(that.topicImages());
+              }
+              formdata.get('topicimages').get(String(0)).setValue(obj1);   
+              formdata.get('topictype').setValue("Scorm");          
+               that.spinner.hide();
+            }, err => {
+              that.spinner.hide();
+            })
           }
         }
         fileReader.readAsText(file);
       }
       else {        
-        if (fileInput && fileInput.target && fileInput.target.files[0]) {
+        if (fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
-          this.imageView.type === 'file';
+          //this.imageView.type === 'file';
           if (item.name === 'Image') {
             const formData = new FormData();
             formData.append('image', this.imageView);
@@ -418,13 +430,11 @@ if (item) {
            })
           } else if (item.name === 'Video') {
             this.formVideo(formdata)
-          } else if (item.name === 'SCROM') {
-            this.spinner.hide();
-          } else if (item.name === 'Knowledge Check') {            
+           } else if (item.name === 'Knowledge Check') { 
+            this.spinner.show();           
             const formData2 = new FormData();
             formData2.append('excel', this.imageView);
             this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data:any) => {
-              this.spinner.hide();
               if(data && data.Message =="Success") {
                this.clearFormArray(formdata.get("topicimages") as FormArray)
                let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
@@ -439,9 +449,7 @@ if (item) {
                this.spinner.hide();
               })
             this.spinner.hide();
-          } else if (item.name === 'Feedback') {
-           
-          }
+          } 
         }
       }
 
@@ -685,6 +693,7 @@ if (item) {
       formdata.get('topictype').setValue('KnowledgeCheck'); 
       this.spinner.hide();
     })
+    this.spinner.hide();
   }
 
   toggle_sub_trans(event,value){

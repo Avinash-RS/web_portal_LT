@@ -94,9 +94,9 @@
                                                         <div class="dspFlx" [formGroupName]="i">
                                                             <span class="restictWidth">
                                                                 <mat-form-field class="matWidth" appearance="outline">
-                                                                    <mat-label class="clrLabel">Topic Name</mat-label>
+                                                                    <!-- <mat-label class="clrLabel">Topic Name</mat-label> -->
                                                                     <input matInput style="color:black;"
-                                                                        formControlName="topicname">
+                                                                        formControlName="topicname" placeholder="Topic Name">
                                                                     <mat-error
                                                                         *ngIf="(!j?.value?.topicname) && submitted">
                                                                         Topic Name Required !!! </mat-error>
@@ -139,7 +139,7 @@
                                                                             <mat-icon class="knowledgeIcon">publish</mat-icon>
                                                                         </span><label class="fsize12">Upload Question</label></div>
                                                                 </div>
-                                                            <span *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
+                                                            <span *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video' && queryData?.template_details[i].name != 'SCROM'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
                                                                 <span><button mat-raised-button class="btnprev"
