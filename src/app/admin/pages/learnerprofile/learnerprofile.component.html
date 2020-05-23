@@ -110,11 +110,11 @@
                             <th>Percentage</th>
                           </tr>
                           <tr *ngFor="let qual of profiledetail?.qualification">
-                            <td>{{qual.board.Board_Name}}</td>
-                            <td>{{qual.discipline.discipline_name}}</td>
-                            <td>{{qual.institute_detail.institute_name}}</td>
-                            <td>{{qual.level_detail.level_name}}</td>
-                            <td>{{qual.specification_detail.specification_name}}</td>
+                            <td>{{qual.board[0].Board_Name}}</td>
+                            <td>{{qual.discipline[0].discipline_name}}</td>
+                            <td>{{qual.institute_detail[0].institute_name}}</td>
+                            <td>{{qual.level_detail[0].level_name}}</td>
+                            <td>{{qual.specification_detail[0].specification_name}}</td>
                             <td>{{qual.year_of_passing}}</td>
                             <td>{{qual.percentage}}</td>
                           </tr>
@@ -137,8 +137,7 @@
           <mat-tab label="Activities">
             <br> <br>
 
-              <br> <br>
-              <mat-table #table [dataSource]="dataSource">
+              <mat-table style="margin-left:2%" #table [dataSource]="dataSource">
                 <ng-container matColumnDef="sno">
                   <mat-header-cell *matHeaderCellDef>
                     S.No
@@ -160,6 +159,7 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
               </mat-table>
+              <br> <br>
               <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
                 showFirstLastButtons>
               </mat-paginator> -->
@@ -168,7 +168,7 @@
 
           <mat-tab label="Enrolled Courses">
             <br> <br>
-            <mat-table #table [dataSource]="dataSource1">
+            <mat-table #table style="margin-left:2%" [dataSource]="dataSource1">
               <ng-container matColumnDef="sno">
                 <mat-header-cell *matHeaderCellDef>
                   S.No
@@ -190,10 +190,12 @@
               <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
             </mat-table>
+            <br> <br>
             <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
               showFirstLastButtons>
             </mat-paginator> -->
           </mat-tab>
+         
         </mat-tab-group>
       </div>
 
