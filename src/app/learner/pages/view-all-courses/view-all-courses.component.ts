@@ -215,11 +215,11 @@ export class ViewAllCoursesComponent implements OnInit {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
-    this.selectedFilter = [];
-    this.selectedFilter = this.selectedFilter.concat(this.selectedlang);
-    this.selectedFilter = this.selectedFilter.concat(this.authordetails);
-    this.selectedFilter = this.selectedFilter.concat(this.coursemode);
-    this.selectedFilter = this.selectedFilter.concat(this.coursepartners);
+    this.selectedFilter.filterVal = [];
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authordetails);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursemode);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners);
       } 
   removeFilterVal(val){
     let langIndex = this.selectedlang.indexOf(val);
@@ -260,11 +260,11 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     }
-    this.selectedFilter = [];
-    this.selectedFilter = this.selectedFilter.concat(this.selectedlang);
-    this.selectedFilter = this.selectedFilter.concat(this.authordetails);
-    this.selectedFilter = this.selectedFilter.concat(this.coursemode);
-    this.selectedFilter = this.selectedFilter.concat(this.coursepartners); 
+    this.selectedFilter.filterVal = [];
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authordetails);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursemode);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners); 
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
@@ -279,6 +279,16 @@ export class ViewAllCoursesComponent implements OnInit {
     this.authordetails = [];
     this.coursemode = [];
     this.coursepartners = [];
+    // ==============
+    this.level1selectedID = []
+    this.level2selectedID = []
+    this.level3selectedID = []
+    this.Lvl1CatId = [];
+    this.Lvl2CatId = [];
+    this.Lvl3CatId = [];
+    this.allLvlCategory = [];
+    this.allLvlCategoryFilterVal = [];
+    this.getthreeLevelCat();
     if(this.guidelineSearchVal && this.guidelineSearchVal.course_data){
       this.guidelineSearchVal.course_data.forEach(element => {
         element.checked = false;
@@ -304,7 +314,7 @@ export class ViewAllCoursesComponent implements OnInit {
       this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']);
-        this. filter();
+        this.filter();
         console.log('count', this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']))
       })
   }
@@ -320,8 +330,15 @@ export class ViewAllCoursesComponent implements OnInit {
     })
    }
 
-
   filter(){
+        this.selectedFilter.category1 = [];
+        this.selectedFilter.category2 = [];
+        this.selectedFilter.category3 = [];
+
+    this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
+    this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
+    this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+
         this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
            if(result['data']['getDetailsCount']['success'] == 'true'){
             this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
