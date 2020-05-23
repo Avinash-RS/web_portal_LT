@@ -60,12 +60,16 @@ hr {
 
 .left {
     z-index: 10 !important;
-    box-shadow: 0px 0px 12px #6c757d;
+    box-shadow: 0px 0px 12px $box-shadow;
     overflow: auto !important
 }
 
+.grey {
+   color :  $box-shadow;
+}
+
 .right {
-    box-shadow: 0px 0px 7px #6c757d;
+    box-shadow: 0px 0px 7px $box-shadow;
 }
 
 .shadow {
@@ -118,10 +122,9 @@ hr {
 }
 
 .addcat-btn {
-    background-color: $color-dark-green;
+    background-color: $color-dark-green !important;
     margin-right: 0 !important;
     display: flex;
-
 }
 
 button,
@@ -172,19 +175,22 @@ input:focus {
 }
 
 .cat-name-card {
-    border: 1.5px solid $box-shadow !important;
-    height: 55%;
-    text-align: center;
-    padding: 10px !important;
-    resize: both;
+    border: 1px solid $box-shadow !important;
+    min-height: 40px;
+    padding: 10px 5px;
+    font-size: medium;
+    // height: 55%;
+    // text-align: center;
+    // padding: 10px !important;
+    // resize: both;
 }
 
 .add-btn {
-    background-color: $color-dark-green;
+    background-color: $color-dark-green !important;
 }
 
 .edit-btn {
-    background-color: $color-subhead;
+    background-color: $color-subhead !important;
 
     .material-icons {
         font-size: 12px !important;
@@ -214,7 +220,7 @@ td.mat-cell {
 }
 
 .remove-btn {
-    background-color: $color-maroon;
+    background-color: $color-maroon !important;
 }
 
 .header-btn {
@@ -250,4 +256,8 @@ td.mat-cell {
 .course-image {
     height: 100px;
     object-fit: cover;
+}
+
+.mat-flat-button[disabled] {
+    opacity: 0.6 !important;
 }

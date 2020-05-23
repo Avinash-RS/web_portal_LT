@@ -1,0 +1,111 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Learner Management</li>
+    <li class="breadcrumb-item active" aria-current="page">Course Enrollment</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col">
+    <div class="toggle" style="margin-left:87px;margin-top: -37px;margin-bottom: 37px;">
+      <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="user_group"
+        id="sizeWeight" checked="checked" />
+      <label for="sizeWeight">User Group</label>
+      <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()"
+        value="individual" id="sizeDimensions" />
+      <label for="sizeDimensions">Individual</label>
+      &nbsp; &nbsp;
+      <div class="searchContainer">
+        <input class="searchBox" type="text" name="search" (keyup)="applyFilter($event)" placeholder="Search">
+        <i class="fa fa-search searchIcon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="p-5px">
+
+    <div class="example-container mat-elevation-z8">
+      <div class="buttons">
+        <button [disabled]="selectedcheckbox" (click)="reject(dataSource.data)" class="button button8">Reject</button>
+        <button [disabled]="selectedcheckbox" (click)="approve(dataSource.data)" class="button button5">Approve</button>
+      </div>
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="selectall">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource?.data?.length" [(ngModel)]="selectall" (change)="selectallchange(selectall)">
+            </mat-checkbox>Select all </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox style = "padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef>  S.No </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <span class="mobile-label">S.No</span>
+            <span class="desktop-data"> {{i+1}}</span>
+            <span class="mobile-data"> {{i+1}}</span>
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+            {{ column.header }}</mat-header-cell>
+          <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+      </mat-table>
+    </div>
+
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+
+<ng-template #enrolldialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+
+  <div class="buttons">
+    <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
+    <button [disabled]="selectedcheckbox1" (click)="approve(dataSource1.data)" class="button button5">Approve</button>
+  </div>
+  <mat-dialog-content style="width: 1000px">
+    <mat-table #table [dataSource]="dataSource1" matSort>
+      <ng-container matColumnDef="selectall">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox *ngIf="dataSource1?.data?.length" [(ngModel)]="selectall1" (change)="selectallchange1(selectall1)">
+          </mat-checkbox> Select all
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxchange1(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="sno">
+        <mat-header-cell *matHeaderCellDef>
+          S.No
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row;let i = index">
+          <span class="mobile-label">S.No</span>
+          <span class="desktop-data"> {{i+1}}</span>
+          <span class="mobile-data"> {{i+1}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
+        <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
+    </mat-table>
+  </mat-dialog-content>
+  <mat-paginator #paginator [length]="resultsLength1" [pageSize]="10" (page)="next1($event)" showFirstLastButtons>
+  </mat-paginator>
+  <br>
+</ng-template>

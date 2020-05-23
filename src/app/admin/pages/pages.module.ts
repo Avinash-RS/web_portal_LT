@@ -24,6 +24,8 @@ import { ReportManagementComponent } from './report-management/report-management
 import { NgxPaginationModule} from 'ngx-pagination';
 import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
 import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
+import { EnrollmentComponent } from './enrollment/enrollment.component';
+import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { CatagoryManagementComponent } from './catagory-management/catagory-mana
         NgxPaginationModule
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, CatagoryManagementComponent, ],
+    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

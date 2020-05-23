@@ -600,3 +600,56 @@ export const getDetailsCount = gql`
     }
       }
   }`;
+
+export const getlearnertrack = gql`
+   query get_learner_track($user_id : String!,$_id: String!) {
+    get_learner_track(user_id: $user_id,_id: $_id){
+        success
+        error_msg
+        message{
+            activities_and_enroll{
+                  _id
+                  last_logout
+                  last_login
+                  courseObjects{
+                         course_id
+                          course_active_time
+                          status
+                          course_description
+                          course_name
+                          course_start_datetime
+                          course_end_datetime
+                          enrollment_start
+                          enrollment_end
+                          author_details{
+                              author_name
+                              description
+                              image
+                          }
+                  }
+            }
+                  Enrolled_courses{
+                          status
+                          is_active
+                          _id
+                          user_id
+                          group_id
+                          course_id
+                          created_at
+                          updated_at
+                          status_reason
+                          course_description
+                          course_name
+                          course_start_datetime
+                          course_end_datetime
+                          enrollment_start
+                          enrollment_end
+                          author_details{
+                                  author_name
+                                  description
+                                  image
+                          }
+                  }
+        }
+    }
+}`

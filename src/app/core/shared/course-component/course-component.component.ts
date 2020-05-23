@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { enrollcourse } from '@core/services/operations/common_mutation';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -167,9 +166,9 @@ export class CourseComponentComponent implements OnInit {
     });
   }
   enrollCourse() {
-    console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    // console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
     this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
-      console.log("working", enrollcourse)
+      // console.log("working", enrollCourse)
       if (enrollCourse.data) {
         if (enrollCourse.data.enrollcourse.success) {
           // this.alert.openAlert("User enrolled successfully for the course", null);

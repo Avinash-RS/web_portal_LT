@@ -58,9 +58,9 @@ mutation create_catelogue(
 
 export const createusergroup = gql`
   mutation createusergroup($group_name: String!, $group_type: String!, $parent_group_id: String!, $hierarchy_id: String!,
-     $admin_id: String!) {
+     $admin_id: String!, $catalogue_id : String!) {
   createusergroup(group_name: $group_name,group_type: $group_type,
-  parent_group_id: $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $admin_id) {
+  parent_group_id: $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $admin_id,catalogue_id: $catalogue_id) {
     success
     error_msg
     message{
@@ -176,3 +176,23 @@ mutation unmapcoursesfromcatalogue($catalogue_id: String! ,$course_id: [String]!
     message
   }
 }`;
+// mutation{
+//   create_master_catalogue(
+//     catalogue_name: "sample 1",
+//     catalogue_description : "sample catalogue number 1",
+//     creator_id : "5e69f4ad139c79bbf14adc8a"
+//   ){
+//     success
+//     error_msg
+//     message
+//   }
+// }
+
+export const rejectenrollment = gql`
+mutation reject_enrollment ($update_type: String!, $status_reason: String!,$enrollments: [enrollments_dtl]){
+  reject_enrollment(update_type: $update_type, status_reason: $status_reason, enrollments: $enrollments ){
+      success
+      error_msg
+      message
+  }
+}` ;

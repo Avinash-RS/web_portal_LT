@@ -3,13 +3,14 @@ import { Apollo } from 'apollo-angular';
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
   create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
-  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping
+  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping,rejectenrollment
 } from './operations/admin_mutation';
+
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup,
-  get_user_group_hierarchy, getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue,
-  getallcatalogue_by_id, getcoursesforcatalogue, getcoursesincatalogue
+  get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
+  , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
+  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -153,7 +154,7 @@ export class AdminServicesService {
       variables: {
         group_name: group.group_name, group_type: group.group_type,
         parent_group_id: group.parent_group_id, hierarchy_id: group.hierarchy_id,
-        admin_id: group.admin_id
+        admin_id: group.admin_id, catalogue_id: group.catalogue_id
       }
     });
   }
@@ -337,6 +338,11 @@ export class AdminServicesService {
       }
     });
   }
+  getcatalogues() {
+    return this.Apollo.query({
+      query: getcatalogue,
+    });
+  }
 
   getallcatalogueById(id, pagenumber) {
     return this.Apollo.query({
@@ -390,4 +396,41 @@ export class AdminServicesService {
     });
   }
   // End of Catalogue Management
+
+  // Enrollment
+  getenrolledcourses(data) {
+    console.log('called',)
+    return this.Apollo.query({
+      query: getenrolledcourses,
+      variables: {
+        group_id: data.group_id,
+        pagenumber: data.pagenumber,
+        is_individual: data.is_individual,
+        course_id: data.course_id
+      }
+    });
+  }
+
+  getenrolledcoursesgroup(pgnumber) {
+    return this.Apollo.query({
+      query: get_all_enrolledcourses,
+      variables: {
+        pagenumber: pgnumber,
+      }
+    });
+  }
+
+  // End of enrollment
+  // End of Catalogue Management
+
+  rejectenrollment(data) {
+    return this.Apollo.query({
+      query: rejectenrollment,
+      variables: {
+        update_type: data.update_type,
+        status_reason: data.status_reason,
+        enrollments: data.enrollments
+      }
+    });
+  }
 }
