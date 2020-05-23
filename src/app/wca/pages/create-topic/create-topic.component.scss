@@ -786,3 +786,7 @@ background-color: $color-blue!important;
  #feedbackModal tbody tr:last-child {  
      border: 1px solid #dee2e6 !important;
      }
+
+     .mat-form-field-appearance-outline .mat-form-field-infix{
+        padding: 0em 0 1em 0 !important;
+    }   

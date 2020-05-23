@@ -594,9 +594,11 @@ if (item) {
 
   addTopicFrom(event,type) {
     event.stopPropagation();
-    if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
-      this.urlRequired = true;
-      return false;
+    if(this.urlValue){
+      if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
+        this.urlRequired = true;
+        return false;
+      } 
     }
     this.urlRequired = false;
     this.submitted = true;
