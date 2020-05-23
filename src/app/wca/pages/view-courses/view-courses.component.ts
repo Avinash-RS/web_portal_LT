@@ -52,12 +52,13 @@ export class ViewCoursesComponent implements OnInit {
   deactivateModule(e) {
     this.modifiedData = {
       "moduleid": this.moduleData.moduleid,
-      "modulestatus": String(e.checked),
+      "modulestatus": String(!e.checked),
       "createdby": this.moduleData.createdby ? this.moduleData.createdby : ''
     }
+    let msg = e.checked ? 'Module deactivated successfully' : 'Module activated successfully';
     this.apiService.deactivateModule(this.modifiedData).subscribe((res: any) => {
       if(res.Code == 200) {
-        this.toast.success('Module deactivated successfully');
+        this.toast.success(msg);
       }
     })
   }

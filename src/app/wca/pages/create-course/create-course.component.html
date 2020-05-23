@@ -67,9 +67,13 @@
                         <div class="row crs1 pad18px">
                           <div class="col-md-4 course-details">Course Long Description</div>
                           <div class="col-md-8">
-                            <textarea class="inputs inputmainWidth" style="resize: none;"
+                        
+
+                              <ckeditor #editors  id="editor" formControlName="course_long_description" [editor]="editor"></ckeditor>
+                            
+                            <!-- <textarea class="inputs inputmainWidth" style="resize: none;"
                               formControlName="course_long_description" placeholder="Enter the course description"
-                              maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea>
+                              maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea> -->
                           </div>
                         </div>
 
