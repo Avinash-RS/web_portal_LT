@@ -6,7 +6,7 @@ import {
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
   MatDialogModule, MatTooltipModule, MatDialogRef
 } from '@angular/material';
-import { ApolloModule, Apollo } from 'apollo-angular';
+import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
