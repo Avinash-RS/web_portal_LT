@@ -44,8 +44,8 @@ export class EnrollmentComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter)
@@ -65,9 +65,10 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
       console.log(result.data);
       this.dataSource.data = result?.data?.getenrolledcourses?.message;
+      this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
     });
   }
 
