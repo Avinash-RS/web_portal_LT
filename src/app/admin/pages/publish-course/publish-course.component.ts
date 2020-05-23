@@ -259,12 +259,12 @@ export class PublishCourseComponent implements OnInit {
   publishCourse() {
     let level;
     if (this.selectedSuperSubCategory.super_sub_category_id !== undefined) {
-      level = 3;
+      level = "3";
     } else if (this.selectedSuperSubCategory.super_sub_category_id === undefined && 
       this.selectedSubCategory.sub_category_id !== undefined) {
-      level = 2;
+      level = "2";
     } else {
-      level = 1;
+      level = "1";
     }
 
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data) => {
