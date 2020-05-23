@@ -103,11 +103,11 @@ export class ViewAllCoursesComponent implements OnInit {
       this. getthreeLevelCat();
     }
 
-    this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.level2selectedID,this.level3selectedID).subscribe((result: any) => {
-      if(result['data']['getLevelSubCategoryData'].success == true){
-        this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
-      }
-    });
+    // this.learnerservice.getLevelSubCategoryData(this.level1selectedID,this.level2selectedID,this.level3selectedID).subscribe((result: any) => {
+    //   if(result['data']['getLevelSubCategoryData'].success == true){
+    //     this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
+    //   }
+    // });
   }
 
 

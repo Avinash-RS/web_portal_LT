@@ -131,7 +131,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Total enrollments</h3>
-              <span class="count">72,684</span>
+              <span class="count">{{newRegisterLearses.allEnrollement}}</span>
             </div>
     
             <div class="col-md-4 icon bg-brown">
@@ -160,7 +160,6 @@
       </div>
     </div>
     
-
     <!-- Overview -->
     <div   *ngIf="newRegisterIsable">
     <div class="row" >
@@ -183,18 +182,8 @@
             </div>
           </div>
           <div class="margin"></div>
-          <!-- <div style="display: block"> -->
-            <canvas baseChart 
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [colors]="lineChartColors"
-            [legend]="lineChartLegend"
-            [chartType]="lineChartType"
-            [plugins]="lineChartPlugins">
-          </canvas>
-          <div style="text-align: center;">Last 7 days</div>
-            <!-- </div> -->
+            <canvas baseChart  [datasets]="lineChartData"  [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"> </canvas>
+          <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
         </div>
       </div>
 
@@ -285,30 +274,17 @@
           <div class="row">
             <div class="col-9"></div>
             <div class="col-3">
-              <select name="day" class="rounded" (change)="onChange($event.target.value)">
+              <select name="day" class="rounded" (change)="activeAndInactiveLearnerChart($event.target.value)">
                 <option *ngFor="let days of days"   [value]="days.id">{{days.name}}</option>
                 </select>
             </div>
           </div>
-          <div class="margin"></div>
-         
-          <canvas baseChart
-          [datasets]="activeLearnerChartData"
-          [labels]="activeLearnerChartLabels"
-          [options]="lineChartOptions"
-          [colors]="activeLearnerChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          [plugins]="lineChartPlugins"></canvas>
-
-          <!-- <div style="text-align: center;">Last 7 days</div> -->
-          <br>
+          <!-- <div class="margin"></div> -->
+          <canvas baseChart [datasets]="activeLearnerChartData" [labels]="activeLearnerChartLabels"  [options]="activeLearnerChartOptions" [colors]="activeLearnerChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas><br>
           <div style="margin-left: 31%;">
           <div class="row">
-              <div class="activeLearner"></div>
-              Active Learners
-              <div class="InactiveLearner"></div>
-              Inactive Learners
+              <div class="activeLearner"></div>  Active Learners
+              <div class="InactiveLearner"></div> Inactive Learners
           </div>
         </div>
         </div>
@@ -329,17 +305,11 @@
           </div>
 
           <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrolled learners
-            <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+            <i class="fa fa-angle-down arrow arrow5 " aria-hidden="true"></i>
           </button>
             <div class="card"  *ngIf="isCollapsed1">
               <div class="card-body">
-                <canvas baseChart 
-                    [data]="doughnutChartData"
-                    [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType"
-                    [colors]="doughnutChartChartColors">
-                   
-                </canvas>
+                <canvas baseChart width="200px" height="200px"   [data]="doughnutChartData"  [labels]="doughnutChartLabels"  [plugins]="doughnutPlugins"  [options]="doughnut"   [chartType]="doughnutChartType"   [colors]="doughnutColors">   </canvas>
               </div>
             </div>
       </div>
@@ -369,17 +339,7 @@
               </div>
             </div>
             <div class="margin"></div>
-            <div style="display: block">
-              <!-- <fusioncharts
-              [width]="width"
-              [height]="height"
-              [type]="type"
-              [dataFormat]="dataFormat"
-              [dataSource]="newRegistrationsdata"
-            >
-            </fusioncharts> -->
-            <div style="text-align: center;">Last 7 days</div>
-              </div>
+              <canvas baseChart height="250px" [data]="categoryChartData"  [labels]="categoryChartLabels" [chartType]="categoryChartType"> </canvas>
           </div>
         </div>
   
@@ -491,6 +451,7 @@
                     <!-- full size table -->
                     <div class="row">
                       <div class="col-12" *ngIf="isFreeCourseEnable">
+                        <div class="example-container">
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable">
                       <ng-container matColumnDef="position">
                         <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -518,6 +479,7 @@
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
                     </div>
+                  </div>
                     </div>
                   </div>
                 </div>
@@ -526,6 +488,7 @@
                  <!-- free Courses table end -->
               <div class="row">
                 <div class="col-12" >
+                  <div class="example-container ">
                   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable">
                     <ng-container matColumnDef="position">
                       <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -582,9 +545,10 @@
                   </table>
                     <!-- Enrolled Courses table end -->
                 </div>
+                </div>
               </div>
               <div class="margin"></div>
-              <!-- <</table> -->
+      
             </div>
           </div>
     
@@ -595,7 +559,7 @@
               <div class="card"  *ngIf="isCollapsed">
                 <div class="card-body">
                 <ul class="">
-                  <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
               <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
               <li>Enrollment Pending requests</li>
                 </ul>
@@ -657,7 +621,7 @@
             <div class="card" >
               <span style="padding: 22px;">Enrolled Courses</span>
               <div class="card-body enrolldoughnut">
-                <canvas baseChart [data]="enrollCoursesData"[labels]="enrollCoursesLabel"[chartType]="doughnutChartType"></canvas>
+                <canvas baseChart  width="200px" height="200px" [data]="enrollCoursesData"   [plugins]="enrollPlugins" [options]="enrollCoursesCount" [labels]="enrollCoursesLabel"  [colors]="enrollCoursesColors"  [chartType]="enrollChartType"></canvas>
               </div>
             </div>
              <!-- Enrolled doughnut chart end -->
@@ -737,7 +701,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Latest courses published</h3>
-              <span class="count">1820</span>
+              <span class="count">{{courseCount?.perMonth}}</span>
             </div>
     
             <div class="col-md-4 icon bg-green bg-course-icon">
@@ -772,7 +736,7 @@
             <div class="row">
               <div class="col-12 bg-color ">
                 <div style="margin-top: 14px;">
-                  <strong>Available courses  (Category wise)
+                  <strong>Available courses (Category wise)
                   </strong>
                 </div>
               </div>
@@ -787,8 +751,7 @@
               </div>
             </div>
             <div class="margin"></div>
-            
-            <!-- <</table> -->
+            <canvas baseChart height="250px" [data]="categoryChartData" [labels]="categoryChartLabels" [chartType]="categoryChartType"> </canvas>
           </div>
         </div>
 
@@ -804,7 +767,8 @@
             </div><br>
     
             <div class="row">
-              <div class="col-12"></div>
+              <div class="col-12">
+              <div class="example-container">
               <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 <ng-container matColumnDef="position">
                   <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -832,12 +796,12 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
+          </div>
+            </div>
             <div class="margin"></div>
           </div>
         </div>
 
-
-  
       <div class="col-4" >
             <div class="card top5box">
               <div class="card-body">
@@ -862,11 +826,8 @@
             </div>
        </div>
    </div>
-
-
-
   <div style="margin-top: 10%;"></div>
-    </mat-tab>
+</mat-tab>
  <!-- Courses tab ends -->
 
   <!-- learner tab -->
@@ -903,7 +864,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3 class="font-size">User groups</h3>
-              <span class="count">2500</span>
+              <span class="count">{{learnertabData?.today_login_count[0].todayCount}}</span>
             </div>
     
             <div class="col-md-4 icon  bg-green  bg-course-icon">
@@ -925,13 +886,12 @@
         </div>
       </div>
 
-
       <div class="col-md-4 col-sm-12 col-12" >
         <div class="medbox">
           <div class="row">
             <div class="col-md-9 ">
               <h3>Login par day</h3>
-              <span class="count">1820</span>
+              <span class="count">{{learnertabData?.total_user_group_count[0].totalCount}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow bg-course-icon">
@@ -960,7 +920,6 @@
       </div>
     </div>
 
-
     <div class="row" >
       <div class="col-6" >
         <div class="container containerShadow">
@@ -975,33 +934,23 @@
           <div class="row">
             <div class="col-9"></div>
             <div class="col-3">
-              <select name="day" class="rounded" (change)="onChange($event.target.value)">
+              <select name="day" class="rounded" (change)="stuVsProfChart($event.target.value)">
                 <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
                 </select>
             </div>
           </div>
-          <div class="margin"></div>
-          <div style="display: block">
-            <canvas baseChart 
-            [datasets]="stuVsProData"
-            [labels]="stuVsProLabels"
-            [options]="stuVsProOptions"
-            [colors]="stuVsProColors"
-            [legend]="lineChartLegend"
-            [chartType]="lineChartType"
-            [plugins]="lineChartPlugins"></canvas>
-
+          <!-- <div class="margin"></div> -->
+          <!-- <div style="display: block"> -->
+            <canvas baseChart  [datasets]="stuVsProData" [labels]="stuVsProLabels" [options]="stuVsProOptions" [colors]="stuVsProColors"[legend]="lineChartLegend"[chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
             <!-- addd student pro label -->
             <br>
             <div style="margin-left: 31%;">
             <div class="row">
-                <div class="activeLearner student"></div>
-                Students
-                <div class="InactiveLearner professional"></div>
-                Professional
+                <div class="activeLearner student"></div>Students
+                <div class="InactiveLearner professional"></div>Professional
             </div>
           </div>
-            </div>
+            <!-- </div> -->
         </div>
       </div>
 
@@ -1023,24 +972,16 @@
               </select>
           </div>
         </div>
-        <div class="margin"></div>
-        <div style="display: block">
-          <canvas baseChart 
-          [datasets]="totVsActData"
-          [labels]="totVsActLabels"
-          [options]="totVsActChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="totVsActChartLegend"
-          [colors]="totVsActColors"
-          [chartType]="totVsActChartType">
+        <!-- <div class="margin"></div> -->
+        <!-- <div style="display: block"> -->
+          <canvas baseChart  [datasets]="totVsActData" [labels]="totVsActLabels" [options]="totVsActChartOptions"[plugins]="totVsActChartPlugins" [legend]="totVsActChartLegend" [colors]="totVsActColors" [chartType]="totVsActChartType">
         </canvas>
-        <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
-          </div>
+        <div style="text-align: center;">Last {{totvsActiveDayCount ? totvsActiveDayCount : '7'}} days</div>
+          <!-- </div> -->
       </div>
      </div>
  </div>
     
- 
  <div class="row" >
   <div class="col-12" >
     <div class="container containerShadow">
@@ -1062,28 +1003,14 @@
       </div>
       <div class="margin"></div>
       <div style="display: block">
-        <canvas baseChart
-        [datasets]="loginperDayData"
-        [labels]="loginperDaChartLabels"
-        [options]="loginperDaChartOptions"
-        [colors]="loginperDaChartColors"
-        [legend]="loginperDaChartLegend"
-        [chartType]="loginperDaChartType"
-        [plugins]="loginperDaChartPlugins">
+        <canvas baseChart [datasets]="loginperDayData" [labels]="loginperDaChartLabels" [options]="loginperDaChartOptions"[colors]="loginperDaChartColors" [legend]="loginperDaChartLegend"[chartType]="loginperDaChartType" [plugins]="loginperDaChartPlugins">
       </canvas>
       <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days  </div>
-     
         </div>
     </div>
   </div>
 </div>
-
-
-
-
-
     <div style="margin-top: 10%;"></div>
      </mat-tab>
     <!-- learner tab end -->
-
 </mat-tab-group>

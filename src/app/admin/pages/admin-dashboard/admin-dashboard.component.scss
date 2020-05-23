@@ -24,9 +24,14 @@
     color: $color-darkGrey ;
     border-radius: 10px;
     background-color: $color-white;
-    -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    
+}
+
+.smallbox:hover{
+-webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
     -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
     box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+  
 }
 
 .medbox{
@@ -38,9 +43,16 @@
     color: $color-darkGrey ;
     border-radius: 10px;
     background-color: $color-white;
-    -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+}
+.medbox:hover{
+  -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
     -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
     box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+}
+.arrow5{
+  margin-left: 58% !important;
+  font-size: 18px;
+  margin-top: 2px
 }
 
 h2{
@@ -130,7 +142,7 @@ h3{
   }
   .tabbutton{
     height: 36px;
-    background: #f6f6f6;
+    background: $light-grey;
     border: none;
     margin-left: 13px;
     border-radius: 3px;
@@ -151,8 +163,12 @@ h3{
     width: 96%;
     margin-left: 2%;
   }
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
   ::ng-deep .mat-header-row {
-    background: #e3e3fe !important;
+    background: $bg-color !important;
     min-height: 40px !important;
 }
   .courselistbox{
@@ -189,7 +205,7 @@ h3{
     margin-left: 2px !important; 
   }
   .bg-brown{
-      background-color: #af481161 !important;
+      background-color: $bg-dark-brown !important;
   }
   .InactiveIcon{
     margin-top: -7px !important;
@@ -208,10 +224,10 @@ h3{
   }
 
   .bg-green{
-      background-color: #7cfc0061;
+      background-color: $bg-green;
   }
   .bg-yellow{
-      background-color: #ffc10759 !important;
+      background-color: $bg-brown !important;
   }
   .iconImg{
     margin-left: 1px;
@@ -236,32 +252,32 @@ h3{
       width: 97.5%;
       border-radius: 5px;
       background-color: $color-white;
-      border: 1px solid #e3e3fe;
+      border: 1px solid $bg-color;
   }
   .bg-color{
-      background-color: #e3e3fe;
+      background-color: $bg-color;
       height: 44px;
       margin-top: -20px;
       border-radius: 3px;
   }
   .rounded{
-    background: #e3e3fe;
+    background: $bg-color;
   }
   .margin{
       margin-top: 7%;
   }
   .card{
-    background-color: #99939326;
+    background-color: $light-grey ;
     border: none;
   }
  li {
     padding: 10px;
-    border: 1px solid #fff;
+    border: 1px solid $color-white;
     box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03);
     margin-left: -51px;
     width: 323px;
     margin-top: 2px;
-    background-color: #fff;
+    background-color: $color-white;
     list-style-type: none;
 
  }
@@ -291,7 +307,7 @@ h3{
     color: #000000;
     border-radius: 6px;
     border: none;
-    background-color: #f6f6f6;
+    background-color: $light-grey;
     box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03) !important;
  }
 
@@ -300,7 +316,7 @@ h3{
     outline: none;
   }
   ::ng-deep mat-progress-bar.my-color .mat-progress-bar-fill::after {
-    background-color: #7cfc0061 !important;
+    background-color: $bg-green !important;
   }
 
   ::ng-deep mat-progress-bar.my-color-red .mat-progress-bar-fill::after {

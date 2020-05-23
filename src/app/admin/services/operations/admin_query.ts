@@ -662,6 +662,10 @@ export const getAdminOverview = gql`
       DraftCourse
       TotalCourse
       newReg
+      allEnrollement
+      enrollPending 
+      enrollmentApprove
+      enrollRejected
       perDays{
       count
       _id 
@@ -733,20 +737,19 @@ export const getLoginsPerDay = gql`
       success
       message{
       _id
-      cnt
+      count
       }
       }
-    
   }`;
 
 
 export const getLeranertabCount = gql`
   query getLeranertabCount{
-    getLeranertabCount {
-      getLeranertabCount{
+      getLeranertabCount {
       success
       message {
       login_diff
+      subscribeUser  
       today_login_count{
       _id
       todayCount
@@ -757,15 +760,17 @@ export const getLeranertabCount = gql`
       totalCount
       }
       }
-    }
+    
     }
   }`;
 // getting active and inactive users  for dashboard
 export const getActiveinactiveCount = gql`
-  query getActiveinactiveCount{
-    getActiveinactiveCount {
+  query getActiveinactiveCount($days: Int){
+    getActiveinactiveCount(days: $days) {
       success
       message{
+        EnrolledActive
+        EnrolledInActive
       InActiveUser{
       _id
       count
@@ -778,3 +783,46 @@ export const getActiveinactiveCount = gql`
       }
     
   }`;
+// getting Professional Student  users  for dashboard
+export const getProfessionalStudent  = gql`
+  query getProfessionalStudent ($days: Int){
+    getProfessionalStudent (days: $days) {
+      success
+      message{
+      student{
+      _id
+      count
+      }
+      professional{
+      _id
+      count
+      }
+      }
+      }
+  }`;
+
+//getting enrolled and free course category and sub-category for admin dashboard 
+export const enrolledCourse  = gql`
+  query enrolledCourse ($days: Int){
+    enrolledCourse(days: $days) {
+      success
+      enrollcourse
+      freecourse
+      message{
+      count
+      category_id{
+        category_name
+      }
+      parent_sub_category_id{
+        sub_category_name
+      }
+      super_sub_category_id{
+        super_sub_category_name
+      }
+      course{
+        course_name
+      }
+      }
+      }
+  }`;
+

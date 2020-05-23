@@ -8,7 +8,7 @@ import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
   , getnotificationreports, get_draft_course, getcategoryadmin,getAdminOverview,getAdmindashboardCoursetab,getLeranertabCount
-  ,getActiveinactiveCount,getLoginsPerDay,getUsersInWeeks} from "./operations/admin_query";
+  ,getActiveinactiveCount,getLoginsPerDay,getUsersInWeeks,getProfessionalStudent,enrolledCourse} from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { group } from '@angular/animations';
@@ -315,13 +315,16 @@ export class AdminServicesService {
       variables: {}
     });
   }
-  getActiveinactiveCount(){
+  //getting Active and in-active chart data
+  getActiveinactiveCount(days){
     return this.Apollo.query({
       query: getActiveinactiveCount,
-      variables: {}
+      variables: {
+        days:days
+      }
     });
   }
-
+//getting login per day chart data
   getLoginsPerDay(days){
     return this.Apollo.query({
       query: getLoginsPerDay,
@@ -330,7 +333,7 @@ export class AdminServicesService {
       }
     });
   }
-
+//getting login per day data
   getUsersIndays(days){
     return this.Apollo.query({
       query: getUsersInWeeks,
@@ -339,8 +342,24 @@ export class AdminServicesService {
       }
     });
   }
-  
-  
+//getting student and professional chart data
+  getProfessionalStudent(days){
+    return this.Apollo.query({
+      query: getProfessionalStudent,
+      variables: {
+        days: days,
+      }
+    });
+  }
+//getting enrolled and free course data for chart 
+  enrolledCourse(days){
+    return this.Apollo.query({
+      query: enrolledCourse,
+      variables: {
+        days: days,
+      }
+    });
+  }
   // End of Catalogue Management
 }
 
