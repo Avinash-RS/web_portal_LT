@@ -377,9 +377,9 @@
             </div>
           </div>
         </div>
-        <div class="row pos_bottom"
-        *ngIf="courseCount > 10">
-        <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">
+        <div class="row width_100 pos_bottom"
+        *ngIf="courseCount >= 10">
+        <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourse()">
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
       </div>
