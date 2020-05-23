@@ -2,8 +2,9 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
     <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue Management</li>
-    <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
-    showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null">{{catalog.catalogue_name}}
+    <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" 
+    (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
+    showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null;getCatalogDetail()">{{catalog.catalogue_name}}
     </li>
     <li class="breadcrumb-item " *ngIf="showAddCatalogueForm">New catalogue</li>
     <li class="breadcrumb-item " *ngIf="type === 'add'">Add Courses</li>
