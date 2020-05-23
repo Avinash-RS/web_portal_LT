@@ -277,7 +277,7 @@ export class EnrollmentComponent implements OnInit {
       //   wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
       // };
       const details = {
-        type: 'publish', id: row.course_id
+        type: 'publish', id: row.course_id , type1: 'enrollment'
       };
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
       // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
