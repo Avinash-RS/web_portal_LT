@@ -25,6 +25,7 @@ import { NgxPaginationModule} from 'ngx-pagination';
 import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
 import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 import { FusionChartsModule } from "angular-fusioncharts";
 import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
@@ -51,7 +52,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
         AdminCoreModule,
         RouterModule,
         NgxPaginationModule,
-        FusionChartsModule
+        FusionChartsModule,
+        ChartsModule
    
          ],
     declarations: [   

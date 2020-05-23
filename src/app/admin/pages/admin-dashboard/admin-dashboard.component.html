@@ -1,12 +1,12 @@
-<mat-tab-group style="padding: 20px;">
-  <mat-tab label="Overview"> 
-    <div class="row">
+<mat-tab-group style="padding: 20px;" (selectedTabChange)="onTabChanged($event);">
+  <mat-tab label="Overview" > 
+    <div class="row" >
       <div class="col-md-3 col-sm-12 col-12" (click)="newRegister()">
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
               <h3>New registrations</h3>
-              <span class="count">2,684</span>
+              <span class="count">{{newRegisterLearses.newReg}}</span>
             </div>
     
             <div class="col-md-4 icon">
@@ -38,7 +38,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Total learners</h3>
-              <span class="count">50,864</span>
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.count}}</span>
             </div>
     
             <div class="col-md-4 icon newLerner">
@@ -65,7 +65,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Active learners</h3>
-              <span class="count">1820</span>
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.Active}}</span>
             </div>
     
             <div class="col-md-4 icon bg-green">
@@ -84,7 +84,7 @@
 
           <div class="row">
             <div class="col-md-9">
-              <span class="count">1820</span>
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.InActive}}</span>
             </div>
             <div class="col-md-3">
               <img class="charticon InactiveIcon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
@@ -98,7 +98,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Available courses</h3>
-              <span class="count">200</span>
+              <span class="count">{{newRegisterLearses?.TotalCourse}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow">
@@ -183,17 +183,18 @@
             </div>
           </div>
           <div class="margin"></div>
-          <div style="display: block">
-            <fusioncharts
-            [width]="width"
-            [height]="height"
-            [type]="type"
-            [dataFormat]="dataFormat"
-            [dataSource]="newRegistrationsdata"
-          >
-          </fusioncharts>
+          <!-- <div style="display: block"> -->
+            <canvas baseChart 
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+          </canvas>
           <div style="text-align: center;">Last 7 days</div>
-            </div>
+            <!-- </div> -->
         </div>
       </div>
 
@@ -203,16 +204,16 @@
         </button>
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
-            <ul class="">
-              <li>Course if draf</li>
-              <li>Course if draf</li>
-              <li>Course if draf</li>
+            <ul class="hoverr">
+              <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
+              <li>Enrollment Pending requests</li>
             </ul>
             </div>
           </div>
 
           <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  500
-            <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+            <i class="fa fa-angle-down arrow arrow3 " aria-hidden="true"></i>
           </button>
             <div class="card"  *ngIf="isCollapsed1">
               <div class="card-body">
@@ -285,15 +286,34 @@
             <div class="col-9"></div>
             <div class="col-3">
               <select name="day" class="rounded" (change)="onChange($event.target.value)">
-                <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                <option *ngFor="let days of days"   [value]="days.id">{{days.name}}</option>
                 </select>
             </div>
           </div>
           <div class="margin"></div>
-            <fusioncharts [width]="width"[height]="height"[type]="type"[dataFormat]="dataFormat"[dataSource]="newRegistrationsdata"></fusioncharts>
-          <div style="text-align: center;">Last 7 days</div>
+         
+          <canvas baseChart
+          [datasets]="activeLearnerChartData"
+          [labels]="activeLearnerChartLabels"
+          [options]="lineChartOptions"
+          [colors]="activeLearnerChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins"></canvas>
+
+          <!-- <div style="text-align: center;">Last 7 days</div> -->
+          <br>
+          <div style="margin-left: 31%;">
+          <div class="row">
+              <div class="activeLearner"></div>
+              Active Learners
+              <div class="InactiveLearner"></div>
+              Inactive Learners
+          </div>
+        </div>
         </div>
       </div>
+
       <div class="col-4" >
         <button class="customButton" (click)="isCollapsed = !isCollapsed">To do list
           <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
@@ -301,9 +321,9 @@
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
             <ul class="">
-              <li>Course if draf</li>
-              <li>Course if draf</li>
-              <li>Course if draf</li>
+              <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
+              <li>Enrollment Pending requests</li>
             </ul>
             </div>
           </div>
@@ -313,7 +333,13 @@
           </button>
             <div class="card"  *ngIf="isCollapsed1">
               <div class="card-body">
-              
+                <canvas baseChart 
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    [colors]="doughnutChartChartColors">
+                   
+                </canvas>
               </div>
             </div>
       </div>
@@ -344,14 +370,14 @@
             </div>
             <div class="margin"></div>
             <div style="display: block">
-              <fusioncharts
+              <!-- <fusioncharts
               [width]="width"
               [height]="height"
               [type]="type"
               [dataFormat]="dataFormat"
               [dataSource]="newRegistrationsdata"
             >
-            </fusioncharts>
+            </fusioncharts> -->
             <div style="text-align: center;">Last 7 days</div>
               </div>
           </div>
@@ -364,9 +390,9 @@
             <div class="card"  *ngIf="isCollapsed">
               <div class="card-body">
               <ul class="">
-                <li>Course if draf</li>
-                <li>Course if draf</li>
-                <li>Course if draf</li>
+                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+                <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
+                <li>Enrollment Pending requests</li>
               </ul>
               </div>
             </div>
@@ -457,7 +483,7 @@
                 <div class="col-3">
                   <img class="fullScreen" (click)="openNav()" src="../../../../assets/learner/Expand.svg">
                 </div>
-                <!-- <span style="font-size:30px;cursor:pointer" >&#9776; open</span> -->
+                
                 <div id="myNav" class="overlay">
                   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
                   <div class="overlay-content">
@@ -491,8 +517,6 @@
                       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
-
-                    
                     </div>
                     </div>
                   </div>
@@ -559,12 +583,7 @@
                     <!-- Enrolled Courses table end -->
                 </div>
               </div>
-
-
-
-
               <div class="margin"></div>
-              
               <!-- <</table> -->
             </div>
           </div>
@@ -576,9 +595,9 @@
               <div class="card"  *ngIf="isCollapsed">
                 <div class="card-body">
                 <ul class="">
-                  <li>Course if draf</li>
-                  <li>Course if draf</li>
-                  <li>Course if draf</li>
+                  <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+              <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
+              <li>Enrollment Pending requests</li>
                 </ul>
                 </div>
               </div>
@@ -630,15 +649,22 @@
                         </div>
                       </div>
                     </li>
-                   
                   </ul>
                   </div>
                 </div>
+                <!-- Enrolled doughnut chart -->
+                <br><br>
+            <div class="card" >
+              <span style="padding: 22px;">Enrolled Courses</span>
+              <div class="card-body enrolldoughnut">
+                <canvas baseChart [data]="enrollCoursesData"[labels]="enrollCoursesLabel"[chartType]="doughnutChartType"></canvas>
+              </div>
+            </div>
+             <!-- Enrolled doughnut chart end -->
          </div>
      </div>
     </div>
       <!-- TotalEnrolments end -->
-
     <div style="margin-top: 10%;"></div>
   </mat-tab>
 
@@ -650,7 +676,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Total categories</h3>
-              <span class="count">2,684</span>
+              <span class="count">{{courseCount?.TotalCategoryCount}}</span>
             </div>
     
             <div class="col-md-4  icon newLerner bg-course-icon">
@@ -676,7 +702,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3 class="font-size">Available courses</h3>
-              <span class="count">102</span>
+              <span class="count">{{courseCount?.TotalCourse}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow bg-course-icon">
@@ -813,21 +839,24 @@
 
   
       <div class="col-4" >
-            <div class="card">
+            <div class="card top5box">
               <div class="card-body">
                 <div class="row">
                   <div class="col-7">
                     <span class="top5">Top 5 Courses</span>
                   </div>
                   <div class="col-5">
-                    <select name="day" class="rounded" (change)="onChange($event.target.value)">
-                      <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                    <!-- (change)="onChange($event.target.value)" -->
+                    <select name="day" class="rounded" >
+                      <option   [value]="">Enrollment</option>
+                      <option   [value]="">Rating</option>
+                      <option   [value]="">Comments</option>
+                      <option   [value]="">Wishlist</option>
                       </select>
                   </div>
                 </div><br>
               <ul class="">
-                <li class="courselistbox ">Network</li>
-                 
+                <li *ngFor="let topCourse of courseCount?.allLast30daysCourses" class="courselistbox ">{{topCourse.course_name}}</li>
               </ul>
               </div>
             </div>
@@ -841,7 +870,7 @@
  <!-- Courses tab ends -->
 
   <!-- learner tab -->
-  <mat-tab label="Learner"> 
+  <mat-tab label="Learner" > 
     <div class="row">
       <div class="col-md-4 col-sm-12 col-12" >
         <div class="medbox">
@@ -953,15 +982,25 @@
           </div>
           <div class="margin"></div>
           <div style="display: block">
-            <fusioncharts
-            [width]="width"
-            [height]="height"
-            [type]="type"
-            [dataFormat]="dataFormat"
-            [dataSource]="newRegistrationsdata"
-          >
-          </fusioncharts>
-          <div style="text-align: center;">Last 7 days</div>
+            <canvas baseChart 
+            [datasets]="stuVsProData"
+            [labels]="stuVsProLabels"
+            [options]="stuVsProOptions"
+            [colors]="stuVsProColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins"></canvas>
+
+            <!-- addd student pro label -->
+            <br>
+            <div style="margin-left: 31%;">
+            <div class="row">
+                <div class="activeLearner student"></div>
+                Students
+                <div class="InactiveLearner professional"></div>
+                Professional
+            </div>
+          </div>
             </div>
         </div>
       </div>
@@ -979,22 +1018,23 @@
         <div class="row">
           <div class="col-9"></div>
           <div class="col-3">
-            <select name="day" class="rounded" (change)="onChange($event.target.value)">
+            <select name="day" class="rounded" (change)="totalVsActiveLernerChart($event.target.value)">
               <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
               </select>
           </div>
         </div>
         <div class="margin"></div>
         <div style="display: block">
-          <fusioncharts
-          [width]="width"
-          [height]="height"
-          [type]="type"
-          [dataFormat]="dataFormat"
-          [dataSource]="newRegistrationsdata"
-        >
-        </fusioncharts>
-        <div style="text-align: center;">Last 7 days</div>
+          <canvas baseChart 
+          [datasets]="totVsActData"
+          [labels]="totVsActLabels"
+          [options]="totVsActChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="totVsActChartLegend"
+          [colors]="totVsActColors"
+          [chartType]="totVsActChartType">
+        </canvas>
+        <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
           </div>
       </div>
      </div>
@@ -1015,22 +1055,24 @@
       <div class="row">
         <div class="col-9"></div>
         <div class="col-3">
-          <select name="day" class="rounded" (change)="onChange($event.target.value)">
+          <select name="day" class="rounded" (change)="loginPerDayChart($event.target.value)">
             <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
             </select>
         </div>
       </div>
       <div class="margin"></div>
       <div style="display: block">
-        <fusioncharts
-        [width]="width"
-        [height]="height"
-        [type]="type"
-        [dataFormat]="dataFormat"
-        [dataSource]="newRegistrationsdata"
-      >
-      </fusioncharts>
-      <div style="text-align: center;">Last 7 days</div>
+        <canvas baseChart
+        [datasets]="loginperDayData"
+        [labels]="loginperDaChartLabels"
+        [options]="loginperDaChartOptions"
+        [colors]="loginperDaChartColors"
+        [legend]="loginperDaChartLegend"
+        [chartType]="loginperDaChartType"
+        [plugins]="loginperDaChartPlugins">
+      </canvas>
+      <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days  </div>
+     
         </div>
     </div>
   </div>

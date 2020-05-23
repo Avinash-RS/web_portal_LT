@@ -346,6 +346,52 @@ h3{
     width: 75%;
     text-align: center;
   }
+  .enrolldoughnut{
+    margin-top: -35px;
+  }
+  .arrow3{
+    margin-left: 42%;
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  li:hover {
+    background: #d4e0fb;
+    // background-image:url('../../../../assets/learner/Expand.svg') ;
+}
+
+  .todo{
+    margin-left: 57%;
+  }
+  .tode1{
+    margin-left: 35%;
+
+  }
+.top5box{
+  margin-top: 20px !important;
+}
+  .student{
+    border: 2px solid $studentChart !important;
+  }
+  .professional{
+    border: 2px solid $professionalChart !important;
+  }
+
+  .activeLearner{
+    border: 2px solid $activelearnerchart;
+    width: 18px;
+    height: 0px;
+    margin-right: 10px;
+    margin-top: 9px;
+  }
+  .InactiveLearner{
+    border: 2px solid $inactivelearnerchart;
+    width: 18px;
+    height: 0px;
+    margin-left: 10px;
+    margin-right: 12px;
+    margin-top: 9px;
+  }
   
   .overlay a {
     padding: 8px;

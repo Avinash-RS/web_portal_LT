@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { Color, Label,MultiDataSet} from 'ng2-charts';
+import { ChartDataSets, ChartOptions, } from 'chart.js';
+import { Router } from '@angular/router';
+import { AdminServicesService } from '@admin/services/admin-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 export interface PeriodicElement {
+
   courseName: string;
   position: number;
   category: string;
@@ -8,13 +15,6 @@ export interface PeriodicElement {
   superSubCategory : string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, courseName: 'Hydrogen', category: 'Hydrogen', subCategory: 'H' ,superSubCategory: ''},
-  {position: 2, courseName: 'Helium', category: 'Hydrogen', subCategory: 'He',superSubCategory: ''},
-  {position: 3, courseName: 'Lithium', category:'Hydrogen', subCategory: 'Li',superSubCategory: ''},
-  {position: 4, courseName: 'Beryllium', category: 'Hydrogen', subCategory: 'Be',superSubCategory: ''},
-  {position: 5, courseName: 'Boron', category: 'Hydrogen', subCategory: 'B',superSubCategory: ''}
-];
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -22,11 +22,59 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'courseName', 'category', 'subCategory','superSubCategory'];
-  dataSource = ELEMENT_DATA;
+  ELEMENT_DATA: PeriodicElement[] = [];
+  jsonData =[]
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  displayedColumns: string[] = ['position', 'courseName', 'category', 'subCategory', 'superSubCategory'];
+  // new register chart val
+  public lineChartData: ChartDataSets[] = [{data: [], label: 'Series A' }];
+  public lineChartLabels: Label[];
+  public lineChartOptions: (ChartOptions) = {responsive: true};
+  public lineChartColors: Color[] = [];
+  public lineChartLegend = true;
+  public lineChartType = "line";
+  public lineChartPlugins = [];
+// Active and inactive learner chart var
+  public activeLearnerChartData: ChartDataSets[] = [];
+  public activeLearnerChartLabels: Label[] = [];
+  public activeLearnerChartOptions: (ChartOptions) = {responsive: true,};
+  public activeLearnerChartColors: Color[] = [];
+
+// Active InActive doughut Chart
+public doughnutChartLabels: Label[] = [];
+public doughnutChartData: MultiDataSet = [];
+public doughnutChartType;
+
+// Enrolled Course doughut Chart
+public enrollCoursesLabel :  Label[] = [];
+public enrollCoursesData: MultiDataSet = [];
+
+// Student vs Professional line char
+public stuVsProData: ChartDataSets[] = [];
+public stuVsProLabels: Label[] = [];
+public stuVsProOptions: (ChartOptions) = {responsive: true};
+public stuVsProColors: Color[] = [];
+
+// Total VS Active Learner
+public totVsActLabels: Label[] = [];
+public totVsActChartType = 'bar';
+public totVsActChartLegend = true;
+public totVsActChartPlugins = [];
+public totVsActColors: Color[] = [];
+public totVsActData: ChartDataSets[] = [{data: [], label: 'Series A' }];
+public totVsActChartOptions: (ChartOptions) = {responsive: true};
+
+//Login Per Day Chart
+public loginperDayData: ChartDataSets[] = [{data: [], label: 'Series A' }];
+public loginperDaChartLabels: Label[] = [];
+public loginperDaChartOptions: (ChartOptions) = {responsive: true,};
+public loginperDaChartColors: Color[] = [{borderColor: '#a28bf5', backgroundColor: 'rgba(255, 255, 255, .4)'}];
+public loginperDaChartLegend = true;
+public loginperDaChartType = 'line';
+public loginperDaChartPlugins = [];
+public isCollapsed = false;
+public isCollapsed1 = false;
   days= [];
-  public isCollapsed = false;
-  public isCollapsed1 = false;
   activeLearnerisable : boolean = false;
   newRegisterIsable : boolean = true;
   availCoursesenable : boolean = false;
@@ -35,22 +83,17 @@ export class AdminDashboardComponent implements OnInit {
   islatestCouresEnable : boolean = false;
   isFreeCourseEnable : boolean = true;
   isEnrolledCoursesEnable : boolean = false;
-  width = 600;
-  height = 400;
-  type = "line";
-  dataFormat = "json";
-  newRegistrationsdata: { chart: { theme: string; }; data: { label: string; value: string; }[];};
+  chartFilterdays: number = 7;
+  newRegisterLearses : any = [];
+  courseCount: any;
+  getLoginsPerDay: any;
  
-
-  
-  constructor() {
-
+  constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
-      id: 1, name: 'Last 7 days'},
-      {id: 2, name: 'Last 14 days'},
-  ]
-  
+      id: 7, name: 'Last 7 days'},
+      {id: 14, name: 'Last 14 days'},]
    }
+
     openNav() {
     document.getElementById("myNav").style.height = "100%";
   }
@@ -60,9 +103,16 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.newRegistrationsChart();
+    this.newRegistrationsChart(this.chartFilterdays);
+    this.activeInactivedoughnutChart();
+    this.stuVsProfChart();
+   
+   
   }
-
+  gotoCoursePage(type){
+    console.log(type)
+      this.route.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
+  }
 
   freeCourse(){
    this.isFreeCourseEnable = true;
@@ -74,20 +124,24 @@ export class AdminDashboardComponent implements OnInit {
     this.isEnrolledCoursesEnable = true;
   }
   activeLearner(){
+  this.activeAndInactiveLearnerChart();
   this.newRegisterIsable = false;
   this.activeLearnerisable = true;
   this.availCoursesenable = false;
+  this.istotenvEnable = false;
   }
   newRegister(){
     this.newRegisterIsable = true;
     this.activeLearnerisable = false;
     this.availCoursesenable = false;
+    this.istotenvEnable = false;
   }
 
   availableCourses(){
     this.newRegisterIsable = false;
     this.activeLearnerisable = false;
     this.availCoursesenable = true;
+    this.istotenvEnable = false;
   }
 
   totalEnrollments(){
@@ -95,6 +149,7 @@ export class AdminDashboardComponent implements OnInit {
     this.activeLearnerisable = false;
     this.availCoursesenable = false;
     this.istotenvEnable = true;
+    this.enrolledCoursedoughutChart();
   }
 
   latestcourses(){
@@ -102,56 +157,116 @@ export class AdminDashboardComponent implements OnInit {
     this.islatestCouresEnable = true;
   }
 
-
   availableCourse(){
     this.islatestcoursesenable = true;
     this.islatestCouresEnable = false;
   }
-
-  newRegistrationsChart(){
-    const data = {
-      chart: {
-        caption: "",
-        yaxisname: "",
-        subcaption: "",
-        numbersuffix: " ",
-        rotatelabels: "50",
-        setadaptiveymin: "50",
-        theme: "fusion"
-      },
-      data: [
-        {
-          label: "1 may 2020",
-          value: "0"
-        },
-        {
-          label: "2 may 2020",
-          value: "50"
-        },
-        {
-          label: "3 may 2020",
-          value: "100"
-        },
-        {
-          label: "4 may 2020",
-          value: "150"
-        },
-        {
-          label: "5 may 2020",
-          value: "200"
-        },
-        {
-          label: "6 may 2020",
-          value: "250"
-        },
-        {
-          label: "7 may 2020",
-          value: "300"
-        }
-      
-      ]
-     
-    };
-    this.newRegistrationsdata = data;
+  onChange(days){
+    this.chartFilterdays = days;
+    this.newRegistrationsChart(this.chartFilterdays)
   }
+
+  newRegistrationsChart(chartFilterdays){
+    this.service.getAdminOverview(chartFilterdays).subscribe((res: any) => {
+      if(res.data.getAdminOverview.success == true){
+        this.newRegisterLearses = res.data.getAdminOverview.message;
+        this.lineChartLabels = this.newRegisterLearses?.perDays.flatMap(i => i._id);
+        let  arr = [];arr = this.newRegisterLearses.perDays.flatMap(i => i.count);
+        this.lineChartData = [{data: arr, label: 'New registrations' }];
+      }else{
+        this.alert.openAlert('Please try after sometime',null);
+      }
+   
+    })
+    this.lineChartColors = [{borderColor: '#a28bf5', backgroundColor: 'rgba(255, 255, 255, .4)',}];
+ 
+   }
+
+   activeAndInactiveLearnerChart(){
+    this.service.getActiveinactiveCount().subscribe((res: any) => {
+      console.log(res,'getActiveinactiveCount')
+    })
+      this.activeLearnerChartData= [{data: [0, 50, 100, 150,200, 250, 300,350], label: 'Series A' },
+      { data: [0, 40, 90, 130,150, 250, 280,10], label: 'Series B' },
+    ];
+      this.activeLearnerChartLabels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+      this.activeLearnerChartColors = [{borderColor: '#7fe7a5', backgroundColor: 'rgba(255, 255, 255, .4)'},
+      {borderColor: '#ea6c89', backgroundColor: 'rgba(255, 255, 255, .4)'}
+    ];
+   }
+  
+   activeInactivedoughnutChart(){
+     this.doughnutChartLabels = ['Active', 'Inactive'];
+     this.doughnutChartData = [[150, 105]];
+     this.doughnutChartType = 'doughnut';
+   }
+
+   enrolledCoursedoughutChart(){
+    this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
+     this.enrollCoursesData = [[100,200]];
+   }
+
+   stuVsProfChart(){
+     this.stuVsProLabels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+     this.stuVsProData = [{data: [0, 50, 100, 150,200, 250, 300,350], label: 'Students' },
+     { data: [0, 40, 90, 130,150, 250, 280,10], label: 'Professional' },]
+     this.stuVsProColors = [{borderColor: '#8080f8', backgroundColor: 'rgba(255, 255, 255, .4)'},
+     {borderColor: '#ea7c37', backgroundColor: 'rgba(255, 255, 255, .4)',}
+    ];
+   }
+
+   totalVsActiveLernerChart(days){
+     this.chartFilterdays = days;
+     this.service.getUsersIndays(this.chartFilterdays).subscribe((res: any) => {
+       console.log(res,'totalvsact')
+
+    })
+    this.totVsActData = [{data: [0,20,40,60,80,100], label: 'Active Learner', type: 'line' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Total Learner' }];
+    console.log( this.totVsActData,' this.totVsActData')
+   }
+   
+
+
+ 
+
+
+   loginPerDayChart(days){
+     this.chartFilterdays = days
+    this.service.getLoginsPerDay(this.chartFilterdays).subscribe((res: any) => {
+      if(res.data.getLoginsPerDay.success == "true"){
+        this.getLoginsPerDay = res.data.getLoginsPerDay.message;
+        this.loginperDaChartLabels = this.getLoginsPerDay.flatMap(i => i._id);
+        let  arr = [];arr = this.getLoginsPerDay.flatMap(i => i.cnt);
+        console.log(arr,'per days count')
+        this.loginperDayData = [{data: arr, label: 'Login per day' }];
+      }else{
+        this.alert.openAlert('Please try after sometime',null);
+      }
+    })
+   }
+
+   onTabChanged(event){
+     if(event.index == 1){
+       this.jsonData= [];
+      this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
+      this.courseCount = res.data.getAdmindashboardCoursetab.message;
+      for (const iterator of this.courseCount.allLast30daysCourses) {
+        this.jsonData.push({category:iterator.category_id.category_name,
+          courseName:iterator.course_name,subCategory:iterator.parent_sub_category_id.sub_category_name})
+
+      }
+      Array.prototype.push.apply(this.ELEMENT_DATA,  this.jsonData);
+      this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+      })
+     }else if (event.index == 2){
+      this.loginPerDayChart(this.chartFilterdays);
+      this.totalVsActiveLernerChart(this.chartFilterdays);
+      this.service.getLeranertabCount().subscribe((res: any) => {
+        console.log(res)
+      })
+     }
+  
+     }
+
 }

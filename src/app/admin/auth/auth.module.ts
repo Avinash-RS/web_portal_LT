@@ -36,6 +36,7 @@ import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
 import { GroupManagementComponent } from '../pages/group-management/group-management.component';
 import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 import { FusionChartsModule } from "angular-fusioncharts";
 import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
@@ -79,7 +80,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
         MatSlideToggleModule,
         InfiniteScrollModule,
         NgxPaginationModule,
-        FusionChartsModule
+        FusionChartsModule,
+        ChartsModule
         // WcaModule
 
 

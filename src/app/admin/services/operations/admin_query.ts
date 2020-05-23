@@ -650,3 +650,131 @@ export const getcategoryadmin = gql`
       }
     }
 }`;
+
+
+export const getAdminOverview = gql`
+  query getAdminOverview($days: Int){
+    getAdminOverview(days: $days) {
+      success
+      error_msg
+      message{
+      PublishCourse
+      DraftCourse
+      TotalCourse
+      newReg
+      perDays{
+      count
+      _id 
+      }
+      TotalActiveInActiveLearner{
+      Active
+      count
+      InActive
+      }
+    }
+  }
+  }`;
+
+export const getAdmindashboardCoursetab = gql`
+  query getAdmindashboardCourseta{
+    getAdmindashboardCoursetab {
+      success
+      error_msg
+      message{
+      level1_count{
+      level1_count
+        }
+      level2_count{
+      level2_count
+      }
+      level3_count{
+      level3_count
+      }
+      TotalCourse
+      perMonth
+      TotalCategoryCount
+      allLast30daysCourses{
+      course_name
+      super_sub_category_id
+      category_id{
+      category_name
+      }
+      parent_sub_category_id{
+      sub_category_name
+      }
+      }
+    }
+   }
+  }`;
+
+
+// getting user per week in dashboard learners tab
+export const getUsersInWeeks = gql`
+  query getUsersInWeeks($weeks: Int){
+    getUsersInWeeks(weeks: $weeks) {
+      success
+      message{
+      total_Users{
+      _id
+      totalCount
+      }
+      active_Users{
+      _id
+      totalCount
+      }
+      }
+    }
+  }`;
+
+// getting login user for dashboard
+export const getLoginsPerDay = gql`
+  query getLoginsPerDay($days: Int){
+    getLoginsPerDay(days: $days) {
+      success
+      message{
+      _id
+      cnt
+      }
+      }
+    
+  }`;
+
+
+export const getLeranertabCount = gql`
+  query getLeranertabCount{
+    getLeranertabCount {
+      getLeranertabCount{
+      success
+      message {
+      login_diff
+      today_login_count{
+      _id
+      todayCount
+      }
+      user_group_diff
+      total_user_group_count{
+      _id
+      totalCount
+      }
+      }
+    }
+    }
+  }`;
+// getting active and inactive users  for dashboard
+export const getActiveinactiveCount = gql`
+  query getActiveinactiveCount{
+    getActiveinactiveCount {
+      success
+      message{
+      InActiveUser{
+      _id
+      count
+      }
+      ActiveUser{
+      _id
+      count
+      }
+      }
+      }
+    
+  }`;
