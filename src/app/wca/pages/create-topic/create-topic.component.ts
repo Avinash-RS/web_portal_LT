@@ -9,7 +9,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatList, MatDialog } from '@angular/material';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatSlideToggleChange } from '@angular/material';
-import * as JSZip from 'jszip';
 declare var $: any;
 
 @Component({
@@ -36,6 +35,7 @@ export class CreateTopicComponent implements OnInit {
   showSubupload = false;
   showTransupload = false;
   isFileContent = false;
+  urlRequired = false;
   videoUrl:any;
   selected = 'English';
   subtitles = [0];
@@ -56,7 +56,7 @@ export class CreateTopicComponent implements OnInit {
     PDF: "(.pdf) are Allowed !!!",
     Word: "(.doc .docx) are Allowed !!!",
     PPT: "(.ppt .pptx) are Allowed !!!",
-    Video: "(.vtt) are Allowed !!! ",
+    Video: "",
     Audio: "are Allowed !!!",
     SCROM: "",
     "Knowledge Check": " (.csv) are Allowed !!!",
@@ -293,14 +293,14 @@ if (item) {
   }
 
   // To unzip SCROM files 
-  handleFile(f) {
-  JSZip.loadAsync(f)                                  
-  .then(function(zip) {
-      zip.forEach(function (data) { 
-      });
-  });
-  this.spinner.hide();
-  }
+  // handleFile(f) {
+  // JSZip.loadAsync(f)                                  
+  // .then(function(zip) {
+  //     zip.forEach(function (data) { 
+  //     });
+  // });
+  // this.spinner.hide();
+  // }
 
   onSelectFile(fileInput: any, item, formdata: FormGroup, index) {    
     if(item == undefined || item == null){
@@ -594,6 +594,11 @@ if (item) {
 
   addTopicFrom(event,type) {
     event.stopPropagation();
+    if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
+      this.urlRequired = true;
+      return false;
+    }
+    this.urlRequired = false;
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
       if (this.query.edit || this.query.addModule) {

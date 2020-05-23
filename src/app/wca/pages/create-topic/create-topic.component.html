@@ -123,7 +123,7 @@
                                                             <span
                                                                 class="padTop">{{queryData?.template_details[i]?.name}}</span>
                                                             <span class="padTop1 showCon"
-                                                                *ngIf="!j?.value?.topicimages[0] &&  queryData?.template_details[i].name != 'Feedback'"> <small>content is
+                                                                *ngIf="!j?.value?.topicimages[0] &&  queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'"> <small>content is
                                                                     empty Double Click to edit</small></span>
                                                             <span class="padTop1"
                                                                 *ngIf="queryData?.template_details[i]?.name===active?.name">
@@ -204,7 +204,7 @@
                                                                 <div class="col-md-4">
                                                                     <div class="input-container">
                                                                         <input class="input-field" type="text" #urlValue placeholder="Add url" required />
-                                                                        <button class="input-button" type="button">Browse</button>
+                                                                        <!-- <button class="input-button" type="button">Browse</button> -->
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -219,9 +219,10 @@
                                                                     </div>
                                                                 </div>                                                                   
                                                             </div>
-                                                            <span *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback'"><small
-                                                                    class="FileuploadValid">FileUpload Required
-                                                                    !!!</small></span>
+                                                            <span *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback' && !j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Video'"><small
+                                                                    class="FileuploadValid">FileUpload Required!!!</small></span>
+                                                            <span *ngIf="urlRequired"><small
+                                                                        class="FileuploadValid">URL Required!!!</small></span>
                                                         </div>
                                                     </div>
 
