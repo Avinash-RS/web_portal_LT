@@ -30,11 +30,11 @@ export class PublishCourseComponent implements OnInit {
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService,
               private alert: AlertServiceService, public learnerservice: LearnerServicesService) {
-    // this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    // if (!this.course) {
-    //   this.route.navigate(['/Admin/auth/Wca']);
-    // }
+    this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    if (!this.course) {
+      this.route.navigate(['/Admin/auth/Wca']);
+    }
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
@@ -257,21 +257,35 @@ export class PublishCourseComponent implements OnInit {
   }
 
   publishCourse() {
+    let level;
+    if (this.selectedSuperSubCategory.super_sub_category_id !== undefined) {
+      level = 3;
+    } else if (this.selectedSuperSubCategory.super_sub_category_id === undefined && 
+      this.selectedSubCategory.sub_category_id !== undefined) {
+      level = 2;
+    } else {
+      level = 1;
+    }
+
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data) => {
       if (data) {
-        // this.service.publishCourse(this.course.id, true).subscribe((res: any) => {
-        //   if (res.data && res.data.publishcourse) {
-        //     if (res.data.publishcourse.success) {
-        //       this.alert.openAlert('Course published successfully', null);
-        //       this.route.navigate(['/Admin/auth/Wca']);
-        //     } else {
-        //       this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
-        //         res.data.publishcourse.message, null);
-        //     }
-        //   } else {
-        //     this.alert.openAlert('Please try again later', null);
-        //   }
-        // });
+        console.log( true, level, this.selectedCategory.category_id, this.selectedSubCategory.sub_category_id,
+          this.selectedSuperSubCategory.super_sub_category_id);
+        this.service.publishCourse(this.course.id, true, level , this.selectedCategory.category_id,
+          this.selectedSubCategory.sub_category_id || 'null', this.selectedSuperSubCategory.super_sub_category_id || 'null' )
+          .subscribe((res: any) => {
+          if (res.data && res.data.publishcourse) {
+            if (res.data.publishcourse.success) {
+              this.alert.openAlert('Course published successfully', null);
+              this.route.navigate(['/Admin/auth/Wca']);
+            } else {
+              this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
+                res.data.publishcourse.message, null);
+            }
+          } else {
+            this.alert.openAlert('Please try again later', null);
+          }
+        });
       } else {
         const detail = { type: 'create', id: this.course.course_id };
         this.route.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });

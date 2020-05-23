@@ -141,36 +141,40 @@
       <!-- end of Mat tree code here ( left hand side) -->
       <!-- start of right hand side card view -->
       <div class="card col-lg-8 col-md-8 col-sm-12 col-12 cardheight right">
-        <!-- <strong>Publish course</strong> -->
+       <h3> <strong class="m-l-10">Publish course</strong></h3>
         <br><br>
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
-          <h3>
+          <h4>
            Selected Level 1 : {{selectedCategory?.category_name}}
-          </h3>
+          </h4>
         </div>
 
         <div class="row m-l-5" *ngIf="selectedSubCategory?.sub_category_name">
-          <h3>
+          <h4>
             Selected Level 2 : {{selectedSubCategory?.sub_category_name}}
-          </h3>
+          </h4>
         </div>
 
         <div class="row m-l-5" *ngIf="selectedSuperSubCategory?.super_sub_category_name">
-          <h3>
+          <h4>
             Selected Level 3 : {{selectedSuperSubCategory?.super_sub_category_name}}
-          </h3>
+          </h4>
         </div>
-
-        <div class="row m-l-5" *ngIf="selectedCategory">
+        <div class="row  center" *ngIf="selectedCategory?.category_name == undefined">
+          <h4  class="m-l-10">
+          Please select category to publish course..
+          </h4>
+        </div>
+        <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h3>
             Selected Category : {{selectedCategory?.category_name}}
-            <strong> {{selectedSubCategory?.sub_category_name ? '>' +selectedSubCategory?.sub_category_name : null}}</strong> 
-            <strong> {{selectedSuperSubCategory?.super_sub_category_name ? '>' +selectedSuperSubCategory?.super_sub_category_name : null}}</strong>
+            <strong> {{selectedSubCategory?.sub_category_name ? ' > ' +selectedSubCategory?.sub_category_name : null}}</strong> 
+            <strong> {{selectedSuperSubCategory?.super_sub_category_name ? ' > ' +selectedSuperSubCategory?.super_sub_category_name : null}}</strong>
           </h3>
           
         </div>
         <br><br>
-        <div class="row">
+        <div class="row"  *ngIf="selectedCategory?.category_name">
           <div class="col-md-2"></div>
           <div class="col-md-4 col-sm-6 col-6 ">
             <button mat-raised-button class="background-blue color_white width_80"
