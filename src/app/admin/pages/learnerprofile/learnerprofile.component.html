@@ -137,7 +137,6 @@
           <mat-tab label="Activities">
             <br> <br>
 
-            <mat-tab label="Enrolled Courses">
               <br> <br>
               <mat-table #table [dataSource]="dataSource">
                 <ng-container matColumnDef="sno">
@@ -161,10 +160,9 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
               </mat-table>
-              <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+              <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
                 showFirstLastButtons>
-              </mat-paginator>
-            </mat-tab>
+              </mat-paginator> -->
 
           </mat-tab>
 
