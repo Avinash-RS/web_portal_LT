@@ -55,8 +55,8 @@ const routes: Routes = [
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
-  { path: 'Dashboard', component: LearnerDashboardComponent},
-
+  { path: 'Dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'Landing', component: LandingpageComponent}
 
 
 ];

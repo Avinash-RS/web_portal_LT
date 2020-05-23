@@ -192,9 +192,9 @@
               <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
             </mat-table>
-            <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+            <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
               showFirstLastButtons>
-            </mat-paginator>
+            </mat-paginator> -->
           </mat-tab>
         </mat-tab-group>
       </div>
