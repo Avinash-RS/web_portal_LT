@@ -25,6 +25,7 @@ import { Ppt1Component } from './ppt1/ppt1.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
 }
@@ -37,7 +38,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AlertComponentComponent,
     DialogComponent,
     Ppt2Component,
-    Ppt1Component
+    Ppt1Component,
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),

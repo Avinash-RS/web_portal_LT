@@ -5,7 +5,7 @@ export const menus = [
         'link': '/auth',
         'open': false,
         'chip': false,
-        
+
     },
     {
         'name': 'User Management',
@@ -26,7 +26,14 @@ export const menus = [
                 'icon': 'list',
                 'chip': false,
                 'open': true,
-            }
+            },
+            {
+                'name': 'Course Enrollment',
+                'icon': 'border_color',
+                'link': 'enrollment',
+                'open': false,
+                'chip': false,
+            },
         ]
     },
     {
@@ -35,7 +42,7 @@ export const menus = [
         'link': 'Wca',
         'chip': false,
         'open': true,
-        
+
     },
 
     {
@@ -59,27 +66,5 @@ export const menus = [
                 'open': true,
             }
         ]
-    }, 
-
-
-
-    {
-        'name': 'Learner Management',
-        'icon': 'list',
-        'link': false,
-        'open': false,
-        'sub': [
-            {
-                'name': 'Course Enrollment',
-                'icon': 'list',
-                'link': 'enrollment',
-                'open': false,
-                'chip': false,
-            },
-        ]
-    }, 
-
-  
-
-  
+    }
 ];

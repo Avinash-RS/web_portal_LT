@@ -37,6 +37,7 @@ import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-cours
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,7 @@ const routes: Routes = [
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'Dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-
+  { path: 'Landing', component: LandingpageComponent}
 
 
 ];
@@ -79,7 +80,8 @@ const routes: Routes = [
     MaskingPipePipe,
     ViewAllCoursesComponent,
     SearchPipe,
-    LearnerDashboardComponent
+    LearnerDashboardComponent,
+    LandingpageComponent
 
   ],
 
