@@ -98,31 +98,24 @@
 
   <mat-tab label="Activities">
     <br> <br>
-    
-    <mat-tab label="Enrolled Courses">
-      <br> <br>
-      <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="sno"> 
-          <mat-header-cell *matHeaderCellDef>
-           S.No
-          </mat-header-cell>
-          <mat-cell *matCellDef="let row;let i = index">
-            <!-- <span class="mobile-label">S.No</span> -->
-            <span class="desktop-data"> {{i+1}}</span>
-            <!-- <span class="mobile-data"> {{i+1}}</span> -->
-          </mat-cell>
-        </ng-container>
-        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-          <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
-          <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row   *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
-      </mat-table>
-      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
-      </mat-paginator>
-    </mat-tab>
- 
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="sno"> 
+        <mat-header-cell *matHeaderCellDef>
+         S.No
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row;let i = index">
+          <!-- <span class="mobile-label">S.No</span> -->
+          <span class="desktop-data"> {{i+1}}</span>
+          <!-- <span class="mobile-data"> {{i+1}}</span> -->
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}</mat-header-cell>
+        <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row   *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+    </mat-table>
   </mat-tab>
 
   <mat-tab label="Enrolled Courses">
@@ -145,8 +138,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
       <mat-row   *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
     </mat-table>
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
-    </mat-paginator>
+    <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+    </mat-paginator> -->
   </mat-tab>
 </mat-tab-group>
 </div>

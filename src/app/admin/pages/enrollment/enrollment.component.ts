@@ -247,15 +247,19 @@ export class EnrollmentComponent implements OnInit {
     if (column.header === 'User Group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course' && this.selectiontype === 'individual') {
-      let details = {
-        id: row.course_id,
-        wishlist: row?.wish_list ? true : false,
-        wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
+      // let details = {
+      //   id: row.course_id,
+      //   wishlist: row?.wish_list ? true : false,
+      //   wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
+      // };
+      const details = {
+        type: 'publish', id: row.course_id
       };
-      console.log(details);
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
+      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
-      const userdetail = { user_id: row.user_id, _id: row._id };
+      // const userdetail = { user_id: row.user_id, _id: row._id };
+      const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
