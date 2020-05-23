@@ -526,7 +526,7 @@ export class CatagoryManagementComponent implements OnInit {
     }
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.courses.push(...result?.data?.get_course_by_subcategory?.message);
-      this.courseCount = result?.data?.get_course_by_subcategory?.course_count || this.courses.length;
+      this.courseCount = result?.data?.get_course_by_subcategory?.total_count || this.courses.length;
     });
   }
 
