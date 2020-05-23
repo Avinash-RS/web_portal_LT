@@ -44,12 +44,12 @@ export class EnrollmentComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
-        data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter) ||
-        data?.group_detail[0]?.group_name?.toString().includes(filter) || data?.group_detail[0]?.course_name?.toString().includes(filter) ;
+        data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter)
+        || data?.group_name?.toString().includes(filter) || data?.course_name?.toString().includes(filter) ;
     };
   }
   getenrolledcoursesindividual(data) {
@@ -65,6 +65,8 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
       console.log(result.data);
       this.dataSource.data = result?.data?.getenrolledcourses?.message;
+      this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -73,15 +75,23 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
       { columnDef: 'request_date', header: 'Last Received', cell: (element: any) => `${moment(element.request_date).format('LL')}` },
-      { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.group_detail[0].course_name}` },
+      { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'totalCount', header: 'Enrollments', cell: (element: any) => `${element.totalCount}` },
-      { columnDef: 'group_name', header: 'User Group', cell: (element: any) => `${element.group_detail[0].group_name}` },
+      { columnDef: 'group_name', header: 'User Group', cell: (element: any) => `${element.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       console.log(result.data);
       this.resultsLength = result?.data?.get_all_enrolledcourses?.enroll_count;
       this.dataSource.data = result?.data?.get_all_enrolledcourses?.message;
+      const array = [];
+      result?.data?.get_all_enrolledcourses?.message.forEach(element => {
+             element.group_detail[0].request_date = element.request_date;
+             element.group_detail[0].totalCount = element.totalCount;
+             array.push(element.group_detail[0]);
+      });
+      console.log(array);
+      this.dataSource.data = array;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -194,10 +204,10 @@ export class EnrollmentComponent implements OnInit {
         const array = [];
         tablevalue.forEach(element => {
           if (element.isChecked === true) {
-            if (this.selectiontype === 'user_group') {
-              array.push({group_id: element.group_detail[0].group_id,
-                course_id: element.group_detail[0].course_id });
-            } else {
+            if (this.selectiontype === 'user_group' && this.dialogopened === false) {
+              array.push({group_id: element.group_id,
+                course_id: element.course_id });
+            } else if ( this.selectiontype === 'individual' || this.dialogopened === true ) {
               array.push({group_id: element.group_id,
                 course_id: element.course_id , user_id: element.user_id });
             }
@@ -210,8 +220,14 @@ export class EnrollmentComponent implements OnInit {
         this.adminservice.rejectenrollment(data).subscribe(( response: any ) => {
         console.log(response);
         if (response?.data?.reject_enrollment?.success === true) {
-          this.dataSource.data = [];
-          this.radiobuttonchange();
+          if (this.dialogopened === true) {
+            const data = { group_id: this.selectedgroupid, pagenumber: 0,
+              is_individual: true, course_id: 'undefined' };
+            this.getenrolledcoursesforgroup(data);
+          } else {
+            this.dataSource.data = [];
+            this.radiobuttonchange();
+          }
           Swal.fire(
               'Rejection',
               'Rejection with the comments shared to the user mail ID',
@@ -229,20 +245,21 @@ export class EnrollmentComponent implements OnInit {
     console.log(column);
     console.log(row);
     if (column.header === 'User Group') {
-      this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_detail[0].group_id } });
+      this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course' && this.selectiontype === 'individual') {
       let details = {
         id: row.course_id,
-        // wishlist: this.course.wishlisted,
-        // wishlist_id: this.course.wishlist_id
+        wishlist: row?.wish_list ? true : false,
+        wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
       };
-      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
+      console.log(details);
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
       const userdetail = { user_id: row.user_id, _id: row._id };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
-      this.selectedgroupid = row.group_detail[0].group_id;
-      const data = { group_id: row.group_detail[0].group_id, pagenumber: 0, is_individual: true, course_id: 'undefined' };
+      this.selectedgroupid = row.group_id;
+      const data = { group_id: row.group_id, pagenumber: 0, is_individual: true, course_id: 'undefined' };
       this.dialogopened = true;
       this.dataSource1.data = [];
       this.getenrolledcoursesforgroup(data);
@@ -254,6 +271,8 @@ export class EnrollmentComponent implements OnInit {
 
   closedialogbox() {
     this.dialog.closeAll();
+    this.dialogopened = false;
+
   }
 
   applyFilter(event: Event) {

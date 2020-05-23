@@ -92,6 +92,7 @@ export class PublishCourseComponent implements OnInit {
   }
 
   selectedcategory(category) {
+    console.log('inside');
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
@@ -133,6 +134,8 @@ export class PublishCourseComponent implements OnInit {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
           }
         }
+      } else {
+        this.resetAll();
       }
     } else if (category.sub_category_id) {
       if (category.checkbox === true) {
@@ -142,9 +145,7 @@ export class PublishCourseComponent implements OnInit {
         oldsupersubcategory = this.selectedSuperSubCategory;
         this.selectedSubCategory = category;
         if (this.selectedSubCategory?.sub_category_id) {
-          // tslint:disable-next-line:no-shadowed-variable
-          const value = this.treeSource._data.value.findIndex(x => x.category_id ===
-            this.selectedSubCategory?.parent_category_id[0]);
+          const value = this.treeSource._data.value.findIndex(x => x.category_id === this.selectedSubCategory?.parent_category_id[0]);
           this.treeSource._data.value[value].checkbox = true;
           this.selectedCategory = this.treeSource._data.value[value];
         }
@@ -177,12 +178,18 @@ export class PublishCourseComponent implements OnInit {
             oldsupersubcategory.super_sub_category_id !== category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
           } else if (category.parent_super_sub_category_id &&
-             oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
+            oldsupersubcategory.super_sub_category_id === category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = true;
           } else {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
             this.selectedSuperSubCategory = {};
           }
+        }
+      } else {
+        this.selectedSubCategory = {};
+        if (this.selectedCategory?.category_name !== undefined) {
+        } else {
+          this.resetAll();
         }
       }
     } else {
@@ -192,11 +199,9 @@ export class PublishCourseComponent implements OnInit {
         oldsupersubcategory = this.selectedSuperSubCategory;
         this.selectedSuperSubCategory = category;
         if (this.selectedSuperSubCategory?.super_sub_category_id) {
-          // tslint:disable-next-line:no-shadowed-variable
           const value1 = this.treeSource._data.value.findIndex(x =>
             x.category_id === this.selectedSuperSubCategory?.parent_category_id[0]);
-          // tslint:disable-next-line:no-shadowed-variable
-          const value: any = this.treeSource._data.value[value1].children.findIndex(x =>
+          const value: any = this.treeSource._data.value[value1].children.findIndex(x => 
             x.sub_category_id === this.selectedSuperSubCategory?.parent_sub_category_id[0]);
           this.treeSource._data.value[value1].checkbox = true;
           this.treeSource._data.value[value1].children[value].checkbox = true;
@@ -239,6 +244,13 @@ export class PublishCourseComponent implements OnInit {
           } else {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
           }
+        }
+      } else {
+        this.selectedSuperSubCategory = {};
+        if (this.selectedSubCategory?.sub_category_name !== undefined) {
+        } else if (this.selectedCategory?.category_name !== undefined) {
+        } else {
+          this.resetAll();
         }
       }
     }
@@ -284,5 +296,11 @@ export class PublishCourseComponent implements OnInit {
         this.treeSource.data = this.categories;
       }
     });
+  }
+
+  resetAll() {
+    this.selectedSubCategory = {};
+    this.selectedCategory = {};
+    this.selectedSuperSubCategory = {};
   }
 }
