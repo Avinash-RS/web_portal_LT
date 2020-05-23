@@ -109,12 +109,12 @@
                             <th>Year of Passing</th>
                             <th>Percentage</th>
                           </tr>
-                          <tr *ngFor="let qual of profiledetail?.user_profile[0]?.qualification">
-                            <td>{{qual.Board_Name}}</td>
-                            <td>{{qual.discipline_name}}</td>
-                            <td>{{qual.institute_name}}</td>
-                            <td>{{qual.level_name}}</td>
-                            <td>{{qual.specification_name}}</td>
+                          <tr *ngFor="let qual of profiledetail?.qualification">
+                            <td>{{qual.board.Board_Name}}</td>
+                            <td>{{qual.discipline.discipline_name}}</td>
+                            <td>{{qual.institute_detail.institute_name}}</td>
+                            <td>{{qual.level_detail.level_name}}</td>
+                            <td>{{qual.specification_detail.specification_name}}</td>
                             <td>{{qual.year_of_passing}}</td>
                             <td>{{qual.percentage}}</td>
                           </tr>
