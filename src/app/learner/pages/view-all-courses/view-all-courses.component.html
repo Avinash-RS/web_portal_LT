@@ -198,9 +198,18 @@
     </div>
 
     <div class="col-8"  >
-        <span class="cover" *ngFor="let item of selectedFilter; let i = index" >{{item}}
-        <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
-        </span>
+        <span class="cover" *ngFor="let item of selectedFilter?.category1; let i = index" >{{item?.category_name}}
+          <!-- <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon> -->
+          </span>
+          <span class="cover" *ngFor="let item of selectedFilter?.category2; let i = index" >{{item?.sub_category_name}}
+            <!-- <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon> -->
+            </span>
+            <span class="cover" *ngFor="let item of selectedFilter?.category3; let i = index" >{{item?.super_sub_category_name}}
+              <!-- <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon> -->
+              </span>
+              <span class="cover" *ngFor="let item of selectedFilter?.filterVal; let i = index" >{{item}}
+                <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
+                </span>
     </div>
 
     <div class="col-2 ">
@@ -328,7 +337,7 @@
           <span class="showmore"> + Show more</span>
         </div><br>
         <div class="borderline"></div><br>
-        <h3><b>Publish date</b></h3><br>
+        <h3><b>Published date</b></h3><br>
         <div class="row">
           <div class="col-10 date">
             <my-date-picker name="fromdate" [options]="myDatePickerOptions" placeholder="From date"
@@ -482,10 +491,10 @@
       </div>
       </div>
     </div>
-    </mat-dialog-content>
     <mat-dialog-actions align="center">
-     <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
-    </mat-dialog-actions>
+      <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
+     </mat-dialog-actions>
+    </mat-dialog-content>
   </ng-template>
 
 
