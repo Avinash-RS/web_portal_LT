@@ -12,13 +12,20 @@ import { MatPaginator } from '@angular/material/paginator';
 export class LearnerprofileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columns = [
-    { columnDef: 'name', header: 'Date', cell: (element: any) => `${element.course_start_datetime}` },
-    { columnDef: 'weight', header: 'Time', cell: (element: any) => `${element?.course_start_datetime || ''}` },
-    // { columnDef: 'weight',   header: 'Business Action', cell: (element: any) => `${element.weight}`   },
-    // { columnDef: 'weight',   header: 'Context', cell: (element: any) => `${element.weight}`   },
+    { columnDef: 'course_start_datetime', header: 'Date', cell: (element: any) => `${element.course_start_datetime ?
+      moment(element?.course_start_datetime).format('LL') || '' : element.lastlogin ? moment(element?.lastlogin).format('LL') || '' :
+       moment(element?.last_logout).format('LL') || ''}`},
+       { columnDef: 'course_active_time', header: 'Time', cell: (element: any) => `${element.course_start_datetime ?
+        moment(element?.course_start_datetime).format('LT') || '' : element.lastlogin ? moment(element?.lastlogin).format('LT') || '' :
+         moment(element?.last_logout).format('LT') || ''}`},
+    // { columnDef: 'course_start_datetime',   header: 'Time', cell: (element: any) => `${element?.course_start_datetime || '' }`   },
+    { columnDef: 'course_id', header: 'Business Action', cell: (element: any) => `${element?.course_id ? 'Started' :
+     element.lastlogin ? 'Login' : 'Logout '  }`   },
+    { columnDef: 'course_name',   header: 'Context', cell: (element: any) => `${element?.course_name ? 'Course' :
+       'User ' }`   },
     // { columnDef: 'symbol',   header: 'Description', cell:
     // (element: any) => `${element.course_description || element.author_details.description}`   },
-    // { columnDef: 'symbol',   header: 'Status', cell: (element: any) => `${element.symbol}`   },
+    { columnDef: 'status',   header: 'Status', cell: (element: any) => `${element.status || 'Success'}`   },
 
   ];
 
@@ -56,21 +63,29 @@ export class LearnerprofileComponent implements OnInit {
     this.dataSource1.paginator = this.paginator;
   }
   getprofiledetails() {
-    if (this.userid) {
-      this.learnerservice.view_profile1(this.userid.user_id).subscribe((profiledetail: any) => {
-        console.log(profiledetail);
-        this.profiledetail = profiledetail?.data?.view_profile?.message[0];
-        this.learnerservice.getlearnertrack(this.userid.user_id, this.userid._id).subscribe((trackdetail: any) => {
-          console.log(trackdetail);
-          this.trackdetail = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0];
-          this.coursedetail = trackdetail?.data?.get_learner_track?.message?.Enrolled_courses;
-          this.dataSource.data = this.trackdetail;
-          this.dataSource1.data = this.coursedetail;
-          this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
-          this.displayedColumns1 = (['sno']).concat(this.columns1.map(c => c.columnDef));
-        });
-      });
-    }
+  if (this.userid) {
+    this.learnerservice.view_profile1(this.userid.user_id).subscribe((profiledetail: any) => {
+      console.log(profiledetail);
+      this.profiledetail = profiledetail?.data?.view_profile?.message[0];
+      this.learnerservice.getlearnertrack(this.userid.user_id, this.userid._id).subscribe((trackdetail: any) => {
+        console.log(trackdetail);
+        this.trackdetail = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0];
+        this.coursedetail = trackdetail?.data?.get_learner_track?.message?.Enrolled_courses;
+        this.dataSource1.data = this.coursedetail;
+        this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
+        this.displayedColumns1 = (['sno']).concat(this.columns1.map(c => c.columnDef));
+
+        trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.
+        push({lastlogin: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_login[0] })
+
+        trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.
+        push({last_logout: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_logout[0] })
+
+        this.dataSource.data = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects;
+
+     });
+    });
+  }
   }
 
 }
