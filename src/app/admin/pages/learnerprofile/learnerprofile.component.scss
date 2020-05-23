@@ -1,8 +1,8 @@
+@import "variable";
+
 .margin20 {
   margin-top: 20px;
 }
-
-
 .common-label1 {
   font-weight: bold;
 }
@@ -19,7 +19,9 @@ img {
 .languages {
   width: auto;
 }
-
+ mat-row {
+   border: none !important ;
+ }
 .profileTable {
 
   th,
@@ -40,7 +42,12 @@ table {
 
 @media screen and (min-width:765px) {
   :host /deep/ .mat-tab-body-content {
-     width: 97% !important;
-     overflow: hidden !important;
-   }
+    width: 97% !important;
+    overflow: hidden !important;
   }
+}
+
+.mat-header-cell {
+  color: $color-blank !important;
+  font-size: 14px !important;
+}

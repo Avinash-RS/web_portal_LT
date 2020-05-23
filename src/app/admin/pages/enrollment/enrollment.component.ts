@@ -48,8 +48,7 @@ export class EnrollmentComponent implements OnInit {
     // this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
-        data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter)
-        || data?.group_name?.toString().includes(filter) || data?.course_name?.toString().includes(filter) ;
+        data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
   }
   getenrolledcoursesindividual(data) {
@@ -282,8 +281,8 @@ export class EnrollmentComponent implements OnInit {
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
       // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
-      const userdetail = { user_id: row.user_id, _id: row._id };
-      // const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
+      // const userdetail = { user_id: row.user_id, _id: row._id };
+      const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
