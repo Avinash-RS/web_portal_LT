@@ -137,7 +137,6 @@
           <mat-tab label="Activities">
             <br> <br>
 
-            <mat-tab label="Enrolled Courses">
               <br> <br>
               <mat-table #table [dataSource]="dataSource">
                 <ng-container matColumnDef="sno">
@@ -151,7 +150,9 @@
                   </mat-cell>
                 </ng-container>
                 <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-                  <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}
+                  <mat-header-cell *matHeaderCellDef>
+                    <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                    {{ column.header }}
                   </mat-header-cell>
                   <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
                   </mat-cell>
@@ -159,10 +160,9 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
               </mat-table>
-              <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+              <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
                 showFirstLastButtons>
-              </mat-paginator>
-            </mat-tab>
+              </mat-paginator> -->
 
           </mat-tab>
 
@@ -180,7 +180,9 @@
                 </mat-cell>
               </ng-container>
               <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
-                <mat-header-cell *matHeaderCellDef><i class="fa fa-sort" aria-hidden="true"></i>{{ column.header }}
+                <mat-header-cell *matHeaderCellDef>
+                  <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                  {{ column.header }}
                 </mat-header-cell>
                 <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
                 </mat-cell>
@@ -188,9 +190,9 @@
               <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
             </mat-table>
-            <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+            <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
               showFirstLastButtons>
-            </mat-paginator>
+            </mat-paginator> -->
           </mat-tab>
         </mat-tab-group>
       </div>
