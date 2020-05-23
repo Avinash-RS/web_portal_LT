@@ -38,6 +38,7 @@ export class ViewAllCoursesComponent implements OnInit {
   loader: boolean;
   sort_type:any = "A-Z";
   showAppliedFiltre :boolean;
+  showMore: Boolean =  true;
   errormsg:boolean = false;
   allLvlCategory: any;
   Lvl1CatId : any = [];
@@ -48,7 +49,7 @@ export class ViewAllCoursesComponent implements OnInit {
   selectedlang : any = [];
   coursepartners: any = [];
   coursemode :any = [];
-  authordetails : any = [];
+  authorDetails : any = [];
   level1selectedID: any = [];
   level2selectedID: any = [];
   level3selectedID: any = [];
@@ -139,7 +140,7 @@ export class ViewAllCoursesComponent implements OnInit {
           }
         });
       } else if (type === 'Instructor') {
-        this.authordetails.push(val.authordetails);
+        this.authorDetails.push(val.authordetails);
         this.guidelineSearchVal.author_data.forEach(element => {
           if(element.authordetails === val.authordetails){
             element.checked = true;
@@ -174,9 +175,9 @@ export class ViewAllCoursesComponent implements OnInit {
         });
       }
       else if (type === 'Instructor') {
-        let index = this.authordetails.indexOf(val.authordetails);
+        let index = this.authorDetails.indexOf(val.authordetails);
         if (index > -1) {
-          this.authordetails.splice(index, 1);
+          this.authorDetails.splice(index, 1);
         }
         this.guidelineSearchVal.author_data.forEach(element => {
           if(element.authordetails === val.authordetails){
@@ -211,19 +212,19 @@ export class ViewAllCoursesComponent implements OnInit {
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
     this.selectedFilter.filterVal = [];
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
-    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authordetails);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authorDetails);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursemode);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners);
       } 
   removeFilterVal(val){
     let langIndex = this.selectedlang.indexOf(val);
-    let authorIndex = this.authordetails.indexOf(val);
+    let authorIndex = this.authorDetails.indexOf(val);
     let coursepartnersIndex = this.coursepartners.indexOf(val);
     let coursemodeIndex = this.coursemode.indexOf(val);
 
@@ -237,7 +238,7 @@ export class ViewAllCoursesComponent implements OnInit {
     }
 
     else if (authorIndex > -1) {
-      this.authordetails.splice(authorIndex, 1);
+      this.authorDetails.splice(authorIndex, 1);
       this.guidelineSearchVal.author_data.forEach(element => {
         if(element.authordetails === val){
           element.checked = false;
@@ -262,13 +263,13 @@ export class ViewAllCoursesComponent implements OnInit {
     }
     this.selectedFilter.filterVal = [];
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
-    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authordetails);
+    this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authorDetails);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursemode);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners); 
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
@@ -276,7 +277,7 @@ export class ViewAllCoursesComponent implements OnInit {
   clearAll(){
     this.selectedFilter = [];
     this.selectedlang = [];
-    this.authordetails = [];
+    this.authorDetails = [];
     this.coursemode = [];
     this.coursepartners = [];
     // ==============
@@ -311,18 +312,17 @@ export class ViewAllCoursesComponent implements OnInit {
     }
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']);
         this.filterReset();
-        console.log('count', this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']))
       })
   }
 
   applyFilter(category) { 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.level1selectedID,this.level2selectedID,this.level3selectedID,this.selectedlang,this.coursemode,
-      this.authordetails,this.coursepartners,this.pagenumber,perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails,this.coursepartners,this.pagenumber,perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         if(result['data']['getCourseCategorySearch'].success == true)
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
@@ -331,7 +331,6 @@ export class ViewAllCoursesComponent implements OnInit {
    }
 
   filter(){
-    console.log(this.selectedFilter)
     if(!this.selectedFilter || !this.selectedFilter.filterVal) {
         this.selectedFilter.category1 = [];
         this.selectedFilter.category2 = [];
@@ -495,7 +494,7 @@ this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3Ca
     // else{
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
@@ -526,5 +525,28 @@ this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3Ca
       });
 
   }
+}
+authorPageNo = 0;
+authorPerPage = 5;
+course_languagePageNo = 0;
+course_languagePerPage = 5;
+course_modePageNo = 0;
+course_modePerPage = 5;
+coursepartnerPageno = 0;
+coursepartnerPerPage = 5;
+showmore(val){
+  if(val == 'author'){
+    this.authorPerPage += 5;
+  }
+  else if(val == 'course_language'){
+    this.course_languagePerPage += 5;
+  }
+  else if(val == 'course_mode'){
+    this.course_modePerPage += 5;
+  }
+  else if(val == 'coursepartner'){
+    this.coursepartnerPerPage += 5;
+  }
+
 }
 }
