@@ -282,8 +282,8 @@ export class EnrollmentComponent implements OnInit {
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
       // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
-      const userdetail = { user_id: row.user_id, _id: row._id };
-      // const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
+      // const userdetail = { user_id: row.user_id, _id: row._id };
+      const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
