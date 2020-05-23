@@ -72,8 +72,8 @@
   </span>
 
   <div class="buttons">
-    <button [disabled]="selectedcheckbox1" (click)="reject(datasource1.data)" class="button button8">Reject</button>
-    <button [disabled]="selectedcheckbox1" (click)="approve(datasource1.data)" class="button button5">Approve</button>
+    <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
+    <button [disabled]="selectedcheckbox1" (click)="approve(dataSource1.data)" class="button button5">Approve</button>
   </div>
   <mat-dialog-content style="width: 1000px">
     <mat-table #table [dataSource]="dataSource1" matSort>
