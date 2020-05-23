@@ -13,7 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@angular/material';
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
     MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule,
-    MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+    MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -28,7 +28,7 @@ import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/
 import { DndDirective } from '../core/dnd.directive';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 import { PipeModule } from '../../pipes/pipe.module';
-import { SearchPipe } from '../../pipes/search.pipe';
+// import { SearchPipe } from '../../pipes/search.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -38,7 +38,9 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
-import { GroupManagementComponent } from '../pages/group-management/group-management.component';
+import { GroupManagementComponent } from '@admin/pages/group-management/group-management.component';
+import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
+import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 
 
 @NgModule({
@@ -79,8 +81,13 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatTreeModule,
         MatSlideToggleModule,
         InfiniteScrollModule,
-        NgxPaginationModule
-        // WcaModule
+        NgxPaginationModule,
+        MatSortModule     // WcaModule
+
+
+
+
+
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -88,7 +95,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
     declarations: [DndDirective, CatalogueManagementComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
-        CatagoryManagementComponent],
+        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
