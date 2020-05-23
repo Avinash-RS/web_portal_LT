@@ -464,6 +464,96 @@ success
 }
 `;
 
+export const view_profile1 = gql`
+  mutation view_profile($user_id: String) {
+    view_profile(user_id:$user_id) {
+    success
+    message {
+      full_name
+      email
+      user_id
+      user_mobile {
+        mobile_number
+      }
+      user_dtl{
+          username
+          created_on
+      }
+      user_profile {
+        _id
+        languages_known
+        is_student_or_professional
+        about_you
+        certificate
+        user_id
+        profile_img
+        year_of_birth
+        progress
+        is_active
+        gender
+        country
+        state
+        city_town
+        student
+        professional {
+          total_experience
+          organization
+          job_role
+        }
+        qualification{
+          discipline
+          board_university
+          qualification
+          specification
+          qualification
+          year_of_passing
+          percentage
+        }
+      }
+      country_detail {
+        countryname
+      }
+      state_detail {
+        statename
+      }
+      district_detail {
+        districtname
+      }
+     qualification {
+        board {
+          Board_Name
+        }
+        discipline {
+          discipline_name
+        }
+        institute_detail {
+          institute_name
+        }
+        level_detail {
+          level_name
+        }
+        specification_detail {
+          specification_name
+        }
+        university {
+          University_Name
+        }
+      year_of_passing
+      percentage
+      }
+      language_detail {
+        languagename
+      }
+      progress
+    }
+  }
+}
+`;
+
+
+
+
+
 export const delete_qualification = gql`
  mutation delete_qualification($user_id: String,$qualification: String){
   delete_qualification(

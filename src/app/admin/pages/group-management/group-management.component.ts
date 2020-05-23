@@ -45,6 +45,7 @@ export class GroupManagementComponent implements OnInit {
   displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
+  groupid: any;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -57,36 +58,52 @@ export class GroupManagementComponent implements OnInit {
   profileDetails: any;
   changeGrpForm: any;
   userGroupChange: any;
+  catalogueList: any;
   constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
-    private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
-    private router: Router, private dialog: MatDialog, ) {
+              private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
+              private router: Router, private dialog: MatDialog, ) {
+
+    this.groupid = (this.router.getCurrentNavigation().extras?.state?.group_id);
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
+    console.log("ggg")
     localStorage.setItem('role', 'admin');
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.adminDetails = this.gs.checkLogout();
     this.getgroups();
+    this.getallcatelogue();
   }
 
   getgroups() {
-    this.adminservice.getUserGroup()
-      .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message
-      });
-
     this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
-    this.adminservice.getgroup(data).subscribe((result: any) => {
-      this.groups = result.data.getgroup.message;
-      this.treeSource.data = null;
-      this.treeSource.data = this.groups;
-      this.dataSource$.next(this.groups);
+    this.adminservice.getUserGroup()
+      .subscribe((result: any) => {
+        this.groups = result.data.get_user_group.message;
+        this.adminservice.getgroup(data).subscribe((result1: any) => {
+          this.groups = result1.data.getgroup.message;
+          this.treeSource.data = null;
+          // this.groups[0].checkbox = true;
+          this.treeSource.data = this.groups;
+          this.dataSource$.next(this.groups);
+          console.log(this.groups);
+          if (this.groupid && this.treeSource.data.length) {
+            const index = this.treeSource.data.findIndex( value => value.group_id === this.groupid);
+            this.treeSource.data[index].checkbox = true;
+            this.selectgroup(this.treeSource.data[index]);
+          }
+        });
+      });
+  }
+  getallcatelogue() {
+    this.adminservice.getcatalogues().subscribe((result: any) => {
+      console.log(result?.data?.getallcatalogue?.message);
+      this.catalogueList = result?.data?.getallcatalogue?.message;
     });
   }
-
 
   /** sub group */
   loadsubgroup(node?: any) {
@@ -137,6 +154,7 @@ export class GroupManagementComponent implements OnInit {
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
+      // this.editcataloguename = node.
       this.getAllUser(0);
     } else {
       this.disabled = true;
@@ -210,7 +228,7 @@ export class GroupManagementComponent implements OnInit {
           group_name: form.value.group_name, group_type: 'new',
           parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
           hierarchy_id: this.currentpath ? hierarchy : 'h1',
-          admin_id: this.adminDetails._id
+          admin_id: this.adminDetails._id, catalogue_id: form.value.catelogue.catalogue_id
         };
         this.adminservice.creategroup(data).subscribe((result: any) => {
           if (result.data.createusergroup.success === true) {

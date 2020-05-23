@@ -776,6 +776,71 @@ export const getcoursesincatalogue = gql`
     }
 }`;
 
+export const getcatalogue = gql`
+   query getallcatalogue{
+    getallcatalogue{
+      success
+      error_msg
+      total_count
+      message{
+        _id
+        catalogue_name
+        catalogue_description
+        creator_id
+        catalogue_id
+        created_on
+        updated_on
+        created_by
+        is_active
+      }
+    }
+}`;
+
+export const getenrolledcourses = gql`
+query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Boolean!,$course_id: String!){
+  getenrolledcourses(group_id: $group_id,pagenumber: $pagenumber,is_individual: $is_individual,course_id: $course_id){
+    success
+    error_msg
+    enroll_count
+    message{
+          _id
+          user_id
+          course_id
+          enroll_date
+          lxp_joined_date
+          username
+          full_name
+          group_name
+          course_name
+          group_id
+          wish_list{
+                  wish_list_id
+                  created_on
+                  user_id
+          }
+    }
+  }
+}`;
+
+// tslint:disable-next-line:variable-name
+export const get_all_enrolledcourses = gql`
+query get_all_enrolledcourses($pagenumber: Int!){
+  get_all_enrolledcourses(pagenumber: $pagenumber){
+      enroll_count
+      success
+      error_msg
+      message{
+            totalCount
+            request_date
+            group_detail{
+                    group_name
+                    group_id
+                    course_id
+                    course_name
+            }
+      }
+  }
+}`;
 export const getcoursesforcatalogue = gql`
    query getcoursesforcatalogue($catalogue_id: String!, $pagenumber: Int!) {
     getcoursesforcatalogue(catalogue_id: $catalogue_id, pagenumber: $pagenumber){

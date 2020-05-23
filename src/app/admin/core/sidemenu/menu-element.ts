@@ -60,5 +60,26 @@ export const menus = [
             }
         ]
     }, 
+
+
+
+    {
+        'name': 'Learner Management',
+        'icon': 'list',
+        'link': false,
+        'open': false,
+        'sub': [
+            {
+                'name': 'Course Enrollment',
+                'icon': 'list',
+                'link': 'enrollment',
+                'open': false,
+                'chip': false,
+            },
+        ]
+    }, 
+
+  
+
   
 ];
