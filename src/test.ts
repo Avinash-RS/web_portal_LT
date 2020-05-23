@@ -22,5 +22,5 @@ getTestBed().initTestEnvironment(
 //  const context = require.context('./app/admin/pages/user-management', false, /user-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/admin-login', false, /admin-login.component\.spec\.ts$/);
 // And load the modules.
-const context = require.context('./', true,/login.component\.spec\.ts$/);
+const context = require.context('../src/app/learner/pages/login/', true,/login.component\.spec\.ts$/);
 context.keys().map(context);
