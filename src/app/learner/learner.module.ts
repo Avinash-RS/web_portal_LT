@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'Dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-
+  { path: 'Landing', component: LandingpageComponent}
 
 
 ];
