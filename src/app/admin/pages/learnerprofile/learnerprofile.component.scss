@@ -1,21 +1,46 @@
 .margin20 {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+
+.common-label1 {
+  font-weight: bold;
+}
+
+img {
+  margin-top: 20px;
+  border-radius: 50%;
+  width: 100px;
+  position: absolute;
+  top: 45%;
+  left: 25%;
+}
+
+.languages {
+  width: auto;
+}
+
+.profileTable {
+
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd !important;
   }
+}
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 95%;
+  margin-left: 1%;
+  border: 1px solid #ddd !important;
+}
 
-  .common-label1{
-    font-weight:bold;
+@media screen and (min-width:765px) {
+  :host /deep/ .mat-tab-body-content {
+     width: 1000px !important;
+     overflow: hidden !important;
    }
-   
-   img {
-       margin-top: 20px;
-       border-radius: 50%;
-       width:100px;
-       position:absolute;
-       top:45%;
-       left:25%;
-     }
-   
-   .languages{
-       width: auto;
-   }
+  }

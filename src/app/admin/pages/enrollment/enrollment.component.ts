@@ -163,7 +163,7 @@ export class EnrollmentComponent implements OnInit {
     } else { this.selectedcheckbox1 = true; }
   }
 
-  approve(data) {
+  approve(tablevalue) {
     Swal.fire({
       title: '<div>Approval Confirmation</div>',
       icon: 'warning',
@@ -175,16 +175,40 @@ export class EnrollmentComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-      //  const array = data.filter( element => element.isChecked === true);
-       Swal.fire(
-          'Successfully Approved',
-          'A Confirmation has been sent to the user Email ID',
-          'success'
-        );
-      //  Swal.fire({
-      //     icon: 'success',
-      //     title: 'A Confirmation has been sent to the user Email ID ',
-      //   });
+      const array = [];
+      tablevalue.forEach(element => {
+        if (element.isChecked === true) {
+          if (this.selectiontype === 'user_group' && this.dialogopened === false) {
+            array.push({group_id: element.group_id,
+              course_id: element.course_id });
+          } else if ( this.selectiontype === 'individual' || this.dialogopened === true ) {
+            array.push({group_id: element.group_id,
+              course_id: element.course_id , user_id: element.user_id });
+          }
+        }
+      });
+      const data = {  update_type: this.selectiontype,
+      status_reason: 'Approved',
+      enrollments: array};
+      console.log(data);
+      this.adminservice.approveenrollment(data).subscribe(( response: any ) => {
+        if (response?.data?.approve_enrollment?.success === true) {
+          if (this.dialogopened === true) {
+            const data = { group_id: this.selectedgroupid, pagenumber: 0,
+              is_individual: true, course_id: 'undefined' };
+            this.getenrolledcoursesforgroup(data);
+            this.getenrolledcoursesgroup(0);
+          } else {
+            this.dataSource.data = [];
+            this.radiobuttonchange();
+          }
+          Swal.fire(
+            'Successfully Approved',
+            'A Confirmation has been sent to the user Email ID',
+            'success'
+          );
+        }
+      });
       }
     });
   }
@@ -246,16 +270,20 @@ export class EnrollmentComponent implements OnInit {
     console.log(row);
     if (column.header === 'User Group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
-    } else if (column.header === 'Course' && this.selectiontype === 'individual') {
-      let details = {
-        id: row.course_id,
-        wishlist: row?.wish_list ? true : false,
-        wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
+    } else if (column.header === 'Course') {
+      // let details = {
+      //   id: row.course_id,
+      //   wishlist: row?.wish_list ? true : false,
+      //   wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
+      // };
+      const details = {
+        type: 'publish', id: row.course_id
       };
-      console.log(details);
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
+      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full Name' || column.header === 'User Name') {
       const userdetail = { user_id: row.user_id, _id: row._id };
+      // const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
