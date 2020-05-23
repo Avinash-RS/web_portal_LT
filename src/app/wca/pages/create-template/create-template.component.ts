@@ -105,9 +105,9 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      return false
+      //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       this.done.push(this.items2[event.previousIndex]);
 

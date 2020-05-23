@@ -627,6 +627,13 @@ h1 {
   .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
     background-color: $color-blue !important;
   }
+  .ck.ck-editor {
+    margin-left: 25px;
+    width: 90%;
+  }
+  .ck-content {
+    background-color: $color-field !important;
+  }
 }
 
 .blue_border {
