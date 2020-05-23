@@ -29,7 +29,7 @@ export const menus = [
             },
             {
                 'name': 'Course Enrollment',
-                'icon': 'list',
+                'icon': 'border_color',
                 'link': 'enrollment',
                 'open': false,
                 'chip': false,
