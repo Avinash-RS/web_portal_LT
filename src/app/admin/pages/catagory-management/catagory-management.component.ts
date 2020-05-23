@@ -49,9 +49,10 @@ export class CatagoryManagementComponent implements OnInit {
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   courseCount: any;
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  formTypeCourse: any;
 
   constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-              public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private dialog: MatDialog,
+    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
     this.treeSource = new MatTreeNestedDataSource<any>();
@@ -128,9 +129,9 @@ export class CatagoryManagementComponent implements OnInit {
 
   loadSupersubcategoryDropDown() {
     this.learnerservice.getsupersubcategory(this.selectCategoryForm.value?.subCategory?.sub_category_id)
-    .subscribe((result: any) => {
-      this.superSubCatArray = result.data.getsupersubcategory.message;
-    });
+      .subscribe((result: any) => {
+        this.superSubCatArray = result.data.getsupersubcategory.message;
+      });
   }
 
   selectedcategory(category) {
@@ -138,13 +139,14 @@ export class CatagoryManagementComponent implements OnInit {
     this.canotEdit = true;
     this.edit = false;
     this.courses = [];
+    this.courseCount = null;
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
         this.level = 1;
         oldcategory = null;
         oldcategory = this.selectedCategory; oldsubcategory = this.selectedSubCategory; oldsupersubcategory =
-        this.selectedSuperSubCategory;
+          this.selectedSuperSubCategory;
         this.selectedCategory = category;
         this.buildForm('category');
         this.assignVariables(false, true, false, false, false);
@@ -258,7 +260,7 @@ export class CatagoryManagementComponent implements OnInit {
         if (this.selectedSuperSubCategory?.super_sub_category_id) {
           const value1 = this.treeSource._data.value.findIndex(x =>
             x.category_id === this.selectedSuperSubCategory?.parent_category_id[0]);
-          const value: any = this.treeSource._data.value[value1].children.findIndex(x => 
+          const value: any = this.treeSource._data.value[value1].children.findIndex(x =>
             x.sub_category_id === this.selectedSuperSubCategory?.parent_sub_category_id[0]);
           this.treeSource._data.value[value1].checkbox = true;
           this.treeSource._data.value[value1].children[value].checkbox = true;
@@ -291,7 +293,7 @@ export class CatagoryManagementComponent implements OnInit {
         }
         if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x =>
-             x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
+            x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !==
             category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -434,7 +436,7 @@ export class CatagoryManagementComponent implements OnInit {
           } else if (results.data.delete_catalogue.success === true) {
             Swal.fire(
               'Deleted!',
-               type + '   has been deleted.',
+              type + '   has been deleted.',
               'success'
             );
             this.showHome = true; this.showCourses = false;
@@ -509,19 +511,28 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   getcourses(formType) {
+    this.formTypeCourse = formType;
     this.showCourses = true;
     this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
-    this.pagenumber = 0;
+    // this.pagenumber = 0;
     const value = formType === 'category' ? this.selectedCategory : (formType === 'subcategory') ? this.selectedSubCategory :
       this.selectedSuperSubCategory;
     const category = {
       type: formType, _id: value.category_id || value.sub_category_id || value.super_sub_category_id,
-      pagenumber: this.pagenumber
+      pagenumber: this.pagenumber || 0
     };
+    if (this.pagenumber === 0) {
+      this.courses = [];
+    }
     this.learnerservice.getcourse(category).subscribe((result: any) => {
-      this.courses = result?.data?.get_course_by_subcategory?.message;
+      this.courses.push(...result?.data?.get_course_by_subcategory?.message);
       this.courseCount = result?.data?.get_course_by_subcategory?.course_count || this.courses.length;
     });
+  }
+
+  getNextCourse() {
+    this.pagenumber = this.pagenumber + 1;
+    this.getcourses(this.formTypeCourse);
   }
 
   selectCourse(c, id) {
@@ -571,10 +582,10 @@ export class CatagoryManagementComponent implements OnInit {
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
       if (result?.data?.reassigncourse?.success) {
         const msg1 = this.selectCategoryForm?.value.category.category_name;
-        const msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> ' 
-        + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
-        const msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> ' 
-        + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
+        const msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> '
+          + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
+        const msg3 = this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name ? '> '
+          + this.selectCategoryForm?.value.subSubCategory?.super_sub_category_name : ' ';
         Swal.fire({
           html:
             'Selected courses successfully moved to  <b> <p style="margin-top:12px">' + msg1 + ' ' + msg2 + ' ' + msg3 +
