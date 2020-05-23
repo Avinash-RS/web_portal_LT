@@ -24,7 +24,6 @@ import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { LandingpageComponent } from '@learner/pages/landingpage/landingpage.component';
 
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
@@ -40,7 +39,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     DialogComponent,
     Ppt2Component,
     Ppt1Component,
-    LandingpageComponent
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
