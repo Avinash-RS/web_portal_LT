@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 // import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -15,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CoursedetailsComponent implements OnInit {
 
-  
+
   trendingCategorires: any = {
     loop: true,
     mouseDrag: true,
@@ -37,13 +38,13 @@ export class CoursedetailsComponent implements OnInit {
       940: {
         items: 4
       },
-      1200 :{
-        items : 4
+      1200: {
+        items: 4
       }
     },
     nav: true
   }
-  
+
   course: any = {};
   customOptions1: any = {
     loop: true,
@@ -116,13 +117,13 @@ export class CoursedetailsComponent implements OnInit {
   //   },
   //   nav: true
   // }
-  
-  constructor(private router: ActivatedRoute,public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
+
+  constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
     public sanitizer: DomSanitizer) {
     this.loader.show();
-    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail) ;
+    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
@@ -132,11 +133,11 @@ export class CoursedetailsComponent implements OnInit {
       } else
         this.loader.hide();
     });
-    console.log(detail , detail.id  ,'course id')
+    console.log(detail, detail.id, 'course id')
     this.Lservice.getModuleData(detail.id).subscribe(data => {
-        this.content =  data.data['getmoduleData']['data'][0];
-        this.modulength =  this.content['coursedetails'].length;
-        console.log(this.content,'course details')
+      this.content = data.data['getmoduleData']['data'][0];
+      this.modulength = this.content['coursedetails'].length;
+      console.log(this.content, 'course details')
     })
 
     // this.service.viewCurseByID('1').subscribe((viewCourse: any) => {
@@ -156,7 +157,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   alterDescriptionText() {
-     this.showShortDesciption = !this.showShortDesciption
+    this.showShortDesciption = !this.showShortDesciption
   }
   ngOnInit() {
     this.service.list_content().subscribe((list_content: any) => {
@@ -269,8 +270,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollTop = 0;       
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollTop = 0;
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
   playCourse(i) {
@@ -304,6 +305,26 @@ export class CoursedetailsComponent implements OnInit {
         });
       }
     }
+  }
+
+  enrollCourse() {
+    // console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
+      // console.log("working", enrollCourse)
+      if (enrollCourse.data) {
+        if (enrollCourse.data.enrollcourse.success) {
+          // this.alert.openAlert("User enrolled successfully for the course", null);
+          Swal.fire("User enrolled successfully for the course")
+        } else {
+          Swal.fire(enrollCourse.data.enrollcourse.message)
+          // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
+        }
+      }
+      else {
+        Swal.fire("Please try again later")
+        //this.alert.openAlert('Please try again later', null);
+      }
+    });
   }
 
 }

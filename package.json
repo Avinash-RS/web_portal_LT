@@ -53,6 +53,7 @@
     "cucumber": "^6.0.5",
     "cucumber-html-reporter": "^5.2.0",
     "d3": "^4.13.0",
+    "datepicker": "0.0.0",
     "file-saver": "^2.0.2",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
