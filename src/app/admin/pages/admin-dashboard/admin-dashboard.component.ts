@@ -7,8 +7,6 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { NumberOnlyDirective } from 'ng-otp-input/lib/directives/number-only.directive';
-// import 'chart.piecelabel.js';
 export interface PeriodicElement {
   courseName: string;
   position: number;
@@ -48,7 +46,6 @@ export class AdminDashboardComponent implements OnInit {
   public lineChartType = "line";
   public lineChartPlugins = [pluginDataLabels];
   public lineChartOptions:any = {responsive: true,
-  scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
         backgroundColor: '#a28bf5',
@@ -57,8 +54,10 @@ export class AdminDashboardComponent implements OnInit {
 						font: {
 							weight: 'bold'
 						},
-        anchor: 'end',
-        align: 'end',
+            datalabels: {
+              align: 'end',
+              anchor: 'end'
+            }
       }
     }
   };
@@ -86,8 +85,10 @@ export class AdminDashboardComponent implements OnInit {
 						font: {
 							weight: 'bold'
 						},
-            anchor: 'end',
-            align: 'end',
+            datalabels: {
+              align: 'end',
+              anchor: 'end'
+            }
       }
     }
   };
@@ -147,7 +148,8 @@ public stuVsProLabels: Label[] = [];
 public stuVsprofChartType = 'line';
 public  stuVsprofLegend = true;
 public stuVsprofPlugins = [pluginDataLabels];
-
+public stuVsProColors: Color[] = [{borderColor: '#8080f8', backgroundColor: 'rgba(255, 255, 255, .4)'},
+{borderColor: '#ea7c37', backgroundColor: 'rgba(255, 255, 255, .4)'}];
 public stuVsProOptions: any = {
   responsive: true,
   scales: {
@@ -165,29 +167,25 @@ public stuVsProOptions: any = {
           font: {
             weight: 'bold'
           },
-          anchor: 'end',
-          align: 'end',
+          datalabels: {
+            align: 'end',
+            anchor: 'end'
+          }
     }
   }
 
 };
-public stuVsProColors: Color[] = [{borderColor: '#8080f8', backgroundColor: 'rgba(255, 255, 255, .4)'},
-{borderColor: '#ea7c37', backgroundColor: 'rgba(255, 255, 255, .4)'}];
+
 
 // Total VS Active Learner
 public totVsActLabels: Label[] = [];
 public totVsActChartType = 'bar';
-public totVsActChartLegend = false;
+public totVsActChartLegend = true;
 public totVsActChartPlugins = [];
 public totVsActColors: Color[] = [];
 public totVsActData: ChartDataSets[] = [{data: [], label: 'Series A' }];
 public totVsActChartOptions: any = {
   responsive: true,
-  scales: {
-    yAxes: [{
-      stacked: true
-    }]
-  },
   plugins: {
     datalabels: {
       backgroundColor: function(context) {
@@ -198,24 +196,46 @@ public totVsActChartOptions: any = {
           font: {
             weight: 'bold'
           },
-          anchor: 'end',
-          align: 'end',
+          datalabels: {
+            align: 'end',
+            anchor: 'end'
+          }
     }
+ 
   }
 };
 
 //Login Per Day Chart
 public loginperDayData: ChartDataSets[] = [{data: [], label: 'Series A' }];
 public loginperDaChartLabels: Label[] = [];
-public loginperDaChartOptions: (ChartOptions) = {responsive: true,};
 public loginperDaChartColors: Color[] = [{borderColor: '#a28bf5', backgroundColor: 'rgba(255, 255, 255, .4)'}];
 public loginperDaChartLegend = true;
 public loginperDaChartType = 'line';
 public loginperDaChartPlugins = [];
+public loginperDaChartOptions: any = {
+  responsive: true,
+  plugins: {
+    datalabels: {
+      backgroundColor: function(context) {
+        return context.dataset.borderColor;
+      },
+      borderRadius: 4,
+        color: 'white',
+          font: {
+            weight: 'bold'
+          },
+          datalabels: {
+            align: 'end',
+            anchor: 'end'
+          }
+    }
+ 
+  }
+};
+
 // Category Chart
 public categoryChartLabels: Label[] = ['Level 1', 'Level 2', 'Level 3'];
-public categoryChartData: MultiDataSet = [[350, 450, 100],[50, 150, 120],[250, 130, 70],
-];
+public categoryChartData: MultiDataSet = [[350, 450, 100],[50, 150, 120],[250, 130, 70],];
 public categoryChartType = 'doughnut';
 
 public isCollapsed = false;
@@ -230,9 +250,9 @@ public isCollapsed1 = false;
   isFreeCourseEnable : boolean = true;
   isEnrolledCoursesEnable : boolean = false;
   chartFilterdays: number = 7;
-  newRegisterLearses : any;enrolledAndFreeCourseData: any;
+  newRegisterLearses : any;
+  enrolledAndFreeCourseData: any;
   totVsActiveChart: any;
-;
   courseCount: any;
   getLoginsPerDay: any;
   totvsActiveDayCount: any;
@@ -258,10 +278,8 @@ public isCollapsed1 = false;
 
   ngOnInit() {
     this.newRegistrationsChart(this.chartFilterdays);
-   
-   
-   
-   
+    this.activeAndInactiveLearnerChart(this.chartFilterdays);
+    this.stuVsProfChart(this.chartFilterdays);
   }
   gotoCoursePage(type){
       this.route.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
@@ -278,7 +296,6 @@ public isCollapsed1 = false;
   }
   activeLearner(){
   this.activeAndInactiveLearnerChart(this.chartFilterdays);
-  // this.activeInactivedoughnutChart();
   this.newRegisterIsable = false;
   this.activeLearnerisable = true;
   this.availCoursesenable = false;
@@ -350,15 +367,6 @@ public isCollapsed1 = false;
       }
     })
    }
-  
-  //  activeInactivedoughnutChart(){
-  //   // this.activeInactivegraphdata.EnrolledActive, this.activeInactivegraphdata.EnrolledInActive
-  //   //  this.doughnutChartLabels = ['Active', 'Inactive'];
-  //   //  this.doughnutChartData = [[this.activeInactivegraphdata.EnrolledActive, this.activeInactivegraphdata.EnrolledInActive]];
-  //   //  this.doughnutChartType = 'doughnut';
-  //  }
-
-
 
    stuVsProfChart(days){
     this.service.getProfessionalStudent(days? days: 7).subscribe((res: any) => {
@@ -369,15 +377,10 @@ public isCollapsed1 = false;
         let  professional = [];professional = this.stuVsProfData.professional.flatMap(i => i.count);
         this.stuVsProData = [{data: student, label: 'Students' },
         { data: professional, label: 'Professional' }]
+      }else{
+        this.alert.openAlert('Please try after sometime',null);
       }
     })
-    
-    //  this.stuVsProLabels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
-    //  this.stuVsProData = [{data: [0, 50, 100, 150,200, 250, 300,350], label: 'Students' },
-    //  { data: [0, 40, 90, 130,150, 250, 280,10], label: 'Professional' },]
-    //  this.stuVsProColors = [{borderColor: '#8080f8', backgroundColor: 'rgba(255, 255, 255, .4)'},
-    //  {borderColor: '#ea7c37', backgroundColor: 'rgba(255, 255, 255, .4)',}
-    // ];
    }
 
    totalVsActiveLernerChart(days){
@@ -393,17 +396,13 @@ public isCollapsed1 = false;
       }else{
         this.alert.openAlert('Please try after sometime',null);
       }
-
     })
-    // this.totVsActData = [{data: [10,20,40,60,80,100], label: 'Active Learner', type: 'line' , borderColor:"#eb7e37",backgroundColor:"rgba(255, 255, 255, .4)" },
-    // { data: [59, 80, 81, 56, 55, 40], label: 'Total Learner', type: 'bar',backgroundColor:"#b6a2fa" }];
-    // console.log( this.totVsActData,' this.totVsActData')
    }
    
 
    loginPerDayChart(days){
      this.chartFilterdays = days
-    this.service.getLoginsPerDay(this.chartFilterdays).subscribe((res: any) => {
+      this.service.getLoginsPerDay(this.chartFilterdays).subscribe((res: any) => {
       if(res.data.getLoginsPerDay.success == "true"){
         this.getLoginsPerDay = res.data.getLoginsPerDay.message;
         this.loginperDaChartLabels = this.getLoginsPerDay.flatMap(i => i._id);
@@ -417,7 +416,6 @@ public isCollapsed1 = false;
 
    onTabChanged(event){
      if(event.index == 1){
-      
       this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
       this.courseCount = res.data.getAdmindashboardCoursetab.message;
       for (const iterator of this.courseCount.allLast30daysCourses) {
@@ -442,7 +440,7 @@ public isCollapsed1 = false;
           if(res.data.enrolledCourse.success == true){
           this.enrolledAndFreeCourseData = res.data.enrolledCourse.message;
           for (const iterator of this.enrolledAndFreeCourseData) {
-            this.EnrolledCoursesJson= [];
+            // this.EnrolledCoursesJson= [];
             this.EnrolledCoursesJson.push({
               category:iterator.category_id.category_name,
               courseName:iterator.course.course_name,
@@ -451,10 +449,8 @@ public isCollapsed1 = false;
               superSubCategory:iterator.super_sub_category_id
             }); 
         }
-        console.log( this.EnrolledCoursesJson)
         Array.prototype.push.apply(this.EnrolledCourse_ELEMENT_Data,this.EnrolledCoursesJson);
           this.enrolledCoursedataSource = new MatTableDataSource<PeriodicElement>(this.EnrolledCourse_ELEMENT_Data);
-          console.log(this.enrolledCoursedataSource,'this.enrolledCoursedataSource')
           //Enrolled and Free course chart
           this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
           this.enrollCoursesData = [[res.data.enrolledCourse.freecourse,res.data.enrolledCourse.enrollcourse]];

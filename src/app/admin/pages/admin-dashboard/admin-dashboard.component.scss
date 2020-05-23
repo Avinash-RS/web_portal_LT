@@ -159,14 +159,21 @@ h3{
     background-color: $color-light-blue ;
     color: $color-blank;
   }
+
+  .tode2{
+    margin-left: 38%;
+  }
+  .tode3{
+    margin-left: 32%;
+  }
   table {
     width: 96%;
     margin-left: 2%;
   }
-  // .example-container {
-  //   height: 400px;
-  //   overflow: auto;
-  // }
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
   ::ng-deep .mat-header-row {
     background: $bg-color !important;
     min-height: 40px !important;
