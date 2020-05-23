@@ -7,9 +7,19 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { NumberOnlyDirective } from 'ng-otp-input/lib/directives/number-only.directive';
 // import 'chart.piecelabel.js';
 export interface PeriodicElement {
   courseName: string;
+  position: number;
+  category: string;
+  subCategory: string;
+  superSubCategory : string;
+}
+
+export interface PeriodicElement {
+  courseName: string;
+  totalEnrolled:number;
   position: number;
   category: string;
   subCategory: string;
@@ -25,6 +35,11 @@ export class AdminDashboardComponent implements OnInit {
   jsonData =[]
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   displayedColumns: string[] = ['position', 'courseName', 'category', 'subCategory', 'superSubCategory'];
+
+  EnrolledCoursesJson :any =[]
+  EnrolledCourse_ELEMENT_Data: PeriodicElement[] = [];
+  enrolledCoursedataSource = new MatTableDataSource(this.EnrolledCourse_ELEMENT_Data);
+  EnrolledCourseCol: string[] = ['position', 'courseName','totalEnrolled', 'category', 'subCategory', 'superSubCategory'];
   // new register chart val
   public lineChartData: ChartDataSets[] = [{data: [], label: 'Series A' }];
   public lineChartLabels: Label[];
@@ -104,7 +119,7 @@ public doughnutColors: Color[] = [{ backgroundColor: ['#7fe7a5', '#ea6c89']}];
 
 // Enrolled Course doughut Chart
 public enrollCoursesLabel :  Label[] = [];
-public enrollCoursesData: MultiDataSet = [];
+public enrollCoursesData: MultiDataSet = [[]];
 public enrollChartType = 'doughnut';
 public enrollPlugins = [pluginDataLabels];
 public enrollCoursesColors: Color[] = [{backgroundColor: ['#a6bbf3', '#f5dc99']}];
@@ -129,6 +144,10 @@ public enrollCoursesCount: any = {
 // Student vs Professional line char
 public stuVsProData: ChartDataSets[] = [{data: [], label: 'Series A' }];
 public stuVsProLabels: Label[] = [];
+public stuVsprofChartType = 'line';
+public  stuVsprofLegend = true;
+public stuVsprofPlugins = [pluginDataLabels];
+
 public stuVsProOptions: any = {
   responsive: true,
   scales: {
@@ -158,11 +177,32 @@ public stuVsProColors: Color[] = [{borderColor: '#8080f8', backgroundColor: 'rgb
 // Total VS Active Learner
 public totVsActLabels: Label[] = [];
 public totVsActChartType = 'bar';
-public totVsActChartLegend = true;
+public totVsActChartLegend = false;
 public totVsActChartPlugins = [];
 public totVsActColors: Color[] = [];
 public totVsActData: ChartDataSets[] = [{data: [], label: 'Series A' }];
-public totVsActChartOptions: (ChartOptions) = {responsive: true};
+public totVsActChartOptions: any = {
+  responsive: true,
+  scales: {
+    yAxes: [{
+      stacked: true
+    }]
+  },
+  plugins: {
+    datalabels: {
+      backgroundColor: function(context) {
+        return context.dataset.borderColor;
+      },
+      borderRadius: 4,
+        color: 'white',
+          font: {
+            weight: 'bold'
+          },
+          anchor: 'end',
+          align: 'end',
+    }
+  }
+};
 
 //Login Per Day Chart
 public loginperDayData: ChartDataSets[] = [{data: [], label: 'Series A' }];
@@ -190,7 +230,9 @@ public isCollapsed1 = false;
   isFreeCourseEnable : boolean = true;
   isEnrolledCoursesEnable : boolean = false;
   chartFilterdays: number = 7;
-  newRegisterLearses : any = [];
+  newRegisterLearses : any;enrolledAndFreeCourseData: any;
+  totVsActiveChart: any;
+;
   courseCount: any;
   getLoginsPerDay: any;
   totvsActiveDayCount: any;
@@ -198,6 +240,7 @@ public isCollapsed1 = false;
   learnertabData: any;
   stuVsProfData: any;
   studentVsProfDays: any;
+  enrollementpert: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -260,7 +303,7 @@ public isCollapsed1 = false;
     this.activeLearnerisable = false;
     this.availCoursesenable = false;
     this.istotenvEnable = true;
-    this.enrolledCoursedoughutChart();
+    this.getEnrolledAndFreeCourseData(this.chartFilterdays)
   }
 
   latestcourses(){
@@ -315,10 +358,7 @@ public isCollapsed1 = false;
   //   //  this.doughnutChartType = 'doughnut';
   //  }
 
-   enrolledCoursedoughutChart(){
-    this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
-     this.enrollCoursesData = [[100,200]];
-   }
+
 
    stuVsProfChart(days){
     this.service.getProfessionalStudent(days? days: 7).subscribe((res: any) => {
@@ -341,18 +381,23 @@ public isCollapsed1 = false;
    }
 
    totalVsActiveLernerChart(days){
-    //  this.totvsActiveDayCount = days;
-    //  this.service.getUsersIndays(this.totvsActiveDayCount ? this.totvsActiveDayCount : 7).subscribe((res: any) => {
-    //   if(res.data.getUsersInWeeks.success == "true"){
-    //       console.log(res.data.getUsersInWeeks)
-    //   }else{
-    //     this.alert.openAlert('Please try after sometime',null);
-    //   }
+     this.totvsActiveDayCount = days;
+     this.service.getUsersIndays(this.totvsActiveDayCount ? this.totvsActiveDayCount : 7).subscribe((res: any) => {
+      if(res.data.getUsersInWeeks.success == "true"){
+        this.totVsActiveChart = res.data.getUsersInWeeks.message;
+        this.totVsActLabels = this.totVsActiveChart.active_Users.flatMap(i => i._id);
+        let  Active = [];Active = this.totVsActiveChart.active_Users.flatMap(i => i.count);
+        let  Inactive = [];Inactive = this.totVsActiveChart.total_Users.flatMap(i => i.count);
+        this.totVsActData = [{data: Active, label: 'Active Learner', type: 'line' , borderColor:"#eb7e37",backgroundColor:"rgba(255, 255, 255, .4)" },
+        { data: Inactive, label: 'Total Learner', borderColor:"#b6a2fa",backgroundColor:"#b6a2fa" }];
+      }else{
+        this.alert.openAlert('Please try after sometime',null);
+      }
 
-    // })
-    this.totVsActData = [{data: [10,20,40,60,80,100], label: 'Active Learner', type: 'line' , borderColor:"#eb7e37",backgroundColor:"rgba(255, 255, 255, .4)" },
-    { data: [59, 80, 81, 56, 55, 40], label: 'Total Learner', type: 'bar',backgroundColor:"#b6a2fa" }];
-    console.log( this.totVsActData,' this.totVsActData')
+    })
+    // this.totVsActData = [{data: [10,20,40,60,80,100], label: 'Active Learner', type: 'line' , borderColor:"#eb7e37",backgroundColor:"rgba(255, 255, 255, .4)" },
+    // { data: [59, 80, 81, 56, 55, 40], label: 'Total Learner', type: 'bar',backgroundColor:"#b6a2fa" }];
+    // console.log( this.totVsActData,' this.totVsActData')
    }
    
 
@@ -362,7 +407,7 @@ public isCollapsed1 = false;
       if(res.data.getLoginsPerDay.success == "true"){
         this.getLoginsPerDay = res.data.getLoginsPerDay.message;
         this.loginperDaChartLabels = this.getLoginsPerDay.flatMap(i => i._id);
-        let  arr = [];arr = this.getLoginsPerDay.flatMap(i => i.cnt);
+        let  arr = [];arr = this.getLoginsPerDay.flatMap(i => i.count);
         this.loginperDayData = [{data: arr, label: 'Login per day' }];
       }else{
         this.alert.openAlert('Please try after sometime',null);
@@ -392,4 +437,30 @@ public isCollapsed1 = false;
       })
      }
     }
+       getEnrolledAndFreeCourseData(days){
+        this.service.enrolledCourse(days ? days : 7).subscribe((res: any) => {
+          if(res.data.enrolledCourse.success == true){
+          this.enrolledAndFreeCourseData = res.data.enrolledCourse.message;
+          for (const iterator of this.enrolledAndFreeCourseData) {
+            this.EnrolledCoursesJson= [];
+            this.EnrolledCoursesJson.push({
+              category:iterator.category_id.category_name,
+              courseName:iterator.course.course_name,
+              totalEnrolled:iterator.count,
+              subCategory:iterator.parent_sub_category_id.sub_category_name,
+              superSubCategory:iterator.super_sub_category_id
+            }); 
+        }
+        console.log( this.EnrolledCoursesJson)
+        Array.prototype.push.apply(this.EnrolledCourse_ELEMENT_Data,this.EnrolledCoursesJson);
+          this.enrolledCoursedataSource = new MatTableDataSource<PeriodicElement>(this.EnrolledCourse_ELEMENT_Data);
+          console.log(this.enrolledCoursedataSource,'this.enrolledCoursedataSource')
+          //Enrolled and Free course chart
+          this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
+          this.enrollCoursesData = [[res.data.enrolledCourse.freecourse,res.data.enrolledCourse.enrollcourse]];
+          }else{
+            this.alert.openAlert('Please try after sometime',null);
+          }
+        })
+      }
 }

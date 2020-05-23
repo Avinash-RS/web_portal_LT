@@ -720,11 +720,11 @@ export const getUsersInWeeks = gql`
       message{
       total_Users{
       _id
-      totalCount
+      count
       }
       active_Users{
       _id
-      totalCount
+      count
       }
       }
     }

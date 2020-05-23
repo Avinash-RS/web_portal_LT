@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>New registrations</h3>
-              <span class="count">{{newRegisterLearses.newReg}}</span>
+              <span class="count">{{newRegisterLearses?.newReg}}</span>
             </div>
     
             <div class="col-md-4 icon">
@@ -131,7 +131,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Total enrollments</h3>
-              <span class="count">{{newRegisterLearses.allEnrollement}}</span>
+              <span class="count">{{newRegisterLearses?.allEnrollement}}</span>
             </div>
     
             <div class="col-md-4 icon bg-brown">
@@ -196,12 +196,12 @@
             <ul class="hoverr">
               <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses.DraftCourse}}</span></li>
               <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
-              <li>Enrollment Pending requests</li>
+              <li>Enrollment Pending requests<span class="tode1">{{newRegisterLearses.enrollmentApprove}}</span></li>
             </ul>
             </div>
           </div>
 
-          <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  500
+          <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  {{newRegisterLearses?.allEnrollement}}
             <i class="fa fa-angle-down arrow arrow3 " aria-hidden="true"></i>
           </button>
             <div class="card"  *ngIf="isCollapsed1">
@@ -213,10 +213,10 @@
                       <span>Approved</span>
                     </div>
                     <div class="col-6">
-                      <mat-progress-bar class="my-color" mode="determinate" value="40"></mat-progress-bar>
+                      <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses?.enrollmentApprove / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                     </div>
                     <div class="col-2">
-                      <span>270</span>
+                      <span>{{newRegisterLearses?.enrollmentApprove}}</span>
                     </div>
                   </div>
                 </li>
@@ -227,10 +227,10 @@
                       <span>Pending</span>
                     </div>
                     <div class="col-6">
-                      <mat-progress-bar class="my-color-blue" mode="determinate" value="10"></mat-progress-bar>
+                      <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses?.enrollPending / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                     </div>
                     <div class="col-2">
-                      <span>270</span>
+                      <span>{{newRegisterLearses?.enrollPending}}</span>
                     </div>
                   </div>
                 </li>
@@ -241,10 +241,10 @@
                       <span>Rejected</span>
                     </div>
                     <div class="col-6">
-                      <mat-progress-bar class="my-color-red" mode="determinate" value="20"></mat-progress-bar>
+                      <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses?.enrollRejected / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                     </div>
                     <div class="col-2">
-                      <span>270</span>
+                      <span>{{newRegisterLearses?.enrollRejected}}</span>
                     </div>
                   </div>
                 </li>
@@ -299,7 +299,7 @@
             <ul class="">
               <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
               <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
-              <li>Enrollment Pending requests</li>
+              <li>Enrollment Pending requests<span class="tode1">{{newRegisterLearses.enrollmentApprove}}</span></li>
             </ul>
             </div>
           </div>
@@ -352,12 +352,12 @@
               <ul class="">
                 <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
                 <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
-                <li>Enrollment Pending requests</li>
+                <li>Enrollment Pending requests<span class="tode1">{{newRegisterLearses.enrollmentApprove}}</span></li>
               </ul>
               </div>
             </div>
   
-            <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  500
+            <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  {{newRegisterLearses?.allEnrollement}}
               <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
             </button>
               <div class="card"  *ngIf="isCollapsed1">
@@ -369,10 +369,10 @@
                         <span>Approved</span>
                       </div>
                       <div class="col-6">
-                        <mat-progress-bar class="my-color" mode="determinate" value="40"></mat-progress-bar>
+                        <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses.enrollmentApprove / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
                       </div>
                       <div class="col-2">
-                        <span>270</span>
+                        <span>{{newRegisterLearses?.enrollmentApprove}}</span>
                       </div>
                     </div>
                   </li>
@@ -383,10 +383,10 @@
                         <span>Pending</span>
                       </div>
                       <div class="col-6">
-                        <mat-progress-bar class="my-color-blue" mode="determinate" value="10"></mat-progress-bar>
+                        <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses.enrollPending / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
                       </div>
                       <div class="col-2">
-                        <span>270</span>
+                        <span>{{newRegisterLearses?.enrollPending}}</span>
                       </div>
                     </div>
                   </li>
@@ -397,10 +397,10 @@
                         <span>Rejected</span>
                       </div>
                       <div class="col-6">
-                        <mat-progress-bar class="my-color-red" mode="determinate" value="20"></mat-progress-bar>
+                        <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses.enrollRejected / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
                       </div>
                       <div class="col-2">
-                        <span>270</span>
+                        <span>{{newRegisterLearses.enrollRejected}}</span>
                       </div>
                     </div>
                   </li>
@@ -430,7 +430,7 @@
               <div class="row">
                 <div class="col-9"></div>
                 <div class="col-3">
-                  <select name="day" class="rounded" (change)="onChange($event.target.value)">
+                  <select name="day" class="rounded" (change)="getEnrolledAndFreeCourseData($event.target.value)">
                     <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
                     </select>
                 </div>
@@ -452,14 +452,19 @@
                     <div class="row">
                       <div class="col-12" *ngIf="isFreeCourseEnable">
                         <div class="example-container">
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable">
+                          <!-- *ngIf="isFreeCourseEnable" -->
+                    <table mat-table [enrolledCoursedataSource]="enrolledCoursedataSource" class="mat-elevation-z8"  >
                       <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <th mat-header-cell *matHeaderCellDef> No. free </th>
                         <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                       </ng-container>
                       <ng-container matColumnDef="courseName">
                         <th mat-header-cell *matHeaderCellDef> Course name </th>
                         <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="totalEnrolled">
+                        <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                        <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
                       </ng-container>
                       <ng-container matColumnDef="category">
                         <th mat-header-cell *matHeaderCellDef> Category </th>
@@ -475,8 +480,8 @@
                         <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
                       </ng-container>
                     
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                      <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
                     </table>
                     </div>
                   </div>
@@ -488,15 +493,20 @@
                  <!-- free Courses table end -->
               <div class="row">
                 <div class="col-12" >
-                  <div class="example-container ">
-                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable">
+                  <!-- <div class="example-container "> -->
+                    <!-- *ngIf="isFreeCourseEnable" -->
+                  <table mat-table [enrolledCoursedataSource]="enrolledCoursedataSource" class="mat-elevation-z8"  >
                     <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <th mat-header-cell *matHeaderCellDef> No. free </th>
                       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                     </ng-container>
                     <ng-container matColumnDef="courseName">
                       <th mat-header-cell *matHeaderCellDef> Course name </th>
                       <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalEnrolled">
+                      <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
                     </ng-container>
                     <ng-container matColumnDef="category">
                       <th mat-header-cell *matHeaderCellDef> Category </th>
@@ -512,19 +522,25 @@
                       <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
                     </ng-container>
                   
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                    <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
                   </table>
                 <!-- free Courses table end -->
+
                   <!-- Enrolled Courses table -->
-                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isEnrolledCoursesEnable">
+                  <!-- *ngIf="isEnrolledCoursesEnable" -->
+                  <table mat-table [enrolledCoursedataSource]="enrolledCoursedataSource" class="mat-elevation-z8"  >
                     <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <th mat-header-cell *matHeaderCellDef> No.{{enrollCoursesData}} </th>
                       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                     </ng-container>
                     <ng-container matColumnDef="courseName">
                       <th mat-header-cell *matHeaderCellDef> Course name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalEnrolled">
+                      <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
                     </ng-container>
                     <ng-container matColumnDef="category">
                       <th mat-header-cell *matHeaderCellDef> Category </th>
@@ -540,11 +556,11 @@
                       <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
                     </ng-container>
                   
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                    <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
                   </table>
                     <!-- Enrolled Courses table end -->
-                </div>
+                <!-- </div> -->
                 </div>
               </div>
               <div class="margin"></div>
@@ -560,13 +576,13 @@
                 <div class="card-body">
                 <ul class="">
                 <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
-              <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
-              <li>Enrollment Pending requests</li>
+                <li>Courses to be published <span class="tode1">{{newRegisterLearses.PublishCourse}}</span></li>
+                <li>Enrollment Pending requests<span class="tode1">{{newRegisterLearses.enrollmentApprove}}</span></li>
                 </ul>
                 </div>
               </div>
     
-              <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments Requests  500
+              <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments Requests  {{newRegisterLearses?.allEnrollement}}
                 <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
               </button>
                 <div class="card"  *ngIf="isCollapsed1">
@@ -578,10 +594,10 @@
                           <span>Approved</span>
                         </div>
                         <div class="col-6">
-                          <mat-progress-bar class="my-color" mode="determinate" value="40"></mat-progress-bar>
+                          <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses?.enrollmentApprove / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                         </div>
                         <div class="col-2">
-                          <span>270</span>
+                          <span>{{newRegisterLearses?.enrollmentApprove}}</span>
                         </div>
                       </div>
                     </li>
@@ -592,10 +608,10 @@
                           <span>Pending</span>
                         </div>
                         <div class="col-6">
-                          <mat-progress-bar class="my-color-blue" mode="determinate" value="10"></mat-progress-bar>
+                          <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses?.enrollPending / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                         </div>
                         <div class="col-2">
-                          <span>270</span>
+                          <span>{{newRegisterLearses?.enrollPending}}</span>
                         </div>
                       </div>
                     </li>
@@ -606,10 +622,10 @@
                           <span>Rejected</span>
                         </div>
                         <div class="col-6">
-                          <mat-progress-bar class="my-color-red" mode="determinate" value="20"></mat-progress-bar>
+                          <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses?.enrollRejected / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
                         </div>
                         <div class="col-2">
-                          <span>270</span>
+                          <span>{{newRegisterLearses?.enrollRejected}}</span>
                         </div>
                       </div>
                     </li>
@@ -941,7 +957,7 @@
           </div>
           <!-- <div class="margin"></div> -->
           <!-- <div style="display: block"> -->
-            <canvas baseChart  [datasets]="stuVsProData" [labels]="stuVsProLabels" [options]="stuVsProOptions" [colors]="stuVsProColors"[legend]="lineChartLegend"[chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+            <canvas baseChart  [datasets]="stuVsProData" [labels]="stuVsProLabels" [options]="stuVsProOptions" [colors]="stuVsProColors"[legend]="stuVsprofLegend"[chartType]="stuVsprofChartType" [plugins]="stuVsprofPlugins"></canvas>
             <!-- addd student pro label -->
             <br>
             <div style="margin-left: 31%;">
@@ -972,7 +988,7 @@
               </select>
           </div>
         </div>
-        <!-- <div class="margin"></div> -->
+        <div class="margin"></div>
         <!-- <div style="display: block"> -->
           <canvas baseChart  [datasets]="totVsActData" [labels]="totVsActLabels" [options]="totVsActChartOptions"[plugins]="totVsActChartPlugins" [legend]="totVsActChartLegend" [colors]="totVsActColors" [chartType]="totVsActChartType">
         </canvas>
