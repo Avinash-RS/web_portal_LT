@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-learnerprofile',
   templateUrl: './learnerprofile.component.html',
-  styleUrls: ['./learnerprofile.component.css']
+  styleUrls: ['./learnerprofile.component.scss']
 })
 export class LearnerprofileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
