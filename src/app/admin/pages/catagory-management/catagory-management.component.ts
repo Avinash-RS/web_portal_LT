@@ -624,12 +624,16 @@ export class CatagoryManagementComponent implements OnInit {
         category_description: new FormControl(''),
         category_image: ['', myGlobals.req]
       });
+      this.selectedCategory.category_description = this.selectedCategory.category_description === 'null' ? '' :
+      this.selectedCategory.category_description;
       this.selectedCategory && this.selectedCategory?.category_name && this.addCategoryForm.patchValue(this.selectedCategory);
     } else if (type === 'subcategory') {
       this.addSubCategoryForm = this.formBuilder.group({
         sub_category_name: new FormControl('', myGlobals.req),
         sub_category_description: new FormControl(''),
       });
+      this.selectedSubCategory.sub_category_description = this.selectedSubCategory.sub_category_description === 'null' ? '' :
+      this.selectedSubCategory.sub_category_description;
       this.selectedSubCategory && this.selectedSubCategory?.sub_category_name &&
         this.addSubCategoryForm.patchValue(this.selectedSubCategory);
     } else {
@@ -637,6 +641,9 @@ export class CatagoryManagementComponent implements OnInit {
         super_sub_category_name: new FormControl('', myGlobals.req),
         super_sub_category_description: new FormControl(''),
       });
+      this.selectedSuperSubCategory.super_sub_category_description =
+      this.selectedSuperSubCategory.super_sub_category_description === 'null' ? '' :
+      this.selectedSuperSubCategory.super_sub_category_description;
       this.selectedSuperSubCategory && this.selectedSuperSubCategory?.super_sub_category_name &&
         this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
     }

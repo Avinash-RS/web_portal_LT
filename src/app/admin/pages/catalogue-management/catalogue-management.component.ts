@@ -104,6 +104,7 @@ export class CatalogueManagementComponent implements OnInit {
         if (result && result.data) {
           if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {
             this.getListCatalogue();
+            // this.getCatalogDetail();
             this.alert.openAlert('Catalogue created successfully', null);
             this.showAddCatalogueForm = false;
             this.showListCatalogue = true;
@@ -119,8 +120,12 @@ export class CatalogueManagementComponent implements OnInit {
   goToCatalogDetail(c) {
     this.catalog = c;
     this.getCatalogDetail();
-    this.showCatalogDetail = this.showHeader = true;
-    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
+    if (this.catalog.course_count === 0) {
+      this.getCoursesForCatalog();
+    } else {
+      this.showCatalogDetail = this.showHeader = true;
+      this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
+    }
   }
 
   getCoursesInCatalog() { // courses mapped to catalog - when click remove
@@ -163,91 +168,11 @@ export class CatalogueManagementComponent implements OnInit {
   getCatalogDetail() { // courses mapped to catalog - Table view
     this.loadingCatalogue = true;
     this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
+      this.catalog = result.data.getallcatalogue_by_id.message;
       if (this.pagenumberTable === 0) {
         this.ELEMENT_DATA = [];
       }
-      // this.ELEMENT_DATA = [{
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: ' Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'peb Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'aeb Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'geb Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'beb Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'yeb Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // },
-      // {
-      //   course_name: 'Web Dev',
-      //   category_details: [],
-      //   course_language: 'English'
-      // }];
       Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
-      this.catalog = result.data.getallcatalogue_by_id.message;
       this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
       this.dataSource.sort = this.sort;
       this.loadingCatalogue = false;
