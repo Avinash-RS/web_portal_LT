@@ -223,7 +223,7 @@ export class AdminServicesService {
     });
   }
   // tslint:disable-next-line:variable-name
-  publishCourse(course_id, is_published, level, category_id, super_sub_category_id) {
+  publishCourse(course_id, is_published, level, category_id, sub_category_id, super_sub_category_id) {
     return this.Apollo.query({
       query: publishcourse,
       variables: {
@@ -231,6 +231,7 @@ export class AdminServicesService {
         is_published,
         level,
         category_id,
+        sub_category_id,
         super_sub_category_id
       }
     });
