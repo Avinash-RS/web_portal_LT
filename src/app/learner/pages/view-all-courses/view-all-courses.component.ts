@@ -314,7 +314,7 @@ export class ViewAllCoursesComponent implements OnInit {
       this.authordetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']);
-        this.filter();
+        this.filterReset();
         console.log('count', this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count']))
       })
   }
@@ -331,6 +331,8 @@ export class ViewAllCoursesComponent implements OnInit {
    }
 
   filter(){
+    console.log(this.selectedFilter)
+    if(!this.selectedFilter || !this.selectedFilter.filterVal) {
         this.selectedFilter.category1 = [];
         this.selectedFilter.category2 = [];
         this.selectedFilter.category3 = [];
@@ -367,6 +369,46 @@ export class ViewAllCoursesComponent implements OnInit {
            }
         })
   }
+}
+
+  
+  filterReset(){
+    this.selectedFilter.category1 = [];
+    this.selectedFilter.category2 = [];
+    this.selectedFilter.category3 = [];
+
+this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
+this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
+this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+
+    this.learnerservice.getGuidelineSearch().subscribe((result : any)=>{
+       if(result['data']['getDetailsCount']['success'] == 'true'){
+        this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
+        if(this.guidelineSearchVal && this.guidelineSearchVal.course_data){
+          this.guidelineSearchVal.course_data.forEach(element => {
+            element.checked = false;
+          });
+        }
+        if(this.guidelineSearchVal && this.guidelineSearchVal.author_data){
+        this.guidelineSearchVal.author_data.forEach(element => {
+          element.checked = false;
+        });
+      }
+      if(this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data){
+        this. guidelineSearchVal.coursemode_data.forEach(element => {
+          element.checked = false;
+        });
+      }
+      if(this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data){
+        this.guidelineSearchVal.coursepartner_data.forEach(element => {
+          element.checked = false;
+        });
+      }
+       }else{
+        //  this.alert.openAlert('Filter not found',null)
+       }
+    })
+}
 
   sorting(sortval){
     this.showAppliedFiltre = false;
