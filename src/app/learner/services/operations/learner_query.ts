@@ -346,6 +346,7 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
   get_course_by_subcategory(input_id: $input_id,input_type: $input_type ,pagenumber: $pagenumber) {
   success
   error_msg
+  total_count
   message{
   course_id
   course_description
