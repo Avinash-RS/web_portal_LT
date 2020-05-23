@@ -17,27 +17,7 @@ import { MockServiceService } from '@learner/services/mockService/mock-service.s
 import { RouterTestingModule } from '@angular/router/testing';
 import { LearnerMyCourseComponent } from '../learner-my-course/learner-my-course.component';
 
-import {HttpLink} from 'apollo-angular-link-http';
-import {InMemoryCache} from 'apollo-cache-inmemory';
 
-export function createApollo(httpLink: HttpLink) {
-  return {
-    link: httpLink.create({uri: 'https://api.example.com/graphql'}),
-    cache: new InMemoryCache(),
-  };
-}
-
-@NgModule({
-  imports: [HttpClientModule, ApolloModule, HttpLinkModule],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
-      deps: [HttpLink],
-    },
-  ],
-})
-class AppModule {}
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
