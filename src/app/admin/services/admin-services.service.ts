@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
   create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
-  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping,rejectenrollment
+  updatecatalogueinfo, unmapcoursesfromcatalogue, coursecataloguemapping, rejectenrollment, approveenrollment
 } from './operations/admin_mutation';
 
 import {
@@ -427,6 +427,18 @@ export class AdminServicesService {
   rejectenrollment(data) {
     return this.Apollo.query({
       query: rejectenrollment,
+      variables: {
+        update_type: data.update_type,
+        status_reason: data.status_reason,
+        enrollments: data.enrollments
+      }
+    });
+  }
+
+
+  approveenrollment(data) {
+    return this.Apollo.query({
+      query: approveenrollment,
       variables: {
         update_type: data.update_type,
         status_reason: data.status_reason,

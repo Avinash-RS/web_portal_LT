@@ -33,7 +33,7 @@ export class LearnerprofileComponent implements OnInit {
     { columnDef: 'course_name', header: 'Course Name', cell: (element: any) => `${element.course_name}` },
     {
       columnDef: 'enrollment_start', header: 'Enrolled Date', cell: (element: any) =>
-        `${moment(element?.enrollment_start).format('LL')}`
+        `${ element?.enrollment_start ? moment(element?.enrollment_start).format('LL') : ''}`
     },
     { columnDef: 'status_reason', header: 'Status', cell: (element: any) => `${element.status_reason}` },
   ];

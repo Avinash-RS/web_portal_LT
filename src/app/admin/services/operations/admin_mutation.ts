@@ -196,3 +196,13 @@ mutation reject_enrollment ($update_type: String!, $status_reason: String!,$enro
       message
   }
 }` ;
+
+
+export const approveenrollment = gql`
+mutation approve_enrollment ($update_type: String!, $status_reason: String!,$enrollments: [enrollments_dtl]){
+  approve_enrollment(update_type: $update_type, status_reason: $status_reason, enrollments: $enrollments ){
+      success
+      error_msg
+      message
+  }
+}` ;
