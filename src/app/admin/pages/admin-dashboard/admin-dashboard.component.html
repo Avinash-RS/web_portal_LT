@@ -1,0 +1,1032 @@
+<mat-tab-group style="padding: 20px;" (selectedTabChange)="onTabChanged($event);">
+  <mat-tab label="Overview" > 
+    <div class="row" >
+      <div class="col-md-3 col-sm-12 col-12" (click)="newRegister()">
+        <div class="smallbox">
+          <div class="row">
+            <div class="col-md-8 ">
+              <h3>New registrations</h3>
+              <span class="count">{{newRegisterLearses?.newReg}}</span>
+            </div>
+    
+            <div class="col-md-4 icon">
+              <div style="width: 60px;margin-left: 6px;">
+                <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+              <img class="charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-md-4">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-8">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-12">
+        <div class="smallbox">
+          <div class="row">
+            <div class="col-md-8 ">
+              <h3>Total learners</h3>
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.count}}</span>
+            </div>
+    
+            <div class="col-md-4 icon newLerner">
+              <div style="width: 60px;margin-left: 6px;">
+                <img  class="iconImg nLSize"  src="../../../../assets/learner/TotalLearners.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row margintop">
+            <div class="col-md-4">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-8">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3 col-sm-12 col-12" (click)="activeLearner()">
+        <div class="smallbox">
+          <div class="row">
+            <div class="col-md-8 ">
+              <h3>Active learners</h3>
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.Active}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-green">
+              <div style="width: 60px;margin-left: 6px;">
+                <img  class="iconImg fontSize"  src="../../../../assets/learner/ActiveLearners.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+              <h3>Inactive learners</h3>
+            </div>
+            <div class="col-md-3">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-9">
+              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.InActive}}</span>
+            </div>
+            <div class="col-md-3">
+              <img class="charticon InactiveIcon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-12" (click)="availableCourses()">
+        <div class="smallbox">
+          <div class="row">
+            <div class="col-md-8 ">
+              <h3>Available courses</h3>
+              <span class="count">{{newRegisterLearses?.TotalCourse}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-yellow">
+              <div style="width: 60px;margin-left: 6px;">
+                <img  class="iconImg "  src="../../../../assets/learner/AvailableCourses.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+              <img class="charticon" src="../../../../assets/learner/PieChartdisable.svg" onmouseover="this.src='../../../../assets/learner/PieChart.svg'"onmouseout="this.src='../../../../assets/learner/PieChartdisable.svg'"/>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-md-4">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-8">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-12" (click)="totalEnrollments()">
+        <div class="smallbox">
+          <div class="row">
+            <div class="col-md-8 ">
+              <h3>Total enrollments</h3>
+              <span class="count">{{newRegisterLearses?.allEnrollement}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-brown">
+              <div style="width: 60px;margin-left: 6px;">
+                <img  class="iconImg"  src="../../../../assets/learner/TotalEnrolments.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+              <img class="charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-md-4">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-8">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Overview -->
+    <div   *ngIf="newRegisterIsable">
+    <div class="row" >
+      <div class="col-8" >
+        <div class="container containerShadow">
+          <div class="row">
+            <div class="col-12 bg-color ">
+              <div style="margin-top: 14px;">
+                <strong> New registrations</strong>
+              </div>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <select name="day" class="rounded" (change)="onChange($event.target.value)">
+                <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                </select>
+            </div>
+          </div>
+          <div class="margin"></div>
+            <canvas baseChart  [datasets]="lineChartData"  [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"> </canvas>
+          <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
+        </div>
+      </div>
+
+    <div class="col-4" >
+        <button class="customButton" (click)="isCollapsed = !isCollapsed">To do list
+          <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+        </button>
+          <div class="card"  *ngIf="isCollapsed">
+            <div class="card-body">
+            <ul class="hoverr">
+              <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
+              <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+            </ul>
+            </div>
+          </div>
+
+          <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  {{newRegisterLearses?.allEnrollement}}
+            <i class="fa fa-angle-down arrow arrow3 " aria-hidden="true"></i>
+          </button>
+            <div class="card"  *ngIf="isCollapsed1">
+              <div class="card-body">
+              <ul class="">
+                <li>
+                  <div class="row">
+                    <div class="col-4">
+                      <span>Approved</span>
+                    </div>
+                    <div class="col-6">
+                      <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses?.enrollmentApprove / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                    </div>
+                    <div class="col-2">
+                      <span>{{newRegisterLearses?.enrollmentApprove}}</span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="row">
+                    <div class="col-4">
+                      <span>Pending</span>
+                    </div>
+                    <div class="col-6">
+                      <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses?.enrollPending / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                    </div>
+                    <div class="col-2">
+                      <span>{{newRegisterLearses?.enrollPending}}</span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="row">
+                    <div class="col-4">
+                      <span>Rejected</span>
+                    </div>
+                    <div class="col-6">
+                      <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses?.enrollRejected / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                    </div>
+                    <div class="col-2">
+                      <span>{{newRegisterLearses?.enrollRejected}}</span>
+                    </div>
+                  </div>
+                </li>
+               
+              </ul>
+              </div>
+            </div>
+     </div>
+ </div>
+</div>
+  <!-- Overview end -->
+
+    <!-- Active  Learners -->
+    <div  >
+      <!--  -->
+    <div class="row"  *ngIf="activeLearnerisable">
+      <div class="col-8" >
+        <div class="container containerShadow">
+          <div class="row">
+            <div class="col-12 bg-color ">
+              <div style="margin-top: 14px;">
+                <strong> Active vs inactive learners (out of total learners)</strong>
+              </div>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <select name="day" class="rounded" (change)="activeAndInactiveLearnerChart($event.target.value)">
+                <option *ngFor="let days of days"   [value]="days.id">{{days.name}}</option>
+                </select>
+            </div>
+          </div>
+          <!-- <div class="margin"></div> -->
+          <canvas baseChart [datasets]="activeLearnerChartData" [labels]="activeLearnerChartLabels"  [options]="activeLearnerChartOptions" [colors]="activeLearnerChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas><br>
+          <div style="margin-left: 31%;">
+          <div class="row">
+              <div class="activeLearner"></div>  Active Learners
+              <div class="InactiveLearner"></div> Inactive Learners
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-4" >
+        <button class="customButton" (click)="isCollapsed = !isCollapsed">To do list
+          <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+        </button>
+          <div class="card"  *ngIf="isCollapsed">
+            <div class="card-body">
+            <ul class="">
+              <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
+              <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+            </ul>
+            </div>
+          </div>
+
+          <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrolled learners
+            <i class="fa fa-angle-down arrow arrow5 " aria-hidden="true"></i>
+          </button>
+            <div class="card"  *ngIf="isCollapsed1">
+              <div class="card-body">
+                <canvas baseChart width="200px" height="200px"   [data]="doughnutChartData"  [labels]="doughnutChartLabels"  [plugins]="doughnutPlugins"  [options]="doughnut"   [chartType]="doughnutChartType"   [colors]="doughnutColors">   </canvas>
+              </div>
+            </div>
+      </div>
+ </div>
+ </div>
+ <!-- Active  Learners end -->
+
+     <!-- Available Courses -->
+     <div   *ngIf="availCoursesenable">
+      <div class="row" >
+        <div class="col-8" >
+          <div class="container containerShadow">
+            <div class="row">
+              <div class="col-12 bg-color ">
+                <div style="margin-top: 14px;">
+                  <strong> Available courses (Category wise)</strong>
+                </div>
+              </div>
+            </div><br>
+  
+            <div class="row">
+              <div class="col-9"></div>
+              <div class="col-3">
+                <select name="day" class="rounded" (change)="onChange($event.target.value)">
+                  <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="margin"></div>
+              <canvas baseChart height="250px" [data]="categoryChartData"  [labels]="categoryChartLabels" [chartType]="categoryChartType"> </canvas>
+          </div>
+        </div>
+  
+      <div class="col-4" >
+          <button class="customButton" (click)="isCollapsed = !isCollapsed">To Do List
+            <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+          </button>
+            <div class="card"  *ngIf="isCollapsed">
+              <div class="card-body">
+              <ul class="">
+                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+                <li>Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
+                <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+              </ul>
+              </div>
+            </div>
+  
+            <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  {{newRegisterLearses?.allEnrollement}}
+              <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+            </button>
+              <div class="card"  *ngIf="isCollapsed1">
+                <div class="card-body">
+                <ul class="">
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <span>Approved</span>
+                      </div>
+                      <div class="col-6">
+                        <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses.enrollmentApprove / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
+                      </div>
+                      <div class="col-2">
+                        <span>{{newRegisterLearses?.enrollmentApprove}}</span>
+                      </div>
+                    </div>
+                  </li>
+  
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <span>Pending</span>
+                      </div>
+                      <div class="col-6">
+                        <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses.enrollPending / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
+                      </div>
+                      <div class="col-2">
+                        <span>{{newRegisterLearses?.enrollPending}}</span>
+                      </div>
+                    </div>
+                  </li>
+  
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <span>Rejected</span>
+                      </div>
+                      <div class="col-6">
+                        <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses.enrollRejected / newRegisterLearses.allEnrollement ) * 100 }}"></mat-progress-bar>
+                      </div>
+                      <div class="col-2">
+                        <span>{{newRegisterLearses.enrollRejected}}</span>
+                      </div>
+                    </div>
+                  </li>
+                 
+                </ul>
+                </div>
+              </div>
+       </div>
+   </div>
+  </div>
+      <!-- Available Courses end -->
+
+      <!-- TotalEnrolments -->
+      <div   *ngIf="istotenvEnable">
+        <div class="row" >
+          <div class="col-8" >
+            <div class="container containerShadow">
+              <div class="row">
+                <div class="col-12 bg-color ">
+                  <div style="margin-top: 14px;">
+                    <strong>Total enrollments (Courses activated)
+                    </strong>
+                  </div>
+                </div>
+              </div><br>
+    
+              <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                  <select name="day" class="rounded" (change)="getEnrolledAndFreeCourseData($event.target.value)">
+                    <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">
+                  <button class="tabbutton"  (click)="freeCourse()">Free Courses</button>
+                  <button class="tabbutton" (click)="enrolledCourse()">Enrolled Courses</button>
+                </div>
+                <div class="col-3">
+                  <img class="fullScreen" (click)="openNav()" src="../../../../assets/learner/Expand.svg">
+                </div>
+                
+                <div id="myNav" class="overlay">
+                  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+                  <div class="overlay-content">
+
+                    <!-- full size table -->
+                    <div class="row">
+                      <div class="col-12" *ngIf="isFreeCourseEnable">
+                        <div class="example-container">
+                          <!--  -->
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="isFreeCourseEnable"  >
+                      <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> No. free </th>
+                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="courseName">
+                        <th mat-header-cell *matHeaderCellDef> Course name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="totalEnrolled">
+                        <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                        <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef> Category </th>
+                        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="subCategory">
+                        <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                        <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                      </ng-container>
+      
+                      <ng-container matColumnDef="superSubCategory">
+                        <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                        <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                      </ng-container>
+                    
+                      <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                      <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
+                    </table>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           
+                 <!-- free Courses table end -->
+              <div class="row">
+                <div class="col-12" >
+                  <div class="example-container ">
+                    <!-- -->
+                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable"  >
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. free </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="courseName">
+                      <th mat-header-cell *matHeaderCellDef> Course name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalEnrolled">
+                      <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="category">
+                      <th mat-header-cell *matHeaderCellDef> Category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="subCategory">
+                      <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="superSubCategory">
+                      <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                    <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
+                  </table>
+                <!-- free Courses table end -->
+
+                  <!-- Enrolled Courses table -->
+                  <!--  -->
+                  <table mat-table [dataSource]="enrolledCoursedataSource" class="mat-elevation-z8" *ngIf="isEnrolledCoursesEnable" >
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No </th>
+                      <td mat-cell *matCellDef="let element let i = index"> {{i +1}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="courseName">
+                      <th mat-header-cell *matHeaderCellDef> Course name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalEnrolled">
+                      <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                      <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="category">
+                      <th mat-header-cell *matHeaderCellDef> Category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="subCategory">
+                      <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="superSubCategory">
+                      <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                    <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
+                  </table>
+                    <!-- Enrolled Courses table end -->
+                </div>
+                </div>
+              </div>
+              <div class="margin"></div>
+      
+            </div>
+          </div>
+    
+        <div class="col-4" >
+            <button class="customButton" (click)="isCollapsed = !isCollapsed">To Do List
+              <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+            </button>
+              <div class="card"  *ngIf="isCollapsed">
+                <div class="card-body">
+                <ul class="">
+                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
+                <li>Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
+                <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+                </ul>
+                </div>
+              </div>
+    
+              <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments Requests  {{newRegisterLearses?.allEnrollement}}
+                <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+              </button>
+                <div class="card"  *ngIf="isCollapsed1">
+                  <div class="card-body">
+                  <ul class="">
+                    <li>
+                      <div class="row">
+                        <div class="col-4">
+                          <span>Approved</span>
+                        </div>
+                        <div class="col-6">
+                          <mat-progress-bar class="my-color" mode="determinate" value="{{(newRegisterLearses?.enrollmentApprove / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                        </div>
+                        <div class="col-2">
+                          <span>{{newRegisterLearses?.enrollmentApprove}}</span>
+                        </div>
+                      </div>
+                    </li>
+    
+                    <li>
+                      <div class="row">
+                        <div class="col-4">
+                          <span>Pending</span>
+                        </div>
+                        <div class="col-6">
+                          <mat-progress-bar class="my-color-blue" mode="determinate" value="{{(newRegisterLearses?.enrollPending / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                        </div>
+                        <div class="col-2">
+                          <span>{{newRegisterLearses?.enrollPending}}</span>
+                        </div>
+                      </div>
+                    </li>
+    
+                    <li>
+                      <div class="row">
+                        <div class="col-4">
+                          <span>Rejected</span>
+                        </div>
+                        <div class="col-6">
+                          <mat-progress-bar class="my-color-red" mode="determinate" value="{{(newRegisterLearses?.enrollRejected / newRegisterLearses?.allEnrollement ) * 100 }}"></mat-progress-bar>
+                        </div>
+                        <div class="col-2">
+                          <span>{{newRegisterLearses?.enrollRejected}}</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  </div>
+                </div>
+                <!-- Enrolled doughnut chart -->
+                <br><br>
+            <div class="card" >
+              <span style="padding: 22px;">Enrolled Courses</span>
+              <div class="card-body enrolldoughnut">
+                <canvas baseChart  width="200px" height="200px" [data]="enrollCoursesData"   [plugins]="enrollPlugins" [options]="enrollCoursesCount" [labels]="enrollCoursesLabel"  [colors]="enrollCoursesColors"  [chartType]="enrollChartType"></canvas>
+              </div>
+            </div>
+             <!-- Enrolled doughnut chart end -->
+         </div>
+     </div>
+    </div>
+      <!-- TotalEnrolments end -->
+    <div style="margin-top: 10%;"></div>
+  </mat-tab>
+
+   <!-- Courses tab -->
+  <mat-tab label="Courses">
+    <div class="row">
+      <div class="col-md-4 col-sm-12 col-12" (click)="newRegister()">
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3>Total categories</h3>
+              <span class="count">{{courseCount?.TotalCategoryCount}}</span>
+            </div>
+    
+            <div class="col-md-4  icon newLerner bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg"  src="../../../../assets/learner/Categories.svg">
+              </div>
+            </div>
+          </div>
+
+          <div class="row margin-to">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-12" (click)="availableCourse()">
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3 class="font-size">Available courses</h3>
+              <span class="count">{{courseCount?.TotalCourse}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-yellow bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg nLSize nL2Size"  src="../../../../assets/learner/AvailableCourses.svg">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+              <img class="md-charticon" src="../../../../assets/learner/PieChartdisable.svg" onmouseover="this.src='../../../../assets/learner/PieChart.svg'"onmouseout="this.src='../../../../assets/learner/PieChartdisable.svg'"/>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4 col-sm-12 col-12"  (click)="latestcourses()">
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3>Latest courses published</h3>
+              <span class="count">{{courseCount?.perMonth}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-green bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg fontSize fontSize2"  src="../../../../assets/learner/CoursesPublished.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+              <img class="md-charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="row" >
+        <div class="col-8"  *ngIf="islatestcoursesenable">
+          <div class="container containerShadow">
+            <div class="row">
+              <div class="col-12 bg-color ">
+                <div style="margin-top: 14px;">
+                  <strong>Available courses (Category wise)
+                  </strong>
+                </div>
+              </div>
+            </div><br>
+  
+            <div class="row">
+              <div class="col-9"></div>
+              <div class="col-3">
+                <select name="day" class="rounded" (change)="onChange($event.target.value)">
+                  <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="margin"></div>
+            <canvas baseChart height="250px" [data]="categoryChartData" [labels]="categoryChartLabels" [chartType]="categoryChartType"> </canvas>
+          </div>
+        </div>
+
+        <div class="col-8"  *ngIf='islatestCouresEnable'>
+          <div class="container containerShadow">
+            <div class="row">
+              <div class="col-12 bg-color ">
+                <div style="margin-top: 14px;">
+                  <strong> Latest published courses (Last 30 days data)
+                  </strong>
+                </div>
+              </div>
+            </div><br>
+    
+            <div class="row">
+              <div class="col-12">
+              <div class="example-container">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+                <ng-container matColumnDef="courseName">
+                  <th mat-header-cell *matHeaderCellDef> Course name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef> Category </th>
+                  <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                </ng-container>
+                <ng-container matColumnDef="subCategory">
+                  <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                  <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="superSubCategory">
+                  <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                  <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          </div>
+            </div>
+            <div class="margin"></div>
+          </div>
+        </div>
+
+      <div class="col-4" >
+            <div class="card top5box">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-7">
+                    <span class="top5">Top 5 Courses</span>
+                  </div>
+                  <div class="col-5">
+                    <!-- (change)="onChange($event.target.value)" -->
+                    <select name="day" class="rounded" >
+                      <option   [value]="">Enrollment</option>
+                      <option   [value]="">Rating</option>
+                      <option   [value]="">Comments</option>
+                      <option   [value]="">Wishlist</option>
+                      </select>
+                  </div>
+                </div><br>
+              <ul class="">
+                <li *ngFor="let topCourse of courseCount?.allLast30daysCourses" class="courselistbox ">{{topCourse.course_name}}</li>
+              </ul>
+              </div>
+            </div>
+       </div>
+   </div>
+  <div style="margin-top: 10%;"></div>
+</mat-tab>
+ <!-- Courses tab ends -->
+
+  <!-- learner tab -->
+  <mat-tab label="Learner" > 
+    <div class="row">
+      <div class="col-md-4 col-sm-12 col-12" >
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3>Subscribed users</h3>
+              <span class="count">102</span>
+            </div>
+    
+            <div class="col-md-4  icon newLerner bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg"  src="../../../../assets/learner/SubscribedUsers.svg">
+              </div>
+            </div>
+          </div>
+
+          <div class="row margin-to">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-12" >
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3 class="font-size">User groups</h3>
+              <span class="count">{{learnertabData?.today_login_count[0].todayCount}}</span>
+            </div>
+    
+            <div class="col-md-4 icon  bg-green  bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg  nL3Size"  src="../../../../assets/learner/UserGroups.svg">
+              </div>
+            </div>
+          </div>
+
+          <div class="row margin-to">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12 col-12" >
+        <div class="medbox">
+          <div class="row">
+            <div class="col-md-9 ">
+              <h3>Login par day</h3>
+              <span class="count">{{learnertabData?.total_user_group_count[0].totalCount}}</span>
+            </div>
+    
+            <div class="col-md-4 icon bg-yellow bg-course-icon">
+              <div style="width: 60px;margin-left: 9px;">
+                <img  class="iconImg fontSize fontSize2"  src="../../../../assets/learner/Loginsperday.svg">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+              <img class="md-charticon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">4%</span>
+            </div>
+            <div class="col-md-6">
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" >
+      <div class="col-6" >
+        <div class="container containerShadow">
+          <div class="row">
+            <div class="col-12 bg-color ">
+              <div style="margin-top: 14px;">
+                <strong> Student vs Professional (Registrations)</strong>
+              </div>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <select name="day" class="rounded" (change)="stuVsProfChart($event.target.value)">
+                <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                </select>
+            </div>
+          </div>
+          <!-- <div class="margin"></div> -->
+          <!-- <div style="display: block"> -->
+            <canvas baseChart  [datasets]="stuVsProData" [labels]="stuVsProLabels" [options]="stuVsProOptions" [colors]="stuVsProColors"[legend]="stuVsprofLegend"[chartType]="stuVsprofChartType" [plugins]="stuVsprofPlugins"></canvas>
+            <!-- addd student pro label -->
+            <br>
+            <div style="margin-left: 31%;">
+            <div class="row">
+                <div class="activeLearner student"></div>Students
+                <div class="InactiveLearner professional"></div>Professional
+            </div>
+          </div>
+            <!-- </div> -->
+        </div>
+      </div>
+
+      <div class="col-6" >
+      <div class="container containerShadow">
+        <div class="row">
+          <div class="col-12 bg-color ">
+            <div style="margin-top: 14px;">
+              <strong>Total vs Active Learners</strong>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-9"></div>
+          <div class="col-3">
+            <select name="day" class="rounded" (change)="totalVsActiveLernerChart($event.target.value)">
+              <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="margin"></div>
+        <!-- <div style="display: block"> -->
+          <canvas baseChart  [datasets]="totVsActData" [labels]="totVsActLabels" [options]="totVsActChartOptions"[plugins]="totVsActChartPlugins" [legend]="totVsActChartLegend" [colors]="totVsActColors" [chartType]="totVsActChartType">
+        </canvas>
+        <div style="text-align: center;">Last {{totvsActiveDayCount ? totvsActiveDayCount : '7'}} days</div>
+          <!-- </div> -->
+      </div>
+     </div>
+ </div>
+    
+ <div class="row" >
+  <div class="col-12" >
+    <div class="container containerShadow">
+      <div class="row">
+        <div class="col-12 bg-color ">
+          <div style="margin-top: 14px;">
+            <strong>Login per day</strong>
+          </div>
+        </div>
+      </div><br>
+
+      <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+          <select name="day" class="rounded" (change)="loginPerDayChart($event.target.value)">
+            <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="margin"></div>
+      <div style="display: block">
+        <canvas baseChart [datasets]="loginperDayData" [labels]="loginperDaChartLabels" [options]="loginperDaChartOptions"[colors]="loginperDaChartColors" [legend]="loginperDaChartLegend"[chartType]="loginperDaChartType" [plugins]="loginperDaChartPlugins">
+      </canvas>
+      <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days  </div>
+        </div>
+    </div>
+  </div>
+</div>
+    <div style="margin-top: 10%;"></div>
+     </mat-tab>
+    <!-- learner tab end -->
+</mat-tab-group>
