@@ -2,7 +2,7 @@ export const menus = [
     {
         'name': 'Dashboard',
         'icon': 'dashboard',
-        'link': '/auth',
+        'link': 'dashboard',
         'open': false,
         'chip': false,
 

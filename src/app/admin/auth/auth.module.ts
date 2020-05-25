@@ -43,6 +43,7 @@ import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dash
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
+// import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -83,7 +84,8 @@ import { ChartsModule } from 'ng2-charts';
         InfiniteScrollModule,
         NgxPaginationModule,
         MatSortModule,     // WcaModule
-        ChartsModule
+        ChartsModule,
+       
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
