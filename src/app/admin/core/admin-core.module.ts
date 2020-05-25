@@ -27,7 +27,7 @@ import {
     MatProgressBarModule,
 } from '@angular/material';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
-// import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -51,7 +51,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     imports: [
         CommonModule,
-        // ChartsModule,
+        ChartsModule,
         MatListModule,
         MatButtonModule,
         MatInputModule,

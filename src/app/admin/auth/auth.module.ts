@@ -42,7 +42,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
 import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
-
+import { ChartsModule } from 'ng2-charts';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
@@ -84,7 +84,7 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
         InfiniteScrollModule,
         NgxPaginationModule,
         MatSortModule,     // WcaModule
- 
+        ChartsModule,
        
     ],
 
