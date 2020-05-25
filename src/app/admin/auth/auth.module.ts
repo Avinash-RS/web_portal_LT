@@ -43,11 +43,6 @@ import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dash
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
-import { FusionChartsModule } from "angular-fusioncharts";
-import * as FusionCharts from "fusioncharts";
-import * as charts from "fusioncharts/fusioncharts.charts";
-import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
     imports: [
         CommonModule,
@@ -89,11 +84,6 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
         NgxPaginationModule,
         MatSortModule,     // WcaModule
         ChartsModule
-
-
-
-
-
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

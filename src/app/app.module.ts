@@ -23,12 +23,6 @@ import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ChartsModule } from 'ng2-charts';
-import { FusionChartsModule } from "angular-fusioncharts";
-import * as FusionCharts from "fusioncharts";
-import * as charts from "fusioncharts/fusioncharts.charts";
-import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
-
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
@@ -48,7 +42,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     ChartsModule,
-    FusionChartsModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,
