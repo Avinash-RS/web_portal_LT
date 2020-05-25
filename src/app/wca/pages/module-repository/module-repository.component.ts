@@ -62,6 +62,8 @@ export class ModuleRepositoryComponent implements OnInit {
       })
       this.savedModules = data.Result;
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
+      this.dataSource.paginator = this.paginator;
+
 
     })
   }
@@ -95,7 +97,7 @@ export class ModuleRepositoryComponent implements OnInit {
   }
 
   viewModule(module) {
-   let dg =  this.dialog.open(ViewCoursesComponent, {
+    let dg = this.dialog.open(ViewCoursesComponent, {
       data: {
         module: module
       },
@@ -104,7 +106,7 @@ export class ModuleRepositoryComponent implements OnInit {
     });
 
     dg.afterClosed().subscribe((data) => {
-        this.getModules();
+      this.getModules();
     })
-}
+  }
 }
