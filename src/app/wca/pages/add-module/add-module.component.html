@@ -65,10 +65,11 @@
                     <div class="prew1">
                       <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                         <span class="del-icon-container">
-                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()"
-                            (mouseover)="onHover(n)">info</mat-icon>
-                          <mat-icon class="del-icon" (click)="deleteModule(n)">delete</mat-icon>
+                        <mat-icon class="info-icon" (click)="addToRepo(n)">library_add</mat-icon>
 
+                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()" (mouseover)="onHover(n)">info
+                          </mat-icon>
+                          <mat-icon class="del-icon" (click)="deleteModule(n)">delete</mat-icon>
                         </span>
                         <div (click)="addTopic(module,n)" class="module-name">
                           {{module.modulename}}
@@ -101,7 +102,9 @@
 
       <mat-card-footer>
         <div>
-          <button type="button" mat-flat-button color="primary" [disabled]="courseDetails && courseDetails.coursetype == 'SCORM'" (click)="onCreate()" class="continue-btn">Save</button>
+          <button type="button" mat-flat-button color="primary"
+            [disabled]="courseDetails && courseDetails.coursetype == 'SCORM'" (click)="onCreate()"
+            class="continue-btn">Save</button>
         </div>
       </mat-card-footer>
 
