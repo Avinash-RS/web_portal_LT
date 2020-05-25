@@ -15,6 +15,15 @@ declare var $: any;
   styleUrls: ['./view-all-courses.component.scss']
 })
 export class ViewAllCoursesComponent implements OnInit {
+  TodateOptions: { dateFormat: string; disableSince: { year: number; month: number; day: number; }; };
+  FromdateOptions: { dateFormat: string; disableUntil: { year: number; month: number; day: number; };
+  disableSince: { year: number; month: number; day: number; }; };
+  get tomorrowDate(): Date {
+    const todayDate = new Date();
+    const tomorrowDate = new Date(todayDate.getTime() + 24 * 60 * 60 * 1000);
+
+    return tomorrowDate;
+  }
    value: number = 0;
   highValue: number = 20;
   options: Options = {
@@ -55,7 +64,6 @@ export class ViewAllCoursesComponent implements OnInit {
   level3selectedID: any = [];
   selectedFilter: any = [];
   isCollapsed: Boolean;
-  myDatePickerOptions: any;
   publishedToDate: String;
   publishedFromDate: String;
   // fromdate: string;
@@ -67,9 +75,16 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myDatePickerOptions = {
-      dateFormat: 'yyyy-mm-dd'
+     this.TodateOptions = {
+       dateFormat: 'yyyy-mm-dd',
+       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate()
     }
+  }
+  this.FromdateOptions = {
+    dateFormat: 'yyyy-mm-dd',
+    disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate()},
+    disableUntil: { year: 2020 , month: 3, day: 31}
+}
     this.getthreeLevelCat();
     this.userDetailes = this.globalservice.checkLogout();
     if (!this.userDetailes.group_id) {
@@ -488,10 +503,10 @@ this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3Ca
     if(name === 'todate'){
       this.publishedToDate = event.formatted;
     }
-    // if(this.publishedFromDate > this.publishedToDate){
-    //   Swal.fire('From date should not be greater than to date');
-    // }
-    // else{
+    if(this.publishedFromDate != '' && this.publishedToDate != '' && this.publishedFromDate > this.publishedToDate){
+      Swal.fire('From date should not be greater than To date');
+    }
+    else{
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage,this.publishedToDate,this.publishedFromDate).subscribe((result: any) => {
@@ -499,7 +514,7 @@ this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3Ca
         this.countUpdate(result['data']['getCourseCategorySearch']['count']['total_count'])
       })
   }
-// }
+}
 
 
   countUpdate(count){
@@ -547,6 +562,5 @@ showmore(val){
   else if(val == 'coursepartner'){
     this.coursepartnerPerPage += 5;
   }
-
 }
 }

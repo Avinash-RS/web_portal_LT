@@ -344,11 +344,13 @@
         <h3><b>Published date</b></h3><br>
         <div class="row">
           <div class="col-10 date">
-            <my-date-picker name="fromdate" [options]="myDatePickerOptions" placeholder="From date"
+            <my-date-picker name="fromdate" [options]="FromdateOptions"
+             placeholder="From date"
             (dateChanged)="onDateChanged($event,'fromdate')"></my-date-picker>
             </div>
             <div class="col-6 todate">
-            <my-date-picker name="todate" [options]="myDatePickerOptions" placeholder="To date"
+            <my-date-picker name="todate" [options]="TodateOptions" 
+           placeholder="To date"
             (dateChanged)="onDateChanged($event,'todate')"></my-date-picker>
             </div>
           <!-- </div> -->
