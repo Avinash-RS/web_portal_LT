@@ -134,7 +134,8 @@ export class AddModuleComponent implements OnInit {
     this.courseDetails.coursedetails.forEach((data) => {
       if (idx == count) {
         modDetails = data;
-        modDetails.coursedetails = []
+        modDetails.coursedetails = [];
+        modDetails.courseid = this.courseDetails.courseid;
         modDetails.coursename = this.courseDetails.coursename;
       }
       ++count;
