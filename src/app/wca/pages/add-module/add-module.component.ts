@@ -263,7 +263,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   navChooseTemp() {
-    if (this.courseDetails.coursetype !== 'SCORM' || this.scormPath.length == 0) {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     }
     else {
@@ -272,7 +272,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModuleRepos() {
-    if (this.courseDetails.coursetype !== 'SCORM' || this.scormPath.length == 0) {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
 
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
     }
