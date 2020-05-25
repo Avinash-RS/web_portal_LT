@@ -74,7 +74,7 @@ export class CreateTemplateComponent implements OnInit {
     //   image:"../../../../assets/images/audio.svg"
     // },
     {
-      name:"SCROM",
+      name:"SCORM",
       image:"../../../../assets/images/scrom.svg"
     },
     {
