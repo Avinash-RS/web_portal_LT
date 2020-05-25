@@ -6,7 +6,7 @@ import { id } from '@swimlane/ngx-charts/release/utils';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { debug } from 'util';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 
 
 @Component({
@@ -25,7 +25,8 @@ export class AddModuleComponent implements OnInit {
   isRepo = 'false';
   moduleList = [];
   constructor(public spinner: NgxSpinnerService,
-    public toast: ToastrService, private gs: GlobalServiceService,private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
+    private alertService: AlertServiceService,
+    public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
     localStorage.setItem('role','admin');
@@ -133,16 +134,49 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
-  deleteModule(idx) {
-    this.courseDetails.flag = "false";
-    let count = 0;
-    this.courseDetails.coursedetails.forEach((data) => {
-      if (idx == count) {
-        data.modulestatus = "false";
+  addToRepo(idx) {
+
+    this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
+      if (data) {
+        this.courseDetails.flag = "false";
+        let count = 0;
+        let modDetails;
+
+        this.courseDetails.coursedetails.forEach((data) => {
+          if (idx == count) {
+            modDetails = data;
+            modDetails.coursedetails = [];
+            modDetails.courseid = this.courseDetails.courseid;
+            modDetails.coursename = this.courseDetails.coursename;
+          }
+          ++count;
+        });
+
+        this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
+          if (res.Code == 200) {
+            this.moduleList.push(res.Result);
+            this.getCourseDetails();
+            this.toast.success("Module added to repository successfully")
+          }
+        });
       }
-      ++count;
-    });
-    this.updateCourseDetails();
+    })
+  }
+
+  deleteModule(idx) {
+    this.alertService.openConfirmAlert('Are you sure you want to delete it', '').then((data: Boolean) => {
+      if (data) {
+        this.courseDetails.flag = "false";
+        let count = 0;
+        this.courseDetails.coursedetails.forEach((data) => {
+          if (idx == count) {
+            data.modulestatus = "false";
+          }
+          ++count;
+        });
+        this.updateCourseDetails();
+      }
+    })
   }
 
   onCreate() {

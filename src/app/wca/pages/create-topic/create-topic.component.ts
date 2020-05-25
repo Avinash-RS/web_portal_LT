@@ -41,13 +41,14 @@ export class CreateTopicComponent implements OnInit {
   subtitles = [0];
   transcripts = [0];
   @ViewChild('urlValue') urlValue;
+  @ViewChild('fileInput3') fileInput3;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
     "Knowledge Check" : /(\.csv)$/i, 
-    SCROM: /(\.imsmanifest)$/i,
+    SCORM: /(\.imsmanifest)$/i,
     Video:/(\.vtt)$/i
   }
 
@@ -58,7 +59,7 @@ export class CreateTopicComponent implements OnInit {
     PPT: "(.ppt .pptx) are Allowed !!!",
     Video: "",
     Audio: "are Allowed !!!",
-    SCROM: "",
+    SCORM: "SCROM are Allowed !!!",
     "Knowledge Check": " (.csv) are Allowed !!!",
     Feedback: ""
   }
@@ -314,13 +315,13 @@ if (item) {
       var filePath = fileInput.target.files[0].name;
       const reader = new FileReader()      
       allowedExtensions = this.fileValidations[item.name];
-      if (item.name != 'SCROM' && !allowedExtensions.exec(filePath)) {
+      if (item.name != 'SCORM' && !allowedExtensions.exec(filePath)) {
           this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
           this.spinner.hide();
           fileInput.value = '';
           return false;
       } 
-      else if (item.name == 'SCROM'){
+      else if (item.name == 'SCORM'){
         this.spinner.show();
         let file = fileInput.target.files[0];
         let fileReader: FileReader = new FileReader();
@@ -330,7 +331,7 @@ if (item) {
           that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
           if (!that.isFileContent) {
             that.spinner.hide();
-            that.toast.warning('Kindly upload a valid SCROM file');
+            that.toast.warning('Kindly upload a valid SCORM file');
           }
           else {
             that.imageView = fileInput.target.files[0];
@@ -451,6 +452,7 @@ if (item) {
             this.spinner.hide();
           } 
         }
+        this.fileInput3.nativeElement.value = '';
       }
 
       reader.addEventListener("load", () => {
@@ -619,6 +621,7 @@ if (item) {
           control.get('topictype').setValue("Feedback");
         }
       });
+      console.log(this.courseForm,"Narendran")
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
        this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
