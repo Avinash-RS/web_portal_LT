@@ -1,0 +1,51 @@
+<div class="view-course-container">
+
+  <!-- <h2 class="rep-title">
+    {{this.moduleData.modulename}}
+  </h2> -->
+
+  <div class="mat-card-container">
+    <mat-card style="text-align: center;">
+      <div class="module-name text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
+        {{moduleData.modulename}}
+      </div>
+      <div style="text-align: left;margin-bottom: 5px;" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)"
+        class="text-overflow">
+
+        {{ moduleData.createdby? "Created by " + moduleData.createdby : 'Created by '}}
+      </div>
+      <div style="text-align: left;">
+        Created on {{moduleData.createdon | date: 'dd MMM, yyyy' }}
+      </div>
+    </mat-card>
+  </div>
+  <div class="course-details">
+    <div class="course-title">
+      Associated Courses
+      <span style="float: right;margin: -3px;">
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+      </span>
+    </div>
+    <div class="course-list">
+      <div *ngFor="let course of moduleData.coursedetails" class="course-names">
+        <div class="course-heading text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
+          {{course.name}}
+        </div>
+        <div class="creater-name text-overflow" (mouseout)="onhoverLeave()" (mouseover)="onHover($event)">
+          {{"Created by " + course.createdby}}
+        </div>
+        <div>
+          Created on 28 Apr, 1994 {{course.createdon | date: 'dd MMM, yyyy' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="isHover">
+    <span class="tool-tip" [style.top.px]="currentTop.top" [style.left.px]="currentTop.left">
+      {{currentText}}
+    </span>
+  </ng-container>
+
+</div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { WcaService } from '@wca/services/wca.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { ViewCoursesComponent } from '../view-courses/view-courses.component';
 
 @Component({
   selector: 'app-module-repository',
@@ -21,7 +22,8 @@ export class ModuleRepositoryComponent implements OnInit {
     private router: Router,
     public route: ActivatedRoute,
     private apiService: WcaService,
-    private alertService: AlertServiceService
+    private alertService: AlertServiceService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -91,4 +93,14 @@ export class ModuleRepositoryComponent implements OnInit {
       }
     })
   }
+
+  viewModule(module) {
+    this.dialog.open(ViewCoursesComponent, {
+      data: {
+        module: module
+      },
+      width: '95%',
+      panelClass: ['view-course-container']
+    });
+}
 }

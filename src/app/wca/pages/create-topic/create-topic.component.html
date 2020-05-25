@@ -112,6 +112,7 @@
                                                         </div>
                                                         <div class="colView">
                                                             <div *ngIf="queryData?.template_details[i].name != 'Feedback'">
+                                                                <app-blob-reader></app-blob-reader>
                                                                 <input style="display: none;" [id]="'fileInput3'+i"
                                                                 type='file' #fileInput3
                                                                 (change)="onSelectFile($event,queryData?.template_details[i],j,i)">

@@ -330,6 +330,7 @@ const obj = {
 coursename: this.courseForm.value.course_name,
 coursefile: null,
 coursestatus: 'true',
+coursetype:'',
 courseid: data.course_id,
 coursedetails: [],
 createdby_name: this.courseForm.value.user_name,

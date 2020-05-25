@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
+import { tap } from 'rxjs/operators'
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
 import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca_query";
@@ -121,9 +122,9 @@ export class WcaService {
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
 
-  uploadKnowledgeCheck(fileData){ return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData)}
+  uploadKnowledgeCheck(fileData) { return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData) }
 
-  getPreviewData(path){return this.http.post(environment.wcaapiurl + 'api/module/getquestions',  { file: path })}
+  getPreviewData(path) { return this.http.post(environment.wcaapiurl + 'api/module/getquestions', { file: path }) }
   repositoryModules() {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }
@@ -131,7 +132,7 @@ export class WcaService {
   updatecoursetomudules(data) {
     return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
   }
-  
+
 
 
   handleKeydown(event) {
@@ -148,5 +149,24 @@ export class WcaService {
     return this.Apollo.query({
       query: get_module_topic
     });
+  }
+
+  // Blob storage services
+
+  private containerName = "container1";
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json' })
+      // .append('x-ms-version', '2014-02-14')
+      // .append('x-ms-date', 'Fri, 26 Jun 2015 23:39:12 GMT')
+      // .append('Authorization', 'SharedKey myaccount:' + environment.accountKey)
+      .append('Access-Control-Allow-Methods', 'GET')
+      .append('Access-Control-Allow-Origin', '*')
+      .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method")
+      .append('Accept', 'application/json')
+  };
+
+  getContainers(): Observable<any> {
+    const subURL = '/api/azureStorage' + '/readBlodContainer';
+    return this.http.get(environment.blobURL + subURL, this.httpOptions).pipe(tap());
   }
 }

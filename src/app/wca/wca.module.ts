@@ -31,6 +31,9 @@ import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 import { AddModuleComponent } from './pages/add-module/add-module.component';
 import { ModuleRepositoryComponent } from './pages/module-repository/module-repository.component';
+import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
 
 
 
@@ -60,9 +63,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent],
   imports: [
     CoreModule,
+    MatDialogModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
@@ -85,7 +89,7 @@ const routes: Routes = [
     MatSlideToggleModule
   ],
   providers: [Apollo],
-  entryComponents: [],
+  entryComponents: [ViewCoursesComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }
