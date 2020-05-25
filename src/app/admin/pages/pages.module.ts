@@ -27,7 +27,7 @@ import { CatagoryManagementComponent } from './catagory-management/catagory-mana
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { ChartsModule } from 'ng2-charts';
         AdminCoreModule,
         RouterModule,
         NgxPaginationModule,
-        ChartsModule
+
    
          ],
     declarations: [   
