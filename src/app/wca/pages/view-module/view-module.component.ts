@@ -41,9 +41,9 @@ export class ViewModuleComponent implements OnInit {
 
 
   navChooseTemp() {
-
-    this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { viewingModule: this.queryData.viewingModule, courseName: this.queryData.courseName, image: this.queryData.image } });
-
+    if (this.scormPath.length == 0) {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { viewingModule: this.queryData.viewingModule, courseName: this.queryData.courseName, image: this.queryData.image } });
+    }
   }
 
   navViewModule() {
@@ -51,7 +51,9 @@ export class ViewModuleComponent implements OnInit {
   }
 
   navModuleRepository() {
-    this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.queryData.viewingModule, image: this.queryData.image, courseName: this.queryData.courseName } });
+    if (this.scormPath.length == 0) {
+      this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.queryData.viewingModule, image: this.queryData.image, courseName: this.queryData.courseName } });
+    }
   }
 
   onUploadDoc(fileList: FileList): void {
@@ -70,6 +72,11 @@ export class ViewModuleComponent implements OnInit {
       }
     }
     fileReader.readAsText(file);
+  }
+
+  deleteFile(e) {
+    this.scormPath = '';
+    event.stopPropagation();
   }
 
   uploadDoc(file) {
