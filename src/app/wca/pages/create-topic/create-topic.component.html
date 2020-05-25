@@ -223,7 +223,7 @@
                                                                 </div>                                                                   
                                                             </div>
                                                             <span *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback' && !j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Video'"><small
-                                                                    class="FileuploadValid">FileUpload Required!!!</small></span>
+                                                                    class="FileuploadValid">File Upload Required!!!</small></span>
                                                             <span *ngIf="urlRequired"><small
                                                                         class="FileuploadValid">URL Required!!!</small></span>
                                                         </div>
@@ -240,8 +240,7 @@
                 </div>
             </span>
             <div *ngIf="queryData?.template_details" class="dspFlx">
-                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as a
-                    draft</button>
+                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as draft</button>
                 <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
                         type="button">Create</button></span>
                 <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']" type="button">Cancel</button>

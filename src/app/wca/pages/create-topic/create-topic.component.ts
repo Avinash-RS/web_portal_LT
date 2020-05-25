@@ -198,6 +198,7 @@ KnowledgeOptions: any = {
           this.initialCall3(this.query);
         } 
       }      
+      console.log(this.query)
     })
 
 
@@ -621,6 +622,7 @@ if (item) {
           control.get('topictype').setValue("Feedback");
         }
       });
+      console.log(this.courseForm,"Narendran")
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
        this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
