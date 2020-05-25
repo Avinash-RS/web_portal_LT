@@ -3,17 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-
 import { CoreModule } from '@core/core.module';
-
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-
 import { AdminLoginModule } from './admin-login/admin-login.module';
-
 import { AdminCoreModule } from './core/admin-core.module';
 import { AuthModule } from './auth/auth.module';
-
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 const routes: Routes = [
@@ -31,7 +26,6 @@ const routes: Routes = [
     AdminLoginModule,
     CommonModule,
     AuthModule,
-
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
