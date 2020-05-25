@@ -182,6 +182,7 @@
             </div>
           </div>
           <div class="margin"></div>
+          <!-- <app-line-chart [data]="lineChartData" [label]="lineChartLabels"></app-line-chart> -->
             <canvas baseChart  [datasets]="lineChartData"  [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"> </canvas>
           <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
         </div>
@@ -443,51 +444,102 @@
                 <div class="col-3">
                   <img class="fullScreen" (click)="openNav()" src="../../../../assets/learner/Expand.svg">
                 </div>
-                
+                 <!-- full size table -->
                 <div id="myNav" class="overlay">
                   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
                   <div class="overlay-content">
-
-                    <!-- full size table -->
                     <div class="row">
-                      <div class="col-12" *ngIf="isFreeCourseEnable">
-                        <div class="example-container">
-                          <!--  -->
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="isFreeCourseEnable"  >
-                      <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef> No. free </th>
-                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                      </ng-container>
-                      <ng-container matColumnDef="courseName">
-                        <th mat-header-cell *matHeaderCellDef> Course name </th>
-                        <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
-                      </ng-container>
-                      <ng-container matColumnDef="totalEnrolled">
-                        <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
-                        <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
-                      </ng-container>
-                      <ng-container matColumnDef="category">
-                        <th mat-header-cell *matHeaderCellDef> Category </th>
-                        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-                      </ng-container>
-                      <ng-container matColumnDef="subCategory">
-                        <th mat-header-cell *matHeaderCellDef> Sub category </th>
-                        <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
-                      </ng-container>
-      
-                      <ng-container matColumnDef="superSubCategory">
-                        <th mat-header-cell *matHeaderCellDef> Super sub category </th>
-                        <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
-                      </ng-container>
-                    
-                      <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
-                      <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
-                    </table>
-                    </div>
+                      <div class="row">
+                        <div class="col-9">
+                          <button class="tabbutton fullScreenbtn"  (click)="freeCourse()">Free Courses</button>
+                          <button class="tabbutton" (click)="enrolledCourse()">Enrolled Courses</button>
+                        </div>
+
+                        <div class="col-3">
+                          <select name="day" class="rounded1" (change)="getEnrolledAndFreeCourseData($event.target.value)">
+                            <option *ngFor="let days of days"  [value]="days.id">{{days.name}}</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-12" >
+                          <div class="row">
+                            <div class="col-12" >
+                              <div class="example-container1 ">
+                              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable"  >
+                                <ng-container matColumnDef="position">
+                                  <th mat-header-cell *matHeaderCellDef> No. free </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="courseName">
+                                  <th mat-header-cell *matHeaderCellDef> Course name </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="totalEnrolled">
+                                  <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                                  <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="category">
+                                  <th mat-header-cell *matHeaderCellDef> Category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="subCategory">
+                                  <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="superSubCategory">
+                                  <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                                </ng-container>
+                              
+                                <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                                <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
+                              </table>
+                            <!-- free Courses table end -->
+            
+                              <!-- Enrolled Courses table -->
+                              <!--  -->
+                              <table mat-table [dataSource]="enrolledCoursedataSource" class="mat-elevation-z8" *ngIf="isEnrolledCoursesEnable" >
+                                <ng-container matColumnDef="position">
+                                  <th mat-header-cell *matHeaderCellDef> No </th>
+                                  <td mat-cell *matCellDef="let element let i = index"> {{i +1}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="courseName">
+                                  <th mat-header-cell *matHeaderCellDef> Course name </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="totalEnrolled">
+                                  <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
+                                  <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="category">
+                                  <th mat-header-cell *matHeaderCellDef> Category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="subCategory">
+                                  <th mat-header-cell *matHeaderCellDef> Sub category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="superSubCategory">
+                                  <th mat-header-cell *matHeaderCellDef> Super sub category </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                                </ng-container>
+                              
+                                <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
+                                <tr mat-row *matRowDef="let row; columns: EnrolledCourseCol;"></tr>
+                              </table>
+                                <!-- Enrolled Courses table end -->
+                            </div>
+                            </div>
+                          </div>
                   </div>
                     </div>
+                <!-- full size table end -->
+
                   </div>
                 </div>
+
               </div>
            
                  <!-- free Courses table end -->
@@ -906,7 +958,7 @@
         <div class="medbox">
           <div class="row">
             <div class="col-md-9 ">
-              <h3>Login par day</h3>
+              <h3>Login per day</h3>
               <span class="count">{{learnertabData?.total_user_group_count[0].totalCount}}</span>
             </div>
     
@@ -988,18 +1040,18 @@
               </select>
           </div>
         </div>
-        <div class="margin"></div>
+        <!-- <div class="margin"></div> -->
         <!-- <div style="display: block"> -->
           <canvas baseChart  [datasets]="totVsActData" [labels]="totVsActLabels" [options]="totVsActChartOptions"[plugins]="totVsActChartPlugins" [legend]="totVsActChartLegend" [colors]="totVsActColors" [chartType]="totVsActChartType">
         </canvas>
-        <div style="text-align: center;">Last {{totvsActiveDayCount ? totvsActiveDayCount : '7'}} days</div>
+        <div style="text-align: center;">Last {{actvstotday ? actvstotday : '7'}} days</div>
           <!-- </div> -->
       </div>
      </div>
  </div>
     
  <div class="row" >
-  <div class="col-12" >
+  <div class="col-7" >
     <div class="container containerShadow">
       <div class="row">
         <div class="col-12 bg-color ">
@@ -1017,12 +1069,12 @@
             </select>
         </div>
       </div>
-      <div class="margin"></div>
-      <div style="display: block">
-        <canvas baseChart [datasets]="loginperDayData" [labels]="loginperDaChartLabels" [options]="loginperDaChartOptions"[colors]="loginperDaChartColors" [legend]="loginperDaChartLegend"[chartType]="loginperDaChartType" [plugins]="loginperDaChartPlugins">
+      <!-- <div class="margin"></div> -->
+      <!-- <div style="display: block"> -->
+        <canvas baseChart  [datasets]="loginperDayData" [labels]="loginperDaChartLabels" [options]="loginperDaChartOptions"[colors]="loginperDaChartColors" [legend]="loginperDaChartLegend"[chartType]="loginperDaChartType" [plugins]="loginperDaChartPlugins">
       </canvas>
-      <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days  </div>
-        </div>
+      <div style="text-align: center;">Last {{loginPerDayFilter ? loginPerDayFilter : '7'}} days  </div>
+        <!-- </div> -->
     </div>
   </div>
 </div>
