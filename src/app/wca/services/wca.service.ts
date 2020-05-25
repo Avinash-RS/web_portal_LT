@@ -117,6 +117,9 @@ export class WcaService {
 
   createDraft(draft) { return this.http.post(environment.wcaapiurl + 'api/courses/createscrom', draft); }
 
+  saveCourse(data) { return this.http.post(environment.wcaapiurl + 'api/courses/createcourse', data); }
+
+
   getCourseDetails(id) { return this.http.get(environment.wcaapiurl + 'api/courses/getscrommodules?courseid=' + id); }
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
