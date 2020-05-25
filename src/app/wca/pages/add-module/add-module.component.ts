@@ -126,6 +126,30 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
+  addToRepo(idx) {
+    this.courseDetails.flag = "false";
+    let count = 0;
+    let modDetails;
+ 
+    this.courseDetails.coursedetails.forEach((data) => {
+      if (idx == count) {
+        modDetails = data;
+        modDetails.coursedetails = [];
+        modDetails.courseid = this.courseDetails.courseid;
+        modDetails.coursename = this.courseDetails.coursename;
+      }
+      ++count;
+    });
+
+    this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
+      if(res.Code == 200) {
+        this.moduleList.push(res.Result);
+        this.toast.success("Module added to repository successfully")
+      }
+    });
+    
+  }
+
   deleteModule(idx) {
     this.courseDetails.flag = "false";
     let count = 0;

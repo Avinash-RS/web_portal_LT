@@ -117,6 +117,9 @@ export class WcaService {
 
   createDraft(draft) { return this.http.post(environment.wcaapiurl + 'api/courses/createscrom', draft); }
 
+  saveCourse(data) { return this.http.post(environment.wcaapiurl + 'api/courses/createcourse', data); }
+
+
   getCourseDetails(id) { return this.http.get(environment.wcaapiurl + 'api/courses/getscrommodules?courseid=' + id); }
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
@@ -128,6 +131,10 @@ export class WcaService {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }
 
+  postRepoModules(data) {
+    return this.http.post(environment.wcaapiurl + 'api/module/savemodules', data);
+  }
+
   updatecoursetomudules(data) {
     return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
   }
@@ -135,6 +142,8 @@ export class WcaService {
   deactivateModule(data) {
     return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
   }
+
+  
 
 
 
