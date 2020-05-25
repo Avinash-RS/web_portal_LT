@@ -129,7 +129,7 @@ h3{
     max-height: 40px;
     margin-top: 9px;
     border-radius: 11px;
-    margin-left: 13px;
+    margin-left: 9px;
   }
   .margintop{
       margin-top: 25%;
@@ -159,6 +159,11 @@ h3{
     background-color: $color-light-blue ;
     color: $color-blank;
   }
+  .fullScreenbtn{
+    margin-left: -150px;
+    margin-bottom: 2px;
+    margin-right: -7px;
+  }
 
   .tode2{
     margin-left: 38%;
@@ -174,9 +179,24 @@ h3{
     height: 400px;
     overflow: auto;
   }
+.rounded1{
+  background: #e3e3fe;
+  margin-left: 394px;
+  margin-top: 3px;
+  height: 33px;
+  margin-bottom: 3px;
+}
+  .example-container1 {
+    height: 600px;
+    overflow: auto;
+  }
   ::ng-deep .mat-header-row {
     background: $bg-color !important;
     min-height: 40px !important;
+}
+
+::ng-deep th.mat-header-cell {
+  text-align: center !important;
 }
   .courselistbox{
     height: 62px !important;
@@ -355,8 +375,7 @@ h3{
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
+    background-color: $light-grey;
     overflow-y: hidden;
     transition: 0.5s;
   }
@@ -426,7 +445,7 @@ h3{
   }
   
   .overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
+    color: #818181;
   }
   
   .overlay .closebtn {

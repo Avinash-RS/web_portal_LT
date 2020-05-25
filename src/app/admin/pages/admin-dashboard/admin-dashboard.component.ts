@@ -46,6 +46,13 @@ export class AdminDashboardComponent implements OnInit {
   public lineChartType = "line";
   public lineChartPlugins = [pluginDataLabels];
   public lineChartOptions:any = {responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          userCallback: function(label, index, labels) {
+            if (Math.floor(label) === label) {
+              return label}},}}]},
     plugins: {
       datalabels: {
         backgroundColor: '#a28bf5',
@@ -70,11 +77,13 @@ export class AdminDashboardComponent implements OnInit {
 
   public activeLearnerChartOptions: any = {
     responsive: true,
-    scales: {
+      scales: {
       yAxes: [{
-        stacked: true
-      }]
-    },
+        ticks: {
+          beginAtZero: true,
+          userCallback: function(label, index, labels) {
+            if (Math.floor(label) === label) {
+              return label}},}}]},
     plugins: {
       datalabels: {
         backgroundColor: function(context) {
@@ -103,6 +112,12 @@ public doughnutColors: Color[] = [{ backgroundColor: ['#7fe7a5', '#ea6c89']}];
   responsive: true,
     legend: {
       position: 'top',
+      
+      labels: {
+        padding: 15,
+        fontSize: 15,
+        usePointStyle: true
+      }
     },
     plugins: {
       datalabels: {
@@ -128,6 +143,11 @@ public enrollCoursesCount: any = {
   responsive: true,
     legend: {
       position: 'top',
+      labels: {
+        fontSize: 12,
+        padding: 15,
+        usePointStyle: true
+      }
     },
     plugins: {
       datalabels: {
@@ -154,9 +174,12 @@ public stuVsProOptions: any = {
   responsive: true,
   scales: {
     yAxes: [{
-      stacked: true
-    }]
-  },
+      stacked : true,
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return label}},}}]},
   plugins: {
     datalabels: {
       backgroundColor: function(context) {
@@ -186,6 +209,13 @@ public totVsActColors: Color[] = [];
 public totVsActData: ChartDataSets[] = [{data: [], label: 'Series A' }];
 public totVsActChartOptions: any = {
   responsive: true,
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return label}},}}]},
   plugins: {
     datalabels: {
       backgroundColor: function(context) {
@@ -214,6 +244,13 @@ public loginperDaChartType = 'line';
 public loginperDaChartPlugins = [];
 public loginperDaChartOptions: any = {
   responsive: true,
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        userCallback: function(label, index, labels) {
+          if (Math.floor(label) === label) {
+            return label}},}}]},
   plugins: {
     datalabels: {
       backgroundColor: function(context) {
@@ -250,6 +287,10 @@ public isCollapsed1 = false;
   isFreeCourseEnable : boolean = true;
   isEnrolledCoursesEnable : boolean = false;
   chartFilterdays: number = 7;
+  actvstotday:number=7;
+  loginPerDayFilter:number=7;
+  stuvsprofDay:number=7;
+  actvsinactDay:number=7;
   newRegisterLearses : any;
   enrolledAndFreeCourseData: any;
   totVsActiveChart: any;
@@ -259,7 +300,7 @@ public isCollapsed1 = false;
   activeInactivegraphdata: any;
   learnertabData: any;
   stuVsProfData: any;
-  studentVsProfDays: any;
+  // studentVsProfDays: any;
   enrollementpert: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
@@ -278,8 +319,8 @@ public isCollapsed1 = false;
 
   ngOnInit() {
     this.newRegistrationsChart(this.chartFilterdays);
-    this.activeAndInactiveLearnerChart(this.chartFilterdays);
-    this.stuVsProfChart(this.chartFilterdays);
+    this.activeAndInactiveLearnerChart(this.actvsinactDay);
+    this.stuVsProfChart(this.stuvsprofDay);
   }
   gotoCoursePage(type){
       this.route.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
@@ -295,7 +336,7 @@ public isCollapsed1 = false;
     this.isEnrolledCoursesEnable = true;
   }
   activeLearner(){
-  this.activeAndInactiveLearnerChart(this.chartFilterdays);
+  this.activeAndInactiveLearnerChart(this.actvsinactDay);
   this.newRegisterIsable = false;
   this.activeLearnerisable = true;
   this.availCoursesenable = false;
@@ -384,8 +425,8 @@ public isCollapsed1 = false;
    }
 
    totalVsActiveLernerChart(days){
-     this.totvsActiveDayCount = days;
-     this.service.getUsersIndays(this.totvsActiveDayCount ? this.totvsActiveDayCount : 7).subscribe((res: any) => {
+     this.actvstotday = days;
+     this.service.getUsersIndays(this.actvstotday ? this.actvstotday : 7).subscribe((res: any) => {
       if(res.data.getUsersInWeeks.success == "true"){
         this.totVsActiveChart = res.data.getUsersInWeeks.message;
         this.totVsActLabels = this.totVsActiveChart.active_Users.flatMap(i => i._id);
@@ -401,8 +442,8 @@ public isCollapsed1 = false;
    
 
    loginPerDayChart(days){
-     this.chartFilterdays = days
-      this.service.getLoginsPerDay(this.chartFilterdays).subscribe((res: any) => {
+     this.loginPerDayFilter= days;
+      this.service.getLoginsPerDay(this.loginPerDayFilter).subscribe((res: any) => {
       if(res.data.getLoginsPerDay.success == "true"){
         this.getLoginsPerDay = res.data.getLoginsPerDay.message;
         this.loginperDaChartLabels = this.getLoginsPerDay.flatMap(i => i._id);
@@ -427,9 +468,9 @@ public isCollapsed1 = false;
       this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
       })
      }else if (event.index == 2){
-      this.loginPerDayChart(this.chartFilterdays);
-      this.totalVsActiveLernerChart(this.chartFilterdays);
-      this.stuVsProfChart(this.chartFilterdays);
+      this.loginPerDayChart(this.loginPerDayFilter);
+      this.totalVsActiveLernerChart(this.actvstotday);
+      this.stuVsProfChart(this.stuvsprofDay);
       this.service.getLeranertabCount().subscribe((res: any) => {
        this.learnertabData = res.data.getLeranertabCount.message;
       })
