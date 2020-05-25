@@ -198,7 +198,6 @@ KnowledgeOptions: any = {
           this.initialCall3(this.query);
         } 
       }      
-      console.log(this.query)
     })
 
 
