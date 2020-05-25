@@ -12,10 +12,11 @@ import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
+import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: DashboardComponent, data: { title: 'Admin Dashboard' } },
+        { path: 'dashboard', component: AdminDashboardComponent, data: { title: 'Admin Dashboard' } },
         { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },

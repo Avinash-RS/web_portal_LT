@@ -10,7 +10,7 @@ import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
   , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
-  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue
+  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue,getAdminOverview,getAdmindashboardCoursetab,getLeranertabCount,getActiveinactiveCount,getLoginsPerDay,getUsersInWeeks,getProfessionalStudent,enrolledCourse,
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -305,6 +305,22 @@ export class AdminServicesService {
       }
     });
   }
+//getting admin dashboard overview data
+  getAdminOverview(days){
+    return this.Apollo.query({
+      query: getAdminOverview,
+      variables: {
+        days: days,
+      }
+    });
+  }
+// getting admin dashboard data for course tab
+  getAdmindashboardCoursetab(){
+    return this.Apollo.query({
+      query: getAdmindashboardCoursetab,
+      variables: {}
+    });
+  }
 
   // End of Category Management
 
@@ -393,6 +409,58 @@ export class AdminServicesService {
         catalogue_id: id,
         course_id: courseid,
         select_all: selectall
+      }
+    });
+  }
+
+  getLeranertabCount(){
+    return this.Apollo.query({
+      query: getLeranertabCount,
+      variables: {}
+    });
+  }
+  //getting Active and in-active chart data
+  getActiveinactiveCount(days){
+    return this.Apollo.query({
+      query: getActiveinactiveCount,
+      variables: {
+        days:days
+      }
+    });
+  }
+//getting login per day chart data
+  getLoginsPerDay(days){
+    return this.Apollo.query({
+      query: getLoginsPerDay,
+      variables: {
+        days: days,
+      }
+    });
+  }
+//getting login per day data
+  getUsersIndays(days){
+    return this.Apollo.query({
+      query: getUsersInWeeks,
+      variables: {
+        weeks: days,
+      }
+    });
+  }
+//getting student and professional chart data
+  getProfessionalStudent(days){
+    return this.Apollo.query({
+      query: getProfessionalStudent,
+      variables: {
+        days: days,
+      }
+    });
+  }
+//getting enrolled and free course data for chart 
+  enrolledCourse(days){
+    return this.Apollo.query({
+      query: enrolledCourse,
+      variables: {
+        days: days,
       }
     });
   }

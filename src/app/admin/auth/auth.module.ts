@@ -38,11 +38,16 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
-import { GroupManagementComponent } from '@admin/pages/group-management/group-management.component';
+import { GroupManagementComponent } from '../pages/group-management/group-management.component';
+import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
-
-
+import { ChartsModule } from 'ng2-charts';
+import { FusionChartsModule } from "angular-fusioncharts";
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
     imports: [
         CommonModule,
@@ -82,7 +87,8 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
         MatSlideToggleModule,
         InfiniteScrollModule,
         NgxPaginationModule,
-        MatSortModule     // WcaModule
+        MatSortModule,     // WcaModule
+        ChartsModule
 
 
 
@@ -92,7 +98,7 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective, CatalogueManagementComponent,
+    declarations: [DndDirective, CatalogueManagementComponent,AdminDashboardComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
         CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],

@@ -856,3 +856,179 @@ export const getcoursesforcatalogue = gql`
       }
     }
 }`;
+
+
+export const getAdminOverview = gql`
+  query getAdminOverview($days: Int){
+    getAdminOverview(days: $days) {
+      success
+      error_msg
+      message{
+      PublishCourse
+      DraftCourse
+      TotalCourse
+      newReg
+      allEnrollement
+      enrollPending 
+      enrollmentApprove
+      enrollRejected
+      perDays{
+      count
+      _id 
+      }
+      TotalActiveInActiveLearner{
+      Active
+      count
+      InActive
+      }
+    }
+  }
+  }`;
+
+export const getAdmindashboardCoursetab = gql`
+  query getAdmindashboardCourseta{
+    getAdmindashboardCoursetab {
+      success
+      error_msg
+      message{
+      level1_count{
+      level1_count
+        }
+      level2_count{
+      level2_count
+      }
+      level3_count{
+      level3_count
+      }
+      TotalCourse
+      perMonth
+      TotalCategoryCount
+      allLast30daysCourses{
+      course_name
+      super_sub_category_id
+      category_id{
+      category_name
+      }
+      parent_sub_category_id{
+      sub_category_name
+      }
+      }
+    }
+   }
+  }`;
+
+
+// getting user per week in dashboard learners tab
+export const getUsersInWeeks = gql`
+  query getUsersInWeeks($weeks: Int){
+    getUsersInWeeks(weeks: $weeks) {
+      success
+      message{
+      total_Users{
+      _id
+      count
+      }
+      active_Users{
+      _id
+      count
+      }
+      }
+    }
+  }`;
+
+// getting login user for dashboard
+export const getLoginsPerDay = gql`
+  query getLoginsPerDay($days: Int){
+    getLoginsPerDay(days: $days) {
+      success
+      message{
+      _id
+      count
+      }
+      }
+  }`;
+
+
+export const getLeranertabCount = gql`
+  query getLeranertabCount{
+      getLeranertabCount {
+      success
+      message {
+      login_diff
+      subscribeUser  
+      today_login_count{
+      _id
+      todayCount
+      }
+      user_group_diff
+      total_user_group_count{
+      _id
+      totalCount
+      }
+      }
+    
+    }
+  }`;
+// getting active and inactive users  for dashboard
+export const getActiveinactiveCount = gql`
+  query getActiveinactiveCount($days: Int){
+    getActiveinactiveCount(days: $days) {
+      success
+      message{
+        EnrolledActive
+        EnrolledInActive
+      InActiveUser{
+      _id
+      count
+      }
+      ActiveUser{
+      _id
+      count
+      }
+      }
+      }
+    
+  }`;
+// getting Professional Student  users  for dashboard
+export const getProfessionalStudent  = gql`
+  query getProfessionalStudent ($days: Int){
+    getProfessionalStudent (days: $days) {
+      success
+      message{
+      student{
+      _id
+      count
+      }
+      professional{
+      _id
+      count
+      }
+      }
+      }
+  }`;
+
+//getting enrolled and free course category and sub-category for admin dashboard 
+export const enrolledCourse  = gql`
+  query enrolledCourse ($days: Int){
+    enrolledCourse(days: $days) {
+      success
+      enrollcourse
+      freecourse
+      message{
+      count
+      category_id{
+        category_name
+      }
+      parent_sub_category_id{
+        sub_category_name
+      }
+      super_sub_category_id{
+        super_sub_category_name
+      }
+      course{
+        course_name
+      }
+      }
+      }
+  }`;
+
