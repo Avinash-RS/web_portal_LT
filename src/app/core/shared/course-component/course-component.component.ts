@@ -23,7 +23,6 @@ export class CourseComponentComponent implements OnInit {
   @Input('showRating') showRating: boolean;
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
-  //here type will come now we need to navigate to your page
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll: boolean = false;
 
@@ -37,6 +36,7 @@ export class CourseComponentComponent implements OnInit {
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
+      console.log(this.course,'this.course')
   }
 
   viewWishList(course) {

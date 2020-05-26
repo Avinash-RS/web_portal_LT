@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-        <li class="breadcrumb-item">
-            <a href="/Admin/auth/Wca">Course Management</a></li>
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
 
         <li class="breadcrumb-item">
@@ -139,7 +137,7 @@
                                                                             <mat-icon class="knowledgeIcon">publish</mat-icon>
                                                                         </span><label class="fsize12">Upload Question</label></div>
                                                                 </div>
-                                                            <span *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video' && queryData?.template_details[i].name != 'SCROM'"
+                                                            <span *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video' && queryData?.template_details[i].name != 'SCORM'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
                                                                 <span><button mat-raised-button class="btnprev"
@@ -152,6 +150,9 @@
                                                                         00:00
                                                                     </mat-card>
                                                                 </span>
+                                                            </span>
+                                                            <span *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'" class="previewAndTime" [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <label style="font-size: 12px;">Uploaded sucessfully</label>
                                                             </span>
                                                             <span *ngIf="queryData?.template_details[i].name == 'Feedback'"
                                                                 class="previewAndTime"
@@ -220,7 +221,7 @@
                                                                 </div>                                                                   
                                                             </div>
                                                             <span *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback' && !j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Video'"><small
-                                                                    class="FileuploadValid">FileUpload Required!!!</small></span>
+                                                                    class="FileuploadValid">File Upload Required!!!</small></span>
                                                             <span *ngIf="urlRequired"><small
                                                                         class="FileuploadValid">URL Required!!!</small></span>
                                                         </div>
@@ -237,8 +238,7 @@
                 </div>
             </span>
             <div *ngIf="queryData?.template_details" class="dspFlx">
-                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as a
-                    draft</button>
+                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as draft</button>
                 <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
                         type="button">Create</button></span>
                 <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']" type="button">Cancel</button>
@@ -258,44 +258,46 @@
             <div class="modal-body">
                 <owl-carousel-o *ngIf="displaySlides" [options]="KnowledgeOptions" class="questionList">
                     <ng-template *ngFor="let value of questionPreData;let i = index" carouselSlide>
-                       <div class="questionContainer">
-                        <div class="queValue">
-                           Question &nbsp;{{i + 1}}
-                        </div>
-                        <div class="queQuery">
-                            {{value.Question}}
-                        </div>
-                        <ng-container>
-                            <section class="queOptions">
-                                <mat-radio-group [(ngModel)]="labelPosition">
-                                    <div>
-                                        <mat-radio-button value="Option1">{{value.Option1}}</mat-radio-button>
-                                    </div>
-                                    <div>
-                                        <mat-radio-button value="Option2">{{value.Option2}}</mat-radio-button>
-                                    </div>
-                                    <div>
-                                        <mat-radio-button value="Option3">{{value.Option3}}</mat-radio-button>
-                                    </div>
-                                    <div>
-                                        <mat-radio-button value="Option4">{{value.Option4}}</mat-radio-button>
-                                    </div>
-                                  </mat-radio-group> 
-                            </section>                          
-                        </ng-container>
-                        <div class="queValue">
-                            Answer
-                        </div>
-                        <div class="queAnswer">
-                            {{value.Answer}}
-                        </div>
-                        <div class="queValue">
-                          Reason
-                        </div>
-                        <div class="queAnswer">
-                            {{value.Reason}}
-                        </div>
-                       </div>
+                            <div class="questionContainer">
+                                <perfect-scrollbar class="scrollbar-container">
+                                <div class="queValue">
+                                   Question &nbsp;{{i + 1}}
+                                </div>
+                                <div class="queQuery">
+                                    {{value.Question}}
+                                </div>
+                                <ng-container>
+                                    <section class="queOptions">
+                                        <mat-radio-group [(ngModel)]="labelPosition">
+                                            <div>
+                                                <mat-radio-button value="Option1">{{value.Option1}}</mat-radio-button>
+                                            </div>
+                                            <div>
+                                                <mat-radio-button value="Option2">{{value.Option2}}</mat-radio-button>
+                                            </div>
+                                            <div>
+                                                <mat-radio-button value="Option3">{{value.Option3}}</mat-radio-button>
+                                            </div>
+                                            <div>
+                                                <mat-radio-button value="Option4">{{value.Option4}}</mat-radio-button>
+                                            </div>
+                                          </mat-radio-group> 
+                                    </section>                          
+                                </ng-container>
+                                <div class="queValue">
+                                    Answer
+                                </div>
+                                <div class="queAnswer">
+                                    {{value.Answer}}
+                                </div>
+                                <div class="queValue">
+                                  Reason
+                                </div>
+                                <div class="queAnswer">
+                                    {{value.Reason}}
+                                </div>
+                            </perfect-scrollbar>
+                               </div>
                        <div class="mright34">
                         <button class="backgroundcol1 cancelBtn" type="button">Cancel</button>
                         <button class="backgroundcol2" type="button">Save</button>

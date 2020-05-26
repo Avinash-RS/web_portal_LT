@@ -46,7 +46,7 @@ export class ReportManagementComponent implements OnInit {
       options: {
         legend: {
           position: 'right',
-          maxWidth: 100,
+          // maxWidth: 100,
         },
         tooltips: {
           enabled: true

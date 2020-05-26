@@ -26,6 +26,8 @@ import { CatalogueManagementComponent } from './catalogue-management/catalogue-m
 import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -47,10 +49,12 @@ import { LearnerprofileComponent } from './learnerprofile/learnerprofile.compone
         MatChipsModule,
         AdminCoreModule,
         RouterModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ChartsModule
+   
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
+    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
