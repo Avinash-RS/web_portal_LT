@@ -50,6 +50,19 @@ export class EnrollmentComponent implements OnInit {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
+
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+      if(!data[sortHeaderId]) {
+        return this.sort.direction === "asc" ? '3' : '1';
+      }
+      return '2' + data[sortHeaderId].toLocaleLowerCase();
+    };
+    // this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+    //   if (typeof data[sortHeaderId] === 'string') {
+    //     return data[sortHeaderId].toLocaleLowerCase();
+    //   }
+    //   return data[sortHeaderId];
+    // };
   }
   getenrolledcoursesindividual(data) {
     console.log(data);
