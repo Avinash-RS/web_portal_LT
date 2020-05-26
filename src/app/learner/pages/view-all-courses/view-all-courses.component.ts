@@ -256,9 +256,9 @@ export class ViewAllCoursesComponent implements OnInit {
     let authorIndex = this.authorDetails.indexOf(val);
     let coursepartnersIndex = this.coursepartners.indexOf(val);
     let coursemodeIndex = this.coursemode.indexOf(val);
-    let cat1Index = this.allLvlCategoryFilterVal.level1.indexOf(val);
-    let cat2Index = this.allLvlCategoryFilterVal.level2.indexOf(val);
-    let cat3Index = this.allLvlCategoryFilterVal.level3.indexOf(val);
+    // let cat1Index = this.allLvlCategoryFilterVal.level1.indexOf(val);
+    // let cat2Index = this.allLvlCategoryFilterVal.level2.indexOf(val);
+    // let cat3Index = this.allLvlCategoryFilterVal.level3.indexOf(val);
 
     if (langIndex > -1) {
       this.selectedlang.splice(langIndex, 1);
@@ -293,14 +293,14 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     }
-    else if (cat1Index > -1) {
-      this.allLvlCategoryFilterVal.level1.splice(cat1Index, 1);
-      this.allLvlCategoryFilterVal.level1.forEach(element => {
-        if (element.category_name === val) {
-          element.checked = false;
-        }
-      });
-    }
+    // else if (cat1Index > -1) {
+    //   this.allLvlCategoryFilterVal.level1.splice(cat1Index, 1);
+    //   this.allLvlCategoryFilterVal.level1.forEach(element => {
+    //     if (element.category_name === val) {
+    //       element.checked = false;
+    //     }
+    //   });
+    // }
     this.selectedFilter.filterVal = [];
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authorDetails);
@@ -315,7 +315,6 @@ export class ViewAllCoursesComponent implements OnInit {
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
         this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
         this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
-        this.filterReset();
       })
   }
   clearAll() {
