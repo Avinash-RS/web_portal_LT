@@ -106,7 +106,7 @@ export class ViewAllCoursesComponent implements OnInit {
       }
       else {
         Swal.fire('No courses found');
-        this.getallcourses();
+        this.allcourses = this.allcourses;
       } 
     })
     this.loadcategoryandcourses();
