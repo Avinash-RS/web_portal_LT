@@ -606,8 +606,16 @@ display: flex;
     border-radius: 5px;
     padding: 30px 40px;
     margin: 9%;
+    padding-right: 10px
 }
 
+.scrollbar-container{
+    max-height:390px !important;
+    padding-right: 20px !important;
+}
+.queQuery{
+    text-align: justify;
+}
 .queValue{
     font-size: 14px;
     font-weight: bold;
