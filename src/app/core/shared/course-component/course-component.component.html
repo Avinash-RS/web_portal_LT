@@ -80,8 +80,22 @@
         </div>
       </div>
 
-      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300" (click)="enrollCourse()">ENROLL NOW
+      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300 pointer"  *ngIf="course.enrollment_status == null"
+        (click)="enrollCourse()">ENROLL 
       </button>
+
+      <button id="add_to_cart"  *ngIf="course.enrollment_status == 'pending'"  mat-stroked-button class="enroll f_wt_300"
+        disabled="{{course.enrollment_status == 'pending'}}">Requested
+      </button>
+
+      <button id="add_to_cart" *ngIf="course.enrollment_status == 'rejected'" mat-stroked-button class="enroll f_wt_300"
+        disabled="{{course.enrollment_status == 'rejected'}}">Request Rejected
+      </button>
+
+      <button id="add_to_cart" *ngIf="course.enrollment_status == 'approved'"  mat-stroked-button class="enroll f_wt_300"
+        disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+      </button>
+
     </div>
   </div>
 

@@ -161,10 +161,12 @@ export class AdminServicesService {
     });
   }
 
-  updategroup(data) {
+  updategroupdetails(data) {
     return this.Apollo.query({
       query: groupstatus,
       variables: {
+        catalogue_id: data.catalogue_id,
+        catalogue_name: data.catalogue_name,
         is_active: data.is_active,
         group_id: data.group_id,
         group_name: data.group_name,
@@ -357,7 +359,6 @@ export class AdminServicesService {
       }
     });
   }
-
   getcatalogues() {
     return this.Apollo.query({
       query: getcatalogue,
@@ -420,6 +421,7 @@ export class AdminServicesService {
 
   // Enrollment
   getenrolledcourses(data) {
+    console.log('called');
     return this.Apollo.query({
       query: getenrolledcourses,
       variables: {
@@ -464,7 +466,29 @@ export class AdminServicesService {
 
   // End of enrollment
 
-  // Dashboard - Please put all code for dashboard below - MYTHREYI
+  // Dashboard
+  //getting admin dashboard overview data
+  getAdminOverview(days) {
+    return this.Apollo.query({
+      query: getAdminOverview,
+      variables: {
+        days: days,
+      }
+    });
+  }
+  // getting admin dashboard data for course tab
+  getAdmindashboardCoursetab() {
+    return this.Apollo.query({
+      query: getAdmindashboardCoursetab,
+      variables: {}
+    });
+  }
+  getLeranertabCount() {
+    return this.Apollo.query({
+      query: getLeranertabCount,
+      variables: {}
+    });
+  }
   //getting Active and in-active chart data
   getActiveinactiveCount(days) {
     return this.Apollo.query({
