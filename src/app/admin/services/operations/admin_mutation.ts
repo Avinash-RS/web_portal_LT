@@ -89,8 +89,10 @@ mutation update_notification($report_id: String!){
 }`;
 
 export const groupstatus = gql`
-mutation groupstatus($group_id: String!, $is_active: Boolean!){
-  groupstatus(group_id : $group_id,is_active: $is_active){
+mutation groupstatus($is_active: Boolean!,$group_id: String!,$group_name: String!,$group_type: String!,
+  $parent_group_id: String!,$hierarchy_id: String!,$admin_id: String!,$created_by: String!){
+  groupstatus(is_active: $is_active,group_id : $group_id,group_name: $group_name,group_type: $group_type,
+    parent_group_id : $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $ admin_id,created_by: $created_by){
       success
       message
       error_msg
