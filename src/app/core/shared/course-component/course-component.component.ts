@@ -102,7 +102,8 @@ export class CourseComponentComponent implements OnInit {
         let detail = {
           id: this.course.course_id,
           wishlist: this.course.wishlisted,
-          wishlist_id: this.course.wishlist_id
+          wishlist_id: this.course.wishlist_id,
+          enrollment_status : this.course.enrollment_status
         }
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail } });
       }

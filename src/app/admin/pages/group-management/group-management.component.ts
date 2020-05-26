@@ -69,7 +69,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ggg")
     localStorage.setItem('role', 'admin');
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.adminDetails = this.gs.checkLogout();

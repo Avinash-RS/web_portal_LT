@@ -126,6 +126,14 @@ export class ListViewCourseComponentComponent implements OnInit {
       // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
       this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name } });
 
+    } else {
+      let detail1 = {
+        id: this.course.course_id,
+        wishlist: this.course.wishlisted || false,
+        wishlist_id: this.course.wishlist_id || null,
+        enrollment_status: this.course.enrollment_status
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail1 } });
     }
   }
   enrollCourse() {

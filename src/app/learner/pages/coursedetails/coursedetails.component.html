@@ -63,8 +63,19 @@
                                 style="background-color: transparent;border: none;box-shadow: none;"
                                 aria-hidden="true"></i>
                             {{course.certificate_html_view_enabled}} day left at this price</p>
-                        <div> <button mat-raised-button class="add_to_cart background-maroon"
-                                (click)="enrollCourse()">ENROLL</button></div>
+                        <div>
+                            <button mat-raised-button class="add_to_cart background-maroon pointer"
+                                *ngIf="course.enrollment_status == 'null'" (click)="enrollCourse()">ENROLL</button>
+                            <button mat-raised-button class="add_to_cart background-maroon"
+                                *ngIf="course.enrollment_status == 'approved'"
+                                disabled="{{course.enrollment_status == 'approved'}}">ENROLLED</button>
+                            <button mat-raised-button class="add_to_cart background-maroon"
+                                *ngIf="course.enrollment_status == 'rejected'"
+                                disabled="{{course.enrollment_status == 'rejected'}}">REQUEST REJECTED</button>
+                            <button mat-raised-button class="add_to_cart background-maroon"
+                                *ngIf="course.enrollment_status == 'pending'"
+                                disabled="{{course.enrollment_status == 'pending'}}">REQUESTED</button>
+                        </div>
                         <br>
                         <!-- <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br> -->
                         <div>
@@ -513,8 +524,9 @@
         <ng-template carouselSlide>Slide 2</ng-template>
         <ng-template carouselSlide>Slide 3</ng-template>
     </owl-carousel-o> -->
-    <owl-carousel-o [options]="trendingCategorires" class="arrow">
-        <ng-template carouselSlide *ngFor="let course of course.frequently_bought_together">
+    <owl-carousel-o [options]="trendingCategorires" class="arrow"  *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0">
+        <ng-template carouselSlide *ngFor="let course of course.frequently_bought_together"
+           >
             <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
                 [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
                 [showCartBtn]="true">
@@ -529,7 +541,8 @@
     <h2 class="m-l-5" *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0">
         People Also Viewed
     </h2>
-    <owl-carousel-o [options]="trendingCategorires" class="arrow">
+    <owl-carousel-o [options]="trendingCategorires" class="arrow"
+        *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0">
         <ng-template carouselSlide *ngFor="let course of course.people_also_viewed">
             <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
                 [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
@@ -541,6 +554,7 @@
         [CourseList]="course.people_also_viewed" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
         [showStatus]="false"></app-top-courses>
 </div> -->
+</div>
 
-    <br><br><br><br><br>
-    <app-footer></app-footer>
+<br><br><br><br><br>
+<app-footer></app-footer>
