@@ -70,7 +70,7 @@
                   <div class="row">
                     <div class="col-md-6">
 
-                      <span class="mt-0 mb-1 text-capitalize"> {{currentpath?.group_name}}
+                      <span class="mt-0 mb-1"> {{currentpath?.group_name}}
                         <ng-container *ngIf="editstatus">
                           <ng-container *ngIf="currentpath?.group_name"> /</ng-container>
                           Create new
@@ -173,19 +173,19 @@
                 <ng-container *ngIf="currentpath?.group_name">
 
                   <div class="card-header">
-                    {{currentpath?.group_name}}'s User list
+                    {{currentpath?.group_name}}'s user list
                   </div>
                 </ng-container>
                 <ng-container *ngIf="!currentpath?.group_name">
 
                   <div class="card-header">
-                    All User list
+                    All user list
                   </div>
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
                 <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
-                  <mat-icon>add</mat-icon>Add User
+                  <mat-icon>add</mat-icon>Add user
                 </button>
               </div>
             </div>
@@ -291,7 +291,7 @@
             </mat-paginator>
             <div *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
               <br><br>
-              <h3 class="center"> No Users in this group</h3>
+              <h3 class="center"> No users in this group</h3>
             </div>
           </mat-tab>
         </mat-tab-group>

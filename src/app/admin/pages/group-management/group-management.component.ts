@@ -281,9 +281,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   updategroupdetails(groupform) {
-    console.log(groupform.value);
-    console.log(this.oldcatalogue)
-    console.log(this.selectedcatalogue)
     console.log(String(this.oldcatalogue) === String(groupform.value.catalogue))
     let value: any;
     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
@@ -317,7 +314,7 @@ export class GroupManagementComponent implements OnInit {
             );
           } else {
             Swal.fire({
-              icon: 'error',
+              // icon: 'error',
               // title: 'Oops...',
               text: result1.data.groupstatus.message,
             });
