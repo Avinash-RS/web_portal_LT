@@ -6,7 +6,8 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
     selector: 'app-create-course',
     templateUrl: './create-course.component.html',
@@ -14,6 +15,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 })
 export class CreateCourseComponent implements OnInit {
 
+    editor = ClassicEditor;
     courseForm: FormGroup;
     imageView: File;
     submitted = false;
@@ -36,6 +38,7 @@ export class CreateCourseComponent implements OnInit {
     authorLengthArray = [];
     courseLengthArray = [];
     TakeAwayLengthArray = []
+
 
     createItem(): FormGroup {
         this.preview2.push(null)
@@ -319,7 +322,7 @@ export class CreateCourseComponent implements OnInit {
                             createdby_id: this.courseForm.value.user_id,
                             createdby_role: this.courseForm.value.user_role
                         }
-                        this.wcaService.createDraft(obj).subscribe((data: any) => {
+                        this.wcaService.saveCourse(obj).subscribe((data: any) => {
                         });
                         this.toast.success('Course Created Successfully !!!');
                         this.router.navigate(['/Admin/auth/Wca/viewmodule'], { queryParams: { viewingModule: data.course_id, image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });

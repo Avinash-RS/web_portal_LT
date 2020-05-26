@@ -606,8 +606,16 @@ display: flex;
     border-radius: 5px;
     padding: 30px 40px;
     margin: 9%;
+    padding-right: 10px
 }
 
+.scrollbar-container{
+    max-height:390px !important;
+    padding-right: 20px !important;
+}
+.queQuery{
+    text-align: justify;
+}
 .queValue{
     font-size: 14px;
     font-weight: bold;
@@ -786,3 +794,7 @@ background-color: $color-blue!important;
  #feedbackModal tbody tr:last-child {  
      border: 1px solid #dee2e6 !important;
      }
+
+     .mat-form-field-appearance-outline .mat-form-field-infix{
+        padding: 0em 0 1em 0 !important;
+    }   

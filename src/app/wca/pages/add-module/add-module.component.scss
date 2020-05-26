@@ -343,6 +343,11 @@ img:hover {
 .add-module-btn {
     text-align: left;
     height: 55px;
+    .mod-btn {
+        font-size: 24px;
+        color: #1f3777;
+        cursor: pointer;
+    }
 }
 
 .add-module-icon {
@@ -361,11 +366,15 @@ img:hover {
 
 .no-module {
     width: 80%;
-    font-size: 32px;
+    font-size: 24px;
     color: #1f3777;
     padding-top: 50px;
-}
 
+}
+.upload-btn {
+    background-color: #dbe7ff !important;
+
+}
 .example-container {
     width: 400px;
     max-width: 100%;
@@ -512,8 +521,23 @@ img:hover {
 .add-modulerepo-icon {
     position: relative;
     top: 4px;
-    border-left: 1px solid grey;
-    padding-left: 5px;
+}
+
+.dis-btn {
+    cursor: no-drop !important;
+    opacity: 0.5;
+}
+
+.repo-mod-btn {
+    font-size: 24px;
+    color: #1f3777;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.disable-select-btn {
+    opacity: 0.5;
+    cursor: no-drop;
 }
 
 @media only screen and (max-width: 600px) {

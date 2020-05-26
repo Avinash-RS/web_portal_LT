@@ -34,10 +34,8 @@ import { AuthGuard } from '@core/services/_helpers';
 import { ModuleRepositoryComponent } from './pages/module-repository/module-repository.component';
 import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
-
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 const routes: Routes = [
 
@@ -66,6 +64,7 @@ const routes: Routes = [
   declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent],
   imports: [
     CoreModule,
+    CKEditorModule,
     MatDialogModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
@@ -86,7 +85,9 @@ const routes: Routes = [
     MatSortModule,
     MatTableModule,
     MatChipsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    PerfectScrollbarModule
+    
   ],
   providers: [Apollo],
   entryComponents: [ViewCoursesComponent],

@@ -29,7 +29,7 @@ export class PublishCourseComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService,
-              private alert: AlertServiceService, public learnerservice: LearnerServicesService) {
+    private alert: AlertServiceService, public learnerservice: LearnerServicesService) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (!this.course) {
@@ -98,7 +98,7 @@ export class PublishCourseComponent implements OnInit {
       if (category.checkbox === true) {
         oldcategory = null;
         oldcategory = this.selectedCategory; oldsubcategory = this.selectedSubCategory; oldsupersubcategory =
-        this.selectedSuperSubCategory;
+          this.selectedSuperSubCategory;
         this.selectedCategory = category;
         let value; let value1; let value2;
         if (oldcategory?.category_id) {
@@ -201,7 +201,7 @@ export class PublishCourseComponent implements OnInit {
         if (this.selectedSuperSubCategory?.super_sub_category_id) {
           const value1 = this.treeSource._data.value.findIndex(x =>
             x.category_id === this.selectedSuperSubCategory?.parent_category_id[0]);
-          const value: any = this.treeSource._data.value[value1].children.findIndex(x => 
+          const value: any = this.treeSource._data.value[value1].children.findIndex(x =>
             x.sub_category_id === this.selectedSuperSubCategory?.parent_sub_category_id[0]);
           this.treeSource._data.value[value1].checkbox = true;
           this.treeSource._data.value[value1].children[value].checkbox = true;
@@ -234,7 +234,7 @@ export class PublishCourseComponent implements OnInit {
         }
         if (oldsupersubcategory?.super_sub_category_id) {
           value2 = this.treeSource._data.value[value].children[value1].children.findIndex(x =>
-             x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
+            x.super_sub_category_id === oldsupersubcategory?.super_sub_category_id);
           if (category.parent_super_sub_category_id && oldsupersubcategory.super_sub_category_id !==
             category.parent_super_sub_category_id[0]) {
             this.treeSource._data.value[value].children[value1].children[value2].checkbox = false;
@@ -259,42 +259,44 @@ export class PublishCourseComponent implements OnInit {
   publishCourse() {
     let level;
     if (this.selectedSuperSubCategory.super_sub_category_id !== undefined) {
-      level = 3;
-    } else if (this.selectedSuperSubCategory.super_sub_category_id === undefined && 
+      level = "3";
+    } else if (this.selectedSuperSubCategory.super_sub_category_id === undefined &&
       this.selectedSubCategory.sub_category_id !== undefined) {
-      level = 2;
+      level = "2";
     } else {
-      level = 1;
+      level = "1";
     }
 
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data) => {
       if (data) {
-        console.log( true, level, this.selectedCategory.category_id, this.selectedSubCategory.sub_category_id,
+        console.log(true, level, this.selectedCategory.category_id, this.selectedSubCategory.sub_category_id,
           this.selectedSuperSubCategory.super_sub_category_id);
-        this.service.publishCourse(this.course.id, true, level , this.selectedCategory.category_id,
-          this.selectedSubCategory.sub_category_id || 'null', this.selectedSuperSubCategory.super_sub_category_id || 'null' )
+        this.service.publishCourse(this.course.id, true, level, this.selectedCategory.category_id,
+          this.selectedSubCategory.sub_category_id || 'null', this.selectedSuperSubCategory.super_sub_category_id || 'null')
           .subscribe((res: any) => {
-          if (res.data && res.data.publishcourse) {
-            if (res.data.publishcourse.success) {
-              this.alert.openAlert('Course published successfully', null);
-              this.route.navigate(['/Admin/auth/Wca']);
+            if (res.data && res.data.publishcourse) {
+              if (res.data.publishcourse.success) {
+                this.alert.openAlert('Course published successfully', null);
+                this.route.navigate(['/Admin/auth/Wca']);
+              } else {
+                this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
+                  res.data.publishcourse.message, null);
+              }
             } else {
-              this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
-                res.data.publishcourse.message, null);
+              this.alert.openAlert('Please try again later', null);
             }
-          } else {
-            this.alert.openAlert('Please try again later', null);
-          }
-        });
-      } else {
-        const detail = { type: 'create', id: this.course.course_id };
-        this.route.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });
+          });
       }
+      //  else {
+      //   const detail = { type: 'create', id: this.course.id };
+      //   this.route.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });
+      // }
     });
   }
 
   draftCourse() {
-    this.route.navigate(['/Admin/auth/Wca']);
+    const detail = { type: 'create', id: this.course.id };
+    this.route.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });
   }
 
   onScrollDown() {

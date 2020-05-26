@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -34,14 +34,22 @@ export class CreateTopicComponent implements OnInit {
   transcriptVal = false;
   showSubupload = false;
   showTransupload = false;
+  isFileContent = false;
+  urlRequired = false;
+  videoUrl:any;
+  selected = 'English';
   subtitles = [0];
-  transcripts = [0]
+  transcripts = [0];
+  @ViewChild('urlValue') urlValue;
+  @ViewChild('fileInput3') fileInput3;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
     "Knowledge Check" : /(\.csv)$/i, 
+    SCORM: /(\.imsmanifest)$/i,
+    Video:/(\.vtt)$/i
   }
 
   fileValidations1 = {
@@ -49,9 +57,9 @@ export class CreateTopicComponent implements OnInit {
     PDF: "(.pdf) are Allowed !!!",
     Word: "(.doc .docx) are Allowed !!!",
     PPT: "(.ppt .pptx) are Allowed !!!",
-    Video: " are Allowed !!!",
+    Video: "",
     Audio: "are Allowed !!!",
-    SCROM: " are Allowed !!!",
+    SCORM: "SCROM are Allowed !!!",
     "Knowledge Check": " (.csv) are Allowed !!!",
     Feedback: ""
   }
@@ -70,6 +78,11 @@ export class CreateTopicComponent implements OnInit {
    },{
     'title':'Duration',
     'star': ['1','2','3','4','5']
+   }]
+
+   language = [{
+     "code": "en",
+     "name": "English"
    }]
 KnowledgeOptions: any = {
   loop: true,
@@ -280,7 +293,21 @@ if (item) {
 }
   }
 
-  onSelectFile(fileInput: any, item, formdata: FormGroup, index) {    
+  // To unzip SCROM files 
+  // handleFile(f) {
+  // JSZip.loadAsync(f)                                  
+  // .then(function(zip) {
+  //     zip.forEach(function (data) { 
+  //     });
+  // });
+  // this.spinner.hide();
+  // }
+
+  onSelectFile(fileInput: any, item, formdata: FormGroup, index,textvalue,subTitleindex) {    
+    if(item == undefined || item == null){
+      item = {}
+      item.name = "Video"
+    }
     if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
       this.spinner.show();
       var imagepath;
@@ -288,16 +315,51 @@ if (item) {
       var filePath = fileInput.target.files[0].name;
       const reader = new FileReader()      
       allowedExtensions = this.fileValidations[item.name];
-      if (!allowedExtensions.exec(filePath)) {
-        this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
-        this.spinner.hide();
-        fileInput.value = '';
-        return false;
-      } else {        
-        if (fileInput && fileInput.target && fileInput.target.files[0]) {
+      if (item.name != 'SCORM' && !allowedExtensions.exec(filePath)) {
+          this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
+          this.spinner.hide();
+          fileInput.value = '';
+          return false;
+      } 
+      else if (item.name == 'SCORM'){
+        this.spinner.show();
+        let file = fileInput.target.files[0];
+        let fileReader: FileReader = new FileReader();
+        let that = this;
+        that.isFileContent = false;
+        fileReader.onloadend = function (x) {
+          that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
+          if (!that.isFileContent) {
+            that.spinner.hide();
+            that.toast.warning('Kindly upload a valid SCORM file');
+          }
+          else {
+            that.imageView = fileInput.target.files[0];
+            const formData = new FormData();
+            formData.append('scrom', that.imageView);
+            that.wcaService.uploadScromCourse(formData).subscribe((data: any) => {
+              imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+              let obj1 = {
+                file:imagepath
+              }
+              if (!formdata.get('topicimages').get(String(0))) {
+                (formdata.get('topicimages') as FormArray).push(that.topicImages());
+              }
+              formdata.get('topicimages').get(String(0)).setValue(obj1);   
+              formdata.get('topictype').setValue("Scorm");          
+               that.spinner.hide();
+            }, err => {
+              that.spinner.hide();
+            })
+          }
+        }
+        fileReader.readAsText(file);
+      }
+      else {        
+        if (fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
-          this.imageView.type === 'file';
+          //this.imageView.type === 'file';
           if (item.name === 'Image') {
             const formData = new FormData();
             formData.append('image', this.imageView);
@@ -348,18 +410,32 @@ if (item) {
             formData3.append('reffile', this.imageView);
            this.wcaService.excelUpload(formData3).subscribe((data:any) => {
             this.spinner.hide();
+            if(data && data.success) {
+              this.clearFormArray(formdata.get("topicimages") as FormArray)            
+              for (var m = 0; m < data.message.length; m++) {
+                let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                let obj3 = {
+                  name:'',
+                  image:path,
+                  file:''
+                }
+                if (!formdata.get('topicimages').get(String(m))) {
+                  (formdata.get('topicimages') as FormArray).push(this.topicImages());
+                }
+                formdata.get('topicimages').get(String(m)).setValue(obj3);
+                formdata.get('topictype').setValue(item.name);          
+              }
+             }
+           },err => {
+            this.spinner.hide();
            })
           } else if (item.name === 'Video') {
-            this.spinner.hide();
-          } else if (item.name === 'Audio') {
-            this.spinner.hide();
-          } else if (item.name === 'SCROM') {
-            this.spinner.hide();
-          } else if (item.name === 'Knowledge Check') {            
+            this.formVideo(formdata,"1",textvalue,"")
+           } else if (item.name === 'Knowledge Check') { 
+            this.spinner.show();           
             const formData2 = new FormData();
             formData2.append('excel', this.imageView);
             this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data:any) => {
-              this.spinner.hide();
               if(data && data.Message =="Success") {
                this.clearFormArray(formdata.get("topicimages") as FormArray)
                let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
@@ -374,21 +450,22 @@ if (item) {
                this.spinner.hide();
               })
             this.spinner.hide();
-          } else if (item.name === 'Feedback') {
-           
+          } 
+        }
+        reader.addEventListener("load", () => {
+          if (item.name === 'PDF') {
+            this.demo(reader.result, formdata, index)
           }
+        }, false);
+  
+        if (fileInput.target.files[0]) {
+          reader.readAsDataURL(fileInput.target.files[0]);
         }
       }
+    }
 
-      reader.addEventListener("load", () => {
-        if (item.name === 'PDF') {
-          this.demo(reader.result, formdata, index)
-        }
-      }, false);
-
-      if (fileInput.target.files[0]) {
-        reader.readAsDataURL(fileInput.target.files[0]);
-      }
+    else if (item.name == 'Video'){
+      this.formVideo(formdata,"2",textvalue,subTitleindex)
     }
   }
 
@@ -487,13 +564,78 @@ if (item) {
     });
   }
 
+  vidObj = {
+    "file" : "",
+    "title" : []
+  }
+  formVideo(formdata,triggerFun,textvalue,subTitleindex){
+    
+    if(triggerFun == "2"){
+      if(subTitleindex){     
+        this.subtitles.splice(subTitleindex, 1);
+        this.vidObj.title.splice(subTitleindex,1)
+    }else{
+      this.vidObj.file = textvalue
+      if (!formdata.get('topicimages').get(String(0))) {
+        (formdata.get('topicimages') as FormArray).push(this.topicImages());
+      }
+      formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
+      formdata.get('topictype').setValue("Video");
+    }
+      this.spinner.hide();
+    }else{
+      const formData4 = new FormData();
+    formData4.append('excel', this.imageView);
+    this.spinner.show();
+    this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data:any) => {
+      this.spinner.show();
+      if(data && data.Message =="Success") {
+        this.clearFormArray(formdata.get("topicimages") as FormArray)
+        let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+        let valueFile = {
+          "code":"en",
+          "name":"English",
+          "file":path2
+        }
+        this.vidObj.title.push(valueFile)
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
+        formdata.get('topictype').setValue("Video");
+        this.spinner.hide();
+      }
+    },err => {
+       this.spinner.hide();
+      })
+    }
+
+  }
+
   addTopicFrom(event,type) {
     event.stopPropagation();
+    if(this.courseForm){
+      var repeatedVal = this.courseForm.value.coursedetails[0].moduledetails.reduce((a, e) => {
+        a[e.topicname] = ++a[e.topicname] || 0;
+        return a;
+      }, {});
+      var valueFind = this.courseForm.value.coursedetails[0].moduledetails.filter(e => repeatedVal[e.topicname])
+    }
+    if(valueFind.length > 0){
+      this.toast.warning("Topic name cannot be same for templates");
+      return false;
+    }
+    if(this.urlValue){
+      if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
+        this.urlRequired = true;
+        return false;
+      } 
+    }
+    this.urlRequired = false;
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
       if (this.query.edit || this.query.addModule) {
         this.courseForm.value.flag = 'false';
-
       } else {
         this.courseForm.value.flag = 'true';
 
@@ -509,7 +651,7 @@ if (item) {
       });
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
-       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
+       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
        this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
        this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
       this.spinner.show();
@@ -564,16 +706,9 @@ if (item) {
 
   }
 
-  openPreviewModal(value){
-    if(value.moduledetails){
-      value.moduledetails.forEach((data)=>{
-        if(data.topictype == "KnowledgeCheck"){
-          this.questionPreData = data.topicimages[0]
-        }
-      })      
-    }
-    console.log(value)
+  openPreviewModal(value,index){
     this.displaySlides = false;
+    this.questionPreData = value.value.moduledetails[index].topicimages[0]
     $('#knowlegeCheckModal').modal('show');
     $('#knowlegeCheckModal').appendTo("body");
     setTimeout(()=>{
@@ -595,6 +730,7 @@ if (item) {
       formdata.get('topictype').setValue('KnowledgeCheck'); 
       this.spinner.hide();
     })
+    this.spinner.hide();
   }
 
   toggle_sub_trans(event,value){

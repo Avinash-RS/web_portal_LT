@@ -346,6 +346,7 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
   get_course_by_subcategory(input_id: $input_id,input_type: $input_type ,pagenumber: $pagenumber) {
   success
   error_msg
+  total_count
   message{
   course_id
   course_description
@@ -653,3 +654,36 @@ export const getlearnertrack = gql`
         }
     }
 }`
+export const getlearnerdashboarddetails = gql`
+query getlearnerdashboarddetails($user_id: String){
+  getlearnerdashboarddetails(user_id:$user_id) {
+    success
+    message
+    data{
+    courseEnrolled{
+    totalCount
+    percent
+    }
+    suspend{
+    _id
+    totalCount
+    percent
+    }
+    incomplete{
+    _id
+    totalCount
+    percent
+    }
+    completed{
+    _id
+    totalCount
+    percent
+    }
+    lastAccessedCourses{
+    course_name
+    course_description
+    course_img_url
+  }
+    }
+}
+}`;

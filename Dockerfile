@@ -19,6 +19,8 @@ RUN npm i ngx-pagination
 RUN npm i ngx-infinite-scroll
 RUN npm install apollo-client
 RUN npm i ng5-slider
+RUN npm i chartjs-plugin-datalabels
+RUN npm install ng2-charts@2.2.3      
 
 COPY . .
 #RUN ng serve

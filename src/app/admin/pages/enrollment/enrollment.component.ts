@@ -48,8 +48,7 @@ export class EnrollmentComponent implements OnInit {
     // this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
-        data?.course_name?.toString().includes(filter) || data?.group_name?.toString().includes(filter)
-        || data?.group_name?.toString().includes(filter) || data?.course_name?.toString().includes(filter) ;
+        data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
   }
   getenrolledcoursesindividual(data) {
