@@ -89,8 +89,8 @@
       <br>
       <div class="row m-l-5 m-r-5" *ngIf="catalogueList && catalogueList.length > 0">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12"
-          *ngFor="let course of catalogueList | sort: reverse : 'catalogue_name'; let i = index">
-          <div class="catalogue-card m-l-5 border-radius-5 pointer" (click)="goToCatalogDetail(course)">
+          *ngFor="let cat of catalogueList | sort: reverse : 'catalogue_name'; let i = index">
+          <div class="catalogue-card m-l-5 border-radius-5 pointer" (click)="goToCatalogDetail(cat)">
             <div class="f_size_15">
               <strong>{{course.catalogue_name}}</strong>
             </div>
