@@ -129,6 +129,7 @@ KnowledgeOptions: any = {
   topicItem(mod_index,i): FormGroup {    
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
+      vidsubtitle : [''],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
           return this.topicImages()
@@ -563,26 +564,23 @@ if (item) {
       }
     });
   }
-
-  vidObj = {
-    "file" : "",
-    "title" : []
-  }
+  
   formVideo(formdata,triggerFun,textvalue,subTitleindex){
-    
-    if(triggerFun == "2"){
-      if(subTitleindex){     
-        this.subtitles.splice(subTitleindex, 1);
-        this.vidObj.title.splice(subTitleindex,1)
-    }else{
-      this.vidObj.file = textvalue
-      if (!formdata.get('topicimages').get(String(0))) {
-        (formdata.get('topicimages') as FormArray).push(this.topicImages());
-      }
-      formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
-      formdata.get('topictype').setValue("Video");
-    }
-      this.spinner.hide();
+    if(triggerFun == "2"){     
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        var vidObj = {
+          "file" : textvalue,
+          "title" : [ {
+            "code":"",
+            "name":"",
+            "file":""
+          }]
+        }
+        formdata.get('topicimages').get(String(0)).setValue(vidObj);  
+        formdata.get('topictype').setValue("Video");
+        this.spinner.hide();
     }else{
       const formData4 = new FormData();
     formData4.append('excel', this.imageView);
@@ -597,12 +595,8 @@ if (item) {
           "name":"English",
           "file":path2
         }
-        this.vidObj.title.push(valueFile)
-        if (!formdata.get('topicimages').get(String(0))) {
-          (formdata.get('topicimages') as FormArray).push(this.topicImages());
-        }
-        formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
-        formdata.get('topictype').setValue("Video");
+        formdata.value.topicimages[0].title[subTitleindex].setValue(valueFile)
+        // this.vidObj.title.push(valueFile) 
         this.spinner.hide();
       }
     },err => {
@@ -733,38 +727,56 @@ if (item) {
     this.spinner.hide();
   }
 
-  toggle_sub_trans(event,value){
-    if(value == "subtitle"){
+  toggle_sub_trans(event,value,formdata){
+    if(value == "subtitle"){ 
       if(event.checked){
-        this.showSubupload = true
+        formdata.get('vidsubtitle').setValue("True");    
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        if(!formdata.value.topicimages[0].file ){
+          var vidObj = {
+            "file" : "",
+            "title" : [ {
+              "code":"",
+              "name":"",
+              "file":""
+            }]
+          }
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);   
+        }
+        
       }
       else{
-        this.showSubupload = false
+        formdata.get('vidsubtitle').setValue("false"); 
+        
       }
     }
-    else{
-      if(event.checked){
-        this.showTransupload = true
-      }
-      else{
-        this.showTransupload = false
-      }
-    }
+    // else{
+    //   if(event.checked){
+    //     this.showTransupload = true
+    //   }
+    //   else{
+    //     this.showTransupload = false
+    //   }
+    // }
   }
 
-  addSubTile(value){
+  addSubTile(value,formdata){
+
     if(value == 'sub'){
-      this.subtitles.push(this.subtitles.length)
+      formdata.value.topicimages[0].title.push([])
     }
     else{
       this.transcripts.push(this.transcripts.length)
     }
 
   }
-  removeSubTile(index,value){
+  removeSubTile(index,value,formdata){
     
     if(value == 'sub'){      
-      this.subtitles.splice(index, 1);
+      // this.subtitles.splice(index, 1);
+      formdata.value.topicimages[0].title.splice(index, 1)
     }
     else{
       this.transcripts.splice(index, 1);

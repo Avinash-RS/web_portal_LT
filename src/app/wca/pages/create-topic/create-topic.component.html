@@ -109,13 +109,13 @@
                                                             </span>
                                                         </div>
                                                         <div class="colView">
-                                                            <div *ngIf="queryData?.template_details[i].name != 'Feedback'">
+                                                            <div *ngIf="queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
                                                                 <input style="display: none;" [id]="'fileInput3'+i"
                                                                 type='file' #fileInput3
                                                                 (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
                                                             <span (dblclick)="fileInput3.click()"><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span>
                                                             </div>
-                                                            <div  *ngIf="queryData?.template_details[i].name === 'Feedback'">
+                                                            <div  *ngIf="queryData?.template_details[i].name === 'Feedback' || queryData?.template_details[i].name === 'Video'">
                                                             <span><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span>
                                                             </div>
                                                             <span
@@ -164,21 +164,22 @@
                                                                 <div class="col-md-4">
                                                                     <div class="vidCol1">
                                                                         <div class="subTitle">
-                                                                            <mat-slide-toggle [checked]="subTitleVal" (change)="toggle_sub_trans($event,'subtitle')">Subtitle</mat-slide-toggle>
+                                                                            <!-- Editing now -->
+                                                                            <mat-slide-toggle [checked]="subTitleVal" (change)="toggle_sub_trans($event,'subtitle',j)">Subtitle</mat-slide-toggle>
                                                                         </div>
-                                                                        <div *ngIf="showSubupload">
-                                                                            <div class="subTitleUpload" *ngFor="let no of subtitles;let subTitleindex = index">                                                                                
+                                                                        <div *ngIf="j?.value?.vidsubtitle == 'True'">
+                                                                            <div class="subTitleUpload" *ngFor="let no of j.value.topicimages[0].title;let subTitleindex = index">  
                                                                                     <mat-select [(value)]="selected" class="subSelect" placeholder="Language">
                                                                                         <mat-option *ngFor="let item of language" class="h30" [value]="item.name">{{item.name}}</mat-option>                                                                                        
                                                                                       </mat-select>                                                                                 
                                                                                 <div class="chooseFile">
-                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">
                                                                                     <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
                                                                                 </div>
                                                                                   <div class="addSub">
-                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub')">add_circle</mat-icon>
-                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">delete</mat-icon>
-                                                                                  </div>
+                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j)">add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)" (click)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">delete</mat-icon>
+                                                                                  </div>                                                                             
                                                                             </div>
                                                                         </div>
                                                                         
@@ -205,7 +206,7 @@
                                                                 <div class="col-md-4">
                                                                     <div class="input-container">
                                                                         <input class="input-field" type="text" #urlValue placeholder="Add url" (paste)="onSelectFile($event,queryData?.template_details[i],j,i,$event.clipboardData.getData('Text'))" (input)="onSelectFile($event,queryData?.template_details[i],j,i,$event.target.value)" required />
-                                                                        <!-- <button class="input-button" type="button">Browse</button> -->
+                                                                        <button class="input-button" type="button">Browse</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
