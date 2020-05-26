@@ -161,18 +161,12 @@ export class AdminServicesService {
     });
   }
 
-  updategroup(data) {
+  changegroupstatus(groupid, status) {
     return this.Apollo.query({
       query: groupstatus,
       variables: {
-        is_active: data.is_active,
-        group_id: data.group_id,
-        group_name: data.group_name,
-        group_type: data.group_type,
-        parent_group_id: data.parent_group_id,
-        hierarchy_id: data.hierarchy_id,
-        admin_id: data.admin_id,
-        created_by: data.created_by
+        group_id: groupid,
+        is_active: status
       }
     });
   }

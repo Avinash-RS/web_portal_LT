@@ -50,28 +50,15 @@ export class EnrollmentComponent implements OnInit {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
-
-    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
-      if(!data[sortHeaderId]) {
-        return this.sort.direction === "asc" ? '3' : '1';
-      }
-      return '2' + data[sortHeaderId].toLocaleLowerCase();
-    };
-    // this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
-    //   if (typeof data[sortHeaderId] === 'string') {
-    //     return data[sortHeaderId].toLocaleLowerCase();
-    //   }
-    //   return data[sortHeaderId];
-    // };
   }
   getenrolledcoursesindividual(data) {
     console.log(data);
     this.columns = [
-      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.lxp_joined_date).format('LL')}` },
-      { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
+      { columnDef: 'lxp_joined_date', header: 'Date Received', cell: (element: any) => `${moment(element.lxp_joined_date).format('LL')}` },
+      { columnDef: 'full_name', header: 'Full Name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
-      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
-      { columnDef: 'username', header: 'User name', cell: (element: any) => `${element.username}` },
+      { columnDef: 'group_name', header: 'User Group', cell: (element: any) => `${element.group_name}` },
+      { columnDef: 'username', header: 'User Name', cell: (element: any) => `${element.username}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
@@ -86,10 +73,10 @@ export class EnrollmentComponent implements OnInit {
 
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
-      { columnDef: 'request_date', header: 'Last received', cell: (element: any) => `${moment(element.request_date).format('LL')}` },
+      { columnDef: 'request_date', header: 'Last Received', cell: (element: any) => `${moment(element.request_date).format('LL')}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'totalCount', header: 'Enrollments', cell: (element: any) => `${element.totalCount}` },
-      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
+      { columnDef: 'group_name', header: 'User Group', cell: (element: any) => `${element.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
@@ -112,10 +99,10 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesforgroup(data) {
     console.log(data);
     this.columns1 = [
-      { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
+      { columnDef: 'full_name', header: 'Full Name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
-      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
-      { columnDef: 'username', header: 'User name', cell: (element: any) => `${element.username}` },
+      { columnDef: 'group_name', header: 'User Group', cell: (element: any) => `${element.group_name}` },
+      { columnDef: 'username', header: 'User Name', cell: (element: any) => `${element.username}` },
     ];
     this.displayedColumns1 = (['selectall', 'sno']).concat(this.columns1.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
@@ -280,7 +267,7 @@ export class EnrollmentComponent implements OnInit {
   datachange(row, column, templateRef: TemplateRef<any>) {
     console.log(column);
     console.log(row);
-    if (column.header === 'User group') {
+    if (column.header === 'User Group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course') {
       // let details = {
@@ -293,7 +280,7 @@ export class EnrollmentComponent implements OnInit {
       };
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
       // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
-    } else if (column.header === 'Full name' || column.header === 'User name') {
+    } else if (column.header === 'Full Name' || column.header === 'User Name') {
       const userdetail = { user_id: row.user_id, _id: row._id };
       // const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
