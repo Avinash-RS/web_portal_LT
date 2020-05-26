@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { NgxSpinnerService } from 'ngx-spinner';
 import { debug } from 'util';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AddModuleComponent implements OnInit {
   scormPath: string = '';
 
   constructor(public spinner: NgxSpinnerService,
-    private alertService: AlertServiceService,
+    private alertService: AlertServiceService,private gs: GlobalServiceService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {
