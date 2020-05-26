@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Form } from '@angular/forms';
@@ -33,11 +33,11 @@ export class UserManagementComponent implements OnInit {
   selectedArray: any = [];
   profileDetails: {};
   trackDetails: any;
-  loader: boolean = false;
+  loader = false;
 
   constructor(private router: Router, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
-    private dialog: MatDialog,
+              private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
+              private dialog: MatDialog,
   ) {
     localStorage.setItem('role', 'admin');
     this.getAllUser(0);
@@ -50,7 +50,7 @@ export class UserManagementComponent implements OnInit {
     this.service.getAllUsers(pagenumber, 1, 'undefined')
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
-          if (pagenumber == 0) {
+          if (pagenumber === 0) {
             this.ELEMENT_DATA = [];
           }
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
@@ -61,7 +61,7 @@ export class UserManagementComponent implements OnInit {
           this.resultsLength = result.data.get_all_user.learner_count;
           this.loader = false;
         } else {
-          this.alert.openAlert("Please try again later", null);
+          this.alert.openAlert('Please try again later', null);
           this.loader = false;
         }
       });
@@ -98,11 +98,10 @@ export class UserManagementComponent implements OnInit {
   }
 
   checkboxLabel(row?) {
-    if (row.isChecked == undefined || row.isChecked == false) {
+    if (row.isChecked === undefined || row.isChecked === false) {
       row.isChecked = true;
       this.selectedArray.push(row);
-    }
-    else {
+    } else {
       row.isChecked = !row.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== row);
     }
@@ -124,10 +123,9 @@ export class UserManagementComponent implements OnInit {
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
               this.resultsLength = 10;
-            }
-            else {
+            } else {
               this.getAllUser(0);
-              this.alert.openAlert("Sorry", 'User doesnt exists');
+              this.alert.openAlert('Sorry', 'User doesnt exists');
             }
 
           });
