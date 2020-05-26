@@ -869,12 +869,12 @@ export const getAdminOverview = gql`
       TotalCourse
       newReg
       allEnrollement
-      enrollPending 
+      enrollPending
       enrollmentApprove
       enrollRejected
       perDays{
       count
-      _id 
+      _id
       }
       TotalActiveInActiveLearner{
       Active
@@ -955,7 +955,7 @@ export const getLeranertabCount = gql`
       success
       message {
       login_diff
-      subscribeUser  
+      subscribeUser
       today_login_count{
       _id
       todayCount
@@ -966,7 +966,6 @@ export const getLeranertabCount = gql`
       totalCount
       }
       }
-    
     }
   }`;
 // getting active and inactive users  for dashboard
@@ -987,7 +986,6 @@ export const getActiveinactiveCount = gql`
       }
       }
       }
-    
   }`;
 // getting Professional Student  users  for dashboard
 export const getProfessionalStudent  = gql`
@@ -1007,7 +1005,7 @@ export const getProfessionalStudent  = gql`
       }
   }`;
 
-//getting enrolled and free course category and sub-category for admin dashboard 
+// getting enrolled and free course category and sub-category for admin dashboard
 export const enrolledCourse  = gql`
   query enrolledCourse ($days: Int){
     enrolledCourse(days: $days) {

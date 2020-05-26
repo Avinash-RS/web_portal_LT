@@ -53,6 +53,14 @@ mutation create_catelogue(
     success
     error_msg
     message
+    details{
+      _id
+      level
+      category_id
+      category_name
+      category_image
+      category_description
+    }
   }
 }`;
 
@@ -147,6 +155,9 @@ mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_descripti
     success
     error_msg
     message
+    details{
+      catalogue_id
+    }
   }
 }`;
 

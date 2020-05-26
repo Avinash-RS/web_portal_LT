@@ -98,16 +98,18 @@ export class CatalogueManagementComponent implements OnInit {
 
   addNewCatalogue() {
     this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name,
-      this.addCatalogueForm.value.catalogue_description,
+      this.addCatalogueForm.value.catalogue_description || '',
       this.adminDetails._id).subscribe((result: any) => {
         this.addCatalogueForm.reset();
         if (result && result.data) {
           if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {
-            this.getListCatalogue();
-            // this.getCatalogDetail();
+            // this.getListCatalogue();
+            this.catalog = result.data.create_master_catalogue.details;
+            this.catalog.course_count = 0;
+            this.goToCatalogDetail(this.catalog);
             this.alert.openAlert('Catalogue created successfully', null);
-            this.showAddCatalogueForm = false;
-            this.showListCatalogue = true;
+            // this.showAddCatalogueForm = false;
+            // this.showListCatalogue = true;
           } else {
             this.alert.openAlert(result.data.create_master_catalogue.message, null);
           }
