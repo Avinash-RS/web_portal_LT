@@ -1,19 +1,15 @@
+<!-- start of nav-bar section  -->
 
-
-
-
-      <!-- start of nav-bar section  -->
-
-      <div class="header">
-        <div class="logo"><img  src="../../assets/images/logo.png"></div>
-        <div class="btn-class"><button class="button">BrowseCategories</button></div>
-        <div class="link1"><a href="">what'snew</a></div>
-        <div class="link2"><a href="">TalkToExpert</a></div>
-        <div class="link3"><a href="">FAQ</a></div>
-        <div class="login"><a href="">login</a></div>
-        <div class="btnclass"><button class="startedbutton">Get Started</button></div>
-      </div>
-      <!-- <div class="container wrap-body">
+<div class="header">
+  <div class="logo"><img src="../../assets/images/logo.png"></div>
+  <div class="btn-class"><button class="button">BrowseCategories</button></div>
+  <div class="link1"><a href="">what'snew</a></div>
+  <div class="link2"><a href="">TalkToExpert</a></div>
+  <div class="link3"><a href="">FAQ</a></div>
+  <div class="login"><a href="">login</a></div>
+  <div class="btnclass"><button class="startedbutton">Get Started</button></div>
+</div>
+<!-- <div class="container wrap-body">
         <div class="row">
       
           <div class="col-md-12">
@@ -42,12 +38,106 @@
 
 
 <!-- start of Popular courses -->
+<div class="row m-l-20 m-r-20">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_400 f_size_23 float_left color_blue">
+    <strong>Popular Courses</strong>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_400 f_size_14 float_right color_blue">
+    <span class="material-icons blue-border f_size_30" style="vertical-align: middle;">
+      navigate_before
+    </span>
+    <span class="material-icons m-left-10 blue-border f_size_30" style="vertical-align: middle;">
+      navigate_next
+    </span>
+    <span class="course-count f_wt_400 f_size_25 blue-border m-left-10" style="margin-bottom: 0;">
+      <small> All | 25 </small>
+    </span>
+  </div>
+</div>
 
+<div class="row m-l-20 m-r-20 m-t-25">
+  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80" *ngFor="let courses of courses;  let i = index">
+    <img class="pointer m-b-10 course-image center width_80" src="{{courses.src}}" alt="">
 
+    <div class="overlay"> 
+      <a (mouseenter)="hoverIdx = i" (mouseleave)="hoverIdx = -1">
+        <span [ngClass]="{ 'overlay': true, 'hide': hoverIdx !== i }">
+          {{ courses.description }}
+        </span> -->
+  <!-- <div class="col-md-12 m-t-25">
+          <p class="course_description">
+            {{ courses.description }}
+          </p>
+        </div> -->
+  <!-- </a>
+    </div> -->
+  <!-- <div class="row color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+      <span class="float_left m-t-10 f_size_14 f_wt_500">{{courses.name}}</span>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80" *ngFor="let courses of courses; let i = index">
+      <div class="containerOverlay">
+        <img class="pointer m-b-10 course-image center" src="{{ courses.src }}" alt=""
+          (click)="selectCourse(courses,i+'c')">
+        <div class="overlay p-5px" style="margin-bottom: 0;">
+          <p class="course_description">
+            <!-- {{ courses.description }} -->
+            {{(courses.description?.length>120)? (courses.description | slice:0:120)+'...':(courses.description) }}
+          </p>
+        </div>
+      </div>
+      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+        <span class="float_left m-t-10 f_size_14 f_wt_500">{{courses.name}}</span>
+        <button class="float_right m-b-10 m-t-10">Enroll</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<br>
 <!-- End of Popular courses -->
 
 
 <!-- start of trending courses -->
+<div class="row m-l-20 m-r-20">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_400 f_size_23 float_left color_blue">
+    <strong>Trending Courses</strong>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_400 f_size_14 float_right color_blue">
+    <span class="material-icons blue-border f_size_30" style="vertical-align: middle;">
+      navigate_before
+    </span>
+    <span class="material-icons m-left-10 blue-border f_size_30" style="vertical-align: middle;">
+      navigate_next
+    </span>
+    <span class="course-count f_wt_400 f_size_25 blue-border m-left-10" style="margin-bottom: 0;">
+      <small> All | 25 </small>
+    </span>
+  </div>
+</div>
 
+<div class="row m-l-20 m-r-20 m-t-25">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80" *ngFor="let courses of courses; let i = index">
+      <div class="containerOverlay">
+        <img class="pointer m-b-10 course-image center" src="{{ courses.src }}" alt=""
+          (click)="selectCourse(courses,i+'c')">
+        <div class="overlay p-5px" style="margin-bottom: 0;">
+          <p class="course_description">
+            <!-- {{ courses.description }} -->
+            {{(courses.description?.length>120)? (courses.description | slice:0:120)+'...':(courses.description) }}
+          </p>
+        </div>
+      </div>
+      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+        <span class="float_left m-t-10 f_size_14 f_wt_500">{{courses.name}}</span>
+        <!-- <button class="float_right m-b-10 m-t-10">Enroll</button> -->
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- End of Trending courses -->
