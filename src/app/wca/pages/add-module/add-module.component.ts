@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -25,6 +25,10 @@ export class AddModuleComponent implements OnInit {
   isDrag: boolean;
   isRepo = 'false';
   moduleList = [];
+  isFileContent = false;
+  @ViewChild('file') fileUploaded;
+  scormPath: string = '';
+
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
     public gs:GlobalServiceService,
@@ -136,6 +140,37 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
+  onUploadDoc(fileList: FileList): void {
+    let file = fileList[0];
+    let fileReader: FileReader = new FileReader();
+    let that = this;
+    that.isFileContent = false;
+    fileReader.onloadend = function (x) {
+      that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
+      if (!that.isFileContent) {
+        that.fileUploaded.nativeElement.value = '';
+        that.toast.warning('Kindly upload a valid zip file');
+      }
+      else {
+        that.uploadDoc(file);
+      }
+    }
+    fileReader.readAsText(file);
+  }
+
+  uploadDoc(file) {
+    let scormCourse = file;
+    const formData = new FormData();
+    formData.append('scrom', scormCourse);
+    this.apiService.uploadScromCourse(formData).subscribe((data: any) => {
+      this.scormPath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+    }, error => {
+      this.scormPath = '';
+      this.fileUploaded.nativeElement.value = '';
+      this.toast.warning('oops someting went wrong. Try again!!!')
+    })
+  }
+
   addToRepo(idx) {
 
     this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
@@ -164,6 +199,12 @@ export class AddModuleComponent implements OnInit {
       }
     })
   }
+  deleteScromFile(e) {
+    this.scormPath = '';
+    this.courseDetails.coursetype = '';
+    this.courseDetails.coursefile = '';
+    event.stopPropagation();
+  }
 
   deleteModule(idx) {
     this.alertService.openConfirmAlert('Are you sure you want to delete it', '').then((data: Boolean) => {
@@ -182,7 +223,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   onCreate() {
-    if (this.courseDetails.coursetype !== 'SCORM') {
+    if (this.scormPath.length == 0) {
       this.spinner.show();
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
         if (res.Code == 200) {
@@ -194,7 +235,28 @@ export class AddModuleComponent implements OnInit {
           this.apiService.updateCourse(obj).subscribe((data: any) => {
           });
           this.toast.success('Module updated successfully');
-          // this.router.navigate(['/Admin/auth/Wca']);
+          this.router.navigate(['/Admin/auth/Wca']);
+        }
+        this.spinner.hide();
+      }, err => {
+        this.spinner.hide();
+      })
+    }
+    else if(this.scormPath.length > 0) {
+      this.spinner.show();
+      this.courseDetails.coursetype = "SCORM";
+      this.courseDetails.coursefile = this.scormPath;
+      this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
+        if (res.Code == 200) {
+          this.getCourseDetails();
+          const obj = {
+            course_id: this.routedCourseDetails.courseId,
+            is_active: 0
+          }
+          this.apiService.updateCourse(obj).subscribe((data: any) => {
+          });
+          this.toast.success('Module updated successfully');
+           this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner.hide();
       }, err => {
@@ -209,7 +271,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   navChooseTemp() {
-    if (this.courseDetails.coursetype !== 'SCORM') {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     }
     else {
@@ -218,7 +280,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModuleRepos() {
-    if (this.courseDetails.coursetype !== 'SCORM') {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
 
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
     }
