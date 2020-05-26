@@ -12,7 +12,7 @@ import {
   , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
   getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue, getAdminOverview,
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
-  enrolledCourse, getgroupbyid
+  enrolledCourse, getgroupbyid,getTopfiveDashboardType
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -526,10 +526,21 @@ export class AdminServicesService {
       variables: {}
     });
   }
+
+  //getting learner dashboard count
   getLeranertabCount() {
     return this.Apollo.query({
       query: getLeranertabCount,
       variables: {}
+    });
+  }
+//getting top 5 course 
+  getTopfiveDashboardType(type){
+    return this.Apollo.query({
+      query: getTopfiveDashboardType,
+      variables: {
+        type:type
+      }
     });
   }
   // End of dashboard
