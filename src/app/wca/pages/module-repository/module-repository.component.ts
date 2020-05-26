@@ -28,10 +28,10 @@ export class ModuleRepositoryComponent implements OnInit {
 
   ngOnInit() {
     this.savedModules = [{
-      coursename: "cname",
-      modulename: "name",
-      createdby: "",
-      createdon: "Date"
+      coursename: 'cname',
+      modulename: 'name',
+      createdby: '',
+      createdon: 'Date'
     }];
     this.dataSource.paginator = this.paginator;
     this.route.queryParams.subscribe(params => {
@@ -54,24 +54,26 @@ export class ModuleRepositoryComponent implements OnInit {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
         val.isSelect = false;
-        this.routeData.moduleList ? this.routeData.moduleList.forEach((data) => {
-          if (val.moduleid == data) {
+        // tslint:disable-next-line:no-shadowed-variable
+        this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
+          if (val.moduleid === data) {
             val.isSelect = true;
           }
-        }) : ''
-      })
+        // tslint:disable-next-line:no-unused-expression
+        }) : '';
+      });
       this.savedModules = data.Result;
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
-
-    })
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   onModuleSelection(selectedModule) {
-    let modDetails = {
-      "moduleid": selectedModule.moduleid,
-      "coursename": selectedModule.coursename,
-      "createdby": selectedModule.createdby
-    }
+    const modDetails = {
+      moduleid: selectedModule.moduleid,
+      coursename: selectedModule.coursename,
+      createdby: selectedModule.createdby
+    };
 
     this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
       if (data) {
@@ -86,17 +88,18 @@ export class ModuleRepositoryComponent implements OnInit {
             }
           });
         this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
-          if (res.Code == 200) {
+          if (res.Code === 200) {
 
           }
-        })
+        });
       }
-    })
+    });
   }
 
   viewModule(module) {
-   let dg =  this.dialog.open(ViewCoursesComponent, {
+    const dg = this.dialog.open(ViewCoursesComponent, {
       data: {
+        // tslint:disable-next-line:object-literal-shorthand
         module: module
       },
       width: '95%',
@@ -104,7 +107,7 @@ export class ModuleRepositoryComponent implements OnInit {
     });
 
     dg.afterClosed().subscribe((data) => {
-        this.getModules();
-    })
-}
+      this.getModules();
+    });
+  }
 }

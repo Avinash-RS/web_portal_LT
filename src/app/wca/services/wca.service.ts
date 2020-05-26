@@ -132,6 +132,10 @@ export class WcaService {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }
 
+  postRepoModules(data) {
+    return this.http.post(environment.wcaapiurl + 'api/module/savemodules', data);
+  }
+
   updatecoursetomudules(data) {
     return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
   }
@@ -139,6 +143,8 @@ export class WcaService {
   deactivateModule(data) {
     return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
   }
+
+  
 
 
 

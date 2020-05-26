@@ -21,7 +21,6 @@ export class BlobReaderComponent implements OnInit {
 
   getContainers() {
     this.azureBlobService.getContainerBlobs().subscribe(res => {
-      console.log(res);
       if (res.statusBool) {
         this.exploredData = res.data;
       }

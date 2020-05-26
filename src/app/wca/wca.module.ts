@@ -35,6 +35,7 @@ import { ViewCoursesComponent } from './pages/view-courses/view-courses.componen
 import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 const routes: Routes = [
 
@@ -84,7 +85,9 @@ const routes: Routes = [
     MatSortModule,
     MatTableModule,
     MatChipsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    PerfectScrollbarModule
+    
   ],
   providers: [Apollo],
   entryComponents: [ViewCoursesComponent, BlobReaderComponent],
