@@ -194,6 +194,10 @@ h3{
     background: $bg-color !important;
     min-height: 40px !important;
 }
+::ng-deep tr.mat-footer-row, tr.mat-row {
+  height: 48px;
+  text-align: center !important;
+}
 
 ::ng-deep th.mat-header-cell {
   text-align: center !important;
