@@ -67,7 +67,7 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesindividual(data) {
     console.log(data);
     this.columns = [
-      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.lxp_joined_date).format('LL')}` },
+      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
@@ -216,8 +216,8 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire(
             'Successfully Approved',
-            'A Confirmation has been sent to the user Email ID',
-            'success'
+            'A confirmation has been sent to the user email id',
+            // 'success'
           );
         }
       });
@@ -266,7 +266,7 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire(
               'Rejection',
-              'Rejection with the comments shared to the user mail ID',
+              'Rejection with the comments shared to the user mail id',
               'error'
             );
         }
