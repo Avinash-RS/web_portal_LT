@@ -126,33 +126,38 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
-  deleteModule(moduleName) {
+  deleteModule(idx) {
     this.courseDetails.flag = "false";
+    let count = 0;
     this.courseDetails.coursedetails.forEach((data) => {
-      if (data.modulename == moduleName) {
+      if (idx == count) {
         data.modulestatus = "false";
       }
+      ++count;
     });
     this.updateCourseDetails();
   }
 
   onCreate() {
-    this.spinner.show();
-    this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
-      if (res.Code == 200) {
-        this.getCourseDetails();
-        const obj = {
-          course_id: this.routedCourseDetails.courseId,
-          is_active: 0
+    if (this.courseDetails.coursetype !== 'SCORM') {
+      this.spinner.show();
+      this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
+        if (res.Code == 200) {
+          this.getCourseDetails();
+          const obj = {
+            course_id: this.routedCourseDetails.courseId,
+            is_active: 0
+          }
+          this.apiService.updateCourse(obj).subscribe((data: any) => {
+          });
+          this.toast.success('Module updated successfully');
+          // this.router.navigate(['/Admin/auth/Wca']);
         }
-        this.apiService.updateCourse(obj).subscribe((data: any) => {
-        });
-        this.toast.success('Module updated successfully');
-      }
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-    })
+        this.spinner.hide();
+      }, err => {
+        this.spinner.hide();
+      })
+    }
   }
 
   addTopic(value, index) {
@@ -161,12 +166,22 @@ export class AddModuleComponent implements OnInit {
   }
 
   navChooseTemp() {
-    this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
-
+    if (this.courseDetails.coursetype !== 'SCORM') {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
+    }
+    else {
+      this.toast.warning("SCORM course cannot be edited")
+    }
   }
 
   addModuleRepos() {
-    this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
+    if (this.courseDetails.coursetype !== 'SCORM') {
+
+      this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
+    }
+    else {
+      this.toast.warning("SCORM course cannot be edited")
+    }
   }
 
   crsDetails() {
@@ -178,9 +193,9 @@ export class AddModuleComponent implements OnInit {
     this.hoverName = '';
   }
 
-  onHover(moduleName) {
+  onHover(n) {
     this.isHover = true;
-    this.hoverName = moduleName;
+    this.hoverName = n;
   }
   onRefernceBtnClick() {
     this.router.navigate(['/Admin/auth/Wca/rf']);

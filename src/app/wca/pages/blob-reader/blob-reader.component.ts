@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { WcaService } from '../../services/wca.service';
+import { BlobServicesService } from '../../services/azureBlobService/blob-services.service';
 
 @Component({
   selector: 'app-blob-reader',
@@ -8,17 +10,26 @@ import { WcaService } from '../../services/wca.service';
 })
 export class BlobReaderComponent implements OnInit {
 
-  constructor(private wcaService: WcaService) { }
+  public exploredData: any;
+
+  constructor(private dialogRef: MatDialogRef<BlobReaderComponent>,
+    private azureBlobService: BlobServicesService) { }
 
   ngOnInit() {
-    console.log('blob reader loaded..');
     this.getContainers();
   }
 
   getContainers() {
-    this.wcaService.getContainers().subscribe( res => {
+    this.azureBlobService.getContainerBlobs().subscribe(res => {
       console.log(res);
+      if (res.statusBool) {
+        this.exploredData = res.data;
+      }
     });
+  }
+
+  getURL(row) {
+    this.dialogRef.close(row);
   }
 
 }

@@ -118,6 +118,9 @@ export class WcaService {
 
   createDraft(draft) { return this.http.post(environment.wcaapiurl + 'api/courses/createscrom', draft); }
 
+  saveCourse(data) { return this.http.post(environment.wcaapiurl + 'api/courses/createcourse', data); }
+
+
   getCourseDetails(id) { return this.http.get(environment.wcaapiurl + 'api/courses/getscrommodules?courseid=' + id); }
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
@@ -131,6 +134,10 @@ export class WcaService {
 
   updatecoursetomudules(data) {
     return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
+  }
+
+  deactivateModule(data) {
+    return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
   }
 
 
@@ -150,23 +157,5 @@ export class WcaService {
       query: get_module_topic
     });
   }
-
-  // Blob storage services
-
-  private containerName = "container1";
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json' })
-      // .append('x-ms-version', '2014-02-14')
-      // .append('x-ms-date', 'Fri, 26 Jun 2015 23:39:12 GMT')
-      // .append('Authorization', 'SharedKey myaccount:' + environment.accountKey)
-      .append('Access-Control-Allow-Methods', 'GET')
-      .append('Access-Control-Allow-Origin', '*')
-      .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method")
-      .append('Accept', 'application/json')
-  };
-
-  getContainers(): Observable<any> {
-    const subURL = '/api/azureStorage' + '/readBlodContainer';
-    return this.http.get(environment.blobURL + subURL, this.httpOptions).pipe(tap());
-  }
+    
 }

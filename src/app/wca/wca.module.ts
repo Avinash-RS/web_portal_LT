@@ -34,10 +34,7 @@ import { ModuleRepositoryComponent } from './pages/module-repository/module-repo
 import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
-
-
-
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 const routes: Routes = [
 
@@ -66,6 +63,7 @@ const routes: Routes = [
   declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent],
   imports: [
     CoreModule,
+    CKEditorModule,
     MatDialogModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
@@ -89,7 +87,7 @@ const routes: Routes = [
     MatSlideToggleModule
   ],
   providers: [Apollo],
-  entryComponents: [ViewCoursesComponent],
+  entryComponents: [ViewCoursesComponent, BlobReaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }

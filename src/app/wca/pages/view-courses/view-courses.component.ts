@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { WcaService } from '@wca/services/wca.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-courses',
@@ -12,7 +14,11 @@ export class ViewCoursesComponent implements OnInit {
   isHover: any;
   currentTop: any;
   currentText: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog) { }
+  modifiedData: { moduleid: string; modulestatus: string; createdby: string; };
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog,
+    public toast: ToastrService,
+    private apiService: WcaService, 
+  ) { }
 
   ngOnInit() {
     this.moduleData = this.data.module
@@ -40,6 +46,20 @@ export class ViewCoursesComponent implements OnInit {
   }
   onhoverLeave() {
     this.currentText = '';
-   this.isHover = false;
+    this.isHover = false;
+  }
+
+  deactivateModule(e) {
+    this.modifiedData = {
+      "moduleid": this.moduleData.moduleid,
+      "modulestatus": String(!e.checked),
+      "createdby": this.moduleData.createdby ? this.moduleData.createdby : ''
+    }
+    let msg = e.checked ? 'Module deactivated successfully' : 'Module activated successfully';
+    this.apiService.deactivateModule(this.modifiedData).subscribe((res: any) => {
+      if(res.Code == 200) {
+        this.toast.success(msg);
+      }
+    })
   }
 }

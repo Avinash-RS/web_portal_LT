@@ -1,3 +1,12 @@
-<p>
-  blob-reader works!
-</p>
+<mat-grid-list cols="2" rowHeight="2:1" *ngFor='let dt of exploredData'>
+  <mat-grid-tile>
+    <mat-button (click)='getURL(dt)'>
+      <mat-card>
+        <mat-card-title>{{dt.name}}</mat-card-title>
+        <mat-card-content>
+          <mat-icon>videocam</mat-icon>
+        </mat-card-content>
+      </mat-card>
+    </mat-button>
+  </mat-grid-tile>
+</mat-grid-list>

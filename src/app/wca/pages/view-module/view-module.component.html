@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
-            </a></li>
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
 
         <li class="breadcrumb-item">
@@ -39,20 +37,21 @@
 
 
 
-                                    <div class="wrapper_1">
+                                    <div class="wrapper_1"  class="{{this.scormPath.length == 0 ? '' : 'disable-select-btn'}}">
                                         <mat-icon (click)="navChooseTemp()">add_circle_outline</mat-icon>
                                     </div>
                                     <div style="margin: -28px 97px 0px 0px">
-                                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+
+                                        <mat-panel-title (click)="navChooseTemp()" class="{{this.scormPath.length == 0 ? 'f_wt_500 f_size_18 color_blue' : 'f_wt_500 f_size_18 color_blue disable-select-btn'}}">
                                             Add Module
                                         </mat-panel-title>
                                     </div>
 
-                                    <div class="wrapper_1" (click)="navModuleRepository()">
-                                        <mat-icon>add_circle_outline</mat-icon>
+                                    <div class="{{this.scormPath.length == 0 ? 'wrapper_1' : 'wrapper_1 disable-select-btn'}}">
+                                        <mat-icon (click)="navModuleRepository()">add_circle_outline</mat-icon>
                                     </div>
-                                    <div style="margin: -28px 0px 0px 30px">
-                                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                                    <div style="margin: -28px 0px 0px 30px" >
+                                        <mat-panel-title (click)="navModuleRepository()" class="{{this.scormPath.length == 0 ? 'f_wt_500 f_size_18 color_blue' : 'f_wt_500 f_size_18 color_blue disable-select-btn'}}">
                                             Add Module from repository
                                         </mat-panel-title>
                                     </div>
@@ -66,20 +65,20 @@
                                     <button for="upload-photo" mat-stroked-button class="upload-btn"
                                         (click)="file.click()">
 
-                                        <span *ngIf="this.scormPath.length == 0" style="padding: 2px 176px 13px 0px;">Upload a SCORM Package </span>
+                                        <span *ngIf="this.scormPath.length == 0"
+                                            style="padding: 2px 176px 13px 0px;">Upload a SCORM Package </span>
 
-                                     <span *ngIf="this.scormPath.length > 0" style="padding: 2px 176px 13px 0px;">SCORM Package uploaded</span>
+                                        <span *ngIf="this.scormPath.length > 0"
+                                            style="padding: 2px 176px 13px 0px;">SCORM Package uploaded</span>
 
-                                        <mat-icon (click)="add(in)" style="margin:2px -156px 3px -157px;">file_upload
-                                        </mat-icon>
-
-
-
-
-
+                                            <ng-container *ngIf="this.scormPath.length == 0; else scromDel">
+                                                <mat-icon (click)="add(in)" style="margin:2px -156px 3px -157px;">file_upload
+                                                </mat-icon>
+                                            </ng-container>
+                                            <ng-template #scromDel>
+                                                <mat-icon (click)="deleteFile($event)" style="margin:2px -156px 3px -157px;">delete</mat-icon>
+                                            </ng-template>
                                     </button>
-
-
                                     <!-- <button  class="backgroundcol2">
                             <div> <mat-icon (click)="add(in)" style="margin:59px -353px -70px -218px;"
                                 >file_upload</mat-icon></div>
