@@ -12,6 +12,7 @@
       "element",
       "app",
       "kebab-case"
-    ]
+    ],
+    "ban-types": [true, ["Object", "Use {} instead."], ["String"]]
   }
 }
