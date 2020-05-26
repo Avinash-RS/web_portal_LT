@@ -30,8 +30,7 @@ export class AddModuleComponent implements OnInit {
   scormPath: string = '';
 
   constructor(public spinner: NgxSpinnerService,
-    private alertService: AlertServiceService,
-    public gs:GlobalServiceService,
+    private alertService: AlertServiceService,private gs: GlobalServiceService,
     public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
 
   ngOnInit() {

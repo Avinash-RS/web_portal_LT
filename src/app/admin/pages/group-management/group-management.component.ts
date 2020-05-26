@@ -264,27 +264,27 @@ export class GroupManagementComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result1: any) => {
-          if (result1.data.groupstatus.success === true) {
-            this.editstatus = true;
-            this.currentpath = null;
-            this.editgroupname = '';
-            this.disabled = true;
-            this.getgroups();
-            this.cdr.detectChanges();
-            Swal.fire(
-              status,
-              'Group  has been ' + status + 'd',
-              'success'
-            );
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: result1.data.groupstatus.message,
-            });
-          }
-        });
+        // this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result1: any) => {
+        //   if (result1.data.groupstatus.success === true) {
+        //     this.editstatus = true;
+        //     this.currentpath = null;
+        //     this.editgroupname = '';
+        //     this.disabled = true;
+        //     this.getgroups();
+        //     this.cdr.detectChanges();
+        //     Swal.fire(
+        //       status,
+        //       'Group  has been ' + status + 'd',
+        //       'success'
+        //     );
+        //   } else {
+        //     Swal.fire({
+        //       icon: 'error',
+        //       title: 'Oops...',
+        //       text: result1.data.groupstatus.message,
+        //     });
+        //   }
+        // });
       }
     });
     // this.checked ="Deactivate"
