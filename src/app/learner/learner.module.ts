@@ -41,7 +41,7 @@ import { LandingpageComponent } from './pages/landingpage/landingpage.component'
 
 
 const routes: Routes = [
-  { path: '', component: LearnerHomeComponent },
+  { path: '', component: LandingpageComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
   { path: 'register', component: RegistrationComponent, data: { title: 'Learner  Registration' } },
@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'Dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'Landing', component: LandingpageComponent}
+  { path: 'home', component: LearnerHomeComponent,canActivate: [AuthGuard],data: { title: 'Learner home' }}
 
 
 ];
