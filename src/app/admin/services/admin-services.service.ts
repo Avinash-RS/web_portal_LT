@@ -10,7 +10,9 @@ import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
   , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
-  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue,getAdminOverview,getAdmindashboardCoursetab,getLeranertabCount,getActiveinactiveCount,getLoginsPerDay,getUsersInWeeks,getProfessionalStudent,enrolledCourse,
+  getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue,getAdminOverview,
+  getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount,getLoginsPerDay,getUsersInWeeks,getProfessionalStudent,
+  enrolledCourse, getgroupbyid
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -159,12 +161,18 @@ export class AdminServicesService {
     });
   }
 
-  changegroupstatus(groupid, status) {
+  updategroup(data) {
     return this.Apollo.query({
       query: groupstatus,
       variables: {
-        group_id: groupid,
-        is_active: status
+        is_active: data.is_active,
+        group_id: data.group_id,
+        group_name: data.group_name,
+        group_type: data.group_type,
+        parent_group_id: data.parent_group_id,
+        hierarchy_id: data.hierarchy_id,
+        admin_id: data.admin_id,
+        created_by: data.created_by
       }
     });
   }
@@ -511,6 +519,15 @@ export class AdminServicesService {
         update_type: data.update_type,
         status_reason: data.status_reason,
         enrollments: data.enrollments
+      }
+    });
+  }
+
+  getgroupbyid(groupid) {
+    return this.Apollo.query({
+      query: getgroupbyid,
+      variables: {
+        group_id: groupid
       }
     });
   }
