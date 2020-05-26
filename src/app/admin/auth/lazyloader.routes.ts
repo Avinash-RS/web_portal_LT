@@ -27,9 +27,9 @@ export const appRoutes: Routes = [{
         { path : 'usergroup' , component: GroupManagementComponent, data: { title: 'User Group creation' }},
         { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
         { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, },
-        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, },
+        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Catalogue Management' }, },
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, },
-        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' }, },
+        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Enrollment' }, },
 
         {
             path: 'Wca',
