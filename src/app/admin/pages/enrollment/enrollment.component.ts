@@ -178,7 +178,7 @@ export class EnrollmentComponent implements OnInit {
   approve(tablevalue) {
     Swal.fire({
       title: '<div>Approval Confirmation</div>',
-      icon: 'warning',
+      // icon: 'warning',
       text: 'Are you sure want to proceed?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

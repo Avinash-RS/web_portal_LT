@@ -54,6 +54,9 @@ img {
     border-radius: 0px;
 }
 
+.mat-stroked-button[disabled] {
+    color : #ebe7e7
+}
 .mat-progress-bar {
     display: block;
     height: 6px;

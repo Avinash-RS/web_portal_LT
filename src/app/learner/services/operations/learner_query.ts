@@ -441,6 +441,7 @@ export const get_all_course_by_usergroup = gql`
     course_id
     course_description
     course_name
+    enrollment_status
     created_at
     updated_at
     version
