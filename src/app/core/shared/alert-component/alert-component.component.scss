@@ -48,3 +48,7 @@ p {
     }
 
 }
+
+.msg:first-letter {
+    text-transform: capitalize
+}

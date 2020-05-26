@@ -36,22 +36,17 @@ export class GroupManagementComponent implements OnInit {
   pagenumber = 0;
   formsubmitted = false;
   @Input()
-  disabled: boolean = true;
+  disabled = true;
   toggleevent: any;
   editgroupname: string;
-  loader: boolean = false;
+  group_name: any;
+  loader = false ;
   ELEMENT_DATA: PeriodicElement[] = [];
   resultsLength: number = null;
   displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   groupid: any;
-  /** tree source stuff */
-  readonly dataSource$: BehaviorSubject<any[]>;
-  readonly treeSource: MatTreeNestedDataSource<any>;
-  /** tree control */
-  readonly treeControl = new NestedTreeControl<any>(node => node.children);
-  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   checked: any = 'Deactivate';
   selectedArray: any = [];
   trackDetails: any;
@@ -59,6 +54,16 @@ export class GroupManagementComponent implements OnInit {
   changeGrpForm: any;
   userGroupChange: any;
   catalogueList: any;
+  catalogue: any;
+  allgroups: any;
+  selectedcatalogue: any;
+  oldcatalogue: any;
+    /** tree source stuff */
+    readonly dataSource$: BehaviorSubject<any[]>;
+    readonly treeSource: MatTreeNestedDataSource<any>;
+    /** tree control */
+    readonly treeControl = new NestedTreeControl<any>(node => node.children);
+    readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
               private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
               private router: Router, private dialog: MatDialog, ) {
@@ -69,12 +74,12 @@ export class GroupManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ggg")
     localStorage.setItem('role', 'admin');
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
     this.adminDetails = this.gs.checkLogout();
     this.getgroups();
     this.getallcatelogue();
+    this.getallgroups();
   }
 
   getgroups() {
@@ -105,6 +110,12 @@ export class GroupManagementComponent implements OnInit {
     });
   }
 
+  getallgroups() {
+    this.adminservice.getUserGroup()
+      .subscribe((result: any) => {
+        this.allgroups = result.data.get_user_group.message;
+      });
+  }
   /** sub group */
   loadsubgroup(node?: any) {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
@@ -148,21 +159,39 @@ export class GroupManagementComponent implements OnInit {
     });
   }
 
+
+  selectcatalogue(event, state: any) {
+    if (event.source.selected) {
+      console.log('You selected: ' , state);
+      this.selectedcatalogue = state;
+    }
+  }
+
   selectgroup(node) {
     if (node.checkbox === true) {
       this.currentpath = node;
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
-      // this.editcataloguename = node.
+      this.group_name = node.group_name;
       this.getAllUser(0);
+      console.log(node);
+      this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
+        console.log(result?.data?.getgroupbyid?.message);
+        this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
+        this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
+        console.log(this.catalogue);
+      });
     } else {
       this.disabled = true;
       this.editstatus = true;
       this.currentpath = null;
       this.editgroupname = '';
+      this.oldcatalogue = '';
+      this.catalogue = '';
     }
   }
+
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.adminservice.getUserSession(element._id).subscribe((track: any) => {
@@ -173,8 +202,8 @@ export class GroupManagementComponent implements OnInit {
           this.profileDetails = result.data && result.data.get_all_learner_detail &&
             result.data.get_all_learner_detail.message && result.data.get_all_learner_detail.message[0];
           this.dialog.open(templateRef);
-        })
-    })
+        });
+    });
   }
 
   closedialogbox() {
@@ -228,17 +257,17 @@ export class GroupManagementComponent implements OnInit {
           group_name: form.value.group_name, group_type: 'new',
           parent_group_id: this.currentpath ? this.currentpath.group_id : 'null',
           hierarchy_id: this.currentpath ? hierarchy : 'h1',
-          admin_id: this.adminDetails._id, catalogue_id: form.value.catelogue.catalogue_id
+          admin_id: this.adminDetails._id, catalogue_id: form.value.catalogue
         };
         this.adminservice.creategroup(data).subscribe((result: any) => {
+          console.log(result.data)
           if (result.data.createusergroup.success === true) {
             this.reset();
-            this.alert.openAlert('Success !', 'Group Created Successfully');
-
+            this.alert.openAlert('Success !', 'Group created successfully');
             form.reset();
             this.getgroups();
           } else {
-            this.alert.openAlert(result.data.createusergroup.message, null);
+            this.alert.openAlert(result.data.createusergroup.error_msg, null);
           }
         });
       }
@@ -250,41 +279,46 @@ export class GroupManagementComponent implements OnInit {
     this.currentpath.is_active = !event.checked;
   }
 
-  changegroupstatus() {
+  updategroupdetails(groupform) {
+    console.log(String(this.oldcatalogue) === String(groupform.value.catalogue))
     let value: any;
     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
-    const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
+    // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
-      title: 'Are you sure want to ' + status +
-        ' the group  ' + this.currentpath.group_name + '?',
-      icon: 'warning',
+      title: 'Are you sure want to update the group ' + this.currentpath.group_name + '?',
+      // icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.value) {
-        // this.adminservice.changegroupstatus(this.currentpath.group_id, value).subscribe((result1: any) => {
-        //   if (result1.data.groupstatus.success === true) {
-        //     this.editstatus = true;
-        //     this.currentpath = null;
-        //     this.editgroupname = '';
-        //     this.disabled = true;
-        //     this.getgroups();
-        //     this.cdr.detectChanges();
-        //     Swal.fire(
-        //       status,
-        //       'Group  has been ' + status + 'd',
-        //       'success'
-        //     );
-        //   } else {
-        //     Swal.fire({
-        //       icon: 'error',
-        //       title: 'Oops...',
-        //       text: result1.data.groupstatus.message,
-        //     });
-        //   }
-        // });
+        const data = {
+          catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : groupform.value.catalogue          ,
+          catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : this.selectedcatalogue.catalogue_name,
+          is_active: value, group_id : this.currentpath.group_id, group_name: groupform.value.group_name,
+          group_type: this.currentpath.group_type, parent_group_id : this.currentpath.parent_group_id,
+          hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
+        };
+        console.log(data);
+        this.adminservice.updategroupdetails(data).subscribe((result1: any) => {
+          if (result1.data.groupstatus.success === true) {
+            this.reset();
+            this.getgroups();
+            this.cdr.detectChanges();
+            Swal.fire(
+              status,
+              'Group  has been  updated successfully',
+              'success'
+            );
+          } else {
+            Swal.fire({
+              // icon: 'error',
+              // title: 'Oops...',
+              text: result1.data.groupstatus.message,
+            });
+          }
+        });
       }
     });
     // this.checked ="Deactivate"
@@ -294,10 +328,12 @@ export class GroupManagementComponent implements OnInit {
       this.editstatus = false;
 
       this.editgroupname = groupname;
+      this.catalogue = this.oldcatalogue?.catalogue_id;
 
     } else {
       this.editstatus = true;
       this.editgroupname = '';
+      this.catalogue = '';
 
     }
 
@@ -307,6 +343,7 @@ export class GroupManagementComponent implements OnInit {
     this.editgroupname = '';
     this.disabled = true;
     this.currentpath = null;
+    this.catalogue = '';
   }
 
   gotoAddUser() {
