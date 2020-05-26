@@ -86,9 +86,10 @@ export class GroupManagementComponent implements OnInit {
   getgroups() {
     this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
-    this.adminservice.getUserGroup()
+    this.adminservice.getgroup(data)
       .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message;
+        console.log(result.data);
+        this.groups = result.data.getgroup.message;
         this.adminservice.getgroup(data).subscribe((result1: any) => {
           this.groups = result1.data.getgroup.message;
           this.treeSource.data = null;

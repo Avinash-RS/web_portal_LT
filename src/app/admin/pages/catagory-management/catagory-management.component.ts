@@ -425,7 +425,7 @@ export class CatagoryManagementComponent implements OnInit {
       'Subcategory' : 'Supersubcategory';
     Swal.fire({
       // title: 'Are you sure want to delete ' + type.toLowerCase() + ' ?',
-      title: 'This category will be deleted',
+      title: 'This ' + type.toLowerCase()  + ' will be deleted',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Confirm',
