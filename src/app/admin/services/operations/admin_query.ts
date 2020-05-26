@@ -988,7 +988,7 @@ export const getActiveinactiveCount = gql`
       }
   }`;
 // getting Professional Student  users  for dashboard
-export const getProfessionalStudent  = gql`
+export const getProfessionalStudent = gql`
   query getProfessionalStudent ($days: Int){
     getProfessionalStudent (days: $days) {
       success
@@ -1006,7 +1006,7 @@ export const getProfessionalStudent  = gql`
   }`;
 
 // getting enrolled and free course category and sub-category for admin dashboard
-export const enrolledCourse  = gql`
+export const enrolledCourse = gql`
   query enrolledCourse ($days: Int){
     enrolledCourse(days: $days) {
       success
@@ -1033,42 +1033,42 @@ export const enrolledCourse  = gql`
 export const getgroupbyid = gql`
 query getgroupbyid($group_id : String!){
   getgroupbyid(group_id: $group_id){
-        success
-        error_msg
-        message{
-            _id
-            group_name
-            group_type
-            parent_group_id
-            hierarchy_id
-            admin_id
-            created_on
-            updated_on
-            created_by
-            is_active
-            group_id
-            catalogue_mapping_details{
-                    _id
-                    admin_id
-                    catalogue_id
-                    created_on
-                    updated_on
-                    created_by
-                    is_active
-                    group_id
-                    catalogue_details{
-                            _id
-                            catalogue_name
-                            catalogue_description
-                            creator_id
-                            catalogue_id
-                            created_on
-                            updated_on
-                            created_by
-                            is_active
-                    }
-                    category_id
-            }
+    success
+    error_msg
+    message{
+      _id
+      group_name
+      group_type
+      parent_group_id
+      hierarchy_id
+      admin_id
+      created_on
+      updated_on
+      created_by
+      is_active
+      group_id
+      catalogue_mapping_details{
+        _id
+        admin_id
+        catalogue_id
+        created_on
+        updated_on
+        created_by
+        is_active
+        group_id
+        catalogue_details{
+          _id
+          catalogue_name
+          catalogue_description
+          creator_id
+          catalogue_id
+          created_on
+          updated_on
+          created_by
+          is_active
         }
+        category_id
+      }
+    }
   }
 }`;
