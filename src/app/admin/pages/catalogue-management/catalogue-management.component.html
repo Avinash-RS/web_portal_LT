@@ -2,9 +2,9 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
     <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue Management</li>
-    <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" 
-    (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
-    showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null;getCatalogDetail()">{{catalog.catalogue_name}}
+    <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="showCourses = showListCatalogue = showAddCatalogueForm = false;
+    showHeader = showCatalogDetail = true;type = null;courseList = [];totalCount = null;getCatalogDetail()">
+      {{catalog.catalogue_name}}
     </li>
     <li class="breadcrumb-item " *ngIf="showAddCatalogueForm">New catalogue</li>
     <li class="breadcrumb-item " *ngIf="type === 'add'">Add Courses</li>
@@ -26,45 +26,13 @@
       <div class="col-lg-3 col-md-4 col-sm-12 col-12 center p-r-0 p-b-0">
         <button mat-raised-button [disabled]="showAddCatalogueForm"
           class="addcat-btn width_70 m-b-10 center color_white" (click)="gotoAdd()">
-          <span class="material-icons" style="vertical-align: middle;">add</span>New Catalogue
+          <span class="material-icons" style="vertical-align: middle;">add</span>New catalogue
         </button>
       </div>
     </div>
     <!-- end of button - add catalogue ( row ) -->
     <!-- start of header ( row ) *ngIf="showHeader && showCatalogDetail"-->
     <div class="row no_margin p-5px" *ngIf="showHeader && showCatalogDetail">
-      <!-- <div class="col-lg-9 col-md-9 col-sm-12 col-12 m-b-10">
-        <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-6 col-6"></div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-t-10">
-            <strong class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name || 'Catalogue Name'}}</strong>
-            <span class="material-icons none f_size_17" style="vertical-align: middle; color:darkGrey;"
-              matTooltip="{{catalog?.catalogue_description || 'Catalogue Description'}}">info_outline</span>
-            <strong class="cat-name-card  m-l-20 border-radius-5 color_blue">{{catalog?.group_details?.group_name  || 'Group Name'}}</strong>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-5px float_right">
-        <div class="row m-r-5">
-          <div class="col-1"></div>
-          <div class=" col-lg-5 col-md-5 col-sm-5 col-5 ">
-            <button mat-raised-button class="width_95 f_size_12 header-btn m-w-100 add-btn color_white border-radius-5"
-              (click)="getCoursesForCatalog()" [disabled]="ELEMENT_DATA.length == 0">
-              <span class="material-icons f_size_17" style="vertical-align: middle;">add</span>Add
-            </button>
-          </div>
-          <div class=" col-lg-5 col-md-5 col-sm-5 col-5 float_right">
-            <button mat-raised-button [disabled]="ELEMENT_DATA.length == 0"
-              class="width_95 f_size_12 header-btn m-w-100 remove-btn color_white border-radius-5"
-              (click)="getCoursesInCatalog()" [disabled]="ELEMENT_DATA.length == 0">
-              <span class="material-icons f_size_17" style="vertical-align: middle;">delete</span>Remove
-            </button>
-          </div>
-        </div>
-      </div> -->
-
-
-
       <div class="col-lg-4 col-md-2"></div>
       <div class="col-lg-4 col-md-5 col-sm-12 col-12">
         <div class="display_flex">
@@ -134,7 +102,7 @@
       </div>
       <br><br>
       <p class="center_align f_size_15" *ngIf="!loadingCatalogue && catalogueList.length == 0">
-        No Catalogues found
+        No catalogues found
       </p>
     </div>
     <div class="width_100 arrow-drop-down" *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">
@@ -156,7 +124,7 @@
             <input type="text" class="inputs border-radius-5 background_trans width_90"
               placeholder="Enter the catalogue name *" formControlName="catalogue_name">
             <div *ngIf="f.catalogue_name.touched && f.catalogue_name.errors" class="mand">
-              <div *ngIf="f.catalogue_name.errors.required">* Catalogue Name is required</div>
+              <div *ngIf="f.catalogue_name.errors.required">* Catalogue name is required</div>
             </div>
           </div>
         </div>
@@ -223,7 +191,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <p class="center_align f_size_15" *ngIf="!loadingCatalogue && ELEMENT_DATA.length == 0">
-        No Catalogue details found
+        No catalogue details found
       </p>
       <div class="width_100 arrow-drop-down" *ngIf="showCatalogDetail && ELEMENT_DATA.length > 0">
         <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCattalogueDetails()">
@@ -247,26 +215,6 @@
   <div class="card  col-lg-9 col-md-9 col-sm-12 col-12 right cardheight ">
     <!-- start of header row -->
     <div class="row no_margin p-5px">
-      <!-- <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-        <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-6 col-6"></div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 m-t-10 ">
-            <strong
-              class="cat-name-card  border-radius-5 color_blue">{{catalog?.catalogue_name || 'Catalogue Name'}}</strong>
-            <span class="material-icons none f_size_17" style="vertical-align: middle; color:darkGrey;"
-              matTooltip="{{catalog?.catalogue_name || 'Catalogue Description'}}">info_outline</span>
-            <strong
-              class="cat-name-card  m-l-20 border-radius-5 color_blue">{{catalog?.group_details?.group_name  || 'Group Name'}}</strong>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-5px float_right">
-        <button mat-raised-button class="width_50 f_size_13 header-btn m-w-100 edit-btn color_white border-radius-5"
-          (click)="openEdit(editDialog)">
-          <span class="material-icons f_size_17" style="vertical-align: middle;">edit</span>Edit
-        </button>
-      </div> -->
-
       <div class="col-lg-4 col-md-2"></div>
       <div class="col-lg-4 col-md-5 col-sm-12 col-12">
         <div class="display_flex">
@@ -291,17 +239,14 @@
     </div>
     <!-- end of  header row -->
 
-    <!-- hr tag -->
-
     <hr class="header-line m-l-20 m-r-20">
 
     <!-- start of view courses row -->
 
     <div class="row m-l-5 m-r-5">
       <div class="col-lg-2 col-md-2 col-sm-6 col-6">
-        <!-- <h3 class="font-display m-b-0 color_blue">295 courses > </h3> -->
         <div class="font-display color_blue m-l-10 m-b-0 f_size_16 f_wt_500">{{totalCount || 0}}
-          {{totalCount <= 1  ? 'Course > ' : 'Courses >'}}
+          {{totalCount > 1  ? 'Courses > ' : 'Course >'}}
         </div>
       </div>
       <div class="col-lg-7 col-md-7 col-sm-6 col-6 float_right">
@@ -398,7 +343,5 @@
     </mat-dialog-content>
     <br>
   </ng-template>
-
-
 </div>
 <br><br>
