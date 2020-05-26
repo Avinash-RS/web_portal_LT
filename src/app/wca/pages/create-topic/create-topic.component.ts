@@ -41,13 +41,14 @@ export class CreateTopicComponent implements OnInit {
   subtitles = [0];
   transcripts = [0];
   @ViewChild('urlValue') urlValue;
+  @ViewChild('fileInput3') fileInput3;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
     "Knowledge Check" : /(\.csv)$/i, 
-    SCROM: /(\.imsmanifest)$/i,
+    SCORM: /(\.imsmanifest)$/i,
     Video:/(\.vtt)$/i
   }
 
@@ -58,7 +59,7 @@ export class CreateTopicComponent implements OnInit {
     PPT: "(.ppt .pptx) are Allowed !!!",
     Video: "",
     Audio: "are Allowed !!!",
-    SCROM: "",
+    SCORM: "SCROM are Allowed !!!",
     "Knowledge Check": " (.csv) are Allowed !!!",
     Feedback: ""
   }
@@ -302,7 +303,7 @@ if (item) {
   // this.spinner.hide();
   // }
 
-  onSelectFile(fileInput: any, item, formdata: FormGroup, index) {    
+  onSelectFile(fileInput: any, item, formdata: FormGroup, index,textvalue,subTitleindex) {    
     if(item == undefined || item == null){
       item = {}
       item.name = "Video"
@@ -314,13 +315,13 @@ if (item) {
       var filePath = fileInput.target.files[0].name;
       const reader = new FileReader()      
       allowedExtensions = this.fileValidations[item.name];
-      if (item.name != 'SCROM' && !allowedExtensions.exec(filePath)) {
+      if (item.name != 'SCORM' && !allowedExtensions.exec(filePath)) {
           this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
           this.spinner.hide();
           fileInput.value = '';
           return false;
       } 
-      else if (item.name == 'SCROM'){
+      else if (item.name == 'SCORM'){
         this.spinner.show();
         let file = fileInput.target.files[0];
         let fileReader: FileReader = new FileReader();
@@ -330,7 +331,7 @@ if (item) {
           that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
           if (!that.isFileContent) {
             that.spinner.hide();
-            that.toast.warning('Kindly upload a valid SCROM file');
+            that.toast.warning('Kindly upload a valid SCORM file');
           }
           else {
             that.imageView = fileInput.target.files[0];
@@ -429,7 +430,7 @@ if (item) {
             this.spinner.hide();
            })
           } else if (item.name === 'Video') {
-            this.formVideo(formdata)
+            this.formVideo(formdata,"1",textvalue,"")
            } else if (item.name === 'Knowledge Check') { 
             this.spinner.show();           
             const formData2 = new FormData();
@@ -451,17 +452,20 @@ if (item) {
             this.spinner.hide();
           } 
         }
-      }
-
-      reader.addEventListener("load", () => {
-        if (item.name === 'PDF') {
-          this.demo(reader.result, formdata, index)
+        reader.addEventListener("load", () => {
+          if (item.name === 'PDF') {
+            this.demo(reader.result, formdata, index)
+          }
+        }, false);
+  
+        if (fileInput.target.files[0]) {
+          reader.readAsDataURL(fileInput.target.files[0]);
         }
-      }, false);
-
-      if (fileInput.target.files[0]) {
-        reader.readAsDataURL(fileInput.target.files[0]);
       }
+    }
+
+    else if (item.name == 'Video'){
+      this.formVideo(formdata,"2",textvalue,subTitleindex)
     }
   }
 
@@ -564,8 +568,23 @@ if (item) {
     "file" : "",
     "title" : []
   }
-  formVideo(formdata){
-    const formData4 = new FormData();
+  formVideo(formdata,triggerFun,textvalue,subTitleindex){
+    
+    if(triggerFun == "2"){
+      if(subTitleindex){     
+        this.subtitles.splice(subTitleindex, 1);
+        this.vidObj.title.splice(subTitleindex,1)
+    }else{
+      this.vidObj.file = textvalue
+      if (!formdata.get('topicimages').get(String(0))) {
+        (formdata.get('topicimages') as FormArray).push(this.topicImages());
+      }
+      formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
+      formdata.get('topictype').setValue("Video");
+    }
+      this.spinner.hide();
+    }else{
+      const formData4 = new FormData();
     formData4.append('excel', this.imageView);
     this.spinner.show();
     this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data:any) => {
@@ -578,7 +597,6 @@ if (item) {
           "name":"English",
           "file":path2
         }
-        this.vidObj.file = this.urlValue.nativeElement.value
         this.vidObj.title.push(valueFile)
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
@@ -590,10 +608,23 @@ if (item) {
     },err => {
        this.spinner.hide();
       })
+    }
+
   }
 
   addTopicFrom(event,type) {
     event.stopPropagation();
+    if(this.courseForm){
+      var repeatedVal = this.courseForm.value.coursedetails[0].moduledetails.reduce((a, e) => {
+        a[e.topicname] = ++a[e.topicname] || 0;
+        return a;
+      }, {});
+      var valueFind = this.courseForm.value.coursedetails[0].moduledetails.filter(e => repeatedVal[e.topicname])
+    }
+    if(valueFind.length > 0){
+      this.toast.warning("Topic name cannot be same for templates");
+      return false;
+    }
     if(this.urlValue){
       if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
         this.urlRequired = true;
@@ -605,7 +636,6 @@ if (item) {
     this.markFormGroupTouched(this.courseForm);
       if (this.query.edit || this.query.addModule) {
         this.courseForm.value.flag = 'false';
-
       } else {
         this.courseForm.value.flag = 'true';
 
@@ -621,7 +651,7 @@ if (item) {
       });
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
-       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';;
+       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
        this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
        this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
       this.spinner.show();
