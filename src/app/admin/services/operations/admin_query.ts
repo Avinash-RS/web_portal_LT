@@ -868,6 +868,11 @@ export const getAdminOverview = gql`
       DraftCourse
       TotalCourse
       newReg
+      totalEnrollbeforeOneDay
+      totalEnrollTillCurrentDay
+      totalLearTillCurrent
+      totalLearnerTillBefore
+      oneDayBeforeReg
       allEnrollement
       enrollPending 
       enrollmentApprove
@@ -903,9 +908,14 @@ export const getAdmindashboardCoursetab = gql`
       TotalCourse
       perMonth
       TotalCategoryCount
+      # availableCourseBeforeOneDayOfCurrentDate
+      # beforeOneDayCourseCount
+      # beforeOneDayCoun
       allLast30daysCourses{
       course_name
-      super_sub_category_id
+      super_sub_category_id {
+      super_sub_category_name
+      }
       category_id{
       category_name
       }
