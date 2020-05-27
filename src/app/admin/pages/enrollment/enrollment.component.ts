@@ -43,17 +43,19 @@ export class EnrollmentComponent implements OnInit {
     this.getenrolledcoursesindividual(this.enrollrequestdata);
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+    // tslint:disable-next-line:only-arrow-functions
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
       if(!data[sortHeaderId]) {
-        return this.sort.direction === "asc" ? '3' : '1';
+        return this.sort.direction === 'asc' ? '3' : '1';
       }
       return '2' + data[sortHeaderId].toLocaleLowerCase();
     };
@@ -228,7 +230,7 @@ export class EnrollmentComponent implements OnInit {
   reject(tablevalue) {
     console.log(tablevalue)
     Swal.fire({
-      title: '<div> Reason for Rejection</div>',
+      title: '<div> Reason for rejection</div>',
       // title: 'Reason for Rejection',
       input: 'textarea',
       showCancelButton: true,
