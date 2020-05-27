@@ -1,5 +1,5 @@
 <!-- start of nav-bar section  -->
-<div class="header">
+<!-- <div class="header">
   <div class="logo"><img src="../../assets/images/logo.png"></div>
   <div class="btn-class"><button class="button">BrowseCategories</button></div>
   <div class="link1"><a href="">what'sNew</a></div>
@@ -7,32 +7,27 @@
   <div class="link3"><a href="">FAQ</a></div>
   <div class="login"><a href="">login</a></div>
   <div class="btnclass"><button class="startedbutton">Get Started</button></div>
-</div>
+</div> -->
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
 
-<div class="w-100 h-100 p-3 " style="background-color: #eee; position: relative;">
+<!-- <div class="w-100 h-100 p-3 " style="background-color: #eee; position: relative;">
   <div class="headerline">
     Welcome to Your
   </div>
-
   <div class="headerline_2">
     Professional Community.
   </div>
-
   <p class="font-weight-bold" style="color: #007bff;margin-left: 10%;font-size: 102%;">This is the new way to learn
     online</p>
-
   <div style="width: 80%; position: relative; border:white">
     <div class="srh"> <input class="form-control" type="search" placeholder="course,title,Author,institution"
         aria-label="Search"></div>
     <div class="srh_btn"> <button class="btn btn-primary" type="submit">Search</button></div>
   </div>
-
   <button class="explore_btn">Explore
     More</button>
-  <!-- <div class="card" style="width:200px"> -->
   <div class="card showform">
     <div class="card-body">
       <button type="button" (click)="onClose()" class="close" aria-label="Close">
@@ -41,21 +36,15 @@
       <p class="font-weight-bold" style="margin-left: 10%;font-size: 102%;">Need Guidance</p>
       <form>
         <div class="form-group">
-
           <input type="text" class="form-control vcat" id="exampleInputEmail1" placeholder="Name">
-
         </div>
         <div class="form-group ">
-
           <input type="text" class="form-control" id="exampleInputPassword1" placeholder="EmailID"
             style=" color: white !important; background-color: #495057; opacity: 60%">
         </div>
-
         <div class="form-group">
-
           <select id="disabledSelect" class="form-control" placeholder="SelectCourse" style=" color: white;
         background-color: #495057;
-          
         opacity: 60%">
             <option>Select Course</option>
           </select>
@@ -66,7 +55,42 @@
       </form>
     </div>
   </div>
+</div> -->
+
+<div style="height: 10vh;">
+sdfddf
 </div>
+<div class="container">
+  <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-12 section_1_a"></div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+      <mat-card class="section_1_card_1 background_trans">
+        <mat-card-content>
+          <form [formGroup]="detailsForm">
+            <h2 style="text-align: center;"> Need Guidance </h2> <br>
+            <mat-card-content>
+              <div class="form-group">
+                <input type="text" name="username" formControlName="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="email" formControlName="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="course" formControlName="course" class="form-control">
+              </div>
+              <br>
+              <button id="login" mat-raised-button [disabled]="detailsForm.invalid" (click)="login()">Sign
+                in</button>
+            </mat-card-content>
+          </form>
+        </mat-card-content>
+        <br><br>
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
 <!-- End of card area -->
 <br>
 <!-- start of Personalized Learning -->
