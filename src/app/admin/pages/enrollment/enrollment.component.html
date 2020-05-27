@@ -7,6 +7,9 @@
 </nav>
 
 <div class="row">
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner diameter="30"></mat-spinner>
+  </div>
   <div class="col">
     <div class="toggle" style="margin-left:87px;margin-top: -37px;margin-bottom: 37px;">
       <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="user_group"
