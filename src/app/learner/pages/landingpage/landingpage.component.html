@@ -45,27 +45,22 @@
 
 <!-- start of card area -->
 
-<div class="w-100 h-100 p-3 " style="background-color: #eee; position: relative;">
+<!-- <div class="w-100 h-100 p-3 " style="background-color: #eee; position: relative;">
   <div class="headerline">
     Welcome to Your
   </div>
-
   <div class="headerline_2">
     Professional Community.
   </div>
-
   <p class="font-weight-bold" style="color: #007bff;margin-left: 10%;font-size: 102%;">This is the new way to learn
     online</p>
-
   <div style="width: 80%; position: relative; border:white">
     <div class="srh"> <input class="form-control" type="search" placeholder="course,title,Author,institution"
         aria-label="Search"></div>
     <div class="srh_btn"> <button class="btn btn-primary" type="submit">Search</button></div>
   </div>
-
   <button class="explore_btn">Explore
     More</button>
-  <!-- <div class="card" style="width:200px"> -->
   <div class="card showform">
     <div class="card-body">
       <button type="button" (click)="onClose()" class="close" aria-label="Close">
@@ -74,21 +69,15 @@
       <p class="font-weight-bold" style="margin-left: 10%;font-size: 102%;">Need Guidance</p>
       <form>
         <div class="form-group">
-
           <input type="text" class="form-control vcat" id="exampleInputEmail1" placeholder="Name">
-
         </div>
         <div class="form-group ">
-
           <input type="text" class="form-control" id="exampleInputPassword1" placeholder="EmailID"
             style=" color: white !important; background-color: #495057; opacity: 60%">
         </div>
-
         <div class="form-group">
-
           <select id="disabledSelect" class="form-control" placeholder="SelectCourse" style=" color: white;
         background-color: #495057;
-          
         opacity: 60%">
             <option>Select Course</option>
           </select>
@@ -99,7 +88,42 @@
       </form>
     </div>
   </div>
+</div> -->
+
+<div style="height: 10vh;">
+  sdfddf
 </div>
+<div class="container">
+  <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-12 section_1_a"></div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+      <mat-card class="section_1_card_1 background_trans">
+        <mat-card-content>
+          <form [formGroup]="detailsForm">
+            <h2 style="text-align: center;"> Need Guidance </h2> <br>
+            <mat-card-content>
+              <div class="form-group">
+                <input type="text" name="username" formControlName="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="email" formControlName="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="course" formControlName="course" class="form-control">
+              </div>
+              <br>
+              <button id="login" mat-raised-button [disabled]="detailsForm.invalid" (click)="login()">Sign
+                in</button>
+            </mat-card-content>
+          </form>
+        </mat-card-content>
+        <br><br>
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
 <!-- End of card area -->
 <br>
 <!-- start of Personalized Learning -->
@@ -178,6 +202,44 @@
   </ng-template>
   <br>
 </owl-carousel-o>
+
+<!-- <div class="row m-l-20 m-r-20 m-t-25">
+  <div class="col-md-11 center">
+    <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="1.7:2" (window:resize)="onResize($event)">
+      <mat-grid-tile *ngFor=" let course of courses; let i = index" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+        <mat-card class="p-5px course-card shadow width_80">
+          <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
+            (click)="selectCourse(course,i+'c')">
+          <mat-card-content>
+            <div class="row" style="height: 10vh;">
+              <div class="col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20" style="word-wrap: break-word">
+                {{course.name}}
+              </div>
+              <div class="col-6 m-t-10 m-b-20 display_flex">
+                <bar-rating [readOnly]="true" [rate]="courses.rating" [max]="5"></bar-rating>
+                &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
+              </div>
+            </div>
+            <mat-card-action>
+              <div class="row no_margin enroll_row">
+                <div class="col-6 f_sz_14 float_left no_padding learner-count">
+                  <span class="material-icons color_grey" style="vertical-align: bottom;">
+                    people
+                  </span> <small class="color_grey">2,500 learners</small>
+                </div>
+                <div class="col-6 float_right width_80 no_padding">
+                  <button id="enroll_now"> Enroll now
+                  </button>
+
+                </div>
+              </div>
+            </mat-card-action>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div> -->
 <br><br>
 <!-- End of Popular courses -->
 
