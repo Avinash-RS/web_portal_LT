@@ -28,6 +28,7 @@ import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { AuditlogComponent } from './auditlog/auditlog.component';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { ChartsModule } from 'ng2-charts';
    
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
+    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

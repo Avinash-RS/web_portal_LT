@@ -29,6 +29,7 @@ import { DndDirective } from '../core/dnd.directive';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 import { PipeModule } from '../../pipes/pipe.module';
 // import { SearchPipe } from '../../pipes/search.pipe';
+import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -93,7 +94,7 @@ import { ChartsModule } from 'ng2-charts';
     declarations: [DndDirective, CatalogueManagementComponent,AdminDashboardComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
-        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
+        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
