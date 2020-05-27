@@ -53,6 +53,14 @@ mutation create_catelogue(
     success
     error_msg
     message
+    details{
+      _id
+      level
+      category_id
+      category_name
+      category_image
+      category_description
+    }
   }
 }`;
 
@@ -89,8 +97,11 @@ mutation update_notification($report_id: String!){
 }`;
 
 export const groupstatus = gql`
-mutation groupstatus($group_id: String!, $is_active: Boolean!){
-  groupstatus(group_id : $group_id,is_active: $is_active){
+mutation groupstatus($catalogue_id: String!,$catalogue_name: String!,$is_active: Boolean!,$group_id: String!,$group_name: String!,
+  $group_type: String!,$parent_group_id: String!,$hierarchy_id: String!,$admin_id: String!,$created_by: String!){
+  groupstatus(catalogue_id: $catalogue_id,catalogue_name: $catalogue_name,is_active: $is_active,group_id : $group_id,
+    group_name: $group_name,group_type: $group_type,
+    parent_group_id : $parent_group_id,hierarchy_id: $hierarchy_id,admin_id: $ admin_id,created_by: $created_by){
       success
       message
       error_msg
@@ -147,6 +158,9 @@ mutation  create_master_catalogue($catalogue_name: String! ,$catalogue_descripti
     success
     error_msg
     message
+    details{
+      catalogue_id
+    }
   }
 }`;
 

@@ -1,9 +1,9 @@
 
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title class="msg">{{data.title}}</h2>
 
 <mat-dialog-content *ngIf = "data.msg">
 
-<p> {{data.msg}} </p>
+<p class="msg"> {{data.msg}} </p>
 </mat-dialog-content>
 
 <mat-dialog-actions *ngIf = "data.type=='showClose'">
