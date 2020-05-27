@@ -871,6 +871,7 @@ export const getAdminOverview = gql`
       allEnrollement
       enrollPending
       enrollRejected
+      enrollmentApprove
       perDays{
         _id
         count

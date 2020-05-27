@@ -300,12 +300,9 @@ public isCollapsed1 = false;
   activeInactivegraphdata: any;
   learnertabData: any;
   stuVsProfData: any;
-  // studentVsProfDays: any;
   enrollementpert: any;
   top5CourseDefault = 'topfiveEnroll';
   top5CourseData: any;
-  // userGroupCount: any;
-  // loginperdayCount: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -469,22 +466,40 @@ public isCollapsed1 = false;
    onTabChanged(event){
      if(event.index == 1){
        this.top5Course(this.top5CourseDefault);
-      // this.getCoursesTabData();
      }else if (event.index == 2){
-      // this.getLearnerTabCount();
       this.loginPerDayChart(this.loginPerDayFilter);
       this.totalVsActiveLernerChart(this.actvstotday);
       this.stuVsProfChart(this.stuvsprofDay);
      }
     }
        getEnrolledAndFreeCourseData(days){
-        this.EnrolledCoursesJson= [];
         this.service.enrolledCourse(parseInt(days) ? parseInt(days) : 7).subscribe((res: any) => {
           if(res.data.enrolledCourse.success == true){
           this.enrolledAndFreeCourseData = res.data.enrolledCourse.message;
-          // this.enrolledAndFreeCourseData = '';
+          //Enrolled and Free course chart
+          this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
+          this.enrollCoursesData = [[res.data.enrolledCourse.freecourse,res.data.enrolledCourse.enrollcourse]];
           for (const iterator of this.enrolledAndFreeCourseData) {
+            if(iterator.category_id==null){
+              var category_id = {
+                category_id :'NA'
+              }
+              iterator.category_id=category_id
+          } 
+          if(iterator.parent_sub_category_id==null){
+              var parent_sub_category_id = {
+                parent_sub_category_id:'NA'
+              }
+              iterator.parent_sub_category_id=parent_sub_category_id;
+          } 
           
+          if(iterator.super_sub_category_id==null){
+              var super_sub_category_id={
+                super_sub_category_name:'NA'
+              }
+              iterator.super_sub_category_id=super_sub_category_id.super_sub_category_name
+          }
+
             this.EnrolledCoursesJson.push({
               category:iterator.category_id.category_name,
               courseName:iterator.course.course_name,
@@ -493,11 +508,9 @@ public isCollapsed1 = false;
               superSubCategory:iterator.super_sub_category_id
             }); 
         }
+       
         Array.prototype.push.apply(this.EnrolledCourse_ELEMENT_Data,this.EnrolledCoursesJson);
           this.enrolledCoursedataSource = new MatTableDataSource<PeriodicElement>(this.EnrolledCourse_ELEMENT_Data);
-          //Enrolled and Free course chart
-          this.enrollCoursesLabel = ['Free Courses', 'Enrolled Courses'];
-          this.enrollCoursesData = [[res.data.enrolledCourse.freecourse,res.data.enrolledCourse.enrollcourse]];
           }else{
             this.alert.openAlert('Please try after sometime',null);
           }
@@ -518,8 +531,6 @@ public isCollapsed1 = false;
       getLearnerTabCount(){
         this.service.getLeranertabCount().subscribe((res: any) => {
           this.learnertabData = res.data.getLeranertabCount.message;
-          // this.userGroupCount = res.data.getLeranertabCount.message.total_user_group_count[0].totalCount;
-          // this.loginperdayCount = res.data.getLeranertabCount.message.today_login_count[0].todayCount;
          })
       }
    // getting Course Tab Cart count
@@ -528,6 +539,19 @@ public isCollapsed1 = false;
         this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
         this.courseCount = res.data.getAdmindashboardCoursetab.message;
         for (const iterator of this.courseCount.allLast30daysCourses) {
+          if(iterator.category_id.category_name==null){
+              iterator.category_id.category_name='NA'
+          } 
+          if(iterator.parent_sub_category_id.sub_category_name==null){
+              iterator.parent_sub_category_id.sub_category_name='NA';
+          } 
+          
+          if(iterator.super_sub_category_id==null){
+              var super_sub_category_id={
+                super_sub_category_name:'NA'
+              }
+              iterator.super_sub_category_id=super_sub_category_id
+          }
             this.jsonData.push({category:iterator.category_id.category_name,
             courseName:iterator.course_name,
             subCategory:iterator.parent_sub_category_id.sub_category_name,
