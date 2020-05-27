@@ -19,7 +19,7 @@ export class LearnerprofileComponent implements OnInit {
         moment(element?.course_start_datetime).format('LT') || '' : element.lastlogin ? moment(element?.lastlogin).format('LT') || '' :
          moment(element?.last_logout).format('LT') || ''}`},
     // { columnDef: 'course_start_datetime',   header: 'Time', cell: (element: any) => `${element?.course_start_datetime || '' }`   },
-    { columnDef: 'course_id', header: 'Business Action', cell: (element: any) => `${element?.course_id ? 'Started' :
+    { columnDef: 'course_id', header: 'Business action', cell: (element: any) => `${element?.course_id ? 'Started' :
      element.lastlogin ? 'Login' : 'Logout '  }`   },
     { columnDef: 'course_name',   header: 'Context', cell: (element: any) => `${element?.course_name ? 'Course' :
        'User ' }`   },
@@ -30,9 +30,9 @@ export class LearnerprofileComponent implements OnInit {
   ];
 
   columns1 = [
-    { columnDef: 'course_name', header: 'Course Name', cell: (element: any) => `${element.course_name}` },
+    { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element.course_name}` },
     {
-      columnDef: 'enrollment_start', header: 'Enrolled Date', cell: (element: any) =>
+      columnDef: 'enrollment_start', header: 'Enrolled date', cell: (element: any) =>
         `${ element?.enrollment_start ? moment(element?.enrollment_start).format('LL') : ''}`
     },
     { columnDef: 'status_reason', header: 'Status', cell: (element: any) => `${element.status_reason}` },
