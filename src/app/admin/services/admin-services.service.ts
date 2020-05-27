@@ -8,11 +8,11 @@ import {
 
 import {
   get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
-  , getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
+  get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy,
+  getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
   getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue, getAdminOverview,
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
-  enrolledCourse, getgroupbyid,getTopfiveDashboardType
+  enrolledCourse, getgroupbyid, getTopfiveDashboardType
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -535,35 +535,35 @@ export class AdminServicesService {
     });
   }
   //getting admin dashboard overview data
-  getAdminOverview(days) {
-    return this.Apollo.query({
-      query: getAdminOverview,
-      variables: {
-        days: days,
-      }
-    });
-  }
-  // getting admin dashboard data for course tab
-  getAdmindashboardCoursetab() {
-    return this.Apollo.query({
-      query: getAdmindashboardCoursetab,
-      variables: {}
-    });
-  }
+  // getAdminOverview(days) {
+  //   return this.Apollo.query({
+  //     query: getAdminOverview,
+  //     variables: {
+  //       days: days,
+  //     }
+  //   });
+  // }
+  // // getting admin dashboard data for course tab
+  // getAdmindashboardCoursetab() {
+  //   return this.Apollo.query({
+  //     query: getAdmindashboardCoursetab,
+  //     variables: {}
+  //   });
+  // }
 
-  //getting learner dashboard count
-  getLeranertabCount() {
-    return this.Apollo.query({
-      query: getLeranertabCount,
-      variables: {}
-    });
-  }
-//getting top 5 course 
-  getTopfiveDashboardType(type){
+  // //getting learner dashboard count
+  // getLeranertabCount() {
+  //   return this.Apollo.query({
+  //     query: getLeranertabCount,
+  //     variables: {}
+  //   });
+  // }
+  // //getting top 5 course 
+  getTopfiveDashboardType(type) {
     return this.Apollo.query({
       query: getTopfiveDashboardType,
       variables: {
-        type:type
+        type: type
       }
     });
   }
