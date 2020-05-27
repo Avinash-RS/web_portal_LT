@@ -130,7 +130,7 @@ export class CreateTopicComponent implements OnInit {
   topicItem(mod_index, i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      videosubtitle : [''],
+      videosubtitle : ['false'],
       topicvalue : [''],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
