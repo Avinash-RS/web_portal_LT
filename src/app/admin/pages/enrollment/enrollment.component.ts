@@ -16,7 +16,7 @@ import * as moment from 'moment';
 export class EnrollmentComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  selectiontype = 'individual';
+  selectiontype = 'user_group';
   selectedcheckbox = true;
   selectedcheckbox1 = true;
   selection = new SelectionModel<any>(true, []);
@@ -38,14 +38,11 @@ export class EnrollmentComponent implements OnInit {
 
   ngOnInit() {
     this.enrollrequestdata = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
-    this.getenrolledcoursesindividual(this.enrollrequestdata);
+    this.getenrolledcoursesgroup(0);
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // tslint:disable-next-line:only-arrow-functions
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
@@ -270,7 +267,7 @@ export class EnrollmentComponent implements OnInit {
         Swal.fire(
               'Rejection',
               'Rejection with the comments shared to the user mail id',
-              'error'
+              // 'error'
             );
         }
         });
