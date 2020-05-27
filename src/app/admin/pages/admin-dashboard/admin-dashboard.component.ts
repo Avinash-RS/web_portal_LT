@@ -302,6 +302,8 @@ public isCollapsed1 = false;
   stuVsProfData: any;
   // studentVsProfDays: any;
   enrollementpert: any;
+  top5CourseDefault = 'topfiveEnroll';
+  top5CourseData: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -462,6 +464,7 @@ public isCollapsed1 = false;
 
    onTabChanged(event){
      if(event.index == 1){
+       this.top5Course(this.top5CourseDefault);
       this.jsonData= [];
       this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
       this.courseCount = res.data.getAdmindashboardCoursetab.message;
@@ -476,12 +479,13 @@ public isCollapsed1 = false;
       this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
       })
      }else if (event.index == 2){
+      this.service.getLeranertabCount().subscribe((res: any) => {
+        this.learnertabData = res.data.getLeranertabCount.message;
+       })
       this.loginPerDayChart(this.loginPerDayFilter);
       this.totalVsActiveLernerChart(this.actvstotday);
       this.stuVsProfChart(this.stuvsprofDay);
-      this.service.getLeranertabCount().subscribe((res: any) => {
-       this.learnertabData = res.data.getLeranertabCount.message;
-      })
+    
      }
     }
        getEnrolledAndFreeCourseData(days){
@@ -509,5 +513,17 @@ public isCollapsed1 = false;
             this.alert.openAlert('Please try after sometime',null);
           }
         })
+      }
+
+      top5Course(type){
+        this.service.getTopfiveDashboardType(type).subscribe((res: any) => {
+          if(res.data.getTopfiveDashboardType.success == 'true'){
+            this.top5CourseData = res.data.getTopfiveDashboardType.data;
+          }else{
+            this.alert.openAlert('Please try after sometime',null);
+          }
+
+         })
+        
       }
 }
