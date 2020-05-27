@@ -3,12 +3,36 @@
 
 //Mythreyi
 
+.f_init {
+    font-size: initial;
+}
+
 :host ::ng-deep .widthClass .owl-carousel .owl-item {
     width: 350px !important;
 }
 
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    position: absolute;
+    font-size: 32px;
+    border-radius: unset;
+    padding: 12px ;
+    opacity: 1;
+    font-weight: 300;
+    top: -41%;
+}
 
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+    left: 80%;
+    background: #ffffff;
+    color: $color-blue !important;
+    border: 1px solid $color-blue !important;
+}
+
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+    left: 83.5%;
+    background: $color-blue;
+    color: white;
+    border: 1px solid $color-blue !important;
 }
 
 //End of Mythreyi
@@ -437,7 +461,7 @@
 }
 
 .m-t-10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 .m-t-25 {
@@ -494,11 +518,13 @@
         width: 80% !important;
     }
 }
+
 .containerOverlay:hover .overlay {
     opacity: 0.9;
     filter: alpha(opacity=100);
     background-color: white;
 }
+
 .course-image {
     height: inherit;
     object-fit: cover;
