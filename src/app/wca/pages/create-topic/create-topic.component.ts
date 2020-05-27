@@ -431,7 +431,7 @@ if (item) {
             this.spinner.hide();
            })
           } else if (item.name === 'Video') {
-            this.formVideo(formdata,"1",textvalue,"")
+            this.formVideo(formdata,"1",textvalue,subTitleindex)
            } else if (item.name === 'Knowledge Check') { 
             this.spinner.show();           
             const formData2 = new FormData();
@@ -572,11 +572,7 @@ if (item) {
         }
         var vidObj = {
           "file" : textvalue,
-          "title" : [ {
-            "code":"",
-            "name":"",
-            "file":""
-          }]
+          "title" : ["1"]
         }
         formdata.get('topicimages').get(String(0)).setValue(vidObj);  
         formdata.get('topictype').setValue("Video");
@@ -588,14 +584,25 @@ if (item) {
     this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data:any) => {
       this.spinner.show();
       if(data && data.Message =="Success") {
-        this.clearFormArray(formdata.get("topicimages") as FormArray)
+        // this.clearFormArray(formdata.get("topicimages") as FormArray)
         let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
         let valueFile = {
           "code":"en",
           "name":"English",
           "file":path2
         }
-        formdata.value.topicimages[0].title[subTitleindex].setValue(valueFile)
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        var vidObj = {
+          "file" : textvalue,
+          "title" : ["1"]
+        }
+        if(formdata.value.topicimages.length == 0){
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);  
+        }
+        formdata.get('topictype').setValue("Video");
+        formdata.value.topicimages[0].title[subTitleindex] = valueFile
         // this.vidObj.title.push(valueFile) 
         this.spinner.hide();
       }
@@ -643,6 +650,7 @@ if (item) {
           control.get('topictype').setValue("Feedback");
         }
       });
+      console.log("FormValue",this.courseForm.value)
     if(this.courseForm.valid) {
       const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
        this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
@@ -737,11 +745,7 @@ if (item) {
         if(!formdata.value.topicimages[0].file ){
           var vidObj = {
             "file" : "",
-            "title" : [ {
-              "code":"",
-              "name":"",
-              "file":""
-            }]
+            "title" : ["1"]
           }
           formdata.get('topicimages').get(String(0)).setValue(vidObj);   
         }
@@ -765,23 +769,23 @@ if (item) {
   addSubTile(value,formdata){
 
     if(value == 'sub'){
-      formdata.value.topicimages[0].title.push([])
+      formdata.value.topicimages[0].title.push((formdata.value.topicimages[0].title.length + 1).toString())
     }
     else{
       this.transcripts.push(this.transcripts.length)
     }
-
+    console.log(formdata.value.topicimages[0])
   }
   removeSubTile(index,value,formdata){
     
-    if(value == 'sub'){      
-      // this.subtitles.splice(index, 1);
-      formdata.value.topicimages[0].title.splice(index, 1)
+    if(value == 'sub'){   
+      formdata.value.topicimages[0].title.splice(index, 1);
+      console.log(formdata.value.topicimages[0])
+    return false;
     }
     else{
       this.transcripts.splice(index, 1);
     }
-    
   }
   
   openFeedback(){

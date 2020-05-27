@@ -164,7 +164,6 @@
                                                                 <div class="col-md-4">
                                                                     <div class="vidCol1">
                                                                         <div class="subTitle">
-                                                                            <!-- Editing now -->
                                                                             <mat-slide-toggle [checked]="subTitleVal" (change)="toggle_sub_trans($event,'subtitle',j)">Subtitle</mat-slide-toggle>
                                                                         </div>
                                                                         <div *ngIf="j?.value?.vidsubtitle == 'True'">
@@ -173,12 +172,12 @@
                                                                                         <mat-option *ngFor="let item of language" class="h30" [value]="item.name">{{item.name}}</mat-option>                                                                                        
                                                                                       </mat-select>                                                                                 
                                                                                 <div class="chooseFile">
-                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">
+                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">
                                                                                     <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
                                                                                 </div>
                                                                                   <div class="addSub">
                                                                                     <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j)">add_circle</mat-icon>
-                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)" (click)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">delete</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)" (click)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">delete</mat-icon>
                                                                                   </div>                                                                             
                                                                             </div>
                                                                         </div>
