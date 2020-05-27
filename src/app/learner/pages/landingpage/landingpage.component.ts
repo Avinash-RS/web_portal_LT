@@ -11,7 +11,7 @@ export class LandingpageComponent implements OnInit {
   hoverIdx = -1;
 
   customOptions: OwlOptions = {
-    loop: true,
+    loop: false,
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
