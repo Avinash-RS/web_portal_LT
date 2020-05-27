@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
+import { tap } from 'rxjs/operators'
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
 import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca_query";
@@ -162,4 +163,5 @@ export class WcaService {
       query: get_module_topic
     });
   }
+    
 }
