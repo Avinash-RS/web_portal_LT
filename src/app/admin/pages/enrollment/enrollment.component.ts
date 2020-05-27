@@ -270,7 +270,7 @@ export class EnrollmentComponent implements OnInit {
         Swal.fire(
               'Rejection',
               'Rejection with the comments shared to the user mail id',
-              'error'
+              // 'error'
             );
         }
         });
