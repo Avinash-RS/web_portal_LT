@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-landingpage',
@@ -10,7 +11,7 @@ export class LandingpageComponent implements OnInit {
   courses: { name: string; description: string; src: string; rating: number }[];
   // hoverIdx = -1;
   breakpoint: number;
-
+  detailsForm: FormGroup;
   customOptions: OwlOptions = {
     loop: false,
     mouseDrag: false,
@@ -18,7 +19,7 @@ export class LandingpageComponent implements OnInit {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
-    navText: ['', ''],
+    navText: ['<', '>'],
     responsive: {
       0: {
         items: 1
@@ -36,7 +37,15 @@ export class LandingpageComponent implements OnInit {
     nav: true
   };
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
+
+    this.detailsForm = this.formBuilder.group({
+      username: new FormControl(''),
+      email: new FormControl(''),
+      course: new FormControl('')
+    });
+
+
     this.courses = [
       {
         name: 'Javascript',
