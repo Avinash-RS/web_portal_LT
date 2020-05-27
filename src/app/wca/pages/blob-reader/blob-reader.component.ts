@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { WcaService } from '../../services/wca.service';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { BlobServicesService } from '../../services/azureBlobService/blob-services.service';
 
 @Component({
@@ -12,6 +11,11 @@ export class BlobReaderComponent implements OnInit {
 
   public exploredData: any;
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    (event.code === 'Escape') && this.closeModel();
+  }
+
   constructor(private dialogRef: MatDialogRef<BlobReaderComponent>,
     private azureBlobService: BlobServicesService) { }
 
@@ -22,13 +26,17 @@ export class BlobReaderComponent implements OnInit {
   getContainers() {
     this.azureBlobService.getContainerBlobs().subscribe(res => {
       if (res.statusBool) {
-        this.exploredData = res.data;
-      }
+        this.exploredData = res.data
+      };
     });
   }
 
   getURL(row) {
     this.dialogRef.close(row);
   }
+
+  closeModel() {
+    this.dialogRef.close(false);
+  } 
 
 }
