@@ -304,6 +304,8 @@ public isCollapsed1 = false;
   enrollementpert: any;
   top5CourseDefault = 'topfiveEnroll';
   top5CourseData: any;
+  // userGroupCount: any;
+  // loginperdayCount: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -323,9 +325,11 @@ public isCollapsed1 = false;
     this.newRegistrationsChart(this.chartFilterdays);
     this.activeAndInactiveLearnerChart(this.actvsinactDay);
     this.stuVsProfChart(this.stuvsprofDay);
+    this.getLearnerTabCount();
+    this.getCoursesTabData();
   }
   gotoCoursePage(type){
-    if (type == 'draft' || type == 'published'){
+    if (type == 'draft' || type == 'created'){
       this.route.navigateByUrl('/Admin/auth/listCourses', { state: { type: type } });
     }else{
       this.route.navigateByUrl('/Admin/auth/enrollment');
@@ -465,31 +469,16 @@ public isCollapsed1 = false;
    onTabChanged(event){
      if(event.index == 1){
        this.top5Course(this.top5CourseDefault);
-      this.jsonData= [];
-      this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
-      this.courseCount = res.data.getAdmindashboardCoursetab.message;
-      for (const iterator of this.courseCount.allLast30daysCourses) {
-          this.jsonData.push({category:iterator.category_id.category_name,
-          courseName:iterator.course_name,
-          subCategory:iterator.parent_sub_category_id.sub_category_name,
-          superSubCategory:iterator.super_sub_category_id.super_sub_category_name
-        }); 
-      }
-      Array.prototype.push.apply(this.ELEMENT_DATA,  this.jsonData);
-      this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-      })
+      // this.getCoursesTabData();
      }else if (event.index == 2){
-      this.service.getLeranertabCount().subscribe((res: any) => {
-        this.learnertabData = res.data.getLeranertabCount.message;
-       })
+      // this.getLearnerTabCount();
       this.loginPerDayChart(this.loginPerDayFilter);
       this.totalVsActiveLernerChart(this.actvstotday);
       this.stuVsProfChart(this.stuvsprofDay);
-    
      }
     }
        getEnrolledAndFreeCourseData(days){
-           this.EnrolledCoursesJson= [];
+        this.EnrolledCoursesJson= [];
         this.service.enrolledCourse(parseInt(days) ? parseInt(days) : 7).subscribe((res: any) => {
           if(res.data.enrolledCourse.success == true){
           this.enrolledAndFreeCourseData = res.data.enrolledCourse.message;
@@ -522,8 +511,31 @@ public isCollapsed1 = false;
           }else{
             this.alert.openAlert('Please try after sometime',null);
           }
-
          })
-        
+      }
+
+   // getting Learner Tab Cart count
+      getLearnerTabCount(){
+        this.service.getLeranertabCount().subscribe((res: any) => {
+          this.learnertabData = res.data.getLeranertabCount.message;
+          // this.userGroupCount = res.data.getLeranertabCount.message.total_user_group_count[0].totalCount;
+          // this.loginperdayCount = res.data.getLeranertabCount.message.today_login_count[0].todayCount;
+         })
+      }
+   // getting Course Tab Cart count
+      getCoursesTabData(){
+        this.jsonData= [];
+        this.service.getAdmindashboardCoursetab().subscribe((res: any) => {
+        this.courseCount = res.data.getAdmindashboardCoursetab.message;
+        for (const iterator of this.courseCount.allLast30daysCourses) {
+            this.jsonData.push({category:iterator.category_id.category_name,
+            courseName:iterator.course_name,
+            subCategory:iterator.parent_sub_category_id.sub_category_name,
+            superSubCategory:iterator.super_sub_category_id.super_sub_category_name
+          }); 
+        }
+        Array.prototype.push.apply(this.ELEMENT_DATA,  this.jsonData);
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+        })
       }
 }

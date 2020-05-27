@@ -468,27 +468,27 @@ export class AdminServicesService {
 
   // Dashboard
   //getting admin dashboard overview data
-  getAdminOverview(days) {
-    return this.Apollo.query({
-      query: getAdminOverview,
-      variables: {
-        days: days,
-      }
-    });
-  }
+  // getAdminOverview(days) {
+  //   return this.Apollo.query({
+  //     query: getAdminOverview,
+  //     variables: {
+  //       days: days,
+  //     }
+  //   });
+  // }
   // getting admin dashboard data for course tab
-  getAdmindashboardCoursetab() {
-    return this.Apollo.query({
-      query: getAdmindashboardCoursetab,
-      variables: {}
-    });
-  }
-  getLeranertabCount() {
-    return this.Apollo.query({
-      query: getLeranertabCount,
-      variables: {}
-    });
-  }
+  // getAdmindashboardCoursetab() {
+  //   return this.Apollo.query({
+  //     query: getAdmindashboardCoursetab,
+  //     variables: {}
+  //   });
+  // }
+  // getLeranertabCount() {
+  //   return this.Apollo.query({
+  //     query: getLeranertabCount,
+  //     variables: {}
+  //   });
+  // }
   //getting Active and in-active chart data
   getActiveinactiveCount(days) {
     return this.Apollo.query({

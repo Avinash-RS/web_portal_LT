@@ -863,69 +863,72 @@ export const getAdminOverview = gql`
     getAdminOverview(days: $days) {
       success
       error_msg
-      message{
+    message{
       PublishCourse
       DraftCourse
       TotalCourse
       newReg
-      beforeOneDayCourseCount
-      todayAllcourseCount
-      totalEnrollbeforeOneDay
-      totalEnrollTillCurrentDay
-      totalLearTillCurrent
-      totalLearnerTillBefore
-      oneDayBeforeReg
       allEnrollement
       enrollPending
-      enrollmentApprove
       enrollRejected
       perDays{
-      count
-      _id
+        _id
+        count
       }
       TotalActiveInActiveLearner{
-      Active
-      count
-      InActive
+        Active
+        InActive
+      }
+      totalLearTillCurrent
+      availableCoursePec{
+        IncDecPec
+        valueIncDecPec
+      }
+      totalEnrollPec{
+        IncDecPec
+        valueIncDecPec
+      }
+      totalLearnerPec{
+        IncDecPec
+        valueIncDecPec
       }
     }
   }
   }`;
 
 export const getAdmindashboardCoursetab = gql`
-  query getAdmindashboardCourseta{
+  query getAdmindashboardCoursetab{
     getAdmindashboardCoursetab {
       success
       error_msg
-      message{
-      level1_count{
-      level1_count
+      message
+    {
+      allLast30daysCourses{
+        course_name
+        super_sub_category_id
+        {
+          super_sub_category_name
         }
-      level2_count{
-      level2_count
-      }
-      level3_count{
-      level3_count
+        category_id{
+          category_name
+        }
+        parent_sub_category_id{
+          sub_category_name
+        }
       }
       TotalCourse
       perMonth
       TotalCategoryCount
-      beforeOneDayCourseCount
-      todayAllcourseCount
-      beforeOneDayCountCategory
-      todayCategorycount
-      allLast30daysCourses{
-      course_name
-      super_sub_category_id {
-      super_sub_category_name
+      availableCoursePec{
+        IncDecPec
+        valueIncDecPec
       }
-      category_id{
-      category_name
+      totalCategoryPec
+      {
+        IncDecPec
+        valueIncDecPec
       }
-      parent_sub_category_id{
-      sub_category_name
-      }
-      }
+      
     }
    }
   }`;
@@ -965,20 +968,25 @@ export const getLoginsPerDay = gql`
 export const getLeranertabCount = gql`
   query getLeranertabCount{
       getLeranertabCount {
-      success
-      message {
-      login_diff
+        success
+      message{
       subscribeUser
-      today_login_count{
-      _id
-      todayCount
-      }
+      today_login_count
+      total_user_group_count
       user_group_diff
-      total_user_group_count{
-      _id
-      totalCount
+      login_percentage{
+        IncDecPec
+        valueIncDecPec
       }
+      userGrpPec{
+        IncDecPec
+        valueIncDecPec
       }
+      subscribeUser_percentage{
+        IncDecPec
+        valueIncDecPec
+      }
+    }
     }
   }`;
 // getting active and inactive users  for dashboard
