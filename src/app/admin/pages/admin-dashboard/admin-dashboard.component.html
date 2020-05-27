@@ -158,7 +158,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Total enrollments</h3>
-              <span class="count">{{newRegisterLearses?.totalEnrollTillCurrentDay}}</span>
+              <span class="count">{{newRegisterLearses?.allEnrollement}}</span>
             </div>
     
             <div class="col-md-4 icon bg-brown">
@@ -503,7 +503,7 @@
                               <div class="example-container1 ">
                               <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable"  >
                                 <ng-container matColumnDef="position">
-                                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                                  <th mat-header-cell *matHeaderCellDef> No. Enrolled Courses</th>
                                   <td mat-cell *matCellDef="let element; let i = index"> {{i}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="courseName">
@@ -537,7 +537,7 @@
                               <!--  -->
                               <table mat-table [dataSource]="enrolledCoursedataSource" class="mat-elevation-z8" *ngIf="isEnrolledCoursesEnable" >
                                 <ng-container matColumnDef="position">
-                                  <th mat-header-cell *matHeaderCellDef> No </th>
+                                  <th mat-header-cell *matHeaderCellDef> No Enrolled Courses </th>
                                   <td mat-cell *matCellDef="let element let i = index"> {{i +1}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="courseName">
@@ -755,13 +755,23 @@
           </div>
 
           <div class="row margin-to">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.beforeOneDayCountCategory / (courseCount?.TotalCategoryCount -  courseCount?.beforeOneDayCountCategory) | percent}}</span>
+              <span class="trendno">{{courseCount?.totalCategoryPec.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.totalCategoryPec.valueIncDecPec}}%</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
             </div>
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -788,12 +798,19 @@
           </div>
 
           <div class="row ">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.TotalCourse - courseCount?.todayAllcourseCount) | percent}}</span>
+              <span class="trendno">{{courseCount?.availableCoursePec.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.availableCoursePec.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
