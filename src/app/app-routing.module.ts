@@ -28,17 +28,6 @@ const routes: Routes = [
     path:'Wca',
     loadChildren: './wca/wca.module#WcaModule',
     data : {title:'Web Content Authoring'}
-  },
-  {
-    path:'ppt1',
-    component: Ppt1Component,
-    data : {title:'Sample PPt1'}
-  }
-  ,
-  {
-    path:'ppt2',
-    component: Ppt2Component,
-    data : {title:'Sample PPt1'}
   }
 
 ];

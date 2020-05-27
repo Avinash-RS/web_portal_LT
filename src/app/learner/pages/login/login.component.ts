@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
-              var ps = btoa(this.loginForm.value.password);
+              let ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner')
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');
               localStorage.setItem('token',loginresult.data.login.message.token)
-              var ps = btoa(this.loginForm.value.password);
+              let ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               //if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated)
