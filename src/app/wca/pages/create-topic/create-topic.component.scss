@@ -304,6 +304,16 @@ input[type=text]
   border-radius: 5px;
 }
 
+.timeInput{
+    width: 15% !important;
+    height: 84%;
+    padding: 0px !important;
+    margin: 0px !important;    
+    text-align: inherit !important;
+    float: left !important;
+}
+
+
 .inputs{
     border: 1px solid;
     padding: 8px !important;
@@ -469,7 +479,8 @@ padding-left: 15px;
 
 .spanTime{
     color: $color-darkGrey;
-    padding-right: 22px;
+    padding-right: 11px;
+    padding-top: 5px;
 }
 .btnprev{
     border-radius: 40px;
@@ -798,3 +809,7 @@ background-color: $color-blue!important;
      .mat-form-field-appearance-outline .mat-form-field-infix{
         padding: 0em 0 1em 0 !important;
     }   
+
+.ml10{
+    margin-left: 10%;
+}

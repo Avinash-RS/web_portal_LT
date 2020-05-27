@@ -34,7 +34,7 @@ import { ModuleRepositoryComponent } from './pages/module-repository/module-repo
 import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 const routes: Routes = [
@@ -64,7 +64,6 @@ const routes: Routes = [
   declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent],
   imports: [
     CoreModule,
-    CKEditorModule,
     MatDialogModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,

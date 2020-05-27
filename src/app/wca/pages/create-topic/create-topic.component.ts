@@ -41,8 +41,8 @@ export class CreateTopicComponent implements OnInit {
   selected = 'English';
   subtitles = [0];
   transcripts = [0];
-  @ViewChild('urlValue') urlValue;
   @ViewChild('fileInput3') fileInput3;
+  @ViewChild('modName') modName;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
@@ -130,13 +130,15 @@ export class CreateTopicComponent implements OnInit {
   topicItem(mod_index, i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      vidsubtitle : [''],
+      videosubtitle : [''],
+      topicvalue : [''],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
           return this.topicImages()
         }) : [],Validators.compose([Validators.required])),
       topicstatus:['true'],
-      topictype:[null]
+      topictype:[null],
+      topictime:[null]
     });
   }
 
@@ -144,7 +146,6 @@ export class CreateTopicComponent implements OnInit {
     return this.formBuilder.control("")
   }
 
-  public urlForm: FormGroup;
 
   constructor(
     public spinner: NgxSpinnerService,
@@ -155,9 +156,7 @@ export class CreateTopicComponent implements OnInit {
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
   ) {
-    this.urlForm = this.formBuilder.group({
-      'videoURI': [null, Validators.compose([Validators.required])]
-    });
+ 
   }
 
   ngOnInit() {
@@ -570,6 +569,9 @@ export class CreateTopicComponent implements OnInit {
   }
   
   formVideo(formdata,triggerFun,textvalue,subTitleindex){
+    if(textvalue){
+      formdata.get('topicvalue').setValue(textvalue);
+    }
     if(triggerFun == "2"){     
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
@@ -616,24 +618,22 @@ export class CreateTopicComponent implements OnInit {
 
   addTopicFrom(event, type) {
     event.stopPropagation();
+    if(this.modName.nativeElement.value){
+      var topicName = this.modName.nativeElement.value
+      var index = this.courseForm.value.coursedetails.findIndex(x => x.modulename === topicName);
+    }
+    
     if (this.courseForm) {
-      var repeatedVal = this.courseForm.value.coursedetails[0].moduledetails.reduce((a, e) => {
+      var repeatedVal = this.courseForm.value.coursedetails[index].moduledetails.reduce((a, e) => {
         a[e.topicname] = ++a[e.topicname] || 0;
         return a;
       }, {});
-      var valueFind = this.courseForm.value.coursedetails[0].moduledetails.filter(e => repeatedVal[e.topicname])
+      var valueFind = this.courseForm.value.coursedetails[index].moduledetails.filter(e => repeatedVal[e.topicname])
     }
     if (valueFind.length > 0) {
       this.toast.warning("Topic name cannot be same for templates");
       return false;
     }
-    if (this.urlValue) {
-      if (this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined) {
-        this.urlRequired = true;
-        return false;
-      }
-    }
-    this.urlRequired = false;
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
     if (this.query.edit || this.query.addModule) {
@@ -642,7 +642,7 @@ export class CreateTopicComponent implements OnInit {
       this.courseForm.value.flag = 'true';
 
     }
-    (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][0]['controls']['moduledetails']['controls']).forEach(control => {
+    (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls']).forEach(control => {
       if (control.value.topictype == null) {
         if (!control.get('topicimages').get(String(0))) {
           (control.get('topicimages') as FormArray).push(this.topicImages());
@@ -651,6 +651,14 @@ export class CreateTopicComponent implements OnInit {
         control.get('topictype').setValue("Feedback");
       }
     });
+    // this.courseForm.value.coursedetails[index].template_details.filter((value)=>{
+    //   if (value.name == "Video"){
+    //     this.courseForm.get('topicvalue').setValidators([Validators.required]);
+    //         this.courseForm.get('topicvalue').updateValueAndValidity()  
+    //   }
+    //   return
+    // })
+    this.validateform(this.courseForm);
     if (this.courseForm.valid) {
       const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
@@ -687,6 +695,17 @@ export class CreateTopicComponent implements OnInit {
 
   }
 
+
+  validateform(courseForm){
+    const invalid = [];
+    const controls = courseForm.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    return invalid;
+  }
   previewimages(images, event, item) {
     event.stopPropagation();
     if (images && images.value && images.value.topicimages) {
@@ -738,7 +757,7 @@ export class CreateTopicComponent implements OnInit {
   toggle_sub_trans(event,value,formdata){
     if(value == "subtitle"){ 
       if(event.checked){
-        formdata.get('vidsubtitle').setValue("True");    
+        formdata.get('videosubtitle').setValue("True");    
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
         }
@@ -752,7 +771,7 @@ export class CreateTopicComponent implements OnInit {
         
       }
       else{
-        formdata.get('vidsubtitle').setValue("false"); 
+        formdata.get('videosubtitle').setValue("false"); 
         
       }
     }
@@ -793,8 +812,7 @@ export class CreateTopicComponent implements OnInit {
     $('#feedbackModal').appendTo("body");
   }
 
-  loadBlobs() {
-    console.log('www');
+  loadBlobs(fileInput, item, formdata, index, textvalue) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
       data: {},
       height: '70%',
@@ -803,7 +821,17 @@ export class CreateTopicComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(res => {
-      this.urlForm.patchValue({ videoURI: res.url });
+      if(res.url)
+      this.onSelectFile(fileInput, item, formdata, index, res.url,'')
+      else
+      this.toast.warning('Try after sometime');
     });
   }
+
+  isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 58))
+        return false;
+    return true;
+}
 }
