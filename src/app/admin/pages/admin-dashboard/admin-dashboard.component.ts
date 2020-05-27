@@ -482,7 +482,7 @@ public isCollapsed1 = false;
         this.service.enrolledCourse(parseInt(days) ? parseInt(days) : 7).subscribe((res: any) => {
           if(res.data.enrolledCourse.success == true){
           this.enrolledAndFreeCourseData = res.data.enrolledCourse.message;
-          this.enrolledAndFreeCourseData = '';
+          // this.enrolledAndFreeCourseData = '';
           for (const iterator of this.enrolledAndFreeCourseData) {
           
             this.EnrolledCoursesJson.push({
