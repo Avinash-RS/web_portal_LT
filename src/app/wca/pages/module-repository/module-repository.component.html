@@ -60,9 +60,10 @@
       <ng-container matColumnDef="select">
         <th mat-header-cell class="action-header" *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
-          <span class="{{element.isSelect ? 'disable-select-btn' : ''}}">
-            <button type="button" mat-button color="primary" (click)="onModuleSelection(element)"
-              [disabled]='element.isSelect' class="select-btn">Select</button>
+          <span>
+            <!-- <button type="button" mat-button color="primary" (click)="onModuleSelection(element)"
+              [disabled]='element.isSelect' class="select-btn">Select</button> -->
+              <mat-checkbox [checked]='element.isSelect' (change)="onModuleSelection(element,$event.checked)"></mat-checkbox>
           </span>
         </td>
       </ng-container>
@@ -70,7 +71,13 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-toolbar>
+      <mat-toolbar-row class="pagination-container">
+        <div></div>
+        <button type="button" mat-button color="primary" class="confirm-btn" (click)="onModuleSubmit()">Confirm</button>
+        <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+      </mat-toolbar-row>
+    </mat-toolbar>
 
-    <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

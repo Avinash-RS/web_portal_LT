@@ -16,16 +16,16 @@ export class ViewCoursesComponent implements OnInit {
   currentText: any;
   modifiedData: { moduleid: string; modulestatus: string; createdby: string; };
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog,
-    public toast: ToastrService,
-    private apiService: WcaService, 
+              public toast: ToastrService,
+              private apiService: WcaService,
   ) { }
 
   ngOnInit() {
-    this.moduleData = this.data.module
+    this.moduleData = this.data.module;
     this.moduleData.createdon = this.moduleData.createdon ? new Date(this.moduleData.createdon) : '';
     this.moduleData.coursedetails.forEach((data) => {
       data.createdon = data.createdon ? new Date(data.createdon) : '';
-    })
+    });
 
   }
 
@@ -41,7 +41,7 @@ export class ViewCoursesComponent implements OnInit {
       this.currentTop = {
         top: e.clientY + 10,
         left: e.clientX
-      }
+      };
     }
   }
   onhoverLeave() {
@@ -51,15 +51,15 @@ export class ViewCoursesComponent implements OnInit {
 
   deactivateModule(e) {
     this.modifiedData = {
-      "moduleid": this.moduleData.moduleid,
-      "modulestatus": String(!e.checked),
-      "createdby": this.moduleData.createdby ? this.moduleData.createdby : ''
-    }
-    let msg = e.checked ? 'Module deactivated successfully' : 'Module activated successfully';
+      moduleid: this.moduleData.moduleid,
+      modulestatus: String(!e.checked),
+      createdby: this.moduleData.createdby ? this.moduleData.createdby : ''
+    };
+    const msg = e.checked ? 'Module deactivated successfully' : 'Module activated successfully';
     this.apiService.deactivateModule(this.modifiedData).subscribe((res: any) => {
-      if(res.Code == 200) {
+      if (res.Code === 200) {
         this.toast.success(msg);
       }
-    })
+    });
   }
 }
