@@ -7,9 +7,7 @@
     width: 350px !important;
 }
 
-:host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-
-}
+:host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {}
 
 //End of Mythreyi
 
@@ -384,11 +382,13 @@
         width: 80% !important;
     }
 }
+
 .containerOverlay:hover .overlay {
     opacity: 0.9;
     filter: alpha(opacity=100);
     background-color: white;
 }
+
 .course-image {
     height: inherit;
     object-fit: cover;
@@ -404,4 +404,49 @@
 
 strong {
     letter-spacing: 0.4px !important;
+}
+
+.enroll_row {
+    bottom: 0vh;
+}
+
+// .course-card {
+//     padding-bottom: 5px !important;
+// }
+
+#enroll_now {
+    background-color: #1f3777;
+    color: #fff;
+    font-weight: 500 !important;
+    width: 70%;
+    border-radius: 0;
+    font-size: smaller;
+    text-align: center;
+    border: none;
+}
+
+
+.learner-count {
+    vertical-align: bottom;
+}
+
+:host ::ng-deep .br {
+    margin: 0 !important
+}
+
+:host ::ng-deep .br-default .br-unit {
+    margin-right: 5px;
+    font-size: 19px !important;
+    height: 18px;
+    width: 10px !important;
+}
+
+
+.course-card {
+    border-radius: 0;
+    background-color: #F5FAFA;
+}
+
+.shadow {
+    box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
