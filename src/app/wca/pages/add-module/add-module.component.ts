@@ -29,11 +29,11 @@ export class AddModuleComponent implements OnInit {
   scormPath = '';
 
   constructor(public spinner: NgxSpinnerService,
-              private alertService: AlertServiceService,
-              public toast: ToastrService,
-              private router: Router,
-              public route: ActivatedRoute,
-              public apiService: WcaService) { }
+    private alertService: AlertServiceService,
+    public toast: ToastrService,
+    private router: Router,
+    public route: ActivatedRoute,
+    public apiService: WcaService) { }
 
   ngOnInit() {
 
@@ -129,7 +129,7 @@ export class AddModuleComponent implements OnInit {
     const that = this;
     that.isFileContent = false;
     // tslint:disable-next-line:only-arrow-functions
-    fileReader.onloadend = function(x) {
+    fileReader.onloadend = function (x) {
       that.isFileContent = String(fileReader.result).includes('imsmanifest.xml') ? true : false;
       if (!that.isFileContent) {
         that.fileUploaded.nativeElement.value = '';
@@ -154,33 +154,35 @@ export class AddModuleComponent implements OnInit {
     });
   }
 
-  addToRepo(idx) {
-    this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
-      if (data) {
-        this.courseDetails.flag = 'false';
-        let count = 0;
-        let modDetails;
+  addToRepo(idx, module) {
+    if (!module.moduleid || module.moduleid.length == 0 ) {
+      this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
+        if (data) {
+          this.courseDetails.flag = 'false';
+          let count = 0;
+          let modDetails;
 
-        // tslint:disable-next-line:no-shadowed-variable
-        this.courseDetails.coursedetails.forEach((data: any) => {
-          if (idx === count) {
-            modDetails = data;
-            modDetails.coursedetails = [];
-            modDetails.courseid = this.courseDetails.courseid;
-            modDetails.coursename = this.courseDetails.coursename;
-          }
-          ++count;
-        });
+          // tslint:disable-next-line:no-shadowed-variable
+          this.courseDetails.coursedetails.forEach((data: any) => {
+            if (idx === count) {
+              modDetails = data;
+              modDetails.coursedetails = [];
+              modDetails.courseid = this.courseDetails.courseid;
+              modDetails.coursename = this.courseDetails.coursename;
+            }
+            ++count;
+          });
 
-        this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
-          if (res.Code === 200) {
-            this.moduleList.push(res.Result);
-            this.getCourseDetails();
-            this.toast.success('Module added to repository successfully');
-          }
-        });
-      }
-    });
+          this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
+            if (res.Code === 200) {
+              this.moduleList.push(res.Result);
+              this.getCourseDetails();
+              this.toast.success('Module added to repository successfully');
+            }
+          });
+        }
+      });
+    }
   }
   deleteScromFile(e) {
     this.scormPath = '';
