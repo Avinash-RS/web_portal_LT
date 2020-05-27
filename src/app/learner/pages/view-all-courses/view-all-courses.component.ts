@@ -7,6 +7,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Options } from 'ng5-slider';
 import * as _ from 'lodash';
 import Swal from 'sweetalert2';
+import { element } from 'protractor';
 declare var $: any;
 
 @Component({
@@ -256,9 +257,6 @@ export class ViewAllCoursesComponent implements OnInit {
     let authorIndex = this.authorDetails.indexOf(val);
     let coursepartnersIndex = this.coursepartners.indexOf(val);
     let coursemodeIndex = this.coursemode.indexOf(val);
-    // let cat1Index = this.allLvlCategoryFilterVal.level1.indexOf(val);
-    // let cat2Index = this.allLvlCategoryFilterVal.level2.indexOf(val);
-    // let cat3Index = this.allLvlCategoryFilterVal.level3.indexOf(val);
 
     if (langIndex > -1) {
       this.selectedlang.splice(langIndex, 1);
@@ -293,14 +291,7 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     }
-    // else if (cat1Index > -1) {
-    //   this.allLvlCategoryFilterVal.level1.splice(cat1Index, 1);
-    //   this.allLvlCategoryFilterVal.level1.forEach(element => {
-    //     if (element.category_name === val) {
-    //       element.checked = false;
-    //     }
-    //   });
-    // }
+    
     this.selectedFilter.filterVal = [];
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.selectedlang);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authorDetails);
@@ -317,6 +308,77 @@ export class ViewAllCoursesComponent implements OnInit {
         this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
       })
   }
+  removeCategoryVal(val){
+    let cat1Index;
+    let cat2Index;
+    let cat3Index;
+   
+    if(val.level == 1) cat1Index = this.Lvl1CatId.indexOf(val);
+    if (cat1Index > -1) {
+      this.selectedFilter.category1.splice(cat1Index, 1);
+      this.isSelected(val);
+      this.Lvl1CatId.find((item) => item.category_id === val.category_id) ?
+      this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== val.category_id) : this.Lvl1CatId.push(val);
+      this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id);
+      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level1 && this.allLvlCategoryFilterVal.level1.length) {
+        this.allLvlCategoryFilterVal.level1.forEach(element=>{
+          if(element.category_id == val.category_id) element.isSelected = false;
+        })
+      } else {
+        this.allLvlCategory.level1.forEach(element=>{
+          if(element.category_id == val.category_id) element.isSelected = false;
+        })
+      }
+
+    }
+    else if(val.level == 2) cat2Index = this.Lvl2CatId.indexOf(val);
+    if (cat2Index > -1) {
+      this.selectedFilter.category2.splice(cat2Index, 1);
+      this.isSelected(val);
+      this.Lvl2CatId.find((item) => item.sub_category_id === val.sub_category_id) ?
+      this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== val.sub_category_id) : this.Lvl2CatId.push(val);
+      this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id);
+      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level2 && this.allLvlCategoryFilterVal.level2.length) {
+        this.allLvlCategoryFilterVal.level2.forEach(element=>{
+          if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
+        })
+      } else {
+        this.allLvlCategory.level2.forEach(element=>{
+          if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
+        })
+      }
+    }
+    else if(val.level == 3) cat3Index = this.Lvl3CatId.indexOf(val);
+    if (cat3Index > -1) {
+      this.selectedFilter.category3.splice(cat3Index, 1);
+      this.isSelected(val);
+      this.Lvl3CatId.find((item) => item.super_sub_category_id === val.super_sub_category_id) ?
+      this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== val.super_sub_category_id) : this.Lvl1CatId.push(val);
+      this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id);
+      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level3 && this.allLvlCategoryFilterVal.level3.length) {
+        this.allLvlCategoryFilterVal.level3.forEach(element=>{
+          if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
+        })
+      } else {
+        this.allLvlCategory.level3.forEach(element=>{
+          if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
+        })
+      }
+    }
+   
+
+
+    var perPage = "10";
+    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+        this.allcourses = result['data']['getCourseCategorySearch']['data'];
+        this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
+        this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
+        this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
+        this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
+      })
+  }
+
   clearAll() {
     this.selectedFilter = [];
     this.selectedlang = [];
@@ -554,6 +616,7 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   countUpdateInstructor(array) {
+    if(this.guidelineSearchVal && this.guidelineSearchVal.author_data && array) {
     this.guidelineSearchVal.author_data.forEach(element => {
       array.forEach(element1 => {
         if (element.authordetails == element1.authordetails) {
@@ -561,9 +624,11 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     })
+  }
     this.guidelineSearchVal.author_data = array;
   }
-  countUpdateLanguage(array) {
+  countUpdateLanguage(array) {  
+    if(this.guidelineSearchVal && this.guidelineSearchVal.course_data && array) {
     this.guidelineSearchVal.course_data.forEach(element => {
       array.forEach(element1 => {
         if (element.course_language == element1.course_language) {
@@ -571,9 +636,11 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     })
+  }
     this.guidelineSearchVal.course_data = array;
   }
   countUpdatePartner(array) {
+    if(this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data && array) {
     this.guidelineSearchVal.coursepartner_data.forEach(element => {
       array.forEach(element1 => {
         if (element.coursepartnerdetails == element1.coursepartnerdetails) {
@@ -581,9 +648,11 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     })
+  }
     this.guidelineSearchVal.coursepartner_data = array;
   }
   countUpdateCoursemode(array) {
+    if(this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data && array) {
     this.guidelineSearchVal.coursemode_data.forEach(element => {
       array.forEach(element1 => {
         if (element.course_mode == element1.course_mode) {
@@ -591,6 +660,7 @@ export class ViewAllCoursesComponent implements OnInit {
         }
       });
     })
+  }
     this.guidelineSearchVal.coursemode_data = array;
   }
   showmore(val) {
