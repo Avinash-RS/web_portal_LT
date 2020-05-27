@@ -69,19 +69,30 @@
   </div>
 </div> -->
 
+<!-- //Mythreyi -->
 
-<div>Some tags before</div>
-<owl-carousel-o [options]="customOptions" [ngClass]="{'widthClass' : courses.length <= 4}">
-
-  <ng-template carouselSlide [id]="i" *ngFor="let courses of courses; let i = index">
-
-    <img [src]="courses.src" [alt]="'slide.alt'" [title]="courses.name">
+<!-- <owl-carousel-o [options]="customOptions"
+  [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+  <ng-template carouselSlide *ngFor="let course of courses">
+    <div class="containerOverlay">
+      <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
+        (click)="selectCourse(course,i+'c')">
+      <div class="overlay p-5px" style="margin-bottom: 0;">
+        <p class="course_description">
+          {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
+        </p>
+      </div>
+    </div>
+    <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+      <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
+      <button class="float_right m-b-10 m-t-10">Enroll</button>
+    </div>
   </ng-template>
-</owl-carousel-o>
-<div>Some tags after</div>
+</owl-carousel-o> -->
+
 <br>
 <br>
-<!-- //MYTHREYI -->
+<!-- //END OF MYTHREYI -->
 
 
 
