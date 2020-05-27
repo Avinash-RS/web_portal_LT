@@ -155,7 +155,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   addToRepo(idx, module) {
-    if (!module.moduleid || module.moduleid.length == 0 ) {
+    if (!module.moduleid || module.moduleid.length == 0) {
       this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
         if (data) {
           this.courseDetails.flag = 'false';
@@ -301,16 +301,28 @@ export class AddModuleComponent implements OnInit {
     this.apiService.repositoryModules().subscribe((data: any) => {
       const moduleList = data.Result;
       moduleList.forEach((val) => {
-        if (val.moduleid === this.queryData.selectedModule) {
-          const mod = {
-            moduleid: val.moduleid,
-            modulename: val.modulename,
-            moduledetails: val.moduledetails,
-            modulestatus: 'true',
-            template_details: val.template_details
-          };
-          this.courseDetails.coursedetails.push(mod);
-        }
+        this.queryData.selectedModule.forEach((selectedModuleId) => {
+          let isInvalid = false;
+          this.courseDetails.coursedetails.forEach((cModId) => {
+            if (cModId.moduleid == val.moduleid) {
+              isInvalid = true;
+            }
+          })
+          if (!isInvalid) {
+            if (val.moduleid === selectedModuleId) {
+              const mod = {
+                moduleid: val.moduleid,
+                modulename: val.modulename,
+                moduledetails: val.moduledetails,
+                modulestatus: 'true',
+                template_details: val.template_details
+              };
+
+              this.courseDetails.coursedetails.push(mod);
+            }
+          }
+        })
+
       });
       this.updateCourseDetails();
       this.updateModList();

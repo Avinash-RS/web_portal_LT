@@ -619,4 +619,9 @@ h1 {
   .ck-content {
     background-color: $color-field !important;
   }
+  .module-repo-container {
+    .mat-checkbox-background {
+      background-color: #1F3777 !important;
+    }
+  }
 }
