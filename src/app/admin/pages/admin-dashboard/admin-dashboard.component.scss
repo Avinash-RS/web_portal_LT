@@ -118,7 +118,7 @@ h3{
     margin-left: 16%;
 }
 .trendno{
-    margin-left: 3px;
+    // margin-left: 3px;
     color: $trend;
 }
 
@@ -193,6 +193,10 @@ h3{
   ::ng-deep .mat-header-row {
     background: $bg-color !important;
     min-height: 40px !important;
+}
+::ng-deep tr.mat-footer-row, tr.mat-row {
+  height: 48px;
+  text-align: center !important;
 }
 
 ::ng-deep th.mat-header-cell {
