@@ -48,3 +48,10 @@ p {
     }
 
 }
+
+.msg {
+    text-transform: lowercase !important;
+}
+.msg:first-letter {
+    text-transform: capitalize !important;
+}

@@ -8,10 +8,12 @@ import { CommonServicesService } from '@core/services/common-services.service';
 })
 export class SearchComponent implements OnInit {
   searchcourse: any;
+  searchName : any;
   // courseName: any;
   constructor(public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
+
   }
   searchCourse(event) {
     var courseName = event.target.value
@@ -21,7 +23,9 @@ export class SearchComponent implements OnInit {
       this.CommonServices.getCoursesByName(courseName).subscribe(data => {
       this.searchcourse = data.data['getCoursesByName'].message;
       this.CommonServices.globalSearch$.next(this.searchcourse);
-      console.log('name', this.searchcourse);
+      if(this.searchcourse.length == 0) {
+        this.searchName = '';
+      }
     });
 
   }

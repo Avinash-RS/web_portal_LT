@@ -129,7 +129,9 @@ export class CoursedetailsComponent implements OnInit {
         this.course = viewCourse.data.viewcourse.message;
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
+        this.course.enrollment_status = detail.enrollment_status;
         this.loader.hide();
+        console.log(this.course)
       } else
         this.loader.hide();
     });
