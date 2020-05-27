@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { BehaviorSubject, Observable, } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators'
-import { Apollo } from "apollo-angular";
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
