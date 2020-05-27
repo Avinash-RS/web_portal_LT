@@ -23,20 +23,20 @@
           </div><br>
 
           <div class="row">
-            <div class="col-md-4" *ngIf = "newRegisterLearses?.newReg > newRegisterLearses?.oneDayBeforeReg ">
+            <div class="col-md-4" >
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{newRegisterLearses?.newReg / newRegisterLearses?.oneDayBeforeReg * 100 }}</span>
+              <span class="trendno">{{newRegisterLearses?.oneDayBeforeReg / newRegisterLearses?.newReg  | percent }} </span>
             </div>
-            <div class="col-md-4" *ngIf = "newRegisterLearses?.newReg > newRegisterLearses?.oneDayBeforeReg ">
+            <!-- <div class="col-md-4" *ngIf = "newRegisterLearses?.newReg < newRegisterLearses?.oneDayBeforeReg">
               <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
-              <span class="trendno">4%</span>
-            </div>
-            <div class="col-md-8" *ngIf = "newRegisterLearses?.newReg > newRegisterLearses?.oneDayBeforeReg ">
+              <span class="trendno">{{newRegisterLearses?.oneDayBeforeReg / newRegisterLearses?.newReg  | percent}} </span>
+            </div> -->
+            <div class="col-md-8">
               <span class="text" >Up from yesterday</span>
             </div>
-            <div class="col-md-8" >
+            <!-- <div class="col-md-8" *ngIf = "newRegisterLearses?.newReg < newRegisterLearses?.oneDayBeforeReg ">
               <span class="text">Down from yesterday</span>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -55,13 +55,25 @@
             </div>
           </div>
           <div class="row margintop">
-            <div class="col-md-4">
+            <div class="col-md-4" >
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">
+                {{ newRegisterLearses?.totalLearnerTillBefore / (newRegisterLearses?.totalLearTillCurrent -  newRegisterLearses?.totalLearnerTillBefore)  | percent }}
+                </span>
             </div>
+
+            <!-- <div class="col-md-4">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendno">4%</span>
+            </div> -->
+
             <div class="col-md-8">
               <span class="text">Up from yesterday</span>
             </div>
+
+            <!-- <div class="col-md-8">
+              <span class="text">Down from yesterday</span>
+            </div> -->
           </div>
         </div>
       </div>
@@ -124,7 +136,9 @@
           <div class="row">
             <div class="col-md-4">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{ newRegisterLearses?.beforeOneDayCourseCount  /  (newRegisterLearses?.TotalCourse - newRegisterLearses?.beforeOneDayCourseCount ) | percent  }}
+                
+              </span>
             </div>
             <div class="col-md-8">
               <span class="text">Up from yesterday</span>
@@ -157,7 +171,7 @@
           <div class="row">
             <div class="col-md-4">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{ newRegisterLearses?.totalEnrollbeforeOneDay  /  (newRegisterLearses?.totalEnrollTillCurrentDay - newRegisterLearses?.totalEnrollbeforeOneDay ) | percent  }}</span>
             </div>
             <div class="col-md-8">
               <span class="text">Up from yesterday</span>
@@ -728,7 +742,7 @@
           <div class="row margin-to">
             <div class="col-md-6">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{courseCount?.beforeOneDayCountCategory / (courseCount?.TotalCategoryCount -  courseCount?.beforeOneDayCountCategory) | percent}}</span>
             </div>
             <div class="col-md-6">
               <span class="text">Up from yesterday</span>
@@ -761,7 +775,7 @@
           <div class="row ">
             <div class="col-md-6">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.TotalCourse - courseCount?.todayAllcourseCount) | percent}}</span>
             </div>
             <div class="col-md-6">
               <span class="text">Up from yesterday</span>
@@ -795,7 +809,7 @@
           <div class="row">
             <div class="col-md-6">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.perMonth - courseCount?.todayAllcourseCount) | percent}}</span>
             </div>
             <div class="col-md-6">
               <span class="text">Up from yesterday</span>
@@ -886,16 +900,16 @@
                   </div>
                   <div class="col-5">
                     <!-- (change)="onChange($event.target.value)" -->
-                    <select name="day" class="rounded" >
-                      <option   [value]="">Enrollment</option>
-                      <option   [value]="">Rating</option>
-                      <option   [value]="">Comments</option>
-                      <option   [value]="">Wishlist</option>
+                    <select name="top5" class="rounded" (change)="top5Course($event.target.value)">
+                      <option   value="topfiveEnroll">Enrollment</option>
+                      <option   value="topfiverating">Rating</option>
+                      <option   value="topfiveComments">Comments</option>
+                      <option   value="topfivewishlist">Wishlist</option>
                       </select>
                   </div>
                 </div><br>
               <ul class="">
-                <li *ngFor="let topCourse of courseCount?.allLast30daysCourses" class="courselistbox ">{{topCourse.course_name}}</li>
+                <li *ngFor="let topCourse of top5CourseData" class="courselistbox ">{{topCourse.course_name}}</li>
               </ul>
               </div>
             </div>
@@ -913,7 +927,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Subscribed users</h3>
-              <span class="count">102</span>
+              <span class="count">{{learnertabData?.subscribeUser}}</span>
             </div>
     
             <div class="col-md-4  icon newLerner bg-course-icon">
@@ -939,7 +953,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3 class="font-size">User groups</h3>
-              <span class="count">{{learnertabData?.today_login_count[0].todayCount}}</span>
+              <span class="count">{{learnertabData?.total_user_group_count[0].todayCount}}</span>
             </div>
     
             <div class="col-md-4 icon  bg-green  bg-course-icon">
@@ -966,7 +980,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Login per day</h3>
-              <span class="count">{{learnertabData?.total_user_group_count[0].totalCount}}</span>
+              <span class="count">{{learnertabData?.today_login_count[0].totalCount}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow bg-course-icon">

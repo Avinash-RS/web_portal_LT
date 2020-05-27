@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSlideToggleModule } from '@angular/material';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { FormBuilder, FormControl } from '@angular/forms';
@@ -85,9 +84,10 @@ export class GroupManagementComponent implements OnInit {
   getgroups() {
     this.pagenumber = 0;
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
-    this.adminservice.getUserGroup()
+    this.adminservice.getgroup(data)
       .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message;
+        console.log(result.data);
+        this.groups = result.data.getgroup.message;
         this.adminservice.getgroup(data).subscribe((result1: any) => {
           this.groups = result1.data.getgroup.message;
           this.treeSource.data = null;
@@ -196,7 +196,7 @@ export class GroupManagementComponent implements OnInit {
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.adminservice.getUserSession(element._id).subscribe((track: any) => {
       this.trackDetails = track.data && track.data.get_user_session_detail &&
-        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0];
       this.adminservice.getLearnerDetail(element.user_id)
         .subscribe((result: any) => {
           this.profileDetails = result.data && result.data.get_all_learner_detail &&
@@ -209,21 +209,22 @@ export class GroupManagementComponent implements OnInit {
   closedialogbox() {
     this.dialog.closeAll();
   }
-  changeGroup(passRef: TemplateRef<any>,element) {
+  changeGroup(passRef: TemplateRef<any>, element) {
     this.userGroupChange = null;
     this.userGroupChange = element;
     this.changeGrpForm = this.formBuilder.group({
       group: ['', myGlobals.req]
-    })
-    this.dialog.open(passRef)
+    });
+    this.dialog.open(passRef);
   }
   get f() {
     return this.changeGrpForm.controls;
   }
   updateGroup() {
     // this.getAllUser(0);
-    this.adminservice.updateGroup(this.userGroupChange._id,this.changeGrpForm.value.group.group_name,this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
-      if(result.data.update_group.success) {
+    this.adminservice.updateGroup(this.userGroupChange._id, this.changeGrpForm.value.group.group_name,
+      this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
+      if (result.data.update_group.success) {
         this.alert.openAlert('User Group Updated Successfully', null);
         this.dialog.closeAll();
         this.getAllUser(0);
@@ -260,7 +261,6 @@ export class GroupManagementComponent implements OnInit {
           admin_id: this.adminDetails._id, catalogue_id: form.value.catalogue
         };
         this.adminservice.creategroup(data).subscribe((result: any) => {
-          console.log(result.data)
           if (result.data.createusergroup.success === true) {
             this.reset();
             this.alert.openAlert('Success !', 'Group created successfully');
@@ -280,7 +280,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   updategroupdetails(groupform) {
-    console.log(String(this.oldcatalogue) === String(groupform.value.catalogue))
     let value: any;
     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
     // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
@@ -370,67 +369,70 @@ export class GroupManagementComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.resultsLength = result.data.get_all_user.learner_count;
           this.loader = false;
-        } else
-          this.alert.openAlert("Please try again later", null)
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
       });
   }
 
   checkboxLabel(row?) {
-    if (row.isChecked == undefined || row.isChecked == false) {
+    if (row.isChecked === undefined || row.isChecked === false) {
       row.isChecked = true;
       this.selectedArray.push(row);
-    }
-    else {
+    } else {
       row.isChecked = !row.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== row);
     }
   }
 
   deActivate(status, element?) {
-    let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+    const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
-        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count :
+      this.alert.openConfirmAlert(status === 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status === 'De-activate' ? 'Are you sure you want to de-activate ' + count :
         'Are you sure you want to activate ' + count).then((data: Boolean) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result1 = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.adminservice.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
+            this.adminservice.deActivate_And_reActivate_User(result1, status === 'De-activate' ? false : true)
               .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+                this.selectedArray = [];
+                if (result.data.deactivate_reactivate_user.success &&
+                  result.data.deactivate_reactivate_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
 
   block(status, element?) {
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
-      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
-        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count :
+      const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
+      this.alert.openConfirmAlert(status === 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status === 'Block' ? 'Are you sure you want to block ' + count :
         'Are you sure you want to un-block ' + count).then((data: Boolean) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result1 = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.adminservice.blockUser(result, status == 'Block' ? true : false)
+            this.adminservice.blockUser(result1, status === 'Block' ? true : false)
               .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+                this.selectedArray = [];
+                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
   next(e) {

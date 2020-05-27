@@ -868,6 +868,8 @@ export const getAdminOverview = gql`
       DraftCourse
       TotalCourse
       newReg
+      beforeOneDayCourseCount
+      todayAllcourseCount
       totalEnrollbeforeOneDay
       totalEnrollTillCurrentDay
       totalLearTillCurrent
@@ -908,9 +910,10 @@ export const getAdmindashboardCoursetab = gql`
       TotalCourse
       perMonth
       TotalCategoryCount
-      # availableCourseBeforeOneDayOfCurrentDate
-      # beforeOneDayCourseCount
-      # beforeOneDayCoun
+      beforeOneDayCourseCount
+      todayAllcourseCount
+      beforeOneDayCountCategory
+      todayCategorycount
       allLast30daysCourses{
       course_name
       super_sub_category_id {
@@ -1082,3 +1085,17 @@ query getgroupbyid($group_id : String!){
     }
   }
 }`;
+
+
+// getting top 5 course filter data
+export const getTopfiveDashboardType = gql`
+  query getTopfiveDashboardType($type: String){
+    getTopfiveDashboardType(type: $type) {
+      success
+      error_msg
+      data{
+      course_name
+      short_description
+      }
+      }
+  }`;
