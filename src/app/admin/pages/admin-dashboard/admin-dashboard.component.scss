@@ -108,11 +108,11 @@ h3{
 .text{
     font-size: 12px;
     color:$color-border;
-    margin-left: 27px;
+    margin-left: 10px;
 }
 
 .trendicon{
-    margin-left: 30%;
+    margin-left: 28%;
 }
 .trendiconcourse{
     margin-left: 16%;
@@ -120,6 +120,12 @@ h3{
 .trendno{
     // margin-left: 3px;
     color: $trend;
+}
+
+.trendnodown{
+  color:$color-red;
+  margin-left: 1px;
+    font-size: 12px;
 }
 
 
@@ -166,7 +172,7 @@ h3{
   }
 
   .tode2{
-    margin-left: 38%;
+    margin-left: 40%;
   }
   .tode3{
     margin-left: 32%;
@@ -306,7 +312,7 @@ h3{
     border: 1px solid $color-white;
     box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03);
     margin-left: -51px;
-    width: 323px;
+    width: auto;
     margin-top: 2px;
     background-color: $color-white;
     list-style-type: none;
