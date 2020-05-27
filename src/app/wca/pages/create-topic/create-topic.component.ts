@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatList, MatDialog } from '@angular/material';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatSlideToggleChange } from '@angular/material';
+import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
 declare var $: any;
 
 @Component({
@@ -19,8 +20,8 @@ declare var $: any;
 export class CreateTopicComponent implements OnInit {
   queryData: any;
   courseArray = [];
-  courseDetails:any;
-  query:any;
+  courseDetails: any;
+  query: any;
   submitted = false;
   active: any;
   createTopicForm: FormGroup;
@@ -28,28 +29,28 @@ export class CreateTopicComponent implements OnInit {
   pdfImages = [];
   fileType: any;
   courseForm: FormGroup;
-  displaySlides:any;
-  questionPreData:any;
+  displaySlides: any;
+  questionPreData: any;
   subTitleVal = false;
   transcriptVal = false;
   showSubupload = false;
   showTransupload = false;
   isFileContent = false;
   urlRequired = false;
-  videoUrl:any;
+  videoUrl: any;
   selected = 'English';
   subtitles = [0];
   transcripts = [0];
-  @ViewChild('urlValue') urlValue;
   @ViewChild('fileInput3') fileInput3;
+  @ViewChild('modName') modName;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
-    "Knowledge Check" : /(\.csv)$/i, 
+    "Knowledge Check": /(\.csv)$/i,
     SCORM: /(\.imsmanifest)$/i,
-    Video:/(\.vtt)$/i
+    Video: /(\.vtt)$/i
   }
 
   fileValidations1 = {
@@ -64,77 +65,80 @@ export class CreateTopicComponent implements OnInit {
     Feedback: ""
   }
 
-  feedBackFormHeading = ['','Very unsatisfied','Unsatisfied','Neutral','Satisfied','Very satisfied']
+  feedBackFormHeading = ['', 'Very unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very satisfied']
   feedBackForm = [{
-   'title':'Content',
-   'star': ['1','2','3','4','5']
+    'title': 'Content',
+    'star': ['1', '2', '3', '4', '5']
   },
   {
-    'title':'Relevance',
-    'star': ['1','2','3','4','5']
-   },{
-    'title':'Ease of understanding',
-    'star': ['1','2','3','4','5']
-   },{
-    'title':'Duration',
-    'star': ['1','2','3','4','5']
-   }]
+    'title': 'Relevance',
+    'star': ['1', '2', '3', '4', '5']
+  }, {
+    'title': 'Ease of understanding',
+    'star': ['1', '2', '3', '4', '5']
+  }, {
+    'title': 'Duration',
+    'star': ['1', '2', '3', '4', '5']
+  }]
 
-   language = [{
-     "code": "en",
-     "name": "English"
-   }]
-KnowledgeOptions: any = {
-  loop: true,
-  mouseDrag: true,
-  touchDrag: true,
-  pullDrag: true,
-  dots: false,
-  navSpeed: 700,
-  navText: ['<', '>'],
-  responsive: {
-    0: {
-      items: 1
+  language = [{
+    "code": "en",
+    "name": "English"
+  }]
+  KnowledgeOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
     },
-    400: {
-      items: 1
-    },
-    740: {
-      items: 1
-    },
-    940: {
-      items: 1
-    }
-  },
-  nav: true
-}
+    nav: true
+  }
 
   courseform(): FormGroup {
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
       coursefile: [null],
       coursestatus: ['true'],
-      coursetype:[null],
+      coursetype: [null],
       courseid: [null, Validators.compose([Validators.required])],
-      coursedetails:this.formBuilder.array(this.courseArray && this.courseArray.length ? this.courseArray.map((data,index) => {
+      coursedetails: this.formBuilder.array(this.courseArray && this.courseArray.length ? this.courseArray.map((data, index) => {
         // if (data.modulestatus === 'true') {
-         return this.createForm(data,index)
+        return this.createForm(data, index)
         // }
       }) : [])
-    // }) : [this.createForm(this.queryData)])
+      // }) : [this.createForm(this.queryData)])
     });
   }
 
 
-  topicItem(mod_index,i): FormGroup {    
+  topicItem(mod_index, i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
+      videosubtitle : ['false'],
+      topicvalue : [''],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
         {
           return this.topicImages()
         }) : [],Validators.compose([Validators.required])),
       topicstatus:['true'],
-      topictype:[null]
+      topictype:[null],
+      topictime:[null]
     });
   }
 
@@ -151,7 +155,10 @@ KnowledgeOptions: any = {
     private wcaService: WcaService,
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
-  ) { }
+  ) {
+ 
+  }
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       let flag = 0;
@@ -161,136 +168,133 @@ KnowledgeOptions: any = {
         }
       }
       if (flag) {
-         this.query = null;
-         this.query = params;
+        this.query = null;
+        this.query = params;
         if (this.query && this.query.temp && !this.query.addModule) {
           this.wcaService.bSubject.subscribe(value => {
-           if (value) {
-            this.queryData = null;
-            this.queryData = value;
-            this.courseForm = this.courseform()
-            this.createTopicForm = this.createForm(this.queryData);
-            (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-            this.courseForm.patchValue({ coursename:this.query.courseName, courseid:this.query.viewingModule});
-           }
+            if (value) {
+              this.queryData = null;
+              this.queryData = value;
+              this.courseForm = this.courseform()
+              this.createTopicForm = this.createForm(this.queryData);
+              (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
+              this.courseForm.patchValue({ coursename: this.query.courseName, courseid: this.query.viewingModule });
+            }
           })
         } else if (this.query.edit && !this.query.addModule) {
-          this.wcaService.bSubject1.subscribe((value1:any) => {          
-         if(value1 && value1.courseDetails) {
-           this.courseArray = value1.courseDetails.coursedetails;
-          this.queryData = value1.courseDetails.coursedetails[value1.index];
-          this.courseForm = this.courseform()
-          this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
-          this.courseForm.patchValue(value1.courseDetails);          
-         } else {
-           this.queryData = {};
-         }
+          this.wcaService.bSubject1.subscribe((value1: any) => {
+            if (value1 && value1.courseDetails) {
+              this.courseArray = value1.courseDetails.coursedetails;
+              this.queryData = value1.courseDetails.coursedetails[value1.index];
+              this.courseForm = this.courseform()
+              this.createTopicForm = this.courseForm.get("coursedetails").get(String(value1.index)) as FormGroup;
+              this.courseForm.patchValue(value1.courseDetails);
+            } else {
+              this.queryData = {};
+            }
           })
-        } else if(this.query && this.query.template && this.query.addModule) 
-        {
+        } else if (this.query && this.query.template && this.query.addModule) {
           this.initialCal2(this.query);
 
-        } else if(this.query && this.query.template && !this.query.addModule) 
-        {
+        } else if (this.query && this.query.template && !this.query.addModule) {
           this.initialCall(this.query);
-        } else if(this.query && this.query.temp && this.query.addModule) 
-        {
+        } else if (this.query && this.query.temp && this.query.addModule) {
           this.initialCall3(this.query);
-        } 
-      }      
+        }
+      }
     })
 
 
   }
-  createForm(mod,mod_index=-1) :FormGroup{
-   return this.formBuilder.group({
+  createForm(mod, mod_index = -1): FormGroup {
+    return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
-      modulestatus:['true'],
-      template_details:[this.queryData.template_details],
-      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length ? mod.template_details.map((data,index) =>
-        this.topicItem(mod_index,index)
+      modulestatus: ['true'],
+      template_details: [this.queryData.template_details],
+      moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length ? mod.template_details.map((data, index) =>
+        this.topicItem(mod_index, index)
       ) : [])
     })
 
   }
   // createTopicForm => 
-   
+
 
   initialCall(data1) {
-    this.spinner.show();    
+    this.spinner.show();
     this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
       this.spinner.hide();
       this.queryData = data.Result;
       this.courseForm = this.courseform()
       this.createTopicForm = this.createForm(this.queryData);
       (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-      this.courseForm.patchValue({ coursename:data1.courseName, courseid:data1.viewingModule});          
+      this.courseForm.patchValue({ coursename: data1.courseName, courseid: data1.viewingModule });
     }, err => {
       this.spinner.hide();
     })
   }
 
   initialCal2(data1) {
-    this.spinner.show();    
-      this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {        
-        this.courseDetails = data.Result[0];
-        this.courseArray =  this.courseDetails.coursedetails;
-        this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
-          this.queryData = data.Result;
+    this.spinner.show();
+    this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
+      this.courseDetails = data.Result[0];
+      this.courseArray = this.courseDetails.coursedetails;
+      this.wcaService.getsingleTemplate(data1.template).subscribe((data: any) => {
+        this.queryData = data.Result;
         this.spinner.hide();
         // this.queryData.moduledetails = this.courseArray[0].moduledetails;
         this.courseForm = this.courseform()
         this.createTopicForm = this.createForm(this.queryData);
         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-        this.courseForm.patchValue(this.courseDetails); 
+        this.courseForm.patchValue(this.courseDetails);
         // this.courseForm.updateValueAndValidity();
-       
+
       }, err => {
         this.spinner.hide();
       })
-  }, err => {
+    }, err => {
       this.spinner.hide();
     })
   }
 
-  initialCall3(data1){
+  initialCall3(data1) {
     this.wcaService.getCourseDetails(this.query.viewingModule).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      this.courseArray =  this.courseDetails.coursedetails;
+      this.courseArray = this.courseDetails.coursedetails;
       this.wcaService.bSubject.subscribe(value => {
         if (value) {
-         this.queryData = null;
-         this.queryData = value;
-         this.spinner.hide();
-        //  this.queryData.moduledetails = this.courseArray[0].moduledetails;
-         this.courseForm = this.courseform()
-         this.createTopicForm = this.createForm(this.queryData);
-         (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
-         this.courseForm.patchValue(this.courseDetails);
-         // this.courseForm.updateValueAndValidity();         
+          this.queryData = null;
+          this.queryData = value;
+          this.spinner.hide();
+          //  this.queryData.moduledetails = this.courseArray[0].moduledetails;
+          this.courseForm = this.courseform()
+          this.createTopicForm = this.createForm(this.queryData);
+          (this.courseForm.get("coursedetails") as FormArray).push(this.createTopicForm)
+          this.courseForm.patchValue(this.courseDetails);
+          // this.courseForm.updateValueAndValidity();         
         }
-        });
+      });
     }, err => {
       this.spinner.hide();
     })
-    }
+  }
 
-  DeleteTopic(jform,event) {
+  DeleteTopic(jform, event) {
     event.stopPropagation();
     // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
     //  allModuleDetails.removeAt(jform);
-  this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
-  // this.queryData.template_details.splice(jform,1);
-  // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
+    this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
+    // this.queryData.template_details.splice(jform,1);
+    // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
 
 
   activate(item) {
-if (item) {
-  this.active = item
-  this.fileType = this.fileValidations1[item.name];
-}
+    if (item) {
+      this.active = item
+      this.fileType = this.fileValidations1[item.name];
+    }
   }
 
   // To unzip SCROM files 
@@ -303,8 +307,8 @@ if (item) {
   // this.spinner.hide();
   // }
 
-  onSelectFile(fileInput: any, item, formdata: FormGroup, index,textvalue,subTitleindex) {    
-    if(item == undefined || item == null){
+  onSelectFile(fileInput: any, item, formdata: FormGroup, index, textvalue, subTitleindex) {
+    if (item == undefined || item == null) {
       item = {}
       item.name = "Video"
     }
@@ -313,15 +317,15 @@ if (item) {
       var imagepath;
       var allowedExtensions;
       var filePath = fileInput.target.files[0].name;
-      const reader = new FileReader()      
+      const reader = new FileReader()
       allowedExtensions = this.fileValidations[item.name];
       if (item.name != 'SCORM' && !allowedExtensions.exec(filePath)) {
-          this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
-          this.spinner.hide();
-          fileInput.value = '';
-          return false;
-      } 
-      else if (item.name == 'SCORM'){
+        this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
+        this.spinner.hide();
+        fileInput.value = '';
+        return false;
+      }
+      else if (item.name == 'SCORM') {
         this.spinner.show();
         let file = fileInput.target.files[0];
         let fileReader: FileReader = new FileReader();
@@ -340,14 +344,14 @@ if (item) {
             that.wcaService.uploadScromCourse(formData).subscribe((data: any) => {
               imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
               let obj1 = {
-                file:imagepath
+                file: imagepath
               }
               if (!formdata.get('topicimages').get(String(0))) {
                 (formdata.get('topicimages') as FormArray).push(that.topicImages());
               }
-              formdata.get('topicimages').get(String(0)).setValue(obj1);   
-              formdata.get('topictype').setValue("Scorm");          
-               that.spinner.hide();
+              formdata.get('topicimages').get(String(0)).setValue(obj1);
+              formdata.get('topictype').setValue("Scorm");
+              that.spinner.hide();
             }, err => {
               that.spinner.hide();
             })
@@ -355,7 +359,7 @@ if (item) {
         }
         fileReader.readAsText(file);
       }
-      else {        
+      else {
         if (fileInput.target && fileInput.target.files[0]) {
           this.imageView = null;
           this.imageView = fileInput.target.files[0];
@@ -366,16 +370,16 @@ if (item) {
             this.wcaService.uploadImage(formData).subscribe((data: any) => {
               imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
               let obj1 = {
-                name:'',
-                image:imagepath,
-                file:''
+                name: '',
+                image: imagepath,
+                file: ''
               }
               if (!formdata.get('topicimages').get(String(0))) {
                 (formdata.get('topicimages') as FormArray).push(this.topicImages());
               }
-              formdata.get('topicimages').get(String(0)).setValue(obj1);   
-              formdata.get('topictype').setValue(item.name);          
-               this.spinner.hide();
+              formdata.get('topicimages').get(String(0)).setValue(obj1);
+              formdata.get('topictype').setValue(item.name);
+              this.spinner.hide();
             }, err => {
               this.spinner.hide();
             })
@@ -383,89 +387,89 @@ if (item) {
             this.spinner.show();
             const formData1 = new FormData();
             formData1.append('reffile', this.imageView);
-           this.wcaService.excelUpload(formData1).subscribe((data:any) => {
-           this.spinner.hide();
-           if(data && data.success) {
-            this.clearFormArray(formdata.get("topicimages") as FormArray)            
-            for (var m = 0; m < data.message.length; m++) {
-              let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
-              let obj2 = {
-                name:'',
-                image:path,
-                file:''
+            this.wcaService.excelUpload(formData1).subscribe((data: any) => {
+              this.spinner.hide();
+              if (data && data.success) {
+                this.clearFormArray(formdata.get("topicimages") as FormArray)
+                for (var m = 0; m < data.message.length; m++) {
+                  let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                  let obj2 = {
+                    name: '',
+                    image: path,
+                    file: ''
+                  }
+                  if (!formdata.get('topicimages').get(String(m))) {
+                    (formdata.get('topicimages') as FormArray).push(this.topicImages());
+                  }
+                  formdata.get('topicimages').get(String(m)).setValue(obj2);
+                  formdata.get('topictype').setValue(item.name);
+                }
               }
-              if (!formdata.get('topicimages').get(String(m))) {
-                (formdata.get('topicimages') as FormArray).push(this.topicImages());
-              }
-              formdata.get('topicimages').get(String(m)).setValue(obj2);
-              formdata.get('topictype').setValue(item.name);          
-            }
-           }
-          
-           },err => {
-            this.spinner.hide();
-           })
+
+            }, err => {
+              this.spinner.hide();
+            })
           } else if (item.name === 'Word') {
             const formData3 = new FormData();
             formData3.append('reffile', this.imageView);
-           this.wcaService.excelUpload(formData3).subscribe((data:any) => {
-            this.spinner.hide();
-            if(data && data.success) {
-              this.clearFormArray(formdata.get("topicimages") as FormArray)            
-              for (var m = 0; m < data.message.length; m++) {
-                let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
-                let obj3 = {
-                  name:'',
-                  image:path,
-                  file:''
+            this.wcaService.excelUpload(formData3).subscribe((data: any) => {
+              this.spinner.hide();
+              if (data && data.success) {
+                this.clearFormArray(formdata.get("topicimages") as FormArray)
+                for (var m = 0; m < data.message.length; m++) {
+                  let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                  let obj3 = {
+                    name: '',
+                    image: path,
+                    file: ''
+                  }
+                  if (!formdata.get('topicimages').get(String(m))) {
+                    (formdata.get('topicimages') as FormArray).push(this.topicImages());
+                  }
+                  formdata.get('topicimages').get(String(m)).setValue(obj3);
+                  formdata.get('topictype').setValue(item.name);
                 }
-                if (!formdata.get('topicimages').get(String(m))) {
-                  (formdata.get('topicimages') as FormArray).push(this.topicImages());
-                }
-                formdata.get('topicimages').get(String(m)).setValue(obj3);
-                formdata.get('topictype').setValue(item.name);          
               }
-             }
-           },err => {
-            this.spinner.hide();
-           })
+            }, err => {
+              this.spinner.hide();
+            })
           } else if (item.name === 'Video') {
-            this.formVideo(formdata,"1",textvalue,"")
+            this.formVideo(formdata,"1",textvalue,subTitleindex)
            } else if (item.name === 'Knowledge Check') { 
             this.spinner.show();           
             const formData2 = new FormData();
             formData2.append('excel', this.imageView);
-            this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data:any) => {
-              if(data && data.Message =="Success") {
-               this.clearFormArray(formdata.get("topicimages") as FormArray)
-               let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
-               let obj2 = {
-                name:'',
-                image:path2,
-                file:''
+            this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data: any) => {
+              if (data && data.Message == "Success") {
+                this.clearFormArray(formdata.get("topicimages") as FormArray)
+                let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+                let obj2 = {
+                  name: '',
+                  image: path2,
+                  file: ''
+                }
+                this.previewKnowledgeCheck(path2, formdata, obj2);
               }
-              this.previewKnowledgeCheck(path2,formdata,obj2);
-            }
-              },err => {
-               this.spinner.hide();
-              })
+            }, err => {
+              this.spinner.hide();
+            })
             this.spinner.hide();
-          } 
+          }
         }
         reader.addEventListener("load", () => {
           if (item.name === 'PDF') {
             this.demo(reader.result, formdata, index)
           }
         }, false);
-  
+
         if (fileInput.target.files[0]) {
           reader.readAsDataURL(fileInput.target.files[0]);
         }
       }
     }
 
-    else if (item.name == 'Video'){
-      this.formVideo(formdata,"2",textvalue,subTitleindex)
+    else if (item.name == 'Video') {
+      this.formVideo(formdata, "2", textvalue, subTitleindex)
     }
   }
 
@@ -484,7 +488,7 @@ if (item) {
 
 
     let getPage = (pdf) => {
-      pdf.getPage(currentPage).then((page) => {        
+      pdf.getPage(currentPage).then((page) => {
         var viewport = page.getViewport({ scale });
         var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
         var renderContext = { canvasContext: ctx, viewport: viewport };
@@ -509,15 +513,15 @@ if (item) {
             for (var m = 0; m < pages.length; m++) {
               let path = await this.imagedata_to_image(pages[m]);
               let obj3 = {
-                name:'',
-                image:path,
-                file:''
+                name: '',
+                image: path,
+                file: ''
               }
               if (!formdata.get('topicimages').get(String(m))) {
                 (formdata.get('topicimages') as FormArray).push(this.topicImages());
               }
               formdata.get('topicimages').get(String(m)).setValue(obj3);
-              formdata.get('topictype').setValue('PDF');          
+              formdata.get('topictype').setValue('PDF');
             }
             this.spinner.hide();
           }
@@ -563,109 +567,115 @@ if (item) {
       }
     });
   }
-
-  vidObj = {
-    "file" : "",
-    "title" : []
-  }
+  
   formVideo(formdata,triggerFun,textvalue,subTitleindex){
-    
-    if(triggerFun == "2"){
-      if(subTitleindex){     
-        this.subtitles.splice(subTitleindex, 1);
-        this.vidObj.title.splice(subTitleindex,1)
-    }else{
-      this.vidObj.file = textvalue
-      if (!formdata.get('topicimages').get(String(0))) {
-        (formdata.get('topicimages') as FormArray).push(this.topicImages());
-      }
-      formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
-      formdata.get('topictype').setValue("Video");
+    if(textvalue){
+      formdata.get('topicvalue').setValue(textvalue);
     }
-      this.spinner.hide();
+    if(triggerFun == "2"){     
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        var vidObj = {
+          "file" : textvalue,
+          "title" : ["1"]
+        }
+        formdata.get('topicimages').get(String(0)).setValue(vidObj);  
+        formdata.get('topictype').setValue("Video");
+        this.spinner.hide();
     }else{
       const formData4 = new FormData();
-    formData4.append('excel', this.imageView);
-    this.spinner.show();
-    this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data:any) => {
+      formData4.append('excel', this.imageView);
       this.spinner.show();
+      this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data: any) => {
       if(data && data.Message =="Success") {
-        this.clearFormArray(formdata.get("topicimages") as FormArray)
+        // this.clearFormArray(formdata.get("topicimages") as FormArray)
         let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
         let valueFile = {
           "code":"en",
           "name":"English",
           "file":path2
         }
-        this.vidObj.title.push(valueFile)
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
         }
-        formdata.get('topicimages').get(String(0)).setValue(this.vidObj);   
+        var vidObj = {
+          "file" : textvalue,
+          "title" : ["1"]
+        }
+        if(formdata.value.topicimages.length == 0){
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);  
+        }
         formdata.get('topictype').setValue("Video");
+        formdata.value.topicimages[0].title[subTitleindex] = valueFile
+        // this.vidObj.title.push(valueFile) 
         this.spinner.hide();
       }
-    },err => {
-       this.spinner.hide();
       })
     }
 
   }
 
-  addTopicFrom(event,type) {
+  addTopicFrom(event, type) {
     event.stopPropagation();
-    if(this.courseForm){
-      var repeatedVal = this.courseForm.value.coursedetails[0].moduledetails.reduce((a, e) => {
+    if(this.modName.nativeElement.value){
+      var topicName = this.modName.nativeElement.value
+      var index = this.courseForm.value.coursedetails.findIndex(x => x.modulename === topicName);
+    }
+    
+    if (this.courseForm) {
+      var repeatedVal = this.courseForm.value.coursedetails[index].moduledetails.reduce((a, e) => {
         a[e.topicname] = ++a[e.topicname] || 0;
         return a;
       }, {});
-      var valueFind = this.courseForm.value.coursedetails[0].moduledetails.filter(e => repeatedVal[e.topicname])
+      var valueFind = this.courseForm.value.coursedetails[index].moduledetails.filter(e => repeatedVal[e.topicname])
     }
-    if(valueFind.length > 0){
+    if (valueFind.length > 0) {
       this.toast.warning("Topic name cannot be same for templates");
       return false;
     }
-    if(this.urlValue){
-      if(this.urlValue.nativeElement.value == "" || this.urlValue.nativeElement.value == undefined){
-        this.urlRequired = true;
-        return false;
-      } 
-    }
-    this.urlRequired = false;
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
-      if (this.query.edit || this.query.addModule) {
-        this.courseForm.value.flag = 'false';
-      } else {
-        this.courseForm.value.flag = 'true';
+    if (this.query.edit || this.query.addModule) {
+      this.courseForm.value.flag = 'false';
+    } else {
+      this.courseForm.value.flag = 'true';
 
-      }
-      (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][0]['controls']['moduledetails']['controls']).forEach(control => {
-        if(control.value.topictype == null){
-          if (!control.get('topicimages').get(String(0))) {
-            (control.get('topicimages') as FormArray).push(this.topicImages());
-          }
-          control.get('topicimages').get(String(0)).setValue("");   
-          control.get('topictype').setValue("Feedback");
+    }
+    (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls']).forEach(control => {
+      if (control.value.topictype == null) {
+        if (!control.get('topicimages').get(String(0))) {
+          (control.get('topicimages') as FormArray).push(this.topicImages());
         }
-      });
-    if(this.courseForm.valid) {
-      const userDetails  = JSON.parse(localStorage.getItem('adminDetails'));      
-       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
-       this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
-       this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
+        control.get('topicimages').get(String(0)).setValue("");
+        control.get('topictype').setValue("Feedback");
+      }
+    });
+    // this.courseForm.value.coursedetails[index].template_details.filter((value)=>{
+    //   if (value.name == "Video"){
+    //     this.courseForm.get('topicvalue').setValidators([Validators.required]);
+    //         this.courseForm.get('topicvalue').updateValueAndValidity()  
+    //   }
+    //   return
+    // })
+    this.validateform(this.courseForm);
+    if (this.courseForm.valid) {
+      const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
+      this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
+      this.courseForm.value.createdby_id = userDetails.user_id ? userDetails.user_id : '';
+      this.courseForm.value.createdby_role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
       this.spinner.show();
-      this.submitted = false;      
+      this.submitted = false;
 
-      this.wcaService.createDraft(this.courseForm.value).subscribe((data:any) => {
+      this.wcaService.createDraft(this.courseForm.value).subscribe((data: any) => {
         if (data && data.Message === 'Success') {
-          const obj ={
-            course_id:this.query.viewingModule,
-            is_active:0
+          const obj = {
+            course_id: this.query.viewingModule,
+            is_active: 0
           }
-          this.wcaService.updateCourse(obj).subscribe((data:any) => {
-          });        
-             this.toast.success('Draft Created Successfully !!!');
+          this.wcaService.updateCourse(obj).subscribe((data: any) => {
+          });
+          this.toast.success('Draft Created Successfully !!!');
           // if(type === 'draft') {
           //   this.router.navigate(['/Admin/auth/Wca/viewmodule']);
           // } else {
@@ -674,19 +684,30 @@ if (item) {
           this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner.hide();
-     }, err => {
-       this.spinner.hide();
-     })
+      }, err => {
+        this.spinner.hide();
+      })
 
     } else {
       this.submitted = true;
     }
-  
-   
+
+
   }
 
-  previewimages(images, event,item) {    
-    event.stopPropagation();    
+
+  validateform(courseForm){
+    const invalid = [];
+    const controls = courseForm.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    return invalid;
+  }
+  previewimages(images, event, item) {
+    event.stopPropagation();
     if (images && images.value && images.value.topicimages) {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'previewImages', images: images.value.topicimages },
@@ -697,7 +718,7 @@ if (item) {
       });
       dialogRef.afterClosed().subscribe(res1 => {
 
-        images.value.topicimages=res1;
+        images.value.topicimages = res1;
 
       })
     } else {
@@ -706,74 +727,111 @@ if (item) {
 
   }
 
-  openPreviewModal(value,index){
+  openPreviewModal(value, index) {
     this.displaySlides = false;
     this.questionPreData = value.value.moduledetails[index].topicimages[0]
     $('#knowlegeCheckModal').modal('show');
     $('#knowlegeCheckModal').appendTo("body");
-    setTimeout(()=>{
+    setTimeout(() => {
       this.displaySlides = true
-    },1000)
+    }, 1000)
   }
 
-  sampleDownload(){
+  sampleDownload() {
     window.location.href = "https://edutechstorage.blob.core.windows.net/container1/knowledgecheck/408209727260479-MCQ Template.csv";
   }
 
-  previewKnowledgeCheck(path,formdata,obj2){
-    this.wcaService.getPreviewData(path).subscribe((value)=>{     
+  previewKnowledgeCheck(path, formdata, obj2) {
+    this.wcaService.getPreviewData(path).subscribe((value) => {
       this.questionPreData = value['Result'];
       if (!formdata.get('topicimages').get(String(0))) {
         (formdata.get('topicimages') as FormArray).push(this.topicImages());
       }
       formdata.get('topicimages').get(String(0)).setValue(this.questionPreData);
-      formdata.get('topictype').setValue('KnowledgeCheck'); 
+      formdata.get('topictype').setValue('KnowledgeCheck');
       this.spinner.hide();
     })
     this.spinner.hide();
   }
 
-  toggle_sub_trans(event,value){
-    if(value == "subtitle"){
+  toggle_sub_trans(event,value,formdata){
+    if(value == "subtitle"){ 
       if(event.checked){
-        this.showSubupload = true
+        formdata.get('videosubtitle').setValue("True");    
+        if (!formdata.get('topicimages').get(String(0))) {
+          (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        }
+        if(!formdata.value.topicimages[0].file ){
+          var vidObj = {
+            "file" : "",
+            "title" : ["1"]
+          }
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);   
+        }
+        
       }
       else{
-        this.showSubupload = false
+        formdata.get('videosubtitle').setValue("false"); 
+        
       }
     }
-    else{
-      if(event.checked){
-        this.showTransupload = true
-      }
-      else{
-        this.showTransupload = false
-      }
-    }
+    // else{
+    //   if(event.checked){
+    //     this.showTransupload = true
+    //   }
+    //   else{
+    //     this.showTransupload = false
+    //   }
+    // }
   }
 
-  addSubTile(value){
+  addSubTile(value,formdata){
+
     if(value == 'sub'){
-      this.subtitles.push(this.subtitles.length)
+      formdata.value.topicimages[0].title.push((formdata.value.topicimages[0].title.length + 1).toString())
     }
-    else{
+    else {
       this.transcripts.push(this.transcripts.length)
     }
-
+    console.log(formdata.value.topicimages[0])
   }
-  removeSubTile(index,value){
+  removeSubTile(index,value,formdata){
     
-    if(value == 'sub'){      
-      this.subtitles.splice(index, 1);
+    if(value == 'sub'){   
+      formdata.value.topicimages[0].title.splice(index, 1);
+      console.log(formdata.value.topicimages[0])
+    return false;
     }
-    else{
+    else {
       this.transcripts.splice(index, 1);
     }
-    
   }
-  
-  openFeedback(){
+
+  openFeedback() {
     $('#feedbackModal').modal('show');
     $('#feedbackModal').appendTo("body");
   }
+
+  loadBlobs(fileInput, item, formdata, index, textvalue) {
+    const dialogRef = this.dialog.open(BlobReaderComponent, {
+      data: {},
+      height: '70%',
+      width: '74%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if(res.url)
+      this.onSelectFile(fileInput, item, formdata, index, res.url,'')
+      else
+      this.toast.warning('Try after sometime');
+    });
+  }
+
+  isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 58))
+        return false;
+    return true;
+}
 }

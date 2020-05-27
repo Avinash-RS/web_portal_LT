@@ -17,6 +17,7 @@ export class ModuleRepositoryComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(this.savedModules);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  modDetails = [];
 
   constructor(
     private router: Router,
@@ -28,10 +29,10 @@ export class ModuleRepositoryComponent implements OnInit {
 
   ngOnInit() {
     this.savedModules = [{
-      coursename: "cname",
-      modulename: "name",
-      createdby: "",
-      createdon: "Date"
+      coursename: 'cname',
+      modulename: 'name',
+      createdby: '',
+      createdon: 'Date'
     }];
     this.dataSource.paginator = this.paginator;
     this.route.queryParams.subscribe(params => {
@@ -54,26 +55,49 @@ export class ModuleRepositoryComponent implements OnInit {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
         val.isSelect = false;
-        this.routeData.moduleList ? this.routeData.moduleList.forEach((data) => {
-          if (val.moduleid == data) {
+        // tslint:disable-next-line:no-shadowed-variable
+        this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
+          if (val.moduleid === data) {
             val.isSelect = true;
+            this.modDetails.push(data);
           }
-        }) : ''
-      })
+          // tslint:disable-next-line:no-unused-expression
+        }) : '';
+      });
       this.savedModules = data.Result;
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
       this.dataSource.paginator = this.paginator;
-
-
-    })
+    });
   }
 
-  onModuleSelection(selectedModule) {
-    let modDetails = {
-      "moduleid": selectedModule.moduleid,
-      "coursename": selectedModule.coursename,
-      "createdby": selectedModule.createdby
+  onModuleSelection(module, e) {
+    const modDetails = {
+      moduleid: module.moduleid,
+      coursename: module.coursename,
+      createdby: module.createdby
+    };
+    let isValid = true;
+    let n = 0;
+    this.modDetails.forEach((val,i) => {
+      if (val == module.moduleid) {
+        isValid == false;
+        n = i;
+      }
+    })
+    if (e && isValid) {
+      this.modDetails.push(module.moduleid);
+       this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
+          if (res.Code === 200) {
+
+          }
+        });
     }
+    else if(!e && isValid) {
+      this.modDetails.splice(n,1);
+    }
+  }
+
+  onModuleSubmit() {
 
     this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
       if (data) {
@@ -84,21 +108,18 @@ export class ModuleRepositoryComponent implements OnInit {
               courseId: this.routeData.viewingModule,
               courseImage: this.routeData.image,
               courseName: this.routeData.courseName,
-              selectedModule: selectedModule.moduleid
+              selectedModule: this.modDetails
             }
           });
-        this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
-          if (res.Code == 200) {
-
-          }
-        })
+       
       }
-    })
+    });
   }
 
   viewModule(module) {
-    let dg = this.dialog.open(ViewCoursesComponent, {
+    const dg = this.dialog.open(ViewCoursesComponent, {
       data: {
+        // tslint:disable-next-line:object-literal-shorthand
         module: module
       },
       width: '95%',
@@ -107,6 +128,6 @@ export class ModuleRepositoryComponent implements OnInit {
 
     dg.afterClosed().subscribe((data) => {
       this.getModules();
-    })
+    });
   }
 }

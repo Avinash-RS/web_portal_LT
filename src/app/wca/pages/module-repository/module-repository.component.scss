@@ -33,4 +33,15 @@
         margin: 0 0 0 1.5% !important;
         color: #1f3777;
     }
+
+    .pagination-container {
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+    }
+    .confirm-btn {
+        background-color: #1f3777 !important;
+        color: white !important;
+        margin-left: 22%;
+    }
 }
