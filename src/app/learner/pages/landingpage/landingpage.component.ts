@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
   styleUrls: ['./landingpage.component.scss']
 })
 export class LandingpageComponent implements OnInit {
-  courses: { name: string; description: string; src: string; rating: number }[];
+  courses: { course_name: string; course_description: string; course_img_url: string; rating: number }[];
   // hoverIdx = -1;
   breakpoint: number;
   detailsForm: FormGroup;
@@ -48,67 +48,67 @@ export class LandingpageComponent implements OnInit {
 
     this.courses = [
       {
-        name: 'Javascript',
-        description:
+        course_name: 'Javascript',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/1.jpg',
+        course_img_url: 'assets/courses/1.jpg',
         rating: 5,
       },
       {
-        name: 'Angular',
-        description:
+        course_name: 'Angular',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/2.jpg',
+        course_img_url: 'assets/courses/2.jpg',
         rating: 5,
       },
       {
-        name: 'Web development',
-        description:
+        course_name: 'Web development',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/3.jpg',
+        course_img_url: 'assets/courses/3.jpg',
         rating: 5,
       },
       {
-        name: 'Coding',
-        description:
+        course_name: 'Coding',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/4.jpg',
+        course_img_url: 'assets/courses/4.jpg',
         rating: 5,
       },
       {
-        name: 'Javascript',
-        description:
+        course_name: 'Javascript',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/1.jpg',
+        course_img_url: 'assets/courses/1.jpg',
         rating: 5,
       },
       {
-        name: 'Angular',
-        description:
+        course_name: 'Angular',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/2.jpg',
+        course_img_url: 'assets/courses/2.jpg',
         rating: 5,
       },
       {
-        name: 'Web development and Web Design',
-        description:
+        course_name: 'Web development',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/3.jpg',
-        rating: 5,
+        course_img_url: 'assets/courses/3.jpg',
+        rating: 4,
       },
       {
-        name: 'Coding',
-        description:
+        course_name: 'Coding and Coding Challenge',
+        course_description:
           // tslint:disable-next-line:max-line-length
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        src: 'assets/courses/4.jpg',
+        course_img_url: 'assets/courses/4.jpg',
         rating: 5,
       },
     ];

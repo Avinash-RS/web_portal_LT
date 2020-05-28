@@ -196,63 +196,23 @@
     </div>
   </div>
   <br><br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-    <ng-template carouselSlide *ngFor="let course of courses">
-      <div class="containerOverlay">
-        <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
-          (click)="selectCourse(course,i+'c')">
-        <div class="overlay p-5px" style="margin-bottom: 0;">
-          <p class="course_description">
-            {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
-          </p>
-        </div>
-      </div>
-      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
-        <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
-        <button class="float_right m-b-10 m-t-10">Enroll</button>
-      </div>
-    </ng-template>
-    <br>
-  </owl-carousel-o>
-  <br><br>
-  <!-- End of Popular courses -->
 
-  <!-- start of trending courses -->
-  <div class="row m-l-20 m-r-20">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
-      <p>Trending Courses</p>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
-      <button mat-flat-button class="blue-border color_blue"
-        style="right: 10px; width: 17%;   height: 45px; font-size: initial; pointer-events: none;">
-        All | 25
-      </button>
-    </div>
-  </div>
-  <br><br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+  <!-- <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
-      <div class="containerOverlay">
-        <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
-          (click)="selectCourse(course,i+'c')">
-        <div class="overlay p-5px" style="margin-bottom: 0;">
-          <p class="course_description">
-            {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
-          </p>
-        </div>
-      </div>
-      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
-        <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
-        <button class="float_right m-b-10 m-t-10">Enroll</button>
-      </div>
+      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+        [goto]="null">
+      </app-course-component>
     </ng-template>
     <br>
-  </owl-carousel-o>
-  <!-- <div class="row m-l-20 m-r-20 m-t-25">
+  </owl-carousel-o> -->
+
+  <div class="row m-l-20 m-r-20 m-t-25">
     <div class="col-md-11 center">
       <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="1.7:2" (window:resize)="onResize($event)">
-        <mat-grid-tile *ngFor=" let course of courses; let i = index" [style.border]="'none'" [colspan]="1" [rowspan]="1">
-          <mat-card class="p-5px course-card shadow width_80">
+        <mat-grid-tile *ngFor=" let course of courses; let i = index" [style.border]="'none'" [colspan]="1"
+          [rowspan]="1">
+          <!-- <mat-card class="p-5px course-card shadow width_80">
             <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
               (click)="selectCourse(course,i+'c')">
             <mat-card-content>
@@ -279,11 +239,52 @@
                 </div>
               </mat-card-action>
             </mat-card-content>
-          </mat-card>
+          </mat-card> -->
+          <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true" [showWishlist]="true"
+            [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="false" [showDate]="false"
+            [goto]="null">
+          </app-course-component>
+
         </mat-grid-tile>
       </mat-grid-list>
     </div>
-  </div>  -->
+  </div>
+
+  <br><br>
+  <!-- End of Popular courses -->
+
+  <!-- start of trending courses -->
+  <div class="row m-l-20 m-r-20">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
+      <p>Trending Courses</p>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
+      <button mat-flat-button class="blue-border color_blue"
+        style="right: 10px; width: 17%;   height: 45px; font-size: initial; pointer-events: none;">
+        All | 25
+      </button>
+    </div>
+  </div>
+  <br><br>
+  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+    <ng-template carouselSlide *ngFor="let course of courses">
+      <div class="containerOverlay">
+        <img class="pointer m-b-10 course-image center" src="{{course.course_img_url}}" alt=""
+          (click)="selectCourse(course,i+'c')">
+        <div class="overlay p-5px" style="margin-bottom: 0;">
+          <p class="course_description">
+            {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+          </p>
+        </div>
+      </div>
+      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+        <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
+        <button class="float_right m-b-10 m-t-10">Enroll</button>
+      </div>
+    </ng-template>
+    <br>
+  </owl-carousel-o>
+
   <br><br>
 
 </div>
