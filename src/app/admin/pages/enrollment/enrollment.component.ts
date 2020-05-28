@@ -64,7 +64,7 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesindividual(data) {
     console.log(data);
     this.columns = [
-      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
+      { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
