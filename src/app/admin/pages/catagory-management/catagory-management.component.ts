@@ -137,7 +137,6 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   selectedcategory(category) {
-    console.log('inside');
     this.canotEdit = true;
     this.edit = false;
     this.courses = [];

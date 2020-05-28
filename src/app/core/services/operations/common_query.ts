@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const logout = gql`
   query logout($user_id: String, $is_admin: Boolean){
@@ -412,7 +412,7 @@ export const syllabus_of_particular_scorm = gql`
       }
     }
   }`;
-  export const getCoursesByName = gql`
+export const getCoursesByName = gql`
     query getCoursesByName($courseName : String!){
       getCoursesByName(courseName: $courseName) {
         success
@@ -509,8 +509,8 @@ export const syllabus_of_particular_scorm = gql`
            updated_at
            created_at
     }
-    }    
-    
+    }
+
       }
   `;
   export const get_all_course_by_usergroup = gql`
