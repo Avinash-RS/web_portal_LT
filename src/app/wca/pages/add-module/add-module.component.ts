@@ -19,7 +19,7 @@ export class AddModuleComponent implements OnInit {
   queryData: any;
   courseDetails: any;
   routedCourseDetails: any;
-  noOfModules: number = 0;
+  noOfModules = 0;
   hoverName: string;
   isHover: boolean;
   isDrag: boolean;
@@ -27,16 +27,18 @@ export class AddModuleComponent implements OnInit {
   moduleList = [];
   isFileContent = false;
   @ViewChild('file') fileUploaded;
-  scormPath: string = '';
+  scormPath = '';
 
   constructor(public spinner: NgxSpinnerService,
-    private alertService: AlertServiceService,private gs: GlobalServiceService,
-    public toast: ToastrService, private router: Router, public route: ActivatedRoute, public apiService: WcaService) { }
+    private alertService: AlertServiceService,
+    public toast: ToastrService,
+    private router: Router,
+    public route: ActivatedRoute,
+    public apiService: WcaService) { }
 
   ngOnInit() {
-    localStorage.setItem('role','admin');
-    this.gs.checkLogout();
-    this.resetList()
+
+    this.resetList();
 
     this.route.queryParams.subscribe(params => {
       let flag = 0;
@@ -47,7 +49,7 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
-        this.isRepo = (this.queryData.isRepo == 'true') ? 'true' : 'false'
+        this.isRepo = (this.queryData.isRepo === 'true') ? 'true' : 'false';
         this.routedCourseDetails = {
           courseId: params.courseId,
           courseImage: params.courseImage,
@@ -58,8 +60,6 @@ export class AddModuleComponent implements OnInit {
         localStorage.setItem('courseid',this.routedCourseDetails.courseId)
       }
     });
-
-
     this.route.snapshot.paramMap.get('courseDetails');
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
@@ -67,25 +67,17 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
-
-  items2: any[]
-
-  done = [
-
-
-  ];
-
   resetList() {
 
     // setTimeout(() => {
     if (this.courseDetails && this.courseDetails.coursedetails) {
       this.courseDetails.coursedetails = this.courseDetails.coursedetails.slice();
     }
-    // }, 0);    
+    // }, 0);
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    //this.isDrag = false;
+    // this.isDrag = false;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -100,30 +92,28 @@ export class AddModuleComponent implements OnInit {
 
 
   getCourseDetails() {
-    //this.spinner.show();
     this.moduleList = [];
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      if (this.isRepo == 'true') {
+      if (this.isRepo === 'true') {
         this.getRepoModules();
         this.isRepo = 'false';
-      }
-      else {
+      } else {
         this.updateModList();
         this.updateCourseDetails();
       }
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-    })
+    });
   }
 
   updateModList() {
     this.courseDetails.coursedetails.forEach((data) => {
       if (data.moduleid) {
-        this.moduleList.push(data.moduleid)
+        this.moduleList.push(data.moduleid);
       }
-    })
+    });
   }
 
   updateCourseDetails() {
@@ -138,25 +128,25 @@ export class AddModuleComponent implements OnInit {
   }
 
   onUploadDoc(fileList: FileList): void {
-    let file = fileList[0];
-    let fileReader: FileReader = new FileReader();
-    let that = this;
+    const file = fileList[0];
+    const fileReader: FileReader = new FileReader();
+    const that = this;
     that.isFileContent = false;
+    // tslint:disable-next-line:only-arrow-functions
     fileReader.onloadend = function (x) {
-      that.isFileContent = String(fileReader.result).includes("imsmanifest.xml") ? true : false;
+      that.isFileContent = String(fileReader.result).includes('imsmanifest.xml') ? true : false;
       if (!that.isFileContent) {
         that.fileUploaded.nativeElement.value = '';
         that.toast.warning('Kindly upload a valid zip file');
-      }
-      else {
+      } else {
         that.uploadDoc(file);
       }
-    }
+    };
     fileReader.readAsText(file);
   }
 
   uploadDoc(file) {
-    let scormCourse = file;
+    const scormCourse = file;
     const formData = new FormData();
     formData.append('scrom', scormCourse);
     this.apiService.uploadScromCourse(formData).subscribe((data: any) => {
@@ -164,37 +154,39 @@ export class AddModuleComponent implements OnInit {
     }, error => {
       this.scormPath = '';
       this.fileUploaded.nativeElement.value = '';
-      this.toast.warning('oops someting went wrong. Try again!!!')
-    })
+      this.toast.warning('oops someting went wrong. Try again!!!');
+    });
   }
 
-  addToRepo(idx) {
+  addToRepo(idx, module) {
+    if (!module.moduleid || module.moduleid.length == 0) {
+      this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
+        if (data) {
+          this.courseDetails.flag = 'false';
+          let count = 0;
+          let modDetails;
 
-    this.alertService.openConfirmAlert('Are you sure you want to add module to the repository', '').then((data: Boolean) => {
-      if (data) {
-        this.courseDetails.flag = "false";
-        let count = 0;
-        let modDetails;
+          // tslint:disable-next-line:no-shadowed-variable
+          this.courseDetails.coursedetails.forEach((data: any) => {
+            if (idx === count) {
+              modDetails = data;
+              modDetails.coursedetails = [];
+              modDetails.courseid = this.courseDetails.courseid;
+              modDetails.coursename = this.courseDetails.coursename;
+            }
+            ++count;
+          });
 
-        this.courseDetails.coursedetails.forEach((data) => {
-          if (idx == count) {
-            modDetails = data;
-            modDetails.coursedetails = [];
-            modDetails.courseid = this.courseDetails.courseid;
-            modDetails.coursename = this.courseDetails.coursename;
-          }
-          ++count;
-        });
-
-        this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
-          if (res.Code == 200) {
-            this.moduleList.push(res.Result);
-            this.getCourseDetails();
-            this.toast.success("Module added to repository successfully")
-          }
-        });
-      }
-    })
+          this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
+            if (res.Code === 200) {
+              this.moduleList.push(res.Result);
+              this.getCourseDetails();
+              this.toast.success('Module added to repository successfully');
+            }
+          });
+        }
+      });
+    }
   }
   deleteScromFile(e) {
     this.scormPath = '';
@@ -204,31 +196,33 @@ export class AddModuleComponent implements OnInit {
   }
 
   deleteModule(idx) {
+    // tslint:disable-next-line:ban-types
     this.alertService.openConfirmAlert('Are you sure you want to delete it', '').then((data: Boolean) => {
       if (data) {
-        this.courseDetails.flag = "false";
+        this.courseDetails.flag = 'false';
         let count = 0;
-        this.courseDetails.coursedetails.forEach((data) => {
-          if (idx == count) {
-            data.modulestatus = "false";
+        // tslint:disable-next-line:no-shadowed-variable
+        this.courseDetails.coursedetails.forEach((data: any) => {
+          if (idx === count) {
+            data.modulestatus = 'false';
           }
           ++count;
         });
         this.updateCourseDetails();
       }
-    })
+    });
   }
 
   onCreate() {
-    if (this.scormPath.length == 0) {
+    if (this.scormPath.length === 0) {
       this.spinner.show();
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
-        if (res.Code == 200) {
+        if (res.Code === 200) {
           this.getCourseDetails();
           const obj = {
             course_id: this.routedCourseDetails.courseId,
             is_active: 0
-          }
+          };
           this.apiService.updateCourse(obj).subscribe((data: any) => {
           });
           this.toast.success('Module updated successfully');
@@ -237,52 +231,52 @@ export class AddModuleComponent implements OnInit {
         this.spinner.hide();
       }, err => {
         this.spinner.hide();
-      })
-    }
-    else if(this.scormPath.length > 0) {
+      });
+    } else if (this.scormPath.length > 0) {
       this.spinner.show();
-      this.courseDetails.coursetype = "SCORM";
+      this.courseDetails.coursetype = 'SCORM';
       this.courseDetails.coursefile = this.scormPath;
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
-        if (res.Code == 200) {
+        if (res.Code === 200) {
           this.getCourseDetails();
           const obj = {
             course_id: this.routedCourseDetails.courseId,
             is_active: 0
-          }
+          };
           this.apiService.updateCourse(obj).subscribe((data: any) => {
           });
           this.toast.success('Module updated successfully');
-           this.router.navigate(['/Admin/auth/Wca']);
+          this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner.hide();
       }, err => {
         this.spinner.hide();
-      })
+      });
     }
   }
 
   addTopic(value, index) {
-    this.apiService.bSubject1.next({ index: index, courseDetails: this.courseDetails });
+    this.apiService.bSubject1.next({ index, courseDetails: this.courseDetails });
+    // tslint:disable-next-line:max-line-length
     this.router.navigate(['/Admin/auth/Wca/addtopic'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
   }
 
   navChooseTemp() {
-    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
+      // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
-    }
-    else {
-      this.toast.warning("SCORM course cannot be edited")
+    } else {
+      this.toast.warning('SCORM course cannot be edited');
     }
   }
 
   addModuleRepos() {
-    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length == 0) {
+    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
 
+      // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
-    }
-    else {
-      this.toast.warning("SCORM course cannot be edited")
+    } else {
+      this.toast.warning('SCORM course cannot be edited');
     }
   }
 
@@ -309,21 +303,33 @@ export class AddModuleComponent implements OnInit {
 
   getRepoModules() {
     this.apiService.repositoryModules().subscribe((data: any) => {
-      let moduleList = data.Result;
+      const moduleList = data.Result;
       moduleList.forEach((val) => {
-        if (val.moduleid == this.queryData.selectedModule) {
-          let mod = {
-            moduleid: val.moduleid,
-            modulename: val.modulename,
-            moduledetails: val.moduledetails,
-            modulestatus: 'true',
-            template_details: val.template_details
+        this.queryData.selectedModule.forEach((selectedModuleId) => {
+          let isInvalid = false;
+          this.courseDetails.coursedetails.forEach((cModId) => {
+            if (cModId.moduleid == val.moduleid) {
+              isInvalid = true;
+            }
+          })
+          if (!isInvalid) {
+            if (val.moduleid === selectedModuleId) {
+              const mod = {
+                moduleid: val.moduleid,
+                modulename: val.modulename,
+                moduledetails: val.moduledetails,
+                modulestatus: 'true',
+                template_details: val.template_details
+              };
+
+              this.courseDetails.coursedetails.push(mod);
+            }
           }
-          this.courseDetails.coursedetails.push(mod);
-        }
-      })
+        })
+
+      });
       this.updateCourseDetails();
       this.updateModList();
-    })
+    });
   }
 }
