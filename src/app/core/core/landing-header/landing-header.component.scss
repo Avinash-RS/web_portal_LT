@@ -1,6 +1,46 @@
 @import "variable";
 
-@media only screen and (max-width: 1444px) {
+@media only screen and (min-width: 992px) and (max-width:1182px){
+    .navbar-expand-lg .navbar-nav .link_1 {
+        margin-left: 125px
+    }
+
+    .navbar-expand-lg .navbar-nav .link_2 {
+        margin-left: -3px
+    }
+
+    .navbar-expand-lg .navbar-nav .link_3 {
+        margin-left: -4px
+    }
+
+    .navbar-expand-lg .navbar-nav .link_4 {
+        margin-left: 43px
+    }
+    .browser_btnn {
+        border: none;
+        border-radius: 20px !important;
+        color: $color-white;
+        background-color: $color-blue !important;
+        width: 130px;
+        height: 35px;
+        opacity: 76%;
+    }
+
+    .m-l-5 {
+        margin-left: 5% !important;
+    }
+
+    .getstarted_btnn {
+        color: $color-white;
+        background-color: $color-blue !important;
+        border: none;
+        border-radius: 20px;
+        width: 23%;
+        margin-left: 4%;
+        opacity: 76%;
+    }
+}
+@media only screen and(min-width:1183px) and (max-width: 1450px) {
     .navbar-light .navbar-nav .nav-link {
         // color: blue;
         $color-subhead: #446bd4d1;
@@ -22,19 +62,19 @@
     }
 
     .navbar-expand-lg .navbar-nav .link_1 {
-        margin-left: 290px
+        margin-left: 310px
     }
 
     .navbar-expand-lg .navbar-nav .link_2 {
-        margin-left: 20px
+        margin-left: -46px
     }
 
     .navbar-expand-lg .navbar-nav .link_3 {
-        margin-left: 20px
+        margin-left: -15px
     }
 
     .navbar-expand-lg .navbar-nav .link_4 {
-        margin-left: -20px
+        margin-left: -31px
     }
 
     a {
@@ -54,7 +94,7 @@
         border-radius: 20px !important;
         color: $color-white;
         background-color: $color-blue !important;
-        width: 12%;
+        width: 130px;
         height: 35px;
         opacity: 76%;
     }
@@ -75,23 +115,23 @@
 
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 800px) {
     .navbar-expand-lg[_ngcontent-vgr-c4] .navbar-nav[_ngcontent-vgr-c4] .link_1[_ngcontent-vgr-c4] {
         margin-left: 101px !important;
     }
 }
 
 
-@media only screen and (max-width: 2560px) {
+@media only screen and(min-width: 2200px)and (max-width: 2562px) {
     .navbar-expand-lg[_ngcontent-crc-c4] .navbar-nav[_ngcontent-crc-c4] .link_1[_ngcontent-crc-c4] {
-        margin-left: 314%;
+        margin-left: 339%;
     }
     .browser_btnn {
         border: none;
         border-radius: 20px !important;
         color: $color-white;
         background-color: $color-blue !important;
-        width: 12%;
+        width: 130px;
         height: 35px;
         opacity: 76%;
     }
@@ -106,7 +146,23 @@
         border: none;
         border-radius: 20px;
         width: 23%;
-        margin-left: -15%;
+        margin-left: 48px;
         opacity: 76%;
+    }
+    
+    .navbar-expand-lg .navbar-nav .link_1 {
+        margin-left: 1166px;
+    }
+
+    .navbar-expand-lg .navbar-nav .link_2 {
+        margin-left: 0px
+    }
+
+    .navbar-expand-lg .navbar-nav .link_3 {
+        margin-left: 0px
+    }
+
+    .navbar-expand-lg .navbar-nav .link_4 {
+        margin-left: 154px
     }
 }
