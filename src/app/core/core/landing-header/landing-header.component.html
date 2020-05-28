@@ -1,0 +1,73 @@
+<!-- ////for Logged out user///////// -->
+
+<!-- <nav class="navbar navbar-expand-lg navbar-default" *ngIf="userDetailes == null">
+  <img class="logo_img" src="../../assets/images/l&t.png">
+  
+  <button
+    style="color: white; background-color: blue;border: none;border-radius: 20px;    width: 12%;
+    height: 35px;margin-left: 5%; ">BrowseCategories</button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+    <div class="navbar-nav">
+      <a class="nav-item nav-link link_1" href="#">Wat'sNew</a>
+      <a class="nav-item nav-link link_2" href="#">TalkToExpert</a>
+      <a class="nav-item nav-link link_3" href="#">FAQ</a>
+      <a class="nav-item nav-link link_4 " href="#">login</a>
+      <button
+        style="color: white; background-color: blue;border: none;border-radius: 20px;width: 23%;margin-left:-15% ;">getstarted</button>
+    </div>
+  </div>
+</nav> -->
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <img class="logo" src="../../assets/images/logo.png">
+  <a class="navbar-brand edutech" href="/Learner">EDUTECH</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto">
+        <i class="fa fa-th box" aria-hidden="true"></i>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            Categories
+            <b class="caret"></b>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="input-group">
+      <input class="form-control border-right-0" placeholder="  Search   ">
+      <span class="input-group-append bg-white border-left-0">
+        <span class="input-group-text bg-transparent">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
+
+    <div class="login_btn">
+      <ul class="navbar-nav mr-auto">
+        <li class="smallmenu2">
+          <button class="backgroundcol" routerLink="/Learner/register">Register</button>
+        </li>
+        <li class="smallmenu2">
+          <button class="backgroundcol" routerLink="/Learner/login">Log in</button>
+        </li>
+        <li class="dropdown1">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            Help
+            <b class="caret"></b>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

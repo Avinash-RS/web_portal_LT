@@ -30,6 +30,7 @@ import { VgBufferingModule } from 'videogular2/compiled/buffering';
 import { SearchComponent } from './shared/search/search.component';
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
+import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -51,7 +52,8 @@ const routes: Routes = [
     ListViewCourseComponentComponent,
     SearchComponent,
     DragDropImageDirective,
-    GuidelineSearchComponent
+    GuidelineSearchComponent,
+    LandingHeaderComponent
   ],
 
   imports: [
@@ -74,6 +76,7 @@ const routes: Routes = [
 
   exports: [
     HeaderComponent,
+    LandingHeaderComponent,
     FooterComponent,
     CourseComponentComponent,
     TopCoursesComponent,
