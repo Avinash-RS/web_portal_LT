@@ -53,7 +53,7 @@
         bottom: 5vh;
         left: 10%;
         opacity: 0;
-        background-color:  $color-white;
+        background-color: $color-white;
         filter: alpha(opacity=0);
     }
 
@@ -65,7 +65,7 @@
 .containerOverlay:hover .overlay {
     opacity: 0.9;
     filter: alpha(opacity=100);
-    background-color:  $color-white;
+    background-color: $color-white;
 }
 
 .containerOverlay1 {
@@ -77,7 +77,7 @@
         bottom: 5vh;
         left: 10%;
         opacity: 0;
-        background-color:  $color-white;
+        background-color: $color-white;
         filter: alpha(opacity=0);
     }
 
@@ -149,6 +149,29 @@ strong {
 .shadow {
     box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
+
+// .topright {
+//     position: absolute;
+//     top: 8px;
+//     right: 16px;
+//     font-size: 18px;
+// }
+
+.wishlist {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    z-index: 1;
+    // margin-left: -5px;
+    margin-top: 10px;
+
+    .wishlist_btn {
+        background: white;
+        opacity: 0.5;
+        border-radius: 0;
+    }
+}
+
 
 
 // END OF LOGGED IN USER
