@@ -150,17 +150,11 @@ strong {
     box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
 
-// .topright {
-//     position: absolute;
-//     top: 8px;
-//     right: 16px;
-//     font-size: 18px;
-// }
 
 .wishlist {
     position: absolute;
-    top: 8px;
-    right: 16px;
+    top: -1px;
+    right: 24px;
     z-index: 1;
     // margin-left: -5px;
     margin-top: 10px;
