@@ -41,7 +41,16 @@
           </span> <small class="color_grey">2,500 learners</small>
         </div>
         <div class="col-6 float_right width_80 no_padding">
-          <button id="enroll_now" (click)="enrollCourse()"> Enroll now
+          <button id="enroll_now" *ngIf="course.enrollment_status == null" (click)="enrollCourse()"> Enroll now
+          </button>
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'pending'"
+            disabled="{{course.enrollment_status == 'pending'}}">Requested
+          </button>
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'rejected'"
+            disabled="{{course.enrollment_status == 'rejected'}}">Request Rejected
+          </button>
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
+            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
         </div>
       </div>
