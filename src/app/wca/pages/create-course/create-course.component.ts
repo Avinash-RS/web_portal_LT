@@ -6,7 +6,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-create-course',
@@ -15,7 +15,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class CreateCourseComponent implements OnInit {
 
-    editor = ClassicEditor;
+    // editor = ClassicEditor;
     courseForm: FormGroup;
     imageView: File;
     submitted = false;
@@ -25,23 +25,26 @@ export class CreateCourseComponent implements OnInit {
     preview4 = [];
     preRequisites = [];
     separatorKeysCodes = [ENTER, COMMA];
+    // tslint:disable-next-line:variable-name
     author_details: FormArray;
+    // tslint:disable-next-line:variable-name
     coursepartner_details: FormArray;
+    // tslint:disable-next-line:variable-name
     takeway_details: FormArray;
     AllInstructors = [];
     AllTakeawayDetails = [];
     AllPrerequisitDetails = [];
     AllCertifyDetails = [];
-    languages = ['English']
+    languages = ['English'];
     queryData: any;
     courseEditDetails: any;
     authorLengthArray = [];
     courseLengthArray = [];
-    TakeAwayLengthArray = []
+    TakeAwayLengthArray = [];
 
 
     createItem(): FormGroup {
-        this.preview2.push(null)
+        this.preview2.push(null);
         return this.formBuilder.group({
             author_name: '',
             description: '',
@@ -51,7 +54,7 @@ export class CreateCourseComponent implements OnInit {
 
 
     createItem1(): FormGroup {
-        this.preview3.push(null)
+        this.preview3.push(null);
         return this.formBuilder.group({
             name: '',
             image: ''
@@ -61,7 +64,10 @@ export class CreateCourseComponent implements OnInit {
     createItem2(): FormGroup {
         return this.formBuilder.group({
             text: '',
-            media: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] && this.courseEditDetails.takeway_details[0].media ? this.courseEditDetails.takeway_details[0].media.map((data, index) => {
+            media: this.formBuilder.array(
+                this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] &&
+                this.courseEditDetails.takeway_details[0].media ?
+                this.courseEditDetails.takeway_details[0].media.map((data, index) => {
                 return this.createMedia();
             }) : [this.createMedia()]),
             description: '',
@@ -70,8 +76,8 @@ export class CreateCourseComponent implements OnInit {
         });
     }
     createMedia(): FormControl {
-        this.preview4.push(null)
-        return this.formBuilder.control("")
+        this.preview4.push(null);
+        return this.formBuilder.control('');
     }
     constructor(
         public formBuilder: FormBuilder,
@@ -94,9 +100,9 @@ export class CreateCourseComponent implements OnInit {
             if (flag) {
                 this.queryData = params;
                 if (this.queryData && this.queryData.edit) {
-                    this.updateFormCourse(this.queryData.viewingModule)
+                    this.updateFormCourse(this.queryData.viewingModule);
                 } else {
-                    this.courseForm = this.mainFormCreation()
+                    this.courseForm = this.mainFormCreation();
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
                 }
             } else {
@@ -114,10 +120,12 @@ export class CreateCourseComponent implements OnInit {
             course_img_url: [null, Validators.compose([Validators.required])],
             pre_requisite: [this.preRequisites, Validators.compose([])],
             preview_video: [null, Validators.compose([])],
-            author_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.author_details && this.courseEditDetails.author_details.length ? this.courseEditDetails.author_details.map((data, index) => {
+            author_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.author_details &&
+                this.courseEditDetails.author_details.length ? this.courseEditDetails.author_details.map((data, index) => {
                 return this.createItem();
             }) : [this.createItem()]),
-            coursepartner_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.coursepartner_details && this.courseEditDetails.coursepartner_details.length ? this.courseEditDetails.coursepartner_details.map((data, index) => {
+            coursepartner_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.coursepartner_details &&
+                this.courseEditDetails.coursepartner_details.length ? this.courseEditDetails.coursepartner_details.map((data, index) => {
                 return this.createItem1();
             }) : [this.createItem1()]),
             takeway_details: this.formBuilder.array([this.createItem2()]),
@@ -156,7 +164,7 @@ export class CreateCourseComponent implements OnInit {
     }
 
     add3(): void {
-        this.takeway_details = this.courseForm.get('takeway_details').get(String(0)).get("media") as FormArray;
+        this.takeway_details = this.courseForm.get('takeway_details').get(String(0)).get('media') as FormArray;
         this.takeway_details.push(this.createMedia());
 
     }
@@ -169,9 +177,9 @@ export class CreateCourseComponent implements OnInit {
 
 
     onSelectFile(fileInput: any, type, index, j = null) {
-        var imagepath;
-        var filePath = fileInput.target.files[0].name;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        let imagepath;
+        const filePath = fileInput.target.files[0].name;
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         if (!allowedExtensions.exec(filePath)) {
             this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
             fileInput.value = '';
@@ -179,27 +187,28 @@ export class CreateCourseComponent implements OnInit {
         } else {
             if (fileInput && fileInput.target && fileInput.target.files[0]) {
                 this.spinner.show();
-                const reader = new FileReader()
+                const reader = new FileReader();
                 this.imageView = fileInput.target.files[0];
                 const formData = new FormData();
+                // tslint:disable-next-line:no-unused-expression
                 this.imageView.type === 'file';
                 formData.append('image', this.imageView);
                 this.wcaService.uploadImage(formData).subscribe((data: any) => {
                     imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
                     this.spinner.hide();
-                    reader.addEventListener("load", () => {
+                    reader.addEventListener('load', () => {
                         // convert image file to base64 string
                         if (type === 'img1') {
                             this.preview1 = reader.result;
                             this.courseForm.get('course_img_url').setValue(imagepath);
                         } else if (type === 'img2') {
-                            this.courseForm.get('author_details').get(String(index)).get('image').setValue(imagepath)
+                            this.courseForm.get('author_details').get(String(index)).get('image').setValue(imagepath);
                             this.preview2[index] = reader.result;
                         } else if (type === 'img3') {
-                            this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(imagepath)
+                            this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(imagepath);
                             this.preview3[index] = reader.result;
                         } else if (type === 'img4') {
-                            this.courseForm.get('takeway_details').get(String(index)).get('media').get(String(j)).setValue(imagepath)
+                            this.courseForm.get('takeway_details').get(String(index)).get('media').get(String(j)).setValue(imagepath);
                             this.preview4[j] = reader.result;
                         }
                     }, false);
@@ -271,7 +280,7 @@ export class CreateCourseComponent implements OnInit {
         this.courseForm.value.is_active = 0;
         this.courseForm.value.published_by = '';
         this.courseForm.value.publisher_id = '';
-        this.courseForm.value.updated_by_id = ''
+        this.courseForm.value.updated_by_id = '';
 
 
 
@@ -296,8 +305,10 @@ export class CreateCourseComponent implements OnInit {
                 this.wcaService.updateCourse(this.courseForm.value).subscribe((data: any) => {
                     if (data && data.success === true) {
                         this.toast.success('Course Updated Successfully !!!');
-                        // this.router.navigate(['/Admin/auth/Wca/viewmodule'],{ queryParams: { viewingModule:data.course_id ,image: this.courseForm.value.course_img_url,courseName:this.courseForm.value.course_name}});
-                        this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams: { courseId: this.queryData.viewingModule, courseImage: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
+                        this.router.navigate(['/Admin/auth/Wca/addmodule'],
+                        { queryParams: { courseId: this.queryData.viewingModule,
+                            courseImage: this.courseForm.value.course_img_url,
+                            courseName: this.courseForm.value.course_name } });
 
                     } else {
                         this.toast.error('Something Went Wrong While Updating !!!');
@@ -306,7 +317,7 @@ export class CreateCourseComponent implements OnInit {
                     this.spinner.hide();
                 }, err => {
                     this.spinner.hide();
-                })
+                });
             } else {
                 this.wcaService.createCourse(this.courseForm.value).subscribe((data: any) => {
                     this.spinner.hide();
@@ -321,15 +332,18 @@ export class CreateCourseComponent implements OnInit {
                             createdby_name: this.courseForm.value.user_name,
                             createdby_id: this.courseForm.value.user_id,
                             createdby_role: this.courseForm.value.user_role
-                        }
+                        };
+                        // tslint:disable-next-line:no-shadowed-variable
                         this.wcaService.saveCourse(obj).subscribe((data: any) => {
                         });
                         this.toast.success('Course Created Successfully !!!');
-                        this.router.navigate(['/Admin/auth/Wca/viewmodule'], { queryParams: { viewingModule: data.course_id, image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
+                        this.router.navigate(['/Admin/auth/Wca/viewmodule'],
+                        { queryParams: { viewingModule: data.course_id,
+                            image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
                     }
                 }, err => {
                     this.spinner.hide();
-                })
+                });
             }
         } else {
             this.toast.warning('Something Went Wrong !!!');
@@ -373,7 +387,7 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllPrerequisitDetails().subscribe((data: any) => {
             this.AllPrerequisitDetails = [];
             this.AllPrerequisitDetails = data.Result;
-        })
+        });
         this.startup1();
     }
 
@@ -381,7 +395,7 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllInstructors().subscribe((data: any) => {
             this.AllInstructors = [];
             this.AllInstructors = data.Result;
-        })
+        });
         this.startup2();
     }
 
@@ -390,7 +404,7 @@ export class CreateCourseComponent implements OnInit {
             this.AllCertifyDetails = [];
             this.AllCertifyDetails = data.Result;
 
-        })
+        });
         this.startup3();
     }
 
@@ -398,24 +412,24 @@ export class CreateCourseComponent implements OnInit {
         this.wcaService.getAllTakeawayDetails().subscribe((data: any) => {
             this.AllTakeawayDetails = [];
             this.AllTakeawayDetails = data.Result;
-        })
+        });
     }
 
 
     get selected() {
         return this.courseForm.get('author_details').value.map(i => {
-            return i.author_name
-        })
+            return i.author_name;
+        });
     }
 
     get selected1() {
         return this.courseForm.get('coursepartner_details').value.map(i => {
-            return i.name
-        })
+            return i.name;
+        });
     }
 
     change(name, index) {
-        let option = this.AllInstructors.find(i => i.name === name)
+        const option = this.AllInstructors.find(i => i.name === name);
         this.courseForm.get('author_details').get(String(index)).get('author_name').setValue(option.name);
         this.courseForm.get('author_details').get(String(index)).get('description').setValue(option.description);
         this.courseForm.get('author_details').get(String(index)).get('image').setValue(option.image);
@@ -423,7 +437,7 @@ export class CreateCourseComponent implements OnInit {
 
 
     change1(name, index) {
-        let option = this.AllTakeawayDetails.find(i => i.name === name)
+        const option = this.AllTakeawayDetails.find(i => i.name === name);
         this.courseForm.get('coursepartner_details').get(String(index)).get('name').setValue(option.name);
         this.courseForm.get('coursepartner_details').get(String(index)).get('image').setValue(option.image);
     }
@@ -438,12 +452,12 @@ export class CreateCourseComponent implements OnInit {
             this.spinner.show();
             const obj = {
                 course_id: courseid,
-            }
+            };
             this.wcaService.getcourseDetails(obj).subscribe((data: any) => {
                 if (data && data.message) {
                     this.courseEditDetails = null;
                     this.courseEditDetails = data.message;
-                    this.courseForm = this.mainFormCreation()
+                    this.courseForm = this.mainFormCreation();
                     this.preRequisites = this.courseEditDetails.pre_requisite;
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
                     this.courseForm.patchValue(this.courseEditDetails);
@@ -451,7 +465,7 @@ export class CreateCourseComponent implements OnInit {
                 this.spinner.hide();
             }, err => {
                 this.spinner.hide();
-            })
+            });
         }
     }
 }

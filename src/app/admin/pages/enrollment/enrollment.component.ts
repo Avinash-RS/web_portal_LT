@@ -8,8 +8,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as moment from 'moment';
-import { element } from 'protractor';
-
 @Component({
   selector: 'app-enrollment',
   templateUrl: './enrollment.component.html',
@@ -18,7 +16,7 @@ import { element } from 'protractor';
 export class EnrollmentComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  selectiontype = 'individual';
+  selectiontype = 'user_group';
   selectedcheckbox = true;
   selectedcheckbox1 = true;
   selection = new SelectionModel<any>(true, []);
@@ -34,26 +32,25 @@ export class EnrollmentComponent implements OnInit {
   enrollrequestdata: any;
   resultsLength: any;
   resultsLength1: any;
-
+  loading = false;
   constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
   ngOnInit() {
     this.enrollrequestdata = { group_id: 'undefined', pagenumber: 0, is_individual: false, course_id: 'undefined' };
-    this.getenrolledcoursesindividual(this.enrollrequestdata);
+    this.getenrolledcoursesgroup(0);
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
     };
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
-      if(!data[sortHeaderId]) {
-        return this.sort.direction === "asc" ? '3' : '1';
+      if (!data[sortHeaderId]) {
+        return this.sort.direction === 'asc' ? '3' : '1';
       }
       return '2' + data[sortHeaderId].toLocaleLowerCase();
     };
@@ -67,7 +64,7 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesindividual(data) {
     console.log(data);
     this.columns = [
-      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.lxp_joined_date).format('LL')}` },
+      { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
@@ -86,10 +83,10 @@ export class EnrollmentComponent implements OnInit {
 
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
-      { columnDef: 'request_date', header: 'Last received', cell: (element: any) => `${moment(element.request_date).format('LL')}` },
-      { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
-      { columnDef: 'totalCount', header: 'Enrollments', cell: (element: any) => `${element.totalCount}` },
-      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
+      { columnDef: 'request_date', header: 'Last received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
+      { columnDef: 'course_name', header: 'Course', cell: (elem: any) => `${elem.course_name}` },
+      { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem.totalCount}` },
+      { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
@@ -144,8 +141,8 @@ export class EnrollmentComponent implements OnInit {
 
   selectallchange(value) {
     console.log(this.dataSource1);
-    this.dataSource.data.forEach(element => {
-      element.isChecked = value;
+    this.dataSource.data.forEach(ele => {
+      ele.isChecked = value;
     });
     if (value === true) { this.selectedcheckbox = false; } else { this.selectedcheckbox = true; }
   }
@@ -203,12 +200,14 @@ export class EnrollmentComponent implements OnInit {
       status_reason: 'Approved',
       enrollments: array};
       console.log(data);
+      // this.loading = true;
       this.adminservice.approveenrollment(data).subscribe(( response: any ) => {
         if (response?.data?.approve_enrollment?.success === true) {
+          this.loading = false;
           if (this.dialogopened === true) {
-            const data = { group_id: this.selectedgroupid, pagenumber: 0,
+            const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
               is_individual: true, course_id: 'undefined' };
-            this.getenrolledcoursesforgroup(data);
+            this.getenrolledcoursesforgroup(data1);
             this.getenrolledcoursesgroup(0);
           } else {
             this.dataSource.data = [];
@@ -216,8 +215,8 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire(
             'Successfully Approved',
-            'A Confirmation has been sent to the user Email ID',
-            'success'
+            'A confirmation has been sent to the user email id',
+            // 'success'
           );
         }
       });
@@ -226,9 +225,8 @@ export class EnrollmentComponent implements OnInit {
   }
 
   reject(tablevalue) {
-    console.log(tablevalue)
     Swal.fire({
-      title: '<div> Reason for Rejection</div>',
+      title: '<div> Reason for rejection</div>',
       // title: 'Reason for Rejection',
       input: 'textarea',
       showCancelButton: true,
@@ -253,21 +251,23 @@ export class EnrollmentComponent implements OnInit {
         status_reason: result.value,
         enrollments: array};
         console.log(data);
+        // this.loading = true;
         this.adminservice.rejectenrollment(data).subscribe(( response: any ) => {
         console.log(response);
         if (response?.data?.reject_enrollment?.success === true) {
-          if (this.dialogopened === true) {
-            const data = { group_id: this.selectedgroupid, pagenumber: 0,
+        this.loading = false;
+        if (this.dialogopened === true) {
+            const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
               is_individual: true, course_id: 'undefined' };
-            this.getenrolledcoursesforgroup(data);
+            this.getenrolledcoursesforgroup(data1);
           } else {
             this.dataSource.data = [];
             this.radiobuttonchange();
           }
-          Swal.fire(
+        Swal.fire(
               'Rejection',
-              'Rejection with the comments shared to the user mail ID',
-              'error'
+              'Rejection with the comments shared to the user mail id',
+              // 'error'
             );
         }
         });
