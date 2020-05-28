@@ -14,20 +14,22 @@ export class ReportManagementComponent implements OnInit {
   total_count;
 
   constructor(public route: Router, private gs: GlobalServiceService, ) {
-    localStorage.setItem('role','admin');
+    localStorage.setItem('role', 'admin');
     this.gs.checkLogout();
-    this.report_data = this.route.getCurrentNavigation().extras.state.type
+    this.report_data = this.route.getCurrentNavigation().extras.state.type;
     // && this.route.getCurrentNavigation().extras.state.detail
-    if (this.report_data)
-      this.total_count = parseInt(this.report_data.duplicate_count) + parseInt(this.report_data.failure_count) + parseInt(this.report_data.success_count)
-    else
+    if (this.report_data) {
+      this.total_count = parseInt(this.report_data.duplicate_count) +
+      parseInt(this.report_data.failure_count) + parseInt(this.report_data.success_count);
+    } else {
     this.route.navigate(['/Admin/auth/userManagement']);
+    }
   }
 
   ngOnInit() {
     setTimeout(() => {
-      this.drawChart()
-    }, 1000)
+      this.drawChart();
+    }, 1000);
   }
 
   drawChart() {
@@ -38,7 +40,7 @@ export class ReportManagementComponent implements OnInit {
         datasets: [
           {
             data: [parseInt(this.report_data.success_count), parseInt(this.report_data.failure_count), parseInt(this.report_data.duplicate_count)],
-            backgroundColor: ["#008000", "#ff0000", "#ffa500"],
+            backgroundColor: ['#008000', '#ff0000', '#ffa500'],
             fill: false
           },
         ]
@@ -52,7 +54,7 @@ export class ReportManagementComponent implements OnInit {
           enabled: true
         }
       }
-    })
+    });
   }
   downloadDoc(url) {
     window.location.href = url;

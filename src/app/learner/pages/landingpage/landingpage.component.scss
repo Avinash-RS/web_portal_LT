@@ -20,6 +20,76 @@ html {
     width: 350px !important;
 }
 
+@media only screen and (max-width: 400px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -46%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+        left: 34%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 460px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -37%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+        left: 34%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+
+@media only screen and (min-width: 625px) and (max-width: 770px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -40%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+        left: 65%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 74%;
+    }
+}
+
+@media only screen and (min-width: 460px) and (max-width: 625px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -46%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+        left: 34%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+
+@media only screen and (min-width: 770px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -45%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+        left: 80%;
+    }
+
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 83.5%;
+    }
+}
+
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
     position: absolute;
     font-size: 32px;
@@ -27,18 +97,18 @@ html {
     padding: 12px;
     opacity: 1;
     font-weight: 300;
-    top: -45%;
+    // top: -45%;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
-    left: 80%;
+    // left: 80%;
     background: #ffffff;
     color: $color-blue !important;
     border: 1px solid $color-blue !important;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
-    left: 83.5%;
+    // left: 83.5%;
     background: $color-blue;
     color: white;
     border: 1px solid $color-blue !important;
@@ -51,59 +121,8 @@ html {
     padding: 0px;
     position: relative;
     overflow: hidden;
+    top: 8vh;
 }
-
-//End of Mythreyi
-
-
-//HEADER
-
-//YOUR CODE GOES HERE
-.navbar-light .navbar-nav .nav-link {
-    color: blue;
-}
-// .navbar-expand-lg .navbar-nav .nav-link {
-//     margin-left: 32%;
- 
-// }
-.navbar-expand-lg .navbar-nav .nav-link {
-  
-    padding-left: 0rem;
-    padding-right: 0rem;
-  
-}
-.navbar-expand-lg .navbar-nav .link_1{
-    margin-left:314px
-}
-.navbar-expand-lg .navbar-nav .link_2{
-    margin-left:20px
-}
-.navbar-expand-lg .navbar-nav .link_3{
-    margin-left:20px
-}
-.navbar-expand-lg .navbar-nav .link_4{
-    margin-left:-20px
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    margin-right: 18%!important;
-}
-.logo_img {
-    width: 112px;
-    height: 103px;
-}
-
-.btn_btn{
-color: white;
-background-color: blue;
-border: none;
-border-radius: 20px;
-width: 18%;}
-//END OF HEADER
-
 
 .section_1_card_1 {
     z-index: 1;
@@ -151,22 +170,66 @@ width: 18%;}
 
 
 //HEADER
+.navbar-light .navbar-nav .nav-link {
+    color: blue;
+}
 
+.navbar-light .navbar-nav .nav-link {
+    color: blue;
+}
 
-//YOUR CODE GOES HERE
+// .navbar-expand-lg .navbar-nav .nav-link {
+//     margin-left: 32%;
+
+// }
+.navbar-expand-lg .navbar-nav .nav-link {
+
+    padding-left: 0rem;
+    padding-right: 0rem;
+
+}
+
+.navbar-expand-lg .navbar-nav .link_1 {
+    margin-left: 314px
+}
+
+.navbar-expand-lg .navbar-nav .link_2 {
+    margin-left: 20px
+}
+
+.navbar-expand-lg .navbar-nav .link_3 {
+    margin-left: 20px
+}
+
+.navbar-expand-lg .navbar-nav .link_4 {
+    margin-left: -20px
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    margin-right: 18% !important;
+}
+
+.logo_img {
+    width: 112px;
+    height: 103px;
+}
+
+.btn_btn {
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 20px;
+    width: 18%;
+}
+
 .width_10 {
     width: 10% !important;
-  }
-//   .button_bttn{
-//     background-color: blue !important;
-//     border: none;
-//     color: white;
-//     border-radius: 10px;
-//     margin-left: -525%;
-//     margin-top: 10px;
-//   }
-//END OF HEADER
+}
 
+//END OF HEADER
 
 // courses CSS
 

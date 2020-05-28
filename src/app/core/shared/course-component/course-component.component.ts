@@ -35,7 +35,7 @@ export class CourseComponentComponent implements OnInit {
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (this.userDetail) {
-      this.viewWishList(this.course);
+      // this.viewWishList(this.course);
       this.getcourserStatus();
     }
   }
@@ -165,17 +165,21 @@ export class CourseComponentComponent implements OnInit {
   }
 
   enrollCourse() {
-    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
-      .subscribe((enrollCourse: any) => {
-        if (enrollCourse.data) {
-          if (enrollCourse.data.enrollcourse.success) {
-            Swal.fire('User enrolled successfully for the course');
+    if (this.userDetail?.user_id) {
+      this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+        .subscribe((enrollCourse: any) => {
+          if (enrollCourse.data) {
+            if (enrollCourse.data.enrollcourse.success) {
+              Swal.fire('User enrolled successfully for the course');
+            } else {
+              Swal.fire(enrollCourse.data.enrollcourse.message);
+            }
           } else {
-            Swal.fire(enrollCourse.data.enrollcourse.message);
+            Swal.fire('Please try again later');
           }
-        } else {
-          Swal.fire('Please try again later');
-        }
-      });
+        });
+    } else {
+      Swal.fire('Please login to continue');
+    }
   }
 }

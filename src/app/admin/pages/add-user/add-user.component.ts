@@ -23,59 +23,19 @@ export interface PeriodicElement {
 })
 export class AddUserComponent implements OnInit {
 
-  addUserForm: FormGroup;
-  adminDetails: any;
-  groups: any = [];
-  exceljson: any; // excel json is assigned
-  selectedfile = null; // excel file is assigned
-
 
   constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService, ) { }
-
-  ngOnInit() {
-    localStorage.setItem('role', 'admin');
-    this.addUserForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.fullnameVal),
-      email: new FormControl('', myGlobals.emailVal),
-      group: ['', myGlobals.req]
-    });
-    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
-    this.adminDetails = this.gs.checkLogout();
-    this.service.getUserGroup()
-      .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message
-      });
-  }
+              private alert: AlertServiceService, private service: AdminServicesService, ) { }
 
   get f() {
     return this.addUserForm.controls;
   }
 
-  addUser() {
-    var fullname = this.addUserForm.value.username.trimLeft();
-    if (fullname != "") {
-      if (fullname.length >= 3) {
-        var admin = [];
-        admin.push(this.adminDetails._id);
-        this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-          true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
-        ).subscribe((result: any) => {
-          if (result.data && result.data.user_registration) {
-            if (result.data.user_registration.success === 'true') {
-              this.addUserForm.reset();
-              this.alert.openAlert('Success !', 'User added successfully');
-            } else {
-              this.alert.openAlert(result.data.user_registration.message, null);
-            }
-          } else
-            this.alert.openAlert("Please try again later", null)
-        });
-      } else
-        this.alert.openAlert("Full name must be minimum of 3 characters long", null)
-    } else
-      this.alert.openAlert("Please enter full name", null)
-  }
+  addUserForm: FormGroup;
+  adminDetails: any;
+  groups: any = [];
+  exceljson: any; // excel json is assigned
+  selectedfile = null; // excel file is assigned
 
   columnHeader = ['studendID', 'fname', 'weight', 'symbol', 'select'];
 
@@ -88,12 +48,55 @@ export class AddUserComponent implements OnInit {
 
   ];
 
+  ngOnInit() {
+    localStorage.setItem('role', 'admin');
+    this.addUserForm = this.formBuilder.group({
+      username: new FormControl('', myGlobals.fullnameVal),
+      email: new FormControl('', myGlobals.emailVal),
+      group: ['', myGlobals.req]
+    });
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
+    this.service.getUserGroup()
+      .subscribe((result: any) => {
+        this.groups = result.data.get_user_group.message;
+      });
+  }
+
+  addUser() {
+    const fullname = this.addUserForm.value.username.trimLeft();
+    if (fullname !== '') {
+      if (fullname.length >= 3) {
+        const admin = [];
+        admin.push(this.adminDetails._id);
+        this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
+          true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
+        ).subscribe((result: any) => {
+          if (result.data && result.data.user_registration) {
+            if (result.data.user_registration.success === 'true') {
+              this.addUserForm.reset();
+              this.alert.openAlert('Success !', 'User added successfully');
+            } else {
+              this.alert.openAlert(result.data.user_registration.message, null);
+            }
+          } else {
+            this.alert.openAlert('Please try again later', null);
+          }
+        });
+      } else {
+        this.alert.openAlert('Full name must be minimum of 3 characters long', null);
+      }
+    } else {
+      this.alert.openAlert('Please enter full name', null);
+    }
+  }
+
   next(e) {
     this.tableData = [{ studendID: 6, fname: 'Carbon', weight: 12.0107, symbol: 'C' },
     { studendID: 7, fname: 'Nitrogen', weight: 14.0067, symbol: 'N' },
     { studendID: 8, fname: 'Oxygen', weight: 15.9994, symbol: 'O' },
     { studendID: 9, fname: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    ]
+    ];
 
   }
 
@@ -107,7 +110,7 @@ export class AddUserComponent implements OnInit {
       Email: null
     }];
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
     this.saveAsExcelFile(excelBuffer, 'Sample');
   }
@@ -148,15 +151,16 @@ export class AddUserComponent implements OnInit {
         const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
         const headerNames: any = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 })[0];
         this.exceljson = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-        const is_same = excelheaders.length === headerNames.length && excelheaders.every(function (element, index) {
+        // tslint:disable-next-line:only-arrow-functions
+        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function(element, index) {
           return element === headerNames[index];
         });
-        if (is_same === false) {
+        if (isSame === false) {
           this.alert.openAlert('Invalid Excel headers', 'Please choose the file to be uploaded');
         } else if (this.exceljson.length === 0) {
           this.alert.openAlert('Excel Sheet is Empty', null);
         } else {
-          this.selectedfile = <File>event[0];
+          this.selectedfile = event[0] as File;
           this.alert.openAlert('Uploaded Successfully', null);
         }
       };
@@ -182,7 +186,7 @@ export class AddUserComponent implements OnInit {
         });
       });
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exceldata);
-      const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
       const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([excelBuffer], {
