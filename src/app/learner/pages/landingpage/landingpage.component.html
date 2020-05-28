@@ -141,8 +141,7 @@
       </button>
     </div>
   </div>
-  <br><br>
-
+  <br>
   <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
       <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
@@ -182,10 +181,14 @@
       </button>
     </div>
   </div>
-  <br><br>
+  <br>
   <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
-      <div class="containerOverlay">
+      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+        [goto]="null">
+      </app-course-component>
+      <!-- <div class="containerOverlay">
         <img class="pointer m-b-10 course-image center" src="{{course.course_img_url}}" alt=""
           (click)="selectCourse(course,i+'c')">
         <div class="overlay p-5px" style="margin-bottom: 0;">
@@ -197,7 +200,7 @@
       <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
         <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
         <button class="float_right m-b-10 m-t-10">Enroll</button>
-      </div>
+      </div> -->
     </ng-template>
     <br>
   </owl-carousel-o>
