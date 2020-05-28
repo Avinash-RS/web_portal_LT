@@ -3,6 +3,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { map, filter } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +19,7 @@ export class LearnerHomeComponent implements OnInit {
 
   constructor(public learnerservice: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
-    private globalservice: GlobalServiceService) {
+    private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
   }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class LearnerHomeComponent implements OnInit {
   }
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
