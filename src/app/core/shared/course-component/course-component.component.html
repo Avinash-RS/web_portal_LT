@@ -19,6 +19,20 @@
 
 <mat-card class="p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
   <!-- <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt="" (click)="selectCourse(course,i+'c')"> -->
+
+  <div class="row wishlist">
+    <div class="topright">
+      <!-- <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn"> -->
+      <!-- <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
+        <mat-icon *ngIf="course.wishlisted == false" style="color:transparent;">favorite</mat-icon> -->
+      <button mat-icon-button aria-label="Example icon button with a heart icon" (click)="selectWishlist(course)"
+        class="wishlist_btn no_padding">
+        <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
+        <mat-icon *ngIf="course.wishlisted == false" style="color:red;">favorite_border</mat-icon>
+        <!-- </button> -->
+      </button>
+    </div>
+  </div>
   <img *ngIf="course.course_img_url != 'null'" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" (click)="gotoDescription()">
   <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
