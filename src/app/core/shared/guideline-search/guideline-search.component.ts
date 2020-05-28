@@ -64,7 +64,6 @@ export class GuidelineSearchComponent implements OnInit {
     private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
-    // this.filter();
     this.CommonServices.globalFilter.subscribe((data: any) => {
         this.guidelineSearchVal = data.guidelineSearchVal;
         this.selectedFilter.category1 = data.selectedFilterCategory1;
