@@ -85,12 +85,12 @@ export class UserManagementComponent implements OnInit {
     // .subscribe((result: any) => {
     this.service.getUserSession(element._id).subscribe((track: any) => {
       this.trackDetails = track.data && track.data.get_user_session_detail &&
-        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0];
       this.profileDetails = track.data && track.data.get_user_session_detail &&
-        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0];
       this.dialog.open(templateRef);
       // })
-    })
+    });
   }
 
   closedialogbox() {
@@ -129,57 +129,60 @@ export class UserManagementComponent implements OnInit {
             }
 
           });
-      } else if (filterValue.trim().toLowerCase().length == 0) {
+      } else if (filterValue.trim().toLowerCase().length === 0) {
         this.getAllUser(0);
       }
     }, 1000);
   }
 
   deActivate(status, element?) {
-    let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+    const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
-        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count :
-        'Are you sure you want to activate ' + count).then((data: Boolean) => {
+      this.alert.openConfirmAlert(status === 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status === 'De-activate' ? 'Are you sure you want to de-activate ' + count :
+        'Are you sure you want to activate ' + count).then((data) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.service.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
-              .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+            this.service.deActivate_And_reActivate_User(result, status === 'De-activate' ? false : true)
+              .subscribe((userresult: any) => {
+                this.selectedArray = [];
+                if (userresult.data.deactivate_reactivate_user.success &&
+                  userresult.data.deactivate_reactivate_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
 
   block(status, element?) {
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
-      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
-        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count :
-        'Are you sure you want to un-block ' + count).then((data: Boolean) => {
+      const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
+      this.alert.openConfirmAlert(status === 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status === 'Block' ? 'Are you sure you want to block ' + count :
+        'Are you sure you want to un-block ' + count).then((data) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.service.blockUser(result, status == 'Block' ? true : false)
-              .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+            this.service.blockUser(result, status === 'Block' ? true : false)
+              .subscribe((userresult: any) => {
+                this.selectedArray = [];
+                if (userresult.data.block_user.success && userresult.data.block_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
 
