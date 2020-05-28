@@ -29,6 +29,7 @@ export class PublishCourseComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService,
+    // tslint:disable-next-line:align
     private alert: AlertServiceService, public learnerservice: LearnerServicesService) {
     this.course = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -92,7 +93,6 @@ export class PublishCourseComponent implements OnInit {
   }
 
   selectedcategory(category) {
-    console.log('inside');
     let oldcategory; let oldsubcategory; let oldsupersubcategory;
     if (category.category_id) {
       if (category.checkbox === true) {
@@ -259,18 +259,16 @@ export class PublishCourseComponent implements OnInit {
   publishCourse() {
     let level;
     if (this.selectedSuperSubCategory.super_sub_category_id !== undefined) {
-      level = "3";
+      level = '3';
     } else if (this.selectedSuperSubCategory.super_sub_category_id === undefined &&
       this.selectedSubCategory.sub_category_id !== undefined) {
-      level = "2";
+      level = '2';
     } else {
-      level = "1";
+      level = '1';
     }
 
     this.alert.openConfirmAlert('Confirmation', 'Are you sure you want to publish the course ?').then((data) => {
       if (data) {
-        console.log(true, level, this.selectedCategory.category_id, this.selectedSubCategory.sub_category_id,
-          this.selectedSuperSubCategory.super_sub_category_id);
         this.service.publishCourse(this.course.id, true, level, this.selectedCategory.category_id,
           this.selectedSubCategory.sub_category_id || 'null', this.selectedSuperSubCategory.super_sub_category_id || 'null')
           .subscribe((res: any) => {

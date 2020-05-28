@@ -53,19 +53,6 @@ html {
     overflow: hidden;
 }
 
-//End of Mythreyi
-
-
-//HEADER
-
-//YOUR CODE GOES HERE
-.navbar-light .navbar-nav .nav-link {
-    color: blue;
-}
-
-//END OF HEADER
-
-
 .section_1_card_1 {
     z-index: 1;
     width: 80%;
@@ -112,14 +99,15 @@ html {
 
 
 //HEADER
+.navbar-light .navbar-nav .nav-link {
+    color: blue;
+}
 
-
-//YOUR CODE GOES HERE
 .width_10 {
     width: 10% !important;
-  }
-//END OF HEADER
+}
 
+//END OF HEADER
 
 // courses CSS
 

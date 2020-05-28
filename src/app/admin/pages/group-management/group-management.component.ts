@@ -86,7 +86,6 @@ export class GroupManagementComponent implements OnInit {
     const data = { input_id: 'h1', type: 'hierarchy', pagenumber: 0 };
     this.adminservice.getgroup(data)
       .subscribe((result: any) => {
-        console.log(result.data);
         this.groups = result.data.getgroup.message;
         this.adminservice.getgroup(data).subscribe((result1: any) => {
           this.groups = result1.data.getgroup.message;
@@ -94,7 +93,6 @@ export class GroupManagementComponent implements OnInit {
           // this.groups[0].checkbox = true;
           this.treeSource.data = this.groups;
           this.dataSource$.next(this.groups);
-          console.log(this.groups);
           if (this.groupid && this.treeSource.data.length) {
             const index = this.treeSource.data.findIndex( value => value.group_id === this.groupid);
             this.treeSource.data[index].checkbox = true;
@@ -105,7 +103,6 @@ export class GroupManagementComponent implements OnInit {
   }
   getallcatelogue() {
     this.adminservice.getcatalogues().subscribe((result: any) => {
-      console.log(result?.data?.getallcatalogue?.message);
       this.catalogueList = result?.data?.getallcatalogue?.message;
     });
   }
@@ -162,7 +159,6 @@ export class GroupManagementComponent implements OnInit {
 
   selectcatalogue(event, state: any) {
     if (event.source.selected) {
-      console.log('You selected: ' , state);
       this.selectedcatalogue = state;
     }
   }
@@ -175,12 +171,9 @@ export class GroupManagementComponent implements OnInit {
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
       this.getAllUser(0);
-      console.log(node);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
-        console.log(result?.data?.getgroupbyid?.message);
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
-        console.log(this.catalogue);
       });
     } else {
       this.disabled = true;
@@ -299,7 +292,6 @@ export class GroupManagementComponent implements OnInit {
           group_type: this.currentpath.group_type, parent_group_id : this.currentpath.parent_group_id,
           hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
         };
-        console.log(data);
         this.adminservice.updategroupdetails(data).subscribe((result1: any) => {
           if (result1.data.groupstatus.success === true) {
             this.reset();
@@ -390,7 +382,7 @@ export class GroupManagementComponent implements OnInit {
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
       this.alert.openConfirmAlert(status === 'De-activate' ? 'De-activation Confirmation' :
         'Activation Confirmation', status === 'De-activate' ? 'Are you sure you want to de-activate ' + count :
-        'Are you sure you want to activate ' + count).then((data: Boolean) => {
+        'Are you sure you want to activate ' + count).then((data) => {
           if (data) {
             const result1 = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
@@ -416,7 +408,7 @@ export class GroupManagementComponent implements OnInit {
       const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
       this.alert.openConfirmAlert(status === 'Block' ? 'Block Confirmation' :
         'Un-block Confirmation', status === 'Block' ? 'Are you sure you want to block ' + count :
-        'Are you sure you want to un-block ' + count).then((data: Boolean) => {
+        'Are you sure you want to un-block ' + count).then((data) => {
           if (data) {
             const result1 = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];

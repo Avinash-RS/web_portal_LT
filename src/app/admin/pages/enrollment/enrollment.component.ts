@@ -43,6 +43,7 @@ export class EnrollmentComponent implements OnInit {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
+    // tslint:disable-next-line:only-arrow-functions
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
@@ -62,7 +63,6 @@ export class EnrollmentComponent implements OnInit {
     // };
   }
   getenrolledcoursesindividual(data) {
-    console.log(data);
     this.columns = [
       { columnDef: 'lxp_joined_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
@@ -72,7 +72,6 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
-      console.log(result.data);
       this.dataSource.data = result?.data?.getenrolledcourses?.message;
       this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
 
@@ -90,7 +89,6 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
-      console.log(result.data);
       this.resultsLength = result?.data?.get_all_enrolledcourses?.enroll_count;
       this.dataSource.data = result?.data?.get_all_enrolledcourses?.message;
       const array = [];
@@ -99,7 +97,6 @@ export class EnrollmentComponent implements OnInit {
              element.group_detail[0].totalCount = element.totalCount;
              array.push(element.group_detail[0]);
       });
-      console.log(array);
       this.dataSource.data = array;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -107,7 +104,6 @@ export class EnrollmentComponent implements OnInit {
   }
 
   getenrolledcoursesforgroup(data) {
-    console.log(data);
     this.columns1 = [
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
       { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
@@ -116,7 +112,6 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns1 = (['selectall', 'sno']).concat(this.columns1.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
-      console.log(result.data);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
 
       this.dataSource1.data = result?.data?.getenrolledcourses?.message;
@@ -133,14 +128,12 @@ export class EnrollmentComponent implements OnInit {
     if (this.selectiontype === 'user_group') {
       this.getenrolledcoursesgroup(0);
     } else {
-      console.log(this.dataSource.data);
       this.getenrolledcoursesindividual(this.enrollrequestdata);
     }
 
   }
 
   selectallchange(value) {
-    console.log(this.dataSource1);
     this.dataSource.data.forEach(ele => {
       ele.isChecked = value;
     });
@@ -149,7 +142,6 @@ export class EnrollmentComponent implements OnInit {
 
   checkboxchange(row?) {
     const result = this.dataSource.data.some(element => element.isChecked === true);
-    console.log(result);
     if (result === true) {
       this.selectedcheckbox = false;
     } else { this.selectedcheckbox = true; }
@@ -157,7 +149,6 @@ export class EnrollmentComponent implements OnInit {
 
 
   selectallchange1(value) {
-    console.log(this.dataSource1);
     this.dataSource1.data.forEach(element => {
       element.isChecked = value;
     });
@@ -166,7 +157,6 @@ export class EnrollmentComponent implements OnInit {
 
   checkboxchange1(row?) {
     const result = this.dataSource1.data.some(element => element.isChecked === true);
-    console.log(result);
     if (result === true) {
       this.selectedcheckbox1 = false;
     } else { this.selectedcheckbox1 = true; }
@@ -199,7 +189,6 @@ export class EnrollmentComponent implements OnInit {
       const data = {  update_type: this.selectiontype,
       status_reason: 'Approved',
       enrollments: array};
-      console.log(data);
       // this.loading = true;
       this.adminservice.approveenrollment(data).subscribe(( response: any ) => {
         if (response?.data?.approve_enrollment?.success === true) {
@@ -250,10 +239,8 @@ export class EnrollmentComponent implements OnInit {
         const data = {  update_type: this.selectiontype,
         status_reason: result.value,
         enrollments: array};
-        console.log(data);
         // this.loading = true;
         this.adminservice.rejectenrollment(data).subscribe(( response: any ) => {
-        console.log(response);
         if (response?.data?.reject_enrollment?.success === true) {
         this.loading = false;
         if (this.dialogopened === true) {
@@ -278,8 +265,6 @@ export class EnrollmentComponent implements OnInit {
 
 
   datachange(row, column, templateRef: TemplateRef<any>) {
-    console.log(column);
-    console.log(row);
     if (column.header === 'User group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course') {
@@ -316,7 +301,7 @@ export class EnrollmentComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue = (event.target as unknown as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
