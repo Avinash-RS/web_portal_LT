@@ -1,5 +1,48 @@
 <!-- start of nav-bar section  -->
-<app-header></app-header>>
+<!-- <div class="header">
+  <div class="logo"><img src="../../assets/images/logo.png"></div>
+  <div class="btn-class"><button class="button">BrowseCategories</button></div>
+  <div class="link1"><a href="">what'sNew</a></div>
+  <div class="link2"><a href="">Talk To Expert</a></div>
+  <div class="link3"><a href="">FAQ</a></div>
+  <div class="login"><a href="">login</a></div>
+  <div class="btnclass"><button class="startedbutton">Get Started</button></div>
+</div> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">BrowseCategories <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">wat'sNew</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">TalkToExpert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">faq</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">getstarted</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+
+
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
@@ -195,6 +238,42 @@
     </ng-template>
     <br>
   </owl-carousel-o>
+  <!-- <div class="row m-l-20 m-r-20 m-t-25">
+    <div class="col-md-11 center">
+      <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="1.7:2" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor=" let course of courses; let i = index" [style.border]="'none'" [colspan]="1" [rowspan]="1">
+          <mat-card class="p-5px course-card shadow width_80">
+            <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
+              (click)="selectCourse(course,i+'c')">
+            <mat-card-content>
+              <div class="row" style="height: 10vh;">
+                <div class="col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20" style="word-wrap: break-word">
+                  {{course.name}}
+                </div>
+                <div class="col-6 m-t-10 m-b-20 display_flex">
+                  <bar-rating [readOnly]="true" [rate]="courses.rating" [max]="5"></bar-rating>
+                  &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
+                </div>
+              </div>
+              <mat-card-action>
+                <div class="row no_margin enroll_row">
+                  <div class="col-6 f_sz_14 float_left no_padding learner-count">
+                    <span class="material-icons color_grey" style="vertical-align: bottom;">
+                      people
+                    </span> <small class="color_grey">2,500 learners</small>
+                  </div>
+                  <div class="col-6 float_right width_80 no_padding">
+                    <button id="enroll_now"> Enroll now
+                    </button>
+                  </div>
+                </div>
+              </mat-card-action>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>  -->
   <br><br>
 
 </div>
