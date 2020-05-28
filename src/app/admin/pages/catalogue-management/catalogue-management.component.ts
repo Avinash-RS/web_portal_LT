@@ -65,7 +65,6 @@ export class CatalogueManagementComponent implements OnInit {
   getListCatalogue() {
     this.loadingCatalogue = true;
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
-      console.log(result?.data?.getallcatalogue?.message);
       this.catalogueList.push(...result?.data?.getallcatalogue?.message);
       this.loadingCatalogue = false;
     });
