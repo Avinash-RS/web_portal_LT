@@ -1,13 +1,5 @@
 <!-- start of nav-bar section  -->
-<!-- <div class="header">
-  <div class="logo"><img src="../../assets/images/logo.png"></div>
-  <div class="btn-class"><button class="button">BrowseCategories</button></div>
-  <div class="link1"><a href="">what'sNew</a></div>
-  <div class="link2"><a href="">Talk To Expert</a></div>
-  <div class="link3"><a href="">FAQ</a></div>
-  <div class="login"><a href="">login</a></div>
-  <div class="btnclass"><button class="startedbutton">Get Started</button></div>
-</div> -->
+<app-header></app-header>>
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
@@ -58,152 +50,152 @@
 </div> -->
 
 <div style="height: 10vh;">
-sdfddf
+  sdfddf
 </div>
-<div class="container">
-  <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
-    <div class="col-lg-9 col-md-9 col-sm-12 col-12 section_1_a"></div>
-    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-      <mat-card class="section_1_card_1 background_trans">
-        <mat-card-content>
-          <form [formGroup]="detailsForm">
-            <h2 style="text-align: center;"> Need Guidance </h2> <br>
-            <mat-card-content>
-              <div class="form-group">
-                <input type="text" name="username" formControlName="username" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="text" name="email" formControlName="email" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="text" name="course" formControlName="course" class="form-control">
-              </div>
-              <br>
-              <button id="login" mat-raised-button [disabled]="detailsForm.invalid" (click)="login()">Sign
-                in</button>
-            </mat-card-content>
-          </form>
-        </mat-card-content>
-        <br><br>
-      </mat-card>
+<div id="myDIV" stickyHeaderDirective style="overflow: auto; max-height: 100%;">
+  <div class="container">
+    <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-12 section_1_a"></div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+        <mat-card class="section_1_card_1 background_trans">
+          <mat-card-content>
+            <form [formGroup]="detailsForm">
+              <h2 style="text-align: center;"> Need Guidance </h2> <br>
+              <mat-card-content>
+                <div class="form-group">
+                  <input type="text" name="username" formControlName="username" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="email" formControlName="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="course" formControlName="course" class="form-control">
+                </div>
+                <br>
+                <button id="login" mat-raised-button [disabled]="detailsForm.invalid" (click)="login()">Sign
+                  in</button>
+              </mat-card-content>
+            </form>
+          </mat-card-content>
+        </mat-card>
 
-    </div>
-  </div>
-</div>
-
-<!-- End of card area -->
-<br>
-<!-- start of Personalized Learning -->
-<div class="row m-l-20 m-r-20">
-  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_black">
-    <p>Personalized Learning</p>
-  </div>
-</div>
-<br>
-<div class="row m-l-20 m-r-20">
-  <div class="col-lg-2 col-md-2 col-sm-12 col-12"></div>
-  <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
-    <div class="row center">
-      <img src="assets/landingpageicons/Vocational Courses.svg" width="60px" height="60px" />
-    </div>
-    <div class="row center p-5px m-t-10">
-      <span class="f_wt_500 f_init">Vocational Course</span>
-    </div>
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
-    <div class="row center">
-      <img src="assets/landingpageicons/E-Learner.svg" width="60px" height="60px" />
-    </div>
-    <div class="row center p-5px m-t-10">
-      <span class="f_wt_500 f_init">E-Learner</span>
-    </div>
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
-    <div class="row center">
-      <img src="assets/landingpageicons/College & University.svg" width="60px" height="60px" />
-    </div>
-    <div class="row center p-5px m-t-10">
-      <span class="f_wt_500 f_init">College & University</span>
-    </div>
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
-    <div class="row center">
-      <img src="assets/landingpageicons/Government.svg" width="60px" height="60px" />
-    </div>
-    <div class="row center p-5px m-t-10">
-      <span class="f_wt_500 f_init">Government</span>
-    </div>
-  </div>
-</div>
-<br> <br> <br>
-<!-- End of Personalized Learning -->
-
-<!-- start of Popular courses -->
-<div class="row m-l-20 m-r-20">
-  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
-    <p>Popular Courses</p>
-  </div>
-  <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
-    <button mat-flat-button class="blue-border color_blue"
-      style="right: 10px; width: 17%;   height: 45px; font-size: initial;pointer-events: none;">
-      All | 25
-    </button>
-  </div>
-</div>
-<br><br>
-<owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-  <ng-template carouselSlide *ngFor="let course of courses">
-    <div class="containerOverlay">
-      <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
-        (click)="selectCourse(course,i+'c')">
-      <div class="overlay p-5px" style="margin-bottom: 0;">
-        <p class="course_description">
-          {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
-        </p>
       </div>
     </div>
-    <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
-      <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
-      <button class="float_right m-b-10 m-t-10">Enroll</button>
-    </div>
-  </ng-template>
-  <br>
-</owl-carousel-o>
-<br><br>
-<!-- End of Popular courses -->
+  </div>
 
-<!-- start of trending courses -->
-<div class="row m-l-20 m-r-20">
-  <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
-    <p>Trending Courses</p>
+  <!-- End of card area -->
+  <br>
+  <!-- start of Personalized Learning -->
+  <div class="row m-l-20 m-r-20">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_black">
+      <p>Personalized Learning</p>
+    </div>
   </div>
-  <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
-    <button mat-flat-button class="blue-border color_blue"
-      style="right: 10px; width: 17%;   height: 45px; font-size: initial; pointer-events: none;">
-      All | 25
-    </button>
-  </div>
-</div>
-<br><br>
-<owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-  <ng-template carouselSlide *ngFor="let course of courses">
-    <div class="containerOverlay">
-      <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
-        (click)="selectCourse(course,i+'c')">
-      <div class="overlay p-5px" style="margin-bottom: 0;">
-        <p class="course_description">
-          {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
-        </p>
+  <br>
+  <div class="row m-l-20 m-r-20">
+    <div class="col-lg-2 col-md-2 col-sm-12 col-12"></div>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
+      <div class="row center">
+        <img src="assets/landingpageicons/Vocational Courses.svg" width="60px" height="60px" />
+      </div>
+      <div class="row center p-5px m-t-10">
+        <span class="f_wt_500 f_init">Vocational Course</span>
       </div>
     </div>
-    <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
-      <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
-      <button class="float_right m-b-10 m-t-10">Enroll</button>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
+      <div class="row center">
+        <img src="assets/landingpageicons/E-Learner.svg" width="60px" height="60px" />
+      </div>
+      <div class="row center p-5px m-t-10">
+        <span class="f_wt_500 f_init">E-Learner</span>
+      </div>
     </div>
-  </ng-template>
-  <br>
-</owl-carousel-o>
-<br><br>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
+      <div class="row center">
+        <img src="assets/landingpageicons/College & University.svg" width="60px" height="60px" />
+      </div>
+      <div class="row center p-5px m-t-10">
+        <span class="f_wt_500 f_init">College & University</span>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
+      <div class="row center">
+        <img src="assets/landingpageicons/Government.svg" width="60px" height="60px" />
+      </div>
+      <div class="row center p-5px m-t-10">
+        <span class="f_wt_500 f_init">Government</span>
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <!-- End of Personalized Learning -->
 
+  <!-- start of Popular courses -->
+  <div class="row m-l-20 m-r-20">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
+      <p>Popular Courses</p>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
+      <button mat-flat-button class="blue-border color_blue"
+        style="right: 10px; width: 17%;   height: 45px; font-size: initial;pointer-events: none;">
+        All | 25
+      </button>
+    </div>
+  </div>
+  <br><br>
+  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+    <ng-template carouselSlide *ngFor="let course of courses">
+      <div class="containerOverlay">
+        <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
+          (click)="selectCourse(course,i+'c')">
+        <div class="overlay p-5px" style="margin-bottom: 0;">
+          <p class="course_description">
+            {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
+          </p>
+        </div>
+      </div>
+      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+        <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
+        <button class="float_right m-b-10 m-t-10">Enroll</button>
+      </div>
+    </ng-template>
+    <br>
+  </owl-carousel-o>
+  <br><br>
+  <!-- End of Popular courses -->
 
+  <!-- start of trending courses -->
+  <div class="row m-l-20 m-r-20">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
+      <p>Trending Courses</p>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
+      <button mat-flat-button class="blue-border color_blue"
+        style="right: 10px; width: 17%;   height: 45px; font-size: initial; pointer-events: none;">
+        All | 25
+      </button>
+    </div>
+  </div>
+  <br><br>
+  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+    <ng-template carouselSlide *ngFor="let course of courses">
+      <div class="containerOverlay">
+        <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
+          (click)="selectCourse(course,i+'c')">
+        <div class="overlay p-5px" style="margin-bottom: 0;">
+          <p class="course_description">
+            {{(course.description?.length>120)? (course.description | slice:0:120)+'...':(course.description) }}
+          </p>
+        </div>
+      </div>
+      <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
+        <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.name}}</span>
+        <button class="float_right m-b-10 m-t-10">Enroll</button>
+      </div>
+    </ng-template>
+    <br>
+  </owl-carousel-o>
+  <br><br>
+
+</div>
 <!-- End of Trending courses -->

@@ -24,7 +24,7 @@ html {
     position: absolute;
     font-size: 32px;
     border-radius: unset;
-    padding: 12px ;
+    padding: 12px;
     opacity: 1;
     font-weight: 300;
     top: -41%;
@@ -69,7 +69,7 @@ html {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color:  $color-white !important;
+    background-color: $color-white !important;
     background-blend-mode: color;
     opacity: 0.5 !important;
 }
@@ -78,7 +78,17 @@ html {
     margin-top: 5%;
     padding: 0 4%;
     width: 80%;
-    color:$color-blank !important;
+    color: $color-blank !important;
+}
+
+.form-control {
+    width: 90%;
+    z-index: 1;
+    margin: auto;
+    height: calc(1rem + .75rem + 2px);
+    color: white;
+    background-color: rgba(62, 62, 62, 0.5) !important;
+    opacity: 0.9;
 }
 
 .section_1 .section_1_card_1 {
@@ -89,6 +99,7 @@ html {
 
 
 //HEADER
+
 
 //YOUR CODE GOES HERE
 
