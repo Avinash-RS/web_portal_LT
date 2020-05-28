@@ -195,7 +195,7 @@ export class EnrollmentComponent implements OnInit {
           this.loading = false;
           if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
-              is_individual: true, course_id: 'undefined' };
+              is_individual: true, course_id: this.selectedgroupid.course_id};
             this.getenrolledcoursesforgroup(data1);
             this.getenrolledcoursesgroup(0);
           } else {
@@ -244,7 +244,7 @@ export class EnrollmentComponent implements OnInit {
         this.loading = false;
         if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
-              is_individual: true, course_id: 'undefined' };
+              is_individual: true, course_id: this.selectedgroupid.course_id };
             this.getenrolledcoursesforgroup(data1);
           } else {
             this.dataSource.data = [];
