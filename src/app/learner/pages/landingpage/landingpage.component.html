@@ -9,7 +9,7 @@
   <div class="btnclass"><button class="startedbutton">Get Started</button></div>
 </div> -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -38,9 +38,9 @@
     </ul>
 
   </div>
-</nav>
+</nav> -->
 
-<div style="height: 10vh;">
+<!-- <div style="height: 10vh;">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -54,8 +54,8 @@
       </ul>
     </div>
   </nav>
-</div>
-
+</div> -->
+<app-header></app-header>
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
@@ -125,13 +125,14 @@
                   <input type="text" name="course" formControlName="course" class="form-control">
                 </div>
                 <br>
-                <button id="login" mat-raised-button [disabled]="detailsForm.invalid" (click)="login()">Sign
-                  in</button>
+                <button id="login" mat-raised-button class="center" [disabled]="detailsForm.invalid"
+                  (click)="login()">Request to get back</button>
               </mat-card-content>
             </form>
+            <br>
           </mat-card-content>
         </mat-card>
-
+        <br><br>
       </div>
     </div>
   </div>
@@ -197,7 +198,7 @@
   </div>
   <br><br>
 
-  <!-- <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
       <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
         [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
@@ -205,50 +206,21 @@
       </app-course-component>
     </ng-template>
     <br>
-  </owl-carousel-o> -->
+  </owl-carousel-o>
 
-  <div class="row m-l-20 m-r-20 m-t-25">
+  <!-- <div class="row m-l-20 m-r-20 m-t-25">
     <div class="col-md-11 center">
       <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="1.7:2" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor=" let course of courses; let i = index" [style.border]="'none'" [colspan]="1"
           [rowspan]="1">
-          <!-- <mat-card class="p-5px course-card shadow width_80">
-            <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt=""
-              (click)="selectCourse(course,i+'c')">
-            <mat-card-content>
-              <div class="row" style="height: 10vh;">
-                <div class="col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20" style="word-wrap: break-word">
-                  {{course.name}}
-                </div>
-                <div class="col-6 m-t-10 m-b-20 display_flex">
-                  <bar-rating [readOnly]="true" [rate]="courses.rating" [max]="5"></bar-rating>
-                  &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
-                </div>
-              </div>
-              <mat-card-action>
-                <div class="row no_margin enroll_row">
-                  <div class="col-6 f_sz_14 float_left no_padding learner-count">
-                    <span class="material-icons color_grey" style="vertical-align: bottom;">
-                      people
-                    </span> <small class="color_grey">2,500 learners</small>
-                  </div>
-                  <div class="col-6 float_right width_80 no_padding">
-                    <button id="enroll_now"> Enroll now
-                    </button>
-                  </div>
-                </div>
-              </mat-card-action>
-            </mat-card-content>
-          </mat-card> -->
           <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true" [showWishlist]="true"
             [showStatus]="false" [showRating]="true" [showCount]="true" [showPrice]="false" [showDate]="false"
             [goto]="null">
           </app-course-component>
-
         </mat-grid-tile>
       </mat-grid-list>
     </div>
-  </div>
+  </div> -->
 
   <br><br>
   <!-- End of Popular courses -->

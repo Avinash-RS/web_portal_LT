@@ -20,6 +20,63 @@ html {
     width: 350px !important;
 }
 
+@media only screen and (max-width: 400px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -46%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev { 
+        left: 34%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 460px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -37%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev { 
+        left: 34%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+
+@media only screen and (min-width: 625px) and (max-width: 770px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -40%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev { 
+        left: 65%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 74%;
+    }
+}
+@media only screen and (min-width: 460px) and (max-width: 625px) {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -46%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev { 
+        left: 34%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 48%;
+    }
+}
+@media only screen and (min-width: 770px)  {
+    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+        top: -45%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev { 
+        left: 80%;
+    }
+    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+        left: 83.5%;
+    }
+}
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
     position: absolute;
     font-size: 32px;
@@ -27,18 +84,18 @@ html {
     padding: 12px;
     opacity: 1;
     font-weight: 300;
-    top: -45%;
+    // top: -45%;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
-    left: 80%;
+    // left: 80%;
     background: #ffffff;
     color: $color-blue !important;
     border: 1px solid $color-blue !important;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
-    left: 83.5%;
+    // left: 83.5%;
     background: $color-blue;
     color: white;
     border: 1px solid $color-blue !important;
@@ -51,6 +108,7 @@ html {
     padding: 0px;
     position: relative;
     overflow: hidden;
+    top : 8vh;
 }
 
 .section_1_card_1 {

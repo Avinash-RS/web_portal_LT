@@ -1,7 +1,7 @@
 <!-- ////NEW DESIGN -->
 
 <!-- for logged out user -->
-<!-- <div class="containerOverlay" *ngIf="userDetail == null">
+<div class="containerOverlay" *ngIf="userDetail == null">
   <img class="pointer m-b-10 course-image center" src="{{ course.course_img_url }}" alt="">
   <div class="overlay p-5px" style="margin-bottom: 0;">
     <p class="course_description">
@@ -11,13 +11,13 @@
 </div>
 <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
   <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
-  <button *ngIf="showCartBtn" class="float_right m-b-10 m-t-10">Enroll</button>
-</div> -->
+  <button *ngIf="showCartBtn" class="float_right m-b-10 m-t-10" (click)="enrollCourse()">Enroll</button>
+</div>
 <!-- end for logged out user -->
 
-<!-- for logged in user *ngIf="userDetail != null"-->
+<!-- for logged in user -->
 
-<mat-card class="p-5px course-card shadow width_80 m-l-10">
+<mat-card class="p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
   <!-- <img class="pointer m-b-10 course-image center" src="{{ course.src }}" alt="" (click)="selectCourse(course,i+'c')"> -->
   <img *ngIf="course.course_img_url != 'null'" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" (click)="gotoDescription()">
