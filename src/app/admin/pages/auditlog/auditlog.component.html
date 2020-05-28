@@ -1,3 +1,71 @@
-<p>
-  auditlog works!
-</p>
+<button (click)="openviewdialog(viewdetaildialog)" class="button button8">Reject</button>
+
+<ng-template #viewdetaildialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+
+  <mat-dialog-content style="width: 1000px">
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <br>
+          <div class="row">
+            <!-- //////userName  +++ full name +++ Phone//////// -->
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Username : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Full Name : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name || 'NA'}}
+                </label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Mobile : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number || 'NA'}}</label></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Email : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                'Female' : 'Rather not specify'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>I'm a : <label class="color_black capitalize f_wt_400">
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional  || 'NA'}}</label>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Languages known : </label><br>
+              <div *ngIf="profileDetails.language.length >0">
+                <div *ngFor="let lang of profileDetails.language" class="display_flex">
+                  {{lang}}
+                </div>
+              </div>
+              <div *ngIf="profileDetails.language.length == 0" class="color_black">
+                NA
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Location : <label class="color_black capitalize f_wt_400">
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
+                 }} </label></label>
+            </div>
+          </div><br>
+                 </div>
+      </form>
+    </mat-dialog-content>
+   
+  </mat-dialog-content>
+ 
+  <br>
+</ng-template>

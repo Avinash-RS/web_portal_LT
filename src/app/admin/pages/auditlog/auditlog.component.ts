@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-auditlog',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuditlogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  openviewdialog(templateRef) {
+    this.dialog.open(templateRef);
+  }
+  closedialogbox(){
+    this.dialog.closeAll();
+  }
 }
