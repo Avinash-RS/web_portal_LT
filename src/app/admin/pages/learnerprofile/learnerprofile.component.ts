@@ -65,10 +65,8 @@ export class LearnerprofileComponent implements OnInit {
   getprofiledetails() {
   if (this.userid) {
     this.learnerservice.view_profile1(this.userid.user_id).subscribe((profiledetail: any) => {
-      console.log(profiledetail);
       this.profiledetail = profiledetail?.data?.view_profile?.message[0];
       this.learnerservice.getlearnertrack(this.userid.user_id, this.userid._id).subscribe((trackdetail: any) => {
-        console.log(trackdetail);
         this.trackdetail = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0];
         this.coursedetail = trackdetail?.data?.get_learner_track?.message?.Enrolled_courses;
         this.dataSource1.data = this.coursedetail;
@@ -76,10 +74,10 @@ export class LearnerprofileComponent implements OnInit {
         this.displayedColumns1 = (['sno']).concat(this.columns1.map(c => c.columnDef));
 
         trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.
-        push({lastlogin: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_login[0] })
+        push({lastlogin: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_login[0] });
 
         trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.
-        push({last_logout: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_logout[0] })
+        push({last_logout: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_logout[0] });
 
         this.dataSource.data = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects;
 

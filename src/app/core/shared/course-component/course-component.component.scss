@@ -1,164 +1,320 @@
 @import "variable";
 
-img {
-    border: 1px solid rgb(141, 141, 141);
-    height: auto;
-    width: inherit;
-    height: 145px;
+
+// NEW DESIGN
+
+// FOR LOGGED OUT USER
+.m-r-20 {
+    margin-right: 20px;
 }
 
-.row {
-    width: 90%;
-    margin: auto;
+.m-l-20 {
+    margin-left: 20px;
+}
+
+.m-left-10 {
+    margin-left: 10px;
 }
 
 .m-t-10 {
-    margin-top: 10px;
-}
-
-.m-b-10 {
-    margin-bottom: 10px;
-}
-
-.m-b-20 {
-    margin-bottom: 20px;
-}
-
-.m-b-30 {
-    margin-bottom: 30px;
-}
-
-
-:host ::ng-deep .br-default .br-unit {
-    font-size: 16px;
-    height: 18px;
-    width: 8px;
-    margin-top: -10px !important;
-}
-
-.m-t-15 {
-    margin-top: 7px;
+    margin-top: 10px !important;
 }
 
 .m-t-25 {
     margin-top: 25px;
 }
 
-.m-l-5 {
-    margin-left: 5px !important;
+.p-l-15 {
+    padding-left: 15px !important;
 }
 
-
-.status {
-    letter-spacing: 1px;
-    border-radius: 0px;
+.blue-border {
+    border: 1.0px solid $color-blue;
 }
 
-.mat-stroked-button[disabled] {
-    color : #ebe7e7
-}
-.mat-progress-bar {
-    display: block;
-    height: 6px;
-    overflow: hidden;
-    position: relative;
-    transition: opacity 250ms linear;
-    border-radius: 30px;
+.color_subhead {
+    color: $color-subhead !important;
 }
 
-.wishlist {
-    position: absolute;
-    z-index: 1;
-    // margin-left: -5px;
-    margin-top: 10px;
+// END OF LOGGED OUT USER
 
-    .wishlist_btn {
-        background: rgb(41, 41, 41);
-    }
+// FOR LOGGED IN USER
+
+.course-name-row {
+    height: 10vh !important;
 }
 
-.mat-mini-fab {
-    width: 33px;
-    height: 35px;
-}
-
-mat-icon {
-    font-size: 18px;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: $color-red;
-}
-
-.container {
-    width: 90%;
-    margin-left: 5%;
-
+.containerOverlay {
     .overlay {
-        height: 80%;
-        width: 70%;
+        height: 50%;
+        width: 80%;
         position: absolute;
         overflow: hidden;
-        top: 0vh;
-        left: 0;
+        bottom: 5vh;
+        left: 10%;
         opacity: 0;
-        margin-left: 15%;
+        background-color:  $color-white;
         filter: alpha(opacity=0);
-        background-color: $color-blue !important;
-        color: $color-white;
-        cursor: pointer;
+    }
+
+    .pointer {
+        width: 80% !important;
     }
 }
 
-.margLeft {
-    margin-left: -10px;
-}
-
-.dspFlx {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.dspFlx1 {
-    display: flex;
-    align-items: center;
-}
-
-.container:hover .overlay {
-    opacity: 1;
+.containerOverlay:hover .overlay {
+    opacity: 0.9;
     filter: alpha(opacity=100);
+    background-color:  $color-white;
 }
 
-.course_description {
-    text-align: initial;
-    text-align: justify;
-    color: honeydew;
+.containerOverlay1 {
+    .overlay1 {
+        height: 50%;
+        // width: 80%;
+        position: absolute;
+        overflow: hidden;
+        bottom: 5vh;
+        left: 10%;
+        opacity: 0;
+        background-color:  $color-white;
+        filter: alpha(opacity=0);
+    }
+
+    .pointer {
+        width: 80% !important;
+    }
 }
 
-.bottomButtons {
-    position: absolute;
-    bottom: 2vh !important;
-    left: 8%;
+.containerOverlay:hover .overlay1 {
+    opacity: 0.9;
+    filter: alpha(opacity=100);
+    background-color: $color-white;
 }
 
-.buy_now {
-    border: 0.5px solid rgb(211, 210, 210);
+.course-image {
+    height: 150px;
+    object-fit: cover;
 }
 
-.enroll {
-    background-color: #1f3777;
+.card-bottom {
+    height: 5vh;
+}
+
+.course-count {
+    bottom: 0vh;
+}
+
+strong {
+    letter-spacing: 0.4px !important;
+}
+
+.enroll_row {
+    bottom: 0vh;
+}
+
+#enroll_now {
+    background-color: $color-blue;
     color: #fff;
     font-weight: 500 !important;
+    width: 70%;
+    border-radius: 0;
+    font-size: smaller;
+    text-align: center;
+    border: none;
 }
 
-.color-grey {
-    color: #363738;
+
+.learner-count {
+    vertical-align: bottom;
 }
 
-.iconClr {
-    color: #777777;
-    font-size: 12px;
-    font-weight: 400;
+:host ::ng-deep .br {
+    margin: 0 !important
 }
 
-.heightname {
-    height: 30px;
+:host ::ng-deep .br-default .br-unit {
+    margin-right: 5px;
+    font-size: 19px !important;
+    height: 18px;
+    width: 10px !important;
 }
+
+
+.course-card {
+    border-radius: 0;
+    background-color: #F5FAFA;
+}
+
+.shadow {
+    box-shadow: 5px 5px 10px 0px $box-shadow !important;
+}
+
+
+// END OF LOGGED IN USER
+
+// ------------------------------------------------------------------------------------- //
+// OLD DESIGN
+// img {
+//     border: 1px solid rgb(141, 141, 141);
+//     height: auto;
+//     width: inherit;
+//     height: 145px;
+// }
+
+// .row {
+//     width: 90%;
+//     margin: auto;
+// }
+
+// .m-t-10 {
+//     margin-top: 10px;
+// }
+
+// .m-b-10 {
+//     margin-bottom: 10px;
+// }
+
+// .m-b-20 {
+//     margin-bottom: 20px;
+// }
+
+// .m-b-30 {
+//     margin-bottom: 30px;
+// }
+
+
+// :host ::ng-deep .br-default .br-unit {
+//     font-size: 16px;
+//     height: 18px;
+//     width: 8px;
+//     margin-top: -10px !important;
+// }
+
+// .m-t-15 {
+//     margin-top: 7px;
+// }
+
+// .m-t-25 {
+//     margin-top: 25px;
+// }
+
+// .m-l-5 {
+//     margin-left: 5px !important;
+// }
+
+
+// .status {
+//     letter-spacing: 1px;
+//     border-radius: 0px;
+// }
+
+// .mat-stroked-button[disabled] {
+//     color : #ebe7e7
+// }
+// .mat-progress-bar {
+//     display: block;
+//     height: 6px;
+//     overflow: hidden;
+//     position: relative;
+//     transition: opacity 250ms linear;
+//     border-radius: 30px;
+// }
+
+// .wishlist {
+//     position: absolute;
+//     z-index: 1;
+//     // margin-left: -5px;
+//     margin-top: 10px;
+
+//     .wishlist_btn {
+//         background: rgb(41, 41, 41);
+//     }
+// }
+
+// .mat-mini-fab {
+//     width: 33px;
+//     height: 35px;
+// }
+
+// mat-icon {
+//     font-size: 18px;
+//     -webkit-text-stroke-width: 3px;
+//     -webkit-text-stroke-color: $color-red;
+// }
+
+// .container {
+//     width: 90%;
+//     margin-left: 5%;
+
+//     .overlay {
+//         height: 80%;
+//         width: 70%;
+//         position: absolute;
+//         overflow: hidden;
+//         top: 0vh;
+//         left: 0;
+//         opacity: 0;
+//         margin-left: 15%;
+//         filter: alpha(opacity=0);
+//         background-color: $color-blue !important;
+//         color: $color-white;
+//         cursor: pointer;
+//     }
+// }
+
+// .margLeft {
+//     margin-left: -10px;
+// }
+
+// .dspFlx {
+//     display: flex;
+//     justify-content: space-evenly;
+// }
+
+// .dspFlx1 {
+//     display: flex;
+//     align-items: center;
+// }
+
+// .container:hover .overlay {
+//     opacity: 1;
+//     filter: alpha(opacity=100);
+// }
+
+// .course_description {
+//     text-align: initial;
+//     text-align: justify;
+//     color: honeydew;
+// }
+
+// .bottomButtons {
+//     position: absolute;
+//     bottom: 2vh !important;
+//     left: 8%;
+// }
+
+// .buy_now {
+//     border: 0.5px solid rgb(211, 210, 210);
+// }
+
+// .enroll {
+//     background-color: #1f3777;
+//     color: #fff;
+//     font-weight: 500 !important;
+// }
+
+// .color-grey {
+//     color: #363738;
+// }
+
+// .iconClr {
+//     color: #777777;
+//     font-size: 12px;
+//     font-weight: 400;
+// }
+
+// .heightname {
+//     height: 30px;
+// }
+// ------------------------------------------------------------------------------------- //
