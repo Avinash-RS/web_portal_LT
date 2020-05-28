@@ -864,6 +864,10 @@ export const getAdminOverview = gql`
       success
       error_msg
     message{
+      totalLearnerPecTill{
+        IncDecPec
+        valueIncDecPec
+      }
       PublishCourse
       DraftCourse
       TotalCourse
@@ -917,6 +921,11 @@ export const getAdmindashboardCoursetab = gql`
           sub_category_name
         }
       }
+      availableCoursePec30Pec{
+        IncDecPec
+        valueIncDecPec
+        } 
+
       TotalCourse
       perMonth
       TotalCategoryCount
