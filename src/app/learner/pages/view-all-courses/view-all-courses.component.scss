@@ -28,7 +28,7 @@ main section {
   -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
   -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
   box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
-  margin-top: 20px;
+  margin-top: 58px;
 }
 
 /////  after filter adding////@extend
@@ -326,6 +326,7 @@ h2{
   flex: 0 0 100%;
   max-width: 100%;
   padding: 2.5%;
+  margin-top: -7%;
 }
 .close{
   float: right !important;
@@ -341,16 +342,7 @@ h2{
   border-radius: 7px;
   color: #1F3777;
 }
-.date{
-    padding: 61px;
-    margin-top: -66px;
-    margin-left: -49px;
-}
-.todate{
-  margin-left: 145px;
-  margin-top: -111px;
-  padding: 8px;
-}
+
 
 
 
