@@ -187,13 +187,13 @@ h2{
 
 }
 
-.box{
-  margin-left: 1%;
-  width: 92.5%;
-  height: auto;
-  border: 1px solid $color-border;
-  color: $color-blue;
-}
+// .box{
+//   margin-left: 1%;
+//   width: 92.5%;
+//   height: auto;
+//   border: 1px solid $color-border;
+//   color: $color-blue;
+// }
 
 .text{
   margin-top: 6px;
@@ -321,12 +321,12 @@ h2{
 .col-9 {
   flex: 0 0 73%;
   max-width: 73%;
+  margin-top: 89px;
 }
 .diffcol-9{
   flex: 0 0 100%;
   max-width: 100%;
   padding: 2.5%;
-  margin-top: -7%;
 }
 .close{
   float: right !important;
