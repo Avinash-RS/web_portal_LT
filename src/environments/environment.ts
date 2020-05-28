@@ -13,7 +13,8 @@ export const environment = {
   // apiUrl: 'http://13.71.123.238:3000/',
   // scormUrl:'http://20.44.41.200:8080/',
   // apiUrlImg:'http://20.44.41.200:3001/',
-  // wcaapiurl:'http://20.44.41.200:9001/'
+  // wcaapiurl:'http://20.44.41.200:9001/',
+  
 };
 
 /*

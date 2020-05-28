@@ -466,8 +466,8 @@ export class AdminServicesService {
 
   // End of enrollment
 
-  // Dashboard
-  //getting admin dashboard overview data
+ // Dashboard
+ // getting admin dashboard overview data
   getAdminOverview(days) {
     return this.Apollo.query({
       query: getAdminOverview,
@@ -534,31 +534,8 @@ export class AdminServicesService {
       }
     });
   }
-  //getting admin dashboard overview data
-  // getAdminOverview(days) {
-  //   return this.Apollo.query({
-  //     query: getAdminOverview,
-  //     variables: {
-  //       days: days,
-  //     }
-  //   });
-  // }
-  // // getting admin dashboard data for course tab
-  // getAdmindashboardCoursetab() {
-  //   return this.Apollo.query({
-  //     query: getAdmindashboardCoursetab,
-  //     variables: {}
-  //   });
-  // }
 
-  // //getting learner dashboard count
-  // getLeranertabCount() {
-  //   return this.Apollo.query({
-  //     query: getLeranertabCount,
-  //     variables: {}
-  //   });
-  // }
-  // //getting top 5 course 
+  //getting top 5 course 
   getTopfiveDashboardType(type) {
     return this.Apollo.query({
       query: getTopfiveDashboardType,

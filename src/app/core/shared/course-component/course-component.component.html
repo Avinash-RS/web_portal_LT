@@ -1,4 +1,27 @@
-<div class="container m-t-15">
+
+<!-- ////NEW DESIGN -->
+
+<!-- for logged out user -->
+
+<!-- end for logged out user -->
+
+<!-- for logged in user -->
+
+<!-- end for logged in user -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- //OLD DESIGN -->
+
+<!-- <div class="container m-t-15">
   <div class="row wishlist" *ngIf="showWishlist">
     <div class="col-md-8 col-sm-8 col-8"></div>
     <div class="col-md-2 col-sm-2 col-2">
@@ -30,19 +53,6 @@
     <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
   </div>
 
-  <!-- <div class="row" *ngIf="showRating || showCount || showPrice">
-    <div class="col-md-5 col-sm-5 col-5 display_flex">
-      <bar-rating *ngIf="showRating" [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating><strong
-        class="m-t-15 m-l-5">&nbsp;<ng-container *ngIf="showRating">{{showRating && course.rating | number:'1.1-1'}}
-        </ng-container></strong>
-    </div>
-    <div class="col-md-2 m-t-15 col-sm-2 col-2" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}
-    </div>
-    <div class="col-md-5 m-t-15 col-sm-5 col-5 float_right" *ngIf="showPrice && course.price"> <strong>Rs
-        {{course.price | number }}</strong>
-    </div>
-  </div> -->
-
   <div class="row" *ngIf="showDate">
     <div class="col-md-12 f_wt_400 f_sz_14 float_left color-grey">
       Published On : {{course.publishedOn || course.updated_at | date}}
@@ -61,13 +71,14 @@
     </div>
   </div>
 
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <small *ngIf="showStatus">{{final_status === 'Resume' && course.statusValue + '%' || null}}</small>
-      <mat-progress-bar *ngIf="final_status === 'Resume'" mode="determinate" value="{{course.statusValue}}">
+      <small *ngIf="showStatus">{{finalStatus === 'Resume' && course.statusValue + '%' || null}}</small>
+      <mat-progress-bar *ngIf="finalStatus === 'Resume'" mode="determinate" value="{{course.statusValue}}">
       </mat-progress-bar>
     </div>
-  </div> -->
+  </div>
+
   <div class="row" *ngIf="showEnroll">
     <div class="col-md-12 col-lg-12 col-sm-12 col-12 text-center ">
       <div>
@@ -125,4 +136,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+

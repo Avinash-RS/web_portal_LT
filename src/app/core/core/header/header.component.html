@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" >
   <img class="logo" src="../../assets/images/logo.png">
   <a class="navbar-brand edutech" href="/Learner">EDUTECH</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -184,36 +184,7 @@
   </ul>
 </div>
 
-<div class="collapse navbar-collapse" id="navbarCollapse"  *ngIf="userDetailes == null">
-  <ul class="navbar-nav mr-auto" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto" id="navbarCollapse">
-      <li class="dropdownsmall">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
-         Categories
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-        </ul>
-      </li>
-      <li class="smallmenu">
-        <a href="#">
-          Search
-        </a>
-      </li><br>
 
-      <li class="smallmenu2"  *ngIf="userDetailes == null">
-        <button class="backgroundcol2" routerLink="/Learner/register" >Register</button>
-      </li><br>
-
-      <li class="smallmenu2"  *ngIf="userDetailes == null">
-        <button class="backgroundcol2" routerLink="/Learner/login" >Login</button>
-        
-      </li><br>
-    </ul>
-
-  </ul>
-
-</div>
 
 <!-- ////ADMIN///////// -->
 

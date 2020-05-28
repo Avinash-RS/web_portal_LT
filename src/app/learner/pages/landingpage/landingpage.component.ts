@@ -115,6 +115,7 @@ export class LandingpageComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
     if (window.innerWidth <= 600) {
       this.breakpoint = 1;
