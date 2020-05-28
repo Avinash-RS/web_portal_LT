@@ -1225,7 +1225,7 @@ export class ProfileComponent implements OnInit {
           else
             profileDetails.progress = Number(profileDetails.progress);
           if (profileDetails.progress <= 60)
-            this.gs.preventBackButton
+            this.gs.preventBackButton();
           const qualification = this.profileForm.get('qualification') as FormArray;
           const certificate = this.profileForm.get('certificate') as FormArray;
           while (qualification.length) {

@@ -23,20 +23,20 @@
           </div><br>
 
           <div class="row">
-            <div class="col-md-4" >
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec != false">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{newRegisterLearses?.oneDayBeforeReg / newRegisterLearses?.newReg  | percent }} </span>
+              <span class="trendno">{{newRegisterLearses?.totalLearnerPec.valueIncDecPec}}% </span>
             </div>
-            <!-- <div class="col-md-4" *ngIf = "newRegisterLearses?.newReg < newRegisterLearses?.oneDayBeforeReg">
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec == false">
               <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
-              <span class="trendno">{{newRegisterLearses?.oneDayBeforeReg / newRegisterLearses?.newReg  | percent}} </span>
-            </div> -->
-            <div class="col-md-8">
+              <span class="trendnodown">{{newRegisterLearses?.totalLearnerPec.valueIncDecPec}}% </span>
+            </div>
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec != false">
               <span class="text" >Up from yesterday</span>
             </div>
-            <!-- <div class="col-md-8" *ngIf = "newRegisterLearses?.newReg < newRegisterLearses?.oneDayBeforeReg ">
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec == false">
               <span class="text">Down from yesterday</span>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -54,28 +54,23 @@
               </div>
             </div>
           </div>
-          <div class="row margintop">
-            <div class="col-md-4" >
-              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">
-                {{ newRegisterLearses?.totalLearnerTillBefore / (newRegisterLearses?.totalLearTillCurrent -  newRegisterLearses?.totalLearnerTillBefore)  | percent }}
-                </span>
+              <div class="row margintop">
+                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec != false">
+                  <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+                  <span class="trendno">{{newRegisterLearses?.totalLearnerPecTill.valueIncDecPec}}% </span>
+                </div>
+                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec == false">
+                  <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+                  <span class="trendnodown">{{newRegisterLearses?.totalLearnerPecTill.valueIncDecPec}}% </span>
+                </div>
+                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec != false">
+                  <span class="text" >Up from yesterday</span>
+                </div>
+                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec == false">
+                  <span class="text">Down from yesterday</span>
+                </div>
             </div>
-
-            <!-- <div class="col-md-4">
-              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
-              <span class="trendno">4%</span>
-            </div> -->
-
-            <div class="col-md-8">
-              <span class="text">Up from yesterday</span>
-            </div>
-
-            <!-- <div class="col-md-8">
-              <span class="text">Down from yesterday</span>
-            </div> -->
-          </div>
-        </div>
+      </div>
       </div>
 
 
@@ -134,15 +129,26 @@
           </div><br>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.availableCoursePec.IncDecPec != false">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{ newRegisterLearses?.beforeOneDayCourseCount  /  (newRegisterLearses?.TotalCourse - newRegisterLearses?.beforeOneDayCourseCount ) | percent  }}
-                
+              <span class="trendno">{{ newRegisterLearses?.availableCoursePec.valueIncDecPec }}%
               </span>
             </div>
-            <div class="col-md-8">
+
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.availableCoursePec.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{ newRegisterLearses?.availableCoursePec.valueIncDecPec }}%
+              </span>
+            </div>
+
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.availableCoursePec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
             </div>
+
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.availableCoursePec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -152,7 +158,7 @@
           <div class="row">
             <div class="col-md-8 ">
               <h3>Total enrollments</h3>
-              <span class="count">{{newRegisterLearses?.totalEnrollTillCurrentDay}}</span>
+              <span class="count">{{newRegisterLearses?.allEnrollement}}</span>
             </div>
     
             <div class="col-md-4 icon bg-brown">
@@ -169,13 +175,22 @@
           </div><br>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.totalEnrollPec.IncDecPec != false">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{ newRegisterLearses?.totalEnrollbeforeOneDay  /  (newRegisterLearses?.totalEnrollTillCurrentDay - newRegisterLearses?.totalEnrollbeforeOneDay ) | percent  }}</span>
+              <span class="trendno">{{newRegisterLearses?.totalEnrollPec.valueIncDecPec }}%</span>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4" *ngIf = "newRegisterLearses?.totalEnrollPec.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{ newRegisterLearses?.totalEnrollPec.valueIncDecPec}}%</span>
+            </div>
+
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.totalEnrollPec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
             </div>
+            <div class="col-md-8" *ngIf = "newRegisterLearses?.totalEnrollPec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -216,9 +231,9 @@
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
             <ul class="hoverr">
-              <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
-              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+              <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
             </ul>
             </div>
           </div>
@@ -319,9 +334,9 @@
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
             <ul class="">
-              <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('published')">Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
-              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+              <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses?.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
+              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
             </ul>
             </div>
           </div>
@@ -372,9 +387,9 @@
             <div class="card"  *ngIf="isCollapsed">
               <div class="card-body">
               <ul class="">
-                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
-                <li>Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
-                <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+                <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
+                <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
+                <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
               </ul>
               </div>
             </div>
@@ -431,8 +446,8 @@
                 </div>
               </div>
        </div>
-   </div>
-  </div>
+       </div>
+       </div>
       <!-- Available Courses end -->
 
       <!-- TotalEnrolments -->
@@ -488,29 +503,29 @@
                               <div class="example-container1 ">
                               <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable"  >
                                 <ng-container matColumnDef="position">
-                                  <th mat-header-cell *matHeaderCellDef> No. </th>
-                                  <td mat-cell *matCellDef="let element; let i = index"> {{i}} </td>
+                                  <th mat-header-cell *matHeaderCellDef> No. Enrolled Courses</th>
+                                  <!-- <td mat-cell *matCellDef="let element; let i = index"> {{i}} </td> -->
                                 </ng-container>
                                 <ng-container matColumnDef="courseName">
                                   <th mat-header-cell *matHeaderCellDef> Course name </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                                  <!-- <td mat-cell *matCellDef="let element"> {{element.courseName}} </td> -->
                                 </ng-container>
                                 <ng-container matColumnDef="totalEnrolled">
                                   <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
-                                  <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                                  <!-- <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td> -->
                                 </ng-container>
                                 <ng-container matColumnDef="category">
                                   <th mat-header-cell *matHeaderCellDef> Category </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                                  <!-- <td mat-cell *matCellDef="let element"> {{element.category}} </td> -->
                                 </ng-container>
                                 <ng-container matColumnDef="subCategory">
                                   <th mat-header-cell *matHeaderCellDef> Sub category </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                                  <!-- <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td> -->
                                 </ng-container>
                 
                                 <ng-container matColumnDef="superSubCategory">
                                   <th mat-header-cell *matHeaderCellDef> Super sub category </th>
-                                  <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                                  <!-- <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td> -->
                                 </ng-container>
                               
                                 <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
@@ -522,7 +537,7 @@
                               <!--  -->
                               <table mat-table [dataSource]="enrolledCoursedataSource" class="mat-elevation-z8" *ngIf="isEnrolledCoursesEnable" >
                                 <ng-container matColumnDef="position">
-                                  <th mat-header-cell *matHeaderCellDef> No </th>
+                                  <th mat-header-cell *matHeaderCellDef> No Enrolled Courses </th>
                                   <td mat-cell *matCellDef="let element let i = index"> {{i +1}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="courseName">
@@ -570,29 +585,29 @@
                     <!-- -->
                   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="isFreeCourseEnable"  >
                     <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> No. free </th>
-                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.position}} </td> -->
                     </ng-container>
                     <ng-container matColumnDef="courseName">
                       <th mat-header-cell *matHeaderCellDef> Course name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.courseName}} </td> -->
                     </ng-container>
                     <ng-container matColumnDef="totalEnrolled">
                       <th mat-header-cell *matHeaderCellDef> Total Enrollments</th>
-                      <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.totalEnrolled}} </td> -->
                     </ng-container>
                     <ng-container matColumnDef="category">
                       <th mat-header-cell *matHeaderCellDef> Category </th>
-                      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.category}} </td> -->
                     </ng-container>
                     <ng-container matColumnDef="subCategory">
                       <th mat-header-cell *matHeaderCellDef> Sub category </th>
-                      <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td> -->
                     </ng-container>
     
                     <ng-container matColumnDef="superSubCategory">
                       <th mat-header-cell *matHeaderCellDef> Super sub category </th>
-                      <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td>
+                      <!-- <td mat-cell *matCellDef="let element"> {{element.superSubCategory}} </td> -->
                     </ng-container>
                   
                     <tr mat-header-row *matHeaderRowDef="EnrolledCourseCol"></tr>
@@ -648,9 +663,9 @@
               <div class="card"  *ngIf="isCollapsed">
                 <div class="card-body">
                 <ul class="">
-                <li>Courses in draft <span class="todo">{{newRegisterLearses.DraftCourse}}</span></li>
-                <li>Courses to be published <span class="tode2">{{newRegisterLearses.PublishCourse}}</span></li>
-                <li>Enrollment Pending requests<span class="tode3">{{newRegisterLearses.enrollmentApprove}}</span></li>
+                  <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
+                  <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
+                  <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
                 </ul>
                 </div>
               </div>
@@ -715,11 +730,11 @@
             </div>
              <!-- Enrolled doughnut chart end -->
          </div>
-     </div>
-    </div>
+      </div>
+      </div>
       <!-- TotalEnrolments end -->
-    <div style="margin-top: 10%;"></div>
-  </mat-tab>
+     <div style="margin-top: 10%;"></div>
+   </mat-tab>
 
    <!-- Courses tab -->
   <mat-tab label="Courses">
@@ -740,13 +755,23 @@
           </div>
 
           <div class="row margin-to">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.beforeOneDayCountCategory / (courseCount?.TotalCategoryCount -  courseCount?.beforeOneDayCountCategory) | percent}}</span>
+              <span class="trendno">{{courseCount?.totalCategoryPec.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.totalCategoryPec.valueIncDecPec}}%</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
             </div>
+            <div class="col-md-6" *ngIf="courseCount?.totalCategoryPec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -773,12 +798,19 @@
           </div>
 
           <div class="row ">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.TotalCourse - courseCount?.todayAllcourseCount) | percent}}</span>
+              <span class="trendno">{{courseCount?.availableCoursePec.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.availableCoursePec.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
@@ -807,12 +839,20 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.perMonth - courseCount?.todayAllcourseCount) | percent}}</span>
+              <span class="trendno">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
@@ -938,12 +978,20 @@
           </div>
 
           <div class="row margin-to">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="learnertabData?.subscribeUser_percentage.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{learnertabData?.subscribeUser_percentage.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="learnertabData?.subscribeUser_percentage.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{learnertabData?.subscribeUser_percentage.valueIncDecPec}}%</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="learnertabData?.subscribeUser_percentage.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+            <div class="col-md-6" *ngIf="learnertabData?.subscribeUser_percentage.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
@@ -953,7 +1001,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3 class="font-size">User groups</h3>
-              <span class="count">{{learnertabData?.total_user_group_count[0].todayCount}}</span>
+              <span class="count">{{learnertabData?.total_user_group_count}}</span>
             </div>
     
             <div class="col-md-4 icon  bg-green  bg-course-icon">
@@ -964,12 +1012,22 @@
           </div>
 
           <div class="row margin-to">
-            <div class="col-md-6">
+            <div class="col-md-6"  *ngIf="learnertabData?.userGrpPec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{learnertabData?.userGrpPec.valueIncDecPec }}%</span>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6"  *ngIf="learnertabData?.userGrpPec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{learnertabData?.userGrpPec.valueIncDecPec }}%</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="learnertabData?.userGrpPec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="learnertabData?.userGrpPec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
@@ -980,7 +1038,7 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Login per day</h3>
-              <span class="count">{{learnertabData?.today_login_count[0].totalCount}}</span>
+              <span class="count">{{learnertabData?.today_login_count}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow bg-course-icon">
@@ -997,12 +1055,22 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="learnertabData?.login_percentage.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4%</span>
+              <span class="trendno">{{learnertabData?.login_percentage.valueIncDecPec}}%</span>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6"  *ngIf="learnertabData?.login_percentage.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{learnertabData?.login_percentage.valueIncDecPec}}%</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="learnertabData?.login_percentage.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="learnertabData?.login_percentage.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>

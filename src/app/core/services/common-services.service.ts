@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from "apollo-angular";
+import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
-import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm, getCoursesByName } from "@core/services/operations/common_query";
-import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse } from "@core/services/operations/common_mutation";
+import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
+  getCoursesByName } from '@core/services/operations/common_query';
+import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse
+} from '@core/services/operations/common_mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +23,8 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: logout,
       variables: {
-        user_id: user_id,
-        is_admin: is_admin
+        user_id,
+        is_admin
       }
     });
   }
@@ -31,7 +33,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: viewcourse,
       variables: {
-        course_id: course_id,
+        course_id,
       }
     });
   }
@@ -40,7 +42,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
-        user_id: user_id,
+        user_id,
       }
     });
   }
@@ -49,8 +51,8 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: add_to_wishlist,
       variables: {
-        course_id: course_id,
-        user_id: user_id
+        course_id,
+        user_id
       }
     });
   }
@@ -59,7 +61,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: delete_wishlist,
       variables: {
-        wishlist_id: wishlist_id,
+        wishlist_id,
       }
     });
   }
@@ -73,7 +75,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: syllabus_of_particular_scorm,
       variables: {
-        contentid: contentid,
+        contentid,
       }
     });
   }
@@ -90,7 +92,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: geturl,
       variables: {
-        courseid: courseid
+        courseid
       }
     });
   }
@@ -99,7 +101,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: getCoursesByName,
       variables: {
-        courseName: courseName,
+        courseName,
       }
     });
   }
@@ -108,8 +110,8 @@ export class CommonServicesService {
       query: enrollcourse,
       variables: {
         user_id: id,
-        group_id: group_id,
-        course_id: course_id,
+        group_id,
+        course_id,
       }
     });
   }

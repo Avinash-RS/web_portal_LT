@@ -340,6 +340,20 @@ img:hover {
     font-size: 14px;
 }
 
+.add-repo-enable {
+    .repo-icon {
+        font-size: 14px;
+    }
+}
+
+.add-repo-disable {
+    .repo-icon {
+        font-size: 14px;
+        opacity: 0.5;
+        cursor: no-drop;
+    }
+}
+
 .add-module-btn {
     text-align: left;
     height: 55px;
@@ -369,11 +383,9 @@ img:hover {
     font-size: 24px;
     color: #1f3777;
     padding-top: 50px;
-
 }
 .upload-btn {
     background-color: #dbe7ff !important;
-
 }
 .example-container {
     width: 400px;

@@ -86,6 +86,21 @@
           </select>
       </div>
     </div>
+    <div class="row">
+      <div class="col-9">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+          </div>
+    </div>
+    </div>
    
 
   </mat-tab>
