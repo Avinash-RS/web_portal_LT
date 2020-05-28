@@ -78,7 +78,7 @@ export class GroupManagementComponent implements OnInit {
     this.adminDetails = this.gs.checkLogout();
     this.getgroups();
     this.getallcatelogue();
-    this.getallgroups();
+    // this.getallgroups();
   }
 
   getgroups() {
@@ -210,6 +210,7 @@ export class GroupManagementComponent implements OnInit {
     this.dialog.closeAll();
   }
   changeGroup(passRef: TemplateRef<any>, element) {
+    this.getallgroups();
     this.userGroupChange = null;
     this.userGroupChange = element;
     this.changeGrpForm = this.formBuilder.group({
