@@ -83,12 +83,29 @@ export class ViewAllCoursesComponent implements OnInit {
         this.allcourses = data;
     })
     this.CommonServices.globalFilterCategory.subscribe((data: any) => {
-      this.allLvlCategoryFilterVal = data;
       if(!data.length){
+        this.allLvlCategoryFilterVal = data;
+        this.selectedFilter = [];
+        this.Lvl1CatId = [];
+        this.level1selectedID = [];
+        this.Lvl2CatId = [];
+        this.level2selectedID = [];
+        this.Lvl3CatId = [];
+        this.level3selectedID = [];
         this.allLvlCategory = [];
         this.getthreeLevelCat();
       } 
   })
+  this.CommonServices.globalCategory.subscribe((data: any) => {
+    if(!data.length){
+      this.Lvl1CatId = data.Lvl1CatId;
+      this.level1selectedID = data.level1selectedID;
+      this.Lvl2CatId = data.Lvl2CatId;
+      this.level2selectedID = data.level2selectedID;
+      this.Lvl3CatId = data.Lvl3CatId;
+      this.level3selectedID = data.level3selectedID;
+    } 
+})
     this.loadcategoryandcourses();
   }
 
