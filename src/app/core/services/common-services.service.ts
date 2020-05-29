@@ -26,6 +26,9 @@ export class CommonServicesService {
   globalFilterCategory$ = new Subject<any>();
   globalFilterCategory = this.globalFilterCategory$.asObservable();
 
+  globalCategory$ = new Subject<any>();
+  globalCategory = this.globalCategory$.asObservable();
+
 
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();

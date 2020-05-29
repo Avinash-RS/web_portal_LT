@@ -107,7 +107,7 @@
                       <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
 
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput [(ngModel)]="group_name"
-                        name="group_name" #groupname1="ngModel" [required]=editstatus  pattern="^[a-zA-Z0-9]+$"
+                        name="group_name" #groupname1="ngModel" [required]=editstatus  pattern="^[a-zA-Z0-9 sss]+$"
                         value="{{editgroupname}}" >
                         <!-- value="{{editgroupname}}" -->
                       <div
