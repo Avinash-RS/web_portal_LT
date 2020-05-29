@@ -196,156 +196,157 @@
     <div class="col-3" *ngIf="showAppliedFiltre">
       <app-guideline-search></app-guideline-search>
     </div>
-   
+
     <ng-container *ngIf="showAppliedFiltre">
-    <div class="col-9">
-      <div class="container">
-        <div class="row" *ngIf="displayMode === 1">
-          <ng-container
-            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-            <div class="col-md-6 col-lg-3 col-sm-12">
-              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
-            </div>
-          </ng-container>
-          <br>
-        </div>
-        <div class="row" *ngIf="displayMode === 2">
-          <ng-container
-            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
-              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
-                [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType"
-                [showCount]="true" [goto]="goto" [showDate]="true">
-              </app-list-view-course-component>
-              <br>
-            </div>
-          </ng-container>
-        </div>
+      <div class="col-9">
+        <div class="container">
+          <div class="row" *ngIf="displayMode === 1">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showRating]="true" [goto]="goto" [showCount]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+            <br>
+          </div>
+          <div class="row" *ngIf="displayMode === 2">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+                <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
+                  [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true"
+                  [btnType]="btnType" [showCount]="true" [goto]="goto" [showDate]="true">
+                </app-list-view-course-component>
+                <br>
+              </div>
+            </ng-container>
+          </div>
 
+        </div>
       </div>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="!showAppliedFiltre">
-    <div class="diffcol-9">
-      <div class="container ">
-        <div class="row" *ngIf="displayMode === 1">
-          <ng-container
-            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-            <div class="col-md-6 col-lg-3 col-sm-12">
-              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
-            </div>
-          </ng-container>
-          <br>
-        </div>
-        <div class="row" *ngIf="displayMode === 2">
-          <ng-container
-            *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
-              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
-                [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType"
-                [showCount]="true" [goto]="goto" [showDate]="true">
-              </app-list-view-course-component>
-              <br>
-            </div>
-          </ng-container>
-        </div>
+    </ng-container>
+    <ng-container *ngIf="!showAppliedFiltre">
+      <div class="diffcol-9">
+        <div class="container ">
+          <div class="row" *ngIf="displayMode === 1">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+              </div>
+            </ng-container>
+            <br>
+          </div>
+          <div class="row" *ngIf="displayMode === 2">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+                <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
+                  [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true"
+                  [btnType]="btnType" [showCount]="true" [goto]="goto" [showDate]="true">
+                </app-list-view-course-component>
+                <br>
+              </div>
+            </ng-container>
+          </div>
 
+        </div>
       </div>
-    </div>
-  </ng-container>
-</div>
+    </ng-container>
+  </div>
 
-<br>
-<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
-</pagination-controls>
+  <br>
+  <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
+  </pagination-controls>
 
-<ng-template #getCategoryDialog>
-  <mat-dialog-title>
-    <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
-  </mat-dialog-title>
-  <mat-dialog-content>
-    <div class="row">
-      <div class="col-4">
-        <h2>Level 1 : Category</h2>
-        <mat-form-field class="example-full-width">
-          <mat-icon matPrefix>search</mat-icon>
-          <input type="search" [(ngModel)]="lvl1Search" matInput placeholder="Search">
-        </mat-form-field>
+  <ng-template #getCategoryDialog>
+    <mat-dialog-title>
+      <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
+    </mat-dialog-title>
+    <mat-dialog-content>
+      <div class="row">
+        <div class="col-4">
+          <h2>Level 1 : Category</h2>
+          <mat-form-field class="example-full-width">
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="search" [(ngModel)]="lvl1Search" matInput placeholder="Search">
+          </mat-form-field>
 
-        <div class="row">
-          <div class="col-md-8">
-            <ul class="list-group">
-              <li class="list-group-item"
-                *ngFor="let item of allLvlCategoryFilterVal?.level1 ? allLvlCategoryFilterVal?.level1 : allLvlCategory?.level1  | search : lvl1Search ">
-                <label class="container1">
-                  <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name"
-                    (change)="getCategoryId(item)" />
-                  <spn style="padding-left: 35px;white-space: nowrap;">{{item.category_name}}</spn>
-                  <span class="checkmark"></span>
-                </label>
-              </li>
-            </ul>
+          <div class="row">
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item"
+                  *ngFor="let item of allLvlCategoryFilterVal?.level1 ? allLvlCategoryFilterVal?.level1 : allLvlCategory?.level1  | search : lvl1Search ">
+                  <label class="container1">
+                    <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name"
+                      (change)="getCategoryId(item)" />
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.category_name}}</spn>
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div class="vertical"></div>
+        <div class="col-4">
+          <h2>Level 2 : Category</h2>
+          <mat-form-field class="example-full-width">
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="search" [(ngModel)]="lvl2Search" matInput placeholder="Search">
+          </mat-form-field>
+          <div class="row">
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item"
+                  *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory?.level2   | search : lvl2Search">
+                  <label class="container1">
+                    <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name2"
+                      (change)="getCategoryId(item)" />
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.sub_category_name}}</spn>
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <!-- <span class="errormsg" *ngIf="errormsg"> Level 2 Category not found </span> -->
           </div>
         </div>
+        <div class="vertical1"></div>
+        <div class="col-4">
+          <h2>Level 3 : Category</h2>
+          <mat-form-field class="example-full-width">
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="search" [(ngModel)]="lvl3Search" matInput placeholder="Search">
+          </mat-form-field>
 
-      </div>
-      <div class="vertical"></div>
-      <div class="col-4">
-        <h2>Level 2 : Category</h2>
-        <mat-form-field class="example-full-width">
-          <mat-icon matPrefix>search</mat-icon>
-          <input type="search" [(ngModel)]="lvl2Search" matInput placeholder="Search">
-        </mat-form-field>
-        <div class="row">
-          <div class="col-md-8">
-            <ul class="list-group">
-              <li class="list-group-item"
-                *ngFor="let item of allLvlCategoryFilterVal?.level2 ? allLvlCategoryFilterVal?.level2 : allLvlCategory?.level2   | search : lvl2Search">
-                <label class="container1">
-                  <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name2"
-                    (change)="getCategoryId(item)" />
-                  <spn style="padding-left: 35px;white-space: nowrap;">{{item.sub_category_name}}</spn>
-                  <span class="checkmark"></span>
-                </label>
-              </li>
-            </ul>
+          <div class="row">
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item"
+                  *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory?.level3 | search : lvl3Search">
+                  <label class="container1">
+                    <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"
+                      (change)="getCategoryId(item)" />
+                    <spn style="padding-left: 35px;white-space: nowrap;">{{item.super_sub_category_name}}</spn>
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <!-- <span class="errormsg" *ngIf="errormsg"> Level 3 Category not found </span> -->
           </div>
-          <!-- <span class="errormsg" *ngIf="errormsg"> Level 2 Category not found </span> -->
         </div>
       </div>
-      <div class="vertical1"></div>
-      <div class="col-4">
-        <h2>Level 3 : Category</h2>
-        <mat-form-field class="example-full-width">
-          <mat-icon matPrefix>search</mat-icon>
-          <input type="search" [(ngModel)]="lvl3Search" matInput placeholder="Search">
-        </mat-form-field>
-
-        <div class="row">
-          <div class="col-md-8">
-            <ul class="list-group">
-              <li class="list-group-item"
-                *ngFor="let item of allLvlCategoryFilterVal?.level3 ? allLvlCategoryFilterVal?.level3 : allLvlCategory?.level3 | search : lvl3Search">
-                <label class="container1">
-                  <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name3"
-                    (change)="getCategoryId(item)" />
-                  <spn style="padding-left: 35px;white-space: nowrap;">{{item.super_sub_category_name}}</spn>
-                  <span class="checkmark"></span>
-                </label>
-              </li>
-            </ul>
-          </div>
-          <!-- <span class="errormsg" *ngIf="errormsg"> Level 3 Category not found </span> -->
-        </div>
-      </div>
-    </div>
-    <mat-dialog-actions align="center">
-      <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
-    </mat-dialog-actions>
-  </mat-dialog-content>
-</ng-template>
+      <mat-dialog-actions align="center">
+        <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
+      </mat-dialog-actions>
+    </mat-dialog-content>
+  </ng-template>
 
 
-<!-- </div> -->
+  <!-- </div> -->
