@@ -16,10 +16,14 @@ export class LearnerHomeComponent implements OnInit {
   pagenumber = 0;
   sort_type: any = "A-Z";
   allcourses: any;
+  enrolledCourses: any =[];
+  wishList:any = [];
+  yetToStart:any;
+  incomplete:any;
 
-  constructor(public learnerservice: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
+  constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
-    private globalservice: GlobalServiceService,public CommonServices: CommonServicesService) {
+    private globalservice: GlobalServiceService,public commonServices: CommonServicesService) {
   }
 
   ngOnInit() {
@@ -29,10 +33,11 @@ export class LearnerHomeComponent implements OnInit {
     }
     this.getallcourses();
     this.getEnrolledCourses();
+    this.viewWishlist();
   }
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         console.log('all courses', this.allcourses)
       });
@@ -40,9 +45,21 @@ export class LearnerHomeComponent implements OnInit {
   // function to fetch all the enrolled courses of the user
   getEnrolledCourses() {
     console.log(this.userDetailes.user_id)
-    this.learnerservice.get_enrolled_courses('4kujob').subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
-        console.log('enrolled response', enrolledList.data.getLearnerenrolledCourses.data)
+        console.log('enrolled response', enrolledList)
+        this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+        this.incomplete = enrolledList.data.getLearnerenrolledCourses.data.suspend[0];
+        this.yetToStart = enrolledList.data.getLearnerenrolledCourses.data.incomplete[0];
+      }
+    });
+  }
+  // function to fetch the wishlist of the user
+  viewWishlist() {
+    this.commonServices.viewWishlist(this.userDetailes.user_id).subscribe((viewWishlist: any) => {
+      if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
+        this.wishList = viewWishlist.data.view_wishlist.message;
+        console.log('wishlist response',viewWishlist);
       }
     });
   }

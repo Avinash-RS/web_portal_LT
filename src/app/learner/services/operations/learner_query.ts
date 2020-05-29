@@ -712,6 +712,9 @@ query getLearnerenrolledCourses($user_id: String){
         rating
         price
         totalLearners
+        coursePlayerStatus{
+          status
+          }
       }
     }
   }
