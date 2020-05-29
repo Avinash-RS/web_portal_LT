@@ -55,18 +55,18 @@
             </div>
           </div>
               <div class="row margintop">
-                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec != false">
+                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec != false">
                   <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-                  <span class="trendno">{{newRegisterLearses?.totalLearnerPec.valueIncDecPec}}% </span>
+                  <span class="trendno">{{newRegisterLearses?.totalLearnerPecTill.valueIncDecPec}}% </span>
                 </div>
-                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec == false">
+                <div class="col-md-4" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec == false">
                   <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
-                  <span class="trendnodown">{{newRegisterLearses?.totalLearnerPec.valueIncDecPec}}% </span>
+                  <span class="trendnodown">{{newRegisterLearses?.totalLearnerPecTill.valueIncDecPec}}% </span>
                 </div>
-                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec != false">
+                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec != false">
                   <span class="text" >Up from yesterday</span>
                 </div>
-                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPec.IncDecPec == false">
+                <div class="col-md-8" *ngIf = "newRegisterLearses?.totalLearnerPecTill.IncDecPec == false">
                   <span class="text">Down from yesterday</span>
                 </div>
             </div>
@@ -839,12 +839,20 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.todayAllcourseCount / (courseCount?.perMonth - courseCount?.todayAllcourseCount) | percent}}</span>
+              <span class="trendno">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec == false">
+              <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
+            </div>
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <span class="text">Up from yesterday</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec == false">
+              <span class="text">Down from yesterday</span>
             </div>
           </div>
         </div>
