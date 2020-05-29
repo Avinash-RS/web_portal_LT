@@ -62,7 +62,7 @@
             <div style="display: flex;">
                 <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
                 <span *ngIf="queryData?.template_details">
-                    <input class="Bcg" type="text" #modName placeholder="Enter the Name" formControlName="modulename" required />
+                    <input class="Bcg" type="text" placeholder="Enter the Name" formControlName="modulename" required />
                 </span>
                 <span class="validmodule"> <small
                         *ngIf="createTopicForm?.controls?.modulename?.errors?.required && submitted">Module Name
@@ -110,15 +110,18 @@
                                                             </span>
                                                         </div>
                                                         <div class="colView">
-                                                            <div *ngIf="queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
+                                                            <div
+                                                                *ngIf="queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
                                                                 <input style="display: none;" [id]="'fileInput3'+i"
                                                                     type='file' #fileInput3
                                                                     (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
                                                                 <span (dblclick)="fileInput3.click()"><img class="img1"
                                                                         src="{{queryData?.template_details[i]?.image}}"></span>
                                                             </div>
-                                                            <div  *ngIf="queryData?.template_details[i].name === 'Feedback' || queryData?.template_details[i].name === 'Video'">
-                                                            <span><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span>
+                                                            <div
+                                                                *ngIf="queryData?.template_details[i].name === 'Feedback' || queryData?.template_details[i].name === 'Video'">
+                                                                <span><img class="img1"
+                                                                        src="{{queryData?.template_details[i]?.image}}"></span>
                                                             </div>
                                                             <span
                                                                 class="padTop">{{queryData?.template_details[i]?.name}}</span>
@@ -153,33 +156,28 @@
                                                                         </mat-icon>
                                                                     </span><label class="fsize12">Upload
                                                                         Question</label></div>
-                                                                <span *ngIf="j?.value?.topicimages[0]" class="dspFlxinside ml10" [formGroupName]="i">
-                                                                    <small class="spanTime"> Time required to complete
-                                                                        the topic </small>
-                                                                        <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00">
-                                                                    
-                                                                </span>
                                                             </div>
                                                             <span
-                                                                *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
+                                                                *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video' && queryData?.template_details[i].name != 'SCORM'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
-                                                                <span><button *ngIf="queryData?.template_details[i].name != 'SCORM'" mat-raised-button class="btnprev"
+                                                                <span><button mat-raised-button class="btnprev"
                                                                         type="button"
-                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button>
-                                                                        <span
-                                                                        *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'"
-                                                                        class="previewAndTime"
-                                                                        [class.active]="queryData?.template_details[i]?.name==active?.name">
-                                                                        <label style="font-size: 12px;">Uploaded
-                                                                            sucessfully</label>
-                                                                    </span>
-                                                                    </span>
-                                                                <span class="dspFlxinside" [formGroupName]="i">
+                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
+                                                                <span class="dspFlxinside">
                                                                     <small class="spanTime"> Time required to complete
                                                                         the topic </small>
-                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                    <mat-card class="matcardTime">
+                                                                        00:00
+                                                                    </mat-card>
                                                                 </span>
+                                                            </span>
+                                                            <span
+                                                                *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'"
+                                                                class="previewAndTime"
+                                                                [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <label style="font-size: 12px;">Uploaded
+                                                                    sucessfully</label>
                                                             </span>
                                                             <span
                                                                 *ngIf="queryData?.template_details[i].name == 'Feedback'"
@@ -188,12 +186,6 @@
                                                                 <span><button mat-raised-button class="btnprev"
                                                                         type="button"
                                                                         (click)="openFeedback()">preview</button></span>
-
-                                                                <span class="dspFlxinside ml10" [formGroupName]="i">
-                                                                    <small class="spanTime"> Time required to complete
-                                                                        the topic </small>
-                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
-                                                                </span>
                                                             </span>
                                                             <div class="UploadVidBlock row previewAndTime"
                                                                 *ngIf="queryData?.template_details[i].name === 'Video'"
@@ -201,21 +193,49 @@
                                                                 <div class="col-md-4">
                                                                     <div class="vidCol1">
                                                                         <div class="subTitle">
-                                                                            <mat-slide-toggle [checked]="j?.value?.videosubtitle" (change)="toggle_sub_trans($event,'subtitle',j)">Subtitle</mat-slide-toggle>
+                                                                            <!-- Editing now -->
+                                                                            <mat-slide-toggle [checked]="subTitleVal"
+                                                                                (change)="toggle_sub_trans($event,'subtitle',j)">
+                                                                                Subtitle</mat-slide-toggle>
                                                                         </div>
-                                                                        <div *ngIf="j?.value?.videosubtitle == 'True'">
-                                                                            <div class="subTitleUpload" *ngFor="let no of j.value.topicimages[0].title;let subTitleindex = index">  
-                                                                                    <mat-select [(value)]="selected" class="subSelect" placeholder="Language">
-                                                                                        <mat-option *ngFor="let item of language" class="h30" [value]="item.name">{{item.name}}</mat-option>                                                                                        
-                                                                                      </mat-select>                                                                                 
+                                                                        <div *ngIf="j?.value?.vidsubtitle == 'True'">
+                                                                            <div class="subTitleUpload"
+                                                                                *ngFor="let no of j.value.topicimages[0].title;let subTitleindex = index">
+                                                                                <mat-select [(value)]="selected"
+                                                                                    class="subSelect"
+                                                                                    placeholder="Language">
+                                                                                    <mat-option
+                                                                                        *ngFor="let item of language"
+                                                                                        class="h30" [value]="item.name">
+                                                                                        {{item.name}}</mat-option>
+                                                                                </mat-select>
                                                                                 <div class="chooseFile">
-                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">
-                                                                                    <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
+                                                                                    <input style="display: none;"
+                                                                                        [id]="'fileInput4'+i"
+                                                                                        type='file' #fileInput4
+                                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">
+                                                                                    <button (click)="fileInput4.click()"
+                                                                                        class="subButton"
+                                                                                        type="button">Choose
+                                                                                        file</button>
                                                                                 </div>
-                                                                                  <div class="addSub">
-                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j)">add_circle</mat-icon>
-                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)">delete</mat-icon>
-                                                                                  </div>                                                                             
+                                                                                <div class="addSub">
+                                                                                    <mat-icon *ngIf="subTitleindex == 0"
+                                                                                        (click)="addSubTile('sub',j)">
+                                                                                        add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0"
+                                                                                        (click)="removeSubTile(subTitleindex,'sub',j)"
+                                                                                        (click)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">
+                                                                                        delete</mat-icon>
+                                                                                </div>
+                                                                                <div class="addSub">
+                                                                                    <mat-icon *ngIf="subTitleindex == 0"
+                                                                                        (click)="addSubTile('sub',j)">
+                                                                                        add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0"
+                                                                                        (click)="removeSubTile(subTitleindex,'sub',j)">
+                                                                                        delete</mat-icon>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
@@ -240,19 +260,29 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="input-container" [formGroupName]="i">
-                                                                        <input class="input-field" type="text" formControlName="topicvalue" placeholder="Add url" (paste)="onSelectFile($event,queryData?.template_details[i],j,i,$event.clipboardData.getData('Text'))" (input)="onSelectFile($event,queryData?.template_details[i],j,i,$event.target.value)" required />
+                                                                    <div class="input-container">
+                                                                        <form [formGroup]="urlForm">
+                                                                            <input class="input-field" type="text"
+                                                                                #urlValue placeholder="Add url"
+                                                                                formControlName="videoURI"
+                                                                                (paste)="onSelectFile($event,queryData?.template_details[i],j,i,$event.clipboardData.getData('Text'))"
+                                                                                (input)="onSelectFile($event,queryData?.template_details[i],j,i,$event.target.value)"
+                                                                                required />
+                                                                        </form>
                                                                         <button class="input-button"
-                                                                            (click)="loadBlobs($event,queryData?.template_details[i],j,i,'')"
+                                                                            (click)='loadBlobs()'
                                                                             type="button">Browse</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="vidCol3" [formGroupName]="i">
-                                                                        <span class="dspFlxinside ml10" style="height: 33px;">
-                                                                            <small class="spanTime"> Time required to complete
+                                                                    <div class="vidCol3">
+                                                                        <span class="dspFlxinside">
+                                                                            <small class="spanTime"> Time required to
+                                                                                complete
                                                                                 the topic </small>
-                                                                                <input type="text" class="timeInput" style="width: 20% !important" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                            <mat-card class="matcardTime">
+                                                                                00:00
+                                                                            </mat-card>
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -263,7 +293,7 @@
                                                                 *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback' && !j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Video'"><small
                                                                     class="FileuploadValid">File Upload
                                                                     Required!!!</small></span>
-                                                            <span *ngIf="!j?.value?.topicvalue && submitted && queryData?.template_details[i].name == 'Video'"><small class="FileuploadValid">URL
+                                                            <span *ngIf="urlRequired"><small class="FileuploadValid">URL
                                                                     Required!!!</small></span>
                                                         </div>
                                                     </div>

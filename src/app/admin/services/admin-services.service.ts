@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import { user_registration , createusergroup, update_notification, groupstatus} from './operations/admin_mutation'
-import { get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
-  get_user_session_detail, get_course_createdby_admin, publishcourse,get_course_published,getgroup,get_user_group_hierarchy
-,getnotificationreports,get_draft_course} from "./operations/admin_query";
+import { user_registration, createusergroup, update_notification, groupstatus } from './operations/admin_mutation'
+import {
+  get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
+  get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy
+  , getnotificationreports, get_draft_course
+} from "./operations/admin_query";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { group } from '@angular/animations';
@@ -12,6 +14,8 @@ import { group } from '@angular/animations';
   providedIn: 'root'
 })
 export class AdminServicesService {
+
+  _currentUser: any;
 
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
@@ -102,20 +106,20 @@ export class AdminServicesService {
     });
   }
 
-  getNotificationData(admin_id){
+  getNotificationData(admin_id) {
     return this.Apollo.query({
       query: getnotificationreports,
       variables: {
-        admin_id : admin_id,
+        admin_id: admin_id,
       }
 
     })
   }
-  removeNotificationData(report_id){
+  removeNotificationData(report_id) {
     return this.Apollo.query({
       query: update_notification,
       variables: {
-        report_id : report_id,
+        report_id: report_id,
       }
 
     })
@@ -193,10 +197,27 @@ export class AdminServicesService {
     return this.Apollo.query({
       query: groupstatus,
       variables: {
-        group_id : groupid,
-        is_active : status
+        group_id: groupid,
+        is_active: status
       }
     });
+  }
+
+  getToken(): string {
+    const token = localStorage.getItem('token');
+    return token;
+  }
+
+  currentUser(): any {
+    if (this._currentUser) {
+      return this._currentUser;
+    } else {
+      if (localStorage.getItem('currentUser')) {
+        const json = JSON.parse(localStorage.getItem('currentUser'));
+        this._currentUser = <any>json;
+      }
+    }
+    return this._currentUser;
   }
 }
 
