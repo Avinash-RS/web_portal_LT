@@ -9,11 +9,6 @@
   <div class="container" #formCard>
     <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
       <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
-        <span style="position: fixed;">
-          <h1>
-            {{scrollAchieved}}
-          </h1>
-        </span>
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
@@ -50,10 +45,9 @@
         <!-- <div [ngClass]="{ 'dispC op' : scrollAchieved && (scrollAchievedValue < 300), 
         'dispC op1' : scrollAchieved && (scrollAchievedValue > 300)}"> -->
         <div [ngClass]="{ 'dispC' : scrollAchieved }">
-          <img src="assets/landingpageicons/Need Guidance_1.svg" (click)="gotoCard(formCard)">
-          <img src="assets/landingpageicons/Need Guidance_2.svg"
-            (click)="formCard.scrollTop = 0;scrollAchieved = false">
-          <img src="assets/landingpageicons/Need Guidance_3.svg" (click)="scrollAchieved = false">
+          <img src="assets/landingpageicons/Need Guidance_1.svg" (click)="gotoTop()">
+          <img src="assets/landingpageicons/Need Guidance_2.svg" (click)="gotoTop()">
+          <img src="assets/landingpageicons/Need Guidance_3.svg" (click)="gotoTop()">
         </div>
       </div>
     </div>
