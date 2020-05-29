@@ -11,10 +11,11 @@
 </div>
 <div class="row card-bottom color_blue width_60 center f_wt_500 m-b-10 m-t-10" *ngIf="userDetail == null">
   <div class="col-lg-8 col-md-8 col-sm-8 col-8 float_left">
-    <span class="f_size_15 f_wt_500" style="word-wrap: break-word">{{course.course_name}}</span>
+    <span class="f_size_15 f_wt_500"
+      style="word-wrap: break-word; vertical-align: middle;">{{course.course_name}}</span>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-4 col-4 float_right">
-    <button *ngIf="showCartBtn" class=" m-b-10 m-t-10 f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
+    <button *ngIf="showCartBtn" class="f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
   </div>
 </div>
 <!-- end for logged out user -->
