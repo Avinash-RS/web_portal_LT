@@ -688,3 +688,31 @@ query getlearnerdashboarddetails($user_id: String){
     }
 }
 }`;
+
+export const getLearnerenrolledCourses = gql`
+query getLearnerenrolledCourses($user_id: String){
+  getLearnerenrolledCourses(user_id:$user_id){
+    success
+    message
+    data{
+      suspend{
+        _id
+        totalCount
+        percent
+      }
+      incomplete{
+        _id
+        totalCount
+        percent
+      }
+      courseEnrolled{
+        course_id
+        course_name
+        course_img_url
+        rating
+        price
+        totalLearners
+      }
+    }
+  }
+}`;
