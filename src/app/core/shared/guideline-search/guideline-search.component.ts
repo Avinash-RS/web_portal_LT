@@ -489,6 +489,15 @@ export class GuidelineSearchComponent implements OnInit {
         })
       }
     }
+    let obj = {
+      Lvl1CatId: this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID
+    }
+    this.CommonServices.globalCategory$.next(obj);
   
     var perPage = "20";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
@@ -498,6 +507,7 @@ export class GuidelineSearchComponent implements OnInit {
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
         this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
         this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
+        this.CommonServices.globalCourses$.next(this.allcourses);
       })
   }
 
