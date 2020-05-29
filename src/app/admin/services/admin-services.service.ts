@@ -468,11 +468,12 @@ export class AdminServicesService {
 
  // Dashboard
  // getting admin dashboard overview data
-  getAdminOverview(days) {
+  getAdminOverview(days,user_id) {
     return this.Apollo.query({
       query: getAdminOverview,
       variables: {
         days: days,
+        user_id:user_id
       }
     });
   }
