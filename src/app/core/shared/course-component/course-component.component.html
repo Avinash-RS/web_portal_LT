@@ -2,16 +2,20 @@
 
 <!-- for logged out user -->
 <div class="containerOverlay" *ngIf="userDetail == null">
-  <img class="pointer m-b-10 course-image center" src="{{ course.course_img_url }}" alt="">
+  <img class="pointer m-b-10 course-image1 center" src="{{ course.course_img_url }}" alt="">
   <div class="overlay p-5px" style="margin-bottom: 0;">
-    <p class="course_description">
+    <p class="course_description1 f_size_12">
       {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
     </p>
   </div>
 </div>
-<div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10" *ngIf="userDetail == null">
-  <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
-  <button *ngIf="showCartBtn" class="float_right m-b-10 m-t-10" (click)="enrollCourse()">Enroll</button>
+<div class="row card-bottom color_blue width_60 center f_wt_500 m-b-10 m-t-10" *ngIf="userDetail == null">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-8 float_left">
+    <span class="f_size_15 f_wt_500" style="word-wrap: break-word">{{course.course_name}}</span>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-4 float_right">
+    <button *ngIf="showCartBtn" class=" m-b-10 m-t-10 f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
+  </div>
 </div>
 <!-- end for logged out user -->
 

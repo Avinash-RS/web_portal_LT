@@ -36,29 +36,26 @@
     color: $color-subhead !important;
 }
 
-// END OF LOGGED OUT USER
-
-// FOR LOGGED IN USER
-
-.course-name-row {
-    height: 10vh !important;
+.course-image1 {
+    height: 150px;
+    object-fit: cover;
 }
 
 .containerOverlay {
     .overlay {
         height: 50%;
-        width: 80%;
+        width: 60%;
         position: absolute;
         overflow: hidden;
         bottom: 5vh;
-        left: 10%;
+        left: 20%;
         opacity: 0;
         background-color: $color-white;
         filter: alpha(opacity=0);
     }
 
     .pointer {
-        width: 80% !important;
+        width: 60% !important;
     }
 }
 
@@ -67,6 +64,21 @@
     filter: alpha(opacity=100);
     background-color: $color-white;
 }
+
+.enroll_btn {
+    border: 1.0px solid $color-blank !important;
+    background-color: $color-white;
+}
+
+// END OF LOGGED OUT USER
+
+// FOR LOGGED IN USER
+
+.course-name-row {
+    height: 10vh !important;
+}
+
+
 
 .containerOverlay1 {
     .overlay1 {
@@ -91,6 +103,7 @@
     filter: alpha(opacity=100);
     background-color: $color-white;
 }
+
 
 .course-image {
     height: 150px;
