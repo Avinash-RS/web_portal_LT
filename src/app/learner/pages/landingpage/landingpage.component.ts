@@ -142,7 +142,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   getScrollValues(e) {
-    console.log(e.scrollTop, 'landing');
+    // console.log(e.scrollTop, 'landing');
     this.scrollAchievedValue = e.scrollTop;
     if (e.scrollTop >= 300) {
       this.scrollAchieved = true;
