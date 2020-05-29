@@ -88,6 +88,7 @@ const routes: Routes = [
     CapslockDirective,
     StickyHeaderDirective,
     DataTableComponent,
+    VideoPlayerComponent,
     ListViewCourseComponentComponent,
     GuidelineSearchComponent]
 })
