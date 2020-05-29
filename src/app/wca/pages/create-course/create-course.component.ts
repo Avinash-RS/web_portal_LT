@@ -6,7 +6,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-create-course',
@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateCourseComponent implements OnInit {
 
-    // editor = ClassicEditor;
+    editor = ClassicEditor;
     courseForm: FormGroup;
     imageView: File;
     submitted = false;
@@ -179,11 +179,15 @@ export class CreateCourseComponent implements OnInit {
     onSelectFile(fileInput: any, type, index, j = null) {
         let imagepath;
         const filePath = fileInput.target.files[0].name;
+        const fileSize = fileInput.target.files[0].size;
         const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         if (!allowedExtensions.exec(filePath)) {
             this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
             fileInput.value = '';
             return false;
+        }
+        else if((fileSize/1024)/1024 >= 2) {
+            this.toast.warning("File size should not exceed more than 2 mb");
         } else {
             if (fileInput && fileInput.target && fileInput.target.files[0]) {
                 this.spinner.show();
@@ -288,12 +292,12 @@ export class CreateCourseComponent implements OnInit {
 
 
         if (!this.courseForm.value.course_name) {
-            this.toast.warning('Course Name is Required !!!');
+            this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
 
         if (!this.courseForm.value.course_img_url) {
-            this.toast.warning('Course Image is Required !!!');
+            this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
 
