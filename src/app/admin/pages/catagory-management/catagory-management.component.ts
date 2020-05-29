@@ -629,7 +629,7 @@ export class CatagoryManagementComponent implements OnInit {
   buildForm(type) {
     if (type === 'category') {
       this.addCategoryForm = this.formBuilder.group({
-        category_name: new FormControl('', myGlobals.req),
+        category_name: new FormControl('', myGlobals.textVal),
         category_description: new FormControl(''),
         category_image: ['', myGlobals.req]
       });
@@ -640,7 +640,7 @@ export class CatagoryManagementComponent implements OnInit {
       }
     } else if (type === 'subcategory') {
       this.addSubCategoryForm = this.formBuilder.group({
-        sub_category_name: new FormControl('', myGlobals.req),
+        sub_category_name: new FormControl('', myGlobals.textVal),
         sub_category_description: new FormControl(''),
       });
       this.selectedSubCategory.sub_category_description = this.selectedSubCategory.sub_category_description === 'null' ? '' :
@@ -650,7 +650,7 @@ export class CatagoryManagementComponent implements OnInit {
       }
     } else {
       this.addSuperSubCategoryForm = this.formBuilder.group({
-        super_sub_category_name: new FormControl('', myGlobals.req),
+        super_sub_category_name: new FormControl('', myGlobals.textVal),
         super_sub_category_description: new FormControl(''),
       });
       this.selectedSuperSubCategory.super_sub_category_description =

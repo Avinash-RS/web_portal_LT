@@ -123,14 +123,14 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   onpagination(event) {
-    this.pagenumber = this.pagenumber + 1;
+    // this.pagenumber = this.pagenumber + 1;
     this.paginationpgno = event;
     if (this.type === 'created') {
       this.loader = true;
-      this.service.getAllDrafted(this.adminDetails.user_id, this.pagenumber).subscribe((res: any) => {
+      this.service.getAllDrafted(this.adminDetails.user_id, event - 1).subscribe((res: any) => {
         if (res.data && res.data.get_draft_course) {
-          this.courseList.push(...res.data.get_draft_course.message);
-          // this.courseList = res.data.get_course_createdby_admin.message;
+          // this.courseList.push(...res.data.get_draft_course.message);
+          this.courseList = res.data.get_course_createdby_admin.message;
           this.goto = 'create';
           this.showPublishedDate = false;
           this.loader = false;
@@ -144,10 +144,10 @@ export class AdminCoursesComponent implements OnInit {
       });
     } else if (this.type === 'published') {
       this.loader = true;
-      this.service.getAllCoursePublished('undefined', this.pagenumber).subscribe((res: any) => {
+      this.service.getAllCoursePublished('undefined', event - 1).subscribe((res: any) => {
         if (res.data && res.data.get_course_published) {
-          this.courseList.push(...res.data.get_course_published.message);
-          // this.courseList = res.data.get_course_published.message;
+          // this.courseList.push(...res.data.get_course_published.message);
+          this.courseList = res.data.get_course_published.message;
           this.goto = 'publish';
           this.showPublishedDate = true;
           this.loader = false;
@@ -161,10 +161,10 @@ export class AdminCoursesComponent implements OnInit {
       });
     } else if (this.type === 'draft') {
       this.loader = true;
-      this.service.getAllDrafted('undefined', this.pagenumber).subscribe((res: any) => {
+      this.service.getAllDrafted('undefined', event - 1).subscribe((res: any) => {
         if (res.data && res.data.get_draft_course) {
-          this.courseList.push(...res.data.get_draft_course.message);
-          // this.courseList = res.data.get_draft_course.message;
+          // this.courseList.push(...res.data.get_draft_course.message);
+          this.courseList = res.data.get_draft_course.message;
           this.goto = 'draft';
           this.showPublishedDate = false;
           this.loader = false;
