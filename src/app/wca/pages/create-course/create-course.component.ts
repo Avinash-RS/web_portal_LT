@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WcaService } from '../../services/wca.service';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatDialog } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
@@ -66,10 +68,10 @@ export class CreateCourseComponent implements OnInit {
             text: '',
             media: this.formBuilder.array(
                 this.courseEditDetails && this.courseEditDetails.takeway_details && this.courseEditDetails.takeway_details[0] &&
-                this.courseEditDetails.takeway_details[0].media ?
-                this.courseEditDetails.takeway_details[0].media.map((data, index) => {
-                return this.createMedia();
-            }) : [this.createMedia()]),
+                    this.courseEditDetails.takeway_details[0].media ?
+                    this.courseEditDetails.takeway_details[0].media.map((data, index) => {
+                        return this.createMedia();
+                    }) : [this.createMedia()]),
             description: '',
             what_will_you_learn: ''
 
@@ -86,7 +88,7 @@ export class CreateCourseComponent implements OnInit {
         public toast: ToastrService,
         public router: Router,
         public route: ActivatedRoute,
-
+        private dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -122,12 +124,12 @@ export class CreateCourseComponent implements OnInit {
             preview_video: [null, Validators.compose([])],
             author_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.author_details &&
                 this.courseEditDetails.author_details.length ? this.courseEditDetails.author_details.map((data, index) => {
-                return this.createItem();
-            }) : [this.createItem()]),
+                    return this.createItem();
+                }) : [this.createItem()]),
             coursepartner_details: this.formBuilder.array(this.courseEditDetails && this.courseEditDetails.coursepartner_details &&
                 this.courseEditDetails.coursepartner_details.length ? this.courseEditDetails.coursepartner_details.map((data, index) => {
-                return this.createItem1();
-            }) : [this.createItem1()]),
+                    return this.createItem1();
+                }) : [this.createItem1()]),
             takeway_details: this.formBuilder.array([this.createItem2()]),
             certificate_name: [null, Validators.compose([])],
             course_mode: [true],
@@ -306,9 +308,13 @@ export class CreateCourseComponent implements OnInit {
                     if (data && data.success === true) {
                         this.toast.success('Course Updated Successfully !!!');
                         this.router.navigate(['/Admin/auth/Wca/addmodule'],
-                        { queryParams: { courseId: this.queryData.viewingModule,
-                            courseImage: this.courseForm.value.course_img_url,
-                            courseName: this.courseForm.value.course_name } });
+                            {
+                                queryParams: {
+                                    courseId: this.queryData.viewingModule,
+                                    courseImage: this.courseForm.value.course_img_url,
+                                    courseName: this.courseForm.value.course_name
+                                }
+                            });
 
                     } else {
                         this.toast.error('Something Went Wrong While Updating !!!');
@@ -338,8 +344,12 @@ export class CreateCourseComponent implements OnInit {
                         });
                         this.toast.success('Course Created Successfully !!!');
                         this.router.navigate(['/Admin/auth/Wca/viewmodule'],
-                        { queryParams: { viewingModule: data.course_id,
-                            image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name } });
+                            {
+                                queryParams: {
+                                    viewingModule: data.course_id,
+                                    image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name
+                                }
+                            });
                     }
                 }, err => {
                     this.spinner.hide();
@@ -467,5 +477,18 @@ export class CreateCourseComponent implements OnInit {
                 this.spinner.hide();
             });
         }
+    }
+
+    loadBlobs() {
+        const dialogRef = this.dialog.open(BlobReaderComponent, {
+            data: {},
+            height: '70%',
+            width: '74%',
+            closeOnNavigation: true,
+            disableClose: true,
+        });
+        dialogRef.afterClosed().subscribe(res => {
+            this.courseForm.patchValue({ preview_video: res.url });
+        });
     }
 }

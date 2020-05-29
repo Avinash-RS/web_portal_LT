@@ -109,8 +109,9 @@
 
                         <div class="row crs1 margbtm">
                           <div class="col-md-4 course-details">Preview Video</div>
-                          <div class="col-md-8"><input class="inputmainWidth" type="text" placeholder="URL"
-                              (keydown)="_handleKeydown($event)" formControlName="preview_video" required /> </div>
+                          <div class="col-md-8"><input class="input-field" type="text" placeholder="URL"
+                              (keydown)="_handleKeydown($event)" formControlName="preview_video" required />
+                            <button class="input-button" (click)='loadBlobs()' type="button">Browse</button> </div>
                         </div>
 
 
