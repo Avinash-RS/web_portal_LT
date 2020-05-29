@@ -1,5 +1,8 @@
 @import "variable";
 
+.swal2-popup.swal2-modal.swal2-show {
+  width: 30% !important;
+}
 .mat-form-field {
   font-size: 14px;
   width: 40%;
