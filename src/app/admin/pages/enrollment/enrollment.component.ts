@@ -186,6 +186,7 @@ export class EnrollmentComponent implements OnInit {
           }
         }
       });
+      const value = array.length > 0 ? 's' : '';
       const data = {  update_type: this.selectiontype,
       status_reason: 'Approved',
       enrollments: array};
@@ -204,7 +205,7 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire({
             title: '<div>Successfully Approved</div> <br> ',
-            text: 'A confirmation has been sent to the user email id',
+            text: 'A confirmation has been sent to the user email id' + value
           });
         }
       });
