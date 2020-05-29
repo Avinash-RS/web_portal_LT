@@ -8,22 +8,60 @@
   (scrollValues)="getScrollValues($event)">
   <div class="container" #formCard>
     <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
-      <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
+      <!-- <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
         <span style="position: fixed;">
           <h1>
             {{scrollAchieved}}
           </h1>
         </span>
         <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-            <h1>Welcome to Your <br> Professional community.</h1>
-            <h4>This is the new way to Learn Online</h4>
-            <!-- search bar -->
-            <button>Explore more</button>
+          <div class="col-2 "></div>
+          <div class="col-6">
+            <h1 class="f_size_40 color ">Welcome to Your <br> Professional community.</h1>
+            <h4 class="color_1 f_size_18">This is the new way to Learn Online</h4>
+            search bar
+            <button class="color_subhead width_25 ">Explore more</button>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
+        <br> <br>
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2" ></div>
+            <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+            <h2 class="f_size_40 landing-text m-b-10 ">Welcome to Your <br> Professional Community.</h2>
+          </div>
+        
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2" ></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+            <h4 class="color_1 f_size_18 m-b-10">This is the new way to Learn Online</h4>
+          </div>
+        </div>
+      
+       <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-2" ></div>
+        <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+          <div class="input-group mb-3">
+            <input type="text" class=" search-bar form-control" placeholder="course,title,author,institution" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">search</span>
+            </div>
+          </div>
+        </div> 
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2" ></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10 float_left">
+            <button class="explore-btn width_25 ">Explore more</button>
           </div>
         </div>
       </div>
+     
       <div class="col-lg-3 col-md-4 col-sm-12 col-12">
         <mat-card class="section_1_card_1 background_trans" [ngClass]="{ 'noneC' : scrollAchieved}">
           <mat-card-content>

@@ -345,3 +345,75 @@ strong {
 .shadow {
     box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f_size_40 {
+    font-size: 40px;
+  }
+.landing-text{
+ color:$color-white ;
+ background-color: $color-subhead ;
+//  width: 334px;
+//  height: 42px;
+ opacity:65%;
+ line-height: 1.4;
+ display:inline;
+}
+
+.color_community{
+    background-color: $color-subhead !important ;
+    width: 461px;
+    color:$color-white ;
+    opacity:65%
+}
+
+.explore-btn{
+background-color:$color-subhead ;
+color:$color-white !important;
+border: none;
+border-radius: 30px;
+height:40px;
+width:150px;
+}
+
+.color_1{
+  color:  $color-subhead;
+  word-wrap: break-word;
+  padding-right: 5px;
+}
+
+
+.mb-3{
+    margin-bottom: 1rem!important;
+    width: 100%;
+}
+
+.input-group-text{
+    background-color:$color-subhead;
+    color:$color-white !important;
+}
+.input-group {
+    background-color:$color-white;
+    padding-right: 5px;
+}
+
+.search-bar{
+    background-color:$color-white !important ;
+    background-color: white !important;
+    height: 40px;
+    font-style: italic;
+}  
