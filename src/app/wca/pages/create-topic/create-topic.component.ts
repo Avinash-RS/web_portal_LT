@@ -793,13 +793,11 @@ export class CreateTopicComponent implements OnInit {
     else {
       this.transcripts.push(this.transcripts.length)
     }
-    console.log(formdata.value.topicimages[0])
   }
   removeSubTile(index,value,formdata){
     
     if(value == 'sub'){   
       formdata.value.topicimages[0].title.splice(index, 1);
-      console.log(formdata.value.topicimages[0])
     return false;
     }
     else {
