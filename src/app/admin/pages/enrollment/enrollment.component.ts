@@ -186,6 +186,7 @@ export class EnrollmentComponent implements OnInit {
           }
         }
       });
+      const value = array.length > 0 ? 's' : '';
       const data = {  update_type: this.selectiontype,
       status_reason: 'Approved',
       enrollments: array};
@@ -195,7 +196,7 @@ export class EnrollmentComponent implements OnInit {
           this.loading = false;
           if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
-              is_individual: true, course_id: 'undefined' };
+              is_individual: true, course_id: this.selectedgroupid.course_id};
             this.getenrolledcoursesforgroup(data1);
             this.getenrolledcoursesgroup(0);
           } else {
@@ -204,7 +205,7 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire({
             title: '<div>Successfully Approved</div> <br> ',
-            text: '<div>A confirmation has been sent to the user email id</div> <br>',
+            text: 'A confirmation has been sent to the user email id' + value
           });
         }
       });
@@ -244,7 +245,7 @@ export class EnrollmentComponent implements OnInit {
         this.loading = false;
         if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
-              is_individual: true, course_id: 'undefined' };
+              is_individual: true, course_id: this.selectedgroupid.course_id };
             this.getenrolledcoursesforgroup(data1);
           } else {
             this.dataSource.data = [];

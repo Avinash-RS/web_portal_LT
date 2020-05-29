@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName,get_all_course_by_usergroup } from '@core/services/operations/common_query';
+  getCoursesByName} from '@core/services/operations/common_query';
 import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
   getCourseCategorySearch, getDetailsCount} from '@core/services/operations/common_mutation';
 
@@ -25,6 +25,9 @@ export class CommonServicesService {
 
   globalFilterCategory$ = new Subject<any>();
   globalFilterCategory = this.globalFilterCategory$.asObservable();
+
+  globalCategory$ = new Subject<any>();
+  globalCategory = this.globalCategory$.asObservable();
 
 
   logout(user_id, is_admin) {
@@ -148,16 +151,6 @@ export class CommonServicesService {
   getGuidelineSearch(){
     return this.Apollo.query({
       query: getDetailsCount
-    });
-  }
-  getallcourses(groupid, pagenumber,sort_type) {
-    return this.Apollo.query({
-      query: get_all_course_by_usergroup,
-      variables: {
-        group_id: groupid,
-        pagenumber: pagenumber,
-        sort_type:sort_type
-      }
     });
   }
 }
