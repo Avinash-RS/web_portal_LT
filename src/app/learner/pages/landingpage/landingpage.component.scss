@@ -152,17 +152,23 @@ html {
     color: $color-blank !important;
 }
 
-.section_1_card_1 .form-control {
-    width: 90%;
-    z-index: 1;
-    margin: auto;
-    height: calc(1rem + .75rem + 2px);
-    color: white;
-    // background-color: rgba(62, 62, 62, 0.7) !important;
-    background-color: rgba(100, 100, 100, 0.7) !important;
-    opacity: 0.9;
-    border-radius: 0;
-}
+.section_1_card_1{
+    ::placeholder {
+        color: $color-white;
+        opacity: 1;
+    }
+    .form-control {
+        width: 90%;
+        z-index: 1;
+        margin: auto;
+        height: calc(1rem + .75rem + 2px);
+        color: white;
+        // background-color: rgba(62, 62, 62, 0.7) !important;
+        background-color: rgba(100, 100, 100, 0.7) !important;
+        opacity: 0.9;
+        border-radius: 0;
+    }
+} 
 
 .section_1 .section_1_card_1 {
     height: auto;
@@ -202,11 +208,9 @@ html {
     width: 200px;
 }
 
-::placeholder {
-    color: $color-white;
-    opacity: 1;
+.f_large {
+    font-size: large;
 }
-
 // .op {
 //     opacity: 0.5;
 // }
@@ -241,7 +245,7 @@ html {
 }
 
 .m-b-10 {
-    margin-bottom: 10px !important;
+    margin-bottom: 20px !important;
 }
 
 .m-t-25 {
@@ -388,7 +392,7 @@ strong {
 
 .landing-text {
     color: $color-white;
-    background: rgba(16, 104, 178, 0.6);
+    background: rgba(40, 133, 212, 0.6);
     line-height: 1.4;
     display: inline;
 }
