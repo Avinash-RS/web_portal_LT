@@ -82,7 +82,7 @@ export class EnrollmentComponent implements OnInit {
 
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
-      { columnDef: 'request_date', header: 'Last received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
+      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
       { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem.course_name}` },
       { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem.totalCount}` },
       { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem.group_name}` },
@@ -169,7 +169,7 @@ export class EnrollmentComponent implements OnInit {
       text: 'Are you sure want to proceed?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       cancelButtonText: 'No',
       confirmButtonText: 'Yes'
     }).then((result) => {
@@ -204,7 +204,7 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire({
             title: '<div>Successfully Approved</div> <br> ',
-            text: '<div>A confirmation has been sent to the user email id</div> <br>',
+            text: '<div>A confirmation has been sent to user email ids</div> <br>',
           });
         }
       });
@@ -219,7 +219,7 @@ export class EnrollmentComponent implements OnInit {
       input: 'textarea',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Ok'
     }).then((result) => {
       if (result.value) {

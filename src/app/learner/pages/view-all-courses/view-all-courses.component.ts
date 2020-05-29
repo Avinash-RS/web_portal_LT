@@ -83,12 +83,29 @@ export class ViewAllCoursesComponent implements OnInit {
         this.allcourses = data;
     })
     this.CommonServices.globalFilterCategory.subscribe((data: any) => {
-      this.allLvlCategoryFilterVal = data;
       if(!data.length){
+        this.allLvlCategoryFilterVal = data;
+        this.selectedFilter = [];
+        this.Lvl1CatId = [];
+        this.level1selectedID = [];
+        this.Lvl2CatId = [];
+        this.level2selectedID = [];
+        this.Lvl3CatId = [];
+        this.level3selectedID = [];
         this.allLvlCategory = [];
         this.getthreeLevelCat();
       } 
   })
+  this.CommonServices.globalCategory.subscribe((data: any) => {
+    if(!data.length){
+      this.Lvl1CatId = data.Lvl1CatId;
+      this.level1selectedID = data.level1selectedID;
+      this.Lvl2CatId = data.Lvl2CatId;
+      this.level2selectedID = data.level2selectedID;
+      this.Lvl3CatId = data.Lvl3CatId;
+      this.level3selectedID = data.level3selectedID;
+    } 
+})
     this.loadcategoryandcourses();
   }
 
@@ -277,7 +294,7 @@ export class ViewAllCoursesComponent implements OnInit {
   sorting(sortval) {
     this.showAppliedFiltre = false;
     if (this.userDetailes.group_id)
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
@@ -318,15 +335,16 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
 
   onpagination(event) {
     this.paginationpgno = event;
+    // console.log(event)
     this.pagenumber = this.pagenumber + 1;
-    this.CommonServices.getallcourses('1', this.pagenumber, this.sort_type).subscribe((result: any) => {
+    this.learnerservice.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
       this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });
   }

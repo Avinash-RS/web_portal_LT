@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.usernameValforLogin),
-      password: new FormControl('', myGlobals.passwordValforLogin),
+      username: new FormControl('', myGlobals.req),
+      password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, [])
     });
   }

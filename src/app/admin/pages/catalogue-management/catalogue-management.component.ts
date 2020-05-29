@@ -90,7 +90,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.showListCatalogue = false;
     this.showAddCatalogueForm = true;
     this.addCatalogueForm = this.formBuilder.group({
-      catalogue_name: new FormControl('', myGlobals.req),
+      catalogue_name: new FormControl('', myGlobals.textVal),
       catalogue_description: new FormControl(''),
     });
   }
@@ -102,13 +102,10 @@ export class CatalogueManagementComponent implements OnInit {
         this.addCatalogueForm.reset();
         if (result && result.data) {
           if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {
-            // this.getListCatalogue();
             this.catalog = result.data.create_master_catalogue.details;
             this.catalog.course_count = 0;
             this.goToCatalogDetail(this.catalog);
             this.alert.openAlert('Catalogue created successfully', null);
-            // this.showAddCatalogueForm = false;
-            // this.showListCatalogue = true;
           } else {
             this.alert.openAlert(result.data.create_master_catalogue.message, null);
           }
@@ -244,8 +241,9 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   openEdit(templateRef: TemplateRef<any>) {
+    this.addCatalogueForm?.reset();
     this.addCatalogueForm = this.formBuilder.group({
-      catalogue_name: new FormControl('', myGlobals.req),
+      catalogue_name: new FormControl('', myGlobals.textVal),
       catalogue_description: new FormControl(''),
     });
     this.addCatalogueForm.patchValue(this.catalog);
@@ -253,11 +251,11 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   editCatalogue() {
-    this.addCatalogueForm.reset();
-    this.adminservice.updateCatalogDtl(this.addCatalogueForm.value.catalogue_name,
+    this.closedialogbox();
+    this.adminservice.updateCatalogDtl(this.addCatalogueForm.value.catalogue_name.trimLeft(),
       this.addCatalogueForm.value.catalogue_description,
       this.catalog.catalogue_id).subscribe((result: any) => {
-        this.closedialogbox();
+        this.addCatalogueForm.reset();
         if (result && result.data) {
           if (result.data.updatecatalogueinfo && result.data.updatecatalogueinfo.success) {
             // this.getListCatalogue();
