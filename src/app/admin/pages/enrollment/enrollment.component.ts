@@ -204,7 +204,7 @@ export class EnrollmentComponent implements OnInit {
           }
           Swal.fire({
             title: '<div>Successfully Approved</div> <br> ',
-            text: '<div>A confirmation has been sent to the user email id</div> <br>',
+            text: 'A confirmation has been sent to the user email id',
           });
         }
       });
