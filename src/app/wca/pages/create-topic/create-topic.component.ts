@@ -65,7 +65,7 @@ export class CreateTopicComponent implements OnInit {
     Feedback: ""
   }
 
-  feedBackFormHeading = ['', 'Very unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very satisfied']
+  feedBackFormHeading = ['', '', '', '', '', '']
   feedBackForm = [{
     'title': 'Content',
     'star': ['1', '2', '3', '4', '5']
