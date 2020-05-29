@@ -2,29 +2,33 @@
 
 @media only screen and (min-width: 992px) and (max-width:1182px) {
     .navbar-expand-lg .navbar-nav .link_1 {
-        margin-left: 175px
+        margin-left: 175px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_2 {
-        margin-left: -3px
+        margin-left: -3px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_3 {
-        margin-left: -4px
+        margin-left: -4px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_4 {
-        margin-left: 43px
+        margin-left: 43px;
+        height: 10px
     }
 
     .browser_btnn {
         border: none;
         border-radius: 20px !important;
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color: $color-landing-blue !important;
         width: 130px;
         height: 35px;
-        opacity: 76%;
+        // opacity: 76%;
     }
 
     .m-l-5 {
@@ -33,12 +37,12 @@
 
     .getstarted_btnn {
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color:$color-landing-blue !important;
         border: none;
         border-radius: 20px;
         width: 23%;
         margin-left: 4%;
-        opacity: 76%;
+        // opacity: 76%;
     }
 }
 
@@ -49,7 +53,7 @@
     }
 
     .navbar-light .navbar-nav .nav-link {
-        color: blue;
+        color: $color-landing-blue !important;
     }
 
     // .navbar-expand-lg .navbar-nav .nav-link {
@@ -64,19 +68,24 @@
     }
 
     .navbar-expand-lg .navbar-nav .link_1 {
-        margin-left: 435px
+        margin-left: 435px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_2 {
-        margin-left: -73px
+        margin-left: -73px;
+        height: 10px
+        // padding:0px;
     }
 
     .navbar-expand-lg .navbar-nav .link_3 {
-        margin-left: -47px
+        margin-left: -47px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_4 {
-        margin-left: -31px
+        margin-left: -31px;
+        height: 10px
     }
 
     a {
@@ -95,10 +104,10 @@
         border: none;
         border-radius: 20px !important;
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color: $color-landing-blue !important;
         width: 130px;
         height: 35px;
-        opacity: 76%;
+        // opacity: 76%;
     }
 
     .m-l-5 {
@@ -107,41 +116,49 @@
 
     .getstarted_btnn {
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color:$color-landing-blue !important;
         border: none;
         border-radius: 20px;
         width: 23%;
         margin-left: -15%;
-        opacity: 76%;
+        // opacity: 76%;
+    }
+
+   .navbar-expand-lg .navbar-nav .link_3:hover, .navbar-expand-lg .navbar-nav .link_3:focus {
+        background-color: transparent;
     }
 
 }
 
 @media only screen and (min-width: 1450px) and (max-width:2200px) {
     .navbar-expand-lg .navbar-nav .link_1 {
-        margin-left: 650px
+        margin-left: 650px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_2 {
-        margin-left: -3px
+        margin-left: -3px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_3 {
-        margin-left: -4px
+        margin-left: -4px;
+        height: 10px
     }
 
     .navbar-expand-lg .navbar-nav .link_4 {
-        margin-left: 43px
+        margin-left: 43px;
+        height: 10px
     }
 
     .browser_btnn {
         border: none;
         border-radius: 20px !important;
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color: $color-landing-blue !important;
         width: 130px;
         height: 35px;
-        opacity: 76%;
+        // opacity: 76%;
     }
 
     .m-l-5 {
@@ -150,12 +167,12 @@
 
     .getstarted_btnn {
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color:$color-landing-blue !important;
         border: none;
         border-radius: 20px;
         width: 23%;
         margin-left: 4%;
-        opacity: 76%;
+        // opacity: 76%;
     }
 }
 
@@ -178,10 +195,10 @@
         border: none;
         border-radius: 20px !important;
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color: $color-landing-blue !important;
         width: 130px;
         height: 35px;
-        opacity: 76%;
+        // opacity: 76%;
     }
 
     .m-l-5 {
@@ -190,12 +207,12 @@
 
     .getstarted_btnn {
         color: $color-white;
-        background-color: $color-blue !important;
+        background-color:$color-landing-blue !important;
         border: none;
         border-radius: 20px;
         width: 23%;
         margin-left: 48px;
-        opacity: 76%;
+        // opacity: 76%;
     }
 
     .navbar-expand-lg .navbar-nav .link_1 {
