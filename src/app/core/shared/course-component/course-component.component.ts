@@ -33,7 +33,7 @@ export class CourseComponentComponent implements OnInit {
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
   }
 
   viewWishList(course) {
