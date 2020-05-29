@@ -65,9 +65,7 @@
                         <div class="row crs1 pad18px">
                           <div class="col-md-4 course-details">Course Long Description</div>
                           <div class="col-md-8">
-                        
-
-                              <ckeditor #editors  id="editor" formControlName="course_long_description" [editor]="editor"></ckeditor>
+                              <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor>
                             
                             <!-- <textarea class="inputs inputmainWidth" style="resize: none;"
                               formControlName="course_long_description" placeholder="Enter the course description"
@@ -82,7 +80,7 @@
                                           placeholder="Enter the course description (200 Characters)" maxlength="1000" 
                                           name="info"></textarea> -->
 
-                            <mat-form-field class="matchipsbrder" [class.active]="preRequisites?.length">
+                            <mat-form-field style="background: #e3ecff !important" class="matchipsbrder" [class.active]="preRequisites?.length">
                               <mat-chip-list #preReqList>
                                 <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
                                   matTooltip={{req?.name}}>
