@@ -166,6 +166,35 @@ html {
     height: auto;
 }
 
+.noneC {
+    opacity: -1;
+}
+
+.dispC {
+    z-index: 11111;
+    top: 25%;
+    width: 65px;
+    position: fixed;
+    background-color: #1F3777 !important;
+    right: 1px;
+    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
+    opacity: 0.7 !important;
+    img {
+        margin: 25%;
+        cursor: pointer;
+    }
+}
+
+// .op {
+//     opacity: 0.5;
+// }
+
+// .op1 {
+//     opacity : 1;
+// }
+
 //End of Mythreyi
 
 

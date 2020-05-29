@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-
+import { DOCUMENT } from '@angular/platform-browser';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -36,15 +36,16 @@ export class LandingpageComponent implements OnInit {
     },
     nav: true
   };
+  scrollAchieved = false;
+  scrollAchievedValue: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, @Inject(Window) private window: Window,) {
 
     this.detailsForm = this.formBuilder.group({
       username: new FormControl(''),
       email: new FormControl(''),
       course: new FormControl('')
     });
-
 
     this.courses = [
       {
@@ -112,9 +113,7 @@ export class LandingpageComponent implements OnInit {
         rating: 5,
       },
     ];
-
   }
-
 
   ngOnInit() {
     if (window.innerWidth <= 600) {
@@ -140,4 +139,30 @@ export class LandingpageComponent implements OnInit {
     }
   }
 
+  getScrollValues(e) {
+    console.log(e.scrollTop, 'landing');
+    this.scrollAchievedValue = e.scrollTop;
+    if (e.scrollTop >= 400) {
+      this.scrollAchieved = true;
+    }
+  }
+
+  gotoCard(el: HTMLElement) {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    //   this.document.body.scrollIntoView({
+    //     block: 'start',
+    //     behavior: 'smooth'
+    //  });
+    // if (this.scrollAchievedValue.scrollTop >= 300) {
+    el.scrollTop = 0;
+
+    this.window.document.getElementById('myDIV').scrollIntoView();
+    //   this.scrollAchieved = false;
+    //   // el.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
+    //   window.scroll(0, 0);
+    // } else {
+    //   this.scrollAchieved = false;
+    //   // window.scroll(0, 0);
+    // }
+  }
 }

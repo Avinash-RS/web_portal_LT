@@ -107,7 +107,7 @@ const routes: Routes = [
     NgxPaginationModule,
     MyDatePickerModule
   ],
-  providers: [Apollo],
+  providers: [Apollo, { provide: Window, useValue: window }  ],
   entryComponents: []
 })
 export class LearnerModule { }
