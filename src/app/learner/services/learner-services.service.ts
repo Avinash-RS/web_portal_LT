@@ -367,16 +367,16 @@ export class LearnerServicesService {
     });
   }
 
-  // getallcourses(groupid, pagenumber,sort_type) {
-  //   return this.Apollo.query({
-  //     query: get_all_course_by_usergroup,
-  //     variables: {
-  //       group_id: groupid,
-  //       pagenumber: pagenumber,
-  //       sort_type:sort_type
-  //     }
-  //   });
-  // }
+  getallcourses(groupid, pagenumber,sort_type) {
+    return this.Apollo.query({
+      query: get_all_course_by_usergroup,
+      variables: {
+        group_id: groupid,
+        pagenumber: pagenumber,
+        sort_type:sort_type
+      }
+    });
+  }
   get_module_topic(){
     return this.Apollo.query({
       query: get_module_topic
