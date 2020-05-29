@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, HostBinding, HostListener } from '@angular/core';
+import { Directive, OnInit, ElementRef, HostBinding, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
     /* tslint:disable-next-line:directive-selector */
@@ -6,14 +6,16 @@ import { Directive, OnInit, ElementRef, HostBinding, HostListener } from '@angul
 })
 export class StickyHeaderDirective implements OnInit {
 
+    // tslint:disable-next-line:no-output-on-prefix
+    @Output() scrollValues = new EventEmitter<any>();
 
     ngOnInit() {
-        console.log('lets track ths scroll');
     }
 
     constructor() {}
 
     @HostListener('scroll', ['$event']) private onScroll($event: Event): void {
         // console.log($event.srcElement.scrollLeft, $event.srcElement.scrollTop);
+        this.scrollValues.emit($event.srcElement);
     }
 }

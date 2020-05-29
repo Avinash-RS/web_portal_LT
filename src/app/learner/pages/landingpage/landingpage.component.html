@@ -1,144 +1,65 @@
 <!-- start of nav-bar section  -->
-<!-- <nav class="navbar navbar-expand-lg navbar-default">
-  <img class="logo_img" src="../../assets/images/l&t.png">
-  
-  <button
-    style="color: white; background-color: blue;border: none;border-radius: 20px;    width: 12%;
-    height: 35px;margin-left: 5%; ">BrowseCategories</button>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-    <div class="navbar-nav">
-      <a class="nav-item nav-link link_1" href="#">Wat'sNew</a>
-      <a class="nav-item nav-link link_2" href="#">TalkToExpert</a>
-      <a class="nav-item nav-link link_3" href="#">FAQ</a>
-      <a class="nav-item nav-link link_4 " href="#">login</a>
-      <button
-        style="color: white; background-color: blue;border: none;border-radius: 20px;width: 23%;margin-left:-15% ;">getstarted</button>
-    </div>
-  </div>
-</nav> -->
-
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">BrowseCategories <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">wat'sNew</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">TalkToExpert</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">faq</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">getstarted</a>
-      </li>
-    </ul>
-
-  </div>
-</nav> -->
-
-<!-- <div style="height: 12vh;"> -->
-<!-- <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#" class="f_size_12">LARSEN&TOUBRO</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <ul><button class="button_bttn">BrowseCategories</button></ul>
-        <li><a href="#">Wat'sNew</a></li>
-        <li><a href="#">TalkToExpert</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">login</a></li>
-        <ul><button >getstarted</button></ul>
-      </ul>
-    </div>
-  </nav>
-</div> -->
-<app-header></app-header>
+<!-- <app-header></app-header> -->
+<app-landing-header></app-landing-header>
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
-
-<!-- <div class="w-100 h-100 p-3 " style="background-color: #eee; position: relative;">
-  <div class="headerline">
-    Welcome to Your
-  </div>
-  <div class="headerline_2">
-    Professional Community.
-  </div>
-  <p class="font-weight-bold" style="color: #007bff;margin-left: 10%;font-size: 102%;">This is the new way to learn
-    online</p>
-  <div style="width: 80%; position: relative; border:white">
-    <div class="srh"> <input class="form-control" type="search" placeholder="course,title,Author,institution"
-        aria-label="Search"></div>
-    <div class="srh_btn"> <button class="btn btn-primary" type="submit">Search</button></div>
-  </div>
-  <button class="explore_btn">Explore
-    More</button>
-  <div class="card showform">
-    <div class="card-body">
-      <button type="button" (click)="onClose()" class="close" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-      <p class="font-weight-bold" style="margin-left: 10%;font-size: 102%;">Need Guidance</p>
-      <form>
-        <div class="form-group">
-          <input type="text" class="form-control vcat" id="exampleInputEmail1" placeholder="Name">
-        </div>
-        <div class="form-group ">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="EmailID"
-            style=" color: white !important; background-color: #495057; opacity: 60%">
-        </div>
-        <div class="form-group">
-          <select id="disabledSelect" class="form-control" placeholder="SelectCourse" style=" color: white;
-        background-color: #495057;
-        opacity: 60%">
-            <option>Select Course</option>
-          </select>
-        </div>
-        <button type="submit"
-          style="border-radius: 21px; background-color: blue; height: 44px;color: white;border: none; margin-left: 10%;">Request
-          to Get Back</button>
-      </form>
-    </div>
-  </div>
-</div> -->
-
-<div id="myDIV" style="overflow: auto; max-height: 100%;">
-  <div class="container">
+<div id="myDIV" stickyHeaderDirective style="overflow: auto; max-height: 100%;"
+  (scrollValues)="getScrollValues($event)">
+  <div class="container" #formCard>
     <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
-      <div class="col-lg-9 col-md-9 col-sm-12 col-12 section_1_a"></div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-        <mat-card class="section_1_card_1 background_trans">
+      <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
+        <br> <br>
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+            <h2 class="f_size_40 landing-text m-b-10 ">Welcome to Your <br> Professional Community.</h2>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+            <h4 class="color_1 f_size_18 m-b-10">This is the new way to Learn Online</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10">
+            <div class="input-group mb-3">
+              <input type="text" class=" search-bar form-control" placeholder="course,title,author,institution"
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">search</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10 float_left">
+            <button class="explore-btn width_25 ">Explore more</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+        <mat-card class="section_1_card_1 background_trans" [ngClass]="{ 'noneC' : scrollAchieved}">
           <mat-card-content>
             <form [formGroup]="detailsForm">
               <h2 style="text-align: center;"> Need Guidance </h2> <br>
               <mat-card-content>
                 <div class="form-group">
-                  <input type="text" name="username" formControlName="username" class="form-control">
+                  <input type="text" name="username" formControlName="username" placeholder="Name" class="form-control">
                 </div>
                 <div class="form-group">
-                  <input type="text" name="email" formControlName="email" class="form-control">
+                  <input type="text" name="email" formControlName="email" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group">
-                  <input type="text" name="course" formControlName="course" class="form-control">
+                  <input type="text" name="course" formControlName="course" placeholder="Course" class="form-control">
                 </div>
                 <br>
                 <button id="login" mat-raised-button class="center" [disabled]="detailsForm.invalid"
@@ -148,7 +69,13 @@
             <br>
           </mat-card-content>
         </mat-card>
-        <br><br>
+        <!-- <div [ngClass]="{ 'dispC op' : scrollAchieved && (scrollAchievedValue < 300), 
+        'dispC op1' : scrollAchieved && (scrollAchievedValue > 300)}"> -->
+        <div [ngClass]="{ 'dispC' : scrollAchieved }">
+          <img src="assets/landingpageicons/Need Guidance_1.svg" (click)="gotoTop()">
+          <img src="assets/landingpageicons/Need Guidance_2.svg" (click)="gotoTop()">
+          <img src="assets/landingpageicons/Need Guidance_3.svg" (click)="gotoTop()">
+        </div>
       </div>
     </div>
   </div>
@@ -212,8 +139,7 @@
       </button>
     </div>
   </div>
-  <br><br>
-
+  <br>
   <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
       <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
@@ -253,10 +179,14 @@
       </button>
     </div>
   </div>
-  <br><br>
+  <br>
   <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
     <ng-template carouselSlide *ngFor="let course of courses">
-      <div class="containerOverlay">
+      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+        [goto]="null">
+      </app-course-component>
+      <!-- <div class="containerOverlay">
         <img class="pointer m-b-10 course-image center" src="{{course.course_img_url}}" alt=""
           (click)="selectCourse(course,i+'c')">
         <div class="overlay p-5px" style="margin-bottom: 0;">
@@ -268,7 +198,7 @@
       <div class="row card-bottom color_blue width_80 center f_wt_500 m-b-10 m-t-10">
         <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
         <button class="float_right m-b-10 m-t-10">Enroll</button>
-      </div>
+      </div> -->
     </ng-template>
     <br>
   </owl-carousel-o>

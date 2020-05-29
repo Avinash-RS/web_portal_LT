@@ -41,7 +41,7 @@ import { LandingpageComponent } from './pages/landingpage/landingpage.component'
 
 
 const routes: Routes = [
-  { path: '', component: LandingpageComponent },
+  { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
   { path: 'register', component: RegistrationComponent, data: { title: 'Learner  Registration' } },
@@ -107,7 +107,7 @@ const routes: Routes = [
     NgxPaginationModule,
     MyDatePickerModule
   ],
-  providers: [Apollo],
+  providers: [Apollo, { provide: Window, useValue: window }  ],
   entryComponents: []
 })
 export class LearnerModule { }

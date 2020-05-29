@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./course-component.component.scss']
 })
 export class CourseComponentComponent implements OnInit {
-  @Input('course') course: any;
+  @Input('course') course: any = {};
   @Input('canNavigate') canNavigate: boolean;
   @Input('showCartBtn') showCartBtn: boolean;
   @Input('showWishlist') showWishlist: boolean;
@@ -33,11 +33,7 @@ export class CourseComponentComponent implements OnInit {
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    if (this.userDetail) {
-      // this.viewWishList(this.course);
-      this.getcourserStatus();
-    }
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
   }
 
   viewWishList(course) {
@@ -90,6 +86,10 @@ export class CourseComponentComponent implements OnInit {
       this.course.coursePlayerStatus.status = 'Completed';
     } else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') {
       this.course.coursePlayerStatus.status = 'Pause';
+    }
+    if (this.course && this.userDetail) {
+      this.viewWishList(this.course);
+      this.getcourserStatus();
     }
   }
 
