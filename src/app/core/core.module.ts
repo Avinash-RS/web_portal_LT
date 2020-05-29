@@ -7,7 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgxMaskModule } from 'ngx-mask';
-// local
+import {NgxPaginationModule} from 'ngx-pagination'; 
+import { Ng5SliderModule } from 'ng5-slider';
+import { MyDatePickerModule } from 'mydatepicker';
+//local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { FooterComponent } from '@core/core/footer/footer.component';
@@ -69,7 +72,10 @@ const routes: Routes = [
     VgOverlayPlayModule,
     VgBufferingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    Ng5SliderModule,
+    NgxPaginationModule,
+    MyDatePickerModule
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
