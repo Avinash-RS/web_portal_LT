@@ -41,6 +41,8 @@
     object-fit: cover;
 }
 
+
+
 .containerOverlay {
     .overlay {
         height: 50%;
@@ -76,7 +78,7 @@
 // FOR LOGGED IN USER
 
 .course-name-row {
-    height: 10vh !important;
+    height: 12vh !important;
 }
 
 
@@ -158,6 +160,11 @@ strong {
 .course-card {
     border-radius: 0;
     background-color: #F5FAFA;
+
+    .img {
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
 .shadow {
