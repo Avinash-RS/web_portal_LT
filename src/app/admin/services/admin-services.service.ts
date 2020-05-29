@@ -22,7 +22,8 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminServicesService {
 
-  // tslint:disable-next-line:no-shadowed-variable
+  _currentUser: any;
+
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   // for add user - group dropdown

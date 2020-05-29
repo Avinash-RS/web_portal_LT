@@ -9,8 +9,9 @@ import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca
 
 import { HttpHeaders } from '@angular/common/http';
 
-
-//import {} from "./operations/learner_mutation"
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-type': 'application/json' })
+};
 
 //change rajesh ranjan
 @Injectable({
@@ -28,8 +29,6 @@ export class WcaService {
 
 
   constructor(private http: HttpClient, private Apollo: Apollo, ) {
-
-
 
   }
 
@@ -84,13 +83,15 @@ export class WcaService {
     return this.http.post(environment.createCourseApi + 'updatecourse', course, { headers });
   }
 
-  getAllInstructors() { return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails'); }
+  getAllInstructors() {
+    return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails', httpOptions);
+  }
 
-  getAllTakeawayDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/gettakewaydetails'); }
+  getAllTakeawayDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/gettakewaydetails', httpOptions); }
 
-  getAllPrerequisitDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getprerequisitdetails'); }
+  getAllPrerequisitDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getprerequisitdetails', httpOptions); }
 
-  getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
+  getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails', httpOptions); }
 
   createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate', arraydata); }
 
@@ -144,7 +145,7 @@ export class WcaService {
     return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
   }
 
-  
+
 
 
 
@@ -163,6 +164,5 @@ export class WcaService {
       query: get_module_topic
     });
   }
-
 
 }
