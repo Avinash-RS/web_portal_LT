@@ -7,10 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgxMaskModule } from 'ngx-mask';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
-//local
+// local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { FooterComponent } from '@core/core/footer/footer.component';
