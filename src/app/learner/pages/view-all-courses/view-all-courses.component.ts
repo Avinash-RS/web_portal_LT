@@ -294,7 +294,7 @@ export class ViewAllCoursesComponent implements OnInit {
   sorting(sortval) {
     this.showAppliedFiltre = false;
     if (this.userDetailes.group_id)
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
@@ -335,7 +335,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
@@ -343,7 +343,7 @@ export class ViewAllCoursesComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.CommonServices.getallcourses('1', this.pagenumber, this.sort_type).subscribe((result: any) => {
+    this.learnerservice.getallcourses('1', this.pagenumber, this.sort_type).subscribe((result: any) => {
       this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
     });
   }
