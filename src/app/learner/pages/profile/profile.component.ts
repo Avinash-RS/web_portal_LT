@@ -12,6 +12,7 @@ import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -1118,7 +1119,7 @@ export class ProfileComponent implements OnInit {
   resendLabel: Boolean = false;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
-    private activeroute: ActivatedRoute, private dialog: MatDialog,
+    private activeroute: ActivatedRoute, private dialog: MatDialog,   private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
     private router: Router, private gs: GlobalServiceService) {
     if (this.gs.checkLogout()) {
@@ -1566,6 +1567,9 @@ export class ProfileComponent implements OnInit {
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         Swal.fire(password.data['get_change_password_updateprofile'].message);
         localStorage.clear();
+        this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+          localStorage.setItem('Systemip', res.ip);
+        });
         this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else

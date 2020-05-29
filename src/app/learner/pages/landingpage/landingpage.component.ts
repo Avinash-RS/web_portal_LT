@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { DOCUMENT } from '@angular/platform-browser';
 import { interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from 'rxjs/operators';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -41,7 +42,9 @@ export class LandingpageComponent implements OnInit {
   scrollAchieved = false;
   scrollAchievedValue: any;
 
-  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, @Inject(Window) private window: Window, ) {
+  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, @Inject(Window) 
+  // tslint:disable-next-line:align
+  private window: Window, public learnerservice: LearnerServicesService ) {
 
     this.detailsForm = this.formBuilder.group({
       username: new FormControl(''),
@@ -156,5 +159,13 @@ export class LandingpageComponent implements OnInit {
       behavior: 'smooth'
     });
     this.scrollAchieved = false;
+  }
+
+  postReq() {
+    this.learnerservice.createGuidanceRequestLanding(this.detailsForm.value.username, this.detailsForm.value.email,
+      this.detailsForm.value.course, localStorage.getItem('Systemip'))
+    .subscribe((result: any) => {
+      console.log('all courses', result);
+    });
   }
 }

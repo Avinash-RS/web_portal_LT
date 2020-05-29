@@ -62,8 +62,8 @@
                   <input type="text" name="course" formControlName="course" placeholder="Course" class="form-control">
                 </div>
                 <br>
-                <button id="login" mat-raised-button class="center" [disabled]="detailsForm.invalid"
-                  (click)="login()">Request to get back</button>
+                <button id="req" mat-raised-button class="center" [disabled]="detailsForm.invalid"
+                  (click)="postReq()">Request to get back</button>
               </mat-card-content>
             </form>
             <br>
@@ -139,16 +139,19 @@
       </button>
     </div>
   </div>
-  <br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-    <ng-template carouselSlide *ngFor="let course of courses">
-      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
-        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
-        [goto]="null">
-      </app-course-component>
-    </ng-template>
-    <br>
-  </owl-carousel-o>
+  <br> <br>
+  <div class="width_90 m-l-5">
+    <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+      <ng-template carouselSlide *ngFor="let course of courses">
+        <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+          [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+          [goto]="null">
+        </app-course-component>
+      </ng-template>
+      <br>
+    </owl-carousel-o>
+  </div>
+
 
   <!-- <div class="row m-l-20 m-r-20 m-t-25">
     <div class="col-md-11 center">
@@ -180,13 +183,14 @@
     </div>
   </div>
   <br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-    <ng-template carouselSlide *ngFor="let course of courses">
-      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
-        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
-        [goto]="null">
-      </app-course-component>
-      <!-- <div class="containerOverlay">
+  <div class="width_90 m-l-5">
+    <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
+      <ng-template carouselSlide *ngFor="let course of courses">
+        <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+          [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+          [goto]="null">
+        </app-course-component>
+        <!-- <div class="containerOverlay">
         <img class="pointer m-b-10 course-image center" src="{{course.course_img_url}}" alt=""
           (click)="selectCourse(course,i+'c')">
         <div class="overlay p-5px" style="margin-bottom: 0;">
@@ -199,10 +203,10 @@
         <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
         <button class="float_right m-b-10 m-t-10">Enroll</button>
       </div> -->
-    </ng-template>
-    <br>
-  </owl-carousel-o>
-
+      </ng-template>
+      <br>
+    </owl-carousel-o>
+  </div>
   <br><br>
 
 </div>

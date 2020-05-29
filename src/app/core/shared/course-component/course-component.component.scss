@@ -44,18 +44,19 @@
 .containerOverlay {
     .overlay {
         height: 50%;
-        width: 60%;
+        width: 80%;
         position: absolute;
         overflow: hidden;
         bottom: 5vh;
-        left: 20%;
+        left: 10%;
         opacity: 0;
         background-color: $color-white;
         filter: alpha(opacity=0);
     }
 
     .pointer {
-        width: 60% !important;
+        width: 80% !important;
+        height: 180px;
     }
 }
 

@@ -174,8 +174,8 @@
             <ng-container *ngFor="let cat of element.category_details; let ind = index">
               <div class="parcel">
                 {{cat?.category_name}}
-                <!-- {{element?.sub_category_details?.length > 0 ?  ' > ' +element.sub_category_details[ind].sub_category_name || null : null}} -->
-                <!-- {{element?.super_sub_category_details?.length > 0 ?  ' > ' +element.super_sub_category_details[ind].super_sub_category_name || null : null}} -->
+                {{element?.sub_category_details?.length > 0 ?  ' > ' +element.sub_category_details[ind]?.sub_category_name || null : null}}
+                {{element?.super_sub_category_details?.length > 0 ?  ' > ' +element.super_sub_category_details[ind]?.super_sub_category_name || null : null}}
               </div>
             </ng-container>
           </td>
