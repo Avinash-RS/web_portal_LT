@@ -24,6 +24,9 @@ import { Ppt1Component } from './ppt1/ppt1.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+// import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
 }
@@ -63,7 +66,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
       deps: [PlatformLocation]
   },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
-    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } }
+    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
