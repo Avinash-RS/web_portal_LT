@@ -104,14 +104,14 @@ html {
     // left: 80%;
     background: #ffffff;
     color: $color-blue !important;
-    border: 1px solid $color-blue !important;
+    border: 1px solid $color-landing-blue !important;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
     // left: 83.5%;
-    background: $color-blue;
+    background: $color-landing-blue;
     color: white;
-    border: 1px solid $color-blue !important;
+    border: 1px solid $color-landing-blue !important;
 }
 
 .section_1 {
@@ -158,8 +158,10 @@ html {
     margin: auto;
     height: calc(1rem + .75rem + 2px);
     color: white;
-    background-color: rgba(62, 62, 62, 0.5) !important;
+    // background-color: rgba(62, 62, 62, 0.7) !important;
+    background-color: rgba(100, 100, 100, 0.7) !important;
     opacity: 0.9;
+    border-radius: 0;
 }
 
 .section_1 .section_1_card_1 {
@@ -175,17 +177,34 @@ html {
     top: 25%;
     width: 65px;
     position: fixed;
-    background-color: #1F3777 !important;
+
+    //background-color: $color-landing-blue;
+    // background-color: #1F3777 !important;
     right: 1px;
     min-height: 200px;
     height: 200px;
     max-height: 200px;
-    opacity: 0.7 !important;
+    //opacity: 0.7 !important;
+    background: rgba(16, 104, 178, 0.7);
 
     img {
         margin: 25%;
         cursor: pointer;
     }
+}
+
+.request-btn {
+    background-color: $color-landing-blue;
+    color: $color-white !important;
+    border: none;
+    border-radius: 30px;
+    height: 40px;
+    width: 200px;
+}
+
+::placeholder {
+    color: $color-white;
+    opacity: 1;
 }
 
 // .op {
@@ -234,7 +253,7 @@ html {
 }
 
 .blue-border {
-    border: 1.0px solid $color-blue;
+    border: 1.0px solid $color-landing-blue;
 }
 
 .color_landing-blue {
@@ -359,11 +378,12 @@ strong {
 
 
 
-
+//jasper
 
 
 .f_size_40 {
     font-size: 40px;
+    font-weight: 400;
 }
 
 .landing-text {
