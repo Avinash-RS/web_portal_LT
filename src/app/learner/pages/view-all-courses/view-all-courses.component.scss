@@ -28,7 +28,7 @@ main section {
   -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
   -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
   box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
-  margin-top: 20px;
+  margin-top: 58px;
 }
 
 /////  after filter adding////@extend
@@ -187,13 +187,13 @@ h2{
 
 }
 
-.box{
-  margin-left: 1%;
-  width: 92.5%;
-  height: auto;
-  border: 1px solid $color-border;
-  color: $color-blue;
-}
+// .box{
+//   margin-left: 1%;
+//   width: 92.5%;
+//   height: auto;
+//   border: 1px solid $color-border;
+//   color: $color-blue;
+// }
 
 .text{
   margin-top: 6px;
@@ -321,6 +321,7 @@ h2{
 .col-9 {
   flex: 0 0 73%;
   max-width: 73%;
+  margin-top: 89px;
 }
 .diffcol-9{
   flex: 0 0 100%;
@@ -341,16 +342,7 @@ h2{
   border-radius: 7px;
   color: #1F3777;
 }
-.date{
-    padding: 61px;
-    margin-top: -66px;
-    margin-left: -49px;
-}
-.todate{
-  margin-left: 145px;
-  margin-top: -111px;
-  padding: 8px;
-}
+
 
 
 
