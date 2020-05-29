@@ -228,6 +228,14 @@
                                                                                         (click)="onSelectFile($event,queryData?.template_details[i],j,i,'',subTitleindex)">
                                                                                         delete</mat-icon>
                                                                                 </div>
+                                                                                <div class="addSub">
+                                                                                    <mat-icon *ngIf="subTitleindex == 0"
+                                                                                        (click)="addSubTile('sub',j)">
+                                                                                        add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0"
+                                                                                        (click)="removeSubTile(subTitleindex,'sub',j)">
+                                                                                        delete</mat-icon>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
@@ -332,21 +340,21 @@
                                     </div>
                                     <ng-container>
                                         <section class="queOptions">
-                                            <mat-radio-group [(ngModel)]="labelPosition">
+                                            <mat-radio-group disabled>
                                                 <div>
-                                                    <mat-radio-button value="Option1">{{value.Option1}}
+                                                    <mat-radio-button value="Option1"><span>{{value.Option1}}</span>
                                                     </mat-radio-button>
                                                 </div>
                                                 <div>
-                                                    <mat-radio-button value="Option2">{{value.Option2}}
+                                                    <mat-radio-button value="Option2"><span>{{value.Option2}}</span>
                                                     </mat-radio-button>
                                                 </div>
                                                 <div>
-                                                    <mat-radio-button value="Option3">{{value.Option3}}
+                                                    <mat-radio-button value="Option3"><span>{{value.Option3}}</span>
                                                     </mat-radio-button>
                                                 </div>
                                                 <div>
-                                                    <mat-radio-button value="Option4">{{value.Option4}}
+                                                    <mat-radio-button value="Option4"><span>{{value.Option4}}</span>
                                                     </mat-radio-button>
                                                 </div>
                                             </mat-radio-group>
@@ -404,17 +412,14 @@
                             </tbody>
                         </table>
                         <label>What do you like about module</label><br />
-                        <textarea style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment"
+                        <textarea disabled style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment"
                             placeholder=""></textarea>
                         <br />
 
                         <label>What could be improved</label><br />
-                        <textarea style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment1"
+                        <textarea disabled style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment1"
                             placeholder=""></textarea>
                         <br />
-
-
-                        <span class="padTwoSides"> <button class="backgroundcol2" type="button">Submit</button></span>
                     </div>
                 </div>
             </div>

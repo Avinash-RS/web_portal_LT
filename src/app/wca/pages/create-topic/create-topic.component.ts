@@ -65,7 +65,7 @@ export class CreateTopicComponent implements OnInit {
     Feedback: ""
   }
 
-  feedBackFormHeading = ['', 'Very unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very satisfied']
+  feedBackFormHeading = ['', '', '', '', '', '']
   feedBackForm = [{
     'title': 'Content',
     'star': ['1', '2', '3', '4', '5']
@@ -130,12 +130,14 @@ export class CreateTopicComponent implements OnInit {
   topicItem(mod_index, i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      vidsubtitle: [''],
+      videosubtitle: ['false'],
+      topicvalue: [''],
       topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index > -1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data => {
         return this.topicImages()
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
-      topictype: [null]
+      topictype: [null],
+      topictime: [null]
     });
   }
 
@@ -773,13 +775,12 @@ export class CreateTopicComponent implements OnInit {
     else {
       this.transcripts.push(this.transcripts.length)
     }
-
   }
   removeSubTile(index, value, formdata) {
 
     if (value == 'sub') {
-      // this.subtitles.splice(index, 1);
-      formdata.value.topicimages[0].title.splice(index, 1)
+      formdata.value.topicimages[0].title.splice(index, 1);
+      return false;
     }
     else {
       this.transcripts.splice(index, 1);

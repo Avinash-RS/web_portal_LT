@@ -17,6 +17,7 @@ export class ModuleRepositoryComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(this.savedModules);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  modDetails = [];
 
   constructor(
     private router: Router,
@@ -58,8 +59,9 @@ export class ModuleRepositoryComponent implements OnInit {
         this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
           if (val.moduleid === data) {
             val.isSelect = true;
+            this.modDetails.push(data);
           }
-        // tslint:disable-next-line:no-unused-expression
+          // tslint:disable-next-line:no-unused-expression
         }) : '';
       });
       this.savedModules = data.Result;
@@ -68,12 +70,34 @@ export class ModuleRepositoryComponent implements OnInit {
     });
   }
 
-  onModuleSelection(selectedModule) {
+  onModuleSelection(module, e) {
     const modDetails = {
-      moduleid: selectedModule.moduleid,
-      coursename: selectedModule.coursename,
-      createdby: selectedModule.createdby
+      moduleid: module.moduleid,
+      coursename: module.coursename,
+      createdby: module.createdby
     };
+    let isValid = true;
+    let n = 0;
+    this.modDetails.forEach((val,i) => {
+      if (val == module.moduleid) {
+        isValid == false;
+        n = i;
+      }
+    })
+    if (e && isValid) {
+      this.modDetails.push(module.moduleid);
+       this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
+          if (res.Code === 200) {
+
+          }
+        });
+    }
+    else if(!e && isValid) {
+      this.modDetails.splice(n,1);
+    }
+  }
+
+  onModuleSubmit() {
 
     this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
       if (data) {
@@ -84,14 +108,10 @@ export class ModuleRepositoryComponent implements OnInit {
               courseId: this.routeData.viewingModule,
               courseImage: this.routeData.image,
               courseName: this.routeData.courseName,
-              selectedModule: selectedModule.moduleid
+              selectedModule: this.modDetails
             }
           });
-        this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
-          if (res.Code === 200) {
-
-          }
-        });
+       
       }
     });
   }

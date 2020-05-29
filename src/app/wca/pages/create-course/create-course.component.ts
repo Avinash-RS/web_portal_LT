@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-create-course',
@@ -16,7 +17,7 @@ import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
 })
 export class CreateCourseComponent implements OnInit {
 
-    // editor = ClassicEditor;
+    editor = ClassicEditor;
     courseForm: FormGroup;
     imageView: File;
     submitted = false;
