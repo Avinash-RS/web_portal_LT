@@ -188,7 +188,7 @@ export class CreateCourseComponent implements OnInit {
             fileInput.value = '';
             return false;
         }
-        else if((fileSize/1024)/1024 >= 2) {
+        else if ((fileSize / 1024) / 1024 >= 2) {
             this.toast.warning("File size should not exceed more than 2 mb");
         } else {
             if (fileInput && fileInput.target && fileInput.target.files[0]) {
@@ -347,11 +347,12 @@ export class CreateCourseComponent implements OnInit {
                         this.wcaService.saveCourse(obj).subscribe((data: any) => {
                         });
                         this.toast.success('Course Created Successfully !!!');
-                        this.router.navigate(['/Admin/auth/Wca/viewmodule'],
+                        this.router.navigate(['/Admin/auth/Wca/addmodule'],
                             {
                                 queryParams: {
-                                    viewingModule: data.course_id,
-                                    image: this.courseForm.value.course_img_url, courseName: this.courseForm.value.course_name
+                                    courseId: this.queryData.viewingModule,
+                                    courseImage: this.courseForm.value.course_img_url,
+                                    courseName: this.courseForm.value.course_name
                                 }
                             });
                     }
