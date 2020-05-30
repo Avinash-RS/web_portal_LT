@@ -362,7 +362,7 @@
             </div>
           </div>
           <div class="m-r-20 m-l-20">
-            <div class="row">
+            <div class="row" *ngIf = "!loadingCourse">
               <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
                 *ngFor="let courses of courses; let i = index">
                 <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
@@ -375,6 +375,11 @@
                 </div>
               </div>
             </div>
+
+            <div class="spinner-container" *ngIf="loadingCourse">
+              <mat-spinner diameter="30"></mat-spinner>
+            </div>
+
           </div>
         </div>
         <div class="row width_100 pos_bottom"
