@@ -12,7 +12,7 @@ import {
   getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
   getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue, getAdminOverview,
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
-  enrolledCourse, getgroupbyid, getTopfiveDashboardType
+  enrolledCourse, getgroupbyid, getTopfiveDashboardType, getadminexportauditlog
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -547,4 +547,15 @@ export class AdminServicesService {
     });
   }
   // End of dashboard
+
+  getadminexportauditlog(fromdate, todate) {
+    return this.Apollo.query({
+      query: getadminexportauditlog,
+      variables: {
+        from_date: fromdate,
+        to_date: todate
+      }
+    });
+  }
+
 }

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
-import { json } from 'd3';
+import { AdminServicesService } from '@admin/services/admin-services.service';
 
 @Component({
   selector: 'app-auditlog',
@@ -17,8 +17,9 @@ export class AuditlogComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   today = new Date();
   viewdetail: any;
+  requiredfield = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog , private adminservice: AdminServicesService) { }
 
   ngOnInit() {
     this.reports =[{
@@ -67,7 +68,6 @@ export class AuditlogComponent implements OnInit {
     ];
     this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
     this.displayedColumns = this.displayedColumns.concat(['action']);
-
     this.dataSource.data = this.reports;
 
   }
@@ -76,17 +76,29 @@ export class AuditlogComponent implements OnInit {
     this.dialog.open(templateRef);
     this.viewdetail = data;
   }
-  closedialogbox(){
+  closedialogbox() {
     this.dialog.closeAll();
   }
   filter(filterform) {
-    console.log(filterform.valid);
+    this.requiredfield = true;
+    console.log(filterform.value);
+    if (filterform.valid) {
+    }
   }
   cancel(filterform) {
     filterform.reset();
+    this.requiredfield = false;
   }
-  export(filterform){
+  export(filterform) {
+    console.log(filterform.value);
+    this.requiredfield = false;
     // window.open(url, '_blank');
+    const fromdate = filterform.value.fromdate ?  filterform.value.fromdate.toISOString() : 'undefined';
+    const todate = filterform.value.todate ? filterform.value.todate.toISOString() : 'undefined';
+    this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
+        console.log(result);
+      // this.reports = result?.data?.
+     });
     window.open('https://edutechstorage.blob.core.windows.net/container1/report_audit_information/06260090788166162-audit_report.csv');
   }
 }

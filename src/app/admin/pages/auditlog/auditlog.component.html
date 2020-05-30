@@ -12,7 +12,7 @@
             <div class="row">
               <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="fromdate" [(ngModel)]="fromdate" required #fromdate1="ngModel" [matDatepicker]="picker"
+                  <input matInput name="fromdate" [(ngModel)]="fromdate" [required] = requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
                     placeholder="Choose from date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
@@ -24,7 +24,7 @@
 
               <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="todate" [(ngModel)]="todate" required #todate1="ngModel" [matDatepicker]="picker1"
+                  <input matInput name="todate" [(ngModel)]="todate" [required] = requiredfield #todate1="ngModel" [matDatepicker]="picker1"
                     placeholder="Choose to date" color="accent" [min]=fromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
