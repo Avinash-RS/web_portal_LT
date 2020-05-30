@@ -94,21 +94,21 @@ html {
     }
 }
 
-@media only screen and (min-width: 2560px) {
-    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-    //     top: -37%;
-    // }
+// @media only screen and (min-width: 2560px) {
+//     // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+//     //     top: -37%;
+//     // }
 
-    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
-        // left: 80%;
-        left: 86.5%;
-    }
+//     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+//         // left: 80%;
+//         left: 86.5%;
+//     }
 
-    :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
-        // left: 83.5%;
-        left: 84%;
-    }
-}
+//     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+//         // left: 83.5%;
+//         left: 84%;
+//     }
+// }
 
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
     position: absolute;
