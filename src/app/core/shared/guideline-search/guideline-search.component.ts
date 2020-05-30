@@ -81,7 +81,9 @@ export class GuidelineSearchComponent implements OnInit {
       this.Lvl2CatId= data.Lvl2CatId,
       this.level2selectedID = data.level2selectedID,
       this.Lvl3CatId= data.Lvl3CatId,
-      this.level3selectedID = data.level3selectedID
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory 
     })
   }
   filter() {
@@ -99,7 +101,7 @@ export class GuidelineSearchComponent implements OnInit {
           this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
           if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {
             this.guidelineSearchVal.course_data.forEach(element => {
-              element.checked = false;
+              element.checked = false; 
             });
           }
           if (this.guidelineSearchVal && this.guidelineSearchVal.author_data) {
@@ -527,7 +529,9 @@ export class GuidelineSearchComponent implements OnInit {
       Lvl2CatId: this.Lvl2CatId,
       level2selectedID : this.level2selectedID,
       Lvl3CatId: this.Lvl3CatId,
-      level3selectedID : this.level3selectedID
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory 
     }
     this.CommonServices.globalCategory$.next(obj);
   
