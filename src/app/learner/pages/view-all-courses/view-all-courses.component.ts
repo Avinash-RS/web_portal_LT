@@ -38,7 +38,7 @@ export class ViewAllCoursesComponent implements OnInit {
   paginationpgno: any;
   loader: boolean;
   sort_type: any = "A-Z";
-  showAppliedFiltre: boolean = false;
+  showAppliedFiltre: boolean = true;
   showMore: Boolean = true;
   errormsg: boolean = false;
   allLvlCategory: any;
@@ -295,7 +295,7 @@ export class ViewAllCoursesComponent implements OnInit {
   sorting(sortval) {
     this.showAppliedFiltre = false;
     if (this.userDetailes.group_id)
-      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
@@ -336,7 +336,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
   }
@@ -345,7 +345,7 @@ export class ViewAllCoursesComponent implements OnInit {
     this.paginationpgno = event;
     // console.log(event)
     this.pagenumber = this.pagenumber + 1;
-    this.learnerservice.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
+    this.CommonServices.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
       // this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
       this.allcourses.push(result.data.get_all_course_by_usergroup.message);
     });

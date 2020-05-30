@@ -35,7 +35,7 @@ import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component'
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SearchPipe } from '../pipes/search.pipe';
+// import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 
@@ -79,7 +79,7 @@ const routes: Routes = [
     ScormplayerComponent,
     MaskingPipePipe,
     ViewAllCoursesComponent,
-    SearchPipe,
+    // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent
 

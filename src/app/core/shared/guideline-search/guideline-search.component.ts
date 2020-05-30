@@ -44,7 +44,7 @@ export class GuidelineSearchComponent implements OnInit {
   Lvl3CatId: any = [];
   pagenumber = 0;
   allcourses: any;
-  showAppliedFiltre: boolean;
+  showAppliedFiltre: boolean = false;
   authorPageNo = 0;
   authorPerPage = 5;
   course_languagePageNo = 0;

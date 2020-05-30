@@ -190,7 +190,7 @@
   <br>
   <br>
 
-    <ng-container *ngIf="showAppliedFiltre">
+    <ng-container *ngIf="!showAppliedFiltre">
     <div class="col-9">
       <div class="container">
         <div class="row" *ngIf="displayMode === 1">
@@ -219,8 +219,8 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="!showAppliedFiltre">
-    <div class="diffcol-9">
+  <ng-container *ngIf="showAppliedFiltre">
+    <div class="col-12">
       <div class="container ">
         <div class="row" *ngIf="displayMode === 1">
           <ng-container
@@ -256,7 +256,7 @@
 </pagination-controls>
 </div>
 
-<ng-template #getCategoryDialog>
+<!-- <ng-template #getCategoryDialog>
   <mat-dialog-title>
     <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
   </mat-dialog-title>
@@ -307,7 +307,7 @@
               </li>
             </ul>
           </div>
-          <!-- <span class="errormsg" *ngIf="errormsg"> Level 2 Category not found </span> -->
+          <span class="errormsg" *ngIf="errormsg"> Level 2 Category not found </span>
         </div>
       </div>
       <div class="vertical1"></div>
@@ -332,7 +332,7 @@
               </li>
             </ul>
           </div>
-          <!-- <span class="errormsg" *ngIf="errormsg"> Level 3 Category not found </span> -->
+          <span class="errormsg" *ngIf="errormsg"> Level 3 Category not found </span>
         </div>
       </div>
     </div>
@@ -340,7 +340,7 @@
       <button class="roundbtn" (click)="applyFilter(allLvlCategoryFilterVal)">Apply</button>
     </mat-dialog-actions>
   </mat-dialog-content>
-</ng-template>
+</ng-template> -->
 
 
 <!-- </div> -->

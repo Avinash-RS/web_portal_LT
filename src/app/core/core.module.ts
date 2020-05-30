@@ -10,6 +10,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
+import { SearchPipe } from '../pipes/search.pipe';
 // local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -58,7 +59,8 @@ const routes: Routes = [
     DragDropImageDirective,
     GuidelineSearchComponent,
     LandingHeaderComponent,
-    CategoryComponentComponent
+    CategoryComponentComponent,
+    SearchPipe
   ],
 
   imports: [
@@ -77,7 +79,7 @@ const routes: Routes = [
     FormsModule,
     Ng5SliderModule,
     NgxPaginationModule,
-    MyDatePickerModule
+    MyDatePickerModule,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -95,6 +97,7 @@ const routes: Routes = [
     DataTableComponent,
     VideoPlayerComponent,
     ListViewCourseComponentComponent,
+    CategoryComponentComponent,
     GuidelineSearchComponent]
 })
 export class CoreModule { }

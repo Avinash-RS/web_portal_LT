@@ -15,7 +15,7 @@ export class LearnerHomeComponent implements OnInit {
   userDetailes: any;
   pagenumber = 0;
   sort_type: any = "A-Z";
-  allcourses: any;
+  allcourses: any = [];
   enrolledCourses: any =[];
   wishList:any = [];
   yetToStart:any;
@@ -35,10 +35,16 @@ export class LearnerHomeComponent implements OnInit {
     this.getallcourses();
     this.getEnrolledCourses();
     this.viewWishlist();
+    this.commonServices.globalAllCategory.subscribe((data: any) => {
+      this.allcourses = data;
+    });
+    this.commonServices.globalCourses.subscribe((data: any) => {
+      this.allcourses = data;
+    });
   }
   getallcourses() {
     if (this.userDetailes.group_id)
-      this.learnerService.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         console.log('all courses', this.allcourses)
       });
