@@ -23,6 +23,9 @@ export class AuditlogComponent implements OnInit {
   constructor(private dialog: MatDialog , private adminservice: AdminServicesService) { }
 
   ngOnInit() {
+    this.adminservice.getauditlogreports('0').subscribe((result: any) => {
+       console.log(result);
+    });
     this.reports =[{
       // "_id" : ObjectId("5ed1c64184817d1bf4e8f9b0"),
       api_call_request : [
@@ -80,15 +83,25 @@ export class AuditlogComponent implements OnInit {
   closedialogbox() {
     this.dialog.closeAll();
   }
-  datefield(fromdate){
-    if(fromdate) {
+  datefield(fromdate) {
+    if (fromdate) {
       this.enablefield = false;
     }
   }
   filter(filterform) {
     this.requiredfield = true;
-    console.log(filterform.value);
+    console.log(filterform.valid);
     if (filterform.valid) {
+      const data = {
+        from_date : filterform.value.fromdate.toISOString(),
+        to_date : filterform.value.todate.toISOString(),
+        pagenumber : '0'
+       };
+      this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
+        console.log(result.message);
+        this.reports = result?.message;
+        this.dataSource.data = this.reports;
+      });
     }
   }
   cancel(filterform) {

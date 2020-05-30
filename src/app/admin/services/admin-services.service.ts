@@ -14,7 +14,7 @@ import {
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
   enrolledCourse, getgroupbyid, getTopfiveDashboardType, getadminexportauditlog
 } from './operations/admin_query';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -558,4 +558,23 @@ export class AdminServicesService {
     });
   }
 
+  getfilteredauditlog(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
+    };
+    return this.http.post(environment.apiUrl + 'get_audit_info', data, httpOptions);
+  }
+
+  getauditlogreports(pagenumber) {
+    console.log(localStorage.getItem('token'))
+    // let params: URLSearchParams = new URLSearchParams();
+    // params.set('pagenumber', pagenumber);
+    // //params.set("surname", surname); for more params
+    // var options:any;
+    // options.search = params;
+
+    const params = new HttpParams().set('pagenumber', pagenumber);
+
+    return this.http.get<any[]>(environment.apiUrl + 'getauditlog' , {params});
+  }
 }
