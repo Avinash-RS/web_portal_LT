@@ -23,6 +23,7 @@ export class ViewAllCoursesComponent implements OnInit {
     floor: 2,
     ceil: 24
   };
+  courseCount: number;
   userDetailes: any;
   categories: any;
   type: any;
@@ -334,6 +335,7 @@ export class ViewAllCoursesComponent implements OnInit {
     category.pagenumber = this.pagenumber;
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.allcourses = result.data.get_course_by_subcategory.message;
+      this.courseCount = result.data.get_course_by_subcategory.total_count || result.data.get_course_by_subcategory.message.length;
       this.loader = false;
     });
   }
@@ -342,6 +344,7 @@ export class ViewAllCoursesComponent implements OnInit {
     if (this.userDetailes.group_id)
       this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
+        this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
       });
   }
 
@@ -351,7 +354,8 @@ export class ViewAllCoursesComponent implements OnInit {
     this.pagenumber = this.pagenumber + 1;
     this.CommonServices.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
       // this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
-      this.allcourses.push(result.data.get_all_course_by_usergroup.message);
+      this.allcourses = result.data.get_all_course_by_usergroup.message;
+      this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
     });
   }
 

@@ -4,24 +4,21 @@
 <!-- end of nav-bar section  -->
 
 <!-- start of card area -->
-<div id="myDIV" stickyHeaderDirective style="overflow: auto; max-height: 100%;"
-  (scrollValues)="getScrollValues($event)">
+<div id="myDIV" stickyHeaderDirective style="overflow: auto; max-height: 100%" (scrollValues)="getScrollValues($event)">
   <div class="container" #formCard>
     <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
       <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
         <br> <br>
         <div class="row">
           <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-          <div class="col-lg-6 col-md-8 col-sm-10 col-10">
-            <h2 class="f_size_40 landing-text m-b-10 ">Welcome to Your <br> Professional Community.</h2>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-10  m-b-10">
+            <h2 class="f_size_40 landing-text ">Welcome to Your <br> Professional Community.</h2>
           </div>
-
         </div>
-
         <div class="row">
           <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
           <div class="col-lg-6 col-md-8 col-sm-10 col-10">
-            <h4 class="color_1 f_size_18 m-b-10">This is the new way to Learn Online</h4>
+            <p class="color_1 f_wt_500 f_size_20 m-b-10">This is the new way to Learn Online</p>
           </div>
         </div>
 
@@ -29,7 +26,7 @@
           <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
           <div class="col-lg-6 col-md-8 col-sm-10 col-10">
             <div class="input-group mb-3">
-              <input type="text" class=" search-bar form-control" placeholder="course,title,author,institution"
+              <input type="text" class=" search-bar form-control" placeholder="Course, Title, Author, Institution"
                 aria-label="Recipient's username" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">search</span>
@@ -47,10 +44,13 @@
       </div>
 
       <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+        <br>
         <mat-card class="section_1_card_1 background_trans" [ngClass]="{ 'noneC' : scrollAchieved}">
           <mat-card-content>
             <form [formGroup]="detailsForm">
-              <h2 style="text-align: center;"> Need Guidance </h2> <br>
+              <span class="material-icons float_right pointer" (click)="scrollAchieved = true">close</span>
+              <h2 style="text-align: center;"> Need Guidance </h2>
+              <br>
               <mat-card-content>
                 <div class="form-group">
                   <input type="text" name="username" formControlName="username" placeholder="Name" class="form-control">
@@ -62,13 +62,13 @@
                   <input type="text" name="course" formControlName="course" placeholder="Course" class="form-control">
                 </div>
                 <br>
-                <button id="login" mat-raised-button class="center" [disabled]="detailsForm.invalid"
-                  (click)="login()">Request to get back</button>
+                <button id="req" mat-raised-button class="center request-btn f_size_16" [disabled]="detailsForm.invalid"
+                  (click)="postReq()">Request to get back</button>
               </mat-card-content>
             </form>
-            <br>
           </mat-card-content>
         </mat-card>
+        <br>
         <!-- <div [ngClass]="{ 'dispC op' : scrollAchieved && (scrollAchievedValue < 300), 
         'dispC op1' : scrollAchieved && (scrollAchievedValue > 300)}"> -->
         <div [ngClass]="{ 'dispC' : scrollAchieved }">
@@ -79,9 +79,8 @@
       </div>
     </div>
   </div>
-
   <!-- End of card area -->
-  <br>
+  <br><br>
   <!-- start of Personalized Learning -->
   <div class="row m-l-20 m-r-20">
     <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_black">
@@ -96,7 +95,7 @@
         <img src="assets/landingpageicons/Vocational Courses.svg" width="60px" height="60px" />
       </div>
       <div class="row center p-5px m-t-10">
-        <span class="f_wt_500 f_init">Vocational Course</span>
+        <span class="f_wt_500 f_large">Vocational Course</span>
       </div>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
@@ -104,7 +103,7 @@
         <img src="assets/landingpageicons/E-Learner.svg" width="60px" height="60px" />
       </div>
       <div class="row center p-5px m-t-10">
-        <span class="f_wt_500 f_init">E-Learner</span>
+        <span class="f_wt_500 f_large">E-Learner</span>
       </div>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
@@ -112,7 +111,7 @@
         <img src="assets/landingpageicons/College & University.svg" width="60px" height="60px" />
       </div>
       <div class="row center p-5px m-t-10">
-        <span class="f_wt_500 f_init">College & University</span>
+        <span class="f_wt_500 f_large">College & University</span>
       </div>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-6 col-6 width_80 center_align">
@@ -120,7 +119,7 @@
         <img src="assets/landingpageicons/Government.svg" width="60px" height="60px" />
       </div>
       <div class="row center p-5px m-t-10">
-        <span class="f_wt_500 f_init">Government</span>
+        <span class="f_wt_500 f_large">Government</span>
       </div>
     </div>
   </div>
@@ -129,26 +128,29 @@
 
   <!-- start of Popular courses -->
   <div class="row m-l-20 m-r-20">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_landing-blue">
       <p>Popular Courses</p>
+      <div class="vertical"></div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
-      <button mat-flat-button class="blue-border color_blue"
-        style="right: 10px; width: 17%;   height: 45px; font-size: initial;pointer-events: none;">
-        All | 25
+      <button mat-flat-button class="blue-border color_landing-blue all-btn">
+        All | {{popularCOurse.length}}
       </button>
     </div>
   </div>
-  <br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-    <ng-template carouselSlide *ngFor="let course of courses">
-      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
-        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
-        [goto]="null">
-      </app-course-component>
-    </ng-template>
-    <br>
-  </owl-carousel-o>
+  <br> <br>
+  <div class="width_90 m-l-5">
+    <owl-carousel-o [options]="customOptions" [ngClass]="popularCOurse.length <= 4 ? 'widthClass arrow' : 'arrow'">
+      <ng-template carouselSlide *ngFor="let course of popularCOurse">
+        <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+          [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+          [goto]="null">
+        </app-course-component>
+      </ng-template>
+      <br>
+    </owl-carousel-o>
+  </div>
+
 
   <!-- <div class="row m-l-20 m-r-20 m-t-25">
     <div class="col-md-11 center">
@@ -164,29 +166,30 @@
     </div>
   </div> -->
 
-  <br><br>
+  <br><br> <br>
   <!-- End of Popular courses -->
 
   <!-- start of trending courses -->
   <div class="row m-l-20 m-r-20">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_blue">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 f_wt_500 f_size_23 float_left p-l-15 color_landing-blue">
       <p>Trending Courses</p>
+      <div class="vertical"></div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
-      <button mat-flat-button class="blue-border color_blue"
-        style="right: 10px; width: 17%;   height: 45px; font-size: initial; pointer-events: none;">
-        All | 25
+      <button mat-flat-button class="blue-border color_landing-blue all-btn">
+        All | {{trendingCourse.length}}
       </button>
     </div>
   </div>
-  <br>
-  <owl-carousel-o [options]="customOptions" [ngClass]="courses.length <= 4 ? 'widthClass arrow' : 'arrow'">
-    <ng-template carouselSlide *ngFor="let course of courses">
-      <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
-        [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
-        [goto]="null">
-      </app-course-component>
-      <!-- <div class="containerOverlay">
+  <br> <br>
+  <div class="width_90 m-l-5">
+    <owl-carousel-o [options]="customOptions" [ngClass]="trendingCourse.length <= 4 ? 'widthClass arrow' : 'arrow'">
+      <ng-template carouselSlide *ngFor="let course of trendingCourse">
+        <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
+          [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
+          [goto]="null">
+        </app-course-component>
+        <!-- <div class="containerOverlay">
         <img class="pointer m-b-10 course-image center" src="{{course.course_img_url}}" alt=""
           (click)="selectCourse(course,i+'c')">
         <div class="overlay p-5px" style="margin-bottom: 0;">
@@ -199,10 +202,10 @@
         <span class="float_left m-t-10 f_size_14 f_wt_500">{{course.course_name}}</span>
         <button class="float_right m-b-10 m-t-10">Enroll</button>
       </div> -->
-    </ng-template>
-    <br>
-  </owl-carousel-o>
-
+      </ng-template>
+      <br>
+    </owl-carousel-o>
+  </div>
   <br><br>
 
 </div>

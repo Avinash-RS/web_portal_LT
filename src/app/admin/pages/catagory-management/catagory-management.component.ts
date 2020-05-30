@@ -24,6 +24,7 @@ export class CatagoryManagementComponent implements OnInit {
   adminDetails: any;
   loading = false;
   loadingCategory = false;
+  loadingCourse = false;
   showHome = true;
   showAddCatForm = false;
   showAddSubCatForm = false;
@@ -423,10 +424,10 @@ export class CatagoryManagementComponent implements OnInit {
     const type = this.level === 1 ? 'Category' : this.level === 2 ?
       'Subcategory' : 'Supersubcategory';
     const alert = this.level === 1 || this.level === 2 ? 'This category has courses/ subcategory attached to it' :
-    'This category has courses attached to it';
+      'This category has courses attached to it';
     Swal.fire({
       // title: 'Are you sure want to delete ' + type.toLowerCase() + ' ?',
-      title: 'This ' + type.toLowerCase()  + ' will be deleted',
+      title: 'This ' + type.toLowerCase() + ' will be deleted',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Confirm',
@@ -520,6 +521,7 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   getcourses(formType) {
+    this.loadingCourse = true;
     this.formTypeCourse = formType;
     this.showCourses = true;
     this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showAddSuperSubCatForm = false;
@@ -535,6 +537,7 @@ export class CatagoryManagementComponent implements OnInit {
     }
     this.learnerservice.getcourse(category).subscribe((result: any) => {
       this.courses.push(...result?.data?.get_course_by_subcategory?.message);
+      this.loadingCourse = false;
       this.courseCount = result?.data?.get_course_by_subcategory?.total_count || this.courses.length;
     });
   }
@@ -569,6 +572,7 @@ export class CatagoryManagementComponent implements OnInit {
 
   moveCourses() {
     this.closedialogbox();
+    this.loadingCourse = true;
     const level = this.selectCategoryForm?.value?.category !== '' &&
       this.selectCategoryForm?.value?.subCategory === '' && this.selectCategoryForm?.value?.subSubCategory === '' ? 1 :
       this.selectCategoryForm?.value?.category !== '' &&
@@ -590,6 +594,7 @@ export class CatagoryManagementComponent implements OnInit {
     };
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
       if (result?.data?.reassigncourse?.success) {
+        this.loadingCourse = false;
         const msg1 = this.selectCategoryForm?.value.category.category_name;
         const msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> '
           + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
@@ -606,6 +611,7 @@ export class CatagoryManagementComponent implements OnInit {
         this.subCategoryArray = [];
         this.superSubCatArray = [];
       } else {
+        this.loadingCourse = false;
         this.alert.openAlert(result?.data?.reassigncourse?.message, null);
       }
     });

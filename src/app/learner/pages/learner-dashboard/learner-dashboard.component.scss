@@ -38,6 +38,23 @@ h2{
     color:$color-darkGrey;
     margin-left: 24px;
 }
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text2{
+    font-size: 18px;
+    color:$color-darkGrey;
+}
+
 
 .trendicon{
     margin-left: 30%;
@@ -45,6 +62,10 @@ h2{
 .trendno{
     margin-left: 3px;
     color: $trend;
+}
+.trendnodown{
+    margin-left: 3px;
+    color: $color-red;
 }
 
 .containerShadow {

@@ -1,4 +1,17 @@
 @import "variable";
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .smallbox{
     margin-left: 12%;
     margin-top: 3%;
@@ -33,12 +46,21 @@ h2{
     margin-left: -20px;
 }
 
+.text2{
+  font-size: 18px;
+  color:$color-border;
+  margin-left: -44px;
+}
+
 .trendicon{
     margin-left: 6%;
 }
 .trendno{
     margin-left: 3px;
     color: $trend;
+}
+.trendnodown{
+  color: $color-red;
 }
 h3{
     color: $color-blue;

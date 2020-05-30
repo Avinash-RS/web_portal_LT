@@ -8,6 +8,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
+import { forEach } from '@angular/router/src/utils/collection';
 
 export interface Data {
   course_name: string;
@@ -78,11 +79,41 @@ export class CatalogueManagementComponent implements OnInit {
     this.type = null;
     this.courseList = this.catalogueList = [];
     this.totalCount = null;
+    this.checked = false;
+  }
+
+  clickCName() {
+    this.showCourses = this.showListCatalogue = this.showAddCatalogueForm = false;
+    this.showHeader = this.showCatalogDetail = true;
+    this.type = null;
+    this.courseList = [];
+    this.totalCount = null;
+    this.getCatalogDetail();
+    this.checked = false;
+  }
+
+  clickCancel() {
+    this.showCatalogDetail = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = this.checked = false;
+    this.type = null;
+    this.getCatalogDetail();
   }
 
   get f() {
     if (this.showAddCatalogueForm === true) {
       return this.addCatalogueForm.controls;
+    }
+  }
+
+  selectedSelectAll() {
+    if (this.checked) {
+      this.courseList.forEach(element => {
+        element.isChecked = true;
+      });
+    } else {
+      this.courseList.forEach(element => {
+        element.isChecked = false;
+      });
     }
   }
 
@@ -142,11 +173,13 @@ export class CatalogueManagementComponent implements OnInit {
     if (this.type === 'add') {
       this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
         this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+        this.selectedSelectAll();
         this.totalCount = result?.data?.getcoursesforcatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
       });
     } else if (this.type === 'remove') {
       this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
         this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
+        this.selectedSelectAll();
         this.totalCount = result?.data?.getcoursesincatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
       });
     }

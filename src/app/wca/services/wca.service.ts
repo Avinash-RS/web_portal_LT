@@ -84,14 +84,14 @@ export class WcaService {
   }
 
   getAllInstructors() {
-    return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails', httpOptions);
+    return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails');
   }
 
-  getAllTakeawayDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/gettakewaydetails', httpOptions); }
+  getAllTakeawayDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/gettakewaydetails'); }
 
-  getAllPrerequisitDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getprerequisitdetails', httpOptions); }
+  getAllPrerequisitDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getprerequisitdetails'); }
 
-  getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails', httpOptions); }
+  getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
 
   createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate', arraydata); }
 

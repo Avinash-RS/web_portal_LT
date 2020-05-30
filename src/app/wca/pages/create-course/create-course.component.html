@@ -65,8 +65,8 @@
                         <div class="row crs1 pad18px">
                           <div class="col-md-4 course-details">Course Long Description</div>
                           <div class="col-md-8">
-                              <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor>
-                            
+                            <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor>
+
                             <!-- <textarea class="inputs inputmainWidth" style="resize: none;"
                               formControlName="course_long_description" placeholder="Enter the course description"
                               maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea> -->
@@ -80,7 +80,8 @@
                                           placeholder="Enter the course description (200 Characters)" maxlength="1000" 
                                           name="info"></textarea> -->
 
-                            <mat-form-field style="background: #e3ecff !important" class="matchipsbrder" [class.active]="preRequisites?.length">
+                            <mat-form-field style="background: #e3ecff !important" class="matchipsbrder"
+                              [class.active]="preRequisites?.length">
                               <mat-chip-list #preReqList>
                                 <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
                                   matTooltip={{req?.name}}>
@@ -109,9 +110,9 @@
 
                         <div class="row crs1 margbtm">
                           <div class="col-md-4 course-details">Preview Video</div>
-                          <div class="col-md-8"><input class="input-field" type="text" placeholder="URL"
+                          <div class="col-md-8"><input class="input-field fix_width" type="text" placeholder="URL"
                               (keydown)="_handleKeydown($event)" formControlName="preview_video" required />
-                            <button class="input-button" (click)='loadBlobs()' type="button">Browse</button> </div>
+                          </div>
                         </div>
 
 
@@ -119,10 +120,10 @@
                           <div class="col-md-4 course-details">Language</div>
                           <div class="col-md-8">
                             <span class="width88">
-                              <mat-select [disabled]='showdeletedicon' formControlName="course_language"
-                                class="inputs2 inputmainWidth" placeholder="Select the Language">
-                                <mat-option *ngFor="let m of languages" [value]="m">{{m}}</mat-option>
-                              </mat-select>
+                              <select matNativeControl [disabled]='showdeletedicon' formControlName="course_language"
+                                class="inputs2 inputmainWidth" placeholder="Select the Language" style="margin-top: 20px;">
+                                <option *ngFor="let m of languages" [value]="m">{{m}}</option>
+                              </select>
                             </span>
                           </div>
                         </div>
@@ -143,6 +144,10 @@
                         <span *ngIf="!this.preview1" class="padMainImg"><small>size should not exceed more than 2
                             mb</small></span>
                       </div>
+
+                      <br><br>
+
+                      <button class="input-button btn_browse" (click)='loadBlobs()' type="button">Browse</button>
 
                     </div>
 
@@ -170,14 +175,14 @@
                             *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
                             <ng-container [formGroupName]="i">
                               <span class="width88">
-                                <mat-select class="inputs2 inputmainWidth" [disabled]='showdeletedicon'
+                                <select matNativeControl class="inputs2 inputmainWidth" [disabled]='showdeletedicon'
                                   formControlName="author_name" (selectionChange)="change($event.value,i)"
-                                  placeholder="Select the instructor" name="language">
-                                  <mat-option *ngFor="let k of AllInstructors | filter_matselect:selected"
+                                  placeholder="Select the instructor" name="language" style="margin-top: 20px;">
+                                  <option *ngFor="let k of AllInstructors | filter_matselect:selected"
                                     [disabled]="k.disabled" [value]="k.name">
                                     {{k?.name}}
-                                  </mat-option>
-                                </mat-select>
+                                  </option>
+                                </select>
                               </span>
                               <span class="instructDSPFlx">
                                 <span>
@@ -216,12 +221,12 @@
                       <div class="row crs1 padtp25px">
                         <div class="col-md-3">Certification</div>
                         <div class="col-md-9">
-                          <mat-select [disabled]='showdeletedicon' formControlName="certificate_name"
-                            class="inputs2 inputmainWidth" placeholder="No Certificate" name="language">
-                            <mat-option *ngFor="let k of AllCertifyDetails" [value]="k.name">
+                          <select matNativeControl [disabled]='showdeletedicon' formControlName="certificate_name"
+                            class="inputs2 inputmainWidth" placeholder="No Certificate" name="language" style="margin-top: 20px;">
+                            <option *ngFor="let k of AllCertifyDetails" [value]="k.name">
                               {{k?.name}}
-                            </mat-option>
-                          </mat-select>
+                            </option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -254,14 +259,14 @@
                               *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
                               <ng-container [formGroupName]="i">
                                 <span class="width100full">
-                                  <mat-select [disabled]='showdeletedicon' formControlName="name"
+                                  <select matNativeControl [disabled]='showdeletedicon' formControlName="name"
                                     (selectionChange)="change1($event.value,i)" class="inputs4 hgt39"
-                                    placeholder="Select the institute" name="language">
-                                    <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
+                                    placeholder="Select the institute" name="language" style="margin-top: 20px;">
+                                    <option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
                                       [disabled]="k.disabled" [value]="k.name">
                                       {{k?.name}}
-                                    </mat-option>
-                                  </mat-select>
+                                    </option>
+                                  </select>
                                   <input style="display: none;" id="fileInput3" type='file' #fileInput3
                                     (change)="onSelectFile($event,'img3',i)">
                                   <img class="img3 img3marg" for="fileInput3" (click)="fileInput3.click()"
@@ -343,9 +348,9 @@
                           *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
                           <div [formGroupName]="i">
                             <div class="row crs1 margbtm">
-                              <div class="col-md-3">Text</div>
+                              <div class="col-md-3">Description</div>
                               <div class="col-md-9"><textarea type="text" class="inputs inputmainWidth"
-                                  style="resize: none;" (keydown)="_handleKeydown($event)" placeholder="Enter the text"
+                                  style="resize: none;" (keydown)="_handleKeydown($event)" placeholder="Enter the description"
                                   formControlName="text"></textarea> </div>
                             </div>
 
