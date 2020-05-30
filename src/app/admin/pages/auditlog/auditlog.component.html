@@ -57,7 +57,7 @@
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action" *ngIf="dataSource?.data?.length">
-          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
             <!-- <span class="mobile-label">S.No</span> -->
             <button mat-icon-button (click)="openviewdialog(viewdetaildialog)" data-toggle="tooltip"
