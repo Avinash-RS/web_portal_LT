@@ -15,7 +15,7 @@
       style="word-wrap: break-word; vertical-align: middle;">{{course.course_name}}</span>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-4 col-4 float_right">
-    <button *ngIf="showCartBtn" class="f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
+    <button class="f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
   </div>
 </div>
 <!-- end for logged out user -->
@@ -64,19 +64,11 @@
           <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
-          <!-- <button id="enroll_now" *ngIf="showStatus" disabled="false"
-            (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
+          <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
+            (click)="goTocourse(course?.coursePlayerStatus?.status || 'Start')"
             [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
           '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
-            {{course?.coursePlayerStatus?.status || 'Start'}}</button> -->
-
-          <button id="enroll_now" *ngIf="showStatus" (click)="goTocourse('Start')">Start</button>
-
-          <!-- <button id="enroll_now" *ngIf="showStatus" disabled="false"
-            (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
-            [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
-          '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
-            {{course?.coursePlayerStatus?.status || 'Start'}}</button> -->
+            {{course?.coursePlayerStatus?.status || 'Start'}}</button>
         </div>
       </div>
     </mat-card-action>

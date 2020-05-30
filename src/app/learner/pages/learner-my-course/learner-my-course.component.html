@@ -30,7 +30,8 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4 col-sm-2 col-12" *ngFor=" let course of myCoursesList">
                                 <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false"
-                                    [showWishlist]="false" [showStatus]="true" [showEnroll]="true"> </app-course-component>
+                                    [showWishlist]="false" [showStatus]="true" [showEnroll]="true">
+                                </app-course-component>
                             </div> <br><br>
                             <h2 class="center" *ngIf="myCoursesList && myCoursesList.length == 0">
                                 No courses yet

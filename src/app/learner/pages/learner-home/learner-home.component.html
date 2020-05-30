@@ -60,8 +60,9 @@
           <div class="row">
             <ng-container *ngFor="let eCourse of enrolledCourses ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
-                <app-course-component [course]="eCourse" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+                <app-course-component [course]="eCourse" [canNavigate]="true" [showWishlist]="false"
+                  [showStatus]="true" [showRating]="false" [showCount]="false" [showEnroll] = "true">
+                </app-course-component> <br>
               </div>
             </ng-container>
             <div class="col-md-12" style="text-align: center;">

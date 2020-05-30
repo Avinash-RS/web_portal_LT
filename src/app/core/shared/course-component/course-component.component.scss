@@ -78,7 +78,7 @@
 // FOR LOGGED IN USER
 
 .course-name-row {
-    height: 12vh !important;
+    height: 10vh !important;
 }
 
 
@@ -133,7 +133,8 @@ strong {
     background-color: $color-blue;
     color: $color-white;
     font-weight: 500 !important;
-    width: 70%;
+    width: 90%;
+    padding: 3px;
     border-radius: 0;
     font-size: smaller;
     text-align: center;
