@@ -5,7 +5,7 @@ import {
   login, get_course_by_user, get_country_details, get_qualification_details, get_trending_course,
   get_board_university_details, get_discipline_details, get_specification_details, get_popular_course,
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
-  getmoduleData, get_user_detail_username, check_existing_user, get_all_category,
+  getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
   get_sub_category, get_course_by_subcategory, get_all_course_by_usergroup, get_module_topic,
   getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails
 } from './operations/learner_query';
@@ -488,9 +488,9 @@ export class LearnerServicesService {
       query: createGuidanceRequest,
       variables: {
         name,
-        email_id : emailid,
-        created_by_ip : createdbyip,
-        course_id : courseid
+        email_id: emailid,
+        created_by_ip: createdbyip,
+        course_id: courseid
       }
     });
   }
@@ -504,6 +504,11 @@ export class LearnerServicesService {
   getTrendingInLanding() {
     return this.Apollo.query({
       query: get_trending_course,
+    });
+  }
+  getPopularcourse() {
+    return this.Apollo.query({
+      query: getPopularcourse,
     });
   }
 }

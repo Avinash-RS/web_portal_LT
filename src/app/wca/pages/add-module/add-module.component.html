@@ -21,7 +21,7 @@
               [src]="routedCourseDetails?.courseImage ? routedCourseDetails?.courseImage : '../../../../assets/images/image_upload.svg'">
             <br>
             <div class="course-name">{{routedCourseDetails?.courseName}}</div>
-            <div class="course-name">{{noOfModules + ' Modules'}}</div>
+            <div class="course-name" >{{noOfModules > 1 ? noOfModules + ' Modules' : (noOfModules == 1 ? noOfModules + ' Module' : 'No Module added')}}</div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
               <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference

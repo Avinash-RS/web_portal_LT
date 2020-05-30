@@ -20,6 +20,7 @@ export class LearnerHomeComponent implements OnInit {
   wishList:any = [];
   yetToStart:any;
   incomplete:any;
+  popularsCourse: any;
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
@@ -28,9 +29,9 @@ export class LearnerHomeComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = this.globalservice.checkLogout();
-    if (!this.userDetailes.group_id) {
-      this.userDetailes.group_id = '1';
-    }
+    // if (!this.userDetailes.group_id) {
+    //   this.userDetailes.group_id = '1';
+    // }
     this.getallcourses();
     this.getEnrolledCourses();
     this.viewWishlist();
@@ -44,7 +45,7 @@ export class LearnerHomeComponent implements OnInit {
   }
   // function to fetch all the enrolled courses of the user
   getEnrolledCourses() {
-    console.log(this.userDetailes.user_id)
+   
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         console.log('enrolled response', enrolledList)
@@ -55,12 +56,31 @@ export class LearnerHomeComponent implements OnInit {
     });
   }
   // function to fetch the wishlist of the user
+ 
   viewWishlist() {
+    console.log(this.userDetailes.user_id)
     this.commonServices.viewWishlist(this.userDetailes.user_id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishList = viewWishlist.data.view_wishlist.message;
         console.log('wishlist response',viewWishlist);
       }
     });
+  }
+
+  // getting popular course
+  getAllPopularcourse(){
+    this.learnerService.getPopularcourse().subscribe((popularCourse: any) => {
+      if (popularCourse.data.getPopularcourse && popularCourse.data.getPopularcourse.success) {
+        this.allcourses = popularCourse.data.getPopularcourse.data;
+      }
+    });
+  }
+
+  onChange(value){
+    if(value == 'popularCourse'){
+      this.getAllPopularcourse();
+    }else{
+      this.getallcourses();
+    }
   }
 }
