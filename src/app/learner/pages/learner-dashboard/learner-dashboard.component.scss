@@ -39,12 +39,22 @@ h2{
     margin-left: 24px;
 }
 
+.text2{
+    font-size: 18px;
+    color:$color-darkGrey;
+}
+
+
 .trendicon{
     margin-left: 30%;
 }
 .trendno{
     margin-left: 3px;
     color: $trend;
+}
+.trendnodown{
+    margin-left: 3px;
+    color: $color-red;
 }
 
 .containerShadow {

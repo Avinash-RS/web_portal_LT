@@ -13,6 +13,7 @@ import { CatagoryManagementComponent } from '@admin/pages/catagory-management/ca
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
+import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
@@ -30,7 +31,7 @@ export const appRoutes: Routes = [{
         { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, },
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, },
         { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' }, },
-
+        { path: 'auditlog', component: AuditlogComponent, data: { title: 'Profile' }, },
         {
             path: 'Wca',
             loadChildren: '../../wca/wca.module#WcaModule',

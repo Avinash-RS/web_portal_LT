@@ -22,7 +22,7 @@ import { MAT_TABS_CONFIG } from '@angular/material';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
 // import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -44,7 +44,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
-    ChartsModule,
+    // ChartsModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,

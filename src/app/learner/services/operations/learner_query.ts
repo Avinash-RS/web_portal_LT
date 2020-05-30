@@ -663,22 +663,26 @@ query getlearnerdashboarddetails($user_id: String){
     data{
     courseEnrolled{
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     suspend{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     incomplete{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     completed{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     lastAccessedCourses{
     course_name
@@ -698,12 +702,14 @@ query getLearnerenrolledCourses($user_id: String){
       suspend{
         _id
         totalCount
-        percent
+        IncDecPec
+        valueIncDecPec
       }
       incomplete{
         _id
         totalCount
-        percent
+        IncDecPec
+        valueIncDecPec
       }
       courseEnrolled{
         course_id

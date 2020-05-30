@@ -10,6 +10,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 export class LearnerDashboardComponent implements OnInit {
   userDetailes: any;
+  dashboardData: void;
 
   constructor(
     public service: LearnerServicesService,
@@ -25,7 +26,11 @@ export class LearnerDashboardComponent implements OnInit {
   getLearnerDashboard(){
     if (this.userDetailes.group_id)
     this.service.get_learner_dashboard(this.userDetailes.user_id).subscribe((response: any) => {
-      console.log('dashboard response', response);
+      if (response.data.getlearnerdashboarddetails && response.data.getlearnerdashboarddetails.success) {
+        this.dashboardData = response.data.getlearnerdashboarddetails.data;
+        console.log('dashboard response', this.dashboardData);
+      }
+  
     });
   }
 
