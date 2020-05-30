@@ -78,7 +78,8 @@
 // FOR LOGGED IN USER
 
 .course-name-row {
-    height: 10vh !important;
+    min-height: 10vh !important;
+    max-height: 12vh !important;
 }
 
 
