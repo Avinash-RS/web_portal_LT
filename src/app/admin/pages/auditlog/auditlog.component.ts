@@ -79,4 +79,14 @@ export class AuditlogComponent implements OnInit {
   closedialogbox(){
     this.dialog.closeAll();
   }
+  filter(filterform) {
+    console.log(filterform.valid);
+  }
+  cancel(filterform) {
+    filterform.reset();
+  }
+  export(filterform){
+    // window.open(url, '_blank');
+    window.open('https://edutechstorage.blob.core.windows.net/container1/report_audit_information/06260090788166162-audit_report.csv');
+  }
 }
