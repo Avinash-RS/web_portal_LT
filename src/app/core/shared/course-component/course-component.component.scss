@@ -189,6 +189,10 @@ strong {
     }
 }
 
+.user-rating {
+    flex-direction: row;
+    justify-content: flex-end;
+}
 
 
 // END OF LOGGED IN USER
