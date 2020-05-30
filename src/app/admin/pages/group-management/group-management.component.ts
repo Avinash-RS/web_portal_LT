@@ -215,12 +215,12 @@ export class GroupManagementComponent implements OnInit {
     return this.changeGrpForm.controls;
   }
   updateGroup() {
+    this.dialog.closeAll();
     // this.getAllUser(0);
     this.adminservice.updateGroup(this.userGroupChange._id, this.changeGrpForm.value.group.group_name,
       this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
       if (result.data.update_group.success) {
         this.alert.openAlert('User Group Updated Successfully', null);
-        this.dialog.closeAll();
         this.getAllUser(0);
       } else {
         this.alert.openAlert(result.data.update_group.message, null);
@@ -276,9 +276,10 @@ export class GroupManagementComponent implements OnInit {
   updategroupdetails(groupform) {
     let value: any;
     value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
+    this.toggleevent = '';
     // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
-      title: 'Are you sure want to update the group ' + this.currentpath.group_name + '?',
+      title: 'Are you sure you want to update the  ' + this.currentpath.group_name + '?',
       // icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -295,6 +296,7 @@ export class GroupManagementComponent implements OnInit {
         };
         this.adminservice.updategroupdetails(data).subscribe((result1: any) => {
           if (result1.data.groupstatus.success === true) {
+            this.toggleevent = '';
             this.reset();
             this.getgroups();
             this.cdr.detectChanges();

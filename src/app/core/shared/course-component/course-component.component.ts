@@ -135,7 +135,6 @@ export class CourseComponentComponent implements OnInit {
   }
 
   goTocourse(status) {
-
     if (this.finalStatus !== 'Completed') {
       const detail1 = {
         id: 'Scaffolding',

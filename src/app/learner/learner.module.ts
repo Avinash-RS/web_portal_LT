@@ -81,7 +81,8 @@ const routes: Routes = [
     ViewAllCoursesComponent,
     SearchPipe,
     LearnerDashboardComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    
 
   ],
 

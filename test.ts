@@ -15,7 +15,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
+//const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
 // const context = require.context('./app/wca/pages/create-course', true, /create-course.component\.spec\.ts$/);
 
 // const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
@@ -24,4 +24,5 @@ const context = require.context('../src/app/learner/pages/login/login.component'
 // const context = require.context('./app/admin/pages/admin-courses', true, /admin-courses.component\.spec\.ts$/);
 // const context = require.context('./app/learner/pages/learner-my-course', true, /admin-courses.component\.spec\.ts$/);
 // And load the modules.
+const context = require.context('../src/app/learner/pages/login/', true,/login.component\.spec\.ts$/);
 context.keys().map(context);

@@ -10,6 +10,7 @@ import {
         MatListModule,
         MatTreeModule
        } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,6 +29,7 @@ import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { AuditlogComponent } from './auditlog/auditlog.component';
 
 
 @NgModule({
@@ -50,11 +52,12 @@ import { ChartsModule } from 'ng2-charts';
         AdminCoreModule,
         RouterModule,
         NgxPaginationModule,
-        ChartsModule
+        ChartsModule,
+        MatDatepickerModule
    
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
+    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

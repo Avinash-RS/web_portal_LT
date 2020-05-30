@@ -17,6 +17,8 @@ import { MockServiceService } from '@learner/services/mockService/mock-service.s
 import { RouterTestingModule } from '@angular/router/testing';
 import { LearnerMyCourseComponent } from '../learner-my-course/learner-my-course.component';
 
+
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -150,14 +152,14 @@ describe('LoginComponent', () => {
           localStorage.setItem('role', 'learner')
           localStorage.setItem('token', loginresult.data.login.message.token)
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-          debugger
-          if (loginresult.data.login.message.is_profile_updated) {
+          // debugger
+          // if (loginresult.data.login.message.is_profile_updated) {
             // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
             // expect(navigateSpy).toHaveBeenCalledWith(['/Learner/MyCourse']);
-          }
-          else {
+          // }
+          // else {
             // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/profile']);
-          }
+          // }
         } else {
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
           localStorage.setItem('remember_me', 'false');

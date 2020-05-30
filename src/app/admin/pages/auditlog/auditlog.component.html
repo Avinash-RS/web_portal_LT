@@ -1,0 +1,145 @@
+<br>
+<div class="row">
+  <div class="col-lg-10">
+    <div>
+      <p>Filter by</p>
+    </div>
+    <div>
+      <form #searchForm="ngForm">
+         <div class="row" >
+            <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
+                <mat-form-field class="wid-100">
+                    <input matInput name="fromdate" [(ngModel)]="fromdate" [matDatepicker]="picker" placeholder="Choose from date"
+                      color="accent" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+              <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
+                  <mat-form-field class="wid-100"> 
+                      <input matInput name="todate" [(ngModel)]="todate" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
+                        [min]=fromdate [max]=today>
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+              </div>
+
+              
+                <div class="col-lg-4 col-sm-12 col-xs-12 col-md-4 pad-t-10">
+                   
+                   <span> <button class="btn  btn btn-primary button_border view-but"  (click)="filterdate(searchForm)">Filter</button></span>
+                   <span> <button class="btn  btn btn-danger button_border"  (click)="cancel(searchForm)">Reset</button></span>
+
+                </div> 
+                 
+      </div> 
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="p-5px">
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <span class="desktop-data"> {{i+1}}</span>
+            <!-- <span class="mobile-data"> {{i+1}}</span> -->
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <mat-header-cell *matHeaderCellDef>
+            {{ column.header }}</mat-header-cell>
+          <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action" *ngIf="dataSource?.data?.length">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <button mat-icon-button (click)="openviewdialog(viewdetaildialog)" data-toggle="tooltip"
+              data-placement="top">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+      </mat-table>
+    </div>
+
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+
+<ng-template #viewdetaildialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+
+  <mat-dialog-content style="width: 1000px">
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <br>
+          <div class="row">
+            <!-- //////userName  +++ full name +++ Phone//////// -->
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Username : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Full Name : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name || 'NA'}}
+                </label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Mobile : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number || 'NA'}}</label></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Email : <label
+                  class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
+                'Female' : 'Rather not specify'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>I'm a : <label class="color_black capitalize f_wt_400">
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional  || 'NA'}}</label>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Languages known : </label><br>
+              <div *ngIf="profileDetails.language.length >0">
+                <div *ngFor="let lang of profileDetails.language" class="display_flex">
+                  {{lang}}
+                </div>
+              </div>
+              <div *ngIf="profileDetails.language.length == 0" class="color_black">
+                NA
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Location : <label class="color_black capitalize f_wt_400">
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
+                  {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
+                 }} </label></label>
+            </div>
+          </div><br>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-dialog-content>
+  <br>
+</ng-template>

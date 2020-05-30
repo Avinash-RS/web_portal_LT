@@ -32,8 +32,8 @@
     border: 1.0px solid $color-blue;
 }
 
-.color_subhead {
-    color: $color-subhead !important;
+.color_landing-blue {
+    color: $color-landing-blue !important;
 }
 
 .course-image1 {
@@ -41,21 +41,24 @@
     object-fit: cover;
 }
 
+
+
 .containerOverlay {
     .overlay {
         height: 50%;
-        width: 60%;
+        width: 80%;
         position: absolute;
         overflow: hidden;
         bottom: 5vh;
-        left: 20%;
+        left: 10%;
         opacity: 0;
         background-color: $color-white;
         filter: alpha(opacity=0);
     }
 
     .pointer {
-        width: 60% !important;
+        width: 80% !important;
+        height: 180px;
     }
 }
 
@@ -75,7 +78,8 @@
 // FOR LOGGED IN USER
 
 .course-name-row {
-    height: 10vh !important;
+    min-height: 10vh !important;
+    max-height: 12vh !important;
 }
 
 
@@ -128,9 +132,10 @@ strong {
 
 #enroll_now {
     background-color: $color-blue;
-    color: #fff;
+    color: $color-white;
     font-weight: 500 !important;
-    width: 70%;
+    width: 90%;
+    padding: 3px;
     border-radius: 0;
     font-size: smaller;
     text-align: center;
@@ -157,6 +162,11 @@ strong {
 .course-card {
     border-radius: 0;
     background-color: #F5FAFA;
+
+    .img {
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
 .shadow {
@@ -173,7 +183,7 @@ strong {
     margin-top: 10px;
 
     .wishlist_btn {
-        background: white;
+        background: $color-white;
         opacity: 0.5;
         border-radius: 0;
     }

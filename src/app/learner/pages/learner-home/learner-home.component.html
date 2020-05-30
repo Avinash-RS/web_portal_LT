@@ -60,8 +60,9 @@
           <div class="row">
             <ng-container *ngFor="let eCourse of enrolledCourses ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
-                <app-course-component [course]="eCourse" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+                <app-course-component [course]="eCourse" [canNavigate]="true" [showWishlist]="false" [showStatus]="true"
+                  [showRating]="false" [showCount]="false" [showEnroll]="true">
+                </app-course-component> <br>
               </div>
             </ng-container>
             <div class="col-md-12" style="text-align: center;">
@@ -85,7 +86,8 @@
             <ng-container *ngFor="let wList of wishList ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="wList" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
               </div>
             </ng-container>
             <div class="col-md-12" style="text-align: center;">
@@ -129,7 +131,7 @@
         <select class="category" (change)="onChange($event.target.value)">
           <option value="allcourses">All Courses</option>
           <option value="popularCourse">Popular Courses</option>
-        
+
         </select>
       </div>
     </div>
@@ -141,8 +143,8 @@
               *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
-              </app-course-component>  <br>
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
               </div>
             </ng-container>
           </div>
