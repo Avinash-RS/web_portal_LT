@@ -193,6 +193,7 @@ export class EnrollmentComponent implements OnInit {
       this.adminservice.approveenrollment(data).subscribe(( response: any ) => {
         if (response?.data?.approve_enrollment?.success === true) {
           this.loading = false;
+          console.log(tablevalue)
           if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
               is_individual: true, course_id: 'undefined' };
@@ -202,9 +203,10 @@ export class EnrollmentComponent implements OnInit {
             this.dataSource.data = [];
             this.radiobuttonchange();
           }
+          const c = array.length > 1 ? 'ids' : 'id';
           Swal.fire({
             title: '<div>Successfully Approved</div> <br> ',
-            text: 'A confirmation has been sent to user email ids',
+            text: 'A confirmation has been sent to user email ' + c ,
           });
         }
       });
