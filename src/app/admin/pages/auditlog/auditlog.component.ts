@@ -15,7 +15,7 @@ export class AuditlogComponent implements OnInit {
   displayedColumns: any;
   reports: any;
   dataSource = new MatTableDataSource<any>();
-
+  today = new Date();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog) { }
 

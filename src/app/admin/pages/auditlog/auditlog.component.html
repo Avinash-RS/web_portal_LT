@@ -6,7 +6,7 @@
     </div>
     <div>
       <form #searchForm="ngForm">
-        <!-- <div class="row" >
+         <div class="row" >
             <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
                 <mat-form-field class="wid-100">
                     <input matInput name="fromdate" [(ngModel)]="fromdate" [matDatepicker]="picker" placeholder="Choose from date"
@@ -19,7 +19,7 @@
               <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
                   <mat-form-field class="wid-100"> 
                       <input matInput name="todate" [(ngModel)]="todate" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
-                        [max]=today>
+                        [min]=fromdate [max]=today>
                       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
@@ -33,7 +33,7 @@
 
                 </div> 
                  
-      </div> -->
+      </div> 
       </form>
     </div>
   </div>

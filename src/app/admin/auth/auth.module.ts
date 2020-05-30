@@ -45,6 +45,7 @@ import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dash
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
+import {MatNativeDateModule} from '@angular/material';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
@@ -87,7 +88,8 @@ import { ChartsModule } from 'ng2-charts';
         NgxPaginationModule,
         MatSortModule,     // WcaModule
         ChartsModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule,
        
     ],
 
