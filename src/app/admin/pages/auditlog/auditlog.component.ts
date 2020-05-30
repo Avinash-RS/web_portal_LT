@@ -16,6 +16,7 @@ export class AuditlogComponent implements OnInit {
   reports: any;
   dataSource = new MatTableDataSource<any>();
   today = new Date();
+  viewdetail: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog) { }
 
@@ -71,8 +72,9 @@ export class AuditlogComponent implements OnInit {
 
   }
 
-  openviewdialog(templateRef) {
+  openviewdialog(data, templateRef) {
     this.dialog.open(templateRef);
+    this.viewdetail = data;
   }
   closedialogbox(){
     this.dialog.closeAll();
