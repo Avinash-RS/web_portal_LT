@@ -227,7 +227,7 @@ export class AddUserComponent implements OnInit {
    */
   deleteFile() {
     Swal.fire({
-      title: 'Are you sure want to delete the uploaded file ?',
+      title: 'Are you sure you want to delete the uploaded file ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
