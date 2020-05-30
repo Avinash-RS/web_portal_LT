@@ -27,7 +27,7 @@
               <span class="text">Up from Yesterday</span>
             </div>
             <div class="col-4 " *ngIf="yetToStart?.IncDecPec == false">
-              <span class="text">Down from Yesterday</span>
+              <span class="text2">Down from Yesterday</span>
             </div>
           </div>
         </div>
@@ -57,12 +57,15 @@
               <span class="text">Up from Yesterday</span>
             </div>
             <div class="col-4 " *ngIf="incomplete?.IncDecPec == false">
-              <span class="text">Down from Yesterday</span>
+              <span class="text2">Down from Yesterday</span>
             </div>
           </div>
  
         </div>
       </div>
+    </div>
+    <div class="spinner-container" *ngIf="loadingCatalogue">
+      <mat-spinner diameter="40"></mat-spinner>
     </div>
     <!-- ---------------------My Enrolled courses section start------------------------- -->
     <div style="margin-top: 3%;"></div>
