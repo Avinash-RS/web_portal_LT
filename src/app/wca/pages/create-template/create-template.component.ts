@@ -105,10 +105,16 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
+    if ((event.previousContainer === event.container)&&(event.previousContainer.id != "cdk-drop-list-0" && event.container.id !="cdk-drop-list-0")) {
       return false
-      //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    } 
+    else if (event.previousContainer.id == "cdk-drop-list-0" && event.container.id =="cdk-drop-list-1"){
+      return false;
+    }
+    else if (event.previousContainer.id == "cdk-drop-list-0" && event.container.id =="cdk-drop-list-0"){
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }
+    else {
       this.done.push(this.items2[event.previousIndex]);
 
       // transferArrayItem(event.previousContainer.data,
