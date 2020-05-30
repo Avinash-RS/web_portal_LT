@@ -40,7 +40,6 @@ export class LearnerHomeComponent implements OnInit {
     if (this.userDetailes.group_id)
       this.learnerService.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
-        console.log('all courses', this.allcourses)
       });
   }
   // function to fetch all the enrolled courses of the user
