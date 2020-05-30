@@ -202,7 +202,7 @@
         <div class="container">
           <div class="row" *ngIf="displayMode === 1">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
                   [showWishlist]="true" [showStatus]="false" [showRating]="true" [goto]="goto" [showCount]="true">
@@ -213,7 +213,7 @@
           </div>
           <div class="row" *ngIf="displayMode === 2">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
                 <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
                   [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true"
@@ -232,7 +232,7 @@
         <div class="container ">
           <div class="row" *ngIf="displayMode === 1">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
                   [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
@@ -243,7 +243,7 @@
           </div>
           <div class="row" *ngIf="displayMode === 2">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: {totalItems: courseCount, itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
                 <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
                   [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true"
