@@ -93,7 +93,7 @@
 
               <ng-template #noMod>
                 <div class="no-module"
-                  *ngIf="(this.scormPath.length == 0 || (this.courseDetails.coursefile.length > 0 && this.courseDetails.coursetype == 'SCORM')); else uploadDel">
+                  *ngIf="(!isScrom && this.scormPath.length == 0); else uploadDel">
                   <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                   <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
                     color="primary">Upload a SCORM Package
