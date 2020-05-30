@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service'
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
-import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-learner-home',
@@ -21,6 +20,7 @@ export class LearnerHomeComponent implements OnInit {
   yetToStart:any;
   incomplete:any;
   popularsCourse: any;
+  loadingCatalogue = false;
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
@@ -32,23 +32,21 @@ export class LearnerHomeComponent implements OnInit {
     this.getEnrolledCourses();
     this.getallcourses();
     this.viewWishlist();
-    // if (!this.userDetailes.group_id) {
-    //   this.userDetailes.group_id = '1';
-    // }
-
   }
   getallcourses() {
+    this.loadingCatalogue = true;
     if (this.userDetailes.group_id)
       this.learnerService.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
+        this.loadingCatalogue = false;
       });
   }
   // function to fetch all the enrolled courses of the user
   getEnrolledCourses() {
-   
+    this.loadingCatalogue = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
-        console.log('enrolled response', enrolledList)
+        this.loadingCatalogue = false;
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.incomplete = enrolledList.data.getLearnerenrolledCourses.data.suspend[0];
         this.yetToStart = enrolledList.data.getLearnerenrolledCourses.data.incomplete[0];
@@ -68,9 +66,11 @@ export class LearnerHomeComponent implements OnInit {
 
   // getting popular course
   getAllPopularcourse(){
+    this.loadingCatalogue = true;
     this.learnerService.getPopularcourse().subscribe((popularCourse: any) => {
       if (popularCourse.data.getPopularcourse && popularCourse.data.getPopularcourse.success) {
         this.allcourses = popularCourse.data.getPopularcourse.data;
+        this.loadingCatalogue = false;
       }
     });
   }
