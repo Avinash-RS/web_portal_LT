@@ -38,7 +38,7 @@ export class ViewAllCoursesComponent implements OnInit {
   paginationpgno: any;
   loader: boolean;
   sort_type: any = "A-Z";
-  showAppliedFiltre: boolean;
+  showAppliedFiltre: boolean = false;
   showMore: Boolean = true;
   errormsg: boolean = false;
   allLvlCategory: any;
