@@ -131,15 +131,14 @@ export class CreateTopicComponent implements OnInit {
   topicItem(mod_index, i): FormGroup {
     return this.formBuilder.group({
       topicname: [null, Validators.compose([Validators.required])],
-      videosubtitle : ['false'],
-      topicvalue : [''],
-      topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index>-1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data =>
-        {
-          return this.topicImages()
-        }) : [],Validators.compose([Validators.required])),
-      topicstatus:['true'],
-      topictype:[null],
-      topictime:[null]
+      videosubtitle: ['false'],
+      topicvalue: [''],
+      topicimages: this.formBuilder.array(this.courseArray && this.courseArray.length && mod_index > -1 && this.courseArray[mod_index].moduledetails ? this.courseArray[mod_index].moduledetails[i].topicimages.map(data => {
+        return this.topicImages()
+      }) : [], Validators.compose([Validators.required])),
+      topicstatus: ['true'],
+      topictype: [null],
+      topictime: [null]
     });
   }
 
@@ -157,7 +156,7 @@ export class CreateTopicComponent implements OnInit {
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
   ) {
- 
+
   }
 
   ngOnInit() {
@@ -446,9 +445,9 @@ export class CreateTopicComponent implements OnInit {
               this.spinner.hide();
             })
           } else if (item.name === 'Video') {
-            this.formVideo(formdata,"1",textvalue,subTitleindex)
-           } else if (item.name === 'Knowledge Check') { 
-            this.spinner.show();           
+            this.formVideo(formdata, "1", textvalue, subTitleindex)
+          } else if (item.name === 'Knowledge Check') {
+            this.spinner.show();
             const formData2 = new FormData();
             formData2.append('excel', this.imageView);
             this.wcaService.uploadKnowledgeCheck(formData2).subscribe((data: any) => {
@@ -580,52 +579,52 @@ export class CreateTopicComponent implements OnInit {
       }
     });
   }
-  
-  formVideo(formdata,triggerFun,textvalue,subTitleindex){
-    if(textvalue){
+
+  formVideo(formdata, triggerFun, textvalue, subTitleindex) {
+    if (textvalue) {
       formdata.get('topicvalue').setValue(textvalue);
     }
-    if(triggerFun == "2"){     
+    if(triggerFun == "2"){
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
           var vidObj = {
             "file" : textvalue,
             "title" : ["1"]
           }
-          formdata.get('topicimages').get(String(0)).setValue(vidObj);  
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);
           formdata.get('topictype').setValue("Video");
           this.spinner.hide();
         }
-       
+
     }else{
       const formData4 = new FormData();
       formData4.append('excel', this.imageView);
       this.spinner.show();
       this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data: any) => {
-      if(data && data.Message =="Success") {
-        // this.clearFormArray(formdata.get("topicimages") as FormArray)
-        let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
-        let valueFile = {
-          "code":"en",
-          "name":"English",
-          "file":path2
+        if (data && data.Message == "Success") {
+          // this.clearFormArray(formdata.get("topicimages") as FormArray)
+          let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+          let valueFile = {
+            "code": "en",
+            "name": "English",
+            "file": path2
+          }
+          if (!formdata.get('topicimages').get(String(0))) {
+            (formdata.get('topicimages') as FormArray).push(this.topicImages());
+          }
+          var vidObj = {
+            "file": textvalue,
+            "title": ["1"]
+          }
+          if (formdata.value.topicimages.length == 0) {
+            formdata.get('topicimages').get(String(0)).setValue(vidObj);
+          }
+          formdata.get('topictype').setValue("Video");
+          formdata.value.topicimages[0].title[subTitleindex] = valueFile
+          // this.vidObj.title.push(valueFile) 
+          this.spinner.hide();
+          this.toast.success('File uploaded sucessfully');
         }
-        if (!formdata.get('topicimages').get(String(0))) {
-          (formdata.get('topicimages') as FormArray).push(this.topicImages());
-        }
-        var vidObj = {
-          "file" : textvalue,
-          "title" : ["1"]
-        }
-        if(formdata.value.topicimages.length == 0){
-          formdata.get('topicimages').get(String(0)).setValue(vidObj);  
-        }
-        formdata.get('topictype').setValue("Video");
-        formdata.value.topicimages[0].title[subTitleindex] = valueFile
-        // this.vidObj.title.push(valueFile) 
-        this.spinner.hide();
-        this.toast.success('File uploaded sucessfully');
-      }
       })
     }
 
@@ -633,11 +632,11 @@ export class CreateTopicComponent implements OnInit {
 
   addTopicFrom(event, type) {
     event.stopPropagation();
-    if(this.modName.nativeElement.value){
+    if (this.modName.nativeElement.value) {
       var topicName = this.modName.nativeElement.value
       var index = this.courseForm.value.coursedetails.findIndex(x => x.modulename === topicName);
     }
-    if(index == undefined){
+    if (index == undefined) {
       index = 0
     }
     if (this.courseForm) {
@@ -660,16 +659,16 @@ export class CreateTopicComponent implements OnInit {
 
     }
     var feedbackIndex = (<any>Object).values(this.courseForm['controls'].coursedetails['controls'][index]['controls']['template_details']['value']).findIndex(control => control.name == "Feedback");
-    
-    if(feedbackIndex >= 0){
+
+    if (feedbackIndex >= 0) {
       var feedbackArray = this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls'][feedbackIndex];
-      if(!feedbackArray.get('topicimages').get(String(0))){
+      if (!feedbackArray.get('topicimages').get(String(0))) {
         (this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls'][feedbackIndex].get('topicimages') as FormArray).push(this.topicImages())
       }
       this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls'][feedbackIndex].get('topicimages').get(String(0)).setValue("");
       this.courseForm['controls'].coursedetails['controls'][index]['controls']['moduledetails']['controls'][feedbackIndex].get('topictype').setValue("Feedback");
     }
-    
+
     // this.courseForm.value.coursedetails[index].template_details.filter((value)=>{
     //   if (value.name == "Video"){
     //     this.courseForm.get('topicvalue').setValidators([Validators.required]);
@@ -715,13 +714,13 @@ export class CreateTopicComponent implements OnInit {
   }
 
 
-  validateform(courseForm){
+  validateform(courseForm) {
     const invalid = [];
     const controls = courseForm.controls;
     for (const name in controls) {
-        if (controls[name].invalid) {
-            invalid.push(name);
-        }
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
     }
     return invalid;
   }
@@ -774,25 +773,25 @@ export class CreateTopicComponent implements OnInit {
     this.spinner.hide();
   }
 
-  toggle_sub_trans(event,value,formdata){
-    if(value == "subtitle"){ 
-      if(event.checked){
-        formdata.get('videosubtitle').setValue("True");    
+  toggle_sub_trans(event, value, formdata) {
+    if (value == "subtitle") {
+      if (event.checked) {
+        formdata.get('videosubtitle').setValue("True");
         if (!formdata.get('topicimages').get(String(0))) {
           (formdata.get('topicimages') as FormArray).push(this.topicImages());
         }
-        if(!formdata.value.topicimages[0].file ){
+        if (!formdata.value.topicimages[0].file) {
           var vidObj = {
-            "file" : "",
-            "title" : ["1"]
+            "file": "",
+            "title": ["1"]
           }
-          formdata.get('topicimages').get(String(0)).setValue(vidObj);   
+          formdata.get('topicimages').get(String(0)).setValue(vidObj);
         }
-        
+
       }
-      else{
-        formdata.get('videosubtitle').setValue("false"); 
-        
+      else {
+        formdata.get('videosubtitle').setValue("false");
+
       }
     }
     // else{
@@ -805,25 +804,25 @@ export class CreateTopicComponent implements OnInit {
     // }
   }
 
-  addSubTile(value,formdata,index){
-    
-    var lastarray = formdata.value.topicimages[0].title.slice(-1)[0] 
-    if(!lastarray['code']){
-    this.toast.warning('Upload a file')
-    return false;
+  addSubTile(value, formdata, index) {
+
+    var lastarray = formdata.value.topicimages[0].title.slice(-1)[0]
+    if (!lastarray['code']) {
+      this.toast.warning('Upload a file')
+      return false;
     }
-    if(value == 'sub'){
+    if (value == 'sub') {
       formdata.value.topicimages[0].title.push((formdata.value.topicimages[0].title.length + 1).toString())
     }
     else {
       this.transcripts.push(this.transcripts.length)
     }
   }
-  removeSubTile(index,value,formdata){
-    
-    if(value == 'sub'){   
+  removeSubTile(index, value, formdata) {
+
+    if (value == 'sub') {
       formdata.value.topicimages[0].title.splice(index, 1);
-    return false;
+      return false;
     }
     else {
       this.transcripts.splice(index, 1);
@@ -844,17 +843,17 @@ export class CreateTopicComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(res => {
-      if(res.url)
-      this.onSelectFile(fileInput, item, formdata, index, res.url,'')      
+      if (res.url)
+        this.onSelectFile(fileInput, item, formdata, index, res.url, '')
       else
-      this.toast.warning('Try after sometime');
+        this.toast.warning('Try after sometime');
     });
   }
 
-  isNumberKey(evt){
+  isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 58))
-        return false;
+      return false;
     return true;
-}
+  }
 }
