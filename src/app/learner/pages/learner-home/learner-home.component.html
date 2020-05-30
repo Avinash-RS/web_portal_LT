@@ -7,7 +7,7 @@
           <h2>Courses yet to start</h2>
           <div class="row">
             <div class="col-10">
-              <span class="count">{{yetToStart ? yetToStart.totalCount : '0'}}</span>
+              <span class="count">{{yetToStart?.totalCount}}</span>
             </div>
             <div class="col-2">
               <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
@@ -15,12 +15,19 @@
           </div><br>
 
           <div class="row">
-            <div class="col-8">
+            <div class="col-8" *ngIf="yetToStart?.IncDecPec != false">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{yetToStart ? yetToStart.percent : '0'}}</span>
+              <span class="trendno">{{yetToStart?.valueIncDecPec}}%</span>
             </div>
-            <div class="col-4">
+            <div class="col-8"  *ngIf="yetToStart?.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{yetToStart?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-4"  *ngIf="yetToStart?.IncDecPec != false">
               <span class="text">Up from Yesterday</span>
+            </div>
+            <div class="col-4 " *ngIf="yetToStart?.IncDecPec == false">
+              <span class="text">Down from Yesterday</span>
             </div>
           </div>
         </div>
@@ -31,22 +38,29 @@
           <h2>Courses in-progress</h2>
           <div class="row">
             <div class="col-10">
-              <span class="count">{{incomplete ? incomplete.totalCount : '0'}}</span>
+              <span class="count">{{incomplete?.totalCount}}</span>
             </div>
             <div class="col-2">
               <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
             </div>
           </div><br>
-
           <div class="row">
-            <div class="col-8">
+            <div class="col-8" *ngIf="incomplete?.IncDecPec != false">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{incomplete ? incomplete.percent : '0'}}</span>
+              <span class="trendno">{{incomplete?.valueIncDecPec}}%</span>
             </div>
-            <div class="col-4">
+            <div class="col-8"  *ngIf="incomplete?.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{incomplete?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-4"  *ngIf="incomplete?.IncDecPec != false">
               <span class="text">Up from Yesterday</span>
             </div>
+            <div class="col-4 " *ngIf="incomplete?.IncDecPec == false">
+              <span class="text">Down from Yesterday</span>
+            </div>
           </div>
+ 
         </div>
       </div>
     </div>
