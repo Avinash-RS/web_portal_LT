@@ -3,6 +3,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'cdk-user-menu',
@@ -10,9 +11,9 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 	styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent implements OnInit {
-	isOpen: boolean = false;
+	isOpen = false;
 
-	//currentUser = null;
+	// currentUser = null;
 	Afser;
 
 
@@ -34,7 +35,7 @@ export class UserMenuComponent implements OnInit {
 
 
 	constructor(private elementRef: ElementRef, public services: CommonServicesService, private alert: AlertServiceService,
-		private router: Router, private gs: GlobalServiceService, ) {
+		private router: Router, private gs: GlobalServiceService, private http: HttpClient, ) {
 		// getAdminName
 		this.userDetailes =
 			JSON.parse(localStorage.getItem('adminDetails')) || null;
@@ -43,31 +44,37 @@ export class UserMenuComponent implements OnInit {
 
 
 		this.gs.adminName.subscribe((message) => {
-			var msg = message.replace('"', '');
-			var msg1 = msg.replace('"', '');
+			const msg = message.replace('"', '');
+			const msg1 = msg.replace('"', '');
 			this.userName = msg1;
 		}
-		)
+		);
 	}
 
 	logout() {
 		this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
 			if (logout.data.logout && logout.data.logout.success) {
 				localStorage.clear();
+				this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+					localStorage.setItem('Systemip', res.ip);
+				});
 				this.userDetailes = null;
-				this.router.navigate(['/Admin/login'])
-			}
-			else if (logout.data.logout && !logout.data.logout.success) {
-				if (logout.data.logout.error_msg == "Authentication error. Token required.") {
+				this.router.navigate(['/Admin/login']);
+			} else if (logout.data.logout && !logout.data.logout.success) {
+				if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
 					localStorage.clear();
+					this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+						localStorage.setItem('Systemip', res.ip);
+					});
 					this.userDetailes = null;
-					this.router.navigate(['/Admin/login'])
-				}
-				else
+					this.userDetailes = null;
+					this.router.navigate(['/Admin/login']);
+				} else {
 					this.alert.openAlert(logout.data.logout.message, null);
+				}
+			} else {
+				this.alert.openAlert('Please try again later', null);
 			}
-			else
-				this.alert.openAlert('Please try again later', null)
 		});
 	}
 	ngOnInit() {
