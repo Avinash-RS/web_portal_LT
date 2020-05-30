@@ -350,7 +350,7 @@ export class CreateCourseComponent implements OnInit {
                         this.router.navigate(['/Admin/auth/Wca/addmodule'],
                             {
                                 queryParams: {
-                                    courseId: this.queryData.viewingModule,
+                                    courseId: data.course_id,
                                     courseImage: this.courseForm.value.course_img_url,
                                     courseName: this.courseForm.value.course_name
                                 }
