@@ -189,178 +189,15 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-</div>
-<br>
+  <br>
+  <br>
 
-<div class="row box" *ngIf="showAppliedFiltre">
-  <div class="col-2 width-10 ">
-    <h3 class="text">Applied filters : </h3>
-  </div>
-
-  <div class="col-8">
-    <span class="cover" *ngFor="let item of selectedFilter?.category1; let i = index">{{item?.category_name}}
-      <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
-    </span>
-    <span class="cover" *ngFor="let item of selectedFilter?.category2; let i = index">{{item?.sub_category_name}}
-      <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
-    </span>
-    <span class="cover" *ngFor="let item of selectedFilter?.category3; let i = index">{{item?.super_sub_category_name}}
-      <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
-    </span>
-    <span class="cover" *ngFor="let item of selectedFilter?.filterVal; let i = index">{{item}}
-      <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
-    </span>
-  </div>
-
-  <div class="col-2 ">
-    <div class="smallline"></div>
-    <h3 class="text2" (click)="clearAll()"> Clear all filters </h3>
-
-  </div>
-</div>
-
-
-
-
-<!-- <div class="container"> -->
-<br>
-
-<div class="row">
-  <div class="col-3" *ngIf="showAppliedFiltre">
-    <div class="container1 containerShadow" *ngIf="showAppliedFiltre">
-      <h3><b>Language</b></h3><br>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data |
-          paginate: { itemsPerPage: course_languagePerPage,currentPage: course_languagePageNo}">
-          <label class="container1">
-            <input type="checkbox" name="language" (change)="checkedVal($event,language,'language')"
-              [checked]="language.checked" />
-            <div class="row">
-              <div class="col-10 pading">
-                {{language.course_language}}
-              </div>
-              <div class="col-2">
-                <span>{{language.count}}</span>
-              </div>
-            </div>
-            <span class="checkmark">
-            </span>
-          </label>
-        </li>
-      </ul><br>
-      <div style="text-align: right;" *ngIf="guidelineSearchVal?.course_data?.length > 5">
-        <span class="showmore" (click)="showmore('course_language')"> + Show more</span>
-      </div><br>
-
-      <div class="borderline"></div>
-      <br>
-      <h3><b>Instructor name</b></h3><br>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data | 
-          paginate: { itemsPerPage: authorPerPage,currentPage: authorPageNo}">
-          <label class="container1">
-            <input type="checkbox" name="authors" (change)="checkedVal($event,authors,'Instructor')"
-              [checked]="authors.checked" />
-            <div class="row">
-              <div class="col-10 pading">
-                {{authors.authordetails}}
-              </div>
-              <div class="col-2">
-                <span>{{authors.count}}</span>
-              </div>
-            </div>
-            <span class="checkmark">
-            </span>
-          </label>
-        </li>
-      </ul><br>
-      <div style="text-align: right;" *ngIf="guidelineSearchVal?.author_data?.length > 5">
-        <span class="showmore" (click)="showmore('author')"> + Show more</span>
-      </div><br>
-      <div class="borderline"></div><br>
-
-
-      <h3><b>Learning pace</b></h3><br>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data | 
-           paginate: { itemsPerPage: course_modePerPage,currentPage: course_modePageNo}">
-          <label class="container1">
-            <input type="checkbox" name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')"
-              [checked]="courseMode.checked" />
-            <div class="row">
-              <div class="col-10 pading">
-                {{courseMode.course_mode}}
-              </div>
-              <div class="col-2">
-                <span>{{courseMode.count}}</span>
-              </div>
-            </div>
-            <span class="checkmark">
-            </span>
-          </label>
-        </li>
-      </ul><br>
-      <div style="text-align: right;" *ngIf="guidelineSearchVal?.coursemode_data?.length > 5">
-        <span class="showmore" (click)="showmore('course_mode')"> + Show more</span>
-      </div><br>
-      <div class="borderline"></div><br>
-
-      <h3><b>Hours of content </b></h3><br>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <label class="container1">
-            <div class="range-control range">
-              <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
-            </div>
-          </label>
-        </li>
-      </ul>
-      <div class="borderline"></div><br>
-
-      <h3><b>Partners search</b></h3><br>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data | 
-          paginate: { itemsPerPage: coursepartnerPerPage,currentPage: coursepartnerPageno}">
-          <label class="container1">
-            <input type="checkbox" name="coursepartner" (change)="checkedVal($event,coursepartner,'coursepartner')"
-              [checked]="coursepartner.checked" />
-            <div class="row">
-              <div class="col-10 pading">
-                {{coursepartner.coursepartnerdetails}}
-              </div>
-              <div class="col-2">
-                <span>{{coursepartner.count}}</span>
-              </div>
-            </div>
-            <span class="checkmark">
-            </span>
-          </label>
-        </li>
-      </ul><br>
-      <div style="text-align: right;" *ngIf="guidelineSearchVal?.coursepartner_data?.length > 5">
-        <span class="showmore" (click)="showmore('coursepartner')"> + Show more</span>
-      </div><br>
-      <div class="borderline"></div><br>
-      <h3><b>Published date</b></h3><br>
-      <div class="row">
-        <div class="col-10 date">
-          <my-date-picker name="fromdate" [options]="FromdateOptions" placeholder="From date"
-            (dateChanged)="onDateChanged($event,'fromdate')"></my-date-picker>
-        </div>
-        <div class="col-6 todate">
-          <my-date-picker name="todate" [options]="TodateOptions" placeholder="To date"
-            (dateChanged)="onDateChanged($event,'todate')"></my-date-picker>
-        </div>
-        <!-- </div> -->
-        <!-- <div class="col-4 dateBox">
-            <dp-date-picker theme="dp-material"
-                            [config]="datePickerConfig" required="true">
-            </dp-date-picker>
-          </div> -->
-      </div>
+  <div class="row">
+    <div class="col-3" *ngIf="showAppliedFiltre">
+      <app-guideline-search></app-guideline-search>
     </div>
-  </div>
-  <ng-container *ngIf="showAppliedFiltre">
+   
+    <ng-container *ngIf="showAppliedFiltre">
     <div class="col-9">
       <div class="container">
         <div class="row" *ngIf="displayMode === 1">
@@ -421,8 +258,10 @@
 </div>
 
 <br>
-<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
+<div style="margin-left: 36%;margin-right: 36%;">
+<pagination-controls class="my-pagination"  (pageChange)="onpagination($event)">
 </pagination-controls>
+</div>
 
 <ng-template #getCategoryDialog>
   <mat-dialog-title>

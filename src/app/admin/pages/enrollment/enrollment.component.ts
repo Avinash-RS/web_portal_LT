@@ -66,7 +66,7 @@ export class EnrollmentComponent implements OnInit {
     this.columns = [
       { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
-      { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
+      { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
       { columnDef: 'username', header: 'User name', cell: (element: any) => `${element.username}` },
     ];
@@ -82,8 +82,8 @@ export class EnrollmentComponent implements OnInit {
 
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
-      { columnDef: 'request_date', header: 'Last received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
-      { columnDef: 'course_name', header: 'Course', cell: (elem: any) => `${elem.course_name}` },
+      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
+      { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem.course_name}` },
       { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem.totalCount}` },
       { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem.group_name}` },
     ];
@@ -106,7 +106,7 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesforgroup(data) {
     this.columns1 = [
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
-      { columnDef: 'course_name', header: 'Course', cell: (element: any) => `${element.course_name}` },
+      { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element.course_name}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
       { columnDef: 'username', header: 'User name', cell: (element: any) => `${element.username}` },
     ];
@@ -169,7 +169,7 @@ export class EnrollmentComponent implements OnInit {
       text: 'Are you sure want to proceed?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       cancelButtonText: 'No',
       confirmButtonText: 'Yes'
     }).then((result) => {
@@ -202,11 +202,10 @@ export class EnrollmentComponent implements OnInit {
             this.dataSource.data = [];
             this.radiobuttonchange();
           }
-          Swal.fire(
-            'Successfully Approved',
-            'A confirmation has been sent to the user email id',
-            // 'success'
-          );
+          Swal.fire({
+            title: '<div>Successfully Approved</div> <br> ',
+            text: '<div>A confirmation has been sent to user email ids</div> <br>',
+          });
         }
       });
       }
@@ -220,7 +219,7 @@ export class EnrollmentComponent implements OnInit {
       input: 'textarea',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Ok'
     }).then((result) => {
       if (result.value) {
@@ -284,7 +283,7 @@ export class EnrollmentComponent implements OnInit {
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
-      const data = { group_id: row.group_id, pagenumber: 0, is_individual: true, course_id: 'undefined' };
+      const data = { group_id: row.group_id, pagenumber: 0, is_individual: true, course_id: row.course_id };
       this.dialogopened = true;
       this.dataSource1.data = [];
       this.getenrolledcoursesforgroup(data);

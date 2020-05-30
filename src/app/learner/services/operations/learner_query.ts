@@ -663,22 +663,26 @@ query getlearnerdashboarddetails($user_id: String){
     data{
     courseEnrolled{
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     suspend{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     incomplete{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     completed{
     _id
     totalCount
-    percent
+    IncDecPec
+    valueIncDecPec
     }
     lastAccessedCourses{
     course_name
@@ -688,3 +692,58 @@ query getlearnerdashboarddetails($user_id: String){
     }
 }
 }`;
+
+export const getLearnerenrolledCourses = gql`
+query getLearnerenrolledCourses($user_id: String){
+  getLearnerenrolledCourses(user_id:$user_id){
+    success
+    message
+    data{
+      suspend{
+        _id
+        totalCount
+        IncDecPec
+        valueIncDecPec
+      }
+      incomplete{
+        _id
+        totalCount
+        IncDecPec
+        valueIncDecPec
+      }
+      courseEnrolled{
+        course_id
+        course_name
+        course_img_url
+        rating
+        price
+        totalLearners
+        coursePlayerStatus{
+          status
+          }
+      }
+    }
+  }
+}`;
+
+
+//getting popular course
+
+export const getPopularcourse = gql`
+    query getPopularcourse{
+      getPopularcourse {
+        success
+        error_msg
+        data{
+        course_id
+        course_name
+        course_img_url
+        course_description
+        rating
+        price
+        learner_count
+        enrollment_end
+        enrollment_start
+        }
+      }
+    }`;

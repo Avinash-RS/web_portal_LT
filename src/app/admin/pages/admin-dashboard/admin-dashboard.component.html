@@ -230,11 +230,41 @@
         </button>
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
-            <ul class="hoverr">
-              <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
-            </ul>
+            <!-- <ul class="hoverr"> -->
+              <ul class="">
+                <li (click)="gotoCoursePage('draft')">
+                  <div class="row">
+                    <div class="col-10">
+                      Courses in draft
+                    </div>
+                    <div class="col-2">
+                      {{newRegisterLearses?.DraftCourse}}
+                    </div>
+                  </div>
+                </li>
+  
+                <li (click)="gotoCoursePage('created')">
+                  <div class="row">
+                    <div class="col-10">
+                      Courses to be published 
+                    </div>
+                    <div class="col-2">
+                      {{newRegisterLearses?.DraftCourse}}
+                    </div>
+                  </div>
+                </li>
+                <li (click)="gotoCoursePage('enrollment')">
+                  <div class="row">
+                    <div class="col-10">
+                      Enrollment Pending requests
+                    </div>
+                    <div class="col-2">
+                      {{newRegisterLearses?.enrollPending}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            <!-- </ul> -->
             </div>
           </div>
 
@@ -334,9 +364,37 @@
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
             <ul class="">
-              <li (click)="gotoCoursePage('draft')">Courses in draft <span class="todo">{{newRegisterLearses?.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
-              <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
+              <li (click)="gotoCoursePage('draft')">
+                <div class="row">
+                  <div class="col-10">
+                    Courses in draft
+                  </div>
+                  <div class="col-2">
+                    {{newRegisterLearses?.DraftCourse}}
+                  </div>
+                </div>
+              </li>
+
+              <li (click)="gotoCoursePage('created')">
+                <div class="row">
+                  <div class="col-10">
+                    Courses to be published 
+                  </div>
+                  <div class="col-2">
+                    {{newRegisterLearses?.DraftCourse}}
+                  </div>
+                </div>
+              </li>
+              <li (click)="gotoCoursePage('enrollment')">
+                <div class="row">
+                  <div class="col-10">
+                    Enrollment Pending requests
+                  </div>
+                  <div class="col-2">
+                    {{newRegisterLearses?.enrollPending}}
+                  </div>
+                </div>
+              </li>
             </ul>
             </div>
           </div>
@@ -381,21 +439,51 @@
         </div>
   
       <div class="col-4" >
-          <button class="customButton" (click)="isCollapsed = !isCollapsed">To Do List
+          <button class="customButton" (click)="isCollapsed = !isCollapsed">To do list
             <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
           </button>
             <div class="card"  *ngIf="isCollapsed">
               <div class="card-body">
-              <ul class="">
-                <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
-                <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
-                <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
-              </ul>
+                <!-- <ul class="hoverr"> -->
+                  <ul class="">
+                    <li (click)="gotoCoursePage('draft')">
+                      <div class="row">
+                        <div class="col-10">
+                          Courses in draft
+                        </div>
+                        <div class="col-2">
+                          {{newRegisterLearses?.DraftCourse}}
+                        </div>
+                      </div>
+                    </li>
+      
+                    <li (click)="gotoCoursePage('created')">
+                      <div class="row">
+                        <div class="col-10">
+                          Courses to be published 
+                        </div>
+                        <div class="col-2">
+                          {{newRegisterLearses?.DraftCourse}}
+                        </div>
+                      </div>
+                    </li>
+                    <li (click)="gotoCoursePage('enrollment')">
+                      <div class="row">
+                        <div class="col-10">
+                          Enrollment Pending requests
+                        </div>
+                        <div class="col-2">
+                          {{newRegisterLearses?.enrollPending}}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                <!-- </ul> -->
               </div>
             </div>
   
             <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments requests  {{newRegisterLearses?.allEnrollement}}
-              <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+              <i class="fa fa-angle-down arrow arrow3 " aria-hidden="true"></i>
             </button>
               <div class="card"  *ngIf="isCollapsed1">
                 <div class="card-body">
@@ -657,21 +745,51 @@
           </div>
     
         <div class="col-4" >
-            <button class="customButton" (click)="isCollapsed = !isCollapsed">To Do List
+            <button class="customButton" (click)="isCollapsed = !isCollapsed">To do list
               <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
             </button>
               <div class="card"  *ngIf="isCollapsed">
                 <div class="card-body">
-                <ul class="">
-                  <li class="" (click)="gotoCoursePage('draft')">Courses in draft <span class="todo" >{{newRegisterLearses?.DraftCourse}}</span></li>
-                  <li (click)="gotoCoursePage('created')">Courses to be published <span class="tode2">{{newRegisterLearses?.DraftCourse}}</span></li>
-                  <li (click)="gotoCoursePage('enrollment')">Enrollment Pending requests<span class="tode3">{{newRegisterLearses?.enrollPending}}</span></li>
-                </ul>
+                  <!-- <ul class="hoverr"> -->
+                    <ul class="">
+                      <li (click)="gotoCoursePage('draft')">
+                        <div class="row">
+                          <div class="col-10">
+                            Courses in draft
+                          </div>
+                          <div class="col-2">
+                            {{newRegisterLearses?.DraftCourse}}
+                          </div>
+                        </div>
+                      </li>
+        
+                      <li (click)="gotoCoursePage('created')">
+                        <div class="row">
+                          <div class="col-10">
+                            Courses to be published 
+                          </div>
+                          <div class="col-2">
+                            {{newRegisterLearses?.DraftCourse}}
+                          </div>
+                        </div>
+                      </li>
+                      <li (click)="gotoCoursePage('enrollment')">
+                        <div class="row">
+                          <div class="col-10">
+                            Enrollment Pending requests
+                          </div>
+                          <div class="col-2">
+                            {{newRegisterLearses?.enrollPending}}
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  <!-- </ul> -->
                 </div>
               </div>
     
               <button class="customButton" (click)="isCollapsed1 = !isCollapsed1">Enrollments Requests  {{newRegisterLearses?.allEnrollement}}
-                <i class="fa fa-angle-down arrow arrow1 " aria-hidden="true"></i>
+                <i class="fa fa-angle-down arrow arrow3 " aria-hidden="true"></i>
               </button>
                 <div class="card"  *ngIf="isCollapsed1">
                   <div class="card-body">
@@ -841,11 +959,11 @@
           <div class="row">
             <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
+              <span class="trendno">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}%</span>
             </div>
             <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec == false">
               <img class="trendiconcourse" src="../../../../assets/learner/Trending_down.svg">
-              <span class="trendnodown">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}</span>
+              <span class="trendnodown">{{courseCount?.availableCoursePec30Pec.valueIncDecPec}}%</span>
             </div>
             <div class="col-md-6" *ngIf="courseCount?.availableCoursePec30Pec.IncDecPec != false">
               <span class="text">Up from yesterday</span>

@@ -1,23 +1,23 @@
 <app-header></app-header>
 <mat-tab-group style="margin-top: 5%;">
-  <mat-tab label="My Courses" > 
+  <mat-tab label="My Courses">
     <div class="row">
       <div class="col-md-6 col-sm-12 col-12">
         <div class="smallbox">
           <h2>Courses yet to start</h2>
           <div class="row">
             <div class="col-10">
-              <span class="count">26</span>
+              <span class="count">{{yetToStart ? yetToStart.totalCount : '0'}}</span>
             </div>
             <div class="col-2">
               <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
             </div>
           </div><br>
-    
+
           <div class="row">
             <div class="col-8">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4</span>
+              <span class="trendno">{{yetToStart ? yetToStart.percent : '0'}}</span>
             </div>
             <div class="col-4">
               <span class="text">Up from Yesterday</span>
@@ -31,17 +31,17 @@
           <h2>Courses in-progress</h2>
           <div class="row">
             <div class="col-10">
-              <span class="count">26</span>
+              <span class="count">{{incomplete ? incomplete.totalCount : '0'}}</span>
             </div>
             <div class="col-2">
               <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
             </div>
           </div><br>
-    
+
           <div class="row">
             <div class="col-8">
               <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-              <span class="trendno">4</span>
+              <span class="trendno">{{incomplete ? incomplete.percent : '0'}}</span>
             </div>
             <div class="col-4">
               <span class="text">Up from Yesterday</span>
@@ -50,14 +50,59 @@
         </div>
       </div>
     </div>
+    <!-- ---------------------My Enrolled courses section start------------------------- -->
     <div style="margin-top: 3%;"></div>
     <h3>My Enrolled Courses</h3>
-    <div class ="vertical"></div> 
+    <div class="vertical"></div>
+    <div class="row">
+      <div class="col-12">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container *ngFor="let eCourse of enrolledCourses ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="eCourse" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+              </div>
+            </ng-container>
+            <div class="col-md-12" style="text-align: center;">
+              <h2 *ngIf="enrolledCourses && enrolledCourses.length == 0">
+                No courses yet
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------My Enrolled courses section end------------------------- -->
+    <!-- ---------------------Wishlist section start------------------------- -->
+    <div style="margin-top: 3%;"></div>
+    <h3>Wishlist</h3>
+    <div class="vertical"></div>
+    <div class="row">
+      <div class="col-12">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container *ngFor="let wList of wishList ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="wList" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+              </div>
+            </ng-container>
+            <div class="col-md-12" style="text-align: center;">
+              <h2 *ngIf="wishList && wishList.length == 0">
+                No courses yet
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------Wishlist section end------------------------- -->
     <div style="margin-bottom: 10%;"></div>
   </mat-tab>
 
-  <mat-tab label="Explore" > 
-    <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
+  <mat-tab label="Explore">
+    <!-- <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
       <div class="col-md-8 section_1_a">
         <h1 class="welcom">Welcome to </h1>
         <h1 class="lxp">LXP Platform </h1>
@@ -68,40 +113,43 @@
         <button class="whitebgBtn">Add Courses</button>
       </div>
      </div>
-    </div>
+    </div> -->
 
     <div style="margin-top: 3%;"></div>
     <div class="row">
       <div class="col-9">
-        <h3>All Courses   <span class="tot">(Total 2500 results )</span></h3>
-        <div class ="vertical"></div> 
+        <h3>All Courses <span class="tot">(Total 2500 results )</span></h3>
+        <div class="vertical"></div>
       </div>
       <div class="col-3">
         <button class="filterbtn"> <i class="fa fa-filter colrr"></i>
           Filter
         </button>
 
-        <select  class="category" (change)="onChange($event.target.value)">
-          <option>Popular Courses</option>
-          </select>
+        <select class="category" (change)="onChange($event.target.value)">
+          <option value="allcourses">All Courses</option>
+          <option value="popularCourse">Popular Courses</option>
+        
+        </select>
       </div>
     </div>
     <div class="row">
-      <div class="col-9">
+      <div class="col-12">
         <div class="container containerShadow">
           <div class="row">
             <ng-container
               *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+                [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+              </app-course-component>  <br>
               </div>
             </ng-container>
           </div>
-          </div>
+        </div>
+      </div>
     </div>
-    </div>
-   
+
 
   </mat-tab>
 </mat-tab-group>

@@ -859,8 +859,8 @@ export const getcoursesforcatalogue = gql`
 
 
 export const getAdminOverview = gql`
-  query getAdminOverview($days: Int){
-    getAdminOverview(days: $days) {
+  query getAdminOverview($days: Int,$user_id:String){
+    getAdminOverview(days: $days,user_id:$user_id) {
       success
       error_msg
     message{

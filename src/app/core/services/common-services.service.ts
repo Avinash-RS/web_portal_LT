@@ -3,9 +3,9 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName } from '@core/services/operations/common_query';
-import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse
-} from '@core/services/operations/common_mutation';
+  getCoursesByName} from '@core/services/operations/common_query';
+import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
+  getCourseCategorySearch, getDetailsCount} from '@core/services/operations/common_mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,18 @@ export class CommonServicesService {
 
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
+
+  globalFilter$ = new Subject<any>();
+  globalFilter = this.globalFilter$.asObservable();
+
+  globalCourses$ = new Subject<any>();
+  globalCourses = this.globalCourses$.asObservable();
+
+  globalFilterCategory$ = new Subject<any>();
+  globalFilterCategory = this.globalFilterCategory$.asObservable();
+
+  globalCategory$ = new Subject<any>();
+  globalCategory = this.globalCategory$.asObservable();
 
 
   logout(user_id, is_admin) {
@@ -38,11 +50,11 @@ export class CommonServicesService {
     });
   }
 
-  viewWishlist(user_id) {
+  viewWishlist(userid) {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
-        user_id,
+        user_id:userid,
       }
     });
   }
@@ -113,6 +125,32 @@ export class CommonServicesService {
         group_id,
         course_id,
       }
+    });
+  }
+  postGuildelineSearchData(category: any,sub_category: any,super_sub_category: any ,course_language:any,course_mode:any,
+    author_details:any,partner_details:any,
+    pagenumber,perPage,publishedToDate,publishedFromDate){
+    return this.Apollo.query({
+      query: getCourseCategorySearch,
+      variables: {
+        category: category,
+        sub_category: sub_category,
+        super_sub_category:super_sub_category,
+        course_language:course_language,
+        course_mode:course_mode,
+        author_details:author_details,
+        partner_details: partner_details,
+       
+        pagenumber:pagenumber,
+        perPage:perPage,
+        publishedFromDate:publishedFromDate,
+        publishedToDate:publishedToDate
+      }
+    });
+  }
+  getGuidelineSearch(){
+    return this.Apollo.query({
+      query: getDetailsCount
     });
   }
 }

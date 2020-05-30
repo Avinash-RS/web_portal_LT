@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgxMaskModule } from 'ngx-mask';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng5SliderModule } from 'ng5-slider';
+import { MyDatePickerModule } from 'mydatepicker';
 // local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -30,6 +33,7 @@ import { VgBufferingModule } from 'videogular2/compiled/buffering';
 import { SearchComponent } from './shared/search/search.component';
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
+import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -51,7 +55,8 @@ const routes: Routes = [
     ListViewCourseComponentComponent,
     SearchComponent,
     DragDropImageDirective,
-    GuidelineSearchComponent
+    GuidelineSearchComponent,
+    LandingHeaderComponent
   ],
 
   imports: [
@@ -67,13 +72,17 @@ const routes: Routes = [
     VgOverlayPlayModule,
     VgBufferingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    Ng5SliderModule,
+    NgxPaginationModule,
+    MyDatePickerModule
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
   exports: [
     HeaderComponent,
+    LandingHeaderComponent,
     FooterComponent,
     CourseComponentComponent,
     TopCoursesComponent,
@@ -82,6 +91,7 @@ const routes: Routes = [
     CapslockDirective,
     StickyHeaderDirective,
     DataTableComponent,
+    VideoPlayerComponent,
     ListViewCourseComponentComponent,
     GuidelineSearchComponent]
 })

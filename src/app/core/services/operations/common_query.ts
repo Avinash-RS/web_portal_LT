@@ -513,4 +513,5 @@ export const getCoursesByName = gql`
 
       }
   `;
+ 
 

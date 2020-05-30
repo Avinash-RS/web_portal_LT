@@ -78,7 +78,7 @@ html {
 
 @media only screen and (min-width: 770px) {
     :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -45%;
+        top: -37%;
     }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
@@ -152,7 +152,7 @@ html {
     color: $color-blank !important;
 }
 
-.form-control {
+.section_1_card_1 .form-control {
     width: 90%;
     z-index: 1;
     margin: auto;
@@ -166,68 +166,39 @@ html {
     height: auto;
 }
 
+.noneC {
+    opacity: -1;
+}
+
+.dispC {
+    z-index: 11111;
+    top: 25%;
+    width: 65px;
+    position: fixed;
+    background-color: #1F3777 !important;
+    right: 1px;
+    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
+    opacity: 0.7 !important;
+    img {
+        margin: 25%;
+        cursor: pointer;
+    }
+}
+
+// .op {
+//     opacity: 0.5;
+// }
+
+// .op1 {
+//     opacity : 1;
+// }
+
 //End of Mythreyi
 
 
 //HEADER
-.navbar-light .navbar-nav .nav-link {
-    color: blue;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: blue;
-}
-
-// .navbar-expand-lg .navbar-nav .nav-link {
-//     margin-left: 32%;
-
-// }
-.navbar-expand-lg .navbar-nav .nav-link {
-
-    padding-left: 0rem;
-    padding-right: 0rem;
-
-}
-
-.navbar-expand-lg .navbar-nav .link_1 {
-    margin-left: 314px
-}
-
-.navbar-expand-lg .navbar-nav .link_2 {
-    margin-left: 20px
-}
-
-.navbar-expand-lg .navbar-nav .link_3 {
-    margin-left: 20px
-}
-
-.navbar-expand-lg .navbar-nav .link_4 {
-    margin-left: -20px
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    margin-right: 18% !important;
-}
-
-.logo_img {
-    width: 112px;
-    height: 103px;
-}
-
-.btn_btn {
-    color: white;
-    background-color: blue;
-    border: none;
-    border-radius: 20px;
-    width: 18%;
-}
-
-.width_10 {
-    width: 10% !important;
-}
 
 //END OF HEADER
 
@@ -247,6 +218,10 @@ a {
 
 .m-t-10 {
     margin-top: 10px !important;
+}
+
+.m-b-10 {
+    margin-bottom: 10px !important;
 }
 
 .m-t-25 {
@@ -370,3 +345,75 @@ strong {
 .shadow {
     box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f_size_40 {
+    font-size: 40px;
+  }
+.landing-text{
+ color:$color-white ;
+ background-color: $color-subhead ;
+//  width: 334px;
+//  height: 42px;
+ opacity:65%;
+ line-height: 1.4;
+ display:inline;
+}
+
+.color_community{
+    background-color: $color-subhead !important ;
+    width: 461px;
+    color:$color-white ;
+    opacity:65%
+}
+
+.explore-btn{
+background-color:$color-subhead ;
+color:$color-white !important;
+border: none;
+border-radius: 30px;
+height:40px;
+width:150px;
+}
+
+.color_1{
+  color:  $color-subhead;
+  word-wrap: break-word;
+  padding-right: 5px;
+}
+
+
+.mb-3{
+    margin-bottom: 1rem!important;
+    width: 100%;
+}
+
+.input-group-text{
+    background-color:$color-subhead;
+    color:$color-white !important;
+}
+.input-group {
+    background-color:$color-white;
+    padding-right: 5px;
+}
+
+.search-bar{
+    background-color:$color-white !important ;
+    background-color: white !important;
+    height: 40px;
+    font-style: italic;
+}  
