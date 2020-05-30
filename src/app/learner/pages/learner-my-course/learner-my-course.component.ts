@@ -24,50 +24,49 @@ export class LearnerMyCourseComponent implements OnInit {
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
-      this.userDetails = this.gs.checkLogout()
+      this.userDetails = this.gs.checkLogout();
       this.viewMycourse();
       this.viewWishlist();
       this.gs.callWishlist.subscribe(message => {
-        this.viewMycourse()
+        this.viewMycourse();
         this.viewWishlist();
-      })
+      });
     }
-    //for responsive
-    if (window.innerWidth <= 480)
+    // for responsive
+    if (window.innerWidth <= 480) {
       this.breakpoint = 1;
-    else if (window.innerWidth >= 480 && window.innerWidth <= 768)
+    } else if (window.innerWidth >= 480 && window.innerWidth <= 768) {
       this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
-    else
+         } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
       this.breakpoint = 4;
+         }
   }
 
   onResize(event) {
-    if (event.target.innerWidth <= 480)
+    if (event.target.innerWidth <= 480) {
       this.breakpoint = 1;
-    else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768)
+    } else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768) {
       this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
+         } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
       this.breakpoint = 3;
-    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
+         } else {
       this.breakpoint = 4;
+         }
   }
 
   viewMycourse() {
-    this.loader.show()
+    this.loader.show();
     this.service.getMyCourse(this.userDetails._id).subscribe((getMyCourse: any) => {
       if (getMyCourse.data.get_course_by_user) {
         if (getMyCourse.data.get_course_by_user.success) {
           this.myCoursesList = getMyCourse.data.get_course_by_user.message;
-          this.loader.hide
+          this.loader.hide();
         }
       }
     });
   }
   viewWishlist() {
-    var userdetail = this.gs.checkLogout()
+    const userdetail = this.gs.checkLogout();
     this.commonService.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;

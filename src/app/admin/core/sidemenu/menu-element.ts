@@ -66,5 +66,12 @@ export const menus = [
                 'open': true,
             }
         ]
-    }
+    },
+    {
+        'name': 'Audit Log',
+        'link': 'auditlog',
+        'icon': 'widgets',
+        'chip': false,
+        'open': true,
+    },
 ];

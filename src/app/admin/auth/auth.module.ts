@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
     MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule,
     MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -29,6 +30,7 @@ import { DndDirective } from '../core/dnd.directive';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
 import { PipeModule } from '../../pipes/pipe.module';
 // import { SearchPipe } from '../../pipes/search.pipe';
+import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -43,6 +45,7 @@ import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dash
 import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
+import {MatNativeDateModule} from '@angular/material';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
@@ -85,6 +88,8 @@ import { ChartsModule } from 'ng2-charts';
         NgxPaginationModule,
         MatSortModule,     // WcaModule
         ChartsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
        
     ],
 
@@ -93,7 +98,7 @@ import { ChartsModule } from 'ng2-charts';
     declarations: [DndDirective, CatalogueManagementComponent,AdminDashboardComponent,
         AuthComponent, UserManagementComponent, ReportManagementComponent,
         AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
-        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent],
+        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

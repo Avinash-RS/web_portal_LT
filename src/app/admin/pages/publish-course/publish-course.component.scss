@@ -10,24 +10,42 @@
 }
 
 .cardheight {
-    height: 400px !important;
+    height: 500px !important;
 }
+
+.alert-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+
+
 .left {
     z-index: 1 !important;
     box-shadow: 0px 0px 12px #6c757d;
     overflow: auto !important
 }
 
+:host ::ng-deep .mat-form-field-infix {
+    width: 280px !important;
+}
+
+.shadow {
+    box-shadow: 2px 0px 10px $box-shadow;
+}
+
 .right {
     box-shadow: 0px 0px 7px #6c757d;
 
-  
+
 }
+
 .list-title {
     text-align: center;
     border-radius: 5px;
-  
+
 }
+
 .color_grey {
     color: $color-darkGrey;
 }

@@ -26,7 +26,11 @@ export class PublishCourseComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   courseCount: any;
+  catalogueList: any = [];
+  selectedcatalogue: any = null;
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+
+
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
@@ -44,6 +48,7 @@ export class PublishCourseComponent implements OnInit {
     localStorage.setItem('role', 'admin');
     this.gs.checkLogout();
     this.getallcategories();
+    this.getallcatelogue();
   }
 
   getallcategories() {
@@ -256,6 +261,18 @@ export class PublishCourseComponent implements OnInit {
     }
   }
 
+  getallcatelogue() {
+    this.service.getcatalogues().subscribe((result: any) => {
+      this.catalogueList = result?.data?.getallcatalogue?.message;
+    });
+  }
+  selectcatalogue(event, state: any) {
+    if (event.source.selected) {
+      this.selectedcatalogue = state.catalogue_id;
+      console.log(this.selectedcatalogue);
+    }
+  }
+
   publishCourse() {
     let level;
     if (this.selectedSuperSubCategory.super_sub_category_id !== undefined) {
@@ -274,8 +291,19 @@ export class PublishCourseComponent implements OnInit {
           .subscribe((res: any) => {
             if (res.data && res.data.publishcourse) {
               if (res.data.publishcourse.success) {
-                this.alert.openAlert('Course published successfully', null);
-                this.route.navigate(['/Admin/auth/Wca']);
+                this.service.addCourse(this.selectedcatalogue, [this.course.id], false).subscribe((result: any) => {
+                  this.selectedcatalogue = null;
+                  if (result && result.data) {
+                    if (result.data.coursecataloguemapping?.success) {
+                      this.alert.openAlert('Course published successfully', null);
+                      this.route.navigate(['/Admin/auth/Wca']);
+                    } else {
+                      this.alert.openAlert(result.data.coursecataloguemapping?.message, null);
+                    }
+                  } else {
+                    this.alert.openAlert('Please try again later', null);
+                  }
+                });
               } else {
                 this.alert.openAlert(res.data.publishcourse.message === '' ? res.data.publishcourse.error_msg :
                   res.data.publishcourse.message, null);
@@ -316,5 +344,6 @@ export class PublishCourseComponent implements OnInit {
     this.selectedSubCategory = {};
     this.selectedCategory = {};
     this.selectedSuperSubCategory = {};
+    this.selectedcatalogue = null;
   }
 }
