@@ -22,7 +22,8 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminServicesService {
 
-  // tslint:disable-next-line:no-shadowed-variable
+  _currentUser: any;
+
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   // for add user - group dropdown
@@ -468,11 +469,12 @@ export class AdminServicesService {
 
  // Dashboard
  // getting admin dashboard overview data
-  getAdminOverview(days) {
+  getAdminOverview(days,user_id) {
     return this.Apollo.query({
       query: getAdminOverview,
       variables: {
         days: days,
+        user_id:user_id
       }
     });
   }
