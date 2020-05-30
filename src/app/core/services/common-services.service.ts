@@ -50,11 +50,11 @@ export class CommonServicesService {
     });
   }
 
-  viewWishlist(user_id) {
+  viewWishlist(userid) {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
-        user_id,
+        user_id:userid,
       }
     });
   }

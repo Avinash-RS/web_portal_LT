@@ -8,7 +8,7 @@ import {
   getmoduleData,get_user_detail_username, check_existing_user,  get_all_category,
   get_sub_category,get_course_by_subcategory, get_module_topic,
   getsupersubcategory,getLevelCategoryData,getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails,
-  get_all_course_by_usergroup
+  get_all_course_by_usergroup,getPopularcourse
 } from "./operations/learner_query";
 
 
@@ -479,6 +479,12 @@ export class LearnerServicesService {
       variables:{
         user_id: user_id
       }
+    });
+  }
+  getPopularcourse(){
+    return this.Apollo.query({
+      query: getPopularcourse,
+      variables:{}
     });
   }
 }
