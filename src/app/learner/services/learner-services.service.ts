@@ -17,7 +17,7 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile, getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest
+  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,
 } from './operations/learner_mutation';
 
 import { HttpClient } from '@angular/common/http';
