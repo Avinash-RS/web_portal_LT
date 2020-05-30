@@ -303,6 +303,7 @@ public isCollapsed1 = false;
   enrollementpert: any;
   top5CourseDefault = 'topfiveEnroll';
   top5CourseData: any;
+  adminDetails: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -319,6 +320,7 @@ public isCollapsed1 = false;
   }
 
   ngOnInit() {
+    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'))
     this.newRegistrationsChart(this.chartFilterdays);
     this.activeAndInactiveLearnerChart(this.actvsinactDay);
     this.stuVsProfChart(this.stuvsprofDay);
@@ -387,7 +389,7 @@ public isCollapsed1 = false;
   }
 
   newRegistrationsChart(chartFilterdays){
-    this.service.getAdminOverview(chartFilterdays).subscribe((res: any) => {
+    this.service.getAdminOverview(chartFilterdays,this.adminDetails.user_id).subscribe((res: any) => {
       if(res.data.getAdminOverview.success == true){
         this.newRegisterLearses = res.data.getAdminOverview.message;
         this.lineChartLabels = this.newRegisterLearses?.perDays.flatMap(i => i._id);
