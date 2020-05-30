@@ -67,14 +67,22 @@
     float: right;
 }
 
-.mat-icon {
-    background-repeat: no-repeat;
-    display: inline-block;
-    fill: currentColor;
-    height: 24px;
-    width: 19px;
-    margin: -14px 0px -8px 605px;
+.delete-icon{
+  background-repeat: no-repeat !important;
+  display: inline-block !important;
+  fill: currentColor !important;
+  height: 24px !important;
+  width: 19px !important;
+  margin: -14px 0px -8px 687px !important;
 }
+// .mat-icon {
+//     background-repeat: no-repeat;
+//     display: inline-block;
+//     fill: currentColor;
+//     height: 24px;
+//     width: 19px;
+//     margin: -14px 0px -8px 687px;
+// }
 
 .img1 {
     vertical-align: middle;
