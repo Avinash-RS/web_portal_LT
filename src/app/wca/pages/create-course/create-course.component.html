@@ -348,9 +348,9 @@
                           *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
                           <div [formGroupName]="i">
                             <div class="row crs1 margbtm">
-                              <div class="col-md-3">Text</div>
+                              <div class="col-md-3">Description</div>
                               <div class="col-md-9"><textarea type="text" class="inputs inputmainWidth"
-                                  style="resize: none;" (keydown)="_handleKeydown($event)" placeholder="Enter the text"
+                                  style="resize: none;" (keydown)="_handleKeydown($event)" placeholder="Enter the description"
                                   formControlName="text"></textarea> </div>
                             </div>
 
