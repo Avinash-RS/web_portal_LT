@@ -57,11 +57,10 @@ export class LearnerHomeComponent implements OnInit {
   // function to fetch the wishlist of the user
  
   viewWishlist() {
-    console.log(this.userDetailes.user_id)
-    this.commonServices.viewWishlist(this.userDetailes.user_id).subscribe((viewWishlist: any) => {
+    const userdetail = this.gs.checkLogout();
+    this.commonServices.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishList = viewWishlist.data.view_wishlist.message;
-        console.log('wishlist response',viewWishlist);
       }
     });
   }
