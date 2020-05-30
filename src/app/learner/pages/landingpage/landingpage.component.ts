@@ -5,6 +5,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from 'rxjs/operators';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -44,7 +45,7 @@ export class LandingpageComponent implements OnInit {
   trendingCourse: any = [];
   popularCOurse = [];
 
-  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document
+  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, private alert: AlertServiceService
   ,           public learnerservice: LearnerServicesService ) {
 
     this.popular();
@@ -169,6 +170,8 @@ export class LandingpageComponent implements OnInit {
     this.learnerservice.createGuidanceRequestLanding(this.detailsForm.value.username, this.detailsForm.value.email,
       this.detailsForm.value.course, localStorage.getItem('Systemip'))
     .subscribe((result: any) => {
+      this.detailsForm.reset();
+      this.alert.openAlert('Requested successfully', null);
     });
   }
 
