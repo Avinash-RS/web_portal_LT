@@ -719,3 +719,25 @@ query getLearnerenrolledCourses($user_id: String){
     }
   }
 }`;
+
+
+//getting popular course
+
+export const getPopularcourse = gql`
+    query getPopularcourse{
+      getPopularcourse {
+        success
+        error_msg
+        data{
+        course_id
+        course_name
+        course_img_url
+        course_description
+        rating
+        price
+        learner_count
+        enrollment_end
+        enrollment_start
+        }
+      }
+    }`;
