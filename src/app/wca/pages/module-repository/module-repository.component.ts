@@ -71,6 +71,9 @@ export class ModuleRepositoryComponent implements OnInit {
   }
 
   onModuleSelection(module, e) {
+    if(module.modulestatus == 'false') {
+      return false;
+    }
     const modDetails = {
       moduleid: module.moduleid,
       coursename: module.coursename,

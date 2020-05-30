@@ -44,4 +44,11 @@
         color: white !important;
         margin-left: 22%;
     }
+
+    .check-box-disable {
+        .check-box {
+            opacity: 0.5;
+            cursor: no-drop !important;
+        }
+    }
 }
