@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@
 import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
     MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule,
     MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -86,6 +87,7 @@ import { ChartsModule } from 'ng2-charts';
         NgxPaginationModule,
         MatSortModule,     // WcaModule
         ChartsModule,
+        MatDatepickerModule
        
     ],
 

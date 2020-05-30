@@ -10,6 +10,7 @@ import {
         MatListModule,
         MatTreeModule
        } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -51,7 +52,8 @@ import { AuditlogComponent } from './auditlog/auditlog.component';
         AdminCoreModule,
         RouterModule,
         NgxPaginationModule,
-        ChartsModule
+        ChartsModule,
+        MatDatepickerModule
    
          ],
     declarations: [   

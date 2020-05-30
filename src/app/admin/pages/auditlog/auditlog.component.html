@@ -1,4 +1,80 @@
-<button (click)="openviewdialog(viewdetaildialog)" class="button button8">Reject</button>
+<br>
+<div class="row">
+  <div class="col-lg-10">
+    <div>
+      <p>Filter by</p>
+    </div>
+    <div>
+      <form #searchForm="ngForm">
+        <!-- <div class="row" >
+            <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
+                <mat-form-field class="wid-100">
+                    <input matInput name="fromdate" [(ngModel)]="fromdate" [matDatepicker]="picker" placeholder="Choose from date"
+                      color="accent" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+              <div class=" col-lg-4 col-sm-12 col-xs-12 col-md-2">
+                  <mat-form-field class="wid-100"> 
+                      <input matInput name="todate" [(ngModel)]="todate" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
+                        [max]=today>
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+              </div>
+
+              
+                <div class="col-lg-4 col-sm-12 col-xs-12 col-md-4 pad-t-10">
+                   
+                   <span> <button class="btn  btn btn-primary button_border view-but"  (click)="filterdate(searchForm)">Filter</button></span>
+                   <span> <button class="btn  btn btn-danger button_border"  (click)="cancel(searchForm)">Reset</button></span>
+
+                </div> 
+                 
+      </div> -->
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="p-5px">
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <span class="desktop-data"> {{i+1}}</span>
+            <!-- <span class="mobile-data"> {{i+1}}</span> -->
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <mat-header-cell *matHeaderCellDef>
+            {{ column.header }}</mat-header-cell>
+          <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action" *ngIf="dataSource?.data?.length">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <button mat-icon-button (click)="openviewdialog(viewdetaildialog)" data-toggle="tooltip"
+              data-placement="top">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+      </mat-table>
+    </div>
+
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
 
 <ng-template #viewdetaildialog class="dialogPopup">
   <span class="close">
@@ -61,11 +137,9 @@
                  }} </label></label>
             </div>
           </div><br>
-                 </div>
+        </div>
       </form>
     </mat-dialog-content>
-   
   </mat-dialog-content>
- 
   <br>
 </ng-template>
