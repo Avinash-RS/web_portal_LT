@@ -16,7 +16,7 @@ export class LearnerHomeComponent implements OnInit {
   pagenumber = 0;
   sort_type: any = "A-Z";
   allcourses: any;
-  enrolledCourses: any =[];
+  enrolledCourses: any;
   wishList:any = [];
   yetToStart:any;
   incomplete:any;
@@ -29,12 +29,13 @@ export class LearnerHomeComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = this.globalservice.checkLogout();
+    this.getEnrolledCourses();
+    this.getallcourses();
+    this.viewWishlist();
     // if (!this.userDetailes.group_id) {
     //   this.userDetailes.group_id = '1';
     // }
-    this.getallcourses();
-    this.getEnrolledCourses();
-    this.viewWishlist();
+
   }
   getallcourses() {
     if (this.userDetailes.group_id)
