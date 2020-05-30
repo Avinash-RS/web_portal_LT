@@ -105,8 +105,7 @@
                                                             <span class="example-spacer"></span>
                                                             <span *ngIf="query">
                                                                 <mat-icon style="display: none;">save</mat-icon>
-                                                                <mat-icon style="display: none;" (click)="DeleteTopic(i,$event)">delete
-                                                                </mat-icon>
+                                                                <mat-icon style="display: none;" (click)="DeleteTopic(i,$event)">delete</mat-icon>
                                                             </span>
                                                         </div>
                                                         <div class="colView">
@@ -396,3 +395,17 @@
         </div>
     </div>
 </span>
+
+<div class="modal fade preivewodal" id="confirmModal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body pad5">
+                <label>Are you sure to delete this template?</label>
+            </div>
+            <div class="modal-footer">
+                <button class="backgroundcol1" type="button" data-dismiss="modal">No</button>
+                <button class="backgroundcol1 BgBtn" type="button" (click)=confirmDelete()>Yes</button>
+              </div>
+        </div>
+    </div>
+</div>

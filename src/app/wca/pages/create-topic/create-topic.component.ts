@@ -41,6 +41,7 @@ export class CreateTopicComponent implements OnInit {
   selected = 'English';
   subtitles = [0];
   transcripts = [0];
+  removeTemplateindex;
   @ViewChild('fileInput3') fileInput3;
   @ViewChild('modName') modName;
   fileValidations = {
@@ -283,12 +284,19 @@ export class CreateTopicComponent implements OnInit {
     event.stopPropagation();
     // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
     //  allModuleDetails.removeAt(jform);
-    
-    this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
+    $('#confirmModal').modal('show');
+    $('#confirmModal').appendTo("body");
+    this.removeTemplateindex = jform
+    // this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
     // this.queryData.template_details.splice(jform,1);
     // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
+  confirmDelete(){
+    $('#confirmModal').modal('hide');
+    this.createTopicForm['controls'].moduledetails['controls'].splice(this.removeTemplateindex,1);
+    this.removeTemplateindex = undefined
+  }
 
 
   activate(item) {
