@@ -168,9 +168,7 @@
     <button class="submit" (click)="getCategory(getCategoryDialog)"> Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre; filter()"> Filter
-      <i class="fa fa-filter colrr"></i>
-    </button>
+    <app-guideline-search></app-guideline-search>
     <button class="submit" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
@@ -192,11 +190,6 @@
   <br>
   <br>
 
-  <div class="row">
-    <div class="col-3" *ngIf="showAppliedFiltre">
-      <app-guideline-search></app-guideline-search>
-    </div>
-   
     <ng-container *ngIf="showAppliedFiltre">
     <div class="col-9">
       <div class="container">

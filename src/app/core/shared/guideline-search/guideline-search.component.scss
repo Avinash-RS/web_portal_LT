@@ -185,4 +185,33 @@
   margin-top: -106px;
   padding: 8px;
 }
+.submit {
+  width: 13%;
+  border: none !important;
+  background-color: $color-white;
+  color: $color-blue;
+  text-align: left;
+  box-shadow: 0px 7px 5px 2px #0b0b0b17;
+  height: 45px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-left: 2.5%;
+}
+
+.submit:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $color-blue ;
+  color: $color-white;
+}
+.colrr{
+  margin-left: 50px;
+}
+button.submit.mat-button {
+  margin-left: 34%;
+  top: -45px;
+}
+
 

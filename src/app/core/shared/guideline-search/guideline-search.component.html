@@ -1,3 +1,8 @@
+<button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre; filter()"> Filter
+  <i class="fa fa-filter colrr"></i>
+</button>
+   <div class="row">
+    <div class="col-3" *ngIf="showAppliedFiltre">
 <div class="row box">
   <div class="col-2 width-10">
     <h3 class="text">Applied filters : </h3>
@@ -154,5 +159,7 @@
           </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
   </div>

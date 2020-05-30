@@ -64,21 +64,27 @@ export class GuidelineSearchComponent implements OnInit {
     private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
-    this.CommonServices.globalFilter.subscribe((data: any) => {
-        this.guidelineSearchVal = data.guidelineSearchVal;
-        this.selectedFilter.category1 = data.selectedFilterCategory1;
-        this.selectedFilter.category2 = data.selectedFilterCategory2;
-        this.selectedFilter.category3 = data.selectedFilterCategory3;
-        this.guidelineSearchVal = data.guidelineSearchVal,
-        this.Lvl1CatId = data.Lvl1CatId,
-        this.level1selectedID = data.level1selectedID,
-        this.Lvl2CatId = data.Lvl2CatId,
-        this.level2selectedID = data.level2selectedID,
-        this.Lvl3CatId = data.Lvl3CatId,
-        this.level3selectedID = data.level3selectedID,
-        this.allLvlCategoryFilterVal = data.allLvlCategoryFilterVal,
-        this.allLvlCategory = data.allLvlCategory
-    })
+    // this.CommonServices.globalFilter.subscribe((data: any) => {
+    //     // this.guidelineSearchVal = data.guidelineSearchVal;
+    //     // this.selectedFilter.category1 = data.selectedFilterCategory1;
+    //     // this.selectedFilter.category2 = data.selectedFilterCategory2;
+    //     // this.selectedFilter.category3 = data.selectedFilterCategory3;
+    //     // this.guidelineSearchVal = data.guidelineSearchVal,
+    //     // this.Lvl1CatId = data.Lvl1CatId,
+    //     // this.level1selectedID = data.level1selectedID,
+    //     // this.Lvl2CatId = data.Lvl2CatId,
+    //     // this.level2selectedID = data.level2selectedID,
+    //     // this.Lvl3CatId = data.Lvl3CatId,
+    //     // this.level3selectedID = data.level3selectedID,
+    //     // this.allLvlCategoryFilterVal = data.allLvlCategoryFilterVal,
+    //     // this.allLvlCategory = data.allLvlCategory
+    //     this.selectedFilter = data.selectedFilter
+    // })
+    // this.CommonServices.globalFilter.subscribe((data: any) => {
+    //   console.log('data',data);
+    //   this.selectedFilter = data.selectedFilter;
+    //   this.filter();
+    // });
     this.TodateOptions = {
       dateFormat: 'yyyy-mm-dd',
       disableSince: {
@@ -89,6 +95,61 @@ export class GuidelineSearchComponent implements OnInit {
       dateFormat: 'yyyy-mm-dd',
       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate() },
       disableUntil: { year: 2020, month: 3, day: 31 }
+    }
+  }
+  filter() {
+    if (!this.selectedFilter || !this.selectedFilter.filterVal) {
+      this.selectedFilter.category1 = [];
+      this.selectedFilter.category2 = [];
+      this.selectedFilter.category3 = [];
+
+      this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
+      this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
+      this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+
+      this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
+        if (result['data']['getDetailsCount']['success'] == 'true') {
+          this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
+          if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {
+            this.guidelineSearchVal.course_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.author_data) {
+            this.guidelineSearchVal.author_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data) {
+            this.guidelineSearchVal.coursemode_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data) {
+            this.guidelineSearchVal.coursepartner_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+        } else {
+          //  this.alert.openAlert('Filter not found',null)
+        }
+        console.log('inside guideline',this.guidelineSearchVal);
+        // let obj = {
+        //   selectedFilterCategory1 : this.selectedFilter.category1,
+        //   selectedFilterCategory2 : this.selectedFilter.category2,
+        //   selectedFilterCategory3 : this.selectedFilter.category3,
+        //   guidelineSearchVal : this.guidelineSearchVal,
+        //   Lvl1CatId: this.Lvl1CatId,
+        //   level1selectedID : this.level1selectedID,
+        //   Lvl2CatId: this.Lvl2CatId,
+        //   level2selectedID : this.level2selectedID,
+        //   Lvl3CatId: this.Lvl3CatId,
+        //   level3selectedID : this.level3selectedID,
+        //   allLvlCategoryFilterVal : this.allLvlCategoryFilterVal,
+        //   allLvlCategory: this.allLvlCategory
+        // }
+        // this.CommonServices.globalFilter$.next(this.selectedFilter);
+      })
     }
   }
  

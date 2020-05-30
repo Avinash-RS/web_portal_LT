@@ -235,60 +235,61 @@ export class ViewAllCoursesComponent implements OnInit {
       })
   }
 
-  filter() {
-    if (!this.selectedFilter || !this.selectedFilter.filterVal) {
-      this.selectedFilter.category1 = [];
-      this.selectedFilter.category2 = [];
-      this.selectedFilter.category3 = [];
+  // filter() {
+  //   // console.log('inside view all', this.selectedFilter);
+  //   // if (!this.selectedFilter || !this.selectedFilter.filterVal) {
+  //   //   this.selectedFilter.category1 = [];
+  //   //   this.selectedFilter.category2 = [];
+  //   //   this.selectedFilter.category3 = [];
 
-      this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
-      this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
-      this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+  //   //   this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
+  //   //   this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
+  //   //   this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
 
-      this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
-        if (result['data']['getDetailsCount']['success'] == 'true') {
-          this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
-          if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {
-            this.guidelineSearchVal.course_data.forEach(element => {
-              element.checked = false;
-            });
-          }
-          if (this.guidelineSearchVal && this.guidelineSearchVal.author_data) {
-            this.guidelineSearchVal.author_data.forEach(element => {
-              element.checked = false;
-            });
-          }
-          if (this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data) {
-            this.guidelineSearchVal.coursemode_data.forEach(element => {
-              element.checked = false;
-            });
-          }
-          if (this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data) {
-            this.guidelineSearchVal.coursepartner_data.forEach(element => {
-              element.checked = false;
-            });
-          }
-        } else {
-          //  this.alert.openAlert('Filter not found',null)
-        }
-        let obj = {
-          selectedFilterCategory1 : this.selectedFilter.category1,
-          selectedFilterCategory2 : this.selectedFilter.category2,
-          selectedFilterCategory3 : this.selectedFilter.category3,
-          guidelineSearchVal : this.guidelineSearchVal,
-          Lvl1CatId: this.Lvl1CatId,
-          level1selectedID : this.level1selectedID,
-          Lvl2CatId: this.Lvl2CatId,
-          level2selectedID : this.level2selectedID,
-          Lvl3CatId: this.Lvl3CatId,
-          level3selectedID : this.level3selectedID,
-          allLvlCategoryFilterVal : this.allLvlCategoryFilterVal,
-          allLvlCategory: this.allLvlCategory
-        }
-        this.CommonServices.globalFilter$.next(obj);
-      })
-    }
-  }
+  //   //   this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
+  //   //     if (result['data']['getDetailsCount']['success'] == 'true') {
+  //   //       this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
+  //   //       if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {
+  //   //         this.guidelineSearchVal.course_data.forEach(element => {
+  //   //           element.checked = false;
+  //   //         });
+  //   //       }
+  //   //       if (this.guidelineSearchVal && this.guidelineSearchVal.author_data) {
+  //   //         this.guidelineSearchVal.author_data.forEach(element => {
+  //   //           element.checked = false;
+  //   //         });
+  //   //       }
+  //   //       if (this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data) {
+  //   //         this.guidelineSearchVal.coursemode_data.forEach(element => {
+  //   //           element.checked = false;
+  //   //         });
+  //   //       }
+  //   //       if (this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data) {
+  //   //         this.guidelineSearchVal.coursepartner_data.forEach(element => {
+  //   //           element.checked = false;
+  //   //         });
+  //   //       }
+  //   //     } else {
+  //   //       //  this.alert.openAlert('Filter not found',null)
+  //   //     }
+  //   // //     // let obj = {
+  //   // //     //   selectedFilterCategory1 : this.selectedFilter.category1,
+  //   // //     //   selectedFilterCategory2 : this.selectedFilter.category2,
+  //   // //     //   selectedFilterCategory3 : this.selectedFilter.category3,
+  //   // //     //   guidelineSearchVal : this.guidelineSearchVal,
+  //   // //     //   Lvl1CatId: this.Lvl1CatId,
+  //   // //     //   level1selectedID : this.level1selectedID,
+  //   // //     //   Lvl2CatId: this.Lvl2CatId,
+  //   // //     //   level2selectedID : this.level2selectedID,
+  //   // //     //   Lvl3CatId: this.Lvl3CatId,
+  //   // //     //   level3selectedID : this.level3selectedID,
+  //   // //     //   allLvlCategoryFilterVal : this.allLvlCategoryFilterVal,
+  //   // //     //   allLvlCategory: this.allLvlCategory
+  //   // //     // }
+  //       this.CommonServices.globalFilter$.next(this.selectedFilter);
+  //   //   })
+  //   // }
+  // }
 
 
   sorting(sortval) {
