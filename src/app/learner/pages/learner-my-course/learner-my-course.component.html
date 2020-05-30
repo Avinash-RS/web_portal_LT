@@ -18,7 +18,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+                        <!-- <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
                             <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
                                 <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false"
                                     [showWishlist]="false" [showStatus]="true"> </app-course-component>
@@ -26,7 +26,17 @@
                         </mat-grid-list>
                         <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
                             No courses yet
-                        </h2>
+                        </h2> -->
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-2 col-12" *ngFor=" let course of myCoursesList">
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false"
+                                    [showWishlist]="false" [showStatus]="true" [showEnroll]="true">
+                                </app-course-component>
+                            </div> <br><br>
+                            <h2 class="center" *ngIf="myCoursesList && myCoursesList.length == 0">
+                                No courses yet
+                            </h2>
+                        </div>
                     </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -48,16 +58,23 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-card style="text-align: center;">
-                        <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)">
+                        <!-- <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)">
                             <mat-grid-tile *ngFor=" let course of wishlist" [style.border]="'none'">
                                 <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
                                     [showWishlist]="true" [showStatus]="false" [showRating]="true" [showCount]="true"
                                     [showPrice]="true"> </app-course-component>
                             </mat-grid-tile>
-                        </mat-grid-list>
-                        <h2 *ngIf="wishlist && wishlist.length == 0">
-                            No courses yet
-                        </h2>
+                        </mat-grid-list> -->
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-2 col-12" *ngFor=" let course of wishlist">
+                                <app-course-component [course]="course" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                                [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                              </app-course-component>
+                            </div> <br><br>
+                            <h2 class="center" *ngIf="wishlist && wishlist.length == 0">
+                                No courses yet
+                            </h2>
+                        </div>
                     </mat-card>
                 </mat-expansion-panel>
             </mat-accordion>

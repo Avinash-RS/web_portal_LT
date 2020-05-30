@@ -12,7 +12,7 @@
       <h2>Courses Enrolled</h2>
       <div class="row">
         <div class="col-8">
-          <span class="count">26</span>
+          <span class="count">{{dashboardData?.courseEnrolled.totalCount}}</span>
         </div>
         <div class="col-4">
           <img class="icon" src="../../../../assets/learner/CoursesEnrolled.svg">
@@ -20,12 +20,19 @@
       </div><br>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-4" *ngIf="dashboardData?.courseEnrolled.IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-          <span class="trendno">4</span>
+          <span class="trendno">{{dashboardData?.courseEnrolled.valueIncDecPec}}%</span>
         </div>
-        <div class="col-8">
+        <div class="col-4" *ngIf="dashboardData?.courseEnrolled.IncDecPec == false">
+          <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+          <span class="trendnodown">{{dashboardData?.courseEnrolled.valueIncDecPec}}%</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.courseEnrolled.IncDecPec != false">
           <span class="text">Up from Yesterday</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.courseEnrolled.IncDecPec == false">
+          <span class="text2">Down from Yesterday</span>
         </div>
       </div>
     </div>
@@ -36,7 +43,7 @@
       <h2>Courses Yet to Start</h2>
       <div class="row">
         <div class="col-8">
-          <span class="count">13</span>
+          <span class="count">{{dashboardData?.incomplete[0].totalCount}}</span>
         </div>
         <div class="col-4">
           <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
@@ -44,12 +51,19 @@
       </div><br>
 
       <div class="row">
-        <div class="col-3">
+        <div class="col-4" *ngIf="dashboardData?.incomplete[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-          <span class="trendno">4</span>
+          <span class="trendno">{{dashboardData?.incomplete[0].valueIncDecPec}}%</span>
         </div>
-        <div class="col-8">
+        <div class="col-4" *ngIf="dashboardData?.incomplete[0].IncDecPec == false">
+          <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+          <span class="trendnodown">{{dashboardData?.incomplete.valueIncDecPec}}%</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.incomplete[0].IncDecPec != false">
           <span class="text">Up from Yesterday</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.incomplete[0].IncDecPec == false">
+          <span class="text2">Down from Yesterday</span>
         </div>
       </div>
     </div>
@@ -60,7 +74,7 @@
       <h2>Courses In-Progress</h2>
       <div class="row">
         <div class="col-8">
-          <span class="count">6</span>
+          <span class="count">{{dashboardData?.suspend[0].totalCount}}</span>
         </div>
         <div class="col-4">
           <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
@@ -68,12 +82,19 @@
       </div><br>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-4" *ngIf="dashboardData?.suspend[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-          <span class="trendno">4</span>
+          <span class="trendno">{{dashboardData?.suspend[0].valueIncDecPec}}%</span>
         </div>
-        <div class="col-8">
+        <div class="col-4" *ngIf="dashboardData?.suspend[0].IncDecPec == false">
+          <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+          <span class="trendnodown">{{dashboardData?.suspend[0].valueIncDecPec}}%</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.suspend[0].IncDecPec != false">
           <span class="text">Up from Yesterday</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.suspend[0].IncDecPec == false">
+          <span class="text2">Down from Yesterday</span>
         </div>
       </div>
     </div>
@@ -84,7 +105,7 @@
       <h2>Courses Completed</h2>
       <div class="row">
         <div class="col-8">
-          <span class="count">7</span>
+          <span class="count">{{dashboardData?.completed[0].totalCount}}</span>
         </div>
         <div class="col-4">
           <img class="icon" src="../../../../assets/learner/CoursesCompleted.svg">
@@ -92,12 +113,19 @@
       </div><br>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-4" *ngIf="dashboardData?.completed[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
-          <span class="trendno">4</span>
+          <span class="trendno">{{dashboardData?.completed[0].valueIncDecPec}}%</span>
         </div>
-        <div class="col-8">
+        <div class="col-4" *ngIf="dashboardData?.completed[0].IncDecPec == false">
+          <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+          <span class="trendnodown">{{dashboardData?.completed[0].valueIncDecPec}}%</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.completed[0].IncDecPec != false">
           <span class="text">Up from Yesterday</span>
+        </div>
+        <div class="col-8" *ngIf="dashboardData?.completed[0].IncDecPec == false">
+          <span class="text2">Down from Yesterday</span>
         </div>
       </div>
     </div>
@@ -109,14 +137,12 @@
     <span class="txthead"><b>Last accessed </b><span class="h8">Courses</span> (click on any courses to resume)</span>
 
       <div class="lg-box">
-        <div class="row">
-
+        <div class="row" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
       <div class="col-md-4 col-sm-12 col-12">
-        <img class="imge" src="../../../../assets/courses/1.jpg">
+        <img class="imge" src="{{dashboard?.course_img_url}}">
       </div>
-
       <div class="col-md-8 col-sm-12 col-12">
-        <h3 class="coursehead">Become an Android Developerfrom Scratch</h3>
+        <h3 class="coursehead">{{dashboard?.course_name}}</h3>
         <mat-progress-bar class="border-radius-5" mode="determinate"
           [value]="10">
         </mat-progress-bar>

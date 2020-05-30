@@ -40,7 +40,6 @@ export class LearnerHomeComponent implements OnInit {
     if (this.userDetailes.group_id)
       this.learnerService.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
-        console.log('all courses', this.allcourses)
       });
   }
   // function to fetch all the enrolled courses of the user
@@ -58,11 +57,10 @@ export class LearnerHomeComponent implements OnInit {
   // function to fetch the wishlist of the user
  
   viewWishlist() {
-    console.log(this.userDetailes.user_id)
-    this.commonServices.viewWishlist(this.userDetailes.user_id).subscribe((viewWishlist: any) => {
+    const userdetail = this.gs.checkLogout();
+    this.commonServices.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishList = viewWishlist.data.view_wishlist.message;
-        console.log('wishlist response',viewWishlist);
       }
     });
   }

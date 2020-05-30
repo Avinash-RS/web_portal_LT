@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { DOCUMENT } from '@angular/platform-browser';
 import { interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from 'rxjs/operators';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -40,8 +42,14 @@ export class LandingpageComponent implements OnInit {
   };
   scrollAchieved = false;
   scrollAchievedValue: any;
+  trendingCourse: any = [];
+  popularCOurse = [];
 
-  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, @Inject(Window) private window: Window, ) {
+  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, private alert: AlertServiceService
+  ,           public learnerservice: LearnerServicesService ) {
+
+    this.popular();
+    this.trending();
 
     this.detailsForm = this.formBuilder.group({
       username: new FormControl(''),
@@ -156,5 +164,28 @@ export class LandingpageComponent implements OnInit {
       behavior: 'smooth'
     });
     this.scrollAchieved = false;
+  }
+
+  postReq() {
+    this.learnerservice.createGuidanceRequestLanding(this.detailsForm.value.username, this.detailsForm.value.email,
+      this.detailsForm.value.course, localStorage.getItem('Systemip'))
+    .subscribe((result: any) => {
+      this.detailsForm.reset();
+      this.alert.openAlert('Requested successfully', null);
+    });
+  }
+
+  popular() {
+    this.learnerservice.getPopularInLanding()
+    .subscribe((result: any) => {
+      this.popularCOurse = result.data.get_popular_course.data;
+    });
+  }
+
+  trending() {
+    this.learnerservice.getTrendingInLanding()
+    .subscribe((result: any) => {
+      this.trendingCourse = result.data.get_trending_course.data;
+    });
   }
 }

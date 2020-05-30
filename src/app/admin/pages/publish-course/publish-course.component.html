@@ -7,96 +7,13 @@
   </ol>
 </nav>
 
-<!-- <div class="p-5px">
-  <h2>Publish {{course && course.name}} </h2>
-  <div class="container">
-    <mat-card style="text-align: left;box-shadow: 0 2px 10px #6c757d;height: 400px;">
-      <h3>
-        Select the category to publish the course
-      </h3>
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-11 float_right">
-          <button mat-raised-button (click)="show = !show">Associate to Catagory</button>
-        </div>
-        <div class="card cardHeight col-lg-3 col-md-4 col-sm-6 col-11 float_left" *ngIf="show">
-          <div style = "margin-left : 1%" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false" [infiniteScrollThrottle]="500"
-            (scrolled)="onScrollDown()">
-            <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
-              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-                <li class="mat-tree-node newstyle" renderDebug>
-                  <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubcategory(node)"
-                    [attr.aria-label]="'toggle ' + node.name">
-                    <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
-                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                  </button>
-                  <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">
-                    {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}
-                  </mat-checkbox>
-                </li>
-              </mat-tree-node>
-              <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-                <li class="mat-tree-node newstyle" renderDebug>
-                  <div class="mat-tree-node">
-                    <button mat-icon-button matTreeNodeToggle class="btnClassicon"
-                      [attr.aria-label]="'toggle ' + node.name">
-                      <mat-icon *ngIf="node?.is_child == true" class="mat-icon-rtl-mirror">
-                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                      </mat-icon>
-                    </button>
-                    <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectedcategory(node)">
-                      {{node?.category_name}} {{node?.sub_category_name}} {{node?.super_sub_category_name}}
-                    </mat-checkbox>
-                  </div>
-                </li>
-                <ul [class.children-invisible]="!treeControl.isExpanded(node)">
-                  <ng-container matTreeNodeOutlet></ng-container>
-                </ul>
-              </mat-nested-tree-node>
-            </mat-tree>
-
-            <br>
-            <br>
-          </div>
-
-        </div>
-      </div>
-
-      <div style="position: absolute; top: 200px; width : 100%;">
-        <hr>
-        <h3>
-          Selected Category
-        </h3>
-        <p class="m-l-5">
-          Catalogue/IT & Software/<strong>Machine Learning</strong>
-        </p>
-        <br>
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-6 float_right ">
-            <button mat-raised-button class="background-blue color_white" (click)="publishCourse()">Publish</button>
-          </div>
-          <div class="col-md-6  col-sm-6 col-6 float_left">
-            <button mat-raised-button (click)="draftCourse()">Cancel</button>
-          </div>
-        </div>
-        <br>
-      </div>
-     
-    </mat-card>
-  </div>
-</div> -->
-
-
-
-
-
 <div class="container profile p-30">
   <h1> Publish course</h1>
   <br>
   <div class="container m-t-20">
-    <div class="row">
+    <div class="row shadow">
       <!-- Mat tree code here ( left hand side) -->
-      <div class="card col-12 col-lg-4 col-md-4 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
+      <div class="card col-12 col-lg-3 col-md-4 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
         [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
         <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Associate to Category </h2>
 
@@ -139,11 +56,12 @@
         </mat-tree>
         <!-- view category and sub category -->
       </div>
-      <!-- end of Mat tree code here ( left hand side) -->
+      <!-- end of Mat tree code here ( left hand side) course_id: "62tw3ynl"-->
       <!-- start of right hand side card view -->
-      <div class="card col-lg-8 col-md-8 col-sm-12 col-12 cardheight right">
-       <h3> <strong class="m-l-10">Publish course</strong></h3>
+      <div class="card col-lg-9 col-md-8 col-sm-12 col-12 cardheight right">
+        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Publish Course </h2>
         <br><br>
+     
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h4>
            Selected Level 1 : {{selectedCategory?.category_name}}
@@ -162,7 +80,7 @@
           </h4>
         </div>
         <div class="row  center" *ngIf="selectedCategory?.category_name == undefined">
-          <h4  class="m-l-10">
+          <h4  class="m-l-10 center_align f_wt_500"  >
           Please select category to publish course..
           </h4>
         </div>
@@ -172,17 +90,29 @@
             <strong> {{selectedSubCategory?.sub_category_name ? ' > ' +selectedSubCategory?.sub_category_name : null}}</strong> 
             <strong> {{selectedSuperSubCategory?.super_sub_category_name ? ' > ' +selectedSuperSubCategory?.super_sub_category_name : null}}</strong>
           </h3>
-          
         </div>
+
+        <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
+          <mat-form-field >
+            <mat-label>Select Catalogue</mat-label>
+            <mat-select name="catalogue"  [(ngModel)]="catalogue" #catelogue1="ngModel"  [required]=editstatus   class="form-control">
+              <mat-option *ngFor="let cat of catalogueList"  [(value)]="cat.catalogue_id" (onSelectionChange)="selectcatalogue($event, cat)">
+                {{cat.catalogue_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <br><br>
-        <div class="row"  *ngIf="selectedCategory?.category_name">
+        <div class="row width_100 alert-btn"  *ngIf="selectedCategory?.category_name">
           <div class="col-md-2"></div>
           <div class="col-md-4 col-sm-6 col-6 ">
-            <button mat-raised-button class="background-blue color_white width_80"
+            <button mat-raised-button class="background-blue color_white width_70"
+            [disabled] = "selectedCategory?.category_name == undefined || selectedcatalogue == null"
               (click)="publishCourse()">Publish</button>
           </div>
           <div class="col-md-4  col-sm-6 col-6 ">
-            <button mat-raised-button class="width_80" (click)="draftCourse()">Cancel</button>
+            <button mat-raised-button class="width_70" (click)="draftCourse()">Cancel</button>
           </div>
           <div class="col-md-2"></div>
         </div>
