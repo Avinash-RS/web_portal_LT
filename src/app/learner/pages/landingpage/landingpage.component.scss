@@ -21,9 +21,9 @@ html {
 }
 
 @media only screen and (max-width: 400px) {
-    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -46%;
-    }
+    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    //     top: -46%;
+    // }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
         left: 34%;
@@ -35,9 +35,9 @@ html {
 }
 
 @media only screen and (min-width: 400px) and (max-width: 460px) {
-    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -37%;
-    }
+    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    //     top: -37%;
+    // }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
         left: 34%;
@@ -49,9 +49,9 @@ html {
 }
 
 @media only screen and (min-width: 625px) and (max-width: 770px) {
-    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -40%;
-    }
+    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    //     top: -40%;
+    // }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
         left: 65%;
@@ -63,9 +63,9 @@ html {
 }
 
 @media only screen and (min-width: 460px) and (max-width: 625px) {
-    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -46%;
-    }
+    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    //     top: -46%;
+    // }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
         left: 34%;
@@ -77,9 +77,9 @@ html {
 }
 
 @media only screen and (min-width: 770px) {
-    :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-        top: -37%;
-    }
+    // :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+    //     top: -37%;
+    // }
 
     :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
         left: 80%;
@@ -97,7 +97,7 @@ html {
     padding: 12px;
     opacity: 1;
     font-weight: 300;
-    // top: -45%;
+    top: -37%;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
