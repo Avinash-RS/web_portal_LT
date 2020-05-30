@@ -16,6 +16,7 @@ export class AuditlogComponent implements OnInit {
   reports: any;
   dataSource = new MatTableDataSource<any>();
   today = new Date();
+  viewdetail: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog) { }
 
@@ -60,18 +61,32 @@ export class AuditlogComponent implements OnInit {
     this.columns = [
       { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
       { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
-      { columnDef: 'updated_on', header: 'Date', cell: (element: any) => `${moment(element.updated_on).format('LL')}` },
+      { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${moment(element.created_on).format('LL')}` },
+      { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element.updated_on).format('LL')}` },
       { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element.admin_username}` },
     ];
-    this.displayedColumns = (['sno','action']).concat(this.columns.map(c => c.columnDef));
+    this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
+    this.displayedColumns = this.displayedColumns.concat(['action']);
+
     this.dataSource.data = this.reports;
 
   }
 
-  openviewdialog(templateRef) {
+  openviewdialog(data, templateRef) {
     this.dialog.open(templateRef);
+    this.viewdetail = data;
   }
   closedialogbox(){
     this.dialog.closeAll();
+  }
+  filter(filterform) {
+    console.log(filterform.valid);
+  }
+  cancel(filterform) {
+    filterform.reset();
+  }
+  export(filterform){
+    // window.open(url, '_blank');
+    window.open('https://edutechstorage.blob.core.windows.net/container1/report_audit_information/06260090788166162-audit_report.csv');
   }
 }

@@ -34,11 +34,13 @@
   <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
   <mat-card-content>
-    <div class="row course-name-row" (click)="gotoDescription()">
-      <div class="col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20" style="word-wrap: break-word">
+    <div class="row course-name-row no_margin" (click)="gotoDescription()">
+      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 no_padding"
+        style="word-wrap: break-word">
         {{course.course_name}}
       </div>
-      <div class="col-6 m-t-10 m-b-20 display_flex" (click)="gotoDescription()">
+      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 m-t-10 m-b-20 display_flex user-rating no_padding"
+        (click)="gotoDescription()">
         <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
         &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>

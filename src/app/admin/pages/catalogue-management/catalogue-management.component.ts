@@ -92,6 +92,13 @@ export class CatalogueManagementComponent implements OnInit {
     this.checked = false;
   }
 
+  clickCancel() {
+    this.showCatalogDetail = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = this.checked = false;
+    this.type = null;
+    this.getCatalogDetail();
+  }
+
   get f() {
     if (this.showAddCatalogueForm === true) {
       return this.addCatalogueForm.controls;
