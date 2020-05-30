@@ -235,7 +235,8 @@
               *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
               </div>
             </ng-container>
             <br>

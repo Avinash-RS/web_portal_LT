@@ -169,14 +169,12 @@ export class LandingpageComponent implements OnInit {
     this.learnerservice.createGuidanceRequestLanding(this.detailsForm.value.username, this.detailsForm.value.email,
       this.detailsForm.value.course, localStorage.getItem('Systemip'))
     .subscribe((result: any) => {
-      console.log('all courses', result);
     });
   }
 
   popular() {
     this.learnerservice.getPopularInLanding()
     .subscribe((result: any) => {
-      console.log('all courses', result);
       this.popularCOurse = result.data.get_popular_course.data;
     });
   }
@@ -184,7 +182,6 @@ export class LandingpageComponent implements OnInit {
   trending() {
     this.learnerservice.getTrendingInLanding()
     .subscribe((result: any) => {
-      console.log('all courses', result);
       this.trendingCourse = result.data.get_trending_course.data;
     });
   }

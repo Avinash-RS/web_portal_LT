@@ -38,9 +38,9 @@
       <div class="col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20" style="word-wrap: break-word">
         {{course.course_name}}
       </div>
-      <div class="col-6 m-t-10 m-b-20 display_flex" *ngIf="showRating" (click)="gotoDescription()">
-        <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
-        &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
+      <div class="col-6 m-t-10 m-b-20 display_flex" (click)="gotoDescription()">
+        <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
+        &nbsp;&nbsp; <strong>{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>
     </div>
     <mat-card-action>
@@ -64,11 +64,19 @@
           <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
-          <button id="enroll_now" *ngIf="showStatus" disabled="{{course?.coursePlayerStatus?.status === 'Completed'}}"
+          <!-- <button id="enroll_now" *ngIf="showStatus" disabled="false"
             (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
             [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
           '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
-            {{course?.coursePlayerStatus?.status || 'Start'}}</button>
+            {{course?.coursePlayerStatus?.status || 'Start'}}</button> -->
+
+          <button id="enroll_now" *ngIf="showStatus" (click)="goTocourse('Start')">Start</button>
+
+          <!-- <button id="enroll_now" *ngIf="showStatus" disabled="false"
+            (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
+            [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
+          '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
+            {{course?.coursePlayerStatus?.status || 'Start'}}</button> -->
         </div>
       </div>
     </mat-card-action>

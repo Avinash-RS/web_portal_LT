@@ -131,7 +131,7 @@ strong {
 
 #enroll_now {
     background-color: $color-blue;
-    color: #fff;
+    color: $color-white;
     font-weight: 500 !important;
     width: 70%;
     border-radius: 0;
@@ -181,7 +181,7 @@ strong {
     margin-top: 10px;
 
     .wishlist_btn {
-        background: white;
+        background: $color-white;
         opacity: 0.5;
         border-radius: 0;
     }
