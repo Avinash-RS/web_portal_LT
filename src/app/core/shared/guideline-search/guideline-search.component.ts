@@ -75,6 +75,14 @@ export class GuidelineSearchComponent implements OnInit {
       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate() },
       disableUntil: { year: 2020, month: 3, day: 31 }
     }
+    this.CommonServices.selectedCategory.subscribe(data => {
+      this.Lvl1CatId = data.Lvl1CatId,
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID
+    })
   }
   filter() {
     if (!this.selectedFilter || !this.selectedFilter.filterVal) {

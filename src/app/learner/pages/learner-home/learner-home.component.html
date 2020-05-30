@@ -131,7 +131,7 @@
           Filter
         </button> -->
            <!-- <ng-container class="filter"> -->
-        <app-guideline-search></app-guideline-search>
+       
         <!-- </ng-container> -->
         <select class="category" (change)="onChange($event.target.value)">
           <option value="allcourses">All Courses</option>
@@ -140,7 +140,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-3">
+        <app-guideline-search></app-guideline-search>
+      </div>
+     
+      <div class="col-9">
         <div class="container containerShadow">
           <div class="row">
             <ng-container

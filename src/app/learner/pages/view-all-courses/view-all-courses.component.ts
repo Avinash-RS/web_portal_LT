@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Options } from 'ng5-slider';
+// import { SearchPipe } from '../pipes/search.pipe';
 import * as _ from 'lodash';
 import Swal from 'sweetalert2';
 import { element } from 'protractor';
@@ -79,6 +80,9 @@ export class ViewAllCoursesComponent implements OnInit {
         this.allcourses = this.allcourses;
       } 
     })
+    this.CommonServices.globalAllCategory.subscribe((data: any) => {
+      this.allcourses = data;
+    });
     this.CommonServices.globalCourses.subscribe((data: any) => {
         this.allcourses = data;
     })
@@ -110,130 +114,130 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
 
-  isSelected(s: any) {
-    if (s.level == 1) {
-      return this.Lvl1CatId.findIndex((item) => item.category_id === s.category_id) > -1 ? true : false;
-    } else if (s.level == 2) {
-      return this.Lvl2CatId.findIndex((item) => item.sub_category_id === s.sub_category_id) > -1 ? true : false;
-    } else {
-      return this.Lvl3CatId.findIndex((item) => item.super_sub_category_id === s.super_sub_category_id) > -1 ? true : false;
-    }
-  }
+  // isSelected(s: any) {
+  //   if (s.level == 1) {
+  //     return this.Lvl1CatId.findIndex((item) => item.category_id === s.category_id) > -1 ? true : false;
+  //   } else if (s.level == 2) {
+  //     return this.Lvl2CatId.findIndex((item) => item.sub_category_id === s.sub_category_id) > -1 ? true : false;
+  //   } else {
+  //     return this.Lvl3CatId.findIndex((item) => item.super_sub_category_id === s.super_sub_category_id) > -1 ? true : false;
+  //   }
+  // }
 
-  getCategoryId(category) {
-    if (category.level == 1) {
-      this.isSelected(category)
-      this.Lvl1CatId.find((item) => item.category_id === category.category_id) ?
-        this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== category.category_id) : this.Lvl1CatId.push(category);
-      this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id)
-    } else if (category.level == 2) {
-      this.isSelected(category)
-      this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) : this.Lvl2CatId.push(category);
-      this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id)
-    } else if ((category.level == 3)) {
-      this.isSelected(category)
-      this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) : this.Lvl3CatId.push(category);
-      this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id)
-    } else {
-      this.getthreeLevelCat();
-    }
+  // getCategoryId(category) {
+  //   if (category.level == 1) {
+  //     this.isSelected(category)
+  //     this.Lvl1CatId.find((item) => item.category_id === category.category_id) ?
+  //       this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== category.category_id) : this.Lvl1CatId.push(category);
+  //     this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id)
+  //   } else if (category.level == 2) {
+  //     this.isSelected(category)
+  //     this.Lvl2CatId.find((item) => item.sub_category_id === category.sub_category_id) ? this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== category.sub_category_id) : this.Lvl2CatId.push(category);
+  //     this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id)
+  //   } else if ((category.level == 3)) {
+  //     this.isSelected(category)
+  //     this.Lvl3CatId.find((item) => item.super_sub_category_id === category.super_sub_category_id) ? this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== category.super_sub_category_id) : this.Lvl3CatId.push(category);
+  //     this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id)
+  //   } else {
+  //     this.getthreeLevelCat();
+  //   }
 
-    if (this.level1selectedID.length || this.level2selectedID.length || this.level3selectedID.length) {
-      this.learnerservice.getLevelSubCategoryData(this.level1selectedID, this.level2selectedID, this.level3selectedID).subscribe((result: any) => {
-        if (result['data']['getLevelSubCategoryData'].success == true) {
-          this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
-        }
-      });
-    } else {
-      this.allLvlCategoryFilterVal = [];
-      this.getthreeLevelCat();
-    }
-  }
+  //   if (this.level1selectedID.length || this.level2selectedID.length || this.level3selectedID.length) {
+  //     this.learnerservice.getLevelSubCategoryData(this.level1selectedID, this.level2selectedID, this.level3selectedID).subscribe((result: any) => {
+  //       if (result['data']['getLevelSubCategoryData'].success == true) {
+  //         this.allLvlCategoryFilterVal = result['data']['getLevelSubCategoryData']['data'];
+  //       }
+  //     });
+  //   } else {
+  //     this.allLvlCategoryFilterVal = [];
+  //     this.getthreeLevelCat();
+  //   }
+  // }
 
-  removeCategoryVal(val){
-    let cat1Index;
-    let cat2Index;
-    let cat3Index;
+  // removeCategoryVal(val){
+  //   let cat1Index;
+  //   let cat2Index;
+  //   let cat3Index;
    
-    if(val.level == 1) cat1Index = this.Lvl1CatId.indexOf(val);
-    if (cat1Index > -1) {
-      this.selectedFilter.category1.splice(cat1Index, 1);
-      this.isSelected(val);
-      this.Lvl1CatId.find((item) => item.category_id === val.category_id) ?
-      this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== val.category_id) : this.Lvl1CatId.push(val);
-      this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id);
-      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level1 && this.allLvlCategoryFilterVal.level1.length) {
-        this.allLvlCategoryFilterVal.level1.forEach(element=>{
-          if(element.category_id == val.category_id) element.isSelected = false;
-        })
-      } else {
-        this.allLvlCategory.level1.forEach(element=>{
-          if(element.category_id == val.category_id) element.isSelected = false;
-        })
-      }
+  //   if(val.level == 1) cat1Index = this.Lvl1CatId.indexOf(val);
+  //   if (cat1Index > -1) {
+  //     this.selectedFilter.category1.splice(cat1Index, 1);
+  //     this.isSelected(val);
+  //     this.Lvl1CatId.find((item) => item.category_id === val.category_id) ?
+  //     this.Lvl1CatId = this.Lvl1CatId.filter((item) => item.category_id !== val.category_id) : this.Lvl1CatId.push(val);
+  //     this.level1selectedID = this.Lvl1CatId.flatMap(i => i.category_id);
+  //     if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level1 && this.allLvlCategoryFilterVal.level1.length) {
+  //       this.allLvlCategoryFilterVal.level1.forEach(element=>{
+  //         if(element.category_id == val.category_id) element.isSelected = false;
+  //       })
+  //     } else {
+  //       this.allLvlCategory.level1.forEach(element=>{
+  //         if(element.category_id == val.category_id) element.isSelected = false;
+  //       })
+  //     }
 
-    }
-    else if(val.level == 2) cat2Index = this.Lvl2CatId.indexOf(val);
-    if (cat2Index > -1) {
-      this.selectedFilter.category2.splice(cat2Index, 1);
-      this.isSelected(val);
-      this.Lvl2CatId.find((item) => item.sub_category_id === val.sub_category_id) ?
-      this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== val.sub_category_id) : this.Lvl2CatId.push(val);
-      this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id);
-      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level2 && this.allLvlCategoryFilterVal.level2.length) {
-        this.allLvlCategoryFilterVal.level2.forEach(element=>{
-          if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
-        })
-      } else {
-        this.allLvlCategory.level2.forEach(element=>{
-          if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
-        })
-      }
-    }
-    else if(val.level == 3) cat3Index = this.Lvl3CatId.indexOf(val);
-    if (cat3Index > -1) {
-      this.selectedFilter.category3.splice(cat3Index, 1);
-      this.isSelected(val);
-      this.Lvl3CatId.find((item) => item.super_sub_category_id === val.super_sub_category_id) ?
-      this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== val.super_sub_category_id) : this.Lvl1CatId.push(val);
-      this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id);
-      if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level3 && this.allLvlCategoryFilterVal.level3.length) {
-        this.allLvlCategoryFilterVal.level3.forEach(element=>{
-          if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
-        })
-      } else {
-        this.allLvlCategory.level3.forEach(element=>{
-          if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
-        })
-      }
-    }
+  //   }
+  //   else if(val.level == 2) cat2Index = this.Lvl2CatId.indexOf(val);
+  //   if (cat2Index > -1) {
+  //     this.selectedFilter.category2.splice(cat2Index, 1);
+  //     this.isSelected(val);
+  //     this.Lvl2CatId.find((item) => item.sub_category_id === val.sub_category_id) ?
+  //     this.Lvl2CatId = this.Lvl2CatId.filter((item) => item.sub_category_id !== val.sub_category_id) : this.Lvl2CatId.push(val);
+  //     this.level2selectedID = this.Lvl2CatId.flatMap(i => i.sub_category_id);
+  //     if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level2 && this.allLvlCategoryFilterVal.level2.length) {
+  //       this.allLvlCategoryFilterVal.level2.forEach(element=>{
+  //         if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
+  //       })
+  //     } else {
+  //       this.allLvlCategory.level2.forEach(element=>{
+  //         if(element.sub_category_id == val.sub_category_id) element.isSelected = false;
+  //       })
+  //     }
+  //   }
+  //   else if(val.level == 3) cat3Index = this.Lvl3CatId.indexOf(val);
+  //   if (cat3Index > -1) {
+  //     this.selectedFilter.category3.splice(cat3Index, 1);
+  //     this.isSelected(val);
+  //     this.Lvl3CatId.find((item) => item.super_sub_category_id === val.super_sub_category_id) ?
+  //     this.Lvl3CatId = this.Lvl3CatId.filter((item) => item.super_sub_category_id !== val.super_sub_category_id) : this.Lvl1CatId.push(val);
+  //     this.level3selectedID = this.Lvl3CatId.flatMap(i => i.super_sub_category_id);
+  //     if(this.allLvlCategoryFilterVal && this.allLvlCategoryFilterVal.level3 && this.allLvlCategoryFilterVal.level3.length) {
+  //       this.allLvlCategoryFilterVal.level3.forEach(element=>{
+  //         if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
+  //       })
+  //     } else {
+  //       this.allLvlCategory.level3.forEach(element=>{
+  //         if(element.super_sub_category_id == val.super_sub_category_id) element.isSelected = false;
+  //       })
+  //     }
+  //   }
    
 
 
-    var perPage = "10";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
-        this.allcourses = result['data']['getCourseCategorySearch']['data'];
-        this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
-        this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
-        this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
-        this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
-      })
-  }
+  //   var perPage = "10";
+  //   this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+  //     this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+  //       this.allcourses = result['data']['getCourseCategorySearch']['data'];
+  //       this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
+  //       this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
+  //       this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
+  //       this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
+  //     })
+  // }
 
-  applyFilter(category) {
-    var perPage = "10";
-    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
-        if (result['data']['getCourseCategorySearch'].success == true)
-          this.allcourses = result['data']['getCourseCategorySearch']['data'];
-        this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
-        this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
-        this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
-        this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
-        this.dialog.closeAll();
-      })
-  }
+  // applyFilter(category) {
+  //   var perPage = "10";
+  //   this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
+  //     this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+  //       if (result['data']['getCourseCategorySearch'].success == true)
+  //         this.allcourses = result['data']['getCourseCategorySearch']['data'];
+  //       this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
+  //       this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
+  //       this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
+  //       this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
+  //       this.dialog.closeAll();
+  //     })
+  // }
 
   // filter() {
   //   // console.log('inside view all', this.selectedFilter);
@@ -351,15 +355,15 @@ export class ViewAllCoursesComponent implements OnInit {
     });
   }
 
-  getCategory(templateRef: TemplateRef<any>) {
-    this.showAppliedFiltre = false;
-    this.dialog.open(templateRef);
-  }
-  closedialogbox() {
-    this.dialog.closeAll();
-    this.allLvlCategoryFilterVal = [];
-    this.getthreeLevelCat();
-  }
+  // getCategory(templateRef: TemplateRef<any>) {
+  //   this.showAppliedFiltre = false;
+  //   this.dialog.open(templateRef);
+  // }
+  // closedialogbox() {
+  //   this.dialog.closeAll();
+  //   this.allLvlCategoryFilterVal = [];
+  //   this.getthreeLevelCat();
+  // }
 
   getthreeLevelCat() {
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {

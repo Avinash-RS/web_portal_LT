@@ -31,6 +31,9 @@ export class CommonServicesService {
 
   globalAllCategory$ = new Subject<any>();
   globalAllCategory = this.globalAllCategory$.asObservable();
+  
+  selectedCategory$ = new Subject<any>();
+  selectedCategory = this.selectedCategory$.asObservable();
 
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();

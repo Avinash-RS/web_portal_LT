@@ -33,12 +33,16 @@ export class CategoryComponentComponent implements OnInit {
   selectedFilter: any = [];
   publishedToDate: String;
   publishedFromDate: String;
+  loader: boolean;
 
   constructor(private dialog: MatDialog,public learnerservice: LearnerServicesService, private alert: AlertServiceService,
     private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
     this.getthreeLevelCat();
+    this.CommonServices.globalCourses.subscribe((data: any) => {
+      this.allcourses = data;
+  })
   }
   getCategory(templateRef: TemplateRef<any>) {
     // this.showAppliedFiltre = false;
@@ -57,6 +61,30 @@ export class CategoryComponentComponent implements OnInit {
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
       this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
     })
+  }
+  getcoursecategories() {
+    this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
+      this.categories = result.data.get_all_category.message;
+    });
+  }
+  getcoursesubcategories(category) {
+    this.type = 'subcategory';
+    const categoryid = category.category_id ? category.category_id : category.sub_category_id;
+    this.learnerservice.getcoursesubcategory(categoryid).subscribe((result: any) => {
+      this.subcategories = result.data.get_sub_category.message;
+      this.getcourses(category);
+    });
+  }
+
+  getcourses(category) {
+    this.loader = true;
+    category.type = this.type;
+    category._id = category.category_id ? category.category_id : category.sub_category_id;
+    category.pagenumber = this.pagenumber;
+    this.learnerservice.getcourse(category).subscribe((result: any) => {
+      this.allcourses = result.data.get_course_by_subcategory.message;
+      this.loader = false;
+    });
   }
 
   getCategoryId(category) {
@@ -177,6 +205,15 @@ export class CategoryComponentComponent implements OnInit {
         this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
         this.dialog.closeAll();
         this.CommonServices.globalAllCategory$.next(this.allcourses);
+        let obj = {
+          Lvl1CatId: this.Lvl1CatId,
+          level1selectedID : this.level1selectedID,
+          Lvl2CatId: this.Lvl2CatId,
+          level2selectedID : this.level2selectedID,
+          Lvl3CatId: this.Lvl3CatId,
+          level3selectedID : this.level3selectedID
+        }
+        this.CommonServices.selectedCategory$.next(obj);
       })
      
   }
