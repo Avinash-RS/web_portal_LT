@@ -18,6 +18,7 @@ export class AuditlogComponent implements OnInit {
   today = new Date();
   viewdetail: any;
   requiredfield = false;
+  enablefield = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog , private adminservice: AdminServicesService) { }
 
@@ -79,6 +80,11 @@ export class AuditlogComponent implements OnInit {
   closedialogbox() {
     this.dialog.closeAll();
   }
+  datefield(fromdate){
+    if(fromdate) {
+      this.enablefield = false;
+    }
+  }
   filter(filterform) {
     this.requiredfield = true;
     console.log(filterform.value);
@@ -88,6 +94,7 @@ export class AuditlogComponent implements OnInit {
   cancel(filterform) {
     filterform.reset();
     this.requiredfield = false;
+    this.enablefield = true;
   }
   export(filterform) {
     console.log(filterform.value);
