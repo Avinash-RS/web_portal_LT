@@ -566,15 +566,9 @@ export class AdminServicesService {
   }
 
   getauditlogreports(pagenumber) {
-    console.log(localStorage.getItem('token'))
-    // let params: URLSearchParams = new URLSearchParams();
-    // params.set('pagenumber', pagenumber);
-    // //params.set("surname", surname); for more params
-    // var options:any;
-    // options.search = params;
-
-    const params = new HttpParams().set('pagenumber', pagenumber);
-
-    return this.http.get<any[]>(environment.apiUrl + 'getauditlog' , {params});
+    const headers1 = new HttpHeaders().set('Authorization', localStorage.getItem('token'));
+    const params1 = new HttpParams().set('pagenumber', pagenumber);
+    const options = { params: params1, headers: headers1 };
+    return this.http.get<any[]>(environment.apiUrl + 'getauditlog' , options);
   }
 }
