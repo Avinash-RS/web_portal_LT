@@ -235,6 +235,8 @@ export class GroupManagementComponent implements OnInit {
     let str;
     let strvalue;
     this.formsubmitted = true;
+    // form.value.group_name.replace(/^[ ]+|[ ]+$/g,'');
+    form.value.group_name = form.value.group_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
