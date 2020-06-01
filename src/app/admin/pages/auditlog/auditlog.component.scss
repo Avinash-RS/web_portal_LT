@@ -1,0 +1,43 @@
+@import "variable";
+.m-b-10 {
+    margin-bottom: 10px !important;
+}
+.example-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  max-height: 700px;
+  min-width: 300px;
+  cursor: pointer;
+  .mat-stroked-button {
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0 0px;
+    margin: 1px;
+  }
+
+  // .mat-header-cell:last-of-type {
+  //   padding-top: 10px;
+  //   padding-bottom: 10px;
+  //   display: initial;
+  //   text-align: center;
+  // }
+}
+.btnCss {
+    display: inline-block;
+    font-weight: 400;
+    color: $color-white !important;
+    text-align: center;
+    vertical-align: middle !important;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: $color-blue ;
+    border-radius: 0px !important;
+    font-size: 1rem;
+    line-height: 1.5;
+    width: 100%;
+}
