@@ -3,6 +3,12 @@
 .mat-form-field {
   font-size: 14px;
   width: 40%;
+  margin-right: 30px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  border: 1px solid #ccc;
+  background-color: white;
 }
 
 .green {
@@ -18,7 +24,7 @@
 }
 
 .mat-tab-body-content {
-  height: 370px  !important;
+  height: 370px !important;
 }
 
 .black {
@@ -26,8 +32,12 @@
 }
 
 :host ::ng-deep {
+  
   .mat-stroked-button {
-    width: 40%;
+    // width: 40%;// changes
+    background-color: #e6e5e5;
+    border : 0px !important;
+    border-radius : none !important;
   }
 
   .mat-progress-spinner {
@@ -79,6 +89,7 @@ table {
   flex-direction: column;
   max-height: 700px;
   min-width: 300px;
+  margin-top: 1px;
 
   .mat-stroked-button {
     font-size: 12px;
@@ -86,6 +97,10 @@ table {
     line-height: 20px;
     padding: 0 0px;
     margin: 1px;
+    background-color: #e6e5e5;
+    border : 0px !important;
+    border-radius : 0px !important;
+    margin-right :12px
   }
 
   .mat-header-cell:last-of-type {
@@ -110,7 +125,9 @@ table {
 
 .search {
   .mat-form-field {
-    width: 25% !important;
+    width: 70% !important;
+    border: 1px solid #ccc;
+    height: 2em;
   }
 }
 
@@ -119,12 +136,24 @@ table {
   padding-left: 15px !important;
 }
 
+@media screen and (max-width:765px) { 
+  .form-control {
+    width: 50%;
+    float: right;
+    margin-right:30px
+  }
+}
+
 @media screen and (min-width:765px) {
   // /deep/ .mat-tab-body-content {
   //   width: 900px !important;
   //   overflow: hidden !important;
   // }
-
+  .form-control {
+    width: 35%;
+    float: right;
+    margin-right:30px
+  }
   .mat-cell {
     flex-wrap: wrap;
   }
@@ -205,8 +234,8 @@ table {
   .mat-column-active {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 8% !important;
-    width: 8% !important;
+    flex: 0 0 6% !important;
+    width: 6% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
@@ -226,6 +255,7 @@ table {
     overflow-wrap: break-word;
     word-wrap: break-word;
 
+    padding-left: 10%;
     word-break: break-word;
 
     -ms-hyphens: auto;
@@ -319,3 +349,66 @@ table {
     width: 100% !important;
   }
 }
+
+
+.mat-button {
+  border-radius: 0px !important;
+}
+
+//////////////////
+:host /deep/ .mat-paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 30px !important;
+  /* padding: 0 8px; */
+  /* padding-top: 14px; */
+  flex-wrap: wrap-reverse;
+  width: 100%;
+  background: #ccc !important;
+  height: 30px;
+  // margin-top: 40px;
+  position: absolute;
+  bottom : 64px;
+}
+
+// :host /deep/ .mat-checkbox-frame {
+//   border-color: #9E9E9E;
+// }
+:host /deep/  {
+  .mat-paginator-range-label,.mat-paginator-page-size,.mat-paginator-icon {
+    margin-top : 10px;
+  }
+}
+
+.mat-button {
+  color: white !important;
+  /* border: 1px solid #004072; */
+  border-radius: none !important;
+  background: #004072;
+  // margin-top: -55px !important;
+  /* padding: 5px; */
+  border:none;
+  margin-right : 10px;
+  border-radius: none !important;
+}
+
+// ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+//   background-color: green !important; /* Red background for example */
+// }
+
+/deep/ .mat-checkbox.mat-accent {
+  .mat-checkbox-frame {
+    border: 1px solid  #9E9E9E;
+  }
+
+  &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+  }
+
+  .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+  }
+}
+

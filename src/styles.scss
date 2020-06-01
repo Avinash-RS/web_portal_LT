@@ -580,10 +580,10 @@ mat-icon {
   padding-bottom: 23px;
 }
 
-.mat-header-row {
-  background: #d7e7ff !important;
-  min-height: 40px !important;
-}
+// .mat-header-row {
+//   background: #d7e7ff !important;
+//   min-height: 40px !important;
+// }
 
 h1 {
   color: #0e3877;
@@ -650,4 +650,29 @@ h1 {
 
 .blue_border {
   border: 1.0px solid $color-blue !important;
+}
+
+
+//////////////////////
+//Breadcrumb change : Mythreyi--- Sarat
+.breadcrumb {
+  display: flex;
+  padding: 0px 0px 0px 26px !important;
+  flex-wrap: wrap;
+  border-radius: 0px !important;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #e5e3e3 !important;
+  border-radius: .25rem;
+  height: 21px !important;
+
+  a,
+  a:hover {
+    color: #004072;
+  }
+}
+
+.mat-header-row {
+  background: #ccc !important;
+  min-height: 40px !important;
 }

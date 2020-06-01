@@ -4,24 +4,34 @@
     <li class="breadcrumb-item active" aria-current="page">View Users</li>
   </ol>
 </nav>
-<div class="container">
-  <h1>User Management</h1>
+<!-- <div class="container"> -->
+<div>
+  <div class="row">
+    <div class="col-lg-4">
+      <h1 style="padding-left: 25px;">User Management</h1>
+    </div>
+    <div class="col-lg-7 float_right">
+      <!-- <mat-label>Search</mat-label><br> -->
+      <!-- <mat-form-field class="search">
+        <input matInput placeholder = "Search" (keyup)="applyFilter($event.target.value)">
+      </mat-form-field> -->
+      <input class="form-control" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)" aria-label="Search">
+    </div>
 
+    <div class="col-lg-1 float_right">
+      <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+        <mat-icon style="color: white;">add</mat-icon>Add User
+      </button>
+    </div>
+  </div>
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
   </div>
 
-  <div class="p-5px">
-    <mat-label>Search</mat-label><br>
-    <mat-form-field class="search">
-      <input matInput (keyup)="applyFilter($event.target.value)">
-    </mat-form-field>
-
-    <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
-      <mat-icon>add</mat-icon>Add User
-    </button>
-
-    <div class="example-container mat-elevation-z8">
+  <hr style="border: 1px solid #ccc;margin-bottom:0 !important; ">
+  <div>
+    <!-- <div class="p-5px"> -->
+    <div class="example-container ">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
@@ -104,9 +114,10 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
+
             <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
               title="View {{element.username}}'s details">
-              <mat-icon>remove_red_eye</mat-icon>
+              <mat-icon style="color: #e6e5e5;font-size:20px; width:20px;">remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button
               [disabled]="(selectedArray && selectedArray.length > 0)"
@@ -243,7 +254,7 @@
             </form>
           </mat-dialog-content>
           <!-- <mat-dialog-actions> -->
-            <!--Button code-->
+          <!--Button code-->
           <!-- </mat-dialog-actions> -->
         </mat-tab>
 
