@@ -321,11 +321,12 @@ h2{
 .col-9 {
   flex: 0 0 73%;
   max-width: 73%;
-  margin-top: 89px;
 }
 .diffcol-9{
   flex: 0 0 100%;
   max-width: 100%;
+  margin-left: 23%;
+    margin-top: -101%;
   padding: 2.5%;
 }
 .close{
@@ -342,6 +343,12 @@ h2{
   border-radius: 7px;
   color: #1F3777;
 }
+.sort{
+  position: absolute;
+left: 22.4em;
+top: 0em;
+}
+
 
 
 

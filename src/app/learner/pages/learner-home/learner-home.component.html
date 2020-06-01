@@ -136,24 +136,47 @@
 
     <div style="margin-top: 3%;"></div>
     <div class="row">
-      <div class="col-9">
+      <div class="col-6">
         <h3>All Courses <span class="tot">(Total 2500 results )</span></h3>
         <div class="vertical"></div>
       </div>
+
       <div class="col-3">
-        <button class="filterbtn"> <i class="fa fa-filter colrr"></i>
+        <button class="submit" (click)="viewCategory(element)"> Category
+          <i class="fa fa-chevron-down colr"></i>
+        </button>
+      </div>
+      <div class="col-3">
+        <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
+          <i class="fa fa-filter colrr"></i>
           Filter
         </button>
-
         <select class="category" (change)="onChange($event.target.value)">
           <option value="allcourses">All Courses</option>
           <option value="popularCourse">Popular Courses</option>
-
         </select>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-3" *ngIf="!showAppliedFiltre">
+        <app-guideline-search></app-guideline-search>
+      </div>
+     
+      <div class="col-9" *ngIf="!showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showAppliedFiltre">
         <div class="container containerShadow">
           <div class="row">
             <ng-container
