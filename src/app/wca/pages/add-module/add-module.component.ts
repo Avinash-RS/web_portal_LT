@@ -28,6 +28,7 @@ export class AddModuleComponent implements OnInit {
   isFileContent = false;
   @ViewChild('file') fileUploaded;
   scormPath = '';
+  isScrom: boolean;
 
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
@@ -95,6 +96,7 @@ export class AddModuleComponent implements OnInit {
     this.moduleList = [];
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
+      this.isScrom = this.courseDetails.coursetype == "SCORM" ? true : false;
       if (this.isRepo === 'true') {
         this.getRepoModules();
         this.isRepo = 'false';
@@ -150,9 +152,11 @@ export class AddModuleComponent implements OnInit {
     const formData = new FormData();
     formData.append('scrom', scormCourse);
     this.apiService.uploadScromCourse(formData).subscribe((data: any) => {
+      this.isScrom = true;
       this.scormPath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
     }, error => {
       this.scormPath = '';
+      this.isScrom = false;
       this.fileUploaded.nativeElement.value = '';
       this.toast.warning('oops someting went wrong. Try again!!!');
     });
@@ -190,6 +194,7 @@ export class AddModuleComponent implements OnInit {
   }
   deleteScromFile(e) {
     this.scormPath = '';
+    this.isScrom = false;
     this.courseDetails.coursetype = '';
     this.courseDetails.coursefile = '';
     event.stopPropagation();

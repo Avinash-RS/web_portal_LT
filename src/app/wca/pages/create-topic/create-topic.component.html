@@ -103,9 +103,9 @@
 
                                                             </span>
                                                             <span class="example-spacer"></span>
-                                                            <span *ngIf="query?.edit">
+                                                            <span *ngIf="query">
                                                                 <mat-icon style="display: none;">save</mat-icon>
-                                                                <mat-icon (click)="DeleteTopic(i,$event)">delete
+                                                                <mat-icon style="display: none;" (click)="DeleteTopic(i,$event)">delete
                                                                 </mat-icon>
                                                             </span>
                                                         </div>
@@ -171,8 +171,7 @@
                                                                         *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'"
                                                                         class="previewAndTime"
                                                                         [class.active]="queryData?.template_details[i]?.name==active?.name">
-                                                                        <label style="font-size: 12px;">Uploaded
-                                                                            sucessfully</label>
+                                                                        <label style="font-size: 12px;">File Uploaded</label>
                                                                     </span>
                                                                     </span>
                                                                 <span class="dspFlxinside" [formGroupName]="i">
@@ -213,7 +212,7 @@
                                                                                     <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
                                                                                 </div>
                                                                                   <div class="addSub">
-                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j)">add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j,subTitleindex)">add_circle</mat-icon>
                                                                                     <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)">delete</mat-icon>
                                                                                   </div>                                                                             
                                                                             </div>
