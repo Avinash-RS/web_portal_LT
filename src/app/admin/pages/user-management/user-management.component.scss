@@ -1,5 +1,9 @@
 @import "variable";
 
+.m-b-10 {
+  margin-bottom : 10px;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 40%;
@@ -32,12 +36,12 @@
 }
 
 :host ::ng-deep {
-  
+
   .mat-stroked-button {
     // width: 40%;// changes
     background-color: #e6e5e5;
-    border : 0px !important;
-    border-radius : none !important;
+    border: 0px !important;
+    border-radius: none !important;
   }
 
   .mat-progress-spinner {
@@ -98,9 +102,9 @@ table {
     padding: 0 0px;
     margin: 1px;
     background-color: #e6e5e5;
-    border : 0px !important;
-    border-radius : 0px !important;
-    margin-right :12px
+    border: 0px !important;
+    border-radius: 0px !important;
+    margin-right: 12px
   }
 
   .mat-header-cell:last-of-type {
@@ -114,6 +118,21 @@ table {
 .mat-table {
   overflow: auto;
   max-height: 650px;
+
+  html {
+    overflow: scroll;
+    overflow-x: hidden !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent !important;
+  }
+
+}
+
+#deactivate {
+  padding: 0px 5px;
 }
 
 .mat-cell,
@@ -136,15 +155,16 @@ table {
   padding-left: 15px !important;
 }
 
-@media screen and (max-width:765px) { 
+@media screen and (max-width:765px) {
   .form-control {
     width: 50%;
     float: right;
-    margin-right:30px
+    margin-right: 30px
   }
 }
 
 @media screen and (min-width:765px) {
+
   // /deep/ .mat-tab-body-content {
   //   width: 900px !important;
   //   overflow: hidden !important;
@@ -152,8 +172,9 @@ table {
   .form-control {
     width: 35%;
     float: right;
-    margin-right:30px
+    margin-right: 30px
   }
+
   .mat-cell {
     flex-wrap: wrap;
   }
@@ -166,8 +187,8 @@ table {
   .mat-column-email {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 20% !important;
-    width: 20% !important;
+    flex: 0 0 27% !important;
+    width: 27% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
@@ -180,14 +201,14 @@ table {
   }
 
   .mat-column-select {
-    flex: 0 0 75px !important;
+    flex: 0 0 8% !important;
   }
 
   .mat-column-name {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
+    flex: 0 0 18% !important;
+    width: 18% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
@@ -199,27 +220,43 @@ table {
     hyphens: auto;
   }
 
-  .mat-column-emailid {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 25% !important;
-    width: 25% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+  // .mat-column-emailid {
+  //   word-wrap: break-word !important;
+  //   white-space: unset !important;
+  //   flex: 0 0 28% !important;
+  //   width: 28% !important;
+  //   overflow-wrap: break-word;
+  //   word-wrap: break-word;
 
-    word-break: break-word;
+  //   word-break: break-word;
 
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-  }
+  //   -ms-hyphens: auto;
+  //   -moz-hyphens: auto;
+  //   -webkit-hyphens: auto;
+  //   hyphens: auto;
+  // }
 
   .mat-column-user_id {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 10% !important;
-    width: 10% !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-mobile {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
@@ -250,12 +287,11 @@ table {
   .mat-column-actions {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 25% !important;
-    width: 25% !important;
+    flex: 0 0 17% !important;
+    width: 17% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
-    padding-left: 10%;
     word-break: break-word;
 
     -ms-hyphens: auto;
@@ -265,11 +301,7 @@ table {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width:765px) {
-  /deep/ .mat-paginator-container {
-    min-height: 120px !important;
-  }
-
+@media screen and (max-width:765px) {
   .avatar {
     width: 45%;
     height: 100%;
@@ -350,6 +382,21 @@ table {
   }
 }
 
+@media screen and (min-width:405px) {
+  /deep/ .mat-paginator-container {
+    min-height: 120px !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    background: #ccc !important;
+    height: 120px;
+    position: absolute;
+    bottom: 64px;
+  }
+}
+
 
 .mat-button {
   border-radius: 0px !important;
@@ -361,23 +408,20 @@ table {
   align-items: center;
   justify-content: flex-end;
   min-height: 30px !important;
-  /* padding: 0 8px; */
-  /* padding-top: 14px; */
   flex-wrap: wrap-reverse;
   width: 100%;
   background: #ccc !important;
   height: 30px;
-  // margin-top: 40px;
   position: absolute;
-  bottom : 64px;
+  bottom: 64px;
 }
 
-// :host /deep/ .mat-checkbox-frame {
-//   border-color: #9E9E9E;
-// }
-:host /deep/  {
-  .mat-paginator-range-label,.mat-paginator-page-size,.mat-paginator-icon {
-    margin-top : 10px;
+:host /deep/ {
+
+  .mat-paginator-range-label,
+  .mat-paginator-page-size,
+  .mat-paginator-icon {
+    margin-top: 10px;
   }
 }
 
@@ -388,8 +432,8 @@ table {
   background: #004072;
   // margin-top: -55px !important;
   /* padding: 5px; */
-  border:none;
-  margin-right : 10px;
+  border: none;
+  margin-right: 10px;
   border-radius: none !important;
 }
 
@@ -399,7 +443,7 @@ table {
 
 /deep/ .mat-checkbox.mat-accent {
   .mat-checkbox-frame {
-    border: 1px solid  #9E9E9E;
+    border: 1px solid #9E9E9E;
   }
 
   &.mat-checkbox-checked .mat-checkbox-background {
@@ -411,4 +455,3 @@ table {
     stroke: #004072 !important;
   }
 }
-
