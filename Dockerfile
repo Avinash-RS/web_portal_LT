@@ -14,8 +14,8 @@ RUN npm install ng2-charts@2.2.3
 COPY . .
 #RUN ng serve
 
-RUN npm run build:${PORT}
-
+#RUN npm run build:${PORT}
+RUN npm run build
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY --from=build /usr/src/app/dist/lxpfrontend /usr/share/nginx/html
