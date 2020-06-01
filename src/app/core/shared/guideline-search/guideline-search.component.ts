@@ -45,7 +45,6 @@ export class GuidelineSearchComponent implements OnInit {
   Lvl3CatId: any = [];
   pagenumber = 0;
   allcourses: any;
-  // showAppliedFiltre: boolean = false;
   authorPageNo = 0;
   authorPerPage = 5;
   course_languagePageNo = 0;
@@ -65,6 +64,17 @@ export class GuidelineSearchComponent implements OnInit {
     private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
+    this.CommonServices.selectedCategory.subscribe(data => {
+      console.log('data',data);
+      this.Lvl1CatId = data.Lvl1CatId,
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+    })
     this.TodateOptions = {
       dateFormat: 'yyyy-mm-dd',
       disableSince: {
@@ -76,16 +86,7 @@ export class GuidelineSearchComponent implements OnInit {
       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate() },
       disableUntil: { year: 2020, month: 3, day: 31 }
     }
-    this.CommonServices.selectedCategory.subscribe(data => {
-      this.Lvl1CatId = data.Lvl1CatId,
-      this.level1selectedID = data.level1selectedID,
-      this.Lvl2CatId= data.Lvl2CatId,
-      this.level2selectedID = data.level2selectedID,
-      this.Lvl3CatId= data.Lvl3CatId,
-      this.level3selectedID = data.level3selectedID,
-      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
-      this.allLvlCategory=data.allLvlCategory 
-    })
+    this.filter();
   }
   filter() {
     if (!this.selectedFilter || !this.selectedFilter.filterVal) {
@@ -96,6 +97,7 @@ export class GuidelineSearchComponent implements OnInit {
       this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
       this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
       this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+      console.log(this.selectedFilter)
 
       this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
         if (result['data']['getDetailsCount']['success'] == 'true') {

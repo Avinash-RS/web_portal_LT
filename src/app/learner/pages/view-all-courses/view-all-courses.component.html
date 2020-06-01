@@ -165,10 +165,17 @@
 <!-- </div> -->
 <div class="row">
   <div class="col-md-10 col-sm-12 col-12">
-    <button class="submit" (click)="getCategory(getCategoryDialog)"> Category
+    <ng-container *ngIf="!showCategory">
+    <button class="submit"> Category
       <i class="fa fa-chevron-down colr"></i>
     </button>
-    <app-guideline-search [showAppliedFiltre]="false"></app-guideline-search>
+  </ng-container>
+    <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
+      <i class="fa fa-filter colrr"></i>
+    </button>
+    <ng-container *ngIf="!showAppliedFiltre">
+    <app-guideline-search></app-guideline-search>
+    </ng-container>
     <button class="submit sort" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
@@ -189,11 +196,11 @@
   </div>
   <br>
   <br>
-
+<!-- 
   <div class="row">
     <div class="col-3" *ngIf="showAppliedFiltre">
       <app-guideline-search></app-guideline-search>
-    </div>
+    </div> -->
     <ng-container *ngIf="showAppliedFiltre">
       <div class="col-9">
         <div class="container">
@@ -261,7 +268,6 @@
     <pagination-controls class="my-pagination" (pageChange)="onpagination($event)">
     </pagination-controls>
   </div>
-
-
-<!-- </div> -->
-<app-category-component></app-category-component>
+  <ng-container *ngIf="!showCategory">
+    <app-category-component></app-category-component>
+  </ng-container>

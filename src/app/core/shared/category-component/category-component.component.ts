@@ -34,6 +34,7 @@ export class CategoryComponentComponent implements OnInit {
   publishedToDate: String;
   publishedFromDate: String;
   loader: boolean;
+  
 
   constructor(private dialog: MatDialog,public learnerservice: LearnerServicesService, private alert: AlertServiceService,
     private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
@@ -71,7 +72,6 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
 })
   }
   getCategory(templateRef: TemplateRef<any>) {
-    // this.showAppliedFiltre = false;
     this.dialog.open(templateRef);
   }
   isSelected(s: any) {
@@ -239,9 +239,10 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
           Lvl3CatId: this.Lvl3CatId,
           level3selectedID : this.level3selectedID,
           allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
-          allLvlCategory:this.allLvlCategory 
+          allLvlCategory:this.allLvlCategory,
         }
         this.CommonServices.selectedCategory$.next(obj);
+        console.log('obj',obj)
       })
      
   }

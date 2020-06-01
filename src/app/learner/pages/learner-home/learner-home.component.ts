@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-learner-home',
@@ -21,10 +22,13 @@ export class LearnerHomeComponent implements OnInit {
   incomplete:any;
   popularsCourse: any;
   loadingCatalogue = false;
+  showAppliedFiltre : Boolean =true;
+  showCategory : Boolean = true;
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
-    private globalservice: GlobalServiceService,public commonServices: CommonServicesService) {
+    private globalservice: GlobalServiceService,public commonServices: CommonServicesService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {

@@ -141,17 +141,14 @@
         <div class="vertical"></div>
       </div>
 
-      <div class="col-3">
+      <div class="col-3" *ngIf="showCategory">
         <app-category-component></app-category-component>
       </div>
       <div class="col-3">
-<!--       
-        <button class="filterbtn"> <i class="fa fa-filter colrr"></i>
+        <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
+          <i class="fa fa-filter colrr"></i>
           Filter
-        </button> -->
-           <!-- <ng-container class="filter"> -->
-       
-        <!-- </ng-container> -->
+        </button>
         <select class="category" (change)="onChange($event.target.value)">
           <option value="allcourses">All Courses</option>
           <option value="popularCourse">Popular Courses</option>
@@ -159,7 +156,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-3">
+      <div class="col-3" *ngIf="!showAppliedFiltre">
         <app-guideline-search></app-guideline-search>
       </div>
      

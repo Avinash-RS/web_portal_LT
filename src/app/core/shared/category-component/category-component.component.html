@@ -1,6 +1,8 @@
-<button class="submit" (click)="getCategory(getCategoryDialog)"> Category
+<ng-container>
+<button class="submit" (click)="showCategory; getCategory(getCategoryDialog)"> Category
   <i class="fa fa-chevron-down colr"></i>
 </button>
+</ng-container>
 <ng-template #getCategoryDialog>
   <mat-dialog-title>
     <mat-icon class="close" (click)="closedialogbox()">clear</mat-icon>
