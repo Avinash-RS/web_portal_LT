@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./guideline-search.component.scss']
 })
 export class GuidelineSearchComponent implements OnInit {
+  @Input('showAppliedFiltre') showAppliedFiltre : boolean;
   TodateOptions: { dateFormat: string; disableSince: { year: number; month: number; day: number; }; };
   FromdateOptions: {
     dateFormat: string; disableUntil: { year: number; month: number; day: number; };
@@ -44,7 +45,7 @@ export class GuidelineSearchComponent implements OnInit {
   Lvl3CatId: any = [];
   pagenumber = 0;
   allcourses: any;
-  showAppliedFiltre: boolean = false;
+  // showAppliedFiltre: boolean = false;
   authorPageNo = 0;
   authorPerPage = 5;
   course_languagePageNo = 0;
