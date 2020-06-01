@@ -12,7 +12,8 @@
             <div class="row">
               <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="fromdate"  [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" [required] = requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
+                  <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)"
+                    [required]=requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
                     placeholder="Choose from date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
@@ -23,8 +24,9 @@
               </div>
               <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield  [required] = requiredfield #todate1="ngModel" [matDatepicker]="picker1"
-                    placeholder="Choose to date" color="accent" [min]=fromdate [max]=today>
+                  <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield [required]=requiredfield
+                    #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
+                    [min]=fromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                   <mat-error *ngIf="todate1.errors && requiredfield">
@@ -32,20 +34,25 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                 <button class="btn  btn btn-primary button_border view-but"
-                    (click)="filter(filterform,'0')"> 
-                      Filter</button>
+              <div class=" col-lg-4 col-md-12 col-sm-12 col-12  float_right m-b-10">
+                <div class="row">
+                  <div class="col-4">
+                    <button class="btn  button_border width_95 center f_size_14" (click)="filter(filterform,'0')">
+                      <span class="material-icons f_size_17" style="vertical-align: middle;">
+                        filter_alt</span>Filter</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btn  button_border width_95 center  f_size_14" (click)="cancel(filterform)">
+                      <span class="material-icons  f_size_17" style="vertical-align: middle;">
+                        refresh</span>Reset</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btn button_border width_95 center  f_size_14" (click)="export(filterform)">
+                      <span class="material-icons  f_size_15" style="vertical-align: middle;">
+                        publish</span>Export</button>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                 <button class="btn  btn btn-danger button_border"
-                    (click)="cancel(filterform)">Reset</button>
-              </div>
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                  <span> <button class="btn  btn btn-primary button_border view-but"
-                  (click)="export(filterform)"> Export</button></span> 
-             </div>
             </div>
           </form>
         </div>
@@ -64,7 +71,7 @@
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
           <mat-header-cell *matHeaderCellDef>
             {{ column.header }}</mat-header-cell>
-          <mat-cell  *matCellDef="let row">{{ column.cell(row) }}
+          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
@@ -82,7 +89,8 @@
       </mat-table>
     </div>
 
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)" showFirstLastButtons>
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
+      showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>
@@ -103,8 +111,7 @@
                   class="color_black capitalize f_wt_400">{{viewdetail?.module_name|| 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
-              <label>Description : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
+              <label>Description : <label class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
                 </label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
@@ -118,11 +125,12 @@
                   class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
-              <label>Created on : <label class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
+              <label>Created on : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
+                  {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
               </label>
             </div>
           </div>

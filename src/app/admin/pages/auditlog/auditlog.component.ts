@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-auditlog',
   templateUrl: './auditlog.component.html',
-  styleUrls: ['./auditlog.component.css']
+  styleUrls: ['./auditlog.component.scss']
 })
 export class AuditlogComponent implements OnInit {
   reports: any;
@@ -28,7 +28,7 @@ export class AuditlogComponent implements OnInit {
   ];
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private dialog: MatDialog , private adminservice: AdminServicesService) { }
+  constructor(private dialog: MatDialog, private adminservice: AdminServicesService) { }
 
   ngOnInit() {
     this.displayedColumns = this.displayedColumns.concat(['action']);
@@ -79,7 +79,7 @@ export class AuditlogComponent implements OnInit {
         this.dataSource.data = this.reports;
         this.resultsLength = result?.total_count;
       }
-   });
+    });
   }
   openviewdialog(data, templateRef) {
     this.dialog.open(templateRef);
@@ -98,10 +98,10 @@ export class AuditlogComponent implements OnInit {
     if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
       this.requiredfield = false;
       const data = {
-        from_date : filterform.value.fromdate.toISOString(),
-        to_date : filterform.value.todate.toISOString(),
-        pagenumber : pgnumber
-       };
+        from_date: filterform.value.fromdate.toISOString(),
+        to_date: filterform.value.todate.toISOString(),
+        pagenumber: pgnumber
+      };
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
         this.resultsLength = null;
         if (result?.success === true) {
@@ -123,15 +123,15 @@ export class AuditlogComponent implements OnInit {
   }
   export(filterform) {
     this.requiredfield = false;
-    const fromdate = filterform.value.fromdate && filterform.value.todate ?  filterform.value.fromdate.toISOString() : 'undefined';
-    const todate = filterform.value.todate &&  filterform.value.fromdate ? filterform.value.todate.toISOString() : 'undefined';
+    const fromdate = filterform.value.fromdate && filterform.value.todate ? filterform.value.fromdate.toISOString() : 'undefined';
+    const todate = filterform.value.todate && filterform.value.fromdate ? filterform.value.todate.toISOString() : 'undefined';
     this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
-        if (result?.data?.get_admin_export_auditlog?.success === true) {
-          window.open(result?.data?.get_admin_export_auditlog.message);
-        } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
-          Swal.fire('Report not found');
-        }
-     });
+      if (result?.data?.get_admin_export_auditlog?.success === true) {
+        window.open(result?.data?.get_admin_export_auditlog.message);
+      } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
+        Swal.fire('Report not found');
+      }
+    });
   }
   next(e, filterform) {
     if (filterform.value.fromdate && filterform.value.todate) {
