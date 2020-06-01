@@ -12,9 +12,9 @@ import {
   getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
   getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue, getAdminOverview,
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
-  enrolledCourse, getgroupbyid, getTopfiveDashboardType
+  enrolledCourse, getgroupbyid, getTopfiveDashboardType, getadminexportauditlog
 } from './operations/admin_query';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -547,4 +547,28 @@ export class AdminServicesService {
     });
   }
   // End of dashboard
+
+  getadminexportauditlog(fromdate, todate) {
+    return this.Apollo.query({
+      query: getadminexportauditlog,
+      variables: {
+        from_date: fromdate,
+        to_date: todate
+      }
+    });
+  }
+
+  getfilteredauditlog(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
+    };
+    return this.http.post(environment.apiUrl + 'get_audit_info', data, httpOptions);
+  }
+
+  getauditlogreports(pagenumber) {
+    const headers1 = new HttpHeaders().set('Authorization', localStorage.getItem('token'));
+    const params1 = new HttpParams().set('pagenumber', pagenumber);
+    const options = { params: params1, headers: headers1 };
+    return this.http.get<any[]>(environment.apiUrl + 'getauditlog' , options);
+  }
 }
