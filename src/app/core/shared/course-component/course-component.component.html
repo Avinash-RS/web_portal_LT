@@ -34,7 +34,7 @@
   <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
   <mat-card-content>
-    <div class="row course-name-row no_margin" (click)="gotoDescription()">
+    <!-- <div class="row course-name-row no_margin" (click)="gotoDescription()">
       <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 no_padding"
         style="word-wrap: break-word">
         {{course.course_name}}
@@ -44,7 +44,24 @@
         <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
         &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>
+    </div> -->
+    <div class="conten no_padding" (click)="gotoDescription()">
+      <div class="mask display_flex user-rating no_padding" (click)="gotoDescription()">
+        <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
+        &nbsp;&nbsp; <strong class="f_size_13"
+          *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
+      </div>
+      <p class="f_wt_500 f_sz_14 course-name" *ngIf="course.course_name.length > 40"
+        matTooltip="{{course.course_name}}">
+        {{(course.course_name  | slice:0:40)+'...'}}
+      </p>
+      <p class="f_wt_500 f_sz_14 course-name" *ngIf="course.course_name.length < 40">
+        {{course.course_name}}
+      </p>
+      <!-- >Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam.</p> -->
     </div>
+
     <mat-card-action>
       <div class="row no_margin enroll_row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_sz_14 float_left no_padding learner-count"
