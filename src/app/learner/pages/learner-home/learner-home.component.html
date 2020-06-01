@@ -141,8 +141,10 @@
         <div class="vertical"></div>
       </div>
 
-      <div class="col-3" *ngIf="showCategory">
-        <app-category-component></app-category-component>
+      <div class="col-3">
+        <button class="submit" (click)="viewCategory(element)"> Category
+          <i class="fa fa-chevron-down colr"></i>
+        </button>
       </div>
       <div class="col-3">
         <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
@@ -160,7 +162,21 @@
         <app-guideline-search></app-guideline-search>
       </div>
      
-      <div class="col-9">
+      <div class="col-9" *ngIf="!showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showAppliedFiltre">
         <div class="container containerShadow">
           <div class="row">
             <ng-container

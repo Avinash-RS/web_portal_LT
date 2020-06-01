@@ -1,27 +1,28 @@
 @import "variable";
 
-.submit {
-    width: 45%;
-    border: none !important;
-    background-color: $color-white;
-    color: $color-blue;
-    text-align: left;
-    box-shadow: 0px 7px 5px 2px #0b0b0b17;
-    height: 45px;
-    letter-spacing: 1px;
-    font-weight: 500;
-    font-size: 16px;
-    border-radius: 3px;
-    margin-left: 59.5%;
-    margin-top: -3%;
-  }
+// .submit {
+//     width: 45%;
+//     border: none !important;
+//     background-color: $color-white;
+//     color: $color-blue;
+//     text-align: left;
+//     box-shadow: 0px 7px 5px 2px #0b0b0b17;
+//     height: 45px;
+//     letter-spacing: 1px;
+//     font-weight: 500;
+//     font-size: 16px;
+//     border-radius: 3px;
+//     margin-left: 59.5%;
+//     margin-top: -3%;
+//   }
   
-  .submit:focus {
-    outline: none;
-    box-shadow: none;
-    background-color: $color-blue ;
-    color: $color-white;
-  }
+//   .submit:focus {
+//     outline: none;
+//     box-shadow: none;
+//     background-color: $color-blue ;
+//     color: $color-white;
+//   }
+// .category-Component{
   .close{
     float: right !important;
     margin-top: -24px;
@@ -123,7 +124,7 @@
     margin-top: 190px !important;
     // margin-top: 22px !important;
     box-sizing: border-box;
-    overflow:  hidden !important;
+    overflow:  scroll !important;
     outline: 0;
     width: 83em !important;
     height: 550px !important;
@@ -149,3 +150,4 @@
     background-color: $color-white;
     border: 1px solid $color-border;
   }
+// }

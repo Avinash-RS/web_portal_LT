@@ -74,7 +74,10 @@ export class GuidelineSearchComponent implements OnInit {
       this.level3selectedID = data.level3selectedID,
       this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
       this.allLvlCategory=data.allLvlCategory
+      console.log('lvl1',this.Lvl1CatId)
     })
+    console.log('lvl111111111111111111111111111111',this.Lvl1CatId)
+
     this.TodateOptions = {
       dateFormat: 'yyyy-mm-dd',
       disableSince: {

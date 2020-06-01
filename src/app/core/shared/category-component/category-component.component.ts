@@ -71,9 +71,9 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
   } 
 })
   }
-  getCategory(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
-  }
+  // getCategory(templateRef: TemplateRef<any>) {
+  //   this.dialog.open(templateRef);
+  // }
   isSelected(s: any) {
     if (s.level == 1) {
       return this.Lvl1CatId.findIndex((item) => item.category_id === s.category_id) > -1 ? true : false;
@@ -86,6 +86,7 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
   getthreeLevelCat() {
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
       this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
+      console.log('inside',this.allLvlCategory);
     })
   }
   getcoursecategories() {

@@ -5,6 +5,8 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { MatDialog } from '@angular/material';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+
 
 @Component({
   selector: 'app-learner-home',
@@ -91,5 +93,14 @@ export class LearnerHomeComponent implements OnInit {
     }else{
       this.getallcourses();
     }
+  }
+  viewCategory(module) {
+    const dg = this.dialog.open(CategoryComponentComponent, {
+      width: '95%'
+    });
+
+    // dg.afterClosed().subscribe((data) => {
+    //   this.getallcourses();
+    // });
   }
 }
