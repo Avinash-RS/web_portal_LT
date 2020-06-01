@@ -41,7 +41,37 @@
     object-fit: cover;
 }
 
+::ng-deep .br-default .br-unit {
+    margin-right: 8px !important;
+    font-size: 11px !important;
+    height: 18px;
+    width: 10px !important;
+}
+.mar{
+    margin-left: 15px;
+}
 
+.small, small {
+    font-size: 75% !important;
+    font-weight: 400;
+}
+
+.countt{
+    font-size: 12px;
+    color: #333;
+}
+
+::ng-deep .br-default .br-unit:after {
+    content: "\2605";
+    // color: $color-blue;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: $color-darkGrey;
+}
+
+::ng-deep .br-default .br-selected:after {
+    color: $color-blue !important;
+    -webkit-text-stroke-color: $color-blue;
+}
 
 .containerOverlay {
     .overlay {
@@ -78,8 +108,8 @@
 // FOR LOGGED IN USER
 
 .course-name-row {
-    min-height: 10vh !important;
-    max-height: 12vh !important;
+    min-height: 4vh !important;
+    // max-height: 12vh !important;
 }
 
 
@@ -136,10 +166,19 @@ strong {
     font-weight: 500 !important;
     width: 90%;
     padding: 3px;
+    margin-left: 54%;
+    margin-top: 15%;
+    margin-right: 50%;
     border-radius: 0;
     font-size: smaller;
     text-align: center;
     border: none;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-size: 18px;
+    color: #ccc !important;
 }
 
 
@@ -151,17 +190,11 @@ strong {
     margin: 0 !important
 }
 
-:host ::ng-deep .br-default .br-unit {
-    margin-right: 5px;
-    font-size: 19px !important;
-    height: 18px;
-    width: 10px !important;
-}
-
 
 .course-card {
     border-radius: 0;
-    background-color: #F5FAFA;
+    background-color: $color-white !important;
+    height: 270px;
 
     .img {
         width: 100%;
@@ -170,7 +203,12 @@ strong {
 }
 
 .shadow {
-    box-shadow: 5px 5px 10px 0px $box-shadow !important;
+    // box-shadow: 5px 5px 10px 0px $box-shadow !important;
+    border:1px solid #ccc;
+}
+
+.mat-card:not([class*='mat-elevation-z']) {
+    box-shadow: none !important;
 }
 
 
@@ -191,7 +229,7 @@ strong {
 
 .user-rating {
     flex-direction: row;
-    justify-content: flex-end;
+    // justify-content: flex-end;
 }
 
 
