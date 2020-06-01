@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName} from '@core/services/operations/common_query';
+  getCoursesByName,get_all_course_by_usergroup} from '@core/services/operations/common_query';
 import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
   getCourseCategorySearch, getDetailsCount} from '@core/services/operations/common_mutation';
 
@@ -29,6 +29,11 @@ export class CommonServicesService {
   globalCategory$ = new Subject<any>();
   globalCategory = this.globalCategory$.asObservable();
 
+  globalAllCategory$ = new Subject<any>();
+  globalAllCategory = this.globalAllCategory$.asObservable();
+  
+  selectedCategory$ = new Subject<any>();
+  selectedCategory = this.selectedCategory$.asObservable();
 
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
@@ -114,6 +119,16 @@ export class CommonServicesService {
       query: getCoursesByName,
       variables: {
         courseName,
+      }
+    });
+  }
+  getallcourses(groupid, pagenumber,sort_type) {
+    return this.Apollo.query({
+      query: get_all_course_by_usergroup,
+      variables: {
+        group_id: groupid,
+        pagenumber: pagenumber,
+        sort_type:sort_type
       }
     });
   }
