@@ -685,9 +685,18 @@ query getlearnerdashboarddetails($user_id: String){
     valueIncDecPec
     }
     lastAccessedCourses{
+    course_id
     course_name
     course_description
     course_img_url
+    coursePlayerStatus{
+            _id
+            course_id
+            course_percentage
+            location
+            status
+            updated_on
+        }
   }
     }
 }

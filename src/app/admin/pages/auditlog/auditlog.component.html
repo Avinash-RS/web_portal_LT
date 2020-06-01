@@ -2,51 +2,59 @@
 
 <div class="container">
   <div class="p-5px">
+    <div>
+      <h2><b>Audit Log</b> </h2>
+    </div>
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-11 center">
+
         <div>
-          <h2><b>Audit Log</b> </h2>
-        </div>
-        <div>
-          <form #searchForm="ngForm">
+          <form #filterform="ngForm">
             <div class="row">
-              <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
+              <div class="col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="fromdate" [(ngModel)]="fromdate" required #fromdate1="ngModel" [matDatepicker]="picker"
+                  <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)"
+                    [required]=requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
                     placeholder="Choose from date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
-                  <mat-error *ngIf="fromdate1.errors">
+                  <mat-error *ngIf="fromdate1.errors && requiredfield">
                     <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
                   </mat-error>
                 </mat-form-field>
               </div>
-
               <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
                 <mat-form-field class="wid-100">
-                  <input matInput name="todate" [(ngModel)]="todate" required #todate1="ngModel" [matDatepicker]="picker1"
-                    placeholder="Choose to date" color="accent" [min]=fromdate [max]=today>
+                  <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield [required]=requiredfield
+                    #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
+                    [min]=fromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
-                  <mat-error *ngIf="todate1.errors">
+                  <mat-error *ngIf="todate1.errors && requiredfield">
                     <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
                   </mat-error>
                 </mat-form-field>
               </div>
-
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                 <button class="btn  btn btn-primary button_border view-but"
-                    (click)="filter(searchForm)"> 
-                      Filter</button>
+              <div class=" col-lg-4 col-md-12 col-sm-12 col-12  float_right m-b-10">
+                <div class="row">
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14" (click)="filter(filterform,'0')">
+                      <span class="material-icons f_size_17 p-5px" style="vertical-align: middle;">
+                        filter_alt</span>Filter</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14 background-maroon"
+                      (click)="cancel(filterform)">
+                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                        refresh</span>Reset</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14" (click)="export(filterform)">
+                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                        publish</span>Export</button>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                 <button class="btn  btn btn-danger button_border"
-                    (click)="cancel(searchForm)">Reset</button>
-              </div>
-              <div class="col-lg-2 col-sm-4 col-xs-4 col-md-2">
-                  <span> <button class="btn  btn btn-primary button_border view-but"
-                  (click)="export(searchForm)"> Export</button></span> 
-             </div>
             </div>
           </form>
         </div>
@@ -65,10 +73,10 @@
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
           <mat-header-cell *matHeaderCellDef>
             {{ column.header }}</mat-header-cell>
-          <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
           </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="action" *ngIf="dataSource?.data?.length">
+        <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
             <!-- <span class="mobile-label">S.No</span> -->
@@ -81,10 +89,10 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
       </mat-table>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
+        showFirstLastButtons>
+      </mat-paginator>
     </div>
-
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
-    </mat-paginator>
   </div>
 </div>
 
@@ -104,8 +112,7 @@
                   class="color_black capitalize f_wt_400">{{viewdetail?.module_name|| 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
-              <label>Description : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
+              <label>Description : <label class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
                 </label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
@@ -119,34 +126,15 @@
                   class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
-              <label>Created on : <label class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
+              <label>Created on : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
+                  {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
               </label>
             </div>
           </div>
-
-          <!-- <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
-              <label>Languages known : </label><br>
-              <div *ngIf="profileDetails.language.length >0">
-                <div *ngFor="let lang of profileDetails.language" class="display_flex">
-                  {{lang}}
-                </div>
-              </div>
-              <div *ngIf="profileDetails.language.length == 0" class="color_black">
-                NA
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-12">
-              <label>Location : <label class="color_black capitalize f_wt_400">
-                  {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
-                  {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
-                 }} </label></label>
-            </div>
-          </div> -->
           <br>
         </div>
       </form>

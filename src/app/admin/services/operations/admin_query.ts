@@ -1117,3 +1117,12 @@ export const getTopfiveDashboardType = gql`
       }
       }
   }`;
+
+export const getadminexportauditlog = gql`
+   query get_admin_export_auditlog($from_date : String!,$to_date : String!){
+    get_admin_export_auditlog(from_date : $from_date, to_date : $to_date){
+                success
+                error_msg
+                message
+             }
+}`;
