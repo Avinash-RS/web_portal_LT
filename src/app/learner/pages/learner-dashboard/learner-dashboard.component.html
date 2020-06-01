@@ -139,18 +139,38 @@
 <div class="container containerShadow">
     <span class="txthead"><b>Last accessed </b><span class="h8">Courses</span> (click on any courses to resume)</span>
 
-      <div class="lg-box" (click)="gotohome()">
-        <div class="row" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
-      <div class="col-md-4 col-sm-12 col-12">
-        <img class="imge" src="{{dashboard?.course_img_url}}">
-      </div>
-      <div class="col-md-8 col-sm-12 col-12">
-        <h3 class="coursehead">{{dashboard?.course_name}}</h3>
-        <mat-progress-bar class="border-radius-5" mode="determinate"
-          [value]="10">
-        </mat-progress-bar>
-        <span class="percent">10% Complete</span>
-      </div>
-    </div>
-    </div>
+     
+      
+         
+            <div class="row" >
+              <div class="col-md-6 col-sm-12 col-12" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
+              <div class="lg-box" (click)="gotohome()" >
+
+             <div class="row">
+               <div class="col-3">
+                <img class="imge" src="{{dashboard?.course_img_url}}">
+               </div>
+
+               <div class="col-8">
+                <h3 class="coursehead">{{dashboard?.course_name}}</h3>
+                <mat-progress-bar class="border-radius-5" mode="determinate"
+                  [value]="0"
+                  >
+                </mat-progress-bar>
+                <!-- <span class="percent">{{dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0' }}% Complete</span> -->
+              </div>
+            </div>
+            
+       
+
+
+          </div>
+        </div>
+
+
+
+
+  </div>
+
+
 </div>
