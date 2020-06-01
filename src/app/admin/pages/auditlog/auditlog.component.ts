@@ -21,7 +21,7 @@ export class AuditlogComponent implements OnInit {
   resultsLength: any;
   columns = [
     { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
-    { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
+    // { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
     { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${moment(element.created_on).format('LL')}` },
     { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element.updated_on).format('LL')}` },
     { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element.admin_username}` },
