@@ -57,7 +57,7 @@ h2{
 
 
 .trendicon{
-    margin-left: 30%;
+    margin-left: 22%;
 }
 .trendno{
     margin-left: 3px;
@@ -89,8 +89,9 @@ h2{
   .lg-box{
     margin-left: 2%;
     margin-top: 1%;
-    width: 45%;
-    height: 110px;
+    width: 92%;
+    height: auto;
+    // display: grid;
     color: $color-darkGrey ;
     border-radius: 10px;
     background-color: $color-white;
@@ -124,10 +125,9 @@ h2{
     color: $color-blank;
 }
 .imge{
-    padding: 14px;
-    width: 175px;
+    padding: 12px;
+    width: 160px;
     height: 108px;
-    margin-left: 20px;
 }
 
 ::ng-deep .mat-progress-bar-buffer {
