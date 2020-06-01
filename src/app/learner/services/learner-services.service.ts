@@ -6,7 +6,7 @@ import {
   get_board_university_details, get_discipline_details, get_specification_details, get_popular_course,
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
-  get_sub_category, get_course_by_subcategory, get_all_course_by_usergroup, get_module_topic,
+  get_sub_category, get_course_by_subcategory, get_module_topic,
   getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails
 } from './operations/learner_query';
 
@@ -367,17 +367,17 @@ export class LearnerServicesService {
     });
   }
 
-  getallcourses(groupid, pagenumber, sort_type) {
-    return this.Apollo.query({
-      query: get_all_course_by_usergroup,
-      variables: {
-        group_id: groupid,
-        pagenumber,
-        sort_type
-      }
-    });
-  }
-  get_module_topic() {
+  // getallcourses(groupid, pagenumber,sort_type) {
+  //   return this.Apollo.query({
+  //     query: get_all_course_by_usergroup,
+  //     variables: {
+  //       group_id: groupid,
+  //       pagenumber: pagenumber,
+  //       sort_type:sort_type
+  //     }
+  //   });
+  // }
+  get_module_topic(){
     return this.Apollo.query({
       query: get_module_topic
     });

@@ -10,6 +10,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
+import { SearchPipe } from '../pipes/search.pipe';
 // local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -34,6 +35,7 @@ import { SearchComponent } from './shared/search/search.component';
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
 import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
+import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -56,7 +58,9 @@ const routes: Routes = [
     SearchComponent,
     DragDropImageDirective,
     GuidelineSearchComponent,
-    LandingHeaderComponent
+    LandingHeaderComponent,
+    CategoryComponentComponent,
+    SearchPipe
   ],
 
   imports: [
@@ -75,7 +79,7 @@ const routes: Routes = [
     FormsModule,
     Ng5SliderModule,
     NgxPaginationModule,
-    MyDatePickerModule
+    MyDatePickerModule,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -93,6 +97,7 @@ const routes: Routes = [
     DataTableComponent,
     VideoPlayerComponent,
     ListViewCourseComponentComponent,
+    CategoryComponentComponent,
     GuidelineSearchComponent]
 })
 export class CoreModule { }
