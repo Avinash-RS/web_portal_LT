@@ -87,11 +87,10 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
       </mat-table>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
+        showFirstLastButtons>
+      </mat-paginator>
     </div>
-
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
-      showFirstLastButtons>
-    </mat-paginator>
   </div>
 </div>
 
@@ -134,26 +133,6 @@
               </label>
             </div>
           </div>
-
-          <!-- <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
-              <label>Languages known : </label><br>
-              <div *ngIf="profileDetails.language.length >0">
-                <div *ngFor="let lang of profileDetails.language" class="display_flex">
-                  {{lang}}
-                </div>
-              </div>
-              <div *ngIf="profileDetails.language.length == 0" class="color_black">
-                NA
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-12">
-              <label>Location : <label class="color_black capitalize f_wt_400">
-                  {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
-                  {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
-                 }} </label></label>
-            </div>
-          </div> -->
           <br>
         </div>
       </form>
