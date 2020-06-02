@@ -293,7 +293,10 @@ export class CreateTopicComponent implements OnInit {
 
   confirmDelete(){
     $('#confirmModal').modal('hide');
-    this.createTopicForm['controls'].moduledetails['controls'].splice(this.removeTemplateindex,1);
+    // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
+    //  allModuleDetails.removeAt(this.removeTemplateindex);
+     (<FormArray>this.createTopicForm.controls['moduledetails']).removeAt(this.removeTemplateindex);
+    //this.createTopicForm['controls'].moduledetails['controls'].removeAt(this.removeTemplateindex);
     this.removeTemplateindex = undefined
   }
 
