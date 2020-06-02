@@ -35,9 +35,10 @@ import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component'
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SearchPipe } from '../pipes/search.pipe';
+// import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 
 
 const routes: Routes = [
@@ -79,7 +80,7 @@ const routes: Routes = [
     ScormplayerComponent,
     MaskingPipePipe,
     ViewAllCoursesComponent,
-    SearchPipe,
+    // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
     
@@ -109,6 +110,6 @@ const routes: Routes = [
     MyDatePickerModule
   ],
   providers: [Apollo, { provide: Window, useValue: window }  ],
-  entryComponents: []
+  entryComponents: [CategoryComponentComponent]
 })
 export class LearnerModule { }

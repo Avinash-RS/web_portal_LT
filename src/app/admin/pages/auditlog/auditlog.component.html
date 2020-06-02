@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Audit Log</li>
+    <li class="breadcrumb-item active" aria-current="page">Audit log</li>
   </ol>
 </nav>
 <br>
@@ -18,7 +18,9 @@
                   <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)"
                     [required]=requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
                     placeholder="Choose from date" color="accent">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                  </mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                   <mat-error *ngIf="fromdate1.errors && requiredfield">
                     <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
@@ -30,7 +32,9 @@
                   <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield [required]=requiredfield
                     #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
                     [min]=fromdate [max]=today>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker-toggle matSuffix [for]="picker1">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                  </mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                   <mat-error *ngIf="todate1.errors && requiredfield">
                     <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
@@ -53,7 +57,7 @@
                   <div class="col-4">
                     <button class="btnCss  button_border width_95 center f_size_14" (click)="export(filterform)">
                       <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
-                        publish</span>Export</button>
+                        get_app</span>Export</button>
                   </div>
                 </div>
               </div>
