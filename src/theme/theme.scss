@@ -11,7 +11,8 @@ $lxp-blue:#1d3f72 ;
 $mat-light-theme-background: (
   status-bar: map_get($mat-grey, 300),
   app-bar:    map_get($mat-grey, 100),
-  background: map_get($mat-indigo, 50),
+  // background: map_get($mat-indigo, 50),
+  background:white,
   hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
   card:       white,
   dialog:     white,

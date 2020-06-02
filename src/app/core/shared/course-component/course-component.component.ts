@@ -182,4 +182,11 @@ export class CourseComponentComponent implements OnInit {
       Swal.fire('Please login to continue');
     }
   }
+  clickRejected() {
+    this.alert.openConfirmAlert('Enrollment Confirmation', 'Do you wish to re-enroll for this course?', 'Enroll', 'Cancel').then((data) => {
+      if (data) {
+        this.enrollCourse();
+      }
+    });
+  }
 }
