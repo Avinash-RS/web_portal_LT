@@ -3,6 +3,7 @@
 .swal2-popup.swal2-modal.swal2-show {
   width: 30% !important;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 40%;
@@ -51,6 +52,7 @@
   display: block;
   margin: auto;
 }
+
 .mat-column-selectall {
   flex: 0 0 12% !important;
 }
@@ -148,12 +150,14 @@ table {
 }
 
 .example-container {
+  margin-top : 1px;
   background-color: white;
   display: flex;
   flex-direction: column;
   max-height: 700px;
   min-width: 300px;
   cursor: pointer;
+
   .mat-stroked-button {
     font-size: 12px;
     cursor: pointer;
@@ -194,7 +198,7 @@ table {
 }
 
 @media screen and (min-width:765px) {
- :host /deep/ .mat-tab-body-content {
+  :host /deep/ .mat-tab-body-content {
     width: 900px !important;
     overflow: hidden !important;
   }
@@ -405,12 +409,12 @@ table {
 
 /****** buttons' style starts here ******/
 .button {
-  float: right;
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
+  // float: right;
+  // display: inline-block;
+  // font-family: 'Open Sans', sans-serif;
   font-weight: 100;
   font-size: 14px;
-  text-decoration: inherit;
+  // text-decoration: inherit;
   border: 3px solid;
   padding: 1px 10px;
   margin: 10px;
@@ -486,6 +490,7 @@ table {
   width: 90px;
   padding: 11px;
 }
+
 .mat-header-cell.mat-sort-header-sorted {
   color: black;
 }
@@ -504,7 +509,7 @@ input[type="radio"] {
 
 .toggle input+label {
   margin: 0;
-  padding: .75rem 2rem;
+  padding: .60rem 2rem;
   box-sizing: border-box;
   position: relative;
   display: inline-block;
@@ -526,8 +531,8 @@ input[type="radio"] {
 .toggle input:checked+label {
   background: #355C7D;
   color: #FFF;
-  box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
-  border-color: #4B9DEA;
+  // box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+  // border-color: #4B9DEA;
   z-index: 1;
 }
 
@@ -553,4 +558,187 @@ input[type="radio"] {
   border: 0;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   flex: 1;
+}
+
+
+
+//jasper table responsive
+@media screen and (min-width: 320px) and (max-width:765px) {
+  .mat-paginator-container {
+    min-height: 120px !important;
+  }
+
+.example-container[_ngcontent-idq-c26] {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  max-height: 100% !important;
+  min-width: 300px;
+  height: 100% !important;
+  cursor: pointer;
+}
+  .mobile-label {
+    width: 50px !important;
+    word-break: break-all;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .desktop-data {
+    display: none;
+  }
+
+  .mobile-data {
+    width: 58%;
+    display: inline-block;
+    font-weight: normal;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  // mat-cell:first-of-type {
+  //   padding-left: 0px;
+  // }
+  .mat-cell[_ngcontent-yhm-c26]:first-of-type, .mat-header-cell[_ngcontent-yhm-c26]:first-of-type {
+    padding-left: 0px !important;
+}
+
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    // padding: 8px 24px;
+    width: 445%;
+    padding: 7px 6px;
+  }
+
+  
+  // .mat-cell>span {
+  //   display: inline-block;
+  //   min-width: 120px;
+  // }
+
+  .mat-cell:nth-of-type(1):before {
+    content: "select";
+    font-weight: bold;
+}
+
+  .mat-cell:nth-of-type(2):before {
+        content: "";
+        font-weight: bold;
+    }
+    
+    .mat-cell:nth-of-type(3):before {
+        content: " daterecived :";
+        font-weight: bold;
+    }
+    
+    .mat-cell:nth-of-type(4):before {
+        content: "coursename  :";
+        font-weight: bold;
+    }
+    
+    .mat-cell:nth-of-type(5):before {
+        content: "enrollment  :";
+        font-weight: bold;
+    }
+    .mat-cell:nth-of-type(6):before {
+      content: "usergroups  :";
+      font-weight: bold;
+    }
+   
+
+  .mat-column-select {
+    flex: 0 0 75px !important;
+  }
+
+  .mat-column-sno[_ngcontent-tan-c26] {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 9% !important;
+    width: 46% !important;
+  }
+
+  .mat-column-totalCount[_ngcontent-jmw-c26] {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 10% !important;
+    width: 26% !important;}
+    .mat-cell[_ngcontent-ixm-c26], .mat-header-cell[_ngcontent-ixm-c26] {
+      padding-left: 5px;
+      padding-right: 5px;
+      word-break: break-all;
+      width: 85% !important;
+  }
+
+  .mat-cell[_ngcontent-opw-c26], .mat-header-cell[_ngcontent-opw-c26] {
+    padding-left: 0px;
+    padding-right: 5px;
+    word-break: break-all;
+}
+}
+
+///////////////////////////@extend@media screen and (min-width:405px) {
+@media screen and (min-width:405px) {
+  :host /deep/ .mat-paginator-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 30px !important;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    background: #ccc !important;
+    height: 30px;
+    position: absolute;
+    bottom: 64px;
+  }
+}
+
+@media screen and (max-width:405px) {
+  /deep/ .mat-paginator-container {
+    min-height: 120px !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    background: #ccc !important;
+    height: 120px;
+    position: absolute;
+    bottom: 64px;
+  }
+}
+
+:host /deep/ {
+
+  .mat-paginator-range-label,
+  .mat-paginator-page-size,
+  .mat-paginator-icon {
+    margin-top: 10px;
+  }
+}
+
+h1 {
+  color: $color-blue;
+  padding-left: 25px;
+  margin-top: 5px;
+}
+
+
+///
+/deep/ .mat-checkbox.mat-accent {
+  .mat-checkbox-frame {
+    border: 1px solid #9E9E9E;
+  }
+
+  &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+  }
+
+  .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+  }
 }

@@ -61,7 +61,8 @@
             disabled="{{course.enrollment_status == 'pending'}}">Requested
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'rejected' && showStatus == false"
-            disabled="{{course.enrollment_status == 'rejected'}}">Rejected
+          (click)="clickRejected()">Rejected
+            <!-- disabled="{{course.enrollment_status == 'rejected'}}">Rejected -->
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
