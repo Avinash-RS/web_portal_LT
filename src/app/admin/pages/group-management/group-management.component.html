@@ -1,13 +1,13 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li *ngIf ="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Group Management</li>
+    <li *ngIf ="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Group management</li>
   </ol>
 </nav>
 
 <div class="container pb-5">
-  <h1> Group Management</h1>
+  <h1> Group management</h1>
   <div class="container margin20">
     <div class="row">
 
@@ -30,7 +30,7 @@
                 </mat-icon>
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -46,7 +46,7 @@
                   </mat-icon>
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -149,8 +149,10 @@
                       </div>
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
-                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle" (change)="toggle($event)"
-                        [checked]="currentpath?.is_active"></mat-slide-toggle>
+                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="currentpath.is_active" 
+                      ></mat-slide-toggle>
+                      <!-- [checked]="currentpath?.is_active" -->
+                      <!-- (change)="toggle(currentpath.is_active)" -->
                       {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
                     </div>
                     <div class="col-6 mt-4">
@@ -320,7 +322,7 @@
       <br><br>
       <form [formGroup]="changeGrpForm">
         <div class="form-group">
-          <label>Group Name</label><span style="color: red;"> *</span><br>
+          <label>Group name</label><span style="color: red;"> *</span><br>
           <mat-form-field class="width_100 ">
             <!-- <mat-label>Institute Name</mat-label> -->
             <mat-select formControlName="group">
@@ -335,7 +337,7 @@
     </mat-dialog-content><br>
     <mat-dialog-actions>
       <button mat-raised-button class="center" [disabled]="changeGrpForm.invalid" (click)="updateGroup()">
-        Update Group
+        Update group
       </button><br><br>
     </mat-dialog-actions>
   </ng-template>
