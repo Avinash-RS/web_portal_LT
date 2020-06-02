@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class CreateTemplateComponent implements OnInit {
   queryData:any;
-
+  breakpoint: any;
 
   constructor(
     public wcaService:WcaService,

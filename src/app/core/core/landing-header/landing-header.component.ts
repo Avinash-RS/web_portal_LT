@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingHeaderComponent implements OnInit {
 
+  userDetailes: any;
   constructor() { }
 
   ngOnInit() {

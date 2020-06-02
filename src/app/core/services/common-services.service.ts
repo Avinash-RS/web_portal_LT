@@ -114,11 +114,12 @@ export class CommonServicesService {
     });
   }
 
-  getCoursesByName(courseName) {
+  getCoursesByName(courseName,pagenumber) {
     return this.Apollo.query({
       query: getCoursesByName,
       variables: {
         courseName,
+        pagenumber
       }
     });
   }

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentComponent } from './enrollment.component';
+import { MatTableModule } from '@angular/material';
+
+
 
 describe('EnrollmentComponent', () => {
   let component: EnrollmentComponent;
@@ -8,7 +11,8 @@ describe('EnrollmentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnrollmentComponent ]
+      declarations: [ EnrollmentComponent ],
+      imports: [MatTableModule]
     })
     .compileComponents();
   }));
