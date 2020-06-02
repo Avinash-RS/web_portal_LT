@@ -115,8 +115,18 @@ export class ModuleRepositoryComponent implements OnInit {
 
         }
       });
+      this.savedModules.forEach((val) => {
+        if(val.moduleid == module.moduleid) {
+          val.isSelect = true;
+        }
+      })
     }
     else if (!e && !isValid) {
+      this.savedModules.forEach((val) => {
+        if(val.moduleid == module.moduleid) {
+          val.isSelect = false;
+        }
+      })
       this.modDetails.splice(n, 1);
     }
   }
