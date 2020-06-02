@@ -107,6 +107,14 @@ main section {
 h2{
   color:$color-subhead ;
 }
+.allcourses{
+  margin-top: 3%;
+}
+.filtercourses{
+  margin-top: -100%;
+  margin-left: 24%;
+  max-width: 75%;
+}
 .roundbtn{
   background-color: $color-subhead;
   font-size: 20px;
@@ -318,10 +326,10 @@ h2{
   // content: "\f078";
   margin-left: -9px !important;
 }
-.col-9 {
-  flex: 0 0 73%;
-  max-width: 73%;
-}
+// .col-9 {
+//   flex: 0 0 73%;
+//   max-width: 73%;
+// }
 .diffcol-9{
   flex: 0 0 100%;
   max-width: 100%;
