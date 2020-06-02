@@ -29,9 +29,9 @@
       <mat-icon *ngIf="course.wishlisted == false" style="color:red;">favorite_border</mat-icon>
     </button>
   </div>
-  <img *ngIf="course.course_img_url != 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url != 'null'" alt="" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" width="100%" (click)="gotoDescription()">
-  <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url == 'null'" alt="" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
   <div class="overlay1 p-5px" style="margin-bottom: 0;">
     <p class="course_description1 f_size_12">
@@ -44,10 +44,13 @@
         style="word-wrap: break-word">
         {{course.course_name}}
       </div>
-      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 m-t-10 m-b-20 display_flex user-rating no_padding"
-        (click)="gotoDescription()">
-        <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
-        &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
+ 
+    </div>
+    <div class="row">
+      <div class="col-lg-7 col-lg-6 col-sm-6 col-6 mar  m-b-20 display_flex user-rating no_padding"
+      (click)="gotoDescription()">
+      <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
+      &nbsp;&nbsp; <strong class="countt" *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>
     </div> -->
 
@@ -68,13 +71,13 @@
 
     <mat-card-action>
       <div class="row no_margin enroll_row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_sz_14 float_left no_padding learner-count"
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_sz_14 float_left no_padding learner-count"
           (click)="gotoDescription()">
           <span *ngIf="showCount" class="material-icons color_grey f_size_18" style="vertical-align: middle;">
             people
           </span> <small *ngIf="showCount" class="color_grey">2,500 learners</small>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right width_80 no_padding" *ngIf="showEnroll">
+        </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_center width_80 no_padding" *ngIf="showEnroll">
           <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false"
             (click)="enrollCourse()"> Enroll now
           </button>

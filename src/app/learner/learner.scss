@@ -230,7 +230,8 @@ mat-icon {
   padding: 15px;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background: url('../../assets/learner/background.jpg');
+  background-color: #cccccc !important;
+  // background: url('../../assets/learner/LoginPageBG.svg');
 }
 
 .btn {
@@ -365,4 +366,9 @@ button:disabled:hover {
 svg.mat-datepicker-toggle-default-icon.ng-star-inserted {
   margin-left: 51px !important;
   margin-top: -12px !important;
+}
+
+//UI changes
+.mat-flat-button {
+  border-radius : 0 !important;
 }

@@ -5,8 +5,10 @@
   </ol>
 </nav>
 <br>
-<div class="container">
-  <div class="p-5px">
+<!-- <div class="container">
+  <div class="p-5px"> -->
+<div>
+  <div>
     <div class="row">
       <div class="col-11 center">
 
@@ -33,7 +35,7 @@
                     #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
                     [min]=fromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker1">
-                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    <mat-icon matDatepickerToggleIcon>today</mat-icon>
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                   <mat-error *ngIf="todate1.errors && requiredfield">
@@ -66,7 +68,10 @@
         </div>
       </div>
     </div>
-    <div class="example-container mat-elevation-z8">
+
+    
+  <hr style="border: 1px solid #ccc;margin:0 !important; ">
+    <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="sno">
           <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
