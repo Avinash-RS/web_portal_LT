@@ -23,10 +23,13 @@
 //     color: $color-white;
 //   }
 // .category-Component{
+  h2{
+    color:$color-subhead ;
+  }  
   .close{
     float: right !important;
-    margin-top: -24px;
-    margin-right: -18px;
+    margin-top: -7%;
+    margin-right: -6%;
   }
   .example-full-width {
     width: 90%;
@@ -118,7 +121,7 @@
   }
   ::ng-deep .mat-dialog-container {
     display: block;
-    padding: 24px;
+    padding: 74px;
     border-radius: 4px;
     margin-left: 192px !important;
     margin-top: 190px !important;
@@ -134,15 +137,15 @@
   }
   .vertical { 
     border-left: 0.5px solid $color-darkGrey;
-    height: 60%;
+    height: 50%;
     position: absolute;
-    left: 42%;
+    left: 43%;
   } 
   .vertical1 { 
     border-left: 0.5px solid $color-darkGrey;
-    height: 60%;
+    height: 50%;
     position: absolute;
-    left: 69%;
+    left: 67%;
   } 
   .categotybtn{
     width: 30%;
