@@ -50,27 +50,48 @@ export class ModuleRepositoryComponent implements OnInit {
 
   }
 
-  getModules() {
+  getModules(d?) {
     this.apiService.repositoryModules().subscribe((data: any) => {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
         val.isSelect = false;
-        // tslint:disable-next-line:no-shadowed-variable
-        this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
-          if (val.moduleid === data) {
-            val.isSelect = true;
-            this.modDetails.push(data);
+        if (d == 'update') {
+          if (this.modDetails.length > 0) {
+            this.modDetails.forEach((mdata, i) => {
+              if (mdata == val.moduleid) {
+                if (val.modulestatus == 'true') {
+                  val.isSelect = true;
+                }
+                else {
+                 this.modDetails.splice(i, 1);
+                }
+              }
+            })
+          
           }
-          // tslint:disable-next-line:no-unused-expression
-        }) : '';
+        }
+        else {
+          // tslint:disable-next-line:no-shadowed-variable
+          this.modDetails = this.routeData.moduleList;
+          this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
+            if (val.moduleid === data) {
+              val.isSelect = true;
+            }
+            // tslint:disable-next-line:no-unused-expression
+          }) : '';
+        }
       });
       this.savedModules = data.Result;
+
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
       this.dataSource.paginator = this.paginator;
     });
   }
 
   onModuleSelection(module, e) {
+    if (module.modulestatus == 'false') {
+      return false;
+    }
     const modDetails = {
       moduleid: module.moduleid,
       coursename: module.coursename,
@@ -78,22 +99,25 @@ export class ModuleRepositoryComponent implements OnInit {
     };
     let isValid = true;
     let n = 0;
-    this.modDetails.forEach((val,i) => {
-      if (val == module.moduleid) {
-        isValid == false;
-        n = i;
+
+    this.modDetails.filter((id, idx) => {
+      if (id == module.moduleid) {
+        isValid = false;
+        n = idx
       }
     })
+
+
     if (e && isValid) {
       this.modDetails.push(module.moduleid);
-       this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
-          if (res.Code === 200) {
+      this.apiService.updatecoursetomudules(modDetails).subscribe((res: any) => {
+        if (res.Code === 200) {
 
-          }
-        });
+        }
+      });
     }
-    else if(!e && isValid) {
-      this.modDetails.splice(n,1);
+    else if (!e && !isValid) {
+      this.modDetails.splice(n, 1);
     }
   }
 
@@ -111,7 +135,7 @@ export class ModuleRepositoryComponent implements OnInit {
               selectedModule: this.modDetails
             }
           });
-       
+
       }
     });
   }
@@ -127,7 +151,7 @@ export class ModuleRepositoryComponent implements OnInit {
     });
 
     dg.afterClosed().subscribe((data) => {
-      this.getModules();
+      this.getModules('update');
     });
   }
 }

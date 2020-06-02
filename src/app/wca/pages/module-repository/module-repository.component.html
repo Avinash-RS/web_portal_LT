@@ -60,10 +60,8 @@
       <ng-container matColumnDef="select">
         <th mat-header-cell class="action-header" *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
-          <span>
-            <!-- <button type="button" mat-button color="primary" (click)="onModuleSelection(element)"
-              [disabled]='element.isSelect' class="select-btn">Select</button> -->
-              <mat-checkbox [checked]='element.isSelect' (change)="onModuleSelection(element,$event.checked)"></mat-checkbox>
+          <span class="{{element.modulestatus == 'true' ? 'check-box-active' : 'check-box-disable' }}">
+              <mat-checkbox [(checked)]='element.isSelect'  [disabled]="element.modulestatus == 'true' ? 'false' : 'true'" class="check-box" (change)="onModuleSelection(element,$event.checked)"></mat-checkbox>
           </span>
         </td>
       </ng-container>
