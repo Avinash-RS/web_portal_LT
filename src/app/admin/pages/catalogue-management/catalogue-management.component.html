@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue Management</li>
+    <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue management</li>
     <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="clickCName()">
       {{catalog.catalogue_name}}
     </li>
@@ -68,7 +68,7 @@
     <div *ngIf="showListCatalogue">
       <div class="row m-r-5 m-l-5 m-t-10">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_left">
-          <strong class="color_blue f_size_17">List of catalogue</strong>
+          <strong class="color_blue f_size_17">List of catalogues</strong>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right"
           *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">

@@ -94,6 +94,7 @@ export class AuditlogComponent implements OnInit {
     }
   }
   filter(filterform, pgnumber) {
+    console.log("gg");
     this.requiredfield = true;
     if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
       this.requiredfield = false;
