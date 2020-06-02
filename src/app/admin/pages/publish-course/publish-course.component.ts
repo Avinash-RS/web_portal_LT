@@ -28,6 +28,8 @@ export class PublishCourseComponent implements OnInit {
   courseCount: any;
   catalogueList: any = [];
   selectedcatalogue: any = null;
+  loadingCategory: any;
+  trackBy: any;
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
 

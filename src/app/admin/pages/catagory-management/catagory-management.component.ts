@@ -45,6 +45,7 @@ export class CatagoryManagementComponent implements OnInit {
   level: number = null;
   canotEdit = true;
   edit = false;
+  trackBy: any;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;

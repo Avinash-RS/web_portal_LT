@@ -34,6 +34,7 @@ export class AddUserComponent implements OnInit {
   addUserForm: FormGroup;
   adminDetails: any;
   groups: any = [];
+  group:any;
   exceljson: any; // excel json is assigned
   selectedfile = null; // excel file is assigned
 

@@ -107,7 +107,7 @@ export class ListViewCourseComponentComponent implements OnInit {
     }
   }
 
-  gotoDescription(course) {
+  gotoDescription(course?) {
     if (this.goto === 'publish') {
       const detail = {
         type: 'publish', id: this.course._id || this.course.course_id

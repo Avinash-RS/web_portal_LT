@@ -57,6 +57,7 @@ export class GroupManagementComponent implements OnInit {
   allgroups: any;
   selectedcatalogue: any;
   oldcatalogue: any;
+  trackBy:any;
   toggle: any;
     /** tree source stuff */
     readonly dataSource$: BehaviorSubject<any[]>;

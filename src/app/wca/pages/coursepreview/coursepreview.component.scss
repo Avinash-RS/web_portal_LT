@@ -350,3 +350,71 @@ ol{
   border-radius: 50px;
   color: $color-white;
 }
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: $light-grey;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 75%;
+  text-align: center;
+}
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #818181;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+:host ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline  {
+  background-color: transparent;
+}
+:host ::ng-deep .mat-select-arrow {
+  color: transparent;
+}
+:host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow   {
+  color: transparent;
+}
+:host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-form-field-underline{
+  color: transparent !important;
+}
+
+:host ::ng-deep .mat-form-field-flex {
+   border: 0px solid transparent !important; 
+  height: 32px !important;
+  margin-top: 20px !important;
+}

@@ -7,6 +7,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Options } from 'ng5-slider';
 import * as _ from 'lodash';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -24,6 +25,7 @@ export class GuidelineSearchComponent implements OnInit {
     disableSince: { year: number; month: number; day: number; };
     editableDateField: false;
   };
+ 
   get tomorrowDate(): Date {
     const todayDate = new Date();
     const tomorrowDate = new Date(todayDate.getTime() + 24 * 60 * 60 * 1000);
@@ -62,9 +64,12 @@ export class GuidelineSearchComponent implements OnInit {
   level2selectedID: any = [];
   level3selectedID: any = [];
   allLvlCategoryFilterVal: any = [];
+  fromdate: any;
+  todate: any;
 
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
-    private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
+    private dialog: MatDialog, private globalservice: GlobalServiceService, 
+    public CommonServices: CommonServicesService,  public toast: ToastrService) { }
 
   ngOnInit() {
     this.CommonServices.selectedCategory.subscribe(data => {
@@ -304,20 +309,33 @@ export class GuidelineSearchComponent implements OnInit {
     if (name === 'todate') {
       this.publishedToDate = event.formatted;
     }
-    if (this.publishedFromDate != '' && this.publishedToDate != '' && this.publishedFromDate > this.publishedToDate) {
-      Swal.fire('From date should not be greater than To date');
+    if (!this.publishedFromDate || !this.publishedToDate) {
+     if(this.publishedFromDate && this.publishedToDate && this.publishedFromDate > this.publishedToDate){
+      Swal.fire('From date should not be greater than To date'); 
+     }
+     else if(!this.publishedFromDate && this.publishedToDate){
+      this.toast.warning('Please select From date!!!');
+     }
+     else if(!this.publishedToDate && this.publishedFromDate){
+      this.toast.warning('Please select To date!!!');
+     }
     }
     else {
-      var perPage = "20";
-      this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-        this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
-          this.allcourses = result['data']['getCourseCategorySearch']['data'];
-          this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
-          this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
-          this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
-          this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
-          this.CommonServices.globalCourses$.next(this.allcourses);
-        })
+      if( this.publishedFromDate > this.publishedToDate) {
+        Swal.fire('From date should not be greater than To date');
+      } else {
+        var perPage = "20";
+        this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+          this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+            this.allcourses = result['data']['getCourseCategorySearch']['data'];
+            this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
+            this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
+            this.countUpdatePartner(result['data']['getCourseCategorySearch']['partner'])
+            this.countUpdateCoursemode(result['data']['getCourseCategorySearch']['courseMode'])
+            this.CommonServices.globalCourses$.next(this.allcourses);
+          })
+      }
+
     }
   }
   //Remove filter
@@ -394,6 +412,10 @@ export class GuidelineSearchComponent implements OnInit {
     this.Lvl3CatId = [];
     this.allLvlCategory = [];
     this.allLvlCategoryFilterVal = [];
+    this.publishedToDate = '';
+    this.publishedFromDate = '';
+    this.fromdate = null;
+    this.todate = null;
     this.CommonServices.globalFilterCategory$.next(this.allLvlCategoryFilterVal);
 
     if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {

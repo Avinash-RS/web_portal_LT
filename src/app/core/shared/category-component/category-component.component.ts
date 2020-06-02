@@ -34,6 +34,9 @@ export class CategoryComponentComponent implements OnInit {
   publishedToDate: String;
   publishedFromDate: String;
   loader: boolean;
+  lvl1Search: any;
+  lvl2Search: any;
+  lvl3Search: any;
   
 
   constructor(private dialog: MatDialog,public learnerservice: LearnerServicesService, private alert: AlertServiceService,
