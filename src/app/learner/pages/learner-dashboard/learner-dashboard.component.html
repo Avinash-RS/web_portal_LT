@@ -1,7 +1,7 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
   <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
   </ol>
 </nav>
@@ -10,7 +10,7 @@
   <div class="col-md-3 col-sm-12 col-12">
 
     <div class="smallbox">
-      <h2>Courses Enrolled</h2>
+      <h2>Courses enrolled</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.courseEnrolled.totalCount}}</span>
@@ -20,7 +20,7 @@
         </div>
       </div><br>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-4" *ngIf="dashboardData?.courseEnrolled.IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
           <span class="trendno">{{dashboardData?.courseEnrolled.valueIncDecPec}}%</span>
@@ -30,18 +30,18 @@
           <span class="trendnodown">{{dashboardData?.courseEnrolled.valueIncDecPec}}%</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.courseEnrolled.IncDecPec != false">
-          <span class="text">Up from Yesterday</span>
+          <span class="text">Up from yesterday</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.courseEnrolled.IncDecPec == false">
-          <span class="text2">Down from Yesterday</span>
+          <span class="text2">Down from yesterday</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses Yet to Start</h2>
+      <h2>Courses yet to start</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.incomplete[0].totalCount}}</span>
@@ -51,7 +51,7 @@
         </div>
       </div><br>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-4" *ngIf="dashboardData?.incomplete[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
           <span class="trendno">{{dashboardData?.incomplete[0].valueIncDecPec}}%</span>
@@ -61,18 +61,18 @@
           <span class="trendnodown">{{dashboardData?.incomplete[0].valueIncDecPec}}%</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.incomplete[0].IncDecPec != false">
-          <span class="text">Up from Yesterday</span>
+          <span class="text">Up from yesterday</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.incomplete[0].IncDecPec == false">
-          <span class="text2">Down from Yesterday</span>
+          <span class="text2">Down from yesterday</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses In-Progress</h2>
+      <h2>Courses in-progress</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.suspend[0].totalCount}}</span>
@@ -81,7 +81,7 @@
           <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
         </div>
       </div><br>
-
+<!-- 
       <div class="row">
         <div class="col-4" *ngIf="dashboardData?.suspend[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
@@ -92,12 +92,12 @@
           <span class="trendnodown">{{dashboardData?.suspend[0].valueIncDecPec}}%</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.suspend[0].IncDecPec != false">
-          <span class="text">Up from Yesterday</span>
+          <span class="text">Up from yesterday</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.suspend[0].IncDecPec == false">
-          <span class="text2">Down from Yesterday</span>
+          <span class="text2">Down from yesterday</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="spinner-container" *ngIf="loadingCatalogue">
@@ -105,7 +105,7 @@
   </div>
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses Completed</h2>
+      <h2>Courses completed</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.completed[0].totalCount}}</span>
@@ -115,7 +115,7 @@
         </div>
       </div><br>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-4" *ngIf="dashboardData?.completed[0].IncDecPec != false">
           <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
           <span class="trendno">{{dashboardData?.completed[0].valueIncDecPec}}%</span>
@@ -125,12 +125,12 @@
           <span class="trendnodown">{{dashboardData?.completed[0].valueIncDecPec}}%</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.completed[0].IncDecPec != false">
-          <span class="text">Up from Yesterday</span>
+          <span class="text">Up from yesterday</span>
         </div>
         <div class="col-8" *ngIf="dashboardData?.completed[0].IncDecPec == false">
-          <span class="text2">Down from Yesterday</span>
+          <span class="text2">Down from yesterday</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
