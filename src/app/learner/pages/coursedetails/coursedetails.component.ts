@@ -64,6 +64,7 @@ export class CoursedetailsComponent implements OnInit {
   content: any;
   modulength: any;
   urlSafe: any;
+  isCollapsed: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
     public sanitizer: DomSanitizer) {
