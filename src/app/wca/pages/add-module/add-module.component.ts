@@ -29,7 +29,7 @@ export class AddModuleComponent implements OnInit {
   @ViewChild('file') fileUploaded;
   scormPath = '';
   isScrom: boolean;
-
+  breakpoint:any;
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
     public toast: ToastrService,

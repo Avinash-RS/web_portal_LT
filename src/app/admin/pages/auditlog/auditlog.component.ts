@@ -26,6 +26,8 @@ export class AuditlogComponent implements OnInit {
     { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element.updated_on).format('LLL')}` },
     { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element.admin_username}` },
   ];
+  fromdate: any;
+  todate: any;
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog, private adminservice: AdminServicesService) { }

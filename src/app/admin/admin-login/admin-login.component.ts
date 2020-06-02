@@ -17,6 +17,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 export class AdminLoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  show: any;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
               private alert: AlertServiceService, private service: LearnerServicesService, ) { }
