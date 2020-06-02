@@ -36,6 +36,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 
 const routes: Routes = [
 
@@ -61,7 +62,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent],
+  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent],
   imports: [
     CoreModule,
     MatDialogModule,
@@ -90,7 +91,7 @@ const routes: Routes = [
     
   ],
   providers: [Apollo],
-  entryComponents: [ViewCoursesComponent, BlobReaderComponent],
+  entryComponents: [ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }

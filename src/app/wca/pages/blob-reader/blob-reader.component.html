@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="2:1" *ngFor='let dt of exploredData'>
+<!-- <mat-grid-list cols="2" rowHeight="2:1" *ngFor='let dt of exploredData'>
   <mat-grid-tile>
     <mat-button (click)='getURL(dt)'>
       <mat-card>
@@ -12,4 +12,50 @@
 </mat-grid-list>
 <mat-action style="float:right">
   <button class="backgroundcol1 btn" (click)='closeModel()' type="button">Cancel</button>
-</mat-action>
+</mat-action> -->
+
+<!-- <mat-toolbar>
+  <span style="margin-left: 8px">{{path || 'Files'}}</span>
+</mat-toolbar> -->
+<!-- <div class="row">
+  <button class="name_Menu_Btn" mat-button>Name</button>
+  <button class="modified_Menu_Btn" mat-button>Date modified</button>
+  <button class="type_Menu_Btn" mat-button>Type</button>
+</div> -->
+<!-- <mat-divider></mat-divider>
+<div class="container" fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
+  <div class="content" fxFlex fxLayout="row">
+    <mat-grid-list cols="4" rowHeight="100px" fxFlex>
+      <mat-list role="list" *ngFor="let element of exploredData">
+        <mat-list-item role="listitem">
+          <mat-icon color="primary" class="file-or-folder-icon pointer">insert_drive_file
+          </mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>{{element.name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>{{element.lastModified}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>{{element.type}}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-list>
+  </div>
+</div> -->
+<!-- <button (click)="closeModel()" class="btn">
+  <mat-icon class="closeIcon">highlight_off</mat-icon>
+</button> -->
+<div style="float: right;">
+  <button style="height: 30px;">
+    <mat-icon style="font-size: 20px;" (click)="closeModel()">close</mat-icon>
+  </button>
+</div>
+
+<mat-grid-list cols="4" rowHeight="2:2">
+  <div *ngFor="let element of exploredData">
+    <mat-grid-tile>
+      <mat-card-content>
+        <label>Name: {{element.name}}</label><br>
+        <mat-icon>insert_drive_file</mat-icon><br>
+        <button class="btn_Icon" (click)="getURL(element)">Generate URL</button>&nbsp;
+        <button class="btn_Icon" (click)="preview(element)">Preview</button>
+      </mat-card-content>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
