@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
-      </a></li>
     <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
 
     <li class="breadcrumb-item">
@@ -53,18 +51,18 @@
                 <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
 
 
-                  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+                  <div id="leftContainer" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
                     [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div class="example-box1" *ngFor="let item of done;let i = index" cdkDrag>
                       <img class="img1" src="{{item.image}}">
-                      <mat-icon (click)="removenewLink(i)">delete</mat-icon>
+                      <mat-icon class="delete-icon" (click)="removeTemplate(i)">delete</mat-icon>
 
 
                     </div>
                   </div>
 
                   <div *ngIf="!done?.length" class="textCenter">
-                    <span style="color: red;">Drag and Drop the Template Please !!!</span>
+                    <label>Drag and Drop the Template Please !!!</label>
                   </div>
 
                   <div class="alnCenter" *ngIf="done?.length">
@@ -88,7 +86,7 @@
               <mat-card style="text-align: center;">
                 <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
 
-                  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                  <div id="rightContainer" cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
                     [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
 
 

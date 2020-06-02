@@ -1,19 +1,20 @@
-//Created by Mythreyi
+// Created by Mythreyi
 // angular imports
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-//others
-import { BarRatingModule } from "ngx-bar-rating";
-import { NgxMaskModule } from 'ngx-mask'
+// others
+import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-
-//local
+import { Ng5SliderModule } from 'ng5-slider';
+import { MyDatePickerModule } from 'mydatepicker';
+// local
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
@@ -33,25 +34,31 @@ import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsco
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
-import { NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+// import { SearchPipe } from '../pipes/search.pipe';
+import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 
-//others
 
 const routes: Routes = [
-  { path: '', component: LearnerHomeComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] ,data : {title:'Learner Login'}},
-  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard],data : {title:'Course details'} },
-  { path: 'register', component: RegistrationComponent,data : {title:'Learner  Registration'} },
-  { path: 'otp', component: OtpComponent ,data : {title:'Learner  Registration OTP'} },
-  { path: 'password', component: PasswordComponent ,data : {title:'Learner  Registration Username/Password'} },
-  { path: 'recover', component: ForgotUsernameAndPasswordComponent ,data : {title:'Learner  Forget Password'}},
-  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent  ,data : {title:'Learner  Forget Password OTP'}},
-  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] ,data : {title:'Learner  Profile'}},
-  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard] ,data : {title:'Learner  MyCourse'}},
-  { path: 'resetpassword', component: ResetpasswordComponent ,data : {title:'Learner   Reset password'}},
-  { path : "terms",component:TermsconditionsComponent,data : {title:'Terms and conditions'}},
-  { path: 'scorm', component: ScormplayerComponent ,canActivate: [AuthGuard],data : {title:'Course Player'}},
-  { path:  'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard]}
+  { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
+  { path: 'register', component: RegistrationComponent, data: { title: 'Learner  Registration' } },
+  { path: 'otp', component: OtpComponent, data: { title: 'Learner  Registration OTP' } },
+  { path: 'password', component: PasswordComponent, data: { title: 'Learner  Registration Username/Password' } },
+  { path: 'recover', component: ForgotUsernameAndPasswordComponent, data: { title: 'Learner  Forget Password' } },
+  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent, data: { title: 'Learner  Forget Password OTP' } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { title: 'Learner  Profile' } },
+  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
+  { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
+  { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
+  { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
+  { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: LearnerHomeComponent,canActivate: [AuthGuard],data: { title: 'Learner home' }}
+
 
 ];
 
@@ -72,7 +79,11 @@ const routes: Routes = [
     TermsconditionsComponent,
     ScormplayerComponent,
     MaskingPipePipe,
-    ViewAllCoursesComponent
+    ViewAllCoursesComponent,
+    // SearchPipe,
+    LearnerDashboardComponent,
+    LandingpageComponent,
+    
 
   ],
 
@@ -89,15 +100,19 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
-    ReactiveFormsModule    ,                    
-    //NgxPasswordToggleModule,
+    Ng5SliderModule,
+    ReactiveFormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
     NgOtpInputModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MyDatePickerModule
   ],
-  providers: [Apollo],
-  entryComponents: []
+  providers: [
+    Apollo, 
+    // { provide: Window, useValue: window }  
+  ],
+  entryComponents: [CategoryComponentComponent]
 })
 export class LearnerModule { }

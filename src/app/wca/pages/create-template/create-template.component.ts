@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class CreateTemplateComponent implements OnInit {
   queryData:any;
-
+  breakpoint: any;
 
   constructor(
     public wcaService:WcaService,
@@ -39,8 +39,7 @@ export class CreateTemplateComponent implements OnInit {
         }
       }
       if (flag) {
-      this.queryData = params;
-      console.log(this.queryData)
+      this.queryData = params;      
       }
     });
 
@@ -69,12 +68,12 @@ export class CreateTemplateComponent implements OnInit {
       name:"Video",
       image:"../../../../assets/images/video.svg"
     },
+    // {
+    //   name:"Audio",
+    //   image:"../../../../assets/images/audio.svg"
+    // },
     {
-      name:"Audio",
-      image:"../../../../assets/images/audio.svg"
-    },
-    {
-      name:"SCROM",
+      name:"SCORM",
       image:"../../../../assets/images/scrom.svg"
     },
     {
@@ -105,10 +104,16 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    
-    if (event.previousContainer === event.container) {
+    if ((event.previousContainer === event.container)&&(event.previousContainer.id != "leftContainer" && event.container.id !="leftContainer")) {
+      return false
+    } 
+    else if (event.previousContainer.id == "leftContainer" && event.container.id =="rightContainer"){
+      return false;
+    }
+    else if (event.previousContainer.id == "leftContainer" && event.container.id =="leftContainer"){
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    }
+    else {
       this.done.push(this.items2[event.previousIndex]);
 
       // transferArrayItem(event.previousContainer.data,
@@ -122,7 +127,6 @@ export class CreateTemplateComponent implements OnInit {
  
 savedTemplates(type) {
   if(this.done.length) {
-    console.log(this.done);
     if (type === 'saveTemplate') {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: { type: 'CreateTemplate' },
@@ -132,7 +136,6 @@ savedTemplates(type) {
         disableClose: true,
       });
       dialogRef.afterClosed().subscribe(res1 => {
-        console.log(res1);
         if (res1 && res1.tempName) {
           this.spinner.show();
           const obj={
@@ -144,7 +147,6 @@ savedTemplates(type) {
             template_details:this.done
           }
          this.wcaService.createTemplate(obj).subscribe((data:any) => {
-          console.log(data);
           this.spinner.hide();
           if (data && data.Message === 'Success') {
             this.toast.success('Template Saved successfully !!!');
@@ -175,7 +177,7 @@ savedTemplates(type) {
 
 }
   
-removenewLink(i) {
+removeTemplate(i) {
    this.done.splice(i,1);
 }
  

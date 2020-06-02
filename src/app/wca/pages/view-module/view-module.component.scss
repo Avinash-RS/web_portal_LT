@@ -1,6 +1,6 @@
 @import "variable";
 
-.mat-expansion-panel:not([class*=mat-elevation-z]) {
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
     box-shadow: none;
 }
 
@@ -12,7 +12,7 @@
     padding: 7px !important;
     color: $color-blue;
 }
-.mat-card:not([class*=mat-elevation-z]) {
+.mat-card:not([class*="mat-elevation-z"]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
 .coursebreadcrumb {
@@ -23,8 +23,8 @@
         // background-color: #fff !important;
     }
 }
-.bcgClrSync{
-    background-color:#e9ecef;
+.bcgClrSync {
+    background-color: #e9ecef;
 }
 .upload-btn {
     cursor: pointer;
@@ -40,18 +40,13 @@
     margin: 49px 54px -15px 22px;
     border-radius: 5px;
     height: 35px;
-  
 }
 
-
-
 .wrapper_1 {
-   
     float: center;
-    
-  }
-  
-  .wrapper_1:after {
+}
+
+.wrapper_1:after {
     content: "";
     background-color: #b9b5b5;
     position: absolute;
@@ -60,22 +55,19 @@
     top: 22px;
     left: 76%;
     display: block;
-  }
-
+}
 
 mat-icon {
     cursor: pointer;
-    color: #1F3777;
-    margin: 59px 26px -70px -218px
+    color: #1f3777;
+    margin: 59px 26px -70px -218px;
 }
-
 
 @import "variable";
 
-.mat-form-field+.mat-form-field {
+.mat-form-field + .mat-form-field {
     margin-left: 8px;
 }
-
 
 // Ankit
 .title {
@@ -108,12 +100,12 @@ mat-icon {
     position: relative;
 }
 
-.small-box .icon>i {
+.small-box .icon > i {
     font-size: 90px;
     position: absolute;
     right: -20px;
     margin-top: -20px;
-    transition: all .3s linear;
+    transition: all 0.3s linear;
 }
 
 .svgimg {
@@ -132,7 +124,6 @@ mat-icon {
     border: 1px solid $color-white;
     background-color: $color-light-pink;
     cursor: pointer;
-
 }
 
 .ion {
@@ -148,17 +139,14 @@ mat-icon {
     padding-left: 7.5px;
 }
 
-.small-box>.inner {
+.small-box > .inner {
     padding: 10px;
 }
 
 .mat-grid-tile .mat-grid-tile-footer {
     color: $color-white;
     background: transparent;
-
 }
-
-
 
 .bg-red {
     background-color: $color-light-pink !important;
@@ -230,12 +218,11 @@ h1 {
 .whatnewcard {
     text-align: center;
     margin-left: 1%;
-    margin-right: 1%; 
+    margin-right: 1%;
     border: hidden;
-
 }
 
-.mat-card:not([class*=mat-elevation-z]) {
+.mat-card:not([class*="mat-elevation-z"]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
 }
 
@@ -266,19 +253,18 @@ h1 {
     background: rgb(247, 27, 88);
 }
 
-input[type=text]
-{
-  width: 100%;
-  padding: 9px 20px;
-  margin: 10px 10px;
-  background: white;
-  display: inline-block;
-  border: 1px solid $color-blue;
-  box-sizing: border-box;
-  border-radius: 5px;
+input[type="text"] {
+    width: 100%;
+    padding: 9px 20px;
+    margin: 10px 10px;
+    background: white;
+    display: inline-block;
+    border: 1px solid $color-blue;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
-.inputs{
+.inputs {
     border: 1px solid;
     padding: 8px !important;
     border-radius: 5px;
@@ -286,10 +272,9 @@ input[type=text]
     width: 100%;
     background-color: none !important;
     margin: 10px 10px;
-  }
+}
 
-
-  .inputs1{
+.inputs1 {
     border: 1px solid;
     padding: 8px !important;
     border-radius: 5px;
@@ -297,16 +282,29 @@ input[type=text]
     width: 100%;
     background-color: none !important;
     margin: 10px 30px;
-  }
+}
 
-  img {
+img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
     width: 150px;
     height: 150px;
-  }
-  
-  img:hover {
+}
+
+img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  }
+}
+
+.continue-btn {
+    height: 35px;
+    margin: 30px 0px 20px 0;
+    background-color: #1f3777 !important;
+    color: white !important;
+    width: 150px;
+}
+
+.disable-select-btn {
+    opacity: 0.5;
+    cursor: no-drop;
+}

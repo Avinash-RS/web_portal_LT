@@ -4,74 +4,90 @@
 /* Add application styles & imports to this file! */
 @import '~ngx-bar-rating/themes/br-default-theme.css';
 @import '~@sweetalert2/theme-material-ui/material-ui.scss';
+
 // @import '~ngx-bar-rating/themes/br-horizontal-theme.css';
-body 
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
 
-{font-family: Roboto, Arial, sans-serif;margin: 0;}
+.basic-container {
+  padding: 30px;
+}
 
-.basic-container {padding: 30px;}
-
-.version-info {font-size: 8pt;float: right;margin: 8px;}
+.version-info {
+  font-size: 8pt;
+  float: right;
+  margin: 8px;
+}
 
 .mat-progress-bar-buffer {
-    background: #8f9bbb;
+  background: #8f9bbb;
 }
-.mat-progress-bar-fill::after {
-    background-color: #ffcf01;
-}
-.br-default .br-selected:after {
-    color: #ffcf05 !important;
-}
-.br-default .br-unit:after {
-    content: "\2605";
-    color: #d2d2d2;
-}
-.example-full-width {
-    width: 100%;
-  }
-  .parentcontent{
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    margin-top: 176px;
-    height: 198px;
-  }
-  // mat-card{
-  //   width: 23%;
-  //   border: dashed;
-  // }
-  .button{
-    margin-top: 25px;
-  }
-  .column2 {
-    text-align: center;
-    width: 90%;
-    float: right;
-    height: 100vh;
-  }
-  .continer {
-    margin-top: 50px;
-    position: relative;
-    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    padding: 10px;
-    background: $color-white;
-    display: flex;
-    justify-content: center;
-    height: 277px;
-  }
 
-  .container-reg100 {
-    width: 100%;
-    height: 100vh !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background: url('./assets/learner/download.jpg');
+.mat-progress-bar-fill::after {
+  background-color: #ffcf01;
+}
+
+.br-default .br-selected:after {
+  color: #ffcf05 !important;
+}
+
+.br-default .br-unit:after {
+  content: "\2605";
+  color: #d2d2d2;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.parentcontent {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 176px;
+  height: 198px;
+}
+
+// mat-card{
+//   width: 23%;
+//   border: dashed;
+// }
+.button {
+  margin-top: 25px;
+}
+
+.column2 {
+  text-align: center;
+  width: 90%;
+  float: right;
+  height: 100vh;
+}
+
+.continer {
+  margin-top: 50px;
+  position: relative;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  padding: 10px;
+  background: $color-white;
+  display: flex;
+  justify-content: center;
+  height: 277px;
+}
+
+.container-reg100 {
+  width: 100%;
+  height: 100vh !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: url('./assets/learner/download.jpg');
 }
 
 .btn {
@@ -100,6 +116,7 @@ body
   width: 100%;
   margin: 0 auto;
 }
+
 .wrap-reg {
   width: 350px;
   height: auto;
@@ -114,16 +131,30 @@ body
     padding-right: 15px;
   }
 }
-.p-l-50 {padding-left: 40px !important;}
-.p-r-50 {padding-right: 40px !important;}
-.p-t-77 {padding-top: 52px !important;}
-.p-b-30 {padding-bottom: 30px !important;}
 
-.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+.p-l-50 {
+  padding-left: 40px !important;
+}
+
+.p-r-50 {
+  padding-right: 40px !important;
+}
+
+.p-t-77 {
+  padding-top: 52px !important;
+}
+
+.p-b-30 {
+  padding-bottom: 30px !important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: $color-blue;
 }
 
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
@@ -132,14 +163,17 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-label{
+
+label {
   color: $color-blue;
   font-weight: 500;
 }
-.head{
+
+.head {
   text-align: center;
-  color: $color-blue;   
+  color: $color-blue;
 }
+
 .swal2-popup {
   width: 27% !important;
   height: 35% !important;

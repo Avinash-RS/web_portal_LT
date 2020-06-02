@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const user_registration = gql`
   mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean) {
@@ -41,7 +41,7 @@ export const user_registration_mobile_otp_verify = gql`
     user_registration_mobile_otp_verify(
       otp: $otp,
       mobile_number:$mobile_number
-      
+
     ) {
       message
       success
@@ -82,7 +82,7 @@ export const get_forgot_username_mobile_email = gql`
     ) {
       success
       message
-      
+
     }
   }
 `;
@@ -99,7 +99,7 @@ export const get_forgot_password_byusername = gql`
         value
         type
       }
-     
+
     }
   }
 `;
@@ -113,7 +113,7 @@ export const user_registration_username_suggestion = gql`
       message
       success
       data
-        
+
     }
   }
 `;
@@ -131,272 +131,272 @@ export const get_forgot_password_byresetpassword = gql`
 `;
 export const view_profile = gql`
   mutation view_profile($user_id: String) {
-    view_profile(user_id:$user_id) 
+    view_profile(user_id:$user_id)
     {
       success
 
       message {
-  
+
         full_name
-  
-       
-  
+
+
+
         email
-  
+
         user_id
-  
+
         user_dtl {
-  
+
           is_admin
-  
+
           user_id
-  
+
           username
-  
+
           password
-  
+
           created_by_ip
           created_on
-  
+
         }
-  
+
         user_mobile {
-  
+
           mobile_number
-  
+
         }
-  
+
         user_profile {
-  
+
           _id
-  
+
           languages_known
-  
+
           is_student_or_professional
-  
+
           about_you
-  
+
           certificate
-  
+
           user_id
-  
+
           profile_img
-  
+
           year_of_birth
-  
+
           doj_lxp
-  
+
           progress
-  
+
           is_active
-  
+
           gender
-  
+
           country
-  
+
           state
-  
+
           city_town
-  
+
           student
-  
+
           professional {
-  
+
             total_experience
-  
+
             organization
-  
+
             job_role
-  
+
           }
-  
-         
-  
+
+
+
           social_media {
-  
+
             link
-  
+
             img
-  
+
           }
-  
+
           last_login
-  
+
           created_by_ip
-  
+
           created_by
-  
+
           created_on
-  
+
           updated_by_ip
-  
+
           updated_on
-  
+
           updated_by
-          qualification {   
+          qualification {
 
             qualification
-  
+
             institute
-  
+
             board_university
-  
+
             discipline
-  
+
             specification
-  
+
             year_of_passing
-  
+
             percentage
-  
-          }                 
-  
+
+          }
+
         }
-  
+
         country_detail {
-  
+
           _id
-  
+
           countryname
-  
+
           countryshortcode
-  
+
           is_active
-  
+
         }
-  
+
         state_detail {
-  
+
           _id
-  
+
           statename
-  
+
           stateshortcode
-  
+
           country
-  
+
           is_active
-  
+
         }
-  
+
         district_detail {
-  
+
           _id
-  
+
           districtname
-  
+
           country
-  
+
           state
-  
+
           is_active
-  
+
         }
-  
+
         qualification {
-  
+
           board {
-  
+
             _id
-  
+
             Board_Id
-  
+
             Board_Name
-  
+
             is_active
-  
+
           }
-  
+
           discipline {
-  
+
             _id
-  
+
             discipline_id
-  
+
             discipline_name
-  
+
             discipline_code
-  
+
             is_active
-  
+
           }
-  
+
           institute_detail {
-  
+
             _id
-  
+
             institute_id
-  
+
             institute_name
-  
+
             institute_code
-  
+
             is_active
-  
+
           }
-  
+
           level_detail {
-  
+
             _id
-  
+
             level_id
-  
+
             level_name
-  
+
             level_code
-  
+
             is_active
-  
+
           }
-  
+
           specification_detail {
-  
+
             _id
-  
+
             specification_id
-  
+
             specification_name
-  
+
             specification_code
-  
+
             is_active
-  
+
           }
-  
+
           university {
-  
+
             _id
-  
+
             University_Id
-  
+
             University_Name
-  
+
             is_active
-  
+
           }
-  
+
           year_of_passing
-  
+
           percentage
-  
-         
-  
+
+
+
         }
-  
+
         language_detail {
-  
+
           _id
-  
+
           is_active
-  
+
           languagecode
-  
+
           languagename
-  
+
         }
-  
-       
-  
+
+
+
         progress
                                 }
 
@@ -448,7 +448,7 @@ mutation get_district_details($country: String,$state: String){
       updated_by_ip
       is_active
     }
-} 
+}
 }
 `;
 export const get_change_password_updateprofile = gql`
@@ -463,6 +463,96 @@ success
   }
 }
 `;
+
+export const view_profile1 = gql`
+  mutation view_profile($user_id: String) {
+    view_profile(user_id:$user_id) {
+    success
+    message {
+      full_name
+      email
+      user_id
+      user_mobile {
+        mobile_number
+      }
+      user_dtl{
+          username
+          created_on
+      }
+      user_profile {
+        _id
+        languages_known
+        is_student_or_professional
+        about_you
+        certificate
+        user_id
+        profile_img
+        year_of_birth
+        progress
+        is_active
+        gender
+        country
+        state
+        city_town
+        student
+        professional {
+          total_experience
+          organization
+          job_role
+        }
+        qualification{
+          discipline
+          board_university
+          qualification
+          specification
+          qualification
+          year_of_passing
+          percentage
+        }
+      }
+      country_detail {
+        countryname
+      }
+      state_detail {
+        statename
+      }
+      district_detail {
+        districtname
+      }
+     qualification {
+        board {
+          Board_Name
+        }
+        discipline {
+          discipline_name
+        }
+        institute_detail {
+          institute_name
+        }
+        level_detail {
+          level_name
+        }
+        specification_detail {
+          specification_name
+        }
+        university {
+          University_Name
+        }
+      year_of_passing
+      percentage
+      }
+      language_detail {
+        languagename
+      }
+      progress
+    }
+  }
+}
+`;
+
+
+
+
 
 export const delete_qualification = gql`
  mutation delete_qualification($user_id: String,$qualification: String){
@@ -571,6 +661,173 @@ export const gettopicdetail = gql`
       }
       success
     }
-    
+
+  }
+`;
+
+
+export const getLevelSubCategoryData = gql`
+  mutation getLevelSubCategoryData($level1: [String],$level2:[String],$level3:[String]) {
+    getLevelSubCategoryData(level1:$level1,level2:$level2,level3:$level3) {
+      success
+      message,
+    data{
+      level1{
+        _id
+        isSelected
+        category_id
+        category_name
+        category_description
+        level
+      }
+      level2{
+       _id
+        sub_category_id
+        isSelected
+        sub_category_name
+        parent_category_id
+        level
+      }
+      level3{
+        _id
+        parent_category_id
+        parent_sub_category_id
+        isSelected
+        creator_id
+        level
+        super_sub_category_id
+        super_sub_category_name
+      }
+    }
+
+    }
+  }
+`;
+
+
+
+
+export const getCourseCategorySearch = gql`
+  mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
+    $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
+    $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String ) {
+    getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
+      course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
+      pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
+       publishedFromDate:$publishedFromDate
+      ) {
+        success
+        message
+        data{
+          course_id
+          course_description
+          course_name
+          version
+          location
+          course_start_datetime
+          course_end_datetime
+          advertised_start
+          course_img_url
+          social_sharing_url
+          certificate_display_behaviour
+          certificates_show_before_end
+          certificate_html_view_enabled
+          has_any_active_web_certificate
+          certificate_name
+          lowest_passing_grade
+          mobile_available
+          visible_to_staff_only
+          enrollment_start
+          enrollment_end
+          invitation_only
+          max_student_enrollments_allowed
+          announcement
+          catalog_visibility
+          course_video_url
+          short_description
+          self_paced
+          marketing_url
+          course_language
+          certificate_available_date
+          article_count
+          downloadable_resource_count
+          course_level
+          step_towards
+          rating
+          price
+          what_will_you_learn
+          course_category
+          course_type
+          groupid
+          created_by
+          updated_by
+          admin_id
+          is_published
+          course_mode
+          preview_video
+          learner_count
+          is_active
+          published_by
+          publisher_id
+          updated_by_id
+          user_role
+          user_id
+          user_name
+          published_on
+          updated_at
+          created_at
+          super_sub_category_id
+          pre_requisite
+          takeway_details{
+            text
+            description
+            what_will_you_learn
+            media
+          }
+          coursepartner_details{
+             name
+             image
+          }
+          category_id
+          parent_sub_category_id
+          course_content_details
+          author_details{
+            author_name
+            description
+            image
+          }
+        }
+        languageCount{
+        course_language
+        count
+        }
+        instructor{
+        authordetails
+        count
+        }
+        partner{
+        coursepartnerdetails
+        count
+        }
+        courseMode{
+        course_mode
+        count
+        }
+  }
+  }
+`;
+
+export const createGuidanceRequest = gql`
+  mutation create_guidance_request($name: String!,$email_id:String!, $created_by_ip : String!, $course_id : String!) {
+    create_guidance_request(
+      name:$name,
+      email_id:$email_id,
+      created_by_ip:$created_by_ip,
+      course_id:$course_id,
+    ) {
+      message
+      success
+      error_msg
+    }
   }
 `;

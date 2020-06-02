@@ -8,7 +8,8 @@ export class CapslockDirective {
   constructor() {
  }
 
-  @Output('capsLock') capsLock = new EventEmitter<Boolean>();
+  // tslint:disable-next-line:no-output-rename
+  @Output('capsLock') capsLock = new EventEmitter<any>();
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {

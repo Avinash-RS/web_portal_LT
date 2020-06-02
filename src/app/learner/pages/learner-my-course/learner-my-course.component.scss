@@ -1,5 +1,4 @@
-// @import "variable";
-@import "../../../../assets/variable.scss";
+@import "variable";
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
@@ -15,15 +14,6 @@
 
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
-}
-
-.coursebreadcrumb {
-    padding-top: 10px;
-
-    ol {
-        margin-bottom: 0 !important;
-        background-color: #fff !important;
-    }
 }
 
 img {

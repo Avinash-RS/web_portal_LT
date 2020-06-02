@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
@@ -6,418 +6,303 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
-import { BehaviorSubject } from 'rxjs';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource, MatDialog } from '@angular/material';
-import { nodeChildrenAsMap } from '@angular/router/src/utils/tree';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import Swal from 'sweetalert2';
+import { forEach } from '@angular/router/src/utils/collection';
+
+export interface Data {
+  course_name: string;
+  category_details: [];
+  course_language: string;
+}
+
 @Component({
   selector: 'app-catalogue-management',
   templateUrl: './catalogue-management.component.html',
   styleUrls: ['./catalogue-management.component.scss']
 })
+
 export class CatalogueManagementComponent implements OnInit {
 
-  addCategoryForm: any; // cat add from
-  addSubCategoryForm: any; // sub cat add form
-  addSuperSubCategoryForm: any; // sub cat add form
-  selectCategoryForm: any; // popop - selct category form
   adminDetails: any;
-  loading: boolean = false;
-  showHome: boolean = true;
-  showAddCatForm: boolean = false;
-  showAddSubCatForm: boolean = false;
-  showAddSuperSubCatForm: boolean = false;
-  showCourses: boolean = false;
-  selectedCategory: any = {};
-  selectedSubCategory: any = {};
-  selectedSuperSubCategory: any = {};
-  categories: any;
-  courses: any;
-  selectedArray: any = [];
+  addCatalogueForm: any;
+  showAddCatalogueForm = false;
+  showListCatalogue = true;
+  showCourses = false;
+  showCatalogDetail = false;
+  showHeader = false;
+  loadingCatalogue = false;
+  checked = false;
+  reverse = false;
   pagenumber = 0;
-  breakpoint: number;
-  /** tree source stuff */
-  readonly dataSource$: BehaviorSubject<any[]>;
-  readonly treeSource: MatTreeNestedDataSource<any>;
-  /** tree control */
-  readonly treeControl = new NestedTreeControl<any>(node => node.children);
-  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  pagenumberCourse = 0;
+  pagenumberTable = 0;
+  totalCount: number;
+  catalog: any = {};
+  type: string;
+  catalogueList = [];
+  selectedArray: any = [];
+  courseList: any = [];
+  ELEMENT_DATA: Data[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns: string[] = ['sno', 'course_name', 'category_details', 'course_language'];
+  dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+  @ViewChild(MatSort) sort: MatSort;
+  catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
-
-  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, private adminservice: AdminServicesService,
-    public learnerservice: LearnerServicesService, private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
+  constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
+    // tslint:disable-next-line:align
+    private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
+    // tslint:disable-next-line:align
+    private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog,
   ) {
     this.adminDetails = this.gs.checkLogout();
-    this.courses = [
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
-      {
-        name: "Web Development",
-        src: "assets/courses/1.jpg",
-      },
-      {
-        name: "Business Analyst",
-        src: "assets/courses/2.jpg",
-      },
-      {
-        name: "Photography",
-        src: "assets/courses/3.jpg",
-      },
-      {
-        name: "Code study",
-        src: "assets/courses/4.jpg",
-      },
-
-    ];
-
-    this.treeSource = new MatTreeNestedDataSource<any>();
-    this.dataSource$ = new BehaviorSubject<any[]>([]);
   }
 
   ngOnInit() {
-    this.getallcategories();
-
-    if (window.innerWidth <= 600)
-      this.breakpoint = 1;
-    else if (window.innerWidth >= 600 && window.innerWidth <= 768)
-      this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 1024)
-      this.breakpoint = 3;
-    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
-      this.breakpoint = 4;
+    this.getListCatalogue();
   }
 
-  onResize(event) {
-    if (event.target.innerWidth <= 600)
-      this.breakpoint = 1;
-    else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768)
-      this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024)
-      this.breakpoint = 3;
-    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
-      this.breakpoint = 4;
-  }
-
-  get f() {
-    if (this.showAddCatForm == true) {
-      return this.addCategoryForm.controls;
-    }
-    else if (this.showAddSubCatForm == true) {
-      return this.addSubCategoryForm.controls;
-    }
-    else if (this.showAddSuperSubCatForm == true) {
-      return this.addSuperSubCategoryForm.controls;
-    }
-  }
-
-  getallcategories() {
-    this.treeSource.data = null;
-    this.pagenumber = 0;
-    this.adminservice.getcategories(this.pagenumber).subscribe((result: any) => {
-      console.log(result.data);
-      this.categories = result.data.getcategoryadmin.message;
-      this.treeSource.data = this.categories;
-      this.dataSource$.next(this.categories);
+  getListCatalogue() {
+    this.loadingCatalogue = true;
+    this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
+      this.catalogueList.push(...result?.data?.getallcatalogue?.message);
+      this.loadingCatalogue = false;
     });
   }
 
-  loadsubcategory(node) {
-    console.log(node);
-    if (node.category_id) {
-      this.learnerservice.getcoursesubcategory(node.category_id).subscribe((result: any) => {
-        console.log(result.data);
-        const category = result.data.get_sub_category.message;
-        if (node) {
-          // node.children = [
-          //   ...(node.children || []),
-          //   group
-          // ];
-          node.children = category;
-          // if (!this.treeControl.isExpanded(node)) {
-          this.treeControl.expand(node);
-          // }
-        } else {
-          this.dataSource$.next([
-            ...this.dataSource$.value, category[0]]);
-        }
-        const array = this.treeSource.data;
-        this.treeSource.data = null;
-        this.treeSource.data = array;
-      });
-    } else {
-      this.learnerservice.getsupersubcategory(node.sub_category_id).subscribe((result: any) => {
-        console.log(result.data);
-        const category = result.data.getsupersubcategory.message;
-        if (node) {
-          // node.children = [
-          //   ...(node.children || []),
-          //   group
-          // ];
-          node.children = category;
-          // if (!this.treeControl.isExpanded(node)) {
-          this.treeControl.expand(node);
-          // }
-        } else {
-          this.dataSource$.next([
-            ...this.dataSource$.value, category[0]]);
-        }
-        const array = this.treeSource.data;
-        this.treeSource.data = null;
-        this.treeSource.data = array;
-      });
+  clickCatalog() {
+    this.showCourses = this.showHeader = this.showAddCatalogueForm = this.showCatalogDetail = false;
+    this.showListCatalogue = true;
+    this.catalog = {};
+    this.getListCatalogue();
+    this.type = null;
+    this.courseList = this.catalogueList = [];
+    this.totalCount = null;
+    this.checked = false;
+  }
+
+  clickCName() {
+    this.showCourses = this.showListCatalogue = this.showAddCatalogueForm = false;
+    this.showHeader = this.showCatalogDetail = true;
+    this.type = null;
+    this.courseList = [];
+    this.totalCount = null;
+    this.getCatalogDetail();
+    this.checked = false;
+  }
+
+  clickCancel() {
+    this.showCatalogDetail = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = this.checked = false;
+    this.type = null;
+    this.getCatalogDetail();
+  }
+
+  get f() {
+    if (this.showAddCatalogueForm === true) {
+      return this.addCatalogueForm.controls;
     }
   }
 
-  selectedcategory(category) {
-    console.log(category)
-    if (category.category_id) {
-      if (category.checkbox === true) {
-        let oldcategory = null;
-        oldcategory = this.selectedCategory;
-        this.selectedCategory = category;
-        this.addCategoryForm = this.formBuilder.group({
-          category_name: new FormControl('', myGlobals.req),
-          category_description: new FormControl([]),
-          category_image: ['', myGlobals.req]
-        });
-        this.addCategoryForm.patchValue(this.selectedCategory);
-        this.showAddCatForm = true;
-        this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-        if (oldcategory?.category_id) {
-          const value = this.treeSource._data.value.findIndex(x => x.category_id === oldcategory?.category_id);
-          this.treeSource._data.value[value].checkbox = false;
-          this.treeSource._data.value[value]?.children?.forEach(element => {
-            element.checkbox = false;
-          });
-        }
-      } else {
-        this.selectedCategory = {};
-        this.addCategoryForm.reset();
-      }
-    } else if (category.sub_category_id) {
-      if (category.checkbox === true) {
-        this.selectedSubCategory = category;
-        this.addSubCategoryForm = this.formBuilder.group({
-          sub_category_name: new FormControl('', myGlobals.req),
-          sub_category_description: new FormControl([]),
-        });
-        this.addSubCategoryForm.patchValue(this.selectedSubCategory);
-        this.showAddSubCatForm = true;
-        this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      } else {
-        this.selectedSubCategory = {};
-        this.addSubCategoryForm.reset();
-      }
+  selectedSelectAll() {
+    if (this.checked) {
+      this.courseList.forEach(element => {
+        element.isChecked = true;
+      });
     } else {
-      if (category.checkbox === true) {
-        this.selectedSuperSubCategory = category;
-        this.addSuperSubCategoryForm = this.formBuilder.group({
-          super_sub_category_name: new FormControl('', myGlobals.req),
-          super_sub_category_description: new FormControl([]),
-        });
-        this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
-        this.showAddSuperSubCatForm = true;
-        this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
-      } else {
-        this.selectedSuperSubCategory = {};
-        this.addSuperSubCategoryForm.reset();
-      }
+      this.courseList.forEach(element => {
+        element.isChecked = false;
+      });
     }
   }
 
   gotoAdd() {
-    if (this.selectedCategory.category_name == undefined) {
-      this.addCategoryForm = this.formBuilder.group({
-        category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl([]),
-        category_image: ['', myGlobals.req]
-      });
-      this.showAddCatForm = true;
-      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      // this.showHome = false;
-      // this.showCourses = false;
-    }
-    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name == undefined) {
-      this.addSubCategoryForm = this.formBuilder.group({
-        sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl([]),
-      });
-      this.showAddSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-      // this.showHome = false;
-    }
-    else if (this.selectedCategory.category_name != undefined && this.selectedSubCategory.sub_category_name != undefined
-      && this.selectedSuperSubCategory.super_sub_category_name == undefined) {
-      this.addSuperSubCategoryForm = this.formBuilder.group({
-        super_sub_category_name: new FormControl('', myGlobals.req),
-        super_sub_category_description: new FormControl(''),
-      });
-      this.showAddSuperSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
-    }
-  }
-
-  changeNav(formType) {
-    if (formType == 'addCategoryForm') {
-      this.addCategoryForm = this.formBuilder.group({
-        category_name: new FormControl('', myGlobals.req),
-        category_description: new FormControl([]),
-        category_image: ['', myGlobals.req]
-      });
-      this.addCategoryForm.patchValue(this.selectedCategory);
-      this.showAddCatForm = true;
-      this.showAddSubCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-    } else  if (formType == 'addSubCategoryForm') {
-      this.addSubCategoryForm = this.formBuilder.group({
-        sub_category_name: new FormControl('', myGlobals.req),
-        sub_category_description: new FormControl([]),
-      });
-      this.addSubCategoryForm.patchValue(this.selectedSubCategory);
-      this.showAddSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSuperSubCatForm = this.showCourses = false;
-    }
-    else  if (formType == 'addSuperSubCategoryForm') {
-      this.addSuperSubCategoryForm = this.formBuilder.group({
-        super_sub_category_name: new FormControl('', myGlobals.req),
-        super_sub_category_description: new FormControl(''),
-      });
-      this.addSuperSubCategoryForm.patchValue(this.selectedSuperSubCategory);
-      this.showAddSuperSubCatForm = true;
-      this.showAddCatForm = this.showHome = this.showAddSubCatForm = this.showCourses = false;
-    }
-  }
-
-  uploadFile(fileInput: any) {
-    this.loading = true;
-    if (fileInput) {
-      var selectfile = <File>fileInput[0];
-      if (selectfile && selectfile.type != 'image/png' && selectfile.type != 'image/jpeg' && selectfile.type != 'image/jpg') {
-        this.alert.openAlert('Image should only be Jpeg or png format', null)
-        this.loading = false;
-      }
-      // else if (selectfile && selectfile.size > 100000) {
-      //   this.alert.openAlert('Image should be less than 1 MB', null)
-      // }
-      else {
-        if (selectfile) {
-          const fb = new FormData();
-          fb.append('image', selectfile, selectfile.name)
-          this.learnerservice.imageupload(fb).subscribe((data: any) => {
-            var split_url = data.url.split('/');
-            var upload_url = split_url[0] + "//" + split_url[1] + split_url[2] + '/' + data.path
-            this.addCategoryForm.controls['category_image'].setValue(upload_url);
-            this.loading = false;
-          })
-        }
-      }
-    } else
-      this.loading = false
-  }
-
-  gotoEdit() {
-  }
-
-  gotoDelete() {
-  }
-
-  selectAll() {
-  }
-
-  hideCourses() {
-  }
-
-  addCategory(formType) {
-    var value = formType == 'category' ? this.addCategoryForm.value : (formType == 'subcategory') ? this.addSubCategoryForm.value :
-      this.addSuperSubCategoryForm.value;
-    let category = {
-      input_name: value.category_name || value.sub_category_name || value.super_sub_category_name,
-      input_description: value.category_description || value.sub_category_description || value.super_sub_category_description || "null",
-      input_image: value.category_image || "null",
-      creator_id: this.adminDetails._id,
-      level: formType == 'category' ? 1 : (formType == 'subcategory') ? 2 : 3,
-      apply_all_courses: false,
-      course_id: [],
-      parent_category_id: this.selectedCategory?.category_id || "null",
-      parent_sub_category_id: this.selectedSubCategory?.sub_category_id || "null",
-    }
-    console.log(category)
-    this.adminservice.createCatalogue(category).subscribe((result: any) => {
-      console.log(result);
-      formType == 'category' ? this.addCategoryForm.reset() : (formType == 'subcategory') ? this.addSubCategoryForm.reset() :
-        this.addSuperSubCategoryForm.reset();
-      if (result?.data?.create_catelogue?.success)
-        this.getallcategories();
-      else
-        this.alert.openAlert(result?.data?.create_catelogue?.message, null)
+    this.showListCatalogue = false;
+    this.showAddCatalogueForm = true;
+    this.addCatalogueForm = this.formBuilder.group({
+      catalogue_name: new FormControl('', myGlobals.textVal),
+      catalogue_description: new FormControl(''),
     });
   }
-  // gotoedit() {
-  //   this.learnerservice.getallcourses(this.userDetailes.group_id[0], this.pagenumber).subscribe((result: any) => {
-  //     this.allcourses = result.data.get_all_course_by_usergroup.message;
-  //   });
-  // }
 
-  // 5eb3b5f50d03e1bc320162cd id 
+  addNewCatalogue() {
+    const cataloguename = this.addCatalogueForm.value.catalogue_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
+    this.adminservice.addNewCatalogue(cataloguename,
+      this.addCatalogueForm.value.catalogue_description || '',
+      this.adminDetails._id).subscribe((result: any) => {
+        this.addCatalogueForm.reset();
+        if (result && result.data) {
+          if (result.data.create_master_catalogue && result.data.create_master_catalogue.success) {
+            this.catalog = result.data.create_master_catalogue.details;
+            this.catalog.course_count = 0;
+            this.goToCatalogDetail(this.catalog);
+            this.alert.openAlert('Catalogue created successfully', null);
+          } else {
+            this.alert.openAlert(result.data.create_master_catalogue.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+  }
+
+  goToCatalogDetail(c) {
+    this.catalog = c;
+    this.getCatalogDetail();
+    if (this.catalog.course_count === 0) {
+      this.getCoursesForCatalog();
+    } else {
+      this.showCatalogDetail = this.showHeader = true;
+      this.showAddCatalogueForm = this.showListCatalogue = this.showCourses = false;
+    }
+  }
+
+  getCoursesInCatalog() { // courses mapped to catalog - when click remove
+    this.type = 'remove';
+    this.courseList = [];
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+      this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
+      this.totalCount = result?.data?.getcoursesincatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
+    });
+  }
+
+  getNextCourses() {
+    this.pagenumberCourse = this.pagenumberCourse + 1;
+    if (this.type === 'add') {
+      this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+        this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+        this.selectedSelectAll();
+        this.totalCount = result?.data?.getcoursesforcatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
+      });
+    } else if (this.type === 'remove') {
+      this.adminservice.getCourseInCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+        this.courseList.push(...result?.data?.getcoursesincatalogue?.message);
+        this.selectedSelectAll();
+        this.totalCount = result?.data?.getcoursesincatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
+      });
+    }
+  }
+
+  getCoursesForCatalog() { // courses not mapped to catalog - when click add
+    this.type = 'add';
+    this.courseList = [];
+    this.showCourses = this.showHeader = true;
+    this.showAddCatalogueForm = this.showListCatalogue = false;
+    this.adminservice.getCourseForCatalogue(this.catalog.catalogue_id, this.pagenumberCourse || 0).subscribe((result: any) => {
+      this.courseList.push(...result?.data?.getcoursesforcatalogue?.message);
+      this.totalCount = result?.data?.getcoursesforcatalogue?.total_count || result?.data?.getcoursesincatalogue?.message.length;
+    });
+  }
+
+  getCatalogDetail() { // courses mapped to catalog - Table view
+    this.loadingCatalogue = true;
+    this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
+      this.catalog = result.data.getallcatalogue_by_id.message;
+      if (this.pagenumberTable === 0) {
+        this.ELEMENT_DATA = [];
+      }
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      this.dataSource.sort = this.sort;
+      this.loadingCatalogue = false;
+    });
+  }
+
+  getNextCattalogueDetails() {
+    this.pagenumberTable = this.pagenumberTable + 1;
+    this.adminservice.getallcatalogueById(this.catalog.catalogue_id, this.pagenumberTable || 0).subscribe((result: any) => {
+      if (this.pagenumberTable === 0) {
+        this.ELEMENT_DATA = [];
+      }
+      Array.prototype.push.apply(this.ELEMENT_DATA, result.data.getallcatalogue_by_id.message.course_details);
+      this.dataSource = new MatTableDataSource<Data>(this.ELEMENT_DATA);
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   selectCourse(c, id) {
-    if (c.isChecked == undefined || c.isChecked == false) {
+    if (c.isChecked === undefined || c.isChecked === false) {
       c.isChecked = true;
       this.selectedArray.push(c);
-    }
-    else {
+    } else {
       c.isChecked = !c.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== c);
     }
   }
 
-  openMoveTo(templateRef: TemplateRef<any>) {
-    this.selectCategoryForm = this.formBuilder.group({
-      category: new FormControl('', myGlobals.req),
-      subCategory: new FormControl("", []),
-      subSubCategory: new FormControl("", []),
-    })
-    this.dialog.open(templateRef);
+  saveCourse() {
+    const arra = this.selectedArray.map((item: any) => item.course_id);
+    if (this.type === 'add') {
+      this.adminservice.addCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.coursecataloguemapping?.success) {
+            this.alert.openAlert('Courses added successfully', null);
+            this.getCoursesForCatalog();
+            this.selectedArray = [];
+          } else {
+            this.selectedArray = [];
+            this.alert.openAlert(result.data.coursecataloguemapping?.message, null);
+          }
+        } else {
+          this.selectedArray = [];
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+    } else if (this.type === 'remove') {
+      this.adminservice.removeCourse(this.catalog.catalogue_id, arra, this.checked).subscribe((result: any) => {
+        if (result && result.data) {
+          if (result.data.unmapcoursesfromcatalogue?.success) {
+            this.getCoursesInCatalog();
+            this.selectedArray = [];
+            this.alert.openAlert('Courses removed successfully', null);
+          } else {
+            this.selectedArray = [];
+            this.alert.openAlert(result.data.unmapcoursesfromcatalogue?.message, null);
+          }
+        } else {
+          this.selectedArray = [];
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
+    }
   }
 
   closedialogbox() {
     this.dialog.closeAll();
   }
 
-  moveCourses() {
-    console.log(this.selectCategoryForm)
+  openEdit(templateRef: TemplateRef<any>) {
+    this.addCatalogueForm?.reset();
+    this.addCatalogueForm = this.formBuilder.group({
+      catalogue_name: new FormControl('', myGlobals.textVal),
+      catalogue_description: new FormControl(''),
+    });
+    this.addCatalogueForm.patchValue(this.catalog);
+    this.dialog.open(templateRef);
+  }
+
+  editCatalogue() {
+    this.closedialogbox();
+    const cataloguename = this.addCatalogueForm.value.catalogue_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
+    this.adminservice.updateCatalogDtl(cataloguename,
+      this.addCatalogueForm.value.catalogue_description,
+      this.catalog.catalogue_id).subscribe((result: any) => {
+        this.addCatalogueForm.reset();
+        if (result && result.data) {
+          if (result.data.updatecatalogueinfo && result.data.updatecatalogueinfo.success) {
+            // this.getListCatalogue();
+            this.alert.openAlert('Catalogue updated successfully', null);
+            // this.showAddCatalogueForm = false;
+            // this.showListCatalogue = true;
+          } else {
+            this.alert.openAlert(result.data.updatecatalogueinfo.message, null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
+      });
   }
 }

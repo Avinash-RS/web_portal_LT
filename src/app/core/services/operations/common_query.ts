@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const logout = gql`
   query logout($user_id: String, $is_admin: Boolean){
@@ -412,4 +412,195 @@ export const syllabus_of_particular_scorm = gql`
       }
     }
   }`;
+export const getCoursesByName = gql`
+    query getCoursesByName($courseName : String!, $pagenumber : String!){
+      getCoursesByName(courseName: $courseName, pagenumber: $pagenumber) {
+        success
+        error_msg
+        message{
+          course_id
+           course_description
+           course_name
+           version
+           location
+           course_start_datetime
+           course_end_datetime
+           advertised_start
+           course_img_url
+           social_sharing_url
+           certificate_display_behaviour
+           certificates_show_before_end
+           certificate_html_view_enabled
+           has_any_active_web_certificate
+           certificate_name
+           lowest_passing_grade
+           mobile_available
+           visible_to_staff_only
+           enrollment_start
+           enrollment_end
+           invitation_only
+           max_student_enrollments_allowed
+           announcement
+           catalog_visibility
+           course_video_url
+           short_description
+           self_paced
+           marketing_url
+           course_language
+           certificate_available_date
+           author_details{
+              author_name
+              description
+              image
+            }
+           course_content_details{
+              name
+              type
+              is_active
+              parent_id
+              description
+              sub_section_id
+              file_content{
+                video_url
+                image_url
+                audio_url
+                file_url
+              }
+              unit{
+                  name
+                  type
+                  is_active
+                  parent_id
+                  description
+                  sub_section_id
+                  file_content{
+                    video_url
+                    image_url
+                    audio_url
+                    file_url
+                  }
+                }
+            }
+           article_count
+           downloadable_resource_count
+           course_level
+           step_towards
+           rating
+           price
+           what_will_you_learn
+           course_category
+           course_type
+           course_mode
+           learner_count
+           coursepartner_details{
+              name
+              image
+           }
+           takeway_details{
+              text
+              description
+              media{
+              image
+              }
+              what_will_you_learn
+              }
+           published_by
+           published_on
+           updated_at
+           created_at
+    }
+    }
+
+      }
+  `;
+
+  export const get_all_course_by_usergroup = gql`
+  query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
+    get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
+    success
+    error_msg
+    message{
+    course_id
+    course_description
+    course_name
+    enrollment_status
+    created_at
+    updated_at
+    version
+    location
+    course_start_datetime
+    course_end_datetime
+    advertised_start
+    course_img_url
+    social_sharing_url
+    certificate_display_behaviour
+    certificates_show_before_end
+    certificate_html_view_enabled
+    has_any_active_web_certificate
+    certificate_name
+    lowest_passing_grade
+    mobile_available
+    visible_to_staff_only
+    pre_requisite{
+      name
+      image
+  }
+    enrollment_start
+    enrollment_end
+    invitation_only
+    max_student_enrollments_allowed
+    announcement
+    catalog_visibility
+    course_video_url
+    short_description
+    self_paced
+    marketing_url
+    course_language
+    certificate_available_date
+    article_count
+    downloadable_resource_count
+    course_level
+    step_towards
+    rating
+    price
+    what_will_you_learn
+    course_category
+    course_type
+    course_content_details{
+    name
+    type
+    is_active
+    parent_id
+    description
+    sub_section_id
+    file_content{
+    video_url
+    image_url
+    audio_url
+    file_url
+    }
+    unit{
+    name
+    type
+    is_active
+    parent_id
+    description
+    sub_section_id
+    file_content{
+    video_url
+    image_url
+    audio_url
+    file_url
+    }
+    }
+    }
+    author_details{
+    author_name
+    description
+    image
+    }
+    }
+    }
+    }`;
+ 
 

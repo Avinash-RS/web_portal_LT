@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import * as myGlobals from '@core/globals';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material'
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Form } from '@angular/forms';
@@ -33,11 +33,11 @@ export class UserManagementComponent implements OnInit {
   selectedArray: any = [];
   profileDetails: {};
   trackDetails: any;
-  loader: boolean = false;
+  loader = false;
 
   constructor(private router: Router, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
-    private dialog: MatDialog,
+              private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
+              private dialog: MatDialog,
   ) {
     localStorage.setItem('role', 'admin');
     this.getAllUser(0);
@@ -50,7 +50,7 @@ export class UserManagementComponent implements OnInit {
     this.service.getAllUsers(pagenumber, 1, 'undefined')
       .subscribe((result: any) => {
         if (result.data && result.data.get_all_user) {
-          if (pagenumber == 0) {
+          if (pagenumber === 0) {
             this.ELEMENT_DATA = [];
           }
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
@@ -61,7 +61,7 @@ export class UserManagementComponent implements OnInit {
           this.resultsLength = result.data.get_all_user.learner_count;
           this.loader = false;
         } else {
-          this.alert.openAlert("Please try again later", null);
+          this.alert.openAlert('Please try again later', null);
           this.loader = false;
         }
       });
@@ -85,12 +85,12 @@ export class UserManagementComponent implements OnInit {
     // .subscribe((result: any) => {
     this.service.getUserSession(element._id).subscribe((track: any) => {
       this.trackDetails = track.data && track.data.get_user_session_detail &&
-        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0];
       this.profileDetails = track.data && track.data.get_user_session_detail &&
-        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0]
+        track.data.get_user_session_detail.message && track.data.get_user_session_detail.message[0];
       this.dialog.open(templateRef);
       // })
-    })
+    });
   }
 
   closedialogbox() {
@@ -98,11 +98,10 @@ export class UserManagementComponent implements OnInit {
   }
 
   checkboxLabel(row?) {
-    if (row.isChecked == undefined || row.isChecked == false) {
+    if (row.isChecked === undefined || row.isChecked === false) {
       row.isChecked = true;
       this.selectedArray.push(row);
-    }
-    else {
+    } else {
       row.isChecked = !row.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== row);
     }
@@ -124,64 +123,66 @@ export class UserManagementComponent implements OnInit {
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
               this.resultsLength = 10;
-            }
-            else {
+            } else {
               this.getAllUser(0);
-              this.alert.openAlert("Sorry", 'User doesnt exists');
+              this.alert.openAlert('Sorry', 'User doesnt exists');
             }
 
           });
-      } else if (filterValue.trim().toLowerCase().length == 0) {
+      } else if (filterValue.trim().toLowerCase().length === 0) {
         this.getAllUser(0);
       }
     }, 1000);
   }
 
   deActivate(status, element?) {
-    let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
+    const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      this.alert.openConfirmAlert(status == 'De-activate' ? 'De-activation Confirmation' :
-        'Activation Confirmation', status == 'De-activate' ? 'Are you sure you want to de-activate ' + count :
-        'Are you sure you want to activate ' + count).then((data: Boolean) => {
+      this.alert.openConfirmAlert(status === 'De-activate' ? 'De-activation Confirmation' :
+        'Activation Confirmation', status === 'De-activate' ? 'Are you sure you want to de-activate ' + count :
+        'Are you sure you want to activate ' + count).then((data) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.service.deActivate_And_reActivate_User(result, status == 'De-activate' ? false : true)
-              .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.deactivate_reactivate_user.success && result.data.deactivate_reactivate_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+            this.service.deActivate_And_reActivate_User(result, status === 'De-activate' ? false : true)
+              .subscribe((userresult: any) => {
+                this.selectedArray = [];
+                if (userresult.data.deactivate_reactivate_user.success &&
+                  userresult.data.deactivate_reactivate_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
 
   block(status, element?) {
     if (element || (this.selectedArray && this.selectedArray.length > 0)) {
-      let count = element ? 'this user' : (this.selectedArray.length == 1 ? 'this user' : this.selectedArray.length + 'users');
-      this.alert.openConfirmAlert(status == 'Block' ? 'Block Confirmation' :
-        'Un-block Confirmation', status == 'Block' ? 'Are you sure you want to block ' + count :
-        'Are you sure you want to un-block ' + count).then((data: Boolean) => {
+      const count = element ? 'this user' : (this.selectedArray.length === 1 ? 'this user' : this.selectedArray.length + 'users');
+      this.alert.openConfirmAlert(status === 'Block' ? 'Block Confirmation' :
+        'Un-block Confirmation', status === 'Block' ? 'Are you sure you want to block ' + count :
+        'Are you sure you want to un-block ' + count).then((data) => {
           if (data) {
-            let result = this.selectedArray && this.selectedArray.length > 0 ?
+            const result = this.selectedArray && this.selectedArray.length > 0 ?
               this.selection.selected.map((item: any) => item.user_id) : [element.user_id];
-            this.service.blockUser(result, status == 'Block' ? true : false)
-              .subscribe((result: any) => {
-                this.selectedArray = []
-                if (result.data.block_user.success && result.data.block_user.message.updated_users.length > 0)
-                  this.getAllUser(0)
-                else
-                  this.alert.openAlert('Sorry, Please try again later', 'null')
+            this.service.blockUser(result, status === 'Block' ? true : false)
+              .subscribe((userresult: any) => {
+                this.selectedArray = [];
+                if (userresult.data.block_user.success && userresult.data.block_user.message.updated_users.length > 0) {
+                  this.getAllUser(0);
+                } else {
+                  this.alert.openAlert('Sorry, Please try again later', 'null');
+                }
               });
           }
-        })
+        });
     } else {
-      this.alert.openAlert("Please select any record", null)
+      this.alert.openAlert('Please select any record', null);
     }
   }
 

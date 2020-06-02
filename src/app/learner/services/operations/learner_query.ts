@@ -310,6 +310,7 @@ query get_sub_category($category_id: String!){
   is_active
   sub_category_image
   parent_category_id
+  is_child
   }
   error_msg
   }
@@ -345,6 +346,7 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
   get_course_by_subcategory(input_id: $input_id,input_type: $input_type ,pagenumber: $pagenumber) {
   success
   error_msg
+  total_count
   message{
   course_id
   course_description
@@ -430,93 +432,94 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
 
 
 
-export const get_all_course_by_usergroup = gql`
-  query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
-    get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
-    success
-    error_msg
-    message{
-    course_id
-    course_description
-    course_name
-    created_at
-    updated_at
-    version
-    location
-    course_start_datetime
-    course_end_datetime
-    advertised_start
-    course_img_url
-    social_sharing_url
-    certificate_display_behaviour
-    certificates_show_before_end
-    certificate_html_view_enabled
-    has_any_active_web_certificate
-    certificate_name
-    lowest_passing_grade
-    mobile_available
-    visible_to_staff_only
-    pre_requisite{
-      name
-      image
-  }
-    enrollment_start
-    enrollment_end
-    invitation_only
-    max_student_enrollments_allowed
-    announcement
-    catalog_visibility
-    course_video_url
-    short_description
-    self_paced
-    marketing_url
-    course_language
-    certificate_available_date
-    article_count
-    downloadable_resource_count
-    course_level
-    step_towards
-    rating
-    price
-    what_will_you_learn
-    course_category
-    course_type
-    course_content_details{
-    name
-    type
-    is_active
-    parent_id
-    description
-    sub_section_id
-    file_content{
-    video_url
-    image_url
-    audio_url
-    file_url
-    }
-    unit{
-    name
-    type
-    is_active
-    parent_id
-    description
-    sub_section_id
-    file_content{
-    video_url
-    image_url
-    audio_url
-    file_url
-    }
-    }
-    }
-    author_details{
-    author_name
-    description
-    image
-    }
-    }
-    }
-    }`;
+// export const get_all_course_by_usergroup = gql`
+//   query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
+//     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
+//     success
+//     error_msg
+//     message{
+//     course_id
+//     course_description
+//     course_name
+//     enrollment_status
+//     created_at
+//     updated_at
+//     version
+//     location
+//     course_start_datetime
+//     course_end_datetime
+//     advertised_start
+//     course_img_url
+//     social_sharing_url
+//     certificate_display_behaviour
+//     certificates_show_before_end
+//     certificate_html_view_enabled
+//     has_any_active_web_certificate
+//     certificate_name
+//     lowest_passing_grade
+//     mobile_available
+//     visible_to_staff_only
+//     pre_requisite{
+//       name
+//       image
+//   }
+//     enrollment_start
+//     enrollment_end
+//     invitation_only
+//     max_student_enrollments_allowed
+//     announcement
+//     catalog_visibility
+//     course_video_url
+//     short_description
+//     self_paced
+//     marketing_url
+//     course_language
+//     certificate_available_date
+//     article_count
+//     downloadable_resource_count
+//     course_level
+//     step_towards
+//     rating
+//     price
+//     what_will_you_learn
+//     course_category
+//     course_type
+//     course_content_details{
+//     name
+//     type
+//     is_active
+//     parent_id
+//     description
+//     sub_section_id
+//     file_content{
+//     video_url
+//     image_url
+//     audio_url
+//     file_url
+//     }
+//     unit{
+//     name
+//     type
+//     is_active
+//     parent_id
+//     description
+//     sub_section_id
+//     file_content{
+//     video_url
+//     image_url
+//     audio_url
+//     file_url
+//     }
+//     }
+//     }
+//     author_details{
+//     author_name
+//     description
+//     image
+//     }
+//     }
+//     }
+//     }`;
 export const get_module_topic = gql`
     query get_module_topic{
       get_module_topic {
@@ -526,5 +529,271 @@ export const get_module_topic = gql`
           modulename
         }
         success
+      }
+    }`;
+
+
+export const getLevelCategoryData = gql`
+    query getLevelCategoryData{
+      getLevelCategoryData {
+        success
+         message
+        data{
+      level1{
+        _id
+        category_name
+        category_id
+        level
+      }
+      level2{
+        _id
+        sub_category_id
+        sub_category_name
+        parent_category_id
+        level
+      }
+      level3{
+        _id
+        parent_category_id
+        parent_sub_category_id
+        level
+        language_code
+        super_sub_category_id
+        super_sub_category_name
+      }
+    }
+  }
+
+}`;
+
+// Guildline Search
+export const getDetailsCount = gql`
+    query getDetailsCount{
+      getDetailsCount {
+        success
+         error_msg
+        message{
+          course_data{
+            course_language
+            count
+          }
+      author_data{
+        authordetails
+        count
+      }
+      coursepartner_data{
+        coursepartnerdetails
+        count
+      }
+      coursemode_data{
+        course_mode
+        count
+      }
+      other_data{
+        fieldCount
+        affectedRows
+        insertId
+        serverStatus
+        warningCount
+        message
+        protocol41
+        changedRows
+      }
+    }
+      }
+  }`;
+
+export const getlearnertrack = gql`
+   query get_learner_track($user_id : String!,$_id: String!) {
+    get_learner_track(user_id: $user_id,_id: $_id){
+        success
+        error_msg
+        message{
+            activities_and_enroll{
+                  _id
+                  last_logout
+                  last_login
+                  courseObjects{
+                         course_id
+                          course_active_time
+                          status
+                          course_description
+                          course_name
+                          course_start_datetime
+                          course_end_datetime
+                          enrollment_start
+                          enrollment_end
+                          author_details{
+                              author_name
+                              description
+                              image
+                          }
+                  }
+            }
+                  Enrolled_courses{
+                          status
+                          is_active
+                          _id
+                          user_id
+                          group_id
+                          course_id
+                          created_at
+                          updated_at
+                          status_reason
+                          course_description
+                          course_name
+                          course_start_datetime
+                          course_end_datetime
+                          enrollment_start
+                          enrollment_end
+                          author_details{
+                                  author_name
+                                  description
+                                  image
+                          }
+                  }
+        }
+    }
+}`
+export const getlearnerdashboarddetails = gql`
+query getlearnerdashboarddetails($user_id: String){
+  getlearnerdashboarddetails(user_id:$user_id) {
+    success
+    message
+    data{
+    courseEnrolled{
+    totalCount
+    IncDecPec
+    valueIncDecPec
+    }
+    suspend{
+    _id
+    totalCount
+    IncDecPec
+    valueIncDecPec
+    }
+    incomplete{
+    _id
+    totalCount
+    IncDecPec
+    valueIncDecPec
+    }
+    completed{
+    _id
+    totalCount
+    IncDecPec
+    valueIncDecPec
+    }
+    lastAccessedCourses{
+    course_id
+    course_name
+    course_description
+    course_img_url
+    coursePlayerStatus{
+            _id
+            course_id
+            course_percentage
+            location
+            status
+            updated_on
+        }
+  }
+    }
+}
+}`;
+
+export const getLearnerenrolledCourses = gql`
+query getLearnerenrolledCourses($user_id: String){
+  getLearnerenrolledCourses(user_id:$user_id){
+    success
+    message
+    data{
+      suspend{
+        _id
+        totalCount
+        IncDecPec
+        valueIncDecPec
+      }
+      incomplete{
+        _id
+        totalCount
+        IncDecPec
+        valueIncDecPec
+      }
+      courseEnrolled{
+        course_id
+        course_name
+        course_img_url
+        rating
+        price
+        totalLearners
+        coursePlayerStatus{
+          status
+          }
+      }
+    }
+  }
+}`;
+
+export const get_trending_course = gql`
+query get_trending_course{
+  get_trending_course {
+    success
+    error_msg
+    total_count
+    data{
+      course_id
+      course_description
+      course_name
+      course_start_datetime
+      course_end_datetime
+      enrollment_start
+      enrollment_end
+      course_img_url
+      short_description
+    }
+  }
+}
+`;
+
+export const get_popular_course = gql`
+query get_popular_course{
+  get_popular_course {
+    success
+    error_msg
+    total_count
+    data{
+      course_id
+      course_description
+      course_name
+      course_start_datetime
+      course_end_datetime
+      enrollment_start
+      enrollment_end
+      course_img_url
+      short_description
+    }
+  }
+}
+`;
+
+//getting popular course
+
+export const getPopularcourse = gql`
+    query getPopularcourse{
+      getPopularcourse {
+        success
+        error_msg
+        data{
+        course_id
+        course_name
+        course_img_url
+        course_description
+        rating
+        price
+        learner_count
+        enrollment_end
+        enrollment_start
+        }
       }
     }`;

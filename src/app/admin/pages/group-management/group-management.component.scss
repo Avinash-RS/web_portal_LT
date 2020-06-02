@@ -163,7 +163,7 @@ label .fa {
   position: relative;
   width: auto;
   overflow: auto;
-  max-height: 400px;
+  max-height: 500px;
 
 }
 
@@ -476,11 +476,20 @@ table {
 }
 
 .cardheight {
-  height: 430px !important;
+  height: 450px !important;
+  width: auto;
 }
 
 :host ::ng-deep .mat-tab-body-content {
   width: 100% !important;
   overflow: hidden !important;
 
+}
+
+.p-5 {
+  padding: 1.5rem!important;
+}
+
+.p-5[_ngcontent-wto-c26] {
+  padding: 1.0rem !important;
 }

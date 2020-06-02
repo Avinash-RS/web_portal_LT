@@ -1,0 +1,204 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
+
+<div class="container pb-5">
+  <h1> Learner Management</h1>
+  <div class="container margin20">
+    <div class="row">
+      <div class="col-12 bg-white">
+        <mat-tab-group>
+          <mat-tab label="User profile">
+            <br>
+            <form>
+              <div class="row pt-3">
+                <div class="col-lg-3  col-md-3 ">
+                  <div class="form-group  m-0 " style="padding-left: inherit;">
+                    <img [src]="profiledetail?.user_profile[0]?.profile_img || '../../../../assets/learner/avatar2.png'"
+                      alt="Avatar">
+                  </div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-lg-3 col-md-3 ">
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group  m-0">
+                    <label class="common-label1">Full name : </label>
+                    <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+                    {{profiledetail?.full_name}}
+                    <!-- </mat-form-field> -->
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group  m-0">
+                    <label class=" common-label1">User Name : </label>
+                    <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+                    {{profiledetail?.user_dtl?.username}}
+                    <!-- </mat-form-field> -->
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group  m-0">
+                    <label class="common-label1">DOJ LXP : </label>
+                    <!-- <mat-form-field color="accent" appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
+                    {{profiledetail?.user_dtl?.created_on | date: 'dd MMM, yyyy'  }}
+                    <!-- </mat-form-field> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-lg-3 col-md-3">
+                </div>
+                <div class="col-lg-3 col-md-3  ">
+                  <div class="form-group  m-0">
+                    <label class=" common-label1">Gender : </label> {{profiledetail?.user_profile[0].gender}}
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group  m-0">
+                    <label class=" common-label1">I am a : </label>
+                    {{profiledetail?.user_profile[0]?.is_student_or_professional}}
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group m-0">
+                    <label class=" common-label1">Languages Known : </label>
+                    {{profiledetail?.language_detail[0]?.languagename}}
+                  </div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-lg-3 col-md-3">
+
+                </div>
+                <div class="col-lg-5 col-md-5">
+                  <div class="form-group  m-0">
+                    <div class="form-group  m-0">
+                      <label class="common-label1">Location : </label>
+                      {{profiledetail?.country_detail[0]?.countryname}}, 
+                      {{profiledetail?.state_detail[0]?.statename}}, 
+                      {{profiledetail?.district_detail[0]?.districtname}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group  m-0">
+                  </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                  <div class="form-group  m-0">
+                    <label class=" common-label1">Qualification : </label>
+
+                    <div class="row" style="overflow-x:auto;">
+                      <div class="col-md-12 col-sm-12 col-12">
+                        <table class="profileTable">
+                          <tr>
+                            <th>Board</th>
+                            <th>Discipline</th>
+                            <th>Institute</th>
+                            <th>Level</th>
+                            <th>Specification</th>
+                            <th>Year of Passing</th>
+                            <th>Percentage</th>
+                          </tr>
+                          <tr *ngFor="let qual of profiledetail?.qualification">
+                            <td>{{qual.board[0].Board_Name}}</td>
+                            <td>{{qual.discipline[0].discipline_name}}</td>
+                            <td>{{qual.institute_detail[0].institute_name}}</td>
+                            <td>{{qual.level_detail[0].level_name}}</td>
+                            <td>{{qual.specification_detail[0].specification_name}}</td>
+                            <td>{{qual.year_of_passing}}</td>
+                            <td>{{qual.percentage}}</td>
+                          </tr>
+                        </table>
+                        <br>
+                      </div>
+                    </div>
+                    <br>
+                    <!-- {{profiledetail?.qualification}} -->
+
+                  </div>
+                </div>
+
+              </div>
+            </form>
+
+
+          </mat-tab>
+
+          <mat-tab label="Activities">
+            <br> <br>
+
+              <mat-table style="margin-left:2%" #table [dataSource]="dataSource">
+                <ng-container matColumnDef="sno">
+                  <mat-header-cell *matHeaderCellDef>
+                    S.No
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row;let i = index">
+                    <!-- <span class="mobile-label">S.No</span> -->
+                    <span class="desktop-data"> {{i+1}}</span>
+                    <!-- <span class="mobile-data"> {{i+1}}</span> -->
+                  </mat-cell>
+                </ng-container>
+                <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+                  <mat-header-cell *matHeaderCellDef>
+                    <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                    {{ column.header }}
+                  </mat-header-cell>
+                  <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+              </mat-table>
+              <br> <br>
+              <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+                showFirstLastButtons>
+              </mat-paginator> -->
+
+          </mat-tab>
+
+          <mat-tab label="Enrolled courses">
+            <br> <br>
+            <mat-table #table style="margin-left:2%" [dataSource]="dataSource1">
+              <ng-container matColumnDef="sno">
+                <mat-header-cell *matHeaderCellDef>
+                  S.No
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index">
+                  <!-- <span class="mobile-label">S.No</span> -->
+                  <span class="desktop-data"> {{i+1}}</span>
+                  <!-- <span class="mobile-data"> {{i+1}}</span> -->
+                </mat-cell>
+              </ng-container>
+              <ng-container *ngFor="let column of columns1" [matColumnDef]="column.columnDef">
+                <mat-header-cell *matHeaderCellDef>
+                  <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                  {{ column.header }}
+                </mat-header-cell>
+                <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns1;let i = index"></mat-row>
+            </mat-table>
+            <br> <br>
+            <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+              showFirstLastButtons>
+            </mat-paginator> -->
+          </mat-tab>
+         
+        </mat-tab-group>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -10,11 +10,13 @@ import {
         MatListModule,
         MatTreeModule
        } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {CdkTableModule} from '@angular/cdk/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -23,6 +25,15 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { NgxPaginationModule} from 'ngx-pagination';
 import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
+import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
+import { EnrollmentComponent } from './enrollment/enrollment.component';
+import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { AuditlogComponent } from './auditlog/auditlog.component';
+import { MatTableModule } from '@angular/material';
+import { PipeModule } from './../../pipes/pipe.module'
+
 
 
 @NgModule({
@@ -44,10 +55,16 @@ import { CatalogueManagementComponent } from './catalogue-management/catalogue-m
         MatChipsModule,
         AdminCoreModule,
         RouterModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ChartsModule,
+        MatDatepickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        PipeModule
          ],
     declarations: [   
-    AddUserComponent, ReportManagementComponent, CatalogueManagementComponent, ],
+    AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

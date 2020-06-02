@@ -10,8 +10,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatProgressSpinnerModule,MatTreeModule, MatSlideToggleModule } from '@angular/material';
-import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule, MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@angular/material';
+import { MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
+    MatGridListModule, MatSelectModule, MatRadioModule, MatDialogModule, MatTooltipModule, MatProgressBarModule,
+    MatAutocompleteModule, MatExpansionModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -21,9 +24,13 @@ import { CoreModule } from '@core/core.module';
 import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
-import {  DndDirective } from '../core/dnd.directive';
+import { DndDirective } from '../core/dnd.directive';
+import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
+import { PipeModule } from '../../pipes/pipe.module';
+// import { SearchPipe } from '../../pipes/search.pipe';
+import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -34,8 +41,13 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
 import { GroupManagementComponent } from '../pages/group-management/group-management.component';
-
-
+import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
+import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
+import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
+import { ChartsModule } from 'ng2-charts';
+import {MatNativeDateModule} from '@angular/material';
+import { PagesModule } from './../pages/pages.module';
+// import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -44,6 +56,7 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         RouterModule.forChild(appRoutes),
         MatToolbarModule,
         DashboardModule,
+        PipeModule,
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
@@ -73,18 +86,22 @@ import { GroupManagementComponent } from '../pages/group-management/group-manage
         MatTreeModule,
         MatSlideToggleModule,
         InfiniteScrollModule,
-        NgxPaginationModule
-        // WcaModule
-       
-
-
-
-
+        NgxPaginationModule,
+        MatSortModule,     // WcaModule
+        ChartsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        PagesModule
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective,CatalogueManagementComponent,AuthComponent,UserManagementComponent,ReportManagementComponent,AddUserComponent,GroupManagementComponent,AdminCoursesComponent,PublishCourseComponent],
+    declarations: [DndDirective,
+        AuthComponent, UserManagementComponent, GroupManagementComponent,AdminCoursesComponent,
+        // ReportManagementComponent, AddUserComponent, , CatalogueManagementComponent, AdminDashboardComponent,
+        PublishCourseComponent,
+        // CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent
+    ],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

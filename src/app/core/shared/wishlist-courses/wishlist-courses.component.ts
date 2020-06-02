@@ -11,7 +11,7 @@ export class WishlistCoursesComponent implements OnInit {
   wishlist: any = [];
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;
-  @Input('showWishlist') showWishlist: boolean; 
+  @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
   breakpoint: number;
@@ -50,7 +50,7 @@ export class WishlistCoursesComponent implements OnInit {
   }
 
   viewWishlist() {
-    var userdetail = this.gs.checkLogout()
+    const userdetail = this.gs.checkLogout();
     this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;

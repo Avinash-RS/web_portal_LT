@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -13,10 +13,11 @@ import * as myGlobals from '@core/globals';
 
 export class LoginComponent implements OnInit {
   capsOn;
-  show: boolean = false;
+  show = false;
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
+    // tslint:disable-next-line:align
     private alert: AlertServiceService, private service: LearnerServicesService) {
   }
 
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
-      username: new FormControl("", myGlobals.usernameValforLogin),
-      password: new FormControl("", myGlobals.passwordValforLogin),
+      username: new FormControl('', myGlobals.req),
+      password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, [])
     });
   }
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('inside comp')
     this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
@@ -45,44 +45,43 @@ export class LoginComponent implements OnInit {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
-              var ps = btoa(this.loginForm.value.password);
+              const ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
-              localStorage.setItem('role', 'learner')
-              localStorage.setItem('token',loginresult.data.login.message.token)
-              // localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWZzZXIiLCJyb2xlIjoibGVhcm5lciIsImlhdCI6MTU4NzgxMDY2OCwiZXhwIjoxNTg3ODI1MDY4LCJpc3MiOiJodHRwczovL3d3dy5sYXJzZW50b3Vicm8uY29tLyJ9.0PaYNjWpbeibE0OJSqOKOc8BpcXYbLP0LcvzXUbDXoM')
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
-              //if false, then need to update profile
-              if (loginresult.data.login.message.is_profile_updated)
-                this.router.navigate(['/Learner/MyCourse'])
-              else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
-                this.router.navigate(['/Learner/profile'])
+              localStorage.setItem('role', 'learner');
+              localStorage.setItem('token', loginresult.data.login.message.token);
+              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              // if false, then need to update profile
+              if (loginresult.data.login.message.is_profile_updated) {
+                this.router.navigate(['/Learner/MyCourse']);
+              } else {
+                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.router.navigate(['/Learner/profile']);
               }
             } else {
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');
-              localStorage.setItem('token',loginresult.data.login.message.token)
-              var ps = btoa(this.loginForm.value.password);
+              localStorage.setItem('token', loginresult.data.login.message.token);
+              const ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
-              //if false, then need to update profile
-              if (loginresult.data.login.message.is_profile_updated)
-                this.router.navigate(['/Learner/MyCourse'])
-              else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details')
-                this.router.navigate(['/Learner/profile'])
+              // if false, then need to update profile
+              if (loginresult.data.login.message.is_profile_updated) {
+                this.router.navigate(['/Learner/MyCourse']);
+              } else {
+                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.router.navigate(['/Learner/profile']);
               }
             }
           } else {
             this.loginForm.reset();
-            this.alert.openAlert(loginresult.data.login.error_msg, null)
+            this.alert.openAlert(loginresult.data.login.error_msg, null);
           }
         } else {
           this.loginForm.reset();
-          this.alert.openAlert("Please try again later", null)
+          this.alert.openAlert('Please try again later', null);
         }
       });
   }

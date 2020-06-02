@@ -1,22 +1,23 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Group/Sub Group</li>
+    <li *ngIf ="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Group management</li>
   </ol>
 </nav>
 
 <div class="container pb-5">
-  <h1> Group Management</h1>
+  <h1> Group management</h1>
   <div class="container margin20">
     <div class="row">
 
       <div class="card col-3 cardheight" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
         [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
         <div class="card-header">
-          Select Group/Sub Group
+          Select group/Sub group
         </div>
 
-
+<br>
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -29,7 +30,7 @@
                 </mat-icon>
               </button>
               <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -45,7 +46,7 @@
                   </mat-icon>
                 </button>
                 <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node)">{{node.group_name}}</mat-checkbox>
+                  [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -69,25 +70,25 @@
                   <div class="row">
                     <div class="col-md-6">
 
-                      <span class="mt-0 mb-1 text-capitalize"> {{currentpath?.group_name}}
+                      <span class="mt-0 mb-1"> {{currentpath?.group_name}}
                         <ng-container *ngIf="editstatus">
                           <ng-container *ngIf="currentpath?.group_name"> /</ng-container>
-                          Create New
+                          Create new
                           <ng-container *ngIf="currentpath?.group_name"> Sub</ng-container>
-                          Group
+                          group
                         </ng-container>
                       </span>
                     </div>
                     <div class="col-md-6">
                       <ng-container *ngIf="currentpath?.group_name && !editstatus">
                         <button type="button" class="btn col-md-4 float-right addnewBtn"
-                          (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add Sub
-                          Group</button>
+                          (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add sub
+                          group</button>
                       </ng-container>
                       <ng-container *ngIf="currentpath?.group_name && editstatus">
                         <button type="button" class="btn col-md-4 float-right addnewBtn"
                           (click)="edit(true,currentpath.group_name)"><i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit
-                          Selected </button>
+                          selected </button>
                       </ng-container>
                     </div>
 
@@ -101,35 +102,63 @@
                           Enter
                           <ng-container *ngIf="currentpath?.group_name">Sub </ng-container>
                         </ng-container>
-                        Group Name
+                        group name
                       </label>
                       <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
 
-                      <input type="text" class="form-control mb-4" placeholder="Group/Sub Group Name" matInput ngModel
-                        name="group_name" #groupname1="ngModel" [required]=editstatus pattern="^[a-zA-Z0-9]+$"
-                        value="{{editgroupname}}">
+                      <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput [(ngModel)]="group_name"
+                        name="group_name" #groupname1="ngModel" [required]=editstatus  value="{{editgroupname}}" >
+                        <!-- pattern="^[a-zA-Z0-9 sss]+$" -->
+                        <!-- value="{{editgroupname}}" -->
                       <div
                         *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
                         class="error-message">
                         <div *ngIf="groupname1.errors.required" class="error-message">
-                          Group Name is required.
+                          Group name is required.
                         </div>
-                        <div *ngIf="groupname1.errors.pattern" class="error-message">
-                          Group Name is Invalid.
-                        </div>
+                        <!-- <div *ngIf="groupname1.errors.pattern" class="error-message">
+                          Group name is invalid.
+                        </div> -->
                       </div>
 
                     </div>
+
+                    <div  class="form-group col-md-6">
+                      <label  for="exampleInputEmail1">
+                        <ng-container *ngIf="editstatus">
+                          Select
+                        </ng-container>
+                        catalogue
+                      </label>
+                      <br>
+                        <mat-form-field >
+                          <mat-select name="catalogue"  [(ngModel)]="catalogue" #catelogue1="ngModel"  [required]=editstatus   class="form-control">
+                            <mat-option *ngFor="let cat of catalogueList"  [(value)]="cat.catalogue_id" (onSelectionChange)="selectcatalogue($event, cat)">
+                              {{cat.catalogue_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <br>
+                      <div 
+                       *ngIf="catelogue1.invalid && (catelogue1.dirty || catelogue1.touched) || formsubmitted && catelogue1.errors"
+                       class="error-message">
+                       <div *ngIf="catelogue1.errors.required" class="error-message">
+                         Catalogue  is required.
+                       </div>
+                     </div> 
+                      </div>
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
-                      <mat-slide-toggle class="example-margin" [color]="color" (change)="toggle($event)"
-                        [checked]="!currentpath?.is_active"></mat-slide-toggle>
-                      {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
+                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle" 
+                      ></mat-slide-toggle>
+                      <!-- [checked]="currentpath?.is_active" -->
+                      <!-- (change)="toggle(currentpath.is_active)" -->
+                      {{toggle === true ? 'Deactivate' : 'Activate'}}
                     </div>
                     <div class="col-6 mt-4">
                       <button *ngIf="editstatus" mat-raised-button color="primary" type="submit">Save</button> &nbsp;
-                      <button *ngIf="!editstatus" mat-raised-button color="primary" (click)="changegroupstatus()"
-                        type="button">Update</button> &nbsp;
+                      <button *ngIf="!editstatus"  [disabled]="!groupform.dirty"  mat-raised-button color="primary" (click)="updategroupdetails(groupform)"
+                        type="button">Update </button> &nbsp;
                       <button mat-raised-button color="primary" (click)="reset();getgroups()"
                         type="reset">Cancel</button>
                     </div>
@@ -140,25 +169,25 @@
 
           </mat-tab>
 
-          <mat-tab label="View User" [disabled]="disabled">
+          <mat-tab label="View user" [disabled]="disabled">
             <div class="row">
               <div class="col-md-6">
                 <ng-container *ngIf="currentpath?.group_name">
 
                   <div class="card-header">
-                    {{currentpath?.group_name}}'s User list
+                    {{currentpath?.group_name}}'s user list
                   </div>
                 </ng-container>
                 <ng-container *ngIf="!currentpath?.group_name">
 
                   <div class="card-header">
-                    All User list
+                    All user list
                   </div>
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
                 <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
-                  <mat-icon>add</mat-icon>Add User
+                  <mat-icon>add</mat-icon>Add user
                 </button>
               </div>
             </div>
@@ -264,7 +293,7 @@
             </mat-paginator>
             <div *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
               <br><br>
-              <h3 class="center"> No Users in this group</h3>
+              <h3 class="center"> No users in this group</h3>
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -293,11 +322,11 @@
       <br><br>
       <form [formGroup]="changeGrpForm">
         <div class="form-group">
-          <label>Group Name</label><span style="color: red;"> *</span><br>
+          <label>Group name</label><span style="color: red;"> *</span><br>
           <mat-form-field class="width_100 ">
             <!-- <mat-label>Institute Name</mat-label> -->
             <mat-select formControlName="group">
-              <mat-option *ngFor="let grp of groups" [value]="grp">
+              <mat-option *ngFor="let grp of allgroups" [value]="grp">
                 {{grp.group_name}}
               </mat-option>
             </mat-select>
@@ -308,7 +337,7 @@
     </mat-dialog-content><br>
     <mat-dialog-actions>
       <button mat-raised-button class="center" [disabled]="changeGrpForm.invalid" (click)="updateGroup()">
-        Update Group
+        Update group
       </button><br><br>
     </mat-dialog-actions>
   </ng-template>

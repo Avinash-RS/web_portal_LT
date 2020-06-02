@@ -1,232 +1,211 @@
 <app-header></app-header>
-<div class="limiter contentTop">
-
-  <!-- <------------ Banner------------->
-  <owl-carousel-o [options]="bannerOptions" class="banner">
-    <ng-template carouselSlide *ngFor="let img of bannerImg"><img height="650px" src="{{img.src}}">
-    </ng-template>
-  </owl-carousel-o><br>
-
-  <!-- <------------End Banner------------->
-
-
-  <!-- <------------ Streams------------->
-  <h1 class="head">Streams</h1>
-  <mat-grid-list [cols]="breakpoint" rowHeight="2:1.7" >
-    <mat-grid-tile>
-      <div class="card">
-        <div class="small-box bg-red">
-          <div class="icon">
-            <i class="fa fa-star-o "></i>
-          </div>
-        </div>
-        <div class="profileimg bg-red">
-          <img class="svgimg" src="assets/images/vocational.svg">
-        </div>
-        <div class="container">
-          <h4 class="title">Vocational Institute</h4>
-        </div>
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <div class="card">
-        <div class="small-box bg-blue">
-          <div class="icon">
-            <i class="fa fa-star-o "></i>
-          </div>
-        </div>
-        <div class="profileimg bg-blue">
-          <img class="svgimg" src="assets/images/College.svg">
-        </div>
-        <div class="container">
-          <h4 class="title">College/University</h4>
-        </div>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="card">
-        <div class="small-box bg-yellow">
-          <div class="icon">
-            <i class="fa fa-star-o "></i>
-          </div>
-        </div>
-        <div class="profileimg bg-yellow">
-          <img class="svgimg" src="assets/images/student.svg">
-        </div>
-        <div class="container">
-          <h4 class="title">Student</h4>
-        </div>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="card">
-        <div class="small-box bg-green">
-          <div class="icon">
-            <i class="fa fa-star-o "></i>
-          </div>
-        </div>
-        <div class="profileimg bg-green">
-          <img class="svgimg" src="assets/images/government.svg">
-        </div>
-        <div class="container">
-          <h4 class="title">Government</h4>
-        </div>
-      </div>
-    </mat-grid-tile>
-
-  </mat-grid-list>
-  <!-- <------------End Streams------------->
-
-  <!-- <------------ Popular categorires------------->
-  <h1 class="head">Popular Categorires</h1><br><br>
-  <owl-carousel-o [options]="popularCategorires" class="partner">
-    <ng-template carouselSlide *ngFor="let pop of popularCourses">
-      <div class="card1">
-        <img src="{{pop.img}}" alt="Snow" style="width: 100%; opacity: 53%;height: 92px;;">
-        <div class="centered">{{pop.name}}</div>
-        <span class="info-box-icon">
-        </span>
-      </div>
-    </ng-template>
-  </owl-carousel-o>
-  <!-- <------------End Popular categorires------------->
-
-
-
-  <!-- <------------ Trending Courses------------->
-  <br><br><br> <br><br><br>
-  <h1>Trending Courses</h1>
-  <br>
-  <owl-carousel-o [options]="trendingCategorires" class="trending">
-    <ng-template carouselSlide *ngFor="let course of myCoursesList">
-      <app-course-component *ngIf="userDetailes == null || userDetailes != null" [course]="course" [canNavigate]="false"
-        [showCartBtn]="false" [showWishlist]="false" [showStatus]="false"> </app-course-component>
-      <!-- <app-course-component *ngIf="userDetailes != null" [course]="course" [canNavigate]="true" [showCartBtn]="true"
-        [showWishlist]="true" [showStatus]="false"> </app-course-component> -->
-    </ng-template>
-  </owl-carousel-o>
-
-  <!-- <------------End Trending Courses------------->
-
-
-  <!-- <------------ Learning path------------->
-  <h1 class="head">Learning Paths</h1><br>
-
-  <mat-grid-list [cols]="Learningbreakpoint" rowHeight="2:1" >
-    <mat-grid-tile>
-      <div class="card2">
-        <div class="smallPMP bg-green">
-        </div>
-        <div class="container">
-          <h4 class="title"><b>PMP</b></h4>
-          <h2 style="text-align: center;color: darkgray;">20 Courses</h2>
-        </div>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <img src="assets/images/larningpath.jpg" style="height: 328px;" alt="Snow">
-    </mat-grid-tile>
-  </mat-grid-list>
-  <div style="text-align:center;">
-    <button class="btn">Explore all</button>
-  </div><br><br>
-
-  <!-- <------------End Learning path------------->
-
-
-  <!-- <------------ What's New------------->
-  <mat-card style="text-align: center;margin-left: 1%;margin-right: 1%; border: hidden;">
-    <mat-grid-list [cols]="WhatsNew"  rowHeight="1:0.7">
-      <mat-grid-tile [style.border]="'none'" *ngFor="let newArtical of whatsnewartical">
-        <p style="margin-bottom: 53px;">{{newArtical.message}}</p><br><br>
-        <mat-grid-tile-footer>
-          <div style="text-align:center;">
-            <button class="footerbtn">View Article</button>
-          </div>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card>
-
-
-  <!-- <------------End What's New------------->
-
-
-  <!-- <------------ Our Partners------------->
-
-  <br><br><br><br>
-  <div class="container">
-    <p class="f_size_30 color_blue center_align p-5px f_wt_500">
-      Our Partners
-    </p><br>
+<mat-tab-group style="margin-top: 5%;">
+  <mat-tab label="My Courses">
     <div class="row">
-      <div class="col-md-12">
-        <owl-carousel-o [options]="partnerOptions" class="partner">
-          <ng-template carouselSlide *ngFor="let img of partnerImg"><img height="100px" src="{{img.src}}">
-          </ng-template>
-        </owl-carousel-o>
+      <div class="col-md-6 col-sm-12 col-12">
+        <div class="smallbox">
+          <h2>Courses yet to start</h2>
+          <div class="row">
+            <div class="col-10">
+              <span class="count">{{yetToStart?.totalCount}}</span>
+            </div>
+            <div class="col-2">
+              <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-8" *ngIf="yetToStart?.IncDecPec != false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">{{yetToStart?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-8"  *ngIf="yetToStart?.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{yetToStart?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-4"  *ngIf="yetToStart?.IncDecPec != false">
+              <span class="text">Up from Yesterday</span>
+            </div>
+            <div class="col-4 " *ngIf="yetToStart?.IncDecPec == false">
+              <span class="text2">Down from Yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 col-12">
+        <div class="smallbox">
+          <h2>Courses in-progress</h2>
+          <div class="row">
+            <div class="col-10">
+              <span class="count">{{incomplete?.totalCount}}</span>
+            </div>
+            <div class="col-2">
+              <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col-8" *ngIf="incomplete?.IncDecPec != false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_Up.svg">
+              <span class="trendno">{{incomplete?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-8"  *ngIf="incomplete?.IncDecPec == false">
+              <img class="trendicon" src="../../../../assets/learner/Trending_down.svg">
+              <span class="trendnodown">{{incomplete?.valueIncDecPec}}%</span>
+            </div>
+            <div class="col-4"  *ngIf="incomplete?.IncDecPec != false">
+              <span class="text">Up from Yesterday</span>
+            </div>
+            <div class="col-4 " *ngIf="incomplete?.IncDecPec == false">
+              <span class="text2">Down from Yesterday</span>
+            </div>
+          </div>
+ 
+        </div>
       </div>
     </div>
-  </div>
-  <br><br>
-
-  <!-- <------------End  Our Partners------------->
-
-
-  <!-- <------------ Happy customers------------->
-  <h1 class="head">Happy Customers</h1>
-  <mat-grid-list [cols]="Learningbreakpoint" rowHeight="1.2:1" >
-    <mat-grid-tile>
-      <img src="assets/images/Group1400.png" style="height: 450px;" alt="Snow">
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <p style="margin-left: 15px;">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with
-        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br><br>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with
-        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <!-- <------------End  Happy customers------------->
-
-
-
-
-  <!-- <------------ Take me to Expert------------->
-
-  <mat-grid-list cols="2" rowHeight="1.2:1" >
-    <mat-grid-tile>
-
-      <!-- <h1 class="head">To get exceptional knowledge experience</h1>
-      <div>
-        <button class="footerbtn">Talk to an Expert</button>
+    <div class="spinner-container" *ngIf="loadingCatalogue">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <!-- ---------------------My Enrolled courses section start------------------------- -->
+    <div style="margin-top: 3%;"></div>
+    <h3>My Enrolled Courses</h3>
+    <div class="vertical"></div>
+    <div class="row">
+      <div class="col-12">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container *ngFor="let eCourse of enrolledCourses ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="eCourse" [canNavigate]="true" [showWishlist]="false" [showStatus]="true"
+                  [showRating]="false" [showCount]="false" [showEnroll]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+            <div class="col-md-12" style="text-align: center;">
+              <h2 *ngIf="enrolledCourses && enrolledCourses.length == 0">
+                No courses yet
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
-         -->
+    </div>
+    <!-- ---------------------My Enrolled courses section end------------------------- -->
+    <!-- ---------------------Wishlist section start------------------------- -->
+    <div style="margin-top: 3%;"></div>
+    <h3>Wishlist</h3>
+    <div class="vertical"></div>
+    <div class="row">
+      <div class="col-12">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container *ngFor="let wList of wishList ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="wList" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+            <div class="col-md-12" style="text-align: center;">
+              <h2 *ngIf="wishList && wishList.length == 0">
+                No courses yet
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------Wishlist section end------------------------- -->
+    <div style="margin-bottom: 10%;"></div>
+  </mat-tab>
 
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <img src="assets/images/Group1406.png" style="height: 450px;" alt="Snow">
-    </mat-grid-tile>
-  </mat-grid-list>
+  <mat-tab label="Explore">
+    <!-- <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
+      <div class="col-md-8 section_1_a">
+        <h1 class="welcom">Welcome to </h1>
+        <h1 class="lxp">LXP Platform </h1>
+
+        <p class="msg">Customize your Experience by adding</p>
+        <h1 class="submsg">your favourite courses</h1>
+        <div style="text-align: center;">
+        <button class="whitebgBtn">Add Courses</button>
+      </div>
+     </div>
+    </div> -->
+
+    <div style="margin-top: 3%;"></div>
+    <div class="row">
+      <div class="col-6">
+        <h3>All Courses <span class="tot">(Total 2500 results )</span></h3>
+        <div class="vertical"></div>
+      </div>
+
+      <div class="col-3">
+        <button class="submit" (click)="viewCategory(element)"> Category
+          <i class="fa fa-chevron-down colr"></i>
+        </button>
+      </div>
+      <div class="col-3">
+        <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
+          <i class="fa fa-filter colrr"></i>
+          Filter
+        </button>
+        <select class="category" (change)="onChange($event.target.value)">
+          <option value="allcourses">All Courses</option>
+          <option value="popularCourse">Popular Courses</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3" *ngIf="!showAppliedFiltre">
+        <app-guideline-search></app-guideline-search>
+      </div>
+     
+      <div class="col-9" *ngIf="!showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-  <!-- <------------End   Take me to Expert------------->
+  </mat-tab>
+</mat-tab-group>
+<!-- <button id="myBtn" (click)="open()">Open Modal</button> -->
+<!-- The Modal -->
+<!-- <div id="myModal" class="modal">
 
-
-  <!-- <------------Footer------------->
-  <br><br><br>
-  <app-footer></app-footer>
-  <!-- <------------End Footer------------->
-</div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Modal Header</span>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+  </div>
+  </div> -->

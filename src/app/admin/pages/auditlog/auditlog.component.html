@@ -1,0 +1,149 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Audit log</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="p-5px">
+    <h1> Audit log</h1>
+    <div class="row">
+      <div class="col-11 center">
+        <div>
+          <form #filterform="ngForm">
+            <div class="row">
+              <div class="col-lg-4 col-sm-4 col-xs-4 col-md-2">
+                <mat-form-field class="wid-100">
+                  <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)"
+                    [required]=requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
+                    placeholder="Choose from date" color="accent">
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="fromdate1.errors && requiredfield">
+                    <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
+                <mat-form-field class="wid-100">
+                  <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield [required]=requiredfield
+                    #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
+                    [min]=fromdate [max]=today>
+                  <mat-datepicker-toggle matSuffix [for]="picker1">
+                      <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error *ngIf="todate1.errors && requiredfield">
+                    <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class=" col-lg-4 col-md-12 col-sm-12 col-12  float_right m-b-10">
+                <div class="row">
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14" (click)="filter(filterform,'0')">
+                      <span class="material-icons f_size_17 p-5px" style="vertical-align: middle;">
+                        filter_alt</span>Filter</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14 background-maroon"
+                      (click)="cancel(filterform)">
+                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                        refresh</span>Reset</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btnCss  button_border width_95 center f_size_14" (click)="export(filterform)">
+                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                        get_app</span>Export</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <span class="desktop-data"> {{i+1}}</span>
+            <!-- <span class="mobile-data"> {{i+1}}</span> -->
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <mat-header-cell *matHeaderCellDef>
+            {{ column.header }}</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <!-- <span class="mobile-label">S.No</span> -->
+            <button mat-icon-button (click)="openviewdialog(row,viewdetaildialog)" data-toggle="tooltip"
+              data-placement="top">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #viewdetaildialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+  <mat-dialog-content style="width: 1000px">
+    <h2><b>View details</b> </h2>
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <br>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Module name : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.module_name|| 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Description : <label class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
+                </label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Request url : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.api_request_url|| 'NA'}}</label></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Created by : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Created on : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-4 col-sm-12 col-12">
+              <label>Updated on : <label class="color_black capitalize f_wt_400">
+                  {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
+              </label>
+            </div>
+          </div>
+          <br>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-dialog-content>
+  <br>
+</ng-template>

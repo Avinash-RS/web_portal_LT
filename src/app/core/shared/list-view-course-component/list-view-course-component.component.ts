@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-view-course-component',
@@ -24,7 +25,7 @@ export class ListViewCourseComponentComponent implements OnInit {
   @Input('goto') goto: string;
   @Input('btnType') btnType: any;
   @Input('isDraft') isDraft: boolean;
-  @Input('showEnroll') showEnroll: boolean = false;
+  @Input('showEnroll') showEnroll = false;
 
 
 
@@ -46,9 +47,9 @@ export class ListViewCourseComponentComponent implements OnInit {
     this.service.viewWishlist(this.userDetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         _.filter(viewWishlist.data.view_wishlist.message, function (o) {
-          if (o.course_id == course.course_id) {
+          if (o.course_id === course.course_id) {
             course.wishlisted = true;
-            course.wishlist_id = o._id
+            course.wishlist_id = o._id;
           }
         });
       }
@@ -58,7 +59,7 @@ export class ListViewCourseComponentComponent implements OnInit {
   selectWishlist(course) {
     this.loader.show();
     if (this.gs.checkLogout()) {
-      if (this.course.wishlisted == false) {
+      if (this.course.wishlisted === false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
           if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
             this.course.wishlisted = !this.course.wishlisted;
@@ -84,47 +85,80 @@ export class ListViewCourseComponentComponent implements OnInit {
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout()
+      this.userDetail = this.gs.checkLogout();
       this.viewWishList(this.course);
     }
-    if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'incomplete') this.course.coursePlayerStatus.status = 'Resume'
-    else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'complete') this.course.coursePlayerStatus.status = 'Completed'
-    else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') this.course.coursePlayerStatus.status = 'Pause'
-
+    if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'incomplete') {
+      this.course.coursePlayerStatus.status = 'Resume';
+    } else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'complete') {
+      this.course.coursePlayerStatus.status = 'Completed';
+    } else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') {
+      this.course.coursePlayerStatus.status = 'Pause';
+    }
   }
 
   gotopublishcourse(course) {
-    if (this.btnType == 'Publish') {
-      let detail = {
+    if (this.btnType === 'Publish') {
+      const detail = {
         id: this.course.course_id,
         name: this.course.course_name
-      }
-      this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
+      };
+      this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail } });
     }
   }
 
-  gotoDescription(course) {
-    if (this.goto == 'publish') {
-      let detail = {
+  gotoDescription(course?) {
+    if (this.goto === 'publish') {
+      const detail = {
         type: 'publish', id: this.course._id || this.course.course_id
-      }
-      localStorage.setItem('courseType', detail.type)
-      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+      };
+      localStorage.setItem('courseType', detail.type);
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });
 
-    }
-    else if (this.goto == 'create') {
-      let detail =
-        { type: 'create', id: this.course._id || this.course.course_id }
-      localStorage.setItem('courseType', detail.type)
-      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
+    } else if (this.goto === 'create') {
+      const detail = { type: 'create', id: this.course._id || this.course.course_id };
+      localStorage.setItem('courseType', detail.type);
+      this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail } });
 
-    }
-    else if (this.goto == 'draft') {
-      let detail = { type: 'draft', id: this.course._id || this.course.course_id }
-      localStorage.setItem('courseType', detail.type)
+    } else if (this.goto === 'draft') {
+      const detail = { type: 'draft', id: this.course._id || this.course.course_id };
+      localStorage.setItem('courseType', detail.type);
       // this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: detail } });
-      this.router.navigate(['/Admin/auth/Wca/addmodule'], { queryParams:  { courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name }});
+      this.router.navigate(['/Admin/auth/Wca/addmodule'], {
+        queryParams: {
+          courseId: this.course.course_id, courseImage: this.course.course_img_url, courseName: this.course.course_name
+        }
+      });
 
+    } else {
+      const detail1 = {
+        id: this.course.course_id,
+        wishlist: this.course.wishlisted || false,
+        wishlist_id: this.course.wishlist_id || null,
+        enrollment_status: this.course.enrollment_status
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail1 } });
+    }
+  }
+  enrollCourse() {
+    if (this.btnType === 'Enroll Now') {
+      // console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+      this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+        .subscribe((enrollCourse: any) => {
+          // console.log("working", enrollCourse)
+          if (enrollCourse.data) {
+            if (enrollCourse.data.enrollcourse.success) {
+              this.course.enrollment_status = 'pending';
+              Swal.fire('User enrolled successfully for the course');
+            } else {
+              Swal.fire(enrollCourse.data.enrollcourse.message);
+              // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
+            }
+          } else {
+            Swal.fire('Please try again later');
+            // this.alert.openAlert('Please try again later', null);
+          }
+        });
     }
   }
 

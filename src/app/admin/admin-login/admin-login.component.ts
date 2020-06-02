@@ -1,8 +1,8 @@
-//Angular
+// Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-//local
+// local
 import * as myGlobals from '@core/globals';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -17,9 +17,10 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 export class AdminLoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  show: any;
 
-  constructor(private router: Router, private formBuilder: FormBuilder,private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: LearnerServicesService, ) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
+              private alert: AlertServiceService, private service: LearnerServicesService, ) { }
 
   ngOnInit() {
     localStorage.removeItem('UserDetails');
@@ -27,9 +28,9 @@ export class AdminLoginComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
-      username: new FormControl("", myGlobals.usernameVal),
-      password: new FormControl("", myGlobals.passwordVal),
-      remember_me: new FormControl("", [])
+      username: new FormControl('', myGlobals.usernameVal),
+      password: new FormControl('', myGlobals.passwordVal),
+      remember_me: new FormControl('', [])
     });
   }
 
@@ -42,15 +43,17 @@ export class AdminLoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data && loginresult.data.login) {
           if (loginresult.data.login.success) {
-              localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message))
-              this.router.navigate(['/Admin/auth/userManagement'])
-              localStorage.setItem('role','admin');
-              // this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
-              localStorage.setItem('token',loginresult.data.login.message.token)
-          } else
-            this.alert.openAlert("Invalid login. Please try again", null)
-        } else
-          this.alert.openAlert("Please try again later", null)
+              localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message));
+              this.router.navigate(['/Admin/auth/userManagement']);
+              localStorage.setItem('role', 'admin');
+              this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
+              localStorage.setItem('token', loginresult.data.login.message.token);
+          } else {
+            this.alert.openAlert('Invalid login. Please try again', null);
+          }
+        } else {
+          this.alert.openAlert('Please try again later', null);
+        }
       });
   }
 }

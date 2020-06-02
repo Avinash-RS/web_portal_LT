@@ -46,8 +46,26 @@
         </div>
         <br> <br> <br><br>
         <div class="row btnEnroll bottom-right float_right " *ngIf="btnType">
-          <button id="enroll_now" mat-stroked-button (click)="login(btnType)"> {{btnType}}
+          <button id="enroll_now" mat-stroked-button (click)="enrollCourse(btnType)" *ngIf="btnType != 'Enroll Now'">
+            {{btnType}}
           </button>
+
+          <button id="enroll_now" mat-stroked-button class="pointer"
+            *ngIf="course.enrollment_status == null && btnType == 'Enroll Now'" (click)="enrollCourse(btnType)">
+            Enroll 
+          </button>
+
+          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'pending'"
+            disabled="{{course.enrollment_status == 'pending'}}"> Requested
+          </button>
+
+          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'rejected'"
+            disabled="{{course.enrollment_status == 'rejected'}}"> Request Rejected
+          </button>
+          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'approved'"
+            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+          </button>
+
         </div>
 
       </div>

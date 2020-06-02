@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service'
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { map, filter } from 'rxjs/operators';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { MatDialog } from '@angular/material';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+
 
 @Component({
   selector: 'app-learner-home',
@@ -11,224 +14,93 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./learner-home.component.scss']
 })
 export class LearnerHomeComponent implements OnInit {
-
   userDetailes: any;
-  breakpoint: number;
-  Learningbreakpoint: number;
-  bannerImg: {}[];
-  myCoursesList: any;
-  partnerImg: {}[];
-  WhatsNew: number;
-  popularCourses: {}[];
-  whatsnewartical: {}[];
-
-  bannerOptions: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
-      }
-    },
-    nav: true
-  }
-
-  partnerOptions: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 5
-      }
-    },
-    nav: true
-  }
-
-  popularCategorires: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
-  }
-
-  trendingCategorires: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      300: {
-        items: 2
-      },
-      540: {
-        items: 3
-      },
-      740: {
-        items: 4
-      }
-    },
-    nav: true
-  }
-
-
-  constructor(public service: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
-    private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute) {
+  pagenumber = 0;
+  sort_type: any = "A-Z";
+  allcourses: any;
+  enrolledCourses: any;
+  wishList:any = [];
+  yetToStart:any;
+  incomplete:any;
+  popularsCourse: any;
+  loadingCatalogue = false;
+  showAppliedFiltre : Boolean =true;
+  showCategory : Boolean = true;
+  element: any;
+  constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
+    private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
+    private globalservice: GlobalServiceService,public commonServices: CommonServicesService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
-    //for responsive layout
-    this.gs.checkProfileFilled();
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
-    this.Learningbreakpoint = (window.innerWidth <= 400) ? 1 : 2;
-    this.WhatsNew = (window.innerWidth <= 400) ? 1 : 4;
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.popularCourses = [{
-      img: '../../../../assets/images/shutterstock_131655707.jpg',
-      name: 'Business'
-    }, {
-      img: '../../../../assets/images/shutterstock_345349079.jpg',
-      name: 'IT & Software'
-    },
-    {
-      img: '../../../../assets/images/shutterstock_393692671.jpg',
-      name: 'Personal Development'
-    }, {
-      img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name: 'Photography'
-    }, {
-      img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name: 'Development'
-    }, {
-      img: '../../../../assets/images/shutterstock_746652751.jpg',
-      name: 'Soft Skill'
-
-    }]
-
-    this.whatsnewartical = [{
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-    }, {
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-    },
-    {
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-    }, {
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s,'
-
-    }]
-
-    this.bannerImg = [{
-      src: '../../../../assets/learner/home3.jpg'
-    }, {
-      src: '../../../../assets/learner/home1.jpg'
-    }, {
-      src: '../../../../assets/learner/home2.jpg'
-    },
-    {
-      src: '../../../../assets/learner/lens.jpg'
-    }]
-
-    this.partnerImg = [{
-      src: '../../../../assets/learner/vit.png'
-    }, {
-      src: '../../../../assets/learner/saveetha.png'
-    },
-    {
-      src: '../../../../assets/learner/srm.png'
-    },
-    {
-      src: '../../../../assets/learner/gla.jpg'
-    }, {
-      src: '../../../../assets/learner/vit.png'
-    }, {
-      src: '../../../../assets/learner/saveetha.png'
-    },
-    {
-      src: '../../../../assets/learner/srm.png'
-    },
-    {
-      src: '../../../../assets/learner/kl.jpg'
-    }, {
-      src: '../../../../assets/learner/vit.png'
-    }, {
-      src: '../../../../assets/learner/saveetha.png'
-    },
-    {
-      src: '../../../../assets/learner/srm.png'
-    },
-    {
-      src: '../../../../assets/learner/psit.jpg'
-    }]
-
-    this.service.getMyCourse('5e7f5125dba4466d9707629c').subscribe((getMyCourse: any) => {
-      if (getMyCourse.data.get_course_by_user) {
-        if (getMyCourse.data.get_course_by_user.success) {
-          this.myCoursesList = getMyCourse.data.get_course_by_user.message;
-        }
+    this.userDetailes = this.globalservice.checkLogout();
+    this.getEnrolledCourses();
+    this.getallcourses();
+    this.viewWishlist();
+    this.commonServices.globalAllCategory.subscribe((data: any) => {
+      this.allcourses = data;
+    });
+    this.commonServices.globalCourses.subscribe((data: any) => {
+      this.allcourses = data;
+    });
+  }
+  getallcourses() {
+    this.loadingCatalogue = true;
+    if (this.userDetailes.group_id)
+      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+        this.allcourses = result.data.get_all_course_by_usergroup.message;
+        this.loadingCatalogue = false;
+      });
+  }
+  // function to fetch all the enrolled courses of the user
+  getEnrolledCourses() {
+    this.loadingCatalogue = true;
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
+      if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
+        this.loadingCatalogue = false;
+        this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+        this.incomplete = enrolledList.data.getLearnerenrolledCourses.data.suspend[0];
+        this.yetToStart = enrolledList.data.getLearnerenrolledCourses.data.incomplete[0];
       }
     });
-
+  }
+  // function to fetch the wishlist of the user
+ 
+  viewWishlist() {
+    const userdetail = this.gs.checkLogout();
+    this.commonServices.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+      if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
+        this.wishList = viewWishlist.data.view_wishlist.message;
+      }
+    });
   }
 
-  myCourses() {
-
+  // getting popular course
+  getAllPopularcourse(){
+    this.loadingCatalogue = true;
+    this.learnerService.getPopularcourse().subscribe((popularCourse: any) => {
+      if (popularCourse.data.getPopularcourse && popularCourse.data.getPopularcourse.success) {
+        this.allcourses = popularCourse.data.getPopularcourse.data;
+        this.loadingCatalogue = false;
+      }
+    });
   }
-  
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
-    this.Learningbreakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
-    this.WhatsNew = (event.target.innerWidth <= 400) ? 1 : 4;
-  }
 
+  onChange(value){
+    if(value == 'popularCourse'){
+      this.getAllPopularcourse();
+    }else{
+      this.getallcourses();
+    }
+  }
+  viewCategory(module) {
+    const dg = this.dialog.open(CategoryComponentComponent, {
+      width: '95%'
+    });
+
+    // dg.afterClosed().subscribe((data) => {
+    //   this.getallcourses();
+    // });
+  }
 }

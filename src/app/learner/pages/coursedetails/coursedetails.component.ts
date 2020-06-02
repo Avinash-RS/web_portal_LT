@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 // import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -14,37 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./coursedetails.component.scss']
 })
 export class CoursedetailsComponent implements OnInit {
-
-  
-  trendingCategorires: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      },
-      1200 :{
-        items : 4
-      }
-    },
-    nav: true
-  }
-  
-  course: any = {};
+  course: any = null;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -63,22 +34,29 @@ export class CoursedetailsComponent implements OnInit {
 
   customOptions: any = {
     loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
     navSpeed: 700,
     navText: ['<', '>'],
     responsive: {
       0: {
         items: 1
       },
-      400: {
+      100: {
         items: 2
+      },
+      440: {
+        items: 3
+      },
+      640: {
+        items: 4
       }
     },
     nav: true
-  }
+  };
+
   // open : boolean = false;
   wishlist: any = [];
   syllabus: {}[];
@@ -116,27 +94,30 @@ export class CoursedetailsComponent implements OnInit {
   //   },
   //   nav: true
   // }
-  
-  constructor(private router: ActivatedRoute,public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
+
+  constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
     public sanitizer: DomSanitizer) {
     this.loader.show();
-    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
-    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail) ;
+    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      // 
     this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
+        this.course.enrollment_status = detail.enrollment_status;
         this.loader.hide();
+        console.log(this.course)
       } else
         this.loader.hide();
     });
-    console.log(detail , detail.id  ,'course id')
+    console.log(detail, detail.id, 'course id')
     this.Lservice.getModuleData(detail.id).subscribe(data => {
-        this.content =  data.data['getmoduleData']['data'][0];
-        this.modulength =  this.content['coursedetails'].length;
-        console.log(this.content,'course details')
+      this.content = data.data['getmoduleData']['data'][0];
+      this.modulength = this.content['coursedetails'].length;
+      console.log(this.content, 'course details')
     })
 
     // this.service.viewCurseByID('1').subscribe((viewCourse: any) => {
@@ -156,7 +137,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   alterDescriptionText() {
-     this.showShortDesciption = !this.showShortDesciption
+    this.showShortDesciption = !this.showShortDesciption
   }
   ngOnInit() {
     this.service.list_content().subscribe((list_content: any) => {
@@ -269,8 +250,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollTop = 0;       
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollTop = 0;
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
   playCourse(i) {
@@ -304,6 +285,26 @@ export class CoursedetailsComponent implements OnInit {
         });
       }
     }
+  }
+
+  enrollCourse() {
+    // console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
+      // console.log("working", enrollCourse)
+      if (enrollCourse.data) {
+        if (enrollCourse.data.enrollcourse.success) {
+          // this.alert.openAlert("User enrolled successfully for the course", null);
+          Swal.fire("User enrolled successfully for the course")
+        } else {
+          Swal.fire(enrollCourse.data.enrollcourse.message)
+          // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);
+        }
+      }
+      else {
+        Swal.fire("Please try again later")
+        //this.alert.openAlert('Please try again later', null);
+      }
+    });
   }
 
 }

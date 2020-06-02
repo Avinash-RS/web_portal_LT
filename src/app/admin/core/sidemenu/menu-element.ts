@@ -2,10 +2,10 @@ export const menus = [
     {
         'name': 'Dashboard',
         'icon': 'dashboard',
-        'link': '/auth',
+        'link': 'dashboard',
         'open': false,
         'chip': false,
-        
+
     },
     {
         'name': 'User Management',
@@ -26,7 +26,14 @@ export const menus = [
                 'icon': 'list',
                 'chip': false,
                 'open': true,
-            }
+            },
+            {
+                'name': 'Course Enrollment',
+                'icon': 'border_color',
+                'link': 'enrollment',
+                'open': false,
+                'chip': false,
+            },
         ]
     },
     {
@@ -35,17 +42,36 @@ export const menus = [
         'link': 'Wca',
         'chip': false,
         'open': true,
-        
+
     },
+
     {
         'name': 'Catalogue Management',
-        'icon': 'library_books',
-        'link': 'catalogue',
+        'icon': 'business',
+        'link': false,
+        'open': false,
+        'sub': [
+            {
+                'name': 'Categories',
+                'link': 'catagory',
+                'icon': 'view_quilt',
+                'chip': false,
+                'open': true,
+            },
+            {
+                'name': 'Catalogues',
+                'link': 'catalogue',
+                'icon': 'assignment',
+                'chip': false,
+                'open': true,
+            }
+        ]
+    },
+    {
+        'name': 'Audit Log',
+        'link': 'auditlog',
+        'icon': 'widgets',
         'chip': false,
         'open': true,
-        
-    }
-    
-   
-  
+    },
 ];

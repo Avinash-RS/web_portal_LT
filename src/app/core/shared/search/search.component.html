@@ -1,0 +1,16 @@
+<!-- <form [formGroup]="passwordForm">
+  <div class="form-group"> -->
+<!-- <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of allcourses" [value]="option">{{option.course_name}}</mat-option>
+    </mat-autocomplete> -->
+<div class="input-group">
+  <input class="form-control border-right-0" [(ngModel)]="searchName"  placeholder="  Search courses  "
+    (keypress)="searchCourse($event)">
+  <span class="input-group-append bg-white border-left-0">
+    <span class="input-group-text bg-transparent">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </span>
+  </span>
+</div>
+<!-- </div>
+</form> -->

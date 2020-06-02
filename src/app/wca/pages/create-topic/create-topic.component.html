@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-        <li class="breadcrumb-item">
-            <a href="/Admin/auth/Wca">Course Management</a></li>
         <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
 
         <li class="breadcrumb-item">
@@ -64,7 +62,7 @@
             <div style="display: flex;">
                 <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
                 <span *ngIf="queryData?.template_details">
-                    <input class="Bcg" type="text" placeholder="Enter the Name" formControlName="modulename" required />
+                    <input class="Bcg" type="text" #modName placeholder="Enter the Name" formControlName="modulename" required />
                 </span>
                 <span class="validmodule"> <small
                         *ngIf="createTopicForm?.controls?.modulename?.errors?.required && submitted">Module Name
@@ -94,9 +92,10 @@
                                                         <div class="dspFlx" [formGroupName]="i">
                                                             <span class="restictWidth">
                                                                 <mat-form-field class="matWidth" appearance="outline">
-                                                                    <mat-label class="clrLabel">Topic Name</mat-label>
-                                                                    <input matInput style="color:black;"
-                                                                        formControlName="topicname">
+                                                                    <!-- <mat-label class="clrLabel">Topic Name</mat-label> -->
+                                                                    <input matInput style="color:black;height: 21px;"
+                                                                        formControlName="topicname"
+                                                                        placeholder="Topic Name">
                                                                     <mat-error
                                                                         *ngIf="(!j?.value?.topicname) && submitted">
                                                                         Topic Name Required !!! </mat-error>
@@ -104,65 +103,182 @@
 
                                                             </span>
                                                             <span class="example-spacer"></span>
-                                                            <span *ngIf="query?.edit">
+                                                            <span *ngIf="query">
                                                                 <mat-icon style="display: none;">save</mat-icon>
-                                                                <mat-icon (click)="DeleteTopic(i,$event)">delete
+                                                                <mat-icon style="display: none;" (click)="DeleteTopic(i,$event)">delete
                                                                 </mat-icon>
                                                             </span>
                                                         </div>
                                                         <div class="colView">
-                                                            <input style="display: none;" [id]="'fileInput3'+i"
-                                                                type='file' #fileInput3
-                                                                (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
-                                                            <span (dblclick)="fileInput3.click()"><img class="img1"
-                                                                    src="{{queryData?.template_details[i]?.image}}"></span>
+                                                            <div *ngIf="queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
+                                                                <input style="display: none;" [id]="'fileInput3'+i"
+                                                                    type='file' #fileInput3
+                                                                    (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                                <span (dblclick)="fileInput3.click()"><img class="img1"
+                                                                        src="{{queryData?.template_details[i]?.image}}"></span>
+                                                            </div>
+                                                            <div  *ngIf="queryData?.template_details[i].name === 'Feedback' || queryData?.template_details[i].name === 'Video'">
+                                                            <span><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span>
+                                                            </div>
                                                             <span
                                                                 class="padTop">{{queryData?.template_details[i]?.name}}</span>
                                                             <span class="padTop1 showCon"
-                                                                *ngIf="!j?.value?.topicimages[0]"> <small>content is
+                                                                *ngIf="!j?.value?.topicimages[0] &&  queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
+                                                                <small>content is
                                                                     empty Double Click to edit</small></span>
-                                                            <span class="padTop1"
+                                                            <!-- <span class="padTop1"
                                                                 *ngIf="queryData?.template_details[i]?.name===active?.name">
-                                                                <small>{{fileType}}</small></span>
-                                                            <span *ngIf="j?.value?.topicimages[0]"
+                                                                <small>{{fileType}}</small></span> -->
+                                                            <!-- knowledge check -->
+                                                            <div class="UploadBlock"
+                                                                *ngIf="queryData?.template_details[i].name === 'Knowledge Check'"
+                                                                [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <div style="width:85px">
+                                                                    <button *ngIf="j?.value?.topicimages[0]"
+                                                                        mat-raised-button class="btnprev" type="button"
+                                                                        (click)="openPreviewModal(createTopicForm,i)">preview</button>
+                                                                </div>
+                                                                <div class="mLeft19">
+                                                                    <mat-icon class="knowledgeIcon"
+                                                                        (click)="sampleDownload()">get_app</mat-icon>
+                                                                    <label class="fsize12">Download question
+                                                                        template</label>
+                                                                </div>
+                                                                <div class="mleft3">
+                                                                    <input style="display: none;" [id]="'fileInput4'+i"
+                                                                        type='file' #fileInput4
+                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                                    <span (click)="fileInput4.click()">
+                                                                        <mat-icon class="knowledgeIcon">publish
+                                                                        </mat-icon>
+                                                                    </span><label class="fsize12">Upload
+                                                                        Question</label></div>
+                                                                <span *ngIf="j?.value?.topicimages[0]" class="dspFlxinside ml10" [formGroupName]="i">
+                                                                    <small class="spanTime"> Time required to complete
+                                                                        the topic </small>
+                                                                        <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00">
+                                                                    
+                                                                </span>
+                                                            </div>
+                                                            <span
+                                                                *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
+                                                                class="previewAndTime"
+                                                                [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <span><button *ngIf="queryData?.template_details[i].name != 'SCORM'" mat-raised-button class="btnprev"
+                                                                        type="button"
+                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button>
+                                                                        <span
+                                                                        *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'"
+                                                                        class="previewAndTime"
+                                                                        [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                        <label style="font-size: 12px;">File Uploaded</label>
+                                                                    </span>
+                                                                    </span>
+                                                                <span class="dspFlxinside" [formGroupName]="i">
+                                                                    <small class="spanTime"> Time required to complete
+                                                                        the topic </small>
+                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                </span>
+                                                            </span>
+                                                            <span
+                                                                *ngIf="queryData?.template_details[i].name == 'Feedback'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
                                                                 <span><button mat-raised-button class="btnprev"
                                                                         type="button"
-                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button></span>
-                                                                <span class="dspFlxinside">
+                                                                        (click)="openFeedback()">preview</button></span>
+
+                                                                <span class="dspFlxinside ml10" [formGroupName]="i">
                                                                     <small class="spanTime"> Time required to complete
                                                                         the topic </small>
-                                                                    <mat-card class="matcardTime">
-                                                                        00:00
-                                                                    </mat-card>
+                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
                                                                 </span>
                                                             </span>
-                                                            <span *ngIf="!j?.value?.topicimages[0] && submitted"><small
-                                                                    class="FileuploadValid">FileUpload Required
-                                                                    !!!</small></span>
+                                                            <div class="UploadVidBlock row previewAndTime"
+                                                                *ngIf="queryData?.template_details[i].name === 'Video'"
+                                                                [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <div class="col-md-4">
+                                                                    <div class="vidCol1">
+                                                                        <div class="subTitle">
+                                                                            <mat-slide-toggle [checked]="j?.value?.videosubtitle" (change)="toggle_sub_trans($event,'subtitle',j)">Subtitle</mat-slide-toggle>
+                                                                        </div>
+                                                                        <div *ngIf="j?.value?.videosubtitle == 'True'">
+                                                                            <div class="subTitleUpload" *ngFor="let no of j.value.topicimages[0].title;let subTitleindex = index">  
+                                                                                    <mat-select [(value)]="selected" class="subSelect" placeholder="Language">
+                                                                                        <mat-option *ngFor="let item of language" class="h30" [value]="item.name">{{item.name}}</mat-option>                                                                                        
+                                                                                      </mat-select>                                                                                 
+                                                                                <div class="chooseFile">
+                                                                                    <input style="display: none;" [id]="'fileInput4'+i" type='file' #fileInput4 (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">
+                                                                                    <button (click)="fileInput4.click()" class="subButton" type="button">Choose file</button>
+                                                                                </div>
+                                                                                  <div class="addSub">
+                                                                                    <mat-icon *ngIf="subTitleindex == 0" (click)="addSubTile('sub',j,subTitleindex)">add_circle</mat-icon>
+                                                                                    <mat-icon *ngIf="subTitleindex != 0" (click)="removeSubTile(subTitleindex,'sub',j)">delete</mat-icon>
+                                                                                  </div>                                                                             
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- code commented for transcript option - future purpose  -->
+                                                                        <!-- <div class="transcript">
+                                                                            <mat-slide-toggle [checked]="transcriptVal" (change)="toggle_sub_trans($event,'transcript')">Transcript</mat-slide-toggle>
+                                                                        </div>
+                                                                        <div *ngIf="showTransupload">
+                                                                            <div class="subTitleUpload" *ngFor="let no of transcripts;let i = index">
+                                                                                <mat-select class="subSelect" placeholder="Language">
+                                                                                    <mat-option class="h30" value="English">English</mat-option>
+                                                                                  </mat-select>                                                                                 
+                                                                            <div class="chooseFile">
+                                                                                <button class="subButton" type="button">Choose file</button>
+                                                                            </div>
+                                                                              <div class="addSub">
+                                                                                <mat-icon *ngIf="i == 0" (click)="addSubTile('tra')">add_circle</mat-icon>
+                                                                                <mat-icon *ngIf="i != 0" (click)="removeSubTile(i,'tra')">delete</mat-icon>
+                                                                              </div>
+                                                                        </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container" [formGroupName]="i">
+                                                                        <input class="input-field" type="text" formControlName="topicvalue" placeholder="Add url" (paste)="onSelectFile($event,queryData?.template_details[i],j,i,$event.clipboardData.getData('Text'))" (input)="onSelectFile($event,queryData?.template_details[i],j,i,$event.target.value)" required />
+                                                                        <button class="input-button"
+                                                                            (click)="loadBlobs($event,queryData?.template_details[i],j,i,'')"
+                                                                            type="button">Browse</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="vidCol3" [formGroupName]="i">
+                                                                        <span class="dspFlxinside ml10" style="height: 33px;">
+                                                                            <small class="spanTime"> Time required to complete
+                                                                                the topic </small>
+                                                                                <input type="text" class="timeInput" style="width: 20% !important" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <span
+                                                                *ngIf="!j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Feedback' && !j?.value?.topicimages[0] && submitted && queryData?.template_details[i].name != 'Video'"><small
+                                                                    class="FileuploadValid">File Upload
+                                                                    Required!!!</small></span>
+                                                            <span *ngIf="!j?.value?.topicvalue && submitted && queryData?.template_details[i].name == 'Video'"><small class="FileuploadValid">URL
+                                                                    Required!!!</small></span>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
-
-
-
-
                                         </div>
-
                                     </mat-grid-list>
                                 </mat-card>
-
-
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>
                 </div>
             </span>
             <div *ngIf="queryData?.template_details" class="dspFlx">
-                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as a
+                <button class="backgroundcol2" (click)="addTopicFrom($event,'draft')" type="button">Save as
                     draft</button>
                 <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
                         type="button">Create</button></span>
@@ -171,4 +287,112 @@
             </div>
         </div>
     </form>
+
+    <!-- Knowledge check preview modal -->
+    <div class="modal fade preivewodal" id="knowlegeCheckModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <label class="modal-title">Knowledge Check</label>
+                </div>
+                <div class="modal-body">
+                    <owl-carousel-o *ngIf="displaySlides" [options]="KnowledgeOptions" class="questionList">
+                        <ng-template *ngFor="let value of questionPreData;let i = index" carouselSlide>
+                            <div class="questionContainer">
+                                <perfect-scrollbar class="scrollbar-container">
+                                    <div class="queValue">
+                                        Question &nbsp;{{i + 1}}
+                                    </div>
+                                    <div class="queQuery">
+                                        {{value.Question}}
+                                    </div>
+                                    <ng-container>
+                                        <section class="queOptions">
+                                            <mat-radio-group disabled>
+                                                <div>
+                                                    <mat-radio-button value="Option1"><span>{{value.Option1}}</span>
+                                                    </mat-radio-button>
+                                                </div>
+                                                <div>
+                                                    <mat-radio-button value="Option2"><span>{{value.Option2}}</span>
+                                                    </mat-radio-button>
+                                                </div>
+                                                <div>
+                                                    <mat-radio-button value="Option3"><span>{{value.Option3}}</span>
+                                                    </mat-radio-button>
+                                                </div>
+                                                <div>
+                                                    <mat-radio-button value="Option4"><span>{{value.Option4}}</span>
+                                                    </mat-radio-button>
+                                                </div>
+                                            </mat-radio-group>
+                                        </section>
+                                    </ng-container>
+                                    <div class="queValue">
+                                        Answer
+                                    </div>
+                                    <div class="queAnswer">
+                                        {{value.Answer}}
+                                    </div>
+                                    <div class="queValue">
+                                        Reason
+                                    </div>
+                                    <div class="queAnswer">
+                                        {{value.Reason}}
+                                    </div>
+                                </perfect-scrollbar>
+                            </div>
+                            <!-- <div class="mright34">
+                        <button class="backgroundcol1 cancelBtn" type="button">Cancel</button>
+                        <button class="backgroundcol2" type="button">Save</button>
+                       </div> -->
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Feedack modal -->
+    <div class="modal fade preivewodal" id="feedbackModal" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <label class="modal-title">Feedback</label>
+                </div>
+                <div class="modal-body">
+                    <div class="mar3">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let title of feedBackFormHeading">{{title}}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let value of feedBackForm">
+                                    <td>{{value.title}}</td>
+                                    <td *ngFor="let value1 of value.star"><span class="fa fa-star starRating"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label>What do you like about module</label><br />
+                        <textarea disabled style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment"
+                            placeholder=""></textarea>
+                        <br />
+
+                        <label>What could be improved</label><br />
+                        <textarea disabled style="margin-top:5px;" class="form-control" rows="3" cols="55" id="comment1"
+                            placeholder=""></textarea>
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </span>

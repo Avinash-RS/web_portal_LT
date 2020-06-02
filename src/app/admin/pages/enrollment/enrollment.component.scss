@@ -1,0 +1,556 @@
+@import "variable";
+
+.swal2-popup.swal2-modal.swal2-show {
+  width: 30% !important;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 40%;
+}
+
+.green {
+  color: $color-dark-green;
+}
+
+.red {
+  color: $color-red;
+}
+
+.black {
+  color: $color-blank;
+}
+
+:host ::ng-deep {
+  .mat-stroked-button {
+    width: 40%;
+  }
+
+  .mat-progress-spinner {
+    position: absolute !important;
+    top: 50% !important;
+    left: 45% !important;
+
+  }
+
+  .mat-tab-label {
+    width: 50% !important;
+    font-weight: 600;
+    font-size: medium;
+  }
+}
+
+// mat-header-cell {
+//   font-size: 14px;
+//   color: $color-blank;
+// }
+
+.avatar {
+  width: 25%;
+  height: 80%;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
+.mat-column-selectall {
+  flex: 0 0 12% !important;
+}
+
+.mat-column-sno {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 9% !important;
+  width: 9% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-request_date {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-course_name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 35% !important;
+  width: 35% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-totalCount {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-group_name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-header-cell {
+  color: $color-blank !important;
+  font-size: 14px !important;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd !important;
+}
+
+.example-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  max-height: 700px;
+  min-width: 300px;
+  cursor: pointer;
+  .mat-stroked-button {
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0 0px;
+    margin: 1px;
+  }
+
+  // .mat-header-cell:last-of-type {
+  //   padding-top: 10px;
+  //   padding-bottom: 10px;
+  //   display: initial;
+  //   text-align: center;
+  // }
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 650px;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding-left: 5px;
+  padding-right: 5px;
+  word-break: break-all;
+}
+
+.search {
+  .mat-form-field {
+    width: 25% !important;
+  }
+}
+
+.mat-cell:first-of-type,
+.mat-header-cell:first-of-type {
+  padding-left: 15px !important;
+}
+
+@media screen and (min-width:765px) {
+ :host /deep/ .mat-tab-body-content {
+    width: 900px !important;
+    overflow: hidden !important;
+  }
+
+  .mat-cell {
+    flex-wrap: wrap;
+  }
+
+  .mobile-label,
+  .mobile-data {
+    display: none;
+  }
+
+  .mat-column-email {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-select {
+    flex: 0 0 75px !important;
+  }
+
+  .mat-column-name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-emailid {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-user_id {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 10% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-active {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 8% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-actions {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width:765px) {
+  /deep/ .mat-paginator-container {
+    min-height: 120px !important;
+  }
+
+  .avatar {
+    width: 45%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+  }
+
+  .profile {
+    justify-content: space-between;
+  }
+
+  .left {
+    order: 2;
+  }
+
+  .right {
+    order: 1;
+  }
+
+  .mobile-label {
+    width: 100px !important;
+    word-break: break-all;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .desktop-data {
+    display: none;
+  }
+
+  .mobile-data {
+    width: 58%;
+    display: inline-block;
+    font-weight: normal;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  mat-cell:first-of-type {
+    padding-left: 0px;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+
+  .mat-column-email {
+    width: 100% !important;
+  }
+
+  .mat-column-select {
+    flex: 0 0 75px !important;
+  }
+
+  .mat-column-name {
+    width: 100% !important;
+  }
+
+  .mat-column-emailid {
+    width: 100% !important;
+  }
+
+  .mat-column-user_id {
+    width: 100% !important;
+  }
+
+  .mat-column-active {
+    width: 100% !important;
+  }
+
+  .mat-column-actions {
+    width: 100% !important;
+  }
+}
+
+// .active 
+// {
+//     background-color:#007bff
+// }
+
+/* TOGGLE STYLING */
+
+
+
+/****** buttons' style starts here ******/
+.button {
+  float: right;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  text-decoration: inherit;
+  border: 3px solid;
+  padding: 1px 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/****** green buttons ******/
+
+.button5 {
+  background-color: rgb(124, 191, 66);
+  border-color: rgb(124, 191, 66);
+  color: rgb(255, 255, 255);
+}
+
+/******  red buttons ******/
+
+.button8 {
+  background-color: rgb(226, 65, 62);
+  border-color: rgb(226, 65, 62);
+  color: rgb(255, 255, 255);
+}
+
+#custom-search-input {
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+}
+
+#custom-search-input .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#custom-search-input button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #D9230F;
+}
+
+.search-query:focus+button {
+  z-index: 3;
+}
+
+/deep/.swal2-header {
+  // background-color: yellow !important;
+}
+
+/deep/.swal2-styled.swal2-cancel {
+  border: 0;
+  border-radius: .25em;
+  background: initial;
+  background-color: #aaa;
+  color: #fff;
+  font-size: 1.0625em;
+  width: 90px;
+  padding: 11px;
+}
+.mat-header-cell.mat-sort-header-sorted {
+  color: black;
+}
+
+.toggle {
+  float: right;
+  margin: 0 10px 0 20px;
+  cursor: pointer;
+}
+
+
+input[type="radio"] {
+  visibility: hidden;
+}
+
+
+.toggle input+label {
+  margin: 0;
+  padding: .75rem 2rem;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  border: solid .5px #DDD;
+  background-color: #FFF;
+  font-size: 1rem;
+  line-height: 100%;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out;
+
+}
+
+.toggle input:hover+label {
+  border-color: #213140;
+}
+
+.toggle input:checked+label {
+  background: #355C7D;
+  color: #FFF;
+  box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+  border-color: #4B9DEA;
+  z-index: 1;
+}
+
+.toggle input:focus+label {
+  outline: dotted 1px #CCC;
+  outline-offset: .45rem;
+}
+
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  flex: 1;
+}

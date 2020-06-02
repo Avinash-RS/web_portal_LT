@@ -2,8 +2,6 @@
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Course Management
-        </a></li>
       <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
       <li class="breadcrumb-item">
         <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{courseDetails?.courseid}}">
@@ -23,7 +21,7 @@
               [src]="routedCourseDetails?.courseImage ? routedCourseDetails?.courseImage : '../../../../assets/images/image_upload.svg'">
             <br>
             <div class="course-name">{{routedCourseDetails?.courseName}}</div>
-            <div class="course-name">{{noOfModules + ' Modules'}}</div>
+            <div class="course-name" >{{noOfModules > 1 ? noOfModules + ' Modules' : (noOfModules == 1 ? noOfModules + ' Module' : 'No Module added')}}</div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
               <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference
@@ -32,9 +30,24 @@
           </div>
           <div class="col-md-10">
             <div class="add-module-btn">
-              <mat-icon (click)="navChooseTemp()" class="add-module-icon">add_circle_outline</mat-icon>
-              <span style="font-size: 24px;color: #1f3777;">
+              <span
+                class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0) ? 'add-module-icon dis-btn' : 'add-module-icon'}}">
+                <mat-icon (click)="navChooseTemp()">add_circle_outline</mat-icon>
+              </span>
+              <span (click)="navChooseTemp()"
+                class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0) ? 'mod-btn dis-btn': 'mod-btn'}}">
                 Add Module
+              </span>
+              <span>
+                <span
+                  class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0) ? 'dis-btn add-modulerepo-icon' : 'add-modulerepo-icon'}}">
+                  <mat-icon (click)="addModuleRepos()" style=" padding-left: 5px;border-left: 1px solid grey;">
+                    add_circle_outline</mat-icon>
+                </span>
+                <span (click)="addModuleRepos()"
+                  class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0 ) ? 'repo-mod-btn dis-btn' : 'repo-mod-btn' }}">
+                  Add Module from repository
+                </span>
               </span>
             </div>
             <div class="module-list">
@@ -52,18 +65,21 @@
                     <div class="prew1">
                       <div class="child-item" *ngIf="module.modulestatus !== 'false'">
                         <span class="del-icon-container">
-                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()"
-                            (mouseover)="onHover(module.modulename)">info</mat-icon>
-                          <mat-icon class="del-icon" (click)="deleteModule(module.modulename)">delete</mat-icon>
-
+                          <span
+                            class="{{(module.moduleid && module.moduleid.length > 0 )? 'add-repo-disable' : 'add-repo-enable'}}">
+                            <mat-icon class="repo-icon" (click)="addToRepo(n,module)">library_add</mat-icon>
+                          </span>
+                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()" (mouseover)="onHover(n)">info
+                          </mat-icon>
+                          <mat-icon class="del-icon" (click)="deleteModule(n)">delete</mat-icon>
                         </span>
                         <div (click)="addTopic(module,n)" class="module-name">
                           {{module.modulename}}
 
                         </div>
-                        <div style="color: grey;" *ngIf="isHover && module.modulename == hoverName" class="overlay">
-                          <div *ngFor="let template of module.template_details">
-                            {{template.name}}
+                        <div style="color: grey;" *ngIf="isHover && n == hoverName" class="overlay">
+                          <div>
+                            {{module.modulename}}
                           </div>
                         </div>
                       </div>
@@ -76,10 +92,26 @@
               </ng-container>
 
               <ng-template #noMod>
-                <div class="no-module">
-                  No Modules found
+                <div class="no-module"
+                  *ngIf="(!isScrom && this.scormPath.length == 0); else uploadDel">
+                  <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
+                  <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
+                    color="primary">Upload a SCORM Package
+                    <mat-icon (click)="add(in)">file_upload</mat-icon>
+                  </button>
                 </div>
               </ng-template>
+
+              <ng-template #uploadDel>
+                <div class="no-module">
+                  <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
+                  <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
+                    color="primary">SCORM Package uploaded
+                    <mat-icon style="font-size: 20px;" (click)="deleteScromFile($event)">delete</mat-icon>
+                  </button>
+                </div>
+              </ng-template>
+
 
             </div>
           </div>
@@ -88,7 +120,9 @@
 
       <mat-card-footer>
         <div>
-          <button type="button" mat-flat-button color="primary" (click)="onCreate()" class="continue-btn">Save</button>
+          <button type="button" mat-flat-button color="primary"
+            [disabled]="courseDetails && courseDetails.coursetype == 'SCORM'" (click)="onCreate()"
+            class="continue-btn">Save</button>
         </div>
       </mat-card-footer>
 
