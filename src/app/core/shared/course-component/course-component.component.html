@@ -21,7 +21,7 @@
 <!-- end for logged out user -->
 
 <!-- for logged in user -->
-<mat-card class="p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
+<mat-card class="containerOverlay1 p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
   <div class="row wishlist" *ngIf="showWishlist">
     <button mat-icon-button aria-label="Example icon button with a heart icon" (click)="selectWishlist(course)"
       class="wishlist_btn no_padding">
@@ -33,7 +33,12 @@
     src="{{course.course_img_url}}" width="100%" (click)="gotoDescription()">
   <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
-  <mat-card-content>
+  <div class="overlay1 p-5px" style="margin-bottom: 0;">
+    <p class="course_description1 f_size_12">
+      {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+    </p>
+  </div>
+  <mat-card-content class="card-bottom1">
     <!-- <div class="row course-name-row no_margin" (click)="gotoDescription()">
       <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 no_padding"
         style="word-wrap: break-word">
@@ -45,6 +50,7 @@
         &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>
     </div> -->
+
     <div class="conten no_padding" (click)="gotoDescription()">
       <div class="mask display_flex user-rating no_padding" (click)="gotoDescription()">
         <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
@@ -64,7 +70,7 @@
       <div class="row no_margin enroll_row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_sz_14 float_left no_padding learner-count"
           (click)="gotoDescription()">
-          <span *ngIf="showCount" class="material-icons color_grey" style="vertical-align: bottom;">
+          <span *ngIf="showCount" class="material-icons color_grey f_size_18" style="vertical-align: middle;">
             people
           </span> <small *ngIf="showCount" class="color_grey">2,500 learners</small>
         </div>

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { MatDialog } from '@angular/material';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+
 
 @Component({
   selector: 'app-learner-home',
@@ -21,10 +24,13 @@ export class LearnerHomeComponent implements OnInit {
   incomplete:any;
   popularsCourse: any;
   loadingCatalogue = false;
+  showAppliedFiltre : Boolean =true;
+  showCategory : Boolean = true;
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
-    private globalservice: GlobalServiceService,public commonServices: CommonServicesService) {
+    private globalservice: GlobalServiceService,public commonServices: CommonServicesService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -32,11 +38,17 @@ export class LearnerHomeComponent implements OnInit {
     this.getEnrolledCourses();
     this.getallcourses();
     this.viewWishlist();
+    this.commonServices.globalAllCategory.subscribe((data: any) => {
+      this.allcourses = data;
+    });
+    this.commonServices.globalCourses.subscribe((data: any) => {
+      this.allcourses = data;
+    });
   }
   getallcourses() {
     this.loadingCatalogue = true;
     if (this.userDetailes.group_id)
-      this.learnerService.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         this.loadingCatalogue = false;
       });
@@ -81,5 +93,14 @@ export class LearnerHomeComponent implements OnInit {
     }else{
       this.getallcourses();
     }
+  }
+  viewCategory(module) {
+    const dg = this.dialog.open(CategoryComponentComponent, {
+      width: '95%'
+    });
+
+    // dg.afterClosed().subscribe((data) => {
+    //   this.getallcourses();
+    // });
   }
 }
