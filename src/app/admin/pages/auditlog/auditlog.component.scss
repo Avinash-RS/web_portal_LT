@@ -31,10 +31,8 @@
     text-align: center;
     vertical-align: middle !important;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    padding: 3px 0px;
+    border: none;
     background-color: $color-blue ;
     border-radius: 0px !important;
     font-size: 1rem;
@@ -68,4 +66,50 @@
   margin-right: 10px !important;
   margin-left: 0px !important;
 
+}
+
+
+
+
+
+
+
+
+///////////////////////
+@media screen and (min-width:405px) {
+  :host /deep/ .mat-paginator-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 30px !important;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    background: #ccc !important;
+    height: 30px;
+    position: absolute;
+    bottom: 64px;
+  }
+}
+
+@media screen and (max-width:405px) {
+  /deep/ .mat-paginator-container {
+    min-height: 120px !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    background: #ccc !important;
+    height: 120px;
+    position: absolute;
+    bottom: 64px;
+  }
+}
+
+:host /deep/ {
+  .mat-paginator-range-label,
+  .mat-paginator-page-size,
+  .mat-paginator-icon {
+    margin-top: 10px;
+  }
 }
