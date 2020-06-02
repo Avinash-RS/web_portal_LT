@@ -29,10 +29,6 @@
         opacity: 0.5;
         cursor: no-drop;
     }
-    .rep-title {
-        margin: 0 0 0 1.5% !important;
-        color: #1f3777;
-    }
 
     .pagination-container {
         background-color: white;
@@ -43,5 +39,28 @@
         background-color: #1f3777 !important;
         color: white !important;
         margin-left: 22%;
+    }
+
+    .check-box-disable {
+        .check-box {
+            opacity: 0.5;
+            cursor: no-drop !important;
+        }
+    }
+
+    .repo-title-container {
+        margin: 0 1.5% 0 1.5% !important;
+        display: flex;
+        justify-content: space-between;
+        .rep-title {
+            color: #1f3777;
+            font-weight: 500;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .search-icn {
+            position: absolute;
+            right: 5px;
+        }
     }
 }
