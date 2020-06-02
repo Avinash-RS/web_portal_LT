@@ -127,7 +127,8 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   addNewCatalogue() {
-    this.adminservice.addNewCatalogue(this.addCatalogueForm.value.catalogue_name,
+    const cataloguename = this.addCatalogueForm.value.catalogue_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
+    this.adminservice.addNewCatalogue(cataloguename,
       this.addCatalogueForm.value.catalogue_description || '',
       this.adminDetails._id).subscribe((result: any) => {
         this.addCatalogueForm.reset();
@@ -285,7 +286,8 @@ export class CatalogueManagementComponent implements OnInit {
 
   editCatalogue() {
     this.closedialogbox();
-    this.adminservice.updateCatalogDtl(this.addCatalogueForm.value.catalogue_name.trimLeft(),
+    const cataloguename = this.addCatalogueForm.value.catalogue_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
+    this.adminservice.updateCatalogDtl(cataloguename,
       this.addCatalogueForm.value.catalogue_description,
       this.catalog.catalogue_id).subscribe((result: any) => {
         this.addCatalogueForm.reset();

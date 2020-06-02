@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MatDialog } from '@angular/material';
@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./guideline-search.component.scss']
 })
 export class GuidelineSearchComponent implements OnInit {
+  @Input('showAppliedFiltre') showAppliedFiltre : boolean;
   TodateOptions: { dateFormat: string; disableSince: { year: number; month: number; day: number; }; };
   FromdateOptions: {
     dateFormat: string; disableUntil: { year: number; month: number; day: number; };
@@ -44,7 +45,6 @@ export class GuidelineSearchComponent implements OnInit {
   Lvl3CatId: any = [];
   pagenumber = 0;
   allcourses: any;
-  showAppliedFiltre: boolean;
   authorPageNo = 0;
   authorPerPage = 5;
   course_languagePageNo = 0;
@@ -64,21 +64,20 @@ export class GuidelineSearchComponent implements OnInit {
     private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
-    this.CommonServices.globalFilter.subscribe((data: any) => {
-        this.guidelineSearchVal = data.guidelineSearchVal;
-        this.selectedFilter.category1 = data.selectedFilterCategory1;
-        this.selectedFilter.category2 = data.selectedFilterCategory2;
-        this.selectedFilter.category3 = data.selectedFilterCategory3;
-        this.guidelineSearchVal = data.guidelineSearchVal,
-        this.Lvl1CatId = data.Lvl1CatId,
-        this.level1selectedID = data.level1selectedID,
-        this.Lvl2CatId = data.Lvl2CatId,
-        this.level2selectedID = data.level2selectedID,
-        this.Lvl3CatId = data.Lvl3CatId,
-        this.level3selectedID = data.level3selectedID,
-        this.allLvlCategoryFilterVal = data.allLvlCategoryFilterVal,
-        this.allLvlCategory = data.allLvlCategory
+    this.CommonServices.selectedCategory.subscribe(data => {
+      console.log('data',data);
+      this.Lvl1CatId = data.Lvl1CatId,
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+      console.log('lvl1',this.Lvl1CatId)
     })
+    console.log('lvl111111111111111111111111111111',this.Lvl1CatId)
+
     this.TodateOptions = {
       dateFormat: 'yyyy-mm-dd',
       disableSince: {
@@ -89,6 +88,47 @@ export class GuidelineSearchComponent implements OnInit {
       dateFormat: 'yyyy-mm-dd',
       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate() },
       disableUntil: { year: 2020, month: 3, day: 31 }
+    }
+    this.filter();
+  }
+  filter() {
+    if (!this.selectedFilter || !this.selectedFilter.filterVal) {
+      this.selectedFilter.category1 = [];
+      this.selectedFilter.category2 = [];
+      this.selectedFilter.category3 = [];
+
+      this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
+      this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
+      this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
+      console.log(this.selectedFilter)
+
+      this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
+        if (result['data']['getDetailsCount']['success'] == 'true') {
+          this.guidelineSearchVal = result['data']['getDetailsCount']['message'];
+          if (this.guidelineSearchVal && this.guidelineSearchVal.course_data) {
+            this.guidelineSearchVal.course_data.forEach(element => {
+              element.checked = false; 
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.author_data) {
+            this.guidelineSearchVal.author_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.coursemode_data) {
+            this.guidelineSearchVal.coursemode_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+          if (this.guidelineSearchVal && this.guidelineSearchVal.coursepartner_data) {
+            this.guidelineSearchVal.coursepartner_data.forEach(element => {
+              element.checked = false;
+            });
+          }
+        } else {
+          //  this.alert.openAlert('Filter not found',null)
+        }
+      })
     }
   }
  
@@ -495,7 +535,9 @@ export class GuidelineSearchComponent implements OnInit {
       Lvl2CatId: this.Lvl2CatId,
       level2selectedID : this.level2selectedID,
       Lvl3CatId: this.Lvl3CatId,
-      level3selectedID : this.level3selectedID
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory 
     }
     this.CommonServices.globalCategory$.next(obj);
   
