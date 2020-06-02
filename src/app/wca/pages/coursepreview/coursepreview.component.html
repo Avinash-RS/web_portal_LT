@@ -85,8 +85,15 @@
         </div>
 
         <div class="enroll">
-          <div class="grid-item ">
+          <div class="grid-item " (click)="previewideo()">
             <i class="fa fa-play course_preview_icon pointer" aria-hidden="true"></i>
+          </div>
+
+          <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+            <div class="overlay-content" *ngIf="course">
+              <app-video-player [url]="course"></app-video-player>
+              </div>
           </div>
 
           <div class="grid-item ">
