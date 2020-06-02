@@ -24,7 +24,7 @@
 
 
     <ng-container *ngIf="dialogdata?.type === 'previewImages'">
-        <div>
+        <!-- <div>
             <div class="dialogClose">
                 <span (click)="dialogClose()"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
             </div>
@@ -39,9 +39,11 @@
                     </mat-card>
                 </div>
             </div>
-        </div>
+        </div> -->
     
-
+        <div class="dialogClose">
+            <span (click)="dialogClose()"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
+        </div>
         <div
         cdkDropList
         #doneList="cdkDropList"
