@@ -17,17 +17,17 @@ export class VideoPreviewModalComponent {
   private displayURL;
 
   constructor(private sanitizer: DomSanitizer,
-    private dialogRef: MatDialogRef<VideoPreviewModalComponent>, @Inject(MAT_DIALOG_DATA) data
+    private dialogRef_vdo: MatDialogRef<VideoPreviewModalComponent>, @Inject(MAT_DIALOG_DATA) data
   ) {
     this.displayURL = sanitizer.bypassSecurityTrustResourceUrl(data.url);
   }
 
   changePosition() {
-    this.dialogRef.updatePosition({ top: '10px' });
+    this.dialogRef_vdo.updatePosition({ top: '10px' });
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef_vdo.close();
   }
 
 }

@@ -40,6 +40,7 @@ export class BlobReaderComponent implements OnInit {
   }
 
   closeModel() {
+    console.log('hhh');
     this.dialogRef.close(false);
   }
 
@@ -48,14 +49,14 @@ export class BlobReaderComponent implements OnInit {
   }
 
   preview(row) {
-    const dialogRef = this.dialog.open(VideoPreviewModalComponent, {
+    const dialogRef_Video = this.dialog.open(VideoPreviewModalComponent, {
       data: { url: row.url },
-      height: '38%',
+      height: '42%',
       width: '30%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef_Video.afterClosed().subscribe(res => {
     });
   }
 
