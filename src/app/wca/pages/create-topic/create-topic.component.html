@@ -105,7 +105,7 @@
                                                             <span class="example-spacer"></span>
                                                             <span *ngIf="query">
                                                                 <mat-icon style="display: none;">save</mat-icon>
-                                                                <mat-icon (click)="DeleteTopic(i,$event)">delete</mat-icon>
+                                                                <mat-icon style="display: none;" (click)="DeleteTopic(i,$event)">delete</mat-icon>
                                                             </span>
                                                         </div>
                                                         <div class="colView">
@@ -152,10 +152,13 @@
                                                                         </mat-icon>
                                                                     </span><label class="fsize12">Upload
                                                                         Question</label></div>
-                                                                <span *ngIf="j?.value?.topicimages[0]" class="dspFlxinside ml10" [formGroupName]="i">
-                                                                    <small class="spanTime"> Time required to complete
-                                                                        the topic </small>
-                                                                        <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00">
+                                                                <span *ngIf="j?.value?.topicimages[0]" class="ml10" [formGroupName]="i">
+                                                                    <span class="dspFlxinside">
+                                                                        <small class="spanTime"> Time required to complete
+                                                                            the topic </small>
+                                                                            <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00:00">
+                                                                    </span>
+                                                                        <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                     
                                                                 </span>
                                                             </div>
@@ -163,7 +166,7 @@
                                                                 *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
-                                                                <span><button *ngIf="queryData?.template_details[i].name != 'SCORM'" mat-raised-button class="btnprev"
+                                                                <span style="width:20%"><button *ngIf="queryData?.template_details[i].name != 'SCORM'" mat-raised-button class="btnprev"
                                                                         type="button"
                                                                         (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button>
                                                                         <span
@@ -173,10 +176,13 @@
                                                                         <label style="font-size: 12px;">File Uploaded</label>
                                                                     </span>
                                                                     </span>
-                                                                <span class="dspFlxinside" [formGroupName]="i">
-                                                                    <small class="spanTime"> Time required to complete
-                                                                        the topic </small>
-                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                <span [formGroupName]="i">
+                                                                    <span class="dspFlxinside">
+                                                                        <small class="spanTime"> Time required to complete
+                                                                            the topic </small>
+                                                                            <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
+                                                                    </span>
+                                                                        <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                 </span>
                                                             </span>
                                                             <span
@@ -187,10 +193,13 @@
                                                                         type="button"
                                                                         (click)="openFeedback()">preview</button></span>
 
-                                                                <span class="dspFlxinside ml10" [formGroupName]="i">
-                                                                    <small class="spanTime"> Time required to complete
-                                                                        the topic </small>
-                                                                        <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                <span class="ml10" [formGroupName]="i">
+                                                                    <span class="dspFlxinside">
+                                                                        <small class="spanTime"> Time required to complete
+                                                                            the topic </small>
+                                                                            <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
+                                                                    </span>
+                                                                        <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                 </span>
                                                             </span>
                                                             <div class="UploadVidBlock row previewAndTime"
@@ -247,10 +256,13 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="vidCol3" [formGroupName]="i">
-                                                                        <span class="dspFlxinside ml10" style="height: 33px;">
-                                                                            <small class="spanTime"> Time required to complete
-                                                                                the topic </small>
-                                                                                <input type="text" class="timeInput" style="width: 20% !important" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00">
+                                                                        <span class="ml10" style="height: 33px;">
+                                                                            <span class="dspFlxinside">
+                                                                                <small class="spanTime"> Time required to complete
+                                                                                    the topic </small>
+                                                                                    <input type="text" class="timeInput" style="width: 24% !important" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
+                                                                            </span>
+                                                                                <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                         </span>
                                                                     </div>
                                                                 </div>

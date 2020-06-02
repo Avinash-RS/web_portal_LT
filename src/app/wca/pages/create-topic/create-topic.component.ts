@@ -138,7 +138,7 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null]
+      topictime: [null,Validators.compose([Validators.required])]
     });
   }
 
@@ -295,8 +295,8 @@ export class CreateTopicComponent implements OnInit {
     $('#confirmModal').modal('hide');
     // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
     //  allModuleDetails.removeAt(this.removeTemplateindex);
-     (<FormArray>this.createTopicForm.controls['moduledetails']).removeAt(this.removeTemplateindex);
-    //this.createTopicForm['controls'].moduledetails['controls'].removeAt(this.removeTemplateindex);
+    (this. createTopicForm.get('moduledetails') as FormArray).removeAt(this.removeTemplateindex);
+    // (<FormArray>this.createTopicForm.controls['moduledetails']).removeAt(this.removeTemplateindex);
     this.removeTemplateindex = undefined
   }
 
