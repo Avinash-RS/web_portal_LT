@@ -41,37 +41,7 @@
     object-fit: cover;
 }
 
-::ng-deep .br-default .br-unit {
-    margin-right: 8px !important;
-    font-size: 11px !important;
-    height: 18px;
-    width: 10px !important;
-}
-.mar{
-    margin-left: 15px;
-}
 
-.small, small {
-    font-size: 75% !important;
-    font-weight: 400;
-}
-
-.countt{
-    font-size: 12px;
-    color: #333;
-}
-
-::ng-deep .br-default .br-unit:after {
-    content: "\2605";
-    // color: $color-blue;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: $color-darkGrey;
-}
-
-::ng-deep .br-default .br-selected:after {
-    color: $color-blue !important;
-    -webkit-text-stroke-color: $color-blue;
-}
 
 .containerOverlay {
     .overlay {
@@ -103,54 +73,49 @@
     background-color: $color-white;
 }
 
-.card-bottom {
-    height: 5vh;
-}
-
 // END OF LOGGED OUT USER
 
 // FOR LOGGED IN USER
 
 .course-name-row {
-    min-height: 4vh !important;
-    // max-height: 12vh !important;
+    min-height: 10vh !important;
+    max-height: 12vh !important;
 }
 
 
 
 .containerOverlay1 {
     .overlay1 {
-        height: 75px;
-        width: 100%;
+        height: 50%;
+        // width: 80%;
         position: absolute;
         overflow: hidden;
-        bottom: 8vh;
+        bottom: 5vh;
+        left: 10%;
         opacity: 0;
-        background-color: $color-blue;
+        background-color: $color-white;
         filter: alpha(opacity=0);
-        text-align: initial;
-        right: 0;
     }
 
     .pointer {
-        width: 100% !important;
+        width: 80% !important;
     }
 }
 
-.containerOverlay1:hover .overlay1 {
+.containerOverlay:hover .overlay1 {
     opacity: 0.9;
     filter: alpha(opacity=100);
     background-color: $color-white;
-}
-
-.card-bottom1 {
-    height: 8vh;
 }
 
 
 .course-image {
     height: 150px;
     object-fit: cover;
+}
+
+.card-bottom {
+    height: 5vh;
 }
 
 .course-count {
@@ -171,19 +136,10 @@ strong {
     font-weight: 500 !important;
     width: 90%;
     padding: 3px;
-    margin-left: 54%;
-    margin-top: 15%;
-    margin-right: 50%;
     border-radius: 0;
     font-size: smaller;
     text-align: center;
     border: none;
-}
-
-.material-icons {
-    font-family: 'Material Icons';
-    font-size: 18px;
-    color: #ccc !important;
 }
 
 
@@ -195,11 +151,17 @@ strong {
     margin: 0 !important
 }
 
+:host ::ng-deep .br-default .br-unit {
+    margin-right: 5px;
+    font-size: 19px !important;
+    height: 18px;
+    width: 10px !important;
+}
+
 
 .course-card {
     border-radius: 0;
-    background-color: $color-white !important;
-    height: 270px;
+    background-color: #F5FAFA;
 
     .img {
         width: 100%;
@@ -208,12 +170,7 @@ strong {
 }
 
 .shadow {
-    // box-shadow: 5px 5px 10px 0px $box-shadow !important;
-    border:1px solid #ccc;
-}
-
-.mat-card:not([class*='mat-elevation-z']) {
-    box-shadow: none !important;
+    box-shadow: 5px 5px 10px 0px $box-shadow !important;
 }
 
 
@@ -235,32 +192,7 @@ strong {
 .user-rating {
     flex-direction: row;
     justify-content: flex-end;
-    // height: 3em;
 }
-
-
-.mask {
-    position: relative;
-    float: right;
-    clear: none;
-    background-color: transparent;
-    width: 50%;
-    height: 1.25em;
-
-}
-
-.conten {
-    height: 6vh;
-    width: 100%;
-}
-
-.course-name {
-    text-align: initial;
-    word-break: break-word;
-    white-space: normal;
-    // display: inline-block;
-}
-
 
 
 // END OF LOGGED IN USER

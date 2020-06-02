@@ -5,6 +5,7 @@
 ::ng-deep .mat-dialog-actions {
   border-top: 1px solid !important;
 }
+
 main {
   width: 90%;
   margin: 3em auto 0;
@@ -20,8 +21,7 @@ main section {
 .icon_fnt {
   height: 50px;
   width: 40px;
-  border: 1px solid $color-border;
-  margin-left: 9px;
+  box-shadow: 0px 7px 5px 2px #0b0b0b17;
 }
 
 .containerShadow {
@@ -34,39 +34,42 @@ main section {
 
 /////  after filter adding////@extend
 
-.icon{
+.icon {
   color: $color-darkGrey;
 }
-.icon:focus{
+
+.icon:focus {
   outline: none;
   box-shadow: none;
 }
 
 .submit {
   width: 13%;
+  border: none !important;
   background-color: $color-white;
   color: $color-blue;
-  border: 1px solid #ccc;
+  text-align: left;
+  box-shadow: 0px 7px 5px 2px #0b0b0b17;
   height: 45px;
   letter-spacing: 1px;
   font-weight: 500;
   font-size: 16px;
-  margin-left: 55px;
-  margin-right: -40px;
+  border-radius: 3px;
+  margin-left: 2.5%;
 }
 
 .submit:focus {
   outline: none;
   box-shadow: none;
-  background-color: $color-blue ;
+  background-color: $color-blue;
   color: $color-white;
 }
 
-.colr{
+.colr {
   margin-left: 26px;
 }
 
-.colrr{
+.colrr {
   margin-left: 50px;
 }
 
@@ -80,7 +83,7 @@ main section {
   margin-top: 190px !important;
   // margin-top: 22px !important;
   box-sizing: border-box;
-  overflow:  hidden !important;
+  overflow: hidden !important;
   outline: 0;
   width: 83em !important;
   height: 550px !important;
@@ -90,31 +93,35 @@ main section {
   width: 90%;
 }
 
-.vertical { 
+.vertical {
   border-left: 0.5px solid $color-darkGrey;
   height: 60%;
   position: absolute;
   left: 28%;
-} 
-.vertical1 { 
+}
+
+.vertical1 {
   border-left: 0.5px solid $color-darkGrey;
   height: 60%;
   position: absolute;
   left: 56%;
-} 
-
-h2{
-  color:$color-subhead ;
 }
-.allcourses{
+
+h2 {
+  color: $color-subhead;
+}
+
+.allcourses {
   margin-top: 3%;
 }
-.filtercourses{
+
+.filtercourses {
   margin-top: -100%;
   margin-left: 24%;
   max-width: 75%;
 }
-.roundbtn{
+
+.roundbtn {
   background-color: $color-subhead;
   font-size: 20px;
   border: none !important;
@@ -125,13 +132,13 @@ h2{
   border-radius: 30px;
 }
 
-::ng-deep .list-group{
+::ng-deep .list-group {
   width: 90% !important;
   border: none;
 }
 
 ::ng-deep .list-group-item {
- border: none !important; 
+  border: none !important;
 }
 
 .container1 {
@@ -163,7 +170,7 @@ h2{
   border-radius: 5px;
 }
 
-.container1 input:checked ~ .checkmark {
+.container1 input:checked~.checkmark {
   background-color: $light-green;
 }
 
@@ -173,7 +180,7 @@ h2{
   display: none;
 }
 
-.container1 input:checked ~ .checkmark:after {
+.container1 input:checked~.checkmark:after {
   display: block;
 }
 
@@ -189,7 +196,7 @@ h2{
   transform: rotate(45deg);
 }
 
- ::ng-deep .list-group-item {
+::ng-deep .list-group-item {
   padding: 5px !important;
 
 }
@@ -202,67 +209,73 @@ h2{
 //   color: $color-blue;
 // }
 
-.text{
+.text {
   margin-top: 6px;
   font-weight: 500;
 }
-.text2{
+
+.text2 {
   margin-top: 6px;
   text-align: right !important;
   color: $color-darkGrey;
   cursor: pointer;
 }
+
 ::ng-deep .mat-typography h3 {
   margin: 5px 0px 5px !important;
 }
 
-.smallline { 
+.smallline {
   border-left: 0.5px solid $color-border;
   height: 76%;
   margin-top: 5px;
   position: absolute;
   margin-left: 56px;
   text-align: right;
-} 
+}
 
 ::ng-deep .mat-dialog-content {
   max-height: 70vh !important;
 }
-.cover{
+
+.cover {
   background-color: #446bd457;
-    padding-top: 5px;
-    font-size: 12px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    margin-right: 10px;
+  padding-top: 5px;
+  font-size: 12px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  margin-right: 10px;
 }
-.clear-icon{
+
+.clear-icon {
   margin-left: 10px;
   color: red;
   font-size: 17px;
   margin-top: 8px;
 }
 
-.width-10{
+.width-10 {
   max-width: 11.5%;
 }
 
-.errormsg{
-    margin-left: 23%;
-    margin-right: 23%;
-    font-size: 18px;
-    font-weight: 500;
-    color: $color-red;
+.errormsg {
+  margin-left: 23%;
+  margin-right: 23%;
+  font-size: 18px;
+  font-weight: 500;
+  color: $color-red;
 }
-.borderline{
+
+.borderline {
   border: 0.5px solid $color-border;
   width: 80%;
   margin-top: 5px;
   position: absolute;
 }
-.showmore{
+
+.showmore {
   text-align: right !important;
-  color: $color-dark-green ;
+  color: $color-dark-green;
   cursor: pointer !important;
   font-size: 12px;
   font-weight: 500;
@@ -295,7 +308,7 @@ h2{
   top: -9px !important;
 }
 
-::ng-deep .range  .ng5-slider-pointer::after {
+::ng-deep .range .ng5-slider-pointer::after {
   position: absolute;
   top: -9px;
   left: -9px;
@@ -304,7 +317,7 @@ h2{
   border-radius: 50%;
   transform: scale(0);
   opacity: 0;
-  transition: transform .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1),opacity .4s cubic-bezier(.25,.8,.25,1);
+  transition: transform .4s cubic-bezier(.25, .8, .25, 1), background-color .4s cubic-bezier(.25, .8, .25, 1), opacity .4s cubic-bezier(.25, .8, .25, 1);
 }
 
 
@@ -312,12 +325,15 @@ h2{
 ::ng-deep .range .ng5-slider-selection {
   background-color: $color-blue !important;
 }
-.pading{
+
+.pading {
   padding-left: 46px;
 }
-.padding{
+
+.padding {
   padding-left: 20px;
 }
+
 // .topadding{
 //   padding-left: 20px;
 // }
@@ -325,22 +341,25 @@ h2{
   // content: "\f078";
   margin-left: -9px !important;
 }
+
 // .col-9 {
 //   flex: 0 0 73%;
 //   max-width: 73%;
 // }
-.diffcol-9{
+.diffcol-9 {
   flex: 0 0 100%;
   max-width: 100%;
   margin-left: 23%;
-    margin-top: -101%;
+  margin-top: -101%;
   padding: 2.5%;
 }
-.close{
+
+.close {
   float: right !important;
   margin-top: -24px;
   margin-right: -18px;
 }
+
 .dateBox {
   margin-left: 1%;
   // width: 43.5%;
@@ -350,13 +369,9 @@ h2{
   border-radius: 7px;
   color: #1F3777;
 }
-.sort{
+
+.sort {
   position: absolute;
-left: 22.4em;
-top: 0em;
+  left: 22.4em;
+  top: 0em;
 }
-
-
-
-
-

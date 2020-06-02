@@ -75,32 +75,3 @@ mat-card-title {
 .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
 }
-
-.wrap-reg {
-    width: 350px;
-    height:600px;
-    // margin-top: -30px;
-    margin-left: 59% !important;
-    background: $color-white !important;
-    overflow: hidden;
-}
-
-// .bg-img{
-//     width: 100%;
-//     height: 100vh !important;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding: 15px;
-//     background-size: cover !important;
-//     background-repeat: no-repeat !important;
-//     background: url('../../../../assets/learner/LoginPageBG.svg');
-// }
-
-.bg-im{
-    width: 940px;
-}
-
-.container-reg100 {
-    background-color: #c6d0ed !important;
-}
