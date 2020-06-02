@@ -47,8 +47,8 @@
     <div class="col-3" *ngIf="showAppliedFiltre">
       <app-guideline-search></app-guideline-search>
     </div> -->
-    <ng-container *ngIf="!showAppliedFiltre">
-      <div class="col-9">
+    <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
+      <div class="col-9" *ngIf="!showAppliedFiltre">
         <div class="container">
           <div class="row" *ngIf="displayMode === 1">
             <ng-container
@@ -76,9 +76,9 @@
 
         </div>
       </div>
-    </ng-container>
+    <!-- </ng-container> -->
     <ng-container *ngIf="showAppliedFiltre">
-      <div class="col-12">
+      <div class="col-12 allcourses">
         <div class="container ">
           <div class="row" *ngIf="displayMode === 1">
             <ng-container
