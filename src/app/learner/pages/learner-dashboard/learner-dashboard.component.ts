@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LearnerDashboardComponent implements OnInit {
   userDetailes: any;
-  dashboardData: void;
+  dashboardData: any;
   loadingCatalogue = false;
   constructor(
     public service: LearnerServicesService,

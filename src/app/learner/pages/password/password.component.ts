@@ -132,7 +132,7 @@ export class PasswordComponent implements OnInit {
     })
   }
 
-  userNamesuggestion() {
+  userNamesuggestion(data?) {
     this.userid = localStorage.getItem('key')
     this.service.userNamesuggestion(this.userid).subscribe(data => {
       if (data.data['user_registration_username_suggestion']['success'] == 'true') {

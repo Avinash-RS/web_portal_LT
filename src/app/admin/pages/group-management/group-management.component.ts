@@ -57,6 +57,8 @@ export class GroupManagementComponent implements OnInit {
   allgroups: any;
   selectedcatalogue: any;
   oldcatalogue: any;
+  trackBy:any;
+  toggle: any;
     /** tree source stuff */
     readonly dataSource$: BehaviorSubject<any[]>;
     readonly treeSource: MatTreeNestedDataSource<any>;
@@ -163,14 +165,16 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  selectgroup(node,groupform) {
+  selectgroup(node, groupform) {
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
+      this.currentpath = null;
       this.currentpath = node;
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
+      this.toggle = node.is_active;
       this.getAllUser(0);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
@@ -274,11 +278,6 @@ export class GroupManagementComponent implements OnInit {
   // toggle(event: MatSlideToggleChange) {
   //   this.toggleevent = event.checked;
   //   this.currentpath.is_active = event.checked;
-  // }
-
-  // toggle(event) {
-  //   this.toggleevent = event;
-  //   this.currentpath.is_active = event;
   // }
   updategroupdetails(groupform) {
     // let value: any;
