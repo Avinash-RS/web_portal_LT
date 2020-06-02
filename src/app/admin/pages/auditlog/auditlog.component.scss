@@ -41,3 +41,31 @@
     line-height: 1.5;
     width: 100%;
 }
+
+// :host ::ng-deep.svg.mat-datepicker-toggle-default-icon.ng-star-inserted {
+//   margin-left: 0px !important;
+//   margin-top: -12px !important;
+// }
+
+// ::ng-deep .mat-datepicker-toggle {
+//   margin-top: -12px !important;
+//   margin-left: 0px !important;
+
+// }
+
+// ::ng-deep .mat-datepicker-toggle{
+//   margin-left: 0px !important;
+//   color:aqua;
+// }
+
+::ng-deep  .svg.mat-datepicker-toggle-default-icon.ng-star-inserted
+{
+
+  color:aqua;
+
+}
+.matDatepickerToggleIcon {
+  margin-right: 10px !important;
+  margin-left: 0px !important;
+
+}
