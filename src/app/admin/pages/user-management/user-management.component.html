@@ -99,8 +99,10 @@
             <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
               (click)="deActivate('De-activate')">
               De-activate</button>
-            <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
-              Block</button>
+            <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
+              Block</button> -->
+            <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Unblock')">
+              Un-block</button> -->
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
@@ -113,9 +115,9 @@
               [disabled]="(selectedArray && selectedArray.length > 0)"
               (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
               {{element.is_active ? 'De-activate' : 'Activate'}}</button>
-            <button *ngIf="!element.is_blocked" mat-stroked-button
+            <!-- <button *ngIf="!element.is_blocked" mat-stroked-button
               [disabled]="(selectedArray && selectedArray.length > 0)" (click)="block('Block',element)">
-              Block</button>
+              Block</button> -->
           </mat-cell>
         </ng-container>
 
