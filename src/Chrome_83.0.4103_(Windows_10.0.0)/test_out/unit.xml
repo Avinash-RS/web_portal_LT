@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-02T13:22:46" id="0" hostname="DESKTOP-729A26A" tests="1" errors="1" failures="1" time="0.269">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"/>
+  </properties>
+  <testcase name="CatalogueManagementComponent should create" time="0.269" classname="Chrome_83_0_4103_(Windows_10_0_0).CatalogueManagementComponent">
+    <failure type="">Failed: Unexpected pipe 'SortPipe' imported by the module 'DynamicTestModule'. Please add a @NgModule annotation.
+Error: Unexpected pipe 'SortPipe' imported by the module 'DynamicTestModule'. Please add a @NgModule annotation.
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2430:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:18645:1
+    at Array.forEach (&lt;anonymous&gt;)
+    at CompileMetadataResolver.getNgModuleMetadata (node_modules/@angular/compiler/fesm5/compiler.js:18620:1)
+    at JitCompiler._loadModules (node_modules/@angular/compiler/fesm5/compiler.js:26029:1)
+    at JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:26017:1)
+    at JitCompiler.compileModuleAndAllComponentsAsync (node_modules/@angular/compiler/fesm5/compiler.js:25976:1)
+    at CompilerImpl.compileModuleAndAllComponentsAsync (node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js:153:1)
+    at TestingCompilerImpl.compileModuleAndAllComponentsAsync (node_modules/@angular/platform-browser-dynamic/fesm5/testing.js:107:1)
+    at TestBedViewEngine.compileComponents (node_modules/@angular/core/fesm5/testing.js:1694:1)
+</failure>
+    <failure type="">Error: Unexpected pipe 'SortPipe' imported by the module 'DynamicTestModule'. Please add a @NgModule annotation.
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2430:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:18645:1
+    at Array.forEach (&lt;anonymous&gt;)
+    at CompileMetadataResolver.getNgModuleMetadata (node_modules/@angular/compiler/fesm5/compiler.js:18620:1)
+    at JitCompiler._loadModules (node_modules/@angular/compiler/fesm5/compiler.js:26029:1)
+    at JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:26017:1)
+    at JitCompiler.compileModuleAndAllComponentsSync (node_modules/@angular/compiler/fesm5/compiler.js:25973:1)
+    at CompilerImpl.compileModuleAndAllComponentsSync (node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js:146:1)
+    at TestingCompilerImpl.compileModuleAndAllComponentsSync (node_modules/@angular/platform-browser-dynamic/fesm5/testing.js:104:1)
+    at TestBedViewEngine._initIfNeeded (node_modules/@angular/core/fesm5/testing.js:1708:1)
+</failure>
+    <failure type="">Expected undefined to be truthy.
+    at UserContext.&lt;anonymous&gt; (src/app/admin/pages/catalogue-management/catalogue-management.component.spec.ts:33:23)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:391:1)
+    at ProxyZoneSpec.onInvoke (node_modules/zone.js/dist/zone-testing.js:289:1)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:390:1)
+</failure>
+  </testcase>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
