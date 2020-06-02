@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
     selector: 'app-create-course',
@@ -43,7 +44,6 @@ export class CreateCourseComponent implements OnInit {
     authorLengthArray = [];
     courseLengthArray = [];
     TakeAwayLengthArray = [];
-
 
     createItem(): FormGroup {
         this.preview2.push(null);
@@ -187,9 +187,8 @@ export class CreateCourseComponent implements OnInit {
             this.toast.warning('Please upload file having extensions .jpeg/.jpg/.png only.');
             fileInput.value = '';
             return false;
-        }
-        else if ((fileSize / 1024) / 1024 >= 2) {
-            this.toast.warning("File size should not exceed more than 2 mb");
+        } else if ((fileSize / 1024) / 1024 >= 2) {
+            this.toast.warning('File size should not exceed more than 2 mb');
         } else {
             if (fileInput && fileInput.target && fileInput.target.files[0]) {
                 this.spinner.show();
