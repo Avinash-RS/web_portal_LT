@@ -79,7 +79,7 @@ export class ViewAllCoursesComponent implements OnInit {
       }
       else {
         Swal.fire('No courses found');
-        this.allcourses = this.allcourses;
+        this.getallcourses();
       } 
     })
     this.CommonServices.globalAllCategory.subscribe((data: any) => {
