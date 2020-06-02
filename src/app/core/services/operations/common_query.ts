@@ -413,8 +413,8 @@ export const syllabus_of_particular_scorm = gql`
     }
   }`;
 export const getCoursesByName = gql`
-    query getCoursesByName($courseName : String!){
-      getCoursesByName(courseName: $courseName) {
+    query getCoursesByName($courseName : String!, $pagenumber : String!){
+      getCoursesByName(courseName: $courseName, pagenumber: $pagenumber) {
         success
         error_msg
         message{
