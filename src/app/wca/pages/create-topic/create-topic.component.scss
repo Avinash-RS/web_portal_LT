@@ -305,7 +305,7 @@ input[type=text]
 }
 
 .timeInput{
-    width: 15% !important;
+    width: 22% !important;
     height: 84%;
     padding: 0px !important;
     margin: 0px !important;    
@@ -480,7 +480,7 @@ padding-left: 15px;
 .spanTime{
     color: $color-darkGrey;
     padding-right: 11px;
-    padding-top: 5px;
+    // padding-top: 5px;
 }
 .btnprev{
     border-radius: 40px;
@@ -813,4 +813,16 @@ background-color: $color-blue!important;
 
 .queOptions span{
     color: black;;
+}
+.pad5{
+    padding: 5% !important;
+}
+
+#confirmModal .modal-footer{
+    justify-content: center !important;
+}
+
+.BgBtn{
+    background: #1F3777 !important;
+    color: white !important;
 }
