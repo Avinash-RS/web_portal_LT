@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/material';
 import { WcaService } from '@wca/services/wca.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { ViewCoursesComponent } from '../view-courses/view-courses.component';
@@ -17,6 +17,8 @@ export class ModuleRepositoryComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(this.savedModules);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   modDetails = [];
 
   constructor(
@@ -34,6 +36,7 @@ export class ModuleRepositoryComponent implements OnInit {
       createdby: '',
       createdon: 'Date'
     }];
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.route.queryParams.subscribe(params => {
       let flag = 0;
@@ -49,6 +52,10 @@ export class ModuleRepositoryComponent implements OnInit {
     });
 
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   getModules(d?) {
     this.apiService.repositoryModules().subscribe((data: any) => {
@@ -63,11 +70,11 @@ export class ModuleRepositoryComponent implements OnInit {
                   val.isSelect = true;
                 }
                 else {
-                 this.modDetails.splice(i, 1);
+                  this.modDetails.splice(i, 1);
                 }
               }
             })
-          
+
           }
         }
         else {
@@ -84,6 +91,7 @@ export class ModuleRepositoryComponent implements OnInit {
       this.savedModules = data.Result;
 
       this.dataSource = new MatTableDataSource<any>(this.savedModules);
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -115,8 +123,18 @@ export class ModuleRepositoryComponent implements OnInit {
 
         }
       });
+      this.savedModules.forEach((val) => {
+        if (val.moduleid == module.moduleid) {
+          val.isSelect = true;
+        }
+      })
     }
     else if (!e && !isValid) {
+      this.savedModules.forEach((val) => {
+        if (val.moduleid == module.moduleid) {
+          val.isSelect = false;
+        }
+      })
       this.modDetails.splice(n, 1);
     }
   }
