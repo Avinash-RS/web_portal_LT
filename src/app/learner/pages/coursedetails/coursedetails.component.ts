@@ -68,7 +68,7 @@ export class CoursedetailsComponent implements OnInit {
   content: any;
   modulength: any;
   urlSafe: any;
-
+  isCollapsed: any;
 
   // slideOptions: any = {
   //   loop: true,

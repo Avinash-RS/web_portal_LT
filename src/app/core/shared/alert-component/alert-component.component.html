@@ -1,16 +1,19 @@
-
 <h2 mat-dialog-title class="msg">{{data.title}}</h2>
 
-<mat-dialog-content *ngIf = "data.msg">
+<mat-dialog-content *ngIf="data.msg">
 
-<p class="msg"> {{data.msg}} </p>
+    <p class="msg"> {{data.msg}} </p>
 </mat-dialog-content>
 
-<mat-dialog-actions *ngIf = "data.type=='showClose'">
-    <button mat-stroked-button class="border-light-grey color_black background-darkGrey" (click)="close()" cdkFocusInitial>Ok</button>
+<mat-dialog-actions *ngIf="data.type=='showClose'">
+    <button mat-stroked-button class="border-light-grey color_black background-darkGrey" (click)="close()"
+        cdkFocusInitial>Ok</button>
 </mat-dialog-actions>
 
 <mat-dialog-actions *ngIf="data.type=='confirmAlert'">
-    <button mat-stroked-button [mat-dialog-close]="true" class="border-light-grey color_black background-darkGrey" cdkFocusInitial>Yes</button>
-    <button mat-flat-button   [mat-dialog-close]="false" class= "background-maroon">No</button>
+    <button mat-stroked-button [mat-dialog-close]="true" class="border-light-grey color_black background-darkGrey"
+        cdkFocusInitial>
+        {{data.confirmText ?data.confirmText :  'Yes'}}</button>
+    <button mat-flat-button [mat-dialog-close]="false" class="background-maroon">
+        {{data.cancelText ?data.cancelText :  'No'}}</button>
 </mat-dialog-actions>
