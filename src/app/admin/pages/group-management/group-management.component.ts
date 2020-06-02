@@ -278,7 +278,7 @@ export class GroupManagementComponent implements OnInit {
 
   updategroupdetails(groupform) {
     let value: any;
-    value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
+    value = this.toggleevent ? this.toggleevent : this.currentpath.is_active;
     this.toggleevent = '';
     // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
