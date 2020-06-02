@@ -46,6 +46,7 @@ import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component
 import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import {MatNativeDateModule} from '@angular/material';
+import { PagesModule } from './../pages/pages.module';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
@@ -90,15 +91,17 @@ import {MatNativeDateModule} from '@angular/material';
         ChartsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-       
+        PagesModule
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
-    declarations: [DndDirective, CatalogueManagementComponent,AdminDashboardComponent,
-        AuthComponent, UserManagementComponent, ReportManagementComponent,
-        AddUserComponent, GroupManagementComponent, AdminCoursesComponent, PublishCourseComponent,
-        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
+    declarations: [DndDirective,
+        AuthComponent, UserManagementComponent, GroupManagementComponent,AdminCoursesComponent,
+        // ReportManagementComponent, AddUserComponent, , CatalogueManagementComponent, AdminDashboardComponent,
+        PublishCourseComponent,
+        // CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent
+    ],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
