@@ -1,560 +1,264 @@
 <app-header></app-header>
-<nav aria-label="breadcrumb" class="coursebreadcrumb">
+<nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Learner/MyCourse">Courses</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{course && course.course_name}}</li>
+
+        <li class="breadcrumb-item active" aria-current="page">{{course.course_name | titlecase }}</li>
     </ol>
 </nav>
 
-<div *ngIf="course != null">
-    <div class="container">
-        <!-- <div class="row section_1" [style.background]="'url('+course.course_img_url+')'"> -->
-        <div class="row section_1" [style.background]="'url(../../../../assets/learner/lens.jpg)'">
-            <div class="col-md-8 section_1_a">
-                <p class="course_name f_wt_500 ">{{course.course_name | titlecase }} </p>
-                <div class="display_flex">
-                    <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class="c_r"></bar-rating>
-                    <strong class="f_size_23 space_5">{{course.rating || '1.0'}}
-                        ({{course.max_student_enrollments_allowed || 2300}})</strong>
+<div class="row" style="padding: 12px;">
+    <!-- right side -->
+    <div class="col-4">
+        <div class="row">
+            <div class="col-9">
+                <h1 class="name">{{course.course_name | titlecase }}</h1>  
+            </div>
+            <div class="col-3">
+                <div style="margin-top: 7px;">
+                    <span  (click)="selectWishlist(course)">
+                        <em class="fa fa-heart" *ngIf="course?.wishlisted == false"
+                            style="-webkit-text-stroke-width: 2px;"></em>
+                        <em class="fa fa-heart" *ngIf="course?.wishlisted == true"
+                            style="color: #db3137 !important;"></em>
+                        Wishlist
+                    </span>
                 </div>
-                <p class="course_desc">{{course.short_description}}</p>
-                <table class="width_90">
-                    <tr>
-                        <td>{{course.max_student_enrollments_allowed}} Already enrolled</td>
-                        <td>
-                            <i class="fa fa-id-card-o" style="background-color: #ebebeb;box-shadow: none;"></i>
-                            Certificate
-                        </td>
-                        <td>
-                            <i class="fa fa-book" style="background-color: #ebebeb;box-shadow: none;"></i>Self
-                            Placed
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> <span class="background-maroon whitefont border-radius-5 p-5px f_wt_initial">Last updated
-                                {{course.updated_at | date}}</span></td>
-                        <td> <i class="fa fa-language" style="background-color: #ebebeb;box-shadow: none;"></i>
-                            {{course.course_language}}</td>
-                    </tr>
-                </table>
-                <i class="fa fa-play course_preview_icon pointer" aria-hidden="true" (click)="coursePlay()"></i>
-                <div class="course_preview" (click)="coursePlay()">
-                    <h2>Course <br> Preview</h2>
-                </div>
+            </div>
+        </div>
+        <div class="row">
+            <span class="short-desc">{{course.short_description}}</span>
+        </div>
+        <div class="row">
+            <div class="col-12 display_flex">
+                <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class=""></bar-rating>
+                <strong class="f_size_23">{{course.rating || '1.0'}}  (500 Rating)</strong> 
+         </div>
+    </div>
 
-                <div class="partner_image_div">
-                    <!-- <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right  m-l-2 border-radius-5">
-                    <img src="../../../../assets/learner/8.jpg" width="15%" class="float_right border-radius-5"> -->
-                    <img class="m-l-30 border-radius-5" width="15%" src="{{course?.course_img_url}}">
-                </div>
-                <!-- </div> -->
-            </div>
-            <div class="col-md-4">
-                <mat-card class="section_1_card_1 background_trans">
-                    <mat-card-title *ngIf="course.price">
-                        <span class="icon f_wt_400 f_size_23">₹ {{course.price}}</span>
-                        <span class="f_wt_200 strike_text f_size_16">Rs {{course.price}}</span>
-                        <span class="f_wt_200 f_size_16"> {{course.rating}}%Off </span>
-                    </mat-card-title>
-                    <mat-card-content>
-                        <p class="day_left"><i class="fa fa-hourglass"
-                                style="background-color: transparent;border: none;box-shadow: none;"
-                                aria-hidden="true"></i>
-                            {{course.certificate_html_view_enabled}} day left at this price</p>
-                        <div>
-                            <button mat-raised-button class="add_to_cart background-maroon pointer"
-                                *ngIf="course.enrollment_status == 'null'" (click)="enrollCourse()">ENROLL</button>
-                            <button mat-raised-button class="add_to_cart background-maroon"
-                                *ngIf="course.enrollment_status == 'approved'"
-                                disabled="{{course.enrollment_status == 'approved'}}">ENROLLED</button>
-                            <button mat-raised-button class="add_to_cart background-maroon"
-                                *ngIf="course.enrollment_status == 'rejected'"
-                                disabled="{{course.enrollment_status == 'rejected'}}">REQUEST REJECTED</button>
-                            <button mat-raised-button class="add_to_cart background-maroon"
-                                *ngIf="course.enrollment_status == 'pending'"
-                                disabled="{{course.enrollment_status == 'pending'}}">REQUESTED</button>
-                        </div>
-                        <br>
-                        <!-- <div><button mat-raised-button class="add_to_cart bg_buy_now">BUY NOW</button></div><br> -->
-                        <div>
-                            <span class="btn btn-primary btn-primary btn2 pointer"><i class="fa fa-share"
-                                    style="-webkit-text-stroke-width: 2px;"></i> Share</span>
-                            <span class="btn btn-primary btn-primary btn2 pointer" (click)="selectWishlist(course)">
-                                <i class="fa fa-heart" *ngIf="course.wishlisted == false"
-                                    style="-webkit-text-stroke-width: 2px;"></i>
-                                <i class="fa fa-heart" *ngIf="course.wishlisted == true"
-                                    style="color: #db3137 !important;"></i>
-                                Wishlist
-                            </span>
-                        </div>
-                    </mat-card-content>
-                    <br><br>
-                </mat-card>
-            </div>
+    <div class="row">
+        <div class="col-12 margin-5">
+            <button class="enrollbtn">ENROLL NOW</button>
         </div>
     </div>
 
-
-
-    <div class="wrap_content">
-        <div class="tabs width_70">
-            <button mat-raised-button>About</button>
-            <button mat-raised-button (click)="scroll(Take_away)">Take aways</button>
-            <button mat-raised-button (click)="scroll(Syllabus)">Syllabus</button>
-            <button mat-raised-button (click)="scroll(Review)">Review</button>
-            <button mat-raised-button (click)="scroll(Instructor)">Instructor</button>
-            <button mat-raised-button (click)="scroll(FAQ)">FAQ</button>
-        </div>
-
-        <br>
-        <div class="float_right m-r-5">
-            <button mat-mini-fab class="iconmat">
-                <!-- <i class='fa fa-comments' style='color:rgb(29, 29, 187); -webkit-text-stroke-color: rgb(29, 29, 187);
-            margin-right: 0px;padding: 0px;background: transparent;box-shadow:none;border:none'> -->
-                <img src="../../../../assets/images/icon_chat.png">
-                <!-- </i> -->
-            </button>
-        </div>
-
-        <div #About class="about_tab" class="display_flex m-l-5">
-            <div class="width_70"><br>
-                <h2>Details About Course</h2>
-                <table>
-                    <tr>
-                        <td class="width_15 f_size_16 f_wt_500">Course Instructor</td>
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
-                            {{course.author_details && course.author_details[0].author_name}}</td>
-                        <!-- <td style="width: 40%;font-size: 15px;font-weight: 400;">{{course.author_name}}</td> -->
-                        <td class="width_10"></td>
-
-                    </tr>
-                    <tr>
-                        <td class="width_15 f_size_16 f_wt_500">Pre Requisite</td>
-                        <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
-                            <button *ngFor="let preque of course?.pre_requisite">
-                                {{preque.name ? preque.name : 'none'}}
-                            </button>
-                        </td>
-                        <td class="width_10"></td>
-                    </tr>
-                    <tr>
-                        <td class="width_15 f_size_16 f_wt_500">Course Description</td>
-                        <!-- <td class="width_40 f_size_16 f_wt_400" style="color: grey;"> -->
-                        <td class="width_40 f_size_16 f_wt_400" style="color: grey;">
-                            <div [ngClass]="{'show-less': showShortDesciption}">{{course.course_description }}</div>
-                            <span (click)="alterDescriptionText()"
-                                class="viewtxt">{{ showShortDesciption  ? 'View More > ': 'View Less' }}</span>
-                        </td>
-
-
-                        <td class="width_10"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="width_30">
-                <h2>This Course Includes</h2>
-                <table>
-                    <tr>
-                        <td>
-                            <i class="fa fa-film"></i>
-                        </td>
-                        <!-- <td>20 hrs on-demand video</td> -->
-                        <td>{{course.article_count}} hrs on-demand video</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file"></i></td>
-                        <td>{{course.downloadable_resource_count}} downloadable resources</td>
-                        <!-- <td> downloadable resources</td> -->
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-pause"></i></td>
-                        <!-- <td>Level in Analytics</td> -->
-                        <td>{{course.course_level}} Level in Analytics</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-circle" style="color: rgb(28, 28, 156);"></i></td>
-                        <!-- <td>Level in Analytics</td> -->
-                        <td>{{course.article_count}} members from Organization/ Institute have enrolled in this course
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div #Take_away> </div>
-        <div
-            *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
-        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '') ||
-        course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''; else noTakeaway">
-            <br> <br><br><br>
-        </div>
-        <ng-template #noTakeaway>
-            <br> <br><br><br>
-            <h2>No Takeaways</h2>
-        </ng-template>
-        <div class="display_flex"
-            *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
-        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '') ||
-        course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">
-            <h2 class="m-l-5">
-                Takeaways</h2>
-            <button mat-raised-button (click)="clickedT('media')" style="border: none;
-        box-shadow: none;color : red;margin-left: 10px;" *ngIf="(course && course.takeway_details && course.takeway_details[0] &&
-            course?.takeway_details[0].media && course?.takeway_details[0].media[0] != '')">Media</button>
-            <button mat-raised-button (click)="clickedT('text')" style="border: none;
-        box-shadow: none;color : red"
-                *ngIf="course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">Text</button>
-        </div>
-        <!-- <mat-tab-group>{{clicked}} -->
-        <!-- <mat-tab label="Media" style="color:red"> -->
-        <div style="width: 100%;height: 600px;" *ngIf="clicked == 'media' && course && course && course.takeway_details && course.takeway_details[0] &&
-        course?.takeway_details[0].media && course?.takeway_details[0].media[0] != ''">
-            <owl-carousel-o [options]="customOptions1" class="takeway">
-                <ng-template carouselSlide [id]="img" *ngFor="let img of course?.takeway_details[0].media">
-                    <img [src]="img" height="500px">
-                </ng-template>
-            </owl-carousel-o>
-        </div>
-        <!-- </mat-tab>
-                <mat-tab label="Text" style="color:red"> -->
-        <br>
-        <ul
-            *ngIf="clicked == 'text' && course && course?.takeway_details && course.takeway_details[0].text != '' && course.takeway_details[0].description != ''">
-            <li class="f_size_17" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">
-                {{text.text ? text.text : text.description  }}
-            </li>
-        </ul>
-        <!-- </mat-tab>
-            </mat-tab-group> -->
-        <br>
-
-        <br>
-    </div>
-    <h2 class="m-l-5"> A Step Towards</h2>
-    <p class="m-l-10">{{course?.step_towards}}</p>
-
-
-    <div #Instructor></div>
-    <br>
-    <br>
-    <div style=" width: 100%;background-color: rgb(192, 191, 189);"><br>
-        <p class="m-l-10 f_wt_500 f_size_18"> Instructor details</p><br><br>
-        <div class="width_100 Instructor_dtl">
-            <owl-carousel-o [options]="customOptions">
-                <ng-template carouselSlide *ngFor="let i of course.author_details" style="height: 45vh;">
-                    <div class="display_flex width_70 m-l-15" style="height: 18vh;">
-                        <img src=" ../../../../assets/learner/lens.jpg">
-                        <div class="m-l-5">
-                            <p> <strong>{{i.author_name}} </strong></p>
-                            <p> {{i.description}}</p>
-                        </div>
-                    </div>
-                    <br><br>
-                </ng-template>
-            </owl-carousel-o>
+    <div class="row">
+        <div class="col-3 margin-15">
+            <img class="parterImg" alt="true" src="../../../../assets/courses/1.jpg">
         </div>
     </div>
 
-    <div #Syllabus> </div><br><br><br>
-    <div class="display_flex wrap_content">
-        <div class="width_80">
-            <br>
-            <h2> Course Outline</h2><br>
-            <!-- <mat-accordion>
-                <mat-expansion-panel *ngFor="let i of syllabus" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header style="background-color: rgb(187, 186, 186);">
-                        <mat-panel-title>
-                            {{i?.package}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                                      <br>
-                    <table>
-                        <tr>
-                            <td width="96%"><i class="fa fa-circle"
-                                    style="background-color: transparent;font-size: 10px;color: black;box-shadow:none;border:none"
-                                    aria-hidden="true"></i>{{i?.package_dec}}</td>
-                            <td (click)="playCourse(i)"><i class="fa fa-play" aria-hidden="true"
-                                    style="font-size:11px;background: rgb(29, 29, 29);color: whitesmoke;box-shadow:none;border:none"></i>
-                            </td>
-                          
-                        </tr>
-                    </table>
-            
-                </mat-expansion-panel>
-            </mat-accordion> -->
+    <div class="row margin-15 ">
+        <div class="col-12">
+            <div class="stuEnrolled">213000 student enrolled | Last updated {{ course.updated_at | date }}</div>
+        </div>
+    </div>
 
+    <div class="row margin-15">
+        <div class="col-8 Outine">
+            Course Outine
+        </div>
+        <div class="col-4">
+            <i class="fa fa-clock-o" aria-hidden="true"></i> 40 mins , 40 sec
+        </div>
+    </div>
+    <div class="row margin-5">
+        <div class="col-12">
             <section class="accordion" *ngFor="let res of content?.coursedetails">
-                <input type="checkbox" name="collapse" [id]="res?.modulename">
-                <h2 class="handle">
-                    <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-                            <b style="padding-left: 18px;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
-                </h2>
-                <div class="content">
-                    <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
-                        <div class="col-8">
-                            <ol class="submod">
-                                <li>{{i+1}} : {{mod?.topicname}}</li>
-                            </ol>
-                        </div>
-
-                        <!-- <div class="col-4">
-                      <mat-form-field style="text-align: right;margin-top: 5%;">
-                        <mat-label>Resourse</mat-label>
-                        <mat-icon matPrefix>folder</mat-icon>
-                        <mat-select>
-                          <mat-option *ngFor="let file of mod.resourse?.files">
-                            <a href="{{file.path}}" download>{{file.path}}</a>
-                          </mat-option>
-                          <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;"
-                            (click)="downloadAll(mod.resourse?.files)">
-                            <button class="btn">Download all</button>
-                          </mat-option>
-          
-                        </mat-select>
-                      </mat-form-field>
-                    </div> -->
-                    </div>
+              <input type="checkbox" name="collapse" [id]="res?.modulename">
+              <h2 class="handle">
+                <label [for]="res?.modulename"><span>{{res?.modulename}}</span></label>
+              </h2>
+              <div class="content" >
+                <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
+                  <div class="col-8"><br>
+                    <ol class="submod">
+                      <li><span>{{i+1}} : {{mod?.topicname}}</span></li>
+                    </ol>
+                  </div>
                 </div>
+              </div>
             </section>
-
-
-
-
         </div>
-        <br>
-        <!-- <div class="width_40 m-l-5">
-            <h2>Learning Paths</h2><br>
-            <img src="../../../../assets/learner/lens.jpg" width="100%">
-        </div> -->
     </div>
+</div>
+     <!-- right end side -->
 
-    <div #Review></div><br><br><br><br><br>
+       <!-- Left side -->
+    <div class="col-8 videoplayer">
+        <app-video-player [url]="course"></app-video-player>
+       
 
-    <mat-card>
-        <div class="display_flex m-l-5">
-            <br><br><br>
-            <div class="width_60 float_left">
-                <h2 class="float_left m-l-5">Reviews</h2>
-                <br><br><br>
-                <div class="display_flex width_100" *ngFor="let r of course.review_and_faq">
-                    <div class="width_10">
-                        <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
-                            style="border-radius: 50px;">
-                        <br>
-                        <p class="display_flex">
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="r.rating" [max]="5"></bar-rating>
-                            <strong>{{r.rating}}</strong>
-                        </p>
-
-                    </div>
-                    <div class="width_15">
-                        <strong>{{r.user_name}}</strong><br>
-                        <small>7 days before</small><br>
-                        <small>{{r.course_id}} years of experience</small>
-                    </div>
-                    <div class="width_60">
-                        {{r.review}}
-                    </div>
+        <div class="row  margin-15">
+            <div class="col-6">
+                <div class="sm-box">
+                    <span>Course Features</span>
                 </div>
-                <mat-card-footer *ngIf="course.review_and_faq">View More ></mat-card-footer>
-
-
-                <br>
-                <!-- <div class="display_flex width_100">
-                <div class="width_10">
-                    <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
-                        style="border-radius: 50px;">
-                    <br>
-                    <p class="display_flex">
-                        <bar-rating class="no_margin" [readOnly]="true" [rate]="5" [max]="5"></bar-rating>
-                        <strong>5</strong>
-                    </p>
-
-                </div>
-                <div class="width_15">
-                    <strong>Anurag</strong><br>
-                    <small>1 week ago</small><br>
-                    <small>2 years of experience</small>
-                </div>
-                <div class="width_50" style="color: rgb(61, 61, 61)">
-                    ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                    in voluptate velit esse cillum dolore eu
-                </div>
-            </div> -->
-
-                <!-- <button mat-raised-button style="color: red;text-align: center;border: none;" (click)="openb()" >Read more..</button> -->
-                <!-- {{open}} -->
-                <div class="display_flex width_100" *ngIf="open">
-                    <div class="width_10">
-                        <img src="../../../../assets/learner/lens.jpg" width="70%" height="60px"
-                            style="border-radius: 50px;">
-                        <br>
-                        <p class="display_flex">
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
-                            <strong>1</strong>
-                        </p>
-
+                <div class="row ">
+                    <div class="col-4 display_flex">
+                        <img class="modeIcon" src="../../../../assets/learner/certificate.svg" alt="">
+                        <span class="modeName">Certificate</span>
                     </div>
-                    <div class="width_15">
-                        <strong>Ankit</strong><br>
-                        <small>1 week ago</small><br>
-                        <small>2 years of experience</small>
+                    <div class="col-4 display_flex">
+                        <img class="modeIcon" src="../../../../assets/learner/self-paced.svg" alt="">
+                        <span class="modeName">Self Paced</span>
                     </div>
-                    <div class="width_50" style="color: rgb(61, 61, 61)">
-                        ion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit
-                        in voluptate velit esse cillum dolore eu
+                    <div class="col-4 display_flex">
+                        <img class="modeIcon" src="../../../../assets/learner/languages-known.svg" alt="">
+                        <span class="modeName">English</span>
                     </div>
                 </div>
 
+                <div class="row margin-10">
+                    <div class="col-8 display_flex">
+                        <img class="modeIcon" src="../../../../assets/learner/application-based-training.svg" alt="">
+                        <span class="modeName">Application Based Learning</span>
+                    </div>
+                    <div class="col-4 display_flex">
+                        <img class="modeIcon" src="../../../../assets/learner/qualification.svg" alt="">
+                        <span class="modeName">Qualification</span>
+                    </div>
+               
+                </div>
             </div>
-            <div class="width_40 float_left">
-                <h2>Students Feedback</h2><br>
-                <div class="display_flex ">
 
-                    <div class="width_25 center_align">
-                        <br>
-                        <span class="rating_number f_wt_600">{{course.rating}}</span>
-                        <!-- <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating> -->
-                        <p>Course ratings</p>
-                    </div>
-                    <div class="width_50">
-                        <div class="display_flex m-t-s">
-                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="70">
-                            </mat-progress-bar>
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="3" [max]="5"></bar-rating>
-                            <span class="f_wt_500 f_size_15 m-l-2">4.5</span>
+            <div class="col-6">
+                <div class="sm-box">
+                    <span>This Course Includes</span>
+                    <div class="row margin-10">
+                        <div class="col-1 display_flex">
+                            <img class="sm-icon" src="../../../../assets/learner/on-demand-video.svg" alt="">
                         </div>
-                        <br>
-                        <div class="display_flex">
-                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="30">
-                            </mat-progress-bar>
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="1" [max]="5"></bar-rating>
-                            <span class="f_wt_500 f_size_15 m-l-2">4.0</span>
-                        </div><br>
-                        <div class="display_flex">
-                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="90">
-                            </mat-progress-bar>
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="4" [max]="5"></bar-rating>
-                            <span class="f_wt_500 f_size_15 m-l-2">3.5</span>
-                        </div><br>
-                        <div class="display_flex">
-                            <mat-progress-bar class="example-margin" [color]="red" [mode]="mode" [value]="50">
-                            </mat-progress-bar>
-                            <bar-rating class="no_margin" [readOnly]="true" [rate]="2" [max]="5"></bar-rating>
-                            <span class="f_wt_500 f_size_15 m-l-2">3.0</span>
+                        <div class="col-10">
+                            <span class="tit">20 hrs on demand video</span>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-1 display_flex">
+                            <img class="sm-icon" src="../../../../assets/learner/asset_aownload.svg" alt="">
+                        </div>
+                        <div class="col-10">
+                            <span class="tit">136 downloadable resources</span>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-1 display_flex">
+                            <img class="sm-icon" src="../../../../assets/learner/skill-level.svg" alt="">
+                        </div>
+                        <div class="col-10">
+                            <span class="tit">Intermediate level in analytics</span>
+                        </div>
+                    </div>
+                    <div class="row margin-10">
+                        <div class="col-1 display_flex">
+                            <img class="sm-icon" src="../../../../assets/learner/org_member.svg" alt="">
+                        </div>
+                        <div class="col-10">
+                            <span class="tit">10 members from organisation / institute have enrolled in this course</span>
                         </div>
                     </div>
                 </div>
             </div>
+             
         </div>
-    </mat-card>
-
-    <div #FAQ></div>
-    <br><br><br>
-    <div class="wrap_content">
-        <div class="width_60">
-            <h2>FAQ</h2>
-            <mat-accordion>
-                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            It has roots in a piece of classical Latin literature from 45 BC, making
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                </mat-expansion-panel>
-                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            It has roots in a piece of classical Latin literature from 45 BC, making
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                </mat-expansion-panel>
-                <mat-expansion-panel class="faq_border" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            It has roots in a piece of classical Latin literature from 45 BC, making
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                </mat-expansion-panel>
-
-                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            It has roots in a piece of classical Latin literature from 45 BC, making
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                </mat-expansion-panel>
-                <mat-expansion-panel *ngIf="open" class="faq_border" style="margin-bottom: 10px;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            It has roots in a piece of classical Latin literature from 45 BC, making
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                </mat-expansion-panel>
-
-            </mat-accordion>
-            <mat-card-footer *ngIf="course.review_and_faq" class="pointer" (click)="open = !open">
-                {{open ? 'View Less >' : 'View More >' }}</mat-card-footer>
+        <div class="line"></div>
+       
+        <div class="row" style="margin-top:80px">
+            <div class="col-12">
+                <div >
+                    <h3 class="head-h1">Course Description</h3>
+                    <div class="vertical"></div>
+                    <p class="desc">{{course?.course_description}}</p>
+                </div>
+            </div>
         </div>
+        <div class="row margin-10">
+            <div class="col-12">
+                    <h3 class="head-h1">Instructors</h3>
+                    <div class="vertical"></div>
+                    <div class="silder" >
+                        <owl-carousel-o [options]="customOptions" class="takeway ">
+                           <ng-template carouselSlide [id]="author.author_name"   *ngFor="let author of course?.author_details" >
+                               <div class="display_flex">
+                                <div class="instr-box">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <img class="img-inst" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'" alt="">
+                                        </div>
+                                        <div class="col-9">
+                                            <h1 class="authorname">{{author?.author_name}}</h1>
+                                        </div>
+                                        <p class="author-desc">{{author?.description}}</p>
+                                    </div>  
+                                </div>
+                               </div>
+                           </ng-template>
+                          </owl-carousel-o>
+    
+                    </div>
+            </div>
+        </div>
+
+        <div class="row margin-10">
+            <div class="col-12">
+                    <div class="row">
+                        <div class="col-2">
+                            <h3 class="head-h1">Takeaways</h3>
+                            <div class="vertical"></div>
+                        </div>
+                        <div class="col-6">
+                            <button (click)="clickedT('media')" class="tabbtn">Media</button>
+                            <button  (click)="clickedT('text')" class="tabbtn">Text</button>
+                        </div>
+                    </div>
+                   
+                <div class="silder"  *ngIf="clicked == 'media'">
+                    <owl-carousel-o [options]="customOptions1" class="takeway">
+                        <ng-template carouselSlide [id]="img" *ngFor="let img of course?.takeway_details[0].media"> 
+                          <img alt="" [src]="img ? img : '../../../../assets/learner/lens.jpg' " height="500px">
+                        </ng-template>
+                      </owl-carousel-o>
+
+                </div>
+                <ul *ngIf="clicked == 'text'">
+                    <li class="takewaytext" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">* {{text.text ? text.text : text.description }}
+                    </li>
+                </ul>
+            </div>
+            </div>
+
+            <div class="row margin-10">
+                <div class="col-12">
+                            <h3 class="head-h1">Step towards</h3>
+                            <div class="vertical"></div>
+                            <p class="desc">{{course?.takeway_details[0].description}}</p>
+                </div>
+            </div>
+
+            <div class="row margin-10">
+                <div class="col-12">
+                    <h3 class="head-h1">Frequently asked questions</h3>
+                     <div class="vertical"></div>
+                     <button class="customButton" (click)="isCollapsed = !isCollapsed">
+                         What do Edutech courses include ?
+                       <div style="text-align: right;"><i class="fa fa-angle-down arrow" aria-hidden="true"></i></div> 
+                      </button>
+                        <div class="card"  *ngIf="isCollapsed">
+                          <div class="card-body">
+                              <ul class="">
+                                <li >
+                                    <p class="desc">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</p>
+                                </li>
+                              </ul>
+                          </div>
+                        </div>
+                      
+                </div>
+                <div class="margin-10"></div>
+            </div>
+
+
     </div>
-    <br><br><br>
-
+     <!-- Left end side -->
 </div>
 
-<div style="z-index: -1;" *ngIf="course">
-    <h2 class=" m-l-5" *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0">
-        Frequently bought together
-    </h2>
-    <!-- <owl-carousel-o [options]="slideOptions">
-        <ng-template  carouselSlide>Slide 1</ng-template>
-        <ng-template carouselSlide>Slide 2</ng-template>
-        <ng-template carouselSlide>Slide 3</ng-template>
-    </owl-carousel-o> -->
-    <owl-carousel-o [options]="trendingCategorires" class="arrow"  *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0">
-        <ng-template carouselSlide *ngFor="let course of course.frequently_bought_together"
-           >
-            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
-                [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
-                [showCartBtn]="true">
-            </app-course-component>
-        </ng-template>
-    </owl-carousel-o>
-    <!-- <app-top-courses *ngIf="course.frequently_bought_together && course.frequently_bought_together.length > 0"
-        [from]="'cd'" [CourseList]="course.frequently_bought_together" [showCartBtn]="true" [showWishlist]="true"
-        [canNavigate]="true" [showStatus]="false"></app-top-courses> -->
-
-
-    <h2 class="m-l-5" *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0">
-        People Also Viewed
-    </h2>
-    <owl-carousel-o [options]="trendingCategorires" class="arrow"
-        *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0">
-        <ng-template carouselSlide *ngFor="let course of course.people_also_viewed">
-            <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true" [showWishlist]="true"
-                [showStatus]="false" [showDate]="false" [isDraft]="false" [showCount]="false" [showRating]="true"
-                [showCartBtn]="true">
-            </app-course-component>
-        </ng-template>
-    </owl-carousel-o>
-    <!-- <app-top-courses [from]="'cd'" *ngIf="course.people_also_viewed && course.people_also_viewed.length > 0"
-        [CourseList]="course.people_also_viewed" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
-        [showStatus]="false"></app-top-courses>
-</div> -->
-</div>
-
-<br><br><br><br><br>
-<app-footer></app-footer>

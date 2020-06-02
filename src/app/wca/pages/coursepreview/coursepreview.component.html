@@ -189,9 +189,9 @@
             <img class="image" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'">
           </div>
           <div class="col-md-8 ">
-            <div class="cardhead"><b>{{author.author_name}}</b></div><br>
+            <div class="cardhead"><b>{{author?.author_name}}</b></div><br>
             <div style="margin-left: 5%;">
-              <p style="word-break: normal;">{{author.description}}</p>
+              <p style="word-break: normal;">{{author?.description}}</p>
             </div>
           </div>
         </div>

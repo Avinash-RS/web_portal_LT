@@ -15,37 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./coursedetails.component.scss']
 })
 export class CoursedetailsComponent implements OnInit {
-
-
-  trendingCategorires: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      },
-      1200: {
-        items: 4
-      }
-    },
-    nav: true
-  }
-
-  course: any = {};
+  course: any = null;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -64,22 +34,29 @@ export class CoursedetailsComponent implements OnInit {
 
   customOptions: any = {
     loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
     navSpeed: 700,
     navText: ['<', '>'],
     responsive: {
       0: {
         items: 1
       },
-      400: {
+      100: {
         items: 2
+      },
+      440: {
+        items: 3
+      },
+      640: {
+        items: 4
       }
     },
     nav: true
-  }
+  };
+
   // open : boolean = false;
   wishlist: any = [];
   syllabus: {}[];
@@ -124,6 +101,7 @@ export class CoursedetailsComponent implements OnInit {
     this.loader.show();
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      // 
     this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
