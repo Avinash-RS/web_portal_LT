@@ -9,6 +9,7 @@ import { CommonServicesService } from '../../services/common-services.service';
 export class SearchComponent implements OnInit {
   searchcourse: any;
   searchName : any;
+  
   // courseName: any;
   constructor(public CommonServices: CommonServicesService) { }
 
@@ -20,7 +21,8 @@ export class SearchComponent implements OnInit {
    if(event.keyCode == 32 && courseName == ''){
     return false;
    }
-      this.CommonServices.getCoursesByName(courseName).subscribe(data => {
+   var pagenumber = 1;
+      this.CommonServices.getCoursesByName(courseName, pagenumber).subscribe(data => {
       this.searchcourse = data.data['getCoursesByName'].message;
       this.CommonServices.globalSearch$.next(this.searchcourse);
       if(this.searchcourse.length == 0) {

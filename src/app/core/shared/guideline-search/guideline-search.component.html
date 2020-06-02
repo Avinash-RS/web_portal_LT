@@ -18,6 +18,12 @@
         <span class="cover" *ngFor="let item of selectedFilter?.filterVal; let i = index">{{item}}
           <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
         </span>
+        <span class="cover" *ngIf="publishedFromDate && publishedToDate">{{publishedFromDate}}
+          <!-- <mat-icon class="clear-icon" (click)="removeFromdate()">clear</mat-icon> -->
+        </span>
+        <span class="cover" *ngIf="publishedFromDate && publishedToDate">{{publishedToDate}}
+          <!-- <mat-icon class="clear-icon" (click)="removeFromdate()">clear</mat-icon> -->
+        </span>
       </div>
 
       <div class="col-2">
