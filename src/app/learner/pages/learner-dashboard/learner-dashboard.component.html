@@ -153,24 +153,12 @@
 
                <div class="col-8">
                 <h3 class="coursehead">{{dashboard?.course_name}}</h3>
-                <mat-progress-bar class="border-radius-5" mode="determinate"
-                  [value]="0"
-                  >
+                <mat-progress-bar class="border-radius-5" mode="determinate"[value]="dashboard?.coursePlayerStatus != null ? dashboard?.coursePlayerStatus.course_percentage : '0' ">
                 </mat-progress-bar>
-                <!-- <span class="percent">{{dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0' }}% Complete</span> -->
+                <span class="percent">{{dashboard?.coursePlayerStatus != null ? dashboard?.coursePlayerStatus.course_percentage : '0'}}% Complete</span>
               </div>
             </div>
-            
-       
-
-
           </div>
         </div>
-
-
-
-
   </div>
-
-
 </div>
