@@ -182,6 +182,80 @@ h3{
     box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
     margin-top: 20px;
   }
-    
+
+  .submit {
+    width: 45%;
+    border: none !important;
+    background-color: $color-white;
+    color: $color-blue;
+    text-align: left;
+    box-shadow: 0px 7px 5px 2px #0b0b0b17;
+    height: 45px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 3px;
+    margin-left: 59.5%;
+    margin-top: -3%;
+  }
   
+  .submit:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: $color-blue ;
+    color: $color-white;
+  }
+//   .col-3 {
+//     flex: 0 0 25%;
+//     max-width: 83%;
+// }
+  
+    
+
+  /* The Modal*/
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+  text-align: left !important;
+}
+
+.modal-body {padding: 2px 16px;}
 

@@ -171,6 +171,7 @@ export class GroupManagementComponent implements OnInit {
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
       this.getAllUser(0);
+      console.log(this.currentpath);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
@@ -234,6 +235,8 @@ export class GroupManagementComponent implements OnInit {
     let str;
     let strvalue;
     this.formsubmitted = true;
+    // form.value.group_name.replace(/^[ ]+|[ ]+$/g,'');
+    form.value.group_name = form.value.group_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
     if (form.valid) {
       this.formsubmitted = false;
       if (this.currentpath) {
@@ -275,7 +278,7 @@ export class GroupManagementComponent implements OnInit {
 
   updategroupdetails(groupform) {
     let value: any;
-    value = this.toggleevent ? this.toggleevent : this.currentpath.is_active;
+    value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
     this.toggleevent = '';
     // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({

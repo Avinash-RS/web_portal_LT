@@ -484,6 +484,7 @@ export class CatagoryManagementComponent implements OnInit {
         input_image: value.category_image || '',
         level: formType === 'category' ? 1 : (formType === 'subcategory') ? 2 : 3,
       };
+      category.input_name = category.input_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
       this.adminservice.updateCatagory(category).subscribe((result: any) => {
         formType === 'category' ? this.addCategoryForm?.reset() : (formType === 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();
@@ -508,6 +509,7 @@ export class CatagoryManagementComponent implements OnInit {
         parent_category_id: this.selectedCategory?.category_id || 'null',
         parent_sub_category_id: this.selectedSubCategory?.sub_category_id || 'null',
       };
+      category.input_name = category.input_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
       this.adminservice.createCategory(category).subscribe((result: any) => {
         formType === 'category' ? this.addCategoryForm?.reset() : (formType === 'subcategory') ? this.addSubCategoryForm?.reset() :
           this.addSuperSubCategoryForm?.reset();

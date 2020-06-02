@@ -3,90 +3,142 @@ import { MatDialog } from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
-import { json } from 'd3';
+import { AdminServicesService } from '@admin/services/admin-services.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-auditlog',
   templateUrl: './auditlog.component.html',
-  styleUrls: ['./auditlog.component.css']
+  styleUrls: ['./auditlog.component.scss']
 })
 export class AuditlogComponent implements OnInit {
-  columns: any;
-  displayedColumns: any;
   reports: any;
   dataSource = new MatTableDataSource<any>();
   today = new Date();
   viewdetail: any;
+  requiredfield = false;
+  enablefield = true;
+  resultsLength: any;
+  columns = [
+    { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
+    // { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
+    { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${moment(element.created_on).format('LLL')}` },
+    { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element.updated_on).format('LLL')}` },
+    { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element.admin_username}` },
+  ];
+  displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private adminservice: AdminServicesService) { }
 
   ngOnInit() {
-    this.reports =[{
-      // "_id" : ObjectId("5ed1c64184817d1bf4e8f9b0"),
-      api_call_request : [
-        [
-          {
-            catalogue_id : "959c4yk51",
-            course_id : [
-              "09xmm9jn"
-            ],
-            select_all : true
-          }
-        ]
-      ],
-      api_call_response : [
-        {
-          response : {
-            user_id: "1234ab",
-            username : "lxpadmin"
-          },
-          category_response : {
-            success : true,
-            message : "courses unmapped from catalogue successfully"
-          }
-        }
-      ],
-      created_by : "admin",
-      created_on : "2020-05-29T14:25:35.574+05:30",
-      updated_on : "2020-05-29T14:25:35.574+05:30",
-      is_active : true,
-      api_request_url : "/unmapcoursesfromcatalogue",
-      api_call_event : "Courses unmapping from Category",
-      module_name : "Course Module",
-      _v: 0,
-      admin_id : "1234ab",
-      admin_username : "lxpadmin"
-    }]
-    console.log(this.reports)
-    this.columns = [
-      { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
-      { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
-      { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${moment(element.created_on).format('LL')}` },
-      { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element.updated_on).format('LL')}` },
-      { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element.admin_username}` },
-    ];
-    this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
     this.displayedColumns = this.displayedColumns.concat(['action']);
-
-    this.dataSource.data = this.reports;
-
+    this.getallauditreports('0');
+    // this.reports =[{
+    //   // "_id" : ObjectId("5ed1c64184817d1bf4e8f9b0"),
+    //   api_call_request : [
+    //     [
+    //       {
+    //         catalogue_id : "959c4yk51",
+    //         course_id : [
+    //           "09xmm9jn"
+    //         ],
+    //         select_all : true
+    //       }
+    //     ]
+    //   ],
+    //   api_call_response : [
+    //     {
+    //       response : {
+    //         user_id: "1234ab",
+    //         username : "lxpadmin"
+    //       },
+    //       category_response : {
+    //         success : true,
+    //         message : "courses unmapped from catalogue successfully"
+    //       }
+    //     }
+    //   ],
+    //   created_by : "admin",
+    //   created_on : "2020-05-29T14:25:35.574+05:30",
+    //   updated_on : "2020-05-29T14:25:35.574+05:30",
+    //   is_active : true,
+    //   api_request_url : "/unmapcoursesfromcatalogue",
+    //   api_call_event : "Courses unmapping from Category",
+    //   module_name : "Course Module",
+    //   _v: 0,
+    //   admin_id : "1234ab",
+    //   admin_username : "lxpadmin"
+    // }]
   }
 
+  getallauditreports(pgnumber) {
+    this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
+      this.resultsLength = null;
+      if (result?.message) {
+        this.reports = result.message;
+        this.dataSource.data = this.reports;
+        this.resultsLength = result?.total_count;
+      }
+    });
+  }
   openviewdialog(data, templateRef) {
     this.dialog.open(templateRef);
     this.viewdetail = data;
   }
-  closedialogbox(){
+  closedialogbox() {
     this.dialog.closeAll();
   }
-  filter(filterform) {
-    console.log(filterform.valid);
+  datefield(fromdate) {
+    if (fromdate) {
+      this.enablefield = false;
+    }
+  }
+  filter(filterform, pgnumber) {
+    console.log("gg");
+    this.requiredfield = true;
+    if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
+      this.requiredfield = false;
+      const data = {
+        from_date: filterform.value.fromdate.toISOString(),
+        to_date: filterform.value.todate.toISOString(),
+        pagenumber: pgnumber
+      };
+      this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
+        this.resultsLength = null;
+        if (result?.success === true) {
+          this.reports = result?.message;
+          this.dataSource.data = this.reports;
+          this.resultsLength = result.total_count;
+        } else {
+
+        }
+
+      });
+    }
   }
   cancel(filterform) {
     filterform.reset();
+    this.requiredfield = false;
+    this.enablefield = true;
+    this.getallauditreports('0');
   }
-  export(filterform){
-    // window.open(url, '_blank');
-    window.open('https://edutechstorage.blob.core.windows.net/container1/report_audit_information/06260090788166162-audit_report.csv');
+  export(filterform) {
+    this.requiredfield = false;
+    const fromdate = filterform.value.fromdate && filterform.value.todate ? filterform.value.fromdate.toISOString() : 'undefined';
+    const todate = filterform.value.todate && filterform.value.fromdate ? filterform.value.todate.toISOString() : 'undefined';
+    this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
+      if (result?.data?.get_admin_export_auditlog?.success === true) {
+        window.open(result?.data?.get_admin_export_auditlog.message);
+      } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
+        Swal.fire('Report not found');
+      }
+    });
+  }
+  next(e, filterform) {
+    if (filterform.value.fromdate && filterform.value.todate) {
+      this.filter(filterform, e.pageIndex.toString());
+    } else {
+      this.getallauditreports(e.pageIndex.toString());
+    }
   }
 }

@@ -107,8 +107,8 @@
                       <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
 
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput [(ngModel)]="group_name"
-                        name="group_name" #groupname1="ngModel" [required]=editstatus  pattern="^[a-zA-Z0-9 sss]+$"
-                        value="{{editgroupname}}" >
+                        name="group_name" #groupname1="ngModel" [required]=editstatus  value="{{editgroupname}}" >
+                        <!-- pattern="^[a-zA-Z0-9 sss]+$" -->
                         <!-- value="{{editgroupname}}" -->
                       <div
                         *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
@@ -116,9 +116,9 @@
                         <div *ngIf="groupname1.errors.required" class="error-message">
                           Group name is required.
                         </div>
-                        <div *ngIf="groupname1.errors.pattern" class="error-message">
+                        <!-- <div *ngIf="groupname1.errors.pattern" class="error-message">
                           Group name is invalid.
-                        </div>
+                        </div> -->
                       </div>
 
                     </div>
@@ -150,8 +150,8 @@
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
                       <mat-slide-toggle class="example-margin" [color]="color" (change)="toggle($event)"
-                        [checked]="currentpath?.is_active"></mat-slide-toggle>
-                      {{currentpath ?.is_active === true ? 'Active' : 'Inactive'}}
+                        [checked]="!currentpath?.is_active"></mat-slide-toggle>
+                      {{currentpath ?.is_active === true ? 'Deactivate' : 'Activate'}}
                     </div>
                     <div class="col-6 mt-4">
                       <button *ngIf="editstatus" mat-raised-button color="primary" type="submit">Save</button> &nbsp;
