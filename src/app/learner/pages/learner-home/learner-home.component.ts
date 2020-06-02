@@ -26,7 +26,7 @@ export class LearnerHomeComponent implements OnInit {
   loadingCatalogue = false;
   showAppliedFiltre : Boolean =true;
   showCategory : Boolean = true;
-
+  element: any;
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
     private globalservice: GlobalServiceService,public commonServices: CommonServicesService,

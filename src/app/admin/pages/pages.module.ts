@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {CdkTableModule} from '@angular/cdk/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -30,6 +31,9 @@ import { LearnerprofileComponent } from './learnerprofile/learnerprofile.compone
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { AuditlogComponent } from './auditlog/auditlog.component';
+import { MatTableModule } from '@angular/material';
+import { PipeModule } from './../../pipes/pipe.module'
+
 
 
 @NgModule({
@@ -53,8 +57,11 @@ import { AuditlogComponent } from './auditlog/auditlog.component';
         RouterModule,
         NgxPaginationModule,
         ChartsModule,
-        MatDatepickerModule
-   
+        MatDatepickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        PipeModule
          ],
     declarations: [   
     AddUserComponent, ReportManagementComponent,AdminDashboardComponent, CatalogueManagementComponent, CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],

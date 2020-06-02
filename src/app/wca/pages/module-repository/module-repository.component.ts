@@ -15,7 +15,7 @@ export class ModuleRepositoryComponent implements OnInit {
   savedModules: any[] = [];
   displayedColumns: string[] = ['modulename', 'coursename', 'createdby', 'createdon', 'view', 'select'];
   dataSource = new MatTableDataSource<any>(this.savedModules);
-
+  courseDetails: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   modDetails = [];
 

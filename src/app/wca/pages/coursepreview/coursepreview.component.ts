@@ -31,7 +31,7 @@ export class CoursepreviewComponent implements OnInit {
     },
     nav: true
   }
-  course: any;
+  course: any = null;
   content: any;
   breakpoint: number;
   detail: any;
@@ -162,5 +162,15 @@ export class CoursepreviewComponent implements OnInit {
       link.click();
     }
     document.body.removeChild(link);
+  }
+
+
+  previewideo() {
+    document.getElementById("myNav").style.height = "100%";
+  }
+
+  
+  closeNav() {
+    document.getElementById("myNav").style.height = "0%";
   }
 }
