@@ -22,8 +22,8 @@ export class AuditlogComponent implements OnInit {
   columns = [
     { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
     // { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
-    { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${moment(element?.created_on).format('L LTS') || ' '}` },
-    { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element?.updated_on).format('L LTS') || ' '}` },
+    { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${element?.created_on || ' '}` },
+    { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${element?.updated_on || ' '}` },
     { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element?.admin_username || ' '}` },
   ];
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
@@ -74,9 +74,14 @@ export class AuditlogComponent implements OnInit {
   getallauditreports(pgnumber) {
     this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
       this.resultsLength = null;
-      console.log(result?.message)
       if (result?.message) {
         this.reports = result.message;
+        this.reports.forEach(element => {
+           const date = moment(element.created_on);
+           const date1 = moment(element.created_on);
+           element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+           element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+        });
         this.dataSource.data = this.reports;
         this.resultsLength = result?.total_count;
       }
