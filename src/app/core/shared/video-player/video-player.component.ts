@@ -30,6 +30,7 @@ export class VideoPlayerComponent {
   constructor() {
   }
   ngOnInit() {
+    console.log('this.url.preview_video',this.url)
     this.sources = [
       {
         src: this.url.preview_video,
