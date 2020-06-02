@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">{{course.course_name | titlecase }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{course?.course_name | titlecase }}</li>
     </ol>
 </nav>
 
@@ -12,7 +12,7 @@
     <div class="col-4">
         <div class="row">
             <div class="col-9">
-                <h1 class="name">{{course.course_name | titlecase }}</h1>  
+                <h1 class="name">{{course?.course_name | titlecase }}</h1>  
             </div>
             <div class="col-3">
                 <div style="margin-top: 7px;">
@@ -27,18 +27,18 @@
             </div>
         </div>
         <div class="row">
-            <span class="short-desc">{{course.short_description}}</span>
+            <span class="short-desc">{{course?.short_description}}</span>
         </div>
         <div class="row">
             <div class="col-12 display_flex">
-                <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5" class=""></bar-rating>
-                <strong class="f_size_23">{{course.rating || '1.0'}}  (500 Rating)</strong> 
+                <bar-rating [readOnly]="true" [rate]="course?.rating" [max]="5" class=""></bar-rating>
+                <strong class="f_size_23">{{course?.rating || '1.0'}}  (500 Rating)</strong> 
          </div>
     </div>
 
     <div class="row">
         <div class="col-12 margin-5">
-            <button class="enrollbtn">ENROLL NOW</button>
+            <button class="enrollbtn" (click)="enrollCourse()">ENROLL NOW</button>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
 
     <div class="row margin-15 ">
         <div class="col-12">
-            <div class="stuEnrolled">213000 student enrolled | Last updated {{ course.updated_at | date }}</div>
+            <div class="stuEnrolled">213000 student enrolled | Last updated {{ course?.updated_at | date }}</div>
         </div>
     </div>
 
@@ -177,18 +177,20 @@
                     <h3 class="head-h1">Instructors</h3>
                     <div class="vertical"></div>
                     <div class="silder" >
-                        <owl-carousel-o [options]="customOptions" class="takeway ">
-                           <ng-template carouselSlide [id]="author.author_name"   *ngFor="let author of course?.author_details" >
+                        <owl-carousel-o [options]="customOptions" [ngClass] = "course?.author_details <= 1 ? 'widthClass arrow' : 'arrow'">
+                           <ng-template carouselSlide [id]="author.author_name" *ngFor="let author of course?.author_details"  >
                                <div class="display_flex">
                                 <div class="instr-box">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-6">
                                             <img class="img-inst" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'" alt="">
-                                        </div>
-                                        <div class="col-9">
                                             <h1 class="authorname">{{author?.author_name}}</h1>
+                                            <p class="author-desc">{{author?.description}}</p>
                                         </div>
-                                        <p class="author-desc">{{author?.description}}</p>
+                                        <!-- <div class="col-9">
+                                          
+                                        </div>
+                                        -->
                                     </div>  
                                 </div>
                                </div>
