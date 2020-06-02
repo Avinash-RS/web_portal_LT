@@ -16,10 +16,13 @@ declare var $: any;
 })
 export class GuidelineSearchComponent implements OnInit {
   @Input('showAppliedFiltre') showAppliedFiltre : boolean;
-  TodateOptions: { dateFormat: string; disableSince: { year: number; month: number; day: number; }; };
+  TodateOptions: { 
+    dateFormat: string; disableSince: { year: number; month: number; day: number; };
+    editableDateField: false };
   FromdateOptions: {
     dateFormat: string; disableUntil: { year: number; month: number; day: number; };
     disableSince: { year: number; month: number; day: number; };
+    editableDateField: false;
   };
   get tomorrowDate(): Date {
     const todayDate = new Date();
@@ -65,7 +68,6 @@ export class GuidelineSearchComponent implements OnInit {
 
   ngOnInit() {
     this.CommonServices.selectedCategory.subscribe(data => {
-      console.log('data',data);
       this.Lvl1CatId = data.Lvl1CatId,
       this.level1selectedID = data.level1selectedID,
       this.Lvl2CatId= data.Lvl2CatId,
@@ -74,17 +76,17 @@ export class GuidelineSearchComponent implements OnInit {
       this.level3selectedID = data.level3selectedID,
       this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
       this.allLvlCategory=data.allLvlCategory
-      console.log('lvl1',this.Lvl1CatId)
     })
-    console.log('lvl111111111111111111111111111111',this.Lvl1CatId)
 
     this.TodateOptions = {
+      editableDateField: false,
       dateFormat: 'yyyy-mm-dd',
       disableSince: {
         year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate()
       }
     }
     this.FromdateOptions = {
+      editableDateField: false,
       dateFormat: 'yyyy-mm-dd',
       disableSince: { year: this.tomorrowDate.getFullYear(), month: this.tomorrowDate.getMonth() + 1, day: this.tomorrowDate.getDate() },
       disableUntil: { year: 2020, month: 3, day: 31 }

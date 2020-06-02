@@ -93,11 +93,11 @@ export class GroupManagementComponent implements OnInit {
           // this.groups[0].checkbox = true;
           this.treeSource.data = this.groups;
           this.dataSource$.next(this.groups);
-          if (this.groupid && this.treeSource.data.length) {
-            const index = this.treeSource.data.findIndex( value => value.group_id === this.groupid);
-            this.treeSource.data[index].checkbox = true;
-            this.selectgroup(this.treeSource.data[index]);
-          }
+          // if (this.groupid && this.treeSource.data.length) {
+          //   const index = this.treeSource.data.findIndex( value => value.group_id === this.groupid);
+          //   this.treeSource.data[index].checkbox = true;
+          //   this.selectgroup(this.treeSource.data[index]);
+          // }
         });
       });
   }
@@ -163,7 +163,8 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  selectgroup(node) {
+  selectgroup(node,groupform) {
+    groupform.form.markAsPristine();
     if (node.checkbox === true) {
       this.currentpath = node;
       this.disabled = false;
@@ -171,7 +172,6 @@ export class GroupManagementComponent implements OnInit {
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
       this.getAllUser(0);
-      console.log(this.currentpath);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
@@ -271,15 +271,20 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  toggle(event: MatSlideToggleChange) {
-    this.toggleevent = event.checked;
-    this.currentpath.is_active = event.checked;
-  }
+  // toggle(event: MatSlideToggleChange) {
+  //   this.toggleevent = event.checked;
+  //   this.currentpath.is_active = event.checked;
+  // }
 
+  // toggle(event) {
+  //   this.toggleevent = event;
+  //   this.currentpath.is_active = event;
+  // }
   updategroupdetails(groupform) {
-    let value: any;
-    value = this.toggleevent ? this.toggleevent : !this.currentpath.is_active;
-    this.toggleevent = '';
+    // let value: any;
+    // value = this.toggleevent ? this.toggleevent : this.currentpath.is_active;
+    // this.toggleevent = '';
+    groupform.value.group_name = groupform.value.group_name.trim().replace(/&nbsp;/g, '').replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
     // const status = this.currentpath.is_active === true ? 'Deactivate' : 'Activate';
     Swal.fire({
       title: 'Are you sure you want to update the  ' + this.currentpath.group_name + '?',
@@ -293,7 +298,7 @@ export class GroupManagementComponent implements OnInit {
         const data = {
           catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : groupform.value.catalogue          ,
           catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : this.selectedcatalogue.catalogue_name,
-          is_active: value, group_id : this.currentpath.group_id, group_name: groupform.value.group_name,
+          is_active: groupform.value.toggle, group_id : this.currentpath.group_id, group_name: groupform.value.group_name,
           group_type: this.currentpath.group_type, parent_group_id : this.currentpath.parent_group_id,
           hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
         };
