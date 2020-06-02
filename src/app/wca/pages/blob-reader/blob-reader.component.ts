@@ -1,3 +1,4 @@
+'use strict';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { BlobServicesService } from '../../services/azureBlobService/blob-services.service';
@@ -14,24 +15,23 @@ export class BlobReaderComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    (event.code === 'Escape') && this.closeModel();
+    if (event.code === 'Escape') { this.closeModel(); }
   }
 
   constructor(private dialogRef: MatDialogRef<BlobReaderComponent>,
-    private dialog: MatDialog,
-    private azureBlobService: BlobServicesService) { }
+              private dialog: MatDialog,
+              private azureBlobService: BlobServicesService) { }
 
   ngOnInit() {
     this.getContainers();
-    this.changePosition();
+    this.dialogRef.updatePosition({ top: '0px' });
   }
 
   getContainers() {
     this.azureBlobService.getContainerBlobs().subscribe(res => {
       if (res.statusBool) {
         this.exploredData = res.data;
-        console.log(res.data);
-      };
+      }
     });
   }
 
@@ -44,19 +44,15 @@ export class BlobReaderComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  changePosition() {
-    this.dialogRef.updatePosition({ top: '0px' });
-  }
-
   preview(row) {
-    const dialogRef_Video = this.dialog.open(VideoPreviewModalComponent, {
+    const dialogRefVideo = this.dialog.open(VideoPreviewModalComponent, {
       data: { url: row.url },
       height: '42%',
       width: '30%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    dialogRef_Video.afterClosed().subscribe(res => {
+    dialogRefVideo.afterClosed().subscribe(res => {
     });
   }
 
