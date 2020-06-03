@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,7 @@ import { MatList, MatDialog } from '@angular/material';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatSlideToggleChange } from '@angular/material';
 import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
+
 declare var $: any;
 
 @Component({
@@ -18,6 +19,11 @@ declare var $: any;
   styleUrls: ['./create-topic.component.scss']
 })
 export class CreateTopicComponent implements OnInit {
+
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {    
+    event.returnValue = false;
+}
+
   queryData: any;
   courseArray = [];
   courseDetails: any;
@@ -43,6 +49,7 @@ export class CreateTopicComponent implements OnInit {
   transcripts = [0];
   removeTemplateindex;
   @ViewChild('fileInput3') fileInput3;
+  @ViewChild('fileInput4') fileInput4;
   @ViewChild('modName') modName;
   fileValidations = {
     Image: /(\.jpg|\.jpeg|\.png)$/i,
@@ -203,7 +210,20 @@ export class CreateTopicComponent implements OnInit {
         }
       }
     })
+    
+    var aElems = document.getElementsByName('a');
 
+    for (var i = 0, len = aElems.length; i < len; i++) {
+        aElems[i].onclick = function() {
+            var check = confirm("Are you sure you want to leave?");
+            if (check == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
+    }
 
   }
   createForm(mod, mod_index = -1): FormGroup {
@@ -346,6 +366,12 @@ export class CreateTopicComponent implements OnInit {
         this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
         this.spinner.hide();
         fileInput.value = '';
+        if(this.fileInput3){
+          this.fileInput3.nativeElement.value = '';
+        }
+        if(this.fileInput4){
+          this.fileInput4.nativeElement.value = '';
+        }
         return false;
       }
       else if (item.name == 'SCORM') {
@@ -359,6 +385,9 @@ export class CreateTopicComponent implements OnInit {
           if (!that.isFileContent) {
             that.spinner.hide();
             that.toast.warning('Kindly upload a valid SCORM file');
+            if(that.fileInput3){
+              that.fileInput3.nativeElement.value = '';
+            }
           }
           else {
             that.imageView = fileInput.target.files[0];
@@ -497,6 +526,8 @@ export class CreateTopicComponent implements OnInit {
     else if (item.name == 'Video') {
       this.formVideo(formdata, "2", textvalue, subTitleindex)
     }
+
+    
   }
 
 
