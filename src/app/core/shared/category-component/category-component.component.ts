@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -11,6 +11,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
   styleUrls: ['./category-component.component.scss']
 })
 export class CategoryComponentComponent implements OnInit {
+  // @Input('Lvl1CatId') Lvl1CatId: any = [];
   userDetailes: any;
   categories: any;
   type: any;
