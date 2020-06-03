@@ -7,16 +7,11 @@
       <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
         Courses</a></li>
     <li class="breadcrumb-item">
-      <ng-container *ngIf="queryData.addModule; else createModule">
+      <ng-container>
         <a
           href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
           Module</a>
       </ng-container>
-      <ng-template #createModule>
-        <a
-          href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create
-          Module</a>
-      </ng-template>
 
     </li>
     <li class="breadcrumb-item active">Create a template</li>
@@ -70,7 +65,7 @@
                       continue</button>
                     <button class="backgroundcol1 margbtwBtn" (click)="savedTemplates('continueTemplate')">Continue
                       without saving</button>
-                    <button class="backgroundcol3 cancelAdjacent" routerLink="/Admin/auth/Wca">Cancel</button>
+                    <button class="backgroundcol3 cancelAdjacent" (click)="onCancel()">Cancel</button>
                     <!-- /Wca/addtopic -->
 
                   </div>
