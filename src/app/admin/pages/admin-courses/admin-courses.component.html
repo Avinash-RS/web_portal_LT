@@ -29,7 +29,7 @@
     <!-- grid-view-course-component here -->
     <div class="row" *ngIf="viewType == 'grid'">
       <div class="col-md-11 center">
-        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;">
+        <!-- <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;"> -->
           <!-- <mat-grid-list cols="4" [cols]="breakpoint" rowHeight="2.3:2.5" (window:resize)="onResize($event)">
             <mat-grid-tile *ngFor=" let course of courseList | paginate: { totalItems: courseCount,itemsPerPage: 12, currentPage:
             paginationpgno } ;" [style.border]="'none'" [colspan]="1" [rowspan]="1">
@@ -48,7 +48,7 @@
               paginationpgno } ;">
               <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
                 [showStatus]="false" [showRating]="showRating" [showCount]="showCount" [showPrice]="showPrice"
-                [showDate]="showPublishedDate" [goto]="goto">
+                [showDate]="showPublishedDate" [goto]="goto" [showEnroll] = "true" [btnType]="btnType">
               </app-course-component>
               <br><br>
             </div>
@@ -57,7 +57,7 @@
               No courses yet
             </h2>
           </div>
-        </mat-card>
+        <!-- </mat-card> -->
       </div>
     </div>
     <!-- end of grid-view-course-component here -->
