@@ -104,8 +104,6 @@
                         </ng-container>
                         group name
                       </label>
-                      <!-- <span>Group/Sub Group Name &nbsp; <b class="text-danger">*</b></span>&nbsp;&nbsp; -->
-
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput
                         [(ngModel)]="group_name" name="group_name" #groupname1="ngModel" [required]=editstatus
                         value="{{editgroupname}}">
@@ -239,7 +237,8 @@
                   <mat-cell *matCellDef="let element"
                     [ngClass]="element.is_blocked ? 'red' : element.is_active ? 'green' : 'black'">
                     <span class="mobile-label">Status</span>
-                    {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
+                    <!-- {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}} </mat-cell> -->
+                    {{element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
@@ -251,9 +250,9 @@
                     <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
                       (click)="deActivate('De-activate')">
                       De-activate</button>
-                    <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
+                    <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
                       (click)="block('Block')">
-                      Block</button>
+                      Block</button> -->
                     <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
                       (click)="block('Unblock')">
                       Un-block</button> -->
@@ -267,10 +266,10 @@
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
                       {{element.is_active ? 'De-activate' : 'Activate'}}</button>
-                    <button mat-stroked-button *ngIf="!element.is_blocked"
+                    <!-- <button mat-stroked-button *ngIf="!element.is_blocked"
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="block(element.is_blocked ? 'Unblock' : 'Block',element)">
-                      Block</button>
+                      Block</button> -->
                     <button *ngIf="!element.is_blocked" mat-stroked-button
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="changeGroup(changeDialog,element)">
@@ -301,19 +300,8 @@
           </mat-tab>
         </mat-tab-group>
 
-
-
-
-
-
-        <!-- <section id="content1" class=" tab-content"> -->
-
-        <!-- <section id="content2" class="tab-content">
-          </section> 
-        </div>-->
       </div>
     </div>
-    <!-- </div> -->
   </div>
 
   <ng-template #changeDialog>
@@ -327,7 +315,6 @@
         <div class="form-group">
           <label>Group name</label><span style="color: red;"> *</span><br>
           <mat-form-field class="width_100 ">
-            <!-- <mat-label>Institute Name</mat-label> -->
             <mat-select formControlName="group">
               <mat-option *ngFor="let grp of allgroups" [value]="grp">
                 {{grp.group_name}}
@@ -339,7 +326,8 @@
       <br><br>
     </mat-dialog-content><br>
     <mat-dialog-actions>
-      <button mat-flat-button class="center" [disabled]="changeGrpForm.invalid" (click)="updateGroup()">
+      <button mat-flat-button class="center blue_border" [disabled]="changeGrpForm.invalid" (click)="updateGroup()">
+        Update group
       </button><br><br>
     </mat-dialog-actions>
   </ng-template>

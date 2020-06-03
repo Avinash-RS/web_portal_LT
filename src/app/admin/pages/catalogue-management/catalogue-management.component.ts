@@ -9,6 +9,7 @@ import * as myGlobals from '@core/globals';
 import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import Swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
+import { CommonServicesService } from '@core/services/common-services.service';
 
 export interface Data {
   course_name: string;
@@ -50,7 +51,7 @@ export class CatalogueManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   catalogueDetails: { sno: string; courses: string; category: string; language: string; }[];
 
-  constructor(private gs: GlobalServiceService, private alert: AlertServiceService,
+  constructor(private gs: GlobalServiceService, private alert: AlertServiceService, public CommonServices: CommonServicesService,
     // tslint:disable-next-line:align
     private adminservice: AdminServicesService, public learnerservice: LearnerServicesService,
     // tslint:disable-next-line:align
@@ -61,6 +62,24 @@ export class CatalogueManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getListCatalogue();
+
+    this.CommonServices.globalSearch.subscribe((data: any) => {
+      if (data.length > 0) {
+        this.courseList = data;
+      } else {
+        Swal.fire('No courses found');
+        this.getCoursesInCatalog();
+        this.getCoursesForCatalog();
+      }
+    });
+    this.CommonServices.globalAllCategory.subscribe((data: any) => {
+      this.courseList = data;
+    });
+    this.CommonServices.globalCourses.subscribe((data: any) => {
+      this.courseList = data;
+    });
+
+
   }
 
   getListCatalogue() {
@@ -281,6 +300,10 @@ export class CatalogueManagementComponent implements OnInit {
       catalogue_description: new FormControl(''),
     });
     this.addCatalogueForm.patchValue(this.catalog);
+    this.dialog.open(templateRef);
+  }
+
+  openCategoryPopup(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
   }
 
