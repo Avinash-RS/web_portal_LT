@@ -26,7 +26,8 @@ export class ToolbarComponent implements OnInit {
 	}
 	feedNotificationData(admin_id) {
 		this.adminService.getNotificationData(admin_id).subscribe((result: any) => {
-			this.toolbarHelpers.notifications = result.data['getnotificationreports'].message
+			this.toolbarHelpers.notifications = result.data['getnotificationreports'].message;
+			localStorage.setItem('Reports', JSON.stringify(result.data['getnotificationreports'].message));
 		})
 	}
 }

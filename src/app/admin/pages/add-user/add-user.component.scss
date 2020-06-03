@@ -17,16 +17,17 @@
 
 :host ::ng-deep .mat-tab-body-content {
   overflow: inherit !important;
-  width : 100% !important;
-  min-height : 600px !important;
-  max-height : 600px !important;
+  width: 100% !important;
+  min-height: 600px !important;
+  max-height: 600px !important;
 
 }
+
 @media screen and (min-width: 765px) {
   :host ::ng-deep .mat-tab-body-content {
     overflow: inherit;
-    width : 100% !important;
-    min-height : 600px !important;
+    width: 100% !important;
+    min-height: 600px !important;
   }
 }
 
@@ -204,4 +205,20 @@
 
 .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   width: 100% !important;
+}
+
+::ng-deep .p5 {
+
+  .mat-option,
+  .mat-select-panel .mat-option {
+    padding: 0px 211px !important;
+  }
+}
+
+::ng-deep .p10 {
+
+  .mat-option,
+  .mat-select-panel .mat-option {
+    padding: 0px 26px !important;
+  }
 }

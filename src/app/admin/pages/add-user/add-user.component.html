@@ -39,7 +39,10 @@
               <mat-form-field class="width_100 ">
                 <!-- <mat-label>Institute Name</mat-label> -->
                 <mat-select formControlName="group">
-                  <mat-option *ngFor="let grp of groups" [value]="grp">
+                  <mat-option *ngFor="let grp of groups" [value]="grp"
+                    [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+                    ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
                     {{grp.group_name}}
                   </mat-option>
                 </mat-select>
@@ -86,43 +89,45 @@
 
     <!-- <div class="row">
       <div class="col-md-6 center col-sm-11 col-11"> -->
-        <div *ngIf="selectedfile" class="files-list">
-          <div class="single-file">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png"
-              class="file-icon" style="width: 50px">
+    <div *ngIf="selectedfile" class="files-list">
+      <div class="single-file">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png"
+          class="file-icon" style="width: 50px">
 
-            <div class="info">
-              <h4 class="name">
-                {{ selectedfile?.name }}
-              </h4>
-              <p class="size">
-                {{ formatBytes(selectedfile?.size) }}
-              </p>
-            </div>
-            <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()"
-              style="width: 30px">
-          </div>
+        <div class="info">
+          <h4 class="name">
+            {{ selectedfile?.name }}
+          </h4>
+          <p class="size">
+            {{ formatBytes(selectedfile?.size) }}
+          </p>
         </div>
-        <div class="downloadbutton">
-          <form #bulkuserform="ngForm">
-          <mat-form-field>
-            <mat-label>Group Name</mat-label>
-            <mat-select name="group" [(ngModel)]="group">
-              <mat-option *ngFor="let grp of groups" [value]="grp">
-                {{grp.group_name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </form>
-        </div>
-      <!-- </dS -->
+        <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()"
+          style="width: 30px">
+      </div>
+    </div>
+    <div class="downloadbutton">
+      <form #bulkuserform="ngForm">
+        <mat-form-field>
+          <mat-label>Group Name</mat-label>
+          <mat-select name="group" [(ngModel)]="group">
+            <mat-option *ngFor="let grp of groups" [value]="grp"
+            [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+            ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+            (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
+            {{grp.group_name}}
+          </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- </dS -->
 
     <!-- <div class="row"> -->
-      <button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
-        class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+    <button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
+      class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
     <!-- </div> -->
-    <br>   <br>   <br>
+    <br> <br> <br>
   </mat-tab>
 
 </mat-tab-group>

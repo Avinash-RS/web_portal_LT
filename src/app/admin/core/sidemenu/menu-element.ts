@@ -34,6 +34,13 @@ export const menus = [
                 'open': false,
                 'chip': false,
             },
+            {
+                'name': 'Reports',
+                'link': 'reports',
+                'icon': 'widgets',
+                'chip': false,
+                'open': true,
+            },
         ]
     },
     {

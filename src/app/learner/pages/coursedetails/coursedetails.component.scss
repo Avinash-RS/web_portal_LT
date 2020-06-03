@@ -56,6 +56,8 @@
 
 .parterImg{
     width: 150px;
+    width: 100px;
+    padding-right: 6px;
 }
 .sm-icon{
     width: 14px;
@@ -192,6 +194,14 @@ li{
 .silder{
     text-align: right;
     width: 332px;
+    // height: 223px;
+    margin-top: 10px;
+}
+
+.silder1{
+    text-align: right;
+    width: 332px;
+     height: 223px;
     margin-top: 10px;
 }
 .takewaytext{
@@ -242,7 +252,7 @@ li{
 }
 
  .instr-box{
-    width: 70%;
+    width: 220px;
     border-bottom: 5px solid $color-blue;
     height: 136px;
     margin-top: 59px;
@@ -252,12 +262,17 @@ li{
     margin-right: 10px;
  }
 
+ :host ::ng-deep .widthClass .owl-carousel .owl-item {
+    width: 350px !important;
+}
+
  .img-inst{
-    width: 100px !important;
+    width: 60px !important;
+    height: 60px;
     border-radius: 50%;
-    margin-left: 5px;
-    margin-top: -67px;
-    position: absolute;
+    // margin-left: 9px;
+    margin-top: -44px;
+    position: absolute
  }
 
  .authorname{
@@ -274,14 +289,15 @@ li{
     margin-right: 22px;
  }
  :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
-    width: 320px !important;
+    width: 310px !important;
 }
 
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-    color: #fff;
+    color: $color-blue;
     font-size: 30px !important;
-    background: #252525;
+    background: $color-white;
     display: inline-block;
+    border: 1px solid $color-blue;
     cursor: pointer !important;
     padding: 10px !important;
     border-radius: 50px !important;
@@ -292,14 +308,25 @@ li{
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
     position: absolute;
-    top: 40%;
+    top: 45%;
     z-index: 1 !important;
-    left: -18px;
+    left: 0px;
 }
 
 :host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
     position: absolute;
-    top: 40%;
+    top: 46%;
+    right: 1%;
     z-index: 1 !important;
-    right: -18px;
+}
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

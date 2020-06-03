@@ -691,7 +691,7 @@ h1 {
   min-height: 40px !important;
 }
 
-mat-header-cell {
-  font-size: 14px;
+mat-header-cell,.mat-header-cell {
+  font-size: 14px !important;
   color: $color-blank !important;
 }
