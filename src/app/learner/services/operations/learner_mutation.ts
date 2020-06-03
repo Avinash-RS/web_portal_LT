@@ -710,11 +710,12 @@ export const getLevelSubCategoryData = gql`
 export const getCourseCategorySearch = gql`
   mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
     $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
-    $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String ) {
+    $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String,
+    $catalogue_visibility: Int! ) {
     getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
       course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
       pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
-       publishedFromDate:$publishedFromDate
+       publishedFromDate:$publishedFromDate, catalogue_visibility: $catalogue_visibility
       ) {
         success
         message

@@ -88,6 +88,17 @@ export class ViewAllCoursesComponent implements OnInit {
     this.CommonServices.globalCourses.subscribe((data: any) => {
         this.allcourses = data;
     })
+    this.CommonServices.appliedCategory.subscribe((data: any) => {
+      console.log('data',data)
+      this.Lvl1CatId = data.Lvl1CatId;
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+  })
     this.loadcategoryandcourses();
   }
 
@@ -129,12 +140,23 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   viewCategory(module) {
+    let obj = {
+      Lvl1CatId : this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory
+    }
     const dg = this.dialog.open(CategoryComponentComponent, {
       width: '95%',
-      // panelClass: ['category-Component']
+      data : obj,
+      // panelClass: ['category']
     });
 
-    // dg.afterClosed().subscribe((data) => {
+    // dg.afterClosed().subscribe((data) :> {
     //   this.getallcourses();
     // });
   }

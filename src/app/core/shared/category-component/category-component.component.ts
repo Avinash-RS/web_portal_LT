@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit,Inject, Input, TemplateRef } from '@angular/core';
+import { MatDialog,MAT_DIALOG_DATA } from '@angular/material';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -37,10 +37,20 @@ export class CategoryComponentComponent implements OnInit {
   lvl1Search: any;
   lvl2Search: any;
   lvl3Search: any;
-  
+  catalogue_visibility = 0;
 
-  constructor(private dialog: MatDialog,public learnerservice: LearnerServicesService, private alert: AlertServiceService,
-    private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { }
+  constructor(private dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: any,
+    public learnerservice: LearnerServicesService, private alert: AlertServiceService,
+    private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) { 
+       this.Lvl1CatId = data.Lvl1CatId
+      this.level1selectedID = data.level1selectedID
+       this.Lvl2CatId = data.Lvl2CatId
+        this.level2selectedID = data.level2selectedID
+      this.Lvl3CatId = data.Lvl3CatId
+       this.level3selectedID = data.level3selectedID
+      this.allLvlCategoryFilterVal= data.allLvlCategoryFilterVal
+      this.allLvlCategory = data.allLvlCategory
+    }
 
   ngOnInit() {
     this.getthreeLevelCat();
@@ -89,7 +99,6 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
   getthreeLevelCat() {
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
       this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
-      console.log('inside',this.allLvlCategory);
     })
   }
   getcoursecategories() {
@@ -209,12 +218,22 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
         })
       }
     }
-   
-
+    let object = {
+      Lvl1CatId: this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory,
+    }
+    this.CommonServices.appliedCategory$.next(object);
 
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+      this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
@@ -226,7 +245,8 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
   applyFilter(category) {
     var perPage = "10";
     this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+      this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         if (result['data']['getCourseCategorySearch'].success == true)
           this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
@@ -246,8 +266,19 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
           allLvlCategory:this.allLvlCategory,
         }
         this.CommonServices.selectedCategory$.next(obj);
-        console.log('obj',obj)
+        let object = {
+          Lvl1CatId: this.Lvl1CatId,
+          level1selectedID : this.level1selectedID,
+          Lvl2CatId: this.Lvl2CatId,
+          level2selectedID : this.level2selectedID,
+          Lvl3CatId: this.Lvl3CatId,
+          level3selectedID : this.level3selectedID,
+          allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+          allLvlCategory:this.allLvlCategory,
+        }
+        this.CommonServices.appliedCategory$.next(object);
       })
+      
      
   }
   countUpdateInstructor(array) {
