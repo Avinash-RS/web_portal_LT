@@ -17,16 +17,11 @@
                 </a></li>
 
             <li class="breadcrumb-item">
-                <ng-container *ngIf="queryData.addModule; else createModule">
+                <ng-container>
                     <a
                         href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
                         Module</a>
                 </ng-container>
-                <ng-template #createModule>
-                    <a
-                        href="/Admin/auth/Wca/viewmodule?viewingModule={{queryData.viewingModule}}&image={{queryData.image}}&courseName={{queryData.courseName}}">Create
-                        Module</a>
-                </ng-template>
 
             </li>
             <li class="breadcrumb-item active">Choose a template</li>
