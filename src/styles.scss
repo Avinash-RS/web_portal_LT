@@ -650,6 +650,7 @@ h1 {
   .mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: #1f3777 !important;
   }
+
   .repo-title-container .mat-form-field {
     width: 250px;
   }
@@ -667,7 +668,7 @@ h1 {
   border-radius: 0px !important;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e5e3e3 !important;
+  background-color: $bread-crumb-bg !important;
   border-radius: .25rem;
   height: 21px !important;
 
@@ -678,6 +679,11 @@ h1 {
 }
 
 .mat-header-row {
-  background: #ccc !important;
+  background: $color-border !important;
   min-height: 40px !important;
+}
+
+mat-header-cell {
+  font-size: 14px;
+  color: $color-blank !important;
 }

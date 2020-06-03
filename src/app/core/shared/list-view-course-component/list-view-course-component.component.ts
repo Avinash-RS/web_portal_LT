@@ -162,6 +162,15 @@ export class ListViewCourseComponentComponent implements OnInit {
     }
   }
 
+  // publish() {
+  //   const detail = {
+  //     id: this.course.course_id,
+  //     name: this.course.course_name
+  //   };
+
+  //   this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail } });
+  // }
+
 }
 
 

@@ -25,6 +25,7 @@ export class CourseComponentComponent implements OnInit {
   @Input('goto') goto: string;
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll: boolean = false;
+  @Input('btnType') btnType: string;
   userDetail: any;
   recordedData: any;
   finalFullData: any;
@@ -134,6 +135,14 @@ export class CourseComponentComponent implements OnInit {
     }
   }
 
+  publish() {
+    const detail = {
+      id: this.course.course_id,
+      name: this.course.course_name
+    };
+
+    this.router.navigateByUrl('/Admin/auth/publishCourse', { state: { detail } });
+  }
   goTocourse(status) {
     if (this.finalStatus !== 'Completed') {
       const detail1 = {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { SidemenuItemComponent } from './sidemenu-item/sidemenu-item.component';
@@ -46,7 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FullscreenComponent,
         SidebarComponent,
         UserMenuComponent,
-       
+
     ],
 
     imports: [
@@ -81,7 +81,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         UserMenuComponent,
         LineChartComponent
     ],
-
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

@@ -129,14 +129,14 @@ describe('AdminCoursesComponent', () => {
     component.pagenumber = 0;
     expect(component.type = 'published')
     component.getCourses();
-    debugger
+    // debugger
     // expect(service.getAllCoursePublished("undefined", component.pagenumber)).toBe(admincourse.data.get_course_published.message);
     // let admincourse;
     // expect(admincourse = service.getAllCoursePublished("undefined", component.pagenumber))
     console.log(admincourse)
     // admincourse = service.getAllCoursePublished("undefined", component.pagenumber);
 
-    debugger
+    // debugger
     expect(service.getAllCoursePublished("undefined", component.pagenumber));
     fixture.detectChanges();
     service.getAllCoursePublished("undefined", component.pagenumber).subscribe(admincourse => {
@@ -165,7 +165,7 @@ describe('AdminCoursesComponent', () => {
     //     console.log(v)
     //   }
     // });
-    debugger
+    // debugger
     // fixture.componentInstance.getCourses();
     // fixture.detectChanges();
     // expect(service.getAllCoursePublished).toHaveBeenCalled();

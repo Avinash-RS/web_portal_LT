@@ -3,6 +3,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CoreModule } from '@core/core.module';
 import { MatProgressSpinnerModule, MatTreeModule, MatSlideToggleModule } from '@angular/material';
 import {
     MatTabsModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatCardModule,
@@ -71,6 +72,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         ChartsModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        CoreModule
     ],
     declarations: [AddUserComponent, ReportManagementComponent, AdminDashboardComponent, CatalogueManagementComponent,
         CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
