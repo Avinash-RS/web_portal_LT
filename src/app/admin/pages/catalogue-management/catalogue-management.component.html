@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
     <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue management</li>
     <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="clickCName()">
       {{catalog.catalogue_name}}
