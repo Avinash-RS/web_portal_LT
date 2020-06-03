@@ -30,6 +30,7 @@ export class AddModuleComponent implements OnInit {
   scormPath = '';
   isScrom: boolean;
   isCreate: boolean;
+  breakpoint: any;
 
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
@@ -70,7 +71,7 @@ export class AddModuleComponent implements OnInit {
       if(this.isCreate) {
         this.isCreate = false;
         setTimeout(() => {
-          debugger
+          // debugger
           this.getCourseDetails();
         }, 5000);
       }

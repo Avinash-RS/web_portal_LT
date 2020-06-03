@@ -271,8 +271,8 @@ public loginperDaChartOptions: any = {
 };
 
 // Category Chart
-public categoryChartLabels: Label[] = ['Level 1', 'Level 2', 'Level 3'];
-public categoryChartData: MultiDataSet = [[350, 450, 100],[50, 150, 120],[250, 130, 70],];
+public categoryChartLabels: Label[] = [];
+public categoryChartData: MultiDataSet = [];
 public categoryChartType = 'doughnut';
 
 public isCollapsed = false;
@@ -304,6 +304,7 @@ public isCollapsed1 = false;
   top5CourseDefault = 'topfiveEnroll';
   top5CourseData: any;
   adminDetails: any;
+  getCoursecate: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -388,6 +389,7 @@ public isCollapsed1 = false;
     this.chartFilterdays = days;
     this.newRegistrationsChart(this.chartFilterdays)
   }
+
 
   newRegistrationsChart(chartFilterdays){
     this.service.getAdminOverview(chartFilterdays,this.adminDetails.user_id).subscribe((res: any) => {
@@ -569,7 +571,21 @@ public isCollapsed1 = false;
 
       getCoursesChart(){
         this.service.getCoursesChart().subscribe((res: any) => {
-          console.log(res,'resresres')
+          if(res.data.getCoursesChart.success == 'true'){
+            this.getCoursecate = res.data.getCoursesChart.data;
+            console.log(this.getCoursecate,'this.getCoursecate')
+        
+            // for (const iterator of this.getCoursecate) {
+            //     console.log(iterator.main_cat[0].main_cat_course_count)
+            //     this.categoryChartData = [[iterator.main_cat[0].category_name,10,30]];
+            //     //  iterator.sub_cat[0].sub_category_name, 
+            //     //  iterator.sub_sub_cat[0].sub_sub_cat_course_count
+                
+            // }
+            console.log( this.categoryChartData,' this.categoryChartData')
+             this.categoryChartLabels = ['Level 1', 'Level 2', 'Level 3'];
+             this.categoryChartData = [[350, 450, 100],[50, 150, 120],[250, 130, 70]];
+          }
         })
       }
 }

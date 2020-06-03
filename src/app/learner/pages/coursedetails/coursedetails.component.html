@@ -43,7 +43,7 @@
     </div>
 
     <div class="row">
-        <div class="col-3 margin-15">
+        <div class="col-3 margin-15 display_flex">
             <img class="parterImg" alt="true"  *ngFor="let coursePartner of course?.coursepartner_details" [src]=" coursePartner.image ?  coursePartner.image : '../../../../assets/learner/8.jpg'">
         </div>
     </div>
@@ -86,8 +86,9 @@
 
        <!-- Left side -->
     <div class="col-8 videoplayer">
-        <app-video-player [url]="course"></app-video-player>
-       
+        <!-- <span *ngIf="course"> -->
+        <app-video-player  *ngIf="course" [url]="course"></app-video-player>
+    <!-- </span> -->
 
         <div class="row  margin-15">
             <div class="col-6">
@@ -121,7 +122,9 @@
                
                 </div>
             </div>
-
+            <!-- <div class="spinner-container" *ngIf="loadingCourse">
+                <mat-spinner diameter="40"></mat-spinner>
+              </div> -->
             <div class="col-6">
                 <div class="sm-box">
                     <span>This Course Includes</span>
@@ -176,24 +179,22 @@
             <div class="col-12">
                     <h3 class="head-h1">Instructors</h3>
                     <div class="vertical"></div>
-                    <div class="silder" >
-                        <owl-carousel-o [options]="customOptions" [ngClass] = "course?.author_details <= 1 ? 'widthClass arrow' : 'arrow'">
+                    <div class="silder1" >
+                        <owl-carousel-o [options]="customOptions" [ngClass] = "course?.author_details.lenght <= 3 ? 'widthClass arrow' : 'arrow'">
                            <ng-template carouselSlide [id]="author.author_name" *ngFor="let author of course?.author_details"  >
-                               <div class="display_flex">
                                 <div class="instr-box">
                                     <div class="row">
-                                        <div class="col-6">
-                                            <img class="img-inst" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'" alt="">
-                                            <h1 class="authorname">{{author?.author_name}}</h1>
+                                        <div class="col-12">
+                                            <div class="col-4">
+                                                <img class="img-inst" [src]="author.image ? author?.image : 'assets/learner/avatar2.png'" alt="">
+                                            </div>
+                                            <div class="col-6">
+                                                <h1 class="authorname">{{author?.author_name}}</h1>
+                                            </div>
                                             <p class="author-desc">{{author?.description}}</p>
                                         </div>
-                                        <!-- <div class="col-9">
-                                          
-                                        </div>
-                                        -->
                                     </div>  
                                 </div>
-                               </div>
                            </ng-template>
                           </owl-carousel-o>
     

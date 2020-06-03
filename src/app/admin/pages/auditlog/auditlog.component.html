@@ -21,7 +21,7 @@
                     [required]=requiredfield #fromdate1="ngModel" [matDatepicker]="picker"
                     placeholder="Choose from date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker">
-                    <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                   <mat-error *ngIf="fromdate1.errors && requiredfield">
@@ -35,7 +35,7 @@
                     #todate1="ngModel" [matDatepicker]="picker1" placeholder="Choose to date" color="accent"
                     [min]=fromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker1">
-                    <mat-icon matDatepickerToggleIcon>today</mat-icon>
+                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                   <mat-error *ngIf="todate1.errors && requiredfield">
@@ -69,8 +69,8 @@
       </div>
     </div>
 
-
-    <hr style="border: 1px solid #ccc;margin:0 !important; ">
+    
+  <hr style="border: 1px solid #ccc;margin:1px !important; ">
     <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="sno">
@@ -138,11 +138,11 @@
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Created on : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on || 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                  {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
+                  {{viewdetail?.updated_on  || 'NA'}}</label>
               </label>
             </div>
           </div>

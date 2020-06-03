@@ -308,9 +308,7 @@ export class GroupManagementComponent implements OnInit {
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(
-              status,
               'Group  has been  updated successfully',
-              'success'
             );
           } else {
             Swal.fire({

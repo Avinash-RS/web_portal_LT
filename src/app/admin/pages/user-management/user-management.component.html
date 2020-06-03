@@ -85,9 +85,10 @@
             [ngClass]="element.is_blocked ? 'red f_wt_500' : element.is_active ? 'green f_wt_500' : 'black f_wt_500'">
             <span class="mobile-label">Status</span>
             <span class="desktop-data">
-              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span>
+              <!-- {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span> -->
+              {{ element.is_active ? 'Active' : 'Inactive'}}</span>
             <span class="mobile-data">
-              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span></mat-cell>
+              {{ element.is_active ? 'Active' : 'Inactive'}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
