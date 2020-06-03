@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li *ngIf="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
+    <li *ngIf="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Group Management</li>
   </ol>
 </nav>
@@ -29,7 +29,8 @@
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+              <!-- (change)="selected = node" -->
+              <mat-checkbox [checked]="selected === node" name="checkbox"
                 [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
             </li>
@@ -45,7 +46,7 @@
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+                <mat-checkbox  (change)="selected = node" name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->

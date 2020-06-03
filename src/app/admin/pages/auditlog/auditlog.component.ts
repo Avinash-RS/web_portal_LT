@@ -22,13 +22,14 @@ export class AuditlogComponent implements OnInit {
   columns = [
     { columnDef: 'module_name', header: 'Module', cell: (element: any) => `${element.module_name}` },
     // { columnDef: 'api_call_event', header: 'Description', cell: (element: any) => `${element.api_call_event}` },
-    { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${element?.created_on || ' '}` },
-    { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${element?.updated_on || ' '}` },
+    { columnDef: 'created_on', header: 'Created date', cell: (element: any) => `${ moment(element?.created_on).format('LLL') || ' '}` },
+    { columnDef: 'updated_on', header: 'Updated date', cell: (element: any) => `${moment(element?.updated_on).format('LLL') || ' '}` },
     { columnDef: 'admin_username', header: 'Created by', cell: (element: any) => `${element?.admin_username || ' '}` },
   ];
   fromdate: any;
   todate: any;
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
+  exportdata = 'exportall';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog, private adminservice: AdminServicesService) { }
 
@@ -79,12 +80,12 @@ export class AuditlogComponent implements OnInit {
       console.log(result.message);
       if (result?.message) {
         this.reports = result.message;
-        this.reports.forEach(element => {
-           const date = moment(element.created_on);
-           const date1 = moment(element.updated_on);
-           element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
-           element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
-        });
+        // this.reports.forEach(element => {
+        //    const date = moment(element.created_on);
+        //    const date1 = moment(element.updated_on);
+        //    element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+        //    element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+        // });
         this.dataSource.data = this.reports;
         this.resultsLength = result?.total_count;
       }
@@ -103,9 +104,9 @@ export class AuditlogComponent implements OnInit {
     }
   }
   filter(filterform, pgnumber) {
-    this.requiredfield = true;
-    if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
-      this.requiredfield = false;
+    // this.requiredfield = true;
+    if (filterform.valid) {
+      // this.requiredfield = false;
       const data = {
         from_date: moment(filterform.value.fromdate).format('YYYY-MM-DD'),
         to_date: moment(filterform.value.todate).format('YYYY-MM-DD'),
@@ -117,12 +118,12 @@ export class AuditlogComponent implements OnInit {
         console.log(result.message);
         if (result?.success === true) {
           this.reports = result?.message;
-          this.reports.forEach(element => {
-            const date = moment(element.created_on);
-            const date1 = moment(element.updated_on);
-            element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
-            element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
-           });
+          // this.reports.forEach(element => {
+          //   const date = moment(element.created_on);
+          //   const date1 = moment(element.updated_on);
+          //   element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+          //   element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+          //  });
           this.dataSource.data = this.reports;
           this.resultsLength = result.total_count;
         } else {
@@ -139,9 +140,23 @@ export class AuditlogComponent implements OnInit {
     this.getallauditreports('0');
   }
   export(filterform) {
-    this.requiredfield = false;
-    const fromdate = filterform.value.fromdate && filterform.value.todate ? filterform.value.fromdate.toISOString() : 'undefined';
-    const todate = filterform.value.todate && filterform.value.fromdate ? filterform.value.todate.toISOString() : 'undefined';
+    // this.requiredfield = false;
+    if (filterform.valid) {
+      const fromdate = moment(filterform.value.fromdate1).format('YYYY-MM-DD');
+      const todate =  moment(filterform.value.todate1).format('YYYY-MM-DD');
+      this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
+        if (result?.data?.get_admin_export_auditlog?.success === true) {
+          filterform.reset();
+          window.open(result?.data?.get_admin_export_auditlog.message);
+        } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
+          Swal.fire('Report not found');
+        }
+      });
+    }
+  }
+  exportall() {
+    const fromdate = 'undefined';
+    const todate = 'undefined';
     this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
       if (result?.data?.get_admin_export_auditlog?.success === true) {
         window.open(result?.data?.get_admin_export_auditlog.message);
@@ -156,5 +171,8 @@ export class AuditlogComponent implements OnInit {
     } else {
       this.getallauditreports(e.pageIndex.toString());
     }
+  }
+  openexportdialog(templateRef) {
+    this.dialog.open(templateRef);
   }
 }

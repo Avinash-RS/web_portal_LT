@@ -64,6 +64,7 @@ export class LearnerprofileComponent implements OnInit {
   }
   getprofiledetails() {
   if (this.userid) {
+    console.log(this.userid);
     this.learnerservice.view_profile1(this.userid.user_id).subscribe((profiledetail: any) => {
       this.profiledetail = profiledetail?.data?.view_profile?.message[0];
       this.learnerservice.getlearnertrack(this.userid.user_id, this.userid._id).subscribe((trackdetail: any) => {
@@ -72,7 +73,7 @@ export class LearnerprofileComponent implements OnInit {
         this.dataSource1.data = this.coursedetail;
         this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
         this.displayedColumns1 = (['sno']).concat(this.columns1.map(c => c.columnDef));
-
+console.log(trackdetail?.data?.get_learner_track?.message?.Enrolled_courses)
         trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.
         push({lastlogin: trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0].last_login[0] });
 

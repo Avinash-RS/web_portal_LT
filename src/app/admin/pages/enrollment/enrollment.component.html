@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">User Management</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Course Enrollment</li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">User management</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Course enrollment</li>
   </ol>
 </nav>
 
@@ -11,7 +11,7 @@
     <mat-spinner diameter="30"></mat-spinner>
   </div>
   <div class="col-5">
-    <h1>Course Enrollment</h1>
+    <h1>Course enrollment</h1>
   </div>
   <div class="col-7">
     <div class="toggle">
@@ -20,7 +20,7 @@
       </div>
       <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()"
         value="user_group" id="sizeWeight" checked="checked" />
-      <label for="sizeWeight">User Group</label>
+      <label for="sizeWeight">User group</label>
       <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()"
         value="individual" id="sizeDimensions" />
       <label for="sizeDimensions">Individual</label>
@@ -46,7 +46,7 @@
           <mat-header-cell *matHeaderCellDef>
             <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource?.data?.length"
               [(ngModel)]="selectall" (change)="selectallchange(selectall)">
-            </mat-checkbox>Select all
+            </mat-checkbox>
           </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <mat-checkbox style="padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
@@ -93,7 +93,7 @@
         <mat-header-cell *matHeaderCellDef>
           <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource1?.data?.length"
             [(ngModel)]="selectall1" (change)="selectallchange1(selectall1)">
-          </mat-checkbox> Select all
+          </mat-checkbox>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <mat-checkbox style="padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange1(row)">
