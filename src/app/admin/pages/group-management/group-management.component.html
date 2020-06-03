@@ -20,7 +20,7 @@
         <br>
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
-          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+          <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle>
             <li class="mat-tree-node newstyle" renderDebug>
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
@@ -30,7 +30,7 @@
                 </mat-icon>
               </button>
               <!-- (change)="selected = node" -->
-              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
+              <mat-checkbox  name="checkbox"
                 [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
             </li>
@@ -46,7 +46,8 @@
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox  [checked]="selected === node" (change)="selected = node" name="checkbox"
+                <!-- [checked]="selected === node" (change)="selected = node" -->
+                <mat-checkbox   name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
