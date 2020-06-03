@@ -1126,3 +1126,33 @@ export const getadminexportauditlog = gql`
                 message
              }
 }`;
+
+
+export const getCoursesChart = gql`
+   query getCoursesChart{
+    success
+    error_msg
+    data{
+      _id
+      main_cat{
+        _id 
+        category_id 
+        category_name
+        level
+        main_cat_course_count
+      }
+      sub_cat{
+        _id
+        sub_category_id
+        sub_category_name
+        level
+        sub_cat_course_count
+      }
+      sub_sub_cat{
+         _id
+        super_sub_category_id
+        level
+        sub_sub_cat_course_count
+      }
+    }
+}`;
