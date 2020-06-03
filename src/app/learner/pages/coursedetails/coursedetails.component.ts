@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class CoursedetailsComponent implements OnInit {
   course: any = null;
+  // loadingCourse = false;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -43,13 +44,13 @@ export class CoursedetailsComponent implements OnInit {
       0: {
         items: 1
       },
-      20: {
+      400: {
         items: 2
       },
-      40: {
+      740: {
         items: 3
       },
-      60: {
+      940: {
         items: 4
       }
     },
@@ -68,21 +69,24 @@ export class CoursedetailsComponent implements OnInit {
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
     public sanitizer: DomSanitizer) {
-    this.loader.show();
+
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      
     this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
+      // this.loadingCourse = true;
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
+        // this.loadingCourse = false;
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
         this.course.enrollment_status = detail.enrollment_status;
-        this.loader.hide();
         console.log(this.course)
-      } else
-        this.loader.hide();
+      } else{
+        
+      }
+      // this.loadingCourse = false;
     });
-    console.log(detail, detail.id, 'course id')
     this.Lservice.getModuleData(detail.id).subscribe(data => {
       this.content = data.data['getmoduleData']['data'][0];
       this.modulength = this.content['coursedetails'].length;
