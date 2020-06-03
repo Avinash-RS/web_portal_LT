@@ -35,6 +35,7 @@ import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component'
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RatingModule } from 'ng-starrating';
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
@@ -106,6 +107,7 @@ const routes: Routes = [
     NgOtpInputModule,
     NgxPaginationModule,
     MyDatePickerModule,
+    RatingModule
   ],
   providers: [
     Apollo, 

@@ -7,7 +7,7 @@ import {
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
   get_sub_category, get_course_by_subcategory, get_module_topic,
-  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails
+  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails,getFeedbackQuestion
 } from './operations/learner_query';
 
 
@@ -17,7 +17,7 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile, getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,
+  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,InsertCourseFeedback
 } from './operations/learner_mutation';
 
 import { HttpClient } from '@angular/common/http';
@@ -509,6 +509,18 @@ export class LearnerServicesService {
   getPopularcourse() {
     return this.Apollo.query({
       query: getPopularcourse,
+    });
+  }
+  getFeedbackQuestion(){
+    return this.Apollo.query({
+      query: getFeedbackQuestion
+    });
+  }
+  InsertCourseFeedback(feedback){
+    console.log(feedback,'lllllllllllllllllllllllllllllllllllllllll')
+    return this.Apollo.query({
+      query: InsertCourseFeedback,
+      variables:feedback
     });
   }
 }

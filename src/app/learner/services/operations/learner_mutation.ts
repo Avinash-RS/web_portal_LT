@@ -831,3 +831,10 @@ export const createGuidanceRequest = gql`
     }
   }
 `;
+export const InsertCourseFeedback = gql`
+mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content]){
+    InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans) {
+      success
+      message
+    }
+  }`;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-scormplayer',
@@ -29,7 +29,10 @@ export class ScormplayerComponent implements OnInit {
   modulength: any;
   public isCollapsed = false;
   countofdoc: any;
-  constructor(public sanitizer: DomSanitizer,    public spinner: NgxSpinnerService,public activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
+  question_id: any = [];
+  jsonData:any;
+  allFeedbackQue:any;
+  constructor( private dialog: MatDialog,public sanitizer: DomSanitizer,    public spinner: NgxSpinnerService,public activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router,public commonService : CommonServicesService,) { 
       var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras && 
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -111,4 +114,31 @@ export class ScormplayerComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
   
   }
+  getFeedbackQue() {
+    this.service.getFeedbackQuestion().subscribe(data => {
+     //console.log(data.data['getFeedbackQuestion']['success'])
+     if(data.data['getFeedbackQuestion']['success'] === true){
+      ///console.log(data.data['getFeedbackQuestion'])
+      this.allFeedbackQue=data.data['getFeedbackQuestion']['data']
+     }
+    })
+  }
+  submitFeedback(are,are1,selectOption){
+    var question_ans: any = [];
+      question_ans.push({question:'What do you like about the module ?',answer:are},{question:'What could be improved ?',answer:are1},{question:'Would you recommend this to a friend ?',answer:selectOption})
+      this.question_id.question_ans=question_ans
+      this.question_id.user_id='hghghjg'
+      this.service.InsertCourseFeedback(this.question_id).subscribe(data => {
+        if(data.data['InsertCourseFeedback']['success']==true){
+          console.log('success')
+        }else{
+          console.log('fail')
+        }
+      })
+  }
+  test(templateRef: TemplateRef<any>){
+    // this.showAppliedFiltre = false;
+    this.dialog.open(templateRef);
+  }
+  
 }
