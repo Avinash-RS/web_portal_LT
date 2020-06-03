@@ -107,10 +107,11 @@ export class AuditlogComponent implements OnInit {
     if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
       this.requiredfield = false;
       const data = {
-        from_date: filterform.value.fromdate.toISOString(),
-        to_date: filterform.value.todate.toISOString(),
+        from_date: moment(filterform.value.fromdate).format('YYYY-MM-DD'),
+        to_date: moment(filterform.value.todate).format('YYYY-MM-DD'),
         pagenumber: pgnumber
       };
+      console.log(data);
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
         this.resultsLength = null;
         console.log(result.message);
