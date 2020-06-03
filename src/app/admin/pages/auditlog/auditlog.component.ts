@@ -80,10 +80,10 @@ export class AuditlogComponent implements OnInit {
       if (result?.message) {
         this.reports = result.message;
         this.reports.forEach(element => {
-           const date = moment(element.created_on);
-           const date1 = moment(element.updated_on);
-           element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
-           element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+          const date = moment(element.created_on);
+          const date1 = moment(element.updated_on);
+          element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+          element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
         });
         this.dataSource.data = this.reports;
         this.resultsLength = result?.total_count;
@@ -121,7 +121,7 @@ export class AuditlogComponent implements OnInit {
             const date1 = moment(element.updated_on);
             element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
             element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
-           });
+          });
           this.dataSource.data = this.reports;
           this.resultsLength = result.total_count;
         } else {
