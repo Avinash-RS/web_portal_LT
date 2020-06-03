@@ -38,9 +38,10 @@
 .medbox{
     margin-left: 7%;
     margin-top: 5%;
-    height: 146px;
+    height: 160px;
     margin-bottom: 10px;
-    width: 80%;
+    width: 85%;
+    border: 1px solid #cccccc7d;
     color: $color-darkGrey ;
     border-radius: 10px;
     background-color: $color-white;
@@ -350,13 +351,13 @@ h3{
     text-align: inherit;
     color: #000000;
     border-radius: 6px;
-    border: none;
+    border: 1px solid #cccccc7d;
     background-color: $light-grey;
     box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03) !important;
  }
 
  button:focus {
-    border: none;
+    border: 1px solid #cccccc7d;
     outline: none;
   }
   :host::ng-deep mat-progress-bar.my-color .mat-progress-bar-fill::after {

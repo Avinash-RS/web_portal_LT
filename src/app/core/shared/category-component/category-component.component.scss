@@ -119,19 +119,18 @@
   :host ::ng-deep .mat-typography h3 {
     margin: 5px 0px 5px !important;
   }
-  :host ::ng-deep .mat-dialog-container {
-    display: block;
-    padding: 80px;
-    border-radius: 4px;
-    margin-left: 192px !important;
-    margin-top: 190px !important;
-    // margin-top: 22px !important;
-    box-sizing: border-box;
-    overflow:  scroll !important;
-    outline: 0;
-    width: 83em !important;
-    height: 550px !important;
-  }
+  // :host ::ng-deep .mat-dialog-container {
+    :host ::ng-deep .mat-dialog-container {
+      padding: 24px;
+      margin-top: 168px !important;
+      border-radius: 4px;
+      box-sizing: border-box;
+      overflow: auto !important;
+      outline: 0;
+      width: 100% !important;
+      max-height: 482px !important;
+    }
+  // }
   :host ::ng-deep .mat-dialog-actions {
     border-top: 1px solid !important;
   }
