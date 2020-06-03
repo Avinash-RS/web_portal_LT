@@ -36,6 +36,9 @@ export class CommonServicesService {
   selectedCategory$ = new Subject<any>();
   selectedCategory = this.selectedCategory$.asObservable();
 
+   //Category to view all courses component
+  appliedCategory$ = new Subject<any>();
+  appliedCategory = this.appliedCategory$.asObservable();
 
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
