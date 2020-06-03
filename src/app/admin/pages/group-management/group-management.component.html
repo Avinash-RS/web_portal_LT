@@ -30,7 +30,7 @@
                 </mat-icon>
               </button>
               <!-- (change)="selected = node" -->
-              <mat-checkbox [checked]="selected === node" name="checkbox"
+              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
                 [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
             </li>
@@ -46,7 +46,7 @@
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox  (change)="selected = node" name="checkbox"
+                <mat-checkbox  [checked]="selected === node" (change)="selected = node" name="checkbox"
                   [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
