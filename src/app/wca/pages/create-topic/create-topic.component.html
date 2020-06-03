@@ -13,20 +13,13 @@
                 </ng-template>
 
             </a></li>
-        <ng-container *ngIf="query.addModule == 'true' || query.edit; else createModule">
+        <ng-container>
             <li class="breadcrumb-item">
                 <a
                     href="/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}">Add
                     Module</a>
             </li>
         </ng-container>
-        <ng-template #createModule>
-            <li class="breadcrumb-item">
-                <a
-                    href="/Admin/auth/Wca/viewmodule?viewingModule={{query.viewingModule}}&image={{query.image}}&courseName={{query.courseName}}">Create
-                    Module</a>
-            </li>
-        </ng-template>
 
         <li *ngIf="query.isCreateTemp" class="breadcrumb-item">
             <a
@@ -382,7 +375,7 @@
                     draft</button>
                 <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
                         type="button">Create</button></span>
-                <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']" type="button">Cancel</button>
+                <button class="backgroundcol1" (click)="onCancel()" type="button">Cancel</button>
 
             </div>
         </div>
