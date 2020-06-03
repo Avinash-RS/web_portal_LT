@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BarRatingModule } from "ngx-bar-rating";
+import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask'
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -22,7 +22,7 @@ import { MatListModule, MatTableModule, MatSortModule, MatChipsModule } from '@a
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ViewModuleComponent } from './pages/view-module/view-module.component';
 import { ChooseTemplateComponent } from './pages/choose-template/choose-template.component';
-import { WcaService } from "./services/wca.service";
+import { WcaService } from './services/wca.service';
 import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
 import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
 import { MycreatedCourseComponent } from './pages/mycreated-course/mycreated-course.component';
@@ -36,9 +36,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 const routes: Routes = [
-
   { path: '', component: DashboardComponent, },
   { path: 'wca', component: WcaComponent, },
   { path: 'addcourse', component: CreateCourseComponent, },
@@ -47,7 +48,6 @@ const routes: Routes = [
   { path: 'addtemplate', component: CreateTemplateComponent, },
   { path: 'choosetemplate', component: ChooseTemplateComponent, },
   { path: 'addtopic', component: CreateTopicComponent, },
-
   { path: 'addfile', component: UploadFilesComponent, },
   { path: 'mycourse', component: MycreatedCourseComponent, },
   { path: 'ct', component: ChooseTemplateComponent, },
@@ -55,13 +55,28 @@ const routes: Routes = [
   { path: 'addmodule', component: AddModuleComponent },
   { path: 'previewcourse', component: CoursepreviewComponent },
   { path: 'modulerepository', component: ModuleRepositoryComponent }
-
-
-
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChooseTemplateComponent, WcaComponent, CreateCourseComponent, CreateModuleComponent, CreateTemplateComponent, ViewModuleComponent, ChooseTemplateComponent, CreateTopicComponent, UploadFilesComponent, MycreatedCourseComponent, ReferenceFileComponent, CoursepreviewComponent, AddModuleComponent, ModuleRepositoryComponent, ViewCoursesComponent, BlobReaderComponent],
+  declarations: [
+    DashboardComponent,
+    ChooseTemplateComponent,
+    WcaComponent,
+    CreateCourseComponent,
+    CreateModuleComponent,
+    CreateTemplateComponent,
+    ViewModuleComponent,
+    ChooseTemplateComponent,
+    CreateTopicComponent,
+    UploadFilesComponent,
+    MycreatedCourseComponent,
+    ReferenceFileComponent,
+    CoursepreviewComponent,
+    AddModuleComponent,
+    ModuleRepositoryComponent,
+    ViewCoursesComponent,
+    BlobReaderComponent,
+    VideoPreviewModalComponent],
   imports: [
     CoreModule,
     MatDialogModule,
@@ -75,7 +90,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,
-    //NgxPasswordToggleModule,
+    // NgxPasswordToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
@@ -86,11 +101,11 @@ const routes: Routes = [
     MatChipsModule,
     MatSlideToggleModule,
     PerfectScrollbarModule,
-    CKEditorModule
-    
+    CKEditorModule,
+    AngularEditorModule
   ],
   providers: [Apollo],
-  entryComponents: [ViewCoursesComponent, BlobReaderComponent],
+  entryComponents: [ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }
