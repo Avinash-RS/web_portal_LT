@@ -28,6 +28,7 @@ export class AddModuleComponent implements OnInit {
   @ViewChild('file') fileUploaded;
   scormPath = '';
   isScrom: boolean;
+  isCreate: boolean;
 
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
@@ -49,6 +50,7 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
+        this.isCreate = params.isCreate && params.isCreate == 'true' ? true : false;
         this.isRepo = (this.queryData.isRepo === 'true') ? 'true' : 'false';
         this.routedCourseDetails = {
           courseId: params.courseId,
@@ -61,6 +63,13 @@ export class AddModuleComponent implements OnInit {
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
+      if(this.isCreate) {
+        this.isCreate = false;
+        setTimeout(() => {
+          debugger
+          this.getCourseDetails();
+        }, 5000);
+      }
     }
   }
 
@@ -100,6 +109,7 @@ export class AddModuleComponent implements OnInit {
         this.updateModList();
         this.updateCourseDetails();
       }
+ 
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
