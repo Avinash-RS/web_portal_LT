@@ -112,7 +112,7 @@ export class AddModuleComponent implements OnInit {
 
   updateModList() {
     this.courseDetails.coursedetails.forEach((data) => {
-      if (data.moduleid) {
+      if (data.moduleid && data.modulestatus == 'true') {
         this.moduleList.push(data.moduleid);
       }
     });
@@ -314,6 +314,7 @@ export class AddModuleComponent implements OnInit {
           let isInvalid = false;
           this.courseDetails.coursedetails.forEach((cModId) => {
             if (cModId.moduleid == val.moduleid) {
+              cModId.modulestatus = 'true';
               isInvalid = true;
             }
           })

@@ -487,9 +487,29 @@ table {
 }
 
 .p-5 {
-  padding: 1.5rem!important;
+  padding: 1.5rem !important;
 }
 
 .p-5[_ngcontent-wto-c26] {
   padding: 1.0rem !important;
+}
+////////////////////////////////////////////////////////////
+.shadow {
+  border: 1px solid #ccc;
+  box-shadow: 2px 0px 10px #ccc;
+}
+
+/deep/ .mat-checkbox.mat-accent {
+  .mat-checkbox-frame {
+    border: 1px solid #9E9E9E;
+  }
+
+  &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+  }
+
+  .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+  }
 }

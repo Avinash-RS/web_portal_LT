@@ -4,8 +4,9 @@
     <li class="breadcrumb-item active" aria-current="page">Catagory Management</li>
   </ol>
 </nav>
-
-<div class="container p-30">
+<h1 style="padding-left:25px"> Category Management</h1>
+<div class="container ">
+ 
   <div class="container m-t-20">
     <div class="row">
       <!-- Mat tree code here ( left hand side) -->
@@ -100,14 +101,14 @@
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
             <div class="row">
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button *ngIf="showCourses"
+                <button mat-flat-button *ngIf="showCourses"
                   class="background-blue width_80 m-b-10 moveTo-btn color_white" (click)="openMoveTo(viewDialog)"
                   [disabled]="!applyAllCourses && selectedArray?.length == 0">
                   <span class="material-icons" style="vertical-align: middle;">domain</span>Move To
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button [disabled]="showCourses ||
+                <button mat-flat-button [disabled]="showCourses ||
                  (addCategoryForm && (addCategoryForm?.value?.category_name != '' || addCategoryForm?.value?.category_description != '' || addCategoryForm?.value?.category_image != '') 
                 && !selectedCategory?.category_name && showAddCatForm ) ||
                 (addSubCategoryForm && (addSubCategoryForm?.value?.sub_category_name != '' || addSubCategoryForm?.value?.sub_category_description != '')
@@ -117,7 +118,7 @@
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button mat-raised-button (click)="canotEdit = false; edit = true" [disabled]="showCourses || showHome ||
+                <button mat-flat-button (click)="canotEdit = false; edit = true" [disabled]="showCourses || showHome ||
                 (showAddCatForm && addCategoryForm && selectedCategory?.category_name == undefined) ||
                 (showAddSubCatForm && showAddSubCatForm && selectedSubCategory?.sub_category_name == undefined) ||
                 (showAddSuperSubCatForm && addSuperSubCategoryForm && selectedSuperSubCategory?.super_sub_category_name == undefined)
@@ -126,7 +127,7 @@
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
-                <button (click)="gotoDelete()" mat-raised-button [disabled]="showCourses || showHome ||
+                <button (click)="gotoDelete()" mat-flat-button [disabled]="showCourses || showHome ||
                 (showAddCatForm && addCategoryForm && selectedCategory?.category_name == undefined) ||
                 (showAddSubCatForm && showAddSubCatForm && selectedSubCategory?.sub_category_name == undefined) ||
                 (showAddSuperSubCatForm && addSuperSubCategoryForm && selectedSuperSubCategory?.super_sub_category_name == undefined)
@@ -344,7 +345,7 @@
         <div class="overflow-auto" *ngIf="showCourses">
           <div class="row m-r-20 m-l-20">
             <div class="col-lg-3 col-md-3 col-sm-9 col-9">
-              <button id="Hide_Courses" mat-raised-button class="width_70 float-left background-blue color_white center"
+              <button id="Hide_Courses" mat-flat-button class="width_70 float-left background-blue color_white center"
                 (click)="hideCourses();showCourses = false">Hide Courses</button>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-3 col-3"></div>
@@ -356,7 +357,7 @@
               </h3>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
-              <button id="selectAll" [disabled]="courses?.length == 0" mat-raised-button
+              <button id="selectAll" [disabled]="courses?.length == 0" mat-flat-button
                 class="width_70  m-b-10 float-right background-blue color_white center"
                 (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
             </div>
