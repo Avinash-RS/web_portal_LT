@@ -71,7 +71,7 @@ export class AddModuleComponent implements OnInit {
       if(this.isCreate) {
         this.isCreate = false;
         setTimeout(() => {
-          debugger
+          // debugger
           this.getCourseDetails();
         }, 5000);
       }

@@ -14,7 +14,8 @@ export class SearchComponent implements OnInit {
   constructor(public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
-
+    // debugger
+console.log('inside');
   }
   searchCourse(event) {
     var courseName = event.target.value
