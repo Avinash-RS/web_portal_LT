@@ -37,7 +37,7 @@ export const menus = [
             {
                 'name': 'Reports',
                 'link': 'reports',
-                'icon': 'widgets',
+                'icon': 'notes',
                 'chip': false,
                 'open': true,
             },

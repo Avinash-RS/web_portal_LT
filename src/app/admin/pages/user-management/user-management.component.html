@@ -110,7 +110,7 @@
 
             <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
               title="View {{element.username}}'s details">
-              <mat-icon style="color: #e6e5e5;font-size:20px; width:20px;">remove_red_eye</mat-icon>
+              <mat-icon style="color: #ccc;font-size:20px; width:20px;">remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button id="deactivate"
               [disabled]="(selectedArray && selectedArray.length > 0)"

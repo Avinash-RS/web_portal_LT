@@ -29,9 +29,9 @@
       <mat-icon *ngIf="course.wishlisted == false" style="color:red;">favorite_border</mat-icon>
     </button>
   </div>
-  <img *ngIf="course.course_img_url != 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url != 'null'" alt = "" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" width="100%" (click)="gotoDescription()">
-  <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url == 'null'" alt = "" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
   <mat-card-content>
     <div class="row course-name-row no_margin" (click)="gotoDescription()">
@@ -59,7 +59,8 @@
             Publish
           </button>
 
-          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false &&(btnType && btnType != 'Publish')"
+          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false && 
+          ( btnType != 'Publish')"
             (click)="enrollCourse()"> Enroll now
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
@@ -67,9 +68,8 @@
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'rejected' && showStatus == false"
           (click)="clickRejected()">Rejected
-            <!-- disabled="{{course.enrollment_status == 'rejected'}}">Rejected -->
           </button>
-          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved' && showStatus == false"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
           <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"

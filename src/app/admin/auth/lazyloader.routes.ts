@@ -33,7 +33,7 @@ export const appRoutes: Routes = [{
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, },
         { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' }, },
         { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, },
-        { path: 'auditlog', component: AuditlogComponent, data: { title: 'Profile' }, },
+        { path: 'auditlog', component: AuditlogComponent, data: { title: 'Audit Log' }, },
         {
             path: 'Wca',
             loadChildren: '../../wca/wca.module#WcaModule',

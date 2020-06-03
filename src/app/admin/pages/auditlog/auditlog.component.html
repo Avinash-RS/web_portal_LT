@@ -5,69 +5,53 @@
   </ol>
 </nav>
 <br>
-<!-- <div class="container">
-  <div class="p-5px"> -->
+
 <div>
   <h1 style="padding-left:25px"> Audit log</h1>
   <div>
-    <div class="row">
-      <div class="col-11 center">
-        <div>
-          <form #filterform="ngForm">
-            <div class="row">
-              <div class="col-lg-4 col-sm-4 col-xs-4 col-md-2">
-                <mat-form-field class="wid-100">
-                  <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)"
-                    required #fromdate1="ngModel" [matDatepicker]="picker"
-                    placeholder="Start date" color="accent">
-                  <mat-datepicker-toggle matSuffix [for]="picker">
-                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-error *ngIf="fromdate1.errors">
-                    <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2">
-                <mat-form-field class="wid-100">
-                  <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield required
-                    #todate1="ngModel" [matDatepicker]="picker1" placeholder="End date" color="accent"
-                    [min]=fromdate [max]=today>
-                  <mat-datepicker-toggle matSuffix [for]="picker1">
-                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                  <mat-error *ngIf="todate1.errors">
-                    <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class=" col-lg-4 col-md-12 col-sm-12 col-12  float_right m-b-10">
-                <div class="row">
-                  <div class="col-4">
-                    <button class="btnCss  button_border width_95 center f_size_14" (click)="filter(filterform,'0')">
-                      <span class="material-icons f_size_17 p-5px" style="vertical-align: middle;">
-                        filter_alt</span>Filter</button>
-                  </div>
-                  <div class="col-4">
-                    <button class="btnCss  button_border width_95 center f_size_14 background-maroon"
-                      (click)="cancel(filterform)">
-                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
-                        refresh</span>Reset</button>
-                  </div>
-                  <div class="col-4">
-                    <button class="btnCss  button_border width_95 center f_size_14" type="button"
-                      (click)="openexportdialog(exportdialog)">
-                      <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
-                        get_app</span>Export</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+    <div class="row no_margin " style="padding-left:40px">
+      <form #filterform="ngForm" class="width_100">
+        <div class="row m-b-10">
+          <div class="col-lg-7 col-sm-12 col-12 col-md-7 display_flex m-b-10">
+            <mat-form-field class="wid-100">
+              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" required
+                #fromdate1="ngModel" [matDatepicker]="picker" placeholder="Start date" color="accent">
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="fromdate1.errors">
+                <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
+              </mat-error>
+            </mat-form-field>&nbsp;&nbsp;
+            <mat-form-field class="wid-100">
+              <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield required #todate1="ngModel"
+                [matDatepicker]="picker1" placeholder="End date" color="accent" [min]=fromdate [max]=today>
+              <mat-datepicker-toggle matSuffix [for]="picker1">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error *ngIf="todate1.errors">
+                <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
+              </mat-error>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btnCss  button_border width_60 center f_size_14" (click)="filter(filterform,'0')">
+              <span class="material-icons f_size_17 p-5px" style="vertical-align: middle;">
+                filter_alt</span>Filter
+            </button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btnCss  button_border width_60 center f_size_14 background-maroon"
+              (click)="cancel(filterform)">
+              <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                refresh</span>Reset
+            </button>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-12 col-12 float_right ">
+            <button class="btnCss pm button_border width_30  f_size_14" type="button"
+              (click)="openexportdialog(exportdialog)">
+              <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                get_app</span>Export
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <hr style="border: 1px solid #ccc;margin:1px !important; ">
@@ -76,9 +60,7 @@
         <ng-container matColumnDef="sno">
           <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
-            <!-- <span class="mobile-label">S.No</span> -->
             <span class="desktop-data"> {{i+1}}</span>
-            <!-- <span class="mobile-data"> {{i+1}}</span> -->
           </mat-cell>
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
@@ -90,10 +72,9 @@
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
-            <!-- <span class="mobile-label">S.No</span> -->
             <button mat-icon-button (click)="openviewdialog(row,viewdetaildialog)" data-toggle="tooltip"
               data-placement="top">
-              <mat-icon>remove_red_eye</mat-icon>
+              <mat-icon style="color: #cccccc;font-size:20px; width:20px;">remove_red_eye</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
@@ -112,7 +93,7 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
   <mat-dialog-content style="width: 1000px">
-    <h2><b>View details</b> </h2>
+    <h2><strong>View details</strong> </h2>
     <mat-dialog-content>
       <form #profileForm="ngForm">
         <div class="container profile">
@@ -147,17 +128,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-lg-6 col-sm-12 col-12">
               <label>Request detail : <label
                   class="color_black capitalize f_wt_400">{{viewdetail?.api_call_request[0] | json}}</label></label>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-lg-6 col-sm-12 col-12">
               <label>Response :<label
                   class="color_black capitalize f_wt_400">{{viewdetail?.api_call_response[0] | json }}</label></label>
             </div>
           </div>
+
           <br>
         </div>
       </form>
@@ -173,59 +153,54 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
   <mat-dialog-content style="width: 650px">
-    <h2><b>Export</b> </h2>
     <mat-dialog-content>
       <form #profileForm="ngForm">
         <div class="container profile">
           <br>
           <form #exportform="ngForm">
-            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-              name="exportdata" [(ngModel)]="exportdata">
-              <mat-radio-button class="example-radio-button" value="exportall">
-                <button class="btnCss  button_border width_95 center f_size_14" type="button" (click)="exportall()">
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="exportdata"
+              [(ngModel)]="exportdata">
+              <mat-radio-button class="example-radio-button" value="exportall" >
+                <button class="btnCss  button_border  center f_size_14 wid_170" type="button" 
+                [disabled] = "exportdata == 'filteredexport'" (click)="exportall()">
                   <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
                     get_app</span>Export all</button>
               </mat-radio-button>
-              <br>
+              <br><br>
 
-              <mat-radio-button class="example-radio-button" value="filteredexport">
-                <!-- <div class="row"> -->
-                <!-- <div class="col-lg-4 col-sm-4 col-xs-4 col-md-2"> -->
-                <mat-form-field class="wid-100">
-                  <input matInput name="exportfromdate" [(ngModel)]="exportfromdate"
-                    (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel"
-                    [matDatepicker]="picker2" placeholder="Start date" color="accent">
+              <mat-radio-button class="example-radio-button" value="filteredexport" >
+                <mat-form-field class="wid-100" >
+                  <input matInput name="exportfromdate" [disabled] = "exportdata == 'exportall'" [(ngModel)]="exportfromdate"
+                    (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel" [matDatepicker]="picker2"
+                    placeholder="Start date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker2">
-                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                   <mat-error *ngIf="fromdate2.errors">
                     <small *ngIf="fromdate2.errors?.required" class="text-danger">From date is required</small>
                   </mat-error>
                 </mat-form-field> &nbsp;&nbsp;&nbsp;
-                <!-- </div> -->
-                <!-- <div class=" col-lg-4 col-sm-4 col-xs-4 col-md-2"> -->
-                <mat-form-field class="wid-100">
-                  <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield
-                    required #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date"
-                    color="accent" [min]=fromdate [max]=today>
+
+                <mat-form-field class="wid-100" >
+                  <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield required
+                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=fromdate
+                    [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker3">
-                    <!-- <mat-icon matDatepickerToggleIcon>today</mat-icon> -->
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker3></mat-datepicker>
                   <mat-error *ngIf="todate2.errors">
                     <small *ngIf="todate2.errors?.required" class="text-danger">To date is required</small>
                   </mat-error>
                 </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
-                <!-- </div> -->
-                <!-- class=" col-lg-4 col-md-12 col-sm-12 col-12  float_right m-b-10" -->
-                <div  *ngIf="exportdata == 'filteredexport'" class="float_right m-b-10">
-                  <button class="btnCss  button_border width_95 center f_size_14" (click)="export(exportform)">
-                    <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
-                      get_app</span>Export</button>
-                </div>
-                <!-- </div> -->
+
               </mat-radio-button>
+
+              <br>
+              <div *ngIf="exportdata == 'filteredexport'">
+                <button class="btnCss  button_border wid_170 center f_size_14" (click)="export(exportform)">
+                  <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                    get_app</span>Export</button>
+              </div>
             </mat-radio-group>
           </form>
           <br>

@@ -6,7 +6,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/cor
 import {
   MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
-  MatDialogModule, MatTooltipModule, MatDialogRef, MatTabHeader, MatHeaderRow, MatHeaderCell, MatHeaderCellDef, MatHeaderRowDef, MatSortHeader, MatRow, MatRowDef, MatCell, MatCellDef, MatTableModule
+  MatDialogModule, MatTooltipModule, MatDialogRef, MatTabHeader, MatHeaderRow, MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRowDef, MatSortHeader, MatRow, MatRowDef, MatCell, MatCellDef, MatTableModule
 } from '@angular/material';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,7 @@ describe('AdminCoursesComponent', () => {
   let component: AdminCoursesComponent;
   let fixture: ComponentFixture<AdminCoursesComponent>;
   let service: AdminMockService;
-  let admincourse = require("assets/mockdata/wca/admin-courses.json");
+  const admincourse = require('assets/mockdata/wca/admin-courses.json');
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -82,43 +83,42 @@ describe('AdminCoursesComponent', () => {
   });
 
   it('Check for resize width below 600', () => {
-    let event = {
+    const event = {
       target: {
         innerWidth: 530
       }
-    }
+    };
     component.onResize(event);
     expect(component.breakpoint).toBe(1);
-  })
-
+  });
   it('Check for the windows inner width between 600 and 768', () => {
-    let event = {
+    const event = {
       target: {
         innerWidth: 650
       }
-    }
+    };
     component.onResize(event);
     expect(component.breakpoint).toBe(2);
-  })
+  });
 
   it('Check for the windows inner width between 768 and 1024', () => {
-    let event = {
+    const event = {
       target: {
         innerWidth: 800
       }
-    }
+    };
     component.onResize(event);
     expect(component.breakpoint).toBe(3);
-  })
+  });
   it('Check for the windows inner width above 1024', () => {
-    let event = {
+    const event = {
       target: {
         innerWidth: 1200
       }
-    }
+    };
     component.onResize(event);
     expect(component.breakpoint).toBe(4);
-  })
+  });
 
   it('Check get published courses', () => {
     // let service: AdminMockService;
@@ -127,36 +127,36 @@ describe('AdminCoursesComponent', () => {
     // service = TestBed.get(AdminMockService);
 
     component.pagenumber = 0;
-    expect(component.type = 'published')
+    expect(component.type = 'published');
     component.getCourses();
     // debugger
     // expect(service.getAllCoursePublished("undefined", component.pagenumber)).toBe(admincourse.data.get_course_published.message);
     // let admincourse;
     // expect(admincourse = service.getAllCoursePublished("undefined", component.pagenumber))
-    console.log(admincourse)
+    console.log(admincourse);
     // admincourse = service.getAllCoursePublished("undefined", component.pagenumber);
 
     // debugger
-    expect(service.getAllCoursePublished("undefined", component.pagenumber));
+    expect(service.getAllCoursePublished('undefined', component.pagenumber));
     fixture.detectChanges();
-    service.getAllCoursePublished("undefined", component.pagenumber).subscribe(admincourse => {
+    service.getAllCoursePublished('undefined', component.pagenumber).subscribe((adminCourse: any) => {
       // expect(value).toBe('observable value');
       fixture.detectChanges();
-      console.log(admincourse);
-      expect(admincourse.data && admincourse.data.get_course_published.status == true)
+      console.log(adminCourse);
+      expect(adminCourse.data && adminCourse.data.get_course_published.status === true);
       fixture.detectChanges();
-      expect(component.courseList = admincourse.data.get_course_published.message);
-      expect(component.goto = 'publish')
-      expect(component.showPublishedDate = true)
-      expect(component.loader = false)
-      expect(component.btnType = null)
-      expect(component.showCount = true)
-      expect(component.showRating = true)
-      expect(component.showPrice = true)
-      expect(component.course_count = 1)
-      expect(component.viewType = 'grid')
-      expect(component.breakpoint = 4)
-      console.log(admincourse.data.get_course_published.message, 'admincourses :', component.courseList)
+      expect(component.courseList = adminCourse.data.get_course_published.message);
+      expect(component.goto = 'publish');
+      expect(component.showPublishedDate = true);
+      expect(component.loader = false);
+      expect(component.btnType = null);
+      expect(component.showCount = true);
+      expect(component.showRating = true);
+      expect(component.showPrice = true);
+      expect(component.courseCount = 1);
+      expect(component.viewType = 'grid');
+      expect(component.breakpoint = 4);
+      console.log(adminCourse.data.get_course_published.message, 'admincourses :', component.courseList);
     });
 
     // let service = fixture.debugElement.injector.get(AdminMockService);
@@ -183,6 +183,6 @@ describe('AdminCoursesComponent', () => {
     // expect(homeComponent.listOfUsers).toEqual(response);
 
 
-   
-  })
+
+  });
 });

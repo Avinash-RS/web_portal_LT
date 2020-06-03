@@ -15,7 +15,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-//const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
+const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
 // const context = require.context('./app/wca/pages/create-course', true, /create-course.component\.spec\.ts$/);
 
 // const context = require.context('../src/app/learner/pages/login/login.component', true, /\.spec\.ts$/);
@@ -27,5 +27,5 @@ getTestBed().initTestEnvironment(
 // const context = require.context('../src/app/learner/pages/login/', true,/login.component\.spec\.ts$/);
 
 
-const context = require.context('./app/admin/pages/catalogue-management', true, /catalogue-management.component\.spec\.ts$/);
+// const context = require.context('./app/admin/pages/catalogue-management', true, /catalogue-management.component\.spec\.ts$/);
 context.keys().map(context);
