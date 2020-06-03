@@ -313,6 +313,7 @@ export class CreateCourseComponent implements OnInit {
                         this.router.navigate(['/Admin/auth/Wca/addmodule'],
                             {
                                 queryParams: {
+                                    isCreate: false,
                                     courseId: this.queryData.viewingModule,
                                     courseImage: this.courseForm.value.course_img_url,
                                     courseName: this.courseForm.value.course_name
@@ -349,6 +350,7 @@ export class CreateCourseComponent implements OnInit {
                         this.router.navigate(['/Admin/auth/Wca/addmodule'],
                             {
                                 queryParams: {
+                                    isCreate: true,
                                     courseId: data.course_id,
                                     courseImage: this.courseForm.value.course_img_url,
                                     courseName: this.courseForm.value.course_name
