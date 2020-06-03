@@ -13,20 +13,13 @@
                 </ng-template>
 
             </a></li>
-        <ng-container *ngIf="query.addModule == 'true' || query.edit; else createModule">
+        <ng-container>
             <li class="breadcrumb-item">
                 <a
                     href="/Admin/auth/Wca/addmodule?courseId={{query.viewingModule}}&courseImage={{query.image}}&courseName={{query.courseName}}">Add
                     Module</a>
             </li>
         </ng-container>
-        <ng-template #createModule>
-            <li class="breadcrumb-item">
-                <a
-                    href="/Admin/auth/Wca/viewmodule?viewingModule={{query.viewingModule}}&image={{query.image}}&courseName={{query.courseName}}">Create
-                    Module</a>
-            </li>
-        </ng-template>
 
         <li *ngIf="query.isCreateTemp" class="breadcrumb-item">
             <a
@@ -59,7 +52,7 @@
 <span *ngIf="createTopicForm?.controls">
     <form [formGroup]="createTopicForm" (ngSubmit)="addTopicFrom()" class="formHeight">
         <div class="container wrap-body">
-            <div style="display: flex;">
+            <div style="display: flex;width: 100%;">
                 <span *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name : </span>
                 <span *ngIf="queryData?.template_details">
                     <input class="Bcg" type="text" #modName placeholder="Enter the Name" formControlName="modulename" required />
@@ -84,7 +77,6 @@
 
                                         <div class="example-list">
                                             <div *ngIf="queryData">
-                                                <!-- *ngFor="let item of queryData.template_details; let m = index" -->
                                                 <div class="example-box1">
                                                     <div (click)="activate(queryData?.template_details[i])"
                                                         class="clickBcg bcgBorder"
@@ -92,7 +84,6 @@
                                                         <div class="dspFlx" [formGroupName]="i">
                                                             <span class="restictWidth">
                                                                 <mat-form-field class="matWidth" appearance="outline">
-                                                                    <!-- <mat-label class="clrLabel">Topic Name</mat-label> -->
                                                                     <input matInput style="color:black;height: 21px;"
                                                                         formControlName="topicname"
                                                                         placeholder="Topic Name">
@@ -119,17 +110,53 @@
                                                             <div  *ngIf="queryData?.template_details[i].name === 'Feedback' || queryData?.template_details[i].name === 'Video'">
                                                             <span><img class="img1" src="{{queryData?.template_details[i]?.image}}"></span>
                                                             </div>
-                                                            <span
-                                                                class="padTop">{{queryData?.template_details[i]?.name}}</span>
+                                                            <span class="padTop">{{queryData?.template_details[i]?.name}}</span>
                                                             <span class="padTop1 showCon"
                                                                 *ngIf="!j?.value?.topicimages[0] &&  queryData?.template_details[i].name != 'Feedback' && queryData?.template_details[i].name != 'Video'">
                                                                 <small>content is
                                                                     empty Double Click to edit</small></span>
-                                                            <!-- <span class="padTop1"
-                                                                *ngIf="queryData?.template_details[i]?.name===active?.name">
-                                                                <small>{{fileType}}</small></span> -->
-                                                            <!-- knowledge check -->
-                                                            <div class="UploadBlock"
+                                                                <!--added now for knowledege check-->
+                                                            <div class="row UploadBlock"
+                                                            *ngIf="queryData?.template_details[i].name === 'Knowledge Check'"
+                                                            [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <div class="col-md-4">
+                                                                    <button *ngIf="j?.value?.topicimages[0]"
+                                                                    mat-raised-button class="btnprev" type="button"
+                                                                    (click)="openPreviewModal(createTopicForm,i)">preview</button>
+                                                                </div>
+                                                                <div class="col-md-4 uploadKC">
+                                                                    <div class="ml5">
+                                                                        <mat-icon class="knowledgeIcon"
+                                                                        (click)="sampleDownload()">get_app</mat-icon>
+                                                                    <label class="fsize12">Download question
+                                                                        template</label>
+                                                                    </div>
+                                                                    <div class="ml5">
+                                                                        <input style="display: none;" [id]="'fileInput4'+i"
+                                                                        type='file' #fileInput4
+                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i)">
+                                                                    <span (click)="fileInput4.click()">
+                                                                        <mat-icon class="knowledgeIcon">publish
+                                                                        </mat-icon>
+                                                                    </span><label class="fsize12">Upload
+                                                                        Question</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div *ngIf="j?.value?.topicimages[0]" class="ml10 mt10" [formGroupName]="i">
+                                                                        <span class="dspFlxinside">
+                                                                            <small class="spanTime"> Time required to complete
+                                                                                the topic </small>
+                                                                                <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00:00">
+                                                                        </span>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--added now-->
+                                                            <!-- commented for knowledgecheck -->
+                                                            <!-- <div class="UploadBlock"
                                                                 *ngIf="queryData?.template_details[i].name === 'Knowledge Check'"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
                                                                 <div style="width:85px">
@@ -151,8 +178,9 @@
                                                                         <mat-icon class="knowledgeIcon">publish
                                                                         </mat-icon>
                                                                     </span><label class="fsize12">Upload
-                                                                        Question</label></div>
-                                                                <span *ngIf="j?.value?.topicimages[0]" class="ml10" [formGroupName]="i">
+                                                                        Question</label>
+                                                                    </div>
+                                                                <div *ngIf="j?.value?.topicimages[0]" class="ml10" [formGroupName]="i">
                                                                     <span class="dspFlxinside">
                                                                         <small class="spanTime"> Time required to complete
                                                                             the topic </small>
@@ -160,9 +188,39 @@
                                                                     </span>
                                                                         <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                     
-                                                                </span>
+                                                                </div>
+                                                            </div> -->
+                                                            <!-- commented for knowledgecheck -->
+
+                                                            <!-- added for new template -->
+                                                            <div class="row UploadBlock" *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
+                                                            [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <div class="col-md-6">
+                                                                    <span style="width:20%"><button *ngIf="queryData?.template_details[i].name != 'SCORM'" mat-raised-button class="btnprev ml30 fleft"
+                                                                        type="button"
+                                                                        (click)="previewimages(j,$event,queryData?.template_details[i])">preview</button>
+                                                                        <span
+                                                                        *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name == 'SCORM'"
+                                                                        class="UploadBlock ml30 fleft"
+                                                                        [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                        <label style="font-size: 12px;">File Uploaded</label>
+                                                                    </span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span [formGroupName]="i">
+                                                                        <span class="dspFlxinside ml30">
+                                                                            <small class="spanTime"> Time required to complete
+                                                                                the topic </small>
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
+                                                                        </span>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                    </span>
+                                                                </div>
                                                             </div>
-                                                            <span
+                                                            <!-- added for new template -->
+                                                            <!-- commented for remaining template -->
+                                                            <!-- <span
                                                                 *ngIf="j?.value?.topicimages[0] && queryData?.template_details[i].name != 'Knowledge Check' && queryData?.template_details[i].name != 'Video'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
@@ -184,8 +242,31 @@
                                                                     </span>
                                                                         <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                 </span>
-                                                            </span>
-                                                            <span
+                                                            </span> -->
+                                                            <!-- commented for remaining template -->
+                                                            <!-- added now for feedback -->
+                                                            <div class="row UploadBlock" *ngIf="queryData?.template_details[i].name == 'Feedback'"
+                                                            [class.active]="queryData?.template_details[i]?.name==active?.name">
+                                                                <div class="col-md-6">
+                                                                    <span><button mat-raised-button class="btnprev"
+                                                                        type="button"
+                                                                        (click)="openFeedback()">preview</button></span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span class="ml10" [formGroupName]="i">
+                                                                        <span class="dspFlxinside ml30">
+                                                                            <small class="spanTime"> Time required to complete
+                                                                                the topic </small>
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
+                                                                        </span>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                
+                                                            <!-- added now for feedback -->
+                                                            <!-- commented for feedback -->
+                                                            <!-- <span
                                                                 *ngIf="queryData?.template_details[i].name == 'Feedback'"
                                                                 class="previewAndTime"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
@@ -201,7 +282,8 @@
                                                                     </span>
                                                                         <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
                                                                 </span>
-                                                            </span>
+                                                            </span> -->
+                                                            <!-- commented for feedback -->
                                                             <div class="UploadVidBlock row previewAndTime"
                                                                 *ngIf="queryData?.template_details[i].name === 'Video'"
                                                                 [class.active]="queryData?.template_details[i]?.name==active?.name">
@@ -293,7 +375,7 @@
                     draft</button>
                 <span class="padTwoSides"> <button class="backgroundcol1" (click)="addTopicFrom($event,'create')"
                         type="button">Create</button></span>
-                <button class="backgroundcol1" [routerLink]="['/Admin/auth/Wca']" type="button">Cancel</button>
+                <button class="backgroundcol1" (click)="onCancel()" type="button">Cancel</button>
 
             </div>
         </div>

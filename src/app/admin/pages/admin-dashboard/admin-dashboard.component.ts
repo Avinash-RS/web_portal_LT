@@ -321,6 +321,7 @@ public isCollapsed1 = false;
 
   ngOnInit() {
     this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'))
+    this.getCoursesChart();
     this.newRegistrationsChart(this.chartFilterdays);
     this.activeAndInactiveLearnerChart(this.actvsinactDay);
     this.stuVsProfChart(this.stuvsprofDay);
@@ -562,6 +563,13 @@ public isCollapsed1 = false;
         }
         Array.prototype.push.apply(this.ELEMENT_DATA,  this.jsonData);
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+        })
+      }
+
+
+      getCoursesChart(){
+        this.service.getCoursesChart().subscribe((res: any) => {
+          console.log(res,'resresres')
         })
       }
 }
