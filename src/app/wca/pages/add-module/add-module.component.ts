@@ -28,6 +28,7 @@ export class AddModuleComponent implements OnInit {
   @ViewChild('file') fileUploaded;
   scormPath = '';
   isScrom: boolean;
+  isCreate: boolean;
 
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
@@ -49,6 +50,7 @@ export class AddModuleComponent implements OnInit {
       }
       if (flag) {
         this.queryData = params;
+        this.isCreate = params.isCreate && params.isCreate == 'true' ? true : false;
         this.isRepo = (this.queryData.isRepo === 'true') ? 'true' : 'false';
         this.routedCourseDetails = {
           courseId: params.courseId,
@@ -61,6 +63,13 @@ export class AddModuleComponent implements OnInit {
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
+      if(this.isCreate) {
+        this.isCreate = false;
+        setTimeout(() => {
+          debugger
+          this.getCourseDetails();
+        }, 5000);
+      }
     }
   }
 
@@ -92,7 +101,7 @@ export class AddModuleComponent implements OnInit {
     this.moduleList = [];
     this.apiService.getCourseDetails(this.routedCourseDetails.courseId).subscribe((data: any) => {
       this.courseDetails = data.Result[0];
-      this.isScrom = this.courseDetails.coursetype == "SCORM" ? true : false;
+      this.isScrom = this.courseDetails && this.courseDetails.coursetype == "SCORM" ? true : false;
       if (this.isRepo === 'true') {
         this.getRepoModules();
         this.isRepo = 'false';
@@ -100,6 +109,7 @@ export class AddModuleComponent implements OnInit {
         this.updateModList();
         this.updateCourseDetails();
       }
+ 
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -263,7 +273,15 @@ export class AddModuleComponent implements OnInit {
   }
 
   navChooseTemp() {
-    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
+    if (!this.courseDetails) {
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], 
+      { queryParams: { 
+        addModule: true, 
+        viewingModule: this.routedCourseDetails.courseId, 
+        courseName: this.routedCourseDetails.courseName,  
+        image: this.routedCourseDetails.courseImage } });
+    }
+    else if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     } else {
@@ -272,7 +290,14 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModuleRepos() {
-    if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
+    if (!this.courseDetails) {
+      this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: 
+        { viewingModule: this.routedCourseDetails.courseId, 
+          courseName: this.routedCourseDetails.courseName, 
+          image: this.routedCourseDetails.courseImage, 
+          moduleList: this.moduleList } });
+    }
+  else if (this.courseDetails && this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
 
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
