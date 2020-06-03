@@ -1,4 +1,7 @@
 @import "variable";
+.contentTop {
+    margin-top: 66px !important;
+}
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
