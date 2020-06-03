@@ -69,7 +69,7 @@ export class CoursedetailsComponent implements OnInit {
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
     public sanitizer: DomSanitizer) {
-
+      
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
       
@@ -83,7 +83,7 @@ export class CoursedetailsComponent implements OnInit {
         this.course.enrollment_status = detail.enrollment_status;
         console.log(this.course)
       } else{
-        
+
       }
       // this.loadingCourse = false;
     });

@@ -46,7 +46,7 @@ describe('DialogComponent', () => {
   xit('Close the Dialog Box', () => {
     component.templateName()
     expect(component.templateForm.valid).toBeTruthy();
-    debugger;
+    // debugger;
   });
 
   it('Template Name Required', () => {
