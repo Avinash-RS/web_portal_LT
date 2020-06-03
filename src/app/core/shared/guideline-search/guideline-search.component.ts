@@ -16,7 +16,14 @@ declare var $: any;
   styleUrls: ['./guideline-search.component.scss']
 })
 export class GuidelineSearchComponent implements OnInit {
-  @Input('showAppliedFiltre') showAppliedFiltre : boolean;
+  @Input('Lvl1CatId') Lvl1CatId: any = [];
+  @Input('Lvl2CatId') Lvl2CatId: any = [];
+  @Input('Lvl3CatId') Lvl3CatId: any = [];
+  @Input('level1selectedID') level1selectedID: any = [];
+  @Input('level2selectedID') level2selectedID: any = [];
+  @Input('level3selectedID') level3selectedID: any = [];
+  @Input('allLvlCategoryFilterVal') allLvlCategoryFilterVal: any = [];
+  @Input('allLvlCategory') allLvlCategory: any = [];
   TodateOptions: { 
     dateFormat: string; disableSince: { year: number; month: number; day: number; };
     editableDateField: false };
@@ -44,10 +51,6 @@ export class GuidelineSearchComponent implements OnInit {
   authorDetails: any = [];
   selectedFilter: any = [];
   guidelineSearchVal: any = [];
-  allLvlCategory: any;
-  Lvl1CatId: any = [];
-  Lvl2CatId: any = [];
-  Lvl3CatId: any = [];
   pagenumber = 0;
   allcourses: any;
   authorPageNo = 0;
@@ -60,12 +63,9 @@ export class GuidelineSearchComponent implements OnInit {
   coursepartnerPerPage = 5;
   publishedToDate: String;
   publishedFromDate: String;
-  level1selectedID: any = [];
-  level2selectedID: any = [];
-  level3selectedID: any = [];
-  allLvlCategoryFilterVal: any = [];
   fromdate: any;
   todate: any;
+  catalogue_visibility = 0;
 
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
     private dialog: MatDialog, private globalservice: GlobalServiceService, 
@@ -237,7 +237,8 @@ export class GuidelineSearchComponent implements OnInit {
 
     var perPage = "20";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate,
+      this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
@@ -326,7 +327,8 @@ export class GuidelineSearchComponent implements OnInit {
       } else {
         var perPage = "20";
         this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-          this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+          this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+          this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
             this.allcourses = result['data']['getCourseCategorySearch']['data'];
             this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
             this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
@@ -384,10 +386,11 @@ export class GuidelineSearchComponent implements OnInit {
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.authorDetails);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursemode);
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners);
-
+   
     var perPage = "20";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+      this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
@@ -403,7 +406,6 @@ export class GuidelineSearchComponent implements OnInit {
     this.authorDetails = [];
     this.coursemode = [];
     this.coursepartners = [];
-    // ==============
     this.level1selectedID = []
     this.level2selectedID = []
     this.level3selectedID = []
@@ -438,9 +440,21 @@ export class GuidelineSearchComponent implements OnInit {
         element.checked = false;
       });
     }
+    let object = {
+      Lvl1CatId: this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory,
+    }
+    this.CommonServices.appliedCategory$.next(object);
     var perPage = "20";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+      this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
@@ -567,7 +581,8 @@ export class GuidelineSearchComponent implements OnInit {
   
     var perPage = "20";
     this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
-      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate).subscribe((result: any) => {
+      this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
+      this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
         this.countUpdateInstructor(result['data']['getCourseCategorySearch']['instructor'])
         this.countUpdateLanguage(result['data']['getCourseCategorySearch']['languageCount'])
