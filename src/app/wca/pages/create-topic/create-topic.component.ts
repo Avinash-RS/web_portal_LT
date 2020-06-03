@@ -211,20 +211,6 @@ export class CreateTopicComponent implements OnInit {
         }
       }
     })
-    
-    var aElems = document.getElementsByName('a');
-
-    for (var i = 0, len = aElems.length; i < len; i++) {
-        aElems[i].onclick = function() {
-            var check = confirm("Are you sure you want to leave?");
-            if (check == true) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        };
-    }
 
   }
   createForm(mod, mod_index = -1): FormGroup {
