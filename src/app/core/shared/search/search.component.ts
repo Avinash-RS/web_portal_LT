@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   constructor(public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
-    debugger
+    // debugger
 console.log('inside');
   }
   searchCourse(event) {
