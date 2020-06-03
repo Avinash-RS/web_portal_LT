@@ -39,8 +39,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
-
-
 const routes: Routes = [
   { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
@@ -107,7 +105,7 @@ const routes: Routes = [
     ApolloModule,
     NgOtpInputModule,
     NgxPaginationModule,
-    MyDatePickerModule
+    MyDatePickerModule,
   ],
   providers: [
     Apollo, 

@@ -92,16 +92,18 @@ h3{
     background-blend-mode: color;
 }
 
-::ng-deep .mat-tab-group {
+:host::ng-deep .mat-tab-group {
     display: block !important;
    flex-direction: column;
    overflow: hidden  !important
 }
 
-::ng-deep .mat-tab-body-content {
+:host::ng-deep .mat-tab-body-content {
    overflow: hidden !important;
    height: 100% !important;
 }
+
+
 .welcom{
     font-size: 38px;
     color: $color-white;
