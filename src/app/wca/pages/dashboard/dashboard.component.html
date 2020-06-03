@@ -58,9 +58,9 @@
             <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                 <owl-carousel-o [options]="trendingCategorires" [ngClass] = "createdCourseLength <= 4 ? 'widthClass arrow' : 'arrow'">
                     <ng-template carouselSlide *ngFor="let course of createdCourses">
-                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false" [btnType]="'Publish'"
                             [showWishlist]="false" [showStatus]="false" [showDate]="false" [showCount]="false"
-                            [showRating]="false" [goto]="'create'">
+                            [showRating]="false" [goto]="'create'" [showEnroll] = "true">
                         </app-course-component>
                     </ng-template>
                 </owl-carousel-o>

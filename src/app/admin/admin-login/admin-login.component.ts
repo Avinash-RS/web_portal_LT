@@ -44,7 +44,7 @@ export class AdminLoginComponent implements OnInit {
         if (loginresult.data && loginresult.data.login) {
           if (loginresult.data.login.success) {
               localStorage.setItem('adminDetails', JSON.stringify(loginresult.data.login.message));
-              this.router.navigate(['/Admin/auth/userManagement']);
+              this.router.navigate(['/Admin/auth/dashboard']);
               localStorage.setItem('role', 'admin');
               this.gs.getAdminName(JSON.stringify(loginresult.data.login.message.username));
               localStorage.setItem('token', loginresult.data.login.message.token);

@@ -513,3 +513,9 @@ table {
     stroke: #004072 !important;
   }
 }
+
+:host /deep/ .mat-checkbox-layout .mat-checkbox-label {
+  white-space: normal;
+  text-transform: capitalize;
+  word-break: break-word;
+}

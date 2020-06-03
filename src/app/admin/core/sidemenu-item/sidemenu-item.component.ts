@@ -16,10 +16,9 @@ export class SidemenuItemComponent implements OnInit {
     ngOnInit() {
     }
 
-    openLink() {
-        this.menu.open = this.menu.open;
-    }
-
+    // openlink(url: string) {
+    //     window.open(url, '_blank');
+    // }
     chechForChildMenu() {
         return (this.menu && this.menu.sub) ? true : false;
     }
