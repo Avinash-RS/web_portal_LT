@@ -19,10 +19,11 @@ export class AlertServiceService {
     }
   }
 
-  public openConfirmAlert(title, msg) {
+  public openConfirmAlert(title, msg, confirmText?, cancelText?) {
     if (this.matDialog.openDialogs.length === 0) {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = { title, msg: msg ? msg : null, type: 'confirmAlert' };
+      dialogConfig.data = { title, msg: msg ? msg : null, type: 'confirmAlert', confirmText : confirmText ? confirmText : 'Yes' ,
+    cancelText : cancelText ? cancelText : 'No'};
       dialogConfig.width = '30%',
       dialogConfig.disableClose = true;
       dialogConfig.panelClass = 'custom-modalbox';

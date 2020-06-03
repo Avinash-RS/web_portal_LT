@@ -41,6 +41,7 @@ export class CreateTopicComponent implements OnInit {
   selected = 'English';
   subtitles = [0];
   transcripts = [0];
+  removeTemplateindex;
   @ViewChild('fileInput3') fileInput3;
   @ViewChild('modName') modName;
   fileValidations = {
@@ -137,7 +138,7 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null]
+      topictime: [null,Validators.compose([Validators.required])]
     });
   }
 
@@ -282,12 +283,34 @@ export class CreateTopicComponent implements OnInit {
     event.stopPropagation();
     // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
     //  allModuleDetails.removeAt(jform);
-
-    this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
+    $('#confirmModal').modal('show');
+    $('#confirmModal').appendTo("body");
+    this.removeTemplateindex = jform
+    // this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
     // this.queryData.template_details.splice(jform,1);
     // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
+  confirmDelete(){
+    $('#confirmModal').modal('hide');
+    var removedObj = {
+      "file": "",
+      "title": [""]
+    }
+    this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicstatus').setValue('false');
+    this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topictime').setValue('00:00:00');
+    this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicname').setValue('false');
+    if (!this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicimages').get(String(0))) {
+      (this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicimages') as FormArray).push(this.topicImages());
+    }
+    this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicimages').get(String(0)).setValue(removedObj);
+    this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topictype').setValue('Deleted');
+    // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
+    //  allModuleDetails.removeAt(this.removeTemplateindex);
+    // (this. createTopicForm.get('moduledetails') as FormArray).removeAt(this.removeTemplateindex);
+    // (<FormArray>this.createTopicForm.controls['moduledetails']).removeAt(this.removeTemplateindex);
+    // this.removeTemplateindex = undefined
+  }
 
 
   activate(item) {
@@ -637,6 +660,9 @@ export class CreateTopicComponent implements OnInit {
         return a;
       }, {});
       var valueFind = this.courseForm.value.coursedetails[index].moduledetails.filter(e => repeatedVal[e.topicname])
+    }
+    if(valueFind.length > 0){
+      valueFind = valueFind.filter(e => e.topicname != 'false')
     }
     if (valueFind.length > 0) {
       this.toast.warning("Topic name cannot be same for templates");

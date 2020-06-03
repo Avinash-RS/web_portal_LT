@@ -6,9 +6,8 @@ p {
 
 .mat-dialog-container {
     display: block;
-    border: 0.5px solid #3f51b5;
+    border: 0.5px solid $color-blue;
     padding: 30px;
-    border-radius: 10px;
     box-sizing: border-box;
     overflow: auto;
     outline: 0;
@@ -23,11 +22,13 @@ p {
 .mat-flat-button {
     min-width: 38%;
     margin: auto;
-    background-color: $color-blue !important;
+    border-radius: 0 !important;
+    // background-color: $color-blue !important;
+    //both confirm and cancel button same clr so no differentiate
 }
 
 .background-darkGrey {
-    background-color: $color-blue !important;
+    background-color: $color-blue !important;// 
     color: $color-white !important;
 }
 

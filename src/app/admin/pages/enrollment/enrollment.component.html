@@ -10,42 +10,51 @@
   <div class="spinner-container" *ngIf="loading">
     <mat-spinner diameter="30"></mat-spinner>
   </div>
-  <div class="col">
-    <div class="toggle" style="margin-left:87px;margin-top: -37px;margin-bottom: 37px;">
-      <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()" value="user_group"
-        id="sizeWeight" checked="checked" />
+  <div class="col-5">
+    <h1>Course Enrollment</h1>
+  </div>
+  <div class="col-7">
+    <div class="toggle">
+      <div class="searchContainer">
+        <input class="searchBox" type="text" name="search" (keyup)="applyFilter($event)" placeholder="Search">
+      </div>
+      <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()"
+        value="user_group" id="sizeWeight" checked="checked" />
       <label for="sizeWeight">User Group</label>
       <input type="radio" [(ngModel)]="selectiontype" name="selectiontype" (change)="radiobuttonchange()"
         value="individual" id="sizeDimensions" />
       <label for="sizeDimensions">Individual</label>
       &nbsp; &nbsp;
-      <div class="searchContainer">
-        <input class="searchBox" type="text" name="search" (keyup)="applyFilter($event)" placeholder="Search">
-        <i class="fa fa-search searchIcon"></i>
-      </div>
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="p-5px">
-
-    <div class="example-container mat-elevation-z8">
-      <div class="buttons">
+<!-- <div class="container"> -->
+<!-- <div class="p-5px"> -->
+<div>
+  <div>
+    <div class=" row ">
+      <div style="margin-left: 85%;">
         <button [disabled]="selectedcheckbox" (click)="reject(dataSource.data)" class="button button8">Reject</button>
         <button [disabled]="selectedcheckbox" (click)="approve(dataSource.data)" class="button button5">Approve</button>
       </div>
+    </div>
+
+    <hr style="border: 1px solid #ccc; margin:0 !important">
+    <div class="example-container">
       <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="selectall">
           <mat-header-cell *matHeaderCellDef>
-            <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource?.data?.length" [(ngModel)]="selectall" (change)="selectallchange(selectall)">
-            </mat-checkbox>Select all </mat-header-cell>
+            <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource?.data?.length"
+              [(ngModel)]="selectall" (change)="selectallchange(selectall)">
+            </mat-checkbox>Select all
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <mat-checkbox style = "padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
+            <mat-checkbox style="padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange(row)">
             </mat-checkbox>
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="sno">
-          <mat-header-cell *matHeaderCellDef>  S.No </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
             <span class="mobile-label">S.No</span>
             <span class="desktop-data"> {{i+1}}</span>
@@ -82,11 +91,12 @@
     <mat-table #table [dataSource]="dataSource1" matSort>
       <ng-container matColumnDef="selectall">
         <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource1?.data?.length" [(ngModel)]="selectall1" (change)="selectallchange1(selectall1)">
+          <mat-checkbox style="padding-right: 10px;padding-left:10px" *ngIf="dataSource1?.data?.length"
+            [(ngModel)]="selectall1" (change)="selectallchange1(selectall1)">
           </mat-checkbox> Select all
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-checkbox style = "padding-left:10px"  [(ngModel)]="row.isChecked" (change)="checkboxchange1(row)">
+          <mat-checkbox style="padding-left:10px" [(ngModel)]="row.isChecked" (change)="checkboxchange1(row)">
           </mat-checkbox>
         </mat-cell>
       </ng-container>
