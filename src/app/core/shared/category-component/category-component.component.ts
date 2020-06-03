@@ -89,7 +89,6 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
   getthreeLevelCat() {
     this.learnerservice.getLevelCategoryData().subscribe((result: any) => {
       this.allLvlCategory = result['data']['getLevelCategoryData']['data'];
-      console.log('inside',this.allLvlCategory);
     })
   }
   getcoursecategories() {
@@ -246,8 +245,9 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
           allLvlCategory:this.allLvlCategory,
         }
         this.CommonServices.selectedCategory$.next(obj);
-        console.log('obj',obj)
+        // console.log('obj',obj)
       })
+      
      
   }
   countUpdateInstructor(array) {
