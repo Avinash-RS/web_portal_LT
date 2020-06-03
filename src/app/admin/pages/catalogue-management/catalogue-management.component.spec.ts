@@ -12,6 +12,7 @@ describe('CatalogueManagementComponent', () => {
   let component: CatalogueManagementComponent;
   let fixture: ComponentFixture<CatalogueManagementComponent>;
   let data: any;
+  let catalogue:
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
@@ -83,9 +84,16 @@ describe('CatalogueManagementComponent', () => {
 
     expect(component.catalog.course_count !== 0).toBe(component.showCatalogDetail = component.showHeader = true );
     fixture.detectChanges();
-  
+
     // tslint:disable-next-line: max-line-length
     expect(component.catalog.course_count !== 0).toBe(component.showAddCatalogueForm = component.showListCatalogue = component.showCourses = false);
     fixture.detectChanges();
+  });
+
+
+  it('check course catalogue', () => {
+component. getCoursesInCatalog();
+expect(component.type = 'remove');
+expect(component)
   });
 });

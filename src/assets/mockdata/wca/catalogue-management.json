@@ -1,0 +1,21 @@
+{
+    "data":{
+        "getallcatalogue":{
+            "message":[
+                {
+                    "catalogue_description": "",
+"catalogue_id": "setdqvaxb",
+"catalogue_name": "java catalogue",
+"course_count": 317,
+"created_by": "admin",
+"created_on": "2020-06-02T05:56:58.172Z",
+"creator_id": "5e69f4ad139c79bbf14adc8a",
+"is_active": true,
+"updated_on": "2020-06-02T05:56:58.172Z",
+"__typename": "Catalogue_Message",
+"_id": "5ed5ea2a38c2810011949adc"
+                }
+            ]
+        }
+    }
+}
