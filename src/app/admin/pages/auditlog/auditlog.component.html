@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Audit log</li>
   </ol>
 </nav>
@@ -69,8 +69,8 @@
       </div>
     </div>
 
-    
-  <hr style="border: 1px solid #ccc;margin:0 !important; ">
+
+    <hr style="border: 1px solid #ccc;margin:0 !important; ">
     <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="sno">

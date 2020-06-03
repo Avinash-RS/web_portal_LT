@@ -70,6 +70,12 @@ describe('CatalogueManagementComponent', () => {
     fixture.detectChanges();
     component.getCatalogDetail();
   });
+  // it('should go to add', () => {
+  //   component.gotoAdd();
+  //   expect(component.showListCatalogue).toBe(false);
+  //   expect(component.showAddCatalogueForm).toBe(true);
+  //   expect(component.addCatalogueForm)
+  // });
 
   it('cataloguedetail', () => {
     component.goToCatalogDetail(data);
@@ -81,9 +87,9 @@ describe('CatalogueManagementComponent', () => {
     fixture.detectChanges();
 
 
-    expect(component.catalog.course_count !== 0).toBe(component.showCatalogDetail = component.showHeader = true );
+    expect(component.catalog.course_count !== 0).toBe(component.showCatalogDetail = component.showHeader = true);
     fixture.detectChanges();
-  
+
     // tslint:disable-next-line: max-line-length
     expect(component.catalog.course_count !== 0).toBe(component.showAddCatalogueForm = component.showListCatalogue = component.showCourses = false);
     fixture.detectChanges();
