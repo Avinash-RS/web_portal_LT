@@ -1,12 +1,12 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Catagory Management</li>
   </ol>
 </nav>
 <h1 style="padding-left:25px"> Category Management</h1>
 <div class="container ">
- 
+
   <div class="container m-t-20">
     <div class="row">
       <!-- Mat tree code here ( left hand side) -->
@@ -243,7 +243,8 @@
           <form [formGroup]="addSubCategoryForm">
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
-                <input type="text" class="inputs border-radius-5 background_trans width_100" placeholder="Sub Category *"
+                <input type="text" class="inputs border-radius-5 background_trans width_100"
+                  placeholder="Sub Category *"
                   [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors , 'dis' : canotEdit}"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
@@ -363,7 +364,7 @@
             </div>
           </div>
           <div class="m-r-20 m-l-20">
-            <div class="row" *ngIf = "!loadingCourse">
+            <div class="row" *ngIf="!loadingCourse">
               <div class="col-lg-3 col-md-4 col-sm-6 col-12  width_80 containerOverlay"
                 *ngFor="let courses of courses; let i = index">
                 <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
@@ -383,12 +384,11 @@
 
           </div>
         </div>
-        <div class="row width_100 pos_bottom"
-        *ngIf="courseCount >= 10">
-        <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourse()">
-          <mat-icon>arrow_drop_down</mat-icon>
-        </button>
-      </div>
+        <div class="row width_100 pos_bottom" *ngIf="courseCount >= 10">
+          <button mat-icon-button aria-label="More Icon" class="center" (click)="getNextCourse()">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+        </div>
         <div class="row pos_bottom"
           *ngIf="!showCourses && !showHome && !showAddCatForm && !selectedCategory.category_name == undefined">
           <button id="viewCourse" mat-stroked-button class=" border-radius-5 background-blue color_white center "

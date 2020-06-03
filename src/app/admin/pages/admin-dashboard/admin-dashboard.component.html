@@ -1,4 +1,5 @@
 <mat-tab-group style="padding: 20px;" (selectedTabChange)="onTabChanged($event);">
+  
   <mat-tab label="Overview" > 
     <div class="row" >
       <div class="col-md-3 col-sm-12 col-12" (click)="newRegister()">
@@ -218,7 +219,6 @@
             </div>
           </div>
           <div class="margin"></div>
-          <!-- <app-line-chart [data]="lineChartData" [label]="lineChartLabels"></app-line-chart> -->
             <canvas baseChart  [datasets]="lineChartData"  [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"> </canvas>
           <div style="text-align: center;">Last {{chartFilterdays ? chartFilterdays : '7'}} days</div>
         </div>
@@ -230,7 +230,6 @@
         </button>
           <div class="card"  *ngIf="isCollapsed">
             <div class="card-body">
-            <!-- <ul class="hoverr"> -->
               <ul class="">
                 <li (click)="gotoCoursePage('draft')">
                   <div class="row">
@@ -264,7 +263,6 @@
                   </div>
                 </li>
               </ul>
-            <!-- </ul> -->
             </div>
           </div>
 
@@ -326,7 +324,6 @@
 
     <!-- Active  Learners -->
     <div  >
-      <!--  -->
     <div class="row"  *ngIf="activeLearnerisable">
       <div class="col-8" >
         <div class="container containerShadow">
@@ -346,7 +343,6 @@
                 </select>
             </div>
           </div>
-          <!-- <div class="margin"></div> -->
           <canvas baseChart [datasets]="activeLearnerChartData" [labels]="activeLearnerChartLabels"  [options]="activeLearnerChartOptions" [colors]="activeLearnerChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas><br>
           <div style="margin-left: 31%;">
           <div class="row">
@@ -444,7 +440,6 @@
           </button>
             <div class="card"  *ngIf="isCollapsed">
               <div class="card-body">
-                <!-- <ul class="hoverr"> -->
                   <ul class="">
                     <li (click)="gotoCoursePage('draft')">
                       <div class="row">
@@ -478,7 +473,6 @@
                       </div>
                     </li>
                   </ul>
-                <!-- </ul> -->
               </div>
             </div>
   
@@ -750,7 +744,6 @@
             </button>
               <div class="card"  *ngIf="isCollapsed">
                 <div class="card-body">
-                  <!-- <ul class="hoverr"> -->
                     <ul class="">
                       <li (click)="gotoCoursePage('draft')">
                         <div class="row">
@@ -784,7 +777,6 @@
                         </div>
                       </li>
                     </ul>
-                  <!-- </ul> -->
                 </div>
               </div>
     
@@ -945,7 +937,7 @@
     
             <div class="col-md-4 icon bg-green bg-course-icon">
               <div style="width: 60px;margin-left: 9px;">
-                <img  class="iconImg fontSize fontSize2"  src="../../../../assets/learner/CoursesPublished.svg">
+                <img alt=""  class="iconImg fontSize fontSize2"  src="../../../../assets/learner/CoursesPublished.svg">
               </div>
             </div>
           </div>
@@ -1057,7 +1049,6 @@
                     <span class="top5">Top 5 Courses</span>
                   </div>
                   <div class="col-5">
-                    <!-- (change)="onChange($event.target.value)" -->
                     <select name="top5" class="rounded" (change)="top5Course($event.target.value)">
                       <option   value="topfiveEnroll">Enrollment</option>
                       <option   value="topfiverating">Rating</option>
@@ -1214,8 +1205,6 @@
                 </select>
             </div>
           </div>
-          <!-- <div class="margin"></div> -->
-          <!-- <div style="display: block"> -->
             <canvas baseChart  [datasets]="stuVsProData" [labels]="stuVsProLabels" [options]="stuVsProOptions" [colors]="stuVsProColors"[legend]="stuVsprofLegend"[chartType]="stuVsprofChartType" [plugins]="stuVsprofPlugins"></canvas>
             <!-- addd student pro label -->
             <br>
@@ -1225,7 +1214,7 @@
                 <div class="InactiveLearner professional"></div>Professional
             </div>
           </div>
-            <!-- </div> -->
+
         </div>
       </div>
 
@@ -1247,13 +1236,10 @@
               </select>
           </div>
         </div>
-        <!-- <div class="margin"></div> -->
-        <!-- <div style="display: block"> -->
           <canvas baseChart  [datasets]="totVsActData" [labels]="totVsActLabels" [options]="totVsActChartOptions"[plugins]="totVsActChartPlugins" [legend]="totVsActChartLegend" [colors]="totVsActColors" [chartType]="totVsActChartType">
         </canvas>
         <br>
         <div style="text-align: center;">Last {{actvstotday ? actvstotday : '7'}} days</div>
-          <!-- </div> -->
       </div>
      </div>
  </div>
@@ -1277,13 +1263,10 @@
             </select>
         </div>
       </div>
-      <!-- <div class="margin"></div> -->
-      <!-- <div style="display: block"> -->
         <canvas baseChart  [datasets]="loginperDayData" [labels]="loginperDaChartLabels" [options]="loginperDaChartOptions"[colors]="loginperDaChartColors" [legend]="loginperDaChartLegend"[chartType]="loginperDaChartType" [plugins]="loginperDaChartPlugins">
       </canvas>
       <br>
       <div style="text-align: center;">Last {{loginPerDayFilter ? loginPerDayFilter : '7'}} days  </div>
-        <!-- </div> -->
     </div>
   </div>
 </div>
