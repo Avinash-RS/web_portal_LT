@@ -65,8 +65,8 @@
                         <div class="row crs1 pad18px">
                           <div class="col-md-4 course-details">Course Long Description</div>
                           <div class="col-md-8">
-                            <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor>
-
+                            <!-- <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor> -->
+                            <angular-editor formControlName="course_long_description" ></angular-editor>
                             <!-- <textarea class="inputs inputmainWidth" style="resize: none;"
                               formControlName="course_long_description" placeholder="Enter the course description"
                               maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea> -->

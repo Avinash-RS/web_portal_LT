@@ -10,6 +10,7 @@ import { MatList, MatDialog } from '@angular/material';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatSlideToggleChange } from '@angular/material';
 import { BlobReaderComponent } from '../blob-reader/blob-reader.component';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 declare var $: any;
 
 @Component({
@@ -138,7 +139,7 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null,Validators.compose([Validators.required])]
+      topictime: [null, Validators.compose([Validators.required])]
     });
   }
 
@@ -155,6 +156,7 @@ export class CreateTopicComponent implements OnInit {
     private wcaService: WcaService,
     public formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private alertService: AlertServiceService
   ) {
 
   }
@@ -291,7 +293,7 @@ export class CreateTopicComponent implements OnInit {
     // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
-  confirmDelete(){
+  confirmDelete() {
     $('#confirmModal').modal('hide');
     var removedObj = {
       "file": "",
@@ -599,19 +601,19 @@ export class CreateTopicComponent implements OnInit {
     if (textvalue) {
       formdata.get('topicvalue').setValue(textvalue);
     }
-    if(triggerFun == "2"){
-        if (!formdata.get('topicimages').get(String(0))) {
-          (formdata.get('topicimages') as FormArray).push(this.topicImages());
-          var vidObj = {
-            "file" : textvalue,
-            "title" : ["1"]
-          }
-          formdata.get('topicimages').get(String(0)).setValue(vidObj);
-          formdata.get('topictype').setValue("Video");
-          this.spinner.hide();
+    if (triggerFun == "2") {
+      if (!formdata.get('topicimages').get(String(0))) {
+        (formdata.get('topicimages') as FormArray).push(this.topicImages());
+        var vidObj = {
+          "file": textvalue,
+          "title": ["1"]
         }
+        formdata.get('topicimages').get(String(0)).setValue(vidObj);
+        formdata.get('topictype').setValue("Video");
+        this.spinner.hide();
+      }
 
-    }else{
+    } else {
       const formData4 = new FormData();
       formData4.append('excel', this.imageView);
       this.spinner.show();
@@ -661,7 +663,7 @@ export class CreateTopicComponent implements OnInit {
       }, {});
       var valueFind = this.courseForm.value.coursedetails[index].moduledetails.filter(e => repeatedVal[e.topicname])
     }
-    if(valueFind.length > 0){
+    if (valueFind.length > 0) {
       valueFind = valueFind.filter(e => e.topicname != 'false')
     }
     if (valueFind.length > 0) {
@@ -717,7 +719,23 @@ export class CreateTopicComponent implements OnInit {
           // } else {
           //   this.router.navigate(['/Admin/auth/Wca']);
           // }
-          this.router.navigate(['/Admin/auth/Wca']);
+          this.alertService.openConfirmAlert('Do you want to add more modules', '').then((data: Boolean) => {
+            if (data) {
+              this.router.navigate(['/Admin/auth/Wca/addmodule'],
+                {
+                  queryParams: {
+                    courseId: this.query.viewingModule,
+                    courseImage: this.query.image,
+                    courseName: this.query.courseName
+                  }
+                });
+
+            }
+            else {
+              this.router.navigate(['/Admin/auth/Wca']);
+
+            }
+          })
         }
         this.spinner.hide();
       }, err => {
@@ -845,6 +863,17 @@ export class CreateTopicComponent implements OnInit {
     else {
       this.transcripts.splice(index, 1);
     }
+  }
+
+  onCancel() {
+    this.router.navigate(['/Admin/auth/Wca/addmodule'],
+    {
+        queryParams: {
+            courseId: this.query.viewingModule,
+            courseImage: this.query.image,
+            courseName: this.query.courseName
+        }
+    });
   }
 
   openFeedback() {

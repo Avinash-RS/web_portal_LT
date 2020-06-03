@@ -550,16 +550,31 @@ display: flex;
    font-weight: 590;
    color: red;
   }
+  .uploadKC{
+    display: flex;
+    margin-top: 1%;
+  }
 
+  .ml5{
+      margin-left: 5%;
+  }
+  .mt10{
+    margin-top: 10px;
+  }
+
+  .fleft{
+      float: left;
+  }
+  .ml30{
+    margin-left: 30%;
+  }
   .UploadBlock{
     display: none;
   }
 
   .UploadBlock.active{
-    display: flex;
-    margin-top: 15px;
     width: 100%;
-    margin-left: 20%;
+    display: flex;
   }
   .knowledgeIcon{
     border: 1px solid #c3c3c3;
@@ -767,7 +782,7 @@ background-color: $color-blue!important;
 }
 
 .vidCol3{
-    margin-top: 4%;
+    // margin-top: 4%;
     margin-left: 19%;
 }
 
@@ -825,4 +840,13 @@ background-color: $color-blue!important;
 .BgBtn{
     background: #1F3777 !important;
     color: white !important;
+}
+
+@media (max-width: 1600px) {
+    .ml10{
+        margin-left: 1% !important;
+    }
+    .mLeft19{
+        margin-left: 4% !important;
+    }
 }
