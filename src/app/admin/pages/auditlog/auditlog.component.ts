@@ -76,11 +76,12 @@ export class AuditlogComponent implements OnInit {
   getallauditreports(pgnumber) {
     this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
       this.resultsLength = null;
+      console.log(result.message);
       if (result?.message) {
         this.reports = result.message;
         this.reports.forEach(element => {
            const date = moment(element.created_on);
-           const date1 = moment(element.created_on);
+           const date1 = moment(element.updated_on);
            element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
            element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
         });
@@ -102,7 +103,6 @@ export class AuditlogComponent implements OnInit {
     }
   }
   filter(filterform, pgnumber) {
-    console.log("gg");
     this.requiredfield = true;
     if (filterform.valid && filterform.value.todate && filterform.value.fromdate) {
       this.requiredfield = false;
@@ -113,8 +113,15 @@ export class AuditlogComponent implements OnInit {
       };
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
         this.resultsLength = null;
+        console.log(result.message);
         if (result?.success === true) {
           this.reports = result?.message;
+          this.reports.forEach(element => {
+            const date = moment(element.created_on);
+            const date1 = moment(element.updated_on);
+            element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+            element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+           });
           this.dataSource.data = this.reports;
           this.resultsLength = result.total_count;
         } else {

@@ -138,11 +138,11 @@
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Created on : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on | date: 'dd MMM, yyyy' || 'NA'}}</label></label>
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on || 'NA'}}</label></label>
             </div>
             <div class="col-md-4 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                  {{viewdetail?.updated_on | date: 'dd MMM, yyyy'  || 'NA'}}</label>
+                  {{viewdetail?.updated_on  || 'NA'}}</label>
               </label>
             </div>
           </div>
