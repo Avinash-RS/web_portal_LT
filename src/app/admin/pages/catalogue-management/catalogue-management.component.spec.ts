@@ -11,7 +11,7 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 describe('CatalogueManagementComponent', () => {
   let component: CatalogueManagementComponent;
   let fixture: ComponentFixture<CatalogueManagementComponent>;
-
+  let data: any;
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
@@ -56,6 +56,7 @@ describe('CatalogueManagementComponent', () => {
     expect(component.showHeader = component.showCatalogDetail = true);
     expect(component.type).toBe(null);
     expect(component.courseList = []);
+    fixture.detectChanges();
     component.getCatalogDetail();
     expect(component.totalCount).toBe(null);
     expect(component.checked).toBe(false);
@@ -66,7 +67,25 @@ describe('CatalogueManagementComponent', () => {
     expect(component.showCatalogDetail = component.showHeader).toBe(true);
     expect(component.showAddCatalogueForm = component.showListCatalogue = component.showCourses = component.checked).toBe(false);
     expect(component.type).toBe(null);
+    fixture.detectChanges();
     component.getCatalogDetail();
   });
 
+  it('cataloguedetail', () => {
+    component.goToCatalogDetail(data);
+    expect(component.catalog = data);
+    component.getCatalogDetail();
+    fixture.detectChanges();
+
+    expect(component.catalog.course_count === 0).toBe(component.getCoursesForCatalog());
+    fixture.detectChanges();
+
+
+    expect(component.catalog.course_count !== 0).toBe(component.showCatalogDetail = component.showHeader = true );
+    fixture.detectChanges();
+  
+    // tslint:disable-next-line: max-line-length
+    expect(component.catalog.course_count !== 0).toBe(component.showAddCatalogueForm = component.showListCatalogue = component.showCourses = false);
+    fixture.detectChanges();
+  });
 });
