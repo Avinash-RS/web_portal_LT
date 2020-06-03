@@ -54,7 +54,12 @@
           </span> <small *ngIf="showCount" class="color_grey">2,500 learners</small>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right width_80 no_padding" *ngIf="showEnroll">
-          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false"
+
+          <button id="enroll_now" mat-stroked-button (click)="publish()" *ngIf="btnType && btnType === 'Publish'">
+            Publish
+          </button>
+
+          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false &&(btnType && btnType != 'Publish')"
             (click)="enrollCourse()"> Enroll now
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
