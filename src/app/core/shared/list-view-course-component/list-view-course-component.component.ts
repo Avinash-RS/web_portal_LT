@@ -26,20 +26,13 @@ export class ListViewCourseComponentComponent implements OnInit {
   @Input('btnType') btnType: any;
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll = false;
-
-
-
-
   currentRate;
-
   userDetail: any;
-  recorded_data: any;
-  final_full_data: any;
-  final_status: any = null;
+
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
+    // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) { }
-
 
   viewWishList(course) {
     this.course.wishlisted = false;
@@ -140,12 +133,11 @@ export class ListViewCourseComponentComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: detail1 } });
     }
   }
+
   enrollCourse() {
     if (this.btnType === 'Enroll Now') {
-      // console.log("enroll works", this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
       this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
         .subscribe((enrollCourse: any) => {
-          // console.log("working", enrollCourse)
           if (enrollCourse.data) {
             if (enrollCourse.data.enrollcourse.success) {
               this.course.enrollment_status = 'pending';
