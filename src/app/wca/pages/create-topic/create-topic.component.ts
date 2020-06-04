@@ -117,7 +117,6 @@ export class CreateTopicComponent implements OnInit {
     },
     nav: true
   }
-
   courseform(): FormGroup {
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
@@ -145,7 +144,7 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null, Validators.compose([Validators.required])]
+      topictime: [null, [Validators.required,Validators.pattern(/^(?:[0-9]{1,3}):(?:[012345]\d):(?:[012345]\d)$/)]]
     });
   }
 
@@ -312,11 +311,23 @@ export class CreateTopicComponent implements OnInit {
     }
     this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicimages').get(String(0)).setValue(removedObj);
     this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topictype').setValue('Deleted');
-    // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
-    //  allModuleDetails.removeAt(this.removeTemplateindex);
-    // (this. createTopicForm.get('moduledetails') as FormArray).removeAt(this.removeTemplateindex);
-    // (<FormArray>this.createTopicForm.controls['moduledetails']).removeAt(this.removeTemplateindex);
-    // this.removeTemplateindex = undefined
+   
+    var noModule =  this.createTopicForm.value.moduledetails.filter((data)=>{
+      return data.topicstatus == "true" 
+    })
+
+    if(noModule.length == 0){
+      this.router.navigate(['/Admin/auth/Wca/addmodule'],
+      {
+          queryParams: {
+              courseId: this.query.viewingModule,
+              courseImage: this.query.image,
+              courseName: this.query.courseName
+          }
+      });
+      $('#confirmModal').modal('hide');
+    }
+
   }
 
 
