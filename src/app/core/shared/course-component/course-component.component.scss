@@ -157,13 +157,19 @@ strong {
     margin: 0 !important
 }
 
+// :host ::ng-deep .br-default .br-unit {
+//     margin-right: 5px;
+//     font-size: 19px !important;
+//     height: 18px;
+//     width: 10px !important;
+// }
+
 :host ::ng-deep .br-default .br-unit {
     margin-right: 5px;
-    font-size: 19px !important;
+    font-size: 18px !important;
     height: 18px;
-    width: 10px !important;
+    width: 9px !important;
 }
-
 
 .course-card {
     border-radius: 0;
