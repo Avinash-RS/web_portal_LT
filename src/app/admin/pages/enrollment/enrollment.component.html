@@ -54,17 +54,24 @@
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="sno">
-          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> s.no </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
-            <span class="mobile-label">S.No</span>
+            <span class="mobile-label">s.no</span>
             <span class="desktop-data"> {{i+1}}</span>
             <span class="mobile-data"> {{i+1}}</span>
           </mat-cell>
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <div *ngIf="column.header == 'Enrollments'">
+            <mat-header-cell  *matHeaderCellDef>
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+              {{ column.header }}</mat-header-cell>
+          </div>
+         <div *ngIf="column.header != 'Enrollments'">
+          <mat-header-cell   *matHeaderCellDef mat-sort-header>
             <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
             {{ column.header }}</mat-header-cell>
+        </div>         
           <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
           </mat-cell>
         </ng-container>
@@ -102,10 +109,10 @@
       </ng-container>
       <ng-container matColumnDef="sno">
         <mat-header-cell *matHeaderCellDef>
-          S.No
+          s.no
         </mat-header-cell>
         <mat-cell *matCellDef="let row;let i = index">
-          <span class="mobile-label">S.No</span>
+          <span class="mobile-label">s.no</span>
           <span class="desktop-data"> {{i+1}}</span>
           <span class="mobile-data"> {{i+1}}</span>
         </mat-cell>
