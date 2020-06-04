@@ -92,61 +92,71 @@
   <span class="close">
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
-  <mat-dialog-content style="width: 1000px">
-    <h2 style="text-align: center"><strong>View details</strong> </h2>
-    <mat-dialog-content>
-      <form #profileForm="ngForm">
+  <mat-tab-group>
+
+    <mat-tab label="View details">
+      <br>
+      <mat-dialog-content style="width: 1000px;min-height: 300px;max-height:450px;margin:0 !important">
         <div class="container profile">
           <br>
           <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Module name : <label
                   class="color_black capitalize f_wt_400">{{viewdetail?.module_name|| 'NA'}}</label></label>
             </div>
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Description : <label class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
                 </label></label>
             </div>
-            <div class="col-md-4 col-sm-12 col-12">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Request url : <label
                   class="color_black capitalize f_wt_400">{{viewdetail?.api_request_url|| 'NA'}}</label></label>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Created by : <label
                   class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
             </div>
-            <div class="col-md-4 col-sm-12 col-12">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Created on : <label
                   class="color_black capitalize f_wt_400">{{viewdetail?.created_on || 'NA'}}</label></label>
             </div>
-            <div class="col-md-4 col-sm-12 col-12">
+            <div class="col-md-6 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
                   {{viewdetail?.updated_on  || 'NA'}}</label>
               </label>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-xl-6 col-lg-6 col-sm-12 col-12">
-              <label>Request detail : <label
-                  class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_request[0] | json}}</label></label>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
-              <label>Response :<label
-                  class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_response[0] | json }}</label></label>
-            </div>
-          </div>
-
-          <br>
         </div>
-      </form>
-    </mat-dialog-content>
-  </mat-dialog-content>
+      </mat-dialog-content>
+    </mat-tab>
+
+    <mat-tab label="Request detail">
+      <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
+        <div class="row no_margin p-5px">
+          <label>Request : </label>
+          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_request[0] | json}}</label>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+    <mat-tab label="Response detail">
+      <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
+        <div class="row no_margin p-5px">
+          <label>Response :</label>
+          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_response[0] | json }}</label>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+  </mat-tab-group>
   <br>
 </ng-template>
-
-
 
 <ng-template #exportdialog class="dialogPopup">
   <span class="close">
@@ -161,19 +171,19 @@
           <form #exportform="ngForm">
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="exportdata"
               [(ngModel)]="exportdata">
-              <mat-radio-button class="example-radio-button" value="exportall" >
-                <button class="btnCss  button_border  center f_size_14 wid_170" type="button" 
-                [disabled] = "exportdata == 'filteredexport'" (click)="exportall()">
+              <mat-radio-button class="example-radio-button" value="exportall">
+                <button class="btnCss  button_border  center f_size_14 wid_170" type="button"
+                  [disabled]="exportdata == 'filteredexport'" (click)="exportall()">
                   <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
-                    get_app</span>Export all</button>
+                    get_app</span>Export all </button>
               </mat-radio-button>
               <br><br>
 
-              <mat-radio-button class="example-radio-button" value="filteredexport" >
-                <mat-form-field class="wid-100" >
-                  <input matInput name="exportfromdate" [disabled] = "exportdata == 'exportall'" [(ngModel)]="exportfromdate"
-                    (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel" [matDatepicker]="picker2"
-                    placeholder="Start date" color="accent">
+              <mat-radio-button class="example-radio-button" value="filteredexport">
+                <mat-form-field class="wid-100">
+                  <input matInput name="exportfromdate" [disabled]="exportdata == 'exportall'"
+                    [(ngModel)]="exportfromdate" (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel"
+                    [matDatepicker]="picker2" placeholder="Start date" color="accent">
                   <mat-datepicker-toggle matSuffix [for]="picker2">
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
@@ -182,7 +192,7 @@
                   </mat-error>
                 </mat-form-field> &nbsp;&nbsp;&nbsp;
 
-                <mat-form-field class="wid-100" >
+                <mat-form-field class="wid-100">
                   <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield required
                     #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=fromdate
                     [max]=today>
