@@ -189,7 +189,7 @@
                 <ng-container *ngIf="!currentpath?.group_name">
 
                   <div class="card-header">
-                    All user list
+                    All user's list
                   </div>
                 </ng-container>
               </div>
@@ -214,29 +214,29 @@
                 </ng-container>
 
                 <ng-container matColumnDef="user_id">
-                  <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">User Id</span>
+                    <span class="mobile-label">User id</span>
                     {{element.user_id}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span class="mobile-label">User Name</span>{{element.username}}
+                  <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span class="mobile-label">User name</span>{{element.username}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
-                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email ID</span>
+                  <mat-header-cell *matHeaderCellDef> Email iD </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email iD</span>
                     {{element.email || 'NA'}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="mobile">
-                  <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+                  <mat-header-cell *matHeaderCellDef> Mobile no </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile no</span>
                     {{element.mobile_number || 'NA'}} </mat-cell>
                 </ng-container>
 

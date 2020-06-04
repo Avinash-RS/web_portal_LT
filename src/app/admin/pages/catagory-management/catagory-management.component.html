@@ -104,7 +104,7 @@
                 <button mat-flat-button *ngIf="showCourses"
                   class="background-blue width_80 m-b-10 moveTo-btn color_white" (click)="openMoveTo(viewDialog)"
                   [disabled]="!applyAllCourses && selectedArray?.length == 0">
-                  <span class="material-icons" style="vertical-align: middle;">domain</span>Move To
+                  <span class="material-icons" style="vertical-align: middle;">domain</span>Move to
                 </button>
               </div>
               <div class="col-md-3 col-lg-3  col-sm-5 center col-5">
@@ -244,7 +244,7 @@
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100"
-                  placeholder="Sub Category *"
+                  placeholder="Sub category *"
                   [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors , 'dis' : canotEdit}"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
@@ -296,7 +296,7 @@
             <div class="row">
               <div class="col-md-4 col-sm-10 col-10 m-l-5">
                 <input type="text" class="inputs border-radius-5 background_trans width_100"
-                  placeholder="Sub Category *"
+                  placeholder="Sub category *"
                   [ngClass]="{ 'is-invalid': f.super_sub_category_name.touched && f.super_sub_category_name.errors ,'dis' : canotEdit}"
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
@@ -347,7 +347,7 @@
           <div class="row m-r-20 m-l-20">
             <div class="col-lg-3 col-md-3 col-sm-9 col-9">
               <button id="Hide_Courses" mat-flat-button class="width_70 float-left background-blue color_white center"
-                (click)="hideCourses();showCourses = false">Hide Courses</button>
+                (click)="hideCourses();showCourses = false">Hide courses</button>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-3 col-3"></div>
           </div>
@@ -359,7 +359,7 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10">
               <button id="selectAll" [disabled]="courses?.length == 0" mat-flat-button
                 class="width_70  m-b-10 float-right background-blue color_white center"
-                (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select All</button>
+                (click)="applyAllCourses = true ; selectedArray = [] ; openMoveTo(viewDialog)">Select all</button>
             </div>
           </div>
           <div class="m-r-20 m-l-20">

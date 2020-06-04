@@ -129,8 +129,8 @@ export class CoursepreviewComponent implements OnInit {
   }
   
   previewcourse(templateRef: TemplateRef<any>) {
-    //this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+    //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
     console.log(this.content.url)
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {

@@ -2,7 +2,7 @@ export const menus = [
     {
         'name': 'Dashboard',
         'icon': 'dashboard',
-        'link': 'dashboard',
+        'link': '/Admin/auth/dashboard',
         'open': false,
         'chip': false,
 
@@ -15,14 +15,14 @@ export const menus = [
         'sub': [
             {
                 'name': 'Users',
-                'link': 'userManagement',
+                'link': '/Admin/auth/userManagement',
                 'icon': 'widgets',
                 'chip': false,
                 'open': true,
             },
             {
                 'name': 'User Groups',
-                'link': 'usergroup',
+                'link': '/Admin/auth/usergroup',
                 'icon': 'list',
                 'chip': false,
                 'open': true,
@@ -30,13 +30,13 @@ export const menus = [
             {
                 'name': 'Course Enrollment',
                 'icon': 'border_color',
-                'link': 'enrollment',
+                'link': '/Admin/auth/enrollment',
                 'open': false,
                 'chip': false,
             },
             {
                 'name': 'Reports',
-                'link': 'reports',
+                'link': '/Admin/auth/reports',
                 'icon': 'notes',
                 'chip': false,
                 'open': true,
@@ -46,7 +46,7 @@ export const menus = [
     {
         'name': 'Course Management',
         'icon': 'list',
-        'link': 'Wca',
+        'link': '/Admin/auth/Wca',
         'chip': false,
         'open': true,
 
@@ -60,14 +60,14 @@ export const menus = [
         'sub': [
             {
                 'name': 'Categories',
-                'link': 'catagory',
+                'link': '/Admin/auth/catagory',
                 'icon': 'view_quilt',
                 'chip': false,
                 'open': true,
             },
             {
                 'name': 'Catalogues',
-                'link': 'catalogue',
+                'link': '/Admin/auth/catalogue',
                 'icon': 'assignment',
                 'chip': false,
                 'open': true,
@@ -76,7 +76,7 @@ export const menus = [
     },
     {
         'name': 'Audit Log',
-        'link': 'auditlog',
+        'link': '/Admin/auth/auditlog',
         'icon': 'widgets',
         'chip': false,
         'open': true,
