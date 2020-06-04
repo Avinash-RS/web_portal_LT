@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item" [routerLink]="['/Admin/auth/userManagement']">Home</li>
-    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+    <li class="breadcrumb-item active" aria-current="page">Add user</li>
   </ol>
 </nav>
 
@@ -108,7 +108,7 @@
     <div class="downloadbutton">
       <form #bulkuserform="ngForm">
         <mat-form-field>
-          <mat-label>Group Name</mat-label>
+          <mat-label>Group name</mat-label>
           <mat-select name="group" [(ngModel)]="group">
             <mat-option *ngFor="let grp of groups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
             ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 

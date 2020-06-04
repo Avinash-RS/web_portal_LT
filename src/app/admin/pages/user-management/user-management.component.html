@@ -17,7 +17,7 @@
 
     <div class="col-lg-1 col-md-2 col-sm-12 col-12 float_right">
       <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
-        <mat-icon style="color: white;">add</mat-icon>Add User
+        <mat-icon style="color: white;">add</mat-icon>Add user
       </button>
     </div>
   </div>
@@ -31,10 +31,12 @@
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
-            Select
+            <!-- Select -->
           </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <span class="mobile-label">Select</span>
+            <span class="mobile-label">
+              <!-- Select -->
+            </span>
             <mat-checkbox (change)="checkboxLabel(row)">
             </mat-checkbox>
           </mat-cell>
