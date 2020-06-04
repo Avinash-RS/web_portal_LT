@@ -372,8 +372,8 @@ table {
 .mat-column-name {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 13% !important;
-  width: 13% !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -420,8 +420,8 @@ table {
 .mat-column-mobile {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 12% !important;
-  width: 12% !important;
+  flex: 0 0 14% !important;
+  width: 14% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -462,8 +462,8 @@ table {
 .mat-column-actions {
   word-wrap: break-word !important;
   white-space: unset !important;
-  //  flex: 0 0 24% !important;
-  width: 24% !important;
+   flex: 0 0 20% !important;
+  width: 20% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -518,4 +518,19 @@ table {
   white-space: normal;
   text-transform: capitalize;
   word-break: break-word;
+}
+
+/deep/ .mat-checkbox.mat-accent {
+  .mat-checkbox-frame {
+    border: 1px solid #9E9E9E;
+  }
+
+  &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+  }
+
+  .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+  }
 }

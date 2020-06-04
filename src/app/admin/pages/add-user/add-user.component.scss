@@ -188,13 +188,10 @@
   align-items: center;
 
   text-transform: uppercase;
-  background: #355C7D;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 13px;
-  -webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  background: $color-blue;
+
+  border-radius: 0 !important;
+  box-shadow: none;
 }
 
 .save-button {
