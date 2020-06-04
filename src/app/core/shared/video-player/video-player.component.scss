@@ -38,7 +38,7 @@ vg-controls vg-scrub-bar-buffering-time {
   color: $color-white !important;
 }
 
-::ng-deep .mat-option-text {
+:host  ::ng-deep .mat-option-text {
   display: inline-block;
   flex-grow: 1;
   overflow: hidden;
@@ -69,7 +69,7 @@ button:focus {
   border: none;
   outline: none;
 }
-::ng-deepvg-scrub-bar .scrubBar{
+:host ::ng-deepvg-scrub-bar .scrubBar{
   border: none;
   outline: none;
 }
