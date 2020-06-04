@@ -45,7 +45,7 @@ export const get_course_by_user = gql`
       success
     error_msg
     message{
-
+      feed_back
       course_id
       course_description
       course_name
@@ -794,5 +794,18 @@ export const getPopularcourse = gql`
         enrollment_end
         enrollment_start
         }
+      }
+    }`;
+    export const getFeedbackQuestion = gql`
+    query getFeedbackQuestion{
+      getFeedbackQuestion{
+        message
+    success
+    success
+    message
+    data{
+      _id
+      question
+    }
       }
     }`;
