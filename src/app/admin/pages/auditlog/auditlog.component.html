@@ -58,7 +58,7 @@
     <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="sno">
-          <mat-header-cell *matHeaderCellDef> s.no </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
             <span class="desktop-data"> {{i+1}}</span>
           </mat-cell>
@@ -93,7 +93,7 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
   <mat-dialog-content style="width: 1000px">
-    <h2><strong>View details</strong> </h2>
+    <h2 style="text-align: center"><strong>View details</strong> </h2>
     <mat-dialog-content>
       <form #profileForm="ngForm">
         <div class="container profile">
@@ -153,6 +153,7 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
   <mat-dialog-content style="width: 650px">
+    <h2 style="text-align: center"> Export Audit log</h2>
     <mat-dialog-content>
       <form #profileForm="ngForm">
         <div class="container profile">
