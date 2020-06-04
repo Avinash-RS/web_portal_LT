@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog } from '@angular/material';
+import { MatDialog ,MatDialogConfig} from '@angular/material';
 
 @Component({
   selector: 'app-scormplayer',
@@ -55,7 +55,7 @@ export class ScormplayerComponent implements OnInit {
 
     })
     if (detail.feed_back == 1) {
-      //open feed back form
+      //  this.test();
     }
   }
 
@@ -141,8 +141,9 @@ export class ScormplayerComponent implements OnInit {
       }
     })
   }
+
+
   test(templateRef: TemplateRef<any>) {
-    // this.showAppliedFiltre = false;
     this.dialog.open(templateRef);
   }
 
