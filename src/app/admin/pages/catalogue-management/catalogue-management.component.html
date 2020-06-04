@@ -339,7 +339,7 @@
         <div class="row width_100">
           <div class="col-md-4 col-sm-12"></div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid" mat-stroked-button
+            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid || !addCatalogueForm.dirty" mat-stroked-button
               (click)="editCatalogue()"
               class="width_80 border-radius-5 background-blue color_white center">Update</button>
           </div>
