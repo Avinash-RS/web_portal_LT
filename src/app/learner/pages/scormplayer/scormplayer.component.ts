@@ -32,6 +32,7 @@ export class ScormplayerComponent implements OnInit {
   question_id: any = [];
   jsonData: any;
   allFeedbackQue: any;
+  show: boolean = false
   constructor(private dialog: MatDialog, public sanitizer: DomSanitizer, public spinner: NgxSpinnerService, public activatedRoute: ActivatedRoute, private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router, public commonService: CommonServicesService, ) {
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -55,7 +56,9 @@ export class ScormplayerComponent implements OnInit {
 
     })
     if (detail.feed_back == 1) {
-      //  this.test();
+      this.show = true;
+    }else{
+      this.show=false;
     }
   }
 
@@ -136,16 +139,11 @@ export class ScormplayerComponent implements OnInit {
     this.question_id.user_id = 'hghghjg'
     this.service.InsertCourseFeedback(this.question_id).subscribe(data => {
       if (data.data['InsertCourseFeedback']['success'] == true) {
+        this.show = false;
         console.log('success')
       } else {
         console.log('fail')
       }
     })
   }
-
-
-  test(templateRef: TemplateRef<any>) {
-    this.dialog.open(templateRef);
-  }
-
 }
