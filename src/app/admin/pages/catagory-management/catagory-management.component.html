@@ -215,7 +215,7 @@
             <div class="row" *ngIf="selectedCategory?.category_name == undefined || !canotEdit">
               <div class="col-lg-8 col-md-6"></div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid"
+                <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid || !addCategoryForm.dirty"
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="addCategory('category')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
@@ -267,7 +267,7 @@
             <div class="row" *ngIf="selectedSubCategory?.sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid"
+                <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid || !addSubCategoryForm.dirty"
                   class="width_80  border-radius-5 background-blue color_white center"
                   (click)="addCategory('subcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
@@ -320,7 +320,7 @@
             <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addSubCategory" mat-stroked-button [disabled]="addSuperSubCategoryForm.invalid"
+                <button id="addSubCategory" mat-stroked-button [disabled]="addSuperSubCategoryForm.invalid || !addSuperSubCategoryForm.dirty"
                   class="width_80  border-radius-5 background-blue color_white center"
                   (click)="addCategory('supersubcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
