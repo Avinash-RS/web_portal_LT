@@ -150,8 +150,10 @@ export class CourseComponentComponent implements OnInit {
         id: 'Scaffolding',
         user: this.userDetail.user_id,
         course_id: this.course.course_id,
-        user_obj_id: this.userDetail._id
+        user_obj_id: this.userDetail._id,
+        feed_back:this.course.feed_back
       };
+      console.log(detail1)
       this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
     }
 

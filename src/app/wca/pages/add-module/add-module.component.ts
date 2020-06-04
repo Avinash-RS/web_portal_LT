@@ -325,11 +325,11 @@ export class AddModuleComponent implements OnInit {
     this.hoverName = n;
   }
   onRefernceBtnClick() {
-    this.router.navigate(['/Admin/auth/Wca/rf']);
+    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf']);
+    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
   }
 
   getRepoModules() {
