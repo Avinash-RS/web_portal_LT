@@ -89,7 +89,6 @@ export class ViewAllCoursesComponent implements OnInit {
         this.allcourses = data;
     })
     this.CommonServices.appliedCategory.subscribe((data: any) => {
-      console.log('data',data)
       this.Lvl1CatId = data.Lvl1CatId;
       this.level1selectedID = data.level1selectedID,
       this.Lvl2CatId= data.Lvl2CatId,

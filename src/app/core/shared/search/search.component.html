@@ -5,7 +5,7 @@
     </mat-autocomplete> -->
 <div class="input-group">
   <input class="form-control border-right-0" [(ngModel)]="searchName"  placeholder="  Search courses  "
-    (keypress)="searchCourse($event)">
+    (keyup)="searchCourse($event, searchName)">
   <span class="input-group-append bg-white border-left-0">
     <span class="input-group-text bg-transparent">
       <i class="fa fa-search" aria-hidden="true"></i>
