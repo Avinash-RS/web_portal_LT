@@ -534,7 +534,4 @@ export class CreateCourseComponent implements OnInit {
         });
     }
 
-    rowAction(row) {
-        console.log(row);
-    }
 }
