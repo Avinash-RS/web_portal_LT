@@ -280,8 +280,9 @@ export class GroupManagementComponent implements OnInit {
         };
         this.adminservice.creategroup(data).subscribe((result: any) => {
           if (result.data.createusergroup.success === true) {
+            this.alert.openAlert('Success !', this.currentpath?.group_id ?
+            'Sub group created successfully' : 'Group created successfully' );
             this.reset();
-            this.alert.openAlert('Success !', 'Group created successfully');
             form.reset();
             this.getgroups();
           } else {
