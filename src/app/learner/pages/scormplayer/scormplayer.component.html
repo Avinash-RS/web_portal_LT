@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <div class="limiter">
   <div class="container wrap-body">
     <h1 class="head" >{{courseDeatils?.course_name}}</h1>
@@ -13,42 +12,7 @@
 
     <div class="left">
       <iframe class="player" [src]="urlSafe"></iframe>
-      <!-- <iframe src="../../../../assets/SequencingRandomTest_SCORM20043rdEdition/shared/launchpage.html?content=assessment4" width="100%" height="600px"></iframe>  -->
-
     </div>
-
-    <!-- <h1 class="subhead">Details about course</h1> -->
-    <!-- <p style="margin-left: 10.8%;font-size: 16px; font-weight: 500;">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type specimen
-      book. It has survived not only five centuries, but also the leap into electronic typesetting,
-      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with
-    </p><br>
-    <p style="margin-left: 10.8%;font-size: 16px;">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type specimen
-      book.
-    </p><br>
-    <div class="row">
-      <div class="col-md-4">
-        <h2 style="margin-left: 34.6%;">Course Description</h2>
-      </div>
-
-      <div class="col-md-8" *ngIf="courseDeatils">
-        <p style="font-size: 16px;padding: 8px;">{{courseDeatils.course_description}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-10">
-      </div>
-      <div class="col-md-2">
-        <a href=""><b>View More ></b></a>
-      </div> -->
-
-    <!-- </div> -->
     <h1 class="subhead">Resources</h1>
     <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
       <input type="checkbox" name="collapse" [id]="res?.modulename">
@@ -114,120 +78,76 @@
         </div>
       </section>
     </div>
-
-
-
-
-
     <div style="text-align:center;" *ngIf="modulength >= 5">
       <button class="btn1 success" (click)="moresection(isCollapsed,modulength)" [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseExample">{{modulength / 2}} more section</button>
     </div>
     <br><br>
-
-    <!-- <div class="card">
-      <h1 class="title">Instructors</h1>
-      <mat-grid-list [cols]="breakpoint"rowHeight="1:0.3" >
-        <mat-grid-tile *ngFor="let author of authorDetails">
-          <div class="box">
-            <div class="row">
-              <div class="col-md-4">
-                <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
-              </div>
-
-              <div class="col-md-8">
-                <div class="cardhead"><b>{{author.author_name}}</b></div><br><br>
-                <div style="float: left;">Lecturer </div><br>
-                <div style="float: left;">School of Information</div><br><br>
-                <div class="info">
-                  <p>{{author.description}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-grid-tile> -->
-
-    <!-- <mat-grid-tile>
-          <div class="box">
-            <div class="row">
-              <div class="col-md-4">
-                <img class="image" src="../../../../assets/images/shutterstock_345349079.jpg">
-              </div>
-
-              <div class="col-md-8">
-                <div class="cardhead"><b>Alexa</b></div><br><br>
-                <div style="float: left;">Lecturer </div><br>
-                <div style="float: left;">School of Information</div><br><br>
-                <div class="info">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                  invidunt ut
-                  labore et dolore magna aliquyam erat, sed diam voluptua. At ver</div>
-              </div>
-            </div>
-          </div>
-        </mat-grid-tile> -->
-
-    <!-- </mat-grid-list>
-    </div> -->
-    <br><br>
   </div>
 </div>
-<button (click)="test(getCategoryDialog)">testing dialog</button>
-<ng-template #getCategoryDialog>
-  <mat-dialog-title class="header_feedback">
-    <h1>Your Feedback</h1>
-  </mat-dialog-title>
-  <mat-dialog-content><br>
-    <span><b>Please take a moment to fill out this survey</b></span>
-    <div class="row" *ngFor="let que of allFeedbackQue">
-      <div class="col-6">
-        <ul>
-          <li>
-            <span > {{que.question}}</span >
-          </li>
-        </ul>
+
+<!-- <button id="myBtn" (click)="open" >Open Modal</button> -->
+<!-- The Modal -->
+<div  class="modal" *ngIf="show" >
+  <!-- *ngIf="show" -->
+  <!-- [ngClass] = "show == true ? 'model' : 'offmodule'" -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Your Feedback</span>
+    </div>
+    <div class="modal-body"><br>
+      <span style="font-size: 18px;">Please take a moment to fill out this survey</span>
+      <div class="row" *ngFor="let que of allFeedbackQue">
+        <div class="col-6">
+          <ul>
+            <li>
+              <span > {{que.question}}</span >
+            </li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <ul>
+            <li>
+              <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"
+                (rate)="onRate($event,que._id)"  ></star-rating>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="col-6">
-        <ul>
-          <li>
-            <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"
-              (rate)="onRate($event,que._id)"  ></star-rating>
-          </li>
-        </ul>
+      <div class="row">
+        <div class="col-6">
+          <ul>
+            <li>
+              <span>Would you recommend this to a friend ?</span>
+            </li>
+            <li>
+              <span>What do you like about the module</span>
+            </li>
+            <li>
+              <textarea class="texare_width_ht" name="are"  [(ngModel)]="are" ></textarea>
+            </li>
+            <li>
+              <span>What could be improved</span>
+            </li>
+            <li>
+              <textarea class="texare_width_ht" name="are1"  [(ngModel)]="are1"></textarea>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <ul>
+            <li>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]='selectOption'>
+                <mat-radio-button style="margin-right: 10px;" value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <ul>
-          <li>
-            <span>Would you recommend this to a friend ?</span>
-          </li>
-          <li>
-            <span>What do you like about the module</span>
-          </li>
-          <li>
-            <textarea class="texare_width_ht" name="are"  [(ngModel)]="are" ></textarea>
-          </li>
-          <li>
-            <span>What could be improved</span>
-          </li>
-          <li>
-            <textarea class="texare_width_ht" name="are1"  [(ngModel)]="are1"></textarea>
-          </li>
-        </ul>
-      </div>
-      <div class="col-6">
-        <ul>
-          <li>
-            <mat-radio-group aria-label="Select an option" [(ngModel)]='selectOption'>
-              <mat-radio-button value="yes">Yes</mat-radio-button>
-              <mat-radio-button value="no">No</mat-radio-button>
-            </mat-radio-group>
-          </li>
-        </ul>
-      </div>
+    <div class="modal-footer">
+      <button class="roundbtn" (click)="submitFeedback(are,are1,selectOption)">Submit</button>
     </div>
-  </mat-dialog-content>
-  <mat-dialog-actions align="center">
-    <button class="roundbtn" (click)="submitFeedback(are,are1,selectOption)">Submit</button>
-  </mat-dialog-actions>
-</ng-template>
+  </div>
+  </div>
