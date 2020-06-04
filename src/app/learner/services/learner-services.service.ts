@@ -377,9 +377,12 @@ export class LearnerServicesService {
   //     }
   //   });
   // }
-  get_module_topic(){
+  get_module_topic(course_id){
     return this.Apollo.query({
-      query: get_module_topic
+      query: get_module_topic,
+      variables: {
+        course_id:course_id
+      }
     });
   }
   gettopicdetail(_id, modulename) {

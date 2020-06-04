@@ -91,7 +91,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.route.navigateByUrl('/Admin/auth/Wca/rf');
+    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id}});
   }
   clickedT(i) {
     this.clicked = i

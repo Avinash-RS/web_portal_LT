@@ -118,12 +118,12 @@ h2 {
   border-radius: 30px;
 }
 
-::ng-deep .list-group {
+:host ::ng-deep .list-group {
   width: 90% !important;
   border: none;
 }
 
-::ng-deep .list-group-item {
+:host  ::ng-deep .list-group-item {
   border: none !important;
 }
 
@@ -182,7 +182,7 @@ h2 {
   transform: rotate(45deg);
 }
 
-::ng-deep .list-group-item {
+:host ::ng-deep .list-group-item {
   padding: 5px !important;
 
 }
@@ -207,7 +207,7 @@ h2 {
   cursor: pointer;
 }
 
-::ng-deep .mat-typography h3 {
+:host ::ng-deep .mat-typography h3 {
   margin: 5px 0px 5px !important;
 }
 
@@ -220,7 +220,7 @@ h2 {
   text-align: right;
 }
 
-::ng-deep .mat-dialog-content {
+:host ::ng-deep .mat-dialog-content {
   max-height: 70vh !important;
 }
 
@@ -279,7 +279,7 @@ h2 {
   padding: 0 9px;
 }
 
-::ng-deep .range .ng5-slider-pointer {
+:host ::ng-deep .range .ng5-slider-pointer {
   width: 8px;
   height: 8px;
   top: -5px;
@@ -287,14 +287,14 @@ h2 {
   outline: none;
 }
 
-::ng-deep .ng5-slider .ng5-slider-pointer {
+:host ::ng-deep .ng5-slider .ng5-slider-pointer {
   cursor: pointer;
   width: 20px !important;
   height: 20px !important;
   top: -9px !important;
 }
 
-::ng-deep .range .ng5-slider-pointer::after {
+:host ::ng-deep .range .ng5-slider-pointer::after {
   position: absolute;
   top: -9px;
   left: -9px;
@@ -308,7 +308,7 @@ h2 {
 
 
 
-::ng-deep .range .ng5-slider-selection {
+:host ::ng-deep .range .ng5-slider-selection {
   background-color: $color-blue !important;
 }
 
@@ -351,9 +351,9 @@ h2 {
   // width: 43.5%;
   width: 70%;
   height: 31px;
-  border: 2px solid #ccc;
+  border: 2px solid $color-border;
   border-radius: 7px;
-  color: #1F3777;
+  color: $color-blue;
 }
 
 .sort {
