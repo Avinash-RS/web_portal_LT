@@ -39,7 +39,7 @@ export class GroupManagementComponent implements OnInit {
   toggleevent: any;
   editgroupname: string;
   group_name: any;
-  loader = false ;
+  loader = false;
   ELEMENT_DATA: PeriodicElement[] = [];
   resultsLength: number = null;
   displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
@@ -57,17 +57,17 @@ export class GroupManagementComponent implements OnInit {
   allgroups: any;
   selectedcatalogue: any;
   oldcatalogue: any;
-  trackBy:any;
+  trackBy: any;
   toggle: any;
-    /** tree source stuff */
-    readonly dataSource$: BehaviorSubject<any[]>;
-    readonly treeSource: MatTreeNestedDataSource<any>;
-    /** tree control */
-    readonly treeControl = new NestedTreeControl<any>(node => node.children);
-    readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
+  /** tree source stuff */
+  readonly dataSource$: BehaviorSubject<any[]>;
+  readonly treeSource: MatTreeNestedDataSource<any>;
+  /** tree control */
+  readonly treeControl = new NestedTreeControl<any>(node => node.children);
+  readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
-              private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
-              private router: Router, private dialog: MatDialog, ) {
+    private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
+    private router: Router, private dialog: MatDialog, ) {
 
     this.groupid = (this.router.getCurrentNavigation().extras?.state?.group_id);
     this.treeSource = new MatTreeNestedDataSource<any>();
@@ -165,24 +165,24 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
- update(items, id, name) {
+  update(items, id, name) {
     let item;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < items.length; i++) {
-        item = items[i];
-        if (item.group_id === id) {
-            item.checkbox = name;
-            return;
-        }
-        if (item.children) {
-             this.update(item.children, id, name);
-        }
+      item = items[i];
+      if (item.group_id === id) {
+        item.checkbox = name;
+        return;
+      }
+      if (item.children) {
+        this.update(item.children, id, name);
+      }
     }
-}
+  }
   selectgroup(node, groupform) {
     if (this.currentpath) {
-     this.update(this.treeSource.data, this.currentpath?.group_id, false);
-  }
+      this.update(this.treeSource.data, this.currentpath?.group_id, false);
+    }
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
       this.currentpath = null;
@@ -193,7 +193,7 @@ export class GroupManagementComponent implements OnInit {
       this.group_name = node.group_name;
       this.toggle = node.is_active;
       this.getAllUser(0);
-      this.adminservice.getgroupbyid(node.group_id).subscribe((result: any ) => {
+      this.adminservice.getgroupbyid(node.group_id).subscribe((result: any) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
       });
@@ -241,15 +241,15 @@ export class GroupManagementComponent implements OnInit {
     // this.getAllUser(0);
     this.adminservice.updateGroup(this.userGroupChange._id, this.changeGrpForm.value.group.group_name,
       this.changeGrpForm.value.group.group_id).subscribe((result: any) => {
-      if (result.data.update_group.success) {
-        this.alert.openAlert('User Group Updated Successfully', null);
-        this.getAllUser(0);
-      } else {
-        this.alert.openAlert(result.data.update_group.message, null);
-        this.dialog.closeAll();
-      }
+        if (result.data.update_group.success) {
+          this.alert.openAlert('User Group Updated Successfully', null);
+          this.getAllUser(0);
+        } else {
+          this.alert.openAlert(result.data.update_group.message, null);
+          this.dialog.closeAll();
+        }
 
-    });
+      });
   }
   savegroup(form) {
     let hierarchy;
@@ -312,10 +312,10 @@ export class GroupManagementComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         const data = {
-          catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : groupform.value.catalogue          ,
-          catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue  ? 'null' : this.selectedcatalogue.catalogue_name,
-          is_active: groupform.value.toggle, group_id : this.currentpath.group_id, group_name: groupform.value.group_name,
-          group_type: this.currentpath.group_type, parent_group_id : this.currentpath.parent_group_id,
+          catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : groupform.value.catalogue,
+          catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : this.selectedcatalogue.catalogue_name,
+          is_active: groupform.value.toggle, group_id: this.currentpath.group_id, group_name: groupform.value.group_name,
+          group_type: this.currentpath.group_type, parent_group_id: this.currentpath.parent_group_id,
           hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
         };
         this.adminservice.updategroupdetails(data).subscribe((result1: any) => {
@@ -362,8 +362,20 @@ export class GroupManagementComponent implements OnInit {
     this.catalogue = '';
   }
 
-  gotoAddUser() {
-    this.router.navigate(['Admin/auth/addUser']);
+  gotoAddUser(group) {
+    const g = {
+      admin_id: group.admin_id,
+      group_id: group.group_id,
+      group_name: group.group_name,
+      group_type: group.group_type,
+      hierarchy_id: group.hierarchy_id,
+      is_active: true,
+      parent_group_id: group.parent_group_id,
+      __typename: 'user_details',
+      _id: group._id
+    };
+
+    this.router.navigateByUrl('/Admin/auth/addUser', { state: { group: g } });
   }
 
   getAllUser(pagenumber) {

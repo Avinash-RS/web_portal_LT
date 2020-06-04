@@ -194,7 +194,7 @@
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
-                <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
+                <button mat-button (click)="gotoAddUser(currentpath)" class="float_right">
                   <mat-icon>add</mat-icon>Add user
                 </button>
               </div>
