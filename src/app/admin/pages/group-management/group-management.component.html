@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
-    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course Enrollment</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Group Management</li>
+    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course enrollment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Group management</li>
   </ol>
 </nav>
-<h1 style="padding-left: 25px;"> Group Management</h1>
+<h1 style="padding-left: 25px;"> Group management</h1>
 <div class="container  pb-5">
 
   <div class="container shadow margin20">
@@ -101,10 +101,13 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">
                         <ng-container *ngIf="editstatus">
-                          Enter
-                          <ng-container *ngIf="currentpath?.group_name">Sub </ng-container>
+                          Enter 
+                          <ng-container *ngIf="currentpath?.group_name">sub </ng-container>
+                          group name 
                         </ng-container>
-                        group name
+                        <ng-container *ngIf="!editstatus">
+                          Group name 
+                        </ng-container>
                       </label>
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput
                         [(ngModel)]="group_name" name="group_name" #groupname1="ngModel" [required]=editstatus
@@ -127,9 +130,11 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">
                         <ng-container *ngIf="editstatus">
-                          Select
+                          Select catalogue
                         </ng-container>
-                        catalogue
+                        <ng-container *ngIf="!editstatus">
+                          Catalogue
+                        </ng-container>
                       </label>
                       <br>
                       <mat-form-field>

@@ -77,7 +77,7 @@ export class AuditlogComponent implements OnInit {
   getallauditreports(pgnumber) {
     this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
       this.resultsLength = null;
-      console.log(result.message);
+      // console.log(result.message);
       if (result?.message) {
         this.reports = result.message;
         // this.reports.forEach(element => {
@@ -148,6 +148,7 @@ export class AuditlogComponent implements OnInit {
         if (result?.data?.get_admin_export_auditlog?.success === true) {
           filterform.reset();
           window.open(result?.data?.get_admin_export_auditlog.message);
+          this.dialog.closeAll();
         } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
           Swal.fire('Report not found');
         }
@@ -160,6 +161,7 @@ export class AuditlogComponent implements OnInit {
     this.adminservice.getadminexportauditlog(fromdate, todate).subscribe((result: any) => {
       if (result?.data?.get_admin_export_auditlog?.success === true) {
         window.open(result?.data?.get_admin_export_auditlog.message);
+        this.dialog.closeAll();
       } else if (result?.data?.get_admin_export_auditlog?.message === 'Error in exporting data') {
         Swal.fire('Report not found');
       }

@@ -64,11 +64,11 @@ export class EnrollmentComponent implements OnInit {
   }
   getenrolledcoursesindividual(data) {
     this.columns = [
-      { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element.enroll_date).format('LL')}` },
-      { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element.full_name}` },
-      { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element.course_name}` },
-      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element.group_name}` },
-      { columnDef: 'username', header: 'User name', cell: (element: any) => `${element.username}` },
+      { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element?.enroll_date).format('LL') || ' '}` },
+      { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element?.full_name || ' '}` },
+      { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element?.course_name || ' '}` },
+      { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element?.group_name || ' '}` },
+      { columnDef: 'username', header: 'User name', cell: (element: any) => `${element?.username || ' '}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
@@ -82,10 +82,10 @@ export class EnrollmentComponent implements OnInit {
 
   getenrolledcoursesgroup(pagenumber) {
     this.columns = [
-      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem.request_date).format('LL')}` },
-      { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem.course_name}` },
-      { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem.totalCount}` },
-      { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem.group_name}` },
+      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem?.request_date).format('LL') || ' '}` },
+      { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem?.course_name || ' ' }` },
+      { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem?.totalCount || ' '}` },
+      { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem?.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
