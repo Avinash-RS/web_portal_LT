@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
-                this.router.navigate(['/Learner/MyCourse']);
+                this.router.navigate(['/Learner/home']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
                 this.router.navigate(['/Learner/profile']);
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('ps', ps);
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
-                this.router.navigate(['/Learner/MyCourse']);
+                this.router.navigate(['/Learner/home']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
                 this.router.navigate(['/Learner/profile']);

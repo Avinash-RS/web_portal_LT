@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'home', component: LearnerHomeComponent,canActivate: [AuthGuard],data: { title: 'Learner home' }}
+  { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
 
 
 ];
@@ -82,8 +82,6 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    
-
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -110,8 +108,8 @@ const routes: Routes = [
     RatingModule
   ],
   providers: [
-    Apollo, 
-    // { provide: Window, useValue: window }  
+    Apollo,
+    // { provide: Window, useValue: window }
   ],
   entryComponents: [CategoryComponentComponent]
 })
