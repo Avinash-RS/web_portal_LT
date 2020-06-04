@@ -182,51 +182,6 @@ ol{
     cursor: pointer;
     color:#5e5e5e96;
   }
-// .card {
-//     // text-align: center;
-//     margin-left: 1%;
-//     margin-right: 1%;
-//     border: hidden;
-//     height: 18%;
-//     border-radius: 1px;
-//     background-color: #e1e1dd;
-//     box-shadow: 0 0 10px rgb(170, 170, 170) !important;
-// }
-// .title{
-//     color: $color-blank !important;
-//     font-size: 30px;
-//     padding: 20px;
-//     margin-top: 12px;
-//     margin-left: 8%;
-//     text-align: left;
-//     font-weight: 500;
-// }
-// .box{
-//     width: 720px;
-//     margin-left: 10%;
-//     margin-right: 10%;
-//     margin-bottom: 10px;
-//     height: 170px;
-//     background-color: $color-white !important;
-//     box-shadow: 0 0 10px $color-light-grey !important;
-//     position: relative;
-// }
-// .image{
-//     width: 156px;
-//     height: 170px;
-// }
-// .cardhead{
-//     float: left; 
-//     font-size: 22px;
-//     margin-top: 8px;
-// }
-// .info{
-//     float: left;
-//     white-space: normal;
-//     word-break: normal;
-//     margin-right: 20px;
-// }
-
 
 :host ::ng-deep .mat-form-field-flex {
     display: inline-flex;
@@ -253,10 +208,7 @@ li{
     text-align: center;
     margin: 4% auto;
     padding: 30px 0;
-    /* background: #111; */
     color: #EEE;
-    /* border-radius: 5px; */
-    /* border: thin solid #444; */
     overflow: hidden;
   }
 
@@ -265,8 +217,6 @@ li{
     color: $color-border !important;
     font-size: 35px !important;
     padding-left: 25px !important;
-    // border: 1px solid $color-border !important;
-    // width: 50px;
     display: inline-block;
 }
 
@@ -274,42 +224,7 @@ li{
     color: $color-yellow !important;
     padding-left: 25px !important;
 }
-::ng-deep .mat-radio-outer-circle {
-    box-sizing: border-box;
-    height: 24px !important;
-    left: 31px !important;
-    position: absolute;
-    top: -9px !important;
-    transition: border-color ease 280ms;
-    width: 24px !important;
-    border-width: 1px !important;
-    border-style: solid;
-    border-radius: 50%;
-}
-::ng-deep .mat-radio-label-content {
-    -webkit-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
-    user-select: auto;
-    display: inline-block;
-    order: 0;
-    line-height: inherit;
-    padding-left: 48px !important;
-    padding-right: 6px !important;
-    /* top: 33px; */
-}
-::ng-deep  .mat-radio-label-content {
-    -webkit-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
-    user-select: auto;
-    display: inline-block;
-    order: 0;
-    height: 32px !important;
-    line-height: inherit;
-    padding-left: 8px;
-    padding-right: 0;
-}
+
 .texare_width_ht {
     margin: 0;
     font-family: inherit;
@@ -318,22 +233,64 @@ li{
     width: 640px !important;
     height: 66px !important;
 }
-::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-    background-color: #e65100;
-    height: 43px !important;
-    width: 41px !important;
-    margin: -18px !important;
-    margin-left: 23px !important;  
-}
+
 .roundbtn{
-    background-color: $color-subhead;
-    font-size: 20px;
+    background-color: $color-blue;
+    font-size: 16px;
     border: none !important;
-    width: 20% !important;
+    width: 12% !important;
     color: $color-white;
-    font-weight: 500;
-    height: 50px;
-    border-radius: 30px;
+    height: 36px;
     margin-left: 70% !important;
   }
+  .roundbtn :focus{
+      outline: none;
+      border: none;
+  }
   
+   /* The Modal*/
+.modal {
+  display: block; 
+  position: fixed;
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+
+.modal-header {
+    background-color: $color-blue;
+    color: white;
+    font-size: 18px;
+    text-align: left !important;
+}
+
+.modal-body {padding: 2px 16px;}
