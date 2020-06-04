@@ -1,10 +1,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Catagory Management</li>
+    <li class="breadcrumb-item active" aria-current="page">Catagory management</li>
   </ol>
 </nav>
-<h1 style="padding-left:25px"> Category Management</h1>
+<h1 style="padding-left:25px"> Category management</h1>
 <div class="container ">
 
   <div class="container m-t-20">
@@ -12,7 +12,7 @@
       <!-- Mat tree code here ( left hand side) -->
       <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
         [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
-        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Category List </h2>
+        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Category list </h2>
 
         <div class="spinner-container" *ngIf="loadingCategory">
           <mat-spinner diameter="40"></mat-spinner>
@@ -168,7 +168,7 @@
                   [ngClass]="{ 'is-invalid': f.category_name.touched && f.category_name.errors , 'dis' : canotEdit}"
                   formControlName="category_name">
                 <div *ngIf="f.category_name.touched && f.category_name.errors" class="invalid-feedback">
-                  <div *ngIf="f.category_name.errors.required">* Category Name is required</div>
+                  <div *ngIf="f.category_name.errors.required">* Category name is required</div>
                 </div>
               </div>
             </div>
@@ -248,7 +248,7 @@
                   [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors , 'dis' : canotEdit}"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
-                  <div *ngIf="f.sub_category_name.errors.required">* Sub Category Name is required</div>
+                  <div *ngIf="f.sub_category_name.errors.required">* Sub category name is required</div>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
                   class="invalid-feedback">
-                  <div *ngIf="f.super_sub_category_name.errors.required">* Sub Category Name is required</div>
+                  <div *ngIf="f.super_sub_category_name.errors.required">* Sub category name is required</div>
                 </div>
               </div>
             </div>
@@ -437,7 +437,7 @@
           <div class="col-md-4">
             <div class="form-group width_90" *ngIf="subCategoryArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
-                <mat-label class="m-l-20">Sub Category</mat-label>
+                <mat-label class="m-l-20">Sub category</mat-label>
                 <mat-select formControlName="subCategory" (selectionChange)="loadSupersubcategoryDropDown()">
                   <mat-option *ngFor="let subcat of subCategoryArray" [value]="subcat">
                     {{subcat.sub_category_name}}
@@ -449,7 +449,7 @@
           <div class="col-md-4">
             <div class="form-group width_90" *ngIf="superSubCatArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
-                <mat-label class="m-l-20">Sub Category</mat-label>
+                <mat-label class="m-l-20">Sub category</mat-label>
                 <mat-select formControlName="subSubCategory">
                   <mat-option *ngFor="let ssubcat of superSubCatArray" [value]="ssubcat">
                     {{ssubcat.super_sub_category_name}}
