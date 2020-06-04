@@ -56,7 +56,7 @@
 }
 
 .content{
-    overflow: auto !important;
+    overflow: hidden !important;
 }
 .accordion .content {
     background: $color-light-grey;;
@@ -235,3 +235,105 @@ ol{
     width: 100%;
     border: 1px solid !important;
 }
+
+ 
+:host ::ng-deep .mat-dialog-container {
+     margin-top: 10% !important;
+    width: 800px !important;
+    height: 600px !important;
+}
+
+li{
+    list-style-type: none;
+    padding: 14px;
+}
+.cont {
+    width: 93%;
+    max-width: 350px;
+    text-align: center;
+    margin: 4% auto;
+    padding: 30px 0;
+    /* background: #111; */
+    color: #EEE;
+    /* border-radius: 5px; */
+    /* border: thin solid #444; */
+    overflow: hidden;
+  }
+
+  ::ng-deep .star {
+    cursor: pointer;
+    color: $color-border !important;
+    font-size: 35px !important;
+    padding-left: 25px !important;
+    // border: 1px solid $color-border !important;
+    // width: 50px;
+    display: inline-block;
+}
+
+::ng-deep .star.on {
+    color: $color-yellow !important;
+    padding-left: 25px !important;
+}
+::ng-deep .mat-radio-outer-circle {
+    box-sizing: border-box;
+    height: 24px !important;
+    left: 31px !important;
+    position: absolute;
+    top: -9px !important;
+    transition: border-color ease 280ms;
+    width: 24px !important;
+    border-width: 1px !important;
+    border-style: solid;
+    border-radius: 50%;
+}
+::ng-deep .mat-radio-label-content {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    display: inline-block;
+    order: 0;
+    line-height: inherit;
+    padding-left: 48px !important;
+    padding-right: 6px !important;
+    /* top: 33px; */
+}
+::ng-deep  .mat-radio-label-content {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    display: inline-block;
+    order: 0;
+    height: 32px !important;
+    line-height: inherit;
+    padding-left: 8px;
+    padding-right: 0;
+}
+.texare_width_ht {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 640px !important;
+    height: 66px !important;
+}
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #e65100;
+    height: 43px !important;
+    width: 41px !important;
+    margin: -18px !important;
+    margin-left: 23px !important;  
+}
+.roundbtn{
+    background-color: $color-subhead;
+    font-size: 20px;
+    border: none !important;
+    width: 20% !important;
+    color: $color-white;
+    font-weight: 500;
+    height: 50px;
+    border-radius: 30px;
+    margin-left: 70% !important;
+  }
+  

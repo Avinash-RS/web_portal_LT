@@ -58,7 +58,7 @@
     <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="sno">
-          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> s.no </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
             <span class="desktop-data"> {{i+1}}</span>
           </mat-cell>
@@ -128,13 +128,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 col-lg-6 col-sm-12 col-12">
+            <div class="col-md-6 col-xl-6 col-lg-6 col-sm-12 col-12">
               <label>Request detail : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.api_call_request[0] | json}}</label></label>
+                  class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_request[0] | json}}</label></label>
             </div>
-            <div class="col-md-6 col-lg-6 col-sm-12 col-12">
+            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
               <label>Response :<label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.api_call_response[0] | json }}</label></label>
+                  class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_response[0] | json }}</label></label>
             </div>
           </div>
 

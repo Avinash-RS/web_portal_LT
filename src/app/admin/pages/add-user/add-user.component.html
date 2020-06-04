@@ -1,10 +1,11 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item" [routerLink]="['/Admin/auth/userManagement']">Home</li>
-    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+    <li class="breadcrumb-item active" aria-current="page">Add user</li>
   </ol>
 </nav>
 
+<h1 style="padding-left: 25px;"> Add user</h1>
 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)">
   <mat-tab label="Add a user">
     <div class="container">
@@ -13,15 +14,15 @@
         <div class="col-md-4 col-sm-10 col-10"><br>
           <form [formGroup]="addUserForm">
             <div class="form-group">
-              <label>Full Name</label><span style="color: red;"> *</span>
+              <label>Full name</label><span style="color: red;"> *</span>
               <input type="text" formControlName="username" class="form-control"
                 [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
               <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Full Name is required</div>
-                <div *ngIf="f.username.errors.pattern">Full Name is invalid</div>
-                <div *ngIf="f.username.errors.minlength">Full Name must be minimum of
+                <div *ngIf="f.username.errors.required">Full name is required</div>
+                <div *ngIf="f.username.errors.pattern">Full name is invalid</div>
+                <div *ngIf="f.username.errors.minlength">Full name must be minimum of
                   {{f.username.errors.minlength.requiredLength}} characters </div>
-                <div *ngIf="f.username.errors.maxlength">Full Name must be
+                <div *ngIf="f.username.errors.maxlength">Full name must be
                   {{f.username.errors.maxlength.requiredLength}} maximum of characters</div>
               </div>
             </div>
@@ -35,14 +36,12 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Group Name</label><span style="color: red;"> *</span><br>
+              <label>Group name</label><span style="color: red;"> *</span><br>
               <mat-form-field class="width_100 ">
-                <!-- <mat-label>Institute Name</mat-label> -->
                 <mat-select formControlName="group">
-                  <mat-option *ngFor="let grp of groups" [value]="grp"
-                    [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+                  <mat-option *ngFor="let grp of groups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
                     ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
-                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
+                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
                     {{grp.group_name}}
                   </mat-option>
                 </mat-select>
@@ -50,7 +49,7 @@
             </div><br>
             <button id="addUser" mat-stroked-button [disabled]="addUserForm.invalid" class="width_70 center"
               (click)="addUser()">Add
-              User</button>
+              user</button>
             <br>
           </form>
         </div>
@@ -58,7 +57,7 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Add Multiple Users">
+  <mat-tab label="Add multiple users">
     <!-- <app-data-table [tableData]="tableData" [columnHeader]="columnHeader"></app-data-table>
     {{tableData | json}}
     <mat-paginator #paginator [length]="9" [pageSize]="5" (page)="next()" showFirstLastButtons>
@@ -109,14 +108,13 @@
     <div class="downloadbutton">
       <form #bulkuserform="ngForm">
         <mat-form-field>
-          <mat-label>Group Name</mat-label>
+          <mat-label>Group name</mat-label>
           <mat-select name="group" [(ngModel)]="group">
-            <mat-option *ngFor="let grp of groups" [value]="grp"
-            [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+            <mat-option *ngFor="let grp of groups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
             ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
-            (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
-            {{grp.group_name}}
-          </mat-option>
+            (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
+              {{grp.group_name}}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </form>

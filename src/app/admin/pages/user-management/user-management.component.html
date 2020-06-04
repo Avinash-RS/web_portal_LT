@@ -17,7 +17,7 @@
 
     <div class="col-lg-1 col-md-2 col-sm-12 col-12 float_right">
       <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
-        <mat-icon style="color: white;">add</mat-icon>Add User
+        <mat-icon style="color: white;">add</mat-icon>Add user
       </button>
     </div>
   </div>
@@ -31,49 +31,51 @@
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
-            Select
+            <!-- Select -->
           </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <span class="mobile-label">Select</span>
+            <span class="mobile-label">
+              <!-- Select -->
+            </span>
             <mat-checkbox (change)="checkboxLabel(row)">
             </mat-checkbox>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="user_id">
-          <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
           <mat-cell>
             sdiuio
           </mat-cell>
 
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User ID</span>
+            <span class="mobile-label">User id</span>
             <span class="desktop-data"> {{element.user_id}}</span>
             <span class="mobile-data"> {{element.user_id}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User Name</span>
+            <span class="mobile-label">User name</span>
             <span class="desktop-data"> {{element.username}}</span>
             <span class="mobile-data"> {{element.username}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Email id </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Email ID</span>
+            <span class="mobile-label">Email id</span>
             <span class="desktop-data"> {{element.email || 'NA'}}</span>
             <span class="mobile-data"> {{element.email || 'NA'}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="mobile">
-          <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+          <mat-header-cell *matHeaderCellDef> Mobile no </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile no</span>
             <span class="desktop-data"> {{element.mobile_number || 'NA'}}</span>
             <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span>
           </mat-cell>

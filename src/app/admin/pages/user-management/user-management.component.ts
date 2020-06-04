@@ -125,7 +125,8 @@ export class UserManagementComponent implements OnInit {
               this.resultsLength = 10;
             } else {
               this.getAllUser(0);
-              this.alert.openAlert('Sorry', 'User doesnt exists');
+              // tslint:disable-next-line:quotemark
+              this.alert.openAlert('Sorry', "User doesn't exist");
             }
 
           });

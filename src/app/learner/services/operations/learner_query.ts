@@ -45,7 +45,7 @@ export const get_course_by_user = gql`
       success
     error_msg
     message{
-
+      feed_back
       course_id
       course_description
       course_name
@@ -521,9 +521,8 @@ query get_course_by_subcategory($input_id: String!,$input_type: String!,$pagenum
 //     }
 //     }`;
 export const get_module_topic = gql`
-    query get_module_topic{
-      get_module_topic {
-    
+    query get_module_topic($course_id:String) {
+      get_module_topic(course_id:$course_id)  {
         data{
           _id
           modulename
@@ -795,5 +794,18 @@ export const getPopularcourse = gql`
         enrollment_end
         enrollment_start
         }
+      }
+    }`;
+    export const getFeedbackQuestion = gql`
+    query getFeedbackQuestion{
+      getFeedbackQuestion{
+        message
+    success
+    success
+    message
+    data{
+      _id
+      question
+    }
       }
     }`;

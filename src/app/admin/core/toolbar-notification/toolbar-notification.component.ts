@@ -40,7 +40,6 @@ export class ToolbarNotificationComponent implements OnInit {
       this.adminService.removeNotificationData(reportId).subscribe((result: any) => {
 			 if (result.data.update_notification.success === true) {
             this.notifications = this.notifications.filter((data) => data.report_id !== reportId);
-            localStorage.setItem('Reports', this.notifications);
        }
       });
     }

@@ -30,8 +30,8 @@
                 </mat-icon>
               </button>
               <!-- (change)="selected = node" -->
-              <mat-checkbox  name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
+              <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                {{node.group_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -47,8 +47,8 @@
                   </mat-icon>
                 </button>
                 <!-- [checked]="selected === node" (change)="selected = node" -->
-                <mat-checkbox   name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
+                <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                  {{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -83,8 +83,9 @@
                     </div>
                     <div class="col-md-6">
                       <ng-container *ngIf="currentpath?.group_name && !editstatus">
-                        <button type="button" class="btn col-md-4 float-right addnewBtn" [disabled] = "currentpath?.is_active == false"
-                          (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add sub
+                        <button type="button" class="btn col-md-4 float-right addnewBtn"
+                          [disabled]="currentpath?.is_active == false" (click)="edit(false,currentpath.group_name)"><i
+                            class="fa fa-plus"></i> &nbsp;&nbsp;Add sub
                           group</button>
                       </ng-container>
                       <ng-container *ngIf="currentpath?.group_name && editstatus">
@@ -101,12 +102,12 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">
                         <ng-container *ngIf="editstatus">
-                          Enter 
+                          Enter
                           <ng-container *ngIf="currentpath?.group_name">sub </ng-container>
-                          group name 
+                          group name
                         </ng-container>
                         <ng-container *ngIf="!editstatus">
-                          Group name 
+                          Group name
                         </ng-container>
                       </label>
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput
@@ -188,12 +189,12 @@
                 <ng-container *ngIf="!currentpath?.group_name">
 
                   <div class="card-header">
-                    All user list
+                    All user's list
                   </div>
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
-                <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
+                <button mat-button (click)="gotoAddUser(currentpath)" class="float_right">
                   <mat-icon>add</mat-icon>Add user
                 </button>
               </div>
@@ -213,29 +214,29 @@
                 </ng-container>
 
                 <ng-container matColumnDef="user_id">
-                  <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">User Id</span>
+                    <span class="mobile-label">User id</span>
                     {{element.user_id}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span class="mobile-label">User Name</span>{{element.username}}
+                  <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span class="mobile-label">User name</span>{{element.username}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
-                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email ID</span>
+                  <mat-header-cell *matHeaderCellDef> Email iD </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email iD</span>
                     {{element.email || 'NA'}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="mobile">
-                  <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+                  <mat-header-cell *matHeaderCellDef> Mobile no </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile no</span>
                     {{element.mobile_number || 'NA'}} </mat-cell>
                 </ng-container>
 
@@ -323,7 +324,9 @@
           <label>Group name</label><span style="color: red;"> *</span><br>
           <mat-form-field class="width_100 ">
             <mat-select formControlName="group">
-              <mat-option *ngFor="let grp of allgroups" [value]="grp">
+              <mat-option *ngFor="let grp of allgroups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+                    ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
                 {{grp.group_name}}
               </mat-option>
             </mat-select>
