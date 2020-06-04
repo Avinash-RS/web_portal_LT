@@ -1,7 +1,7 @@
 <div style="overflow: hidden;">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">View Users</li>
     </ol>
   </nav>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-lg-1 col-md-2 col-sm-12 col-12 float_right">
-      <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+      <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
         <mat-icon style="color: white;">add</mat-icon>Add User
       </button>
     </div>
@@ -110,7 +110,7 @@
 
             <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
               title="View {{element.username}}'s details">
-              <mat-icon style="color: #e6e5e5;font-size:20px; width:20px;">remove_red_eye</mat-icon>
+              <mat-icon style="color: #ccc;font-size:20px; width:20px;">remove_red_eye</mat-icon>
             </button>
             <button *ngIf="!element.is_blocked" mat-stroked-button id="deactivate"
               [disabled]="(selectedArray && selectedArray.length > 0)"

@@ -5,7 +5,7 @@
     <h1 class="head" >{{courseDeatils?.course_name}}</h1>
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/MyCourse">Course</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/MyCourse']">Course</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">{{courseDeatils?.course_name}}</li>
       </ol>

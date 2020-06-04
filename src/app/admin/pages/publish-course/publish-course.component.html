@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">My courses</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">My courses</a></li>
     <li class="breadcrumb-item">Publish course</li>
     <li class="breadcrumb-item active" aria-current="page">{{course && course.name}}</li>
   </ol>
@@ -61,10 +61,10 @@
       <div class="card col-lg-9 col-md-8 col-sm-12 col-12 cardheight right">
         <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Publish Course </h2>
         <br><br>
-     
+
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h4>
-           Selected Level 1 : {{selectedCategory?.category_name}}
+            Selected Level 1 : {{selectedCategory?.category_name}}
           </h4>
         </div>
 
@@ -80,23 +80,27 @@
           </h4>
         </div>
         <div class="row  center" *ngIf="selectedCategory?.category_name == undefined">
-          <h4  class="m-l-10 center_align f_wt_500"  >
-          Please select category to publish course..
+          <h4 class="m-l-10 center_align f_wt_500">
+            Please select category to publish course..
           </h4>
         </div>
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h3>
             Selected Category : {{selectedCategory?.category_name}}
-            <strong> {{selectedSubCategory?.sub_category_name ? ' > ' +selectedSubCategory?.sub_category_name : null}}</strong> 
-            <strong> {{selectedSuperSubCategory?.super_sub_category_name ? ' > ' +selectedSuperSubCategory?.super_sub_category_name : null}}</strong>
+            <strong>
+              {{selectedSubCategory?.sub_category_name ? ' > ' +selectedSubCategory?.sub_category_name : null}}</strong>
+            <strong>
+              {{selectedSuperSubCategory?.super_sub_category_name ? ' > ' +selectedSuperSubCategory?.super_sub_category_name : null}}</strong>
           </h3>
         </div>
 
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Select Catalogue</mat-label>
-            <mat-select name="catalogue"  [(ngModel)]="catalogue" #catelogue1="ngModel"  [required]=editstatus   class="form-control">
-              <mat-option *ngFor="let cat of catalogueList"  [(value)]="cat.catalogue_id" (onSelectionChange)="selectcatalogue($event, cat)">
+            <mat-select name="catalogue" [(ngModel)]="catalogue" #catelogue1="ngModel" [required]=editstatus
+              class="form-control">
+              <mat-option *ngFor="let cat of catalogueList" [(value)]="cat.catalogue_id"
+                (onSelectionChange)="selectcatalogue($event, cat)">
                 {{cat.catalogue_name}}
               </mat-option>
             </mat-select>
@@ -104,11 +108,11 @@
         </div>
 
         <br><br>
-        <div class="row width_100 alert-btn"  *ngIf="selectedCategory?.category_name">
+        <div class="row width_100 alert-btn" *ngIf="selectedCategory?.category_name">
           <div class="col-md-2"></div>
           <div class="col-md-4 col-sm-6 col-6 ">
             <button mat-raised-button class="background-blue color_white width_70"
-            [disabled] = "selectedCategory?.category_name == undefined || selectedcatalogue == null"
+              [disabled]="selectedCategory?.category_name == undefined || selectedcatalogue == null"
               (click)="publishCourse()">Publish</button>
           </div>
           <div class="col-md-4  col-sm-6 col-6 ">

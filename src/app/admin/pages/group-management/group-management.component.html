@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li *ngIf="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course Enrollment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Group Management</li>
   </ol>
 </nav>
@@ -152,8 +152,8 @@
                     </div>
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
-                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle" 
-                      ></mat-slide-toggle>
+                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle">
+                      </mat-slide-toggle>
                       <!-- [checked]="currentpath?.is_active" -->
                       <!-- (change)="toggle(currentpath.is_active)" -->
                       {{toggle === true ? 'Deactivate' : 'Activate'}}
@@ -188,7 +188,7 @@
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
-                <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+                <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
                   <mat-icon>add</mat-icon>Add user
                 </button>
               </div>

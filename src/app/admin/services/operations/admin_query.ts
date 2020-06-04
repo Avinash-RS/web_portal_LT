@@ -6,14 +6,18 @@ export const get_user_group = gql`
     get_user_group {
       success
       message{
-          _id
-          group_name
-          group_type
-          is_active
-          group_id
+        _id
+        group_name
+        group_type
+        is_active
+        group_id
+        parent_group_id
+        admin_id
+        hierarchy_id
       }
     }
   }`;
+
 // tslint:disable-next-line:variable-name
 export const search_user = gql`
   query search_user($search_string: String!, $pagination: Int!, $sort: Int!){

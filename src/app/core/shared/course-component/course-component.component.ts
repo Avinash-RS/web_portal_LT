@@ -26,6 +26,7 @@ export class CourseComponentComponent implements OnInit {
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll: boolean = false;
   @Input('btnType') btnType: string;
+  
   userDetail: any;
   recordedData: any;
   finalFullData: any;

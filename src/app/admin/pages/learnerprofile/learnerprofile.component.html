@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course Enrollment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
@@ -80,8 +80,8 @@
                   <div class="form-group  m-0">
                     <div class="form-group  m-0">
                       <label class="common-label1">Location : </label>
-                      {{profiledetail?.country_detail[0]?.countryname}}, 
-                      {{profiledetail?.state_detail[0]?.statename}}, 
+                      {{profiledetail?.country_detail[0]?.countryname}},
+                      {{profiledetail?.state_detail[0]?.statename}},
                       {{profiledetail?.district_detail[0]?.districtname}}
                     </div>
                   </div>
@@ -137,30 +137,30 @@
           <mat-tab label="Activities">
             <br> <br>
 
-              <mat-table style="margin-left:2%" #table [dataSource]="dataSource">
-                <ng-container matColumnDef="sno">
-                  <mat-header-cell *matHeaderCellDef>
-                    S.No
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row;let i = index">
-                    <!-- <span class="mobile-label">S.No</span> -->
-                    <span class="desktop-data"> {{i+1}}</span>
-                    <!-- <span class="mobile-data"> {{i+1}}</span> -->
-                  </mat-cell>
-                </ng-container>
-                <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-                  <mat-header-cell *matHeaderCellDef>
-                    <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
-                    {{ column.header }}
-                  </mat-header-cell>
-                  <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
-                  </mat-cell>
-                </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
-              </mat-table>
-              <br> <br>
-              <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
+            <mat-table style="margin-left:2%" #table [dataSource]="dataSource">
+              <ng-container matColumnDef="sno">
+                <mat-header-cell *matHeaderCellDef>
+                  S.No
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index">
+                  <!-- <span class="mobile-label">S.No</span> -->
+                  <span class="desktop-data"> {{i+1}}</span>
+                  <!-- <span class="mobile-data"> {{i+1}}</span> -->
+                </mat-cell>
+              </ng-container>
+              <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+                <mat-header-cell *matHeaderCellDef>
+                  <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+                  {{ column.header }}
+                </mat-header-cell>
+                <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+            </mat-table>
+            <br> <br>
+            <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)"
                 showFirstLastButtons>
               </mat-paginator> -->
 
@@ -195,7 +195,7 @@
               showFirstLastButtons>
             </mat-paginator> -->
           </mat-tab>
-         
+
         </mat-tab-group>
       </div>
 
