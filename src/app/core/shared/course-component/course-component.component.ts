@@ -153,7 +153,6 @@ export class CourseComponentComponent implements OnInit {
         user_obj_id: this.userDetail._id,
         feed_back:this.course.feed_back
       };
-      console.log(detail1)
       this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
     }
 

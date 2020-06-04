@@ -49,12 +49,12 @@ export class GraphqlModule {
     });
 
     const Errlink = onError(({ graphQLErrors, networkError, response, operation }) => {
-      console.log(operation);
+      // console.log(operation);
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          );
+          // console.log(
+          //   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+          // );
           if (message === 'TokenExpiredError: jwt expired') {
             localStorage.clear();
             this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
