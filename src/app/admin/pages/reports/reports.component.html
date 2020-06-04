@@ -10,28 +10,28 @@
 <div class="example-container">
   <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="slNo">
-      <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
       <mat-cell *matCellDef="let row;let i = index">
         <span class="desktop-data"> {{i+1}}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="report_id">
-      <mat-header-cell *matHeaderCellDef> Report Id </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Report id </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span class="desktop-data">  {{element.report_id }}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="total_count">
-      <mat-header-cell *matHeaderCellDef> Total Count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Total count</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <!-- <span class="mobile-label">Total Count</span> -->
+        <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.total_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.username}}</span> -->
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="success_count">
-      <mat-header-cell *matHeaderCellDef> Success Count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Success count</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.success_count || 0}}</span>
@@ -40,7 +40,7 @@
     </ng-container>
 
     <ng-container matColumnDef="duplicate_count">
-      <mat-header-cell *matHeaderCellDef> Duplicate Count </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Duplicate count </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data"> {{element.duplicate_count || 0}}</span>
@@ -48,11 +48,20 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="existing_count">
-      <mat-header-cell *matHeaderCellDef> Existing Count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Existing count</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <!-- <span class="mobile-label">Total Count</span> -->
+        <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.existing_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.username}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_count">
+      <mat-header-cell *matHeaderCellDef> Updated count</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Email ID</span> -->
+        <span class="desktop-data"> {{element.updated_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
 
@@ -66,7 +75,7 @@
     </ng-container>
  
     <ng-container matColumnDef="failure_count">
-      <mat-header-cell *matHeaderCellDef> Failure Count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Failure count</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.failure_count || 0}}</span>
@@ -75,7 +84,7 @@
     </ng-container>
 
     <ng-container matColumnDef="link">
-      <mat-header-cell *matHeaderCellDef> Link To Download</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Link to download</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data" (click)="downloadDoc(element.report_url)">   <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon></span>

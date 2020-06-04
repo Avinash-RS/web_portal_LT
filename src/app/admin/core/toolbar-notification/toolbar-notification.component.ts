@@ -10,8 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ToolbarNotificationComponent implements OnInit {
 	cssPrefix = 'toolbar-notification';
-    isOpen: boolean = false;
-    read : boolean = false;
+    isOpen = false;
+    read = false;
   	@Input() notifications = [];
 
     // @HostListener('document:click', ['$event', '$event.target'])
@@ -24,32 +24,31 @@ export class ToolbarNotificationComponent implements OnInit {
     //          this.isOpen = false;
     //     }
     // }
-  	
-  	constructor(private elementRef: ElementRef,private adminService: AdminServicesService,private router:Router) { }
+
+  	constructor(private elementRef: ElementRef, private adminService: AdminServicesService, private router: Router) { }
 
   	ngOnInit() {
     }
-    
-    downloadDoc(url){
+
+    downloadDoc(url) {
       window.location.href = url;
     }
 
-  	select() {
-    	
-  	}
+  	select() {}
 
-		removeNotification(reportId){
+		removeNotification(reportId) {
       this.adminService.removeNotificationData(reportId).subscribe((result: any) => {
-			 if(result.data['update_notification'].success == true){
-            this.notifications = this.notifications.filter((data) => data.report_id !== reportId)
+			 if (result.data.update_notification.success === true) {
+            this.notifications = this.notifications.filter((data) => data.report_id !== reportId);
+            localStorage.setItem('Reports', this.notifications);
        }
-      })
+      });
     }
 
-    moveToReport(value){
+    moveToReport(value) {
       this.router.navigateByUrl('/', {skipLocationChange: true})
       .then(() => this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } }));
       // this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
-      this.isOpen = false;      
+      this.isOpen = false;
     }
 }

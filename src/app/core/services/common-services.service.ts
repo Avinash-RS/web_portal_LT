@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName,get_all_course_by_usergroup} from '@core/services/operations/common_query';
+  getCoursesByName, get_all_course_by_usergroup} from '@core/services/operations/common_query';
 import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
   getCourseCategorySearch, getDetailsCount} from '@core/services/operations/common_mutation';
 
@@ -32,11 +32,11 @@ export class CommonServicesService {
   globalAllCategory$ = new Subject<any>();
   globalAllCategory = this.globalAllCategory$.asObservable();
 
-  //Category to guideline search component
+  // Category to guideline search component
   selectedCategory$ = new Subject<any>();
   selectedCategory = this.selectedCategory$.asObservable();
 
-   //Category to view all courses component
+   // Category to view all courses component
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
 
@@ -64,7 +64,7 @@ export class CommonServicesService {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
-        user_id:userid,
+        user_id: userid,
       }
     });
   }
@@ -119,7 +119,7 @@ export class CommonServicesService {
     });
   }
 
-  getCoursesByName(courseName,pagenumber) {
+  getCoursesByName(courseName, pagenumber) {
     return this.Apollo.query({
       query: getCoursesByName,
       variables: {
@@ -128,13 +128,13 @@ export class CommonServicesService {
       }
     });
   }
-  getallcourses(groupid, pagenumber,sort_type) {
+  getallcourses(groupid, pagenumber, sort_type) {
     return this.Apollo.query({
       query: get_all_course_by_usergroup,
       variables: {
         group_id: groupid,
-        pagenumber: pagenumber,
-        sort_type:sort_type
+        pagenumber,
+        sort_type
       }
     });
   }
@@ -148,28 +148,28 @@ export class CommonServicesService {
       }
     });
   }
-  postGuildelineSearchData(category: any,sub_category: any,super_sub_category: any ,course_language:any,course_mode:any,
-    author_details:any,partner_details:any,
-    pagenumber,perPage,publishedToDate,publishedFromDate){
+  postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any , course_language: any, course_mode: any,
+                           author_details: any, partner_details: any,
+                           pagenumber, perPage, publishedToDate, publishedFromDate) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
-        category: category,
-        sub_category: sub_category,
-        super_sub_category:super_sub_category,
-        course_language:course_language,
-        course_mode:course_mode,
-        author_details:author_details,
-        partner_details: partner_details,
-       
-        pagenumber:pagenumber,
-        perPage:perPage,
-        publishedFromDate:publishedFromDate,
-        publishedToDate:publishedToDate
+        category,
+        sub_category,
+        super_sub_category,
+        course_language,
+        course_mode,
+        author_details,
+        partner_details,
+
+        pagenumber,
+        perPage,
+        publishedFromDate,
+        publishedToDate
       }
     });
   }
-  getGuidelineSearch(){
+  getGuidelineSearch() {
     return this.Apollo.query({
       query: getDetailsCount
     });
