@@ -6,7 +6,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 @Component({
   selector: 'app-report-management',
   templateUrl: './report-management.component.html',
-  styleUrls: ['./report-management.component.css']
+  styleUrls: ['./report-management.component.scss']
 })
 export class ReportManagementComponent implements OnInit {
   chart: any;
