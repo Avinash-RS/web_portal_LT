@@ -176,6 +176,17 @@ savedTemplates(type) {
    }
 
 }
+
+onCancel() {
+  this.router.navigate(['/Admin/auth/Wca/addmodule'],
+  {
+      queryParams: {
+          courseId: this.queryData.viewingModule,
+          courseImage: this.queryData.image,
+          courseName: this.queryData.courseName
+      }
+  });
+}
   
 removeTemplate(i) {
    this.done.splice(i,1);
