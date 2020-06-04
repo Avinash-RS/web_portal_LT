@@ -20,6 +20,9 @@
     margin: 1px;
   }
 
+  :host ::ng-deep .mat-dialog-content {
+    overflow: hidden;;
+  }
   // .mat-header-cell:last-of-type {
   //   padding-top: 10px;
   //   padding-bottom: 10px;
