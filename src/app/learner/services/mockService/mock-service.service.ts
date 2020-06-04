@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-
+import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class MockServiceService {
 
   constructor() { }
-
+  getAllLearnerDashboarddata(type, pagenumber): Observable<any> {
+    let learnerDashboard = require("assets/mockdata/admin/admin_dashboard.json");
+    return of(learnerDashboard)
+}
   login() {
     return {
       "data": {

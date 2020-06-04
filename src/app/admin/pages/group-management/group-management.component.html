@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-    <li *ngIf="groupid" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course Enrollment</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Group Management</li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course enrollment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Group management</li>
   </ol>
 </nav>
-<h1 style="padding-left: 25px;"> Group Management</h1>
+<h1 style="padding-left: 25px;"> Group management</h1>
 <div class="container  pb-5">
 
   <div class="container shadow margin20">
@@ -20,7 +20,7 @@
         <br>
         <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
           <!-- This is the tree node template for leaf nodes -->
-          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+          <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle>
             <li class="mat-tree-node newstyle" renderDebug>
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
@@ -29,8 +29,9 @@
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
+              <!-- (change)="selected = node" -->
+              <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                {{node.group_name}}</mat-checkbox>
 
             </li>
           </mat-tree-node>
@@ -45,8 +46,9 @@
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <mat-checkbox [checked]="selected === node" (change)="selected = node" name="checkbox"
-                  [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">{{node.group_name}}</mat-checkbox>
+                <!-- [checked]="selected === node" (change)="selected = node" -->
+                <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                  {{node.group_name}}</mat-checkbox>
 
                 <!-- {{node.group_name}}2 -->
               </div>
@@ -81,8 +83,9 @@
                     </div>
                     <div class="col-md-6">
                       <ng-container *ngIf="currentpath?.group_name && !editstatus">
-                        <button type="button" class="btn col-md-4 float-right addnewBtn" [disabled] = "currentpath?.is_active == false"
-                          (click)="edit(false,currentpath.group_name)"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add sub
+                        <button type="button" class="btn col-md-4 float-right addnewBtn"
+                          [disabled]="currentpath?.is_active == false" (click)="edit(false,currentpath.group_name)"><i
+                            class="fa fa-plus"></i> &nbsp;&nbsp;Add sub
                           group</button>
                       </ng-container>
                       <ng-container *ngIf="currentpath?.group_name && editstatus">
@@ -100,9 +103,12 @@
                       <label for="exampleInputEmail1">
                         <ng-container *ngIf="editstatus">
                           Enter
-                          <ng-container *ngIf="currentpath?.group_name">Sub </ng-container>
+                          <ng-container *ngIf="currentpath?.group_name">sub </ng-container>
+                          group name
                         </ng-container>
-                        group name
+                        <ng-container *ngIf="!editstatus">
+                          Group name
+                        </ng-container>
                       </label>
                       <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput
                         [(ngModel)]="group_name" name="group_name" #groupname1="ngModel" [required]=editstatus
@@ -125,9 +131,11 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">
                         <ng-container *ngIf="editstatus">
-                          Select
+                          Select catalogue
                         </ng-container>
-                        catalogue
+                        <ng-container *ngIf="!editstatus">
+                          Catalogue
+                        </ng-container>
                       </label>
                       <br>
                       <mat-form-field>
@@ -150,8 +158,8 @@
                     </div>
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
-                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle" 
-                      ></mat-slide-toggle>
+                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle">
+                      </mat-slide-toggle>
                       <!-- [checked]="currentpath?.is_active" -->
                       <!-- (change)="toggle(currentpath.is_active)" -->
                       {{toggle === true ? 'Deactivate' : 'Activate'}}
@@ -186,7 +194,7 @@
                 </ng-container>
               </div>
               <div class="col-md-6" *ngIf="currentpath?.is_active">
-                <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
+                <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
                   <mat-icon>add</mat-icon>Add user
                 </button>
               </div>
@@ -316,7 +324,9 @@
           <label>Group name</label><span style="color: red;"> *</span><br>
           <mat-form-field class="width_100 ">
             <mat-select formControlName="group">
-              <mat-option *ngFor="let grp of allgroups" [value]="grp">
+              <mat-option *ngFor="let grp of allgroups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+                    ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
                 {{grp.group_name}}
               </mat-option>
             </mat-select>

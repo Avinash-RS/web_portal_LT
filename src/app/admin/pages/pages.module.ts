@@ -32,6 +32,7 @@ import { AuditlogComponent } from './auditlog/auditlog.component';
 import { PipeModule } from './../../pipes/pipe.module';
 import { MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
     imports: [
@@ -75,7 +76,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         CoreModule
     ],
     declarations: [AddUserComponent, ReportManagementComponent, AdminDashboardComponent, CatalogueManagementComponent,
-        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent],
+        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent, ReportsComponent,
+        ReportsComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
