@@ -24,7 +24,7 @@ export class CourseComponentComponent implements OnInit {
   @Input('showDate') showDate: boolean;
   @Input('goto') goto: string;
   @Input('isDraft') isDraft: boolean;
-  @Input('showEnroll') showEnroll: boolean = false;
+  @Input('showEnroll') showEnroll: boolean ;
   @Input('btnType') btnType: string;
   
   userDetail: any;
