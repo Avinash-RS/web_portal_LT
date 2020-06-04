@@ -11,21 +11,20 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 describe('CatalogueManagementComponent', () => {
   let component: CatalogueManagementComponent;
   let fixture: ComponentFixture<CatalogueManagementComponent>;
-  let data: any;
-  let catalogue:
-  beforeEach(async(() => {
-
-    TestBed.configureTestingModule({
-      imports: [SortPipe, CommonModule],
-      declarations: [CatalogueManagementComponent],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA,
-        NO_ERRORS_SCHEMA
-      ],
-
-    })
-      .compileComponents();
-  }));
+  // const data: any;
+  // const catalogue;
+    // tslint:disable-next-line:align
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [SortPipe, CommonModule],
+        declarations: [CatalogueManagementComponent],
+        schemas: [
+          CUSTOM_ELEMENTS_SCHEMA,
+          NO_ERRORS_SCHEMA
+        ],
+      })
+        .compileComponents();
+    }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CatalogueManagementComponent);
@@ -79,6 +78,7 @@ describe('CatalogueManagementComponent', () => {
   // });
 
   it('cataloguedetail', () => {
+    const data: any = null;
     component.goToCatalogDetail(data);
     expect(component.catalog = data);
     component.getCatalogDetail();
@@ -98,8 +98,8 @@ describe('CatalogueManagementComponent', () => {
 
 
   it('check course catalogue', () => {
-component. getCoursesInCatalog();
-expect(component.type = 'remove');
-expect(component)
+    component.getCoursesInCatalog();
+    expect(component.type = 'remove');
+    expect(component);
   });
 });

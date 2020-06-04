@@ -165,7 +165,24 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
+ update(items, id, name) {
+    let item;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < items.length; i++) {
+        item = items[i];
+        if (item.group_id === id) {
+            item.checkbox = name;
+            return;
+        }
+        if (item.children) {
+             this.update(item.children, id, name);
+        }
+    }
+}
   selectgroup(node, groupform) {
+    if (this.currentpath) {
+     this.update(this.treeSource.data, this.currentpath?.group_id, false);
+  }
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
       this.currentpath = null;

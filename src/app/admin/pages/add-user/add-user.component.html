@@ -5,7 +5,6 @@
   </ol>
 </nav>
 
-
 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)">
   <mat-tab label="Add a user">
     <div class="container">
@@ -40,7 +39,10 @@
               <mat-form-field class="width_100 ">
                 <!-- <mat-label>Institute Name</mat-label> -->
                 <mat-select formControlName="group">
-                  <mat-option *ngFor="let grp of groups" [value]="grp">
+                  <mat-option *ngFor="let grp of groups" [value]="grp"
+                    [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+                    ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+                    (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
                     {{grp.group_name}}
                   </mat-option>
                 </mat-select>
@@ -109,9 +111,12 @@
         <mat-form-field>
           <mat-label>Group Name</mat-label>
           <mat-select name="group" [(ngModel)]="group">
-            <mat-option *ngFor="let grp of groups" [value]="grp">
-              {{grp.group_name}}
-            </mat-option>
+            <mat-option *ngFor="let grp of groups" [value]="grp"
+            [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+            ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+            (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))" >
+            {{grp.group_name}}
+          </mat-option>
           </mat-select>
         </mat-form-field>
       </form>

@@ -1,7 +1,7 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a [routerLink]="['/Learner']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">{{course?.course_name | titlecase }}</li>
     </ol>
@@ -56,7 +56,7 @@
 
     <div class="row margin-15">
         <div class="col-8 Outine">
-            Course Outine
+            Course outline
         </div>
         <div class="col-4">
             <i class="fa fa-clock-o" aria-hidden="true"></i> 40 mins , 40 sec
@@ -93,7 +93,7 @@
         <div class="row  margin-15">
             <div class="col-6">
                 <div class="sm-box">
-                    <span>Course Features</span>
+                    <span>Course features</span>
                 </div>
                 <div class="row ">
                     <div class="col-4 display_flex">
@@ -127,7 +127,7 @@
               </div> -->
             <div class="col-6">
                 <div class="sm-box">
-                    <span>This Course Includes</span>
+                    <span>This course includes</span>
                     <div class="row margin-10">
                         <div class="col-1 display_flex">
                             <img class="sm-icon" src="../../../../assets/learner/on-demand-video.svg" alt="">
@@ -169,7 +169,7 @@
         <div class="row" style="margin-top:80px">
             <div class="col-12">
                 <div >
-                    <h3 class="head-h1">Course Description</h3>
+                    <h3 class="head-h1">Course description</h3>
                     <div class="vertical"></div>
                     <p class="desc">{{course?.course_description}}</p>
                 </div>
@@ -224,8 +224,8 @@
 
                 </div>
                 <ul *ngIf="clicked == 'text'">
-                    <li class="takewaytext" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">* {{text.text ? text.text : text.description }}
-                    </li>
+                    <p class="takewaytext" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">{{text.text ? text.text : text.description }}
+                    </p>
                 </ul>
             </div>
             </div>

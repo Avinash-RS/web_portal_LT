@@ -73,9 +73,9 @@
     background-color: $color-white;
 }
 
-// END OF LOGGED OUT USER
-
-// FOR LOGGED IN USER
+.card-bottom {
+    height: 5vh;
+}
 
 .course-name-row {
     min-height: 10vh !important;
@@ -83,39 +83,45 @@
 }
 
 
+// END OF LOGGED OUT USER
+
+// FOR LOGGED IN USER
+
 
 .containerOverlay1 {
     .overlay1 {
-        height: 50%;
-        // width: 80%;
+        height: 75px;
+        width: 100%;
         position: absolute;
         overflow: hidden;
-        bottom: 5vh;
-        left: 10%;
+        bottom: 75px;
         opacity: 0;
         background-color: $color-white;
+        text-align: initial;
+        right: 0;
         filter: alpha(opacity=0);
     }
 
     .pointer {
-        width: 80% !important;
+        width: 100% !important;
     }
 }
 
-.containerOverlay:hover .overlay1 {
+.containerOverlay1:hover .overlay1 {
     opacity: 0.9;
     filter: alpha(opacity=100);
     background-color: $color-white;
+}
+
+.card-bottom1 {
+    height: 75px;
+    // height: 16vh;
 }
 
 
 .course-image {
     height: 150px;
     object-fit: cover;
-}
-
-.card-bottom {
-    height: 5vh;
 }
 
 .course-count {
@@ -134,8 +140,8 @@ strong {
     background-color: $color-blue;
     color: $color-white;
     font-weight: 500 !important;
-    width: 90%;
-    padding: 3px;
+    width: 80%;
+    // padding: 3px;
     border-radius: 0;
     font-size: smaller;
     text-align: center;
@@ -193,6 +199,30 @@ strong {
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.mask {
+    position: relative;
+    float: right;
+    clear: none;
+    background-color: transparent;
+    width: 50%;
+    height: 1.25em;
+
+}
+
+.conten {
+    height: 55px;
+    width: 100%;
+}
+
+.course-name {
+    text-align: initial;
+    word-break: break-word;
+    white-space: normal;
+    // display: inline-block;
+}
+
+
 
 
 // END OF LOGGED IN USER

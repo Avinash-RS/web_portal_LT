@@ -446,7 +446,7 @@ export class CatagoryManagementComponent implements OnInit {
           } else if (results.data.delete_catalogue.success === true) {
             Swal.fire({
               html:
-                '<b>' + type + '</b> ' + '  has been deleted.'
+                '<strong>' + type + '</strong> ' + '  has been deleted.'
             });
             // Swal.fire('Deleted!', type + '   has been deleted.', 'success');
             this.showHome = true; this.showCourses = false;

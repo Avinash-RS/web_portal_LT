@@ -1,10 +1,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Catagory Management</li>
+    <li class="breadcrumb-item active" aria-current="page">Catagory management</li>
   </ol>
 </nav>
-<h1 style="padding-left:25px"> Category Management</h1>
+<h1 style="padding-left:25px"> Category management</h1>
 <div class="container ">
 
   <div class="container m-t-20">
@@ -12,7 +12,7 @@
       <!-- Mat tree code here ( left hand side) -->
       <div class="card col-12 col-lg-3 col-md-3 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
         [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
-        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Category List </h2>
+        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Category list </h2>
 
         <div class="spinner-container" *ngIf="loadingCategory">
           <mat-spinner diameter="40"></mat-spinner>
@@ -168,7 +168,7 @@
                   [ngClass]="{ 'is-invalid': f.category_name.touched && f.category_name.errors , 'dis' : canotEdit}"
                   formControlName="category_name">
                 <div *ngIf="f.category_name.touched && f.category_name.errors" class="invalid-feedback">
-                  <div *ngIf="f.category_name.errors.required">* Category Name is required</div>
+                  <div *ngIf="f.category_name.errors.required">* Category name is required</div>
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@
                   <div class="col-md-5 col-sm-12 col-12 pointer">
                     <input hidden #fileInput (change)="uploadFile($event.target.files)" accept=".png,.jpg,.jpeg"
                       id="fileInput" type='file'>
-                    <img class="img1 verticle_middle marginClass" [src]="'assets/images/image_upload.svg'">
+                    <img class="img1 verticle_middle marginClass" alt="" [src]="'assets/images/image_upload.svg'">
                   </div>
                   <div class="col-md-7 col-sm-0 col-0 pointer center f_size_12 none"
                     (change)="uploadFile($event.target.files)">
@@ -205,7 +205,7 @@
                 </div>
                 <div class="row"
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
-                  <img class="center width_80 imgHt" [src]="addCategoryForm.value.category_image">
+                  <img class="center width_80 imgHt" alt=""  [src]="addCategoryForm.value.category_image">
                   <mat-icon *ngIf="!canotEdit" style="position: absolute;top:0;" (click)="addCategoryForm.controls['category_image'].reset();
                     ">cancel</mat-icon>
                 </div>
@@ -248,7 +248,7 @@
                   [ngClass]="{ 'is-invalid': f.sub_category_name.touched && f.sub_category_name.errors , 'dis' : canotEdit}"
                   formControlName="sub_category_name">
                 <div *ngIf="f.sub_category_name.touched && f.sub_category_name.errors" class="invalid-feedback">
-                  <div *ngIf="f.sub_category_name.errors.required">* Sub Category Name is required</div>
+                  <div *ngIf="f.sub_category_name.errors.required">* Sub category name is required</div>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@
                   formControlName="super_sub_category_name">
                 <div *ngIf="f.super_sub_category_name.touched && f.super_sub_category_name.errors"
                   class="invalid-feedback">
-                  <div *ngIf="f.super_sub_category_name.errors.required">* Sub Category Name is required</div>
+                  <div *ngIf="f.super_sub_category_name.errors.required">* Sub category name is required</div>
                 </div>
               </div>
             </div>
@@ -353,7 +353,6 @@
           </div>
           <div class="row m-t-10 m-r-20">
             <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-              <!-- <h3 class="font-display m-b-0">295 courses > </h3> -->
               <h3 class="font-display m-b-0 m-l-20">{{courseCount}} {{courseCount <= 1  ? 'Course > ' : 'Courses >'}}
               </h3>
             </div>
@@ -370,7 +369,7 @@
                 <img class="pointer m-b-10 course-image center" src="{{ courses.course_img_url }}" alt=""
                   (click)="selectCourse(courses,i+'c')">
                 <div class="overlay" *ngIf="courses.isChecked" (click)="selectCourse(courses,i+'c')">
-                  <img src="assets/courses/selectimagefull.png" width="100%" height="100px">
+                  <img src="assets/courses/selectimagefull.png" alt="" width="100%" height="100px">
                 </div>
                 <div class="row color_blue width_80 f_wt_500 center_align center m-b-10 m-t-10">
                   {{courses.course_name}}
@@ -438,7 +437,7 @@
           <div class="col-md-4">
             <div class="form-group width_90" *ngIf="subCategoryArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
-                <mat-label class="m-l-20">Sub Category</mat-label>
+                <mat-label class="m-l-20">Sub category</mat-label>
                 <mat-select formControlName="subCategory" (selectionChange)="loadSupersubcategoryDropDown()">
                   <mat-option *ngFor="let subcat of subCategoryArray" [value]="subcat">
                     {{subcat.sub_category_name}}
@@ -450,7 +449,7 @@
           <div class="col-md-4">
             <div class="form-group width_90" *ngIf="superSubCatArray.length > 0">
               <mat-form-field appearance="outline fill" class="width_100 category-label">
-                <mat-label class="m-l-20">Sub Category</mat-label>
+                <mat-label class="m-l-20">Sub category</mat-label>
                 <mat-select formControlName="subSubCategory">
                   <mat-option *ngFor="let ssubcat of superSubCatArray" [value]="ssubcat">
                     {{ssubcat.super_sub_category_name}}

@@ -21,7 +21,7 @@
 <!-- end for logged out user -->
 
 <!-- for logged in user -->
-<mat-card class="p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
+<mat-card class="containerOverlay1 p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
   <div class="row wishlist" *ngIf="showWishlist">
     <button mat-icon-button aria-label="Example icon button with a heart icon" (click)="selectWishlist(course)"
       class="wishlist_btn no_padding">
@@ -29,13 +29,18 @@
       <mat-icon *ngIf="course.wishlisted == false" style="color:red;">favorite_border</mat-icon>
     </button>
   </div>
-  <img *ngIf="course.course_img_url != 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url != 'null'" alt="course image" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" width="100%" (click)="gotoDescription()">
-  <img *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
+  <img *ngIf="course.course_img_url == 'null'" alt="" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
-  <mat-card-content>
-    <div class="row course-name-row no_margin" (click)="gotoDescription()">
-      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 no_padding"
+  <div class="overlay1 p-5px" style="margin-bottom: 0;">
+    <p class="course_description1 f_size_12">
+      {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+    </p>
+  </div>
+  <mat-card-content class="card-bottom1">
+    <!-- <div class="row course-name-row no_margin" (click)="gotoDescription()">
+      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_size_14 float_left m-t-10 m-b-20 no_padding"
         style="word-wrap: break-word">
         {{course.course_name}}
       </div>
@@ -44,32 +49,46 @@
         <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
         &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
       </div>
+    </div> -->
+
+    <div class="conten no_padding" (click)="gotoDescription()">
+      <div class="mask display_flex user-rating no_padding" (click)="gotoDescription()">
+        <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
+        &nbsp;&nbsp; <strong class="f_size_13"
+          *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
+      </div>
+      <p class="f_wt_500 f_size_14 course-name" *ngIf="course.course_name.length > 40"
+        matTooltip="{{course.course_name}}">
+        {{(course.course_name  | slice:0:40)+'...'}}
+      </p>
+      <p class="f_wt_500 f_size_14 course-name" *ngIf="course.course_name.length < 40">
+        {{course.course_name}}
+      </p>
     </div>
     <mat-card-action>
       <div class="row no_margin enroll_row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_sz_14 float_left no_padding learner-count"
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_size_14 float_left no_padding learner-count"
           (click)="gotoDescription()">
-          <span *ngIf="showCount" class="material-icons color_grey" style="vertical-align: bottom;">
+          <span *ngIf="showCount" class="material-icons color_grey f_size_18" style="vertical-align: bottom;">
             people
           </span> <small *ngIf="showCount" class="color_grey">2,500 learners</small>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right width_80 no_padding" *ngIf="showEnroll">
 
-          <button id="enroll_now" mat-stroked-button (click)="publish()" *ngIf="btnType && btnType === 'Publish'">
+          <button id="enroll_now" (click)="publish()" *ngIf="btnType && btnType === 'Publish'">
             Publish
           </button>
 
-          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false &&(btnType && btnType != 'Publish')"
-            (click)="enrollCourse()"> Enroll now
+          <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false && 
+          ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> Enroll now
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
             disabled="{{course.enrollment_status == 'pending'}}">Requested
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'rejected' && showStatus == false"
-          (click)="clickRejected()">Rejected
-            <!-- disabled="{{course.enrollment_status == 'rejected'}}">Rejected -->
+            (click)="clickRejected()">Rejected
           </button>
-          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved' && showStatus == false"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
           <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
@@ -115,7 +134,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 f_wt_500 f_sz_14 float_left m-t-10 m-b-20 heightname">
+    <div class="col-md-12 f_wt_500 f_size_14 float_left m-t-10 m-b-20 heightname">
       {{course.course_name}}
     </div>
   </div>
@@ -130,7 +149,7 @@
   </div>
 
   <div class="row" *ngIf="showDate">
-    <div class="col-md-12 f_wt_400 f_sz_14 float_left color-grey">
+    <div class="col-md-12 f_wt_400 f_size_14 float_left color-grey">
       Published On : {{course.publishedOn || course.updated_at | date}}
     </div>
   </div>
