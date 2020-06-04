@@ -149,7 +149,10 @@
                                                                                 the topic </small>
                                                                                 <input type="text" class="timeInput" formControlName="topictime" (keypress)="isNumberKey($event)" placeholder="00:00:00">
                                                                         </span>
-                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Time required </mat-error>
+                                                                            <mat-error *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
+                                                                                Invalid time format
+                                                                              </mat-error>
                                                                         
                                                                     </div>
                                                                 </div>
@@ -214,7 +217,11 @@
                                                                                 the topic </small>
                                                                                 <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
-                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Time required </mat-error>
+                                                                            <mat-error *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
+                                                                                Invalid time format
+                                                                              </mat-error>
+                                                                            
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -259,7 +266,10 @@
                                                                                 the topic </small>
                                                                                 <input type="text" class="timeInput" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
-                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                            <mat-error *ngIf="(!j?.value?.topictime) && submitted">Time required</mat-error>
+                                                                            <mat-error *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
+                                                                                Invalid time format
+                                                                              </mat-error>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -344,7 +354,11 @@
                                                                                     the topic </small>
                                                                                     <input type="text" class="timeInput" style="width: 24% !important" (keypress)="isNumberKey($event)" formControlName="topictime" placeholder="00:00:00">
                                                                             </span>
-                                                                                <mat-error *ngIf="(!j?.value?.topictime) && submitted">Topic Name Required !!! </mat-error>
+                                                                                <mat-error *ngIf="(!j?.value?.topictime) && submitted">Time required</mat-error>
+                                                                                <mat-error *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
+                                                                                    Invalid time format
+                                                                                  </mat-error>
+                                                                                  
                                                                         </span>
                                                                     </div>
                                                                 </div>
