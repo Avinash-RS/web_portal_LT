@@ -139,18 +139,20 @@
       <mat-tab label="Request Detail">
         <mat-dialog-content>
           <div class="row">
-            <div class="col-md-6 col-xl-6 col-lg-6 col-sm-12 col-12">
-              <label>Request detail : <label
-                  class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_request[0] | json}}</label></label>
-            </div>
+            <!-- <div class="col-md-6 col-xl-6 col-lg-6 col-sm-12 col-12"> -->
+            <label>Request detail : <label
+                class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_request[0] | json}}</label></label>
+            <!-- </div> -->
           </div>
         </mat-dialog-content>
       </mat-tab>
       <mat-tab label="Response Detail">
         <mat-dialog-content>
-          <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+          <div class="row">
+            <!-- <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12"> -->
             <label>Response :<label
                 class="color_black capitalize f_wt_400 p-5px">{{viewdetail?.api_call_response[0] | json }}</label></label>
+            <!-- </div> -->
           </div>
         </mat-dialog-content>
       </mat-tab>
