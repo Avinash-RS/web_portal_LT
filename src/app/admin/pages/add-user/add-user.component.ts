@@ -24,32 +24,18 @@ export interface PeriodicElement {
 export class AddUserComponent implements OnInit {
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
-              private alert: AlertServiceService, private service: AdminServicesService, ) { }
-
-  get f() {
-    return this.addUserForm.controls;
-  }
-
   addUserForm: FormGroup;
   adminDetails: any;
   groups: any = [];
-  group:any;
+  group: any = null;
   exceljson: any; // excel json is assigned
   selectedfile = null; // excel file is assigned
 
-  columnHeader = ['studendID', 'fname', 'weight', 'symbol', 'select'];
-
-  tableData: PeriodicElement[] = [
-    { studendID: 1, fname: 'Hydrogen', weight: 1.0079, symbol: 'H', },
-    { studendID: 2, fname: 'Helium', weight: 4.0026, symbol: 'He' },
-    { studendID: 3, fname: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { studendID: 4, fname: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { studendID: 5, fname: 'Boron', weight: 10.811, symbol: 'B' },
-
-  ];
-
-  ngOnInit() {
+  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
+    // tslint:disable-next-line:align
+    private alert: AlertServiceService, private service: AdminServicesService, ) {
+    this.group = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
+      this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.group) || null;
     localStorage.setItem('role', 'admin');
     this.addUserForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.fullnameVal),
@@ -61,7 +47,16 @@ export class AddUserComponent implements OnInit {
     this.service.getUserGroup()
       .subscribe((result: any) => {
         this.groups = result.data.get_user_group.message;
+        const index = this.groups.findIndex(x => x.group_id === this.group?.group_id);
+        this.addUserForm.patchValue({ group: index !== -1 ? this.groups[index] : null});
       });
+  }
+
+  get f() {
+    return this.addUserForm.controls;
+  }
+
+  ngOnInit() {
   }
 
   addUser() {
@@ -91,16 +86,6 @@ export class AddUserComponent implements OnInit {
       this.alert.openAlert('Please enter full name', null);
     }
   }
-
-  next(e) {
-    this.tableData = [{ studendID: 6, fname: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { studendID: 7, fname: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { studendID: 8, fname: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { studendID: 9, fname: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    ];
-
-  }
-
 
   /**
    * Download sample excel template
@@ -153,7 +138,7 @@ export class AddUserComponent implements OnInit {
         const headerNames: any = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 })[0];
         this.exceljson = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         // tslint:disable-next-line:only-arrow-functions
-        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function(element, index) {
+        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function (element, index) {
           return element === headerNames[index];
         });
         if (isSame === false) {

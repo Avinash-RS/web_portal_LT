@@ -15,7 +15,6 @@ export class StickyHeaderDirective implements OnInit {
     constructor() {}
 
     @HostListener('scroll', ['$event']) private onScroll($event: Event): void {
-        // console.log($event.srcElement.scrollLeft, $event.srcElement.scrollTop);
         this.scrollValues.emit($event.srcElement);
     }
 }
