@@ -164,7 +164,7 @@ export class EnrollmentComponent implements OnInit {
 
   approve(tablevalue) {
     Swal.fire({
-      title: '<div>Approval Confirmation</div>',
+      title: '<div>Approval confirmation</div>',
       // icon: 'warning',
       text: 'Are you sure you want to proceed?',
       showCancelButton: true,
@@ -268,7 +268,7 @@ export class EnrollmentComponent implements OnInit {
   datachange(row, column, templateRef: TemplateRef<any>) {
     if (column.header === 'User group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
-    } else if (column.header === 'Course') {
+    } else if (column.header === 'Course name') {
       // let details = {
       //   id: row.course_id,
       //   wishlist: row?.wish_list ? true : false,

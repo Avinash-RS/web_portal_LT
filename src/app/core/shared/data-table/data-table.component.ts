@@ -28,12 +28,10 @@ export class DataTableComponent implements OnInit {
     if (row.isChecked == undefined) {
       row.isChecked = true;
       this.selectedArray.push(row);
-      console.log(this.selectedArray)
     }
     else {
       row.isChecked = !row.isChecked;
       this.selectedArray  = this.selectedArray.filter(i => i !== row);
-      console.log(this.selectedArray)
     }
   }
 }

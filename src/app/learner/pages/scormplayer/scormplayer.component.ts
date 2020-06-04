@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog } from '@angular/material';
+import { MatDialog ,MatDialogConfig} from '@angular/material';
 
 @Component({
   selector: 'app-scormplayer',
@@ -55,7 +55,7 @@ export class ScormplayerComponent implements OnInit {
 
     })
     if (detail.feed_back == 1) {
-      //open feed back form
+      //  this.test();
     }
   }
 
@@ -79,7 +79,8 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       if (data.data['getmoduleData']['success'] === 'true') {
         this.content = data.data['getmoduleData']['data'][0];
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
         this.modulength = this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
           moduledetails.moduledetails.forEach(element => {
@@ -141,8 +142,9 @@ export class ScormplayerComponent implements OnInit {
       }
     })
   }
+
+
   test(templateRef: TemplateRef<any>) {
-    // this.showAppliedFiltre = false;
     this.dialog.open(templateRef);
   }
 

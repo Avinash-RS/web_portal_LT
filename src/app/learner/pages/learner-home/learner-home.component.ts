@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { MatDialog } from '@angular/material';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -27,6 +28,16 @@ export class LearnerHomeComponent implements OnInit {
   showAppliedFiltre : Boolean =true;
   showCategory : Boolean = true;
   element: any;
+  Lvl1CatId: any = [];
+  Lvl2CatId: any = [];
+  Lvl3CatId: any = [];
+  level1selectedID: any = [];
+  level2selectedID: any = [];
+  level3selectedID: any = [];
+  allLvlCategoryFilterVal: any = [];
+  allLvlCategory: any;
+
+
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
     private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
     private globalservice: GlobalServiceService,public commonServices: CommonServicesService,
@@ -38,12 +49,31 @@ export class LearnerHomeComponent implements OnInit {
     this.getEnrolledCourses();
     this.getallcourses();
     this.viewWishlist();
+    this.commonServices.globalSearch.subscribe((data: any) => {
+      if (data.length > 0) {
+        this.allcourses = data;
+      }
+      else {
+        Swal.fire('No courses found');
+        this.getallcourses();
+      } 
+    })
     this.commonServices.globalAllCategory.subscribe((data: any) => {
       this.allcourses = data;
     });
     this.commonServices.globalCourses.subscribe((data: any) => {
       this.allcourses = data;
     });
+    this.commonServices.appliedCategory.subscribe((data: any) => {
+      this.Lvl1CatId = data.Lvl1CatId;
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+  })
   }
   getallcourses() {
     this.loadingCatalogue = true;
@@ -95,8 +125,19 @@ export class LearnerHomeComponent implements OnInit {
     }
   }
   viewCategory(module) {
+    let obj = {
+      Lvl1CatId : this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory
+    }
     const dg = this.dialog.open(CategoryComponentComponent, {
-      width: '95%'
+      width: '95%',  
+      data : obj,
     });
 
     // dg.afterClosed().subscribe((data) => {

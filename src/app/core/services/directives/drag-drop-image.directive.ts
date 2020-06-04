@@ -13,7 +13,6 @@ export class DragDropImageDirective {
 
   // Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {
-    console.log('2');
     evt.preventDefault();
     evt.stopPropagation();
     this.background = '#9ecbec';
@@ -22,7 +21,6 @@ export class DragDropImageDirective {
 
   // Dragleave listener
   @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
-    console.log('3');
     evt.preventDefault();
     evt.stopPropagation();
     this.background = '#f5fcff';
@@ -31,7 +29,6 @@ export class DragDropImageDirective {
 
   // Drop listener
   @HostListener('drop', ['$event']) public ondrop(evt) {
-    console.log('4');
     evt.preventDefault();
     evt.stopPropagation();
     this.background = '#f5fcff';
