@@ -23,4 +23,5 @@ const context = require.context('./app/learner/pages/login', true, /login.compon
 // And load the modules.
 // const context = require.context('../src/app/learner/pages/login/', true,/login.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/catalogue-management', false, /catalogue-management.component\.spec\.ts$/);
+// const context = require.context('./app/admin/pages/catagory-management', false, /catagory-management.component\.spec\.ts$/);
 context.keys().map(context);

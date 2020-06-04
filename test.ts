@@ -28,4 +28,6 @@ const context = require.context('../src/app/learner/pages/login/login.component'
 
 
 // const context = require.context('./app/admin/pages/catalogue-management', true, /catalogue-management.component\.spec\.ts$/);
+// const context = require.context('./app/admin/pages/category-management', true, /category-management.component\.spec\.ts$/);
+
 context.keys().map(context);
