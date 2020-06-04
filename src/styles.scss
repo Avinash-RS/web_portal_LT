@@ -108,6 +108,14 @@ html {
   margin-top: 58px !important;
 }
 
+.contentTop1{
+  margin-top: 6px !important;
+}
+
+.contentTop2{
+  margin-top: 66px !important;
+}
+
 .f_wt_200 {
   font-weight: 300;
 }
@@ -205,7 +213,7 @@ html {
 }
 
 .width_30 {
-  width: 30%;
+  width: 30% !important;
 }
 
 .width_25 {
@@ -683,7 +691,7 @@ h1 {
   min-height: 40px !important;
 }
 
-mat-header-cell {
-  font-size: 14px;
+mat-header-cell,.mat-header-cell {
+  font-size: 14px !important;
   color: $color-blank !important;
 }

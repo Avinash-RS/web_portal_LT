@@ -47,6 +47,7 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
 import { ChartsModule } from 'ng2-charts';
 import {MatNativeDateModule} from '@angular/material';
 import { PagesModule } from './../pages/pages.module';
+// import { ReportsComponent } from '@admin/pages/reports/reports.component';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
     imports: [
