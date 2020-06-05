@@ -174,6 +174,7 @@ export class AddModuleComponent implements OnInit {
         if (data) {
           this.courseDetails.flag = 'false';
           let count = 0;
+          let cnt = 0;
           let modDetails;
 
           // tslint:disable-next-line:no-shadowed-variable
@@ -184,13 +185,17 @@ export class AddModuleComponent implements OnInit {
               modDetails.courseid = this.courseDetails.courseid;
               modDetails.coursename = this.courseDetails.coursename;
             }
-            ++count;
           });
 
           this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
             if (res.Code === 200) {
               this.moduleList.push(res.Result);
-              this.getCourseDetails();
+              this.courseDetails.coursedetails.forEach((data: any) => {
+                if (idx === cnt) {
+                  data.moduleid = res.Result;
+                }
+                ++cnt;
+              })
               this.toast.success('Module added to repository successfully');
             }
           });
@@ -308,7 +313,7 @@ export class AddModuleComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     } else {
-     // this.toast.warning('SCORM course cannot be edited');
+      // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
@@ -329,7 +334,7 @@ export class AddModuleComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
     } else {
-     // this.toast.warning('SCORM course cannot be edited');
+      // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
