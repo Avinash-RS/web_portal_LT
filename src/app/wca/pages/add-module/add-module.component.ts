@@ -308,7 +308,7 @@ export class AddModuleComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     } else {
-      this.toast.warning('SCORM course cannot be edited');
+     // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
@@ -329,7 +329,7 @@ export class AddModuleComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
     } else {
-      this.toast.warning('SCORM course cannot be edited');
+     // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
