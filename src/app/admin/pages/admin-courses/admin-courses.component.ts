@@ -14,20 +14,23 @@ export class AdminCoursesComponent implements OnInit {
   breakpoint: number;
   type: any;
   // type: any = 'published';
-  goto: any;
-  showPublishedDate: boolean;
+  goto: any = null;
+  showPublishedDate: boolean = null;
   loader: boolean;
-  btnType: any;
+  btnType: any = null;
   viewType = 'grid';
-  showCount: boolean;
-  showRating: boolean;
-  showPrice: boolean;
+  showCount: boolean = null;
+  showRating: boolean = null;
+  showPrice: boolean = null;
   pagenumber: any;
   paginationpgno: any;
   courseCount: number;
   rowHeight: any;
+  showEnroll: boolean = null;
 
   constructor(public route: Router, private service: AdminServicesService, private gs: GlobalServiceService, ) {
+    this.btnType = null;
+    this.goto = null;
     this.type = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.type) || 'published';
     // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
@@ -54,6 +57,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = false;
           this.showRating = false;
           this.showPrice = false;
+          this.showEnroll = true;
           this.courseCount = res.data.get_course_createdby_admin.course_count;
         } else {
           this.loader = false;
@@ -72,6 +76,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = true;
           this.showRating = true;
           this.showPrice = true;
+          this.showEnroll = false;
           this.courseCount = admincourse.data.get_course_published.course_count;
         } else {
           this.loader = false;
@@ -89,6 +94,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = false;
           this.showRating = false;
           this.showPrice = false;
+          this.showEnroll = false;
           this.courseCount = res.data.get_draft_course.course_count;
         } else {
           this.loader = false;
@@ -102,11 +108,11 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     } else if (window.innerWidth >= 600 && window.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
+    } else if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
       this.breakpoint = 3;
-         } else {
+    } else {
       this.breakpoint = 4;
-         }
+    }
 
   }
 
@@ -115,11 +121,11 @@ export class AdminCoursesComponent implements OnInit {
       this.breakpoint = 1;
     } else if (event.target.innerWidth >= 600 && event.target.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024) {
+    } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 1024) {
       this.breakpoint = 3;
-         } else {
+    } else {
       this.breakpoint = 4;
-         }
+    }
   }
 
   onpagination(event) {
@@ -128,7 +134,7 @@ export class AdminCoursesComponent implements OnInit {
     if (this.type === 'created') {
       this.loader = true;
       this.service.getAllDrafted(this.adminDetails.user_id, event - 1).subscribe((res: any) => {
-        if (res.data && res.data.get_draft_course) {
+        if (res.data && res.data.get_course_createdby_admin) {
           // this.courseList.push(...res.data.get_draft_course.message);
           this.courseList = res.data.get_course_createdby_admin.message;
           this.goto = 'create';
@@ -138,6 +144,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = false;
           this.showRating = false;
           this.showPrice = false;
+          this.showEnroll = true;
         } else {
           this.loader = false;
         }
@@ -155,6 +162,7 @@ export class AdminCoursesComponent implements OnInit {
           this.showCount = true;
           this.showRating = true;
           this.showPrice = true;
+          this.showEnroll = false;
         } else {
           this.loader = false;
         }
@@ -168,10 +176,11 @@ export class AdminCoursesComponent implements OnInit {
           this.goto = 'draft';
           this.showPublishedDate = false;
           this.loader = false;
-          this.btnType = 'Publish';
+          this.btnType = null;
           this.showCount = false;
           this.showRating = false;
           this.showPrice = false;
+          this.showEnroll = false;
         } else {
           this.loader = false;
         }

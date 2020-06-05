@@ -49,7 +49,7 @@
               paginationpgno } ;">
             <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="false" [showWishlist]="false"
               [showStatus]="false" [showRating]="showRating" [showCount]="showCount" [showPrice]="showPrice"
-              [showDate]="showPublishedDate" [goto]="goto" [showEnroll]="true" [btnType]="btnType">
+              [showDate]="showPublishedDate" [goto]="goto" [showEnroll]="showEnroll" [btnType]="btnType">
             </app-course-component>
             <br><br>
           </div>
@@ -67,7 +67,8 @@
       <div class="col-md-9 col-sm-11 col-11 width_80 center" *ngFor=" let course of courseList | paginate: { totalItems: courseCount,itemsPerPage: 12, currentPage:
         paginationpgno } ;">
         <app-list-view-course-component [course]="course" [showRating]="showRating" [btnType]="btnType"
-          [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate" [showWishlist]="false">
+          [showCount]="showCount" [goto]="goto" [showDate]="showPublishedDate" [showEnroll]="showEnroll"
+          [showWishlist]="false">
         </app-list-view-course-component>
         <br>
       </div>
