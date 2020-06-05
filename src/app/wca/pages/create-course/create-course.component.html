@@ -1,447 +1,467 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <ng-container *ngIf="queryData.edit; else createCourse">
-        Edit Course
-      </ng-container>
-      <ng-template #createCourse>
-        Create Course
-      </ng-template>
-
-    </li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <ng-container *ngIf="queryData.edit; else createCourse">
+                Edit Course
+            </ng-container>
+            <ng-template #createCourse>
+                Create Course
+            </ng-template>
+        </li>
+    </ol>
 </nav>
 
-
-
-
 <div class="container create-course wrap-body" *ngIf="courseForm?.controls">
-  <form [formGroup]="courseForm" (ngSubmit)="createcourseForm()">
-    <div class="row">
+    <form [formGroup]="courseForm" (ngSubmit)="createcourseForm()">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="true" class="bcgClrSync">
+                        <mat-panel-title class="f_wt_500 f_size_20 color_blue">
+                            Create a Course
+                        </mat-panel-title>
+                        <mat-card style="text-align: center;">
+                            <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+                                <div class="form-group">
+                                    <!-- Course Details Started -->
+                                    <div class="row">
+                                        <div class="col-md-8">
 
-      <div class="col-md-12">
-        <mat-accordion>
-          <mat-expansion-panel [expanded]="true" class="bcgClrSync">
+                                            <div class="row crs1 padBot20px">
+                                                <div class="col-md-4 page-Header"><span
+                                                        style="font-weight: bold;">Course Details</span>
+                                                </div>
+                                                <div class="col-md-8" style="visibility:collapse;">
+                                                    <mat-checkbox formControlName="course_mode">Self paced
+                                                    </mat-checkbox>
+                                                </div>
+                                            </div>
 
-            <mat-panel-title class="f_wt_500 f_size_18 color_blue">
-              Create a Course
-            </mat-panel-title>
-            <mat-card style="text-align: center;">
-              <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+                                            <div class="row crs1">
+                                                <div class="col-md-4 course-details">Course Name<span
+                                                        style="color: red;">*</span></div>
+                                                <div class="col-md-8"><input class="inputmainWidth"
+                                                        (keydown)="_handleKeydown($event)" type="text"
+                                                        placeholder="Enter the course name"
+                                                        formControlName="course_name" required />
+                                                </div>
+                                            </div>
 
+                                            <div class="row crs1 pad18px">
+                                                <div class="col-md-4 course-details">Course Short Description</div>
+                                                <div class="col-md-8">
+                                                    <textarea class="inputs inputmainWidth" style="resize: none;"
+                                                        formControlName="course_description"
+                                                        placeholder="Enter the course description" maxlength="1000"
+                                                        name="info" (keydown)="_handleKeydown($event)"></textarea>
+                                                </div>
+                                            </div>
 
-                <div class="form-group">
+                                            <div class="row crs1 pad18px">
+                                                <div class="col-md-4 course-details">Course Long Description</div>
+                                                <div class="col-md-8">
+                                                    <angular-editor class="inputmainWidth" [config]='config'
+                                                        formControlName="course_long_description"></angular-editor>
+                                                </div>
+                                            </div>
 
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div>
-                        <div class="row crs1 padBot20px">
-                          <div class="col-md-4 course-details"><span style="font-weight: bold;">Course Details</span>
-                          </div>
-                          <div class="col-md-8" style="visibility:collapse;">
-                            <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
-                          </div>
-                        </div>
+                                            <div class="row crs1 margTop7px">
+                                                <div class="col-md-4 course-details">Pre-Requisite Skill</div>
+                                                <div class="col-md-8">
+                                                    <mat-form-field style="background: #e3ecff !important"
+                                                        class="matchipsbrder inputmainWidth"
+                                                        [class.active]="preRequisites?.length">
+                                                        <mat-chip-list #preReqList>
+                                                            <mat-chip *ngFor="let req of preRequisites" removable
+                                                                (removed)="onRemoverequest(req)"
+                                                                matTooltip={{req?.name}}>
+                                                                {{req?.name}}
+                                                                <mat-icon matChipRemove>cancel</mat-icon>
+                                                            </mat-chip>
+                                                            <input class="inputmainWidth"
+                                                                (keydown)="_handleKeydown($event)"
+                                                                (keydown.space)="$event.preventDefault()"
+                                                                [matChipInputAddOnBlur]="true"
+                                                                [matChipInputFor]="preReqList"
+                                                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                                (matChipInputTokenEnd)="addrequest($event)">
+                                                        </mat-chip-list>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
 
-                        <div class="row crs1">
-                          <div class="col-md-4 course-details">Course Name<span style="color: red;">*</span></div>
-                          <div class="col-md-8"><input class="inputmainWidth" (keydown)="_handleKeydown($event)"
-                              type="text" placeholder="Enter the course name" formControlName="course_name" required />
-                          </div>
-                        </div>
+                                            <div class="row crs1 pad18px">
+                                                <div class="col-md-4 course-details margTop6px">Mode</div>
+                                                <div class="col-md-8 modeFlx">
+                                                    <mat-checkbox formControlName="course_mode">Self paced
+                                                    </mat-checkbox>
+                                                </div>
+                                            </div>
 
+                                        </div>
 
-                        <div class="row crs1 pad18px">
-                          <div class="col-md-4 course-details">Course Short Description</div>
-                          <div class="col-md-8">
-                            <textarea class="inputs inputmainWidth" style="resize: none;"
-                              formControlName="course_description" placeholder="Enter the course description"
-                              maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea>
-                          </div>
-                        </div>
-
-                        <div class="row crs1 pad18px">
-                          <div class="col-md-4 course-details">Course Long Description</div>
-                          <div class="col-md-8">
-                            <!-- <ckeditor formControlName="course_long_description" [editor]="editor"></ckeditor> -->
-                            <angular-editor formControlName="course_long_description" ></angular-editor>
-                            <!-- <textarea class="inputs inputmainWidth" style="resize: none;"
-                              formControlName="course_long_description" placeholder="Enter the course description"
-                              maxlength="1000" name="info" (keydown)="_handleKeydown($event)"></textarea> -->
-                          </div>
-                        </div>
-
-                        <div class="row crs1 margTop7px">
-                          <div class="col-md-4 course-details">Pre-Requisite Skill</div>
-                          <div class="col-md-8">
-                            <!-- <textarea class="inputs" style="resize: none;"  formControlName="prerequisit_details"
-                                          placeholder="Enter the course description (200 Characters)" maxlength="1000" 
-                                          name="info"></textarea> -->
-
-                            <mat-form-field style="background: #e3ecff !important" class="matchipsbrder"
-                              [class.active]="preRequisites?.length">
-                              <mat-chip-list #preReqList>
-                                <mat-chip *ngFor="let req of preRequisites" removable (removed)="onRemoverequest(req)"
-                                  matTooltip={{req?.name}}>
-                                  {{req?.name}}
-                                  <mat-icon matChipRemove>cancel</mat-icon>
-                                </mat-chip>
-                                <input (keydown)="_handleKeydown($event)" (keydown.space)="$event.preventDefault()"
-                                  [matChipInputAddOnBlur]="true" [matChipInputFor]="preReqList"
-                                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                  (matChipInputTokenEnd)="addrequest($event)">
-
-                              </mat-chip-list>
-
-                            </mat-form-field>
-                          </div>
-                        </div>
-
-                        <div class="row crs1 pad18px">
-                          <div class="col-md-4 course-details margTop6px">Mode</div>
-                          <div class="col-md-8 modeFlx">
-                            <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
-                          </div>
-                        </div>
-
-
-
-                        <div class="row crs1 margbtm">
-                          <div class="col-md-4 course-details">Preview Video</div>
-                          <div class="col-md-8"><input class="input-field fix_width" type="text" placeholder="URL"
-                              (keydown)="_handleKeydown($event)" formControlName="preview_video" required />
-                          </div>
-                        </div>
-
-
-                        <div class="row crs1">
-                          <div class="col-md-4 course-details">Language</div>
-                          <div class="col-md-8">
-                            <span class="width88">
-                              <select matNativeControl [disabled]='showdeletedicon' formControlName="course_language"
-                                class="inputs2 inputmainWidth" placeholder="Select the Language" style="margin-top: 20px;">
-                                <option *ngFor="let m of languages" [value]="m">{{m}}</option>
-                              </select>
-                            </span>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="mainImage">
-                        <span>
-                          <input hidden id="fileInput" type='file' #fileInput
-                            (change)="onSelectFile($event,'img1')"> <img
-                            class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}" (click)="fileInput.click()"
-                            [src]="courseForm?.value?.course_img_url ? courseForm?.value?.course_img_url : '../../../../assets/images/image_upload.svg'">
-                        </span>
-                        <span *ngIf="!this.preview1">Upload the Course Image <span style="color: red;">*</span></span>
-                        <span *ngIf="!this.preview1">(.JPG,.JPEG,.PNG)</span>
-                        <span *ngIf="!this.preview1" class="padMainImg"><small>size should not exceed more than 2
-                            mb</small></span>
-                      </div>
-
-                      <br><br>
-
-                      <button class="input-button btn_browse" (click)='loadBlobs()' type="button">Browse</button>
-
-                    </div>
-
-                  </div>
-
-                  <div class="btmUnderline"></div>
-                  <!-- --------------------------------------------------------------------------------------------- -->
-
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="row padBot20px crs1">
-                        <div class="col-md-3"><span style="font-weight: bold;">Instructor Details</span></div>
-                        <div class="col-md-9 collapaseIcon">
-                          <mat-icon (click)="add1()">add_circle_outline</mat-icon>
-                          <mat-icon (click)="removenewLink1()">delete</mat-icon>
-                        </div>
-                        <div class="col-md-9" style="visibility:collapse;">
-                          <mat-checkbox formControlName="course_mode">Self paced</mat-checkbox>
-                        </div>
-                      </div>
-                      <div class="row crs1">
-                        <div class="col-md-3">Instructor Name</div>
-                        <div class="col-md-9">
-                          <ng-container formArrayName="author_details"
-                            *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
-                            <ng-container [formGroupName]="i">
-                              <span class="width88">
-                                <select matNativeControl class="inputs2 inputmainWidth" [disabled]='showdeletedicon'
-                                  formControlName="author_name" (selectionChange)="change($event.value,i)"
-                                  placeholder="Select the instructor" name="language" style="margin-top: 20px;">
-                                  <option *ngFor="let k of AllInstructors | filter_matselect:selected"
-                                    [disabled]="k.disabled" [value]="k.name">
-                                    {{k?.name}}
-                                  </option>
-                                </select>
-                              </span>
-                              <span class="instructDSPFlx">
-                                <span>
-                                  <input style="display: none;" id="fileInput1" type='file' #fileInput1
-                                    (change)="onSelectFile($event,'img2',i)">
-                                  <img class="img2" for="fileInput1" (click)="fileInput1.click()"
-                                    [src]="courseForm?.value?.author_details[i]?.image ? courseForm?.value?.author_details[i]?.image : '../../../../assets/images/image_upload.svg'">
-                                </span>
-                                <div class="spanandWidth">
-                                  <textarea class="inputs3" style="resize: none;" formControlName="description"
-                                    (keydown)="_handleKeydown($event)" placeholder="Description" maxlength="1000"
-                                    name="info"></textarea>
-                                </div>
-                              </span>
-                            </ng-container>
-                          </ng-container>
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row padBot20px crs1 instructorIcon">
-                        <mat-icon (click)="add1()">add_circle_outline</mat-icon>
-                        <mat-icon (click)="removenewLink1()">delete</mat-icon>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-                  <div class="btmUnderline"></div>
-                  <!-- --------------------------------------------------------------------------------------------- -->
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="row crs1 padtp25px">
-                        <div class="col-md-3">Certification</div>
-                        <div class="col-md-9">
-                          <select matNativeControl [disabled]='showdeletedicon' formControlName="certificate_name"
-                            class="inputs2 inputmainWidth" placeholder="No Certificate" name="language" style="margin-top: 20px;">
-                            <option *ngFor="let k of AllCertifyDetails" [value]="k.name">
-                              {{k?.name}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="btmUnderline"></div>
-                  <!-- --------------------------------------------------------------------------------------------- -->
-                  <div>
-                    <div class="row">
-
-                      <div class="col-md-11">
-
-                        <div class="row">
-                          <div class="col-md-3"><span style="font-weight: bold;">Course Partners</span></div>
-                          <div class="col-md-9 collapaseIcon">
-                            <mat-icon (click)="add2(in)">add_circle_outline</mat-icon>
-                            <mat-icon (click)="removenewLink2(in)">delete</mat-icon>
-                          </div>
-                          <div class="col-md-9" style="visibility:collapse;">
-                            <mat-checkbox formControlName="course_mode">Self Paced</mat-checkbox>
-                          </div>
-                        </div>
-
-
-
-                        <div class="row">
-                          <div class="col-md-3">Institute Name</div>
-                          <div class="col-md-7 width_margin">
-                            <ng-container formArrayName="coursepartner_details"
-                              *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
-                              <ng-container [formGroupName]="i">
-                                <span class="width100full">
-                                  <select matNativeControl [disabled]='showdeletedicon' formControlName="name"
-                                    (selectionChange)="change1($event.value,i)" class="inputs4 hgt39"
-                                    placeholder="Select the institute" name="language" style="margin-top: 20px;">
-                                    <option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
-                                      [disabled]="k.disabled" [value]="k.name">
-                                      {{k?.name}}
-                                    </option>
-                                  </select>
-                                  <input style="display: none;" id="fileInput3" type='file' #fileInput3
-                                    (change)="onSelectFile($event,'img3',i)">
-                                  <img class="img3 img3marg" for="fileInput3" (click)="fileInput3.click()"
-                                    [src]="courseForm?.value?.coursepartner_details[i]?.image ? courseForm?.value?.coursepartner_details[i]?.image : '../../../../assets/images/image_upload.svg'">
-                                </span>
-
-                              </ng-container>
-                            </ng-container>
-                            <!-- <div class="row">
-                              <div class="col-sm-8" formArrayName="coursepartner_details"
-                                *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
-                                <div [formGroupName]="i">
-                                  <div class="row">
-                                    <div class="col-md-11">
-                                      <mat-select [disabled]='showdeletedicon' formControlName="name" class="inputs4"
-                                        placeholder="Select the institute" name="language">
-                                        <mat-option *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
-                                          [disabled]="k.disabled" [value]="k.name" (onSelectionChange)="change1(k,i)">
-                                          {{k?.name}}
-                                        </mat-option>
-                                      </mat-select>
+                                        <div class="col-md-4">
+                                            <div class="mainImage">
+                                                <span>
+                                                    <input style="display: none;" id="fileInput" type='file' #fileInput
+                                                        (change)="onSelectFile($event,'img1')"> <img
+                                                        class="{{!this.preview1 ? 'img1' : 'img1-uploaded'}}"
+                                                        (click)="fileInput.click()"
+                                                        [src]="courseForm?.value?.course_img_url ? courseForm?.value?.course_img_url : '../../../../assets/images/image_upload.svg'">
+                                                </span>
+                                                <span *ngIf="!this.preview1">Upload the Course Image <span
+                                                        style="color: red;">*</span></span>
+                                                <span *ngIf="!this.preview1">(.JPG,.JPEG,.PNG)</span>
+                                                <span *ngIf="!this.preview1" class="padMainImg"><small>size should not
+                                                        exceed more than 2
+                                                        mb</small></span>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="col-md-1 flxCls">
-                                      <input style="display: none;" id="fileInput3" type='file' #fileInput3
-                                        (change)="onSelectFile($event,'img3',i)">
-                                      <img class="img3" for="fileInput3" (click)="fileInput3.click()"
-                                        [src]="preview3[i] ? preview3[i] : '../../../../assets/images/image_upload.svg'">
-
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 margbtm">
+                                                <div class="col-md-4 course-details">Preview Video</div>
+                                                <div class="col-md-8"><input class="input-field inputmainWidth"
+                                                        type="text" placeholder="URL" (keydown)="_handleKeydown($event)"
+                                                        formControlName="preview_video" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="input-button btn_browse" (click)='loadBlobs()'
+                                                type="button">Browse</button>
+                                        </div>
+                                        <div class="col-md-2"></div>
                                     </div>
 
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-2 pdleft">
-                                <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
-                                <mat-icon style="margin: 0;padding-left: 6px;" (click)="removenewLink2(in)">delete
-                                </mat-icon>
-                              </div>    <div class="col-sm-2 pdleft">
-                                <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
-                                <mat-icon style="margin: 0;padding-left: 6px;" (click)="removenewLink2(in)">delete
-                                </mat-icon>
-                              </div>
-                            </div> -->
-
-
-                          </div>
-                          <div class="col-sm-2">
-                            <div style="float: left;margin-left: -24px;" class="removeIcon">
-                              <mat-icon style="margin: 0;" (click)="add2(in)">add_circle_outline</mat-icon>
-                              <mat-icon style="margin: 0;" (click)="removenewLink2(in)">delete
-                              </mat-icon>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                    </div>
-                  </div>
-
-                  <div class="btmUnderline"></div>
-                  <!-- --------------------------------------------------------------------------------------------- -->
-
-
-                  <div>
-                    <div class="row">
-
-                      <div class="col-md-8">
-
-                        <div class="row margbtm">
-                          <div class="col-md-3"><span style="font-weight: bold;">Learners Takeaway</span></div>
-                          <div class="col-md-9" style="visibility:collapse;">
-                            <mat-checkbox formControlName="course_mode">Self placed</mat-checkbox>
-                          </div>
-                        </div>
-
-                        <div formArrayName="takeway_details"
-                          *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
-                          <div [formGroupName]="i">
-                            <div class="row crs1 margbtm">
-                              <div class="col-md-3">Description</div>
-                              <div class="col-md-9"><textarea type="text" class="inputs inputmainWidth"
-                                  style="resize: none;" (keydown)="_handleKeydown($event)" placeholder="Enter the description"
-                                  formControlName="text"></textarea> </div>
-                            </div>
-
-                            <div class="row crs1 margbtm">
-                              <div class="col-md-3">Media</div>
-                              <div class="col-md-1">
-                                <div formArrayName="media"
-                                  *ngFor="let item of courseForm.get('takeway_details').controls[i].get('media').controls; let j = index;">
-
-                                  <div class="row crs1">
-                                    <div class="col-md-2">
-                                      <input style="display: none;" id="fileInput4" type='file' #fileInput4
-                                        (change)="onSelectFile($event,'img4',i,j)"><img class="img5" for="fileInput4"
-                                        (click)="fileInput4.click()"
-                                        [src]="courseForm?.value?.takeway_details[0]?.media[j] ? courseForm?.value?.takeway_details[0]?.media[j] : '../../../../assets/images/image_upload.svg'">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1">
+                                                <div class="col-md-4 course-details">Language</div>
+                                                <div class="col-md-8">
+                                                    <span class="width88">
+                                                        <mat-form-field style="width: 100%;">
+                                                            <mat-select [disabled]='showdeletedicon'
+                                                                formControlName="course_language"
+                                                                class="inputs2 inputmainWidth"
+                                                                placeholder="Select the Language">
+                                                                <mat-option *ngFor="let m of languages" [value]="m">
+                                                                    {{m}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8"></div>
                                     </div>
-                                  </div>
+                                    <div class="btmUnderline"></div>
+                                    <!-- Course Details Ends -->
+
+                                    <!-- Instruction Details Starts -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 padBot20px">
+                                                <div class="col-md-4 page-Header">
+                                                    <span style="font-weight: bold;">Instructor Details</span>
+                                                </div>
+                                                <div class="col-md-8" style="visibility:collapse;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row"
+                                        *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
+                                        <div class="col-md-8">
+                                            <div class="row crs1">
+                                                <div class="col-md-4 course-details">
+                                                    <span *ngIf='i === 0'>Instructor Name</span>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div formArrayName="author_details">
+                                                        <div [formGroupName]="i">
+                                                            <span class="width88">
+                                                                <mat-form-field style="width: 100%;">
+                                                                    <mat-select class="inputs2 inputmainWidth"
+                                                                        [disabled]='showdeletedicon'
+                                                                        formControlName="author_name"
+                                                                        (selectionChange)="change($event.value,i)"
+                                                                        placeholder="Select the instructor"                                                                        
+                                                                        name="language" disableOptionCentering>
+                                                                        <mat-option
+                                                                            *ngFor="let k of AllInstructors | filter_matselect:selected"
+                                                                            [disabled]="k.disabled" [value]="k.name">
+                                                                            {{k?.name}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </span>
+                                                            <span class="instructDSPFlx">
+                                                                <span>
+                                                                    <input style="display: none;" class="inputmainWidth"
+                                                                        id="fileInput1" type='file' #fileInput1
+                                                                        (change)="onSelectFile($event,'img2',i)">
+                                                                    <img class="img2" for="fileInput1"
+                                                                        (click)="fileInput1.click()"
+                                                                        [src]="courseForm?.value?.author_details[i]?.image ? courseForm?.value?.author_details[i]?.image : '../../../../assets/images/image_upload.svg'">
+                                                                </span>
+                                                                <div class="spanandWidth">
+                                                                    <textarea class="inputs3 inputmainWidth"
+                                                                        style="resize: none;"
+                                                                        formControlName="description"
+                                                                        (keydown)="_handleKeydown($event)"
+                                                                        placeholder="Description" maxlength="1000"
+                                                                        name="info"></textarea>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row padBot20px crs1 instructorIcon">
+                                                <mat-icon (click)="add1()">add_circle_outline</mat-icon>
+                                                <mat-icon *ngIf='i !== 0' (click)="removenewLink1()">delete</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btmUnderline"></div>
+                                    <!-- Instruction Details Ends -->
+
+                                    <!-- Certification Details Starts -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 padtp25px">
+                                                <div class="col-md-4 course-details">Certification</div>
+                                                <div class="col-md-8">
+                                                    <mat-form-field style="width: 100%;">
+                                                        <mat-select [disabled]='showdeletedicon'
+                                                            formControlName="certificate_name"
+                                                            class="inputs2 inputmainWidth" placeholder="No Certificate"
+                                                            name="language" disableOptionCentering>
+                                                            <mat-option *ngFor="let k of AllCertifyDetails"
+                                                                [value]="k.name">
+                                                                {{k?.name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                    <div class="btmUnderline"></div>
+                                    <!--  Certification Details Ends -->
+
+                                    <!-- Course Partners Starts -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 padBot20px">
+                                                <div class="col-md-4 page-Header">
+                                                    <span style="font-weight: bold;">Course Partners</span>
+                                                </div>
+                                                <div class="col-md-8" style="visibility:collapse;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row"
+                                        *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
+                                        <div class="col-md-8">
+                                            <div class="row crs1">
+                                                <div class="col-md-4 course-details">
+                                                    <span *ngIf='i === 0'>Institute Name</span>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <ng-container formArrayName="coursepartner_details">
+                                                        <ng-container [formGroupName]="i">
+                                                            <span>
+                                                                <mat-form-field style="width: 80%;">
+                                                                    <mat-select
+                                                                        [disabled]='showdeletedicon'
+                                                                        formControlName="name"
+                                                                        (selectionChange)="change1($event.value,i)"
+                                                                        class="inputs4 hgt39"
+                                                                        placeholder="Select the institute"
+                                                                        name="language" 
+                                                                        style="width: -webkit-fill-available;"
+                                                                        disableOptionCentering>
+                                                                        <mat-option
+                                                                            *ngFor="let k of AllTakeawayDetails | filter_matselect:selected1"
+                                                                            [disabled]="k.disabled" [value]="k.name">
+                                                                            {{k?.name}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                                <input style="display: none;" id="fileInput3"
+                                                                    type='file' #fileInput3
+                                                                    (change)="onSelectFile($event,'img3',i)">
+                                                                <img class="img3 img3marg" for="fileInput3"
+                                                                    (click)="fileInput3.click()"
+                                                                    [src]="courseForm?.value?.coursepartner_details[i]?.image ? courseForm?.value?.coursepartner_details[i]?.image : '../../../../assets/images/image_upload.svg'">
+                                                            </span>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row padBot20px crs1" style="margin-left: 66px;">
+                                                <mat-icon style="margin: 0;" (click)="add2(in)">
+                                                    add_circle_outline</mat-icon>
+                                                <mat-icon *ngIf='i !== 0' style="margin: 0;" (click)="removenewLink2(in)">
+                                                    delete
+                                                </mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btmUnderline"></div>
+                                    <!-- Course Parteners Ends -->
+
+                                    <!-- Leaners Takeaway Starts -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 padBot20px">
+                                                <div class="col-md-4 page-Header">
+                                                    <span style="font-weight: bold;">Learners Takeaway</span>
+                                                </div>
+                                                <div class="col-md-8" style="visibility:collapse;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 margbtm">
+                                                <div class="col-md-4 course-details">
+                                                    <span>Description</span>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea type="text" class="inputs inputmainWidth"
+                                                        style="resize: none;" (keydown)="_handleKeydown($event)"
+                                                        placeholder="Enter the description"
+                                                        formControlName="text"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div formArrayName="takeway_details"
+                                        *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
+                                        <div
+                                            *ngFor="let item of courseForm.get('takeway_details').controls[i].get('media').controls; let j = index;">
+                                            <div [formGroupName]="i">
+                                                <div class="row crs1 margbtm">
+                                                    <div class="col-md-4 course-details" style="margin-left: inherit;">
+                                                        <span *ngIf="j === 0">Media</span></div>
+                                                    <div class="col-md-1">
+                                                        <div formArrayName="media">
+                                                            <div class="row crs1" style="margin-left: -165px;">
+                                                                <div class="col-md-2">
+                                                                    <input style="display: none;" id="fileInput4"
+                                                                        type='file' #fileInput4
+                                                                        (change)="onSelectFile($event,'img4',i,j)"><img
+                                                                        class="img5" for="fileInput4"
+                                                                        (click)="fileInput4.click()"
+                                                                        [src]="courseForm?.value?.takeway_details[0]?.media[j] ? courseForm?.value?.takeway_details[0]?.media[j] : '../../../../assets/images/image_upload.svg'">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2" style="margin-left: -150px;">
+                                                        <mat-icon style="margin:0;" (click)="add3()">
+                                                            add_circle_outline</mat-icon>
+                                                        <mat-icon *ngIf='j !== 0' style="margin:0;" (click)="removenewLink3()">
+                                                            delete</mat-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 margbtm">
+                                                <div class="col-md-4 course-details">A Step Towards</div>
+                                                <div class="col-md-8"><textarea class="inputs inputmainWidth"
+                                                        (keydown)="_handleKeydown($event)" style="resize: none;"
+                                                        formControlName="description"
+                                                        placeholder="Enter the course description" maxlength="1000"
+                                                        name="info"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 margbtm">
+                                                <div class="col-md-4 course-details">Course Milestone</div>
+                                                <div class="col-md-8"><textarea type="text" style="resize: none;"
+                                                        class="inputs inputmainWidth" (keydown)="_handleKeydown($event)"
+                                                        placeholder="Enter the Milestone"
+                                                        formControlName="what_will_you_learn"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                    <div class="btmUnderline"></div>
+                                    <!-- Learners Takeaway Ends -->
+
+                                    <!-- Feedback Starts -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1 padBot20px">
+                                                <div class="col-md-4 page-Header">
+                                                    <span style="font-weight: bold;">Feedback</span>
+                                                </div>
+                                                <div class="col-md-8" style="visibility:collapse;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row crs1">
+                                                <div class="col-md-4 course-details">Course Feedback</div>
+                                                <div class="col-md-8" style="text-align: left;">
+                                                    <mat-slide-toggle formControlName="feed_back">
+                                                        Enable</mat-slide-toggle>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <button class="backgroundcol2" type="submit">Save &
+                                                Continue</button>
+                                        </div>
+                                        <div class="col-md-4"></div>                                        
+                                    </div>
+                                    <!-- Feedback Ends -->
+
                                 </div>
-                              </div>
-
-                              <div class="col-md-2 mrgnpad learnerIcon">
-                                <mat-icon style="margin:0;" (click)="add3()">add_circle_outline</mat-icon>
-                                <mat-icon style="margin:0;" (click)="removenewLink3()">delete</mat-icon>
-                              </div>
-                            </div>
-
-                            <div class="row crs1 margbtm">
-                              <div class="col-md-3">A Step Towards</div>
-                              <div class="col-md-9"><textarea class="inputs inputmainWidth"
-                                  (keydown)="_handleKeydown($event)" style="resize: none;" formControlName="description"
-                                  placeholder="Enter the step towards" maxlength="1000" name="info"></textarea>
-                              </div>
-                            </div>
-
-                            <div class="row crs1 margbtm">
-                              <div class="col-md-3">Course Milestone</div>
-                              <div class="col-md-9"><textarea type="text" style="resize: none;"
-                                  class="inputs inputmainWidth" (keydown)="_handleKeydown($event)"
-                                  placeholder="Enter the Milestone" formControlName="what_will_you_learn"></textarea>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="btmUnderline"></div>
-
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="row crs1 padBot20px">
-                        <div class="col-md-3"><span style="font-weight: bold;">Feedback</span>
-                        </div>
-
-                        <div class="col-md-9" style="visibility:collapse;">
-                          <mat-checkbox>Self paced</mat-checkbox>
-                        </div>
-
-                      </div>
-
-                      <div class="row crs1">
-                        <div class="col-md-4 course-details">Course Feedback</div>
-                        <div class="col-md-8" style="text-align: left;">
-
-                          <mat-slide-toggle formControlName="feed_back">
-                            Enable</mat-slide-toggle>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="marginsection"> <button class="backgroundcol2" type="submit">Save & Continue</button>
-                  </div>
-
-
-                  <!-- routerLink="/Admin/auth/Wca/viewmodule" -->
-
-
-                </div>
-
-              </mat-grid-list>
-            </mat-card>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
-    </div>
-  </form>
+                            </mat-grid-list>
+                        </mat-card>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </form>
 </div>

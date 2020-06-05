@@ -204,7 +204,7 @@
 
                 <ng-container matColumnDef="select">
                   <mat-header-cell *matHeaderCellDef>
-                    Select
+                    <!-- Select -->
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row">
                     <span class="mobile-label">Select</span>
@@ -228,8 +228,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef> Email iD </mat-header-cell>
-                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email iD</span>
+                  <mat-header-cell *matHeaderCellDef> Email id </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><span class="mobile-label">Email id</span>
                     {{element.email || 'NA'}}
                   </mat-cell>
                 </ng-container>
@@ -281,7 +281,7 @@
                     <button *ngIf="!element.is_blocked" mat-stroked-button
                       [disabled]="(selectedArray && selectedArray.length > 0)"
                       (click)="changeGroup(changeDialog,element)">
-                      Change Group</button>
+                      Change group</button>
                     <!-- <mat-form-field class="width_100 ">
                       <mat-label>Change Group</mat-label>
                       <mat-select name="Change Group">

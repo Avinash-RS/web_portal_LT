@@ -140,7 +140,7 @@
       </span>
 
       <mat-tab-group>
-        <mat-tab label="View Details">
+        <mat-tab label="View details">
           <br>
           <mat-dialog-content style="width: 1000px;margin:0">
             <form #profileForm="ngForm">
@@ -169,11 +169,11 @@
                 <div class="row">
                   <!-- //////userName  +++ full name +++ Phone//////// -->
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Username : <label
+                    <label>User name : <label
                         class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username || 'NA'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Full Name : <label
+                    <label>Full name : <label
                         class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name || 'NA'}}
                       </label></label>
                   </div>
@@ -253,7 +253,7 @@
           <!-- </mat-dialog-actions> -->
         </mat-tab>
 
-        <mat-tab label="Track Details">
+        <mat-tab label="Track details">
           <br> <br>
           <mat-dialog-content style="width: 1000px;margin:0">
           <div class="container profile">
@@ -264,7 +264,7 @@
                     class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
-                <label>No. of Wishlisted courses : <label
+                <label>No. of wishlisted courses : <label
                     class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
                 </label>
               </div>
@@ -278,7 +278,7 @@
                   </label> </label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
-                <label>Registered On : <label class="color_black capitalize f_wt_400">
+                <label>Registered on : <label class="color_black capitalize f_wt_400">
                     {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
                   </label> </label>
               </div>
