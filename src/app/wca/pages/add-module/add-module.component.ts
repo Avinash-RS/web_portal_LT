@@ -63,7 +63,7 @@ export class AddModuleComponent implements OnInit {
     // this.queryData = 1
     if (this.routedCourseDetails.courseId) {
       this.getCourseDetails();
-      if(this.isCreate) {
+      if (this.isCreate) {
         this.isCreate = false;
         setTimeout(() => {
           debugger
@@ -109,7 +109,7 @@ export class AddModuleComponent implements OnInit {
         this.updateModList();
         this.updateCourseDetails();
       }
- 
+
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -174,6 +174,7 @@ export class AddModuleComponent implements OnInit {
         if (data) {
           this.courseDetails.flag = 'false';
           let count = 0;
+          let cnt = 0;
           let modDetails;
 
           // tslint:disable-next-line:no-shadowed-variable
@@ -184,13 +185,17 @@ export class AddModuleComponent implements OnInit {
               modDetails.courseid = this.courseDetails.courseid;
               modDetails.coursename = this.courseDetails.coursename;
             }
-            ++count;
           });
 
           this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
             if (res.Code === 200) {
               this.moduleList.push(res.Result);
-              this.getCourseDetails();
+              this.courseDetails.coursedetails.forEach((data: any) => {
+                if (idx === cnt) {
+                  data.moduleid = res.Result;
+                }
+                ++cnt;
+              })
               this.toast.success('Module added to repository successfully');
             }
           });
@@ -199,11 +204,31 @@ export class AddModuleComponent implements OnInit {
     }
   }
   deleteScromFile(e) {
-    this.scormPath = '';
-    this.isScrom = false;
-    this.courseDetails.coursetype = '';
-    this.courseDetails.coursefile = '';
     event.stopPropagation();
+    this.alertService.openConfirmAlert('Are you sure you want to delete it', '').then((data: Boolean) => {
+      if (data) {
+        this.scormPath = '';
+        this.isScrom = false;
+        this.courseDetails.coursetype = '';
+        this.courseDetails.coursefile = '';
+
+        this.spinner.show();
+        this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
+          if (res.Code === 200) {
+            this.getCourseDetails();
+            const obj = {
+              course_id: this.routedCourseDetails.courseId,
+              is_active: 0
+            };
+            this.apiService.updateCourse(obj).subscribe((data: any) => {
+            });
+          }
+          this.spinner.hide();
+        }, err => {
+          this.spinner.hide();
+        });
+      }
+    });
   }
 
   deleteModule(idx) {
@@ -274,35 +299,42 @@ export class AddModuleComponent implements OnInit {
 
   navChooseTemp() {
     if (!this.courseDetails) {
-      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], 
-      { queryParams: { 
-        addModule: true, 
-        viewingModule: this.routedCourseDetails.courseId, 
-        courseName: this.routedCourseDetails.courseName,  
-        image: this.routedCourseDetails.courseImage } });
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],
+        {
+          queryParams: {
+            addModule: true,
+            viewingModule: this.routedCourseDetails.courseId,
+            courseName: this.routedCourseDetails.courseName,
+            image: this.routedCourseDetails.courseImage
+          }
+        });
     }
     else if (this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.courseDetails.courseid, courseName: this.courseDetails.coursename, image: this.routedCourseDetails.courseImage } });
     } else {
-      this.toast.warning('SCORM course cannot be edited');
+      // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
   addModuleRepos() {
     if (!this.courseDetails) {
-      this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: 
-        { viewingModule: this.routedCourseDetails.courseId, 
-          courseName: this.routedCourseDetails.courseName, 
-          image: this.routedCourseDetails.courseImage, 
-          moduleList: this.moduleList } });
+      this.router.navigate(['/Admin/auth/Wca/modulerepository'], {
+        queryParams:
+        {
+          viewingModule: this.routedCourseDetails.courseId,
+          courseName: this.routedCourseDetails.courseName,
+          image: this.routedCourseDetails.courseImage,
+          moduleList: this.moduleList
+        }
+      });
     }
-  else if (this.courseDetails && this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
+    else if (this.courseDetails && this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
 
       // tslint:disable-next-line:max-line-length
       this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
     } else {
-      this.toast.warning('SCORM course cannot be edited');
+      // this.toast.warning('SCORM course cannot be edited');
     }
   }
 
