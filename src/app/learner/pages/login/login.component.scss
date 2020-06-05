@@ -71,6 +71,10 @@ mat-form-field {
     margin-left: -10px;
 }
 
+ :host ::ng-deep.p-t-77 {
+    padding-top: 21px !important;
+}
+
 .signIn{
     text-align : center !important;
     margin-top: 22px !important;
@@ -78,10 +82,10 @@ mat-form-field {
     font-weight: lighter !important ;
   }
 .linee{
-    border-left: 215px solid #ccc;
+    border-left: 222px solid $color-border;
     height: 1px;
     position: absolute;
-    margin-left: 30px;
+    margin-left: 54px;
     margin-top: 2px;
     border-radius: 17px;
 }
@@ -140,30 +144,43 @@ label {
 }
 
 .wrap-reg {
-    width: 364px;
-    height: auto;
+    width: 30%;
+    height: 100%;
     border-radius: 0px !important;
-    margin-left: -8% !important;
+    margin-left: 70% !important;
     overflow: hidden !important;
 }
 .pg{
     position: absolute;
     color: $color-white;
     padding: 7px;
-    margin: 10px !important;
-    background-color: #ffffff85;
-    font-size: 40px;
+    margin-top: 16px;
+    margin-left: 42% !important;
+    /* background-color: #ffffff85; */
+    font-size: 14px;
     font-weight: normal !important;
 }
 
+.privcy{
+    position: absolute;
+    color: $color-white;
+    padding: 7px;
+    margin-top: 45%;
+    margin-left: 47% !important;
+    /* background-color: #ffffff85; */
+    font-size: 14px;
+    font-weight: normal !important;  
+}
+
  :host ::ng-deep .container-reg200 {
-    width: 98%;
-    height: auto !important;
+    width: 100%;
+    height: 100vh!important;
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* background-size: cover !important; */
-    /* background-repeat: no-repeat !important;*/
+    justify-content: center; 
+     align-items: center; 
+     background-size: cover !important; 
+     background-repeat: no-repeat !important;
+    background: url('../../../../assets/learner/bg-6.jpg');
   }
 
   .lxplogo{
@@ -174,12 +191,17 @@ label {
   }
   .head1{
     text-align: center;
-    font-weight: lighter !important;
-    font-size: 32px;
+    font-weight: normal !important;
+    font-size: 22px;
   }
 
   .bgimg{
     width: 99%;
     height: 657px;
   }
-  
+  .lnt_logo{
+    position: absolute;
+    width: 10%;
+    margin-top: 21px;
+    margin-left: 108px;
+  }
