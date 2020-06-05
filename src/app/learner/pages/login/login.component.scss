@@ -42,6 +42,7 @@ mat-form-field {
 
 .forgot{
     color: $color-blue !important;
+    font-weight: 400 !important;
 }
 
  ::ng-deep .mat-checkbox-inner-container {
@@ -192,7 +193,7 @@ label {
   .head1{
     text-align: center;
     font-weight: normal !important;
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .bgimg{
