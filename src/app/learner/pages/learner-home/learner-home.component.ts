@@ -36,6 +36,7 @@ export class LearnerHomeComponent implements OnInit {
   level3selectedID: any = [];
   allLvlCategoryFilterVal: any = [];
   allLvlCategory: any;
+  viewallcourse: Boolean = false;
 
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,

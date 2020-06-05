@@ -63,6 +63,8 @@ export class ViewAllCoursesComponent implements OnInit {
   publishedFromDate: String;
   showCategory : Boolean = false;
   element: any;
+  viewallcourse: Boolean = false;
+
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
     private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) {
     this.btnType = "Enroll Now"
