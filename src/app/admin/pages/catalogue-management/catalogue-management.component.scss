@@ -139,7 +139,7 @@ input:focus {
 }
 
 .sort-btn {
-    border-radius: 5px;
+    border-radius: 0 !important;
     width: 80px;
     height: 30px;
     border-width: thin;
@@ -204,12 +204,17 @@ input:focus {
 table {
     width: 95%;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 th {
     color: $color-blank;
     font-size: 15px !important;
 
+}
+
+tr.mat-header-row {
+    height: 40px;
 }
 
 th.mat-header-cell {
@@ -350,7 +355,7 @@ td.mat-cell {
     }
 
     tr.mat-header-row {
-        // height: 56px;
+        height: 40px;
         display: none;
     }
 
