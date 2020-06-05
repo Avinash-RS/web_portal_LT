@@ -1,38 +1,104 @@
 @import "variable";
 div.terms{
     color: $color-blue;
-    word-break: break-all !important;
+    /* word-break: break-all !important; */
     font-size: 12px;
-    font-weight: 500;
-    margin-top: 10px;
+    /* font-weight: 500; */
+    /* margin-top: 10px;*/
 }
+
+:host ::ng-deep .mat-checkbox-inner-container {
+    height: 12px !important;
+    height: 14px !important;
+}
+:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: $color-border !important;
+   
+}
+
+.col{
+    color: $color-blue !important;  
+    margin-left: -10px;
+}
+.signIn{
+    text-align : center !important;
+    margin-top: 22px !important;
+    color: $color-blue !important;
+    font-weight: lighter !important ;
+  }
 .account{
-    color:  $color-blue;
+    color: #333333 !important;
     word-break: break-all !important;
     text-align: center !important;
+    margin-top: 30%;
 }
 .sign_up, .remember_me,mat-card-title , a{
     color: $color-blue;
 }
 .alert{
     color: $color-red;
-    // text-align: center;
     margin-left: -19px;
     font-size: 12px;
     font-weight: 500;
 }
 input[type=text] {
     width: 100%;
-    padding: 12px 20px;
+    /* padding: 12px 20px; */
     margin: 1px 0;
-    background: $color-light-blue;
-    display: inline-block;
+    /* display: inline-block; */
+    border-radius: 0px;
     border: 1px solid $color-border;
     box-sizing: border-box;
-    border-radius: 5px;
 }
 .star{
     color: $color-red;
 }
 
+ :host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    line-height: 14px !important;
+}
 
+.wrap-reg {
+    width: 364px;
+    height: auto;
+    border-radius: 0px !important;
+    margin-left: -8% !important;
+    overflow: hidden !important;
+}
+.pg{
+    position: absolute;
+    color: $color-white;
+    padding: 7px;
+    margin: 10px !important;
+    background-color: #ffffff85;
+    font-size: 40px;
+    font-weight: normal !important;
+}
+
+ :host ::ng-deep .container-reg200 {
+    width: 98%;
+    height: auto !important;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-size: cover !important; */
+    /* background-repeat: no-repeat !important;*/
+  }
+
+  .lxplogo{
+    text-align: center;
+    margin-left: 94px;
+    margin-right: 94px;
+    width: 110px;
+  }
+  .head1{
+    text-align: center;
+    font-weight: lighter !important;
+    font-size: 32px;
+  }
+
+  .bgimg{
+    width: 99%;
+    height: 657px;
+  }
+  

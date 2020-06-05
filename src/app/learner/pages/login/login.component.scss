@@ -1,5 +1,4 @@
 @import "variable";
-// @import "../../../../assets/variable.scss";
 
 mat-card {
     width: 22%;
@@ -7,51 +6,106 @@ mat-card {
     top: 10%;
 }
 
-input[type=text] {
+.align{
+    text-align: right !important;
+}
+
+input[type=text][type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 1px 0;
-    background: $color-light-blue;
+    // background: $color-light-blue;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid $color-border;
     box-sizing: border-box;
-    border-radius: 5px;
+    // border-radius: 5px;
 }
 
 button {
     background: $color-blue !important;
-    color: white;
-    width: 70%;
-    margin-left: 15%;
+    color: $color-white;
+    width: 100%;
+    border-radius: 0px;
+    height: 42px;
 }
 
 mat-form-field {
     width: 80%;
-    // height: 10vh !important;
 }
 
-.remember_me {
+.remember_me  {
     float: left;
+    font-size: 11px;
+    color: $color-blue !important;
+    margin-top: -18px;
+}
+
+.forgot{
+    color: $color-blue !important;
+}
+
+ ::ng-deep .mat-checkbox-inner-container {
+    height: 13px !important;
+    width: 13px !important;
+
+}
+
+::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+    line-height: 27px;
+}
+.haveacc{
+    color: #333333 !important;
 }
 
 .forgot_ps {
-    text-align: end;
-    width: 90%;
-    color: #3f548b;
+    text-align: center;
+    width: 100%;
+    color: $color-blue;
     font-weight: 500;
+    font-size: 12px;
+    margin-top: 30%;
 }
 
-.sign_up,
-.remember_me,
+.col{
+    color: $color-blue !important;  
+    margin-left: -10px;
+}
+
+.signIn{
+    text-align : center !important;
+    margin-top: 22px !important;
+    color: $color-blue !important;
+    font-weight: lighter !important ;
+  }
+.linee{
+    border-left: 215px solid #ccc;
+    height: 1px;
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 2px;
+    border-radius: 17px;
+}
+
+.sign_up{
+    color: $color-blue !important;
+    margin-top: 5px !important;
+    text-align: center !important;
+    margin-left: 16px;
+}
 mat-card-title,
-a {
-    color: #3f548b;
+.remember_me .a {
+    color: $color-blue !important;
+    margin-top: -12px !important;
     text-align: center !important;
 }
 
-.mat-checkbox .mat-checkbox-frame {
-    border-color: black;
-    background-color: #dddddd
+:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: $color-border !important;
+   
+}
+
+:host ::ng-deep.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: $color-blue !important;
 }
 
 mat-card-title {
@@ -62,16 +116,70 @@ mat-card-title {
     cursor: pointer;
     font-size: 16px;
 }
+.form-control{
+    border-radius: 0px !important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 2px !important;
+}
 
 .errspan {
     float: right;
     margin-right: 10px;
-    margin-top: -28px;
+    margin-top: -29px;
     position: relative;
     z-index: 2;
-    color: black;
+    font-size: 18px;
+    color: #9E9E9E;
 }
 
 .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
 }
+
+.wrap-reg {
+    width: 364px;
+    height: auto;
+    border-radius: 0px !important;
+    margin-left: -8% !important;
+    overflow: hidden !important;
+}
+.pg{
+    position: absolute;
+    color: $color-white;
+    padding: 7px;
+    margin: 10px !important;
+    background-color: #ffffff85;
+    font-size: 40px;
+    font-weight: normal !important;
+}
+
+ :host ::ng-deep .container-reg200 {
+    width: 98%;
+    height: auto !important;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-size: cover !important; */
+    /* background-repeat: no-repeat !important;*/
+  }
+
+  .lxplogo{
+    text-align: center;
+    margin-left: 94px;
+    margin-right: 94px;
+    width: 110px;
+  }
+  .head1{
+    text-align: center;
+    font-weight: lighter !important;
+    font-size: 32px;
+  }
+
+  .bgimg{
+    width: 99%;
+    height: 657px;
+  }
+  
