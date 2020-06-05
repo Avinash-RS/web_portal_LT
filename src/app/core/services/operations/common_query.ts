@@ -72,6 +72,10 @@ export const viewcourse = gql`
         user_role
         user_id
         user_name
+        topicData{
+          topicname
+          topictime
+          } 
         people_also_viewed{
           course_id
           course_description
@@ -514,7 +518,7 @@ export const getCoursesByName = gql`
       }
   `;
 
-  export const get_all_course_by_usergroup = gql`
+export const get_all_course_by_usergroup = gql`
   query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
@@ -602,5 +606,5 @@ export const getCoursesByName = gql`
     }
     }
     }`;
- 
+
 
