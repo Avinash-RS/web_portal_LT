@@ -128,7 +128,7 @@ export class AdminCoursesComponent implements OnInit {
     if (this.type === 'created') {
       this.loader = true;
       this.service.getAllDrafted(this.adminDetails.user_id, event - 1).subscribe((res: any) => {
-        if (res.data && res.data.get_draft_course) {
+        if (res.data && res.data.get_course_createdby_admin) {
           // this.courseList.push(...res.data.get_draft_course.message);
           this.courseList = res.data.get_course_createdby_admin.message;
           this.goto = 'create';
