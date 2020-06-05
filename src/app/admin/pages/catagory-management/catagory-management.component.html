@@ -81,21 +81,21 @@
               {{selectedCategory?.category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
                 *ngIf="selectedCategory?.category_description != undefined"
-                matTooltip="{{selectedCategory?.category_description || 'Category Description'}}">info_outline</span>
+                matTooltip="{{selectedCategory?.category_description || 'Category description'}}">info_outline</span>
             </span>
             <span class="f_size_16 f_wt_500 m-l-5 color_grey"
               *ngIf="selectedCategory?.category_name != undefined && 
             selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name == undefined">
               {{selectedSubCategory?.sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedSubCategory ?.sub_category_description || 'Sub Category Description'}}">info_outline</span>
+                matTooltip="{{selectedSubCategory ?.sub_category_description || 'Sub category description'}}">info_outline</span>
             </span>
             <span class="f_size_16 f_wt_500 m-l-5 color_grey"
               *ngIf="selectedCategory?.category_name != undefined && 
             selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name != undefined">
               {{selectedSuperSubCategory?.super_sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub Category Description'}}">info_outline</span>
+                matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub category description'}}">info_outline</span>
             </span>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
@@ -230,7 +230,7 @@
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="courses = [];selectedArray = [];getcourses('category')">View
-                  Courses</button>
+                  courses</button>
               </div>
             </div>
             <br>
@@ -418,7 +418,7 @@
       </div>
       <hr>
       <mat-label>
-        Choose Category
+        Choose category
       </mat-label>
       <form [formGroup]="selectCategoryForm" class="m-t-20">
         <div class="row">
