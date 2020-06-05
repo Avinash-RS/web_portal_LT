@@ -508,8 +508,8 @@ display: flex;
 
 .previewAndTime.active{
     display: flex;
-    justify-content: space-between;
-    width: 80%;
+    // justify-content: space-between;
+    // width: 80%;
 }
 .matcardTime{
     height: 1px;
@@ -520,6 +520,7 @@ display: flex;
     display: flex;
     align-items: center;
     padding-left: 8%;
+    width: 18%;
 }
 .dspFlx{
     display: flex;
@@ -787,7 +788,7 @@ background-color: $color-blue!important;
 }
 
 .vidCol1{
-    margin-left: -78%;
+    margin-left: -33%;
 }
 
 .starRating{
@@ -849,4 +850,13 @@ background-color: $color-blue!important;
     .mLeft19{
         margin-left: 4% !important;
     }
+}
+
+.ml48{
+    margin-left: 48% !important;
+}
+
+.feedbacBtn{
+    float: left;
+    margin-left: 28% !important;
 }
