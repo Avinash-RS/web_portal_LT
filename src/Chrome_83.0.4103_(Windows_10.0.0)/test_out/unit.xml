@@ -1,23 +1,53 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-03T15:57:34" id="0" hostname="DESKTOP-HTI0BOT" tests="6" errors="1" failures="0" time="2.769">
+<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-04T11:32:57" id="0" hostname="DESKTOP-729A26A" tests="1" errors="1" failures="1" time="0.941">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"/>
   </properties>
-  <testcase name="LoginComponent should create and identify components" time="0.832" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent form invalid when empty" time="0.513" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent should click remember me change value" time="0.446" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent username field validity" time="0.33" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent password field validity" time="0.257" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
-  <testcase name="LoginComponent submitting a form emits a user while remeber me is true" time="0.391" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="CatagoryManagementComponent should create" time="0.941" classname="Chrome_83_0_4103_(Windows_10_0_0).CatagoryManagementComponent">
+    <failure type="">Property binding matTreeNodeDefWhen not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+          &lt;/mat-tree-node&gt;&#xD;
+          &lt;!-- node with children --&gt;&#xD;
+          [ERROR -&gt;]&lt;mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild"&gt;&#xD;
+            &lt;li class="mat-tree-no"): ng:///DynamicTestModule/CatagoryManagementComponent.html@35:10
+Error: Template parse errors:
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2430:1)
+    at TemplateParser.push../node_modules/@angular/compiler/fesm5/compiler.js.TemplateParser.parse (node_modules/@angular/compiler/fesm5/compiler.js:20605:1)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._parseTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26171:1)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26158:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26101:48
+    at Set.forEach (&lt;anonymous&gt;)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileComponents (node_modules/@angular/compiler/fesm5/compiler.js:26101:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26019:1
+    at Object.then (node_modules/@angular/compiler/fesm5/compiler.js:2421:33)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:26017:1)
+</failure>
+    <failure type="">Error: Template parse errors:
+Property binding matTreeNodeDefWhen not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+          &lt;/mat-tree-node&gt;&#xD;
+          &lt;!-- node with children --&gt;&#xD;
+          [ERROR -&gt;]&lt;mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild"&gt;&#xD;
+            &lt;li class="mat-tree-no"): ng:///DynamicTestModule/CatagoryManagementComponent.html@35:10
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2430:1)
+    at TemplateParser.push../node_modules/@angular/compiler/fesm5/compiler.js.TemplateParser.parse (node_modules/@angular/compiler/fesm5/compiler.js:20605:1)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._parseTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26171:1)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26158:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26101:48
+    at Set.forEach (&lt;anonymous&gt;)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileComponents (node_modules/@angular/compiler/fesm5/compiler.js:26101:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26019:1
+    at Object.then (node_modules/@angular/compiler/fesm5/compiler.js:2421:33)
+    at JitCompiler.push../node_modules/@angular/compiler/fesm5/compiler.js.JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:26017:1)
+</failure>
+    <failure type="">Expected undefined to be truthy.
+    at UserContext.&lt;anonymous&gt; (src/app/admin/pages/catagory-management/catagory-management.component.spec.ts:70:23)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:391:1)
+    at ProxyZoneSpec.push../node_modules/zone.js/dist/zone-testing.js.ProxyZoneSpec.onInvoke (node_modules/zone.js/dist/zone-testing.js:289:1)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:390:1)
+</failure>
+  </testcase>
   <system-out>
     <![CDATA[Chrome 83.0.4103 (Windows 10.0.0) ERROR
-  DisconnectedClient disconnected from CONNECTED state (ping timeout)
-,Chrome 83.0.4103 (Windows 10.0.0) LOG: Object{data: Object{login: Object{success: ..., error_msg: ..., message: ..., __typename: ...}}}
-,Chrome 83.0.4103 (Windows 10.0.0) ERROR
-  {
-    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
-    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
-  }
+  DisconnectedClient disconnected from CONNECTED state (transport close)
 
 ]]>
   </system-out>

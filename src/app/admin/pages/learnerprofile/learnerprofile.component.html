@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                   <div class="form-group  m-0">
-                    <label class=" common-label1">User Name : </label>
+                    <label class=" common-label1">User name : </label>
                     <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6"> -->
                     {{profiledetail?.user_dtl?.username}}
                     <!-- </mat-form-field> -->
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                   <div class="form-group m-0">
-                    <label class=" common-label1">Languages Known : </label>
+                    <label class=" common-label1">Languages known : </label>
                     {{profiledetail?.language_detail[0]?.languagename}}
                   </div>
                 </div>
@@ -106,7 +106,7 @@
                             <th>Institute</th>
                             <th>Level</th>
                             <th>Specification</th>
-                            <th>Year of Passing</th>
+                            <th>Year of passing</th>
                             <th>Percentage</th>
                           </tr>
                           <tr *ngFor="let qual of profiledetail?.qualification">
@@ -140,7 +140,7 @@
             <mat-table style="margin-left:2%" #table [dataSource]="dataSource">
               <ng-container matColumnDef="sno">
                 <mat-header-cell *matHeaderCellDef>
-                  S.No
+                  S.no
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row;let i = index">
                   <!-- <span class="mobile-label">S.No</span> -->
@@ -171,7 +171,7 @@
             <mat-table #table style="margin-left:2%" [dataSource]="dataSource1">
               <ng-container matColumnDef="sno">
                 <mat-header-cell *matHeaderCellDef>
-                  S.No
+                  S.no
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row;let i = index">
                   <!-- <span class="mobile-label">S.No</span> -->
