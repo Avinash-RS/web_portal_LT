@@ -212,7 +212,8 @@ li{
     overflow: hidden;
   }
 
-  ::ng-deep .star {
+  
+  :host ::ng-deep .star {
     cursor: pointer;
     color: $color-border !important;
     font-size: 35px !important;
@@ -220,7 +221,7 @@ li{
     display: inline-block;
 }
 
-::ng-deep .star.on {
+:host ::ng-deep .star.on {
     color: $color-yellow !important;
     padding-left: 25px !important;
 }
