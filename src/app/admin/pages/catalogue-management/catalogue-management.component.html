@@ -190,6 +190,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <br>
       <p class="center_align f_size_15" *ngIf="!loadingCatalogue && ELEMENT_DATA.length == 0">
         No catalogue details found
       </p>
@@ -258,8 +259,8 @@
         </div>
       </div>
       <div class="col-lg-7 col-md-7 col-sm-6 col-6 float_right">
-        <app-search></app-search>
-        search code goes here
+        <!-- <app-search></app-search>
+        search code goes here -->
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 col-12 p-r-0 m-b-10 float_right">
         <h4 *ngIf="courseList && courseList.length > 0">Select all
