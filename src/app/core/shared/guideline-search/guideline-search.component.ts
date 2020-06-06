@@ -24,6 +24,7 @@ export class GuidelineSearchComponent implements OnInit {
   @Input('level3selectedID') level3selectedID: any = [];
   @Input('allLvlCategoryFilterVal') allLvlCategoryFilterVal: any = [];
   @Input('allLvlCategory') allLvlCategory: any = [];
+  @Input('viewallcourse') viewallcourse : Boolean;
   TodateOptions: { 
     dateFormat: string; disableSince: { year: number; month: number; day: number; };
     editableDateField: false };

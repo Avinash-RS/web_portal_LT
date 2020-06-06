@@ -44,6 +44,44 @@ export class CreateCourseComponent implements OnInit {
     authorLengthArray = [];
     courseLengthArray = [];
     TakeAwayLengthArray = [];
+    config: AngularEditorConfig = {
+        editable: true,
+        spellcheck: true,
+        maxHeight: 'auto',
+        width: 'auto',
+        minWidth: '0',
+        translate: 'yes',
+        enableToolbar: true,
+        showToolbar: true,
+        placeholder: 'Enter text here...',
+        defaultParagraphSeparator: '',
+        defaultFontName: '',
+        defaultFontSize: '',
+        height: '15rem',
+        minHeight: '5rem',
+        fonts: [
+            { class: 'arial', name: 'Arial' },
+            { class: 'times-new-roman', name: 'Times New Roman' },
+            { class: 'calibri', name: 'Calibri' },
+            { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+        ],
+        customClasses: [
+            {
+              name: 'quote',
+              class: 'quote',
+            },
+            {
+              name: 'redText',
+              class: 'redText'
+            },
+            {
+              name: 'titleText',
+              class: 'titleText',
+              tag: 'h1',
+            },
+          ]
+        // defaultTextAlign: 'left'
+    };
 
     createItem(): FormGroup {
         this.preview2.push(null);
@@ -497,4 +535,5 @@ export class CreateCourseComponent implements OnInit {
             this.courseForm.patchValue({ preview_video: res.url });
         });
     }
+
 }
