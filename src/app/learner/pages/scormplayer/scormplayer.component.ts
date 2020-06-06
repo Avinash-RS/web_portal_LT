@@ -85,7 +85,7 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       if (data.data['getmoduleData']['success'] === 'true') {
         this.content = data.data['getmoduleData']['data'][0];
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id);
         //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
         this.modulength = this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
