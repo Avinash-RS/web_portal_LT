@@ -1,0 +1,484 @@
+@import "variable";
+:host::ng-deep .mat-tab-group {
+     display: block !important;
+    flex-direction: column;
+    overflow: hidden  !important
+}
+
+:host::ng-deep .mat-tab-body-content {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+:host::ng-deep .mat-typography h3 {
+    margin: 0 0 5px !important;
+}
+
+.smallbox{
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 5%;
+    height: 170px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc7d;
+    width: 85%;
+    color: $color-darkGrey ;
+    border-radius: 10px;
+    background-color: $color-white;
+    
+}
+
+.smallbox:hover{
+-webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+  
+}
+
+.medbox{
+    margin-left: 7%;
+    margin-top: 5%;
+    height: 160px;
+    margin-bottom: 10px;
+    width: 85%;
+    border: 1px solid #cccccc7d;
+    color: $color-darkGrey ;
+    border-radius: 10px;
+    background-color: $color-white;
+}
+.medbox:hover{
+  -webkit-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+    box-shadow: 3px 3px 24px 13px rgba(0, 0, 0, 0.09);
+}
+.arrow5{
+  margin-left: 58% !important;
+  font-size: 18px;
+  margin-top: 2px
+}
+
+h2{
+    padding-left: 20px;
+    padding-top: 18px;
+    font-size: 22px;
+    padding-bottom: 5px;
+}
+
+h3{
+    padding-left: 27px;
+    padding-top: 14px;
+    font-size: 14px;
+}
+
+@media (min-width: 300px)  {
+    .col-md-9{
+        padding: 0px !important;
+        width: 78%;
+        position: relative;
+    }
+}
+
+.count{
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 27px;
+    color:$color-blank;
+}
+
+@media (min-width: 768px){
+    .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 20% !important;
+    }
+}
+
+@media (min-width: 300px){
+    .col-md-4 {
+        position: relative;
+        width: 30% !important;
+    }
+}
+
+@media (min-width: 300px){
+    .col-md-8 {
+        position: relative;
+        width: 76% !important;
+    }
+}
+
+// @media screen and (min-width:765px) {
+//   /deep/ .mat-tab-body-content {
+//     width: 100% !important;
+//     overflow: hidden !important;
+//   }
+// }
+
+.text{
+    font-size: 12px;
+    color:$color-border;
+    margin-left: 10px;
+}
+
+.trendicon{
+    margin-left: 28%;
+}
+.trendiconcourse{
+    margin-left: 16%;
+}
+.trendno{
+    // margin-left: 3px;
+    color: $trend;
+}
+
+.trendnodown{
+  color:$color-red;
+  margin-left: 1px;
+    font-size: 12px;
+}
+
+
+  .icon{
+    background: $newRegistericon;
+    max-width: 42px;
+    max-height: 40px;
+    margin-top: 9px;
+    border-radius: 11px;
+    margin-left: 9px;
+  }
+  .margintop{
+      margin-top: 25%;
+  }
+  .nL3Size{
+    width: 34px !important;
+    height: 36px !important;
+    margin-left: -3px !important;
+
+  }
+  .tabbutton{
+    height: 36px;
+    background: $light-grey;
+    border: none;
+    margin-left: 13px;
+    border-radius: 3px;
+    box-shadow: 0px 7px 5px 2px #0b0b0b17;
+  }
+  .fullScreen{
+    margin-left: 57%;
+    margin-top: 10px;
+  }
+  .tabbutton:focus {
+    border-top: 2px solid $newRegistericon;
+    outline: none;
+    box-shadow: none;
+    background-color: $color-light-blue ;
+    color: $color-blank;
+  }
+  .fullScreenbtn{
+    margin-left: -150px;
+    margin-bottom: 2px;
+    margin-right: -7px;
+  }
+
+  .tode2{
+    margin-left: 40%;
+  }
+  .tode3{
+    margin-left: 32%;
+  }
+  table {
+    width: 96%;
+    margin-left: 2%;
+  }
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
+.rounded1{
+  background: #e3e3fe;
+  margin-left: 394px;
+  margin-top: 3px;
+  height: 33px;
+  margin-bottom: 3px;
+}
+  .example-container1 {
+    height: 600px;
+    overflow: auto;
+  }
+  :host ::ng-deep .mat-header-row {
+    background: $bg-color !important;
+    min-height: 40px !important;
+}
+:host::ng-deep tr.mat-footer-row, tr.mat-row {
+  height: 48px;
+  text-align: center !important;
+}
+
+:host::ng-deep th.mat-header-cell {
+  text-align: center !important;
+}
+  .courselistbox{
+    height: 62px !important;
+    border-left: 4px solid $newRegistericon;
+
+  }
+  .margin-to{
+    margin-top: 16%;
+    margin-bottom: 5px;
+  }
+  .top5{
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .fontSize{
+    width: 22px !important;
+    padding-left: 5px !important;
+    margin-left: 2px !important;
+  }
+  .fontSize2{
+    width: 30px !important;
+    padding-left: 0px !important;
+    margin-left: 2px !important;
+  }
+  .md-charticon{
+    margin-top: 7px ;
+    margin-left: -5px ;
+    width: 32px ;
+    margin-bottom: 12px;
+  }
+  .nLSize{
+    width: 25px !important;
+    margin-left: 2px !important; 
+  }
+  .bg-brown{
+      background-color: $bg-dark-brown !important;
+  }
+  .InactiveIcon{
+    margin-top: -7px !important;
+  }
+
+  .newLerner{
+    background: $newLearner !important;
+  }
+  .nL2Size{
+    width: 28px !important;
+    margin-left: 0px !important;
+  }
+  .bg-course-icon{
+    max-width: 47px !important;
+    max-height: 47px !important;
+  }
+
+  .bg-green{
+      background-color: $bg-green;
+  }
+  .bg-yellow{
+      background-color: $bg-brown !important;
+  }
+  .iconImg{
+    margin-left: 1px;
+    padding-top: 11px;
+    width: 26px;
+    padding-left: 3px;
+  }
+  .charticon{
+    margin-top: 7px;
+    width: 26px !important;
+  }
+
+  .containerShadow {
+    padding: 15px;
+    -webkit-box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    -moz-box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.2);
+    margin-top: 20px;
+  }
+
+  .container{
+      width: 97.5%;
+      border-radius: 5px;
+      background-color: $color-white;
+      border: 1px solid $bg-color;
+  }
+  .bg-color{
+      background-color: $bg-color;
+      height: 44px;
+      margin-top: -20px;
+      border-radius: 3px;
+  }
+  .rounded{
+    background: $bg-color;
+  }
+  .margin{
+      margin-top: 7%;
+  }
+  .card{
+    background-color: $light-grey ;
+    border: none;
+  }
+ li {
+    padding: 10px;
+    border: 1px solid $color-white;
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03);
+    margin-left: -51px;
+    width: auto;
+    margin-top: 2px;
+    background-color: $color-white;
+    list-style-type: none;
+
+ }
+
+ .arrow{
+    margin-left: 74%;
+    font-size: 18px;
+    margin-top: 2px;
+ }
+
+  .arrow1{
+    margin-left: 42%;
+    font-size: 18px;
+    margin-top: 2px;
+ }
+ .height{
+     height: 37px !important;
+ }
+ .customButton{
+    width: 100%;
+    margin-top: 20px !important;
+    height: 40px;
+    padding-left: 11px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: inherit;
+    color: #000000;
+    border-radius: 6px;
+    border: 1px solid #cccccc7d;
+    background-color: $light-grey;
+    box-shadow: 0px 1px 4px 3px rgba(9, 9, 9, 0.03) !important;
+ }
+
+ button:focus {
+    border: 1px solid #cccccc7d;
+    outline: none;
+  }
+  :host::ng-deep mat-progress-bar.my-color .mat-progress-bar-fill::after {
+    background-color: $bg-green !important;
+  }
+
+  :host::ng-deep mat-progress-bar.my-color-red .mat-progress-bar-fill::after {
+    background-color: $color-red !important;
+  }
+
+  :host::ng-deep mat-progress-bar.my-color-blue .mat-progress-bar-fill::after {
+    background-color: $newRegistericon !important;
+  }
+
+  :host::ng-deep .mat-progress-bar {
+    height: 10px !important;
+    height: 10px !important;
+    margin-top: 4px !important;
+    width: 179px;
+    margin-left: -35px;
+}
+:host::ng-deep .mat-progress-bar-buffer {
+    background-color: $color-white !important;
+}
+
+
+
+
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $light-grey;
+    overflow-y: hidden;
+    transition: 0.5s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 75%;
+    text-align: center;
+  }
+  .enrolldoughnut{
+    margin-top: -35px;
+  }
+  .arrow3{
+    margin-left: 46%;
+    font-size: 18px;
+    margin-top: 2px;
+  }
+
+  li:hover {
+    background: #d4e0fb;
+    // background-image:url('../../../../assets/learner/Expand.svg') ;
+}
+
+  .todo{
+    margin-left: 57%;
+  }
+  .tode1{
+    margin-left: 35%;
+
+  }
+.top5box{
+  margin-top: 20px !important;
+}
+  .student{
+    border: 2px solid $studentChart !important;
+  }
+  .professional{
+    border: 2px solid $professionalChart !important;
+  }
+
+  .activeLearner{
+    border: 2px solid $activelearnerchart;
+    width: 18px;
+    height: 0px;
+    margin-right: 10px;
+    margin-top: 9px;
+  }
+  .InactiveLearner{
+    border: 2px solid $inactivelearnerchart;
+    width: 18px;
+    height: 0px;
+    margin-left: 10px;
+    margin-right: 12px;
+    margin-top: 9px;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #818181;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay {overflow-y: auto;}
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }

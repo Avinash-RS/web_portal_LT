@@ -1,7 +1,8 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Admin/auth/Wca">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Course</li>
+    <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+    <li *ngIf="detail?.type1" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{course?.course_name}}</li>
   </ol>
 </nav>
@@ -16,9 +17,12 @@
   <div class="wrap-reg"><br>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-12">
-        <button class="outlinebtn" (click)="editModules()">Edit modules</button>
-        <button class="fillsmallbtn" (click)="previewcourse(previewDialog)">Preview course</button>
-        <button class="fillgreenbtn" *ngIf="isshowPublish" (click)="published()">Publish</button>
+        <button class="fillsmallbtn" (click)="editModules()">Edit modules</button>
+        <button class="fillsmallbtn" [class.disabled]="modulength == 0" [disabled]="modulength == 0"  (click)="previewcourse(previewDialog)">Preview course</button>
+        <span *ngIf="isshowPublish">
+          <button [class.disabled]="modulength == 0" class="fillsmallbtn disabled" [disabled]= "modulength == 0"  (click)="published()">Publish</button>
+        </span>
+       
       </div>
     </div>
     <div class="row">
@@ -38,11 +42,15 @@
           <div class="grid-item fadetext">Course ID</div>
           <div class="grid-item">: {{course?.course_id}}</div>
           <div class="grid-item fadetext">Version number</div>
-          <div class="grid-item">: {{course?.version}}</div>
-          <div class="grid-item fadetext">Published on</div>
-          <div class="grid-item">: {{course?.published_on | date }}</div>
-          <div class="grid-item fadetext">Published by</div>
-          <div class="grid-item">: {{course?.published_by}}</div>
+          <div class="grid-item">: {{courseType != 'publish' ? 'NA'  : course?.version}}</div>
+          <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created on</div>
+          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_at | date}}</div>
+          <div class="grid-item fadetext" *ngIf="courseType != 'publish'">Created by</div>
+          <div class="grid-item" *ngIf="courseType != 'publish'">: {{course?.created_by == 'admin' ? 'Admin' : course?.created_by }}</div>
+          <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published on</div>
+          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_on | date }}</div>
+          <div class="grid-item fadetext" *ngIf="courseType === 'publish'">Published by</div>
+          <div class="grid-item" *ngIf="courseType === 'publish'">: {{course?.published_by == 'admin' ? 'Admin' : course?.published_by }}</div>
         </div>
 
         <div class="row cls" *ngIf="isshowPublish">
@@ -77,13 +85,20 @@
         </div>
 
         <div class="enroll">
-          <div class="grid-item ">
+          <div class="grid-item " (click)="previewideo()">
             <i class="fa fa-play course_preview_icon pointer" aria-hidden="true"></i>
+          </div>
+
+          <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+            <div class="overlay-content" *ngIf="course">
+              <app-video-player [url]="course"></app-video-player>
+              </div>
           </div>
 
           <div class="grid-item ">
             <div class="course_preview">
-              <h2>Course <br> Preview</h2>
+              <h2>Course <br> Nuggets</h2>
             </div>
           </div>
 
@@ -109,7 +124,7 @@
         <h3><b>Course Instructor</b></h3>
       </div>
       <div class="col-md-4 col-sm-12 col-12">
-        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}} , </span>
+        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}}  </span>
       </div>
     </div>
     <div class="row">
@@ -164,7 +179,7 @@
 
     <div class="row">
       <div class="col-md-12 col-sm-12 col-12">
-        <h3>{{course?.step_towards}}</h3>
+        <h3>{{course?.takeway_details[0].description}}</h3>
       </div>
     </div><br>
     <div class="line"></div>
@@ -181,9 +196,9 @@
             <img class="image" [src]="author.image ? author.image : '../../../../assets/learner/avatar2.png'">
           </div>
           <div class="col-md-8 ">
-            <div class="cardhead"><b>{{author.author_name}}</b></div><br>
+            <div class="cardhead"><b>{{author?.author_name}}</b></div><br>
             <div style="margin-left: 5%;">
-              <p style="word-break: normal;">{{author.description}}</p>
+              <p style="word-break: normal;">{{author?.description}}</p>
             </div>
           </div>
         </div>
@@ -200,9 +215,9 @@
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
         <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-            <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+            <b style="text-align: right;" > {{countofdoc}} Documents</b></i> </label>
       </h2>
-      <div class="content">
+      <div class="content" >
         <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
           <div class="col-8"><br>
             <ol class="submod">
@@ -210,13 +225,13 @@
             </ol>
           </div>
 
-          <div class="col-4">
-            <mat-form-field style="text-align: right;margin-top: 5%;">
-              <mat-label>Resourse</mat-label>
+          <div class="col-4" >
+            <mat-form-field style="text-align: right;margin-top: 5%;" *ngIf="mod.resourse?.files.length > 0">
+              <mat-label>Resources</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
-                  <a href="{{file.path}}" download>{{file.path}}</a>
+                  <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                 </mat-option>
                 <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                   <button class="btn">Download all</button>
@@ -233,7 +248,7 @@
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
           <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-              <b style="text-align: right;"> {{res?.moduledetails?.length}} Documents</b></i> </label>
+              <b style="text-align: right;"> {{countofdoc}} Documents</b></i> </label>
         </h2>
         <div class="content">
           <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
@@ -249,9 +264,9 @@
                 <mat-icon matPrefix>folder</mat-icon>
                 <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">
-                    <a href="{{file.path}}" download>{{file.path}}</a>
+                    <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
                   </mat-option>
-                  <mat-option style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
+                  <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                     <button class="btn">Download all</button>
                   </mat-option>
                 </mat-select>

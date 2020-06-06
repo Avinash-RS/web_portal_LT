@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-module.component.scss']
 })
 export class CreateModuleComponent implements OnInit {
-
+  breakpoint:any;
   constructor() { }
 
   ngOnInit() {

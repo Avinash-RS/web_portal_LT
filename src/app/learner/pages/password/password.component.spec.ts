@@ -54,15 +54,15 @@ describe('PasswordComponent', () => {
         expect(errors['required']).toBeTruthy();
   });
 
-  it('check password and confirm password is match'),() =>{
+  it('check password and confirm password is match',() =>{
     let password = component.passwordForm.controls['password'];
-    let conpassword =  component.passwordForm.controls['confirmpassword']
+    let conpassword =  component.passwordForm.controls['confirmpassword'];
     if(password == conpassword){
       expect(password.valid).toBeTruthy();
     }else{
       expect(password.invalid).toBeFalsy();
     }
-  }
+  });
 
 
   it('submitting a form emits a user', () => {

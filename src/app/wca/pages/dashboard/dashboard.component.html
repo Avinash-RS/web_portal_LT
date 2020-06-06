@@ -1,13 +1,12 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-
-        <li class="breadcrumb-item active" aria-current="page">My Courses</li>
+        <li class="breadcrumb-item" [routerLink]="['/Admin/auth/userManagement']">Home</li>
+        <li class="breadcrumb-item active" aria-current="page">My courses</li>
     </ol>
 </nav>
 
 <div>
-    <button class="backgroundcol2" (click)="createCourseNav()">Create a Course</button>
+    <button class="backgroundcol2" (click)="createCourseNav()">Create a course</button>
 </div>
 
 
@@ -15,7 +14,102 @@
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
 </div>
 
-<!-- <div class="container">
+ <div class="container wrap-body">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Published courses ({{publishedCourseLength || 0}} Courses)</h2>
+        </div>
+        <div class="col-md-6 float_right">
+            <mat-label (click)="goToViewCourse('published')">View all</mat-label>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                <owl-carousel-o [options]="trendingCategorires"  [ngClass] = "publishedCourseLength <= 4 ? 'widthClass arrow' : 'arrow'">
+                    <ng-template carouselSlide *ngFor="let course of publishedCourses">
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
+                            [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
+                            [showRating]="true" [goto]="'publish'"> </app-course-component>
+                    </ng-template>
+                </owl-carousel-o>
+                <h2 *ngIf="publishedCourses && publishedCourses.length == 0">
+                    No courses yet
+                </h2>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div class="container wrap-body">
+    <div class="row">
+        <div class="col-md-6">
+            <h2> Courses created by me <span>(Yet to be published) </span>({{createdCourseLength || 0}} courses)</h2>
+        </div>
+        <div class="col-md-6 float_right">
+            <mat-label (click)="goToViewCourse('created')">View all</mat-label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                <owl-carousel-o [options]="trendingCategorires" [ngClass] = "createdCourseLength <= 4 ? 'widthClass arrow' : 'arrow'">
+                    <ng-template carouselSlide *ngFor="let course of createdCourses">
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false" [btnType]="'Publish'"
+                            [showWishlist]="false" [showStatus]="false" [showDate]="false" [showCount]="false"
+                            [showRating]="false" [goto]="'create'" [showEnroll] = "true">
+                        </app-course-component>
+                    </ng-template>
+                </owl-carousel-o>
+                <h2 *ngIf="createdCourses && createdCourses.length == 0">
+                    No courses yet
+                </h2>
+            </mat-card>
+
+        </div>
+    </div>
+</div>
+
+<div class="container wrap-body">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Draft <span>(Work in progress)</span> ({{ draftCourseLength || 0}} Courses)</h2>
+        </div>
+        <div class="col-md-6 float_right">
+            <mat-label (click)="goToViewCourse('draft')">View all</mat-label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                <owl-carousel-o [options]="trendingCategorires" [ngClass] = "draftCourseLength <= 4 ? 'widthClass arrow' : 'arrow'">
+                    <ng-template carouselSlide *ngFor="let course of draftCourses">
+                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
+                            [showWishlist]="false" [showStatus]="false" [showDate]="false" [isDraft]="true"
+                            [showCount]="false" [showRating]="false">
+                        </app-course-component>
+                    </ng-template>
+                </owl-carousel-o>
+                <h2 *ngIf="draftCourses && draftCourses.length == 0">
+                    No courses yet
+                </h2>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div class="container wrap-body">
+    <br>
+</div> 
+
+
+
+<!-- 
+ <div class="container">
     <div class="row">
         <div class="col-md-12">
             <mat-accordion>
@@ -139,98 +233,3 @@
         </div>
     </div>
 </div> -->
-
-
-<div class="container wrap-body">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Published Courses ({{publishedCourseLength || 0}} Courses)</h2>
-        </div>
-        <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('published')">View All</mat-label>
-        </div>
-    </div>
-
-    
-    <div class="row">
-        <div class="col-md-12">
-            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                <owl-carousel-o [options]="trendingCategorires" class="arrow">
-                    <ng-template carouselSlide *ngFor="let course of publishedCourses">
-                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="true"
-                            [showWishlist]="false" [showStatus]="false" [showDate]="true" [showCount]="true"
-                            [showRating]="true" [goto]="'publish'"> </app-course-component>
-                    </ng-template>
-                </owl-carousel-o>
-                <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
-                    No courses yet
-                </h2>
-            </mat-card>
-
-        </div>
-    </div>
-</div>
-
-<div class="container wrap-body">
-    <div class="row">
-        <div class="col-md-6">
-            <h2> Courses created by me <span>(Yet to be published) </span>({{createdCourseLength || 0}} courses)</h2>
-        </div>
-        <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('created')">View All</mat-label>
-        </div>
-    </div>
-  
-    <div class="row">
-        <div class="col-md-12">
-            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                <owl-carousel-o [options]="trendingCategorires" class="arrow">
-                    <ng-template carouselSlide *ngFor="let course of createdCourses">
-                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                            [showWishlist]="false" [showStatus]="false" [showDate]="false" [showCount]="false"
-                            [showRating]="false" [goto]="'create'">
-                        </app-course-component>
-                    </ng-template>
-                </owl-carousel-o>
-                <h2 *ngIf="createdCourses && createdCourses.length == 0">
-                    No courses yet
-                </h2>
-            </mat-card>
-
-        </div>
-    </div>
-</div>
-
-<div class="container wrap-body">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Draft <span>(Work in progress)</span> ({{ draftCourseLength || 0}} Courses)</h2>
-        </div>
-        <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('draft')">View All</mat-label>
-        </div>
-    </div>
-  
-    <div class="row">
-        <div class="col-md-12">
-            <mat-card style="text-align: center;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                <owl-carousel-o [options]="trendingCategorires" class="arrow">
-                    <ng-template carouselSlide *ngFor="let course of draftCourses">
-                        <app-course-component [course]="course" [canNavigate]="true" [showPrice]="false"
-                            [showWishlist]="false" [showStatus]="false" [showDate]="false" [isDraft]="true"
-                            [showCount]="false" [showRating]="false">
-                        </app-course-component>
-                    </ng-template>
-                </owl-carousel-o>
-                <h2 *ngIf="draftCourses && draftCourses.length == 0">
-                    No courses yet
-                </h2>
-            </mat-card>
-
-        </div>
-    </div>
-</div>
-
-<div class="container wrap-body">
-    <br>
-</div>

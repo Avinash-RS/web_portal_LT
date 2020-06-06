@@ -15,6 +15,7 @@ export class ViewModuleComponent implements OnInit {
   scormPath = '';
   @ViewChild('file') fileUploaded;
   userDetails: any;
+  breakpoint: any;
   constructor(
     private router: Router,
     public route: ActivatedRoute,

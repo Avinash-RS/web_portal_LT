@@ -11,7 +11,7 @@ export class TopCoursesComponent implements OnInit {
   breakpoint: number;
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;
-  @Input('showWishlist') showWishlist: boolean; 
+  @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
   @Input('CourseList') CourseList: any = [];
@@ -52,7 +52,6 @@ export class TopCoursesComponent implements OnInit {
     //   { text: 'Completed', cols: 65671, rows: 1567, rating : 1, img : "../../../../assets/learner/4.jpg"},
     // ];
 
-console.log(this.CourseList)
 
     if (window.innerWidth <= 480)
       this.breakpoint = 1;

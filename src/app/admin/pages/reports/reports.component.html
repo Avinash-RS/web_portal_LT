@@ -1,0 +1,97 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/Admin/auth/userManagement']">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Reports</li>
+  </ol>
+</nav>
+<h1 style="padding-left: 25px;"> Reports</h1>
+<br>
+<hr style="border: 1px solid #ccc;margin:1px !important; ">
+<div class="example-container">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="slNo">
+      <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index">
+        <span class="desktop-data"> {{i+1}}</span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="report_id">
+      <mat-header-cell *matHeaderCellDef> Report id </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="desktop-data">  {{element.report_id }}</span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="total_count">
+      <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Total count</span> -->
+        <span class="desktop-data"> {{element.total_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.username}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="success_count">
+      <mat-header-cell *matHeaderCellDef>Success</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Email ID</span> -->
+        <span class="desktop-data"> {{element.success_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duplicate_count">
+      <mat-header-cell *matHeaderCellDef>Duplicate</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Mobile No</span> -->
+        <span class="desktop-data"> {{element.duplicate_count || 0}}</span>
+        <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="existing_count">
+      <mat-header-cell *matHeaderCellDef> Existing</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Total count</span> -->
+        <span class="desktop-data"> {{element.existing_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.username}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_count">
+      <mat-header-cell *matHeaderCellDef> Updated</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Email ID</span> -->
+        <span class="desktop-data"> {{element.updated_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time_ago">
+      <mat-header-cell *matHeaderCellDef> Created</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Email ID</span> -->
+        <span class="desktop-data"> {{element.time_ago }}</span>
+        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+ 
+    <ng-container matColumnDef="failure_count">
+      <mat-header-cell *matHeaderCellDef>Failure</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- <span class="mobile-label">Email ID</span> -->
+        <span class="desktop-data"> {{element.failure_count || 0}}</span>
+        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="link">
+      <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="centre">
+        <!-- <span class="mobile-label">Mobile No</span> -->
+        <span class="desktop-data" (click)="downloadDoc(element.report_url)">   <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon></span>
+        <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+  </mat-table>
+</div>

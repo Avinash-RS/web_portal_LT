@@ -1,77 +1,81 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item active" aria-current="page">View Users</li>
-  </ol>
-</nav>
-<div class="container">
-  <h1>User Management</h1>
+<div style="overflow: hidden;">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">View users</li>
+    </ol>
+  </nav>
 
+  <div class="row no_margin">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+      <h1 style="padding-left: 25px;">User management</h1>
+    </div>
+    <div class="col-lg-7 col-md-6 col-sm-12 col-12 float_right">
+      <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)"
+        aria-label="Search">
+    </div>
+
+    <div class="col-lg-1 col-md-2 col-sm-12 col-12 float_right">
+      <button mat-button (click)="gotoAddUser()" class="float_right" [routerLink]="['/Admin/auth/addUser']">
+        <mat-icon style="color: white;">add</mat-icon>Add user
+      </button>
+    </div>
+  </div>
   <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
   </div>
 
-  <div class="p-5px">
-    <mat-label>Search</mat-label><br>
-    <mat-form-field class="search">
-      <input matInput (keyup)="applyFilter($event.target.value)">
-    </mat-form-field>
-
-    <button mat-button (click)="gotoAddUser()" class="float_right" href="/Admin/auth/addUser">
-      <mat-icon>add</mat-icon>Add User
-    </button>
-
-    <div class="example-container mat-elevation-z8">
+  <hr style="border: 1px solid #ccc;margin:0 !important; ">
+  <div>
+    <div class="example-container">
       <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
-            <!-- <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-          </mat-checkbox> -->
-            Select
+            <!-- Select -->
           </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <span class="mobile-label">Select</span>
+            <span class="mobile-label">
+              <!-- Select -->
+            </span>
             <mat-checkbox (change)="checkboxLabel(row)">
             </mat-checkbox>
           </mat-cell>
-          <!-- <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-          </mat-checkbox>
-        </td> -->
         </ng-container>
 
         <ng-container matColumnDef="user_id">
-          <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
+          <mat-cell>
+            sdiuio
+          </mat-cell>
+
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User ID</span>
+            <span class="mobile-label">User id</span>
             <span class="desktop-data"> {{element.user_id}}</span>
             <span class="mobile-data"> {{element.user_id}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">User Name</span>
+            <span class="mobile-label">User name</span>
             <span class="desktop-data"> {{element.username}}</span>
             <span class="mobile-data"> {{element.username}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email ID </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Email id </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Email ID</span>
+            <span class="mobile-label">Email id</span>
             <span class="desktop-data"> {{element.email || 'NA'}}</span>
             <span class="mobile-data"> {{element.email || 'NA'}}</span>
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="mobile">
-          <mat-header-cell *matHeaderCellDef> Mobile No </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile No</span>
+          <mat-header-cell *matHeaderCellDef> Mobile no </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile no</span>
             <span class="desktop-data"> {{element.mobile_number || 'NA'}}</span>
             <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span>
           </mat-cell>
@@ -83,9 +87,10 @@
             [ngClass]="element.is_blocked ? 'red f_wt_500' : element.is_active ? 'green f_wt_500' : 'black f_wt_500'">
             <span class="mobile-label">Status</span>
             <span class="desktop-data">
-              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span>
+              <!-- {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span> -->
+              {{ element.is_active ? 'Active' : 'Inactive'}}</span>
             <span class="mobile-data">
-              {{element.is_blocked ? 'Blocked' : element.is_active ? 'Active' : 'Inactive'}}</span></mat-cell>
+              {{ element.is_active ? 'Active' : 'Inactive'}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -97,24 +102,25 @@
             <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0"
               (click)="deActivate('De-activate')">
               De-activate</button>
-            <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
-              Block</button>
+            <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Block')">
+              Block</button> -->
             <!-- <button mat-stroked-button *ngIf="selectedArray && selectedArray.length > 0" (click)="block('Unblock')">
               Un-block</button> -->
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Actions</span>
+
             <button mat-icon-button (click)="viewDetail(element,viewDialog)" data-toggle="tooltip" data-placement="top"
               title="View {{element.username}}'s details">
-              <mat-icon>remove_red_eye</mat-icon>
+              <mat-icon style="color: #ccc;font-size:20px; width:20px;">remove_red_eye</mat-icon>
             </button>
-            <button *ngIf="!element.is_blocked" mat-stroked-button
+            <button *ngIf="!element.is_blocked" mat-stroked-button id="deactivate"
               [disabled]="(selectedArray && selectedArray.length > 0)"
               (click)="deActivate(!element.is_blocked && element.is_active ? 'De-activate' : 'Activate',element)">
               {{element.is_active ? 'De-activate' : 'Activate'}}</button>
-            <button *ngIf="!element.is_blocked" mat-stroked-button
+            <!-- <button *ngIf="!element.is_blocked" mat-stroked-button
               [disabled]="(selectedArray && selectedArray.length > 0)" (click)="block('Block',element)">
-              Block</button>
+              Block</button> -->
           </mat-cell>
         </ng-container>
 
@@ -124,7 +130,7 @@
       </mat-table>
     </div>
 
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="20" (page)="next($event)" showFirstLastButtons>
     </mat-paginator>
     <br><br>
 
@@ -134,9 +140,9 @@
       </span>
 
       <mat-tab-group>
-        <mat-tab label="View Details">
+        <mat-tab label="View details">
           <br>
-          <mat-dialog-content>
+          <mat-dialog-content style="width: 1000px;margin:0">
             <form #profileForm="ngForm">
               <div class="container profile">
                 <div class="row">
@@ -163,17 +169,17 @@
                 <div class="row">
                   <!-- //////userName  +++ full name +++ Phone//////// -->
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Username : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username}}</label></label>
+                    <label>User name : <label
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].username || 'NA'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
-                    <label>Full Name : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name}}
+                    <label>Full name : <label
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].full_name || 'NA'}}
                       </label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Mobile : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].mobile_number || 'NA'}}</label></label>
                   </div>
                 </div>
 
@@ -181,7 +187,7 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Email : <label
-                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email}}</label></label>
+                        class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].email || 'NA'}}</label></label>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>Gender : <label class="color_black capitalize f_wt_400">{{profileDetails.userObjects && profileDetails.userObjects[0].gender == 'M' ? 'Male' : profileDetails.userObjects[0].gender == 'F' ?
@@ -189,7 +195,7 @@
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
                     <label>I'm a : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional}}</label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].is_student_or_professional  || 'NA'}}</label>
                     </label>
                   </div>
                 </div>
@@ -203,14 +209,17 @@
                         {{lang}}
                       </div>
                     </div>
+                    <div *ngIf="profileDetails.language.length == 0" class="color_black">
+                      NA
+                    </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-12">
                     <label>Location : <label class="color_black capitalize f_wt_400">
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name}},
-                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name}} </label></label>
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].state_name || 'NA'}}
+                        {{profileDetails.userObjects && profileDetails.userObjects[0].country_name  
+                       }} </label></label>
                   </div>
-                </div>
-                <br><br>
+                </div><br>
                 <!-- commented till profile structure fix -->
                 <!-- <div class="row" style="overflow-x:auto;">
                   <div class="col-md-12 col-sm-12 col-12">
@@ -239,13 +248,14 @@
               </div>
             </form>
           </mat-dialog-content>
-          <mat-dialog-actions>
-            <!--Button code-->
-          </mat-dialog-actions>
+          <!-- <mat-dialog-actions> -->
+          <!--Button code-->
+          <!-- </mat-dialog-actions> -->
         </mat-tab>
 
-        <mat-tab label="Track Details">
+        <mat-tab label="Track details">
           <br> <br>
+          <mat-dialog-content style="width: 1000px;margin:0">
           <div class="container profile">
             <div class="row">
               <!-- //////userName  +++ full name +++ Phone//////// -->
@@ -254,7 +264,7 @@
                     class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
-                <label>No. of Wishlisted courses : <label
+                <label>No. of wishlisted courses : <label
                     class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
                 </label>
               </div>
@@ -264,16 +274,17 @@
             <div class="row">
               <div class="col-md-6 col-sm-12 col-12">
                 <label>Last login time : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails && trackDetails.last_login[0]  || 'NA'}}
+                    {{trackDetails && trackDetails.last_login[0] | date:short }}
                   </label> </label>
               </div>
               <div class="col-md-6 col-sm-12 col-12">
-                <label>Registered On : <label class="color_black capitalize f_wt_400">
+                <label>Registered on : <label class="color_black capitalize f_wt_400">
                     {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
                   </label> </label>
               </div>
             </div>
           </div>
+          </mat-dialog-content>
         </mat-tab>
       </mat-tab-group>
       <br>

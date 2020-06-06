@@ -45,16 +45,15 @@ export class ResetpasswordComponent implements OnInit {
       if(params["code"]){
         const decryptedString = simpleCrypto.decrypt(params["code"]);
         this.user = decryptedString;
-        console.log(this.user)
         this.get_user_detail_username(this.user)
-      }
+      }  
      else{
-      var userdetails= localStorage.getItem('UserDetails')
-      this.currentUser = JSON.parse(userdetails);
-      this.user = this.currentUser.username;
-     }
-    
+      this.user = localStorage.getItem('Username')
+      this.isLinkActive = true
+     } 
     })
+
+  
 
     this.resetForm = this.formBuilder.group({
       password: new FormControl('', myGlobals.passwordVal),
@@ -102,9 +101,14 @@ validator: MustMatch('password', 'confirmpassword'),
     this.service.resetPassword( this.user,this.resetForm.value.password).subscribe(data => {
       if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
-        
+        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null);
+        localStorage.removeItem('Username');
+        localStorage.removeItem('Details_user');
+        localStorage.removeItem('UserDetails');
+        localStorage.removeItem('role');
+
         this.router.navigate(['/Learner/login']);
+
       } else{
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
@@ -115,7 +119,6 @@ validator: MustMatch('password', 'confirmpassword'),
   get_user_detail_username(name){
     try {
       this.service.get_user_detail_username(name).subscribe((data: any) => {
-        console.log(data)
         this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
           true : false;
       })  

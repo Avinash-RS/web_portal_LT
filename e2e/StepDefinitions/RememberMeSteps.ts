@@ -9,7 +9,7 @@ let rem=new RememberMePage();
 Given(': I am in login page for remember me test', async ()=> {
  browser.waitForAngularEnabled(false);
  await browser.get(browser.params.login.url);
- await browser.manage().window().maximize();
+ //await browser.manage().window().maximize();
  });
 
  When(': Enter usrname and passwd for remember me', async () => {
@@ -26,6 +26,6 @@ Given(': I am in login page for remember me test', async ()=> {
  });
 
 Then(': I am able to directly access my portal if have not logged out of the platform but closed the tab.', async ()=> {
- await browser.get('http://52.171.134.188/Learner/login');
+ await browser.get(browser.params.login.url);
  console.log("User Logged in successfully");
 });

@@ -4,23 +4,35 @@
   </div>
   <nav aria-label="breadcrumb" >
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
+      <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
+      <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
       <li class="breadcrumb-item active" aria-current="page"><a href="/Admin/auth/Wca/previewcourse">Course</a></li>
       <li class="breadcrumb-item active" aria-current="page"> Add Reference file</li>
     </ol>
   </nav>
-  <div class="breadcrump-container">
-    <div class="reference-heading">
-      Add Reference file
-    </div>
-    <div>
 
+  <div class="row">
+    <div class="col-8">
+      <div class="reference-heading">
+        <h1 style="margin-left: 21px;">Add Reference file</h1>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="input-group search">
+        <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
+        <span class="input-group-append bg-white border-left-0">
+          <span class="input-group-text bg-transparent">
+            <i class="fa fa-search searchicon" aria-hidden="true"></i>
+          </span>
+        </span>
+      </div>
     </div>
   </div>
+
   <div class="main-section">
   <div class="row">
     <div class="col-md-3 col-sm-12 col-12">
-     
       <div class="file-selection">
         <mat-card>
           <div class="select">
@@ -52,7 +64,7 @@
             <div class="space-10"></div>
   
             <div class="ref-input" *ngIf="selectedOption == 'document'">
-              <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
+              <input type="text" maxlength="50" id="ref_link" placeholder="Enter document name" [(ngModel)]="referenceName"
                 [ngModelOptions]="{standalone: true}" required>
             </div>
   
@@ -68,8 +80,8 @@
   
             </div>
             <div class="ref-input" *ngIf="selectedOption == 'link'">
-              <input type="text" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
-                [ngModelOptions]="{standalone: true}">
+              <input type="text"  maxlength="50" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
+                [ngModelOptions]="{standalone: true}" required>
               <input type="text" id="ref_link" class="ref-link" [(ngModel)]="referenceLink"
                 [ngModelOptions]="{standalone: true}">
             </div>
@@ -91,21 +103,15 @@
     </div>
 
     <div class="col-md-9 col-sm-12 col-12">
-      <div class="row">
+      
+      <!-- <div class="row">
         <div class="col-md-3 col-sm-12 col-12">
           <h4 style="text-align: start;margin-left: 15px;">Showing {{count > 10 ? 10 : count }} out of {{count}}</h4>
         </div>
         <div class="col-md-9 col-sm-12 col-12">
-          <div class="input-group search">
-            <input class="form-control border-right-0" placeholder="  Search  " (keyup)="applyFilter($event)">
-            <span class="input-group-append bg-white border-left-0">
-              <span class="input-group-text bg-transparent">
-                <i class="fa fa-search searchicon" aria-hidden="true"></i>
-              </span>
-            </span>
-          </div>
+   
         </div>
-      </div>
+      </div> -->
      
 
       <div class="file-list">
@@ -113,19 +119,19 @@
   
           <!-- Position Column -->
           <ng-container matColumnDef="type_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Name </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Document name </th>
             <td mat-cell *matCellDef="let data"> {{data.type_name}} </td>
           </ng-container>
   
           <!-- Name Column -->
           <ng-container matColumnDef="module_id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module name </th>
             <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
           </ng-container>
   
           <!-- Weight Column -->
           <ng-container matColumnDef="topic_id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic name </th>
             <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
           </ng-container>
   
@@ -151,7 +157,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator [length]="count" [pageSize]="9" (page)="next($event)" showFirstLastButtons>
+        <mat-paginator #paginator [length]="count" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
         </mat-paginator>
       </div>
     </div>
@@ -159,12 +165,12 @@
   </div>
 
 
-  <div style="text-align: center; margin-top: 2%;">
+  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;">
     <button mat-flat-button color="primary" class="back-btn" (click)="back()">Back</button>
 
   </div>
   <div>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
   </div>
 
 </div>

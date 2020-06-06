@@ -1,5 +1,6 @@
 Feature: Remember Me Feature
 
+@sprint1
 Scenario: Rememer me Test
 
 Given : I am in login page for remember me test

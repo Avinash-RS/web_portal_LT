@@ -16,6 +16,7 @@ export class ChooseTemplateComponent implements OnInit {
   selectedTemplate: any;
   hoverId: any;
   isHover: boolean;
+  tlist: any;
   public isMobile = false;
 
   constructor(

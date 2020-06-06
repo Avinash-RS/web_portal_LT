@@ -8,8 +8,8 @@ export class SigninAdminPage
 
     constructor()
     {
-        this.Username=element(by.name('username'));
-        this.Password=element(by.name('password'));
+        this.Username=element(by.xpath("//input[@type='text']"));
+        this.Password=element(by.xpath("//input[@type='password']"));
         this.LoginButton=element(by.id('login'));
     }
 }

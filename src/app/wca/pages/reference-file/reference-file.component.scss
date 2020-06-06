@@ -47,10 +47,16 @@
     flex: 0 0 25%;
     max-width: 23%;
 }
-
+ :host ::ng-deep .mat-option-text {
+    display: inline-block;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $color-blank !important;
+}
 .file-selection {
     width: 250px;
-    margin-top: 43px;
+    // margin-top: 43px;
 
     .mat-card:not([class*="mat-elevation-z"]) {
         box-shadow: 0 0 10px rgb(170, 170, 170) !important;
@@ -244,9 +250,10 @@ tr.mat-row {
     background-color: transparent;
   }
 .search{
-    width: 24% !important;
+  width: 70% !important;
     float: right;
     margin-right: 32px;
+    border-radius: 0px !important;
 }
 
 .paperclip{
@@ -262,7 +269,7 @@ tr.mat-row {
     height: 35px !important;
 }
 
-::ng-deep .mat-sort-header-stem {
+:host ::ng-deep .mat-sort-header-stem {
  background: fixed !important; 
     height: 10px;
     color: $color-blank;
