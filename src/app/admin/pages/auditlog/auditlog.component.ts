@@ -187,4 +187,11 @@ export class AuditlogComponent implements OnInit {
   openexportdialog(templateRef) {
     this.dialog.open(templateRef , { disableClose: true });
   }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }
