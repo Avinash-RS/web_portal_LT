@@ -22,7 +22,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="total_count">
-      <mat-header-cell *matHeaderCellDef> Total count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.total_count || 0}}</span>
@@ -31,7 +31,7 @@
     </ng-container>
 
     <ng-container matColumnDef="success_count">
-      <mat-header-cell *matHeaderCellDef> Success count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Success</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.success_count || 0}}</span>
@@ -40,7 +40,7 @@
     </ng-container>
 
     <ng-container matColumnDef="duplicate_count">
-      <mat-header-cell *matHeaderCellDef> Duplicate count </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Duplicate</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data"> {{element.duplicate_count || 0}}</span>
@@ -48,7 +48,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="existing_count">
-      <mat-header-cell *matHeaderCellDef> Existing count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Existing</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.existing_count || 0}}</span>
@@ -57,7 +57,7 @@
     </ng-container>
 
     <ng-container matColumnDef="updated_count">
-      <mat-header-cell *matHeaderCellDef> Updated count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Updated</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.updated_count || 0}}</span>
@@ -75,7 +75,7 @@
     </ng-container>
  
     <ng-container matColumnDef="failure_count">
-      <mat-header-cell *matHeaderCellDef> Failure count</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Failure</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.failure_count || 0}}</span>
@@ -84,8 +84,8 @@
     </ng-container>
 
     <ng-container matColumnDef="link">
-      <mat-header-cell *matHeaderCellDef> Link to download</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="centre">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data" (click)="downloadDoc(element.report_url)">   <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon></span>
         <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->

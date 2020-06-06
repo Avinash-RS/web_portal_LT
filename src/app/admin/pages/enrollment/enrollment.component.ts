@@ -266,6 +266,7 @@ export class EnrollmentComponent implements OnInit {
 
 
   datachange(row, column, templateRef: TemplateRef<any>) {
+    console.log(row)
     if (column.header === 'User group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course name') {
@@ -278,10 +279,8 @@ export class EnrollmentComponent implements OnInit {
         type: 'publish', id: row.course_id , type1: 'enrollment'
       };
       this.router.navigateByUrl('/Admin/auth/Wca/previewcourse', { state: { detail: details } });
-      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail: details } });
     } else if (column.header === 'Full name' || column.header === 'User name') {
-      const userdetail = { user_id: row.user_id, _id: row._id };
-      // const userdetail = { user_id: '3qpai7', _id: '5e9693b2a5c649722e94351c' };
+      const userdetail = { user_id: row.user_id, _id: row.user_obj_id };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
     } else if (column.header === 'Enrollments') {
       this.selectedgroupid = row.group_id;
