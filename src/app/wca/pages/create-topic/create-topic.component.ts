@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -20,10 +20,15 @@ declare var $: any;
 })
 export class CreateTopicComponent implements OnInit {
 
-  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {    
-    event.returnValue = false;
-}
-
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+    if (this.isReload) {
+      event.returnValue = false;
+    }
+    else {
+      this.isReload = true;
+    }
+  }
+  isReload = true;
   queryData: any;
   courseArray = [];
   courseDetails: any;
@@ -144,7 +149,7 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null, [Validators.required,Validators.pattern(/^(?:[0-9]{1,3}):(?:[012345]\d):(?:[012345]\d)$/)]]
+      topictime: [null, [Validators.required, Validators.pattern(/^(?:[0-9]{1,3}):(?:[012345]\d):(?:[012345]\d)$/)]]
     });
   }
 
@@ -311,20 +316,20 @@ export class CreateTopicComponent implements OnInit {
     }
     this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topicimages').get(String(0)).setValue(removedObj);
     this.createTopicForm.get('moduledetails').get(String(this.removeTemplateindex)).get('topictype').setValue('Deleted');
-   
-    var noModule =  this.createTopicForm.value.moduledetails.filter((data)=>{
-      return data.topicstatus == "true" 
+
+    var noModule = this.createTopicForm.value.moduledetails.filter((data) => {
+      return data.topicstatus == "true"
     })
 
-    if(noModule.length == 0){
+    if (noModule.length == 0) {
       this.router.navigate(['/Admin/auth/Wca/addmodule'],
-      {
+        {
           queryParams: {
-              courseId: this.query.viewingModule,
-              courseImage: this.query.image,
-              courseName: this.query.courseName
+            courseId: this.query.viewingModule,
+            courseImage: this.query.image,
+            courseName: this.query.courseName
           }
-      });
+        });
       $('#confirmModal').modal('hide');
     }
 
@@ -364,10 +369,10 @@ export class CreateTopicComponent implements OnInit {
         this.toast.warning('Please upload file having extensions ' + this.fileValidations1[item.name]);
         this.spinner.hide();
         fileInput.value = '';
-        if(this.fileInput3){
+        if (this.fileInput3) {
           this.fileInput3.nativeElement.value = '';
         }
-        if(this.fileInput4){
+        if (this.fileInput4) {
           this.fileInput4.nativeElement.value = '';
         }
         return false;
@@ -383,7 +388,7 @@ export class CreateTopicComponent implements OnInit {
           if (!that.isFileContent) {
             that.spinner.hide();
             that.toast.warning('Kindly upload a valid SCORM file');
-            if(that.fileInput3){
+            if (that.fileInput3) {
               that.fileInput3.nativeElement.value = '';
             }
           }
@@ -525,7 +530,7 @@ export class CreateTopicComponent implements OnInit {
       this.formVideo(formdata, "2", textvalue, subTitleindex)
     }
 
-    
+
   }
 
 
@@ -819,6 +824,7 @@ export class CreateTopicComponent implements OnInit {
   }
 
   sampleDownload() {
+    this.isReload = false;
     window.location.href = "https://edutechstorage.blob.core.windows.net/container1/knowledgecheck/408209727260479-MCQ Template.csv";
   }
 
@@ -894,13 +900,13 @@ export class CreateTopicComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['/Admin/auth/Wca/addmodule'],
-    {
+      {
         queryParams: {
-            courseId: this.query.viewingModule,
-            courseImage: this.query.image,
-            courseName: this.query.courseName
+          courseId: this.query.viewingModule,
+          courseImage: this.query.image,
+          courseName: this.query.courseName
         }
-    });
+      });
   }
 
   openFeedback() {
