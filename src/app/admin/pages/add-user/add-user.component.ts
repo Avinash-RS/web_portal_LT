@@ -7,7 +7,7 @@ import * as myGlobals from '@core/globals';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
   fname: string;
@@ -23,72 +23,101 @@ export interface PeriodicElement {
 })
 export class AddUserComponent implements OnInit {
 
+
   addUserForm: FormGroup;
   adminDetails: any;
   groups: any = [];
+  group: any = null;
   exceljson: any; // excel json is assigned
   selectedfile = null; // excel file is assigned
 
-
   constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService,
-    private alert: AlertServiceService, private service: AdminServicesService, ) { }
-
-  ngOnInit() {
-
+    // tslint:disable-next-line:align
+    private alert: AlertServiceService, private service: AdminServicesService, ) {
+    this.group = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
+      this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.group) || null;
+    localStorage.setItem('role', 'admin');
     this.addUserForm = this.formBuilder.group({
       username: new FormControl('', myGlobals.fullnameVal),
       email: new FormControl('', myGlobals.emailVal),
       group: ['', myGlobals.req]
     });
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    // this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
     this.service.getUserGroup()
       .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message
+        // this.groups = result.data.get_user_group.message;
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.groups = this.flattree(tree);
+        const index = this.groups.findIndex(x => x.group_id === this.group?.group_id);
+        this.addUserForm.patchValue({ group: index !== -1 ? this.groups[index] : null});
       });
   }
 
+
+  tree(data, root) {
+    function setCount(object) {
+        return object.children
+            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+            : 0;
+    }
+    const t = {};
+    data.forEach(o => {
+        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+        t[o.parent_group_id] = t[o.parent_group_id] || {};
+        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+        t[o.parent_group_id].children.push(t[o.group_id]);
+        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+    });
+    setCount(t[root]);
+    return t[root].children;
+}
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
+      delete item.children;
+    }
+    delete item.children;
+  });
+  return flat;
+}
   get f() {
     return this.addUserForm.controls;
   }
 
+  ngOnInit() {
+  }
+
   addUser() {
-    var admin = []
-    admin.push(this.adminDetails._id);
-    this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
-      true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
-    ).subscribe((result: any) => {
-      if (result.data && result.data.user_registration) {
-        if (result.data.user_registration.success === 'true') {
-          this.addUserForm.reset();
-          this.alert.openAlert('Success !', 'User added successfully');
-        } else {
-          this.alert.openAlert(result.data.user_registration.message, null);
-        }
-      } else
-        this.alert.openAlert("Please try again later", null)
-    });
+    const fullname = this.addUserForm.value.username.trimLeft();
+    if (fullname !== '') {
+      if (fullname.length >= 3) {
+        const admin = [];
+        admin.push(this.adminDetails._id);
+        this.service.user_registration(this.addUserForm.value.email, this.addUserForm.value.username,
+          true, this.addUserForm.value.group.group_id, this.addUserForm.value.group.group_name, admin
+        ).subscribe((result: any) => {
+          if (result.data && result.data.user_registration) {
+            if (result.data.user_registration.success === 'true') {
+              this.addUserForm.reset();
+              this.alert.openAlert('Success !', 'User added successfully');
+            } else {
+              this.alert.openAlert(result.data.user_registration.message, null);
+            }
+          } else {
+            this.alert.openAlert('Please try again later', null);
+          }
+        });
+      } else {
+        this.alert.openAlert('Full name must be minimum of 3 characters long', null);
+      }
+    } else {
+      this.alert.openAlert('Please enter full name', null);
+    }
   }
-
-  columnHeader = ['studendID', 'fname', 'weight', 'symbol', 'select'];
-
-  tableData: PeriodicElement[] = [
-    { studendID: 1, fname: 'Hydrogen', weight: 1.0079, symbol: 'H', },
-    { studendID: 2, fname: 'Helium', weight: 4.0026, symbol: 'He' },
-    { studendID: 3, fname: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { studendID: 4, fname: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { studendID: 5, fname: 'Boron', weight: 10.811, symbol: 'B' },
-
-  ];
-
-  next(e) {
-    this.tableData = [{ studendID: 6, fname: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { studendID: 7, fname: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { studendID: 8, fname: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { studendID: 9, fname: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    ]
-
-  }
-
 
   /**
    * Download sample excel template
@@ -99,7 +128,7 @@ export class AddUserComponent implements OnInit {
       Email: null
     }];
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
     this.saveAsExcelFile(excelBuffer, 'Sample');
   }
@@ -140,16 +169,17 @@ export class AddUserComponent implements OnInit {
         const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
         const headerNames: any = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 })[0];
         this.exceljson = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-        const is_same = excelheaders.length === headerNames.length && excelheaders.every(function (element, index) {
+        // tslint:disable-next-line:only-arrow-functions
+        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function(element, index) {
           return element === headerNames[index];
         });
-        if (is_same === false) {
+        if (isSame === false) {
           this.alert.openAlert('Invalid Excel headers', 'Please choose the file to be uploaded');
         } else if (this.exceljson.length === 0) {
           this.alert.openAlert('Excel Sheet is Empty', null);
         } else {
-          this.selectedfile = <File>event[0];
-          this.alert.openAlert( 'Uploaded Successfully', null);
+          this.selectedfile = event[0] as File;
+          this.alert.openAlert('Uploaded Successfully', null);
         }
       };
       reader.readAsBinaryString(event[0]);
@@ -174,7 +204,7 @@ export class AddUserComponent implements OnInit {
         });
       });
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exceldata);
-      const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
       const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([excelBuffer], {
@@ -186,6 +216,7 @@ export class AddUserComponent implements OnInit {
         if (result.success === true) {
           this.alert.openAlert('Success !', 'Upload in Progress ...');
           this.selectedfile = '';
+          this.group = '';
         } else {
           this.selectedfile = '';
           this.alert.openAlert(result.message, null);
@@ -214,7 +245,19 @@ export class AddUserComponent implements OnInit {
    * Delete csv file
    */
   deleteFile() {
-    this.selectedfile = '';
+    Swal.fire({
+      title: 'Are you sure you want to delete the uploaded file ?',
+      // icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.value) {
+        this.selectedfile = '';
+        this.group = '';
+      }
+    });
   }
 
   /**
@@ -233,4 +276,13 @@ export class AddUserComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  tabClick(event, form) {
+    if (event.index === 0) {
+      form.reset();
+      this.selectedfile = '';
+    }
+    if (event.index === 1) {
+      this.addUserForm.reset();
+    }
+  }
 }

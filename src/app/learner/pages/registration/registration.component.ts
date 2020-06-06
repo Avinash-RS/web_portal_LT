@@ -49,21 +49,29 @@ export class RegistrationComponent implements OnInit {
     localStorage.removeItem('role');
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
+  
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
     this.service.user_registration(this.registerForm.value.email, this.fullname, this.registerForm.value.termsandconditions)
       .subscribe(data => {
-        if (data.data['user_registration']['success'] == 'true') {
-          this.alert.openAlert(data.data['user_registration'].message, null)
-          // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
-          // localStorage.setItem('role', 'learner')
-          this.loader.hide();
-          this.registerForm.reset();
-        } else {
-          this.alert.openAlert(data.data['user_registration'].message, null)
-          this.loader.hide();
-        }
+     console.log(data.data['user_registration'])
+     if(data.data['user_registration']){
+      if (data.data['user_registration']['success'] == 'true') {
+        this.alert.openAlert(data.data['user_registration'].message, null)
+        // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
+        // localStorage.setItem('role', 'learner')
+        this.loader.hide();
+        this.registerForm.reset();
+      } else {
+        this.alert.openAlert(data.data['user_registration'].message, null)
+        this.loader.hide();
+      }
+     }else{
+      this.alert.openAlert("Please try after sometime", null)
+     }
+
       })
+      // console.log('something')
   }
 
   onSubmit() {

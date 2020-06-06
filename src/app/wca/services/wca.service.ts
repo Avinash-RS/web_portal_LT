@@ -106,12 +106,12 @@ export class WcaService {
       }
     });
   }
-  getallrefdoc(pagenumber) {
+  getallrefdoc(pagenumber,course_id) {
     return this.Apollo.query({
       query: getallrefdoc,
       variables: {
-        pagenumber: pagenumber
-
+        pagenumber: pagenumber,
+        course_id: course_id
       }
     });
   }
@@ -125,6 +125,8 @@ export class WcaService {
   getCourseDetails(id) { return this.http.get(environment.wcaapiurl + 'api/courses/getscrommodules?courseid=' + id); }
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
+
+  excelPpt(ppt) { return this.http.post(environment.wcaapiurl + "api/template/pdftoimage", ppt); }
 
   uploadKnowledgeCheck(fileData) { return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData) }
 

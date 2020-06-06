@@ -12,6 +12,7 @@ import * as _ from "lodash";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -1109,8 +1110,6 @@ export class ProfileComponent implements OnInit {
   };
   otp: any;
   verifybutton: Boolean = false;
-  resendOtp: Boolean = false;
-  sendOtp: Boolean = false;
   levelCode: any;
   minutes: number;
   seconds: number;
@@ -1120,7 +1119,7 @@ export class ProfileComponent implements OnInit {
   resendLabel: Boolean = false;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
-    private activeroute: ActivatedRoute, private dialog: MatDialog,
+    private activeroute: ActivatedRoute, private dialog: MatDialog,   private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
     private router: Router, private gs: GlobalServiceService) {
     if (this.gs.checkLogout()) {
@@ -1148,7 +1147,7 @@ export class ProfileComponent implements OnInit {
     else{
       this.cannotEdit = false;
     }
-    moment().year();
+    // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl("", myGlobals.req),
@@ -1227,7 +1226,7 @@ export class ProfileComponent implements OnInit {
           else
             profileDetails.progress = Number(profileDetails.progress);
           if (profileDetails.progress <= 60)
-            this.gs.preventBackButton
+            this.gs.preventBackButton();
           const qualification = this.profileForm.get('qualification') as FormArray;
           const certificate = this.profileForm.get('certificate') as FormArray;
           while (qualification.length) {
@@ -1250,8 +1249,10 @@ export class ProfileComponent implements OnInit {
     })
   }
   yearOfpassing(index) {
-    this.startYear = moment().year() - 60;
-    this.endYear = moment().year() + 3;
+       this.startYear = 2020- 60;
+    this.endYear = 2020 + 3;
+    // this.startYear = moment().year() - 60;
+    // this.endYear = moment().year() + 3;
 
     this.profileForm.value.qualification.forEach(element => {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
@@ -1488,8 +1489,6 @@ export class ProfileComponent implements OnInit {
 
   otpverification() {
     this.loader.show();
-    this.resendOtp = false;
-    this.sendOtp = true;
     this.resendLabel = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['update_mobile_onprofile']['success'] == 'true') {
@@ -1542,13 +1541,12 @@ export class ProfileComponent implements OnInit {
   }
 
   Resendcode() {
-    this.resendOtp = true;
-    this.sendOtp = false;
     this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
     this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
       if (data.data['resend_otp_onprofile']['success'] == 'true') {
         Swal.fire(data.data['resend_otp_onprofile']['message'])
         this.showotp = true;
+        clearTimeout(this.interval);
         this.interval = setInterval(() => {
           if (this.resendtimeLeft > 0) {
             this.resendtimeLeft--;
@@ -1569,6 +1567,9 @@ export class ProfileComponent implements OnInit {
       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
         Swal.fire(password.data['get_change_password_updateprofile'].message);
         localStorage.clear();
+        this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+          localStorage.setItem('Systemip', res.ip);
+        });
         this.dialog.closeAll();
         this.router.navigate(['/Learner/login'])
       } else

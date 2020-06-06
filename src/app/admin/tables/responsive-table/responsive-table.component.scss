@@ -99,7 +99,7 @@ mat-button-toggle-group{
     cursor:pointer;
 }
 
-::ng-deep .mat-sort-header-container{
+:host ::ng-deep .mat-sort-header-container{
     justify-content: center;
 }
 /* Structure */

@@ -42,13 +42,14 @@
     </ul>
 
 
-    <div class="input-group"  *ngIf="userDetailes != null">
-      <input class="form-control border-right-0" placeholder="  Search courses  ">
+    <div *ngIf="userDetailes != null">
+      <!-- <input class="form-control border-right-0" placeholder="  Search courses  ">
       <span class="input-group-append bg-white border-left-0">
         <span class="input-group-text bg-transparent">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
-      </span>
+      </span> -->
+    <app-search></app-search>
     </div>
 
     <div class="input-group" *ngIf="userDetailes == null">
@@ -93,7 +94,7 @@
         <button class="backgroundcol" mat-menu-item  routerLink="/Learner/viewallcourses">
           <label>View All Courses</label>
         </button>
-        <button class="backgroundcol" mat-menu-item>
+        <button class="backgroundcol" mat-menu-item  routerLink="/Learner/dashboard">
           <label>Dashboard</label>
         </button>
         <button class="backgroundcol" mat-menu-item (click)="navigateWishlist()">
@@ -183,36 +184,4 @@
   </ul>
 </div>
 
-<div class="collapse navbar-collapse" id="navbarCollapse"  *ngIf="userDetailes == null">
-  <ul class="navbar-nav mr-auto" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto" id="navbarCollapse">
-      <li class="dropdownsmall">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
-         Categories
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-        </ul>
-      </li>
-      <li class="smallmenu">
-        <a href="#">
-          Search
-        </a>
-      </li><br>
-
-      <li class="smallmenu2"  *ngIf="userDetailes == null">
-        <button class="backgroundcol2" routerLink="/Learner/register" >Register</button>
-      </li><br>
-
-      <li class="smallmenu2"  *ngIf="userDetailes == null">
-        <button class="backgroundcol2" routerLink="/Learner/login" >Login</button>
-        
-      </li><br>
-    </ul>
-
-  </ul>
-
-</div>
-
-<!-- ////ADMIN///////// -->
 

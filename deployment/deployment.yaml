@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: webportal
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: webportal
@@ -15,7 +15,7 @@ spec:
       containers:
         - name: webportal
           image: lxpacrazure.azurecr.io/webportal:$tag
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
           - containerPort: 80
       imagePullSecrets:

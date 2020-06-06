@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { MatDialog } from '@angular/material';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { Options } from 'ng5-slider';
+// import { SearchPipe } from '../pipes/search.pipe';
+import * as _ from 'lodash';
+import Swal from 'sweetalert2';
+import { element } from 'protractor';
+import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 declare var $: any;
 
 @Component({
@@ -9,6 +18,13 @@ declare var $: any;
   styleUrls: ['./view-all-courses.component.scss']
 })
 export class ViewAllCoursesComponent implements OnInit {
+  value: number = 0;
+  highValue: number = 20;
+  options: Options = {
+    floor: 2,
+    ceil: 24
+  };
+  courseCount: number;
   userDetailes: any;
   categories: any;
   type: any;
@@ -24,8 +40,32 @@ export class ViewAllCoursesComponent implements OnInit {
   displayMode: number = 1;
   paginationpgno: any;
   loader: boolean;
-  
-  constructor(public learnerservice: LearnerServicesService, private globalservice: GlobalServiceService) {
+  sort_type: any = "A-Z";
+  showAppliedFiltre : Boolean =true;
+  showMore: Boolean = true;
+  errormsg: boolean = false;
+  allLvlCategory: any;
+  Lvl1CatId: any = [];
+  Lvl2CatId: any = [];
+  Lvl3CatId: any = [];
+  guidelineSearchVal: any = [];
+  allLvlCategoryFilterVal: any = [];
+  selectedlang: any = [];
+  coursepartners: any = [];
+  coursemode: any = [];
+  authorDetails: any = [];
+  level1selectedID: any = [];
+  level2selectedID: any = [];
+  level3selectedID: any = [];
+  selectedFilter: any = [];
+  isCollapsed: Boolean;
+  publishedToDate: String;
+  publishedFromDate: String;
+  showCategory : Boolean = false;
+  element: any;
+
+  constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
+    private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) {
     this.btnType = "Enroll Now"
   }
 
@@ -34,78 +74,91 @@ export class ViewAllCoursesComponent implements OnInit {
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';
     }
-
+    this.CommonServices.globalSearch.subscribe((data: any) => {
+      if (data.length > 0) {
+        this.allcourses = data;
+      }
+      else {
+        Swal.fire('No courses found');
+        this.getallcourses();
+      } 
+    })
+    this.CommonServices.globalAllCategory.subscribe((data: any) => {
+      this.allcourses = data;
+    });
+    this.CommonServices.globalCourses.subscribe((data: any) => {
+        this.allcourses = data;
+    })
+    this.CommonServices.appliedCategory.subscribe((data: any) => {
+      this.Lvl1CatId = data.Lvl1CatId;
+      this.level1selectedID = data.level1selectedID,
+      this.Lvl2CatId= data.Lvl2CatId,
+      this.level2selectedID = data.level2selectedID,
+      this.Lvl3CatId= data.Lvl3CatId,
+      this.level3selectedID = data.level3selectedID,
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+  })
     this.loadcategoryandcourses();
+  }
+
+  sorting(sortval) {
+    this.showAppliedFiltre = true;
+    if (this.userDetailes.group_id)
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
+        this.allcourses = result.data.get_all_course_by_usergroup.message;
+      });
   }
 
   loadcategoryandcourses() {
     this.type = 'category';
-    this.pagenumber = 0;
     this.paginationpgno = 0;
-    this.getcoursecategories();
     this.getallcourses();
   }
-  getcoursecategories() {
-    // console.log(this.userDetailes);
-    this.learnerservice.getcoursecategory(this.userDetailes.group_id).subscribe((result: any) => {
-      this.categories = result.data.get_all_category.message;
-    });
-  }
+
   onDisplayModeChange(mode: number): void {
     this.displayMode = mode;
   }
-  getcoursesubcategories(category) {
-    this.type = 'subcategory';
-    const categoryid = category.category_id ? category.category_id : category.sub_category_id;
-    this.learnerservice.getcoursesubcategory(categoryid).subscribe((result: any) => {
-      this.subcategories = result.data.get_sub_category.message;
-      this.getcourses(category);
-    });
-  }
 
-  getcourses(category) {
-    this.loader = true;
-    this.pagenumber = 0;
-    category.type = this.type;
-    category._id = category.category_id ? category.category_id : category.sub_category_id;
-    category.pagenumber = this.pagenumber;
-    this.learnerservice.getcourse(category).subscribe((result: any) => {
-      this.allcourses = result.data.get_course_by_subcategory.message;
-      // this.allcourses = result.data.get_a
-      this.loader = false;
-    });
-  }
 
   getallcourses() {
-    if (this.userDetailes.group_id) {
-    }
-    this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
+    if (this.userDetailes.group_id)
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+        this.allcourses = result.data.get_all_course_by_usergroup.message;
+        this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
+      });
+  }
+
+  onpagination(event) {
+    this.paginationpgno = event;
+    this.pagenumber = this.pagenumber + 1;
+    this.CommonServices.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
+      // this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
       this.allcourses = result.data.get_all_course_by_usergroup.message;
+      this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
     });
   }
 
-  // test() {
-  //   $('.option__button').on('click', function () {
-  //     $('.option__button').removeClass('selected');
-  //     $(this).addClass('selected');
-  //     if ($(this).hasClass('option--grid')) {
-  //       $('.results-section').attr('class', 'results-section results--grid');
-  //     } else if ($(this).hasClass('option--list')) {
-  //       $('.results-section').attr('class', 'results-section results--list');
-  //     }
-  //   });
-  // }
-  /**
-   * Determines whether scroll down on
-   */
-  onpagination(event) {
-    console.log(event);
-    this.paginationpgno = event;
-    this.pagenumber = this.pagenumber + 1;
-    console.log(this.userDetailes);
-    this.learnerservice.getallcourses('1', this.pagenumber).subscribe((result: any) => {
-      console.log(result.data.get_all_course_by_usergroup.message);
-      this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
+  viewCategory(module) {
+    let obj = {
+      Lvl1CatId : this.Lvl1CatId,
+      level1selectedID : this.level1selectedID,
+      Lvl2CatId: this.Lvl2CatId,
+      level2selectedID : this.level2selectedID,
+      Lvl3CatId: this.Lvl3CatId,
+      level3selectedID : this.level3selectedID,
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory
+    }
+    const dg = this.dialog.open(CategoryComponentComponent, {
+      width: '95%',
+      data : obj,
+      // panelClass: ['category']
     });
+
+    // dg.afterClosed().subscribe((data) :> {
+    //   this.getallcourses();
+    // });
   }
+ 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no" ?>
+<manifest identifier="com.scorm.golfsamples.contentpackaging.multioscosinglefile.12" version="1" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+<metadata>
+<schema>ADL SCORM</schema>
+<schemaversion>1.2</schemaversion>
+</metadata>
+<organizations default="Leadership: Practical Leadership Skills">
+<organization identifier="Leadership: Practical Leadership Skills">
+<title>Leadership: Practical Leadership Skills</title>
+<item identifier="What is a leader ?">
+<title>What is a leader ?</title>
+<item identifier="Connecting with your team" identifierref="Connecting with your team">
+<title>Connecting with your team</title>
+</item>
+<item identifier="Motivation" identifierref="Motivation">
+<title>Motivation</title>
+</item>
+</item>
+</organization>
+</organizations>
+<resources>
+<resource identifier="Connecting with your team" type="webcontent" adlcp:scormtype="asset" href="What is a leader ?/index.html">
+<file href="What is a leader ?/Connecting with your team.html"/>
+</resource>
+<resource identifier="Motivation" type="webcontent" adlcp:scormtype="asset" href="What is a leader ?/index.html">
+<file href="What is a leader ?/Motivation.html"/>
+</resource>
+</resources>
+</manifest>

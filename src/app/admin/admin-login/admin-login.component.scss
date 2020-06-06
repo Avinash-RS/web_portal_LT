@@ -1,5 +1,5 @@
-@import "variable";
-
+// @import "variable";
+@import "../../../assets/variable.scss";
 h2 {
     color: $color-blue;
 }
@@ -14,8 +14,10 @@ mat-card {
 button {
     background: $color-blue !important;
     color: $color-white;
-    width: 70%;
-    margin-left: 15%;
+    width: 80%;
+    // margin-left: 15%;
+    margin: auto;
+    display: block;
 }
 
 mat-form-field {
@@ -64,4 +66,13 @@ input[type=text] {
 
 .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
+}
+
+.errspan {
+    float: right;
+    margin-right: 10px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+    color: black;
 }

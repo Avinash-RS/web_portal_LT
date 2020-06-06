@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecomendedCoursesComponent implements OnInit {
   breakpoint: number;
-
+  from: any;
+  
   constructor() { }
 
   ngOnInit() {

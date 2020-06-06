@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WcaService } from '../../services/wca.service'
 import { Router } from '@angular/router';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoHeight:true,
     navSpeed: 700,
     navText: ['<', '>'],
     responsive: {
@@ -32,17 +34,21 @@ export class DashboardComponent implements OnInit {
         items: 2
       },
       740: {
-        items: 3
+        items: 3,
+        autoHeight:true,
       },
       940: {
-        items: 4
+        items: 3,
+        autoHeight:true,
       },
       1200 :{
-        items : 4
+        items : 4,
+        autoHeight:true,
       }
     },
     nav: true
   }
+
   adminDetails: any;
   spinner: boolean = false;
   publishedCourseLength: number;
@@ -52,10 +58,13 @@ export class DashboardComponent implements OnInit {
   constructor(public service: WcaService,
     private adminService: AdminServicesService,
     //  public spinner: NgxSpinnerService, 
-    private router: Router, ) { }
+    private gs: GlobalServiceService,
+    private router: Router, ) {
+      localStorage.setItem('role', 'admin');
+     }
 
   ngOnInit() {
-    this.adminDetails = JSON.parse(localStorage.getItem('adminDetails'));
+    this.adminDetails = this.gs.checkLogout();
     this.spinner = true;
     this.getPublishedCourses();
     this.getCreatedCourses();
@@ -95,20 +104,10 @@ export class DashboardComponent implements OnInit {
 
   getCreatedCourses() {
     var adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-    var role = localStorage.getItem('role') || null;
-    console.log(adminDetails.user_id+'----'+role)
-
     this.adminService.getAllCourseCreated(adminDetails.user_id, 0).subscribe((data: any) => {
       this.createdCourses = data.data.get_course_createdby_admin.message;
       this.createdCourseLength = data.data.get_course_createdby_admin.course_count;
-    // }, err => {
-    //   this.spinner.hide();
-    // });
-    // this.adminService.getAllDrafted(adminDetails.user_id, 0).subscribe((data: any) => {
-
-    //   this.createdCourses = data.data.get_draft_course.message;
       this.spinner = false;
-
     }, err => {
       this.spinner = false;
     });
