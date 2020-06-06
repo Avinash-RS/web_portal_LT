@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="col-4 width_80 center">
+      <div class="col-4 width_100 center">
         <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img2.png'"
           id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="230px" style="margin : auto;display : block;
           height: 220px;
@@ -93,7 +93,7 @@
             &nbsp;&nbsp;| &nbsp;&nbsp;
           </span>
 
-          <span class="f_size_16"> Hindi, English</span>
+          <span class="f_size_16" *ngFor = "let l of userData?.language_detail"> {{l.languagename}} , </span>
 
         </div>
 
