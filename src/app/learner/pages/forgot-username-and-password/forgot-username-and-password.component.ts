@@ -20,12 +20,24 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   type: string;
   subtype: string;
   isenable: boolean = false;
+  isForgotUsernameEnable: boolean = false;
+  isForgotPasswordEnable: boolean = false;
   isshow:boolean = true;
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private alert: AlertServiceService,
     private loader : Ng4LoadingSpinnerService,
     public service : LearnerServicesService) { 
+
+      this.type = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
+      this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.type) || 'forgotUsername';
+        if(this.type == 'forgotUsername'){
+          this.isForgotUsernameEnable = false;
+          this.isForgotPasswordEnable= true;
+        }else{
+          this.isForgotUsernameEnable = true;
+          this.isForgotPasswordEnable= false;
+        }
     }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <div class="limiter">
   <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
-  <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;Enroll now&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick help</span>
+  <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/register']">Enroll now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick help</span>
   <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms and conditions</span>
   <div class="container-reg200 " >
     <!-- <div class="row"> -->
@@ -44,7 +44,7 @@
                 in</button>
              
               <div class="forgot_ps">
-                <mat-label><a [routerLink]="['/Learner/recover']"><span class="forgot">Forgot username?  &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  Reset password?</span></a>
+                <mat-label><span class="forgot" (click)="forgotusername('forgotUsername')">Forgot username?</span>  &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  <span (click)="reserPassword('reserPassword')">Reset password?</span>
                 </mat-label>
                 <div class="linee"></div>
               </div>
