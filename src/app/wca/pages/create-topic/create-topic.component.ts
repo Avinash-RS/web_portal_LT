@@ -537,7 +537,7 @@ export class CreateTopicComponent implements OnInit {
     var pages = [], heights = [], width = 0, height = 0, currentPage = 1;
     var scale = 1.5;
 
-    PDFJS.disableWorker = true; // due to CORS
+  //  PDFJS.disableWorker = true; // due to CORS
 
 
 
