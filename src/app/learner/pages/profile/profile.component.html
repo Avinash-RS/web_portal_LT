@@ -1,7 +1,7 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+  <ol class="breadcrumb contentTop1">
+    <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
@@ -353,7 +353,7 @@
           <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h1 class="head">Change the Email ID</h1>
-        <mat-dialog-content style="width: 270px;margin-top: 24px; height: 200px;">
+        <mat-dialog-content style="width: 300px;margin-top: 24px; height: 200px;">
           <form [formGroup]="mailForm">
             <div class="form-group">
               <label class="f_size_20 f_wt_400">Enter new email id</label>
@@ -381,7 +381,7 @@
           <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h1 class="head">Change the Mobile No</h1>
-        <mat-dialog-content style="width: 285px;margin-top: 24px;">
+        <mat-dialog-content style="width: 330px;margin-top: 24px;">
           <form [formGroup]="otpForm">
             <div class="form-group">
               <label class="f_size_20 f_wt_400">Enter new mobile no</label>
@@ -402,12 +402,9 @@
                 <ng-otp-input [config]="config" formControlName="otp" (onInputChange)="onOtpChange($event)" mask="0">
                 </ng-otp-input>
               </div><br>
-              <div *ngIf="sendOtp">
+              <div>
                 <p>{{minutes}}:{{seconds}}</p>
-              </div>
-              <div *ngIf="resendOtp">
-                <p>{{minutes}}:{{seconds}}</p>
-              </div>
+                </div>
               <br><br>
             </div>
             <div *ngIf="showotp">

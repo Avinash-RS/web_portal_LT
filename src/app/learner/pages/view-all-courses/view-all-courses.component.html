@@ -1,218 +1,123 @@
 <app-header></app-header>
-<!-- <br>
-<br>
-<input class="variation" id="bluepurple" type="radio" value="1" name="color" checked="checked"/>
-<main id="bluepurple">
-  <section class="results-header">
-
-      <div class="sortby">
-        <label class="label-form">Sort by :</label>
-        <select type="text" >
-            <option value="1">Featured</option>
-            <option value="2">Popular</option>
-          </select>
-      </div>
-
-    <div class="results-header__option">
-    
-      <div (click)="test();showdesc=true" class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span></span></div>
-      <div (click)="test();showdesc=false" class="option__button option--list"><span></span><span></span><span></span><span></span></div>
-    </div>
-    <div class="main">
-
-        <div class="form-group has-search">
-          <span class="fa fa-search form-control-feedback"></span>
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-         
-      </div>
-  </section>
- 
-  <div class="filter-section__wrapper">
-    <section class="filter-section">
-      <h6>Filters</h6>
-      <div class="filters">
-        <h5 class="filters__title">Category</h5>
-        <div class="filters__item" *ngFor ="let cat of categories;let ind = index">
-          <div class="checkbox">
-            <input  name="check"  id="{{ind+1}}" [checked]="selected === ind" (change)="selected = ind" (change)="getcourses(cat)"
-                 type="checkbox"/>
-            <label (click)="getcourses(cat)" for="{{ind+1}}">{{cat.category_name}}<span class="box"></span>
-            </label> 
-          </div><span class="badge status-primary">10</span>
-        </div>
-      </div>
-      <div class="filters">
-        <h5 class="filters__title">Enrollments</h5>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-5" type="checkbox"/>
-            <label for="checkbox-5">0-100<span class="box"></span></label>
-          </div><span class="badge status-primary">9</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-6" type="checkbox" />
-            <label for="checkbox-6">101-200<span class="box"></span></label>
-          </div><span class="badge status-primary">12</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-7" type="checkbox"/>
-            <label for="checkbox-7">201-500<span class="box"></span></label>
-          </div><span class="badge status-primary">17</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-8" type="checkbox"/>
-            <label for="checkbox-8">501-1000<span class="box"></span></label>
-          </div><span class="badge status-primary">3</span>
-        </div>
-        <div class="filters__item">
-            <div class="checkbox">
-              <input id="checkbox-9" type="checkbox"/>
-              <label for="checkbox-9">> 1000<span class="box"></span></label>
-            </div><span class="badge status-primary">3</span>
-          </div>
-      </div>
-      <div class="filters">
-        <h5 class="filters__title">Instructor Name</h5>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-10" type="checkbox"/>
-            <label for="checkbox-10">Fernado<span class="box"></span></label>
-          </div><span class="badge status-primary">9</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-11" type="checkbox" />
-            <label for="checkbox-11">Example<span class="box"></span></label>
-          </div><span class="badge status-primary">12</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-12" type="checkbox"/>
-            <label for="checkbox-12">Peter<span class="box"></span></label>
-          </div><span class="badge status-primary">17</span>
-        </div>
-        <div class="filters__item">
-          <div class="checkbox">
-            <input id="checkbox-13" type="checkbox"/>
-            <label for="checkbox-13">Joseph<span class="box"></span></label>
-          </div><span class="badge status-primary">3</span>
-        </div>
-        <div class="filters__item">
-            <div class="checkbox">
-              <input id="checkbox-14" type="checkbox"/>
-              <label for="checkbox-14">John<span class="box"></span></label>
-            </div><span class="badge status-primary">3</span>
-          </div>
-      </div>
-      <div class="filters__item">
-      <a class="button" (click)="loadcategoryandcourses();check=false">Clear</a>
-      </div>
-    </section>
-  </div>
-  <section class="results-section results--grid">
-
-    <div class="profile" *ngFor ="let c of allcourses  | paginate: { itemsPerPage: 10, currentPage: pagenumber } ;let j=index">
-      <div class="profile__image"><img src="{{c?.course_img_url}}" alt="Course Image"/></div>
-      <div *ngIf="showdesc" class="overlayinn">
-    
-        <h6>{{c?.course_description}}</h6>
-    </div>
-      <div class="profile__info">
-        <h3>{{c?.course_name}}</h3>
-     
-        <p *ngIf="!showdesc" class="profile__info__extra">{{c?.course_description}}</p>
-      </div>
-      <div class="profile__stats">
-       <i class="fa fa-users fa-2x"></i>
-      </div>
-      <p class="profile__stats__title">2,900 learners</p>   
-      <div class="profile__cta"><a class="button">ENROLL NOW</a></div>
-    </div>
-
-    <div *ngIf="allcourses?.length==0">
-
-      No Courses Found
-       
-    </div>
-  </section>
-</main>
-<br>
-<pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="pagenumber = $event" ></pagination-controls> -->
 
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Learner">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
 
     <li class="breadcrumb-item active" aria-current="page">All Courses</li>
   </ol>
 </nav>
-
-
 <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
   <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
 </div>
-
-<div class="btn-group pull-right">
-  <!-- <button class="icon_fnt"  type="button"(click)="onDisplayModeChange(1)"
-  [ngClass]="{'btn-primary active': displayMode === 1}" >
-  <i class="fa fa-search"></i>
-</button> -->
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)">
-    <i class="fa fa-filter"></i>
-  </button>
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(1)"
-    [ngClass]="{'btn-primary active': displayMode === 1}">
-    <i class="fa fa-th"></i>
-  </button>
-  <button class="icon_fnt" type="button" (click)="onDisplayModeChange(2)"
-    [ngClass]="{'btn-primary active': displayMode === 2}">
-    <i class="fa fa-list"></i>
-  </button>
-</div>
-<div class="container">
-  <br>
-  <br>
-  <!-- grid -->
-  <div class="container containerShadow">
-    <div class="row" *ngIf="displayMode === 1">
-      <ng-container
-        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <div class="col-lg-3">
-          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-            [showWishlist]="true" [showStatus]="false"> </app-course-component> <br>
-        </div>
-      </ng-container>
-      <br>
-    </div>
-
-
-    <div class="row" *ngIf="displayMode === 2">
-      <!-- <div class="col-md-12 width_90 center" *ngFor="let c of allcourses   | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <mat-card style="text-align: center;box-shadow: 0 2px 10px #6c757d;padding: 0px !important;">
-          <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-          [showWishlist]="true" [showStatus]="false"> </app-course-component>
-        </mat-card>
-        <br><br>
-      </div> -->
-
-      <ng-container
-        *ngFor="let c of allcourses  | paginate: { itemsPerPage: 8, currentPage: paginationpgno } ;let j=index">
-        <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
-          <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-            [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
-            [goto]="goto" [showDate]="true">
-          </app-list-view-course-component>
-          <br>
-        </div>
-      </ng-container>
-    </div>
+<br> <br>
+<div class="row">
+  <div class="col-md-10 col-sm-12 col-12">
+    <button class="submit" (click)="viewCategory(element)"> Category
+      <i class="fa fa-chevron-down colr"></i>
+    </button>
+    <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
+      <i class="fa fa-filter colrr"></i>
+    </button>
+    <ng-container *ngIf="!showAppliedFiltre">
+      <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
+        [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID"
+        [level3selectedID]="level3selectedID" [allLvlCategoryFilterVal]="allLvlCategoryFilterVal"
+        [allLvlCategory]="allLvlCategory"  [viewallcourse]= "true">
+      </app-guideline-search>
+    </ng-container>
+    <button class="submit sort" mat-button [matMenuTriggerFor]="Sort">Sort by
+      <i class="fa fa-chevron-down colrr"></i>
+    </button>
+    <mat-menu #Sort="matMenu">
+      <button mat-menu-item (click)="sorting('A-Z')">A-Z</button>
+      <button mat-menu-item (click)="sorting('Z-A')">Z-A</button>
+    </mat-menu>
 
   </div>
+  <div class="col-md-2 col-sm-12 col-12">
+    <button class="icon_fnt" mat-button (click)="onDisplayModeChange(1)">
+      <mat-icon class="icon">view_module</mat-icon>
+    </button>
+
+    <button class="icon_fnt" mat-button (click)="onDisplayModeChange(2)">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <br>
+  <br>
+  <!-- 
+  <div class="row">
+    <div class="col-3" *ngIf="showAppliedFiltre">
+      <app-guideline-search></app-guideline-search>
+    </div> -->
+  <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
+  <div class="col-9" *ngIf="!showAppliedFiltre">
+    <div class="container">
+      <div class="row" *ngIf="displayMode === 1">
+        <ng-container
+          *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+              [showWishlist]="true" [showStatus]="false" [showRating]="true" [goto]="goto" [showCount]="true">
+            </app-course-component> <br>
+          </div>
+        </ng-container>
+        <br>
+      </div>
+      <div class="row" *ngIf="displayMode === 2">
+        <ng-container
+          *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
+          <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+            <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+              [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType" [showCount]="true"
+              [goto]="goto" [showDate]="true">
+            </app-list-view-course-component>
+            <br>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+  <!-- </ng-container> -->
+  <ng-container *ngIf="showAppliedFiltre">
+    <div class="col-12 allcourses">
+      <div class="container ">
+        <div class="row" *ngIf="displayMode === 1">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+              <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+              </app-course-component> <br>
+            </div>
+          </ng-container>
+          <br>
+        </div>
+        <div class="row" *ngIf="displayMode === 2">
+          <ng-container
+            *ngFor="let c of allcourses  | paginate: {totalItems: courseCount, itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
+            <div class="col-lg-9 col-md-9 center col-sm-11 col-11">
+              <app-list-view-course-component [course]="c" [canNavigate]="true" [showEnroll]="true"
+                [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showRating]="true" [btnType]="btnType"
+                [showCount]="true" [goto]="goto" [showDate]="true">
+              </app-list-view-course-component>
+              <br>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+</div>
+
 <br>
-  <pagination-controls class="my-pagination" style="text-align: center;" (pageChange)="onpagination($event)">
+<div style="margin-left: 36%;margin-right: 36%;">
+  <pagination-controls class="my-pagination" (pageChange)="onpagination($event)">
   </pagination-controls>
 </div>
+<!-- <ng-container *ngIf="!showCategory">
+    <app-category-component></app-category-component>
+  </ng-container> -->

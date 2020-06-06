@@ -380,7 +380,7 @@ div.account{
   margin-left: 15px;
 }
 
-::ng-deep .mat-radio-outer-circle {
+:host ::ng-deep .mat-radio-outer-circle {
   border-width: 1px !important;
 }
 
@@ -391,7 +391,7 @@ div.account{
 
 }
 
-// ::ng-deep .mat-select-panel {
+// :host ::ng-deep .mat-select-panel {
 //   overflow: hidden !important;
 // }
 
@@ -513,4 +513,8 @@ textarea:focus, input:focus{
   width: 90% !important;
   margin-right: 10px !important;
   border-radius: 10px !important;
+}
+.col-md-1.col-sm-4.col-4.ng-star-inserted {
+  margin-left: 100% !important;
+  margin-top: -3% !important;
 }

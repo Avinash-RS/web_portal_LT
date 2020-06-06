@@ -1,5 +1,6 @@
 Feature: ViewProfileFunctionality
 
+@sprint1
 Scenario: ViewProfilePageTest
 
 Given : I am successfully logged into my account 

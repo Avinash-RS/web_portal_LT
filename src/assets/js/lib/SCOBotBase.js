@@ -137,21 +137,21 @@ function SCOBotBase(options) {
             }
             switch (lvl) {
             case 1:
-                console.error(msg);
+                // console.error(msg);
                 break;
             case 2:
-                console.warn(msg);
+                // console.warn(msg);
                 break;
             case 4:
-                console.info(msg);
+                // console.info(msg);
                 window.localStorage.setItem('course_status',msg);
                 startResumeEvent(msg)
                 break;
             case 3:
-                console.log(msg);
+                // console.log(msg);
                 break;
             default:
-                console.log(msg);
+                // console.log(msg);
                 return false;
             }
             return true;
@@ -1564,12 +1564,12 @@ function SCOBotBase(options) {
     this.init();
 }
 function startResumeEvent(params){
-    console.log(params)
+    // console.log(params)
      //console.log('pause and location',params)
      var rec_status,jsonData
-     user_id=window.localStorage.getItem('scorm_user_id');
-     course_id=window.localStorage.getItem('course_id');
-     str=params
+     var user_id=window.localStorage.getItem('scorm_user_id');
+     var course_id=window.localStorage.getItem('course_id');
+     var str=params
      var strSplit = str.split(' ');
      /////knowledge material
      let score_raw,score_min,score_max,score_scaled,score_success_status
@@ -1599,7 +1599,7 @@ function startResumeEvent(params){
          jsonDataKnowledge.score_success_status=score_success_status
      }
      if(jsonDataKnowledge.score_raw&&jsonDataKnowledge.score_min&&jsonDataKnowledge.score_max&&jsonDataKnowledge.score_scaled&&jsonDataKnowledge.score_success_status){
-         console.log(jsonDataKnowledge,'lllllllllllllllllllllllll')
+        //  console.log(jsonDataKnowledge,'lllllllllllllllllllllllll')
      }
      /////end of knowledge material
      const foundInCom = strSplit.find(element => element === 'incomplete');
@@ -1645,11 +1645,11 @@ function startResumeEvent(params){
      }
      if(rec_status){
         window.localStorage.setItem('scorm_player_result',JSON.stringify(jsonData));
-        getcourse(jsonData).then(data=> console.log(data,"data course"))
+        getcourse(jsonData).then(data=> console.log())
     }
 
     async function getcourse(jsonData) {
-       const response = await fetch('http://loclhost:3000/course/coursestatus', {
+       const response = await fetch('http://20.44.41.200:3000/course/coursestatus', {
         method: 'POST',
         body:JSON.stringify(jsonData), // string or object
         headers: {

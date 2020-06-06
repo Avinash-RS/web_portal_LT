@@ -1,5 +1,6 @@
 Feature: Logout Functionality test
 
+@sprint1
 Scenario: Logout test when user already logged in
 
 Given : User is already logged in the system 

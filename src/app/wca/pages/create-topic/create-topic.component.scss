@@ -4,11 +4,11 @@
     box-shadow: none;
 }
 
-::ng-deep .mat-expansion-indicator {
+:host ::ng-deep .mat-expansion-indicator {
     margin-right: 25px !important;
 }
 
-::ng-deep .mat-expansion-indicator::after {
+:host ::ng-deep .mat-expansion-indicator::after {
     padding: 7px !important;
     color: $color-blue;
 }
@@ -441,7 +441,7 @@ input[type=text]
     font-size: 13px;
 }
 
-::ng-deep .mat-form-field-underline {
+:host ::ng-deep .mat-form-field-underline {
     display: none !important;
 }
 

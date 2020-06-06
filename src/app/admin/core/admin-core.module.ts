@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { SidemenuItemComponent } from './sidemenu-item/sidemenu-item.component';
@@ -21,14 +21,13 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FullscreenComponent } from './fullscreen/fullscreen.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
-
-
-
 import {
     MatSidenavModule,
     MatSliderModule,
     MatProgressBarModule,
 } from '@angular/material';
+import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -39,17 +38,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     declarations: [
         SidemenuComponent,
+        LineChartComponent,
         SidemenuItemComponent,
         ToolbarNotificationComponent,
         ToolbarComponent,
         SearchBarComponent,
         FullscreenComponent,
         SidebarComponent,
-        UserMenuComponent
+        UserMenuComponent,
+
     ],
 
     imports: [
         CommonModule,
+        ChartsModule,
         MatListModule,
         MatButtonModule,
         MatInputModule,
@@ -64,6 +66,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatTabsModule,
         MatSliderModule,
         MatProgressBarModule,
+        // LineChartComponent
     ],
 
 
@@ -75,9 +78,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SearchBarComponent,
         FullscreenComponent,
         SidebarComponent,
-        UserMenuComponent
+        UserMenuComponent,
+        LineChartComponent
     ],
-
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

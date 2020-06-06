@@ -17,6 +17,6 @@ export class AlertComponentComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close("Thanks for using me!");
+    this.dialogRef.close();
   }
 }

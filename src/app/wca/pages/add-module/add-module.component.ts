@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { NgxSpinnerService } from 'ngx-spinner';
 import { debug } from 'util';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class AddModuleComponent implements OnInit {
   scormPath = '';
   isScrom: boolean;
   isCreate: boolean;
+  breakpoint: any;
 
   constructor(public spinner: NgxSpinnerService,
     private alertService: AlertServiceService,
@@ -56,7 +58,10 @@ export class AddModuleComponent implements OnInit {
           courseId: params.courseId,
           courseImage: params.courseImage,
           courseName: params.courseName,
-        };
+        }
+        console.log(this.queryData)
+        // added by ankit 
+        localStorage.setItem('courseid',this.routedCourseDetails.courseId)
       }
     });
     this.route.snapshot.paramMap.get('courseDetails');
@@ -66,7 +71,7 @@ export class AddModuleComponent implements OnInit {
       if (this.isCreate) {
         this.isCreate = false;
         setTimeout(() => {
-          debugger
+          // debugger
           this.getCourseDetails();
         }, 5000);
       }
@@ -352,11 +357,11 @@ export class AddModuleComponent implements OnInit {
     this.hoverName = n;
   }
   onRefernceBtnClick() {
-    this.router.navigate(['/Admin/auth/Wca/rf']);
+    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf']);
+    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
   }
 
   getRepoModules() {

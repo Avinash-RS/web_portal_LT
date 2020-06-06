@@ -12,9 +12,9 @@ var {setDefaultTimeout} = require('cucumber');
 setDefaultTimeout(60 * 1000);
 
 Given(': User is already logged in the system', async ()=> {
-    browser.waitForAngularEnabled(false);
+    await browser.waitForAngularEnabled(false);
     await browser.get(browser.params.login.url);
-    await browser.manage().window().maximize();
+   // await browser.manage().window().maximize();
     await lout.Username.sendKeys(browser.params.login.user);
     await lout.Password.sendKeys(browser.params.login.pwd);
 });
@@ -22,6 +22,7 @@ Given(': User is already logged in the system', async ()=> {
 
 Given(': Remember me checked during log in', async ()=> {
     await lout.RememberMe.click();
+    await browser.sleep(2000);
     await lout.LoginButton.click();            
 });
 
@@ -37,7 +38,7 @@ Then(': User must be logged out of the system', async ()=> {
 });
 
 Then(': User again loads the URL', async ()=> {
-    await browser.get('http://40.76.47.212/Learner/login');    
+    await browser.get(browser.params.login.url);    
   });
 
   Then(': it should not be logged into the Portal.', async ()=> {
