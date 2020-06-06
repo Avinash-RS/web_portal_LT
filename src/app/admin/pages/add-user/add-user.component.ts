@@ -255,6 +255,7 @@ flattree(items) {
     }).then((result) => {
       if (result.value) {
         this.selectedfile = '';
+        this.group = '';
       }
     });
   }

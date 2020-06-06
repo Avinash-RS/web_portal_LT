@@ -14,7 +14,7 @@
         <div class="row m-b-10">
           <div class="col-lg-7 col-sm-12 col-12 col-md-7 display_flex m-b-10">
             <mat-form-field class="wid-100">
-              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" required
+              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" [max]=today required
                 #fromdate1="ngModel" [matDatepicker]="picker" placeholder="Start date" color="accent">
               <mat-datepicker-toggle matSuffix [for]="picker">
               </mat-datepicker-toggle>
@@ -183,7 +183,7 @@
                 <mat-form-field class="wid-100">
                   <input matInput name="exportfromdate" [disabled]="exportdata == 'exportall'"
                     [(ngModel)]="exportfromdate" (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel"
-                    [matDatepicker]="picker2" placeholder="Start date" color="accent">
+                    [matDatepicker]="picker2" placeholder="Start date" color="accent" [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker2">
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
@@ -194,7 +194,7 @@
 
                 <mat-form-field class="wid-100">
                   <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield required
-                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=fromdate
+                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=exportfromdate
                     [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker3">
                   </mat-datepicker-toggle>
