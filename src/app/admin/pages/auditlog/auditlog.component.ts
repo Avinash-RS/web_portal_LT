@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import Swal from 'sweetalert2';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-auditlog',
@@ -31,8 +32,8 @@ export class AuditlogComponent implements OnInit {
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
   exportdata = 'exportall';
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private dialog: MatDialog, private adminservice: AdminServicesService) { }
-
+  constructor(private dialog: MatDialog, private adminservice: AdminServicesService, private locationStrategy: LocationStrategy) {
+  }
   ngOnInit() {
     this.displayedColumns = this.displayedColumns.concat(['action']);
     this.getallauditreports('0');
@@ -86,13 +87,17 @@ export class AuditlogComponent implements OnInit {
         //    element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
         //    element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
         // });
+        if (pgnumber === 0) {
+          this.reports = [];
+        }
+        Array.prototype.push.apply(this.reports, result.message);
         this.dataSource.data = this.reports;
         this.resultsLength = result?.total_count;
       }
     });
   }
   openviewdialog(data, templateRef) {
-    this.dialog.open(templateRef);
+    this.dialog.open(templateRef, { disableClose: true });
     this.viewdetail = data;
   }
   closedialogbox() {
@@ -124,6 +129,11 @@ export class AuditlogComponent implements OnInit {
           //   element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
           //   element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
           //  });
+          if (pgnumber === 0) {
+            this.reports = [];
+          }
+          Array.prototype.push.apply(this.reports, result.message);
+          this.dataSource.data = this.reports;
           this.dataSource.data = this.reports;
           this.resultsLength = result.total_count;
         } else {
@@ -134,7 +144,7 @@ export class AuditlogComponent implements OnInit {
     }
   }
   cancel(filterform) {
-    filterform.reset();
+    filterform.resetForm();
     this.requiredfield = false;
     this.enablefield = true;
     this.getallauditreports('0');
@@ -175,6 +185,6 @@ export class AuditlogComponent implements OnInit {
     }
   }
   openexportdialog(templateRef) {
-    this.dialog.open(templateRef);
+    this.dialog.open(templateRef , { disableClose: true });
   }
 }

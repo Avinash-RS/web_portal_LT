@@ -809,6 +809,7 @@ query getenrolledcourses($group_id: String!,$pagenumber: Int!,$is_individual: Bo
     message{
           _id
           user_id
+          user_obj_id
           course_id
           enroll_date
           lxp_joined_date

@@ -7,7 +7,9 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog ,MatDialogConfig} from '@angular/material';
-
+import { StarRatingComponent } from 'ng-starrating';
+import { json } from 'd3';
+ 
 @Component({
   selector: 'app-scormplayer',
   templateUrl: './scormplayer.component.html',
@@ -68,6 +70,7 @@ export class ScormplayerComponent implements OnInit {
     this.contentid = 'dfdfd'
     this.url = environment.scormUrl + 'scormPlayer.html?contentID=' + this.contentid + '&user_id=' + this.user_id + '&course_id=' + this.course_id
     this.getModuleData();
+    this.getFeedbackQue()
   }
   getcontent() {
     this.service.list_content().subscribe(data => {
@@ -82,7 +85,7 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       if (data.data['getmoduleData']['success'] === 'true') {
         this.content = data.data['getmoduleData']['data'][0];
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id);
         //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
         this.modulength = this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
@@ -125,7 +128,7 @@ export class ScormplayerComponent implements OnInit {
   }
   getFeedbackQue() {
     this.service.getFeedbackQuestion().subscribe(data => {
-      //console.log(data.data['getFeedbackQuestion']['success'])
+      console.log(data.data['getFeedbackQuestion']['success'])
       if (data.data['getFeedbackQuestion']['success'] === true) {
         ///console.log(data.data['getFeedbackQuestion'])
         this.allFeedbackQue = data.data['getFeedbackQuestion']['data']
@@ -138,12 +141,20 @@ export class ScormplayerComponent implements OnInit {
     this.question_id.question_ans = question_ans
     this.question_id.user_id = 'hghghjg'
     this.service.InsertCourseFeedback(this.question_id).subscribe(data => {
-      if (data.data['InsertCourseFeedback']['success'] == true) {
+      if (data.data['InsertCourseFeedback']['success'] == "true") {
         this.show = false;
         console.log('success')
       } else {
         console.log('fail')
       }
     })
+  }
+  onRate(rating,id) {
+    var jsonData={
+      rating:rating.newValue,
+      question_id:id
+    }
+    this.question_id.push(jsonData)
+  
   }
 }
