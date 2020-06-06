@@ -30,9 +30,11 @@ export class EnrollmentComponent implements OnInit {
   dialogopened = false;
   selectedgroupid: any;
   enrollrequestdata: any;
-  resultsLength: any;
+  resultsLength: number = null;
   resultsLength1: any;
   loading = false;
+  enrollmentrecords: any;
+  groupenrollmentrecords: any;
   constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
@@ -44,6 +46,9 @@ export class EnrollmentComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // tslint:disable-next-line:only-arrow-functions
+    
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
       return data?.username?.toLowerCase().includes(filter) || data?.full_name?.toLowerCase().includes(filter) ||
         data?.course_name?.toLowerCase().includes(filter) || data?.group_name?.toLowerCase().includes(filter) ;
@@ -63,6 +68,7 @@ export class EnrollmentComponent implements OnInit {
     // };
   }
   getenrolledcoursesindividual(data) {
+    this.resultsLength = null;
     this.columns = [
       { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element?.enroll_date).format('LL') || ' '}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element?.full_name || ' '}` },
@@ -72,15 +78,19 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
-      this.dataSource.data = result?.data?.getenrolledcourses?.message;
-      this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
-
+      if (data.pagenumber === 0) {
+        this.enrollmentrecords = [];
+      }
+      Array.prototype.push.apply(this.enrollmentrecords, result.data.getenrolledcourses.message);
+      this.dataSource.data = this.enrollmentrecords;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.resultsLength = result?.data?.getenrolledcourses?.enroll_count;
     });
   }
 
   getenrolledcoursesgroup(pagenumber) {
+    this.resultsLength = null;
     this.columns = [
       { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem?.request_date).format('LL') || ' '}` },
       { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem?.course_name || ' ' }` },
@@ -89,17 +99,20 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
-      this.resultsLength = result?.data?.get_all_enrolledcourses?.enroll_count;
-      this.dataSource.data = result?.data?.get_all_enrolledcourses?.message;
       const array = [];
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
              element.group_detail[0].request_date = element.request_date;
              element.group_detail[0].totalCount = element.totalCount;
              array.push(element.group_detail[0]);
       });
-      this.dataSource.data = array;
+      if (pagenumber === 0) {
+        this.enrollmentrecords = [];
+      }
+      Array.prototype.push.apply(this.enrollmentrecords, array);
+      this.dataSource.data = this.enrollmentrecords;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.resultsLength = result?.data?.get_all_enrolledcourses?.enroll_count;
     });
   }
 
@@ -112,8 +125,11 @@ export class EnrollmentComponent implements OnInit {
     ];
     this.displayedColumns1 = (['selectall', 'sno']).concat(this.columns1.map(c => c.columnDef));
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
+      if (data.pagenumber === 0) {
+        this.groupenrollmentrecords = [];
+      }
+      Array.prototype.push.apply(this.groupenrollmentrecords, result?.data?.getenrolledcourses?.message);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
-
       this.dataSource1.data = result?.data?.getenrolledcourses?.message;
       this.dataSource1.paginator = this.paginator;
       this.dataSource1.sort = this.sort;
@@ -193,7 +209,6 @@ export class EnrollmentComponent implements OnInit {
       this.adminservice.approveenrollment(data).subscribe(( response: any ) => {
         if (response?.data?.approve_enrollment?.success === true) {
           this.loading = false;
-          console.log(tablevalue)
           if (this.dialogopened === true) {
             const data1 = { group_id: this.selectedgroupid, pagenumber: 0,
               is_individual: true, course_id: 'undefined' };
@@ -205,7 +220,7 @@ export class EnrollmentComponent implements OnInit {
           }
           const c = array.length > 1 ? 'ids' : 'id';
           Swal.fire({
-            title: '<div>Successfully Approved</div> <br> ',
+            title: '<div>Successfully approved</div> <br> ',
             text: 'A confirmation has been sent to user email ' + c ,
           });
         }
@@ -266,7 +281,6 @@ export class EnrollmentComponent implements OnInit {
 
 
   datachange(row, column, templateRef: TemplateRef<any>) {
-    console.log(row)
     if (column.header === 'User group') {
       this.router.navigateByUrl('/Admin/auth/usergroup', { state: { group_id: row?.group_id || row.group_id } });
     } else if (column.header === 'Course name') {
@@ -309,7 +323,7 @@ export class EnrollmentComponent implements OnInit {
     if (this.selectiontype === 'user_group') {
       this.getenrolledcoursesgroup(e.pageIndex);
     } else {
-      const data = { group_id: 'undefined', pagenumber: e.pageIndex, is_individual: false };
+      const data = { course_id: 'undefined', group_id: 'undefined', pagenumber: e.pageIndex, is_individual: false };
       this.getenrolledcoursesindividual(data);
     }
   }
