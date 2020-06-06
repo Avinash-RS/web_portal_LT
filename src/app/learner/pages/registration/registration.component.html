@@ -1,46 +1,68 @@
 <div class="limiter">
-    <div class="container-reg100 p-t-77">
-        <div class="wrap-reg p-l-50 p-r-50 p-t-77  p-b-30">
-            <h1 class="head">Create an account </h1>
-            <form [formGroup]="registerForm">
-                <div class="form-group">
-                    <label>Full Name</label><span class="star"> *</span>
-                    <input type="text" id="fullname" #fullname formControlName="fullname" placeholder="Full Name"
-                        minlength="3" maxlength="64" class="form-control"
-                        [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
-                    <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
-                        <div *ngIf="f.fullname.errors.required">Full Name is required</div>
-                        <div *ngIf="f.fullname.errors.pattern">Full Name is invalid</div>
-                        <div *ngIf="f.fullname.errors.minlength">Full Name must be minimum of 3 characters </div>
-                        <div *ngIf="f.fullname.errors.maxlength">Full Name must be 50 maximum of characters</div>
-                    </div>
+    <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
+    <span class="pg"><span style="font-size: 12px;">Already have an account !</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick help</span>
+  <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms & conditions</span>
+    <div class="container-reg200">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-9"> -->
+              <!-- <img class="bgimg" src="../../../../assets/learner/bg-6.jpg"> -->
+            <!-- </div> -->
+            <!-- <div class="col-3"> -->
+                <div class="wrap-reg p-l-50 p-r-50 p-t-77">
+                    <form  [formGroup]="registerForm">
+                        <h1 class="head1"> <b>Edu</b>Tech</h1>
+                        <h1 class="signIn">Create an account </h1><br><br><br>
+                        <div class="form-group">
+                            <label class="fromLabel">Full Name</label>
+                            <!-- <span class="star"> *</span> -->
+                            <input type="text" id="fullname" #fullname formControlName="fullname"
+                                minlength="3" maxlength="64" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
+                            <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
+                                <div *ngIf="f.fullname.errors.required">Full Name is required</div>
+                                <div *ngIf="f.fullname.errors.pattern">Full Name is invalid</div>
+                                <div *ngIf="f.fullname.errors.minlength">Full Name must be minimum of 3 characters </div>
+                                <div *ngIf="f.fullname.errors.maxlength">Full Name must be 50 maximum of characters</div>
+                            </div>
+                        </div>
+        
+                     
+        
+        
+                        <div class="form-group space5">
+                            <label class="fromLabel">Email ID</label>
+                            <!-- <span class="star"> *</span> -->
+                            <input type="text" id="email" #email formControlName="email" maxlength="64"
+                                class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
+                            <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
+                            </div><br>
+
+                            <div class="alert "> Note : This name will be used in your certificates</div>
+
+                             <div class="linee"></div>
+                            <br>
+                            <div style="margin-top: -41px;margin-left: 40px;">
+                            <mat-checkbox  formControlName="termsandconditions" required>
+                                <div class="terms"><span style="color:#333">I agree with!</span> <a (click)="openDialog()">&nbsp;&nbsp;<span style="font-size: 14px;">"Terms &
+                                    Conditions"</span></a></div>
+                            </mat-checkbox><br><br></div>
+
+                            <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
+                                Register
+                            </button>
+                           
+                            
+                            <div class="account">Already have an account !
+                                <a [routerLink]="['/Learner/login']"><strong class="col">Sign
+                                        In</strong></a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <span class="alert ">This name will be used in your certificates</span>
-
-
-                <div class="form-group space5">
-                    <label>Email ID</label><span class="star"> *</span>
-                    <input type="text" id="email" #email formControlName="email" placeholder="Email" maxlength="64"
-                        class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" required />
-                    <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
-                    </div><br>
-
-                    <mat-checkbox class="" formControlName="termsandconditions" required>
-                        <div class="terms">I agree to the <a (click)="openDialog()">"Terms and
-                                Conditions"</a> and <br> privacy policy by clicking on register</div>
-                    </mat-checkbox><br><br>
-                    <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
-                        Register
-                    </button><br><br>
-                    <div class="account">Already have an account?
-                        <a [routerLink]="['/Learner/login']"><strong>Sign
-                                In</strong></a>
-                    </div>
-                </div>
-            </form>
-        </div>
+             <!-- </div> -->
+        <!-- </div> -->
+   
     </div>
 </div>
