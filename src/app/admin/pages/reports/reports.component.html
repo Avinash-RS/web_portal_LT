@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item" [routerLink]="['/Admin/auth/userManagement']">Home</li>
+    <li class="breadcrumb-item" [routerLink]="['/Admin/auth/dashboard']">Home</li>
     <li class="breadcrumb-item active" aria-current="page">Reports</li>
   </ol>
 </nav>
@@ -18,7 +18,7 @@
     <ng-container matColumnDef="report_id">
       <mat-header-cell *matHeaderCellDef> Report id </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span class="desktop-data">  {{element.report_id }}</span>
+        <span class="desktop-data"> {{element.report_id }}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="total_count">
@@ -73,7 +73,7 @@
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
- 
+
     <ng-container matColumnDef="failure_count">
       <mat-header-cell *matHeaderCellDef>Failure</mat-header-cell>
       <mat-cell *matCellDef="let element">
@@ -87,7 +87,9 @@
       <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
       <mat-cell *matCellDef="let element" class="centre">
         <!-- <span class="mobile-label">Mobile No</span> -->
-        <span class="desktop-data" (click)="downloadDoc(element.report_url)">   <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon></span>
+        <span class="desktop-data" (click)="downloadDoc(element.report_url)">
+          <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon>
+        </span>
         <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
