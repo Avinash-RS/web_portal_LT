@@ -173,7 +173,7 @@ html {
 }
 
 .f_size_23 {
-  font-size: 23px;
+  font-size: 23px !important;
 }
 
 .f_size_25 {
@@ -357,6 +357,10 @@ td {
   color: $color-blue !important;
 }
 
+.color_label {
+  color: $label !important;
+}
+
 .color_white {
   color: $color-white !important;
 }
@@ -500,7 +504,7 @@ input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: $color-light-blue;
+  // background: $color-light-blue;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -512,10 +516,6 @@ input[type="password"] {
 //   font-weight: 500;
 // }
 
-.head {
-  text-align: center;
-  color: $color-blue !important;
-}
 
 .mand {
   color: $color-red !important;
@@ -704,4 +704,8 @@ mat-header-cell,
 .angular-editor-textarea[_ngcontent-udl-c31] {
   background-color: #1f3777 !important;
   outline-color: lightblue;
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.41) !important;
 }
