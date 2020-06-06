@@ -78,7 +78,6 @@ export class LearnerprofileComponent implements OnInit {
     this.dataSource1.paginator = this.paginator;
   }
   getprofiledetails() {
-    console.log(this.userid)
     if (this.userid) {
       this.learnerservice.view_profile1(this.userid.user_id).subscribe((profiledetail: any) => {
         this.profiledetail = profiledetail?.data?.view_profile?.message[0];

@@ -92,7 +92,7 @@ export class AuditlogComponent implements OnInit {
     });
   }
   openviewdialog(data, templateRef) {
-    this.dialog.open(templateRef);
+    this.dialog.open(templateRef, { disableClose: true });
     this.viewdetail = data;
   }
   closedialogbox() {
@@ -134,7 +134,7 @@ export class AuditlogComponent implements OnInit {
     }
   }
   cancel(filterform) {
-    filterform.reset();
+    filterform.resetForm();
     this.requiredfield = false;
     this.enablefield = true;
     this.getallauditreports('0');
@@ -175,6 +175,6 @@ export class AuditlogComponent implements OnInit {
     }
   }
   openexportdialog(templateRef) {
-    this.dialog.open(templateRef);
+    this.dialog.open(templateRef , { disableClose: true });
   }
 }
