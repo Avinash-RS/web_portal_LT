@@ -60,9 +60,12 @@ export class OtpComponent implements OnInit {
     disableAutoFocus: false,
     placeholder:'',
     inputStyles: {
-      'width': '60px',
-      'height': '60px',
-      'background': '#B8D0FF'
+      'width': '40px',
+      'height': '40px',
+       'border-radius': '4px'
+      // 'margin-right': '15px',
+      // 'margin-left':'20px'
+      // 'background': '#B8D0FF'
     }
   };
 

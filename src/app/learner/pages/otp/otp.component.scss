@@ -1,14 +1,14 @@
 @import "variable";
 
 input[type=text] {
-  width: 105%;
-  padding: 12px 20px;
+  width: 100%;
+  // padding: 12px 20px;
   margin: 1px 0;
-  background: $color-light-blue;
+  // background: $color-light-blue;
   display: inline-block;
   border: 1px solid $color-border;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 0px !important;
 }
   .otp {
     margin: 0 5px;
@@ -16,10 +16,10 @@ input[type=text] {
     font-size: 27px;
     outline: none;
     width: 21%;
-    background-color:$color-light-blue !important;
+    // background-color:$color-light-blue !important;
     transition: all .2s ease-in-out;
     &:focus {
-      border-color: $color-light-blue;
+      // border-color: $color-light-blue;
       box-shadow: 0 0 5px $color-light-blue inset;
     }
     
@@ -27,13 +27,100 @@ input[type=text] {
       background: transparent;
     }
   }
+  :host ::ng-deep label {
+    margin-bottom: .1em !important;
+}
+
+.btn.disabled, .btn:disabled {
+  opacity: .65;
+  color: #333 !important;
+  background-color: $color-border !important;
+}
   div.account{
     color: $color-blue;
     word-break: break-all !important;
     text-align: center !important;
     cursor: pointer;
+    margin-top: 20%;
+}
+.did{
+  color: #333;
 }
 .star{
   color: $color-red;
 } 
-  
+.link {
+  color: $color-white !important;
+}
+:host ::ng-deep .container-reg200 {
+  width: 100%;
+  height: 100vh!important;
+  display: flex;
+  justify-content: center; 
+   align-items: center; 
+   background-size: cover !important; 
+   background-repeat: no-repeat !important;
+  background: url('../../../../assets/learner/bg-6.jpg');
+}
+.wrap-reg {
+  width: 30%;
+  height: 100%;
+  border-radius: 0px !important;
+  margin-left: 70% !important;
+  overflow: hidden !important;
+}
+
+.pg{
+  position: absolute;
+  color: $color-white;
+  padding: 7px;
+  margin-top: 16px;
+  margin-left: 42% !important;
+  /* background-color: #ffffff85; */
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+.privcy{
+  position: absolute;
+  color: $color-white;
+  padding: 7px;
+  margin-top: 45%;
+  margin-left: 47% !important;
+  /* background-color: #ffffff85; */
+  font-size: 14px;
+  font-weight: normal !important;  
+}
+
+
+.lxplogo{
+  text-align: center;
+  margin-left: 94px;
+  margin-right: 94px;
+  width: 110px;
+}
+.head1{
+  text-align: center;
+  font-weight: normal !important;
+  font-size: 21px;
+}
+:host ::ng-deep.p-t-77 {
+  padding-top: 21px !important;
+}
+
+.signIn{
+  text-align : center !important;
+  color: $color-blue !important;
+  font-weight: lighter !important ;
+}
+
+.bgimg{
+  width: 99%;
+  height: 657px;
+}
+.lnt_logo{
+  position: absolute;
+  width: 10%;
+  margin-top: 21px;
+  margin-left: 108px;
+}
