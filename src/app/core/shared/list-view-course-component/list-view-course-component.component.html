@@ -52,17 +52,20 @@
 
           <button id="enroll_now" mat-stroked-button class="pointer"
             *ngIf="course.enrollment_status == null && btnType == 'Enroll Now'" (click)="enrollCourse(btnType)">
-            Enroll 
+            Enroll
           </button>
 
-          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'pending'"
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'pending'"
             disabled="{{course.enrollment_status == 'pending'}}"> Requested
           </button>
 
-          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'rejected'"
-            disabled="{{course.enrollment_status == 'rejected'}}"> Request Rejected
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'rejected'"
+            disabled="{{course.enrollment_status == 'rejected'}}"> Rejected
           </button>
-          <button id="enroll_now" mat-stroked-button *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'approved'"
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'approved'"
             disabled="{{course.enrollment_status == 'approved'}}">Enrolled
           </button>
 
