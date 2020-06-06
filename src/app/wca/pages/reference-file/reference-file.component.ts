@@ -101,6 +101,7 @@ export class ReferenceFileComponent implements OnInit {
     payload.append("module_id", this.referenceLinkForm.value.module.modulename);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
     payload.append("user_id",this.currentUser.user_id);
+    payload.append("course_id",this.courseId);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
@@ -140,7 +141,7 @@ removeDoc(recordID){
 getAllRefDoc(pagenumber){
   if (pagenumber == 0)
   this.ELEMENT_DATA = []
-  this.service.getallrefdoc(pagenumber).subscribe(data => {
+  this.service.getallrefdoc(pagenumber, this.courseId).subscribe(data => {
     this.getdocData = data.data['getallrefdoc']['data'];
     this.count = data.data['getallrefdoc']['count'];
    Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
