@@ -332,5 +332,11 @@ export class EnrollmentComponent implements OnInit {
     const data = { group_id: this.selectedgroupid, pagenumber: e.pageIndex, is_individual: true };
     this.getenrolledcoursesforgroup(data);
   }
+ // tslint:disable-next-line:use-life-cycle-interface
+ ngOnDestroy() {
+  if (this.dialog) {
+      this.dialog.closeAll();
+  }
+}
 
 }
