@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">User management</a></li>
     <li class="breadcrumb-item active" aria-current="page">Course enrollment</li>
   </ol>
@@ -63,15 +63,15 @@
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
           <div *ngIf="column.header == 'Enrollments'">
-            <mat-header-cell  *matHeaderCellDef>
+            <mat-header-cell *matHeaderCellDef>
               <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
               {{ column.header }}</mat-header-cell>
           </div>
-         <div *ngIf="column.header != 'Enrollments'">
-          <mat-header-cell   *matHeaderCellDef mat-sort-header>
-            <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
-            {{ column.header }}</mat-header-cell>
-        </div>         
+          <div *ngIf="column.header != 'Enrollments'">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+              {{ column.header }}</mat-header-cell>
+          </div>
           <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
           </mat-cell>
         </ng-container>
@@ -92,7 +92,7 @@
   <div class="row">
     <div style="margin-left: 80%">
       <button [disabled]="selectedcheckbox1" (click)="approve(dataSource1.data)" class="button button5">Approve</button>
-    <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
+      <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
     </div>
   </div>
   <!-- <div class="buttons">
