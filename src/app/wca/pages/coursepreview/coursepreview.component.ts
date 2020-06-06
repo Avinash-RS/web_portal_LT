@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material";
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-coursepreview',
@@ -129,7 +130,7 @@ export class CoursepreviewComponent implements OnInit {
   }
   
   previewcourse(templateRef: TemplateRef<any>) {
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
     console.log(this.content.url)
     // this.dialog.open(templateRef);
