@@ -106,12 +106,12 @@ export class WcaService {
       }
     });
   }
-  getallrefdoc(pagenumber) {
+  getallrefdoc(pagenumber,course_id) {
     return this.Apollo.query({
       query: getallrefdoc,
       variables: {
-        pagenumber: pagenumber
-
+        pagenumber: pagenumber,
+        course_id: course_id
       }
     });
   }
