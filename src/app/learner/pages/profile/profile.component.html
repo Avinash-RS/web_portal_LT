@@ -15,7 +15,8 @@
     </span>
 
     <div class="row" style="margin-top: 7%;">
-      <div class="col-4" style="margin-top: 9%;">
+
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 9%;">
         <div class="row" *ngIf="userData">
           <div class="col-md-1"></div>
           <div class="col-md-8 col-sm-10 col-10 bb">
@@ -26,8 +27,6 @@
               (click)="editPassword(passwordDialog)">create</mat-icon>
           </div>
         </div>
-
-        <!-- <hr *ngIf="userData.user_mobile" style="border: 0.5px solid rgb(185, 185, 185);      width: 83%; "> -->
 
         <div class="row m-t-25px">
           <div class="col-md-1"></div>
@@ -40,8 +39,6 @@
               create</mat-icon>
           </div>
         </div>
-
-        <!-- <hr *ngIf="userData.email" style="border: 0.5px solid rgb(185, 185, 185);      width: 83%;     "> -->
 
         <div class="row m-t-25px m-b-10" *ngIf="userData.email">
           <div class="col-md-1"></div>
@@ -64,48 +61,56 @@
 
       </div>
 
-      <div class="col-4 width_100 center">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center">
         <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img2.png'"
           id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="230px" style="margin : auto;display : block;
-          height: 220px;
-            border: 8px solid #fff;">
+          height: 220px; border: 8px solid #fff;">
         <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
         <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
         </mat-icon>
 
-        <div class="uname">{{'Mythreyi Gullapalli'}} </div>
+        <div class="uname">{{userData?.full_name || 'Full Name'}} </div>
 
         <div class="width_100 center_align stateDet">
-          {{userData.state_detail && userData.state_detail[0].statename}}, India
+          {{userData.state_detail && userData.state_detail[0].statename || 'Sate'}},
+          {{userData.country_detail && userData.country_detail[0].countryname || 'Country' }}
         </div>
 
         <div class="f_wt_400 uID">
 
-          <span class="f_size_16"> {{'MythreyiG'}} &nbsp;&nbsp;| &nbsp;&nbsp; </span>
+          <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}} &nbsp;&nbsp;|
+            &nbsp;&nbsp; </span>
+
+          <span class="f_size_16">{{userData.user_profile && (userData.user_profile[0].gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
+            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') }}
+            &nbsp;&nbsp;| &nbsp;&nbsp;
+          </span>
 
           <span
-            class="f_size_16">{{userData.user_profile && userData.user_profile[0].gender =='M' ? 'Male' : 'Female' }}
+            class="f_size_16">{{userData.user_profile && (userData.user_profile[0].is_student_or_professional =='student' ? 
+            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Role')}}
             &nbsp;&nbsp;| &nbsp;&nbsp;
           </span>
 
-          <span class="f_size_16">{{userData.user_profile && userData.user_profile[0].is_student_or_professional =='student' ? 
-            'Student' : 'Professional' }}
-            &nbsp;&nbsp;| &nbsp;&nbsp;
-          </span>
-
-          <span class="f_size_16" *ngFor = "let l of userData?.language_detail"> {{l.languagename}} , </span>
-
+          <span class="f_size_16" *ngFor="let l of userData?.language_detail;let i = index">
+            {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}} </span>
         </div>
 
-        <div style="font-size: 16px;font-weight: 500;margin-top : 5px;color :#004072;margin-bottom : 15px"
-          class="width_100 center_align m-b-10">
+        <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
           Member Since
           {{userData.user_dtl && userData.user_dtl.created_on | date}}
         </div>
 
       </div>
 
-      <div class="col-4"></div>
+      <div class="col-xl-4 col-lg-4 col-md-2 col-sm-12 col-12">
+        <!-- <div class="row" style="margin-top: 40%;">
+          <span class="percentText color_blue">Profile Progress</span><span
+            class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
+          <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
+          </mat-progress-bar>
+        </div> -->
+      </div>
     </div>
   </div>
 
@@ -117,9 +122,9 @@
         <!-- ////// Info about you//////// -->
         <div class="row">
           <div class="form-group width_100">
-            <label>About Me</label>
-            <textarea style="resize: none;" rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label background_trans width_100' :
-                'inputs  color_label background_trans width_100'"
+            <label class="f_size_19">About Me</label>
+            <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
+                'inputs  color_label  width_100'"
               [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" placeholder="1000 characters"
               formControlName="about_you" name="about_you"></textarea>
             <div *ngIf="f.about_you.touched && f.about_you.errors" class="invalid-feedback">
@@ -138,8 +143,8 @@
         <!-- //////Gender part//////// -->
         <div class="row" *ngIf="!cannotEdit">
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
-            <label class="p-b-10px">Gender</label><span style="color: red;" class="p-b-10px"> *</span>
-            <div class="form-group ">
+            <label class="p-b-10px f_size_19">Gender</label><span class="mand p-b-10px"> *</span>
+            <div class="form-group">
               <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
                 <mat-radio-button value="M">Male</mat-radio-button>
                 <mat-radio-button value="F">Female</mat-radio-button>
@@ -150,7 +155,7 @@
 
           <!-- //////I'm a//////// -->
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
-            <label class="p-b-10px">I Am a</label><span style="color: red;" class="p-b-10px"> *</span>
+            <label class="p-b-10px f_size_19">I Am a</label><span class="mand p-b-10px"> *</span>
             <div class="form-group ">
               <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
                 name="is_student_or_professional">
@@ -163,9 +168,9 @@
           <!-- //////Language known//////// -->
           <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
             <div class="form-group p-b-10px">
-              <label>Languages known</label><br>
+              <label class="f_size_19">Languages known</label><br>
               <mat-select [disabled]='cannotEdit' multiple
-                [ngClass]="cannotEdit ? 'n inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
+                [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
                 placeholder="Language" formControlName="languages_known" name="language">
                 <mat-option *ngFor="let item of languageList" [value]="item._id">
                   {{item.languagename}}
@@ -173,8 +178,8 @@
               </mat-select>
               <!-- <ng-container *ngIf="lang">
                   <input type="text" class="inputs col-md-6 col-sm-12 col-12"
-                 [ngClass]="cannotEdit ? 'dis inputs  color_blue background_trans width_80' :
-                'inputs  color_blue background_trans width_80'"
+                 [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+                'inputs  color_blue  width_80'"
                  formControlName="languages_known">
                 </ng-container> -->
             </div>
@@ -186,11 +191,11 @@
         <br *ngIf="!cannotEdit">
 
         <!-- //////Location//////// -->
-        <label class="p-b-10px" *ngIf="!cannotEdit">Location</label>
-        <span *ngIf="!cannotEdit" style="color: red;"> *</span><br>
+        <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Location</label>
+        <span *ngIf="!cannotEdit" class="mand"> *</span><br>
         <div class="row p-b-10px" *ngIf="!cannotEdit">
           <div class="col-md-2 col-lg-2 col-sm-12 col-12">
-            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'" placeholder="Country"
+            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Country"
               formControlName="country" name="country" (selectionChange)="getAllState()">
               <mat-option [value]="country._id" *ngFor="let country of countryValue">
                 {{country.countryname}}
@@ -198,7 +203,7 @@
             </mat-select>
           </div>
           <div class="col-md-2 col-lg-2 col-sm-12 col-12">
-            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'" placeholder="State"
+            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="State"
               formControlName="state" name="state" (selectionChange)="getDistrict()">
               <mat-option [value]="state._id" *ngFor="let state of stateValue">
                 {{state.statename}}
@@ -206,8 +211,8 @@
             </mat-select>
           </div>
           <div class="col-md-2 col-lg-2 col-sm-12 col-12">
-            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'" placeholder="District"
-              formControlName="city_town" name="City">
+            <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
+              placeholder="District" formControlName="city_town" name="City">
               <mat-option [value]="city._id" *ngFor="let city of cityValue">
                 {{city.districtname}}
               </mat-option>
@@ -217,21 +222,21 @@
 
         <br *ngIf="!cannotEdit">
         <hr *ngIf="!cannotEdit" class="p-b-10px">
-        <br *ngIf="!cannotEdit">
+        <br *ngIf="!cannotEdit" class="f_size_19">
 
         <!-- ////////////Qualification row////////////// -->
-        <label class="p-b-10px">Qualification</label><span style="color: red;"> *</span><br>
+        <label class="f_size_19 p-b-10px">Qualification</label><span class="mand"> *</span><br>
         <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
           <div class="row p-b-10px" [formGroupName]="in">
             <div class="col-md-3 col-sm-12 col-12 display_flex">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'" placeholder="Level"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
                 formControlName="qualification" name="qualification" (selectionChange)="changed($event.value,in)">
                 <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
                   (click)="checkSpec(qual,in,profileForm.qualification,lv)">
                   {{lv.level_name}}
                 </mat-option>
               </mat-select>
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                 placeholder="Board/University" formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
@@ -244,7 +249,7 @@
               <!-- <mat-form-field *ngIf=""> -->
               <ng-container
                 *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
-                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'"
+                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                   placeholder="Institute" formControlName="institute" name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
                     {{item.institute_name}}
@@ -254,10 +259,10 @@
               <!------------------------Institute textbox for 10th and 12th--------------------->
               <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
                 *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
-                <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs  color_label background_trans width_80' :
-                'inputs  color_blue background_trans width_80'" formControlName="institute">
+                <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
+                'inputs  color_blue  width_80'" formControlName="institute">
               </ng-container>
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines">
                   {{item.discipline_name}}
@@ -268,7 +273,7 @@
             <div class="col-md-3 col-sm-12 col-12 display_flex">
               <ng-container
                 *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
-                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n inputs' : 'inputs'"
+                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                   placeholder="Specification" formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">
                     {{item.specification_name}}
@@ -276,16 +281,16 @@
                 </mat-select>
               </ng-container>
               <ng-container>
-                <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs  color_label background_trans width_80' :
-                'inputs  color_blue background_trans width_80'" placeholder="Year of Passing"
-                  formControlName="year_of_passing" (change)="yearOfpassing(in)">
+                <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
+                'inputs  color_blue  width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
+                  (change)="yearOfpassing(in)">
               </ng-container>
             </div>
 
             <div class="col-md-3 col-sm-12 col-12 display_flex">
-              <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label background_trans m-l-10px' :
-                'inputs  width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
-                formControlName="percentage" maxlength="5" (blur)="formatPercentage(in)">
+              <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label  m-l-10px' :
+                'inputs  width_50 color_blue  m-l-10px'" placeholder="Percentage" formControlName="percentage"
+                maxlength="5" (blur)="formatPercentage(in)">
               <mat-icon (click)="addQualification()"
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
                 class="p-5px cG">add
@@ -303,13 +308,13 @@
         <br>
 
         <!-- ////////////Certificate row////////////// -->
-        <label class="p-b-10px">Certificate</label><br>
+        <label class="p-b-10px" class="f_size_19">Certificate</label><br>
         <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
 
             <input type="text"
-              [ngClass]="cannotEdit ? 'dis inputs  color_label background_trans width_80': 'inputs  color_blue background_trans width_80 ena'"
+              [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs  color_blue  width_80 ena'"
               placeholder="Certificate Link" formControlName="{{i}}">
             <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
               profileForm.value.certificate.length < 15" class="p-5px cG">add
@@ -323,16 +328,15 @@
         <hr>
         <br class="p-b-10px">
 
-        <label class="p-b-10px">Social Media</label><br>
+        <label class="p-b-10px" class="f_size_19">Social Media</label><br>
         <!-- ////////////Social Link row////////////// -->
         <div formArrayName="social_media" class="row p-b-10px"
           *ngFor="let social of social_media.controls; let ind=index">
-          <div [ngClass]="cannotEdit ? 'dis col-md-2 col-sm-4 col-8 display_flex' :
+          <div [ngClass]="cannotEdit ? 'col-md-2 col-sm-4 col-8 display_flex' :
             'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
             <i class="fa fa-linkedin linkedin " aria-hidden="true"></i>
-            <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit"
-              class="inputs color_blue background_trans width_80" placeholder="Social Media Link"
-              formControlName="link">
+            <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs color_blue width_80 dis' :
+            'inputs color_blue width_80'" placeholder="Social Media Link" formControlName="link">
             <!-- {{profileForm.value.link}} -->
             <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
               </mat-icon>
@@ -345,22 +349,20 @@
         <hr *ngIf="profileForm.value.is_student_or_professional == 'professional'">
         <br>
 
-
-
         <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
-          <label class=" p-b-10px">Experience</label><span style="color: red;"> *</span><br>
+          <label class="f_size_19 p-b-10px">Experience</label><span class="mand"> *</span>
           <div class="row p-b-10px" formGroupName="professional">
             <div class="col-md-2 col-sm-4 col-8">
               <!-- {{f.professional.controls.total_experience.touched}},
                 {{f.professional.controls.total_experience.errors.required}} -->
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue background_trans width_80' :
-                'inputs  color_blue background_trans width_80'"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+                'inputs  color_blue  width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
                 placeholder="Total Experience" formControlName="total_experience">
-              <div style="color: red;" *ngIf="f.professional.controls.total_experience.touched && 
+              <div class="mand" *ngIf="f.professional.controls.total_experience.touched && 
                   f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
               </div>
-              <div style="color: red;"
+              <div class="mand"
                 *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
                 <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
                 </div>
@@ -369,12 +371,12 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue background_trans width_80' :
-                'inputs  color_blue background_trans width_80'"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+                'inputs  color_blue  width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
                 placeholder="Organization" formControlName="organization">
               <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
-                style="color: red;">
+                class="mand">
                 <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
                 </div>
                 <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
@@ -385,11 +387,11 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue background_trans width_80' :
-                'inputs  color_blue background_trans width_80'" placeholder="Job role" formControlName="job_role"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+                'inputs  color_blue  width_80'" placeholder="Job role" formControlName="job_role"
                 [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
               <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
-                style="color: red;">
+                class="mand">
                 <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
                 </div>
                 <div *ngIf="f.professional.controls.job_role.errors.pattern">Job role is invalid
@@ -405,25 +407,22 @@
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
           <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
-            (click)="updateProfile()">I Am Done</button>
+            (click)="updateProfile()">Save</button>
         </div>
       </form>
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" style="color: grey;" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
-        <h2 style="border-bottom: 1px solid #ccc;padding-bottom: 12px;">Change Email Id</h2>
+        <h2 class="bb" style="padding-bottom: 12px;">Change Email Id</h2>
         <mat-dialog-content style="width: 600px;margin-top: 24px; height: 150px;">
           <form [formGroup]="mailForm">
-            <div class="form-group" style="margin: auto;
-            display: block;
-            text-align: center;">
-            <br>
+            <div class="form-group" classs="center center_align">
+              <br>
               <label class="f_size_19 f_wt_400 color_black" style="font-size: 17px;">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control width_50"
-              style="margin-left : 15px"
-                [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
+                style="margin-left : 15px" [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
               <div *ngIf="c.mailid.touched && c.mailid.errors" class="invalid-feedback">
                 <div *ngIf="c.mailid.errors.required">Email is required</div>
                 <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
@@ -435,26 +434,24 @@
           </form>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
-          <div class="account" *ngIf="resendLabel">Don't receive link?<button
-              class="no_border f_wt_500 background_trans color_blue" (click)="updateEmail(mailForm.valid)">Resend
+          <div class="account" *ngIf="resendLabel">Don't receive link?<button class="no_border f_wt_500  color_blue"
+              (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" style="color: grey;" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h2 style="border-bottom: 1px solid #ccc;padding-bottom: 12px;">Change Mobile Number</h2>
         <mat-dialog-content style="width: 600px;margin-top: 24px;height: 150px;">
           <form [formGroup]="otpForm">
-            <div class="form-group" style="margin: auto;
-            display: block;
-            text-align: center;">
-              <label class="f_size_19 f_wt_400 color_black" style="font-size: 17px;">Enter New Mobile no</label>
+            <div class="form-group" class="center center_align">
+              <label class="f_size_17 f_wt_400 color_black">Enter New Mobile no</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
-                mask="0000000000" class="form-control width_50" style="margin-left : 15px" [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}"
-                required />
+                mask="0000000000" class="form-control width_50" style="margin-left : 15px"
+                [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}" required />
               <div *ngIf="c.mobile.errors" class="invalid-feedback">
                 <div *ngIf="c.mobile.errors.required">Mobile Number is required</div>
                 <div *ngIf="c.mobile.errors.pattern">Mobile Number is invalid</div>
@@ -482,7 +479,7 @@
               <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
-                class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend
+                class="no_border f_wt_500  color_blue" (click)="Resendcode()">Resend
                 OTP</button></div>
           </form>
         </mat-dialog-content>
@@ -495,7 +492,7 @@
       <!---------------------------------Password Dialog--------------------------------->
       <ng-template #passwordDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" style="color: grey;" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h2 style="border-bottom: 1px solid #ccc;padding-bottom: 12px;">Change Password</h2>
         <mat-dialog-content style="width: 800px;margin-top: 24px;">
@@ -504,11 +501,11 @@
             <div class="row">
 
               <div class="col-4">
-                <label class="f_size_19 f_wt_400 color_black">Enter the current password</label>
+                <label class="f_size_14 f_wt_400 color_black">Enter the current password</label>
                 <div class="form-group">
                   <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
                     onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control border-right-0"
+                    class="form-control"
                     [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
                   <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
                     aria-hidden="true"></i>
@@ -523,11 +520,11 @@
               </div>
 
               <div class="col-4">
-                <label class="f_size_19 f_wt_400 color_black">Enter the new password</label>
+                <label class="f_size_14 f_wt_400 color_black">Enter the new password</label>
                 <div class="form-group">
                   <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
                     onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control border-right-0"
+                    class="form-control "
                     [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }"
                     (keyup)="change($event)" />
                   <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
@@ -544,11 +541,11 @@
               </div>
 
               <div class="col-4 ">
-                <label class="f_size_19 f_wt_400 color_black">Confirm the new password</label>
+                <label class="f_size_14 f_wt_400 color_black">Confirm the new password</label>
                 <div class="form-group">
                   <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
                     onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control border-right-0"
+                    class="form-control"
                     [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
                   <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
                     (click)="showConNew = !showConNew" aria-hidden="true"></i>
@@ -566,7 +563,7 @@
               <p style="margin-left: 12px; font-size: 13px; ">
                 <span>Note : &nbsp; </span>
                 <span style=" padding-bottom: 7px;
-                border-bottom: 1px solid #ccc;">8 CHaracters | 1 Uppercase | 1 Lowercase | 1 Number | 1 Special
+                border-bottom: 1px solid #ccc;">8 Characters | 1 Uppercase | 1 Lowercase | 1 Number | 1 Special
                   character</span>
               </p>
               <p style="margin-left : 60px;   font-size: 13px;margin-top: -3px;">
@@ -580,19 +577,21 @@
               <div class="box width_100" id="message">
                 <div class="row center center_align">
                   <!-- <div class="col"> -->
-                  <span *ngIf="uppercase" id="uppercase" class="valid" style="color: #c5c5c5;">
-                    <i class="fa fa-check" aria-hidden="true" style="color: #c5c5c5;"></i>
+                  <span *ngIf="uppercase" id="uppercase" class="valid color-border" >
+                    <i class="fa fa-check" aria-hidden="true" ></i>
                     &nbsp; &nbsp;Uppercase | &nbsp;&nbsp;</span>
-                  <span *ngIf="lowercase" id="lowercase" class="valid" style="color: #c5c5c5;">
-                    <i class="fa fa-check" style="color: #c5c5c5;" aria-hidden="true"></i>
+                  <span *ngIf="lowercase" id="lowercase" class="valid color-border" >
+                    <i class="fa fa-check" aria-hidden="true"></i>
                     &nbsp; &nbsp; Lowercase | &nbsp; &nbsp;</span>
-                  <span style="color: #c5c5c5;" *ngIf="spicalcharacter" id="specialcharacter" class="valid">
-                    <i class="fa fa-check" style="color: #c5c5c5;" aria-hidden="true"></i> &nbsp; &nbsp;Special
+                  <span  *ngIf="spicalcharacter" id="specialcharacter" class="valid color-border">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Special
                     character | &nbsp; &nbsp;</span>
-                  <span style="color: #c5c5c5;" *ngIf="number" id="number" class="valid">
-                    <i class="fa fa-check" style="color: #c5c5c5;" aria-hidden="true"></i> &nbsp; &nbsp;Number
+                  <span  *ngIf="number" id="number" class="valid color-border">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Number | &nbsp; &nbsp;
                   </span>
-
+                  <span  *ngIf="passwordForm.value.newpassword?.length >= 8" id="charLength" class="valid color-border">
+                    <i class="fa fa-check"  aria-hidden="true"></i> &nbsp; &nbsp;8 Characters
+                  </span>
                   <!-- </div> -->
                   <!-- <div class="col">
 

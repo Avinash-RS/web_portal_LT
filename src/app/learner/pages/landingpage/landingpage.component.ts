@@ -178,14 +178,14 @@ export class LandingpageComponent implements OnInit {
   popular() {
     this.learnerservice.getPopularInLanding()
     .subscribe((result: any) => {
-      this.popularCOurse = result.data.get_popular_course.data;
+      this.popularCOurse = result.data.get_popular_course?.data;
     });
   }
 
   trending() {
     this.learnerservice.getTrendingInLanding()
     .subscribe((result: any) => {
-      this.trendingCourse = result.data.get_trending_course.data;
+      this.trendingCourse = result.data.get_trending_course?.data;
     });
   }
 }
