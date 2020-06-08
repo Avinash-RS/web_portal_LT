@@ -244,7 +244,7 @@
         <label class="f_size_19 p-b-10px">Qualification</label><span class="mand"> *</span><br>
         <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
           <div class="row p-b-10px" [formGroupName]="in">
-            <div class="col-md-3 col-sm-12 col-12 display_flex">
+            <div class="col-md-3 col-sm-12 col-12 m-b-5px display_flex">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
                 formControlName="qualification" name="qualification" (selectionChange)="changed($event.value,in)">
                 <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
@@ -261,7 +261,7 @@
               </mat-select>
             </div>
 
-            <div class="col-md-3 col-sm-12 col-12 display_flex">
+            <div class="col-md-3 col-sm-12 col-12 m-b-5px display_flex">
               <!-- <mat-form-field *ngIf=""> -->
               <ng-container
                 *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
@@ -273,7 +273,7 @@
                 </mat-select>
               </ng-container>
               <!------------------------Institute textbox for 10th and 12th--------------------->
-              <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
+              <ng-container class="col-md-3 col-sm-12 col-12 m-b-5px display_flex"
                 *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
                 'inputs   width_80'" formControlName="institute">
@@ -286,7 +286,7 @@
               </mat-select>
             </div>
 
-            <div class="col-md-3 col-sm-12 col-12 display_flex">
+            <div class="col-md-3 col-sm-12 col-12 m-b-5px display_flex">
               <ng-container
                 *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
                 <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
@@ -303,7 +303,7 @@
               </ng-container>
             </div>
 
-            <div class="col-md-3 col-sm-12 col-12 display_flex">
+            <div class="col-md-3 col-sm-12 col-12 m-b-5px display_flex">
               <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label  m-l-10px' :
                 'inputs  width_50  m-l-10px'" placeholder="Percentage" formControlName="percentage" maxlength="5"
                 (blur)="formatPercentage(in)">
