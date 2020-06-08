@@ -16,55 +16,51 @@
 
     <div class="row" style="margin-top: 7%;">
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 9%;">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 17.5em;">
         <div class="row" *ngIf="userData">
-          <div class="col-md-1"></div>
-          <div class="col-md-8 col-sm-10 col-10 bb">
-            <span class="color_blue f_size_13 f_wt_500 ">Password : ********</span>
+          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+            <span class="f_size_13 f_wt_500 ">Password : ********</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2" *ngIf="editpopup && !cannotEdit">
-            <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Password"
+          <div class="col-md-1 col-sm-2 col-2">
+            <mat-icon class="f_size_17 bb"  *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Password"
               (click)="editPassword(passwordDialog)">create</mat-icon>
           </div>
         </div>
 
         <div class="row m-t-25px">
-          <div class="col-md-1"></div>
-          <div class="col-md-8 col-sm-10 col-10 bb">
-            <span class="color_blue f_size_13 f_wt_500">Mobile : {{userData.user_mobile || 'XXXXXXXXXX'}}</span>
+          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+            <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile || 'XXXXXXXXXX'}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2" *ngIf="editpopup && !cannotEdit">
-            <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Mobile number"
+          <div class="col-md-1 col-sm-2 col-2" >
+            <mat-icon *ngIf="editpopup && !cannotEdit" class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Mobile number"
               (click)="editmobno(mobDialog)">
               create</mat-icon>
           </div>
         </div>
 
-        <div class="row m-t-25px m-b-10" *ngIf="userData.email">
-          <div class="col-md-1"></div>
-          <div class="col-md-8 col-sm-10 col-10 bb">
-            <span class="color_blue f_size_13 f_wt_500">Email : {{userData.email}}</span>
+        <div class="row m-t-25px  m-b-10" *ngIf="userData.email">
+          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+            <span class="f_size_13 f_wt_500">Email : {{userData.email}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2 " *ngIf="editpopup && !cannotEdit">
-            <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Email Id"
+          <div class="col-md-1 col-sm-2 col-2 ">
+            <mat-icon class="f_size_17 bb" *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Email Id"
               (click)="editEmail(emailDialog)">
               create</mat-icon>
           </div>
         </div>
 
-        <div class="row" style="margin-top: 12%;">
+        <!-- <div class="row" style="margin-top: 12%;">
           <span class="percentText color_blue">Profile Progress</span><span
             class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
           <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
           </mat-progress-bar>
-        </div>
+        </div> -->
 
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center">
-        <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img2.png'"
-          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="230px" style="margin : auto;display : block;
-          height: 220px; border: 8px solid #fff;">
+        <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img.png'"
+          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="220px" class= "avatar">
         <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
         <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
         </mat-icon>
@@ -78,22 +74,32 @@
 
         <div class="f_wt_400 uID">
 
-          <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}} &nbsp;&nbsp;|
-            &nbsp;&nbsp; </span>
+          <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
+            &nbsp;&nbsp;</span>
 
-          <span class="f_size_16">{{userData.user_profile && (userData.user_profile[0].gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
+          <span class="f_size_16"
+            *ngIf="userData.user_profile && userData.user_profile[0] && userData.user_profile[0].gender">
+            | &nbsp;&nbsp; {{userData.user_profile && (userData.user_profile[0].gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
             userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') }}
-            &nbsp;&nbsp;| &nbsp;&nbsp;
+            &nbsp;&nbsp;
           </span>
 
-          <span
-            class="f_size_16">{{userData.user_profile && (userData.user_profile[0].is_student_or_professional =='student' ? 
+          <span class="f_size_16"
+            *ngIf="userData.user_profile && userData.user_profile[0] && userData.user_profile[0].is_student_or_professional">
+            | &nbsp;&nbsp;
+            {{userData.user_profile && (userData.user_profile[0].is_student_or_professional =='student' ? 
             'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Role')}}
-            &nbsp;&nbsp;| &nbsp;&nbsp;
+            <!-- &nbsp;&nbsp;| &nbsp;&nbsp; -->
           </span>
 
-          <span class="f_size_16" *ngFor="let l of userData?.language_detail;let i = index">
-            {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}} </span>
+        </div>
+
+        <div class="width_100 bb center center_align p-b-10">
+          <!-- <span class="f_size_16" *ngFor="let l of userData?.language_detail;let i = index"> -->
+          <span class="f_size_15 color_label f_wt_500">
+            <!-- {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}} -->
+            Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu
+          </span>
         </div>
 
         <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
@@ -103,13 +109,13 @@
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-2 col-sm-12 col-12">
-        <!-- <div class="row" style="margin-top: 40%;">
-          <span class="percentText color_blue">Profile Progress</span><span
-            class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
+      <div class="col-xl-4 col-lg-4 col-md-2 col-sm-12 col-12 ">
+        <div class="width_70 float_right m-t-50 m-r-25px">
+          <span class="percentText float_left f_size_16">Profile Progress</span><span
+            class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
           <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
           </mat-progress-bar>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -293,10 +299,10 @@
                 maxlength="5" (blur)="formatPercentage(in)">
               <mat-icon (click)="addQualification()"
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
-                class="p-5px cG">add
+                class="p-5px ">add
               </mat-icon>
               <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
-                (click)="removeQualification(in)" class="p-5px dIcon cG" [disabled]='cannotEdit'>delete_outline
+                (click)="removeQualification(in)" class="p-5px dIcon " [disabled]='cannotEdit'>delete_outline
               </mat-icon>
             </div>
           </div>
@@ -317,10 +323,10 @@
               [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs  color_blue  width_80 ena'"
               placeholder="Certificate Link" formControlName="{{i}}">
             <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15" class="p-5px cG">add
+              profileForm.value.certificate.length < 15" class="p-5px ">add
             </mat-icon>
             <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-              class="p-5px dIcon cG">delete_outline</mat-icon>
+              class="p-5px dIcon ">delete_outline</mat-icon>
           </div>
         </div>
 
@@ -403,7 +409,10 @@
             </div>
           </div>
         </div>
-        <br>
+        <br *ngIf="cannotEdit">
+        <hr>
+        <br *ngIf="cannotEdit">
+        <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
           <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
@@ -524,8 +533,7 @@
                 <div class="form-group">
                   <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
                     onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control "
-                    [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }"
+                    class="form-control " [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }"
                     (keyup)="change($event)" />
                   <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
                     aria-hidden="true"></i>
@@ -577,20 +585,20 @@
               <div class="box width_100" id="message">
                 <div class="row center center_align">
                   <!-- <div class="col"> -->
-                  <span *ngIf="uppercase" id="uppercase" class="valid color-border" >
-                    <i class="fa fa-check" aria-hidden="true" ></i>
+                  <span *ngIf="uppercase" id="uppercase" class="valid color_label">
+                    <i class="fa fa-check" aria-hidden="true"></i>
                     &nbsp; &nbsp;Uppercase | &nbsp;&nbsp;</span>
-                  <span *ngIf="lowercase" id="lowercase" class="valid color-border" >
+                  <span *ngIf="lowercase" id="lowercase" class="valid color_label">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     &nbsp; &nbsp; Lowercase | &nbsp; &nbsp;</span>
-                  <span  *ngIf="spicalcharacter" id="specialcharacter" class="valid color-border">
+                  <span *ngIf="spicalcharacter" id="specialcharacter" class="valid color_label">
                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Special
                     character | &nbsp; &nbsp;</span>
-                  <span  *ngIf="number" id="number" class="valid color-border">
+                  <span *ngIf="number" id="number" class="valid color_label">
                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Number | &nbsp; &nbsp;
                   </span>
-                  <span  *ngIf="passwordForm.value.newpassword?.length >= 8" id="charLength" class="valid color-border">
-                    <i class="fa fa-check"  aria-hidden="true"></i> &nbsp; &nbsp;8 Characters
+                  <span *ngIf="passwordForm.value.newpassword?.length >= 8" id="charLength" class="valid color_label">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;8 Characters
                   </span>
                   <!-- </div> -->
                   <!-- <div class="col">
