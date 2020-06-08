@@ -35,6 +35,14 @@
 
 // responsiveness ends here
 
+@media screen and (min-width:320px) and (max-width:335px) {
+  .camIcon {
+
+    left: 10% !important;
+  }
+
+}
+
 @media screen and (min-width:320px) and (max-width:768px) {
   .profile {
     justify-content: space-between;
@@ -94,7 +102,7 @@
     padding: 0px !important;
     font-size: 23px !important;
     top: 10px;
-    left: 15%;
+    left: 21%;
   }
 
 }
@@ -149,6 +157,14 @@
     margin-left: 0 !important;
   }
 
+  .camIcon {
+    position: absolute !important;
+    background: $color-white !important;
+    padding: 0px !important;
+    font-size: 23px !important;
+    top: 10px;
+    left: 35%;
+  }
 
 }
 
@@ -199,7 +215,18 @@
     padding: 0px !important;
     font-size: 23px !important;
     top: 10px;
-    left: 30%;
+    left: 18%;
+  }
+}
+
+@media screen and (min-width:1440px) {
+  .camIcon {
+    position: absolute !important;
+    background: $color-white !important;
+    padding: 0px !important;
+    font-size: 23px !important;
+    top: 10px;
+    left: 28%;
   }
 }
 
