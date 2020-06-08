@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
         <li class="breadcrumb-item active" aria-current="page">
             <ng-container *ngIf="queryData.edit; else createCourse">
                 Edit Course

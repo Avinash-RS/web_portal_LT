@@ -1,18 +1,16 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-    <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
 
     <li class="breadcrumb-item">
-      <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{queryData.viewingModule}}">Create
-        Courses</a></li>
+      <a [routerLink]="['/Admin/auth/Wca/addcourse']"
+        [queryParams]="{edit:'true',viewingModule:queryData.viewingModule}">Edit
+        Course</a></li>
     <li class="breadcrumb-item">
-      <ng-container>
-        <a
-          href="/Admin/auth/Wca/addmodule?courseId={{queryData.viewingModule}}&courseImage={{queryData.image}}&courseName={{queryData.courseName}}">Add
-          Module</a>
-      </ng-container>
-
+      <a [routerLink]="['/Admin/auth/Wca/addmodule']"
+        [queryParams]="{courseId:queryData.viewingModule,courseImage:queryData.image,courseName:queryData.courseName}">Add
+        Module</a>
     </li>
     <li class="breadcrumb-item active">Create a template</li>
   </ol>
