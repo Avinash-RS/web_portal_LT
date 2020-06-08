@@ -25,7 +25,7 @@
     display: flex;
 }
 .pad18px {
-    padding: 18px 0px 18px 0px;
+    padding: 18px 0px 0px 0px;
 }
 .padBot20px {
     padding-bottom: 20px;
@@ -36,9 +36,9 @@
     margin-left: -16px;
 }
 .instructDSPFlx {
-    padding-top: 14px;
+    // padding-top: 14px;
     display: flex;
-    padding-bottom: 12px;
+    // padding-bottom: 12px;
     margin-left: 30px;
 }
 .padtp25px {
@@ -552,8 +552,11 @@ input[type="text"] {
 }
 
 .img3 {
-    padding: 9px 7px 12px 10px;
-    width: 61px;
+    margin-top: 8px;
+    padding: 7px 7px 7px 7px;
+    width: 45px;
+    // padding: 9px 7px 12px 10px;
+    // width: 61px;
     background: $color-field;
     margin-left: 19px;
 }
@@ -685,8 +688,7 @@ input[type="text"] {
 }
 
 .btn_browse {
-    // margin-top: 130px;
-    // margin-left: -130px;
+    margin-top: 18px;
     width: 100px;
     height: 33px;
     border-radius: 7px;

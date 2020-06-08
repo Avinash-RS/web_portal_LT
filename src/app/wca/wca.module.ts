@@ -38,6 +38,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TreeViewComponent } from './pages/tree-view/tree-view.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, },
@@ -76,7 +77,8 @@ const routes: Routes = [
     ModuleRepositoryComponent,
     ViewCoursesComponent,
     BlobReaderComponent,
-    VideoPreviewModalComponent],
+    VideoPreviewModalComponent,
+    TreeViewComponent],
   imports: [
     CoreModule,
     MatDialogModule,
