@@ -30,7 +30,7 @@
 
 // responsiveness ends here
 
-@media screen and (min-width:320px) and (max-width:765px) {
+@media screen and (min-width:320px) and (max-width:768px) {
   .profile {
     justify-content: space-between;
   }
@@ -79,12 +79,118 @@
     margin-left: 0 !important;
   }
 
+  .camIcon {
+    position: absolute !important;
+    background: $color-white !important;
+    padding: 0px !important;
+    font-size: 23px !important;
+    top: 10px;
+    left: 15%;
+  }
+
+}
+
+@media screen and (min-width:768px) and (max-width:1020px) {
+  .profile {
+    justify-content: space-between;
+  }
+
+  .first {
+    order: 1;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .second {
+    order: 2;
+    margin-top: 20px !important;
+    z-index: 1;
+  }
+
+  .third {
+    order: 3;
+    margin-top: 20px !important;
+    z-index: 1;
+    align-items: center;
+  }
+
+  .fourth {
+    order: 4;
+    margin-top: 60% !important;
+  }
+
+  .profile-progress {
+    width: 100%;
+    margin-top: 20px !important;
+    padding-left: 35px;
+    padding-bottom: 35px;
+  }
+
+  .details-row {
+    margin-top: 10% !important;
+    width: 100%;
+    margin-left: 10% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+  }
+
+  .user-info {
+    margin-left: 0 !important;
+  }
+
+
+}
+
+@media screen and (min-width:1020px) and (max-width:1400px) {
+  // .fourth {
+  //   margin-top: 10%;
+  // }
+
+  .details-row {
+    margin-top: 10% !important;
+    width: 100%;
+    // margin-left: 10% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+  }
+
+  .fourth {
+
+    margin-top: 40% !important;
+  }
+
 
 }
 
 @media screen and (min-width:765px) {
   .fourth {
     margin-top: 22%;
+  }
+
+  @media screen and (max-width:1024px) {
+    .camIcon {
+      position: absolute !important;
+      background: $color-white !important;
+      padding: 0px !important;
+      font-size: 23px !important;
+      top: 10px;
+      left: 15%;
+    }
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .camIcon {
+    position: absolute !important;
+    background: $color-white !important;
+    padding: 0px !important;
+    font-size: 23px !important;
+    top: 10px;
+    left: 30%;
   }
 }
 
@@ -190,14 +296,6 @@ div.account {
   height: 45px;
 }
 
-.camIcon {
-  position: absolute !important;
-  background: $color-white !important;
-  padding: 0px !important;
-  font-size: 23px !important;
-  top: 10px;
-  left: 30%;
-}
 
 .mat-progress-bar {
   // width: 65%;
@@ -453,7 +551,8 @@ hr {
 :host ::ng-deep .mat-radio-checked .mat-radio-label {
   color: $color-blank;
 }
-:host ::ng-deep  .mat-radio-label {
+
+:host ::ng-deep .mat-radio-label {
   color: $color-darkGrey;
 }
 
