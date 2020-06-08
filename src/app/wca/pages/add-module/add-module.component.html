@@ -1,10 +1,10 @@
 <div>
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Admin/auth/dashboard">Home</a></li>
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
       <li class="breadcrumb-item">
-        <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{courseDetails?.courseid}}">
+        <a [routerLink]="['/Admin/auth/Wca/addcourse']" [queryParams]="{edit:'true',viewingModule:courseDetails?.courseid}">
           Edit Course
         </a></li>
 
