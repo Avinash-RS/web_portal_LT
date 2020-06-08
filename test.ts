@@ -33,5 +33,6 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/category-management', true, /category-management.component\.spec\.ts$/);
 
 
-const context = require.context('./app/learner/pages/landingpage', true, /landingpage.component\.spec\.ts$/);
+// const context = require.context('./app/learner/pages/landingpage', true, /landingpage.component\.spec\.ts$/);
+const context = require.context('./app/core/shared/wishlist-courses', true, /wishlist-courses.component\.spec\.ts$/);
 context.keys().map(context);

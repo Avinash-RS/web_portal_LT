@@ -26,5 +26,6 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/catalogue-management', false, /catalogue-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/catagory-management', false, /catagory-management.component\.spec\.ts$/);
 
-const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
+// const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
+const context = require.context('./app/core/shared/wishlist-courses', false, /wishlist-courses.component\.spec\.ts$/);
 context.keys().map(context);
