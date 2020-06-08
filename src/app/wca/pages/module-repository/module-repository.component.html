@@ -2,16 +2,17 @@
 
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/Admin/auth/userManagement">Home</a></li>
-      <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
       <li class="breadcrumb-item">
-        <a href="/Admin/auth/Wca/addcourse?edit=true&viewingModule={{courseDetails?.courseid}}">
+        <a [routerLink]="['/Admin/auth/Wca/addcourse']"
+          [queryParams]="{edit:'true',viewingModule:routeData.viewingModule}">
           Edit Course
         </a></li>
 
       <li class="breadcrumb-item">
-        <a
-          href="/Admin/auth/Wca/addmodule?courseId={{routeData.viewingModule}}&courseImage={{routeData.image}}&courseName={{routeData.courseName}}">
+        <a [routerLink]="['/Admin/auth/Wca/addmodule']"
+          [queryParams]="{courseId:routeData.viewingModule,courseImage:routeData.image,courseName:routeData.courseName}">
           Add Module
         </a></li>
       <li class="breadcrumb-item" aria-current="page">Module Repository</li>
@@ -24,9 +25,9 @@
     </div>
     <div>
       <mat-form-field>
-      <input matInput placeholder="Search" (keyup)="applyFilter($event)">
-      <i class="fa fa-search searchicon search-icn" aria-hidden="true"></i>
-    </mat-form-field>
+        <input matInput placeholder="Search" (keyup)="applyFilter($event)">
+        <i class="fa fa-search searchicon search-icn" aria-hidden="true"></i>
+      </mat-form-field>
     </div>
   </div>
   <div class="mat-elevation-z8 table-container">
