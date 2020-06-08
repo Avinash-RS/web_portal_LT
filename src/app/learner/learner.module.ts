@@ -41,7 +41,8 @@ import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-das
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 const routes: Routes = [
-  { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
+  // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
+  { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
   { path: 'register', component: RegistrationComponent, data: { title: 'Learner  Registration' } },
