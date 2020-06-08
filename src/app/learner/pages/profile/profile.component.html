@@ -16,14 +16,15 @@
 
     <div class="row" style="margin-top: 7%;">
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 17.5em;">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 17.2em;">
         <div class="row" *ngIf="userData">
           <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
             <span class="f_size_13 f_wt_500 ">Password : ********</span>
           </div>
           <div class="col-md-1 col-sm-2 col-2">
-            <mat-icon class="f_size_17 bb"  *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Password"
-              (click)="editPassword(passwordDialog)">create</mat-icon>
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+              style="width: 17px;" matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">
+              create</mat-icon>
           </div>
         </div>
 
@@ -31,20 +32,20 @@
           <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
             <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile || 'XXXXXXXXXX'}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2" >
-            <mat-icon *ngIf="editpopup && !cannotEdit" class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Mobile number"
-              (click)="editmobno(mobDialog)">
+          <div class="col-md-1 col-sm-2 col-2">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+              style="width: 17px;" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
               create</mat-icon>
           </div>
         </div>
 
-        <div class="row m-t-25px  m-b-10" *ngIf="userData.email">
+        <div class="row m-t-25px  m-b-10">
           <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
-            <span class="f_size_13 f_wt_500">Email : {{userData.email}}</span>
+            <span class="f_size_13 f_wt_500">Email : {{userData.email || 'example@domain.com'}}</span>
           </div>
           <div class="col-md-1 col-sm-2 col-2 ">
-            <mat-icon class="f_size_17 bb" *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Email Id"
-              (click)="editEmail(emailDialog)">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+              style="width: 17px;" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
               create</mat-icon>
           </div>
         </div>
@@ -59,8 +60,9 @@
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center">
-        <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img.png'"
-          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="220px" class= "avatar">
+        <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
+          [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
         <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
         <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
         </mat-icon>
@@ -68,8 +70,8 @@
         <div class="uname">{{userData?.full_name || 'Full Name'}} </div>
 
         <div class="width_100 center_align stateDet">
-          {{userData.state_detail && userData.state_detail[0].statename || 'Sate'}},
-          {{userData.country_detail && userData.country_detail[0].countryname || 'Country' }}
+          {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
+          {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
         </div>
 
         <div class="f_wt_400 uID">
@@ -77,34 +79,39 @@
           <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
             &nbsp;&nbsp;</span>
 
-          <span class="f_size_16"
-            *ngIf="userData.user_profile && userData.user_profile[0] && userData.user_profile[0].gender">
+          <span class="f_size_16">
             | &nbsp;&nbsp; {{userData.user_profile && (userData.user_profile[0].gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
-            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') }}
+            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') || 'Gender' }}
             &nbsp;&nbsp;
           </span>
 
-          <span class="f_size_16"
-            *ngIf="userData.user_profile && userData.user_profile[0] && userData.user_profile[0].is_student_or_professional">
+          <span class="f_size_16">
             | &nbsp;&nbsp;
             {{userData.user_profile && (userData.user_profile[0].is_student_or_professional =='student' ? 
-            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Role')}}
+            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') || 'Profession'}}
             <!-- &nbsp;&nbsp;| &nbsp;&nbsp; -->
           </span>
 
         </div>
 
-        <div class="width_100 bb center center_align p-b-10">
-          <!-- <span class="f_size_16" *ngFor="let l of userData?.language_detail;let i = index"> -->
+        <div class="width_100 bb center center_align p-b-10"
+          *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
+          <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
+            <!-- <span class="f_size_15 color_label f_wt_500"> -->
+            {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
+            <!-- Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu -->
+          </span>
+        </div>
+
+        <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
           <span class="f_size_15 color_label f_wt_500">
-            <!-- {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}} -->
-            Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu
+            Languages Known
           </span>
         </div>
 
         <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
-          Member Since
-          {{userData.user_dtl && userData.user_dtl.created_on | date}}
+          Member Since &nbsp;
+          {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
         </div>
 
       </div>
@@ -266,7 +273,7 @@
               <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
                 *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
-                'inputs  color_blue  width_80'" formControlName="institute">
+                'inputs   width_80'" formControlName="institute">
               </ng-container>
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
@@ -288,15 +295,15 @@
               </ng-container>
               <ng-container>
                 <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
-                'inputs  color_blue  width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
+                'inputs   width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
                   (change)="yearOfpassing(in)">
               </ng-container>
             </div>
 
             <div class="col-md-3 col-sm-12 col-12 display_flex">
               <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label  m-l-10px' :
-                'inputs  width_50 color_blue  m-l-10px'" placeholder="Percentage" formControlName="percentage"
-                maxlength="5" (blur)="formatPercentage(in)">
+                'inputs  width_50  m-l-10px'" placeholder="Percentage" formControlName="percentage" maxlength="5"
+                (blur)="formatPercentage(in)">
               <mat-icon (click)="addQualification()"
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
                 class="p-5px ">add
@@ -319,8 +326,7 @@
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
 
-            <input type="text"
-              [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs  color_blue  width_80 ena'"
+            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 ena'"
               placeholder="Certificate Link" formControlName="{{i}}">
             <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
               profileForm.value.certificate.length < 15" class="p-5px ">add
@@ -341,8 +347,8 @@
           <div [ngClass]="cannotEdit ? 'col-md-2 col-sm-4 col-8 display_flex' :
             'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
             <i class="fa fa-linkedin linkedin " aria-hidden="true"></i>
-            <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs color_blue width_80 dis' :
-            'inputs color_blue width_80'" placeholder="Social Media Link" formControlName="link">
+            <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs  width_80 dis' :
+            'inputs  width_80'" placeholder="Social Media Link" formControlName="link">
             <!-- {{profileForm.value.link}} -->
             <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
               </mat-icon>
@@ -361,8 +367,8 @@
             <div class="col-md-2 col-sm-4 col-8">
               <!-- {{f.professional.controls.total_experience.touched}},
                 {{f.professional.controls.total_experience.errors.required}} -->
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
-                'inputs  color_blue  width_80'"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+                'inputs    width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
                 placeholder="Total Experience" formControlName="total_experience">
               <div class="mand" *ngIf="f.professional.controls.total_experience.touched && 
@@ -377,8 +383,8 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
-                'inputs  color_blue  width_80'"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+                'inputs    width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
                 placeholder="Organization" formControlName="organization">
               <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
@@ -393,8 +399,8 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
-                'inputs  color_blue  width_80'" placeholder="Job role" formControlName="job_role"
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+                'inputs   width_80'" placeholder="Job role" formControlName="job_role"
                 [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
               <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
                 class="mand">
@@ -425,24 +431,24 @@
           <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h2 class="bb" style="padding-bottom: 12px;">Change Email Id</h2>
-        <mat-dialog-content style="width: 600px;margin-top: 24px; height: 180px;">
+        <mat-dialog-content style="width: 600px;margin-top: 24px; height: 150px;">
           <form [formGroup]="mailForm">
             <div class="form-group" classs="center center_align">
-              <br>
+              <br> <br>
               <label class="f_size_19 f_wt_400 color_black" style="font-size: 17px;">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control width_50"
                 style="margin-left : 15px" [ngClass]="{ 'is-invalid': b.mailid.touched && b.mailid.errors }" required>
-              <div *ngIf="b.mailid.touched && b.mailid.errors" class="invalid-feedback">
+              <div *ngIf="b.mailid.touched && b.mailid.errors" class="invalid-feedback m-l-30">
                 <div *ngIf="b.mailid.errors.required">Email is required</div>
                 <div *ngIf="b.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div><br>
-            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
-              Submit
-            </button>
           </form>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
+          <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
+            Submit
+          </button>
           <div class="account" *ngIf="resendLabel">Don't receive link?<button class="no_border f_wt_500  color_blue"
               (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
@@ -461,7 +467,7 @@
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
                 mask="0000000000" class="form-control width_50" style="margin-left : 15px"
                 [ngClass]="{ 'is-invalid': a.mobile.touched && a.mobile.errors}" required />
-              <div *ngIf="a.mobile.errors" class="invalid-feedback">
+              <div *ngIf="a.mobile.errors" class="invalid-feedback m-l-5">
                 <div *ngIf="a.mobile.errors.required">Mobile Number is required</div>
                 <div *ngIf="a.mobile.errors.pattern">Mobile Number is invalid</div>
                 <div *ngIf="a.mobile.errors.minlength || a.mobile.errors.maxlength">Mobile Number must be 10 digits
@@ -585,7 +591,6 @@
             <div class="row">
               <div class="box width_100" id="message">
                 <div class="row center center_align">
-                  <!-- <div class="col"> -->
                   <span *ngIf="uppercase" id="uppercase" class="valid color_label">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     &nbsp; &nbsp;Uppercase | &nbsp;&nbsp;</span>
@@ -601,15 +606,9 @@
                   <span *ngIf="passwordForm.value.newpassword?.length >= 8" id="charLength" class="valid color_label">
                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;8 Characters
                   </span>
-                  <!-- </div> -->
-                  <!-- <div class="col">
-
-                  </div> -->
                 </div>
               </div>
             </div>
-
-            <!-- <p class="f_wt_500 f_size_15">The password should not be last password</p> -->
 
           </form>
         </mat-dialog-content>
@@ -624,7 +623,23 @@
       </ng-template>
     </div>
   </div>
+
+  <hr class="p-b-32">
+  <div class="footer">
+    <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
+
+    <span class="center_align">2020 LARSEN & TOUBRO LIMITED. All rights reserved. &nbsp; &nbsp; | &nbsp; &nbsp;
+      Copyright & Terms &nbsp; &nbsp;| &nbsp; &nbsp; Privacy Policy</span>
+
+  </div>
+
 </div>
+<!-- <div class="footer">
+  <p>ffffffffffffffffffffff</p>
+</div> -->
+
+
+
 
 <!-- DEBUG
 <br><br><br>VALID : <br>
@@ -643,86 +658,3 @@
 <br> -->
 
 <!-- {{profileForm.value | json}} -->
-
-
-
-
-<!-- //////////End of first section left part/////////// -->
-<!-- //////FIrst section Right part//////// -->
-<!-- <div class="col-md-8 col-sm-12 col-12 right">
-              <div class="row float_right">
-                <label class="f_size_20 f_wt_400">My Profile</label>
-                <ng-container *ngIf="cannotEdit">
-                  <mat-icon matTooltip="Click here to change profile details" (click)="cannotEdit = !cannotEdit;"
-                    class="m-l-10px f_size_20">create
-                  </mat-icon>
-                </ng-container>
-                <ng-container *ngIf="!cannotEdit">
-                  <mat-icon matTooltip="You can start editing" (click)="cannotEdit = !cannotEdit;"
-                    class="m-l-10px f_size_20">create
-                  </mat-icon>
-                </ng-container>
-              </div>
-              <br><br><br>
-              <div class=row>
-                <div class="col-md-8"></div>
-                <div class="col-md-2 col-sm-6 col-6 float_right">
-                  <img
-                    [src]="profileForm.value.profile_img ? profileForm.value.profile_img : '../../../../assets/learner/avatar2.png'"
-                    id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" class="avatar">
-                  <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
-                  <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
-                  </mat-icon>
-                </div>
-                <div class="col-md-2 col-sm-6 col-6" *ngIf="userData && userData != null">
-                  <label class="f_wt_400 m-l-10px space5">{{userData.full_name}}</label><br>
-                  <label class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.username}}</label><br>
-                  <label
-                    class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.created_on | date : "dd.MM.y"}}</label>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-md-8"> </div>
-                <div class="col-md-4">
-                  <span class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
-                  <mat-progress-bar class="" mode="determinate"
-                    [value]="profileForm.value.progress || 10">
-                  </mat-progress-bar>
-                </div>
-              </div>
-              <br>
-              <div class="row" *ngIf="userData">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">Password</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Password"
-                    (click)="editPassword(passwordDialog)">create</mat-icon>
-                </div>
-              </div>
-              <br>
-              <div class="row" *ngIf="userData.user_mobile">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">{{userData.user_mobile.mobile_number}}</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Mobile number"
-                    (click)="editmobno(mobDialog)">create</mat-icon>
-                </div>
-              </div>
-              <br>
-              <div class="row" *ngIf="userData.email">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">{{userData.email}}</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Email Id"
-                    (click)="editEmail(emailDialog)">create</mat-icon>
-                </div>
-              </div>
-              <br><br>
-            </div> -->

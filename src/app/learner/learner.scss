@@ -58,7 +58,7 @@
 .profile {
   .container-reg200 {
     width: 100%;
-    height: 100vh !important;
+    // height: 100vh !important;
     justify-content: center;
     align-items: center;
     padding: 35px;
@@ -68,7 +68,7 @@
   }
 
   .wrap-reg {
-    margin-top: -22px;
+    // margin-top: -22px;
     width: 100%;
     padding: 30px;
     height: auto;
@@ -104,7 +104,13 @@
   // }
 
   .mat-select-placeholder {
-    color: $color-blue !important;
+    color: #757575 !important;
+    font-weight: 500;
+  }
+
+  ::placeholder{
+    color: #757575 !important;
+    font-weight: 500;
   }
   // .swal2-popup.swal2-modal.swal2-show {
   //   display: flex !important;
