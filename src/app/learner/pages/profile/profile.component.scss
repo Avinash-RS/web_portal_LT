@@ -118,16 +118,11 @@ div.account {
   margin-left: 15px;
 }
 
-:host ::ng-deep .mat-radio-outer-circle {
-  border-width: 1px !important;
-}
-
 .mat-select {
   width: 90%;
   margin-right: 15px;
 
 }
-
 
 .p-b-10px {
   padding-bottom: 15px;
@@ -170,6 +165,16 @@ div.account {
   display: block;
   background: $color-white !important;
   border: 8px solid $color-white;
+  width: 220px;
+}
+
+.iconImg {
+  margin: auto;
+  display: block;
+  background: $color-white !important;
+  border: 8px solid $color-white;
+  width: 220px;
+  padding: 50px;
 }
 
 .popupbtns {
@@ -192,7 +197,6 @@ div.account {
   font-size: 23px !important;
   top: 10px;
   left: 30%;
-  color: $color-blue;
 }
 
 .mat-progress-bar {
@@ -204,6 +208,10 @@ div.account {
 
 .m-t-50 {
   margin-top: 60% !important;
+}
+
+.m-l-30 {
+  margin-left: 30%
 }
 
 .mat-dialog-content {
@@ -296,6 +304,10 @@ textarea {
 }
 
 ::ng-deep .n .mat-select-arrow-wrapper {
+  visibility: hidden !important;
+}
+
+.m-n {
   visibility: hidden !important;
 }
 
@@ -423,6 +435,26 @@ hr {
 
 :host ::ng-deep .mat-select-disabled .mat-select-value {
   color: $color-blank !important
+}
+
+.footer {
+  padding: 30px;
+  font-size: inherit;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: $label;
+  font-weight: 500;
+  background-color: $profile-t-grey;
+  text-align: center;
+  border-top: 2px solid $profile-p-grey;
+}
+
+:host ::ng-deep .mat-radio-checked .mat-radio-label {
+  color: $color-blank;
+}
+:host ::ng-deep  .mat-radio-label {
+  color: $color-darkGrey;
 }
 
 // html {
