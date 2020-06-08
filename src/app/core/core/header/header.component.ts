@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
         });
         this.userDetailes = null;
         this.userDetailes = null;
-        this.router.navigate(['/Learner']);
+        //june 10 added by ankit
+        this.router.navigate(['/Learner/login']);
       } else if (logout.data.logout && !logout.data.logout.success) {
         if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
           localStorage.clear();
@@ -49,7 +50,8 @@ export class HeaderComponent implements OnInit {
           });
           this.userDetailes = null;
           this.userDetailes = null;
-          this.router.navigate(['/Learner']);
+            //june 10 added by ankit
+          this.router.navigate(['/Learner/login']);
         } else {
           this.alert.openAlert(logout.data.logout.message, null);
         }

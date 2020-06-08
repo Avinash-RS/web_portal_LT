@@ -313,7 +313,7 @@ div.account {
 .iconImg {
   margin: auto;
   display: block;
-  background: $color-white !important;
+  background: $light-grey !important;
   border: 8px solid $color-white;
   width: 220px;
   padding: 50px;
@@ -559,9 +559,6 @@ hr {
 //   color : $color-darkGrey;
 // }
 
-.dIcon {
-  margin-left: 10px;
-}
 
 .form-control {
   border-radius: 0 !important;
@@ -591,6 +588,29 @@ hr {
 :host ::ng-deep .mat-radio-label {
   color: $color-darkGrey;
 }
+
+.addIcon {
+  color: #000;
+  border: 1px solid $color-border;
+  background: $color-border;
+  /* margin: 6px; */
+  margin-left: 20px;
+  height: auto;
+  width: 36px;
+  padding: 6px;
+}
+
+.dIcon {
+  margin-left: 10px;
+  color: $color-blank;
+  border: 1px solid $color-border;
+  background: $color-white;
+  /* margin: 6px; */
+  height: auto;
+  width: 36px;
+  padding: 6px;
+}
+
 
 // html {
 //   overflow: scroll;
