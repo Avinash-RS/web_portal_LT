@@ -238,11 +238,15 @@ query getmoduleData($courseid:String!){
       coursefile
       coursestatus
       coursecreated_on
+      coursetime
       coursedetails{
+        moduletime
+        Modulecount
         modulename
         modulestatus
         modulecreated_on
         moduledetails{
+          topictime
           topicname
           topicstatus
           topiccreated_on

@@ -38,9 +38,11 @@
 
     <div class="row">
         <div class="col-12 margin-5">
-            <button class="enrollbtn" (click)="enrollCourse()">ENROLL NOW</button>
+            <button class="enrollbtn" *ngIf="(course.enrollment_status != 'pending') && (course.enrollment_status != 'rejected')
+            && (course.enrollment_status != 'approved')"
+             (click)="enrollCourse()">ENROLL NOW</button>
 
-            <button id="enroll_now" *ngIf="course.enrollment_status == 'pending'"
+            <button class="enrollbtn" id="enroll_now" *ngIf="course.enrollment_status == 'pending'"
             [disabled]="course.enrollment_status == 'pending'">Requested
           </button>
           <button  id="enroll_now" *ngIf="course.enrollment_status == 'rejected'"
@@ -88,7 +90,7 @@
                 <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
                   <div class="col-8"><br>
                     <ol class="submod">
-                      <li><span>{{i+1}} : {{mod?.topicname}}</span></li>
+                      <li><span>{{i+1}} : {{mod?.topicname}} {{mod?.topictime}}</span></li>
                     </ol>
                   </div>
                 </div>
