@@ -305,12 +305,13 @@ input[type=text]
 }
 
 .timeInput{
-    width: 22% !important;
+    width: 30% !important;
     height: 84%;
     padding: 0px !important;
     margin: 0px !important;    
     text-align: inherit !important;
     float: left !important;
+    height: 30px !important;
 }
 
 
@@ -480,6 +481,7 @@ padding-left: 15px;
 .spanTime{
     color: $color-darkGrey;
     padding-right: 11px;
+    padding-top: 4px;
     // padding-top: 5px;
 }
 .btnprev{
@@ -519,8 +521,6 @@ display: flex;
 .firstSpan{
     display: flex;
     align-items: center;
-    padding-left: 8%;
-    width: 18%;
 }
 .dspFlx{
     display: flex;
@@ -852,11 +852,24 @@ background-color: $color-blue!important;
     }
 }
 
-.ml48{
-    margin-left: 48% !important;
+.ml35{
+    margin-left: 35% !important;
 }
 
 .feedbacBtn{
     float: left;
     margin-left: 28% !important;
+}
+
+.backdropModal{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.moduleInput{
+    display: flex;
+    margin-left: 3%;
+}
+
+::ng-deep .templatesList .mat-expansion-panel-body {
+    padding: 16px 24px 16px !important;
 }
