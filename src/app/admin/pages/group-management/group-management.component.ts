@@ -219,6 +219,7 @@ flattree(items) {
     if (node.checkbox === true) {
       this.currentpath = null;
       this.currentpath = node;
+      console.log(this.currentpath);
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
@@ -507,4 +508,10 @@ flattree(items) {
       this.getAllUser(pagenumber);
     }
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }

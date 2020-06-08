@@ -98,7 +98,7 @@ export class AuditlogComponent implements OnInit {
     });
   }
   openviewdialog(data, templateRef) {
-    this.dialog.open(templateRef, { disableClose: true });
+    this.dialog.open(templateRef);
     this.viewdetail = data;
   }
   closedialogbox() {
@@ -183,7 +183,7 @@ export class AuditlogComponent implements OnInit {
     }
   }
   openexportdialog(templateRef) {
-    this.dialog.open(templateRef , { disableClose: true });
+    this.dialog.open(templateRef);
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
