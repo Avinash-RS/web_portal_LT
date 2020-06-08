@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    // tslint:disable-next-line:align
     private alert: AlertServiceService, private service: LearnerServicesService) {
   }
 
@@ -53,7 +52,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
-                this.router.navigate(['/Learner/home']);
+                // for june 10 added by ankit
+                this.router.navigate(['/Learner/profile']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
                 this.router.navigate(['/Learner/profile']);
@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('ps', ps);
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
-                this.router.navigate(['/Learner/home']);
+                // for june 10 added by ankit
+                this.router.navigate(['/Learner/profile']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
                 this.router.navigate(['/Learner/profile']);
@@ -85,12 +86,12 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-  forgotusername(type){
+  forgotusername(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
   }
 
-  reserPassword(type){
+  reserPassword(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
   }
- 
+
 }

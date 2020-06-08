@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from 'src/app/./core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -27,7 +27,6 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
     private router: Router,
     public service : LearnerServicesService,) { 
       this.mobile = this.activatedRoute.snapshot.paramMap.get('mobile')
-      console.log(this.mobile)
     }
     config = {
       allowNumbersOnly: true,
@@ -38,14 +37,11 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
       inputStyles: {
         'width': '40px',
         'height': '40px',
-        // 'background': '#B8D0FF'
       }
     }
 
   ngOnInit() {
-    // this.userId=localStorage.getItem('Username');
     const val = localStorage.getItem('Details_user');
-    // console.log(JSON.parse(val));
     this.details = JSON.parse(val)
 
     this.recoverOTPForm = this.formBuilder.group({
