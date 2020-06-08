@@ -102,7 +102,7 @@ export const menus = [
             {
                 name: 'Users',
                 link: 'userManagement',
-                icon: 'widgets',
+                icon: 'assignment_ind',
                 chip: false,
                 open: true,
             },
@@ -131,7 +131,7 @@ export const menus = [
     },
     {
         name: 'Course Management',
-        icon: 'list',
+        icon: 'library_books',
         link: 'Wca',
         chip: false,
         open: true,
@@ -163,7 +163,7 @@ export const menus = [
     {
         name: 'Audit Log',
         link: 'auditlog',
-        icon: 'widgets',
+        icon: 'receipt',
         chip: false,
         open: true,
     },

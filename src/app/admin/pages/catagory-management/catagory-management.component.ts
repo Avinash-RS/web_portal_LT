@@ -688,5 +688,11 @@ export class CatagoryManagementComponent implements OnInit {
     this.selectedSuperSubCategory = {};
     this.addSuperSubCategoryForm?.reset();
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }
 // 721
