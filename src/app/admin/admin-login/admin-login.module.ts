@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FormsModule , ReactiveFormsModule} from '@angular/forms';
         MatButtonModule,
         MatButtonToggleModule,
         MatInputModule,
+        ChartsModule,
         MatToolbarModule,
         FormsModule,
         ReactiveFormsModule,

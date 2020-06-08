@@ -1,5 +1,6 @@
 Feature: SigninAdminFunctionality
 
+@sprint1
 Scenario: AdminLoginTest
 
 Given : I am in admin login page 

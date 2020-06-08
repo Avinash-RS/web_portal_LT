@@ -6,7 +6,7 @@ import { WcaService } from '../../services/wca.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 export interface PeriodicElement {
   type_name: string;
   module: string;
@@ -45,12 +45,18 @@ export class ReferenceFileComponent implements OnInit {
   topicListData:any;
   topicnamelist:any;
   count: any;
-  constructor(public service: WcaService,public route: Router,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
+  courseId: any;
+  constructor(public service: WcaService,public route: Router,public router: ActivatedRoute,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
 
   ngOnInit() {
-    this.get_module_topic()
+    this.router.queryParams.subscribe(params => {
+     this.courseId = params.id;
+     this.get_module_topic(this.courseId)
+    })
+
+   
     this.dataSource.sort = this.sort;
     this.getAllRefDoc(0);
    // this.getModuleData();
@@ -70,19 +76,6 @@ export class ReferenceFileComponent implements OnInit {
     })
   }
 
-
-  // getModuleData() {
-  //   this.learnerservice.getModuleData(1).subscribe(data => {
-  //     console.log(data)
-  //     // if(data.data['getmoduleData']['success'] == true){
-  //       this.modulemenu = data.data['getmoduleData']['data'][0]
-  //       this.topicmenu = this.modulemenu.coursedetails[0];
-  //     // }else{
-  //       // this.alert.openAlert('Something went wrong please try after sometime',null)
-  //     // } 
-  //   })
-  // }
-
   uploadDoc(event){
     this.selectfile = <File>event.target.files[0];
     const fb = new FormData();
@@ -93,7 +86,6 @@ export class ReferenceFileComponent implements OnInit {
     }    
     else {
       this.uploadMsg = tempData.name;
-     // console.log(this.uploadMsg,'this.uploadMsg')
     }
   }
 
@@ -103,20 +95,18 @@ export class ReferenceFileComponent implements OnInit {
         payload.append('reffile', this.selectfile, this.selectfile.name);
         payload.append('path', this.referenceLink + 'www');
     }else{
-     // console.log('fil..........',this.referenceLink);
       payload.append('path', this.referenceLink);
     }
    
     payload.append("module_id", this.referenceLinkForm.value.module.modulename);
     payload.append('topic_id', this.referenceLinkForm.value.topic);
-   
     payload.append("user_id",this.currentUser.user_id);
+    payload.append("course_id",this.courseId);
     payload.append('type', this.selectedOption);
     payload.append('type_name', this.referenceName);
     payload.append('created_on', this.myDate.toString());
     
     this.service.refDocUpload(payload).subscribe(data => {
-     // console.log(data)
       if(data['success'] == true){
         this.alert.openAlert(data['message'],null)
         this.referenceLinkForm.reset();
@@ -151,7 +141,7 @@ removeDoc(recordID){
 getAllRefDoc(pagenumber){
   if (pagenumber == 0)
   this.ELEMENT_DATA = []
-  this.service.getallrefdoc(pagenumber).subscribe(data => {
+  this.service.getallrefdoc(pagenumber, this.courseId).subscribe(data => {
     this.getdocData = data.data['getallrefdoc']['data'];
     this.count = data.data['getallrefdoc']['count'];
    Array.prototype.push.apply(this.ELEMENT_DATA, this.getdocData);
@@ -172,22 +162,20 @@ clear(){
   this.referenceLink = "http://";
 }
 //get module name
-get_module_topic(){
-  this.learnerservice.get_module_topic().subscribe(data => {
+get_module_topic(courseId){
+  this.learnerservice.get_module_topic(courseId).subscribe(data => {
      if(data['data']['get_module_topic'].success){
-       this.moduleListData=data['data']
-      // console.log( this.moduleListData)
-       this.modulenamelist=this.moduleListData.get_module_topic.data
-      // console.log(this.modulenamelist)
+       this.moduleListData=data['data'];
+      console.log( this.moduleListData)
+       this.modulenamelist=this.moduleListData.get_module_topic.data;
   }
   })
 }
 gettopicdetail(){
-  //console.log(this.referenceLinkForm.value)
   this.learnerservice.gettopicdetail(this.referenceLinkForm.value.module._id,this.referenceLinkForm.value.module.modulename).subscribe(data => {
     if(data['data']['gettopicdetail'].success){
-      this.topicListData=data['data']
-      this.topicnamelist=this.topicListData.gettopicdetail.data
+      this.topicListData=data['data'];
+      this.topicnamelist=this.topicListData.gettopicdetail.data;
       console.log(this.topicnamelist)
     }
   })

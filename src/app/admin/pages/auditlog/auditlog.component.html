@@ -1,0 +1,223 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Audit log</li>
+  </ol>
+</nav>
+<br>
+
+<div>
+  <h1 style="padding-left:25px"> Audit log</h1>
+  <div>
+    <div class="row no_margin " style="padding-left:40px">
+      <form #filterform="ngForm" class="width_100">
+        <div class="row m-b-10">
+          <div class="col-lg-7 col-sm-12 col-12 col-md-7 display_flex m-b-10">
+            <mat-form-field class="wid-100">
+              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" [max]=today required
+                #fromdate1="ngModel" [matDatepicker]="picker" placeholder="Start date" color="accent">
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="fromdate1.errors">
+                <small *ngIf="fromdate1.errors?.required" class="text-danger">From date is required</small>
+              </mat-error>
+            </mat-form-field>&nbsp;&nbsp;
+            <mat-form-field class="wid-100">
+              <input matInput name="todate" [(ngModel)]="todate" [disabled]=enablefield required #todate1="ngModel"
+                [matDatepicker]="picker1" placeholder="End date" color="accent" [min]=fromdate [max]=today>
+              <mat-datepicker-toggle matSuffix [for]="picker1">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error *ngIf="todate1.errors">
+                <small *ngIf="todate1.errors?.required" class="text-danger">To date is required</small>
+              </mat-error>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btnCss  button_border width_60 center f_size_14" (click)="filter(filterform,'0')">
+              <span class="material-icons f_size_17 p-5px" style="vertical-align: middle;">
+                filter_alt</span>Apply
+            </button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btnCss  button_border width_60 center f_size_14 background-maroon"
+              (click)="cancel(filterform)">
+              <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                refresh</span>Reset
+            </button>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-12 col-12 float_right ">
+            <button class="btnCss pm button_border width_30  f_size_14" type="button"
+              (click)="openexportdialog(exportdialog)">
+              <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                get_app</span>Export
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <hr style="border: 1px solid #ccc;margin:1px !important; ">
+    <div class="example-container">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <span class="desktop-data"> {{i+1}}</span>
+          </mat-cell>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <mat-header-cell *matHeaderCellDef>
+            {{ column.header }}</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+          <mat-cell *matCellDef="let row;let i = index">
+            <button mat-icon-button (click)="openviewdialog(row,viewdetaildialog)" data-toggle="tooltip"
+              data-placement="top">
+              <mat-icon style="color: #cccccc;font-size:20px; width:20px;">remove_red_eye</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event,filterform)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #viewdetaildialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+  <mat-tab-group>
+
+    <mat-tab label="View details">
+      <br>
+      <mat-dialog-content style="width: 1000px;min-height: 300px;max-height:450px;margin:0 !important">
+        <div class="container profile">
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Module name : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.module_name|| 'NA'}}</label></label>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Description : <label class="color_black capitalize f_wt_400">{{viewdetail?.api_call_event|| 'NA'}}
+                </label></label>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Request url : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.api_request_url|| 'NA'}}</label></label>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Created by : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Created on : <label
+                  class="color_black capitalize f_wt_400">{{viewdetail?.created_on || 'NA'}}</label></label>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12">
+              <label>Updated on : <label class="color_black capitalize f_wt_400">
+                  {{viewdetail?.updated_on  || 'NA'}}</label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+    <mat-tab label="Request detail">
+      <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
+        <div class="row no_margin p-5px">
+          <label>Request : </label>
+          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_request[0] | json}}</label>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+    <mat-tab label="Response detail">
+      <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
+        <div class="row no_margin p-5px">
+          <label>Response :</label>
+          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_response[0] | json }}</label>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+  </mat-tab-group>
+  <br>
+</ng-template>
+
+<ng-template #exportdialog class="dialogPopup">
+  <span class="close">
+    <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
+  </span>
+  <mat-dialog-content style="width: 650px">
+    <h2 style="text-align: center"> Export audit log</h2>
+    <mat-dialog-content>
+      <form #profileForm="ngForm">
+        <div class="container profile">
+          <br>
+          <form #exportform="ngForm">
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="exportdata"
+              [(ngModel)]="exportdata">
+              <mat-radio-button class="example-radio-button" value="exportall">
+                <button class="btnCss  button_border  center f_size_14 wid_170" type="button"
+                  [disabled]="exportdata == 'filteredexport'" (click)="exportall()">
+                  <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                    get_app</span>Export all </button>
+              </mat-radio-button>
+              <br><br>
+
+              <mat-radio-button class="example-radio-button" value="filteredexport">
+                <mat-form-field class="wid-100">
+                  <input matInput name="exportfromdate" [disabled]="exportdata == 'exportall'"
+                    [(ngModel)]="exportfromdate" (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel"
+                    [matDatepicker]="picker2" placeholder="Start date" color="accent" [max]=today>
+                  <mat-datepicker-toggle matSuffix [for]="picker2">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-error *ngIf="fromdate2.errors">
+                    <small *ngIf="fromdate2.errors?.required" class="text-danger">From date is required</small>
+                  </mat-error>
+                </mat-form-field> &nbsp;&nbsp;&nbsp;
+
+                <mat-form-field class="wid-100">
+                  <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield required
+                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=exportfromdate
+                    [max]=today>
+                  <mat-datepicker-toggle matSuffix [for]="picker3">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+                  <mat-error *ngIf="todate2.errors">
+                    <small *ngIf="todate2.errors?.required" class="text-danger">To date is required</small>
+                  </mat-error>
+                </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+              </mat-radio-button>
+
+              <br>
+              <div *ngIf="exportdata == 'filteredexport'">
+                <button class="btnCss  button_border wid_170 center f_size_14" (click)="export(exportform)">
+                  <span class="material-icons  f_size_17 p-5px" style="vertical-align: middle;">
+                    get_app</span>Export</button>
+              </div>
+            </mat-radio-group>
+          </form>
+          <br>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-dialog-content>
+  <br>
+</ng-template>

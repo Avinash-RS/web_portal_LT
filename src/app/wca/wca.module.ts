@@ -30,6 +30,7 @@ import { ReferenceFileComponent } from './pages/reference-file/reference-file.co
 import { PipeModule } from '../pipes/pipe.module';
 import { CoursepreviewComponent } from './pages/coursepreview/coursepreview.component';
 import { AddModuleComponent } from './pages/add-module/add-module.component';
+import { AuthGuard } from '@core/services/_helpers';
 import { ModuleRepositoryComponent } from './pages/module-repository/module-repository.component';
 import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
 import {MatDialogModule} from '@angular/material/dialog';

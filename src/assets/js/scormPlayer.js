@@ -26,12 +26,12 @@ $(document).ready(function () {
    var urlParams = getQueryParameters(document.location.search);
    var contentID = urlParams.contentID;
    
-   $.get('/navTree',{contentID:contentID},function (navData) {
-      console.log(JSON.stringify(navData));
-      createNavList(navData);
-      // Note: comment createNavList and uncomment the line below to auto run the first SCO
-      // $("#content").attr('src', navData[0].children[0].link);
-   })
+   // $.get('/navTree',{contentID:contentID},function (navData) {
+   //    // console.log(JSON.stringify(navData));
+   //    createNavList(navData);
+   //    // Note: comment createNavList and uncomment the line below to auto run the first SCO
+   //    // $("#content").attr('src', navData[0].children[0].link);
+   // })
 });
 
 var createNavList = function (navData) {

@@ -2,8 +2,10 @@
 import {After,Before, Status} from "cucumber";
 import { browser } from "protractor";
 
-Before(async function () {
-    console.log("Test Started")
+Before(async ()=> {
+  await browser.manage().deleteAllCookies();
+  await browser.manage().window().maximize();
+  console.log("Test Started")
   });
 
 After(async function(scenario) {

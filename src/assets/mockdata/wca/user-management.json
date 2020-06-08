@@ -1,0 +1,64 @@
+{
+    "data": {
+        "get_all_user": {
+            "message": [
+                {
+                    "email": "ramyathothathiri@lntecc.com",
+                    "full_name": "Ramya",
+                    "group_id": null,
+                    "group_name": null,
+                    "is_active": true,
+                    "is_admin": false,
+                    "is_blocked": false,
+                    "mobile_number": "7358321980",
+                    "user_id": "v296ah",
+                    "username": "ramya123",
+                    "__typename": "Message",
+                    "_id": "5eba3791925bf37163c81614"
+                }
+            ]
+        }
+    },
+    "data1": {
+        "get_user_session_detail": {
+            "message": [
+                {
+                    "userObjects": [
+                        {
+                            "about_you": "",
+                            "country_name": "India",
+                            "email": "ramyathothathiri@lntecc.com",
+                            "full_name": "Ramya",
+                            "gender": "F",
+                            "is_active": true,
+                            "is_admin": false,
+                            "is_blocked": false,
+                            "is_profile_updated": true,
+                            "is_student_or_professional": "student",
+                            "mobile_number": "7358321980",
+                            "_id": "5eba3791925bf37163c81614",
+                            "user_id": "v296ah",
+                            "professional": {
+                                "job_role": "",
+                                "organization": "",
+                                "total_experience": null,
+                                "__typename": "Professional_dtl",
+                                "profile_img": null,
+                                "progress": "90",
+                                "registered_date": "2020-05-12T05:43:45.122Z"
+                            },
+                            "socialmedia": [
+                                {
+                                    "img": "",
+                                    "link": "",
+                                    "__typename": "SocialMedia_dtl",
+                                    "_id": "5eba37b7925bf37163c81618"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

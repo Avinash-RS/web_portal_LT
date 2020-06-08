@@ -9,7 +9,7 @@
 
       <div class="col-md-6  col-sm-9 col-9 float_left m-t-20" (click)="gotoDescription()">
         <div class="row ">
-          <div class="f_wt_500 f_size_16 float_left m-left-5 course_name">{{course.course_name}}</div>
+          <div class="f_wt_500 f_size_16 float_left m-left-5 m-r-20 course_name">{{course.course_name}}</div>
         </div>
         <div class="row m-t-10 m-left-5  course_description ">
           {{course.short_description}}
@@ -37,7 +37,7 @@
             <div class="col-md-9 col-sm-9 col-9"></div>
           </div>
           <div class="display_flex m-r-30 bg m-t-20 user_rating">
-            <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1'}}</strong>
+            <strong class="m-t-15 rating-text">&nbsp;{{course.rating | number:'1.1-1' || 1.0}}</strong>
             <span class="material-icons" style="vertical-align: middle;" *ngIf="showRating">
               star_border
             </span>
@@ -46,8 +46,29 @@
         </div>
         <br> <br> <br><br>
         <div class="row btnEnroll bottom-right float_right " *ngIf="btnType">
-          <button id="enroll_now" mat-stroked-button (click)="login(btnType)"> {{btnType}}
+          <button id="enroll_now" mat-stroked-button (click)="gotopublishcourse()" *ngIf="btnType != 'Enroll Now'">
+            {{btnType}}
           </button>
+
+          <button id="enroll_now" mat-stroked-button class="pointer"
+            *ngIf="course.enrollment_status == null && btnType == 'Enroll Now'" (click)="enrollCourse(btnType)">
+            Enroll
+          </button>
+
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'pending'"
+            disabled="{{course.enrollment_status == 'pending'}}"> Requested
+          </button>
+
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'rejected'"
+            disabled="{{course.enrollment_status == 'rejected'}}"> Rejected
+          </button>
+          <button id="enroll_now" mat-stroked-button
+            *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'approved'"
+            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+          </button>
+
         </div>
 
       </div>
