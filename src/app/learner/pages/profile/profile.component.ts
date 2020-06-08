@@ -24,11 +24,16 @@ import { HttpClient } from '@angular/common/http';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+
+  enableMobileEdit ;
+
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
     private router: Router, private gs: GlobalServiceService) {
+    const x = localStorage.getItem('OTPFeature') || false;
+    this.enableMobileEdit = x;
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();

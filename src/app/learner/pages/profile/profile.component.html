@@ -33,7 +33,7 @@
             <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile?.mobile_number || 'XXXXXXXXXX'}}</span>
           </div>
           <div class="col-md-2 col-sm-2 col-2">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit"
               style="width: 17px;" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
               create</mat-icon>
           </div>
@@ -307,16 +307,15 @@
               <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label  m-l-10px' :
                 'inputs  width_50  m-l-10px'" placeholder="Percentage" formControlName="percentage" maxlength="5"
                 (blur)="formatPercentage(in)">
+              <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
+                (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
+              </mat-icon>
               <mat-icon (click)="addQualification()"
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
-                class="p-5px ">add
-              </mat-icon>
-              <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
-                (click)="removeQualification(in)" class="p-5px dIcon " [disabled]='cannotEdit'>delete_outline
+                class="addIcon">add
               </mat-icon>
             </div>
           </div>
-
         </div>
 
         <br>
@@ -328,14 +327,20 @@
         <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
-
-            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 ena'"
+            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 ena'"
               placeholder="Certificate Link" formControlName="{{i}}">
+            <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
+              class="dIcon ">delete_outline</mat-icon>
             <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15" class="p-5px ">add
-            </mat-icon>
+              profileForm.value.certificate.length < 15" class="addIcon ">add
+            </mat-icon> -->
+          </div>
+          <div class="col-md-1 col-sm-4 col-4 display_flex">
             <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-              class="p-5px dIcon ">delete_outline</mat-icon>
+              class="dIcon ">delete_outline</mat-icon>
+            <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
+              profileForm.value.certificate.length < 15" class="addIcon ">add
+            </mat-icon>
           </div>
         </div>
 
