@@ -69,8 +69,8 @@
               </div>
 
               <div class="input-group back" *ngIf="selectedOption == 'document'">
-                <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput
-                  (change)="uploadDoc($event)">
+                <input class="form-control border-right-0" formControlName="upload" type='file' id="upload-photo" #fileInput
+                  (change)="uploadDoc($event)" required>
                 <span class="input-group-append bg-white border-left-0">
                   <label for="upload-photo" class="upload">{{uploadMsg}}</label> </span>
                 <span class="input-group-text  bg">
