@@ -15,6 +15,9 @@ import Swal from 'sweetalert2';
 })
 export class CoursedetailsComponent implements OnInit {
   course: any = null;
+  recordedData: any;
+  finalFullData: any;
+  finalStatus: any = null;
   // loadingCourse = false;
   customOptions1: any = {
     loop: true,
@@ -149,10 +152,50 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
+  getcourserStatus() {
+    this.service.getPlayerStatus(this.userDetail.user_id).subscribe((data: any) => {
+      if (data.data.getPlayerStatus) {
+        this.recordedData = data;
+        this.finalFullData = this.recordedData.data.getPlayerStatus.message;
+        if (this.finalFullData && this.finalFullData.status) {
+          if (this.finalFullData.status === 'completed') {
+            this.finalStatus = 'Completed';
+          } else if (this.finalFullData.status === 'incomplete') {
+            this.finalStatus = 'Resume';
+          }
+        }
+      }
+    });
+  }
+
+
+  goTocourse(status) {
+    if (this.finalStatus !== 'Completed') {
+      const detail1 = {
+        id: 'Scaffolding',
+        user: this.userDetail.user_id,
+        course_id: this.course.course_id,
+        user_obj_id: this.userDetail._id,
+        feed_back:this.course.feed_back
+      };
+      this.route.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+    }
+
+  }
+
+  clickRejected() {
+    this.alert.openConfirmAlert('Enrollment Confirmation', 'Do you wish to re-enroll for this course?', 'Enroll', 'Cancel').then((data) => {
+      if (data) {
+        this.enrollCourse();
+      }
+    });
+  }
+
   enrollCourse() {
     this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
       if (enrollCourse.data) {
         if (enrollCourse.data.enrollcourse.success) {
+          this.course.enrollment_status = 'pending';
           Swal.fire("User enrolled successfully for the course")
         } else {
           Swal.fire(enrollCourse.data.enrollcourse.message)
