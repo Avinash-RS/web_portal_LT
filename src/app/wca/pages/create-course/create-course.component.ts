@@ -527,12 +527,14 @@ export class CreateCourseComponent implements OnInit {
         const dialogRef = this.dialog.open(BlobReaderComponent, {
             data: {},
             height: '70%',
-            width: '74%',
+            width: '80%',
             closeOnNavigation: true,
             disableClose: true,
         });
         dialogRef.afterClosed().subscribe(res => {
-            this.courseForm.patchValue({ preview_video: res.url });
+            if (res.url !== undefined) {
+                this.courseForm.patchValue({ preview_video: res.url });
+            }
         });
     }
 
