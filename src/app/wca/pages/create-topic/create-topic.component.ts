@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener,OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +19,7 @@ declare var $: any;
   templateUrl: './create-topic.component.html',
   styleUrls: ['./create-topic.component.scss']
 })
-export class CreateTopicComponent implements OnInit {
+export class CreateTopicComponent implements OnInit,OnDestroy  {
 
   @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
     if (this.isReload) {
@@ -219,6 +219,12 @@ export class CreateTopicComponent implements OnInit {
     })
 
   }
+
+  ngOnDestroy() { 
+    $('#confirmModal').modal('hide');
+    $('#knowlegeCheckModal').modal('hide');
+    $('#feedbackModal').modal('hide');
+  }
   createForm(mod, mod_index = -1): FormGroup {
     return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
@@ -294,14 +300,8 @@ export class CreateTopicComponent implements OnInit {
 
   DeleteTopic(jform, event) {
     event.stopPropagation();
-    // let allModuleDetails = this.createTopicForm.get('moduledetails') as FormArray;
-    //  allModuleDetails.removeAt(jform);
     $('#confirmModal').modal('show');
-    $('#confirmModal').appendTo("body");
     this.removeTemplateindex = jform
-    // this.createTopicForm.get('moduledetails').get(String(jform)).get('topicstatus').setValue('false');
-    // this.queryData.template_details.splice(jform,1);
-    // this.createTopicForm.get('template_details').setValue(this.queryData.template_details);
   }
 
   confirmDelete() {
@@ -332,9 +332,7 @@ export class CreateTopicComponent implements OnInit {
             courseName: this.query.courseName
           }
         });
-      $('#confirmModal').modal('hide');
     }
-
   }
 
 
@@ -345,15 +343,6 @@ export class CreateTopicComponent implements OnInit {
     }
   }
 
-  // To unzip SCROM files 
-  // handleFile(f) {
-  // JSZip.loadAsync(f)                                  
-  // .then(function(zip) {
-  //     zip.forEach(function (data) { 
-  //     });
-  // });
-  // this.spinner.hide();
-  // }
 
   onSelectFile(fileInput: any, item, formdata: FormGroup, index, textvalue, subTitleindex) {
     if (item == undefined || item == null) {
@@ -426,7 +415,7 @@ export class CreateTopicComponent implements OnInit {
             const formData = new FormData();
             formData.append('image', this.imageView);
             this.wcaService.uploadImage(formData).subscribe((data: any) => {
-              imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
+              imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
               let obj1 = {
                 name: '',
                 image: imagepath,
@@ -543,11 +532,6 @@ export class CreateTopicComponent implements OnInit {
             this.spinner.hide();
           }
         }
-        // reader.addEventListener("load", () => {
-        //   if (item.name === 'PDF') {
-        //     this.demo(reader.result, formdata, index)
-        //   }
-        // }, false);
 
         if (fileInput.target.files[0]) {
           reader.readAsDataURL(fileInput.target.files[0]);
@@ -564,64 +548,7 @@ export class CreateTopicComponent implements OnInit {
 
 
 
-  async demo(pdf1, formdata: FormGroup, index) {
 
-    var url = pdf1;
-
-    var pages = [], heights = [], width = 0, height = 0, currentPage = 1;
-    var scale = 1.5;
-
-  //  PDFJS.disableWorker = true; // due to CORS
-
-
-
-
-    let getPage = (pdf) => {
-      pdf.getPage(currentPage).then((page) => {
-        var viewport = page.getViewport({ scale });
-        var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
-        var renderContext = { canvasContext: ctx, viewport: viewport };
-
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        page.render(renderContext).promise.then(async () => {
-          pages.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-
-          heights.push(height);
-          height += canvas.height;
-          if (width < canvas.width) width = canvas.width;
-
-          if (currentPage < pdf.numPages) {
-            currentPage++;
-            getPage(pdf);
-          }
-          else {
-
-            this.clearFormArray(formdata.get("topicimages") as FormArray)
-            for (var m = 0; m < pages.length; m++) {
-              let path = await this.imagedata_to_image(pages[m]);
-              let obj3 = {
-                name: '',
-                image: path,
-                file: ''
-              }
-              if (!formdata.get('topicimages').get(String(m))) {
-                (formdata.get('topicimages') as FormArray).push(this.topicImages());
-              }
-              formdata.get('topicimages').get(String(m)).setValue(obj3);
-              formdata.get('topictype').setValue('PDF');
-            }
-            this.spinner.hide();
-            this.toast.success('File uploaded sucessfully');
-          }
-        });
-      });
-
-    }
-    const pdf = await PDFJS.getDocument(url).promise
-    getPage(pdf)
-  }
   clearFormArray = (formArray: FormArray) => {
     while (formArray.length !== 0) {
       formArray.removeAt(0)
@@ -846,7 +773,6 @@ export class CreateTopicComponent implements OnInit {
     this.displaySlides = false;
     this.questionPreData = value.value.moduledetails[index].topicimages[0]
     $('#knowlegeCheckModal').modal('show');
-    $('#knowlegeCheckModal').appendTo("body");
     setTimeout(() => {
       this.displaySlides = true
     }, 1000)
@@ -940,7 +866,6 @@ export class CreateTopicComponent implements OnInit {
 
   openFeedback() {
     $('#feedbackModal').modal('show');
-    $('#feedbackModal').appendTo("body");
   }
 
   loadBlobs(fileInput, item, formdata, index, textvalue) {
