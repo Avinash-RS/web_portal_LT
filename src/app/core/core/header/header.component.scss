@@ -62,8 +62,9 @@ a {
     background-color: $color-blue !important;
 }
 
-.logo {
+:host ::ng-deep.logo {
     height: 42px;
+    margin-top: 0px !important;
 }
 
 .mat-menu-panel {
