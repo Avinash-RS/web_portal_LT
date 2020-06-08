@@ -36,9 +36,9 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
       disableAutoFocus: false,
       placeholder:'',
       inputStyles: {
-        'width': '60px',
-        'height': '60px',
-        'background': '#B8D0FF'
+        'width': '40px',
+        'height': '40px',
+        // 'background': '#B8D0FF'
       }
     }
 
