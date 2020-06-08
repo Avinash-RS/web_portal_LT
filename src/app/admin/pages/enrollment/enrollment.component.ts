@@ -130,7 +130,8 @@ export class EnrollmentComponent implements OnInit {
       }
       Array.prototype.push.apply(this.groupenrollmentrecords, result?.data?.getenrolledcourses?.message);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
-      this.dataSource1.data = result?.data?.getenrolledcourses?.message;
+      // this.dataSource1.data = result?.data?.getenrolledcourses?.message;
+      this.dataSource1.data = this.groupenrollmentrecords;
       this.dataSource1.paginator = this.paginator;
       this.dataSource1.sort = this.sort;
     });
