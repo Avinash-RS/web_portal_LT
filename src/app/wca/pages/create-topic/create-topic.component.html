@@ -153,10 +153,7 @@
                                                                             <small class="spanTime"> Time required to
                                                                                 complete
                                                                                 the topic </small>
-                                                                            <input type="text" class="timeInput"
-                                                                                formControlName="topictime"
-                                                                                (keypress)="isNumberKey($event)"
-                                                                                placeholder="00:00:00">
+                                                                                <input type="text" class="timeInput" formControlName="topictime" mask="00:00:00" [dropSpecialCharacters]="false" (keypress)="isNumberKey($event)" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
@@ -232,10 +229,7 @@
                                                                             <small class="spanTime"> Time required to
                                                                                 complete
                                                                                 the topic </small>
-                                                                            <input type="text" class="timeInput"
-                                                                                (keypress)="isNumberKey($event)"
-                                                                                formControlName="topictime"
-                                                                                placeholder="00:00:00">
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:00:00" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
@@ -289,10 +283,7 @@
                                                                             <small class="spanTime"> Time required to
                                                                                 complete
                                                                                 the topic </small>
-                                                                            <input type="text" class="timeInput"
-                                                                                (keypress)="isNumberKey($event)"
-                                                                                formControlName="topictime"
-                                                                                placeholder="00:00:00">
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:00:00" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
@@ -408,11 +399,7 @@
                                                                                 <small class="spanTime"> Time required
                                                                                     to complete
                                                                                     the topic </small>
-                                                                                <input type="text" class="timeInput"
-                                                                                    style="width: 23% !important"
-                                                                                    (keypress)="isNumberKey($event)"
-                                                                                    formControlName="topictime"
-                                                                                    placeholder="00:00:00">
+                                                                                    <input type="text" class="timeInput" style="width: 23% !important" (keypress)="isNumberKey($event)" mask="00:00:00" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                             </span>
                                                                             <mat-error
                                                                                 *ngIf="(!j?.value?.topictime) && submitted">

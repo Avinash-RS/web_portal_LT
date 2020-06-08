@@ -149,7 +149,8 @@ export class CreateTopicComponent implements OnInit {
       }) : [], Validators.compose([Validators.required])),
       topicstatus: ['true'],
       topictype: [null],
-      topictime: [null, [Validators.required, Validators.pattern(/^(?:[0-9]{1,3}):(?:[012345]\d):(?:[012345]\d)$/)]]
+      topictime: [null, Validators.compose([Validators.required])]
+      // topictime: [null, [Validators.required, Validators.pattern(/^(?:[0-9]{1,3}):(?:[012345]\d):(?:[012345]\d)$/)]]
     });
   }
 
@@ -491,7 +492,34 @@ export class CreateTopicComponent implements OnInit {
             }, err => {
               this.spinner.hide();
             })
-          } else if (item.name === 'Video') {
+          } 
+          else if (item.name === 'PDF') {
+            const formData5 = new FormData();
+            formData5.append('pdf', this.imageView);
+            this.wcaService.excelPpt(formData5).subscribe((data: any) => {
+              if (data && data.Message == 'Success') {
+                this.clearFormArray(formdata.get("topicimages") as FormArray)
+                for (var m = 0; m < data.Result.length; m++) {
+                  let path = data.Result[m];
+                  let obj3 = {
+                    name: '',
+                    image: path,
+                    file: ''
+                  }
+                  if (!formdata.get('topicimages').get(String(m))) {
+                    (formdata.get('topicimages') as FormArray).push(this.topicImages());
+                  }
+                  formdata.get('topicimages').get(String(m)).setValue(obj3);
+                  formdata.get('topictype').setValue(item.name);
+                }
+              }
+              this.spinner.hide();
+              this.toast.success('File uploaded sucessfully');
+            }, err => {
+              this.spinner.hide();
+            })
+          }
+          else if (item.name === 'Video') {
             this.formVideo(formdata, "1", textvalue, subTitleindex)
           } else if (item.name === 'Knowledge Check') {
             this.spinner.show();
@@ -514,11 +542,11 @@ export class CreateTopicComponent implements OnInit {
             this.spinner.hide();
           }
         }
-        reader.addEventListener("load", () => {
-          if (item.name === 'PDF') {
-            this.demo(reader.result, formdata, index)
-          }
-        }, false);
+        // reader.addEventListener("load", () => {
+        //   if (item.name === 'PDF') {
+        //     this.demo(reader.result, formdata, index)
+        //   }
+        // }, false);
 
         if (fileInput.target.files[0]) {
           reader.readAsDataURL(fileInput.target.files[0]);
@@ -542,7 +570,7 @@ export class CreateTopicComponent implements OnInit {
     var pages = [], heights = [], width = 0, height = 0, currentPage = 1;
     var scale = 1.5;
 
-    PDFJS.disableWorker = true; // due to CORS
+  //  PDFJS.disableWorker = true; // due to CORS
 
 
 
