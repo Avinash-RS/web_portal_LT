@@ -17,16 +17,17 @@
   text-align: end !important;
   // 
   margin-top: 60% !important;
-  margin-right: 13%;
+  // margin-right: 13%;
 }
 
 .details-row {
   margin-top: 7% !important;
+  padding: 35px;
 }
 
-.user-info {
-  margin-left: 12%;
-}
+// .user-info {
+//   margin-left: 12%;
+// }
 
 .m-b-5px {
   margin-bottom: 5px;
@@ -37,6 +38,10 @@
 @media screen and (min-width:320px) and (max-width:768px) {
   .profile {
     justify-content: space-between;
+  }
+
+  .editText {
+    margin-right: 4% !important;
   }
 
   .first {
@@ -461,7 +466,7 @@ hr {
   background: rgba(255, 255, 255, 0.6);
   font-size: 23px;
   padding: 13px;
-  margin-right: 4%;
+  margin-right: 35px;
   margin-top: 25px;
   border: 1px solid $color-white;
 }
