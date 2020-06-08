@@ -103,10 +103,10 @@ export class CoursepreviewComponent implements OnInit {
         this.content = data.data['getmoduleData']['data'][0];
         this.modulength = this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
-          moduledetails.moduledetails.forEach(element => {
-            this.countofdoc = element.resourse.count;
+          // moduledetails.moduledetails.forEach(element => {
+            this.countofdoc = moduledetails.Modulecount;
              return true
-           });
+          //  });
         });
       }
     })

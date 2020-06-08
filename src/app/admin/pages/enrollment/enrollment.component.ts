@@ -77,7 +77,9 @@ export class EnrollmentComponent implements OnInit {
       { columnDef: 'username', header: 'User name', cell: (element: any) => `${element?.username || ' '}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
+    this.loading = true;
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
+      this.loading = false;
       if (data.pagenumber === 0) {
         this.enrollmentrecords = [];
       }
@@ -98,7 +100,9 @@ export class EnrollmentComponent implements OnInit {
       { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem?.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
+    this.loading = true;
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
+      this.loading = false;
       const array = [];
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
              element.group_detail[0].request_date = element.request_date;
@@ -130,7 +134,8 @@ export class EnrollmentComponent implements OnInit {
       }
       Array.prototype.push.apply(this.groupenrollmentrecords, result?.data?.getenrolledcourses?.message);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
-      this.dataSource1.data = result?.data?.getenrolledcourses?.message;
+      // this.dataSource1.data = result?.data?.getenrolledcourses?.message;
+      this.dataSource1.data = this.groupenrollmentrecords;
       this.dataSource1.paginator = this.paginator;
       this.dataSource1.sort = this.sort;
     });
