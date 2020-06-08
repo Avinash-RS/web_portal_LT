@@ -425,18 +425,18 @@
           <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
         <h2 class="bb" style="padding-bottom: 12px;">Change Email Id</h2>
-        <mat-dialog-content style="width: 600px;margin-top: 24px; height: 150px;">
+        <mat-dialog-content style="width: 600px;margin-top: 24px; height: 180px;">
           <form [formGroup]="mailForm">
             <div class="form-group" classs="center center_align">
               <br>
               <label class="f_size_19 f_wt_400 color_black" style="font-size: 17px;">Enter new email id</label>
               <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control width_50"
-                style="margin-left : 15px" [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
-              <div *ngIf="c.mailid.touched && c.mailid.errors" class="invalid-feedback">
-                <div *ngIf="c.mailid.errors.required">Email is required</div>
-                <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
+                style="margin-left : 15px" [ngClass]="{ 'is-invalid': b.mailid.touched && b.mailid.errors }" required>
+              <div *ngIf="b.mailid.touched && b.mailid.errors" class="invalid-feedback">
+                <div *ngIf="b.mailid.errors.required">Email is required</div>
+                <div *ngIf="b.mailid.errors.pattern">Email Id is invalid</div>
               </div>
-            </div><br><br>
+            </div><br>
             <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
               Submit
             </button>
@@ -460,11 +460,11 @@
               <label class="f_size_17 f_wt_400 color_black">Enter New Mobile no</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
                 mask="0000000000" class="form-control width_50" style="margin-left : 15px"
-                [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}" required />
-              <div *ngIf="c.mobile.errors" class="invalid-feedback">
-                <div *ngIf="c.mobile.errors.required">Mobile Number is required</div>
-                <div *ngIf="c.mobile.errors.pattern">Mobile Number is invalid</div>
-                <div *ngIf="c.mobile.errors.minlength || c.mobile.errors.maxlength">Mobile Number must be 10 digits
+                [ngClass]="{ 'is-invalid': a.mobile.touched && a.mobile.errors}" required />
+              <div *ngIf="a.mobile.errors" class="invalid-feedback">
+                <div *ngIf="a.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="a.mobile.errors.pattern">Mobile Number is invalid</div>
+                <div *ngIf="a.mobile.errors.minlength || a.mobile.errors.maxlength">Mobile Number must be 10 digits
                 </div>
               </div>
             </div>
@@ -554,10 +554,11 @@
                   <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
                     onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
                     class="form-control"
-                    [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
+                    [ngClass]="{ 'is-invalid': c.confirmpassword?.touched && c.confirmpassword?.errors }" />
                   <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
                     (click)="showConNew = !showConNew" aria-hidden="true"></i>
-                  <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
+                  <div *ngIf="c.confirmpassword?.touched && c.confirmpassword?.errors" class="invalid-feedback">
+                    <div *ngIf="c.confirmpassword.errors.required">Confirm the new password is required</div>
                     <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as password</div>
                   </div>
                 </div>
