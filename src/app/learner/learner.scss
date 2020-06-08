@@ -1,12 +1,13 @@
 @import "variable";
+
 .my-panel {
   background: $color-blue !important;
-  height: 100px ;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: 70px !important;
-  }
+}
 
 
 .form-control.is-invalid,
@@ -40,35 +41,35 @@
 // }
 
 .mand {
-  color:  $color-red;
+  color: $color-red;
 }
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
-  color:$color-white
+  color: $color-white
 }
 
 .wrap-body {
   padding: 3% !important;
 
   .star {
-    color:  $color-red;
+    color: $color-red;
   }
 }
 
 .profile {
   .container-reg200 {
     width: 100%;
-    height: 100vh !important;
+    // height: 100vh !important;
     justify-content: center;
     align-items: center;
     padding: 35px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color:$color-white;
+    background-color: $color-white;
   }
 
   .wrap-reg {
-    margin-top: -22px;
+    // margin-top: -22px;
     width: 100%;
     padding: 30px;
     height: auto;
@@ -88,14 +89,14 @@
   .mat-radio-outer-circle {
     height: 16px !important;
     width: 16px !important;
-    border-color:  $color-border !important;
+    border-color: $color-border !important;
     border-width: 2px !important;
   }
 
   .mat-radio-inner-circle {
     height: 16px !important;
     width: 16px !important;
-    background-color:  $color-blue !important;
+    background-color: $color-blue !important;
   }
 
   // mat-select {
@@ -106,6 +107,7 @@
   .mat-select-placeholder {
     color: $color-blue !important;
   }
+
   // .swal2-popup.swal2-modal.swal2-show {
   //   display: flex !important;
   //   width: 27% !important;
@@ -234,7 +236,7 @@ mat-icon {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color:  $color-blue !important;
+  background-color: $color-blue !important;
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
@@ -302,13 +304,13 @@ button:disabled:hover {
   padding-top: 60px;
 
   ol {
-      margin-bottom: 0 !important;
-      // background-color: $color-white !important;
+    margin-bottom: 0 !important;
+    // background-color: $color-white !important;
   }
 }
 
-.outlinebtn{
-  background-color: $color-white  !important;
+.outlinebtn {
+  background-color: $color-white !important;
   color: $color-blue;
   border: none;
   font-size: 12px;
@@ -320,7 +322,7 @@ button:disabled:hover {
   margin-left: 10px;
 }
 
-.fillsmallbtn{
+.fillsmallbtn {
   background-color: $color-blue !important;
   color: $color-white;
   border: none;
@@ -332,7 +334,7 @@ button:disabled:hover {
   float: right;
 }
 
-.fillgreenbtn{
+.fillgreenbtn {
   background-color: $light-green !important;
   color: $color-white;
   border: none;
@@ -343,6 +345,7 @@ button:disabled:hover {
   float: right;
   margin-right: 10px;
 }
+
 // svg.mat-datepicker-toggle-default-icon.ng-star-inserted {
 //   margin-left: 51px !important;
 //   margin-top: -12px !important;

@@ -14,37 +14,37 @@
       </mat-icon> Edit &nbsp;
     </span>
 
-    <div class="row" style="margin-top: 7%;">
+    <div class="row details-row">
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12" style="margin-top: 17.5em;">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 third" style="margin-top: 17.5em;">
         <div class="row" *ngIf="userData">
-          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+          <div class="col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500 ">Password : ********</span>
           </div>
           <div class="col-md-1 col-sm-2 col-2">
-            <mat-icon class="f_size_17 bb"  *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Password"
-              (click)="editPassword(passwordDialog)">create</mat-icon>
+            <mat-icon class="f_size_17 bb" *ngIf="editpopup && !cannotEdit" style="width: 17px;"
+              matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">create</mat-icon>
           </div>
         </div>
 
         <div class="row m-t-25px">
-          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+          <div class="col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile || 'XXXXXXXXXX'}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2" >
-            <mat-icon *ngIf="editpopup && !cannotEdit" class="f_size_17 bb" style="width: 17px;" matTooltip="Click here to change Mobile number"
-              (click)="editmobno(mobDialog)">
+          <div class="col-md-1 col-sm-2 col-2">
+            <mat-icon *ngIf="editpopup && !cannotEdit" class="f_size_17 bb" style="width: 17px;"
+              matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
               create</mat-icon>
           </div>
         </div>
 
         <div class="row m-t-25px  m-b-10" *ngIf="userData.email">
-          <div class="col-md-8 col-sm-10 col-10 bb m-l-12">
+          <div class="col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500">Email : {{userData.email}}</span>
           </div>
           <div class="col-md-1 col-sm-2 col-2 ">
-            <mat-icon class="f_size_17 bb" *ngIf="editpopup && !cannotEdit" style="width: 17px;" matTooltip="Click here to change Email Id"
-              (click)="editEmail(emailDialog)">
+            <mat-icon class="f_size_17 bb" *ngIf="editpopup && !cannotEdit" style="width: 17px;"
+              matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
               create</mat-icon>
           </div>
         </div>
@@ -58,9 +58,9 @@
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center first">
         <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/profile-img.png'"
-          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="220px" class= "avatar">
+          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" width="220px" class="avatar">
         <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
         <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
         </mat-icon>
@@ -109,8 +109,9 @@
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-2 col-sm-12 col-12 ">
-        <div class="width_70 float_right m-t-50 m-r-25px">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second ">
+        <div class="profile-progress">
+          <!-- <div class="width_70 float_right m-t-50 m-r-25px"> -->
           <span class="percentText float_left f_size_16">Profile Progress</span><span
             class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
           <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
@@ -121,8 +122,8 @@
   </div>
 
 
-  <div class="container-reg200" style="margin-top: 22%;">
-    <div class="wrap-reg">
+  <div class="container-reg200 fourth">
+    <div class="profile-details">
       <form [formGroup]="profileForm">
 
         <!-- ////// Info about you//////// -->
@@ -141,6 +142,7 @@
             </div>
           </div>
         </div>
+
 
         <br>
         <hr class="p-b-10px">

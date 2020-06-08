@@ -7,17 +7,84 @@
   justify-content: center;
 }
 
-@media screen and (max-width:765px) {
+// responsiveness starts here
+
+.profile-progress {
+  width: 70%;
+  // float right
+  float: right;
+  text-align: right !important;
+  text-align: end !important;
+  // 
+  margin-top: 60% !important;
+  margin-right: 13%;
+}
+
+.details-row {
+  margin-top: 7% !important;
+}
+
+.user-info {
+  margin-left: 12%;
+}
+
+// responsiveness ends here
+
+@media screen and (min-width:320px) and (max-width:765px) {
   .profile {
     justify-content: space-between;
   }
 
-  .left {
-    order: 2;
+  .first {
+    order: 1;
+    align-items: center;
+    z-index: 1;
   }
 
-  .right {
-    order: 1;
+  .second {
+    order: 2;
+    margin-top: 20px !important;
+    z-index: 1;
+  }
+
+  .third {
+    order: 3;
+    margin-top: 20px !important;
+    z-index: 1;
+  }
+
+  .fourth {
+    order: 4;
+    margin-top: 200% !important;
+  }
+
+  .profile-progress {
+    width: 100%;
+    margin-top: 20px !important;
+    padding-left: 35px;
+    padding-bottom: 35px;
+  }
+
+  .details-row {
+    margin-top: 20% !important;
+    width: 100%;
+    margin-left: 10% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+  }
+
+  .user-info {
+    margin-left: 0 !important;
+  }
+
+
+}
+
+@media screen and (min-width:765px) {
+  .fourth {
+    margin-top: 22%;
   }
 }
 
