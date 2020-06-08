@@ -6,7 +6,7 @@
 </nav>
 
 <div>
-    <button class="backgroundcol2" (click)="createCourseNav()">Create a Course</button>
+    <button class="backgroundcol2" (click)="createCourseNav()">Create a course</button>
 </div>
 
 
@@ -17,10 +17,10 @@
  <div class="container wrap-body">
     <div class="row">
         <div class="col-md-6">
-            <h2>Published Courses ({{publishedCourseLength || 0}} Courses)</h2>
+            <h2>Published courses ({{publishedCourseLength || 0}} Courses)</h2>
         </div>
         <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('published')">View All</mat-label>
+            <mat-label (click)="goToViewCourse('published')">View all</mat-label>
         </div>
     </div>
 
@@ -49,7 +49,7 @@
             <h2> Courses created by me <span>(Yet to be published) </span>({{createdCourseLength || 0}} courses)</h2>
         </div>
         <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('created')">View All</mat-label>
+            <mat-label (click)="goToViewCourse('created')">View all</mat-label>
         </div>
     </div>
 
@@ -79,7 +79,7 @@
             <h2>Draft <span>(Work in progress)</span> ({{ draftCourseLength || 0}} Courses)</h2>
         </div>
         <div class="col-md-6 float_right">
-            <mat-label (click)="goToViewCourse('draft')">View All</mat-label>
+            <mat-label (click)="goToViewCourse('draft')">View all</mat-label>
         </div>
     </div>
 

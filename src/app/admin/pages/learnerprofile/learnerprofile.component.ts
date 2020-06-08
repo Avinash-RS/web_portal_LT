@@ -85,6 +85,7 @@ export class LearnerprofileComponent implements OnInit {
           this.trackdetail = trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0];
           this.coursedetail = trackdetail?.data?.get_learner_track?.message?.Enrolled_courses;
           this.dataSource1.data = this.coursedetail;
+          console.log(trackdetail?.data?.get_learner_track);
           this.displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
           this.displayedColumns1 = (['sno']).concat(this.columns1.map(c => c.columnDef));
           trackdetail?.data?.get_learner_track?.message?.activities_and_enroll[0]?.courseObjects.

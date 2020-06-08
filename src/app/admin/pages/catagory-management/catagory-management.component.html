@@ -81,21 +81,21 @@
               {{selectedCategory?.category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
                 *ngIf="selectedCategory?.category_description != undefined"
-                matTooltip="{{selectedCategory?.category_description || 'Category Description'}}">info_outline</span>
+                matTooltip="{{selectedCategory?.category_description || 'Category description'}}">info_outline</span>
             </span>
             <span class="f_size_16 f_wt_500 m-l-5 color_grey"
               *ngIf="selectedCategory?.category_name != undefined && 
             selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name == undefined">
               {{selectedSubCategory?.sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedSubCategory ?.sub_category_description || 'Sub Category Description'}}">info_outline</span>
+                matTooltip="{{selectedSubCategory ?.sub_category_description || 'Sub category description'}}">info_outline</span>
             </span>
             <span class="f_size_16 f_wt_500 m-l-5 color_grey"
               *ngIf="selectedCategory?.category_name != undefined && 
             selectedSubCategory ?.sub_category_name != undefined && selectedSuperSubCategory ?.super_sub_category_name != undefined">
               {{selectedSuperSubCategory?.super_sub_category_name}}
               <span class="material-icons none" style="vertical-align: middle;"
-                matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub Category Description'}}">info_outline</span>
+                matTooltip="{{selectedSuperSubCategory?.super_sub_category_description || 'Sub category description'}}">info_outline</span>
             </span>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12">
@@ -187,7 +187,7 @@
               <div class="col-md-3 col-lg-3 h_100px col-sm-10 col-10 m-l-5 inputs border-radius-5">
                 <mat-label class="color_grey"
                   *ngIf="addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == ''">
-                  Category Image *</mat-label>
+                  Category image *</mat-label>
                 <div class="row" appDnd (click)="fileInput.click()" (fileDropped)="uploadFile($event)"
                   *ngIf="addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == ''">
                   <div class="spinner-container" *ngIf="loading">
@@ -230,7 +230,7 @@
                 <button id="viewCourse" mat-stroked-button
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="courses = [];selectedArray = [];getcourses('category')">View
-                  Courses</button>
+                  courses</button>
               </div>
             </div>
             <br>
@@ -392,7 +392,7 @@
           *ngIf="!showCourses && !showHome && !showAddCatForm && !selectedCategory.category_name == undefined">
           <button id="viewCourse" mat-stroked-button class=" border-radius-5 background-blue color_white center "
             (click)="showCourses = !showCourses">View
-            Courses</button>
+            courses</button>
         </div>
         <!-- end of view courses -->
       </div>
@@ -418,7 +418,7 @@
       </div>
       <hr>
       <mat-label>
-        Choose Category
+        Choose category
       </mat-label>
       <form [formGroup]="selectCategoryForm" class="m-t-20">
         <div class="row">

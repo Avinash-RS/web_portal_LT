@@ -16,6 +16,7 @@ getTestBed().initTestEnvironment(
 );
 // Then we find all the tests.
 // const context = require.context('./app/learner/pages/login', true, /login.component\.spec\.ts$/);
+const context = require.context('./app/core/shared/course-component', false, /course-component.component\.spec\.ts$/);
 //  const context = require.context('./app/admin/pages/admin-courses', false, /admin-courses.component\.spec\.ts$/);
 // const context = require.context('./app/learner/pages/learner-my-course', false, /learner-my-course.component\.spec\.ts$/);
 //  const context = require.context('./app/admin/pages/user-management', false, /user-management.component\.spec\.ts$/);
@@ -25,5 +26,5 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/catalogue-management', false, /catalogue-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/catagory-management', false, /catagory-management.component\.spec\.ts$/);
 
-const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
+// const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
 context.keys().map(context);
