@@ -55,7 +55,8 @@
       </span>
     </div>
 
-    <div style="text-align: right !important;">
+    <!-- <div style="text-align: right !important;"> -->
+      <div style="position: absolute;right: 60px;">
       <ul class="navbar-nav" *ngIf="userDetailes != null">
         <ul class="navbar-nav">
           <!-- <li>
@@ -73,7 +74,7 @@
       </ul>
     </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute;right: 20px;" aria-label="Example icon-button with a menu"
       *ngIf="userDetailes != null">
       <mat-icon>more_vert</mat-icon>
     </button>
