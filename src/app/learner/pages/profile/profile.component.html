@@ -16,12 +16,12 @@
 
     <div class="row details-row">
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 third" style="margin-top: 17.5em;">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 third" style="margin-top: 17.5em;">
         <div class="row" *ngIf="userData">
-          <div class="col-md-8 col-sm-10 col-10 bb user-info">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500 ">Password : ********</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2">
+          <div class="col-md-2 col-sm-2 col-2">
             <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
               style="width: 17px;" matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">
               create</mat-icon>
@@ -29,10 +29,10 @@
         </div>
 
         <div class="row m-t-25px">
-          <div class="col-md-8 col-sm-10 col-10 bb user-info">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile || 'XXXXXXXXXX'}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2">
+          <div class="col-md-2 col-sm-2 col-2">
             <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
               style="width: 17px;" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
               create</mat-icon>
@@ -40,10 +40,10 @@
         </div>
 
         <div class="row m-t-25px  m-b-10">
-          <div class="col-md-8 col-sm-10 col-10 bb user-info">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
             <span class="f_size_13 f_wt_500">Email : {{userData.email || 'example@domain.com'}}</span>
           </div>
-          <div class="col-md-1 col-sm-2 col-2 ">
+          <div class="col-md-2 col-sm-2 col-2 ">
             <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
               style="width: 17px;" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
               create</mat-icon>
@@ -59,7 +59,7 @@
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 center first">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
         <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
           id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
           [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
@@ -119,7 +119,7 @@
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second ">
         <div class="profile-progress">
           <!-- <div class="width_70 float_right m-t-50 m-r-25px"> -->
-          <span class="percentText float_left f_size_16">Profile Progress</span><span
+          <span class="percentText float_left no_margin f_size_16">Profile Progress</span><span
             class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
           <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
           </mat-progress-bar>
