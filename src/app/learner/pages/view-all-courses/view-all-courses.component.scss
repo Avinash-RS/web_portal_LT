@@ -328,10 +328,11 @@ h2 {
   margin-left: -9px !important;
 }
 
-// .col-9 {
-//   flex: 0 0 73%;
-//   max-width: 73%;
-// }
+.col-9 {
+  margin-top: 7%;
+  flex: 0 0 73%;
+  max-width: 73%;
+}
 .diffcol-9 {
   flex: 0 0 100%;
   max-width: 100%;

@@ -190,6 +190,7 @@ export class AddModuleComponent implements OnInit {
               modDetails.courseid = this.courseDetails.courseid;
               modDetails.coursename = this.courseDetails.coursename;
             }
+            ++count;
           });
 
           this.apiService.postRepoModules(modDetails).subscribe((res: any) => {
@@ -257,6 +258,7 @@ export class AddModuleComponent implements OnInit {
   onCreate() {
     if (this.scormPath.length === 0) {
       this.spinner.show();
+      this.courseDetails.coursefile = ""
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
         if (res.Code === 200) {
           this.getCourseDetails();

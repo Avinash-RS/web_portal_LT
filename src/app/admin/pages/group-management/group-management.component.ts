@@ -112,9 +112,41 @@ export class GroupManagementComponent implements OnInit {
   getallgroups() {
     this.adminservice.getUserGroup()
       .subscribe((result: any) => {
-        this.allgroups = result.data.get_user_group.message;
+        // this.allgroups = result.data.get_user_group.message;
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.allgroups = this.flattree(tree);
       });
   }
+
+  tree(data, root) {
+    function setCount(object) {
+        return object.children
+            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+            : 0;
+    }
+    const t = {};
+    data.forEach(o => {
+        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+        t[o.parent_group_id] = t[o.parent_group_id] || {};
+        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+        t[o.parent_group_id].children.push(t[o.group_id]);
+        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+    });
+    setCount(t[root]);
+    return t[root].children;
+}
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
+      delete item.children;
+    }
+    delete item.children;
+  });
+  return flat;
+}
   /** sub group */
   loadsubgroup(node?: any) {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
@@ -283,7 +315,7 @@ export class GroupManagementComponent implements OnInit {
             this.alert.openAlert('Success !', this.currentpath?.group_id ?
             'Sub group created successfully' : 'Group created successfully' );
             this.reset();
-            form.reset();
+            form.resetform();
             this.getgroups();
           } else {
             this.alert.openAlert(result.data.createusergroup.error_msg, null);
