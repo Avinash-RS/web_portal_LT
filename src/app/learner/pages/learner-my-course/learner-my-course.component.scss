@@ -2,6 +2,9 @@
 .contentTop {
     margin-top: 66px !important;
 }
+
+
+
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
@@ -21,4 +24,78 @@
 
 img {
     width: 275px !important;
+}
+
+.footer {
+    padding: 30px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: center;
+    border-top: 2px solid $profile-p-grey;
+  }
+// added by ankit 
+//   :host ::ng-deep.container{
+//     width: 100% !important;
+//     height: 100vh!important;
+//     display: flex;
+//     justify-content: center; 
+//      align-items: center; 
+//      background-size: cover !important; 
+//      background-repeat: no-repeat !important;
+//     background: url('../../../../assets/learner/bg-6.jpg');
+// }
+
+// :host ::ng-deep.pg{
+//     position: absolute;
+//     color: $color-white;
+//     padding: 7px;
+//     margin-left: 45% !important;
+//     margin-top: 16px;
+//     /* background-color: #ffffff85; */
+//     font-size: 14px;
+//     font-weight: normal !important;
+// }
+:host ::ng-deep.lnt_logo{
+    position: absolute;
+    width: 10% !important;
+    margin-top: 65px !important;
+    margin-left: 108px;
+  }
+  :host ::ng-deep .container-reg200 {
+    width: 100%;
+    height: 100vh!important;
+    display: flex;
+    justify-content: center; 
+     align-items: center; 
+     background-size: cover !important; 
+     background-repeat: no-repeat !important;
+    background: url('../../../../assets/learner/bg-6.jpg');
+  }
+
+//   :host ::ng-deep.privcy{
+//     position: absolute;
+//     color: $color-white;
+//     padding: 7px;
+//     margin-top: 45%;
+//     margin-left: 47% !important;
+//     /* background-color: #ffffff85; */
+//     font-size: 14px;
+//     font-weight: normal !important;  
+// }
+.thank{
+    position: absolute !important;
+    color: #ffffff;
+    font-size: 80px;
+    margin-top: 9%;
+    margin-left: 50%;
+    text-align: right;
+    // margin-top: 8%;
+}
+.next{
+    font-size: 25px !important;
 }
