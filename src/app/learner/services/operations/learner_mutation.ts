@@ -32,7 +32,11 @@ export const user_registration_mobile_otp_send = gql`
     ) {
       message
       success
+      data{
+      status
+    } 
     }
+
   }
 `;
 

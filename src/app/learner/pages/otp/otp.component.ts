@@ -40,6 +40,7 @@ export class OtpComponent implements OnInit {
   verifybutton: Boolean = false;
   resendtimeLeft: number = 60;
   resendLabel: Boolean = false;
+  otpFeature: any;
   constructor(private router:Router,
       private formBuilder: FormBuilder,
       private alert: AlertServiceService,
@@ -47,7 +48,9 @@ export class OtpComponent implements OnInit {
       public service : LearnerServicesService,
       private activeroute: ActivatedRoute) { 
         this.activeroute.queryParams.subscribe(params => {
-          this.email = params["code"]
+          this.email = params["code"];
+          this.otpFeature = params["otpstatus"];
+          localStorage.setItem('OTPFeature',this.otpFeature);
           this.get_user_detail(this.email)
         })
       }
@@ -89,6 +92,7 @@ get f() { return this.otpForm.controls; }
     this.get_user_detail(this.email)
     this.loader.show();
     this.service.submit_otp(this.userid,this.currentUser._id,this.otpForm.value.mobile,this.email).subscribe(data => {
+        if(this.otpFeature == 'true'){
           if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
             this.loader.hide();
             this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
@@ -107,6 +111,10 @@ get f() { return this.otpForm.controls; }
                 }
               }, 1000)
             } 
+        }else{
+          this.router.navigate(['Learner/password']);
+        }
+    
       })
   
   }
@@ -129,6 +137,10 @@ get f() { return this.otpForm.controls; }
       })
 
   }
+
+  // next(){
+  //   this.router.navigate(['Learner/password']);
+  // }
   Resendcode(){
     this.loader.show();
     this.service.submit_otp(this.userid,'this.currentUser._id',this.otpForm.value.mobile,this.email).subscribe(data => {
@@ -136,7 +148,12 @@ get f() { return this.otpForm.controls; }
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.loader.hide();
         this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null)
-        this.showotp = true;
+        if(data.data['user_registration_mobile_otp_send']['data'].status == true){
+          this.showotp = true;
+        }else{
+          this.showotp = false;
+        }
+       
         clearTimeout(this.interval);
         this.interval = setInterval(() => {
           if (this.resendtimeLeft > 0) {
@@ -159,6 +176,7 @@ get f() { return this.otpForm.controls; }
       this.service.get_user_detail(email).subscribe(data => {
         this.useridData=data.data
         this.userid =this.useridData.get_user_detail.message[0].user_id; 
+        localStorage.setItem("key",this.userid)
         // this.userid= 'm6siev';
         this.isLinkActive = this.useridData.get_user_detail.message[0].email_verify.flag;
       })  

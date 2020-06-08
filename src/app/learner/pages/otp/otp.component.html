@@ -17,10 +17,16 @@
           <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile Number must be 10 digits</div>
         </div>
         </div>
+
+
+        <button  *ngIf="otpFeature == 'false'" class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Next</button>
+        <!-- // sms getway integation pending  -->
+        <div *ngIf="otpFeature == 'true'">
         <div *ngIf="isenable"><br>
           <p class="head">OTP will be sent to this number</p>
           <button class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Verify</button>
         </div>
+
         <div *ngIf="showotp"><br>
           <p class="otphead">OTP Code</p>
           <ng-otp-input [config]="config"
@@ -32,11 +38,16 @@
           </div>
           <br><br>
         </div>
-        <div   *ngIf="showotp">
+        
+        <div *ngIf="showotp">
           <button class="btn" [disabled]="verifybutton"  (click)="otpverify()">Verify</button>
         </div><br>
-        <div class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b (click)="Resendcode()"><br>
+        <div  class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b (click)="Resendcode()"><br>
          Resend OTP</b></div>
+
+        </div>
+
+          <!-- // sms getway integation pending  -->
       </form>
     </div>
   </div>
