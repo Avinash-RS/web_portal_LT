@@ -3,6 +3,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,15 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    Swal.fire({
+      title: 'Are you sure you want to log out ?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+      }).then((result) => {
+      if (result.value) {
+
     this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
       if (logout.data.logout && logout.data.logout.success) {
         localStorage.clear();
@@ -57,5 +67,7 @@ export class HeaderComponent implements OnInit {
         this.alert.openAlert('Please try again later', null);
            }
     });
+  }
+});
   }
 }

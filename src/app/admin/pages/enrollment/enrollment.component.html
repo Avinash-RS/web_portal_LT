@@ -41,6 +41,8 @@
 
     <hr style="border: 1px solid #ccc; margin:0 !important">
     <div class="example-container">
+      <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+
       <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="selectall">
           <mat-header-cell *matHeaderCellDef>
