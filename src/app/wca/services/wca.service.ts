@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { BehaviorSubject, Observable, } from 'rxjs';
-import { tap } from 'rxjs/operators'
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 //change rajesh ranjan
 import { Apollo } from "apollo-angular";
 import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca_query";
@@ -11,32 +11,32 @@ import { HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
+  .append('Authorization', 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970')
 };
 
-//change rajesh ranjan
+// const headers = new HttpHeaders()
+//       .set('Authorization', 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970');
+
+// change rajesh ranjan
 @Injectable({
   providedIn: 'root'
 })
 export class WcaService {
 
-  url = "http://localhost:9001/api/upload/uploadExcel"
+  url = 'http://localhost:9001/api/upload/uploadExcel';
 
   bSubject = new BehaviorSubject({});
   bSubject1 = new BehaviorSubject({});
+  token: string;
 
-
-  token: String;
-
-
-  constructor(private http: HttpClient, private Apollo: Apollo, ) {
-
-  }
+  constructor(private http: HttpClient,
+              private apollo: Apollo, ) { }
 
 
   getcourseDetails(courseID) {
-    var headers = new HttpHeaders()
-      .set("Authorization", "Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
-    return this.http.post(environment.createCourseApi + 'viewcourse', courseID, { headers });
+    // var headers = new HttpHeaders()
+    //   .set("Authorization", "Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
+    return this.http.post(environment.createCourseApi + 'viewcourse', courseID, httpOptions);
   }
 
   getPublishedCourse() {
@@ -64,23 +64,14 @@ export class WcaService {
   }
 
   createCourse(course) {
-
-    var headers = new HttpHeaders()
-      .set("Authorization", "Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
-
     // httpOptions.headers.append('Authorization', 'Bearer ' + this.token);
     // httpOptions.headers.append('Content-Type' , 'application/json');
-
     // console.log(httpOptions)
-
-
-    return this.http.post(environment.createCourseApi + 'coursecreation', course, { headers });
+    return this.http.post(environment.createCourseApi + 'coursecreation', course, httpOptions);
   }
 
   updateCourse(course) {
-    var headers = new HttpHeaders()
-      .set("Authorization", "Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
-    return this.http.post(environment.createCourseApi + 'updatecourse', course, { headers });
+    return this.http.post(environment.createCourseApi + 'updatecourse', course, httpOptions);
   }
 
   getAllInstructors() {
@@ -98,7 +89,7 @@ export class WcaService {
   refDocUpload(fromdata) { return this.http.post(environment.apiUrl + 'wca/refdocupload', fromdata) }
 
   remove_doc_ref(id) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: remove_doc_ref,
       variables: {
         doc_id: id
@@ -106,12 +97,12 @@ export class WcaService {
       }
     });
   }
-  getallrefdoc(pagenumber,course_id) {
-    return this.Apollo.query({
+  getallrefdoc(pagenumber, course_id) {
+    return this.apollo.query({
       query: getallrefdoc,
       variables: {
-        pagenumber: pagenumber,
-        course_id: course_id
+        pagenumber,
+        course_id
       }
     });
   }
@@ -147,10 +138,6 @@ export class WcaService {
     return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
   }
 
-
-
-
-
   handleKeydown(event) {
     // tslint:disable-next-line: deprecation
     if (event.keyCode === 32) {
@@ -162,9 +149,14 @@ export class WcaService {
     }
   }
   get_module_topic() {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: get_module_topic
     });
+  }
+
+  // Check Course Name Avalailability
+  checkCourseName_Availability(courseName): Observable<any> {
+    return this.http.get(environment.createCourseApi + 'checkcoursename?course_name=' + courseName, httpOptions).pipe(tap());
   }
 
 }

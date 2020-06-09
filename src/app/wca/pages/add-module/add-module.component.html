@@ -9,7 +9,7 @@
           Edit Course
         </a></li>
 
-      <li class="breadcrumb-item" aria-current="page">Add Module</li>
+      <li class="breadcrumb-item" aria-current="page">Add module</li>
     </ol>
   </nav>
 
@@ -39,7 +39,7 @@
               </span>
               <span (click)="navChooseTemp()"
                 class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0) ? 'mod-btn dis-btn': 'mod-btn'}}">
-                Add Module
+                Add module
               </span>
               <span>
                 <span
@@ -49,7 +49,7 @@
                 </span>
                 <span (click)="addModuleRepos()"
                   class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0 ) ? 'repo-mod-btn dis-btn' : 'repo-mod-btn' }}">
-                  Add Module from repository
+                  Add module from repository
                 </span>
               </span>
             </div>
