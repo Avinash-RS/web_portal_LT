@@ -58,7 +58,8 @@ div.terms{
     color: $label;
     // margin-left: -19px;
     font-size: 11px;
-    text-align: center;
+    // text-align: center;
+    margin-left: 75px !important;
     font-weight: 600;
     margin-bottom: 26px;
 }
@@ -70,12 +71,14 @@ div.terms{
     height: 1px;
     position: absolute;
     margin-top: -26px;
-    margin-left: 43px;
+    // margin-left: 43px;
+    margin-left: 75px !important;
     margin-right: 43px;
 }
 :host ::ng-deep .iagree{
     margin-top: -21px !important;
-    margin-left: 46px !important;
+    // margin-left: 46px !important;
+    margin-left: 75px !important;
     margin-right: 46px !important;
 }
 
