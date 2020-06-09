@@ -21,14 +21,14 @@ declare var $: any;
 })
 export class CreateTopicComponent implements OnInit,OnDestroy  {
 
-  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    }
-    else {
-      this.isReload = true;
-    }
-  }
+  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   }
+  //   else {
+  //     this.isReload = true;
+  //   }
+  // }
   isReload = true;
   queryData: any;
   courseArray = [];
@@ -612,7 +612,8 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
           let valueFile = {
             "code": "en",
             "name": "English",
-            "file": path2
+            "file": path2,
+            "vttfile" : path2.replace(/.*?-/, "")
           }
           if (!formdata.get('topicimages').get(String(0))) {
             (formdata.get('topicimages') as FormArray).push(this.topicImages());
