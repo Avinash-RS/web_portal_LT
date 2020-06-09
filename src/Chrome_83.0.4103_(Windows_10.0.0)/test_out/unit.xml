@@ -1,17 +1,12 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-08T11:51:35" id="0" hostname="DESKTOP-729A26A" tests="5" errors="0" failures="0" time="0.616">
+<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-09T14:50:20" id="0" hostname="DESKTOP-729A26A" tests="2" errors="0" failures="0" time="0.271">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"/>
   </properties>
-  <testcase name="WishlistCoursesComponent should create" time="0.257" classname="Chrome_83_0_4103_(Windows_10_0_0).WishlistCoursesComponent"/>
-  <testcase name="WishlistCoursesComponent Check for resize width below 480" time="0.1" classname="Chrome_83_0_4103_(Windows_10_0_0).WishlistCoursesComponent"/>
-  <testcase name="WishlistCoursesComponent Check for the windows inner width between 480 and 768" time="0.068" classname="Chrome_83_0_4103_(Windows_10_0_0).WishlistCoursesComponent"/>
-  <testcase name="WishlistCoursesComponent Check for the windows inner width between 768 and 992" time="0.067" classname="Chrome_83_0_4103_(Windows_10_0_0).WishlistCoursesComponent"/>
-  <testcase name="WishlistCoursesComponent Check for the windows inner width above 992" time="0.124" classname="Chrome_83_0_4103_(Windows_10_0_0).WishlistCoursesComponent"/>
+  <testcase name="AlertComponentComponent should create" time="0.201" classname="Chrome_83_0_4103_(Windows_10_0_0).AlertComponentComponent"/>
+  <testcase name="AlertComponentComponent close()" time="0.07" classname="Chrome_83_0_4103_(Windows_10_0_0).AlertComponentComponent"/>
   <system-out>
-    <![CDATA[Chrome 83.0.4103 (Windows 10.0.0) ERROR
-  DisconnectedClient disconnected from CONNECTED state (transport close)
-
+    <![CDATA[
 ]]>
   </system-out>
   <system-err/>

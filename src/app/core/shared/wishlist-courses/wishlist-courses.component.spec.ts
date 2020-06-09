@@ -73,8 +73,8 @@ describe('WishlistCoursesComponent', () => {
     component.onResize(event);
     expect(component.breakpoint).toBe(4);
   });
-  it('viewwishlist', () => {
-    component. viewWishlist();
-    // expect(component.userdetail).toBe(component.checkLogout()) 
-  });
+  // it('viewwishlist', () => {
+  //   component. viewWishlist();
+  //   // expect(component.userdetail).toBe(component.checkLogout()) 
+  // });
 });

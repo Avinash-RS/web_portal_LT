@@ -28,8 +28,8 @@ export class ListViewCourseComponentComponent implements OnInit {
   @Input('showEnroll') showEnroll = false;
   currentRate;
   userDetail: any;
-
-
+   
+ 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) { }
@@ -77,6 +77,7 @@ export class ListViewCourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+  
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
       this.viewWishList(this.course);
