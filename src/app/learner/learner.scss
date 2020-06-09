@@ -188,7 +188,7 @@ mat-icon {
   align-items: center;
   padding: 12px 11px 10px 1px;
   margin-bottom: 0;
-  height: 38px;
+  height: 38px !important;
   // margin-top: 1px;
   font-size: 1rem;
   font-weight: 400;
@@ -197,7 +197,7 @@ mat-icon {
   text-align: center;
   white-space: nowrap;
   border: 1px solid #cccccc;
-  border-radius: 7px;
+  border-radius: 0px !important;
 }
 
 
