@@ -76,7 +76,7 @@ div.terms{
     margin-right: 43px;
 }
 
-:host ::ng-deepinput[type=text] {
+:host ::ng-deep input[type=text] {
     width: 100%;
     /* padding: 12px 20px; */
     margin: 1px 0;
@@ -161,8 +161,8 @@ div.terms{
 
 :host ::ng-deep .btn.disabled, .btn:disabled {
     opacity: .65;
-    color: #333 !important;
-    background-color: #ccc !important;
+    color: $label2 !important;
+    background-color: $color-border !important;
 }
 
 

@@ -1,6 +1,6 @@
 @import "variable";
 
-input[type=text] {
+:host ::ng-deep  input[type=text] {
   width: 100%;
   // padding: 12px 20px;
   margin: 1px 0;
