@@ -161,7 +161,7 @@
         <div class="row" *ngIf="!cannotEdit">
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
             <label class="p-b-10px f_size_19">Gender</label>
-            <!-- <span class="mand p-b-10px"> *</span> -->
+            <span class="mand p-b-10px"> *</span>
             <div class="form-group">
               <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
                 <mat-radio-button value="M">Male</mat-radio-button>
@@ -174,7 +174,7 @@
           <!-- //////I'm a//////// -->
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
             <label class="p-b-10px f_size_19">I Am a</label>
-            <!-- <span class="mand p-b-10px"> *</span> -->
+            <span class="mand p-b-10px"> *</span>
             <div class="form-group ">
               <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
                 name="is_student_or_professional">

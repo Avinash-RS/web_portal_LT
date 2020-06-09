@@ -1,15 +1,12 @@
 @import "variable";
 div.terms{
     color: $color-blue;
-    /* word-break: break-all !important; */
     font-size: 12px;
-    /* font-weight: 500; */
-    /* margin-top: 10px;*/
 }
 
 :host ::ng-deep .mat-checkbox-inner-container {
-    height: 12px !important;
     height: 14px !important;
+    width: 14px !important;
 }
 :host ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border-color: $color-border !important;
@@ -57,17 +54,18 @@ div.terms{
 .sign_up, .remember_me,mat-card-title , a{
     color: $color-blue;
 }
-.alert{
+.alert1{
     color: $label;
     // margin-left: -19px;
     font-size: 11px;
     text-align: center;
     font-weight: 600;
+    margin-bottom: 26px;
 }
 .link {
     color: $color-white !important;
 }
-:host ::ng-deep.linee{
+:host ::ng-deep .linee{
     border-left: 246px solid $color-border;
     height: 1px;
     position: absolute;
@@ -75,12 +73,15 @@ div.terms{
     margin-left: 43px;
     margin-right: 43px;
 }
+:host ::ng-deep .iagree{
+    margin-top: -21px !important;
+    margin-left: 46px !important;
+    margin-right: 46px !important;
+}
 
-:host ::ng-deepinput[type=text] {
+:host ::ng-deep input[type=text] {
     width: 100%;
-    /* padding: 12px 20px; */
     margin: 1px 0;
-    /* display: inline-block; */
     border-radius: 0px;
     border: 1px solid $color-border;
     box-sizing: border-box;
@@ -120,8 +121,6 @@ div.terms{
         width: 100%;
         height: 100vh !important;
         display: flex;
-        // justify-content: center; 
-        //  align-items: center; 
          background-size: cover !important;     
          background-repeat: no-repeat !important;
         background: url('../../../../assets/learner/bg-6.jpg');
@@ -154,15 +153,14 @@ div.terms{
     padding: 7px;
     margin-top: 45%;
     margin-left: 47% !important;
-    /* background-color: #ffffff85; */
     font-size: 14px;
     font-weight: normal !important;  
 }
 
 :host ::ng-deep .btn.disabled, .btn:disabled {
     opacity: .65;
-    color: #333 !important;
-    background-color: #ccc !important;
+    color: $label2 !important;
+    background-color: $color-border !important;
 }
 
 
