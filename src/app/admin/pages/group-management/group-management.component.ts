@@ -59,6 +59,7 @@ export class GroupManagementComponent implements OnInit {
   oldcatalogue: any;
   trackBy: any;
   toggle: any;
+  editgroupfield: boolean = false;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -217,6 +218,7 @@ flattree(items) {
     }
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
+      this.editgroupfield = true;
       this.currentpath = null;
       this.currentpath = node;
       console.log(this.currentpath);
@@ -231,6 +233,7 @@ flattree(items) {
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
       });
     } else {
+      this.editgroupfield = false;
       this.disabled = true;
       this.editstatus = true;
       this.currentpath = null;
@@ -239,7 +242,9 @@ flattree(items) {
       this.catalogue = '';
     }
   }
-
+  editgroup() {
+  this.editgroupfield = false;
+  }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.adminservice.getUserSession(element._id).subscribe((track: any) => {
@@ -374,6 +379,7 @@ flattree(items) {
     // this.checked ="Deactivate"
   }
   edit(data: boolean, groupname) {
+    this.editgroupfield = false;
     if (data) {
       this.editstatus = false;
 
@@ -425,6 +431,7 @@ flattree(items) {
             this.ELEMENT_DATA = [];
             this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           }
+          console.log(result.data.get_all_user);
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           this.selection = new SelectionModel(true, []);
