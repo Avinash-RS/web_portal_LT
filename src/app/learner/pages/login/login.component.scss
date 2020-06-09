@@ -10,7 +10,7 @@ mat-card {
     text-align: right !important;
 }
 
-input[type=text][type=password] {
+:host ::ng-deep input[type=text][type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 1px 0;
@@ -21,7 +21,7 @@ input[type=text][type=password] {
     // border-radius: 5px;
 }
 
-button {
+:host ::ng-deep button {
     background: $color-blue !important;
     color: $color-white;
     width: 100%;
@@ -59,7 +59,7 @@ mat-form-field {
     line-height: 27px;
 }
 .haveacc{
-    color: #333333 !important;
+    color: $label2 !important;
 }
 
 .forgot_ps {
@@ -80,7 +80,7 @@ mat-form-field {
     padding-top: 21px !important;
 }
 
-.signIn{
+:host ::ng-deep.signIn{
     text-align : center !important;
     margin-top: 22px !important;
     color: $color-blue !important;
@@ -96,7 +96,7 @@ mat-form-field {
     border-radius: 17px;
 }
 
-.sign_up{
+:host ::ng-deep.sign_up{
     color: $color-blue !important;
     margin-top: 5px !important;
     text-align: center !important;
@@ -135,7 +135,7 @@ label {
     margin-bottom: 2px !important;
 }
 
-.errspan {
+:host ::ng-deep.errspan {
     float: right;
     margin-right: 10px;
     margin-top: -29px;
@@ -149,14 +149,19 @@ label {
     color: #d2d1d1;
 }
 
-.wrap-reg {
-    width: 30%;
-    height: 100%;
+ :host ::ng-deep .wrap-reg {
+    width: 84%;
+    /* padding: 48px; */
+    padding-left: 40px;
+    padding-right: 30px;
+    /* padding-top: 77px; */
+    height: 100vh;
     border-radius: 0px !important;
-    margin-left: 70% !important;
+    margin-left: 16% !important;
     overflow: hidden !important;
+
 }
-.pg{
+:host ::ng-deep.pg{
     position: absolute;
     color: $color-white;
     padding: 7px;
@@ -167,7 +172,7 @@ label {
     font-weight: normal !important;
 }
 
-.privcy{
+:host ::ng-deep.privcy{
     position: absolute;
     color: $color-white;
     padding: 7px;
@@ -189,23 +194,24 @@ label {
     background: url('../../../../assets/learner/bg-6.jpg');
   }
 
-  .lxplogo{
+  :host ::ng-deep.lxplogo{
     text-align: center;
     margin-left: 94px;
     margin-right: 94px;
     width: 110px;
   }
-  .head1{
+  :host ::ng-deep.head1{
     text-align: center;
     font-weight: normal !important;
     font-size: 21px;
+    margin-top: 18px !important;
   }
 
-  .bgimg{
+  :host ::ng-deep.bgimg{
     width: 99%;
     height: 657px;
   }
-  .lnt_logo{
+  :host ::ng-deep.lnt_logo{
     position: absolute;
     width: 10%;
     margin-top: 21px;

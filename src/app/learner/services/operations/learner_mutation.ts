@@ -198,6 +198,12 @@ export const view_profile = gql`
 
           country
 
+          addressline1
+          pincode
+          addressline2
+          neft
+          iAgree
+
           state
 
           city_town
@@ -574,7 +580,7 @@ export const delete_qualification = gql`
 export const update_profile = gql`
   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
-    $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
+    $country: String, $state: String, $city_town: String, $addressline1: String,$pincode: Int, $addressline2: String, $neft: String, $iAgree: Boolean, $about_you: String, $certificate: [String], $student: String,
     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
     $updated_by_ip: String, $updated_on: String, $updated_by: String){
     update_profile(
@@ -591,6 +597,11 @@ export const update_profile = gql`
       country: $country,
       state: $state,
       city_town: $city_town,
+      addressline1: $addressline1,
+      pincode: $pincode,
+      iAgree: $iAgree,
+      addressline2: $addressline2,
+      neft: $neft,
       about_you: $about_you,
       certificate: $certificate,
       is_student_or_professional: $is_student_or_professional,
