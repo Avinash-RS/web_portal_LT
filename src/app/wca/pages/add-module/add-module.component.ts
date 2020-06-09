@@ -31,8 +31,8 @@ export class AddModuleComponent implements OnInit {
   isScrom: boolean;
   isCreate: boolean;
   breakpoint: any;
-
-  constructor(public spinner: NgxSpinnerService,
+  spinner = false;
+  constructor(
     private alertService: AlertServiceService,
     public toast: ToastrService,
     private router: Router,
@@ -42,7 +42,7 @@ export class AddModuleComponent implements OnInit {
   ngOnInit() {
 
     this.resetList();
-
+    this.spinner = true;
     this.route.queryParams.subscribe(params => {
       let flag = 0;
       for (const key in params) {
@@ -115,9 +115,9 @@ export class AddModuleComponent implements OnInit {
         this.updateCourseDetails();
       }
 
-      this.spinner.hide();
+      this.spinner = false;
     }, err => {
-      this.spinner.hide();
+      this.spinner = false;
     });
   }
 
@@ -218,7 +218,7 @@ export class AddModuleComponent implements OnInit {
         this.courseDetails.coursetype = '';
         this.courseDetails.coursefile = '';
 
-        this.spinner.show();
+        this.spinner = true;
         this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
           if (res.Code === 200) {
             this.getCourseDetails();
@@ -229,9 +229,9 @@ export class AddModuleComponent implements OnInit {
             this.apiService.updateCourse(obj).subscribe((data: any) => {
             });
           }
-          this.spinner.hide();
+          this.spinner = false;
         }, err => {
-          this.spinner.hide();
+          this.spinner = false;
         });
       }
     });
@@ -257,7 +257,7 @@ export class AddModuleComponent implements OnInit {
 
   onCreate() {
     if (this.scormPath.length === 0) {
-      this.spinner.show();
+      this.spinner = true;
       this.courseDetails.coursefile = ""
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
         if (res.Code === 200) {
@@ -271,12 +271,12 @@ export class AddModuleComponent implements OnInit {
           this.toast.success('Module updated successfully');
           this.router.navigate(['/Admin/auth/Wca']);
         }
-        this.spinner.hide();
+        this.spinner = false;
       }, err => {
-        this.spinner.hide();
+        this.spinner = false;
       });
     } else if (this.scormPath.length > 0) {
-      this.spinner.show();
+      this.spinner = true;
       this.courseDetails.coursetype = 'SCORM';
       this.courseDetails.coursefile = this.scormPath;
       this.apiService.createDraft(this.courseDetails).subscribe((res: any) => {
@@ -291,9 +291,9 @@ export class AddModuleComponent implements OnInit {
           this.toast.success('Module updated successfully');
           this.router.navigate(['/Admin/auth/Wca']);
         }
-        this.spinner.hide();
+        this.spinner = false;
       }, err => {
-        this.spinner.hide();
+        this.spinner = false;
       });
     }
   }
