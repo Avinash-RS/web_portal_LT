@@ -146,12 +146,19 @@ export class ProfileComponent implements OnInit {
     // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
-      gender: new FormControl('', myGlobals.req),
-      is_student_or_professional: new FormControl('', myGlobals.req),
+      // gender: new FormControl('', myGlobals.req),
+      // is_student_or_professional: new FormControl('', myGlobals.req),
+      gender: new FormControl(''),
+      is_student_or_professional: new FormControl(''),
       languages_known: [''],
+      addressline1 :  ['', myGlobals.address],
+      addressline2 : ['', myGlobals.address],
+      pincode :  ['', myGlobals.pincode],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
+      neft : ['', myGlobals.req],
+      iAgree: new FormControl(true, []),
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
       qualification: this.formBuilder.array([this.createQualItem()]),
@@ -205,6 +212,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
+          profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree ;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
           }
@@ -249,13 +257,26 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {
-    if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
-      this.profileForm.value.country && this.profileForm.value.state
-      && this.profileForm.value.city_town) {
+    // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
+    //   this.profileForm.value.country && this.profileForm.value.state
+    //   && this.profileForm.value.city_town) {
+    //   this.profileForm.controls.progress.setValue(60);
+    // }
+    // if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
+    //   && this.profileForm.value.social_media) {
+    //   this.profileForm.controls.progress.setValue(90);
+    // }
+    // if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+    //   this.profileForm.controls.progress.setValue(100);
+    // }
+
+    if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
+      this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft
+      && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
       this.profileForm.controls.progress.setValue(60);
     }
     if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
-      && this.profileForm.value.social_media) {
+      && this.profileForm.value.social_media && this.profileForm.value.gender && this.profileForm.value.is_student_or_professional) {
       this.profileForm.controls.progress.setValue(90);
     }
     if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
@@ -266,6 +287,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls.created_by_ip.setValue(ip);
     this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
+    this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
     // console.log('jsonData', this.profileForm.value);
 
     this.service.update_profile(this.profileForm.value).subscribe((data: any) => {

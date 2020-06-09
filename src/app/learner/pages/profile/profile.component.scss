@@ -35,12 +35,20 @@
 
     left: 10% !important;
   }
+
+  .bb-icon {
+    border-bottom: 0px !important;
+  }
 }
 
 @media screen and (min-width:335px) and (max-width:375px) {
   .camIcon {
 
     left: 16% !important;
+  }
+
+  .bb-icon {
+    border-bottom: 0px !important;
   }
 
 }
@@ -176,7 +184,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 35px;
+    padding: 10px 35px 35px 35px;
   }
 
   .fourth {
@@ -201,13 +209,41 @@
     padding: 0px !important;
     font-size: 23px !important;
     top: 10px;
-    left: 28%;
+    left: 30%;
   }
 
   .fourth {
     margin-top: 25% !important;
   }
+}
 
+@media screen and (min-width:2560px) {
+  .camIcon {
+    position: absolute !important;
+    background: $color-white !important;
+    padding: 0px !important;
+    font-size: 23px !important;
+    top: 10px;
+    left: 38%;
+  }
+
+  .fourth {
+    margin-top: 15% !important;
+  }
+
+  .details-row {
+    margin-top: 0% !important;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 35px 35px 35px;
+  }
+
+  .profile-progress {
+
+    margin-top: 35% !important;
+  }
 }
 
 .row {
@@ -525,6 +561,10 @@ hr {
 
 .bb {
   border-bottom: 1px solid $color-border !important;
+}
+
+.bb-icon {
+  border-bottom: 1px solid $color-border;
 }
 
 :host ::ng-deep .mat-progress-bar-buffer {
