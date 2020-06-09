@@ -83,6 +83,7 @@ export class EnrollmentComponent implements OnInit {
       if (data.pagenumber === 0) {
         this.enrollmentrecords = [];
       }
+      console.log( result?.data?.getenrolledcourses?.message);
       Array.prototype.push.apply(this.enrollmentrecords, result.data.getenrolledcourses.message);
       this.dataSource.data = this.enrollmentrecords;
       this.dataSource.paginator = this.paginator;

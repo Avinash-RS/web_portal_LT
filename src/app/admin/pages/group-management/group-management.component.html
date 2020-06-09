@@ -312,7 +312,7 @@
               </mat-table>
             </div>
             <mat-paginator #paginator *ngIf="ELEMENT_DATA && ELEMENT_DATA.length > 0" [length]="resultsLength"
-              [pageSize]="20" (page)="next($event)">
+              [pageSize]="10" (page)="next($event)">
             </mat-paginator>
             <div *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
               <br><br>
