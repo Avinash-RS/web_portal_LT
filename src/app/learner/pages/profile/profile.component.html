@@ -60,62 +60,73 @@
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
+        <div class="row">
+          <div class="profile-pic">
+            <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
+            </mat-icon>
+            <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+              id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
+              [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
+            <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+          </div>
+        </div>
 
-        <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+        <!-- <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
           id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
           [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
         <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
         <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
-        </mat-icon>
+        </mat-icon> -->
+        <div class="row width_100">
+          <div class="uname width_100 center_align">{{userData?.full_name || 'Full Name'}} </div>
 
-        <div class="uname">{{userData?.full_name || 'Full Name'}} </div>
+          <div class="width_100 center_align stateDet">
+            {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
+            {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
+          </div>
 
-        <div class="width_100 center_align stateDet">
-          {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
-          {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
-        </div>
+          <div class="f_wt_400 uID">
 
-        <div class="f_wt_400 uID">
+            <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
+              &nbsp;&nbsp;</span>
 
-          <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
-            &nbsp;&nbsp;</span>
-
-          <span class="f_size_16">| &nbsp;&nbsp;
-            {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
+            <span class="f_size_16">| &nbsp;&nbsp;
+              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
               userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
             userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
-            &nbsp;&nbsp;
-          </span>
+              &nbsp;&nbsp;
+            </span>
 
-          <span class="f_size_16">
-            | &nbsp;&nbsp;
-            {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
+            <span class="f_size_16">
+              | &nbsp;&nbsp;
+              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
               userData.user_profile[0]?.is_student_or_professional =='student' ? 
             'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
-          </span>
+            </span>
+
+          </div>
+
+          <div class="width_100 bb center center_align p-b-10"
+            *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
+            <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
+              <!-- <span class="f_size_15 color_label f_wt_500"> -->
+              {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
+              <!-- Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu -->
+            </span>
+          </div>
+
+          <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
+            <span class="f_size_15 color_label f_wt_500">
+              Languages Known
+            </span>
+          </div>
+
+          <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
+            Member Since &nbsp;
+            {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
+          </div>
 
         </div>
-
-        <div class="width_100 bb center center_align p-b-10"
-          *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
-          <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
-            <!-- <span class="f_size_15 color_label f_wt_500"> -->
-            {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
-            <!-- Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu -->
-          </span>
-        </div>
-
-        <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
-          <span class="f_size_15 color_label f_wt_500">
-            Languages known
-          </span>
-        </div>
-
-        <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
-          Member since &nbsp;
-          {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
-        </div>
-
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second">
