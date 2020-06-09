@@ -1,14 +1,15 @@
-<div>
+<div class="add-module-container">
   <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
       <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
       <li class="breadcrumb-item">
-        <a [routerLink]="['/Admin/auth/Wca/addcourse']" [queryParams]="{edit:'true',viewingModule:courseDetails?.courseid}">
+        <a [routerLink]="['/Admin/auth/Wca/addcourse']"
+          [queryParams]="{edit:'true',viewingModule:courseDetails?.courseid}">
           Edit Course
         </a></li>
 
-      <li class="breadcrumb-item" aria-current="page">Add Module</li>
+      <li class="breadcrumb-item" aria-current="page">Add module</li>
     </ol>
   </nav>
 
@@ -21,7 +22,9 @@
               [src]="routedCourseDetails?.courseImage ? routedCourseDetails?.courseImage : '../../../../assets/images/image_upload.svg'">
             <br>
             <div class="course-name">{{routedCourseDetails?.courseName}}</div>
-            <div class="no-modules" >{{noOfModules > 1 ? noOfModules + ' Modules' : (noOfModules == 1 ? noOfModules + ' Module' : 'No Module added')}}</div>
+            <div class="no-modules">
+              {{noOfModules > 1 ? noOfModules + ' Modules' : (noOfModules == 1 ? noOfModules + ' Module' : 'No Module added')}}
+            </div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
               <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference
@@ -36,7 +39,7 @@
               </span>
               <span (click)="navChooseTemp()"
                 class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0) ? 'mod-btn dis-btn': 'mod-btn'}}">
-                Add Module
+                Add module
               </span>
               <span>
                 <span
@@ -46,7 +49,7 @@
                 </span>
                 <span (click)="addModuleRepos()"
                   class="{{(courseDetails && courseDetails.coursetype == 'SCORM' || this.scormPath.length > 0 ) ? 'repo-mod-btn dis-btn' : 'repo-mod-btn' }}">
-                  Add Module from repository
+                  Add module from repository
                 </span>
               </span>
             </div>
@@ -92,8 +95,7 @@
               </ng-container>
 
               <ng-template #noMod>
-                <div class="no-module"
-                  *ngIf="(!isScrom && this.scormPath.length == 0); else uploadDel">
+                <div class="no-module" *ngIf="(!isScrom && !spinner && this.scormPath.length == 0); else uploadDel">
                   <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                   <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
                     color="primary">Upload a SCORM Package
@@ -103,7 +105,7 @@
               </ng-template>
 
               <ng-template #uploadDel>
-                <div class="no-module">
+                <div class="no-module" *ngIf="!spinner">
                   <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                   <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
                     color="primary">SCORM Package uploaded
@@ -118,6 +120,10 @@
         </div>
       </mat-grid-list>
 
+      <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="spinner" style="height:100%">
+        <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+      </div>
+
       <mat-card-footer>
         <div>
           <button type="button" mat-flat-button color="primary"
@@ -125,10 +131,10 @@
             class="continue-btn">Save</button>
         </div>
       </mat-card-footer>
+      
 
     </mat-card>
 
 
   </div>
-
 </div>
