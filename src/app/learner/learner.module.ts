@@ -51,7 +51,10 @@ const routes: Routes = [
   { path: 'recover', component: ForgotUsernameAndPasswordComponent, data: { title: 'Learner  Forget Password' } },
   { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent, data: { title: 'Learner  Forget Password OTP' } },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { title: 'Learner  Profile' } },
-  { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
+
+  // { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
+  { path: 'Thankyou', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Thank you' } },
+
   { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
