@@ -295,7 +295,7 @@ export class AddModuleComponent implements OnInit {
           };
           this.apiService.updateCourse(obj).subscribe((data: any) => {
           });
-          this.toast.success('Module updated successfully');
+          this.toast.success('SCORM course uploaded successfully');
           this.router.navigate(['/Admin/auth/Wca']);
         }
         this.spinner = false;
