@@ -28,17 +28,33 @@
                                 <div *ngIf="f.email.errors.required">Email is required</div>
                                 <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
                             </div><br>
+                            <div style=" margin-left: -17px;margin-right: -17px;">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-10">
+                                    <div class="alert1"> Note : This name will be used in your certificates</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-10">
+                                    <div class="linee"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-10">
+                                    <div class="iagree">
+                                        <mat-checkbox  formControlName="termsandconditions" required>
+                                            <div class="terms"><span style="color:#333">I agree with!</span> <a (click)="openDialog()">&nbsp;&nbsp;<span style="font-size: 14px;">"Terms &
+                                                Conditions"</span></a></div>
+                                        </mat-checkbox><br><br></div>
+                                </div>
+                            </div>
+                        </div>
+                            
 
-                            <div class="alert1"> Note : This name will be used in your certificates</div>
-
-                             <div class="linee"></div>
-
-                            <div class="iagree">
-
-                            <mat-checkbox  formControlName="termsandconditions" required>
-                                <div class="terms"><span style="color:#333">I agree with!</span> <a (click)="openDialog()">&nbsp;&nbsp;<span style="font-size: 14px;">"Terms &
-                                    Conditions"</span></a></div>
-                            </mat-checkbox><br><br></div>
+                          
 
                             <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                                 Register
