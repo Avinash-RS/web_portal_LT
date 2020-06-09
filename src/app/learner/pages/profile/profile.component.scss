@@ -9,9 +9,19 @@
 
 // responsiveness starts here
 
+.cameraIcon {
+  z-index: 11;
+  margin-top: 12px;
+  margin-left: 12px;
+  position: absolute;
+  background: white;
+}
 
+.profile-pic {
+  margin: 0 auto;
+}
 
-/deep/ .mat-checkbox-layout {
+:host ::ng-deep .mat-checkbox-layout {
   white-space: normal !important;
 }
 
@@ -22,25 +32,16 @@
   text-align: right !important;
   text-align: end !important;
   // 
-  margin-top: 60% !important;
-}
-
-.details-row {
-  margin-top: 7% !important;
-  padding: 35px;
+  margin-top: 70% !important;
 }
 
 .m-b-5px {
   margin-bottom: 5px;
 }
 
-// responsiveness ends here
+
 
 @media screen and (min-width:320px) and (max-width:335px) {
-  .camIcon {
-
-    left: 10% !important;
-  }
 
   .bb-icon {
     border-bottom: 0px !important;
@@ -48,11 +49,6 @@
 }
 
 @media screen and (min-width:335px) and (max-width:375px) {
-  .camIcon {
-
-    left: 16% !important;
-  }
-
   .bb-icon {
     border-bottom: 0px !important;
   }
@@ -71,24 +67,24 @@
   .first {
     order: 1;
     align-items: center;
-    z-index: 1;
+
   }
 
   .second {
     order: 2;
     margin-top: 20px !important;
-    z-index: 1;
+
   }
 
   .third {
     order: 3;
     margin-top: 20px !important;
-    z-index: 1;
+
   }
 
   .fourth {
     order: 4;
-    margin-top: 600px !important;
+    margin-top: 100vh !important;
   }
 
   .profile-progress {
@@ -110,45 +106,32 @@
     margin-left: 0 !important;
   }
 
-  .camIcon {
-    position: absolute !important;
-    background: $color-white !important;
-    padding: 0px !important;
-    font-size: 23px !important;
-    top: 10px;
-    left: 21%;
-  }
-
 }
 
-@media screen and (min-width:768px) and (max-width:1020px) {
-  .profile {
-    justify-content: space-between;
-  }
+
+@media screen and (min-width:769px) and (max-width:991px) {
+
 
   .first {
     order: 1;
     align-items: center;
-    z-index: 1;
+
   }
 
   .second {
     order: 2;
-    margin-top: 20px !important;
-    z-index: 1;
   }
 
   .third {
     order: 3;
     margin-top: 20px !important;
-    z-index: 1;
-    align-items: center;
+
   }
 
   .fourth {
-    order: 4;
-    margin-top: 580px !important;
+    margin-top: 100vh !important;
   }
+
 
   .profile-progress {
     width: 100%;
@@ -170,19 +153,13 @@
   .user-info {
     margin-left: 0 !important;
   }
-
-  .camIcon {
-    position: absolute !important;
-    background: $color-white !important;
-    padding: 0px !important;
-    font-size: 23px !important;
-    top: 10px;
-    left: 35%;
-  }
-
 }
 
-@media screen and (min-width:1020px) {
+
+
+
+@media screen and (min-width:992px) {
+
 
   .details-row {
     margin-top: 7% !important;
@@ -194,44 +171,29 @@
   }
 
   .fourth {
-    margin-top: 35% !important;
+    margin-top: 60vh !important;
   }
 
-  .camIcon {
-    position: absolute !important;
-    background: $color-white !important;
-    padding: 0px !important;
-    font-size: 23px !important;
-    top: 10px;
-    left: 18%;
+
+  .profile-progress {
+    margin-top: 50vh !important;
   }
 
 }
 
 @media screen and (min-width:1440px) {
-  .camIcon {
-    position: absolute !important;
-    background: $color-white !important;
-    padding: 0px !important;
-    font-size: 23px !important;
-    top: 10px;
-    left: 30%;
-  }
+
 
   .fourth {
     margin-top: 25% !important;
   }
+
+  .profile-progress {
+    margin-top: 70% !important;
+  }
 }
 
 @media screen and (min-width:2560px) {
-  .camIcon {
-    position: absolute !important;
-    background: $color-white !important;
-    padding: 0px !important;
-    font-size: 23px !important;
-    top: 10px;
-    left: 38%;
-  }
 
   .fourth {
     margin-top: 15% !important;
@@ -251,6 +213,8 @@
     margin-top: 35% !important;
   }
 }
+
+// responsiveness ends here
 
 .row {
   margin-left: 0 !important;
@@ -335,7 +299,7 @@ div.account {
 .iconImg {
   margin: auto;
   display: block;
-  background: $light-grey !important;
+  background: $profile-p-grey !important;
   border: 8px solid $color-white;
   width: 220px;
   padding: 50px;
@@ -402,7 +366,7 @@ div.account {
   margin-right: 10px;
   margin-top: -28px;
   position: relative;
-  z-index: 2;
+  // z-index: 2;
   color: $color-blank;
 }
 
