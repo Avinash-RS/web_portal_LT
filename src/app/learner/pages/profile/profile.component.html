@@ -44,7 +44,7 @@
             <span class="f_size_13 f_wt_500">Email : {{userData.email || 'example@domain.com'}}</span>
           </div>
           <div class="col-md-2 col-sm-2 col-2 ">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb-icon' : 'f_size_17  bb-icon'" *ngIf="editpopup "
               style="width: 17px;" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
               create</mat-icon>
           </div>
@@ -118,7 +118,7 @@
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second ">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second">
         <div class="profile-progress">
           <!-- <div class="width_70 float_right m-t-50 m-r-25px"> -->
           <span class="percentText float_left no_margin f_size_16">Profile Progress</span><span
