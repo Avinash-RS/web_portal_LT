@@ -46,6 +46,7 @@ export class ReferenceFileComponent implements OnInit {
   topicnamelist:any;
   count: any;
   courseId: any;
+  
   constructor(public service: WcaService,public route: Router,public router: ActivatedRoute,  public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService,) { 
     console.log(this.myDate)
   }
@@ -72,7 +73,7 @@ export class ReferenceFileComponent implements OnInit {
       name:  new FormControl(''),
       module:  new FormControl(''),
       topic:  new FormControl(''),
-
+      upload: new FormControl('')
     })
   }
 
@@ -82,7 +83,9 @@ export class ReferenceFileComponent implements OnInit {
     fb.append('reffile', this.selectfile)
     let tempData: any = fb.get("reffile");
     if((tempData.size/1000) > 10240){
-      this.uploadMsg = "Upload the document";
+      // this.uploadMsg = "Upload the document";
+      this.uploadMsg = tempData.name;
+      tempData = '';
     }    
     else {
       this.uploadMsg = tempData.name;
@@ -113,7 +116,8 @@ export class ReferenceFileComponent implements OnInit {
         this.clear();
         this.getAllRefDoc(0)
       }else{
-        this.alert.openAlert(data['message'],null)
+        this.alert.openAlert(data['message'],null);
+        this.uploadMsg = "Upload the document";
       }
     })
   }

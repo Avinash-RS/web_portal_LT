@@ -56,7 +56,7 @@ export class WcaService {
 
 
   uploadImage(image) {
-    return this.http.post(environment.apiUrlImg + 'upload/image', image);
+    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
   }
 
   uploadScromCourse(file) {

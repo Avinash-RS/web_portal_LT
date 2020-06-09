@@ -31,6 +31,7 @@ export class AuditlogComponent implements OnInit {
   todate: any;
   displayedColumns = (['sno']).concat(this.columns.map(c => c.columnDef));
   exportdata = 'exportall';
+  filteredreports: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private dialog: MatDialog, private adminservice: AdminServicesService, private locationStrategy: LocationStrategy) {
   }
@@ -76,28 +77,28 @@ export class AuditlogComponent implements OnInit {
   }
 
   getallauditreports(pgnumber) {
+    this.resultsLength = null;
     this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
-      this.resultsLength = null;
-      // console.log(result.message);
       if (result?.message) {
-        this.reports = result.message;
         // this.reports.forEach(element => {
         //    const date = moment(element.created_on);
         //    const date1 = moment(element.updated_on);
         //    element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
         //    element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
         // });
-        if (pgnumber === 0) {
+        // console.log(pgnumber);
+        if (pgnumber === '0') {
           this.reports = [];
         }
         Array.prototype.push.apply(this.reports, result.message);
         this.dataSource.data = this.reports;
+        this.dataSource.paginator = this.paginator;
         this.resultsLength = result?.total_count;
       }
     });
   }
   openviewdialog(data, templateRef) {
-    this.dialog.open(templateRef, { disableClose: true });
+    this.dialog.open(templateRef);
     this.viewdetail = data;
   }
   closedialogbox() {
@@ -110,6 +111,7 @@ export class AuditlogComponent implements OnInit {
   }
   filter(filterform, pgnumber) {
     // this.requiredfield = true;
+    this.resultsLength = null;
     if (filterform.valid) {
       // this.requiredfield = false;
       const data = {
@@ -117,24 +119,20 @@ export class AuditlogComponent implements OnInit {
         to_date: moment(filterform.value.todate).format('YYYY-MM-DD'),
         pagenumber: pgnumber
       };
-      console.log(data);
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
-        this.resultsLength = null;
-        console.log(result.message);
         if (result?.success === true) {
-          this.reports = result?.message;
           // this.reports.forEach(element => {
           //   const date = moment(element.created_on);
           //   const date1 = moment(element.updated_on);
           //   element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
           //   element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
           //  });
-          if (pgnumber === 0) {
-            this.reports = [];
+          if (pgnumber === '0') {
+            this.filteredreports = [];
           }
-          Array.prototype.push.apply(this.reports, result.message);
-          this.dataSource.data = this.reports;
-          this.dataSource.data = this.reports;
+          Array.prototype.push.apply(this.filteredreports, result.message);
+          this.dataSource.data = this.filteredreports;
+          this.dataSource.paginator = this.paginator;
           this.resultsLength = result.total_count;
         } else {
 
@@ -185,7 +183,7 @@ export class AuditlogComponent implements OnInit {
     }
   }
   openexportdialog(templateRef) {
-    this.dialog.open(templateRef , { disableClose: true });
+    this.dialog.open(templateRef);
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
