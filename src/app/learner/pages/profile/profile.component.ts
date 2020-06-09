@@ -212,7 +212,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
-          profileDetails.iAgree = profileDetails.iAgree == null && true;
+          profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree ;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
           }

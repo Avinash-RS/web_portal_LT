@@ -402,9 +402,9 @@
         </div>
 
         <!-- /////If professional////// -->
-        <br>
+        <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
         <hr *ngIf="profileForm.value.is_student_or_professional === 'professional'">
-        <br>
+        <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
 
         <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
           <label class="f_size_19 p-b-10px">Experience</label><span class="mand"> *</span>
@@ -467,7 +467,7 @@
         <br>
 
         <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
-        <label class="f_size_15">(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
+        <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
         <div class="row p-b-10px">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
             <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
