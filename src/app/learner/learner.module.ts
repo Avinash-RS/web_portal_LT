@@ -37,6 +37,7 @@ import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-cours
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingModule } from 'ng-starrating';
 // import { SearchPipe } from '../pipes/search.pipe';
+import { PipeModule } from '../pipes/pipe.module';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
@@ -92,6 +93,7 @@ const routes: Routes = [
 
   imports: [
     CoreModule,
+    PipeModule,
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,

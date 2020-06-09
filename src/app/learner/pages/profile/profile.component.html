@@ -107,12 +107,12 @@
 
         <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
           <span class="f_size_15 color_label f_wt_500">
-            Languages Known
+            Languages known
           </span>
         </div>
 
         <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
-          Member Since &nbsp;
+          Member since &nbsp;
           {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
         </div>
 
@@ -138,12 +138,12 @@
         <!-- ////// Info about you//////// -->
         <div class="row">
           <div class="form-group width_100">
-            <label class="f_size_19">About Me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
+            <label class="f_size_19">About me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
             <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
                 'inputs  color_label  width_100'"
               [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" formControlName="about_you"
               name="about_you"></textarea>
-            <div *ngIf="f.about_you.touched && f.about_you.errors" class="invalid-feedback">
+            <div *ngIf="f.about_you.touched && f.about_you.errors" class="mand">
               <div *ngIf="f.about_you.errors.minlength">Information about you must be minimum of
                 {{f.about_you.errors.minlength.requiredLength}} characters </div>
               <div *ngIf="f.about_you.errors.maxlength">Information about you must be
@@ -191,7 +191,7 @@
               <mat-select [disabled]='cannotEdit' multiple
                 [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
                 placeholder="Language" formControlName="languages_known" name="language">
-                <mat-option *ngFor="let item of languageList" [value]="item._id">
+                <mat-option *ngFor="let item of languageList | sort: false : 'languagename'" [value]="item._id">
                   {{item.languagename}}
                 </mat-option>
               </mat-select>
@@ -348,7 +348,7 @@
               <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
                 (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
               </mat-icon>
-              <mat-icon (click)="addQualification()"
+              <mat-icon (click)="addQualification(in)"
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
                 class="addIcon">add
               </mat-icon>
@@ -424,8 +424,8 @@
                 *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
                 <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
                 </div>
-                <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less
-                  than 70</div>
+                <!-- <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less
+                  than 70</div> -->
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
@@ -488,7 +488,6 @@
             </mat-checkbox>
           </div>
         </div>
-
 
         <br *ngIf="cannotEdit">
         <hr>
@@ -645,7 +644,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
 
             <br>
@@ -699,7 +697,6 @@
       </ng-template>
     </div>
   </div>
-
 
 </div>
 

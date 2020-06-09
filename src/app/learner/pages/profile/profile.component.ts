@@ -25,7 +25,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class ProfileComponent implements OnInit {
 
-  enableMobileEdit ;
+  enableMobileEdit;
 
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
@@ -152,13 +152,13 @@ export class ProfileComponent implements OnInit {
       // gender: new FormControl(''),
       // is_student_or_professional: new FormControl(''),
       languages_known: [''],
-      addressline1 :  ['', myGlobals.address],
-      addressline2 : ['', myGlobals.address],
-      pincode :  ['', myGlobals.pincode],
+      addressline1: ['', myGlobals.address],
+      addressline2: ['', myGlobals.address],
+      pincode: ['', myGlobals.pincode],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      neft : ['', myGlobals.req],
+      neft: new FormControl('', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]),
       iAgree: new FormControl(true, []),
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
@@ -183,7 +183,8 @@ export class ProfileComponent implements OnInit {
           job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)]);
           org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)]);
           totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3),
-          Validators.pattern(/^[0-6][0-9]{1}$/)]);
+            // Validators.pattern(/^[0-6][0-9]{1}$/)
+          ]);
         } else {
           job_role.setValidators(null);
           org.setValidators(null);
@@ -213,7 +214,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
-          profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree ;
+          profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
           }
@@ -276,8 +277,11 @@ export class ProfileComponent implements OnInit {
       && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
       this.profileForm.controls.progress.setValue(60);
     }
-    if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
-      && this.profileForm.value.social_media && this.profileForm.value.gender && this.profileForm.value.is_student_or_professional) {
+    debugger
+    if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
+      this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
+      && this.profileForm.value.social_media[0].link !== '' && this.profileForm.value.gender !== '' &&
+      this.profileForm.value.is_student_or_professional !== '') {
       this.profileForm.controls.progress.setValue(90);
     }
     if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
@@ -332,8 +336,14 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  addQualification() {
-    this.qualification.push(this.createQualItem());
+  addQualification(i) {
+    if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].qualification !== '' &&
+      this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+      this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+      this.qualification.push(this.createQualItem());
+    } else {
+      this.alert.openAlert('Please fill all details', null);
+    }
   }
 
   removeQualification(i) {
@@ -569,6 +579,7 @@ export class ProfileComponent implements OnInit {
   updatePassword() {
     this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword,
       this.passwordForm.value.newpassword).subscribe((password: any) => {
+        this.passwordForm.reset();
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
           localStorage.clear();
@@ -651,7 +662,18 @@ export class ProfileComponent implements OnInit {
 
   formatPercentage(index) {
     const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
-    const per = parseFloat(val).toFixed(2);
-    this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+    if (val.includes('.')) {
+      // console.log(val, typeof val);
+    } else {
+      if (val.length > 2) {
+        const per = val.slice(0, 2) + '.' + val.slice(2, val.length - 1);
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      } else {
+        const per = val + '.00';
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      }
+    }
   }
 }
