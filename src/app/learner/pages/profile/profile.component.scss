@@ -17,17 +17,12 @@
   text-align: end !important;
   // 
   margin-top: 60% !important;
-  // margin-right: 13%;
 }
 
 .details-row {
   margin-top: 7% !important;
   padding: 35px;
 }
-
-// .user-info {
-//   margin-left: 12%;
-// }
 
 .m-b-5px {
   margin-bottom: 5px;
@@ -39,6 +34,13 @@
   .camIcon {
 
     left: 10% !important;
+  }
+}
+
+@media screen and (min-width:335px) and (max-width:375px) {
+  .camIcon {
+
+    left: 16% !important;
   }
 
 }
@@ -78,8 +80,6 @@
   .profile-progress {
     width: 100%;
     margin-top: 20px !important;
-    padding-left: 35px;
-    padding-bottom: 35px;
   }
 
   .details-row {
@@ -169,14 +169,10 @@
 }
 
 @media screen and (min-width:1020px) {
-  // .fourth {
-  //   margin-top: 10%;
-  // }
 
   .details-row {
     margin-top: 7% !important;
     width: 100%;
-    // margin-left: 10% !important;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -184,31 +180,9 @@
   }
 
   .fourth {
-
-    margin-top: 25% !important;
+    margin-top: 35% !important;
   }
 
-
-}
-
-@media screen and (min-width:765px) {
-  .fourth {
-    margin-top: 22%;
-  }
-
-  @media screen and (max-width:1024px) {
-    .camIcon {
-      position: absolute !important;
-      background: $color-white !important;
-      padding: 0px !important;
-      font-size: 23px !important;
-      top: 10px;
-      left: 15%;
-    }
-  }
-}
-
-@media screen and (min-width:1024px) {
   .camIcon {
     position: absolute !important;
     background: $color-white !important;
@@ -217,7 +191,12 @@
     top: 10px;
     left: 18%;
   }
+
+
 }
+
+
+@media screen and (min-width:1024px) {}
 
 @media screen and (min-width:1440px) {
   .camIcon {
@@ -228,6 +207,12 @@
     top: 10px;
     left: 28%;
   }
+
+  .fourth {
+    margin-top: 25% !important;
+  }
+
+
 }
 
 .row {
