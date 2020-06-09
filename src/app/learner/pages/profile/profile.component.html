@@ -137,11 +137,11 @@
         <!-- ////// Info about you//////// -->
         <div class="row">
           <div class="form-group width_100">
-            <label class="f_size_19">About Me</label>
+            <label class="f_size_19">About Me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
             <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
                 'inputs  color_label  width_100'"
-              [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" placeholder="1000 characters"
-              formControlName="about_you" name="about_you"></textarea>
+              [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" formControlName="about_you"
+              name="about_you"></textarea>
             <div *ngIf="f.about_you.touched && f.about_you.errors" class="invalid-feedback">
               <div *ngIf="f.about_you.errors.minlength">Information about you must be minimum of
                 {{f.about_you.errors.minlength.requiredLength}} characters </div>
@@ -159,7 +159,8 @@
         <!-- //////Gender part//////// -->
         <div class="row" *ngIf="!cannotEdit">
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
-            <label class="p-b-10px f_size_19">Gender</label><span class="mand p-b-10px"> *</span>
+            <label class="p-b-10px f_size_19">Gender</label>
+            <!-- <span class="mand p-b-10px"> *</span> -->
             <div class="form-group">
               <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
                 <mat-radio-button value="M">Male</mat-radio-button>
@@ -171,7 +172,8 @@
 
           <!-- //////I'm a//////// -->
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
-            <label class="p-b-10px f_size_19">I Am a</label><span class="mand p-b-10px"> *</span>
+            <label class="p-b-10px f_size_19">I Am a</label>
+            <!-- <span class="mand p-b-10px"> *</span> -->
             <div class="form-group ">
               <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
                 name="is_student_or_professional">
@@ -207,8 +209,43 @@
         <br *ngIf="!cannotEdit">
 
         <!-- //////Location//////// -->
-        <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Location</label>
+        <!-- <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Location</label> -->
+        <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Address</label>
         <span *ngIf="!cannotEdit" class="mand"> *</span><br>
+        <div class="row p-b-10px" *ngIf="!cannotEdit">
+          <div class="col-md-2 col-lg-2 col-sm-12 col-12">
+            <div class="form-group width_100">
+              <input class="institute" type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
+          'inputs  width_80'" placeholder="Address Line 1" formControlName="addressline1">
+              <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
+                <div *ngIf="f.addressline1.errors.required">Address Line 1 is required</div>
+                <div *ngIf="f.addressline1.errors.minlength">Address Line 1 must be minimum of
+                  {{f.addressline1.errors.minlength.requiredLength}} characters </div>
+                <div *ngIf="f.addressline1.errors.maxlength">Address Line 1 must be
+                  {{f.addressline1.errors.maxlength.requiredLength}} maximum of characters</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-lg-2 col-sm-12 col-12">
+            <input class="institute" type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
+          'inputs  width_80'" placeholder="Address Line 2" formControlName="addressline2">
+            <div *ngIf="f.addressline2.touched && f.addressline2.errors" class="mand">
+              <div *ngIf="f.addressline2.errors.required">Address Line 2 is required</div>
+              <div *ngIf="f.addressline2.errors.minlength">Address Line 2 must be minimum of
+                {{f.addressline2.errors.minlength.requiredLength}} characters </div>
+              <div *ngIf="f.addressline2.errors.maxlength">Address Line 2 must be
+                {{f.addressline2.errors.maxlength.requiredLength}} maximum of characters</div>
+            </div>
+          </div>
+          <div class="col-md-2 col-lg-2 col-sm-12 col-12">
+            <input class="institute" type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
+          'inputs  width_80'" placeholder="Pincode" formControlName="pincode">
+          <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
+            <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+          </div>
+          </div>
+        </div>
+
         <div class="row p-b-10px" *ngIf="!cannotEdit">
           <div class="col-md-2 col-lg-2 col-sm-12 col-12">
             <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Country"
@@ -327,7 +364,7 @@
         <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
-            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 ena'"
+            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100'"
               placeholder="Certificate Link" formControlName="{{i}}">
             <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
               class="dIcon ">delete_outline</mat-icon>
@@ -366,7 +403,7 @@
 
         <!-- /////If professional////// -->
         <br>
-        <hr *ngIf="profileForm.value.is_student_or_professional == 'professional'">
+        <hr *ngIf="profileForm.value.is_student_or_professional === 'professional'">
         <br>
 
         <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
@@ -375,7 +412,7 @@
             <div class="col-md-2 col-sm-4 col-8">
               <!-- {{f.professional.controls.total_experience.touched}},
                 {{f.professional.controls.total_experience.errors.required}} -->
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
                 'inputs    width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
                 placeholder="Total Experience" formControlName="total_experience">
@@ -391,7 +428,7 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
                 'inputs    width_80'"
                 [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
                 placeholder="Organization" formControlName="organization">
@@ -407,7 +444,7 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs    width_80' :
+              <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
                 'inputs   width_80'" placeholder="Job role" formControlName="job_role"
                 [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
               <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
@@ -423,9 +460,39 @@
             </div>
           </div>
         </div>
+
+        <!-- /////If professional////// -->
+        <br>
+        <hr>
+        <br>
+
+        <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
+        <label class="f_size_15">(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
+        <div class="row p-b-10px">
+          <div class="col-md-2 col-sm-4 col-8 display_flex">
+            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
+              placeholder="Reference number" formControlName="neft">
+          </div>
+        </div>
+
         <br *ngIf="cannotEdit">
         <hr>
         <br *ngIf="cannotEdit">
+
+        <div class="row p-b-10px">
+          <div class="col-md-2 col-sm-4 col-8 display_flex">
+            <mat-checkbox class="iAgree" formControlName="iAgree">
+              <span class="mand"> * </span> I hereby confirm having read and understood the details of L&T - Kaushalya
+              Program
+            </mat-checkbox>
+          </div>
+        </div>
+
+
+        <br *ngIf="cannotEdit">
+        <hr>
+        <br *ngIf="cannotEdit">
+
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">

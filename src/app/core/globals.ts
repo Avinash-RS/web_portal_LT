@@ -48,6 +48,19 @@ export const req: any = [
     Validators.required
 ];
 
+export const address: any = [
+    Validators.required,
+    Validators.pattern(/^.{1,100}$/),
+    Validators.minLength(1),
+    Validators.maxLength(100)
+];
+
+export const pincode: any = [
+    Validators.required,
+    Validators.pattern(/^[1-9][0-9]{5}$/),
+];
+
+
 export const textVal: any = [
     Validators.pattern(/^(.|\s)*\S(.|\s)*$/),
     Validators.required
