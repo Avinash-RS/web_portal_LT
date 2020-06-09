@@ -180,8 +180,8 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe((val: any) => {
         if (val === 'professional') {
-          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)]);
-          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)]);
+          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]*$/)]);
+          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]*$/)]);
           totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(3),
             // Validators.pattern(/^[0-6][0-9]{1}$/)
           ]);
@@ -666,6 +666,10 @@ export class ProfileComponent implements OnInit {
     } else {
       if (val.length > 2) {
         const per = val.slice(0, 2) + '.' + val.slice(2, val.length - 1);
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      } else if (val.length === 0) {
+        const per = '';
         // const per = parseFloat(val).toFixed(2);
         this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
       } else {

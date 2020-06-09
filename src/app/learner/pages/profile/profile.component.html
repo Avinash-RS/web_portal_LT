@@ -49,14 +49,6 @@
               create</mat-icon>
           </div>
         </div>
-
-        <!-- <div class="row" style="margin-top: 12%;">
-          <span class="percentText color_blue">Profile Progress</span><span
-            class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
-          <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
-          </mat-progress-bar>
-        </div> -->
-
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
@@ -71,12 +63,6 @@
           </div>
         </div>
 
-        <!-- <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
-          id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
-          [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
-        <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
-        <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
-        </mat-icon> -->
         <div class="row width_100">
           <div class="uname width_100 center_align">{{userData?.full_name || 'Full Name'}} </div>
 
@@ -109,9 +95,7 @@
           <div class="width_100 bb center center_align p-b-10"
             *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
             <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
-              <!-- <span class="f_size_15 color_label f_wt_500"> -->
               {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
-              <!-- Hindi, English, Urdu, Bengali, Punjabi, Kannada, Tamil, Telugu -->
             </span>
           </div>
 
@@ -131,7 +115,6 @@
 
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second">
         <div class="profile-progress">
-          <!-- <div class="width_70 float_right m-t-50 m-r-25px"> -->
           <span class="percentText float_left no_margin f_size_16">Profile Progress</span><span
             class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
           <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
@@ -482,8 +465,16 @@
         <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
         <div class="row p-b-10px">
           <div class="col-md-2 col-sm-4 col-8 display_flex">
-            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
+            <input type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
               placeholder="Reference number" formControlName="neft">
+          </div>
+          <div *ngIf="f.neft.touched && f.neft.errors" class="width_100 mand">
+            <div *ngIf="f.neft.errors.required">Transaction number is required</div>
+            <div *ngIf="f.neft.errors.minlength">Transaction number must be minimum of
+              {{f.neft.errors.minlength.requiredLength}} characters </div>
+            <div *ngIf="f.neft.errors.maxlength">Transaction number must be
+              {{f.neft.errors.maxlength.requiredLength}} maximum of characters</div>
+
           </div>
         </div>
 
