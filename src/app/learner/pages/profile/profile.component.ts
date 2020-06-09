@@ -277,7 +277,6 @@ export class ProfileComponent implements OnInit {
       && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
       this.profileForm.controls.progress.setValue(60);
     }
-    debugger
     if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
       this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
       && this.profileForm.value.social_media[0].link !== '' && this.profileForm.value.gender !== '' &&
