@@ -14,16 +14,16 @@ export class ToolbarNotificationComponent implements OnInit {
     read = false;
   	@Input() notifications = [];
 
-    // @HostListener('document:click', ['$event', '$event.target'])
-    // onClick(event: MouseEvent, targetElement: HTMLElement) {
-    //     if (!targetElement) {
-    //           return;
-    //     }
-    //     const clickedInside = this.elementRef.nativeElement.contains(targetElement);
-    //     if (!clickedInside) {
-    //          this.isOpen = false;
-    //     }
-    // }
+    @HostListener('document:click', ['$event', '$event.target'])
+    onClick(event: MouseEvent, targetElement: HTMLElement) {
+        if (!targetElement) {
+              return;
+        }
+        const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+             this.isOpen = false;
+        }
+    }
 
   	constructor(private elementRef: ElementRef, private adminService: AdminServicesService, private router: Router) { }
 
