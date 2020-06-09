@@ -2,61 +2,62 @@
   <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
   <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/register']">Enroll now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick help</span>
   <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms and conditions</span>
-  <div class="container-reg200 " >
-    <!-- <div class="row"> -->
-      <!-- <div class="col-3"> -->
-       
-        <!-- <img class="bgimg" src="../../../../assets/learner/bg-6.jpg"> -->
-      <!-- </div> -->
-      <!-- <div class="col-3"> -->
-        <div class="wrap-reg p-l-50 p-r-50 p-t-77 ">
-          <form [formGroup]="loginForm">
-            <h1 class="head1"><span style="font-weight: lighter;">Welcome to </span> <b>Edu</b>Tech</h1>
-            <h1 class="signIn"> Sign In </h1> <br><br><br><br>
-            <mat-card-content style="margin-top:10px">
-              <div class="form-group">
-                <label>User Name</label>
-                <!-- <span style="color: red;"> *</span> -->
-                <input type="text" name="username" formControlName="username" class="form-control"
-                  [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
-                <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">User Name is required</div>
-                </div>
-              </div>
-              <div class="form-group" appCapslock (capsLock)="capsOn=$event">
-                <label>Password</label>
-                <!-- <span style="color: red;"> *</span> -->
-                <div *ngIf="capsOn">Caps Lock is On !</div>
-                <input [type]="show ? 'text' : 'password'" name="password" formControlName="password" onCopy="return false"
-                  onDrag="return false" onDrop="return false" onPaste="return false" class="form-control"
-                  [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
-                <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
-                  aria-hidden="true"></i>
-                <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
-                  <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
-                </div>
-              </div>
-              <mat-checkbox class="remember_me" formControlName="remember_me">
-                Remember Me
-              </mat-checkbox><br><br>
-              <button id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">Sign
-                in</button>
-             
-              <div class="forgot_ps">
-                <mat-label><span class="forgot" (click)="forgotusername('forgotUsername')">Forgot username?</span>  &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  <span style="cursor: pointer;" (click)="reserPassword('reserPassword')">Reset password?</span>
-                </mat-label>
-                <div class="linee"></div>
-              </div>
-            
-              <div class="sign_up">
-                <span class="haveacc">Don't have an account ?</span> 
-                <a [routerLink]="['/Learner/register']"><strong class="col">Sign up</strong></a> </div><br><br>
-            </mat-card-content>
-          </form>
+  
+  <div class="row container-reg200">
+    <div class="col-md-8 col-sm-12 col-12 ">
+      <div class=" " >
         </div>
-      <!-- </div> -->
-    <!-- </div> -->
-
+    </div>
+    <div class="col-md-4 col-sm-12 col-12">
+      <div class="wrap-reg">
+        <form [formGroup]="loginForm">
+          <h1 class="head1"><span style="font-weight: lighter;">Welcome to </span> <b>Edu</b>Tech</h1>
+          <h1 class="signIn"> Sign In </h1> <br><br><br><br>
+          <mat-card-content style="margin-top:10px">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" name="username" formControlName="username" class="form-control"
+                [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
+              <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">User Name is required</div>
+              </div>
+            </div>
+            <div class="form-group" appCapslock (capsLock)="capsOn=$event">
+              <label>Password</label>
+              <div *ngIf="capsOn">Caps Lock is On !</div>
+              <input [type]="show ? 'text' : 'password'" name="password" formControlName="password" onCopy="return false"
+                onDrag="return false" onDrop="return false" onPaste="return false" class="form-control"
+                [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
+              <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
+                aria-hidden="true"></i>
+              <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
+              </div>
+            </div>
+            <mat-checkbox class="remember_me" formControlName="remember_me">
+              Remember Me
+            </mat-checkbox><br><br>
+            <button id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">Sign
+              in</button>
+           
+            <div class="forgot_ps">
+              <mat-label><span class="forgot" (click)="forgotusername('forgotUsername')">Forgot username?</span>  &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;  <span style="cursor: pointer;" (click)="reserPassword('reserPassword')">Reset password?</span>
+              </mat-label>
+              <div class="linee"></div>
+            </div>
+          
+            <div class="sign_up">
+              <span class="haveacc">Don't have an account ?</span> 
+              <a [routerLink]="['/Learner/register']"><strong class="col">Sign up</strong></a> </div><br><br>
+          </mat-card-content>
+        </form>
+      </div>
+    </div>
   </div>
+  
+  
+  <!-- <div class="container-reg200 " >
+
+  </div> -->
 </div>

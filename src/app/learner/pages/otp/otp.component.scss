@@ -33,7 +33,7 @@ input[type=text] {
 
 .btn.disabled, .btn:disabled {
   opacity: .65;
-  color: #333 !important;
+  color: $label2 !important;
   background-color: $color-border !important;
 }
   div.account{
@@ -44,7 +44,7 @@ input[type=text] {
     margin-top: 20%;
 }
 .did{
-  color: #333;
+  color: $label2;
 }
 .star{
   color: $color-red;
