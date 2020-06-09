@@ -9,6 +9,12 @@
 
 // responsiveness starts here
 
+
+
+/deep/ .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
 .profile-progress {
   width: 70%;
   // float right

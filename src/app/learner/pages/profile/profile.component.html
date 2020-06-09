@@ -241,9 +241,9 @@
           <div class="col-md-2 col-lg-2 col-sm-12 col-12">
             <input class="institute" type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80' :
           'inputs  width_80'" placeholder="Pincode" formControlName="pincode">
-          <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
-            <div *ngIf="f.pincode.errors.required">Pincode is required</div>
-          </div>
+            <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
+              <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+            </div>
           </div>
         </div>
 
@@ -481,10 +481,10 @@
         <br *ngIf="cannotEdit">
 
         <div class="row p-b-10px">
-          <div class="col-md-2 col-sm-4 col-8 display_flex">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
             <mat-checkbox class="iAgree" formControlName="iAgree">
-              <span class="mand"> * </span> I hereby confirm having read and understood the details of L&T - Kaushalya
-              Program
+              <span class="mand"> * </span> I hereby confirm having
+              read and understood the details of L&T - Kaushalya Program
             </mat-checkbox>
           </div>
         </div>
