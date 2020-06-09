@@ -20,7 +20,7 @@
 }
 
 .mat-icon {
-    font-size: 150px;
+    font-size: 90px;
     /* margin-top: -100px;
     margin-left: 50px; */
     color: grey;
@@ -52,6 +52,81 @@ label {
 .closeIcon {
     font-size: 34px;
 }
-/* mat-grid-tile {
-    background: lightblue;
-} */
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+    float: left;
+    width: 20%;
+    height: 300px; /* only for demonstration, should be removed */
+    /* background: #ccc; */
+    padding: 2px;
+    border-style: ridge
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  article {
+    float: left;
+    padding: 20px;
+    width: 80%;
+    background-color: #f1f1f1;
+    height: 300px; /* only for demonstration, should be removed */
+  }
+  
+  /* Clear floats after the columns */
+  section:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  ul, #myUL {
+    list-style-type: none;
+  }
+  
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+  }
+  
+  .caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .caret-down::before {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */
+    transform: rotate(90deg);  
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+
+  .type-icon {
+    color: #999;
+    margin-right: 5px;
+  }
+
+  .mat-icon-rtl-mirror, .type-icon {
+    font-size: smaller;
+  }
