@@ -140,7 +140,7 @@ export class WcaService {
   }
 
   updatecoursetomudules(data) {
-    return this.http.get(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
+    return this.http.post(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
   }
 
   deactivateModule(data) {
