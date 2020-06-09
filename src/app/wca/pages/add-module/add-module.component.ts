@@ -61,7 +61,7 @@ export class AddModuleComponent implements OnInit {
         }
         console.log(this.queryData)
         // added by ankit 
-        localStorage.setItem('courseid',this.routedCourseDetails.courseId)
+        localStorage.setItem('courseid', this.routedCourseDetails.courseId)
       }
     });
     this.route.snapshot.paramMap.get('courseDetails');
@@ -114,8 +114,6 @@ export class AddModuleComponent implements OnInit {
         this.updateModList();
         this.updateCourseDetails();
       }
-
-      this.spinner = false;
     }, err => {
       this.spinner = false;
     });
@@ -138,6 +136,7 @@ export class AddModuleComponent implements OnInit {
         }
       });
     }
+    this.spinner = false;
   }
 
   onUploadDoc(fileList: FileList): void {
@@ -243,13 +242,21 @@ export class AddModuleComponent implements OnInit {
       if (data) {
         this.courseDetails.flag = 'false';
         let count = 0;
+        let id;
         // tslint:disable-next-line:no-shadowed-variable
         this.courseDetails.coursedetails.forEach((data: any) => {
           if (idx === count) {
             data.modulestatus = 'false';
+            id = data.moduleid;
           }
           ++count;
         });
+        this.moduleList.forEach((val, i, obj) => {
+          if (val == id) {
+            obj.splice(i, 1);
+          }
+        })
+
         this.updateCourseDetails();
       }
     });
@@ -359,11 +366,11 @@ export class AddModuleComponent implements OnInit {
     this.hoverName = n;
   }
   onRefernceBtnClick() {
-    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
+    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.routedCourseDetails.courseId}});
+    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
   }
 
   getRepoModules() {
