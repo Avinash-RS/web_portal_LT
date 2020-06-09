@@ -221,7 +221,7 @@ flattree(items) {
       this.editgroupfield = true;
       this.currentpath = null;
       this.currentpath = node;
-      console.log(this.currentpath);
+      // console.log(this.currentpath);
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
@@ -431,7 +431,7 @@ flattree(items) {
             this.ELEMENT_DATA = [];
             this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           }
-          console.log(result.data.get_all_user);
+          // console.log(result.data.get_all_user);
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           this.selection = new SelectionModel(true, []);
