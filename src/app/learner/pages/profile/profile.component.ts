@@ -258,7 +258,47 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+  
   updateProfile() {
+    if (this.profileForm.value.qualification[0].board_university !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
+      this.profileForm.value.qualification[0].discipline !== '' && this.profileForm.value.qualification[0].institute !== '' &&
+      this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
+      if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
+        this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft
+        && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
+        this.profileForm.controls.progress.setValue(60);
+      }
+      if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
+        this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
+        && this.profileForm.value.social_media[0].link !== '' && this.profileForm.value.gender !== '' &&
+        this.profileForm.value.is_student_or_professional !== '') {
+        this.profileForm.controls.progress.setValue(90);
+      }
+      if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+        this.profileForm.controls.progress.setValue(100);
+      }
+
+      const ip = localStorage.getItem('Systemip');
+      this.profileForm.controls.created_by_ip.setValue(ip);
+      this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
+
+      this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
+      // console.log('jsonData', this.profileForm.value);
+
+      this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+        if (data.data.update_profile.success === 'true') {
+          this.loader.hide();
+          this.currentUser.is_profile_updated = true;
+          localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+          this.alert.openAlert(data.data.update_profile.message, null);
+          this.router.navigate(['/Learner/Thankyou']);
+        } else {
+          this.alert.openAlert(data.data.update_profile.message, null);
+        }
+      });
+    } else {
+      this.alert.openAlert('Please fill all qualification details', null);
+    }
     // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
     //   this.profileForm.value.country && this.profileForm.value.state
     //   && this.profileForm.value.city_town) {
@@ -272,39 +312,7 @@ export class ProfileComponent implements OnInit {
     //   this.profileForm.controls.progress.setValue(100);
     // }
 
-    if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
-      this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft
-      && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
-      this.profileForm.controls.progress.setValue(60);
-    }
-    if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
-      this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
-      && this.profileForm.value.social_media[0].link !== '' && this.profileForm.value.gender !== '' &&
-      this.profileForm.value.is_student_or_professional !== '') {
-      this.profileForm.controls.progress.setValue(90);
-    }
-    if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
-      this.profileForm.controls.progress.setValue(100);
-    }
 
-    const ip = localStorage.getItem('Systemip');
-    this.profileForm.controls.created_by_ip.setValue(ip);
-    this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
-
-    this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
-    // console.log('jsonData', this.profileForm.value);
-
-    this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-      if (data.data.update_profile.success === 'true') {
-        this.loader.hide();
-        this.currentUser.is_profile_updated = true;
-        localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-        this.alert.openAlert(data.data.update_profile.message, null);
-        this.router.navigate(['/Learner/Thankyou']);
-      } else {
-        this.alert.openAlert(data.data.update_profile.message, null);
-      }
-    });
   }
 
   addCertificates(c, i) {
