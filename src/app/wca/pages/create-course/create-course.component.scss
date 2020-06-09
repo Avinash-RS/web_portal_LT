@@ -39,7 +39,7 @@
     // padding-top: 14px;
     display: flex;
     // padding-bottom: 12px;
-    margin-left: 30px;
+    // margin-left: 30px;
 }
 .padtp25px {
     padding-top: 25px;
@@ -410,7 +410,7 @@ input[type="text"] {
     border-bottom: 1px solid #b9b5b5;
     width: 97%;
     margin: 0px 12px;
-    padding: 13px 0px 13px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 // .wrapper_1 {
@@ -509,7 +509,7 @@ input[type="text"] {
     margin: -7px -1px 0px 20px;
 }
 .margbtm {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .width100full {
     display: flex;
@@ -528,14 +528,11 @@ input[type="text"] {
 }
 
 .inputs3 {
-    // border: 1px solid;
-    padding: 11px 5px 0px 7px;
+    padding: 0px 0px 0px 0px;
     border-radius: 5px;
-    background: $color-field;
-    width: 99%;
+    background: #e3ecff;
+    width: 105%;
     height: 58px;
-    // background-color: none !important;
-    // margin: -1px 41px 18px -360px;
     border: none;
 }
 
@@ -719,4 +716,8 @@ input[type="text"] {
 .mat-select {
     height: 40px;
     margin-top: -8px;
+}
+
+.mat-form-field-infix {
+    padding: 0 !important;
 }

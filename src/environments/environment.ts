@@ -14,7 +14,6 @@ export const environment = {
   // scormUrl:'http://20.44.41.200:8080/',
   // apiUrlImg:'http://20.44.41.200:3001/',
   // wcaapiurl:'http://20.44.41.200:9001/',
-  
 };
 
 /*

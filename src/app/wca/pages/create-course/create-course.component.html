@@ -42,9 +42,9 @@
                                             <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Course Name<span
                                                         style="color: red;">*</span></div>
-                                                <div class="col-md-8"><input class="inputmainWidth"
+                                                <div class="col-md-8"><input class="inputmainWidth" #course_name
                                                         (keydown)="_handleKeydown($event)" type="text"
-                                                        placeholder="Enter the course name"
+                                                        placeholder="Enter the course name" (focusout)="checkCourseName()"
                                                         formControlName="course_name" required />
                                                 </div>
                                             </div>
@@ -147,8 +147,7 @@
                                                         <mat-form-field style="width: 100%;">
                                                             <mat-select [disabled]='showdeletedicon'
                                                                 formControlName="course_language"
-                                                                class="inputs2 inputmainWidth"
-                                                                placeholder="Select the Language">
+                                                                class="inputs2 inputmainWidth">
                                                                 <mat-option *ngFor="let m of languages" [value]="m">
                                                                     {{m}}
                                                                 </mat-option>
@@ -191,8 +190,7 @@
                                                                     <mat-select class="inputs2 inputmainWidth"
                                                                         [disabled]='showdeletedicon'
                                                                         formControlName="author_name"
-                                                                        (selectionChange)="change($event.value,i)"
-                                                                        placeholder="Select the instructor"                                                                        
+                                                                        (selectionChange)="change($event.value,i)"                                                                   
                                                                         name="language" disableOptionCentering>
                                                                         <mat-option
                                                                             *ngFor="let k of AllInstructors | filter_matselect:selected"
@@ -244,7 +242,7 @@
                                                     <mat-form-field style="width: 100%;">
                                                         <mat-select [disabled]='showdeletedicon'
                                                             formControlName="certificate_name"
-                                                            class="inputs2 inputmainWidth" placeholder="No Certificate"
+                                                            class="inputs2 inputmainWidth"
                                                             name="language" disableOptionCentering>
                                                             <mat-option *ngFor="let k of AllCertifyDetails"
                                                                 [value]="k.name">
@@ -290,7 +288,6 @@
                                                                         formControlName="name"
                                                                         (selectionChange)="change1($event.value,i)"
                                                                         class="inputs4 hgt39"
-                                                                        placeholder="Select the institute"
                                                                         name="language" 
                                                                         style="width: -webkit-fill-available;"
                                                                         disableOptionCentering>
@@ -340,7 +337,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-8" style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">
                                                     <span>Description</span>
@@ -390,7 +387,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-8"  style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">A Step Towards</div>
                                                 <div class="col-md-8"><textarea class="inputs inputmainWidth"
@@ -405,7 +402,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-8"  style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">Course Milestone</div>
                                                 <div class="col-md-8"><textarea type="text" style="resize: none;"
