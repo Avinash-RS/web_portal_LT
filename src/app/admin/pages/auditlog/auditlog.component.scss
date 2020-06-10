@@ -167,6 +167,16 @@
   overflow: hidden !important;
 }
 
+mat-cell{
+  display:flex !important;
+  justify-content:center!important;
+  
+}
+
+mat-header-cell {
+  display:flex;
+  justify-content:center;
+}
 
 
 
