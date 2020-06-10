@@ -181,7 +181,7 @@ export class CourseComponentComponent implements OnInit {
           if (enrollCourse.data) {
             if (enrollCourse.data.enrollcourse.success) {
               this.course.enrollment_status = 'pending';
-              Swal.fire('User enrolled successfully for the course');
+              Swal.fire('Your request for enrolment is successfully submitted');
             } else {
               Swal.fire(enrollCourse.data.enrollcourse.message);
             }
