@@ -114,7 +114,7 @@ export const menus = [
                 open: true,
             },
             {
-                name: 'Course Enrollment',
+                name: 'Course Enrolment',
                 icon: 'border_color',
                 link: 'enrollment',
                 open: false,
