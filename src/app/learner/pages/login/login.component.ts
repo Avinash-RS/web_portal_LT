@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
+              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               const ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
