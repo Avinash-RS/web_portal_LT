@@ -1,14 +1,15 @@
 <div *ngIf="!isLinkActive" class="limiter">
-  <img alt="" class="lnt_logo" src="../../../../assets/learner/Edutech_White.svg"> 
-  <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Sign in</a></span>
+  <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
+  <!-- <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Sign in</a></span> -->
   <!-- <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms & conditions</span> -->
   <div class="row container-reg200">
     <div class="col-md-8 col-sm-12 col-12">
     </div>
     <div class="col-md-4 col-sm-12 col-12">
         <div class="wrap-reg ">
+        <img class="kauhalya" alt="" src='../../../../assets//learner/kauhalya.png'>
           <form [formGroup]="otpForm">
-            <h1 class="head1">Enter the mobile number</h1><br><br><br>
+            <h1 class="head1">Enter the mobile number</h1><br><br>
             <label>Mobile number</label>
             <div class="form-group">
             <input type="text"  formControlName="mobile" placeholder="+91"   maxlength="10" minlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control" 
@@ -51,6 +52,17 @@
     
               <!-- // sms getway integation pending  -->
           </form>
+
+          <div class="row footer">
+            <div class="col-7">
+                <span class="footertext">© 2020 Edutech.All rights reserved.</span>
+            </div>
+            <div class="col-5">
+                <span style="font-size: 11px;">Powered by : 
+                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+                </span>
+            </div>
+        </div>
         </div>
       </div>
 
