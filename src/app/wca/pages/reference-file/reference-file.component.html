@@ -56,7 +56,7 @@
               <div class="space-10">
                 <mat-radio-group [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
                   <mat-radio-button value="document">Upload document
-                  </mat-radio-button>
+                  </mat-radio-button><br>
                   <mat-radio-button value="link">Add link
                   </mat-radio-button>
                 </mat-radio-group>
@@ -69,7 +69,7 @@
               </div>
 
               <div class="input-group back" *ngIf="selectedOption == 'document'">
-                <input class="form-control border-right-0" formControlName="upload" type='file' id="upload-photo" #fileInput
+                <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput
                   (change)="uploadDoc($event)" required>
                 <span class="input-group-append bg-white border-left-0">
                   <label for="upload-photo" class="upload">{{uploadMsg}}</label> </span>
@@ -83,7 +83,7 @@
                 <input type="text" maxlength="50" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
                   [ngModelOptions]="{standalone: true}" required>
                 <input type="text" id="ref_link" class="ref-link" [(ngModel)]="referenceLink"
-                  [ngModelOptions]="{standalone: true}">
+                  [ngModelOptions]="{standalone: true}" required>
               </div>
 
               <mat-card-footer>

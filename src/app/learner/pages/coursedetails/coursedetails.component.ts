@@ -83,7 +83,7 @@ export class CoursedetailsComponent implements OnInit {
       // this.loadingCourse = true;
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
-        this.loadingCourse = false;
+        // this.loadingCourse = false;
         if(this.course.topicData && this.course.topicData.length) {
          this.topicData = []
         this.course.topicData.forEach(element=>{
