@@ -62,14 +62,16 @@
    background-repeat: no-repeat !important;
   background: url('../../../../assets/learner/bg-6.jpg');
 }
-:host ::ng-deep.wrap-reg {
-  width: 30%;
-  height: 100%;
+:host ::ng-deep .wrap-reg {
+  width: 84%;
+  padding-left: 40px;
+  padding-right: 30px;
+  height: 100vh;
   border-radius: 0px !important;
-  margin-left: 70% !important;
+  margin-left: 16% !important;
   overflow: hidden !important;
-}
 
+}
 :host ::ng-deep.pg{
   position: absolute;
   color: $color-white;
@@ -103,16 +105,13 @@
   text-align: center;
   font-weight: normal !important;
   font-size: 21px;
+  margin-top: 18px !important;
 }
+
 :host ::ng-deep.p-t-77 {
   padding-top: 21px !important;
 }
 
-:host ::ng-deep.signIn{
-  text-align : center !important;
-  color: $color-blue !important;
-  font-weight: lighter !important ;
-}
 
 :host ::ng-deep.bgimg{
   width: 99%;
@@ -124,3 +123,35 @@
   margin-top: 21px;
   margin-left: 108px;
 }
+
+  // mobile screen
+  @media (max-width: 480px){
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow: hidden !important;
+        height: 100vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+         margin-right: 0px !important; 
+         margin-left: 0px !important; 
+    }
+  }
+
+
+  @media (max-width: 568px){
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow: hidden !important;
+        height: 100vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+  }
