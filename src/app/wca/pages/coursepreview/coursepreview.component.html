@@ -131,7 +131,7 @@
         <h3><b>Course instructor</b></h3>
       </div>
       <div class="col-md-4 col-sm-12 col-12">
-        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}} </span>
+        <span *ngFor="let author of course?.author_details,let isLast=last" class="fadetext"> {{author.author_name}} {{isLast ? '' : ', '}} </span>
       </div>
     </div>
     <div class="row">
