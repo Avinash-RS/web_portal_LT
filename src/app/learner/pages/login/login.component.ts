@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/profile']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory field');
                 this.router.navigate(['/Learner/profile']);
               }
             } else {
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/profile']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory field');
                 this.router.navigate(['/Learner/profile']);
               }
             }
