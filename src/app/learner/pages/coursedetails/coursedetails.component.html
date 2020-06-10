@@ -38,7 +38,24 @@
 
     <div class="row">
         <div class="col-12 margin-5">
-            <button class="enrollbtn" (click)="enrollCourse()">ENROLL NOW</button>
+            <button class="enrollbtn" *ngIf="(course.enrollment_status != 'pending') && (course.enrollment_status != 'rejected')
+            && (course.enrollment_status != 'approved')"
+             (click)="enrollCourse()">ENROLL NOW</button>
+
+            <button class="enrollbtn" id="enroll_now" *ngIf="course.enrollment_status == 'pending'"
+            [disabled]="course.enrollment_status == 'pending'">Requested
+          </button>
+          <button  id="enroll_now" *ngIf="course.enrollment_status == 'rejected'"
+            (click)="clickRejected()">Rejected
+          </button>
+          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
+            [disabled]="course.enrollment_status == 'approved'">Enrolled
+          </button>
+          <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
+            (click)="goTocourse(course?.coursePlayerStatus?.status || 'Start')"
+            [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
+          '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
+            {{course?.coursePlayerStatus?.status || 'Start'}}</button>
         </div>
     </div>
 
@@ -73,7 +90,7 @@
                 <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
                   <div class="col-8"><br>
                     <ol class="submod">
-                      <li><span>{{i+1}} : {{mod?.topicname}}</span></li>
+                      <li><span>{{i+1}} : {{mod?.topicname}} {{mod?.topictime}}</span></li>
                     </ol>
                   </div>
                 </div>

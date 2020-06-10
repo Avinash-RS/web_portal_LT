@@ -4,6 +4,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'cdk-user-menu',
@@ -51,32 +52,42 @@ export class UserMenuComponent implements OnInit {
 		);
 	}
 
-	logout() {
-		this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
-			if (logout.data.logout && logout.data.logout.success) {
-				localStorage.clear();
-				this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-					localStorage.setItem('Systemip', res.ip);
-				});
-				this.userDetailes = null;
-				this.router.navigate(['/Admin/login']);
-			} else if (logout.data.logout && !logout.data.logout.success) {
-				if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
-					localStorage.clear();
-					this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-						localStorage.setItem('Systemip', res.ip);
-					});
-					this.userDetailes = null;
-					this.userDetailes = null;
-					this.router.navigate(['/Admin/login']);
-				} else {
-					this.alert.openAlert(logout.data.logout.message, null);
-				}
-			} else {
-				this.alert.openAlert('Please try again later', null);
-			}
-		});
-	}
+logout() {
+ Swal.fire({
+ title: 'Are you sure you want to log out ?',
+ showCancelButton: true,
+ confirmButtonColor: '#3085d6',
+ cancelButtonColor: '#d33',
+ confirmButtonText: 'Yes'
+ }).then((result) => {
+ if (result.value) {
+this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
+ if (logout.data.logout && logout.data.logout.success) {
+localStorage.clear();
+this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+localStorage.setItem('Systemip', res.ip);
+});
+this.userDetailes = null;
+this.router.navigate(['/Admin/login']);
+} else if (logout.data.logout && !logout.data.logout.success) {
+if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
+localStorage.clear();
+this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+localStorage.setItem('Systemip', res.ip);
+});
+this.userDetailes = null;
+this.userDetailes = null;
+this.router.navigate(['/Admin/login']);
+} else {
+this.alert.openAlert(logout.data.logout.message, null);
+}
+} else {
+this.alert.openAlert('Please try again later', null);
+}
+});
+}
+});
+}
 	ngOnInit() {
 	}
 

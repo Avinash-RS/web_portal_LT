@@ -59,6 +59,7 @@ export class GroupManagementComponent implements OnInit {
   oldcatalogue: any;
   trackBy: any;
   toggle: any;
+  editgroupfield: boolean = false;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -112,9 +113,41 @@ export class GroupManagementComponent implements OnInit {
   getallgroups() {
     this.adminservice.getUserGroup()
       .subscribe((result: any) => {
-        this.allgroups = result.data.get_user_group.message;
+        // this.allgroups = result.data.get_user_group.message;
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.allgroups = this.flattree(tree);
       });
   }
+
+  tree(data, root) {
+    function setCount(object) {
+        return object.children
+            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+            : 0;
+    }
+    const t = {};
+    data.forEach(o => {
+        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+        t[o.parent_group_id] = t[o.parent_group_id] || {};
+        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+        t[o.parent_group_id].children.push(t[o.group_id]);
+        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+    });
+    setCount(t[root]);
+    return t[root].children;
+}
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
+      delete item.children;
+    }
+    delete item.children;
+  });
+  return flat;
+}
   /** sub group */
   loadsubgroup(node?: any) {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
@@ -185,8 +218,10 @@ export class GroupManagementComponent implements OnInit {
     }
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
+      this.editgroupfield = true;
       this.currentpath = null;
       this.currentpath = node;
+      // console.log(this.currentpath);
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
@@ -198,6 +233,7 @@ export class GroupManagementComponent implements OnInit {
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
       });
     } else {
+      this.editgroupfield = false;
       this.disabled = true;
       this.editstatus = true;
       this.currentpath = null;
@@ -206,7 +242,9 @@ export class GroupManagementComponent implements OnInit {
       this.catalogue = '';
     }
   }
-
+  editgroup() {
+  this.editgroupfield = false;
+  }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.adminservice.getUserSession(element._id).subscribe((track: any) => {
@@ -283,7 +321,7 @@ export class GroupManagementComponent implements OnInit {
             this.alert.openAlert('Success !', this.currentpath?.group_id ?
             'Sub group created successfully' : 'Group created successfully' );
             this.reset();
-            form.reset();
+            form.resetform();
             this.getgroups();
           } else {
             this.alert.openAlert(result.data.createusergroup.error_msg, null);
@@ -341,6 +379,7 @@ export class GroupManagementComponent implements OnInit {
     // this.checked ="Deactivate"
   }
   edit(data: boolean, groupname) {
+    this.editgroupfield = false;
     if (data) {
       this.editstatus = false;
 
@@ -392,6 +431,7 @@ export class GroupManagementComponent implements OnInit {
             this.ELEMENT_DATA = [];
             this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           }
+          // console.log(result.data.get_all_user);
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           this.selection = new SelectionModel(true, []);
@@ -475,4 +515,10 @@ export class GroupManagementComponent implements OnInit {
       this.getAllUser(pagenumber);
     }
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }

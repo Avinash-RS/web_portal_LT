@@ -328,4 +328,10 @@ export class CatalogueManagementComponent implements OnInit {
         }
       });
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }

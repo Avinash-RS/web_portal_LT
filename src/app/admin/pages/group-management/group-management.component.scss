@@ -254,12 +254,23 @@ button.mat-menu-item {
 
 }
 
-input[type=text] {
+.groupfield {
   width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
   background: rgb(197, 215, 252) !important;
   ;
+  display: inline-block;
+  border: 1px solid rgb(197, 215, 252) !important;
+  ;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.groupfield1 {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 0;
   display: inline-block;
   border: 1px solid rgb(197, 215, 252) !important;
   ;

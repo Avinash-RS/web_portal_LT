@@ -34,6 +34,7 @@ export class ScormplayerComponent implements OnInit {
   question_id: any = [];
   jsonData: any;
   allFeedbackQue: any;
+  getuserid:any;
   show: boolean = false
   constructor(private dialog: MatDialog, public sanitizer: DomSanitizer, public spinner: NgxSpinnerService, public activatedRoute: ActivatedRoute, private alert: AlertServiceService,
     public service: LearnerServicesService, public route: Router, public commonService: CommonServicesService, ) {
@@ -85,7 +86,8 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe(data => {
       if (data.data['getmoduleData']['success'] === 'true') {
         this.content = data.data['getmoduleData']['data'][0];
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        this.getuserid= JSON.parse(localStorage.getItem('UserDetails'))
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id+'&user_obj_id='+this.getuserid._id);
         //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
         this.modulength = this.content['coursedetails'].length;
         this.content.coursedetails.forEach(moduledetails => {
@@ -139,7 +141,7 @@ export class ScormplayerComponent implements OnInit {
     var question_ans: any = [];
     question_ans.push({ question: 'What do you like about the module ?', answer: are }, { question: 'What could be improved ?', answer: are1 }, { question: 'Would you recommend this to a friend ?', answer: selectOption })
     this.question_id.question_ans = question_ans
-    this.question_id.user_id = 'hghghjg'
+    this.question_id.user_id = this.user_id
     this.service.InsertCourseFeedback(this.question_id).subscribe(data => {
       if (data.data['InsertCourseFeedback']['success'] == "true") {
         this.show = false;

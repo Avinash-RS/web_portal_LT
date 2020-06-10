@@ -191,4 +191,11 @@ export class UserManagementComponent implements OnInit {
     this.getAllUser(e.pageIndex);
     this.selectedArray = [];
   }
+
+// tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }

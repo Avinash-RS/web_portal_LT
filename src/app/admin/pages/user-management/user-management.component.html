@@ -1,7 +1,7 @@
 <div style="overflow: hidden;">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">View users</li>
     </ol>
   </nav>
@@ -130,7 +130,7 @@
       </mat-table>
     </div>
 
-    <mat-paginator #paginator [length]="resultsLength" [pageSize]="20" (page)="next($event)" showFirstLastButtons>
+    <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
     </mat-paginator>
     <br><br>
 
@@ -256,34 +256,34 @@
         <mat-tab label="Track details">
           <br> <br>
           <mat-dialog-content style="width: 1000px;margin:0">
-          <div class="container profile">
-            <div class="row">
-              <!-- //////userName  +++ full name +++ Phone//////// -->
-              <div class="col-md-6 col-sm-12 col-12">
-                <label>No. of courses enrolled : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
+            <div class="container profile">
+              <div class="row">
+                <!-- //////userName  +++ full name +++ Phone//////// -->
+                <div class="col-md-6 col-sm-12 col-12">
+                  <label>No. of courses enrolled : <label
+                      class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.enrolled_course_count || 0}}</label></label>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                  <label>No. of wishlisted courses : <label
+                      class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
+                  </label>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-12 col-12">
-                <label>No. of wishlisted courses : <label
-                    class="color_black capitalize f_wt_400">{{trackDetails && trackDetails.wishlist_count || 0}}</label>
-                </label>
+              <br>
+              <!-- //////Language known//////// -->
+              <div class="row">
+                <div class="col-md-6 col-sm-12 col-12">
+                  <label>Last login time : <label class="color_black capitalize f_wt_400">
+                      {{trackDetails && trackDetails.last_login[0] | date:short }}
+                    </label> </label>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                  <label>Registered on : <label class="color_black capitalize f_wt_400">
+                      {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
+                    </label> </label>
+                </div>
               </div>
             </div>
-            <br>
-            <!-- //////Language known//////// -->
-            <div class="row">
-              <div class="col-md-6 col-sm-12 col-12">
-                <label>Last login time : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails && trackDetails.last_login[0] | date:short }}
-                  </label> </label>
-              </div>
-              <div class="col-md-6 col-sm-12 col-12">
-                <label>Registered on : <label class="color_black capitalize f_wt_400">
-                    {{trackDetails && trackDetails.userObjects[0].registered_date | date:short}}
-                  </label> </label>
-              </div>
-            </div>
-          </div>
           </mat-dialog-content>
         </mat-tab>
       </mat-tab-group>
