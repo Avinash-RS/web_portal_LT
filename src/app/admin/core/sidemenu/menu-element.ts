@@ -85,14 +85,14 @@
 
 
 export const menus = [
-    {
-        name: 'Dashboard',
-        icon: 'dashboard',
-        link: 'dashboard',
-        open: false,
-        chip: false,
+    // {
+    //     name: 'Dashboard',
+    //     icon: 'dashboard',
+    //     link: 'dashboard',
+    //     open: false,
+    //     chip: false,
 
-    },
+    // },
     {
         name: 'User Management',
         icon: 'widgets',
@@ -129,42 +129,42 @@ export const menus = [
             },
         ]
     },
-    {
-        name: 'Course Management',
-        icon: 'list',
-        link: 'Wca',
-        chip: false,
-        open: true,
+    // {
+    //     name: 'Course Management',
+    //     icon: 'list',
+    //     link: 'Wca',
+    //     chip: false,
+    //     open: true,
 
-    },
+    // },
 
-    {
-        name: 'Catalogue Management',
-        icon: 'business',
-        link: false,
-        open: false,
-        sub: [
-            {
-                name: 'Categories',
-                link: 'catagory',
-                icon: 'view_quilt',
-                chip: false,
-                open: true,
-            },
-            {
-                name: 'Catalogues',
-                link: 'catalogue',
-                icon: 'assignment',
-                chip: false,
-                open: true,
-            }
-        ]
-    },
-    {
-        name: 'Audit Log',
-        link: 'auditlog',
-        icon: 'widgets',
-        chip: false,
-        open: true,
-    },
+    // {
+    //     name: 'Catalogue Management',
+    //     icon: 'business',
+    //     link: false,
+    //     open: false,
+    //     sub: [
+    //         {
+    //             name: 'Categories',
+    //             link: 'catagory',
+    //             icon: 'view_quilt',
+    //             chip: false,
+    //             open: true,
+    //         },
+    //         {
+    //             name: 'Catalogues',
+    //             link: 'catalogue',
+    //             icon: 'assignment',
+    //             chip: false,
+    //             open: true,
+    //         }
+    //     ]
+    // },
+    // {
+    //     name: 'Audit Log',
+    //     link: 'auditlog',
+    //     icon: 'widgets',
+    //     chip: false,
+    //     open: true,
+    // },
 ];

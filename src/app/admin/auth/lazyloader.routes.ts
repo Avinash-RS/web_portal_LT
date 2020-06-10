@@ -18,7 +18,7 @@ import { ReportsComponent } from '@admin/pages/reports/reports.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: AdminDashboardComponent, data: { title: 'Admin Dashboard' } },
+        { path: 'dashboard', component: UserManagementComponent, data: { title: 'Learner Management' } },
         { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
