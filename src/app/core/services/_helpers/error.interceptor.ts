@@ -1,26 +1,34 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
-// import { AuthenticationService } from '../_services';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { CommonServicesService } from '../common-services.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor() {
-        console.log('ho')
-    }
-
+    
+  constructor(private CommonService: CommonServicesService) { }
+  
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
-            if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                // this.authenticationService.logout();
-                location.reload(true);
-            }
-            
-            const error = err.error.message || err.statusText;
-            return throwError(error);
-        }))
+        this.showLoader();
+        return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
+            this.onEnd();
+          }
+        },
+          (err: any) => {
+            this.onEnd();
+          }));
+      }
+      private onEnd(): void {
+        this.hideLoader();
+      }
+      private showLoader(): void {
+        const isLoad = this.CommonService.isLoad;
+        this.CommonService.loader$.next(isLoad);
+      }
+      private hideLoader(): void {
+        this.CommonService.loader$.next(false);
+        this.CommonService.isLoad = true;
+      }
     }
-}
