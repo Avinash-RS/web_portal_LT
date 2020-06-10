@@ -18,7 +18,7 @@
               <input type="text" name="username" formControlName="username" class="form-control"
                 [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
               <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">User Name is required</div>
+                <div *ngIf="f.username.errors.required">Username is required</div>
               </div>
             </div>
             <div class="form-group" appCapslock (capsLock)="capsOn=$event">
@@ -31,7 +31,7 @@
                 aria-hidden="true"></i>
               <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
-                <div *ngIf="f.password.errors.mustMatch"> Passwords must be same</div>
+                <div *ngIf="f.password.errors.mustMatch"> Password must be same</div>
               </div>
             </div>
             <mat-checkbox class="remember_me" formControlName="remember_me">
