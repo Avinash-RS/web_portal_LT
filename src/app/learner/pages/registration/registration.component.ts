@@ -52,7 +52,8 @@ export class RegistrationComponent implements OnInit {
   
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
-    this.service.user_registration(this.registerForm.value.email, this.fullname, this.registerForm.value.termsandconditions)
+    // this.registerForm.value.termsandconditions
+    this.service.user_registration(this.registerForm.value.email, this.fullname,true )
       .subscribe(data => {
      console.log(data.data['user_registration'])
      if(data.data['user_registration']){
