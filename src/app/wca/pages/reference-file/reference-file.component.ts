@@ -73,7 +73,6 @@ export class ReferenceFileComponent implements OnInit {
       name:  new FormControl(''),
       module:  new FormControl(''),
       topic:  new FormControl(''),
-      upload: new FormControl('')
     })
   }
 
