@@ -114,7 +114,7 @@ div.terms{
     position: absolute;
     color: $color-white;
     padding: 7px;
-    margin-left: 45% !important;
+    margin-left: 50% !important;
     margin-top: 16px;
     /* background-color: #ffffff85; */
     font-size: 14px;
@@ -174,3 +174,39 @@ div.terms{
   :host ::ng-deep label {
     margin-bottom: .1em !important;
 }
+
+
+
+
+
+  // mobile screen
+  @media (max-width: 480px){
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow: hidden !important;
+        height: 100vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+         margin-right: 0px !important; 
+         margin-left: 0px !important; 
+    }
+  }
+
+
+  @media (max-width: 568px){
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow: hidden !important;
+        height: 100vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+  }
