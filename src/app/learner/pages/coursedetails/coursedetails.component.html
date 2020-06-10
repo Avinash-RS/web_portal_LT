@@ -81,7 +81,7 @@
     </div>
     <div class="row margin-5">
         <div class="col-12">
-            <section class="accordion" *ngFor="let res of content?.coursedetails">
+            <section class="accordion" *ngFor="let res of course?.topicData">
               <input type="checkbox" name="collapse" [id]="res?.modulename">
               <h2 class="handle">
                 <label [for]="res?.modulename"><span>{{res?.modulename}}</span></label>
