@@ -12,7 +12,7 @@
             <h1 class="head1">Enter the mobile number</h1><br><br>
             <label>Mobile number</label>
             <div class="form-group">
-            <input type="text"  formControlName="mobile" placeholder="Enter the mobile number without country code"   maxlength="10" minlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control" 
+            <input type="text"  formControlName="mobile" placeholder="Mobile number without country code"   maxlength="10" minlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control" 
               [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
             <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
               <div *ngIf="f.mobile.errors.required">Mobile number is required</div>
