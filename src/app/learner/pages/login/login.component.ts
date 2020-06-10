@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
             } else {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
+              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');

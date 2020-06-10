@@ -94,6 +94,7 @@ export class PasswordComponent implements OnInit {
             if (loginresult.data.login) {
               if (loginresult.data.login.success) {
                 localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
+                localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
                 localStorage.setItem('uname', this.passwordForm.value.username);
                 localStorage.setItem('role', 'learner');
                 localStorage.setItem('token', loginresult.data.login.message.token)
