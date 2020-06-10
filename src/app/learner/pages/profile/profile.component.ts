@@ -159,7 +159,7 @@ export class ProfileComponent implements OnInit {
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
       neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
-      Validators.minLength(22), Validators.maxLength(22)
+      Validators.minLength(16), Validators.maxLength(22)
       ]),
       iAgree: new FormControl(true, []),
       progress: [],
