@@ -22,6 +22,8 @@ import { MAT_TABS_CONFIG } from '@angular/material';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
+import { ErrorInterceptor } from '@core/services/_helpers';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -72,7 +74,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

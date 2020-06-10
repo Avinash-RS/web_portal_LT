@@ -5,6 +5,8 @@ import { GlobalServiceService } from '././core/services/handlers/global-service.
 import { WcaService } from '../app/wca/services/wca.service';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,18 +17,24 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   ipAddress = '';
   title = 'Lxpfrontend';
+  isLoader = false;
+  loaderSubscription: Subscription;
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private APIService: WcaService,
-    private titleService: Title
+    private titleService: Title,
+    private commonService: CommonServicesService
 
   ) {
     this.getIPAddress();
   }
 
   ngOnInit() {
+    this.loaderSubscription = this.commonService.loader.subscribe((val) => {
+     this.isLoader = val;
+    })
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => {
@@ -71,5 +79,9 @@ export class AppComponent {
       this.ipAddress = res.ip;
       localStorage.setItem('Systemip', this.ipAddress)
     });
+  }
+
+  ngOnDestroy(): void {
+    this.loaderSubscription.unsubscribe();
   }
 }

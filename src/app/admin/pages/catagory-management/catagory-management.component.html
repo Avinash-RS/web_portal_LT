@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Catagory management</li>
   </ol>
 </nav>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="row"
                   *ngIf="!(addCategoryForm.value.category_image == null || addCategoryForm.value.category_image == '')">
-                  <img class="center width_80 imgHt" alt=""  [src]="addCategoryForm.value.category_image">
+                  <img class="center width_80 imgHt" alt="" [src]="addCategoryForm.value.category_image">
                   <mat-icon *ngIf="!canotEdit" style="position: absolute;top:0;" (click)="addCategoryForm.controls['category_image'].reset();
                     ">cancel</mat-icon>
                 </div>
@@ -215,7 +215,8 @@
             <div class="row" *ngIf="selectedCategory?.category_name == undefined || !canotEdit">
               <div class="col-lg-8 col-md-6"></div>
               <div class="col-lg-2 col-md-3 center col-sm-6 col-6">
-                <button id="addCategory" mat-stroked-button [disabled]="addCategoryForm.invalid || !addCategoryForm.dirty"
+                <button id="addCategory" mat-stroked-button
+                  [disabled]="addCategoryForm.invalid || !addCategoryForm.dirty"
                   class="width_80 border-radius-5 background-blue color_white center"
                   (click)="addCategory('category')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
@@ -267,7 +268,8 @@
             <div class="row" *ngIf="selectedSubCategory?.sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addSubCategory" mat-stroked-button [disabled]="addSubCategoryForm.invalid || !addSubCategoryForm.dirty"
+                <button id="addSubCategory" mat-stroked-button
+                  [disabled]="addSubCategoryForm.invalid || !addSubCategoryForm.dirty"
                   class="width_80  border-radius-5 background-blue color_white center"
                   (click)="addCategory('subcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>
@@ -320,7 +322,8 @@
             <div class="row" *ngIf="selectedSuperSubCategory?.super_sub_category_name == undefined || !canotEdit">
               <div class="col-md-8"></div>
               <div class="col-md-2 center col-sm-6 col-6">
-                <button id="addSubCategory" mat-stroked-button [disabled]="addSuperSubCategoryForm.invalid || !addSuperSubCategoryForm.dirty"
+                <button id="addSubCategory" mat-stroked-button
+                  [disabled]="addSuperSubCategoryForm.invalid || !addSuperSubCategoryForm.dirty"
                   class="width_80  border-radius-5 background-blue color_white center"
                   (click)="addCategory('supersubcategory')">{{edit ? 'Update' : 'Save' }}</button>
               </div>

@@ -495,7 +495,7 @@ export class CatagoryManagementComponent implements OnInit {
           this.alert.openAlert('Details have been updated successfully', null);
           this.getallcategories();
         } else {
-          this.alert.openAlert(result?.data?.create_catelogue?.message, null);
+          this.alert.openAlert(result?.data?.update_catalogue?.message, null);
         }
       });
     } else {
@@ -688,5 +688,11 @@ export class CatagoryManagementComponent implements OnInit {
     this.selectedSuperSubCategory = {};
     this.addSuperSubCategoryForm?.reset();
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }
 // 721
