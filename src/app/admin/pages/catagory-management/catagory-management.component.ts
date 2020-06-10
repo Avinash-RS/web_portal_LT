@@ -424,7 +424,7 @@ export class CatagoryManagementComponent implements OnInit {
       this.selectedSubCategory.sub_category_id : this.selectedSuperSubCategory.super_sub_category_id;
     const type = this.level === 1 ? 'Category' : this.level === 2 ?
       'Subcategory' : 'Supersubcategory';
-    const alert = this.level === 1 || this.level === 2 ? 'This category has courses/ subcategory attached to it' :
+    const alert = this.level === 1 || this.level === 2 ? 'This category has courses and subcategory attached to it' :
       'This category has courses attached to it';
     Swal.fire({
       // title: 'Are you sure want to delete ' + type.toLowerCase() + ' ?',

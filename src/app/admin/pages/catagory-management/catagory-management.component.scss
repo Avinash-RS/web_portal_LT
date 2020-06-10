@@ -208,6 +208,7 @@ hr {
     background-color: $color_white !important;
     padding-bottom: 10px;
     padding-left: 0;
+    cursor: pointer;
 }
 
 /deep/ .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex,
