@@ -813,3 +813,18 @@ export const getPopularcourse = gql`
     }
       }
     }`;
+export const getCoursePlayerStatusForCourse = gql`
+query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
+  getCoursePlayerStatusForCourse(user_id:$user_id,course_id:$course_id) {
+    success
+    message{
+    _id
+    status
+    location
+    course_id
+    feedback_status
+    course_percentage
+}
+  }
+}
+`

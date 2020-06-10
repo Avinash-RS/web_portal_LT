@@ -132,9 +132,10 @@ export class CoursepreviewComponent implements OnInit {
   previewcourse(templateRef: TemplateRef<any>) {
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
-    console.log(this.content.url)
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });

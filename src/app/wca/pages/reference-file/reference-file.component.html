@@ -7,14 +7,14 @@
       <li class="breadcrumb-item"><a href="/Admin/auth/dashboard">Home</a></li>
       <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
       <li class="breadcrumb-item active" aria-current="page"><a href="/Admin/auth/Wca/previewcourse">Course</a></li>
-      <li class="breadcrumb-item active" aria-current="page"> Add Reference file</li>
+      <li class="breadcrumb-item active" aria-current="page"> Add resource file</li>
     </ol>
   </nav>
 
   <div class="row">
     <div class="col-8">
       <div class="reference-heading">
-        <h1 style="margin-left: 21px;">Add Reference file</h1>
+        <h1 style="margin-left: 21px;">Add resource file</h1>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
               Select
             </div>
             <form [formGroup]="referenceLinkForm">
-              <mat-select class="selectinputs" placeholder="Module Name" formControlName="module"
+              <mat-select class="selectinputs" placeholder="Module name" formControlName="module"
                 (selectionChange)="gettopicdetail()" required>
                 <mat-option *ngFor="let res of modulenamelist" [value]="res">
                   {{res?.modulename}}
@@ -47,7 +47,7 @@
               </mat-select>
 
 
-              <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic" required>
+              <mat-select class="selectinputs" placeholder="Topic name" formControlName="topic" required>
                 <mat-option *ngFor="let topic of topicnamelist" [value]="topic?.topicname">
                   {{topic?.topicname}}
                 </mat-option>
@@ -55,9 +55,9 @@
 
               <div class="space-10">
                 <mat-radio-group [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
-                  <mat-radio-button value="document">Upload Document
+                  <mat-radio-button value="document">Upload document
                   </mat-radio-button>
-                  <mat-radio-button value="link">Add Link
+                  <mat-radio-button value="link">Add link
                   </mat-radio-button>
                 </mat-radio-group>
               </div>
@@ -141,7 +141,7 @@
               <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
             </ng-container>
             <ng-container matColumnDef="created_on">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date added </th>
               <td mat-cell *matCellDef="let data"> {{data.created_on |  date :'MMM d, y, h:mm:ss a'}}
               </td>
             </ng-container>
