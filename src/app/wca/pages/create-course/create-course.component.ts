@@ -237,7 +237,7 @@ export class CreateCourseComponent implements OnInit {
                 this.imageView.type === 'file';
                 formData.append('image', this.imageView);
                 this.wcaService.uploadImage(formData).subscribe((data: any) => {
-                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
+                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
                     this.spinner.hide();
                     reader.addEventListener('load', () => {
                         // convert image file to base64 string
