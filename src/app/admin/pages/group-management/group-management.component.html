@@ -72,7 +72,9 @@
                   <div class="row">
                     <div class="col-md-6">
 
-                      <span class="mt-0 mb-1"> {{currentpath?.group_name}}
+                      <span class="mt-0 mb-1"> {{currentpath?.group_name}} <span
+                          *ngIf="currentpath?.group_name && !editstatus && editgroupfield" (click)="editgroup()"
+                          class="material-icons" style="vertical-align: middle;">create</span>
                         <ng-container *ngIf="editstatus">
                           <ng-container *ngIf="currentpath?.group_name"> /</ng-container>
                           Create a
@@ -80,6 +82,14 @@
                           group
                         </ng-container>
                       </span>
+                      <!-- <span class="mt-0 mb-1"> {{currentpath?.group_name}} 
+                        <ng-container *ngIf="editstatus">
+                          <ng-container *ngIf="currentpath?.group_name"> /</ng-container>
+                          Create a
+                          <ng-container *ngIf="currentpath?.group_name"> Sub</ng-container>
+                          group
+                        </ng-container>
+                      </span> -->
                     </div>
                     <div class="col-md-6">
                       <ng-container *ngIf="currentpath?.group_name && !editstatus">
@@ -110,22 +120,24 @@
                           Group name
                         </ng-container>
                       </label>
-                      <input type="text" class="form-control mb-4" placeholder="Group/Sub group name" matInput
-                        [(ngModel)]="group_name" name="group_name" #groupname1="ngModel" [required]=editstatus
-                        value="{{editgroupname}}">
-                      <!-- pattern="^[a-zA-Z0-9 sss]+$" -->
-                      <!-- value="{{editgroupname}}" -->
-                      <div
-                        *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
-                        class="error-message">
-                        <div *ngIf="groupname1.errors.required" class="error-message">
-                          Group name is required.
+                      <div *ngIf="!editgroupfield">
+                        <input type="text" class="form-control mb-4 groupfield" placeholder="Group/Sub group name"
+                          matInput [(ngModel)]="group_name" name="group_name" #groupname1="ngModel"
+                          [required]=editstatus value="{{editgroupname}}">
+                        <div
+                          *ngIf="groupname1.invalid && (groupname1.dirty || groupname1.touched) || formsubmitted && groupname1.errors"
+                          class="error-message">
+                          <div *ngIf="groupname1.errors.required" class="error-message">
+                            Group name is required.
+                          </div>
                         </div>
-                        <!-- <div *ngIf="groupname1.errors.pattern" class="error-message">
-                          Group name is invalid.
-                        </div> -->
                       </div>
 
+                      <input *ngIf="editgroupfield" type="text" class="form-control mb-4 groupfield1"
+                        placeholder="Group/Sub group name" matInput [(ngModel)]="group_name" name="group_name"
+                        [readonly]=editgroupfield [required]=editstatus value="{{editgroupname}}">
+                      <!-- pattern="^[a-zA-Z0-9 sss]+$" -->
+                      <!-- value="{{editgroupname}}" -->
                     </div>
 
                     <div class="form-group col-md-6">
@@ -139,8 +151,8 @@
                       </label>
                       <br>
                       <mat-form-field>
-                        <mat-select name="catalogue" [(ngModel)]="catalogue" #catelogue1="ngModel" [required]=editstatus
-                          class="form-control">
+                        <mat-select name="catalogue" [disabled]=editgroupfield [(ngModel)]="catalogue"
+                          #catelogue1="ngModel" [required]=editstatus class="form-control">
                           <mat-option *ngFor="let cat of catalogueList" [(value)]="cat.catalogue_id"
                             (onSelectionChange)="selectcatalogue($event, cat)">
                             {{cat.catalogue_name}}
@@ -158,7 +170,8 @@
                     </div>
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
-                      <mat-slide-toggle class="example-margin" [color]="color" name="toggle" [(ngModel)]="toggle">
+                      <mat-slide-toggle class="example-margin" [disabled]=editgroupfield [color]="color" name="toggle"
+                        [(ngModel)]="toggle">
                       </mat-slide-toggle>
                       <!-- [checked]="currentpath?.is_active" -->
                       <!-- (change)="toggle(currentpath.is_active)" -->
