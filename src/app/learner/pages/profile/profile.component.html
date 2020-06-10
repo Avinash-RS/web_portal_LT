@@ -57,7 +57,7 @@
           <div class="profile-pic">
             <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
             </mat-icon>
-            <img [src]="profileForm.value.profile_img != 'null' ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+            <img [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
               id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
               [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
             <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
