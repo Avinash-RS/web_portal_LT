@@ -51,7 +51,10 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     Ng5SliderModule,
     ToastrModule.forRoot({
       timeOut: 4000,
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      maxOpened: 1,
+      preventDuplicates: true,
+      autoDismiss: true
     }),
     NgxSpinnerModule,
     BrowserModule,
