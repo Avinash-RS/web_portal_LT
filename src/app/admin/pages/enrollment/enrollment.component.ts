@@ -296,6 +296,8 @@ export class EnrollmentComponent implements OnInit {
       //   wishlist: row?.wish_list ? true : false,
       //   wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
       // };
+      // (keyup)="addCategoryForm.patchValue({category_name: $event.target.value[0].
+      // toUpperCase() + $event.target.value.substr(1).toLowerCase()})"
       const details = {
         type: 'publish', id: row.course_id , type1: 'enrollment'
       };
