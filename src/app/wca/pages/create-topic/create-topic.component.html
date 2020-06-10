@@ -251,6 +251,10 @@
                                                                         <div *ngIf="j?.value?.videosubtitle == 'True'">
                                                                             <div class="subTitleUpload"
                                                                                 *ngFor="let no of j.value.topicimages[0].title;let subTitleindex = index">
+                                                                                <div class="initalAlign">
+                                                                                    <label class="vttLable">{{no.vttfile}}</label>
+                                                                                </div>
+                                                                                <div style="display: flex;">
                                                                                 <mat-select [(value)]="selected"
                                                                                     class="subSelect"
                                                                                     placeholder="Language">
@@ -277,6 +281,7 @@
                                                                                         (click)="removeSubTile(subTitleindex,'sub',j)">
                                                                                         delete</mat-icon>
                                                                                 </div>
+                                                                            </div>
                                                                             </div>
                                                                         </div>
 
