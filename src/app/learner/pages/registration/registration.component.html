@@ -22,8 +22,10 @@
                 <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
                     <div *ngIf="f.fullname.errors.required">Full Name is required</div>
                     <div *ngIf="f.fullname.errors.pattern">Full Name is invalid</div>
-                    <div *ngIf="f.fullname.errors.minlength">Full Name must be minimum of 3 characters </div>
-                    <div *ngIf="f.fullname.errors.maxlength">Full Name must be 50 maximum of characters</div>
+                    <!-- <div *ngIf="f.fullname.errors.minlength">Full Name must be minimum of 3 characters </div>
+                    <div *ngIf="f.fullname.errors.maxlength">Full Name must be 50 maximum of characters</div> -->
+                    <div *ngIf="f.fullname.errors.maxlength || f.fullname.errors.minlength">Full name must be
+                        3-50 characters long </div>
                 </div>
             </div>
 
