@@ -43,7 +43,7 @@ export class AuthGuard implements CanActivate {
         // if profile not updated and trying to access other screens, redirect to profile
         if (state.url !== '/Learner/profile') {
           this.router.navigate(['/Learner/profile']);
-          this.alert.openAlert('Your profile is incomplete !', 'Please provide data for all mandatory field');
+          this.alert.openAlert('Your profile is incomplete !', 'Please provide data for all mandatory fields');
           return false;
         } else {// if url is profile or anything
           return true;

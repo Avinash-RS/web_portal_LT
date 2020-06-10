@@ -40,7 +40,7 @@ export class GlobalServiceService {
     const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetail && !userDetail.is_profile_updated) {
       this.route.navigate(['/Learner/profile']);
-      this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory field');
+      this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
       return false;
     } else {
       return true;

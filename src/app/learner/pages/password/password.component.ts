@@ -105,7 +105,7 @@ export class PasswordComponent implements OnInit {
                 if (loginresult.data.login.message.is_profile_updated)
                   this.router.navigate(['/Learner'])
                 else {
-                  this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory field')
+                  this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields')
                   this.router.navigate(['/Learner/profile'])
                 }
               }
