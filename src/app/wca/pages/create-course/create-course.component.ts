@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WcaService } from '../../services/wca.service';
 import { MatChipInputEvent, MatDialog } from '@angular/material';
@@ -17,6 +17,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
     styleUrls: ['./create-course.component.scss']
 })
 export class CreateCourseComponent implements OnInit {
+
+    @ViewChild('course_name') courseNameElem: ElementRef;
 
     editor = ClassicEditor;
     courseForm: FormGroup;
@@ -67,19 +69,19 @@ export class CreateCourseComponent implements OnInit {
         ],
         customClasses: [
             {
-              name: 'quote',
-              class: 'quote',
+                name: 'quote',
+                class: 'quote',
             },
             {
-              name: 'redText',
-              class: 'redText'
+                name: 'redText',
+                class: 'redText'
             },
             {
-              name: 'titleText',
-              class: 'titleText',
-              tag: 'h1',
+                name: 'titleText',
+                class: 'titleText',
+                tag: 'h1',
             },
-          ]
+        ]
         // defaultTextAlign: 'left'
     };
 
@@ -536,6 +538,20 @@ export class CreateCourseComponent implements OnInit {
                 this.courseForm.patchValue({ preview_video: res.url });
             }
         });
+    }
+
+    checkCourseName() {
+        const courseName = this.courseForm.controls.course_name.value;
+        if (courseName !== undefined || courseName !== null || courseName !== '') {
+            this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
+                console.log(res);
+                if (!res.success) {
+                    this.toast.warning(res.message);
+                    this.courseForm.get('course_name').reset();
+                    this.courseNameElem.nativeElement.focus();
+                }
+            });
+        }
     }
 
 }
