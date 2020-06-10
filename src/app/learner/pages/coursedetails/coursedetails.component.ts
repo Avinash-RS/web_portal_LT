@@ -18,7 +18,7 @@ export class CoursedetailsComponent implements OnInit {
   recordedData: any;
   finalFullData: any;
   finalStatus: any = null;
-  // loadingCourse = false;
+  loadingCourse = false;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
