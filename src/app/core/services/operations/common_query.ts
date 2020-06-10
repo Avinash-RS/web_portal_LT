@@ -72,9 +72,17 @@ export const viewcourse = gql`
         user_role
         user_id
         user_name
-        topicData{
+       topicData{
+          moduleData{
+          moduleid
+          modulename
+          modulestatus
+          moduledetails{
           topicname
+          topicstatus
           topictime
+          }
+          }
           } 
         people_also_viewed{
           course_id
