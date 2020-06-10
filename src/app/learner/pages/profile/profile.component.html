@@ -378,7 +378,7 @@
           </div>
           <div *ngIf="f.neft.touched && f.neft.errors" class="width_100 mand">
             <div *ngIf="f.neft.errors.required">Transaction number is required</div>
-            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 22 digits long</div>
+            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits long</div>
             <div *ngIf="f.neft.errors.pattern">Transaction number must be only numbers</div>
             <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
               {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
