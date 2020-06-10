@@ -14,7 +14,8 @@
   margin-top: 12px;
   margin-left: 12px;
   position: absolute;
-  background: white;
+  background: $color-white;
+  width : 25px !important 
 }
 
 .profile-pic {
@@ -331,7 +332,7 @@ div.account {
 }
 
 .m-l-30 {
-  margin-left: 30%
+  margin-left: 24%
 }
 
 .mat-dialog-content {
@@ -580,7 +581,7 @@ hr {
 }
 
 .addIcon {
-  color: #000;
+  color: $color-blank;
   border: 1px solid $color-border;
   background: $color-border;
   /* margin: 6px; */
@@ -601,7 +602,10 @@ hr {
   padding: 6px;
 }
 
-
+/deep/ .swal2-styled.swal2-confirm {
+  background-color : $color-blue !important;
+  border-radius : 0 !important;
+}
 // html {
 //   overflow: scroll;
 //   overflow-x: hidden !important;
