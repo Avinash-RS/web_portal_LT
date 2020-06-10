@@ -147,10 +147,10 @@ export class ProfileComponent implements OnInit {
     // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
-      gender: new FormControl('', myGlobals.req),
-      is_student_or_professional: new FormControl('', myGlobals.req),
-      // gender: new FormControl(''),
-      // is_student_or_professional: new FormControl(''),
+      // gender: new FormControl('', myGlobals.req),
+      // is_student_or_professional: new FormControl('', myGlobals.req),
+      gender: new FormControl(''),
+      is_student_or_professional: new FormControl(''),
       languages_known: [''],
       addressline1: ['', myGlobals.address],
       addressline2: ['', myGlobals.address],
