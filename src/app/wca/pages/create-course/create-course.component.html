@@ -81,8 +81,6 @@
                                                                 <mat-icon matChipRemove>cancel</mat-icon>
                                                             </mat-chip>
                                                             <input class="inputmainWidth"
-                                                                (keydown)="_handleKeydown($event)"
-                                                                (keydown.space)="$event.preventDefault()"
                                                                 [matChipInputAddOnBlur]="true"
                                                                 [matChipInputFor]="preReqList"
                                                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
