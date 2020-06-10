@@ -46,7 +46,6 @@ export class EnrollmentComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // tslint:disable-next-line:only-arrow-functions
-    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
@@ -79,6 +78,7 @@ export class EnrollmentComponent implements OnInit {
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.loading = true;
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
+      // console.log(result?.data?.getenrolledcourses?.message);
       this.loading = false;
       if (data.pagenumber === 0) {
         this.enrollmentrecords = [];
@@ -104,6 +104,7 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       this.loading = false;
       const array = [];
+      // console.log(result?.data?.get_all_enrolledcourses?.message);
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
              element.group_detail[0].request_date = element.request_date;
              element.group_detail[0].totalCount = element.totalCount;
@@ -132,6 +133,7 @@ export class EnrollmentComponent implements OnInit {
       if (data.pagenumber === 0) {
         this.groupenrollmentrecords = [];
       }
+      // console.log(result?.data?.getenrolledcourses?.message);
       Array.prototype.push.apply(this.groupenrollmentrecords, result?.data?.getenrolledcourses?.message);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
       // this.dataSource1.data = result?.data?.getenrolledcourses?.message;
@@ -223,10 +225,10 @@ export class EnrollmentComponent implements OnInit {
             this.dataSource.data = [];
             this.radiobuttonchange();
           }
-          const c = array.length > 1 ? 'ids' : 'id';
+          const c = array.length > 1 ?  array.length + ' courses' : array.length + ' course';
           Swal.fire({
-            title: '<div>Successfully approved</div> <br> ',
-            text: 'A confirmation has been sent to user email ' + c ,
+            title:   c + '&nbsp;<div> approved successfully</div> <br> ',
+            text: 'Confirmation email sent to learner ',
           });
         }
       });
