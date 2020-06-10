@@ -53,26 +53,20 @@ export class RegistrationComponent implements OnInit {
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
     // this.registerForm.value.termsandconditions
-    this.service.user_registration(this.registerForm.value.email, this.fullname,true )
-      .subscribe(data => {
-     console.log(data.data['user_registration'])
+    this.service.user_registration(this.registerForm.value.email, this.fullname,true ).subscribe(data => {
+    this.registerForm.reset();
      if(data.data['user_registration']){
       if (data.data['user_registration']['success'] == 'true') {
         this.alert.openAlert(data.data['user_registration'].message, null)
-        // localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration'].data))
-        // localStorage.setItem('role', 'learner')
         this.loader.hide();
-        this.registerForm.reset();
       } else {
-        this.alert.openAlert(data.data['user_registration'].message, null)
+        this.alert.openAlert(data.data['user_registration'].message, null);
         this.loader.hide();
       }
      }else{
       this.alert.openAlert("Please try after sometime", null)
      }
-
-      })
-      // console.log('something')
+    })
   }
 
   onSubmit() {
@@ -82,9 +76,6 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  signIn() {
-
-  }
   openDialog(): void {
     const dialogRef = this.dialog.open(TermsconditionsComponent, {
       width: '550px',

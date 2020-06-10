@@ -1,6 +1,6 @@
 <div class="limiter">
-  <img alt="" class="lnt_logo" src="../../../../assets/learner/Edutech_White.svg"> 
-  <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/register']">Sign up</a></span>
+  <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
+  <!-- <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/register']">Sign up</a></span> -->
   <!-- <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms & conditions</span> -->
   
   <div class="row container-reg200">
@@ -8,9 +8,10 @@
     </div>
     <div class="col-md-4 col-sm-12 col-12">
       <div class="wrap-reg">
+        <img class="kauhalya" alt="" src='../../../../assets//learner/kauhalya.png'>
         <form [formGroup]="loginForm">
-          <h1 class="head1"><span style="font-weight: lighter;">Welcome to </span>Edutech</h1>
-          <h1 class="signIn"> Sign In </h1> <br><br><br><br>
+          <!-- <h1 class="head1"><span style="font-weight: lighter;">Welcome to </span>Edutech</h1> -->
+          <h1 class="signIn"> Sign In </h1> <br><br>
           <mat-card-content style="margin-top:10px">
             <div class="form-group">
               <label>User name</label>
@@ -34,7 +35,7 @@
               </div>
             </div>
             <mat-checkbox class="remember_me" formControlName="remember_me">
-              Remember me
+              Keep me signed in
             </mat-checkbox><br><br>
             <button id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">Sign
               in</button>
@@ -50,6 +51,16 @@
               <a [routerLink]="['/Learner/register']"><strong class="col">Sign up</strong></a> </div><br><br>
           </mat-card-content>
         </form>
+        <div class="row footer">
+          <div class="col-7">
+              <span class="footertext">© 2020 Edutech.All rights reserved.</span>
+          </div>
+          <div class="col-5">
+              <span style="font-size: 11px;">Powered by : 
+                  <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+              </span>
+          </div>
+      </div>
       </div>
     </div>
   </div>
