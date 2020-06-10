@@ -15,7 +15,7 @@
   margin-left: 12px;
   position: absolute;
   background: $color-white;
-  width : 25px !important 
+  width: 25px !important
 }
 
 .profile-pic {
@@ -43,10 +43,20 @@
 
 
 @media screen and (min-width:270px) and (max-width:335px) {
-
+  .lap_95 {
+    width: 100%;
+  }
+  .lap_s95 {
+    width: 100% !important;
+  }
   .bb-icon {
     border-bottom: 0px !important;
   }
+
+  .lapview {
+    display: none;
+  }
+
 }
 
 @media screen and (min-width:335px) and (max-width:375px) {
@@ -54,11 +64,31 @@
     border-bottom: 0px !important;
   }
 
+  .lap_95 {
+    width: 100%;
+  }
+  .lap_s95 {
+    width: 100% !important;
+  }
+  .lapview {
+    display: none;
+  }
+
 }
 
-@media screen and (min-width:320px) and (max-width:768px) {
+@media screen and (min-width:320px) and (max-width:767px) {
   .profile {
     justify-content: space-between;
+  }
+
+  .lap_95 {
+    width: 100%;
+  }
+  .lap_s95 {
+    width: 100% !important;
+  }
+  .lapview {
+    display: none;
   }
 
   .editText {
@@ -106,13 +136,20 @@
     margin-left: auto !important;
 
   }
-
-
 }
 
 
-@media screen and (min-width:769px) and (max-width:991px) {
+@media screen and (min-width:768px) and (max-width:991px) {
 
+  .lap_95 {
+    width: 95% !important;
+  }
+  .lap_s95 {
+    width: 95% !important;
+  }
+  .lapview {
+    display: block;
+  }
 
   .first {
     order: 1;
@@ -161,8 +198,15 @@
 
 
 @media screen and (min-width:992px) {
-
-
+  .lap_95 {
+    width: 95% !important;
+  }
+  .lap_s95 {
+    width: 95% !important;
+  }
+  .lapview {
+    display: block;
+  }
   .details-row {
     margin-top: 7% !important;
     width: 100%;
@@ -184,10 +228,21 @@
 }
 
 @media screen and (min-width:1440px) {
+  @media screen and (min-width:1024px) {
+    .lap_95 {
+      width: 95% !important;
+    }
+    .lap_s95 {
+      width: 95% !important;
+    }
+  }
 
 
   .fourth {
     margin-top: 25% !important;
+  }
+  .lapview {
+    display: block;
   }
 
   .profile-progress {
@@ -196,11 +251,16 @@
 }
 
 @media screen and (min-width:2560px) {
+  .lap_95 {
+    width: 95% !important;
+  }
 
   .fourth {
     margin-top: 15% !important;
   }
-
+  .lapview {
+    display: block;
+  }
   .details-row {
     margin-top: 0% !important;
     width: 100%;
@@ -249,9 +309,8 @@ div.account {
 }
 
 .mat-select {
-  width: 90%;
-  margin-right: 15px;
-
+  // width: 90%;
+  // margin-right: 15px;
 }
 
 .p-b-10px {
@@ -404,8 +463,8 @@ input:focus {
 }
 
 .institute {
-  width: 90% !important;
-  margin-right: 10px !important;
+  // width: 90% !important;
+  // margin-right: 10px !important;
   // border-radius: 10px !important;
 }
 
@@ -604,9 +663,10 @@ hr {
 }
 
 /deep/ .swal2-styled.swal2-confirm {
-  background-color : $color-blue !important;
-  border-radius : 0 !important;
+  background-color: $color-blue !important;
+  border-radius: 0 !important;
 }
+
 // html {
 //   overflow: scroll;
 //   overflow-x: hidden !important;
