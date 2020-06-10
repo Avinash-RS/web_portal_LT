@@ -158,7 +158,9 @@ export class ProfileComponent implements OnInit {
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      neft: new FormControl('', [Validators.required, Validators.minLength(22), Validators.maxLength(22)]),
+      neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
+      Validators.minLength(22), Validators.maxLength(22)
+      ]),
       iAgree: new FormControl(true, []),
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
@@ -207,8 +209,12 @@ export class ProfileComponent implements OnInit {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
         if (profileDetails) {
-          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(v => delete v.__typename);
-          profileDetails.social_media.length > 0 && profileDetails.social_media.forEach(v => delete v.__typename);
+          if (profileDetails.qualification.length > 0) {
+            profileDetails.qualification.forEach(v => delete v.__typename);
+          }
+          if (profileDetails.social_media.length > 0) {
+            profileDetails.social_media.forEach(v => delete v.__typename);
+          }
           if (profileDetails.progress.includes('%')) {
             profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
           } else {
@@ -230,10 +236,14 @@ export class ProfileComponent implements OnInit {
           this.profileForm.patchValue(profileDetails);
           this.getAllState();
           this.getDistrict();
-          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(qual =>
-            qualification.push(this.formBuilder.group(qual)));
-          profileDetails.certificate && profileDetails.certificate.length > 0 && profileDetails.certificate.forEach(certif =>
-            certificate.push(this.formBuilder.control(certif)));
+          if (profileDetails.qualification.length > 0) {
+            profileDetails.qualification.forEach(qual =>
+              qualification.push(this.formBuilder.group(qual)));
+          }
+          if (profileDetails.certificate && profileDetails.certificate.length > 0) {
+            profileDetails.certificate.forEach(certif =>
+              certificate.push(this.formBuilder.control(certif)));
+          }
           this.loader.hide();
         } else {
           this.loader.hide();
@@ -242,36 +252,19 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  yearOfpassing(index) {
-    this.startYear = 2020 - 60;
-    this.endYear = 2020 + 3;
-    // this.startYear = moment().year() - 60;
-    // this.endYear = moment().year() + 3;
-
-    this.profileForm.value.qualification.forEach(element => {
-      if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
-        this.alert.openAlert('Invalid year', null);
-        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
-        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators(
-          [Validators.required, Validators.minLength(4)]);
-        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').updateValueAndValidity();
-      }
-    });
-  }
-  
   updateProfile() {
+    // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].board_university !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].discipline !== '' && this.profileForm.value.qualification[0].institute !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
       if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
-        this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft
+        this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft !== ''
         && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
-        this.profileForm.controls.progress.setValue(60);
+        this.profileForm.controls.progress.setValue(80);
       }
       if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
         this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
-        && this.profileForm.value.social_media[0].link !== '' && this.profileForm.value.gender !== '' &&
-        this.profileForm.value.is_student_or_professional !== '') {
+        && this.profileForm.value.social_media[0].link !== '') {
         this.profileForm.controls.progress.setValue(90);
       }
       if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
@@ -283,6 +276,9 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
       this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
+      this.profileForm.value.gender = 'O';
+      this.profileForm.value.is_student_or_professional = 'student';
+
       // console.log('jsonData', this.profileForm.value);
 
       this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
@@ -315,8 +311,25 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  yearOfpassing(index) {
+    this.startYear = 2020 - 60;
+    this.endYear = 2020 + 3;
+    // this.startYear = moment().year() - 60;
+    // this.endYear = moment().year() + 3;
+
+    this.profileForm.value.qualification.forEach(element => {
+      if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
+        this.alert.openAlert('Invalid year', null);
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators(
+          [Validators.required, Validators.minLength(4)]);
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').updateValueAndValidity();
+      }
+    });
+  }
+
   addCertificates(c, i) {
-    const arrayT = this.certificate.value.filter(i => i === c);
+    const arrayT = this.certificate.value.filter(val => val === c);
     if (arrayT.length > 1) {
       this.alert.openAlert('This certificate link is already filled', null);
       this.certificate.removeAt(i);
@@ -466,9 +479,10 @@ export class ProfileComponent implements OnInit {
 
   updateEmail(mailForm) {
     if (mailForm === false) {
-      Swal.fire('Email Id is invalid');
+      Swal.fire('Email id is invalid');
     } else {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe((data: any) => {
+        this.dialog.closeAll();
         if (data.data.update_email_onprofile.success === 'true') {
           Swal.fire(data.data.update_email_onprofile.message);
           this.getprofileDetails(this.currentUser.user_id);
@@ -587,13 +601,14 @@ export class ProfileComponent implements OnInit {
     this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword,
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         this.passwordForm.reset();
+        this.dialog.closeAll(); // Asok said
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
           localStorage.clear();
           this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
             localStorage.setItem('Systemip', res.ip);
           });
-          this.dialog.closeAll();
+          // this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
         } else {
           Swal.fire(password.data.get_change_password_updateprofile.message);
