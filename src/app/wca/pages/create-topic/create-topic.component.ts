@@ -659,6 +659,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
       this.toast.warning("Topic name cannot be same for templates");
       return false;
     }
+
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
     if (this.query.edit || this.query.addModule) {
@@ -686,6 +687,16 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
     //   return
     // })
     // this.validateform(this.courseForm);
+    let invalid = document.getElementsByClassName('ng-invalid')
+    if(invalid){
+       Array.from(invalid).forEach((data)=>{
+        console.log(data.classList)
+        var classList = data.classList
+        if(classList.contains("timeInput")){  
+          this.toast.warning('Time required');
+        }
+      })
+    }
     if (this.courseForm.valid) {
       const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';

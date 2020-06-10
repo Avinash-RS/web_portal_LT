@@ -51,7 +51,7 @@
 
                                             <div class="row crs1 pad18px" style="height: 80px;">
                                                 <div class="col-md-4 course-details">Course Short Description</div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 cls-idx">
                                                     <textarea class="inputs inputmainWidth" style="resize: none;"
                                                         formControlName="course_description"
                                                         placeholder="Enter the course description" maxlength="1000"
@@ -81,8 +81,6 @@
                                                                 <mat-icon matChipRemove>cancel</mat-icon>
                                                             </mat-chip>
                                                             <input class="inputmainWidth"
-                                                                (keydown)="_handleKeydown($event)"
-                                                                (keydown.space)="$event.preventDefault()"
                                                                 [matChipInputAddOnBlur]="true"
                                                                 [matChipInputFor]="preReqList"
                                                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -337,7 +335,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8" style="height: 80px;">
+                                        <div class="col-md-8 cls-idx" style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">
                                                     <span>Description</span>
@@ -387,7 +385,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8"  style="height: 80px;">
+                                        <div class="col-md-8 cls-idx"  style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">A Step Towards</div>
                                                 <div class="col-md-8"><textarea class="inputs inputmainWidth"
@@ -402,7 +400,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-8"  style="height: 80px;">
+                                        <div class="col-md-8 cls-idx"  style="height: 80px;">
                                             <div class="row crs1 margbtm">
                                                 <div class="col-md-4 course-details">Course Milestone</div>
                                                 <div class="col-md-8"><textarea type="text" style="resize: none;"
