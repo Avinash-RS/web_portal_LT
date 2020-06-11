@@ -165,9 +165,11 @@
   </div>
 
 
-  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;">
+  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;" *ngIf="editModulesback == 'true'">
+    <button mat-flat-button color="primary" class="back-btn" (click)="backforeditModule()">Back</button>
+  </div>
+  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;" *ngIf="editModulesback == 'false'">
     <button mat-flat-button color="primary" class="back-btn" (click)="back()">Back</button>
-
   </div>
   <div>
     <!-- <app-footer></app-footer> -->
