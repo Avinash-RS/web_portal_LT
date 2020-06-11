@@ -152,7 +152,7 @@
         </div> -->
 
 
-        <br>
+        <!-- <br> -->
         <hr class="p-b-10px">
         <br *ngIf="!cannotEdit">
 
@@ -292,53 +292,49 @@
         <br>
 
         <label class="p-b-10px" class="f_size_19">Address</label>
-        <span class="mand"> *</span><br>
+        <!-- <span class="mand"> *</span> -->
+        <br>
         <div class="row width_100">
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="Address line 1" formControlName="addressline1">
+                'inputs lap_95'" placeholder="Address line 1 *" formControlName="addressline1">
               <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
                 <div *ngIf="f.addressline1.errors.required">Address line 1 is required</div>
-                <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be
+                <!-- <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be -->
                   <!-- minimum of
                   {{f.addressline1.errors.minlength.requiredLength}} -
                   {{f.addressline1.errors.maxlength.requiredLength}} characters long</div> -->
 
-                  1 -
-                  100 characters long</div>
+                  <!-- 1 - -->
+                  <!-- 100 characters long</div> -->
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
           'inputs  lap_95'" placeholder="Address line 2" formControlName="addressline2">
-              <div *ngIf="f.addressline2.touched && f.addressline2.errors" class="mand">
+              <!-- <div *ngIf="f.addressline2.touched && f.addressline2.errors" class="mand">
                 <div *ngIf="f.addressline2.errors.required">Address line 2 is required</div>
                 <div *ngIf="f.addressline2.errors.minlength || f.addressline2.errors.maxlength">Address line 2 must be
-                  <!-- minimum of
-                  {{f.addressline2.errors.minlength.requiredLength}} -
-                  {{f.addressline2.errors.minlength.requiredLength}}
-                  characters long</div> -->
-                  1 -
-                  100 characters long</div>
-              </div>
+                  1 - 100 characters long</div>
+              </div> -->
             </div>
           </div>
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <input type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
           'inputs  lap_95'" placeholder="Pincode" formControlName="pincode">
-              <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
+              <!-- <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
                 <div *ngIf="f.pincode.errors.required">Pincode is required</div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
 
         <div class="row p-b-10px">
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
                 placeholder="Country" formControlName="country" name="country" (selectionChange)="getAllState()">
@@ -348,7 +344,7 @@
               </mat-select>
             </div>
           </div>
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12 p-b-10px">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
                 placeholder="State" formControlName="state" name="state" (selectionChange)="getDistrict()">
@@ -358,7 +354,7 @@
               </mat-select>
             </div>
           </div>
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12 p-b-10px">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
                 placeholder="District" formControlName="city_town" name="City">
@@ -525,6 +521,13 @@
         <div class="row" *ngIf="!cannotEdit">
           <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
             (click)="updateProfile()">Save</button>
+        </div>
+        <br> <br>
+        <div class="row">
+          L & T reserves the right of admission of any student in to the program and its decision would be final. L & T
+          also holds the right of what constitutes the internship completion by a student. The certificate would be
+          awarded only to those students who have fully gone through the program by meeting the participation and
+          project requirements.
         </div>
       </form>
       <!------------------------------Change Email Dialog---------------------->
@@ -731,10 +734,10 @@
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
 
   <span class="center_align">@ 2020 EduTech. All rights reserved. &nbsp; &nbsp; | &nbsp; &nbsp;
-    <span class="powered">Powered by : 
+    <span class="powered">Powered by :
       <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-  </span>
     </span>
+  </span>
 
 </div>
 

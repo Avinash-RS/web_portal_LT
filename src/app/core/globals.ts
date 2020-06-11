@@ -64,8 +64,9 @@ export const address: any = [
     Validators.maxLength(100)
 ];
 
+
 export const pincode: any = [
-    Validators.required,
+    // Validators.required,
     Validators.pattern(/^[1-9][0-9]{5}$/),
 ];
 
