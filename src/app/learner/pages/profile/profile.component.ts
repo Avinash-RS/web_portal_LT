@@ -400,7 +400,7 @@ export class ProfileComponent implements OnInit {
           this.alert.openAlert('Please fill all details', null);
         }
       } else {
-        if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+        if ( this.profileForm.value.qualification[i].institute !== '' &&
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
           && this.profileForm.value.qualification[i].discipline !== '') {
           this.qualification.push(this.createQualItem());
