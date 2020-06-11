@@ -73,6 +73,15 @@ describe('WishlistCoursesComponent', () => {
     component.onResize(event);
     expect(component.breakpoint).toBe(4);
   });
+
+  it('Check for window below 480 on loading', () => {
+    const windows = {
+      innerWidth: 400
+    };
+    component.ngOnInit();
+    expect(component.ngOnInit()).toContain(windows.innerWidth);
+    expect(component.breakpoint).toBe(1);
+  });
   // it('viewwishlist', () => {
   //   component. viewWishlist();
   //   // expect(component.userdetail).toBe(component.checkLogout()) 

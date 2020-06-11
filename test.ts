@@ -34,9 +34,10 @@ getTestBed().initTestEnvironment(
 
 
 // const context = require.context('./app/learner/pages/landingpage', true, /landingpage.component\.spec\.ts$/);
-const context = require.context('./app/core/shared/wishlist-courses', true, /wishlist-courses.component\.spec\.ts$/);
+// const context = require.context('./app/core/shared/wishlist-courses', true, /wishlist-courses.component\.spec\.ts$/);
 // const context = require.context('./app/core/shared/list-view-course-component', true, /list-view-course-component.component\.spec\.ts$/);
 // const context = require.context('./app/core/shared/alert-component', true, /alert-component.component\.spec\.ts$/);
 
+const context = require.context('./app/learner/pages/termsconditions', true, /termsconditions.component\.spec\.ts$/);
 
 context.keys().map(context);
