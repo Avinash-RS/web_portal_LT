@@ -176,7 +176,15 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl('')
       })
     });
-    
+
+    // for (let i = 0; i < 2; i++) {
+    //   debugger;
+    //   // if (this.qualification.controls.length < 3) {
+    //   // }
+    // }
+
+
+
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
@@ -376,14 +384,41 @@ export class ProfileComponent implements OnInit {
   }
 
   addQualification(i) {
-    if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].qualification !== '' &&
-      this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
-      this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
-      this.qualification.push(this.createQualItem());
+    // if (this.profileForm.value.qualification[i].board_university !== '' &&
+    //   this.profileForm.value.qualification[i].qualification !== '' &&
+    //   this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+    //   this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+    //   this.qualification.push(this.createQualItem());
+    //   console.log(this.qualification);
+    // } else {
+    //   this.alert.openAlert('Please fill all details', null);
+    // }
+
+    if (this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2' ||
+      this.profileForm.value.qualification[i].qualification === '5e7deddfdba4466d9704b44a') {
+      if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+        this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+        this.qualification.push(this.createQualItem());
+      } else {
+        this.alert.openAlert('Please fill all details', null);
+      }
     } else {
-      this.alert.openAlert('Please fill all details', null);
+      if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+        this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
+        && this.profileForm.value.qualification[i].discipline !== '') {
+        this.qualification.push(this.createQualItem());
+      } else {
+        this.alert.openAlert('Please fill all details', null);
+      }
     }
+
   }
+
+  // addQualification() {
+  //   this.qualification.push(this.createQualItem());
+  //   this.qualification.push(this.createQualItem());
+  //   console.log(this.qualification.controls, this.qualification);
+  // }
 
   removeQualification(i) {
     this.qualification.removeAt(i);
