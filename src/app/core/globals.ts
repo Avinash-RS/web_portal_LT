@@ -18,7 +18,7 @@ export const usernamesplVal: any = [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(20),
-    Validators.pattern(/^[A-Za-z0-9]+[^\w\s]*$/)
+    Validators.pattern(/^[A-Za-z0-9]+[\w\s]*$/)
 ];
 
 
