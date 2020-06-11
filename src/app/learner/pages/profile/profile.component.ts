@@ -26,6 +26,12 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent implements OnInit {
 
   enableMobileEdit;
+  boardValue1: any;
+  uniValue1: any;
+  boardValue3: any;
+  uniValue3: any;
+  disciplines1: any;
+  disciplines2: any;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -147,9 +153,9 @@ export class ProfileComponent implements OnInit {
     // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
-      // gender: new FormControl('', myGlobals.req),
+      gender: new FormControl('', myGlobals.req),
       // is_student_or_professional: new FormControl('', myGlobals.req),
-      gender: new FormControl(''),
+      // gender: new FormControl('',myGlobals.req),
       is_student_or_professional: new FormControl(''),
       languages_known: [''],
       addressline1: ['', myGlobals.textVal],
@@ -158,7 +164,9 @@ export class ProfileComponent implements OnInit {
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      neft: new FormControl(''),
+      neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
+      Validators.minLength(16), Validators.maxLength(22)
+      ]),
       iAgree: new FormControl(true, []),
       throughTPO: new FormControl(false, []),
       progress: [],
@@ -208,7 +216,6 @@ export class ProfileComponent implements OnInit {
     const neft = this.profileForm.get('neft');
     this.profileForm.get('throughTPO').valueChanges
       .subscribe((val: any) => {
-        console.log(val);
         if (val === true) {
           neft.setValidators([Validators.pattern(/^[0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
@@ -240,7 +247,7 @@ export class ProfileComponent implements OnInit {
           if (profileDetails.social_media.length > 0) {
             profileDetails.social_media.forEach(v => delete v.__typename);
           }
-          if (profileDetails.progress.includes('%')) {
+          if (profileDetails.progress && profileDetails.progress.includes('%')) {
             profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
           } else {
             profileDetails.progress = Number(profileDetails.progress);
@@ -259,6 +266,7 @@ export class ProfileComponent implements OnInit {
             certificate.removeAt(0);
           }
           this.profileForm.patchValue(profileDetails);
+          console.log(this.profileForm);
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
@@ -281,38 +289,37 @@ export class ProfileComponent implements OnInit {
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
-    // this.profileForm.value.qualification.forEach(element => {
-    //   if (element.qualification === '"5e7deddfdba4466d9704b44a"') {
-    //     if (element.board_university !== '' && element.institute !== '' && element.percentage !== '' &&
-    //       element.qualification !== '' && element.year_of_passing !== '') {
 
-    //       }
-    //   }
-    // });
-
-    // const index = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dedc1dba4466d9704b3f2');
-    // const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '"5e7dee15dba4466d9704b4d2"');
-    // if (index === -1) {
-      // this.alert.openAlert('Please fill all 10th qualification details', null);
-    // } else {
-      // if (this.profileForm.value.qualification(index).board_university !== '' &&
-      //   this.profileForm.value.qualification(index).institute !== '' &&
-      //   this.profileForm.value.qualification(index).percentage !== '' &&
-      //   this.profileForm.value.qualification(index).year_of_passing !== '') {
-
-      // if (index1 !== -1) {
-        // if (this.profileForm.value.qualification(index1).discipline !== '' &&
-        //   this.profileForm.value.qualification(index1).institute !== '' &&
-        //   this.profileForm.value.qualification(index1).percentage !== '' &&
+      const index = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dedc1dba4466d9704b3f2');
+      const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
+      const index2 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7deddfdba4466d9704b44a');
+      if (index === -1) {
+        this.alert.openAlert('Please fill 10th qualification details', null);
+      } else if (index1 === -1) {
+        this.alert.openAlert('Please fill diploma qualification details', null);
+      } else {
+        console.log(this.profileForm.value.qualification);
+        // if (this.profileForm.value.qualification(index).board_university !== '' ||
+        //   this.profileForm.value.qualification(index).institute !== '' ||
+        //   this.profileForm.value.qualification(index).percentage !== '' ||
+        //   this.profileForm.value.qualification(index).year_of_passing !== '' ||
+        //   this.profileForm.value.qualification(index1).discipline !== '' ||
+        //   this.profileForm.value.qualification(index1).institute !== '' ||
+        //   this.profileForm.value.qualification(index1).percentage !== '' ||
         //   this.profileForm.value.qualification(index1).year_of_passing !== '') {
-
-
-        if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
-          this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft !== ''
-          && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
-          this.profileForm.controls.progress.setValue(80);
+        this.profileForm.value.qualification[index1].board_university = '5ee28a037d0045bb0edc1df9';
+        this.profileForm.value.qualification[index1].specification = '5ee2877b7d0045bb0edc19c2';
+        this.profileForm.value.qualification[index].specification = '5ee2877b7d0045bb0edc19c2';
+        if (index2 !== -1) {
+          this.profileForm.value.qualification[index2].specification = '5ee2877b7d0045bb0edc19c2';
         }
-        if (this.profileForm.value.progress === 80 && this.profileForm.value.certificate.length > 0 &&
+        if (this.profileForm.value.addressline1 &&
+          this.profileForm.value.country && this.profileForm.value.state
+          && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
+          this.profileForm.controls.progress.setValue(60);
+        }
+        if (this.profileForm.value.progress === 60 && this.profileForm.value.neft !== '' &&
+        this.profileForm.value.certificate.length > 0 &&
           this.profileForm.value.certificate[0] !== '' && this.profileForm.value.social_media[0].link !== '') {
           this.profileForm.controls.progress.setValue(90);
         }
@@ -340,9 +347,6 @@ export class ProfileComponent implements OnInit {
             this.alert.openAlert(data.data.update_profile.message, null);
           }
         });
-        // } else {
-        //   this.alert.openAlert('Please fill all diplamo qualification details', null);
-        // }
         // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
         //   this.profileForm.value.country && this.profileForm.value.state
         //   && this.profileForm.value.city_town) {
@@ -356,11 +360,10 @@ export class ProfileComponent implements OnInit {
         //   this.profileForm.controls.progress.setValue(100);
         // }
 
-    //   } else {
-    //     this.alert.openAlert('Please fill all diplamo qualification details', null);
-    //   }
-    // }
-    // }
+        // } else {
+        //   this.alert.openAlert('Please fill all qualification details', null);
+        // }
+      }
     } else {
       this.alert.openAlert('Please fill all qualification details', null);
     }
@@ -508,6 +511,8 @@ export class ProfileComponent implements OnInit {
       this.levelValue = level.data.get_qualification_details.data;
       this.levelValue.forEach(element => {
         element.allowed = 'Y';
+        this.getBoardsUniv(element._id);
+        this.getDiscipline(element._id);
       });
     });
   }
@@ -518,9 +523,16 @@ export class ProfileComponent implements OnInit {
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
     this.service.get_board_university_details(levelid).subscribe((boards: any) => {
-      this.boardValue = boards.data.get_board_university_details.data.board;
-      this.uniValue = boards.data.get_board_university_details.data.university;
-
+      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+        this.boardValue = boards.data.get_board_university_details.data.board;
+        this.uniValue = boards.data.get_board_university_details.data.university;
+      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+        this.boardValue1 = boards.data.get_board_university_details.data.board;
+        this.uniValue1 = boards.data.get_board_university_details.data.university;
+      } else {
+        this.boardValue3 = boards.data.get_board_university_details.data?.board;
+        this.uniValue3 = boards.data.get_board_university_details.data?.university;
+      }
     });
   }
 
@@ -531,9 +543,14 @@ export class ProfileComponent implements OnInit {
   }
 
   getDiscipline(levelid) {
-    console.log(this.currentUser);
     this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
-      this.disciplines = discipline.data.get_discipline_details.data;
+      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+        this.disciplines = discipline.data.get_discipline_details?.data;
+      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+        this.disciplines1 = discipline.data.get_discipline_details?.data;
+      } else {
+        this.disciplines2 = discipline.data.get_discipline_details?.data;
+      }
     });
   }
 
@@ -765,11 +782,11 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSpec(a, spec, quali, level) {
-    console.log(level);
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
-      specification.setValidators([Validators.required]);
+      // specification.setValidators([Validators.required]);
+      specification.setValidators([]);
     } else {
       specification.setValidators(null);
     }
@@ -780,7 +797,7 @@ export class ProfileComponent implements OnInit {
 
   formatPercentage(index) {
     const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
-    if (val.includes('.')) {
+    if (val && val.includes('.')) {
       const ind = val.indexOf('.');
 
       if (ind > 2) {
