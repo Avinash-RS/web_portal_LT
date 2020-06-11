@@ -4,6 +4,11 @@
     box-shadow: none;
 }
 
+.create-course {
+    background: #e5e3e3;
+
+}
+
 .mat-checkbox {
     // display: inline-block;
     height: 24px;
@@ -129,7 +134,6 @@
     padding-top: 9px;
     float: right;
     margin: 0px 100px 8px 551px;
-    border-radius: 5px;
     height: 50px;
     width: 150px;
 }
@@ -156,7 +160,9 @@
     padding: 5px;
     width: 63px;
     // margin: -1px -12px -23px -259px;s
-    background: $color-field;
+    // background: $color-field;
+    border: 1px solid #1d3f72;
+    
 }
 
 .mat-card {
@@ -363,29 +369,29 @@ input[type="text"] {
     // width: 90%;
     padding: 9px 13px;
     // margin: 3px 37px 16px 6px;
-    background: $color-field;
+    // background: $color-field;
     display: inline-block;
     // border: 1px solid #1F3777;
     box-sizing: border-box;
-    border-radius: 5px;
-    border: none;
+    // border-radius: 5px;
+    border: 1px solid #1d3f72;
 }
 
 .inputmainWidth {
     width: 100%;
-    outline-color: lightblue;
+    outline-color: #335b96;
 }
 
 .inputs {
     // border: 1px solid;
-    background: $color-field;
+    // background: $color-field;
     padding: 16px 0px 2px 8px;
-    border-radius: 5px;
+    // border-radius: 5px;
     // color: #1F3777;
     // width: 90%;
     // background-color: none !important;
     // margin: 0px 15px 10px -16px;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 
 .inputs1 {
@@ -394,9 +400,9 @@ input[type="text"] {
     border-radius: 5px;
     // color: $color-blue;
     width: 100%;
-    background: $color-field;
+    // background: $color-field;
     // margin: 10px 30px;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 
 .inputs2 {
@@ -405,9 +411,9 @@ input[type="text"] {
     border-radius: 5px;
     // color: #1F3777;
     // width: 100%;
-    background: $color-field;
+    // background: $color-field;
     // margin: 6px 40px 35px 16px;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 
 .btmUnderline {
@@ -493,9 +499,9 @@ input[type="text"] {
     border-radius: 5px;
     // color: #1F3777;
     // width: 83%;
-    background: $color-field;
+    // background: $color-field;
     // margin: 0px 1px 15px -220px;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 .inpt100wid {
     width: 100%;
@@ -525,19 +531,19 @@ input[type="text"] {
     // color: #1F3777;
     width: 88%;
     margin-left: -16px;
-    background: $color-field;
+    // background: $color-field;
     // margin: 0px -78px 15px -220px;
     // border: 1px solid;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 
 .inputs3 {
     padding: 16px 0px 2px 8px;
     border-radius: 5px;
-    background: #e3ecff;
+    // background: #e3ecff;
     width: 105%;
     height: 58px;
-    border: none;
+    border: 1px solid #1d3f72;
 }
 
 .inputs4 {
@@ -546,9 +552,9 @@ input[type="text"] {
     border-radius: 5px;
     // color: #1F3777;
     width: 80%;
-    background: $color-field;
+    // background: $color-field;
     // margin: -4px 28px 19px -23px;
-    border: none;
+    border: 1px solid #1d3f72;
     margin-left: -9px;
 }
 
@@ -558,15 +564,18 @@ input[type="text"] {
     width: 45px;
     // padding: 9px 7px 12px 10px;
     // width: 61px;
-    background: $color-field;
+    // background: $color-field;
     margin-left: 19px;
+    border: 1px solid #1d3f72;
+
 }
 
 .img5 {
     padding: 7px;
     width: 61px;
     margin: -5px -396px 8px -259px;
-    background: $color-field;
+    // background: $color-field;
+    border: 1px solid #1d3f72;
 }
 
 :host ::ng-deep .mat-form-field-underline {
@@ -575,12 +584,13 @@ input[type="text"] {
 
 .matchipsbrder {
     display: block;
-    background: $color-field;
+    // background: $color-field;
     border-radius: 6px;
     padding-left: 10px;
     // margin-left: 29px;
     margin-right: 27px;
-    border: none;
+    border: 1px solid #1d3f72;
+    
 }
 
 .matchipsbrder.active {
@@ -603,9 +613,11 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: $color-field;
-    border-radius: 13px;
+    border: 1px solid #1d3f72;
+    // background: $color-field;
+    // border-radius: 13px;
     margin: 45px;
+
 }
 .mrgnpad {
     margin: 9px 33px;
@@ -692,7 +704,6 @@ input[type="text"] {
     margin-top: 18px;
     width: 100px;
     height: 33px;
-    border-radius: 7px;
     color: white;
     background: #1f3777;
 }
