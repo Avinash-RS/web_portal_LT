@@ -67,7 +67,7 @@
           </li> -->
 
           <li (click)="navigateProfile()">
-            <img class="profileimg" [src]="userimage != 'null' ? userimage : 'assets/learner/pro2.png'">
+            <img class="profileimg" [src]="userimage != 'null' && userimage != 'undefined'  ? userimage : 'assets/learner/pro2.png'">
           </li>
 
         </ul>

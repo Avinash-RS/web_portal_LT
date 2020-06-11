@@ -39,10 +39,10 @@
                     <div *ngIf="f.email.errors.required">Email is required</div>
                     <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
                 </div><br>
-                <div style=" margin-left: -50px;margin-right: -50px;">
+                <!-- <div style=" margin-left: -50px;margin-right: -50px;"> -->
                 <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-10">
+                    <!-- <div class="col-2"></div> -->
+                    <div class="col-12">
                         <div class="alert1"> Note : This name will be used in your certificates</div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             </mat-checkbox><br><br></div>
                     </div>
                 </div> -->
-            </div>
+            <!-- </div> -->
                 
                 <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                     Register
@@ -75,16 +75,18 @@
             </div>
         </div>
         </form>
-        <div class="row footer">
-            <div class="col-7">
-                <span class="footertext">© 2020 Edutech.All rights reserved.</span>
+        <!-- <footer class="footer-before-login"> -->
+            <div class="row footer">
+              <div class="col-7">
+                  <span class="footertext">@ 2020 EduTech. All rights reserved.</span>
+              </div>
+              <div class="col-5">
+                  <span class="powered">Powered by : 
+                      <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+                  </span>
+              </div>
             </div>
-            <div class="col-5">
-                <span style="font-size: 11px;">Powered by : 
-                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-                </span>
-            </div>
-        </div>
+            <!-- </footer> -->
 
     </div>
 <!-- </div> -->

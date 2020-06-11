@@ -63,7 +63,8 @@ a {
 }
 
 :host ::ng-deep.logo {
-    height: 42px;
+    // height: 42px;
+    width: 13%;
     margin-top: 0px !important;
 }
 
