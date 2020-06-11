@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-//change rajesh ranjan
-import { Apollo } from "apollo-angular";
-import { remove_doc_ref, getallrefdoc, get_module_topic } from "./operations/wca_query";
-
+import { tap } from 'rxjs/operators'; // change rajesh ranjan
+import { Apollo } from 'apollo-angular';
+import { remove_doc_ref, getallrefdoc, get_module_topic } from './operations/wca_query';
 import { HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
@@ -16,7 +14,6 @@ const httpOptions = {
 
 // const headers = new HttpHeaders()
 //       .set('Authorization', 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970');
-
 // change rajesh ranjan
 @Injectable({
   providedIn: 'root'
@@ -40,20 +37,19 @@ export class WcaService {
   }
 
   getPublishedCourse() {
-    return this.http.get(environment.wcaapiurl + "api/courses/getpublishedcourse");
+    return this.http.get(environment.wcaapiurl + 'api/courses/getpublishedcourse');
   }
   getCreatedCourse() {
 
-    return this.http.get(environment.wcaapiurl + "api/courses/getcreatedcourse");
+    return this.http.get(environment.wcaapiurl + 'api/courses/getcreatedcourse');
   }
   getDraftCourse() {
-    return this.http.get(environment.wcaapiurl + "api/courses/getdraftcourse");
+    return this.http.get(environment.wcaapiurl + 'api/courses/getdraftcourse');
   }
 
   getAllTemplates() {
-    return this.http.get(environment.wcaapiurl + "api/template/getalltemplates");
+    return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates');
   }
-
 
   uploadImage(image) {
     return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
@@ -86,7 +82,7 @@ export class WcaService {
 
   createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate', arraydata); }
 
-  refDocUpload(fromdata) { return this.http.post(environment.apiUrl + 'wca/refdocupload', fromdata) }
+  refDocUpload(fromdata) { return this.http.post(environment.apiUrl + 'wca/refdocupload', fromdata); }
 
   remove_doc_ref(id) {
     return this.apollo.query({
@@ -97,12 +93,12 @@ export class WcaService {
       }
     });
   }
-  getallrefdoc(pagenumber, course_id) {
+  getallrefdoc(pagenumber, courseId) {
     return this.apollo.query({
       query: getallrefdoc,
       variables: {
         pagenumber,
-        course_id
+        course_id: courseId
       }
     });
   }
@@ -117,11 +113,11 @@ export class WcaService {
 
   excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
 
-  excelPpt(ppt) { return this.http.post(environment.wcaapiurl + "api/template/pdftoimage", ppt); }
+  excelPpt(ppt) { return this.http.post(environment.wcaapiurl + 'api/template/pdftoimage', ppt); }
 
-  uploadKnowledgeCheck(fileData) { return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData) }
+  uploadKnowledgeCheck(fileData) { return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData); }
 
-  getPreviewData(path) { return this.http.post(environment.wcaapiurl + 'api/module/getquestions', { file: path }) }
+  getPreviewData(path) { return this.http.post(environment.wcaapiurl + 'api/module/getquestions', { file: path }); }
   repositoryModules() {
     return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
   }
@@ -154,9 +150,9 @@ export class WcaService {
     });
   }
 
-  // Check Course Name Avalailability
-  checkCourseName_Availability(courseName): Observable<any> {
-    return this.http.get(environment.createCourseApi + 'checkcoursename?course_name=' + courseName, httpOptions).pipe(tap());
+  checkCourseName_Availability(courseName): Observable<any> { // Check Course Name Avalailability
+    return this.http.get(environment.createCourseApi + 'checkcoursename?course_name=' + courseName, httpOptions)
+    .pipe(tap());
   }
 
 }

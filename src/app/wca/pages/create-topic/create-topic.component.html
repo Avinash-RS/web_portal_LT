@@ -260,11 +260,12 @@
                                                                                         {{item.name}}</mat-option>
                                                                                 </mat-select>
                                                                                 <div class="chooseFile">
-                                                                                    <input style="display: none;"
+                                                                                    <!-- <input style="display: none;"
                                                                                         [id]="'fileInput4'+i"
                                                                                         type='file' #fileInput4
-                                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">
-                                                                                    <button (click)="fileInput4.click()"
+                                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)"> -->
+                                                                                        <!-- (click)="fileInput4.click()" -->
+                                                                                    <button (click)='getBlobVttFiles()'
                                                                                         class="subButton"
                                                                                         type="button">Choose
                                                                                         file</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,16 +18,8 @@ declare var $: any;
   templateUrl: './create-topic.component.html',
   styleUrls: ['./create-topic.component.scss']
 })
-export class CreateTopicComponent implements OnInit,OnDestroy  {
+export class CreateTopicComponent implements OnInit, OnDestroy {
 
-  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    }
-    else {
-      this.isReload = true;
-    }
-  }
   isReload = true;
   queryData: any;
   courseArray = [];
@@ -61,43 +53,43 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
-    "Knowledge Check": /(\.csv)$/i,
+    'Knowledge Check': /(\.csv)$/i,
     SCORM: /(\.imsmanifest)$/i,
     Video: /(\.vtt)$/i
-  }
+  };
 
   fileValidations1 = {
-    Image: "(.jpg .jpeg .png) are Allowed !!!",
-    PDF: "(.pdf) are Allowed !!!",
-    Word: "(.doc .docx) are Allowed !!!",
-    PPT: "(.ppt .pptx) are Allowed !!!",
-    Video: "",
-    Audio: "are Allowed !!!",
-    SCORM: "SCROM are Allowed !!!",
-    "Knowledge Check": " (.csv) are Allowed !!!",
-    Feedback: ""
-  }
+    Image: '(.jpg .jpeg .png) are Allowed !!!',
+    PDF: '(.pdf) are Allowed !!!',
+    Word: '(.doc .docx) are Allowed !!!',
+    PPT: '(.ppt .pptx) are Allowed !!!',
+    Video: '',
+    Audio: 'are Allowed !!!',
+    SCORM: 'SCROM are Allowed !!!',
+    'Knowledge Chec': ' (.csv) are Allowed !!!',
+    Feedback: ''
+  };
 
-  feedBackFormHeading = ['Please take a moment to fill out the survey', '', '', '', '', '']
+  feedBackFormHeading = ['Please take a moment to fill out the survey', '', '', '', '', ''];
   feedBackForm = [{
-    'title': 'Content',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Content',
+    star: ['1', '2', '3', '4', '5']
   },
   {
-    'title': 'Relevance',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Relevance',
+    star: ['1', '2', '3', '4', '5']
   }, {
-    'title': 'Ease of understanding',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Ease of understanding',
+    star: ['1', '2', '3', '4', '5']
   }, {
-    'title': 'Duration',
-    'star': ['1', '2', '3', '4', '5']
-  }]
+    title: 'Duration',
+    star: ['1', '2', '3', '4', '5']
+  }];
 
   language = [{
-    "code": "en",
-    "name": "English"
-  }]
+    code: 'en',
+    name: 'English'
+  }];
   KnowledgeOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -121,7 +113,16 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
       }
     },
     nav: true
+  };
+
+  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+    if (this.isReload) {
+      event.returnValue = false;
+    } else {
+      this.isReload = true;
+    }
   }
+
   courseform(): FormGroup {
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
@@ -219,7 +220,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
 
   }
 
-  ngOnDestroy() { 
+  ngOnDestroy() {
     $('#confirmModal').modal('hide');
     $('#knowlegeCheckModal').modal('hide');
     $('#feedbackModal').modal('hide');
@@ -481,7 +482,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
             }, err => {
               this.spinner.hide();
             })
-          } 
+          }
           else if (item.name === 'PDF') {
             const formData5 = new FormData();
             formData5.append('pdf', this.imageView);
@@ -869,24 +870,41 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
 
   loadBlobs(fileInput, item, formdata, index, textvalue) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
-      data: {},
+      data: { type: 'videos' },
       height: '70%',
-      width: '74%',
+      width: '90%',
       closeOnNavigation: true,
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(res => {
-      if (res.url)
+      if (res.url) {
         this.onSelectFile(fileInput, item, formdata, index, res.url, '')
-      else
+      } else {
         this.toast.warning('Try after sometime');
+      }
     });
   }
 
   isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 58))
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 58)) {
       return false;
+    }
     return true;
   }
+
+  getBlobVttFiles() {
+    const dialogRef = this.dialog.open(BlobReaderComponent, {
+      data: { type: 'subtitles' },
+      height: '70%',
+      width: '90%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+    });
+  }
+
 }
