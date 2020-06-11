@@ -26,7 +26,6 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent implements OnInit {
 
   enableMobileEdit;
-
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -47,9 +46,9 @@ export class ProfileComponent implements OnInit {
     this.getAllLanguage();
     this.getAllcountry();
     this.getAllLevels();
-    this.getBoardsUniv();
+    // this.getBoardsUniv();
     this.getInstitute();
-    this.getDiscipline();
+    // this.getDiscipline();
     this.getSpec();
   }
 
@@ -223,7 +222,7 @@ export class ProfileComponent implements OnInit {
       });
 
   }
-
+ 
   // edit(){
   //   this.cannotEdit = false;
   // }
@@ -480,12 +479,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getBoardsUniv() {
+  getBoardsUniv(levelid) {
     // this.service.get_institute_details().subscribe(institute => {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_board_university_details().subscribe((boards: any) => {
+    this.service.get_board_university_details(levelid).subscribe((boards: any) => {
       this.boardValue = boards.data.get_board_university_details.data.board;
       this.uniValue = boards.data.get_board_university_details.data.university;
 
@@ -498,8 +497,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getDiscipline() {
-    this.service.get_discipline_details().subscribe((discipline: any) => {
+  getDiscipline(levelid) {
+    console.log(this.currentUser);
+    this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
       this.disciplines = discipline.data.get_discipline_details.data;
     });
   }
@@ -732,6 +732,7 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSpec(a, spec, quali, level) {
+    console.log(level);
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
@@ -740,7 +741,9 @@ export class ProfileComponent implements OnInit {
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
-  }
+    this.getDiscipline(level._id);
+    this.getBoardsUniv(level._id);
+    }
 
   formatPercentage(index) {
     const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
