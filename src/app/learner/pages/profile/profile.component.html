@@ -57,7 +57,8 @@
           <div class="profile-pic">
             <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
             </mat-icon>
-            <img [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+            <img
+              [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
               id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
               [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
             <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
@@ -78,10 +79,9 @@
               &nbsp;&nbsp;</span>
 
             <span class="f_size_16">| &nbsp;&nbsp;
-              <!-- {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
+              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
               userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
-            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }} -->
-              Rather not say
+            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
               &nbsp;&nbsp;
             </span>
 
@@ -157,7 +157,7 @@
         <br *ngIf="!cannotEdit">
 
         <!-- //////Gender part//////// -->
-        <!-- <div class="row" *ngIf="!cannotEdit">
+        <div class="row" *ngIf="!cannotEdit">
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
             <label class="p-b-10px f_size_19">Gender</label>
             <span class="mand p-b-10px"> *</span>
@@ -170,7 +170,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12">
+          <!-- <div class="col-md-4 col-lg-4 col-sm-12 col-12">
             <label class="p-b-10px f_size_19">I Am a</label>
             <span class="mand p-b-10px"> *</span>
             <div class="form-group ">
@@ -180,9 +180,9 @@
                 <mat-radio-button value="professional">Professional</mat-radio-button>
               </mat-radio-group>
             </div>
-          </div>
+          </div> -->
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
+          <!-- <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
             <div class="form-group p-b-10px">
               <label class="f_size_19">Languages known</label><br>
               <mat-select [disabled]='cannotEdit' multiple
@@ -199,12 +199,12 @@
                  formControlName="languages_known">
                 </ng-container>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <br *ngIf="!cannotEdit">
         <hr *ngIf="!cannotEdit" class="p-b-10px">
-        <br *ngIf="!cannotEdit"> -->
+        <br *ngIf="!cannotEdit">
 
         <!-- //////Location//////// -->
         <!-- <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Location</label> -->
@@ -301,9 +301,12 @@
               <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
                 <div *ngIf="f.addressline1.errors.required">Address line 1 is required</div>
                 <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be
-                  minimum of
+                  <!-- minimum of
                   {{f.addressline1.errors.minlength.requiredLength}} -
-                  {{f.addressline1.errors.maxlength.requiredLength}} characters long</div>
+                  {{f.addressline1.errors.maxlength.requiredLength}} characters long</div> -->
+
+                  1 -
+                  100 characters long</div>
               </div>
             </div>
           </div>
@@ -314,10 +317,12 @@
               <div *ngIf="f.addressline2.touched && f.addressline2.errors" class="mand">
                 <div *ngIf="f.addressline2.errors.required">Address line 2 is required</div>
                 <div *ngIf="f.addressline2.errors.minlength || f.addressline2.errors.maxlength">Address line 2 must be
-                  minimum of
+                  <!-- minimum of
                   {{f.addressline2.errors.minlength.requiredLength}} -
                   {{f.addressline2.errors.minlength.requiredLength}}
-                  characters long</div>
+                  characters long</div> -->
+                  1 -
+                  100 characters long</div>
               </div>
             </div>
           </div>
@@ -345,8 +350,8 @@
           </div>
           <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-12 p-b-10px">
             <div class="form-group width_100">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" placeholder="State"
-                formControlName="state" name="state" (selectionChange)="getDistrict()">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
+                placeholder="State" formControlName="state" name="state" (selectionChange)="getDistrict()">
                 <mat-option [value]="state._id" *ngFor="let state of stateValue">
                   {{state.statename}}
                 </mat-option>
@@ -367,7 +372,16 @@
 
         <br>
         <hr class="p-b-10px">
-        <br class="f_size_19">
+        <br>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
+          <label class="containerRad">
+            <input type="checkbox" formControlName="throughTPO">
+            <span class="checkmark"></span>Through TPO
+          </label>
+        </div>
+
+        <br>
 
         <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
         <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
@@ -378,7 +392,8 @@
           </div>
           <div *ngIf="f.neft.touched && f.neft.errors" class="width_100 mand">
             <div *ngIf="f.neft.errors.required">Transaction number is required</div>
-            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits long</div>
+            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits
+              long</div>
             <div *ngIf="f.neft.errors.pattern">Transaction number must be only numbers</div>
             <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
               {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->

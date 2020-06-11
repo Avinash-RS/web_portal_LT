@@ -106,6 +106,7 @@ export class ProfileComponent implements OnInit {
   lowercase: boolean;
   uppercase: boolean;
   number: boolean;
+  checkdedTPO = false;
   spicalcharacter: boolean;
   selectfile: File;
   showotp: boolean;
@@ -158,10 +159,9 @@ export class ProfileComponent implements OnInit {
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
-      Validators.minLength(16), Validators.maxLength(22)
-      ]),
+      neft: new FormControl(''),
       iAgree: new FormControl(true, []),
+      throughTPO: new FormControl(false, []),
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
       qualification: this.formBuilder.array([this.createQualItem()]),
@@ -278,19 +278,19 @@ export class ProfileComponent implements OnInit {
       this.profileForm.value.gender = 'O';
       this.profileForm.value.is_student_or_professional = 'student';
 
-      // console.log('jsonData', this.profileForm.value);
+      console.log('jsonData', this.profileForm.value);
 
-      this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-        if (data.data.update_profile.success === 'true') {
-          this.loader.hide();
-          this.currentUser.is_profile_updated = true;
-          localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-          // this.alert.openAlert(data.data.update_profile.message, null);
-          this.router.navigate(['/Learner/Thankyou']);
-        } else {
-          this.alert.openAlert(data.data.update_profile.message, null);
-        }
-      });
+      // this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+      //   if (data.data.update_profile.success === 'true') {
+      //     this.loader.hide();
+      //     this.currentUser.is_profile_updated = true;
+      //     localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+      //     // this.alert.openAlert(data.data.update_profile.message, null);
+      //     this.router.navigate(['/Learner/Thankyou']);
+      //   } else {
+      //     this.alert.openAlert(data.data.update_profile.message, null);
+      //   }
+      // });
     } else {
       this.alert.openAlert('Please fill all qualification details', null);
     }
@@ -700,5 +700,24 @@ export class ProfileComponent implements OnInit {
         this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
       }
     }
+  }
+
+  radiobuttonchange(e) {
+    this.checkdedTPO = !this.checkdedTPO;
+
+    const neft = this.profileForm.get('neft');
+    this.profileForm.get('throughTPO').valueChanges
+      .subscribe((val: any) => {
+        if (val === true) {
+          neft.setValidators([Validators.required, Validators.pattern(/^[0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22)
+          ]);
+        } else {
+          neft.setValidators([Validators.pattern(/^[0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22)
+          ]);
+        }
+      });
+      console.log(e, this.checkdedTPO, this.profileForm);
   }
 }

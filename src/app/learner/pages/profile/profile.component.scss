@@ -46,9 +46,11 @@
   .lap_95 {
     width: 100%;
   }
+
   .lap_s95 {
     width: 100% !important;
   }
+
   .bb-icon {
     border-bottom: 0px !important;
   }
@@ -67,9 +69,11 @@
   .lap_95 {
     width: 100%;
   }
+
   .lap_s95 {
     width: 100% !important;
   }
+
   .lapview {
     display: none;
   }
@@ -84,9 +88,11 @@
   .lap_95 {
     width: 100%;
   }
+
   .lap_s95 {
     width: 100% !important;
   }
+
   .lapview {
     display: none;
   }
@@ -144,9 +150,11 @@
   .lap_95 {
     width: 95% !important;
   }
+
   .lap_s95 {
     width: 95% !important;
   }
+
   .lapview {
     display: block;
   }
@@ -194,19 +202,105 @@
   }
 }
 
+.throughTPO {
+  /deep/ .mat-checkbox-frame {
+    border-radius: 100px !important;
+  }
 
+  /deep/ &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+    border-radius: 100px !important;
+  }
+
+  /deep/ .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+    border-radius: 100px !important;
+  }
+}
+
+// .containerRad {
+//   display: block;
+//   position: relative;
+//   padding-left: 35px;
+//   margin-bottom: 12px;
+//   cursor: pointer;
+//   font-size: 22px;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+// }
+
+// .containerRad input {
+//   position: absolute;
+//   opacity: 0;
+//   cursor: pointer;
+//   height: 0;
+//   width: 0;
+// }
+
+// /* Create a custom checkbox */
+// .checkmark {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 25px;
+//   width: 25px;
+//   border: 2px solid grey;
+//   border-radius: 50px;
+//   background-color: white;
+// }
+
+// /* On mouse-over, add a grey background color */
+// .containerRad:hover input~.checkmark {
+//   background-color: rgb(240, 239, 239);
+// }
+
+// /* When the checkbox is checked, add a blue background */
+// .containerRad input:checked~.checkmark {
+//   background-color: $color-blue;
+//   // left: 6px;
+//   // top: 5px;
+//   border-radius: 60px;
+//   border: 2px solid grey;
+//   // border-width: 5px 5px 5px 5px !important;
+// }
+
+// /* Create the checkmark/indicator (hidden when not checked) */
+// .containerRad:after {
+//   content: "";
+//   position: absolute;
+//   display: none;
+// }
+
+// /* Show the checkmark when checked */
+// .containerRad input:checked~.checkmark:after {
+//   display: block;
+// }
+
+// .containerRad .checkmark:after {
+//   // left: 6px;
+//   // top: 5px;
+//   // border-radius: 60px;
+//   // border: solid white;
+//   // border-width: 5px 5px 5px 5px !important;
+// }
 
 
 @media screen and (min-width:992px) {
   .lap_95 {
     width: 95% !important;
   }
+
   .lap_s95 {
     width: 95% !important;
   }
+
   .lapview {
     display: block;
   }
+
   .details-row {
     margin-top: 7% !important;
     width: 100%;
@@ -232,6 +326,7 @@
     .lap_95 {
       width: 95% !important;
     }
+
     .lap_s95 {
       width: 95% !important;
     }
@@ -241,6 +336,7 @@
   .fourth {
     margin-top: 25% !important;
   }
+
   .lapview {
     display: block;
   }
@@ -258,9 +354,11 @@
   .fourth {
     margin-top: 15% !important;
   }
+
   .lapview {
     display: block;
   }
+
   .details-row {
     margin-top: 0% !important;
     width: 100%;
