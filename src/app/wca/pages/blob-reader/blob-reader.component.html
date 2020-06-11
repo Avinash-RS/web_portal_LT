@@ -1,8 +1,10 @@
-<button class="btn_Icon" style="float: right;" (click)="closeModel()">Close
+<button class="btn_Icon topClose_btn" (click)="closeModel()">
+  <mat-icon class="closeIcon">close</mat-icon>
 </button>
 <br>
 <section>
   <nav>
+    <mat-chip>Quick Access</mat-chip>
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
         <button mat-icon-button disabled></button>
@@ -26,16 +28,19 @@
     </mat-tree>
   </nav>
 
-  <article>    
+  <article>
     <mat-grid-list cols="4" rowHeight="2:2">
       <div *ngFor="let element of exploredData">
         <mat-grid-tile>
-          <mat-card-content>
+          <mat-card-content style="margin-bottom:unset !important;">
             <label>Name: {{element.name}}</label><br>
             <label>Size: {{element.size}}</label><br>
             <mat-icon>insert_drive_file</mat-icon><br>
-            <button class="btn_Icon" (click)="getURL(element)">Generate URL</button>&nbsp;
-            <button class="btn_Icon" (click)="preview(element)">Preview</button>
+            <button class="btn_Icon" (click)="getURL(element)">
+              <span *ngIf='!isPreview'>Upload</span>
+              <span *ngIf='isPreview'>Generate URL</span>
+            </button>&nbsp;
+            <button *ngIf='isPreview' class="btn_Icon" (click)="preview(element)">Preview</button>
           </mat-card-content>
         </mat-grid-tile>
       </div>
