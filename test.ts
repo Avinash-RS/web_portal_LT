@@ -36,7 +36,7 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/learnerprofile', true, /learnerprofile.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/report-management', true, /report-management.component\.spec\.ts$/);
 const context = require.context('./app/admin/pages/reports', true, /reports.component\.spec\.ts$/);
-
+// const context = require.context('./app/admin/pages/auditlog', true, /auditlog.component\.spec\.ts$/);
 
 
 

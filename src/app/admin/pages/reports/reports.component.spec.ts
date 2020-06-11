@@ -41,15 +41,15 @@ describe('ReportsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('downloaddoc', () => {
-    // expect(component).toBeTruthy();
-const event = {
-  url:"abc"
-}
+//   it('downloaddoc', () => {
+//     // expect(component).toBeTruthy();
+// const event = {
+//   url:"abc"
+// }
 
-component.downloadDoc(event);
-// expect(component.location.href)
-expect(component.window.location.href).toContain(event.url)
+// component.downloadDoc(event);
+// // expect(component.location.href)
+// expect(component.window.location.href).toContain(event.url)
 
-  });
+//   });
 });
