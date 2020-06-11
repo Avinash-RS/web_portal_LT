@@ -186,7 +186,7 @@ label {
     align-items: center;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    background: url('../../../../assets/learner/bg-6.jpg');
+    // background: url('../../../../assets/learner/login-bg.jpg');
 }
 
 :host ::ng-deep.lxplogo {
@@ -210,7 +210,7 @@ label {
 
 :host ::ng-deep.lnt_logo {
     position: absolute;
-    width: 10%;
+    width: 15%;
     margin-top: 21px;
     margin-left: 108px;
 }
