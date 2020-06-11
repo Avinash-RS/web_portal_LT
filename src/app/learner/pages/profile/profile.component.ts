@@ -138,7 +138,7 @@ export class ProfileComponent implements OnInit {
   editpopup = true;
   resendLabel = false;
   duplicateValueCheck = [];
-
+  selectedinstitute = false;
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -176,6 +176,7 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl('')
       })
     });
+    
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
@@ -677,7 +678,12 @@ export class ProfileComponent implements OnInit {
     this.duplicateValueCheck[index] = value;
     this.checkFunction();
   }
-
+  // checkinstitute(event , value) {
+  //   if (event.source.selected) {
+  //     this.selectedinstitute = value;
+  //   }
+  //   console.log(this.selectedinstitute);
+  // }
   checkFunction() {
     this.levelValue.forEach((type) => {
       if (type.level_code === '10' || type.level_code === '12') {
