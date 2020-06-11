@@ -662,13 +662,17 @@ h1 {
     width: 250px;
   }
 }
-.add-module-container {
+.create-course {
+  .mat-expansion-panel-body {
+    background: #e5e3e3;
+ }
+}
 .mat-progress-spinner {
   position: absolute !important;
   top: 50% !important;
   left: 45% !important;
+  z-index: 999;
   }
-}
 
 
 

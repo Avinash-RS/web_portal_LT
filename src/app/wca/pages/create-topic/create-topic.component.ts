@@ -19,7 +19,7 @@ declare var $: any;
   styleUrls: ['./create-topic.component.scss']
 })
 export class CreateTopicComponent implements OnInit, OnDestroy {
-
+  
   isReload = true;
   queryData: any;
   courseArray = [];
@@ -115,13 +115,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     nav: true
   };
 
-  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    } else {
-      this.isReload = true;
-    }
-  }
+  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   } else {
+  //     this.isReload = true;
+  //   }
+  // }
 
   courseform(): FormGroup {
     return this.formBuilder.group({
@@ -612,7 +612,8 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
           let valueFile = {
             "code": "en",
             "name": "English",
-            "file": path2
+            "file": path2,
+            "vttfile" : path2.replace(/.*?-/, "")
           }
           if (!formdata.get('topicimages').get(String(0))) {
             (formdata.get('topicimages') as FormArray).push(this.topicImages());
@@ -658,6 +659,7 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
       this.toast.warning("Topic name cannot be same for templates");
       return false;
     }
+
     this.submitted = true;
     this.markFormGroupTouched(this.courseForm);
     if (this.query.edit || this.query.addModule) {
@@ -685,6 +687,16 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     //   return
     // })
     // this.validateform(this.courseForm);
+    let invalid = document.getElementsByClassName('ng-invalid')
+    if(invalid){
+       Array.from(invalid).forEach((data)=>{
+        console.log(data.classList)
+        var classList = data.classList
+        if(classList.contains("timeInput")){  
+          this.toast.warning('Time required');
+        }
+      })
+    }
     if (this.courseForm.valid) {
       const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';

@@ -114,8 +114,6 @@ export class AddModuleComponent implements OnInit {
         this.updateModList();
         this.updateCourseDetails();
       }
-    }, err => {
-      this.spinner = false;
     });
   }
 

@@ -9,7 +9,7 @@
         <h1 style="text-align: center;"> Sign In </h1> <br>
         <mat-card-content>
           <div class="form-group">
-            <label>User Name</label><span style="color: red;"> *</span>
+            <label>User Name</label><span style="color: red;"></span>
             <input type="text" name="username" formControlName="username" class="form-control"
               [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
             <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="form-group" appCapslock (capsLock)="capsOn=$event">
-            <label>Password</label><span style="color: red;"> *</span>
+            <label>Password</label><span style="color: red;"> </span>
             <div *ngIf="capsOn">Caps Lock is On !</div>
             <input [type]="show ? 'text' : 'password'" name="password" formControlName="password" onCopy="return false"
               onDrag="return false" onDrop="return false" onPaste="return false" class="form-control"
