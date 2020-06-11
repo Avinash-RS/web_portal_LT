@@ -66,10 +66,8 @@ a {
 
 .alert1 {
     color: $label;
-    // margin-left: -19px;
     font-size: 11px;
-    // text-align: center;
-    // margin-left: 75px !important;
+    text-align: center;
     font-weight: 600;
     margin-bottom: 26px;
 }
@@ -107,17 +105,6 @@ a {
 
 :host ::ng-deep.p-t-77 {
     padding-top: 21px !important;
-}
-
-:host ::ng-deep .wrap-reg {
-    width: 90%;
-    padding-left: 40px;
-    padding-right: 30px;
-    height: 100vh;
-    border-radius: 0px !important;
-    margin-left: 12% !important;
-    overflow: hidden !important;
-
 }
 
 :host ::ng-deep.pg {
@@ -190,15 +177,31 @@ a {
     margin-bottom: .1em !important;
 }
 
+:host ::ng-deep .wrap-reg {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 30px;
+    height: 100vh;
+    border-radius: 0px !important;
+    margin-left: 0% !important;
+    overflow: hidden !important;
+
+}
+
 :host ::ng-deep.footericon{
-    width: 55%;
+    width: 67%;
     position: absolute;
-    margin-top: 4px;
-    margin-left: 2px;
+    margin-left: 5px;
 
 }
 :host ::ng-deep.footertext{
-    font-size: 11px;
+    font-size: 13px;
+    margin-left: -18px;
+}
+
+:host ::ng-deep .powered{
+    font-size: 14px;
+     margin-left: -29px;
 }
 :host ::ng-deep.footer{
     margin-top: 20%;

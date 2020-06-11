@@ -765,6 +765,13 @@ hr {
   border-radius: 0 !important;
 }
 
+
+:host ::ng-deep.footericon{
+  width: 9%;
+  position: absolute;
+  margin-left: 5px;
+
+}
 // html {
 //   overflow: scroll;
 //   overflow-x: hidden !important;

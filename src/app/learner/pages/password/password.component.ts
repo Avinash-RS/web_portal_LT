@@ -39,7 +39,7 @@ export class PasswordComponent implements OnInit {
     this.systemip = localStorage.getItem('Systemip')
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.usernameVal),
+      username: new FormControl('', myGlobals.usernamesplVal),
       password: new FormControl('', myGlobals.passwordVal),
       confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
     }, {
