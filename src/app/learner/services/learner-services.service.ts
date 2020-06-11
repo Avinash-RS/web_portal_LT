@@ -311,6 +311,7 @@ export class LearnerServicesService {
   }
 
   update_profile(userData) {
+    console.log(userData);
     return this.Apollo.query({
       query: update_profile,
       variables: userData
