@@ -539,8 +539,11 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
       }
     }
 
-    else if (item.name == 'Video') {
+    else if (item.name == 'Video' && subTitleindex === "") {
       this.formVideo(formdata, "2", textvalue, subTitleindex)
+    }
+    else{
+      this.formVideo(formdata,"3",textvalue,subTitleindex)
     }
 
 
@@ -586,7 +589,7 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
   }
 
   formVideo(formdata, triggerFun, textvalue, subTitleindex) {
-    if (textvalue) {
+    if (textvalue && triggerFun != '3') {
       formdata.get('topicvalue').setValue(textvalue);
     }
     if (triggerFun == "2") {
@@ -602,36 +605,27 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
       }
 
     } else {
-      const formData4 = new FormData();
-      formData4.append('excel', this.imageView);
-      this.spinner.show();
-      this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data: any) => {
-        if (data && data.Message == "Success") {
-          // this.clearFormArray(formdata.get("topicimages") as FormArray)
-          let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+      
           let valueFile = {
             "code": "en",
             "name": "English",
-            "file": path2,
-            "vttfile" : path2.replace(/.*?-/, "")
+            "file": textvalue.url,
+            "vttfile" : textvalue.name
           }
           if (!formdata.get('topicimages').get(String(0))) {
             (formdata.get('topicimages') as FormArray).push(this.topicImages());
           }
-          var vidObj = {
-            "file": textvalue,
+          var vidObj1 = {
+            "file": '',
             "title": ["1"]
           }
           if (formdata.value.topicimages.length == 0) {
-            formdata.get('topicimages').get(String(0)).setValue(vidObj);
+            formdata.get('topicimages').get(String(0)).setValue(vidObj1);
           }
           formdata.get('topictype').setValue("Video");
           formdata.value.topicimages[0].title[subTitleindex] = valueFile
           // this.vidObj.title.push(valueFile) 
-          this.spinner.hide();
           this.toast.success('File uploaded sucessfully');
-        }
-      })
     }
 
   }
@@ -905,7 +899,7 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  getBlobVttFiles() {
+  getBlobVttFiles(fileInput, item, formdata, index,value, subTitleindex ) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
       data: { type: 'subtitles' },
       height: '70%',
@@ -916,6 +910,9 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       console.log(res);
+      if(res){
+        this.onSelectFile(fileInput, item, formdata, index, res,subTitleindex)
+      }
     });
   }
 

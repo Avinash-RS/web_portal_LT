@@ -268,11 +268,14 @@
                                                                                         [id]="'fileInput4'+i"
                                                                                         type='file' #fileInput4
                                                                                         (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)"> -->
-                                                                                        <!-- (click)="fileInput4.click()" -->
-                                                                                    <button (click)='getBlobVttFiles()'
+                                                                                    <button (click)="getBlobVttFiles($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)"
                                                                                         class="subButton"
                                                                                         type="button">Choose
                                                                                         file</button>
+                                                                                        <!-- <button (click)="fileInput4.click()"
+                                                                                        class="subButton"
+                                                                                        type="button">Choose
+                                                                                        file</button> -->
                                                                                 </div>
                                                                                 <div class="addSub">
                                                                                     <mat-icon *ngIf="subTitleindex == 0"
