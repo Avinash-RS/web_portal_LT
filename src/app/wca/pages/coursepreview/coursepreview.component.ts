@@ -13,9 +13,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './coursepreview.component.html',
   styleUrls: ['./coursepreview.component.scss']
 })
-export class CoursepreviewComponent implements OnInit {
-  @Input('editModulesback')editModulesback: Boolean;
-  
+export class CoursepreviewComponent implements OnInit {  
   public isCollapsed = false;
   clicked: any = 'media';
   urlSafe: SafeResourceUrl;
@@ -45,6 +43,7 @@ export class CoursepreviewComponent implements OnInit {
   countofdoc: any;
   authorinfo: any;
   url:any;
+  
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
     private loader: NgxSpinnerService, ) {
@@ -65,7 +64,6 @@ export class CoursepreviewComponent implements OnInit {
 
     this.loader.show();
     this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid).subscribe((viewCourse: any) => {
-      console.log(viewCourse.data.viewcourse, 'viewCourse')
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
@@ -94,8 +92,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.editModulesback = false;
-    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id}});
+    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id,editModulesback: false}});
   }
   clickedT(i) {
     this.clicked = i
