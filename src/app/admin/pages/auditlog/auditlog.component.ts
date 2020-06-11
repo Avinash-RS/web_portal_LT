@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { AdminServicesService } from '@admin/services/admin-services.service';
 import Swal from 'sweetalert2';
 import { LocationStrategy } from '@angular/common';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-auditlog',
@@ -33,6 +34,7 @@ export class AuditlogComponent implements OnInit {
   exportdata = 'exportall';
   filteredreports: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(private dialog: MatDialog, private adminservice: AdminServicesService, private locationStrategy: LocationStrategy) {
   }
   ngOnInit() {
@@ -76,6 +78,25 @@ export class AuditlogComponent implements OnInit {
     // }]
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data?.module_name?.toLowerCase().includes(filter) || data?.admin_username?.toLowerCase().includes(filter);
+    };
+
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+      if (!data[sortHeaderId]) {
+        return this.sort.direction === 'asc' ? '3' : '1';
+      }
+      return '2' + data[sortHeaderId].toLocaleLowerCase();
+    };
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as unknown as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   getallauditreports(pgnumber) {
     this.resultsLength = null;
     this.adminservice.getauditlogreports(pgnumber).subscribe((result: any) => {
@@ -93,6 +114,7 @@ export class AuditlogComponent implements OnInit {
         Array.prototype.push.apply(this.reports, result.message);
         this.dataSource.data = this.reports;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.resultsLength = result?.total_count;
       }
     });
@@ -133,6 +155,7 @@ export class AuditlogComponent implements OnInit {
           Array.prototype.push.apply(this.filteredreports, result.message);
           this.dataSource.data = this.filteredreports;
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           this.resultsLength = result.total_count;
         } else {
 

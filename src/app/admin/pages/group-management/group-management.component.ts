@@ -321,7 +321,7 @@ flattree(items) {
             this.alert.openAlert('Success !', this.currentpath?.group_id ?
             'Sub group created successfully' : 'Group created successfully' );
             this.reset();
-            form.resetform();
+            form.resetForm();
             this.getgroups();
           } else {
             this.alert.openAlert(result.data.createusergroup.error_msg, null);
@@ -361,6 +361,7 @@ flattree(items) {
           if (result1.data.groupstatus.success === true) {
             this.toggleevent = '';
             this.reset();
+            groupform.resetForm();
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(

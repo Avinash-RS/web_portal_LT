@@ -40,10 +40,10 @@
   }
 }
 
-// mat-header-cell {
-//   font-size: 14px;
-//   color: $color-blank;
-// }
+mat-header-cell {
+  font-size: 14px;
+  color: $color-blank;
+}
 
 .avatar {
   width: 25%;
@@ -88,6 +88,7 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
 
 .mat-column-course_name {
   word-wrap: break-word !important;
