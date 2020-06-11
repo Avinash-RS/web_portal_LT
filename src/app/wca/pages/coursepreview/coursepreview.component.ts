@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,6 +14,8 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./coursepreview.component.scss']
 })
 export class CoursepreviewComponent implements OnInit {
+  @Input('editModulesback')editModulesback: Boolean;
+  
   public isCollapsed = false;
   clicked: any = 'media';
   urlSafe: SafeResourceUrl;
@@ -92,6 +94,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
+    this.editModulesback = false;
     this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id}});
   }
   clickedT(i) {
