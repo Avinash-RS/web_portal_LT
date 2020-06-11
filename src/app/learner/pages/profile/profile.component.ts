@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit {
       gender: new FormControl(''),
       is_student_or_professional: new FormControl(''),
       languages_known: [''],
-      addressline1: ['', myGlobals.req],
+      addressline1: ['', myGlobals.textVal],
       addressline2: [''],
       pincode: ['', myGlobals.pincode],
       country: ['', myGlobals.req],
@@ -222,7 +222,7 @@ export class ProfileComponent implements OnInit {
       });
 
   }
- 
+
   // edit(){
   //   this.cannotEdit = false;
   // }
@@ -279,8 +279,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     // changed for Koushalys - 10th june
-    if (this.profileForm.value.qualification[0].board_university !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
-      this.profileForm.value.qualification[0].discipline !== '' && this.profileForm.value.qualification[0].institute !== '' &&
+    if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
       if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
         this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft !== ''
@@ -371,9 +370,9 @@ export class ProfileComponent implements OnInit {
     return this.formBuilder.group({
       qualification: ['', myGlobals.req],
       institute: ['', myGlobals.req],
-      board_university: ['', myGlobals.req],
-      discipline: ['', myGlobals.req],
-      specification: ['', myGlobals.req],
+      board_university: ['',],
+      discipline: ['',],
+      specification: ['',],
       year_of_passing: ['', myGlobals.req],
       percentage: ['', new FormControl('', [Validators.required, Validators.pattern(/^[1-9.]$/),
       Validators.minLength(1), Validators.maxLength(5)])]
@@ -392,25 +391,26 @@ export class ProfileComponent implements OnInit {
     // } else {
     //   this.alert.openAlert('Please fill all details', null);
     // }
-
-    if (this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2' ||
-      this.profileForm.value.qualification[i].qualification === '5e7deddfdba4466d9704b44a') {
-      if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
-        this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
-        this.qualification.push(this.createQualItem());
+    if (this.profileForm.value.qualification[i].qualification !== '5e7deddfdba4466d9704b44a') {
+      if (this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2') {
+        if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+          this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+          this.qualification.push(this.createQualItem());
+        } else {
+          this.alert.openAlert('Please fill all details', null);
+        }
       } else {
-        this.alert.openAlert('Please fill all details', null);
+        if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+          this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
+          && this.profileForm.value.qualification[i].discipline !== '') {
+          this.qualification.push(this.createQualItem());
+        } else {
+          this.alert.openAlert('Please fill all details', null);
+        }
       }
     } else {
-      if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
-        this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
-        && this.profileForm.value.qualification[i].discipline !== '') {
-        this.qualification.push(this.createQualItem());
-      } else {
-        this.alert.openAlert('Please fill all details', null);
-      }
+      this.qualification.push(this.createQualItem());
     }
-
   }
 
   // addQualification() {
@@ -724,10 +724,10 @@ export class ProfileComponent implements OnInit {
   // }
   checkFunction() {
     this.levelValue.forEach((type) => {
-      if (type.level_code === '10' || type.level_code === '12') {
-        const selected = this.duplicateValueCheck.includes(type._id);
-        if (selected) { type.allowed = 'N'; } else { type.allowed = 'Y'; }
-      }
+      // if (type.level_code === '10' || type.level_code === '12') {
+      //   const selected = this.duplicateValueCheck.includes(type._id);
+      //   if (selected) { type.allowed = 'N'; } else { type.allowed = 'Y'; }
+      // }
     });
   }
 
@@ -743,12 +743,21 @@ export class ProfileComponent implements OnInit {
     specification.updateValueAndValidity();
     this.getDiscipline(level._id);
     this.getBoardsUniv(level._id);
-    }
+  }
 
   formatPercentage(index) {
     const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
     if (val.includes('.')) {
-      // console.log(val, typeof val);
+      const ind = val.indexOf('.');
+
+      if (ind > 2) {
+        const val1 = val.replace('.', '');
+        if (val1.length > 2) {
+          const per = val1.slice(0, 2) + '.' + val1.slice(2, val1.length - 1);
+          // const per = parseFloat(val).toFixed(2);
+          this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+        }
+      }
     } else {
       if (val.length > 2) {
         const per = val.slice(0, 2) + '.' + val.slice(2, val.length - 1);
