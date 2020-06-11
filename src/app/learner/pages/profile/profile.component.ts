@@ -281,56 +281,89 @@ export class ProfileComponent implements OnInit {
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
-      if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
-        this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft !== ''
-        && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
-        this.profileForm.controls.progress.setValue(80);
-      }
-      if (this.profileForm.value.progress === 80 && this.profileForm.value.certificate.length > 0 &&
-        this.profileForm.value.certificate[0] !== '' && this.profileForm.value.social_media[0].link !== '') {
-        this.profileForm.controls.progress.setValue(90);
-      }
-      if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
-        this.profileForm.controls.progress.setValue(100);
-      }
+    // this.profileForm.value.qualification.forEach(element => {
+    //   if (element.qualification === '"5e7deddfdba4466d9704b44a"') {
+    //     if (element.board_university !== '' && element.institute !== '' && element.percentage !== '' &&
+    //       element.qualification !== '' && element.year_of_passing !== '') {
 
-      const ip = localStorage.getItem('Systemip');
-      this.profileForm.controls.created_by_ip.setValue(ip);
-      this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
+    //       }
+    //   }
+    // });
 
-      this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
-      this.profileForm.value.is_student_or_professional = 'student';
+    // const index = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dedc1dba4466d9704b3f2');
+    // const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '"5e7dee15dba4466d9704b4d2"');
+    // if (index === -1) {
+      // this.alert.openAlert('Please fill all 10th qualification details', null);
+    // } else {
+      // if (this.profileForm.value.qualification(index).board_university !== '' &&
+      //   this.profileForm.value.qualification(index).institute !== '' &&
+      //   this.profileForm.value.qualification(index).percentage !== '' &&
+      //   this.profileForm.value.qualification(index).year_of_passing !== '') {
 
-      console.log('jsonData', this.profileForm.value);
+      // if (index1 !== -1) {
+        // if (this.profileForm.value.qualification(index1).discipline !== '' &&
+        //   this.profileForm.value.qualification(index1).institute !== '' &&
+        //   this.profileForm.value.qualification(index1).percentage !== '' &&
+        //   this.profileForm.value.qualification(index1).year_of_passing !== '') {
 
-      this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-        if (data.data.update_profile.success === 'true') {
-          this.loader.hide();
-          this.currentUser.is_profile_updated = true;
-          localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-          // this.alert.openAlert(data.data.update_profile.message, null);
-          this.router.navigate(['/Learner/Thankyou']);
-        } else {
-          this.alert.openAlert(data.data.update_profile.message, null);
+
+        if (this.profileForm.value.addressline1 && this.profileForm.value.addressline2 &&
+          this.profileForm.value.country && this.profileForm.value.state && this.profileForm.value.neft !== ''
+          && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
+          this.profileForm.controls.progress.setValue(80);
         }
-      });
+        if (this.profileForm.value.progress === 80 && this.profileForm.value.certificate.length > 0 &&
+          this.profileForm.value.certificate[0] !== '' && this.profileForm.value.social_media[0].link !== '') {
+          this.profileForm.controls.progress.setValue(90);
+        }
+        if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+          this.profileForm.controls.progress.setValue(100);
+        }
+
+        const ip = localStorage.getItem('Systemip');
+        this.profileForm.controls.created_by_ip.setValue(ip);
+        this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
+
+        this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
+        this.profileForm.value.is_student_or_professional = 'student';
+
+        console.log('jsonData', this.profileForm.value);
+
+        this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+          if (data.data.update_profile.success === 'true') {
+            this.loader.hide();
+            this.currentUser.is_profile_updated = true;
+            localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+            // this.alert.openAlert(data.data.update_profile.message, null);
+            this.router.navigate(['/Learner/Thankyou']);
+          } else {
+            this.alert.openAlert(data.data.update_profile.message, null);
+          }
+        });
+        // } else {
+        //   this.alert.openAlert('Please fill all diplamo qualification details', null);
+        // }
+        // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
+        //   this.profileForm.value.country && this.profileForm.value.state
+        //   && this.profileForm.value.city_town) {
+        //   this.profileForm.controls.progress.setValue(60);
+        // }
+        // if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
+        //   && this.profileForm.value.social_media) {
+        //   this.profileForm.controls.progress.setValue(90);
+        // }
+        // if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+        //   this.profileForm.controls.progress.setValue(100);
+        // }
+
+    //   } else {
+    //     this.alert.openAlert('Please fill all diplamo qualification details', null);
+    //   }
+    // }
+    // }
     } else {
       this.alert.openAlert('Please fill all qualification details', null);
     }
-    // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
-    //   this.profileForm.value.country && this.profileForm.value.state
-    //   && this.profileForm.value.city_town) {
-    //   this.profileForm.controls.progress.setValue(60);
-    // }
-    // if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
-    //   && this.profileForm.value.social_media) {
-    //   this.profileForm.controls.progress.setValue(90);
-    // }
-    // if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
-    //   this.profileForm.controls.progress.setValue(100);
-    // }
-
-
   }
 
   yearOfpassing(index) {
@@ -344,7 +377,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert('Invalid year', null);
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators(
-          [Validators.required, Validators.minLength(4)]);
+          []);
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').updateValueAndValidity();
       }
     });
@@ -374,7 +407,7 @@ export class ProfileComponent implements OnInit {
       discipline: [''],
       specification: [''],
       year_of_passing: [''],
-      percentage: ['', new FormControl('', [ Validators.pattern(/^[1-9.]$/),
+      percentage: ['', new FormControl('', [Validators.pattern(/^[1-9.]$/),
       Validators.minLength(1), Validators.maxLength(5)])]
       // ,
       ,
