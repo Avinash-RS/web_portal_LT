@@ -19,8 +19,7 @@
       <div class="col-md-12 col-sm-12 col-12">
         <h1 class="head1">{{course?.course_name}}</h1>
         <button class="fillsmallbtn" (click)="editModules()">Edit modules</button>
-        <button class="fillsmallbtn" [class.disabled]="modulength == 0" [disabled]="modulength == 0"
-          (click)="previewcourse(previewDialog)">Preview course</button>
+        <button class="fillsmallbtn" (click)="previewcourse(previewDialog)">Preview course</button>
         <span *ngIf="isshowPublish">
           <button [class.disabled]="modulength == 0" class="fillsmallbtn disabled" [disabled]="modulength == 0"
             (click)="published()">Publish</button>
@@ -299,13 +298,13 @@
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close</mat-icon>
       </button>
-      <mat-dialog-content style="width: 80em;height: 800px; overflow:hidden;">
+      <!-- <mat-dialog-content style="width: 80em;height: 800px; overflow:hidden;"> -->
         <!-- <div id="content" class="overlay">
           <div class="overlay-content"> -->
-        <iframe style="width: 100%; height: 700px; border:none;" [src]="urlSafe"></iframe>
+        <iframe style="width: 100%; height: 100%; border:none; overflow:hidden !important;margin-top: -46px !important;" [src]="urlSafe"></iframe>
         <!-- </div>
       </div> -->
-        </mat-dialog-content>
+        <!-- </mat-dialog-content> -->
     </ng-template>
   </div>
 </div>
