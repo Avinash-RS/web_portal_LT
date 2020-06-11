@@ -11,6 +11,7 @@ export class AdminMockService {
         const admincourse = require('assets/mockdata/wca/admin-courses.json');
         return of(admincourse);
     }
+   
     getCourseInCatalogue(catalogue_id, pagenumberCourse  ): Observable<any> {
         const admincourse = require('assets/mockdata/wca/catalogue-management.json');
         return of(admincourse);

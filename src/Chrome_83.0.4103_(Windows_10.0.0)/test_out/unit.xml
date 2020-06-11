@@ -1,13 +1,27 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-11T07:07:27" id="0" hostname="DESKTOP-729A26A" tests="2" errors="0" failures="0" time="0.277">
+<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-11T12:32:25" id="0" hostname="DESKTOP-729A26A" tests="2" errors="1" failures="1" time="0.44">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"/>
   </properties>
-  <testcase name="TermsconditionsComponent should create" time="0.191" classname="Chrome_83_0_4103_(Windows_10_0_0).TermsconditionsComponent"/>
-  <testcase name="TermsconditionsComponent close()" time="0.086" classname="Chrome_83_0_4103_(Windows_10_0_0).TermsconditionsComponent"/>
+  <testcase name="ReportsComponent should create" time="0.44" classname="Chrome_83_0_4103_(Windows_10_0_0).ReportsComponent">
+    <failure type="">TypeError: Cannot read property '_id' of undefined
+    at ReportsComponent._id [as ngOnInit] (src/app/admin/pages/reports/reports.component.ts:18:48)
+    at checkAndUpdateDirectiveInline (node_modules/@angular/core/fesm5/core.js:22099:1)
+    at checkAndUpdateNodeInline (node_modules/@angular/core/fesm5/core.js:23363:1)
+    at checkAndUpdateNode (node_modules/@angular/core/fesm5/core.js:23325:1)
+    at debugCheckAndUpdateNode (node_modules/@angular/core/fesm5/core.js:23959:1)
+    at debugCheckDirectivesFn (node_modules/@angular/core/fesm5/core.js:23919:1)
+    at Object.eval [as updateDirectives] (ng:///DynamicTestModule/ReportsComponent_Host.ngfactory.js:9:5)
+    at Object.debugUpdateDirectives [as updateDirectives] (node_modules/@angular/core/fesm5/core.js:23911:1)
+    at checkAndUpdateView (node_modules/@angular/core/fesm5/core.js:23307:1)
+    at callWithDebugContext (node_modules/@angular/core/fesm5/core.js:24177:1)
+</failure>
+  </testcase>
   <system-out>
     <![CDATA[Chrome 83.0.4103 (Windows 10.0.0) ERROR
   DisconnectedClient disconnected from CONNECTED state (ping timeout)
+,Chrome 83.0.4103 (Windows 10.0.0) ERROR
+  Disconnected, because no message in 30000 ms.
 
 ]]>
   </system-out>
