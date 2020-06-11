@@ -46,7 +46,7 @@ export class ReferenceFileComponent implements OnInit {
   topicnamelist: any;
   count: any;
   courseId: any;
-  editModulesback: Boolean;
+  editModulesback: any;
 
   constructor(public service: WcaService, public route: Router, public router: ActivatedRoute, public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService, ) {
   }
