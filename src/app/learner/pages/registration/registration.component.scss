@@ -204,7 +204,9 @@ a {
      margin-left: -29px;
 }
 :host ::ng-deep.footer20{
-    margin-top: 20%;
+    position: absolute;
+    bottom: 20px;
+    width: 91%;
 }
 
 
