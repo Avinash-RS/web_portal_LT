@@ -20,14 +20,14 @@ declare var $: any;
 })
 export class CreateTopicComponent implements OnInit,OnDestroy  {
 
-  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    }
-    else {
-      this.isReload = true;
-    }
-  }
+  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   }
+  //   else {
+  //     this.isReload = true;
+  //   }
+  // }
   isReload = true;
   queryData: any;
   courseArray = [];
@@ -458,12 +458,12 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
             })
           } else if (item.name === 'Word') {
             const formData3 = new FormData();
-            formData3.append('reffile', this.imageView);
-            this.wcaService.excelUpload(formData3).subscribe((data: any) => {
-              if (data && data.success) {
+            formData3.append('pdf', this.imageView);
+            this.wcaService.excelPpt(formData3).subscribe((data: any) => {
+              if (data && data.Message == 'Success') {
                 this.clearFormArray(formdata.get("topicimages") as FormArray)
-                for (var m = 0; m < data.message.length; m++) {
-                  let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                for (var m = 0; m < data.Result.length; m++) {
+                  let path = data.Result[m];
                   let obj3 = {
                     name: '',
                     image: path,
@@ -611,7 +611,8 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
           let valueFile = {
             "code": "en",
             "name": "English",
-            "file": path2
+            "file": path2,
+            "vttfile" : path2.replace(/.*?-/, "")
           }
           if (!formdata.get('topicimages').get(String(0))) {
             (formdata.get('topicimages') as FormArray).push(this.topicImages());
