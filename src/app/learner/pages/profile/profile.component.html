@@ -304,7 +304,7 @@
                 (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
               </mat-icon>
               <mat-icon (click)="addQualification(in)"
-                *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
+                *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 3"
                 class="addIcon">add
               </mat-icon>
               <!-- <div *ngIf="f.qualification && f.qualification[in] && f.qualification[in].percentage && f.qualification[in].percentage.touched && f.qualification[in].percentage.errors" class="mand">
@@ -565,7 +565,7 @@
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" 
             (click)="updateProfile()">Save</button>
         </div>
         <br> <br>

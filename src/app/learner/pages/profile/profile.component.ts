@@ -368,13 +368,13 @@ export class ProfileComponent implements OnInit {
 
   createQualItem(): FormGroup {
     return this.formBuilder.group({
-      qualification: ['', myGlobals.req],
-      institute: ['', myGlobals.req],
-      board_university: ['',],
-      discipline: ['',],
-      specification: ['',],
-      year_of_passing: ['', myGlobals.req],
-      percentage: ['', new FormControl('', [Validators.required, Validators.pattern(/^[1-9.]$/),
+      qualification: [''],
+      institute: [''],
+      board_university: [''],
+      discipline: [''],
+      specification: [''],
+      year_of_passing: [''],
+      percentage: ['', new FormControl('', [ Validators.pattern(/^[1-9.]$/),
       Validators.minLength(1), Validators.maxLength(5)])]
       // ,
       ,
@@ -400,7 +400,7 @@ export class ProfileComponent implements OnInit {
           this.alert.openAlert('Please fill all details', null);
         }
       } else {
-        if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+        if (this.profileForm.value.qualification[i].institute !== '' &&
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
           && this.profileForm.value.qualification[i].discipline !== '') {
           this.qualification.push(this.createQualItem());
