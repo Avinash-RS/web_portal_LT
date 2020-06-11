@@ -6,13 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
-  MatDialogModule, MatTooltipModule, MatTableModule } from '@angular/material';
+  MatDialogModule, MatTooltipModule, MatTableModule, MatProgressSpinnerModule, MatTreeModule } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule } from 'apollo-angular';
 import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { BrowserModule } from '@angular/platform-browser';
 
 describe('CatagoryManagementComponent', () => {
   let component: CatagoryManagementComponent;
@@ -22,38 +24,43 @@ describe('CatagoryManagementComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CatagoryManagementComponent ],
       imports: [
-        NgxPaginationModule,
-        BrowserAnimationsModule,
+      //   NgxPaginationModule,
+      //   BrowserAnimationsModule,
+      BrowserModule,
         ReactiveFormsModule,
         FormsModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatInputModule,
-        MatToolbarModule,
+      //   MatButtonModule,
+      //   MatMenuModule,
+      //   MatInputModule,
+      //   MatToolbarModule,
         MatCheckboxModule,
-        MatFormFieldModule,
+      //   MatFormFieldModule,
         MatIconModule,
-        MatCardModule,
-        MatGridListModule,
+      //   MatCardModule,
+      //   MatGridListModule,
         MatSelectModule,
-        MatRadioModule,
+      //   MatRadioModule,
         MatDialogModule,
-        MatTooltipModule,
+      //   MatTooltipModule,
+      CdkTreeModule,
+      MatTreeModule,
         MatTableModule,
-        ToastrModule.forRoot({
-          timeOut: 5000,
-          positionClass: 'toast-bottom-center',
-          preventDuplicates: true,
-          closeButton: true,
-          progressBar: true,
-          maxOpened: 1,
-          autoDismiss: true,
-          enableHtml: true
-        }),
+        MatProgressSpinnerModule,
+      //   ToastrModule.forRoot({
+      //     timeOut: 5000,
+      //     positionClass: 'toast-bottom-center',
+      //     preventDuplicates: true,
+      //     closeButton: true,
+      //     progressBar: true,
+      //     maxOpened: 1,
+      //     autoDismiss: true,
+      //     enableHtml: true
+      //   }),
         HttpClientModule,
         ApolloModule,
         RouterModule.forRoot([]),
-        HttpLinkModule],
+      //   HttpLinkModule
+    ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
@@ -71,4 +78,13 @@ describe('CatagoryManagementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+//   it('courses', () => {
+//     // expect(component).toBeTruthy();
+// component.getNextCourse();
+// expect(component.pagenumber).toBe(component.pagenumber+1);
+
+//   });
+
+
 });
