@@ -182,9 +182,12 @@ export class LearnerServicesService {
       query: get_qualification_details,
     });
   }
-  get_board_university_details() {
+  get_board_university_details(id) {
     return this.Apollo.query({
       query: get_board_university_details,
+      variables: {
+    _id: id
+      }
     });
   }
 
@@ -208,9 +211,12 @@ export class LearnerServicesService {
       }
     });
   }
-  get_discipline_details() {
+  get_discipline_details(id) {
     return this.Apollo.query({
       query: get_discipline_details,
+      variables: {
+       _id : id
+      }
     });
   }
   get_specification_details() {

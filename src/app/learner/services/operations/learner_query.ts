@@ -82,8 +82,8 @@ export const get_qualification_details = gql`
 `;
 
 export const get_board_university_details = gql`
-query get_board_university_details{
-  get_board_university_details{
+query get_board_university_details ($_id :String!) {
+  get_board_university_details (_id : $_id) {
         message
 success
 data{
@@ -117,8 +117,8 @@ data{
 }`;
 
 export const get_discipline_details = gql`
-  query   get_discipline_details{
-    get_discipline_details{
+  query   get_discipline_details ($_id :String!) {
+    get_discipline_details(_id:$_id){
       message
       success
       data{

@@ -137,7 +137,7 @@ export class ProfileComponent implements OnInit {
   editpopup = true;
   resendLabel = false;
   duplicateValueCheck = [];
-  tpo:boolean =false;
+  selectedinstitute = false;
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -152,8 +152,8 @@ export class ProfileComponent implements OnInit {
       gender: new FormControl(''),
       is_student_or_professional: new FormControl(''),
       languages_known: [''],
-      addressline1: ['', myGlobals.address],
-      addressline2: ['', myGlobals.address],
+      addressline1: ['', myGlobals.req],
+      addressline2: [''],
       pincode: ['', myGlobals.pincode],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
@@ -175,6 +175,7 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl('')
       })
     });
+    
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
@@ -195,6 +196,23 @@ export class ProfileComponent implements OnInit {
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       });
+
+    const neft = this.profileForm.get('neft');
+    this.profileForm.get('throughTPO').valueChanges
+      .subscribe((val: any) => {
+        console.log(val);
+        if (val === true) {
+          neft.setValidators([Validators.pattern(/^[0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22)
+          ]);
+        } else {
+          neft.setValidators([Validators.required, Validators.pattern(/^[0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22)
+          ]);
+        }
+        neft.updateValueAndValidity();
+      });
+
   }
  
   // edit(){
@@ -274,22 +292,21 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
       this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
-      this.profileForm.value.gender = 'O';
       this.profileForm.value.is_student_or_professional = 'student';
 
       console.log('jsonData', this.profileForm.value);
 
-      // this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-      //   if (data.data.update_profile.success === 'true') {
-      //     this.loader.hide();
-      //     this.currentUser.is_profile_updated = true;
-      //     localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-      //     // this.alert.openAlert(data.data.update_profile.message, null);
-      //     this.router.navigate(['/Learner/Thankyou']);
-      //   } else {
-      //     this.alert.openAlert(data.data.update_profile.message, null);
-      //   }
-      // });
+      this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+        if (data.data.update_profile.success === 'true') {
+          this.loader.hide();
+          this.currentUser.is_profile_updated = true;
+          localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+          // this.alert.openAlert(data.data.update_profile.message, null);
+          this.router.navigate(['/Learner/Thankyou']);
+        } else {
+          this.alert.openAlert(data.data.update_profile.message, null);
+        }
+      });
     } else {
       this.alert.openAlert('Please fill all qualification details', null);
     }
@@ -350,7 +367,10 @@ export class ProfileComponent implements OnInit {
       discipline: ['', myGlobals.req],
       specification: ['', myGlobals.req],
       year_of_passing: ['', myGlobals.req],
-      percentage: ['', myGlobals.req]
+      percentage: ['', new FormControl('', [Validators.required, Validators.pattern(/^[1-9.]$/),
+      Validators.minLength(1), Validators.maxLength(5)])]
+      // ,
+      ,
     });
   }
 
@@ -429,7 +449,7 @@ export class ProfileComponent implements OnInit {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_board_university_details().subscribe((boards: any) => {
+    this.service.get_board_university_details(this.currentUser._id).subscribe((boards: any) => {
       this.boardValue = boards.data.get_board_university_details.data.board;
       this.uniValue = boards.data.get_board_university_details.data.university;
 
@@ -443,7 +463,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getDiscipline() {
-    this.service.get_discipline_details().subscribe((discipline: any) => {
+    console.log(this.currentUser);
+    this.service.get_discipline_details(this.currentUser._id).subscribe((discipline: any) => {
       this.disciplines = discipline.data.get_discipline_details.data;
     });
   }
@@ -617,9 +638,9 @@ export class ProfileComponent implements OnInit {
   onSelectFile(event) {
     this.selectfile = event.target.files[0] as File;
     if (this.selectfile && this.selectfile.type !== 'image/png' && this.selectfile.type !== 'image/jpeg') {
-      this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null);
-    } else if (this.selectfile && this.selectfile.size > 100000) {
-      this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null);
+      this.alert.openAlert('mage should be less than 5 MB and should be only Jpeg or png format', null);
+    } else if (this.selectfile && this.selectfile.size > 500000) {
+      this.alert.openAlert('image should be less than 5 MB and should be only Jpeg or png format', null);
     } else {
       if (this.selectfile) {
         const fb = new FormData();
@@ -655,11 +676,17 @@ export class ProfileComponent implements OnInit {
       this.spicalcharacter = false;
     }
   }
+
   changed(value, index) {
     this.duplicateValueCheck[index] = value;
     this.checkFunction();
   }
-
+  // checkinstitute(event , value) {
+  //   if (event.source.selected) {
+  //     this.selectedinstitute = value;
+  //   }
+  //   console.log(this.selectedinstitute);
+  // }
   checkFunction() {
     this.levelValue.forEach((type) => {
       if (type.level_code === '10' || type.level_code === '12') {
@@ -701,22 +728,20 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  radiobuttonchange(e) {
-    this.checkdedTPO = !this.checkdedTPO;
-
-    const neft = this.profileForm.get('neft');
-    this.profileForm.get('throughTPO').valueChanges
-      .subscribe((val: any) => {
-        if (val === true) {
-          neft.setValidators([Validators.required, Validators.pattern(/^[0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22)
-          ]);
-        } else {
-          neft.setValidators([Validators.pattern(/^[0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22)
-          ]);
-        }
-      });
-      console.log(e, this.checkdedTPO, this.profileForm);
-  }
+  // radiobuttonchange(e) {
+  //   const neft = this.profileForm.get('neft');
+  //   this.profileForm.get('throughTPO').valueChanges
+  //     .subscribe((val: any) => {
+  //       if (val === true) {
+  //         neft.setValidators([Validators.required, Validators.pattern(/^[0-9]*$/),
+  //         Validators.minLength(16), Validators.maxLength(22)
+  //         ]);
+  //       } else {
+  //         neft.setValidators([Validators.pattern(/^[0-9]*$/),
+  //         Validators.minLength(16), Validators.maxLength(22)
+  //         ]);
+  //       }
+  //     });
+  //   console.log(e, this.checkdedTPO, this.profileForm);
+  // }
 }
