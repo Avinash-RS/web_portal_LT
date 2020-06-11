@@ -1,6 +1,6 @@
 <div class="limiter">
-    <img alt="" class="lnt_logo" src="../../../../assets/learner/Edutech_White.svg"> 
-    <span class="pg"><span style="font-size: 12px;">Already have an account !</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Sign in</a></span>
+    <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
+    <!-- <span class="pg"><span style="font-size: 12px;">Already have an account !</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Sign in</a></span> -->
   <!-- <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms & conditions</span> -->
     
   <div class="row container-reg200">
@@ -11,13 +11,15 @@
             
   <!-- <div class="container-reg200"> -->
     <div class="wrap-reg ">
+        <img class="kauhalya" alt="" src='../../../../assets//learner/kauhalya.png'>
         <form  [formGroup]="registerForm">
-            <h1 class="head1">Edutech</h1>
-            <h1 class="signIn">Create an account </h1><br><br><br>
+            <div class="borderbox">
+            <!-- <h1 class="head1">Edutech</h1> -->
+            <h1 class="signIn">Create an account </h1><br><br>
             <div class="form-group">
                 <label class="fromLabel">Full Name</label>
                 <input type="text" id="fullname" #fullname formControlName="fullname"
-                    minlength="3" maxlength="64" class="form-control"
+                    minlength="3" maxlength="50" class="form-control"
                     [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
                 <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
                     <div *ngIf="f.fullname.errors.required">Full Name is required</div>
@@ -71,7 +73,19 @@
                             in</strong></a>
                 </div>
             </div>
+        </div>
         </form>
+        <div class="row footer">
+            <div class="col-7">
+                <span class="footertext">© 2020 Edutech.All rights reserved.</span>
+            </div>
+            <div class="col-5">
+                <span style="font-size: 11px;">Powered by : 
+                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+                </span>
+            </div>
+        </div>
+
     </div>
 <!-- </div> -->
     </div>

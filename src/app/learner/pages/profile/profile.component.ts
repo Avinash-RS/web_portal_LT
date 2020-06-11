@@ -159,7 +159,7 @@ export class ProfileComponent implements OnInit {
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
       neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
-      Validators.minLength(22), Validators.maxLength(22)
+      Validators.minLength(16), Validators.maxLength(22)
       ]),
       iAgree: new FormControl(true, []),
       progress: [],
@@ -263,8 +263,7 @@ export class ProfileComponent implements OnInit {
         this.profileForm.controls.progress.setValue(80);
       }
       if (this.profileForm.value.progress === 80 && this.profileForm.value.certificate.length > 0 &&
-        this.profileForm.value.certificate[0] !== ''
-        && this.profileForm.value.social_media[0].link !== '') {
+        this.profileForm.value.certificate[0] !== '' && this.profileForm.value.social_media[0].link !== '') {
         this.profileForm.controls.progress.setValue(90);
       }
       if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
@@ -286,7 +285,7 @@ export class ProfileComponent implements OnInit {
           this.loader.hide();
           this.currentUser.is_profile_updated = true;
           localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-          this.alert.openAlert(data.data.update_profile.message, null);
+          // this.alert.openAlert(data.data.update_profile.message, null);
           this.router.navigate(['/Learner/Thankyou']);
         } else {
           this.alert.openAlert(data.data.update_profile.message, null);

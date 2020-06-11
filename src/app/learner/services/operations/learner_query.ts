@@ -7,6 +7,7 @@ export const login = gql`
       error_msg
       message {
         _id
+        profile_img 
         email
         is_active
         username
@@ -14,7 +15,7 @@ export const login = gql`
         user_id
         is_blocked
         is_profile_updated
-        group_id                  
+        group_id 
         message      
       }
     }

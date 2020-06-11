@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('remember_me', 'true');
+              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               const ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);
               localStorage.setItem('login', 'true');
@@ -56,12 +57,13 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/profile']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             } else {
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
+              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');
@@ -73,7 +75,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/profile']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             }

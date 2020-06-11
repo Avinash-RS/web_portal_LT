@@ -70,7 +70,7 @@ mat-form-field {
     color: $color-blue;
     font-weight: 500;
     font-size: 12px;
-    margin-top: 30%;
+    margin-top: 8%;
 }
 
 .col {
@@ -93,8 +93,8 @@ mat-form-field {
     border-left: 222px solid $color-border;
     height: 1px;
     position: absolute;
-    margin-left: 54px;
-    margin-right: 54px;
+    margin-left: 59px;
+    margin-right: 59px;
     margin-top: 2px;
     border-radius: 17px;
 }
@@ -155,13 +155,13 @@ label {
     color: #d2d1d1;
 }
 
-:host ::ng-deep .wrap-reg {
-    width: 84%;
+ :host ::ng-deep .wrap-reg {
+    width: 90%;
     padding-left: 40px;
     padding-right: 30px;
     height: 100vh;
     border-radius: 0px !important;
-    margin-left: 16% !important;
+    margin-left: 12% !important;
     overflow: hidden !important;
 
 }
@@ -227,6 +227,19 @@ label {
 
 .reset {
     cursor: pointer;
+  }
+  :host ::ng-deep.footericon{
+    width: 55%;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 2px;
+
+}
+:host ::ng-deep.footertext{
+    font-size: 11px;
+}
+:host ::ng-deep.footer{
+    margin-top: 20%;
 }
 
 
@@ -287,8 +300,8 @@ label {
     }
 
     .head1 {
-        font-size: 36px;
-        margin-top: 12% !important;
+        // font-size: 36px !important;
+        // margin-top: 12%!important;
     }
 
     .form-group {

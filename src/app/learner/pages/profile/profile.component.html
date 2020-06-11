@@ -57,7 +57,7 @@
           <div class="profile-pic">
             <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
             </mat-icon>
-            <img [src]="profileForm.value.profile_img ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+            <img [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
               id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
               [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
             <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
@@ -378,8 +378,7 @@
           </div>
           <div *ngIf="f.neft.touched && f.neft.errors" class="width_100 mand">
             <div *ngIf="f.neft.errors.required">Transaction number is required</div>
-            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength  ">Transaction number must be between 16 and 
-              22 digits long</div>
+            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits long</div>
             <div *ngIf="f.neft.errors.pattern">Transaction number must be only numbers</div>
             <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
               {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
