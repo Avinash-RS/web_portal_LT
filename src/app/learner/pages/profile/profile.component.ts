@@ -202,7 +202,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((val: any) => {
         console.log(val);
         if (val === true) {
-          neft.setValidators([ Validators.pattern(/^[0-9]*$/),
+          neft.setValidators([Validators.pattern(/^[0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         } else {
@@ -367,7 +367,10 @@ export class ProfileComponent implements OnInit {
       discipline: ['', myGlobals.req],
       specification: ['', myGlobals.req],
       year_of_passing: ['', myGlobals.req],
-      percentage: ['', myGlobals.req]
+      percentage: ['', new FormControl('', [Validators.required, Validators.pattern(/^[1-9.]$/),
+      Validators.minLength(1), Validators.maxLength(5)])]
+      // ,
+      ,
     });
   }
 

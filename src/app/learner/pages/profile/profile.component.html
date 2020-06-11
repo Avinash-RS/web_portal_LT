@@ -283,6 +283,8 @@
                 *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
                 class="addIcon">add
               </mat-icon>
+              <!-- <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
+              </div> -->
             </div>
           </div>
         </div>
@@ -302,12 +304,12 @@
               <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
                 <div *ngIf="f.addressline1.errors.required">Address line 1 is required</div>
                 <!-- <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be -->
-                  <!-- minimum of
+                <!-- minimum of
                   {{f.addressline1.errors.minlength.requiredLength}} -
                   {{f.addressline1.errors.maxlength.requiredLength}} characters long</div> -->
 
-                  <!-- 1 - -->
-                  <!-- 100 characters long</div> -->
+                <!-- 1 - -->
+                <!-- 100 characters long</div> -->
               </div>
             </div>
           </div>
