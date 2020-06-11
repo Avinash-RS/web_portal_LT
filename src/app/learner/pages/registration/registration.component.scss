@@ -126,7 +126,7 @@ a {
     align-items: center;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    background: url('../../../../assets/learner/bg-6.jpg');
+    // background: url('../../../../assets/learner/bg-6.jpg');
 }
 
 :host ::ng-deep .lxplogo {
@@ -150,7 +150,7 @@ a {
 
 :host ::ng-deep.lnt_logo {
     position: absolute;
-    width: 10%;
+    width: 15%;
     margin-top: 21px;
     margin-left: 108px;
 }
@@ -203,7 +203,7 @@ a {
     font-size: 14px;
      margin-left: -29px;
 }
-:host ::ng-deep.footer{
+:host ::ng-deep.footer20{
     margin-top: 20%;
 }
 
@@ -225,6 +225,23 @@ a {
         flex-wrap: wrap;
         margin-right: 0px !important;
         margin-left: 0px !important;
+    }
+    .powered {
+        font-size: 10px;
+        margin-left: -19px;
+    }
+    .footericon {
+        width: 67%;
+        position: absolute;
+        margin-left: 5px;
+        margin-top: 4px;
+    }
+    .footertext {
+        font-size: 10px;
+        margin-left: -39px;
+    }
+     .footer20 {
+        margin-top: 28%;
     }
 }
 

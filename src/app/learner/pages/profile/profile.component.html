@@ -222,7 +222,7 @@
                   {{lv.level_name}}
                 </mat-option>
               </mat-select>&nbsp;&nbsp;&nbsp;
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2') ? 'n dis inputs' : 'inputs'"
                 placeholder="Board/University" formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
@@ -768,7 +768,7 @@
 <div class="footer">
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
 
-  <span class="center_align">@ 2020 EduTech. All rights reserved. &nbsp; &nbsp; | &nbsp; &nbsp;
+  <span class="center_align">@ 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
     <span class="powered">Powered by :
       <img class="footericon" alt="" src="assets/learner/LT_small.svg">
     </span>

@@ -45,7 +45,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('',myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),
-      username: new FormControl('', myGlobals.usernameVal),
+      username: new FormControl('', myGlobals.usernamesplVal),
     }, {
       
   });
