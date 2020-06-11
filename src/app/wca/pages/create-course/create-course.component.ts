@@ -527,9 +527,9 @@ export class CreateCourseComponent implements OnInit {
 
     loadBlobs() {
         const dialogRef = this.dialog.open(BlobReaderComponent, {
-            data: {},
+            data: { type: 'videos' },
             height: '70%',
-            width: '80%',
+            width: '90%',
             closeOnNavigation: true,
             disableClose: true,
         });
@@ -544,7 +544,6 @@ export class CreateCourseComponent implements OnInit {
         const courseName = this.courseForm.controls.course_name.value;
         if (courseName !== undefined || courseName !== null || courseName !== '') {
             this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
-                console.log(res);
                 if (!res.success) {
                     this.toast.warning(res.message);
                     this.courseForm.get('course_name').reset();
