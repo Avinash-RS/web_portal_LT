@@ -447,7 +447,7 @@ export class ProfileComponent implements OnInit {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_board_university_details().subscribe((boards: any) => {
+    this.service.get_board_university_details(this.currentUser._id).subscribe((boards: any) => {
       this.boardValue = boards.data.get_board_university_details.data.board;
       this.uniValue = boards.data.get_board_university_details.data.university;
 
@@ -461,7 +461,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getDiscipline() {
-    this.service.get_discipline_details().subscribe((discipline: any) => {
+    console.log(this.currentUser);
+    this.service.get_discipline_details(this.currentUser._id).subscribe((discipline: any) => {
       this.disciplines = discipline.data.get_discipline_details.data;
     });
   }
