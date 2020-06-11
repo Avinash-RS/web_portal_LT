@@ -3,6 +3,8 @@
     <li class="breadcrumb-item"><a href="/Admin/auth/dashboard">Home</a></li>
     <li *ngIf="detail?.type1" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrolment</a></li>
     <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
+    <li  *ngIf="detail?.type === 'publish'" class="breadcrumb-item active" aria-current="page">Published courses</li>
+    <li *ngIf="detail?.type === 'create'" class="breadcrumb-item active" aria-current="page">Created by me</li>
     <li class="breadcrumb-item active" aria-current="page">{{course?.course_name}}</li>
   </ol>
 </nav>
