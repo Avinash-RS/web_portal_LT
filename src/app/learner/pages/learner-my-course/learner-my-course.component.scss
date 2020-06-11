@@ -26,7 +26,7 @@ img {
     width: 275px !important;
 }
 
-.footer {
+:host ::ng-deep.footer {
     padding: 30px;
     font-size: inherit;
     left: 0;
