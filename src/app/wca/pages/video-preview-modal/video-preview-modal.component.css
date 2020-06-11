@@ -3,3 +3,19 @@
     color: #1565c0;
     border-color: #1565c0;
 }
+
+.closeIcon {
+    font-size: medium;
+    margin-top: 4px;
+    margin-left: -5px;
+    color: black;
+}
+
+.topClose_btn {
+    float: right;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border-color: black;
+}

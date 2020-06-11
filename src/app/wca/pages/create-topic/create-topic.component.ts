@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
@@ -19,16 +19,8 @@ declare var $: any;
   templateUrl: './create-topic.component.html',
   styleUrls: ['./create-topic.component.scss']
 })
-export class CreateTopicComponent implements OnInit,OnDestroy  {
-
-  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-  //   if (this.isReload) {
-  //     event.returnValue = false;
-  //   }
-  //   else {
-  //     this.isReload = true;
-  //   }
-  // }
+export class CreateTopicComponent implements OnInit, OnDestroy {
+  
   isReload = true;
   queryData: any;
   courseArray = [];
@@ -62,43 +54,43 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
     PDF: /(\.pdf)$/i,
     Word: /(\.doc|\.docx)$/i,
     PPT: /(\.ppt|\.pptx)$/i,
-    "Knowledge Check": /(\.csv)$/i,
+    'Knowledge Check': /(\.csv)$/i,
     SCORM: /(\.imsmanifest)$/i,
     Video: /(\.vtt)$/i
-  }
+  };
 
   fileValidations1 = {
-    Image: "(.jpg .jpeg .png) are Allowed !!!",
-    PDF: "(.pdf) are Allowed !!!",
-    Word: "(.doc .docx) are Allowed !!!",
-    PPT: "(.ppt .pptx) are Allowed !!!",
-    Video: "",
-    Audio: "are Allowed !!!",
-    SCORM: "SCROM are Allowed !!!",
-    "Knowledge Check": " (.csv) are Allowed !!!",
-    Feedback: ""
-  }
+    Image: '(.jpg .jpeg .png) are Allowed !!!',
+    PDF: '(.pdf) are Allowed !!!',
+    Word: '(.doc .docx) are Allowed !!!',
+    PPT: '(.ppt .pptx) are Allowed !!!',
+    Video: '',
+    Audio: 'are Allowed !!!',
+    SCORM: 'SCROM are Allowed !!!',
+    'Knowledge Chec': ' (.csv) are Allowed !!!',
+    Feedback: ''
+  };
 
-  feedBackFormHeading = ['Please take a moment to fill out the survey', '', '', '', '', '']
+  feedBackFormHeading = ['Please take a moment to fill out the survey', '', '', '', '', ''];
   feedBackForm = [{
-    'title': 'Content',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Content',
+    star: ['1', '2', '3', '4', '5']
   },
   {
-    'title': 'Relevance',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Relevance',
+    star: ['1', '2', '3', '4', '5']
   }, {
-    'title': 'Ease of understanding',
-    'star': ['1', '2', '3', '4', '5']
+    title: 'Ease of understanding',
+    star: ['1', '2', '3', '4', '5']
   }, {
-    'title': 'Duration',
-    'star': ['1', '2', '3', '4', '5']
-  }]
+    title: 'Duration',
+    star: ['1', '2', '3', '4', '5']
+  }];
 
   language = [{
-    "code": "en",
-    "name": "English"
-  }]
+    code: 'en',
+    name: 'English'
+  }];
   KnowledgeOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -122,7 +114,16 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
       }
     },
     nav: true
-  }
+  };
+
+  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   } else {
+  //     this.isReload = true;
+  //   }
+  // }
+
   courseform(): FormGroup {
     return this.formBuilder.group({
       coursename: [null, Validators.compose([Validators.required])],
@@ -220,7 +221,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
 
   }
 
-  ngOnDestroy() { 
+  ngOnDestroy() {
     $('#confirmModal').modal('hide');
     $('#knowlegeCheckModal').modal('hide');
     $('#feedbackModal').modal('hide');
@@ -482,7 +483,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
             }, err => {
               this.spinner.hide();
             })
-          } 
+          }
           else if (item.name === 'PDF') {
             const formData5 = new FormData();
             formData5.append('pdf', this.imageView);
@@ -539,8 +540,11 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
       }
     }
 
-    else if (item.name == 'Video') {
+    else if (item.name == 'Video' && subTitleindex === "") {
       this.formVideo(formdata, "2", textvalue, subTitleindex)
+    }
+    else{
+      this.formVideo(formdata,"3",textvalue,subTitleindex)
     }
 
 
@@ -586,7 +590,7 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
   }
 
   formVideo(formdata, triggerFun, textvalue, subTitleindex) {
-    if (textvalue) {
+    if (textvalue && triggerFun != '3') {
       formdata.get('topicvalue').setValue(textvalue);
     }
     if (triggerFun == "2") {
@@ -602,36 +606,27 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
       }
 
     } else {
-      const formData4 = new FormData();
-      formData4.append('excel', this.imageView);
-      this.spinner.show();
-      this.wcaService.uploadKnowledgeCheck(formData4).subscribe((data: any) => {
-        if (data && data.Message == "Success") {
-          // this.clearFormArray(formdata.get("topicimages") as FormArray)
-          let path2 = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+      
           let valueFile = {
             "code": "en",
             "name": "English",
-            "file": path2,
-            "vttfile" : path2.replace(/.*?-/, "")
+            "file": textvalue.url,
+            "vttfile" : textvalue.name
           }
           if (!formdata.get('topicimages').get(String(0))) {
             (formdata.get('topicimages') as FormArray).push(this.topicImages());
           }
-          var vidObj = {
-            "file": textvalue,
+          var vidObj1 = {
+            "file": '',
             "title": ["1"]
           }
           if (formdata.value.topicimages.length == 0) {
-            formdata.get('topicimages').get(String(0)).setValue(vidObj);
+            formdata.get('topicimages').get(String(0)).setValue(vidObj1);
           }
           formdata.get('topictype').setValue("Video");
           formdata.value.topicimages[0].title[subTitleindex] = valueFile
           // this.vidObj.title.push(valueFile) 
-          this.spinner.hide();
           this.toast.success('File uploaded sucessfully');
-        }
-      })
     }
 
   }
@@ -882,24 +877,44 @@ export class CreateTopicComponent implements OnInit,OnDestroy  {
 
   loadBlobs(fileInput, item, formdata, index, textvalue) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
-      data: {},
+      data: { type: 'videos' },
       height: '70%',
-      width: '74%',
+      width: '90%',
       closeOnNavigation: true,
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe(res => {
-      if (res.url)
+      if (res.url) {
         this.onSelectFile(fileInput, item, formdata, index, res.url, '')
-      else
+      } else {
         this.toast.warning('Try after sometime');
+      }
     });
   }
 
   isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 58))
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 58)) {
       return false;
+    }
     return true;
   }
+
+  getBlobVttFiles(fileInput, item, formdata, index,value, subTitleindex ) {
+    const dialogRef = this.dialog.open(BlobReaderComponent, {
+      data: { type: 'subtitles' },
+      height: '70%',
+      width: '90%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      if(res){
+        this.onSelectFile(fileInput, item, formdata, index, res,subTitleindex)
+      }
+    });
+  }
+
 }
