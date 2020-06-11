@@ -230,7 +230,9 @@ label {
 
 }
 :host ::ng-deep.footer20{
-    margin-top: 17%;
+    position: absolute;
+    bottom: 20px;
+    width: 91%;
 }
 
   :host ::ng-deep.footericon{
