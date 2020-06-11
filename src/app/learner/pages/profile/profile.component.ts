@@ -252,6 +252,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
+          
           profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
@@ -328,6 +329,9 @@ export class ProfileComponent implements OnInit {
           this.profileForm.controls.progress.setValue(100);
         }
 
+        if (this.profileForm.value.throughTPO) {
+          this.profileForm.value.throughTPO = Boolean(this.profileForm.value.throughTPO)
+        }
         const ip = localStorage.getItem('Systemip');
         this.profileForm.controls.created_by_ip.setValue(ip);
         this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
