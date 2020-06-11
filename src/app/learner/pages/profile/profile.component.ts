@@ -26,7 +26,6 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent implements OnInit {
 
   enableMobileEdit;
-
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -138,7 +137,7 @@ export class ProfileComponent implements OnInit {
   editpopup = true;
   resendLabel = false;
   duplicateValueCheck = [];
-
+  tpo:boolean =false;
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -197,7 +196,7 @@ export class ProfileComponent implements OnInit {
         totalExp.updateValueAndValidity();
       });
   }
-
+ 
   // edit(){
   //   this.cannotEdit = false;
   // }
