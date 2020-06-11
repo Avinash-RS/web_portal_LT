@@ -59,7 +59,6 @@ export class AddModuleComponent implements OnInit {
           courseImage: params.courseImage,
           courseName: params.courseName,
         }
-        console.log(this.queryData)
         // added by ankit 
         localStorage.setItem('courseid', this.routedCourseDetails.courseId)
       }
@@ -368,7 +367,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
+    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId, editModulesback: true } });
   }
 
   getRepoModules() {

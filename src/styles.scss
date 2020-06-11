@@ -662,7 +662,11 @@ h1 {
     width: 250px;
   }
 }
-
+.create-course {
+  .mat-expansion-panel-body {
+    background: #e5e3e3;
+ }
+}
 .mat-progress-spinner {
   position: absolute !important;
   top: 50% !important;

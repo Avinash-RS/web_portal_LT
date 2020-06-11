@@ -27,7 +27,8 @@
             </div>
             <div style="text-align: center;">
               <button mat-flat-button color="primary" (click)="crsDetails()" class="submit-btn">Course Details</button>
-              <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn">Reference
+              <button mat-stroked-button color="primary" (click)="editResource()" class="reference-btn"
+              >Reference
                 file</button>
             </div>
           </div>
@@ -95,7 +96,7 @@
               </ng-container>
 
               <ng-template #noMod>
-                <div class="no-module" *ngIf="(!isScrom && this.scormPath.length == 0); else uploadDel">
+                <div class="no-module" *ngIf="(!isScrom && !spinner && this.scormPath.length == 0); else uploadDel">
                   <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                   <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
                     color="primary">Upload a SCORM Package
@@ -105,7 +106,7 @@
               </ng-template>
 
               <ng-template #uploadDel>
-                <div class="no-module">
+                <div class="no-module" *ngIf="!spinner">
                   <input type="file" accept="application/zip" #file (change)="onUploadDoc(file.files)" hidden>
                   <button (click)="file.click()" for="upload-photo" mat-stroked-button class="upload-btn"
                     color="primary">SCORM Package uploaded
