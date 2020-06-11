@@ -70,6 +70,9 @@ export const pincode: any = [
     Validators.pattern(/^[1-9][0-9]{5}$/),
 ];
 
+export const whitespase: any = [
+    Validators.pattern(/^(.|\s)*\S(.|\s)*$/),
+];
 
 export const textVal: any = [
     Validators.pattern(/^(.|\s)*\S(.|\s)*$/),

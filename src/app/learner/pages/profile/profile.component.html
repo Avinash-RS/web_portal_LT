@@ -254,8 +254,8 @@
               </ng-container>&nbsp;&nbsp;&nbsp;
               <mat-select [disabled]="cannotEdit && (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
                 [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2') || 
-                (qual?.value?.qualification === '5e7deddfdba4466d9704b44a') ? 'n dis inputs' : 'inputs'" placeholder="Discipline" formControlName="discipline"
-                name="discipline">
+                (qual?.value?.qualification === '5e7deddfdba4466d9704b44a') ? 'n dis inputs' : 'inputs'"
+                placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines">
                   {{item.discipline_name}}
                 </mat-option>
@@ -266,12 +266,12 @@
               <!-- <ng-container
 [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                 > -->
-                <mat-select [disabled]="true" [ngClass]="'n dis inputs'"
-                  placeholder="Specialization" formControlName="specification" name="specification">
-                  <mat-option [value]="item._id" *ngFor="let item of specValue">
-                    {{item.specification_name}}
-                  </mat-option>
-                </mat-select>&nbsp;&nbsp;&nbsp;
+              <mat-select [disabled]="true" [ngClass]="'n dis inputs'" placeholder="Specialization"
+                formControlName="specification" name="specification">
+                <mat-option [value]="item._id" *ngFor="let item of specValue">
+                  {{item.specification_name}}
+                </mat-option>
+              </mat-select>&nbsp;&nbsp;&nbsp;
               <!-- </ng-container> -->
               <ng-container>
                 <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
@@ -283,8 +283,13 @@
             <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
               <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label ' :
                 'inputs  width_50'" placeholder="Percentage" formControlName="percentage" maxlength="5"
-                (blur)="formatPercentage(in)">
-              <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
+                (blur)="formatPercentage(in)"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+              <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
+                (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
+              </mat-icon> --> 
+              <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1 && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
+                (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')"
                 (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
               </mat-icon>
               <mat-icon (click)="addQualification(in)"
@@ -312,6 +317,7 @@
                 'inputs lap_95'" placeholder="Address line 1 *" formControlName="addressline1">
               <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
                 <div *ngIf="f.addressline1.errors.required">Address line 1 is required</div>
+                <div *ngIf="f.addressline1.errors.pattern">Address line 1 is invalid</div>
                 <!-- <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be -->
                 <!-- minimum of
                   {{f.addressline1.errors.minlength.requiredLength}} -
@@ -382,16 +388,18 @@
         <br>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
-            <label class="container120">Through TPO
-              <input type="checkbox"  formControlName="throughTPO">
-              <span class="checkmark"></span>
-            </label>
+          <label class="container120">Through TPO
+            <input type="checkbox" formControlName="throughTPO">
+            <span class="checkmark"></span>
+          </label>
         </div>
 
         <br>
 
         <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
-        <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label><span class="mand"> *</span><br>
+        <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label>
+        <span class="mand" *ngIf="!profileForm.value.throughTPO"> *</span>
+        <br>
         <div class="row p-b-10px">
           <div class="col-md-4 col-lg-3 col-xl-2 col-sm-4 col-12 display_flex">
             <input type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
@@ -419,6 +427,22 @@
               read and understood the details of L&T - Kaushalya Program
             </mat-checkbox>
           </div>
+        </div>
+
+        <div class="row width_80">
+          <span style="    font-size: 11px;
+          color: grey;">
+            L&T Kaushalya Program – Terms and Conditions<br>
+            1) In case of online transfer the cost of transfer to be borne by the student. After L&T scheduling the
+            first session of L&T Kaushalya no refunds shall be entertained
+            session of L&T Kaushalya no refunds shall be entertained.<br>
+            2) L&T Kaushalya is not a job recruitment program and limited to the purpose of internship only<br>
+            3) L&T reserves the right to terminate a student from L&T Kaushalya program if he/she is found to be
+            impersonating or putting inappropriate content into the platform<br>
+            4) Decision of L&T will be final with regard to course content, assessment, course delivery, L&T Kaushalya
+            completion and certification. In case of disputes, the decision of L&T shall be final and L&T’s liability is
+            limited to the fees paid by the student. Standard Force majeure clauses will apply.</span>
+
         </div>
 
         <br>
@@ -534,12 +558,12 @@
             (click)="updateProfile()">Save</button>
         </div>
         <br> <br>
-        <div class="row">
+        <!-- <div class="row">
           L & T reserves the right of admission of any student in to the program and its decision would be final. L & T
           also holds the right of what constitutes the internship completion by a student. The certificate would be
           awarded only to those students who have fully gone through the program by meeting the participation and
           project requirements.
-        </div>
+        </div> -->
       </form>
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
