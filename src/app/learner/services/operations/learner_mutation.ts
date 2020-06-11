@@ -173,7 +173,7 @@ export const view_profile = gql`
         user_profile {
 
           _id
-
+          throughTPO
           languages_known
 
           is_student_or_professional
@@ -499,7 +499,6 @@ export const view_profile1 = gql`
         profile_img
         year_of_birth
         progress
-        throughTPO
         is_active
         gender
         country
