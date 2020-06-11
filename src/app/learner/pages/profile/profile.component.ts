@@ -147,10 +147,10 @@ export class ProfileComponent implements OnInit {
     // moment().year();
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
-      gender: new FormControl('', myGlobals.req),
-      is_student_or_professional: new FormControl('', myGlobals.req),
-      // gender: new FormControl(''),
-      // is_student_or_professional: new FormControl(''),
+      // gender: new FormControl('', myGlobals.req),
+      // is_student_or_professional: new FormControl('', myGlobals.req),
+      gender: new FormControl(''),
+      is_student_or_professional: new FormControl(''),
       languages_known: [''],
       addressline1: ['', myGlobals.address],
       addressline2: ['', myGlobals.address],
@@ -262,8 +262,8 @@ export class ProfileComponent implements OnInit {
         && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
         this.profileForm.controls.progress.setValue(80);
       }
-      if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate.length > 0 &&
-        this.profileForm.value.certificate[0] !== '' && this.profileForm.value.languages_known.length > 0
+      if (this.profileForm.value.progress === 80 && this.profileForm.value.certificate.length > 0 &&
+        this.profileForm.value.certificate[0] !== ''
         && this.profileForm.value.social_media[0].link !== '') {
         this.profileForm.controls.progress.setValue(90);
       }

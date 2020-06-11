@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');
               localStorage.setItem('token', loginresult.data.login.message.token);
+              localStorage.setItem('user_img', loginresult.data.login.message.user_img);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {

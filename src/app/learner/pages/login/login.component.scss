@@ -6,7 +6,7 @@ mat-card {
     top: 10%;
 }
 
-.align{
+.align {
     text-align: right !important;
 }
 
@@ -33,23 +33,24 @@ mat-form-field {
     width: 80%;
 }
 
-.remember_me  {
+.remember_me {
     float: left;
     font-size: 11px;
     color: $color-blue !important;
     margin-top: -18px;
 }
 
-.forgot{
+.forgot {
     color: $color-blue !important;
     font-weight: 400 !important;
     cursor: pointer;
 }
+
 .link {
     color: $color-white !important;
 }
 
- ::ng-deep .mat-checkbox-inner-container {
+::ng-deep .mat-checkbox-inner-container {
     height: 13px !important;
     width: 13px !important;
 
@@ -58,7 +59,8 @@ mat-form-field {
 ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
     line-height: 27px;
 }
-.haveacc{
+
+.haveacc {
     color: $label2 !important;
 }
 
@@ -71,22 +73,23 @@ mat-form-field {
     margin-top: 30%;
 }
 
-.col{
-    color: $color-blue !important;  
+.col {
+    color: $color-blue !important;
     margin-left: -10px;
 }
 
- :host ::ng-deep.p-t-77 {
+:host ::ng-deep.p-t-77 {
     padding-top: 21px !important;
 }
 
-:host ::ng-deep.signIn{
-    text-align : center !important;
+:host ::ng-deep.signIn {
+    text-align: center !important;
     margin-top: 22px !important;
     color: $color-blue !important;
-    font-weight: lighter !important ;
-  }
-:host ::ng-deep.linee{
+    font-weight: lighter !important;
+}
+
+:host ::ng-deep.linee {
     border-left: 222px solid $color-border;
     height: 1px;
     position: absolute;
@@ -96,12 +99,13 @@ mat-form-field {
     border-radius: 17px;
 }
 
-:host ::ng-deep.sign_up{
+:host ::ng-deep.sign_up {
     color: $color-blue !important;
     margin-top: 5px !important;
     text-align: center !important;
     margin-left: 16px;
 }
+
 mat-card-title,
 .remember_me .a {
     color: $color-blue !important;
@@ -111,10 +115,11 @@ mat-card-title,
 
 :host ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border-color: $color-border !important;
-   
+
 }
 
-:host ::ng-deep.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+:host ::ng-deep.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: $color-blue !important;
 }
 
@@ -126,8 +131,9 @@ mat-card-title {
     cursor: pointer;
     font-size: 16px;
 }
-.form-control{
-    border-radius: 0px !important;
+
+.form-control {
+    // border-radius: 0px !important;
 }
 
 label {
@@ -149,7 +155,7 @@ label {
     color: #d2d1d1;
 }
 
- :host ::ng-deep .wrap-reg {
+:host ::ng-deep .wrap-reg {
     width: 84%;
     padding-left: 40px;
     padding-right: 30px;
@@ -159,7 +165,8 @@ label {
     overflow: hidden !important;
 
 }
-:host ::ng-deep.pg{
+
+:host ::ng-deep.pg {
     position: absolute;
     color: $color-white;
     padding: 7px;
@@ -170,7 +177,7 @@ label {
     font-weight: normal !important;
 }
 
-:host ::ng-deep.privcy{
+:host ::ng-deep.privcy {
     position: absolute;
     color: $color-white;
     padding: 7px;
@@ -178,69 +185,53 @@ label {
     margin-left: 47% !important;
     /* background-color: #ffffff85; */
     font-size: 14px;
-    font-weight: normal !important;  
+    font-weight: normal !important;
 }
 
- :host ::ng-deep .container-reg200 {
+:host ::ng-deep .container-reg200 {
     width: 100%;
-    height: 100vh!important;
+    height: 100vh !important;
     display: flex;
-    justify-content: center; 
-     align-items: center; 
-     background-size: cover !important; 
-     background-repeat: no-repeat !important;
+    justify-content: center;
+    align-items: center;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     background: url('../../../../assets/learner/bg-6.jpg');
-  }
+}
 
-  :host ::ng-deep.lxplogo{
+:host ::ng-deep.lxplogo {
     text-align: center;
     margin-left: 94px;
     margin-right: 94px;
     width: 110px;
-  }
-  :host ::ng-deep.head1{
+}
+
+:host ::ng-deep.head1 {
     text-align: center;
     font-weight: normal !important;
     font-size: 21px;
     margin-top: 18px !important;
-  }
+}
 
-  :host ::ng-deep.bgimg{
+:host ::ng-deep.bgimg {
     width: 99%;
     height: 657px;
-  }
-  :host ::ng-deep.lnt_logo{
+}
+
+:host ::ng-deep.lnt_logo {
     position: absolute;
     width: 10%;
     margin-top: 21px;
     margin-left: 108px;
-  }
-  .reset{
+}
+
+.reset {
     cursor: pointer;
-  }
+}
 
 
-  // mobile
-  @media (max-width: 480px) and (max-width: 320px) {
-    .wrap-reg {
-        width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
-        overflow: hidden !important;
-        height: 100vh;
-        border-radius: 0 !important;
-        margin-left: 0% !important;
-    }
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-         margin-right: 0px !important; 
-         margin-left: 0px !important; 
-    }
-  }
-
-
-  @media (max-width: 568px){
+// mobile
+@media (max-width: 480px) and (max-width: 320px) {
     .wrap-reg {
         width: 100%;
         padding-left: 30px;
@@ -254,46 +245,127 @@ label {
     .row {
         display: flex;
         flex-wrap: wrap;
-         margin-right: 0px !important; 
-         margin-left: 0px !important; 
+        margin-right: 0px !important;
+        margin-left: 0px !important;
     }
-  }
+}
 
-  @media only screen and (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+@media (max-width: 568px) {
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow: hidden !important;
+        height: 100vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
     .col-md-4 {
         flex: 0 0 100%;
         max-width: 100%;
     }
 
     .row {
-         margin-right: 0px !important; 
-         margin-left: 0px !important; 
+        margin-right: 0px !important;
+        margin-left: 0px !important;
     }
+
     .wrap-reg {
         width: 100%;
-        margin-left: 0% !important; 
+        margin-left: 0% !important;
     }
+
     .head1 {
         font-size: 36px;
-        margin-top: 12%!important;
+        margin-top: 12% !important;
     }
+
     .form-group {
         margin-bottom: 2rem;
     }
+
     label {
         display: inline-block;
         margin-bottom: 10px !important;
     }
 
-    .forgot{
+    .forgot {
         font-size: 14px !important;
     }
-    .reset{
-        font-size: 14px !important;
-      }
 
-      .haveacc {
+    .reset {
         font-size: 14px !important;
     }
-    
+
+    .haveacc {
+        font-size: 14px !important;
     }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/////////////
+.form-control {
+    background: #f7f7f7;
+    border-radius: 5px !important;
+    height: calc(1.9em + .75rem + 2px);
+}
+
+.form-control.is-invalid:focus,
+.form-control.is-invalid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid red !important;
+    border-radius: 5px !important;
+}
+
+.form-control.is-valid:focus,
+.form-control.is-valid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid $color-blue !important;
+    border-radius: 5px !important;
+}
+
+
+input:focus:invalid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid red !important;
+    border-radius: 5px !important;
+    // border-left: 5px solid red !important;
+    // border-radius: 5px !important;
+    box-shadow: none;
+    // outline: 0 none;
+}
+
+input:focus:valid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid $color-blue !important;
+    border-radius: 5px !important;
+    // border-left: 5px solid red !important;
+    // border-radius: 5px !important;
+    box-shadow: none;
+    // outline: 0 none;
+}

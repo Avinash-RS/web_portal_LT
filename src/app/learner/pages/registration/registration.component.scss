@@ -1,5 +1,6 @@
 @import "variable";
-div.terms{
+
+div.terms {
     color: $color-blue;
     font-size: 12px;
 }
@@ -8,9 +9,10 @@ div.terms{
     height: 14px !important;
     width: 14px !important;
 }
+
 :host ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border-color: $color-border !important;
-   
+
 }
 
 :host ::ng-deep.btn {
@@ -24,37 +26,45 @@ div.terms{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color:  $color-blue !important;
+    background-color: $color-blue !important;
     border-radius: 0px !important;
     font-size: 18px;
     line-height: 1.5;
     width: 100%;
     margin-top: 17px;
-  }
-  .fromLabel{
-      color: #33333396  !important;
-  }
+}
 
-.col{
-    color: $color-blue !important;  
+.fromLabel {
+    color: #33333396 !important;
+}
+
+.col {
+    color: $color-blue !important;
     margin-left: -10px;
 }
-:host ::ng-deep.signIn{
-    text-align : center !important;
+
+:host ::ng-deep.signIn {
+    text-align: center !important;
     margin-top: 22px !important;
     color: $color-blue !important;
-    font-weight: lighter !important ;
-  }
-.account{
+    font-weight: lighter !important;
+}
+
+.account {
     color: $label2 !important;
     word-break: break-all !important;
     text-align: center !important;
     margin-top: 30%;
 }
-.sign_up, .remember_me,mat-card-title , a{
+
+.sign_up,
+.remember_me,
+mat-card-title,
+a {
     color: $color-blue;
 }
-.alert1{
+
+.alert1 {
     color: $label;
     // margin-left: -19px;
     font-size: 11px;
@@ -63,10 +73,12 @@ div.terms{
     font-weight: 600;
     margin-bottom: 26px;
 }
+
 .link {
     color: $color-white !important;
 }
-:host ::ng-deep .linee{
+
+:host ::ng-deep .linee {
     border-left: 246px solid $color-border;
     height: 1px;
     position: absolute;
@@ -75,7 +87,8 @@ div.terms{
     // margin-left: 75px !important;
     // margin-right: 43px;
 }
-:host ::ng-deep .iagree{
+
+:host ::ng-deep .iagree {
     margin-top: -21px !important;
     // margin-left: 46px !important;
     // margin-left: 75px !important;
@@ -89,13 +102,15 @@ div.terms{
     border: 1px solid $color-border;
     box-sizing: border-box;
 }
-.star{
+
+.star {
     color: $color-red;
 }
 
- :host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+:host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
     line-height: 14px !important;
 }
+
 :host ::ng-deep.p-t-77 {
     padding-top: 21px !important;
 }
@@ -110,7 +125,8 @@ div.terms{
     overflow: hidden !important;
 
 }
-:host ::ng-deep.pg{
+
+:host ::ng-deep.pg {
     position: absolute;
     color: $color-white;
     padding: 7px;
@@ -123,55 +139,60 @@ div.terms{
 
 :host ::ng-deep .container-reg200 {
     width: 100%;
-    height: 100vh!important;
+    height: 100vh !important;
     display: flex;
-    justify-content: center; 
-     align-items: center; 
-     background-size: cover !important; 
-     background-repeat: no-repeat !important;
+    justify-content: center;
+    align-items: center;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     background: url('../../../../assets/learner/bg-6.jpg');
-  }
-      :host ::ng-deep .lxplogo{
+}
+
+:host ::ng-deep .lxplogo {
     text-align: center;
     margin-left: 94px;
     margin-right: 94px;
     width: 110px;
-  }
-  :host ::ng-deep.head1{
+}
+
+:host ::ng-deep.head1 {
     text-align: center;
     font-weight: normal !important;
     font-size: 21px;
     margin-top: 18px !important;
-  }
+}
 
-  :host ::ng-deep.bgimg{
+:host ::ng-deep.bgimg {
     width: 99%;
     height: 657px;
-  }
-  :host ::ng-deep.lnt_logo{
+}
+
+:host ::ng-deep.lnt_logo {
     position: absolute;
     width: 10%;
     margin-top: 21px;
     margin-left: 108px;
-  }
-  :host ::ng-deep.privcy{
+}
+
+:host ::ng-deep.privcy {
     position: absolute;
     color: $color-white;
     padding: 7px;
     margin-top: 45%;
     margin-left: 47% !important;
     font-size: 14px;
-    font-weight: normal !important;  
+    font-weight: normal !important;
 }
 
-:host ::ng-deep .btn.disabled, .btn:disabled {
+:host ::ng-deep .btn.disabled,
+.btn:disabled {
     opacity: .65;
     color: $label2 !important;
     background-color: $color-border !important;
 }
 
 
-  :host ::ng-deep label {
+:host ::ng-deep label {
     margin-bottom: .1em !important;
 }
 
@@ -179,8 +200,8 @@ div.terms{
 
 
 
-  // mobile screen
-  @media (max-width: 480px){
+// mobile screen
+@media (max-width: 480px) {
     .wrap-reg {
         width: 100%;
         padding-left: 30px;
@@ -190,16 +211,17 @@ div.terms{
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
+
     .row {
         display: flex;
         flex-wrap: wrap;
-         margin-right: 0px !important; 
-         margin-left: 0px !important; 
+        margin-right: 0px !important;
+        margin-left: 0px !important;
     }
-  }
+}
 
 
-  @media (max-width: 568px){
+@media (max-width: 568px) {
     .wrap-reg {
         width: 100%;
         padding-left: 30px;
@@ -209,4 +231,57 @@ div.terms{
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
-  }
+}
+
+
+
+
+
+
+
+
+/////////
+.form-control {
+    background: #f7f7f7;
+    border-radius: 5px !important;
+    height: calc(1.9em + .75rem + 2px);
+}
+
+.form-control.is-invalid:focus,
+.form-control.is-invalid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid red !important;
+    border-radius: 5px !important;
+}
+
+.form-control.is-valid:focus,
+.form-control.is-valid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid $color-blue !important;
+    border-radius: 5px !important;
+}
+
+
+input:focus:invalid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid red !important;
+    border-radius: 5px !important;
+    // border-left: 5px solid red !important;
+    // border-radius: 5px !important;
+    box-shadow: none;
+    // outline: 0 none;
+}
+
+input:focus:valid {
+    background: #f7f7f7;
+    border: none;
+    border-left: 5px solid $color-blue !important;
+    border-radius: 5px !important;
+    // border-left: 5px solid red !important;
+    // border-radius: 5px !important;
+    box-shadow: none;
+    // outline: 0 none;
+}
