@@ -31,7 +31,7 @@
   </div>
   <img *ngIf="course.course_img_url != 'null'" alt="course image" class="pointer m-b-10 course-image center"
     src="{{course.course_img_url}}" width="100%" (click)="gotoDescription()">
-  <img *ngIf="course.course_img_url == 'null'" alt="" class="pointer m-b-10 course-image center"
+  <img   *ngIf="course.course_img_url == 'null'" class="pointer m-b-10 course-image center"
     src="../../../../assets/learner/kl.jpg" (click)="gotoDescription()">
   <div class="overlay1 p-5px" style="margin-bottom: 0;">
     <p class="course_description1 f_size_12">
