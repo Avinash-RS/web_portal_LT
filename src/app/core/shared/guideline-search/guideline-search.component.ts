@@ -66,7 +66,7 @@ export class GuidelineSearchComponent implements OnInit {
   publishedFromDate: String;
   fromdate: any;
   todate: any;
-  catalogue_visibility = 0;
+  catalogue_visibility = null;
   showAppliedFiltre: any;
 
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
