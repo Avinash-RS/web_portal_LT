@@ -37,7 +37,7 @@ export class CategoryComponentComponent implements OnInit {
   lvl1Search: any;
   lvl2Search: any;
   lvl3Search: any;
-  catalogue_visibility = 0;
+  catalogue_visibility = null;
 
   constructor(private dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: any,
     public learnerservice: LearnerServicesService, private alert: AlertServiceService,
