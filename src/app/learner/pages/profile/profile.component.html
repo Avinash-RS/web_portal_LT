@@ -446,9 +446,9 @@
         <hr class="p-b-10px">
         <br>
 
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
-          <label class="container120">Through TPO
-            <input type="checkbox" formControlName="throughTPO">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex" [ngClass]="{ 'dis1' : cannotEdit}">
+          <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
+            <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
             <span class="checkmark"></span>
           </label>
         </div>

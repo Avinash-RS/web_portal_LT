@@ -228,7 +228,7 @@
   margin-bottom: 0px;
   cursor: pointer;
   height: 27px;
-  font-size: 14px;
+  font-size: 15px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -619,7 +619,9 @@ input:focus {
   background: $profile-t-grey !important;
   border: 1px solid $profile-t-grey !important;
 }
-
+.dis1 {
+  pointer-events: none !important;
+}
 .otp {
   margin-top: 49px;
 }

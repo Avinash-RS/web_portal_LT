@@ -266,7 +266,7 @@ export class ProfileComponent implements OnInit {
             certificate.removeAt(0);
           }
           this.profileForm.patchValue(profileDetails);
-          console.log(this.profileForm);
+          // console.log(this.profileForm);
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
@@ -298,7 +298,7 @@ export class ProfileComponent implements OnInit {
       } else if (index1 === -1) {
         this.alert.openAlert('Please fill diploma qualification details', null);
       } else {
-        console.log(this.profileForm.value.qualification);
+        // console.log(this.profileForm.value.qualification);
         // if (this.profileForm.value.qualification(index).board_university !== '' ||
         //   this.profileForm.value.qualification(index).institute !== '' ||
         //   this.profileForm.value.qualification(index).percentage !== '' ||
@@ -313,14 +313,15 @@ export class ProfileComponent implements OnInit {
         if (index2 !== -1) {
           this.profileForm.value.qualification[index2].specification = '5ee2877b7d0045bb0edc19c2';
         }
-        if (this.profileForm.value.addressline1 &&
+        if (this.profileForm.value.addressline1 && this.profileForm.value.gender !== '' &&
           this.profileForm.value.country && this.profileForm.value.state
           && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
           this.profileForm.controls.progress.setValue(60);
         }
         if (this.profileForm.value.progress === 60 && this.profileForm.value.neft !== '' &&
-        this.profileForm.value.certificate.length > 0 &&
-          this.profileForm.value.certificate[0] !== '' && this.profileForm.value.social_media[0].link !== '') {
+        this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
+          this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '' &&
+          this.profileForm.value.social_media[0].link !== '') {
           this.profileForm.controls.progress.setValue(90);
         }
         if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
@@ -331,10 +332,13 @@ export class ProfileComponent implements OnInit {
         this.profileForm.controls.created_by_ip.setValue(ip);
         this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
-        this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
+        if (this.profileForm.value.pincode !== '' && this.profileForm.value.pincode !== null) {
+          this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
+        } else {
+          this.profileForm.value.pincode = null;
+        }
         this.profileForm.value.is_student_or_professional = 'student';
-
-        console.log('jsonData', this.profileForm.value);
+        // console.log('jsonData', this.profileForm.value);
 
         this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
           if (data.data.update_profile.success === 'true') {
