@@ -18,7 +18,7 @@ export const usernamesplVal: any = [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(20),
-    Validators.pattern(/^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/)
+    Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)
     // Validators.pattern(/^[A-Za-z0-9]+[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/) // with first char should string
 ];
 
