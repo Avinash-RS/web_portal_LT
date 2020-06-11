@@ -9,15 +9,16 @@ import { ApolloModule } from 'apollo-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { formatDate } from '@angular/common';
 describe('AuditlogComponent', () => {
   let component: AuditlogComponent;
   let fixture: ComponentFixture<AuditlogComponent>;
   const dialogMock = {
     closeAll: () => { }
-    };
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         BrowserModule,
         ReactiveFormsModule,
         FormsModule,
@@ -34,21 +35,21 @@ describe('AuditlogComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      declarations: [ AuditlogComponent ],
+      declarations: [AuditlogComponent],
       providers: [
         {
           provide: MatDialogRef,
           useValue: {}
         },
-        { provide: MatDialogRef, useValue:  dialogMock },
-        { provide: MatDialogTitle , useValue: [] },
+        { provide: MatDialogRef, useValue: dialogMock },
+        { provide: MatDialogTitle, useValue: [] },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-    
-        
+
+
         // ...
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -60,22 +61,26 @@ describe('AuditlogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('closedialog()', () => {
-    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    const spy = spyOn(component.dialog, 'closeAll').and.callThrough();
     component.closedialogbox();
-    expect(spy).toHaveBeenCalled();    
+    expect(spy).toHaveBeenCalled();
   });
 
   it('destroy', () => {
-    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    const spy = spyOn(component.dialog, 'closeAll').and.callThrough();
     component.ngOnDestroy();
-    expect(spy).toHaveBeenCalled();    
+    expect(spy).toHaveBeenCalled();
   });
 
-  // it('openviewdialog', () => {
+  it('formdate', () => {
+    const fromdate = {
+      date: 1010
+    };
+    expect(component.datefield(fromdate.date));
+    expect(component.enablefield).toBe(false)
 
-  //   component. openviewdialog(data, templateRef)
-  // });
+  });
 
 });
