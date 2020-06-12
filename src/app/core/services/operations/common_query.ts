@@ -17,6 +17,7 @@ export const viewcourse = gql`
       message{
         course_id
         course_description
+        course_long_description
         course_name
         created_at
         updated_at
