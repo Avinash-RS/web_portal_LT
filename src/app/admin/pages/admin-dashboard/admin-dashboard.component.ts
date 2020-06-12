@@ -505,12 +505,15 @@ public isCollapsed1 = false;
               iterator.super_sub_category_id=super_sub_category_id.super_sub_category_name
           }
 
+          let superSubCat;
+         if(iterator.super_sub_category_id == 'NA')  superSubCat = 'NA'
+         else superSubCat = iterator.super_sub_category_id.super_sub_category_name
             this.EnrolledCoursesJson.push({
               category:iterator.category_id.category_name,
               courseName:iterator.course.course_name,
               totalEnrolled:iterator.count,
               subCategory:iterator.parent_sub_category_id.sub_category_name,
-              superSubCategory:iterator.super_sub_category_id
+              superSubCategory:superSubCat
             }); 
         }
        

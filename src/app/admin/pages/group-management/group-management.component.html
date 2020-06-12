@@ -181,11 +181,11 @@
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
                       <mat-slide-toggle class="example-margin" [disabled]=editgroupfield [color]="color" name="toggle"
-                        [(ngModel)]="toggle">
+                        [(ngModel)]="toggle" (change)="selectedtoggle(toggle)">
                       </mat-slide-toggle>
                       <!-- [checked]="currentpath?.is_active" -->
-                      <!-- (change)="toggle(currentpath.is_active)" -->
-                      {{toggle === true ? 'Deactivate' : 'Activate'}}
+                      <!-- (change)="selectedtoggle(currentpath.is_active)" -->
+                      {{toggle === true ? 'Deactivate' : 'Deactivate '}}
                     </div>
                     <div class="col-6 mt-4">
                       <button *ngIf="editstatus" mat-flat-button color="primary" type="submit">Save</button> &nbsp;

@@ -37,10 +37,10 @@ export class AddModuleComponent implements OnInit {
     public toast: ToastrService,
     private router: Router,
     public route: ActivatedRoute,
-    public apiService: WcaService) { }
+    public apiService: WcaService) { 
+    }
 
   ngOnInit() {
-
     this.resetList();
     this.spinner = true;
     this.route.queryParams.subscribe(params => {
