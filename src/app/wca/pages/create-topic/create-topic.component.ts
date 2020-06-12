@@ -230,6 +230,7 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     return this.formBuilder.group({
       modulename: [null, Validators.compose([Validators.required])],
       modulestatus: ['true'],
+      moduleid: mod.moduleid,
       template_details: [this.queryData.template_details],
       moduledetails: this.formBuilder.array(mod && mod.template_details && mod.template_details.length ? mod.template_details.map((data, index) =>
         this.topicItem(mod_index, index)

@@ -80,6 +80,18 @@ export class UserManagementComponent implements OnInit {
   //   this.dataSource.paginator = this.paginator
   // }
 
+  ngAfterViewInit() {
+    // tslint:disable-next-line:only-arrow-functions
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+      if (!data[sortHeaderId]) {
+        return this.sort.direction === 'asc' ? '3' : '1';
+      }
+      return '2' + data[sortHeaderId].toLocaleLowerCase();
+    };
+  }
+
   viewDetail(element, templateRef: TemplateRef<any>) {
     // this.service.getLearnerDetail(element.user_id)
     // .subscribe((result: any) => {

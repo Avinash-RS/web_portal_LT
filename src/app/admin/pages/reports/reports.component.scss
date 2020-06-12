@@ -10,4 +10,50 @@
     justify-content:center;
   }
   
+  .m-b-10 {
+    margin-bottom: 10px;
+  }
   
+  @media screen and (max-width:765px) {
+    .form-control {
+      width: 50%;
+      float: right;
+      margin-right: 30px
+    }
+  }
+  
+  @media screen and (min-width:765px) {
+    .form-control {
+      width: 35%;
+      float: right;
+      margin-right: 30px
+    }
+  }
+
+
+  // .example-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   max-height: 700px;
+  //   min-width: 300px;
+  //   margin-top: 1px;
+  
+  //   .mat-stroked-button {
+  //     font-size: 12px;
+  //     cursor: pointer;
+  //     line-height: 20px;
+  //     padding: 0 0px;
+  //     margin: 1px;
+  //     background-color: #e6e5e5;
+  //     border: 0px !important;
+  //     border-radius: 0px !important;
+  //     margin-right: 12px
+  //   }
+  
+  //   .mat-header-cell:last-of-type {
+  //     padding-top: 10px;
+  //     padding-bottom: 10px;
+  //     display: initial;
+  //     text-align: center;
+  //   }
+  // }

@@ -28,7 +28,7 @@
   <hr style="border: 1px solid #ccc;margin:0 !important; ">
   <div>
     <div class="example-container">
-      <mat-table #table [dataSource]="dataSource">
+      <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
             <!-- Select -->
@@ -56,7 +56,7 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> User name </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">User name</span>
             <span class="desktop-data"> {{element.username}}</span>
@@ -65,7 +65,7 @@
         </ng-container>
 
         <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email id </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Email id </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span class="mobile-label">Email id</span>
             <span class="desktop-data"> {{element.email || 'NA'}}</span>
@@ -82,7 +82,7 @@
         </ng-container>
 
         <ng-container matColumnDef="active">
-          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
           <mat-cell *matCellDef="let element"
             [ngClass]="element.is_blocked ? 'red f_wt_500' : element.is_active ? 'green f_wt_500' : 'black f_wt_500'">
             <span class="mobile-label">Status</span>
