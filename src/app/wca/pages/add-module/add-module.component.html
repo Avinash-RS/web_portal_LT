@@ -3,6 +3,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
       <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
+      <!-- <li *ngIf="type === 'draft'" class="breadcrumb-item">Draft</li> -->
       <li class="breadcrumb-item">
         <a [routerLink]="['/Admin/auth/Wca/addcourse']"
           [queryParams]="{edit:'true',viewingModule:courseDetails?.courseid}">
