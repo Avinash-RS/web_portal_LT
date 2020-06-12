@@ -298,7 +298,11 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert('Please fill 10th qualification details', null);
       } else if (index1 === -1) {
         this.alert.openAlert('Please fill diploma qualification details', null);
-      } else {
+      } else if (this.profileForm.value.iAgree == false){
+        this.alert.openAlert('Please fill all mandatory feilds', null);
+      }
+      
+      else {
         // console.log(this.profileForm.value.qualification);
         // if (this.profileForm.value.qualification(index).board_university !== '' ||
         //   this.profileForm.value.qualification(index).institute !== '' ||
@@ -733,9 +737,9 @@ export class ProfileComponent implements OnInit {
   onSelectFile(event) {
     this.selectfile = event.target.files[0] as File;
     if (this.selectfile && this.selectfile.type !== 'image/png' && this.selectfile.type !== 'image/jpeg') {
-      this.alert.openAlert('mage should be less than 5 MB and should be only Jpeg or png format', null);
+      this.alert.openAlert('Image should be less than 5 MB and should be only Jpeg or png format', null);
     } else if (this.selectfile && this.selectfile.size > 500000) {
-      this.alert.openAlert('image should be less than 5 MB and should be only Jpeg or png format', null);
+      this.alert.openAlert('Image should be less than 5 MB and should be only Jpeg or png format', null);
     } else {
       if (this.selectfile) {
         const fb = new FormData();
