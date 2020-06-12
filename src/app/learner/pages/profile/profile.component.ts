@@ -252,6 +252,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
+          
           profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
@@ -328,17 +329,22 @@ export class ProfileComponent implements OnInit {
           this.profileForm.controls.progress.setValue(100);
         }
 
+        if (this.profileForm.value.throughTPO) {
+          this.profileForm.value.throughTPO = Boolean(this.profileForm.value.throughTPO);
+        }
         const ip = localStorage.getItem('Systemip');
         this.profileForm.controls.created_by_ip.setValue(ip);
         this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
-
+        const p = this.profileForm.value.progress;
+        this.profileForm.value.progress = p.toString();
         if (this.profileForm.value.pincode !== '' && this.profileForm.value.pincode !== null) {
           this.profileForm.value.pincode = Number(this.profileForm.value.pincode);
         } else {
           this.profileForm.value.pincode = null;
         }
         this.profileForm.value.is_student_or_professional = 'student';
-        // console.log('jsonData', this.profileForm.value);
+
+        console.log('jsonData', this.profileForm.value);
 
         this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
           if (data.data.update_profile.success === 'true') {
