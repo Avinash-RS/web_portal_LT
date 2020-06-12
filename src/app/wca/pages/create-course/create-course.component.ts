@@ -342,7 +342,6 @@ export class CreateCourseComponent implements OnInit {
             this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
-
         if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
             this.spinner.show();
             this.submitted = false;
