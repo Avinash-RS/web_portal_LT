@@ -217,7 +217,7 @@ a {
         padding-left: 30px;
         padding-right: 30px;
         overflow: hidden !important;
-        height: 100vh;
+        height: 96vh;
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
@@ -242,8 +242,14 @@ a {
         font-size: 10px;
         margin-left: -39px;
     }
-     .footer20 {
-        margin-top: 28%;
+    .footer20 {
+        position: absolute;
+        bottom: 13px;
+        width: 84%;
+    }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
     }
 }
 
@@ -251,12 +257,21 @@ a {
 @media (max-width: 568px) {
     .wrap-reg {
         width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
         overflow: hidden !important;
-        height: 100vh;
+        height: 96vh;
         border-radius: 0 !important;
         margin-left: 0% !important;
+    }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
+    .footer20 {
+        position: absolute;
+        bottom: 13px;
+        width: 84%;
     }
 }
 

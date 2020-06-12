@@ -5,7 +5,8 @@ import { GlobalServiceService } from '././core/services/handlers/global-service.
 import { WcaService } from '../app/wca/services/wca.service';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
-
+import { ConnectionService } from 'ng-connection-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,36 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   ipAddress = '';
   title = 'Lxpfrontend';
+  status = 'ONLINE'; //initializing as online by default
+  isConnected = true;
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private APIService: WcaService,
-    private titleService: Title
+    private titleService: Title,
+    private connectionService:ConnectionService,
+    private toast:ToastrService,
 
   ) {
+
     this.getIPAddress();
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if(this.isConnected){
+      this.status = "ONLINE";
+      } else {
+      this.status = "OFFLINE"
+      }
+
+      // alert(this.status);
+      if(this.status == "OFFLINE"){
+        this.toast.warning('You appear to be offline. Please check your network connection');
+      }else{
+        this.toast.success('Came online');
+      }
+      
+      });
   }
 
   ngOnInit() {

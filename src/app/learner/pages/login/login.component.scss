@@ -256,10 +256,10 @@ label {
 @media (max-width: 480px) and (max-width: 320px) {
     .wrap-reg {
         width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
         overflow: hidden !important;
-        height: 100vh;
+        height: 96vh;
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
@@ -270,16 +270,20 @@ label {
         margin-right: 0px !important;
         margin-left: 0px !important;
     }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
 }
 
 
 @media (max-width: 568px) {
     .wrap-reg {
         width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
         overflow: hidden !important;
-        height: 100vh;
+        height: 96vh;
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
@@ -300,8 +304,8 @@ label {
         border-radius: 17px;
     }
     .powered {
-        font-size: 10px;
-        margin-left: -19px;
+        font-size: 10px !important;
+        margin-left: -43px;
     }
     .footericon {
         width: 67%;
@@ -314,7 +318,18 @@ label {
         margin-left: -39px;
     }
     .footer20 {
-        margin-top: 10%;
+        position: absolute;
+        bottom: 2px;
+        width: 91%;
+    }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
+    .footer20 {
+        position: absolute;
+        bottom: 13px;
+        width: 84%;
     }
 }
 
