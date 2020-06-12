@@ -232,8 +232,9 @@
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
                 formControlName="qualification" name="qualification" (selectionChange)="changed($event.value,in)">
                 <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
-                  (click)="checkSpec(qual,in,profileForm.qualification,lv)"
-                  (onSelectionChange)="selectedinstitute = false">
+                  (click)="checkSpec(qual,in,profileForm.qualification,lv);checkinstitute(lv);"
+                 > 
+                 <!-- (onSelectionChange)="selectedinstitute = false" -->
                   {{lv.level_name}}
                 </mat-option>
               </mat-select>&nbsp;&nbsp;&nbsp;
@@ -312,14 +313,24 @@
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
-              <mat-select *ngIf="(qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')"
+              <mat-select *ngIf="!selecteddiscipline && (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')"
                 [disabled]="cannotEdit && (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
                 [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines2">
                   {{item.discipline_name}}
                 </mat-option>
-              </mat-select><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                <mat-option (onSelectionChange)="selecteddiscipline= true"
+                    *ngIf="qual?.value.qualification == '5e7dee15dba4466d9704b4d2'">
+                    Others
+                </mat-option>
+              </mat-select>
+              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex" *ngIf="selecteddiscipline && (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')">
+                <input type="text" class="institute"   [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
+                'inputs width_100'" placeholder="Discipline" formControlName="discipline"><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+              </ng-container> 
+
+              <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
             </div>
             <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
             <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">

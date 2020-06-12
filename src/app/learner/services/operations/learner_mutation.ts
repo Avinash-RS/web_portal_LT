@@ -448,8 +448,6 @@ mutation get_district_details($country: String,$state: String){
     data{
        _id
       districtname
-      state
-      country
       created_by
       created_on
       created_by_ip

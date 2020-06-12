@@ -144,6 +144,7 @@ export class ProfileComponent implements OnInit {
   resendLabel = false;
   duplicateValueCheck = [];
   selectedinstitute = false;
+  selecteddiscipline = false;
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -349,18 +350,28 @@ export class ProfileComponent implements OnInit {
         this.profileForm.value.is_student_or_professional = 'student';
 
         console.log('jsonData', this.profileForm.value);
-
-        this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-          if (data.data.update_profile.success === 'true') {
-            this.loader.hide();
-            this.currentUser.is_profile_updated = true;
-            localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-            // this.alert.openAlert(data.data.update_profile.message, null);
-            this.router.navigate(['/Learner/Thankyou']);
-          } else {
-            this.alert.openAlert(data.data.update_profile.message, null);
-          }
-        });
+        var found;
+        if (this.profileForm?.value?.qualification[2]){
+          const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[2]));
+          found = Object.keys(obj).filter(function(key) {
+             return obj[key] === '';
+           });
+        }
+        if (found?.length) {
+          this.alert.openAlert('Please fill all qualification details', null);
+        } else {
+          this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+            if (data.data.update_profile.success === 'true') {
+              this.loader.hide();
+              this.currentUser.is_profile_updated = true;
+              localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+              // this.alert.openAlert(data.data.update_profile.message, null);
+              this.router.navigate(['/Learner/Thankyou']);
+            } else {
+              this.alert.openAlert(data.data.update_profile.message, null);
+            }
+          });
+         }
         // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
         //   this.profileForm.value.country && this.profileForm.value.state
         //   && this.profileForm.value.city_town) {
@@ -523,6 +534,7 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe((level: any) => {
       this.levelValue = level.data.get_qualification_details.data;
+      console.log(this.levelValue);
       this.levelValue.forEach(element => {
         element.allowed = 'Y';
         this.getBoardsUniv(element._id);
@@ -809,6 +821,12 @@ export class ProfileComponent implements OnInit {
     this.getBoardsUniv(level._id);
   }
 
+  checkinstitute(level) {
+    if (level._id === '5e7dee15dba4466d9704b4d2') {
+      this.selectedinstitute = false;
+      this.selecteddiscipline = false;
+    }
+  }
   formatPercentage(index) {
     const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
     if (val && val.includes('.')) {
