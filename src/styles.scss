@@ -666,6 +666,11 @@ h1 {
   .mat-expansion-panel-body {
     background: #e5e3e3;
  }
+ .angular-editor-textarea {
+   outline-color: #335b96;
+   border: 1px solid #1d3f72 !important;
+
+ }
 }
 .mat-progress-spinner {
   position: absolute !important;
