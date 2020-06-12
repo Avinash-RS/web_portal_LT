@@ -300,7 +300,10 @@
                 </div>
                 <div style="color: red;" *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
                   <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required </div>
-                  <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less than 70</div>
+                  <div *ngIf="f.professional.controls.total_experience.errors.minlength">Total experience must be minimum of
+                    {{f.professional.controls.total_experience.errors.minlength.requiredLength}}
+                  </div>
+                  <!-- <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less than 70</div> -->
                 </div>
               </div>
               <div class="col-md-2 col-sm-4 col-8">
