@@ -247,11 +247,13 @@ export class ProfileComponent implements OnInit {
   radioChange(event){
     console.log(event.value)
     if(event.value == "tpo"){
+      this.profileForm.get('ref_no1').setValue('');
     //  this.profileForm.value.ref_no1 = [];
     //  this.profileForm.setValue({ref_no1: ''});
       this.isTpoEnable = true;
       this.isSelfEnable = false;
     }else if (event.value == "self"){
+      this.profileForm.get('ref_no').setValue('');
       // this.profileForm.value.ref_no = [];
       // this.profileForm.setValue({ref_no: ''});
       this.isTpoEnable = false;
