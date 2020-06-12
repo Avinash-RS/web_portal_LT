@@ -178,6 +178,25 @@ mat-header-cell {
   justify-content:center;
 }
 
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width:765px) {
+  .form-control {
+    width: 50%;
+    float: right;
+    margin-right: 30px
+  }
+}
+
+@media screen and (min-width:765px) {
+  .form-control {
+    width: 35%;
+    float: right;
+    margin-right: 30px
+  }
+}
 
 
 
