@@ -116,13 +116,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     nav: true
   };
 
-  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
-  //   if (this.isReload) {
-  //     event.returnValue = false;
-  //   } else {
-  //     this.isReload = true;
-  //   }
-  // }
+  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+    if (this.isReload) {
+      event.returnValue = false;
+    } else {
+      this.isReload = true;
+    }
+  }
 
   courseform(): FormGroup {
     return this.formBuilder.group({

@@ -367,7 +367,14 @@ export class AddModuleComponent implements OnInit {
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId, editModulesback: true } });
+    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId, 
+      editModulesback: true,
+      courseId:  this.routedCourseDetails.courseId,
+      courseImage:  this.routedCourseDetails.courseImage,
+      courseName:  this.routedCourseDetails.courseName, 
+      isRepo:this.isRepo,
+      isCreate:this.isCreate
+    } });
   }
 
   getRepoModules() {

@@ -47,6 +47,11 @@ export class ReferenceFileComponent implements OnInit {
   count: any;
   courseId: any;
   editModulesback: any;
+  routedCourseId : any;
+  routedCourseImg : any;
+  routedCourseName : any;
+  routedisRepo : any;
+  routedisCreate : any;
 
   constructor(public service: WcaService, public route: Router, public router: ActivatedRoute, public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService, ) {
   }
@@ -55,6 +60,12 @@ export class ReferenceFileComponent implements OnInit {
     this.router.queryParams.subscribe(params => {
       this.courseId = params.id;
       this.editModulesback = params.editModulesback
+      this.routedCourseId = params.courseId
+      this.routedCourseImg = params.courseImage
+      this.routedCourseName = params.courseName
+      this.routedisRepo = params.isRepo
+      this.routedisCreate = params.isCreate
+
       this.get_module_topic(this.courseId)
     })
 
@@ -186,7 +197,12 @@ export class ReferenceFileComponent implements OnInit {
   }
 
   backforeditModule() {
-    this.route.navigateByUrl('/Admin/auth/Wca/addmodule');
+    this.route.navigate(['/Admin/auth/Wca/addmodule'],
+    {
+      queryParams:
+        { courseId:  this.routedCourseId, courseImage:  this.routedCourseImg, courseName:  this.routedCourseName,
+        isRepo:  this.routedisRepo, isCreate: this.routedisCreate }
+    });
   }
   back(){
     this.route.navigateByUrl('/Admin/auth/Wca/previewcourse');
