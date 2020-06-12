@@ -447,11 +447,20 @@
         <hr class="p-b-10px">
         <br>
 
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex" [ngClass]="{ 'dis1' : cannotEdit}">
-          <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
+        <div class="col-md-4 col-lg-4 col-sm-12 col-12" [ngClass]="{ 'dis1' : cannotEdit}">
+          <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
             <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
             <span class="checkmark"></span>
-          </label>
+          </label> -->
+          <label class="p-b-10px f_size_19">Mode of payment</label>
+          <span class="mand p-b-10px"> *</span> <br>
+          <div class="form-group">
+            <mat-radio-group [disabled]='cannotEdit' formControlName="modeOfpayment" name="MOP">
+              <mat-radio-button value="tpo">Through TPO</mat-radio-button>
+              <mat-radio-button value="self">Self</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
         </div>
 
         <br>
