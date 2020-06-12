@@ -505,11 +505,16 @@ padding-left: 15px;
  display: none;
 }
 .bcgClrSync{
-    background-color:#e9ecef;
+    background-color:#e5e3e3;
+}
+
+.container {
+    height: 100%;
+    background-color:#e5e3e3;
 }
 
 .formHeight{
-    height: 80%;
+    height: 100%;
     overflow: auto;
 }
 .dspFlxinside{
@@ -534,6 +539,10 @@ display: flex;
 .dspFlx{
     display: flex;
     justify-content: center;
+}
+
+.no-temp {
+    background: #e5e3e3;
 }
 
 .Bcg{
