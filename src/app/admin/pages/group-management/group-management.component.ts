@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
+import { ToastrService } from 'ngx-toastr';
 
 export interface PeriodicElement {
   user_id: string;
@@ -66,7 +67,7 @@ export class GroupManagementComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
-  constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
+  constructor(private toastr: ToastrService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
     private router: Router, private dialog: MatDialog, ) {
 
@@ -226,7 +227,8 @@ flattree(items) {
       this.editstatus = false;
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
-      this.toggle = node.is_active;
+      console.log(node);
+      this.toggle = !node.is_active;
       this.getAllUser(0);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
@@ -331,10 +333,15 @@ flattree(items) {
     }
   }
 
-  // toggle(event: MatSlideToggleChange) {
-  //   this.toggleevent = event.checked;
-  //   this.currentpath.is_active = event.checked;
-  // }
+  selectedtoggle(event) {
+    // this.toggleevent = event.checked;
+    // this.currentpath.is_active = event.checked;
+    console.log(event);
+    console.log(this.toggle);
+    const msg = event === false ? 'Group has been Activated' : 'Group has been  Deactivated';
+    this.toastr.success(msg);
+
+  }
   updategroupdetails(groupform) {
     // let value: any;
     // value = this.toggleevent ? this.toggleevent : this.currentpath.is_active;
@@ -353,7 +360,7 @@ flattree(items) {
         const data = {
           catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : groupform.value.catalogue,
           catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : this.selectedcatalogue.catalogue_name,
-          is_active: groupform.value.toggle, group_id: this.currentpath.group_id, group_name: groupform.value.group_name,
+          is_active: !groupform.value.toggle, group_id: this.currentpath.group_id, group_name: groupform.value.group_name,
           group_type: this.currentpath.group_type, parent_group_id: this.currentpath.parent_group_id,
           hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
         };

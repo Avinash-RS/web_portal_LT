@@ -54,12 +54,13 @@ export class UserMenuComponent implements OnInit {
 
 logout() {
  Swal.fire({
- title: 'Are you sure you want to log out ?',
+ title: 'Please confirm to logout?',
  showCancelButton: true,
  confirmButtonColor: '#3085d6',
  cancelButtonColor: '#d33',
- confirmButtonText: 'Yes'
- }).then((result) => {
+//  cancelButtonText: 'No',
+confirmButtonText: 'Confirm'
+}).then((result) => {
  if (result.value) {
 this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
  if (logout.data.logout && logout.data.logout.success) {
