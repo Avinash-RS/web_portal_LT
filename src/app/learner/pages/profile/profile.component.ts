@@ -248,6 +248,7 @@ export class ProfileComponent implements OnInit {
     console.log(event.value)
     if(event.value == "tpo"){
      this.profileForm.value.ref_no1 = [];
+     
       this.isTpoEnable = true;
       this.isSelfEnable = false;
     }else if (event.value == "self"){
@@ -280,7 +281,6 @@ export class ProfileComponent implements OnInit {
           profileDetails.payment_mode=profileDetails.payment.payment_mode
         }
         
- 
         this.userData.ref=profileDetails.payment.pay_status;
         
         console.log(this.payment_mode )

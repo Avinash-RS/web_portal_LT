@@ -477,13 +477,13 @@
             <div class="row">
               <div class="col-md-4" *ngIf="isTpoEnable">
                 <label ># Reference no.</label>
-                <input  type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                <input  type="tel" onfocus="this.value=''" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no">
               </div>
 
               <div class="col-md-4"  *ngIf="isSelfEnable" >
                 <label># RTGS / NEFT reference no.</label>
-                <input type="tel" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                <input type="tel" onfocus="this.value=''" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no1">
               </div>
 
