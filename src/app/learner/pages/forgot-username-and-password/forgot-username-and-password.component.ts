@@ -108,6 +108,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
         localStorage.setItem('Details_user',JSON.stringify(obj));
         this.isenable = true;
       } else{
+        this.forgotUsername.reset();
         this.loader.hide();
         this.alert.openAlert(data.data['get_forgot_password_byusername'].message,null)
       }

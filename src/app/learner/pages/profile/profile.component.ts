@@ -32,6 +32,8 @@ export class ProfileComponent implements OnInit {
   uniValue3: any;
   disciplines1: any;
   disciplines2: any;
+  payment_mode: any;
+  ref_no1: any;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -145,6 +147,9 @@ export class ProfileComponent implements OnInit {
   duplicateValueCheck = [];
   selectedinstitute = false;
   selecteddiscipline = false;
+  isSelfEnable:boolean;
+  isTpoEnable:boolean;
+
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -155,6 +160,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl('', myGlobals.req),
+      payment_mode:new FormControl('', myGlobals.req),
+      ref_no1: new FormControl('', [ Validators.pattern(/^[0-9]*$/),
+      Validators.minLength(16), Validators.maxLength(22)
+      ]),
+      ref_no:new FormControl(''),
       // is_student_or_professional: new FormControl('', myGlobals.req),
       // gender: new FormControl('',myGlobals.req),
       is_student_or_professional: new FormControl(''),
@@ -165,9 +175,6 @@ export class ProfileComponent implements OnInit {
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      neft: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/),
-      Validators.minLength(16), Validators.maxLength(22)
-      ]),
       iAgree: new FormControl(true, []),
       throughTPO: new FormControl(false, []),
       progress: [],
@@ -182,15 +189,13 @@ export class ProfileComponent implements OnInit {
         job_role: new FormControl(''),
         organization: new FormControl(''),
         total_experience: new FormControl('')
-      })
+      }),
+      // payment:this.formBuilder.group({
+      //   payment_mode: this.profileForm?.value.payment_mode,
+      //   ref_no: this.profileForm?.value.ref_no,
+      //   ref_no1: this.profileForm?.value.ref_no1
+      // })
     });
-
-    // for (let i = 0; i < 2; i++) {
-    //   debugger;
-    //   // if (this.qualification.controls.length < 3) {
-    //   // }
-    // }
-
 
 
     const job_role = this.profileForm.get('professional.job_role');
@@ -214,21 +219,43 @@ export class ProfileComponent implements OnInit {
         totalExp.updateValueAndValidity();
       });
 
-    const neft = this.profileForm.get('neft');
+    const ref_no1 = this.profileForm.get('ref_no1');
+    // const payment_mode =  this.profileForm.get('payment.payment_mode');
+    // const ref_no =  this.profileForm.get('payment.ref_no');
+    // payment_mode.setValidators(null);
+    //     ref_no.setValidators(null);
     this.profileForm.get('throughTPO').valueChanges
       .subscribe((val: any) => {
         if (val === true) {
-          neft.setValidators([Validators.pattern(/^[0-9]*$/),
+          ref_no1.setValidators([Validators.pattern(/^[0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         } else {
-          neft.setValidators([Validators.required, Validators.pattern(/^[0-9]*$/),
+          ref_no1.setValidators([ Validators.pattern(/^[0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         }
-        neft.updateValueAndValidity();
+        ref_no1.updateValueAndValidity();
+        // payment_mode.setValidators(null);
+        // ref_no.setValidators(null);
       });
 
+  }
+
+  
+
+  radioChange(event){
+    console.log(event.value)
+    if(event.value == "tpo"){
+      this.isTpoEnable = true;
+      this.isSelfEnable = false;
+    }else if (event.value == "self"){
+      this.isTpoEnable = false;
+      this.isSelfEnable = true;
+    }else{
+      this.isTpoEnable = false;
+      this.isSelfEnable = false;
+    }
   }
 
   // edit(){
@@ -241,6 +268,24 @@ export class ProfileComponent implements OnInit {
       if (data.data.view_profile.success) {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
+        
+        this.payment_mode = profileDetails.payment.payment_mode;
+        if(this.payment_mode=='self'){
+          profileDetails.ref_no=profileDetails.payment.ref_no;
+          profileDetails.payment_mode=profileDetails.payment.payment_mode
+        }else if(this.payment_mode=='tpo'){
+          profileDetails.ref_no1=profileDetails.payment.ref_no;
+          profileDetails.payment_mode=profileDetails.payment.payment_mode
+        }
+        
+ 
+        this.userData.ref=profileDetails.payment.pay_status;
+        
+        console.log(this.payment_mode )
+        this.ref_no1 = profileDetails.payment.ref_no;
+        console.log(this.ref_no1 )
+
+
         if (profileDetails) {
           if (profileDetails.qualification.length > 0) {
             profileDetails.qualification.forEach(v => delete v.__typename);
@@ -267,7 +312,9 @@ export class ProfileComponent implements OnInit {
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
           }
+
           this.profileForm.patchValue(profileDetails);
+
           // console.log(this.profileForm);
           this.getAllState();
           this.getDistrict();
@@ -301,6 +348,16 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert('Please fill diploma qualification details', null);
       } else if (this.profileForm.value.iAgree == false){
         this.alert.openAlert('Please fill all mandatory feilds', null);
+      } 
+      // else if(this.profileForm.value.payment_mode == ''){
+      //   this.alert.openAlert("Please select any one of the payment option",null)
+      // }
+      else if (this.profileForm.value.payment_mode == 'self'){
+      
+        if (this.profileForm&&this.profileForm.value&&this.profileForm.value.ref_no1 == ''){
+          this.alert.openAlert("Please enter the NEFT/RTGS reference number",null)
+        }
+       
       }
       
       else {
@@ -324,7 +381,7 @@ export class ProfileComponent implements OnInit {
           && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
           this.profileForm.controls.progress.setValue(60);
         }
-        if (this.profileForm.value.progress === 60 && this.profileForm.value.neft !== '' &&
+        if (this.profileForm.value.progress === 60 && 
         this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
           this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '' &&
           this.profileForm.value.social_media[0].link !== '') {
@@ -360,6 +417,17 @@ export class ProfileComponent implements OnInit {
         if (found?.length) {
           this.alert.openAlert('Please fill all qualification details', null);
         } else {
+          var jsonData={
+            pay_status: true,
+            payment_mode:this.profileForm.value.payment_mode,
+            ref_no: this.profileForm.value.ref_no1 ? this.profileForm.value.ref_no1 : this.profileForm.value.ref_no
+            // payment_mode:this.profileForm.value.payment_mode,
+            // ref_no: this.profileForm?.value.ref_no,
+            // ref_no1: this.profileForm?.value.ref_no1
+          }
+           this.profileForm.value.payment = jsonData;
+           console.log(jsonData)
+
           this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
             if (data.data.update_profile.success === 'true') {
               this.loader.hide();

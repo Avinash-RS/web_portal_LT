@@ -457,26 +457,49 @@
         <br>
         <hr class="p-b-10px">
         <br>
-
+        <!-- <div  formGroupName="payment" > -->
         <div class="col-md-4 col-lg-4 col-sm-12 col-12" [ngClass]="{ 'dis1' : cannotEdit}">
-          <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
-            <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
-            <span class="checkmark"></span>
-          </label> -->
-          <label class="p-b-10px f_size_19">Mode of payment</label>
-          <span class="mand p-b-10px"> *</span> <br>
-          <div class="form-group">
-            <mat-radio-group [disabled]='cannotEdit' formControlName="modeOfpayment" name="MOP">
-              <mat-radio-button value="tpo">Through TPO</mat-radio-button>
-              <mat-radio-button value="self">Self</mat-radio-button>
-            </mat-radio-group>
-          </div>
-
+         
+            <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
+              <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
+              <span class="checkmark"></span>
+            </label> -->
+             <label class="p-b-10px f_size_19">Mode of payment</label>
+            <span class="mand p-b-10px"> *</span> <br>
+            <div class="form-group">
+              <mat-radio-group  (change)="radioChange($event)" [disabled]='cannotEdit'  formControlName="payment_mode" name="payment_mode">
+                <mat-radio-button value="tpo">Through TPO</mat-radio-button> <span style="margin-left: -4px;position: absolute; color: #33333396;">or</span>
+                <mat-radio-button value="self" style="margin-left: 42px;margin-top: 0px;">Self</mat-radio-button>
+              </mat-radio-group>
+            </div>
         </div>
+
+            <div class="row">
+              <div class="col-md-4" *ngIf="isTpoEnable">
+                <label ># Reference no.</label>
+                <input  type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                formControlName="ref_no">
+              </div>
+
+              <div class="col-md-4"  *ngIf="isSelfEnable" >
+                <label># RTGS / NEFT reference no.</label>
+                <input type="tel" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                formControlName="ref_no1">
+              </div>
+
+              <div *ngIf="f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
+                <div *ngIf="f.ref_no1.errors.required">Transaction number is required</div>
+                <div *ngIf="f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number must be 16-22 digits
+                  long</div>
+                <div *ngIf="f.ref_no1.errors.pattern">Transaction number must be only numbers</div>
+          </div>
+        </div>
+      
+      <!-- </div> -->
 
         <br>
 
-        <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
+        <!-- <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
         <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label>
         <span class="mand" *ngIf="!profileForm.value.throughTPO"> *</span>
         <br>
@@ -490,11 +513,15 @@
             <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits
               long</div>
             <div *ngIf="f.neft.errors.pattern">Transaction number must be only numbers</div>
-            <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
-              {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
-
           </div>
-        </div>
+        </div> -->
+
+
+
+
+     <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
+              {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
+        
 
         <br *ngIf="cannotEdit">
         <hr>
