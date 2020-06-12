@@ -247,11 +247,14 @@ export class ProfileComponent implements OnInit {
   radioChange(event){
     console.log(event.value)
     if(event.value == "tpo"){
+     this.profileForm.value.ref_no1 = [];
       this.isTpoEnable = true;
       this.isSelfEnable = false;
     }else if (event.value == "self"){
+      this.profileForm.value.ref_no = [];
       this.isTpoEnable = false;
       this.isSelfEnable = true;
+   
     }else{
       this.isTpoEnable = false;
       this.isSelfEnable = false;
@@ -268,13 +271,12 @@ export class ProfileComponent implements OnInit {
       if (data.data.view_profile.success) {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
-        
         this.payment_mode = profileDetails.payment.payment_mode;
         if(this.payment_mode=='self'){
-          profileDetails.ref_no=profileDetails.payment.ref_no;
+          profileDetails.ref_no1=profileDetails.payment.ref_no;
           profileDetails.payment_mode=profileDetails.payment.payment_mode
         }else if(this.payment_mode=='tpo'){
-          profileDetails.ref_no1=profileDetails.payment.ref_no;
+          profileDetails.ref_no=profileDetails.payment.ref_no;
           profileDetails.payment_mode=profileDetails.payment.payment_mode
         }
         
@@ -335,6 +337,12 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+     if (this.profileForm.value.payment_mode == 'self'){
+      if (this.profileForm&&this.profileForm.value&&this.profileForm.value.ref_no1 == ''){
+        this.alert.openAlert("Please enter the NEFT/RTGS reference number",null)
+      }
+     
+    }
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
@@ -352,13 +360,7 @@ export class ProfileComponent implements OnInit {
       // else if(this.profileForm.value.payment_mode == ''){
       //   this.alert.openAlert("Please select any one of the payment option",null)
       // }
-      else if (this.profileForm.value.payment_mode == 'self'){
-      
-        if (this.profileForm&&this.profileForm.value&&this.profileForm.value.ref_no1 == ''){
-          this.alert.openAlert("Please enter the NEFT/RTGS reference number",null)
-        }
-       
-      }
+     
       
       else {
         // console.log(this.profileForm.value.qualification);
