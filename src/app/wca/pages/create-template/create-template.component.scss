@@ -8,6 +8,10 @@
     margin-right: 25px !important;
 }
 
+.container {
+  background: #e5e3e3;
+}
+
 :host ::ng-deep .mat-expansion-indicator::after {
     padding: 7px !important;
     color: $color-blue;
@@ -24,7 +28,7 @@
     }
 }
 .bcgClrSync{
-    background-color:#e9ecef;
+    background-color:#e5e3e3;
 }
 .backgroundcol2{
     cursor: pointer;
