@@ -295,9 +295,7 @@ export const view_profile = gql`
 
           districtname
 
-          country
-
-          state
+     
 
           is_active
 
