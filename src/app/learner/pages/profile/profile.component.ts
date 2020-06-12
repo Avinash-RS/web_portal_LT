@@ -247,12 +247,13 @@ export class ProfileComponent implements OnInit {
   radioChange(event){
     console.log(event.value)
     if(event.value == "tpo"){
-     this.profileForm.value.ref_no1 = [];
-     
+    //  this.profileForm.value.ref_no1 = [];
+    //  this.profileForm.setValue({ref_no1: ''});
       this.isTpoEnable = true;
       this.isSelfEnable = false;
     }else if (event.value == "self"){
-      this.profileForm.value.ref_no = [];
+      // this.profileForm.value.ref_no = [];
+      // this.profileForm.setValue({ref_no: ''});
       this.isTpoEnable = false;
       this.isSelfEnable = true;
    
@@ -274,9 +275,11 @@ export class ProfileComponent implements OnInit {
         this.userData = data.data.view_profile.message[0];
         this.payment_mode = profileDetails.payment.payment_mode;
         if(this.payment_mode=='self'){
+          this.isSelfEnable = true;
           profileDetails.ref_no1=profileDetails.payment.ref_no;
           profileDetails.payment_mode=profileDetails.payment.payment_mode
         }else if(this.payment_mode=='tpo'){
+          this.isTpoEnable = true;
           profileDetails.ref_no=profileDetails.payment.ref_no;
           profileDetails.payment_mode=profileDetails.payment.payment_mode
         }
