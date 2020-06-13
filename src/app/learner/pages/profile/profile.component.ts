@@ -163,7 +163,7 @@ export class ProfileComponent implements OnInit {
       
       college_name:new FormControl('', myGlobals.req),
       college_stream:new FormControl('', myGlobals.req),
-      country_name:new FormControl('', myGlobals.req),
+      // country_name:new FormControl('', myGlobals.req),
       state_name:new FormControl('', myGlobals.req),
       district_name:new FormControl('', myGlobals.req),
 

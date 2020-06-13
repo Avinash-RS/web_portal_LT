@@ -388,7 +388,7 @@
                 'inputs lap_95'" placeholder="College name" formControlName="college_name">
               <div *ngIf="f.college_name.touched && f.college_name.errors" class="mand">
                 <div *ngIf="f.college_name.errors.required">College name is required</div>
-                <div *ngIf="f.college_name.errors.pattern">College name is invalid</div>
+                <!-- <div *ngIf="f.college_name.errors.pattern">College name is invalid</div> -->
               </div>
             </div>
           </div>
@@ -399,13 +399,13 @@
                 'inputs lap_95'" placeholder="Stream" formControlName="college_stream">
               <div *ngIf="f.college_stream.touched && f.college_stream.errors" class="mand">
                 <div *ngIf="f.college_stream.errors.required">Stream name is required</div>
-                <div *ngIf="f.college_stream.errors.pattern">Stream name is invalid</div>
+                <!-- <div *ngIf="f.college_stream.errors.pattern">Stream name is invalid</div> -->
               </div>
             </div>
           </div>
 
 
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
+          <!-- <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
                 'inputs lap_95'" placeholder="Country" formControlName="country_name">
@@ -414,7 +414,7 @@
                 <div *ngIf="f.country_name.errors.pattern">Country name is invalid</div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
@@ -422,7 +422,7 @@
                 'inputs lap_95'" placeholder="State" formControlName="state_name">
               <div *ngIf="f.state_name.touched && f.state_name.errors" class="mand">
                 <div *ngIf="f.state_name.errors.required">State name is required</div>
-                <div *ngIf="f.state_name.errors.pattern">State name is invalid</div>
+                <!-- <div *ngIf="f.state_name.errors.pattern">State name is invalid</div> -->
               </div>
             </div>
           </div>
@@ -430,10 +430,10 @@
           <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="District" formControlName="district_name">
+                'inputs lap_95'" placeholder=" District/City" formControlName="district_name">
               <div *ngIf="f.district_name.touched && f.district_name.errors" class="mand">
-                <div *ngIf="f.district_name.errors.required">District name is required</div>
-                <div *ngIf="f.district_name.errors.pattern">District name is invalid</div>
+                <div *ngIf="f.district_name.errors.required"> District/City name is required</div>
+                <!-- <div *ngIf="f.district_name.errors.pattern"> District/City name is invalid</div> -->
               </div>
             </div>
           </div>
