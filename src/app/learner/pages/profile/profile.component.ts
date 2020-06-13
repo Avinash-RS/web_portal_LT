@@ -168,7 +168,7 @@ export class ProfileComponent implements OnInit {
       district_name:new FormControl('', myGlobals.req),
 
       payment_mode:new FormControl('', myGlobals.req),
-      ref_no1: new FormControl('', [ Validators.pattern(/^[0-9]*$/),
+      ref_no1: new FormControl('', [ Validators.pattern(/^[a-zA-Z0-9]*$/),
       Validators.minLength(16), Validators.maxLength(22)
       ]),
       ref_no: new FormControl(''),
@@ -424,7 +424,7 @@ export class ProfileComponent implements OnInit {
           });
         }
         if (found?.length) {
-          this.alert.openAlert('Please fill all qualification details', null);
+          this.alert.openAlert('Please fill all qualification details.', null);
         } else {
           const jsonData = {
             pay_status: true,
