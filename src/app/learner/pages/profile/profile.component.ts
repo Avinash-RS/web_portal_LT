@@ -147,8 +147,8 @@ export class ProfileComponent implements OnInit {
   duplicateValueCheck = [];
   selectedinstitute = false;
   selecteddiscipline = false;
-  isSelfEnable:boolean;
-  isTpoEnable:boolean;
+  isSelfEnable: boolean;
+  isTpoEnable: boolean;
 
   ngOnInit() {
     if (this.currentUser.is_profile_updated) {
@@ -171,7 +171,7 @@ export class ProfileComponent implements OnInit {
       ref_no1: new FormControl('', [ Validators.pattern(/^[0-9]*$/),
       Validators.minLength(16), Validators.maxLength(22)
       ]),
-      ref_no:new FormControl(''),
+      ref_no: new FormControl(''),
       // is_student_or_professional: new FormControl('', myGlobals.req),
       // gender: new FormControl('',myGlobals.req),
       is_student_or_professional: new FormControl(''),
@@ -238,7 +238,7 @@ export class ProfileComponent implements OnInit {
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         } else {
-          ref_no1.setValidators([ Validators.pattern(/^[0-9]*$/),
+          ref_no1.setValidators([Validators.pattern(/^[0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         }
@@ -249,24 +249,24 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  
 
-  radioChange(event){
-    console.log(event.value)
-    if(event.value == "tpo"){
+
+  radioChange(event) {
+    console.log(event.value);
+    if (event.value === 'tpo') {
       this.profileForm.get('ref_no1').setValue('');
-    //  this.profileForm.value.ref_no1 = [];
-    //  this.profileForm.setValue({ref_no1: ''});
+      //  this.profileForm.value.ref_no1 = [];
+      //  this.profileForm.setValue({ref_no1: ''});
       this.isTpoEnable = true;
       this.isSelfEnable = false;
-    }else if (event.value == "self"){
+    } else if (event.value === 'self') {
       this.profileForm.get('ref_no').setValue('');
       // this.profileForm.value.ref_no = [];
       // this.profileForm.setValue({ref_no: ''});
       this.isTpoEnable = false;
       this.isSelfEnable = true;
-   
-    }else{
+
+    } else {
       this.isTpoEnable = false;
       this.isSelfEnable = false;
     }
@@ -283,21 +283,21 @@ export class ProfileComponent implements OnInit {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
         this.payment_mode = profileDetails.payment.payment_mode;
-        if(this.payment_mode=='self'){
+        if (this.payment_mode === 'self') {
           this.isSelfEnable = true;
-          profileDetails.ref_no1=profileDetails.payment.ref_no;
-          profileDetails.payment_mode=profileDetails.payment.payment_mode
-        }else if(this.payment_mode=='tpo'){
+          profileDetails.ref_no1 = profileDetails.payment.ref_no;
+          profileDetails.payment_mode = profileDetails.payment.payment_mode;
+        } else if (this.payment_mode === 'tpo') {
           this.isTpoEnable = true;
-          profileDetails.ref_no=profileDetails.payment.ref_no;
-          profileDetails.payment_mode=profileDetails.payment.payment_mode
+          profileDetails.ref_no = profileDetails.payment.ref_no;
+          profileDetails.payment_mode = profileDetails.payment.payment_mode;
         }
-        
-        this.userData.ref=profileDetails.payment.pay_status;
-        
-        console.log(this.payment_mode )
+
+        this.userData.ref = profileDetails.payment.pay_status;
+
+        console.log(this.payment_mode);
         this.ref_no1 = profileDetails.payment.ref_no;
-        console.log(this.ref_no1 )
+        console.log(this.ref_no1);
 
 
         if (profileDetails) {
@@ -312,7 +312,7 @@ export class ProfileComponent implements OnInit {
           } else {
             profileDetails.progress = Number(profileDetails.progress);
           }
-          
+
           profileDetails.iAgree = profileDetails.iAgree == null ? true : profileDetails.iAgree;
           if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
@@ -326,6 +326,26 @@ export class ProfileComponent implements OnInit {
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
           }
+
+          const ind = profileDetails.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
+          if (ind !== -1) {
+
+            if (profileDetails.qualification[ind].institute.startsWith('5')) {
+              this.selectedinstitute = false;
+            } else {
+              this.selectedinstitute = true;
+            }
+            if (profileDetails.qualification[ind].discipline.startsWith('5')) {
+              this.selecteddiscipline = false;
+            } else {
+              this.selecteddiscipline = true;
+            }
+
+          } else {
+            this.selectedinstitute = false;
+            this.selecteddiscipline = false;
+          }
+
 
           this.profileForm.patchValue(profileDetails);
 
@@ -349,11 +369,11 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-     if (this.profileForm.value.payment_mode == 'self'){
-      if (this.profileForm&&this.profileForm.value&&this.profileForm.value.ref_no1 == ''){
-        this.alert.openAlert("Please enter the NEFT/RTGS reference number",null)
+    if (this.profileForm.value.payment_mode === 'self') {
+      if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '') {
+        this.alert.openAlert('Please enter the NEFT/RTGS reference number', null);
       }
-     
+
     }
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
@@ -364,17 +384,13 @@ export class ProfileComponent implements OnInit {
       const index2 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7deddfdba4466d9704b44a');
       if (index === -1) {
         this.alert.openAlert('Please fill 10th qualification details', null);
-      } else if (index1 === -1) {
-        this.alert.openAlert('Please fill diploma qualification details', null);
-      } else if (this.profileForm.value.iAgree == false){
-        this.alert.openAlert('Please fill all mandatory feilds', null);
-      } 
-      // else if(this.profileForm.value.payment_mode == ''){
-      //   this.alert.openAlert("Please select any one of the payment option",null)
+      }
+      //  else if (index1 === -1) {
+      //   this.alert.openAlert('Please fill diploma qualification details', null);
       // }
-     
-      
-      else {
+      else if (this.profileForm.value.iAgree === false) {
+        this.alert.openAlert('Please fill all mandatory feilds', null);
+      } else {
         // console.log(this.profileForm.value.qualification);
         // if (this.profileForm.value.qualification(index).board_university !== '' ||
         //   this.profileForm.value.qualification(index).institute !== '' ||
@@ -384,9 +400,9 @@ export class ProfileComponent implements OnInit {
         //   this.profileForm.value.qualification(index1).institute !== '' ||
         //   this.profileForm.value.qualification(index1).percentage !== '' ||
         //   this.profileForm.value.qualification(index1).year_of_passing !== '') {
-        this.profileForm.value.qualification[index1].board_university = '5ee28a037d0045bb0edc1df9';
-        this.profileForm.value.qualification[index1].specification = '5ee2877b7d0045bb0edc19c2';
-        this.profileForm.value.qualification[index].specification = '5ee2877b7d0045bb0edc19c2';
+        // this.profileForm.value.qualification[index1].board_university = '5ee28a037d0045bb0edc1df9';
+        // this.profileForm.value.qualification[index1].specification = '5ee2877b7d0045bb0edc19c2';
+        // this.profileForm.value.qualification[index].specification = '5ee2877b7d0045bb0edc19c2';
         if (index2 !== -1) {
           this.profileForm.value.qualification[index2].specification = '5ee2877b7d0045bb0edc19c2';
         }
@@ -395,8 +411,8 @@ export class ProfileComponent implements OnInit {
           && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
           this.profileForm.controls.progress.setValue(60);
         }
-        if (this.profileForm.value.progress === 60 && 
-        this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
+        if (this.profileForm.value.progress === 60 &&
+          this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
           this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '' &&
           this.profileForm.value.social_media[0].link !== '') {
           this.profileForm.controls.progress.setValue(90);
@@ -421,26 +437,26 @@ export class ProfileComponent implements OnInit {
         this.profileForm.value.is_student_or_professional = 'student';
 
         console.log('jsonData', this.profileForm.value);
-        var found;
-        if (this.profileForm?.value?.qualification[2]){
+        let found;
+        if (this.profileForm?.value?.qualification[2]) {
           const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[2]));
-          found = Object.keys(obj).filter(function(key) {
-             return obj[key] === '';
-           });
+          found = Object.keys(obj).filter(function (key) {
+            return obj[key] === '';
+          });
         }
         if (found?.length) {
           this.alert.openAlert('Please fill all qualification details', null);
         } else {
-          var jsonData={
+          const jsonData = {
             pay_status: true,
-            payment_mode:this.profileForm.value.payment_mode,
+            payment_mode: this.profileForm.value.payment_mode,
             ref_no: this.profileForm.value.ref_no1 ? this.profileForm.value.ref_no1 : this.profileForm.value.ref_no
             // payment_mode:this.profileForm.value.payment_mode,
             // ref_no: this.profileForm?.value.ref_no,
             // ref_no1: this.profileForm?.value.ref_no1
-          }
-           this.profileForm.value.payment = jsonData;
-           console.log(jsonData)
+          };
+          this.profileForm.value.payment = jsonData;
+          console.log(jsonData);
 
           this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
             if (data.data.update_profile.success === 'true') {
@@ -453,7 +469,7 @@ export class ProfileComponent implements OnInit {
               this.alert.openAlert(data.data.update_profile.message, null);
             }
           });
-         }
+        }
         // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
         //   this.profileForm.value.country && this.profileForm.value.state
         //   && this.profileForm.value.city_town) {
@@ -546,6 +562,7 @@ export class ProfileComponent implements OnInit {
         if (this.profileForm.value.qualification[i].institute !== '' &&
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
           && this.profileForm.value.qualification[i].discipline !== '') {
+            // && this.profileForm.value.qualification[i].discipline !== '') {
           this.qualification.push(this.createQualItem());
         } else {
           this.alert.openAlert('Please fill all details', null);
