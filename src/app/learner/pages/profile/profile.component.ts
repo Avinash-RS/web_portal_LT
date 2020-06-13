@@ -160,6 +160,13 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl('', myGlobals.req),
+      
+      college_name:new FormControl('', myGlobals.req),
+      college_stream:new FormControl('', myGlobals.req),
+      country_name:new FormControl('', myGlobals.req),
+      state_name:new FormControl('', myGlobals.req),
+      district_name:new FormControl('', myGlobals.req),
+
       payment_mode:new FormControl('', myGlobals.req),
       ref_no1: new FormControl('', [ Validators.pattern(/^[0-9]*$/),
       Validators.minLength(16), Validators.maxLength(22)
