@@ -6,6 +6,7 @@ import { interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from 'rxjs/operators';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import {ActivatedRoute, Router} from '@angular/router'
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -44,9 +45,13 @@ export class LandingpageComponent implements OnInit {
   scrollAchievedValue: any;
   trendingCourse: any = [];
   popularCOurse = [];
+  currentPage:any;
 
   constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, private alert: AlertServiceService
-  ,           public learnerservice: LearnerServicesService ) {
+  ,           public learnerservice: LearnerServicesService, public router: Router ) {
+
+    console.log('----------------'+this.router.url)
+    this.currentPage =this.router.url;
 
     this.popular();
     this.trending();

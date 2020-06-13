@@ -7,7 +7,7 @@
 <div id="myDIV" stickyHeaderDirective style="overflow: auto; max-height: 100%" (scrollValues)="getScrollValues($event)">
   <div class="container" #formCard>
     <div class="row section_1" [style.background]="'url(assets/learner/lapBG.jpeg)'">
-      <div class="col-lg-9 col-md-8 col-sm-12 col-12 section_1_a">
+      <div class="col-lg-8 col-md-8 col-sm-12 col-12 section_1_a">
         <br> <br>
         <div class="row">
           <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
@@ -43,8 +43,18 @@
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-4 col-sm-12 col-12">
-        <br>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+<!--Start Login/SignUp-->
+
+<app-login *ngIf="currentPage =='/Learner' || currentPage =='/Learner/login'"></app-login>
+
+<app-registration *ngIf="currentPage =='/Learner/register'"></app-registration>
+
+     
+
+
+
+<!-- 
         <mat-card class="section_1_card_1 background_trans" [ngClass]="{ 'noneC' : scrollAchieved}">
           <mat-card-content>
             <form [formGroup]="detailsForm">
@@ -67,15 +77,17 @@
               </mat-card-content>
             </form>
           </mat-card-content>
-        </mat-card>
-        <br>
+        </mat-card> -->
+        <!-- <br> -->
         <!-- <div [ngClass]="{ 'dispC op' : scrollAchieved && (scrollAchievedValue < 300), 
         'dispC op1' : scrollAchieved && (scrollAchievedValue > 300)}"> -->
-        <div [ngClass]="{ 'dispC' : scrollAchieved }">
+        <!-- <div [ngClass]="{ 'dispC' : scrollAchieved }">
           <img src="assets/landingpageicons/Need Guidance_1.svg" (click)="gotoTop()">
           <img src="assets/landingpageicons/Need Guidance_2.svg" (click)="gotoTop()">
           <img src="assets/landingpageicons/Need Guidance_3.svg" (click)="gotoTop()">
-        </div>
+        </div> -->
+
+        <!--End Login/SignUp-->
       </div>
     </div>
   </div>
