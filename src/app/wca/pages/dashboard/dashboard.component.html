@@ -1,18 +1,19 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item" [routerLink]="['/Admin/auth/dashboard']">Home</li>
-        <li class="breadcrumb-item active" aria-current="page">My courses</li>
+        <li class="breadcrumb-item active" aria-current="page">Courses</li>
     </ol>
 </nav>
-
+<br>
 <div>
     <button class="backgroundcol2" (click)="createCourseNav()">Create a course</button>
 </div>
 
 
-<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="spinner" style="height:100%">
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="spinner" style="height:100%">
     <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
-</div>
+</div> -->
+
 
 <div class="container wrap-body">
     <div class="row">

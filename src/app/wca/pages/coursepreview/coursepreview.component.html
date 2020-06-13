@@ -1,25 +1,25 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Admin/auth/dashboard">Home</a></li>
-    <li *ngIf="detail?.type1" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrollment</a></li>
+    <li *ngIf="detail?.type1" class="breadcrumb-item"><a href="/Admin/auth/enrollment">Course enrolment</a></li>
     <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{course?.course_name}}</li>
   </ol>
 </nav>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-12 col-sm-12 col-12">
     <h1 class="head1">{{course?.course_name}}</h1>
   </div>
-</div>
+</div> -->
 
 <div class="profile">
   <div class="wrap-reg"><br>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-12">
+        <h1 class="head1">{{course?.course_name}}</h1>
         <button class="fillsmallbtn" (click)="editModules()">Edit modules</button>
-        <button class="fillsmallbtn" [class.disabled]="modulength == 0" [disabled]="modulength == 0"
-          (click)="previewcourse(previewDialog)">Preview course</button>
+        <button class="fillsmallbtn" (click)="previewcourse(previewDialog)">Preview course</button>
         <span *ngIf="isshowPublish">
           <button [class.disabled]="modulength == 0" class="fillsmallbtn disabled" [disabled]="modulength == 0"
             (click)="published()">Publish</button>
@@ -34,7 +34,7 @@
           <img class="image" src="{{course?.course_img_url}}">
         </div><br>
         <div class="info">
-          <div class="grid-item fadetext"><b>Course Name</b></div>
+          <div class="grid-item fadetext"><b>Course name</b></div>
           <!-- <div class="grid-item" > -->
           <div class="grid-item">: {{course?.course_name}}</div>
           <!-- <button class="smallbtn" *ngIf="!isshowPublish" >
@@ -79,7 +79,7 @@
           <h4 style="text-align: left;">{{course?.short_description}}</h4>
         </div> -->
         <div class="enroll">
-          <div class="grid-item " *ngIf="courseType === 'publish'"><b>Learners Enrolled</b></div>
+          <div class="grid-item " *ngIf="courseType === 'publish'"><b>Learners enrolled</b></div>
           <div class="grid-item fadetext" *ngIf="courseType === 'publish'">: NA</div>
           <div class="grid-item "><b>Language</b></div>
           <div class="grid-item fadetext">: {{course?.course_language}}</div>
@@ -102,7 +102,7 @@
 
           <div class="grid-item ">
             <div class="course_preview">
-              <h2>Course <br> Nuggets</h2>
+              <h2>Course <br> nuggets</h2>
             </div>
           </div>
 
@@ -122,20 +122,20 @@
     <div class="line"></div>
     <br>
     <div class="row">
-      <h1>Details about the Course</h1>
+      <h1>Details about the course</h1>
     </div><br>
     <div class="row">
       <!-- left side -->
       <div class="col-md-4 col-sm-12 col-12">
-        <h3><b>Course Instructor</b></h3>
+        <h3><b>Course instructor</b></h3>
       </div>
       <div class="col-md-4 col-sm-12 col-12">
-        <span *ngFor="let author of course?.author_details" class="fadetext"> {{author.author_name}} </span>
+        <span *ngFor="let author of course?.author_details,let isLast=last" class="fadetext"> {{author.author_name}} {{isLast ? '' : ', '}} </span>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 col-sm-12 col-12">
-        <h3><b>Pre-Requisite</b></h3>
+        <h3><b>Pre-requisite</b></h3>
       </div>
       <div class="col-md-6 col-sm-12 col-12">
         <button *ngFor="let preque of course?.pre_requisite" class="outlinebtn cent">
@@ -181,7 +181,7 @@
     <div class="line"></div>
     <br>
     <div class="row">
-      <h1>A Step towards</h1>
+      <h1>A step towards</h1>
     </div>
 
     <div class="row">
@@ -298,9 +298,13 @@
       <button mat-icon-button class="close-button" [mat-dialog-close]="true">
         <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close</mat-icon>
       </button>
-      <mat-dialog-content style="width: 80em;height: 600px;">
-        <iframe style="width: 75em; height: 420px; border:none" [src]="urlSafe"></iframe>
-      </mat-dialog-content>
+      <!-- <mat-dialog-content style="width: 80em;height: 800px; overflow:hidden;"> -->
+        <!-- <div id="content" class="overlay">
+          <div class="overlay-content"> -->
+        <iframe style="width: 100%; height: 100%; border:none; overflow:hidden !important;margin-top: -46px !important;" [src]="urlSafe"></iframe>
+        <!-- </div>
+      </div> -->
+        <!-- </mat-dialog-content> -->
     </ng-template>
   </div>
 </div>

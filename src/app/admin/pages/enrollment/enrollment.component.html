@@ -2,16 +2,16 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">User management</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Course enrollment</li>
+    <li class="breadcrumb-item active" aria-current="page">Course enrolment</li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="spinner-container" *ngIf="loading">
-    <mat-spinner diameter="30"></mat-spinner>
+    <!-- <mat-spinner diameter="30"></mat-spinner> -->
   </div>
   <div class="col-5">
-    <h1>Course enrollment</h1>
+    <h1>Course enrolment</h1>
   </div>
   <div class="col-7">
     <div class="toggle">
@@ -33,7 +33,7 @@
 <div>
   <div>
     <div class=" row ">
-      <div style="margin-left: 85%;">
+      <div style="margin-left: 82%;">
         <button [disabled]="selectedcheckbox" (click)="approve(dataSource.data)" class="button button5">Approve</button>
         <button [disabled]="selectedcheckbox" (click)="reject(dataSource.data)" class="button button8">Reject</button>
       </div>

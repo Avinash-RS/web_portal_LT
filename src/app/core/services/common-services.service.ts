@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
-import { logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName, get_all_course_by_usergroup} from '@core/services/operations/common_query';
-import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
-  getCourseCategorySearch, getDetailsCount} from '@core/services/operations/common_mutation';
+import {
+  logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
+  getCoursesByName, get_all_course_by_usergroup
+} from '@core/services/operations/common_query';
+import {
+  add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
+  getCourseCategorySearch, getDetailsCount
+} from '@core/services/operations/common_mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +17,19 @@ import { add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse
 export class CommonServicesService {
 
   constructor(private Apollo: Apollo) { }
-//Search Component for search all courses
+  //Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
 
-//Global for all courses(Guideline search to Category and View all courses)
+  //Global for all courses(Guideline search to Category and View all courses)
   globalCourses$ = new Subject<any>();
   globalCourses = this.globalCourses$.asObservable();
-  
-//Guideline search to Category for Clear all filter
+
+  //Guideline search to Category for Clear all filter
   globalFilterCategory$ = new Subject<any>();
   globalFilterCategory = this.globalFilterCategory$.asObservable();
 
-//Guideline search to Category for removing Category from applied filter
+  //Guideline search to Category for removing Category from applied filter
   globalCategory$ = new Subject<any>();
   globalCategory = this.globalCategory$.asObservable();
 
@@ -37,9 +41,14 @@ export class CommonServicesService {
   selectedCategory$ = new Subject<any>();
   selectedCategory = this.selectedCategory$.asObservable();
 
-   // Category to view all courses component to show category on applied filter
+  // Category to view all courses component to show category on applied filter
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
+
+  loader$ = new Subject<boolean>();
+  loader = this.loader$.asObservable();
+
+  isLoad = true;
 
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
@@ -149,9 +158,9 @@ export class CommonServicesService {
       }
     });
   }
-  postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any , course_language: any, course_mode: any,
-                           author_details: any, partner_details: any,
-                           pagenumber, perPage, publishedToDate, publishedFromDate) {
+  postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any, course_language: any, course_mode: any,
+    author_details: any, partner_details: any,
+    pagenumber, perPage, publishedToDate, publishedFromDate) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {

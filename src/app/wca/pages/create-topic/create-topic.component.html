@@ -154,16 +154,16 @@
                                                                         <span class="dspFlxinside ml10">
                                                                             <small class="spanTime"> Time required to
                                                                                 complete
-                                                                                the topic </small>
-                                                                                <input type="text" class="timeInput" formControlName="topictime" mask="00:m0:s0" [dropSpecialCharacters]="false" (keypress)="isNumberKey($event)" placeholder="00:00:00">
+                                                                                the topic * </small>
+                                                                                <input type="text" class="timeInput" formControlName="topictime" mask="00:m0:s0" [validation]="false" [dropSpecialCharacters]="false" (keypress)="isNumberKey($event)" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
                                                                             Time required </mat-error>
-                                                                        <mat-error
-                                                                            *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
+                                                                        <!-- <mat-error
+                                                                            *ngIf="(j?.controls?.topictime.hasError('mask')) && submitted">
                                                                             Invalid time format
-                                                                        </mat-error>
+                                                                        </mat-error> -->
 
                                                                     </div>
                                                                 </div>
@@ -193,8 +193,8 @@
                                                                     <span [formGroupName]="i">
                                                                         <span class="dspFlxinside ml35">
                                                                             <small class="spanTime"> Time required to complete
-                                                                                the topic </small>
-                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
+                                                                                the topic * </small>
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [validation]="false" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
@@ -222,8 +222,8 @@
                                                                     <span class="ml10" [formGroupName]="i">
                                                                         <span class="dspFlxinside ml35">
                                                                             <small class="spanTime"> Time required to complete
-                                                                                the topic </small>
-                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
+                                                                                the topic * </small>
+                                                                                <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [validation]="false" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                         </span>
                                                                         <mat-error
                                                                             *ngIf="(!j?.value?.topictime) && submitted">
@@ -264,14 +264,18 @@
                                                                                         {{item.name}}</mat-option>
                                                                                 </mat-select>
                                                                                 <div class="chooseFile">
-                                                                                    <input style="display: none;"
+                                                                                    <!-- <input style="display: none;"
                                                                                         [id]="'fileInput4'+i"
                                                                                         type='file' #fileInput4
-                                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)">
-                                                                                    <button (click)="fileInput4.click()"
+                                                                                        (change)="onSelectFile($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)"> -->
+                                                                                    <button (click)="getBlobVttFiles($event,queryData?.template_details[i],j,i,j?.value?.topicimages[0].file,subTitleindex)"
                                                                                         class="subButton"
                                                                                         type="button">Choose
                                                                                         file</button>
+                                                                                        <!-- <button (click)="fileInput4.click()"
+                                                                                        class="subButton"
+                                                                                        type="button">Choose
+                                                                                        file</button> -->
                                                                                 </div>
                                                                                 <div class="addSub">
                                                                                     <mat-icon *ngIf="subTitleindex == 0"
@@ -324,16 +328,16 @@
                                                                             <span class="dspFlxinside">
                                                                                 <small class="spanTime"> Time required
                                                                                     to complete
-                                                                                    the topic </small>
-                                                                                    <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
+                                                                                    the topic *</small>
+                                                                                    <input type="text" class="timeInput" (keypress)="isNumberKey($event)" mask="00:m0:s0" [validation]="false" [dropSpecialCharacters]="false" formControlName="topictime" placeholder="00:00:00">
                                                                             </span>
                                                                             <mat-error
                                                                                 *ngIf="(!j?.value?.topictime) && submitted">
                                                                                 Time required</mat-error>
-                                                                            <mat-error
+                                                                            <!-- <mat-error
                                                                                 *ngIf="(j?.controls?.topictime.hasError('pattern')) && submitted">
                                                                                 Invalid time format
-                                                                            </mat-error>
+                                                                            </mat-error> -->
 
                                                                         </span>
                                                                     </div>

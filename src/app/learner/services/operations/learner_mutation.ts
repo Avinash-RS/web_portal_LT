@@ -711,7 +711,7 @@ export const getCourseCategorySearch = gql`
   mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
     $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
     $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String,
-    $catalogue_visibility: Int! ) {
+    $catalogue_visibility: Int ) {
     getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
       course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
       pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
@@ -833,8 +833,8 @@ export const createGuidanceRequest = gql`
   }
 `;
 export const InsertCourseFeedback = gql`
-mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content]){
-    InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans) {
+mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content],$course_id: String ){
+    InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans, course_id : $course_id ) {
       success
       message
     }

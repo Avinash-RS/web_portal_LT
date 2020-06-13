@@ -12,14 +12,18 @@ export class BlobServicesService {
 
   constructor(private http: HttpClient) { }
 
-  private urlAPI = environment.wcaapiurl + 'api/azureStorage' + '/readBlodContainer';
+  private urlAPI = environment.wcaapiurl + 'api/azureStorage';
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
 
   getContainerBlobs(): Observable<any> {
-    return this.http.get(this.urlAPI, this.httpOptions).pipe(tap());
+    return this.http.get(this.urlAPI + '/readBlodContainer', this.httpOptions).pipe(tap());
+  }
+
+  getContainerBlobs_VTTFiles(): Observable<any> {
+    return this.http.get(this.urlAPI + '/getSubtitlesContainer', this.httpOptions).pipe(tap());
   }
 
 }

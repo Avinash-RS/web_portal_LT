@@ -239,7 +239,7 @@ export class CreateCourseComponent implements OnInit {
                 this.imageView.type === 'file';
                 formData.append('image', this.imageView);
                 this.wcaService.uploadImage(formData).subscribe((data: any) => {
-                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
+                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
                     this.spinner.hide();
                     reader.addEventListener('load', () => {
                         // convert image file to base64 string
@@ -527,9 +527,9 @@ export class CreateCourseComponent implements OnInit {
 
     loadBlobs() {
         const dialogRef = this.dialog.open(BlobReaderComponent, {
-            data: {},
+            data: { type: 'videos' },
             height: '70%',
-            width: '80%',
+            width: '90%',
             closeOnNavigation: true,
             disableClose: true,
         });
@@ -544,7 +544,6 @@ export class CreateCourseComponent implements OnInit {
         const courseName = this.courseForm.controls.course_name.value;
         if (courseName !== undefined || courseName !== null || courseName !== '') {
             this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
-                console.log(res);
                 if (!res.success) {
                     this.toast.warning(res.message);
                     this.courseForm.get('course_name').reset();

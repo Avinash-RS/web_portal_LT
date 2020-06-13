@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './coursepreview.component.html',
   styleUrls: ['./coursepreview.component.scss']
 })
-export class CoursepreviewComponent implements OnInit {
+export class CoursepreviewComponent implements OnInit {  
   public isCollapsed = false;
   clicked: any = 'media';
   urlSafe: SafeResourceUrl;
@@ -43,6 +43,7 @@ export class CoursepreviewComponent implements OnInit {
   countofdoc: any;
   authorinfo: any;
   url:any;
+  
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
     private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
     private loader: NgxSpinnerService, ) {
@@ -63,7 +64,6 @@ export class CoursepreviewComponent implements OnInit {
 
     this.loader.show();
     this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid).subscribe((viewCourse: any) => {
-      console.log(viewCourse.data.viewcourse, 'viewCourse')
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
@@ -92,7 +92,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id}});
+    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id,editModulesback: false}});
   }
   clickedT(i) {
     this.clicked = i
@@ -132,9 +132,10 @@ export class CoursepreviewComponent implements OnInit {
   previewcourse(templateRef: TemplateRef<any>) {
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
-    console.log(this.content.url)
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });

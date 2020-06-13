@@ -1,6 +1,6 @@
 'use strict';
-import { OnInit, HostListener, Component } from '@angular/core';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { OnInit, HostListener, Component, Inject } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { BlobServicesService } from '../../services/azureBlobService/blob-services.service';
 import { VideoPreviewModalComponent } from '../../pages/video-preview-modal/video-preview-modal.component';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
@@ -31,10 +31,13 @@ export class BlobReaderComponent implements OnInit {
   treeControl: FlatTreeControl<TreeNode>;
   treeFlattener: MatTreeFlattener<FileNode, TreeNode>;
   dataSource: MatTreeFlatDataSource<FileNode, TreeNode>;
+  type: any;
+  isPreview: boolean;
 
-  constructor(private dialogRef: MatDialogRef<BlobReaderComponent>,
-              private dialog: MatDialog,
-              private azureBlobService: BlobServicesService) {
+  constructor(private dialog: MatDialog,
+              private azureBlobService: BlobServicesService,
+              private dialogRef: MatDialogRef<BlobReaderComponent>, @Inject(MAT_DIALOG_DATA) data) {
+    this.type = data.type;
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
@@ -59,13 +62,25 @@ export class BlobReaderComponent implements OnInit {
   }
 
   getContainers() {
-    this.azureBlobService.getContainerBlobs().subscribe(res => {
-      if (res.statusBool) {
-        this.exploredData = res.data.data;
-        this.exploredFile = res.data.file;
-        this.dataSource.data = res.data.file;
-      }
-    });
+    if (this.type === 'subtitles') {
+      this.azureBlobService.getContainerBlobs_VTTFiles().subscribe(res => {
+        if (res.statusBool) {
+          this.exploredData = res.data.data;
+          this.exploredFile = res.data.file;
+          this.dataSource.data = res.data.file;
+          this.isPreview = false;
+        }
+      });
+    } else if (this.type === 'videos') {
+      this.azureBlobService.getContainerBlobs().subscribe(res => {
+        if (res.statusBool) {
+          this.exploredData = res.data.data;
+          this.exploredFile = res.data.file;
+          this.dataSource.data = res.data.file;
+          this.isPreview = true;
+        }
+      });
+    }
   }
 
   getURL(row) {
