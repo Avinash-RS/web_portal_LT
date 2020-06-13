@@ -168,9 +168,8 @@ export class ProfileComponent implements OnInit {
       district_name:new FormControl('', myGlobals.req),
 
       payment_mode:new FormControl('', myGlobals.req),
-      ref_no1: new FormControl('', [ Validators.pattern(/^[0-9]*$/),
-      Validators.minLength(16), Validators.maxLength(22)
-      ]),
+      ref_no1: new FormControl('',[Validators.pattern(/^[A-Z a-z 0-9]*$/),
+      Validators.minLength(16), Validators.maxLength(22)]),
       ref_no: new FormControl(''),
       // is_student_or_professional: new FormControl('', myGlobals.req),
       // gender: new FormControl('',myGlobals.req),
