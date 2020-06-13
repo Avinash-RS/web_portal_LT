@@ -1,60 +1,208 @@
+// @import "variable";
+// // @import "../../../../assets/variable.scss";
+
+// mat-card {
+//     width: 22%;
+//     margin: auto;
+//     top: 10%;
+// }
+ .wrap-reg{
+   background: #ffffffc7 !important;
+     width: 100% !important;
+ }
+// input[type=text] {
+//     width: 100%;
+//     padding: 12px 20px;
+//     margin: 1px 0;
+//     background: $color-light-blue;
+//     display: inline-block;
+//     border: 1px solid #ccc;
+//     box-sizing: border-box;
+//     border-radius: 5px;
+// }
+
+// button {
+//     background: $color-blue !important;
+//     color: white;
+//     width: 70%;
+//     margin-left: 15%;
+// }
+
+// mat-form-field {
+//     width: 80%;
+//     // height: 10vh !important;
+// }
+
+// .remember_me {
+//     float: left;
+// }
+
+// .forgot_ps {
+//     text-align: end;
+//     width: 90%;
+//     color: #3f548b;
+//     font-weight: 500;
+// }
+
+// .sign_up,
+// .remember_me,
+// mat-card-title,
+// a {
+//     color: #3f548b;
+//     text-align: center !important;
+// }
+
+// .mat-checkbox .mat-checkbox-frame {
+//     border-color: black;
+//     background-color: #dddddd
+// }
+
+// mat-card-title {
+//     font-weight: 400;
+// }
+
+// .fa {
+//     cursor: pointer;
+//     font-size: 16px;
+// }
+
+// .errspan {
+//     float: right;
+//     margin-right: 10px;
+//     margin-top: -28px;
+//     position: relative;
+//     z-index: 2;
+//     color: black;
+// }
+
+// .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
+//     color: #d2d1d1;
+// }
 @import "variable";
-// @import "../../../../assets/variable.scss";
 
 mat-card {
     width: 22%;
     margin: auto;
     top: 10%;
 }
-.wrap-reg{
-    background: #ffffff9e !important;
-    width: 100% !important;
+
+.align {
+    text-align: right !important;
 }
-input[type=text] {
+
+:host ::ng-deep input[type=text],input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 1px 0;
-    background: $color-light-blue;
+    // background: $color-light-blue;
+    background: $color-white !important;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid $color-border;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: none !important;
+    // border-radius: 5px;
 }
 
-button {
+:host ::ng-deep button {
     background: $color-blue !important;
-    color: white;
-    width: 70%;
-    margin-left: 15%;
+    color: $color-white;
+    width: 100%;
+    border-radius: 0px;
+    height: 42px;
 }
 
 mat-form-field {
     width: 80%;
-    // height: 10vh !important;
 }
 
 .remember_me {
     float: left;
+    font-size: 11px;
+    color: $color-blue !important;
+    margin-top: -18px;
+}
+
+.forgot {
+    color: $color-blue !important;
+    font-weight: 400 !important;
+    cursor: pointer;
+}
+
+.link {
+    color: $color-white !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+    height: 13px !important;
+    width: 13px !important;
+
+}
+
+::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+    line-height: 27px;
+}
+
+.haveacc {
+    color: $label2 !important;
 }
 
 .forgot_ps {
-    text-align: end;
-    width: 90%;
-    color: #3f548b;
+    text-align: center;
+    width: 100%;
+    color: $color-blue;
     font-weight: 500;
+    font-size: 12px;
+    margin-top: 8%;
 }
 
-.sign_up,
-.remember_me,
+.col {
+    color: $color-blue !important;
+    margin-left: -10px;
+}
+
+:host ::ng-deep.p-t-77 {
+    padding-top: 21px !important;
+}
+
+:host ::ng-deep.signIn {
+    text-align: center !important;
+    margin-top: 22px !important;
+    color: $color-blue !important;
+    font-weight: lighter !important;
+}
+
+:host ::ng-deep.linee {
+    border-left: 222px solid #ccc;
+    height: 1px;
+    position: absolute;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 2px;
+    border-radius: 17px;
+}
+
+:host ::ng-deep.sign_up {
+    color: $color-blue !important;
+    margin-top: 5px !important;
+    text-align: center !important;
+    margin-left: 16px;
+}
+
 mat-card-title,
-a {
-    color: #3f548b;
+.remember_me .a {
+    color: $color-blue !important;
+    margin-top: -12px !important;
     text-align: center !important;
 }
 
-.mat-checkbox .mat-checkbox-frame {
-    border-color: black;
-    background-color: #dddddd
+:host ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: $color-border !important;
+
+}
+
+:host ::ng-deep.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: $color-blue !important;
 }
 
 mat-card-title {
@@ -66,15 +214,255 @@ mat-card-title {
     font-size: 16px;
 }
 
-.errspan {
+.form-control {
+    // border-radius: 0px !important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 2px !important;
+}
+
+:host ::ng-deep.errspan {
     float: right;
     margin-right: 10px;
-    margin-top: -28px;
+    margin-top: -29px;
     position: relative;
     z-index: 2;
-    color: black;
+    font-size: 18px;
+    color: #9E9E9E;
 }
 
 .mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
 }
+
+
+:host ::ng-deep.pg {
+    position: absolute;
+    color: $color-white;
+    padding: 7px;
+    margin-top: 16px;
+    margin-left: 50% !important;
+    /* background-color: #ffffff85; */
+    font-size: 14px;
+    font-weight: normal !important;
+}
+
+:host ::ng-deep.privcy {
+    position: absolute;
+    color: $color-white;
+    padding: 7px;
+    margin-top: 45%;
+    margin-left: 47% !important;
+    /* background-color: #ffffff85; */
+    font-size: 14px;
+    font-weight: normal !important;
+}
+
+:host ::ng-deep .container-reg200 {
+    width: 100%;
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    // background: url('../../../../assets/learner/login-bg.jpg');
+}
+
+:host ::ng-deep.lxplogo {
+    text-align: center;
+    margin-left: 94px;
+    margin-right: 94px;
+    width: 110px;
+}
+
+:host ::ng-deep.head1 {
+    text-align: center;
+    font-weight: normal !important;
+    font-size: 21px;
+    margin-top: 18px !important;
+}
+
+:host ::ng-deep.bgimg {
+    width: 99%;
+    height: 657px;
+}
+
+:host ::ng-deep.lnt_logo {
+    position: absolute;
+    width: 15%;
+    margin-top: 21px;
+    margin-left: 108px;
+}
+
+.reset {
+    cursor: pointer;
+  }
+
+ :host ::ng-deep .wrap-reg {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 30px;
+    // height: 100vh;
+    border-radius: 0px !important;
+    margin-left: 0% !important;
+    overflow: hidden !important;
+
+}
+:host ::ng-deep.footer20{
+    position: absolute;
+    bottom: 20px;
+    width: 91%;
+}
+
+  :host ::ng-deep.footericon{
+    width: 67%;
+    position: absolute;
+    margin-left: 5px;
+
+}
+:host ::ng-deep.footertext{
+    font-size: 12px !important;
+    margin-left: -18px;
+}
+
+:host ::ng-deep .powered{
+    font-size: 12px !important;
+     margin-left: -29px;
+}
+
+
+// mobile
+@media (max-width: 480px) and (max-width: 320px) {
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        overflow: hidden !important;
+        height: 96vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
+}
+
+
+@media (max-width: 568px) {
+    .wrap-reg {
+        width: 100%;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        overflow: hidden !important;
+        height: 96vh;
+        border-radius: 0 !important;
+        margin-left: 0% !important;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+    .linee {
+        border-left: 222px solid #ccc;
+        height: 1px;
+        position: absolute;
+        margin-left: 43px;
+        margin-right: 80px;
+        margin-top: 2px;
+        border-radius: 17px;
+    }
+    .powered {
+        font-size: 10px !important;
+        margin-left: -43px;
+    }
+    .footericon {
+        width: 67%;
+        position: absolute;
+        margin-left: 5px;
+        margin-top: 4px;
+    }
+    .footertext {
+        font-size: 10px;
+        margin-left: -39px;
+    }
+    .footer20 {
+        position: absolute;
+        bottom: 2px;
+        width: 91%;
+    }
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
+    .footer20 {
+        position: absolute;
+        bottom: 13px;
+        width: 84%;
+    }
+}
+
+@media only screen and (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .row {
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+
+    .wrap-reg {
+        width: 100%;
+        margin-left: 0% !important;
+    }
+
+    .head1 {
+        // font-size: 36px !important;
+        // margin-top: 12%!important;
+    }
+
+    .form-group {
+        margin-bottom: 2rem;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 10px !important;
+    }
+
+    .forgot {
+        font-size: 14px !important;
+    }
+
+    .reset {
+        font-size: 14px !important;
+    }
+
+    .haveacc {
+        font-size: 14px !important;
+    }
+
+}
+
+
+
+
+
+
+
+
