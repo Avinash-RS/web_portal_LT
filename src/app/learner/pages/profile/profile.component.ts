@@ -233,11 +233,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('throughTPO').valueChanges
       .subscribe((val: any) => {
         if (val === true) {
-          ref_no1.setValidators([Validators.pattern(/^[0-9]*$/),
+          ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         } else {
-          ref_no1.setValidators([Validators.pattern(/^[0-9]*$/),
+          ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
           Validators.minLength(16), Validators.maxLength(22)
           ]);
         }
