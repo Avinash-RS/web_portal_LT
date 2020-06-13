@@ -369,8 +369,8 @@ export class ProfileComponent implements OnInit {
 
     }
     // changed for Koushalys - 10th june
-    // if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
-    //   this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
+    if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
+      this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
 
     const index = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dedc1dba4466d9704b3f2');
     const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
@@ -478,9 +478,9 @@ export class ProfileComponent implements OnInit {
       //   this.alert.openAlert('Please fill all qualification details', null);
       // }
     }
-    // } else {
-    //   this.alert.openAlert('Please fill all qualification details', null);
-    // }
+    } else {
+      this.alert.openAlert('Please fill all qualification details', null);
+    }
   }
 
   yearOfpassing(index) {
