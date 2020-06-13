@@ -115,13 +115,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     nav: true
   };
 
-  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
-  //   if (this.isReload) {
-  //     event.returnValue = false;
-  //   } else {
-  //     this.isReload = true;
-  //   }
-  // }
+  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+    if (this.isReload) {
+      event.returnValue = false;
+    } else {
+      this.isReload = true;
+    }
+  }
 
   courseform(): FormGroup {
     return this.formBuilder.group({
@@ -435,12 +435,12 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
           } else if (item.name === 'PPT') {
             this.spinner.show();
             const formData1 = new FormData();
-            formData1.append('reffile', this.imageView);
-            this.wcaService.excelUpload(formData1).subscribe((data: any) => {
-              if (data && data.success) {
+            formData1.append('pdf', this.imageView);
+            this.wcaService.excelPpt(formData1).subscribe((data: any) => {
+              if (data && data.Message == 'Success') {
                 this.clearFormArray(formdata.get("topicimages") as FormArray)
-                for (var m = 0; m < data.message.length; m++) {
-                  let path = 'https://edutechstorage.blob.core.windows.net/' + data.message[m].path;
+                for (var m = 0; m < data.Result.length; m++) {
+                  let path = data.Result[m];
                   let obj2 = {
                     name: '',
                     image: path,
