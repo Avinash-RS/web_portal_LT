@@ -553,7 +553,7 @@
 
               <div class="col-md-4"  *ngIf="isSelfEnable" >
                 <label># RTGS / NEFT reference no.</label>
-                <input type="tel" onfocus="this.value=''" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                <input type="text" onfocus="this.value=''" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no1">
               </div>
 
@@ -561,7 +561,7 @@
                 <div *ngIf="f.ref_no1.errors.required">Transaction number is required</div>
                 <div *ngIf="f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number must be 16-22 digits
                   long</div>
-                <div *ngIf="f.ref_no1.errors.pattern">Transaction number must be only numbers</div>
+                <div *ngIf="f.ref_no1.errors.pattern">Transaction number must be only alphanumeric</div>
           </div>
         </div>
       
