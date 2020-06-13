@@ -275,7 +275,8 @@
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
               <!-- <mat-form-field *ngIf=""> -->
               <ng-container *ngIf="(selectedinstitute == false) && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
-                (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')&& 
+                (qual?.value?.qualification !== '5e7dee15dba4466d9704b4d2')">
                 <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                   placeholder="Institute" formControlName="institute" name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
@@ -289,7 +290,7 @@
               </ng-container>
               <!------------------------Institute textbox for 10th and 12th--------------------->
               <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex"
-                *ngIf="(selectedinstitute == true) || (qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                *ngIf="(selectedinstitute == true) || (qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')|| (qual?.value?.qualification == '5e7dee15dba4466d9704b4d2')">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
                 'inputs width_100'" formControlName="institute">
               </ng-container>&nbsp;&nbsp;&nbsp;
