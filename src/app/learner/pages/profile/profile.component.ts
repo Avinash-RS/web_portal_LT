@@ -423,7 +423,7 @@ export class ProfileComponent implements OnInit {
           });
         }
         if (found?.length) {
-          this.alert.openAlert('Please fill all qualification details', null);
+          this.alert.openAlert('Please fill all qualification details.', null);
         } else {
           const jsonData = {
             pay_status: true,
