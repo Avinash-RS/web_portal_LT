@@ -243,8 +243,6 @@ export class ProfileComponent implements OnInit {
           ]);
         }
         ref_no1.updateValueAndValidity();
-        // payment_mode.setValidators(null);
-        // ref_no.setValidators(null);
       });
 
   }
@@ -252,17 +250,12 @@ export class ProfileComponent implements OnInit {
 
 
   radioChange(event) {
-    console.log(event.value);
     if (event.value === 'tpo') {
       this.profileForm.get('ref_no1').setValue('');
-      //  this.profileForm.value.ref_no1 = [];
-      //  this.profileForm.setValue({ref_no1: ''});
       this.isTpoEnable = true;
       this.isSelfEnable = false;
     } else if (event.value === 'self') {
       this.profileForm.get('ref_no').setValue('');
-      // this.profileForm.value.ref_no = [];
-      // this.profileForm.setValue({ref_no: ''});
       this.isTpoEnable = false;
       this.isSelfEnable = true;
 
@@ -271,10 +264,6 @@ export class ProfileComponent implements OnInit {
       this.isSelfEnable = false;
     }
   }
-
-  // edit(){
-  //   this.cannotEdit = false;
-  // }
 
   getprofileDetails(userid) {
     this.loader.show();
@@ -294,12 +283,8 @@ export class ProfileComponent implements OnInit {
         }
 
         this.userData.ref = profileDetails.payment.pay_status;
-
-        console.log(this.payment_mode);
         this.ref_no1 = profileDetails.payment.ref_no;
-        console.log(this.ref_no1);
-
-
+       
         if (profileDetails) {
           if (profileDetails.qualification.length > 0) {
             profileDetails.qualification.forEach(v => delete v.__typename);
@@ -322,7 +307,6 @@ export class ProfileComponent implements OnInit {
           while (qualification.length) {
             qualification.removeAt(0);
           }
-          // localStorage.setItem('user_img',this.urlImage)
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
           }
@@ -346,10 +330,7 @@ export class ProfileComponent implements OnInit {
             this.selecteddiscipline = false;
           }
 
-
           this.profileForm.patchValue(profileDetails);
-
-          // console.log(this.profileForm);
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
@@ -435,11 +416,9 @@ export class ProfileComponent implements OnInit {
           this.profileForm.value.pincode = null;
         }
         this.profileForm.value.is_student_or_professional = 'student';
-
-        console.log('jsonData', this.profileForm.value);
         let found;
-        if (this.profileForm?.value?.qualification[2]) {
-          const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[2]));
+        if (this.profileForm?.value?.qualification[1]) {
+          const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[1]));
           found = Object.keys(obj).filter(function (key) {
             return obj[key] === '';
           });
@@ -451,19 +430,14 @@ export class ProfileComponent implements OnInit {
             pay_status: true,
             payment_mode: this.profileForm.value.payment_mode,
             ref_no: this.profileForm.value.ref_no1 ? this.profileForm.value.ref_no1 : this.profileForm.value.ref_no
-            // payment_mode:this.profileForm.value.payment_mode,
-            // ref_no: this.profileForm?.value.ref_no,
-            // ref_no1: this.profileForm?.value.ref_no1
           };
           this.profileForm.value.payment = jsonData;
-          console.log(jsonData);
 
           this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
             if (data.data.update_profile.success === 'true') {
               this.loader.hide();
               this.currentUser.is_profile_updated = true;
               localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-              // this.alert.openAlert(data.data.update_profile.message, null);
               this.router.navigate(['/Learner/Thankyou']);
             } else {
               this.alert.openAlert(data.data.update_profile.message, null);
@@ -633,7 +607,6 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe((level: any) => {
       this.levelValue = level.data.get_qualification_details.data;
-      console.log(this.levelValue);
       this.levelValue.forEach(element => {
         element.allowed = 'Y';
         this.getBoardsUniv(element._id);
