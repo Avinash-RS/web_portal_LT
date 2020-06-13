@@ -85,4 +85,12 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
+  forgotusername(data) {
+
+  }
+
+  resetPassword(data) {
+
+  }
 }
