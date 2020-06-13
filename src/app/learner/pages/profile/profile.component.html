@@ -364,7 +364,7 @@
                 (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
               </mat-icon> -->
               <mat-icon (click)="addQualification(in)"
-                *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 3"
+                *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 2"
                 class="addIcon">add
               </mat-icon>
               <!-- <div *ngIf="f.qualification && f.qualification[in] && f.qualification[in].percentage && f.qualification[in].percentage.touched && f.qualification[in].percentage.errors" class="mand">
