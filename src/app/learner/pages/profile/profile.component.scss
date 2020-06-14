@@ -1,328 +1,5 @@
 @import "variable";
 
-
-// .overAll{
-//   margin-left: 6px;
-//   margin-top: 6px;
-// }
-// // textarea {
-// //   // width: 314px;
-// //   // border-radius: 4px;
-// //   height: auto;
-// // }
-// .mat-radio-button ~ .mat-radio-button {
-// margin-left: 25px;
-// }
-// figure.mat-figure {
-// padding-left: -39px;
-// }
-// .profilegrid{
-//   margin-left: 451px;
-//   margin-top: -24px;
-// }
-// .subbtn{
-// background-color:  $color-blue;
-// color: $color-white;
-// width: 20%;
-// border: solid;
-// height: 50px;
-// }
-// .bt{
-//   text-align: center;
-// }
-// .popupbtns{
-//   text-align: center;
-//   background-color: $color-blue;
-//   color: $color-white;
-//   width: 90%;
-//   margin-left: 5%;
-//   margin-right: 5%;
-//   margin-bottom: 5%;
-//   border: solid;
-//   font-size: 18px;
-//   height: 46px;
-// }
-// .avatar {
-//   vertical-align: middle;
-//   width: 120px;
-//   height: 120px;
-//   border-radius: 50%;
-//   margin-left: -73px;
-
-// }
-// .camera{
-//   background-color: #f8f9fa;
-//   border-radius: 50%;
-// }
-
-
-
-// .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
-//   background: $color-blue !important;
-// }
-
-// .masterGrid{
-//   margin-top: -4%;
-//   // height: 24em;
-// }
-// .createicon {
-//   background-repeat: no-repeat;
-//   display: inline-block;
-//   fill: currentColor;
-//   font-size: 17px;
-//   color: $color-blue !important;
-//   margin-top: -1px;
-//   margin-left: 10px;
-// }
-
-// .Edit{
-//   margin-left: -59px;
-//   margin-top: 21px;
-// }
-// .certificate{
-//   margin-left: -30px;
-// }
-// .myprofile{
-//   margin-left: 50px;
-//   font-size: 22px !important;
-//   font-weight: 500 !important;
-//   color:$color-blue;
-//   margin-top: 20%;
-//   // height: 30em;
-// }
-// .cameraicon{
-//   margin-left: -47px;
-//   margin-top: 97px;
-//   font-size: 20px;
-//   color: $color-blue;
-//   z-index: 0;
-// }
-// .plusicon{
-//   margin-top: 7px;
-// }
-// .plusicon2{
-//   margin-top: 7px;
-// }
-// .inputs{
-//   border: 1px solid;
-//   padding: 8px !important;
-//   border-radius: 5px;
-//   color: $color-blue;
-//   width: 100%;
-//   background-color: none !important;
-// }
-
-// .input-group-text {
-//   display: inline-grid;
-//   align-items: center;
-//   padding: 0.375rem 0.75rem;
-//   margin-bottom: 0;
-//   font-size: 1rem;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   color: $color-blue !important;
-//   text-align: center;
-//   white-space: nowrap;
-//   border: 1px solid #ced4da;
-//   border-top-right-radius: 5px !important
-// }
-// .bg-transparent {
-//   background-color: #94b5f1!important;
-// }
-// .passwordmodel{
-//   width: 150px !important;
-// }
-// input[type=text]
-// {
-//   width: 100%;
-//   padding: 9px 20px;
-//   margin: 1px 0;
-//   background: white;
-//   display: inline-block;
-//   border: 1px solid $color-blue;
-//   box-sizing: border-box;
-//   border-radius: 5px;
-// }
-
-// .inputbox[type=password]{
-//   background: $color-blue !important;
-// }
-// .linkedin{
-//   font-size: 35px;
-//   margin-top: 8px;
-// }
-// .selectinputs{
-//   border: 1px solid;
-//   padding: 8px !important;
-//   border-radius: 5px;
-//   color: $color-blue;
-//   width: 105px
-// }
-
-// .grid1 {
-//   left: 0px;
-//   width: 50%;
-//   margin-top: -51px;
-//   padding-top: 27%;
-//   margin-left: -12%;
-// }
-
-// .language{
-//    padding-left: 18px;
-// }
-// .doj{
-//   margin-left: 54px;
-//   margin-top: -111px;
-// }
-// .example-section {
-//   margin-left: -88px;
-//   margin-right: 8%;
-//   margin-top: 0%;
-//   height: 0px;
-// }
-// .example-margin {
-//   margin: 0 10px;
-//   color:$color-white;
-//   border: 2px solid;
-//   border-radius: 16px;
-//   height: 10px;
-//   width: 100%;
-// }
-// .studentradio {
-//   margin-left: 5px;
-// }
-// .experirnce{
-//   margin-left: -33px;
-// }
-// .space5{
-//   margin-top: 5px;
-// }
-
-// .profilelabe{
-//   font-size: 10px
-// }
-// .profilecomplete{
-//   color: $color-blue;
-//   margin-left: 50px;
-//   text-align: center !important;
-// }
-// label{
-//   color: #1F3777;
-// }
-// .qual{
-//   margin-left: 6px;
-// }
-
-
-
-// .col-sm-2 {
-//     flex: 0 0 16.666667%;
-//     max-width: 16.666667%;
-//     padding: 6px;
-// }
-
-// .mat-menu-panel {
-//   background: $color-blue !important;
-// }
-
-// .mat-menu-content:not(:empty) {
-//   padding-top: 8px;
-//   padding-bottom: 8px;
-//   background: $color-blue !important;
-// }
-// .head{
-//   font-weight: lighter !important;
-//   margin-top: 9%;
-// }
-
-// .title{
-
-//   font-size: 20px;
-//   font-weight: 400;
-// }
-// div.account{
-//   color: $color-blue;
-//   word-break: break-all !important;
-//   text-align: center !important;
-//   margin-left: 15px;
-//   cursor: pointer;
-// }
-// .otphead{
-//   color: $color-blue;
-//   text-align: left;
-//   font-weight: 500 !important;
-// }
-
-// .otp {
-//   margin: 0 4px;
-//   text-align: center;
-//   font-size: 27px;
-//   height: 50px;
-//   border: none;
-//   border-radius: 9px;
-//   background-color: #94b5f1 !important;
-
-//   &:focus {
-//     border-color: #94b5f1;
-//     box-shadow: 0 0 5px #94b5f1 inset;
-//   }
-
-//   &::selection {
-//     background: transparent;
-//   }
-// }
-
-// .input-group-text {
-//   display: flex;
-//   align-items: center;
-//   padding: 12px 11px 10px 1px;
-//   margin-bottom: 0;
-//   height: 38px;
-//   margin-top: 1px;
-//   font-size: 1rem;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   color: #495057;
-//   text-align: center;
-//   white-space: nowrap;
-//   border: 1px solid #cccccc;
-//   border-radius: 7px;
-// }
-
-// .bg-transparent {
-//   background-color: $color-light-blue!important;
-// }
-// .box{
-//   width: 218px !important;
-//   margin-left: 12% !important;
-
-// }
-// .valid{
-//   color:$color-blue;
-//   font-size: 10px;
-//   font-weight: 600;
-// }
-
-// .mat-dialog-content{
-//   overflow: hidden !important;
-// }
-
-// .resendbtn{
-//   background-color: transparent !important;
-//   color: $color-blue !important;
-//   border: 0px !important;
-//   font-weight: 500 !important;
-// }
-
-// .close{
-//   font-size: 18px;
-//   color: $color-blue;
-//   text-align: right !important;
-// }
-
-
-
-
 //After Restructure
 .profile {
   display: flex;
@@ -330,19 +7,438 @@
   justify-content: center;
 }
 
-@media screen and (max-width:765px) {
+// responsiveness starts here
+
+.cameraIcon {
+  z-index: 11;
+  margin-top: 12px;
+  margin-left: 12px;
+  position: absolute;
+  background: $color-white;
+  width: 25px !important
+}
+
+.profile-pic {
+  margin: 0 auto;
+}
+
+:host ::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+.profile-progress {
+  width: 70%;
+  // float right
+  float: right;
+  text-align: right !important;
+  text-align: end !important;
+  // 
+  margin-top: 70% !important;
+}
+
+.m-b-5px {
+  margin-bottom: 5px;
+}
+
+
+
+@media screen and (min-width:270px) and (max-width:335px) {
+  .lap_95 {
+    width: 100%;
+  }
+
+  .lap_s95 {
+    width: 100% !important;
+  }
+
+  .bb-icon {
+    border-bottom: 0px !important;
+  }
+
+  .lapview {
+    display: none;
+  }
+
+}
+
+@media screen and (min-width:335px) and (max-width:375px) {
+  .bb-icon {
+    border-bottom: 0px !important;
+  }
+
+  .lap_95 {
+    width: 100%;
+  }
+
+  .lap_s95 {
+    width: 100% !important;
+  }
+
+  .lapview {
+    display: none;
+  }
+
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
   .profile {
     justify-content: space-between;
   }
 
-  .left {
+  .lap_95 {
+    width: 100%;
+  }
+
+  .lap_s95 {
+    width: 100% !important;
+  }
+
+  .lapview {
+    display: none;
+  }
+
+  .editText {
+    margin-right: 4% !important;
+  }
+
+  .first {
+    order: 1;
+    align-items: center;
+
+  }
+
+  .second {
+    order: 2;
+    margin-top: 20px !important;
+
+  }
+
+  .third {
+    order: 3;
+    margin-top: 30px !important;
+  }
+
+  .fourth {
+    order: 4;
+    margin-top: 550px !important;
+  }
+
+  .profile-progress {
+    width: 100%;
+    margin-top: 20px !important;
+  }
+
+  .details-row {
+    // margin-top: 20% !important;
+    width: 100%;
+    margin-left: 10% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+  }
+
+  .user-info {
+    margin-left: auto !important;
+
+  }
+}
+
+
+@media screen and (min-width:768px) and (max-width:991px) {
+
+  .lap_95 {
+    width: 95% !important;
+  }
+
+  .lap_s95 {
+    width: 95% !important;
+  }
+
+  .lapview {
+    display: block;
+  }
+
+  .first {
+    order: 1;
+    align-items: center;
+
+  }
+
+  .second {
     order: 2;
   }
 
-  .right {
-    order: 1;
+  .third {
+    order: 3;
+    margin-top: 20px !important;
+
+  }
+
+  .fourth {
+    margin-top: 80% !important;
+  }
+
+
+  .profile-progress {
+    width: 100%;
+    margin-top: 20px !important;
+    padding-left: 35px;
+    padding-bottom: 35px;
+  }
+
+  .details-row {
+    margin-top: 10% !important;
+    width: 100%;
+    margin-left: 10% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+  }
+
+  .user-info {
+    margin-left: auto !important;
   }
 }
+
+.throughTPO {
+  /deep/ .mat-checkbox-frame {
+    border-radius: 100px !important;
+  }
+
+  /deep/ &.mat-checkbox-checked .mat-checkbox-background {
+    background-color: white;
+    border: 1px solid #004072;
+    border-radius: 100px !important;
+  }
+
+  /deep/ .mat-checkbox-checkmark-path {
+    stroke: #004072 !important;
+    border-radius: 100px !important;
+  }
+}
+
+
+
+.container120 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  height: 27px;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container120 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  // background-color: #ccc;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+}
+
+.container120 input:checked ~ .checkmark {
+  background-color: $color-white;
+  border: 1px solid #ccc;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container120 input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container120 .checkmark:after {
+  font-family: FontAwesome;
+  content: "\f111";
+  left: 4px;
+  font-size: 12px;
+  top: -1px;
+  width: 0px;
+  height: 0px;
+  color: $color-blue;
+}
+
+
+
+// .containerRad {
+//   display: block;
+//   position: relative;
+//   padding-left: 35px;
+//   margin-bottom: 12px;
+//   cursor: pointer;
+//   font-size: 22px;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+// }
+
+// .containerRad input {
+//   position: absolute;
+//   opacity: 0;
+//   cursor: pointer;
+//   height: 0;
+//   width: 0;
+// }
+
+// /* Create a custom checkbox */
+// .checkmark {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 25px;
+//   width: 25px;
+//   border: 2px solid grey;
+//   border-radius: 50px;
+//   background-color: white;
+// }
+
+// /* On mouse-over, add a grey background color */
+// .containerRad:hover input~.checkmark {
+//   background-color: rgb(240, 239, 239);
+// }
+
+// /* When the checkbox is checked, add a blue background */
+// .containerRad input:checked~.checkmark {
+//   background-color: $color-blue;
+//   // left: 6px;
+//   // top: 5px;
+//   border-radius: 60px;
+//   border: 2px solid grey;
+//   // border-width: 5px 5px 5px 5px !important;
+// }
+
+// /* Create the checkmark/indicator (hidden when not checked) */
+// .containerRad:after {
+//   content: "";
+//   position: absolute;
+//   display: none;
+// }
+
+// /* Show the checkmark when checked */
+// .containerRad input:checked~.checkmark:after {
+//   display: block;
+// }
+
+// .containerRad .checkmark:after {
+//   // left: 6px;
+//   // top: 5px;
+//   // border-radius: 60px;
+//   // border: solid white;
+//   // border-width: 5px 5px 5px 5px !important;
+// }
+
+
+@media screen and (min-width:992px) {
+  .lap_95 {
+    width: 95% !important;
+  }
+
+  .lap_s95 {
+    width: 95% !important;
+  }
+
+  .lapview {
+    display: block;
+  }
+
+  .details-row {
+    margin-top: 7% !important;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 35px 35px 35px;
+  }
+
+  .fourth {
+    margin-top: 300px !important;
+  }
+
+
+  .profile-progress {
+    margin-top: 80% !important;
+  }
+
+}
+
+@media screen and (min-width:1440px) {
+  @media screen and (min-width:1024px) {
+    .lap_95 {
+      width: 95% !important;
+    }
+
+    .lap_s95 {
+      width: 95% !important;
+    }
+  }
+
+
+  .fourth {
+    margin-top: 25% !important;
+  }
+
+  .lapview {
+    display: block;
+  }
+
+  .profile-progress {
+    margin-top: 70% !important;
+  }
+}
+
+@media screen and (min-width:2560px) {
+  .lap_95 {
+    width: 95% !important;
+  }
+
+  .fourth {
+    margin-top: 15% !important;
+  }
+
+  .lapview {
+    display: block;
+  }
+
+  .details-row {
+    margin-top: 0% !important;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 35px 35px 35px;
+  }
+
+  .profile-progress {
+
+    margin-top: 35% !important;
+  }
+}
+
+// responsiveness ends here
 
 .row {
   margin-left: 0 !important;
@@ -350,21 +446,15 @@
 }
 
 .inputs {
-  border: 1.0px solid $color-blue !important;
+  border: 1.0px solid $color-border;
   padding: 8px !important;
 }
 
 label {
-  font-size: 15px;
-  margin-left: 5px;
-  margin-bottom: 15px;
-  margin-top: 0px;
+  color: $label;
+  // font-size: 19px;
+  font-weight: 500;
 }
-
-// .head{
-//   font-weight: lighter !important;
-//   margin-top: 9%;
-// }
 
 .invalid-feedback {
   font-size: 90%;
@@ -372,43 +462,34 @@ label {
 }
 
 .mat-radio-button.mat-radio-button {
-  margin-left: 30px;
+  margin-right: 30px;
 }
 
-div.account{
+div.account {
   word-break: break-all !important;
   margin-left: 15px;
 }
 
-:host ::ng-deep .mat-radio-outer-circle {
-  border-width: 1px !important;
-}
-
 .mat-select {
-  width: 90%;
-  margin-right: 10px;
-  border-radius: 10px;
-
+  // width: 90%;
+  // margin-right: 15px;
 }
-
-// :host ::ng-deep .mat-select-panel {
-//   overflow: hidden !important;
-// }
 
 .p-b-10px {
-  padding-bottom: 10px;
-}
-.head{
-  font-weight: lighter !important;
-  // margin-top: 9%;
+  padding-bottom: 15px;
 }
 
-.title{
+.head {
+  font-weight: lighter !important;
+}
+
+.title {
 
   font-size: 18px;
   font-weight: 430;
 }
-div.account{
+
+div.account {
   color: $color-blue;
   word-break: break-all !important;
   text-align: center !important;
@@ -421,53 +502,78 @@ div.account{
 }
 
 .linkedin {
-  font-size: 30px;
-  margin-top: 5px;
-  color: $color-blue;
+  width: 38px;
+  font-size: 24px;
+  border: 1px solid $color-border;
+  padding: 5px;
+  color: $color-blue !important;
+  text-align: center;
+  margin-right: 15px;
 }
 
 .avatar {
-  vertical-align: middle;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  margin: auto;
+  display: block;
+  background: $color-white !important;
+  border: 8px solid $color-white;
+  width: 220px;
 }
 
-.popupbtns{
+.iconImg {
+  margin: auto;
+  display: block;
+  background: $profile-p-grey !important;
+  border: 8px solid $color-white;
+  width: 220px;
+  padding: 50px;
+}
+
+.popupbtns {
   text-align: center;
   background-color: $color-blue;
   color: $color-white;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 30%;
+  margin: auto;
+  display: block;
   margin-bottom: 5%;
   border: solid;
   font-size: 18px;
-  height: 46px;
+  height: 45px;
 }
 
-.camIcon {
-  position: absolute !important;
-  margin-left: -45px !important;
-  margin-top: 90px !important;
-  background: white !important;
-  border-radius: 50% !important;
-  padding: 1px !important;
-  font-size: 22px !important;
-}
 
 .mat-progress-bar {
-  height: 6px;
-  width: 80%;
+  // width: 65%;
+  // margin: auto;
+  height: 25px;
+  border-radius: 15px;
 }
 
-.mat-dialog-content{
+.m-t-50 {
+  margin-top: 60% !important;
+}
+
+.m-l-30 {
+  margin-left: 24%
+}
+
+.mat-dialog-content {
   overflow: hidden !important;
   max-height: 100% !important;
   // resize: both;
 }
+
 .percent {
-  margin-left: 38%;
+  font-weight: 500;
+  color: $color-darkGrey;
+  margin-bottom: 5px;
+}
+
+.percentText {
+  color: $color-darkGrey;
+  margin-left: 5px;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .submit {
@@ -483,38 +589,261 @@ div.account{
   margin-right: 10px;
   margin-top: -28px;
   position: relative;
-  z-index: 2;
-  color: black;
+  // z-index: 2;
+  color: $color-blank;
 }
+
 input[type=text] {
   // width: 100%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: $color-light-blue;
+  // background: none !important;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid $color-border;
   box-sizing: border-box;
-  border-radius: 5px;
 }
-textarea:focus, input:focus{
+
+textarea:focus,
+input:focus {
   outline: none;
 }
+
 .fa {
   cursor: pointer;
+  color: $color-border;
 }
 
 .dis {
   pointer-events: none !important;
+  color: $color-blank !important;
+  background: $profile-t-grey !important;
+  border: 1px solid $profile-t-grey !important;
 }
-.otp{
+.dis1 {
+  pointer-events: none !important;
+}
+.otp {
   margin-top: 49px;
 }
-.institute{
-  width: 90% !important;
-  margin-right: 10px !important;
-  border-radius: 10px !important;
+
+.institute {
+  // width: 90% !important;
+  // margin-right: 10px !important;
+  // border-radius: 10px !important;
 }
+
 .col-md-1.col-sm-4.col-4.ng-star-inserted {
   margin-left: 100% !important;
   margin-top: -3% !important;
 }
+
+textarea {
+  resize: none;
+  color: $color-blank !important;
+}
+
+//////////////////////////////////////////////////////////////@extend
+
+.bg-image {
+  height: 100px;
+}
+
+::ng-deep .n .mat-select-arrow-wrapper {
+  visibility: hidden !important;
+}
+
+.m-n {
+  visibility: hidden !important;
+}
+
+.textarea:disabled,
+.inputs:disabled {
+  background-color: $color-light-grey;
+  color: $color-blank;
+}
+
+mat-icon {
+  color: $color-border;
+}
+
+.color-border {
+  color: $color-border;
+}
+
+hr {
+  border-top: 1px dotted $color-border;
+  // border-style: ;
+}
+
+.m-t-5px {
+  margin-top: 5px;
+}
+
+.m-t-25px {
+  margin-top: 25px;
+}
+
+.m-r-25px {
+  margin-right: 13%;
+}
+
+.bg-img {
+  background-image: url('../../../../assets/learner/p-bg-5.png');
+  height: 210px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.editText {
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+  color: $color-blank;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 23px;
+  padding: 13px;
+  margin-right: 35px;
+  margin-top: 25px;
+  border: 1px solid $color-white;
+}
+
+.editIcon {
+  color: $color-blank;
+  font-size: 22px;
+  width: 25px;
+}
+
+.uname {
+  font-size: 30px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  text-align: center;
+  color: $color-blank;
+  font-weight: 300 !important;
+  text-transform: capitalize;
+}
+
+.stateDet {
+  font-size: 20px;
+  margin-top: 20px;
+  color: $color-darkGrey;
+  font-weight: 300 !important;
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+
+.uID {
+  width: inherit;
+  color: $color-blank;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 7px;
+  // border-bottom: 1px solid $color-border !important;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+
+.p-b-10 {
+  padding-bottom: 10px;
+}
+
+.m-l-12 {
+  margin-left: 12%;
+}
+
+.bb {
+  border-bottom: 1px solid $color-border !important;
+}
+
+.bb-icon {
+  border-bottom: 1px solid $color-border;
+}
+
+:host ::ng-deep .mat-progress-bar-buffer {
+  background-color: $profile-t-grey !important;
+}
+
+:host ::ng-deep .mat-progress-bar-fill::after {
+  background-color: $profile-p-grey !important;
+}
+
+// .cG {
+//   color : $color-darkGrey;
+// }
+
+
+.form-control {
+  border-radius: 0 !important;
+}
+
+:host ::ng-deep .mat-select-disabled .mat-select-value {
+  color: $color-blank !important
+}
+
+.footer {
+  padding: 30px;
+  font-size: inherit;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: $label;
+  font-weight: 500;
+  background-color: $profile-t-grey;
+  text-align: center;
+  border-top: 2px solid $profile-p-grey;
+}
+
+:host ::ng-deep .mat-radio-checked .mat-radio-label {
+  color: $color-blank;
+}
+
+:host ::ng-deep .mat-radio-label {
+  color: $color-darkGrey;
+}
+
+.addIcon {
+  color: $color-blank;
+  border: 1px solid $color-border;
+  background: $color-border;
+  /* margin: 6px; */
+  margin-left: 20px;
+  height: auto;
+  width: 36px;
+  padding: 6px;
+}
+
+.dIcon {
+  margin-left: 10px;
+  color: $color-blank;
+  border: 1px solid $color-border;
+  background: $color-white;
+  /* margin: 6px; */
+  height: auto;
+  width: 36px;
+  padding: 6px;
+}
+
+/deep/ .swal2-styled.swal2-confirm {
+  background-color: $color-blue !important;
+  border-radius: 0 !important;
+}
+
+
+:host ::ng-deep.footericon{
+  width: 9%;
+  position: absolute;
+  margin-left: 5px;
+
+}
+// html {
+//   overflow: scroll;
+//   overflow-x: hidden !important;
+// }
+
+// ::-webkit-scrollbar {
+//   width: 0px;
+//   background: transparent !important;
+// }
