@@ -1,4 +1,5 @@
 <app-header></app-header>
+<div class="coursedetail">
 <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <span class="short-desc">{{course?.short_description}}</span>
+            <span class="short-desc">{{course?.course_description}}</span>
         </div>
         <div class="row">
             <div class="col-12 display_flex">
@@ -188,7 +189,8 @@
                 <div >
                     <h3 class="head-h1">Course description</h3>
                     <div class="vertical"></div>
-                    <p class="desc">{{course?.course_description}}</p>
+                    <div [innerHTML]="course?.course_long_description"></div>
+                    <!-- <p class="desc">{{course?.course_long_description}}</p> -->
                 </div>
             </div>
         </div>
@@ -280,5 +282,6 @@
 
     </div>
      <!-- Left end side -->
+</div>
 </div>
 

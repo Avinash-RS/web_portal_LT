@@ -7,199 +7,265 @@
 </nav>
 
 <div class="profile">
-  <div class="container-reg200">
-    <div class="wrap-reg"><br>
-      <form [formGroup]="profileForm">
-        <div class="container">
-          <div class="row">
-            <!-- //////FIrst section left part//////// -->
-            <div class="col-md-4 col-sm-12 col-12 left">
-              <!-- ////// Info about you//////// -->
-              <div class="form-group">
-                <label>Information about you</label>
-                <textarea style="resize: none;" rows="3" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_100' :
-                  'inputs border-radius-5 color_blue background_trans width_100'"
-                  [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" placeholder="1000 characters"
-                  formControlName="about_you" name="about_you"></textarea>
-                <div *ngIf="f.about_you.touched && f.about_you.errors" class="invalid-feedback">
-                  <div *ngIf="f.about_you.errors.minlength">Information about you must be minimum of
-                    {{f.about_you.errors.minlength.requiredLength}} characters </div>
-                  <div *ngIf="f.about_you.errors.maxlength">Information about you must be
-                    {{f.about_you.errors.maxlength.requiredLength}} maximum of characters</div>
-                </div>
-              </div>
-              <!-- //////Gender part//////// -->
-              <div class="form-group display_flex">
-                <label>Gender</label><span style="color: red;"> *</span>
-                <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
-                  <mat-radio-button value="M">M</mat-radio-button>
-                  <mat-radio-button value="F">F</mat-radio-button>
-                  <mat-radio-button value="O">Rather not say</mat-radio-button>
-                </mat-radio-group>
-              </div>
-              <!-- //////I'm a//////// -->
-              <div class="form-group display_flex">
-                <label>I'm a</label><span style="color: red;"> * &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
-                  name="is_student_or_professional">
-                  <mat-radio-button value="student">Student</mat-radio-button>
-                  <mat-radio-button value="professional">Professional</mat-radio-button>
-                </mat-radio-group>
-              </div>
-              <!-- //////Language known//////// -->
-              <div class="form-group">
-                <label>Languages known</label><br>
-                <mat-select [disabled]='cannotEdit' multiple class="inputs col-md-6 col-sm-12 col-12"
-                  placeholder="Language" formControlName="languages_known" name="language">
-                  <mat-option *ngFor="let item of languageList" [value]="item._id">
-                    {{item.languagename}}
-                  </mat-option>
-                </mat-select>
-                <!-- <ng-container *ngIf="lang">
-                  <input type="text" class="inputs col-md-6 col-sm-12 col-12"
-                 [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'"
-                 formControlName="languages_known">
-                </ng-container> -->
-              </div>
-              <!-- //////Location//////// -->
-              <label>Location</label><span style="color: red;"> *</span><br>
-              <div class="form-group row">
-                <div class="col-md-4 col-sm-12 col-12">
-                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Country" formControlName="country"
-                    name="country" (selectionChange)="getAllState()">
-                    <mat-option [value]="country._id" *ngFor="let country of countryValue">
-                      {{country.countryname}}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-md-4 col-sm-12 col-12">
-                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="State" formControlName="state"
-                    name="state" (selectionChange)="getDistrict()">
-                    <mat-option [value]="state._id" *ngFor="let state of stateValue">
-                      {{state.statename}}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-md-4 col-sm-12 col-12">
-                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="District" formControlName="city_town"
-                    name="City">
-                    <mat-option [value]="city._id" *ngFor="let city of cityValue">
-                      {{city.districtname}}
-                    </mat-option>
-                  </mat-select>
-                </div>
-              </div>
-            </div>
-            <!-- //////////End of first section left part/////////// -->
-            <!-- //////FIrst section Right part//////// -->
-            <div class="col-md-8 col-sm-12 col-12 right">
-              <div class="row float_right">
-                <!-- <p ></p> -->
-                <label class="f_size_20 f_wt_400">My Profile</label>
-                <ng-container *ngIf="cannotEdit">
-                  <mat-icon matTooltip="Click here to change profile details" (click)="cannotEdit = !cannotEdit;"
-                    class="m-l-10px f_size_20">create
-                  </mat-icon>
-                </ng-container>
-                <ng-container *ngIf="!cannotEdit">
-                  <mat-icon matTooltip="You can start editing" (click)="cannotEdit = !cannotEdit;"
-                    class="m-l-10px f_size_20">create
-                  </mat-icon>
-                </ng-container>
-              </div>
-              <br><br><br>
-              <div class=row>
-                <div class="col-md-8"></div>
-                <div class="col-md-2 col-sm-6 col-6 float_right">
-                  <img
-                    [src]="profileForm.value.profile_img ? profileForm.value.profile_img : '../../../../assets/learner/avatar2.png'"
-                    id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar" class="avatar">
-                  <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
-                  <mat-icon *ngIf="!cannotEdit" class="camIcon" for="fileInput" (click)="fileInput.click()">camera_alt
-                  </mat-icon>
-                </div>
-                <div class="col-md-2 col-sm-6 col-6" *ngIf="userData && userData != null">
-                  <label class="f_wt_400 m-l-10px space5">{{userData.full_name}}</label><br>
-                  <label class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.username}}</label><br>
-                  <label
-                    class="f_wt_400 m-l-10px">{{userData.user_dtl && userData.user_dtl.created_on | date : "dd.MM.y"}}</label>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-md-8"> </div>
-                <div class="col-md-4">
-                  <span class="percent color_blue">{{profileForm.value.progress || '10'}}%</span>
-                  <mat-progress-bar class="border-radius-5" mode="determinate"
-                    [value]="profileForm.value.progress || 10">
-                  </mat-progress-bar>
-                </div>
-              </div>
-              <br>
-              <div class="row" *ngIf="userData">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">Password</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Password"
-                    (click)="editPassword(passwordDialog)">create</mat-icon>
-                </div>
-                <!-- <div class="col-md-1 col-sm-4 col-4" *ngIf="!editpopup">
-                  <mat-icon class="f_size_17" matTooltip="You can start editing" (click)="editPassword(passwordDialog)">create</mat-icon>
-                </div> -->
-              </div>
-              <br>
-              <div class="row" *ngIf="userData.user_mobile">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">{{userData.user_mobile.mobile_number}}</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Mobile number"
-                    (click)="editmobno(mobDialog)">create</mat-icon>
-                </div>
-              </div>
-              <br>
-              <div class="row" *ngIf="userData.email">
-                <div class="col-md-8"> </div>
-                <div class="col-md-3 col-sm-8 col-8">
-                  <span class="color_blue">{{userData.email}}</span>
-                </div>
-                <div class="col-md-1 col-sm-4 col-4" *ngIf="editpopup">
-                  <mat-icon class="f_size_17" matTooltip="Click here to change Email Id"
-                    (click)="editEmail(emailDialog)">create</mat-icon>
-                </div>
-              </div>
-              <br><br>
-            </div>
+
+
+  <div class="bg-img">
+    <span (click)="cannotEdit = !cannotEdit;" class="editText">
+      <mat-icon matTooltip="Click here to change profile details" class="editIcon">create
+      </mat-icon> Edit &nbsp;
+    </span>
+
+    <div class="row details-row">
+
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 third" style="margin-top: 17.5em;">
+        <div class="row info-row" *ngIf="userData">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+            <span class="f_size_13 f_wt_500 ">Password : ********</span>
+          </div>
+          <div class="col-md-2 col-sm-2 col-2">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+              style="width: 17px;" matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">
+              create</mat-icon>
+          </div>
+        </div>
+
+        <div class="row m-t-25px">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+            <span class="f_size_13 f_wt_500">Mobile : {{userData.user_mobile?.mobile_number || 'XXXXXXXXXX'}}</span>
+          </div>
+          <div class="col-md-2 col-sm-2 col-2">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit"
+              style="width: 17px;" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
+              create</mat-icon>
+          </div>
+        </div>
+
+        <div class="row m-t-25px  m-b-10">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+            <span class="f_size_13 f_wt_500">Email : {{userData.email || 'example@domain.com'}}</span>
+          </div>
+          <div class="col-md-2 col-sm-2 col-2 ">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb-icon' : 'f_size_17  bb-icon'" *ngIf="editpopup "
+              style="width: 17px;" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
+              create</mat-icon>
+          </div>
+        </div>
+
+       
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
+        <div *ngIf="!cannotEdit" style="margin-left: 21%; color: #333;">Max size: 5 mb, upload format: jpg & png</div>
+        <div class="row">
+          <div class="profile-pic">
+            <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
+            </mat-icon>
+            <img
+              [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+              id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
+              [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
+            <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+          </div>
+        </div>
+
+        <div class="row width_100">
+          <div class="uname width_100 center_align">{{userData?.full_name || 'Full name'}} </div>
+
+          <div class="width_100 center_align stateDet">
+            {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
+            {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
+          </div>
+
+          <div class="f_wt_400 uID">
+
+            <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
+              &nbsp;&nbsp;</span>
+
+            <span class="f_size_16">| &nbsp;&nbsp;
+              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
+              userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
+            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
+              &nbsp;&nbsp;
+            </span>
+
+            <span class="f_size_16">
+              | &nbsp;&nbsp;Student
+              <!-- {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
+              userData.user_profile[0]?.is_student_or_professional =='student' ? 
+            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}} -->
+            </span>
 
           </div>
-          <!-- ////////////Qualification row////////////// -->
-          <label>Qualification</label><span style="color: red;"> *</span><br>
-          <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
-            <div class="row p-b-10px" [formGroupName]="in">
-              <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
-                  name="qualification" (selectionChange)="changed($event.value,in)">
-                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
-                    (click)="checkSpec(qual,in,profileForm.qualification,lv)">
-                    {{lv.level_name}}
-                  </mat-option>
-                </mat-select>
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Board/University"
-                  formControlName="board_university" name="board_university">
-                  <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
-                    {{board.Board_Name}}
-                    {{univ.University_Name}}
-                  </mat-option>
-                </mat-select>
-              </div>
 
-              <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <!-- <mat-form-field *ngIf=""> -->
-                <ng-container
+          <!-- <div class="width_100 bb center center_align p-b-10"
+            *ngIf="userData?.language_detail && userData?.language_detail.length > 0"> -->
+            <div class="width_100 bb center center_align p-b-10">
+            <!-- <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
+              {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
+            </span> -->
+            <span class="f_size_15 color_label f_wt_500">
+              English
+            </span>
+          </div>
+
+          <!-- <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
+            <span class="f_size_15 color_label f_wt_500">
+              Languages Known
+            </span>
+          </div> -->
+
+          <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
+            Member since &nbsp;
+            {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second">
+        <div class="profile-progress">
+          <span class="percentText float_left no_margin f_size_16">Profile progress</span><span
+            class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
+          <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
+          </mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container-reg200 fourth">
+    <div class="profile-details">
+
+
+
+      <form [formGroup]="profileForm">
+  <!-- ////// Info about you//////// -->
+        <div class="row">
+          <div class="form-group width_100">
+            <label class="f_size_19">About me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
+            <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
+                'inputs  color_label  width_100'"
+              [ngClass]="{ 'is-invalid': f.about_you.touched && f.about_you.errors }" formControlName="about_you"
+              name="about_you"></textarea>
+            <div *ngIf="f.about_you.touched && f.about_you.errors" class="mand">
+              <div *ngIf="f.about_you.errors.minlength">Information about you must be minimum of
+                {{f.about_you.errors.minlength.requiredLength}} characters </div>
+              <div *ngIf="f.about_you.errors.maxlength">Information about you must be
+                {{f.about_you.errors.maxlength.requiredLength}} maximum of characters</div>
+            </div>
+          </div>
+        </div>
+<!-- Info End-->
+
+        <br>
+        <hr class="p-b-10px">
+        <br *ngIf="!cannotEdit">
+       
+  <!-- //////Gender part//////// -->
+  <div class="row" *ngIf="!cannotEdit">
+    <div class="col-md-4 col-lg-4 col-sm-12 col-12">
+      <label class="p-b-10px f_size_19">Gender</label>
+      <span class="mand p-b-10px"> *</span>
+      <div class="form-group">
+        <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
+          <mat-radio-button value="M">Male</mat-radio-button>
+          <mat-radio-button value="F">Female</mat-radio-button>
+          <mat-radio-button value="O">Rather not say</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-4 col-sm-12 col-12">
+      <label class="p-b-10px f_size_19">I Am a</label>
+      <span class="mand p-b-10px"> *</span>
+      <div class="form-group ">
+        <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
+          name="is_student_or_professional">
+          <mat-radio-button value="student">Student</mat-radio-button>
+          <mat-radio-button value="professional">Professional</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
+      <div class="form-group p-b-10px">
+        <label class="f_size_19">Languages known</label><br>
+        <mat-select [disabled]='cannotEdit' multiple class="inputs col-md-6 col-sm-12 col-12"
+        placeholder="Language" formControlName="languages_known" name="language">
+        <mat-option *ngFor="let item of languageList" [value]="item._id">
+          {{item.languagename}}
+        </mat-option>
+      </mat-select>
+        <!-- <mat-select [disabled]='cannotEdit' multiple
+          [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
+          placeholder="Language" formControlName="languages_known" name="language">
+          <mat-option *ngFor="let item of languageList | sort: false : 'languagename'" [value]="item._id">
+            {{item.languagename}}
+          </mat-option>
+        </mat-select>
+        <ng-container *ngIf="lang">
+            <input type="text" class="inputs col-md-6 col-sm-12 col-12"
+           [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+          'inputs  color_blue  width_80'"
+           formControlName="languages_known">
+          </ng-container> -->
+      </div>
+    </div> 
+  </div>
+
+  <br *ngIf="!cannotEdit">
+  <hr *ngIf="!cannotEdit" class="p-b-10px">
+  <br *ngIf="!cannotEdit">
+
+
+
+
+ <!-- ////////////Qualification row////////////// -->
+ <label class="f_size_19 p-b-10px">Qualification</label><span class="mand"> *</span><br>
+ <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
+   <div class="row p-b-10px" [formGroupName]="in">
+     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
+
+
+      <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
+      name="qualification" (selectionChange)="changed($event.value,in)">
+      <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
+        (click)="checkSpec(qual,in,profileForm.qualification,lv)">
+        {{lv.level_name}}
+      </mat-option>
+    </mat-select>
+    
+    &nbsp;&nbsp;&nbsp;
+    <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Board/University"
+      formControlName="board_university" name="board_university">
+      <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
+        {{board.Board_Name}}
+        {{univ.University_Name}}
+      </mat-option>
+    </mat-select>
+    <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+     </div>
+
+     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
+       <!-- <mat-form-field *ngIf=""> -->
+        <ng-container
                   *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
                   <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
                     name="institute">
@@ -208,145 +274,236 @@
                     </mat-option>
                   </mat-select>
                 </ng-container>
-                <!------------------------Institute textbox for 10th and 12th--------------------->
-                <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
-                  *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
-                  <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'" formControlName="institute">
-                </ng-container>
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Discipline" formControlName="discipline"
-                  name="discipline">
-                  <mat-option [value]="item._id" *ngFor="let item of disciplines">
-                    {{item.discipline_name}}
-                  </mat-option>
-                </mat-select>
-              </div>
+       <!------------------------Institute textbox for 10th and 12th--------------------->
+       <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
+       *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+       <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
+     'inputs color_blue background_trans width_80'" formControlName="institute">
+     </ng-container>
+     <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+     <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Discipline" formControlName="discipline"
+       name="discipline">
+       <mat-option [value]="item._id" *ngFor="let item of disciplines">
+         {{item.discipline_name}}
+       </mat-option>
+     </mat-select>
 
-              <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <ng-container
-                  *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
-                  <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
-                    formControlName="specification" name="specification">
-                    <mat-option [value]="item._id" *ngFor="let item of specValue">
-                      {{item.specification_name}}
-                    </mat-option>
-                  </mat-select>
-                </ng-container>
-                <ng-container>
-                  <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'" placeholder="Year of Passing"
-                    formControlName="year_of_passing" (change)="yearOfpassing(in)">
-                </ng-container>
-              </div>
+       <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+     </div>
+     <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
+     <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
+      <ng-container
+      *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+      <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
+        formControlName="specification" name="specification">
+        <mat-option [value]="item._id" *ngFor="let item of specValue">
+          {{item.specification_name}}
+        </mat-option>
+      </mat-select>
+    </ng-container>
 
-              <div class="col-md-3 col-sm-12 col-12 display_flex">
-                <input type="tel"
-                 suffix="%" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 width_50 color_blue background_trans m-l-10px' :
-                'inputs border-radius-5 width_50 color_blue background_trans m-l-10px'" placeholder="Percentage"
-                  formControlName="percentage" maxlength="5" (blur)="formatPercentage(in)">
-                <mat-icon (click)="addQualification()"
-                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
-                  class="p-5px">add_circle_outline
-                </mat-icon>
-                <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
-                  (click)="removeQualification(in)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon>
-              </div>
-            </div>
+    <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+    <ng-container>
+      <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
+    'inputs color_blue background_trans width_80'" placeholder="Year of Passing"
+        formControlName="year_of_passing" (change)="yearOfpassing(in)">
+    </ng-container>
+     </div>
 
-          </div>
-          <br>
-          <!-- ////////////Certificate row////////////// -->
-          <div formArrayName="certificate" class="row p-b-10px"
-            *ngFor="let certificate of certificate.controls; let i=index">
-            <div class="col-md-2 col-sm-4 col-8 display_flex">
-              <input type="text"
-                [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80': 'inputs border-radius-5 color_blue background_trans width_80 ena'"
-                placeholder="Certificate Link" formControlName="{{i}}">
-              <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15" class="p-5px">add_circle_outline
-              </mat-icon>
-              <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-                class="p-5px">delete</mat-icon>
+     <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
+      <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+       <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label ' :
+         'inputs  width_50'" placeholder="Percentage" formControlName="percentage" maxlength="5"
+         (blur)="formatPercentage(in)"
+         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+       <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
+         (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
+       </mat-icon>
+       <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1 && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
+         (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')"
+         (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
+       </mat-icon> -->
+       <mat-icon (click)="addQualification(in)"
+         *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
+         class="addIcon">add
+       </mat-icon>
+       <!-- <div *ngIf="f.qualification && f.qualification[in] && f.qualification[in].percentage && f.qualification[in].percentage.touched && f.qualification[in].percentage.errors" class="mand">
+         asdijsaio
+       </div> -->
+     </div>
+   </div>
+ </div>
+
+ <br>
+ <hr class="p-b-10px">
+ <br>
+
+
+ <label class="p-b-10px" class="f_size_19"> Location</label>
+        <span class="mand"> *</span>
+        <br>
+       
+        <div class="row p-b-10px">
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
+            <div class="form-group width_100">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
+                placeholder="Country" formControlName="country" name="country" (selectionChange)="getAllState()">
+                <mat-option [value]="country._id" *ngFor="let country of countryValue">
+                  {{country.countryname}}
+                </mat-option>
+              </mat-select>
             </div>
           </div>
-          <br>
-          <!-- ////////////Social Link row////////////// -->
-          <div formArrayName="social_media" class="row p-b-10px"
-            *ngFor="let social of social_media.controls; let ind=index">
-            <div [ngClass]="cannotEdit ? 'dis col-md-2 col-sm-4 col-8 display_flex' :
-            'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
-              <input type="text" class="inputs border-radius-5 color_blue background_trans width_80"
-                placeholder="Social Media Link" formControlName="link">
-              <i class="fa fa-linkedin-square linkedin m-l-10px" aria-hidden="true"></i>
-              <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
-              </mat-icon>
-              <mat-icon (click)="removeMediaLink(ind)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon> -->
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
+            <div class="form-group width_100">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
+                placeholder="State" formControlName="state" name="state" (selectionChange)="getDistrict()">
+                <mat-option [value]="state._id" *ngFor="let state of stateValue">
+                  {{state.statename}}
+                </mat-option>
+              </mat-select>
             </div>
           </div>
-          <!-- /////If professional////// -->
-          <br>
-          <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
-            <label>Experience</label><span style="color: red;"> *</span><br>
-            <div class="row p-b-10px" formGroupName="professional">
-              <div class="col-md-2 col-sm-4 col-8">
-                <!-- {{f.professional.controls.total_experience.touched}},
-                {{f.professional.controls.total_experience.errors.required}} -->
-                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'"
-                  [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
-                  placeholder="Total Experience" formControlName="total_experience">
-                <div style="color: red;" *ngIf="f.professional.controls.total_experience.touched && 
-                  f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
-                </div>
-                <div style="color: red;" *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
-                  <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required </div>
-                  <div *ngIf="f.professional.controls.total_experience.errors.pattern">Total experience must be less than 70</div>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-4 col-8">
-                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'"
-                  [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
-                  placeholder="Organization" formControlName="organization">
-                <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
-                style="color: red;">
-                  <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
-                  </div>
-                  <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
-                  </div>
-                  <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
-                    {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-4 col-8">
-                <input type="text" [ngClass]="cannotEdit ? 'dis inputs border-radius-5 color_blue background_trans width_80' :
-                'inputs border-radius-5 color_blue background_trans width_80'" placeholder="Job role"
-                  formControlName="job_role"
-                  [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
-                <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
-                style="color: red;">
-                  <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
-                  </div>
-                  <div *ngIf="f.professional.controls.job_role.errors.pattern">Job role is invalid
-                  </div>
-                  <div *ngIf="f.professional.controls.job_role.errors.minlength">Job Role must be minimum of
-                    {{f.professional.controls.job_role.errors.minlength.requiredLength}} characters
-                  </div>
-                </div>
-              </div>
+          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
+            <div class="form-group width_100">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
+                placeholder="District" formControlName="city_town" name="City">
+                <mat-option [value]="city._id" *ngFor="let city of cityValue">
+                  {{city.districtname}}
+                </mat-option>
+              </mat-select>
             </div>
-          </div>
-          <br>
-          <!-- //.Button -Submit -->
-          <div class="row" *ngIf="!cannotEdit">
-            <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
-              (click)="updateProfile()">Submit</button>
-            <!-- <button mat-flat-button class="submit f_size_17 color_white f_wt_400"
-              (click)="updateProfile()">Submit</button> -->
           </div>
         </div>
+
+        <br>
+        <hr class="p-b-10px">
+        <br>
+
+   <!-- ////////////Certificate row////////////// -->
+   <label class="p-b-10px" class="f_size_19">Certificate</label><br>
+   <div formArrayName="certificate" class="row p-b-10px"
+     *ngFor="let certificate of certificate.controls; let i=index">
+     <div class="col-xl-2 col-xl-2 col-lg-3 col-md-4 col-sm-4 col-8 display_flex">
+       <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100'"
+         placeholder="Certificate Link" formControlName="{{i}}">
+       <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
+         class="dIcon ">delete_outline</mat-icon>
+       <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
+         profileForm.value.certificate.length < 15" class="addIcon ">add
+       </mat-icon> -->
+     </div>
+     <div class="col-md-1 col-sm-4 col-4 display_flex">
+       <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
+         class="dIcon ">delete_outline</mat-icon>
+       <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
+         profileForm.value.certificate.length < 15" class="addIcon ">add
+       </mat-icon>
+     </div>
+   </div>
+
+   <br>
+   <hr>
+   <br class="p-b-10px">
+
+   <label class="p-b-10px" class="f_size_19">Social media</label><br>
+   <!-- ////////////Social Link row////////////// -->
+   <div formArrayName="social_media" class="row p-b-10px"
+     *ngFor="let social of social_media.controls; let ind=index">
+     <div [ngClass]="cannotEdit ? 'col-xl-2 col-lg-2 col-md-3 col-sm-4 col-8 display_flex' :
+       'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
+       <i class="fa fa-linkedin linkedin " style="
+       cursor: default;
+   " aria-hidden="true"></i>
+       <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs  width_80 dis' :
+       'inputs  width_80'" placeholder="Social media link" formControlName="link">
+       <!-- {{profileForm.value.link}} -->
+       <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
+         </mat-icon>
+         <mat-icon (click)="removeMediaLink(ind)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon> -->
+     </div>
+   </div>
+
+   <!-- /////If professional////// -->
+   <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
+   <hr *ngIf="profileForm.value.is_student_or_professional === 'professional'">
+   <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
+
+   <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
+     <label class="f_size_19 p-b-10px">Experience</label><span class="mand"> *</span>
+     <div class="row p-b-10px" formGroupName="professional">
+       <div class="col-md-2 col-sm-4 col-8">
+         <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
+           'inputs    width_80'"
+           [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
+           placeholder="Total Experience" formControlName="total_experience">
+         <div class="mand" *ngIf="f.professional.controls.total_experience.touched && 
+             f.professional.controls.total_experience.value >= 70">Total Experience should not be greater than 70
+         </div>
+         <div class="mand"
+           *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
+           <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
+           </div>
+         </div>
+       </div>
+       <div class="col-md-2 col-sm-4 col-8">
+         <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
+           'inputs    width_80'"
+           [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
+           placeholder="Organization" formControlName="organization">
+         <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
+           class="mand">
+           <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
+           </div>
+           <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
+           </div>
+           <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
+             {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
+           </div>
+         </div>
+       </div>
+       <div class="col-md-2 col-sm-4 col-8">
+         <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
+           'inputs   width_80'" placeholder="Job role" formControlName="job_role"
+           [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
+         <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
+           class="mand">
+           <div *ngIf="f.professional.controls.job_role.errors.required">Job Role is required
+           </div>
+           <div *ngIf="f.professional.controls.job_role.errors.pattern">Job role is invalid
+           </div>
+           <div *ngIf="f.professional.controls.job_role.errors.minlength">Job Role must be minimum of
+             {{f.professional.controls.job_role.errors.minlength.requiredLength}} characters
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <br *ngIf="cannotEdit">
+   <hr>
+   <br *ngIf="cannotEdit">
+
+   <br> <br>
+   <!-- //.Button -Submit -->
+   <div class="row" *ngIf="!cannotEdit">
+     <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+       (click)="updateProfile()">Save</button>
+   </div>
+   <br> <br>
+
+
+
+
+
+
+
+
+
       </form>
+
+
+
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <span class="f_size_18 color_blue float_right">
@@ -501,6 +658,11 @@
         </mat-dialog-actions>
       </ng-template>
     </div>
+
+
+
+
+    
   </div>
 </div>
 

@@ -84,6 +84,7 @@ export class CreateCourseComponent implements OnInit {
         ]
         // defaultTextAlign: 'left'
     };
+    isEditable: boolean;
 
     createItem(): FormGroup {
         this.preview2.push(null);
@@ -93,7 +94,6 @@ export class CreateCourseComponent implements OnInit {
             image: ''
         });
     }
-
 
     createItem1(): FormGroup {
         this.preview3.push(null);
@@ -133,6 +133,7 @@ export class CreateCourseComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
+            this.isEditable = params.edit === undefined ? false : params.edit;
             let flag = 0;
             for (const key in params) {
                 if (params.hasOwnProperty(key)) {
@@ -341,7 +342,6 @@ export class CreateCourseComponent implements OnInit {
             this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
-
         if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
             this.spinner.show();
             this.submitted = false;
@@ -542,14 +542,30 @@ export class CreateCourseComponent implements OnInit {
 
     checkCourseName() {
         const courseName = this.courseForm.controls.course_name.value;
-        if (courseName !== undefined || courseName !== null || courseName !== '') {
-            this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
-                if (!res.success) {
-                    this.toast.warning(res.message);
-                    this.courseForm.get('course_name').reset();
-                    this.courseNameElem.nativeElement.focus();
+        if (this.isEditable) {
+            if (courseName === this.courseEditDetails.course_name) {
+                return;
+            } else {
+                if (courseName !== undefined || courseName !== null || courseName !== '') {
+                    this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
+                        if (!res.success) {
+                            this.toast.warning(res.message);
+                            this.courseForm.get('course_name').reset();
+                            this.courseNameElem.nativeElement.focus();
+                        }
+                    });
                 }
-            });
+            }
+        } else {
+            if (courseName !== undefined || courseName !== null || courseName !== '') {
+                this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
+                    if (!res.success) {
+                        this.toast.warning(res.message);
+                        this.courseForm.get('course_name').reset();
+                        this.courseNameElem.nativeElement.focus();
+                    }
+                });
+            }
         }
     }
 

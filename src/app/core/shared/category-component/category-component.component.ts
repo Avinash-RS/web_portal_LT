@@ -229,9 +229,9 @@ this.CommonServices.globalCategory.subscribe((data: any) => {
       allLvlCategory:this.allLvlCategory,
     }
     this.CommonServices.appliedCategory$.next(object);
-
+   
     var perPage = "10";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
       this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];

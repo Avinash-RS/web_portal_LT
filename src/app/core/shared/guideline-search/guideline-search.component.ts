@@ -109,7 +109,6 @@ export class GuidelineSearchComponent implements OnInit {
       this.selectedFilter.category1 = this.selectedFilter.category1.concat(this.Lvl1CatId)
       this.selectedFilter.category2 = this.selectedFilter.category2.concat(this.Lvl2CatId)
       this.selectedFilter.category3 = this.selectedFilter.category3.concat(this.Lvl3CatId)
-      console.log(this.selectedFilter)
 
       this.learnerservice.getGuidelineSearch().subscribe((result: any) => {
         if (result['data']['getDetailsCount']['success'] == 'true') {
@@ -238,7 +237,7 @@ export class GuidelineSearchComponent implements OnInit {
 
 
     var perPage = "20";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, this.publishedFromDate,
       this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -328,7 +327,7 @@ export class GuidelineSearchComponent implements OnInit {
         Swal.fire('From date should not be greater than To date');
       } else {
         var perPage = "20";
-        this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+        this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
           this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
           this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
             this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -390,7 +389,7 @@ export class GuidelineSearchComponent implements OnInit {
     this.selectedFilter.filterVal = this.selectedFilter.filterVal.concat(this.coursepartners);
    
     var perPage = "20";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
       this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -454,7 +453,7 @@ export class GuidelineSearchComponent implements OnInit {
     }
     this.CommonServices.appliedCategory$.next(object);
     var perPage = "20";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
       this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
@@ -580,9 +579,8 @@ export class GuidelineSearchComponent implements OnInit {
       allLvlCategory:this.allLvlCategory 
     }
     this.CommonServices.globalCategory$.next(obj);
-  
     var perPage = "20";
-    this.learnerservice.postGuildelineSearchData(this.Lvl1CatId, this.Lvl2CatId, this.Lvl3CatId, this.selectedlang, this.coursemode,
+    this.learnerservice.postGuildelineSearchData(this.level1selectedID, this.level2selectedID, this.level3selectedID, this.selectedlang, this.coursemode,
       this.authorDetails, this.coursepartners, this.pagenumber, perPage, this.publishedToDate, 
       this.publishedFromDate, this.catalogue_visibility).subscribe((result: any) => {
         this.allcourses = result['data']['getCourseCategorySearch']['data'];
