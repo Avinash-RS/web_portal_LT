@@ -19,12 +19,14 @@
       
       <mat-form-field style="width: 30%; margin-left: 15%;">
         <mat-label>Select group</mat-label>
-        <input type="text" matInput [matAutocomplete]="auto">
+        <input type="text" matInput formControlName="group" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          <mat-option *ngFor="let grp of filteredOptions | async" [value]="selectedArray" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+          ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+          (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))"> 
             <div (click)="$event.stopPropagation()">
-              <mat-checkbox (change)="checkboxLabel(option)">
-              </mat-checkbox> {{option.name}}
+              <mat-checkbox (change)="checkboxLabel(grp)">
+              </mat-checkbox> {{grp.group_name}}
             </div>
           </mat-option>
         </mat-autocomplete>
@@ -43,7 +45,7 @@
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   <div (click)="$event.stopPropagation()">
                     <mat-checkbox (change)="checkboxLabel(option)">
-                    </mat-checkbox> {{option.name}}
+                    </mat-checkbox> {{option.group_name}}
                   </div>
                 </mat-option>
               </mat-autocomplete>
@@ -59,7 +61,7 @@
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             <div (click)="$event.stopPropagation()">
               <mat-checkbox (change)="checkboxLabel(option)">
-              </mat-checkbox> {{option.name}}
+              </mat-checkbox> {{option.group_name}}
             </div>
           </mat-option>
         </mat-autocomplete>
