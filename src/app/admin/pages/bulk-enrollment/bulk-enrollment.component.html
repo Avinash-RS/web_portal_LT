@@ -1,3 +1,44 @@
-<p>
-  bulk-enrollment works!
-</p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Bulk enrollment</li>
+  </ol>
+</nav>
+<!-- 
+<h1 style="padding-left: 25px;"> Reports</h1>
+<br> -->
+
+<h1 style="padding-left: 25px;">Bulk enrollment</h1>
+
+<mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabClick($event,bulkuserform)">
+
+  <mat-tab label="Add a user">
+    <form [formGroup]="singleUserForm">
+      <br><br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Select Group</mat-label>
+        <input type="text" matInput [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <div (change)="checkboxLabel(option)">
+              <mat-checkbox (change)="checkboxLabel(option)"  (click)="$event.stopPropagation()">
+              </mat-checkbox> {{option.name}}
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <br><br>
+      <div class=" form-group">
+        <mat-radio-group formControlName="userType" name="userType">
+          <mat-radio-button value="all_user">All users in group</mat-radio-button>
+          <mat-radio-button value="select">Select users</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Add multiple users">
+  </mat-tab>
+
+</mat-tab-group>

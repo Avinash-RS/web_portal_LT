@@ -80,6 +80,7 @@ export class UserManagementComponent implements OnInit {
   //   this.dataSource.paginator = this.paginator
   // }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // tslint:disable-next-line:only-arrow-functions
     this.dataSource.paginator = this.paginator;
