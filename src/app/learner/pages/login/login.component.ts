@@ -86,10 +86,10 @@ export class LoginComponent implements OnInit {
       });
   }
   forgotusername(type) {
-    this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
+    this.router.navigateByUrl('/Learner/recover', { state: { type } });
   }
 
   reserPassword(type) {
-    this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
+    this.router.navigateByUrl('/Learner/recover', { state: { type } });
   }
 }
