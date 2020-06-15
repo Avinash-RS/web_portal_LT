@@ -67,21 +67,21 @@ export class CreateCourseComponent implements OnInit {
             { class: 'calibri', name: 'Calibri' },
             { class: 'comic-sans-ms', name: 'Comic Sans MS' }
         ],
-        customClasses: [
-            {
-                name: 'quote',
-                class: 'quote',
-            },
-            {
-                name: 'redText',
-                class: 'redText'
-            },
-            {
-                name: 'titleText',
-                class: 'titleText',
-                tag: 'h1',
-            },
-        ]
+        // customClasses: [
+        //     {
+        //         name: 'quote',
+        //         class: 'quote',
+        //     },
+        //     {
+        //         name: 'redText',
+        //         class: 'redText'
+        //     },
+        //     {
+        //         name: 'titleText',
+        //         class: 'titleText',
+        //         tag: 'h1',
+        //     },
+        // ]
         // defaultTextAlign: 'left'
     };
     isEditable: boolean;
@@ -568,5 +568,6 @@ export class CreateCourseComponent implements OnInit {
             }
         }
     }
+
 
 }
