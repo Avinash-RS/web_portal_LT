@@ -387,7 +387,7 @@
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
                 'inputs lap_95'" placeholder="Name of college" formControlName="college_name">
               <div *ngIf="f.college_name.touched && f.college_name.errors" class="mand">
-                <div *ngIf="f.college_name.errors.required">Name of college name is required</div>
+                <div *ngIf="f.college_name.errors.required">Name of college is required</div>
                 <!-- <div *ngIf="f.college_name.errors.pattern">College name is invalid</div> -->
               </div>
             </div>
