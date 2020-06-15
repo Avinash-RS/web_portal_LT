@@ -150,13 +150,13 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
       <button mat-flat-button class="blue-border color_landing-blue all-btn">
-        All | {{popularCOurse.length}}
+        All | {{popularCOurse && popularCOurse.length}}
       </button>
     </div>
   </div>
   <br> <br>
   <div class="width_90 m-l-5">
-    <owl-carousel-o [options]="customOptions" [ngClass]="popularCOurse.length <= 4 ? 'widthClass arrow' : 'arrow'">
+    <owl-carousel-o [options]="customOptions" [ngClass]="popularCOurse && popularCOurse.length <= 4 ? 'widthClass arrow' : 'arrow'">
       <ng-template carouselSlide *ngFor="let course of popularCOurse">
         <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
           [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
@@ -193,13 +193,13 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-12 float_right ">
       <button mat-flat-button class="blue-border color_landing-blue all-btn">
-        All | {{trendingCourse.length}}
+        All | {{trendingCourse && trendingCourse.length}}
       </button>
     </div>
   </div>
   <br> <br>
   <div class="width_90 m-l-5">
-    <owl-carousel-o [options]="customOptions" [ngClass]="trendingCourse.length <= 4 ? 'widthClass arrow' : 'arrow'">
+    <owl-carousel-o [options]="customOptions" [ngClass]="trendingCourse && trendingCourse.length <= 4 ? 'widthClass arrow' : 'arrow'">
       <ng-template carouselSlide *ngFor="let course of trendingCourse">
         <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="true" [showWishlist]="false"
           [showStatus]="false" [showRating]="false" [showCount]="false" [showPrice]="false" [showDate]="false"
