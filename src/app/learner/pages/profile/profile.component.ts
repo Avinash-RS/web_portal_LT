@@ -1180,7 +1180,7 @@ export class ProfileComponent implements OnInit {
         console.log('inside')
         if (is_student_or_professional === 'professional') {
           job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z ]*$/)])
-          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z]*$/)])
+          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z ]*$/)])
           totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern(/^[0-9]{1,2}$/)])
         } else {
           job_role.setValidators(null)
