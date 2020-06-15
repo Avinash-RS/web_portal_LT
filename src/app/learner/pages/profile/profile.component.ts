@@ -1117,6 +1117,7 @@ export class ProfileComponent implements OnInit {
   endYear: number;
   editpopup: Boolean = true;
   resendLabel: Boolean = false;
+  enableMobileEdit: any;
   constructor(
     private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog,   private httpC: HttpClient,
