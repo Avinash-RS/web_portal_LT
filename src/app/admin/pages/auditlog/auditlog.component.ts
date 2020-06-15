@@ -33,7 +33,7 @@ export class AuditlogComponent implements OnInit {
   exportdata = 'exportall';
   filteredreports: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private dialog: MatDialog, private adminservice: AdminServicesService, private locationStrategy: LocationStrategy) {
+  constructor(public dialog: MatDialog, private adminservice: AdminServicesService, private locationStrategy: LocationStrategy) {
   }
   ngOnInit() {
     this.displayedColumns = this.displayedColumns.concat(['action']);
