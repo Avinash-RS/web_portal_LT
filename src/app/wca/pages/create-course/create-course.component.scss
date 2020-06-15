@@ -739,3 +739,11 @@ input[type="text"] {
 .mat-form-field-infix {
     padding: 0 !important;
 }
+
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set:nth-child(1){
+    display: none !important;
+}
+
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set:nth-child(10){
+    display: none !important;
+}

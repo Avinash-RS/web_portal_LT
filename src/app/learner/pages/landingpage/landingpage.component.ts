@@ -6,7 +6,7 @@ import { interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from 'rxjs/operators';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import {ActivatedRoute, Router} from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -45,13 +45,14 @@ export class LandingpageComponent implements OnInit {
   scrollAchievedValue: any;
   trendingCourse: any = [];
   popularCOurse = [];
-  currentPage:any;
+  currentPage: any;
 
-  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, private alert: AlertServiceService
-  ,           public learnerservice: LearnerServicesService, public router: Router ) {
+  constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document, private alert: AlertServiceService,
+    // tslint:disable-next-line:align
+    public learnerservice: LearnerServicesService, public router: Router) {
 
-    console.log('----------------'+this.router.url)
-    this.currentPage =this.router.url;
+    console.log('----------------' + this.router.url);
+    this.currentPage = this.router.url;
 
     this.popular();
     this.trending();
@@ -174,23 +175,23 @@ export class LandingpageComponent implements OnInit {
   postReq() {
     this.learnerservice.createGuidanceRequestLanding(this.detailsForm.value.username, this.detailsForm.value.email,
       this.detailsForm.value.course, localStorage.getItem('Systemip'))
-    .subscribe((result: any) => {
-      this.detailsForm.reset();
-      this.alert.openAlert('Requested successfully', null);
-    });
+      .subscribe((result: any) => {
+        this.detailsForm.reset();
+        this.alert.openAlert('Requested successfully', null);
+      });
   }
 
   popular() {
     this.learnerservice.getPopularInLanding()
-    .subscribe((result: any) => {
-      this.popularCOurse = result.data.get_popular_course.data;
-    });
+      .subscribe((result: any) => {
+        this.popularCOurse = result.data.get_popular_course.data;
+      });
   }
 
   trending() {
     this.learnerservice.getTrendingInLanding()
-    .subscribe((result: any) => {
-      this.trendingCourse = result.data.get_trending_course.data;
-    });
+      .subscribe((result: any) => {
+        this.trendingCourse = result.data.get_trending_course.data;
+      });
   }
 }
