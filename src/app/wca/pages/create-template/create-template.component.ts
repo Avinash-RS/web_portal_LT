@@ -14,8 +14,6 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./create-template.component.scss']
 })
 export class CreateTemplateComponent implements OnInit {
-  queryData: any;
-  breakpoint: any;
 
   constructor(
     public wcaService: WcaService,
@@ -28,6 +26,56 @@ export class CreateTemplateComponent implements OnInit {
   ) {
 
   }
+  queryData: any;
+  breakpoint: any;
+
+  todo = [
+    {
+      name: 'PDF',
+      image: '../../../../assets/images/pdf.svg',
+    },
+    {
+      name: 'Word',
+      image: '../../../../assets/images/word.svg',
+    },
+    {
+      name: 'PPT',
+      image: '../../../../assets/images/ppt.svg'
+    },
+    {
+      name: 'Image',
+      image: '../../../../assets/images/image.svg',
+    },
+    {
+      name: 'Video',
+      image: '../../../../assets/images/video.svg'
+    },
+    // {
+    //   name:"Audio",
+    //   image:"../../../../assets/images/audio.svg"
+    // },
+    {
+      name: 'SCORM',
+      image: '../../../../assets/images/scrom.svg'
+    },
+    {
+      name: 'Knowledge Check',
+      image: '../../../../assets/images/quiz.svg'
+    },
+    {
+      name: 'Feedback',
+      image: '../../../../assets/images/feedback.svg'
+    },
+
+
+  ];
+
+  items2: any[];
+
+  done = [
+
+
+  ];
 
   ngOnInit() {
 
@@ -43,57 +91,9 @@ export class CreateTemplateComponent implements OnInit {
       }
     });
 
-    this.resetList()
+    this.resetList();
 
   }
-
-  todo = [
-    {
-      name: "PDF",
-      image: "../../../../assets/images/pdf.svg",
-    },
-    {
-      name: "Word",
-      image: "../../../../assets/images/word.svg",
-    },
-    {
-      name: "PPT",
-      image: "../../../../assets/images/ppt.svg"
-    },
-    {
-      name: "Image",
-      image: "../../../../assets/images/image.svg",
-    },
-    {
-      name: "Video",
-      image: "../../../../assets/images/video.svg"
-    },
-    // {
-    //   name:"Audio",
-    //   image:"../../../../assets/images/audio.svg"
-    // },
-    {
-      name: "SCORM",
-      image: "../../../../assets/images/scrom.svg"
-    },
-    {
-      name: "Knowledge Check",
-      image: "../../../../assets/images/quiz.svg"
-    },
-    {
-      name: "Feedback",
-      image: "../../../../assets/images/feedback.svg"
-    },
-
-
-  ];
-
-  items2: any[]
-
-  done = [
-
-
-  ];
 
 
   resetList() {
@@ -104,16 +104,13 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    if ((event.previousContainer === event.container) && (event.previousContainer.id != "leftContainer" && event.container.id != "leftContainer")) {
-      return false
-    }
-    else if (event.previousContainer.id == "leftContainer" && event.container.id == "rightContainer") {
+    if ((event.previousContainer === event.container) && (event.previousContainer.id != 'leftContainer' && event.container.id != 'leftContainer')) {
       return false;
-    }
-    else if (event.previousContainer.id == "leftContainer" && event.container.id == "leftContainer") {
+    } else if (event.previousContainer.id == 'leftContainer' && event.container.id == 'rightContainer') {
+      return false;
+    } else if (event.previousContainer.id == 'leftContainer' && event.container.id == 'leftContainer') {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    }
-    else {
+    } else {
       this.done.push(this.items2[event.previousIndex]);
 
       // transferArrayItem(event.previousContainer.data,
@@ -141,11 +138,11 @@ export class CreateTemplateComponent implements OnInit {
             const obj = {
               name: res1.tempName,
               coursename: this.queryData.courseName,
-              userid: "001",
-              username: "Sathish",
-              userrole: "admin",
+              userid: '001',
+              username: 'Sathish',
+              userrole: 'admin',
               template_details: this.done
-            }
+            };
             this.wcaService.createTemplate(obj).subscribe((data: any) => {
               this.spinner.hide();
               if (data && data.Message === 'Success') {
@@ -185,19 +182,23 @@ export class CreateTemplateComponent implements OnInit {
             {
               queryParams: {
                 addModule: true, temp: 'noTempID',
-                viewingModule: this.queryData.viewingModule, 
-                courseName: this.queryData.courseName, 
+                viewingModule: this.queryData.viewingModule,
+                courseName: this.queryData.courseName,
                 image: this.queryData.image,
                 isCreateTemp: true
               }
             });
         } else {
-          this.router.navigate(['/Admin/auth/Wca/addtopic'], 
-          { queryParams: { temp: 'noTempID', 
-          viewingModule: this.queryData.viewingModule, 
-          courseName: this.queryData.courseName,
-          image: this.queryData.image,
-          isCreateTemp: true } });
+          this.router.navigate(['/Admin/auth/Wca/addtopic'],
+            {
+              queryParams: {
+                temp: 'noTempID',
+                viewingModule: this.queryData.viewingModule,
+                courseName: this.queryData.courseName,
+                image: this.queryData.image,
+                isCreateTemp: true
+              }
+            });
         }
       }
     } else {
@@ -224,12 +225,25 @@ export class CreateTemplateComponent implements OnInit {
 
   routeTo() {
     if (this.queryData && this.queryData.addModule) {
-      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { addModule: true, viewingModule: this.queryData.viewingModule, courseName: this.queryData.courseName, image: this.queryData.image } });
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],
+        {
+          queryParams: {
+            addModule: true,
+            viewingModule: this.queryData.viewingModule,
+            courseName: this.queryData.courseName,
+            image: this.queryData.image
+          }
+        });
     } else {
-      this.router.navigate(['/Admin/auth/Wca/choosetemplate'], { queryParams: { viewingModule: this.queryData.viewingModule, courseName: this.queryData.courseName, image: this.queryData.image } });
+      this.router.navigate(['/Admin/auth/Wca/choosetemplate'],
+        {
+          queryParams: {
+            viewingModule: this.queryData.viewingModule,
+            courseName: this.queryData.courseName,
+            image: this.queryData.image
+          }
+        });
     }
 
   }
-
-
 }
