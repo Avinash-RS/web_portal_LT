@@ -85,7 +85,6 @@ export class LearnerMyCourseComponent implements OnInit {
 
   checkscroll() {
     this.gs.navigation.subscribe(message => {
-      console.log(message);
       if (message === 'wishlist') {
         this.inputMessageRef.nativeElement.scrollIntoView();
       } else if (message === 'mycourse') {

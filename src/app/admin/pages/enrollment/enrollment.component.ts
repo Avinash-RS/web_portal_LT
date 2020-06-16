@@ -108,7 +108,6 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       this.loading = false;
       const array = [];
-      console.log(result?.data?.get_all_enrolledcourses?.message);
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
              element.group_detail[0].totalCount = element.totalCount;
              const date = moment(element.request_date);
