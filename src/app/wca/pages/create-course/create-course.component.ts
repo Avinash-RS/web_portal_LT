@@ -142,8 +142,9 @@ export class CreateCourseComponent implements OnInit {
             }
             if (flag) {
                 this.queryData = params;
-                if (this.queryData && this.queryData.edit) {
+                if (this.queryData && this.queryData.edit === 'true') {
                     this.updateFormCourse(this.queryData.viewingModule);
+                    this.preview1 = 'image';
                 } else {
                     this.courseForm = this.mainFormCreation();
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
