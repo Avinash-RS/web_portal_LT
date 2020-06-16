@@ -45,7 +45,6 @@ export class ReportsComponent implements OnInit {
             this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
             this.dataSource.sort = this.sort;
           }
-          console.log(this.reportDetails);
           this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
           this.dataSource.sort = this.sort;
         }

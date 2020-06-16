@@ -51,7 +51,6 @@ export class UserMenuComponent implements OnInit {
     this.userDetailes =
       JSON.parse(localStorage.getItem('adminDetails')) || null;
     // this.currentUser = this.userDetailes.username;
-    // console.log(this.currentUser)
 
     this.gs.adminName.subscribe((message) => {
       const msg = message.replace('"', '');
