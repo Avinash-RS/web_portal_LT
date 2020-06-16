@@ -1160,7 +1160,6 @@ export class ProfileComponent implements OnInit {
   duplicateValueCheck = [];
 
   ngOnInit() {
-    console.log('user', this.currentUser.is_profile_updated);
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
     } else {
@@ -1195,7 +1194,6 @@ export class ProfileComponent implements OnInit {
     const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
-        console.log('inside');
         if (is_student_or_professional === 'professional') {
           job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z ]*$/)]);
           org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]*$/)]);
@@ -1210,7 +1208,6 @@ export class ProfileComponent implements OnInit {
         job_role.updateValueAndValidity();
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
-        console.log(this.profileForm.get('professional'));
       });
   }
 
@@ -1307,7 +1304,7 @@ export class ProfileComponent implements OnInit {
     //     if(element.qualification!={}) {element.qualification = element.qualification._id}
     //   });
     // }
-    console.log('jsonData', this.profileForm.value);
+    // console.log('jsonData', this.profileForm.value);
 
     this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
       if (data.data.update_profile.success === 'true') {
@@ -1652,7 +1649,10 @@ export class ProfileComponent implements OnInit {
       this.spicalcharacter = false;
     }
   }
+
   changed(value, index) {
+    const q = this.profileForm.controls.qualification;
+    q.controls[index].controls.institute.setValue('');
     this.duplicateValueCheck[index] = value;
     this.checkFunction();
   }
@@ -1667,7 +1667,6 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSpec(a, spec, quali, level) {
-    // console.log(a, b, c, d);
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
@@ -1676,7 +1675,6 @@ export class ProfileComponent implements OnInit {
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
-    console.log(specification);
   }
 
   formatPercentage(index) {

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<nav aria-label="breadcrumb ">
+<nav aria-label="breadcrumb "  #mycourse>
     <ol class="breadcrumb contentTop2">
         <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">My courses</li>
@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header>
+                    <mat-expansion-panel-header >
                         <mat-panel-title class="f_wt_500 f_size_18 color_blue">
                             My courses
                         </mat-panel-title>
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<div #inputMessage>
+<div #wishlist>
     <app-wishlist-courses [from]="'home'" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
     [showStatus]="false"></app-wishlist-courses>
 </div>
