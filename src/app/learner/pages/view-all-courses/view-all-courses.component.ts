@@ -132,7 +132,7 @@ export class ViewAllCoursesComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.CommonServices.getallcourses('1', event - 1, this.sort_type).subscribe((result: any) => {
+    this.CommonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sort_type).subscribe((result: any) => {
       // this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
       this.allcourses = result.data.get_all_course_by_usergroup.message;
       this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;

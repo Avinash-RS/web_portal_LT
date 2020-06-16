@@ -23,7 +23,8 @@
         <button class="fillsmallbtn" (click)="editModules()">Edit modules</button>
         <button class="fillsmallbtn" (click)="previewcourse(previewDialog)">Preview course</button>
         <span *ngIf="isshowPublish">
-          <button [class.disabled]="modulength == 0" class="fillsmallbtn disabled" [disabled]="modulength == 0"
+          <!-- [class.disabled]="modulength == 0" [disabled]="modulength == 0" -->
+          <button  class="fillsmallbtn disabled" 
             (click)="published()">Publish</button>
         </span>
 
