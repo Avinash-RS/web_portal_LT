@@ -100,9 +100,7 @@
       </div> -->
     </div>
   </div>
-  <div class="spinner-container" *ngIf="loadingCatalogue">
-    <mat-spinner diameter="40"></mat-spinner>
-  </div>
+
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
       <h2>Courses completed</h2>
@@ -138,10 +136,6 @@
 
 <div class="container containerShadow">
     <span class="txthead"><b>Last accessed </b><span class="h8">Courses</span> (click on any course to resume)</span>
-
-     
-      
-         
             <div class="row" >
               <div class="col-md-6 col-sm-12 col-12" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
               <div class="lg-box" (click)="gotohome()" >
