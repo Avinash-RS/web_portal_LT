@@ -571,6 +571,13 @@ export class CatagoryManagementComponent implements OnInit {
 
   closedialogbox() {
     this.dialog.closeAll();
+    this.applyAllCourses = false;
+    this.selectedArray = [];
+    this.courses = this.courses.map(function(el) {
+      const o = Object.assign({}, el);
+      o.isChecked = false;
+      return o;
+    });
   }
 
   moveCourses() {
