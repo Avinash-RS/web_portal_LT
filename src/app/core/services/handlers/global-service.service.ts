@@ -16,6 +16,9 @@ export class GlobalServiceService {
   private $adminName = new BehaviorSubject('admin');
   adminName = this.$adminName.asObservable();
 
+  private $navigation = new BehaviorSubject('myCourse');
+  navigation = this.$navigation.asObservable();
+
   constructor(public route: Router, public alert: AlertServiceService, private locationStrategy: LocationStrategy,
   ) { }
 
@@ -53,6 +56,10 @@ export class GlobalServiceService {
 
   getAdminName(name: any) {
     this.$adminName.next(name);
+  }
+
+  getNavigation(navigation: any) {
+    this.$navigation.next(navigation);
   }
 
   preventBackButton() {
