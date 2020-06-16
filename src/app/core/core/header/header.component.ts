@@ -4,6 +4,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +16,8 @@ export class HeaderComponent implements OnInit {
   userimage: any;
   role: string;
 
-  constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
-              private router: Router, ) { }
+  constructor(private gs: GlobalServiceService,public services: CommonServicesService, private alert: AlertServiceService, 
+              private http: HttpClient,private router: Router ) { }
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || null;
@@ -29,12 +30,16 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateWishlist() {
-    this.router.navigate(['Learner/MyCourse']);
-  }
+    // this.router.navigate(['Learner/MyCourse']);
+    this.router.navigateByUrl('/Learner/MyCourse', { state: { wishlist: true } });
 
+  }
+  navigatetomycourse(){
+    this.router.navigateByUrl('/Learner/MyCourse');
+  }
   logout() {
     Swal.fire({
-      title: 'Please confirm to logout?',
+      title: 'Please confirm to logout',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
