@@ -48,4 +48,17 @@ describe('CourseComponentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+  // it('should render title in a p tag', () => {
+  //   // const fixture = TestBed.createComponent(AppComponent);
+  //   fixture.detectChanges();
+  //   const compiled = fixture.debugElement.nativeElement;
+  //   expect(compiled.querySelector('p').textContent).toBeTruthy();
+  // });
+  // it('should gotodescription', () => {
+
+  // });
+
 });
