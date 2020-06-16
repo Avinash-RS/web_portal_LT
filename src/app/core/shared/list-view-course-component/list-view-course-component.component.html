@@ -12,7 +12,8 @@
           <div class="f_wt_500 f_size_16 float_left m-left-5 m-r-20 course_name">{{course.course_name}}</div>
         </div>
         <div class="row m-t-10 m-left-5  course_description ">
-          {{course.short_description}}
+          <!-- {{course.short_description}} -->
+          {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
         </div>
         <div class="row m-left-5  bottom-left learner-count" *ngIf="showCount">
           <span class="material-icons" style="vertical-align: middle;">

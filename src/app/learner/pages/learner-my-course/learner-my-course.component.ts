@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -19,8 +20,20 @@ export class LearnerMyCourseComponent implements OnInit {
   @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
+  @ViewChild('wishlist') inputMessageRef: ElementRef;
+  @ViewChild('mycourse') mycourseRef: ElementRef;
 
-  constructor(public service: LearnerServicesService, public commonService: CommonServicesService, private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) { }
+  constructor(private router: Router, public service: LearnerServicesService, public commonService: CommonServicesService,
+    // tslint:disable-next-line:align
+    private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) {
+      this.gs.navigation.subscribe(message => {
+        if (message === 'wishlist') {
+          this.inputMessageRef.nativeElement.scrollIntoView();
+        } else if (message === 'mycourse') {
+          this.mycourseRef.nativeElement.scrollIntoView();
+        }
+      });
+  }
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
@@ -65,7 +78,8 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     });
   }
-  viewWishlist() {
+   viewWishlist() {
+    // document.querySelector('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
     const userdetail = this.gs.checkLogout();
     this.commonService.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {

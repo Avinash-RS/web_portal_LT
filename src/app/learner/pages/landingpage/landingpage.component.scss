@@ -497,3 +497,87 @@ strong {
     height: 40px;
     font-style: italic;
 }
+//Afser's CSS
+.whatsnew2{:host ::ng-deep .mat-tab-labels {
+    border-bottom: 1px solid #3468b2;
+}
+
+:host ::ng-deep .mat-tab-label-content {
+    font-size: 21px;
+    color: #04439c;
+    font-weight: 800;
+}
+:host ::ng-deep .mat-tab-label-active{
+    border-bottom: 5px solid #1f3777;
+}}
+
+h3{
+  
+    color: #1068B2 !important;
+    font-size: 23px;
+    font-weight: 500;
+  
+    position: relative;
+    padding-bottom: 7px;
+    
+    display: inline-block;
+}
+.logosBg{
+    background-color: #f3f3f3;
+    padding-top: 18px;
+}
+.logosBgWh{
+    padding-top: 18px;
+
+}
+.whatnewcard{
+   
+    font-size: 12px;
+    text-align: justify;
+    margin: 7px 30px;
+ 
+}
+.lineBlow{
+    height: 30px;
+    background-color: yellow;
+}
+h3:before{
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 1px;
+    bottom: 0;
+    border-radius: 2px;
+    left: 0;
+     border-bottom: 4px solid #3468b2;
+}
+footer{
+    background-color: #70aed3;
+    color: #fff;
+    .footer-copyright {
+        background-color: #006ab2;
+        color: white !important;
+        font-size: 11px;
+        a{
+            color: white !important;
+        }
+        .maradd{
+            margin-right: 4px !important;
+            margin-left: 5px !important;
+        }
+        .newcp{
+            font-weight: 500;
+        }
+        i{
+            font-size: 20px !important;
+            padding: 10px !important;
+        }
+    }
+    h6{
+        font-size: 15px !important;
+    font-weight: 500 !important;
+    }
+    p{
+        margin: 0px !important;
+    }
+}
