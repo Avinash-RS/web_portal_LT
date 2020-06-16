@@ -30,6 +30,7 @@ export class CatagoryManagementComponent implements OnInit {
   showAddSubCatForm = false;
   showAddSuperSubCatForm = false;
   showCourses = false;
+  tempVar = false;
   applyAllCourses = false;
   selectedCategory: any = {};
   selectedSubCategory: any = {};
@@ -440,7 +441,7 @@ export class CatagoryManagementComponent implements OnInit {
             // Swal.fire({ text: 'Move/Remove the subcategories/courses to delete this ' + type, });
             Swal.fire({
               html:
-              '<strong>' + results.data.delete_catalogue.message + '</strong>'
+                '<strong>' + results.data.delete_catalogue.message + '</strong>'
               // 'Move/Remove the subcategories/courses to delete this ' + '<b>' + type + '</b> '
             });
           } else if (results.data.delete_catalogue.success === true) {
@@ -558,6 +559,7 @@ export class CatagoryManagementComponent implements OnInit {
       c.isChecked = !c.isChecked;
       this.selectedArray = this.selectedArray.filter(i => i !== c);
     }
+    console.log(this.selectedArray);
   }
 
   openMoveTo(templateRef: TemplateRef<any>) {
@@ -571,9 +573,9 @@ export class CatagoryManagementComponent implements OnInit {
 
   closedialogbox() {
     this.dialog.closeAll();
-    this.applyAllCourses = false;
     this.selectedArray = [];
-    this.courses = this.courses.map(function(el) {
+    this.applyAllCourses = false;
+    this.courses = this.courses.map(function (el) {
       const o = Object.assign({}, el);
       o.isChecked = false;
       return o;
@@ -581,7 +583,6 @@ export class CatagoryManagementComponent implements OnInit {
   }
 
   moveCourses() {
-    this.closedialogbox();
     this.loadingCourse = true;
     const level = this.selectCategoryForm?.value?.category !== '' &&
       this.selectCategoryForm?.value?.subCategory === '' && this.selectCategoryForm?.value?.subSubCategory === '' ? 1 :
@@ -589,14 +590,15 @@ export class CatagoryManagementComponent implements OnInit {
         this.selectCategoryForm?.value?.subCategory !== '' && this.selectCategoryForm?.value?.subSubCategory === '' ? 2 :
         this.selectCategoryForm?.value?.category !== '' &&
         this.selectCategoryForm?.value?.subCategory !== '' && this.selectCategoryForm?.value?.subSubCategory !== '' && 3;
-    const arra = !this.applyAllCourses && this.selectedArray.map((item: any) => item.course_id);
+    const arra = !this.tempVar && this.selectedArray.map((item: any) => item.course_id);
+    this.closedialogbox();
     const course = {
       old_level: this.level,
       old_category_id: this.selectedCategory?.category_id,
       old_sub_category_id: this.selectedSubCategory?.sub_category_id || 'null',
       old_super_sub_category_id: this.selectedSuperSubCategory?.super_sub_category_id || 'null',
       level,
-      apply_all_courses: this.applyAllCourses || false,
+      apply_all_courses: this.tempVar || false,
       course_id: arra || [],
       category_id: this.selectCategoryForm.value.category?.category_id,
       sub_category_id: this.selectCategoryForm.value.subCategory?.sub_category_id || 'null',
@@ -604,7 +606,7 @@ export class CatagoryManagementComponent implements OnInit {
     };
     this.adminservice.reAssignCourses(course).subscribe((result: any) => {
       if (result?.data?.reassigncourse?.success) {
-        this.loadingCourse = false;
+        this.loadingCourse = this.tempVar = false;
         const msg1 = this.selectCategoryForm?.value.category.category_name;
         const msg2 = this.selectCategoryForm?.value.subCategory?.sub_category_name ? '> '
           + this.selectCategoryForm?.value.subCategory?.sub_category_name : ' ';
@@ -695,11 +697,11 @@ export class CatagoryManagementComponent implements OnInit {
     this.selectedSuperSubCategory = {};
     this.addSuperSubCategoryForm?.reset();
   }
-   // tslint:disable-next-line:use-life-cycle-interface
-   ngOnDestroy() {
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
     if (this.dialog) {
-        this.dialog.closeAll();
+      this.dialog.closeAll();
     }
- }
+  }
 }
 // 721
