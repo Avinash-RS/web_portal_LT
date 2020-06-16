@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     Swal.fire({
-      title: 'Please confirm to logout?',
+      title: 'Please confirm to logout',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
