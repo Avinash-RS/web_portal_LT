@@ -328,7 +328,7 @@ label {
     }
     .footer20 {
         position: absolute;
-        bottom: 13px;
+        bottom: 25px;
         width: 84%;
     }
 }
@@ -347,11 +347,6 @@ label {
     .wrap-reg {
         width: 100%;
         margin-left: 0% !important;
-    }
-
-    .head1 {
-        // font-size: 36px !important;
-        // margin-top: 12%!important;
     }
 
     .form-group {
@@ -373,6 +368,11 @@ label {
 
     .haveacc {
         font-size: 14px !important;
+    }
+
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
     }
 
 }
