@@ -1651,7 +1651,8 @@ export class ProfileComponent implements OnInit {
   }
 
   changed(value, index) {
-    const q = this.profileForm.controls.qualification;
+    let q;
+    q = this.profileForm.controls.qualification;
     q.controls[index].controls.institute.setValue('');
     this.duplicateValueCheck[index] = value;
     this.checkFunction();
