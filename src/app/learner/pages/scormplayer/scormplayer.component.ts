@@ -50,7 +50,7 @@ export class ScormplayerComponent implements OnInit {
     localStorage.setItem('scorm_user_id', this.user_id)
     localStorage.setItem('course_id', this.course_id)
     this.spinner.show();
-    this.commonService.viewCurseByID(this.course_id).subscribe(data => {
+    this.commonService.viewCurseByID(this.course_id,this.user_id).subscribe(data => {
       if (data.data['viewcourse'].success == true) {
         this.courseDeatils = data.data['viewcourse']['message'];
         this.spinner.hide();
