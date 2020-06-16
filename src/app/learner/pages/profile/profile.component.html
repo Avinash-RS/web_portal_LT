@@ -158,7 +158,7 @@
 
       <form [formGroup]="profileForm">
         <!-- ////// Info about you//////// -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="form-group width_100">
             <label class="f_size_19">About me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
             <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
@@ -172,12 +172,12 @@
                 {{f.about_you.errors.maxlength.requiredLength}} maximum of characters</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- Info End-->
 
-        <br>
+        <!-- <br>
         <hr class="p-b-10px">
-        <br *ngIf="!cannotEdit">
+        <br *ngIf="!cannotEdit"> -->
 
         <!-- //////Gender part//////// -->
         <div class="row" *ngIf="!cannotEdit">
