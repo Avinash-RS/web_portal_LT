@@ -231,9 +231,10 @@ export class EnrollmentComponent implements OnInit {
             this.radiobuttonchange();
           }
           const c = array.length > 1 ?  array.length + ' courses' : array.length + ' course';
+          const learner = array.length > 1 ?  array.length + ' learners' : array.length + ' learner';
           Swal.fire({
             title:   c + '&nbsp;<div> approved successfully</div> <br> ',
-            text: 'Confirmation email sent to learner ',
+            text: 'Confirmation email sent to ' + learner ,
           });
         }
       });

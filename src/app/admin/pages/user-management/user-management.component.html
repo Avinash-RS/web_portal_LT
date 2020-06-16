@@ -82,7 +82,7 @@
         </ng-container>
 
         <ng-container matColumnDef="active">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
           <mat-cell *matCellDef="let element"
             [ngClass]="element.is_blocked ? 'red f_wt_500' : element.is_active ? 'green f_wt_500' : 'black f_wt_500'">
             <span class="mobile-label">Status</span>

@@ -3,12 +3,12 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from "@angular/material";
+import { MatDialog } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, NgModel, Validators, FormArray } from '@angular/forms';
 import * as myGlobals from '@core/globals';
 import { Certificate } from 'crypto';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./profile.component.scss']
 })
 
-//BEFORE
+// BEFORE
 // export class ProfileComponent implements OnInit {
 //   config = {
 //     allowNumbersOnly: true,
@@ -274,7 +274,7 @@ import { HttpClient } from '@angular/common/http';
 //         this.userData = data.data['view_profile'].message[0];
 //         // this.profileDetails.about_you = this.userData.user_profile[0].about_you;gender
 //         this.loader.hide();
-//         // this.profileDetails.about_you 
+//         // this.profileDetails.about_you
 //         if (this.userData.user_profile.length != 0) {
 //           this.userData.progress = this.userData.user_profile[0].progress
 //           var p = this.userData.progress.slice(0, -1);
@@ -320,7 +320,6 @@ import { HttpClient } from '@angular/common/http';
 //         this.getAllState(this.profileDetails.country);
 //         this.getDistrict(this.profileDetails.state);
 //         this.qual = this.userData.qualification;
-//         //if (this.userData.user_profile.length!=0 && this.userData.user_profile[0].certificate.length!=0 && this.userData.user_profile[0].certificate.length[0].value!=""){
 //         this.words2 = this.userData.user_profile[0].certificate.map(s => ({
 //           value: s
 //         }));
@@ -331,8 +330,6 @@ import { HttpClient } from '@angular/common/http';
 
 //         this.qual = this.userData.qualification;
 //         if (this.userData.user_profile.length != 0) {
-//           this.socialMediaLink = this.userData.user_profile[0].social_media && this.userData.user_profile[0].social_media[0] && this.userData.user_profile[0].social_media[0].link;
-//         }
 //         // this.words2 = this.userData.user_profile[0].certificate
 
 
@@ -394,7 +391,7 @@ import { HttpClient } from '@angular/common/http';
 //   updateProfile(language, country, state, city, social, about_you, exp) {
 //     // role = 'aaaasd';
 //     // console.log(this.qual);
-//     //profile imgg is not mandatory because of that 
+//     //profile imgg is not mandatory because of that
 //     /*if(!localStorage.getItem('user_img')){
 //       this.alert.openAlert('Please update profile image.', null);
 //       return
@@ -410,8 +407,7 @@ import { HttpClient } from '@angular/common/http';
 //       this.prof.job_role = '';
 //       if (this.profileDetails.gender && this.profileDetails.country &&
 //         this.profileDetails.state && city && this.qualification_obj.qualification != '' &&
-//         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
-//         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
+
 //         this.profileDetailCheck = true;
 //       } else {
 //         this.loader.hide();
@@ -423,8 +419,10 @@ import { HttpClient } from '@angular/common/http';
 //       if (this.profileDetails.gender && this.prof.total_experience && this.prof.organization &&
 //         this.prof.job_role && this.profileDetails.country &&
 //         this.profileDetails.state && city && this.qualification_obj[0].qualification != '' &&
-//         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
-//         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
+//         this.qualification_obj[0].board_university != '' &&
+// this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
+//         && this.qualification_obj[0].specification != '' &&
+// this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
 //         this.profileDetailCheck = true;
 //         if (this.prof.total_experience > 70) {
 //           this.alert.openAlert('Total experience should be less than or equal to 70 years', null);
@@ -448,9 +446,6 @@ import { HttpClient } from '@angular/common/http';
 //       if (this.profileDetails.gender && this.profileDetails.is_student_or_professional
 //         && this.profileDetails.country &&
 //         this.profileDetails.state && this.profileDetails.city && this.qual[0].qualification != '' &&
-//         this.qualification_obj[0].board_university != '' && this.qualification_obj[0].institute != '' && this.qualification_obj[0].discipline != ''
-//         && this.qualification_obj[0].specification != '' && this.qualification_obj[0].year_of_passing != '' && this.qualification_obj[0].percentage != '') {
-//         this.profileDetailCheck = true;
 //       } else {
 //         this.loader.hide();
 //         this.profileDetailCheck = false;
@@ -475,11 +470,8 @@ import { HttpClient } from '@angular/common/http';
 //       //   country != undefined && this.qualification_obj != undefined && localStorage.getItem('user_img') == undefined &&
 //       //   localStorage.getItem('user_img') == null) {
 //       //   progress = '60%'
-//       // } else if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && 
-//       //   country != undefined && this.qual != undefined && localStorage.getItem('user_img') && language == undefined && this.words2.length == 1 && social.length == 1) {
+//       // } else if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
 //       //   progress = '90%'
-//       // } else if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
-//       //   && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
 //       //   progress = '100%'
 //       // }
 //       if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined &&
@@ -490,8 +482,6 @@ import { HttpClient } from '@angular/common/http';
 //         country != undefined && this.qual != undefined  && language != undefined &&  this.words2.length == 1 && this.socialMediaLink) {
 //         progress = '90%';
 //         this.progress = 90;
-//       } if (this.profileDetails.gender != undefined && this.profileDetails.is_student_or_professional != undefined && country != undefined && this.qual != undefined
-//         && localStorage.getItem('user_img') && language != undefined && this.words2 != undefined && social != undefined) {
 //         progress = '100%';
 //         this.progress = 100;
 //       }
@@ -505,10 +495,10 @@ import { HttpClient } from '@angular/common/http';
 //     }
 //       // for (const iterator of this.words2) {
 //       //     this.certificate.push(iterator.value)
-//       //   } 
+//       //   }
 //       //  for (const iterator of this.words2) {
 //       //         this.certificate.push(iterator)
-//       //       } 
+//       //       }
 //       var jsonData = {
 //         user_id: this.currentUser.user_id,
 //         gender: this.profileDetails.gender,
@@ -596,7 +586,6 @@ import { HttpClient } from '@angular/common/http';
 //   //Verify OTP
 //   otpverify() {
 //     // this.otp = this.otpForm.value.otp
-//     this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
 //       if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
 //         this.closedialogbox();
 //         this.alert.openAlert(data.data['update_verifyotp_mobile_onprofile'].message, null)
@@ -627,7 +616,6 @@ import { HttpClient } from '@angular/common/http';
 //     var psd = localStorage.getItem('ps');
 //     var ps = atob(psd)
 //     this.user_id_data = this.gs.checkLogout()
-//     this.service.get_change_password_updateprofile(this.user_id_data.user_id, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
 
 //       if (password.data['get_change_password_updateprofile']['success'] == 'true') {
 //         this.alert.openAlert(password.data['get_change_password_updateprofile'].message, null);
@@ -714,7 +702,7 @@ import { HttpClient } from '@angular/common/http';
 //     }
 //     // else if (this.words2.length > 1 && this.words2.length-1 != i && _.find(this.words2, { value :this.words2[i].value})) {
 //     //   this.alert.openAlert('Certificate link already present', null)
-//     // } 
+//     // }
 //     else
 //       this.words2.push({ value: '' });
 //     console.log(this.words2, i)
@@ -737,11 +725,6 @@ import { HttpClient } from '@angular/common/http';
 //   addnewQual(index, q, qual) {
 //     if (this.qual && this.qual[0] && this.qualification_obj.length == 0) {
 //       this.qualification_obj.push({});
-//       this.qualification_obj[0].qualification = this.qual[0].level_detail && this.qual[0].level_detail.length == 1 && this.qual[0].level_detail[0]._id || null;
-//       this.qualification_obj[0].board_university = this.qual[0].board && this.qual[0].board.length == 1 && this.qual[0].board[0]._id || null;
-//       this.qualification_obj[0].institute = this.qual[0].institute_detail && this.qual[0].institute_detail[0]._id || null;
-//       this.qualification_obj[0].discipline = this.qual[0].discipline && this.qual[0].discipline.length == 1 && this.qual[0].discipline[0]._id || null;
-//       this.qualification_obj[0].specification = this.qual[0].specification_detail && this.qual[0].specification_detail.length == 1 && this.qual[0].specification_detail[0]._id || null;
 //       this.qualification_obj[0].year_of_passing = this.qual[0].year_of_passing || null;
 //       this.qualification_obj[0].percentage = parseFloat(this.qual[0].percentage) || null;
 //     }
@@ -1055,20 +1038,70 @@ import { HttpClient } from '@angular/common/http';
 //     }
 //   }
 // }
-//End of Sprint 1 code before- restructure
+// End of Sprint 1 code before- restructure
 
 
 
 
-//AFTER restructure - Mythreyi
+// AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+  constructor(
+    private alert: AlertServiceService, public service: LearnerServicesService,
+    private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
+    private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
+    private router: Router, private gs: GlobalServiceService) {
+    if (this.gs.checkLogout()) {
+      // this.urlImage = localStorage.getItem('user_img')
+      this.currentUser = this.gs.checkLogout();
+      this.getprofileDetails(this.currentUser.user_id);
+      if (!this.currentUser.is_profile_updated) {
+        this.gs.preventBackButton();
+      }
+    }
+
+    this.getAllLanguage();
+    this.getAllcountry();
+    this.getAllLevels();
+    this.getBoardsUniv();
+    this.getInstitute();
+    this.getDiscipline();
+    this.getSpec();
+  }
+
+  // to get controls for validation
+  get f() {
+    return this.profileForm.controls;
+  }
+
+  get c() {
+    if (this.mailForm) {
+      return this.mailForm.controls;
+    } else if (this.otpForm) {
+      return this.otpForm.controls;
+    } else if (this.passwordForm) {
+      return this.passwordForm.controls;
+    }
+  }
+
+  // Dynamic add rows
+  get certificate() {
+    return this.profileForm.get('certificate') as FormArray;
+  }
+
+  get qualification() {
+    return this.profileForm.get('qualification') as FormArray;
+  }
+
+  get social_media() {
+    return this.profileForm.get('social_media') as FormArray;
+  }
 
   profileForm: FormGroup;
   mailForm: FormGroup;
   otpForm: FormGroup;
   passwordForm: FormGroup;
-  cannotEdit: Boolean = true;
+  cannotEdit = true;
   languageList: any = [];
   stateValue: any = [];
   countryValue: any = [];
@@ -1081,18 +1114,18 @@ export class ProfileComponent implements OnInit {
   disciplines: any = [];
   currentUser: any;
   userData: any = {};
-  show: Boolean = false;
-  showNew: Boolean = false;
-  showConNew: Boolean = false;
+  show = false;
+  showNew = false;
+  showConNew = false;
   lowercase: boolean;
   uppercase: boolean;
   number: boolean;
   spicalcharacter: boolean;
   selectfile: File;
   showotp: boolean;
-  isenable: boolean = true;
+  isenable = true;
   timeLeft: number;
-  resendtimeLeft: number = 60;
+  resendtimeLeft = 60;
   interval;
   status: string;
   config = {
@@ -1102,111 +1135,83 @@ export class ProfileComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      'width': '50px',
-      'height': '50px',
-      'background': '#B8D0FF',
+      width: '50px',
+      height: '50px',
+      background: '#B8D0FF',
       // 'margin-top': '24px'
     }
   };
   otp: any;
-  verifybutton: Boolean = false;
+  verifybutton = false;
   levelCode: any;
   minutes: number;
   seconds: number;
   startYear: number;
   endYear: number;
-  editpopup: Boolean = true;
-  resendLabel: Boolean = false;
+  editpopup = true;
+  resendLabel = false;
   enableMobileEdit: any;
-  constructor(
-    private alert: AlertServiceService, public service: LearnerServicesService,
-    private activeroute: ActivatedRoute, private dialog: MatDialog,   private httpC: HttpClient,
-    private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-    private router: Router, private gs: GlobalServiceService) {
-    if (this.gs.checkLogout()) {
-      // this.urlImage = localStorage.getItem('user_img')
-      this.currentUser = this.gs.checkLogout();
-      this.getprofileDetails(this.currentUser.user_id);
-      if (!this.currentUser.is_profile_updated)
-        this.gs.preventBackButton()
-    }
+  // Percentage
+  //   public setTwoNumberDecimal($event) {
+  //     $event.target.value = parseFloat($event.target.value).toFixed(2);
+  // }
 
-    this.getAllLanguage();
-    this.getAllcountry();
-    this.getAllLevels();
-    this.getBoardsUniv();
-    this.getInstitute();
-    this.getDiscipline();
-    this.getSpec();
-  }
+
+  duplicateValueCheck = [];
 
   ngOnInit() {
-    console.log('user',this.currentUser.is_profile_updated);
-    if (this.currentUser.is_profile_updated){
+    console.log('user', this.currentUser.is_profile_updated);
+    if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
-    }
-    else{
+    } else {
       this.cannotEdit = false;
     }
     // moment().year();
     this.profileForm = this.formBuilder.group({
-      about_you: new FormControl("", [Validators.minLength(3), Validators.maxLength(1000)]),
-      gender: new FormControl("", myGlobals.req),
-      is_student_or_professional: new FormControl("", myGlobals.req),
+      about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
+      gender: new FormControl('', myGlobals.req),
+      is_student_or_professional: new FormControl('', myGlobals.req),
       languages_known: [''],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
       progress: [],
-      certificate: this.formBuilder.array([new FormControl("")]),
+      certificate: this.formBuilder.array([new FormControl('')]),
       qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth: "05-08-1998",
+      year_of_birth: '05-08-1998',
       profile_img: [],
       user_id: [],
       created_by_ip: [],
       professional: this.formBuilder.group({
-        job_role: new FormControl(""),
-        organization: new FormControl(""),
-        total_experience: new FormControl("")
+        job_role: new FormControl(''),
+        organization: new FormControl(''),
+        total_experience: new FormControl('')
       })
     });
-    console.log('form', this.profileForm);
-    console.log('stud', this.profileForm.get('is_student_or_professional'))
+
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
       .subscribe(is_student_or_professional => {
-        console.log('inside')
+        console.log('inside');
         if (is_student_or_professional === 'professional') {
-          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z ]*$/)])
-          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Za-z ]*$/)])
-          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern(/^[0-9]{1,2}$/)])
+          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z ]*$/)]);
+          org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]*$/)]);
+          totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(2),
+            // Validators.pattern(/^[0-9]{1,2}$/)]);
+          ]);
         } else {
-          job_role.setValidators(null)
-          org.setValidators(null)
-          totalExp.setValidators(null)
+          job_role.setValidators(null);
+          org.setValidators(null);
+          totalExp.setValidators(null);
         }
         job_role.updateValueAndValidity();
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
-        console.log(this.profileForm.get('professional'))
-      })
-  }
-
-  //to get controls for validation
-  get f() {
-    return this.profileForm.controls;
-  }
-
-  get c() {
-    if (this.mailForm)
-      return this.mailForm.controls;
-    else if (this.otpForm)
-      return this.otpForm.controls;
-    else if (this.passwordForm)
-      return this.passwordForm.controls;
+        console.log(this.profileForm.get('professional'));
+      });
   }
 
   // edit(){
@@ -1217,17 +1222,23 @@ export class ProfileComponent implements OnInit {
     this.loader.show();
     this.service.view_profile(userid).subscribe((data: any) => {
       if (data.data.view_profile.success) {
-        let profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
+        const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
         if (profileDetails) {
-          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(v => delete v.__typename);
-          profileDetails.social_media.length > 0 && profileDetails.social_media.forEach(v => delete v.__typename);
-          if (profileDetails.progress.includes("%"))
+          if (profileDetails.qualification.length > 0) {
+            profileDetails.qualification.forEach(v => delete v.__typename);
+          }
+          if (profileDetails.social_media.length > 0) {
+            profileDetails.social_media.forEach(v => delete v.__typename);
+          }
+          if (profileDetails.progress.includes('%')) {
             profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
-          else
+          } else {
             profileDetails.progress = Number(profileDetails.progress);
-          if (profileDetails.progress <= 60)
+          }
+          if (profileDetails.progress <= 60) {
             this.gs.preventBackButton();
+          }
           const qualification = this.profileForm.get('qualification') as FormArray;
           const certificate = this.profileForm.get('certificate') as FormArray;
           while (qualification.length) {
@@ -1240,17 +1251,24 @@ export class ProfileComponent implements OnInit {
           this.profileForm.patchValue(profileDetails);
           this.getAllState();
           this.getDistrict();
-          profileDetails.qualification.length > 0 && profileDetails.qualification.forEach(qual => qualification.push(this.formBuilder.group(qual)));
-          profileDetails.certificate && profileDetails.certificate.length > 0 && profileDetails.certificate.forEach(certif => certificate.push(this.formBuilder.control(certif)));
+          if (profileDetails.qualification.length > 0) {
+            profileDetails.qualification.forEach(qual =>
+              qualification.push(this.formBuilder.group(qual)));
+          }
+          if (profileDetails.certificate && profileDetails.certificate.length > 0) {
+            profileDetails.certificate.forEach(certif =>
+              certificate.push(this.formBuilder.control(certif)));
+          }
           // console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
           this.loader.hide();
-        } else
+        } else {
           this.loader.hide();
+        }
       }
-    })
+    });
   }
   yearOfpassing(index) {
-       this.startYear = 2020- 60;
+    this.startYear = 2020 - 60;
     this.endYear = 2020 + 3;
     // this.startYear = moment().year() - 60;
     // this.endYear = moment().year() + 3;
@@ -1259,24 +1277,29 @@ export class ProfileComponent implements OnInit {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
         this.alert.openAlert('Invalid year', null);
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
-        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators([Validators.required, Validators.minLength(4)]);
+        this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators([Validators.required,
+        Validators.minLength(4)]);
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').updateValueAndValidity();
       }
     });
   }
   updateProfile() {
-    // /console.log(this.profileForm)
-    if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional && this.profileForm.value.country && this.profileForm.value.state
-      && this.profileForm.value.city_town)
-      this.profileForm.controls['progress'].setValue(60);
-    if (this.profileForm.value.progress == 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known && this.profileForm.value.social_media)
-      this.profileForm.controls['progress'].setValue(90);
-    if (this.profileForm.value.progress == 90 && this.profileForm.value.profile_img)
-      this.profileForm.controls['progress'].setValue(100);
+    if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
+      this.profileForm.value.country && this.profileForm.value.state
+      && this.profileForm.value.city_town) {
+      this.profileForm.controls.progress.setValue(60);
+    }
+    if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
+      && this.profileForm.value.social_media) {
+      this.profileForm.controls.progress.setValue(90);
+    }
+    if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+      this.profileForm.controls.progress.setValue(100);
+    }
 
-    var ip = localStorage.getItem('Systemip');
-    this.profileForm.controls['created_by_ip'].setValue(ip);
-    this.profileForm.controls['user_id'].setValue(this.currentUser.user_id);
+    const ip = localStorage.getItem('Systemip');
+    this.profileForm.controls.created_by_ip.setValue(ip);
+    this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
     // console.log('jsonData', this.profileForm.value)
     // if(this.profileForm.value && this.profileForm.value.qualification) {
@@ -1284,36 +1307,31 @@ export class ProfileComponent implements OnInit {
     //     if(element.qualification!={}) {element.qualification = element.qualification._id}
     //   });
     // }
-    console.log('jsonData', this.profileForm.value)
+    console.log('jsonData', this.profileForm.value);
 
-    this.service.update_profile(this.profileForm.value).subscribe(data => {
-      if (data.data['update_profile']['success'] == 'true') {
+    this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+      if (data.data.update_profile.success === 'true') {
         this.loader.hide();
         this.currentUser.is_profile_updated = true;
-        localStorage.setItem('UserDetails', JSON.stringify(this.currentUser))
-        this.alert.openAlert(data.data['update_profile'].message, null)
+        localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+        this.alert.openAlert(data.data.update_profile.message, null);
         this.router.navigate(['/Learner/MyCourse']);
       } else {
-        this.alert.openAlert(data.data['update_profile'].message, null)
+        this.alert.openAlert(data.data.update_profile.message, null);
       }
-    })
-  }
-
-  //Dynamic add rows
-  get certificate() {
-    return this.profileForm.get('certificate') as FormArray;
+    });
   }
 
   addCertificates(c, i) {
-    var arrayT = this.certificate.value.filter(i => i === c);
+    const arrayT = this.certificate.value.filter(ind => ind === c);
     if (arrayT.length > 1) {
-      this.alert.openAlert("This certificate link is already filled", null)
-      this.certificate.removeAt(i);;
-    }
-    else if (c[0] == '')
-      this.alert.openAlert("Please enter certificate", null)
-    else
+      this.alert.openAlert('This certificate link is already filled', null);
+      this.certificate.removeAt(i);
+    } else if (c[0] === '') {
+      this.alert.openAlert('Please enter certificate', null);
+    } else {
       this.certificate.push(this.formBuilder.control(['']));
+    }
   }
 
   removeCertificates(i) {
@@ -1332,16 +1350,30 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  get qualification() {
-    return this.profileForm.get('qualification') as FormArray;
-  }
+  addQualification(i) {
+    if (this.profileForm.value.qualification[i].qualification === '5e7deddfdba4466d9704b44a' ||
+      this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2') {
+      if (this.profileForm.value.qualification[i].board_university !== '' &&
+        this.profileForm.value.qualification[i].qualification !== '' &&
+        this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+        this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+        this.qualification.push(this.createQualItem());
+      } else {
+        this.alert.openAlert('Please fill all details', null);
+      }
+    } else {
+      const isEmpty = Object.values(this.profileForm.value.qualification[i]).some(x => (x === ''));
+      if (isEmpty) {
+        this.alert.openAlert('Please fill all details', null);
+      } else {
+        this.qualification.push(this.createQualItem());
+      }
+    }
 
-  addQualification() {
-    this.qualification.push(this.createQualItem());
   }
 
   removeQualification(i) {
-    this.qualification.removeAt(i);;
+    this.qualification.removeAt(i);
   }
 
   createSocialMedia(): FormGroup {
@@ -1351,56 +1383,53 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  get social_media() {
-    return this.profileForm.get('social_media') as FormArray;
-  }
-
   addSocialMedia() {
     this.social_media.push(this.createSocialMedia());
   }
 
   removeSocialMedia(i) {
-    this.social_media.removeAt(i);;
+    this.social_media.removeAt(i);
   }
   // ENd of Dynamic Add rows
 
   getAllLanguage() {
-    this.service.get_language_details().subscribe(language => {
-      this.languageList = language.data['get_language_details'].data;
-    })
+    this.service.get_language_details().subscribe((language: any) => {
+      this.languageList = language.data.get_language_details.data;
+    });
   }
 
-  //Country List
+  // Country List
   getAllcountry() {
-    this.service.get_country_details().subscribe(countryDetails => {
-      this.countryValue = countryDetails.data['get_country_details'].data.filter(cnt =>
+    this.service.get_country_details().subscribe((countryDetails: any) => {
+      this.countryValue = countryDetails.data.get_country_details.data.filter(cnt =>
         cnt.countryname === 'India'
       );
-    })
+    });
   }
-  //State List
+  // State List
   getAllState() {
-    this.service.get_state_details(this.profileForm.value.country).subscribe(stateDetails => {
-      this.stateValue = stateDetails.data['get_state_details'].data;
+    this.service.get_state_details(this.profileForm.value.country).subscribe((stateDetails: any) => {
+      this.stateValue = stateDetails.data.get_state_details.data;
       this.getDistrict();
-      if (this.stateValue == null)
-        this.alert.openAlert(stateDetails.data['get_state_details'].message, null);
-    })
+      if (this.stateValue == null) {
+        this.alert.openAlert(stateDetails.data.get_state_details.message, null);
+      }
+    });
   }
 
   getDistrict() {
-    this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.state).subscribe(city => {
-      this.cityValue = city.data['get_district_details'].data;
-    })
+    this.service.get_district_details(this.profileForm.value.country, this.profileForm.value.state).subscribe((city: any) => {
+      this.cityValue = city.data.get_district_details.data;
+    });
   }
 
   getAllLevels() {
-    this.service.get_qualification_details().subscribe(level => {
-      this.levelValue = level.data['get_qualification_details'].data;
+    this.service.get_qualification_details().subscribe((level: any) => {
+      this.levelValue = level.data.get_qualification_details.data;
       this.levelValue.forEach(element => {
         element.allowed = 'Y';
       });
-    })
+    });
   }
 
   getBoardsUniv() {
@@ -1408,23 +1437,23 @@ export class ProfileComponent implements OnInit {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_board_university_details().subscribe(boards => {
-      this.boardValue = boards.data['get_board_university_details'].data['board'];
-      this.uniValue = boards.data['get_board_university_details'].data['university'];
+    this.service.get_board_university_details().subscribe((boards: any) => {
+      this.boardValue = boards.data.get_board_university_details.data.board;
+      this.uniValue = boards.data.get_board_university_details.data.university;
 
-    })
+    });
   }
 
   getInstitute() {
-    this.service.get_institute_details().subscribe(institute => {
-      this.institutes = institute.data['get_institute_details'].data;
-    })
+    this.service.get_institute_details().subscribe((institute: any) => {
+      this.institutes = institute.data.get_institute_details.data;
+    });
   }
 
   getDiscipline() {
-    this.service.get_discipline_details().subscribe(discipline => {
-      this.disciplines = discipline.data['get_discipline_details'].data;
-    })
+    this.service.get_discipline_details().subscribe((discipline: any) => {
+      this.disciplines = discipline.data.get_discipline_details.data;
+    });
   }
 
   getSpec() {
@@ -1432,12 +1461,12 @@ export class ProfileComponent implements OnInit {
 
     //   this.specValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_specification_details().subscribe(spec => {
-      this.specValue = spec.data['get_specification_details'].data;
-    })
+    this.service.get_specification_details().subscribe((spec: any) => {
+      this.specValue = spec.data.get_specification_details.data;
+    });
   }
 
-  //All dialogs
+  // All dialogs
   closedialogbox() {
     this.dialog.closeAll();
   }
@@ -1450,18 +1479,18 @@ export class ProfileComponent implements OnInit {
   }
 
   updateEmail(mailForm) {
-    if (mailForm == false) {
-      Swal.fire('Email Id is invalid')
+    if (mailForm === false) {
+      Swal.fire('Email Id is invalid');
     } else {
-      this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe(data => {
-        if (data.data['update_email_onprofile']['success'] == 'true') {
-          Swal.fire(data.data['update_email_onprofile'].message);
+      this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe((data: any) => {
+        if (data.data.update_email_onprofile.success === 'true') {
+          Swal.fire(data.data.update_email_onprofile.message);
           this.getprofileDetails(this.currentUser.user_id);
           this.mailForm.reset();
         } else {
-          Swal.fire(data.data['update_email_onprofile'].message)
+          Swal.fire(data.data.update_email_onprofile.message);
         }
-      })
+      });
     }
 
   }
@@ -1471,13 +1500,13 @@ export class ProfileComponent implements OnInit {
     this.showotp = false;
     this.otpForm = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
-      otp: new FormControl("", []),
-    })
+      otp: new FormControl('', []),
+    });
     this.dialog.open(mobRef);
   }
 
   editPassword(passRef: TemplateRef<any>) {
-    this.dialog.open(passRef)
+    this.dialog.open(passRef);
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
@@ -1485,20 +1514,20 @@ export class ProfileComponent implements OnInit {
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });
-    ;
+
   }
 
   otpverification() {
     this.loader.show();
     this.resendLabel = true;
-    this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe(data => {
-      if (data.data['update_mobile_onprofile']['success'] == 'true') {
+    this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe((data: any) => {
+      if (data.data.update_mobile_onprofile.success === 'true') {
         this.loader.hide();
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
-        Swal.fire(data.data['update_mobile_onprofile'].message);
+        Swal.fire(data.data.update_mobile_onprofile.message);
         this.isenable = false;
         this.showotp = true;
-        //Timer
+        // Timer
         this.timeLeft = 60;
         // if(this.timeLeft > 60){
         this.interval = setInterval(() => {
@@ -1511,12 +1540,13 @@ export class ProfileComponent implements OnInit {
             // this.minutes = 0;
             this.verifybutton = true;
           }
-        }, 1000)
+        }, 1000);
 
-      } else
+      } else {
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
-        Swal.fire(data.data['update_mobile_onprofile'].message);
-    })
+        Swal.fire(data.data.update_mobile_onprofile.message);
+      }
+    });
   }
 
   onOtpChange(otp) {
@@ -1525,27 +1555,28 @@ export class ProfileComponent implements OnInit {
   }
 
   otpverify() {
-    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp).subscribe(data => {
-      if (data.data['update_verifyotp_mobile_onprofile']['success'] == 'true') {
-        this.closedialogbox();
-        Swal.fire(data.data['update_verifyotp_mobile_onprofile'].message)
-        this.showotp = false;
-        this.isenable = true;
-        this.getprofileDetails(this.currentUser.user_id)
-      } else {
-        Swal.fire(data.data['update_verifyotp_mobile_onprofile'].message)
-        this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
-        this.showotp = false;
-        this.isenable = true;
-      }
-    })
+    this.service.update_verifyotp_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile, this.otp)
+      .subscribe((data: any) => {
+        if (data.data.update_verifyotp_mobile_onprofile.success === 'true') {
+          this.closedialogbox();
+          Swal.fire(data.data.update_verifyotp_mobile_onprofile.message);
+          this.showotp = false;
+          this.isenable = true;
+          this.getprofileDetails(this.currentUser.user_id);
+        } else {
+          Swal.fire(data.data.update_verifyotp_mobile_onprofile.message);
+          this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' });
+          this.showotp = false;
+          this.isenable = true;
+        }
+      });
   }
 
   Resendcode() {
-    this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
-    this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe(data => {
-      if (data.data['resend_otp_onprofile']['success'] == 'true') {
-        Swal.fire(data.data['resend_otp_onprofile']['message'])
+    this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' });
+    this.service.resend_otp_onprofile(this.currentUser.user_id).subscribe((data: any) => {
+      if (data.data.resend_otp_onprofile.success === 'true') {
+        Swal.fire(data.data.resend_otp_onprofile.message);
         this.showotp = true;
         clearTimeout(this.interval);
         this.interval = setInterval(() => {
@@ -1558,72 +1589,69 @@ export class ProfileComponent implements OnInit {
             this.minutes = 0;
             this.verifybutton = true;
           }
-        }, 1000)
+        }, 1000);
       }
-    })
+    });
   }
 
   updatePassword() {
-    this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword, this.passwordForm.value.newpassword).subscribe(password => {
-      if (password.data['get_change_password_updateprofile']['success'] == 'true') {
-        Swal.fire(password.data['get_change_password_updateprofile'].message);
-        localStorage.clear();
-        this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-          localStorage.setItem('Systemip', res.ip);
-        });
-        this.dialog.closeAll();
-        this.router.navigate(['/Learner/login'])
-      } else
-        Swal.fire(password.data['get_change_password_updateprofile'].message);
-    })
+    this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword,
+      this.passwordForm.value.newpassword).subscribe((password: any) => {
+        if (password.data.get_change_password_updateprofile.success === 'true') {
+          Swal.fire(password.data.get_change_password_updateprofile.message);
+          localStorage.clear();
+          this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+            localStorage.setItem('Systemip', res.ip);
+          });
+          this.dialog.closeAll();
+          this.router.navigate(['/Learner/login']);
+        } else {
+          Swal.fire(password.data.get_change_password_updateprofile.message);
+        }
+      });
   }
 
   onSelectFile(event) {
-    this.selectfile = <File>event.target.files[0];
-    if (this.selectfile && this.selectfile.type != 'image/png' && this.selectfile.type != 'image/jpeg') {
-      this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null)
-    }
-    else if (this.selectfile && this.selectfile.size > 100000) {
-      this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null)
-    }
-    else {
+    this.selectfile = event.target.files[0] as File;
+    if (this.selectfile && this.selectfile.type !== 'image/png' && this.selectfile.type !== 'image/jpeg') {
+      this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null);
+    } else if (this.selectfile && this.selectfile.size > 100000) {
+      this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null);
+    } else {
       if (this.selectfile) {
         const fb = new FormData();
-        fb.append('image', this.selectfile, this.selectfile.name)
+        fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
-          this.profileForm.controls['profile_img'].setValue(data);
-          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path)
-          this.profileForm.controls['profile_img'].setValue(localStorage.getItem('user_img'))
-        })
+          this.profileForm.controls.profile_img.setValue(data);
+          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path);
+          this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
+        });
       }
     }
   }
 
   change(event) {
-    if (event.target.value.match(myGlobals.lowerCaseLetters))
+    if (event.target.value.match(myGlobals.lowerCaseLetters)) {
       this.lowercase = true;
-    else
+    } else {
       this.lowercase = false;
-    if (event.target.value.match(myGlobals.upperCaseLetters))
+    }
+    if (event.target.value.match(myGlobals.upperCaseLetters)) {
       this.uppercase = true;
-    else
+    } else {
       this.uppercase = false;
-    if (event.target.value.match(myGlobals.numbers))
+    }
+    if (event.target.value.match(myGlobals.numbers)) {
       this.number = true;
-    else
+    } else {
       this.number = false;
-    if (event.target.value.match(myGlobals.specialchar))
+    }
+    if (event.target.value.match(myGlobals.specialchar)) {
       this.spicalcharacter = true;
-    else
+    } else {
       this.spicalcharacter = false;
+    }
   }
-  //Percentage
-  //   public setTwoNumberDecimal($event) {
-  //     $event.target.value = parseFloat($event.target.value).toFixed(2);
-  // }
-
-
-  duplicateValueCheck = []
   changed(value, index) {
     this.duplicateValueCheck[index] = value;
     this.checkFunction();
@@ -1631,10 +1659,9 @@ export class ProfileComponent implements OnInit {
 
   checkFunction() {
     this.levelValue.forEach((type) => {
-      if (type.level_code == '10' || type.level_code == '12') {
-        let selected = this.duplicateValueCheck.includes(type._id);
-        if (selected) type.allowed = 'N'
-        else type.allowed = 'Y'
+      if (type.level_code === '10' || type.level_code === '12') {
+        const selected = this.duplicateValueCheck.includes(type._id);
+        if (selected) { type.allowed = 'N'; } else { type.allowed = 'Y'; }
       }
     });
   }
@@ -1643,16 +1670,42 @@ export class ProfileComponent implements OnInit {
     // console.log(a, b, c, d);
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
-    if (level.level_code !== '10' && level.level_code !== '12')
+    if (level.level_code !== '10' && level.level_code !== '12') {
       specification.setValidators([Validators.required]);
-    else
-      specification.setValidators(null)
+    } else {
+      specification.setValidators(null);
+    }
     specification.updateValueAndValidity();
-    console.log(specification)
+    console.log(specification);
   }
-  formatPercentage(index){
-    let val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
-    let per = parseFloat(val).toFixed(2);
-    this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+
+  formatPercentage(index) {
+    const val = this.profileForm.get('qualification').get(String(index)).get('percentage').value;
+    if (val && val.includes('.')) {
+      const ind = val.indexOf('.');
+
+      if (ind > 2) {
+        const val1 = val.replace('.', '');
+        if (val1.length > 2) {
+          const per = val1.slice(0, 2) + '.' + val1.slice(2, val1.length - 1);
+          // const per = parseFloat(val).toFixed(2);
+          this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+        }
+      }
+    } else {
+      if (val.length > 2) {
+        const per = val.slice(0, 2) + '.' + val.slice(2, val.length - 1);
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      } else if (val.length === 0) {
+        const per = '';
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      } else {
+        const per = val + '.00';
+        // const per = parseFloat(val).toFixed(2);
+        this.profileForm.get('qualification').get(String(index)).get('percentage').setValue(per);
+      }
+    }
   }
 }

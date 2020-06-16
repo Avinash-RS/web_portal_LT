@@ -71,6 +71,7 @@ export class CoursedetailsComponent implements OnInit {
   isCollapsed: any;
   showStatus: any;
   topicData : any = []
+  courseTime: any;
   
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
@@ -110,6 +111,7 @@ export class CoursedetailsComponent implements OnInit {
     });
     this.Lservice.getModuleData(detail.id).subscribe(data => {
       this.content = data.data['getmoduleData']['data'][0];
+      this.courseTime = this.content.coursetime;
       this.modulength = this.content['coursedetails'].length;
     })
   }
