@@ -25,14 +25,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   constructor(private router: Router, public service: LearnerServicesService, public commonService: CommonServicesService,
     // tslint:disable-next-line:align
-    private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) {
-      this.gs.navigation.subscribe(message => {
-        if (message === 'wishlist') {
-          this.inputMessageRef.nativeElement.scrollIntoView();
-        } else if (message === 'mycourse') {
-          this.mycourseRef.nativeElement.scrollIntoView();
-        }
-      });
+    private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService ) {
   }
 
   ngOnInit() {
@@ -74,6 +67,7 @@ export class LearnerMyCourseComponent implements OnInit {
         if (getMyCourse.data.get_course_by_user.success) {
           this.myCoursesList = getMyCourse.data.get_course_by_user.message;
           this.loader.hide();
+          this.checkscroll();
         }
       }
     });
@@ -84,6 +78,18 @@ export class LearnerMyCourseComponent implements OnInit {
     this.commonService.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
+        this.checkscroll();
+      }
+    });
+  }
+
+  checkscroll() {
+    this.gs.navigation.subscribe(message => {
+      console.log(message);
+      if (message === 'wishlist') {
+        this.inputMessageRef.nativeElement.scrollIntoView();
+      } else if (message === 'mycourse') {
+        this.mycourseRef.nativeElement.scrollIntoView();
       }
     });
   }
