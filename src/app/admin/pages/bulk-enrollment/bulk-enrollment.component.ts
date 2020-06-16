@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import * as _ from 'lodash';
 import * as myGlobals from '@core/globals';
 import { AdminServicesService } from '@admin/services/admin-services.service';
+import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+
 // export interface User {
 //   name: string;
 // }
@@ -22,6 +25,13 @@ export class BulkEnrollmentComponent implements OnInit {
   filteredOptions: Observable<any[]>;
   selectedArray: any = [];
   lastFilter: string = '';
+  selectedgroup = [];
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA]; // for mat chips to add into an array
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('usergroup') usergroup: ElementRef<HTMLInputElement>;  //mat input values
 
   constructor(private formBuilder: FormBuilder, private adminservice: AdminServicesService) {
     this.singleUserForm = this.formBuilder.group({
@@ -149,4 +159,15 @@ flattree(items) {
 
   //   this.userControl.setValue(this.selectedUsers);
   // }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event.option.viewValue);
+    this.selectedgroup.push({group_name: event.option.viewValue});
+    this.usergroup.nativeElement.value = '';
+    this.singleUserForm.get('group').setValue(null);
+  }
+
+   remove(indx): void {
+    this.selectedgroup.splice(indx, 1);
+  }
 }
