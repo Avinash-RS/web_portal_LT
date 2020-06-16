@@ -1171,8 +1171,7 @@ export class ProfileComponent implements OnInit {
         total_experience: new FormControl("")
       })
     });
-    console.log('form', this.profileForm);
-    console.log('stud', this.profileForm.get('is_student_or_professional'))
+
     const job_role = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
@@ -1336,12 +1335,30 @@ export class ProfileComponent implements OnInit {
     return this.profileForm.get('qualification') as FormArray;
   }
 
-  addQualification() {
-    this.qualification.push(this.createQualItem());
+  addQualification(i) {
+    if (this.profileForm.value.qualification[i].qualification === '5e7deddfdba4466d9704b44a' ||
+    this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2') {
+    if (this.profileForm.value.qualification[i].board_university !== '' &&
+      this.profileForm.value.qualification[i].qualification !== '' &&
+      this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
+      this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
+      this.qualification.push(this.createQualItem());
+    } else {
+      this.alert.openAlert('Please fill all details', null);
+    }
+  } else {
+    const isEmpty = Object.values(this.profileForm.value.qualification[i]).some(x => ( x === ''));
+    if (isEmpty) {
+      this.alert.openAlert('Please fill all details', null);
+    } else {
+      this.qualification.push(this.createQualItem());
+    }
   }
 
+}
+
   removeQualification(i) {
-    this.qualification.removeAt(i);;
+    this.qualification.removeAt(i);
   }
 
   createSocialMedia(): FormGroup {
