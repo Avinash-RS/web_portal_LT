@@ -15,7 +15,7 @@
       style="word-wrap: break-word; vertical-align: middle;">{{course.course_name}}</span>
   </div>
   <div class="col-lg-4 col-md-4 col-sm-4 col-4 float_right">
-    <button class="f_size_12 enroll_btn" (click)="enrollCourse()">Enroll</button>
+    <button class="f_size_12 enroll_btn" (click)="enrollCourse()">Enrol</button>
   </div>
 </div>
 <!-- end for logged out user -->
@@ -80,7 +80,7 @@
           </button>
 
           <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false && 
-          ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> Enroll
+          ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> Enrol
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
             disabled="{{course.enrollment_status == 'pending'}}">Requested
