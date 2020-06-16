@@ -11,15 +11,15 @@
 <h1 style="padding-left: 25px;">Bulk enrollment</h1>
 <br>
 <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabClick($event,bulkuserform)">
- 
+
   <mat-tab label="Add a user">
     <form [formGroup]="singleUserForm">
 
       <br><br>
-      
+
+      <mat-label style="margin-left: 15%;">Select group</mat-label> <span class="mand p-b-10px"> *</span><br>
       <mat-form-field style="width: 30%; margin-left: 15%;">
-        <mat-label>Select group</mat-label>
-        <input type="text" matInput [matAutocomplete]="auto">
+        <input type="text"  placeholder="Select group" matInput [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             <div (click)="$event.stopPropagation()">
@@ -52,8 +52,8 @@
         </mat-radio-group>
       </div>
 
+      <mat-label style="margin-left: 15%;">Select courses</mat-label> <span class="mand p-b-10px"> *</span><br>
       <mat-form-field style="width: 30%; margin-left: 15%;">
-        <mat-label>Select courses</mat-label>
         <input type="text" matInput [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -65,7 +65,14 @@
         </mat-autocomplete>
       </mat-form-field>
 
+      <br><br><br><br>
+      <div class="width_100 center center_align">
+        <button id="addUser" mat-stroked-button [disabled]="singleUserForm.invalid" style="width:15%; margin : 3%" (click)="addUser()">Save</button>
+        <button id="addUser" mat-stroked-button (click)="addUser()" style="width:15%; margin : 3%">Cancel</button>
+      </div>
+      <br><br>
     </form>
+
   </mat-tab>
 
   <mat-tab label="Add multiple users">

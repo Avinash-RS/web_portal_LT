@@ -7,12 +7,12 @@ import {
 } from './operations/admin_mutation';
 
 import {
-  get_user_group, search_user, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
+  get_user_group, search_user, searchUserFromGroup, deactivate_reactivate_user, get_all_user, block_user, get_all_learner_detail,
   get_user_session_detail, get_course_createdby_admin, publishcourse, get_course_published, getgroup, get_user_group_hierarchy,
   getnotificationreports, get_draft_course, getcategoryadmin, getallcatalogue, getallcatalogue_by_id, getcatalogue,
   getenrolledcourses, get_all_enrolledcourses, getcoursesforcatalogue, getcoursesincatalogue, getAdminOverview,
   getAdmindashboardCoursetab, getLeranertabCount, getActiveinactiveCount, getLoginsPerDay, getUsersInWeeks, getProfessionalStudent,
-  enrolledCourse, getgroupbyid, getTopfiveDashboardType, getadminexportauditlog,getCoursesChart
+  enrolledCourse, getgroupbyid, getTopfiveDashboardType, getadminexportauditlog, getCoursesChart
 } from './operations/admin_query';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -22,8 +22,10 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminServicesService {
 
+  // tslint:disable-next-line:variable-name
   _currentUser: any;
 
+  // tslint:disable-next-line:no-shadowed-variable
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   // for add user - group dropdown
@@ -97,6 +99,17 @@ export class AdminServicesService {
         search_string,
         pagination,
         sort,
+      }
+    });
+  }
+
+  // tslint:disable-next-line:variable-name
+  searchUserInGroup(search_string, group_id) {
+    return this.Apollo.query({
+      query: searchUserFromGroup,
+      variables: {
+        search_string,
+        group_id
       }
     });
   }
@@ -467,14 +480,14 @@ export class AdminServicesService {
 
   // End of enrollment
 
- // Dashboard
- // getting admin dashboard overview data
-  getAdminOverview(days,user_id) {
+  // Dashboard
+  // getting admin dashboard overview data
+  getAdminOverview(days, userid) {
     return this.Apollo.query({
       query: getAdminOverview,
       variables: {
-        days: days,
-        user_id:user_id
+        days,
+        user_id : userid
       }
     });
   }
@@ -491,25 +504,25 @@ export class AdminServicesService {
       variables: {}
     });
   }
-  //getting Active and in-active chart data
+  // getting Active and in-active chart data
   getActiveinactiveCount(days) {
     return this.Apollo.query({
       query: getActiveinactiveCount,
       variables: {
-        days: days
+        days
       }
     });
   }
-  //getting login per day chart data
+  // getting login per day chart data
   getLoginsPerDay(days) {
     return this.Apollo.query({
       query: getLoginsPerDay,
       variables: {
-        days: days,
+        days,
       }
     });
   }
-  //getting login per day data
+  // getting login per day data
   getUsersIndays(days) {
     return this.Apollo.query({
       query: getUsersInWeeks,
@@ -518,35 +531,35 @@ export class AdminServicesService {
       }
     });
   }
-  //getting student and professional chart data
+  // getting student and professional chart data
   getProfessionalStudent(days) {
     return this.Apollo.query({
       query: getProfessionalStudent,
       variables: {
-        days: days,
+        days,
       }
     });
   }
-  //getting enrolled and free course data for chart 
+  // getting enrolled and free course data for chart
   enrolledCourse(days) {
     return this.Apollo.query({
       query: enrolledCourse,
       variables: {
-        days: days,
+        days,
       }
     });
   }
 
-  //getting top 5 course 
+  // getting top 5 course
   getTopfiveDashboardType(type) {
     return this.Apollo.query({
       query: getTopfiveDashboardType,
       variables: {
-        type: type
+        type
       }
     });
   }
-//getting all 3 level category for admin dashboard chart
+  // getting all 3 level category for admin dashboard chart
   getCoursesChart() {
     return this.Apollo.query({
       query: getCoursesChart,
@@ -554,7 +567,7 @@ export class AdminServicesService {
     });
   }
 
-  
+
   // End of dashboard
 
   getadminexportauditlog(fromdate, todate) {
@@ -578,6 +591,6 @@ export class AdminServicesService {
     const headers1 = new HttpHeaders().set('Authorization', localStorage.getItem('token'));
     const params1 = new HttpParams().set('pagenumber', pagenumber);
     const options = { params: params1, headers: headers1 };
-    return this.http.get<any[]>(environment.apiUrl + 'getauditlog' , options);
+    return this.http.get<any[]>(environment.apiUrl + 'getauditlog', options);
   }
 }
