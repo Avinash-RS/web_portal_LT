@@ -542,12 +542,13 @@ export class CreateCourseComponent implements OnInit {
     }
 
     checkCourseName() {
+        debugger;
         const courseName = this.courseForm.controls.course_name.value;
         if (this.isEditable) {
             if (courseName === this.courseEditDetails.course_name) {
                 return;
             } else {
-                if (courseName !== undefined || courseName !== null || courseName !== '') {
+                if (courseName !== undefined || courseName !== null || courseName !== "") {
                     this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
                         if (!res.success) {
                             this.toast.warning(res.message);
@@ -557,8 +558,11 @@ export class CreateCourseComponent implements OnInit {
                     });
                 }
             }
-        } else {
-            if (courseName !== undefined || courseName !== null || courseName !== '') {
+        } 
+        else if(courseName == ""){
+            return;
+        }else {
+            if (courseName !== undefined || courseName !== null || courseName !== "") {
                 this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
                     if (!res.success) {
                         this.toast.warning(res.message);
