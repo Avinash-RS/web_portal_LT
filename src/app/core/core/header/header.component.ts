@@ -30,13 +30,15 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateWishlist() {
-    // this.router.navigate(['Learner/MyCourse']);
-    this.router.navigateByUrl('/Learner/MyCourse', { state: { wishlist: true } });
+    this.router.navigate(['Learner/MyCourse']);
+    this.gs.getNavigation('wishlist');
+  }
 
-  }
-  navigatetomycourse(){
+  navigatetomycourse() {
     this.router.navigateByUrl('/Learner/MyCourse');
+    this.gs.getNavigation('mycourse');
   }
+
   logout() {
     Swal.fire({
       title: 'Please confirm to logout',

@@ -428,7 +428,7 @@ export class CatagoryManagementComponent implements OnInit {
     //   'This category has courses attached to it';
     Swal.fire({
       // title: 'Are you sure want to delete ' + type.toLowerCase() + ' ?',
-      title: 'This ' + type.toLowerCase() + ' will be deleted',
+      title: '<strong>' + 'This ' + type.toLowerCase() + ' will be deleted' + '</strong>',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'Confirm',
@@ -440,7 +440,7 @@ export class CatagoryManagementComponent implements OnInit {
             // Swal.fire({ text: 'Move/Remove the subcategories/courses to delete this ' + type, });
             Swal.fire({
               html:
-                results.data.delete_catalogue.message
+              '<strong>' + results.data.delete_catalogue.message + '</strong>'
               // 'Move/Remove the subcategories/courses to delete this ' + '<b>' + type + '</b> '
             });
           } else if (results.data.delete_catalogue.success === true) {

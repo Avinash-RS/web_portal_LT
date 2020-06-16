@@ -20,11 +20,19 @@ export class LearnerMyCourseComponent implements OnInit {
   @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
-  @ViewChild('inputMessage')
-  inputMessageRef: ElementRef;
-  wishistselected: any;
-  constructor(private router: Router,public service: LearnerServicesService, public commonService: CommonServicesService, private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) { 
-    this.wishistselected = (this.router.getCurrentNavigation().extras?.state?.wishlist);
+  @ViewChild('wishlist') inputMessageRef: ElementRef;
+  @ViewChild('mycourse') mycourseRef: ElementRef;
+
+  constructor(private router: Router, public service: LearnerServicesService, public commonService: CommonServicesService,
+    // tslint:disable-next-line:align
+    private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) {
+      this.gs.navigation.subscribe(message => {
+        if (message === 'wishlist') {
+          this.inputMessageRef.nativeElement.scrollIntoView();
+        } else if (message === 'mycourse') {
+          this.mycourseRef.nativeElement.scrollIntoView();
+        }
+      });
   }
 
   ngOnInit() {
@@ -76,9 +84,6 @@ export class LearnerMyCourseComponent implements OnInit {
     this.commonService.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
-        if (this.wishistselected) {
-          this.inputMessageRef.nativeElement.scrollIntoView();
-        }
       }
     });
   }
