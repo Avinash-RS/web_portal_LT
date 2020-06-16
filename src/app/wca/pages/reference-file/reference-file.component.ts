@@ -135,26 +135,7 @@ export class ReferenceFileComponent implements OnInit {
       }
     })
   }
-  editDoc(index,topic_id,type){
-    this.edit = true;
-    var editData = new FormData();
-  editData.append("module_id", this.referenceLinkForm.value.module.modulename);
-  editData.append('topic_id', this.referenceLinkForm.value.topic);
-  editData.append("user_id", this.currentUser.user_id);
-  editData.append("course_id", this.courseId);
-  editData.append('type', this.selectedOption);
-  editData.append('type_name', this.referenceName);
-  editData.append('created_on', this.myDate.toString());
-
-  this.service.editrefdocupload(editData).subscribe(data => {
-    if (data['success'] == true) {
-      topic_id = editData;
-    }
-    // else {
-    //   this.alert.openAlert(data['message'], null);
-    // }
-  })
-  }
+ 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
