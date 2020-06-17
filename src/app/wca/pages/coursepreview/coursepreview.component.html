@@ -21,10 +21,10 @@
       <div class="col-md-12 col-sm-12 col-12">
         <h1 class="head1">{{course?.course_name}}</h1>
         <button class="fillsmallbtn" (click)="editModules()">Edit modules</button>
-        <button class="fillsmallbtn" (click)="previewcourse(previewDialog)">Preview course</button>
+        <button class="fillsmallbtn"   (click)="previewcourse(previewDialog)">Preview course</button>
         <span *ngIf="isshowPublish">
-          <!-- [class.disabled]="modulength == 0" [disabled]="modulength == 0" -->
-          <button  class="fillsmallbtn disabled" 
+          <!-- [class.disabled]="modulength == 0" [disabled]="modulength == 0" disabled -->
+          <button  class="fillsmallbtn "  [class.disabled]="content?.coursetype != 'SCORM' && modulength == 0"
             (click)="published()">Publish</button>
         </span>
 

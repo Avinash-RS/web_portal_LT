@@ -235,6 +235,7 @@ query getmoduleData($courseid:String!){
       courseid
       _id
       url
+      coursetype
       coursename
       coursefile
       coursestatus
