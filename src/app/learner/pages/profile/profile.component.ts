@@ -86,9 +86,9 @@ export class ProfileComponent implements OnInit {
     return this.profileForm.get('qualification') as FormArray;
   }
 
-  get social_media() {
-    return this.profileForm.get('social_media') as FormArray;
-  }
+  // get social_media() {
+  //   return this.profileForm.get('social_media') as FormArray;
+  // }
 
   profileForm: FormGroup;
   mailForm: FormGroup;
@@ -186,7 +186,7 @@ export class ProfileComponent implements OnInit {
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
       qualification: this.formBuilder.array([this.createQualItem()]),
-      social_media: this.formBuilder.array([this.createSocialMedia()]),
+      // social_media: this.formBuilder.array([this.createSocialMedia()]),
       year_of_birth: '05-08-1998',
       profile_img: [],
       user_id: [],
@@ -288,9 +288,9 @@ export class ProfileComponent implements OnInit {
           if (profileDetails.qualification.length > 0) {
             profileDetails.qualification.forEach(v => delete v.__typename);
           }
-          if (profileDetails.social_media.length > 0) {
-            profileDetails.social_media.forEach(v => delete v.__typename);
-          }
+          // if (profileDetails.social_media.length > 0) {
+          //   profileDetails.social_media.forEach(v => delete v.__typename);
+          // }
           if (profileDetails.progress && profileDetails.progress.includes('%')) {
             profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
           } else {
@@ -389,17 +389,19 @@ export class ProfileComponent implements OnInit {
         if (this.profileForm.value.addressline1 && this.profileForm.value.gender !== '' &&
           this.profileForm.value.country && this.profileForm.value.state
           && this.profileForm.value.city_town && this.profileForm.value.iAgree) {
-          this.profileForm.controls.progress.setValue(60);
-        }
-        if (this.profileForm.value.progress === 60 &&
-          this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
-          this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '' &&
-          this.profileForm.value.social_media[0].link !== '') {
-          this.profileForm.controls.progress.setValue(90);
-        }
-        if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
           this.profileForm.controls.progress.setValue(100);
         }
+        // if (this.profileForm.value.progress === 60 &&
+        //   this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
+        //   this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '') 
+         
+          //  && this.profileForm.value.social_media[0].link !== ''
+        //   {
+        //   this.profileForm.controls.progress.setValue(90);
+        // }
+        // if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+        //   this.profileForm.controls.progress.setValue(100);
+        // }
 
         if (this.profileForm.value.throughTPO) {
           this.profileForm.value.throughTPO = Boolean(this.profileForm.value.throughTPO);
@@ -556,20 +558,20 @@ export class ProfileComponent implements OnInit {
     this.qualification.removeAt(i);
   }
 
-  createSocialMedia(): FormGroup {
-    return this.formBuilder.group({
-      link: [''],
-      img: [''],
-    });
-  }
+  // createSocialMedia(): FormGroup {
+  //   return this.formBuilder.group({
+  //     link: [''],
+  //     img: [''],
+  //   });
+  // }
 
-  addSocialMedia() {
-    this.social_media.push(this.createSocialMedia());
-  }
+  // addSocialMedia() {
+  //   this.social_media.push(this.createSocialMedia());
+  // }
 
-  removeSocialMedia(i) {
-    this.social_media.removeAt(i);
-  }
+  // removeSocialMedia(i) {
+  //   this.social_media.removeAt(i);
+  // }
   // ENd of Dynamic Add rows
 
   getAllLanguage() {
