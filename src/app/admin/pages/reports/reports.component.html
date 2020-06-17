@@ -21,19 +21,19 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="slNo">
       <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
-      <mat-cell *matCellDef="let row;let i = index">
+      <mat-cell *matCellDef="let row;let i = index" class ="reportid">
         <span class="desktop-data"> {{i+1}}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="report_id">
-      <mat-header-cell *matHeaderCellDef> Report id </mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Report id </mat-header-cell>
+      <mat-cell *matCellDef="let element" class ="reportid">
         <span class="desktop-data"> {{element.report_id }}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="total_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.total_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.username}}</span> -->
@@ -42,7 +42,7 @@
 
     <ng-container matColumnDef="success_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Success</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.success_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
@@ -51,15 +51,15 @@
 
     <ng-container matColumnDef="duplicate_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Duplicate</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data"> {{element.duplicate_count || 0}}</span>
         <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="existing_count">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Existing</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef mat-sort-header > Existing</mat-header-cell>
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.existing_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.username}}</span> -->
@@ -68,7 +68,7 @@
 
     <ng-container matColumnDef="updated_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Updated</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.updated_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
@@ -77,7 +77,7 @@
 
     <ng-container matColumnDef="time_ago">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Created</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.time_ago }}</span>
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
@@ -86,7 +86,7 @@
 
     <ng-container matColumnDef="failure_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Failure</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.failure_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
@@ -95,7 +95,7 @@
 
     <ng-container matColumnDef="link">
       <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
-      <mat-cell *matCellDef="let element" class="centre">
+      <mat-cell *matCellDef="let element" class ="alignment">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data" (click)="downloadDoc(element.report_url)">
           <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon>

@@ -13,6 +13,7 @@ export const login = gql`
         token
         user_id
         is_blocked
+        profile_img
         is_profile_updated
         group_id                  
         message      
@@ -234,6 +235,7 @@ query getmoduleData($courseid:String!){
       courseid
       _id
       url
+      coursetype
       coursename
       coursefile
       coursestatus

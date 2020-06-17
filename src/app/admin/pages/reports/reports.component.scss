@@ -1,15 +1,25 @@
 /* Structure */  
-  mat-cell{
-    display:flex !important;
-    justify-content:center!important;
-    
-  }
+  // mat-cell{
+  //   display:flex !important;
+  //   justify-content:center!important;
+  //   margin-left: -15px !important;
+  // }
   
   mat-header-cell {
     display:flex;
     justify-content:center;
   }
   
+  .alignment{
+    display:flex !important;
+    justify-content:center!important;
+    margin-left: -9px !important;
+  }
+   .reportid{
+    display:flex !important;
+    justify-content:center !important;
+    margin-right: -15px !important;
+   }
   .m-b-10 {
     margin-bottom: 10px;
   }

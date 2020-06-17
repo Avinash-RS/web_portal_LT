@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('role', 'learner');
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              localStorage.setItem('user_img',loginresult.data.login.message.profile_img)
+              
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
                 this.router.navigate(['/Learner/home']);
@@ -64,6 +66,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('uname', this.loginForm.value.username);
               localStorage.setItem('login', 'true');
               localStorage.setItem('role', 'learner');
+              localStorage.setItem('user_img',loginresult.data.login.message.profile_img)
               localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               localStorage.setItem('ps', ps);

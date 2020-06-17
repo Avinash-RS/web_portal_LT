@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <img class="logo" src="../../assets/images/logo.png">
-  <a class="navbar-brand edutech" href="/Learner">EDUTECH</a>
+  <a class="navbar-brand edutech" href="/Learner/home">EDUTECH</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -10,16 +10,16 @@
     <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
       <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
-        <li class="dropdown">
-          <a href="/Learner/viewallcourses" class="dropdown-toggle drop" data-toggle="dropdown">
+        <li class="dropdown" routerLink="/Learner/viewallcourses">
+          <a routerLink="/Learner/viewallcourses" class="dropdown-toggle drop" data-toggle="dropdown">
             All Courses
             <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu">
+          <!-- <ul class="dropdown-menu"> -->
             <!-- <li><a href="#">Link</a></li>
                         <li><a href="#">Link</a></li>
                         <li><a href="#">Link</a></li> -->
-          </ul>
+          <!-- </ul> -->
         </li>
       </ul>
     </ul>
@@ -33,9 +33,6 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <!-- <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li> -->
           </ul>
         </li>
       </ul>
@@ -64,12 +61,12 @@
     <div class="">
       <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null">
         <ul class="navbar-nav mr-auto">
-          <li>
+          <!-- <li>
             <i class="fa fa-bell bellicon" aria-hidden="true"></i>
           </li>
-          <li>
-            <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
-          </li>
+          <li> -->
+            <!-- <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
+          </li> -->
 
           <li (click)="navigateProfile()">
             <img class="profileimg" [src]="userimage ? userimage : '../../../../assets/learner/avatar2.png'">
@@ -88,21 +85,21 @@
         <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
           <label>Profile</label>
         </button>
-        <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
-          <label>My Courses</label>
+        <button class="backgroundcol" mat-menu-item  routerLink="/Learner/dashboard">
+          <label>Dashboard</label>
         </button>
         <button class="backgroundcol" mat-menu-item  routerLink="/Learner/viewallcourses">
           <label>View All Courses</label>
         </button>
-        <button class="backgroundcol" mat-menu-item  routerLink="/Learner/dashboard">
-          <label>Dashboard</label>
+        <button class="backgroundcol" (click)="navigatetomycourse()" mat-menu-item>
+          <label>My Courses</label>
         </button>
         <button class="backgroundcol" mat-menu-item (click)="navigateWishlist()">
           <label>Wishlist</label>
         </button>
-        <button class="backgroundcol" mat-menu-item>
+        <!-- <button class="backgroundcol" mat-menu-item>
           <label style="color: #fff;">Certificates</label>
-        </button>
+        </button> -->
         <button class="backgroundcol" mat-menu-item (click)="logout()">
           <label>Logout</label>
         </button>
@@ -123,7 +120,7 @@
         </li>
 
       <li class="dropdown1">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+        <a href="" class="dropdown-toggle drop" data-toggle="dropdown">
           Help
           <b class="caret"></b>
         </a>
@@ -143,16 +140,16 @@
   <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null && role == 'learner'" id="navbarCollapse">
     <ul class="navbar-nav mr-auto" id="navbarCollapse">
       <li class="dropdownsmall">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+        <a href="/Learner/viewallcourses" class="dropdown-toggle drop" data-toggle="dropdown">
           All Courses
           <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu">
-        </ul>
+        <!-- <ul class="dropdown-menu">
+        </ul> -->
       </li>
 
       <li class="smallmenu">
-        <a routerLink="/Learner/MyCourse">
+        <a routerLink="/Learner/viewallcourses">
           My Course
         </a>
       </li>
@@ -162,18 +159,18 @@
           Search
         </a>
       </li>
-
+<!-- 
       <li class="smallmenu">
         <a href="#">
           Notifications
         </a>
-      </li>
+      </li> -->
 
-      <li class="smallmenu">
+      <!-- <li class="smallmenu">
         <a href="#">
           My Cart
         </a>
-      </li>
+      </li> -->
 
       <li class="smallmenu">
         <a href="#">

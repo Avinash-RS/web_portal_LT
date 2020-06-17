@@ -1,5 +1,90 @@
 <app-header></app-header>
 <mat-tab-group style="margin-top: 5%;">
+
+
+  <mat-tab label="Explore">
+    <!-- <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
+      <div class="col-md-8 section_1_a">
+        <h1 class="welcom">Welcome to </h1>
+        <h1 class="lxp">LXP Platform </h1>
+
+        <p class="msg">Customize your Experience by adding</p>
+        <h1 class="submsg">your favourite courses</h1>
+        <div style="text-align: center;">
+        <button class="whitebgBtn">Add Courses</button>
+      </div>
+     </div>
+    </div> -->
+
+    <div style="margin-top: 3%;"></div>
+    <div class="row">
+      <div class="col-6">
+        <h3>All courses <span class="tot">(Total 2500 results )</span></h3>
+        <div class="vertical"></div>
+      </div>
+
+      <div class="col-3">
+        <button class="submit" (click)="viewCategory(element)"> Category
+          <i class="fa fa-chevron-down colr"></i>
+        </button>
+      </div>
+      <div class="col-3">
+        <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
+          <i class="fa fa-filter colrr"></i>
+          Filter
+        </button>
+        <select class="category" (change)="onChange($event.target.value)">
+          <option value="allcourses">All courses</option>
+          <option value="popularCourse">Popular courses</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3" *ngIf="!showAppliedFiltre">
+        <div class="row">
+          <div class="col-12">
+            <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
+            [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID" [level3selectedID]="level3selectedID" 
+            [allLvlCategoryFilterVal]="allLvlCategoryFilterVal" [allLvlCategory]="allLvlCategory"
+            [viewallcourse]= "true">
+            </app-guideline-search>
+          </div>
+        </div>
+      </div>
+     
+      <div class="col-9" *ngIf="!showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showAppliedFiltre">
+        <div class="container containerShadow">
+          <div class="row">
+            <ng-container
+              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              <div class="col-md-6 col-lg-3 col-sm-12">
+                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
+                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
+                </app-course-component> <br>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-tab>
+
   <mat-tab label="My Courses">
     <div class="row">
       <div class="col-md-6 col-sm-12 col-12">
@@ -118,89 +203,6 @@
     </div>
     <!-- ---------------------Wishlist section end------------------------- -->
     <div style="margin-bottom: 10%;"></div>
-  </mat-tab>
-
-  <mat-tab label="Explore">
-    <!-- <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
-      <div class="col-md-8 section_1_a">
-        <h1 class="welcom">Welcome to </h1>
-        <h1 class="lxp">LXP Platform </h1>
-
-        <p class="msg">Customize your Experience by adding</p>
-        <h1 class="submsg">your favourite courses</h1>
-        <div style="text-align: center;">
-        <button class="whitebgBtn">Add Courses</button>
-      </div>
-     </div>
-    </div> -->
-
-    <div style="margin-top: 3%;"></div>
-    <div class="row">
-      <div class="col-6">
-        <h3>All courses <span class="tot">(Total 2500 results )</span></h3>
-        <div class="vertical"></div>
-      </div>
-
-      <div class="col-3">
-        <button class="submit" (click)="viewCategory(element)"> Category
-          <i class="fa fa-chevron-down colr"></i>
-        </button>
-      </div>
-      <div class="col-3">
-        <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
-          <i class="fa fa-filter colrr"></i>
-          Filter
-        </button>
-        <select class="category" (change)="onChange($event.target.value)">
-          <option value="allcourses">All courses</option>
-          <option value="popularCourse">Popular courses</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3" *ngIf="!showAppliedFiltre">
-        <div class="row">
-          <div class="col-12">
-            <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
-            [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID" [level3selectedID]="level3selectedID" 
-            [allLvlCategoryFilterVal]="allLvlCategoryFilterVal" [allLvlCategory]="allLvlCategory"
-            [viewallcourse]= "true">
-            </app-guideline-search>
-          </div>
-        </div>
-      </div>
-     
-      <div class="col-9" *ngIf="!showAppliedFiltre">
-        <div class="container containerShadow">
-          <div class="row">
-            <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-              <div class="col-md-6 col-lg-3 col-sm-12">
-                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
-                </app-course-component> <br>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-      <div class="col-12" *ngIf="showAppliedFiltre">
-        <div class="container containerShadow">
-          <div class="row">
-            <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
-              <div class="col-md-6 col-lg-3 col-sm-12">
-                <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
-                  [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
-                </app-course-component> <br>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
   </mat-tab>
 </mat-tab-group>
 <!-- <button id="myBtn" (click)="open()">Open Modal</button> -->

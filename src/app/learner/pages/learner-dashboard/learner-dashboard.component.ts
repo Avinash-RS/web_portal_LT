@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class LearnerDashboardComponent implements OnInit {
   userDetailes: any;
   dashboardData: any;
-  loadingCatalogue = false;
   constructor(
     public service: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -25,12 +24,10 @@ export class LearnerDashboardComponent implements OnInit {
   }
   
   getLearnerDashboard(){
-    this.loadingCatalogue = true;
     if (this.userDetailes.group_id)
     this.service.get_learner_dashboard(this.userDetailes.user_id).subscribe((response: any) => {
       if (response.data.getlearnerdashboarddetails && response.data.getlearnerdashboarddetails.success) {
         this.dashboardData = response.data.getlearnerdashboarddetails.data;
-        this.loadingCatalogue = false;
       }
   
     });
