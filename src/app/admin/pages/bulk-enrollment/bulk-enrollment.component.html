@@ -17,53 +17,74 @@
 
       <br><br>
 
-      <mat-label style="margin-left: 15%;">Select group</mat-label> <span class="mand p-b-10px"> *</span><br>
-      <mat-form-field style="width: 30%; margin-left: 15%;">
-        <input type="text"  placeholder="Select group" matInput [matAutocomplete]="auto">
+      <!-- <mat-form-field style="width: 30%; margin-left: 15%;">
+        <mat-label>Select group</mat-label>
+        <input type="text" matInput formControlName="group" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          <mat-option *ngFor="let grp of filteredOptions | async" [value]="selectedArray" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+          ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+          (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))"> 
             <div (click)="$event.stopPropagation()">
-              <mat-checkbox (change)="checkboxLabel(option)">
-              </mat-checkbox> {{option.name}}
+              <mat-checkbox (change)="checkboxLabel(grp)">
+              </mat-checkbox> {{grp.group_name}}
             </div>
           </mat-option>
         </mat-autocomplete>
+      </mat-form-field> -->
+      <mat-form-field style="width: 30%; margin-left: 15%;">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let group of selectedgroup;let indx=index;" [selectable]="selectable"
+            [removable]="removable" (removed)="remove(indx)">
+            {{group.group_name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel
+            </mat-icon>
+          </mat-chip>
+          <input type="text" matInput id="group" placeholder="Enter group" formControlName="group" #usergroup
+            [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let grp of filteredOptions | async" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+        ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
+        (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
+            {{ grp.group_name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-
       <br><br>
 
       <div class="form-group" style="margin-left: 15%;">
         <mat-radio-group formControlName="userType" name="userType">
           <mat-radio-button value="all_user">All users in group</mat-radio-button>
           <mat-radio-button value="select" style="margin-left: 5%;">
-            <mat-form-field>
+            <!-- <mat-form-field>
               <mat-label>Select users</mat-label>
               <input type="text" matInput [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   <div (click)="$event.stopPropagation()">
                     <mat-checkbox (change)="checkboxLabel(option)">
-                    </mat-checkbox> {{option.name}}
+                    </mat-checkbox> {{option.group_name}}
                   </div>
                 </mat-option>
               </mat-autocomplete>
-            </mat-form-field>
+            </mat-form-field> -->
           </mat-radio-button>
         </mat-radio-group>
       </div>
 
-      <mat-label style="margin-left: 15%;">Select courses</mat-label> <span class="mand p-b-10px"> *</span><br>
-      <mat-form-field style="width: 30%; margin-left: 15%;">
+      <!-- <mat-form-field style="width: 30%; margin-left: 15%;">
+        <mat-label>Select courses</mat-label>
         <input type="text" matInput [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             <div (click)="$event.stopPropagation()">
               <mat-checkbox (change)="checkboxLabel(option)">
-              </mat-checkbox> {{option.name}}
+              </mat-checkbox> {{option.group_name}}
             </div>
           </mat-option>
         </mat-autocomplete>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <br><br><br><br>
       <div class="width_100 center center_align">
