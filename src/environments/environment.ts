@@ -5,10 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://13.71.123.238:3000/',
-  
-  // apiUrl: 'http://20.44.41.200:3000/',
-  apiUrl: 'http://20.44.42.101:3000/',
-  
+  apiUrl: 'http://20.44.41.200:3000/',
+  // apiUrl: 'http://20.44.42.101:3000/',
   scormUrl: 'http://20.44.36.116:8089/',
   apiUrlImg: 'http://20.44.41.200:3000/',
   createCourseApi: 'http://20.44.41.55:3002/',
@@ -17,6 +15,7 @@ export const environment = {
   // scormUrl:'http://20.44.41.200:8080/',
   // apiUrlImg:'http://20.44.41.200:3001/',
   // wcaapiurl:'http://20.44.41.200:9001/',
+  domain : 'LXP'
 };
 
 /*
