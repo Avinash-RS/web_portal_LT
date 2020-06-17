@@ -277,7 +277,7 @@ export class LearnerServicesService {
       variables: {
         user_id,
         email,
-        domian: environment.domain
+        domain: environment.domain
       }
     });
   }

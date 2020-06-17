@@ -633,11 +633,11 @@ export const update_verifyotp_mobile_onprofile = gql`
   }
 `;
 export const update_email_onprofile = gql`
-  mutation update_email_onprofile($user_id: String, $email: String,$domian:String!){
+  mutation update_email_onprofile($user_id: String, $email: String,$domain:String!){
     update_email_onprofile(
       user_id: $user_id,
       email: $email,
-      domian:$domian
+      domain:$domain
     ) {
       message
       success
