@@ -108,13 +108,16 @@ export class AuditlogComponent implements OnInit {
         pagenumber: pgnumber
       };
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
-        if (result?.success === true) {
-          // this.reports.forEach(element => {
-          //   const date = moment(element.created_on);
-          //   const date1 = moment(element.updated_on);
-          //   element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
-          //   element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
-          //  });
+        if (result?.message?.length) {
+          result.message.forEach(element => {
+            //  const date = moment(element.created_on);
+            //  const date1 = moment(element.updated_on);
+            //  element.created_on = date.utc().format('MMMM Do YYYY, h:mm:ss a');
+            //  element.updated_on = date1.utc().format('MMMM Do YYYY, h:mm:ss a');
+             element.created_on = moment(element?.created_on, 'YYYY-MM-DD HH:MM:SS').format('MMMM Do YYYY, hh:MM:SS a');
+             element.updated_on = moment(element?.updated_on, 'YYYY-MM-DD HH:MM:SS').format('MMMM Do YYYY, hh:MM:SS a');
+            });
+
           if (pgnumber === '0') {
             this.filteredreports = [];
           }
