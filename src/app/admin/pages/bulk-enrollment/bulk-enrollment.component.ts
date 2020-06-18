@@ -41,159 +41,175 @@ export class BulkEnrollmentComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
 
-    this.adminservice.getUserGroup()
-      .subscribe((result: any) => {
-        const tree = this.tree(result?.data?.get_user_group?.message, null);
-        this.groups = this.flattree(tree);
-        this.filteredOptions = this.groups;
-        // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-        //   startWith(''),
-        //   map(value => typeof value === 'string' ? value : value.group_name),
-        //   map(name => name ? this._filter(name) : this.groups.slice())
-        // );
 
-        // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-        //   startWith(''),
-        //   map(value => this._filter(value))
-        // );
-        this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-          startWith<string | any[]>(''),
-          map(value => typeof value === 'string' ? value : this.lastFilter),
-          map(filter => this._filter(filter))
-        );
-      });
+ngOnInit() {
 
-  }
+  this.adminservice.getUserGroup()
+    .subscribe((result: any) => {
+      const tree = this.tree(result?.data?.get_user_group?.message, null);
+      this.groups = this.flattree(tree);
+      this.filteredOptions = this.groups;
+      // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+      //   startWith(''),
+      //   map(value => typeof value === 'string' ? value : value.group_name),
+      //   map(name => name ? this._filter(name) : this.groups.slice())
+      // );
 
-  tree(data, root) {
-    function setCount(object) {
-      return object.children
-        ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
-        : 0;
-    }
-    const t = {};
-    data.forEach(o => {
-      Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
-      t[o.parent_group_id] = t[o.parent_group_id] || {};
-      t[o.parent_group_id].children = t[o.parent_group_id].children || [];
-      t[o.parent_group_id].children.push(t[o.group_id]);
-      if (o.parent_group_id === root) { t[o.group_id].root = true; }
+      // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+      //   startWith(''),
+      //   map(value => this._filter(value))
+      // );
+      this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+        startWith<string | any[]>(''),
+        map(value => typeof value === 'string' ? value : this.lastFilter),
+        map(filter => this._filter(filter))
+      );
     });
-    setCount(t[root]);
-    return t[root].children;
-  }
 
-  flattree(items) {
-    const flat = [];
-    items.forEach(item => {
-      flat.push(item);
-      if (Array.isArray(item.children) && item.children.length > 0) {
-        flat.push(...this.flattree(item.children));
-        delete item.children;
-      }
+}
+
+tree(data, root) {
+  function setCount(object) {
+    return object.children
+      ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+      : 0;
+  }
+  const t = {};
+  data.forEach(o => {
+    Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+    t[o.parent_group_id] = t[o.parent_group_id] || {};
+    t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+    t[o.parent_group_id].children.push(t[o.group_id]);
+    if (o.parent_group_id === root) { t[o.group_id].root = true; }
+  });
+  setCount(t[root]);
+  return t[root].children;
+}
+
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
       delete item.children;
-    });
-    return flat;
-  }
-
-
-  // displayFn(user: any): string {
-  //   return user && user.group_name ? user.group_name : '';
-  // }
-
-
-  displayFn(value: any[] | string): string | undefined {
-    let displayValue: string;
-    if (Array.isArray(value)) {
-      value.forEach((user, index) => {
-        if (index === 0) {
-          displayValue = user.group_name;
-        } else {
-          displayValue += ', ' + user.group_name;
-        }
-      });
-    } else {
-      displayValue = value;
     }
-    return displayValue;
+    delete item.children;
+  });
+  return flat;
+}
+
+
+// displayFn(user: any): string {
+//   return user && user.group_name ? user.group_name : '';
+// }
+
+
+displayFn(value: any[] | string): string | undefined {
+  let displayValue: string;
+  if (Array.isArray(value)) {
+    value.forEach((user, index) => {
+      if (index === 0) {
+        displayValue = user.group_name;
+      } else {
+        displayValue += ', ' + user.group_name;
+      }
+    });
+  } else {
+    displayValue = value;
   }
+  return displayValue;
+}
 
   private _filter(name: string): string[] {
-    // const filterValue = name.toLowerCase();
-    // return this.groups.filter(option => option.group_name.toLowerCase().indexOf(filterValue) === 0);
-    this.lastFilter = name;
-    if (name) {
-      return this.groups.filter(option => {
-        return option.group_name.toLowerCase().indexOf(name.toLowerCase()) >= 0
-          || option.group_name.toLowerCase().indexOf(name.toLowerCase()) >= 0;
-      });
-    } else {
-      return this.groups.slice();
+  // const filterValue = name.toLowerCase();
+  // return this.groups.filter(option => option.group_name.toLowerCase().indexOf(filterValue) === 0);
+  this.lastFilter = name;
+  if (name) {
+    return this.groups.filter(option => {
+      return option.group_name.toLowerCase().indexOf(name.toLowerCase()) >= 0
+        || option.group_name.toLowerCase().indexOf(name.toLowerCase()) >= 0;
+    });
+  } else {
+    return this.groups.slice();
+  }
+
+}
+
+checkboxLabel(row ?) {
+  if (row.isChecked === undefined || row.isChecked === false) {
+    row.isChecked = true;
+    this.selectedArray.push(row);
+  } else {
+    row.isChecked = !row.isChecked;
+    this.selectedArray = this.selectedArray.filter(i => i !== row);
+  }
+  console.log(this.selectedArray);
+  // this.userControl.setValue(this.selectedUsers);
+  this.singleUserForm.get('group').setValue(this.selectedArray);
+  console.log(this.singleUserForm);
+ 
+}
+
+// toggleSelection(user: any) {
+//   user.selected = !user.selected;
+//   if (user.selected) {
+//     this.selectedUsers.push(user);
+//   } else {
+//     const i = this.selectedUsers.findIndex(value => value.firstname === user.firstname && value.lastname === user.lastname);
+//     this.selectedUsers.splice(i, 1);
+//   }
+
+//   this.userControl.setValue(this.selectedUsers);
+// }
+
+selected(event: MatAutocompleteSelectedEvent): void {
+  console.log(event.option.viewValue);
+  this.singleUserForm.get('group').valueChanges.subscribe((grp) => {
+    this.getGrpUser();
+  });
+  this.selectedgroup.push({ group_name: event.option.viewValue });
+  this.usergroup.nativeElement.value = '';
+  this.singleUserForm.get('group').setValue(null);
+}
+
+remove(indx): void {
+  this.selectedgroup.splice(indx, 1);
+}
+
+
+///////////////////////////////////////////////////
+filterOptions(filterValue: string) {
+  setTimeout(() => {
+    if (filterValue.trim().toLowerCase().length > 3) {
+      this.adminservice.searchUserInGroup(filterValue.trim().toLowerCase(), this.singleUserForm.value.group[0].group_id)
+        .subscribe((result: any) => {
+          if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
+            this.userList = result.data.search_user.message;
+          } else {
+            // this.alert.openAlert('Sorry', "User doesn't exist");
+          }
+
+        });
+    } else if (filterValue.trim().toLowerCase().length === 0) {
+      // this.getAllUser(0);
     }
+  }, 1000);
+}
 
-  }
+  // public filterOptions(filter: string): void {
+  // this.options = this.userList.filter(x => x.username.toLowerCase().includes(filter.toLowerCase()));
+// }
 
-  checkboxLabel(row?) {
-    if (row.isChecked === undefined || row.isChecked === false) {
-      row.isChecked = true;
-      this.selectedArray.push(row);
-    } else {
-      row.isChecked = !row.isChecked;
-      this.selectedArray = this.selectedArray.filter(i => i !== row);
-    }
-    console.log(this.selectedArray);
-    // this.userControl.setValue(this.selectedUsers);
-    this.singleUserForm.get('group').setValue(this.selectedArray);
-    console.log(this.singleUserForm);
-
-  }
-
-  // toggleSelection(user: any) {
-  //   user.selected = !user.selected;
-  //   if (user.selected) {
-  //     this.selectedUsers.push(user);
-  //   } else {
-  //     const i = this.selectedUsers.findIndex(value => value.firstname === user.firstname && value.lastname === user.lastname);
-  //     this.selectedUsers.splice(i, 1);
-  //   }
-
-  //   this.userControl.setValue(this.selectedUsers);
-  // }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event.option.viewValue);
-    this.selectedgroup.push({ group_name: event.option.viewValue });
-    this.usergroup.nativeElement.value = '';
-    this.singleUserForm.get('group').setValue(null);
-  }
-
-  remove(indx): void {
-    this.selectedgroup.splice(indx, 1);
-  }
-
-
-  ///////////////////////////////////////////////////
-  applyFilter(filterValue: string) {
-    setTimeout(() => {
-      if (filterValue.trim().toLowerCase().length > 3) {
-        this.adminservice.searchUser(filterValue.trim().toLowerCase(), 0, 1)
-          .subscribe((result: any) => {
-            if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
-
-            } else {
-              // this.alert.openAlert('Sorry', "User doesn't exist");
-            }
-
-          });
-      } else if (filterValue.trim().toLowerCase().length === 0) {
-        // this.getAllUser(0);
+getGrpUser() {
+  console.log(this.singleUserForm.value.group);
+  this.adminservice.getAllUsers(0, 1, this.singleUserForm.value.group.group_id)
+    .subscribe((result: any) => {
+      if (result.data && result.data.get_all_user) {
+        // console.log(result.data.get_all_user);
+        this.userList = result.data.get_all_user.message;
       }
-    }, 1000);
-  }
-
-  public filterOptions(filter: string): void {
-    this.options = this.userList.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()));
-  }
+    });
+}
 }

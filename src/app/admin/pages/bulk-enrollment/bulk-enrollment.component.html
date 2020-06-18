@@ -85,8 +85,8 @@
           <input matInput placeholer="Search" (input)="filterOptions($event.target.value)" />
         </mat-form-field>
       
-        <mat-option *ngFor="let option of options" [value]="option">
-          {{option.name}}
+        <mat-option *ngFor="let option of userList" [value]="option">
+          {{option.username}}
         </mat-option>
       
       
