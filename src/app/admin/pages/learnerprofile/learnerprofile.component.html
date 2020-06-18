@@ -196,20 +196,6 @@
                            'inputs  width_50'" placeholder="Percentage" formControlName="percentage" maxlength="5"
                                   (blur)="formatPercentage(in)"
                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                                <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
-                                  (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
-                                </mat-icon> -->
-                                <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1 && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
-                           (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')"
-                           (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
-                         </mat-icon> -->
-                                <!-- <mat-icon (click)="addQualification(in)"
-                                  *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 15"
-                                  class="addIcon">add
-                                </mat-icon> -->
-                                <!-- <div *ngIf="f.qualification && f.qualification[in] && f.qualification[in].percentage && f.qualification[in].percentage.touched && f.qualification[in].percentage.errors" class="mand">
-                           asdijsaio
-                         </div> -->
                               </div>
                             </div>
                           </div>
