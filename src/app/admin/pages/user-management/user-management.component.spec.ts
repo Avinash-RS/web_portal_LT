@@ -8,12 +8,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/cor
 import {
   MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
-  MatDialogModule, MatTooltipModule, MatDialogRef, MatTabHeader, MatHeaderRow, MatHeaderCell, MatHeaderCellDef, MatHeaderRowDef, MatSortHeader, MatRow, MatRowDef, MatCell, MatCellDef, MatTableModule
+  MatDialogModule, MatTooltipModule, MatDialogRef, MatTabHeader, MatHeaderRow, MatHeaderCell, MatHeaderCellDef, MatHeaderRowDef, MatSortHeader, MatRow, MatRowDef, MatCell, MatCellDef, MatTableModule, MatDialogTitle, MAT_DIALOG_DATA
 } from '@angular/material';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -22,7 +23,13 @@ describe('UserManagementComponent', () => {
   let component: UserManagementComponent;
   let fixture: ComponentFixture<UserManagementComponent>;
   let usermanagement = require("../../../../assets/mockdata/wca/user-management.json");
+  const dialogMock = {
+    closeAll: () => { }
+    };
 
+    let mockRouter = {
+      navigate: jasmine.createSpy('navigate')
+    }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -61,7 +68,16 @@ describe('UserManagementComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Apollo],
+      providers: [Apollo,
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        { provide: MatDialogRef, useValue:  dialogMock },
+        { provide: MatDialogTitle , useValue: [] },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: Router, useValue: mockRouter},
+      ],
       declarations: [UserManagementComponent]
     })
       .compileComponents();
@@ -127,5 +143,17 @@ describe('UserManagementComponent', () => {
   //   expect(component.dialog).toBeTruthy();
 
   // });
+  it('close()', () => {
+    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component. ngOnDestroy();
+    expect(spy).toHaveBeenCalled();    
+  });
+
+  it('router', () => {
+    component.gotoAddUser();
+    expect (mockRouter.navigate).toHaveBeenCalledWith (['/Admin/auth/addUser']);
+
+  });
+
 
 });

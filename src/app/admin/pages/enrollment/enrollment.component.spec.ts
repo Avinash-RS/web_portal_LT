@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentComponent } from './enrollment.component';
-import { MatTableModule, MatDialogModule } from '@angular/material';
+import { MatTableModule, MatDialogModule, MatDialogRef, MatDialogTitle, MAT_DIALOG_DATA } from '@angular/material';
 // import { Router } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +19,9 @@ describe('EnrollmentComponent', () => {
   let fixture: ComponentFixture<EnrollmentComponent>;
   // let testUsers: User[] = [
   //  { sno : 1, Datereceived: '01-01-2020', Coursename: '' , Enrolments: 1, Usergroup: 'Manipal University'} ];
-
+  const dialogMock = {
+    closeAll: () => { }
+    };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EnrollmentComponent ],
@@ -28,9 +30,17 @@ describe('EnrollmentComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      // providers: [
-      //   { provide: AdminServicesService }
-      // ]
+      providers: [
+        // { provide: AdminServicesService }
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        { provide: MatDialogRef, useValue:  dialogMock },
+        { provide: MatDialogTitle , useValue: [] },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+    
+      ]
     })
     .compileComponents();
   }));
@@ -44,5 +54,21 @@ describe('EnrollmentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('closedialogbox()', () => {
+    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component.closedialogbox();
+    expect(spy).toHaveBeenCalled(); 
+    expect(component.dialogopened).toBe('false')   
+  });
+
+  it('close()', () => {
+    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component. ngOnDestroy();
+    expect(spy).toHaveBeenCalled();    
+  });
+
+
 });
 
