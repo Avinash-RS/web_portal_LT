@@ -17,6 +17,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule , NO_ERRORS_SCHEMA } from '@angular/co
 describe('EnrollmentComponent', () => {
   let component: EnrollmentComponent;
   let fixture: ComponentFixture<EnrollmentComponent>;
+  // let testUsers: User[] = [
+  //  { sno : 1, Datereceived: '01-01-2020', Coursename: '' , Enrolments: 1, Usergroup: 'Manipal University'} ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,4 +46,3 @@ describe('EnrollmentComponent', () => {
   });
 });
 
-//testing
