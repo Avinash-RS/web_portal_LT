@@ -84,9 +84,9 @@ export class LearnerprofileComponent implements OnInit {
       qualification: this.formBuilder.array([this.createQualItem()]),
     });
     this.getAllLevels();
-    this.getBoardsUniv();
+    //this.getBoardsUniv();
     this.getInstitute();
-    this.getDiscipline();
+    //this.getDiscipline();
     this.getSpec();
   }
   createQualItem(): FormGroup {
@@ -117,7 +117,7 @@ export class LearnerprofileComponent implements OnInit {
     });
   }
 
-  getBoardsUniv() {
+ /* getBoardsUniv() {
     // this.service.get_institute_details().subscribe(institute => {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
@@ -127,19 +127,19 @@ export class LearnerprofileComponent implements OnInit {
       this.uniValue = boards.data.get_board_university_details.data.university;
 
     });
-  }
+  }*/
 
   getInstitute() {
     this.learnerservice.get_institute_details().subscribe((institute: any) => {
       this.institutes = institute?.data?.get_institute_details?.data;
     });
   }
-
+/*
   getDiscipline() {
     this.learnerservice.get_discipline_details().subscribe((discipline: any) => {
       this.disciplines = discipline.data.get_discipline_details.data;
     });
-  }
+  }*/
 
   getSpec() {
     // this.service.get_institute_details().subscribe(institute => {
