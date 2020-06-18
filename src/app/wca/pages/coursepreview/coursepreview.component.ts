@@ -179,6 +179,7 @@ export class CoursepreviewComponent implements OnInit {
 
   
   closeNav() {
+    this.service.pauseVideo$.next("off");
     document.getElementById("myNav").style.height = "0%";
   }
 }
