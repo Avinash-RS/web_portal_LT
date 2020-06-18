@@ -534,6 +534,7 @@ export const get_all_course_by_usergroup = gql`
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
     error_msg
+    total_count
     message{
     course_id
     course_description

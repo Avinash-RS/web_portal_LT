@@ -38,6 +38,7 @@ export class LearnerHomeComponent implements OnInit {
   allLvlCategoryFilterVal: any = [];
   allLvlCategory: any;
   paginationpgno: any;
+  total_count: number;
 
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
@@ -90,6 +91,7 @@ export class LearnerHomeComponent implements OnInit {
     if (this.userDetailes.group_id)
       this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
+        this.total_count = result.data.get_all_course_by_usergroup.total_count;
         this.loadingCatalogue = false;
       });
   }
