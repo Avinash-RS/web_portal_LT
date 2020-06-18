@@ -13,7 +13,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -1186,7 +1186,8 @@ export class ProfileComponent implements OnInit {
         job_role: new FormControl(''),
         organization: new FormControl(''),
         total_experience: new FormControl('')
-      })
+      }),
+      domain : environment.domain
     });
 
     const job_role = this.profileForm.get('professional.job_role');
