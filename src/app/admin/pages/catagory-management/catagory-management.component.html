@@ -407,7 +407,7 @@
   <!-- start of popup -->
   <ng-template #viewDialog class="dialogPopup">
     <span class="close">
-      <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox()"></i>
+      <i class="fa fa-times-circle-o pointer color_blue" aria-hidden="true" (click)="closedialogbox('close')"></i>
     </span>
     <h2>Move {{selectedArray?.length || courseCount}} {{ selectedArray?.length ==1 ? 'course' : 'courses' }}</h2>
     <mat-dialog-content style="width: 850px;">
