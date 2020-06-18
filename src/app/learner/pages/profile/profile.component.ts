@@ -1063,9 +1063,9 @@ export class ProfileComponent implements OnInit {
     this.getAllLanguage();
     this.getAllcountry();
     this.getAllLevels();
-    this.getBoardsUniv();
+   // this.getBoardsUniv();
     this.getInstitute();
-    this.getDiscipline();
+   // this.getDiscipline();
     this.getSpec();
   }
 
@@ -1096,7 +1096,12 @@ export class ProfileComponent implements OnInit {
   get social_media() {
     return this.profileForm.get('social_media') as FormArray;
   }
-
+  uniValue1:any;
+  uniValue3:any;
+  boardValue1: any;
+  boardValue3: any;
+  disciplines1: any;
+  disciplines2: any;
   profileForm: FormGroup;
   mailForm: FormGroup;
   otpForm: FormGroup;
@@ -1426,19 +1431,28 @@ export class ProfileComponent implements OnInit {
       this.levelValue = level.data.get_qualification_details.data;
       this.levelValue.forEach(element => {
         element.allowed = 'Y';
+        this.getBoardsUniv(element._id);
+        this.getDiscipline(element._id);
       });
     });
   }
 
-  getBoardsUniv() {
+  getBoardsUniv(levelid) {
     // this.service.get_institute_details().subscribe(institute => {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    this.service.get_board_university_details().subscribe((boards: any) => {
-      this.boardValue = boards.data.get_board_university_details.data.board;
-      this.uniValue = boards.data.get_board_university_details.data.university;
-
+    this.service.get_board_university_details(levelid).subscribe((boards: any) => {
+      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+        this.boardValue = boards.data.get_board_university_details.data.board;
+        this.uniValue = boards.data.get_board_university_details.data.university;
+      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+        this.boardValue1 = boards.data.get_board_university_details.data.board;
+        this.uniValue1 = boards.data.get_board_university_details.data.university;
+      } else {
+        this.boardValue3 = boards.data.get_board_university_details.data?.board;
+        this.uniValue3 = boards.data.get_board_university_details.data?.university;
+      }
     });
   }
 
@@ -1448,9 +1462,15 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getDiscipline() {
-    this.service.get_discipline_details().subscribe((discipline: any) => {
-      this.disciplines = discipline.data.get_discipline_details.data;
+  getDiscipline(levelid) {
+    this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
+      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+        this.disciplines = discipline.data.get_discipline_details?.data;
+      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+        this.disciplines1 = discipline.data.get_discipline_details?.data;
+      } else {
+        this.disciplines2 = discipline.data.get_discipline_details?.data;
+      }
     });
   }
 
@@ -1677,6 +1697,8 @@ export class ProfileComponent implements OnInit {
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
+    this.getDiscipline(level._id);
+    this.getBoardsUniv(level._id);
   }
 
   formatPercentage(index) {
