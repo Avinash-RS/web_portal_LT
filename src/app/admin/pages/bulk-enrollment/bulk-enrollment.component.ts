@@ -24,77 +24,79 @@ export class BulkEnrollmentComponent implements OnInit {
   options = [{ name: 'One' }, { name: 't' }, { name: 'sdfg' }, { name: 'dfsd' }, { name: 'ht' }, { name: 'zsdfg' }];
   filteredOptions: Observable<any[]>;
   selectedArray: any = [];
-  lastFilter: string = '';
+  lastFilter = '';
   selectedgroup = [];
   selectable = true;
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA]; // for mat chips to add into an array
+  userList = [{ name: 'One' }, { name: 't' }, { name: 'sdfg' }, { name: 'dfsd' }, { name: 'ht' }, { name: 'zsdfg' }];
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  @ViewChild('usergroup') usergroup: ElementRef<HTMLInputElement>;  //mat input values
+  @ViewChild('usergroup') usergroup: ElementRef<HTMLInputElement>;  // mat input values
 
   constructor(private formBuilder: FormBuilder, private adminservice: AdminServicesService) {
     this.singleUserForm = this.formBuilder.group({
       group: new FormControl('', myGlobals.req),
-      userType: ['', myGlobals.req]
+      userType: ['', myGlobals.req],
     });
   }
 
   ngOnInit() {
 
     this.adminservice.getUserGroup()
-    .subscribe((result: any) => {
-      const tree = this.tree(result?.data?.get_user_group?.message, null);
-      this.groups = this.flattree(tree);
-      this.filteredOptions = this.groups;
-      // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-      //   startWith(''),
-      //   map(value => typeof value === 'string' ? value : value.group_name),
-      //   map(name => name ? this._filter(name) : this.groups.slice())
-      // );
+      .subscribe((result: any) => {
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.groups = this.flattree(tree);
+        this.filteredOptions = this.groups;
+        // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+        //   startWith(''),
+        //   map(value => typeof value === 'string' ? value : value.group_name),
+        //   map(name => name ? this._filter(name) : this.groups.slice())
+        // );
 
-      // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-      //   startWith(''),
-      //   map(value => this._filter(value))
-      // );
-      this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
-        startWith<string | any[]>(''),
-        map(value => typeof value === 'string' ? value : this.lastFilter),
-        map(filter => this._filter(filter))
-      );
-    });
+        // this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+        //   startWith(''),
+        //   map(value => this._filter(value))
+        // );
+        this.filteredOptions = this.singleUserForm.get('group').valueChanges.pipe(
+          startWith<string | any[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter),
+          map(filter => this._filter(filter))
+        );
+      });
 
   }
 
   tree(data, root) {
     function setCount(object) {
-        return object.children
-            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
-            : 0;
+      return object.children
+        ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+        : 0;
     }
     const t = {};
     data.forEach(o => {
-        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
-        t[o.parent_group_id] = t[o.parent_group_id] || {};
-        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
-        t[o.parent_group_id].children.push(t[o.group_id]);
-        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+      Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+      t[o.parent_group_id] = t[o.parent_group_id] || {};
+      t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+      t[o.parent_group_id].children.push(t[o.group_id]);
+      if (o.parent_group_id === root) { t[o.group_id].root = true; }
     });
     setCount(t[root]);
     return t[root].children;
-}
-flattree(items) {
-  const flat = [];
-  items.forEach(item => {
-    flat.push(item);
-    if (Array.isArray(item.children) && item.children.length > 0) {
-      flat.push(...this.flattree(item.children));
+  }
+
+  flattree(items) {
+    const flat = [];
+    items.forEach(item => {
+      flat.push(item);
+      if (Array.isArray(item.children) && item.children.length > 0) {
+        flat.push(...this.flattree(item.children));
+        delete item.children;
+      }
       delete item.children;
-    }
-    delete item.children;
-  });
-  return flat;
-}
+    });
+    return flat;
+  }
 
 
   // displayFn(user: any): string {
@@ -162,12 +164,36 @@ flattree(items) {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log(event.option.viewValue);
-    this.selectedgroup.push({group_name: event.option.viewValue});
+    this.selectedgroup.push({ group_name: event.option.viewValue });
     this.usergroup.nativeElement.value = '';
     this.singleUserForm.get('group').setValue(null);
   }
 
-   remove(indx): void {
+  remove(indx): void {
     this.selectedgroup.splice(indx, 1);
+  }
+
+
+  ///////////////////////////////////////////////////
+  applyFilter(filterValue: string) {
+    setTimeout(() => {
+      if (filterValue.trim().toLowerCase().length > 3) {
+        this.adminservice.searchUser(filterValue.trim().toLowerCase(), 0, 1)
+          .subscribe((result: any) => {
+            if (result.data.search_user.success && result.data.search_user.message && result.data.search_user.message.length > 0) {
+
+            } else {
+              // this.alert.openAlert('Sorry', "User doesn't exist");
+            }
+
+          });
+      } else if (filterValue.trim().toLowerCase().length === 0) {
+        // this.getAllUser(0);
+      }
+    }, 1000);
+  }
+
+  public filterOptions(filter: string): void {
+    this.options = this.userList.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()));
   }
 }
