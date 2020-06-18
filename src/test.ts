@@ -19,7 +19,7 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/core/shared/course-component', false, /course-component.component\.spec\.ts$/);
 //  const context = require.context('./app/admin/pages/admin-courses', false, /admin-courses.component\.spec\.ts$/);
 // const context = require.context('./app/learner/pages/learner-my-course', false, /learner-my-course.component\.spec\.ts$/);
-//  const context = require.context('./app/admin/pages/user-management', false, /user-management.component\.spec\.ts$/);
+ const context = require.context('./app/admin/pages/user-management', false, /user-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/admin-login', false, /admin-login.component\.spec\.ts$/);
 // And load the modules.
 // const context = require.context('../src/app/learner/pages/login/', true,/login.component\.spec\.ts$/);
@@ -31,7 +31,7 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/report-management', false, /report-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/reports', false, /reports.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/auditlog', false, /auditlog.component\.spec\.ts$/);
-const context = require.context('./app/admin/pages/enrollment', false, /enrollment.component\.spec\.ts$/);
+// const context = require.context('./app/admin/pages/enrollment', false, /enrollment.component\.spec\.ts$/);
 
 
 // const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
