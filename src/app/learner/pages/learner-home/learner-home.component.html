@@ -56,7 +56,7 @@
         <div class="container containerShadow">
           <div class="row">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: {  totalItems: courseCount, itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
                   [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
@@ -70,7 +70,7 @@
         <div class="container containerShadow">
           <div class="row">
             <ng-container
-              *ngFor="let c of allcourses  | paginate: { itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
+              *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 16, currentPage: paginationpgno } ;let j=index">
               <div class="col-md-6 col-lg-3 col-sm-12">
                 <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
                   [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
@@ -82,7 +82,10 @@
       </div>
     </div>
 
-
+    <div style="margin-left: 36%;margin-right: 36%;">
+      <pagination-controls class="my-pagination" (pageChange)="onpagination($event)">
+      </pagination-controls>
+    </div>
   </mat-tab>
 
   <mat-tab label="My Courses">
@@ -205,6 +208,7 @@
     <div style="margin-bottom: 10%;"></div>
   </mat-tab>
 </mat-tab-group>
+
 <!-- <button id="myBtn" (click)="open()">Open Modal</button> -->
 <!-- The Modal -->
 <!-- <div id="myModal" class="modal">
