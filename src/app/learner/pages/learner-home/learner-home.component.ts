@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./learner-home.component.scss']
 })
 export class LearnerHomeComponent implements OnInit {
+  courseCount: number;
   userDetailes: any;
   pagenumber = 0;
   sort_type: any = "A-Z";
@@ -36,6 +37,7 @@ export class LearnerHomeComponent implements OnInit {
   level3selectedID: any = [];
   allLvlCategoryFilterVal: any = [];
   allLvlCategory: any;
+  paginationpgno: any;
 
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
@@ -74,6 +76,14 @@ export class LearnerHomeComponent implements OnInit {
       this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
       this.allLvlCategory=data.allLvlCategory
   })
+  }
+  onpagination(event) {
+    this.paginationpgno = event;
+    this.pagenumber = this.pagenumber + 1;
+    this.commonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sort_type).subscribe((result: any) => {
+      this.allcourses = result.data.get_all_course_by_usergroup.message;
+      this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
+    });
   }
   getallcourses() {
     this.loadingCatalogue = true;
