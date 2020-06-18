@@ -52,6 +52,7 @@ export class ReferenceFileComponent implements OnInit {
   routedCourseName : any;
   routedisRepo : any;
   routedisCreate : any;
+  edit: Boolean = false;
 
   constructor(public service: WcaService, public route: Router, public router: ActivatedRoute, public learnerservice: LearnerServicesService, public fb: FormBuilder, private alert: AlertServiceService, ) {
   }
@@ -134,6 +135,7 @@ export class ReferenceFileComponent implements OnInit {
       }
     })
   }
+ 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

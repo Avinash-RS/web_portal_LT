@@ -1,4 +1,5 @@
 @import "variable";
+.reffile{
 .reference-file-container {
     background-color: $color-white;
 
@@ -95,7 +96,22 @@ table {
     color: $color-blank;;
     width: 100px !important;
 }
-
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+    padding-right: 6px !important;
+}
+.edit-icon {
+    font-size: 18px !important;
+    padding-left: 8px;
+    padding-top: 7px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+    background:  $color-light-blue;
+    margin-left: -16%;
+    font-weight: lighter;
+    color: $color-darkGrey;
+    cursor: pointer;
+}
 .del-icon {
     font-size: 18px !important;
     padding-left: 8px;
@@ -104,9 +120,10 @@ table {
     height: 30px;
     border-radius: 20%;
     background:  $color-light-blue;
-    margin-left: 50%;
+    margin-left: 30%;
     font-weight: lighter;
     color: $color-darkGrey;
+    cursor: pointer;
 }
 
 .mat-header-row {
@@ -287,6 +304,8 @@ tr.mat-row {
     0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
 }
 
 
