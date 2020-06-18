@@ -130,29 +130,14 @@
 
             <ng-container matColumnDef="topic_id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic name </th>
-              <td mat-cell *matCellDef="let data;let index = index"> 
-                <div *ngIf="!edit">
-                  {{data.topic_id}}
-                </div>
-                <div *ngIf="edit">
-                  <mat-form-field class="example-full-width">
-                  <input matInput>
-                  </mat-form-field>
-                </div> </td>
+              <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
             </ng-container>
 
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customtypeClass'"> Type </th>
-              <td mat-cell *matCellDef="let data;let index = index"> 
-                <div *ngIf="!edit">
-                  {{data.files[0].doc_type}}
-                </div>
-                <div *ngIf="edit">
-                  <mat-form-field>
-                  <input matInput>
-                  </mat-form-field>
-                </div> </td>
+              <td mat-cell *matCellDef="let data">  {{data.files[0].doc_type}} </td>
             </ng-container>
+
             <ng-container matColumnDef="created_on">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date added </th>
               <td mat-cell *matCellDef="let data"> {{data.created_on |  date :'MMM d, y, h:mm:ss a'}}
@@ -161,9 +146,8 @@
 
             <ng-container matColumnDef="Action">
               <th mat-header-cell *matHeaderCellDef [ngClass]="'customActionClass'"> </th>
-              <td mat-cell *matCellDef="let data;let index = index">
+              <td mat-cell *matCellDef="let data">
                 <!-- <mat-icon class="del-icon" (click)="deleteReferenceFile(data)">delete</mat-icon> -->
-                <!-- <i class="fa fa-pencil edit-icon" aria-hidden="true" (click)="editDoc(index,topic_id,type)"></i> -->
                 <i class="fa fa-trash-o del-icon" aria-hidden="true" (click)="removeDoc(data)"></i>
               </td>
             </ng-container>
