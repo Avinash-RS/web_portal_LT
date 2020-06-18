@@ -30,8 +30,8 @@ getTestBed().initTestEnvironment(
 // const context = require.context('./app/admin/pages/learnerprofile', false, /learnerprofile.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/report-management', false, /report-management.component\.spec\.ts$/);
 // const context = require.context('./app/admin/pages/reports', false, /reports.component\.spec\.ts$/);
-const context = require.context('./app/admin/pages/auditlog', false, /auditlog.component\.spec\.ts$/);
-
+// const context = require.context('./app/admin/pages/auditlog', false, /auditlog.component\.spec\.ts$/);
+const context = require.context('./app/admin/pages/enrollment', false, /enrollment.component\.spec\.ts$/);
 
 
 // const context = require.context('./app/learner/pages/landingpage', false, /landingpage.component\.spec\.ts$/);
