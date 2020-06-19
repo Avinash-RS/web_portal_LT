@@ -1054,6 +1054,7 @@ export class ProfileComponent implements OnInit {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
+      this.getAllLevels();
       this.getprofileDetails(this.currentUser.user_id);
       if (!this.currentUser.is_profile_updated) {
         this.gs.preventBackButton();
@@ -1062,7 +1063,6 @@ export class ProfileComponent implements OnInit {
 
     this.getAllLanguage();
     this.getAllcountry();
-    this.getAllLevels();
    // this.getBoardsUniv();
     this.getInstitute();
    // this.getDiscipline();
@@ -1255,14 +1255,31 @@ export class ProfileComponent implements OnInit {
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
-            profileDetails.qualification.forEach(qual =>
-              qualification.push(this.formBuilder.group(qual)));
+            profileDetails.qualification.forEach((qual,index)=>{
+              var unique = true;
+              this.levelValue.forEach(element=>{
+                if((element._id == qual.qualification && element.level_code == "10") || (element._id == qual.qualification && element.level_code == "12") )
+                {
+                    element.allowed = 'N';
+                    unique = false;
+                }
+              })
+              if(unique) {
+                qualification.push(this.formBuilder.group(qual));
+                qualification.controls[index]['insCheck'] = false;
+              }
+              else {
+                qualification.push(this.formBuilder.group(qual))
+                qualification.controls[index]['insCheck'] = true;
+
+              }              
+            });
+              
           }
           if (profileDetails.certificate && profileDetails.certificate.length > 0) {
             profileDetails.certificate.forEach(certif =>
               certificate.push(this.formBuilder.control(certif)));
           }
-          // console.log(data.data.view_profile.message[0], 'profileDetails', profileDetails)
           this.loader.hide();
         } else {
           this.loader.hide();
@@ -1354,8 +1371,14 @@ export class ProfileComponent implements OnInit {
   }
 
   addQualification(i) {
-    if (this.profileForm.value.qualification[i].qualification === '5e7deddfdba4466d9704b44a' ||
-      this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2') {
+    var unique = false;
+    this.levelValue.forEach((type) => {
+      if ((type.level_code == '10' && this.profileForm.value.qualification[i].qualification == type._id )
+       || (type.level_code == '12' && this.profileForm.value.qualification[i].qualification == type._id )) {
+        unique = true;
+      }
+    })
+    if (unique) {
       if (this.profileForm.value.qualification[i].board_university !== '' &&
         this.profileForm.value.qualification[i].qualification !== '' &&
         this.profileForm.value.qualification[i].discipline !== '' && this.profileForm.value.qualification[i].institute !== '' &&
@@ -1376,6 +1399,12 @@ export class ProfileComponent implements OnInit {
   }
 
   removeQualification(i) {
+    this.levelValue.forEach(level => {
+      if((level._id == this.qualification.controls[i].value.qualification && level.level_code == '10') ||
+      (level._id == this.qualification.controls[i].value.qualification && level.level_code == '12')){
+        level.allowed = 'Y';
+      }
+    })
     this.qualification.removeAt(i);
   }
 
@@ -1443,16 +1472,18 @@ export class ProfileComponent implements OnInit {
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
     this.service.get_board_university_details(levelid).subscribe((boards: any) => {
-      if (levelid === '5e7dedc1dba4466d9704b3f2') {
-        this.boardValue = boards.data.get_board_university_details.data.board;
-        this.uniValue = boards.data.get_board_university_details.data.university;
-      } else if (levelid === '5e7deddfdba4466d9704b44a') {
-        this.boardValue1 = boards.data.get_board_university_details.data.board;
-        this.uniValue1 = boards.data.get_board_university_details.data.university;
-      } else {
-        this.boardValue3 = boards.data.get_board_university_details.data?.board;
-        this.uniValue3 = boards.data.get_board_university_details.data?.university;
-      }
+      // if (levelid === '5e7dedc1dba4466d9704b3f2') {
+      //   this.boardValue = boards.data.get_board_university_details.data.board;
+      //   this.uniValue = boards.data.get_board_university_details.data.university;
+      // } else if (levelid === '5e7deddfdba4466d9704b44a') {
+      //   this.boardValue1 = boards.data.get_board_university_details.data.board;
+      //   this.uniValue1 = boards.data.get_board_university_details.data.university;
+      // } else {
+      //   this.boardValue3 = boards.data.get_board_university_details.data?.board;
+      //   this.uniValue3 = boards.data.get_board_university_details.data?.university;
+      // }
+      this.boardValue = boards.data.get_board_university_details.data.board;
+      this.uniValue = boards.data.get_board_university_details.data.university;
     });
   }
 
@@ -1464,13 +1495,14 @@ export class ProfileComponent implements OnInit {
 
   getDiscipline(levelid) {
     this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
-      if (levelid === '5e7dedc1dba4466d9704b3f2') {
-        this.disciplines = discipline.data.get_discipline_details?.data;
-      } else if (levelid === '5e7deddfdba4466d9704b44a') {
-        this.disciplines1 = discipline.data.get_discipline_details?.data;
-      } else {
-        this.disciplines2 = discipline.data.get_discipline_details?.data;
-      }
+      // if (levelid === '5e7dedc1dba4466d9704b3f2') {
+      //   this.disciplines = discipline.data.get_discipline_details?.data;
+      // } else if (levelid === '5e7deddfdba4466d9704b44a') {
+      //   this.disciplines1 = discipline.data.get_discipline_details?.data;
+      // } else {
+      //   this.disciplines2 = discipline.data.get_discipline_details?.data;
+      // }
+      this.disciplines = discipline.data.get_discipline_details.data;
     });
   }
 
@@ -1683,7 +1715,17 @@ export class ProfileComponent implements OnInit {
     this.levelValue.forEach((type) => {
       if (type.level_code === '10' || type.level_code === '12') {
         const selected = this.duplicateValueCheck.includes(type._id);
-        if (selected) { type.allowed = 'N'; } else { type.allowed = 'Y'; }
+        if (selected) { type.allowed = 'N'; } 
+        else { 
+          let quali = this.profileForm.controls.qualification;
+          var unique = true;
+          quali.value.forEach(element => {
+            if(element.qualification == type._id){
+               unique = false;
+            }
+          });
+          if(unique) type.allowed = 'Y'; 
+        }
       }
     });
   }
@@ -1692,8 +1734,10 @@ export class ProfileComponent implements OnInit {
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
+      a.insCheck=  false;
       specification.setValidators([Validators.required]);
     } else {
+      a.insCheck=  true;
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
