@@ -263,11 +263,11 @@
               </mat-select>
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
             </div>
-
+           
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
               <!-- <mat-form-field *ngIf=""> -->
               <ng-container
-                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                *ngIf="!qual.insCheck">
                 <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Institute" formControlName="institute"
                   name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
@@ -277,7 +277,7 @@
               </ng-container>
               <!------------------------Institute textbox for 10th and 12th--------------------->
               <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
-                *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                *ngIf="qual.insCheck">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
      'inputs color_blue background_trans width_80'" formControlName="institute">
               </ng-container>
@@ -294,7 +294,7 @@
             <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
             <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
               <ng-container
-                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                *ngIf="!qual.insCheck">
                 <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Specification"
                   formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">
