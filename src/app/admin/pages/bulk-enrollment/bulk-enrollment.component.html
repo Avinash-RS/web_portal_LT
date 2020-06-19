@@ -10,99 +10,64 @@
 
 <h1 style="padding-left: 25px;">Bulk enrollment</h1>
 <br>
-<mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabClick($event,bulkuserform)">
 
-  <mat-tab label="Add a user">
-    <form [formGroup]="singleUserForm">
 
-      <br><br>
+<div class="downloadbutton">
+  <button (click)="downloadsampleexceltemplate()" *ngIf="!selectedfile"> Download Excel
+  </button>
+</div>
 
-      <!-- <mat-form-field style="width: 30%; margin-left: 15%;">
-        <mat-label>Select group</mat-label>
-        <input type="text" matInput formControlName="group" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let grp of filteredOptions | async" [value]="selectedArray" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
-          ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
-          (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))"> 
-            <div (click)="$event.stopPropagation()">
-              <mat-checkbox (change)="checkboxLabel(grp)">
-              </mat-checkbox> {{grp.group_name}}
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field> -->
-      <mat-form-field style="width: 50%; margin-left: 15%;">
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let group of selectedgroup;let indx=index;" [selectable]="selectable"
-            [removable]="removable" (removed)="remove(indx)">
-            {{group.group_name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel
-            </mat-icon>
-          </mat-chip>
-          <input type="text" matInput id="group" placeholder="Enter group" formControlName="group" #usergroup
-            [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
-        </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let grp of filteredOptions | async" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
+<div class="row">
+  <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle" style="text-align:center;"
+    *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
+    <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
+      (change)="fileBrowseHandler($event.target.files)" />
+    <img src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64">
+
+    <h3>Drag and drop file here</h3>
+    <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
+    <h3>or</h3>
+    <button for="fileDropRef" class="browse pointer">Browse for file</button>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-6 center col-sm-11 col-11"> -->
+<div *ngIf="selectedfile" class="files-list">
+  <div class="single-file">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png"
+      class="file-icon" style="width: 50px">
+
+    <div class="info">
+      <h4 class="name">
+        {{ selectedfile?.name }}
+      </h4>
+      <p class="size">
+        {{ formatBytes(selectedfile?.size) }}
+      </p>
+    </div>
+    <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()"
+      style="width: 30px">
+  </div>
+</div>
+<!-- <div class="downloadbutton">
+  <form #bulkuserform="ngForm">
+    <mat-form-field>
+      <mat-label>Group name</mat-label>
+      <mat-select name="group" [(ngModel)]="group">
+        <mat-option *ngFor="let grp of groups" [value]="grp" [style.padding]="(grp.hierarchy_id === 'h1' ? '0px 5px' : (grp.hierarchy_id === 'h2' ? '0px 15px' : 
         ( grp.hierarchy_id === 'h3' ? '0px 30px' : (grp.hierarchy_id === 'h4' ? '0px 45px' :  (grp.hierarchy_id === 'h5' ? '0px 60px' : 
         (grp.hierarchy_id === 'h6' ? '0px 75px' : '0px 90px'))))))">
-            {{ grp.group_name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <br><br>
-
-      <div class="form-group" style="margin-left: 15%;">
-        <mat-radio-group formControlName="userType" name="userType">
-          <mat-radio-button value="all_user">All users in group</mat-radio-button>
-          <mat-radio-button value="select" style="margin-left: 5%;">
-            <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)"
-            aria-label="Search">
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
-
-      <!-- <mat-form-field style="width: 30%; margin-left: 15%;">
-        <mat-label>Select courses</mat-label>
-        <input type="text" matInput [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            <div (click)="$event.stopPropagation()">
-              <mat-checkbox (change)="checkboxLabel(option)">
-              </mat-checkbox> {{option.group_name}}
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field> -->
-
-      <br><br><br><br>
-
-
-      <mat-select multiple style="width: 30%; margin-left: 15%;">
-
-        <mat-form-field >
-          <input matInput placeholer="Search" (input)="filterOptions($event.target.value)" />
-        </mat-form-field>
-      
-        <mat-option *ngFor="let option of userList" [value]="option">
-          {{option.username}}
+          {{grp.group_name}}
         </mat-option>
-      
-      
-      </mat-select> 
-      
-      <div class="width_100 center center_align">
-        <button id="addUser" mat-stroked-button [disabled]="singleUserForm.invalid" style="width:15%; margin : 3%"
-          (click)="addUser()">Save</button>
-        <button id="addUser" mat-stroked-button (click)="addUser()" style="width:15%; margin : 3%">Cancel</button>
-      </div>
-      <br><br>
-    </form>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div> -->
+<!-- </dS -->
 
-  </mat-tab>
-
-  <mat-tab label="Add multiple users">
-  </mat-tab>
-
-</mat-tab-group>
+<!-- <div class="row"> -->
+<button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
+  class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+<!-- </div> -->
+<br> <br> <br>
