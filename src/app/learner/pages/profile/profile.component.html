@@ -147,7 +147,7 @@
 
   <div class="container-reg200 fourth">
     <div class="profile-details">
-      <form [formGroup]="profileForm">
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
 
         <!-- ////// Info about you//////// -->
         <!-- <div class="row">
@@ -484,9 +484,9 @@
             <div class="form-group width_100">
               <input type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
           'inputs  lap_95'" placeholder="Pincode" formControlName="pincode">
-              <!-- <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
+              <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
                 <div *ngIf="f.pincode.errors.required">Pincode is required</div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -547,21 +547,21 @@
             <div class="row">
               <div class="col-md-4" *ngIf="isTpoEnable">
                 <label ># Reference no.</label>
-                <input  type="tel" onfocus="this.value=''" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                <input  type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no">
               </div>
 
               <div class="col-md-4"  *ngIf="isSelfEnable" >
                 <label># RTGS / NEFT reference no.</label>
-                <input type="text" onfocus="this.value=''" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+                <input type="text" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no1">
               </div>
 
-              <div *ngIf="f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
-                <div *ngIf="f.ref_no1.errors.required">Transaction number is required</div>
-                <div *ngIf="f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number must be 16-22 digits
+              <div *ngIf="isSelfEnable && f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
+                <div *ngIf="isSelfEnable && f.ref_no1.errors.required">Transaction number is required</div>
+                <div *ngIf="isSelfEnable && f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number must be 16-22 digits
                   long</div>
-                <div *ngIf="f.ref_no1.errors.pattern">Transaction number must be only alphanumeric </div>
+                <div *ngIf="isSelfEnable && f.ref_no1.errors.pattern">Transaction number must be only alphanumeric </div>
           </div>
         </div>
       
@@ -754,8 +754,7 @@ if he/she is found to be impersonating or putting inappropriate content into the
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
-            (click)="updateProfile()">Save</button>
+          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="this.profileForm.invalid">Save</button>
         </div>
         <br> <br>
         <!-- <div class="row">

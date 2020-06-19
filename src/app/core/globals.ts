@@ -69,6 +69,7 @@ export const address: any = [
 export const pincode: any = [
     // Validators.required,
     Validators.pattern(/^[1-9][0-9]{5}$/),
+    Validators.required
 ];
 
 export const whitespase: any = [

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   payment_mode: any;
   ref_no1: any;
   constructor(
-    private alert: AlertServiceService, public service: LearnerServicesService,
+    private el: ElementRef, private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
     private router: Router, private gs: GlobalServiceService) {
@@ -169,7 +169,7 @@ export class ProfileComponent implements OnInit {
 
       payment_mode:new FormControl('', myGlobals.req),
       ref_no1: new FormControl('',[Validators.pattern(/^[A-Z a-z 0-9]*$/),
-      Validators.minLength(16), Validators.maxLength(22)]),
+      Validators.minLength(16), Validators.maxLength(22), Validators.required]),
       ref_no: new FormControl(''),
       // is_student_or_professional: new FormControl('', myGlobals.req),
       // gender: new FormControl('',myGlobals.req),
@@ -225,43 +225,51 @@ export class ProfileComponent implements OnInit {
         totalExp.updateValueAndValidity();
       });
 
-    const ref_no1 = this.profileForm.get('ref_no1');
+    // const ref_no1 = this.profileForm.get('ref_no1');
     // const payment_mode =  this.profileForm.get('payment.payment_mode');
     // const ref_no =  this.profileForm.get('payment.ref_no');
     // payment_mode.setValidators(null);
     //     ref_no.setValidators(null);
-    this.profileForm.get('throughTPO').valueChanges
-      .subscribe((val: any) => {
-        if (val === true) {
-          ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22)
-          ]);
-        } else {
-          ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22)
-          ]);
-        }
-        ref_no1.updateValueAndValidity();
-      });
+    // this.profileForm.get('throughTPO').valueChanges
+    //   .subscribe((val: any) => {
+    //     if (val === true) {
+    //       ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
+    //       Validators.minLength(16), Validators.maxLength(22)
+    //       ]);
+    //     } else {
+    //       ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
+    //       Validators.minLength(16), Validators.maxLength(22), Validators.required
+    //       ]);
+    //     }
+    //     ref_no1.updateValueAndValidity();
+    //   });
 
   }
 
 
 
   radioChange(event) {
+    const ref_no1 = this.profileForm.get('ref_no1');
     if (event.value === 'tpo') {
       this.profileForm.get('ref_no1').setValue('');
       this.isTpoEnable = true;
       this.isSelfEnable = false;
+      ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22)
+          ]);
     } else if (event.value === 'self') {
       this.profileForm.get('ref_no').setValue('');
       this.isTpoEnable = false;
       this.isSelfEnable = true;
+      ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
+          Validators.minLength(16), Validators.maxLength(22), Validators.required
+          ]);
 
     } else {
       this.isTpoEnable = false;
       this.isSelfEnable = false;
     }
+    ref_no1.updateValueAndValidity();
   }
 
   getprofileDetails(userid) {
@@ -350,8 +358,9 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     if (this.profileForm.value.payment_mode === 'self') {
-      if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '') {
+      if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '' ) {
         this.alert.openAlert('Please enter the NEFT/RTGS reference number', null);
+        // this.invalidForm();
       }
 
     }
@@ -464,6 +473,17 @@ export class ProfileComponent implements OnInit {
       }
     } else {
       this.alert.openAlert('Please fill all qualification details', null);
+      // this.invalidForm();
+    }
+  }
+
+  invalidForm(){
+    for(const key of Object.keys(this.profileForm.controls)){
+      if(this.profileForm.controls[key].invalid){
+        const invalidControl = this.el.nativeElement.querySelector('[formcontrolname="' + key + '"]');
+        invalidControl.focus();
+        break;
+      }
     }
   }
 
