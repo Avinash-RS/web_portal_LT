@@ -92,7 +92,6 @@ export class BulkEnrollmentComponent implements OnInit {
     } else {
       this.alert.openAlert('Invalid File Type', null);
     }
-    // }
   }
 
   /**
