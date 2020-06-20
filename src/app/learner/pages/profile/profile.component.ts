@@ -1061,4 +1061,4 @@ export class ProfileComponent implements OnInit {
     redirectWindow.location;
  }
   }
-}
+
