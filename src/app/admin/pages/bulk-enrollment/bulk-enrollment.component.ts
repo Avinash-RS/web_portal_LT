@@ -169,7 +169,7 @@ export class BulkEnrollmentComponent implements OnInit {
 }
 
 
-// old ts file
+// old ts file to be removed
 
 
 // import { Observable } from 'rxjs';
