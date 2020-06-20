@@ -317,16 +317,25 @@ export class ProfileComponent implements OnInit {
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
           }
+          
+          var diplomaVal = -1;
+          this.levelValue.forEach((type) => {
+            for(var i =0; i < profileDetails.qualification.length;i++){
+              if(profileDetails.qualification[i].qualification ==  type._id  && type.level_code == 'diploma'){
+                diplomaVal = i;
+              }
+            }
+          })
+          // const ind = profileDetails.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
+          // if (ind !== -1) {
+            if(diplomaVal !== -1) {
 
-          const ind = profileDetails.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
-          if (ind !== -1) {
-
-            if (profileDetails.qualification[ind].institute.startsWith('5')) {
+            if (profileDetails.qualification[diplomaVal].institute.startsWith('5')) {
               this.selectedinstitute = false;
             } else {
               this.selectedinstitute = true;
             }
-            if (profileDetails.qualification[ind].discipline.startsWith('5')) {
+            if (profileDetails.qualification[diplomaVal].discipline.startsWith('5')) {
               this.selecteddiscipline = false;
             } else {
               this.selecteddiscipline = true;
@@ -341,8 +350,28 @@ export class ProfileComponent implements OnInit {
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
-            profileDetails.qualification.forEach(qual =>
-              qualification.push(this.formBuilder.group(qual)));
+              profileDetails.qualification.forEach((qual,index)=>{
+                var unique = '';
+                this.levelValue.forEach(element=>{
+                  if((element._id == qual.qualification && element.level_code == "10") || 
+                  (element._id == qual.qualification && element.level_code == "12"))
+                  {
+                      element.allowed = 'N';
+                      unique = element.level_code;
+                  } else if(element._id == qual.qualification && element.level_code == "diploma"){
+                    unique = element.level_code;
+                  }
+                })
+                if(unique) {
+                  qualification.push(this.formBuilder.group(qual));
+                  qualification.controls[index]['insCheck'] = unique;
+                }
+                else {
+                  qualification.push(this.formBuilder.group(qual))
+                  qualification.controls[index]['insCheck'] = unique;
+  
+                }              
+              });
           }
           if (profileDetails.certificate && profileDetails.certificate.length > 0) {
             profileDetails.certificate.forEach(certif =>
@@ -545,8 +574,18 @@ export class ProfileComponent implements OnInit {
     // } else {
     //   this.alert.openAlert('Please fill all details', null);
     // }
-    if (this.profileForm.value.qualification[i].qualification !== '5e7deddfdba4466d9704b44a') {
-      if (this.profileForm.value.qualification[i].qualification === '5e7dedc1dba4466d9704b3f2') {
+    var tenVal = false;
+    var twelveVal = false;
+    this.levelValue.forEach((type) => {
+      if(type.level_code == '12' && this.profileForm.value.qualification[i].qualification !== type._id ){
+        twelveVal = true;
+      }
+      else if (type.level_code == '10' && this.profileForm.value.qualification[i].qualification == type._id) {
+        tenVal = true;
+      }
+    })
+    if (twelveVal) {
+      if (tenVal) {
         if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
           this.qualification.push(this.createQualItem());
@@ -575,6 +614,12 @@ export class ProfileComponent implements OnInit {
   // }
 
   removeQualification(i) {
+    this.levelValue.forEach(level => {
+      if((level._id == this.qualification.controls[i].value.qualification && level.level_code == '10') ||
+      (level._id == this.qualification.controls[i].value.qualification && level.level_code == '12')){
+        level.allowed = 'Y';
+      }
+    })
     this.qualification.removeAt(i);
   }
 
@@ -641,11 +686,21 @@ export class ProfileComponent implements OnInit {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
+    var boardforTen = false;
+    var boardforTwelve = false;
+    this.levelValue.forEach((type) => {
+      if ((type.level_code == '10' && levelid == type._id )) {
+        boardforTen = true;
+      }
+      else if ((type.level_code == '12' && levelid == type._id )) {
+        boardforTwelve = true;
+      }
+    })
     this.service.get_board_university_details(levelid).subscribe((boards: any) => {
-      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+      if (boardforTen) {
         this.boardValue = boards.data.get_board_university_details.data.board;
         this.uniValue = boards.data.get_board_university_details.data.university;
-      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+      } else if (boardforTwelve) {
         this.boardValue1 = boards.data.get_board_university_details.data.board;
         this.uniValue1 = boards.data.get_board_university_details.data.university;
       } else {
@@ -662,10 +717,20 @@ export class ProfileComponent implements OnInit {
   }
 
   getDiscipline(levelid) {
+    var tenVar = false;
+    var twelveVar = false;
+    this.levelValue.forEach((type) => {
+      if (type.level_code == '10' && levelid == type._id) {  
+        tenVar = true;
+      } 
+      else   if (type.level_code == '12' && levelid == type._id) {
+        twelveVar = true;
+      } 
+    })
     this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
-      if (levelid === '5e7dedc1dba4466d9704b3f2') {
+      if (tenVar) {
         this.disciplines = discipline.data.get_discipline_details?.data;
-      } else if (levelid === '5e7deddfdba4466d9704b44a') {
+      } else if (twelveVar) {
         this.disciplines1 = discipline.data.get_discipline_details?.data;
       } else {
         this.disciplines2 = discipline.data.get_discipline_details?.data;
@@ -893,10 +958,20 @@ export class ProfileComponent implements OnInit {
   // }
   checkFunction() {
     this.levelValue.forEach((type) => {
-      // if (type.level_code === '10' || type.level_code === '12') {
-      //   const selected = this.duplicateValueCheck.includes(type._id);
-      //   if (selected) { type.allowed = 'N'; } else { type.allowed = 'Y'; }
-      // }
+      if (type.level_code === '10' || type.level_code === '12') {
+        const selected = this.duplicateValueCheck.includes(type._id);
+        if (selected) { type.allowed = 'N'; } 
+        else { 
+          let quali = this.profileForm.controls.qualification;
+          var unique = true;
+          quali.value.forEach(element => {
+            if(element.qualification == type._id){
+               unique = false;
+            }
+          });
+          if(unique) type.allowed = 'Y'; 
+        }
+      }
     });
   }
 
@@ -905,17 +980,26 @@ export class ProfileComponent implements OnInit {
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
       // specification.setValidators([Validators.required]);
+      a.insCheck=  level.level_code;
       specification.setValidators([]);
     } else {
+      a.insCheck=  level.level_code;
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
     this.getDiscipline(level._id);
     this.getBoardsUniv(level._id);
   }
+  
 
   checkinstitute(level) {
-    if (level._id === '5e7dee15dba4466d9704b4d2') {
+    var unique = false;
+    this.levelValue.forEach((type) => {
+      if (type.level_code == 'diploma' && level._id == type._id) { 
+        unique = true;
+      }
+    })
+    if (unique) {
       this.selectedinstitute = false;
       this.selecteddiscipline = false;
     }

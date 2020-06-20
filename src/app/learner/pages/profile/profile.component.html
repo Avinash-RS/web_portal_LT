@@ -246,24 +246,24 @@
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select> -->
-              <mat-select [disabled]='cannotEdit' *ngIf="(qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2') ? 'n dis inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' *ngIf="qual.insCheck == '10'"
+                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
                 placeholder="Board/University" formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select>
-              <mat-select [disabled]='cannotEdit' *ngIf="(qual?.value?.qualification === '5e7deddfdba4466d9704b44a')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2') ? 'n dis inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' *ngIf="(qual.insCheck === '12')"
+                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
                 placeholder="Board/University" formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select>
-              <mat-select [disabled]='cannotEdit' *ngIf="(qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2') ? 'n dis inputs' : 'inputs'"
+              <mat-select [disabled]='cannotEdit' *ngIf="(qual.insCheck === 'diploma')"
+                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
                 placeholder="Board/University" formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
@@ -274,22 +274,22 @@
 
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
               <!-- <mat-form-field *ngIf=""> -->
-              <ng-container *ngIf="(selectedinstitute == false) && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
-                (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+              <ng-container *ngIf="(selectedinstitute == false) && (qual.insCheck !== '10') && 
+                (qual.insCheck !== '12')">
                 <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
                   placeholder="Institute" formControlName="institute" name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
                     {{item.institute_name}}
                   </mat-option>
                   <mat-option (onSelectionChange)="selectedinstitute = true"
-                    *ngIf="qual?.value.qualification == '5e7dee15dba4466d9704b4d2'">
+                    *ngIf="qual.insCheck == 'diploma'">
                     Others
                   </mat-option>
                 </mat-select>&nbsp;&nbsp;&nbsp;
               </ng-container>
               <!------------------------Institute textbox for 10th and 12th--------------------->
               <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex"
-                *ngIf="(selectedinstitute == true) || (qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                *ngIf="(selectedinstitute == true) || (qual.insCheck == '10') || (qual.insCheck == '12')">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
                 'inputs width_100'" formControlName="institute">
               </ng-container>&nbsp;&nbsp;&nbsp;
@@ -297,35 +297,35 @@
                 [ngClass]="cannotEdit || (qual?.value?.qualification === '')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" name="discipline">
               </mat-select> -->
-              <mat-select *ngIf="(qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
-                [disabled]="cannotEdit && (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')  ? 'n dis inputs' : 'inputs'"
+              <mat-select *ngIf="(qual.insCheck === '10')"
+                [disabled]="cannotEdit && (qual.insCheck === '10')"
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
-              <mat-select *ngIf="(qual?.value?.qualification === '5e7deddfdba4466d9704b44a')"
-                [disabled]="cannotEdit && (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')  ? 'n dis inputs' : 'inputs'"
+              <mat-select *ngIf="(qual.insCheck === '12')"
+                [disabled]="cannotEdit && (qual.insCheck === '10')"
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines1">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
-              <mat-select *ngIf="!selecteddiscipline && (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')"
-                [disabled]="cannotEdit && (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dedc1dba4466d9704b3f2')  ? 'n dis inputs' : 'inputs'"
+              <mat-select *ngIf="!selecteddiscipline && (qual.insCheck === 'diploma')"
+                [disabled]="cannotEdit && (qual.insCheck === '10')"
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines2">
                   {{item.discipline_name}}
                 </mat-option>
                 <mat-option (onSelectionChange)="selecteddiscipline= true"
-                    *ngIf="qual?.value.qualification == '5e7dee15dba4466d9704b4d2'">
+                    *ngIf="qual.insCheck == 'diploma'">
                     Others
                 </mat-option>
               </mat-select>
-              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex" *ngIf="selecteddiscipline && (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2')">
+              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex" *ngIf="selecteddiscipline && (qual.insCheck === 'diploma')">
                 <input type="text" class="institute"   [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
                 'inputs width_100'" placeholder="Discipline" formControlName="discipline"><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
               </ng-container> 
