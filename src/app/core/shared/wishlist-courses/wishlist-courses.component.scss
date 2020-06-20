@@ -17,3 +17,15 @@
 .mat-card:not([class*=mat-elevation-z]) {
     box-shadow: 0 0 10px rgb(170, 170, 170);
 }
+
+.arrow-drop-down {
+    position: absolute;
+    bottom: 0px;
+    padding-bottom: 10px;
+    background-color: $color-white;
+    left: 0px;
+
+    mat-icon {
+        font-size: 40px;
+    }
+}

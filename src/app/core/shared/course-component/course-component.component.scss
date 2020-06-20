@@ -148,6 +148,9 @@ strong {
     border: none;
 }
 
+#enroll_now:first-letter {
+    text-transform: capitalize !important;
+}
 
 .learner-count {
     vertical-align: bottom;
