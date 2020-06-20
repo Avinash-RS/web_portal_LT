@@ -1057,6 +1057,8 @@ export class ProfileComponent implements OnInit {
   //   console.log(e, this.checkdedTPO, this.profileForm);
   // }
   download(){
-    
+    var redirectWindow = window.open('https://edutechstorage.blob.core.windows.net/container1/images/LnT%20Kaushalya%202020_Brochure.pdf', '_blank');
+    redirectWindow.location;
+ }
   }
 }
