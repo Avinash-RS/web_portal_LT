@@ -13,7 +13,7 @@ spec:
         app: webportaldevkaush
     spec:
       containers:
-        - name: webportal_dev_kaush
+        - name: webportaldevkaush
           image: lxpacrazure.azurecr.io/webportaldevkaush:$tag
           imagePullPolicy: Always
           ports:
