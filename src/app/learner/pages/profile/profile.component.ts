@@ -1056,4 +1056,7 @@ export class ProfileComponent implements OnInit {
   //     });
   //   console.log(e, this.checkdedTPO, this.profileForm);
   // }
+  download(){
+    
+  }
 }
