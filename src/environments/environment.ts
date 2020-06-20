@@ -10,6 +10,7 @@ export const environment = {
   apiUrlImg: 'http://20.44.41.200:3000/',
   createCourseApi: 'http://20.44.41.55:3002/',
   wcaapiurl: 'http://20.44.34.169:9001/',
+  domain : 'Kousalya'
   // apiUrl: 'http://13.71.123.238:3000/',
   // scormUrl:'http://20.44.41.200:8080/',
   // apiUrlImg:'http://20.44.41.200:3001/',

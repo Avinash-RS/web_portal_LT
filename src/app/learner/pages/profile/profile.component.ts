@@ -13,6 +13,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -196,6 +197,7 @@ export class ProfileComponent implements OnInit {
         organization: new FormControl(''),
         total_experience: new FormControl('')
       }),
+      domain : environment.domain
       // payment:this.formBuilder.group({
       //   payment_mode: this.profileForm?.value.payment_mode,
       //   ref_no: this.profileForm?.value.ref_no,
