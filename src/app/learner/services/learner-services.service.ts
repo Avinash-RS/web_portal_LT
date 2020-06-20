@@ -52,6 +52,7 @@ export class LearnerServicesService {
         full_name,
         email,
         term_condition: termsandconditions,
+        domain:environment.domain
       }
     });
   }
@@ -155,8 +156,8 @@ export class LearnerServicesService {
         type,
         subtype,
         mobile_number,
-        email
-
+        email,
+        domain:environment.domain
       }
     });
   }
@@ -279,7 +280,8 @@ export class LearnerServicesService {
       query: update_email_onprofile,
       variables: {
         user_id,
-        email
+        email,
+        domain: environment.domain
       }
     });
   }

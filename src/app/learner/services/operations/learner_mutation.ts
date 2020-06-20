@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean) {
+  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
       full_name: $full_name
       email: $email,
-      term_condition: $term_condition
+      term_condition: $term_condition,
+      domain:$domain
     ) {
       message
       success
@@ -77,12 +78,14 @@ export const user_registration_done = gql`
 `;
 
 export const get_forgot_username_mobile_email = gql`
-  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String) {
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String,
+    $domain:String!) {
     get_forgot_username_mobile_email(
       type:$type,
       subtype:$subtype,
       mobile_number:$mobile_number,
-      email:$email
+      email:$email,
+      domain:$domain
     ) {
       success
       message
@@ -585,7 +588,8 @@ export const update_profile = gql`
     $social_media: [social_media_content], $is_active: Boolean,  $progress: String, $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $addressline1: String,$pincode: Int, $addressline2: String, $neft: String, $iAgree: Boolean, $about_you: String, $certificate: [String], $student: String,
     $professional: professional_content, $payment:payment_, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String,$college_name:String,$college_stream:String,$country_name:String,$state_name:String,$district_name:String){
+    $updated_by_ip: String, $updated_on: String, $updated_by: String,$college_name:String,$college_stream:String,$country_name:String,$state_name:String,$district_name:String,
+    $domain:String!){
     update_profile(
       college_name:$college_name,
       college_stream:$college_stream,
@@ -623,7 +627,8 @@ export const update_profile = gql`
       created_on: $created_on,
       updated_by_ip: $updated_by_ip,
       updated_on: $updated_on,
-      updated_by: $updated_by
+      updated_by: $updated_by,
+      domain:$domain
     ) {
       success
       message
@@ -655,10 +660,11 @@ export const update_verifyotp_mobile_onprofile = gql`
   }
 `;
 export const update_email_onprofile = gql`
-  mutation update_email_onprofile($user_id: String, $email: String){
+  mutation update_email_onprofile($user_id: String, $email: String,$domain:String!){
     update_email_onprofile(
       user_id: $user_id,
-      email: $email
+      email: $email,
+      domain:$domain
     ) {
       message
       success
