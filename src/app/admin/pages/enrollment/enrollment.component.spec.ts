@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentComponent } from './enrollment.component';
-import { MatTableModule } from '@angular/material';
-import { Router } from '@angular/router';
+import { MatTableModule, MatDialogModule, MatDialogRef, MatDialogTitle, MAT_DIALOG_DATA } from '@angular/material';
+// import { Router } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule } from 'apollo-angular';
 import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule , NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialog } from '@angular/material';
+
 // import { AdminServicesService } from '@admin/services/admin-services.service';
 
 
@@ -17,18 +17,30 @@ import { MatDialog } from '@angular/material';
 describe('EnrollmentComponent', () => {
   let component: EnrollmentComponent;
   let fixture: ComponentFixture<EnrollmentComponent>;
-
+  // let testUsers: User[] = [
+  //  { sno : 1, Datereceived: '01-01-2020', Coursename: '' , Enrolments: 1, Usergroup: 'Manipal University'} ];
+  const dialogMock = {
+    closeAll: () => { }
+    };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EnrollmentComponent ],
-      imports: [MatTableModule, ApolloModule, HttpLinkModule, RouterModule, HttpClientModule, Router, MatDialog, NgModule],
+      imports: [MatTableModule, MatDialogModule, ApolloModule, HttpLinkModule, RouterModule, HttpClientModule, RouterModule.forRoot([])],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      // providers: [
-      //   { provide: AdminServicesService }
-      // ]
+      providers: [
+        // { provide: AdminServicesService }
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        { provide: MatDialogRef, useValue:  dialogMock },
+        { provide: MatDialogTitle , useValue: [] },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+    
+      ]
     })
     .compileComponents();
   }));
@@ -42,4 +54,20 @@ describe('EnrollmentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('closedialogbox()', () => {
+    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component.closedialogbox();
+    expect(spy).toHaveBeenCalled(); 
+    expect(component.dialogopened).toBe('false')   
+  });
+
+  it('close()', () => {
+    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component. ngOnDestroy();
+    expect(spy).toHaveBeenCalled();    
+  });
+
+
 });
