@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webportal_dev_kaush
+  name: webportaldevkaush
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webportal_dev_kaush
+      app: webportaldevkaush
   template:
     metadata:
       labels:
-        app: webportal_dev_kaush
+        app: webportaldevkaush
     spec:
       containers:
         - name: webportal_dev_kaush
-          image: lxpacrazure.azurecr.io/webportal_dev_kaush:$tag
+          image: lxpacrazure.azurecr.io/webportaldevkaush:$tag
           imagePullPolicy: Always
           ports:
           - containerPort: 80
