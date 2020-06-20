@@ -1096,8 +1096,8 @@ export class ProfileComponent implements OnInit {
   get social_media() {
     return this.profileForm.get('social_media') as FormArray;
   }
-  uniValue1:any;
-  uniValue3:any;
+  uniValue1: any;
+  uniValue3: any;
   boardValue1: any;
   boardValue3: any;
   disciplines1: any;
@@ -1255,26 +1255,27 @@ export class ProfileComponent implements OnInit {
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
-            profileDetails.qualification.forEach((qual,index)=>{
-              var unique = true;
-              this.levelValue.forEach(element=>{
-                if((element._id == qual.qualification && element.level_code == "10") || (element._id == qual.qualification && element.level_code == "12") )
-                {
+            profileDetails.qualification.forEach((qual, index) => {
+              let unique = true;
+              this.getDiscipline(qual.qualification, index);
+              this.getBoardsUniv(qual.qualification, index);
+              this.levelValue.forEach(element => {
+                if ((element._id === qual.qualification && element.level_code === '10') ||
+                 (element._id === qual.qualification && element.level_code === '12') ) {
                     element.allowed = 'N';
                     unique = false;
                 }
-              })
-              if(unique) {
+              });
+              if (unique) {
                 qualification.push(this.formBuilder.group(qual));
-                qualification.controls[index]['insCheck'] = false;
-              }
-              else {
-                qualification.push(this.formBuilder.group(qual))
-                qualification.controls[index]['insCheck'] = true;
+                qualification.controls[index].insCheck = false;
+              } else {
+                qualification.push(this.formBuilder.group(qual));
+                qualification.controls[index].insCheck = true;
 
-              }              
+              }
             });
-              
+
           }
           if (profileDetails.certificate && profileDetails.certificate.length > 0) {
             profileDetails.certificate.forEach(certif =>
@@ -1371,13 +1372,13 @@ export class ProfileComponent implements OnInit {
   }
 
   addQualification(i) {
-    var unique = false;
+    let unique = false;
     this.levelValue.forEach((type) => {
-      if ((type.level_code == '10' && this.profileForm.value.qualification[i].qualification == type._id )
-       || (type.level_code == '12' && this.profileForm.value.qualification[i].qualification == type._id )) {
+      if ((type.level_code === '10' && this.profileForm.value.qualification[i].qualification === type._id )
+       || (type.level_code === '12' && this.profileForm.value.qualification[i].qualification === type._id )) {
         unique = true;
       }
-    })
+    });
     if (unique) {
       if (this.profileForm.value.qualification[i].board_university !== '' &&
         this.profileForm.value.qualification[i].qualification !== '' &&
@@ -1400,11 +1401,11 @@ export class ProfileComponent implements OnInit {
 
   removeQualification(i) {
     this.levelValue.forEach(level => {
-      if((level._id == this.qualification.controls[i].value.qualification && level.level_code == '10') ||
-      (level._id == this.qualification.controls[i].value.qualification && level.level_code == '12')){
+      if ((level._id === this.qualification.controls[i].value.qualification && level.level_code === '10') ||
+      (level._id === this.qualification.controls[i].value.qualification && level.level_code === '12')) {
         level.allowed = 'Y';
       }
-    })
+    });
     this.qualification.removeAt(i);
   }
 
@@ -1458,15 +1459,15 @@ export class ProfileComponent implements OnInit {
   getAllLevels() {
     this.service.get_qualification_details().subscribe((level: any) => {
       this.levelValue = level.data.get_qualification_details.data;
-      this.levelValue.forEach(element => {
-        element.allowed = 'Y';
-        this.getBoardsUniv(element._id);
-        this.getDiscipline(element._id);
-      });
+      // this.levelValue.forEach((element, index) => {
+      //   element.allowed = 'Y';
+      //   this.getBoardsUniv(element._id, index);
+      //   this.getDiscipline(element._id, index);
+      // });
     });
   }
 
-  getBoardsUniv(levelid) {
+  getBoardsUniv(levelid, ind?) {
     // this.service.get_institute_details().subscribe(institute => {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
@@ -1482,18 +1483,18 @@ export class ProfileComponent implements OnInit {
       //   this.boardValue3 = boards.data.get_board_university_details.data?.board;
       //   this.uniValue3 = boards.data.get_board_university_details.data?.university;
       // }
-      this.boardValue = boards.data.get_board_university_details.data.board;
-      this.uniValue = boards.data.get_board_university_details.data.university;
+      this.boardValue[ind] = boards.data.get_board_university_details.data?.board;
+      this.uniValue[ind] = boards.data.get_board_university_details.data?.university;
     });
   }
 
   getInstitute() {
     this.service.get_institute_details().subscribe((institute: any) => {
-      this.institutes = institute.data.get_institute_details.data;
+      this.institutes = institute.data.get_institute_details?.data;
     });
   }
 
-  getDiscipline(levelid) {
+  getDiscipline(levelid, ind?) {
     this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
       // if (levelid === '5e7dedc1dba4466d9704b3f2') {
       //   this.disciplines = discipline.data.get_discipline_details?.data;
@@ -1502,7 +1503,7 @@ export class ProfileComponent implements OnInit {
       // } else {
       //   this.disciplines2 = discipline.data.get_discipline_details?.data;
       // }
-      this.disciplines = discipline.data.get_discipline_details.data;
+      this.disciplines[ind] = discipline.data.get_discipline_details?.data;
     });
   }
 
@@ -1512,7 +1513,7 @@ export class ProfileComponent implements OnInit {
     //   this.specValue= institute.data['get_institute_details'].data;
     // })
     this.service.get_specification_details().subscribe((spec: any) => {
-      this.specValue = spec.data.get_specification_details.data;
+      this.specValue = spec.data.get_specification_details?.data;
     });
   }
 
@@ -1705,6 +1706,8 @@ export class ProfileComponent implements OnInit {
 
   changed(value, index) {
     let q;
+    this.getBoardsUniv(value, index);
+    this.getDiscipline(value, index);
     q = this.profileForm.controls.qualification;
     q.controls[index].controls.institute.setValue('');
     this.duplicateValueCheck[index] = value;
@@ -1715,16 +1718,15 @@ export class ProfileComponent implements OnInit {
     this.levelValue.forEach((type) => {
       if (type.level_code === '10' || type.level_code === '12') {
         const selected = this.duplicateValueCheck.includes(type._id);
-        if (selected) { type.allowed = 'N'; } 
-        else { 
-          let quali = this.profileForm.controls.qualification;
-          var unique = true;
+        if (selected) { type.allowed = 'N'; } else {
+          const quali = this.profileForm.controls.qualification;
+          let unique = true;
           quali.value.forEach(element => {
-            if(element.qualification == type._id){
+            if (element.qualification === type._id) {
                unique = false;
             }
           });
-          if(unique) type.allowed = 'Y'; 
+          if (unique) { type.allowed = 'Y'; }
         }
       }
     });
@@ -1734,10 +1736,10 @@ export class ProfileComponent implements OnInit {
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
-      a.insCheck=  false;
+      a.insCheck =  false;
       specification.setValidators([Validators.required]);
     } else {
-      a.insCheck=  true;
+      a.insCheck =  true;
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();

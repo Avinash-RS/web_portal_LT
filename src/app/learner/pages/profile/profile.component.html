@@ -256,7 +256,7 @@
               &nbsp;&nbsp;&nbsp;
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Board/University"
                 formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
+                <mat-option [value]="board._id" *ngFor="let board of boardValue[in], let univ of uniValue[in]">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
@@ -284,7 +284,7 @@
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Discipline" formControlName="discipline"
                 name="discipline">
-                <mat-option [value]="item._id" *ngFor="let item of disciplines">
+                <mat-option [value]="item._id" *ngFor="let item of disciplines[in]">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
