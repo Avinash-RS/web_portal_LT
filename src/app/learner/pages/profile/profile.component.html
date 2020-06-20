@@ -552,7 +552,7 @@
               </div>
 
               <div class="col-md-4"  *ngIf="isSelfEnable" >
-                <label># RTGS / NEFT reference no.</label>
+                <label># RTGS / NEFT reference no. <span class="mand p-b-10px"> *</span> </label>
                 <input type="text" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
                 formControlName="ref_no1">
               </div>
@@ -649,16 +649,18 @@ if he/she is found to be impersonating or putting inappropriate content into the
 
         <!-- ////////////Certificate row////////////// -->
         <label class="p-b-10px" class="f_size_19">Certificate</label><br>
-        <div formArrayName="certificate" class="row p-b-10px"
+        <button mat-flat-button [disabled]="true" class="submit f_size_17 color_white f_wt_400">Download</button><br><br>
+        <span>* Download after course completion.</span>
+        <!-- <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-xl-2 col-xl-2 col-lg-3 col-md-4 col-sm-4 col-8 display_flex">
             <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100'"
               placeholder="Certificate Link" formControlName="{{i}}">
-            <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
+            <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
               class="dIcon ">delete_outline</mat-icon>
             <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
               profileForm.value.certificate.length < 15" class="addIcon ">add
-            </mat-icon> -->
+            </mat-icon>
           </div>
           <div class="col-md-1 col-sm-4 col-4 display_flex">
             <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
@@ -667,7 +669,7 @@ if he/she is found to be impersonating or putting inappropriate content into the
               profileForm.value.certificate.length < 15" class="addIcon ">add
             </mat-icon>
           </div>
-        </div>
+        </div> -->
 
 
         <!-- for 10 june -->

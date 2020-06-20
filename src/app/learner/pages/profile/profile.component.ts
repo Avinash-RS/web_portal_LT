@@ -978,6 +978,10 @@ export class ProfileComponent implements OnInit {
   }
 
   checkSpec(a, spec, quali, level) {
+    this.profileForm.get('qualification').get(String(spec)).get('percentage').setValue('');
+    this.profileForm.get('qualification').get(String(spec)).get('institute').setValue('');
+    this.profileForm.get('qualification').get(String(spec)).get('board_university').setValue('');
+    this.profileForm.get('qualification').get(String(spec)).get('year_of_passing').setValue('');
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
