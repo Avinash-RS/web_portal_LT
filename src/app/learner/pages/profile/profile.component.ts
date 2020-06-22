@@ -1268,11 +1268,14 @@ export class ProfileComponent implements OnInit {
               });
               if (unique) {
                 qualification.push(this.formBuilder.group(qual));
-                qualification.controls[index].insCheck = false;
+                let q;
+                q = qualification.controls[index];
+                q.insCheck = false;
               } else {
                 qualification.push(this.formBuilder.group(qual));
-                qualification.controls[index].insCheck = true;
-
+                let q;
+                q = qualification.controls[index];
+                q.insCheck = true;
               }
             });
 

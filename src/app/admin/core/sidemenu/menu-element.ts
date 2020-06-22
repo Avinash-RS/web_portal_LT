@@ -130,6 +130,21 @@ export const menus = [
         ]
     },
     {
+        name: 'Jobs',
+        icon: 'work',
+        link: false,
+        open: false,
+        sub: [
+            {
+                name: 'Bulk Enrolment',
+                icon: 'border_color',
+                link: 'bulkenrolment',
+                open: false,
+                chip: false,
+            },
+        ]
+    },
+    {
         name: 'Course Management',
         icon: 'library_books',
         link: 'Wca',
