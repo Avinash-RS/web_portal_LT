@@ -62,24 +62,23 @@ export class ModuleRepositoryComponent implements OnInit {
       data.Result.forEach((val) => {
         val.createdon = val.createdon ? new Date(val.createdon) : '';
         val.isSelect = false;
-        if (d == 'update') {
+        if (d === 'update') {
           if (this.modDetails.length > 0) {
             this.modDetails.forEach((mdata, i) => {
-              if (mdata == val.moduleid) {
-                if (val.modulestatus == 'true') {
+              if (mdata === val.moduleid) {
+                if (val.modulestatus === 'true') {
                   val.isSelect = true;
-                }
-                else {
+                } else {
                   this.modDetails.splice(i, 1);
                 }
               }
-            })
+            });
 
           }
-        }
-        else {
+        } else {
           // tslint:disable-next-line:no-shadowed-variable
           this.modDetails = this.routeData.moduleList;
+          // tslint:disable-next-line: no-shadowed-variable
           this.routeData.moduleList ? this.routeData.moduleList.forEach((data: any) => {
             if (val.moduleid === data) {
               val.isSelect = true;
@@ -97,7 +96,7 @@ export class ModuleRepositoryComponent implements OnInit {
   }
 
   onModuleSelection(module, e) {
-    if (module.modulestatus == 'false') {
+    if (module.modulestatus === 'false') {
       return false;
     }
     const modDetails = {
@@ -109,11 +108,11 @@ export class ModuleRepositoryComponent implements OnInit {
     let n = 0;
 
     this.modDetails.filter((id, idx) => {
-      if (id == module.moduleid) {
+      if (id === module.moduleid) {
         isValid = false;
-        n = idx
+        n = idx;
       }
-    })
+    });
 
 
     if (e && isValid) {
@@ -124,23 +123,23 @@ export class ModuleRepositoryComponent implements OnInit {
         }
       });
       this.savedModules.forEach((val) => {
-        if (val.moduleid == module.moduleid) {
+        if (val.moduleid === module.moduleid) {
           val.isSelect = true;
         }
-      })
-    }
-    else if (!e && !isValid) {
+      });
+    } else if (!e && !isValid) {
       this.savedModules.forEach((val) => {
-        if (val.moduleid == module.moduleid) {
+        if (val.moduleid === module.moduleid) {
           val.isSelect = false;
         }
-      })
+      });
       this.modDetails.splice(n, 1);
     }
   }
 
   onModuleSubmit() {
 
+    // tslint:disable-next-line: ban-types
     this.alertService.openConfirmAlert('Please confirm to proceed', '').then((data: Boolean) => {
       if (data) {
         this.router.navigate(['/Admin/auth/Wca/addmodule'],

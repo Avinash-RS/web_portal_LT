@@ -12,7 +12,8 @@
           <div class="f_wt_500 f_size_16 float_left m-left-5 m-r-20 course_name">{{course.course_name}}</div>
         </div>
         <div class="row m-t-10 m-left-5  course_description ">
-          {{course.short_description}}
+          <!-- {{course.short_description}} -->
+          {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
         </div>
         <div class="row m-left-5  bottom-left learner-count" *ngIf="showCount">
           <span class="material-icons" style="vertical-align: middle;">
@@ -52,7 +53,7 @@
 
           <button id="enroll_now" mat-stroked-button class="pointer"
             *ngIf="course.enrollment_status == null && btnType == 'Enroll Now'" (click)="enrollCourse(btnType)">
-            Enroll
+            Enrol
           </button>
 
           <button id="enroll_now" mat-stroked-button
@@ -66,7 +67,7 @@
           </button>
           <button id="enroll_now" mat-stroked-button
             *ngIf=" btnType == 'Enroll Now' && course.enrollment_status == 'approved'"
-            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+            disabled="{{course.enrollment_status == 'approved'}}">Enroled
           </button>
 
         </div>

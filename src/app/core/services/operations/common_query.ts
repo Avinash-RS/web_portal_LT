@@ -10,11 +10,13 @@ export const logout = gql`
   }`;
 
 export const viewcourse = gql`
-  query viewcourse($course_id: String){
-    viewcourse(course_id: $course_id) {
+  query viewcourse($course_id: String,$user_id: String){
+    viewcourse(course_id: $course_id,user_id:$user_id) {
       success
       error_msg
       message{
+        totalLearners
+        course_enrollment_status
         course_id
         course_description
         course_long_description
@@ -532,6 +534,7 @@ export const get_all_course_by_usergroup = gql`
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
     error_msg
+    total_count
     message{
     course_id
     course_description

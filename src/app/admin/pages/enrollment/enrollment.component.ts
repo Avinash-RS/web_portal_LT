@@ -108,7 +108,6 @@ export class EnrollmentComponent implements OnInit {
     this.adminservice.getenrolledcoursesgroup(pagenumber).subscribe((result: any) => {
       this.loading = false;
       const array = [];
-      console.log(result?.data?.get_all_enrolledcourses?.message);
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
              element.group_detail[0].totalCount = element.totalCount;
              const date = moment(element.request_date);
@@ -231,9 +230,10 @@ export class EnrollmentComponent implements OnInit {
             this.radiobuttonchange();
           }
           const c = array.length > 1 ?  array.length + ' courses' : array.length + ' course';
+          const learner = array.length > 1 ?  array.length + ' learners' : array.length + ' learner';
           Swal.fire({
             title:   c + '&nbsp;<div> approved successfully</div> <br> ',
-            text: 'Confirmation email sent to learner ',
+            text: 'Confirmation email sent to ' + learner ,
           });
         }
       });

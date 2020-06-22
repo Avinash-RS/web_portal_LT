@@ -227,7 +227,6 @@ flattree(items) {
       this.editstatus = false;
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
-      console.log(node);
       this.toggle = !node.is_active;
       this.getAllUser(0);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any) => {
@@ -336,8 +335,6 @@ flattree(items) {
   selectedtoggle(event) {
     // this.toggleevent = event.checked;
     // this.currentpath.is_active = event.checked;
-    console.log(event);
-    console.log(this.toggle);
     const msg = event === false ? 'Group has been Activated' : 'Group has been  Deactivated';
     this.toastr.success(msg);
 

@@ -11,7 +11,7 @@ import { Form } from '@angular/forms';
 
 export interface PeriodicElement {
   user_id: string;
-  name: number;
+  username: number;
   email: string;
   mobile: string;
 }
@@ -26,7 +26,7 @@ export class UserManagementComponent implements OnInit {
   ELEMENT_DATA: PeriodicElement[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
+  displayedColumns: string[] = ['select', 'user_id', 'username', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   resultsLength: number = null;

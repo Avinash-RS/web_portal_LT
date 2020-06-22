@@ -43,9 +43,10 @@ export class ReportsComponent implements OnInit {
             det = JSON.parse(localStorage.getItem('Reports'));
             this.reportDetails = det;
             this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
+            this.dataSource.sort = this.sort;
           }
-          console.log(this.reportDetails);
           this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
+          this.dataSource.sort = this.sort;
         }
       });
   }

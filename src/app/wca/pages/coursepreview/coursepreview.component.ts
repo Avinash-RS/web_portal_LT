@@ -63,7 +63,7 @@ export class CoursepreviewComponent implements OnInit {
     }
 
     this.loader.show();
-    this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid).subscribe((viewCourse: any) => {
+    this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid,"admin").subscribe((viewCourse: any) => {
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
@@ -179,6 +179,7 @@ export class CoursepreviewComponent implements OnInit {
 
   
   closeNav() {
+    this.service.pauseVideo$.next("off");
     document.getElementById("myNav").style.height = "0%";
   }
 }

@@ -71,6 +71,7 @@ export class CoursedetailsComponent implements OnInit {
   isCollapsed: any;
   showStatus: any;
   topicData : any = []
+  courseTime: any;
   
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
@@ -78,8 +79,10 @@ export class CoursedetailsComponent implements OnInit {
       
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      
-    this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
+      if (this.gs.checkLogout()) {
+        this.userDetail = this.gs.checkLogout()
+
+    this.service.viewCurseByID(detail && detail.id || '1', this.userDetail.user_id).subscribe((viewCourse: any) => {
       // this.loadingCourse = true;
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
@@ -108,8 +111,11 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.loadingCourse = false;
     });
+    console.log( this.userDetail,' this.userDetail')
+  }
     this.Lservice.getModuleData(detail.id).subscribe(data => {
       this.content = data.data['getmoduleData']['data'][0];
+      this.courseTime = this.content.coursetime;
       this.modulength = this.content['coursedetails'].length;
     })
   }
@@ -130,6 +136,7 @@ export class CoursedetailsComponent implements OnInit {
 
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
+      console.log( this.userDetail,' this.userDetail')
     }
   }
 

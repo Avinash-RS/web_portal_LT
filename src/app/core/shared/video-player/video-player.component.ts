@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
+import { CommonServicesService } from '@core/services/common-services.service';
 export interface playback {
   value: string;
   viewValue: string;
@@ -27,9 +28,14 @@ export class VideoPlayerComponent {
     { value: '2.0', viewValue: '2x' }
   ];
 
-  constructor() {
+  constructor(public service: CommonServicesService) {
   }
   ngOnInit() {
+    this.service.pauseVideo.subscribe((data: any) => {
+      if(data == 'off'){
+        this.api.pause();
+      }
+    });
     console.log('this.url.preview_video',this.url)
     this.sources = [
       {

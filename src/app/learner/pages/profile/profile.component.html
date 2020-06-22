@@ -89,23 +89,24 @@
             </span>
 
             <span class="f_size_16">
-              | &nbsp;&nbsp;Student
-              <!-- {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
+              | &nbsp;&nbsp;
+              <!-- Student -->
+              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
               userData.user_profile[0]?.is_student_or_professional =='student' ? 
-            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}} -->
+            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
             </span>
 
           </div>
 
-          <!-- <div class="width_100 bb center center_align p-b-10"
-            *ngIf="userData?.language_detail && userData?.language_detail.length > 0"> -->
-          <div class="width_100 bb center center_align p-b-10">
-            <!-- <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
+          <div class="width_100 bb center center_align p-b-10"
+            *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
+            <!-- <div class="width_100 bb center center_align p-b-10"> -->
+            <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
               {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
-            </span> -->
-            <span class="f_size_15 color_label f_wt_500">
-              English
             </span>
+            <!-- <span class="f_size_15 color_label f_wt_500">
+              English
+            </span> -->
           </div>
 
           <!-- <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
@@ -157,7 +158,7 @@
 
       <form [formGroup]="profileForm">
         <!-- ////// Info about you//////// -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="form-group width_100">
             <label class="f_size_19">About me </label><label class="f_size_15">&nbsp; (1000 characters)</label>
             <textarea rows="5" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100' :
@@ -171,12 +172,12 @@
                 {{f.about_you.errors.maxlength.requiredLength}} maximum of characters</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- Info End-->
 
-        <br>
+        <!-- <br>
         <hr class="p-b-10px">
-        <br *ngIf="!cannotEdit">
+        <br *ngIf="!cannotEdit"> -->
 
         <!-- //////Gender part//////// -->
         <div class="row" *ngIf="!cannotEdit">
@@ -244,7 +245,7 @@
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
 
 
-              <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Level" formControlName="qualification"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level" formControlName="qualification"
                 name="qualification" (selectionChange)="changed($event.value,in)">
                 <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
                   (click)="checkSpec(qual,in,profileForm.qualification,lv)">
@@ -253,21 +254,21 @@
               </mat-select>
 
               &nbsp;&nbsp;&nbsp;
-              <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Board/University"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Board/University"
                 formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
+                <mat-option [value]="board._id" *ngFor="let board of boardValue[in], let univ of uniValue[in]">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select>
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
             </div>
-
+           
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
               <!-- <mat-form-field *ngIf=""> -->
               <ng-container
-                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Institute" formControlName="institute"
+                *ngIf="!qual.insCheck">
+                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Institute" formControlName="institute"
                   name="institute">
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
                     {{item.institute_name}}
@@ -276,14 +277,14 @@
               </ng-container>
               <!------------------------Institute textbox for 10th and 12th--------------------->
               <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
-                *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                *ngIf="qual.insCheck">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
      'inputs color_blue background_trans width_80'" formControlName="institute">
               </ng-container>
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-              <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Discipline" formControlName="discipline"
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Discipline" formControlName="discipline"
                 name="discipline">
-                <mat-option [value]="item._id" *ngFor="let item of disciplines">
+                <mat-option [value]="item._id" *ngFor="let item of disciplines[in]">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
@@ -293,8 +294,8 @@
             <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
             <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
               <ng-container
-                *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
-                <mat-select [disabled]='cannotEdit' class="inputs" placeholder="Specification"
+                *ngIf="!qual.insCheck">
+                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Specification"
                   formControlName="specification" name="specification">
                   <mat-option [value]="item._id" *ngFor="let item of specValue">
                     {{item.specification_name}}
@@ -434,11 +435,11 @@
           <div class="row p-b-10px" formGroupName="professional">
             <div class="col-md-2 col-sm-4 col-8">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
-           'inputs    width_80'"
+           'inputs    width_80'" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
                 [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
                 placeholder="Total Experience" formControlName="total_experience">
               <div class="mand" *ngIf="f.professional.controls.total_experience.touched && 
-             f.professional.controls.total_experience.value >= 70">Total Experience should not be greater than 70
+             f.professional.controls.total_experience.value > 70">Total Experience should not be greater than 70
               </div>
               <div class="mand"
                 *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
@@ -590,7 +591,7 @@
             <div class="form-group">
               <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control border-right-0"
+                class="form-control"
                 [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
               <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
                 aria-hidden="true"></i>
@@ -608,7 +609,7 @@
             <div class="form-group">
               <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control border-right-0"
+                class="form-control "
                 [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)" />
               <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
                 aria-hidden="true"></i>
@@ -641,7 +642,7 @@
             <div class="form-group">
               <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control border-right-0"
+                class="form-control"
                 [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
               <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
                 (click)="showConNew = !showConNew" aria-hidden="true"></i>

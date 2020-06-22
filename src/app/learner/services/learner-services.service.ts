@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-
 import {
   login, get_course_by_user, get_country_details, get_qualification_details, get_trending_course,
   get_board_university_details, get_discipline_details, get_specification_details, get_popular_course,
@@ -24,6 +23,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +53,7 @@ export class LearnerServicesService {
         full_name,
         email,
         term_condition: termsandconditions,
+        domain:environment.domain
       }
     });
   }
@@ -156,7 +157,8 @@ export class LearnerServicesService {
         type,
         subtype,
         mobile_number,
-        email
+        email,
+        domain:environment.domain
 
       }
     });
@@ -183,9 +185,12 @@ export class LearnerServicesService {
       query: get_qualification_details,
     });
   }
-  get_board_university_details() {
+  get_board_university_details(id) {
     return this.Apollo.query({
       query: get_board_university_details,
+      variables: {
+    _id: id
+      }
     });
   }
 
@@ -209,9 +214,12 @@ export class LearnerServicesService {
       }
     });
   }
-  get_discipline_details() {
+  get_discipline_details(id) {
     return this.Apollo.query({
       query: get_discipline_details,
+      variables: {
+       _id : id
+      }
     });
   }
   get_specification_details() {
@@ -274,7 +282,8 @@ export class LearnerServicesService {
       query: update_email_onprofile,
       variables: {
         user_id,
-        email
+        email,
+        domain: environment.domain
       }
     });
   }
@@ -309,6 +318,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: update_profile,
       variables: userData
+      
     });
   }
 
