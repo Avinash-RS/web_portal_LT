@@ -526,7 +526,26 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
+  yearCheck(index){
+    var tenYear;
+    var twelveYear;
+    this.levelValue.forEach((type) => {
+      this.profileForm.value.qualification.forEach((element,index) => {
+        if(type.level_code == '10' && element.qualification == type._id ){
+          tenYear = this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
+         }
+         else if(type.level_code == '12'  && element.qualification == type._id){
+          twelveYear =  this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
+        }
+      })
+    })
+    if(tenYear >= twelveYear){
+      this.alert.openAlert('10th year of passing should not be greater than 12th', null);
+      this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
+    }
+  }
   yearOfpassing(index) {
+    this.yearCheck(index);
     this.startYear = 2020 - 60;
     this.endYear = 2020 + 3;
     // this.startYear = moment().year() - 60;
