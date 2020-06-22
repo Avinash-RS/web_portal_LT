@@ -121,18 +121,26 @@ export const menus = [
                 chip: false,
             },
             {
-                name: 'Course Enrolment 1',
-                icon: 'border_color',
-                link: 'courseEnrollment',
-                open: false,
-                chip: false,
-            },
-            {
                 name: 'Reports',
                 link: 'reports',
                 icon: 'notes',
                 chip: false,
                 open: true,
+            },
+        ]
+    },
+    {
+        name: 'Jobs',
+        icon: 'work',
+        link: false,
+        open: false,
+        sub: [
+            {
+                name: 'Bulk Enrolment',
+                icon: 'border_color',
+                link: 'bulkenrolment',
+                open: false,
+                chip: false,
             },
         ]
     },

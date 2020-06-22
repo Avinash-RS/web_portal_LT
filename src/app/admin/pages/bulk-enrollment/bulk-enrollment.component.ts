@@ -19,9 +19,12 @@ export class BulkEnrollmentComponent implements OnInit {
 
   exceljson: any; // excel json is assigned
   selectedfile = null; // excel file is assigned
+  adminDetails: any;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService, private alert: AlertServiceService, private service: AdminServicesService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private gs: GlobalServiceService, private alert: AlertServiceService, private service: AdminServicesService) {
+    this.adminDetails = this.gs.checkLogout();
+   }
 
 
   ngOnInit() {
@@ -31,8 +34,8 @@ export class BulkEnrollmentComponent implements OnInit {
    */
   downloadsampleexceltemplate() {
     const json: any = [{
-      User_Name: null,
-      Course_Id: null
+      course_id: null,
+      username: null
     }];
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
@@ -57,9 +60,9 @@ export class BulkEnrollmentComponent implements OnInit {
    * Bulk user uploads
    * @param event :file
    */
-  bulkuserupload(event) {
+  bulkenrollment(event) {
     this.selectedfile = '';
-    const excelheaders = ['User_Name', 'Course_Id'];
+    const excelheaders = ['course_id', 'username'];
     const ext = event[0].name.split('.').pop();
     if (event.length === 1 && ext === 'csv' || ext === 'xlsx' || ext === 'xls') {
       const File = event[0];
@@ -98,36 +101,64 @@ export class BulkEnrollmentComponent implements OnInit {
    * Save excel
    * @param group :json
    */
+  // saveexcel(group) {
+  //   if (this.selectedfile) {
+  //     const fb = new FormData();
+  //     fb.append('csv', this.selectedfile, this.selectedfile.name);
+  //     this.service.bulkuserupload(fb).subscribe((result: any) => {
+  //       if (result.success === true) {
+  //         this.alert.openAlert('Success !', 'Upload in Progress ...');
+  //         this.selectedfile = '';
+  //       } else {
+  //         this.selectedfile = '';
+  //         this.alert.openAlert(result.message, null);
+  //       }
+  //     });
+  //   } else {
+  //     this.alert.openAlert('Please Select Group', null);
+  //   }
+  // }
   saveexcel(group) {
-    if (this.selectedfile) {
-      const fb = new FormData();
-      fb.append('csv', this.selectedfile, this.selectedfile.name);
-      this.service.bulkuserupload(fb).subscribe((result: any) => {
-        if (result.success === true) {
-          this.alert.openAlert('Success !', 'Upload in Progress ...');
-          this.selectedfile = '';
-        } else {
-          this.selectedfile = '';
-          this.alert.openAlert(result.message, null);
-        }
+    const exceldata: any = [];
+    this.exceljson.forEach(element => {
+      exceldata.push({
+        course_id: element.course_id, username: element.username, admin: this.adminDetails._id,
       });
-    } else {
-      this.alert.openAlert('Please Select Group', null);
-    }
+    });
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exceldata);
+    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
+    const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const data: Blob = new Blob([excelBuffer], {
+      type: EXCEL_TYPE,
+    });
+    const fb = new FormData();
+    fb.append('request_file', data, this.selectedfile.name);
+    this.service.bulkenrollment(fb).subscribe((result: any) => {
+      if (result.success === true) {
+        this.alert.openAlert('Success !', 'Upload in Progress ...');
+        this.selectedfile = '';
+        // this.group = '';
+      } else {
+        this.selectedfile = '';
+        this.alert.openAlert(result.message, null);
+      }
+    });
+    
   }
 
   /**
    * on file drop handler
    */
   onFileDropped($event) {
-    this.bulkuserupload($event);
+    this.bulkenrollment($event);
   }
 
   /**
    * handle file from browsing
    */
   fileBrowseHandler(files) {
-    this.bulkuserupload(files);
+    this.bulkenrollment(files);
   }
 
   /**

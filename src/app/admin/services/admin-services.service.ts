@@ -479,6 +479,15 @@ export class AdminServicesService {
   }
 
   // End of enrollment
+  // Start Of Bulk Enrollment
+  bulkenrollment(fb) {
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+    };
+    return this.http.post<any[]>(environment.apiUrlImg + 'bulkenrollment', fb, httpOptions);
+  }
+
+  // End Of Bulk Enrollment
 
   // Dashboard
   // getting admin dashboard overview data

@@ -34,7 +34,7 @@ export const appRoutes: Routes = [{
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, canActivate: [AuthGuard] },
         { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' },  canActivate: [AuthGuard]},
         { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, canActivate: [AuthGuard] },
-        { path: 'courseEnrollment', component: BulkEnrollmentComponent, data: { title: 'Enrollment' }, canActivate: [AuthGuard] },
+        { path: 'bulkenrolment', component: BulkEnrollmentComponent, data: { title: 'Bulk Enrolment' }, canActivate: [AuthGuard] },
         { path: 'auditlog', component: AuditlogComponent, data: { title: 'Audit Log' }, canActivate: [AuthGuard] },
         {
             path: 'Wca',
