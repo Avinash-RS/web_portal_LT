@@ -152,6 +152,11 @@ export class ProfileComponent implements OnInit {
   isTpoEnable: boolean;
 
   ngOnInit() {
+    this.activeroute.queryParams.subscribe(params => {
+      if(params["status"]){
+       Swal.fire('Email updated successfully')
+      }  
+    })
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
     } else {

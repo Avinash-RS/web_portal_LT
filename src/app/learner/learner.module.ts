@@ -41,6 +41,7 @@ import { PipeModule } from '../pipes/pipe.module';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
@@ -55,7 +56,8 @@ const routes: Routes = [
 
   // { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
   { path: 'Thankyou', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Thank you' } },
-
+ 
+  { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
   { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
@@ -87,6 +89,7 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
+    ForbiddenComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
