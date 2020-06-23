@@ -7,7 +7,8 @@
 </nav>
 
 <h1 style="padding-left: 25px;"> Add user</h1>
-<mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)">
+<!-- <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event,bulkuserform)"> -->
+<mat-tab-group mat-align-tabs="center">
   <mat-tab label="Add a user">
     <div class="container">
       <div class="row">
@@ -74,16 +75,16 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle" style="text-align:center;"
+      <div class="col-md-6 center col-sm-11 col-11 filecontainer inheritcursor b_middle"
         *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
         <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
-          (change)="fileBrowseHandler($event.target.files)" />
+          (change)="fileBrowseHandler($event.target.files)" class="inheritcursor" />
         <img src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64">
 
-        <h3>Drag and drop file here</h3>
-        <h4>( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
-        <h3>or</h3>
-        <button for="fileDropRef" class="browse pointer">Browse for file</button>
+        <h3 class="inheritcursor">Drag and drop file here</h3>
+        <h4 class="inheritcursor">( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
+        <h3 class="inheritcursor">or</h3>
+        <button for="fileDropRef" class="browse inheritcursor">Browse for file</button>
       </div>
     </div>
 
