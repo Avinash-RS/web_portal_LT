@@ -11,7 +11,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+// import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
 // local
@@ -56,7 +56,6 @@ const routes: Routes = [
 
   // { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
   { path: 'Thankyou', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Thank you' } },
- 
   { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
   { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
@@ -97,7 +96,7 @@ const routes: Routes = [
   imports: [
     CoreModule,
     PipeModule,
-    Ng4LoadingSpinnerModule.forRoot(),
+    // Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
     BarRatingModule,

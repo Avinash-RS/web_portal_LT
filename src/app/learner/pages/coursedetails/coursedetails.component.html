@@ -1,267 +1,155 @@
 <app-header></app-header>
-<nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
+<div class="space"></div>
+<button mat-button class="backbtn">
+    <mat-icon [routerLink]="['/Learner/home']" class="backIcon">keyboard_backspace</mat-icon>
+    &nbsp; Back to my course
+</button>
 
-        <li class="breadcrumb-item active" aria-current="page">{{course?.course_name | titlecase }}</li>
-    </ol>
-</nav>
-
-<div class="row" style="padding: 12px;">
-    <!-- right side -->
-    <div class="col-4">
-        <div class="row">
-            <div class="col-9">
-                <h1 class="name">{{course?.course_name | titlecase }}</h1>  
-            </div>
-            <div class="col-3">
-                <div style="margin-top: 7px;">
-                    <span  (click)="selectWishlist(course)">
-                        <em class="fa fa-heart" *ngIf="course?.wishlisted == false"
-                            style="-webkit-text-stroke-width: 2px;"></em>
-                        <em class="fa fa-heart" *ngIf="course?.wishlisted == true"
-                            style="color: #db3137 !important;"></em>
-                        Wishlist
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <span class="short-desc">{{course?.short_description}}</span>
-        </div>
-        <div class="row">
-            <div class="col-12 display_flex">
-                <bar-rating [readOnly]="true" [rate]="course?.rating" [max]="5" class=""></bar-rating>
-                <strong class="f_size_23">{{course?.rating || '1.0'}}  (500 Rating)</strong> 
-         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 margin-5">
-            <button class="enrollbtn" (click)="enrollCourse()">ENROLL NOW</button>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-3 margin-15 display_flex">
-            <img class="parterImg" alt="true"  *ngFor="let coursePartner of course?.coursepartner_details" [src]=" coursePartner.image ?  coursePartner.image : '../../../../assets/learner/8.jpg'">
-        </div>
-    </div>
-
-    <div class="row margin-15 ">
-        <div class="col-12">
-            <div class="stuEnrolled">213000 student enrolled | Last updated {{ course?.updated_at | date }}</div>
-        </div>
-    </div>
-
-    <div class="row margin-15">
-        <div class="col-8 Outine">
-            Course outline
-        </div>
-        <div class="col-4">
-            <i class="fa fa-clock-o" aria-hidden="true"></i> 40 mins , 40 sec
-        </div>
-    </div>
-    <div class="row margin-5">
-        <div class="col-12">
-            <section class="accordion" *ngFor="let res of content?.coursedetails">
-              <input type="checkbox" name="collapse" [id]="res?.modulename">
-              <h2 class="handle">
-                <label [for]="res?.modulename"><span>{{res?.modulename}}</span></label>
-              </h2>
-              <div class="content" >
-                <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
-                  <div class="col-8"><br>
-                    <ol class="submod">
-                      <li><span>{{i+1}} : {{mod?.topicname}}</span></li>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            </section>
-        </div>
+<div class="row" style="padding-left: 1.3%;">
+    <div class="col-12">
+        <h1 class="name">{{course?.course_name | titlecase }}</h1>
     </div>
 </div>
-     <!-- right end side -->
 
-       <!-- Left side -->
-    <div class="col-8 videoplayer">
-        <!-- <span *ngIf="course"> -->
-        <app-video-player  *ngIf="course" [url]="course"></app-video-player>
-    <!-- </span> -->
-
-        <div class="row  margin-15">
-            <div class="col-6">
-                <div class="sm-box">
-                    <span>Course features</span>
-                </div>
-                <div class="row ">
-                    <div class="col-4 display_flex">
-                        <img class="modeIcon" src="../../../../assets/learner/certificate.svg" alt="">
-                        <span class="modeName">Certificate</span>
-                    </div>
-                    <div class="col-4 display_flex">
-                        <img class="modeIcon" src="../../../../assets/learner/self-paced.svg" alt="">
-                        <span class="modeName">Self Paced</span>
-                    </div>
-                    <div class="col-4 display_flex">
-                        <img class="modeIcon" src="../../../../assets/learner/languages-known.svg" alt="">
-                        <span class="modeName">English</span>
-                    </div>
-                </div>
-
-                <div class="row margin-10">
-                    <div class="col-8 display_flex">
-                        <img class="modeIcon" src="../../../../assets/learner/application-based-training.svg" alt="">
-                        <span class="modeName">Application Based Learning</span>
-                    </div>
-                    <div class="col-4 display_flex">
-                        <img class="modeIcon" src="../../../../assets/learner/qualification.svg" alt="">
-                        <span class="modeName">Qualification</span>
-                    </div>
-               
-                </div>
-            </div>
-            <!-- <div class="spinner-container" *ngIf="loadingCourse">
-                <mat-spinner diameter="40"></mat-spinner>
-              </div> -->
-            <div class="col-6">
-                <div class="sm-box">
-                    <span>This course includes</span>
-                    <div class="row margin-10">
-                        <div class="col-1 display_flex">
-                            <img class="sm-icon" src="../../../../assets/learner/on-demand-video.svg" alt="">
-                        </div>
-                        <div class="col-10">
-                            <span class="tit">20 hrs on demand video</span>
+<mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
+  <mat-drawer #drawer  class="drawer"  mode="side"  opened="true">
+    <mat-toolbar class="header">
+                <div class="row margin-15">
+                    <div class="col-6 Outine">
+                        Course outline
+                    </div> |
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2">
+                                <mat-icon  class="alarmIcon">alarm</mat-icon>
+                            </div>
+                            <div class="col-4">
+                                <span style="font-size: 12px; display: flex;margin-left: -12px;">{{courseTime}} 40hr , 40 sec</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="row margin-10">
-                        <div class="col-1 display_flex">
-                            <img class="sm-icon" src="../../../../assets/learner/asset_aownload.svg" alt="">
-                        </div>
-                        <div class="col-10">
-                            <span class="tit">136 downloadable resources</span>
-                        </div>
-                    </div>
-                    <div class="row margin-10">
-                        <div class="col-1 display_flex">
-                            <img class="sm-icon" src="../../../../assets/learner/skill-level.svg" alt="">
-                        </div>
-                        <div class="col-10">
-                            <span class="tit">Intermediate level in analytics</span>
-                        </div>
-                    </div>
-                    <div class="row margin-10">
-                        <div class="col-1 display_flex">
-                            <img class="sm-icon" src="../../../../assets/learner/org_member.svg" alt="">
-                        </div>
-                        <div class="col-10">
-                            <span class="tit">10 members from organisation / institute have enrolled in this course</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             
         </div>
-        <div class="line"></div>
-       
-        <div class="row" style="margin-top:80px">
-            <div class="col-12">
-                <div >
-                    <h3 class="head-h1">Course description</h3>
-                    <div class="vertical"></div>
-                    <p class="desc">{{course?.course_description}}</p>
+      <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+        
+        <mat-accordion *ngFor="let res of course?.topicData; let i = index">
+            <mat-expansion-panel class="panel" hideToggle="true" #example>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}}<br>
+                    </mat-panel-title>
+                    <mat-icon *ngIf="!example.expanded">add_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="example.expanded">remove_circle_outline
+                    </mat-icon>
+                </mat-expansion-panel-header>
+
+                <div class="row" *ngFor="let mod of res?.moduledetails">
+                    <div class="col-8"><br>
+                        <ol class="submod">
+                            <li><span>{{mod?.topicname}}</span></li>
+                        </ol>
+                    </div>
+                    <div class="col-4"><br>
+                        {{mod?.topictime}}
+                    </div>
                 </div>
-            </div>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+  </mat-drawer>
+  
+  <!-- <mat-toolbar class="main header">
+    <mat-icon *ngIf="!drawer.opened"  (click)="drawer.toggle()">menu</mat-icon>
+  </mat-toolbar> -->
+
+  <div class="main contents">
+    <div class="videoplayer">
+        <div class="left">
+            <mat-icon *ngIf="!drawer.opened"  (click)="drawer.toggle()">menu</mat-icon>
+            <iframe class="player" [src]="urlSafe"></iframe>
         </div>
-        <div class="row margin-10">
-            <div class="col-12">
-                    <h3 class="head-h1">Instructors</h3>
-                    <div class="vertical"></div>
-                    <div class="silder1" >
-                        <owl-carousel-o [options]="customOptions" [ngClass] = "course?.author_details.lenght <= 3 ? 'widthClass arrow' : 'arrow'">
-                           <ng-template carouselSlide [id]="author.author_name" *ngFor="let author of course?.author_details"  >
-                                <div class="instr-box">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="col-4">
-                                                <img class="img-inst" [src]="author.image ? author?.image : 'assets/learner/avatar2.png'" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <h1 class="authorname">{{author?.author_name}}</h1>
-                                            </div>
-                                            <p class="author-desc">{{author?.description}}</p>
-                                        </div>
-                                    </div>  
+    </div>
+    <div class="margin-7per">
+        <mat-tab-group>
+            <mat-tab label="About the course">
+                <h3 class="head-h1">Course description</h3>
+                <div class="vertical"></div> 
+
+                <div class="curInclu">This course includes :</div>
+                <div class="row">
+                    <div style="max-width: 180px;" class="col-3">
+                        <span class="font-color">20 hrs on demand video</span>
+                    </div> |
+                    <div style="max-width: 211px;" class="col-3">
+                        <span class="font-color">136 downloadable resources</span>
+                    </div> |
+                    <div style="max-width: 100px;" class="col-2">
+                        <span class="font-color">Self paced</span>
+                    </div> |
+                    <div style="max-width: 78px;" class="col-2">
+                        <span class="font-color">English</span>
+                    </div> |
+                    <div class="col-2">
+                        <span class="font-color">4 Days</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="desc">
+                            {{course?.course_description}}
+                        </p>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Resources">
+                Content 2
+            </mat-tab>
+            <mat-tab label="Forum">
+                Content 3
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+  
+    <div class="row margin-10">
+        <div class="col-12">
+            <h3 class="head-h1">Instructors</h3>
+            <div class="vertical"></div>
+            <div class="silder1">
+                <owl-carousel-o [options]="customOptions"
+                    [ngClass]="course?.author_details.lenght <= 1 ? 'widthClass arrow' : 'arrow'">
+                    <ng-template carouselSlide [id]="author.author_name"
+                        *ngFor="let author of course?.author_details">
+                        <div class="instr-box">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/avatar2.png'"
+                                    alt="">
                                 </div>
-                           </ng-template>
-                          </owl-carousel-o>
-    
-                    </div>
+                                <div class="col-6">
+                                    <div class="authorname">{{author?.author_name | titlecase}}</div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 borderline">
+                                    <p class="author-desc">{{author?.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+
             </div>
         </div>
-
-        <div class="row margin-10">
-            <div class="col-12">
-                    <div class="row">
-                        <div class="col-2">
-                            <h3 class="head-h1">Takeaways</h3>
-                            <div class="vertical"></div>
-                        </div>
-                        <div class="col-6">
-                            <button (click)="clickedT('media')" class="tabbtn">Media</button>
-                            <button  (click)="clickedT('text')" class="tabbtn">Text</button>
-                        </div>
-                    </div>
-                   
-                <div class="silder"  *ngIf="clicked == 'media'">
-                    <owl-carousel-o [options]="customOptions1" class="takeway">
-                        <ng-template carouselSlide [id]="img" *ngFor="let img of course?.takeway_details[0].media"> 
-                          <img alt="" [src]="img ? img : '../../../../assets/learner/lens.jpg' " height="500px">
-                        </ng-template>
-                      </owl-carousel-o>
-
-                </div>
-                <ul *ngIf="clicked == 'text'">
-                    <p class="takewaytext" style="margin-bottom: 12px;" *ngFor="let text of course?.takeway_details">{{text.text ? text.text : text.description }}
-                    </p>
-                </ul>
-            </div>
-            </div>
-
-            <div class="row margin-10">
-                <div class="col-12">
-                            <h3 class="head-h1">Step towards</h3>
-                            <div class="vertical"></div>
-                            <p class="desc">{{course?.takeway_details[0].description}}</p>
-                </div>
-            </div>
-
-            <div class="row margin-10">
-                <div class="col-12">
-                    <h3 class="head-h1">Frequently asked questions</h3>
-                     <div class="vertical"></div>
-                     <button class="customButton" (click)="isCollapsed = !isCollapsed">
-                         What do Edutech courses include ?
-                       <div style="text-align: right;"><i class="fa fa-angle-down arrow" aria-hidden="true"></i></div> 
-                      </button>
-                        <div class="card"  *ngIf="isCollapsed">
-                          <div class="card-body">
-                              <ul class="">
-                                <li >
-                                    <p class="desc">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</p>
-                                </li>
-                              </ul>
-                          </div>
-                        </div>
-                      
-                </div>
-                <div class="margin-10"></div>
-            </div>
-
-
     </div>
-     <!-- Left end side -->
-</div>
 
+    <!-- <div class="margin-10"></div> -->
+    <div style="height: 100px">&nbsp;</div>
+  </div>
+</mat-drawer-container>
