@@ -23,6 +23,8 @@
   border: dashed 1px #979797;
   position: relative;
   margin: auto;
+  cursor: pointer !important; 
+  pointer-events: auto;
 
   input {
     opacity: 0;
@@ -93,6 +95,10 @@
       display: block;
     }
   }
+}
+
+.inheritcursor {
+  cursor: inherit;
 }
 
 /* Shake animation */

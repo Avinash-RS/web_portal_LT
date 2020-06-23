@@ -276,13 +276,13 @@ flattree(items) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-  tabClick(event, form) {
-    if (event.index === 0) {
-      form.reset();
-      this.selectedfile = '';
-    }
-    if (event.index === 1) {
-      this.addUserForm.reset();
-    }
-  }
+  // tabClick(event, form) {
+  //   if (event.index === 0) {
+  //     form.reset();
+  //     this.selectedfile = '';
+  //   }
+  //   if (event.index === 1) {
+  //     this.addUserForm.reset();
+  //   }
+  // }
 }
