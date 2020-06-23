@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   disciplines2: any;
   payment_mode: any;
   ref_no1: any;
- 
+
   constructor(
     private el: ElementRef, private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     // const x = localStorage.getItem('OTPFeature') || false;
     // console.log(x);
     this.enableMobileEdit = false;
-        this.getAllLanguage();
+    this.getAllLanguage();
     this.getAllcountry();
     this.getAllLevels();
     // this.getBoardsUniv();
@@ -155,10 +155,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
-      if(params["status"]){
-       Swal.fire('Email updated successfully')
-      }  
-    })
+      if (params.status) {
+        Swal.fire('Email updated successfully');
+      }
+    });
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
     } else {
@@ -168,15 +168,15 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl('', myGlobals.req),
-      
-      college_name:new FormControl('', myGlobals.req),
-      college_stream:new FormControl('', myGlobals.req),
-      // country_name:new FormControl('', myGlobals.req),
-      state_name:new FormControl('', myGlobals.req),
-      district_name:new FormControl('', myGlobals.req),
 
-      payment_mode:new FormControl('', myGlobals.req),
-      ref_no1: new FormControl('',[Validators.pattern(/^[A-Z a-z 0-9]*$/),
+      college_name: new FormControl('', myGlobals.req),
+      college_stream: new FormControl('', myGlobals.req),
+      // country_name:new FormControl('', myGlobals.req),
+      state_name: new FormControl('', myGlobals.req),
+      district_name: new FormControl('', myGlobals.req),
+
+      payment_mode: new FormControl('', myGlobals.req),
+      ref_no1: new FormControl('', [Validators.pattern(/^[A-Z a-z 0-9]*$/),
       Validators.minLength(16), Validators.maxLength(22), Validators.required]),
       ref_no: new FormControl(''),
       // is_student_or_professional: new FormControl('', myGlobals.req),
@@ -204,7 +204,7 @@ export class ProfileComponent implements OnInit {
         organization: new FormControl(''),
         total_experience: new FormControl('')
       }),
-      domain : environment.domain
+      domain: environment.domain
       // payment:this.formBuilder.group({
       //   payment_mode: this.profileForm?.value.payment_mode,
       //   ref_no: this.profileForm?.value.ref_no,
@@ -264,15 +264,15 @@ export class ProfileComponent implements OnInit {
       this.isTpoEnable = true;
       this.isSelfEnable = false;
       ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22)
-          ]);
+      Validators.minLength(16), Validators.maxLength(22)
+      ]);
     } else if (event.value === 'self') {
       this.profileForm.get('ref_no').setValue('');
       this.isTpoEnable = false;
       this.isSelfEnable = true;
       ref_no1.setValidators([Validators.pattern(/^[A-Z a-z 0-9]*$/),
-          Validators.minLength(16), Validators.maxLength(22), Validators.required
-          ]);
+      Validators.minLength(16), Validators.maxLength(22), Validators.required
+      ]);
 
     } else {
       this.isTpoEnable = false;
@@ -300,7 +300,7 @@ export class ProfileComponent implements OnInit {
 
         this.userData.ref = profileDetails.payment.pay_status;
         this.ref_no1 = profileDetails.payment.ref_no;
-       
+
         if (profileDetails) {
           if (profileDetails.qualification.length > 0) {
             profileDetails.qualification.forEach(v => delete v.__typename);
@@ -326,18 +326,18 @@ export class ProfileComponent implements OnInit {
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
           }
-          
-          var diplomaVal = -1;
+
+          let diplomaVal = -1;
           this.levelValue.forEach((type) => {
-            for(var i =0; i < profileDetails.qualification.length;i++){
-              if(profileDetails.qualification[i].qualification ==  type._id  && type.level_code == 'diploma'){
+            for (let i = 0; i < profileDetails.qualification.length; i++) {
+              if (profileDetails.qualification[i].qualification === type._id && type.level_code === 'diploma') {
                 diplomaVal = i;
               }
             }
-          })
+          });
           // const ind = profileDetails.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
           // if (ind !== -1) {
-            if(diplomaVal !== -1) {
+          if (diplomaVal !== -1) {
 
             if (profileDetails.qualification[diplomaVal].institute.startsWith('5')) {
               this.selectedinstitute = false;
@@ -359,28 +359,26 @@ export class ProfileComponent implements OnInit {
           this.getAllState();
           this.getDistrict();
           if (profileDetails.qualification.length > 0) {
-              profileDetails.qualification.forEach((qual,index)=>{
-                var unique = '';
-                this.levelValue.forEach(element=>{
-                  if((element._id == qual.qualification && element.level_code == "10") || 
-                  (element._id == qual.qualification && element.level_code == "12"))
-                  {
-                      element.allowed = 'N';
-                      unique = element.level_code;
-                  } else if(element._id == qual.qualification && element.level_code == "diploma"){
-                    unique = element.level_code;
-                  }
-                })
-                if(unique) {
-                  qualification.push(this.formBuilder.group(qual));
-                  qualification.controls[index]['insCheck'] = unique;
+            profileDetails.qualification.forEach((qual, index) => {
+              let unique = '';
+              this.levelValue.forEach(element => {
+                if ((element._id === qual.qualification && element.level_code === '10') ||
+                  (element._id === qual.qualification && element.level_code === '12')) {
+                  element.allowed = 'N';
+                  unique = element.level_code;
+                } else if (element._id === qual.qualification && element.level_code === 'diploma') {
+                  unique = element.level_code;
                 }
-                else {
-                  qualification.push(this.formBuilder.group(qual))
-                  qualification.controls[index]['insCheck'] = unique;
-  
-                }              
               });
+              if (unique) {
+                qualification.push(this.formBuilder.group(qual));
+                qualification.controls[index].insCheck = unique;
+              } else {
+                qualification.push(this.formBuilder.group(qual));
+                qualification.controls[index].insCheck = unique;
+
+              }
+            });
           }
           if (profileDetails.certificate && profileDetails.certificate.length > 0) {
             profileDetails.certificate.forEach(certif =>
@@ -396,7 +394,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     if (this.profileForm.value.payment_mode === 'self') {
-      if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '' ) {
+      if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '') {
         this.alert.openAlert('Please enter the NEFT/RTGS reference number', null);
         // this.invalidForm();
       }
@@ -411,11 +409,7 @@ export class ProfileComponent implements OnInit {
       const index2 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7deddfdba4466d9704b44a');
       if (index === -1) {
         this.alert.openAlert('Please fill 10th qualification details', null);
-      }
-      //  else if (index1 === -1) {
-      //   this.alert.openAlert('Please fill diploma qualification details', null);
-      // }
-      else if (this.profileForm.value.iAgree === false) {
+      } else if (this.profileForm.value.iAgree === false) {
         this.alert.openAlert('Please fill all mandatory feilds', null);
       } else {
         // console.log(this.profileForm.value.qualification);
@@ -431,7 +425,7 @@ export class ProfileComponent implements OnInit {
         // this.profileForm.value.qualification[index1].specification = '5ee2877b7d0045bb0edc19c2';
         // this.profileForm.value.qualification[index].specification = '5ee2877b7d0045bb0edc19c2';
 
-        //******* */
+        // ******* */
         if (index2 !== -1) {
           this.profileForm.value.qualification[index2].specification = '5ee2877b7d0045bb0edc19c2';
         }
@@ -442,9 +436,9 @@ export class ProfileComponent implements OnInit {
         }
         // if (this.profileForm.value.progress === 60 &&
         //   this.profileForm.value.certificate.length > 0 && this.profileForm.value.addressline2 !== '' &&
-        //   this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '') 
-         
-          //  && this.profileForm.value.social_media[0].link !== ''
+        //   this.profileForm.value.certificate[0] !== '' && this.profileForm.value.pincode !== '')
+
+        //  && this.profileForm.value.social_media[0].link !== ''
         //   {
         //   this.profileForm.controls.progress.setValue(90);
         // }
@@ -488,7 +482,7 @@ export class ProfileComponent implements OnInit {
               this.loader.hide();
               this.currentUser.is_profile_updated = true;
               localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-              this.router.navigate(['/Learner/Thankyou']);
+              this.router.navigate(['/Learner/MyCourse']);
             } else {
               this.alert.openAlert(data.data.update_profile.message, null);
             }
@@ -517,29 +511,28 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  invalidForm(){
-    for(const key of Object.keys(this.profileForm.controls)){
-      if(this.profileForm.controls[key].invalid){
+  invalidForm() {
+    for (const key of Object.keys(this.profileForm.controls)) {
+      if (this.profileForm.controls[key].invalid) {
         const invalidControl = this.el.nativeElement.querySelector('[formcontrolname="' + key + '"]');
         invalidControl.focus();
         break;
       }
     }
   }
-  yearCheck(index){
-    var tenYear;
-    var twelveYear;
+  yearCheck(index) {
+    let tenYear;
+    let twelveYear;
     this.levelValue.forEach((type) => {
-      this.profileForm.value.qualification.forEach((element,index) => {
-        if(type.level_code == '10' && element.qualification == type._id ){
+      this.profileForm.value.qualification.forEach((element, index) => {
+        if (type.level_code === '10' && element.qualification === type._id) {
           tenYear = this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
-         }
-         else if(type.level_code == '12'  && element.qualification == type._id){
-          twelveYear =  this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
+        } else if (type.level_code === '12' && element.qualification === type._id) {
+          twelveYear = this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
         }
-      })
-    })
-    if(tenYear >= twelveYear){
+      });
+    });
+    if (tenYear >= twelveYear) {
       this.alert.openAlert('10th year of passing should not be greater than 12th', null);
       this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
     }
@@ -603,16 +596,15 @@ export class ProfileComponent implements OnInit {
     // } else {
     //   this.alert.openAlert('Please fill all details', null);
     // }
-    var tenVal = false;
-    var twelveVal = false;
+    let tenVal = false;
+    let twelveVal = false;
     this.levelValue.forEach((type) => {
-      if(type.level_code == '12' && this.profileForm.value.qualification[i].qualification !== type._id ){
+      if (type.level_code === '12' && this.profileForm.value.qualification[i].qualification !== type._id) {
         twelveVal = true;
-      }
-      else if (type.level_code == '10' && this.profileForm.value.qualification[i].qualification == type._id) {
+      } else if (type.level_code === '10' && this.profileForm.value.qualification[i].qualification === type._id) {
         tenVal = true;
       }
-    })
+    });
     if (twelveVal) {
       if (tenVal) {
         if (this.profileForm.value.qualification[i].board_university !== '' && this.profileForm.value.qualification[i].institute !== '' &&
@@ -625,7 +617,7 @@ export class ProfileComponent implements OnInit {
         if (this.profileForm.value.qualification[i].institute !== '' &&
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== ''
           && this.profileForm.value.qualification[i].discipline !== '') {
-            // && this.profileForm.value.qualification[i].discipline !== '') {
+          // && this.profileForm.value.qualification[i].discipline !== '') {
           this.qualification.push(this.createQualItem());
         } else {
           this.alert.openAlert('Please fill all details', null);
@@ -644,11 +636,11 @@ export class ProfileComponent implements OnInit {
 
   removeQualification(i) {
     this.levelValue.forEach(level => {
-      if((level._id == this.qualification.controls[i].value.qualification && level.level_code == '10') ||
-      (level._id == this.qualification.controls[i].value.qualification && level.level_code == '12')){
+      if ((level._id === this.qualification.controls[i].value.qualification && level.level_code === '10') ||
+        (level._id === this.qualification.controls[i].value.qualification && level.level_code === '12')) {
         level.allowed = 'Y';
       }
-    })
+    });
     this.qualification.removeAt(i);
   }
 
@@ -715,16 +707,15 @@ export class ProfileComponent implements OnInit {
     //   this.boardValue = institute.data['get_institute_details'].data;
     //   this.uniValue= institute.data['get_institute_details'].data;
     // })
-    var boardforTen = false;
-    var boardforTwelve = false;
+    let boardforTen = false;
+    let boardforTwelve = false;
     this.levelValue.forEach((type) => {
-      if ((type.level_code == '10' && levelid == type._id )) {
+      if ((type.level_code === '10' && levelid === type._id)) {
         boardforTen = true;
-      }
-      else if ((type.level_code == '12' && levelid == type._id )) {
+      } else if ((type.level_code === '12' && levelid === type._id)) {
         boardforTwelve = true;
       }
-    })
+    });
     this.service.get_board_university_details(levelid).subscribe((boards: any) => {
       if (boardforTen) {
         this.boardValue = boards.data.get_board_university_details.data.board;
@@ -746,16 +737,15 @@ export class ProfileComponent implements OnInit {
   }
 
   getDiscipline(levelid) {
-    var tenVar = false;
-    var twelveVar = false;
+    let tenVar = false;
+    let twelveVar = false;
     this.levelValue.forEach((type) => {
-      if (type.level_code == '10' && levelid == type._id) {  
+      if (type.level_code === '10' && levelid === type._id) {
         tenVar = true;
-      } 
-      else   if (type.level_code == '12' && levelid == type._id) {
+      } else if (type.level_code === '12' && levelid === type._id) {
         twelveVar = true;
-      } 
-    })
+      }
+    });
     this.service.get_discipline_details(levelid).subscribe((discipline: any) => {
       if (tenVar) {
         this.disciplines = discipline.data.get_discipline_details?.data;
@@ -989,16 +979,15 @@ export class ProfileComponent implements OnInit {
     this.levelValue.forEach((type) => {
       if (type.level_code === '10' || type.level_code === '12') {
         const selected = this.duplicateValueCheck.includes(type._id);
-        if (selected) { type.allowed = 'N'; } 
-        else { 
-          let quali = this.profileForm.controls.qualification;
-          var unique = true;
+        if (selected) { type.allowed = 'N'; } else {
+          const quali = this.profileForm.controls.qualification;
+          let unique = true;
           quali.value.forEach(element => {
-            if(element.qualification == type._id){
-               unique = false;
+            if (element.qualification === type._id) {
+              unique = false;
             }
           });
-          if(unique) type.allowed = 'Y'; 
+          if (unique) { type.allowed = 'Y'; }
         }
       }
     });
@@ -1013,25 +1002,25 @@ export class ProfileComponent implements OnInit {
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
       // specification.setValidators([Validators.required]);
-      a.insCheck=  level.level_code;
+      a.insCheck = level.level_code;
       specification.setValidators([]);
     } else {
-      a.insCheck=  level.level_code;
+      a.insCheck = level.level_code;
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
     this.getDiscipline(level._id);
     this.getBoardsUniv(level._id);
   }
-  
+
 
   checkinstitute(level) {
-    var unique = false;
+    let unique = false;
     this.levelValue.forEach((type) => {
-      if (type.level_code == 'diploma' && level._id == type._id) { 
+      if (type.level_code === 'diploma' && level._id === type._id) {
         unique = true;
       }
-    })
+    });
     if (unique) {
       this.selectedinstitute = false;
       this.selecteddiscipline = false;
@@ -1083,9 +1072,10 @@ export class ProfileComponent implements OnInit {
   //     });
   //   console.log(e, this.checkdedTPO, this.profileForm);
   // }
-  download(){
-    var redirectWindow = window.open('https://edutechstorage.blob.core.windows.net/container1/images/LnT%20Kaushalya%202020_Brochure.pdf', '_blank');
+  download() {
+    const redirectWindow = 
+    window.open('https://edutechstorage.blob.core.windows.net/container1/images/LnT%20Kaushalya%202020_Brochure.pdf', '_blank');
     redirectWindow.location;
- }
   }
+}
 

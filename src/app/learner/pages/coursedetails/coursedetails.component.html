@@ -44,15 +44,11 @@
                     <mat-icon *ngIf="example.expanded">remove_circle_outline
                     </mat-icon>
                 </mat-expansion-panel-header>
-
                 <div class="row" *ngFor="let mod of res?.moduledetails">
                     <div class="col-8">
-                        <!-- <ol class="submod"> -->
                             <li><span>{{mod?.topicname}}</span></li>
-                        <!-- </ol> -->
                     </div>
                     <div class="col-4"><br>
-                        <!-- {{mod?.topictime}} -->
                     </div>
                 </div>
             </mat-expansion-panel>
@@ -60,10 +56,6 @@
         </mat-accordion>
     </div>
   </mat-drawer>
-  
-  <!-- <mat-toolbar class="main header">
-    <mat-icon *ngIf="!drawer.opened"  (click)="drawer.toggle()">menu</mat-icon>
-  </mat-toolbar> -->
 
   <div class="main contents">
     <div class="videoplayer">
@@ -106,7 +98,86 @@
             </mat-tab>
 
             <mat-tab label="Resources">
-                Content 2
+               <mat-accordion >
+            <mat-expansion-panel class="panel" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
+                    </mat-panel-title>
+                    <mat-icon *ngIf="!example1.expanded">add_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="example1.expanded">remove_circle_outline
+                    </mat-icon>
+                </mat-expansion-panel-header>
+
+                <div class="row margin-5">
+                    <div class="col-12">
+                        <section class="accordion" *ngFor="let mod of res?.moduledetails">
+                          <input type="checkbox" name="collapse" [id]="mod?.topicname">
+                          <h2 class="handle">
+                            <label [for]="mod?.topicname"><span>{{mod?.topicname}}</span></label>
+                          </h2>
+                          <div class="content" ngIf="mod.resourse.lenght > 0">
+                            <div class="row" *ngFor="let file of mod.resourse?.files" >
+                              <div class="col-12">
+                                  <div class="row">
+                                      <div class="col-2">
+                                        <i class="fa fa-file-text size" aria-hidden="true"></i> 
+                                      </div>
+                                      <div class="col-6">
+                                        {{file.type_name}}  
+                                    </div>
+                                    <div class="col-2" *ngIf="file?.size">
+                                        {{file.size}}
+                                    </div>
+                                    <div class="col-2">
+                                        <a class="link"  href="{{file?.path}}" download></a>
+                                    </div>
+                                  </div>
+                                <!-- <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a> -->
+                               
+                              </div>
+                  
+                            </div>
+                          </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- <ng-template matExpansionPanelContent #example2 *ngFor="let mod of res?.moduledetails">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                           {{mod?.topicname}}<br>
+                        </mat-panel-title>
+                        <mat-icon *ngIf="!example2.expanded">add_circle_outline
+                        </mat-icon>
+                        <mat-icon *ngIf="example2.expanded">remove_circle_outline
+                        </mat-icon>
+                    </mat-expansion-panel-header>
+                    <p>zbkababbafbafbsafakfbafbfbfbaba
+                        kskfajbkabfkafkjaakjbfasfbk
+                        kabkjfabkjbafkbakfbakakaskkafbakf
+                    </p>
+                  </ng-template> -->
+            </mat-expansion-panel>
+
+
+            <!-- <mat-expansion-panel class="panel" hideToggle="true" #example2 > -->
+               
+
+                <!-- <div class="row" *ngFor="let mod of res?.moduledetails">
+                    <div class="col-8">
+                            <li><span>{{mod?.topicname}}</span></li>
+                    </div>
+                    <div class="col-4"><br>
+                    </div>
+                </div> -->
+            <!-- </mat-expansion-panel> -->
+
+
+        </mat-accordion>
+                
+
             </mat-tab>
             <mat-tab label="Forum">
                 Content 3
