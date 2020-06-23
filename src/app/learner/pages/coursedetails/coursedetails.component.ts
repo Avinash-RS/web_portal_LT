@@ -76,9 +76,9 @@ export class CoursedetailsComponent implements OnInit {
   getuserid: any;
   topicData: any[];
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
-    public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router, private alert: AlertServiceService,
-    public sanitizer: DomSanitizer) {
+              public service: CommonServicesService, private gs: GlobalServiceService,
+              public route: Router, private alert: AlertServiceService,
+              public sanitizer: DomSanitizer) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -205,4 +205,4 @@ export class CoursedetailsComponent implements OnInit {
 //         });
 //       }
 //     });
-//   }
+  }
