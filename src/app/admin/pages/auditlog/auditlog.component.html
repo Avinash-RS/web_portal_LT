@@ -1,21 +1,37 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Audit log</li>
   </ol>
 </nav>
 <br>
 
 <div>
-  <h1 style="padding-left:25px"> Audit log</h1>
+  <!-- <h1 style="padding-left:25px"> Audit log</h1>  -->
+  <div class="row no_margin">
+    <div class="col-lg-5 col-md-4 col-sm-12 col-12">
+      <h1 style="padding-left: 25px;">Audit log</h1>
+    </div>
+    <div class="col-lg-7 col-md-6 col-sm-12 col-12 float_right">
+      <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event)"
+        aria-label="Search">
+    </div>
+  </div>
   <div>
     <div class="row no_margin " style="padding-left:40px">
       <form #filterform="ngForm" class="width_100">
+        <!-- <div  class="row no_margin"> 
+          <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+            <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)"
+              aria-label="Search">
+          </div>
+        </div> -->
+    
         <div class="row m-b-10">
           <div class="col-lg-7 col-sm-12 col-12 col-md-7 display_flex m-b-10">
             <mat-form-field class="wid-100">
-              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" required
-                #fromdate1="ngModel" [matDatepicker]="picker" placeholder="Start date" color="accent">
+              <input matInput name="fromdate" [(ngModel)]="fromdate" (dateChange)="datefield(fromdate)" [max]=today
+                required #fromdate1="ngModel" [matDatepicker]="picker" placeholder="Start date" color="accent">
               <mat-datepicker-toggle matSuffix [for]="picker">
               </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -53,10 +69,9 @@
         </div>
       </form>
     </div>
-
     <hr style="border: 1px solid #ccc;margin:1px !important; ">
     <div class="example-container">
-      <mat-table #table [dataSource]="dataSource">
+      <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="sno">
           <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
@@ -64,9 +79,9 @@
           </mat-cell>
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-          <mat-header-cell *matHeaderCellDef>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ column.header }}</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
+          <mat-cell *matCellDef="let row">{{ column?.cell(row) }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
@@ -117,7 +132,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Created by : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
+                  class="color_black capitalize f_wt_400">{{viewdetail?.admin_username|| 'NA'}}</label></label>
             </div>
           </div>
           <br>
@@ -128,7 +143,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                  {{viewdetail?.updated_on  || 'NA'}}</label>
+                  {{viewdetail?.updated_on || 'NA'}}</label>
               </label>
             </div>
           </div>
@@ -140,7 +155,8 @@
       <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
         <div class="row no_margin p-5px">
           <label>Request : </label>
-          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_request[0] | json}}</label>
+          <label class="color_black capitalize f_wt_400 p-5px"
+            style="white-space : pre">{{viewdetail?.api_call_request[0] | json}}</label>
         </div>
       </mat-dialog-content>
     </mat-tab>
@@ -149,7 +165,8 @@
       <mat-dialog-content style="width: 1000px;min-height: 250px;max-height:350px;margin:0 !important">
         <div class="row no_margin p-5px">
           <label>Response :</label>
-          <label class="color_black capitalize f_wt_400 p-5px" style="white-space : pre">{{viewdetail?.api_call_response[0] | json }}</label>
+          <label class="color_black capitalize f_wt_400 p-5px"
+            style="white-space : pre">{{viewdetail?.api_call_response[0] | json }}</label>
         </div>
       </mat-dialog-content>
     </mat-tab>
@@ -163,7 +180,7 @@
     <i class="fa fa-times-circle-o pointer" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
   <mat-dialog-content style="width: 650px">
-    <h2 style="text-align: center"> Export Audit log</h2>
+    <h2 style="text-align: center"> Export audit log</h2>
     <mat-dialog-content>
       <form #profileForm="ngForm">
         <div class="container profile">
@@ -183,7 +200,7 @@
                 <mat-form-field class="wid-100">
                   <input matInput name="exportfromdate" [disabled]="exportdata == 'exportall'"
                     [(ngModel)]="exportfromdate" (dateChange)="datefield(exportfromdate)" required #fromdate2="ngModel"
-                    [matDatepicker]="picker2" placeholder="Start date" color="accent">
+                    [matDatepicker]="picker2" placeholder="Start date" color="accent" [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker2">
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
@@ -194,8 +211,8 @@
 
                 <mat-form-field class="wid-100">
                   <input matInput name="exporttodate" [(ngModel)]="exporttodate" [disabled]=enablefield required
-                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent" [min]=fromdate
-                    [max]=today>
+                    #todate2="ngModel" [matDatepicker]="picker3" placeholder="End date" color="accent"
+                    [min]=exportfromdate [max]=today>
                   <mat-datepicker-toggle matSuffix [for]="picker3">
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker3></mat-datepicker>

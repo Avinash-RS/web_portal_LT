@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import * as myGlobals from '@core/globals';
+import { ToastrService } from 'ngx-toastr';
 
 export interface PeriodicElement {
   user_id: string;
@@ -59,13 +60,14 @@ export class GroupManagementComponent implements OnInit {
   oldcatalogue: any;
   trackBy: any;
   toggle: any;
+  editgroupfield: boolean = false;
   /** tree source stuff */
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
-  constructor(private alert: AlertServiceService, private gs: GlobalServiceService,
+  constructor(private toastr: ToastrService, private alert: AlertServiceService, private gs: GlobalServiceService,
     private cdr: ChangeDetectorRef, private adminservice: AdminServicesService, private formBuilder: FormBuilder,
     private router: Router, private dialog: MatDialog, ) {
 
@@ -112,9 +114,41 @@ export class GroupManagementComponent implements OnInit {
   getallgroups() {
     this.adminservice.getUserGroup()
       .subscribe((result: any) => {
-        this.allgroups = result.data.get_user_group.message;
+        // this.allgroups = result.data.get_user_group.message;
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.allgroups = this.flattree(tree);
       });
   }
+
+  tree(data, root) {
+    function setCount(object) {
+        return object.children
+            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+            : 0;
+    }
+    const t = {};
+    data.forEach(o => {
+        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+        t[o.parent_group_id] = t[o.parent_group_id] || {};
+        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+        t[o.parent_group_id].children.push(t[o.group_id]);
+        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+    });
+    setCount(t[root]);
+    return t[root].children;
+}
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
+      delete item.children;
+    }
+    delete item.children;
+  });
+  return flat;
+}
   /** sub group */
   loadsubgroup(node?: any) {
     const data = { input_id: node.group_id, type: 'group', pagenumber: 0 };
@@ -185,19 +219,22 @@ export class GroupManagementComponent implements OnInit {
     }
     groupform.form.markAsPristine();
     if (node.checkbox === true) {
+      this.editgroupfield = true;
       this.currentpath = null;
       this.currentpath = node;
+      // console.log(this.currentpath);
       this.disabled = false;
       this.editstatus = false;
       this.editgroupname = node.group_name;
       this.group_name = node.group_name;
-      this.toggle = node.is_active;
+      this.toggle = !node.is_active;
       this.getAllUser(0);
       this.adminservice.getgroupbyid(node.group_id).subscribe((result: any) => {
         this.catalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details?.catalogue_id;
         this.oldcatalogue = result?.data?.getgroupbyid?.message[0]?.catalogue_mapping_details?.catalogue_details;
       });
     } else {
+      this.editgroupfield = false;
       this.disabled = true;
       this.editstatus = true;
       this.currentpath = null;
@@ -206,7 +243,9 @@ export class GroupManagementComponent implements OnInit {
       this.catalogue = '';
     }
   }
-
+  editgroup() {
+  this.editgroupfield = false;
+  }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     this.adminservice.getUserSession(element._id).subscribe((track: any) => {
@@ -283,7 +322,7 @@ export class GroupManagementComponent implements OnInit {
             this.alert.openAlert('Success !', this.currentpath?.group_id ?
             'Sub group created successfully' : 'Group created successfully' );
             this.reset();
-            form.reset();
+            form.resetForm();
             this.getgroups();
           } else {
             this.alert.openAlert(result.data.createusergroup.error_msg, null);
@@ -293,10 +332,13 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  // toggle(event: MatSlideToggleChange) {
-  //   this.toggleevent = event.checked;
-  //   this.currentpath.is_active = event.checked;
-  // }
+  selectedtoggle(event) {
+    // this.toggleevent = event.checked;
+    // this.currentpath.is_active = event.checked;
+    const msg = event === false ? 'Group has been Activated' : 'Group has been  Deactivated';
+    this.toastr.success(msg);
+
+  }
   updategroupdetails(groupform) {
     // let value: any;
     // value = this.toggleevent ? this.toggleevent : this.currentpath.is_active;
@@ -315,7 +357,7 @@ export class GroupManagementComponent implements OnInit {
         const data = {
           catalogue_id: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : groupform.value.catalogue,
           catalogue_name: this.oldcatalogue?.catalogue_id === groupform.value.catalogue ? 'null' : this.selectedcatalogue.catalogue_name,
-          is_active: groupform.value.toggle, group_id: this.currentpath.group_id, group_name: groupform.value.group_name,
+          is_active: !groupform.value.toggle, group_id: this.currentpath.group_id, group_name: groupform.value.group_name,
           group_type: this.currentpath.group_type, parent_group_id: this.currentpath.parent_group_id,
           hierarchy_id: this.currentpath.hierarchy_id, admin_id: this.currentpath.admin_id, created_by: this.currentpath.created_by
         };
@@ -323,6 +365,7 @@ export class GroupManagementComponent implements OnInit {
           if (result1.data.groupstatus.success === true) {
             this.toggleevent = '';
             this.reset();
+            groupform.resetForm();
             this.getgroups();
             this.cdr.detectChanges();
             Swal.fire(
@@ -341,6 +384,7 @@ export class GroupManagementComponent implements OnInit {
     // this.checked ="Deactivate"
   }
   edit(data: boolean, groupname) {
+    this.editgroupfield = false;
     if (data) {
       this.editstatus = false;
 
@@ -392,6 +436,7 @@ export class GroupManagementComponent implements OnInit {
             this.ELEMENT_DATA = [];
             this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           }
+          // console.log(result.data.get_all_user);
           Array.prototype.push.apply(this.ELEMENT_DATA, result.data.get_all_user.message);
           this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
           this.selection = new SelectionModel(true, []);
@@ -475,4 +520,10 @@ export class GroupManagementComponent implements OnInit {
       this.getAllUser(pagenumber);
     }
   }
+   // tslint:disable-next-line:use-life-cycle-interface
+   ngOnDestroy() {
+    if (this.dialog) {
+        this.dialog.closeAll();
+    }
+ }
 }

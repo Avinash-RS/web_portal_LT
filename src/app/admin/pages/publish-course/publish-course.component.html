@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">My courses</a></li>
     <li class="breadcrumb-item">Publish course</li>
     <li class="breadcrumb-item active" aria-current="page">{{course && course.name}}</li>
@@ -15,7 +15,7 @@
       <!-- Mat tree code here ( left hand side) -->
       <div class="card col-12 col-lg-3 col-md-4 col-sm-12 cardheight left" infiniteScroll [infiniteScrollDistance]="2"
         [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
-        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Associate to Category </h2>
+        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Associate to category </h2>
 
         <div class="spinner-container" *ngIf="loadingCategory">
           <mat-spinner diameter="40"></mat-spinner>
@@ -59,24 +59,24 @@
       <!-- end of Mat tree code here ( left hand side) course_id: "62tw3ynl"-->
       <!-- start of right hand side card view -->
       <div class="card col-lg-9 col-md-8 col-sm-12 col-12 cardheight right">
-        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Publish Course </h2>
+        <h2 class="list-title m-t-20 m-l-5 m-r-20 color_grey">Publish course </h2>
         <br><br>
 
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h4>
-            Selected Level 1 : {{selectedCategory?.category_name}}
+            Selected level 1 : {{selectedCategory?.category_name}}
           </h4>
         </div>
 
         <div class="row m-l-5" *ngIf="selectedSubCategory?.sub_category_name">
           <h4>
-            Selected Level 2 : {{selectedSubCategory?.sub_category_name}}
+            Selected level 2 : {{selectedSubCategory?.sub_category_name}}
           </h4>
         </div>
 
         <div class="row m-l-5" *ngIf="selectedSuperSubCategory?.super_sub_category_name">
           <h4>
-            Selected Level 3 : {{selectedSuperSubCategory?.super_sub_category_name}}
+            Selected level 3 : {{selectedSuperSubCategory?.super_sub_category_name}}
           </h4>
         </div>
         <div class="row  center" *ngIf="selectedCategory?.category_name == undefined">
@@ -86,7 +86,7 @@
         </div>
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <h3>
-            Selected Category : {{selectedCategory?.category_name}}
+            Selected category : {{selectedCategory?.category_name}}
             <strong>
               {{selectedSubCategory?.sub_category_name ? ' > ' +selectedSubCategory?.sub_category_name : null}}</strong>
             <strong>
@@ -96,7 +96,7 @@
 
         <div class="row m-l-5" *ngIf="selectedCategory?.category_name">
           <mat-form-field>
-            <mat-label>Select Catalogue</mat-label>
+            <mat-label>Select catalogue</mat-label>
             <mat-select name="catalogue" [(ngModel)]="catalogue" #catelogue1="ngModel" [required]=editstatus
               class="form-control">
               <mat-option *ngFor="let cat of catalogueList" [(value)]="cat.catalogue_id"

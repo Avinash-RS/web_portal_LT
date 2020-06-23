@@ -83,6 +83,7 @@ export class CatalogueManagementComponent implements OnInit {
   }
 
   getListCatalogue() {
+    this.catalogueList = [];
     this.loadingCatalogue = true;
     this.adminservice.getAllCatalogue(this.pagenumber || 0).subscribe((result: any) => {
       this.catalogueList.push(...result?.data?.getallcatalogue?.message);
@@ -90,13 +91,22 @@ export class CatalogueManagementComponent implements OnInit {
     });
   }
 
+  nextGetListCatalogue() {
+    this.loadingCatalogue = true;
+    this.pagenumber = this.pagenumber + 1;
+    this.adminservice.getAllCatalogue(this.pagenumber).subscribe((result: any) => {
+      this.catalogueList.push(...result?.data?.getallcatalogue?.message);
+      this.loadingCatalogue = false;
+    });
+  }
+
   clickCatalog() {
+    this.courseList = this.catalogueList = this.ELEMENT_DATA = [];
     this.showCourses = this.showHeader = this.showAddCatalogueForm = this.showCatalogDetail = false;
     this.showListCatalogue = true;
     this.catalog = {};
     this.getListCatalogue();
     this.type = null;
-    this.courseList = this.catalogueList = [];
     this.totalCount = null;
     this.checked = false;
   }
@@ -105,7 +115,7 @@ export class CatalogueManagementComponent implements OnInit {
     this.showCourses = this.showListCatalogue = this.showAddCatalogueForm = false;
     this.showHeader = this.showCatalogDetail = true;
     this.type = null;
-    this.courseList = [];
+    this.courseList = this.ELEMENT_DATA = [];
     this.totalCount = null;
     this.getCatalogDetail();
     this.checked = false;
@@ -168,6 +178,8 @@ export class CatalogueManagementComponent implements OnInit {
 
   goToCatalogDetail(c) {
     this.catalog = c;
+    this.pagenumberTable = 0;
+    this.ELEMENT_DATA = [];
     this.getCatalogDetail();
     if (this.catalog.course_count === 0) {
       this.getCoursesForCatalog();
@@ -327,5 +339,11 @@ export class CatalogueManagementComponent implements OnInit {
           this.alert.openAlert('Please try again later', null);
         }
       });
+  }
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.dialog) {
+      this.dialog.closeAll();
+    }
   }
 }

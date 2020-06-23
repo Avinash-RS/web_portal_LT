@@ -15,10 +15,11 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
 import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 import { ReportsComponent } from '@admin/pages/reports/reports.component';
+import { BulkEnrollmentComponent } from '@admin/pages/bulk-enrollment/bulk-enrollment.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
-        { path: 'dashboard', component: UserManagementComponent, data: { title: 'Learner Management' } },
+        { path: 'dashboard', component: AdminDashboardComponent, data: { title: 'Admin Dashboard' } },
         { path: 'userManagement', component: UserManagementComponent, data: { title: 'Learner Management' }, canActivate: [AuthGuard] },
         { path: 'addUser', component: AddUserComponent, data: { title: 'Add New Learner' }, canActivate: [AuthGuard] },
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
@@ -26,14 +27,15 @@ export const appRoutes: Routes = [{
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path : 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title: 'Admin Dashboard'} ,
          canActivate: [AuthGuard] },
-        { path : 'usergroup' , component: GroupManagementComponent, data: { title: 'User Group creation' }},
-        { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, },
-        { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, },
-        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, },
-        { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, },
-        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' }, },
-        { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, },
-        { path: 'auditlog', component: AuditlogComponent, data: { title: 'Audit Log' }, },
+        { path : 'usergroup' , component: GroupManagementComponent, data: { title: 'User Group creation' }, canActivate: [AuthGuard]},
+        { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, canActivate: [AuthGuard]},
+        { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, canActivate: [AuthGuard]},
+        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, canActivate: [AuthGuard]},
+        { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, canActivate: [AuthGuard] },
+        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' },  canActivate: [AuthGuard]},
+        { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, canActivate: [AuthGuard] },
+        { path: 'bulkenrolment', component: BulkEnrollmentComponent, data: { title: 'Bulk Enrolment' }, canActivate: [AuthGuard] },
+        { path: 'auditlog', component: AuditlogComponent, data: { title: 'Audit Log' }, canActivate: [AuthGuard] },
         {
             path: 'Wca',
             loadChildren: '../../wca/wca.module#WcaModule',

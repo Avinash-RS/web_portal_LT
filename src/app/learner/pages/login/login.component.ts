@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
                 // for june 10 added by ankit
-                this.router.navigate(['/Learner/profile']);
+                this.router.navigate(['/Learner/home']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
                 // for june 10 added by ankit
-                this.router.navigate(['/Learner/profile']);
+                this.router.navigate(['/Learner/home']);
               } else {
                 this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);

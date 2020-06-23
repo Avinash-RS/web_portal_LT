@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item pointer" (click)="clickCatalog()">Catalogue management</li>
     <li class="breadcrumb-item pointer" *ngIf="catalog?.catalogue_name" (click)="clickCName()">
       {{catalog.catalogue_name}}
@@ -15,9 +15,9 @@
 <!-- START OF CARD_1 -->
 <div class="row width_95 center space2" *ngIf="!showCourses">
   <!-- spinner-container -->
-  <div class="spinner-container" *ngIf="loadingCatalogue">
+  <!-- <div class="spinner-container" *ngIf="loadingCatalogue">
     <mat-spinner diameter="40"></mat-spinner>
-  </div>
+  </div> -->
   <!-- end spinner-container -->
   <div class="card col-12 col-lg-12 col-md-12 col-sm-12 cardheight">
     <!-- start of button - add catalogue ( row ) -->
@@ -37,12 +37,12 @@
       <div class="col-lg-4 col-md-5 col-sm-12 col-12">
         <div class="display_flex">
           <div class="border-radius-5 width_40 m-b-10 center_align cat-name-card color_blue">
-            {{catalog?.catalogue_name || 'Catalogue Name'}}
+            {{catalog?.catalogue_name || 'Catalogue name'}}
           </div>
           <div class="material-icons center center_align width_10 f_size_20 grey"
-            matTooltip="{{catalog?.catalogue_description || 'Catalogue Description'}}">info_outline</div>
+            matTooltip="{{catalog?.catalogue_description || 'Catalogue description'}}">info_outline</div>
           <div class="border-radius-5 width_40 m-b-10 center_align cat-name-card color_blue m-l-10">
-            {{catalog?.group_details?.group_name  || 'Group Name'}}
+            {{catalog?.group_details?.group_name  || 'Group name'}}
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@
       </p>
     </div>
     <div class="width_100 arrow-drop-down" *ngIf="showListCatalogue && catalogueList && catalogueList.length > 0">
-      <button mat-icon-button aria-label="More Icon" class="center" (click)="++pagenumber;getListCatalogue()">
+      <button mat-icon-button aria-label="More Icon" class="center" (click)="nextGetListCatalogue()">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </div>
@@ -133,7 +133,7 @@
           <div class="col-md-11 col-lg-11 m-l-5 col-sm-11 col-11">
             <div class="form-group">
               <textarea style="resize: none;" rows="7" class="inputs border-radius-5 background_trans width_90"
-                placeholder="Catalogue Description" formControlName="catalogue_description"
+                placeholder="Catalogue description" formControlName="catalogue_description"
                 name="catalogue_description"></textarea>
             </div>
           </div>
@@ -164,12 +164,12 @@
         </ng-container>
 
         <ng-container matColumnDef="course_name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Courses </th>
+          <th mat-header-cell *matHeaderCellDef> Courses </th>
           <td mat-cell *matCellDef="let element"> {{element.course_name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="category_details">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <th mat-header-cell *matHeaderCellDef> Category </th>
           <td mat-cell *matCellDef="let element">
             <ng-container *ngFor="let cat of element.category_details; let ind = index">
               <div class="parcel">
@@ -183,7 +183,7 @@
         </ng-container>
 
         <ng-container matColumnDef="course_language">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
+          <th mat-header-cell *matHeaderCellDef> Language </th>
           <td mat-cell *matCellDef="let element"> {{element.course_language}} </td>
         </ng-container>
 
@@ -228,12 +228,12 @@
       <div class="col-lg-4 col-md-5 col-sm-12 col-12">
         <div class="display_flex">
           <div class="border-radius-5 width_40 m-b-10 center_align cat-name-card color_blue">
-            {{catalog?.catalogue_name || 'Catalogue Name'}}
+            {{catalog?.catalogue_name || 'Catalogue name'}}
           </div>
           <div class="material-icons center center_align width_10 f_size_20 grey"
-            matTooltip="{{catalog?.catalogue_description || 'Catalogue Description'}}">info_outline</div>
+            matTooltip="{{catalog?.catalogue_description || 'Catalogue description'}}">info_outline</div>
           <div class="border-radius-5 width_40 m-b-10 center_align cat-name-card color_blue m-l-10">
-            {{catalog?.group_details?.group_name  || 'Group Name'}}
+            {{catalog?.group_details?.group_name  || 'Group name'}}
           </div>
         </div>
       </div>
@@ -331,7 +331,7 @@
           <div class="col-md-11 col-lg-11 m-l-5 col-sm-12 col-12">
             <div class="form-group">
               <textarea style="resize: none;" rows="3" class="inputs border-radius-5 background_trans width_100"
-                placeholder="Catalogue Description" formControlName="catalogue_description"
+                placeholder="Catalogue description" formControlName="catalogue_description"
                 name="catalogue_description"></textarea>
             </div>
           </div>
@@ -340,8 +340,8 @@
         <div class="row width_100">
           <div class="col-md-4 col-sm-12"></div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">
-            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid || !addCatalogueForm.dirty" mat-stroked-button
-              (click)="editCatalogue()"
+            <button id="createCatalogue" [disabled]="addCatalogueForm.invalid || !addCatalogueForm.dirty"
+              mat-stroked-button (click)="editCatalogue()"
               class="width_80 border-radius-5 background-blue color_white center">Update</button>
           </div>
           <div class="col-md-2 m-l-5 col-sm-6 col-6 no_margin">

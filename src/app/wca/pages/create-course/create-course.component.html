@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="coursebreadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Admin/auth/Wca">Courses</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Courses</a></li>
         <li class="breadcrumb-item active" aria-current="page">
             <ng-container *ngIf="queryData.edit; else createCourse">
                 Edit Course
@@ -34,24 +34,24 @@
                                                         style="font-weight: bold;">Course Details</span>
                                                 </div>
                                                 <div class="col-md-8" style="visibility:collapse;">
-                                                    <mat-checkbox formControlName="course_mode">Self paced
-                                                    </mat-checkbox>
-                                                </div>
-                                            </div>
-
-                                            <div class="row crs1">
-                                                <div class="col-md-4 course-details">Course Name<span
-                                                        style="color: red;">*</span></div>
-                                                <div class="col-md-8"><input class="inputmainWidth"
-                                                        (keydown)="_handleKeydown($event)" type="text"
-                                                        placeholder="Enter the course name"
-                                                        formControlName="course_name" required />
+                                                    <!-- <mat-checkbox formControlName="course_mode">Self paced
+                                                    </mat-checkbox> -->
                                                 </div>
                                             </div>
 
                                             <div class="row crs1 pad18px">
+                                                <div class="col-md-4 course-details">Course Name<span
+                                                        style="color: red;">*</span></div>
+                                                <div class="col-md-8"><input class="inputmainWidth" #course_name
+                                                        (keydown)="_handleKeydown($event)" type="text"
+                                                        placeholder="Enter the course name" (focusout)="checkCourseName()"
+                                                        formControlName="course_name" required />
+                                                </div>
+                                            </div>
+
+                                            <div class="row crs1 pad18px" style="height: 80px;">
                                                 <div class="col-md-4 course-details">Course Short Description</div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 cls-idx">
                                                     <textarea class="inputs inputmainWidth" style="resize: none;"
                                                         formControlName="course_description"
                                                         placeholder="Enter the course description" maxlength="1000"
@@ -62,15 +62,15 @@
                                             <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Course Long Description</div>
                                                 <div class="col-md-8">
-                                                    <angular-editor class="inputmainWidth" [config]='config'
+                                                    <angular-editor id="angulareditor" class="inputmainWidth" [config]='config'
                                                         formControlName="course_long_description"></angular-editor>
                                                 </div>
                                             </div>
 
-                                            <div class="row crs1 margTop7px">
+                                            <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Pre-Requisite Skill</div>
                                                 <div class="col-md-8">
-                                                    <mat-form-field style="background: #e3ecff !important"
+                                                    <mat-form-field
                                                         class="matchipsbrder inputmainWidth"
                                                         [class.active]="preRequisites?.length">
                                                         <mat-chip-list #preReqList>
@@ -81,8 +81,6 @@
                                                                 <mat-icon matChipRemove>cancel</mat-icon>
                                                             </mat-chip>
                                                             <input class="inputmainWidth"
-                                                                (keydown)="_handleKeydown($event)"
-                                                                (keydown.space)="$event.preventDefault()"
                                                                 [matChipInputAddOnBlur]="true"
                                                                 [matChipInputFor]="preReqList"
                                                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -123,7 +121,7 @@
 
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="row crs1 margbtm">
+                                            <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Preview Video</div>
                                                 <div class="col-md-8"><input class="input-field inputmainWidth"
                                                         type="text" placeholder="URL" (keydown)="_handleKeydown($event)"
@@ -131,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 pad18px">
                                             <button class="input-button btn_browse" (click)='loadBlobs()'
                                                 type="button">Browse</button>
                                         </div>
@@ -140,15 +138,14 @@
 
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="row crs1">
+                                            <div class="row crs1" style="padding-top: 12px;">
                                                 <div class="col-md-4 course-details">Language</div>
                                                 <div class="col-md-8">
                                                     <span class="width88">
                                                         <mat-form-field style="width: 100%;">
                                                             <mat-select [disabled]='showdeletedicon'
                                                                 formControlName="course_language"
-                                                                class="inputs2 inputmainWidth"
-                                                                placeholder="Select the Language">
+                                                                class="inputs2 inputmainWidth">
                                                                 <mat-option *ngFor="let m of languages" [value]="m">
                                                                     {{m}}
                                                                 </mat-option>
@@ -179,7 +176,7 @@
                                     <div class="row"
                                         *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
                                         <div class="col-md-8">
-                                            <div class="row crs1">
+                                            <div class="row crs1" style="padding-top: 2px;">
                                                 <div class="col-md-4 course-details">
                                                     <span *ngIf='i === 0'>Instructor Name</span>
                                                 </div>
@@ -191,8 +188,7 @@
                                                                     <mat-select class="inputs2 inputmainWidth"
                                                                         [disabled]='showdeletedicon'
                                                                         formControlName="author_name"
-                                                                        (selectionChange)="change($event.value,i)"
-                                                                        placeholder="Select the instructor"                                                                        
+                                                                        (selectionChange)="change($event.value,i)"                                                                   
                                                                         name="language" disableOptionCentering>
                                                                         <mat-option
                                                                             *ngFor="let k of AllInstructors | filter_matselect:selected"
@@ -226,7 +222,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="row padBot20px crs1 instructorIcon">
+                                            <div class="row pad18px crs1 instructorIcon">
                                                 <mat-icon (click)="add1()">add_circle_outline</mat-icon>
                                                 <mat-icon *ngIf='i !== 0' (click)="removenewLink1()">delete</mat-icon>
                                             </div>
@@ -244,7 +240,7 @@
                                                     <mat-form-field style="width: 100%;">
                                                         <mat-select [disabled]='showdeletedicon'
                                                             formControlName="certificate_name"
-                                                            class="inputs2 inputmainWidth" placeholder="No Certificate"
+                                                            class="inputs2 inputmainWidth"
                                                             name="language" disableOptionCentering>
                                                             <mat-option *ngFor="let k of AllCertifyDetails"
                                                                 [value]="k.name">
@@ -290,7 +286,6 @@
                                                                         formControlName="name"
                                                                         (selectionChange)="change1($event.value,i)"
                                                                         class="inputs4 hgt39"
-                                                                        placeholder="Select the institute"
                                                                         name="language" 
                                                                         style="width: -webkit-fill-available;"
                                                                         disableOptionCentering>
@@ -314,7 +309,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="row padBot20px crs1" style="margin-left: 66px;">
+                                            <div class="row padBot20px crs1" style="margin-left: 66px; margin-top: 15px;">
                                                 <mat-icon style="margin: 0;" (click)="add2(in)">
                                                     add_circle_outline</mat-icon>
                                                 <mat-icon *ngIf='i !== 0' style="margin: 0;" (click)="removenewLink2(in)">
@@ -339,28 +334,28 @@
                                         <div class="col-md-4"></div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="row crs1 margbtm">
-                                                <div class="col-md-4 course-details">
-                                                    <span>Description</span>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <textarea type="text" class="inputs inputmainWidth"
-                                                        style="resize: none;" (keydown)="_handleKeydown($event)"
-                                                        placeholder="Enter the description"
-                                                        formControlName="text"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
-
                                     <div formArrayName="takeway_details"
                                         *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
-                                        <div
+                                        <div [formGroupName]="i">
+                                            <div class="row">
+                                                <div class="col-md-8 cls-idx" style="height: 80px;">
+                                                    <div class="row crs1 margbtm">
+                                                        <div class="col-md-4 course-details">
+                                                            <span>Description</span>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea type="text" class="inputs inputmainWidth"
+                                                                style="resize: none;" (keydown)="_handleKeydown($event)"
+                                                                placeholder="Enter the description"
+                                                                formControlName="text"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <div
                                             *ngFor="let item of courseForm.get('takeway_details').controls[i].get('media').controls; let j = index;">
-                                            <div [formGroupName]="i">
+                                            <div>
                                                 <div class="row crs1 margbtm">
                                                     <div class="col-md-4 course-details" style="margin-left: inherit;">
                                                         <span *ngIf="j === 0">Media</span></div>
@@ -387,35 +382,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="row crs1 margbtm">
-                                                <div class="col-md-4 course-details">A Step Towards</div>
-                                                <div class="col-md-8"><textarea class="inputs inputmainWidth"
-                                                        (keydown)="_handleKeydown($event)" style="resize: none;"
-                                                        formControlName="description"
-                                                        placeholder="Enter the course description" maxlength="1000"
-                                                        name="info"></textarea>
+                                        <div class="row">
+                                            <div class="col-md-8 cls-idx"  style="height: 80px;">
+                                                <div class="row crs1 margbtm">
+                                                    <div class="col-md-4 course-details">A Step Towards</div>
+                                                    <div class="col-md-8"><textarea class="inputs inputmainWidth"
+                                                            (keydown)="_handleKeydown($event)" style="resize: none;"
+                                                            formControlName="description"
+                                                            placeholder="Enter the course description" maxlength="1000"
+                                                            name="info"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4"></div>
                                         </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="row crs1 margbtm">
-                                                <div class="col-md-4 course-details">Course Milestone</div>
-                                                <div class="col-md-8"><textarea type="text" style="resize: none;"
-                                                        class="inputs inputmainWidth" (keydown)="_handleKeydown($event)"
-                                                        placeholder="Enter the Milestone"
-                                                        formControlName="what_will_you_learn"></textarea>
+                                        <div class="row">
+                                            <div class="col-md-8 cls-idx"  style="height: 80px;">
+                                                <div class="row crs1 margbtm">
+                                                    <div class="col-md-4 course-details">Course Milestone</div>
+                                                    <div class="col-md-8"><textarea type="text" style="resize: none;"
+                                                            class="inputs inputmainWidth" (keydown)="_handleKeydown($event)"
+                                                            placeholder="Enter the Milestone"
+                                                            formControlName="what_will_you_learn"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4"></div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        </div>
                                     </div>
                                     <div class="btmUnderline"></div>
                                     <!-- Learners Takeaway Ends -->

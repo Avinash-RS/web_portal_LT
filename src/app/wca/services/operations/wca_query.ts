@@ -9,8 +9,8 @@ export const remove_doc_ref = gql`
   }`;
 
   export const getallrefdoc = gql`
-  query getallrefdoc($pagenumber:Int!){
-    getallrefdoc(pagenumber:$pagenumber) {
+  query getallrefdoc($pagenumber:Int!, $course_id:String!){
+    getallrefdoc(pagenumber:$pagenumber,course_id:$course_id) {
       data{
       module_id
       topic_id

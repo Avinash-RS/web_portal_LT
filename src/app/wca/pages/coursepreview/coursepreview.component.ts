@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -6,13 +6,14 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-coursepreview',
   templateUrl: './coursepreview.component.html',
   styleUrls: ['./coursepreview.component.scss']
 })
-export class CoursepreviewComponent implements OnInit {
+export class CoursepreviewComponent implements OnInit {  
   public isCollapsed = false;
   clicked: any = 'media';
   urlSafe: SafeResourceUrl;
@@ -41,7 +42,8 @@ export class CoursepreviewComponent implements OnInit {
   courseid: string;
   countofdoc: any;
   authorinfo: any;
-  url: any;
+  url:any;
+  
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
               private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
               private loader: NgxSpinnerService, ) {
@@ -60,10 +62,9 @@ export class CoursepreviewComponent implements OnInit {
       this.isshowPublish = false;
     }
 
-      this.loader.show();
-      this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid, 'sfs').subscribe((viewCourse: any) => {
-      console.log(viewCourse.data.viewcourse, 'viewCourse');
-      if (viewCourse.data.viewcourse.success === true) {
+    this.loader.show();
+    this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid,"admin").subscribe((viewCourse: any) => {
+      if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
       } else {
@@ -92,7 +93,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.route.navigate(['/Admin/auth/Wca/rf'], {queryParams: {id: this.course.course_id}});
+    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id,editModulesback: false}});
   }
   clickedT(i) {
     this.clicked = i;
@@ -103,10 +104,10 @@ export class CoursepreviewComponent implements OnInit {
         this.content = data.data.getmoduleData.data[0];
         this.modulength = this.content.coursedetails.length;
         this.content.coursedetails.forEach(moduledetails => {
-          moduledetails.moduledetails.forEach(element => {
-            this.countofdoc = element.resourse.count;
-            return true;
-           });
+          // moduledetails.moduledetails.forEach(element => {
+            this.countofdoc = moduledetails.Modulecount;
+             return true
+          //  });
         });
       }
     });
@@ -130,11 +131,12 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   previewcourse(templateRef: TemplateRef<any>) {
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
-    // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
-    console.log(this.content.url);
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
+    //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });
@@ -178,6 +180,7 @@ export class CoursepreviewComponent implements OnInit {
 
 
   closeNav() {
-    document.getElementById('myNav').style.height = '0%';
+    this.service.pauseVideo$.next("off");
+    document.getElementById("myNav").style.height = "0%";
   }
 }

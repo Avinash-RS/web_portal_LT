@@ -271,7 +271,6 @@ export class PublishCourseComponent implements OnInit {
   selectcatalogue(event, state: any) {
     if (event.source.selected) {
       this.selectedcatalogue = state.catalogue_id;
-      console.log(this.selectedcatalogue);
     }
   }
 

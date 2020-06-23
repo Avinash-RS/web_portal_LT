@@ -78,6 +78,11 @@
     // margin: -12px 12px 3px 631px;
 }
 
+.deleteTemplate{
+    padding-right: 50px;
+    padding-top: 10px;
+}
+    
 
 @import "variable";
 
@@ -305,12 +310,13 @@ input[type=text]
 }
 
 .timeInput{
-    width: 22% !important;
+    width: 30% !important;
     height: 84%;
     padding: 0px !important;
     margin: 0px !important;    
     text-align: inherit !important;
     float: left !important;
+    height: 30px !important;
 }
 
 
@@ -480,25 +486,34 @@ padding-left: 15px;
 .spanTime{
     color: $color-darkGrey;
     padding-right: 11px;
+    padding-top: 4px;
     // padding-top: 5px;
 }
 .btnprev{
-    border-radius: 40px;
-    background:  $color-blue;
-    color: white;
-    outline: none;
-    font-size: smaller;
-    padding: 0px;
+    background-color:  $color-blue  !important;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid !important;
+    padding-top: 8px;
+    color: #ffffff;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 9px;
 }
 .previewAndTime{
  display: none;
 }
 .bcgClrSync{
-    background-color:#e9ecef;
+    background-color:#e5e3e3;
+}
+
+.container {
+    background-color:#e5e3e3;
 }
 
 .formHeight{
-    height: 80%;
+    height: 90%;
     overflow: auto;
 }
 .dspFlxinside{
@@ -508,8 +523,8 @@ display: flex;
 
 .previewAndTime.active{
     display: flex;
-    justify-content: space-between;
-    width: 80%;
+    // justify-content: space-between;
+    // width: 80%;
 }
 .matcardTime{
     height: 1px;
@@ -519,11 +534,14 @@ display: flex;
 .firstSpan{
     display: flex;
     align-items: center;
-    padding-left: 8%;
 }
 .dspFlx{
     display: flex;
     justify-content: center;
+}
+
+.no-temp {
+    background: #e5e3e3; 
 }
 
 .Bcg{
@@ -698,9 +716,9 @@ display: flex;
 }
 
 .subTitleUpload{
-    display: flex;
+    // display: flex;
     margin-left: 38%;
-    margin-top: 4%;
+    margin-top: 3%;
     margin-bottom: 6%;
 }
 
@@ -787,7 +805,7 @@ background-color: $color-blue!important;
 }
 
 .vidCol1{
-    margin-left: -78%;
+    margin-left: -33%;
 }
 
 .starRating{
@@ -849,4 +867,38 @@ background-color: $color-blue!important;
     .mLeft19{
         margin-left: 4% !important;
     }
+}
+
+.ml35{
+    margin-left: 35% !important;
+}
+
+.feedbacBtn{
+    float: left;
+    margin-left: 28% !important;
+}
+
+.backdropModal{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.moduleInput{
+    display: flex;
+    margin-left: 3%;
+}
+
+::ng-deep .templatesList .mat-expansion-panel-body {
+    padding: 16px 24px 16px !important;
+}
+
+.vttLable{
+    display: block;
+    margin-left: 3px;
+    width: 74%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.initalAlign{
+    text-align: initial;
 }

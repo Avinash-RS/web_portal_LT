@@ -20,7 +20,8 @@ export class LearnerMyCourseComponent implements OnInit {
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
 
-  constructor(public service: LearnerServicesService, public commonService: CommonServicesService, private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService, ) { }
+  constructor(public service: LearnerServicesService, public commonService: CommonServicesService, private gs: GlobalServiceService,
+    private loader: Ng4LoadingSpinnerService,) { }
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
@@ -37,9 +38,9 @@ export class LearnerMyCourseComponent implements OnInit {
       this.breakpoint = 1;
     } else if (window.innerWidth >= 480 && window.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
+    } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
       this.breakpoint = 4;
-         }
+    }
   }
 
   onResize(event) {
@@ -47,11 +48,11 @@ export class LearnerMyCourseComponent implements OnInit {
       this.breakpoint = 1;
     } else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
+    } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
       this.breakpoint = 3;
-         } else {
+    } else {
       this.breakpoint = 4;
-         }
+    }
   }
 
   viewMycourse() {
