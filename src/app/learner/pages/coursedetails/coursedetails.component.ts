@@ -73,6 +73,7 @@ export class CoursedetailsComponent implements OnInit {
   userid: any;
   courseid: any;
   contentid: string;
+  getuserid: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -88,7 +89,7 @@ export class CoursedetailsComponent implements OnInit {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
             if (this.course.topicData && this.course.topicData.length) {
-              // this.topicData = [];
+              this.topicData = [];
               this.course.topicData.forEach(element => {
                 const subArr = [];
                 element.moduleData.forEach(element1 => {
@@ -98,24 +99,28 @@ export class CoursedetailsComponent implements OnInit {
                   modulename: element.moduleData[0].modulename,
                   moduledetails: subArr
                 };
-                // this.topicData.push(obj);
+                this.topicData.push(obj);
               });
             }
-            // this.course.topicData = this.topicData;
+            this.course.topicData = this.topicData;
 
             this.course.wishlisted = detail.wishlist || false;
             this.course.wishlist_id = detail.wishlist_id || null;
             this.course.enrollment_status = detail.enrollment_status;
           }
         });
-      this.passCourseId();
-      this.contentid = 'dfdfd';
-      this.url = environment.scormUrl + 'scormPlayer.html?contentID=' + this.contentid + '&user_id=' +
-          this.userid + '&course_id=' + this.courseid;
+      // this.passCourseId();
+      // this.contentid = 'dfdfd';
+      // this.url = environment.scormUrl + 'scormPlayer.html?contentID=' + this.contentid + '&user_id=' +
+      //     this.userid + '&course_id=' + this.courseid;
 
     }
     this.Lservice.getModuleData(detail.id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+      this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+      (environment.scormUrl + '/scormPlayer.html?contentID=' +
+      this.courseid + '&user_id=' + this.userid + '&user_obj_id=' + this.getuserid._id);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -132,10 +137,10 @@ export class CoursedetailsComponent implements OnInit {
       this.userDetail = this.gs.checkLogout();
     }
   }
-  passCourseId() {
-    this.service.geturl(this.courseid).subscribe((data: any) => {
-    });
-  }
+  // passCourseId() {
+  //   this.service.geturl(this.courseid).subscribe((data: any) => {
+  //   });
+  // }
     scroll(el: HTMLElement) {
       el.scrollTop = 0;
       el.scrollIntoView({ behavior: 'smooth' });
@@ -188,3 +193,23 @@ export class CoursedetailsComponent implements OnInit {
     }
 
   }
+
+// getModuleData(){
+//     this.service.getModuleData(this.course_id).subscribe((data: any) => {
+//       if (data.data.getmoduleData.success === 'true') {
+//         this.content = data.data.getmoduleData.data[0];
+//         this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+//         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+//         (environment.scormUrl + '/scormPlayer.html?contentID=' +
+//         this.course_id + '&user_id=' + this.user_id + '&user_obj_id=' + this.getuserid._id);
+//         // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+//         this.modulength = this.content.coursedetails.length;
+//         this.content.coursedetails.forEach(moduledetails => {
+//           moduledetails.moduledetails.forEach(element => {
+//             this.countofdoc = element.resourse.count;
+//             return true;
+//           });
+//         });
+//       }
+//     });
+//   }

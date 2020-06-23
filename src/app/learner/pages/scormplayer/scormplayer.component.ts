@@ -33,6 +33,7 @@ export class ScormplayerComponent implements OnInit {
   jsonData: any;
   allFeedbackQue: any;
   show = false;
+  getuserid: any;
   constructor(private dialog: MatDialog, public sanitizer: DomSanitizer,
               public spinner: NgxSpinnerService, public activatedRoute: ActivatedRoute, private alert: AlertServiceService,
               public service: LearnerServicesService, public route: Router, public commonService: CommonServicesService, ) {
@@ -46,7 +47,7 @@ export class ScormplayerComponent implements OnInit {
     localStorage.setItem('scorm_user_id', this.user_id);
     localStorage.setItem('course_id', this.course_id);
     this.spinner.show();
-    this.commonService.viewCurseByID(this.course_id, this.user_id).subscribe((data:any) => {
+    this.commonService.viewCurseByID(this.course_id, this.user_id).subscribe((data: any) => {
       if (data.data.viewcourse.success === true) {
         this.courseDeatils = data.data.viewcourse.message;
         this.spinner.hide();
@@ -84,7 +85,10 @@ export class ScormplayerComponent implements OnInit {
     this.service.getModuleData(this.course_id).subscribe((data: any) => {
       if (data.data.getmoduleData.success === 'true') {
         this.content = data.data.getmoduleData.data[0];
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.content.url);
+        this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+        this.course_id + '&user_id=' + this.user_id + '&user_obj_id=' + this.getuserid._id);
         // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
         this.modulength = this.content.coursedetails.length;
         this.content.coursedetails.forEach(moduledetails => {
@@ -96,6 +100,7 @@ export class ScormplayerComponent implements OnInit {
       }
     });
   }
+
 
   downloadAll(urls) {
     const arr: any = [];
