@@ -9,9 +9,10 @@
     margin-top: -5px;
 }
 
-:host ::ng-deep .mat-tab-body-content {
-overflow: hidden !important;
-}
+// :host ::ng-deep .mat-tab-body-content {
+//     overflow: hidden !important;
+// }
+
 :host ::ng-deep .myC .mat-tab-label .mat-tab-label-content {
     font-size: 17px !important;
     font-weight: 600 !important;
@@ -41,6 +42,10 @@ overflow: hidden !important;
     height: 100vh;
 }
 
+:host /deep/ .mat-tab-body {
+    background: #e0eaea;
+}
+
 .coursebg {
     background-color: white;
     margin-bottom: 10px;
@@ -48,9 +53,10 @@ overflow: hidden !important;
 }
 
 .courseImg {
-    padding: 1px;
-    margin: 20px 0px 20px 20px;
     border: 1px solid #d8d8d8;
+    width: 180px;
+    height: 140px;
+    margin: auto;
 }
 
 .linee {
