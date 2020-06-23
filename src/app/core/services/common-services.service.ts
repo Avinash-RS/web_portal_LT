@@ -51,11 +51,12 @@ export class CommonServicesService {
     });
   }
 
-  viewCurseByID(course_id) {
+  viewCurseByID(course_id,user_id) {
     return this.Apollo.query({
       query: viewcourse,
       variables: {
         course_id,
+        user_id
       }
     });
   }

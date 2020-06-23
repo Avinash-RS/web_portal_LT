@@ -9,9 +9,9 @@ export const logout = gql`
     }
   }`;
 
-export const viewcourse = gql`
-  query viewcourse($course_id: String){
-    viewcourse(course_id: $course_id) {
+  export const viewcourse = gql`
+  query viewcourse($course_id: String,$user_id: String){
+    viewcourse(course_id: $course_id,user_id:$user_id) {
       success
       error_msg
       message{

@@ -741,7 +741,7 @@ query getLearnerenrolledCourses($user_id: String){
         {
           status
           course_percentage
-          feedback
+          feedback_status
         }
       }
     }
@@ -823,3 +823,19 @@ export const getFeedbackQuestion = gql`
     }
       }
     }`;
+
+export const getCoursePlayerStatusForCourse = gql`
+query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
+  getCoursePlayerStatusForCourse(user_id:$user_id,course_id:$course_id) {
+    success
+    message{
+    _id
+    status
+    location
+    course_id
+    feedback_status
+    course_percentage
+}
+  }
+}
+`;

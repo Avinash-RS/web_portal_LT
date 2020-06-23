@@ -8,7 +8,7 @@
   <!-- id="navbarCollapse" -->
   <div class="collapse navbar-collapse">
     <!-- <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null"> -->
-      <!-- <ul class="navbar-nav mr-auto">
+    <!-- <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
         <li class="dropdown">
           <a href="/Learner/viewallcourses" class="dropdown-toggle drop" data-toggle="dropdown">
@@ -43,7 +43,7 @@
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
       </span> -->
-    <!-- <app-search></app-search> -->
+      <!-- <app-search></app-search> -->
     </div>
 
     <div class="input-group" *ngIf="userDetailes == null">
@@ -56,7 +56,7 @@
     </div>
 
     <!-- <div style="text-align: right !important;"> -->
-      <div style="position: absolute;right: 60px;">
+    <div style="position: absolute;right: 60px;">
       <ul class="navbar-nav" *ngIf="userDetailes != null">
         <ul class="navbar-nav">
           <!-- <li>
@@ -67,21 +67,26 @@
           </li> -->
 
           <li (click)="navigateProfile()">
-            <img class="profileimg" [src]="userimage != 'null' && userimage != 'undefined'  ? userimage : 'assets/learner/pro2.png'">
+            <img class="profileimg"
+              [src]="userimage != 'null' && userimage != 'undefined'  ? userimage : 'assets/learner/pro2.png'">
           </li>
 
         </ul>
       </ul>
     </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute;right: 20px;" aria-label="Example icon-button with a menu"
-      *ngIf="userDetailes != null">
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="position: absolute;right: 20px;"
+      aria-label="Example icon-button with a menu" *ngIf="userDetailes != null">
       <mat-icon>more_vert</mat-icon>
     </button>
     <div class="header">
       <mat-menu class="menubar" #menu="matMenu">
+
         <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
           <label>Profile</label>
+        </button>
+        <button class="backgroundcol" routerLink="/Learner/home" mat-menu-item>
+          <label>My Course</label>
         </button>
         <!-- <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
           <label>My Course</label>
@@ -104,37 +109,37 @@
       </mat-menu>
     </div>
 
-    <div class="login_btn"   *ngIf="userDetailes == null">
+    <div class="login_btn" *ngIf="userDetailes == null">
       <!-- 
        -->
       <ul class="navbar-nav mr-auto">
         <li class="smallmenu2">
-          <button class="backgroundcol" routerLink="/Learner/register" >Register</button>
-         
+          <button class="backgroundcol" routerLink="/Learner/register">Register</button>
+
         </li>
 
         <li class="smallmenu2">
-          <button class="backgroundcol" routerLink="/Learner/login" >Log in</button>
+          <button class="backgroundcol" routerLink="/Learner/login">Log in</button>
         </li>
 
-      <li class="dropdown1">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
-          Help
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <!-- <li><a href="#">Link</a></li>
+        <li class="dropdown1">
+          <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
+            Help
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- <li><a href="#">Link</a></li>
                       <li><a href="#">Link</a></li>
                       <li><a href="#">Link</a></li> -->
-        </ul>
-      </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
 
 </nav>
 
-<div class="collapse navbar-collapse" id="navbarCollapse" >
+<div class="collapse navbar-collapse" id="navbarCollapse">
   <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null && role == 'learner'" id="navbarCollapse">
     <ul class="navbar-nav mr-auto" id="navbarCollapse">
       <!-- <li class="dropdownsmall">
@@ -179,5 +184,3 @@
     </ul>
   </ul>
 </div>
-
-

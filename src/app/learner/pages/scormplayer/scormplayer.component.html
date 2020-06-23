@@ -1,11 +1,10 @@
 <app-header></app-header>
 <div class="limiter">
   <div class="container wrap-body">
-    <h1 class="head" >{{courseDeatils?.course_name}}</h1>
+    <!-- <h1 class="head" >{{courseDeatils?.course_name}}</h1> -->
     <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['/MyCourse']">Course</a></li>
-
         <li class="breadcrumb-item active" aria-current="page">{{courseDeatils?.course_name}}</li>
       </ol>
     </nav>
@@ -30,7 +29,7 @@
 
           <div class="col-4">
             <mat-form-field style="text-align: right;margin-top: 5%;">
-              <mat-label>Resourse</mat-label>
+              <mat-label>Resources</mat-label>
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
@@ -62,7 +61,7 @@
 
             <div class="col-4">
               <mat-form-field style="text-align: right;margin-top: 5%;">
-                <mat-label>Resourse</mat-label>
+                <mat-label>Resources</mat-label>
                 <mat-icon matPrefix>folder</mat-icon>
                 <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">

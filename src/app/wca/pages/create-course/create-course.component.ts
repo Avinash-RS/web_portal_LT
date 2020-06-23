@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { WcaService } from '../../services/wca.service';
 import { MatChipInputEvent, MatDialog } from '@angular/material';
@@ -17,6 +17,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
     styleUrls: ['./create-course.component.scss']
 })
 export class CreateCourseComponent implements OnInit {
+
+    @ViewChild('course_name') courseNameElem: ElementRef;
 
     editor = ClassicEditor;
     courseForm: FormGroup;
@@ -65,23 +67,24 @@ export class CreateCourseComponent implements OnInit {
             { class: 'calibri', name: 'Calibri' },
             { class: 'comic-sans-ms', name: 'Comic Sans MS' }
         ],
-        customClasses: [
-            {
-              name: 'quote',
-              class: 'quote',
-            },
-            {
-              name: 'redText',
-              class: 'redText'
-            },
-            {
-              name: 'titleText',
-              class: 'titleText',
-              tag: 'h1',
-            },
-          ]
+        // customClasses: [
+        //     {
+        //         name: 'quote',
+        //         class: 'quote',
+        //     },
+        //     {
+        //         name: 'redText',
+        //         class: 'redText'
+        //     },
+        //     {
+        //         name: 'titleText',
+        //         class: 'titleText',
+        //         tag: 'h1',
+        //     },
+        // ]
         // defaultTextAlign: 'left'
     };
+    isEditable: boolean;
 
     createItem(): FormGroup {
         this.preview2.push(null);
@@ -91,7 +94,6 @@ export class CreateCourseComponent implements OnInit {
             image: ''
         });
     }
-
 
     createItem1(): FormGroup {
         this.preview3.push(null);
@@ -131,6 +133,7 @@ export class CreateCourseComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
+            this.isEditable = params.edit === undefined ? false : params.edit;
             let flag = 0;
             for (const key in params) {
                 if (params.hasOwnProperty(key)) {
@@ -139,8 +142,9 @@ export class CreateCourseComponent implements OnInit {
             }
             if (flag) {
                 this.queryData = params;
-                if (this.queryData && this.queryData.edit) {
+                if (this.queryData && this.queryData.edit === 'true') {
                     this.updateFormCourse(this.queryData.viewingModule);
+                    this.preview1 = 'image';
                 } else {
                     this.courseForm = this.mainFormCreation();
                     this.courseForm.controls.pre_requisite.setValue(this.preRequisites);
@@ -237,7 +241,7 @@ export class CreateCourseComponent implements OnInit {
                 this.imageView.type === 'file';
                 formData.append('image', this.imageView);
                 this.wcaService.uploadImage(formData).subscribe((data: any) => {
-                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.path;
+                    imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
                     this.spinner.hide();
                     reader.addEventListener('load', () => {
                         // convert image file to base64 string
@@ -339,7 +343,6 @@ export class CreateCourseComponent implements OnInit {
             this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
-
         if (this.courseForm.value.course_name && this.courseForm.value.course_img_url) {
             this.spinner.show();
             this.submitted = false;
@@ -525,15 +528,51 @@ export class CreateCourseComponent implements OnInit {
 
     loadBlobs() {
         const dialogRef = this.dialog.open(BlobReaderComponent, {
-            data: {},
+            data: { type: 'videos' },
             height: '70%',
-            width: '74%',
+            width: '90%',
             closeOnNavigation: true,
             disableClose: true,
         });
         dialogRef.afterClosed().subscribe(res => {
-            this.courseForm.patchValue({ preview_video: res.url });
+            if (res.url !== undefined) {
+                this.courseForm.patchValue({ preview_video: res.url });
+            }
         });
     }
+
+    checkCourseName() {
+        debugger;
+        const courseName = this.courseForm.controls.course_name.value;
+        if (this.isEditable) {
+            if (courseName === this.courseEditDetails.course_name) {
+                return;
+            } else {
+                if (courseName !== undefined || courseName !== null || courseName !== "") {
+                    this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
+                        if (!res.success) {
+                            this.toast.warning(res.message);
+                            this.courseForm.get('course_name').reset();
+                            this.courseNameElem.nativeElement.focus();
+                        }
+                    });
+                }
+            }
+        } 
+        else if(courseName == ""){
+            return;
+        }else {
+            if (courseName !== undefined || courseName !== null || courseName !== "") {
+                this.wcaService.checkCourseName_Availability(courseName).subscribe(res => {
+                    if (!res.success) {
+                        this.toast.warning(res.message);
+                        this.courseForm.get('course_name').reset();
+                        this.courseNameElem.nativeElement.focus();
+                    }
+                });
+            }
+        }
+    }
+
 
 }

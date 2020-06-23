@@ -6,7 +6,7 @@ import {
   get_board_university_details, get_discipline_details, get_specification_details, get_popular_course,
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
-  get_sub_category, get_course_by_subcategory, get_module_topic,
+  get_sub_category, get_course_by_subcategory, get_module_topic,getCoursePlayerStatusForCourse,
   getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails,getFeedbackQuestion
 } from './operations/learner_query';
 
@@ -534,6 +534,16 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: InsertCourseFeedback,
       variables:feedback
+    });
+  }
+
+  getCoursePlayerStatusForCourse(user_id,course_id) {
+    return this.Apollo.query({
+      query: getCoursePlayerStatusForCourse,
+      variables: {
+        user_id: user_id,
+        course_id: course_id
+      }
     });
   }
 }
