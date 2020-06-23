@@ -109,6 +109,7 @@ export class AuditlogComponent implements OnInit {
       };
       this.adminservice.getfilteredauditlog(data).subscribe((result: any) => {
         if (result?.message?.length) {
+          // console.log(result.message);
           result.message.forEach(element => {
             //  const date = moment(element.created_on);
             //  const date1 = moment(element.updated_on);
