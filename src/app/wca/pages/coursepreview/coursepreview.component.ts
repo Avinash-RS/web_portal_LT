@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog } from "@angular/material";
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -31,12 +31,12 @@ export class CoursepreviewComponent implements OnInit {
       }
     },
     nav: true
-  }
+  };
   course: any = null;
   content: any;
   breakpoint: number;
   detail: any;
-  isshowPublish: boolean = false;
+  isshowPublish = false;
   courseType: string;
   modulength: any;
   courseid: string;
@@ -45,21 +45,21 @@ export class CoursepreviewComponent implements OnInit {
   url:any;
   
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
-    private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
-    private loader: NgxSpinnerService, ) {
+              private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
+              private loader: NgxSpinnerService, ) {
       localStorage.setItem('role', 'admin');
       this.gs.checkLogout();
-      
-    this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    this.loader.show();
 
-    this.courseType = localStorage.getItem('courseType');
-    this.courseid = localStorage.getItem('courseid');
-    if (this.courseType === "create") {
-      this.isshowPublish = true
+      this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      this.loader.show();
+
+      this.courseType = localStorage.getItem('courseType');
+      this.courseid = localStorage.getItem('courseid');
+      if (this.courseType === 'create') {
+      this.isshowPublish = true;
     } else {
-      this.isshowPublish = false
+      this.isshowPublish = false;
     }
 
     this.loader.show();
@@ -67,15 +67,16 @@ export class CoursepreviewComponent implements OnInit {
       if (viewCourse.data.viewcourse.success == true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
-      } else
+      } else {
         this.loader.hide();
+      }
     });
   }
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
-    this.getModuleData()
+    this.getModuleData();
   }
 
   closedialogbox() {
@@ -83,25 +84,25 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   published() {
-    let detail = {
+    const detail = {
       id: this.course.course_id,
       name: this.course.course_name
-    }
+    };
 
-    this.route.navigateByUrl('/Admin/auth/publishCourse', { state: { detail: detail } });
+    this.route.navigateByUrl('/Admin/auth/publishCourse', { state: { detail } });
   }
 
   editResource() {
     this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id,editModulesback: false}});
   }
   clickedT(i) {
-    this.clicked = i
+    this.clicked = i;
   }
   getModuleData() {
-    this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-      if(data.data['getmoduleData']['success'] === 'true'){
-        this.content = data.data['getmoduleData']['data'][0];
-        this.modulength = this.content['coursedetails'].length;
+    this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe((data: any) => {
+      if (data.data.getmoduleData.success === 'true') {
+        this.content = data.data.getmoduleData.data[0];
+        this.modulength = this.content.coursedetails.length;
         this.content.coursedetails.forEach(moduledetails => {
           // moduledetails.moduledetails.forEach(element => {
             this.countofdoc = moduledetails.Modulecount;
@@ -109,12 +110,12 @@ export class CoursepreviewComponent implements OnInit {
           //  });
         });
       }
-    })
+    });
   }
 
-     passCourseId(){
-      this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-      })
+     passCourseId() {
+      this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe((data: any) => {
+      });
      }
 
   crsDetails() {
@@ -123,12 +124,12 @@ export class CoursepreviewComponent implements OnInit {
 
   editModules() {
     this.route.navigate(['/Admin/auth/Wca/addmodule'],
-    { queryParams: {courseId:this.course.course_id, 
-      courseImage: this.course.course_img_url, 
+    { queryParams: {courseId: this.course.course_id,
+      courseImage: this.course.course_img_url,
       courseName: this.course.course_name
     }});
   }
-  
+
   previewcourse(templateRef: TemplateRef<any>) {
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
     //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
@@ -149,23 +150,23 @@ export class CoursepreviewComponent implements OnInit {
   moresection(vale, modelenght) {
     this.modulength = modelenght - 5;
 
-    if (vale == true) {
-      this.isCollapsed = false
+    if (vale === true) {
+      this.isCollapsed = false;
     } else {
-      this.isCollapsed = true
+      this.isCollapsed = true;
     }
   }
 
   downloadAll(urls) {
-    var arr: any = [];
+    const arr: any = [];
     urls.forEach(element => {
       arr.push(element.path);
     });
-    var link = document.createElement('a');
+    const link = document.createElement('a');
     link.target = '_blank';
     link.style.display = 'none';
     document.body.appendChild(link);
-    for (var i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
       link.href = arr[i];
       link.click();
     }
@@ -174,10 +175,10 @@ export class CoursepreviewComponent implements OnInit {
 
 
   previewideo() {
-    document.getElementById("myNav").style.height = "100%";
+    document.getElementById('myNav').style.height = '100%';
   }
 
-  
+
   closeNav() {
     this.service.pauseVideo$.next("off");
     document.getElementById("myNav").style.height = "0%";

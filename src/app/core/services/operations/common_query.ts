@@ -15,8 +15,11 @@ export const logout = gql`
       success
       error_msg
       message{
+        totalLearners
+        course_enrollment_status
         course_id
         course_description
+        course_long_description
         course_name
         created_at
         updated_at
@@ -72,6 +75,18 @@ export const logout = gql`
         user_role
         user_id
         user_name
+       topicData{
+          moduleData{
+          moduleid
+          modulename
+          modulestatus
+          moduledetails{
+          topicname
+          topicstatus
+          topictime
+          }
+          }
+          } 
         people_also_viewed{
           course_id
           course_description
@@ -360,7 +375,6 @@ export const logout = gql`
       }
     }
   }`;
-
 export const view_wishlist = gql`
   query view_wishlist($user_id: String){
     view_wishlist(user_id: $user_id) {

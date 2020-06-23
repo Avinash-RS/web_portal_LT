@@ -238,6 +238,7 @@ query getmoduleData($courseid:String!){
       coursename
       coursefile
       coursestatus
+      coursetime
       coursecreated_on
       coursedetails{
         modulename

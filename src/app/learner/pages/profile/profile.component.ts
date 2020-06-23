@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
   disciplines2: any;
   payment_mode: any;
   ref_no1: any;
+ 
   constructor(
     private el: ElementRef, private alert: AlertServiceService, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
@@ -43,6 +44,13 @@ export class ProfileComponent implements OnInit {
     // const x = localStorage.getItem('OTPFeature') || false;
     // console.log(x);
     this.enableMobileEdit = false;
+        this.getAllLanguage();
+    this.getAllcountry();
+    this.getAllLevels();
+    // this.getBoardsUniv();
+    this.getInstitute();
+    // this.getDiscipline();
+    this.getSpec();
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
@@ -52,13 +60,7 @@ export class ProfileComponent implements OnInit {
       }
     }
 
-    this.getAllLanguage();
-    this.getAllcountry();
-    this.getAllLevels();
-    // this.getBoardsUniv();
-    this.getInstitute();
-    // this.getDiscipline();
-    this.getSpec();
+
   }
 
   // to get controls for validation
@@ -428,6 +430,8 @@ export class ProfileComponent implements OnInit {
         // this.profileForm.value.qualification[index1].board_university = '5ee28a037d0045bb0edc1df9';
         // this.profileForm.value.qualification[index1].specification = '5ee2877b7d0045bb0edc19c2';
         // this.profileForm.value.qualification[index].specification = '5ee2877b7d0045bb0edc19c2';
+
+        //******* */
         if (index2 !== -1) {
           this.profileForm.value.qualification[index2].specification = '5ee2877b7d0045bb0edc19c2';
         }
@@ -522,8 +526,26 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-
+  yearCheck(index){
+    var tenYear;
+    var twelveYear;
+    this.levelValue.forEach((type) => {
+      this.profileForm.value.qualification.forEach((element,index) => {
+        if(type.level_code == '10' && element.qualification == type._id ){
+          tenYear = this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
+         }
+         else if(type.level_code == '12'  && element.qualification == type._id){
+          twelveYear =  this.profileForm.get('qualification').get(String(index)).get('year_of_passing').value;
+        }
+      })
+    })
+    if(tenYear >= twelveYear){
+      this.alert.openAlert('10th year of passing should not be greater than 12th', null);
+      this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
+    }
+  }
   yearOfpassing(index) {
+    this.yearCheck(index);
     this.startYear = 2020 - 60;
     this.endYear = 2020 + 3;
     // this.startYear = moment().year() - 60;

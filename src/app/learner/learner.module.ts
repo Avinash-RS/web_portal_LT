@@ -11,7 +11,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+// import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
 // local
@@ -99,7 +99,7 @@ const routes: Routes = [
   imports: [
     CoreModule,
     PipeModule,
-    Ng4LoadingSpinnerModule.forRoot(),
+    // Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
     BarRatingModule,

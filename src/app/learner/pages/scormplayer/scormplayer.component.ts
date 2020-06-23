@@ -111,6 +111,7 @@ export class ScormplayerComponent implements OnInit {
     });
   }
 
+
   downloadAll(urls) {
     const arr: any = [];
     urls.forEach(element => {
