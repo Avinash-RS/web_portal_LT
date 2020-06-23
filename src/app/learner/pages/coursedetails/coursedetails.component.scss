@@ -219,6 +219,13 @@ li {
     margin-top: 8%;
 }
 
+.panel1 {
+    border: 1px solid $color-border;
+    margin-left: 3.7%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
 :host ::ng-deep .mat-expansion-panel-header {
     padding: 0 11px !important;
 }
@@ -386,4 +393,9 @@ li {
     transform-origin: center;
     transition: 0.8s;
     color: $color-border;
+}
+
+:host /deep/ .mat-ink-bar {
+    height: 4px !important;
+    background-color: #0260A7 !important;
 }

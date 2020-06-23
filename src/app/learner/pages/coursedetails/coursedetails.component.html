@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="space"></div>
 <button mat-button class="backbtn">
-    <mat-icon [routerLink]="['/Learner/MyCourse']" class="backIcon">keyboard_backspace</mat-icon>
+    <mat-icon [routerLink]="['/Learner/home']" class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to my course
 </button>
 
@@ -99,7 +99,7 @@
 
             <mat-tab label="Resources">
                <mat-accordion >
-            <mat-expansion-panel class="panel" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
+            <mat-expansion-panel class="panel1" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
@@ -117,7 +117,7 @@
                           <h2 class="handle">
                             <label [for]="mod?.topicname"><span>{{mod?.topicname}}</span></label>
                           </h2>
-                          <div class="content" ngIf="mod.resourse.lenght > 0">
+                          <div class="content">
                             <div class="row" *ngFor="let file of mod.resourse?.files" >
                               <div class="col-12">
                                   <div class="row">
@@ -143,41 +143,8 @@
                         </section>
                     </div>
                 </div>
-
-                <!-- <ng-template matExpansionPanelContent #example2 *ngFor="let mod of res?.moduledetails">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                           {{mod?.topicname}}<br>
-                        </mat-panel-title>
-                        <mat-icon *ngIf="!example2.expanded">add_circle_outline
-                        </mat-icon>
-                        <mat-icon *ngIf="example2.expanded">remove_circle_outline
-                        </mat-icon>
-                    </mat-expansion-panel-header>
-                    <p>zbkababbafbafbsafakfbafbfbfbaba
-                        kskfajbkabfkafkjaakjbfasfbk
-                        kabkjfabkjbafkbakfbakakaskkafbakf
-                    </p>
-                  </ng-template> -->
             </mat-expansion-panel>
-
-
-            <!-- <mat-expansion-panel class="panel" hideToggle="true" #example2 > -->
-               
-
-                <!-- <div class="row" *ngFor="let mod of res?.moduledetails">
-                    <div class="col-8">
-                            <li><span>{{mod?.topicname}}</span></li>
-                    </div>
-                    <div class="col-4"><br>
-                    </div>
-                </div> -->
-            <!-- </mat-expansion-panel> -->
-
-
         </mat-accordion>
-                
-
             </mat-tab>
             <mat-tab label="Forum">
                 Content 3
@@ -195,7 +162,7 @@
                     [ngClass]="course?.author_details.lenght <= 3 ? 'widthClass arrow' : 'arrow'">
                     <ng-template carouselSlide [id]="author.author_name"
                         *ngFor="let author of course?.author_details">
-                        <div class="instr-box">
+                        <div class="instr-box" *ngIf="course?.author_details.lenght > 0">
                             <div class="row">
                                 <div class="col-4">
                                     <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
@@ -204,9 +171,7 @@
                                 <div class="col-6">
                                     <div class="authorname">{{author?.author_name | titlecase}}</div>
                                 </div>
-
                             </div>
-
                             <div class="row">
                                 <div class="col-12 borderline">
                                     <p class="author-desc">{{author?.description}}</p>
@@ -215,12 +180,9 @@
                         </div>
                     </ng-template>
                 </owl-carousel-o>
-
             </div>
         </div>
     </div>
-
-    <!-- <div class="margin-10"></div> -->
     <div style="height: 100px">&nbsp;</div>
   </div>
 </mat-drawer-container>
