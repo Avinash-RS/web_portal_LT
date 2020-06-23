@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-6 float_right">
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoScorm(course)">
+                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon>play_circle_outline</mat-icon>
                         &nbsp;<span class="cap">
                           {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
@@ -64,7 +64,7 @@
                         </span>
                       </button>
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoScorm(course)">
+                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon>replay</mat-icon>
                         &nbsp;<span class="cap">
                           Replay
