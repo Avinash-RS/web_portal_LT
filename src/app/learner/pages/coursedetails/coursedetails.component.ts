@@ -16,21 +16,21 @@ import Swal from 'sweetalert2';
 export class CoursedetailsComponent implements OnInit {
   course: any = null;
   // loadingCourse = false;
-  customOptions1: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      400: {
-        items: 1
-      }
-    },
-    nav: true
-  };
+  // customOptions1: any = {
+  //   loop: true,
+  //   mouseDrag: true,
+  //   touchDrag: true,
+  //   pullDrag: true,
+  //   dots: true,
+  //   navSpeed: 700,
+  //   navText: ['<', '>'],
+  //   responsive: {
+  //     400: {
+  //       items: 1
+  //     }
+  //   },
+  //   nav: true
+  // };
 
   customOptions: any = {
     loop: true,
@@ -109,11 +109,6 @@ export class CoursedetailsComponent implements OnInit {
             this.course.enrollment_status = detail.enrollment_status;
           }
         });
-      // this.passCourseId();
-      // this.contentid = 'dfdfd';
-      // this.url = environment.scormUrl + 'scormPlayer.html?contentID=' + this.contentid + '&user_id=' +
-      //     this.userid + '&course_id=' + this.courseid;
-
     }
     this.Lservice.getModuleData(detail.id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
@@ -124,11 +119,6 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    this.Lservice.getModuleData(detail?.id).subscribe(data => {
-      this.content = data.data['getmoduleData']['data'][0];
-      this.modulength = this.content['coursedetails'].length;
-      console.log(this.content, 'course details')
-    })
   }
   clickedT(i) {
     this.clicked = i;
@@ -142,20 +132,16 @@ export class CoursedetailsComponent implements OnInit {
       this.userDetail = this.gs.checkLogout();
     }
   }
-  // passCourseId() {
-  //   this.service.geturl(this.courseid).subscribe((data: any) => {
-  //   });
-  // }
     scroll(el: HTMLElement) {
       el.scrollTop = 0;
       el.scrollIntoView({ behavior: 'smooth' });
     }
 
-    playCourse(i) {
-      this.route.navigate(['/Learner/scorm', { id: i }]);
-      this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
-      });
-    }
+    // playCourse(i) {
+    //   this.route.navigate(['/Learner/scorm', { id: i }]);
+    //   this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
+    //   });
+    // }
 
     selectWishlist(course) {
       // this.loader.show();
@@ -182,20 +168,20 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
 
-    enrollCourse() {
-      this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
-        .subscribe((enrollCourse: any) => {
-          if (enrollCourse.data) {
-            if (enrollCourse.data.enrollcourse.success) {
-              Swal.fire('User enrolled successfully for the course');
-            } else {
-              Swal.fire(enrollCourse.data.enrollcourse.message);
-            }
-          } else {
-            Swal.fire('Please try again later');
-          }
-        });
-    }
+    // enrollCourse() {
+    //   this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+    //     .subscribe((enrollCourse: any) => {
+    //       if (enrollCourse.data) {
+    //         if (enrollCourse.data.enrollcourse.success) {
+    //           Swal.fire('User enrolled successfully for the course');
+    //         } else {
+    //           Swal.fire(enrollCourse.data.enrollcourse.message);
+    //         }
+    //       } else {
+    //         Swal.fire('Please try again later');
+    //       }
+    //     });
+    // }
 
   }
 
