@@ -219,8 +219,8 @@ li {
 
 .panel {
     border: 1px solid $color-border;
-    margin-left: 3.7%;
     margin-bottom: 1%;
+    width: 100%;
     margin-top: 8%;
 }
 
@@ -404,4 +404,7 @@ li {
 :host /deep/ .mat-ink-bar {
     height: 4px !important;
     background-color: #0260A7 !important;
+}
+.moduletime{
+    font-size: 12px;
 }

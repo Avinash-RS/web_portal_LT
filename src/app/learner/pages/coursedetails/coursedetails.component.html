@@ -37,16 +37,18 @@
             <mat-expansion-panel class="panel" hideToggle="true" #example>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}}<br>
+                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}}
                     </mat-panel-title>
+                
                     <mat-icon *ngIf="!example.expanded">add_circle_outline
                     </mat-icon>
                     <mat-icon *ngIf="example.expanded">remove_circle_outline
                     </mat-icon>
+                  
                 </mat-expansion-panel-header>
                 <div class="row" *ngFor="let mod of res?.moduledetails">
                     <div class="col-8">
-                            <li><span>{{mod?.topicname}}</span></li>
+                            <li><span style="margin-left: 14px;">{{mod?.topicname}}</span></li>
                     </div>
                     <div class="col-4"><br>
                     </div>
@@ -79,10 +81,10 @@
                         <span class="font-color">136 downloadable resources</span>
                     </div> |
                     <div style="max-width: 100px;" class="col-2">
-                        <span class="font-color">Self paced</span>
+                        <span class="font-color"> {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
                     </div> |
                     <div style="max-width: 78px;" class="col-2">
-                        <span class="font-color">English</span>
+                        <span class="font-color">{{course?.course_language}}</span>
                     </div> |
                     <div class="col-2">
                         <span class="font-color">4 Days</span>
