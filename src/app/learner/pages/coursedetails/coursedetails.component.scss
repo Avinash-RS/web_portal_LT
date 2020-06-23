@@ -4,13 +4,6 @@
     display: flex;
 }
 
-.f_size_23 {
-    font-size: 12px;
-    margin-top: 16px;
-    margin-left: 6px;
-    color: $color-blue;
-}
-
 .vertical {
     border-left: 44px solid $color-blue;
     height: 3px;
@@ -30,11 +23,6 @@
     margin-top: 10px;
 }
 
-.stuEnrolled {
-    text-align: center;
-    font-weight: 500;
-}
-
 .Outine {
     font-size: 16px;
     font-weight: 400px;
@@ -43,26 +31,8 @@
 
 }
 
-.parterImg {
-    width: 150px;
-    width: 100px;
-    padding-right: 6px;
-}
-
 .sm-icon {
     width: 14px;
-}
-
-.tit {
-    font-size: 12px;
-}
-
-.line {
-    border-left: 868px solid $color-border;
-    height: 1px;
-    position: absolute;
-    margin-top: 72px;
-    border-radius: 17px;
 }
 
 .content {
@@ -78,11 +48,6 @@ li {
     list-style: none;
 }
 
-.sm-box {
-    background: $color-border;
-    height: 30px;
-    padding: 6px;
-}
 
 .modeIcon {
     width: 26px;
@@ -217,8 +182,6 @@ li {
     opacity: 0.7;
 }
 
-
-
 .spinner-container {
     position: absolute;
     top: 0;
@@ -319,27 +282,11 @@ li {
     background-color: $color-white;
 }
 
-//   .main.header {
-//     position: absolute;
-//     top: 0;
-//     width: 100%;
-//     z-index: 2;
-//     // margin-top: 4%;
-//     border-bottom: 1px solid #ccc;
-//   }
 
 .main.contents {
     min-height: 100vh;
-    // margin-top: 64px; /* height of header */
-    // padding: 16px;
 }
 
-//   .main.footer {
-//     position: fixed;
-//     border-top: 1px solid #ccc;
-//     bottom: 0;
-//     width: 100%;
-//   }
 :host ::ng-deep .mat-toolbar-row,
 .mat-toolbar-single-row {
     height: 44px !important;
@@ -353,12 +300,12 @@ li {
 .margin-7per {
     margin-top: 8%;
 }
-:host ::ng-deep .mat-accordion>.mat-expansion-panel-spacing:last-child, .mat-accordion>:last-child:not(.mat-expansion-panel) .mat-expansion-panel-spacing {
+
+:host ::ng-deep .mat-accordion>.mat-expansion-panel-spacing:last-child,
+.mat-accordion>:last-child:not(.mat-expansion-panel) .mat-expansion-panel-spacing {
     margin-bottom: 0;
     margin-top: 33px !important;
 }
-
-
 
 .font-color {
     color: #9a9898;
@@ -367,4 +314,76 @@ li {
 :host ::ng-deep .mat-drawer-content {
     padding-left: 15px !important;
     overflow: hidden !important;
+}
+
+
+///////////// sub 
+
+.accordion>input[name="collapse"] {
+    display: none;
+}
+.accordion label,
+.accordion .content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.accordion .content {
+    // background: $color-border;
+    height: 0;
+    transition: 0.5s;
+    border: 1px solid $color-border;
+    border-top-color: transparent;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    height: 380px;
+    transition: height 0.5s;
+}
+.accordion label {
+    display: block;
+}
+/* For Desktop */
+@media only screen and (min-width: 620px) {
+    .accordion>input[name="collapse"]:checked~.content {
+        height: auto;
+        overflow: hidden !important;
+        background: $color-border;
+    }
+}
+.accordion {
+    margin-bottom: 1em;
+}
+.accordion>input[name="collapse"]:checked~.content {
+    border-top: 0;
+    transition: 0.3s;
+}
+.accordion .handle {
+    margin: 0;
+    font-size: 12px;
+}
+.accordion label {
+    color: $color-darkGrey;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid $color-border;
+    border-bottom-color: transparent;
+
+}
+
+.accordion .handle label:before {
+    font-family: FontAwesome;
+    content: "\f067";
+    display: inline-block;
+    margin-right: 21px;
+    margin-left: 20px;
+    font-size: 1.5em;
+    color: $color-border;
+    line-height: 1.556em;
+    vertical-align: middle;
+    transition: 0.8s;
+}
+.accordion>input[name="collapse"]:checked~.handle label:before {
+    content: "\f068";
+    transform-origin: center;
+    transition: 0.8s;
+    color: $color-border;
 }
