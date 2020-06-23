@@ -42,6 +42,7 @@ import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-das
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { NewHomeComponent } from './pages/new-home/new-home.component';
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
@@ -56,14 +57,14 @@ const routes: Routes = [
 
   // { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
   { path: 'Thankyou', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Thank you' } },
- 
+  { path: 'home', component: NewHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }},
   { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
   { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
+  // { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
 
 
 ];
@@ -90,6 +91,7 @@ const routes: Routes = [
     LearnerDashboardComponent,
     LandingpageComponent,
     ForbiddenComponent,
+    NewHomeComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

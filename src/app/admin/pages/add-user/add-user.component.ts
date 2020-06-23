@@ -46,12 +46,44 @@ export class AddUserComponent implements OnInit {
     this.adminDetails = this.gs.checkLogout();
     this.service.getUserGroup()
       .subscribe((result: any) => {
-        this.groups = result.data.get_user_group.message;
+        // this.groups = result.data.get_user_group.message;
+        const tree = this.tree(result?.data?.get_user_group?.message, null);
+        this.groups = this.flattree(tree);
         const index = this.groups.findIndex(x => x.group_id === this.group?.group_id);
         this.addUserForm.patchValue({ group: index !== -1 ? this.groups[index] : null});
       });
   }
 
+
+  tree(data, root) {
+    function setCount(object) {
+        return object.children
+            ? (object.count = object.children.reduce((s, o) => s + 1 + setCount(o), 0))
+            : 0;
+    }
+    const t = {};
+    data.forEach(o => {
+        Object.assign(t[o.group_id] = t[o.group_id] || {}, o);
+        t[o.parent_group_id] = t[o.parent_group_id] || {};
+        t[o.parent_group_id].children = t[o.parent_group_id].children || [];
+        t[o.parent_group_id].children.push(t[o.group_id]);
+        if (o.parent_group_id === root) { t[o.group_id].root = true; }
+    });
+    setCount(t[root]);
+    return t[root].children;
+}
+flattree(items) {
+  const flat = [];
+  items.forEach(item => {
+    flat.push(item);
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      flat.push(...this.flattree(item.children));
+      delete item.children;
+    }
+    delete item.children;
+  });
+  return flat;
+}
   get f() {
     return this.addUserForm.controls;
   }
@@ -138,7 +170,7 @@ export class AddUserComponent implements OnInit {
         const headerNames: any = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 })[0];
         this.exceljson = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
         // tslint:disable-next-line:only-arrow-functions
-        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function (element, index) {
+        const isSame = excelheaders.length === headerNames.length && excelheaders.every(function(element, index) {
           return element === headerNames[index];
         });
         if (isSame === false) {
@@ -184,6 +216,7 @@ export class AddUserComponent implements OnInit {
         if (result.success === true) {
           this.alert.openAlert('Success !', 'Upload in Progress ...');
           this.selectedfile = '';
+          this.group = '';
         } else {
           this.selectedfile = '';
           this.alert.openAlert(result.message, null);
@@ -222,6 +255,7 @@ export class AddUserComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.selectedfile = '';
+        this.group = '';
       }
     });
   }

@@ -722,14 +722,27 @@ query getLearnerenrolledCourses($user_id: String){
       }
       courseEnrolled{
         course_id
+        course_mode
+    course_start_datetime
+    course_end_datetime
         course_name
+        course_description
+        short_description
+        author_details{
+          author_name
+          description
+          image
+        }
         course_img_url
         rating
         price
         totalLearners
-        coursePlayerStatus{
+        coursePlayerStatus
+        {
           status
-          }
+          course_percentage
+          feedback
+        }
       }
     }
   }
@@ -797,7 +810,7 @@ export const getPopularcourse = gql`
         }
       }
     }`;
-    export const getFeedbackQuestion = gql`
+export const getFeedbackQuestion = gql`
     query getFeedbackQuestion{
       getFeedbackQuestion{
         message

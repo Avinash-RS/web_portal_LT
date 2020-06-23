@@ -85,14 +85,14 @@
 
 
 export const menus = [
-    // {
-    //     name: 'Dashboard',
-    //     icon: 'dashboard',
-    //     link: 'dashboard',
-    //     open: false,
-    //     chip: false,
+    {
+        name: 'Dashboard',
+        icon: 'dashboard',
+        link: 'dashboard',
+        open: false,
+        chip: false,
 
-    // },
+    },
     {
         name: 'User Management',
         icon: 'widgets',
@@ -102,7 +102,7 @@ export const menus = [
             {
                 name: 'Users',
                 link: 'userManagement',
-                icon: 'widgets',
+                icon: 'assignment_ind',
                 chip: false,
                 open: true,
             },
@@ -114,7 +114,7 @@ export const menus = [
                 open: true,
             },
             {
-                name: 'Course Enrollment',
+                name: 'Course Enrolment',
                 icon: 'border_color',
                 link: 'enrollment',
                 open: false,
@@ -129,42 +129,57 @@ export const menus = [
             },
         ]
     },
-    // {
-    //     name: 'Course Management',
-    //     icon: 'list',
-    //     link: 'Wca',
-    //     chip: false,
-    //     open: true,
+    {
+        name: 'Jobs',
+        icon: 'work',
+        link: false,
+        open: false,
+        sub: [
+            {
+                name: 'Bulk Enrolment',
+                icon: 'border_color',
+                link: 'bulkenrolment',
+                open: false,
+                chip: false,
+            },
+        ]
+    },
+    {
+        name: 'Course Management',
+        icon: 'library_books',
+        link: 'Wca',
+        chip: false,
+        open: true,
 
-    // },
+    },
 
-    // {
-    //     name: 'Catalogue Management',
-    //     icon: 'business',
-    //     link: false,
-    //     open: false,
-    //     sub: [
-    //         {
-    //             name: 'Categories',
-    //             link: 'catagory',
-    //             icon: 'view_quilt',
-    //             chip: false,
-    //             open: true,
-    //         },
-    //         {
-    //             name: 'Catalogues',
-    //             link: 'catalogue',
-    //             icon: 'assignment',
-    //             chip: false,
-    //             open: true,
-    //         }
-    //     ]
-    // },
-    // {
-    //     name: 'Audit Log',
-    //     link: 'auditlog',
-    //     icon: 'widgets',
-    //     chip: false,
-    //     open: true,
-    // },
+    {
+        name: 'Catalogue Management',
+        icon: 'business',
+        link: false,
+        open: false,
+        sub: [
+            {
+                name: 'Categories',
+                link: 'catagory',
+                icon: 'view_quilt',
+                chip: false,
+                open: true,
+            },
+            {
+                name: 'Catalogues',
+                link: 'catalogue',
+                icon: 'assignment',
+                chip: false,
+                open: true,
+            }
+        ]
+    },
+    {
+        name: 'Audit Log',
+        link: 'auditlog',
+        icon: 'receipt',
+        chip: false,
+        open: true,
+    },
 ];

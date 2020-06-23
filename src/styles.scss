@@ -321,7 +321,7 @@ html {
 }
 
 .border-radius-5 {
-  border-radius: 10px !important;
+  border-radius: 5px !important;
 }
 
 .blue_border {
@@ -669,7 +669,12 @@ h1 {
 }
 
 
-
+.myC {
+  .mat-tab-label {
+    font-size: 17px !important;
+    font-weight: 600 !important;
+  }
+}
 
 //////////////////////
 //Breadcrumb change : Mythreyi--- Sarat

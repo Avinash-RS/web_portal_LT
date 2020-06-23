@@ -275,7 +275,7 @@ public categoryChartLabels: Label[] = [];
 public categoryChartData: MultiDataSet = [];
 public categoryChartType = 'doughnut';
 
-public isCollapsed = false;
+public isCollapsed = true;
 public isCollapsed1 = false;
   days= [];
   activeLearnerisable : boolean = false;
@@ -305,6 +305,7 @@ public isCollapsed1 = false;
   top5CourseData: any;
   adminDetails: any;
   getCoursecate: any;
+  enrollmentSum: any;
  
   constructor(public route: Router, private service: AdminServicesService,private alert: AlertServiceService,public spinner: NgxSpinnerService,) {
     this.days = [{
@@ -395,6 +396,7 @@ public isCollapsed1 = false;
     this.service.getAdminOverview(chartFilterdays,this.adminDetails.user_id).subscribe((res: any) => {
       if(res.data.getAdminOverview.success == true){
         this.newRegisterLearses = res.data.getAdminOverview.message;
+        this.enrollmentSum = this.newRegisterLearses.enrollPending + this.newRegisterLearses.enrollRejected + this.newRegisterLearses.enrollmentApprove
         this.lineChartLabels = this.newRegisterLearses?.perDays.flatMap(i => i._id);
         let  arr = [];arr = this.newRegisterLearses.perDays.flatMap(i => i.count);
         this.lineChartData = [{data: arr, label: 'New registrations' }];
@@ -505,12 +507,15 @@ public isCollapsed1 = false;
               iterator.super_sub_category_id=super_sub_category_id.super_sub_category_name
           }
 
+          let superSubCat;
+         if(iterator.super_sub_category_id == 'NA')  superSubCat = 'NA'
+         else superSubCat = iterator.super_sub_category_id.super_sub_category_name
             this.EnrolledCoursesJson.push({
               category:iterator.category_id.category_name,
               courseName:iterator.course.course_name,
               totalEnrolled:iterator.count,
               subCategory:iterator.parent_sub_category_id.sub_category_name,
-              superSubCategory:iterator.super_sub_category_id
+              superSubCategory:superSubCat
             }); 
         }
        

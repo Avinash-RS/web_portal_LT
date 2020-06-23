@@ -87,7 +87,7 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.loadingCourse = false;
     });
-    this.Lservice.getModuleData(detail.id).subscribe(data => {
+    this.Lservice.getModuleData(detail?.id).subscribe(data => {
       this.content = data.data['getmoduleData']['data'][0];
       this.modulength = this.content['coursedetails'].length;
       console.log(this.content, 'course details')

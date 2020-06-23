@@ -1,17 +1,17 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">User management</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Course enrollment</li>
+    <li class="breadcrumb-item active" aria-current="page">Course enrolment</li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="spinner-container" *ngIf="loading">
-    <mat-spinner diameter="30"></mat-spinner>
+    <!-- <mat-spinner diameter="30"></mat-spinner> -->
   </div>
   <div class="col-5">
-    <h1>Course enrollment</h1>
+    <h1>Course enrolment</h1>
   </div>
   <div class="col-7">
     <div class="toggle">
@@ -33,7 +33,7 @@
 <div>
   <div>
     <div class=" row ">
-      <div style="margin-left: 85%;">
+      <div style="margin-left: 82%;">
         <button [disabled]="selectedcheckbox" (click)="approve(dataSource.data)" class="button button5">Approve</button>
         <button [disabled]="selectedcheckbox" (click)="reject(dataSource.data)" class="button button8">Reject</button>
       </div>
@@ -41,6 +41,8 @@
 
     <hr style="border: 1px solid #ccc; margin:0 !important">
     <div class="example-container">
+      <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+
       <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="selectall">
           <mat-header-cell *matHeaderCellDef>
@@ -62,16 +64,16 @@
           </mat-cell>
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-          <div *ngIf="column.header == 'Enrollments'">
-            <mat-header-cell  *matHeaderCellDef>
+          <div *ngIf="column.header == 'Enrolments'">
+            <mat-header-cell *matHeaderCellDef>
               <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
               {{ column.header }}</mat-header-cell>
           </div>
-         <div *ngIf="column.header != 'Enrollments'">
-          <mat-header-cell   *matHeaderCellDef mat-sort-header>
-            <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
-            {{ column.header }}</mat-header-cell>
-        </div>         
+          <div *ngIf="column.header != 'Enrollments'">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              <!-- <i class="fa fa-sort" aria-hidden="true"></i> -->
+              {{ column.header }}</mat-header-cell>
+          </div>
           <mat-cell (click)="datachange(row,column,enrolldialog)" *matCellDef="let row">{{ column.cell(row) }}
           </mat-cell>
         </ng-container>
@@ -92,7 +94,7 @@
   <div class="row">
     <div style="margin-left: 80%">
       <button [disabled]="selectedcheckbox1" (click)="approve(dataSource1.data)" class="button button5">Approve</button>
-    <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
+      <button [disabled]="selectedcheckbox1" (click)="reject(dataSource1.data)" class="button button8">Reject</button>
     </div>
   </div>
   <!-- <div class="buttons">
