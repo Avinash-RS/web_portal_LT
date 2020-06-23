@@ -100,7 +100,7 @@
             <mat-tab label="Resources">
                <mat-accordion >
             <mat-expansion-panel class="panel1" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
-                <mat-expansion-panel-header>
+                <mat-expansion-panel-header >
                     <mat-panel-title>
                         <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
                     </mat-panel-title>
@@ -110,7 +110,7 @@
                     </mat-icon>
                 </mat-expansion-panel-header>
 
-                <div class="row margin-5">
+                <div class="row margin-5" *ngIf="res?.moduledetails.lenght > 0">
                     <div class="col-12">
                         <section class="accordion" *ngFor="let mod of res?.moduledetails">
                           <input type="checkbox" name="collapse" [id]="mod?.topicname">
@@ -119,25 +119,21 @@
                           </h2>
                           <div class="content">
                             <div class="row" *ngFor="let file of mod.resourse?.files" >
-                              <div class="col-12">
+                              <div class="col-12" style="margin-top:6px">
                                   <div class="row">
-                                      <div class="col-2">
-                                        <i class="fa fa-file-text size" aria-hidden="true"></i> 
-                                      </div>
-                                      <div class="col-6">
+                                    <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="../../../../assets/learner/fileicon/PDF_Icon.svg">
+                                      <div class="col-8">
                                         {{file.type_name}}  
                                     </div>
                                     <div class="col-2" *ngIf="file?.size">
                                         {{file.size}}
                                     </div>
-                                    <div class="col-2">
-                                        <a class="link"  href="{{file?.path}}" download></a>
+                                    <div class="col-1">
+                                        <a href="{{file?.path}}" download>
+                                        <mat-icon style="color: black;font-size: 20px;">save_alt </mat-icon></a>
                                     </div>
                                   </div>
-                                <!-- <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a> -->
-                               
                               </div>
-                  
                             </div>
                           </div>
                         </section>
@@ -146,9 +142,9 @@
             </mat-expansion-panel>
         </mat-accordion>
             </mat-tab>
-            <mat-tab label="Forum">
-                Content 3
-            </mat-tab>
+            <!-- <mat-tab label="Forum" >
+         
+            </mat-tab> -->
         </mat-tab-group>
     </div>
 

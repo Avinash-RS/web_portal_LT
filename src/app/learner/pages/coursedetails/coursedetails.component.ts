@@ -186,7 +186,7 @@ export class CoursedetailsComponent implements OnInit {
 
   }
 
-}
+// }
 
 // getModuleData(){
 //     this.service.getModuleData(this.course_id).subscribe((data: any) => {

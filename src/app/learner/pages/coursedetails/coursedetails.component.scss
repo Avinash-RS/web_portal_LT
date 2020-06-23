@@ -30,6 +30,11 @@
     width: 142px;
 
 }
+.size{
+    height: 17px;
+    margin-left: 3px;
+
+}
 
 .sm-icon {
     width: 14px;
@@ -353,7 +358,7 @@ li {
     .accordion>input[name="collapse"]:checked~.content {
         height: auto;
         overflow: hidden !important;
-        background: $color-border;
+        // background: $color-border;
     }
 }
 .accordion {
@@ -366,6 +371,7 @@ li {
 .accordion .handle {
     margin: 0;
     font-size: 12px;
+    // border-bottom: 1px solid $color-border;
 }
 .accordion label {
     color: $color-darkGrey;
