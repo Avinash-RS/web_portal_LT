@@ -372,11 +372,14 @@ export class ProfileComponent implements OnInit {
               });
               if (unique) {
                 qualification.push(this.formBuilder.group(qual));
-                qualification.controls[index].insCheck = unique;
+                let q;
+                q = qualification.controls[index];
+                q.insCheck = unique;
               } else {
                 qualification.push(this.formBuilder.group(qual));
-                qualification.controls[index].insCheck = unique;
-
+                let a;
+                a = qualification.controls[index];
+                a.insCheck = unique;
               }
             });
           }
@@ -1073,8 +1076,8 @@ export class ProfileComponent implements OnInit {
   //   console.log(e, this.checkdedTPO, this.profileForm);
   // }
   download() {
-    const redirectWindow = 
-    window.open('https://edutechstorage.blob.core.windows.net/container1/images/LnT%20Kaushalya%202020_Brochure.pdf', '_blank');
+    const redirectWindow =
+      window.open('https://edutechstorage.blob.core.windows.net/container1/images/LnT%20Kaushalya%202020_Brochure.pdf', '_blank');
     redirectWindow.location;
   }
 }
