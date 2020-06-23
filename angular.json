@@ -35,6 +35,7 @@
               "src/styles.scss",
               "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
               "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
@@ -44,7 +45,9 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+              "node_modules/froala-editor/js/languages/de.js"
             ],
             "es5BrowserSupport": true
           },
@@ -87,7 +90,7 @@
                   "maximumError": "5mb"
                 }
               ] 
-            },
+            }
           }
         },
         "serve": {
@@ -128,6 +131,7 @@
               "src/styles.scss",
               "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
               "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",

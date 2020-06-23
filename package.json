@@ -37,6 +37,8 @@
     "@types/jquery": "^3.3.35",
     "@types/node": "^10.17.19",
     "add": "^2.0.6",
+    "angular-froala-wysiwyg": "^3.0.1",
+    "froala-editor": "^3.0.0",
     "angular-fusioncharts": "^3.0.4",
     "angular-highlight-js": "^2.0.1",
     "angular-nvd3": "^1.0.9",
