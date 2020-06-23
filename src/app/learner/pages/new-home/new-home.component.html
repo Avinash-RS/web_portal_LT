@@ -35,7 +35,7 @@
                     {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                   </div>
                   <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
-                    {{course.author_details[0]?.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{course.course_mode === 'self-placed' ? 'Self placed' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span *ngFor="let l of course?.author_details;let in = index">
                       {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                     </span>
@@ -57,14 +57,17 @@
                         class="width_35 blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon>play_circle_outline</mat-icon>
                         &nbsp;<span class="cap">
-                          {{course?.coursePlayerStatus?.status || 'Start'}}
+                          {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 
+                          course?.coursePlayerStatus?.status === 'start' ? 'Start'
+                          : 'Start'}}
                         </span>
                       </button>
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
                         class="width_35 blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon>replay</mat-icon>
                         &nbsp;<span class="cap">
-                          {{course?.coursePlayerStatus?.status}}
+                          Replay
                         </span>
                       </button>
                     </div>
@@ -82,7 +85,8 @@
                   (click)="gotoDesc(course)">
                   <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
                   <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                  <img alt="Course Img" src="{{course.course_img_url}}"  width="200px" height="130px" class="courseImg float_right">
+                  <img alt="Course Img" src="{{course.course_img_url}}" width="200px" height="130px"
+                    class="courseImg float_right">
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
                   <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
@@ -92,7 +96,7 @@
                     {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                   </div>
                   <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
-                    {{course.author_details[0]?.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{course.course_mode === 'self-placed' ? 'Self placed' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span *ngFor="let l of course?.author_details;let in = index">
                       {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                     </span>
@@ -113,7 +117,7 @@
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                         class="width_35 blue_clr cap m-b-10 statBtn" (click)="gotoDesc(course)">
                         <mat-icon>play_circle_outline</mat-icon>
-                        &nbsp;{{course?.coursePlayerStatus?.status || 'Start'}}
+                        &nbsp;Resume
                       </button>
                     </div>
                   </div>
@@ -122,7 +126,7 @@
             </ng-container>
             <br>
           </mat-tab>
-          <mat-tab [label]="'Completed (' +completed?.length+ ' )'">
+          <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'">
             <br>
             <ng-container *ngFor="let course of completed ;let k=index">
               <div class="row coursebg no_margin pointer border-radius-5" (click)="gotoDesc(course)">
@@ -130,7 +134,8 @@
                   (click)="gotoDesc(course)">
                   <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
                   <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                  <img alt="Course Img" src="{{course.course_img_url}}"  width="200px" height="130px" class="courseImg float_right">
+                  <img alt="Course Img" src="{{course.course_img_url}}" width="200px" height="130px"
+                    class="courseImg float_right">
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
                   <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500" (click)="gotoDesc(course)">
@@ -140,7 +145,7 @@
                     {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                   </div>
                   <div class="width_100 color_black2 f_size_12 f_wt_400 space2" (click)="gotoDesc(course)">
-                    {{course.author_details[0]?.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{course.course_mode === 'self-placed' ? 'Self placed' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                     <span *ngFor="let l of course?.author_details;let in = index">
                       {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                     </span>
