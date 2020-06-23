@@ -76,9 +76,9 @@ export class CoursedetailsComponent implements OnInit {
   getuserid: any;
   topicData: any[];
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
-              public service: CommonServicesService, private gs: GlobalServiceService,
-              public route: Router, private alert: AlertServiceService,
-              public sanitizer: DomSanitizer) {
+    public service: CommonServicesService, private gs: GlobalServiceService,
+    public route: Router, private alert: AlertServiceService,
+    public sanitizer: DomSanitizer) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -133,16 +133,16 @@ export class CoursedetailsComponent implements OnInit {
       this.userDetail = this.gs.checkLogout();
     }
   }
-    scroll(el: HTMLElement) {
-      el.scrollTop = 0;
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  scroll(el: HTMLElement) {
+    el.scrollTop = 0;
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 
-    // playCourse(i) {
-    //   this.route.navigate(['/Learner/scorm', { id: i }]);
-    //   this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
-    //   });
-    // }
+  // playCourse(i) {
+  //   this.route.navigate(['/Learner/scorm', { id: i }]);
+  //   this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
+  //   });
+  // }
 
   selectWishlist(course) {
     // this.loader.show();
@@ -169,24 +169,23 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-    // enrollCourse() {
-    //   this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
-    //     .subscribe((enrollCourse: any) => {
-    //       if (enrollCourse.data) {
-    //         if (enrollCourse.data.enrollcourse.success) {
-    //           Swal.fire('User enrolled successfully for the course');
-    //         } else {
-    //           Swal.fire(enrollCourse.data.enrollcourse.message);
-    //         }
-    //       } else {
-    //         Swal.fire('Please try again later');
-    //       }
-    //     });
-    // }
-
-  }
+  // enrollCourse() {
+  //   this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+  //     .subscribe((enrollCourse: any) => {
+  //       if (enrollCourse.data) {
+  //         if (enrollCourse.data.enrollcourse.success) {
+  //           Swal.fire('User enrolled successfully for the course');
+  //         } else {
+  //           Swal.fire(enrollCourse.data.enrollcourse.message);
+  //         }
+  //       } else {
+  //         Swal.fire('Please try again later');
+  //       }
+  //     });
+  // }
 
 }
+
 
 // getModuleData(){
 //     this.service.getModuleData(this.course_id).subscribe((data: any) => {
