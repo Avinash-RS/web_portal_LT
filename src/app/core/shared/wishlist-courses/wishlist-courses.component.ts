@@ -19,7 +19,8 @@ export class WishlistCoursesComponent implements OnInit {
 
   constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    this.pagenumber = 0;
     if (this.gs.checkLogout()) {
       this.viewWishlist();
       this.gs.callWishlist.subscribe(message =>
@@ -52,7 +53,7 @@ export class WishlistCoursesComponent implements OnInit {
 
   viewWishlist() {
     const userdetail = this.gs.checkLogout();
-    this.service.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+    this.service.viewWishlist(userdetail._id, this.pagenumber).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
       }
@@ -60,11 +61,14 @@ export class WishlistCoursesComponent implements OnInit {
   }
 
   nextGetWishList() {
+    const userdetail = this.gs.checkLogout();
     this.pagenumber = this.pagenumber + 1;
     console.log(this.pagenumber);
-    // this.service.viewWishlist(this.pagenumber).subscribe((result: any) => {
-    //   this.viewWishlist.push(...result?.data?.viewWishlist?.message);
-    //   };
+    this.service.viewWishlist(userdetail._id, this.pagenumber).subscribe((result: any) => {
+      console.log(this.wishlist, result);
+      this.wishlist.push(...result?.data?.view_wishlist?.message);
+      console.log(this.wishlist);
+      });
     }
     // this.adminservice.getAllCatalogue(this.pagenumber).subscribe((result: any) => {
     //   this.catalogueList.push(...result?.data?.getallcatalogue?.message);
