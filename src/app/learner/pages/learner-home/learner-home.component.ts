@@ -86,7 +86,7 @@ export class LearnerHomeComponent implements OnInit {
   // function to fetch all the enrolled courses of the user
   getEnrolledCourses() {
     this.loadingCatalogue = true;
-    this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, 0).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         this.loadingCatalogue = false;
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
