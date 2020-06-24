@@ -111,7 +111,7 @@ export class LearnerHomeComponent implements OnInit {
  
   viewWishlist() {
     const userdetail = this.gs.checkLogout();
-    this.commonServices.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+    this.commonServices.viewWishlist(userdetail._id, 0).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishList = viewWishlist.data.view_wishlist.message;
       }

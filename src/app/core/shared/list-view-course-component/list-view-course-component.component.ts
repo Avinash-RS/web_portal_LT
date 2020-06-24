@@ -40,7 +40,7 @@ export class ListViewCourseComponentComponent implements OnInit {
   viewWishList(course) {
     this.course.wishlisted = false;
     this.course.wishlist_id = null;
-    this.service.viewWishlist(this.userDetail._id).subscribe((viewWishlist: any) => {
+    this.service.viewWishlist(this.userDetail._id, 0).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         _.filter(viewWishlist.data.view_wishlist.message, function (o) {
           if (o.course_id === course.course_id) {
