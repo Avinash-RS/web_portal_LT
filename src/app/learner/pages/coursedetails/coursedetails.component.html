@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="space"></div>
-<button mat-button class="backbtn">
-    <mat-icon [routerLink]="['/Learner/home']" class="backIcon">keyboard_backspace</mat-icon>
+<button mat-button class="backbtn" [routerLink]="['/Learner/home']">
+    <mat-icon  class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to my course
 </button>
 
@@ -162,6 +162,7 @@
   
     <!-- <div class="row margin-10"> -->
         <!-- <div class="col-12"> -->
+            <div  *ngIf="course?.author_details[0].author_name != ''">
             <h3 class="head-h2">Instructors</h3>
             <div class="vertical"></div>
             <!-- <div class="silder1"> -->
@@ -183,6 +184,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     <!-- </ng-template> -->
                 <!-- </owl-carousel-o> -->
             <!-- </div> -->
