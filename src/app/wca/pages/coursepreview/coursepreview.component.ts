@@ -43,7 +43,7 @@ export class CoursepreviewComponent implements OnInit {
   countofdoc: any;
   authorinfo: any;
   url: any;
-  userDetails: string;
+  userDetails: any;
 
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
               private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
