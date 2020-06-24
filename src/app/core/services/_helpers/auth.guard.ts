@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
       if ((state.url === '/Learner/login' || state.url === '/Admin/login' || state.url === '/Learner/register')) {
-        this.router.navigate(['/Learner']);
+        this.router.navigate(['/Learner/home']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
         // if profile not updated and trying to access other screens, redirect to profile

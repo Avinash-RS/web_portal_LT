@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="space"></div>
-<button mat-button class="backbtn">
-    <mat-icon [routerLink]="['/Learner/home']" class="backIcon">keyboard_backspace</mat-icon>
+<button mat-button class="backbtn" [routerLink]="['/Learner/home']">
+    <mat-icon  class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to my course
 </button>
 
@@ -78,17 +78,18 @@
                         <span class="font-color">20 hrs on demand video</span>
                     </div> |
                     <div style="max-width: 211px;" class="col-3">
-                        <span class="font-color">136 downloadable resources</span>
+                        <span class="font-color">{{course?.totalResourseCount}} downloadable resources</span>
                     </div> |
                     <div style="max-width: 100px;" class="col-2">
                         <span class="font-color"> {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
                     </div> |
                     <div style="max-width: 78px;" class="col-2">
                         <span class="font-color">{{course?.course_language}}</span>
-                    </div> |
+                    </div> 
+                    <!-- |
                     <div class="col-2">
                         <span class="font-color">4 Days</span>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -159,17 +160,16 @@
     </div>
 
   
-    <div class="row margin-10">
-        <div class="col-12">
+    <!-- <div class="row margin-10"> -->
+        <!-- <div class="col-12"> -->
+            <div  *ngIf="course?.author_details[0].author_name != ''">
             <h3 class="head-h2">Instructors</h3>
             <div class="vertical"></div>
-            <div class="silder1">
-                <owl-carousel-o [options]="customOptions"
-                    [ngClass]="course?.author_details.lenght <= 3 ? 'widthClass arrow' : 'arrow'">
-                    <ng-template carouselSlide [id]="author.author_name"
-                        *ngFor="let author of course?.author_details">
-                        <div class="instr-box" *ngIf="course?.author_details.lenght > 0">
-                            <div class="row">
+            <!-- <div class="silder1"> -->
+                <!-- <owl-carousel-o [options]="customOptions" >
+                    <ng-template carouselSlide [id]="author.author_name" > -->
+                        <div class="instr-box" *ngFor="let author of course?.author_details">
+                            <div class="row" >
                                 <div class="col-4">
                                     <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
                                     alt="">
@@ -184,11 +184,12 @@
                                 </div>
                             </div>
                         </div>
-                    </ng-template>
-                </owl-carousel-o>
-            </div>
-        </div>
-    </div>
+                    </div>
+                    <!-- </ng-template> -->
+                <!-- </owl-carousel-o> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
     <div style="height: 100px">&nbsp;</div>
   </div>
 </mat-drawer-container>

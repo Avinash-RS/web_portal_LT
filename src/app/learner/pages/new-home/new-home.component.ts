@@ -13,6 +13,7 @@ export class NewHomeComponent implements OnInit {
   enrolledCourses: any = [];
   incomplete: any = [];
   completed: any = [];
+  loading: boolean;
 
   constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,) {
     this.userDetailes = this.gs.checkLogout();
@@ -22,10 +23,14 @@ export class NewHomeComponent implements OnInit {
   ngOnInit() {
   }
   getEnrolledCourses() {
+    this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
-         element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
+          this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
+            element.duration = data.data.getmoduleData.data[0].coursetime;
+          });
+          //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
         });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
@@ -38,6 +43,7 @@ export class NewHomeComponent implements OnInit {
         this.completed = arr1;
         this.incomplete = arr;
       }
+      this.loading = false;
     });
   }
 
