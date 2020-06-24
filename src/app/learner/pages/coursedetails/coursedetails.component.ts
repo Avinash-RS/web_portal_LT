@@ -75,6 +75,7 @@ export class CoursedetailsComponent implements OnInit {
   contentid: string;
   getuserid: any;
   topicData: any[];
+  resourceFile: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -113,6 +114,7 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.Lservice.getModuleData(detail.id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+      this.resourceFile = this.content?.coursedetails[0]?.moduledetails[0]?.resourse?.files;
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
