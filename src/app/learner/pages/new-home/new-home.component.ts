@@ -72,5 +72,6 @@ export class NewHomeComponent implements OnInit {
       enrollment_status: null
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    localStorage.setItem('Courseid', c.course_id);
   }
 }

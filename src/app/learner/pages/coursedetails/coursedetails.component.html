@@ -131,7 +131,7 @@
                                     <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' " class="size" alt="" src="assets/learner/fileicon/Image_Icon.svg">
                                     <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'" class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
                                     <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
-
+                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' ">description</mat-icon>
                                     <div class="col-8">
                                         {{file.type_name}}  
                                     </div>

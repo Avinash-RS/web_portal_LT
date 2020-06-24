@@ -94,13 +94,13 @@ li {
 }
 
 .instr-box {
-    width: 300px;
+    width: 294px;
     height: auto;
     margin-top: 20px;
     padding-top: 22px;
     margin-bottom: 6px;
     margin-left: 5px;
-    margin-right: 10px;
+    // margin-right: 10px;
     display: inline-grid;
     box-shadow: 1px 1px 0px 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.88);
     border-radius: 2px;
@@ -164,6 +164,11 @@ li {
     color: $color-darkGrey;
     font-weight: 300;
     font-family: roboto;
+}
+.docType{
+    margin-left: 3px;
+    font-size: 22px;
+    margin-top: -3px;      
 }
 
 .author-desc {
