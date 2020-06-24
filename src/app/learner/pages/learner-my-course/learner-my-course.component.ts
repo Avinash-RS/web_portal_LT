@@ -75,7 +75,7 @@ export class LearnerMyCourseComponent implements OnInit {
    viewWishlist() {
     // document.querySelector('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
     const userdetail = this.gs.checkLogout();
-    this.commonService.viewWishlist(userdetail._id).subscribe((viewWishlist: any) => {
+    this.commonService.viewWishlist(userdetail._id, 0).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         this.wishlist = viewWishlist.data.view_wishlist.message;
         this.checkscroll();
