@@ -18,6 +18,7 @@ export class AppComponent {
   title = 'Lxpfrontend';
   status = 'ONLINE'; //initializing as online by default
   isConnected = true;
+  isLoader: any;
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,

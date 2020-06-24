@@ -100,7 +100,7 @@
             </mat-tab>
 
             <mat-tab label="Resources">
-               <mat-accordion >
+               <mat-accordion *ngIf="resourceFile">
             <mat-expansion-panel class="panel1" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
                 <mat-expansion-panel-header >
                     <mat-panel-title>
@@ -143,6 +143,15 @@
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
+            <mat-accordion *ngIf="!resourceFile">
+            <mat-expansion-panel class="panel2" hideToggle="true">
+                <mat-expansion-panel-header >
+                    <mat-panel-title>
+                No resources found
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+        </mat-accordion >
             </mat-tab>
             <!-- <mat-tab label="Forum" >
          
