@@ -16,6 +16,7 @@ import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dash
 import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 import { ReportsComponent } from '@admin/pages/reports/reports.component';
 import { BulkEnrollmentComponent } from '@admin/pages/bulk-enrollment/bulk-enrollment.component';
+import { BulkEnrolmentReportsComponent } from '@admin/pages/bulk-enrolment-reports/bulk-enrolment-reports.component';
 
 export const appRoutes: Routes = [{
     path: 'auth', component: AuthComponent, children: [
@@ -35,6 +36,8 @@ export const appRoutes: Routes = [{
         { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' },  canActivate: [AuthGuard]},
         { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, canActivate: [AuthGuard] },
         { path: 'bulkenrolment', component: BulkEnrollmentComponent, data: { title: 'Bulk Enrolment' }, canActivate: [AuthGuard] },
+        // tslint:disable-next-line:max-line-length
+        { path: 'bulkenrolmentreports', component: BulkEnrolmentReportsComponent, data: { title: 'Bulk Enrolment Reports' }, canActivate: [AuthGuard] },
         { path: 'auditlog', component: AuditlogComponent, data: { title: 'Audit Log' }, canActivate: [AuthGuard] },
         {
             path: 'Wca',

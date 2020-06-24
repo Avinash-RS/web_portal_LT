@@ -34,6 +34,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReportsComponent } from './reports/reports.component';
 import { BulkEnrollmentComponent } from './bulk-enrollment/bulk-enrollment.component';
+import { BulkEnrolmentReportsComponent } from './bulk-enrolment-reports/bulk-enrolment-reports.component';
 
 @NgModule({
     imports: [
@@ -79,7 +80,8 @@ import { BulkEnrollmentComponent } from './bulk-enrollment/bulk-enrollment.compo
     declarations: [AddUserComponent, ReportManagementComponent, AdminDashboardComponent, CatalogueManagementComponent,
         CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent, ReportsComponent,
         ReportsComponent,
-        BulkEnrollmentComponent],
+        BulkEnrollmentComponent,
+        BulkEnrolmentReportsComponent],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
