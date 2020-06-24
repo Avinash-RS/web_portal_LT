@@ -485,7 +485,7 @@ export class ProfileComponent implements OnInit {
               this.loader.hide();
               this.currentUser.is_profile_updated = true;
               localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-              this.router.navigate(['/Learner/MyCourse']);
+              this.router.navigate(['/Learner/home']);
             } else {
               this.alert.openAlert(data.data.update_profile.message, null);
             }
