@@ -1,8 +1,13 @@
 <app-header></app-header>
-<mat-tab-group style="margin-top: 5%;" class="myC">
-  <mat-tab label="My Courses" class="m-l-5 ">
+<!-- <mat-tab-group style="margin-top: 5%;" class="myC">
+  <mat-tab label="My Courses" class="m-l-5 "> -->
+    <p class="mHead">My Courses</p>
+    <div class="vertical"></div>
     <hr style="margin: 0 !important;">
-    <div class="row width_100  bodybg">
+    <div class="spinner-container" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <div class="row width_100 no_margin bodybg" *ngIf="!loading">
       <div class="col-xl-8 col0lg-8 col-md-10 col-sm12 col-12">
         <mat-tab-group style="padding: 0% 3%;" class="myCc">
           <mat-tab [label]="'All ( '+enrolledCourses?.length +' )'">
@@ -196,7 +201,5 @@
         <br>
       </div>
     </div>
-  </mat-tab>
-
-
-</mat-tab-group>
+  <!-- </mat-tab>
+</mat-tab-group> -->

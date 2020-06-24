@@ -13,6 +13,7 @@ export class NewHomeComponent implements OnInit {
   enrolledCourses: any = [];
   incomplete: any = [];
   completed: any = [];
+  loading: boolean;
 
   constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,) {
     this.userDetailes = this.gs.checkLogout();
@@ -22,6 +23,7 @@ export class NewHomeComponent implements OnInit {
   ngOnInit() {
   }
   getEnrolledCourses() {
+    this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
@@ -38,6 +40,7 @@ export class NewHomeComponent implements OnInit {
         this.completed = arr1;
         this.incomplete = arr;
       }
+      this.loading = false;
     });
   }
 
