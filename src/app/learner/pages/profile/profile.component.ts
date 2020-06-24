@@ -1063,9 +1063,9 @@ export class ProfileComponent implements OnInit {
 
     this.getAllLanguage();
     this.getAllcountry();
-   // this.getBoardsUniv();
+    // this.getBoardsUniv();
     this.getInstitute();
-   // this.getDiscipline();
+    // this.getDiscipline();
     this.getSpec();
   }
 
@@ -1192,7 +1192,7 @@ export class ProfileComponent implements OnInit {
         organization: new FormControl(''),
         total_experience: new FormControl('')
       }),
-      domain : environment.domain
+      domain: environment.domain
     });
 
     const job_role = this.profileForm.get('professional.job_role');
@@ -1261,9 +1261,9 @@ export class ProfileComponent implements OnInit {
               this.getBoardsUniv(qual.qualification, index);
               this.levelValue.forEach(element => {
                 if ((element._id === qual.qualification && element.level_code === '10') ||
-                 (element._id === qual.qualification && element.level_code === '12') ) {
-                    element.allowed = 'N';
-                    unique = false;
+                  (element._id === qual.qualification && element.level_code === '12')) {
+                  element.allowed = 'N';
+                  unique = false;
                 }
               });
               if (unique) {
@@ -1377,8 +1377,8 @@ export class ProfileComponent implements OnInit {
   addQualification(i) {
     let unique = false;
     this.levelValue.forEach((type) => {
-      if ((type.level_code === '10' && this.profileForm.value.qualification[i].qualification === type._id )
-       || (type.level_code === '12' && this.profileForm.value.qualification[i].qualification === type._id )) {
+      if ((type.level_code === '10' && this.profileForm.value.qualification[i].qualification === type._id)
+        || (type.level_code === '12' && this.profileForm.value.qualification[i].qualification === type._id)) {
         unique = true;
       }
     });
@@ -1405,7 +1405,7 @@ export class ProfileComponent implements OnInit {
   removeQualification(i) {
     this.levelValue.forEach(level => {
       if ((level._id === this.qualification.controls[i].value.qualification && level.level_code === '10') ||
-      (level._id === this.qualification.controls[i].value.qualification && level.level_code === '12')) {
+        (level._id === this.qualification.controls[i].value.qualification && level.level_code === '12')) {
         level.allowed = 'Y';
       }
     });
@@ -1726,7 +1726,7 @@ export class ProfileComponent implements OnInit {
           let unique = true;
           quali.value.forEach(element => {
             if (element.qualification === type._id) {
-               unique = false;
+              unique = false;
             }
           });
           if (unique) { type.allowed = 'Y'; }
@@ -1739,10 +1739,10 @@ export class ProfileComponent implements OnInit {
     quali = this.profileForm.get('qualification');
     const specification = quali.controls[spec].controls.specification;
     if (level.level_code !== '10' && level.level_code !== '12') {
-      a.insCheck =  false;
+      a.insCheck = false;
       specification.setValidators([Validators.required]);
     } else {
-      a.insCheck =  true;
+      a.insCheck = true;
       specification.setValidators(null);
     }
     specification.updateValueAndValidity();
