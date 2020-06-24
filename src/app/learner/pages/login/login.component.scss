@@ -50,13 +50,13 @@ mat-form-field {
     color: $color-white !important;
 }
 
-::ng-deep .mat-checkbox-inner-container {
+:host::ng-deep .mat-checkbox-inner-container {
     height: 13px !important;
     width: 13px !important;
 
 }
 
-::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+:host ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
     line-height: 27px;
 }
 
@@ -151,7 +151,7 @@ label {
     color: #9E9E9E;
 }
 
-.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
+:host ::ng-deep.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
 }
 

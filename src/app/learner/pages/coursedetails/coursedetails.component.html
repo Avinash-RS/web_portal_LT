@@ -204,17 +204,22 @@
             <!-- <div class="silder1"> -->
             <!-- <owl-carousel-o [options]="customOptions" >
                     <ng-template carouselSlide [id]="author.author_name" > -->
-            <div class="instr-box" *ngFor="let author of course?.author_details">
-                <div class="row">
-                    <div class="col-4">
-                        <img class="img-inst" [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
-                    </div>
-                    <div class="col-6">
-                        <div class="authorname">{{author?.author_name | titlecase}}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 borderline">
-                            <p class="author-desc">{{author?.description}}</p>
+                        <div class="instr-box" *ngFor="let author of course?.author_details">
+                            <div class="row" >
+                                <div class="col-4">
+                                    <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
+                                    alt="">
+                                </div>
+                                <div class="col-6">
+                                    <div class="authorname">{{author?.author_name | titlecase}}</div>
+                                </div>
+
+                                <div class="row margin-35 borderline">
+                                    <div class="col-12">
+                                        <p class="author-desc">{{author?.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
