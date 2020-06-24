@@ -116,7 +116,11 @@ li {
 
 .borderline {
     border-top: 1px solid $color-border;
-    margin-top: 13% !important;
+    width: 295px;
+
+}
+.margin-35{
+    margin-top: 35px;
 }
 
 // :host ::ng-deep .owl-carousel {
