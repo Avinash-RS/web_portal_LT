@@ -1,35 +1,7 @@
 @import "variable";
 
-:host ::ng-deep .mat-tab-label {
-  width: 50% !important;
-  font-weight: 600;
-  font-size: medium;
-}
 
-:host ::ng-deep .mat-form-field-flex {
-  background: $color-white;
-  border: 1px solid $color-border;
-}
 
-:host ::ng-deep .mat-select-arrow {
-  height: 12px !important;
-}
-
-:host ::ng-deep .mat-tab-body-content {
-  overflow: inherit !important;
-  width: 100% !important;
-  min-height: 600px !important;
-  max-height: 600px !important;
-
-}
-
-@media screen and (min-width: 765px) {
-  :host ::ng-deep .mat-tab-body-content {
-    overflow: inherit;
-    width: 100% !important;
-    min-height: 600px !important;
-  }
-}
 
 // for bulk file excel upload
 
@@ -54,7 +26,6 @@
   cursor: pointer !important; 
   pointer-events: auto;
 
-
   input {
     opacity: 0;
     position: absolute;
@@ -73,10 +44,10 @@
   }
 }
 
-.fileover {
-  animation: shake 1s;
-  animation-iteration-count: infinite;
-}
+// .fileover {
+//   animation: shake 1s;
+//   animation-iteration-count: infinite;
+// }
 
 .files-list {
   margin-top: 1.5rem;
@@ -207,22 +178,3 @@
   display: block;
 }
 
-.mat-form-field-appearance-legacy .mat-form-field-wrapper {
-  width: 100% !important;
-}
-
-::ng-deep .p5 {
-
-  .mat-option,
-  .mat-select-panel .mat-option {
-    padding: 0px 211px !important;
-  }
-}
-
-::ng-deep .p10 {
-
-  .mat-option,
-  .mat-select-panel .mat-option {
-    padding: 0px 26px !important;
-  }
-}

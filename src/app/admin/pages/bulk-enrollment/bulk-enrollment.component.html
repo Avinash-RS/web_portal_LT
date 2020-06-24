@@ -1,0 +1,53 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Bulk enrolment</li>
+  </ol>
+</nav>
+
+<h1 style="padding-left: 25px;">Bulk enrolment</h1>
+<br>
+
+
+<div class="downloadbutton">
+  <button (click)="downloadsampleexceltemplate()" *ngIf="!selectedfile"> Download Excel
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle inheritcursor"
+    *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
+    <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
+      (change)="fileBrowseHandler($event.target.files)" class="inheritcursor" />
+    <img src="https://img.icons8.com/cotton/2x/upload.png" width="85" height="64">
+
+    <h3 class="inheritcursor">Drag and drop file here</h3>
+    <h4 class="inheritcursor">( <font color="red">*</font>file extension allowed: .xlx or .xlxs or .csv)</h4>
+    <h3 class="inheritcursor">or</h3>
+    <button for="fileDropRef" class="browse inheritcursor">Browse for file</button>
+  </div>
+</div>
+
+
+<div *ngIf="selectedfile" class="files-list">
+  <div class="single-file">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/.xlsx_icon.svg/1200px-.xlsx_icon.svg.png"
+      class="file-icon" style="width: 50px">
+
+    <div class="info">
+      <h4 class="name">
+        {{ selectedfile?.name }}
+      </h4>
+      <p class="size">
+        {{ formatBytes(selectedfile?.size) }}
+      </p>
+    </div>
+    <img src='https://image.flaticon.com/icons/png/512/61/61848.png' class="delete" (click)="deleteFile()"
+      style="width: 30px">
+  </div>
+</div>
+
+<button type="button" *ngIf="selectedfile" (click)="saveexcel(group)"
+  class="btn btn-primary btn-xs btn-update btn-add-card save-button">Save</button>
+
+<br> <br> <br>

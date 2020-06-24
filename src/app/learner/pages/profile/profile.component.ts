@@ -1276,7 +1276,6 @@ export class ProfileComponent implements OnInit {
                 let q;
                 q = qualification.controls[index];
                 q.insCheck = true;
-
               }
             });
 

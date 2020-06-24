@@ -50,6 +50,7 @@ export class AddUserComponent implements OnInit {
         const tree = this.tree(result?.data?.get_user_group?.message, null);
         this.groups = this.flattree(tree);
         const index = this.groups.findIndex(x => x.group_id === this.group?.group_id);
+        this.group = index ?  this.groups[index] : null;
         this.addUserForm.patchValue({ group: index !== -1 ? this.groups[index] : null});
       });
   }
@@ -276,13 +277,13 @@ flattree(items) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-  tabClick(event, form) {
-    if (event.index === 0) {
-      form.reset();
-      this.selectedfile = '';
-    }
-    if (event.index === 1) {
-      this.addUserForm.reset();
-    }
-  }
+  // tabClick(event, form) {
+  //   if (event.index === 0) {
+  //     form.reset();
+  //     this.selectedfile = '';
+  //   }
+  //   if (event.index === 1) {
+  //     this.addUserForm.reset();
+  //   }
+  // }
 }
