@@ -221,7 +221,7 @@ li {
     border: 1px solid $color-border;
     margin-bottom: 1%;
     width: 100%;
-    margin-top: 8%;
+    margin-top: 1%;
 }
 .panel2{
     height: 50px !important;
@@ -229,6 +229,10 @@ li {
     margin-left: 0.7%;
     margin-bottom: 1%;
     margin-top: 1%;
+}
+
+.topicnm{
+    font-size: 14px;
 }
 .panel1 {
     border: 1px solid $color-border;
@@ -287,13 +291,13 @@ li {
 }
 
 .drawer .header {
-    position: absolute;
+    position: inherit !important;
     right: 0;
     justify-content: space-between;
 }
 
 .drawer .contents {
-    padding: 16px;
+    padding: 2px !important;
 }
 
 .main {
@@ -413,4 +417,10 @@ li {
 }
 .moduletime{
     font-size: 12px;
+}
+
+.courseTime{
+    font-size: 12px;
+     display: flex;
+     margin-left: -12px;  
 }

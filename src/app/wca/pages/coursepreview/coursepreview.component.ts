@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './coursepreview.component.html',
   styleUrls: ['./coursepreview.component.scss']
 })
-export class CoursepreviewComponent implements OnInit {  
+export class CoursepreviewComponent implements OnInit {
   public isCollapsed = false;
   clicked: any = 'media';
   urlSafe: SafeResourceUrl;
@@ -42,32 +42,29 @@ export class CoursepreviewComponent implements OnInit {
   courseid: string;
   countofdoc: any;
   authorinfo: any;
-  url:any;
+  url: any;
   userDetails: string;
-  
+
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
               private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
               private loader: NgxSpinnerService, ) {
       localStorage.setItem('role', 'admin');
       this.gs.checkLogout();
-
       this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
       this.loader.show();
-
       this.courseType = localStorage.getItem('courseType');
       this.courseid = localStorage.getItem('courseid');
       this.userDetails = JSON.parse(localStorage.getItem('adminDetails'));
-      console.log(this.userDetails.user_id)
       if (this.courseType === 'create') {
       this.isshowPublish = true;
     } else {
       this.isshowPublish = false;
     }
 
-    this.loader.show();
-    this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid,"admin").subscribe((viewCourse: any) => {
-      if (viewCourse.data.viewcourse.success == true) {
+      this.loader.show();
+      this.service.viewCurseByID(this.detail ? this.detail.id : this.courseid, 'admin').subscribe((viewCourse: any) => {
+      if (viewCourse.data.viewcourse.success === true) {
         this.course = viewCourse.data.viewcourse.message;
         this.loader.hide();
       } else {
@@ -77,7 +74,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
     this.getModuleData();
@@ -97,7 +94,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   editResource() {
-    this.route.navigate(['/Admin/auth/Wca/rf'],{queryParams:{id:this.course.course_id,editModulesback: false}});
+    this.route.navigate(['/Admin/auth/Wca/rf'], {queryParams: {id: this.course.course_id, editModulesback: false}});
   }
   clickedT(i) {
     this.clicked = i;
@@ -110,7 +107,7 @@ export class CoursepreviewComponent implements OnInit {
         this.content.coursedetails.forEach(moduledetails => {
           // moduledetails.moduledetails.forEach(element => {
             this.countofdoc = moduledetails.Modulecount;
-             return true
+            return true;
           //  });
         });
       }
@@ -135,8 +132,9 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   previewcourse(templateRef: TemplateRef<any>) {
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course.course_id,);
-    //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
+      environment.scormUrl + '/scormPlayer.html?contentID=' + this.course.course_id, );
+    // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {
       width: '100%',
@@ -184,7 +182,7 @@ export class CoursepreviewComponent implements OnInit {
 
 
   closeNav() {
-    this.service.pauseVideo$.next("off");
-    document.getElementById("myNav").style.height = "0%";
+    this.service.pauseVideo$.next('off');
+    document.getElementById('myNav').style.height = '0%';
   }
 }
