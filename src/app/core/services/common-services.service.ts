@@ -17,22 +17,23 @@ import {
 export class CommonServicesService {
 
   constructor(private Apollo: Apollo) { }
-
+  //Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
 
-  globalFilter$ = new Subject<any>();
-  globalFilter = this.globalFilter$.asObservable();
-
+  //Global for all courses(Guideline search to Category and View all courses)
   globalCourses$ = new Subject<any>();
   globalCourses = this.globalCourses$.asObservable();
 
+  //Guideline search to Category for Clear all filter
   globalFilterCategory$ = new Subject<any>();
   globalFilterCategory = this.globalFilterCategory$.asObservable();
 
+  //Guideline search to Category for removing Category from applied filter
   globalCategory$ = new Subject<any>();
   globalCategory = this.globalCategory$.asObservable();
 
+  //Category to view all courses component for applying category
   globalAllCategory$ = new Subject<any>();
   globalAllCategory = this.globalAllCategory$.asObservable();
 
@@ -40,7 +41,7 @@ export class CommonServicesService {
   selectedCategory$ = new Subject<any>();
   selectedCategory = this.selectedCategory$.asObservable();
 
-  // Category to view all courses component
+  // Category to view all courses component to show category on applied filter
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
 
@@ -48,7 +49,8 @@ export class CommonServicesService {
   loader = this.loader$.asObservable();
 
   isLoad = true;
-  // While closing video palyer, pause video in course preview page
+
+  //While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
@@ -63,7 +65,7 @@ export class CommonServicesService {
     });
   }
 
-  viewCurseByID(course_id, user_id) {
+  viewCurseByID(course_id,user_id) {
     return this.Apollo.query({
       query: viewcourse,
       variables: {

@@ -28,11 +28,14 @@ export class ListViewCourseComponentComponent implements OnInit {
   @Input('showEnroll') showEnroll = false;
   currentRate;
   userDetail: any;
+  role: string;
 
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
-    private router: Router, private loader: Ng4LoadingSpinnerService, ) { }
+    private router: Router, private loader: Ng4LoadingSpinnerService, ) {
+      this.role = localStorage.getItem('role') || null;
+     }
 
   viewWishList(course) {
     this.course.wishlisted = false;
@@ -79,7 +82,9 @@ export class ListViewCourseComponentComponent implements OnInit {
   ngOnInit() {
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
-      this.viewWishList(this.course);
+      if (this.role === 'learner') {
+        this.viewWishList(this.course);
+      }
     }
     if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'incomplete') {
       this.course.coursePlayerStatus.status = 'Resume';
@@ -141,7 +146,7 @@ export class ListViewCourseComponentComponent implements OnInit {
           if (enrollCourse.data) {
             if (enrollCourse.data.enrollcourse.success) {
               this.course.enrollment_status = 'pending';
-              Swal.fire('User enrolled successfully for the course');
+              Swal.fire('Your request for enrolment is successfully submitted');
             } else {
               Swal.fire(enrollCourse.data.enrollcourse.message);
               // this.alert.openAlert(enrollCourse.data.enrollcourse.message, null);

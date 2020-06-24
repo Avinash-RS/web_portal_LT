@@ -16,6 +16,9 @@ export class GlobalServiceService {
   private $adminName = new BehaviorSubject('admin');
   adminName = this.$adminName.asObservable();
 
+  private $navigation = new BehaviorSubject('myCourse');
+  navigation = this.$navigation.asObservable();
+
   constructor(public route: Router, public alert: AlertServiceService, private locationStrategy: LocationStrategy,
   ) { }
 
@@ -25,11 +28,11 @@ export class GlobalServiceService {
       const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
       const role = localStorage.getItem('role') || null;
       const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-      if ((userDetail != null || userDetail !== undefined) && role === 'learner') {
+      if ((userDetail != null || userDetail !== undefined ) && role === 'learner') {
         return userDetail;
       } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
         return adminDetails;
-      } else {
+           } else {
         this.alert.openAlert('Logged Out!', 'You have been logged out. Please login to continue');
         this.route.navigate(['/Learner/login']);
       }
@@ -40,7 +43,7 @@ export class GlobalServiceService {
     const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetail && !userDetail.is_profile_updated) {
       this.route.navigate(['/Learner/profile']);
-      this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
+      this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
       return false;
     } else {
       return true;
@@ -53,6 +56,10 @@ export class GlobalServiceService {
 
   getAdminName(name: any) {
     this.$adminName.next(name);
+  }
+
+  getNavigation(navigation: any) {
+    this.$navigation.next(navigation);
   }
 
   preventBackButton() {

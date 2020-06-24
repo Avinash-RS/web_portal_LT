@@ -52,7 +52,7 @@
                             [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                           </mat-progress-bar>
                         </div> <span class="percent color_black2">
-                          {{course?.coursePlayerStatus?.course_percentage}}%
+                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
                         </span>
                       </div>
                       <div class="col-6 float_right">
@@ -78,12 +78,13 @@
                   </div>
                 </div>
               </mat-card>
-              <!-- </div> -->
-              <br>
+              <!-- <br> -->
             </ng-container>
+            <p *ngIf="enrolledCourses?.length === 0" class="noCourse">
+              No courses enrolled yet
+            </p>
           </mat-tab>
-          <mat-tab [label]="'On-Going ( '+incomplete?.length + ' )'">
-            <br>
+          <mat-tab [label]="'On-Going ( '+incomplete?.length + ' )'" [disabled]='incomplete?.length === 0'>
             <ng-container *ngFor="let course of incomplete ;let j=index">
               <br>
               <mat-card class="coursebg">
@@ -118,7 +119,7 @@
                             [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                           </mat-progress-bar>
                         </div> <span class="percent color_black2 pointer">
-                          {{course?.coursePlayerStatus?.course_percentage}}%
+                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
                         </span>
                       </div>
                       <div class="col-6 float_right">
@@ -132,12 +133,14 @@
                   </div>
                 </div>
               </mat-card>
-              <br>
+              <!-- <br> -->
             </ng-container>
+            <p *ngIf="incomplete?.length === 0" class="noCourse">
+              No courses to resume
+            </p>
           </mat-tab>
-          <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'">
-            <br>
-            <ng-container *ngFor="let course of completed ;let k=index">
+          <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'" [disabled]='completed?.length === 0'>
+            <ng-container *ngFor="let course of completed;let k=index">
               <br>
               <mat-card class="coursebg">
                 <div class="row width_100 no_margin">
@@ -171,7 +174,7 @@
                           </mat-progress-bar>
                         </div>
                         <span class="percent color_black2">
-                          {{course?.coursePlayerStatus?.course_percentage}}%
+                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
                         </span>
                       </div>
                       <div class="col-6 float_right">
@@ -187,8 +190,11 @@
                   </div>
                 </div>
               </mat-card>
-              <br>
+              <!-- <br> -->
             </ng-container>
+            <p *ngIf="completed?.length === 0" class="noCourse">
+              No courses completed yet
+            </p>
           </mat-tab>
         </mat-tab-group>
         <br>
