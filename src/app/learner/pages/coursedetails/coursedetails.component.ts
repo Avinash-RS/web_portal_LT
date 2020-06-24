@@ -76,7 +76,7 @@ export class CoursedetailsComponent implements OnInit {
   getuserid: any;
   topicData: any[];
   localStoCourseid: string;
-
+  isLeaner = true;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
