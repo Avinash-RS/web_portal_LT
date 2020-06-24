@@ -11,66 +11,79 @@
     </div>
 </div>
 
-<mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-  <mat-drawer #drawer  class="drawer"  mode="side"  opened="true">
-    <mat-toolbar class="header">
-                <div class="row margin-15">
-                    <div class="col-6 Outine">
-                        Course outline
-                    </div> |
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-2">
-                                <mat-icon  class="alarmIcon">alarm</mat-icon>
-                            </div>
-                            <div class="col-4">
-                                <span class="courseTime">{{courseTime}}</span>
-                            </div>
+<mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
+    <mat-drawer #drawer class="drawer" mode="side" opened="true">
+        <mat-toolbar class="header">
+            <div class="row margin-15">
+                <div class="col-6 Outine">
+                    Course outline
+                </div> |
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            <mat-icon class="alarmIcon">alarm</mat-icon>
+                        </div>
+                        <div class="col-4">
+                            <span class="courseTime">{{courseTime}}</span>
                         </div>
                     </div>
-        </div>
-      <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
-    </mat-toolbar>
-    <div class="contents">
-        
-        <mat-accordion *ngFor="let res of course?.topicData; let i = index">
-            <mat-expansion-panel class="panel" hideToggle="true" #example>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}}
-                    </mat-panel-title>
-                
-                    <mat-icon *ngIf="!example.expanded">add_circle_outline
-                    </mat-icon>
-                    <mat-icon *ngIf="example.expanded">remove_circle_outline
-                    </mat-icon>
-                  
-                </mat-expansion-panel-header>
-                <div class="row" *ngFor="let mod of res?.moduledetails">
-                    <div class="col-8">
-                            <li style="margin-bottom:20px"><span class="topicnm">{{mod?.topicname}}</span></li>
-                    </div>
-                    <div class="col-4"><br>
-                    </div>
                 </div>
-            </mat-expansion-panel>
+            </div>
+            <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
+        </mat-toolbar>
+        <div class="contents">
 
-        </mat-accordion>
-    </div>
-  </mat-drawer>
+            <mat-accordion *ngFor="let res of course?.topicData; let i = index">
+                <mat-expansion-panel class="panel" hideToggle="true" #example>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="module-container">
+                            <!-- <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}} -->
+                            <span>
+                                <span class='index-number'>{{i+1}}</span>
+                                <span style="padding-left:10px;font-weight: 500;">
+                                    {{res?.modulename}}
+                                </span>
+                            </span>
+                            <span style="margin-left:40px;font-weight: 500;">
+                                <mat-icon class="time-icon">alarm</mat-icon>
+                                <span class="course-time">
+                                    09:07:05
+                                </span>
+                            </span>
 
-  <div class="main contents">
-    <div class="videoplayer">
-        <div class="left">
-            <mat-icon *ngIf="!drawer.opened"  (click)="drawer.toggle()">menu</mat-icon>
-            <iframe class="player" [src]="urlSafe"></iframe>
+                        </mat-panel-title>
+                        <mat-checkbox class="mod-check-icon"></mat-checkbox>
+                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                        </mat-icon>
+                        <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
+                        </mat-icon>
+
+                    </mat-expansion-panel-header>
+                    <div class="row" *ngFor="let mod of res?.moduledetails">
+                        <div class="col-8">
+                            <li style="margin-bottom:20px"><span class="topicnm">{{mod?.topicname}}</span></li>
+                        </div>
+                        <div class="col-4"><br>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+
+            </mat-accordion>
         </div>
-    </div>
-    <div class="margin-7per">
-        <mat-tab-group>
-            <mat-tab label="About the course">
-                <h3 class="head-h1">Course description</h3>
-                <div class="vertical"></div> 
+    </mat-drawer>
+
+    <div class="main contents">
+        <div class="videoplayer">
+            <div class="left">
+                <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+                <iframe class="player" [src]="urlSafe"></iframe>
+            </div>
+        </div>
+        <div class="margin-7per">
+            <mat-tab-group>
+                <mat-tab label="About the course">
+                    <h3 class="head-h1">Course description</h3>
+                    <div class="vertical"></div>
 
                 <div class="curInclu">This course includes :</div>
                 <div class="row">
@@ -97,8 +110,8 @@
                             {{course?.course_description}}
                         </p>
                     </div>
-                </div>
-            </mat-tab>
+                    </div>
+                </mat-tab>
 
             <mat-tab label="Resources">
                <mat-accordion>
@@ -156,8 +169,8 @@
             <!-- <mat-tab label="Forum" >
          
             </mat-tab> -->
-        </mat-tab-group>
-    </div>
+            </mat-tab-group>
+        </div>
 
   
     <!-- <div class="row margin-10"> -->
@@ -177,10 +190,10 @@
                                 <div class="col-6">
                                     <div class="authorname">{{author?.author_name | titlecase}}</div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 borderline">
-                                    <p class="author-desc">{{author?.description}}</p>
+                                <div class="row">
+                                    <div class="col-12 borderline">
+                                        <p class="author-desc">{{author?.description}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
