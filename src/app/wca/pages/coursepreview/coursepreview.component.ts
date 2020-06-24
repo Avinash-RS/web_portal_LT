@@ -74,7 +74,6 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
     this.getModuleData();
@@ -133,7 +132,7 @@ export class CoursepreviewComponent implements OnInit {
 
   previewcourse(templateRef: TemplateRef<any>) {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
-      environment.scormUrl + '/scormPlayer.html?contentID=' + this.course.course_id, );
+      environment.scormUrl + '/scormPlayer.html?contentID=' + this.course.course_id + '&path=' + this.content.url, );
     // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
     // this.dialog.open(templateRef);
     this.dialog.open(templateRef, {

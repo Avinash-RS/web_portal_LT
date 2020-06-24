@@ -7,6 +7,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -77,6 +78,8 @@ export class CoursedetailsComponent implements OnInit {
   topicData: any[];
   localStoCourseid: string;
   isLeaner = true;
+  scromModuleData: any;
+  scromApiData: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -126,9 +129,11 @@ export class CoursedetailsComponent implements OnInit {
       element.resValue = resourceFile;
     });
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+      console.log(this.getuserid);
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.courseid + '&user_id=' + this.userid + '&user_obj_id=' + this.getuserid._id);
+        this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id  + '&path=' + this.content.url);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -143,8 +148,15 @@ export class CoursedetailsComponent implements OnInit {
   // get Scrom module and topic
   playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid || this.localStoCourseid).subscribe((data: any) => {
-      console.log(data);
+      this.scromApiData =  data.data.playerModuleAndTopic.message[0];
+      this.scromModuleData = this.scromApiData.childData;
     });
+  }
+  playTopic(url) {
+    console.log(url, 'asdajdadjkajdlkalhhkashdad');
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+    (environment.scormUrl + '/scormPlayer.html?contentID=' +
+    this.localStoCourseid + '&user_id=' + this.getuserid.user_id  + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
   }
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
