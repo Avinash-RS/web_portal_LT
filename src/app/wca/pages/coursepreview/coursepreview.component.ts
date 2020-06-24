@@ -43,6 +43,7 @@ export class CoursepreviewComponent implements OnInit {
   countofdoc: any;
   authorinfo: any;
   url:any;
+  userDetails: string;
   
   constructor(public service: CommonServicesService, public sanitizer: DomSanitizer, private gs: GlobalServiceService,
               private dialog: MatDialog, public route: Router, public learnerservice: LearnerServicesService,
@@ -56,6 +57,8 @@ export class CoursepreviewComponent implements OnInit {
 
       this.courseType = localStorage.getItem('courseType');
       this.courseid = localStorage.getItem('courseid');
+      this.userDetails = JSON.parse(localStorage.getItem('adminDetails'));
+      console.log(this.userDetails.user_id)
       if (this.courseType === 'create') {
       this.isshowPublish = true;
     } else {
@@ -74,6 +77,7 @@ export class CoursepreviewComponent implements OnInit {
   }
 
   ngOnInit() {
+   
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
     this.getModuleData();
@@ -99,7 +103,7 @@ export class CoursepreviewComponent implements OnInit {
     this.clicked = i;
   }
   getModuleData() {
-    this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe((data: any) => {
+    this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid, this.userDetails.user_id).subscribe((data: any) => {
       if (data.data.getmoduleData.success === 'true') {
         this.content = data.data.getmoduleData.data[0];
         this.modulength = this.content.coursedetails.length;

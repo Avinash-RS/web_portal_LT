@@ -93,7 +93,7 @@ export class ScormplayerComponent implements OnInit {
   }
 
   getModuleData() {
-    this.service.getModuleData(this.course_id).subscribe((data: any) => {
+    this.service.getModuleData(this.course_id, this.user_id).subscribe((data: any) => {
       if (data.data.getmoduleData.success === 'true') {
         this.content = data.data.getmoduleData.data[0];
         this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
