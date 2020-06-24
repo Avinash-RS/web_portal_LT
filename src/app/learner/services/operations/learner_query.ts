@@ -704,8 +704,8 @@ query getlearnerdashboarddetails($user_id: String){
 }`;
 
 export const getLearnerenrolledCourses = gql`
-query getLearnerenrolledCourses($user_id: String){
-  getLearnerenrolledCourses(user_id:$user_id){
+query getLearnerenrolledCourses($user_id: String, $user_obj_id: String){
+  getLearnerenrolledCourses(user_id:$user_id, user_obj_id:$user_obj_id){
     success
     message
     data{

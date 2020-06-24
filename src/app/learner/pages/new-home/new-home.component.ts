@@ -22,7 +22,7 @@ export class NewHomeComponent implements OnInit {
   ngOnInit() {
   }
   getEnrolledCourses() {
-    this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
          element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
