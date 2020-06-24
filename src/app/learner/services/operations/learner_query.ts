@@ -228,10 +228,24 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
 }`;
 
 export const getmoduleData = gql`
-query getmoduleData($courseid:String!){
-  getmoduleData(courseid:$courseid) {
+query getmoduleData($courseid:String!,$user_id:String){
+  getmoduleData(courseid:$courseid,user_id:$user_id) {
     success
     data {
+      playerstatusData{
+        success
+        playerstatus{
+          course_dtl{
+            module{
+              topic{
+                topic_name
+                status
+              }
+              module_name
+            }
+          }
+        }
+      }
       courseid
       _id
       url
@@ -704,8 +718,8 @@ query getlearnerdashboarddetails($user_id: String){
 }`;
 
 export const getLearnerenrolledCourses = gql`
-query getLearnerenrolledCourses($user_id: String){
-  getLearnerenrolledCourses(user_id:$user_id){
+query getLearnerenrolledCourses($user_id: String, $user_obj_id: String){
+  getLearnerenrolledCourses(user_id:$user_id, user_obj_id:$user_obj_id){
     success
     message
     data{

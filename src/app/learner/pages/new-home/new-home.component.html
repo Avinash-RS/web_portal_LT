@@ -61,16 +61,14 @@
                           <mat-icon>play_circle_outline</mat-icon>
                           &nbsp;<span class="cap">
                             {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 
-                          course?.coursePlayerStatus?.status === 'start' ? 'Start'
-                          : 'Start'}}
+                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
                           </span>
                         </button>
                         <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
                           class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                           <mat-icon>replay</mat-icon>
                           &nbsp;<span class="cap">
-                            Replay
+                            Replay&nbsp;
                           </span>
                         </button>
                       </div>
@@ -78,7 +76,6 @@
                   </div>
                 </div>
               </mat-card>
-              <!-- <br> -->
             </ng-container>
             <p *ngIf="enrolledCourses?.length === 0" class="noCourse">
               No courses enrolled yet
@@ -126,14 +123,13 @@
                         <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                           class="width_35 blue_clr cap m-b-10 statBtn" (click)="gotoDesc(course)">
                           <mat-icon>play_circle_outline</mat-icon>
-                          &nbsp;Resume
+                          &nbsp;Resume&nbsp;
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </mat-card>
-              <!-- <br> -->
             </ng-container>
             <p *ngIf="incomplete?.length === 0" class="noCourse">
               No courses to resume
@@ -182,7 +178,7 @@
                           class="width_35 blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                           <mat-icon>replay</mat-icon>
                           &nbsp;<span class="cap">
-                            {{course?.coursePlayerStatus?.status}}
+                            Replay&nbsp;
                           </span>
                         </button>
                       </div>
@@ -190,7 +186,6 @@
                   </div>
                 </div>
               </mat-card>
-              <!-- <br> -->
             </ng-container>
             <p *ngIf="completed?.length === 0" class="noCourse">
               No courses completed yet

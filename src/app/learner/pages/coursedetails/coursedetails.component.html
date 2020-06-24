@@ -123,8 +123,14 @@
                             <div class="row" *ngFor="let file of mod.resourse?.files" >
                               <div class="col-12" style="margin-top:6px">
                                   <div class="row">
-                                    <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="../../../../assets/learner/fileicon/PDF_Icon.svg">
-                                      <div class="col-8">
+                                    <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="assets/learner/fileicon/PDF_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' " class="size" alt="" src="assets/learner/fileicon/Image_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'" class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+
+                                    <div class="col-8">
                                         {{file.type_name}}  
                                     </div>
                                     <div class="col-2" *ngIf="file?.size">

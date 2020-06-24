@@ -43,6 +43,15 @@
 
 :host /deep/ .mat-tab-body {
     background: #f1f1f1;
+    html {
+        overflow: scroll;
+        overflow-x: hidden !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent !important;
+    }
 }
 
 .coursebg {
@@ -57,6 +66,7 @@
     border: 1px solid $profile-s-grey;
     width: 180px;
     height: 140px;
+    padding: 1px;
     margin: auto;
 }
 

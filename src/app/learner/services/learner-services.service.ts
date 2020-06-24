@@ -303,11 +303,12 @@ export class LearnerServicesService {
       }
     });
   }
-  getModuleData(course_id) {
+  getModuleData(course_id, userid) {
     return this.Apollo.query({
       query: getmoduleData,
       variables: {
-        courseid: course_id
+        courseid: course_id,
+        user_id: userid
       }
     });
   }
@@ -477,11 +478,12 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id) {
+  get_enrolled_courses(user_id, id) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
-        user_id
+        user_id,
+        user_obj_id : id
       }
     });
   }

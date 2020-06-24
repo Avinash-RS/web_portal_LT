@@ -25,6 +25,8 @@ import {
   MatPaginatorModule,
   MatTreeModule,
   MatDividerModule,
+  MatSidenavModule,
+  MatSliderModule,
   MatProgressSpinnerModule
 } from '@angular/material';
 
@@ -56,7 +58,9 @@ import { CommonModule } from '@angular/common';
     MatPaginatorModule,
     MatTreeModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSliderModule,
   ],
   exports: [
     MatButtonModule,
@@ -82,7 +86,9 @@ import { CommonModule } from '@angular/common';
     MatPaginatorModule,
     MatTreeModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSliderModule,
   ],
   providers: [
     {
