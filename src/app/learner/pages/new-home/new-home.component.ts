@@ -27,7 +27,10 @@ export class NewHomeComponent implements OnInit {
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
-         element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
+          this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
+            element.duration = data.data.getmoduleData.data[0].coursetime;
+          });
+          //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
         });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
@@ -69,5 +72,6 @@ export class NewHomeComponent implements OnInit {
       enrollment_status: null
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    localStorage.setItem('Courseid', c.course_id);
   }
 }

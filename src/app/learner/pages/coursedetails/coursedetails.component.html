@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="space"></div>
-<button mat-button class="backbtn">
-    <mat-icon [routerLink]="['/Learner/home']" class="backIcon">keyboard_backspace</mat-icon>
+<button mat-button class="backbtn" [routerLink]="['/Learner/home']">
+    <mat-icon  class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to my course
 </button>
 
@@ -85,127 +85,110 @@
                     <h3 class="head-h1">Course description</h3>
                     <div class="vertical"></div>
 
-                    <div class="curInclu">This course includes :</div>
-                    <div class="row">
-                        <div style="max-width: 180px;margin-left: -14px;" class="col-3">
-                            <span class="font-color">20 hrs on demand video</span>
-                        </div> |
-                        <div style="max-width: 211px;" class="col-3">
-                            <span class="font-color">{{course?.downloadable_resource_count}} downloadable
-                                resources</span>
-                        </div> |
-                        <div style="max-width: 100px;" class="col-2">
-                            <span class="font-color">
-                                {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
-                        </div> |
-                        <div style="max-width: 78px;" class="col-2">
-                            <span class="font-color">{{course?.course_language}}</span>
-                        </div> |
-                        <div class="col-2">
-                            <span class="font-color">4 Days</span>
-                        </div>
+                <div class="curInclu">This course includes :</div>
+                <div class="row">
+                    <div style="max-width: 180px;margin-left: -14px;" class="col-3">
+                        <span class="font-color">20 hrs on demand video</span>
+                    </div> |
+                    <div style="max-width: 211px;" class="col-3">
+                        <span class="font-color">{{course?.totalResourseCount}} downloadable resources</span>
+                    </div> |
+                    <div style="max-width: 100px;" class="col-2">
+                        <span class="font-color"> {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
+                    </div> |
+                    <div style="max-width: 78px;" class="col-2">
+                        <span class="font-color">{{course?.course_language}}</span>
+                    </div> 
+                    <!-- |
+                    <div class="col-2">
+                        <span class="font-color">4 Days</span>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="desc">
+                            {{course?.course_description}}
+                        </p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="desc">
-                                {{course?.course_description}}
-                            </p>
-                        </div>
                     </div>
                 </mat-tab>
 
-                <mat-tab label="Resources">
-                    <mat-accordion>
-                        <mat-expansion-panel class="panel1" hideToggle="true" #example1
-                            *ngFor="let res of content?.coursedetails; let i = index">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
-                                </mat-panel-title>
-                                <mat-icon *ngIf="!example1.expanded">add_circle_outline
-                                </mat-icon>
-                                <mat-icon *ngIf="example1.expanded">remove_circle_outline
-                                </mat-icon>
-                            </mat-expansion-panel-header>
+            <mat-tab label="Resources">
+               <mat-accordion>
+            <mat-expansion-panel class="panel1" hideToggle="true" #example1 *ngFor="let res of content?.coursedetails; let i = index">
+                <mat-expansion-panel-header *ngIf="res.resValue">
+                    <mat-panel-title>
+                        <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
+                    </mat-panel-title>
+                    <mat-icon *ngIf="!example1.expanded">add_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="example1.expanded">remove_circle_outline
+                    </mat-icon>
+                </mat-expansion-panel-header>
 
-                            <div class="row margin-5">
-                                <div class="col-12">
-                                    <section class="accordion" *ngFor="let mod of res?.moduledetails">
-                                        <input type="checkbox" name="collapse" [id]="mod?.topicname">
-                                        <h2 class="handle">
-                                            <label [for]="mod?.topicname"><span>{{mod?.topicname}}</span></label>
-                                        </h2>
-                                        <div class="content" *ngIf="mod.resourse?.files.length">
-                                            <div class="row" *ngFor="let file of mod.resourse?.files">
-                                                <div class="col-12" style="margin-top:6px">
-                                                    <div class="row">
-                                                        <img *ngIf="file.doc_type == 'application/pdf'" class="size"
-                                                            alt="" src="assets/learner/fileicon/PDF_Icon.svg">
-                                                        <img *ngIf="file.doc_type == 'link'" class="size" alt=""
-                                                            src="assets/learner/fileicon/Link_Icon.svg">
-                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                            class="size" alt=""
-                                                            src="assets/learner/fileicon/Excel_Icon.svg">
-                                                        <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
-                                                            class="size" alt=""
-                                                            src="assets/learner/fileicon/Image_Icon.svg">
-                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                            class="size" alt=""
-                                                            src="assets/learner/fileicon/PPT_Icon.svg">
-                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                            class="size" alt=""
-                                                            src="assets/learner/fileicon/Word_Icon.svg">
-
-                                                        <div class="col-8">
-                                                            {{file.type_name}}
-                                                        </div>
-                                                        <div class="col-2 f_size_12" *ngIf="file?.size">
-                                                            {{file.size}}
-                                                        </div>
-                                                        <div class="col-1">
-                                                            <a href="{{file?.path}}" download>
-                                                                <mat-icon style="color: #333;font-size: 20px;">save_alt
-                                                                </mat-icon>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content" *ngIf="!mod.resourse?.files.length">
-                                            No resources found
-                                        </div>
-                                    </section>
-                                </div>
+                <div class="row margin-5" *ngIf="res.resValue">
+                    <div class="col-12">
+                        <section class="accordion" *ngFor="let mod of res?.moduledetails">
+                        <ng-container  *ngIf="mod.resourse?.files.length">
+                          <input type="checkbox" name="collapse" [id]="mod?.topicname">
+                          <h2 class="handle">
+                            <label [for]="mod?.topicname"><span>{{mod?.topicname}}</span></label>
+                          </h2>
+                          <div class="content">
+                            <div class="row" *ngFor="let file of mod.resourse?.files" >
+                              <div class="col-12" style="margin-top:6px">
+                                  <div class="row">
+                                    <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="assets/learner/fileicon/PDF_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' " class="size" alt="" src="assets/learner/fileicon/Image_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'" class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' ">description</mat-icon>
+                                    <div class="col-8">
+                                        {{file.type_name}}  
+                                    </div>
+                                    <div class="col-2 f_size_12" *ngIf="file?.size">
+                                        {{file.size}}
+                                    </div>
+                                    <div class="col-1">
+                                        <a href="{{file?.path}}" download>
+                                        <mat-icon style="color: #333;font-size: 20px;">save_alt </mat-icon></a>
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </mat-tab>
-                <!-- <mat-tab label="Forum" >
+                          </div>
+                        </ng-container>
+                        </section>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+            </mat-tab>
+            <!-- <mat-tab label="Forum" >
          
             </mat-tab> -->
             </mat-tab-group>
         </div>
 
-
-        <div class="row margin-10">
-            <div class="col-12">
-                <h3 class="head-h2">Instructors</h3>
-                <div class="vertical"></div>
-                <div class="silder1">
-                    <owl-carousel-o [options]="customOptions"
-                        [ngClass]="course?.author_details.lenght <= 3 ? 'widthClass arrow' : 'arrow'">
-                        <ng-template carouselSlide [id]="author.author_name"
-                            *ngFor="let author of course?.author_details">
-                            <div class="instr-box">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <img class="img-inst"
-                                            [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="authorname">{{author?.author_name | titlecase}}</div>
-                                    </div>
+  
+    <!-- <div class="row margin-10"> -->
+        <!-- <div class="col-12"> -->
+            <div  *ngIf="course?.author_details[0].author_name != ''">
+            <h3 class="head-h2">Instructors</h3>
+            <div class="vertical"></div>
+            <!-- <div class="silder1"> -->
+                <!-- <owl-carousel-o [options]="customOptions" >
+                    <ng-template carouselSlide [id]="author.author_name" > -->
+                        <div class="instr-box" *ngFor="let author of course?.author_details">
+                            <div class="row" >
+                                <div class="col-4">
+                                    <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
+                                    alt="">
+                                </div>
+                                <div class="col-6">
+                                    <div class="authorname">{{author?.author_name | titlecase}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 borderline">
@@ -213,11 +196,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </ng-template>
-                    </owl-carousel-o>
-                </div>
-            </div>
-        </div>
-        <div style="height: 100px">&nbsp;</div>
-    </div>
+                        </div>
+                    </div>
+                    <!-- </ng-template> -->
+                <!-- </owl-carousel-o> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    <div style="height: 100px">&nbsp;</div>
+  </div>
 </mat-drawer-container>

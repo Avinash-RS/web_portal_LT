@@ -75,7 +75,8 @@ export class CoursedetailsComponent implements OnInit {
   contentid: string;
   getuserid: any;
   topicData: any[];
- 
+  localStoCourseid: string;
+
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -84,9 +85,10 @@ export class CoursedetailsComponent implements OnInit {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
-      this.courseid = detail.id;
+      this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
-      this.service.viewCurseByID(detail && detail.id || '1', this.userDetail.user_id)
+      this.localStoCourseid = localStorage.getItem('Courseid');
+      this.service.viewCurseByID(detail && detail.id ||  this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
@@ -105,15 +107,23 @@ export class CoursedetailsComponent implements OnInit {
               });
             }
             this.course.topicData = this.topicData;
-
-            this.course.wishlisted = detail.wishlist || false;
-            this.course.wishlist_id = detail.wishlist_id || null;
+            // this.course.wishlisted = detail.wishlist || false;
+            // this.course.wishlist_id = detail.wishlist_id || null;
             this.course.enrollment_status = detail.enrollment_status;
           }
         });
     }
-    this.Lservice.getModuleData(detail.id, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+      this.content.coursedetails.forEach(element => {
+      let resourceFile = false;
+      element.moduledetails.forEach(value => {
+        if (value.resourse) {
+          resourceFile = true;
+        }
+      });
+      element.resValue = resourceFile;
+    });
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -122,6 +132,9 @@ export class CoursedetailsComponent implements OnInit {
       this.courseTime = this.content.coursetime;
     });
   }
+  ngOnInit(): void {
+  }
+
   clickedT(i) {
     this.clicked = i;
   }
@@ -129,11 +142,8 @@ export class CoursedetailsComponent implements OnInit {
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
   }
-  ngOnInit() {
-    if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout();
-    }
-  }
+  // ngOnInit() {
+  // }
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
     el.scrollIntoView({ behavior: 'smooth' });
@@ -145,30 +155,28 @@ export class CoursedetailsComponent implements OnInit {
   //   });
   // }
 
-  selectWishlist(course) {
-    // this.loader.show();
-    if (this.gs.checkLogout()) {
-      if (this.course.wishlisted === false) {
-        this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
-          if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
-            this.course.wishlisted = !this.course.wishlisted;
-            this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
-            this.gs.canCallWishlist(true);
-            // this.loader.hide();
-          }
-        });
-      } else {
-        this.service.removeWishlist(course.wishlist_id).subscribe((addWishlist: any) => {
-          if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
-            this.course.wishlisted = !this.course.wishlisted;
-            course.wishlist_id = null;
-            this.gs.canCallWishlist(true);
-            // this.loader.hide();
-          }
-        });
-      }
-    }
-  }
+  // selectWishlist(course) {
+  //   if (this.gs.checkLogout()) {
+  //     if (this.course.wishlisted === false) {
+  //       this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
+  //         if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
+  //           this.course.wishlisted = !this.course.wishlisted;
+  //           this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
+  //           this.gs.canCallWishlist(true);       // this.loader.hide();
+  //         }
+  //       });
+  //     } else {
+  //       this.service.removeWishlist(course.wishlist_id).subscribe((addWishlist: any) => {
+  //         if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
+  //           this.course.wishlisted = !this.course.wishlisted;
+  //           course.wishlist_id = null;
+  //           this.gs.canCallWishlist(true);
+  //           // this.loader.hide();
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
   // enrollCourse() {
   //   this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)

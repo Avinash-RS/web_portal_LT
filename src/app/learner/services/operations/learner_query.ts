@@ -249,6 +249,7 @@ query getmoduleData($courseid:String!,$user_id:String){
       courseid
       _id
       url
+      totalResourseCount
       coursename
       coursefile
       coursestatus
