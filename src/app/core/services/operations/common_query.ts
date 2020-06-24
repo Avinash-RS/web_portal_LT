@@ -9,7 +9,7 @@ export const logout = gql`
     }
   }`;
 
-  export const viewcourse = gql`
+export const viewcourse = gql`
   query viewcourse($course_id: String,$user_id: String){
     viewcourse(course_id: $course_id,user_id:$user_id) {
       success
@@ -375,6 +375,7 @@ export const logout = gql`
       }
     }
   }`;
+
 export const view_wishlist = gql`
   query view_wishlist($user_id: String){
     view_wishlist(user_id: $user_id) {
@@ -528,11 +529,12 @@ export const getCoursesByName = gql`
       }
   `;
 
-  export const get_all_course_by_usergroup = gql`
+export const get_all_course_by_usergroup = gql`
   query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
     error_msg
+    total_count
     message{
     course_id
     course_description
@@ -616,5 +618,5 @@ export const getCoursesByName = gql`
     }
     }
     }`;
- 
+
 
