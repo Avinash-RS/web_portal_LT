@@ -6,8 +6,9 @@ import {
   get_board_university_details, get_discipline_details, get_specification_details, get_popular_course,
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
-  get_sub_category, get_course_by_subcategory, get_module_topic,getCoursePlayerStatusForCourse,
-  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails,getFeedbackQuestion
+  get_sub_category, get_course_by_subcategory, get_module_topic, getCoursePlayerStatusForCourse,
+  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, playerModuleAndTopic,
+  getLearnerenrolledCourses, getlearnerdashboarddetails, getFeedbackQuestion
 } from './operations/learner_query';
 
 
@@ -17,7 +18,7 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile, getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,InsertCourseFeedback
+  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest, InsertCourseFeedback
 } from './operations/learner_mutation';
 
 import { HttpClient } from '@angular/common/http';
@@ -52,7 +53,7 @@ export class LearnerServicesService {
         full_name,
         email,
         term_condition: termsandconditions,
-        domain:environment.domain
+        domain: environment.domain
       }
     });
   }
@@ -157,7 +158,7 @@ export class LearnerServicesService {
         subtype,
         mobile_number,
         email,
-        domain:environment.domain
+        domain: environment.domain
       }
     });
   }
@@ -387,11 +388,11 @@ export class LearnerServicesService {
   //     }
   //   });
   // }
-  get_module_topic(course_id){
+  get_module_topic(course_id) {
     return this.Apollo.query({
       query: get_module_topic,
       variables: {
-        course_id:course_id
+        course_id
       }
     });
   }
@@ -438,8 +439,8 @@ export class LearnerServicesService {
 
   // Guildeline selected filter value and getting courses
   postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any, course_language: any, course_mode: any,
-    author_details: any, partner_details: any,
-    pagenumber, perPage, publishedToDate, publishedFromDate,catalogue_visibility) {
+                           author_details: any, partner_details: any,
+                           pagenumber, perPage, publishedToDate, publishedFromDate, catalogue_visibility) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
@@ -526,27 +527,40 @@ export class LearnerServicesService {
       query: getPopularcourse,
     });
   }
-  getFeedbackQuestion(){
+  getFeedbackQuestion() {
     return this.Apollo.query({
       query: getFeedbackQuestion
     });
   }
-  InsertCourseFeedback(feedback){
-    console.log(feedback,'lllllllllllllllllllllllllllllllllllllllll')
+  InsertCourseFeedback(feedback) {
+    console.log(feedback, 'lllllllllllllllllllllllllllllllllllllllll');
     return this.Apollo.query({
       query: InsertCourseFeedback,
-      variables:feedback
+      variables: feedback
     });
   }
 
-  getCoursePlayerStatusForCourse(user_id,course_id) {
+  getCoursePlayerStatusForCourse(user_id, course_id) {
     return this.Apollo.query({
       query: getCoursePlayerStatusForCourse,
       variables: {
-        user_id: user_id,
-        course_id: course_id
+        user_id,
+        course_id
       }
     });
   }
+
+  playerModuleAndTopic(contentID) {
+    return this.Apollo.query({
+      query: playerModuleAndTopic,
+      variables: {
+        contentID
+      }
+    });
+  }
+
+
+
+  
 }
 

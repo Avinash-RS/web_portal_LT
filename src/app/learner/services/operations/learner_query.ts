@@ -281,12 +281,34 @@ query getmoduleData($courseid:String!,$user_id:String){
     }
   }
 }`;
+
 export const check_existing_user = gql`
   query check_existing_user($username: String){
     check_existing_user(username: $username) {
       message
       success
   }
+}`;
+
+export const playerModuleAndTopic = gql`
+  query playerModuleAndTopic($contentID: String){
+    playerModuleAndTopic(contentID: $contentID) {
+      message{
+        _id
+        url
+        course_id
+        childData
+        {title _id
+       children
+       { _id
+        title
+         link
+          isVisible
+           }
+            }
+             }
+              success
+               }
 }`;
 
 export const get_all_category = gql`

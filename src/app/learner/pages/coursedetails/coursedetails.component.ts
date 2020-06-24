@@ -88,6 +88,7 @@ export class CoursedetailsComponent implements OnInit {
       this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
+      this.playerModuleAndTopic();
       this.service.viewCurseByID(detail && detail.id ||  this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -139,6 +140,12 @@ export class CoursedetailsComponent implements OnInit {
     this.clicked = i;
   }
 
+  // get Scrom module and topic
+  playerModuleAndTopic() {
+    this.Lservice.playerModuleAndTopic(this.courseid || this.localStoCourseid).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
   }
