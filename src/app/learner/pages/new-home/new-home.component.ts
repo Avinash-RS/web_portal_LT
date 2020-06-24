@@ -37,17 +37,8 @@ export class NewHomeComponent implements OnInit {
         });
         this.completed = arr1;
         this.incomplete = arr;
-        console.log(arr);
       }
     });
-
-    // this.learnerService.getMyCourse(this.userDetailes._id).subscribe((getMyCourse: any) => {
-    //   if (getMyCourse.data.get_course_by_user) {
-    //     if (getMyCourse.data.get_course_by_user.success) {
-    //       console.log(getMyCourse.data.get_course_by_user.message);
-    //     }
-    //   }
-    // });
   }
 
   diff_hours(dt2, dt1) {
