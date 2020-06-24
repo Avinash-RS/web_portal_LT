@@ -774,4 +774,14 @@ mat-header-cell,
     border-top-right-radius: unset !important;
     border-top-left-radius: unset !important;
   }
+  .mat-vertical-content {
+    padding: unset !important;
+  }
+  .mat-expansion-panel-body {
+    padding: unset !important;
+  }
+
+  .mat-vertical-stepper-header {
+    height: 10px !important;
+  }
 }
