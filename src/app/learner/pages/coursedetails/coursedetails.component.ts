@@ -114,6 +114,15 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.Lservice.getModuleData(detail.id, this.userDetail.user_id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+    this.content.coursedetails.forEach(element => {
+      var resourceFile = false;
+      element.moduledetails.forEach(value => {
+        if(value.resourse){
+          resourceFile = true;
+        }
+      });
+      element.resValue = resourceFile;
+    });
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -122,6 +131,7 @@ export class CoursedetailsComponent implements OnInit {
       this.courseTime = this.content.coursetime;
     });
   }
+  
   clickedT(i) {
     this.clicked = i;
   }
