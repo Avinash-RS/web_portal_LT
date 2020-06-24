@@ -61,7 +61,7 @@
                     </mat-expansion-panel-header>
                     <div class="row">
                         <div class="col-12">
-                            <mat-vertical-stepper [linear]="'true'">
+                            <mat-vertical-stepper [linear]="isLeaner">
                                 <ng-container *ngFor="let mod of res?.moduledetails">
                                     <mat-step>
                                         <ng-template matStepLabel>{{mod?.topicname}}</ng-template>
