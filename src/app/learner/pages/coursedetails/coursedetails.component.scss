@@ -30,7 +30,8 @@
     width: 142px;
 
 }
-.size{
+
+.size {
     height: 17px;
     margin-left: 3px;
 
@@ -119,15 +120,18 @@ li {
     width: 295px;
 
 }
-.hideButton{
+
+.hideButton {
     border: none;
     background-color: transparent;
     width: 50px;
     height: 50px;
 }
-.margin-35{
+
+.margin-35 {
     margin-top: 35px;
 }
+
 // :host ::ng-deep .mat-step-header .mat-step-icon {
 //     background-color: $color-white !important;
 //      color: $color-blank; 
@@ -136,7 +140,7 @@ li {
 
 :host ::ng-deep .colorGreen .mat-step-header .mat-step-icon {
     background-color: $color-green !important;
-     color: $color-white; 
+    color: $color-white;
 }
 
 
@@ -191,10 +195,11 @@ li {
     font-weight: 300;
     font-family: roboto;
 }
-.docType{
+
+.docType {
     margin-left: 3px;
     font-size: 22px;
-    margin-top: -3px;      
+    margin-top: -3px;
 }
 
 .author-desc {
@@ -242,7 +247,8 @@ li {
     border: 1px solid $color-border;
     width: 100%;
 }
-.panel2{
+
+.panel2 {
     height: 50px !important;
     border: 1px solid $color-border;
     margin-left: 0.7%;
@@ -250,9 +256,10 @@ li {
     margin-top: 1%;
 }
 
-.topicnm{
+.topicnm {
     font-size: 14px;
 }
+
 .panel1 {
     border: 1px solid $color-border;
     margin-left: 3.7%;
@@ -369,11 +376,13 @@ li {
 .accordion>input[name="collapse"] {
     display: none;
 }
+
 .accordion label,
 .accordion .content {
     max-width: 900px;
     margin: 0 auto;
 }
+
 .accordion .content {
     // background: $color-border;
     height: 0;
@@ -381,13 +390,16 @@ li {
     border: 1px solid $color-border;
     border-top-color: transparent;
 }
+
 .accordion>input[name="collapse"]:checked~.content {
     height: 380px;
     transition: height 0.5s;
 }
+
 .accordion label {
     display: block;
 }
+
 /* For Desktop */
 @media only screen and (min-width: 620px) {
     .accordion>input[name="collapse"]:checked~.content {
@@ -396,18 +408,22 @@ li {
         // background: $color-border;
     }
 }
+
 .accordion {
     margin-bottom: 1em;
 }
+
 .accordion>input[name="collapse"]:checked~.content {
     border-top: 0;
     transition: 0.3s;
 }
+
 .accordion .handle {
     margin: 0;
     font-size: 12px;
     // border-bottom: 1px solid $color-border;
 }
+
 .accordion label {
     color: $color-darkGrey;
     cursor: pointer;
@@ -429,6 +445,7 @@ li {
     vertical-align: middle;
     transition: 0.8s;
 }
+
 .accordion>input[name="collapse"]:checked~.handle label:before {
     content: "\f068";
     transform-origin: center;
@@ -440,14 +457,15 @@ li {
     height: 4px !important;
     background-color: #0260A7 !important;
 }
-.moduletime{
+
+.moduletime {
     font-size: 12px;
 }
 
-.courseTime{
+.courseTime {
     font-size: 12px;
-     display: flex;
-     margin-left: -12px;  
+    display: flex;
+    margin-left: -12px;
 }
 
 .time-icon {
@@ -464,13 +482,13 @@ li {
     margin-top: 3px;
 }
 
-.mod-check-icon{
+.mod-check-icon {
     margin: 3px 8px;
     height: 22px;
     font-size: 20px;
     font-weight: bolder;
     color: $color-green;
-    border:1px solid $color-border;
+    border: 1px solid $color-border;
 }
 
 .spinner-container {
@@ -483,25 +501,28 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  .boll{
+.boll {
     width: 20px;
     height: 20px;
-    margin-left: 15px;;
-      background-color: red;
-      border-radius: 50%;
-  }
+    margin-left: 15px;
+    ;
+    background-color: red;
+    border-radius: 50%;
+}
 
-  .line {
+.line {
     border-left: 1px solid green;
     // height: 40px;
     height: 24px;
     margin-left: 24px;
 
-  }
-// .colgreen{
-    :host /deep/ .colgreen .mat-step-header .mat-step-icon-selected{
+}
+
+::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
+    .mat-step-icon {
         background-color: green !important;
+        color: red !important;
     }
-// }
+}
