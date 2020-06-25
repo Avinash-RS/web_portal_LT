@@ -11,7 +11,7 @@
     </mat-list-item>
 
     <mat-list-item *ngIf="menu.link!=false" (click)="menu.open = !menu.open" [routerLink]="[menu.link]">
-        <mat-icon [style.padding-left]="(menu.isChild === true ? '38px' : '0px')"  matListIcon iconsmall title="{{menu.name}}">{{menu.icon}} </mat-icon>
+        <mat-icon [style.padding-left]="(menu.isChild === true ? '20px' : '0px')"  matListIcon iconsmall title="{{menu.name}}">{{menu.icon}} </mat-icon>
         <h3 matLine *ngIf="!iconOnly" title="{{menu.name}}">{{ menu.name }} </h3>
     </mat-list-item>
 
