@@ -7,12 +7,13 @@ import { MatSort } from '@angular/material/sort';
 export interface Report {
   slNo: number;
   total_count: number;
-  // success_count: number;
-  // updated_count: number;
-  // duplicate_count: number;
-  // existing_count: number;
-  // failure_count: number;
+  success_count: number;
+  updated_count: number;
+  duplicate_count: number;
+  existing_count: number;
+  failure_count: number;
   time_ago: string;
+  Status: string;
   link: string;
   report_id: string;
 }
@@ -25,7 +26,7 @@ export interface Report {
 export class BulkEnrolmentReportsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   reportDetails: Report[] = [];
-  displayedColumns: string[] = ['slNo', 'report_id', 'total_count', 'time_ago', 'link'];
+  displayedColumns: string[] = ['slNo', 'report_id', 'total_count', 'time_ago', 'status', 'link'];
   dataSource = new MatTableDataSource<Report>(this.reportDetails);
   constructor(private service: AdminServicesService, private gs: GlobalServiceService, ) { }
 
