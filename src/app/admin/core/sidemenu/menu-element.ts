@@ -91,6 +91,7 @@ export const menus = [
         link: 'dashboard',
         open: false,
         chip: false,
+        isChild : false,
 
     },
     {
@@ -98,6 +99,7 @@ export const menus = [
         icon: 'widgets',
         link: false,
         open: false,
+        isChild : false,
         sub: [
             {
                 name: 'Users',
@@ -105,6 +107,7 @@ export const menus = [
                 icon: 'assignment_ind',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'User Groups',
@@ -112,6 +115,7 @@ export const menus = [
                 icon: 'list',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'Course Enrolment',
@@ -119,6 +123,7 @@ export const menus = [
                 link: 'enrollment',
                 open: false,
                 chip: false,
+                isChild : true
             },
             {
                 name: 'Reports',
@@ -126,14 +131,16 @@ export const menus = [
                 icon: 'notes',
                 chip: false,
                 open: true,
+                isChild : true
             },
         ]
     },
     {
-        name: 'Jobs',
+        name: 'Bulk Enrolment Management',
         icon: 'work',
         link: false,
         open: false,
+        isChild : false,
         sub: [
             {
                 name: 'Bulk Enrolment',
@@ -141,6 +148,7 @@ export const menus = [
                 link: 'bulkenrolment',
                 open: false,
                 chip: false,
+                isChild : true
             },
             {
                 name: 'Reports',
@@ -148,6 +156,7 @@ export const menus = [
                 icon: 'notes',
                 chip: false,
                 open: true,
+                isChild : true
             },
         ]
     },
@@ -157,7 +166,7 @@ export const menus = [
         link: 'Wca',
         chip: false,
         open: true,
-
+        isChild : false
     },
 
     {
@@ -165,6 +174,7 @@ export const menus = [
         icon: 'business',
         link: false,
         open: false,
+        isChild : false,
         sub: [
             {
                 name: 'Categories',
@@ -172,6 +182,7 @@ export const menus = [
                 icon: 'view_quilt',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'Catalogues',
@@ -179,6 +190,7 @@ export const menus = [
                 icon: 'assignment',
                 chip: false,
                 open: true,
+                isChild : true
             }
         ]
     },
@@ -188,5 +200,6 @@ export const menus = [
         icon: 'receipt',
         chip: false,
         open: true,
+        isChild : false
     },
 ];
