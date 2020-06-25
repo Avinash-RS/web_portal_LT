@@ -1,6 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Jobs</li>
     <li class="breadcrumb-item active" aria-current="page">Reports</li>
   </ol>
 </nav>
@@ -21,21 +22,22 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="slNo">
       <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
-      <mat-cell *matCellDef="let row;let i = index" class ="reportid">
+      <mat-cell *matCellDef="let row;let i = index" class="reportid">
         <span class="desktop-data"> {{i+1}}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="report_id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Report id </mat-header-cell>
-      <mat-cell *matCellDef="let element" class ="reportid">
+      <mat-cell *matCellDef="let element" class="reportid">
         <span class="desktop-data"> {{element.report_id }}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="total_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
-      <mat-cell *matCellDef="let element" class ="alignment">
+      <mat-cell *matCellDef="let element" class="alignment">
         <!-- <span class="mobile-label">Total count</span> -->
-        <span class="desktop-data"> {{element.total_count || 0}}</span>
+        <span class="desktop-data">
+          {{element.total_count || 0}}</span>
         <!-- <span class="mobile-data"> {{element.username}}</span> -->
       </mat-cell>
     </ng-container>
@@ -69,13 +71,22 @@
 
     <ng-container matColumnDef="time_ago">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Created</mat-header-cell>
-      <mat-cell *matCellDef="let element" class ="alignment">
+      <mat-cell *matCellDef="let element" class="alignment">
         <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.time_ago }}</span>
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
-<!-- 
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="alignment">
+        <span class="desktop-data">
+          {{ element.total_count === element.updated_count  ? 'All Success' : element.total_count === element.failure_count  ?  'All Failure' : 'Partial Success' }}</span>
+        <!-- <span class="desktop-data">all success</span> -->
+      </mat-cell>
+    </ng-container>
+    <!-- 
     <ng-container matColumnDef="failure_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Failure</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
@@ -85,7 +96,7 @@
 
     <ng-container matColumnDef="link">
       <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
-      <mat-cell *matCellDef="let element" class ="alignment">
+      <mat-cell *matCellDef="let element" class="alignment">
         <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data" (click)="downloadDoc(element.report_url)">
           <mat-icon class="download_doc" (click)="downloadDoc(notification.report_url)">get_app</mat-icon>
