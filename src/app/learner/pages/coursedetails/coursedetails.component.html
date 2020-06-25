@@ -37,7 +37,7 @@
             <mat-accordion *ngFor="let res of scromModuleData; let i = index">
                 <mat-expansion-panel class="panel" hideToggle="true" #example>
                     <mat-expansion-panel-header>
-                        <mat-panel-title class="module-container">
+                        <mat-panel-title class="module-container" (click)="insertPersentage(scromModuleData.length,i + 1)">
                             <!-- <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}} -->
                             <span>
                                 <span class='index-number'>{{i+1}}</span>
@@ -54,7 +54,7 @@
 
                         </mat-panel-title>
                         <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-iconmod-check-icon">done</span>
-                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                        <mat-icon *ngIf="!example.expanded" (click)="insertPersentage(scromModuleData.length,i + 1)" class="exp-icon">add_circle_outline
                         </mat-icon>
                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
                         </mat-icon>

@@ -81,6 +81,7 @@ export class CoursedetailsComponent implements OnInit {
   isLeaner = true;
   scromModuleData: any;
   scromApiData: any;
+  persentage: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -155,17 +156,22 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus , topicLenght, index) {
-    console.log(topicName, topicStatus, moduleName, moduleStatus);
+    // console.log(moduleLegth, modIndex);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
     (environment.scormUrl + '/scormPlayer.html?contentID=' +
     this.localStoCourseid + '&user_id=' + this.getuserid.user_id  + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
     this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index);
   }
-  alterDescriptionText() {
-    this.showShortDesciption = !this.showShortDesciption;
+
+  insertPersentage(moduleLegth, modIndex) {
+    console.log(moduleLegth, modIndex);
+    // tslint:disable-next-line:radix
+    this.persentage = parseInt(modIndex)  / parseInt(moduleLegth) * 100;
+    console.log(this.persentage);
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index) {
+    // tslint:disable-next-line:radix
     const len = parseInt(topicLenght);
     if (index === len) {
       moduleStatus = 'Passed';
@@ -183,7 +189,7 @@ export class CoursedetailsComponent implements OnInit {
     }]
     }]
    };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.persentage)
    .subscribe((data: any) => {
      if (data.data.playerstatusrealtime.success === true) {
         this.playerModuleAndTopic();
