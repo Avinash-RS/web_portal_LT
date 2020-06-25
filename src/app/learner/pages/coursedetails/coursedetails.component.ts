@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 
 @Component({
@@ -58,12 +58,12 @@ export class CoursedetailsComponent implements OnInit {
     },
     nav: true
   };
-  wishlist: any = [];
-  syllabus: {}[];
+  // wishlist: any = [];
+  // syllabus: {}[];
   open = false;
   userDetail: any;
   showShortDesciption = true;
-  clicked: any = 'media';
+  // clicked: any = 'media';
   content: any;
   modulength: any;
   isCollapsed: any;
@@ -99,24 +99,24 @@ export class CoursedetailsComponent implements OnInit {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
             this.loading = false;
-            if (this.course.topicData && this.course.topicData.length) {
-              this.topicData = [];
-              this.course.topicData.forEach(element => {
-                const subArr = [];
-                element.moduleData.forEach(element1 => {
-                  subArr.push(element1.moduledetails);
-                });
-                const obj = {
-                  modulename: element.moduleData[0].modulename,
-                  moduledetails: subArr
-                };
-                this.topicData.push(obj);
-              });
-            }
-            this.course.topicData = this.topicData;
+            // if (this.course.topicData && this.course.topicData.length) {
+            //   this.topicData = [];
+            //   this.course.topicData.forEach(element => {
+            //     const subArr = [];
+            //     element.moduleData.forEach(element1 => {
+            //       subArr.push(element1.moduledetails);
+            //     });
+            //     const obj = {
+            //       modulename: element.moduleData[0].modulename,
+            //       moduledetails: subArr
+            //     };
+            //     this.topicData.push(obj);
+            //   });
+            // }
+            // this.course.topicData = this.topicData;
             // this.course.wishlisted = detail.wishlist || false;
             // this.course.wishlist_id = detail.wishlist_id || null;
-            this.course.enrollment_status = detail.enrollment_status;
+            // this.course.enrollment_status = detail.enrollment_status;
           }
         });
     }
@@ -143,9 +143,9 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  clickedT(i) {
-    this.clicked = i;
-  }
+  // clickedT(i) {
+  //   this.clicked = i;
+  // }
 
   // get Scrom module and topic
   playerModuleAndTopic() {
@@ -193,10 +193,6 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
 
-
-
-  // ngOnInit() {
-  // }
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
     el.scrollIntoView({ behavior: 'smooth' });
