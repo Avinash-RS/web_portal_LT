@@ -534,7 +534,6 @@ export class LearnerServicesService {
     });
   }
   InsertCourseFeedback(feedback) {
-    console.log(feedback, 'lllllllllllllllllllllllllllllllllllllllll');
     return this.Apollo.query({
       query: InsertCourseFeedback,
       variables: feedback
@@ -556,17 +555,19 @@ export class LearnerServicesService {
       query: playerModuleAndTopic,
       variables: {
         contentID,
-        user_id
+        user_id,
+
       }
     });
   }
 
-  playerstatusrealtime(user_id, course_id) {
+  playerstatusrealtime(user_id, contentID, module: any) {
     return this.Apollo.query({
-      query: playerModuleAndTopic,
+      query: playerstatusrealtime,
       variables: {
         user_id,
-        course_id
+        contentID,
+        module
       }
     });
   }

@@ -11,6 +11,7 @@
     </div>
 </div>
 
+
 <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
     <mat-drawer #drawer class="drawer" mode="side" opened="true">
         <mat-toolbar class="header">
@@ -52,7 +53,10 @@
                             </span>
 
                         </mat-panel-title>
-                        <mat-checkbox class="mod-check-icon"></mat-checkbox>
+                        <!-- <mat-checkbox class="mod-check-icon"></mat-checkbox> -->
+                        <span class="material-icons mod-check-icon">
+                            done
+                            </span>
                         <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                         </mat-icon>
                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
@@ -62,9 +66,9 @@
                     <div class="row">
                         <div class="col-12">
                             <mat-vertical-stepper [linear]="isLeaner">
-                                <ng-container *ngFor="let mod of res?.children">
-                                    <mat-step>
-                                        <ng-template  matStepLabel><span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status)">{{mod?.title}}</span></ng-template>
+                                <ng-container *ngFor="let mod of res?.children; let j = index" >
+                                    <mat-step class="bgcol" [ngClass] = "mod?.status == 'Passed' ? 'colorGreen' : 'colorYellow'">
+                                        <ng-template  matStepLabel><span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j)">{{mod?.title}}{{mod?.status}}</span></ng-template>
                                     </mat-step>
                                 </ng-container>
                             </mat-vertical-stepper>
@@ -76,6 +80,9 @@
     </mat-drawer>
 
     <div class="main contents">
+        <div class="spinner-container" *ngIf="loading">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
         <div class="videoplayer">
             <div class="left">
                 <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
@@ -115,6 +122,27 @@
                             </p>
                         </div>
                     </div>
+                    <div *ngIf="course?.author_details[0].author_name != ''">
+                        <h3 class="head-h2">Instructors</h3>
+                        <div class="vertical"></div>
+                                    <div class="instr-box" *ngFor="let author of course?.author_details">
+                                        <div class="row" >
+                                            <div class="col-4">
+                                                <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
+                                                alt="">
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="authorname">{{author?.author_name | titlecase}}</div>
+                                            </div>
+            
+                                            <div class="row margin-35 borderline">
+                                                <div class="col-12">
+                                                    <p class="author-desc">{{author?.description}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                 </mat-tab>
 
                 <mat-tab label="Resources">
@@ -192,37 +220,6 @@
         </div>
 
 
-        <!-- <div class="row margin-10"> -->
-        <!-- <div class="col-12"> -->
-        <div *ngIf="course?.author_details[0].author_name != ''">
-            <h3 class="head-h2">Instructors</h3>
-            <div class="vertical"></div>
-            <!-- <div class="silder1"> -->
-            <!-- <owl-carousel-o [options]="customOptions" >
-                    <ng-template carouselSlide [id]="author.author_name" > -->
-                        <div class="instr-box" *ngFor="let author of course?.author_details">
-                            <div class="row" >
-                                <div class="col-4">
-                                    <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
-                                    alt="">
-                                </div>
-                                <div class="col-6">
-                                    <div class="authorname">{{author?.author_name | titlecase}}</div>
-                                </div>
-
-                                <div class="row margin-35 borderline">
-                                    <div class="col-12">
-                                        <p class="author-desc">{{author?.description}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        <!-- </ng-template> -->
-        <!-- </owl-carousel-o> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div style="height: 100px">&nbsp;</div>
     </div>
 </mat-drawer-container>

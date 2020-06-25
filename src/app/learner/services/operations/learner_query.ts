@@ -302,6 +302,7 @@ export const playerModuleAndTopic = gql`
           title
         _id
         status
+        topic_len
        children
        { _id
         title

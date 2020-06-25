@@ -872,8 +872,8 @@ mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $quest
   }`;
 
 export const playerstatusrealtime = gql`
-mutation playerstatusrealtime($user_id: String, $course_id:String){
-  playerstatusrealtime(user_id: $user_id,course_id:$course_id) {
+mutation playerstatusrealtime($user_id: String, $contentID:String,$module:[module_type_input]){
+  playerstatusrealtime(user_id: $user_id,contentID:$contentID,module:$module) {
       success
       message
     }

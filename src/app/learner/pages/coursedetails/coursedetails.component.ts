@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class CoursedetailsComponent implements OnInit {
   course: any = null;
+  loading: boolean;
   // loadingCourse = false;
   // customOptions1: any = {
   //   loop: true,
@@ -91,11 +92,13 @@ export class CoursedetailsComponent implements OnInit {
       this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
+      this.loading = true;
       this.playerModuleAndTopic();
       this.service.viewCurseByID(detail && detail.id ||  this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
+            this.loading = false;
             if (this.course.topicData && this.course.topicData.length) {
               this.topicData = [];
               this.course.topicData.forEach(element => {
@@ -146,34 +149,48 @@ export class CoursedetailsComponent implements OnInit {
 
   // get Scrom module and topic
   playerModuleAndTopic() {
-    this.Lservice.playerModuleAndTopic(this.courseid || this.localStoCourseid , this.userDetail.user_id).subscribe((data: any) => {
+    console.log(this.localStoCourseid, '1111111111111111111');
+    this.Lservice.playerModuleAndTopic(this.localStoCourseid , this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData =  data.data.playerModuleAndTopic.message[0];
       this.scromModuleData = this.scromApiData.childData;
     });
   }
-  playTopic(url, topicName, topicStatus, moduleName, moduleStatus ) {
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus , topicLenght, index) {
+    console.log(topicName, topicStatus, moduleName, moduleStatus);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
     (environment.scormUrl + '/scormPlayer.html?contentID=' +
     this.localStoCourseid + '&user_id=' + this.getuserid.user_id  + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
-    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus);
+    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index);
   }
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
   }
 
-  playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus) {
-   const jsonData = {
+  playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index) {
+    console.log(topicLenght , index)
+    if (index === topicLenght) {
+      moduleStatus = 'Passed';
+    } else {
+      moduleStatus = 'Process';
+    }
+    const jsonData = {
     module : [{
     module_name: moduleName,
     status: moduleStatus,
     topic : [{
       topic_name: topicName,
-      status: topicStatus
+      status: 'Passed'
     }]
     }]
    };
-
-   console.log(jsonData,'23423423423')
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module)
+   .subscribe((data: any) => {
+     if (data.data.playerstatusrealtime.success === true) {
+        this.playerModuleAndTopic();
+     } else {
+       console.log(data.playerstatusrealtime.message);
+     }
+    });
   }
 
 
