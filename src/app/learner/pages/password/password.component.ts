@@ -3,9 +3,9 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { AlertServiceService } from 'src/app/./core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import * as myGlobals from '@core/globals';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-password',
@@ -32,7 +32,7 @@ export class PasswordComponent implements OnInit {
   constructor(private router: Router,
     private loader: Ng4LoadingSpinnerService,
     private formBuilder: FormBuilder,
-    private alert: AlertServiceService,
+    private toastr: ToastrService,
     public service: LearnerServicesService) { }
 
   ngOnInit() {
@@ -106,19 +106,19 @@ export class PasswordComponent implements OnInit {
                 if (loginresult.data.login.message.is_profile_updated)
                   this.router.navigate(['/Learner'])
                 else {
-                  this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields')
+                  this.toastr.warning('Your profile is incomplete !','Please provide data for all mandatory fields')
                   this.router.navigate(['/Learner/profile'])
                 }
               }
             } else {
               this.loader.hide();
               this.passwordForm.reset();
-              this.alert.openAlert(loginresult.data.login.error_msg, null)
+              this.toastr.error(loginresult.data.login.error_msg, null)
             }
           });
       } else {
         this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_done'].message, null)
+        this.toastr.error(data.data['user_registration_done'].message, null)
       }
     })
   }
@@ -129,7 +129,7 @@ export class PasswordComponent implements OnInit {
       if (data.data['user_registration_username_suggestion']['success'] == 'true') {
         this.options = data.data['user_registration_username_suggestion'].data
       } else {
-        this.alert.openAlert(data.data['user_registration_username_suggestion'].message, null)
+        this.toastr.error(data.data['user_registration_username_suggestion'].message, null)
       }
     })
   }
@@ -140,7 +140,7 @@ export class PasswordComponent implements OnInit {
       try {
         this.service.check_existing_user(this.passwordForm.value.username).subscribe((data: any) => {
           if (data.data.check_existing_user && data.data.check_existing_user.message === 'Username already exists') {
-            this.alert.openAlert(data.data['check_existing_user'].message, null)
+            this.toastr.warning(data.data['check_existing_user'].message, null)
           }
         })
       } catch (error) {

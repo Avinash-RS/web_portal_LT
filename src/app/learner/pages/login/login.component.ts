@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
-import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private alert: AlertServiceService, private service: LearnerServicesService) {
+     private service: LearnerServicesService,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/home']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
+                this.toastr.warning('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             } else {
@@ -75,17 +76,17 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/home']);
               } else {
-                this.alert.openAlert('Your profile is incomplete !','Please provide data for all mandatory fields');
+                this.toastr.warning('Your profile is incomplete !','Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             }
           } else {
             this.loginForm.reset();
-            this.alert.openAlert(loginresult.data.login.error_msg, null);
+            this.toastr.error(loginresult.data.login.error_msg, null);
           }
         } else {
           this.loginForm.reset();
-          this.alert.openAlert('Please try again later', null);
+          this.toastr.warning('Please try again later', null);
         }
       });
   }
