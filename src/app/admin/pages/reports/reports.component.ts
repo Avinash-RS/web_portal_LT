@@ -40,16 +40,26 @@ export class ReportsComponent implements OnInit {
     this.service.getNotificationData(admin._id)
       .subscribe((result: any) => {
         if (result.data && result.data.getnotificationreports?.message) {
-          this.reportDetails = result.data.getnotificationreports?.message || [];
-          if (this.reportDetails.length === 0) {
+          const reportDetails = result.data.getnotificationreports?.message || [];
+          if (reportDetails.length === 0) {
             let det;
             det = JSON.parse(localStorage.getItem('Reports'));
-            this.reportDetails = det;
+            const array = det.filter((item) => {
+              return item.request_type === 'bulk_user_upload';
+            });
+            // const array = det.filter(element => return element.request_type === 'bulk_enrollment');
+            this.reportDetails = array;
+            this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
+            this.dataSource.sort = this.sort;
+          } else {
+            // const array = reportDetails.filter(element => element.request_type === 'bulk_enrollment');
+            const array = reportDetails.filter((item) => {
+              return item.request_type === 'bulk_user_upload';
+            });
+            this.reportDetails = array;
             this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
             this.dataSource.sort = this.sort;
           }
-          this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
-          this.dataSource.sort = this.sort;
         }
       });
   }

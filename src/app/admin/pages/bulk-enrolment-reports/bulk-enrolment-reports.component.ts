@@ -27,31 +27,40 @@ export class BulkEnrolmentReportsComponent implements OnInit {
   reportDetails: Report[] = [];
   displayedColumns: string[] = ['slNo', 'report_id', 'total_count', 'time_ago', 'link'];
   dataSource = new MatTableDataSource<Report>(this.reportDetails);
-  constructor(private service: AdminServicesService, private gs: GlobalServiceService,) { }
+  constructor(private service: AdminServicesService, private gs: GlobalServiceService, ) { }
 
   ngOnInit() {
     const admin = this.gs.checkLogout();
     this.service.getNotificationData(admin._id)
-    .subscribe((result: any) => {
-      if (result.data && result.data.getnotificationreports?.message) {
-        this.reportDetails = result.data.getnotificationreports?.message || [];
-        if (this.reportDetails.length === 0) {
-          let det;
-          det = JSON.parse(localStorage.getItem('Reports'));
-          console.log(det);
-          this.reportDetails = det;
-          this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
-          this.dataSource.sort = this.sort;
+      .subscribe((result: any) => {
+        if (result.data && result.data.getnotificationreports?.message) {
+          const reportDetails = result.data.getnotificationreports?.message || [];
+          if (reportDetails.length === 0) {
+            let det;
+            det = JSON.parse(localStorage.getItem('Reports'));
+            const array = det.filter((item) => {
+              return item.request_type === 'bulk_enrolment';
+            });
+            // const array = det.filter(element => return element.request_type === 'bulk_enrollment');
+            this.reportDetails = array;
+            this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
+            this.dataSource.sort = this.sort;
+          } else {
+            // const array = reportDetails.filter(element => element.request_type === 'bulk_enrollment');
+            const array = reportDetails.filter((item) => {
+              return item.request_type === 'bulk_enrolment';
+            });
+            this.reportDetails = array;
+            this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
+            this.dataSource.sort = this.sort;
+          }
         }
-        this.dataSource = new MatTableDataSource<Report>(this.reportDetails);
-        this.dataSource.sort = this.sort;
-      }
-    });
+      });
   }
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = function(data: Report, filter: string): boolean {
-      return data?.report_id?.toLowerCase().includes(filter) ;
+    this.dataSource.filterPredicate = function (data: Report, filter: string): boolean {
+      return data?.report_id?.toLowerCase().includes(filter);
       // || data?.total_count?.toLowerCase().includes(filter) ||
       //   data?.success_count().includes(filter) || data?.updated_count?.toLowerCase().includes(filter) ;
     };
