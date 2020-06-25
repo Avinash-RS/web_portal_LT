@@ -1,0 +1,35 @@
+mat-header-cell {
+    display:flex;
+    justify-content:center;
+  }
+  
+  .alignment{
+    display:flex !important;
+    justify-content:center!important;
+    margin-left: -9px !important;
+  }
+   .reportid{
+    display:flex !important;
+    justify-content:center !important;
+    margin-right: -15px !important;
+   }
+  .m-b-10 {
+    margin-bottom: 10px;
+  }
+  
+  @media screen and (max-width:765px) {
+    .form-control {
+      width: 50%;
+      float: right;
+      margin-right: 30px
+    }
+  }
+  
+  @media screen and (min-width:765px) {
+    .form-control {
+      width: 35%;
+      float: right;
+      margin-right: 30px
+    }
+  }
+

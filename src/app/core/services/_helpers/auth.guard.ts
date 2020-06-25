@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
         state.url !== '/Admin/auth/listCourses' && state.url !== '/Admin/auth/viewReport' && state.url !== '/Admin/auth/viewReport' &&
         state.url !== '/Admin/auth/publishCourse' && state.url !== '/Admin/auth/Wca' &&
         state.url !== '/Admin/auth/Wca/addcourse' && state.url !== '/Admin/auth/Wca/wca' && 
-        state.url !== '/Admin/auth/bulkenrolment' &&
+        state.url !== '/Admin/auth/bulkenrolment' &&  state.url !== '/Admin/auth/bulkenrolmentreports' &&
         state.url !== '/Admin/auth/Wca/createmodule' && state.url !== '/Admin/auth/Wca/addmodule' &&
         state.url !== '/Admin/auth/Wca/choosetemplate' && state.url !== '/Admin/auth/Wca/previewcourse' &&
         state.url !== '/Admin/auth/Wca/rf' &&  state.url !== '/Admin/auth/Wca/addtemplate' &&
@@ -74,7 +74,7 @@ export class AuthGuard implements CanActivate {
         || state.url === '/Admin/auth/listCourses' || state.url === '/Admin/auth/viewReport' || state.url === '/Admin/auth/publishCourse'
         || state.url === '/Admin/auth/usergroup' || state.url === '/Admin/auth/Wca' || state.url === '/Admin/auth/Wca/addcourse'
         || state.url === '/Admin/auth/Wca/viewmodule' || state.url === '/Admin/auth/Wca/createmodule'
-        || state.url === '/Admin/auth/bulkenrolment'
+        || state.url === '/Admin/auth/bulkenrolment'  || state.url === '/Admin/auth/bulkenrolmentreports'
         || state.url === '/Admin/auth/Wca/addtemplate' || state.url === '/Admin/auth/Wca/choosetemplate'
         || state.url === '/Admin/auth/Wca/addtopic' || state.url === '/Admin/auth/Wca/rf'
         || state.url === '/Admin/auth/Wca/addfile' || state.url === '/Admin/auth/Wca/addmodule'
