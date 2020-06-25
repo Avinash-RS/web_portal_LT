@@ -144,9 +144,10 @@
 
                 <mat-tab label="Resources">
                     <mat-accordion>
+                        <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
                         <mat-expansion-panel class="panel1" hideToggle="true" #example1
-                            *ngFor="let res of content?.coursedetails; let i = index">
-                            <mat-expansion-panel-header *ngIf="res.resValue">
+                        *ngIf="res.resValue">
+                            <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp;{{res?.modulename}}<br>
                                 </mat-panel-title>
@@ -155,6 +156,7 @@
                                 <mat-icon *ngIf="example1.expanded">remove_circle_outline
                                 </mat-icon>
                             </mat-expansion-panel-header>
+
 
                             <div class="row margin-5" *ngIf="res.resValue">
                                 <div class="col-12">
@@ -208,6 +210,7 @@
                                 </div>
                             </div>
                         </mat-expansion-panel>
+                    </ng-container>
                     </mat-accordion>
                 </mat-tab>
                 <!-- <mat-tab label="Forum" >
