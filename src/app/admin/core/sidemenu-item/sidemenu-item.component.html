@@ -1,6 +1,6 @@
 <mat-nav-list [style.maxHeight]="(menu.open)?'1200px':'48px'"
     [ngClass]="{'secondaryMenu': secondaryMenu, 'primary': !secondaryMenu}">
-    <mat-list-item *ngIf="menu.link==false" (click)="menu.open = !menu.open">
+    <mat-list-item *ngIf="menu.link==false" title="{{menu.name}}" (click)="menu.open = !menu.open">
         <mat-icon matListIcon iconsmall title="{{menu.name}}">{{menu.icon}} </mat-icon>
         <h3 matLine *ngIf="!iconOnly" title="{{menu.name}}">{{ menu.name }} </h3>
         <mat-chip-list *ngIf="menu?.chip && !iconOnly">
@@ -11,7 +11,7 @@
     </mat-list-item>
 
     <mat-list-item *ngIf="menu.link!=false" (click)="menu.open = !menu.open" [routerLink]="[menu.link]">
-        <mat-icon matListIcon iconsmall title="{{menu.name}}">{{menu.icon}} </mat-icon>
+        <mat-icon [style.padding-left]="(menu.isChild === true ? '20px' : '0px')"  matListIcon iconsmall title="{{menu.name}}">{{menu.icon}} </mat-icon>
         <h3 matLine *ngIf="!iconOnly" title="{{menu.name}}">{{ menu.name }} </h3>
     </mat-list-item>
 
