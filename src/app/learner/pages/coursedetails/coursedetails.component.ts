@@ -129,7 +129,6 @@ export class CoursedetailsComponent implements OnInit {
       element.resValue = resourceFile;
     });
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
-      console.log(this.getuserid);
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -147,20 +146,38 @@ export class CoursedetailsComponent implements OnInit {
 
   // get Scrom module and topic
   playerModuleAndTopic() {
-    this.Lservice.playerModuleAndTopic(this.courseid || this.localStoCourseid).subscribe((data: any) => {
+    this.Lservice.playerModuleAndTopic(this.courseid || this.localStoCourseid , this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData =  data.data.playerModuleAndTopic.message[0];
       this.scromModuleData = this.scromApiData.childData;
     });
   }
-  playTopic(url) {
-    console.log(url, 'asdajdadjkajdlkalhhkashdad');
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus ) {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
     (environment.scormUrl + '/scormPlayer.html?contentID=' +
     this.localStoCourseid + '&user_id=' + this.getuserid.user_id  + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
+    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus);
   }
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
   }
+
+  playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus) {
+   const jsonData = {
+    module : [{
+    module_name: moduleName,
+    status: moduleStatus,
+    topic : [{
+      topic_name: topicName,
+      status: topicStatus
+    }]
+    }]
+   };
+
+   console.log(jsonData,'23423423423')
+  }
+
+
+
   // ngOnInit() {
   // }
   scroll(el: HTMLElement) {

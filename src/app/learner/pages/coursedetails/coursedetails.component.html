@@ -64,7 +64,7 @@
                             <mat-vertical-stepper [linear]="isLeaner">
                                 <ng-container *ngFor="let mod of res?.children">
                                     <mat-step>
-                                        <ng-template  matStepLabel><span  (click)="playTopic(mod.link)">{{mod?.title}}</span></ng-template>
+                                        <ng-template  matStepLabel><span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status)">{{mod?.title}}</span></ng-template>
                                     </mat-step>
                                 </ng-container>
                             </mat-vertical-stepper>

@@ -870,3 +870,11 @@ mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $quest
       message
     }
   }`;
+
+export const playerstatusrealtime = gql`
+mutation playerstatusrealtime($user_id: String, $course_id:String){
+  playerstatusrealtime(user_id: $user_id,course_id:$course_id) {
+      success
+      message
+    }
+  }`;
