@@ -48,12 +48,12 @@
                             <span style="margin-left:40px;font-weight: 500;height: 20px;">
                                 <mat-icon class="time-icon">alarm</mat-icon>
                                 <span class="course-time">
-                                    09:07:05
+                                    {{res?.moduletime}}
                                 </span>
                             </span>
 
                         </mat-panel-title>
-                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-icon">done</span>
+                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-iconmod-check-icon">done</span>
                         <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                         </mat-icon>
                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline

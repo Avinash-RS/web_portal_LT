@@ -425,8 +425,8 @@ li {
     height: 22px;
     font-size: 20px;
     font-weight: bolder;
-    color: $color-green;
-    border: 1px solid $color-border;
+    color: #0E7D12;
+    // border: 1px solid $color-border;
 }
 
 .spinner-container {
@@ -443,7 +443,7 @@ li {
 
 ::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
     .mat-step-icon {
-        background-color: $color-green !important;
+        background-color: #0E7D12 !important;
         color: $color-white !important;
     }
 }
