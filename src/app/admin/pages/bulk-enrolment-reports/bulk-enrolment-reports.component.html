@@ -83,8 +83,8 @@
       <mat-cell *matCellDef="let element" class="alignment">
         <span class="desktop-data">
         <!-- {{element.success_count}},{{element.updated_count}}  {{+element.success_count + +element.updated_count}} -->
-          {{ +element.total_count === +element.updated_count + +element.success_count  ? 'All Success' :
-           +element.total_count === +element.failure_count + +element.existing_count + +element.duplicate_count ?  'All Failure' : 'Partial Success' }}
+          {{ +element.total_count === +element.updated_count + +element.success_count  ? 'All success' :
+           +element.total_count === +element.failure_count + +element.existing_count + +element.duplicate_count ?  'All failure' : 'Partial success' }}
         <!-- <span class="desktop-data">all success</span> -->
       </span> 
       </mat-cell>
