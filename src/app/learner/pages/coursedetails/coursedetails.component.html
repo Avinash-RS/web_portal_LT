@@ -48,12 +48,12 @@
                             <span style="margin-left:40px;font-weight: 500;height: 20px;">
                                 <mat-icon class="time-icon">alarm</mat-icon>
                                 <span class="course-time">
-                                    09:07:05
+                                    {{res?.moduletime}}
                                 </span>
                             </span>
 
                         </mat-panel-title>
-                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-icon">done</span>
+                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-iconmod-check-icon">done</span>
                         <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                         </mat-icon>
                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
@@ -63,13 +63,15 @@
                     <div class="row">
                         <div class="col-12">
                             <mat-vertical-stepper [linear]="isLeaner">
-                                <ng-container *ngFor="let mod of res?.children; let j = index">
-                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
-                                        mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-                                        <ng-template matStepLabel> <span
-                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j + 1)">{{mod?.title}}</span>
-                                        </ng-template>
-                                    </mat-step>
+                                <ng-container *ngFor="let mod of res?.children; let j = index" >
+                                        <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
+                                        mod.status === 'Process' ? 'colYellow' : 'colWhite'" >
+
+                                            <ng-template  matStepLabel> 
+                                                <span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j + 1)">
+                                                {{mod?.title}}</span>
+                                            </ng-template>
+                                        </mat-step>
                                 </ng-container>
                             </mat-vertical-stepper>
                         </div>
@@ -117,9 +119,9 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p class="desc">
-                                {{course?.course_description}}
-                            </p>
+                            <div class="desc" [innerHTML]="course?.course_long_description" >
+                               
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="course?.author_details[0].author_name != ''">
