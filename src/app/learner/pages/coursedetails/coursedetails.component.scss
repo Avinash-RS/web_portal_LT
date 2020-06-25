@@ -462,3 +462,35 @@ li {
         border: 2px solid $color-border;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//////////foooter
+.footer {
+    padding: 30px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: center;
+    border-top: 2px solid $profile-p-grey;
+  }
+
+  :host ::ng-deep.footericon{
+    width: 9%;
+    position: absolute;
+    margin-left: 5px;
+  
+  }

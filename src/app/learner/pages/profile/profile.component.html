@@ -56,7 +56,9 @@
             <span class="f_size_13 f_wt_500">Download brochure</span>
           </div>
           <div class="col-md-2 col-sm-2 col-2 ">
-            <a target="_top" class="f_size_17 bb"  matTooltip="Click here to download brochure" (click)="download()" download="LnT%20Kaushalya%202020_Brochure.pdf"><i class="fa fa-cloud-download size" aria-hidden="true"></i> </a>
+            <a target="_top" class="f_size_17 bb" matTooltip="Click here to download brochure" (click)="download()"
+              download="LnT%20Kaushalya%202020_Brochure.pdf"><i class="fa fa-cloud-download size"
+                aria-hidden="true"></i> </a>
             <!-- <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Download brochure">
               create</mat-icon> -->
           </div>
@@ -108,7 +110,7 @@
 
           <!-- <div class="width_100 bb center center_align p-b-10"
             *ngIf="userData?.language_detail && userData?.language_detail.length > 0"> -->
-            <div class="width_100 bb center center_align p-b-10">
+          <div class="width_100 bb center center_align p-b-10">
             <!-- <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
               {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
             </span> -->
@@ -230,9 +232,8 @@
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
                 formControlName="qualification" name="qualification" (selectionChange)="changed($event.value,in)">
                 <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
-                  (click)="checkSpec(qual,in,profileForm.qualification,lv);checkinstitute(lv);"
-                 > 
-                 <!-- (onSelectionChange)="selectedinstitute = false" -->
+                  (click)="checkSpec(qual,in,profileForm.qualification,lv);checkinstitute(lv);">
+                  <!-- (onSelectionChange)="selectedinstitute = false" -->
                   {{lv.level_name}}
                 </mat-option>
               </mat-select>&nbsp;&nbsp;&nbsp;
@@ -279,8 +280,7 @@
                   <mat-option [value]="item._id" *ngFor="let item of institutes">
                     {{item.institute_name}}
                   </mat-option>
-                  <mat-option (onSelectionChange)="selectedinstitute = true"
-                    *ngIf="qual.insCheck == 'diploma'">
+                  <mat-option (onSelectionChange)="selectedinstitute = true" *ngIf="qual.insCheck == 'diploma'">
                     Others
                   </mat-option>
                 </mat-select>&nbsp;&nbsp;&nbsp;
@@ -295,38 +295,37 @@
                 [ngClass]="cannotEdit || (qual?.value?.qualification === '')  ? 'n dis inputs' : 'inputs'"
                 placeholder="Discipline" name="discipline">
               </mat-select> -->
-              <mat-select *ngIf="(qual.insCheck === '10')"
-                [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
-                placeholder="Discipline" formControlName="discipline" name="discipline">
+              <mat-select *ngIf="(qual.insCheck === '10')" [disabled]="cannotEdit && (qual.insCheck === '10')"
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
+                formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
-              <mat-select *ngIf="(qual.insCheck === '12')"
-                [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
-                placeholder="Discipline" formControlName="discipline" name="discipline">
+              <mat-select *ngIf="(qual.insCheck === '12')" [disabled]="cannotEdit && (qual.insCheck === '10')"
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
+                formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines1">
                   {{item.discipline_name}}
                 </mat-option>
               </mat-select>
               <mat-select *ngIf="!selecteddiscipline && (qual.insCheck === 'diploma')"
                 [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'"
-                placeholder="Discipline" formControlName="discipline" name="discipline">
+                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
+                formControlName="discipline" name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines2">
                   {{item.discipline_name}}
                 </mat-option>
-                <mat-option (onSelectionChange)="selecteddiscipline= true"
-                    *ngIf="qual.insCheck == 'diploma'">
-                    Others
+                <mat-option (onSelectionChange)="selecteddiscipline= true" *ngIf="qual.insCheck == 'diploma'">
+                  Others
                 </mat-option>
               </mat-select>
-              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex" *ngIf="selecteddiscipline && (qual.insCheck === 'diploma')">
-                <input type="text" class="institute"   [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
-                'inputs width_100'" placeholder="Discipline" formControlName="discipline"><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-              </ng-container> 
+              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex"
+                *ngIf="selecteddiscipline && (qual.insCheck === 'diploma')">
+                <input type="text" class="institute" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
+                'inputs width_100'" placeholder="Discipline" formControlName="discipline"><span
+                  class="lapview">&nbsp;&nbsp;&nbsp;</span>
+              </ng-container>
 
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
             </div>
@@ -436,7 +435,7 @@
             </div>
           </div>
 
-      </div>
+        </div>
 
 
 
@@ -483,7 +482,7 @@
               <input type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
           'inputs  lap_95'" placeholder="Pincode" formControlName="pincode">
               <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
-                <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+                <div *ngIf="f.pincode.errors.pattern">Pincode must contain 6 digits</div>
               </div>
             </div>
           </div>
@@ -527,43 +526,47 @@
         <br>
         <!-- <div  formGroupName="payment" > -->
         <div class="col-md-4 col-lg-4 col-sm-12 col-12" [ngClass]="{ 'dis1' : cannotEdit}">
-         
-            <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
+
+          <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
               <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
               <span class="checkmark"></span>
             </label> -->
-             <label class="p-b-10px f_size_19">Mode of payment</label>
-            <span class="mand p-b-10px"> *</span> <br>
-            <div class="form-group">
-              <mat-radio-group  (change)="radioChange($event)" [disabled]='cannotEdit'  formControlName="payment_mode" name="payment_mode">
-                <mat-radio-button value="tpo">Through TPO</mat-radio-button> <span style="margin-left: -4px;position: absolute; color: #33333396;">or</span>
-                <mat-radio-button value="self" style="margin-left: 42px;margin-top: 0px;">Self</mat-radio-button>
-              </mat-radio-group>
-            </div>
-        </div>
-
-            <div class="row">
-              <div class="col-md-4" *ngIf="isTpoEnable">
-                <label ># Reference no.</label>
-                <input  type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
-                formControlName="ref_no">
-              </div>
-
-              <div class="col-md-4"  *ngIf="isSelfEnable" >
-                <label># RTGS / NEFT reference no. <span class="mand p-b-10px"> *</span> </label>
-                <input type="text" maxlength="22" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
-                formControlName="ref_no1">
-              </div>
-
-              <div *ngIf="isSelfEnable && f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
-                <div *ngIf="isSelfEnable && f.ref_no1.errors.required">Transaction number is required</div>
-                <div *ngIf="isSelfEnable && f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number must be 16-22 digits
-                  long</div>
-                <div *ngIf="isSelfEnable && f.ref_no1.errors.pattern">Transaction number must be only alphanumeric </div>
+          <label class="p-b-10px f_size_19">Mode of payment</label>
+          <span class="mand p-b-10px"> *</span> <br>
+          <div class="form-group">
+            <mat-radio-group (change)="radioChange($event)" [disabled]='cannotEdit' formControlName="payment_mode"
+              name="payment_mode">
+              <mat-radio-button value="tpo">Through TPO</mat-radio-button> <span
+                style="margin-left: -4px;position: absolute; color: #33333396;">or</span>
+              <mat-radio-button value="self" style="margin-left: 42px;margin-top: 0px;">Self</mat-radio-button>
+            </mat-radio-group>
           </div>
         </div>
-      
-      <!-- </div> -->
+
+        <div class="row">
+          <div class="col-md-4" *ngIf="isTpoEnable">
+            <label># Reference no.</label>
+            <input type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+              formControlName="ref_no">
+          </div>
+
+          <div class="col-md-4" *ngIf="isSelfEnable">
+            <label># RTGS / NEFT reference no. <span class="mand p-b-10px"> *</span> </label>
+            <input type="text" maxlength="22"
+              [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
+              formControlName="ref_no1">
+          </div>
+
+          <div *ngIf="isSelfEnable && f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
+            <div *ngIf="isSelfEnable && f.ref_no1.errors.required">Transaction number is required</div>
+            <div *ngIf="isSelfEnable && f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number
+              must be 16-22 digits
+              long</div>
+            <div *ngIf="isSelfEnable && f.ref_no1.errors.pattern">Transaction number must be only alphanumeric </div>
+          </div>
+        </div>
+
+        <!-- </div> -->
 
         <br>
 
@@ -587,9 +590,9 @@
 
 
 
-     <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
+        <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
               {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
-        
+
 
         <br *ngIf="cannotEdit">
         <hr>
@@ -598,7 +601,7 @@
         <div class="row p-b-10px">
           <!-- [checked]="iAgree" -->
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
-            <mat-checkbox  [ngClass]="{ 'dis1' : cannotEdit}"   class="iAgree" formControlName="iAgree">
+            <mat-checkbox [ngClass]="{ 'dis1' : cannotEdit}" class="iAgree" formControlName="iAgree">
               <span class="mand"> * </span> I hereby confirm having
               read and understood the details of L&T - Kaushalya Program
             </mat-checkbox>
@@ -609,18 +612,18 @@
           <span style="    font-size: 11px;
           color: grey;">
 
-L&T Kaushalya Program – Terms and Conditions:<br>
+            L&T Kaushalya Program – Terms and Conditions:<br>
 
-1) In case of online payment, the cost of transfer to be borne by the student. After L&T scheduling 
-the first session of the internship program, no refund claim shall be accepted. <br>
-2) L&T Kaushalya is not a campus recruitment program/portal and its scope is
- limited to the purpose of providing online internship only.<br>
-3) L&T reserves the right to terminate a student from L&T Kaushalya program 
-if he/she is found to be impersonating or putting inappropriate content into the platform<br>
-4) Decision of L&T will be final with regard to course content, delivery, assessment,
- completion and certification. In case of disputes, the decision of <br>
- L&T shall be final and L&T’s liability is limited to the fee paid by the student towards internship.
-  Force majeure clauses will apply.
+            1) In case of online payment, the cost of transfer to be borne by the student. After L&T scheduling
+            the first session of the internship program, no refund claim shall be accepted. <br>
+            2) L&T Kaushalya is not a campus recruitment program/portal and its scope is
+            limited to the purpose of providing online internship only.<br>
+            3) L&T reserves the right to terminate a student from L&T Kaushalya program
+            if he/she is found to be impersonating or putting inappropriate content into the platform<br>
+            4) Decision of L&T will be final with regard to course content, delivery, assessment,
+            completion and certification. In case of disputes, the decision of <br>
+            L&T shall be final and L&T’s liability is limited to the fee paid by the student towards internship.
+            Force majeure clauses will apply.
 
 
 
@@ -635,8 +638,8 @@ if he/she is found to be impersonating or putting inappropriate content into the
             4) Decision of L&T will be final with regard to course content, assessment, course delivery, L&T Kaushalya
             completion and certification. In case of disputes, the decision of L&T shall be final and L&T’s liability is
             limited to the fees paid by the student. Standard Force majeure clauses will apply. -->
-          
-          
+
+
           </span>
 
         </div>
@@ -647,7 +650,8 @@ if he/she is found to be impersonating or putting inappropriate content into the
 
         <!-- ////////////Certificate row////////////// -->
         <label class="p-b-10px" class="f_size_19">Certificate</label><br>
-        <button mat-flat-button [disabled]="true" class="submit f_size_17 color_white f_wt_400">Download</button><br><br>
+        <button mat-flat-button [disabled]="true"
+          class="submit f_size_17 color_white f_wt_400">Download</button><br><br>
         <span>* Download after course completion.</span>
         <!-- <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
@@ -684,11 +688,11 @@ if he/she is found to be impersonating or putting inappropriate content into the
             <i class="fa fa-linkedin linkedin " aria-hidden="true"></i>
             <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs  width_80 dis' :
             'inputs  width_80'" placeholder="Social media link" formControlName="link"> -->
-            <!-- {{profileForm.value.link}} -->
-            <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
+        <!-- {{profileForm.value.link}} -->
+        <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
               </mat-icon>
               <mat-icon (click)="removeMediaLink(ind)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon> -->
-          <!-- </div>
+        <!-- </div>
         </div> -->
 
         <!-- /////If professional////// -->
@@ -754,7 +758,7 @@ if he/she is found to be impersonating or putting inappropriate content into the
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="this.profileForm.invalid">Save</button>
+          <button mat-flat-button [disabled]="this.profileForm.invalid" class="submit f_size_17 color_white f_wt_400">Save</button>
         </div>
         <br> <br>
         <!-- <div class="row">
