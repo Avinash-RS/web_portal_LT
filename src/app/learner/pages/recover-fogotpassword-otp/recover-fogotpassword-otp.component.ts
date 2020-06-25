@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { AlertServiceService } from 'src/app/./core/services/handlers/alert-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recover-fogotpassword-otp',
@@ -22,9 +23,10 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   userId: any;
   email: string;
   details: any;
-  constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,  private alert: AlertServiceService,
+  constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
     private loader : Ng4LoadingSpinnerService,
     private router: Router,
+    private toastr: ToastrService,
     public service : LearnerServicesService,) { 
       this.mobile = this.activatedRoute.snapshot.paramMap.get('mobile')
     }
@@ -59,13 +61,13 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
     this.service.user_registration_verify(this.otp,this.mobile).subscribe(data => {
           if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
             this.loader.hide();
-            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null);
+            Swal.fire(data.data['user_registration_mobile_otp_verify'].message,null);
             localStorage.setItem('UserDetails',JSON.stringify(data.data['user_registration_mobile_otp_verify'].data[0]))
             localStorage.setItem('role', 'learner')
             this.router.navigate(['Learner/resetpassword']);
           } else{
             this.loader.hide();
-            this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message,null)
+            this.toastr.error(data.data['user_registration_mobile_otp_verify'].message,null)
            
           }
       })
@@ -90,7 +92,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
       clearTimeout(this.interval);
       this.timer();
         this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'],null) 
+        Swal.fire(data.data['user_registration_mobile_otp_send']['message'],null) 
   })
         } 
 

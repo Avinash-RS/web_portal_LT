@@ -4,8 +4,10 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals';
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -41,7 +43,7 @@ export class OtpComponent implements OnInit {
   otpFeature: any;
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private alert: AlertServiceService,
+    private toastr: ToastrService,
     private loader: Ng4LoadingSpinnerService,
     public service: LearnerServicesService,
     private activeroute: ActivatedRoute) {
@@ -85,7 +87,7 @@ export class OtpComponent implements OnInit {
       if (this.otpFeature == 'true') {
         if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
           this.loader.hide();
-          this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
+          Swal.fire(data.data['user_registration_mobile_otp_send']['message'], null)
           this.isenable = false;
           this.showotp = true;
           //Timer
@@ -114,13 +116,13 @@ export class OtpComponent implements OnInit {
   otpverify() {
     this.service.user_registration_verify(this.otp, this.otpForm.value.mobile).subscribe(data => {
       if (data.data['user_registration_mobile_otp_verify']['success'] == 'true') {
-        this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message, null)
+        this.toastr.success(data.data['user_registration_mobile_otp_verify'].message, null)
         this.showotp = true;
         localStorage.setItem("key", this.userid)
         this.router.navigate(['Learner/password']);
       } else {
         this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' })
-        this.alert.openAlert(data.data['user_registration_mobile_otp_verify'].message, null)
+        this.toastr.error(data.data['user_registration_mobile_otp_verify'].message, null)
         this.showotp = false;
         this.isenable = true;
       }
@@ -133,7 +135,7 @@ export class OtpComponent implements OnInit {
       this.otp = '';
       if (data.data['user_registration_mobile_otp_send']['success'] == 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['user_registration_mobile_otp_send']['message'], null)
+        Swal.fire(data.data['user_registration_mobile_otp_send']['message'], null)
         if (data.data['user_registration_mobile_otp_send']['data'].status == true) {
           this.showotp = true;
         } else {

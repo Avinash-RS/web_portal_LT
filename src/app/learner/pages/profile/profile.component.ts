@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+// import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, NgModel, Validators, FormArray } from '@angular/forms';
@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -37,10 +38,10 @@ export class ProfileComponent implements OnInit {
   ref_no1: any;
 
   constructor(
-    private el: ElementRef, private alert: AlertServiceService, public service: LearnerServicesService,
+    private el: ElementRef, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-    private router: Router, private gs: GlobalServiceService) {
+    private router: Router, private gs: GlobalServiceService,private toastr: ToastrService,) {
     // const x = localStorage.getItem('OTPFeature') || false;
     // console.log(x);
     this.enableMobileEdit = false;
@@ -156,7 +157,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (params.status) {
-        Swal.fire('Email updated successfully');
+        this.toastr.success('Email updated successfully');
       }
     });
     if (this.currentUser.is_profile_updated) {
@@ -398,7 +399,7 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
     if (this.profileForm.value.payment_mode === 'self') {
       if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '') {
-        this.alert.openAlert('Please enter the NEFT/RTGS reference number', null);
+        this.toastr.warning('Please enter the NEFT/RTGS reference number', null);
         // this.invalidForm();
       }
 
@@ -411,9 +412,9 @@ export class ProfileComponent implements OnInit {
       const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
       const index2 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7deddfdba4466d9704b44a');
       if (index === -1) {
-        this.alert.openAlert('Please fill 10th qualification details', null);
+        this.toastr.warning('Please fill 10th qualification details', null);
       } else if (this.profileForm.value.iAgree === false) {
-        this.alert.openAlert('Please fill all mandatory feilds', null);
+        this.toastr.warning('Please fill all mandatory feilds', null);
       } else {
         // console.log(this.profileForm.value.qualification);
         // if (this.profileForm.value.qualification(index).board_university !== '' ||
@@ -471,7 +472,7 @@ export class ProfileComponent implements OnInit {
           });
         }
         if (found?.length) {
-          this.alert.openAlert('Please fill all qualification details.', null);
+          this.toastr.warning('Please fill all qualification details.', null);
         } else {
           const jsonData = {
             pay_status: true,
@@ -487,7 +488,7 @@ export class ProfileComponent implements OnInit {
               localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
               this.router.navigate(['/Learner/home']);
             } else {
-              this.alert.openAlert(data.data.update_profile.message, null);
+              this.toastr.error(data.data.update_profile.message, null);
             }
           });
         }
@@ -509,7 +510,7 @@ export class ProfileComponent implements OnInit {
         // }
       }
     } else {
-      this.alert.openAlert('Please fill all qualification details', null);
+      this.toastr.warning('Please fill all qualification details', null);
       // this.invalidForm();
     }
   }
@@ -536,7 +537,7 @@ export class ProfileComponent implements OnInit {
       });
     });
     if (tenYear >= twelveYear) {
-      this.alert.openAlert('10th year of passing should not be greater than 12th', null);
+      this.toastr.warning('10th year of passing should not be greater than 12th', null);
       this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
     }
   }
@@ -549,7 +550,7 @@ export class ProfileComponent implements OnInit {
 
     this.profileForm.value.qualification.forEach(element => {
       if (element.year_of_passing > this.endYear || element.year_of_passing < this.startYear) {
-        this.alert.openAlert('Invalid year', null);
+        this.toastr.warning('Invalid year');
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').reset();
         this.profileForm.get('qualification').get(String(index)).get('year_of_passing').setValidators(
           []);
@@ -561,10 +562,10 @@ export class ProfileComponent implements OnInit {
   addCertificates(c, i) {
     const arrayT = this.certificate.value.filter(val => val === c);
     if (arrayT.length > 1) {
-      this.alert.openAlert('This certificate link is already filled', null);
+      this.toastr.warning('This certificate link is already filled', null);
       this.certificate.removeAt(i);
     } else if (c[0] === '') {
-      this.alert.openAlert('Please enter certificate', null);
+      this.toastr.warning('Please enter certificate', null);
     } else {
       this.certificate.push(this.formBuilder.control(['']));
     }
@@ -614,7 +615,7 @@ export class ProfileComponent implements OnInit {
           this.profileForm.value.qualification[i].percentage !== '' && this.profileForm.value.qualification[i].year_of_passing !== '') {
           this.qualification.push(this.createQualItem());
         } else {
-          this.alert.openAlert('Please fill all details', null);
+          this.toastr.warning('Please fill all details', null);
         }
       } else {
         if (this.profileForm.value.qualification[i].institute !== '' &&
@@ -623,7 +624,7 @@ export class ProfileComponent implements OnInit {
           // && this.profileForm.value.qualification[i].discipline !== '') {
           this.qualification.push(this.createQualItem());
         } else {
-          this.alert.openAlert('Please fill all details', null);
+          this.toastr.warning('Please fill all details', null);
         }
       }
     } else {
@@ -683,7 +684,7 @@ export class ProfileComponent implements OnInit {
       this.stateValue = stateDetails.data.get_state_details.data;
       this.getDistrict();
       if (this.stateValue == null) {
-        this.alert.openAlert(stateDetails.data.get_state_details.message, null);
+        this.toastr.warning(stateDetails.data.get_state_details.message, null);
       }
     });
   }
@@ -789,16 +790,16 @@ export class ProfileComponent implements OnInit {
 
   updateEmail(mailForm) {
     if (mailForm === false) {
-      Swal.fire('Email id is invalid');
+      this.toastr.error('Email id is invalid');
     } else {
       this.service.update_email_onprofile(this.currentUser.user_id, this.mailForm.value.mailid).subscribe((data: any) => {
         this.dialog.closeAll();
         if (data.data.update_email_onprofile.success === 'true') {
-          Swal.fire(data.data.update_email_onprofile.message);
+          this.toastr.success(data.data.update_email_onprofile.message);
           this.getprofileDetails(this.currentUser.user_id);
           this.mailForm.reset();
         } else {
-          Swal.fire(data.data.update_email_onprofile.message);
+          this.toastr.error(data.data.update_email_onprofile.message);
         }
       });
     }
@@ -857,7 +858,7 @@ export class ProfileComponent implements OnInit {
 
       } else {
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
-        Swal.fire(data.data.update_mobile_onprofile.message);
+        this.toastr.error(data.data.update_mobile_onprofile.message);
       }
     });
   }
@@ -872,12 +873,12 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.data.update_verifyotp_mobile_onprofile.success === 'true') {
           this.closedialogbox();
-          Swal.fire(data.data.update_verifyotp_mobile_onprofile.message);
+          this.toastr.success(data.data.update_verifyotp_mobile_onprofile.message);
           this.showotp = false;
           this.isenable = true;
           this.getprofileDetails(this.currentUser.user_id);
         } else {
-          Swal.fire(data.data.update_verifyotp_mobile_onprofile.message);
+          this.toastr.error(data.data.update_verifyotp_mobile_onprofile.message);
           this.otpForm.setValue({ mobile: this.otpForm.value.mobile, otp: '' });
           this.showotp = false;
           this.isenable = true;
@@ -913,7 +914,7 @@ export class ProfileComponent implements OnInit {
         this.passwordForm.reset();
         this.dialog.closeAll(); // Asok said
         if (password.data.get_change_password_updateprofile.success === 'true') {
-          Swal.fire(password.data.get_change_password_updateprofile.message);
+          this.toastr.success(password.data.get_change_password_updateprofile.message);
           localStorage.clear();
           this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
             localStorage.setItem('Systemip', res.ip);
@@ -921,7 +922,7 @@ export class ProfileComponent implements OnInit {
           // this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
         } else {
-          Swal.fire(password.data.get_change_password_updateprofile.message);
+          this.toastr.error(password.data.get_change_password_updateprofile.message);
         }
       });
   }
@@ -929,9 +930,9 @@ export class ProfileComponent implements OnInit {
   onSelectFile(event) {
     this.selectfile = event.target.files[0] as File;
     if (this.selectfile && this.selectfile.type !== 'image/png' && this.selectfile.type !== 'image/jpeg') {
-      this.alert.openAlert('Image should be less than 5 MB and should be only Jpeg or png format', null);
+      this.toastr.warning('Image should be less than 5 MB and should be only Jpeg or png format', null);
     } else if (this.selectfile && this.selectfile.size > 500000) {
-      this.alert.openAlert('Image should be less than 5 MB and should be only Jpeg or png format', null);
+      this.toastr.warning('Image should be less than 5 MB and should be only Jpeg or png format', null);
     } else {
       if (this.selectfile) {
         const fb = new FormData();
