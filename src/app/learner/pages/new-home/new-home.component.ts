@@ -28,7 +28,9 @@ export class NewHomeComponent implements OnInit {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
           this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
-            element.duration = data.data.getmoduleData.data[0].coursetime;
+            if (data.data.getmoduleData.data) {
+              element.duration = data.data.getmoduleData.data[0]?.coursetime;
+            }
           });
           //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
         });

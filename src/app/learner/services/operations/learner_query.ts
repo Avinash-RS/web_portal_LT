@@ -291,18 +291,22 @@ export const check_existing_user = gql`
 }`;
 
 export const playerModuleAndTopic = gql`
-  query playerModuleAndTopic($contentID: String){
-    playerModuleAndTopic(contentID: $contentID) {
+  query playerModuleAndTopic($contentID: String , $user_id:String){
+    playerModuleAndTopic(contentID: $contentID , user_id:$user_id) {
       message{
         _id
         url
         course_id
         childData
-        {title _id
+        {
+          title
+        _id
+        status
        children
        { _id
         title
          link
+         status
           isVisible
            }
             }
