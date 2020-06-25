@@ -75,7 +75,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 center col-sm-11 col-11 filecontainer no_padding inheritcursor b_middle"
+      <div class="col-md-6 center col-sm-11 col-11 filecontainer inheritcursor b_middle"
         *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
         <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
           (change)="fileBrowseHandler($event.target.files)" class="inheritcursor" />

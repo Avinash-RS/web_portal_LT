@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">User Management</li>
+    <li class="breadcrumb-item active" aria-current="page">Jobs</li>
     <li class="breadcrumb-item active" aria-current="page">Reports</li>
   </ol>
 </nav>
@@ -41,40 +41,32 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="success_count">
+    <!-- <ng-container matColumnDef="success_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Success</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
-        <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.success_count || 0}}</span>
-        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="duplicate_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Duplicate</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
-        <!-- <span class="mobile-label">Mobile No</span> -->
         <span class="desktop-data"> {{element.duplicate_count || 0}}</span>
-        <!-- <span class="mobile-data">&nbsp;&nbsp; {{element.mobile_number || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="existing_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header > Existing</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
-        <!-- <span class="mobile-label">Total count</span> -->
         <span class="desktop-data"> {{element.existing_count || 0}}</span>
-        <!-- <span class="mobile-data"> {{element.username}}</span> -->
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="updated_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Updated</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
-        <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.updated_count || 0}}</span>
-        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="time_ago">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Created</mat-header-cell>
@@ -84,15 +76,13 @@
         <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
     </ng-container>
-
+<!-- 
     <ng-container matColumnDef="failure_count">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Failure</mat-header-cell>
       <mat-cell *matCellDef="let element" class ="alignment">
-        <!-- <span class="mobile-label">Email ID</span> -->
         <span class="desktop-data"> {{element.failure_count || 0}}</span>
-        <!-- <span class="mobile-data"> {{element.email || 'NA'}}</span> -->
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="link">
       <mat-header-cell *matHeaderCellDef class="centre"> Link to download</mat-header-cell>
