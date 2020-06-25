@@ -142,6 +142,13 @@ export const menus = [
                 open: false,
                 chip: false,
             },
+            {
+                name: 'Reports',
+                link: 'bulkenrolmentreports',
+                icon: 'notes',
+                chip: false,
+                open: true,
+            },
         ]
     },
     {
