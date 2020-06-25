@@ -82,8 +82,11 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
       <mat-cell *matCellDef="let element" class="alignment">
         <span class="desktop-data">
-          {{ element.total_count === element.updated_count  ? 'All Success' : element.total_count === element.failure_count  ?  'All Failure' : 'Partial Success' }}</span>
+        <!-- {{element.success_count}},{{element.updated_count}}  {{+element.success_count + +element.updated_count}} -->
+          {{ +element.total_count === +element.updated_count + +element.success_count  ? 'All Success' :
+           +element.total_count === +element.failure_count + +element.existing_count + +element.duplicate_count ?  'All Failure' : 'Partial Success' }}
         <!-- <span class="desktop-data">all success</span> -->
+      </span> 
       </mat-cell>
     </ng-container>
     <!-- 
