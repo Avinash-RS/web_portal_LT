@@ -377,8 +377,8 @@ export const viewcourse = gql`
   }`;
 
 export const view_wishlist = gql`
-  query view_wishlist($user_id: String){
-    view_wishlist(user_id: $user_id) {
+  query view_wishlist($user_id: String, $pagenumber: Int ){
+    view_wishlist(user_id: $user_id, pagenumber: $pagenumber) {
       success
       error_msg
       message{
@@ -395,6 +395,7 @@ export const view_wishlist = gql`
         price
         rating
         short_description
+        enrollment_status
         }
     }
   }`;
