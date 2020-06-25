@@ -149,7 +149,6 @@ export class CoursedetailsComponent implements OnInit {
 
   // get Scrom module and topic
   playerModuleAndTopic() {
-    console.log(this.localStoCourseid, '1111111111111111111');
     this.Lservice.playerModuleAndTopic(this.localStoCourseid , this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData =  data.data.playerModuleAndTopic.message[0];
       this.scromModuleData = this.scromApiData.childData;
