@@ -7,7 +7,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
-// import { debugger } from 'fusioncharts';
+
 
 @Component({
   selector: 'app-coursedetails',
@@ -167,12 +167,13 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index) {
-    console.log(topicLenght , index)
-    if (index === topicLenght) {
+    const len = parseInt(topicLenght);
+    if (index === len) {
       moduleStatus = 'Passed';
     } else {
       moduleStatus = 'Process';
     }
+    console.log(moduleStatus);
     const jsonData = {
     module : [{
     module_name: moduleName,

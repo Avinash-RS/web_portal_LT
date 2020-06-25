@@ -134,16 +134,16 @@ li {
 //      border: 2px solid $color-border;
 // }
 
-:host ::ng-deep.colorGreen.mat-step-header .mat-step-icon {
+:host ::ng-deep .colorGreen .mat-step-header .mat-step-icon {
     background-color: $color-green !important;
      color: $color-white; 
 }
 
 
-:host ::ng-deep.colorYellow.mat-step-header .mat-step-icon {
-    background-color: $color-yellow !important;
-     color: $color-white; 
-}
+// :host ::ng-deep .colorYellow.mat-step-header .mat-step-icon {
+//     background-color: $color-yellow !important;
+//      color: $color-white; 
+// }
 
 // :host ::ng-deep .owl-carousel {
 //     display: none;
@@ -500,3 +500,8 @@ li {
     margin-left: 24px;
 
   }
+// .colgreen{
+    :host /deep/ .colgreen .mat-step-header .mat-step-icon-selected{
+        background-color: green !important;
+    }
+// }
