@@ -164,7 +164,6 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   insertPersentage(moduleLegth, modIndex) {
-    console.log(moduleLegth, modIndex);
     // tslint:disable-next-line:radix
     this.persentage = parseInt(modIndex)  / parseInt(moduleLegth) * 100;
     console.log(this.persentage);
