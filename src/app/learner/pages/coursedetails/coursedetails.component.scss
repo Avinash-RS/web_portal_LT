@@ -526,3 +526,10 @@ li {
         color: red !important;
     }
 }
+
+::ng-deep .mat-step-header[aria-labelledby="colBlue"] {
+    .mat-step-icon {
+        background-color: red !important;
+        color: yellow !important;
+    }
+}

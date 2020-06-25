@@ -64,7 +64,7 @@
                         <div class="col-12">
                             <mat-vertical-stepper [linear]="isLeaner">
                                 <ng-container *ngFor="let mod of res?.children; let j = index" >
-                                        <mat-step [aria-labelledby]="'colgreen'" >
+                                        <mat-step [aria-labelledby]="mod.title === 'false' ? 'colgreen' : 'colBlue'" >
                                             <ng-template  matStepLabel> <span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j + 1)">{{mod?.title}}{{mod?.status}}</span></ng-template>
                                         </mat-step>
                                 </ng-container>
