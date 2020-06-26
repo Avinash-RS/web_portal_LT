@@ -1,50 +1,19 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+<!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <img class="logo pointer" routerLink="/Learner/home" src="assets/learner/kauhalya_trans.png">
-  <!-- <a class="navbar-brand edutech" href="/Learner/Thankyou"><b>Edu</b>Tech</a> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!-- id="navbarCollapse" -->
   <div class="collapse navbar-collapse">
-    <!-- <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null"> -->
-    <!-- <ul class="navbar-nav mr-auto">
-        <i class="fa fa-th box" aria-hidden="true"></i>
-        <li class="dropdown">
-          <a href="/Learner/viewallcourses" class="dropdown-toggle drop" data-toggle="dropdown">
-            All Courses
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-          </ul>
-        </li>
-      </ul> -->
-    <!-- </ul> -->
-
     <ul class="navbar-nav mr-auto" *ngIf="userDetailes == null">
       <ul class="navbar-nav mr-auto">
         <i class="fa fa-th box" aria-hidden="true"></i>
         <li class="dropdown">
-          <!-- <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
-            Categories
-            <b class="caret"></b>
-          </a> -->
-          <ul class="dropdown-menu">
+           <ul class="dropdown-menu">
           </ul>
         </li>
       </ul>
     </ul>
-
-
-    <div *ngIf="userDetailes != null">
-      <!-- <input class="form-control border-right-0" placeholder="  Search courses  ">
-      <span class="input-group-append bg-white border-left-0">
-        <span class="input-group-text bg-transparent">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </span>
-      </span> -->
-      <!-- <app-search></app-search> -->
-    </div>
 
     <div class="input-group" *ngIf="userDetailes == null">
       <input class="form-control border-right-0" placeholder="  Search   ">
@@ -55,17 +24,9 @@
       </span>
     </div>
 
-    <!-- <div style="text-align: right !important;"> -->
     <div style="position: absolute;right: 60px;">
       <ul class="navbar-nav" *ngIf="userDetailes != null">
         <ul class="navbar-nav">
-          <!-- <li>
-            <i class="fa fa-bell bellicon" aria-hidden="true"></i>
-          </li>
-          <li>
-            <i class="fa fa-shopping-cart carticon" aria-hidden="true"></i>
-          </li> -->
-
           <li (click)="navigateProfile()">
             <img class="profileimg"
               [src]="userimage != 'null' && userimage != 'undefined'  ? userimage : 'assets/learner/pro2.png'">
@@ -88,21 +49,6 @@
         <button class="backgroundcol" routerLink="/Learner/home" mat-menu-item>
           <label>My Course</label>
         </button>
-        <!-- <button class="backgroundcol" routerLink="/Learner/MyCourse" mat-menu-item>
-          <label>My Course</label>
-        </button>
-        <button class="backgroundcol" mat-menu-item  routerLink="/Learner/viewallcourses">
-          <label>View All Courses</label>
-        </button>
-      <!--  <button class="backgroundcol" mat-menu-item  routerLink="/Learner/dashboard">
-          <label>Dashboard</label>
-        </button>
-        <button class="backgroundcol" mat-menu-item (click)="navigateWishlist()">
-          <label>Wishlist</label>
-        </button> -->
-        <!-- <button class="backgroundcol" mat-menu-item>
-          <label style="color: #fff;">Certificate</label>
-        </button> -->
         <button class="backgroundcol" mat-menu-item (click)="logout()">
           <label>Logout</label>
         </button>
@@ -110,8 +56,6 @@
     </div>
 
     <div class="login_btn" *ngIf="userDetailes == null">
-      <!-- 
-       -->
       <ul class="navbar-nav mr-auto">
         <li class="smallmenu2">
           <button class="backgroundcol" routerLink="/Learner/register">Register</button>
@@ -128,53 +72,16 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <!-- <li><a href="#">Link</a></li>
-                      <li><a href="#">Link</a></li>
-                      <li><a href="#">Link</a></li> -->
           </ul>
         </li>
       </ul>
     </div>
   </div>
-
 </nav>
 
 <div class="collapse navbar-collapse" id="navbarCollapse">
   <ul class="navbar-nav mr-auto" *ngIf="userDetailes != null && role == 'learner'" id="navbarCollapse">
     <ul class="navbar-nav mr-auto" id="navbarCollapse">
-      <!-- <li class="dropdownsmall">
-        <a href="#" class="dropdown-toggle drop" data-toggle="dropdown">
-          All Courses
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-        </ul>
-      </li> -->
-
-      <!-- <li class="smallmenu">
-        <a routerLink="/Learner/MyCourse">
-          My Course
-        </a>
-      </li> -->
-
-      <!-- <li class="smallmenu">
-        <a href="#">
-          Search
-        </a>
-      </li> -->
-
-      <!-- <li class="smallmenu">
-        <a href="#">
-          Notifications
-        </a>
-      </li> -->
-
-      <!-- <li class="smallmenu">
-        <a href="#">
-          My Cart
-        </a>
-      </li> -->
-
       <li class="smallmenu">
         <a href="#">
           Profile
@@ -183,4 +90,33 @@
       <br><br>
     </ul>
   </ul>
-</div>
+</div> -->
+
+<mat-toolbar color="primary"   class="mat-elevation-z4 bg-dark">  
+  <div>
+    <img class="hearder-logo" alt="" src="../../assets/learner/kauhalya_trans.png">
+  </div>
+  
+    <span class="spacer"></span>
+    <div (click)="navigateProfile()">
+      <img class="profileimg" [src]="userimage != 'null' && userimage != 'undefined'  ? userimage : 'assets/learner/pro2.png'">
+    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+       <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
+      <label>Profile</label>
+    </button>
+    <button class="backgroundcol"  routerLink="/Learner/home"  mat-menu-item>
+      <label>My Courses</label>
+    </button>
+   
+    <button class="backgroundcol" mat-menu-item (click)="logout()">
+      <label>Logout</label>
+    </button>
+    </mat-menu>
+</mat-toolbar>
+
+
