@@ -10,8 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
+}
+
 .m-t-3 {
     margin-top: 3%;
 }
@@ -19,6 +19,30 @@
 .m-b-10 {
     margin-bottom: 12px;
     // margin-top: -5px;
+}
+
+@media screen and (min-width:270px) and (max-width:795px) {
+    .descmc {
+        max-height: 175px !important;
+        min-height: 40px;
+    }
+
+    @media screen and (max-width:500px) {
+        .statBtn {
+            width: 60%;
+            margin: auto !important;
+            text-align: center !important;
+            display: block !important;
+        }
+    }
+}
+
+@media screen and (min-width:500px) and (max-width:765px) {
+    .statBtn {
+        width: 50%;
+        text-align: center !important;
+        float: right;
+    }
 }
 
 .vertical {
@@ -37,6 +61,7 @@
     font-weight: 500 !important;
     color: #616060;
 }
+
 // :host ::ng-deep .myC .mat-tab-label .mat-tab-label-content {
 //     font-size: 17px !important;
 //     font-weight: 600 !important;
@@ -175,10 +200,7 @@
 }
 
 .noCourse {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 17px;
-    color: #575656;
+    padding: 50px;
 }
 
 .footer {
@@ -192,11 +214,4 @@
     background-color: $profile-t-grey;
     text-align: center;
     border-top: 2px solid $profile-p-grey;
-  }
-
-  :host ::ng-deep.footericon{
-    width: 9%;
-    position: absolute;
-    margin-left: 5px;
-  
-  }
+}
