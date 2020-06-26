@@ -112,7 +112,7 @@
                   Course Duration: {{course.course_duration}} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
-                  <div class="col-6 display_flex">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
                     <div class="width_70">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
@@ -120,7 +120,7 @@
                       {{course?.coursePlayerStatus?.course_percentage || 0}}%
                     </span>
                   </div>
-                  <div class="col-6 float_right">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                       class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>play_circle_outline</mat-icon>
@@ -164,7 +164,7 @@
                   Course Duration: {{course.course_duration}} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3" (click)="gotoDesc(course)">
-                  <div class="col-6 display_flex">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
                     <div class="width_70">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
@@ -173,7 +173,7 @@
                       {{course?.coursePlayerStatus?.course_percentage || 0}}%
                     </span>
                   </div>
-                  <div class="col-6 float_right">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
                       class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>replay</mat-icon>
