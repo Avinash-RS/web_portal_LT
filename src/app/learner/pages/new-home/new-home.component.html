@@ -50,15 +50,15 @@
                   Course Duration: {{course.course_duration}} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
-                  <div class="col-6 display_flex">
-                    <div class="width_70">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
+                    <div class="width_70 m-b-10">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
                     </div> <span class="percent color_black2">
                       {{course?.coursePlayerStatus?.course_percentage || 0}}%
                     </span>
                   </div>
-                  <div class="col-6 float_right">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                       class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>play_circle_outline</mat-icon>
@@ -122,7 +122,7 @@
                   </div>
                   <div class="col-6 float_right">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                      class="width_35 blue_clr cap m-b-10 statBtn" (click)="gotoDesc(course)">
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>play_circle_outline</mat-icon>
                       &nbsp;Resume&nbsp;
                     </button>
@@ -175,7 +175,7 @@
                   </div>
                   <div class="col-6 float_right">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                      class="width_35 blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>replay</mat-icon>
                       &nbsp;<span class="cap">
                         Replay&nbsp;
@@ -203,7 +203,7 @@
 
   <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
     <span class="powered">Powered by :
-      <img width = "160px" alt="" src="assets/learner/LT_small.svg">
+      <img width="160px" alt="" src="assets/learner/LT_small.svg">
     </span>
   </span>
 
