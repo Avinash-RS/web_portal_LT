@@ -6,10 +6,11 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AlertServiceService } from '../handlers/alert-service.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
+    private toastr: ToastrService,
     private alert: AlertServiceService,
     private router: Router,
   ) { }
@@ -48,7 +49,8 @@ export class AuthGuard implements CanActivate {
         // if profile not updated and trying to access other screens, redirect to profile
         if (state.url !== '/Learner/profile') {
           this.router.navigate(['/Learner/profile']);
-          this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+          this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields');
+          // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
           return false;
         } else {// if url is profile or anything
           return true;

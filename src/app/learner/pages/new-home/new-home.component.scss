@@ -129,6 +129,14 @@
     margin: auto;
 }
 
+.courseImgs {
+    width: 125px;
+    height: 142px;
+    padding: 21px;
+    margin: auto;
+}
+
+
 .linee {
     background: $color-landing-blue;
     height: 100%;
@@ -145,6 +153,13 @@
     border-bottom-right-radius: 5px;
 }
 
+.lineer {
+    background: #ea4135;
+    height: 100%;
+    border: 4px solid #ea4135;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 .m-l-1 {
     margin-top: 1%;
 }

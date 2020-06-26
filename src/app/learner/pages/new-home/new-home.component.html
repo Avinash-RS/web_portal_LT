@@ -81,8 +81,21 @@
           </mat-card>
         </ng-container>
         <div *ngIf="enrolledCourses?.length === 0" class="space5">
-          <mat-card class="coursebg width_60 center noCourse center_align">
+          <!-- <mat-card class="coursebg width_60 center noCourse center_align">
             You have no enrolled courses at the moment
+          </mat-card> -->
+          <mat-card class="coursebg width_90">
+            <div class="row width_90 no_margin">
+              <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
+                (click)="gotoDesc(course)">
+                <div class="lineer"></div>
+                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
+              </div>
+              <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
+               
+              <span style="font-size: medium;"> You have no enrolled courses at the moment.</span> 
+              </div>
+            </div>
           </mat-card>
         </div>
       </mat-tab>

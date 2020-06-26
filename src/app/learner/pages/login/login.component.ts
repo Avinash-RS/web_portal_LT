@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-     private service: LearnerServicesService,
-    private toastr: ToastrService) {
+              private service: LearnerServicesService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/home']);
               } else {
-                this.toastr.warning('Your profile is incomplete !','Please provide data for all mandatory fields');
+                this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             } else {
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/home']);
               } else {
-                this.toastr.warning('Your profile is incomplete !','Please provide data for all mandatory fields');
+                this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields');
                 this.router.navigate(['/Learner/profile']);
               }
             }
@@ -91,11 +91,11 @@ export class LoginComponent implements OnInit {
       });
   }
   forgotusername(type) {
-    this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
+    this.router.navigateByUrl('/Learner/recover', { state: { type } });
   }
 
   reserPassword(type) {
-    this.router.navigateByUrl('/Learner/recover', { state: { type: type } });
+    this.router.navigateByUrl('/Learner/recover', { state: { type } });
   }
 
 }
