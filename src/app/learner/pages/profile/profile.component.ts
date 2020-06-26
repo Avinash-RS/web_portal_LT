@@ -27,6 +27,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ProfileComponent implements OnInit {
 
+  userImage;
   enableMobileEdit;
   boardValue1: any;
   uniValue1: any;
@@ -493,6 +494,9 @@ export class ProfileComponent implements OnInit {
             this.loader.hide();
             this.currentUser.is_profile_updated = true;
             localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+            if(this.userImage){
+              localStorage.setItem('user_img', this.userImage);
+            }
             this.toastr.success('Profile updated successfully', null);
             this.router.navigate(['/Learner/home']);
           } else {
@@ -947,8 +951,8 @@ export class ProfileComponent implements OnInit {
         fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
           this.profileForm.controls.profile_img.setValue(data);
-          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path);
-          this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
+          this.userImage = 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path
+          this.profileForm.controls.profile_img.setValue(this.userImage);
         });
       }
     }
