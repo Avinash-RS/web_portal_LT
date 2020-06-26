@@ -8,7 +8,7 @@
   <mat-spinner diameter="40"></mat-spinner>
 </div>
 <div class="row width_100 no_margin bodybg" *ngIf="!loading">
-  <div class="col-xl-8 col0lg-8 col-md-10 col-sm12 col-12">
+  <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-12">
     <mat-tab-group style="padding: 0% 3%;" class="myCc">
       <mat-tab [label]="'All ( '+enrolledCourses?.length +' )'">
         <ng-container *ngFor="let course of enrolledCourses ;let i=index">
@@ -38,7 +38,7 @@
                   {{course.course_name}}
                 </div>
                 <div class="width_100 color_black2 f_size_12 descmc f_wt_400 m-l-1 pointer" (click)="gotoDesc(course)">
-                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                  {{(course.course_description?.length > 375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                 </div>
                 <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
                   {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
@@ -47,7 +47,7 @@
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
+                  Course Duration: {{course.course_duration?.slice(0, 5) }} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -58,7 +58,7 @@
                       {{course?.coursePlayerStatus?.course_percentage || 0}}%
                     </span>
                   </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12">
                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                       class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon>play_circle_outline</mat-icon>
@@ -80,9 +80,11 @@
             </div>
           </mat-card>
         </ng-container>
-        <p *ngIf="enrolledCourses?.length === 0" class="noCourse">
-          No courses enrolled yet
-        </p>
+        <div *ngIf="enrolledCourses?.length === 0" class="space5">
+          <mat-card class="coursebg width_60 center noCourse center_align">
+            You have no enrolled courses at the moment
+          </mat-card>
+        </div>
       </mat-tab>
       <mat-tab [label]="'On-Going ( '+incomplete?.length + ' )'" [disabled]='incomplete?.length === 0'>
         <ng-container *ngFor="let course of incomplete ;let j=index">
@@ -95,12 +97,12 @@
                 <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
                 <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl"  style="padding: 5px !important;">
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl" style="padding: 5px !important;">
                 <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
                 <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 pointer descmc" (click)="gotoDesc(course)">
-                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                  {{(course.course_description?.length > 375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                 </div>
                 <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
                   {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
@@ -109,7 +111,7 @@
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
+                  Course Duration: {{course.course_duration?.slice(0, 5) }} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -132,9 +134,11 @@
             </div>
           </mat-card>
         </ng-container>
-        <p *ngIf="incomplete?.length === 0" class="noCourse">
-          No courses to resume
-        </p>
+        <div *ngIf="incomplete?.length === 0" class="space5">
+          <mat-card class="coursebg width_60 center noCourse center_align">
+            You have no enrolled courses at the moment
+          </mat-card>
+        </div>
       </mat-tab>
       <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'" [disabled]='completed?.length === 0'>
         <ng-container *ngFor="let course of completed;let k=index">
@@ -147,12 +151,12 @@
                 <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
                 <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl"  style="padding: 5px !important;" >
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl" style="padding: 5px !important;">
                 <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
                 <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 descmc" (click)="gotoDesc(course)">
-                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                  {{(course.course_description?.length > 375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
                 </div>
                 <div class="width_100 color_black2 f_size_12 f_wt_400 space2" (click)="gotoDesc(course)">
                   {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
@@ -161,7 +165,7 @@
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
+                  Course Duration: {{course.course_duration?.slice(0, 5) }} hours
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 m-t-3" (click)="gotoDesc(course)">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -187,9 +191,11 @@
             </div>
           </mat-card>
         </ng-container>
-        <p *ngIf="completed?.length === 0" class="noCourse">
-          No courses completed yet
-        </p>
+        <div *ngIf="completed?.length === 0" class="space5">
+          <mat-card class="coursebg width_60 center noCourse center_align">
+            You have no enrolled courses at the moment
+          </mat-card>
+        </div>
       </mat-tab>
     </mat-tab-group>
     <br>
