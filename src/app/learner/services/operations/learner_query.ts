@@ -303,6 +303,7 @@ export const playerModuleAndTopic = gql`
         _id
         status
         topic_len
+        moduletime
        children
        { _id
         title

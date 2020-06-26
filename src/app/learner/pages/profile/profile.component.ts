@@ -27,6 +27,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ProfileComponent implements OnInit {
 
+  userImage;
   enableMobileEdit;
   boardValue1: any;
   uniValue1: any;
@@ -41,7 +42,7 @@ export class ProfileComponent implements OnInit {
     private el: ElementRef, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-    private router: Router, private gs: GlobalServiceService,private toastr: ToastrService,) {
+    private router: Router, private gs: GlobalServiceService, private toastr: ToastrService,) {
     // const x = localStorage.getItem('OTPFeature') || false;
     // console.log(x);
     this.enableMobileEdit = false;
@@ -288,7 +289,7 @@ export class ProfileComponent implements OnInit {
       if (data.data.view_profile.success) {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         this.userData = data.data.view_profile.message[0];
-        this.payment_mode = profileDetails.payment.payment_mode;
+        this.payment_mode = profileDetails?.payment?.payment_mode;
         if (this.payment_mode === 'self') {
           this.isSelfEnable = true;
           profileDetails.ref_no1 = profileDetails.payment.ref_no;
@@ -299,8 +300,8 @@ export class ProfileComponent implements OnInit {
           profileDetails.payment_mode = profileDetails.payment.payment_mode;
         }
 
-        this.userData.ref = profileDetails.payment.pay_status;
-        this.ref_no1 = profileDetails.payment.ref_no;
+        this.userData.ref = profileDetails?.payment?.pay_status;
+        this.ref_no1 = profileDetails?.payment?.ref_no;
 
         if (profileDetails) {
           if (profileDetails.qualification.length > 0) {
@@ -397,6 +398,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+    // console.log(this.profileForm);
     if (this.profileForm.value.payment_mode === 'self') {
       if (this.profileForm && this.profileForm.value && this.profileForm.value.ref_no1 === '') {
         this.toastr.warning('Please enter the NEFT/RTGS reference number', null);
@@ -406,8 +408,11 @@ export class ProfileComponent implements OnInit {
     }
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
-      this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '') {
-
+      this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '' &&
+      (this.profileForm.value.qualification[1]  === undefined  ||
+        (this.profileForm.value.qualification[1] !== undefined && this.profileForm.value.qualification[1].qualification !== '' &&
+          this.profileForm.value.qualification[1].institute !== '' && this.profileForm.value.qualification[1].year_of_passing !== '' &&
+          this.profileForm.value.qualification[1].percentage !== ''))) {
       const index = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dedc1dba4466d9704b3f2');
       const index1 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7dee15dba4466d9704b4d2');
       const index2 = this.profileForm.value.qualification.findIndex(x => x.qualification === '5e7deddfdba4466d9704b44a');
@@ -464,34 +469,41 @@ export class ProfileComponent implements OnInit {
           this.profileForm.value.pincode = null;
         }
         this.profileForm.value.is_student_or_professional = 'student';
-        let found;
-        if (this.profileForm?.value?.qualification[1]) {
-          const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[1]));
-          found = Object.keys(obj).filter(function (key) {
-            return obj[key] === '';
-          });
-        }
-        if (found?.length) {
-          this.toastr.warning('Please fill all qualification details.', null);
-        } else {
-          const jsonData = {
-            pay_status: true,
-            payment_mode: this.profileForm.value.payment_mode,
-            ref_no: this.profileForm.value.ref_no1 ? this.profileForm.value.ref_no1 : this.profileForm.value.ref_no
-          };
-          this.profileForm.value.payment = jsonData;
+        // commented because 10th, 12th will not have all data --- Mythreyi --- the below logic fails in this scenario
+        // Bug raised by Ram in QA - 20-06-2020, also in dev
+        // let found;
+        // if (this.profileForm?.value?.qualification[1]) {
+        //   const obj = JSON.parse(JSON.stringify(this.profileForm?.value?.qualification[1]));
+        //   found = Object.keys(obj).filter(function (key) {
+        //     return obj[key] === '';
+        //   });
+        // }
+        // if (found?.length) {
+        //   this.toastr.warning('Please fill all qualification details.', null);
+        // }
+        // else {
+        const jsonData = {
+          pay_status: true,
+          payment_mode: this.profileForm.value.payment_mode,
+          ref_no: this.profileForm.value.ref_no1 ? this.profileForm.value.ref_no1 : this.profileForm.value.ref_no
+        };
+        this.profileForm.value.payment = jsonData;
 
-          this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
-            if (data.data.update_profile.success === 'true') {
-              this.loader.hide();
-              this.currentUser.is_profile_updated = true;
-              localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-              this.router.navigate(['/Learner/home']);
-            } else {
-              this.toastr.error(data.data.update_profile.message, null);
+        this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+          if (data.data.update_profile.success === 'true') {
+            this.loader.hide();
+            this.currentUser.is_profile_updated = true;
+            localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
+            if(this.userImage){
+              localStorage.setItem('user_img', this.userImage);
             }
-          });
-        }
+            this.toastr.success('Profile updated successfully', null);
+            this.router.navigate(['/Learner/home']);
+          } else {
+            this.toastr.error(data.data.update_profile.message, null);
+          }
+        });
+        // }
         // if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
         //   this.profileForm.value.country && this.profileForm.value.state
         //   && this.profileForm.value.city_town) {
@@ -722,14 +734,14 @@ export class ProfileComponent implements OnInit {
     });
     this.service.get_board_university_details(levelid).subscribe((boards: any) => {
       if (boardforTen) {
-        this.boardValue = boards.data.get_board_university_details.data.board;
-        this.uniValue = boards.data.get_board_university_details.data.university;
+        this.boardValue = boards.data.get_board_university_details?.data?.board;
+        this.uniValue = boards.data.get_board_university_details?.data?.university;
       } else if (boardforTwelve) {
-        this.boardValue1 = boards.data.get_board_university_details.data.board;
-        this.uniValue1 = boards.data.get_board_university_details.data.university;
+        this.boardValue1 = boards.data.get_board_university_details?.data?.board;
+        this.uniValue1 = boards.data.get_board_university_details?.data?.university;
       } else {
-        this.boardValue3 = boards.data.get_board_university_details.data?.board;
-        this.uniValue3 = boards.data.get_board_university_details.data?.university;
+        this.boardValue3 = boards.data.get_board_university_details?.data?.board;
+        this.uniValue3 = boards.data.get_board_university_details?.data?.university;
       }
     });
   }
@@ -939,8 +951,8 @@ export class ProfileComponent implements OnInit {
         fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
           this.profileForm.controls.profile_img.setValue(data);
-          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path);
-          this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
+          this.userImage = 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path
+          this.profileForm.controls.profile_img.setValue(this.userImage);
         });
       }
     }

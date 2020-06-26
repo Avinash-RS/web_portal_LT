@@ -1,19 +1,19 @@
 <app-header></app-header>
 <!-- <mat-tab-group style="margin-top: 5%;" class="myC">
   <mat-tab label="My Courses" class="m-l-5 "> -->
-    <p class="mHead">My Courses</p>
-    <div class="vertical"></div>
-    <hr style="margin: 0 !important;">
-    <div class="spinner-container" *ngIf="loading">
-      <mat-spinner diameter="40"></mat-spinner>
-    </div>
-    <div class="row width_100 no_margin bodybg" *ngIf="!loading">
-      <div class="col-xl-8 col0lg-8 col-md-10 col-sm12 col-12">
-        <mat-tab-group style="padding: 0% 3%;" class="myCc">
-          <mat-tab [label]="'All ( '+enrolledCourses?.length +' )'">
-            <ng-container *ngFor="let course of enrolledCourses ;let i=index">
-              <br>
-              <!-- <mat-grid-list cols="7" rowHeight="150px" style="background-color: white;">
+<p class="mHead">My Courses</p>
+<div class="vertical"></div>
+<hr style="margin: 0 !important;">
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner diameter="40"></mat-spinner>
+</div>
+<div class="row width_100 no_margin bodybg" *ngIf="!loading">
+  <div class="col-xl-8 col0lg-8 col-md-10 col-sm12 col-12">
+    <mat-tab-group style="padding: 0% 3%;" class="myCc">
+      <mat-tab [label]="'All ( '+enrolledCourses?.length +' )'">
+        <ng-container *ngFor="let course of enrolledCourses ;let i=index">
+          <br>
+          <!-- <mat-grid-list cols="7" rowHeight="150px" style="background-color: white;">
                 <mat-grid-tile [colspan]="2" [rowspan]="1"
                   style="border-left: 8px solid blue;border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
                   <img alt="Course Img" src="{{course.course_img_url}}" width="200px" height="100px">
@@ -24,182 +24,189 @@
                   </div>
                 </mat-grid-tile>
               </mat-grid-list> -->
-              <!-- <div class="row width_100 no_margin coursebg  border-radius-5"> -->
-              <mat-card class="coursebg">
-                <div class="row width_100 no_margin">
-                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
-                    (click)="gotoDesc(course)">
-                    <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
-                    <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                    <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+          <!-- <div class="row width_100 no_margin coursebg  border-radius-5"> -->
+          <mat-card class="coursebg">
+            <div class="row width_100 no_margin">
+              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
+                (click)="gotoDesc(course)">
+                <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
+                <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
+                <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+              </div>
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl" style="padding: 5px !important;">
+                <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
+                  {{course.course_name}}
+                </div>
+                <div class="width_100 color_black2 f_size_12 descmc f_wt_400 m-l-1 pointer" (click)="gotoDesc(course)">
+                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                </div>
+                <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
+                  {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <span *ngFor="let l of course?.author_details;let in = index">
+                    {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
+                  </span>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  Course Duration: {{course.course_duration}} hours
+                </div>
+                <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
+                    <div class="width_70 m-b-10">
+                      <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
+                      </mat-progress-bar>
+                    </div> <span class="percent color_black2">
+                      {{course?.coursePlayerStatus?.course_percentage || 0}}%
+                    </span>
                   </div>
-                  <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
-                    <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
-                      {{course.course_name}}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 desc f_wt_400 m-l-1 pointer"
-                      (click)="gotoDesc(course)">
-                      {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
-                      {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span *ngFor="let l of course?.author_details;let in = index">
-                        {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
-                      </span>
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      Course Duration: {{course.course_duration}} hours
-                    </div>
-                    <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
-                      <div class="col-6 display_flex">
-                        <div class="width_70">
-                          <mat-progress-bar mode="determinate"
-                            [value]="course?.coursePlayerStatus?.course_percentage|| 0">
-                          </mat-progress-bar>
-                        </div> <span class="percent color_black2">
-                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
-                        </span>
-                      </div>
-                      <div class="col-6 float_right">
-                        <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                          class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
-                          <mat-icon>play_circle_outline</mat-icon>
-                          &nbsp;<span class="cap">
-                            {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
+                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                      <mat-icon>play_circle_outline</mat-icon>
+                      &nbsp;<span class="cap">
+                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                           course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
-                          </span>
-                        </button>
-                        <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                          class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
-                          <mat-icon>replay</mat-icon>
-                          &nbsp;<span class="cap">
-                            Replay&nbsp;
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </mat-card>
-            </ng-container>
-            <p *ngIf="enrolledCourses?.length === 0" class="noCourse">
-              No courses enrolled yet
-            </p>
-          </mat-tab>
-          <mat-tab [label]="'On-Going ( '+incomplete?.length + ' )'" [disabled]='incomplete?.length === 0'>
-            <ng-container *ngFor="let course of incomplete ;let j=index">
-              <br>
-              <mat-card class="coursebg">
-                <div class="row width_100 no_margin">
-                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
-                    (click)="gotoDesc(course)">
-                    <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
-                    <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                    <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
-                    <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
-                      {{course.course_name}}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 pointer desc"
-                      (click)="gotoDesc(course)">
-                      {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
-                      {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span *ngFor="let l of course?.author_details;let in = index">
-                        {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                       </span>
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      Course Duration: {{course.course_duration}} hours
-                    </div>
-                    <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
-                      <div class="col-6 display_flex">
-                        <div class="width_70">
-                          <mat-progress-bar mode="determinate"
-                            [value]="course?.coursePlayerStatus?.course_percentage|| 0">
-                          </mat-progress-bar>
-                        </div> <span class="percent color_black2 pointer">
-                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
-                        </span>
-                      </div>
-                      <div class="col-6 float_right">
-                        <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                          class="width_35 blue_clr cap m-b-10 statBtn" (click)="gotoDesc(course)">
-                          <mat-icon>play_circle_outline</mat-icon>
-                          &nbsp;Resume&nbsp;
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </mat-card>
-            </ng-container>
-            <p *ngIf="incomplete?.length === 0" class="noCourse">
-              No courses to resume
-            </p>
-          </mat-tab>
-          <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'" [disabled]='completed?.length === 0'>
-            <ng-container *ngFor="let course of completed;let k=index">
-              <br>
-              <mat-card class="coursebg">
-                <div class="row width_100 no_margin">
-                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
-                    (click)="gotoDesc(course)">
-                    <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
-                    <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                    <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
-                    <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500" (click)="gotoDesc(course)">
-                      {{course.course_name}}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 desc" (click)="gotoDesc(course)">
-                      {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
-                    </div>
-                    <div class="width_100 color_black2 f_size_12 f_wt_400 space2" (click)="gotoDesc(course)">
-                      {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span *ngFor="let l of course?.author_details;let in = index">
-                        {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
+                    </button>
+                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                      <mat-icon>replay</mat-icon>
+                      &nbsp;<span class="cap">
+                        Replay&nbsp;
                       </span>
-                      &nbsp;&nbsp;|&nbsp;&nbsp;
-                      Course Duration: {{course.course_duration}} hours
-                    </div>
-                    <div class="row color_black f_size_12 f_wt_400 m-t-3" (click)="gotoDesc(course)">
-                      <div class="col-6 display_flex">
-                        <div class="width_70">
-                          <mat-progress-bar mode="determinate"
-                            [value]="course?.coursePlayerStatus?.course_percentage|| 0">
-                          </mat-progress-bar>
-                        </div>
-                        <span class="percent color_black2">
-                          {{course?.coursePlayerStatus?.course_percentage || 0}}%
-                        </span>
-                      </div>
-                      <div class="col-6 float_right">
-                        <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                          class="width_35 blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
-                          <mat-icon>replay</mat-icon>
-                          &nbsp;<span class="cap">
-                            Replay&nbsp;
-                          </span>
-                        </button>
-                      </div>
-                    </div>
+                    </button>
                   </div>
                 </div>
-              </mat-card>
-            </ng-container>
-            <p *ngIf="completed?.length === 0" class="noCourse">
-              No courses completed yet
-            </p>
-          </mat-tab>
-        </mat-tab-group>
-        <br>
-        <br>
-      </div>
-    </div>
-  <!-- </mat-tab>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
+        <p *ngIf="enrolledCourses?.length === 0" class="noCourse">
+          No courses enrolled yet
+        </p>
+      </mat-tab>
+      <mat-tab [label]="'On-Going ( '+incomplete?.length + ' )'" [disabled]='incomplete?.length === 0'>
+        <ng-container *ngFor="let course of incomplete ;let j=index">
+          <br>
+          <mat-card class="coursebg">
+            <div class="row width_100 no_margin">
+              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
+                (click)="gotoDesc(course)">
+                <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
+                <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
+                <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+              </div>
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl"  style="padding: 5px !important;">
+                <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
+                  {{course.course_name}}
+                </div>
+                <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 pointer descmc" (click)="gotoDesc(course)">
+                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                </div>
+                <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
+                  {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <span *ngFor="let l of course?.author_details;let in = index">
+                    {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
+                  </span>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  Course Duration: {{course.course_duration}} hours
+                </div>
+                <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
+                    <div class="width_70">
+                      <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
+                      </mat-progress-bar>
+                    </div> <span class="percent color_black2 pointer">
+                      {{course?.coursePlayerStatus?.course_percentage || 0}}%
+                    </span>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
+                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                      <mat-icon>play_circle_outline</mat-icon>
+                      &nbsp;Resume&nbsp;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
+        <p *ngIf="incomplete?.length === 0" class="noCourse">
+          No courses to resume
+        </p>
+      </mat-tab>
+      <mat-tab [label]="'Completed ( ' +completed?.length+ ' )'" [disabled]='completed?.length === 0'>
+        <ng-container *ngFor="let course of completed;let k=index">
+          <br>
+          <mat-card class="coursebg">
+            <div class="row width_100 no_margin">
+              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
+                (click)="gotoDesc(course)">
+                <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
+                <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
+                <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+              </div>
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl"  style="padding: 5px !important;" >
+                <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500" (click)="gotoDesc(course)">
+                  {{course.course_name}}
+                </div>
+                <div class="width_100 color_black2 f_size_12 f_wt_400 m-l-1 descmc" (click)="gotoDesc(course)">
+                  {{(course.course_description?.length>375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                </div>
+                <div class="width_100 color_black2 f_size_12 f_wt_400 space2" (click)="gotoDesc(course)">
+                  {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <span *ngFor="let l of course?.author_details;let in = index">
+                    {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
+                  </span>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  Course Duration: {{course.course_duration}} hours
+                </div>
+                <div class="row color_black f_size_12 f_wt_400 m-t-3" (click)="gotoDesc(course)">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
+                    <div class="width_70">
+                      <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
+                      </mat-progress-bar>
+                    </div>
+                    <span class="percent color_black2">
+                      {{course?.coursePlayerStatus?.course_percentage || 0}}%
+                    </span>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 float_right">
+                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                      <mat-icon>replay</mat-icon>
+                      &nbsp;<span class="cap">
+                        Replay&nbsp;
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
+        <p *ngIf="completed?.length === 0" class="noCourse">
+          No courses completed yet
+        </p>
+      </mat-tab>
+    </mat-tab-group>
+    <br>
+    <br>
+  </div>
+</div>
+
+
+<div class="footer" *ngIf="!loading">
+  <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
+
+  <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
+    <span class="powered">Powered by :
+      <img width="160px" alt="" src="assets/learner/LT_small.svg">
+    </span>
+  </span>
+
+</div>
+<!-- </mat-tab>
 </mat-tab-group> -->

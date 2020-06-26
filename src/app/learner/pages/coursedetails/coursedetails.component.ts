@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 
 @Component({
@@ -58,12 +58,12 @@ export class CoursedetailsComponent implements OnInit {
     },
     nav: true
   };
-  wishlist: any = [];
-  syllabus: {}[];
+  // wishlist: any = [];
+  // syllabus: {}[];
   open = false;
   userDetail: any;
   showShortDesciption = true;
-  clicked: any = 'media';
+  // clicked: any = 'media';
   content: any;
   modulength: any;
   isCollapsed: any;
@@ -81,6 +81,8 @@ export class CoursedetailsComponent implements OnInit {
   isLeaner = true;
   scromModuleData: any;
   scromApiData: any;
+  persentage: any;
+  per: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -99,24 +101,24 @@ export class CoursedetailsComponent implements OnInit {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
             this.loading = false;
-            if (this.course.topicData && this.course.topicData.length) {
-              this.topicData = [];
-              this.course.topicData.forEach(element => {
-                const subArr = [];
-                element.moduleData.forEach(element1 => {
-                  subArr.push(element1.moduledetails);
-                });
-                const obj = {
-                  modulename: element.moduleData[0].modulename,
-                  moduledetails: subArr
-                };
-                this.topicData.push(obj);
-              });
-            }
-            this.course.topicData = this.topicData;
+            // if (this.course.topicData && this.course.topicData.length) {
+            //   this.topicData = [];
+            //   this.course.topicData.forEach(element => {
+            //     const subArr = [];
+            //     element.moduleData.forEach(element1 => {
+            //       subArr.push(element1.moduledetails);
+            //     });
+            //     const obj = {
+            //       modulename: element.moduleData[0].modulename,
+            //       moduledetails: subArr
+            //     };
+            //     this.topicData.push(obj);
+            //   });
+            // }
+            // this.course.topicData = this.topicData;
             // this.course.wishlisted = detail.wishlist || false;
             // this.course.wishlist_id = detail.wishlist_id || null;
-            this.course.enrollment_status = detail.enrollment_status;
+            // this.course.enrollment_status = detail.enrollment_status;
           }
         });
     }
@@ -146,9 +148,9 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  clickedT(i) {
-    this.clicked = i;
-  }
+  // clickedT(i) {
+  //   this.clicked = i;
+  // }
 
   // get Scrom module and topic
   playerModuleAndTopic() {
@@ -158,17 +160,22 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus , topicLenght, index) {
-    console.log(topicName, topicStatus, moduleName, moduleStatus);
+    // console.log(moduleLegth, modIndex);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
     (environment.scormUrl + '/scormPlayer.html?contentID=' +
     this.localStoCourseid + '&user_id=' + this.getuserid.user_id  + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
     this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index);
   }
-  alterDescriptionText() {
-    this.showShortDesciption = !this.showShortDesciption;
+
+  insertPersentage(moduleLegth, modIndex) {
+    // tslint:disable-next-line:radix
+    this.persentage = parseInt(modIndex)  / parseInt(moduleLegth) * 100;
+    // tslint:disable-next-line:no-unused-expression
+    this.per = this.persentage.toString().split('.')[0];
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index) {
+    // tslint:disable-next-line:radix
     const len = parseInt(topicLenght);
     if (index === len) {
       moduleStatus = 'Passed';
@@ -186,7 +193,7 @@ export class CoursedetailsComponent implements OnInit {
     }]
     }]
    };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.per)
    .subscribe((data: any) => {
      if (data.data.playerstatusrealtime.success === true) {
         this.playerModuleAndTopic();
@@ -196,10 +203,6 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
 
-
-
-  // ngOnInit() {
-  // }
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
     el.scrollIntoView({ behavior: 'smooth' });

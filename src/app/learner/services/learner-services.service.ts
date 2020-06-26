@@ -561,13 +561,14 @@ export class LearnerServicesService {
     });
   }
 
-  playerstatusrealtime(user_id, contentID, module: any) {
+  playerstatusrealtime(user_id, contentID, module: any, percentage) {
     return this.Apollo.query({
       query: playerstatusrealtime,
       variables: {
         user_id,
         contentID,
-        module
+        module,
+        percentage
       }
     });
   }

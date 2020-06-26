@@ -1,8 +1,8 @@
 <app-header></app-header>
-<div class="space"></div>
+<!-- <div class="space"></div> -->
 <button mat-button class="backbtn" [routerLink]="['/Learner/home']">
     <mat-icon class="backIcon">keyboard_backspace</mat-icon>
-    &nbsp; Back to my course
+    &nbsp; Back to My Courses
 </button>
 
 <div class="row">
@@ -37,7 +37,7 @@
             <mat-accordion *ngFor="let res of scromModuleData; let i = index">
                 <mat-expansion-panel class="panel" hideToggle="true" #example>
                     <mat-expansion-panel-header>
-                        <mat-panel-title class="module-container">
+                        <mat-panel-title class="module-container" (click)="insertPersentage(scromModuleData.length,i + 1)">
                             <!-- <span class="sqnumner">{{i+1}}</span>&nbsp;&nbsp; {{res?.modulename}} -->
                             <span>
                                 <span class='index-number'>{{i+1}}</span>
@@ -48,13 +48,13 @@
                             <span style="margin-left:40px;font-weight: 500;height: 20px;">
                                 <mat-icon class="time-icon">alarm</mat-icon>
                                 <span class="course-time">
-                                    09:07:05
+                                    {{res?.moduletime}}
                                 </span>
                             </span>
 
                         </mat-panel-title>
-                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-icon">done</span>
-                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                        <span *ngIf="res?.status == 'Passed'" class="material-icons mod-check-iconmod-check-icon">done</span>
+                        <mat-icon *ngIf="!example.expanded" (click)="insertPersentage(scromModuleData.length,i + 1)" class="exp-icon">add_circle_outline
                         </mat-icon>
                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
                         </mat-icon>
@@ -66,7 +66,11 @@
                                 <ng-container *ngFor="let mod of res?.children; let j = index" >
                                         <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'" >
-                                            <ng-template  matStepLabel> <span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j + 1)">{{mod?.title}}</span></ng-template>
+
+                                            <ng-template  matStepLabel> 
+                                                <span  (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,res?.topic_len,j + 1)">
+                                                {{mod?.title}}</span>
+                                            </ng-template>
                                         </mat-step>
                                 </ng-container>
                             </mat-vertical-stepper>
@@ -81,13 +85,13 @@
         <div class="spinner-container" *ngIf="loading">
             <mat-spinner diameter="40"></mat-spinner>
           </div>
-        <div class="videoplayer">
-            <div class="left">
+        <!-- <div class="videoplayer"> -->
+            <!-- <div class="left"> -->
                 <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
-                <iframe class="player" [src]="urlSafe"></iframe>
-            </div>
-        </div>
-        <div class="margin-7per">
+                <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
+            <!-- </div> -->
+        <!-- </div> -->
+        <div class="">
             <mat-tab-group>
                 <mat-tab label="About the course">
                     <h3 class="head-h1">Course description</h3>
@@ -95,11 +99,11 @@
 
                     <div class="curInclu">This course includes :</div>
                     <div class="row">
-                        <div style="max-width: 180px;margin-left: -14px;" class="col-3">
+                        <!-- <div style="max-width: 180px;margin-left: -14px;" class="col-3">
                             <span class="font-color">20 hrs on demand video</span>
-                        </div> |
-                        <div style="max-width: 211px;" class="col-3">
-                            <span class="font-color">{{course?.totalResourseCount}} downloadable resources</span>
+                        </div> | -->
+                        <div style="max-width: 196px;" class="col-3">
+                            <span class="font-color">{{content?.totalResourseCount}} downloadable resources</span>
                         </div> |
                         <div style="max-width: 100px;" class="col-2">
                             <span class="font-color">
@@ -115,32 +119,32 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p class="desc">
-                                {{course?.course_description}}
-                            </p>
+                            <div class="desc" [innerHTML]="course?.course_long_description" >
+                               
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="course?.author_details[0].author_name != ''">
                         <h3 class="head-h2">Instructors</h3>
                         <div class="vertical"></div>
-                                    <div class="instr-box" *ngFor="let author of course?.author_details">
-                                        <div class="row" >
-                                            <div class="col-4">
-                                                <img class="img-inst"[src]="author.image ? author?.image : 'assets/learner/pro2.png'"
-                                                alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="authorname">{{author?.author_name | titlecase}}</div>
-                                            </div>
-            
-                                            <div class="row margin-35 borderline">
-                                                <div class="col-12">
-                                                    <p class="author-desc">{{author?.description}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="instr-box" *ngFor="let author of course?.author_details">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img class="img-inst"
+                                        [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
+                                </div>
+                                <div class="col-6">
+                                    <div class="authorname">{{author?.author_name | titlecase}}</div>
+                                </div>
+
+                                <div class="row margin-35 borderline">
+                                    <div class="col-12">
+                                        <p class="author-desc">{{author?.description}}</p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 </mat-tab>
 
                 <mat-tab label="Resources">
@@ -206,14 +210,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </ng-container>
-                                    </section>
+                                                </div>
+                                            </ng-container>
+                                        </section>
+                                    </div>
                                 </div>
-                            </div>
-                        </mat-expansion-panel>
+                            </mat-expansion-panel>
+                        </ng-container>
                     </ng-container>
-                </ng-container>
+                            
+                       
                 <ng-container *ngIf="!content.noresource">
                     <span>This course does not have resource files.</span>
                     </ng-container>
@@ -223,9 +229,22 @@
          
             </mat-tab> -->
             </mat-tab-group>
+        <!-- </div> -->
         </div>
 
 
         <div style="height: 100px">&nbsp;</div>
     </div>
 </mat-drawer-container>
+
+
+<div class="footer">
+    <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
+  
+    <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
+      <span class="powered">Powered by :
+        <img width = "160px" alt="" src="assets/learner/LT_small.svg">
+      </span>
+    </span>
+  
+  </div>
