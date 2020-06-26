@@ -89,13 +89,13 @@
           <br>
           <mat-card class="coursebg">
             <div class="row width_100 no_margin">
-              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"  style="padding: 5px !important;"
+              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
                 (click)="gotoDesc(course)">
                 <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
                 <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
                 <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl">
+              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl"  style="padding: 5px !important;">
                 <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
