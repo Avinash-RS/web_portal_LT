@@ -16,6 +16,9 @@ export class NewHomeComponent implements OnInit {
   loading: boolean;
   screenHeight: number;
   screenWidth: number;
+  showShortDesciption = true;
+  show = false;
+
 
   constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router, ) {
     this.userDetailes = this.gs.checkLogout();
@@ -82,14 +85,24 @@ export class NewHomeComponent implements OnInit {
       enrollment_status: null
     };
     if (this.screenWidth < 800) {
-      Swal.fire({
-        title: 'Please login in laptop',
-      }).then((result) => {
+      this.show = true;
+      // Swal.fire({
+      //   title: 'Please login in laptop',
+      // }).then((result) => {
 
-      });
+      // });
   } else {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     localStorage.setItem('Courseid', c.course_id);
+    this.show = false;
   }
+  }
+  alterDescriptionText() {
+    this.showShortDesciption = !this.showShortDesciption;
+  }
+
+  close(){
+    this.show = false;
   }
 }
+

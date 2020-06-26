@@ -197,6 +197,43 @@
   </div>
 </div>
 
+ <!-- Model for mobile user  -->
+ <div  class="modal" *ngIf="show" >
+  <div class="modal-content">
+    <div class="modal-header">
+      <span style="font-size:22px; color: red;">Alert !</span>
+    </div>
+    <div class="modal-body">
+     <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
+     <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
+      <div class="row">
+        <div class="col-8">
+          <p><b>Recommended browsers</b></p>
+        </div>
+        <div class="col-1">
+          <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
+        </div>
+      </div>
+  <div [ngClass]="{'show-less': showShortDesciption}">
+     <p>L&T Kaushalya supports the most recent versions of the following browsers</p>
+     <ul>
+       <li>Google Chrome (recommended)</li>
+       <li>Firefox</li>
+       <li>Safari</li>
+       <li>Internet Explorer 11</li>
+       <li>Microsoft Edge</li>
+      
+     </ul>
+     <p>If you're using an older browser , updatating your browser can help solve problems</p>
+     </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button class="roundbtn" (click)="close()">Close</button>
+    </div>
+  </div>
+  </div>
 
 <div class="footer" *ngIf="!loading">
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
