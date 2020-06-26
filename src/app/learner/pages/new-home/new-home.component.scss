@@ -234,4 +234,86 @@
     background-color: $profile-t-grey;
     text-align: center;
     border-top: 2px solid $profile-p-grey;
+  }
+
+  :host ::ng-deep.footericon{
+    width: 9%;
+    position: absolute;
+    margin-left: 5px;
+  
+  }
+
+  .roundbtn{
+    background-color: $color-red;
+    font-size: 16px;
+    border: none !important;
+    width: 28% !important;
+    color: $color-white;
+    height: 36px;
+    // margin-left: 70% !important;
+  }
+  .roundbtn :focus{
+    outline: none !important;
+    border: none !important;
+  }
+
+  .show-less {
+    height: 0rem;
+    overflow: hidden;
+    padding: 0rem;
+}
+
+.showbtn{
+    color: $color-blue !important;
+    // background-color: $color-white;
+    // border: none !important;
+    margin-left: -56px;
+    margin-left: -72px;
+    font-size: 19px;
+    font-weight: 500;
+
+
+}
+
+.showbtn :focus{
+    outline: none !important;
+    border: none !important;
+}
+
+     /* The Modal*/
+.modal {
+    display: block; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 98%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem;
+}
+
+ :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
 }

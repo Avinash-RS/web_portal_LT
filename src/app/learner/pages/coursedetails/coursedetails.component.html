@@ -149,7 +149,7 @@
 
                 <mat-tab label="Resources">
                     <mat-accordion>
-                        <ng-container *ngIf="content.noresource">
+                        <ng-container *ngIf="content?.noresource">
                         <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
                         <mat-expansion-panel class="panel1" hideToggle="true" #example1
                         *ngIf="res.resValue">
@@ -220,7 +220,7 @@
                     </ng-container>
                             
                        
-                <ng-container *ngIf="!content.noresource">
+                <ng-container *ngIf="!content?.noresource">
                     <span>This course does not have resource files.</span>
                     </ng-container>
                     </mat-accordion>
