@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { WcaService } from '../../services/wca.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import 'froala-editor/js/plugins.pkgd.min.js';
+import html2canvas from 'html2canvas';
 import { element } from 'protractor';
 declare var $: any;
 
@@ -27,6 +28,7 @@ export class DialogComponent implements OnInit {
 
   froalaOptions: Object = {
     toolbarSticky: true,
+    imagePaste: false,
     zIndex: 9999,
     imageEditButtons: ['imageAlign', 'imageDisplay', 'imageStyle', 'imageSize'],
     toolbarButtons: {
@@ -124,8 +126,8 @@ export class DialogComponent implements OnInit {
                }
              },
     events: {
-             'image.beforeUpload': function (images) {
-                 console.log(images);
+             'paste': function (images) {
+               return false;
                  debugger;
                    //alert('hello');
                }
@@ -191,11 +193,14 @@ export class DialogComponent implements OnInit {
   activeSlide(item){
     if(item){
       this.currentSlide = item
-      this.editableImage = item.image
       setTimeout(()=>{
         $(".fr-element.fr-view").css('background-image', 'url(' + item.image + ')');
+        this.editableImage = item;
+      //   html2canvas($(".fr-element.fr-view")[0]).then(function(canvas) {
+      //     var a = canvas.toDataURL();
+      //     console.log(a)
+      // });
       },1000)
-      
     }
   }
   openEditorView(){

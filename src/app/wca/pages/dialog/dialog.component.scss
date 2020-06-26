@@ -240,6 +240,10 @@
   margin-top: 10px;
   text-align: center;
 }
+
+::ng-deep .mat-typography h1{
+  color: black !important;
+}
 ::ng-deep .second-toolbar a{
   display: none;
 }
@@ -255,6 +259,8 @@ overflow-y: auto;
 
     .fr-element {
       min-height: 100%;
+      border: 1px solid #c4bcbc;
+      margin: 10px;
     }
   }
 }
@@ -278,6 +284,7 @@ overflow-y: auto;
 ::ng-deep .fr-box .fr-wrapper .fr-element{
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    overflow: hidden !important;
 }
   
 ::ng-deep .fr-quick-insert {

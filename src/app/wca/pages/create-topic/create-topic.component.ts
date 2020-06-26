@@ -115,13 +115,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     nav: true
   };
 
-  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    } else {
-      this.isReload = true;
-    }
-  }
+  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   } else {
+  //     this.isReload = true;
+  //   }
+  // }
 
   courseform(): FormGroup {
     return this.formBuilder.group({
@@ -767,6 +767,18 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(res1 => {
 
+        if(res1){
+          res1.forEach(element => {
+            if(element.file){
+              element.isEdit = true;
+              element.htmlContent = "<div style='height: 1000px;width:1046px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
+              console.log(element.htmlContent)
+            }
+            else{
+              element.isEdit = false;
+            }
+          });
+        }
         images.value.topicimages = res1;
 
       })
