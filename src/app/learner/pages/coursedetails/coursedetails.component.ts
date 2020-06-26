@@ -122,15 +122,18 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+      var noresource = false;
       this.content.coursedetails.forEach(element => {
       let resourceFile = false;
       element.moduledetails.forEach(value => {
         if (value.resourse) {
           resourceFile = true;
+          noresource = true;
         }
       });
       element.resValue = resourceFile;
     });
+    this.content.noresource = noresource;
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
