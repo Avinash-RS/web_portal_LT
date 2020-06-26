@@ -40,7 +40,12 @@
 @media screen and (min-width:500px) and (max-width:765px) {
     .statBtn {
         width: 50%;
-        text-align: center !important;
+        float: right;
+    }
+}
+
+@media screen and (min-width:765px)  {
+    .statBtn {
         float: right;
     }
 }
