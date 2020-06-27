@@ -104,7 +104,7 @@ flattree(items) {
           if (result.data && result.data.user_registration) {
             if (result.data.user_registration.success === 'true') {
               this.addUserForm.reset();
-              this.alert.openAlert('Success !', 'User added successfully');
+              this.alert.openAlert('User added successfully', null);
             } else {
               this.alert.openAlert(result.data.user_registration.message, null);
             }
@@ -215,7 +215,7 @@ flattree(items) {
       fb.append('csv', data, this.selectedfile.name);
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Upload in Progress ...');
+          this.alert.openAlert('Upload in Progress ...', null);
           this.selectedfile = '';
           this.group = '';
         } else {

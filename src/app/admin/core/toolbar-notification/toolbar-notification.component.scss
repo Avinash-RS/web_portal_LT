@@ -34,7 +34,7 @@ $prefix: 'toolbar-notification';
     position: absolute;
     top: 42px;
     right: 28px;
-    min-width: 350px;
+    min-width: 450px;
     z-index: 1000;
     transform: translateY(0) scale(0);
     transform-origin: top right;
@@ -189,4 +189,22 @@ $prefix: 'toolbar-notification';
 .name:hover{
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+@media (min-width: 300px) {
+
+  .col-md-12,
+  .col-md-11,
+  .col-md-10,
+  .col-md-9,
+  .col-md-8,
+  .col-md-7,
+  .col-md-6,
+  .col-md-5,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2,
+  .col-md-1 {
+    padding: 0px !important;
+  }
 }

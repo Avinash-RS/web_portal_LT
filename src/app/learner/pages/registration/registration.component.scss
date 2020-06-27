@@ -69,6 +69,7 @@ div.terms {
     line-height: 1.5;
     width: 100%;
     margin-top: 17px;
+<<<<<<< HEAD
 }
 
 .fromLabel {
@@ -80,6 +81,19 @@ div.terms {
     margin-left: -10px;
 }
 
+=======
+}
+
+.fromLabel {
+    color: #33333396 !important;
+}
+
+.col {
+    color: $color-blue !important;
+    margin-left: -10px;
+}
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 :host ::ng-deep.signIn {
     text-align: center !important;
     margin-top: 22px !important;
@@ -91,9 +105,13 @@ div.terms {
     color: $label2 !important;
     word-break: break-all !important;
     text-align: center !important;
+<<<<<<< HEAD
     margin-top: 10px;
     margin-bottom: 20px;
 
+=======
+    margin-top: 16%;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 .sign_up,
@@ -113,6 +131,7 @@ a {
 
 .link {
     color: $color-white !important;
+<<<<<<< HEAD
 }
 
 :host ::ng-deep .linee {
@@ -122,6 +141,17 @@ a {
     margin-top: -26px;
 }
 
+=======
+}
+
+:host ::ng-deep .linee {
+    border-left: 246px solid $color-border;
+    height: 1px;
+    position: absolute;
+    margin-top: -26px;
+}
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 :host ::ng-deep .iagree {
     margin-top: -21px !important;
 }
@@ -220,7 +250,11 @@ a {
     width: 100%;
     padding-left: 40px;
     padding-right: 30px;
+<<<<<<< HEAD
     // height: 100vh;
+=======
+    height: 100vh;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     border-radius: 0px !important;
     margin-left: 0% !important;
     overflow: hidden !important;
@@ -234,18 +268,31 @@ a {
 
 }
 :host ::ng-deep.footertext{
+<<<<<<< HEAD
     font-size: 13px;
     margin-left: -18px;
 }
 
 :host ::ng-deep .powered{
     font-size: 14px;
+=======
+    font-size: 12px;
+    margin-left: -51px;
+}
+
+:host ::ng-deep .powered{
+    font-size: 12px;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
      margin-left: -29px;
 }
 :host ::ng-deep.footer20{
     position: absolute;
     bottom: 20px;
+<<<<<<< HEAD
     width: 91%;
+=======
+    width: 90%;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 
@@ -313,10 +360,13 @@ a {
         width: 84%;
     }
 }
+<<<<<<< HEAD
 .wrap-reg{
     background: #ffffffc7 !important;
       width: 100% !important;
   }
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
 
 

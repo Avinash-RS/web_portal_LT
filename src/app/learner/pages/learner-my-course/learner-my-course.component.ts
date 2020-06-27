@@ -23,10 +23,15 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild('wishlist') inputMessageRef: ElementRef;
   @ViewChild('mycourse') mycourseRef: ElementRef;
 
+<<<<<<< HEAD
   constructor(private router: Router, public service: LearnerServicesService, public commonService: CommonServicesService,
     // tslint:disable-next-line:align
     private gs: GlobalServiceService, private loader: Ng4LoadingSpinnerService ) {
   }
+=======
+  constructor(public service: LearnerServicesService, public commonService: CommonServicesService, private gs: GlobalServiceService,
+    private loader: Ng4LoadingSpinnerService,) { }
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
   ngOnInit() {
     if (this.gs.checkLogout()) {
@@ -43,9 +48,9 @@ export class LearnerMyCourseComponent implements OnInit {
       this.breakpoint = 1;
     } else if (window.innerWidth >= 480 && window.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
+    } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
       this.breakpoint = 4;
-         }
+    }
   }
 
   onResize(event) {
@@ -53,11 +58,11 @@ export class LearnerMyCourseComponent implements OnInit {
       this.breakpoint = 1;
     } else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768) {
       this.breakpoint = 2;
-         } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
+    } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
       this.breakpoint = 3;
-         } else {
+    } else {
       this.breakpoint = 4;
-         }
+    }
   }
 
   viewMycourse() {

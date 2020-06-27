@@ -1,6 +1,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+<<<<<<< HEAD
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
+=======
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     <li class="breadcrumb-item active" aria-current="page">Bulk enrolment</li>
   </ol>
 </nav>
@@ -15,7 +19,11 @@
 </div>
 
 <div class="row">
+<<<<<<< HEAD
   <div class="col-md-6 center col-sm-11 col-11 filecontainer b_middle inheritcursor"
+=======
+  <div class="col-md-6 center col-sm-11 col-11 filecontainer no_padding  b_middle inheritcursor"
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     *ngIf="!selectedfile" appDnd (fileDropped)="onFileDropped($event)">
     <input type="file" accept=".csv,.xlsx,.xls" #fileDropRef id="fileDropRef" multiple
       (change)="fileBrowseHandler($event.target.files)" class="inheritcursor" />

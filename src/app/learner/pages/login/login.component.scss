@@ -90,16 +90,26 @@ mat-card {
     text-align: right !important;
 }
 
+<<<<<<< HEAD
 :host ::ng-deep input[type=text],input[type=password] {
+=======
+:host ::ng-deep input[type=text][type=password] {
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     width: 100%;
     padding: 12px 20px;
     margin: 1px 0;
     // background: $color-light-blue;
+<<<<<<< HEAD
     background: $color-white !important;
     display: inline-block;
     border: 1px solid $color-border;
     box-sizing: border-box;
     border-radius: none !important;
+=======
+    display: inline-block;
+    border: 1px solid $color-border;
+    box-sizing: border-box;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     // border-radius: 5px;
 }
 
@@ -119,7 +129,11 @@ mat-form-field {
     float: left;
     font-size: 11px;
     color: $color-blue !important;
+<<<<<<< HEAD
     margin-top: -10px;
+=======
+    margin-top: -18px;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 .forgot {
@@ -132,13 +146,21 @@ mat-form-field {
     color: $color-white !important;
 }
 
+<<<<<<< HEAD
 ::ng-deep .mat-checkbox-inner-container {
+=======
+:host::ng-deep .mat-checkbox-inner-container {
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     height: 13px !important;
     width: 13px !important;
 
 }
 
+<<<<<<< HEAD
 ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+=======
+:host ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     line-height: 27px;
 }
 
@@ -175,7 +197,12 @@ mat-form-field {
     border-left: 222px solid #ccc;
     height: 1px;
     position: absolute;
+<<<<<<< HEAD
     margin-left: 112px;
+=======
+    margin-left: 67px;
+    margin-right: 67px;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     margin-top: 2px;
     border-radius: 17px;
 }
@@ -190,7 +217,11 @@ mat-form-field {
 mat-card-title,
 .remember_me .a {
     color: $color-blue !important;
+<<<<<<< HEAD
     // margin-top: -12px !important;
+=======
+    margin-top: -12px !important;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     text-align: center !important;
 }
 
@@ -232,7 +263,7 @@ label {
     color: #9E9E9E;
 }
 
-.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
+:host ::ng-deep.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
 }
 
@@ -304,7 +335,11 @@ label {
     width: 100%;
     padding-left: 40px;
     padding-right: 30px;
+<<<<<<< HEAD
     // height: 100vh;
+=======
+    height: 100vh;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     border-radius: 0px !important;
     margin-left: 0% !important;
     overflow: hidden !important;
@@ -313,7 +348,11 @@ label {
 :host ::ng-deep.footer20{
     position: absolute;
     bottom: 20px;
+<<<<<<< HEAD
     width: 91%;
+=======
+    width: 90%;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
   :host ::ng-deep.footericon{
@@ -324,7 +363,11 @@ label {
 }
 :host ::ng-deep.footertext{
     font-size: 12px !important;
+<<<<<<< HEAD
     margin-left: -18px;
+=======
+    margin-left: -51px;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 :host ::ng-deep .powered{
@@ -355,6 +398,12 @@ label {
         width: 100%;
          height: 0vh !important; 
     }
+<<<<<<< HEAD
+=======
+    .linee {
+        border-left: 222px solid none !important;
+    }
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 
@@ -375,6 +424,7 @@ label {
         margin-right: 0px !important;
         margin-left: 0px !important;
     }
+<<<<<<< HEAD
     .linee {
         border-left: 222px solid #ccc;
         height: 1px;
@@ -383,6 +433,8 @@ label {
         margin-top: 2px;
         border-radius: 17px;
     }
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     .powered {
         font-size: 10px !important;
         margin-left: -43px;
@@ -397,20 +449,35 @@ label {
         font-size: 10px;
         margin-left: -39px;
     }
+<<<<<<< HEAD
     .footer20 {
         position: absolute;
         bottom: 2px;
         width: 91%;
     }
+=======
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
     }
     .footer20 {
         position: absolute;
+<<<<<<< HEAD
         bottom: 13px;
         width: 84%;
     }
+=======
+        bottom: 25px;
+        width: 84%;
+    }
+    .linee {
+        border-left: 257px solid none !important;
+        margin-left: 33px !important;
+}
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 @media only screen and (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -429,11 +496,14 @@ label {
         margin-left: 0% !important;
     }
 
+<<<<<<< HEAD
     .head1 {
         // font-size: 36px !important;
         // margin-top: 12%!important;
     }
 
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     .form-group {
         margin-bottom: 2rem;
     }
@@ -445,18 +515,41 @@ label {
 
     .forgot {
         font-size: 14px !important;
+<<<<<<< HEAD
         border-bottom: 1px solid #ccc;
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     }
 
     .reset {
         font-size: 14px !important;
+<<<<<<< HEAD
         border-bottom: 1px solid #ccc;
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     }
 
     .haveacc {
         font-size: 14px !important;
     }
 
+<<<<<<< HEAD
+=======
+    .beforeloginimg {
+        width: 100%;
+         height: 0vh !important; 
+    }
+    // .linee {
+    //     border-left: 222px solid $color-blank;
+    //     height: 1px;
+    //     position: absolute;
+    //     margin-left: 49px;
+    //     margin-right: 49px;
+    //     margin-top: 2px;
+    //     border-radius: 17px;
+    // }
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 
