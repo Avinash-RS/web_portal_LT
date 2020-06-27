@@ -71,7 +71,6 @@
     "jquery": "^3.5.0",
     "leaflet": "^1.2.0",
     "mydatepicker": "^2.6.10",
-    "ng-connection-service": "^1.0.4",
     "ng-otp-input": "^1.7.0",
     "ng-starrating": "^1.0.20",
     "ng2-charts": "2.2.3",

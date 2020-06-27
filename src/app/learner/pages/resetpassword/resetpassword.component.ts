@@ -4,8 +4,8 @@ import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import * as myGlobals from '@core/globals'; 
-import { ToastrService } from 'ngx-toastr';
 ///////decrypt
  
 import SimpleCrypto from "simple-crypto-js";
@@ -36,7 +36,7 @@ export class ResetpasswordComponent implements OnInit {
     private router:Router, 
     private formBuilder: FormBuilder,
     private activeroute: ActivatedRoute,
-    private toastr: ToastrService,
+    private alert: AlertServiceService,
     public service : LearnerServicesService) { }
 
   ngOnInit() {
@@ -101,7 +101,7 @@ validator: MustMatch('password', 'confirmpassword'),
     this.service.resetPassword( this.user,this.resetForm.value.password).subscribe(data => {
       if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
         this.loader.hide();
-        this.toastr.success(data.data['get_forgot_password_byresetpassword'].message);
+        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null);
         localStorage.removeItem('Username');
         localStorage.removeItem('Details_user');
         localStorage.removeItem('UserDetails');
@@ -111,7 +111,7 @@ validator: MustMatch('password', 'confirmpassword'),
 
       } else{
         this.loader.hide();
-        this.toastr.error(data.data['get_forgot_password_byresetpassword'].message,null)
+        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
       }
   })
   }

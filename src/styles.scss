@@ -14,23 +14,23 @@ button:disabled:hover {
   cursor: not-allowed;
 }
 
-// @media (min-width: 300px) {
+@media (min-width: 300px) {
 
-//   .col-md-12,
-//   .col-md-11,
-//   .col-md-10,
-//   .col-md-9,
-//   .col-md-8,
-//   .col-md-7,
-//   .col-md-6,
-//   .col-md-5,
-//   .col-md-4,
-//   .col-md-3,
-//   .col-md-2,
-//   .col-md-1 {
-//     padding: 0px !important;
-//   }
-// }
+  .col-md-12,
+  .col-md-11,
+  .col-md-10,
+  .col-md-9,
+  .col-md-8,
+  .col-md-7,
+  .col-md-6,
+  .col-md-5,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2,
+  .col-md-1 {
+    padding: 0px !important;
+  }
+}
 
 ///////////////////////////// root loader ////////////////////////////////////////
 
@@ -109,7 +109,7 @@ html {
 }
 
 .contentTop1 {
-  margin-top: 16px !important;
+  margin-top: 6px !important;
 }
 
 .contentTop2 {
@@ -177,7 +177,7 @@ html {
 }
 
 .f_size_23 {
-  font-size: 23px !important;
+  font-size: 23px;
 }
 
 .f_size_25 {
@@ -321,11 +321,11 @@ html {
 }
 
 .border-radius-5 {
-  border-radius: 5px !important;
+  border-radius: 10px !important;
 }
 
 .blue_border {
-  border: 1px solid $color-blue !important;
+  border: 1.0px solid $color-blue !important;
 }
 
 .background-maroon {
@@ -359,10 +359,6 @@ td {
 
 .color_blue {
   color: $color-blue !important;
-}
-
-.color_label {
-  color: $label !important;
 }
 
 .color_white {
@@ -519,6 +515,7 @@ body {
 //   color: $color-blue;
 //   font-weight: 500;
 // }
+
 .head {
   text-align: center;
   color: $color-blue !important;
@@ -560,7 +557,7 @@ body {
   }
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   content: ">" !important;
 }
 
@@ -686,12 +683,8 @@ h1 {
   z-index: 999;
   }
 
-.myC {
-  .mat-tab-label {
-    font-size: 17px !important;
-    font-weight: 600 !important;
-  }
-}
+
+
 
 //////////////////////
 //Breadcrumb change : Mythreyi--- Sarat
@@ -700,10 +693,10 @@ h1 {
   padding: 0px 0px 0px 26px !important;
   flex-wrap: wrap;
   border-radius: 0px !important;
-  // margin-bottom: 1rem;
+  margin-bottom: 1rem;
   list-style: none;
   background-color: $bread-crumb-bg !important;
-  border-radius: 0.25rem;
+  border-radius: .25rem;
   height: 21px !important;
 
   a,
@@ -731,75 +724,3 @@ mat-header-cell,
   background-color: #1f3777 !important;
   outline-color: lightblue;
 }
-<<<<<<< HEAD
-=======
-
-.cdk-overlay-dark-backdrop {
-  background: rgba(0, 0, 0, 0.41) !important;
-}
-
-// .form-control {
-//   background: #f7f7f7;
-//   border-radius: 5px !important;
-//   height: calc(1.9em + .75rem + 2px);
-// }
-
-// .form-control.is-invalid:focus,
-// .form-control.is-invalid {
-//   background: #f7f7f7;
-//   border: none;
-//   border-left: 5px solid red !important;
-//   border-radius: 5px !important;
-// }
-
-// .form-control.is-valid:focus,
-// .form-control.is-valid {
-//   background: #f7f7f7;
-//   border: none;
-//   border-left: 5px solid $color-blue !important;
-//   border-radius: 5px !important;
-// }
-
-// input:focus:invalid {
-//   background: #f7f7f7;
-//   border: none;
-//   border-left: 5px solid red !important;
-//   border-radius: 5px !important;
-//   // border-left: 5px solid red !important;
-//   // border-radius: 5px !important;
-//   box-shadow: none;
-//   // outline: 0 none;
-// }
-
-// input:focus:valid {
-//   background: #f7f7f7;
-//   border: none;
-//   border-left: 5px solid $color-blue !important;
-//   border-radius: 5px !important;
-//   // border-left: 5px solid red !important;
-//   // border-radius: 5px !important;
-//   box-shadow: none;
-//   // outline: 0 none;
-// }
-.course-details-container {
-  .mat-expansion-panel:last-of-type {
-    border-bottom-right-radius: unset !important;
-    border-bottom-left-radius: unset !important;
-  }
-
-  .mat-expansion-panel:first-of-type {
-    border-top-right-radius: unset !important;
-    border-top-left-radius: unset !important;
-  }
-  .mat-vertical-content {
-    padding: unset !important;
-  }
-  .mat-expansion-panel-body {
-    padding: unset !important;
-  }
-
-  .mat-vertical-stepper-header {
-    height: 10px !important;
-  }
-}
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7

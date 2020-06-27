@@ -10,7 +10,6 @@ RUN npm config set registry http://registry.npmjs.org/
 RUN npm install
 RUN npm install @types/core-js --save-dev
 RUN npm install ng2-charts@2.2.3
-RUN npm i ng-connection-service --save
 
 COPY . .
 #RUN ng serve
