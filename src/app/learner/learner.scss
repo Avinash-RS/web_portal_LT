@@ -1,12 +1,13 @@
 @import "variable";
+
 .my-panel {
   background: $color-blue !important;
-  height: 100px ;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: 70px !important;
-  }
+}
 
 
 .form-control.is-invalid,
@@ -35,67 +36,67 @@
   }
 }
 
-.label {
-  color:  $color-blue;
-}
+// .label {
+//   color:  $color-blue;
+// }
 
 .mand {
-  color:  $color-red;
+  color: $color-red;
 }
 
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
-  color:$color-white
+  color: $color-white
 }
 
 .wrap-body {
   padding: 3% !important;
 
   .star {
-    color:  $color-red;
+    color: $color-red;
   }
 }
 
 .profile {
   .container-reg200 {
     width: 100%;
-    height: 100vh !important;
+    // height: 100vh !important;
     justify-content: center;
     align-items: center;
     padding: 35px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color:$color-white;
+    background-color: $color-white;
   }
 
   .wrap-reg {
-    margin-top: -22px;
+    // margin-top: -22px;
     width: 100%;
     padding: 30px;
     height: auto;
     background: $color-white !important;
     border-radius: 25px;
     border: none !important;
-    box-shadow: 0 2px 11px #b0d4dfb5;
+    // box-shadow: 0 2px 11px #b0d4dfb5;
     overflow: hidden;
     background-color: $color-white !important;
     margin-bottom: 30px;
   }
 
-  mat-label {
-    color:  $color-blue;
-  }
+  // mat-label {
+  //   color:  $color-blue;
+  // }
 
   .mat-radio-outer-circle {
     height: 16px !important;
     width: 16px !important;
-    border-color:  $color-blue !important;
-    border-width: 1px !important;
+    border-color: $color-border !important;
+    border-width: 2px !important;
   }
 
   .mat-radio-inner-circle {
     height: 16px !important;
     width: 16px !important;
-    background-color:  $color-blue !important;
+    background-color: $color-blue !important;
   }
 
   // mat-select {
@@ -104,8 +105,15 @@
   // }
 
   .mat-select-placeholder {
-    color: $color-blue !important;
+    color: #757575 !important;
+    font-weight: 500;
   }
+
+  ::placeholder{
+    color: #757575 !important;
+    font-weight: 500;
+  }
+
   // .swal2-popup.swal2-modal.swal2-show {
   //   display: flex !important;
   //   width: 27% !important;
@@ -167,14 +175,9 @@
 
 mat-icon {
   cursor: pointer;
-  color:  $color-blue;
+  // color:  $color-blue;
 }
 
-
-
-.mat-progress-bar-fill::after {
-  background-color: #ffcf01 !important;
-}
 
 .br-default .br-selected:after {
   color: #ffcf05 !important;
@@ -185,7 +188,11 @@ mat-icon {
   align-items: center;
   padding: 12px 11px 10px 1px;
   margin-bottom: 0;
+<<<<<<< HEAD
   height: 38px;
+=======
+  height: 38px !important;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   // margin-top: 1px;
   font-size: 1rem;
   font-weight: 400;
@@ -194,18 +201,17 @@ mat-icon {
   text-align: center;
   white-space: nowrap;
   border: 1px solid #cccccc;
+<<<<<<< HEAD
   border-radius: 0px  !important;
+=======
+  border-radius: 0px !important;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 
 
 .bg-transparent {
   background-color: $color-light-blue !important;
-}
-
-.head {
-  text-align: center;
-  color:  $color-blue !important;
 }
 
 .continer {
@@ -244,7 +250,7 @@ mat-icon {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color:  $color-blue !important;
+  background-color: $color-blue !important;
   border-radius: 0px !important;
   font-size: 1rem;
   line-height: 1.5;
@@ -294,23 +300,14 @@ mat-icon {
 }
 
 
-label {
-  color:  $color-blue;
-  font-weight: 500;
-}
-
-.head {
-  text-align: center;
-  color:  $color-blue !important;
-}
-
-.mand {
-  color:  $color-red !important;
-}
+// label {
+//   color:  $color-blue;
+//   font-weight: 500;
+// }
 
 mat-icon {
   cursor: pointer;
-  color:  $color-blue;
+  // color:  $color-blue;
 }
 
 button:disabled:hover {
@@ -318,16 +315,16 @@ button:disabled:hover {
 }
 
 .coursebreadcrumb {
-  padding-top: 60px;
+  padding-top: 52px;
 
   ol {
-      margin-bottom: 0 !important;
-      // background-color: $color-white !important;
+    margin-bottom: 0 !important;
+    // background-color: $color-white !important;
   }
 }
 
-.outlinebtn{
-  background-color: $color-white  !important;
+.outlinebtn {
+  background-color: $color-white !important;
   color: $color-blue;
   border: none;
   font-size: 12px;
@@ -339,7 +336,7 @@ button:disabled:hover {
   margin-left: 10px;
 }
 
-.fillsmallbtn{
+.fillsmallbtn {
   background-color: $color-blue !important;
   color: $color-white;
   border: none;
@@ -351,7 +348,7 @@ button:disabled:hover {
   float: right;
 }
 
-.fillgreenbtn{
+.fillgreenbtn {
   background-color: $light-green !important;
   color: $color-white;
   border: none;
@@ -362,6 +359,25 @@ button:disabled:hover {
   float: right;
   margin-right: 10px;
 }
+
+.kauhalya{
+  width: 75%;
+  margin-top: 8%;
+  margin-left: 10%;
+}
+
+.footer-before-login{
+  position: fixed;
+  left: 68%;
+  width: 29%;
+  bottom: 6px;
+}
+
+.beforeloginimg{
+  width: 100%;
+    height: 100vh;
+}
+
 // svg.mat-datepicker-toggle-default-icon.ng-star-inserted {
 //   margin-left: 51px !important;
 //   margin-top: -12px !important;

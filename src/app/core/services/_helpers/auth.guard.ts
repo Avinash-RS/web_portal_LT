@@ -6,10 +6,11 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AlertServiceService } from '../handlers/alert-service.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
+    private toastr: ToastrService,
     private alert: AlertServiceService,
     private router: Router,
   ) { }
@@ -30,7 +31,11 @@ export class AuthGuard implements CanActivate {
         state.url !== '/Admin/auth/auditlog' &&
         state.url !== '/Admin/auth/listCourses' && state.url !== '/Admin/auth/viewReport' && state.url !== '/Admin/auth/viewReport' &&
         state.url !== '/Admin/auth/publishCourse' && state.url !== '/Admin/auth/Wca' &&
+<<<<<<< HEAD
         state.url !== '/Admin/auth/Wca/addcourse' && state.url !== '/Admin/auth/Wca/wca' && 
+=======
+        state.url !== '/Admin/auth/Wca/addcourse' && state.url !== '/Admin/auth/Wca/wca' &&
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         state.url !== '/Admin/auth/bulkenrolment' &&  state.url !== '/Admin/auth/bulkenrolmentreports' &&
         state.url !== '/Admin/auth/Wca/createmodule' && state.url !== '/Admin/auth/Wca/addmodule' &&
         state.url !== '/Admin/auth/Wca/choosetemplate' && state.url !== '/Admin/auth/Wca/previewcourse' &&
@@ -42,13 +47,14 @@ export class AuthGuard implements CanActivate {
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
       if ((state.url === '/Learner/login' || state.url === '/Admin/login' || state.url === '/Learner/register')) {
-        this.router.navigate(['/Learner']);
+        this.router.navigate(['/Learner/home']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
         // if profile not updated and trying to access other screens, redirect to profile
         if (state.url !== '/Learner/profile') {
           this.router.navigate(['/Learner/profile']);
-          this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+          this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields');
+          // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
           return false;
         } else {// if url is profile or anything
           return true;
@@ -74,7 +80,11 @@ export class AuthGuard implements CanActivate {
         || state.url === '/Admin/auth/listCourses' || state.url === '/Admin/auth/viewReport' || state.url === '/Admin/auth/publishCourse'
         || state.url === '/Admin/auth/usergroup' || state.url === '/Admin/auth/Wca' || state.url === '/Admin/auth/Wca/addcourse'
         || state.url === '/Admin/auth/Wca/viewmodule' || state.url === '/Admin/auth/Wca/createmodule'
+<<<<<<< HEAD
         || state.url === '/Admin/auth/bulkenrolment'  || state.url === '/Admin/auth/bulkenrolmentreports'
+=======
+        || state.url === '/Admin/auth/bulkenrolment' ||  state.url === '/Admin/auth/bulkenrolmentreports'
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         || state.url === '/Admin/auth/Wca/addtemplate' || state.url === '/Admin/auth/Wca/choosetemplate'
         || state.url === '/Admin/auth/Wca/addtopic' || state.url === '/Admin/auth/Wca/rf'
         || state.url === '/Admin/auth/Wca/addfile' || state.url === '/Admin/auth/Wca/addmodule'

@@ -1,53 +1,194 @@
 @import "variable";
 
-:host ::ng-deep input[type=text],input[type=password] {
+:host ::ng-deep input[type=text] {
   width: 100%;
-  padding: 12px 20px;
+  // padding: 12px 20px;
   margin: 1px 0;
   // background: $color-light-blue;
   display: inline-block;
   border: 1px solid $color-border;
   box-sizing: border-box;
-  border-radius: none !important;
-  // border-radius: 5px;
+  border-radius: 0px !important;
 }
-:host ::ng-deep.signIn {
-  text-align: center !important;
-  margin-top: 22px !important;
-  color: $color-blue !important;
-  font-weight: lighter !important;
-}
-  .otp {
-    margin: 0 5px;
-    text-align: center;
-    font-size: 27px;
-    outline: none;
-    width: 21%;
-    background-color:$color-light-blue !important;
-    transition: all .2s ease-in-out;
-    &:focus {
-      border-color: $color-light-blue;
-      box-shadow: 0 0 5px $color-light-blue inset;
-    }
-    
-    &::selection {
-      background: transparent;
-    }
+
+.otp {
+  margin: 0 5px;
+  text-align: center;
+  font-size: 27px;
+  outline: none;
+  width: 21%;
+  // background-color:$color-light-blue !important;
+  transition: all .2s ease-in-out;
+
+  &:focus {
+    // border-color: $color-light-blue;
+    box-shadow: 0 0 5px $color-light-blue inset;
   }
-  div.account{
-    color: $color-blue;
-    word-break: break-all !important;
-    text-align: center !important;
-    cursor: pointer;
+
+  &::selection {
+    background: transparent;
+  }
 }
-.star{
+
+:host ::ng-deep label {
+  margin-bottom: .1em !important;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: .65;
+  color: $label2 !important;
+  background-color: $color-border !important;
+}
+
+div.account {
+  color: $color-blue;
+  word-break: break-all !important;
+  text-align: center !important;
+  cursor: pointer;
+  margin-top: 20%;
+}
+
+.did {
+  color: $label2;
+}
+
+.star {
   color: $color-red;
-} 
-
-.wrap-reg{
-  background: #ffffffc7 !important;
-    width: 100% !important;
-    height: 450px;
 }
 
-  
+.link {
+  color: $color-white !important;
+}
+
+:host ::ng-deep .container-reg200 {
+  width: 100%;
+  height: 100vh !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  // background: url('../../../../assets/learner/bg-6.jpg');
+}
+
+:host ::ng-deep.pg {
+  position: absolute;
+  color: $color-white;
+  padding: 7px;
+  margin-top: 16px;
+  margin-left: 50% !important;
+  /* background-color: #ffffff85; */
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+:host ::ng-deep.privcy {
+  position: absolute;
+  color: $color-white;
+  padding: 7px;
+  margin-top: 45%;
+  margin-left: 47% !important;
+  /* background-color: #ffffff85; */
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+
+:host ::ng-deep.lxplogo {
+  text-align: center;
+  margin-left: 94px;
+  margin-right: 94px;
+  width: 110px;
+}
+
+:host ::ng-deep.head1 {
+  text-align: center;
+  font-weight: normal !important;
+  font-size: 21px;
+  margin-top: 18px !important;
+}
+
+:host ::ng-deep.p-t-77 {
+  padding-top: 21px !important;
+}
+
+
+:host ::ng-deep.bgimg {
+  width: 99%;
+  height: 657px;
+}
+
+:host ::ng-deep.lnt_logo {
+  position: absolute;
+  width: 15%;
+  margin-top: 21px;
+  margin-left: 108px;
+}
+:host ::ng-deep .wrap-reg {
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 30px;
+  height: 100vh;
+  border-radius: 0px !important;
+  margin-left: 0% !important;
+  overflow: hidden !important;
+
+}
+
+:host ::ng-deep.footericon{
+  width: 67%;
+  position: absolute;
+  margin-left: 5px;
+
+}
+:host ::ng-deep.footertext{
+  font-size: 13px;
+  margin-left: -18px;
+}
+
+:host ::ng-deep .powered{
+  font-size: 14px;
+   margin-left: -29px;
+}
+:host ::ng-deep.footer20{
+  position: absolute;
+  bottom: 20px;
+  width: 91%;
+}
+
+// mobile screen
+@media (max-width: 480px) {
+  .wrap-reg {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden !important;
+    height: 100vh;
+    border-radius: 0 !important;
+    margin-left: 0% !important;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+}
+
+
+@media (max-width: 568px) {
+  .wrap-reg {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden !important;
+    height: 100vh;
+    border-radius: 0 !important;
+    margin-left: 0% !important;
+  }
+}
+.img{
+  text-align: center;
+}

@@ -5,9 +5,14 @@ import { GlobalServiceService } from '././core/services/handlers/global-service.
 import { WcaService } from '../app/wca/services/wca.service';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+<<<<<<< HEAD
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
 
+=======
+import { ConnectionService } from 'ng-connection-service';
+import { ToastrService } from 'ngx-toastr';
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
 @Component({
   selector: 'app-root',
@@ -17,18 +22,46 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
   ipAddress = '';
   title = 'Lxpfrontend';
+<<<<<<< HEAD
   isLoader = false;
   loaderSubscription: Subscription;
+=======
+  status = 'ONLINE'; //initializing as online by default
+  isConnected = true;
+  isLoader: any;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private APIService: WcaService,
     private titleService: Title,
+<<<<<<< HEAD
     private commonService: CommonServicesService
+=======
+    private connectionService:ConnectionService,
+    private toast:ToastrService,
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
   ) {
+
     this.getIPAddress();
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if(this.isConnected){
+      this.status = "ONLINE";
+      } else {
+      this.status = "OFFLINE"
+      }
+
+      // alert(this.status);
+      if(this.status == "OFFLINE"){
+        this.toast.warning('You appear to be offline. Please check your network connection');
+      }else{
+        this.toast.success('Came online');
+      }
+      
+      });
   }
 
   ngOnInit() {
