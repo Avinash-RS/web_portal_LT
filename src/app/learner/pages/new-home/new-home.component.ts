@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
@@ -14,14 +14,25 @@ export class NewHomeComponent implements OnInit {
   incomplete: any = [];
   completed: any = [];
   loading: boolean;
+  screenHeight: number;
+  screenWidth: number;
+  showShortDesciption = true;
+  show = false;
 
-  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router,) {
+
+  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router, ) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
+    this.getScreenSize();
   }
-
+  @HostListener('window:resize', ['$event'])
   ngOnInit() {
   }
+
+  getScreenSize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+}
   getEnrolledCourses() {
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
@@ -35,11 +46,11 @@ export class NewHomeComponent implements OnInit {
         //   //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
         // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend';
         });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'completed';
         });
         this.completed = arr1;
@@ -73,7 +84,25 @@ export class NewHomeComponent implements OnInit {
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null
     };
+    if (this.screenWidth < 800) {
+      this.show = true;
+      // Swal.fire({
+      //   title: 'Please login in laptop',
+      // }).then((result) => {
+
+      // });
+  } else {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     localStorage.setItem('Courseid', c.course_id);
+    this.show = false;
+  }
+  }
+  alterDescriptionText() {
+    this.showShortDesciption = !this.showShortDesciption;
+  }
+
+  close(){
+    this.show = false;
   }
 }
+

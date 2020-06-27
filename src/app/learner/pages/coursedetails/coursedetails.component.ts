@@ -82,6 +82,7 @@ export class CoursedetailsComponent implements OnInit {
   scromModuleData: any;
   scromApiData: any;
   persentage: any;
+  per: any;
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService,
               public service: CommonServicesService, private gs: GlobalServiceService,
               public route: Router, private alert: AlertServiceService,
@@ -123,15 +124,18 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.content = data.data.getmoduleData.data[0];
+      var noresource = false;
       this.content.coursedetails.forEach(element => {
       let resourceFile = false;
       element.moduledetails.forEach(value => {
         if (value.resourse) {
           resourceFile = true;
+          noresource = true;
         }
       });
       element.resValue = resourceFile;
     });
+    this.content.noresource = noresource;
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -166,7 +170,8 @@ export class CoursedetailsComponent implements OnInit {
   insertPersentage(moduleLegth, modIndex) {
     // tslint:disable-next-line:radix
     this.persentage = parseInt(modIndex)  / parseInt(moduleLegth) * 100;
-    console.log(this.persentage);
+    // tslint:disable-next-line:no-unused-expression
+    this.per = this.persentage.toString().split('.')[0];
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, topicLenght, index) {
@@ -188,7 +193,7 @@ export class CoursedetailsComponent implements OnInit {
     }]
     }]
    };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.persentage)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.per)
    .subscribe((data: any) => {
      if (data.data.playerstatusrealtime.success === true) {
         this.playerModuleAndTopic();

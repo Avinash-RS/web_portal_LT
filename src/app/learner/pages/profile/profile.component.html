@@ -1,6 +1,8 @@
 <app-header></app-header>
-<nav aria-label="breadcrumb" class="coursebreadcrumb">
-  <ol class="breadcrumb contentTop1">
+<!-- <nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb contentTop1"> -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
     <!-- <li class="breadcrumb-item">Home</li>NewHomeComponent -->
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
@@ -56,8 +58,8 @@
             <span class="f_size_13 f_wt_500">Download brochure</span>
           </div>
           <div class="col-md-2 col-sm-2 col-2 ">
-            <a target="_top" class="f_size_17 bb" matTooltip="Click here to download brochure" (click)="download()"
-              download="LnT%20Kaushalya%202020_Brochure.pdf"><i class="fa fa-cloud-download size"
+            <a target="_top" class="f_size_17 bb downloadIcon" matTooltip="Click here to download brochure"
+              (click)="download()" download="LnT%20Kaushalya%202020_Brochure.pdf"><i class="fa fa-cloud-download size"
                 aria-hidden="true"></i> </a>
             <!-- <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Download brochure">
               create</mat-icon> -->
@@ -226,7 +228,7 @@
 
         <!-- ////////////Qualification row////////////// -->
         <label class="f_size_19 p-b-10px">Qualification</label><span class="mand"> *</span><br>
-        <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
+        <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index" class="qual">
           <div class="row p-b-10px" [formGroupName]="in">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
@@ -437,10 +439,6 @@
 
         </div>
 
-
-
-
-
         <br>
         <hr class="p-b-10px">
         <br>
@@ -488,7 +486,7 @@
           </div>
         </div>
 
-        <div class="row p-b-10px">
+        <div class="row">
           <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
@@ -525,22 +523,23 @@
         <hr class="p-b-10px">
         <br>
         <!-- <div  formGroupName="payment" > -->
-        <div class="col-md-4 col-lg-4 col-sm-12 col-12" [ngClass]="{ 'dis1' : cannotEdit}">
 
-          <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
+        <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
               <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
               <span class="checkmark"></span>
             </label> -->
-          <label class="p-b-10px f_size_19">Mode of payment</label>
-          <span class="mand p-b-10px"> *</span> <br>
-          <div class="form-group">
+        <label class="p-b-10px f_size_19">Mode of payment</label>
+        <span class="mand p-b-10px"> *</span> <br>
+        <div class="row width_100 form-group" [ngClass]="{ 'dis1' : cannotEdit}">
+          <div class="col-12">
             <mat-radio-group (change)="radioChange($event)" [disabled]='cannotEdit' formControlName="payment_mode"
               name="payment_mode">
-              <mat-radio-button value="tpo">Through TPO</mat-radio-button> <span
-                style="margin-left: -4px;position: absolute; color: #33333396;">or</span>
-              <mat-radio-button value="self" style="margin-left: 42px;margin-top: 0px;">Self</mat-radio-button>
+              <mat-radio-button value="tpo">Through TPO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or</mat-radio-button>
+              <!-- <span style="margin-left: -4px;position: absolute; color: #33333396;">or</span> -->
+              <mat-radio-button value="self">Self</mat-radio-button>
             </mat-radio-group>
           </div>
+
         </div>
 
         <div class="row">
@@ -550,7 +549,7 @@
               formControlName="ref_no">
           </div>
 
-          <div class="col-md-4" *ngIf="isSelfEnable">
+          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-10 col-10" *ngIf="isSelfEnable">
             <label># RTGS / NEFT reference no. <span class="mand p-b-10px"> *</span> </label>
             <input type="text" maxlength="22"
               [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
@@ -650,9 +649,14 @@
 
         <!-- ////////////Certificate row////////////// -->
         <label class="p-b-10px" class="f_size_19">Certificate</label><br>
-        <button mat-flat-button [disabled]="true"
-          class="submit f_size_17 color_white f_wt_400">Download</button><br><br>
-        <span>* Download after course completion.</span>
+        <div class="row width_100">
+          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-10 col-10">
+            <button mat-flat-button [disabled]="true"
+              class="width_100 f_size_17 color_white f_wt_400">Download</button><br><br>
+            <span>* Download after course completion.</span>
+          </div>
+        </div>
+
         <!-- <div formArrayName="certificate" class="row p-b-10px"
           *ngFor="let certificate of certificate.controls; let i=index">
           <div class="col-xl-2 col-xl-2 col-lg-3 col-md-4 col-sm-4 col-8 display_flex">
@@ -758,7 +762,8 @@
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button [disabled]="this.profileForm.invalid" class="submit f_size_17 color_white f_wt_400">Save</button>
+          <button mat-flat-button [disabled]="this.profileForm.invalid"
+            class="submit f_size_17 color_white f_wt_400">Save</button>
         </div>
         <br> <br>
         <!-- <div class="row">
@@ -970,13 +975,11 @@
 
 <div class="footer">
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
-
   <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
     <span class="powered">Powered by :
-      <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+      <img width="160px" alt="" src="assets/learner/LT_small.svg">
     </span>
   </span>
-
 </div>
 
 

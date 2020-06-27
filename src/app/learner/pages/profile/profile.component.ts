@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     private el: ElementRef, public service: LearnerServicesService,
     private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
     private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-    private router: Router, private gs: GlobalServiceService, private toastr: ToastrService,) {
+    private router: Router, private gs: GlobalServiceService, private toastr: ToastrService) {
     // const x = localStorage.getItem('OTPFeature') || false;
     // console.log(x);
     this.enableMobileEdit = false;
@@ -409,7 +409,7 @@ export class ProfileComponent implements OnInit {
     // changed for Koushalys - 10th june
     if (this.profileForm.value.qualification[0].institute !== '' && this.profileForm.value.qualification[0].qualification !== '' &&
       this.profileForm.value.qualification[0].percentage !== '' && this.profileForm.value.qualification[0].year_of_passing !== '' &&
-      (this.profileForm.value.qualification[1]  === undefined  ||
+      (this.profileForm.value.qualification[1] === undefined ||
         (this.profileForm.value.qualification[1] !== undefined && this.profileForm.value.qualification[1].qualification !== '' &&
           this.profileForm.value.qualification[1].institute !== '' && this.profileForm.value.qualification[1].year_of_passing !== '' &&
           this.profileForm.value.qualification[1].percentage !== ''))) {
@@ -492,13 +492,17 @@ export class ProfileComponent implements OnInit {
         this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
           if (data.data.update_profile.success === 'true') {
             this.loader.hide();
-            this.currentUser.is_profile_updated = true;
-            localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
-            if(this.userImage){
+            if (this.userImage) {
               localStorage.setItem('user_img', this.userImage);
             }
-            this.toastr.success('Profile updated successfully', null);
+            if (this.currentUser.is_profile_updated) {
+              this.toastr.success('Profile updated successfully', null);
+            } else {
+              this.toastr.success('Email confirmation is sent', 'Profile updated successfully');
+            }
             this.router.navigate(['/Learner/home']);
+            this.currentUser.is_profile_updated = true;
+            localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
           } else {
             this.toastr.error(data.data.update_profile.message, null);
           }
