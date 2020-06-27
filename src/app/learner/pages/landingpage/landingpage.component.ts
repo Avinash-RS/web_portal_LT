@@ -183,15 +183,27 @@ export class LandingpageComponent implements OnInit {
 
   popular() {
     this.learnerservice.getPopularInLanding()
+<<<<<<< HEAD
       .subscribe((result: any) => {
         this.popularCOurse = result.data.get_popular_course.data;
       });
+=======
+    .subscribe((result: any) => {
+      this.popularCOurse = result.data.get_popular_course?.data;
+    });
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   }
 
   trending() {
     this.learnerservice.getTrendingInLanding()
+<<<<<<< HEAD
       .subscribe((result: any) => {
         this.trendingCourse = result.data.get_trending_course.data;
       });
+=======
+    .subscribe((result: any) => {
+      this.trendingCourse = result.data.get_trending_course?.data;
+    });
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   }
 }

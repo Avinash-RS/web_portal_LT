@@ -2,6 +2,9 @@
 .contentTop {
     margin-top: 66px !important;
 }
+
+
+
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: none;
 }
@@ -22,3 +25,118 @@
 img {
     width: 275px !important;
 }
+
+:host ::ng-deep.footer {
+    padding: 30px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: center;
+    border-top: 2px solid $profile-p-grey;
+  }
+// added by ankit 
+//   :host ::ng-deep.container{
+//     width: 100% !important;
+//     height: 100vh!important;
+//     display: flex;
+//     justify-content: center; 
+//      align-items: center; 
+//      background-size: cover !important; 
+//      background-repeat: no-repeat !important;
+//     background: url('../../../../assets/learner/bg-6.jpg');
+// }
+
+// :host ::ng-deep.pg{
+//     position: absolute;
+//     color: $color-white;
+//     padding: 7px;
+//     margin-left: 45% !important;
+//     margin-top: 16px;
+//     /* background-color: #ffffff85; */
+//     font-size: 14px;
+//     font-weight: normal !important;
+// }
+:host ::ng-deep.lnt_logo{
+    position: absolute;
+    width: 15% !important;
+    margin-top: 65px !important;
+    margin-left: 108px;
+  }
+//   :host ::ng-deep .container-reg200 {
+//     width: 100%;
+//     height: 100vh!important;
+//     display: flex;
+//     // justify-content: center; 
+//     //  align-items: center; 
+//     //  background-size: cover !important; 
+//     //  background-repeat: no-repeat !important;
+//     // background: url('../../../../assets/learner/login-bg.jpg');
+//   }
+
+//   :host ::ng-deep.privcy{
+//     position: absolute;
+//     color: $color-white;
+//     padding: 7px;
+//     margin-top: 45%;
+//     margin-left: 47% !important;
+//     /* background-color: #ffffff85; */
+//     font-size: 14px;
+//     font-weight: normal !important;  
+// }
+.thank{
+    position: absolute !important;
+    color: #ffffff;
+    font-size: 31px;
+    margin-top: 10%;
+    margin-left: 47%;
+}
+.next{
+    font-size: 30px !important;
+    margin-left: 35% !important;
+    margin-top: 24px !important;
+}
+.getstart{
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+    margin-top: 55%;
+    margin-left: 74%;
+    border: none;
+    background-color: $color-white;
+    color: $color-blue;
+}
+
+ :host ::ng-deep .line2{
+    border-left: 644px solid #ccc;
+    height: 1px;
+    position: absolute;
+    margin-bottom: 10px;
+    margin-left: 0px !important;
+    margin-right: 54px;
+    margin-top: 10px !important;
+    border-radius: 17px;
+    }
+.logopng{
+    width: 24px !important;
+    margin-left: 53%;
+    margin-top: 30.8%;
+    position: absolute;
+}
+.edu{
+    margin-left: 55%;
+    margin-top: 31.2%;
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+}
+
+:host ::ng-deep.footericon{
+    width: 9% !important;
+    position: absolute;
+    margin-left: 5px;
+  
+  }

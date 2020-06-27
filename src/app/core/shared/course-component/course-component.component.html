@@ -80,7 +80,11 @@
           </button>
 
           <button id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false && 
+<<<<<<< HEAD
           ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> Enroll
+=======
+          ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> Enrol
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
             disabled="{{course.enrollment_status == 'pending'}}">Requested
@@ -89,7 +93,7 @@
             (click)="clickRejected()">Rejected
           </button>
           <button id="enroll_now" *ngIf="course.enrollment_status == 'approved' && showStatus == false"
-            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+            disabled="{{course.enrollment_status == 'approved'}}">Enroled
           </button>
           <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
             (click)="goTocourse(course?.coursePlayerStatus?.status || 'Start')"
