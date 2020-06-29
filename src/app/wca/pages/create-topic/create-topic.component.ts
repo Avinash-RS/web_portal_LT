@@ -685,13 +685,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     let invalid = document.getElementsByClassName('ng-invalid')
     if(invalid){
        Array.from(invalid).forEach((data)=>{
-        console.log(data.classList)
         var classList = data.classList
         if(classList.contains("timeInput")){  
           this.toast.warning('Time required');
         }
       })
     }
+    return false;
     if (this.courseForm.valid) {
       const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
@@ -771,8 +771,7 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
           res1.forEach(element => {
             if(element.file){
               element.isEdit = true;
-              element.htmlContent = "<div style='height: 1000px;width:1046px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
-              console.log(element.htmlContent)
+              element.htmlContent = "<div style='height: 958px;width:1004px;margin:10px;border:1px;padding:20px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
             }
             else{
               element.isEdit = false;
@@ -922,7 +921,6 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
       if(res){
         this.onSelectFile(fileInput, item, formdata, index, res,subTitleindex)
       }

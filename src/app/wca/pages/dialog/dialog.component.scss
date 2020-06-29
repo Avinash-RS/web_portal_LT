@@ -257,8 +257,7 @@ overflow-y: auto;
   .fr-wrapper {
     flex: 1;
 
-    .fr-element {
-      min-height: 100%;
+    .fr-element {      
       border: 1px solid #c4bcbc;
       margin: 10px;
     }
@@ -285,6 +284,7 @@ overflow-y: auto;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     overflow: hidden !important;
+    height: 1000px;    
 }
   
 ::ng-deep .fr-quick-insert {
