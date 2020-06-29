@@ -7,10 +7,26 @@
 <br>
 
 <div>
-  <h1 style="padding-left:25px"> Audit log</h1>
+  <!-- <h1 style="padding-left:25px"> Audit log</h1>  -->
+  <div class="row no_margin">
+    <div class="col-lg-5 col-md-4 col-sm-12 col-12">
+      <h1 style="padding-left: 25px;">Audit log</h1>
+    </div>
+    <div class="col-lg-7 col-md-6 col-sm-12 col-12 float_right">
+      <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event)"
+        aria-label="Search">
+    </div>
+  </div>
   <div>
     <div class="row no_margin " style="padding-left:40px">
       <form #filterform="ngForm" class="width_100">
+        <!-- <div  class="row no_margin"> 
+          <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+            <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)"
+              aria-label="Search">
+          </div>
+        </div> -->
+    
         <div class="row m-b-10">
           <div class="col-lg-7 col-sm-12 col-12 col-md-7 display_flex m-b-10">
             <mat-form-field class="wid-100">
@@ -55,7 +71,7 @@
     </div>
     <hr style="border: 1px solid #ccc;margin:1px !important; ">
     <div class="example-container">
-      <mat-table #table [dataSource]="dataSource">
+      <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="sno">
           <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
           <mat-cell *matCellDef="let row;let i = index">
@@ -63,9 +79,9 @@
           </mat-cell>
         </ng-container>
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-          <mat-header-cell *matHeaderCellDef>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ column.header }}</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
+          <mat-cell *matCellDef="let row">{{ column?.cell(row) }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
@@ -116,7 +132,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Created by : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
+                  class="color_black capitalize f_wt_400">{{viewdetail?.admin_username|| 'NA'}}</label></label>
             </div>
           </div>
           <br>
@@ -127,7 +143,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                  {{viewdetail?.updated_on  || 'NA'}}</label>
+                  {{viewdetail?.updated_on || 'NA'}}</label>
               </label>
             </div>
           </div>

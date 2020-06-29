@@ -22,7 +22,7 @@ export class ViewCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.moduleData = this.data.module;
-    this.moduleData.isActivated = this.moduleData.modulestatus == 'true' ? true : false;
+    this.moduleData.isActivated = this.moduleData.modulestatus === 'true' ? true : false;
     this.moduleData.createdon = this.moduleData.createdon ? new Date(this.moduleData.createdon) : '';
     this.moduleData.coursedetails.forEach((data) => {
       data.createdon = data.createdon ? new Date(data.createdon) : '';

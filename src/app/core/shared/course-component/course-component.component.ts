@@ -26,16 +26,18 @@ export class CourseComponentComponent implements OnInit {
   @Input('isDraft') isDraft: boolean;
   @Input('showEnroll') showEnroll: boolean ;
   @Input('btnType') btnType: string;
-  
+
   userDetail: any;
   recordedData: any;
   finalFullData: any;
   finalStatus: any = null;
+  role: any;
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
+    this.role = localStorage.getItem('role') || null;
   }
 
   viewWishList(course) {
@@ -89,7 +91,7 @@ export class CourseComponentComponent implements OnInit {
     } else if (this.course.coursePlayerStatus && this.course.coursePlayerStatus.status === 'suspend') {
       this.course.coursePlayerStatus.status = 'Pause';
     }
-    if (this.course && this.userDetail) {
+    if (this.course && this.userDetail && this.role === 'learner') {
       this.viewWishList(this.course);
       this.getcourserStatus();
     }
@@ -151,7 +153,7 @@ export class CourseComponentComponent implements OnInit {
         user: this.userDetail.user_id,
         course_id: this.course.course_id,
         user_obj_id: this.userDetail._id,
-        feed_back:this.course.feed_back
+        feed_back: this.course.feed_back
       };
       this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
     }
@@ -181,7 +183,7 @@ export class CourseComponentComponent implements OnInit {
           if (enrollCourse.data) {
             if (enrollCourse.data.enrollcourse.success) {
               this.course.enrollment_status = 'pending';
-              Swal.fire('User enrolled successfully for the course');
+              Swal.fire('Your request for enrolment is successfully submitted');
             } else {
               Swal.fire(enrollCourse.data.enrollcourse.message);
             }

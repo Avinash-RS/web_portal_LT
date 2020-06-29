@@ -1,4 +1,9 @@
 @import "variable";
+.coursedetail{
+    width: 100% !important;
+    height: 100% !important;
+    overflow-x: hidden !important;
+}
 .coursebreadcrumb {
      padding-top: 0px !important; 
 }
@@ -55,8 +60,7 @@
 }
 
 .parterImg{
-    width: 150px;
-    width: 100px;
+    width: 50px;
     padding-right: 6px;
 }
 .sm-icon{
@@ -191,6 +195,11 @@ li{
     position: relative;
     z-index: 1;
 }
+// .owl-carousel .owl-item img {
+//     display: block;
+//     width: 15%;
+//     height: 10%;
+// }
 .silder{
     text-align: right;
     width: 332px;

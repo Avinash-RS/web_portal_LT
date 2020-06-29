@@ -1,3 +1,4 @@
+<div class="reffile">
 <div class="reference-file-container">
   <div>
     <!-- <app-wca></app-wca> -->
@@ -7,14 +8,14 @@
       <li class="breadcrumb-item"><a href="/Admin/auth/dashboard">Home</a></li>
       <li class="breadcrumb-item " aria-current="page"><a href="/Admin/auth/Wca">My courses</a></li>
       <li class="breadcrumb-item active" aria-current="page"><a href="/Admin/auth/Wca/previewcourse">Course</a></li>
-      <li class="breadcrumb-item active" aria-current="page"> Add Reference file</li>
+      <li class="breadcrumb-item active" aria-current="page"> Add resource file</li>
     </ol>
   </nav>
 
   <div class="row">
     <div class="col-8">
       <div class="reference-heading">
-        <h1 style="margin-left: 21px;">Add Reference file</h1>
+        <h1 style="margin-left: 21px;">Add resource file</h1>
       </div>
     </div>
 
@@ -39,7 +40,7 @@
               Select
             </div>
             <form [formGroup]="referenceLinkForm">
-              <mat-select class="selectinputs" placeholder="Module Name" formControlName="module"
+              <mat-select class="selectinputs" placeholder="Module name" formControlName="module"
                 (selectionChange)="gettopicdetail()" required>
                 <mat-option *ngFor="let res of modulenamelist" [value]="res">
                   {{res?.modulename}}
@@ -47,7 +48,7 @@
               </mat-select>
 
 
-              <mat-select class="selectinputs" placeholder="Topic Name" formControlName="topic" required>
+              <mat-select class="selectinputs" placeholder="Topic name" formControlName="topic" required>
                 <mat-option *ngFor="let topic of topicnamelist" [value]="topic?.topicname">
                   {{topic?.topicname}}
                 </mat-option>
@@ -55,9 +56,9 @@
 
               <div class="space-10">
                 <mat-radio-group [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
-                  <mat-radio-button value="document">Upload Document
-                  </mat-radio-button>
-                  <mat-radio-button value="link">Add Link
+                  <mat-radio-button value="document">Upload document
+                  </mat-radio-button><br>
+                  <mat-radio-button value="link">Add link
                   </mat-radio-button>
                 </mat-radio-group>
               </div>
@@ -69,7 +70,7 @@
               </div>
 
               <div class="input-group back" *ngIf="selectedOption == 'document'">
-                <input class="form-control border-right-0" formControlName="upload" type='file' id="upload-photo" #fileInput
+                <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput
                   (change)="uploadDoc($event)" required>
                 <span class="input-group-append bg-white border-left-0">
                   <label for="upload-photo" class="upload">{{uploadMsg}}</label> </span>
@@ -83,7 +84,7 @@
                 <input type="text" maxlength="50" id="ref_link" placeholder="Enter the name" [(ngModel)]="referenceName"
                   [ngModelOptions]="{standalone: true}" required>
                 <input type="text" id="ref_link" class="ref-link" [(ngModel)]="referenceLink"
-                  [ngModelOptions]="{standalone: true}">
+                  [ngModelOptions]="{standalone: true}" required>
               </div>
 
               <mat-card-footer>
@@ -117,31 +118,28 @@
         <div class="file-list">
           <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-            <!-- Position Column -->
             <ng-container matColumnDef="type_name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customNameClass'"> Document name </th>
               <td mat-cell *matCellDef="let data"> {{data.type_name}} </td>
             </ng-container>
 
-            <!-- Name Column -->
             <ng-container matColumnDef="module_id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Module name </th>
               <td mat-cell *matCellDef="let data"> {{data.module_id}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
             <ng-container matColumnDef="topic_id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Topic name </th>
               <td mat-cell *matCellDef="let data"> {{data.topic_id}} </td>
             </ng-container>
 
-            <!-- Symbol Column -->
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customtypeClass'"> Type </th>
-              <td mat-cell *matCellDef="let data"> {{data.files[0].doc_type}} </td>
+              <td mat-cell *matCellDef="let data">  {{data.files[0].doc_type}} </td>
             </ng-container>
+
             <ng-container matColumnDef="created_on">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date Added </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> Date added </th>
               <td mat-cell *matCellDef="let data"> {{data.created_on |  date :'MMM d, y, h:mm:ss a'}}
               </td>
             </ng-container>
@@ -165,12 +163,15 @@
   </div>
 
 
-  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;">
+  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;" *ngIf="editModulesback == 'true'">
+    <button mat-flat-button color="primary" class="back-btn" (click)="backforeditModule()">Back</button>
+  </div>
+  <div style="text-align: center; margin-top: 2%;margin-bottom: 65px;" *ngIf="editModulesback == 'false'">
     <button mat-flat-button color="primary" class="back-btn" (click)="back()">Back</button>
-
   </div>
   <div>
     <!-- <app-footer></app-footer> -->
   </div>
 
+</div>
 </div>

@@ -18,7 +18,7 @@ export class CoursedetailsComponent implements OnInit {
   recordedData: any;
   finalFullData: any;
   finalStatus: any = null;
-  // loadingCourse = false;
+  loadingCourse = false;
   customOptions1: any = {
     loop: true,
     mouseDrag: true,
@@ -70,6 +70,8 @@ export class CoursedetailsComponent implements OnInit {
   urlSafe: any;
   isCollapsed: any;
   showStatus: any;
+  topicData : any = []
+  courseTime: any;
   
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
     public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
@@ -77,12 +79,30 @@ export class CoursedetailsComponent implements OnInit {
       
     var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      
-    this.service.viewCurseByID(detail && detail.id || '1').subscribe((viewCourse: any) => {
+      if (this.gs.checkLogout()) {
+        this.userDetail = this.gs.checkLogout()
+
+    this.service.viewCurseByID(detail && detail.id || '1', this.userDetail.user_id).subscribe((viewCourse: any) => {
       // this.loadingCourse = true;
       if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
         this.course = viewCourse.data.viewcourse.message;
         // this.loadingCourse = false;
+        if(this.course.topicData && this.course.topicData.length) {
+         this.topicData = []
+        this.course.topicData.forEach(element=>{
+          let subArr =[];
+          element.moduleData.forEach(element1=>{
+                 subArr.push(element1.moduledetails);
+          })
+          let obj = {
+            modulename : element.moduleData[0].modulename,
+            moduledetails : subArr
+          };
+          this.topicData.push(obj);
+        })
+        }
+          this.course.topicData = this.topicData;
+
         this.course.wishlisted = detail.wishlist || false;
         this.course.wishlist_id = detail.wishlist_id || null;
         this.course.enrollment_status = detail.enrollment_status;
@@ -91,10 +111,12 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.loadingCourse = false;
     });
+    console.log( this.userDetail,' this.userDetail')
+  }
     this.Lservice.getModuleData(detail.id).subscribe(data => {
       this.content = data.data['getmoduleData']['data'][0];
+      this.courseTime = this.content.coursetime;
       this.modulength = this.content['coursedetails'].length;
-      console.log(this.content, 'course details')
     })
   }
 
@@ -114,6 +136,7 @@ export class CoursedetailsComponent implements OnInit {
 
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout()
+      console.log( this.userDetail,' this.userDetail')
     }
   }
 
@@ -197,7 +220,7 @@ export class CoursedetailsComponent implements OnInit {
       if (enrollCourse.data) {
         if (enrollCourse.data.enrollcourse.success) {
           this.course.enrollment_status = 'pending';
-          Swal.fire("User enrolled successfully for the course")
+          Swal.fire("Your request for enrolment is successfully submitted")
         } else {
           Swal.fire(enrollCourse.data.enrollcourse.message)
         }

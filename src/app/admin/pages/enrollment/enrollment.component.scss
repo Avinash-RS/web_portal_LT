@@ -40,10 +40,10 @@
   }
 }
 
-// mat-header-cell {
-//   font-size: 14px;
-//   color: $color-blank;
-// }
+mat-header-cell {
+  font-size: 14px;
+  color: $color-blank;
+}
 
 .avatar {
   width: 25%;
@@ -54,7 +54,7 @@
 }
 
 .mat-column-selectall {
-  flex: 0 0 12% !important;
+  flex: 0 0 8% !important;
 }
 
 .mat-column-sno {
@@ -76,8 +76,8 @@
 .mat-column-request_date {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 15% !important;
-  width: 15% !important;
+  flex: 0 0 19% !important;
+  width: 19% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -88,6 +88,7 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
 
 .mat-column-course_name {
   word-wrap: break-word !important;

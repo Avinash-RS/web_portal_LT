@@ -46,7 +46,6 @@ export class EnrollmentComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // tslint:disable-next-line:only-arrow-functions
-    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
@@ -70,7 +69,7 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesindividual(data) {
     this.resultsLength = null;
     this.columns = [
-      { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${moment(element?.enroll_date).format('LL') || ' '}` },
+      { columnDef: 'enroll_date', header: 'Date received', cell: (element: any) => `${element?.enroll_date || ' '}` },
       { columnDef: 'full_name', header: 'Full name', cell: (element: any) => `${element?.full_name || ' '}` },
       { columnDef: 'course_name', header: 'Course name', cell: (element: any) => `${element?.course_name || ' '}` },
       { columnDef: 'group_name', header: 'User group', cell: (element: any) => `${element?.group_name || ' '}` },
@@ -79,10 +78,15 @@ export class EnrollmentComponent implements OnInit {
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
     this.loading = true;
     this.adminservice.getenrolledcourses(data).subscribe((result: any) => {
+      // console.log(result?.data?.getenrolledcourses?.message);
       this.loading = false;
       if (data.pagenumber === 0) {
         this.enrollmentrecords = [];
       }
+      result?.data?.getenrolledcourses?.message.forEach(element => {
+        const date = moment(element.enroll_date);
+        element.enroll_date = date.utc().format('MMMM Do YYYY');
+      });
       Array.prototype.push.apply(this.enrollmentrecords, result.data.getenrolledcourses.message);
       this.dataSource.data = this.enrollmentrecords;
       this.dataSource.paginator = this.paginator;
@@ -94,9 +98,9 @@ export class EnrollmentComponent implements OnInit {
   getenrolledcoursesgroup(pagenumber) {
     this.resultsLength = null;
     this.columns = [
-      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${moment(elem?.request_date).format('LL') || ' '}` },
+      { columnDef: 'request_date', header: 'Date received', cell: (elem: any) => `${elem?.request_date || ' '}` },
       { columnDef: 'course_name', header: 'Course name', cell: (elem: any) => `${elem?.course_name || ' ' }` },
-      { columnDef: 'totalCount', header: 'Enrollments', cell: (elem: any) => `${elem?.totalCount || ' '}` },
+      { columnDef: 'totalCount', header: 'Enrolments', cell: (elem: any) => `${elem?.totalCount || ' '}` },
       { columnDef: 'group_name', header: 'User group', cell: (elem: any) => `${elem?.group_name}` },
     ];
     this.displayedColumns = (['selectall', 'sno']).concat(this.columns.map(c => c.columnDef));
@@ -105,8 +109,9 @@ export class EnrollmentComponent implements OnInit {
       this.loading = false;
       const array = [];
       result?.data?.get_all_enrolledcourses?.message.forEach(element => {
-             element.group_detail[0].request_date = element.request_date;
              element.group_detail[0].totalCount = element.totalCount;
+             const date = moment(element.request_date);
+             element.group_detail[0].request_date = date.utc().format('MMMM Do YYYY');
              array.push(element.group_detail[0]);
       });
       if (pagenumber === 0) {
@@ -132,6 +137,7 @@ export class EnrollmentComponent implements OnInit {
       if (data.pagenumber === 0) {
         this.groupenrollmentrecords = [];
       }
+      // console.log(result?.data?.getenrolledcourses?.message);
       Array.prototype.push.apply(this.groupenrollmentrecords, result?.data?.getenrolledcourses?.message);
       this.resultsLength1 = result?.data?.getenrolledcourses?.enroll_count;
       // this.dataSource1.data = result?.data?.getenrolledcourses?.message;
@@ -223,10 +229,11 @@ export class EnrollmentComponent implements OnInit {
             this.dataSource.data = [];
             this.radiobuttonchange();
           }
-          const c = array.length > 1 ? 'ids' : 'id';
+          const c = array.length > 1 ?  array.length + ' courses' : array.length + ' course';
+          const learner = array.length > 1 ?  array.length + ' learners' : array.length + ' learner';
           Swal.fire({
-            title: '<div>Successfully approved</div> <br> ',
-            text: 'A confirmation has been sent to user email ' + c ,
+            title:   c + '&nbsp;<div> approved successfully</div> <br> ',
+            text: 'Confirmation email sent to ' + learner ,
           });
         }
       });
@@ -242,7 +249,7 @@ export class EnrollmentComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Ok'
+      confirmButtonText: 'OK'
     }).then((result) => {
       if (result.value) {
         const array = [];
@@ -294,6 +301,8 @@ export class EnrollmentComponent implements OnInit {
       //   wishlist: row?.wish_list ? true : false,
       //   wishlist_id: row?.wish_list ? row.wish_list.wish_list_id :  null
       // };
+      // (keyup)="addCategoryForm.patchValue({category_name: $event.target.value[0].
+      // toUpperCase() + $event.target.value.substr(1).toLowerCase()})"
       const details = {
         type: 'publish', id: row.course_id , type1: 'enrollment'
       };
@@ -301,7 +310,7 @@ export class EnrollmentComponent implements OnInit {
     } else if (column.header === 'Full name' || column.header === 'User name') {
       const userdetail = { user_id: row.user_id, _id: row.user_obj_id };
       this.router.navigateByUrl('/Admin/auth/learnerprofile', { state: { userid: userdetail } });
-    } else if (column.header === 'Enrollments') {
+    } else if (column.header === 'Enrolments') {
       this.selectedgroupid = row.group_id;
       const data = { group_id: row.group_id, pagenumber: 0, is_individual: true, course_id: row.course_id };
       this.dialogopened = true;

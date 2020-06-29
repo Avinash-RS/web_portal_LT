@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
-    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course enrollment</a></li>
+    <li *ngIf="groupid" class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course enrolment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Group management</li>
   </ol>
 </nav>
@@ -72,9 +72,7 @@
                   <div class="row">
                     <div class="col-md-6">
 
-                      <span class="mt-0 mb-1"> {{currentpath?.group_name}} <span
-                          *ngIf="currentpath?.group_name && !editstatus && editgroupfield" (click)="editgroup()"
-                          class="material-icons" style="vertical-align: middle;">create</span>
+                      <span class="mt-0 mb-1"> {{currentpath?.group_name}}
                         <ng-container *ngIf="editstatus">
                           <ng-container *ngIf="currentpath?.group_name"> /</ng-container>
                           Create a
@@ -91,7 +89,19 @@
                         </ng-container>
                       </span> -->
                     </div>
+                    <!-- <div class="col-md-2">
+                      <ng-container *ngIf="currentpath?.group_name && !editstatus && editgroupfield">
+                        <button type="button" class="btn col-md-4 float-right addnewBtn"
+                         (click)="editgroup()"><i
+                          class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</button>
+                      </ng-container>
+                    </div> -->
                     <div class="col-md-6">
+                      <ng-container *ngIf="currentpath?.group_name && !editstatus && editgroupfield">
+                        <button type="button" class="btn col-md-3  addnewBtn1"
+                         (click)="editgroup()"><i
+                          class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</button>
+                      </ng-container>
                       <ng-container *ngIf="currentpath?.group_name && !editstatus">
                         <button type="button" class="btn col-md-4 float-right addnewBtn"
                           [disabled]="currentpath?.is_active == false" (click)="edit(false,currentpath.group_name)"><i
@@ -171,11 +181,11 @@
                     <div class="col-12" *ngIf="currentpath && !editstatus">
                       <!-- [(ngModel)]="checked" -->
                       <mat-slide-toggle class="example-margin" [disabled]=editgroupfield [color]="color" name="toggle"
-                        [(ngModel)]="toggle">
+                        [(ngModel)]="toggle" (change)="selectedtoggle(toggle)">
                       </mat-slide-toggle>
                       <!-- [checked]="currentpath?.is_active" -->
-                      <!-- (change)="toggle(currentpath.is_active)" -->
-                      {{toggle === true ? 'Deactivate' : 'Activate'}}
+                      <!-- (change)="selectedtoggle(currentpath.is_active)" -->
+                      {{toggle === true ? 'Deactivate' : 'Deactivate '}}
                     </div>
                     <div class="col-6 mt-4">
                       <button *ngIf="editstatus" mat-flat-button color="primary" type="submit">Save</button> &nbsp;

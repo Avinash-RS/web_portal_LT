@@ -4,7 +4,7 @@ input[type=text] {
   width: 105%;
   padding: 12px 20px;
   margin: 1px 0;
-  background: $color-light-blue;
+  // background: $color-light-blue;
   display: inline-block;
   border: 1px solid $color-border;
   box-sizing: border-box;
@@ -36,4 +36,11 @@ input[type=text] {
 .star{
   color: $color-red;
 } 
+
+.wrap-reg{
+  background: #ffffffc7 !important;
+    width: 100% !important;
+    height: 450px;
+}
+
   

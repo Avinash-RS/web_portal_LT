@@ -13,6 +13,7 @@ export const login = gql`
         token
         user_id
         is_blocked
+        profile_img
         is_profile_updated
         group_id                  
         message      
@@ -81,8 +82,8 @@ export const get_qualification_details = gql`
 `;
 
 export const get_board_university_details = gql`
-query get_board_university_details{
-  get_board_university_details{
+query get_board_university_details ($_id :String!) {
+  get_board_university_details (_id : $_id) {
         message
 success
 data{
@@ -114,10 +115,9 @@ data{
 
   }
 }`;
-
 export const get_discipline_details = gql`
-  query   get_discipline_details{
-    get_discipline_details{
+  query   get_discipline_details ($_id :String!) {
+    get_discipline_details(_id:$_id){
       message
       success
       data{
@@ -234,6 +234,7 @@ query getmoduleData($courseid:String!){
       courseid
       _id
       url
+      coursetype
       coursename
       coursefile
       coursestatus
@@ -813,3 +814,18 @@ export const getPopularcourse = gql`
     }
       }
     }`;
+export const getCoursePlayerStatusForCourse = gql`
+query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
+  getCoursePlayerStatusForCourse(user_id:$user_id,course_id:$course_id) {
+    success
+    message{
+    _id
+    status
+    location
+    course_id
+    feedback_status
+    course_percentage
+}
+  }
+}
+`

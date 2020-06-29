@@ -37,10 +37,10 @@ export class AddModuleComponent implements OnInit {
     public toast: ToastrService,
     private router: Router,
     public route: ActivatedRoute,
-    public apiService: WcaService) { }
+    public apiService: WcaService) {
+    }
 
   ngOnInit() {
-
     this.resetList();
     this.spinner = true;
     this.route.queryParams.subscribe(params => {
@@ -378,7 +378,15 @@ export class AddModuleComponent implements OnInit {
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
+    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId,
+      editModulesback: true,
+      courseId:  this.routedCourseDetails.courseId,
+      courseImage:  this.routedCourseDetails.courseImage,
+      courseName:  this.routedCourseDetails.courseName,
+      isRepo: this.isRepo,
+      isCreate: this.isCreate
+    }
+  });
   }
 
   getRepoModules() {

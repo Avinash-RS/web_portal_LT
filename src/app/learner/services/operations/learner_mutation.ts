@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean) {
+  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
       full_name: $full_name
       email: $email,
-      term_condition: $term_condition
+      term_condition: $term_condition,
+      domain:$domain
     ) {
       message
       success
@@ -73,12 +74,13 @@ export const user_registration_done = gql`
 `;
 
 export const get_forgot_username_mobile_email = gql`
-  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String) {
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String ,$domain:String!) {
     get_forgot_username_mobile_email(
       type:$type,
       subtype:$subtype,
       mobile_number:$mobile_number,
-      email:$email
+      email:$email,
+      domain:$domain
     ) {
       success
       message
@@ -285,10 +287,6 @@ export const view_profile = gql`
 
           districtname
 
-          country
-
-          state
-
           is_active
 
         }
@@ -438,8 +436,7 @@ mutation get_district_details($country: String,$state: String){
     data{
        _id
       districtname
-      state
-      country
+   
       created_by
       created_on
       created_by_ip
@@ -572,7 +569,7 @@ export const update_profile = gql`
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String){
+    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!){
     update_profile(
       user_id: $user_id,
       profile_img: $profile_img,
@@ -598,7 +595,8 @@ export const update_profile = gql`
       created_on: $created_on,
       updated_by_ip: $updated_by_ip,
       updated_on: $updated_on,
-      updated_by: $updated_by
+      updated_by: $updated_by,
+      domain:$domain
     ) {
       success
       message
@@ -630,10 +628,11 @@ export const update_verifyotp_mobile_onprofile = gql`
   }
 `;
 export const update_email_onprofile = gql`
-  mutation update_email_onprofile($user_id: String, $email: String){
+  mutation update_email_onprofile($user_id: String, $email: String,$domain:String!){
     update_email_onprofile(
       user_id: $user_id,
-      email: $email
+      email: $email,
+      domain:$domain
     ) {
       message
       success
@@ -711,7 +710,7 @@ export const getCourseCategorySearch = gql`
   mutation getCourseCategorySearch($category: [String]!,$sub_category:[String]!, $super_sub_category: [String]!,
     $course_language: [String],  $course_mode:[String],$author_details:[String],$partner_details:[String],
     $pagenumber:Int!,$perPage: Int!, $publishedToDate: String, $publishedFromDate: String,
-    $catalogue_visibility: Int! ) {
+    $catalogue_visibility: Int ) {
     getCourseCategorySearch(category:$category,sub_category:$sub_category,super_sub_category:$super_sub_category,
       course_language:$course_language,course_mode:$course_mode,author_details:$author_details,partner_details:$partner_details,
       pagenumber:$pagenumber,perPage:$perPage, publishedToDate:$publishedToDate,
@@ -833,8 +832,8 @@ export const createGuidanceRequest = gql`
   }
 `;
 export const InsertCourseFeedback = gql`
-mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content]){
-    InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans) {
+mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content],$course_id: String ){
+    InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans, course_id : $course_id ) {
       success
       message
     }

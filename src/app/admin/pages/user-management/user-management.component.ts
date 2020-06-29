@@ -11,7 +11,7 @@ import { Form } from '@angular/forms';
 
 export interface PeriodicElement {
   user_id: string;
-  name: number;
+  username: number;
   email: string;
   mobile: string;
 }
@@ -26,7 +26,7 @@ export class UserManagementComponent implements OnInit {
   ELEMENT_DATA: PeriodicElement[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['select', 'user_id', 'name', 'email', 'mobile', 'active', 'actions'];
+  displayedColumns: string[] = ['select', 'user_id', 'username', 'email', 'mobile', 'active', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   resultsLength: number = null;
@@ -79,6 +79,19 @@ export class UserManagementComponent implements OnInit {
   // ngAfterViewInit() {
   //   this.dataSource.paginator = this.paginator
   // }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    // tslint:disable-next-line:only-arrow-functions
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+      if (!data[sortHeaderId]) {
+        return this.sort.direction === 'asc' ? '3' : '1';
+      }
+      return '2' + data[sortHeaderId].toLocaleLowerCase();
+    };
+  }
 
   viewDetail(element, templateRef: TemplateRef<any>) {
     // this.service.getLearnerDetail(element.user_id)

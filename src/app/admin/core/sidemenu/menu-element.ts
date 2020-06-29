@@ -114,7 +114,7 @@ export const menus = [
                 open: true,
             },
             {
-                name: 'Course Enrollment',
+                name: 'Course Enrolment',
                 icon: 'border_color',
                 link: 'enrollment',
                 open: false,
@@ -126,6 +126,21 @@ export const menus = [
                 icon: 'notes',
                 chip: false,
                 open: true,
+            },
+        ]
+    },
+    {
+        name: 'Jobs',
+        icon: 'work',
+        link: false,
+        open: false,
+        sub: [
+            {
+                name: 'Bulk Enrolment',
+                icon: 'border_color',
+                link: 'bulkenrolment',
+                open: false,
+                chip: false,
             },
         ]
     },

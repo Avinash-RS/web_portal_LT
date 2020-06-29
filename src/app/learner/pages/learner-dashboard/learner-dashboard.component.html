@@ -100,9 +100,7 @@
       </div> -->
     </div>
   </div>
-  <div class="spinner-container" *ngIf="loadingCatalogue">
-    <mat-spinner diameter="40"></mat-spinner>
-  </div>
+
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
       <h2>Courses completed</h2>
@@ -138,10 +136,6 @@
 
 <div class="container containerShadow">
     <span class="txthead"><b>Last accessed </b><span class="h8">Courses</span> (click on any course to resume)</span>
-
-     
-      
-         
             <div class="row" >
               <div class="col-md-6 col-sm-12 col-12" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
               <div class="lg-box" (click)="gotohome()" >
@@ -153,9 +147,9 @@
 
                <div class="col-8">
                 <h3 class="coursehead">{{dashboard?.course_name}}</h3>
-                <mat-progress-bar class="border-radius-5" mode="determinate"[value]="dashboard?.coursePlayerStatus != null ? dashboard?.coursePlayerStatus.course_percentage : '0' ">
+                <mat-progress-bar class="border-radius-5" mode="determinate"[value]="dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0' ">
                 </mat-progress-bar>
-                <span class="percent">{{dashboard?.coursePlayerStatus != null ? dashboard?.coursePlayerStatus.course_percentage : '0'}}% Complete</span>
+                <span class="percent">{{dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0'}}% Complete</span>
               </div>
             </div>
           </div>

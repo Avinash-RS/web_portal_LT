@@ -1,4 +1,5 @@
 <app-header></app-header>
+<div class="coursedetail">
 <nav aria-label="breadcrumb" class="coursebreadcrumb contentTop">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <span class="short-desc">{{course?.short_description}}</span>
+            <span class="short-desc">{{course?.course_description}}</span>
         </div>
         <div class="row">
             <div class="col-12 display_flex">
@@ -38,24 +39,24 @@
 
     <div class="row">
         <div class="col-12 margin-5">
-            <button class="enrollbtn" *ngIf="(course.enrollment_status != 'pending') && (course.enrollment_status != 'rejected')
-            && (course.enrollment_status != 'approved')"
+            <button class="enrollbtn" *ngIf="(course?. course_enrollment_status != 'Pending') && (course?.course_enrollment_status != 'Rejected')
+            && (course?.course_enrollment_status != 'Approved')"
              (click)="enrollCourse()">ENROLL NOW</button>
 
-            <button class="enrollbtn" id="enroll_now" *ngIf="course.enrollment_status == 'pending'"
-            [disabled]="course.enrollment_status == 'pending'">Requested
+            <button class="enrollbtn" id="enroll_now" *ngIf="course?.course_enrollment_status == 'Pending'"
+            [disabled]="course?.course_enrollment_status == 'Pending'">Requested
           </button>
-          <button  id="enroll_now" *ngIf="course.enrollment_status == 'rejected'"
+          <button class="enrollbtn"  id="enroll_now" *ngIf="course?.course_enrollment_status == 'Rejected'"
             (click)="clickRejected()">Rejected
           </button>
-          <button id="enroll_now" *ngIf="course.enrollment_status == 'approved'"
-            [disabled]="course.enrollment_status == 'approved'">Enrolled
+          <button class="enrollbtn" id="enroll_now" *ngIf="course.course_enrollment_status == 'Approved'"
+            [disabled]="course?.course_enrollment_status == 'Approved'">Enrolled
           </button>
-          <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
+          <!-- <button id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
             (click)="goTocourse(course?.coursePlayerStatus?.status || 'Start')"
             [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
           '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
-            {{course?.coursePlayerStatus?.status || 'Start'}}</button>
+            {{course?.coursePlayerStatus?.status || 'Start'}}</button> -->
         </div>
     </div>
 
@@ -67,7 +68,7 @@
 
     <div class="row margin-15 ">
         <div class="col-12">
-            <div class="stuEnrolled">213000 student enrolled | Last updated {{ course?.updated_at | date }}</div>
+            <div class="stuEnrolled">{{course?.totalLearners}} student enrolled | Last updated {{ course?.updated_at | date }}</div>
         </div>
     </div>
 
@@ -76,12 +77,12 @@
             Course outline
         </div>
         <div class="col-4">
-            <i class="fa fa-clock-o" aria-hidden="true"></i> 40 mins , 40 sec
+            <i class="fa fa-clock-o" aria-hidden="true"></i>  {{courseTime}}
         </div>
     </div>
     <div class="row margin-5">
         <div class="col-12">
-            <section class="accordion" *ngFor="let res of content?.coursedetails">
+            <section class="accordion" *ngFor="let res of course?.topicData">
               <input type="checkbox" name="collapse" [id]="res?.modulename">
               <h2 class="handle">
                 <label [for]="res?.modulename"><span>{{res?.modulename}}</span></label>
@@ -90,8 +91,11 @@
                 <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
                   <div class="col-8"><br>
                     <ol class="submod">
-                      <li><span>{{i+1}} : {{mod?.topicname}} {{mod?.topictime}}</span></li>
+                      <li><span>{{i+1}} : {{mod?.topicname}} </span></li>
                     </ol>
+                  </div>
+                  <div class="col-4"><br>
+                    {{mod?.topictime}}
                   </div>
                 </div>
               </div>
@@ -188,7 +192,8 @@
                 <div >
                     <h3 class="head-h1">Course description</h3>
                     <div class="vertical"></div>
-                    <p class="desc">{{course?.course_description}}</p>
+                    <div [innerHTML]="course?.course_long_description"></div>
+                    <!-- <p class="desc">{{course?.course_long_description}}</p> -->
                 </div>
             </div>
         </div>
@@ -280,5 +285,6 @@
 
     </div>
      <!-- Left end side -->
+</div>
 </div>
 
