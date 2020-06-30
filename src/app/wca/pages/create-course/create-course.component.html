@@ -27,10 +27,10 @@
                                     <!-- Course Details Started -->
                                     <div class="basic-det" (click)="ontoggle(0)">
                                         Basic Details
-                                        <span *ngIf="!isBasicDetails">
+                                        <span *ngIf="!isBasicDetails" style="padding-right: 5px;">
                                             <mat-icon>keyboard_arrow_up</mat-icon>
                                         </span>
-                                        <span *ngIf="isBasicDetails">
+                                        <span *ngIf="isBasicDetails" style="padding-right: 5px;">
                                             <mat-icon>keyboard_arrow_down</mat-icon>
                                         </span>
 
@@ -188,7 +188,7 @@
                                     <!-- Course Details Ends -->
 
                                     <!-- Instruction Details Starts -->
-                                    <div class="row" (click)="ontoggle(1)" style="cursor: pointer;">
+                                    <div class="row toggle-click" (click)="ontoggle(1)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
@@ -271,7 +271,7 @@
                                     <!--  Certification Details Ends -->
 
                                     <!-- Course Partners Starts -->
-                                    <div class="row" (click)="ontoggle(2)" style="cursor: pointer;">
+                                    <div class="row toggle-click" (click)="ontoggle(2)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
@@ -343,7 +343,7 @@
                                     <!-- Course Parteners Ends -->
 
                                     <!-- Leaners Takeaway Starts -->
-                                    <div class="row" (click)="ontoggle(3)" style="cursor: pointer;">
+                                    <div class="row toggle-click" (click)="ontoggle(3)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
