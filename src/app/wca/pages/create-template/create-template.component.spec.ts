@@ -91,7 +91,7 @@ describe('CreateTemplateComponent', () => {
   // })
 
   it('Check Remove New Link',()=>{
-    component.removenewLink(1)
+    // component.removenewLink(1)
     expect(component.items2.length).toBe(0);
   })
 
