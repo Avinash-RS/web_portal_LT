@@ -4,6 +4,7 @@ import { WcaService } from '../../services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as PDFJS from 'pdfjs-dist/build/pdf';
+PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatList, MatDialog } from '@angular/material';

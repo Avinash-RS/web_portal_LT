@@ -5,20 +5,7 @@
         <li class="breadcrumb-item active" aria-current="page">My courses</li>
     </ol>
 </nav>
-<<<<<<< HEAD
 <div class="container wrap-body"  #mycourse>
-=======
-
-  <!-- <span class="thank"><div style="text-align: right;">Your details have been submitted successfully.  </div>
-    <div class="line2"></div>
-    <div class="next">Thank you</div>
-</span> -->
-
-<div class="container-reg200">
-
-
-    <!-- june 10 commented by ankit -->
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     <div class="row">
         <div class="col-md-12">
             <mat-accordion>
@@ -29,6 +16,15 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-card style="text-align: center;">
+                        <!-- <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
+                            <mat-grid-tile *ngFor="let course of myCoursesList" [style.border]="'none'">
+                                <app-course-component [course]="course" [canNavigate]="false" [showCartBtn]="false"
+                                    [showWishlist]="false" [showStatus]="true"> </app-course-component>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h2 *ngIf="myCoursesList && myCoursesList.length == 0">
+                            No courses yet
+                        </h2> -->
                         <div class="row">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12"
                                 *ngFor=" let course of myCoursesList">
@@ -46,25 +42,45 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 <div #wishlist>
     <app-wishlist-courses [from]="'home'" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
     [showStatus]="false"></app-wishlist-courses>
 </div>
 
-=======
-<div class="footer">
-  <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
 
-  <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
-    <span class="powered">Powered by : 
-      <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-  </span>
-    </span>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
-
-</div>
-<!-- <app-wishlist-courses [from]="'home'" [showCartBtn]="true" [showWishlist]="true" [canNavigate]="true"
-    [showStatus]="false"></app-wishlist-courses>
-<app-footer></app-footer> -->
- <!-- june 10 commented by ankit -->
+<!-- <div class="container wrap-body">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="f_wt_500 f_size_18 color_blue">
+                            Wish List
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-card style="text-align: center;">
+                        <mat-grid-list [cols]="breakpoint" rowHeight="2.3:2" (window:resize)="onResize($event)">
+                            <mat-grid-tile *ngFor=" let course of wishlist" [style.border]="'none'">
+                                <app-course-component [course]="course" [canNavigate]="true" [showCartBtn]="true"
+                                    [showWishlist]="true" [showStatus]="false" [showRating]="true" [showCount]="true"
+                                    [showPrice]="true"> </app-course-component>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-2 col-12" *ngFor=" let course of wishlist">
+                                <app-course-component [course]="course" [canNavigate]="true" [showEnroll]="true"
+                                    [showCartBtn]="false" [showWishlist]="true" [showStatus]="false" [showCount]="true"
+                                    [showRating]="true">
+                                </app-course-component>
+                            </div> <br><br>
+                            <h2 class="center" *ngIf="wishlist && wishlist.length == 0">
+                            No courses yet
+                        </h2>
+                        </div>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div> -->
+<app-footer></app-footer>

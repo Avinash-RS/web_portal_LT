@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div *ngIf="!isLinkActive" >
 <!-- <div *ngIf="!isLinkActive" class="limiter">
   <div class="container-reg100 p-t-77"> -->
@@ -30,82 +29,20 @@
             <p>{{minutes}}:{{seconds}}</p>
           </div>
          
-=======
-<div *ngIf="!isLinkActive" class="limiter">
-  <!-- <img alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg">  -->
-  <!-- <span class="pg"><span style="font-size: 12px;">Haven't setup your account ?</span>&nbsp;&nbsp;<a class="link" [routerLink]="['/Learner/login']">Sign in</a></span> -->
-  <!-- <span class="privcy"> Privacy policy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms & conditions</span> -->
-  <div class="row container-reg200">
-    <div class="col-md-8 col-sm-12 col-12">
-      <img  alt="" class="lnt_logo" src="../../../../assets/learner/WHITE_LNT T_LOGO.svg"> 
-      <img class="beforeloginimg" src="../../../../assets/learner/login-bg.jpg">
-    </div>
-    <div class="col-md-4 col-sm-12 col-12">
-        <div class="wrap-reg ">
-        <img class="kauhalya" alt="" src='../../../../assets//learner/kauhalya.png'>
-          <form [formGroup]="otpForm">
-            <h1 class="head1">Enter the mobile number</h1><br><br>
-            <label>Mobile number</label>
-            <div class="form-group">
-            <input type="text"  formControlName="mobile" placeholder="Mobile number without country code"   maxlength="10" minlength="10" pattern="[1-9]{1}[0-9]{9}"  mask="0000000000" class="form-control" 
-              [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" />
-            <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
-              <div *ngIf="f.mobile.errors.required">Mobile number is required</div>
-              <div *ngIf="f.mobile.errors.pattern">Mobile number is invalid</div>
-              <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxlength">Mobile number must be 10 digits</div>
-            </div>
-            </div>
-    
-    
-            <button  *ngIf="otpFeature == 'false'" class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Next</button>
-            <!-- // sms getway integation pending  -->
-            <div *ngIf="otpFeature == 'true'">
-            <div *ngIf="isenable"><br>
-              <p class="head">OTP will be sent to this number</p>
-              <button class="btn"  [disabled]="!otpForm.valid" (click)="otpverification()">Verify</button>
-            </div>
-    
-            <div *ngIf="showotp"><br>
-              <p class="otphead">OTP Code</p>
-              <ng-otp-input [config]="config"
-              [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
-              formControlName="otp" min="0" max="9" (onInputChange)="onOtpChange($event)"  pattern="[0-9]{1}">
-              </ng-otp-input>
-              <div>
-                <p>{{minutes}}:{{seconds}}</p>
-              </div>
-              <br><br>
-            </div>
-            
-            <div *ngIf="showotp">
-              <button class="btn" [disabled]="verifybutton"  (click)="otpverify()">Verify</button>
-            </div><br>
-            <div  class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b (click)="Resendcode()"><br>
-             Resend OTP</b></div>
-    
-            </div>
-    
-              <!-- // sms getway integation pending  -->
-          </form>
-
-          <div class="row footer20">
-            <div class="col-7">
-                <span class="footertext">© 2020 L&T EduTech.</span>
-            </div>
-            <div class="col-5">
-                <span class="powered">Powered by : 
-                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-                </span>
-            </div>
         </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
-        </div>
-      </div>
+        <!-- *ngIf="showotp" -->
+        <!-- <div  *ngIf="showotp"><br>
+          <p class="head">OTP Code</p>
 
-  </div>
+          <input [ngClass]="{ 'is-invalid': f.otp1.touched && f.otp1.errors }" class="otp" type="text"
+            formControlName="otp1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}"  mask="0" />
 
+          <input [ngClass]="{ 'is-invalid': f.otp2.touched && f.otp2.errors }" class="otp" type="text"
+            formControlName="otp2" maxLength="1" size="1" min="0" max="9"  mask="0" pattern="[0-9]{1}" />
 
-<<<<<<< HEAD
+          <input [ngClass]="{ 'is-invalid': f.otp3.touched && f.otp3.errors }" class="otp" type="text"
+            formControlName="otp3" maxLength="1" size="1" min="0" max="9"   mask="0" pattern="[0-9]{1}" />
+
           <input [ngClass]="{ 'is-invalid': f.otp4.touched && f.otp4.errors }" class="otp" type="text"
             formControlName="otp4" maxLength="1" size="1" min="0" max="9"  mask="0"  pattern="[0-9]{1}" /> -->
           <!-- <input type="tel" formControlName="otp" class="form-control"
@@ -135,12 +72,3 @@
   <br>
   <br>
 </div>
-=======
-</div>
-
-
-
-  <!-- <img src="../../../../assets/images/forbidden.jpg"> -->
-  <img src="../../../../assets/images/2nd_sample.svg">
-  <h1 class="img">This Link has already expired..</h1>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7

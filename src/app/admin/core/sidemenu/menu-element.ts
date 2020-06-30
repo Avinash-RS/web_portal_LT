@@ -85,14 +85,15 @@
 
 
 export const menus = [
-    // {
-    //     name: 'Dashboard',
-    //     icon: 'dashboard',
-    //     link: 'dashboard',
-    //     open: false,
-    //     chip: false,
+    {
+        name: 'Dashboard',
+        icon: 'dashboard',
+        link: 'dashboard',
+        open: false,
+        chip: false,
+        isChild : false,
 
-    // },
+    },
     {
         name: 'User Management',
         icon: 'widgets',

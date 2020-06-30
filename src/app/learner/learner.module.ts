@@ -11,7 +11,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-// import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
 // local
@@ -37,21 +37,12 @@ import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-cours
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingModule } from 'ng-starrating';
 // import { SearchPipe } from '../pipes/search.pipe';
-import { PipeModule } from '../pipes/pipe.module';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
-import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
-import { NewHomeComponent } from './pages/new-home/new-home.component';
 const routes: Routes = [
-<<<<<<< HEAD
   { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
-=======
-  // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
-  { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
   { path: 'register', component: LandingpageComponent, data: { title: 'Learner  Registration' } },
   { path: 'otp', component: LandingpageComponent, data: { title: 'Learner  Registration OTP' } },
@@ -59,22 +50,13 @@ const routes: Routes = [
   { path: 'recover', component: LandingpageComponent, data: { title: 'Learner  Forget Password' } },
   { path: 'recoverotp', component: LandingpageComponent, data: { title: 'Learner  Forget Password OTP' } },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { title: 'Learner  Profile' } },
-<<<<<<< HEAD
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
   { path: 'resetpassword', component: LandingpageComponent, data: { title: 'Learner   Reset password' } },
-=======
-
-  // { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
-  { path: 'Thankyou', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Thank you' } },
-  { path: 'home', component: NewHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }},
-  { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
-  { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner   Reset password' } },
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-  // { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
+  { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
 
 
 ];
@@ -100,16 +82,13 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    ForbiddenComponent,
-    NewHomeComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 
   imports: [
     CoreModule,
-    PipeModule,
-    // Ng4LoadingSpinnerModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
     BarRatingModule,

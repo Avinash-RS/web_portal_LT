@@ -10,7 +10,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { ConnectionService } from 'ng-connection-service'
 //local
 import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
@@ -54,14 +53,10 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     Ng5SliderModule,
     ToastrModule.forRoot({
       timeOut: 4000,
-<<<<<<< HEAD
       positionClass: 'toast-bottom-right',
       maxOpened: 1,
       preventDuplicates: true,
       autoDismiss: true
-=======
-      positionClass: 'toast-top-right'
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     }),
     NgxSpinnerModule,
     BrowserModule,

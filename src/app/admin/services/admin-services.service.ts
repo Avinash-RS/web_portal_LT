@@ -46,8 +46,7 @@ export class AdminServicesService {
         term_condition: termsandconditions,
         group_id,
         group_name,
-        admin,
-        domain: environment.domain
+        admin
       }
     });
   }
