@@ -50,6 +50,7 @@ export class AddUserComponent implements OnInit {
         const tree = this.tree(result?.data?.get_user_group?.message, null);
         this.groups = this.flattree(tree);
         const index = this.groups.findIndex(x => x.group_id === this.group?.group_id);
+        this.group = index ?  this.groups[index] : null;
         this.addUserForm.patchValue({ group: index !== -1 ? this.groups[index] : null});
       });
   }
@@ -103,7 +104,7 @@ flattree(items) {
           if (result.data && result.data.user_registration) {
             if (result.data.user_registration.success === 'true') {
               this.addUserForm.reset();
-              this.alert.openAlert('Success !', 'User added successfully');
+              this.alert.openAlert('User added successfully', null);
             } else {
               this.alert.openAlert(result.data.user_registration.message, null);
             }
@@ -214,7 +215,7 @@ flattree(items) {
       fb.append('csv', data, this.selectedfile.name);
       this.service.bulkuserupload(fb).subscribe((result: any) => {
         if (result.success === true) {
-          this.alert.openAlert('Success !', 'Upload in Progress ...');
+          this.alert.openAlert('Upload in Progress ...', null);
           this.selectedfile = '';
           this.group = '';
         } else {
@@ -276,13 +277,13 @@ flattree(items) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-  tabClick(event, form) {
-    if (event.index === 0) {
-      form.reset();
-      this.selectedfile = '';
-    }
-    if (event.index === 1) {
-      this.addUserForm.reset();
-    }
-  }
+  // tabClick(event, form) {
+  //   if (event.index === 0) {
+  //     form.reset();
+  //     this.selectedfile = '';
+  //   }
+  //   if (event.index === 1) {
+  //     this.addUserForm.reset();
+  //   }
+  // }
 }

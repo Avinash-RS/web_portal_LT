@@ -13,6 +13,16 @@ export const usernameVal: any = [
     Validators.pattern(/^[A-Za-z0-9]*$/)
 ];
 
+//username with spl char
+export const usernamesplVal: any = [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(20),
+    Validators.pattern(/^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/)
+    // Validators.pattern(/^[A-Za-z0-9]+[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/) // with first char should string
+];
+
+
 export const passwordVal: any = [
     Validators.required,
     Validators.minLength(8),
@@ -46,6 +56,24 @@ export const fullnameVal: any = [
 
 export const req: any = [
     Validators.required
+];
+
+export const address: any = [
+    Validators.required,
+    Validators.pattern(/^.{1,100}$/),
+    Validators.minLength(1),
+    Validators.maxLength(100)
+];
+
+
+export const pincode: any = [
+    // Validators.required,
+    Validators.pattern(/^[1-9][0-9]{5}$/),
+    // Validators.required
+];
+
+export const whitespase: any = [
+    Validators.pattern(/^(.|\s)*\S(.|\s)*$/),
 ];
 
 export const textVal: any = [

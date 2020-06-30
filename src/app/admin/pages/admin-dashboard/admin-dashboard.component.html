@@ -6,12 +6,12 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>New registrations</h3>
+              <h3 class="overviewHeadTitle">New registrations</h3>
               <span class="count">{{newRegisterLearses?.newReg}}</span>
             </div>
     
             <div class="col-md-4 icon">
-              <div style="width: 60px;margin-left: 6px;">
+              <div style="width: 60px;margin-left: -3px;">
                 <img  class="iconImg"  src="../../../../assets/learner/NewRegistrations.svg">
               </div>
             </div>
@@ -45,12 +45,12 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>Total learners</h3>
+              <h3 class="overviewHeadTitle">Total learners</h3>
               <span class="count">{{newRegisterLearses?.totalLearTillCurrent}}</span>
             </div>
     
             <div class="col-md-4 icon newLerner">
-              <div style="width: 60px;margin-left: 6px;">
+              <div style="width: 60px;margin-left: -4px;">
                 <img  class="iconImg nLSize"  src="../../../../assets/learner/TotalLearners.svg">
               </div>
             </div>
@@ -79,19 +79,19 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>Active learners</h3>
+              <h3 class="overviewHeadTitle">Active learners</h3>
               <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.Active}}</span>
             </div>
     
             <div class="col-md-4 icon bg-green">
-              <div style="width: 60px;margin-left: 6px;">
+              <div style="width: 60px;margin-left: -3px;">
                 <img  class="iconImg fontSize"  src="../../../../assets/learner/ActiveLearners.svg">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-9">
-              <h3>Inactive learners</h3>
+              <h3 >Inactive learners</h3>
             </div>
             <div class="col-md-3">
             </div>
@@ -99,7 +99,7 @@
 
           <div class="row">
             <div class="col-md-9">
-              <span class="count">{{newRegisterLearses?.TotalActiveInActiveLearner?.InActive}}</span>
+              <div class="count1">{{newRegisterLearses?.TotalActiveInActiveLearner?.InActive}}</div>
             </div>
             <div class="col-md-3">
               <img class="charticon InactiveIcon" src="../../../../assets/learner/BarChartdisable.svg" onmouseover="this.src='../../../../assets/learner/BarChart.svg'"onmouseout="this.src='../../../../assets/learner/BarChartdisable.svg'"/>
@@ -112,12 +112,12 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>Available courses</h3>
+              <h3 class="overviewHeadTitle">Available courses</h3>
               <span class="count">{{newRegisterLearses?.TotalCourse}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow">
-              <div style="width: 60px;margin-left: 6px;">
+              <div style="width: 60px;margin-left: -5px;">
                 <img  class="iconImg "  src="../../../../assets/learner/AvailableCourses.svg">
               </div>
             </div>
@@ -158,12 +158,12 @@
         <div class="smallbox">
           <div class="row">
             <div class="col-md-8 ">
-              <h3>Total enrollments</h3>
+              <h3 class="overviewHeadTitle">Total enrollments</h3>
               <span class="count">{{newRegisterLearses?.allEnrollement}}</span>
             </div>
     
             <div class="col-md-4 icon bg-brown">
-              <div style="width: 60px;margin-left: 6px;">
+              <div style="width: 60px;margin-left: -5px;">
                 <img  class="iconImg"  src="../../../../assets/learner/TotalEnrolments.svg">
               </div>
             </div>
@@ -854,11 +854,11 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Total categories</h3>
-              <span class="count">{{courseCount?.TotalCategoryCount}}</span>
+              <span class="Totalcount">{{courseCount?.TotalCategoryCount}}</span>
             </div>
     
             <div class="col-md-4  icon newLerner bg-course-icon">
-              <div style="width: 60px;margin-left: 9px;">
+              <div style="width: 60px;margin-left: -2px;">
                 <img  class="iconImg"  src="../../../../assets/learner/Categories.svg">
               </div>
             </div>
@@ -890,11 +890,11 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3 class="font-size">Available courses</h3>
-              <span class="count">{{courseCount?.TotalCourse}}</span>
+              <span class="Totalcount">{{courseCount?.TotalCourse}}</span>
             </div>
     
             <div class="col-md-4 icon bg-yellow bg-course-icon">
-              <div style="width: 60px;margin-left: 9px;">
+              <div style="width: 60px;margin-left: -2px;">
                 <img  class="iconImg nLSize nL2Size"  src="../../../../assets/learner/AvailableCourses.svg">
               </div>
             </div>
@@ -932,11 +932,11 @@
           <div class="row">
             <div class="col-md-9 ">
               <h3>Latest courses published</h3>
-              <span class="count">{{courseCount?.perMonth}}</span>
+              <span class="Totalcount">{{courseCount?.perMonth}}</span>
             </div>
     
             <div class="col-md-4 icon bg-green bg-course-icon">
-              <div style="width: 60px;margin-left: 9px;">
+              <div style="width: 60px;margin-left: -2px;">
                 <img alt=""  class="iconImg fontSize fontSize2"  src="../../../../assets/learner/CoursesPublished.svg">
               </div>
             </div>

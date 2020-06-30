@@ -377,8 +377,8 @@ export const viewcourse = gql`
   }`;
 
 export const view_wishlist = gql`
-  query view_wishlist($user_id: String){
-    view_wishlist(user_id: $user_id) {
+  query view_wishlist($user_id: String, $pagenumber: Int ){
+    view_wishlist(user_id: $user_id, pagenumber: $pagenumber) {
       success
       error_msg
       message{
@@ -395,6 +395,7 @@ export const view_wishlist = gql`
         price
         rating
         short_description
+        enrollment_status
         }
     }
   }`;
@@ -534,6 +535,7 @@ export const get_all_course_by_usergroup = gql`
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){
     success
     error_msg
+    total_count
     message{
     course_id
     course_description

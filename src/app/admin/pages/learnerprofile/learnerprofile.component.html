@@ -1,12 +1,16 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+<<<<<<< HEAD
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
+=======
+    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/enrollment']">Course enrolment</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
 
-<div class="container pb-5">
+<div class="container qualification pb-5">
   <h1 style="padding-left: 12px"> Learner management</h1>
   <div class="container margin20">
     <div class="row">
@@ -99,7 +103,7 @@
 
                     <div class="row" style="overflow-x:auto;">
                       <div class="col-md-12 col-sm-12 col-12">
-                        <table class="profileTable">
+                         <!-- <table class="profileTable">
                           <tr>
                             <th>Board</th>
                             <th>Discipline</th>
@@ -118,8 +122,88 @@
                             <td>{{qual?.year_of_passing}}</td>
                             <td>{{qual?.percentage}}</td>
                           </tr>
-                        </table>
-                        <br>
+                        </table> -->
+                        <!-- <br> -->
+                        <form [formGroup]="profileForm">
+                          <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
+                            <div class="row p-b-10px" [formGroupName]="in">
+                              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
+                                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level" formControlName="qualification"
+                                  name="qualification" (selectionChange)="changed($event.value,in)">
+                                  <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
+                                    (click)="checkSpec(qual,in,profileForm.qualification,lv)">
+                                    {{lv.level_name}}
+                                  </mat-option>
+                                </mat-select>
+                  
+                                &nbsp;&nbsp;&nbsp;
+                                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Board/University"
+                                  formControlName="board_university" name="board_university">
+                                  <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
+                                    {{board.Board_Name}}
+                                    {{univ.University_Name}}
+                                  </mat-option>
+                                </mat-select>
+                                <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                              </div>
+                  
+                              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
+                                <!-- <mat-form-field *ngIf=""> -->
+                                <ng-container
+                                  *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                                  <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Institute" formControlName="institute"
+                                    name="institute">
+                                    <mat-option [value]="item._id" *ngFor="let item of institutes">
+                                      {{item.institute_name}}
+                                    </mat-option>
+                                  </mat-select>
+                                </ng-container>
+                                <!------------------------Institute textbox for 10th and 12th--------------------->
+                                <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
+                                  *ngIf="(qual?.value?.qualification == '5e7dedc1dba4466d9704b3f2') || (qual?.value?.qualification == '5e7deddfdba4466d9704b44a')">
+                                  <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
+                       'inputs color_blue background_trans width_80'" formControlName="institute">
+                                </ng-container>
+                                <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Discipline" formControlName="discipline"
+                                  name="discipline">
+                                  <mat-option [value]="item._id" *ngFor="let item of disciplines">
+                                    {{item.discipline_name}}
+                                  </mat-option>
+                                </mat-select>
+                  
+                                <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                              </div>
+                              <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
+                              <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
+                                <ng-container
+                                  *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')">
+                                  <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Specification"
+                                    formControlName="specification" name="specification">
+                                    <mat-option [value]="item._id" *ngFor="let item of specValue">
+                                      {{item.specification_name}}
+                                    </mat-option>
+                                  </mat-select>
+                                </ng-container>
+                  
+                                <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                                <ng-container>
+                                  <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
+                      'inputs color_blue background_trans width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
+                                    (change)="yearOfpassing(in)">
+                                </ng-container>
+                              </div>
+                  
+                              <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
+                                <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
+                                <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label ' :
+                           'inputs  width_50'" placeholder="Percentage" formControlName="percentage" maxlength="5"
+                                  (blur)="formatPercentage(in)"
+                                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                              </div>
+                            </div>
+                          </div>
+                          </form>
                       </div>
                     </div>
                     <br>

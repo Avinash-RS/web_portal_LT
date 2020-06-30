@@ -51,6 +51,9 @@
   border: dashed 1px #979797;
   position: relative;
   margin: auto;
+  cursor: pointer !important; 
+  pointer-events: auto;
+
 
   input {
     opacity: 0;
@@ -123,6 +126,10 @@
   }
 }
 
+.inheritcursor {
+  cursor: inherit;
+}
+
 /* Shake animation */
 @keyframes shake {
   0% {
@@ -182,7 +189,7 @@
   height: 50px;
   width: 200px;
   color: white;
-  font: 17px/50px sans-serif, Helvetica;
+  font: 16px/50px sans-serif, Helvetica;
   text-decoration: none;
   text-align: center;
   align-items: center;

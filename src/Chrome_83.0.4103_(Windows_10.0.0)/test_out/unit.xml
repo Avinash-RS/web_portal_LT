@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-18T16:04:23" id="0" hostname="DESKTOP-729A26A" tests="0" errors="1" failures="0" time="0">
+<testsuite name="Chrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-19T09:20:34" id="0" hostname="edu24-lap" tests="6" errors="1" failures="0" time="2.786">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"/>
   </properties>
+  <testcase name="LoginComponent should create and identify components" time="0.74" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent form invalid when empty" time="0.518" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent should click remember me change value" time="0.38" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent username field validity" time="0.383" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent password field validity" time="0.323" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent submitting a form emits a user while remeber me is true" time="0.442" classname="Chrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
   <system-out>
     <![CDATA[Chrome 83.0.4103 (Windows 10.0.0) ERROR
   {
@@ -11,6 +17,12 @@
   }
 ,Chrome 83.0.4103 (Windows 10.0.0) ERROR
   Disconnected, because no message in 30000 ms.
+,Chrome 83.0.4103 (Windows 10.0.0) LOG: Object{data: Object{login: Object{success: ..., error_msg: ..., message: ..., __typename: ...}}}
+,Chrome 83.0.4103 (Windows 10.0.0) ERROR
+  {
+    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
+    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
+  }
 
 ]]>
   </system-out>

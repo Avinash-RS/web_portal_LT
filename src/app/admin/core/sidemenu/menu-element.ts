@@ -85,19 +85,30 @@
 
 
 export const menus = [
+<<<<<<< HEAD
     {
         name: 'Dashboard',
         icon: 'dashboard',
         link: 'dashboard',
         open: false,
         chip: false,
+        isChild : false,
+=======
+    // {
+    //     name: 'Dashboard',
+    //     icon: 'dashboard',
+    //     link: 'dashboard',
+    //     open: false,
+    //     chip: false,
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
-    },
+    // },
     {
         name: 'User Management',
         icon: 'widgets',
         link: false,
         open: false,
+        isChild : false,
         sub: [
             {
                 name: 'Users',
@@ -105,6 +116,7 @@ export const menus = [
                 icon: 'assignment_ind',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'User Groups',
@@ -112,6 +124,7 @@ export const menus = [
                 icon: 'list',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'Course Enrolment',
@@ -119,6 +132,7 @@ export const menus = [
                 link: 'enrollment',
                 open: false,
                 chip: false,
+                isChild : true
             },
             {
                 name: 'Reports',
@@ -126,6 +140,32 @@ export const menus = [
                 icon: 'notes',
                 chip: false,
                 open: true,
+                isChild : true
+            },
+        ]
+    },
+    {
+        name: 'Bulk Enrolment Management',
+        icon: 'work',
+        link: false,
+        open: false,
+        isChild : false,
+        sub: [
+            {
+                name: 'Bulk Enrolment',
+                icon: 'border_color',
+                link: 'bulkenrolment',
+                open: false,
+                chip: false,
+                isChild : true
+            },
+            {
+                name: 'Reports',
+                link: 'bulkenrolmentreports',
+                icon: 'notes',
+                chip: false,
+                open: true,
+                isChild : true
             },
         ]
     },
@@ -135,7 +175,7 @@ export const menus = [
         link: 'Wca',
         chip: false,
         open: true,
-
+        isChild : false
     },
 
     {
@@ -143,6 +183,7 @@ export const menus = [
         icon: 'business',
         link: false,
         open: false,
+        isChild : false,
         sub: [
             {
                 name: 'Categories',
@@ -150,6 +191,7 @@ export const menus = [
                 icon: 'view_quilt',
                 chip: false,
                 open: true,
+                isChild : true
             },
             {
                 name: 'Catalogues',
@@ -157,6 +199,7 @@ export const menus = [
                 icon: 'assignment',
                 chip: false,
                 open: true,
+                isChild : true
             }
         ]
     },
@@ -164,7 +207,11 @@ export const menus = [
         name: 'Audit Log',
         link: 'auditlog',
         icon: 'receipt',
+<<<<<<< HEAD
         chip: false,
+=======
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         open: true,
+        isChild : false
     },
 ];

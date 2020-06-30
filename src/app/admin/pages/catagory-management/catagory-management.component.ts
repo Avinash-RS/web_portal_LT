@@ -571,14 +571,19 @@ export class CatagoryManagementComponent implements OnInit {
     this.dialog.open(templateRef);
   }
 
-  closedialogbox() {
+  closedialogbox(close?) {
     this.dialog.closeAll();
     this.selectedArray = [];
-    this.applyAllCourses = false;
-    this.courses = this.courses.map(function (el) {
-      const o = Object.assign({}, el);
-      o.isChecked = false;
-      return o;
+    if (close === 'close') {
+      this.applyAllCourses = this.tempVar = false;
+    }
+    // this.courses = this.courses.map(function (el) {
+    //   const o = Object.assign({}, el);
+    //   o.isChecked = false;
+    //   return o;
+    // });
+    this.courses.forEach(element => {
+      element.isChecked = false;
     });
   }
 
@@ -591,7 +596,7 @@ export class CatagoryManagementComponent implements OnInit {
         this.selectCategoryForm?.value?.category !== '' &&
         this.selectCategoryForm?.value?.subCategory !== '' && this.selectCategoryForm?.value?.subSubCategory !== '' && 3;
     const arra = !this.tempVar && this.selectedArray.map((item: any) => item.course_id);
-    this.closedialogbox();
+    this.closedialogbox('dont-close');
     const course = {
       old_level: this.level,
       old_category_id: this.selectedCategory?.category_id,

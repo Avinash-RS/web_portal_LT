@@ -10,7 +10,11 @@
   <!-- <h1 style="padding-left:25px"> Audit log</h1>  -->
   <div class="row no_margin">
     <div class="col-lg-5 col-md-4 col-sm-12 col-12">
+<<<<<<< HEAD
       <h1 style="padding-left: 25px;">Audit log</h1>
+=======
+      <h1 style="padding-left: 10px;">Audit log</h1>
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     </div>
     <div class="col-lg-7 col-md-6 col-sm-12 col-12 float_right">
       <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event)"
@@ -81,7 +85,7 @@
         <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
           <mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ column.header }}</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ column.cell(row) }}
+          <mat-cell *matCellDef="let row">{{ column?.cell(row) }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
@@ -132,7 +136,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Created by : <label
-                  class="color_black capitalize f_wt_400">{{viewdetail?.created_by|| 'NA'}}</label></label>
+                  class="color_black capitalize f_wt_400">{{viewdetail?.admin_username|| 'NA'}}</label></label>
             </div>
           </div>
           <br>
@@ -143,7 +147,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-12">
               <label>Updated on : <label class="color_black capitalize f_wt_400">
-                  {{viewdetail?.updated_on  || 'NA'}}</label>
+                  {{viewdetail?.updated_on || 'NA'}}</label>
               </label>
             </div>
           </div>

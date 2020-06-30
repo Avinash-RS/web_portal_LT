@@ -50,6 +50,10 @@ export class CommonServicesService {
 
   isLoad = true;
 
+  //While closing video palyer, pause video in course preview page
+  pauseVideo$ = new Subject<any>();
+  pauseVideo = this.pauseVideo$.asObservable();
+
   logout(user_id, is_admin) {
     // this.Apollo.getClient().resetStore();
     return this.Apollo.query({
@@ -71,11 +75,12 @@ export class CommonServicesService {
     });
   }
 
-  viewWishlist(userid) {
+  viewWishlist(userid, pagenumber) {
     return this.Apollo.query({
       query: view_wishlist,
       variables: {
         user_id: userid,
+        pagenumber
       }
     });
   }

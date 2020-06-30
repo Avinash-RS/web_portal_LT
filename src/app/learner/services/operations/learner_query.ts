@@ -7,6 +7,7 @@ export const login = gql`
       error_msg
       message {
         _id
+        profile_img 
         email
         is_active
         username
@@ -15,7 +16,7 @@ export const login = gql`
         is_blocked
         profile_img
         is_profile_updated
-        group_id                  
+        group_id 
         message      
       }
     }
@@ -82,8 +83,8 @@ export const get_qualification_details = gql`
 `;
 
 export const get_board_university_details = gql`
-query get_board_university_details{
-  get_board_university_details{
+query get_board_university_details ($_id :String!) {
+  get_board_university_details (_id : $_id) {
         message
 success
 data{
@@ -115,10 +116,9 @@ data{
 
   }
 }`;
-
 export const get_discipline_details = gql`
-  query   get_discipline_details{
-    get_discipline_details{
+  query   get_discipline_details ($_id :String!) {
+    get_discipline_details(_id:$_id){
       message
       success
       data{
@@ -228,17 +228,36 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
 }`;
 
 export const getmoduleData = gql`
-query getmoduleData($courseid:String!){
-  getmoduleData(courseid:$courseid) {
+query getmoduleData($courseid:String!,$user_id:String){
+  getmoduleData(courseid:$courseid,user_id:$user_id) {
     success
     data {
+      playerstatusData{
+        success
+        playerstatus{
+          course_dtl{
+            module{
+              topic{
+                topic_name
+                status
+              }
+              module_name
+            }
+          }
+        }
+      }
       courseid
       _id
       url
+<<<<<<< HEAD
       coursetype
+=======
+      totalResourseCount
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
       coursename
       coursefile
       coursestatus
+      coursetime
       coursecreated_on
       coursetime
       coursedetails{
@@ -270,12 +289,40 @@ query getmoduleData($courseid:String!){
     }
   }
 }`;
+
 export const check_existing_user = gql`
   query check_existing_user($username: String){
     check_existing_user(username: $username) {
       message
       success
   }
+}`;
+
+export const playerModuleAndTopic = gql`
+  query playerModuleAndTopic($contentID: String , $user_id:String){
+    playerModuleAndTopic(contentID: $contentID , user_id:$user_id) {
+      message{
+        _id
+        url
+        course_id
+        childData
+        {
+          title
+        _id
+        status
+        topic_len
+        moduletime
+       children
+       { _id
+        title
+         link
+         status
+          isVisible
+           }
+            }
+             }
+              success
+               }
 }`;
 
 export const get_all_category = gql`
@@ -708,8 +755,8 @@ query getlearnerdashboarddetails($user_id: String){
 }`;
 
 export const getLearnerenrolledCourses = gql`
-query getLearnerenrolledCourses($user_id: String){
-  getLearnerenrolledCourses(user_id:$user_id){
+query getLearnerenrolledCourses($user_id: String, $user_obj_id: String){
+  getLearnerenrolledCourses(user_id:$user_id, user_obj_id:$user_obj_id){
     success
     message
     data{
@@ -727,14 +774,28 @@ query getLearnerenrolledCourses($user_id: String){
       }
       courseEnrolled{
         course_id
+        course_mode
+    course_start_datetime
+    course_end_datetime
         course_name
+        course_description
+        short_description
+        author_details{
+          author_name
+          description
+          image
+        }
         course_img_url
         rating
         price
         totalLearners
-        coursePlayerStatus{
+        course_duration
+        coursePlayerStatus
+        {
           status
-          }
+          course_percentage
+          feedback_status
+        }
       }
     }
   }
@@ -802,7 +863,7 @@ export const getPopularcourse = gql`
         }
       }
     }`;
-    export const getFeedbackQuestion = gql`
+export const getFeedbackQuestion = gql`
     query getFeedbackQuestion{
       getFeedbackQuestion{
         message
@@ -815,6 +876,10 @@ export const getPopularcourse = gql`
     }
       }
     }`;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 export const getCoursePlayerStatusForCourse = gql`
 query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
   getCoursePlayerStatusForCourse(user_id:$user_id,course_id:$course_id) {
@@ -829,4 +894,8 @@ query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
 }
   }
 }
+<<<<<<< HEAD
 `
+=======
+`;
+>>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
