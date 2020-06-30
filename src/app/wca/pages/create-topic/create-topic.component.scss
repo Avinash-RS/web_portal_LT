@@ -902,3 +902,8 @@ background-color: $color-blue!important;
 .initalAlign{
     text-align: initial;
 }
+
+::ng-deep .preview-dialog-overflow .mat-dialog-container {
+    overflow: hidden !important;
+    border: 20px solid #1F3777 !important;
+}

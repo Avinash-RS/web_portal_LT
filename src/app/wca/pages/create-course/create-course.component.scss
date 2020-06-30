@@ -108,7 +108,7 @@
     color: $color-blue;
 }
 .mat-card:not([class*="mat-elevation-z"]) {
-    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    box-shadow: 0 0 5px rgb(170, 170, 170) !important;
 }
 .coursebreadcrumb {
     padding-top: 0px;
@@ -334,7 +334,7 @@ h1 {
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {
-    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+    box-shadow: 0 0 5px rgb(170, 170, 170) !important;
 }
 
 .centered {
@@ -643,6 +643,10 @@ input[type="text"] {
 
 .collapaseIcon {
     display: none;
+}
+
+.wrap-course-body {
+    padding: 2% 3% 5% 3% !important;
 }
 
 @media (max-width: 480px) {
