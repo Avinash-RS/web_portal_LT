@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReportManagementComponent } from './report-management.component';
+import { MatCardModule, MatIconModule, MatDialogModule } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 describe('ReportManagementComponent', () => {
   let component: ReportManagementComponent;
@@ -8,7 +11,16 @@ describe('ReportManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportManagementComponent ]
+      imports:[
+        MatIconModule,
+        MatCardModule,
+        RouterModule.forRoot([]),
+        MatDialogModule,],
+      declarations: [ ReportManagementComponent ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+      ],
     })
     .compileComponents();
   }));

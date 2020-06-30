@@ -8,6 +8,9 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
   styleUrls: ['./wishlist-courses.component.scss']
 })
 export class WishlistCoursesComponent implements OnInit {
+  onResize(event: { target: { innerWidth: number; }; }) {
+    throw new Error('Method not implemented.');
+  }
   wishlist: any = [];
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;

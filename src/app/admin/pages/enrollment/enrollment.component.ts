@@ -35,7 +35,7 @@ export class EnrollmentComponent implements OnInit {
   loading = false;
   enrollmentrecords: any;
   groupenrollmentrecords: any;
-  constructor(private router: Router, private dialog: MatDialog, private adminservice: AdminServicesService) {
+  constructor(private router: Router, public dialog: MatDialog, private adminservice: AdminServicesService) {
   }
 
   ngOnInit() {
