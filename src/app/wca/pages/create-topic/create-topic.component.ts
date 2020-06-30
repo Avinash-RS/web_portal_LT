@@ -116,13 +116,13 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     nav: true
   };
 
-  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
-    if (this.isReload) {
-      event.returnValue = false;
-    } else {
-      this.isReload = true;
-    }
-  }
+  // @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+  //   if (this.isReload) {
+  //     event.returnValue = false;
+  //   } else {
+  //     this.isReload = true;
+  //   }
+  // }
 
   courseform(): FormGroup {
     return this.formBuilder.group({
@@ -686,7 +686,6 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     let invalid = document.getElementsByClassName('ng-invalid')
     if(invalid){
        Array.from(invalid).forEach((data)=>{
-        console.log(data.classList)
         var classList = data.classList
         if(classList.contains("timeInput")){  
           this.toast.warning('Time required');
@@ -768,6 +767,18 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(res1 => {
 
+        if(res1){
+          res1.forEach(element => {
+            if(element.file){
+              element.isEdit = "true";
+              element.htmlContent = "<div style='height: 1000px;width:100%;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"              
+            }
+            else{
+              element.isEdit = "false";
+              element.htmlContent = ""
+            }
+          });
+        }
         images.value.topicimages = res1;
 
       })
@@ -900,6 +911,16 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     }
     return true;
   }
+  removeChar(evt) {
+    const code = (evt.which) ? evt.which : evt.keyCode;
+    if(code == 40 || code == 41 || code == 95 || code == 45 || code == 43 || code == 35 || code == 64 ){
+      return true;
+    }
+    if (!(code == 32) && !(code > 47 && code < 58) && !(code > 64 && code < 91) && !(code > 96 && code < 123)) { 
+      evt.preventDefault();
+  }
+  }
+
 
   getBlobVttFiles(fileInput, item, formdata, index,value, subTitleindex ) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
@@ -911,7 +932,6 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
       if(res){
         this.onSelectFile(fileInput, item, formdata, index, res,subTitleindex)
       }

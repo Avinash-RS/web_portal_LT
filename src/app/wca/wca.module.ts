@@ -35,10 +35,13 @@ import { ModuleRepositoryComponent } from './pages/module-repository/module-repo
 import { ViewCoursesComponent } from './pages/view-courses/view-courses.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BlobReaderComponent } from './pages/blob-reader/blob-reader.component';
+import {DialogComponent} from './pages/dialog/dialog.component'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { FroalaEditorModule } from 'angular-froala-wysiwyg/editor/editor.module.js';
+import 'froala-editor/js/plugins.pkgd.min.js';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, },
@@ -77,6 +80,7 @@ const routes: Routes = [
     ModuleRepositoryComponent,
     ViewCoursesComponent,
     BlobReaderComponent,
+    DialogComponent,
     VideoPreviewModalComponent],
   imports: [
     CoreModule,
@@ -103,10 +107,11 @@ const routes: Routes = [
     MatSlideToggleModule,
     PerfectScrollbarModule,
     CKEditorModule,
-    AngularEditorModule
+    AngularEditorModule,
+    FroalaEditorModule.forRoot()
   ],
   providers: [Apollo],
-  entryComponents: [ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent],
+  entryComponents: [ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent,DialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class WcaModule { }

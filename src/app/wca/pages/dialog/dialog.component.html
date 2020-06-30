@@ -1,4 +1,4 @@
-<div>
+<div id="previewDialog" style="height: 100%;">
     <ng-container *ngIf="dialogdata?.type === 'CreateTemplate'">
         <form [formGroup]="templateForm" (ngSubmit)="templateName()">
 
@@ -22,29 +22,12 @@
 
     </ng-container>
 
-
-    <ng-container *ngIf="dialogdata?.type === 'previewImages'">
-        <!-- <div>
-            <div class="dialogClose">
-                <span (click)="dialogClose()"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
-            </div>
-
-            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="dialogdata.images"
-                [cdkDropListConnectedTo]="[todoList]" cdkDropListOrientation="horizontal"
-                (cdkDropListDropped)="drop($event)">
-
-                <div class="prew1 ">
-                    <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
-                        <img height="100%" width="100%" [src]="i">
-                    </mat-card>
-                </div>
-            </div>
-        </div> -->
-    
+    <ng-container *ngIf="dialogdata?.type === 'previewImages' && !openEdior">
         <div class="dialogClose">
-            <span (click)="dialogClose()"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
+            <span (click)="dialogClose()" class="close-icon"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
         </div>
         <div
+        class="drop-container-overflow"
         cdkDropList
         #doneList="cdkDropList"
         [cdkDropListData]="dialogdata.images"
@@ -52,12 +35,43 @@
         cdkDropListOrientation="horizontal"
         (cdkDropListDropped)="drop($event)">
 
-        <div class="prew1 ">
+        <div class="prew3">
             <mat-card class="prew2 " *ngFor="let i of dialogdata.images" cdkDrag>
              <img height="100%" width="100%" [src]="i?.image">
         </mat-card>
     </div>
+    <div class="edit-container">
+        <button class="backgroundcol1" (click)="openEditorView()" type="button">Edit</button>
+    </div>
        </div>
-    
+    </ng-container>
+
+    <ng-container *ngIf="openEdior">
+        <div class="dialogClose">
+            <span (click)="dialogClose()" class="close-icon"> <img class="dialogClose2" src="assets\images\dialog close.svg"> </span>
+        </div>
+        <div class="row" style="height: 100%;">
+            <div class="col-md-3" style="height: 100%;" >
+                <div class="left-scroll-element">  
+                    <div class="prew1"   [cdkDropListData]="dialogdata.images">
+                        <div *ngFor="let i of dialogdata.images;let j = index">
+                            <div class="active-slide"
+                                [class.active]="i?.image === currentSlide?.image">
+                            <mat-card (click)="activeSlide(i)" class="prew2">
+                                <img height="100%" width="100%" [src]="i?.image">
+                           </mat-card>
+                            </div>
+                        </div>
+                    </div>          
+                </div>  
+            </div>
+            <div class="col-md-9" style="height: 97%;">
+                <div class="editable-content">
+                    <div id="froalaeditor"  [froalaEditor]="froalaOptions" [(froalaModel)]="editableImage.file">                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
     </ng-container>
 </div>

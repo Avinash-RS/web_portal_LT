@@ -52,7 +52,7 @@
                 <div class="col-md-8 moduleInput">
                     <label *ngIf="queryData?.template_details" class="firstSpan"> Enter Module Name<span>:</span></label>
                 <div *ngIf="queryData?.template_details">
-                    <input class="Bcg" type="text" #modName placeholder="Enter the Name" formControlName="modulename"
+                    <input class="Bcg" type="text" #modName (keypress)="removeChar($event)" placeholder="Enter the Name" formControlName="modulename"
                         required />
                 </div>
                 <div class="validmodule"> <small
@@ -85,7 +85,7 @@
                                                                 <mat-form-field class="matWidth" appearance="outline">
                                                                     <input matInput style="color:black;height: 21px;"
                                                                         formControlName="topicname"
-                                                                        placeholder="Topic Name">
+                                                                        placeholder="Topic Name" (keypress)="removeChar($event)">
                                                                     <mat-error
                                                                         *ngIf="(!j?.value?.topicname) && submitted">
                                                                         Topic Name Required !!! </mat-error>

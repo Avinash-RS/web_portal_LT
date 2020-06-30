@@ -16,7 +16,7 @@ import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
-import { DialogComponent } from './wca/pages/dialog/dialog.component';
+// import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MAT_TABS_CONFIG } from '@angular/material';
 import { Ppt2Component } from './ppt2/ppt2.component';
@@ -39,7 +39,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    DialogComponent,
+    // DialogComponent,
     Ppt2Component,
     Ppt1Component,
   ],
@@ -78,6 +78,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  entryComponents: [AlertComponentComponent, DialogComponent]
+  entryComponents: [AlertComponentComponent]
 })
 export class AppModule { }

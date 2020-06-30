@@ -173,7 +173,7 @@ export class CreateCourseComponent implements OnInit {
                     return this.createItem1();
                 }) : [this.createItem1()]),
             takeway_details: this.formBuilder.array([this.createItem2()]),
-            certificate_name: [null, Validators.compose([])],
+            certificate_name: [false],
             course_mode: [true],
             course_language: [null],
             feed_back: [false],
@@ -340,6 +340,11 @@ export class CreateCourseComponent implements OnInit {
         }
 
         if (!this.courseForm.value.course_img_url) {
+            this.toast.warning('Mandatory fields should not be blank');
+            return false;
+        }
+
+        if (!this.courseForm.value.course_description) {
             this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
@@ -542,7 +547,6 @@ export class CreateCourseComponent implements OnInit {
     }
 
     checkCourseName() {
-        debugger;
         const courseName = this.courseForm.controls.course_name.value;
         if (this.isEditable) {
             if (courseName === this.courseEditDetails.course_name) {
