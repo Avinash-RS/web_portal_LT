@@ -691,7 +691,6 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
         }
       })
     }
-    return false;
     if (this.courseForm.valid) {
       const userDetails = JSON.parse(localStorage.getItem('adminDetails'));
       this.courseForm.value.createdby_name = userDetails.username ? userDetails.username : '';
@@ -771,7 +770,8 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
           res1.forEach(element => {
             if(element.file){
               element.isEdit = true;
-              element.htmlContent = "<div style='height: 958px;width:1004px;margin:10px;border:1px;padding:20px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
+              element.htmlContent = "<div style='height: 958px;width:100%;margin:10px;border:1px;padding:20px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
+              console.log(element.htmlContent)
             }
             else{
               element.isEdit = false;
