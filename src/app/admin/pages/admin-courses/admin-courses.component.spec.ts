@@ -120,6 +120,26 @@ describe('AdminCoursesComponent', () => {
     expect(component.breakpoint).toBe(4);
   });
 
+  it('Check for resize width below 600 on loading', () => {
+    const windows = {
+      innerWidth: 550
+    };
+    component.ngOnInit();
+    expect(component.ngOnInit()).toContain(windows.innerWidth);
+    expect(component.breakpoint).toBe(1);
+  });
+
+
+  it('Check for the windows inner width between 600 and 768', () => {
+    const windows = {
+      innerWidth: 650
+    };
+    component.ngOnInit();
+    expect(component.ngOnInit()).toContain(windows.innerWidth);
+    expect(component.breakpoint).toBe(2);
+
+  })
+
   it('Check get published courses', () => {
     // let service: AdminMockService;
 
@@ -185,4 +205,8 @@ describe('AdminCoursesComponent', () => {
 
 
   });
+
+
+ 
+
 });

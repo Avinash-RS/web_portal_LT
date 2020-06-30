@@ -32,6 +32,8 @@ export class ReportsComponent implements OnInit {
   displayedColumns: string[] = ['slNo', 'report_id', 'total_count', 'success_count', 'updated_count', 'failure_count',
     'duplicate_count', 'existing_count', 'time_ago', 'link'];
   dataSource = new MatTableDataSource<Report>(this.reportDetails);
+  
+  window: any;
 
   constructor(private service: AdminServicesService, private gs: GlobalServiceService, ) { }
 

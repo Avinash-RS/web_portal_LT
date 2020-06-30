@@ -1,0 +1,78 @@
+{
+    "data":{
+        "get_course_published":{
+            "course_count": 339,
+            "message":[
+                {
+                   " admin_id": "1234ab",
+                    "advertised_start": "",
+                    "announcement": "",
+                    "article_count": null,
+                    "author_details": [{"author_name": "", "description": "", "image": "", "__typename": "authorinfo"}],
+                    "catalog_visibility": null,
+                    "category_id": ["xuqirygit"],
+                    "certificate_available_date": "",
+                    "certificate_display_behaviour": "",
+                    "certificate_html_view_enabled": null,
+                    "certificate_name": null,
+                    "certificates_show_before_end": "",
+                    "course_category": "",
+                    "course_content_details": [],
+                    "course_description": "This is short",
+                    "course_end_datetime": null,
+                    "course_id": "bh6twxxf",
+                    "course_img_url": "https://edutechstorage.blob.core.windows.net/container1/images/10426884053257424-Desert.jpg",
+                    "course_language": null,
+                    "course_level": "",
+                    "course_mode": "self-placed",
+                    "course_name": "OOPS",
+                    "course_start_datetime": null,
+                    "course_type": "",
+                    "course_video_url": "",
+                    "coursepartner_details": [{"name": "", "image": "", "__typename": "CoursepartnerDtl"}],
+                    "created_at": "2020-06-10T05:38:25.303Z",
+                    "created_by": "lxpadmin",
+                    "downloadable_resource_count": null,
+                    "enrollment_end": null,
+                    "enrollment_start": null,
+                    "groupid": null,
+                    "has_any_active_web_certificate": null,
+                    "invitation_only": null,
+                    "is_active": 1,
+                    "is_published": true,
+                    "learner_count": null,
+                    "location": "",
+                    "lowest_passing_grade": "",
+                    "marketing_url": "",
+                    "max_student_enrollments_allowed": null,
+                    "mobile_available": "",
+                    "parent_sub_category_id": [],
+                    "pre_requisite": [],
+                    "preview_video": null,
+                    "price": "",
+                    "published_by": "admin",
+                    "published_on": "2020-06-12T09:55:03.463Z",
+                    "publisher_id": "",
+                    "rating": "",
+                    "self_paced": null,
+                    "short_description": "",
+                    "social_sharing_url": "",
+                    "step_towards": "",
+                    "takeway_details": [{
+                    
+                   
+                    "text": "",
+                    "what_will_you_learn": "",
+                    "__typename": "TakewayDtl",
+                    "updated_at": "2020-06-12T09:55:13.886Z",
+                    "updated_by": "",
+                    "updated_by_id": "",
+                    "version": "1",
+                    "visible_to_staff_only": null,
+                    "what_will_you_learn": null,
+                    "__typename": "course_dlt"}]
+                }
+            ]
+        }
+    }
+}

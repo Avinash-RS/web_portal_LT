@@ -14,6 +14,9 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./create-template.component.scss']
 })
 export class CreateTemplateComponent implements OnInit {
+  removenewLink(arg0: number) {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(
     public wcaService: WcaService,

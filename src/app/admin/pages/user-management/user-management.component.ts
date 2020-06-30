@@ -37,7 +37,7 @@ export class UserManagementComponent implements OnInit {
 
   constructor(private router: Router, private gs: GlobalServiceService,
               private alert: AlertServiceService, private service: AdminServicesService, public toast: ToastrService,
-              private dialog: MatDialog,
+              public dialog: MatDialog,
   ) {
     localStorage.setItem('role', 'admin');
     this.getAllUser(0);

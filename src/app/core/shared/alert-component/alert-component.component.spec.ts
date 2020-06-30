@@ -8,6 +8,10 @@ describe('AlertComponentComponent', () => {
   let component: AlertComponentComponent;
   let fixture: ComponentFixture<AlertComponentComponent>;
 
+  const dialogMock = {
+    close: () => { }
+    };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -19,7 +23,7 @@ describe('AlertComponentComponent', () => {
       provide: MatDialogRef,
       useValue: {}
     },
-    { provide: MatDialogRef, useValue: {} },
+    { provide: MatDialogRef, useValue:  dialogMock },
     { provide: MatDialogTitle , useValue: [] },
     { provide: MAT_DIALOG_DATA, useValue: {} },
 
@@ -40,5 +44,11 @@ describe('AlertComponentComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('close()', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.close();
+    expect(spy).toHaveBeenCalled();    
   });
 });
