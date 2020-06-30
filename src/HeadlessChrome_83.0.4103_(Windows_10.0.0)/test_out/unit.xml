@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 83.0.4103 (Windows 10.0.0)" package="" timestamp="2020-06-30T07:15:50" id="0" hostname="edu1-lap" tests="6" errors="1" failures="0" time="1.616">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/83.0.4103.116 Safari/537.36"/>
+  </properties>
+  <testcase name="LoginComponent should create and identify components" time="0.507" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent form invalid when empty" time="0.246" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent should click remember me change value" time="0.219" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent username field validity" time="0.215" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent password field validity" time="0.224" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <testcase name="LoginComponent submitting a form emits a user while remeber me is true" time="0.205" classname="HeadlessChrome_83_0_4103_(Windows_10_0_0).LoginComponent"/>
+  <system-out>
+    <![CDATA[HeadlessChrome 83.0.4103 (Windows 10.0.0) LOG: Object{data: Object{login: Object{success: ..., error_msg: ..., message: ..., __typename: ...}}}
+,HeadlessChrome 83.0.4103 (Windows 10.0.0) ERROR
+  {
+    "message": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown",
+    "str": "An error was thrown in afterAll\nUncaught Error: Client has not been defined yet thrown"
+  }
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
