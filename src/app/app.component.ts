@@ -5,14 +5,11 @@ import { GlobalServiceService } from '././core/services/handlers/global-service.
 import { WcaService } from '../app/wca/services/wca.service';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
-<<<<<<< HEAD
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
 
-=======
 import { ConnectionService } from 'ng-connection-service';
 import { ToastrService } from 'ngx-toastr';
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
 @Component({
   selector: 'app-root',
@@ -22,26 +19,20 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent {
   ipAddress = '';
   title = 'Lxpfrontend';
-<<<<<<< HEAD
   isLoader = false;
   loaderSubscription: Subscription;
-=======
   status = 'ONLINE'; //initializing as online by default
   isConnected = true;
-  isLoader: any;
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
+  // isLoader: any;
   constructor(private router: Router,
     private gs: GlobalServiceService,
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private APIService: WcaService,
     private titleService: Title,
-<<<<<<< HEAD
-    private commonService: CommonServicesService
-=======
+    private commonService: CommonServicesService,
     private connectionService:ConnectionService,
     private toast:ToastrService,
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
   ) {
 

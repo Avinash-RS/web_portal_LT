@@ -85,22 +85,12 @@
 
 
 export const menus = [
-<<<<<<< HEAD
-    {
-        name: 'Dashboard',
-        icon: 'dashboard',
-        link: 'dashboard',
-        open: false,
-        chip: false,
-        isChild : false,
-=======
     // {
     //     name: 'Dashboard',
     //     icon: 'dashboard',
     //     link: 'dashboard',
     //     open: false,
     //     chip: false,
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
     // },
     {
@@ -207,10 +197,7 @@ export const menus = [
         name: 'Audit Log',
         link: 'auditlog',
         icon: 'receipt',
-<<<<<<< HEAD
         chip: false,
-=======
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         open: true,
         isChild : false
     },
