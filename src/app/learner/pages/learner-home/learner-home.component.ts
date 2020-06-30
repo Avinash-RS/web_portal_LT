@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Component, OnInit,TemplateRef } from '@angular/core';
+import { LearnerServicesService } from '@learner/services/learner-services.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -18,16 +18,16 @@ export class LearnerHomeComponent implements OnInit {
   courseCount: number;
   userDetailes: any;
   pagenumber = 0;
-  sort_type: any = 'A-Z';
+  sort_type: any = "A-Z";
   allcourses: any;
   enrolledCourses: any;
-  wishList: any = [];
-  yetToStart: any;
-  incomplete: any;
+  wishList:any = [];
+  yetToStart:any;
+  incomplete:any;
   popularsCourse: any;
   loadingCatalogue = false;
-  showAppliedFiltre: Boolean = true;
-  showCategory: Boolean = true;
+  showAppliedFiltre : Boolean =true;
+  showCategory : Boolean = true;
   element: any;
   Lvl1CatId: any = [];
   Lvl2CatId: any = [];
@@ -42,9 +42,9 @@ export class LearnerHomeComponent implements OnInit {
 
 
   constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
-              private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
-              private globalservice: GlobalServiceService, public commonServices: CommonServicesService,
-              private dialog: MatDialog) {
+    private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
+    private globalservice: GlobalServiceService,public commonServices: CommonServicesService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -55,11 +55,12 @@ export class LearnerHomeComponent implements OnInit {
     this.commonServices.globalSearch.subscribe((data: any) => {
       if (data.length > 0) {
         this.allcourses = data;
-      } else {
+      }
+      else {
         Swal.fire('No courses found');
         this.getallcourses();
-      }
-    });
+      } 
+    })
     this.commonServices.globalAllCategory.subscribe((data: any) => {
       this.allcourses = data;
     });
@@ -69,13 +70,13 @@ export class LearnerHomeComponent implements OnInit {
     this.commonServices.appliedCategory.subscribe((data: any) => {
       this.Lvl1CatId = data.Lvl1CatId;
       this.level1selectedID = data.level1selectedID,
-      this.Lvl2CatId = data.Lvl2CatId,
+      this.Lvl2CatId= data.Lvl2CatId,
       this.level2selectedID = data.level2selectedID,
-      this.Lvl3CatId = data.Lvl3CatId,
+      this.Lvl3CatId= data.Lvl3CatId,
       this.level3selectedID = data.level3selectedID,
-      this.allLvlCategoryFilterVal = data.allLvlCategoryFilterVal,
-      this.allLvlCategory = data.allLvlCategory;
-  });
+      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
+      this.allLvlCategory=data.allLvlCategory
+  })
   }
   onpagination(event) {
     this.paginationpgno = event;
@@ -87,18 +88,17 @@ export class LearnerHomeComponent implements OnInit {
   }
   getallcourses() {
     this.loadingCatalogue = true;
-    if (this.userDetailes.group_id) {
+    if (this.userDetailes.group_id)
       this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         this.total_count = result.data.get_all_course_by_usergroup.total_count;
         this.loadingCatalogue = false;
       });
-    }
   }
   // function to fetch all the enrolled courses of the user
   getEnrolledCourses() {
     this.loadingCatalogue = true;
-    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         this.loadingCatalogue = false;
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
@@ -108,7 +108,7 @@ export class LearnerHomeComponent implements OnInit {
     });
   }
   // function to fetch the wishlist of the user
-
+ 
   viewWishlist() {
     const userdetail = this.gs.checkLogout();
     this.commonServices.viewWishlist(userdetail._id, 0).subscribe((viewWishlist: any) => {
@@ -119,7 +119,7 @@ export class LearnerHomeComponent implements OnInit {
   }
 
   // getting popular course
-  getAllPopularcourse() {
+  getAllPopularcourse(){
     this.loadingCatalogue = true;
     this.learnerService.getPopularcourse().subscribe((popularCourse: any) => {
       if (popularCourse.data.getPopularcourse && popularCourse.data.getPopularcourse.success) {
@@ -129,26 +129,26 @@ export class LearnerHomeComponent implements OnInit {
     });
   }
 
-  onChange(value) {
-    if (value === 'popularCourse') {
+  onChange(value){
+    if(value == 'popularCourse'){
       this.getAllPopularcourse();
-    } else {
+    }else{
       this.getallcourses();
     }
   }
   viewCategory(module) {
-    const obj = {
+    let obj = {
       Lvl1CatId : this.Lvl1CatId,
       level1selectedID : this.level1selectedID,
       Lvl2CatId: this.Lvl2CatId,
       level2selectedID : this.level2selectedID,
       Lvl3CatId: this.Lvl3CatId,
       level3selectedID : this.level3selectedID,
-      allLvlCategoryFilterVal: this.allLvlCategoryFilterVal,
-      allLvlCategory: this.allLvlCategory
-    };
+      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
+      allLvlCategory:this.allLvlCategory
+    }
     const dg = this.dialog.open(CategoryComponentComponent, {
-      width: '95%',
+      width: '95%',  
       data : obj,
     });
 

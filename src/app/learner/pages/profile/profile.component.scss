@@ -476,11 +476,7 @@ div.account {
 }
 
 .p-b-10px {
-<<<<<<< HEAD
   padding-bottom: 15px;
-=======
-  padding-bottom: 15px !important;
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 
 .head {
@@ -581,7 +577,7 @@ div.account {
 }
 
 .submit {
-  width: 25%;
+  width: 20%;
   background-color: $color-blue;
   margin: auto;
   height: 45px;
@@ -836,22 +832,11 @@ hr {
 }
 
 
-<<<<<<< HEAD
 :host ::ng-deep.footericon{
   width: 9%;
   position: absolute;
   margin-left: 5px;
 
-=======
-// :host ::ng-deep.footericon{
-//   width: 9%;
-//   position: absolute;
-//   margin-left: 5px;
-// }
-
-.downloadIcon {
-  padding-bottom: 1px;
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 }
 // html {
 //   overflow: scroll;
@@ -861,29 +846,4 @@ hr {
 // ::-webkit-scrollbar {
 //   width: 0px;
 //   background: transparent !important;
-<<<<<<< HEAD
 // }
-=======
-// }
-
-.qual, .details-row {
-  
-@media (min-width: 300px) {
-
-  .col-md-12,
-  .col-md-11,
-  .col-md-10,
-  .col-md-9,
-  .col-md-8,
-  .col-md-7,
-  .col-md-6,
-  .col-md-5,
-  .col-md-4,
-  .col-md-3,
-  .col-md-2,
-  .col-md-1 {
-    padding: 0px !important;
-  }
-}
-}
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7

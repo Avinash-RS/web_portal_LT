@@ -1,20 +1,14 @@
 <app-header></app-header>
-<!-- <nav aria-label="breadcrumb" class="coursebreadcrumb">
-  <ol class="breadcrumb contentTop1"> -->
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+<nav aria-label="breadcrumb" class="coursebreadcrumb">
+  <ol class="breadcrumb contentTop1">
     <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
-    <!-- <li class="breadcrumb-item">Home</li>NewHomeComponent -->
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
 </nav>
 
 <div class="profile">
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   <div class="bg-img">
     <span (click)="cannotEdit = !cannotEdit;" class="editText">
       <mat-icon matTooltip="Click here to change profile details" class="editIcon">create
@@ -57,22 +51,7 @@
           </div>
         </div>
 
-<<<<<<< HEAD
 
-=======
-        <div class="row m-t-25px  m-b-10">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
-            <span class="f_size_13 f_wt_500">Download brochure</span>
-          </div>
-          <div class="col-md-2 col-sm-2 col-2 ">
-            <a target="_top" class="f_size_17 bb downloadIcon" matTooltip="Click here to download brochure"
-              (click)="download()" download="LnT%20Kaushalya%202020_Brochure.pdf"><i class="fa fa-cloud-download size"
-                aria-hidden="true"></i> </a>
-            <!-- <mat-icon class="f_size_17 bb" style="width: 17px;" matTooltip="Download brochure">
-              create</mat-icon> -->
-          </div>
-        </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
       </div>
 
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
@@ -105,32 +84,20 @@
             <span class="f_size_16">| &nbsp;&nbsp;
               {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
               userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
-<<<<<<< HEAD
             userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
-=======
-            userData.user_profile[0].gender =='O' ? 'Rather not say' : 'Gender') : 'Gender' }}
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
               &nbsp;&nbsp;
             </span>
 
             <span class="f_size_16">
-<<<<<<< HEAD
               | &nbsp;&nbsp;
               <!-- Student -->
               {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
               userData.user_profile[0]?.is_student_or_professional =='student' ? 
             'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
-=======
-              | &nbsp;&nbsp;Student
-              <!-- {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
-              userData.user_profile[0]?.is_student_or_professional =='student' ? 
-            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}} -->
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
             </span>
 
           </div>
 
-<<<<<<< HEAD
           <div class="width_100 bb center center_align p-b-10"
             *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
             <!-- <div class="width_100 bb center center_align p-b-10"> -->
@@ -140,17 +107,6 @@
             <!-- <span class="f_size_15 color_label f_wt_500">
               English
             </span> -->
-=======
-          <!-- <div class="width_100 bb center center_align p-b-10"
-            *ngIf="userData?.language_detail && userData?.language_detail.length > 0"> -->
-          <div class="width_100 bb center center_align p-b-10">
-            <!-- <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
-              {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
-            </span> -->
-            <span class="f_size_15 color_label f_wt_500">
-              English
-            </span>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
           </div>
 
           <!-- <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
@@ -179,7 +135,6 @@
   </div>
 
 
-<<<<<<< HEAD
 
 
 
@@ -202,12 +157,6 @@
 
 
       <form [formGroup]="profileForm">
-=======
-  <div class="container-reg200 fourth">
-    <div class="profile-details">
-      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         <!-- ////// Info about you//////// -->
         <!-- <div class="row">
           <div class="form-group width_100">
@@ -224,19 +173,11 @@
             </div>
           </div>
         </div> -->
-<<<<<<< HEAD
         <!-- Info End-->
 
         <!-- <br>
         <hr class="p-b-10px">
         <br *ngIf="!cannotEdit"> -->
-=======
-
-
-        <!-- <br> -->
-        <!-- <hr class="p-b-10px"> -->
-        <br *ngIf="!cannotEdit"><br><br>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
         <!-- //////Gender part//////// -->
         <div class="row" *ngIf="!cannotEdit">
@@ -249,7 +190,6 @@
                 <mat-radio-button value="F">Female</mat-radio-button>
                 <mat-radio-button value="O">Rather not say</mat-radio-button>
               </mat-radio-group>
-<<<<<<< HEAD
             </div>
           </div>
 
@@ -291,48 +231,10 @@
           </div>
         </div>
 
-=======
-            </div>
-          </div>
-
-          <!-- <div class="col-md-4 col-lg-4 col-sm-12 col-12">
-            <label class="p-b-10px f_size_19">I Am a</label>
-            <span class="mand p-b-10px"> *</span>
-            <div class="form-group ">
-              <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
-                name="is_student_or_professional">
-                <mat-radio-button value="student">Student</mat-radio-button>
-                <mat-radio-button value="professional">Professional</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </div> -->
-
-          <!-- <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
-            <div class="form-group p-b-10px">
-              <label class="f_size_19">Languages known</label><br>
-              <mat-select [disabled]='cannotEdit' multiple
-                [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
-                placeholder="Language" formControlName="languages_known" name="language">
-                <mat-option *ngFor="let item of languageList | sort: false : 'languagename'" [value]="item._id">
-                  {{item.languagename}}
-                </mat-option>
-              </mat-select>
-              <ng-container *ngIf="lang">
-                  <input type="text" class="inputs col-md-6 col-sm-12 col-12"
-                 [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
-                'inputs  color_blue  width_80'"
-                 formControlName="languages_known">
-                </ng-container>
-            </div>
-          </div> -->
-        </div>
-
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
         <br *ngIf="!cannotEdit">
         <hr *ngIf="!cannotEdit" class="p-b-10px">
         <br *ngIf="!cannotEdit">
 
-<<<<<<< HEAD
 
 
 
@@ -355,49 +257,10 @@
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Board/University"
                 formControlName="board_university" name="board_university">
                 <mat-option [value]="board._id" *ngFor="let board of boardValue[in], let univ of uniValue[in]">
-=======
-        <!-- //////Location//////// -->
-        <!-- <label class="p-b-10px" *ngIf="!cannotEdit" class="f_size_19">Location</label> -->
-
-        <!-- ////////////Qualification row////////////// -->
-        <label class="f_size_19 p-b-10px">Qualification</label><span class="mand"> *</span><br>
-        <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index" class="qual">
-          <div class="row p-b-10px" [formGroupName]="in">
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Level"
-                formControlName="qualification" name="qualification" (selectionChange)="changed($event.value,in)">
-                <mat-option [value]="lv._id" *ngFor="let lv of levelValue" [disabled]="lv.allowed=='N'"
-                  (click)="checkSpec(qual,in,profileForm.qualification,lv);checkinstitute(lv);">
-                  <!-- (onSelectionChange)="selectedinstitute = false" -->
-                  {{lv.level_name}}
-                </mat-option>
-              </mat-select>&nbsp;&nbsp;&nbsp;
-              <!-- <mat-select [disabled]='cannotEdit' *ngIf="cannotEdit || qual?.value?.qualification == ''"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '5e7dee15dba4466d9704b4d2') ? 'n dis inputs' : 'inputs'"
-                placeholder="Board/University" formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
-                  {{board.Board_Name}}
-                  {{univ.University_Name}}
-                </mat-option>
-              </mat-select> -->
-              <mat-select [disabled]='cannotEdit' *ngIf="qual.insCheck == '10'"
-                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
-                placeholder="Board/University" formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
                   {{board.Board_Name}}
                   {{univ.University_Name}}
                 </mat-option>
               </mat-select>
-              <mat-select [disabled]='cannotEdit' *ngIf="(qual.insCheck === '12')"
-                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
-                placeholder="Board/University" formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
-                  {{board.Board_Name}}
-                  {{univ.University_Name}}
-                </mat-option>
-              </mat-select>
-<<<<<<< HEAD
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
             </div>
            
@@ -492,242 +355,6 @@
               </mat-select>
             </div>
           </div>
-=======
-              <mat-select [disabled]='cannotEdit' *ngIf="(qual.insCheck === 'diploma')"
-                [ngClass]="cannotEdit || (qual.insCheck === 'diploma') ? 'n dis inputs' : 'inputs'"
-                placeholder="Board/University" formControlName="board_university" name="board_university">
-                <mat-option [value]="board._id" *ngFor="let board of boardValue, let univ of uniValue">
-                  {{board.Board_Name}}
-                  {{univ.University_Name}}
-                </mat-option>
-              </mat-select><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-            </div>
-
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
-              <!-- <mat-form-field *ngIf=""> -->
-              <ng-container *ngIf="(selectedinstitute == false) && (qual.insCheck !== '10') && 
-                (qual.insCheck !== '12')">
-                <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
-                  placeholder="Institute" formControlName="institute" name="institute">
-                  <mat-option [value]="item._id" *ngFor="let item of institutes">
-                    {{item.institute_name}}
-                  </mat-option>
-                  <mat-option (onSelectionChange)="selectedinstitute = true" *ngIf="qual.insCheck == 'diploma'">
-                    Others
-                  </mat-option>
-                </mat-select>&nbsp;&nbsp;&nbsp;
-              </ng-container>
-              <!------------------------Institute textbox for 10th and 12th--------------------->
-              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex"
-                *ngIf="(selectedinstitute == true) || (qual.insCheck == '10') || (qual.insCheck == '12')">
-                <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
-                'inputs width_100'" formControlName="institute">
-              </ng-container>&nbsp;&nbsp;&nbsp;
-              <!-- <mat-select *ngIf="cannotEdit || qual?.value?.qualification === ''"
-                [ngClass]="cannotEdit || (qual?.value?.qualification === '')  ? 'n dis inputs' : 'inputs'"
-                placeholder="Discipline" name="discipline">
-              </mat-select> -->
-              <mat-select *ngIf="(qual.insCheck === '10')" [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
-                formControlName="discipline" name="discipline">
-                <mat-option [value]="item._id" *ngFor="let item of disciplines">
-                  {{item.discipline_name}}
-                </mat-option>
-              </mat-select>
-              <mat-select *ngIf="(qual.insCheck === '12')" [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
-                formControlName="discipline" name="discipline">
-                <mat-option [value]="item._id" *ngFor="let item of disciplines1">
-                  {{item.discipline_name}}
-                </mat-option>
-              </mat-select>
-              <mat-select *ngIf="!selecteddiscipline && (qual.insCheck === 'diploma')"
-                [disabled]="cannotEdit && (qual.insCheck === '10')"
-                [ngClass]="cannotEdit || (qual.insCheck === '10')  ? 'n dis inputs' : 'inputs'" placeholder="Discipline"
-                formControlName="discipline" name="discipline">
-                <mat-option [value]="item._id" *ngFor="let item of disciplines2">
-                  {{item.discipline_name}}
-                </mat-option>
-                <mat-option (onSelectionChange)="selecteddiscipline= true" *ngIf="qual.insCheck == 'diploma'">
-                  Others
-                </mat-option>
-              </mat-select>
-              <ng-container class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex"
-                *ngIf="selecteddiscipline && (qual.insCheck === 'diploma')">
-                <input type="text" class="institute" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
-                'inputs width_100'" placeholder="Discipline" formControlName="discipline"><span
-                  class="lapview">&nbsp;&nbsp;&nbsp;</span>
-              </ng-container>
-
-              <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-            </div>
-            <!-- *ngIf="(qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')" -->
-            <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
-              <!-- <ng-container
-[ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'"
-                > -->
-              <mat-select [disabled]="true" [ngClass]="'n dis inputs'" placeholder="Specialization"
-                formControlName="specification" name="specification">
-                <mat-option [value]="item._id" *ngFor="let item of specValue">
-                  {{item.specification_name}}
-                </mat-option>
-              </mat-select>&nbsp;&nbsp;&nbsp;
-              <!-- </ng-container> -->
-              <ng-container>
-                <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs width_100 color_label ' :
-                'inputs width_100'" placeholder="Year of Passing" formControlName="year_of_passing"
-                  (change)="yearOfpassing(in)"><span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-              </ng-container>
-            </div>
-
-            <div class="col-xl-3 col-lg-3 col-md-4  col-sm-12 col-12 m-b-5px display_flex">
-              <input type="tel" suffix="%" [ngClass]="cannotEdit ? 'dis inputs  width_50 color_label ' :
-                'inputs  width_50'" placeholder="Percentage" formControlName="percentage" maxlength="5"
-                (blur)="formatPercentage(in)"
-                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-              <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1"
-                (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
-              </mat-icon>
-              <!-- <mat-icon *ngIf="!cannotEdit && profileForm.value.qualification.length > 1 && (qual?.value?.qualification !== '5e7dedc1dba4466d9704b3f2') && 
-                (qual?.value?.qualification !== '5e7deddfdba4466d9704b44a')"
-                (click)="removeQualification(in)" class="dIcon " [disabled]='cannotEdit'>delete_outline
-              </mat-icon> -->
-              <mat-icon (click)="addQualification(in)"
-                *ngIf="!cannotEdit && in == profileForm.value.qualification.length -1 && profileForm.value.qualification.length < 2"
-                class="addIcon">add
-              </mat-icon>
-              <!-- <div *ngIf="f.qualification && f.qualification[in] && f.qualification[in].percentage && f.qualification[in].percentage.touched && f.qualification[in].percentage.errors" class="mand">
-                asdijsaio
-              </div> -->
-            </div>
-          </div>
-        </div>
-
-        <br>
-        <hr class="p-b-10px">
-        <br>
-
-
-        <!-- Currently studying -->
-        <label class="p-b-10px" class="f_size_19">Currently studying at</label><span class="mand"> *</span>
-        <div class="row width_100">
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="Name of college" formControlName="college_name">
-              <div *ngIf="f.college_name.touched && f.college_name.errors" class="mand">
-                <div *ngIf="f.college_name.errors.required">Name of college is required</div>
-                <!-- <div *ngIf="f.college_name.errors.pattern">College name is invalid</div> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="Stream of Engineering" formControlName="college_stream">
-              <div *ngIf="f.college_stream.touched && f.college_stream.errors" class="mand">
-                <div *ngIf="f.college_stream.errors.required">Stream of Engineering is required</div>
-                <!-- <div *ngIf="f.college_stream.errors.pattern">Stream name is invalid</div> -->
-              </div>
-            </div>
-          </div>
-
-
-          <!-- <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="Country" formControlName="country_name">
-              <div *ngIf="f.country_name.touched && f.country_name.errors" class="mand">
-                <div *ngIf="f.country_name.errors.required">Country name is required</div>
-                <div *ngIf="f.country_name.errors.pattern">Country name is invalid</div>
-              </div>
-            </div>
-          </div> -->
-
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="State" formControlName="state_name">
-              <div *ngIf="f.state_name.touched && f.state_name.errors" class="mand">
-                <div *ngIf="f.state_name.errors.required">State name is required</div>
-                <!-- <div *ngIf="f.state_name.errors.pattern">State name is invalid</div> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder=" District/City" formControlName="district_name">
-              <div *ngIf="f.district_name.touched && f.district_name.errors" class="mand">
-                <div *ngIf="f.district_name.errors.required"> District/City name is required</div>
-                <!-- <div *ngIf="f.district_name.errors.pattern"> District/City name is invalid</div> -->
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <br>
-        <hr class="p-b-10px">
-        <br>
-
-        <label class="p-b-10px" class="f_size_19"> Residential address</label>
-        <!-- <span class="mand"> *</span> -->
-        <br>
-        <div class="row width_100">
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs color_label  lap_95' :
-                'inputs lap_95'" placeholder="Address line 1 *" formControlName="addressline1">
-              <div *ngIf="f.addressline1.touched && f.addressline1.errors" class="mand">
-                <div *ngIf="f.addressline1.errors.required">Address line 1 is required</div>
-                <div *ngIf="f.addressline1.errors.pattern">Address line 1 is invalid</div>
-                <!-- <div *ngIf="f.addressline1.errors.minlength || f.addressline1.errors.maxlength">Address line 1 must be -->
-                <!-- minimum of
-                  {{f.addressline1.errors.minlength.requiredLength}} -
-                  {{f.addressline1.errors.maxlength.requiredLength}} characters long</div> -->
-
-                <!-- 1 - -->
-                <!-- 100 characters long</div> -->
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
-          'inputs  lap_95'" placeholder="Address line 2" formControlName="addressline2">
-              <!-- <div *ngIf="f.addressline2.touched && f.addressline2.errors" class="mand">
-                <div *ngIf="f.addressline2.errors.required">Address line 2 is required</div>
-                <div *ngIf="f.addressline2.errors.minlength || f.addressline2.errors.maxlength">Address line 2 must be
-                  1 - 100 characters long</div>
-              </div> -->
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <input type="tel" mask="000000" [ngClass]="cannotEdit ? 'dis inputs  color_label  lap_95' :
-          'inputs  lap_95'" placeholder="Pincode" formControlName="pincode">
-              <div *ngIf="f.pincode.touched && f.pincode.errors" class="mand">
-                <div *ngIf="f.pincode.errors.pattern">Pincode must contain 6 digits</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
-            <div class="form-group width_100">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
-                placeholder="Country" formControlName="country" name="country" (selectionChange)="getAllState()">
-                <mat-option [value]="country._id" *ngFor="let country of countryValue">
-                  {{country.countryname}}
-                </mat-option>
-              </mat-select>
-            </div>
-          </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
           <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12 p-b-10px">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
@@ -746,7 +373,6 @@
                   {{city.districtname}}
                 </mat-option>
               </mat-select>
-<<<<<<< HEAD
             </div>
           </div>
         </div>
@@ -832,225 +458,6 @@
                 </div>
                 <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
                 </div>
-=======
-            </div>
-          </div>
-        </div>
-
-        <br>
-        <hr class="p-b-10px">
-        <br>
-        <!-- <div  formGroupName="payment" > -->
-
-        <!-- <label class="container120"  [ngClass]="{ 'dis1' : cannotEdit}">Through TPO
-              <input type="checkbox" [ngClass]="{ 'dis1' : cannotEdit}" formControlName="throughTPO">
-              <span class="checkmark"></span>
-            </label> -->
-        <label class="p-b-10px f_size_19">Mode of payment</label>
-        <span class="mand p-b-10px"> *</span> <br>
-        <div class="row width_100 form-group" [ngClass]="{ 'dis1' : cannotEdit}">
-          <div class="col-12">
-            <mat-radio-group (change)="radioChange($event)" [disabled]='cannotEdit' formControlName="payment_mode"
-              name="payment_mode">
-              <mat-radio-button value="tpo">Through TPO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or</mat-radio-button>
-              <!-- <span style="margin-left: -4px;position: absolute; color: #33333396;">or</span> -->
-              <mat-radio-button value="self">Self</mat-radio-button>
-            </mat-radio-group>
-          </div>
-
-        </div>
-
-        <div class="row">
-          <div class="col-md-4" *ngIf="isTpoEnable">
-            <label># Reference no.</label>
-            <input type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
-              formControlName="ref_no">
-          </div>
-
-          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-10 col-10" *ngIf="isSelfEnable">
-            <label># RTGS / NEFT reference no. <span class="mand p-b-10px"> *</span> </label>
-            <input type="text" maxlength="22"
-              [ngClass]="cannotEdit ? 'dis inputs  color_label  width_80': 'inputs   width_80 '"
-              formControlName="ref_no1">
-          </div>
-
-          <div *ngIf="isSelfEnable && f.ref_no1.touched && f.ref_no1.errors" class="width_100 mand">
-            <div *ngIf="isSelfEnable && f.ref_no1.errors.required">Transaction number is required</div>
-            <div *ngIf="isSelfEnable && f.ref_no1.errors.minlength || f.ref_no1.errors.maxlength ">Transaction number
-              must be 16-22 digits
-              long</div>
-            <div *ngIf="isSelfEnable && f.ref_no1.errors.pattern">Transaction number must be only alphanumeric </div>
-          </div>
-        </div>
-
-        <!-- </div> -->
-
-        <br>
-
-        <!-- <label class="p-b-10px" class="f_size_19">Fees payment reference number </label>
-        <label class="f_size_15"> &nbsp;(NEFT/ RTGS transaction number)</label>
-        <span class="mand" *ngIf="!profileForm.value.throughTPO"> *</span>
-        <br>
-        <div class="row p-b-10px">
-          <div class="col-md-4 col-lg-3 col-xl-2 col-sm-4 col-12 display_flex">
-            <input type="tel" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100 '"
-              placeholder="Reference number" formControlName="neft">
-          </div>
-          <div *ngIf="f.neft.touched && f.neft.errors" class="width_100 mand">
-            <div *ngIf="f.neft.errors.required">Transaction number is required</div>
-            <div *ngIf="f.neft.errors.minlength || f.neft.errors.maxlength ">Transaction number must be 16-22 digits
-              long</div>
-            <div *ngIf="f.neft.errors.pattern">Transaction number must be only numbers</div>
-          </div>
-        </div> -->
-
-
-
-
-        <!-- <div *ngIf="f.neft.errors.maxlength">Transaction number must be
-              {{f.neft.errors.maxlength.requiredLength}} maximum of digits</div> -->
-
-
-        <br *ngIf="cannotEdit">
-        <hr>
-        <br *ngIf="cannotEdit">
-
-        <div class="row p-b-10px">
-          <!-- [checked]="iAgree" -->
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 display_flex">
-            <mat-checkbox [ngClass]="{ 'dis1' : cannotEdit}" class="iAgree" formControlName="iAgree">
-              <span class="mand"> * </span> I hereby confirm having
-              read and understood the details of L&T - Kaushalya Program
-            </mat-checkbox>
-          </div>
-        </div>
-
-        <div class="row width_80">
-          <span style="    font-size: 11px;
-          color: grey;">
-
-            L&T Kaushalya Program – Terms and Conditions:<br>
-
-            1) In case of online payment, the cost of transfer to be borne by the student. After L&T scheduling
-            the first session of the internship program, no refund claim shall be accepted. <br>
-            2) L&T Kaushalya is not a campus recruitment program/portal and its scope is
-            limited to the purpose of providing online internship only.<br>
-            3) L&T reserves the right to terminate a student from L&T Kaushalya program
-            if he/she is found to be impersonating or putting inappropriate content into the platform<br>
-            4) Decision of L&T will be final with regard to course content, delivery, assessment,
-            completion and certification. In case of disputes, the decision of <br>
-            L&T shall be final and L&T’s liability is limited to the fee paid by the student towards internship.
-            Force majeure clauses will apply.
-
-
-
-
-            <!-- L&T Kaushalya Program – Terms and Conditions<br>
-            1) In case of online transfer the cost of transfer to be borne by the student. After L&T scheduling the
-            first session of L&T Kaushalya no refunds shall be entertained
-            session of L&T Kaushalya no refunds shall be entertained.<br>
-            2) L&T Kaushalya is not a job recruitment program and limited to the purpose of internship only<br>
-            3) L&T reserves the right to terminate a student from L&T Kaushalya program if he/she is found to be
-            impersonating or putting inappropriate content into the platform<br>
-            4) Decision of L&T will be final with regard to course content, assessment, course delivery, L&T Kaushalya
-            completion and certification. In case of disputes, the decision of L&T shall be final and L&T’s liability is
-            limited to the fees paid by the student. Standard Force majeure clauses will apply. -->
-
-
-          </span>
-
-        </div>
-
-        <br>
-        <hr>
-        <br>
-
-        <!-- ////////////Certificate row////////////// -->
-        <label class="p-b-10px" class="f_size_19">Certificate</label><br>
-        <div class="row width_100">
-          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-10 col-10">
-            <button mat-flat-button [disabled]="true"
-              class="width_100 f_size_17 color_white f_wt_400">Download</button><br><br>
-            <span>* Download after course completion.</span>
-          </div>
-        </div>
-
-        <!-- <div formArrayName="certificate" class="row p-b-10px"
-          *ngFor="let certificate of certificate.controls; let i=index">
-          <div class="col-xl-2 col-xl-2 col-lg-3 col-md-4 col-sm-4 col-8 display_flex">
-            <input type="text" [ngClass]="cannotEdit ? 'dis inputs  color_label  width_100': 'inputs   width_100'"
-              placeholder="Certificate Link" formControlName="{{i}}">
-            <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-              class="dIcon ">delete_outline</mat-icon>
-            <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15" class="addIcon ">add
-            </mat-icon>
-          </div>
-          <div class="col-md-1 col-sm-4 col-4 display_flex">
-            <mat-icon *ngIf="!cannotEdit && profileForm.value.certificate.length > 1" (click)="removeCertificates(i)"
-              class="dIcon ">delete_outline</mat-icon>
-            <mat-icon (click)="addCertificates(certificate.value,i)" *ngIf="!cannotEdit && i == profileForm.value.certificate.length -1 && 
-              profileForm.value.certificate.length < 15" class="addIcon ">add
-            </mat-icon>
-          </div>
-        </div> -->
-
-
-        <!-- for 10 june -->
-        <!-- <br>
-        <hr>
-        <br class="p-b-10px"> -->
-
-        <!-- <label class="p-b-10px" class="f_size_19">Social media</label><br> -->
-        <!-- ////////////Social Link row////////////// -->
-        <!-- <div formArrayName="social_media" class="row p-b-10px"
-          *ngFor="let social of social_media.controls; let ind=index">
-          <div [ngClass]="cannotEdit ? 'col-xl-2 col-lg-2 col-md-3 col-sm-4 col-8 display_flex' :
-            'col-md-2 col-sm-4 col-8 display_flex'" [formGroupName]="ind">
-            <i class="fa fa-linkedin linkedin " aria-hidden="true"></i>
-            <input type="text" *ngIf="profileForm.value.link != '' && !cannotEdit" [ngClass]="cannotEdit ? 'inputs  width_80 dis' :
-            'inputs  width_80'" placeholder="Social media link" formControlName="link"> -->
-        <!-- {{profileForm.value.link}} -->
-        <!-- <mat-icon (click)="addMediaLink()" class="p-5px" [disabled]='cannotEdit'>add_circle_outline
-              </mat-icon>
-              <mat-icon (click)="removeMediaLink(ind)" class="p-5px" [disabled]='cannotEdit'>delete</mat-icon> -->
-        <!-- </div>
-        </div> -->
-
-        <!-- /////If professional////// -->
-        <!-- <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
-        <hr *ngIf="profileForm.value.is_student_or_professional === 'professional'">
-        <br *ngIf="profileForm.value.is_student_or_professional === 'professional'">
-
-        <div *ngIf="profileForm.value.is_student_or_professional == 'professional'">
-          <label class="f_size_19 p-b-10px">Experience</label><span class="mand"> *</span>
-          <div class="row p-b-10px" formGroupName="professional">
-            <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
-                'inputs    width_80'"
-                [ngClass]="{ 'is-invalid': f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors }"
-                placeholder="Total Experience" formControlName="total_experience">
-              <div class="mand" *ngIf="f.professional.controls.total_experience.touched && 
-                  f.professional.controls.total_experience.value >= 70">Total Experience should not be greater than 70
-              </div>
-              <div class="mand"
-                *ngIf="f.professional.controls.total_experience.touched && f.professional.controls.total_experience.errors">
-                <div *ngIf="f.professional.controls.total_experience.errors.required">Total experience is required
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-8">
-              <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
-                'inputs    width_80'"
-                [ngClass]="{ 'is-invalid': f.professional.controls.organization.touched && f.professional.controls.organization.errors }"
-                placeholder="Organization" formControlName="organization">
-              <div *ngIf="f.professional.controls.organization.touched && f.professional.controls.organization.errors"
-                class="mand">
-                <div *ngIf="f.professional.controls.organization.errors.required">Organization is required
-                </div>
-                <div *ngIf="f.professional.controls.organization.errors.pattern">Organization is invalid
-                </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
                 <div *ngIf="f.professional.controls.organization.errors.minlength">Organization must be minimum of
                   {{f.professional.controls.organization.errors.minlength.requiredLength}} characters
                 </div>
@@ -1058,11 +465,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-8">
               <input type="text" [ngClass]="cannotEdit ? 'dis inputs width_80' :
-<<<<<<< HEAD
            'inputs   width_80'" placeholder="Job role" formControlName="job_role"
-=======
-                'inputs   width_80'" placeholder="Job role" formControlName="job_role"
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
                 [ngClass]="{ 'is-invalid': f.professional.controls.job_role.touched && f.professional.controls.job_role.errors }">
               <div *ngIf="f.professional.controls.job_role.touched && f.professional.controls.job_role.errors"
                 class="mand">
@@ -1076,7 +479,6 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
         </div>
 
         <br *ngIf="cannotEdit">
@@ -1099,27 +501,6 @@
 
 
 
-=======
-        </div> -->
-
-        <br *ngIf="cannotEdit">
-        <hr>
-        <br *ngIf="cannotEdit">
-
-        <br> <br>
-        <!-- //.Button -Submit -->
-        <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button [disabled]="this.profileForm.invalid"
-            class="submit f_size_17 color_white f_wt_400">Save</button>
-        </div>
-        <br> <br>
-        <!-- <div class="row">
-          L & T reserves the right of admission of any student in to the program and its decision would be final. L & T
-          also holds the right of what constitutes the internship completion by a student. The certificate would be
-          awarded only to those students who have fully gone through the program by meeting the participation and
-          project requirements.
-        </div> -->
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
       </form>
 
 
@@ -1127,57 +508,52 @@
       <!------------------------------Change Email Dialog---------------------->
       <ng-template #emailDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
-        <h2 class="bb" style="padding-bottom: 12px;">Change email id</h2>
-        <mat-dialog-content style="width: 600px;margin-top: 24px; height: 120px;">
+        <h1 class="head">Change the Email ID</h1>
+        <mat-dialog-content style="width: 300px;margin-top: 24px; height: 200px;">
           <form [formGroup]="mailForm">
-            <div class="form-group" classs="center center_align">
-              <br>
-              <label class="f_size_14 f_wt_400 color_black">Enter new email id</label>
-              <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control width_50"
-                style="margin-left : 15px" [ngClass]="{ 'is-invalid': b.mailid.touched && b.mailid.errors }" required>
-              <div *ngIf="b.mailid.touched && b.mailid.errors" class="invalid-feedback m-l-30">
-                <div *ngIf="b.mailid.errors.required">Email id is required</div>
-                <div *ngIf="b.mailid.errors.pattern">Email id is invalid</div>
+            <div class="form-group">
+              <label class="f_size_20 f_wt_400">Enter new email id</label>
+              <input type="text" formControlName="mailid" placeholder="example@mail.com" class="form-control"
+                [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
+              <div *ngIf="c.mailid.touched && c.mailid.errors" class="invalid-feedback">
+                <div *ngIf="c.mailid.errors.required">Email is required</div>
+                <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
               </div>
-            </div><br>
-          </form>
+            </div><br><br>
+            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
+              Submit
+            </button>
+          </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
-          <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
-            Submit
-          </button>
-          <div class="account" *ngIf="resendLabel">Don't receive link?<button class="no_border f_wt_500  color_blue"
-              (click)="updateEmail(mailForm.valid)">Resend
+          <div class="account" *ngIf="resendLabel">Don't receive link?<button
+              class="no_border f_wt_500 background_trans color_blue" (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
         </mat-dialog-actions>
       </ng-template>
       <!------------------------------Change mobileno Dialog---------------------->
       <ng-template #mobDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
-        <h2 style="border-bottom: 1px solid #ccc;padding-bottom: 12px;">Change mobile number</h2>
-        <mat-dialog-content style="width: 600px;margin-top: 24px;height: 150px;">
+        <h1 class="head">Change the Mobile No</h1>
+        <mat-dialog-content style="width: 330px;margin-top: 24px;">
           <form [formGroup]="otpForm">
-            <div class="form-group" class="center center_align">
-              <label class="f_size_17 f_wt_400 color_black">Enter new mobile no</label>
+            <div class="form-group">
+              <label class="f_size_20 f_wt_400">Enter new mobile no</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
-                mask="0000000000" class="form-control width_50" style="margin-left : 15px"
-                [ngClass]="{ 'is-invalid': a.mobile.touched && a.mobile.errors}" required />
-              <div *ngIf="a.mobile.errors" class="invalid-feedback m-l-5">
-                <div *ngIf="a.mobile.errors.required">Mobile mumber is required</div>
-                <div *ngIf="a.mobile.errors.pattern">Mobile mumber is invalid</div>
-                <div *ngIf="a.mobile.errors.minlength || a.mobile.errors.maxlength">Mobile number must be 10 digits
+                mask="0000000000" class="form-control" [ngClass]="{ 'is-invalid': c.mobile.touched && c.mobile.errors}"
+                required />
+              <div *ngIf="c.mobile.errors" class="invalid-feedback">
+                <div *ngIf="c.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="c.mobile.errors.pattern">Mobile Number is invalid</div>
+                <div *ngIf="c.mobile.errors.minlength || c.mobile.errors.maxlength">Mobile Number must be 10 digits
                 </div>
               </div>
             </div>
-            <p class="f_wt_400 color_black float_left" style="margin-top: 30px;
-            margin-left: 9%;
-            border-top: 1px solid #ccc;
-            padding-top: 15px;
-            width: 82%;">Note : OTP will be sent to this number</p>
+            <p class="f_wt_500 color_blue float_left">OTP will be send to this number</p>
             <div *ngIf="showotp"><br>
               <p class="f_wt_500 color_blue float_left">OTP Code</p>
               <div class="otp">
@@ -1193,7 +569,7 @@
               <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
-                class="no_border f_wt_500  color_blue" (click)="Resendcode()">Resend
+                class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend
                 OTP</button></div>
           </form>
         </mat-dialog-content>
@@ -1206,12 +582,11 @@
       <!---------------------------------Password Dialog--------------------------------->
       <ng-template #passwordDialog>
         <span class="f_size_18 color_blue float_right">
-          <i class="fa fa-times" aria-hidden="true" (click)="closedialogbox()"></i>
+          <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
         </span>
-        <h2 style="border-bottom: 1px solid #ccc;padding-bottom: 12px;">Change password</h2>
-        <mat-dialog-content style="width: 800px;margin-top: 24px;">
+        <h1 class="head">Change the Password</h1>
+        <mat-dialog-content style="width: 380px;margin-top: 24px;">
           <form [formGroup]="passwordForm">
-<<<<<<< HEAD
             <label class="f_size_19 f_wt_400">Enter the current password</label>
             <div class="form-group">
               <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
@@ -1228,12 +603,8 @@
                   mixture of Special characters, uppercase and lowercase letters.</div>
               </div>
             </div><br>
-=======
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 
-            <div class="row">
 
-<<<<<<< HEAD
             <label class="f_size_19 f_wt_400">Enter the new password</label>
             <div class="form-group">
               <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
@@ -1248,64 +619,24 @@
                 <div *ngIf="c.newpassword.errors.pattern">Your password must contain at least one number and have a
                   mixture of Special characters, uppercase and lowercase letters.</div>
                 <div *ngIf="c.newpassword.errors.mustMatch"> Passwords must be same</div>
-=======
-              <div class="col-4">
-                <label class="f_size_14 f_wt_400 color_black">Current password</label>
-                <div class="form-group">
-                  <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
-                    onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control"
-                    [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
-                  <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
-                    aria-hidden="true"></i>
-                  <div *ngIf="c.currentpassword.touched && c.currentpassword.errors" class="invalid-feedback">
-                    <div *ngIf="c.currentpassword.errors.required">Current password is required</div>
-                    <!-- <div *ngIf="c.currentpassword.errors.minlength">Current Password must be at least 8 characters</div>
-                    <div *ngIf="c.currentpassword.errors.pattern">Your password must contain at least one number and
-                      have a
-                      mixture of Special characters, uppercase and lowercase letters.</div> -->
-                  </div>
-                </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
               </div>
-
-              <div class="col-4">
-                <label class="f_size_14 f_wt_400 color_black">New password</label>
-                <div class="form-group">
-                  <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
-                    onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control " [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }"
-                    (keyup)="change($event)" />
-                  <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
-                    aria-hidden="true"></i>
-                  <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
-                    <div *ngIf="c.newpassword.errors.required">New password is required</div>
-                    <!-- <div *ngIf="c.newpassword.errors.minlength">New Password must be at least 8 characters</div>
-                    <div *ngIf="c.newpassword.errors.pattern">Your password must contain at least one number and have a
-                      mixture of Special characters, uppercase and lowercase letters.</div>
-                    <div *ngIf="c.newpassword.errors.mustMatch"> Passwords must be same</div> -->
-                  </div>
+            </div><br>
+            <div class="box" id="message">
+              <div class="row">
+                <div class="col">
+                  <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                    Uppercase</p>
+                  <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
+                    Lowercase</p>
                 </div>
-
-              </div>
-
-              <div class="col-4 ">
-                <label class="f_size_14 f_wt_400 color_black">Confirm new password</label>
-                <div class="form-group">
-                  <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
-                    onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                    class="form-control"
-                    [ngClass]="{ 'is-invalid': c.confirmpassword?.touched && c.confirmpassword?.errors }" />
-                  <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
-                    (click)="showConNew = !showConNew" aria-hidden="true"></i>
-                  <div *ngIf="c.confirmpassword?.touched && c.confirmpassword?.errors" class="invalid-feedback">
-                    <div *ngIf="c.confirmpassword.errors.required">Confirm new password is required</div>
-                    <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as new password</div>
-                  </div>
+                <div class="col">
+                  <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check"
+                      aria-hidden="true"></i> Special character</p>
+                  <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i> Number
+                  </p>
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
             <p class="head f_size_17">The password should not be last password</p>
             <label class="f_size_19 f_wt_400">Confirm the new password</label>
             <div class="form-group">
@@ -1317,56 +648,14 @@
                 (click)="showConNew = !showConNew" aria-hidden="true"></i>
               <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
                 <div *ngIf="c.confirmpassword.errors.mustMatch">Should be same as password</div>
-=======
-
-            <br>
-
-            <civ class="row">
-              <p class="f_size_13 center center_align">
-                <span>Note : &nbsp; </span>
-                <span style=" padding-bottom: 7px;
-                border-bottom: 1px solid #ccc;">8 Characters | 1 Uppercase | 1 Lowercase | 1 Number | 1 Special
-                  character</span>
-              </p>
-              <p style="margin-left : 186px;   font-size: 13px;margin-top: 9px;">
-                <span>The new password must be same as your last password</span>
-              </p>
-            </civ>
-
-            <br>
-
-            <div class="row">
-              <div class="box width_100" id="message">
-                <div class="row center center_align">
-                  <span *ngIf="uppercase" id="uppercase" class="valid color_label">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    &nbsp; &nbsp;Uppercase | &nbsp;&nbsp;</span>
-                  <span *ngIf="lowercase" id="lowercase" class="valid color_label">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    &nbsp; &nbsp; Lowercase | &nbsp; &nbsp;</span>
-                  <span *ngIf="spicalcharacter" id="specialcharacter" class="valid color_label">
-                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Special
-                    character | &nbsp; &nbsp;</span>
-                  <span *ngIf="number" id="number" class="valid color_label">
-                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;Number | &nbsp; &nbsp;
-                  </span>
-                  <span *ngIf="passwordForm.value.newpassword?.length >= 8" id="charLength" class="valid color_label">
-                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp; &nbsp;8 Characters
-                  </span>
-                </div>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
               </div>
             </div>
-
           </form>
-        </mat-dialog-content>
-
-        <br>
-
+        </mat-dialog-content><br>
         <mat-dialog-actions>
           <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
             Submit
-          </button>
+          </button><br><br>
         </mat-dialog-actions>
       </ng-template>
     </div>
@@ -1376,18 +665,7 @@
 
 
   </div>
-
 </div>
-
-<div class="footer">
-  <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
-  <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
-    <span class="powered">Powered by :
-      <img width="160px" alt="" src="assets/learner/LT_small.svg">
-    </span>
-  </span>
-</div>
-
 
 <!-- DEBUG
 <br><br><br>VALID : <br>

@@ -1,10 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-<<<<<<< HEAD
     <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/dashboard']">Home</a></li>
-=======
-    <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     <li class="breadcrumb-item active" aria-current="page">User Management</li>
     <li class="breadcrumb-item active" aria-current="page">Reports</li>
   </ol>
@@ -14,11 +10,7 @@
 <br> -->
 <div class="row no_margin">
   <div class="col-lg-5 col-md-4 col-sm-12 col-12">
-<<<<<<< HEAD
     <h1 style="padding-left: 25px;">Reports</h1>
-=======
-    <h1 style="padding-left: 10px;">Reports</h1>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
   </div>
   <div class="col-lg-7 col-md-6 col-sm-12 col-12 float_right">
     <input class="form-control m-b-10" type="text" placeholder="Search" (keyup)="applyFilter($event)"
@@ -115,14 +107,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
   </mat-table>
-<<<<<<< HEAD
   <br><br>
 </div>
 <br><br>
-=======
-  <br><br>  <br><br>
-</div>
-<br><br>  <br><br>
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 <!-- <mat-paginator #paginator [length]="resultsLength" [pageSize]="10" (page)="next($event)" showFirstLastButtons>
 </mat-paginator> -->

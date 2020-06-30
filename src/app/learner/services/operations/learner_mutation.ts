@@ -33,11 +33,7 @@ export const user_registration_mobile_otp_send = gql`
     ) {
       message
       success
-      data{
-      status
-    } 
     }
-
   }
 `;
 
@@ -78,12 +74,7 @@ export const user_registration_done = gql`
 `;
 
 export const get_forgot_username_mobile_email = gql`
-<<<<<<< HEAD
   mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String ,$domain:String!) {
-=======
-  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String,
-    $domain:String!) {
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     get_forgot_username_mobile_email(
       type:$type,
       subtype:$subtype,
@@ -149,8 +140,13 @@ export const view_profile = gql`
       message {
 
         full_name
+
+
+
         email
+
         user_id
+
         user_dtl {
 
           is_admin
@@ -173,19 +169,11 @@ export const view_profile = gql`
         }
 
         user_profile {
-          college_name
-          college_stream
-          country_name
-          state_name
-          district_name
+
           _id
-          throughTPO
+
           languages_known
-            payment{
-            pay_status,
-            payment_mode,
-            ref_no
-      }
+
           is_student_or_professional
 
           about_you
@@ -207,12 +195,6 @@ export const view_profile = gql`
           gender
 
           country
-
-          addressline1
-          pincode
-          addressline2
-          neft
-          iAgree
 
           state
 
@@ -305,11 +287,6 @@ export const view_profile = gql`
 
           districtname
 
-<<<<<<< HEAD
-=======
-     
-
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
           is_active
 
         }
@@ -459,10 +436,7 @@ mutation get_district_details($country: String,$state: String){
     data{
        _id
       districtname
-<<<<<<< HEAD
    
-=======
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
       created_by
       created_on
       created_by_ip
@@ -590,33 +564,14 @@ export const delete_qualification = gql`
 `;
 
 
-
-
-
-
 export const update_profile = gql`
-<<<<<<< HEAD
   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
     $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!){
-=======
-  mutation update_profile($user_id: String,$throughTPO: Boolean, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
-    $social_media: [social_media_content], $is_active: Boolean,  $progress: String, $gender: String, $languages_known: [String],
-    $country: String, $state: String, $city_town: String, $addressline1: String,$pincode: Int, $addressline2: String, $neft: String, $iAgree: Boolean, $about_you: String, $certificate: [String], $student: String,
-    $professional: professional_content, $payment:payment_, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String,$college_name:String,$college_stream:String,$country_name:String,$state_name:String,$district_name:String,
-    $domain:String!){
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
     update_profile(
-      college_name:$college_name,
-      college_stream:$college_stream,
-      country_name:$country_name,
-      state_name:$state_name,
-      district_name:$district_name,
       user_id: $user_id,
-      throughTPO: $throughTPO,
       profile_img: $profile_img,
       year_of_birth: $year_of_birth,
       doj_lxp: $doj_lxp,
@@ -629,17 +584,11 @@ export const update_profile = gql`
       country: $country,
       state: $state,
       city_town: $city_town,
-      addressline1: $addressline1,
-      pincode: $pincode,
-      iAgree: $iAgree,
-      addressline2: $addressline2,
-      neft: $neft,
       about_you: $about_you,
       certificate: $certificate,
       is_student_or_professional: $is_student_or_professional,
       student: $student,
       professional: $professional,
-      payment:$payment,
       last_login: $last_login,
       created_by_ip: $created_by_ip,
       created_by: $created_by,
@@ -885,14 +834,6 @@ export const createGuidanceRequest = gql`
 export const InsertCourseFeedback = gql`
 mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $question_ans: [question_ans_content],$course_id: String ){
     InsertCourseFeedback(user_id: $user_id, question_id: $question_id, question_ans: $question_ans, course_id : $course_id ) {
-      success
-      message
-    }
-  }`;
-
-export const playerstatusrealtime = gql`
-mutation playerstatusrealtime($user_id: String, $contentID:String,$module:[module_type_input],$percentage:String){
-  playerstatusrealtime(user_id: $user_id,contentID:$contentID,module:$module,percentage:$percentage) {
       success
       message
     }
