@@ -14,7 +14,7 @@ describe('WishlistCoursesComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ApolloModule,
-        RouterModule.forRoot([]),MatDialogModule
+        RouterModule.forRoot([]), MatDialogModule
       ],
       declarations: [ WishlistCoursesComponent ],
       schemas: [
@@ -84,6 +84,6 @@ describe('WishlistCoursesComponent', () => {
   });
   // it('viewwishlist', () => {
   //   component. viewWishlist();
-  //   // expect(component.userdetail).toBe(component.checkLogout()) 
+  //   // expect(component.userdetail).toBe(component.checkLogout())
   // });
 });

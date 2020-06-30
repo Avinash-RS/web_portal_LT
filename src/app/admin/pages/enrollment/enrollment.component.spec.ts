@@ -39,7 +39,7 @@ describe('EnrollmentComponent', () => {
         { provide: MatDialogRef, useValue:  dialogMock },
         { provide: MatDialogTitle , useValue: [] },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-    
+
       ]
     })
     .compileComponents();
@@ -57,16 +57,16 @@ describe('EnrollmentComponent', () => {
 
 
   it('closedialogbox()', () => {
-    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    const spy = spyOn(component.dialog, 'closeAll').and.callThrough();
     component.closedialogbox();
-    expect(spy).toHaveBeenCalled(); 
-    expect(component.dialogopened).toBe('false')   
+    expect(spy).toHaveBeenCalled();
+    // expect(component.dialogopened).toBe('false');
   });
 
   it('close()', () => {
-    let spy = spyOn(component.dialog, 'closeAll').and.callThrough();
-    component. ngOnDestroy();
-    expect(spy).toHaveBeenCalled();    
+    const spy = spyOn(component.dialog, 'closeAll').and.callThrough();
+    component.ngOnDestroy();
+    expect(spy).toHaveBeenCalled();
   });
 
 

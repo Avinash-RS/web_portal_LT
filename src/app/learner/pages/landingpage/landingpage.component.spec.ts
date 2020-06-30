@@ -78,14 +78,14 @@ describe('LandingpageComponent', () => {
     expect(component.breakpoint).toBe(4);
   });
 
-  // it('popular courses', () => {
-  //   component.popular();
-  //   expect(component.popularCOurse).toBe(landingpage.data1.get_popular_course.data.course_img_url);
-  // });
+  it('popular courses', () => {
+    component.popular();
+    expect(component.popularCOurse).toBe(landingpage.data1.get_popular_course.data);
+  });
 
-  // it('trending courses', () => {
-  //   component.trending();
-  //   expect(component.trendingCourse).toBe(landingpage.data.get_popular_course.data);
-  // });
+  it('trending courses', () => {
+    component.trending();
+    expect(component.trendingCourse).toBe(landingpage.data.get_popular_course.data);
+  });
 
 });
