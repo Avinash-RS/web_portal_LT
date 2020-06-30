@@ -910,6 +910,16 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
     }
     return true;
   }
+  removeChar(evt) {
+    const code = (evt.which) ? evt.which : evt.keyCode;
+    if(code == 40 || code == 41 || code == 95 || code == 45 || code == 43 || code == 35 || code == 64 ){
+      return true;
+    }
+    if (!(code == 32) && !(code > 47 && code < 58) && !(code > 64 && code < 91) && !(code > 96 && code < 123)) { 
+      evt.preventDefault();
+  }
+  }
+
 
   getBlobVttFiles(fileInput, item, formdata, index,value, subTitleindex ) {
     const dialogRef = this.dialog.open(BlobReaderComponent, {
