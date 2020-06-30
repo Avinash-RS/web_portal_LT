@@ -85,7 +85,10 @@ export class CreateCourseComponent implements OnInit {
         // defaultTextAlign: 'left'
     };
     isEditable: boolean;
-
+    isBasicDetails = false;
+isInstrucDetails = true;
+isCoursePartner = true;
+isLearnersTakeaway = true;
     createItem(): FormGroup {
         this.preview2.push(null);
         return this.formBuilder.group({
@@ -544,6 +547,18 @@ export class CreateCourseComponent implements OnInit {
                 this.courseForm.patchValue({ preview_video: res.url });
             }
         });
+    }
+
+    ontoggle(val) {
+        if (val === 0) {
+            this.isBasicDetails = !this.isBasicDetails;
+        } else if (val === 1) {
+            this.isInstrucDetails = !this.isInstrucDetails;
+        } else if (val === 2) {
+            this.isCoursePartner = !this.isCoursePartner;
+        } else if (val === 3) {
+            this.isLearnersTakeaway = !this.isLearnersTakeaway;
+        }
     }
 
     checkCourseName() {

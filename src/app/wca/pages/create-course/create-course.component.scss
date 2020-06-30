@@ -168,7 +168,7 @@
     transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     position: relative;
-    padding: 16px;
+    padding: 0 16px 16px 16px;
     margin: 5px 0px 14px 0px;
     border-radius: 4px;
     height: 100%;
@@ -421,7 +421,7 @@ input[type="text"] {
 
 .btmUnderline {
     border-bottom: 1px solid #b9b5b5;
-    width: 97%;
+    width: 98%;
     margin: 0px 12px;
     padding: 0px 0px 0px 0px;
 }
@@ -619,8 +619,13 @@ input[type="text"] {
     border: 1px solid #1d3f72;
     // background: $color-field;
     // border-radius: 13px;
-    margin: 45px;
+    margin: 18px 40px;
 
+}
+
+.toggle-icn {
+    text-align: right;
+    padding-right: 15px !important;
 }
 .mrgnpad {
     margin: 9px 33px;
@@ -628,6 +633,20 @@ input[type="text"] {
 .crs1 {
     margin: none;
     flex-wrap: nowrap;
+}
+.disp-none {
+    display: none;
+}
+.basic-det {
+    text-align: left;
+    font-size: larger;
+    font-weight: bold;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    padding-top: 16px;
+    cursor: pointer;
+    justify-content: space-between;
 }
 .margTop7px {
     margin-top: -7px;
