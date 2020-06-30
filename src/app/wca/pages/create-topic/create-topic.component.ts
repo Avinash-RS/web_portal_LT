@@ -769,12 +769,12 @@ export class CreateTopicComponent implements OnInit, OnDestroy {
         if(res1){
           res1.forEach(element => {
             if(element.file){
-              element.isEdit = true;
-              element.htmlContent = "<div style='height: 958px;width:100%;margin:10px;border:1px;padding:20px;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"
-              console.log(element.htmlContent)
+              element.isEdit = "true";
+              element.htmlContent = "<div style='height: 1000px;width:100%;background-image: url("+ element.image + ");background-repeat: no-repeat;background-size: 100% 100%;'>"+ element.file + "</div>"              
             }
             else{
-              element.isEdit = false;
+              element.isEdit = "false";
+              element.htmlContent = ""
             }
           });
         }
