@@ -5,9 +5,5 @@ export const environment = {
   apiUrlImg:'http://20.44.35.112:3000/',
   createCourseApi:'http://52.140.12.145:3002/',
   wcaapiurl:'http://20.44.38.161:9001/',
-<<<<<<< HEAD
   domain : 'LXP'
-=======
-  domain : 'kaushalya'
->>>>>>> 73f6ce0d281a1e33db9170fe3cae7f193d9f43e7
 };
