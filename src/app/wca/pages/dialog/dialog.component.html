@@ -57,7 +57,7 @@
                         <div *ngFor="let i of dialogdata.images;let j = index">
                             <div class="active-slide"
                                 [class.active]="i?.image === currentSlide?.image">
-                            <mat-card (click)="activeSlide(i)" class="prew2">
+                            <mat-card (click)="activeSlide(i)" class="prew4">
                                 <img height="100%" width="100%" [src]="i?.image">
                            </mat-card>
                             </div>
@@ -67,8 +67,8 @@
             </div>
             <div class="col-md-9" style="height: 97%;">
                 <div class="editable-content">
-                    <div id="froalaeditor"  [froalaEditor]="froalaOptions" [(froalaModel)]="editableImage.file">                        
-                    </div>
+                    <angular-editor id="angulareditor" class="inputmainWidth" [config]='config'
+                    [(ngModel)]="editableImage.file"></angular-editor>
                     
                 </div>
             </div>
