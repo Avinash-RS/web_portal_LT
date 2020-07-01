@@ -85,7 +85,10 @@ export class CreateCourseComponent implements OnInit {
         // defaultTextAlign: 'left'
     };
     isEditable: boolean;
-
+    isBasicDetails = false;
+isInstrucDetails = true;
+isCoursePartner = true;
+isLearnersTakeaway = true;
     createItem(): FormGroup {
         this.preview2.push(null);
         return this.formBuilder.group({
@@ -173,7 +176,7 @@ export class CreateCourseComponent implements OnInit {
                     return this.createItem1();
                 }) : [this.createItem1()]),
             takeway_details: this.formBuilder.array([this.createItem2()]),
-            certificate_name: [null, Validators.compose([])],
+            certificate_name: [false],
             course_mode: [true],
             course_language: [null],
             feed_back: [false],
@@ -340,6 +343,11 @@ export class CreateCourseComponent implements OnInit {
         }
 
         if (!this.courseForm.value.course_img_url) {
+            this.toast.warning('Mandatory fields should not be blank');
+            return false;
+        }
+
+        if (!this.courseForm.value.course_description) {
             this.toast.warning('Mandatory fields should not be blank');
             return false;
         }
@@ -541,8 +549,19 @@ export class CreateCourseComponent implements OnInit {
         });
     }
 
+    ontoggle(val) {
+        if (val === 0) {
+            this.isBasicDetails = !this.isBasicDetails;
+        } else if (val === 1) {
+            this.isInstrucDetails = !this.isInstrucDetails;
+        } else if (val === 2) {
+            this.isCoursePartner = !this.isCoursePartner;
+        } else if (val === 3) {
+            this.isLearnersTakeaway = !this.isLearnersTakeaway;
+        }
+    }
+
     checkCourseName() {
-        debugger;
         const courseName = this.courseForm.controls.course_name.value;
         if (this.isEditable) {
             if (courseName === this.courseEditDetails.course_name) {
