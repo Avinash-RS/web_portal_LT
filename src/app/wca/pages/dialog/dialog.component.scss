@@ -73,6 +73,14 @@
   padding: 22px;
 }
 
+.prew4{
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 10px 10px 10px 10px;
+  display: inline-block;
+  margin: 25px;
+  padding: 22px;
+}
+
 .example-box {
   padding: 18px 11px;
   color: #1f3777;
@@ -211,6 +219,7 @@
     border: 2px dotted #bfb5b5;
     margin-left: 2%;
     padding: 10px;
+    overflow-y: scroll
 }
 
 .editable-content label{
@@ -244,51 +253,37 @@
 ::ng-deep .mat-typography h1{
   color: black !important;
 }
-::ng-deep .second-toolbar a{
-  display: none;
+
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set:nth-child(1){
+  display: none !important;
 }
 
-::ng-deep .fr-box {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-overflow-y: auto;
-
-  .fr-wrapper {
-    flex: 1;
-
-    .fr-element {      
-      border: 1px solid #c4bcbc;
-      margin: 10px;
-    }
-  }
+::ng-deep .angular-editor-toolbar .angular-editor-toolbar-set:nth-child(10){
+  display: none !important;
 }
 
-::ng-deep .fr-box::-webkit-scrollbar {
+::ng-deep .angular-editor-textarea{
+  resize: none !important;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden !important;
+  height: 1000px !important; 
+}
+
+::ng-deep .editable-content::-webkit-scrollbar {
   width: 6px;
 }
 
-::ng-deep .fr-box::-webkit-scrollbar-track {
+::ng-deep .editable-content::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 
-::ng-deep .fr-box::-webkit-scrollbar-thumb {
+::ng-deep .editable-content::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #bbb8b8;
   transition: background-color .2s linear, width .2s ease-in-out;
   // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
-
-::ng-deep .fr-box .fr-wrapper .fr-element{
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    overflow: hidden !important;
-    height: 1000px;    
-}
-  
-::ng-deep .fr-quick-insert {
-   display: none;
-   }
 
 

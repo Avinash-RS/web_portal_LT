@@ -485,3 +485,6 @@ input[type=text]
         margin: 0px 0px 0px 110px;
       }
   }
+  ::ng-deep .example-box1 mat-icon{
+    color: #1F3777 !important;
+}
