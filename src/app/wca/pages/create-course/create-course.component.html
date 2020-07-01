@@ -25,18 +25,27 @@
                             <mat-grid-list [cols]="breakpoint" rowHeight="1.70:2">
                                 <div class="form-group">
                                     <!-- Course Details Started -->
-                                    <div class="row">
+                                    <div class="basic-det" (click)="ontoggle(0)">
+                                        Basic Details
+                                        <span *ngIf="!isBasicDetails" style="padding-right: 5px;">
+                                            <mat-icon>keyboard_arrow_up</mat-icon>
+                                        </span>
+                                        <span *ngIf="isBasicDetails" style="padding-right: 5px;">
+                                            <mat-icon>keyboard_arrow_down</mat-icon>
+                                        </span>
+
+                                    </div>
+                                    <div class="{{isBasicDetails ? 'disp-none row' : 'row'}}">
                                         <div class="col-md-8">
 
-                                            <div class="row crs1 padBot20px">
+                                            <!-- <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header"><span style="font-weight: bold;">Basic
                                                         Details</span>
                                                 </div>
                                                 <div class="col-md-8" style="visibility:collapse;">
-                                                    <!-- <mat-checkbox formControlName="course_mode">Self paced
-                                                    </mat-checkbox> -->
+                                               
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Course Name<span
@@ -119,7 +128,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="{{isBasicDetails ? 'disp-none row' : 'row'}}">
                                         <div class="col-md-8">
                                             <div class="row crs1 pad18px">
                                                 <div class="col-md-4 course-details">Preview Video</div>
@@ -136,7 +145,7 @@
                                         <div class="col-md-2"></div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="{{isBasicDetails ? 'disp-none row' : 'row'}}">
                                         <div class="col-md-8">
                                             <div class="row crs1" style="padding-top: 12px;">
                                                 <div class="col-md-4 course-details">Language</div>
@@ -157,23 +166,16 @@
                                         </div>
                                         <div class="col-md-8"></div>
                                     </div>
-                                    <div class="row">
+                                    <div class="{{isBasicDetails ? 'disp-none row' : 'row'}}">
                                         <div class="col-md-8">
-                                            <div class="row crs1">
+                                            <div class="row crs1" style="margin-bottom:5px">
                                                 <div class="col-md-4 course-details">Certification</div>
-                                                <div class="col-md-8" style="text-align: left;">
+                                                <div class="col-md-2" style="text-align: left;margin-top: 8px;">
                                                     <mat-slide-toggle formControlName="certificate_name">
                                                         Enable</mat-slide-toggle>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="row crs1">
-                                                <div class="col-md-4 course-details">Course Feedback</div>
-                                                <div class="col-md-8" style="text-align: left;">
+                                                <div class="col-md-3" style="margin-top: 10px;">Course Feedback</div>
+                                                <div class="col-md-2" style="text-align: left;margin-top: 8px;">
                                                     <mat-slide-toggle formControlName="feed_back">
                                                         Enable</mat-slide-toggle>
                                                 </div>
@@ -181,11 +183,12 @@
                                         </div>
                                         <div class="col-md-4"></div>
                                     </div>
+
                                     <div class="btmUnderline"></div>
                                     <!-- Course Details Ends -->
 
                                     <!-- Instruction Details Starts -->
-                                    <div class="row">
+                                    <div class="row toggle-click" (click)="ontoggle(1)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
@@ -194,10 +197,17 @@
                                                 <div class="col-md-8" style="visibility:collapse;"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4 toggle-icn">
+                                            <span *ngIf="!isInstrucDetails">
+                                                <mat-icon >keyboard_arrow_up</mat-icon>
+                                            </span>
+                                            <span *ngIf="isInstrucDetails">
+                                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                            </span>
+                                        </div>
                                     </div>
 
-                                    <div class="row"
+                                    <div class="{{ isInstrucDetails ? 'disp-none row' : 'row' }}"
                                         *ngFor="let item of courseForm.get('author_details').controls; let i = index;">
                                         <div class="col-md-8">
                                             <div class="row crs1" style="padding-top: 2px;">
@@ -261,7 +271,7 @@
                                     <!--  Certification Details Ends -->
 
                                     <!-- Course Partners Starts -->
-                                    <div class="row">
+                                    <div class="row toggle-click" (click)="ontoggle(2)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
@@ -270,10 +280,17 @@
                                                 <div class="col-md-8" style="visibility:collapse;"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4 toggle-icn">
+                                            <span *ngIf="!isCoursePartner">
+                                                <mat-icon>keyboard_arrow_up</mat-icon>
+                                            </span>
+                                            <span *ngIf="isCoursePartner">
+                                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                            </span>
+                                        </div>
                                     </div>
 
-                                    <div class="row"
+                                    <div class="{{ isCoursePartner ? 'disp-none row' : 'row' }}"
                                         *ngFor="let item of courseForm.get('coursepartner_details').controls; let i = index;">
                                         <div class="col-md-8">
                                             <div class="row crs1">
@@ -326,7 +343,7 @@
                                     <!-- Course Parteners Ends -->
 
                                     <!-- Leaners Takeaway Starts -->
-                                    <div class="row">
+                                    <div class="row toggle-click" (click)="ontoggle(3)">
                                         <div class="col-md-8">
                                             <div class="row crs1 padBot20px">
                                                 <div class="col-md-4 page-Header">
@@ -335,10 +352,17 @@
                                                 <div class="col-md-8" style="visibility:collapse;"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4 toggle-icn">
+                                            <span *ngIf="!isLearnersTakeaway">
+                                                <mat-icon>keyboard_arrow_up</mat-icon>
+                                            </span>
+                                            <span *ngIf="isLearnersTakeaway">
+                                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                            </span>
+                                        </div>
                                     </div>
 
-                                    <div formArrayName="takeway_details"
+                                    <div formArrayName="takeway_details" class="{{ isLearnersTakeaway ? 'disp-none' : ''}}"
                                         *ngFor="let item of courseForm.get('takeway_details').controls; let i = index;">
                                         <div [formGroupName]="i">
                                             <div class="row">

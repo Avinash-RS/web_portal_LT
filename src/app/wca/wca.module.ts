@@ -40,8 +40,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { FroalaEditorModule } from 'angular-froala-wysiwyg/editor/editor.module.js';
-import 'froala-editor/js/plugins.pkgd.min.js';
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, },
@@ -108,7 +107,6 @@ const routes: Routes = [
     PerfectScrollbarModule,
     CKEditorModule,
     AngularEditorModule,
-    FroalaEditorModule.forRoot()
   ],
   providers: [Apollo],
   entryComponents: [ViewCoursesComponent, BlobReaderComponent, VideoPreviewModalComponent,DialogComponent],
