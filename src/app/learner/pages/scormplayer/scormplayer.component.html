@@ -10,7 +10,7 @@
     </nav>
 
     <div class="left">
-      <iframe class="player" [src]="urlSafe"></iframe>
+      <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
     </div>
     <h1 class="subhead">Resources</h1>
     <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
