@@ -72,9 +72,9 @@
                         <span class="del-icon-container">
                           <span
                             class="{{(module.moduleid && module.moduleid.length > 0 )? 'add-repo-disable' : 'add-repo-enable'}}">
-                            <mat-icon class="repo-icon" (click)="addToRepo(n,module)">library_add</mat-icon>
+                            <mat-icon class="repo-icon" (click)="addToRepo(n,module)"  (mouseout)="onhoverLeave(0)" (mouseover)="onHover(0,n)">library_add</mat-icon>
                           </span>
-                          <mat-icon class="info-icon" (mouseout)="onhoverLeave()" (mouseover)="onHover(n)">info
+                          <mat-icon class="info-icon" (mouseout)="onhoverLeave(1)" (mouseover)="onHover(1,n)">info
                           </mat-icon>
                           <mat-icon class="del-icon" (click)="deleteModule(n)">delete</mat-icon>
                         </span>
@@ -82,9 +82,9 @@
                           {{module.modulename}}
 
                         </div>
-                        <div style="color: grey;" *ngIf="isHover && n == hoverName" class="overlay">
+                        <div style="color: grey;" *ngIf="((isHover || isAdd) && n == hoverName)" class="overlay">
                           <div>
-                            {{module.modulename}}
+                            {{isHover ?  module.modulename : (module.moduleid && module.moduleid.length > 0 ) ? 'Module already added to the repository' : 'Add module to the repository'}}
                           </div>
                         </div>
                       </div>
