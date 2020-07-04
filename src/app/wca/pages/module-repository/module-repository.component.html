@@ -12,7 +12,7 @@
 
       <li class="breadcrumb-item">
         <a [routerLink]="['/Admin/auth/Wca/addmodule']"
-          [queryParams]="{courseId:routeData.viewingModule,courseImage:routeData.image,courseName:routeData.courseName}">
+          [queryParams]="{isRepo:'true',courseId:routeData.viewingModule,courseImage:routeData.image,courseName:routeData.courseName,selectedModule:modDetails}">
           Add Module
         </a></li>
       <li class="breadcrumb-item" aria-current="page">Module Repository</li>
