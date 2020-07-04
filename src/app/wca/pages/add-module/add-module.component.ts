@@ -32,6 +32,7 @@ export class AddModuleComponent implements OnInit {
   isCreate: boolean;
   breakpoint: any;
   spinner = false;
+  isAdd: boolean;
   constructor(
     private alertService: AlertServiceService,
     public toast: ToastrService,
@@ -364,14 +365,25 @@ export class AddModuleComponent implements OnInit {
     this.router.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid } });
   }
 
-  onhoverLeave() {
+  onhoverLeave(val) {
+    if(val === 1) {
     this.isHover = false;
     this.hoverName = '';
+    }
+    else {
+      this.isAdd = false;
+    }
   }
 
-  onHover(n) {
+  onHover(val,n) {
+   if(val === 1) {
     this.isHover = true;
     this.hoverName = n;
+   }
+   else {
+     this.isAdd = true;
+    this.hoverName = n;
+   }
   }
   onRefernceBtnClick() {
     this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
