@@ -14,23 +14,24 @@ button:disabled:hover {
   cursor: not-allowed;
 }
 
-// @media (min-width: 300px) {
-
-//   .col-md-12,
-//   .col-md-11,
-//   .col-md-10,
-//   .col-md-9,
-//   .col-md-8,
-//   .col-md-7,
-//   .col-md-6,
-//   .col-md-5,
-//   .col-md-4,
-//   .col-md-3,
-//   .col-md-2,
-//   .col-md-1 {
-//     padding: 0px !important;
-//   }
-// }
+@media (min-width: 300px) {
+  .create-course {
+    .col-md-12,
+    .col-md-11,
+    .col-md-10,
+    .col-md-9,
+    .col-md-8,
+    .col-md-7,
+    .col-md-6,
+    .col-md-5,
+    .col-md-4,
+    .col-md-3,
+    .col-md-2,
+    .col-md-1 {
+      padding: 0px !important;
+    }
+  }
+}
 
 ///////////////////////////// root loader ////////////////////////////////////////
 
@@ -663,7 +664,7 @@ h1 {
 
 .module-repo-container {
   .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-    background-color: #1F3777 !important;
+    background-color: #1f3777 !important;
   }
   .repo-title-container .mat-form-field {
     width: 250px;
@@ -672,19 +673,18 @@ h1 {
 .create-course {
   .mat-expansion-panel-body {
     background: #e5e3e3;
- }
- .angular-editor-textarea {
-   outline-color: #335b96;
-   border: 1px solid #1d3f72 !important;
-
- }
+  }
+  .angular-editor-textarea {
+    outline-color: #335b96;
+    border: 1px solid #1d3f72 !important;
+  }
 }
 .mat-progress-spinner {
   position: absolute !important;
   top: 50% !important;
   left: 45% !important;
   z-index: 999;
-  }
+}
 
 .myC {
   .mat-tab-label {
