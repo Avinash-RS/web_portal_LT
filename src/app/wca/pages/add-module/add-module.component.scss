@@ -537,7 +537,8 @@ img:hover {
     box-shadow: 0 0 5px #aaaaaa !important;
     text-align: left;
     z-index: 999;
-    width: 20%;
+    min-width: 20%;
+    margin-top: 5px;
 }
 
 .add-modulerepo-icon {

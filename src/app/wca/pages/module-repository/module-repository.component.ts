@@ -87,11 +87,21 @@ export class ModuleRepositoryComponent implements OnInit {
           }) : '';
         }
       });
-      this.savedModules = data.Result;
+      this.apiService.getCourseDetails(this.routeData.viewingModule).subscribe((dataT: any) => {
+        dataT.Result[0].coursedetails.forEach(valT => {
+          data.Result.forEach((repoVal,i) => {
+            if(repoVal.moduleid == valT.moduleid) {
+              data.Result.splice(i,1);
+            }
+          })
+        });
+        this.savedModules = data.Result;
 
-      this.dataSource = new MatTableDataSource<any>(this.savedModules);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+        this.dataSource = new MatTableDataSource<any>(this.savedModules);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+ 
     });
   }
 

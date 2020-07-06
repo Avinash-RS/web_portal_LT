@@ -32,13 +32,14 @@ export class AddModuleComponent implements OnInit {
   isCreate: boolean;
   breakpoint: any;
   spinner = false;
+  isAdd: boolean;
   constructor(
     private alertService: AlertServiceService,
     public toast: ToastrService,
     private router: Router,
     public route: ActivatedRoute,
     public apiService: WcaService) {
-    }
+  }
 
   ngOnInit() {
     this.resetList();
@@ -143,7 +144,7 @@ export class AddModuleComponent implements OnInit {
     const that = this;
     that.isFileContent = false;
     // tslint:disable-next-line:only-arrow-functions
-    fileReader.onloadend = function(x) {
+    fileReader.onloadend = function (x) {
       that.isFileContent = String(fileReader.result).includes('imsmanifest.xml') ? true : false;
       if (!that.isFileContent) {
         that.fileUploaded.nativeElement.value = '';
@@ -354,7 +355,16 @@ export class AddModuleComponent implements OnInit {
     } else if (this.courseDetails && this.courseDetails.coursetype !== 'SCORM' && this.scormPath.length === 0) {
 
       // tslint:disable-next-line:max-line-length
-      this.router.navigate(['/Admin/auth/Wca/modulerepository'], { queryParams: { viewingModule: this.routedCourseDetails.courseId, courseName: this.routedCourseDetails.courseName, image: this.routedCourseDetails.courseImage, moduleList: this.moduleList } });
+      this.router.navigate(['/Admin/auth/Wca/modulerepository'],
+        {
+          queryParams:
+          {
+            viewingModule: this.routedCourseDetails.courseId,
+            courseName: this.routedCourseDetails.courseName,
+            image: this.routedCourseDetails.courseImage,
+            moduleList: this.moduleList
+          }
+        });
     } else {
       // this.toast.warning('SCORM course cannot be edited');
     }
@@ -364,29 +374,42 @@ export class AddModuleComponent implements OnInit {
     this.router.navigate(['/Admin/auth/Wca/addcourse'], { queryParams: { edit: true, viewingModule: this.courseDetails.courseid } });
   }
 
-  onhoverLeave() {
-    this.isHover = false;
-    this.hoverName = '';
+  onhoverLeave(val) {
+    if (val === 1) {
+      this.isHover = false;
+      this.hoverName = '';
+    }
+    else {
+      this.isAdd = false;
+    }
   }
 
-  onHover(n) {
-    this.isHover = true;
-    this.hoverName = n;
+  onHover(val, n) {
+    if (val === 1) {
+      this.isHover = true;
+      this.hoverName = n;
+    }
+    else {
+      this.isAdd = true;
+      this.hoverName = n;
+    }
   }
   onRefernceBtnClick() {
     this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId } });
   }
 
   editResource() {
-    this.router.navigate(['/Admin/auth/Wca/rf'], { queryParams: { id: this.routedCourseDetails.courseId,
-      editModulesback: true,
-      courseId:  this.routedCourseDetails.courseId,
-      courseImage:  this.routedCourseDetails.courseImage,
-      courseName:  this.routedCourseDetails.courseName,
-      isRepo: this.isRepo,
-      isCreate: this.isCreate
-    }
-  });
+    this.router.navigate(['/Admin/auth/Wca/rf'], {
+      queryParams: {
+        id: this.routedCourseDetails.courseId,
+        editModulesback: true,
+        courseId: this.routedCourseDetails.courseId,
+        courseImage: this.routedCourseDetails.courseImage,
+        courseName: this.routedCourseDetails.courseName,
+        isRepo: this.isRepo,
+        isCreate: this.isCreate
+      }
+    });
   }
 
   getRepoModules() {
