@@ -30,6 +30,11 @@ const routes: Routes = [
     data : {title: 'Web Content Authoring'}
   },
   {
+    path: 'Batch',
+    loadChildren: './batch-management/batch-management.module#BatchManagementModule',
+    data : {title: 'Batch Management'}
+  },
+  {
     path: 'ppt1',
     component: Ppt1Component,
     data : {title: 'Sample PPt1'}
