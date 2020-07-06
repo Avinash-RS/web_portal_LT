@@ -195,6 +195,14 @@ export const menus = [
         ]
     },
     {
+        name: 'Batch Management',
+        icon: 'school',
+        link: 'Batch',
+        chip: false,
+        open: true,
+        isChild : false
+    },
+    {
         name: 'Audit Log',
         link: 'auditlog',
         icon: 'receipt',
