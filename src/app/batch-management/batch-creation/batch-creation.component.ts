@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-batch-creation',
+  selector: 'batch-creation',
   templateUrl: './batch-creation.component.html',
   styleUrls: ['./batch-creation.component.css']
 })

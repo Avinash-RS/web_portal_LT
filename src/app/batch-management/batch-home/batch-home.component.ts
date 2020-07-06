@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-batch-home',
+  selector: 'batch-home',
   templateUrl: './batch-home.component.html',
   styleUrls: ['./batch-home.component.css']
 })

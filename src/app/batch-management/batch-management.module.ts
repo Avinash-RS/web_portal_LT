@@ -16,9 +16,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { BatchCreationComponent } from './batch-creation/batch-creation.component';
 import { batchRoutingModule } from './batch-management.routing';
+import { BatchAddCourseComponent } from './batch-add-course/batch-add-course.component';
+import { BatchAddLearnerComponent } from './batch-add-learner/batch-add-learner.component';
 
 @NgModule({
-  declarations: [BatchHomeComponent,BatchCreationComponent],
+  declarations: [BatchHomeComponent,BatchCreationComponent, BatchAddCourseComponent, BatchAddLearnerComponent],
   imports: [
     CommonModule,
     CoreModule,
