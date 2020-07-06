@@ -10,8 +10,8 @@ import { PublishCourseComponent } from '@admin/pages/publish-course/publish-cour
 import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
 import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
 import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
-import { EnrollmentComponent} from '@admin/pages/enrollment/enrollment.component';
-import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofile.component';
+import { EnrollmentComponent } from '@admin/pages/enrollment/enrollment.component';
+import { LearnerprofileComponent } from '@admin/pages/learnerprofile/learnerprofile.component';
 import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
 import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
 import { ReportsComponent } from '@admin/pages/reports/reports.component';
@@ -26,14 +26,16 @@ export const appRoutes: Routes = [{
         { path: 'publishCourse', component: PublishCourseComponent, data: { title: 'Publish Course' } },
         { path: 'viewReport', component: ReportManagementComponent, data: { title: 'Report Management' }, canActivate: [AuthGuard] },
         // { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
-        { path : 'tables', loadChildren: '../tables/tables.module#TablesModule', data : {title: 'Admin Dashboard'} ,
-         canActivate: [AuthGuard] },
-        { path : 'usergroup' , component: GroupManagementComponent, data: { title: 'User Group creation' }, canActivate: [AuthGuard]},
-        { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, canActivate: [AuthGuard]},
-        { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, canActivate: [AuthGuard]},
-        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, canActivate: [AuthGuard]},
+        {
+            path: 'tables', loadChildren: '../tables/tables.module#TablesModule', data: { title: 'Admin Dashboard' },
+            canActivate: [AuthGuard]
+        },
+        { path: 'usergroup', component: GroupManagementComponent, data: { title: 'User Group creation' }, canActivate: [AuthGuard] },
+        { path: 'listCourses', component: AdminCoursesComponent, data: { title: 'View Courses' }, canActivate: [AuthGuard] },
+        { path: 'catalogue', component: CatalogueManagementComponent, data: { title: 'Catalogue Management' }, canActivate: [AuthGuard] },
+        { path: 'catagory', component: CatagoryManagementComponent, data: { title: 'Category Management' }, canActivate: [AuthGuard] },
         { path: 'enrollment', component: EnrollmentComponent, data: { title: 'Enrollment' }, canActivate: [AuthGuard] },
-        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' },  canActivate: [AuthGuard]},
+        { path: 'learnerprofile', component: LearnerprofileComponent, data: { title: 'Profile' }, canActivate: [AuthGuard] },
         { path: 'reports', component: ReportsComponent, data: { title: 'Reports' }, canActivate: [AuthGuard] },
         { path: 'bulkenrolment', component: BulkEnrollmentComponent, data: { title: 'Bulk Enrolment' }, canActivate: [AuthGuard] },
         // tslint:disable-next-line:max-line-length
@@ -42,12 +44,19 @@ export const appRoutes: Routes = [{
         {
             path: 'Wca',
             loadChildren: '../../wca/wca.module#WcaModule',
-            data : {title: 'Web Content Authoring'}
-          },
+            data: { title: 'Web Content Authoring' }
+        },
+        {
+            path: 'Batch',
+            loadChildren: '../../batch-management/batch-management.module#BatchManagementModule',
+            data: { title: 'Batch Management' }
+        },
 
         // { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },
-        { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule', data : {title: 'Admin Dashboard'} ,
-         canActivate: [AuthGuard]  },
+        {
+            path: 'charts', loadChildren: '../charts/charts.module#ChartsModule', data: { title: 'Admin Dashboard' },
+            canActivate: [AuthGuard]
+        },
         // { path: 'chats', loadChildren: '../chats/chat.module#ChatsModule' }, // fix this
         // { path: 'mail', loadChildren: '../mail/mail.module#MailModule' }, // fix this
         // { path: 'pages', loadChildren: '../pages/pages.module#PagesModule' },
