@@ -47,7 +47,7 @@ export const appRoutes: Routes = [{
             data: { title: 'Web Content Authoring' }
         },
         {
-            path: 'Batch',
+            path: 'batch',
             loadChildren: '../../batch-management/batch-management.module#BatchManagementModule',
             data: { title: 'Batch Management' }
         },

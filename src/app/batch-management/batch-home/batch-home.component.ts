@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BatchHomeComponent implements OnInit {
 
+  sortValue = ['A to Z','Z to A']
+
   constructor() { }
 
   ngOnInit() {

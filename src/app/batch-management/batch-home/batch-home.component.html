@@ -1,7 +1,30 @@
 <div class="batch-home-container">
 
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a>Home</a></li>
+    </ol>
+  </nav>
+
+  <!-- -------------------------------------batch header ---------------------------->
   <div class="batch-home-header">
     
+    <div class="sort-dropdown">
+      <label for="sort">Sort by: </label>
+      <select name="sort" id="sort">
+        <ng-container *ngFor="let val of sortValue">
+          <option [value]=val>{{val}}</option>
+        </ng-container>
+      </select>
+    </div>
+
+    <div class="input-container">
+      <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search"/>
+      <i class="fa fa-search search-icn" aria-hidden="true"></i>
+    </div>
+    <div class="batch-btn">
+      <button mat-flat-button color="primary" [routerLink]="['/Admin/auth/batch/create']">Create a Batch</button>
+    </div>
   </div>
 
 </div>

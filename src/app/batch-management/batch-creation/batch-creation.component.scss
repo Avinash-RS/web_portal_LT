@@ -1,0 +1,24 @@
+@import "variable";
+
+.batch-creation-container {
+    height: 90%;
+    .batch-creation-header {
+        height: 10%;
+        border-bottom: 1px solid $color-border;
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 15px;
+        .batch-btn {
+            width: 30%;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 45%;
+                margin-left: 5%;
+            }
+        }
+    }
+    .breadcrumb {
+        margin-bottom: 0.5em;
+    }
+}

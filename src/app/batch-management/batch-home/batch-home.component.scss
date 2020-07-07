@@ -1,0 +1,47 @@
+@import "variable";
+
+.batch-home-container {
+    height: 90%;
+    .batch-home-header {
+        height: 10%;
+        border-bottom: 1px solid $color-border;
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 15px;
+        .batch-btn {
+            width: 15%;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 100%;
+            }
+        }
+        .input-container {
+            width: 25%;
+            .input-box {
+                width: 94%;
+                outline-color: #335b96;
+                height: 33px;
+            }
+            .search-icn {
+                position: relative;
+                right: 10%;
+            }
+        }
+        .sort-dropdown {
+            width: 20%;
+            label {
+            margin-right: 10px;
+            color: $color-darkGrey;
+            }
+            select {
+                outline-color: #335b96;
+                width: 70%;
+                height: 33px;
+            }
+        }
+    }
+    .breadcrumb {
+        margin-bottom: 0.5em;
+    }
+}
