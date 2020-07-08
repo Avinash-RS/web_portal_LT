@@ -197,7 +197,7 @@ export const menus = [
     {
         name: 'Batch Management',
         icon: 'school',
-        link: 'Batch',
+        link: 'batch',
         chip: false,
         open: true,
         isChild : false
