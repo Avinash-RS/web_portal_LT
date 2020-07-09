@@ -6,8 +6,9 @@
         height: 10%;
         border-bottom: 1px solid $color-border;
         display: flex;
-        justify-content: flex-end;
-        padding: 5px 15px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0em 1em 0.5em 1em;
         .batch-btn {
             width: 30%;
             button {
@@ -20,5 +21,30 @@
     }
     .breadcrumb {
         margin-bottom: 0.5em;
+    }
+    .main-content-1 {
+        height: 38%;
+        padding: 10px 30px 20px 15px;
+        .batch-name {
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        .input-box {
+            width: 40%;
+            height: 40px;
+            outline-color: #335b96;
+        }
+        .batch-instruc {
+            padding: 20px 0 5px 0;
+        }
+        .description-container {
+            padding-top: 20px;
+            .batch-desc {
+                padding-bottom: 5px;
+            }
+        }
+    }
+    .main-content-2 {
+        height: 40%;
     }
 }

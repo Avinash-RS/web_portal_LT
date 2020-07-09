@@ -8,11 +8,58 @@
 
   <!-- -------------------------------------batch creation header ---------------------------->
   <div class="batch-creation-header">
-    
+
+    <div class="f_wt_400 f_size_23">
+      Create a Batch
+    </div>
+
     <div class="batch-btn">
       <button mat-flat-button color="primary">Add Course</button>
       <button mat-flat-button color="primary">Add User</button>
     </div>
+  </div>
+
+  <!------------------------------------------- main section  ----------------------------------->
+  <div class="main-content-1">
+
+    <div class="batch-name">
+      Batch name <span style="color: red;">*</span>
+    </div>
+    <div>
+      <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
+    </div>
+    <div class="description-container">
+
+      <div>
+        <div class="batch-desc">
+          Description
+        </div>
+        <div>
+          <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
+        </div>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+
+    <div class="batch-instruc">
+      Add batch Instructor
+    </div>
+    <div>
+      <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
+    </div>
+
+    <div>
+
+    </div>
+
+    <!-- ----------------------------- -->
+  </div>
+
+  <div class="main-content-2">
+
   </div>
 
 </div>
