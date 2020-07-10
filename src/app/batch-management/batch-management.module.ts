@@ -13,7 +13,14 @@ import { BatchCreationComponent } from './batch-creation/batch-creation.componen
 import { batchRoutingModule } from './batch-management.routing';
 import { BatchAddCourseComponent } from './batch-add-course/batch-add-course.component';
 import { BatchAddLearnerComponent } from './batch-add-learner/batch-add-learner.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 @NgModule({
   declarations: [
     BatchHomeComponent,
@@ -37,7 +44,15 @@ import { BatchAddLearnerComponent } from './batch-add-learner/batch-add-learner.
     MatTableModule,
     MatChipsModule,
     MatSlideToggleModule,
+    InfiniteScrollModule,
+    PerfectScrollbarModule,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  providers: [
+    {
+        provide: PERFECT_SCROLLBAR_CONFIG,
+        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+]
 })
 export class BatchManagementModule { }
