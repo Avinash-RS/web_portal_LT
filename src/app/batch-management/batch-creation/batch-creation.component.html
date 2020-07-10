@@ -26,20 +26,33 @@
       Batch name <span style="color: red;">*</span>
     </div>
     <div>
-      <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
+      <input class="input-box" [(ngModel)]="branchDetails.batchname" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
     </div>
-    <div class="description-container">
+    <div class="desc-date-container">
 
-      <div>
+      <div class="desc-container">
         <div class="batch-desc">
           Description
         </div>
         <div>
-          <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
+          <input class="desc-input" [(ngModel)]="branchDetails.batchdescription" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
         </div>
 
       </div>
-      <div>
+      <div class="date-container">
+
+        <mat-form-field class="date-picker">
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="branchDetails.batchstartdate" placeholder="Start Date">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+
+        <mat-form-field class="date-picker">
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="branchDetails.batchenddate" placeholder="End Date">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
 
       </div>
     </div>
@@ -47,18 +60,56 @@
     <div class="batch-instruc">
       Add batch Instructor
     </div>
-    <div>
-      <input class="input-box" (keydown)="_handleKeydown($event)" type="text" placeholder="Search" />
-    </div>
+    <div class="instruc-dropdown">
 
-    <div>
-
+      <mat-form-field>
+        <mat-select multiple (selectionChange)="instrucSelection($event)">
+          <mat-option *ngFor="let inst of instructors" [value]="inst._id">{{inst.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <!-- ----------------------------- -->
   </div>
 
   <div class="main-content-2">
+
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" (closed)="setStep(4)" class="expansion-panel"
+        hideToggle>
+        <mat-expansion-panel-header class="mat-heading">
+          <mat-panel-title class="mat-heading-title">
+            Batch Instructors
+            <mat-icon>{{step === 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" (closed)="setStep(4)" class="expansion-panel"
+        hideToggle>
+        <mat-expansion-panel-header class="mat-heading">
+          <mat-panel-title class="mat-heading-title">
+            Courses
+            <mat-icon>{{step === 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" (closed)="setStep(4)" class="expansion-panel"
+        hideToggle>
+        <mat-expansion-panel-header class="mat-heading">
+          <mat-panel-title class="mat-heading-title">
+            Users
+            <mat-icon>{{step === 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="create-btn">
+      <button mat-flat-button color="primary" (click)="createBatch()">Create a Batch</button>
+    </div>
 
   </div>
 

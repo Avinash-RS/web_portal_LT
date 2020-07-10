@@ -326,7 +326,7 @@ html {
 }
 
 .blue_border {
-  border: 1.0px solid $color-blue !important;
+  border: 1px solid $color-blue !important;
 }
 
 .background-maroon {
@@ -558,7 +558,7 @@ body {
   }
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
   content: ">" !important;
 }
 
@@ -683,9 +683,6 @@ h1 {
   z-index: 999;
 }
 
-
-
-
 //////////////////////
 //Breadcrumb change : Mythreyi--- Sarat
 .breadcrumb {
@@ -696,7 +693,7 @@ h1 {
   margin-bottom: 1rem;
   list-style: none;
   background-color: $bread-crumb-bg !important;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   height: 21px !important;
 
   a,
@@ -791,5 +788,30 @@ mat-header-cell,
 
   .mat-vertical-stepper-header {
     height: 10px !important;
+  }
+}
+
+.batch-creation-container {
+  .instruc-dropdown {
+    .mat-form-field-infix {
+      padding: 0px !important;
+    }
+    .mat-form-field-flex {
+      border: 1px solid grey;
+      height: 40px;
+      width: 350px;
+    }
+  }
+  .mat-select-arrow {
+    color: unset !important;
+  }
+  .mat-select-arrow-wrapper {
+    padding-right: 5px;
+  }
+  .mat-form-field-ripple {
+    background-color: unset !important;
+  }
+  .mat-expansion-panel-header {
+    
   }
 }
