@@ -362,11 +362,11 @@ export class BatchAddCourseComponent implements OnInit {
 
   addCourses(){        
     const keys_to_keep = ['course_id', 'course_name','course_img_url'];
-    const redux = this.selectedCourseArray.map(o => keys_to_keep.reduce((acc, curr) => {
+    const courseValue = this.selectedCourseArray.map(o => keys_to_keep.reduce((acc, curr) => {
     acc[curr] = o[curr];
     return acc;
     }, {}));  
-    // var value = this.selectedCourseArray
+    // var value = courseValue
 // this.router.navigateByUrl('/', {skipLocationChange: true})
     // .then(() => this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } }));
     // to send data
