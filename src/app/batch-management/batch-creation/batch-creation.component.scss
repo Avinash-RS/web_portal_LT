@@ -6,8 +6,9 @@
         height: 10%;
         border-bottom: 1px solid $color-border;
         display: flex;
-        justify-content: flex-end;
-        padding: 5px 15px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0em 1em 0.5em 1em;
         .batch-btn {
             width: 30%;
             button {
@@ -20,5 +21,75 @@
     }
     .breadcrumb {
         margin-bottom: 0.5em;
+    }
+    .main-content-1 {
+        height: 41%;
+        padding: 10px 30px 0px 15px;
+        border-bottom: 1px solid $color-border;
+        .batch-name {
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        .input-box {
+            width: 40%;
+            height: 40px;
+            outline-color: #335b96;
+        }
+        .batch-instruc {
+            padding-bottom: 5px;
+        }
+        .desc-date-container {
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            .desc-container {
+                width: 65%;
+                .batch-desc {
+                    padding-bottom: 5px;
+                }
+                .desc-input {
+                    width: 100%;
+                    height: 40px;
+                    outline-color: #335b96;
+                }
+            }
+            .date-container {
+                display: flex;
+                width: 40%;
+                margin-top: 1.7%;
+                .date-picker {
+                    margin: 5px 15px;
+                }
+            }
+        }
+    }
+    .main-content-2 {
+        height: 40%;
+        padding: 5px;
+        .expansion-panel {
+            margin: 10px;
+            border-radius: 0px;
+            .mat-heading {
+                background: #e5e3e3;
+                height: 45px !important;
+                border-radius: 0px;
+                padding: 0 15px;
+                .mat-heading-title {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-right: 0px;
+                }
+            }
+        }
+        .create-btn {
+            width: 100%;
+            display: flex;
+    justify-content: center;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 15%;
+            }
+        }
     }
 }
