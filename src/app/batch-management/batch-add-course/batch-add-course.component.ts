@@ -357,7 +357,17 @@ export class BatchAddCourseComponent implements OnInit {
     this.courses.forEach(element => {
       element.isChecked = true
     });
-    this.selectedCourseArray = this.courses;
+
+    // const compareName = (obj1, obj2)=>{
+    //   return (obj1.course_id === obj2.course_id);
+    // }
+    
+    // let output = this.selectedCourseArray.filter(b=>{
+    //   let indexFound = this.courses.findIndex(a => compareName(a, b));
+    //   return indexFound == -1;
+    // })
+    // this.selectedCourseArray = output;
+    this.selectedCourseArray = this.courses
   }
 
   addCourses(){        
