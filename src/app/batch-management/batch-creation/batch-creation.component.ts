@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { WcaService } from '@wca/services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import { batchService } from '../batch-management.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'batch-creation',
@@ -23,15 +24,24 @@ export class BatchCreationComponent implements OnInit {
     instructure_details: []
   };
   selectedInst = [];
+  isEdit: boolean;
   constructor(
     private wcaService: WcaService,
     public toast: ToastrService,
-    private apiService: batchService) {
+    private apiService: batchService,
+    private router: Router,
+    public route: ActivatedRoute,
+  ) {
   }
 
   ngOnInit() {
-
     this.getInsructors();
+    this.route.queryParams.subscribe(params => {
+      if (params.isEdit == 'true' && this.apiService.batchDetails) {
+        this.isEdit = true;
+        this.branchDetails = this.apiService.batchDetails;
+      }
+    });
   }
 
 
@@ -41,7 +51,16 @@ export class BatchCreationComponent implements OnInit {
 
   getInsructors() {
     this.wcaService.getAllInstructors().subscribe((data: any) => {
-      this.instructors = data.Result;
+      let inst = [];
+      data.Result.forEach((val) => {
+        inst.push({
+          id: val._id,
+          name: val.name,
+          image: val.image,
+          description: val.description
+        })
+      })
+      this.instructors = inst;
     });
   }
 
@@ -60,8 +79,8 @@ export class BatchCreationComponent implements OnInit {
           image: "",
           description: ""
         };
-        if (dt._id == val) {
-          inst.id = dt._id
+        if (dt.id == val) {
+          inst.id = dt.id
           inst.name = dt.name
           inst.image = dt.image
           inst.description = dt.description
@@ -71,6 +90,17 @@ export class BatchCreationComponent implements OnInit {
     })
     this.branchDetails.instructure_details = instDetails;
 
+  }
+
+  onAddcourse() {
+    this.apiService.batchDetails = this.branchDetails;
+    this.router.navigateByUrl('/Admin/auth/batch/addcourse');
+  }
+
+
+  onAddLearner() {
+    this.apiService.batchDetails = this.branchDetails;
+    this.router.navigateByUrl('/Admin/auth/batch/addlearner', { state: { type: this.branchDetails.user_details } });
   }
 
   createBatch() {

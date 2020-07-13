@@ -101,7 +101,7 @@
             }
             .learner-chip {
                 border-radius: 3px;
-                margin: 5px 20px;
+                margin: 10px 20px 10px 20px;
                 background: white;
                 border: 1px solid lightgrey;
                 box-shadow: 1px 1px 1px 1px #dedada;
@@ -128,9 +128,10 @@
                         max-height: 40px;
                         width: 138px;
                         overflow: hidden;
+                        margin-top: 10px;
                         // -webkit-line-clamp: 2;
                         // display: -webkit-box;
-                        // -webkit-box-orient: vertical;
+                        // -webkit-box-orient: vertical !important; 
                     }
                 }
             }
@@ -164,7 +165,6 @@
             }
         }
         .learner-list {
-            padding: 5px;
         }
         .create-btn {
             width: 100%;

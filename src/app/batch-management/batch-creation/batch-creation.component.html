@@ -14,8 +14,8 @@
     </div>
 
     <div class="batch-btn">
-      <button mat-flat-button color="primary">Add Course</button>
-      <button mat-flat-button color="primary">Add User</button>
+      <button mat-flat-button color="primary" (click)="onAddcourse()">Add Course</button>
+      <button mat-flat-button color="primary" (click)="onAddLearner()">Add Learner</button>
     </div>
   </div>
 
@@ -67,7 +67,7 @@
 
       <mat-form-field>
         <mat-select multiple (selectionChange)="instrucSelection($event)">
-          <mat-option *ngFor="let inst of instructors" [value]="inst._id">{{inst.name}}</mat-option>
+          <mat-option *ngFor="let inst of instructors" [value]="inst.id">{{inst.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -117,77 +117,18 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="tool-bar">
-          <mat-icon class="add-icon">add</mat-icon>
+          <mat-icon class="add-icon" (click)="onAddcourse()">add</mat-icon>
           <!-- <mat-icon class="del-icon">delete</mat-icon> -->
         </div>
         <div class="batch-course-list">
+          <ng-container *ngFor="let course of branchDetails.course_details">
           <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
+            <img [src]="course.image" alt="">
             <div>
-              test card
+              {{course.name}}
             </div>
           </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-          <mat-card class="batch-couse-card">
-            <img src="../../../assets/images/image_upload.svg" alt="">
-            <div>
-              test card
-            </div>
-          </mat-card>
-   
+        </ng-container>
         </div>
       </mat-expansion-panel>
 
@@ -200,37 +141,14 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="tool-bar">
-          <mat-icon class="add-icon">add</mat-icon>
+          <mat-icon class="add-icon" (click)="onAddLearner()">add</mat-icon>
           <!-- <mat-icon class="del-icon">delete</mat-icon> -->
         </div>
         <div class="learner-list">
           <mat-chip-list>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-            <mat-chip class="learner-chip">One fish</mat-chip>
-     
+            <ng-container *ngFor="let learners of branchDetails.user_details">
+              <mat-chip class="learner-chip">{{learners.name}}</mat-chip>
+          </ng-container>
           </mat-chip-list>
         </div>
       </mat-expansion-panel>
