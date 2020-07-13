@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { batchService } from '../batch-management.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'batch-home',
@@ -14,7 +15,7 @@ export class BatchHomeComponent implements OnInit {
   batchList: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private apiService: batchService) { }
+  constructor(private apiService: batchService,private router: Router) { }
 
   ngOnInit() {
 
@@ -44,6 +45,15 @@ export class BatchHomeComponent implements OnInit {
       })
       this.batchList = data.data.read_batch.message;
     })
+  }
+
+  editBatch(id) {
+    this.router.navigate(['/Admin/auth/batch/create'], {
+      queryParams:
+      {
+        batchId: id
+      }
+    });
   }
 
   dateDiffCalc(dateSent) {

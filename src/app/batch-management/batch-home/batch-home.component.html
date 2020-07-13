@@ -32,7 +32,7 @@
   <div class="batch-card-container">
     <ng-container *ngFor="let batch of batchList | filter:searchBatch">
     
-    <mat-card class="batch-card">
+    <mat-card class="batch-card" (click)="editBatch(batch._id)">
       <span class="batch-card-header">
         {{batch.batchname}}
       </span>
@@ -73,7 +73,7 @@
         </div>
 
       </div>
-      <div class="border-btm">
+      <div class="{{batch.batchstatus == 'On-going' ? 'border-going' : (batch.batchstatus == 'Yet to start') ? 'border-start' : 'border-complete'}}">
       </div>
     </mat-card>
   </ng-container>

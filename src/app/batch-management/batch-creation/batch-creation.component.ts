@@ -25,6 +25,7 @@ export class BatchCreationComponent implements OnInit {
   };
   selectedInst = [];
   isEdit: boolean;
+  isBatchId: boolean;
   constructor(
     private wcaService: WcaService,
     public toast: ToastrService,
@@ -41,12 +42,24 @@ export class BatchCreationComponent implements OnInit {
         this.isEdit = true;
         this.branchDetails = this.apiService.batchDetails;
       }
+      else if(params.batchId && params.batchId.length > 0) {
+        this.isBatchId = true;
+        this.getBatchDetails(params.batchId);
+      }
     });
   }
 
 
   setStep(index: number) {
     this.step = index;
+  }
+
+  getBatchDetails(id) {
+
+  }
+
+  onEditBatch() {
+    this.isBatchId = false;
   }
 
   getInsructors() {
@@ -93,12 +106,18 @@ export class BatchCreationComponent implements OnInit {
   }
 
   onAddcourse() {
+    if(this.isBatchId){
+      return false;
+    }
     this.apiService.batchDetails = this.branchDetails;
     this.router.navigateByUrl('/Admin/auth/batch/addcourse');
   }
 
 
   onAddLearner() {
+    if(this.isBatchId){
+      return false;
+    }
     this.apiService.batchDetails = this.branchDetails;
     this.router.navigateByUrl('/Admin/auth/batch/addlearner', { state: { type: this.branchDetails.user_details } });
   }
