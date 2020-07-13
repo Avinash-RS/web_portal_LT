@@ -20,8 +20,9 @@ export class BatchCreationComponent implements OnInit {
     batchenddate: '',
     user_details: [],
     course_details: [],
-    instructur_details: []
+    instructure_details: []
   };
+  selectedInst = [];
   constructor(
     private wcaService: WcaService,
     public toast: ToastrService,
@@ -45,8 +46,30 @@ export class BatchCreationComponent implements OnInit {
   }
 
   instrucSelection(e) {
+    this.selectedInst = e.value;
+    this.addInst();
+  }
 
-    
+  addInst() {
+    let instDetails = [];
+    this.selectedInst.forEach((val) => {
+      this.instructors.forEach((dt) => {
+        let inst = {
+          id: "",
+          name: "",
+          image: "",
+          description: ""
+        };
+        if (dt._id == val) {
+          inst.id = dt._id
+          inst.name = dt.name
+          inst.image = dt.image
+          inst.description = dt.description
+          instDetails.push(inst);
+        }
+      })
+    })
+    this.branchDetails.instructure_details = instDetails;
 
   }
 
@@ -54,8 +77,10 @@ export class BatchCreationComponent implements OnInit {
     if (!this.branchDetails.batchname || this.branchDetails.batchname.length == 0) {
       this.toast.warning('Batch name is mandatory');
     }
-
-    this.apiService.create_batch(this.branchDetails.batchname, this.branchDetails.batchdescription,this.branchDetails.batchstartdate,this.branchDetails.batchenddate,this.branchDetails.user_details,this.branchDetails.course_details,this.branchDetails.instructur_details)
+    else {
+      this.addInst();
+      this.apiService.create_batch(this.branchDetails.batchname, this.branchDetails.batchdescription, this.branchDetails.batchstartdate, this.branchDetails.batchenddate, this.branchDetails.user_details, this.branchDetails.course_details, this.branchDetails.instructure_details)
+    }
   }
 
 }
