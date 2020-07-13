@@ -17,6 +17,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { BatchSchedulerComponent } from './batch-scheduler/batch-scheduler.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -26,7 +27,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BatchHomeComponent,
     BatchCreationComponent,
     BatchAddCourseComponent,
-    BatchAddLearnerComponent
+    BatchAddLearnerComponent,
+    BatchSchedulerComponent
   ],
   imports: [
     CommonModule,
