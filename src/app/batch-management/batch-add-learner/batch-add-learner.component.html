@@ -138,7 +138,9 @@
                 {{element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="select">
-              <mat-header-cell *matHeaderCellDef>                
+              <mat-header-cell *matHeaderCellDef>               
+                <mat-checkbox [(ngModel)]="SelectLeaners" (change)="SelectAllLeaner()">
+                </mat-checkbox> 
               </mat-header-cell>
               <mat-cell *matCellDef="let row">
                 <span class="mobile-label">Select</span>

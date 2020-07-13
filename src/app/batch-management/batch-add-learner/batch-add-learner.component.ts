@@ -14,6 +14,7 @@ export interface LeanerList {
   name: number;
   email: string;
   mobile: string;
+  isChecked : boolean
 }
 @Component({
   selector: 'batch-add-learner',
@@ -29,6 +30,7 @@ export class BatchAddLearnerComponent implements OnInit {
   ELEMENT_DATA: LeanerList[] = [];
   selectedArray: any = [];
   displayedColumns: string[] = ['full_name','user_id', 'name', 'email', 'mobile', 'active','select'];
+  SelectLeaners = false;
   dataSource = new MatTableDataSource<LeanerList>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
   currentpath = null;
@@ -137,6 +139,7 @@ export class BatchAddLearnerComponent implements OnInit {
   }
   next(e) {
     this.getAllUser(e.pageIndex);
+    this.SelectLeaners = false;
   }
   checkboxLabel(row,value:any) {
     console.log(row)
@@ -176,7 +179,27 @@ export class BatchAddLearnerComponent implements OnInit {
       }
     });
   }
+  SelectAllLeaner(){
+    this.dataSource.data.forEach((element)=>{
+      if(this.SelectLeaners){
+        element.isChecked = true
+        var selectedUser = []
+      this.selectedArray.forEach(element1 => {
+        if(element1.user_id === element.user_id){
+          selectedUser.push("duplicate")
+        }
+      });
+      if(selectedUser.length == 0){
+        this.selectedArray.push(element);
+      }
+      }
+      else{
+        element.isChecked = false
+        this.selectedArray = this.selectedArray.filter(i => i !== element);
+      }
+    })
 
+  }
   addLeaner(){     
     // var value = this.selectedArray   
 // this.router.navigateByUrl('/', {skipLocationChange: true})
