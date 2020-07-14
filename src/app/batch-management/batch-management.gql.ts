@@ -3,11 +3,11 @@ import gql from 'graphql-tag';
 export const create_batch = gql`
   mutation create_batch($batchname: String!, 
     $batchdescription: String,
-    $batchstartdate:object,
-    $batchenddate:object,
-    $user_details:object,
-    $course_details:object,
-    $instructur_details:object) {
+    $batchstartdate:String,
+    $batchenddate:String,
+    $user_details:[batch_user_details],
+    $course_details:[batch_course_details],
+    $instructur_details:[batch_instructur_details]) {
     create_batch(
         batchname: $batchname
         batchdescription: $batchdescription,

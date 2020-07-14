@@ -13,18 +13,10 @@ export class batchService {
 
   constructor(private http: HttpClient,private Apollo: Apollo) { }
 
-  create_batch(batchname, batchdescription, batchstartdate, batchenddate,user_details,course_details,instructur_details) {
+  create_batch(batchDetails) {
     return this.Apollo.query({
       query: create_batch,
-      variables: {
-        batchname,
-        batchdescription,
-        batchstartdate,
-        batchenddate,
-        user_details,
-        course_details,
-        instructur_details
-      }
+      variables: batchDetails
     });
   }
 

@@ -128,7 +128,12 @@ export class BatchCreationComponent implements OnInit {
     }
     else {
       this.addInst();
-      this.apiService.create_batch(this.branchDetails.batchname, this.branchDetails.batchdescription, this.branchDetails.batchstartdate, this.branchDetails.batchenddate, this.branchDetails.user_details, this.branchDetails.course_details, this.branchDetails.instructure_details)
+      this.apiService.create_batch(this.branchDetails).subscribe((data: any) => {
+        if(data.data.create_batch.success) {
+          this.toast.success("Batch created successfully");
+          this.router.navigateByUrl('/Admin/auth/batch');
+        }
+      })
     }
   }
 
