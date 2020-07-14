@@ -79,7 +79,7 @@ export class AuthGuard implements CanActivate {
         || state.url === '/Admin/auth/Wca/addtopic' || state.url === '/Admin/auth/Wca/rf'
         || state.url === '/Admin/auth/Wca/addfile' || state.url === '/Admin/auth/Wca/addmodule'
         || state.url === '/Admin/auth/Wca/mycourse' || state.url === '/Admin/auth/Wca/previewcourse'
-        || state.url === '/Admin/auth/Wca/ct'  || state.url === '/Learner/login') {
+        || state.url === '/Admin/auth/Wca/ct'  || state.url === '/Learner/login' || state.url === '/Admin/auth/Batch') {
         return true;
       }
     } else if (role === 'admin' && !adminDetails) {

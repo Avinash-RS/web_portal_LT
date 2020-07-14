@@ -1,0 +1,167 @@
+<div class="batch-leaners-container">
+  <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Batch</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Leaners</li>
+    </ol>
+</nav>
+<div class="row">
+<div class="col-md-12">
+  <div class="batch-btn p-1">
+    <button mat-flat-button color="primary" *ngIf="selectedArray.length != 0" (click)="addLeaner()">Add Leaners</button>
+  </div>
+</div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pl-3">
+      <h2>Selected Leaners ({{selectedArray.length}})</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="tag-container p-3 m-2 border d-flex">
+      <div class="m-l-50" *ngIf="selectedArray.length == 0">
+        Add Leaner!...
+      </div>
+      <span *ngFor="let selection of selectedArray;let i = index">
+       <div *ngIf="selectedArray.length > 0" class="course-tag">{{selection.full_name}}<i class="fa fa-times-circle pl-3" (click)="checkboxLabel(selection,'remove')"></i></div>
+      </span>
+    </div>
+  </div>
+</div>
+<hr class="dotted-hr">
+<div class="pl-3">
+  <h2>Select Leaners</h2>
+</div>
+<div class="container  pb-5">
+  <div class="container shadow margin20">
+    <div class="row">
+      <div class="card col-3 cardheight" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
+        [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
+        <div class="card-header">
+          Select group/Sub group
+        </div>
+
+        <br>
+        <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle>
+            <li class="mat-tree-node newstyle" renderDebug>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button matTreeNodeToggle class="btnClassicon" (click)="loadsubgroup(node)"
+                [attr.aria-label]="'toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <!-- (change)="selected = node" -->
+              <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                {{node.group_name}}</mat-checkbox>
+
+            </li>
+          </mat-tree-node>
+
+          <!-- node with children -->
+          <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+            <li class="mat-tree-node newstyle" renderDebug>
+              <div class="mat-tree-node">
+                <button mat-icon-button matTreeNodeToggle class="btnClassicon"
+                  [attr.aria-label]="'toggle ' + node.name">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <mat-checkbox name="checkbox" [(ngModel)]="node.checkbox" (change)="selectgroup(node,groupform)">
+                  {{node.group_name}}</mat-checkbox>
+              </div>
+            </li>
+            <ul [class.children-invisible]="!treeControl.isExpanded(node)">
+              <ng-container matTreeNodeOutlet></ng-container>
+            </ul>
+          </mat-nested-tree-node>
+        </mat-tree>
+      </div>
+      <div class="col-9 bg-white">
+        <div class="row">
+          <div class="col-md-6">
+            <ng-container *ngIf="currentpath?.group_name">
+
+              <div class="card-header">
+                {{currentpath?.group_name}}'s user list
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="example-container mat-elevation-z8" *ngIf="ELEMENT_DATA && ELEMENT_DATA.length > 0">
+          <mat-table #table [dataSource]="dataSource">full_name
+            <ng-container matColumnDef="full_name">
+              <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">User id</span>
+                {{element.full_name}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="user_id">
+              <mat-header-cell *matHeaderCellDef> User id </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">User id</span>
+                {{element.user_id}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <span class="mobile-label">User name</span>{{element.username}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef> Email id </mat-header-cell>
+              <mat-cell *matCellDef="let element"><span class="mobile-label">Email id</span>
+                {{element.email || 'NA'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="mobile">
+              <mat-header-cell *matHeaderCellDef> Mobile no </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <span class="mobile-label">Mobile no</span>
+                {{element.mobile_number || 'NA'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="active">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let element"
+                [ngClass]="element.is_blocked ? 'red' : element.is_active ? 'green' : 'black'">
+                <span class="mobile-label">Status</span>
+                {{element.is_active ? 'Active' : 'Inactive'}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef>               
+                <mat-checkbox [(ngModel)]="SelectLeaners" (change)="SelectAllLeaner()">
+                </mat-checkbox> 
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <span class="mobile-label">Select</span>
+                <mat-checkbox [(ngModel)]="row.isChecked" (change)="checkboxLabel(row,'add')">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </mat-row>
+          </mat-table>
+        </div>
+        <mat-paginator #paginator *ngIf="ELEMENT_DATA && ELEMENT_DATA.length > 0" [length]="resultsLength"
+          [pageSize]="10" (page)="next($event)">
+        </mat-paginator>
+        <div *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
+          <br><br>
+          <h3 class="center"> No users in this group</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,190 @@
+@import "variable";
+
+.batch-creation-container {
+    height: 90%;
+    .batch-creation-header {
+        height: 10%;
+        border-bottom: 1px solid $color-border;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0em 1em 0.5em 1em;
+        .batch-btn {
+            width: 30%;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 45%;
+                margin-left: 5%;
+            }
+        }
+        .batch-btn-disable {
+            width: 15%;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 95%;
+                margin-left: 5%;
+            }
+        }
+    }
+    .breadcrumb {
+        margin-bottom: 0.5em;
+    }
+    .main-content-1 {
+        height: 41%;
+        padding: 10px 30px 0px 15px;
+        border-bottom: 1px solid $color-border;
+        .batch-name {
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        .input-box {
+            width: 40%;
+            height: 40px;
+            outline-color: #335b96;
+        }
+        .batch-instruc {
+            padding-bottom: 5px;
+        }
+        .desc-date-container {
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            .desc-container {
+                width: 65%;
+                .batch-desc {
+                    padding-bottom: 5px;
+                }
+                .desc-input {
+                    width: 100%;
+                    height: 40px;
+                    outline-color: #335b96;
+                }
+            }
+            .date-container {
+                display: flex;
+                width: 40%;
+                margin-top: 1.7%;
+                .date-picker {
+                    margin: 5px 15px;
+                }
+            }
+        }
+    }
+    .main-content-2 {
+        height: 42%;
+        padding: 5px;
+        .expansion-panel {
+            margin: 10px;
+            border-radius: 0px;
+            .mat-heading {
+                background: #e5e3e3;
+                height: 45px !important;
+                border-radius: 0px;
+                padding: 0 15px;
+                .mat-heading-title {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-right: 0px;
+                }
+            }
+            .header-active {
+                background: #c4cfe5 !important;
+            }
+            .tool-bar {
+                display: flex;
+                justify-content: flex-end;
+                padding: 8px 10px;
+                height: 35px;
+                border-bottom: 1px solid $color-border;
+                .add-icon {
+                    font-size: 20px;
+                    color: #797878;
+                }
+                .del-icon {
+                    font-size: 17px;
+                    margin-top: 1.8px;
+                    color: #797878;
+                }
+            }
+            .learner-chip {
+                border-radius: 3px;
+                margin: 10px 20px 10px 20px;
+                background: white;
+                border: 1px solid lightgrey;
+                box-shadow: 1px 1px 1px 1px #dedada;
+            }
+            .batch-course-list {
+                display: flex;
+                flex-wrap: wrap;
+                .batch-couse-card {
+                    width: 139px;
+                    height: 175px;
+                    display: flex;
+                    flex-direction: column;
+                    margin: 20px 35px;
+                    padding: 0px;
+                    text-align: center;
+                    img {
+                        height: 130px;
+                        width: 135px;
+                        padding-left: 2px;
+                        padding-top: 4px;
+                    }
+                    div {
+                        height: 38px;
+                        max-height: 40px;
+                        width: 138px;
+                        overflow: hidden;
+                        margin-top: 10px;
+                        // -webkit-line-clamp: 2;
+                        // display: -webkit-box;
+                        // -webkit-box-orient: vertical !important; 
+                    }
+                }
+            }
+            .batch-couse-instructors {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 10px;
+                .instructor-card {
+                    width: 315px;
+                    display: flex;
+                    margin: 10px 20px;
+                    padding: 0px;
+                    border: 1px solid $color-border;
+                    img {
+                        height: 80px;
+                        width: 80px;
+                        margin: 5px 15px 5px 5px;
+                    }
+                    .instructors-details {
+                        width: 70%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        .inst-name {
+                            padding-bottom: 5px;
+                            font-size: 20px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+        .learner-list {
+        }
+        .create-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 70px;
+            button {
+                background-color: #1f3777 !important;
+                height: 33px;
+                width: 15%;
+            }
+        }
+    }
+}

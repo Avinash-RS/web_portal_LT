@@ -110,7 +110,7 @@ html {
 }
 
 .contentTop1 {
-  margin-top: 16px !important;
+  margin-top: 6px !important;
 }
 
 .contentTop2 {
@@ -178,7 +178,7 @@ html {
 }
 
 .f_size_23 {
-  font-size: 23px !important;
+  font-size: 23px;
 }
 
 .f_size_25 {
@@ -322,7 +322,7 @@ html {
 }
 
 .border-radius-5 {
-  border-radius: 5px !important;
+  border-radius: 10px !important;
 }
 
 .blue_border {
@@ -360,10 +360,6 @@ td {
 
 .color_blue {
   color: $color-blue !important;
-}
-
-.color_label {
-  color: $label !important;
 }
 
 .color_white {
@@ -520,6 +516,7 @@ body {
 //   color: $color-blue;
 //   font-weight: 500;
 // }
+
 .head {
   text-align: center;
   color: $color-blue !important;
@@ -686,13 +683,6 @@ h1 {
   z-index: 999;
 }
 
-.myC {
-  .mat-tab-label {
-    font-size: 17px !important;
-    font-weight: 600 !important;
-  }
-}
-
 //////////////////////
 //Breadcrumb change : Mythreyi--- Sarat
 .breadcrumb {
@@ -700,7 +690,7 @@ h1 {
   padding: 0px 0px 0px 26px !important;
   flex-wrap: wrap;
   border-radius: 0px !important;
-  // margin-bottom: 1rem;
+  margin-bottom: 1rem;
   list-style: none;
   background-color: $bread-crumb-bg !important;
   border-radius: 0.25rem;
@@ -798,5 +788,33 @@ mat-header-cell,
 
   .mat-vertical-stepper-header {
     height: 10px !important;
+  }
+}
+
+.batch-creation-container {
+  .instruc-dropdown {
+    .mat-form-field-infix {
+      padding: 0px !important;
+    }
+    .mat-form-field-flex {
+      border: 1px solid grey;
+      height: 40px;
+      width: 350px;
+    }
+    .mat-form-field-underline {
+      background-color: unset;
+    }
+  }
+  .mat-select-arrow {
+    color: unset !important;
+  }
+  .mat-select-arrow-wrapper {
+    padding-right: 5px;
+  }
+  .mat-form-field-ripple {
+    background-color: unset !important;
+  }
+  .mat-expansion-panel-body {
+    padding: 0px;
   }
 }
