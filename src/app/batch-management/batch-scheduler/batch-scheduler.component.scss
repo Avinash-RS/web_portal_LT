@@ -1,0 +1,110 @@
+@import "variable";
+.batch-scheduler-container{
+
+    .batch-group-scheduler{
+
+    }
+
+    .coursebreadcrumb {
+     padding-top: 0px !important; 
+    }
+    table {
+        width: 100%;
+      }
+      
+      tr.scheduler-detail-row {
+        height: 0;
+      }
+      
+      tr.scheduler-element-row:not(.scheduler-expanded-row):hover {
+        background: rgb(238, 238, 238);
+      }
+      
+      tr.scheduler-element-row:not(.scheduler-expanded-row):active {
+        background: #efefef;
+      }
+      
+      .scheduler-element-row td {
+        border-bottom-width: 0;
+      }
+      
+      .scheduler-element-detail {
+        overflow: hidden;
+        display: flex;
+      }
+      
+      .scheduler-element-diagram {
+        min-width: 80px;
+        border: 2px solid black;
+        padding: 8px;
+        font-weight: lighter;
+        margin: 8px 0;
+        height: 104px;
+      }
+      
+      .scheduler-element-symbol {
+        font-weight: bold;
+        font-size: 40px;
+        line-height: normal;
+      }
+      
+      .scheduler-element-description {
+        padding: 16px;
+      }
+      
+      .scheduler-element-description-attribution {
+        opacity: 0.5;
+      }
+      
+      mat-icon {
+        cursor: pointer;
+      }
+
+      th.mat-header-cell:first-of-type{
+        text-align: left !important;
+      }
+
+      th.mat-header-cell{
+        text-align: center !important;
+      }
+      td.mat-cell:first-of-type{
+        text-align: left !important;
+      }
+      td.mat-cell{
+        text-align: center !important;
+      }
+      td.mat-cell:last-of-type{
+        padding-right: 10px;
+      }
+      td.mat-cell:first-of-type{
+        padding-left: 10px;
+      }
+      .module-table{
+        border-collapse: initial !important;
+        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      }
+      .module-table tr.mat-row:nth-child(odd) {
+        background-color: #dadbf1
+      }
+   
+}
+
+::ng-deep .batch-scheduler-container .mat-header-row{
+    background: #929dc2  !important;
+    height: 40px !important;
+}
+::ng-deep .batch-group-scheduler .mat-tab-label {
+    border: 1px solid rgba(109, 108, 108, 0.87) !important;
+    margin: 2px !important;
+    color: black !important;
+    background: rgba(204, 204, 204, 0.87) !important;
+}
+
+::ng-deep .mat-tab-label-active {
+    opacity: 1;
+}
+::ng-deep .batch-group-scheduler .mat-tab-label.mat-tab-label-active {
+    background-color: $color-blue !important;
+    color: white !important;
+
+}

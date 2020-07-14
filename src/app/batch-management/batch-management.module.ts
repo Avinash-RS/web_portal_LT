@@ -18,6 +18,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { BatchSchedulerComponent } from './batch-scheduler/batch-scheduler.component';
+import { CdkTableModule } from '@angular/cdk/table';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -28,7 +30,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BatchCreationComponent,
     BatchAddCourseComponent,
     BatchAddLearnerComponent,
-    BatchSchedulerComponent
+    BatchSchedulerComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSlideToggleModule,
     InfiniteScrollModule,
     PerfectScrollbarModule,
+    CdkTableModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [
