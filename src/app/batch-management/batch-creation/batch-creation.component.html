@@ -10,21 +10,21 @@
   <div class="batch-creation-header">
 
     <div class="f_wt_400 f_size_23">
-      Create a Batch
+      {{isBatchId ? 'Update Batch' : 'Create a Batch' }}
     </div>
 
-    <ng-container *ngIf="isBatchId; else editBatch">
+    <ng-container *ngIf="isEnable; else editBatch">
       <div class="batch-btn-disable">
-      <button mat-flat-button color="primary" (click)="onEditBatch()">Edit</button>
+        <button mat-flat-button color="primary" (click)="onEditBatch()">Edit</button>
       </div>
-      
+
     </ng-container>
     <ng-template #editBatch>
-          
-    <div class="batch-btn">
-      <button mat-flat-button color="primary" (click)="onAddcourse()">Add Course</button>
-      <button mat-flat-button color="primary" (click)="onAddLearner()">Add Learner</button>
-    </div>
+
+      <div class="batch-btn">
+        <button mat-flat-button color="primary" (click)="onAddcourse()">Add Course</button>
+        <button mat-flat-button color="primary" (click)="onAddLearner()">Add Learner</button>
+      </div>
     </ng-template>
 
   </div>
@@ -36,8 +36,8 @@
       Batch name <span style="color: red;">*</span>
     </div>
     <div>
-      <input class="input-box" [(ngModel)]="branchDetails.batchname" type="text"
-        placeholder="Enter the batch name" [disabled]=isBatchId/>
+      <input class="input-box" [(ngModel)]="branchDetails.batchname" type="text" placeholder="Enter the batch name"
+        [disabled]=isEnable />
     </div>
     <div class="desc-date-container">
 
@@ -46,8 +46,8 @@
           Description
         </div>
         <div>
-          <input class="desc-input" [(ngModel)]="branchDetails.batchdescription"
-            type="text" placeholder="Enter the short description (max 75 characters)" [disabled]=isBatchId/>
+          <input class="desc-input" [(ngModel)]="branchDetails.batchdescription" type="text"
+            placeholder="Enter the short description (max 75 characters)" [disabled]=isEnable />
         </div>
 
       </div>
@@ -55,16 +55,17 @@
 
         <mat-form-field class="date-picker">
           <input matInput [matDatepicker]="startPicker" [(ngModel)]="branchDetails.batchstartdate"
-            placeholder="Start Date" [disabled]=isBatchId>
+            placeholder="Start Date" [disabled]=isEnable>
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
 
 
         <mat-form-field class="date-picker">
-          <input matInput [matDatepicker]="endPicker" [(ngModel)]="branchDetails.batchenddate" placeholder="End Date" [disabled]=isBatchId>
-          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-          <mat-datepicker #endPicker></mat-datepicker>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="branchDetails.batchenddate" placeholder="End Date"
+            [disabled]=isEnable>
+          <mat-datepicker-toggle matSuffix [for]="endPicker" [disabled]=isEnable></mat-datepicker-toggle>
+          <mat-datepicker #endPicker [disabled]=isEnable></mat-datepicker>
         </mat-form-field>
 
       </div>
@@ -76,7 +77,7 @@
     <div class="instruc-dropdown">
 
       <mat-form-field>
-        <mat-select multiple (selectionChange)="instrucSelection($event)" [disabled]=isBatchId>
+        <mat-select multiple (selectionChange)="instrucSelection($event)" [disabled]=isEnable>
           <mat-option *ngFor="let inst of instructors" [value]="inst.id">{{inst.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -92,11 +93,11 @@
         hideToggle>
         <mat-expansion-panel-header class="mat-heading">
           <mat-panel-title class="mat-heading-title">
-            {{'Batch Instructors' + ' (' + branchDetails.instructure_details.length + ')'}}
+            {{'Batch Instructors' + ' (' + branchDetails.instructure_details?.length + ')'}}
             <mat-icon>{{step === 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
           </mat-panel-title>
         </mat-expansion-panel-header>
-       
+
         <div class="batch-couse-instructors">
           <ng-container *ngFor="let instDetails of branchDetails.instructure_details">
             <mat-card class="instructor-card">
@@ -111,9 +112,9 @@
               </div>
             </mat-card>
           </ng-container>
-          
-      
-      </div>
+
+
+        </div>
 
 
       </mat-expansion-panel>
@@ -122,7 +123,7 @@
         hideToggle>
         <mat-expansion-panel-header class="mat-heading">
           <mat-panel-title class="mat-heading-title">
-            {{'Courses' + ' (' + branchDetails.course_details.length + ')'}}
+            {{'Courses' + ' (' + branchDetails.course_details?.length + ')'}}
             <mat-icon>{{step === 1 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -132,13 +133,13 @@
         </div>
         <div class="batch-course-list">
           <ng-container *ngFor="let course of branchDetails.course_details">
-          <mat-card class="batch-couse-card">
-            <img [src]="course.image" alt="">
-            <div>
-              {{course.name}}
-            </div>
-          </mat-card>
-        </ng-container>
+            <mat-card class="batch-couse-card">
+              <img [src]="course.image" alt="">
+              <div>
+                {{course.name}}
+              </div>
+            </mat-card>
+          </ng-container>
         </div>
       </mat-expansion-panel>
 
@@ -146,7 +147,7 @@
         hideToggle>
         <mat-expansion-panel-header class="mat-heading">
           <mat-panel-title class="mat-heading-title">
-            {{'Learners' + ' (' + branchDetails.user_details.length + ')'}}
+            {{'Learners' + ' (' + branchDetails.user_details?.length + ')'}}
             <mat-icon>{{step === 2 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -158,15 +159,16 @@
           <mat-chip-list>
             <ng-container *ngFor="let learners of branchDetails.user_details">
               <mat-chip class="learner-chip">{{learners.name}}</mat-chip>
-          </ng-container>
+            </ng-container>
           </mat-chip-list>
         </div>
       </mat-expansion-panel>
-   
+
     </mat-accordion>
 
-    <div class="create-btn">
-      <button mat-flat-button color="primary" (click)="createBatch()">Create a Batch</button>
+    <div class="create-btn" *ngIf="!isEnable">
+      <button mat-flat-button color="primary"
+        (click)="isBatchId ? updateBatch() : createBatch()">{{isBatchId ? 'Update Batch' : 'Create a Batch' }}</button>
     </div>
 
   </div>

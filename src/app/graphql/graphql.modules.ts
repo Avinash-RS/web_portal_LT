@@ -72,7 +72,9 @@ export class GraphqlModule {
 
     apollo.create({
       link: Errlink.concat(link),
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache({
+        addTypename: false
+      }),
       defaultOptions,
     });
   }
