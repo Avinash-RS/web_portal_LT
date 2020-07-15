@@ -93,13 +93,13 @@
         hideToggle>
         <mat-expansion-panel-header class="mat-heading">
           <mat-panel-title class="mat-heading-title">
-            {{'Batch Instructors' + ' (' + branchDetails.instructure_details?.length + ')'}}
+            {{'Batch Instructors' + ' (' + branchDetails.instructur_details?.length + ')'}}
             <mat-icon>{{step === 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <div class="batch-couse-instructors">
-          <ng-container *ngFor="let instDetails of branchDetails.instructure_details">
+          <ng-container *ngFor="let instDetails of branchDetails.instructur_details">
             <mat-card class="instructor-card">
               <img [src]="instDetails.image" alt="no image">
               <div class="instructors-details">
@@ -167,8 +167,19 @@
     </mat-accordion>
 
     <div class="create-btn" *ngIf="!isEnable">
-      <button mat-flat-button color="primary"
-        (click)="isBatchId ? updateBatch() : createBatch()">{{isBatchId ? 'Update Batch' : 'Create a Batch' }}</button>
+      <ng-container ></ng-container>
+      
+      <ng-container *ngIf="isBatchId; else create">
+        <button mat-flat-button color="primary"
+        (click)="updateBatch()">Update Batch</button>
+      </ng-container>
+      <ng-template #create>
+        <button mat-flat-button color="primary"
+        (click)="createBatch()">Create a Batch</button>
+      </ng-template>
+      
+
+     
     </div>
 
   </div>

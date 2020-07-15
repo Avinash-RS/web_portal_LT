@@ -21,7 +21,7 @@ export class BatchCreationComponent implements OnInit {
     batchenddate: '',
     user_details: [],
     course_details: [],
-    instructure_details: []
+    instructur_details: []
   };
   selectedInst = [];
   isEdit: boolean;
@@ -105,7 +105,7 @@ export class BatchCreationComponent implements OnInit {
         }
       })
     })
-    this.branchDetails.instructure_details = instDetails;
+    this.branchDetails.instructur_details = instDetails;
 
   }
 
@@ -134,6 +134,7 @@ export class BatchCreationComponent implements OnInit {
       this.addInst();
       this.apiService.create_batch(this.branchDetails).subscribe((data: any) => {
         if (data.data.create_batch.success) {
+          this.apiService.batchDetails = undefined;
           this.toast.success("Batch created successfully");
           this.router.navigateByUrl('/Admin/auth/batch');
         }
@@ -149,6 +150,7 @@ export class BatchCreationComponent implements OnInit {
       this.addInst();
       this.apiService.update_batch(this.branchDetails).subscribe((data: any) => {
         if (data.data.update_batch.success) {
+          this.apiService.batchDetails = undefined;
           this.toast.success("Batch updated successfully");
           this.router.navigateByUrl('/Admin/auth/batch');
         }
