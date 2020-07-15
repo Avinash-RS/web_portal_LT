@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: '', component: BatchHomeComponent },
     {path: 'create', component: BatchCreationComponent},
     {path: 'addcourse', component: BatchAddCourseComponent},
-    {path: 'addleaner', component: BatchAddLearnerComponent},
+    {path: 'addlearner', component: BatchAddLearnerComponent},
     {path: 'addscheduler', component: BatchSchedulerComponent},
   ];
 

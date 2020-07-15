@@ -801,6 +801,9 @@ mat-header-cell,
       height: 40px;
       width: 350px;
     }
+    .mat-form-field-underline {
+      background-color: unset;
+    }
   }
   .mat-select-arrow {
     color: unset !important;
@@ -811,7 +814,7 @@ mat-header-cell,
   .mat-form-field-ripple {
     background-color: unset !important;
   }
-  .mat-expansion-panel-header {
-    
+  .mat-expansion-panel-body {
+    padding: 0px;
   }
 }

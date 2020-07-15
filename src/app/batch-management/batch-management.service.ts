@@ -1,29 +1,41 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { create_batch, read_batch } from './batch-management.gql';
+import { create_batch, read_batch, read_particular_batch, update_batch } from './batch-management.gql';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class batchService {
 
+  batchDetails: any;
+
   constructor(private http: HttpClient,private Apollo: Apollo) { }
 
-  create_batch(batchname, batchdescription, batchstartdate, batchenddate,user_details,course_details,instructur_details) {
+  create_batch(batchDetails) {
     return this.Apollo.query({
       query: create_batch,
-      variables: {
-        batchname,
-        batchdescription,
-        batchstartdate,
-        batchenddate,
-        user_details,
-        course_details,
-        instructur_details
-      }
+      variables: batchDetails
     });
   }
+
+  update_batch(batchDetails) {
+    return this.Apollo.query({
+      query: update_batch,
+      variables: batchDetails
+    });
+  }
+
+getParticularBatch(batchid) {
+
+  return this.Apollo.query({
+    query: read_particular_batch,
+    variables: {
+      batchid
+    }
+  });
+}
 
   getBatch() {
     return this.Apollo.query({

@@ -7,6 +7,8 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { SelectionModel } from '@angular/cdk/collections';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
+import { batchService } from '../batch-management.service';
 
 export interface LeanerList {
   full_name: string;
@@ -33,6 +35,15 @@ export class BatchAddLearnerComponent implements OnInit {
   SelectLeaners = false;
   dataSource = new MatTableDataSource<LeanerList>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
+  branchDetails = {
+    batchname: '',
+    batchdescription: '',
+    batchstartdate: '',
+    batchenddate: '',
+    user_details: [],
+    course_details: [],
+    instructure_details: []
+  };
   currentpath = null;
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
@@ -41,13 +52,27 @@ export class BatchAddLearnerComponent implements OnInit {
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private adminservice: AdminServicesService,private alert: AlertServiceService,public toast: ToastrService) {
+  constructor(private adminservice: AdminServicesService,private alert: AlertServiceService,public toast: ToastrService,
+    private router: Router,
+    public route: ActivatedRoute,
+    public apiService: batchService) {
     this.treeSource = new MatTreeNestedDataSource<any>();
     this.dataSource$ = new BehaviorSubject<any[]>([]);
    }
 
   ngOnInit() {
     this.getgroups();
+    if(this.apiService.batchDetails.user_details.length > 0) {
+      let learnerList = [];
+      this.apiService.batchDetails.user_details.forEach((data) => {
+        learnerList.push({
+          user_id: data.id,
+          full_name: data.name
+        })
+      })
+      
+      this.selectedArray = learnerList
+    }
   }
   getgroups() {
     this.pagenumber = 0;
@@ -205,8 +230,21 @@ export class BatchAddLearnerComponent implements OnInit {
 // this.router.navigateByUrl('/', {skipLocationChange: true})
     // .then(() => this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } }));
     // to send data
-    // this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
-
+    let learner = [];
+    this.selectedArray.forEach((val) => {
+      learner.push({
+        id: val.user_id,
+        name: val.full_name,
+        image: ''
+      })
+    })
+    this.apiService.batchDetails.user_details = learner;
+     this.router.navigate(['/Admin/auth/batch/create'], {
+      queryParams:
+      {
+        isEdit: 'true'
+      }
+    });
     // to retrive data
     // this.report_data = this.route.getCurrentNavigation().extras.state.type;
   }

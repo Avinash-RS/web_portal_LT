@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material';
+import { batchService } from '../batch-management.service';
 
 export interface AddedCourse {
   course_id: string;
@@ -38,13 +39,25 @@ export class BatchAddCourseComponent implements OnInit {
   /** tree control */
   readonly treeControl = new NestedTreeControl<any>(node => node.children);
   readonly hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
-  constructor(private adminservice: AdminServicesService,public learnerservice: LearnerServicesService,private router: Router,public toast: ToastrService) { 
+  constructor(private adminservice: AdminServicesService,public learnerservice: LearnerServicesService,private router: Router,public toast: ToastrService,
+    private apiService: batchService) { 
 
     this.treeSource = new MatTreeNestedDataSource<any>();
   }
 
   ngOnInit() {
     this.getallcategories();
+    if(this.apiService.batchDetails.course_details.length > 0) {
+      let courseList = [];
+      this.apiService.batchDetails.course_details.forEach((data) => {
+        courseList.push({
+          course_id: data.id,
+          course_name: data.name,
+          course_img_url: data.image
+        })
+      })
+      this.selectedCourseArray = courseList
+    }
   }
 
   getallcategories() {
@@ -376,12 +389,27 @@ export class BatchAddCourseComponent implements OnInit {
     acc[curr] = o[curr];
     return acc;
     }, {}));  
-    // var value = courseValue
+   var value = courseValue
 // this.router.navigateByUrl('/', {skipLocationChange: true})
     // .then(() => this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } }));
     // to send data
-    // this.router.navigateByUrl('/Admin/auth/viewReport', { state: { type: value } });
 
+    let courses = [];
+    value.forEach((val) => {
+      courses.push({
+        id: val.course_id,
+        name: val.course_name,
+        image: val.course_img_url
+      })
+    })
+
+    this.apiService.batchDetails.course_details = courses;
+     this.router.navigate(['/Admin/auth/batch/create'], {
+      queryParams:
+      {
+        isEdit: 'true'
+      }
+    });
     // to retrive data
     // this.report_data = this.route.getCurrentNavigation().extras.state.type;
   }

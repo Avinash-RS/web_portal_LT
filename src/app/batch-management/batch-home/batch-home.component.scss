@@ -58,6 +58,7 @@
             box-shadow: 0px 5px 10px 0px lightgrey;
             border: 1px solid #ccc;
             border-radius: 0px;
+            cursor: pointer;
             .batch-card-header {
                 background: #c4cfe5;
                 height: 20%;
@@ -85,10 +86,22 @@
                 align-items: center;
                 margin: 0 4%;
             }
-            .border-btm {
+            .border-going {
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
                 background-color: #e9a85e;
+                height: 4%;
+            }
+            .border-complete {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                background-color: #48ae16;
+                height: 4%;
+            }
+            .border-start{
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                background-color: #9e9e9e;
                 height: 4%;
             }
         }
