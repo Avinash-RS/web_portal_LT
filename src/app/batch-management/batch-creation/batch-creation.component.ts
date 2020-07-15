@@ -100,7 +100,7 @@ export class BatchCreationComponent implements OnInit {
           inst.id = dt.id
           inst.name = dt.name
           inst.image = dt.image
-          inst.description = dt.description
+          // inst.description = dt.description
           instDetails.push(inst);
         }
       })
