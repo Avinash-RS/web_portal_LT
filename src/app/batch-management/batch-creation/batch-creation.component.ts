@@ -94,7 +94,7 @@ export class BatchCreationComponent implements OnInit {
           id: "",
           name: "",
           image: "",
-          description: ""
+          // description: ""
         };
         if (dt.id == val) {
           inst.id = dt.id
