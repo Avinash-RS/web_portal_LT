@@ -32,7 +32,7 @@
         margin-bottom: 0.5em;
     }
     .main-content-1 {
-        height: 41%;
+        height: 43%;
         padding: 10px 30px 0px 15px;
         border-bottom: 1px solid $color-border;
         .batch-name {
@@ -73,7 +73,7 @@
         }
     }
     .main-content-2 {
-        height: 42%;
+        height: 40%;
         padding: 5px;
         .expansion-panel {
             margin: 10px;
@@ -126,6 +126,7 @@
                     margin: 20px 35px;
                     padding: 0px;
                     text-align: center;
+                    box-shadow: 0.5px 1px 5px 1px lightgrey;
                     img {
                         height: 130px;
                         width: 135px;
