@@ -19,6 +19,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { BatchSchedulerComponent } from './batch-scheduler/batch-scheduler.component';
 import { CdkTableModule } from '@angular/cdk/table';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -51,11 +52,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSlideToggleModule,
     InfiniteScrollModule,
     PerfectScrollbarModule,
-<<<<<<< HEAD
-    CdkTableModule
-=======
-    Ng2SearchPipeModule
->>>>>>> e43559b3f3c9d1f3a35e41cd9a2c3f5e0573629c
+    CdkTableModule,
+    Ng2SearchPipeModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [

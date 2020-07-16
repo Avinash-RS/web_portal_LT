@@ -86,11 +86,37 @@
       .module-table tr.mat-row:nth-child(odd) {
         background-color: #dadbf1
       }
-   
-}
+      .topic-table tr.mat-row:nth-child(odd){
+        background-color:white !important;
+      }
+      .topic-table a{
+    text-decoration: underline !important;
+    color: $color-blue !important;
+   }
 
+   .topic-table td.mat-cell:last-of-type{
+    padding-top: 20px !important; 
+   }
+  //  .topic-table td.mat-cell:first-of-type{
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+   white-space: nowrap !important;
+  //  }
+   .topic-table mat-icon{
+     font-size: 16px !important;
+     color: #484545 !important ;
+   }
+  // .topic-table th, td {
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   white-space: nowrap;
+  // }
+}
+::ng-deep .batch-scheduler-container .owl-dt-container{
+  font-size: 14px !important;
+}
 ::ng-deep .batch-scheduler-container .mat-header-row{
-    background: #929dc2  !important;
+    background: #95a2ccc7   !important;
     height: 40px !important;
 }
 ::ng-deep .batch-group-scheduler .mat-tab-label {
@@ -108,3 +134,24 @@
     color: white !important;
 
 }
+
+::ng-deep .topic-table mat-form-field {
+  width: 80%;
+}
+
+::ng-deep td.mat-cell.cdk-column-topic.mat-column-topic{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// ::ng-deep .mat-column-scorename{
+//   flex: 0 0 2% !important;
+//   width: 2% !important;
+//  }
+
+//  ::ng-deep .mat-cell .cdk-column-scorename .mat-column-scorename {
+//   flex: 0 0 2% !important;
+//   width: 2% !important;
+//  }
+
+

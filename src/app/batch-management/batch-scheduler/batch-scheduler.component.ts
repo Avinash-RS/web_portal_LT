@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { batchService } from '../batch-management.service';
 
 @Component({
   selector: 'app-batch-scheduler',
@@ -18,7 +19,15 @@ export class BatchSchedulerComponent implements OnInit {
 
   courseColumnsToDisplay = ['course_name', 'module_count','action'];
   ModuleColumnsToDisplay = ['module_name','topic_count' ];
+  TopicColumnsToDisplay = ['topic', 'start_date', 'end_date', 'activity_type','activity_name','digital_resource','scorename','action'];
   expandedElement;
+  activityType = [
+    {viewValue: 'VILT'},
+    {viewValue: 'Assignment'},
+    {viewValue: 'Lecture'},
+    {viewValue: 'Pre-read'},
+    {viewValue: 'In-class Quiz'}
+  ];
   CourseModule = [
     {
       "course_name": "self reading & pre-reading skills",
@@ -27,7 +36,7 @@ export class BatchSchedulerComponent implements OnInit {
           "module_name": "How to read a paragraph",
           "topic_details": [
             {
-              "topic_name": "Topic 1",
+              "topic_name": "self reading & pre-reading skills",
               "start_date": "20/20/20",
               "end_date": "20/20/20",
               "activity_type": "lecture",
@@ -124,9 +133,12 @@ export class BatchSchedulerComponent implements OnInit {
     }
   ]
  
-  constructor() { }
+  constructor( public apiService: batchService) { }
 
   ngOnInit() {
+    this.apiService.getScheduleDetails('BATH0005').subscribe((result)=>{
+      console.log(result)
+    })
     this.dataSource = this.CourseModule;
     // this.dataSource = new MatTableDataSource(this.CourseModule);
   }
