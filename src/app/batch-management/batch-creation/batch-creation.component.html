@@ -77,7 +77,7 @@
     <div class="instruc-dropdown">
 
       <mat-form-field>
-        <mat-select multiple (selectionChange)="instrucSelection($event)" [disabled]=isEnable>
+        <mat-select multiple [(ngModel)]="selectedInst" (selectionChange)="instrucSelection($event)" [disabled]=isEnable>
           <mat-option *ngFor="let inst of instructors" [value]="inst.id">{{inst.name}}</mat-option>
         </mat-select>
       </mat-form-field>
