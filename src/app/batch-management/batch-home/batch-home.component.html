@@ -48,6 +48,7 @@
           </div>
         </div>
         <div class="f_wt_500">
+          <span class="{{batch.batchstatus == 'On-going' ? 'dot-going' : (batch.batchstatus == 'Yet to start') ? 'dot-start' : 'dot-complete'}}"></span>
           {{batch.batchstatus}}
         </div>
 

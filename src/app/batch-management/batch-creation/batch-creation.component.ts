@@ -42,9 +42,11 @@ export class BatchCreationComponent implements OnInit {
       if (params.isEdit == 'true' && this.apiService.batchDetails) {
         this.isEdit = true;
         this.branchDetails = this.apiService.batchDetails;
+        this.addPrevInstList();
       }
       else if (params.batchId && params.batchId.length > 0) {
         this.isBatchId = true;
+        this.isEdit = true;
         this.isEnable = true;
         this.getBatchDetails(params.batchId);
       }
@@ -56,9 +58,18 @@ export class BatchCreationComponent implements OnInit {
     this.step = index;
   }
 
+  addPrevInstList() {
+    let inst = [];
+    this.branchDetails.instructur_details.forEach((data) => {
+      inst.push(data.id);
+    })
+    this.selectedInst = inst;
+  }
+
   getBatchDetails(id) {
     this.apiService.getParticularBatch(id).subscribe((data: any) => {
           this.branchDetails = data.data.read_batch.message[0];
+          this.addPrevInstList();
     })
   }
 
@@ -110,18 +121,12 @@ export class BatchCreationComponent implements OnInit {
   }
 
   onAddcourse() {
-    if (this.isBatchId) {
-      return false;
-    }
     this.apiService.batchDetails = this.branchDetails;
     this.router.navigateByUrl('/Admin/auth/batch/addcourse');
   }
 
 
   onAddLearner() {
-    if (this.isBatchId) {
-      return false;
-    }
     this.apiService.batchDetails = this.branchDetails;
     this.router.navigateByUrl('/Admin/auth/batch/addlearner', { state: { type: this.branchDetails.user_details } });
   }
