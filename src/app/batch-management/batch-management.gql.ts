@@ -112,3 +112,22 @@ export const read_particular_batch = gql`
     }
     }
   }`;
+
+  export const get_scheduled_activity = gql`
+  query get_scheduled_activity($batchid: String!){
+    get_scheduled_activity(
+      batchid: $batchid
+    ) {
+      success
+      error_msg
+      message{
+          _id
+          coursename
+          coursedetails{
+              id
+              name
+              image
+          }
+      }
+  }
+    }`

@@ -1,9 +1,160 @@
-<mat-tab-group>
-  <mat-tab label="Batch Details"> Content 1 </mat-tab>
-  <mat-tab label="View Leaners"> Content 2 </mat-tab>
-  <mat-tab label="View Courses"> Content 3 </mat-tab>
-  <mat-tab label="Schedule Activities"> Content 4 </mat-tab>
-  <mat-tab label="View Assignments"> 
-    <!-- Assignment code comes here -->
-  </mat-tab>
-</mat-tab-group>
+<div class="batch-scheduler-container">
+  <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/userManagement']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/Admin/auth/Wca']">Scheduled Batches</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Batch</li>
+    </ol>
+</nav>
+  <mat-tab-group mat-stretch-tabs class="batch-group-scheduler m-2" [selectedIndex]="3">
+    <mat-tab label="Batch Details"> Content 1 </mat-tab>
+    <mat-tab label="View Leaners"> Content 2 </mat-tab>
+    <mat-tab label="View Courses"> Content 3 </mat-tab>
+    <mat-tab label="Schedule Activities">
+    <!--Scheduler start-->
+    <div class="scheduler-container w-100 p-3">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="course_name">
+           <th mat-header-cell *matHeaderCellDef> Course Name </th>
+           <td mat-cell *matCellDef="let element"> {{element.course_name}} </td>
+           </ng-container>
+
+           <ng-container matColumnDef="module_count">
+           <th mat-header-cell *matHeaderCellDef> No.of Module </th>
+           <td mat-cell *matCellDef="let element"> {{element.course_details.length}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="action">
+           <th mat-header-cell *matHeaderCellDef> Action </th>
+           <td mat-cell *matCellDef="let element"> <mat-icon (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement === element ? 'remove_circle_outline' : 'add_circle_outline'}}</mat-icon> </td>
+          </ng-container>
+
+           <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+           <ng-container matColumnDef="expandedDetail">
+           <td mat-cell *matCellDef="let element" [attr.colspan]="courseColumnsToDisplay.length">
+             <div class="scheduler-element-detail"
+                   [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                   <!-- Module data table starts -->
+                   <table mat-table [dataSource]="element.course_details" multiTemplateDataRows class="module-table mat-elevation-z8">
+                    <ng-container matColumnDef="module_name">
+                      <th mat-header-cell *matHeaderCellDef> Module Name </th>
+                      <td mat-cell *matCellDef="let value"> {{value.module_name}} </td>
+                      </ng-container>
+           
+                      <ng-container matColumnDef="topic_count">
+                        <th mat-header-cell *matHeaderCellDef> No.of Topic </th>
+                        <td mat-cell *matCellDef="let value"> {{value.topic_details.length}} </td>
+                      </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="ModuleColumnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ModuleColumnsToDisplay;"></tr> 
+                    <ng-container matColumnDef="groupHeader">
+                      <td colspan="999" mat-cell *matCellDef="let groupBy" class="pt-2 pb-2">
+                        <!-- Topic data table starts -->
+                        <table mat-table [dataSource]="groupBy.topic_details" class="topic-table list-topic mat-elevation-z8 pt-4 pb-4" style="table-layout: fixed;">
+                          <ng-container matColumnDef="topic">
+                            <th mat-header-cell *matHeaderCellDef> Topic </th>
+                            <td mat-cell *matCellDef="let topicvalue">{{topicvalue.topic_name}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="start_date">
+                            <th mat-header-cell *matHeaderCellDef> Start Date & Time </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <mat-form-field class="example-form-field">
+                                <input matInput [owlDateTime]="sdt">
+                                <button mat-button matSuffix mat-icon-button [owlDateTimeTrigger]="sdt">
+                                  <mat-icon>date_range</mat-icon>
+                                </button>
+                                <owl-date-time #sdt></owl-date-time>
+                              </mat-form-field>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="end_date">
+                            <th mat-header-cell *matHeaderCellDef>End Date & Time </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <mat-form-field class="example-form-field">
+                                <input matInput [owlDateTime]="edt">
+                                <button mat-button matSuffix mat-icon-button [owlDateTimeTrigger]="edt">
+                                  <mat-icon>date_range</mat-icon>
+                                </button>
+                                <owl-date-time #edt></owl-date-time>
+                              </mat-form-field>  
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="activity_type">
+                            <th mat-header-cell *matHeaderCellDef> Activity Type </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <mat-form-field>
+                                <mat-select>
+                                  <mat-option *ngFor="let activity of activityType" [value]="activity.viewValue">
+                                    {{activity.viewValue}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>  
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="activity_name">
+                            <th mat-header-cell *matHeaderCellDef>Activity Name</th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <mat-form-field class="example-full-width">
+                                <input matInput>
+                              </mat-form-field>  
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="digital_resource">
+                            <th mat-header-cell *matHeaderCellDef> Digital Resources </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <a class="un">Select</a>  
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="scorename">
+                            <th mat-header-cell *matHeaderCellDef> Score </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                                <mat-form-field>
+                                  <input matInput>
+                                </mat-form-field> 
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> action </th>
+                            <td mat-cell *matCellDef="let topicvalue"> 
+                              <mat-icon class="inser-link">insert_link</mat-icon>
+                              <mat-icon>save</mat-icon>
+                              <mat-icon>content_copy</mat-icon>
+                            </td>
+                          </ng-container>
+                          
+                          <tr mat-header-row *matHeaderRowDef="TopicColumnsToDisplay"></tr>
+                          <tr mat-row *matRowDef="let row; columns: TopicColumnsToDisplay;"></tr>
+                        </table>
+                        <!-- Topic data table ends -->
+                      </td>
+                    </ng-container>
+                  
+                    <tr mat-row *matRowDef="let row; columns: ['groupHeader'];"> </tr>
+                   </table>
+                   <!-- Module data table ends -->
+             </div>
+           </td>
+           </ng-container>
+           <tr mat-header-row *matHeaderRowDef="courseColumnsToDisplay"></tr>
+           <tr mat-row *matRowDef="let element; columns: courseColumnsToDisplay;"
+             class="scheduler-element-row"
+             [class.scheduler-expanded-row]="expandedElement === element">
+           </tr>
+           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="scheduler-detail-row"></tr>
+ </table>
+    </div>
+    <!--Scheduler end-->
+    </mat-tab>
+    <mat-tab label="View Assignments"> 
+      <!-- Assignment code comes here -->
+    </mat-tab>
+  </mat-tab-group>
+</div>
