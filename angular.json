@@ -38,6 +38,7 @@
               "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
+              "node_modules/ng-pick-datetime/assets/style/picker.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
               "src/assets/variable.scss"
@@ -131,6 +132,7 @@
               "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
+              "node_modules/ng-pick-datetime/assets/style/picker.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
               "src/assets/variable.scss"

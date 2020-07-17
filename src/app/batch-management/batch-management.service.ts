@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { create_batch, read_batch, read_particular_batch, update_batch } from './batch-management.gql';
+import { create_batch, read_batch, read_particular_batch, update_batch,get_scheduled_activity } from './batch-management.gql';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -43,4 +43,13 @@ getParticularBatch(batchid) {
     });
   }
 
+  getScheduleDetails(batchid){
+    debugger;
+    return this.Apollo.query({
+      query: get_scheduled_activity,
+      variables: {
+        batchid
+      }
+    });
+  }
 }
