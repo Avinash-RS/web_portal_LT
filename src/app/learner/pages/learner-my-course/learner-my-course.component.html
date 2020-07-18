@@ -1,12 +1,13 @@
 <app-header></app-header>
 <!-- <mat-tab-group style="margin-top: 5%;" class="myC">
   <mat-tab label="My Courses" class="m-l-5 "> -->
+<br><br><br><br>
 <p class="mHead">My Courses</p>
 <div class="vertical"></div>
 <hr style="margin: 0 !important;">
-<div class="spinner-container" *ngIf="loading">
+<!-- <div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="40"></mat-spinner>
-</div>
+</div> -->
 <div class="row width_100 no_margin bodybg" *ngIf="!loading">
   <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-12">
     <mat-tab-group style="padding: 0% 3%;" class="myCc">
@@ -91,9 +92,10 @@
                 <div class="lineer"></div>
                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
               </div>
-              <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
-               
-              <span style="font-size: medium;"> You have no enrolled courses at the moment.</span> 
+              <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl"
+                style="padding: 5px !important;margin : auto">
+
+                <span style="font-size: medium;"> You have no enrolled courses at the moment.</span>
               </div>
             </div>
           </mat-card>
@@ -142,10 +144,10 @@
                       <!-- <span class="cap icon-color">
                       &nbsp;Resume&nbsp;
                     </span> -->
-                    &nbsp;<span class="cap icon-color">
-                      {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                      &nbsp;<span class="cap icon-color">
+                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                         course?.coursePlayerStatus?.status === 'start' ? 'Start' : 'Resume'}}&nbsp;
-                    </span>
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -222,15 +224,15 @@
   </div>
 </div>
 
- <!-- Model for mobile user  -->
- <div  class="modal" *ngIf="show" >
+<!-- Model for mobile user  -->
+<div class="modal" *ngIf="show">
   <div class="modal-content">
     <div class="modal-header">
       <span style="font-size:22px; color: red;">Alert !</span>
     </div>
     <div class="modal-body">
-     <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
-     <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
+      <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
+      <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
       <div class="row">
         <div class="col-8">
           <p><b>Recommended browsers</b></p>
@@ -239,18 +241,18 @@
           <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
         </div>
       </div>
-  <div [ngClass]="{'show-less': showShortDesciption}">
-     <p>L&T Kaushalya supports the most recent versions of the following browsers.</p>
-     <ul>
-       <li>Google Chrome (recommended)</li>
-       <li>Firefox</li>
-       <li>Safari</li>
-       <li>Internet Explorer 11</li>
-       <li>Microsoft Edge</li>
-      
-     </ul>
-     <p>If you're using an older browser , updating your browser can help solve problems.</p>
-     </div>
+      <div [ngClass]="{'show-less': showShortDesciption}">
+        <p>L&T Kaushalya supports the most recent versions of the following browsers.</p>
+        <ul>
+          <li>Google Chrome (recommended)</li>
+          <li>Firefox</li>
+          <li>Safari</li>
+          <li>Internet Explorer 11</li>
+          <li>Microsoft Edge</li>
+
+        </ul>
+        <p>If you're using an older browser , updating your browser can help solve problems.</p>
+      </div>
 
 
     </div>
@@ -258,7 +260,7 @@
       <button class="roundbtn" (click)="close()">Close</button>
     </div>
   </div>
-  </div>
+</div>
 
 <div class="footer" *ngIf="!loading">
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
