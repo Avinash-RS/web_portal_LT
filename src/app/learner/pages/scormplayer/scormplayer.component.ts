@@ -67,7 +67,7 @@ export class ScormplayerComponent implements OnInit {
     this.passCourseId();
     this.contentid = 'dfdfd'
     this.url = environment.scormUrl + 'scormPlayer.html?contentID=' + this.contentid + '&user_id=' + this.user_id + '&course_id=' + this.course_id
-    this.getModuleData();
+    // this.getModuleData();
     this.getFeedbackQue();
     this.getCoursePlayerStatus();
   }
@@ -90,23 +90,23 @@ export class ScormplayerComponent implements OnInit {
     })
   }
 
-  getModuleData() {
-    this.service.getModuleData(this.course_id).subscribe(data => {
-      if (data.data['getmoduleData']['success'] === 'true') {
-        this.content = data.data['getmoduleData']['data'][0];
-        this.getuserid= JSON.parse(localStorage.getItem('UserDetails'))
-        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id+'&user_obj_id='+this.getuserid._id);
-        //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
-        this.modulength = this.content['coursedetails'].length;
-        this.content.coursedetails.forEach(moduledetails => {
-          moduledetails.moduledetails.forEach(element => {
-            this.countofdoc = element.resourse.count;
-            return true
-          });
-        });
-      }
-    })
-  }
+  // getModuleData() {
+  //   this.service.getModuleData(this.course_id).subscribe(data => {
+  //     if (data.data['getmoduleData']['success'] === 'true') {
+  //       this.content = data.data['getmoduleData']['data'][0];
+  //       this.getuserid= JSON.parse(localStorage.getItem('UserDetails'))
+  //       this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id+'&user_obj_id='+this.getuserid._id);
+  //       //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+  //       this.modulength = this.content['coursedetails'].length;
+  //       this.content.coursedetails.forEach(moduledetails => {
+  //         moduledetails.moduledetails.forEach(element => {
+  //           this.countofdoc = element.resourse.count;
+  //           return true
+  //         });
+  //       });
+  //     }
+  //   })
+  // }
 
   downloadAll(urls) {
     var arr: any = [];

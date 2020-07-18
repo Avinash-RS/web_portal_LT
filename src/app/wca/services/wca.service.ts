@@ -85,6 +85,7 @@ export class WcaService {
   refDocUpload(fromdata) { return this.http.post(environment.apiUrl + 'wca/refdocupload', fromdata); }
   
   editrefdocupload(data) { return this.http.post(environment.apiUrl + 'wca/editrefdocupload', data); }
+  uploadAssignments(fromdata) { return this.http.post(environment.apiUrl + 'wca/learnerscorefile', fromdata); }
 
   remove_doc_ref(id) {
     return this.apollo.query({

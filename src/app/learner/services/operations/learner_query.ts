@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const login = gql`
   query login($username: String, $password: String, $is_admin: Boolean){
@@ -15,8 +15,8 @@ export const login = gql`
         is_blocked
         profile_img
         is_profile_updated
-        group_id                  
-        message      
+        group_id
+        message
       }
     }
   }`;
@@ -126,7 +126,7 @@ export const get_discipline_details = gql`
         discipline_name
         discipline_code
         is_active
-      }  
+      }
     }
   }
 `;
@@ -142,7 +142,7 @@ export const get_specification_details = gql`
         specification_name
         specification_code
         is_active
-      }  
+      }
     }
   }
 `;
@@ -158,7 +158,7 @@ export const get_institute_details = gql`
         institute_name
         institute_code
         is_active
-      }  
+      }
     }
   }
 `;
@@ -173,7 +173,7 @@ export const get_language_details = gql`
         is_active
         languagecode
         languagename
-      }  
+      }
     }
   }
 `;
@@ -227,35 +227,50 @@ query syllabus_of_particular_scorm($contentid:String,$user_id:String,$course_id:
 }`;
 
 export const getmoduleData = gql`
-query getmoduleData($courseid:String!){
-  getmoduleData(courseid:$courseid) {
+query getmoduleData($courseid:String!,$user_id:String){
+  getmoduleData(courseid:$courseid,user_id:$user_id) {
     success
     data {
+      playerstatusData{
+        success
+        playerstatus{
+          course_dtl{
+            module{
+              topic{
+                topic_name
+                status
+              }
+              module_name
+            }
+          }
+        }
+      }
       courseid
       _id
       url
-      coursetype
+      totalResourseCount
       coursename
       coursefile
       coursestatus
-      coursecreated_on
       coursetime
+      coursecreated_on
       coursedetails{
-        moduletime
-        Modulecount
         modulename
         modulestatus
         modulecreated_on
         moduledetails{
-          topictime
           topicname
           topicstatus
           topiccreated_on
           topicimages
           url
           resourse{
+            _id
             type
             files{
+              doc_status
+              _id
+              assignment
               doc_type
               path
               type_name
@@ -658,7 +673,7 @@ export const getlearnertrack = gql`
                   }
         }
     }
-}`
+}`;
 export const getlearnerdashboarddetails = gql`
 query getlearnerdashboarddetails($user_id: String){
   getlearnerdashboarddetails(user_id:$user_id) {
@@ -707,8 +722,8 @@ query getlearnerdashboarddetails($user_id: String){
 }`;
 
 export const getLearnerenrolledCourses = gql`
-query getLearnerenrolledCourses($user_id: String){
-  getLearnerenrolledCourses(user_id:$user_id){
+query getLearnerenrolledCourses($user_id: String,$user_obj_id: String){
+  getLearnerenrolledCourses(user_id:$user_id,user_obj_id:$user_obj_id){
     success
     message
     data{
@@ -726,14 +741,28 @@ query getLearnerenrolledCourses($user_id: String){
       }
       courseEnrolled{
         course_id
+        course_mode
+    course_start_datetime
+    course_end_datetime
         course_name
+        course_description
+        short_description
+        author_details{
+          author_name
+          description
+          image
+        }
         course_img_url
         rating
         price
         totalLearners
-        coursePlayerStatus{
+        course_duration
+        coursePlayerStatus
+        {
           status
-          }
+          course_percentage
+          feedback_status
+        }
       }
     }
   }
@@ -781,7 +810,7 @@ query get_popular_course{
 }
 `;
 
-//getting popular course
+// getting popular course
 
 export const getPopularcourse = gql`
     query getPopularcourse{
@@ -801,7 +830,7 @@ export const getPopularcourse = gql`
         }
       }
     }`;
-    export const getFeedbackQuestion = gql`
+export const getFeedbackQuestion = gql`
     query getFeedbackQuestion{
       getFeedbackQuestion{
         message
@@ -828,4 +857,184 @@ query getCoursePlayerStatusForCourse($user_id: String!, $course_id: String!){
 }
   }
 }
-`
+`;
+
+
+
+export const getAssignmentmoduleData = gql`
+query getAssignmentmoduleData( $courseid: String,$user_id: String){
+  getAssignmentmoduleData(courseid:$courseid,user_id:$user_id) {
+    success
+    message
+    data{
+      courseid
+      coursedetails{
+        modulename
+        moduledetails{
+          topicname
+          topicimages
+          url
+          resourse{
+            assignment_count
+            type
+            type_name
+            doc_type
+            _id
+            files{
+              _id
+              assignment
+              path
+              type_name
+              doc_status
+              resubmit
+              doc_type
+            }
+          }
+        }
+      }
+      courseEndDate
+      courseStartDate
+    }
+  }
+}
+`;
+export const playerModuleAndTopic = gql`
+  query playerModuleAndTopic($contentID: String , $user_id:String){
+    playerModuleAndTopic(contentID: $contentID , user_id:$user_id) {
+      message{
+        _id
+        url
+        course_id
+        childData
+        {
+          title
+        _id
+        status
+        topic_len
+        moduletime
+       children
+       { _id
+        title
+         link
+         status
+          isVisible
+           }
+            }
+             }
+              success
+               }
+}`;
+export const ViewSingleTopicDiscussionData = gql`
+query ViewSingleTopicDiscussionData($topic_slug : String, $uid : Int!){
+  ViewSingleTopicDiscussionData(topic_slug: $topic_slug, uid: $uid){
+    success
+        message
+        data{
+            cid
+            mainPid
+            postcount
+            slug
+            tid
+            title
+            uid
+            viewcount
+            titleRaw
+            timestampISO
+            lastposttimeISO
+            bookmark
+            bookmarkThreshold
+            category{
+                   cid
+                    name
+                    description
+                    link
+                    numRecentReplies
+                    parentCid
+                    post_count
+                    slug
+                    topic_count
+                    totalPostCount
+                    totalTopicCount
+            }
+            posts{
+                    content
+                    local_content
+                    deleted
+                    pid
+                    tid
+                    uid
+                    a2i_lable
+                    toPid
+                    bookmarks
+                    upvotes
+                    downvotes
+                    votes
+                    timestampISO
+                    user {
+                           fullname
+                            postcount
+                            uid
+                            username
+                            userslug
+                            lastonlineISO
+                            picture
+                    }
+                    bookmarked
+                    upvoted
+                    downvoted
+                    selfPost
+                    index
+            }
+        }
+    }
+  }`;
+
+export const ViewAllThreadData = gql`
+  query ViewAllThreadData($module_id : String, $course_id : String) {
+    ViewAllThreadData(module_id: $module_id, course_id: $course_id){
+      success
+      message
+      data{
+      cid
+      description
+      name
+      numRecentReplies
+      order
+      parentCid
+      post_count
+      slug
+      topic_count
+      totalPostCount
+      totalTopicCount
+      title
+      topics{
+      cid
+      thread_status
+      deleted
+      postcount
+      slug
+      tid
+      title
+      uid
+      viewcount
+      titleRaw
+      timestampISO
+      lastposttimeISO
+      category{
+      name
+      cid
+      }
+      user {
+      fullname
+      picture
+      postcount
+      status
+      uid
+      username
+      userslug
+      }
+      }
+      }
+    }
+    }
+    `;

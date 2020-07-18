@@ -6,8 +6,9 @@ import {
   get_institute_details, get_language_details, get_user_detail, list_content, syllabus_of_particular_scorm,
   getmoduleData, get_user_detail_username, check_existing_user, get_all_category, getPopularcourse,
   get_sub_category, get_course_by_subcategory, get_module_topic,
-  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack, getLearnerenrolledCourses, getlearnerdashboarddetails,getFeedbackQuestion,
-  getCoursePlayerStatusForCourse
+  getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack,
+  getLearnerenrolledCourses, getlearnerdashboarddetails, getFeedbackQuestion, getCoursePlayerStatusForCourse,
+  getAssignmentmoduleData, playerModuleAndTopic, ViewSingleTopicDiscussionData, ViewAllThreadData, 
 } from './operations/learner_query';
 
 
@@ -17,10 +18,11 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile, getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,InsertCourseFeedback
+  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest, 
+  InsertCourseFeedback, playerstatusrealtime, CreateNewThread
 } from './operations/learner_mutation';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { from } from 'rxjs';
@@ -44,6 +46,20 @@ export class LearnerServicesService {
 
   imageupload(fb) {
     return this.http.post<any[]>(environment.apiUrlImg + `upload/image`, fb);
+  }
+
+  postcomment(data) {
+    const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
+    return this.http.post(environment.apiUrl + 'postcomment', data, httpOptions);
+  }
+
+  unlikepost(data) {
+    const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
+    return this.http.post(environment.apiUrl + 'post_unlike', data, httpOptions);
+  }
+  likepost(data) {
+    const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
+    return this.http.post(environment.apiUrl + 'post_like', data, httpOptions);
   }
 
   user_registration(email, full_name, termsandconditions) {
@@ -305,11 +321,12 @@ export class LearnerServicesService {
       }
     });
   }
-  getModuleData(course_id) {
+  getModuleData(course_id, userid) {
     return this.Apollo.query({
       query: getmoduleData,
       variables: {
-        courseid: course_id
+        courseid: course_id,
+        user_id: userid
       }
     });
   }
@@ -479,11 +496,12 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id) {
+  get_enrolled_courses(user_id,id) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
-        user_id
+        user_id,
+        user_obj_id: id
       }
     });
   }
@@ -532,7 +550,7 @@ export class LearnerServicesService {
     });
   }
   InsertCourseFeedback(feedback){
-    console.log(feedback,'lllllllllllllllllllllllllllllllllllllllll')
+ 
     return this.Apollo.query({
       query: InsertCourseFeedback,
       variables:feedback
@@ -544,6 +562,67 @@ export class LearnerServicesService {
       variables: {
         user_id: user_id,
         course_id: course_id
+      }
+    });
+  }
+
+  getAssignmentmoduleData(courseid, user_id) {
+    return this.Apollo.query({
+      query: getAssignmentmoduleData,
+      variables: {
+        courseid, user_id
+      }
+    });
+  }
+
+  playerModuleAndTopic(contentID, user_id) {
+    return this.Apollo.query({
+      query: playerModuleAndTopic,
+      variables: {
+        contentID,
+        user_id,
+
+      }
+    });
+  }
+
+  playerstatusrealtime(user_id, contentID, module: any, percentage) {
+    return this.Apollo.query({
+      query: playerstatusrealtime,
+      variables: {
+        user_id,
+        contentID,
+        module,
+        percentage
+      }
+    });
+  }
+
+  viewsingletopicdiscussion(topic_slug, uid) {
+    return this.Apollo.query({
+      query: ViewSingleTopicDiscussionData,
+      variables: {
+        topic_slug,
+        uid
+      }
+    });
+  }
+
+  ViewAllThreadData(modId, cid) {
+    return this.Apollo.query({
+      query: ViewAllThreadData,
+      variables: {
+        module_id: modId,
+        course_id: cid,
+      }
+    });
+  }
+
+  createNewThread(uid, course_id, module_id, title, content, course_name) {
+    return this.Apollo.query({
+      query: CreateNewThread,
+      variables: {
+        uid, course_id, module_id, title, content, course_name
       }
     });
   }

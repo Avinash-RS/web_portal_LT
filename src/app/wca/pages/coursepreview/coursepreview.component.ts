@@ -75,7 +75,7 @@ export class CoursepreviewComponent implements OnInit {
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
-    this.getModuleData()
+    // this.getModuleData()
   }
 
   closedialogbox() {
@@ -97,20 +97,20 @@ export class CoursepreviewComponent implements OnInit {
   clickedT(i) {
     this.clicked = i
   }
-  getModuleData() {
-    this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
-      if(data.data['getmoduleData']['success'] === 'true'){
-        this.content = data.data['getmoduleData']['data'][0];
-        this.modulength = this.content['coursedetails'].length;
-        this.content.coursedetails.forEach(moduledetails => {
-          // moduledetails.moduledetails.forEach(element => {
-            this.countofdoc = moduledetails.Modulecount;
-             return true
-          //  });
-        });
-      }
-    })
-  }
+  // getModuleData() {
+  //   this.learnerservice.getModuleData(this.detail ? this.detail.id : this.courseid).subscribe(data => {
+  //     if(data.data['getmoduleData']['success'] === 'true'){
+  //       this.content = data.data['getmoduleData']['data'][0];
+  //       this.modulength = this.content['coursedetails'].length;
+  //       this.content.coursedetails.forEach(moduledetails => {
+  //         // moduledetails.moduledetails.forEach(element => {
+  //           this.countofdoc = moduledetails.Modulecount;
+  //            return true
+  //         //  });
+  //       });
+  //     }
+  //   })
+  // }
 
      passCourseId(){
       this.service.geturl(this.detail ? this.detail.id : this.courseid).subscribe(data => {

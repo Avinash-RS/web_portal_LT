@@ -838,3 +838,19 @@ mutation InsertCourseFeedback($user_id: String!, $question_id: [que_dtl], $quest
       message
     }
   }`;
+
+export const playerstatusrealtime = gql`
+mutation playerstatusrealtime($user_id: String, $contentID:String,$module:[module_type_input],$percentage:String){
+  playerstatusrealtime(user_id: $user_id,contentID:$contentID,module:$module,percentage:$percentage) {
+      success
+      message
+    }
+  }`;
+
+export const CreateNewThread = gql`
+mutation CreateNewThread($uid: Int!, $course_id : String, $module_id:String, $title:String, $content:String, $course_name : String){
+  CreateNewThread(uid: $uid, course_id : $course_id, module_id:$module_id,title:$title,content:$content, course_name:$course_name) {
+    success
+    message
+  }
+}`;
