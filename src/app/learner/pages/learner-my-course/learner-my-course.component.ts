@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
+// import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -21,7 +21,9 @@ export class LearnerMyCourseComponent implements OnInit {
   show = false;
 
 
-  constructor(public translate: TranslateService, public learnerService: LearnerServicesService, private gs: GlobalServiceService,
+  constructor(
+    // public translate: TranslateService, 
+    public learnerService: LearnerServicesService, private gs: GlobalServiceService,
               private router: Router) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
@@ -29,7 +31,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    // this.translate.use(localStorage.getItem('language'));
   }
 
   getScreenSize(event?) {
