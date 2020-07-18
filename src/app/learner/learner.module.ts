@@ -36,6 +36,8 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-courses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingModule } from 'ng-starrating';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
@@ -104,6 +106,8 @@ const routes: Routes = [
     ApolloModule,
     NgOtpInputModule,
     NgxPaginationModule,
+    MatSidenavModule,
+    MatExpansionModule,
     MyDatePickerModule,
     RatingModule
   ],
