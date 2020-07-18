@@ -1,24 +1,328 @@
 @import "variable";
-.contentTop {
-    margin-top: 66px !important;
-}
-.mat-expansion-panel:not([class*=mat-elevation-z]) {
-    box-shadow: none;
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-:host ::ng-deep .mat-expansion-indicator {
-    margin-right: 25px !important;
+.m-t-3 {
+    margin-top: 3%;
 }
 
-:host ::ng-deep .mat-expansion-indicator::after {
-    padding: 7px !important;
-    color: $color-blue;
+.m-b-10 {
+    margin-bottom: 12px;
+    // margin-top: -5px;
 }
 
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 0 10px rgb(170, 170, 170) !important;
+@media screen and (min-width:270px) and (max-width:795px) {
+    .descmc {
+        max-height: 175px !important;
+        min-height: 40px;
+    }
+
+    @media screen and (max-width:500px) {
+        .statBtn {
+            width: 60%;
+            margin: auto !important;
+            text-align: center !important;
+            display: block !important;
+        }
+    }
 }
 
-img {
-    width: 275px !important;
+@media screen and (min-width:500px) and (max-width:765px) {
+    .statBtn {
+        width: 50%;
+        float: right;
+    }
+}
+
+@media screen and (min-width:765px)  {
+    .statBtn {
+        float: right;
+    }
+}
+
+.vertical {
+    border-left: 160px solid $color-subhead;
+    max-width: 100%;
+    height: 4px;
+    position: absolute;
+    left: 1%;
+    border-radius: 20px
+}
+
+.mHead {
+    margin-top: 1%;
+    margin-left: 3%;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #616060;
+}
+
+// :host ::ng-deep .myC .mat-tab-label .mat-tab-label-content {
+//     font-size: 17px !important;
+//     font-weight: 600 !important;
+// }
+
+:host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: $color-blank !important;
+}
+
+.descmc {
+    max-height: 90px;
+    min-height: 40px;
+}
+
+:host /deep/ .mat-ink-bar {
+    height: 4px !important;
+    // left: 10px !important;
+    // width: 140px !important;
+    background-color: $color-subhead !important;
+}
+
+.bodybg {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background-color: #616060;
+    // background-size: cover !important;
+    // background-repeat: no-repeat !important;
+    background: url('../../../../assets/learner/p-bg-5.png');
+}
+
+:host /deep/ .mat-tab-body {
+    // background: #f1f1f1;
+
+    html {
+        overflow: scroll;
+        overflow-x: hidden !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent !important;
+    }
+}
+
+.coursebg {
+    background-color: $color_white;
+    margin-bottom: 10px;
+    // box-shadow: 0 0 5px rgb(207, 207, 207);
+}
+
+.mat-card {
+    padding: 0%;
+}
+
+.courseImg {
+    border: 1px solid $profile-s-grey;
+    width: 180px;
+    height: 140px;
+    padding: 1px;
+    margin: auto;
+    margin-left: 10px;
+}
+
+.courseImgs {
+    width: 125px;
+    height: 142px;
+    padding: 21px;
+    margin: auto;
+}
+
+
+.linee {
+    background: $color-landing-blue;
+    height: 100%;
+    border: 4px solid $color-landing-blue;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.lineeg {
+    background: green;
+    height: 100%;
+    border: 4px solid green;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.lineer {
+    background: #ea4135;
+    height: 100%;
+    border: 4px solid #ea4135;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.m-l-1 {
+    margin-top: 1%;
+}
+
+.no_pl {
+    padding-left: 0 !important;
+}
+
+.color_black2 {
+    color: #151414de;
+}
+
+:host ::ng-deep .mat-progress-bar-buffer {
+    background-color: $profile-t-grey !important;
+}
+
+:host ::ng-deep .mat-progress-bar-fill::after {
+    background-color: green !important;
+}
+
+.mat-progress-bar {
+    height: 8px;
+    border-radius: 15px;
+}
+
+.material-icons {
+    font-size: 18px;
+    padding-top: 2.5px;
+}
+
+.blue_clr {
+    background-color: $color-blue;
+    color: $color-white;
+}
+
+.icon-color{
+    color: $color-white;
+}
+
+.cap::first-letter {
+    text-transform: capitalize !important;
+}
+
+.width_35 {
+    width: 35% !important
+}
+
+.percent {
+    margin-left: 10px;
+    margin-top: -5px;
+    font-weight: 400;
+}
+
+.statBtn {
+    border: 1px solid $color-small-blue;
+}
+
+.mat-stroked-button {
+    border: 1px solid currentColor;
+    padding: 0px 7px;
+    line-height: 25px;
+    margin-right: 15px;
+}
+
+.noCourse {
+    padding: 50px;
+}
+
+.footer {
+    padding: 30px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: center;
+    border-top: 2px solid $profile-p-grey;
+  }
+
+  :host ::ng-deep.footericon{
+    width: 9%;
+    position: absolute;
+    margin-left: 5px;
+  
+  }
+
+  .roundbtn{
+    background-color: $color-red;
+    font-size: 16px;
+    border: none !important;
+    width: 28% !important;
+    color: $color-white;
+    height: 36px;
+    // margin-left: 70% !important;
+  }
+  .roundbtn :focus{
+    outline: none !important;
+    border: none !important;
+  }
+
+  .show-less {
+    height: 0rem;
+    overflow: hidden;
+    padding: 0rem;
+}
+
+.showbtn{
+    color: $color-blue !important;
+    // background-color: $color-white;
+    // border: none !important;
+    margin-left: -56px;
+    margin-left: -72px;
+    font-size: 19px;
+    font-weight: 500;
+
+
+}
+
+.showbtn :focus{
+    outline: none !important;
+    border: none !important;
+}
+
+     /* The Modal*/
+.modal {
+    display: block; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 98%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem;
+}
+
+ :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
 }

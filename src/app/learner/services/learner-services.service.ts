@@ -318,7 +318,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: update_profile,
       variables: userData
-      
+
     });
   }
 

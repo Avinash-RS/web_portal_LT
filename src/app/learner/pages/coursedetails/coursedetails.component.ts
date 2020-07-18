@@ -1,143 +1,314 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { environment } from '../../../../environments/environment';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import Swal from 'sweetalert2';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as myGlobals from '@core/globals';
+import { MatDialog } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
+import { WcaService } from '@wca/services/wca.service';
 
 @Component({
   selector: 'app-coursedetails',
   templateUrl: './coursedetails.component.html',
   styleUrls: ['./coursedetails.component.scss']
 })
-export class CoursedetailsComponent implements OnInit {
+export class CoursedetailsComponent {
   course: any = null;
-  recordedData: any;
-  finalFullData: any;
-  finalStatus: any = null;
-  loadingCourse = false;
-  customOptions1: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      400: {
-        items: 1
-      }
-    },
-    nav: true
-  }
-
-  customOptions: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<', '>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
-  };
-  wishlist: any = [];
-  syllabus: {}[];
-  open: boolean = false;
+  loading: boolean;
+  pagenumber: any;
+  open = false;
   userDetail: any;
   showShortDesciption = true;
-  clicked: any = 'media';
+  // clicked: any = 'media';
   content: any;
+  assignmentContent: any;
   modulength: any;
-  urlSafe: any;
   isCollapsed: any;
-  showStatus: any;
-  topicData : any = []
+  panelOpenState = false;
+  showFiller = false;
   courseTime: any;
-  
-  constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, public service: CommonServicesService, private gs: GlobalServiceService,
-    public route: Router, private loader: Ng4LoadingSpinnerService, private alert: AlertServiceService,
-    public sanitizer: DomSanitizer) {
-      
-    var detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+  url: string;
+  urlSafe: SafeResourceUrl;
+  userid: any;
+  courseid: any;
+  contentid: string;
+  getuserid: any;
+  topicData: any[];
+  localStoCourseid: string;
+  isLeaner = true;
+  scromModuleData: any;
+  scromApiData: any;
+  persentage: any;
+  per: any;
+  showCommentThread = false;
+  showCourseDetails = true;
+  showCommentEditor = [];
+  addThreadForm: any;
+  showSearch = false;
+  addCommentForm: any;
+  discussionData: any;
+  selected = '1';
+  discussionData1: any = [];
+  dataRefresher: any;
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    height: 'auto',
+    minHeight: '10',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    toolbarPosition: 'bottom',
+
+  };
+
+  commentConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Leave your comments here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    height: 'auto',
+    minHeight: '6',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    toolbarPosition: 'bottom',
+
+  };
+
+  selectedModuleData: any = null;
+  showThreadComment = false;
+
+  lastpersentage: any;
+  modIndex: any;
+  topLength: number;
+  finalper: any;
+  finalper2: number;
+  localper: string;
+  selectedIndex = 0;
+  topicDiscussionData: any;
+  addThreadComment: any;
+  addPostComment = [];
+  selectedThreadData: any = null;
+  filterValue: any = null;
+  loadingForum: boolean;
+  a2iFlag = false;
+  topicDiscussionData1: any;
+  assignmentVal = false;
+  docpath: any = null;
+  assFile: File;
+  // initials: any;
+
+  constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+
+    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      if (this.gs.checkLogout()) {
-        this.userDetail = this.gs.checkLogout()
-
-    this.service.viewCurseByID(detail && detail.id || '1', this.userDetail.user_id).subscribe((viewCourse: any) => {
-      // this.loadingCourse = true;
-      if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-        this.course = viewCourse.data.viewcourse.message;
-        // this.loadingCourse = false;
-        if(this.course.topicData && this.course.topicData.length) {
-         this.topicData = []
-        this.course.topicData.forEach(element=>{
-          let subArr =[];
-          element.moduleData.forEach(element1=>{
-                 subArr.push(element1.moduledetails);
-          })
-          let obj = {
-            modulename : element.moduleData[0].modulename,
-            moduledetails : subArr
-          };
-          this.topicData.push(obj);
-        })
-        }
-          this.course.topicData = this.topicData;
-
-        this.course.wishlisted = detail.wishlist || false;
-        this.course.wishlist_id = detail.wishlist_id || null;
-        this.course.enrollment_status = detail.enrollment_status;
-      } else{
-
-      }
-      // this.loadingCourse = false;
-    });
-    console.log( this.userDetail,' this.userDetail')
-  }
-    this.Lservice.getModuleData(detail.id).subscribe(data => {
-      this.content = data.data['getmoduleData']['data'][0];
-      this.courseTime = this.content.coursetime;
-      this.modulength = this.content['coursedetails'].length;
-    })
-  }
-
-  clickedT(i) {
-    this.clicked = i
-  }
-
-  alterDescriptionText() {
-    this.showShortDesciption = !this.showShortDesciption
-  }
-  ngOnInit() {
-    // this.service.list_content().subscribe((list_content: any) => {
-    //   if (list_content.data.list_content.success) {
-    //     this.syllabus = list_content.data.list_content.data
-    //   }
-    // });
-
     if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout()
-      console.log( this.userDetail,' this.userDetail')
+      this.courseid = detail && detail.id || this.localStoCourseid;
+      this.userDetail = this.gs.checkLogout();
+      this.localStoCourseid = localStorage.getItem('Courseid');
+      this.lastpersentage = localStorage.getItem('persentage');
+      // this.lastpersentage = detail  && detail.persentage || this.localper ;
+      this.loading = true;
+      this.playerModuleAndTopic(true);
+      this.refreshData();
+      this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
+        .subscribe((viewCourse: any) => {
+          if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
+            this.course = viewCourse.data.viewcourse.message;
+            this.selectedModuleData = this.scromApiData?.childData[0];
+            this.selectedModuleData.indexValue = 1;
+            if (this.selectedModuleData) {
+              this.viewAllThreads();
+            }
+            // all post in one thread
+            this.loading = false;
+            // if (this.course.topicData && this.course.topicData.length) {
+            //   this.topicData = [];
+            //   this.course.topicData.forEach(element => {
+            //     const subArr = [];
+            //     element.moduleData.forEach(element1 => {
+            //       subArr.push(element1.moduledetails);
+            //     });
+            //     const obj = {
+            //       modulename: element.moduleData[0].modulename,
+            //       moduledetails: subArr
+            //     };
+            //     this.topicData.push(obj);
+            //   });
+            // }
+            // this.course.topicData = this.topicData;
+            // this.course.wishlisted = detail.wishlist || false;
+            // this.course.wishlist_id = detail.wishlist_id || null;
+            // this.course.enrollment_status = detail.enrollment_status;
+          }
+        });
     }
+    this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+      this.content = data.data.getmoduleData.data[0];
+      this.assignmentVal = false;
+      let noresource = false;
+      this.content.coursedetails.forEach(element => {
+        let resourceFile = false;
+        element.moduledetails.forEach(value => {
+          if (value.resourse) {
+            resourceFile = true;
+            noresource = true;
+          }
+        });
+        element.resValue = resourceFile;
+      });
+      this.content.noresource = noresource;
+      this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.content.url);
+      this.modulength = this.content.coursedetails.length;
+      this.courseTime = this.content.coursetime;
+    });
+    this.getAssignmentmoduleData();
+  }
+
+  getAssignmentmoduleData() {
+    this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+      this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+    });
+  }
+  uploadAssignmentsFile(event, fileId, modulename, topicname, assName) {
+    this.assFile = event.target.files[0] as File;
+    this.postAssignmentsFile(fileId, modulename, topicname, assName);
+
+  }
+
+  postAssignmentsFile(fileId, modulename, topicname, assName) {
+    const payload = new FormData();
+    payload.append('learnerdoc', this.assFile, this.assFile.name);
+    payload.append('user_id', this.getuserid.user_id);
+    payload.append('course_id', this.localStoCourseid);
+    payload.append('topic_id', topicname);
+    payload.append('module_id', modulename);
+    payload.append('file_id', fileId);
+    payload.append('type_name', assName);
+    this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
+      if (data.success === true) {
+        this.toastr.success(data.message, null);
+        this.getAssignmentmoduleData();
+      } else {
+        this.toastr.warning(data.message, null);
+      }
+    });
+  }
+
+
+  // get Scrom module and topic
+  playerModuleAndTopic(setPageFlag) {
+    this.Lservice.playerModuleAndTopic(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+      this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
+      this.scromModuleData = this.scromApiData?.childData;
+    });
+  }
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+      (environment.scormUrl + '/scormPlayer.html?contentID=' +
+        this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
+    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
+  }
+
+  playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
+    // tslint:disable-next-line:radix
+    const len = parseInt(topicLenght);
+    if (topindex === len) {
+
+      moduleStatus = 'Passed';
+    } else {
+      moduleStatus = 'Process';
+    }
+    const jsonData = {
+      module: [{
+        module_name: moduleName,
+        status: moduleStatus,
+        topic: [{
+          topic_name: topicName,
+          status: 'Passed'
+        }]
+      }]
+    };
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.finalper)
+      .subscribe((data: any) => {
+        if (data.data.playerstatusrealtime.success === true) {
+          this.playerModuleAndTopic(true);
+        } else {
+        }
+      });
+  }
+
+  getSelectedIndex(i) {
+    this.selectedIndex = i;
+  }
+
+  refreshData() {
+    this.dataRefresher =
+      setInterval(() => {
+        this.playerModuleAndTopic(false);
+      }, 20000);
+    // this.cancelPageRefresh();
+  }
+
+  cancelPageRefresh() {
+    if (this.dataRefresher) {
+      clearInterval(this.dataRefresher);
+    }
+  }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    this.cancelPageRefresh();
+  }
+
+
+  previewDoc(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.docpath = path;
   }
 
   scroll(el: HTMLElement) {
@@ -145,90 +316,413 @@ export class CoursedetailsComponent implements OnInit {
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  playCourse(i) {
-    this.route.navigate(["/Learner/scorm", { id: i }]);
-    this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
-    });
+  // playCourse(i) {
+  //   this.route.navigate(['/Learner/scorm', { id: i }]);
+  //   this.service.syllabus_of_particular_scorm('FSL ').subscribe((viewCourse: any) => {
+  //   });
+  // }
+
+  // selectWishlist(course) {
+  //   if (this.gs.checkLogout()) {
+  //     if (this.course.wishlisted === false) {
+  //       this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
+  //         if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
+  //           this.course.wishlisted = !this.course.wishlisted;
+  //           this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
+  //           this.gs.canCallWishlist(true);       // this.loader.hide();
+  //         }
+  //       });
+  //     } else {
+  //       this.service.removeWishlist(course.wishlist_id).subscribe((addWishlist: any) => {
+  //         if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
+  //           this.course.wishlisted = !this.course.wishlisted;
+  //           course.wishlist_id = null;
+  //           this.gs.canCallWishlist(true);
+  //           // this.loader.hide();
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
+
+  // enrollCourse() {
+  //   this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id)
+  //     .subscribe((enrollCourse: any) => {
+  //       if (enrollCourse.data) {
+  //         if (enrollCourse.data.enrollcourse.success) {
+  //           Swal.fire('User enrolled successfully for the course');
+  //         } else {
+  //           Swal.fire(enrollCourse.data.enrollcourse.message);
+  //         }
+  //       } else {
+  //         Swal.fire('Please try again later');
+  //       }
+  //     });
+  // }
+
+  // }
+
+
+  // getModuleData(){
+  //     this.service.getModuleData(this.course_id).subscribe((data: any) => {
+  //       if (data.data.getmoduleData.success === 'true') {
+  //         this.content = data.data.getmoduleData.data[0];
+  //         this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+  //         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+  //         (environment.scormUrl + '/scormPlayer.html?contentID=' +
+  //         this.course_id + '&user_id=' + this.user_id + '&user_obj_id=' + this.getuserid._id);
+  //         // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
+  //         this.modulength = this.content.coursedetails.length;
+  //         this.content.coursedetails.forEach(moduledetails => {
+  //           moduledetails.moduledetails.forEach(element => {
+  //             this.countofdoc = element.resourse.count;
+  //             return true;
+  //           });
+  //         });
+  //       }
+  //     });
+
+  onScrollDown() {
+    this.pagenumber = this.pagenumber + 1;
   }
 
-  selectWishlist(course) {
-    this.loader.show()
-    if (this.gs.checkLogout()) {
-      if (this.course.wishlisted == false) {
-        this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
-          if (addWishlist.data.add_to_wishlist && addWishlist.data.add_to_wishlist.success) {
-            this.course.wishlisted = !this.course.wishlisted;
-            this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
-            this.gs.canCallWishlist(true)
-            this.loader.hide()
-          }
-        });
+  gotoNewThread(templateRef: TemplateRef<any>) {
+    this.addThreadForm?.reset();
+    this.addThreadForm = this.formBuilder.group({
+      thread_name: new FormControl('', [Validators.minLength(8), Validators.required]),
+      thread_description: new FormControl('', [Validators.minLength(8), Validators.required]),
+      // module: new FormControl('', myGlobals.req),
+    });
+    // this.addThreadForm.patchValue(this.catalog);
+    this.dialog.open(templateRef, { disableClose: true });
+  }
+
+  get f() {
+    return this.addThreadForm.controls;
+  }
+
+  closedialogbox() {
+    this.dialog.closeAll();
+    // this.addThreadForm?.reset();
+  }
+
+  showDetail(data) {
+    this.showCourseDetails = false;
+    this.showCommentThread = true;
+    this.selectedThreadData = data;
+    this.viewsingletopicdiscussion(data.tid);
+  }
+
+  gotoDisplayAllThreads() {
+    this.showCourseDetails = true;
+    this.showCommentThread = false;
+    this.a2iFlag = false;
+    this.showCommentEditor = [];
+    this.showThreadComment = false;
+  }
+
+  // addComment(i) {
+  //   this.showCommentEditor[i] = !this.showCommentEditor[i];
+  //   this.addCommentForm?.reset();
+  //   // this.addCommentForm = this.formBuilder.group({
+  //   //   add_comment: new FormControl('', myGlobals.textVal),
+  //   // });
+  // }
+
+
+  sendComment(type, data, array?, pidData?) {
+    let d = data;
+    d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
+    if (d.length > 8) {
+      if (d.length > 55500) {
+        this.toastr.warning('Comment should be less than 60000 characters');
       } else {
-        this.service.removeWishlist(course.wishlist_id).subscribe((addWishlist: any) => {
-          if (addWishlist.data.delete_wishlist && addWishlist.data.delete_wishlist.success) {
-            this.course.wishlisted = !this.course.wishlisted;
-            course.wishlist_id = null;
-            this.gs.canCallWishlist(true)
-            this.loader.hide()
+        this.loadingForum = true;
+        const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
+        const data1 = {
+          content: data,
+          tid: this.selectedThreadData.tid,
+          uid: UserDetails.nodebb_response.uid,
+          toPid: pidData?.pid ? pidData.pid : 0,
+          course_id: this.course?.course_id,
+          course_name: this.course?.course_name,
+          module_id: this.selectedModuleData._id,
+          module_name: this.selectedModuleData.title,
+          thread_id: (this.selectedThreadData.tid).toString(),
+          thread_name: this.selectedThreadData.title,
+          created_by: this.userDetail.username,
+          a2i: this.a2iFlag || false,
+        };
+        this.Lservice.postcomment(data1).subscribe((result: any) => {
+          this.a2iFlag = false;
+          if (result.success) {
+            this.addThreadComment = null;
+            this.showThreadComment = false;
+            this.viewsingletopicdiscussion(this.selectedThreadData.tid);
+            this.toastr.success('Comment added successfully');
+          } else {
+            this.toastr.warning(result.message);
+            this.loadingForum = false;
           }
         });
       }
+    } else {
+      this.toastr.warning('Comment should be minimum of 8 characters');
+    }
+
+  }
+
+  changedSort(e) {
+    // this.loadingForum = true;
+    // const data = {
+    //   // userid: this.userDetail.user_id,
+    //   moduleid: '1/announcements/',
+    //   threadsearch: 'null',
+    //   threadsort: e
+    // };
+    // this.Lservice.searchandsortthread(data).subscribe((result: any) => {
+    //   if (result.success) {
+    //     this.discussionData.topics = result.message;
+    //     this.loadingForum = false;
+    //   }
+    // });
+    if (this.showCommentThread) {
+      if (e === '1') {
+        const arr = this.topicDiscussionData.posts.slice(1);
+        const thread = this.topicDiscussionData.posts[0];
+        arr.sort((a, b) => new Date(b.timestampISO).getTime() -
+          new Date(a.timestampISO).getTime());
+        this.topicDiscussionData.posts = [thread, ...arr];
+      } else {
+        const arr = this.topicDiscussionData.posts.slice(1);
+        const thread = this.topicDiscussionData.posts[0];
+        arr.sort((a, b) => new Date(a.timestampISO).getTime() -
+          new Date(b.timestampISO).getTime());
+        this.topicDiscussionData.posts = [thread, ...arr];
+      }
+    } else {
+      if (e === '1') {
+        this.discussionData.topics.sort((a, b) => new Date(b.lastposttimeISO).getTime() -
+          new Date(a.lastposttimeISO).getTime());
+      } else {
+        this.discussionData.topics.sort((a, b) => new Date(a.lastposttimeISO).getTime() -
+          new Date(b.lastposttimeISO).getTime());
+      }
+      // this.viewAllThreads();
     }
   }
 
-  getcourserStatus() {
-    this.service.getPlayerStatus(this.userDetail.user_id).subscribe((data: any) => {
-      if (data.data.getPlayerStatus) {
-        this.recordedData = data;
-        this.finalFullData = this.recordedData.data.getPlayerStatus.message;
-        if (this.finalFullData && this.finalFullData.status) {
-          if (this.finalFullData.status === 'completed') {
-            this.finalStatus = 'Completed';
-          } else if (this.finalFullData.status === 'incomplete') {
-            this.finalStatus = 'Resume';
-          }
+  onSearchChange(e) {
+    this.filterValue = e;
+    this.searchThread(e);
+  }
+
+  closeSearch() {
+    if (this.showCommentThread) {
+      this.topicDiscussionData = this.topicDiscussionData1;
+      this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
+    } else {
+      this.discussionData = this.discussionData1;
+      this.discussionData.topics = this.discussionData1.topics1;
+    }
+    this.filterValue = null;
+    this.cdr.detectChanges();
+  }
+
+  searchThread(filterValue: string) {
+    // setTimeout(() => {
+    if (filterValue.trim().toLowerCase().length > 3) {
+      // const data = {
+      //   moduleid: '1/announcements/',
+      //   threadsearch: filterValue,
+      //   threadsort: 'null'
+      // };
+      // this.Lservice.searchandsortthread(data).subscribe((result: any) => {
+      //   if (result.success) {
+      //     this.discussionData.topics = result.message;
+      //   }
+      // });data.user.username, data?.lastposttimeISO, data?.postcount
+      if (this.showCommentThread) {
+        let arr = this.topicDiscussionData.posts.slice(1);
+        const thread = this.topicDiscussionData.posts[0];
+        arr = this.topicDiscussionData.posts.filter((item) => {
+          return (item.content?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
+            item.user?.timestampISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
+            item?.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
+            // || item.postcount?.indexOf(filterValue) > -1
+          );
+        });
+        this.topicDiscussionData.posts = [thread, ...arr];
+        if (this.topicDiscussionData.posts.length === 1) {
+          // setTimeout(() => {
+          this.toastr.warning('No search results found');
+          // }, 3000);
         }
+      } else {
+        this.discussionData.topics = this.discussionData.topics.filter((item) => {
+          return (item.title?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
+            item.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
+            item.lastposttimeISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
+            // || item.postcount?.indexOf(filterValue) > -1
+          );
+        });
       }
-    });
-  }
-
-
-  goTocourse(status) {
-    if (this.finalStatus !== 'Completed') {
-      const detail1 = {
-        id: 'Scaffolding',
-        user: this.userDetail.user_id,
-        course_id: this.course.course_id,
-        user_obj_id: this.userDetail._id,
-        feed_back:this.course.feed_back
-      };
-      this.route.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+    } else {
+      this.filterValue = null;
+      if (this.showCommentThread) {
+        this.topicDiscussionData = this.topicDiscussionData1;
+        this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
+      } else {
+        this.discussionData = this.discussionData1;
+        this.discussionData.topics = this.discussionData1.topics1;
+      }
+      this.cdr.detectChanges();
     }
+    // }, 3000);
 
   }
 
-  clickRejected() {
-    this.alert.openConfirmAlert('Enrollment Confirmation', 'Do you wish to re-enroll for this course?', 'Enroll', 'Cancel').then((data) => {
-      if (data) {
-        this.enrollCourse();
+  viewsingletopicdiscussion(slug) {
+    // const topicSlug = '2/pradeep-check-1';
+    if (this.selectedThreadData.postcount > 1) {
+      this.loadingForum = true;
+    }
+    this.topicDiscussionData = [];
+    const topicSlug = slug;
+    this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
+      this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
+      this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
+      this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+      const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
+      const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+      this.loadingForum = false;
+    });
+    // this.Lservice.getSingleThread(topicSlug, this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
+    //   this.topicDiscussionData = result.data;
+    //   this.topicDiscussionData1 = Object.assign({}, result.data);
+    //   this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+    //   const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item.content));
+    //   const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item.content));
+    //   this.loadingForum = false;
+    //   this.cdr.detectChanges();
+    // });
+
+  }
+
+  getModuleDataForForum(length, ind, modData) {
+    this.showCourseDetails = true;
+    this.showCommentThread = false;
+    this.selectedModuleData = null;
+    this.selectedModuleData = modData;
+    this.selectedThreadData = null;
+    this.topicDiscussionData = [];
+    this.selectedModuleData.indexValue = ind;
+    this.viewAllThreads();
+  }
+
+  viewAllThreads() {
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?._id, this.course?.course_id).subscribe((result: any) => {
+      const temp = result.data.ViewAllThreadData.data;
+      if (result?.data?.ViewAllThreadData?.data !== '') {
+        result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
+          new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
+        this.discussionData = result.data.ViewAllThreadData.data;
+        this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
+        this.discussionData.topics = this.discussionData.topics.filter(i => i.deleted === false);
+        if (this.discussionData.topics && this.discussionData.topics?.length > 0) {
+          this.discussionData1.topics1 = this.discussionData.topics;
+        }
+        this.loadingForum = false;
+      } else {
+        this.loadingForum = false;
+        this.discussionData = null;
       }
     });
   }
 
-  enrollCourse() {
-    this.service.enrollcourse(this.userDetail.user_id, this.userDetail.group_id[0], this.course.course_id).subscribe((enrollCourse: any) => {
-      if (enrollCourse.data) {
-        if (enrollCourse.data.enrollcourse.success) {
-          this.course.enrollment_status = 'pending';
-          Swal.fire("Your request for enrolment is successfully submitted")
+  createNewThread() {
+    this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
+      || this.addThreadForm.value.thread_name.trimLeft();
+    const desc: any = {};
+    desc.d = this.addThreadForm.value.thread_description;
+    desc.d = desc.d.replace(/&#160;/g, '').trim() || desc.d.replace(/&#160;/g, '').trimLeft();
+    if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
+      if (desc.d.length > 55500) {
+        this.toastr.warning('Content should be less than 60000 characters');
+      } else {
+        this.closedialogbox();
+        this.loadingForum = true;
+        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?._id,
+          this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
+          .subscribe((result: any) => {
+            this.loadingForum = true;
+            this.addThreadForm?.reset();
+            if (result.data.CreateNewThread?.success === 'true') {
+              this.discussionData = this.discussionData1.topics1 = null;
+              this.toastr.success('New thread created successfully');
+              this.viewAllThreads();
+              // this.loadingForum = false;
+            } else {
+              this.loadingForum = false;
+              this.toastr.warning('New thread is not created');
+            }
+          });
+      }
+    } else {
+      this.toastr.warning('Please fill mandatory details');
+    }
+  }
+
+  likeandunlikepost(d) {
+    const data = { uid: this.userDetail?.nodebb_response.uid, pid: d.pid };
+    if (d.bookmarked) {
+      d.bookmarked = !d.bookmarked;
+      d.bookmarks = d.bookmarks - 1;
+      this.Lservice.unlikepost(data).subscribe((result: any) => {
+        if (!result.success) {
+          d.bookmarked = !d.bookmarked;
+          d.bookmarks = d.bookmarks + 1;
+          this.toastr.warning('Something went wrong. Try like/dislike later');
         } else {
-          Swal.fire(enrollCourse.data.enrollcourse.message)
+          // this.toastr.success('Unliked successfully');
+          // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
         }
-      }
-      else {
-        Swal.fire("Please try again later")
-      }
-    });
+        // this.loadingForum = false;
+      });
+    } else {
+      d.bookmarked = !d.bookmarked;
+      d.bookmarks = d.bookmarks + 1;
+      this.Lservice.likepost(data).subscribe((result: any) => {
+        if (!result.success) {
+          d.bookmarked = !d.bookmarked;
+          d.bookmarks = d.bookmarks - 1;
+          this.toastr.warning('Something went wrong. Try like/dislike later');
+        } else {
+          // this.toastr.success('Liked successfully');
+          // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
+        }
+        // this.loadingForum = false;
+      });
+    }
   }
 
+  alterstring(text) {
+    // return text.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
+    // replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
+    if (text?.indexOf('rel="nofollow"') === -1) {
+      return text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
+        replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
+    } else {
+      text = text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
+        replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
+      // const startIndex = text.indexOf('rel="nofollow"');
+      // const endIndex = text.indexOf('</a>" ');
+      // const replacement = '';
+      // const toBeReplaced = text.substring(startIndex + 1, endIndex);
+      // return text.replace(toBeReplaced, replacement).replace(' r</a>"', '').replace('<a href="', '');
+      return text?.replace(text?.substring(text?.indexOf('rel="nofollow"') + 1, text?.indexOf('</a>" ')), '').
+        replace(' r</a>"', '').replace('<a href="', '');
+
+    }
+  }
 }
