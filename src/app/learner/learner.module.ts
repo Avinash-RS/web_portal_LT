@@ -38,6 +38,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingModule } from 'ng-starrating';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatStepperModule} from '@angular/material/stepper';
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
@@ -108,6 +109,7 @@ const routes: Routes = [
     NgxPaginationModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatStepperModule,
     MyDatePickerModule,
     RatingModule
   ],
