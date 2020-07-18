@@ -7,16 +7,24 @@ export const login = gql`
       error_msg
       message {
         _id
+        full_name
+        profile_img
         email
         is_active
         username
         token
         user_id
         is_blocked
-        profile_img
+        is_forum_config
+        is_thread_config
+        is_comment_config
         is_profile_updated
         group_id
         message
+        bb_forum
+        nodebb_response{
+          uid
+        }
       }
     }
   }`;
