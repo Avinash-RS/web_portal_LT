@@ -24,6 +24,7 @@ import { Ppt1Component } from './ppt1/ppt1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -51,6 +52,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     DragDropModule,
     BrowserAnimationsModule,
     Ng5SliderModule,
+    PdfJsViewerModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right',

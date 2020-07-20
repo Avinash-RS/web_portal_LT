@@ -36,6 +36,7 @@ import { DragDropImageDirective } from './services/directives/drag-drop-image.di
 import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
 import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
+import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 
 const routes: Routes = [
   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
@@ -58,6 +59,7 @@ const routes: Routes = [
     SearchComponent,
     DragDropImageDirective,
     GuidelineSearchComponent,
+    PdfreaderComponent,
     LandingHeaderComponent,
     CategoryComponentComponent,
     SearchPipe
@@ -67,6 +69,7 @@ const routes: Routes = [
     MaterialModule,
     RouterModule,
     CommonModule,
+   
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),
