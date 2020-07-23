@@ -30,7 +30,11 @@ import { from } from 'rxjs';
   providedIn: 'root'
 })
 export class LearnerServicesService {
-
+  envWcaApi:any = environment.wcaapiurl;
+  envApi:any = environment.apiUrl;
+  envApiImg:any =environment.apiUrlImg;
+  envCourseApi:any =environment.createCourseApi;
+  envDomain:any= environment.domain;
   constructor(private Apollo: Apollo, private http: HttpClient, ) { }
 
   login(username, password, is_admin) {
@@ -45,21 +49,21 @@ export class LearnerServicesService {
   }
 
   imageupload(fb) {
-    return this.http.post<any[]>(environment.apiUrlImg + `upload/image`, fb);
+    return this.http.post<any[]>(this.envApiImg + `upload/image`, fb);
   }
 
   postcomment(data) {
     const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
-    return this.http.post(environment.apiUrl + 'postcomment', data, httpOptions);
+    return this.http.post(this.envApi + 'postcomment', data, httpOptions);
   }
 
   unlikepost(data) {
     const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
-    return this.http.post(environment.apiUrl + 'post_unlike', data, httpOptions);
+    return this.http.post(this.envApi + 'post_unlike', data, httpOptions);
   }
   likepost(data) {
     const httpOptions = { headers: new HttpHeaders({ Authorization: localStorage.getItem('token') }) };
-    return this.http.post(environment.apiUrl + 'post_like', data, httpOptions);
+    return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
   user_registration(email, full_name, termsandconditions) {
@@ -69,7 +73,7 @@ export class LearnerServicesService {
         full_name,
         email,
         term_condition: termsandconditions,
-        domain:environment.domain
+        domain:this.envDomain
       }
     });
   }
@@ -174,7 +178,7 @@ export class LearnerServicesService {
         subtype,
         mobile_number,
         email,
-        domain:environment.domain
+        domain:this.envDomain
 
       }
     });
@@ -299,7 +303,7 @@ export class LearnerServicesService {
       variables: {
         user_id,
         email,
-        domain: environment.domain
+        domain: this.envDomain
       }
     });
   }
@@ -451,7 +455,7 @@ export class LearnerServicesService {
 
 
   postCategoryFilter(data) {
-    return this.http.post<any[]>(environment.apiUrl + `getsublevelcategories`, data);
+    return this.http.post<any[]>(this.envApi + `getsublevelcategories`, data);
   }
 
   // Guildeline selected filter value and getting courses

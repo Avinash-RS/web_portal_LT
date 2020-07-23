@@ -31,8 +31,12 @@ const defaultOptions: DefaultOptions = {
 })
 
 export class GraphqlModule {
+  envWcaApi:any = environment.wcaapiurl;
+  envApi:any = environment.apiUrl;
+  envApiImg:any =environment.apiUrlImg;
+  envCourseApi:any =environment.createCourseApi
   constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,) {
-    const http = httpLink.create({ uri: environment.apiUrl + 'graphql' });
+    const http = httpLink.create({ uri: this.envApi + 'graphql' });
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token

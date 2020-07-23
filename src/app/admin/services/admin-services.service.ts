@@ -21,7 +21,10 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AdminServicesService {
-
+  envWcaApi:any = environment.wcaapiurl;
+  envApi:any = environment.apiUrl;
+  envApiImg:any =environment.apiUrlImg;
+  envCourseApi:any =environment.createCourseApi
   // tslint:disable-next-line:variable-name
   _currentUser: any;
 
@@ -55,7 +58,7 @@ export class AdminServicesService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
     };
-    return this.http.post<any[]>(environment.apiUrlImg + 'bulkuserupload', fb, httpOptions);
+    return this.http.post<any[]>(this.envApiImg + 'bulkuserupload', fb, httpOptions);
   }
   // end of Add user flow
 
@@ -483,7 +486,7 @@ export class AdminServicesService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
     };
-    return this.http.post<any[]>(environment.apiUrlImg + 'bulkenrollment', fb, httpOptions);
+    return this.http.post<any[]>(this.envApiImg + 'bulkenrollment', fb, httpOptions);
   }
 
   // End Of Bulk Enrollment
@@ -592,13 +595,13 @@ export class AdminServicesService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
     };
-    return this.http.post(environment.apiUrl + 'get_audit_info', data, httpOptions);
+    return this.http.post(this.envApi + 'get_audit_info', data, httpOptions);
   }
 
   getauditlogreports(pagenumber) {
     const headers1 = new HttpHeaders().set('Authorization', localStorage.getItem('token'));
     const params1 = new HttpParams().set('pagenumber', pagenumber);
     const options = { params: params1, headers: headers1 };
-    return this.http.get<any[]>(environment.apiUrl + 'getauditlog', options);
+    return this.http.get<any[]>(this.envApi + 'getauditlog', options);
   }
 }

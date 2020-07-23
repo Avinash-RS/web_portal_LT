@@ -21,7 +21,9 @@ const httpOptions = {
 export class WcaService {
 
   url = 'http://localhost:9001/api/upload/uploadExcel';
-
+ envWcaApi:any = environment.wcaapiurl;
+ envApi:any = environment.apiUrl;
+ envCourseApi:any =environment.createCourseApi
   bSubject = new BehaviorSubject({});
   bSubject1 = new BehaviorSubject({});
   token: string;
@@ -33,59 +35,59 @@ export class WcaService {
   getcourseDetails(courseID) {
     // var headers = new HttpHeaders()
     //   .set("Authorization", "Bearer 104150f8e66cae68b40203e1dbba7b4529231970");
-    return this.http.post(environment.createCourseApi + 'viewcourse', courseID, httpOptions);
+    return this.http.post(this.envCourseApi + 'viewcourse', courseID, httpOptions);
   }
 
   getPublishedCourse() {
-    return this.http.get(environment.wcaapiurl + 'api/courses/getpublishedcourse');
+    return this.http.get(this.envWcaApi + 'api/courses/getpublishedcourse');
   }
   getCreatedCourse() {
 
-    return this.http.get(environment.wcaapiurl + 'api/courses/getcreatedcourse');
+    return this.http.get(this.envWcaApi + 'api/courses/getcreatedcourse');
   }
   getDraftCourse() {
-    return this.http.get(environment.wcaapiurl + 'api/courses/getdraftcourse');
+    return this.http.get(this.envWcaApi + 'api/courses/getdraftcourse');
   }
 
   getAllTemplates() {
-    return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates');
+    return this.http.get(this.envWcaApi + 'api/template/getalltemplates');
   }
 
   uploadImage(image) {
-    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
+    return this.http.post(this.envWcaApi + 'api/upload/uploadimagefile', image);
   }
 
   uploadScromCourse(file) {
-    return this.http.post(environment.wcaapiurl + 'api/upload/uploadscromfile', file);
+    return this.http.post(this.envWcaApi + 'api/upload/uploadscromfile', file);
   }
 
   createCourse(course) {
     // httpOptions.headers.append('Authorization', 'Bearer ' + this.token);
     // httpOptions.headers.append('Content-Type' , 'application/json');
     // console.log(httpOptions)
-    return this.http.post(environment.createCourseApi + 'coursecreation', course, httpOptions);
+    return this.http.post(this.envCourseApi + 'coursecreation', course, httpOptions);
   }
 
   updateCourse(course) {
-    return this.http.post(environment.createCourseApi + 'updatecourse', course, httpOptions);
+    return this.http.post(this.envCourseApi + 'updatecourse', course, httpOptions);
   }
 
   getAllInstructors() {
-    return this.http.get(environment.wcaapiurl + 'api/lov/getinstructordetails');
+    return this.http.get(this.envWcaApi + 'api/lov/getinstructordetails');
   }
 
-  getAllTakeawayDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/gettakewaydetails'); }
+  getAllTakeawayDetails() { return this.http.get(this.envWcaApi + 'api/lov/gettakewaydetails'); }
 
-  getAllPrerequisitDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getprerequisitdetails'); }
+  getAllPrerequisitDetails() { return this.http.get(this.envWcaApi + 'api/lov/getprerequisitdetails'); }
 
-  getAllCertifyDetails() { return this.http.get(environment.wcaapiurl + 'api/lov/getcertificationdetails'); }
+  getAllCertifyDetails() { return this.http.get(this.envWcaApi + 'api/lov/getcertificationdetails'); }
 
-  createTemplate(arraydata) { return this.http.post(environment.wcaapiurl + 'api/template/savetemplate', arraydata); }
+  createTemplate(arraydata) { return this.http.post(this.envWcaApi + 'api/template/savetemplate', arraydata); }
 
-  refDocUpload(fromdata) { return this.http.post(environment.apiUrl + 'wca/refdocupload', fromdata); }
+  refDocUpload(fromdata) { return this.http.post(this.envApi + 'wca/refdocupload', fromdata); }
   
-  editrefdocupload(data) { return this.http.post(environment.apiUrl + 'wca/editrefdocupload', data); }
-  uploadAssignments(fromdata) { return this.http.post(environment.apiUrl + 'wca/learnerscorefile', fromdata); }
+  editrefdocupload(data) { return this.http.post(this.envApi + 'wca/editrefdocupload', data); }
+  uploadAssignments(fromdata) { return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata); }
 
   remove_doc_ref(id) {
     return this.apollo.query({
@@ -105,36 +107,36 @@ export class WcaService {
       }
     });
   }
-  getsingleTemplate(template) { return this.http.get(environment.wcaapiurl + 'api/template/getalltemplates?template_id=' + template); }
+  getsingleTemplate(template) { return this.http.get(this.envWcaApi + 'api/template/getalltemplates?template_id=' + template); }
 
-  createDraft(draft) { return this.http.post(environment.wcaapiurl + 'api/courses/createscrom', draft); }
+  createDraft(draft) { return this.http.post(this.envWcaApi + 'api/courses/createscrom', draft); }
 
-  saveCourse(data) { return this.http.post(environment.wcaapiurl + 'api/courses/createcourse', data); }
+  saveCourse(data) { return this.http.post(this.envWcaApi + 'api/courses/createcourse', data); }
 
 
-  getCourseDetails(id) { return this.http.get(environment.wcaapiurl + 'api/courses/getscrommodules?courseid=' + id); }
+  getCourseDetails(id) { return this.http.get(this.envWcaApi + 'api/courses/getscrommodules?courseid=' + id); }
 
-  excelUpload(excel) { return this.http.post(environment.apiUrl + 'wca/uploaddocument', excel); }
+  excelUpload(excel) { return this.http.post(this.envApi + 'wca/uploaddocument', excel); }
 
-  excelPpt(ppt) { return this.http.post(environment.wcaapiurl + 'api/template/pdftoimage', ppt); }
+  excelPpt(ppt) { return this.http.post(this.envWcaApi + 'api/template/pdftoimage', ppt); }
 
-  uploadKnowledgeCheck(fileData) { return this.http.post(environment.wcaapiurl + 'api/upload/uploadexcelfile', fileData); }
+  uploadKnowledgeCheck(fileData) { return this.http.post(this.envWcaApi + 'api/upload/uploadexcelfile', fileData); }
 
-  getPreviewData(path) { return this.http.post(environment.wcaapiurl + 'api/module/getquestions', { file: path }); }
+  getPreviewData(path) { return this.http.post(this.envWcaApi + 'api/module/getquestions', { file: path }); }
   repositoryModules() {
-    return this.http.get(environment.wcaapiurl + 'api/module/viewrepomodules', {});
+    return this.http.get(this.envWcaApi + 'api/module/viewrepomodules', {});
   }
 
   postRepoModules(data) {
-    return this.http.post(environment.wcaapiurl + 'api/module/savemodules', data);
+    return this.http.post(this.envWcaApi + 'api/module/savemodules', data);
   }
 
   updatecoursetomudules(data) {
-    return this.http.post(environment.wcaapiurl + 'api/module/updatecoursetomudules', data);
+    return this.http.post(this.envWcaApi + 'api/module/updatecoursetomudules', data);
   }
 
   deactivateModule(data) {
-    return this.http.post(environment.wcaapiurl + 'api/module/updaterepomodulestatus', data);
+    return this.http.post(this.envWcaApi + 'api/module/updaterepomodulestatus', data);
   }
 
   handleKeydown(event) {
@@ -154,7 +156,7 @@ export class WcaService {
   }
 
   checkCourseName_Availability(courseName): Observable<any> { // Check Course Name Avalailability
-    return this.http.get(environment.createCourseApi + 'checkcoursename?course_name=' + courseName, httpOptions)
+    return this.http.get(this.envCourseApi + 'checkcoursename?course_name=' + courseName, httpOptions)
     .pipe(tap());
   }
 

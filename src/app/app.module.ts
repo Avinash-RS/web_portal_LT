@@ -25,6 +25,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -72,7 +73,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,
-      deps: [PlatformLocation]
+      deps: [PlatformLocation,ConfigsLoaderService]
   },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
@@ -83,3 +84,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   entryComponents: [AlertComponentComponent]
 })
 export class AppModule { }
+export function appInitializerFactory(configsLoaderService: ConfigsLoaderService) {
+  return () => configsLoaderService.loadConfigs(); 
+}
