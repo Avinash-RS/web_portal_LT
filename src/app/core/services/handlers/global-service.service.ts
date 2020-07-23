@@ -26,13 +26,13 @@ export class GlobalServiceService {
     if (this.route.url !== '/' && this.route.url !== '/Learner/login' && this.route.url !== '/Learner' &&
       this.route.url !== '/Admin/login') {
       const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-      const role = localStorage.getItem('role') || null;
-      const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-      if ((userDetail != null || userDetail !== undefined ) && role === 'learner') {
+      const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
+      const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
+      if ((userDetail != null || userDetail !== undefined) && role === 'learner') {
         return userDetail;
       } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
         return adminDetails;
-           } else {
+      } else {
         this.alert.openAlert('Logged Out!', 'You have been logged out. Please login to continue');
         this.route.navigate(['/Learner/login']);
       }

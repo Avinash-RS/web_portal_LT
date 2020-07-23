@@ -37,33 +37,36 @@ import { ViewAllCoursesComponent } from './pages/view-all-courses/view-all-cours
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingModule } from 'ng-starrating';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
-  { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  { path: '', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
-  { path: 'register', component: LandingpageComponent, data: { title: 'Learner  Registration' } },
-  { path: 'otp', component: LandingpageComponent, data: { title: 'Learner  Registration OTP' } },
-  { path: 'password', component: LandingpageComponent, data: { title: 'Learner  Registration Username/Password' } },
-  { path: 'recover', component: LandingpageComponent, data: { title: 'Learner  Forget Password' } },
-  { path: 'recoverotp', component: LandingpageComponent, data: { title: 'Learner  Forget Password OTP' } },
+  { path: 'register', component: RegistrationComponent, data: { title: 'Learner  Registration' } },
+  { path: 'otp', component: OtpComponent, data: { title: 'Learner  Registration OTP' } },
+  { path: 'password', component: PasswordComponent, data: { title: 'Learner  Registration Username/Password' } },
+  { path: 'recover', component: ForgotUsernameAndPasswordComponent, data: { title: 'Learner Forget Password' } },
+  { path: 'recoverotp', component: RecoverFogotpasswordOTPComponent, data: { title: 'Learner Forget Password OTP' } },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { title: 'Learner  Profile' } },
   { path: 'MyCourse', component: LearnerMyCourseComponent, canActivate: [AuthGuard], data: { title: 'Learner  MyCourse' } },
-  { path: 'resetpassword', component: LandingpageComponent, data: { title: 'Learner   Reset password' } },
+  { path: 'resetpassword', component: ResetpasswordComponent, data: { title: 'Learner Reset password' } },
   { path: 'terms', component: TermsconditionsComponent, data: { title: 'Terms and conditions' } },
   { path: 'scorm', component: ScormplayerComponent, canActivate: [AuthGuard], data: { title: 'Course Player' } },
   { path: 'viewallcourses', component: ViewAllCoursesComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' }}
-
+  { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' } },
+  { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
 
 ];
 
@@ -84,6 +87,7 @@ const routes: Routes = [
     TermsconditionsComponent,
     ScormplayerComponent,
     MaskingPipePipe,
+    ForbiddenComponent,
     ViewAllCoursesComponent,
     // SearchPipe,
     LearnerDashboardComponent,
@@ -115,6 +119,8 @@ const routes: Routes = [
     MatExpansionModule,
     MatStepperModule,
     MyDatePickerModule,
+    InfiniteScrollModule,
+    PdfJsViewerModule,
     RatingModule
   ],
   providers: [

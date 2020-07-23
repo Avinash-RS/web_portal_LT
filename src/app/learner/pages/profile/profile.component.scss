@@ -1,5 +1,8 @@
 @import "variable";
 
+.breadcrumb ol{
+  margin-bottom: 0 !important;
+}
 //After Restructure
 .profile {
   display: flex;
@@ -40,6 +43,28 @@
   margin-bottom: 5px;
 }
 
+.passwordDialog{
+  width: 800px;
+  margin-top: 24px;
+}
+.newPassMsg{
+  margin-left : 186px;
+     font-size: 13px;
+     margin-top: 9px;
+}
+
+.emailDialog{
+  width: 600px;
+  margin-top: 24px;
+   height: 120px;
+}
+.note{
+  max-width: 100%;
+}
+.noteTxt{
+  padding-bottom: 7px;
+  border-bottom: 1px solid $color-border;
+}
 
 
 @media screen and (min-width:270px) and (max-width:335px) {
@@ -142,6 +167,32 @@
     margin-left: auto !important;
 
   }
+  .passwordDialog{
+    width: 450px !important;
+    margin-top: 24px;
+  }
+
+  .newPassMsg{
+    margin-left : 0px !important;
+       font-size: 13px;
+       margin-top: 9px;
+  }
+
+  .emailDialog{
+    width: 450px !important;
+  }
+
+  .note{
+    max-width: 80% !important;
+  }
+  .noteTxt{
+    padding-bottom: 7px;
+    border-bottom: 1px solid transparent !important;
+  }
+.mobileWidth{
+  width: 77% !important;
+}
+  
 }
 
 
@@ -476,7 +527,7 @@ div.account {
 }
 
 .p-b-10px {
-  padding-bottom: 15px;
+  padding-bottom: 15px !important;
 }
 
 .head {
@@ -577,7 +628,7 @@ div.account {
 }
 
 .submit {
-  width: 20%;
+  width: 25%;
   background-color: $color-blue;
   margin: auto;
   height: 45px;
@@ -762,13 +813,13 @@ hr {
   border-bottom: 1px solid $color-border;
 }
 
-:host ::ng-deep .mat-progress-bar-buffer {
-  background-color: $profile-t-grey !important;
-}
+// :host ::ng-deep .mat-progress-bar-buffer {
+//   background-color: $profile-t-grey !important;
+// }
 
-:host ::ng-deep .mat-progress-bar-fill::after {
-  background-color: $profile-p-grey !important;
-}
+// :host ::ng-deep .mat-progress-bar-fill::after {
+//   background-color: $profile-p-grey !important;
+// }
 
 // .cG {
 //   color : $color-darkGrey;
@@ -832,11 +883,14 @@ hr {
 }
 
 
-:host ::ng-deep.footericon{
-  width: 9%;
-  position: absolute;
-  margin-left: 5px;
+// :host ::ng-deep.footericon{
+//   width: 9%;
+//   position: absolute;
+//   margin-left: 5px;
+// }
 
+.downloadIcon {
+  padding-bottom: 1px;
 }
 // html {
 //   overflow: scroll;
@@ -846,4 +900,101 @@ hr {
 // ::-webkit-scrollbar {
 //   width: 0px;
 //   background: transparent !important;
+// }
+
+.qual, .details-row {
+  
+@media (min-width: 300px) {
+
+  .col-md-12,
+  .col-md-11,
+  .col-md-10,
+  .col-md-9,
+  .col-md-8,
+  .col-md-7,
+  .col-md-6,
+  .col-md-5,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2,
+  .col-md-1 {
+    padding: 0px !important;
+  }
+}
+}
+:host ::ng-deep .green-progress .mat-progress-bar-fill::after {
+  background-color: green !important;
+}
+:host ::ng-deep .orange-progress .mat-progress-bar-fill::after {
+  background-color: orange !important;
+}
+:host ::ng-deep .mat-progress-bar-buffer {
+  background-color: $profile-t-grey !important;
+}
+
+
+// // cookie bar 
+// .cookie-bar {
+//   position: fixed;
+//   width: 100%;
+//   top: 0;
+//   right: 0;
+//   left: 0;
+//   height: 64px;
+//   text-align: center;
+//   line-height: 66px;
+//   background: $bule2;
+//   color: $color-white;
+//   font-size: 14px;
+//   font-weight: 100;
+//   transition: .8s;
+//   animation: slideIn .8s;
+//   animation-delay: .8s;
+//   .message {
+//     white-space: nowrap;
+//     // text-shadow: 0 1px 0 darken($color-blue, 10%);
+//     @media (max-width: 767px){
+//       display: none;
+//     }
+//   }
+//   .mobile {
+//     display: none;
+//     @media (max-width: 767px){
+//       display: inline-block;
+//     }
+//   }
+// }
+// @keyframes slideIn {
+//   0% {
+//     transform: translateY(-66px);
+//   }
+//   100% {
+//     transform: translateY(0);
+//   }
+// }
+// .close-cb {
+//   border: none;
+//   color: $color-white;
+//   background: $bule2;
+//   position: absolute;
+//   display: inline-block;
+//   right: 10px;
+//   top:17px;
+//   cursor: pointer;
+//   border-radius: 3px;
+//   box-shadow: inset 0 0 3px 0 rgba(0,0,0,.2);
+//   line-height: 30px;
+//   height: 30px;
+//   width: 30px;
+//   font-size: 16px;
+//   font-weight: bold;
+//   &:hover {
+//     background: $bule2;
+//   }
+// }
+// .checkbox-cb {
+//   display: none;
+//   &:checked + .cookie-bar {
+//     transform: translateY(-66px);
+//   }
 // }

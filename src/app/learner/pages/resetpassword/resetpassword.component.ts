@@ -4,13 +4,15 @@ import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import * as myGlobals from '@core/globals'; 
-///////decrypt
- 
-import SimpleCrypto from "simple-crypto-js";
-var _secretKey = "myTotalySecretKey";
-var simpleCrypto = new SimpleCrypto(_secretKey);
+import * as myGlobals from '@core/globals';
+import { ToastrService } from 'ngx-toastr';
+/////// decrypt
+// import 'angular-base64/angular-base64';
+// import * as crypto from 'crypto';
+// import CryptoJS from 'crypto-js';
+import SimpleCrypto from 'simple-crypto-js';
+const _secretKey = 'myTotalySecretKey';
+const simpleCrypto = new SimpleCrypto(_secretKey);
 
 @Component({
   selector: 'app-resetpassword',
@@ -19,55 +21,64 @@ var simpleCrypto = new SimpleCrypto(_secretKey);
 })
 export class ResetpasswordComponent implements OnInit {
   resetForm: FormGroup;
-  currentUser:any = [];
-  user:any;
-  username:any;
-  lowercase: boolean = false;
-  uppercase: boolean = false;
-  number: boolean = false;
-  spicalcharacter: boolean = false;
+  currentUser: any = [];
+  user: any;
+  username: any;
+  lowercase = false;
+  uppercase = false;
+  number = false;
+  spicalcharacter = false;
   showpassbutton: Boolean = false;
   showpsseye: Boolean = false;
   showconpassbutton: Boolean = false;
   showconpsseye: Boolean = false;
   isLinkActive: Boolean;
+
+
+
   constructor(
-    private loader : Ng4LoadingSpinnerService,
-    private router:Router, 
+    private loader: Ng4LoadingSpinnerService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private activeroute: ActivatedRoute,
-    private alert: AlertServiceService,
-    public service : LearnerServicesService) { }
+    private toastr: ToastrService,
+    public service: LearnerServicesService) { }
 
   ngOnInit() {
-
     this.activeroute.queryParams.subscribe(params => {
-      if(params["code"]){
-        const decryptedString = simpleCrypto.decrypt(params["code"]);
-        this.user = decryptedString;
-        this.get_user_detail_username(this.user)
-      }  
-     else{
-      this.user = localStorage.getItem('Username')
-      this.isLinkActive = true
-     } 
-    })
+      if (params.code) {
+        // const decryptedString = simpleCrypto.decrypt(params.code);
 
-  
+        // const decryptedString = this.decrypt(params.code);
+        // const bytes = CryptoJS.AES.decrypt(params.code, 'secret key 123');
+        // const originalText = bytes.toString(CryptoJS.enc.Utf8);
+        const decryptedString = atob(params.code);
+        this.user = decryptedString;
+        this.get_user_detail_username(this.user);
+      } else {
+        this.user = localStorage.getItem('Username');
+        this.isLinkActive = true;
+      }
+    });
+
+
 
     this.resetForm = this.formBuilder.group({
       password: new FormControl('', myGlobals.passwordVal),
-      confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
-}, {
-validator: MustMatch('password', 'confirmpassword'),
-});
+      confirmpassword: new FormControl('', [Validators.required,
+      Validators.minLength(8), Validators.maxLength(20),
+      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+    }, {
+      validator: MustMatch('password', 'confirmpassword'),
+    });
   }
+
   get f() { return this.resetForm.controls; }
   showPassword() {
     this.showpassbutton = !this.showpassbutton;
     this.showpsseye = !this.showpsseye;
   }
-  showconPassword(){
+  showconPassword() {
     this.showconpassbutton = !this.showconpassbutton;
     this.showconpsseye = !this.showconpsseye;
   }
@@ -96,12 +107,12 @@ validator: MustMatch('password', 'confirmpassword'),
   }
 
 
-  resetpassword(){
+  resetpassword() {
     this.loader.show();
-    this.service.resetPassword( this.user,this.resetForm.value.password).subscribe(data => {
-      if (data.data['get_forgot_password_byresetpassword']['success'] == 'true') {
+    this.service.resetPassword(this.user, this.resetForm.value.password).subscribe((data: any) => {
+      if (data.data.get_forgot_password_byresetpassword.success === 'true') {
         this.loader.hide();
-        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null);
+        this.toastr.success(data.data.get_forgot_password_byresetpassword.message);
         localStorage.removeItem('Username');
         localStorage.removeItem('Details_user');
         localStorage.removeItem('UserDetails');
@@ -109,21 +120,21 @@ validator: MustMatch('password', 'confirmpassword'),
 
         this.router.navigate(['/Learner/login']);
 
-      } else{
+      } else {
         this.loader.hide();
-        this.alert.openAlert(data.data['get_forgot_password_byresetpassword'].message,null)
+        this.toastr.error(data.data.get_forgot_password_byresetpassword.message, null);
       }
-  })
+    });
   }
 
-  get_user_detail_username(name){
+  get_user_detail_username(name) {
     try {
       this.service.get_user_detail_username(name).subscribe((data: any) => {
         this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
           true : false;
-      })  
+      });
     } catch (error) {
-        throw error 
+      throw error;
     }
   }
 

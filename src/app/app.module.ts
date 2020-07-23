@@ -56,7 +56,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     PdfJsViewerModule,
     ToastrModule.forRoot({
       timeOut: 4000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       maxOpened: 1,
       preventDuplicates: true,
       autoDismiss: true
