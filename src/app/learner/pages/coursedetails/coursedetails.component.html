@@ -391,8 +391,8 @@
                                             <span class="color-blue f_size_16 f_wt_500"
                                                 style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
                                             </span> :
-                                            &nbsp;&nbsp; <span
-                                                class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</span>
+                                            &nbsp;&nbsp;
+                                            <!-- <span class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</span> -->
                                         </p>
                                     </div>
                                 </div>
@@ -405,7 +405,7 @@
                                     <p class="no_margin">Sort by :
                                         <mat-form-field class="sort no_margin">
                                             <mat-select [(value)]="selected"
-                                                [disabled]=" discussionData === null || discussionData?.topics?.length === 0"
+                                                [disabled]="discussionData === null || discussionData?.topics?.length === 0"
                                                 (selectionChange)="changedSort($event.value)">
                                                 <mat-option value="1">Latest</mat-option>
                                                 <mat-option value="0">Oldest</mat-option>
@@ -418,15 +418,20 @@
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                             <form class="search-form">
                                                 <mat-form-field class="example-full-width">
-                                                    <input class="toolbar-search" [disabled]="discussionData === null"
+                                                    <input class="toolbar-search" [disabled]="
+                                                    showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                    (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
                                                         type="text" matInput name="searchbar" [(ngModel)]="filterValue"
                                                         (input)="onSearchChange($event.target.value);">
                                                     <mat-placeholder>Search</mat-placeholder>
                                                     <mat-icon matSuffix *ngIf="filterValue?.length > 0"
                                                         style="font-size: 1.2em" (click)="closeSearch()">
                                                         close</mat-icon>
-                                                    <mat-icon matSuffix *ngIf="filterValue == null"
-                                                        style="font-size: 1.2em">search</mat-icon>
+                                                    <mat-icon matSuffix *ngIf="filterValue == null" [ngClass]="
+                                                    (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                                                    (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                                                     'pointerNone' : 'pointer'" style="font-size: 1.2em">search
+                                                    </mat-icon>
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -466,11 +471,12 @@
                                             </div>
                                             <div class="row f_size_14 date_color">
                                                 <p> Last post by <strong
-                                                        class="titlecolor">{{data?.user?.username | titlecase}} &nbsp;</strong>
-                                                    &nbsp; | &nbsp; {{data?.lastposttimeISO | date}} </p>
+                                                        class="titlecolor">{{data?.user?.username | titlecase}}
+                                                        &nbsp;</strong>
+                                                    &nbsp; | &nbsp; {{data?.lastposttimeISO | date : 'medium'}} </p>
                                                 <!-- <p class="pointer"> Created by <strong
                                                         class="titlecolor">{{data?.user?.username | titlecase}}</strong>
-                                                    &nbsp; | &nbsp; {{data?.timestampISO | date}} </p> -->
+                                                    &nbsp; | &nbsp; {{data?.timestampISO | date : 'medium'}} </p> -->
                                             </div>
                                         </div>
                                         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
@@ -510,8 +516,11 @@
                                             &nbsp;</strong> <span>
                                             <!-- - -->
                                             <!-- Instructor -->
-                                            &nbsp; | &nbsp; {{selectedThreadData?.timestampISO | date}} </span>
-                                        <br> <br>
+                                            &nbsp; | &nbsp; {{selectedThreadData?.timestampISO | date : 'medium'}}
+                                        </span>
+                                        <br> <br> 
+                                        <p class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</p>
+                                        
                                         <div
                                             *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
                                             <p [innerHTML]="topicDiscussionData?.posts[0].content"></p>
@@ -581,10 +590,10 @@
                                                 disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
                                         </div>
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                            <strong
-                                                class="color-blue float_left">{{post?.user?.username | titlecase}}  &nbsp;</strong>
+                                            <strong class="color-blue float_left">{{post?.user?.username | titlecase}}
+                                                &nbsp;</strong>
                                             <span>
-                                                &nbsp; | &nbsp; {{post?.timestampISO | date}} </span>
+                                                &nbsp; | &nbsp; {{post?.timestampISO | date : 'medium'}} </span>
                                             <br> <br>
                                             <p [innerHTML]="post?.content"></p>
                                         </div>
@@ -636,9 +645,11 @@
                                                 </div>
                                                 <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                                     <strong
-                                                        class="color-blue float_left">{{posts?.user?.username | titlecase}}  &nbsp;</strong>
+                                                        class="color-blue float_left">{{posts?.user?.username | titlecase}}
+                                                        &nbsp;</strong>
                                                     <span>
-                                                        &nbsp; | &nbsp; {{posts?.timestampISO | date}} </span>
+                                                        &nbsp; | &nbsp; {{posts?.timestampISO | date : 'medium'}}
+                                                    </span>
                                                     <br> <br>
                                                     <p [innerHTML]="posts?.content"></p>
                                                 </div>
@@ -646,7 +657,8 @@
                                             <mat-card-actions>
                                                 <div class="row">
                                                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                    <div
+                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                         &nbsp;
                                                         <button mat-button class="f_size_12 no_padding"
                                                             (click)="likeandunlikepost(posts)">
@@ -705,10 +717,10 @@
                                     <br><br>
 
                                     <div class="row m-l-20 m-r-20">
-                                        <div class="col-md-2 col-lg-2 col-sm-12 col-12">
+                                        <div class="col-12">
                                             <mat-label>Title</mat-label><span class="mand"> *</span>
                                         </div>
-                                        <div class="col-md-10 col-lg-10 col-sm-12 col-12">
+                                        <div class="col-12">
                                             <input type="text" class="width_100 greyBor background_trans"
                                                 name="thread_name" formControlName="thread_name" autofocus>
                                             <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
@@ -720,10 +732,10 @@
                                     </div>
                                     <br><br>
                                     <div class="row m-l-20 m-r-20">
-                                        <div class="col-md-2 col-lg-2 col-sm-12 col-12">
+                                        <div class="col-12">
                                             <mat-label>Description</mat-label><span class="mand"> *</span>
                                         </div>
-                                        <div class="col-md-10 col-lg-10 col-sm-12 col-12">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <angular-editor [config]="config" formControlName="thread_description">
                                                 </angular-editor>
@@ -758,7 +770,8 @@
                                 </form>
                             </mat-dialog-content>
                             <mat-dialog-actions align="end" class="dialogButtons">
-                                <button mat-stroked-button (click)="addThreadForm?.reset()" [disabled]="addThreadForm.untouched">Reset</button>
+                                <button mat-stroked-button (click)="addThreadForm?.reset()"
+                                    [disabled]="addThreadForm.untouched">Reset</button>
                                 <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
                                     [disabled]="addThreadForm.invalid" cdkFocusInitial>Create</button>
                             </mat-dialog-actions>

@@ -39,13 +39,16 @@ import { RatingModule } from 'ng-starrating';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 const routes: Routes = [
-  { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
-  { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
+  // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  { path: '', component: LoginComponent , canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   { path: 'courseDetail', component: CoursedetailsComponent, canActivate: [AuthGuard], data: { title: 'Course details' } },
   { path: 'register', component: LandingpageComponent, data: { title: 'Learner  Registration' } },
   { path: 'otp', component: LandingpageComponent, data: { title: 'Learner  Registration OTP' } },
@@ -97,6 +100,7 @@ const routes: Routes = [
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
+    AngularEditorModule,
     RouterModule.forChild(routes),
     NgxMaskModule.forChild(),
     FormsModule,

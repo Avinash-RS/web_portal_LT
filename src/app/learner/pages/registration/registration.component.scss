@@ -1,40 +1,3 @@
-// @import "variable";
-// div.terms{
-//     color: $color-blue;
-//     word-break: break-all !important;
-//     font-size: 12px;
-//     font-weight: 500;
-//     margin-top: 10px;
-// }
-// .account{
-//     color:  $color-blue;
-//     word-break: break-all !important;
-//     text-align: center !important;
-// }
-// .sign_up, .remember_me,mat-card-title , a{
-//     color: $color-blue;
-// }
-// .alert{
-//     color: $color-red;
-//     // text-align: center;
-//     margin-left: -19px;
-//     font-size: 12px;
-//     font-weight: 500;
-// }
-// input[type=text] {
-//     width: 100%;
-//     padding: 12px 20px;
-//     margin: 1px 0;
-//     background: $color-light-blue;
-//     display: inline-block;
-//     border: 1px solid $color-border;
-//     box-sizing: border-box;
-//     border-radius: 5px;
-// }
-// .star{
-//     color: $color-red;
-// }
-
 @import "variable";
 
 div.terms {
@@ -91,9 +54,7 @@ div.terms {
     color: $label2 !important;
     word-break: break-all !important;
     text-align: center !important;
-    margin-top: 10px;
-    margin-bottom: 20px;
-
+    margin-top: 16%;
 }
 
 .sign_up,
@@ -220,7 +181,7 @@ a {
     width: 100%;
     padding-left: 40px;
     padding-right: 30px;
-    // height: 100vh;
+    height: 100vh;
     border-radius: 0px !important;
     margin-left: 0% !important;
     overflow: hidden !important;
@@ -234,18 +195,18 @@ a {
 
 }
 :host ::ng-deep.footertext{
-    font-size: 13px;
-    margin-left: -18px;
+    font-size: 12px;
+    margin-left: -51px;
 }
 
 :host ::ng-deep .powered{
-    font-size: 14px;
+    font-size: 12px;
      margin-left: -29px;
 }
 :host ::ng-deep.footer20{
     position: absolute;
     bottom: 20px;
-    width: 91%;
+    width: 90%;
 }
 
 
@@ -313,10 +274,6 @@ a {
         width: 84%;
     }
 }
-.wrap-reg{
-    background: #ffffffc7 !important;
-      width: 100% !important;
-  }
 
 
 

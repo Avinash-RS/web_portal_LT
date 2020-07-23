@@ -60,7 +60,8 @@ export class CoursedetailsComponent {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    maxHeight: 'auto',
+    height: '12rem',
+    minHeight: '5rem',
     width: 'auto',
     minWidth: '0',
     translate: 'yes',
@@ -70,41 +71,38 @@ export class CoursedetailsComponent {
     defaultParagraphSeparator: '',
     defaultFontName: '',
     defaultFontSize: '',
-    height: 'auto',
-    minHeight: '10',
     fonts: [
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },
       { class: 'calibri', name: 'Calibri' },
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
+    // uploadUrl: 'environment.apiUrlImg + `upload/image`',
     toolbarPosition: 'bottom',
-
   };
 
   commentConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    maxHeight: 'auto',
+    height: '12rem',
+    minHeight: '5rem',
     width: 'auto',
     minWidth: '0',
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    placeholder: 'Leave your comments here...',
+    placeholder: 'Enter text here...',
     defaultParagraphSeparator: '',
     defaultFontName: '',
     defaultFontSize: '',
-    height: 'auto',
-    minHeight: '6',
     fonts: [
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },
       { class: 'calibri', name: 'Calibri' },
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
+    // uploadUrl: 'environment.apiUrlImg + `upload/image`',
     toolbarPosition: 'bottom',
-
   };
 
   selectedModuleData: any = null;
@@ -394,7 +392,7 @@ export class CoursedetailsComponent {
       // module: new FormControl('', myGlobals.req),
     });
     // this.addThreadForm.patchValue(this.catalog);
-    this.dialog.open(templateRef, { disableClose: true });
+    this.dialog.open(templateRef, );
   }
 
   get f() {
@@ -559,7 +557,7 @@ export class CoursedetailsComponent {
           // }, 3000);
         }
       } else {
-        this.discussionData.topics = this.discussionData.topics.filter((item) => {
+        this.discussionData.topics = this.discussionData?.topics?.filter((item) => {
           return (item.title?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.lastposttimeISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
@@ -628,8 +626,8 @@ export class CoursedetailsComponent {
           new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
         this.discussionData = result.data.ViewAllThreadData.data;
         this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
-        this.discussionData.topics = this.discussionData.topics.filter(i => i.deleted === false);
-        if (this.discussionData.topics && this.discussionData.topics?.length > 0) {
+        if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
+          this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
           this.discussionData1.topics1 = this.discussionData.topics;
         }
         this.loadingForum = false;
@@ -642,10 +640,11 @@ export class CoursedetailsComponent {
 
   createNewThread() {
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
-      || this.addThreadForm.value.thread_name.trimLeft();
+      || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
     desc.d = this.addThreadForm.value.thread_description;
-    desc.d = desc.d.replace(/&#160;/g, '').trim() || desc.d.replace(/&#160;/g, '').trimLeft();
+    desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
+    desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
       if (desc.d.length > 55500) {
         this.toastr.warning('Content should be less than 60000 characters');
@@ -664,7 +663,7 @@ export class CoursedetailsComponent {
               // this.loadingForum = false;
             } else {
               this.loadingForum = false;
-              this.toastr.warning('New thread is not created');
+              this.toastr.warning(result.data.CreateNewThread?.message);
             }
           });
       }
@@ -726,3 +725,5 @@ export class CoursedetailsComponent {
     }
   }
 }
+
+
