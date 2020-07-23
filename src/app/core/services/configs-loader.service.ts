@@ -31,12 +31,24 @@ export class ConfigsLoaderService {
   }
 
   get ApiUrl() {
-    return this.configs.ApiUrl; 
+    return this.configs.apiUrl; 
+  }
+  get ScormUrl() {
+    return this.configs.scormUrl; 
+  }
+  get ApiUrlImg() {
+    return this.configs.apiUrlImg; 
+  }
+  get CreateCourseApi() {
+    return this.configs.createCourseApi; 
+  }
+  get Wcaapiurl() {
+    return this.configs.wcaapiurl; 
+  }
+  get Domain() {
+    return this.configs.domain; 
   }
 
-  get ConfigsLoadedFrom() {
-    return this.configs.ConfigsLoadedFrom;
-  } 
 
   public async loadConfigs() : Promise<any> {
     return this.httpClient.get('assets/configs.json').pipe(settings => settings)
@@ -49,6 +61,12 @@ export class ConfigsLoaderService {
 }
 
 export interface Configs {
-  ApiUrl: string, 
-  ConfigsLoadedFrom: string 
+//   ApiUrl: string, 
+//   ConfigsLoadedFrom: string,
+  apiUrl: string,
+  scormUrl: string, 
+  apiUrlImg: string, 
+  createCourseApi: string,
+  wcaapiurl: string, 
+  domain : string, 
 }

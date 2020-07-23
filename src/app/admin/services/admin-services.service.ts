@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import {
   user_registration, createusergroup, update_notification, groupstatus, update_group,
   create_catelogue, reassigncourse, update_catalogue, delete_catalogue, create_master_catalogue,
@@ -29,7 +30,8 @@ export class AdminServicesService {
   _currentUser: any;
 
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(private Apollo: Apollo, private http: HttpClient) { }
+  constructor(private Apollo: Apollo, private http: HttpClient, 
+    private configs:ConfigsLoaderService) { }
 
   // for add user - group dropdown
   getUserGroup() {
