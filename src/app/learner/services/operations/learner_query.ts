@@ -896,6 +896,9 @@ query getAssignmentmoduleData( $courseid: String,$user_id: String){
               doc_status
               resubmit
               doc_type
+              score
+              startDate
+              endDate
             }
           }
         }
