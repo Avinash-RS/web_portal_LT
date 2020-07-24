@@ -265,7 +265,7 @@ li {
 }
 
 .backbtn {
-    margin-top: 5%;
+    margin-top: 1%;
     font-size: 12px;
 }
 
@@ -631,7 +631,7 @@ li {
 }
 
 .createThreadDialog {
-    width: 850px;
+    width: 900px;
 }
 
 @media screen and (min-width: 320px) and (max-width:760px) {
@@ -724,8 +724,12 @@ li {
 //Mythreyi CSS ends here
 
 //Kani CSS starts here 
+.pointerNone {
+    pointer-events: none !important;
+    opacity: 0.5;
+}
 .new_Thread {
-    color: white !important;
+    color: $color-white !important;
     border-radius: none !important;
     background-color: $color-landing-blue;
     border: none;

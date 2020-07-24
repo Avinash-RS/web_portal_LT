@@ -248,12 +248,15 @@
                         <mat-accordion>
                             <ng-container>
                                 <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
+                                    
                                     <mat-expansion-panel class="panel1" hideToggle="true" #example1
                                         [expanded]="selectedIndex === i">
                                         <mat-expansion-panel-header style="height: 50px !important;">
                                             <mat-panel-title>
                                                 <span
-                                                    class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}</span>
+                                                    class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}
+                                                    </span>
+    
                                             </mat-panel-title>
                                             <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
                                             </mat-icon>
@@ -313,19 +316,24 @@
                                                                         {{file.size}}
                                                                     </div>
                                                                     <div class="col-1 no-cursor">
-                                                                        <mat-icon
+                                                                        <mat-icon *ngIf= "file.enableView"
                                                                             (click)="previewDoc(previewDialog,file)"
+                                                                            class="viewDoc">remove_red_eye</mat-icon>
+                                                                            <mat-icon *ngIf= "!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                     </div>
                                                                     <div class="col-2" (click)="fileInput.click()">
                                                                         <button mat-stroked-button
                                                                             matTooltip="Click upload button to add the file"
-                                                                            [disabled]="file?.doc_status === false">Upload</button>
-                                                                        <input class="form-control border-right-0"  [disabled]="file?.doc_status === false"
+                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload"
+                                                                          >
+                                                                            Upload</button>
+                                                                        <input class="form-control border-right-0"
+                                                                            [disabled]="file?.doc_status === false"
                                                                             type='file' id="upload-photo" #fileInput
-                                                                            (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name)">
+                                                                            (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
                                                                     </div>
-                                                                    <div class="col-2 disply no-cursor" >
+                                                                    <div class="col-2 disply no-cursor">
                                                                         <mat-icon class="no-cursor"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">
                                                                             check_circle</mat-icon>
@@ -792,5 +800,6 @@
                 <img width="160px" alt="" src="assets/learner/LT_small.svg">
             </span>
         </span>
+
     </div>
 </div>

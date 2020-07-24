@@ -8,17 +8,21 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+// import { setInterval, clearInterval} from 'timers';
+// import Swal from 'sweetalert2';
 import * as myGlobals from '@core/globals';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-coursedetails',
   templateUrl: './coursedetails.component.html',
   styleUrls: ['./coursedetails.component.scss']
 })
-export class CoursedetailsComponent {
+export class CoursedetailsComponent implements OnInit {
   course: any = null;
   loading: boolean;
   pagenumber: any;
@@ -202,18 +206,52 @@ export class CoursedetailsComponent {
     this.getAssignmentmoduleData();
   }
 
+  ngOnInit(): void {
+  }
+
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+      if (moment().format('DD-MM-YYYY HH:MM') >=
+       moment(this.assignmentContent.courseStartDate).format('DD-MM-YYYY HH:MM') &&
+       moment().format('DD-MM-YYYY HH:MM') <=
+       moment(this.assignmentContent.courseEndDate).format('DD-MM-YYYY HH:MM')) {
+      this.assignmentContent.enableUpload = true;
+    } else if (moment().format('DD-MM-YYYY HH:MM') <
+    moment(this.assignmentContent.courseStartDate).format('DD-MM-YYYY HH:MM') ||
+    moment().format('DD-MM-YYYY HH:MM') >
+    moment(this.assignmentContent.courseEndDate).format('DD-MM-YYYY HH:MM')) {
+      this.assignmentContent.enableUpload = false;
+    }
+      this.assignmentContent.coursedetails.forEach(element => {
+        element.moduledetails.forEach(moduleData => {
+          moduleData.resourse.files.forEach(fileData => {
+            if (moment().format('DD-MM-YYYY HH:MM') >= moment(fileData.startDate).format('DD-MM-YYYY HH:MM')) {
+              fileData.enableView = true;
+            } else {
+              fileData.enableView = false;
+            }
+          });
+        });
+      });
     });
   }
-  uploadAssignmentsFile(event, fileId, modulename, topicname, assName) {
+  uploadAssignmentsFile(event, fileId, modulename, topicname, assName, score, endDate) {
     this.assFile = event.target.files[0] as File;
-    this.postAssignmentsFile(fileId, modulename, topicname, assName);
+    this.postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate);
 
   }
 
-  postAssignmentsFile(fileId, modulename, topicname, assName) {
+  postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate) {
+    if (!score) {
+      score = 50;
+    }
+    let submitStatus = 'ontime';
+    if (moment().format('DD-MM-YYYY HH:MM') > moment(endDate).format('DD-MM-YYYY HH:MM')) {
+      submitStatus = 'late';
+    } else {
+      submitStatus = 'ontime';
+    }
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
@@ -222,6 +260,8 @@ export class CoursedetailsComponent {
     payload.append('module_id', modulename);
     payload.append('file_id', fileId);
     payload.append('type_name', assName);
+    payload.append('submit_status', submitStatus);
+    payload.append('total_mark', score);
     this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
