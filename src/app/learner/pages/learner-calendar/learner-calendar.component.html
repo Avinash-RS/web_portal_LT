@@ -1,0 +1,52 @@
+<p>
+  learner-calendar works!
+</p>
+<div class="container" style="margin-top: 18px;">
+  <div class="ui two column grid">
+      <div class="column">
+          <div class="uk-card uk-card-default uk-card-body">
+              <div class="row">
+                  <div class="pr-3 pb-3">
+                      <bs-datepicker-inline [bsConfig]="{containerClass: 'theme-blue' }" (bsValueChange)="getDateChangedValue($event)" [bsValue]="bsInlineValue"></bs-datepicker-inline>
+                  </div>
+                  <div *ngIf="selectedToday && learnerActivityList.length != 0" style="font-size: 16px; line-height: 1.5em;">
+                      <i class="fa fa-circle" style="color:#509ad4" aria-hidden="true"></i>
+                      <span class="sr-only">Example of circle-thin</span><span class="pl-2">On-going Courses</span></div>
+              </div>
+              <br />
+              <br />
+          </div>
+          <br />
+      </div>
+
+      <div class="column scrollcard">
+          <div class="uk-card uk-card-default uk-card-body">
+              <div *ngIf="showErrorCard">
+                  <div class="uk-card uk-card-default uk-card-body">
+                      <p>
+                          {{ errorMessage }}
+                      </p>
+                  </div>
+              </div>
+              <div>
+                  <ng-container *ngFor="let data of learnerActivityList">
+                      <div id="insidecard" class="uk-card uk-card-default uk-card-body" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }">
+                          <p style="color:#509ad4">
+                              {{ data.activity_details.startdate | date:'shortTime'}} - {{ data.activity_details.enddate | date:'shortTime'}} <span *ngIf="data.activity_details.ongoing == 'true' "> | On-going</span>
+                              <i class="fa fa-circle float-right color-white" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }" aria-hidden="true"></i>
+                          </p>
+                          <h4>{{ data.activity_details.topicname }}</h4>
+                          <p>
+                              {{ data.activity_details.coursename }}
+                          </p>
+                          <p>
+                              {{ data.activity_details.activitytype }} | {{ data.activity_details.createdby_name }}
+                          </p>
+                      </div>
+                  </ng-container>
+                  <br />
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
