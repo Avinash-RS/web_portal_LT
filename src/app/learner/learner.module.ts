@@ -20,12 +20,12 @@ import { Ng5SliderModule } from "ng5-slider";
 import { MyDatePickerModule } from "mydatepicker";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 
-// local
 import { MaskingPipePipe } from "@core/core/masking-pipe.pipe";
 import { CoreModule } from "@core/core.module";
 import { MaterialModule } from "@core/material.module";
 import { AuthGuard } from "@core/services/_helpers/auth.guard";
 import { LoginComponent } from "@learner/pages/login/login.component";
+// import { NewHomeComponent } from '@learner/pages/new-home/new-home.component';
 import { CoursedetailsComponent } from "@learner/pages/coursedetails/coursedetails.component";
 import { RegistrationComponent } from "@learner/pages/registration/registration.component";
 import { OtpComponent } from "@learner/pages/otp/otp.component";
@@ -46,6 +46,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatStepperModule } from "@angular/material/stepper";
 import { AngularEditorModule } from "@kolkov/angular-editor";
+
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from "./pages/learner-dashboard/learner-dashboard.component";
 import { LandingpageComponent } from "./pages/landingpage/landingpage.component";
@@ -149,11 +150,13 @@ const routes: Routes = [
     component: ForbiddenComponent,
     data: { title: "Learner Change email" }
   }
+  // { path: 'new-home', component: NewHomeComponent },
 ];
 
 @NgModule({
   declarations: [
     LoginComponent,
+    // NewHomeComponent,
     LearnerHomeComponent,
     CoursedetailsComponent,
     RegistrationComponent,

@@ -35,6 +35,7 @@ import {
   playerModuleAndTopic,
   ViewSingleTopicDiscussionData,
   ViewAllThreadData,
+  // get_read_learner_activity,
   getReadLeanerActivity
 } from "./operations/learner_query";
 
@@ -80,8 +81,18 @@ export class LearnerServicesService {
   envApiImg: any = environment.apiUrlImg;
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
+
   constructor(private Apollo: Apollo, private http: HttpClient) {}
 
+  public getData(userid, date) {
+    return this.Apollo.query({
+      query: getReadLeanerActivity,
+      variables: {
+        userid,
+        date
+      }
+    });
+  }
   login(username, password, is_admin) {
     return this.Apollo.query({
       query: login,
