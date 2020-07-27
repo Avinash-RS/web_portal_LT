@@ -2,14 +2,9 @@
 <!-- <mat-tab-group style="margin-top: 5%;" class="myC">
   <mat-tab label="My Courses" class="m-l-5 "> -->
 <!-- <br><br> -->
-<p class="mHead">My Courses</p>
-<div class="vertical"></div>
-<hr style="margin: 0 !important;">
-<!-- <div class="spinner-container" *ngIf="loading">
-  <mat-spinner diameter="40"></mat-spinner>
-</div> -->
-<div class="row width_100 no_margin bodybg" *ngIf="!loading">
-  <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-12">
+
+<mat-tab-group>
+  <mat-tab label="My Courses">
     <mat-tab-group style="padding: 0% 3%;" class="myCc">
       <mat-tab [label]="'All ( '+enrolledCourses?.length +' )'">
         <ng-container *ngFor="let course of enrolledCourses ;let i=index">
@@ -221,6 +216,25 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+  </mat-tab>
+  <mat-tab label="Calendar">
+    <app-learner-calendar></app-learner-calendar>
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Default</h3>
+      <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+  </mat-tab>
+  
+</mat-tab-group>
+<!-- <p class="mHead">My Courses</p>
+<div class="vertical"></div>
+<hr style="margin: 0 !important;"> -->
+<!-- <div class="spinner-container" *ngIf="loading">
+  <mat-spinner diameter="40"></mat-spinner>
+</div> -->
+<div class="row width_100 no_margin bodybg" *ngIf="!loading">
+  <div class="col-xl-8 col-lg-10 col-md-10 col-sm-12 col-12">
+   
     <br>
     <br>
   </div>
