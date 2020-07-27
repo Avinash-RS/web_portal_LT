@@ -909,6 +909,36 @@ query getAssignmentmoduleData( $courseid: String,$user_id: String){
   }
 }
 `;
+
+export const get_read_learner_activity = gql`
+query get_read_learner_activity($userid: String!, $date: String!){
+  get_read_learner_activity(userid:$userid,date:$date) {
+        success
+        error_msg
+        message{
+            _id
+            activity_details{
+                    topicname
+                    status
+                    courseid
+                    coursename
+                    modulename
+                    startdate
+                    enddate
+                    activitytype
+                    activityname
+                    resourcefile
+                    score
+                    link
+                    created_on
+                    createdby_name
+                    createdby_role
+                    createdby_id
+            }
+        }
+      }
+    }`;
+
 export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String , $user_id:String){
     playerModuleAndTopic(contentID: $contentID , user_id:$user_id) {

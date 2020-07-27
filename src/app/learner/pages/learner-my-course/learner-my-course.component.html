@@ -26,62 +26,64 @@
                 </mat-grid-tile>
               </mat-grid-list> -->
           <!-- <div class="row width_100 no_margin coursebg  border-radius-5"> -->
-            <div matRipple >
-          <mat-card class="coursebg">
-            <div class="row width_100 no_margin">
-              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
-                (click)="gotoDesc(course)">
-                <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
-                <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
-                <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-              </div>
-              <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl" style="padding: 5px !important;">
-                <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
-                  {{course.course_name}}
+          <div matRipple>
+            <mat-card class="coursebg">
+              <div class="row width_100 no_margin">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 display_flex pointer no_pl"
+                  (click)="gotoDesc(course)">
+                  <div *ngIf="course?.coursePlayerStatus?.status ==='completed'" class="lineeg"></div>
+                  <div *ngIf="course?.coursePlayerStatus?.status !=='completed'" class="linee"></div>
+                  <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                 </div>
-                <div class="width_100 color_black2 f_size_12 descmc f_wt_400 m-l-1 pointer" (click)="gotoDesc(course)">
-                  {{(course.course_description?.length > 375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
-                </div>
-                <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
-                  {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <span *ngFor="let l of course?.author_details;let in = index">
-                    {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
-                  </span>
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
-                </div>
-                <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
-                    <div class="width_70 m-b-10">
-                      <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
-                      </mat-progress-bar>
-                    </div> <span class="percent color_black2">
-                      {{course?.coursePlayerStatus?.course_percentage}}%
+                <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 no_pl" style="padding: 5px !important;">
+                  <div class="width_100 m-t-3 color_blue f_size_15 f_wt_500 pointer" (click)="gotoDesc(course)">
+                    {{course.course_name}}
+                  </div>
+                  <div class="width_100 color_black2 f_size_12 descmc f_wt_400 m-l-1 pointer"
+                    (click)="gotoDesc(course)">
+                    {{(course.course_description?.length > 375)? (course.course_description | slice:0:375)+'...':(course.course_description) }}
+                  </div>
+                  <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
+                    {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span *ngFor="let l of course?.author_details;let in = index">
+                      {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                     </span>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    Course Duration: {{course.course_duration}} hours
                   </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12">
-                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
-                      <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                      &nbsp;<span class="cap icon-color">
-                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                  <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
+                      <div class="width_70 m-b-10">
+                        <mat-progress-bar mode="determinate"
+                          [value]="course?.coursePlayerStatus?.course_percentage|| 0">
+                        </mat-progress-bar>
+                      </div> <span class="percent color_black2">
+                        {{course?.coursePlayerStatus?.course_percentage}}%
+                      </span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12">
+                      <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                        <mat-icon class="icon-color">play_circle_outline</mat-icon>
+                        &nbsp;<span class="cap icon-color">
+                          {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                           course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
-                      </span>
-                    </button>
-                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                      class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
-                      <mat-icon class="icon-color">replay</mat-icon>
-                      &nbsp;<span class="cap icon-color">
-                        Replay&nbsp;
-                      </span>
-                    </button>
+                        </span>
+                      </button>
+                      <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                        class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
+                        <mat-icon class="icon-color">replay</mat-icon>
+                        &nbsp;<span class="cap icon-color">
+                          Replay&nbsp;
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </mat-card>
-        </div>
+            </mat-card>
+          </div>
         </ng-container>
         <div *ngIf="enrolledCourses?.length === 0" class="space5">
           <!-- <mat-card class="coursebg width_60 center noCourse center_align">
@@ -224,6 +226,37 @@
     <br>
     <br>
   </div>
+  <!-- ------------------------------------------------->
+  <div class="col-md-4">
+    <h1>Today's Sessions</h1>
+    <mat-card class="coursebg width_100" *ngIf="results.message.length == 0">
+      <div class="row width_100 no_margin">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl">
+              <div class="lineer"></div>
+            </div>
+            <div class="col-md-8" style="padding: 5px !important;font-size: medium;">
+              <p> {{ results.error_msg }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div *ngIf="results.message.length > 0">
+      <mat-card *ngFor="let result of results.message" style="border-radius: 10px;">
+        <div class="col-md-8" id="insidecard" class="uk-card uk-card-default uk-card-body" style="font-size: medium;"
+          [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
+          <h5>{{strDate | date :'dd MMM yyyy'}}
+            <span *ngIf="result.activity_details.ongoing == 'true' "> | On-going</span>
+          </h5>
+          <p> {{ result.activity_details.coursename }}</p>
+          <h5>{{ result.activity_details.activitytype }} | {{ result.activity_details.createdby_name }}</h5>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <!-- ---------------------------------------------- -->
 </div>
 
 <!-- Model for mobile user  -->
@@ -274,5 +307,6 @@
   </span>
 
 </div>
+
 <!-- </mat-tab>
 </mat-tab-group> -->

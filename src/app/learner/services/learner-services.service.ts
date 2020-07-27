@@ -8,7 +8,7 @@ import {
   get_sub_category, get_course_by_subcategory, get_module_topic,
   getsupersubcategory, getLevelCategoryData, getDetailsCount, getlearnertrack,
   getLearnerenrolledCourses, getlearnerdashboarddetails, getFeedbackQuestion, getCoursePlayerStatusForCourse,
-  getAssignmentmoduleData, playerModuleAndTopic, ViewSingleTopicDiscussionData, ViewAllThreadData, 
+  getAssignmentmoduleData, playerModuleAndTopic, ViewSingleTopicDiscussionData, ViewAllThreadData, get_read_learner_activity
 } from './operations/learner_query';
 
 
@@ -18,7 +18,7 @@ import {
   view_profile, get_state_details, user_registration_done, get_forgot_password_byresetpassword,
   get_district_details, get_change_password_updateprofile, update_mobile_onprofile, getLevelSubCategoryData,
   update_verifyotp_mobile_onprofile, update_email_onprofile, update_profile, resend_otp_onprofile,
-  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest, 
+  delete_qualification, gettopicdetail, getCourseCategorySearch, view_profile1, createGuidanceRequest,
   InsertCourseFeedback, playerstatusrealtime, CreateNewThread
 } from './operations/learner_mutation';
 
@@ -30,13 +30,23 @@ import { from } from 'rxjs';
   providedIn: 'root'
 })
 export class LearnerServicesService {
-  envWcaApi:any = environment.wcaapiurl;
-  envApi:any = environment.apiUrl;
-  envApiImg:any =environment.apiUrlImg;
-  envCourseApi:any =environment.createCourseApi;
-  envDomain:any= environment.domain;
-  constructor(private Apollo: Apollo, private http: HttpClient, ) { }
+  envWcaApi: any = environment.wcaapiurl;
+  envApi: any = environment.apiUrl;
+  envApiImg: any = environment.apiUrlImg;
+  envCourseApi: any = environment.createCourseApi;
+  envDomain: any = environment.domain;
+  constructor(private Apollo: Apollo, private http: HttpClient,) { }
 
+
+  public getData(userid, date) {
+    return this.Apollo.query({
+      query: get_read_learner_activity,
+      variables: {
+        userid,
+        date
+      }
+    });
+  }
   login(username, password, is_admin) {
     return this.Apollo.query({
       query: login,
@@ -73,7 +83,7 @@ export class LearnerServicesService {
         full_name,
         email,
         term_condition: termsandconditions,
-        domain:this.envDomain
+        domain: this.envDomain
       }
     });
   }
@@ -178,7 +188,7 @@ export class LearnerServicesService {
         subtype,
         mobile_number,
         email,
-        domain:this.envDomain
+        domain: this.envDomain
 
       }
     });
@@ -209,7 +219,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: get_board_university_details,
       variables: {
-    _id: id
+        _id: id
       }
     });
   }
@@ -238,7 +248,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: get_discipline_details,
       variables: {
-       _id : id
+        _id: id
       }
     });
   }
@@ -409,11 +419,11 @@ export class LearnerServicesService {
   //     }
   //   });
   // }
-  get_module_topic(course_id){
+  get_module_topic(course_id) {
     return this.Apollo.query({
       query: get_module_topic,
       variables: {
-        course_id:course_id
+        course_id: course_id
       }
     });
   }
@@ -461,7 +471,7 @@ export class LearnerServicesService {
   // Guildeline selected filter value and getting courses
   postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any, course_language: any, course_mode: any,
     author_details: any, partner_details: any,
-    pagenumber, perPage, publishedToDate, publishedFromDate,catalogue_visibility) {
+    pagenumber, perPage, publishedToDate, publishedFromDate, catalogue_visibility) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
@@ -500,7 +510,7 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id,id) {
+  get_enrolled_courses(user_id, id) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
@@ -548,19 +558,19 @@ export class LearnerServicesService {
       query: getPopularcourse,
     });
   }
-  getFeedbackQuestion(){
+  getFeedbackQuestion() {
     return this.Apollo.query({
       query: getFeedbackQuestion
     });
   }
-  InsertCourseFeedback(feedback){
- 
+  InsertCourseFeedback(feedback) {
+
     return this.Apollo.query({
       query: InsertCourseFeedback,
-      variables:feedback
+      variables: feedback
     });
   }
-  getCoursePlayerStatusForCourse(user_id,course_id) {
+  getCoursePlayerStatusForCourse(user_id, course_id) {
     return this.Apollo.query({
       query: getCoursePlayerStatusForCourse,
       variables: {

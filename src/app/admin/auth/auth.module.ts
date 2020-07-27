@@ -47,6 +47,7 @@ import { LearnerprofileComponent} from '@admin/pages/learnerprofile/learnerprofi
 import { ChartsModule } from 'ng2-charts';
 import {MatNativeDateModule} from '@angular/material';
 import { PagesModule } from './../pages/pages.module';
+// import { NewHomeComponent } from 'src/app/learner/pages/new-home/new-home.component'
 // import { ReportsComponent } from '@admin/pages/reports/reports.component';
 // import {LineChartComponent} from '@admin/core/charts/line-chart/line-chart.component';
 @NgModule({
@@ -92,7 +93,7 @@ import { PagesModule } from './../pages/pages.module';
         ChartsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        PagesModule
+        PagesModule,
     ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -100,6 +101,7 @@ import { PagesModule } from './../pages/pages.module';
     declarations: [DndDirective,
         AuthComponent, UserManagementComponent, GroupManagementComponent,AdminCoursesComponent,
         // ReportManagementComponent, AddUserComponent, , CatalogueManagementComponent, AdminDashboardComponent,
+        // NewHomeComponent,
         PublishCourseComponent,
         // CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent
     ],

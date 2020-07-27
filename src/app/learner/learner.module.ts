@@ -20,6 +20,7 @@ import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { LoginComponent } from '@learner/pages/login/login.component';
+// import { NewHomeComponent } from '@learner/pages/new-home/new-home.component';
 import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
 import { RegistrationComponent } from '@learner/pages/registration/registration.component';
 import { OtpComponent } from '@learner/pages/otp/otp.component';
@@ -67,12 +68,14 @@ const routes: Routes = [
   { path: 'dashboard', component: LearnerDashboardComponent, canActivate: [AuthGuard] },
   { path: 'home', component: LearnerHomeComponent, canActivate: [AuthGuard], data: { title: 'Learner home' } },
   { path: 'forbidden', component: ForbiddenComponent, data: { title: 'Learner Change email' } },
+  // { path: 'new-home', component: NewHomeComponent },
 
 ];
 
 @NgModule({
   declarations: [
     LoginComponent,
+    // NewHomeComponent,
     LearnerHomeComponent,
     CoursedetailsComponent,
     RegistrationComponent,
