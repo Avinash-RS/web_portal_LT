@@ -9,7 +9,6 @@ export const environment = {
   apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
   createCourseApi: 'http://20.44.41.55:3002/',
   wcaapiurl: 'http://20.44.34.169:9001/',
-
   domain : 'LXP'
 };
 
