@@ -8,7 +8,7 @@ export const environment = {
   scormUrl: 'http://20.44.36.116:8089/',
   apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
   createCourseApi: 'http://20.44.41.55:3002/',
-  wcaapiurl: 'http://20.44.34.169:9001/',
+  wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
   domain : 'LXP'
 };
 
