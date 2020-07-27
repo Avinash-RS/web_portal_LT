@@ -9,7 +9,8 @@ export const environment = {
   apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
   createCourseApi: 'http://course.southindia.cloudapp.azure.com:3002/',
   wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
-  domain : 'LXP'
+  domain : 'LXP',
+  analytics: 'UA-171656647-1'
 };
 
 /*
