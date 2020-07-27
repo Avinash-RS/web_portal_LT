@@ -54,6 +54,7 @@ import { CategoryComponentComponent } from "@core/shared/category-component/cate
 import { PdfJsViewerModule } from "ng2-pdfjs-viewer";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { ForbiddenComponent } from "./pages/forbidden/forbidden.component";
+import { NewHomeComponent } from "./pages/new-home/new-home.component";
 import { LearnerCalendarComponent } from "./pages/learner-calendar/learner-calendar.component";
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
@@ -172,6 +173,7 @@ const routes: Routes = [
     ScormplayerComponent,
     MaskingPipePipe,
     ForbiddenComponent,
+    NewHomeComponent,
     ViewAllCoursesComponent,
     // SearchPipe,
     LearnerDashboardComponent,
