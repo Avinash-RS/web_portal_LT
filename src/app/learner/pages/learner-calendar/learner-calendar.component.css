@@ -1,0 +1,39 @@
+#insidecard.uk-card-default {
+    background: #fff;
+    color: #666;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    border-left: 8px solid #b5acac;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+div.scrollcard {
+    width: 95%;
+    height: 800px;
+    overflow-y: auto;
+}
+
+::ng-deep.bs-datepicker-body {
+    padding: 10px;
+    border-radius: 0 0 3px 3px;
+    /* min-height: 500px; */
+    min-width: 600px;
+    border: 1px solid #e9edf0;
+}
+
+.color-grey {
+    border-left: 8px solid #b5acac !important;
+    color: #b5acac !important;
+}
+
+.color-blue {
+    border-left: 8px solid #6cabdb !important;
+    color: #509ad4 !important;
+}
+
+.color-white {
+    color: #b5acac;
+    background: white !important;
+    border-left: 0px !important
+}
