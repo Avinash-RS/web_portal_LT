@@ -2,7 +2,7 @@
 <hr style="margin: 0 !important;">
 <div class="bodybg" *ngIf="!loading">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
-    <mat-tab-group  class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container ">
+    <mat-tab-group  class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
       <mat-tab [label]="'ALL ('+enrolledCourses?.length +')'">
         <!-- <ng-container > -->
           <div class="container" *ngFor="let course of enrolledCourses ;let i=index">
@@ -11,7 +11,7 @@
               <div class=" display_flex pointer no_pl"
                 (click)="gotoDesc(course)">
               
-            <div class="container23">
+            <div class="courseHover">
               <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               <div class="overlay">
                 <mat-icon class="text"  > play_arrow </mat-icon>
@@ -19,7 +19,7 @@
             </div>
 
               </div>
-              <div class=" col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl" style="padding: 10px 20px !important;">
+              <div class=" col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
                 <div class="width_100  f_size_20 f_wt_500 pointer" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row color_black f_size_12 f_wt_400  pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
-                    <div class="width_70 pad-10-12">
+                    <div class="width_35 pad-10-12">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
                     </div> <span class="percent color_black2">
@@ -48,7 +48,7 @@
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                        &nbsp;<span class="cap">
+                        &nbsp;<span class="cap f_wt_400">
                           {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                             course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
                         </span>
@@ -56,7 +56,7 @@
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
                         class="blue_clr cap statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">replay</mat-icon>
-                        &nbsp;<span class="cap ">
+                        &nbsp;<span class="cap f_wt_400">
                           Replay&nbsp;
                         </span>
                       </button>
@@ -99,7 +99,7 @@
                 (click)="gotoDesc(course)">
               
 
-            <div class="container23">
+            <div class="courseHover">
               <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               <div class="overlay">
                 <mat-icon class="text"  > play_arrow </mat-icon>
@@ -107,7 +107,7 @@
             </div>
               
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl" style="padding: 10px 20px !important;">
+              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
                 <div class="width_100  f_size_20 f_wt_500 pointer" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
-                    <div class="width_70 pad-10-12">
+                    <div class="width_35 pad-10-12">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
                     </div> <span class="percent color_black2 pointer">
@@ -137,7 +137,7 @@
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">play_circle_outline</mat-icon>
                       
-                        &nbsp;<span class="cap">
+                        &nbsp;<span class="cap f_wt_400">
                           {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                           course?.coursePlayerStatus?.status === 'start' ? 'Start' : 'Resume'}}&nbsp;
                         </span>
@@ -164,7 +164,7 @@
               <div class=" display_flex pointer no_pl"
                 (click)="gotoDesc(course)">
               
-            <div class="container23">
+            <div class="courseHover">
               <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
               <div class="overlay">
                 <mat-icon class="text"  > play_arrow </mat-icon>
@@ -172,7 +172,7 @@
             </div>
               
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl" style="padding: 10px 20px !important;">
+              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
                 <div class="width_100  f_size_20 f_wt_500" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="row color_black f_size_12 f_wt_400" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
-                    <div class="width_70 pad-10-12">
+                    <div class="width_35 pad-10-12">
                       <mat-progress-bar mode="determinate" [value]="course?.coursePlayerStatus?.course_percentage|| 0">
                       </mat-progress-bar>
                     </div>
@@ -202,7 +202,7 @@
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'"
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">replay</mat-icon>
-                        &nbsp;<span class="cap">
+                        &nbsp;<span class="cap f_wt_400">
                           Replay&nbsp;
                         </span>
                       </button>

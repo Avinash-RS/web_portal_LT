@@ -18,7 +18,6 @@
 
 .m-b-10 {
     margin-bottom: 12px;
-    // margin-top: -5px;
 }
 
 @media screen and (min-width:270px) and (max-width:795px) {
@@ -67,26 +66,19 @@
     color: #616060;
 }
 
-// :host ::ng-deep .myC .mat-tab-label .mat-tab-label-content {
-//     font-size: 17px !important;
-//     font-weight: 600 !important;
-// }
-
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
     font-weight: 500 !important;
+    // color: $label !important;
+
+}
+
+:host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
     color: $color-blank !important;
 }
 
-// .descmc {
-//     max-height: 90px;
-//     min-height: 40px;
-// }
-
 :host /deep/ .mat-ink-bar {
     height: 4px !important;
-    // left: 10px !important;
-    // width: 140px !important;
     background-color: $color-subhead !important;
 }
 
@@ -95,13 +87,9 @@
     min-height: 100vh;
     display: flex;
     background-color: $color-white;
-    // background-size: cover !important;
-    // background-repeat: no-repeat !important;
-    // background: url('../../../../assets/learner/p-bg-5.png');
 }
 
 :host /deep/ .mat-tab-body {
-    // background: #f1f1f1;
 
     html {
         overflow: scroll;
@@ -122,9 +110,9 @@
 
 }
 
-.mat-card {
+ :host ::ng-deep.mat-card {
     padding: 0%;
-    // width: 65%;
+    border-radius: 0px;
 }
 
 .courseImg {
@@ -137,36 +125,38 @@
 
 }
 
-.container23 {
+.courseHover {
     position: relative;
     width:100%;
+    padding: 15px 0;
   }
   
   .overlay {
     position: absolute;
-    bottom: 100%;
-    left: 1%;
+    bottom: 10%;
+    left: 0;
     right: 0;
-    background:rgba(0, 0, 0, 0.4);
+    padding: 15px 0;
+    background-color: #0000003b;
     overflow: hidden;
-    width: 100%;
-    height:0;
-    transition: .2s ease;
+    width: 0;
+    height: 80%;
+    transition: .5s ease;
   }
   
-  .container23:hover .overlay {
-    bottom: 0;
-    height: 100%;
+  .courseHover:hover .overlay {
+    width: 100%;
   }
   
   .text {
     color: white;
-    font-size: 50px !important;
+    font-size: 32px !important;
     position: absolute;
     top: 50%;
+    padding: 2px;
     left: 50%;
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background-color: black;
     -webkit-transform: translate(-50%, -50%);
@@ -184,29 +174,29 @@
 }
 
 
-.linee {
-    background: $color-landing-blue;
-    height: 100%;
-    border: 4px solid $color-landing-blue;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+// .linee {
+//     background: $color-landing-blue;
+//     height: 100%;
+//     border: 4px solid $color-landing-blue;
+//     border-top-right-radius: 5px;
+//     border-bottom-right-radius: 5px;
+// }
 
-.lineeg {
-    background: green;
-    height: 100%;
-    border: 4px solid green;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+// .lineeg {
+//     background: green;
+//     height: 100%;
+//     border: 4px solid green;
+//     border-top-right-radius: 5px;
+//     border-bottom-right-radius: 5px;
+// }
 
-.lineer {
-    background: #ea4135;
-    height: 100%;
-    border: 4px solid #ea4135;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+// .lineer {
+//     background: #ea4135;
+//     height: 100%;
+//     border: 4px solid #ea4135;
+//     border-top-right-radius: 5px;
+//     border-bottom-right-radius: 5px;
+// }
 .m-l-1 {
     margin-top: 1%;
 }
@@ -234,17 +224,19 @@
 
 .material-icons {
     font-size: 18px;
-    // padding-top: 2.5px;
 }
 
 .blue_clr {
     background-color: $color-white;
-    color: $color-blank;
+    color:#69727c;
+}
+.pad1020{
+    padding: 20px 0 10px 18px !important;
+}
+.icon-color{
+    font-size: 22px;
 }
 
-.icon-color{
-    font-size: 24px;
-}
 
 .cap::first-letter {
     text-transform: capitalize !important;
@@ -258,8 +250,8 @@
     width: 35% !important
 }
 .btl-alin{
-    // margin-left: 2%;
     margin-top: -0.5%;
+    margin-left: 52%;
 }
 .margin{
     margin-left: 2%;
@@ -282,12 +274,6 @@
     color: $color-white !important;
 }
 
-// .mat-stroked-button {
-//     border: 1px solid currentColor;
-//     padding: 0px 7px;
-//     line-height: 25px;
-//     margin-right: 15px;
-// }
 
 .noCourse {
     padding: 50px;
@@ -320,7 +306,6 @@
     width: 28% !important;
     color: $color-white;
     height: 36px;
-    // margin-left: 70% !important;
   }
   .roundbtn :focus{
     outline: none !important;
@@ -335,8 +320,6 @@
 
 .showbtn{
     color: $color-blue !important;
-    // background-color: $color-white;
-    // border: none !important;
     margin-left: -56px;
     margin-left: -72px;
     font-size: 19px;
@@ -388,10 +371,10 @@
     display: none !important;
 }
 
-// :host ::ng-deep .mat-tab-header{
-//     margin-left: 30% !important;
-//     margin-right: 30% !important;
-// }
+:host ::ng-deep .mat-tab-header{
+    padding-left: 128px;
+    margin-bottom: 15px;
+}
 
 :host ::ng-deep .mat-tab-nav-bar, .mat-tab-header {
    border-bottom: none !important;

@@ -19,13 +19,7 @@
     <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
       <i class="fa fa-filter colrr"></i>
     </button>
-    <!-- <ng-container *ngIf="!showAppliedFiltre">
-      <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
-        [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID"
-        [level3selectedID]="level3selectedID" [allLvlCategoryFilterVal]="allLvlCategoryFilterVal"
-        [allLvlCategory]="allLvlCategory"  [viewallcourse]= "true">
-      </app-guideline-search>
-    </ng-container> -->
+
     <button class="submit sort" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
@@ -49,15 +43,12 @@
   
   <div class="row">
     <div class="col-3" *ngIf="!showAppliedFiltre">
-      <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
         <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
           [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID"
           [level3selectedID]="level3selectedID" [allLvlCategoryFilterVal]="allLvlCategoryFilterVal"
           [allLvlCategory]="allLvlCategory"  [viewallcourse]= "true">
         </app-guideline-search>
-      <!-- </ng-container> -->
     </div>
-  <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
   <div class="col-9" *ngIf="!showAppliedFiltre">
     <div class="container">
       <div class="row" *ngIf="displayMode === 1">
@@ -86,7 +77,6 @@
 
     </div>
   </div>
-  <!-- </ng-container> -->
   <ng-container *ngIf="showAppliedFiltre">
     <div class="col-12 allcourses">
       <div class="container ">
@@ -124,6 +114,3 @@
   <pagination-controls class="my-pagination" (pageChange)="onpagination($event)">
   </pagination-controls>
 </div>
-<!-- <ng-container *ngIf="!showCategory">
-    <app-category-component></app-category-component>
-  </ng-container> -->
