@@ -308,7 +308,7 @@
                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                         description
                                                                     </mat-icon>
-                                                                    <div class="col-6 no-cursor">
+                                                                    <div class="col-2 no-cursor">
                                                                         {{file.type_name}}
                                                                     </div>
 
@@ -321,6 +321,12 @@
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                             <mat-icon *ngIf= "!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
+                                                                    </div>
+                                                                    <div class="col-2" matTooltip="Course start date">
+                                                                        {{courseStartDate}}
+                                                                    </div>
+                                                                    <div class="col-2" matTooltip="Course end date">
+                                                                        {{courseEndDate}}
                                                                     </div>
                                                                     <div class="col-2" (click)="fileInput.click()">
                                                                         <button mat-stroked-button
