@@ -32,15 +32,14 @@ mat-form-field {
 }
 
 .remember_me {
-    float: left;
-    font-size: 11px;
+    float: center;
+    font-size: 12px;
     color: $color-blue !important;
     margin-top: -18px;
 }
 
 .forgot {
     color: $color-blue !important;
-    font-weight: 400 !important;
     cursor: pointer;
 }
 
@@ -55,11 +54,11 @@ mat-form-field {
 }
 
 :host ::ng-deep.mat-checkbox-layout .mat-checkbox-label {
-    line-height: 27px;
+    line-height: 28px;
 }
 
 .haveacc {
-    color: $label2 !important;
+    color: $label !important;
 }
 
 .forgot_ps {
@@ -82,7 +81,7 @@ mat-form-field {
 
 :host ::ng-deep.signIn {
     text-align: center !important;
-    margin-top: 22px !important;
+    margin-top: 27px !important;
     color: $color-blue !important;
     font-weight: lighter !important;
 }
@@ -99,7 +98,7 @@ mat-form-field {
 
 :host ::ng-deep.sign_up {
     color: $color-blue !important;
-    margin-top: 5px !important;
+    margin-top: 10px !important;
     text-align: center !important;
     margin-left: 16px;
 }
@@ -134,6 +133,8 @@ mat-card-title {
 label {
     display: inline-block;
     margin-bottom: 2px !important;
+    color: $label;
+    
 }
 
 :host ::ng-deep.errspan {
@@ -236,11 +237,28 @@ label {
 :host ::ng-deep.footertext{
     font-size: 12px !important;
     margin-left: -51px;
+    color: $label;
 }
 
 :host ::ng-deep .powered{
     font-size: 12px !important;
      margin-left: -29px;
+     color: $label;
+}
+
+// new changes
+
+.btn {
+    border-radius: .25rem !important;
+    font-size: 16px;
+}
+:host ::ng-deep .btn.disabled,
+.btn:disabled {
+  opacity: 0.65;
+  color: $label !important;
+  background-color: $color-border !important;
+  border-radius: .25rem;
+  font-size: 16px;
 }
 
 
@@ -292,6 +310,7 @@ label {
     .powered {
         font-size: 10px !important;
         margin-left: -43px;
+        color: $label;
     }
     .footericon {
         width: 67%;
@@ -302,6 +321,7 @@ label {
     .footertext {
         font-size: 12px;
         margin-left: -39px;
+        color: $label;
     }
 
     .beforeloginimg {
@@ -355,6 +375,7 @@ label {
 
     .haveacc {
         font-size: 14px !important;
+
     }
 
     .beforeloginimg {

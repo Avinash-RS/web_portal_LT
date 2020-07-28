@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {
                 // for june 10 added by ankit
-                this.router.navigate(['/Learner/home']);
+                this.router.navigate(['/Learner/MyCourse']);
               } else {
                 this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
                 this.router.navigate(['/Learner/profile']);

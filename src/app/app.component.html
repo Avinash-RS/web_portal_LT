@@ -6,5 +6,7 @@
 <!-- <ng4-loading-spinner> </ng4-loading-spinner> -->
 
 <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="isLoader" style="height:100%">
-  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+  <div class="app-loading">
+    <div class="logo" style="text-align: center;"><img src="assets\images\loader.gif"></div>
+  </div>
 </div>

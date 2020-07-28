@@ -1,14 +1,14 @@
 @import "assets/variable";
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 /* Add application styles & imports to this file! */
 @import "~ngx-bar-rating/themes/br-default-theme.css";
-@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
-@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+// @import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+// @import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 @import "~bootstrap/scss/bootstrap-reboot";
-@import "~bootstrap/scss/bootstrap-grid";
+// @import "~bootstrap/scss/bootstrap-grid";
 
 button:disabled:hover {
   cursor: not-allowed;
@@ -34,6 +34,11 @@ button:disabled:hover {
 }
 
 ///////////////////////////// root loader ////////////////////////////////////////
+// to remove button border on active 
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
 
 .app-loading .logo {
   width: -webkit-fill-available !important;
@@ -100,10 +105,10 @@ html {
 }
 
 ///////////////////////////////////////////////////////////////////////
-.container {
-  max-width: 100% !important;
-  overflow: hidden;
-}
+// .container {
+//   max-width: 100% ;
+//   overflow: hidden;
+// }
 
 .contentTop {
   margin-top: 58px !important;

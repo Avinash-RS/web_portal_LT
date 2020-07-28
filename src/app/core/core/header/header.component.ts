@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   initials: any;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
-    private router: Router, private gs: GlobalServiceService,) { }
+              public router: Router, private gs: GlobalServiceService) { }
 
   ngOnInit() {
     // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     this.getShortName(this.fullName);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function (str) {
+    const Name = fullName?.split(' ').map(function(str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {

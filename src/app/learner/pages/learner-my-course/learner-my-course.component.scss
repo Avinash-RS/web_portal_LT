@@ -78,10 +78,10 @@
     color: $color-blank !important;
 }
 
-.descmc {
-    max-height: 90px;
-    min-height: 40px;
-}
+// .descmc {
+//     max-height: 90px;
+//     min-height: 40px;
+// }
 
 :host /deep/ .mat-ink-bar {
     height: 4px !important;
@@ -94,10 +94,10 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
-    background-color: #616060;
+    background-color: $color-white;
     // background-size: cover !important;
     // background-repeat: no-repeat !important;
-    background: url('../../../../assets/learner/p-bg-5.png');
+    // background: url('../../../../assets/learner/p-bg-5.png');
 }
 
 :host /deep/ .mat-tab-body {
@@ -117,21 +117,97 @@
 .coursebg {
     background-color: $color_white;
     margin-bottom: 10px;
-    // box-shadow: 0 0 5px rgb(207, 207, 207);
+    box-shadow: none;
+    border-bottom: 1px solid #bebebead;
+
 }
 
 .mat-card {
     padding: 0%;
+    // width: 65%;
 }
 
 .courseImg {
     border: 1px solid $profile-s-grey;
-    width: 180px;
-    height: 140px;
-    padding: 1px;
+    width: 190px;
     margin: auto;
-    margin-left: 10px;
+    margin-left: 0;
+    border-radius: 4px;
+
 }
+
+
+// .containerOverlay {
+//     .overlay {
+//         height: 100%;
+//         width: 82%;
+//         position: absolute;
+//         overflow: hidden;
+//         bottom: 4vh;
+//         left: 5%;
+//         opacity: 0;
+//         // background-color: $color-blank;
+//         // filter: alpha(opacity=0);
+//     }
+// }
+
+// .containerOverlay:hover .overlay {
+//     opacity: 0.9;
+//     filter: alpha(opacity=100);
+//     background-color: #000000b8;
+//     transition: .5s ease;
+// }
+
+// .hoverplayicon{
+//     color: white;
+//                   font-size: 50px !important;
+//                   position: absolute;
+//                   top: 50%;
+//                   left: 50%;
+//                   -webkit-transform: translate(-50%, -50%);
+//                   -ms-transform: translate(-50%, -50%);
+//                   transform: translate(-50%, -50%);
+//                   text-align: center;
+// }
+
+.container23 {
+    position: relative;
+    width:100%;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 12%;
+    right: 0;
+    background:rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    width: 81%;
+    height:0;
+    transition: .2s ease;
+  }
+  
+  .container23:hover .overlay {
+    bottom: 0;
+    height: 100%;
+  }
+  
+  .text {
+    color: white;
+    font-size: 50px !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: black;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
 
 .courseImgs {
     width: 125px;
@@ -173,7 +249,7 @@
 }
 
 .color_black2 {
-    color: #151414de;
+    color: $label;
 }
 
 :host ::ng-deep .mat-progress-bar-buffer {
@@ -181,7 +257,7 @@
 }
 
 :host ::ng-deep .mat-progress-bar-fill::after {
-    background-color: green !important;
+    background-color: #4ad295 !important;
 }
 
 .mat-progress-bar {
@@ -191,7 +267,7 @@
 
 .material-icons {
     font-size: 18px;
-    padding-top: 2.5px;
+    // padding-top: 2.5px;
 }
 
 .blue_clr {
@@ -233,7 +309,7 @@
 }
 
 .footer {
-    padding: 30px;
+    padding: 15px;
     font-size: inherit;
     left: 0;
     bottom: 0;
@@ -326,3 +402,13 @@
  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
     display: none !important;
 }
+
+// :host ::ng-deep .mat-tab-header{
+//     margin-left: 30% !important;
+//     margin-right: 30% !important;
+// }
+
+:host ::ng-deep .mat-tab-nav-bar, .mat-tab-header {
+   border-bottom: none !important;
+}
+
