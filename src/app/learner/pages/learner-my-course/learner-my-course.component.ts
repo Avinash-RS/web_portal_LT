@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
+import { data } from 'jquery';
 // import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./learner-my-course.component.scss']
 })
 export class LearnerMyCourseComponent implements OnInit {
+  strDate: Date = new Date();
   userDetailes: any;
   enrolledCourses: any = [];
   incomplete: any = [];
@@ -19,19 +21,40 @@ export class LearnerMyCourseComponent implements OnInit {
   screenWidth: number;
   showShortDesciption = true;
   show = false;
+  results = [];
+
 
 
   constructor(
     // public translate: TranslateService, 
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
-              private router: Router) {
+    private router: Router) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
     this.getScreenSize();
   }
   @HostListener('window:resize', ['$event'])
+  // ngOnInit() {
+  // this.translate.use(localStorage.getItem('language'));
+  // }
   ngOnInit() {
-    // this.translate.use(localStorage.getItem('language'));
+
+    this.learnerService.getData("p1xg6y", "2020-07-23T08:01:00.000Z").subscribe((data: any) => {
+      this.results = data.data.get_read_learner_activity;
+      this.results['message'].forEach((element, index) => {
+        if (index == 0) {
+          element.activity_details.ongoing = "true"
+        }
+        else {
+          element.activity_details.ongoing = "false"
+        }
+      });
+      console.log("after playlist order UPDATED", data.data);
+    }, (error) => {
+      console.log('there was an error sending the query', error);
+    })
+    console.log("data retreived", data);
+
   }
 
   getScreenSize(event?) {
@@ -61,9 +84,9 @@ export class LearnerMyCourseComponent implements OnInit {
           }
         });
         this.enrolledCourses.forEach(element => {
-            if (element.coursePlayerStatus.course_percentage) {
-              element.coursePlayerStatus.course_percentage =  Math.round(element.coursePlayerStatus.course_percentage);
-            }
+          if (element.coursePlayerStatus.course_percentage) {
+            element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+          }
         });
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
