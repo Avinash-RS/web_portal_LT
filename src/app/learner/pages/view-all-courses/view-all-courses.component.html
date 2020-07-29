@@ -7,10 +7,31 @@
     <li class="breadcrumb-item active" aria-current="page">All courses</li>
   </ol>
 </nav>
-<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
+<!-- container -->
+<div class="">
+  <div  class="row">
+    <div class="col-8" style="margin-top: 10px;">
+      <!-- <button class="menubtn" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
+        <i class="fa fa-filter colrr"></i>
+      </button>   -->
+    </div>
+
+    <div class=" col-4 display_flex" style="margin-top: 8px;">
+      <div style="display: inline-flex;">
         <mat-icon class="layouticon"(click)="onDisplayModeChange(1)">view_module</mat-icon>
+        <mat-icon  class="layouticon" (click)="onDisplayModeChange(2)">menu</mat-icon>
+      </div>
+    
+      <button class="menubtn" (click)="viewCategory(element)">Category</button>   
+     
+      <button  class="menubtn"> Sort by</button>   
+
+    </div>
+
+  </div>
+  
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
   <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
-</div>
 </div> -->
 
 <!-- <div class="row"> -->
