@@ -104,7 +104,7 @@
 
 .coursebg {
     background-color: $color_white;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     box-shadow: none;
     border-bottom: 1px solid #bebebead;
 
@@ -114,11 +114,13 @@
     padding: 0%;
     border-radius: 0px;
 }
-
+.f_size_22{
+    font-size: 22px;
+}
 .courseImg {
     border: 1px solid $profile-s-grey;
     width: 190px;
-    height: 136px;
+    height: 120px;
     margin: auto;
     margin-left: 0;
     border-radius: 4px;
@@ -243,7 +245,7 @@
 }
 
 .pad-10-12{
-    padding: 10px 12px;
+    padding: 15px 12px 0px 12px;
 }
 
 .width_35 {
@@ -259,8 +261,8 @@
 
 .percent {
     margin-left: 5px;
-    margin-top: 4px;
-    font-size: 16px;
+    margin-top: 8px;
+    font-size: 14px;
     font-weight: 400;
 }
 

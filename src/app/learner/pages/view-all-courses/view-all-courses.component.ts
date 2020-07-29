@@ -18,8 +18,8 @@ declare var $: any;
   styleUrls: ['./view-all-courses.component.scss']
 })
 export class ViewAllCoursesComponent implements OnInit {
-  value: number = 0;
-  highValue: number = 20;
+  value = 0;
+  highValue = 20;
   options: Options = {
     floor: 2,
     ceil: 24
@@ -34,16 +34,16 @@ export class ViewAllCoursesComponent implements OnInit {
   pagenumber = 0;
   showPublishedDate: boolean;
   btnType: any;
-  viewType: string = 'grid';
+  viewType = 'grid';
   showCount: boolean;
   showRating: boolean;
-  displayMode: number = 1;
+  displayMode = 1;
   paginationpgno: any;
   loader: boolean;
-  sort_type: any = "A-Z";
-  showAppliedFiltre : Boolean =true;
+  sort_type: any = 'A-Z';
+  showAppliedFiltre: Boolean = true;
   showMore: Boolean = true;
-  errormsg: boolean = false;
+  errormsg = false;
   allLvlCategory: any;
   Lvl1CatId: any = [];
   Lvl2CatId: any = [];
@@ -61,12 +61,12 @@ export class ViewAllCoursesComponent implements OnInit {
   isCollapsed: Boolean;
   publishedToDate: String;
   publishedFromDate: String;
-  showCategory : Boolean = false;
+  showCategory: Boolean = false;
   element: any;
 
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
-    private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) {
-    this.btnType = "Enroll Now"
+              private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) {
+    this.btnType = 'Enroll Now';
   }
 
   ngOnInit() {
@@ -77,37 +77,37 @@ export class ViewAllCoursesComponent implements OnInit {
     this.CommonServices.globalSearch.subscribe((data: any) => {
       if (data.length > 0) {
         this.allcourses = data;
-      }
-      else {
+      } else {
         Swal.fire('No courses found');
         this.getallcourses();
-      } 
-    })
+      }
+    });
     this.CommonServices.globalAllCategory.subscribe((data: any) => {
       this.allcourses = data;
     });
     this.CommonServices.globalCourses.subscribe((data: any) => {
         this.allcourses = data;
-    })
+    });
     this.CommonServices.appliedCategory.subscribe((data: any) => {
       this.Lvl1CatId = data.Lvl1CatId;
       this.level1selectedID = data.level1selectedID,
-      this.Lvl2CatId= data.Lvl2CatId,
+      this.Lvl2CatId = data.Lvl2CatId,
       this.level2selectedID = data.level2selectedID,
-      this.Lvl3CatId= data.Lvl3CatId,
+      this.Lvl3CatId = data.Lvl3CatId,
       this.level3selectedID = data.level3selectedID,
-      this.allLvlCategoryFilterVal=data.allLvlCategoryFilterVal,
-      this.allLvlCategory=data.allLvlCategory
-  })
+      this.allLvlCategoryFilterVal = data.allLvlCategoryFilterVal,
+      this.allLvlCategory = data.allLvlCategory;
+  });
     this.loadcategoryandcourses();
   }
 
   sorting(sortval) {
     this.showAppliedFiltre = true;
-    if (this.userDetailes.group_id)
+    if (this.userDetailes.group_id) {
       this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, sortval).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
       });
+    }
   }
 
   loadcategoryandcourses() {
@@ -122,11 +122,12 @@ export class ViewAllCoursesComponent implements OnInit {
 
 
   getallcourses() {
-    if (this.userDetailes.group_id)
+    if (this.userDetailes.group_id) {
       this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
       });
+    }
   }
 
   onpagination(event) {
@@ -140,16 +141,16 @@ export class ViewAllCoursesComponent implements OnInit {
   }
 
   viewCategory(module) {
-    let obj = {
+    const obj = {
       Lvl1CatId : this.Lvl1CatId,
       level1selectedID : this.level1selectedID,
       Lvl2CatId: this.Lvl2CatId,
       level2selectedID : this.level2selectedID,
       Lvl3CatId: this.Lvl3CatId,
       level3selectedID : this.level3selectedID,
-      allLvlCategoryFilterVal:this.allLvlCategoryFilterVal,
-      allLvlCategory:this.allLvlCategory
-    }
+      allLvlCategoryFilterVal: this.allLvlCategoryFilterVal,
+      allLvlCategory: this.allLvlCategory
+    };
     const dg = this.dialog.open(CategoryComponentComponent, {
       width: '95%',
       data : obj,
@@ -160,5 +161,5 @@ export class ViewAllCoursesComponent implements OnInit {
     //   this.getallcourses();
     // });
   }
- 
+
 }

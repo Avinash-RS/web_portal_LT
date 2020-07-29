@@ -1,7 +1,7 @@
 <!-- ////NEW DESIGN -->
 
 <!-- for logged out user -->
-<div class="containerOverlay" *ngIf="userDetail == null">
+<!-- <div class="containerOverlay" *ngIf="userDetail == null">
   <img class="pointer m-b-10 course-image1 center" src="{{ course.course_img_url }}" alt="">
   <div class="overlay p-5px" style="margin-bottom: 0;">
     <p class="course_description1 f_size_12">
@@ -17,11 +17,11 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-4 float_right">
     <button class="f_size_12 enroll_btn" (click)="enrollCourse()">Enrol</button>
   </div>
-</div>
+</div> -->
 <!-- end for logged out user -->
 
 <!-- for logged in user -->
-<mat-card class="containerOverlay1 p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
+<!-- <mat-card class="containerOverlay1 p-5px course-card shadow width_80 m-l-10" *ngIf="userDetail != null">
   <div class="row wishlist" *ngIf="showWishlist">
     <button mat-icon-button aria-label="Example icon button with a heart icon" (click)="selectWishlist(course)"
       class="wishlist_btn no_padding">
@@ -39,18 +39,6 @@
     </p>
   </div>
   <mat-card-content class="card-bottom1">
-    <!-- <div class="row course-name-row no_margin" (click)="gotoDescription()">
-      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 f_wt_500 f_size_14 float_left m-t-10 m-b-20 no_padding"
-        style="word-wrap: break-word">
-        {{course.course_name}}
-      </div>
-      <div class="col-lg-6 col-lg-6 col-sm-6 col-6 m-t-10 m-b-20 display_flex user-rating no_padding"
-        (click)="gotoDescription()">
-        <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
-        &nbsp;&nbsp; <strong *ngIf="showRating">{{(course.rating ? course.rating : 1 )| number:'1.1-1'}}</strong>
-      </div>
-    </div> -->
-
     <div class="conten no_padding" (click)="gotoDescription()">
       <div class="mask display_flex user-rating no_padding" (click)="gotoDescription()">
         <bar-rating [readOnly]="true" *ngIf="showRating" [rate]="course.rating || 1" [max]="5"></bar-rating>
@@ -100,135 +88,98 @@
       </div>
     </mat-card-action>
   </mat-card-content>
-</mat-card> <br>
+</mat-card> <br> -->
 
 <!-- end for logged in user -->
 
-
-
-
-
-
-
-
-
-
-
-<!-- //OLD DESIGN -->
-
-<!-- <div class="container m-t-15">
-  <div class="row wishlist" *ngIf="showWishlist">
-    <div class="col-md-8 col-sm-8 col-8"></div>
-    <div class="col-md-2 col-sm-2 col-2">
-      <button mat-mini-fab (click)="selectWishlist(course)" class="wishlist_btn">
-        <mat-icon *ngIf="course.wishlisted == true" style="color:red;">favorite</mat-icon>
-        <mat-icon *ngIf="course.wishlisted == false" style="color:transparent;">favorite</mat-icon>
-      </button>
+<div class="grid__item"  *ngIf="userDetail == null">
+  <a class="grid__item-top">
+    <img *ngIf="course.course_img_url != 'null'" alt="course image" 
+    src="{{course.course_img_url}}" style="height: 190px;" (click)="gotoDescription()">
+    <div class="top-holder">
+      <!-- <div><i class="material-icons">favorite</i></div> -->
     </div>
-    <div class="col-md-2 col-sm-2 col-2"></div>
+    <div class="overlay">
+      <p> {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}</p>
+     
+      </div> 
+    </a>
+  <div class="grid__item-bottom">
+    <p> {{course.course_name}}</p>
+    <button  id="enroll_now" (click)="enrollCourse()">
+      <div class="eff-5"></div>
+            <a>Enrol</a>
+    </button>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <img *ngIf="course.course_img_url != 'null'" src="{{course.course_img_url}}">
-      <img *ngIf="course.course_img_url == 'null'" src="../../../../assets/learner/kl.jpg">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 f_wt_500 f_size_14 float_left m-t-10 m-b-20 heightname">
-      {{course.course_name}}
-    </div>
-  </div>
-
-  <div class="dspFlx">
-    <span *ngIf="showRating" class="dspFlx1">
-      <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
-      &nbsp;&nbsp; <strong>{{course.rating | number:'1.1-1'}}</strong>
-    </span>
-    <span class="dspFlx1" *ngIf="showCount">{{course.max_student_enrollments_allowed | number}}</span>
-    <span class="dspFlx1" *ngIf="showPrice"><strong>Rs {{course.price | number }}</strong></span>
   </div>
 
-  <div class="row" *ngIf="showDate">
-    <div class="col-md-12 f_wt_400 f_size_14 float_left color-grey">
-      Published On : {{course.publishedOn || course.updated_at | date}}
-    </div>
-  </div>
 
-  <div class="row" *ngIf="showStatus">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <button mat-flat-button disabled="{{course?.coursePlayerStatus?.status === 'Completed'}}"
-        class="status color_white f_size_16 f_wt_400 width_100 p-10px"
-        (click)="course?.coursePlayerStatus?.status != 'Completed' && goTocourse(course?.coursePlayerStatus?.status || 'Start')"
-        [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
-        '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }">
-        {{course?.coursePlayerStatus?.status || 'Start'}}</button>
 
-    </div>
-  </div>
+  <!-- after login -->
 
-  <div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-12 ">
-      <small *ngIf="showStatus">{{finalStatus === 'Resume' && course.statusValue + '%' || null}}</small>
-      <mat-progress-bar *ngIf="finalStatus === 'Resume'" mode="determinate" value="{{course.statusValue}}">
-      </mat-progress-bar>
-    </div>
-  </div>
-
-  <div class="row" *ngIf="showEnroll">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-12 text-center ">
-      <div>
-
-        <div class="col-md-12 col-lg-12 col-sm-12 display_flex">
-          <strong class="m-t-15 m-l-5 iconClr"> <i class="fa fa-users iconClr"></i> &nbsp;232323 Learners</strong>
-          &nbsp;&nbsp;
-          <bar-rating [readOnly]="true" [rate]="course.rating" [max]="5"></bar-rating>
-          <strong class="m-t-15 m-l-5 iconClr">&nbsp;{{course.rating | number:'1.1-1'}} &nbsp;</strong>
+  <div class="grid__item" *ngIf="userDetail != null">
+    <a class="grid__item-top">
+      <img *ngIf="course.course_img_url != 'null'" alt="course image" 
+      src="{{course.course_img_url}}" class="courseImg" (click)="gotoDescription()">
+      <div class="top-holder">
+        <div class="favorite" *ngIf="showWishlist">
+          <button mat-icon-button aria-label="Example icon button with a heart icon" (click)="selectWishlist(course)">
+            <mat-icon class="favIcon" *ngIf="course.wishlisted == true">favorite</mat-icon>
+            <mat-icon class="unfavIcon" *ngIf="course.wishlisted == false">favorite_border</mat-icon>
+          </button>
         </div>
       </div>
+      <div class="overlay">
+        <p class="shortdesc"> {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}</p>
 
-      <button id="add_to_cart" mat-stroked-button class="enroll f_wt_300 pointer"  *ngIf="course.enrollment_status == null"
-        (click)="enrollCourse()">ENROLL 
-      </button>
+        </div> 
+      </a>
+      <div class="hoverr">
+    <div class="grid__item-bottom">
+      <p  class="coursename" > {{course.course_name}}</p>
+      <div class="row no_margin enroll_row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 f_size_14 float_left no_padding learner-count"
+          (click)="gotoDescription()">
+          <!-- <span *ngIf="showCount" class="material-icons color_grey f_size_18" style="vertical-align: bottom;">
+            people
+          </span> <small *ngIf="showCount" class="color_grey">2,500 learners</small> -->
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 float_right width_80 no_padding" *ngIf="showEnroll">
 
-      <button id="add_to_cart"  *ngIf="course.enrollment_status == 'pending'"  mat-stroked-button class="enroll f_wt_300"
-        disabled="{{course.enrollment_status == 'pending'}}">Requested
-      </button>
+          <button  id="enroll_now" (click)="publish()" *ngIf="btnType && btnType === 'Publish'">
+            <div class="eff-5"></div>
+            <a>Publish</a>
+          </button>
 
-      <button id="add_to_cart" *ngIf="course.enrollment_status == 'rejected'" mat-stroked-button class="enroll f_wt_300"
-        disabled="{{course.enrollment_status == 'rejected'}}">Request Rejected
-      </button>
-
-      <button id="add_to_cart" *ngIf="course.enrollment_status == 'approved'"  mat-stroked-button class="enroll f_wt_300"
-        disabled="{{course.enrollment_status == 'approved'}}">Enrolled
-      </button>
-
+          <button   id="enroll_now" *ngIf="course.enrollment_status == null && showStatus == false && 
+          ((btnType && btnType != 'Publish') || !btnType)" (click)="enrollCourse()"> 
+          <div class="eff-5"></div>
+          <a >Enroll</a>
+          </button>
+          <button  id="enroll_now" *ngIf="course.enrollment_status == 'pending' && showStatus == false"
+            disabled="{{course.enrollment_status == 'pending'}}">Requested
+          </button>
+          <button  id="enroll_now" *ngIf="course.enrollment_status == 'rejected' && showStatus == false"
+            (click)="clickRejected()">
+            <div class="eff-5"></div>
+            <a>Rejected</a>
+          </button>
+          <button  id="enroll_now" *ngIf="course.enrollment_status == 'approved' && showStatus == false"
+            disabled="{{course.enrollment_status == 'approved'}}">Enrolled
+          
+          </button>
+          <button  id="enroll_now" *ngIf="showStatus" [disabled]="course?.coursePlayerStatus?.status === 'Completed'"
+            (click)="goTocourse(course?.coursePlayerStatus?.status || 'Start')">
+          <!-- [ngStyle]="{'background-color':course?.coursePlayerStatus?.status === null ? 
+          '#1f3777' : course?.coursePlayerStatus?.status === 'Resume' ? '#2661ff' : course?.coursePlayerStatus?.status === 'Completed' ? '#028514' : '#1f3777' }" -->
+         
+            <div class="eff-5"></div>
+            <a> {{course?.coursePlayerStatus?.status || 'Start'}}</a>
+          </button>
+        </div>
+      </div>
+      <!-- <div class="tag tag-default">Laravel</div>-->
+      <!-- <div class="tag tag-default"></div>  -->
+    </div>
     </div>
   </div>
-
-  <div class="overlay" (click)="gotoDescription()" *ngIf="canNavigate">
-    <div class="row" (click)="gotoDescription()">
-      <div class="col-md-12 m-b-10 m-t-10" style="text-align: center;">
-        Description
-      </div>
-    </div>
-    <div class="row" (click)="gotoDescription()">
-      <div class="col-md-12 m-t-25">
-        <p class="course_description">
-          {{ (course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
-
-        </p>
-      </div>
-    </div>
-    <div class="row bottomButtons" *ngIf="showCartBtn">
-      <div class="col-md-5 col-sm-5 col-5 center_align">
-        <button id="buy_now" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Buy Now
-        </button>
-      </div>
-      <div class="col-md-7 center_align  col-sm-7 col-7">
-        <button id="add_to_cart" mat-stroked-button class="buy_now f_wt_300" (click)="login()">Add
-          to cart
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
