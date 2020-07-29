@@ -87,6 +87,7 @@
     "ng4-loading-spinner": "^1.2.3",
     "ng5-slider": "^1.2.4",
     "ngx-bar-rating": "^1.1.0",
+    "ngx-bootstrap": "^5.6.0",
     "ngx-infinite-scroll": "^8.0.2",
     "ngx-mask": "^8.1.7",
     "ngx-owl-carousel-o": "^1.2.0",
