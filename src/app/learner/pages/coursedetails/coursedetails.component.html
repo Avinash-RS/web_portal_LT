@@ -248,15 +248,15 @@
                         <mat-accordion>
                             <ng-container>
                                 <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
-                                    
+
                                     <mat-expansion-panel class="panel1" hideToggle="true" #example1
                                         [expanded]="selectedIndex === i">
                                         <mat-expansion-panel-header style="height: 50px !important;">
                                             <mat-panel-title>
                                                 <span
                                                     class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}
-                                                    </span>
-    
+                                                </span>
+
                                             </mat-panel-title>
                                             <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
                                             </mat-icon>
@@ -316,17 +316,16 @@
                                                                         {{file.size}}
                                                                     </div>
                                                                     <div class="col-1 no-cursor">
-                                                                        <mat-icon *ngIf= "file.enableView"
+                                                                        <mat-icon *ngIf="file.enableView"
                                                                             (click)="previewDoc(previewDialog,file)"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
-                                                                            <mat-icon *ngIf= "!file.enableView"
+                                                                        <mat-icon *ngIf="!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                     </div>
                                                                     <div class="col-2" (click)="fileInput.click()">
                                                                         <button mat-stroked-button
                                                                             matTooltip="Click upload button to add the file"
-                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload"
-                                                                          >
+                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload">
                                                                             Upload</button>
                                                                         <input class="form-control border-right-0"
                                                                             [disabled]="file?.doc_status === false"
@@ -510,32 +509,48 @@
 
                         <div class="comment_card" *ngIf="showCommentThread">
                             <!-- for thread -->
-                            <mat-card class="black_border m-b-8 no-radius">
-                                <div class="row">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                        <!-- <img class="profileimg" src="assets/learner/pro2.png">  -->
-                                        <button class="profileimg"
-                                            disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
+                            <mat-card class="black_border m-b-10 no-radius no_padding">
+                                <div class="black_border no_padding no_margin" style="background-color: #C9E4F35C;">
+                                    <div class="row p-lr-30">
+                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding  m-auto-tb">
+                                            <!-- <img class="profileimg" src="assets/learner/pro2.png">  -->
+                                            <button class="profileimg"
+                                                disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
 
-                                    </div>
-                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                        <strong
-                                            class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
-                                            &nbsp;</strong> <span>
-                                            <!-- - -->
-                                            <!-- Instructor -->
-                                            &nbsp; | &nbsp; {{selectedThreadData?.timestampISO | date : 'medium'}}
-                                        </span>
-                                        <br> <br> 
-                                        <p class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</p>
-                                        
-                                        <div
-                                            *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
-                                            <p [innerHTML]="topicDiscussionData?.posts[0].content"></p>
                                         </div>
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
 
+                                            <div class="row">
+                                                <div class="col-10 m-auto-tb">
+                                                    <strong
+                                                        class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
+                                                        &nbsp;</strong> <span>
+                                                        <!-- - -->
+                                                        <!-- Instructor -->
+                                                        &nbsp; | &nbsp;
+                                                        {{selectedThreadData?.timestampISO | date : 'medium'}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="row p-lr-30 m-t-20">
+                                    <div class=col-1></div>
+                                    <div class="col-11 thread_title p-l-0">
+                                    <p class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}
+                                    </p>
+
+                                    <div
+                                        *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+                                        <p [innerHTML]="topicDiscussionData?.posts[0].content"></p>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+
                                 <mat-card-actions>
                                     <div class="row">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
@@ -709,15 +724,15 @@
 
 
                         <ng-template #createThreadDialog class="dialogPopup">
-                            <mat-dialog-content class="createThreadDialog">
+                            <mat-dialog-content class="createThreadDialog ">
                                 <form [formGroup]="addThreadForm">
                                     <div class="row m-l-20 m-r-20">
                                         <div class="col-10">
-                                            <p class="m-t-10 f_size_18">Create a new thread</p>
+                                            <p class="m-t-10 f_size_18 ">Create a new thread</p>
                                         </div>
                                         <div class="col-2">
                                             <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
-                                                class="f_size_25 float_right">close
+                                                class="f_size_25 float_right  ">close
                                             </mat-icon>
                                         </div>
                                     </div>
@@ -743,8 +758,8 @@
                                         <div class="col-12">
                                             <mat-label>Description</mat-label><span class="mand"> *</span>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
+                                        <div class="col-12 m-b-0">
+                                            <div class="form-group m-b-0">
                                                 <angular-editor [config]="config" formControlName="thread_description">
                                                 </angular-editor>
                                                 <div *ngIf="f.thread_description.touched && f.thread_description.errors"

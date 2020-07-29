@@ -8,6 +8,8 @@
 
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
+    padding: 30px !important;
+    border-radius: 0 !important;
 }
 
 .close-icon {
@@ -50,11 +52,11 @@
     margin-top: -15px;
 }
 
-.grey{
+.grey {
     color: $bule2 !important;
 }
 
-.blue{
+.blue {
     color: $color-border !important;
 }
 
@@ -100,10 +102,13 @@
     width: 142px;
 
 }
-button:focus, button:active:focus, button.active:focus {
+
+button:focus,
+button:active:focus,
+button.active:focus {
     outline: none !important;
     outline-style: none !important;
-    }
+}
 
 
 .size {
@@ -115,12 +120,14 @@ button:focus, button:active:focus, button.active:focus {
 .sm-icon {
     width: 14px;
 }
-.viewDoc{
+
+.viewDoc {
     color: $color-border;
-    font-size:20px;
-     width:20px;
+    font-size: 20px;
+    width: 20px;
 }
-.modTopName{
+
+.modTopName {
     font-size: 16px;
     margin-left: 17px;
     font-weight: 500;
@@ -728,6 +735,7 @@ li {
     pointer-events: none !important;
     opacity: 0.5;
 }
+
 .new_Thread {
     color: $color-white !important;
     border-radius: none !important;
@@ -919,5 +927,36 @@ li {
     padding-top: 15px !important;
     padding-bottom: 12px !important;
 }
+
+
+
+.m-b-0 {
+    margin-bottom: 0 !important;
+}
+
+.m-t-20 {
+    margin-top: 20px !important;
+}
+
+// /deep/.dialogPopup.mat-dialog-container {
+//     padding: 30px !important;
+//     border-radius: 0 !important;
+// }
+
+// .m-t-30 {
+//     margin-top: 30px !important;
+// }
+
+.m-b-10 {
+    margin-bottom: 10px;
+  }
+  .p-lr-30 {
+    padding: 0px 30px !important;
+  }
+
+  .m-auto-tb {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
 //Jasper CSS ends here
