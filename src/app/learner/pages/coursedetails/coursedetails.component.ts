@@ -106,7 +106,7 @@ export class CoursedetailsComponent implements OnInit {
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
     // uploadUrl: 'environment.apiUrlImg + `upload/image`',
-    toolbarPosition: 'bottom',
+    toolbarPosition: 'top',
   };
 
   selectedModuleData: any = null;
