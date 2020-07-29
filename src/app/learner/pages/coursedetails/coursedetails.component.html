@@ -331,12 +331,8 @@
                                                                     <div class="col-2" (click)="fileInput.click()">
                                                                         <button mat-stroked-button
                                                                             matTooltip="Click upload button to add the file"
-<<<<<<< HEAD
-                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload">
-=======
                                                                             [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload ||
                                                                             !file?.startDate">
->>>>>>> 30c7dc420407e964f9a64d48568968ecd753eb66
                                                                             Upload</button>
                                                                         <input class="form-control border-right-0"
                                                                             [disabled]="file?.doc_status === false"
