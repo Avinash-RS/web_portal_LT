@@ -500,6 +500,7 @@ export class CoursedetailsComponent implements OnInit {
           if (result.success) {
             this.addThreadComment = null;
             this.showThreadComment = false;
+            this.showCommentEditor = [];
             this.viewsingletopicdiscussion(this.selectedThreadData.tid);
             this.toastr.success('Comment added successfully');
           } else {

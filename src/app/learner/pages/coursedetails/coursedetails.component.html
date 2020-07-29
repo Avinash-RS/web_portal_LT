@@ -677,6 +677,7 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        {{showCommentEditor[pin]}}
                                         <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div
@@ -752,12 +753,13 @@
                                                                     thumb_up_alt</mat-icon>Like
                                                                 ({{posts?.bookmarks || 0}})
                                                             </button> &nbsp;&nbsp;
-                                                            <button mat-button
+                                                            <!-- // commented by Mythreyi - no need child's child comment -->
+                                                            <!-- <button mat-button
                                                                 (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
                                                                 class="f_size_12 no_padding">
                                                                 <mat-icon class="action_icon">
                                                                     comment</mat-icon>Comment
-                                                            </button>
+                                                            </button> -->
                                                         </div>
                                                     </div>
                                                     <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
