@@ -535,25 +535,6 @@
                                                         &nbsp; | &nbsp;
                                                         {{selectedThreadData?.timestampISO | date : 'medium'}} </span>
                                                 </div>
-                                                <div class="col-2 m-auto-tb">
-                                                    <button mat-icon-button [matMenuTriggerFor]="menu"
-                                                        [disabled]="selectedThreadData == null" class="float_right">
-                                                        <mat-icon>more_vert</mat-icon>
-                                                    </button>
-                                                    <mat-menu #menu="matMenu">
-                                                        <button mat-menu-item (click)="removeThread()">
-                                                            <span>Remove thread</span>
-                                                        </button>
-                                                        <button mat-menu-item (click)="getSlideDetail()">
-                                                            <span
-                                                                *ngIf="selectedThreadData && selectedThreadData.thread_status === false">Open
-                                                                thread</span>
-                                                            <span
-                                                                *ngIf="selectedThreadData && selectedThreadData.thread_status == true">Close
-                                                                thread</span>
-                                                        </button>
-                                                    </mat-menu>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -644,19 +625,13 @@
                                             </div>
                                             <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
                                                 <div class="row ">
-                                                    <div class="col-9 m-auto-tb">
+                                                    <div class="col-12 m-auto-tb">
                                                         <strong
                                                             class="color-blue float_left">{{post?.user?.username | titlecase}}
                                                             &nbsp;</strong>
                                                         <span> &nbsp; | &nbsp; {{post?.timestampISO | date : 'medium'}}
                                                             &nbsp; </span>
                                                         <span class="a2i_lable" *ngIf="post.a2i_lable"> A2I</span>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <button (click)="removeComment(post)"
-                                                            class="float_right no-radius ht-30 remove"
-                                                            mat-stroked-button>{{post?.deleted ? 'Removed' : 'Remove'}}
-                                                        </button>
                                                     </div>
                                                 </div>
 
