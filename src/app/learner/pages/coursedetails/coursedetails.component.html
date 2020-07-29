@@ -415,22 +415,59 @@
                         <br>
                         <mat-card class=" black_border box_shadow alignment ">
                             <div class="row" *ngIf="!showSearch">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <p class="no_margin">Sort by :
-                                        <mat-form-field class="sort no_margin">
+                                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+
+                                    <div class="row">
+                                        <mat-icon (click)="sortBox = !sortBox"
+                                            [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                                            style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
+                                        <mat-form-field class="sort no_margin" *ngIf="sortBox">
                                             <mat-select [(value)]="selected"
                                                 [disabled]="discussionData === null || discussionData?.topics?.length === 0"
                                                 (selectionChange)="changedSort($event.value)">
                                                 <mat-option value="1">Latest</mat-option>
                                                 <mat-option value="0">Oldest</mat-option>
                                             </mat-select>
+                                            <!-- <mat-icon matSuffix (click)="closeSort()" class="pointer align_bottom">
+                close</mat-icon> -->
                                         </mat-form-field>
-                                    </p>
+
+                                        <form class="search-form">
+                                            <mat-icon (click)="goToSearchThread()" class="pointer"
+                                                style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
+                  (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                  (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                   'pointerNone' : 'pointer'">
+                                                search
+                                            </mat-icon>
+
+                                            <mat-form-field class="no_margin" *ngIf="searchthreadname">
+                                                <input class="toolbar-search" [disabled]="
+                  showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                  (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text" matInput
+                                                    name="searchbar" [(ngModel)]="filterValue"
+                                                    (input)="onSearchChange($event.target.value);">
+                                                <!-- <mat-placeholder>Search</mat-placeholder> -->
+                                                <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
+                                                    (click)="closeSearch()">
+                                                    close</mat-icon>
+                                                <!-- <mat-icon matSuffix *ngIf="filterValue === null"
+                    [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                    style="font-size: 1.2em">search
+                  </mat-icon> -->
+                                            </mat-form-field>
+                                        </form>
+                                    </div>
+
+
+
+
+
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 float_right no_padding">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 float_right no_padding">
                                     <div class="row">
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                            <form class="search-form">
+                                            <!-- <form class="search-form">
                                                 <mat-form-field class="example-full-width">
                                                     <input class="toolbar-search" [disabled]="
                                                     showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
@@ -447,7 +484,7 @@
                                                      'pointerNone' : 'pointer'" style="font-size: 1.2em">search
                                                     </mat-icon>
                                                 </mat-form-field>
-                                            </form>
+                                            </form> -->
                                         </div>
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
