@@ -132,6 +132,9 @@ export class CoursedetailsComponent implements OnInit {
   assFile: File;
   courseStartDate: string;
   courseEndDate: string;
+
+  sortBox = false;
+  searchthreadname = false;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -560,7 +563,7 @@ export class CoursedetailsComponent implements OnInit {
     this.searchThread(e);
   }
 
-  closeSearch() {
+  closeSearch() {this.searchthreadname = false;
     if (this.showCommentThread) {
       this.topicDiscussionData = this.topicDiscussionData1;
       this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
@@ -570,6 +573,7 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.filterValue = null;
     this.cdr.detectChanges();
+    
   }
 
   searchThread(filterValue: string) {
@@ -768,6 +772,10 @@ export class CoursedetailsComponent implements OnInit {
         replace(' r</a>"', '').replace('<a href="', '');
 
     }
+  }
+
+  goToSearchThread() {
+    this.searchthreadname = true;
   }
 }
 
