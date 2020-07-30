@@ -739,7 +739,7 @@ li {
 .new_Thread {
     color: $color-white !important;
     border-radius: none !important;
-    background-color: $color-landing-blue;
+    background-color: #004072;
     border: none;
     margin-right: 10px !important;
     float: right !important;
@@ -882,7 +882,7 @@ li {
     .new_Thread {
         color: white !important;
         border-radius: none !important;
-        background-color: $color-landing-blue;
+        background-color:#004072;
         border: none;
         margin-right: 10px !important;
         float: left !important
@@ -959,4 +959,10 @@ li {
     margin-bottom: auto;
   }
 
+  .bg-col{
+      background-color: #004072;
+  }
+  .reset:hover{
+    background-color: #f5f5f5 !important;
+  }
 //Jasper CSS ends here
