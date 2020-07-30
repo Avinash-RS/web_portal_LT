@@ -82,7 +82,7 @@ export class CoursedetailsComponent implements OnInit {
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
     // uploadUrl: 'environment.apiUrlImg + `upload/image`',
-    toolbarPosition: 'bottom',
+    toolbarPosition: 'top',
   };
 
   commentConfig: AngularEditorConfig = {
@@ -106,7 +106,7 @@ export class CoursedetailsComponent implements OnInit {
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
     // uploadUrl: 'environment.apiUrlImg + `upload/image`',
-    toolbarPosition: 'bottom',
+    toolbarPosition: 'top',
   };
 
   selectedModuleData: any = null;
@@ -132,6 +132,9 @@ export class CoursedetailsComponent implements OnInit {
   assFile: File;
   courseStartDate: string;
   courseEndDate: string;
+
+  sortBox = false;
+  searchthreadname = false;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -500,6 +503,7 @@ export class CoursedetailsComponent implements OnInit {
           if (result.success) {
             this.addThreadComment = null;
             this.showThreadComment = false;
+            this.showCommentEditor = [];
             this.viewsingletopicdiscussion(this.selectedThreadData.tid);
             this.toastr.success('Comment added successfully');
           } else {
@@ -559,7 +563,7 @@ export class CoursedetailsComponent implements OnInit {
     this.searchThread(e);
   }
 
-  closeSearch() {
+  closeSearch() {this.searchthreadname = false;
     if (this.showCommentThread) {
       this.topicDiscussionData = this.topicDiscussionData1;
       this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
@@ -569,6 +573,7 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.filterValue = null;
     this.cdr.detectChanges();
+    
   }
 
   searchThread(filterValue: string) {
@@ -767,6 +772,10 @@ export class CoursedetailsComponent implements OnInit {
         replace(' r</a>"', '').replace('<a href="', '');
 
     }
+  }
+
+  goToSearchThread() {
+    this.searchthreadname = true;
   }
 }
 
