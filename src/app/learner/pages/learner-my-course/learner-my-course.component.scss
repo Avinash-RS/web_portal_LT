@@ -175,30 +175,6 @@
     margin: auto;
 }
 
-
-// .linee {
-//     background: $color-landing-blue;
-//     height: 100%;
-//     border: 4px solid $color-landing-blue;
-//     border-top-right-radius: 5px;
-//     border-bottom-right-radius: 5px;
-// }
-
-// .lineeg {
-//     background: green;
-//     height: 100%;
-//     border: 4px solid green;
-//     border-top-right-radius: 5px;
-//     border-bottom-right-radius: 5px;
-// }
-
-// .lineer {
-//     background: #ea4135;
-//     height: 100%;
-//     border: 4px solid #ea4135;
-//     border-top-right-radius: 5px;
-//     border-bottom-right-radius: 5px;
-// }
 .m-l-1 {
     margin-top: 1%;
 }
@@ -382,3 +358,38 @@
    border-bottom: none !important;
 }
 
+// animation
+
+
+// :host ::ng-deep mat-tab-body {
+//     animation: fade-out 0.5s;
+//     opacity: 0;
+// }
+// :host ::ng-deep mat-tab-body.mat-tab-body-active {
+//     animation: fade-in 0.5s;
+//     opacity: 1;
+// }
+
+// @keyframes fade-in {
+//     0% {
+//         opacity: 0;
+//     }
+//     50% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }
+
+// @keyframes fade-out {
+//     0% {
+//         opacity: 1;
+//     }
+//     50% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 0;
+//     }
+// }

@@ -2,12 +2,25 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 // import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
-  styleUrls: ['./learner-my-course.component.scss']
+  styleUrls: ['./learner-my-course.component.scss'],
+  animations: [
+    trigger('EnterLeave', [
+      state('flyIn', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('0.5s 300ms ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class LearnerMyCourseComponent implements OnInit {
   userDetailes: any;

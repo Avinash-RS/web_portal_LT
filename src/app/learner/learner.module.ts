@@ -47,6 +47,7 @@ import { CategoryComponentComponent } from '@core/shared/category-component/cate
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
@@ -121,7 +122,8 @@ const routes: Routes = [
     MyDatePickerModule,
     InfiniteScrollModule,
     PdfJsViewerModule,
-    RatingModule
+    RatingModule,
+  
   ],
   providers: [
     Apollo,
