@@ -741,14 +741,14 @@
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right m-auto-tb p-5px m-b-15"
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
                                                 <div class="row">
-                                                    <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
-                                                        <mat-checkbox class="width_100 f_size_12 align-middle"
+                                                    <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
+                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
-                                                            &nbsp;Ask the instructor
-                                                        </mat-checkbox>
+                                                            &nbsp;&nbsp;Ask the instructor
+                                                        </mat-checkbox> 
                                                     </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
-                                                        <button mat-button class="new_Thread no-radius ht-30"
+                                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
+                                                        <button mat-button class="new_Thread no-radius ht-30 width_50"
                                                             (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
                                                             [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
                                                     </div>
