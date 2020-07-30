@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webportal
+  name: collegeconnect
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webportal
+      app: collegeconnect
   template:
     metadata:
       labels:
-        app: webportal
+        app: collegeconnect
     spec:
       containers:
-        - name: webportal
-          image: lxpacrazure.azurecr.io/webportal:$tag
+        - name: collegeconnect
+          image: lxpacrazure.azurecr.io/collegeconnect:$tag
           imagePullPolicy: Always
           ports:
           - containerPort: 80
       imagePullSecrets:
-        - name: mysecret2
+        - name: mysecret
