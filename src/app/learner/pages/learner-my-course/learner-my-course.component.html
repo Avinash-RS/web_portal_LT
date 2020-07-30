@@ -223,8 +223,7 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <div class="col-sm-4">
-    <br/>
+  <!-- <div class="col-sm-4">
         <h1>Today's Sessions</h1>
         <mat-card class="coursebg width_100" *ngIf="results.message.length == 0">
           <div class="row width_100 no_margin">
@@ -242,12 +241,6 @@
         </mat-card>
         <div *ngIf="results.message.length > 0">
           <mat-card *ngFor="let result of results.message" style="border-radius: 10px;">
-            <!-- <div class="row width_100 no_margin"> -->
-            <!-- <div class="container-fluid">
-              <div class="row"> -->
-            <!-- <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl">
-                    <div class="linee"></div>
-                  </div> -->
             <div class="col-md-8" id="insidecard" class="uk-card uk-card-default uk-card-body" style="font-size: medium;"
               [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
               <h5>{{strDate | date :'dd MMM yyyy'}} 
@@ -256,23 +249,15 @@
               <p> {{ result.activity_details.coursename }}</p>
               <h5>{{ result.activity_details.activitytype }} | {{ result.activity_details.createdby_name }}</h5>
             </div>
-            <!-- <div class="col-6 col-md-2" style="font-size: medium;padding: 5px !important;">
-                  <h5>{{strDate | date :'hh:mm'}}</h5>
-                  <br>
-                  <p>Now</p>
-                </div> -->
-            <!-- </div>
-            </div> -->
-            <!-- </div> -->
           </mat-card>
         </div>
      
-</div>
-</div>
-</mat-tab>
-<mat-tab label="Calendar">
+</div> -->
+<!-- </div> -->
+<!-- </mat-tab> -->
+<!-- <mat-tab label="Calendar">
 <app-learner-calendar></app-learner-calendar>
-</mat-tab>
+</mat-tab> -->
     <br>
     <br>
   </div>
