@@ -1,4 +1,4 @@
-<div class="container learner-calender" style="margin-top: 18px;">
+<div class="container learner-calender">
     <div class="ui two column grid">
         <div class="column">
             <div class="uk-card uk-card-body">
@@ -17,7 +17,7 @@
         </div>
 
         <div class="column scrollcard">
-            <div class="uk-card uk-card-default uk-card-body">
+            <div class="uk-card uk-card-body">
                 <div *ngIf="showErrorCard">
                     <div class="uk-card uk-card-default uk-card-body">
                         <p>
@@ -28,13 +28,14 @@
                 <div>
                     <ng-container *ngFor="let data of learnerActivityList">
                         <div (click)="launchActivity(data)" id="insidecard" class="uk-card uk-card-default uk-card-body" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }">
-                            <img *ngIf="data.activity_details.activitytype == 'Live  Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
+                            <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
                             <h4>{{ data.activity_details.topicname }}</h4>
                             <p>
                                 {{ data.activity_details.coursename }}
                             </p>
                             <p>
                                 {{ data.activity_details.activitytype }} | {{ data.activity_details.createdby_name }}
+                                <button *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer float-right">Launch</button>
                             </p>
                         </div>
                     </ng-container>

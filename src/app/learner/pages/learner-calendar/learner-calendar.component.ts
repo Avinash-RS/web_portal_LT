@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: "app-learner-calendar",
   templateUrl: "./learner-calendar.component.html",
-  styleUrls: ["./learner-calendar.component.css"]
+  styleUrls: ["./learner-calendar.component.scss"]
 })
 export class LearnerCalendarComponent implements OnInit {
   public UserDetails: any;
@@ -55,13 +55,12 @@ export class LearnerCalendarComponent implements OnInit {
         event.getUTCSeconds()
       )
     ).toISOString();
-
-    console.log(this.selectedDate);
     this.getLearnerActivity(this.selectedDate);
   }
   getLearnerActivity(selectedDate) {
     var selectedDatediff = new Date(selectedDate);
-    if (this.bsInlineValue.getDate() == selectedDatediff.getDate()) {
+    var today = this.bsInlineValue.getDate() - selectedDatediff.getDate()
+    if (today == 0) {
       this.selectedToday = true;
     } else {
       this.selectedToday = false;
@@ -91,9 +90,14 @@ export class LearnerCalendarComponent implements OnInit {
     );
   }
   launchActivity(value){    
-    if(value.activity_details.activitytype == "Assignment"){
-      this.router.navigate(['/Learner/courseDetail']);
-      // this.router.navigateByUrl('/Learner/profile', { state: { type } });
+    if(value.activity_details.activitytype != "Assignment"){
+      // const detail = {
+      //   id: this.course.course_id,
+      //   wishlist: this.course.wishlisted,
+      //   wishlist_id: this.course.wishlist_id,
+      //   enrollment_status: this.course.enrollment_status
+      // };
+      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }else{
       window.open(value.activity_details.link)
     }

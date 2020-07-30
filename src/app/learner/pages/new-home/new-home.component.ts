@@ -33,6 +33,16 @@ export class NewHomeComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
+    // this.selectedDate = new Date(
+    //   Date.UTC(
+    //     event.getUTCFullYear(),
+    //     event.getUTCMonth(),
+    //     event.getUTCDate(),
+    //     event.getUTCHours(),
+    //     event.getUTCMinutes(),
+    //     event.getUTCSeconds()
+    //   )
+    // ).toISOString();
     var dateValue = new Date().toISOString()
     this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
