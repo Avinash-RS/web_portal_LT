@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
-    data : {title: 'Learner'}
+    data : {animation: 'Learner'}
   },
   {
     path: 'Admin',

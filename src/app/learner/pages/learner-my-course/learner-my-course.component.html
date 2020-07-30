@@ -4,7 +4,7 @@
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
     <mat-tab-group animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
     
-      <mat-tab [label]="'ON-GOING ('+incomplete?.length + ')'" [disabled]='incomplete?.length === 0'>
+      <mat-tab [label]="'ON-GOING ('+incomplete?.length + ')'"   [disabled]='incomplete?.length === 0'>
         <div class="container" *ngFor="let course of incomplete ;let j=index" [@EnterLeave]="'flyIn'">
           <mat-card class="coursebg" >
             <div class="row width_100 no_margin">
@@ -21,7 +21,7 @@
               
               </div>
               <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
-                <div class="width_100  f_size_22 f_wt_500 pointer" (click)="gotoDesc(course)">
+                <div class="width_100  f_size_20 f_wt_500 pointer letter_space" (click)="gotoDesc(course)">
                   {{course.course_name}}
                 </div>
                 <div class="width_100 color_black2 f_size_15 f_wt_400 m-l-1 pointer descmc" (click)="gotoDesc(course)">
@@ -33,8 +33,10 @@
                   <span *ngFor="let l of course?.author_details;let in = index">
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
+                     &nbsp;&nbsp;|&nbsp;&nbsp;
+                   
+                    <mat-icon class="timer"> alarm_on </mat-icon >
+                      <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -46,6 +48,7 @@
                     </span>
                     <div class="margin"></div>
                     <div class="btl-alin">
+                      
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">play_circle_outline</mat-icon>
@@ -55,6 +58,7 @@
                           course?.coursePlayerStatus?.status === 'start' ? 'Start' : 'Resume'}}&nbsp;
                         </span>
                       </button>
+                    
                     </div>
                   </div>
                  

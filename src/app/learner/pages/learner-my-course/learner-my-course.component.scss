@@ -192,7 +192,7 @@
 }
 
 :host ::ng-deep .mat-progress-bar-fill::after {
-    background-color: #4ad295 !important;
+    background-color: $lxp-theme-green !important;
 }
 
 .mat-progress-bar {
@@ -248,11 +248,17 @@
     width: 120px;
 }
 .blue_clr:hover {
-    background-color: $color-blue !important;
+    background-color: $lxp-theme-green !important;
     color: $color-white !important;
 }
-
-
+.timer{
+  position: absolute;
+}
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
+}
 .noCourse {
   padding: 50px;
 }
@@ -311,8 +317,6 @@
 
 .showbtn {
   color: $color-blue !important;
-  // background-color: $color-white;
-  // border: none !important;
   margin-left: -56px;
   margin-left: -72px;
   font-size: 19px;
@@ -323,6 +327,7 @@
   outline: none !important;
   border: none !important;
 }
+
 
 /* The Modal*/
 .modal {
@@ -402,39 +407,14 @@
 :host ::ng-deep .mat-tab-nav-bar, .mat-tab-header {
    border-bottom: none !important;
 }
+.letter_space{
+  letter-spacing: 0.5;
 }
+
+
+}
+
 // animation
+/* BUTTON 3 */
+/* GENERAL BUTTON STYLING */
 
-
-// :host ::ng-deep mat-tab-body {
-//     animation: fade-out 0.5s;
-//     opacity: 0;
-// }
-// :host ::ng-deep mat-tab-body.mat-tab-body-active {
-//     animation: fade-in 0.5s;
-//     opacity: 1;
-// }
-
-// @keyframes fade-in {
-//     0% {
-//         opacity: 0;
-//     }
-//     50% {
-//         opacity: 0;
-//     }
-//     100% {
-//         opacity: 1;
-//     }
-// }
-
-// @keyframes fade-out {
-//     0% {
-//         opacity: 1;
-//     }
-//     50% {
-//         opacity: 0;
-//     }
-//     100% {
-//         opacity: 0;
-//     }
-// }

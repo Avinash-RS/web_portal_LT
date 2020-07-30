@@ -14,11 +14,13 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { slideInAnimation } from 'src/app/router.animation';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  // animations: [ slideInAnimation ]
 })
 
 // BEFORE

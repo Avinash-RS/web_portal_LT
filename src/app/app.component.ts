@@ -7,12 +7,14 @@ import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
+import { slideInAnimation } from './router.animation';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
   ipAddress = '';
