@@ -557,14 +557,15 @@
                             <mat-card class="black_border m-b-10 no-radius no_padding">
                                 <!-- name row start -->
                                 <div class="black_border no_padding no_margin" style="background-color: #C9E4F35C;">
-                                    <div class="row p-lr-30">
-                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding m-auto-tb">
+                                    <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); -->
+                                    <div class="row padding_matcard">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
                                             <button class="profileimg"
                                                 disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
                                         </div>
-                                        <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
-                                            <div class="row">
-                                                <div class="col-10 m-auto-tb">
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+                                            <div class="row m-auto-tb">
+                                                <div class="col-10 no_padding">
                                                     <strong
                                                         class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
                                                         &nbsp;
@@ -634,9 +635,19 @@
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 m-auto-tb p-5px"
                                             style="background: whitesmoke; border: 1px solid #dddddd;  margin-bottom: 16px;">
-                                            <button mat-button class="new_Thread no-radius ht-30"
-                                                [disabled]="addThreadComment == null || addThreadComment?.length == 0"
-                                                (click)="sendComment('thread',addThreadComment)">Send</button>
+                                            <div class="row">
+                                                <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                    <mat-checkbox class="width_100 f_size_12 align-middle"
+                                                        [(ngModel)]="a2iFlag">
+                                                        &nbsp;Ask the instructor
+                                                    </mat-checkbox>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                    <button mat-button class="new_Thread no-radius ht-30"
+                                                        [disabled]="addThreadComment == null || addThreadComment?.length == 0"
+                                                        (click)="sendComment('thread',addThreadComment)">Send</button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  float_right send_pos  black_bo">
                                     <mat-icon class="send_btn" [disabled]="addThreadComment == null || addThreadComment?.length == 0"
@@ -656,13 +667,14 @@
                                     [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
                                     <div class="black_border no_padding no_margin" style="background-color: #F1F1F1;">
                                         <div class="row padding_matcard">
-                                            <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding">
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
                                                 <button class="profileimg"
                                                     disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
                                             </div>
-                                            <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
-                                                <div class="row ">
-                                                    <div class="col-12 m-auto-tb">
+                                            <div
+                                                class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+                                                <div class="row m-auto-tb">
+                                                    <div class="col-12 no_padding m-auto-tb">
                                                         <strong
                                                             class="color-blue float_left">{{post?.user?.username | titlecase}}
                                                             &nbsp;</strong>
@@ -682,9 +694,9 @@
                                         </div>
                                     </div>
                                     <div class="row p-lr-30 m-t-20">
-                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
                                         </div>
-                                        <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                             <p class="no_margin" *ngIf="post?.deleted === false"
                                                 [innerHTML]="post?.content"></p>
                                             <p class="no_margin" *ngIf="post?.deleted === true"
@@ -714,7 +726,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        {{showCommentEditor[pin]}}
+
                                         <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div
@@ -726,11 +738,21 @@
                                             </div>
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 m-auto-tb p-5px m-b-15"
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right m-auto-tb p-5px m-b-15"
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
-                                                <button mat-button class="new_Thread no-radius ht-30"
-                                                    (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
-                                                    [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
+                                                <div class="row">
+                                                    <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
+                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                            [(ngModel)]="a2iFlag">
+                                                            &nbsp;&nbsp;Ask the instructor
+                                                        </mat-checkbox> 
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
+                                                        <button mat-button class="new_Thread no-radius ht-30 width_50"
+                                                            (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
+                                                            [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!-- <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  float_right send_pos black_bo">
                                       <mat-icon (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
@@ -742,19 +764,20 @@
 
                                     <!-- // 1st child -->
                                     <div *ngFor="let posts of topicDiscussionData?.posts; let pjn = index;">
-                                        <div style="padding: 0px 10px 5px 10px;">
+                                        <div style="padding: 0px 10px;">
                                             <mat-card class="no-radius no_padding black_border m-bt-4"
                                                 *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid">
                                                 <div class="black_border no_padding no_margin"
-                                                    style="background-color: #F1F1F15C;">
+                                                    style="background-color: #eeeeee;">
+                                                    <!-- F1F1F15C  -->
                                                     <div class="row padding_matcard">
                                                         <div
-                                                            class="col-xl-1 col-lg-1 col-md-3 col-sm-3 col-3 no_padding m-auto-tb">
+                                                            class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
                                                             <button class="profileimg"
                                                                 disabled>{{posts?.user?.username | slice:0:1 | uppercase}}</button>
                                                         </div>
                                                         <div
-                                                            class="col-xl-11 col-lg-11 col-md-9 col-sm-9 col-9 no_padding m-auto-tb">
+                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9 no_padding m-auto-tb">
                                                             <strong
                                                                 class="color-blue float_left">{{posts?.user?.username | titlecase}}</strong>
                                                             <span>
@@ -764,10 +787,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="row p-lr-30 m-t-20">
-                                                    <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding">
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
                                                     </div>
                                                     <div
-                                                        class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
+                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                                         <p class="no_margin" *ngIf="posts?.deleted === false"
                                                             [innerHTML]="posts?.content"></p>
                                                         <p class="no_margin" *ngIf="posts?.deleted === true"
@@ -810,10 +833,20 @@
                                                         </div>
                                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 m-auto-tb p-5px m-b-15"
+                                                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right m-auto-tb p-5px m-b-15"
                                                             style="background: whitesmoke; border: 1px solid #dddddd;">
-                                                            <button mat-button class="new_Thread no-radius ht-30"
-                                                                (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
+                                                            <div class="row">
+                                                                <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                                <mat-checkbox class="width_100 f_size_12 align-middle"
+                                                                    [(ngModel)]="a2iFlag">
+                                                                    &nbsp;Ask the instructor
+                                                                </mat-checkbox>
+                                                                </div>
+                                                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                                <button mat-button class="new_Thread no-radius ht-30"
+                                                                    (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
+                                                                </div>
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </mat-card-actions>
@@ -825,10 +858,10 @@
                                                         <mat-card class="no-radius no_padding black_border m-bt-4"
                                                             *ngIf="pkn !== 0 && posts.pid.toString() === postss.toPid">
                                                             <div class="black_border no_padding no_margin"
-                                                                style="background-color: #82f195;">
+                                                                style="background-color: #F7F7F7;">
                                                                 <div class="row padding_matcard">
                                                                     <div
-                                                                        class="col-xl-1 col-lg-1 col-md-3 col-sm-3 col-3 no_padding m-auto-tb">
+                                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
                                                                         <button class="profileimg"
                                                                             disabled>{{postss?.user?.username | slice:0:1 | uppercase}}</button>
                                                                     </div>
@@ -845,10 +878,10 @@
                                                             </div>
                                                             <div class="row p-lr-30 m-t-20">
                                                                 <div
-                                                                    class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 no_padding">
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
                                                                 </div>
                                                                 <div
-                                                                    class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 no_padding">
+                                                                    class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                                                     <p class="no_margin"
                                                                         *ngIf="postss?.deleted === false"
                                                                         [innerHTML]="postss?.content"></p>
@@ -874,7 +907,7 @@
                                                                             <mat-icon class="action_icon_filled"
                                                                                 *ngIf="postss.bookmarked">
                                                                                 thumb_up_alt</mat-icon>Like
-                                                                            ({{posts?.bookmarks || 0}})
+                                                                            ({{postss?.bookmarks || 0}})
                                                                         </button> &nbsp;&nbsp;
                                                                     </div>
                                                                 </div>

@@ -8,8 +8,6 @@
 
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
-    padding: 30px !important;
-    border-radius: 0 !important;
 }
 
 .close-icon {
@@ -625,7 +623,7 @@ li {
     display: inline-block;
     height: 16px;
     line-height: 0;
-    margin: 5px 0px 0px 0px !important;
+    margin: 10px 0px 0px 0px !important;
     order: 0;
     position: relative;
     white-space: nowrap;
@@ -640,6 +638,12 @@ li {
 .createThreadDialog {
     width: 900px;
 }
+
+::ng-deep .mat-dialog-container {
+        padding: 30px !important;
+        border-radius: 0 !important;
+    }
+
 
 @media screen and (min-width: 320px) and (max-width:760px) {
     .createThreadDialog {
@@ -826,6 +830,8 @@ li {
 //     flex-direction: row;
 // }
 
+
+
 //kani CSS ends here
 
 //Jasper CSS starts here
@@ -947,17 +953,22 @@ li {
 //     margin-top: 30px !important;
 // }
 
-.m-b-10 {
-    margin-bottom: 10px;
-  }
-  .p-lr-30 {
-    padding: 0px 30px !important;
-  }
+.m-b-15 {
+    margin-bottom: 15px;
+}
 
-  .m-auto-tb {
+.p-lr-30 {
+    padding: 0px 30px !important;
+}
+
+.m-auto-tb {
     margin-top: auto;
     margin-bottom: auto;
-  }
+}
+
+.padding_matcard {
+    padding: 5px 30px !important;
+}
 
   .bg-col{
       background-color: #004072;
