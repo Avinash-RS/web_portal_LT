@@ -84,15 +84,7 @@ export class LearnerServicesService {
 
   constructor(private Apollo: Apollo, private http: HttpClient) {}
 
-  public getData(userid, date) {
-    return this.Apollo.query({
-      query: getReadLeanerActivity,
-      variables: {
-        userid,
-        date
-      }
-    });
-  }
+
   login(username, password, is_admin) {
     return this.Apollo.query({
       query: login,

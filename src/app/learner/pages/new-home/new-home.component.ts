@@ -33,8 +33,8 @@ export class NewHomeComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
-
-    this.learnerService.getData("p1xg6y", "2020-07-23T08:01:00.000Z").subscribe((data: any) => {
+    var dateValue = new Date().toISOString()
+    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       this.results['message'].forEach((element, index) => {
         if (index == 0) {
@@ -144,6 +144,14 @@ export class NewHomeComponent implements OnInit {
 
   close() {
     this.show = false;
+  }
+  launchActivity(value){    
+    if(value.activity_details.activitytype == "Assignment"){
+      this.router.navigate(['/Learner/courseDetail']);
+      // this.router.navigateByUrl('/Learner/profile', { state: { type } });
+    }else{
+      window.open(value.activity_details.link)
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LearnerServicesService } from "../../services/learner-services.service";
 import * as moment from "moment";
+import { Router } from '@angular/router';
 @Component({
   selector: "app-learner-calendar",
   templateUrl: "./learner-calendar.component.html",
@@ -24,7 +25,7 @@ export class LearnerCalendarComponent implements OnInit {
   selectedToday;
   bsInlineValue = new Date();
 
-  constructor(private service: LearnerServicesService) {}
+  constructor(private service: LearnerServicesService,private router: Router) {}
 
   ngOnInit() {
     this.UserDetails =
@@ -88,5 +89,13 @@ export class LearnerCalendarComponent implements OnInit {
       },
       err => {}
     );
+  }
+  launchActivity(value){    
+    if(value.activity_details.activitytype == "Assignment"){
+      this.router.navigate(['/Learner/courseDetail']);
+      // this.router.navigateByUrl('/Learner/profile', { state: { type } });
+    }else{
+      window.open(value.activity_details.link)
+    }
   }
 }
