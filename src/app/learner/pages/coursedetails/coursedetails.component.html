@@ -248,15 +248,15 @@
                         <mat-accordion>
                             <ng-container>
                                 <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
-                                    
+
                                     <mat-expansion-panel class="panel1" hideToggle="true" #example1
                                         [expanded]="selectedIndex === i">
                                         <mat-expansion-panel-header style="height: 50px !important;">
                                             <mat-panel-title>
                                                 <span
                                                     class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}
-                                                    </span>
-    
+                                                </span>
+
                                             </mat-panel-title>
                                             <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
                                             </mat-icon>
@@ -316,10 +316,10 @@
                                                                         {{file.size}}
                                                                     </div>
                                                                     <div class="col-1 no-cursor">
-                                                                        <mat-icon *ngIf= "file.enableView"
+                                                                        <mat-icon *ngIf="file.enableView"
                                                                             (click)="previewDoc(previewDialog,file)"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
-                                                                            <mat-icon *ngIf= "!file.enableView"
+                                                                        <mat-icon *ngIf="!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                     </div>
                                                                     <div class="col-2" matTooltip="Course start date">
@@ -415,22 +415,59 @@
                         <br>
                         <mat-card class=" black_border box_shadow alignment ">
                             <div class="row" *ngIf="!showSearch">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <p class="no_margin">Sort by :
-                                        <mat-form-field class="sort no_margin">
+                                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+
+                                    <div class="row">
+                                        <mat-icon (click)="sortBox = !sortBox"
+                                            [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                                            style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
+                                        <mat-form-field class="sort no_margin" *ngIf="sortBox">
                                             <mat-select [(value)]="selected"
                                                 [disabled]="discussionData === null || discussionData?.topics?.length === 0"
                                                 (selectionChange)="changedSort($event.value)">
                                                 <mat-option value="1">Latest</mat-option>
                                                 <mat-option value="0">Oldest</mat-option>
                                             </mat-select>
+                                            <!-- <mat-icon matSuffix (click)="closeSort()" class="pointer align_bottom">
+                close</mat-icon> -->
                                         </mat-form-field>
-                                    </p>
+
+                                        <form class="search-form">
+                                            <mat-icon (click)="goToSearchThread()" class="pointer"
+                                                style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
+                  (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                  (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                   'pointerNone' : 'pointer'">
+                                                search
+                                            </mat-icon>
+
+                                            <mat-form-field class="no_margin" *ngIf="searchthreadname">
+                                                <input class="toolbar-search" [disabled]="
+                  showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                  (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text" matInput
+                                                    name="searchbar" [(ngModel)]="filterValue"
+                                                    (input)="onSearchChange($event.target.value);">
+                                                <!-- <mat-placeholder>Search</mat-placeholder> -->
+                                                <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
+                                                    (click)="closeSearch()">
+                                                    close</mat-icon>
+                                                <!-- <mat-icon matSuffix *ngIf="filterValue === null"
+                    [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                    style="font-size: 1.2em">search
+                  </mat-icon> -->
+                                            </mat-form-field>
+                                        </form>
+                                    </div>
+
+
+
+
+
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 float_right no_padding">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 float_right no_padding">
                                     <div class="row">
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                            <form class="search-form">
+                                            <!-- <form class="search-form">
                                                 <mat-form-field class="example-full-width">
                                                     <input class="toolbar-search" [disabled]="
                                                     showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
@@ -447,7 +484,7 @@
                                                      'pointerNone' : 'pointer'" style="font-size: 1.2em">search
                                                     </mat-icon>
                                                 </mat-form-field>
-                                            </form>
+                                            </form> -->
                                         </div>
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
@@ -514,36 +551,55 @@
                             </mat-card>
                         </div>
 
-                        <div class="comment_card" *ngIf="showCommentThread">
+                        <div class="comment_card" *ngIf="selectedThreadData != null">
                             <!-- for thread -->
-                            <mat-card class="black_border m-b-8 no-radius">
-                                <div class="row">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                        <!-- <img class="profileimg" src="assets/learner/pro2.png">  -->
-                                        <button class="profileimg"
-                                            disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
 
-                                    </div>
-                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                        <strong
-                                            class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
-                                            &nbsp;</strong> <span>
-                                            <!-- - -->
-                                            <!-- Instructor -->
-                                            &nbsp; | &nbsp; {{selectedThreadData?.timestampISO | date : 'medium'}}
-                                        </span>
-                                        <br> <br> 
-                                        <p class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</p>
-                                        
-                                        <div
-                                            *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
-                                            <p [innerHTML]="topicDiscussionData?.posts[0].content"></p>
+                            <mat-card class="black_border m-b-10 no-radius no_padding">
+                                <!-- name row start -->
+                                <div class="black_border no_padding no_margin" style="background-color: #C9E4F35C;">
+                                    <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); -->
+                                    <div class="row padding_matcard">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
+                                            <button class="profileimg"
+                                                disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
                                         </div>
-
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+                                            <div class="row m-auto-tb">
+                                                <div class="col-10 no_padding">
+                                                    <strong
+                                                        class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
+                                                        &nbsp;
+                                                    </strong> <span>
+                                                        &nbsp; | &nbsp;
+                                                        {{selectedThreadData?.timestampISO | date : 'medium'}} </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <mat-card-actions>
-                                    <div class="row">
+
+                                <!-- name row end -->
+                                <!-- content start -->
+                                <div class="row p-lr-30 m-t-20">
+                                    <div class=col-1></div>
+                                    <div class="col-11 thread_title p-l-0">
+                                        <p class="f_size_17 color_black f_wt_400 color_grey">
+                                            {{selectedThreadData?.titleRaw || 'Thread name'}}
+                                        </p>
+
+
+                                        <div
+                                            *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+                                            <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === false"
+                                                [innerHTML]="topicDiscussionData?.posts[0].content"></p>
+                                            <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === true"
+                                                [innerHTML]="topicDiscussionData?.posts[0].local_content"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--content ends  -->
+                                <mat-card-actions class="no_margin no_padding">
+                                    <div class="row p-lr-30 m-t-20 m-b-15">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                             &nbsp;
@@ -558,62 +614,97 @@
                                                 ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
                                             </button> &nbsp;&nbsp;
                                             <button mat-button class="f_size_12 no_padding"
-                                                *ngIf="userDetail?.is_comment_config"
                                                 (click)="showThreadComment = !showThreadComment"
                                                 [disabled]="selectedThreadData?.thread_status === false">
-                                                <mat-icon class="action_icon">
+                                                <mat-icon class="action_icon"
+                                                    [disabled]="selectedThreadData?.thread_status === false">
                                                     comment</mat-icon>Comment
                                             </button>
+
                                         </div>
                                     </div>
-                                    <div class="row" *ngIf="showThreadComment">
+                                    <div class="row p-lr-30" *ngIf="showThreadComment">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                        <div class="col-xl-9 col-lg-9 col-md-10 col-sm-12 col-12 no_padding">
-                                            <angular-editor [config]="commentConfig" minlength="8"
+                                        <div
+                                            class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
+                                            <angular-editor [config]="config" name="addThreadComment" autofocus
                                                 [placeholder]="'Leave your comments here...'"
-                                                [(ngModel)]="addThreadComment">
+                                                [(ngModel)]="addThreadComment" ngDefaultControl>
                                             </angular-editor>
                                         </div>
-                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 send_pos">
-                                            <div class="width_100">
-                                                <mat-checkbox class="width_100" [(ngModel)]="a2iFlag">
-                                                    &nbsp;Ask instructor to answer
-                                                </mat-checkbox>
-                                            </div>
-                                            <div class="width_100" (click)="sendComment('thread',addThreadComment)">
-                                                <mat-icon class="send_btn">send</mat-icon>
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 m-auto-tb p-5px"
+                                            style="background: whitesmoke; border: 1px solid #dddddd;  margin-bottom: 16px;">
+                                            <div class="row">
+                                                <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                    <mat-checkbox class="width_100 f_size_12 align-middle"
+                                                        [(ngModel)]="a2iFlag">
+                                                        &nbsp;Ask the instructor
+                                                    </mat-checkbox>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                    <button mat-button class="new_Thread no-radius ht-30"
+                                                        [disabled]="addThreadComment == null || addThreadComment?.length == 0"
+                                                        (click)="sendComment('thread',addThreadComment)">Send</button>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  float_right send_pos  black_bo">
+                                    <mat-icon class="send_btn" [disabled]="addThreadComment == null || addThreadComment?.length == 0"
+                                      (click)="sendComment('thread',addThreadComment)">send</mat-icon>
+                                  </div> -->
                                     </div>
-                                    <div class="row">
-                                        <!-- <div *ngIf="addThreadComment?.invalid && (addThreadComment?.dirty || addThreadComment?.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="addThreadComment.errors.minlength">
-                                                Comments must be at least 8 characters long.
-                                            </div>
-                                        </div> -->
-                                    </div>
+                                    <!-- <div class="row p-lr-30 float_right black_bo" *ngIf="showThreadComment">
+                                  <button mat-button class="new_Thread no-radius float_right ht-30"
+                                    [disabled]="addThreadComment == null || addThreadComment?.length == 0"
+                                    (click)="sendComment('thread',addThreadComment)">Send</button>
+                                </div> -->
                                 </mat-card-actions>
                             </mat-card>
                             <!-- for posts -->
                             <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
-                                <mat-card class="black_border m-b-8" *ngIf="pin !== 0 && post.deleted === false">
-                                    <div class="row">
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                            <button class="profileimg"
-                                                disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
-                                        </div>
-                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                            <strong class="color-blue float_left">{{post?.user?.username | titlecase}}
-                                                &nbsp;</strong>
-                                            <span>
-                                                &nbsp; | &nbsp; {{post?.timestampISO | date : 'medium'}} </span>
-                                            <br> <br>
-                                            <p [innerHTML]="post?.content"></p>
+                                <mat-card *ngIf="pin !== 0" [disabled]="post.deleted" class="no-radius no_padding"
+                                    [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
+                                    <div class="black_border no_padding no_margin" style="background-color: #F1F1F1;">
+                                        <div class="row padding_matcard">
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
+                                                <button class="profileimg"
+                                                    disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
+                                            </div>
+                                            <div
+                                                class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+                                                <div class="row m-auto-tb">
+                                                    <div class="col-12 no_padding m-auto-tb">
+                                                        <strong
+                                                            class="color-blue float_left">{{post?.user?.username | titlecase}}
+                                                            &nbsp;</strong>
+                                                        <span> &nbsp; | &nbsp; {{post?.timestampISO | date : 'medium'}}
+                                                            &nbsp; </span>
+                                                        <span class="a2i_lable" *ngIf="post.a2i_lable"> A2I</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <mat-slide-toggle class="mat-slide-toggle mat-primary mat-checked float_right"
+                                      [(ngModel)]="post.deleted" (change)="removeComment(post)">Remove</mat-slide-toggle> -->
+
+
+
+                                                <!-- <p [innerHTML]="post?.content" style="word-break: break-word ;"></p> -->
+                                            </div>
                                         </div>
                                     </div>
-                                    <mat-card-actions>
-                                        <div class="row">
+                                    <div class="row p-lr-30 m-t-20">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                        </div>
+                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                            <p class="no_margin" *ngIf="post?.deleted === false"
+                                                [innerHTML]="post?.content"></p>
+                                            <p class="no_margin" *ngIf="post?.deleted === true"
+                                                [innerHTML]="post?.local_content"></p>
+                                        </div>
+                                    </div>
+                                    <mat-card-actions class="no_margin no_padding">
+                                        <div class="row p-lr-30 m-t-20 m-b-15">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                 &nbsp;
@@ -625,116 +716,237 @@
                                                         thumb_up_alt</mat-icon>Like
                                                     ({{post?.bookmarks || 0}})
                                                 </button> &nbsp;&nbsp;
-                                                <!-- <button mat-button
+                                                <button mat-button
+                                                    [disabled]="selectedThreadData?.thread_status === false"
                                                     (click)="showCommentEditor[pin] = !showCommentEditor[pin]"
                                                     class="f_size_12 no_padding">
-                                                    <mat-icon class="action_icon">
+                                                    <mat-icon class="action_icon"
+                                                        [disabled]="selectedThreadData?.thread_status === false">
                                                         comment</mat-icon>Comment
-                                                </button> -->
+                                                </button>
                                             </div>
                                         </div>
-                                        <!-- <div class="row" *ngIf="showCommentEditor[pin]">
+
+                                        <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding">
-                                                <angular-editor [config]="commentConfig"
+                                            <div
+                                                class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding m-b-0">
+                                                <angular-editor [config]="config" autofocus name="addPostComment[pin]"
                                                     [placeholder]="'Leave your comments here...'"
-                                                    [(ngModel)]="addPostComment[pin]">
+                                                    [(ngModel)]="addPostComment[pin]" ngDefaultControl>
                                                 </angular-editor>
                                             </div>
-                                            <div (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
-                                                class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  send_pos">
-                                                <mat-icon class="send_btn">send</mat-icon>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right m-auto-tb p-5px m-b-15"
+                                                style="background: whitesmoke; border: 1px solid #dddddd;">
+                                                <div class="row">
+                                                    <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
+                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                            [(ngModel)]="a2iFlag">
+                                                            &nbsp;&nbsp;Ask the instructor
+                                                        </mat-checkbox> 
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
+                                                        <button mat-button class="new_Thread no-radius ht-30 width_50"
+                                                            (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
+                                                            [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div> -->
+                                            <!-- <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  float_right send_pos black_bo">
+                                      <mat-icon (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
+                                        [disabled]="addPostComment && addPostComment[pin] == null" class="send_btn">send</mat-icon>
+                    
+                                    </div> -->
+                                        </div>
                                     </mat-card-actions>
 
-
+                                    <!-- // 1st child -->
                                     <div *ngFor="let posts of topicDiscussionData?.posts; let pjn = index;">
-                                        <mat-card class="black_border m-bt-4"
-                                            *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid  && posts.deleted === false">
-                                            <div class="row">
-                                                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                                    <button class="profileimg"
-                                                        disabled>{{posts?.user?.username | slice:0:1 | uppercase}}</button>
+                                        <div style="padding: 0px 10px;">
+                                            <mat-card class="no-radius no_padding black_border m-bt-4"
+                                                *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid">
+                                                <div class="black_border no_padding no_margin"
+                                                    style="background-color: #eeeeee;">
+                                                    <!-- F1F1F15C  -->
+                                                    <div class="row padding_matcard">
+                                                        <div
+                                                            class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
+                                                            <button class="profileimg"
+                                                                disabled>{{posts?.user?.username | slice:0:1 | uppercase}}</button>
+                                                        </div>
+                                                        <div
+                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9 no_padding m-auto-tb">
+                                                            <strong
+                                                                class="color-blue float_left">{{posts?.user?.username | titlecase}}</strong>
+                                                            <span>
+                                                                &nbsp; | &nbsp;
+                                                                {{posts?.timestampISO | date : 'medium'}} </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                                    <strong
-                                                        class="color-blue float_left">{{posts?.user?.username | titlecase}}
-                                                        &nbsp;</strong>
-                                                    <span>
-                                                        &nbsp; | &nbsp; {{posts?.timestampISO | date : 'medium'}}
-                                                    </span>
-                                                    <br> <br>
-                                                    <p [innerHTML]="posts?.content"></p>
-                                                </div>
-                                            </div>
-                                            <mat-card-actions>
-                                                <div class="row">
-                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                <div class="row p-lr-30 m-t-20">
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                    </div>
                                                     <div
-                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
-                                                        &nbsp;
-                                                        <button mat-button class="f_size_12 no_padding"
-                                                            (click)="likeandunlikepost(posts)">
-                                                            <mat-icon class="action_icon" *ngIf="!posts?.bookmarked">
-                                                                thumb_up_alt</mat-icon>
-                                                            <mat-icon class="action_icon_filled"
-                                                                *ngIf="posts.bookmarked">
-                                                                thumb_up_alt</mat-icon>Like ({{posts?.bookmarks  || 0}})
-                                                        </button> &nbsp;&nbsp;
-                                                        <!-- <button mat-button
-                                                            (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
-                                                            class="f_size_12 no_padding">
-                                                            <mat-icon class="action_icon">
-                                                                comment</mat-icon>Comment
-                                                        </button> -->
+                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                                        <p class="no_margin" *ngIf="posts?.deleted === false"
+                                                            [innerHTML]="posts?.content"></p>
+                                                        <p class="no_margin" *ngIf="posts?.deleted === true"
+                                                            [innerHTML]="posts?.local_content"></p>
                                                     </div>
                                                 </div>
-                                                <div class="row " *ngIf="showCommentEditor[pjn]">
-                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                                    <div
-                                                        class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding">
-                                                        <angular-editor [config]="commentConfig"
-                                                            [placeholder]="'Leave your comments here...'"
-                                                            [(ngModel)]="addPostComment[pjn]">
-                                                        </angular-editor>
+                                                <mat-card-actions class="no_margin no_padding">
+                                                    <div class="row p-lr-30 m-t-20 m-b-15">
+                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                        <div
+                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                            &nbsp;
+                                                            <button mat-button class="f_size_12 no_padding"
+                                                                (click)="likeandunlikepost(posts)">
+                                                                <mat-icon class="action_icon"
+                                                                    *ngIf="!posts?.bookmarked">
+                                                                    thumb_up_alt</mat-icon>
+                                                                <mat-icon class="action_icon_filled"
+                                                                    *ngIf="posts.bookmarked">
+                                                                    thumb_up_alt</mat-icon>Like
+                                                                ({{posts?.bookmarks || 0}})
+                                                            </button> &nbsp;&nbsp;
+                                                            <!-- // commented by Mythreyi - no need child's child comment -->
+                                                            <!-- <button mat-button
+                                                                (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
+                                                                class="f_size_12 no_padding">
+                                                                <mat-icon class="action_icon">
+                                                                    comment</mat-icon>Comment
+                                                            </button> -->
+                                                        </div>
                                                     </div>
-                                                    <div (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)"
-                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12  float_right send_pos black_bo">
-                                                        <mat-icon class="action_icon">send</mat-icon>
+                                                    <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
+                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                        <div
+                                                            class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding no_margin">
+                                                            <angular-editor [config]="config"
+                                                                [placeholder]="'Leave your comments here...'"
+                                                                [(ngModel)]="addPostComment[pjn]">
+                                                            </angular-editor>
+                                                        </div>
+                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right m-auto-tb p-5px m-b-15"
+                                                            style="background: whitesmoke; border: 1px solid #dddddd;">
+                                                            <div class="row">
+                                                                <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                                <mat-checkbox class="width_100 f_size_12 align-middle"
+                                                                    [(ngModel)]="a2iFlag">
+                                                                    &nbsp;Ask the instructor
+                                                                </mat-checkbox>
+                                                                </div>
+                                                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                                <button mat-button class="new_Thread no-radius ht-30"
+                                                                    (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
+                                                                </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </mat-card-actions>
+
+                                                <!-- // 2nd child --- in learner d.f /// Refer this div-- Kani -- -->
+                                                <div
+                                                    *ngFor="let postss of topicDiscussionData?.posts; let pkn = index;">
+                                                    <div style="padding: 0px 10px;">
+                                                        <mat-card class="no-radius no_padding black_border m-bt-4"
+                                                            *ngIf="pkn !== 0 && posts.pid.toString() === postss.toPid">
+                                                            <div class="black_border no_padding no_margin"
+                                                                style="background-color: #F7F7F7;">
+                                                                <div class="row padding_matcard">
+                                                                    <div
+                                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
+                                                                        <button class="profileimg"
+                                                                            disabled>{{postss?.user?.username | slice:0:1 | uppercase}}</button>
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-xl-11 col-lg-11 col-md-9 col-sm-9 col-9 no_padding m-auto-tb">
+                                                                        <strong
+                                                                            class="color-blue float_left">{{postss?.user?.username | titlecase}}</strong>
+                                                                        <span>
+                                                                            &nbsp; | &nbsp;
+                                                                            {{postss?.timestampISO | date : 'medium'}}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row p-lr-30 m-t-20">
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                                </div>
+                                                                <div
+                                                                    class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                                                    <p class="no_margin"
+                                                                        *ngIf="postss?.deleted === false"
+                                                                        [innerHTML]="postss?.content"></p>
+                                                                    <p class="no_margin"
+                                                                        *ngIf="postss?.deleted === true"
+                                                                        [innerHTML]="postss?.local_content">
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <mat-card-actions class="no_margin no_padding">
+                                                                <div class="row p-lr-30 m-t-20 m-b-15">
+                                                                    <div
+                                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                                        &nbsp;
+                                                                        <button mat-button class="f_size_12 no_padding"
+                                                                            (click)="likeandunlikepost(postss)">
+                                                                            <mat-icon class="action_icon"
+                                                                                *ngIf="!postss?.bookmarked">
+                                                                                thumb_up_alt</mat-icon>
+                                                                            <mat-icon class="action_icon_filled"
+                                                                                *ngIf="postss.bookmarked">
+                                                                                thumb_up_alt</mat-icon>Like
+                                                                            ({{postss?.bookmarks || 0}})
+                                                                        </button> &nbsp;&nbsp;
+                                                                    </div>
+                                                                </div>
+                                                            </mat-card-actions>
+
+                                                        </mat-card>
                                                     </div>
                                                 </div>
-                                            </mat-card-actions>
-                                        </mat-card>
+
+                                            </mat-card>
+                                        </div>
                                     </div>
 
 
                                 </mat-card>
                             </div>
+
+                            <div> <br><br>
+                                <br><br></div>
                         </div>
 
-
-                        <ng-template #createThreadDialog class="dialogPopup">
-                            <mat-dialog-content class="createThreadDialog">
+                        <ng-template #createThreadDialog class="dialogPopup no-radius">
+                            <mat-dialog-content class="createThreadDialog no-radius">
                                 <form [formGroup]="addThreadForm">
-                                    <div class="row m-l-20 m-r-20">
+                                    <div class="row m-l-20 m-r-20 m-b-0">
                                         <div class="col-10">
-                                            <p class="m-t-10 f_size_18">Create a new thread</p>
+                                            <p class="m-t-10 m-b-0 f_size_18">Create a new thread</p>
                                         </div>
                                         <div class="col-2">
                                             <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
-                                                class="f_size_25 float_right">close
+                                                class="f_size_25 float_right pointer">close
                                             </mat-icon>
                                         </div>
                                     </div>
-
-                                    <br><br>
-
-                                    <div class="row m-l-20 m-r-20">
+                                    <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
                                         <div class="col-12">
                                             <mat-label>Title</mat-label><span class="mand"> *</span>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 m-b-0 form-group">
                                             <input type="text" class="width_100 greyBor background_trans"
                                                 name="thread_name" formControlName="thread_name" autofocus>
                                             <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
@@ -742,15 +954,18 @@
                                                     minimum of 8 characters </div>
                                                 <div *ngIf="f.thread_name.errors.required">Title is required</div>
                                             </div>
+                                            <!-- <app-input [type]="'text'" class="width_100" [form]="addThreadForm" [required]="'true'" [name]="'Thread title'"
+                                      [controlname]="'title'" [reqcondition]="'req'">
+                                    </app-input> -->
                                         </div>
                                     </div>
-                                    <br><br>
-                                    <div class="row m-l-20 m-r-20">
+
+                                    <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
                                         <div class="col-12">
                                             <mat-label>Description</mat-label><span class="mand"> *</span>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
+                                        <div class="col-12 m-b-0">
+                                            <div class="form-group m-b-0">
                                                 <angular-editor [config]="config" formControlName="thread_description">
                                                 </angular-editor>
                                                 <div *ngIf="f.thread_description.touched && f.thread_description.errors"
@@ -765,28 +980,12 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <!-- <br>
-                                    <div class="row m-l-20 m-r-20">
-                                        <div class="col-md-2 col-lg-2 col-sm-12 col-12">
-                                            <mat-label>Module</mat-label><span class="mand"> *</span>
-                                        </div>
-                                        <div class="col-md-10 col-lg-10 col-sm-12 col-12">
-                                            <mat-form-field class="width_100 ">
-                                                <mat-select formControlName="module">
-                                                    <mat-option *ngFor="let res of scromModuleData; let i = index"
-                                                        [value]="res">
-                                                        {{res.title}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                    </div> -->
                                 </form>
                             </mat-dialog-content>
                             <mat-dialog-actions align="end" class="dialogButtons">
-                                <button mat-stroked-button (click)="addThreadForm?.reset()"
+                                <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
                                     [disabled]="addThreadForm.untouched">Reset</button>
-                                <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
+                                <button mat-stroked-button class="bg-col color_white" (click)="createNewThread()"
                                     [disabled]="addThreadForm.invalid" cdkFocusInitial>Create</button>
                             </mat-dialog-actions>
                             <br>
