@@ -73,7 +73,7 @@ export class UserMenuComponent implements OnInit {
           .logout(this.userDetailes._id, false)
           .subscribe((logout: any) => {
             if (logout.data.logout && logout.data.logout.success) {
-              localStorage.clear();
+              // localStorage.clear();
               this.http
                 .get('http://api.ipify.org/?format=json')
                 .subscribe((res: any) => {
@@ -86,7 +86,7 @@ export class UserMenuComponent implements OnInit {
                 logout.data.logout.error_msg ===
                 'Authentication error. Token required.'
               ) {
-                localStorage.clear();
+                // localStorage.clear();
                 this.http
                   .get('http://api.ipify.org/?format=json')
                   .subscribe((res: any) => {

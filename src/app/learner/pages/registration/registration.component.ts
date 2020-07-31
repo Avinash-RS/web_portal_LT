@@ -47,9 +47,6 @@ export class RegistrationComponent implements OnInit {
     localStorage.removeItem('role');
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
-    sessionStorage.removeItem('UserDetails');
-    sessionStorage.removeItem('role');
-    sessionStorage.removeItem('token');
 
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();

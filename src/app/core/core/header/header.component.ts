@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+
     Swal.fire({
       title: 'Are you sure you want to logout ?',
       // icon: 'warning',
