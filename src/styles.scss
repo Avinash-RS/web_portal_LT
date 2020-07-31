@@ -435,12 +435,7 @@ body {
   margin: 8px;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: $lxp-theme-green !important;
-}
-.mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color:$lxp-theme-green !important; 
-}
+
 // .br-default .br-selected:after {
 //   color: $color-yellow !important;
 // }
@@ -647,11 +642,6 @@ body {
 //   background: #d7e7ff !important;
 //   min-height: 40px !important;
 // }
-
-h1 {
-  color: #0e3877;
-  font-weight: 500 !important;
-}
 
 .create-course .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: #1f3777 !important;
@@ -864,3 +854,4 @@ mat-header-cell,
     padding: 0px;
   }
 }
+

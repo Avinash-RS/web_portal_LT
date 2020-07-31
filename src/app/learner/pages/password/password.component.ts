@@ -17,17 +17,19 @@ export class PasswordComponent implements OnInit {
   currentUser: any = [];
   usersuggestion: any = [];
   passwordForm: FormGroup;
-  systemip: String;
+  systemip: string;
   userid: any;
   options: string[] = [];
-  lowercase: boolean = false;
-  uppercase: boolean = false;
-  number: boolean = false;
-  spicalcharacter: boolean = false;
-  showpassbutton: Boolean = false;
-  showpsseye: Boolean = false;
-  showconpassbutton: Boolean = false;
-  showconpsseye: Boolean = false;
+  hide = true;
+  hide2 = true;
+  lowercase = false;
+  uppercase  = false;
+  number = false;
+  spicalcharacter  = false;
+  showpassbutton  = false;
+  showpsseye  = false;
+  showconpassbutton  = false;
+  showconpsseye  = false;
 
   constructor(private router: Router,
               private loader: Ng4LoadingSpinnerService,
@@ -39,9 +41,13 @@ export class PasswordComponent implements OnInit {
     this.systemip = localStorage.getItem('Systemip');
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.usernamesplVal),
-      password: new FormControl('', myGlobals.passwordVal),
-      confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+      // username: new FormControl('', myGlobals.usernamesplVal),
+      username: ['', [Validators.required, Validators.minLength(3),
+      Validators.maxLength(20), Validators.pattern(/^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/)]],
+      password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
+      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)]],
+      confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
+        Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
     }, {
       validator: MustMatch('password', 'confirmpassword'),
     });
@@ -86,8 +92,9 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key');
-    this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip).subscribe((data: any) => {
-      if (data.data.user_registration_done.success == 'true') {
+    this.service.user_registration_done(this.userid, this.passwordForm.value.username,
+      this.passwordForm.value.password, this.systemip).subscribe((data: any) => {
+      if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
         this.service.login(this.passwordForm.value.username, this.passwordForm.value.password, false)
           .subscribe((loginresult: any) => {
@@ -100,15 +107,16 @@ export class PasswordComponent implements OnInit {
                 localStorage.setItem('role', 'learner');
                 localStorage.setItem('remember_me', 'true');
                 localStorage.setItem('token', loginresult.data.login.message.token);
-                localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token));
-                var ps = btoa(this.passwordForm.value.password);
+                localStorage.setItem('UserToken', JSON.stringify(data.data.user_registration_done.token));
+                const ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);
                 this.loader.hide();
                 // if false, then need to update profile
                 if (loginresult.data.login.message.is_profile_updated) {
                   this.router.navigate(['/Learner']);
                 } else {
-                  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true});
+                  this.toastr.warning('Your profile is incomplete !',
+                  'Please provide data for all mandatory fields', { closeButton: true});
                   this.router.navigate(['/Learner/profile']);
                 }
               }
@@ -125,7 +133,7 @@ export class PasswordComponent implements OnInit {
     });
   }
 
-  userNamesuggestion(data?) {
+  userNamesuggestion() {
     this.userid = localStorage.getItem('key');
     this.service.userNamesuggestion(this.userid).subscribe((data: any) => {
       if (data.data.user_registration_username_suggestion.success === 'true') {

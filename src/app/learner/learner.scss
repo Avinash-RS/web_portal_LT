@@ -373,6 +373,21 @@ color: $lxp-theme-green;
 
 
 // Animation class
+// common css don't remove : Ankit
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: $lxp-theme-green !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color:$lxp-theme-green !important; 
+}
+
+.signIn {
+  text-align: center !important;
+  margin-top: 27px !important;
+  color: $lxp-theme-green !important;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+}
 @keyframes fadeInUp {
   from {
       transform: translate3d(0,40px,0)

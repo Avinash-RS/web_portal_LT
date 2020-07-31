@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class LoginComponent implements OnInit {
   capsOn;
+  hide = true;
   show = false;
   loginForm: FormGroup;
   languages: any;

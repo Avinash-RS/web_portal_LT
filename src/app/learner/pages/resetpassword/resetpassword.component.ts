@@ -28,12 +28,13 @@ export class ResetpasswordComponent implements OnInit {
   uppercase = false;
   number = false;
   spicalcharacter = false;
-  showpassbutton: Boolean = false;
-  showpsseye: Boolean = false;
-  showconpassbutton: Boolean = false;
-  showconpsseye: Boolean = false;
+  showpassbutton = false;
+  showpsseye = false;
+  showconpassbutton = false;
+  showconpsseye = false;
   isLinkActive: Boolean;
-
+  hide = true;
+  hide2 = true;
 
 
   constructor(
@@ -64,10 +65,14 @@ export class ResetpasswordComponent implements OnInit {
 
 
     this.resetForm = this.formBuilder.group({
-      password: new FormControl('', myGlobals.passwordVal),
-      confirmpassword: new FormControl('', [Validators.required,
-      Validators.minLength(8), Validators.maxLength(20),
-      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+      password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)]],
+        confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
+          Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+      // password: new FormControl('', myGlobals.passwordVal),
+      // confirmpassword: new FormControl('', [Validators.required,
+      // Validators.minLength(8), Validators.maxLength(20),
+      // Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
     }, {
       validator: MustMatch('password', 'confirmpassword'),
     });
