@@ -227,7 +227,7 @@
                             </h5>
                             <p> {{ result.activity_details.coursename }}</p>
                             <p>{{ result.activity_details.activitytype }} | {{ result.activity_details.createdby_name }}
-                                <button *ngIf="result.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer">Launch</button>
+                                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'" style="margin-right: 0px;" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer">Launch</button>
                             </p>
 
                         </div>
