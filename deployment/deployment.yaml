@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ccdev
+  name: ccweb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ccdev
+      app: ccweb
   template:
     metadata:
       labels:
-        app: ccdev
+        app: ccweb
     spec:
       containers:
-        - name: ccdev
-          image: lxpacrazure.azurecr.io/ccdev:$tag
+        - name: ccweb
+          image: lxpacrazure.azurecr.io/ccweb:$tag
           imagePullPolicy: Always
           ports:
           - containerPort: 80
