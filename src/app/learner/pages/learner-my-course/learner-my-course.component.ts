@@ -37,9 +37,9 @@ export class LearnerMyCourseComponent implements OnInit {
   // ngOnInit() {
   // this.translate.use(localStorage.getItem('language'));
   // }
-  ngOnInit() {
-
-    this.learnerService.getData("p1xg6y", "2020-07-23T08:01:00.000Z").subscribe((data: any) => {
+  ngOnInit() {    
+    var dateValue = new Date().toISOString()
+    this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       this.results['message'].forEach((element, index) => {
         if (index == 0) {
@@ -148,6 +148,21 @@ export class LearnerMyCourseComponent implements OnInit {
 
   close() {
     this.show = false;
+  }
+  
+  launchAssignment(value){
+    if(value.activity_details.activitytype == "Assignment"){
+      const detail = {
+        id: value.activity_details.courseid,
+        wishlist: false,
+        wishlist_id: false,
+        enrollment_status: false
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    }
+  }
+  launchActivity(value){    
+      window.open(value.activity_details.link)
   }
 }
 
