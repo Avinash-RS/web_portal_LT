@@ -328,11 +328,11 @@
                                                                     <div class="col-2" matTooltip="Course end date">
                                                                         {{courseEndDate}}
                                                                     </div>
-                                                                    <div class="col-2" (click)="fileInput.click()">
+                                                                    <div class="col-2">
                                                                         <button mat-stroked-button
                                                                             matTooltip="Click upload button to add the file"
                                                                             [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload ||
-                                                                            !file?.startDate">
+                                                                            !file?.startDate" (click)="fileInput.click()">
                                                                             Upload</button>
                                                                         <input class="form-control border-right-0"
                                                                             [disabled]="file?.doc_status === false"
