@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { LearnerServicesService } from "../../services/learner-services.service";
-import * as moment from "moment";
+import { Component, OnInit } from '@angular/core';
+import { LearnerServicesService } from '../../services/learner-services.service';
+import * as moment from 'moment';
 @Component({
-  selector: "app-learner-calendar",
-  templateUrl: "./learner-calendar.component.html",
-  styleUrls: ["./learner-calendar.component.css"]
+  selector: 'app-learner-calendar',
+  templateUrl: './learner-calendar.component.html',
+  styleUrls: ['./learner-calendar.component.css']
 })
 export class LearnerCalendarComponent implements OnInit {
   public UserDetails: any;
@@ -28,11 +28,11 @@ export class LearnerCalendarComponent implements OnInit {
 
   ngOnInit() {
     this.UserDetails =
-      JSON.parse(localStorage.getItem("UserDetails")) ||
-      JSON.parse(sessionStorage.getItem("UserDetails")) ||
+      JSON.parse(localStorage.getItem('UserDetails')) ||
+      JSON.parse(sessionStorage.getItem('UserDetails')) ||
       null;
 
-    this.tokenDetails = localStorage.getItem("token");
+    this.tokenDetails = localStorage.getItem('token');
 
     this.user_id = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;
@@ -59,8 +59,8 @@ export class LearnerCalendarComponent implements OnInit {
     this.getLearnerActivity(this.selectedDate);
   }
   getLearnerActivity(selectedDate) {
-    var selectedDatediff = new Date(selectedDate);
-    if (this.bsInlineValue.getDate() == selectedDatediff.getDate()) {
+    const selectedDatediff = new Date(selectedDate);
+    if (this.bsInlineValue.getDate() === selectedDatediff.getDate()) {
       this.selectedToday = true;
     } else {
       this.selectedToday = false;
@@ -73,10 +73,10 @@ export class LearnerCalendarComponent implements OnInit {
             res.data?.get_read_learner_activity?.message;
           if (this.selectedToday) {
             this.learnerActivityList.forEach((element, index) => {
-              if (index == 0) {
-                element.activity_details.ongoing = "true";
+              if (index === 0) {
+                element.activity_details.ongoing = 'true';
               } else {
-                element.activity_details.ongoing = "false";
+                element.activity_details.ongoing = 'false';
               }
             });
           }

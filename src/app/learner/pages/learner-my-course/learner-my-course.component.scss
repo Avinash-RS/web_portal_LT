@@ -79,7 +79,7 @@
 
 :host /deep/ .mat-ink-bar {
     height: 4px !important;
-    background-color: $color-subhead !important;
+    background-color: $lxp-theme-green !important;
 }
 
 .bodybg {
@@ -190,6 +190,7 @@
 .coursenameT{
   border-left: 5px solid #f3cc58;
   padding-left: 10px;
+  margin-bottom: 2px;
   border-radius: 3px;
   font-weight: 600;
   height: 40px;
@@ -200,21 +201,26 @@
 .space-10{
   margin-top: 10px;
 }
+.mainCard{
+  background: #f9f9f9;
+  margin-left: 4%;
+}
 .session-card{
-  // margin-bottom: 1%;
-  // border-bottom: 1px solid $color-border;
   border-radius: 0px;
   box-shadow: none;
   margin-left: 3%;
-  height: 110px;
-  margin-bottom: 2%;
+  height: 100px;
+  margin-bottom: 0%;
+  background: transparent !important;
 }
 .session-sub-card{
-        width: 70%;
-        border-bottom: 1px solid #ccc;
-        background: #c9c8c80f;
-        margin-left: 3%;
-        padding-left: 14px;
+        width: 90%;
+        border-bottom: 1px solid #dedede;
+        // margin-left: 3%;
+        // padding-left: 14px;
+}
+.m-l-4{
+  margin-left: 4%;
 }
 hr {
 
@@ -242,6 +248,11 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
     background-color: $lxp-theme-green !important;
 }
+
+// :host ::ng-deep .mat-badge-content {
+//   color: $color-white;
+//   background: $lxp-theme-green;
+// }
 
 .mat-progress-bar {
   height: 8px;

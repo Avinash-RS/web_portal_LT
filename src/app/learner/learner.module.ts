@@ -119,6 +119,13 @@ const routes: Routes = [
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },
+
+  {
+    path: 'calendar',
+    component: LearnerCalendarComponent,
+    data: { animation: 'Calendar' }
+  },
+
   // {
   //   path: 'terms',
   //   component: TermsconditionsComponent,

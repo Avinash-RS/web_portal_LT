@@ -5,24 +5,24 @@
   <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
     <mat-tab-group animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
       <!-- [label]="'ON-GOING ('+incomplete?.length + ')'" -->
-      <mat-tab   [disabled]='incomplete?.length === 0'>
+      <mat-tab [disabled]='incomplete?.length === 0'>
         <ng-template matTabLabel>
-          <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">ON-GOING</span>
-      </ng-template>
+          <span color="primary" class="color_black2" matBadge="{{incomplete?.length}}"
+            matBadgeOverlap="false">ON-GOING</span>
+        </ng-template>
         <div class="container" *ngFor="let course of incomplete ;let j=index" [@EnterLeave]="'flyIn'">
-          <mat-card class="coursebg" >
+          <mat-card class="coursebg">
             <div class="row width_100 no_margin">
-              <div class=" display_flex pointer no_pl"
-                (click)="gotoDesc(course)">
-              
+              <div class=" display_flex pointer no_pl" (click)="gotoDesc(course)">
 
-            <div class="courseHover">
-              <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-              <div class="overlay">
-                <mat-icon class="text"  > play_arrow </mat-icon>
-              </div>
-            </div>
-              
+
+                <div class="courseHover">
+                  <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+                  <div class="overlay">
+                    <mat-icon class="text"> play_arrow </mat-icon>
+                  </div>
+                </div>
+
               </div>
               <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
                 <div class="width_100  f_size_20 f_wt_500 pointer letter_space" (click)="gotoDesc(course)">
@@ -37,10 +37,10 @@
                   <span *ngFor="let l of course?.author_details;let in = index">
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
-                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                   
-                    <mat-icon class="timer"> alarm_on </mat-icon >
-                      <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+
+                  <mat-icon class="timer"> alarm_on </mat-icon>
+                  <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
                 </div>
                 <div class="row color_black f_size_12 f_wt_400 pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -52,20 +52,20 @@
                     </span>
                     <div class="margin"></div>
                     <div class="btl-alin">
-                      
+
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                      
+
                         &nbsp;<span class="cap f_wt_400">
                           {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                           course?.coursePlayerStatus?.status === 'start' ? 'Start' : 'Resume'}}&nbsp;
                         </span>
                       </button>
-                    
+
                     </div>
                   </div>
-                 
+
                 </div>
               </div>
             </div>
@@ -78,23 +78,22 @@
         </div>
       </mat-tab>
       <!-- [label]="'COMPLETED (' +completed?.length+ ')'" -->
-      <mat-tab  [disabled]='completed?.length === 0'>
+      <mat-tab [disabled]='completed?.length === 0'>
         <ng-template matTabLabel>
           <span matBadge="{{completed?.length}}" matBadgeOverlap="false">COMPLETED</span>
-      </ng-template>
+        </ng-template>
         <div class="container" *ngFor="let course of completed;let k=index">
           <mat-card class="coursebg">
             <div class="row width_100 no_margin">
-              <div class=" display_flex pointer no_pl"
-                (click)="gotoDesc(course)">
-              
-            <div class="courseHover">
-              <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-              <div class="overlay">
-                <mat-icon class="text"  > play_arrow </mat-icon>
-              </div>
-            </div>
-              
+              <div class=" display_flex pointer no_pl" (click)="gotoDesc(course)">
+
+                <div class="courseHover">
+                  <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+                  <div class="overlay">
+                    <mat-icon class="text"> play_arrow </mat-icon>
+                  </div>
+                </div>
+
               </div>
               <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
                 <div class="width_100  f_size_22 f_wt_500" (click)="gotoDesc(course)">
@@ -111,9 +110,9 @@
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
 
-                  <mat-icon class="timer"> alarm_on </mat-icon >
-                    <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
-                
+                  <mat-icon class="timer"> alarm_on </mat-icon>
+                  <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+
                 </div>
                 <div class="row color_black f_size_12 f_wt_400" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -135,7 +134,7 @@
                       </button>
                     </div>
                   </div>
-                
+
                 </div>
               </div>
             </div>
@@ -148,23 +147,22 @@
         </div>
       </mat-tab>
       <!-- [label]="'ALL ('+enrolledCourses?.length +')'" -->
-      <mat-tab  >
+      <mat-tab>
         <ng-template matTabLabel>
           <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">ALL</span>
-      </ng-template>
+        </ng-template>
         <!-- <ng-container > -->
-          <div class="container" *ngFor="let course of enrolledCourses ;let i=index" >
-          <mat-card class="coursebg" matRipple >
+        <div class="container" *ngFor="let course of enrolledCourses ;let i=index">
+          <mat-card class="coursebg" matRipple>
             <div class="row width_100 no_margin">
-              <div class=" display_flex pointer no_pl"
-                (click)="gotoDesc(course)">
-              
-            <div class="courseHover">
-              <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-              <div class="overlay">
-                <mat-icon class="text"  > play_arrow </mat-icon>
-              </div>
-            </div>
+              <div class=" display_flex pointer no_pl" (click)="gotoDesc(course)">
+
+                <div class="courseHover">
+                  <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+                  <div class="overlay">
+                    <mat-icon class="text"> play_arrow </mat-icon>
+                  </div>
+                </div>
 
               </div>
               <div class=" col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 no_pl pad1020">
@@ -182,8 +180,8 @@
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
 
-                  <mat-icon class="timer"> alarm_on </mat-icon >
-                    <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                  <mat-icon class="timer"> alarm_on </mat-icon>
+                  <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
                 </div>
                 <div class="row color_black f_size_12 f_wt_400  pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -194,7 +192,7 @@
                       {{course?.coursePlayerStatus?.course_percentage}}%
                     </span>
                     <div class="margin"></div>
-                    <div class="btl-alin" >
+                    <div class="btl-alin">
                       <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                         class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                         <mat-icon class="icon-color">play_circle_outline</mat-icon>
@@ -212,17 +210,17 @@
                       </button>
                     </div>
                   </div>
-                 
+
                 </div>
               </div>
             </div>
           </mat-card>
         </div>
-      
+
         <!-- </ng-container> -->
-      
+
         <div *ngIf="enrolledCourses?.length === 0" class="space5">
-        
+
           <mat-card class="coursebg width_90">
             <div class="row width_90 no_margin">
               <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
@@ -240,7 +238,7 @@
         </div>
       </mat-tab>
     </mat-tab-group>
-  <!-- <div class="col-sm-4">
+    <!-- <div class="col-sm-4">
         <h1>Today's Sessions</h1>
         <mat-card class="coursebg width_100" *ngIf="results.message.length == 0">
           <div class="row width_100 no_margin">
@@ -269,18 +267,19 @@
           </mat-card>
         </div>
      
-</div> -->
-<!-- </div> -->
-<!-- </mat-tab> -->
-<!-- <mat-tab label="Calendar">
-<app-learner-calendar></app-learner-calendar>
-</mat-tab> -->
+    </div> -->
+    <!-- </div> -->
+    <!-- </mat-tab> -->
+    <!-- <mat-tab label="Calendar">
+    <app-learner-calendar></app-learner-calendar>
+    </mat-tab> -->
     <!-- <br>
-    <br> -->
-  </div> 
-  <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
+        <br> -->
+  </div>
+  <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
     <div class="f_size_22 pad-7 m-l-13">Today's Sessions</div>
     <hr style=" margin-left: 21px;">
+
     <mat-card class="coursebg width_100" *ngIf="results?.message?.length == 0">
       <div class="row width_100 no_margin">
         <div class="container-fluid">
@@ -296,62 +295,72 @@
       </div>
     </mat-card>
     <div *ngIf="results?.message?.length > 0">
-      <mat-card *ngFor="let result of results?.message" class="session-card">
-        <div class="session-sub-card"
-          [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
-          <h5 style="margin-left: 4%;"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}} </span>
-            <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> | On-going</span>
-          </h5>
-          <p class="coursenameT"> {{ result?.activity_details.coursename }}</p>
-          <h5 style="margin-left: 4%;"> <span class="f_wt_500 f_size_14">Type </span>: <span class="lxp-text f_size_14 f_wt_400">{{ result?.activity_details.activitytype }} </span>
-            <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon >
-              <span class="aligned-icon lxp-text f_size_14 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
-           </h5>
-        </div>
-      </mat-card>
-  </div>
- 
-</div>
-    <br>
-    <br>
-<!-- Model for mobile user  -->
-<div class="modal" *ngIf="show">
-  <div class="modal-content">
-    <div class="modal-header">
-      <span style="font-size:22px; color: red;">Alert !</span>
-    </div>
-    <div class="modal-body">
-      <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
-      <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
-      <div class="row">
-        <div class="col-8">
-          <p><b>Recommended browsers</b></p>
-        </div>
-        <div class="col-1">
-          <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
-        </div>
-      </div>
-      <div [ngClass]="{'show-less': showShortDesciption}">
-        <p>L&T supports the most recent versions of the following browsers.</p>
-        <ul>
-          <li>Google Chrome (recommended)</li>
-          <li>Firefox</li>
-          <li>Safari</li>
-          <li>Internet Explorer 11</li>
-          <li>Microsoft Edge</li>
+      <div class="mainCard" *ngFor="let result of results?.message">
+        <mat-card class="session-card">
+          <div class="session-sub-card"
+            [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
+            <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}}
+              </span>
+              <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> |
+                On-going</span>
+            </div>
+            <p class="coursenameT"> {{ result?.activity_details.coursename }}</p>
+            <h5 class="m-l-4" > <span class="f_wt_500 f_size_14">Type </span>: <span
+                class="lxp-text f_size_14 f_wt_400">{{ result?.activity_details.activitytype }} </span>
+              <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
+              <span
+                class="aligned-icon lxp-text f_size_14 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
+            </h5>
+          </div>
+        </mat-card>
+        <!-- <div class="">
+    </div> -->
 
-        </ul>
-        <p>If you're using an older browser , updating your browser can help solve problems.</p>
       </div>
 
+      <!-- Model for mobile user  -->
+      <div class="modal" *ngIf="show">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span style="font-size:22px; color: red;">Alert !</span>
+          </div>
+          <div class="modal-body">
+            <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
+            <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
+            <div class="row">
+              <div class="col-8">
+                <p><b>Recommended browsers</b></p>
+              </div>
+              <div class="col-1">
+                <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
+              </div>
+            </div>
+            <div [ngClass]="{'show-less': showShortDesciption}">
+              <p>L&T supports the most recent versions of the following browsers.</p>
+              <ul>
+                <li>Google Chrome (recommended)</li>
+                <li>Firefox</li>
+                <li>Safari</li>
+                <li>Internet Explorer 11</li>
+                <li>Microsoft Edge</li>
+
+              </ul>
+              <p>If you're using an older browser , updating your browser can help solve problems.</p>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button class="roundbtn" (click)="close()">Close</button>
+          </div>
+        </div>
+      </div>
 
     </div>
-    <div class="modal-footer">
-      <button class="roundbtn" (click)="close()">Close</button>
-    </div>
-  </div>
+
+ </div>
+
 </div>
-
 <div class="footer" *ngIf="!loading">
   <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
 
@@ -360,4 +369,5 @@
       <img width="160px" alt="" src="assets/learner/LT_small.svg">
     </span>
   </span>
+
 </div>

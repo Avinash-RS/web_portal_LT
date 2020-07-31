@@ -4,11 +4,12 @@
     <span class="headTit"> LARSEN & TOUBRO</span>
   <span class="spacer"></span>
   <div class="tab" >
-      <button class="btn" routerLink="/Learner/MyCourse">
+      <button class="btn" routerLink="/Learner/MyCourse" routerLinkActive="active">
         <mat-icon fontSet="material-icons-outlined" class="headicon " inline=true> local_library </mat-icon>MY COURSES </button>
-    <!-- <button class="btn" routerLink="/Learner/viewallcourses">
-      <mat-icon class="headicon" inline=true> list_alt </mat-icon>
-      VIEW ALL COURSES </button> -->
+    <button class="btn"  routerLink="/Learner/calendar" routerLinkActive="active">
+      <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> event_note </mat-icon>
+      CALENDAR </button>
+      
   </div>
   <button class="profileimg" mat-icon-button >{{initials}}</button>
   <!-- [matMenuTriggerFor]="menu" -->
