@@ -83,20 +83,21 @@
 .btn{
     width: 27%;
     display: inline-grid;
-    border: none;
+    border: none !important;
     font-size: 12px;
     background: $lxp-theme-green !important;
     cursor: pointer;
   }
 
   .btn:focus :hover {
-    border-bottom: 4px solid $color-subhead; 
-    border-right: none !important;
-    border-left: none !important;
+    // border-bottom: 4px solid $color-subhead; 
+    // border-right: none !important;
+    // border-left: none !important;
     color:$color-white;
   }
   :host ::ng-deep .btn.focus, .btn:focus .btn:hover{
     outline: 0;
+    border: none !important;
     box-shadow: none !important;
     color:$color-white
 }

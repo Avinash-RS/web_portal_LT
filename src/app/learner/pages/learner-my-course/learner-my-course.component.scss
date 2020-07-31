@@ -187,7 +187,50 @@
 .no_pl {
   padding-left: 0 !important;
 }
+.coursenameT{
+  border-left: 5px solid #f3cc58;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  height: 40px;
+  padding-top: 9px;
+  font-size: 18px;
 
+}
+.space-10{
+  margin-top: 10px;
+}
+.session-card{
+  // margin-bottom: 1%;
+  // border-bottom: 1px solid $color-border;
+  border-radius: 0px;
+  box-shadow: none;
+  margin-left: 3%;
+  height: 110px;
+  margin-bottom: 2%;
+}
+.session-sub-card{
+        width: 70%;
+        border-bottom: 1px solid #ccc;
+        background: #c9c8c80f;
+        margin-left: 3%;
+        padding-left: 14px;
+}
+hr {
+
+  margin-bottom: 0.5rem;
+}
+.person{
+  position: absolute;
+    margin-left: 10px;
+    color: $lxp-icon;
+    font-size: 18px;
+}
+.aligned-icon{
+  position: absolute;
+  color: $lxp-text;
+  margin-left: 32px;
+}
 .color_black2 {
     color: $label;
 }
@@ -234,12 +277,14 @@
 }
 .btl-alin{
     margin-top: -0.5%;
-    margin-left: 52%;
+    margin-left: 42%;
 }
 .margin{
     margin-left: 2%;
 }
-
+.pad-7{
+  padding: 7px;
+}
 .percent {
     margin-left: 5px;
     margin-top: 8px;
@@ -257,12 +302,12 @@
     color: $color-white !important;
 }
 .timer{
-  position: absolute;
+  position: relative;
+  top: 4px;
 }
 .aligned-with-icon{
   position: absolute;
   margin-top: 5px;
-  margin-left: 5px; /* optional */
 }
 .noCourse {
   padding: 50px;
@@ -368,10 +413,7 @@
   padding: 0.75rem;
 }
 
-:host
-  ::ng-deep
-  .mat-tab-header-pagination-controls-enabled
-  .mat-tab-header-pagination {
+:host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
   display: none !important;
 }
 

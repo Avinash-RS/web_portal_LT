@@ -2,8 +2,9 @@
 <hr style="margin: 0 !important;">
 <div class="f_size_22   myC-head animated animatedFadeInUp fadeInUp ">MY COURSES</div>
 <div class="bodybg" *ngIf="!loading">
-  <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
+  <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
     <mat-tab-group animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
+
       <mat-tab [label]="'ON-GOING ('+incomplete?.length + ')'"   [disabled]='incomplete?.length === 0'>
         <div class="container" *ngFor="let course of incomplete ;let j=index" [@EnterLeave]="'flyIn'">
           <mat-card class="coursebg" >
@@ -103,7 +104,10 @@
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course?.course_duration}} hours
+
+                  <mat-icon class="timer"> alarm_on </mat-icon >
+                    <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                
                 </div>
                 <div class="row color_black f_size_12 f_wt_400" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -168,7 +172,9 @@
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
                   </span>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  Course Duration: {{course.course_duration}} hours
+
+                  <mat-icon class="timer"> alarm_on </mat-icon >
+                    <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
                 </div>
                 <div class="row color_black f_size_12 f_wt_400  pointer" (click)="gotoDesc(course)">
                   <div class="width_100 display_flex">
@@ -262,9 +268,10 @@
 </mat-tab> -->
     <!-- <br>
     <br> -->
-  </div>
+  </div> 
   <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
-    <div class="f_size_22">Today's Sessions</div>
+    <div class="f_size_22 pad-7 m-l-13">Today's Sessions</div>
+    <hr style=" margin-left: 21px;">
     <mat-card class="coursebg width_100" *ngIf="results?.message?.length == 0">
       <div class="row width_100 no_margin">
         <div class="container-fluid">
@@ -280,17 +287,21 @@
       </div>
     </mat-card>
     <div *ngIf="results?.message?.length > 0">
-      <mat-card *ngFor="let result of results?.message" style="border-radius: 10px;">
-        <div class="col-md-8" id="insidecard" class="uk-card uk-card-default uk-card-body" style="font-size: medium;"
+      <mat-card *ngFor="let result of results?.message" class="session-card">
+        <div class="session-sub-card"
           [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
-          <h5>{{strDate | date :'dd MMM yyyy'}} 
-            <span *ngIf="result?.activity_details.ongoing == 'true' "> | On-going</span>
+          <h5 style="margin-left: 4%;"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}} </span>
+            <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> | On-going</span>
           </h5>
-          <p> {{ result?.activity_details.coursename }}</p>
-          <h5>{{ result?.activity_details.activitytype }} | {{ result?.activity_details.createdby_name }}</h5>
+          <p class="coursenameT"> {{ result?.activity_details.coursename }}</p>
+          <h5 style="margin-left: 4%;"> <span class="f_wt_500 f_size_14">Type </span>: <span class="lxp-text f_size_14 f_wt_400">{{ result?.activity_details.activitytype }} </span>
+            <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon >
+              <span class="aligned-icon lxp-text f_size_14 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
+           </h5>
         </div>
       </mat-card>
   </div>
+ 
 </div>
     <br>
     <br>
