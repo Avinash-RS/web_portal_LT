@@ -233,15 +233,15 @@ a {
 }
 :host ::ng-deep.footertext{
   font-size: 14px !important;
-  font-weight: 500;
+  font-weight: 400;
   padding: 18px;
   position: absolute;
-  color: $lxp-footer-text
+  color: $lxp-footer-text;
 }
 
 :host ::ng-deep .powered{
   font-size: 14px !important;
-  font-weight: 500;
+  font-weight: 400;
   padding: 18px;
   position: absolute;
   color: $lxp-footer-text;

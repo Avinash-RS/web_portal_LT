@@ -27,7 +27,7 @@ mat-form-field {
 
 .remember_me {
     float: left !important;
-    font-size: 14px;
+    font-size: 13px;
     color: $lxp-text !important;
     margin-top: -4px;
 }
@@ -35,11 +35,14 @@ mat-form-field {
 .forgot {
     color: $lxp-text ;
     cursor: pointer;
+    font-size: 13px;
 }
 
-a:not([href]):hover {
+a:hover {
     color: $lxp-theme-green !important;
-   
+    
+        text-decoration: underline;
+    
 }
 
 .link {
@@ -58,6 +61,7 @@ a:not([href]):hover {
 
 .haveacc {
     color: $label !important;
+    font-size: 13px;
 }
 
 .forgot_ps {
@@ -88,15 +92,15 @@ a:not([href]):hover {
     letter-spacing: 0.5px;
 }
 
-:host ::ng-deep.linee {
-    border-left: 222px solid $color-border;
-    height: 1px;
-    position: absolute;
-    margin-left: 67px;
-    margin-right: 67px;
-    margin-top: 2px;
-    border-radius: 17px;
-}
+// :host ::ng-deep.linee {
+//     border-left: 222px solid $color-border;
+//     height: 1px;
+//     position: absolute;
+//     margin-left: 67px;
+//     margin-right: 67px;
+//     margin-top: 2px;
+//     border-radius: 17px;
+// }
 
 :host ::ng-deep.sign_up {
     margin-top: 12% !important;
@@ -106,7 +110,7 @@ a:not([href]):hover {
 
 mat-card-title,
 .remember_me .a {
-    color: $color-blue !important;
+    // color: $color-blue !important;
     margin-top: -12px !important;
     text-align: center !important;
 }
@@ -115,7 +119,9 @@ mat-card-title,
     border-color: $color-border !important;
 
 }
-
+:host ::ng-deep.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: $lxp-text  !important;
+}
 // :host ::ng-deep.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 // .mat-checkbox-checked.mat-accent .mat-checkbox-background {
 //     background-color: $color-blue !important;
@@ -243,7 +249,7 @@ mat-card-title {
 }
 :host ::ng-deep.footertext{
     font-size: 14px !important;
-    font-weight: 500;
+    font-weight: 400;
     padding: 18px;
     position: absolute;
     color: $lxp-footer-text;
@@ -251,7 +257,7 @@ mat-card-title {
 
 :host ::ng-deep .powered{
     font-size: 14px !important;
-    font-weight: 500;
+    font-weight: 400;
     padding: 18px;
     position: absolute;
     color: $lxp-footer-text;
@@ -477,7 +483,7 @@ input.mat-input-element {
     }
 
     .forgot {
-        font-size: 14px !important;
+        font-size: 13px !important;
         // color: $color-border !important;
     }
 
@@ -486,7 +492,7 @@ input.mat-input-element {
     }
 
     .haveacc {
-        font-size: 14px !important;
+        font-size: 13px !important;
 
     }
 
