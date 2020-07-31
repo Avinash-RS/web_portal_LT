@@ -735,6 +735,29 @@ li {
 //Mythreyi CSS ends here
 
 //Kani CSS starts here 
+.thread-header {
+    // background-color: #C9E4F35C;
+    background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
+    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
+    border-bottom: 1px solid $color-border;
+  }
+  
+  .post-header {
+    // background-color: #F1F1F1;
+    background-image: linear-gradient(#F1F1F1, #fafafa);
+    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
+    border-bottom: 1px solid $color-border;
+  }
+  .child-post-header {
+    // background-color: #F1F1F15C;
+    background-image: linear-gradient(#F1F1F15C, #fafafa);
+    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
+    border-bottom: 1px solid $color-border;
+  }
+
+  
+
+
 .pointerNone {
     pointer-events: none !important;
     opacity: 0.5;
