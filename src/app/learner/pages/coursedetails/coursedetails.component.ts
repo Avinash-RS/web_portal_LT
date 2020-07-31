@@ -130,8 +130,8 @@ export class CoursedetailsComponent implements OnInit {
   assignmentVal = false;
   docpath: any = null;
   assFile: File;
-  courseStartDate: string;
-  courseEndDate: string;
+  courseStartDate: any;
+  courseEndDate: any;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -214,17 +214,19 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-      this.courseStartDate = moment(this.assignmentContent.courseStartDate).format('DD-MM-YYYY');
-      this.courseEndDate = moment(this.assignmentContent.courseEndDate).format('DD-MM-YYYY');
+      const startDate = new Date(this.assignmentContent.courseStartDate);
+      const endDate = new Date(this.assignmentContent.courseEndDate);
+      this.courseStartDate = moment(startDate).format('DD-MM-YYYY');
+      this.courseEndDate = moment(endDate).format('DD-MM-YYYY');
       if (moment().format('DD-MM-YYYY') >=
-       moment(this.assignmentContent.courseStartDate).format('DD-MM-YYYY') &&
+       this.courseStartDate &&
        moment().format('DD-MM-YYYY') <=
-       moment(this.assignmentContent.courseEndDate).format('DD-MM-YYYY')) {
+       this.courseEndDate) {
       this.assignmentContent.enableUpload = true;
     } else if (moment().format('DD-MM-YYYY') <
-    moment(this.assignmentContent.courseStartDate).format('DD-MM-YYYY') ||
+    this.courseStartDate ||
     moment().format('DD-MM-YYYY') >
-    moment(this.assignmentContent.courseEndDate).format('DD-MM-YYYY')) {
+    this.courseEndDate) {
       this.assignmentContent.enableUpload = false;
     }
       this.assignmentContent.coursedetails.forEach(element => {
