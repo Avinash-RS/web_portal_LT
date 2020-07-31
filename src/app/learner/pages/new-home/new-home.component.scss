@@ -1,5 +1,4 @@
 @import "variable";
-
 .spinner-container {
     position: absolute;
     top: 0;
@@ -26,7 +25,6 @@
         max-height: 175px !important;
         min-height: 40px;
     }
-
     @media screen and (max-width:500px) {
         .statBtn {
             width: 60%;
@@ -44,7 +42,7 @@
     }
 }
 
-@media screen and (min-width:765px)  {
+@media screen and (min-width:765px) {
     .statBtn {
         float: right;
     }
@@ -71,7 +69,6 @@
 //     font-size: 17px !important;
 //     font-weight: 600 !important;
 // }
-
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
     font-weight: 500 !important;
@@ -102,13 +99,11 @@
 
 :host /deep/ .mat-tab-body {
     // background: #f1f1f1;
-
     html {
         overflow: scroll;
         overflow-x: hidden !important;
     }
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
         width: 0px;
         background: transparent !important;
     }
@@ -140,7 +135,6 @@
     margin: auto;
 }
 
-
 .linee {
     background: $color-landing-blue;
     height: 100%;
@@ -164,6 +158,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
 .m-l-1 {
     margin-top: 1%;
 }
@@ -199,7 +194,7 @@
     color: $color-white;
 }
 
-.icon-color{
+.icon-color {
     color: $color-white;
 }
 
@@ -243,16 +238,15 @@
     background-color: $profile-t-grey;
     text-align: center;
     border-top: 2px solid $profile-p-grey;
-  }
+}
 
-  :host ::ng-deep.footericon{
+ :host ::ng-deep.footericon {
     width: 9%;
     position: absolute;
     margin-left: 5px;
-  
-  }
+}
 
-  .roundbtn{
+.roundbtn {
     background-color: $color-red;
     font-size: 16px;
     border: none !important;
@@ -260,19 +254,20 @@
     color: $color-white;
     height: 36px;
     // margin-left: 70% !important;
-  }
-  .roundbtn :focus{
+}
+
+.roundbtn :focus {
     outline: none !important;
     border: none !important;
-  }
+}
 
-  .show-less {
+.show-less {
     height: 0rem;
     overflow: hidden;
     padding: 0rem;
 }
 
-.showbtn{
+.showbtn {
     color: $color-blue !important;
     // background-color: $color-white;
     // border: none !important;
@@ -280,42 +275,44 @@
     margin-left: -72px;
     font-size: 19px;
     font-weight: 500;
-
-
 }
 
-.showbtn :focus{
+.showbtn :focus {
     outline: none !important;
     border: none !important;
 }
 
-     /* The Modal*/
+
+/* The Modal*/
+
 .modal {
-    display: block; 
+    display: block;
     position: fixed;
-    z-index: 1; 
-    padding-top: 100px; 
+    z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Modal Content */
+
+.modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
     width: 98%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  }
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
-  .modal-footer {
+.modal-footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -329,13 +326,13 @@
 
 #insidecard.uk-card-default {
     background: #fff;
-    color: #666;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     border-left: 8px solid #b5acac;
     padding: 10px;
     margin-bottom: 20px;
 }
+
 .color-grey {
     border-left: 8px solid #b5acac !important;
     color: #b5acac !important;
