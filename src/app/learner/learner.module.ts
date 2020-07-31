@@ -62,13 +62,13 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { title: 'Learner Login' }
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { title: 'Learner Login' }
   },
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
-    data: { title: 'Learner  Registration' }
+    data: { animation: 'Learner  Registration' }
   },
   {
     path: 'otp',
@@ -95,7 +95,7 @@ const routes: Routes = [
   {
     path: 'recover',
     component: ForgotUsernameAndPasswordComponent,
-    data: { title: 'Learner Forget Password' }
+    data: { animation: 'Learner Forget Password' }
   },
   {
     path: 'recoverotp',

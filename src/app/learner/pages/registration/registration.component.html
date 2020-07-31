@@ -1,16 +1,50 @@
 <div class="limiter">
     <div class="row container-reg200">
         <div class="col-md-8 col-sm-12 col-12">
-            <img alt="" class="lnt_logo" src="assets/learner/WHITE_LNT T_LOGO.svg">
+            <!-- <img alt="" class="lnt_logo" src="assets/learner/WHITE_LNT T_LOGO.svg"> -->
             <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/lapBG.jpeg">
+            <div class="row footer20">
+                <div class="col-3">
+                  <span class="footertext">© 2020 L&T EduTech.</span>
+                </div>
+                <div class="col-6">
+                  <span class="powered">Powered by
+                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
+                  </span>
+                </div>
+              </div>
         </div>
         <div class="col-md-4 col-sm-12 col-12">
             <div class="wrap-reg ">
                 <img class="kauhalya" alt="" src='assets/images/l&t.png'>
                 <form [formGroup]="registerForm">
-                    <div class="borderbox">
+                    <!-- <div class="borderbox"> -->
                         <h1 class="signIn">Create an account </h1><br><br>
-                        <div class="form-group">
+
+                        <mat-form-field  appearance="outline">
+                            <mat-label class="label-color">Fullname</mat-label>
+                            <input matInput id="fullname"  #fullname placeholder="Enter the fullname"  formControlName="fullname" 
+                            required  maxlength="50">
+                            <mat-icon matPrefix class="icon-color">person_outline</mat-icon>
+                          
+                            <!-- <mat-error class="error" *ngIf="f.fullname.touched && f.fullname.errors">Fullname is required</mat-error>
+                            <mat-error class="error" *ngIf="f.fullname.errors.pattern">Fullname is invalid</mat-error> -->
+                            <mat-error class="error"  *ngIf="registerForm.get('fullname').hasError('required')">
+                                Fullname is Required
+                              </mat-error>
+                            <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('minlength')">
+                                Fullname should be atleast 3 characters long
+                              </mat-error>
+                          
+                              <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('maxlength')">
+                                Fullname can be atmax 50 characters long
+                              </mat-error>
+                          
+                              <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('pattern')">
+                                Fullname invalid
+                              </mat-error>
+                          </mat-form-field>
+                        <!-- <div class="form-group">
                             <label class="fromLabel">Full Name</label>
                             <input type="text" id="fullname" #fullname formControlName="fullname" minlength="3"
                                 maxlength="50" class="form-control"
@@ -22,20 +56,28 @@
                                     be
                                     3-50 characters long </div>
                             </div>
-                        </div>
-
-                        <div class="form-group space5">
-                            <label class="fromLabel">Email ID</label>
+                        </div> -->
+                        <br><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="label-color">Email ID</mat-label>
+                            <input matInput  id="email" #email placeholder="Enter the email id"  formControlName="email" maxlength="64"
+                            required>
+                            <mat-icon matPrefix class="icon-color">email_outline</mat-icon>
+                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email ID is required</mat-error>
+                            <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
+                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address </mat-error>
+                          </mat-form-field>
+                        <div class=" space5">
+                            <!-- <label class="fromLabel">Email ID</label>
                             <input type="text" id="email" #email formControlName="email" maxlength="64"
                                 class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }"
                                 required />
                             <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                                 <div *ngIf="f.email.errors.required">Email is required</div>
                                 <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
-                            </div><br>
+                            </div><br> -->
 
                             <div class="row">
-
                                 <div class="col-12">
                                     <div class="alert1"> Note : This name will be used in your certificates</div>
                                 </div>
@@ -43,17 +85,17 @@
 
 
                             <button class="btn" id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
-                                Register
+                                REGISTER
                             </button>
 
                             <div class="account">Already have an account !
-                                <a [routerLink]="['/Learner/login']"><strong class="col">Sign
+                                <a [routerLink]="['/Learner/login']" routerLinkActive="active"><strong class="col">Sign
                                         in</strong></a>
                             </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </form>
-                <div class="row footer20">
+                <!-- <div class="row footer20">
                     <div class="col-7">
                         <span class="footertext">© 2020 L&T EduTech.</span>
                     </div>
@@ -62,7 +104,7 @@
                             <img class="footericon" alt="" src="assets/learner/LT_small.svg">
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>

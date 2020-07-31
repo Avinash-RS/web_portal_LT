@@ -14,40 +14,78 @@ div.terms {
   border-color: $color-border !important;
 }
 
-:host ::ng-deep.btn {
-  display: inline-block;
-  font-weight: 500;
-  color: $color-white !important;
-  text-align: center;
-  vertical-align: middle !important;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: $color-blue !important;
-  border-radius: 0px !important;
-  font-size: 18px;
-  line-height: 1.5;
-  width: 100%;
-  margin-top: 17px;
+.btn {
+  font-size: 16px;
+ background: $lxp-theme-green !important;
+ color: $color-white;
+ border-radius: 50px !important;
+ width: 54%;
+ height: 45px;
+ margin-left: 23%;
+ margin-right: 23%;
+ margin-top: 10%;
+
+}
+.center{
+text-align: center;
+}
+:host ::ng-deep .btn.disabled,
+.btn:disabled {
+color: $color-white !important;
+border-radius: .25rem;
+font-size: 16px;
 }
 
-.fromLabel {
-  color: #33333396 !important;
+:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0em 0 !important;
 }
+:host ::ng-deep.mat-form-field-wrapper {
+  padding-bottom: .5em;
+}
+.icon-color{
+color:  #8c8c8c !important;
+position: relative;
+top: -2px;
+} 
+.error{
+  margin-top: 10px;
+}
+mat-form-field {
+  width: 100%;
+}
+
+.label-color{
+  color: #5c6873;
+  font-family: "Roboto Condensed", sans-serif !important;
+}
+input.mat-input-element {
+  margin-top: -3px !important;
+}
+
+:host ::ng-deep.mat-input-element {
+
+  margin: 3px !important;
+
+}
+
+/////
+// .fromLabel {
+//   color: #33333396 !important;
+// }
 
 .col {
-  color: $color-blue !important;
+  color: $lxp-theme-green !important;
   margin-left: -10px;
 }
 
 :host ::ng-deep.signIn {
   text-align: center !important;
-  margin-top: 22px !important;
-  color: $color-blue !important;
-  font-weight: lighter !important;
+  margin-top: 27px !important;
+  color: $lxp-theme-green !important;
+  font-size: 28px;
+  letter-spacing: 0.5px;
 }
+
 
 .account {
   color: $label2 !important;
@@ -65,38 +103,38 @@ a {
 
 .alert1 {
   color: $label;
-  font-size: 11px;
+  font-size: 14px;
   text-align: center;
   font-weight: 600;
-  margin-bottom: 26px;
+  margin-top: 10%;
 }
 
 .link {
   color: $color-white !important;
 }
 
-:host ::ng-deep .linee {
-  border-left: 246px solid $color-border;
-  height: 1px;
-  position: absolute;
-  margin-top: -26px;
-}
+// :host ::ng-deep .linee {
+//   border-left: 246px solid $color-border;
+//   height: 1px;
+//   position: absolute;
+//   margin-top: -26px;
+// }
 
 :host ::ng-deep .iagree {
   margin-top: -21px !important;
 }
 
-:host ::ng-deep input[type="text"] {
-  width: 100%;
-  margin: 1px 0;
-  border-radius: 0px;
-  border: 1px solid $color-border;
-  box-sizing: border-box;
-}
+// :host ::ng-deep input[type="text"] {
+//   width: 100%;
+//   margin: 1px 0;
+//   border-radius: 0px;
+//   border: 1px solid $color-border;
+//   box-sizing: border-box;
+// }
 
-.star {
-  color: $color-red;
-}
+// .star {
+//   color: $color-red;
+// }
 
 :host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
   line-height: 14px !important;
@@ -164,12 +202,12 @@ a {
   font-weight: normal !important;
 }
 
-:host ::ng-deep .btn.disabled,
-.btn:disabled {
-  opacity: 0.65;
-  color: $label2 !important;
-  background-color: $color-border !important;
-}
+// :host ::ng-deep .btn.disabled,
+// .btn:disabled {
+//   opacity: 0.65;
+//   color: $label2 !important;
+//   background-color: $color-border !important;
+// }
 
 :host ::ng-deep label {
   margin-bottom: 0.1em !important;
@@ -178,31 +216,39 @@ a {
 :host ::ng-deep .wrap-reg {
   width: 100%;
   padding-left: 40px;
-  padding-right: 30px;
+  padding-right: 40px;
   height: 100vh;
   border-radius: 0px !important;
   margin-left: 0% !important;
   overflow: hidden !important;
-}
 
-:host ::ng-deep.footericon {
-  width: 67%;
+}
+:host ::ng-deep.footericon{
+  width: 100%;
   position: absolute;
   margin-left: 5px;
+
 }
-:host ::ng-deep.footertext {
-  font-size: 12px;
-  margin-left: -51px;
+:host ::ng-deep.footertext{
+  font-size: 14px !important;
+  font-weight: 500;
+  padding: 18px;
+  position: absolute;
+  color: $lxp-footer-text
 }
 
-:host ::ng-deep .powered {
-  font-size: 12px;
-  margin-left: -29px;
-}
-:host ::ng-deep.footer20 {
+:host ::ng-deep .powered{
+  font-size: 14px !important;
+  font-weight: 500;
+  padding: 18px;
   position: absolute;
-  bottom: 20px;
-  width: 90%;
+  color: $lxp-footer-text;
+}
+:host ::ng-deep.footer20{
+  height: 50px;
+  bottom: 6px;
+  width: 100%;
+  position: absolute;
 }
 
 // mobile screen

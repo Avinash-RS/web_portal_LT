@@ -26,7 +26,7 @@ export const slideInAnimation =
                    ], { optional: true }),
               ])
          ]),
-         transition('Home => *', [
+         transition('recover => *', [
               query(':enter, :leave',
                    style({ position: 'fixed',  width: '100%' }),
                    { optional: true }),
