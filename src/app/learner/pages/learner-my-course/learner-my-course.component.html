@@ -4,8 +4,11 @@
 <div class="bodybg" *ngIf="!loading">
   <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
     <mat-tab-group animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
-
-      <mat-tab [label]="'ON-GOING ('+incomplete?.length + ')'"   [disabled]='incomplete?.length === 0'>
+      <!-- [label]="'ON-GOING ('+incomplete?.length + ')'" -->
+      <mat-tab   [disabled]='incomplete?.length === 0'>
+        <ng-template matTabLabel>
+          <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">ON-GOING</span>
+      </ng-template>
         <div class="container" *ngFor="let course of incomplete ;let j=index" [@EnterLeave]="'flyIn'">
           <mat-card class="coursebg" >
             <div class="row width_100 no_margin">
@@ -74,9 +77,12 @@
           </mat-card>
         </div>
       </mat-tab>
-      
-      <mat-tab [label]="'COMPLETED (' +completed?.length+ ')'" [disabled]='completed?.length === 0'>
-        <div class="container" *ngFor="let course of completed;let k=index" [@EnterLeave]="'flyIn'">
+      <!-- [label]="'COMPLETED (' +completed?.length+ ')'" -->
+      <mat-tab  [disabled]='completed?.length === 0'>
+        <ng-template matTabLabel>
+          <span matBadge="{{completed?.length}}" matBadgeOverlap="false">COMPLETED</span>
+      </ng-template>
+        <div class="container" *ngFor="let course of completed;let k=index">
           <mat-card class="coursebg">
             <div class="row width_100 no_margin">
               <div class=" display_flex pointer no_pl"
@@ -141,8 +147,11 @@
           </mat-card>
         </div>
       </mat-tab>
-
-      <mat-tab [label]="'ALL ('+enrolledCourses?.length +')'" [@EnterLeave]="'flyIn'">
+      <!-- [label]="'ALL ('+enrolledCourses?.length +')'" -->
+      <mat-tab  >
+        <ng-template matTabLabel>
+          <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">ALL</span>
+      </ng-template>
         <!-- <ng-container > -->
           <div class="container" *ngFor="let course of enrolledCourses ;let i=index" >
           <mat-card class="coursebg" matRipple >
