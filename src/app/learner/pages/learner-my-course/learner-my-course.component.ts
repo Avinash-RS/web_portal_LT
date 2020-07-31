@@ -149,18 +149,20 @@ export class LearnerMyCourseComponent implements OnInit {
   close() {
     this.show = false;
   }
-  launchActivity(value){    
+  
+  launchAssignment(value){
     if(value.activity_details.activitytype == "Assignment"){
-      // const detail = {
-      //   id: this.course.course_id,
-      //   wishlist: this.course.wishlisted,
-      //   wishlist_id: this.course.wishlist_id,
-      //   enrollment_status: this.course.enrollment_status
-      // };
-      // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-    }else{
-      window.open(value.activity_details.link)
+      const detail = {
+        id: value.activity_details.courseid,
+        wishlist: false,
+        wishlist_id: false,
+        enrollment_status: false
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
+  }
+  launchActivity(value){    
+      window.open(value.activity_details.link)
   }
 }
 

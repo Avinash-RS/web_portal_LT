@@ -219,13 +219,14 @@
                     </div>
                 </mat-card>
                 <div *ngIf="results.message.length > 0">
-                    <mat-card *ngFor="let result of results.message" style="border-radius: 10px;">
+                    <mat-card (click)="launchAssignment(result)" *ngFor="let result of results.message" style="border-radius: 10px;">
                         <div class="col-md-8" id="insidecard" class="uk-card uk-card-default uk-card-body" style="font-size: medium;" [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
                             <img *ngIf="result.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
                             <h5>{{strDate | date :'dd MMM yyyy'}}
                                 <span *ngIf="result.activity_details.ongoing == 'true' "> | On-going</span>
                             </h5>
                             <p> {{ result.activity_details.coursename }}</p>
+                            <h4>{{ result.activity_details.topicname }}</h4>
                             <p>{{ result.activity_details.activitytype }} | {{ result.activity_details.createdby_name }}
                                 <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'" style="margin-right: 0px;" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer">Launch</button>
                             </p>
