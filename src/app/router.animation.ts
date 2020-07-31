@@ -22,7 +22,7 @@ export const slideInAnimation =
                    query(':leave', [
                        style({ transform:   'translateX(0%)'}),
                        animate('0.5s ease-in-out',
-                       style({ transform: 'translateX(100%)' }))
+                       style({ transform: 'translateX(-100%)' }))
                    ], { optional: true }),
               ])
          ]),

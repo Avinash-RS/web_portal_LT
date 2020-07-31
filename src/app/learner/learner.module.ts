@@ -75,7 +75,7 @@ const routes: Routes = [
     path: 'courseDetail',
     component: CoursedetailsComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Course details' }
+    data: { animation: 'Course details' }
   },
   {
     path: 'register',
@@ -119,33 +119,33 @@ const routes: Routes = [
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },
-  {
-    path: 'terms',
-    component: TermsconditionsComponent,
-    data: { title: 'Terms and conditions' }
-  },
-  {
-    path: 'scorm',
-    component: ScormplayerComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Course Player' }
-  },
+  // {
+  //   path: 'terms',
+  //   component: TermsconditionsComponent,
+  //   data: { title: 'Terms and conditions' }
+  // },
+  // {
+  //   path: 'scorm',
+  //   component: ScormplayerComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { title: 'Course Player' }
+  // },
   {
     path: 'viewallcourses',
     component: ViewAllCoursesComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'dashboard',
-    component: LearnerDashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: LearnerHomeComponent,
-    canActivate: [AuthGuard],
-    data: { animation: 'Learner home' }
-  },
+  // {
+  //   path: 'dashboard',
+  //   component: LearnerDashboardComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'home',
+  //   component: LearnerHomeComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { animation: 'Learner home' }
+  // },
   {
     path: 'forbidden',
     component: ForbiddenComponent,

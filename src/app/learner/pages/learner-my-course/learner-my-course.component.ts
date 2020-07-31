@@ -95,11 +95,11 @@ export class LearnerMyCourseComponent implements OnInit {
             }
           }
         });
-        this.enrolledCourses.forEach(element => {
-          if (element.coursePlayerStatus.course_percentage) {
-            element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
-          }
-        });
+        // this.enrolledCourses.forEach(element => {
+        //   if (element.coursePlayerStatus.course_percentage) {
+        //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+        //   }
+        // });
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||

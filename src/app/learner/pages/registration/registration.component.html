@@ -19,8 +19,7 @@
                 <img class="kauhalya" alt="" src='assets/images/l&t.png'>
                 <form [formGroup]="registerForm">
                     <!-- <div class="borderbox"> -->
-                        <h1 class="signIn">Create an account </h1><br><br>
-
+                        <h1 class=" animated animatedFadeInUp fadeInUp signIn">Create an account </h1><br><br>
                         <mat-form-field  appearance="outline">
                             <mat-label class="label-color">Fullname</mat-label>
                             <input matInput id="fullname"  #fullname placeholder="Enter the fullname"  formControlName="fullname" 
@@ -62,7 +61,7 @@
                             <mat-label class="label-color">Email ID</mat-label>
                             <input matInput  id="email" #email placeholder="Enter the email id"  formControlName="email" maxlength="64"
                             required>
-                            <mat-icon matPrefix class="icon-color">email_outline</mat-icon>
+                            <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
                             <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email ID is required</mat-error>
                             <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
                             <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address </mat-error>
@@ -89,8 +88,8 @@
                             </button>
 
                             <div class="account">Already have an account !
-                                <a [routerLink]="['/Learner/login']" routerLinkActive="active"><strong class="col">Sign
-                                        in</strong></a>
+                                <a [routerLink]="['/Learner/login']" routerLinkActive="active"><span class="col">Sign
+                                        in</span></a>
                             </div>
                         </div>
                     <!-- </div> -->
