@@ -217,6 +217,7 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+      if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
       const startDate = new Date(this.assignmentContent.courseStartDate);
       const endDate = new Date(this.assignmentContent.courseEndDate);
       this.courseStartDate = moment(startDate).format('DD-MM-YYYY');
@@ -232,10 +233,12 @@ export class CoursedetailsComponent implements OnInit {
     this.courseEndDate) {
       this.assignmentContent.enableUpload = false;
     }
+  }
       this.assignmentContent.coursedetails.forEach(element => {
         element.moduledetails.forEach(moduleData => {
           moduleData.resourse.files.forEach(fileData => {
-            if (moment().format('DD-MM-YYYY HH:MM') >= moment(fileData.startDate).format('DD-MM-YYYY HH:MM')) {
+            const startDate = new Date(fileData.startDate);
+            if (moment().format('DD-MM-YYYY HH:MM') >= moment(startDate).format('DD-MM-YYYY HH:MM')) {
               fileData.enableView = true;
             } else {
               fileData.enableView = false;
@@ -256,7 +259,8 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    if (moment().format('DD-MM-YYYY HH:MM') > moment(endDate).format('DD-MM-YYYY HH:MM')) {
+    const enddate = new Date(endDate);
+    if (moment().format('DD-MM-YYYY HH:MM') > moment(enddate).format('DD-MM-YYYY HH:MM')) {
       submitStatus = 'late';
     } else {
       submitStatus = 'ontime';
@@ -565,17 +569,18 @@ export class CoursedetailsComponent implements OnInit {
     this.searchThread(e);
   }
 
-  closeSearch() {this.searchthreadname = false;
-    if (this.showCommentThread) {
+  closeSearch() {
+  this.searchthreadname = false;
+  if (this.showCommentThread) {
       this.topicDiscussionData = this.topicDiscussionData1;
       this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
     } else {
       this.discussionData = this.discussionData1;
       this.discussionData.topics = this.discussionData1.topics1;
     }
-    this.filterValue = null;
-    this.cdr.detectChanges();
-    
+  this.filterValue = null;
+  this.cdr.detectChanges();
+
   }
 
   searchThread(filterValue: string) {
