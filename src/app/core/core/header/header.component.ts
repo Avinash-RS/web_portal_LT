@@ -16,11 +16,13 @@ export class HeaderComponent implements OnInit {
   role: string;
   fullName: string;
   initials: any;
+  orgDetails: any;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
     private router: Router, private gs: GlobalServiceService,) { }
 
   ngOnInit() {
+    this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userDetailes = this.gs.checkLogout();
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
