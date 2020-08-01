@@ -18,7 +18,7 @@
     width: 30px;
     font-size: 22px;
     margin-top: 27px;
-    background: $color-blue;
+    background: $lxp-theme-green;
     height: 30px;
     border-radius: 50px;
     color: $color-white;
@@ -45,13 +45,13 @@
 }
 
 .vertical {
-    border-left: 44px solid $bule2;
+    border-left: 44px solid $lxp-theme-green;
     height: 3px;
     margin-top: -15px;
 }
 
 .grey{
-    color: $bule2 !important;
+    color: $lxp-theme-green !important;
 }
 
 .blue{
@@ -59,7 +59,7 @@
 }
 
 .tickIcon {
-    color: $bule2;
+    color: $lxp-theme-green;
     font-size: 22px;
     width: 20px;
 }
@@ -153,15 +153,19 @@ li {
 }
 
 .head-h1 {
-    font-size: 18px;
-    color: $color-blue;
+    font-size: 20px;
+    color: $lxp-theme-green;
     margin-top: 10px;
+    font-weight: 500;
+
 }
 
 .head-h2 {
-    font-size: 18px;
-    color: $color-blue;
+    font-size: 20px;
+    color: $lxp-theme-green;
     margin-top: 10px;
+    font-weight: 500;
+
 }
 
 .arrow {
@@ -234,7 +238,7 @@ li {
     border-radius: 50%;
     margin-top: -17px;
     position: absolute;
-    border: 1px solid $bule2;
+    border: 1px solid $lxp-theme-green;
 }
 
 .authorname {
@@ -304,7 +308,7 @@ li {
 
 :host ::ng-deep .mat-expansion-panel-header {
     padding: 0 11px !important;
-    height: 69px !important;
+    height: 45px !important;
     // margin-top: 2px;
 }
 
@@ -334,7 +338,7 @@ li {
     align-items: center;
     width: 100%;
     height: 700px;
-    border: 1px solid $color-border;
+    // border: 1px solid $color-border;
 }
 
 :host ::ng-deep .mat-tab-body-content {
@@ -410,13 +414,28 @@ li {
 
 
 
+:host ::ng-deep  .mat-tab-label .mat-tab-label-content {
+    font-size: 14px !important;
+    // font-weight: 500 !important;
+    // color: $label !important;
+
+}
+
+:host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
+    color: $color-blank !important;
+}
+
+:host /deep/ .mat-ink-bar {
+    height: 4px !important;
+    background-color: $lxp-theme-green !important;
+}
 
 /* For Desktop */
 @media only screen and (min-width: 620px) {
 
     :host /deep/ .mat-ink-bar {
         height: 4px !important;
-        background-color: $bule2 !important;
+        background-color:$lxp-theme-green !important;
     }
 
     .moduletime {
@@ -513,7 +532,7 @@ li {
 }
 
 .bottom-border {
-    border-bottom: 3px solid $bule2;
+    border-bottom: 3px solid $lxp-theme-green;
     border-right: inset;
     border-left: inset;
     border-left-color: transparent;
@@ -554,7 +573,8 @@ li {
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
-    font-size: 18px !important;
+    font-size: 14px !important;
+    color: $label;
 }
 
 :host ::ng-deep.footericon {
@@ -605,7 +625,7 @@ li {
 
 .send_btn {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #0066B7;
+    -webkit-text-stroke-color: $lxp-theme-green;;
     -webkit-text-fill-color: transparent;
     font-size: 30px;
 }
@@ -710,7 +730,7 @@ li {
 
 
 .bg-blue {
-    background-color: $color-landing-blue;
+    background-color:$lxp-theme-green;;
 }
 
 .dialogButtons {
@@ -731,7 +751,7 @@ li {
 .new_Thread {
     color: $color-white !important;
     border-radius: none !important;
-    background-color: $color-landing-blue;
+    background-color: $lxp-theme-green;
     border: none;
     margin-right: 10px !important;
     float: right !important;
@@ -747,7 +767,7 @@ li {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: $color-landing-blue;
+    background-color: $lxp-theme-green;
     cursor: inherit !important;
     color: $color-white;
     font-size: 18px;
@@ -756,7 +776,7 @@ li {
 }
 
 .color-blue {
-    color: $color-landing-blue;
+    color: $lxp-theme-green;
 }
 
 .black_border {
@@ -781,7 +801,7 @@ li {
     padding-right: 25px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: $profile-t-grey;
-    -webkit-text-fill-color: $color-landing-blue;
+    -webkit-text-fill-color:$lxp-theme-green;
     font-size: 20px;
 }
 
@@ -874,7 +894,7 @@ li {
     .new_Thread {
         color: white !important;
         border-radius: none !important;
-        background-color: $color-landing-blue;
+        background-color: $lxp-theme-green;
         border: none;
         margin-right: 10px !important;
         float: left !important

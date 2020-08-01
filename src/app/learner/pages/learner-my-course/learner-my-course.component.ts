@@ -52,8 +52,9 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
   ngOnInit() {
 
+    var dateValue = new Date().toISOString();
     // tslint:disable-next-line:no-shadowed-variable
-    this.learnerService.getData(this.userDetailes.user_id, '2020-07-31T08:01:00.000Z').subscribe((data: any) => {
+    this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       // tslint:disable-next-line:no-string-literal
       this.results['message'].forEach((element, index) => {
@@ -68,6 +69,7 @@ export class LearnerMyCourseComponent implements OnInit {
       console.log('there was an error sending the query', error);
     });
     console.log('data retreived', data);
+
 
   }
 
@@ -97,11 +99,11 @@ export class LearnerMyCourseComponent implements OnInit {
             }
           }
         });
-        // this.enrolledCourses.forEach(element => {
-        //   if (element.coursePlayerStatus.course_percentage) {
-        //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
-        //   }
-        // });
+        this.enrolledCourses.forEach(element => {
+          if (element.coursePlayerStatus.course_percentage) {
+            element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+          }
+        });
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||

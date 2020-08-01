@@ -50,13 +50,13 @@
           </div> -->
 
 
-          <button *ngIf="otpFeature == 'false'" class="btn" [disabled]="!otpForm.valid"
+          <button *ngIf="otpFeature == 'false'" mat-raised-button class="btn" [disabled]="!otpForm.valid"
             (click)="otpverification()">NEXT</button>
           <!-- // sms getway integation pending  -->
           <div *ngIf="otpFeature == 'true'">
             <div *ngIf="isenable"><br>
               <p class="head">OTP will be sent to this number</p>
-              <button class="btn" [disabled]="!otpForm.valid" (click)="otpverification()">VERIFY</button>
+              <button mat-raised-button class="btn" [disabled]="!otpForm.valid" (click)="otpverification()">VERIFY</button>
             </div>
 
             <div *ngIf="showotp"><br>
@@ -71,7 +71,7 @@
             </div>
 
             <div *ngIf="showotp">
-              <button class="btn" [disabled]="verifybutton" (click)="otpverify()">VERIFY</button>
+              <button class="btn" mat-raised-button [disabled]="verifybutton" (click)="otpverify()">VERIFY</button>
             </div><br>
             <div class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b
                 (click)="Resendcode()"><br>

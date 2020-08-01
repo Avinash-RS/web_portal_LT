@@ -7,10 +7,10 @@
       <!-- [label]="'ON-GOING ('+incomplete?.length + ')'" -->
       <mat-tab [disabled]='incomplete?.length === 0'>
         <ng-template matTabLabel>
-          <span color="primary" class="color_black2" matBadge="{{incomplete?.length}}"
+          <span   matBadge="{{incomplete?.length}}"
             matBadgeOverlap="false">ON-GOING</span>
         </ng-template>
-        <div class="container" *ngFor="let course of incomplete ;let j=index" [@EnterLeave]="'flyIn'">
+        <div class="container" *ngFor="let course of incomplete ;let j=index">
           <mat-card class="coursebg">
             <div class="row width_100 no_margin">
               <div class=" display_flex pointer no_pl" (click)="gotoDesc(course)">
@@ -280,7 +280,7 @@
     <div class="f_size_22 pad-7 m-l-13 animated animatedFadeInUp fadeInUp">Today's Sessions</div>
     <hr style=" margin-left: 21px;">
 
-    <mat-card class="coursebg width_100" *ngIf="results?.message?.length == 0">
+    <mat-card class="coursebg width_80 m-l-5" *ngIf="results?.message?.length == 0">
       <div class="row width_100 no_margin">
         <div class="container-fluid">
           <div class="row">
@@ -298,13 +298,13 @@
       <div class="mainCard animated animatedFadeInUp fadeInUp" *ngFor="let result of results?.message">
         <mat-card class="session-card">
           <div class="session-sub-card"
-            [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
+          >
             <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}}
               </span>
               <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> |
                 On-going</span>
             </div>
-            <p class="coursenameT"> {{ result?.activity_details.coursename }}</p>
+            <p class="coursenameT"   [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }"> {{ result?.activity_details.coursename }}</p>
             <h5 class="m-l-4" > <span class="f_wt_500 f_size_14">Type </span>: <span
                 class="lxp-text f_size_14 f_wt_400">{{ result?.activity_details.activitytype }} </span>
               <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>

@@ -1,7 +1,6 @@
 @import "variable";
 #insidecard.uk-card-default {
-    background: #fff;
-    color: #666;
+    background: $color-white;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     border-left: 8px solid #b5acac;
@@ -25,16 +24,120 @@ div.scrollcard {
 
 .color-grey {
     border-left: 8px solid #b5acac !important;
-    color: #b5acac !important;
 }
-
+.errorbox{
+    border-left: 7px solid;
+    height: 55px;
+    background: #ffecb3;
+    border-left-color: #ffc107;
+    color: rgba(0,0,0,.87);
+}
+.f_size_24{
+    font-size: 24px;
+}
+.iconevent{
+    padding: 9px;
+    font-size: 37px;
+    color:$lxp-icon;
+}
 .color-blue {
-    border-left: 8px solid $lxp-theme-green !important;
-    color: $lxp-theme-green !important;
+    border-left: 5px solid $color-small-blue !important;
+    color: $color-blank!important;
 }
 
 .color-white {
     color: #b5acac;
-    background: white !important;
+    background: $color-white !important;
     border-left: 0px !important
 }
+
+::ng-deep .learner-calender .theme-blue .bs-datepicker-head {
+    background-color: $lxp-theme-green;
+}
+
+::ng-deep .learner-calender .theme-blue .bs-datepicker-body table td span.selected {
+    background-color: $lxp-theme-green !important;
+}
+
+.blue_clr {
+    background-color: $lxp-theme-green;
+    color: $color-white;
+}
+
+.cap::first-letter {
+    text-transform: capitalize !important;
+}
+
+.m-b-10 {
+    margin-bottom: 12px;
+}
+
+.statBtn {
+    border: 1px solid $color-small-blue;
+}
+
+.mat-stroked-button {
+    border: 1px solid currentColor;
+    padding: 0px 7px;
+    line-height: 25px;
+}
+
+.uk-card-default {
+    color: $color-blank !important;
+}
+.m-l-4{
+    margin-left: 4%;
+  }
+  hr {
+  
+    margin-bottom: 0.5rem;
+  }
+.no_pl {
+    padding-left: 0 !important;
+  }
+  .coursenameT{
+    // border-left: 5px solid #f3cc58;
+    padding-left: 10px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    font-weight: 600;
+    height: 40px;
+    padding-top: 9px;
+    font-size: 18px;
+  
+  }
+  .person{
+    position: absolute;
+      margin-left: 10px;
+      color: $lxp-icon;
+      font-size: 18px;
+  }
+  .aligned-icon{
+    position: absolute;
+    color: $lxp-text;
+    margin-left: 32px;
+  }
+  .color_black2 {
+      color: $label;
+  }
+  
+  .space-10{
+    margin-top: 10px;
+  }
+.mainCard{
+    background: #f9f9f9;
+    margin-left: 4%;
+  }
+  .session-card{
+    border-radius: 0px;
+    box-shadow: none;
+      height: auto;
+    margin-bottom: 0%;
+    background: transparent !important;
+  }
+  .session-sub-card{
+          width: 90%;
+          border-bottom: 1px solid #dedede;
+          // margin-left: 3%;
+          // padding-left: 14px;
+  }

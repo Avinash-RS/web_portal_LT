@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import * as moment from 'moment';
+import { Component, OnInit } from "@angular/core";
+import { LearnerServicesService } from "../../services/learner-services.service";
+import * as moment from "moment";
+import { Router } from '@angular/router';
 @Component({
-  selector: 'app-learner-calendar',
-  templateUrl: './learner-calendar.component.html',
-  styleUrls: ['./learner-calendar.component.scss']
+  selector: "app-learner-calendar",
+  templateUrl: "./learner-calendar.component.html",
+  styleUrls: ["./learner-calendar.component.scss"]
 })
 export class LearnerCalendarComponent implements OnInit {
   public UserDetails: any;
@@ -24,15 +25,15 @@ export class LearnerCalendarComponent implements OnInit {
   selectedToday;
   bsInlineValue = new Date();
 
-  constructor(private service: LearnerServicesService) {}
+  constructor(private service: LearnerServicesService,private router: Router) {}
 
   ngOnInit() {
     this.UserDetails =
-      JSON.parse(localStorage.getItem('UserDetails')) ||
-      JSON.parse(sessionStorage.getItem('UserDetails')) ||
+      JSON.parse(localStorage.getItem("UserDetails")) ||
+      JSON.parse(sessionStorage.getItem("UserDetails")) ||
       null;
 
-    this.tokenDetails = localStorage.getItem('token');
+    this.tokenDetails = localStorage.getItem("token");
 
     this.user_id = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;
@@ -54,13 +55,12 @@ export class LearnerCalendarComponent implements OnInit {
         event.getUTCSeconds()
       )
     ).toISOString();
-
-    console.log(this.selectedDate);
     this.getLearnerActivity(this.selectedDate);
   }
   getLearnerActivity(selectedDate) {
-    const selectedDatediff = new Date(selectedDate);
-    if (this.bsInlineValue.getDate() === selectedDatediff.getDate()) {
+    var selectedDatediff = new Date(selectedDate);
+    var today = this.bsInlineValue.getDate() - selectedDatediff.getDate()
+    if (today == 0) {
       this.selectedToday = true;
     } else {
       this.selectedToday = false;
@@ -73,10 +73,10 @@ export class LearnerCalendarComponent implements OnInit {
             res.data?.get_read_learner_activity?.message;
           if (this.selectedToday) {
             this.learnerActivityList.forEach((element, index) => {
-              if (index === 0) {
-                element.activity_details.ongoing = 'true';
+              if (index == 0) {
+                element.activity_details.ongoing = "true";
               } else {
-                element.activity_details.ongoing = 'false';
+                element.activity_details.ongoing = "false";
               }
             });
           }
@@ -88,5 +88,19 @@ export class LearnerCalendarComponent implements OnInit {
       },
       err => {}
     );
+  }
+  launchAssignment(value){
+    if(value.activity_details.activitytype == "Assignment"){
+      const detail = {
+        id: value.activity_details.courseid,
+        wishlist: false,
+        wishlist_id: false,
+        enrollment_status: false
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    }
+  }
+  launchActivity(value){    
+      window.open(value.activity_details.link)
   }
 }

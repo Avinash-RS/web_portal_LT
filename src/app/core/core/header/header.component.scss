@@ -80,29 +80,29 @@
 
 }
 
-.btn{
-    width: 27%;
-    display: inline-grid;
-    // border: none !important;
-    font-size: 12px;
+.btn1{
+    position: relative;
+    font-size: 14px;
+    border: none;
+    height: 52px;
+    color: $color-border;
     background: $lxp-theme-green !important;
     cursor: pointer;
   }
-
-  .btn:focus :hover {
-    // border-bottom: 4px solid $color-white; 
+  :host ::ng-deep .btn1:focus {
+    border-bottom: 4px solid $color-white !important; 
     border-right: none !important;
+    outline: 0 !important;
     border-left: none !important;
-    color:$color-white;
   }
-  :host ::ng-deep .btn.focus, .btn:focus .btn:hover{
-    outline: 0;
-    // border-bottom: 4px solid $color-white; 
-    border-right: none !important;
-    border-left: none !important;
-    box-shadow: none !important;
-    color:$color-white
+.btn1:hover{
+color:  $color-white
 }
+:host ::ng-deep button:active {
+    outline: none !important;
+    border: none;
+    }
+
   .tab{
     text-align: center; 
     width: 100%;
@@ -114,19 +114,9 @@
     font-style: oblique;
   }
   .headicon{
-    font-size: 22px !important;
-    line-height: 1 !important;
-    margin-left: 35%;
+    font-size: 24px !important;
+    width: 30px !important;
+    position: relative;
+    top: 7px;
   }
 
-//   .material-icons {
-//     font-size: inherit;
-//     height: inherit;
-//     line-height: 1 !important;
-//     vertical-align: top;
-//     margin-left: 36%;
-//     font-size: 24px !important;
-//     direction: ltr;
-//     /* width: inherit; */
-
-// }

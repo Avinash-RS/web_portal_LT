@@ -222,6 +222,12 @@ font-size: 16px;
     color: #5c6873;
     font-family: "Roboto Condensed", sans-serif !important;
 }
+:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0em 0 !important;
+}
+:host ::ng-deep.mat-form-field-wrapper {
+  padding-bottom: .5em;
+}
 // mobile screen
 @media (max-width: 480px) {
   .wrap-reg {

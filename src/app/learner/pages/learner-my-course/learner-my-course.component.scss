@@ -183,12 +183,15 @@
 .m-l-1 {
   margin-top: 1%;
 }
-
+.color-blue {
+  border-left: 5px solid $color-small-blue !important;
+  color: $color-blank!important;
+}
 .no_pl {
   padding-left: 0 !important;
 }
 .coursenameT{
-  border-left: 5px solid #f3cc58;
+  // border-left: 5px solid #f3cc58;
   padding-left: 10px;
   margin-bottom: 2px;
   border-radius: 3px;
@@ -249,10 +252,10 @@ hr {
     background-color: $lxp-theme-green !important;
 }
 
-// :host ::ng-deep .mat-badge-content {
-//   color: $color-white;
-//   background: $lxp-theme-green;
-// }
+:host ::ng-deep .mat-badge-content {
+  color: $color-white;
+  background: $lxp-theme-green;
+}
 
 .mat-progress-bar {
   height: 8px;
