@@ -71,7 +71,8 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('remember_me', 'false');
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               sessionStorage.setItem('role', 'learner');
-              localStorage.setItem('token', loginresult.data.login.message.token);
+              sessionStorage.setItem('token', loginresult.data.login.message.token);
+              // localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               // if false, then need to update profile
               if (loginresult.data.login.message.is_profile_updated) {

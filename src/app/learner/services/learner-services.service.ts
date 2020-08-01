@@ -36,7 +36,8 @@ import {
   ViewSingleTopicDiscussionData,
   ViewAllThreadData,
   // get_read_learner_activity,
-  getReadLeanerActivity
+  getReadLeanerActivity,
+  get_organization_by_id
 } from "./operations/learner_query";
 
 import {
@@ -698,6 +699,15 @@ export class LearnerServicesService {
       variables: {
         userid,
         date
+      }
+    });
+  }
+
+  get_organization_by_id(organization_id){
+    return this.Apollo.query({
+      query: get_organization_by_id,
+      variables: {
+        organization_id
       }
     });
   }
