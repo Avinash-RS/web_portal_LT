@@ -91,6 +91,11 @@ export class AppComponent {
 
   getorganizationbyiddetails() {
     const organizationid = environment.orgId;
+    if (organizationid === '') {
+      // localStorage.clear();
+      localStorage.removeItem('organizationDetails');
+    }
+
     this.Lservice
       .get_organization_by_id(organizationid)
       .subscribe((result: any) => {
