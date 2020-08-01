@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class AppComponent {
               private activatedRoute: ActivatedRoute,
               private APIService: WcaService,
               private titleService: Title,
-              private commonService: CommonServicesService
+              private commonService: CommonServicesService,
+              public Lservice: LearnerServicesService,
 
   ) {
     this.getIPAddress();
@@ -83,5 +85,14 @@ export class AppComponent {
 
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
+  }
+
+  getorganizationbyiddetails() {
+    const organizationid = 'dwujfebmw';
+    this.Lservice
+      .get_organization_by_id(organizationid)
+      .subscribe((result: any) => {
+        console.log(result, 'resultdata')
+       });
   }
 }
