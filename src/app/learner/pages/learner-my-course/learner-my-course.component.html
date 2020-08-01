@@ -277,7 +277,7 @@
         <br> -->
   </div>
   <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
-    <div class="f_size_22 pad-7 m-l-13">Today's Sessions</div>
+    <div class="f_size_22 pad-7 m-l-13 animated animatedFadeInUp fadeInUp">Today's Sessions</div>
     <hr style=" margin-left: 21px;">
 
     <mat-card class="coursebg width_100" *ngIf="results?.message?.length == 0">
@@ -295,7 +295,7 @@
       </div>
     </mat-card>
     <div *ngIf="results?.message?.length > 0">
-      <div class="mainCard" *ngFor="let result of results?.message">
+      <div class="mainCard animated animatedFadeInUp fadeInUp" *ngFor="let result of results?.message">
         <mat-card class="session-card">
           <div class="session-sub-card"
             [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
