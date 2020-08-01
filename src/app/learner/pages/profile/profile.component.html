@@ -1,12 +1,12 @@
 <app-header></app-header>
-<nav aria-label="breadcrumb">
+<!-- <nav aria-label="breadcrumb">
   <ol class="breadcrumb" style="margin-bottom: 0 !important;">
     <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
   </ol>
-</nav>
+</nav> -->
 
-<div class="profile">
+<div class="profile animated animatedFadeInUp fadeInUp">
 
 
   <div class="bg-img">
@@ -488,8 +488,8 @@
         <br> <br>
         <!-- //.Button -Submit -->
         <div class="row" *ngIf="!cannotEdit">
-          <button mat-flat-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
-            (click)="updateProfile()">Save</button>
+          <button mat-raised-button class="submit f_size_17 color_white f_wt_400" [disabled]="profileForm.invalid"
+            (click)="updateProfile()">SAVE</button>
         </div>
         <br> <br>
 
@@ -522,13 +522,13 @@
                 <div *ngIf="c.mailid.errors.pattern">Email Id is invalid</div>
               </div>
             </div><br><br>
-            <button class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
+            <button   class="popupbtns" [disabled]="!mailForm.valid" (click)="updateEmail(mailForm.valid)">
               Submit
             </button>
           </form><br>
         </mat-dialog-content>
         <mat-dialog-actions class="center_align">
-          <div class="account" *ngIf="resendLabel">Don't receive link?<button
+          <div class="account" *ngIf="resendLabel">Don't receive link?<button mat-raised-button
               class="no_border f_wt_500 background_trans color_blue" (click)="updateEmail(mailForm.valid)">Resend
               link</button></div>
         </mat-dialog-actions>
@@ -566,7 +566,7 @@
               <br><br>
             </div>
             <div *ngIf="showotp">
-              <button class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
+              <button  class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">Verify</button>
             </div><br>
             <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
                 class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">Resend

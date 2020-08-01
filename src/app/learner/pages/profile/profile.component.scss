@@ -260,16 +260,18 @@
 
   /deep/ &.mat-checkbox-checked .mat-checkbox-background {
     background-color: white;
-    border: 1px solid #004072;
+    border: 1px solid $lxp-theme-green ;
     border-radius: 100px !important;
   }
 
   /deep/ .mat-checkbox-checkmark-path {
-    stroke: #004072 !important;
+    stroke: $lxp-theme-green  !important;
     border-radius: 100px !important;
   }
 }
-
+/deep/ .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
+  background: $lxp-theme-green !important;
+}
 
 
 .container120 {
@@ -581,9 +583,10 @@ div.account {
 
 .popupbtns {
   text-align: center;
-  background-color: $color-blue;
+  background-color: $lxp-theme-green;
   color: $color-white;
   width: 30%;
+  border-radius: 50px !important;
   margin: auto;
   display: block;
   margin-bottom: 5%;
@@ -598,6 +601,10 @@ div.account {
   // margin: auto;
   height: 25px;
   border-radius: 15px;
+}
+
+:host ::ng-deep .mat-progress-bar-fill::after {
+  background-color: $lxp-theme-green !important;
 }
 
 .m-t-50 {
@@ -629,10 +636,13 @@ div.account {
 
 .submit {
   width: 25%;
-  background-color: $color-blue;
+  background-color: $lxp-theme-green;
   margin: auto;
   height: 45px;
   letter-spacing: 1px;
+  border-radius: 50px !important;
+  font-size: 16px;
+
 }
 
 .errspan {
