@@ -737,7 +737,8 @@ li {
 //Kani CSS starts here 
 .thread-header {
     // background-color: #C9E4F35C;
-    background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
+    // background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
+    background-image: linear-gradient(#c1dceb, #c9e4f35c);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
   }
