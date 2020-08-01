@@ -6,11 +6,11 @@
 
 <div class="row">
     <div class="col-12">
-        <h1 class="nameh1">{{course?.course_name | titlecase }}</h1>
+        <h1 class="nameh1 animated animatedFadeInUp fadeInUp">{{course?.course_name | titlecase }}</h1>
     </div>
 </div>
 
-<div class="container007">
+<div class="container007 animated animatedFadeInUp fadeInUp">
     <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
         <mat-drawer #drawer class="drawer" mode="side" opened="true">
             <mat-toolbar class="header">
@@ -98,7 +98,7 @@
             <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
 
             <div class="">
-                <mat-tab-group>
+                <mat-tab-group animationDuration="1000ms">
                     <mat-tab label="About the course">
                         <h3 class="head-h1">Course description</h3>
                         <div class="vertical"></div>

@@ -1,3 +1,4 @@
+@import "variable";
 #insidecard.uk-card-default {
     background: #fff;
     color: #666;
@@ -28,8 +29,8 @@ div.scrollcard {
 }
 
 .color-blue {
-    border-left: 8px solid #6cabdb !important;
-    color: #509ad4 !important;
+    border-left: 8px solid $lxp-theme-green !important;
+    color: $lxp-theme-green !important;
 }
 
 .color-white {

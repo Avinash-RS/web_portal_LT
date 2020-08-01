@@ -4,7 +4,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-learner-calendar',
   templateUrl: './learner-calendar.component.html',
-  styleUrls: ['./learner-calendar.component.css']
+  styleUrls: ['./learner-calendar.component.scss']
 })
 export class LearnerCalendarComponent implements OnInit {
   public UserDetails: any;

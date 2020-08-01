@@ -8,7 +8,7 @@
                         <bs-datepicker-inline [bsConfig]="{containerClass: 'theme-blue' }" (bsValueChange)="getDateChangedValue($event)" [bsValue]="bsInlineValue"></bs-datepicker-inline>
                     </div>
                     <div *ngIf="selectedToday && learnerActivityList.length != 0" style="font-size: 16px; line-height: 1.5em;">
-                        <i class="fa fa-circle" style="color:#509ad4" aria-hidden="true"></i>
+                        <i class="fa fa-circle color_lxp_green"  aria-hidden="true"></i>
                         <span class="sr-only">Example of circle-thin</span><span class="pl-2">On-going Courses</span></div>
                 </div>
                 <br />
@@ -29,7 +29,7 @@
                 <div>
                     <ng-container *ngFor="let data of learnerActivityList">
                         <div id="insidecard" class="uk-card uk-card-default uk-card-body" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }">
-                            <p style="color:#509ad4">
+                            <p class="color_lxp_green" >
                                 {{ data.activity_details.startdate | date:'shortTime'}} - {{ data.activity_details.enddate | date:'shortTime'}} <span *ngIf="data.activity_details.ongoing == 'true' "> | On-going</span>
                                 <i class="fa fa-circle float-right color-white" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }" aria-hidden="true"></i>
                             </p>
