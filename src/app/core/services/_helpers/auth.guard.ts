@@ -18,19 +18,20 @@ export class AuthGuard implements CanActivate {
   // Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
-    const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-    const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
+    // const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
     // console.log('role-----',role)
     // for learner ------> 1
     // debugger
     const adminUrl = state.url.includes('Admin');
     const learnerUrl = state.url.includes('Learner');
-    if (userDetailes != null && role === 'learner') {
+    if (userDetailes != null) {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
-      if (state.url === '/Learner/login' || state.url === '/Learner/register' ||
-        state.url === '/' || state.url === '/Learner' || adminUrl) {
+      if (state.url === '/Learner' || state.url === '/Learner/login' || state.url === '/Learner/register'
+        || state.url === '/Learner/otp' || state.url === '/Learner/recover'
+        || state.url === '/Learner/password' || state.url === '/Learner/recoverotp'
+        || state.url === '/Learner/resetpassword' || state.url === '/Learner/terms' || state.url === '/' || adminUrl) {
         this.router.navigate(['/Learner/home']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
@@ -47,26 +48,16 @@ export class AuthGuard implements CanActivate {
         return true;
       }
       // end of url navigations for logged in learner ------> 1
-    } else if ((userDetailes == null || adminDetails == null) && role == null) { // user detail is not present in local storage
-      if (state.url === '/Learner' || state.url === '/Learner/login' || state.url === '/Admin/login'
-        || state.url === '/Learner/register') {
+    } else if ((userDetailes == null)) { // user detail is not present in local storage
+      if (state.url === '/Learner' || state.url === '/Learner/login' || state.url === '/Learner/register'
+        || state.url === '/Learner/otp' || state.url === '/Learner/recover'
+        || state.url === '/Learner/password' || state.url === '/Learner/recoverotp'
+        || state.url === '/Learner/resetpassword' || state.url === '/Learner/terms' || state.url === '/') {
         return true;
       } else {
         this.router.navigate(['/Learner']);
         return false;
       }
-    }
-    // if admin logged in
-    if (role === 'admin' && adminDetails) {
-      if (adminUrl && !learnerUrl && state.url !== '/Admin/login') {
-        return true;
-      } else {
-        this.router.navigate(['/Admin/auth/userManagement']);
-      }
-    } else if (role === 'admin' && !adminDetails) {
-      // console.log('role--3333---',role)
-      localStorage.clear();
-
     } else {
       // console.log('role--33334444---',role)
       this.router.navigate(['/Learner']);
