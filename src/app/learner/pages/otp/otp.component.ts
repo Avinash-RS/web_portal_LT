@@ -83,7 +83,7 @@ export class OtpComponent implements OnInit {
     this.resendLabel = true;
     this.get_user_detail(this.email);
     this.loader.show();
-    this.service.submit_otp(this.userid, this.currentUser._id, this.otpForm.value.mobile, this.email).subscribe(data => {
+    this.service.submit_otp(this.userid, this.currentUser._id, this.otpForm.value.mobile, this.email).subscribe((data: any) => {
       if (this.otpFeature === 'true') {
         if (data.data.user_registration_mobile_otp_send.success === 'true') {
           this.loader.hide();
@@ -118,7 +118,7 @@ export class OtpComponent implements OnInit {
     this.otp = otp;
   }
   otpverify() {
-    this.service.user_registration_verify(this.otp, this.otpForm.value.mobile).subscribe(data => {
+    this.service.user_registration_verify(this.otp, this.otpForm.value.mobile).subscribe((data: any) => {
       if (data.data.user_registration_mobile_otp_verify.success === 'true') {
         this.toastr.success(data.data.user_registration_mobile_otp_verify.message, null);
         this.showotp = true;
@@ -135,7 +135,7 @@ export class OtpComponent implements OnInit {
   }
   Resendcode() {
     this.loader.show();
-    this.service.submit_otp(this.userid, 'this.currentUser._id', this.otpForm.value.mobile, this.email).subscribe(data => {
+    this.service.submit_otp(this.userid, 'this.currentUser._id', this.otpForm.value.mobile, this.email).subscribe((data: any) => {
       this.otp = '';
       if (data.data.user_registration_mobile_otp_send.success === 'true') {
         this.loader.hide();
@@ -165,7 +165,7 @@ export class OtpComponent implements OnInit {
   }
   get_user_detail(email) {
     try {
-      this.service.get_user_detail(email).subscribe(data => {
+      this.service.get_user_detail(email).subscribe((data: any) => {
         this.useridData = data.data;
         this.userid = this.useridData.get_user_detail.message[0].user_id;
         localStorage.setItem('key', this.userid);

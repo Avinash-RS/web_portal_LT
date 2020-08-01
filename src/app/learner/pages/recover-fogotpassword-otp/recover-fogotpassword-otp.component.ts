@@ -58,7 +58,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   }
   VerifyOTP() {
     this.loader.show();
-    this.service.user_registration_verify(this.otp, this.mobile).subscribe(data => {
+    this.service.user_registration_verify(this.otp, this.mobile).subscribe((data: any) => {
       if (data.data.user_registration_mobile_otp_verify.success === 'true') {
         this.loader.hide();
         Swal.fire(data.data.user_registration_mobile_otp_verify.message, null);
@@ -88,7 +88,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
 
   resendcode() {
     this.loader.show();
-    this.service.submit_otp(this.details.user_id, 'this.details._id', this.mobile, this.details.data[0].value).subscribe(data => {
+    this.service.submit_otp(this.details.user_id, 'this.details._id', this.mobile, this.details.data[0].value).subscribe((data: any) => {
       clearTimeout(this.interval);
       this.timer();
       this.loader.hide();

@@ -79,7 +79,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     this.type = 'username';
     this.loader.show();
     this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, this.forgotUsername.value.email)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         if (data.data.get_forgot_username_mobile_email.success === 'true') {
           this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
           this.router.navigate(['Learner/login']);
@@ -95,7 +95,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   getUserDetails() {
     this.loader.show();
     this.recoveryTypes = [];
-    this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe(data => {
+    this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe((data: any) => {
       if (data.data.get_forgot_password_byusername.success === 'true') {
         this.loader.hide();
         this.isnextBtnEnable = false;
@@ -128,7 +128,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     if (recovertype?.type === 'mobile') {
       this.loader.show();
       this.service.submit_otp(this.currentUser, 'this.currentUser._id', recovertype.value, this.forgotUsername.value.email)
-        .subscribe(data => {
+        .subscribe((data: any) => {
           if (data.data.user_registration_mobile_otp_send.success === 'true') {
             this.loader.hide();
             Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
@@ -138,7 +138,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     } else {
       this.type = 'password';
       this.service.forgotUsernameandPassword(this.type, recovertype.type, this.forgotUsername.value.mobile, recovertype.value)
-        .subscribe(data => {
+        .subscribe((data: any) => {
           this.loader.show();
           if (data.data.get_forgot_username_mobile_email.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
