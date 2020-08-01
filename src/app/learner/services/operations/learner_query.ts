@@ -1139,7 +1139,7 @@ export const getReadLeanerActivity = gql`
 
 
 export const get_organization_by_id = gql`
-  query get_organization_by_id($organization_id: String) {
+  query get_organization_by_id($organization_id: String!) {
     get_organization_by_id(organization_id: $organization_id) {
       success
       error_msg
