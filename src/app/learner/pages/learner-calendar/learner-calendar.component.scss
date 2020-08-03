@@ -6,6 +6,8 @@
     border-left: 8px solid #b5acac;
     padding: 10px;
     margin-bottom: 20px;
+}.f_size_22{
+    font-size: 22px;
 }
 
 div.scrollcard {
@@ -22,8 +24,17 @@ div.scrollcard {
     border: 1px solid #e9edf0;
 }
 
+::ng-deep .bs-datepicker-head {
+ 
+    text-align: center !important;
+}
+.myC-head{
+    margin-left: 2% !important;
+    margin-top: 1%;
+    margin-bottom: -2%;
+  }
 .color-grey {
-    border-left: 8px solid #b5acac !important;
+    border-left: 3px solid #b5acac !important;
 }
 .errorbox{
     border-left: 7px solid;
@@ -39,13 +50,14 @@ div.scrollcard {
     display: inline-flex;
     font-size: 18px;
 }
+
 .iconevent{
     padding: 9px;
     font-size: 37px;
     color:$lxp-icon;
 }
 .color-blue {
-    border-left: 5px solid $color-small-blue !important;
+    border-left: 3px solid $color-small-blue !important;
     color: $color-blank!important;
 }
 
@@ -54,6 +66,7 @@ div.scrollcard {
     background: $color-white !important;
     border-left: 0px !important
 }
+
 
 ::ng-deep .learner-calender .theme-blue .bs-datepicker-head {
     background-color: $lxp-theme-green;

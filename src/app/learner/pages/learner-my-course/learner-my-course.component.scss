@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: $lxp-theme-green;
 }
 
 .m-t-3 {
@@ -18,6 +19,9 @@
 
 .m-b-10 {
     margin-bottom: 12px;
+}
+.m-l-2{
+  margin-top: 2%;
 }
 
 @media screen and (min-width: 270px) and (max-width: 795px) {
@@ -69,8 +73,21 @@
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
     font-weight: 500 !important;
+    // margin-right: 58%;
     // color: $label !important;
 
+}
+
+:host ::ng-deep.mat-tab-label {
+  height: 48px;
+  padding: 0px 11px !important;
+  // min-width: 130px;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
 }
 
 :host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
@@ -78,15 +95,27 @@
 }
 
 :host /deep/ .mat-ink-bar {
-    height: 4px !important;
+    height: 2px !important;
     background-color: $lxp-theme-green !important;
+    // left: 8px !important;
+    // width: 90px !important;
 }
 
 .bodybg {
-    width: 100%;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px;
     min-height: 100vh;
     display: flex;
     background-color: $color-white;
+}
+
+:host ::ng-deep.container {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 :host /deep/ .mat-tab-body {
@@ -109,6 +138,10 @@
     border-bottom: 1px solid #bebebead;
 
 }
+.hrStyle{
+  margin-left: 21px;
+  width: 90%;
+}
 
  :host ::ng-deep.mat-card {
     padding: 0%;
@@ -118,8 +151,8 @@
     font-size: 22px;
 }
 .myC-head{
-  margin-left: 3.5% !important;
-  margin-top: 30px;
+  margin-left: 2% !important;
+  margin-top: 1%;
   margin-bottom: 1%;
 }
 .courseImg {
@@ -184,8 +217,12 @@
   margin-top: 1%;
 }
 .color-blue {
-  border-left: 5px solid $color-small-blue !important;
+  border-left: 3px solid $color-small-blue !important;
   color: $color-blank!important;
+}
+
+.color-grey {
+  border-left: 3px solid #b5acac !important;
 }
 .no_pl {
   padding-left: 0 !important;
@@ -193,11 +230,11 @@
 .coursenameT{
   // border-left: 5px solid #f3cc58;
   padding-left: 10px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
   border-radius: 3px;
   font-weight: 600;
   height: 40px;
-  padding-top: 9px;
+  padding-top: 8px;
   font-size: 18px;
 
 }
@@ -217,10 +254,8 @@
   background: transparent !important;
 }
 .session-sub-card{
-        width: 90%;
+        width: 95%;
         border-bottom: 1px solid #dedede;
-        // margin-left: 3%;
-        // padding-left: 14px;
 }
 .m-l-4{
   margin-left: 4%;
@@ -283,15 +318,18 @@ hr {
 }
 
 .pad-10-12{
-    padding: 15px 12px 0px 12px;
+  padding: 15px 15px 0px 15px;
 }
 
 .width_35 {
   width: 35% !important;
 }
 .btl-alin{
-    margin-top: -0.5%;
-    margin-left: 42%;
+      /* margin-top: -0.5%; */
+      // text-align: left;
+      /* justify-content: end; */
+      position: relative;
+      margin-left: 51%;
 }
 .margin{
     margin-left: 2%;

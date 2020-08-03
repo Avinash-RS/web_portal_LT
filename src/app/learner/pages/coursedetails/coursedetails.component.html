@@ -1,10 +1,10 @@
 <app-header></app-header>
-<button mat-button class="backbtn" [routerLink]="['/Learner/MyCourse']">
+<!-- <button mat-button class="backbtn" [routerLink]="['/Learner/MyCourse']">
     <mat-icon class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to My Courses
-</button>
+</button> -->
 
-<div class="row">
+<div class="row "  id='hideMe'>
     <div class="col-12">
         <h1 class="nameh1 animated animatedFadeInUp fadeInUp">{{course?.course_name | titlecase }}</h1>
     </div>
@@ -40,7 +40,7 @@
                             <mat-panel-title class="module-container">
                                 <div class="row">
                                     <div style="margin-top: 8px;">
-                                        <span class='index-number'>{{i+1}}</span>
+                                        <span class='index-number'>{{i+1}}.</span>
                                     </div>
                                     <div>
                                         <div class="moduleHead" matTooltip="{{res?.title}}">
@@ -74,7 +74,7 @@
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
 
                                             <ng-template matStepLabel>
-                                                <span
+                                                <span class="topicnm"
                                                     (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
                                                     {{mod?.title}}</span>
                                             </ng-template>
@@ -108,11 +108,15 @@
                             <div style="max-width: 196px;">
                                 <span class="font-color;padding: 5px">{{content?.totalResourseCount}} downloadable
                                     resources</span>
-                            </div>&nbsp; |&nbsp;
+                            </div>
+                            <!-- &nbsp; |&nbsp; -->
+                            <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
                             <div style="max-width: 100px;">
                                 <span class="font-color;padding: 5px">
                                     {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
-                            </div>&nbsp; |&nbsp;
+                            </div>
+                            <!-- &nbsp; |&nbsp; -->
+                            <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
                             <div style="max-width: 78px;">
                                 <span class="font-color;padding: 5px">{{course?.course_language}}</span>
                             </div>

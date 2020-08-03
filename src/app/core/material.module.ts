@@ -28,7 +28,8 @@ import {
   MatProgressSpinnerModule,
   MatDatepickerModule,
   MatRippleModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatButtonToggleModule
 } from '@angular/material';
 
 import { CommonModule } from '@angular/common';
@@ -62,7 +63,8 @@ import { CommonModule } from '@angular/common';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatRippleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatButtonToggleModule
   ],
   exports: [
     MatButtonModule,
@@ -91,7 +93,8 @@ import { CommonModule } from '@angular/common';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatRippleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatButtonToggleModule
   ],
   providers: [
     {

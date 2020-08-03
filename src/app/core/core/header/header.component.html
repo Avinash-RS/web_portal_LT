@@ -4,12 +4,14 @@
     <span class="headTit"> LARSEN & TOUBRO</span>
   <span class="spacer"></span>
   <div class="tab" >
-      <button class="btn1" md-raised-button routerLink="/Learner/MyCourse" >
-        <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon>&nbsp;MY COURSES </button>
+      <button class="btn1"  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
+      'colWhite'" md-raised-button routerLink="/Learner/MyCourse" >
+        <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon>&nbsp;My Courses </button>
 
-        <button class="btn1" md-raised-button  routerLink="/Learner/calendar" routerLinkActive="active">
+        <button class="btn1" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
+        'colWhite'" md-raised-button  routerLink="/Learner/calendar" routerLinkActive="active">
       <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true> event_note </mat-icon>
-      CALENDAR </button>
+      Calendar </button>
 
 
   </div>

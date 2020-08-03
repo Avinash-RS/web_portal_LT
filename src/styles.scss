@@ -330,6 +330,23 @@ body {
   margin: auto !important;
   display: block !important;
 }
+// ::ng-deep .mat-menu-panel {
+//   border-radius: 0px !important;
+//   min-width: 140px !important;
+//   margin-top: 7px !important;
+//   max-width: 280px !important;
+
+// }
+.cdk-overlay-connected-position-bounding-box {
+  position: absolute;
+  z-index: 1000;
+  top: 54.5px !important;
+  display: flex;
+  min-width: 140px !important;
+  flex-direction: column;
+  min-width: 1px;
+  min-height: 1px;
+}
 
 .background_trans {
   background: transparent !important;

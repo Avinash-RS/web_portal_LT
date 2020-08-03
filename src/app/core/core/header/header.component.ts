@@ -16,11 +16,13 @@ export class HeaderComponent implements OnInit {
   role: string;
   fullName: string;
   initials: any;
+  activeUrl: string;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
               public router: Router, private gs: GlobalServiceService) { }
 
   ngOnInit() {
+    this.activeUrl = this.router.url;
     // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userDetailes = this.gs.checkLogout();
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
@@ -52,7 +54,7 @@ export class HeaderComponent implements OnInit {
       title: 'Are you sure you want to logout ?',
       // icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#3aaf9f',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
