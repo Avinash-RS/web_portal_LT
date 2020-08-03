@@ -23,7 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class OtpComponent implements OnInit {
   currentUser: any = [];
   otpForm: FormGroup;
-  systemip: String;
+  systemip;
   otp: any;
   isLinkActive = false;
   showotp = false;

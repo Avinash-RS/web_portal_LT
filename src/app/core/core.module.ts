@@ -101,6 +101,7 @@ const routes: Routes = [
     VideoPlayerComponent,
     ListViewCourseComponentComponent,
     CategoryComponentComponent,
+    PdfreaderComponent,
     GuidelineSearchComponent]
 })
 export class CoreModule { }

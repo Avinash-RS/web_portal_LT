@@ -1,13 +1,11 @@
 @import "variable";
 #insidecard.uk-card-default {
-    background: $color-white;
+    background: #fff;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     border-left: 8px solid #b5acac;
     padding: 10px;
     margin-bottom: 20px;
-}.f_size_22{
-    font-size: 22px;
 }
 
 div.scrollcard {
@@ -24,60 +22,31 @@ div.scrollcard {
     border: 1px solid #e9edf0;
 }
 
-::ng-deep .bs-datepicker-head {
- 
-    text-align: center !important;
-}
-.myC-head{
-    margin-left: 2% !important;
-    margin-top: 1%;
-    margin-bottom: -2%;
-  }
 .color-grey {
-    border-left: 3px solid #b5acac !important;
-}
-.errorbox{
-    border-left: 7px solid;
-    height: 55px;
-    background: #ffecb3;
-    border-left-color: #ffc107;
-    color: rgba(0,0,0,.87);
-}
-.f_size_24{
-    font-size: 24px;
-}
-.para{
-    display: inline-flex;
-    font-size: 18px;
+    border-left: 8px solid #b5acac !important;
 }
 
-.iconevent{
-    padding: 9px;
-    font-size: 37px;
-    color:$lxp-icon;
-}
 .color-blue {
-    border-left: 3px solid $color-small-blue !important;
-    color: $color-blank!important;
+    border-left: 8px solid #6cabdb !important;
+    color: #509ad4 !important;
 }
 
 .color-white {
     color: #b5acac;
-    background: $color-white !important;
+    background: white !important;
     border-left: 0px !important
 }
 
-
 ::ng-deep .learner-calender .theme-blue .bs-datepicker-head {
-    background-color: $lxp-theme-green;
+    background-color: #004072;
 }
 
 ::ng-deep .learner-calender .theme-blue .bs-datepicker-body table td span.selected {
-    background-color: $lxp-theme-green !important;
+    background-color: #509ad4 !important;
 }
 
 .blue_clr {
-    background-color: $lxp-theme-green;
+    background-color: $color-blue;
     color: $color-white;
 }
 
@@ -100,61 +69,5 @@ div.scrollcard {
 }
 
 .uk-card-default {
-    color: $color-blank !important;
+    color: black !important;
 }
-.m-l-4{
-    margin-left: 4%;
-  }
-  hr {
-  
-    margin-bottom: 0.5rem;
-  }
-.no_pl {
-    padding-left: 0 !important;
-  }
-  .coursenameT{
-    // border-left: 5px solid #f3cc58;
-    padding-left: 10px;
-    margin-bottom: 2px;
-    border-radius: 3px;
-    font-weight: 600;
-    height: 40px;
-    padding-top: 9px;
-    font-size: 18px;
-  
-  }
-  .person{
-    position: absolute;
-      margin-left: 10px;
-      color: $lxp-icon;
-      font-size: 18px;
-  }
-  .aligned-icon{
-    position: absolute;
-    color: $lxp-text;
-    margin-left: 32px;
-  }
-  .color_black2 {
-      color: $label;
-  }
-  
-  .space-10{
-    margin-top: 10px;
-  }
-.mainCard{
-    background: #f9f9f9;
-    margin-left: 4%;
-  }
-  .session-card{
-    border-radius: 0px;
-    box-shadow: none;
-      height: auto;
-    margin-bottom: 0%;
-    background: transparent !important;
-  }
-  .session-sub-card{
-          width: 90%;
-          border-bottom: 1px solid #dedede;
-          // margin-left: 3%;
-          // padding-left: 14px;
-  }

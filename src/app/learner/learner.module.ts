@@ -62,13 +62,13 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { title: 'Learner Login' }
   },
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { title: 'Learner Login' }
   },
   {
@@ -85,11 +85,13 @@ const routes: Routes = [
   {
     path: 'otp',
     component: OtpComponent,
+    canActivate: [AuthGuard],
     data: { title: 'Learner  Registration OTP' }
   },
   {
     path: 'password',
     component: PasswordComponent,
+    canActivate: [AuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
   },
   {
@@ -217,7 +219,6 @@ const routes: Routes = [
     InfiniteScrollModule,
     PdfJsViewerModule,
     RatingModule,
-  
   ],
   providers: [
     Apollo

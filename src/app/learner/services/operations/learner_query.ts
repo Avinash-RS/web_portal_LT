@@ -1136,3 +1136,33 @@ export const getReadLeanerActivity = gql`
     }
   }
 `;
+
+
+export const get_organization_by_id = gql`
+  query get_organization_by_id($organization_id: String!) {
+    get_organization_by_id(organization_id: $organization_id) {
+      success
+      error_msg
+      message{
+          _id
+          is_active
+          organization_name
+          organization_logo
+          organization_id
+          created_by
+          created_on
+          updated_on
+          updated_by
+          learner_login_image
+          role_details{
+              role_id
+              role_name
+          }
+          admin_details{
+              admin_email
+              admin_username
+      }
+      }
+    }
+  }
+`;

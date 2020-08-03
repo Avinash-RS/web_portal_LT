@@ -59,18 +59,18 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   VerifyOTP() {
     this.loader.show();
     this.service.user_registration_verify(this.otp, this.mobile).subscribe((data: any) => {
-          if (data.data.user_registration_mobile_otp_verify.success === 'true') {
-            this.loader.hide();
-            Swal.fire(data.data.user_registration_mobile_otp_verify.message, null);
-            localStorage.setItem('UserDetails', JSON.stringify(data.data.user_registration_mobile_otp_verify.data[0]));
-            localStorage.setItem('role', 'learner');
-            this.router.navigate(['Learner/resetpassword']);
-          } else {
-            this.loader.hide();
-            this.toastr.error(data.data.user_registration_mobile_otp_verify.message, null);
+      if (data.data.user_registration_mobile_otp_verify.success === 'true') {
+        this.loader.hide();
+        Swal.fire(data.data.user_registration_mobile_otp_verify.message, null);
+        localStorage.setItem('UserDetails', JSON.stringify(data.data.user_registration_mobile_otp_verify.data[0]));
+        localStorage.setItem('role', 'learner');
+        this.router.navigate(['Learner/resetpassword']);
+      } else {
+        this.loader.hide();
+        this.toastr.error(data.data.user_registration_mobile_otp_verify.message, null);
 
-          }
-      });
+      }
+    });
   }
   timer() {
     this.timeLeft = 60;

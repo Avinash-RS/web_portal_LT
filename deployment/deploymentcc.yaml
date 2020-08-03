@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ccweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ccweb
+  template:
+    metadata:
+      labels:
+        app: ccweb
+    spec:
+      containers:
+        - name: ccweb
+          image: lxpacrazure.azurecr.io/ccweb:$tag
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: mysecret

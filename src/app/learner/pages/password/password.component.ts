@@ -92,8 +92,8 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key');
-    this.service.user_registration_done(this.userid, this.passwordForm.value.username,
-      this.passwordForm.value.password, this.systemip).subscribe((data: any) => {
+    this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip)
+    .subscribe((data: any) => {
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
         this.service.login(this.passwordForm.value.username, this.passwordForm.value.password, false)

@@ -51,9 +51,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
-
-    var dateValue = new Date().toISOString();
-    // tslint:disable-next-line:no-shadowed-variable
+    const dateValue = new Date().toISOString();
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       // tslint:disable-next-line:no-string-literal
@@ -99,11 +97,11 @@ export class LearnerMyCourseComponent implements OnInit {
             }
           }
         });
-        // this.enrolledCourses.forEach(element => {
-        //   if (element.coursePlayerStatus.course_percentage) {
-        //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
-        //   }
-        // });
+        this.enrolledCourses.forEach(element => {
+          if (element.coursePlayerStatus.course_percentage) {
+            element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+          }
+        });
         const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||
@@ -164,6 +162,21 @@ export class LearnerMyCourseComponent implements OnInit {
 
   close() {
     this.show = false;
+  }
+
+  launchAssignment(value) {
+    if (value.activity_details.activitytype === 'Assignment') {
+      const detail = {
+        id: value.activity_details.courseid,
+        wishlist: false,
+        wishlist_id: false,
+        enrollment_status: false
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    }
+  }
+  launchActivity(value) {
+      window.open(value.activity_details.link);
   }
 }
 

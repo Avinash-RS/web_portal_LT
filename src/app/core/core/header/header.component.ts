@@ -17,12 +17,14 @@ export class HeaderComponent implements OnInit {
   fullName: string;
   initials: any;
   activeUrl: string;
+  orgDetails: any;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
               public router: Router, private gs: GlobalServiceService) { }
 
   ngOnInit() {
     this.activeUrl = this.router.url;
+    this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userDetailes = this.gs.checkLogout();
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
@@ -50,6 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+
     Swal.fire({
       title: 'Are you sure you want to logout ?',
       // icon: 'warning',

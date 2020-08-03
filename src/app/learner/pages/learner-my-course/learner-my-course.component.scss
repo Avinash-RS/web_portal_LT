@@ -1,5 +1,4 @@
 @import "variable";
-
 .spinner-container {
   position: absolute;
   top: 0;
@@ -14,7 +13,7 @@
 }
 
 .m-t-3 {
-  margin-top: 3%;
+    margin-top: 3%;
 }
 
 .m-b-10 {
@@ -25,49 +24,48 @@
 }
 
 @media screen and (min-width: 270px) and (max-width: 795px) {
-  .descmc {
-    max-height: 175px !important;
-    min-height: 40px;
-  }
-
-  @media screen and (max-width: 500px) {
-    .statBtn {
-      width: 60%;
-      margin: auto !important;
-      text-align: center !important;
-      display: block !important;
+    .descmc {
+        max-height: 175px !important;
+        min-height: 40px;
     }
-  }
+    @media screen and (max-width: 500px) {
+        .statBtn {
+            width: 60%;
+            margin: auto !important;
+            text-align: center !important;
+            display: block !important;
+        }
+    }
 }
 
 @media screen and (min-width: 500px) and (max-width: 765px) {
-  .statBtn {
-    width: 50%;
-    float: right;
-  }
+    .statBtn {
+        width: 50%;
+        float: right;
+    }
 }
 
 @media screen and (min-width: 765px) {
-  .statBtn {
-    float: right;
-  }
+    .statBtn {
+        float: right;
+    }
 }
 
 .vertical {
-  border-left: 160px solid $color-subhead;
-  max-width: 100%;
-  height: 4px;
-  position: absolute;
-  left: 1%;
-  border-radius: 20px;
+    border-left: 160px solid $color-subhead;
+    max-width: 100%;
+    height: 4px;
+    position: absolute;
+    left: 1%;
+    border-radius: 20px;
 }
 
 .mHead {
-  margin-top: 1%;
-  margin-left: 3%;
-  font-size: 18px !important;
-  font-weight: 500 !important;
-  color: #616060;
+    margin-top: 1%;
+    margin-left: 3%;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #616060;
 }
 
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
@@ -207,14 +205,14 @@
 
 
 .courseImgs {
-  width: 125px;
-  height: 142px;
-  padding: 21px;
-  margin: auto;
+    width: 125px;
+    height: 142px;
+    padding: 21px;
+    margin: auto;
 }
 
 .m-l-1 {
-  margin-top: 1%;
+    margin-top: 1%;
 }
 .color-blue {
   border-left: 3px solid $color-small-blue !important;
@@ -225,7 +223,7 @@
   border-left: 3px solid #b5acac !important;
 }
 .no_pl {
-  padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 .coursenameT{
   // border-left: 5px solid #f3cc58;
@@ -280,7 +278,7 @@ hr {
 }
 
 :host ::ng-deep .mat-progress-bar-buffer {
-  background-color: $profile-t-grey !important;
+    background-color: $profile-t-grey !important;
 }
 
 :host ::ng-deep .mat-progress-bar-fill::after {
@@ -293,8 +291,8 @@ hr {
 }
 
 .mat-progress-bar {
-  height: 8px;
-  border-radius: 15px;
+    height: 8px;
+    border-radius: 15px;
 }
 
 .material-icons {
@@ -314,7 +312,7 @@ hr {
 
 
 .cap::first-letter {
-  text-transform: capitalize !important;
+    text-transform: capitalize !important;
 }
 
 .pad-10-12{
@@ -322,7 +320,7 @@ hr {
 }
 
 .width_35 {
-  width: 35% !important;
+    width: 35% !important;
 }
 .btl-alin{
       /* margin-top: -0.5%; */
@@ -362,7 +360,7 @@ hr {
   margin-top: 5px;
 }
 .noCourse {
-  padding: 50px;
+    padding: 50px;
 }
 
 .footer {
@@ -399,9 +397,9 @@ hr {
   }
 
 :host ::ng-deep.footericon {
-  width: 9%;
-  position: absolute;
-  margin-left: 5px;
+    width: 9%;
+    position: absolute;
+    margin-left: 5px;
 }
 
 .showbtn{
@@ -412,9 +410,9 @@ hr {
     font-weight: 500;
 
 .show-less {
-  height: 0rem;
-  overflow: hidden;
-  padding: 0rem;
+    height: 0rem;
+    overflow: hidden;
+    padding: 0rem;
 }
 
 .showbtn {
@@ -426,43 +424,46 @@ hr {
 }
 
 .showbtn :focus {
-  outline: none !important;
-  border: none !important;
+    outline: none !important;
+    border: none !important;
 }
 
 
 /* The Modal*/
+
 .modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+    display: block;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
+
 /* Modal Content */
+
 .modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 98%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 98%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .modal-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
 }
 
 :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
@@ -470,28 +471,28 @@ hr {
 }
 
 #insidecard.uk-card-default {
-  background: #fff;
-  color: #666;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  border-left: 8px solid #b5acac;
-  padding: 10px;
-  margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    border-left: 8px solid #b5acac;
+    padding: 10px;
+    margin-bottom: 20px;
 }
+
 .color-grey {
-  border-left: 8px solid #b5acac !important;
-  color: #b5acac !important;
+    border-left: 8px solid #b5acac !important;
+    // color: #b5acac !important;
 }
 
 .color-blue {
-  border-left: 8px solid #6cabdb !important;
-  color: #509ad4 !important;
+    border-left: 8px solid #6cabdb !important;
+    color: #509ad4 !important;
 }
 
 .color-white {
-  color: #b5acac;
-  background: white !important;
-  border-left: 0px !important;
+    color: #b5acac;
+    background: white !important;
+    border-left: 0px !important;
 }
 
  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {

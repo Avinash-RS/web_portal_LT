@@ -31,16 +31,16 @@ const defaultOptions: DefaultOptions = {
 })
 
 export class GraphqlModule {
-  envWcaApi:any = environment.wcaapiurl;
-  envApi:any = environment.apiUrl;
-  envApiImg:any =environment.apiUrlImg;
-  envCourseApi:any =environment.createCourseApi
-  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,) {
+  envWcaApi: any = environment.wcaapiurl;
+  envApi: any = environment.apiUrl;
+  envApiImg: any = environment.apiUrlImg;
+  envCourseApi: any = environment.createCourseApi;
+  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient, ) {
     const http = httpLink.create({ uri: this.envApi + 'graphql' });
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       if (!token) { return forward(operation); }
 
       operation.setContext({
@@ -59,7 +59,7 @@ export class GraphqlModule {
           // console.log(
           //   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
           // );
-          if (message === 'TokenExpiredError: jwt expired') {
+          if (message === 'TokenExpiredError: jwt expired' || message === ' JsonWebTokenError: jwt must be a string') {
             localStorage.clear();
             this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
               localStorage.setItem('Systemip', res.ip);
