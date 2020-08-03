@@ -279,7 +279,7 @@
               <ng-container class="col-md-3 col-sm-12 col-12 display_flex"
                 *ngIf="qual.insCheck">
                 <input type="text" class="institute" placeholder="Institute" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
-     'inputs color_blue background_trans width_80'" formControlName="institute">
+     'inputs  background_trans width_80'" formControlName="institute">
               </ng-container>
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" placeholder="Discipline" formControlName="discipline"
@@ -306,7 +306,7 @@
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
               <ng-container>
                 <input class="institute" type="tel" mask="0000" [ngClass]="cannotEdit ? 'dis inputs color_blue background_trans width_80' :
-    'inputs color_blue background_trans width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
+    'inputs  background_trans width_80'" placeholder="Year of Passing" formControlName="year_of_passing"
                   (change)="yearOfpassing(in)">
               </ng-container>
             </div>
