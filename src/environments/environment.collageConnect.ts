@@ -7,5 +7,5 @@ export const environment = {
     wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
     domain: 'LXP',
     analytics: 'UA-171656647-1',
-    orgId: 'b0m91mprs' // saveetha
+    orgId: '' // saveetha
 };
