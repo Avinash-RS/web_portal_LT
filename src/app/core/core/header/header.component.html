@@ -6,9 +6,10 @@
   <div class="tab" >
       <button class="btn1"  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
       'colWhite'" md-raised-button routerLink="/Learner/MyCourse" >
-        <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon>&nbsp;My Courses </button>
-
-        <button class="btn1" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
+        <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon> My Courses </button>
+        <span style="margin-left: 5%;"></span>
+        
+        <button *ngIf="loginDetails.is_profile_updated" class="btn1" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
         'colWhite'" md-raised-button  routerLink="/Learner/calendar" routerLinkActive="active">
       <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true> event_note </mat-icon>
       Calendar </button>

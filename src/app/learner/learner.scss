@@ -44,10 +44,22 @@
 //   color:  $color-blue;
 // }
 
+// My Course badge css 
 .mand {
   color: $color-red;
 }
+.mat-badge-medium.mat-badge-after .mat-badge-content {
+  right: -26px !important;
+}
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: -9px !important;
+}
 
+.mat-badge-medium .mat-badge-content {
+  width: 20px !important;
+  height: 20px !important;
+  line-height: 20px !important;
+}
 .mat-raised-button[disabled]:not([class*=mat-elevation-z]) {
   color: $color-white
 }

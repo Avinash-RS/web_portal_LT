@@ -57,7 +57,7 @@ div.scrollcard {
     color:$lxp-icon;
 }
 .color-blue {
-    border-left: 2px solid $color-small-blue !important;
+    border-left: 2px solid $lxp-status-yellow !important;
     color: $color-blank!important;
 }
 
@@ -78,7 +78,7 @@ div.scrollcard {
 
 .blue_clr {
     background-color: $lxp-theme-green;
-    color: $color-white;
+    color: $lxp-button-text;
 }
 
 .cap::first-letter {
@@ -99,11 +99,27 @@ div.scrollcard {
     line-height: 25px;
 }
 
+.blue_clr:hover {
+    background-color: $lxp-theme-green !important;
+    color: $color-white !important;
+}
+.LaunchBtn{
+    border: 1px solid $lxp-theme-green !important;
+    border-radius: 5px;
+    position: relative;
+    float: right;
+    margin-top: -5px;
+    background: $color-white;
+    color: $lxp-text;
+    border: 1px solid currentColor;
+    padding: 0px 7px;
+    line-height: 22px;
+  }
 .uk-card-default {
     color: $color-blank !important;
 }
 .m-l-4{
-    margin-left: 4%;
+    margin-left: 3%;
   }
   hr {
   

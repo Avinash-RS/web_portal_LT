@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
         || state.url === '/Learner/otp' || state.url === '/Learner/recover'
         || state.url === '/Learner/password' || state.url === '/Learner/recoverotp'
         || state.url === '/Learner/resetpassword' || state.url === '/Learner/terms' || state.url === '/' || adminUrl) {
-        this.router.navigate(['/Learner/home']);
+        this.router.navigate(['/Learner/MyCourse']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
         // if profile not updated and trying to access other screens, redirect to profile
