@@ -307,7 +307,7 @@
       <div (click)="launchAssignment(result)" class="mainCard animated animatedFadeInUp fadeInUp" *ngFor="let result of results?.message">
         <mat-card class="session-card">
           <div class="session-sub-card">
-            <img *ngIf="result.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
+            <img alt="" *ngIf="result.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
             <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}}
               </span>
               <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> |
@@ -365,13 +365,7 @@
           </div>
         </div>
       </div>
-
-        <!-- </div> -->
-        <!-- <div class="modal-footer">
-            <button class="roundbtn" (click)="close()">Close</button>
-        </div> -->
     </div>
-
  </div>
 
 </div>
