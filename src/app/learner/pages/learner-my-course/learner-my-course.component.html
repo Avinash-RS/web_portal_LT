@@ -304,20 +304,22 @@
       </div>
     </mat-card>
     <div *ngIf="results?.message?.length > 0">
-      <div class="mainCard animated animatedFadeInUp fadeInUp" *ngFor="let result of results?.message">
+      <div (click)="launchAssignment(result)" class="mainCard animated animatedFadeInUp fadeInUp" *ngFor="let result of results?.message">
         <mat-card class="session-card">
           <div class="session-sub-card">
+            <img *ngIf="result.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
             <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{strDate | date :'dd MMM yyyy'}}
               </span>
               <span class="lxp-text f_size_14 f_wt_400" *ngIf="result?.activity_details.ongoing == 'true' "> |
                 Ongoing</span>
             </div>
-            <p class="coursenameT"   [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }"> {{ result?.activity_details.coursename }}</p>
+            <p class="coursenameT"  [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }"> {{ result?.activity_details.coursename }}</p>
             <h5 class="m-l-4" > <span class="f_wt_500 f_size_14">Type </span>: <span
                 class="lxp-text f_size_14 f_wt_400">{{ result?.activity_details.activitytype }} </span>
               <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
               <span
                 class="aligned-icon lxp-text f_size_14 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
+                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'" style="margin-right: 0px;" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer">Launch</button>
             </h5>
           </div>
         </mat-card>
