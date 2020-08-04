@@ -135,6 +135,7 @@ export class CoursedetailsComponent implements OnInit {
 
   sortBox = false;
   searchthreadname = false;
+  assignmentStartDate: any;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -218,34 +219,32 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
-      const startDate = new Date(this.assignmentContent.courseStartDate);
-      const endDate = new Date(this.assignmentContent.courseEndDate);
-      this.courseStartDate = moment(startDate).format('DD-MM-YYYY');
-      this.courseEndDate = moment(endDate).format('DD-MM-YYYY');
-      if (moment().format('DD-MM-YYYY') >=
-       this.courseStartDate &&
-       moment().format('DD-MM-YYYY') <=
-       this.courseEndDate) {
-      this.assignmentContent.enableUpload = true;
-    } else if (moment().format('DD-MM-YYYY') <
-    this.courseStartDate ||
-    moment().format('DD-MM-YYYY') >
-    this.courseEndDate) {
-      this.assignmentContent.enableUpload = false;
-    }
-  }
+      const batchStartDate = new Date(this.assignmentContent.courseStartDate);
+      const batchEndDate = new Date(this.assignmentContent.courseEndDate);
+      this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
+      this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+
       this.assignmentContent.coursedetails.forEach(element => {
-        element.moduledetails.forEach(moduleData => {
-          moduleData.resourse.files.forEach(fileData => {
-            const startDate = new Date(fileData.startDate);
-            if (moment().format('DD-MM-YYYY HH:MM') >= moment(startDate).format('DD-MM-YYYY HH:MM')) {
-              fileData.enableView = true;
-            } else {
-              fileData.enableView = false;
-            }
-          });
+      element.moduledetails.forEach(moduleData => {
+        moduleData.resourse.files.forEach(fileData => {
+          const startDate = new Date(fileData.startDate);
+          this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+          if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
+            fileData.enableView = true;
+          } else {
+            fileData.enableView = false;
+          }
+
+          if (moment().format('DD-MM-YYYY') >= this.assignmentStartDate && moment().format('DD-MM-YYYY') <= this.courseEndDate) {
+            this.assignmentContent.enableUpload = true;
+          } else if (moment().format('DD-MM-YYYY')  < this.assignmentStartDate || moment().format('DD-MM-YYYY') > this.courseEndDate) {
+            this.assignmentContent.enableUpload = false;
+          }
         });
       });
+    });
+  }
+
     });
   }
   uploadAssignmentsFile(event, fileId, modulename, topicname, assName, score, endDate) {

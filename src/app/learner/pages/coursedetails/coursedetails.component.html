@@ -312,7 +312,7 @@
                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                         description
                                                                     </mat-icon>
-                                                                    <div class="col-2 no-cursor">
+                                                                    <div class="col-1 no-cursor" matTooltip="{{file.type_name}}">
                                                                         {{file.type_name}}
                                                                     </div>
 
@@ -326,31 +326,46 @@
                                                                         <mat-icon *ngIf="!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                     </div>
-                                                                    <div class="col-2" matTooltip="Course start date">
+                                                                    <div class="col-2">
                                                                         {{courseStartDate}}
                                                                     </div>
-                                                                    <div class="col-2" matTooltip="Course end date">
+                                                                    <div class="col-2">
                                                                         {{courseEndDate}}
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        {{file?.score}}
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <button mat-stroked-button
-                                                                            matTooltip="Click upload button to add the file"
-                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload ||
-                                                                            !file?.startDate" (click)="fileInput.click()">
+                                                                            [disabled]="!assignmentContent?.enableUpload"
+                                                                             (click)="fileInput.click()">
                                                                             Upload</button>
                                                                         <input class="form-control border-right-0"
-                                                                            [disabled]="file?.doc_status === false"
                                                                             type='file' id="upload-photo" #fileInput
                                                                             (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
                                                                     </div>
-                                                                    <div class="col-2 disply no-cursor">
+                                                                    <div class="col-1">
+                                                                        <mat-icon class="icon" matTooltip="File size: 10mb
+                                                                        Type: pdf,jpg,jpeg,png only">info</mat-icon>
+                                                                    </div>
+                                                                    <!-- <div class="col-2 disply no-cursor">
                                                                         <mat-icon class="no-cursor"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">
                                                                             check_circle</mat-icon>
                                                                         <span style="padding-top: 4px;"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">&nbsp;
                                                                             File has been uploaded</span>
+                                                                    </div> -->
+                                                                    <div class="col-2 disply no-cursor"  *ngIf="file.doc_status === false">
+                                                                        <mat-icon class="no-cursor icon">
+                                                                            check_circle</mat-icon>
+                                                                        <span class="icon" style="padding-top: 4px;">&nbsp;
+                                                                            Submitted</span>
                                                                     </div>
+                                                                    <div class="col-2 disply no-cursor"   *ngIf="file.grade_status === true">
+                                                                     <span class="grade" style="padding-top: 4px;color: green;" >&nbsp;
+                                                                            Graded</span>
+                                                                            </div>
                                                                 </div>
                                                             </div>
                                                         </div>
