@@ -73,7 +73,7 @@
 
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
-    font-weight: 500 !important;
+     font-weight: 300 !important;
     // margin-right: 58%;
     // color: $label !important;
 
@@ -151,14 +151,17 @@
 .f_size_22{
     font-size: 22px;
 }
+.p-b-5{
+padding-bottom: 5px;
+}
 .myC-head{
   margin-left: 2% !important;
-  margin-top: 1%;
+  margin-top: 2%;
   margin-bottom: 1%;
 }
 .courseImg {
     border: 1px solid $profile-s-grey;
-    width: 190px;
+    width: 160px;
     height: 120px;
     margin: auto;
     margin-left: 0;
@@ -174,15 +177,16 @@
   
   .overlay {
     position: absolute;
-    bottom: 10%;
+    bottom: 13%;
     left: 0;
     right: 0;
     padding: 15px 0;
-    background-color: #0000003b;
+    background-color: #0000001f;
     overflow: hidden;
     width: 0;
-    height: 80%;
-    transition: .5s ease;
+    height: 77%;
+    transition: .7s ease;
+    border-radius: 4px;
   }
   
   .courseHover:hover .overlay {
@@ -218,10 +222,32 @@
     margin-top: 1%;
 }
 .color-blue {
-  border-left: 3px solid $color-small-blue !important;
+  border-left: 3px solid $lxp-status-yellow!important;
   color: $color-blank!important;
 }
+.LaunchBtn{
+  border: 1px solid $lxp-theme-green !important;
+  border-radius: 5px;
+  position: relative;
+  float: right;
+  margin-top: -5px;
+  border: 1px solid currentColor;
+  padding: 0px 7px;
+  line-height: 22px;
+}
+.m-b-10 {
+  margin-bottom: 12px;
+}
 
+.statBtn {
+  border: 1px solid $color-small-blue;
+}
+
+// .mat-stroked-button {
+//   border: 1px solid currentColor;
+//   padding: 0px 7px;
+//   line-height: 25px;
+// }
 .color-grey {
   border-left: 3px solid #b5acac !important;
 }
@@ -236,15 +262,35 @@
   font-weight: 600;
   height: 40px;
   padding-top: 8px;
-  font-size: 18px;
+  font-size: 16px;
 
 }
+.status{
+  background: $lxp-status-yellow;
+  padding: 2px 6px;
+  float: right;
+  border-radius: 4px;
+  font-size: 13px;
+  color: $color-white;
+}
+
+.Completedstatus{
+  background: #b5acac;
+  padding: 2px 6px;
+  float: right;
+  border-radius: 4px;
+  font-size: 13px;
+  color: $color-white;
+}
+
 .space-10{
   margin-top: 10px;
 }
 .mainCard{
   background: #f9f9f9;
-  margin-left: 4%;
+  margin-left: 5%;
+  width: 90%;
+  padding-top: 9px;
 }
 .session-card{
   border-radius: 0px;
@@ -255,11 +301,12 @@
   background: transparent !important;
 }
 .session-sub-card{
-        width: 95%;
+        width: 96%;
         border-bottom: 1px solid #dedede;
 }
 .m-l-4{
   margin-left: 4%;
+  // padding-bottom: 5px;
 }
 hr {
 
@@ -304,7 +351,7 @@ hr {
 
 .blue_clr {
     background-color: $color-white;
-    color:#69727c;
+    color:$lxp-button-text;
 }
 .pad1020{
     padding: 20px 0 10px 18px !important;
@@ -339,16 +386,17 @@ hr {
   padding: 7px;
 }
 .percent {
-    margin-left: 5px;
+    // margin-left: 5px;
     margin-top: 8px;
+    width: 50px;
     font-size: 14px;
     font-weight: 400;
 }
 
 .statBtn {
-    border: 1px solid $color-border;
+    border: 1px solid $lxp-theme-green;
     border-radius: 50px;
-    width: 120px;
+    width: 110px;
 }
 .blue_clr:hover {
     background-color: $lxp-theme-green !important;
@@ -356,7 +404,7 @@ hr {
 }
 .timer{
   position: relative;
-  top: 4px;
+  top: 5px;
 }
 .aligned-with-icon{
   position: absolute;
@@ -406,7 +454,7 @@ hr {
 }
 
 .showbtn{
-    color: $color-blue !important;
+    color: $lxp-theme-green !important;
     margin-left: -56px;
     margin-left: -72px;
     font-size: 19px;
@@ -419,7 +467,7 @@ hr {
 }
 
 .showbtn {
-  color: $color-blue !important;
+  color: $lxp-theme-green !important;
   margin-left: -56px;
   margin-left: -72px;
   font-size: 19px;
@@ -474,7 +522,7 @@ hr {
 }
 
 #insidecard.uk-card-default {
-    background: #fff;
+    background: $color-white;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
     border-left: 8px solid #b5acac;
@@ -488,8 +536,8 @@ hr {
 }
 
 .color-blue {
-    border-left: 8px solid #6cabdb !important;
-    color: #509ad4 !important;
+    border-left: 8px solid $lxp-status-yellow !important;
+    color: $color-blank !important;
 }
 
 .color-white {

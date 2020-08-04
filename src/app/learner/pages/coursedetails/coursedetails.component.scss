@@ -1079,10 +1079,24 @@ li {
 //Ramya CSS starts here
 .icon {
     color: $color-blue;
+
 }
 
 .grade {
     color: $color-dark-green;
+}
+.info-icon{
+    position: relative;
+    left: 16px;
+    top: 15px;
+}
+.upload-btn{
+    position: relative;
+    bottom: 5px;
+    right: 23px;
+}
+.singleline-text{
+    white-space: nowrap
 }
 
 //Ramya CSS ends here

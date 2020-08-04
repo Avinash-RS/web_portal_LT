@@ -4,7 +4,7 @@
     &nbsp; Back to My Courses
 </button> -->
 
-<div class="row "  id='hideMe'>
+<div class="row " id='hideMe'>
     <div class="col-12">
         <h1 class="nameh1 animated animatedFadeInUp fadeInUp">{{course?.course_name | titlecase }}</h1>
     </div>
@@ -274,13 +274,173 @@
                                                 <mat-list *ngFor="let mod of res?.moduledetails">
                                                     <mat-list-item>
                                                         <div mat-line class="modName">
-                                                            <span> {{mod?.topicname}} :</span> </div>
+                                                            <span> {{mod?.topicname}} :</span>
+
+                                                        </div>
+                                                        <!-- <div class="row">
+                                                                <div class="col-1">
+                                                            <span>Assignment Name</span>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <span>View</span>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <span>Start date</span>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <span>End date</span>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <span>Score</span>
+                                                                </div>
+                                                                <div class="col-5">
+                                                            
+                                                                </div>
+                                                            </div> -->
                                                         <!-- <div class="content"> -->
                                                         <div class="row" *ngFor="let file of mod.resourse?.files">
                                                             <div class="col-12" style="margin-top:6px"
                                                                 *ngIf="file?.assignment === true">
+
+
                                                                 <div class="row">
-                                                                    <img *ngIf="file.doc_type == 'application/pdf'"
+                                                                    <div class="col-2 no-cursor"
+                                                                        matTooltip="{{file.type_name}}">
+                                                                        <div class="row">
+                                                                            <span class="singleline-text"><b>Assignment name</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <img *ngIf="file.doc_type == 'application/pdf'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/PDF_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'link'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Link_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Image_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/PPT_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Word_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/msword'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Word_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                            <mat-icon class="docType no-cursor"
+                                                                                *ngIf="file.doc_type == 'text/plain' ">
+                                                                                description </mat-icon>&nbsp;
+                                                                            {{file.type_name}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1 no-cursor">
+                                                                        <div class="row">
+                                                                            <span><b>View</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <mat-icon *ngIf="file.enableView"
+                                                                                (click)="previewDoc(previewDialog,file)"
+                                                                                class="viewDoc">remove_red_eye
+                                                                            </mat-icon>
+                                                                            <mat-icon *ngIf="!file.enableView"
+                                                                                class="viewDoc">remove_red_eye
+                                                                            </mat-icon>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>Start date</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            {{courseStartDate}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>End date</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            {{courseEndDate}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <div class="row">
+                                                                            <span><b>Score</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            {{file?.score}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>Status</b></span>
+                                                                        </div>
+                                                                        
+<div class="row">
+    <div class="disply no-cursor"
+    *ngIf="file.doc_status === false">
+    <!-- <mat-icon class="no-cursor icon">
+        check_circle</mat-icon> -->
+    <div class="icon">
+        Submitted</div>
+</div>
+<div class="disply no-cursor"
+    *ngIf="file.grade_status === true">
+    <div class="grade"
+        style="padding-top: 4px;color: green;">
+        Graded</div>
+</div>
+</div>
+                                                                    </div>
+                                                                   
+                                                                    <div class="col-1">
+                                                                        <div class="row mt-4">
+                                                                                <button class="upload-btn" mat-stroked-button
+                                                                                    [disabled]="!assignmentContent?.enableUpload"
+                                                                                    (click)="fileInput.click()">
+                                                                                    Upload</button>
+                                                                                <input
+                                                                                    class="form-control border-right-0"
+                                                                                    type='file' id="upload-photo"
+                                                                                    #fileInput
+                                                                                    (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
+
+                                                                               
+                                                                            <!-- </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                                    <div class=col-1>
+                                                                        <div class="row">
+                                                                        
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="info-icon">
+                                                                                <mat-icon class="icon"
+                                                                                matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
+                                                                                info</mat-icon>
+                                                                            </span>
+                                                                        </div>
+                                                                       
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+
+
+                                                                <!-- <div class="row"> -->
+
+                                                                <!--    <img *ngIf="file.doc_type == 'application/pdf'"
                                                                         class="size" alt=""
                                                                         src="assets/learner/fileicon/PDF_Icon.svg">
                                                                     <img *ngIf="file.doc_type == 'link'" class="size"
@@ -312,7 +472,8 @@
                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                         description
                                                                     </mat-icon>
-                                                                    <div class="col-1 no-cursor" matTooltip="{{file.type_name}}">
+                                                                    <div class="col-1 no-cursor"
+                                                                        matTooltip="{{file.type_name}}">
                                                                         {{file.type_name}}
                                                                     </div>
 
@@ -325,30 +486,30 @@
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                         <mat-icon *ngIf="!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
-                                                                    </div>
-                                                                    <div class="col-2">
+                                                                    </div> -->
+                                                                <!-- <div class="col-2">
                                                                         {{courseStartDate}}
-                                                                    </div>
-                                                                    <div class="col-2">
+                                                                    </div> -->
+                                                                <!-- <div class="col-2">
                                                                         {{courseEndDate}}
-                                                                    </div>
-                                                                    <div class="col-1">
+                                                                    </div> -->
+                                                                <!-- <div class="col-1">
                                                                         {{file?.score}}
-                                                                    </div>
-                                                                    <div class="col-2">
+                                                                    </div> -->
+                                                                <!-- <div class="col-2">
                                                                         <button mat-stroked-button
                                                                             [disabled]="!assignmentContent?.enableUpload"
-                                                                             (click)="fileInput.click()">
-                                                                            Upload</button>
-                                                                        <input class="form-control border-right-0"
+                                                                            (click)="fileInput.click()">
+                                                                            Upload</button> -->
+                                                                <!-- <input class="form-control border-right-0"
                                                                             type='file' id="upload-photo" #fileInput
                                                                             (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
-                                                                    </div>
-                                                                    <div class="col-1">
+                                                                    </div> -->
+                                                                <!-- <div class="col-1">
                                                                         <mat-icon class="icon" matTooltip="File size: 10mb
                                                                         Type: pdf,jpg,jpeg,png only">info</mat-icon>
-                                                                    </div>
-                                                                    <!-- <div class="col-2 disply no-cursor">
+                                                                    </div> -->
+                                                                <!-- <div class="col-2 disply no-cursor">
                                                                         <mat-icon class="no-cursor"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">
                                                                             check_circle</mat-icon>
@@ -356,19 +517,23 @@
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">&nbsp;
                                                                             File has been uploaded</span>
                                                                     </div> -->
-                                                                    <div class="col-2 disply no-cursor"  *ngIf="file.doc_status === false">
+                                                                <!-- <div class="col-2 disply no-cursor"
+                                                                        *ngIf="file.doc_status === false">
                                                                         <mat-icon class="no-cursor icon">
                                                                             check_circle</mat-icon>
-                                                                        <span class="icon" style="padding-top: 4px;">&nbsp;
+                                                                        <span class="icon"
+                                                                            style="padding-top: 4px;">&nbsp;
                                                                             Submitted</span>
                                                                     </div>
-                                                                    <div class="col-2 disply no-cursor"   *ngIf="file.grade_status === true">
-                                                                     <span class="grade" style="padding-top: 4px;color: green;" >&nbsp;
+                                                                    <div class="col-2 disply no-cursor"
+                                                                        *ngIf="file.grade_status === true">
+                                                                        <span class="grade"
+                                                                            style="padding-top: 4px;color: green;">&nbsp;
                                                                             Graded</span>
-                                                                            </div>
-                                                                </div>
+                                                                    </div> -->
                                                             </div>
                                                         </div>
+
                                                         <!-- </div> -->
                                                     </mat-list-item>
                                                     <hr>
@@ -655,13 +820,15 @@
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 m-b-15 p-5px"
                                             style="background: whitesmoke; border: 1px solid #dddddd;">
                                             <div class="row">
-                                                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-6 col-6 float_right no_padding">
+                                                <div
+                                                    class="col-xl-10 col-lg-10 col-md-10 col-sm-6 col-6 float_right no_padding">
                                                     <mat-checkbox class="width_100 f_size_15 align-middle"
                                                         [(ngModel)]="a2iFlag">
                                                         &nbsp;&nbsp;Ask the instructor
                                                     </mat-checkbox>
                                                 </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
+                                                <div
+                                                    class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
                                                     <button mat-button class="new_Thread no-radius ht-30 width_60"
                                                         [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
                                                         (click)="sendComment('thread',addThreadComment)">Send</button>
@@ -717,7 +884,8 @@
                                         </div>
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                             <p class="no_margin" *ngIf="post?.deleted === false"
-                                                [innerHTML]="post?.content"></p>
+                                                [innerHTML]="post?.content">
+                                            </p>
                                             <p class="no_margin" *ngIf="post?.deleted === true"
                                                 [innerHTML]="post?.local_content"></p>
                                         </div>
@@ -760,13 +928,15 @@
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
                                                 <div class="row">
-                                                    <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
+                                                    <div
+                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
                                                         <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
                                                             &nbsp;&nbsp;Ask the instructor
-                                                        </mat-checkbox> 
+                                                        </mat-checkbox>
                                                     </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
+                                                    <div
+                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
                                                         <button mat-button class="new_Thread no-radius ht-30 width_50"
                                                             (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
                                                             [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
@@ -854,17 +1024,21 @@
                                                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
                                                             style="background: whitesmoke; border: 1px solid #dddddd;">
                                                             <div class="row">
-                                                                <div class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
-                                                                <mat-checkbox class="width_100 f_size_15 align-middle"
-                                                                    [(ngModel)]="a2iFlag">
-                                                                    &nbsp;Ask the instructor
-                                                                </mat-checkbox>
+                                                                <div
+                                                                    class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                                    <mat-checkbox
+                                                                        class="width_100 f_size_12 align-middle"
+                                                                        [(ngModel)]="a2iFlag">
+                                                                        &nbsp;Ask the instructor
+                                                                    </mat-checkbox>
                                                                 </div>
-                                                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
-                                                                <button mat-button class="new_Thread no-radius ht-30"
-                                                                    (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
+                                                                <div
+                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                                    <button mat-button
+                                                                        class="new_Thread no-radius ht-30"
+                                                                        (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
                                                                 </div>
-                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </mat-card-actions>
@@ -875,7 +1049,8 @@
                                                     <div style="padding: 0px 10px;">
                                                         <mat-card class="no-radius no_padding black_border m-bt-4"
                                                             *ngIf="pkn !== 0 && posts.pid.toString() === postss.toPid">
-                                                            <div class="black_border no_padding no_margin child-post-header">
+                                                            <div
+                                                                class="black_border no_padding no_margin child-post-header">
                                                                 <div class="row padding_matcard">
                                                                     <div
                                                                         class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
@@ -996,6 +1171,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <br>
                                 </form>
                             </mat-dialog-content>

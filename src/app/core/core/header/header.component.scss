@@ -79,16 +79,17 @@
     position: relative;
     font-size: 16px;
     border: none;
-    height: 52px;
+    height: 50px;
+    padding: 0 0px;
     color: $color-border;
     background: $lxp-theme-green !important;
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $color-white !important; 
-    border-right: none !important;
-    outline: 0 !important;
-    border-left: none !important;
+    border-bottom: 4px solid $color-white !important; 
+    // border-right: none !important;
+    // outline: 0 !important;
+    // border-left: none !important;
   }
 .btn1:hover{
 color:  $color-white
@@ -110,15 +111,21 @@ color:  $color-white
   }
   .headicon{
     font-size: 22px !important;
-    width: 30px !important;
+    // width: 30px !important;
     position: relative;
     top: 7px;
   }
  .colgreen{
-    border-bottom: 2px solid $color-white !important; 
+    border-bottom: 4px solid $color-white !important; 
     color: $color-white !important;
-    transition: 0.5;
+    // position: relative;
+    // top: 2px;
+
  }
+ .mat-h5, .mat-typography h5 {
+    margin: 0px 0 5px !important;
+}
+
 .colWhite{
 
 }

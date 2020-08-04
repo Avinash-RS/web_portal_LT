@@ -33,20 +33,21 @@
                     <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)" >
                         <mat-card class="session-card">
                           <div class="session-sub-card">
+                            <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
                             <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{selectedDate | date :'dd MMM yyyy'}}
                               </span>
                      
                             </div>
                             <p class="coursenameT" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }"> {{ data.activity_details.coursename }}</p>
                             <h5 class="m-l-4">{{ data.activity_details.topicname }}
-                                <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
+                             
                             </h5>
                             <h5 class="m-l-4" > <span class="f_wt_500 f_size_14">Type </span>: <span
                                 class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
                               <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
                               <span
                                 class="aligned-icon lxp-text f_size_14 f_wt_400">{{ data.activity_details.createdby_name }}</span>
-                                <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer float-right">Launch</button>
+                                <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
                             </h5>
                           </div>
                         </mat-card>
