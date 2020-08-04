@@ -633,7 +633,7 @@
                                                 ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
                                             </button> &nbsp;&nbsp;
                                             <button mat-button class="f_size_12 no_padding"
-                                                (click)="showThreadComment = !showThreadComment"
+                                                (click)="clickToComment()"
                                                 [disabled]="selectedThreadData?.thread_status === false">
                                                 <mat-icon class="action_icon"
                                                     [disabled]="selectedThreadData?.thread_status === false">
@@ -663,7 +663,7 @@
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
                                                     <button mat-button class="new_Thread no-radius ht-30 width_60"
-                                                        [disabled]="addThreadComment == null || addThreadComment?.length == 0"
+                                                        [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
                                                         (click)="sendComment('thread',addThreadComment)">Send</button>
                                                 </div>
                                             </div>
@@ -737,7 +737,7 @@
                                                 </button> &nbsp;&nbsp;
                                                 <button mat-button
                                                     [disabled]="selectedThreadData?.thread_status === false"
-                                                    (click)="showCommentEditor[pin] = !showCommentEditor[pin]"
+                                                    (click)="clickToCommentPost(pin)"
                                                     class="f_size_12 no_padding">
                                                     <mat-icon class="action_icon"
                                                         [disabled]="selectedThreadData?.thread_status === false">
