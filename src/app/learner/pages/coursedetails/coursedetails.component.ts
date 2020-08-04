@@ -492,7 +492,7 @@ export class CoursedetailsComponent implements OnInit {
       if (d.length > 55500) {
         this.toastr.warning('Comment should be less than 60000 characters');
       } else {
-        // this.loadingForum = true;
+        this.loadingForum = true;
         const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
         const data1 = {
           content: data,
@@ -664,14 +664,18 @@ export class CoursedetailsComponent implements OnInit {
     }
     this.topicDiscussionData = [];
     const topicSlug = slug;
-    this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
-      this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
-      this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
-      this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
-      const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
-      const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
-      this.loadingForum = false;
-    });
+    if (this.userDetail?.nodebb_response?.uid) {
+      this.loadingForum = true;
+      this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response?.uid).subscribe((result: any) => {
+        this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
+        this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
+        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+        const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
+        const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+        this.loadingForum = false;
+      });
+    }
+
     // this.Lservice.getSingleThread(topicSlug, this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
     //   this.topicDiscussionData = result.data;
     //   this.topicDiscussionData1 = Object.assign({}, result.data);
@@ -728,17 +732,17 @@ export class CoursedetailsComponent implements OnInit {
         this.toastr.warning('Content should be less than 60000 characters');
       } else {
         this.closedialogbox();
-        // this.loadingForum = true;
+        this.loadingForum = true;
         this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?._id,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
           .subscribe((result: any) => {
-            // this.loadingForum = true;
+            this.loadingForum = true;
             this.addThreadForm?.reset();
             if (result.data.CreateNewThread?.success === 'true') {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              // this.loadingForum = false;
+              this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);
@@ -750,10 +754,10 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  likeandunlikepost(d) {
+  likeandunlikepost(d ?) {
     console.log('abc', this.userDetail.nodebb_response);
-    if (this.userDetail.nodebb_response != null) {
-      const data = { uid: this.userDetail?.nodebb_response.uid, pid: d.pid };
+    if (this.userDetail.nodebb_response != null || d !== undefined) {
+      const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
       if (d.bookmarked) {
         d.bookmarked = !d.bookmarked;
         d.bookmarks = d.bookmarks - 1;
@@ -766,7 +770,7 @@ export class CoursedetailsComponent implements OnInit {
             // this.toastr.success('Unliked successfully');
             // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
           }
-          // this.loadingForum = false;
+          this.loadingForum = false;
         });
       } else {
         d.bookmarked = !d.bookmarked;
@@ -780,7 +784,7 @@ export class CoursedetailsComponent implements OnInit {
             // this.toastr.success('Liked successfully');
             // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
           }
-          // this.loadingForum = false;
+          this.loadingForum = false;
         });
       }
     } else {

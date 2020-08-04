@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
-    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
     // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userDetailes = this.gs.checkLogout();
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');

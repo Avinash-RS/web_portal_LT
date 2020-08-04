@@ -788,7 +788,7 @@
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                             &nbsp;
                                             <button mat-button class="f_size_12 no_padding"
-                                                (click)="likeandunlikepost(topicDiscussionData?.posts[0])">
+                                                (click)="likeandunlikepost(topicDiscussionData?.posts && topicDiscussionData?.posts[0])">
                                                 <mat-icon class="action_icon"
                                                     *ngIf="topicDiscussionData?.posts && !topicDiscussionData?.posts[0]?.bookmarked">
                                                     thumb_up_alt</mat-icon>
