@@ -110,21 +110,24 @@ export class LearnerServicesService {
   }
 
   postcomment(data) {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const httpOptions = {
-      headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
+      headers: new HttpHeaders({ Authorization: token })
     };
     return this.http.post(this.envApi + 'postcomment', data, httpOptions);
   }
 
   unlikepost(data) {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const httpOptions = {
-      headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
+      headers: new HttpHeaders({ Authorization: token })
     };
     return this.http.post(this.envApi + 'post_unlike', data, httpOptions);
   }
   likepost(data) {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const httpOptions = {
-      headers: new HttpHeaders({ Authorization: localStorage.getItem('token') })
+      headers: new HttpHeaders({ Authorization: token })
     };
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }

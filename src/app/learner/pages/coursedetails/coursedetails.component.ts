@@ -484,6 +484,7 @@ export class CoursedetailsComponent implements OnInit {
   sendComment(type, data, array?, pidData?) {
     let d = data;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
+    console.log(d.length);
     if (d.length > 8) {
       if (d.length > 55500) {
         this.toastr.warning('Comment should be less than 60000 characters');
@@ -504,6 +505,7 @@ export class CoursedetailsComponent implements OnInit {
           created_by: this.userDetail.username,
           a2i: this.a2iFlag || false,
         };
+        console.log(data1);
         this.Lservice.postcomment(data1).subscribe((result: any) => {
           this.a2iFlag = false;
           if (result.success) {
@@ -695,6 +697,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   createNewThread() {
+    console.log(this.addThreadForm.value);
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
