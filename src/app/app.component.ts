@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
+import { slideInAnimation } from './router.animation';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { environment } from '@env/environment.collageConnect';
 
@@ -14,25 +15,26 @@ import { environment } from '@env/environment.collageConnect';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ slideInAnimation ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   ipAddress = '';
-  title = 'Lxpfrontend';
+  title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
   constructor(private router: Router,
-    private gs: GlobalServiceService,
-    private http: HttpClient,
-    private activatedRoute: ActivatedRoute,
-    private APIService: WcaService,
-    private titleService: Title,
-    private commonService: CommonServicesService,
-    public Lservice: LearnerServicesService,
+              private gs: GlobalServiceService,
+              private http: HttpClient,
+              private activatedRoute: ActivatedRoute,
+              private APIService: WcaService,
+              private titleService: Title,
+              private commonService: CommonServicesService,
+              public Lservice: LearnerServicesService,
 
   ) {
     this.getIPAddress();
-    this.getorganizationbyiddetails();
+    // this.getorganizationbyiddetails();
   }
 
   ngOnInit() {
@@ -89,20 +91,20 @@ export class AppComponent {
     this.loaderSubscription.unsubscribe();
   }
 
-  getorganizationbyiddetails() {
-    const organizationid = environment.orgId;
-    if (organizationid === '') {
-      // localStorage.clear();
-      localStorage.removeItem('organizationDetails');
-    }
+//   getorganizationbyiddetails() {
+//     const organizationid = environment.orgId;
+//     if (organizationid === '') {
+//       // localStorage.clear();
+//       localStorage.removeItem('organizationDetails');
+//     }
 
-    this.Lservice
-      .get_organization_by_id(organizationid)
-      .subscribe((result: any) => {
-        console.log(result, 'resultdata');
-        if (result.data?.get_organization_by_id?.success) {
-          localStorage.setItem('organizationDetails', JSON.stringify(result.data?.get_organization_by_id?.message));
-        }
-      });
-  }
+//     this.Lservice
+//     .get_organization_by_id(organizationid)
+//     .subscribe((result: any) => {
+//       console.log(result, 'resultdata');
+//       if (result.data?.get_organization_by_id?.success) {
+//         localStorage.setItem('organizationDetails', JSON.stringify(result.data?.get_organization_by_id?.message));
+//       }
+//     });
+// }
 }

@@ -7,25 +7,39 @@
     <li class="breadcrumb-item active" aria-current="page">All courses</li>
   </ol>
 </nav>
-<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
+<!-- container -->
+<div class="">
+  <div  class="row">
+    <div class="col-8" style="margin-top: 10px;">
+      <!-- <button class="menubtn" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
+        <i class="fa fa-filter colrr"></i>
+      </button>   -->
+    </div>
+
+    <div class=" col-4 display_flex" style="margin-top: 8px;">
+      <div style="display: inline-flex;">
+        <mat-icon class="layouticon"(click)="onDisplayModeChange(1)">view_module</mat-icon>
+        <mat-icon  class="layouticon" (click)="onDisplayModeChange(2)">menu</mat-icon>
+      </div>
+    
+      <button class="menubtn" (click)="viewCategory(element)">Category</button>   
+     
+      <button  class="menubtn"> Sort by</button>   
+
+    </div>
+
+  </div>
+  
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="loader" style="height:100%">
   <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
-</div>
-<br> <br>
-<div class="row">
-  <div class="col-md-10 col-sm-12 col-12">
-    <button class="submit" (click)="viewCategory(element)"> Category
-      <i class="fa fa-chevron-down colr"></i>
-    </button>
+</div> -->
+
+<!-- <div class="row"> -->
+  <!-- <div class="col-md-10 col-sm-12 col-12">
     <button class="submit" (click)="showAppliedFiltre = !showAppliedFiltre"> Filter
       <i class="fa fa-filter colrr"></i>
     </button>
-    <!-- <ng-container *ngIf="!showAppliedFiltre">
-      <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
-        [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID"
-        [level3selectedID]="level3selectedID" [allLvlCategoryFilterVal]="allLvlCategoryFilterVal"
-        [allLvlCategory]="allLvlCategory"  [viewallcourse]= "true">
-      </app-guideline-search>
-    </ng-container> -->
+
     <button class="submit sort" mat-button [matMenuTriggerFor]="Sort">Sort by
       <i class="fa fa-chevron-down colrr"></i>
     </button>
@@ -34,36 +48,23 @@
       <button mat-menu-item (click)="sorting('Z-A')">Z-A</button>
     </mat-menu>
 
-  </div>
-  <div class="col-md-2 col-sm-12 col-12">
-    <button class="icon_fnt" mat-button (click)="onDisplayModeChange(1)">
-      <mat-icon class="icon">view_module</mat-icon>
-    </button>
+  </div> -->
 
-    <button class="icon_fnt" mat-button (click)="onDisplayModeChange(2)">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </div>
-  <br>
-  <br>
   
   <div class="row">
-    <div class="col-3" *ngIf="!showAppliedFiltre">
-      <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
+    <div class="col-3">
         <app-guideline-search [Lvl1CatId]="Lvl1CatId" [Lvl2CatId]="Lvl2CatId" [Lvl3CatId]="Lvl3CatId"
           [level1selectedID]="level1selectedID" [level2selectedID]="level2selectedID"
           [level3selectedID]="level3selectedID" [allLvlCategoryFilterVal]="allLvlCategoryFilterVal"
           [allLvlCategory]="allLvlCategory"  [viewallcourse]= "true">
         </app-guideline-search>
-      <!-- </ng-container> -->
     </div>
-  <!-- <ng-container *ngIf="!showAppliedFiltre"> -->
-  <div class="col-9" *ngIf="!showAppliedFiltre">
-    <div class="container">
+  <div class="col-9" >
+    <!-- <div class=""> -->
       <div class="row" *ngIf="displayMode === 1">
         <ng-container
           *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+          <div class="">
             <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
               [showWishlist]="true" [showStatus]="false" [showRating]="true" [goto]="goto" [showCount]="true">
             </app-course-component> <br>
@@ -84,16 +85,15 @@
         </ng-container>
       </div>
 
-    </div>
+    <!-- </div> -->
   </div>
-  <!-- </ng-container> -->
-  <ng-container *ngIf="showAppliedFiltre">
-    <div class="col-12 allcourses">
-      <div class="container ">
+  <!-- <ng-container *ngIf="showAppliedFiltre">
+    <div class="allcourses">
+      <div class=" ">
         <div class="row" *ngIf="displayMode === 1">
           <ng-container
             *ngFor="let c of allcourses  | paginate: { totalItems: courseCount,itemsPerPage: 20, currentPage: paginationpgno } ;let j=index">
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <div >
               <app-course-component [course]="c" [canNavigate]="true" [showEnroll]="true" [showCartBtn]="false"
                 [showWishlist]="true" [showStatus]="false" [showCount]="true" [showRating]="true">
               </app-course-component> <br>
@@ -116,7 +116,7 @@
 
       </div>
     </div>
-  </ng-container>
+  </ng-container> -->
 </div>
 
 <br>
@@ -124,6 +124,4 @@
   <pagination-controls class="my-pagination" (pageChange)="onpagination($event)">
   </pagination-controls>
 </div>
-<!-- <ng-container *ngIf="!showCategory">
-    <app-category-component></app-category-component>
-  </ng-container> -->
+<!-- </div> -->

@@ -2,13 +2,26 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { data } from 'jquery';
 // import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
-  styleUrls: ['./learner-my-course.component.scss']
+  styleUrls: ['./learner-my-course.component.scss'],
+  animations: [
+    trigger('EnterLeave', [
+      state('flyIn', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('0.5s 300ms ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class LearnerMyCourseComponent implements OnInit {
   strDate: Date = new Date();
@@ -26,7 +39,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
 
   constructor(
-    // public translate: TranslateService, 
+    // public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router) {
     this.userDetailes = this.gs.checkLogout();
@@ -37,23 +50,24 @@ export class LearnerMyCourseComponent implements OnInit {
   // ngOnInit() {
   // this.translate.use(localStorage.getItem('language'));
   // }
-  ngOnInit() {    
-    var dateValue = new Date().toISOString()
+  ngOnInit() {
+    const dateValue = new Date().toISOString();
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
+      // tslint:disable-next-line:no-string-literal
       this.results['message'].forEach((element, index) => {
-        if (index == 0) {
-          element.activity_details.ongoing = "true"
-        }
-        else {
-          element.activity_details.ongoing = "false"
+        if (index === 0) {
+          element.activity_details.ongoing = 'true';
+        } else {
+          element.activity_details.ongoing = 'false';
         }
       });
-      console.log("after playlist order UPDATED", data.data);
+      // console.log('after playlist order UPDATED', data.data);
     }, (error) => {
-      console.log('there was an error sending the query', error);
-    })
-    console.log("data retreived", data);
+      // console.log('there was an error sending the query', error);
+    });
+    // console.log('data retreived', data);
+
 
   }
 
@@ -77,23 +91,23 @@ export class LearnerMyCourseComponent implements OnInit {
         this.enrolledCourses.forEach(element => {
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
-              element.course_duration = Number(element.course_duration.slice(0, 2)) + 1
+              element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
             } else {
               element.course_duration = Number(element.course_duration.slice(0, 2));
             }
           }
         });
-        this.enrolledCourses.forEach(element => {
-          if (element.coursePlayerStatus.course_percentage) {
-            element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
-          }
-        });
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        // this.enrolledCourses.forEach(element => {
+        //   if (element.coursePlayerStatus.course_percentage) {
+        //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+        //   }
+        // });
+        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||
             item.coursePlayerStatus?.status === 'start';
         });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
           return item.coursePlayerStatus?.status === 'completed';
         });
         this.completed = arr1;
@@ -149,9 +163,9 @@ export class LearnerMyCourseComponent implements OnInit {
   close() {
     this.show = false;
   }
-  
-  launchAssignment(value){
-    if(value.activity_details.activitytype == "Assignment"){
+
+  launchAssignment(value) {
+    if (value.activity_details.activitytype === 'Assignment') {
       const detail = {
         id: value.activity_details.courseid,
         wishlist: false,
@@ -161,8 +175,8 @@ export class LearnerMyCourseComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
   }
-  launchActivity(value){    
-      window.open(value.activity_details.link)
+  launchActivity(value) {
+      window.open(value.activity_details.link);
   }
 }
 

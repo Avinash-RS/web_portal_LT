@@ -1,16 +1,16 @@
 <app-header></app-header>
-<button mat-button class="backbtn" [routerLink]="['/Learner/home']">
+<!-- <button mat-button class="backbtn" [routerLink]="['/Learner/MyCourse']">
     <mat-icon class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to My Courses
-</button>
+</button> -->
 
-<div class="row">
+<div class="row "  id='hideMe'>
     <div class="col-12">
-        <h1 class="nameh1">{{course?.course_name | titlecase }}</h1>
+        <h1 class="nameh1 animated animatedFadeInUp fadeInUp">{{course?.course_name | titlecase }}</h1>
     </div>
 </div>
 
-<div class="container007">
+<div class="container007 animated animatedFadeInUp fadeInUp">
     <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
         <mat-drawer #drawer class="drawer" mode="side" opened="true">
             <mat-toolbar class="header">
@@ -40,7 +40,7 @@
                             <mat-panel-title class="module-container">
                                 <div class="row">
                                     <div style="margin-top: 8px;">
-                                        <span class='index-number'>{{i+1}}</span>
+                                        <span class='index-number'>{{i+1}}.</span>
                                     </div>
                                     <div>
                                         <div class="moduleHead" matTooltip="{{res?.title}}">
@@ -74,7 +74,7 @@
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
 
                                             <ng-template matStepLabel>
-                                                <span
+                                                <span class="topicnm"
                                                     (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
                                                     {{mod?.title}}</span>
                                             </ng-template>
@@ -98,7 +98,7 @@
             <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
 
             <div class="">
-                <mat-tab-group>
+                <mat-tab-group animationDuration="1000ms">
                     <mat-tab label="About the course">
                         <h3 class="head-h1">Course description</h3>
                         <div class="vertical"></div>
@@ -108,11 +108,15 @@
                             <div style="max-width: 196px;">
                                 <span class="font-color;padding: 5px">{{content?.totalResourseCount}} downloadable
                                     resources</span>
-                            </div>&nbsp; |&nbsp;
+                            </div>
+                            <!-- &nbsp; |&nbsp; -->
+                            <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
                             <div style="max-width: 100px;">
                                 <span class="font-color;padding: 5px">
                                     {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
-                            </div>&nbsp; |&nbsp;
+                            </div>
+                            <!-- &nbsp; |&nbsp; -->
+                            <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
                             <div style="max-width: 78px;">
                                 <span class="font-color;padding: 5px">{{course?.course_language}}</span>
                             </div>
@@ -308,7 +312,7 @@
                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                         description
                                                                     </mat-icon>
-                                                                    <div class="col-2 no-cursor">
+                                                                    <div class="col-1 no-cursor" matTooltip="{{file.type_name}}">
                                                                         {{file.type_name}}
                                                                     </div>
 
@@ -322,31 +326,46 @@
                                                                         <mat-icon *ngIf="!file.enableView"
                                                                             class="viewDoc">remove_red_eye</mat-icon>
                                                                     </div>
-                                                                    <div class="col-2" matTooltip="Course start date">
+                                                                    <div class="col-2">
                                                                         {{courseStartDate}}
                                                                     </div>
-                                                                    <div class="col-2" matTooltip="Course end date">
+                                                                    <div class="col-2">
                                                                         {{courseEndDate}}
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        {{file?.score}}
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <button mat-stroked-button
-                                                                            matTooltip="Click upload button to add the file"
-                                                                            [disabled]="file?.doc_status === false || !assignmentContent?.enableUpload ||
-                                                                            !file?.startDate" (click)="fileInput.click()">
+                                                                            [disabled]="!assignmentContent?.enableUpload"
+                                                                             (click)="fileInput.click()">
                                                                             Upload</button>
                                                                         <input class="form-control border-right-0"
-                                                                            [disabled]="file?.doc_status === false"
                                                                             type='file' id="upload-photo" #fileInput
                                                                             (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
                                                                     </div>
-                                                                    <div class="col-2 disply no-cursor">
+                                                                    <div class="col-1">
+                                                                        <mat-icon class="icon" matTooltip="File size: 10mb
+                                                                        Type: pdf,jpg,jpeg,png only">info</mat-icon>
+                                                                    </div>
+                                                                    <!-- <div class="col-2 disply no-cursor">
                                                                         <mat-icon class="no-cursor"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">
                                                                             check_circle</mat-icon>
                                                                         <span style="padding-top: 4px;"
                                                                             [ngClass]="file.doc_status === true ? 'blue' : 'grey'">&nbsp;
                                                                             File has been uploaded</span>
+                                                                    </div> -->
+                                                                    <div class="col-2 disply no-cursor"  *ngIf="file.doc_status === false">
+                                                                        <mat-icon class="no-cursor icon">
+                                                                            check_circle</mat-icon>
+                                                                        <span class="icon" style="padding-top: 4px;">&nbsp;
+                                                                            Submitted</span>
                                                                     </div>
+                                                                    <div class="col-2 disply no-cursor"   *ngIf="file.grade_status === true">
+                                                                     <span class="grade" style="padding-top: 4px;color: green;" >&nbsp;
+                                                                            Graded</span>
+                                                                            </div>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -1,22 +1,22 @@
 <div class="row" *ngIf="!showAppliedFiltre">  
-  <div class="col-3">
+  <div class="">
     <div class="row box" *ngIf="viewallcourse">
       <div class="col-2 width-10">
-        <h3 class="text">Applied filters : </h3>
+        <div class="text">Applied filters : </div>
       </div>
       <div class="col-8">
         <span class="cover" *ngFor="let item of selectedFilter?.category1; let i = index">{{item?.category_name}}
-          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
+          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">cancel</mat-icon>
         </span>
         <span class="cover" *ngFor="let item of selectedFilter?.category2; let i = index">{{item?.sub_category_name}}
-          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
+          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">cancel</mat-icon>
         </span>
         <span class="cover"
           *ngFor="let item of selectedFilter?.category3; let i = index">{{item?.super_sub_category_name}}
-          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">clear</mat-icon>
+          <mat-icon class="clear-icon" (click)="removeCategoryVal(item)">cancel</mat-icon>
         </span>
         <span class="cover" *ngFor="let item of selectedFilter?.filterVal; let i = index">{{item}}
-          <mat-icon class="clear-icon" (click)="removeFilterVal(item)">clear</mat-icon>
+          <mat-icon class="clear-icon" (click)="removeFilterVal(item)">cancel</mat-icon>
         </span>
         <span class="cover" *ngIf="publishedFromDate && publishedToDate">{{publishedFromDate}}
           <!-- <mat-icon class="clear-icon" (click)="removeFromdate()">clear</mat-icon> -->
@@ -27,13 +27,13 @@
       </div>
 
       <div class="col-2">
-        <div class="smallline"></div>
-        <h3 class="text2" (click)="clearAll()"> Clear all filters </h3>
+        <!-- <div class="smallline"></div> -->
+        <div class="text2" (click)="clearAll()"> Clear all filters </div>
       </div>
     </div>
     <!--------------------------Filter------------------------>
     <div class="row">
-      <div class="col-3">
+      <div class="">
         <div class="container1 containerShadow">
           <h3><b>Language</b></h3><br>
           <ul class="list-group">

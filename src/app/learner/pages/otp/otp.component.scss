@@ -1,15 +1,15 @@
 @import "variable";
 
-:host ::ng-deep input[type="text"] {
-  width: 100%;
-  // padding: 12px 20px;
-  margin: 1px 0;
-  // background: $color-light-blue;
-  display: inline-block;
-  border: 1px solid $color-border;
-  box-sizing: border-box;
-  border-radius: 0px !important;
-}
+// :host ::ng-deep input[type="text"] {
+//   width: 100%;
+//   // padding: 12px 20px;
+//   margin: 1px 0;
+//   // background: $color-light-blue;
+//   display: inline-block;
+//   border: 1px solid $color-border;
+//   box-sizing: border-box;
+//   border-radius: 0px !important;
+// }
 
 .otp {
   margin: 0 5px;
@@ -30,16 +30,16 @@
   }
 }
 
-:host ::ng-deep label {
-  margin-bottom: 0.1em !important;
-}
+// :host ::ng-deep label {
+//   margin-bottom: 0.1em !important;
+// }
 
-.btn.disabled,
-.btn:disabled {
-  opacity: 0.65;
-  color: $label2 !important;
-  background-color: $color-border !important;
-}
+// .btn.disabled,
+// .btn:disabled {
+//   opacity: 0.65;
+//   color: $label2 !important;
+//   background-color: $color-border !important;
+// }
 
 div.account {
   color: $color-blue;
@@ -133,26 +133,101 @@ div.account {
   overflow: hidden !important;
 }
 
-:host ::ng-deep.footericon {
-  width: 67%;
+:host ::ng-deep.signIn {
+  text-align: center !important;
+  margin-top: 27px !important;
+  color: $lxp-theme-green !important;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+:host ::ng-deep.footer20{
+  height: 50px;
+  bottom: 6px;
+  width: 100%;
+  position: absolute;
+}
+
+:host ::ng-deep.footericon{
+  width: 100%;
   position: absolute;
   margin-left: 5px;
-}
-:host ::ng-deep.footertext {
-  font-size: 13px;
-  margin-left: -18px;
-}
 
-:host ::ng-deep .powered {
-  font-size: 14px;
-  margin-left: -29px;
 }
-:host ::ng-deep.footer20 {
+:host ::ng-deep.footertext{
+  font-size: 14px !important;
+  font-weight: 400;
+  padding: 18px;
   position: absolute;
-  bottom: 20px;
-  width: 91%;
+  color: $lxp-footer-text;
 }
 
+:host ::ng-deep .powered{
+  font-size: 14px !important;
+  font-weight: 400;
+  padding: 18px;
+  position: absolute;
+  color: $lxp-footer-text;
+}
+input.mat-input-element {
+  margin-top: -3px !important;
+}
+
+:host ::ng-deep.mat-input-element {
+
+  margin: 3px !important;
+
+}
+.btn {
+       font-size: 16px;
+      background: $lxp-theme-green !important;
+      color: $color-white;
+      border-radius: 50px !important;
+      width: 54%;
+      height: 45px;
+      margin-left: 23%;
+      margin-right: 23%;
+      margin-top: 10%;
+  
+}
+.center{
+  text-align: center;
+}
+:host ::ng-deep .btn.disabled,
+.btn:disabled {
+color: $color-white !important;
+border-radius: .25rem;
+font-size: 16px;
+}
+.usericon input{
+  padding-left:25px;
+}
+
+::placeholder {
+  color: $color-border !important;
+  }
+
+.icon-color{
+  color:  #8c8c8c !important;
+  position: relative;
+  top: -2px;
+} 
+.error{
+    margin-top: 10px;
+}
+.label-color{
+    color: #5c6873;
+    font-family: "Roboto Condensed", sans-serif !important;
+}
+:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0em 0 !important;
+}
+:host ::ng-deep.mat-form-field-wrapper {
+  padding-bottom: .5em;
+}
 // mobile screen
 @media (max-width: 480px) {
   .wrap-reg {

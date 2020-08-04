@@ -1,4 +1,6 @@
-<div class="container learner-calender">
+<app-header></app-header>
+<div class="f_size_22  myC-head animated animatedFadeInUp fadeInUp ">Calendar</div>
+<div class=" learner-calender animated animatedFadeInUp fadeInUp">
     <div class="ui two column grid">
         <div class="column">
             <div class="uk-card uk-card-body">
@@ -7,8 +9,8 @@
                         <bs-datepicker-inline [bsConfig]="{containerClass: 'theme-blue' }" (bsValueChange)="getDateChangedValue($event)" [bsValue]="bsInlineValue"></bs-datepicker-inline>
                     </div>
                     <div *ngIf="selectedToday && learnerActivityList.length != 0" style="font-size: 16px; line-height: 1.5em;">
-                        <i class="fa fa-circle" style="color:#509ad4" aria-hidden="true"></i>
-                        <span class="sr-only">Example of circle-thin</span><span class="pl-2">On-going Courses</span></div>
+                        <i class="fa fa-circle" class="color_lxp_green" aria-hidden="true"></i>
+                        <span class="sr-only">Example of circle-thin</span><span class="pl-2">Ongoing Courses</span></div>
                 </div>
                 <br />
                 <br />
@@ -16,17 +18,42 @@
             <br />
         </div>
 
-        <div class="column scrollcard">
+        <div class="column scrollcard ">
             <div class="uk-card uk-card-body">
                 <div *ngIf="showErrorCard">
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <p>
-                            {{ errorMessage }}
+                    <div class=" errorbox animated animatedFadeInUp fadeInUp">
+                        <p class="para" >
+                            <!-- <span fontSet="material-icons-outlined" class="material-icons iconevent"> event_busy </span>  -->
+                            <span class=" f_size_15" style="padding: 15px;">{{ errorMessage }}</span>      
                         </p>
                     </div>
                 </div>
                 <div>
                     <ng-container *ngFor="let data of learnerActivityList">
+                    <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)" >
+                        <mat-card class="session-card">
+                          <div class="session-sub-card">
+                            <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{selectedDate | date :'dd MMM yyyy'}}
+                              </span>
+                     
+                            </div>
+                            <p class="coursenameT" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }"> {{ data.activity_details.coursename }}</p>
+                            <h5 class="m-l-4">{{ data.activity_details.topicname }}
+                                <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
+                            </h5>
+                            <h5 class="m-l-4" > <span class="f_wt_500 f_size_14">Type </span>: <span
+                                class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
+                              <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
+                              <span
+                                class="aligned-icon lxp-text f_size_14 f_wt_400">{{ data.activity_details.createdby_name }}</span>
+                                <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer float-right">Launch</button>
+                            </h5>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </ng-container>
+                
+                    <!-- <ng-container *ngFor="let data of learnerActivityList">
                         <div (click)="launchAssignment(data)" id="insidecard" class="uk-card uk-card-default uk-card-body" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }">
                             <h5>{{selectedDate | date :'dd MMM yyyy'}}
                                 <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
@@ -38,7 +65,7 @@
                                 <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 statBtn pointer float-right">Launch</button>
                             </p>
                         </div>
-                    </ng-container>
+                    </ng-container> -->
                     <br />
                 </div>
             </div>

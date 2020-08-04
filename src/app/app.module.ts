@@ -66,8 +66,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    GraphqlModule,
-    BrowserAnimationsModule,
+    GraphqlModule
   ],
   providers: [AlertComponentComponent,
     {

@@ -5,7 +5,29 @@
     top: -25px;
     right: -16px;
 }
-
+// auto hide course title 
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
 }
@@ -18,7 +40,7 @@
     width: 30px;
     font-size: 22px;
     margin-top: 27px;
-    background: $color-blue;
+    background: $lxp-theme-green;
     height: 30px;
     border-radius: 50px;
     color: $color-white;
@@ -45,13 +67,13 @@
 }
 
 .vertical {
-    border-left: 44px solid $bule2;
+    border-left: 44px solid $lxp-theme-green;
     height: 3px;
     margin-top: -15px;
 }
 
-.grey {
-    color: $bule2 !important;
+.grey{
+    color: $lxp-theme-green !important;
 }
 
 .blue {
@@ -59,7 +81,7 @@
 }
 
 .tickIcon {
-    color: $bule2;
+    color: $lxp-theme-green;
     font-size: 22px;
     width: 20px;
 }
@@ -86,7 +108,7 @@
 
 .margin-15 {
     margin-top: 8px;
-    margin-left: 0.2%;
+    margin-left: 4% !important;
 }
 
 .margin-10 {
@@ -96,7 +118,7 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    margin-left: -13px;
+    margin-left: -8px;
     width: 142px;
 
 }
@@ -158,15 +180,19 @@ li {
 }
 
 .head-h1 {
-    font-size: 18px;
-    color: $color-blue;
+    font-size: 20px;
+    color: $lxp-theme-green;
     margin-top: 10px;
+    font-weight: 500;
+
 }
 
 .head-h2 {
-    font-size: 18px;
-    color: $color-blue;
+    font-size: 20px;
+    color: $lxp-theme-green;
     margin-top: 10px;
+    font-weight: 500;
+
 }
 
 .arrow {
@@ -239,7 +265,7 @@ li {
     border-radius: 50%;
     margin-top: -17px;
     position: absolute;
-    border: 1px solid $bule2;
+    border: 1px solid $lxp-theme-green;
 }
 
 .authorname {
@@ -284,7 +310,7 @@ li {
 }
 
 .panel {
-    border: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
     width: 100%;
 }
 
@@ -298,6 +324,7 @@ li {
 
 .topicnm {
     font-size: 14px;
+    font-weight: normal;
 }
 
 .panel1 {
@@ -309,7 +336,7 @@ li {
 
 :host ::ng-deep .mat-expansion-panel-header {
     padding: 0 11px !important;
-    height: 69px !important;
+    height: 45px !important;
     // margin-top: 2px;
 }
 
@@ -324,7 +351,7 @@ li {
 }
 
 .index-number {
-    border: 1px solid $color-border;
+    // border: 1px solid $color-border;
     padding: 2px 8px;
 }
 
@@ -339,14 +366,16 @@ li {
     align-items: center;
     width: 100%;
     height: 700px;
-    border: 1px solid $color-border;
+    // border: 1px solid $color-border;
 }
 
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
 }
-
+// :host ::ng-deep.mat-tab-body{
+//     left: 24px !important;
+// }
 .curInclu {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -413,15 +442,37 @@ li {
     overflow: hidden !important;
 }
 
+.bodybg {
+    width: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    min-height: 100vh;
+    display: flex;
+    background-color: #ffffff;
+}
 
+:host ::ng-deep  .mat-tab-label .mat-tab-label-content {
+    font-size: 14px !important;
+    // font-weight: 500 !important;
+    // color: $label !important;
 
+}
+
+:host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
+    color: $color-blank !important;
+}
+
+:host /deep/ .mat-ink-bar {
+    height: 2px !important;
+    background-color: $lxp-theme-green !important;
+}
 
 /* For Desktop */
 @media only screen and (min-width: 620px) {
 
     :host /deep/ .mat-ink-bar {
-        height: 4px !important;
-        background-color: $bule2 !important;
+        height: 2px !important;
+        background-color:$lxp-theme-green !important;
     }
 
     .moduletime {
@@ -483,6 +534,8 @@ li {
     .mat-step-icon {
         background-color: #0E7D12 !important;
         color: $color-white !important;
+        height: 20px !important;
+        width: 20px !important;
     }
 }
 
@@ -490,6 +543,8 @@ li {
     .mat-step-icon {
         background-color: $color-yellow !important;
         color: $color-white !important;
+        height: 20px !important;
+        width: 20px !important;
     }
 }
 
@@ -498,11 +553,18 @@ li {
         background-color: $color-white !important;
         color: $color-blank !important;
         border: 2px solid $color-border;
+        height: 20px !important;
+        width: 20px !important;
     }
+
+}
+
+:host ::ng-deep  .mat-step-header{
+    margin-left: -7% !important;
 }
 
 .moduleHead {
-    padding-left: 16px;
+    padding-left: 8px;
     position: absolute;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -511,14 +573,14 @@ li {
 }
 
 .moduleund {
-    margin-left: 42px;
+    margin-left: 37px;
     font-weight: 500;
     height: 20px;
     margin-top: -8px;
 }
 
 .bottom-border {
-    border-bottom: 3px solid $bule2;
+    border-bottom: 3px solid $lxp-theme-green;
     border-right: inset;
     border-left: inset;
     border-left-color: transparent;
@@ -530,7 +592,8 @@ li {
     display: inline-block;
     max-width: 270px;
     overflow: hidden;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 :host ::ng-deep .mat-step-label {
@@ -559,7 +622,8 @@ li {
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
-    font-size: 18px !important;
+    font-size: 14px !important;
+    color: $label;
 }
 
 :host ::ng-deep.footericon {
@@ -571,12 +635,15 @@ li {
 
 .nameh1 {
     color: $color-blank !important;
+    padding-left: 8px;
+
 }
 
-//   :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
-//   box-shadow: none !important;
+
+  :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none !important;
 //   border: none !important;
-// }
+}
 
 // }
 
@@ -610,7 +677,7 @@ li {
 
 .send_btn {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #0066B7;
+    -webkit-text-stroke-color: $lxp-theme-green;;
     -webkit-text-fill-color: transparent;
     font-size: 30px;
 }
@@ -721,7 +788,7 @@ li {
 
 
 .bg-blue {
-    background-color: $color-landing-blue;
+    background-color:$lxp-theme-green;;
 }
 
 .dialogButtons {
@@ -767,7 +834,7 @@ li {
 .new_Thread {
     color: $color-white !important;
     border-radius: none !important;
-    background-color: #004072;
+    background-color: $lxp-theme-green;
     border: none;
     margin-right: 10px !important;
     float: right !important;
@@ -783,7 +850,7 @@ li {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: $color-landing-blue;
+    background-color: $lxp-theme-green;
     cursor: inherit !important;
     color: $color-white;
     font-size: 18px;
@@ -792,7 +859,7 @@ li {
 }
 
 .color-blue {
-    color: $color-landing-blue;
+    color: $lxp-theme-green;
 }
 
 .black_border {
@@ -817,7 +884,7 @@ li {
     padding-right: 25px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: $profile-t-grey;
-    -webkit-text-fill-color: $color-landing-blue;
+    -webkit-text-fill-color:$lxp-theme-green;
     font-size: 20px;
 }
 
@@ -912,7 +979,7 @@ li {
     .new_Thread {
         color: white !important;
         border-radius: none !important;
-        background-color:#004072;
+        background-color: $lxp-theme-green;
         border: none;
         margin-right: 10px !important;
         float: left !important
@@ -1001,3 +1068,12 @@ li {
     background-color: #f5f5f5 !important;
   }
 //Jasper CSS ends here
+
+//Ramya CSS starts here
+.icon {
+    color: $color-blue;
+}
+.grade {
+    color: $color-dark-green;
+}
+//Ramya CSS ends here

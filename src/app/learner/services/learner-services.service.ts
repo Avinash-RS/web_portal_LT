@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Apollo } from "apollo-angular";
+import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
 import {
   login,
   get_course_by_user,
@@ -38,7 +38,7 @@ import {
   // get_read_learner_activity,
   getReadLeanerActivity,
   get_organization_by_id
-} from "./operations/learner_query";
+} from './operations/learner_query';
 
 import {
   user_registration,
@@ -67,14 +67,14 @@ import {
   InsertCourseFeedback,
   playerstatusrealtime,
   CreateNewThread
-} from "./operations/learner_mutation";
+} from './operations/learner_mutation';
 
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
-import { Message } from "@angular/compiler/src/i18n/i18n_ast";
-import { from } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { from } from 'rxjs';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class LearnerServicesService {
   envWcaApi: any = environment.wcaapiurl;
@@ -114,7 +114,7 @@ export class LearnerServicesService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
-    return this.http.post(this.envApi + "postcomment", data, httpOptions);
+    return this.http.post(this.envApi + 'postcomment', data, httpOptions);
   }
 
   unlikepost(data) {
@@ -122,14 +122,14 @@ export class LearnerServicesService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
-    return this.http.post(this.envApi + "post_unlike", data, httpOptions);
+    return this.http.post(this.envApi + 'post_unlike', data, httpOptions);
   }
   likepost(data) {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
-    return this.http.post(this.envApi + "post_like", data, httpOptions);
+    return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
   user_registration(email, full_name, termsandconditions) {
@@ -468,7 +468,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: get_module_topic,
       variables: {
-        course_id: course_id
+        course_id
       }
     });
   }
@@ -624,8 +624,8 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: getCoursePlayerStatusForCourse,
       variables: {
-        user_id: user_id,
-        course_id: course_id
+        user_id,
+        course_id
       }
     });
   }
@@ -706,7 +706,7 @@ export class LearnerServicesService {
     });
   }
 
-  get_organization_by_id(organization_id){
+  get_organization_by_id(organization_id) {
     return this.Apollo.query({
       query: get_organization_by_id,
       variables: {

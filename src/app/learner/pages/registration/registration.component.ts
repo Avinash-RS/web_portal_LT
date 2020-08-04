@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -7,7 +7,7 @@ import * as myGlobals from '@core/globals';
 import { TermsconditionsComponent } from '../termsconditions/termsconditions.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-
+import {ErrorStateMatcher} from '@angular/material/core';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -33,8 +33,9 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      fullname: new FormControl('', myGlobals.fullnameVal),
-      email: new FormControl('', myGlobals.emailVal),
+      fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('[a-zA-Z]+')]],
+      email: ['', [ Validators.minLength(6),
+        Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
       termsandconditions: new FormControl('', [])
     }, {
     });
@@ -66,7 +67,9 @@ export class RegistrationComponent implements OnInit {
      }
     });
   }
-
+  register() {
+    this.router.navigateByUrl('/Learner/login');
+  }
   onSubmit() {
     if (this.registerForm.valid) {
       this.Submit();

@@ -149,13 +149,21 @@ export class CourseComponentComponent implements OnInit {
   goTocourse(status) {
     if (this.finalStatus !== 'Completed') {
       const detail1 = {
-        id: 'Scaffolding',
+        id: this.course.course_id,
         user: this.userDetail.user_id,
         course_id: this.course.course_id,
-        user_obj_id: this.userDetail._id,
-        feed_back: this.course.feed_back
+        // user_obj_id: this.userDetail._id,
+        // feed_back: this.course.feed_back
       };
-      this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+
+      // id: c.course_id,
+      // wishlist: c.wishlisted || false,
+      // wishlist_id: c.wishlist_id || null,
+      // enrollment_status: null,
+      // this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail1 } });
+      localStorage.setItem('Courseid', this.course.course_id);
+      // localStorage.setItem('persentage', c.coursePlayerStatus.course_percentage);
     }
 
   }

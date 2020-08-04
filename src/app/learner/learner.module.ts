@@ -75,18 +75,17 @@ const routes: Routes = [
     path: 'courseDetail',
     component: CoursedetailsComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Course details' }
+    data: { animation: 'Course details' }
   },
   {
     path: 'register',
-    canActivate: [AuthGuard],
     component: RegistrationComponent,
-    data: { title: 'Learner  Registration' }
+    data: { animation: 'Learner  Registration' }
   },
   {
     path: 'otp',
     component: OtpComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration OTP' }
   },
   {
@@ -97,13 +96,11 @@ const routes: Routes = [
   },
   {
     path: 'recover',
-    canActivate: [AuthGuard],
     component: ForgotUsernameAndPasswordComponent,
-    data: { title: 'Learner Forget Password' }
+    data: { animation: 'Learner Forget Password' }
   },
   {
     path: 'recoverotp',
-    canActivate: [AuthGuard],
     component: RecoverFogotpasswordOTPComponent,
     data: { title: 'Learner Forget Password OTP' }
   },
@@ -111,48 +108,53 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Learner  Profile' }
+    data: { animation: 'Learner  Profile' }
   },
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Learner  MyCourse' }
+    data: { animation: 'Learner  MyCourse' }
   },
   {
     path: 'resetpassword',
-    canActivate: [AuthGuard],
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },
+
   {
-    path: 'terms',
-    canActivate: [AuthGuard],
-    component: TermsconditionsComponent,
-    data: { title: 'Terms and conditions' }
+    path: 'calendar',
+    component: LearnerCalendarComponent,
+    data: { animation: 'Calendar' }
   },
-  {
-    path: 'scorm',
-    component: ScormplayerComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Course Player' }
-  },
+
+  // {
+  //   path: 'terms',
+  //   component: TermsconditionsComponent,
+  //   data: { title: 'Terms and conditions' }
+  // },
+  // {
+  //   path: 'scorm',
+  //   component: ScormplayerComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { title: 'Course Player' }
+  // },
   {
     path: 'viewallcourses',
     component: ViewAllCoursesComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'dashboard',
-    component: LearnerDashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: LearnerHomeComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Learner home' }
-  },
+  // {
+  //   path: 'dashboard',
+  //   component: LearnerDashboardComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'home',
+  //   component: LearnerHomeComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { animation: 'Learner home' }
+  // },
   {
     path: 'forbidden',
     component: ForbiddenComponent,
@@ -216,7 +218,7 @@ const routes: Routes = [
     MyDatePickerModule,
     InfiniteScrollModule,
     PdfJsViewerModule,
-    RatingModule
+    RatingModule,
   ],
   providers: [
     Apollo

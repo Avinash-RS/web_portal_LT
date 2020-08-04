@@ -17,17 +17,19 @@ export class PasswordComponent implements OnInit {
   currentUser: any = [];
   usersuggestion: any = [];
   passwordForm: FormGroup;
-  systemip;
+  systemip: string;
   userid: any;
   options: string[] = [];
+  hide = true;
+  hide2 = true;
   lowercase = false;
-  uppercase = false;
+  uppercase  = false;
   number = false;
-  spicalcharacter = false;
-  showpassbutton = false;
-  showpsseye = false;
-  showconpassbutton = false;
-  showconpsseye = false;
+  spicalcharacter  = false;
+  showpassbutton  = false;
+  showpsseye  = false;
+  showconpassbutton  = false;
+  showconpsseye  = false;
 
   constructor(private router: Router,
               private loader: Ng4LoadingSpinnerService,
@@ -39,10 +41,13 @@ export class PasswordComponent implements OnInit {
     this.systemip = localStorage.getItem('Systemip');
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.usernamesplVal),
-      password: new FormControl('', myGlobals.passwordVal),
-      confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), 
-        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+      // username: new FormControl('', myGlobals.usernamesplVal),
+      username: ['', [Validators.required, Validators.minLength(3),
+      Validators.maxLength(20), Validators.pattern(/^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/)]],
+      password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
+      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)]],
+      confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
+        Validators.maxLength(20), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
     }, {
       validator: MustMatch('password', 'confirmpassword'),
     });
@@ -102,7 +107,7 @@ export class PasswordComponent implements OnInit {
                 localStorage.setItem('role', 'learner');
                 localStorage.setItem('remember_me', 'true');
                 localStorage.setItem('token', loginresult.data.login.message.token);
-                localStorage.setItem('UserToken', JSON.stringify(data.data['user_registration_done'].token));
+                localStorage.setItem('UserToken', JSON.stringify(data.data.user_registration_done.token));
                 const ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);
                 this.loader.hide();
@@ -110,7 +115,8 @@ export class PasswordComponent implements OnInit {
                 if (loginresult.data.login.message.is_profile_updated) {
                   this.router.navigate(['/Learner']);
                 } else {
-                  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true});
+                  this.toastr.warning('Your profile is incomplete !',
+                  'Please provide data for all mandatory fields', { closeButton: true});
                   this.router.navigate(['/Learner/profile']);
                 }
               }
@@ -127,7 +133,7 @@ export class PasswordComponent implements OnInit {
     });
   }
 
-  userNamesuggestion(data?) {
+  userNamesuggestion() {
     this.userid = localStorage.getItem('key');
     this.service.userNamesuggestion(this.userid).subscribe((data: any) => {
       if (data.data.user_registration_username_suggestion.success === 'true') {

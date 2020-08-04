@@ -26,43 +26,43 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   isForgotPasswordEnable = false;
   isshow = true;
   isnextBtnEnable = true;
-  constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private toastr: ToastrService,
-    private loader: Ng4LoadingSpinnerService,
-    public service: LearnerServicesService) {
+  constructor( private formBuilder: FormBuilder,
+               private router: Router,
+               private toastr: ToastrService,
+               private loader: Ng4LoadingSpinnerService,
+               public service: LearnerServicesService) {
 
     this.type = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
       this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.type) || 'forgotUsername';
     if (this.type === 'forgotUsername') {
-      this.isForgotUsernameEnable = false;
-      this.isForgotPasswordEnable = true;
-    } else {
-      this.isForgotUsernameEnable = true;
-      this.isForgotPasswordEnable = false;
+          this.isForgotUsernameEnable = false;
+          this.isForgotPasswordEnable = true;
+        } else {
+          this.isForgotUsernameEnable = true;
+          this.isForgotPasswordEnable = false;
+        }
     }
-  }
 
-  ngOnInit() {
+ngOnInit() {
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),
       username: new FormControl('', myGlobals.usernamesplVal),
     }, {
 
-    });
+  });
   }
 
 
-  get f() { return this.forgotUsername.controls; }
-  get fp() { return this.forgotPasswordform.controls; }
+get f() { return this.forgotUsername.controls; }
+get fp() { return this.forgotPasswordform.controls; }
 
-  inputChanged(element: HTMLElement) {
+inputChanged(element: HTMLElement) {
     this.subtype = element.getAttribute('formControlName');
   }
 
-  focusout(e) {
-    if (e.target.id === 'mobile' && e.target.value !== '' && e.target.value.length > 9) {
+focusout(e) {
+    if ( e.target.id === 'mobile' && e.target.value !== '' && e.target.value.length > 9) {
       this.forgotUsername.controls.email.disable();
       this.isshow = false;
     } else if (e.target.id === 'email' && e.target.value !== '' && e.target.value.length > 0) {
@@ -75,7 +75,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
   }
 
-  forgotusername() {
+forgotusername() {
     this.type = 'username';
     this.loader.show();
     this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, this.forgotUsername.value.email)
@@ -92,7 +92,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       });
   }
 
-  getUserDetails() {
+getUserDetails() {
     this.loader.show();
     this.recoveryTypes = [];
     this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe((data: any) => {
@@ -115,7 +115,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
       }
     });
   }
-  change(event) {
+change(event) {
     if (event.target.value.length > 0 || event.target.value.length === '') {
       this.recoveryTypes = [];
       this.isenable = false;
@@ -124,7 +124,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
 
-  forgotPassword(recovertype) {
+forgotPassword(recovertype) {
     if (recovertype?.type === 'mobile') {
       this.loader.show();
       this.service.submit_otp(this.currentUser, 'this.currentUser._id', recovertype.value, this.forgotUsername.value.email)
@@ -155,7 +155,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   }
 
 
-  resetForm(val) {
+resetForm(val) {
     if (val === 'mobile') {
       this.forgotUsername.get('mobile').reset();
       this.forgotUsername.get('mobile').setValidators(myGlobals.mobileVal);

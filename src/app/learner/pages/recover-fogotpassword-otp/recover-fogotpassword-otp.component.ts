@@ -19,28 +19,28 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   interval;
   minutes: number;
   seconds: number;
-  verifybutton: Boolean = false;
+  verifybutton = false;
   userId: any;
   email: string;
   details: any;
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
-    private loader: Ng4LoadingSpinnerService,
-    private router: Router,
-    private toastr: ToastrService,
-    public service: LearnerServicesService,) {
-    this.mobile = this.activatedRoute.snapshot.paramMap.get('mobile');
-  }
-  config = {
-    allowNumbersOnly: true,
-    length: 4,
-    isPasswordInput: false,
-    disableAutoFocus: false,
-    placeholder: '',
-    inputStyles: {
-      width: '40px',
-      height: '40px',
+  constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
+                private loader: Ng4LoadingSpinnerService,
+                private router: Router,
+                private toastr: ToastrService,
+                public service: LearnerServicesService, ) {
+      this.mobile = this.activatedRoute.snapshot.paramMap.get('mobile');
     }
-  };
+    config = {
+      allowNumbersOnly: true,
+      length: 4,
+      isPasswordInput: false,
+      disableAutoFocus: false,
+      placeholder: '',
+      inputStyles: {
+        width: '40px',
+        height: '40px',
+      }
+    };
 
   ngOnInit() {
     const val = localStorage.getItem('Details_user');
@@ -48,8 +48,8 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
 
     this.recoverOTPForm = this.formBuilder.group({
       otp: new FormControl('', []),
-    }, {
-    });
+  }, {
+  });
     this.timer();
   }
   get f() { return this.recoverOTPForm.controls; }
@@ -93,7 +93,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
       this.timer();
       this.loader.hide();
       Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
-    });
-  }
+  });
+        }
 
 }

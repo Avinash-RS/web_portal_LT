@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -72,7 +72,9 @@ export class OtpComponent implements OnInit {
   ngOnInit() {
     this.systemip = localStorage.getItem('Systemip');
     this.otpForm = this.formBuilder.group({
-      mobile: new FormControl('', myGlobals.mobileVal),
+      // mobile: new FormControl('', myGlobals.mobileVal),
+      mobile: ['', [Validators.required, Validators.minLength(10),  Validators.maxLength(10),
+        Validators.pattern(/^[6-9][0-9]{9}$/)]],
       otp: new FormControl('', []),
     }, {
 
