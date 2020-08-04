@@ -20,5 +20,5 @@ RUN npm run build
 FROM nginx:1.17.1-alpine
 COPY --from=build /usr/src/app/dist/lxpfrontend /usr/share/nginx/html
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
-COPY ./selfsigncert.crt /etc/ssl/certs/
-COPY ./privateKey.key /etc/ssl/certs/
+COPY ./bundle.crt /etc/ssl/certs/
+COPY ./kaushalyas.key /etc/ssl/certs/
