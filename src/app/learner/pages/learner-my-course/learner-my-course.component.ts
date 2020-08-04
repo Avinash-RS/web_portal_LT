@@ -62,11 +62,11 @@ export class LearnerMyCourseComponent implements OnInit {
           element.activity_details.ongoing = 'false';
         }
       });
-      console.log('after playlist order UPDATED', data.data);
+      // console.log('after playlist order UPDATED', data.data);
     }, (error) => {
-      console.log('there was an error sending the query', error);
+      // console.log('there was an error sending the query', error);
     });
-    console.log('data retreived', data);
+    // console.log('data retreived', data);
 
 
   }

@@ -85,7 +85,7 @@ const routes: Routes = [
   {
     path: 'otp',
     component: OtpComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration OTP' }
   },
   {

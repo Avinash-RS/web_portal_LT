@@ -20,7 +20,7 @@ import { environment } from '@env/environment.collageConnect';
 })
 export class AppComponent implements OnInit {
   ipAddress = '';
-  title = 'Lxpfrontend';
+  title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
   constructor(private router: Router,
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   ) {
     this.getIPAddress();
-    this.getorganizationbyiddetails();
+    // this.getorganizationbyiddetails();
   }
 
   ngOnInit() {
@@ -91,20 +91,20 @@ export class AppComponent implements OnInit {
     this.loaderSubscription.unsubscribe();
   }
 
-  getorganizationbyiddetails() {
-    const organizationid = environment.orgId;
-    if (organizationid === '') {
-      // localStorage.clear();
-      localStorage.removeItem('organizationDetails');
-    }
+//   getorganizationbyiddetails() {
+//     const organizationid = environment.orgId;
+//     if (organizationid === '') {
+//       // localStorage.clear();
+//       localStorage.removeItem('organizationDetails');
+//     }
 
-    this.Lservice
-      .get_organization_by_id(organizationid)
-      .subscribe((result: any) => {
-        console.log(result, 'resultdata');
-        if (result.data?.get_organization_by_id?.success) {
-          localStorage.setItem('organizationDetails', JSON.stringify(result.data?.get_organization_by_id?.message));
-        }
-      });
-  }
+//     this.Lservice
+//     .get_organization_by_id(organizationid)
+//     .subscribe((result: any) => {
+//       console.log(result, 'resultdata');
+//       if (result.data?.get_organization_by_id?.success) {
+//         localStorage.setItem('organizationDetails', JSON.stringify(result.data?.get_organization_by_id?.message));
+//       }
+//     });
+// }
 }
