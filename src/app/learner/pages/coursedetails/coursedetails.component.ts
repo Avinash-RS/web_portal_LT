@@ -139,9 +139,9 @@ export class CoursedetailsComponent implements OnInit {
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -219,31 +219,31 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
-      const batchStartDate = new Date(this.assignmentContent.courseStartDate);
-      const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-      this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
-      this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+        const batchStartDate = new Date(this.assignmentContent.courseStartDate);
+        const batchEndDate = new Date(this.assignmentContent.courseEndDate);
+        this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
+        this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
 
-      this.assignmentContent.coursedetails.forEach(element => {
-      element.moduledetails.forEach(moduleData => {
-        moduleData.resourse.files.forEach(fileData => {
-          const startDate = new Date(fileData.startDate);
-          this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-          if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
-            fileData.enableView = true;
-          } else {
-            fileData.enableView = false;
-          }
+        this.assignmentContent.coursedetails.forEach(element => {
+          element.moduledetails.forEach(moduleData => {
+            moduleData.resourse.files.forEach(fileData => {
+              const startDate = new Date(fileData.startDate);
+              this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
+                fileData.enableView = true;
+              } else {
+                fileData.enableView = false;
+              }
 
-          if (moment().format('DD-MM-YYYY') >= this.assignmentStartDate && moment().format('DD-MM-YYYY') <= this.courseEndDate) {
-            this.assignmentContent.enableUpload = true;
-          } else if (moment().format('DD-MM-YYYY')  < this.assignmentStartDate || moment().format('DD-MM-YYYY') > this.courseEndDate) {
-            this.assignmentContent.enableUpload = false;
-          }
+              if (moment().format('DD-MM-YYYY') >= this.assignmentStartDate && moment().format('DD-MM-YYYY') <= this.courseEndDate) {
+                this.assignmentContent.enableUpload = true;
+              } else if (moment().format('DD-MM-YYYY') < this.assignmentStartDate || moment().format('DD-MM-YYYY') > this.courseEndDate) {
+                this.assignmentContent.enableUpload = false;
+              }
+            });
+          });
         });
-      });
-    });
-  }
+      }
 
     });
   }
@@ -437,14 +437,18 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   gotoNewThread(templateRef: TemplateRef<any>) {
-    this.addThreadForm?.reset();
-    this.addThreadForm = this.formBuilder.group({
-      thread_name: new FormControl('', [Validators.minLength(8), Validators.required]),
-      thread_description: new FormControl('', [Validators.minLength(8), Validators.required]),
-      // module: new FormControl('', myGlobals.req),
-    });
-    // this.addThreadForm.patchValue(this.catalog);
-    this.dialog.open(templateRef, );
+    if (this.userDetail.nodebb_response != null) {
+      this.addThreadForm?.reset();
+      this.addThreadForm = this.formBuilder.group({
+        thread_name: new FormControl('', [Validators.minLength(8), Validators.required]),
+        thread_description: new FormControl('', [Validators.minLength(8), Validators.required]),
+        // module: new FormControl('', myGlobals.req),
+      });
+      // this.addThreadForm.patchValue(this.catalog);
+      this.dialog.open(templateRef);
+    } else {
+      this.toastr.warning('You are not a registered user for forum');
+    }
   }
 
   get f() {
@@ -524,6 +528,22 @@ export class CoursedetailsComponent implements OnInit {
     }
 
   }
+  clickToComment() {
+    if (this.userDetail.nodebb_response != null) {
+      this.showThreadComment = !this.showThreadComment;
+    } else {
+      this.toastr.warning('You are not a registered user for forum');
+    }
+  }
+  clickToCommentPost(pin) {
+    if (this.userDetail.nodebb_response != null) {
+      this.showCommentEditor[pin] = !this.showCommentEditor[pin];
+    } else {
+      this.toastr.warning('You are not a registered user for forum');
+    }
+  }
+
+
 
   changedSort(e) {
     // this.loadingForum = true;
@@ -571,16 +591,16 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   closeSearch() {
-  this.searchthreadname = false;
-  if (this.showCommentThread) {
+    this.searchthreadname = false;
+    if (this.showCommentThread) {
       this.topicDiscussionData = this.topicDiscussionData1;
       this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
     } else {
       this.discussionData = this.discussionData1;
       this.discussionData.topics = this.discussionData1.topics1;
     }
-  this.filterValue = null;
-  this.cdr.detectChanges();
+    this.filterValue = null;
+    this.cdr.detectChanges();
 
   }
 
@@ -640,18 +660,22 @@ export class CoursedetailsComponent implements OnInit {
   viewsingletopicdiscussion(slug) {
     // const topicSlug = '2/pradeep-check-1';
     if (this.selectedThreadData.postcount > 1) {
-      this.loadingForum = true;
+      // this.loadingForum = true;
     }
     this.topicDiscussionData = [];
     const topicSlug = slug;
-    this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
-      this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
-      this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
-      this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
-      const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
-      const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
-      this.loadingForum = false;
-    });
+    if (this.userDetail?.nodebb_response?.uid) {
+      this.loadingForum = true;
+      this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response?.uid).subscribe((result: any) => {
+        this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
+        this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
+        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+        const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
+        const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+        this.loadingForum = false;
+      });
+    }
+
     // this.Lservice.getSingleThread(topicSlug, this.userDetail?.nodebb_response.uid).subscribe((result: any) => {
     //   this.topicDiscussionData = result.data;
     //   this.topicDiscussionData1 = Object.assign({}, result.data);
@@ -702,7 +726,7 @@ export class CoursedetailsComponent implements OnInit {
     const desc: any = {};
     desc.d = this.addThreadForm.value.thread_description;
     desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
-    desc.d.replace(/&#160;/g, '')?.trimEnd();
+      desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
       if (desc.d.length > 55500) {
         this.toastr.warning('Content should be less than 60000 characters');
@@ -718,7 +742,7 @@ export class CoursedetailsComponent implements OnInit {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              // this.loadingForum = false;
+              this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);
@@ -730,36 +754,41 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  likeandunlikepost(d) {
-    const data = { uid: this.userDetail?.nodebb_response.uid, pid: d.pid };
-    if (d.bookmarked) {
-      d.bookmarked = !d.bookmarked;
-      d.bookmarks = d.bookmarks - 1;
-      this.Lservice.unlikepost(data).subscribe((result: any) => {
-        if (!result.success) {
-          d.bookmarked = !d.bookmarked;
-          d.bookmarks = d.bookmarks + 1;
-          this.toastr.warning('Something went wrong. Try like/dislike later');
-        } else {
-          // this.toastr.success('Unliked successfully');
-          // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-        }
-        // this.loadingForum = false;
-      });
+  likeandunlikepost(d ?) {
+    console.log('abc', this.userDetail.nodebb_response);
+    if (this.userDetail.nodebb_response != null || d !== undefined) {
+      const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
+      if (d.bookmarked) {
+        d.bookmarked = !d.bookmarked;
+        d.bookmarks = d.bookmarks - 1;
+        this.Lservice.unlikepost(data).subscribe((result: any) => {
+          if (!result.success) {
+            d.bookmarked = !d.bookmarked;
+            d.bookmarks = d.bookmarks + 1;
+            this.toastr.warning('Something went wrong. Try like/dislike later');
+          } else {
+            // this.toastr.success('Unliked successfully');
+            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
+          }
+          this.loadingForum = false;
+        });
+      } else {
+        d.bookmarked = !d.bookmarked;
+        d.bookmarks = d.bookmarks + 1;
+        this.Lservice.likepost(data).subscribe((result: any) => {
+          if (!result.success) {
+            d.bookmarked = !d.bookmarked;
+            d.bookmarks = d.bookmarks - 1;
+            this.toastr.warning('Something went wrong. Try like/dislike later');
+          } else {
+            // this.toastr.success('Liked successfully');
+            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
+          }
+          this.loadingForum = false;
+        });
+      }
     } else {
-      d.bookmarked = !d.bookmarked;
-      d.bookmarks = d.bookmarks + 1;
-      this.Lservice.likepost(data).subscribe((result: any) => {
-        if (!result.success) {
-          d.bookmarked = !d.bookmarked;
-          d.bookmarks = d.bookmarks - 1;
-          this.toastr.warning('Something went wrong. Try like/dislike later');
-        } else {
-          // this.toastr.success('Liked successfully');
-          // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-        }
-        // this.loadingForum = false;
-      });
+      this.toastr.warning('You are not a registered user for forum');
     }
   }
 

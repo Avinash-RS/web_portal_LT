@@ -5,6 +5,7 @@
     top: -25px;
     right: -16px;
 }
+
 // auto hide course title 
 #hideMe {
     -moz-animation: cssAnimation 0s ease-in 5s forwards;
@@ -14,20 +15,23 @@
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
+
 @keyframes cssAnimation {
     to {
-        width:0;
-        height:0;
-        overflow:hidden;
+        width: 0;
+        height: 0;
+        overflow: hidden;
     }
 }
+
 @-webkit-keyframes cssAnimation {
     to {
-        width:0;
-        height:0;
-        visibility:hidden;
+        width: 0;
+        height: 0;
+        visibility: hidden;
     }
 }
+
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
 }
@@ -72,7 +76,7 @@
     margin-top: -15px;
 }
 
-.grey{
+.grey {
     color: $lxp-theme-green !important;
 }
 
@@ -373,6 +377,7 @@ li {
     height: 100%;
     overflow: hidden !important;
 }
+
 // :host ::ng-deep.mat-tab-body{
 //     left: 24px !important;
 // }
@@ -451,7 +456,7 @@ li {
     background-color: #ffffff;
 }
 
-:host ::ng-deep  .mat-tab-label .mat-tab-label-content {
+:host ::ng-deep .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
     // font-weight: 500 !important;
     // color: $label !important;
@@ -472,7 +477,7 @@ li {
 
     :host /deep/ .mat-ink-bar {
         height: 2px !important;
-        background-color:$lxp-theme-green !important;
+        background-color: $lxp-theme-green !important;
     }
 
     .moduletime {
@@ -559,7 +564,7 @@ li {
 
 }
 
-:host ::ng-deep  .mat-step-header{
+:host ::ng-deep .mat-step-header {
     margin-left: -7% !important;
 }
 
@@ -640,9 +645,9 @@ li {
 }
 
 
-  :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
-  box-shadow: none !important;
-//   border: none !important;
+:host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none !important;
+    //   border: none !important;
 }
 
 // }
@@ -677,7 +682,8 @@ li {
 
 .send_btn {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: $lxp-theme-green;;
+    -webkit-text-stroke-color: $lxp-theme-green;
+    ;
     -webkit-text-fill-color: transparent;
     font-size: 30px;
 }
@@ -707,9 +713,9 @@ li {
 }
 
 ::ng-deep .mat-dialog-container {
-        padding: 30px !important;
-        border-radius: 0 !important;
-    }
+    padding: 30px !important;
+    border-radius: 0 !important;
+}
 
 
 @media screen and (min-width: 320px) and (max-width:760px) {
@@ -788,7 +794,8 @@ li {
 
 
 .bg-blue {
-    background-color:$lxp-theme-green;;
+    background-color: $lxp-theme-green;
+    ;
 }
 
 .dialogButtons {
@@ -808,22 +815,23 @@ li {
     background-image: linear-gradient(#c1dceb, #c9e4f35c);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
-  }
-  
-  .post-header {
+}
+
+.post-header {
     // background-color: #F1F1F1;
     background-image: linear-gradient(#F1F1F1, #fafafa);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
-  }
-  .child-post-header {
+}
+
+.child-post-header {
     // background-color: #F1F1F15C;
     background-image: linear-gradient(#F1F1F15C, #fafafa);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
-  }
+}
 
-  
+
 
 
 .pointerNone {
@@ -884,7 +892,7 @@ li {
     padding-right: 25px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: $profile-t-grey;
-    -webkit-text-fill-color:$lxp-theme-green;
+    -webkit-text-fill-color: $lxp-theme-green;
     font-size: 20px;
 }
 
@@ -1061,12 +1069,11 @@ li {
     padding: 5px 30px !important;
 }
 
-  .bg-col{
-      background-color: #004072;
-  }
-  .reset:hover{
+
+.reset:hover {
     background-color: #f5f5f5 !important;
-  }
+}
+
 //Jasper CSS ends here
 
 //Ramya CSS starts here
@@ -1074,6 +1081,7 @@ li {
     color: $color-blue;
 
 }
+
 .grade {
     color: $color-dark-green;
 }
