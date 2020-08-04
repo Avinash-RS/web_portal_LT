@@ -91,7 +91,7 @@ const routes: Routes = [
   {
     path: 'password',
     component: PasswordComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
   },
   {
