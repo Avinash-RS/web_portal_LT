@@ -11,8 +11,6 @@ export class PdfreaderComponent implements OnInit {
   @Input('url') url: any;
   isEnable = false;
   constructor() {
-    console.log(this.url);
-  //  this.pdfSrc =  this.url.path;
    }
 
   ngOnInit() {
