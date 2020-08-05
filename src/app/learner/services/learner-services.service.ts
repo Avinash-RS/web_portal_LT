@@ -676,19 +676,19 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: ViewAllThreadData,
       variables: {
-        module_id: modId,
+        module_name: modId,
         course_id: cid
       }
     });
   }
 
-  createNewThread(uid, course_id, module_id, title, content, course_name) {
+  createNewThread(uid, course_id, module_name, title, content, course_name) {
     return this.Apollo.query({
       query: CreateNewThread,
       variables: {
         uid,
         course_id,
-        module_id,
+        module_name,
         title,
         content,
         course_name
