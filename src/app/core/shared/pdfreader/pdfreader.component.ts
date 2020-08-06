@@ -17,10 +17,11 @@ export class PdfreaderComponent implements OnInit {
     console.log(this.url.path);
     if (this.url.doc_type === 'application/pdf') {
       this.isEnable = true;
-      this.pdfSrc = {
-        url: this.url.path,
-        withCredentials: true
-       };
+      // this.pdfSrc = {
+      //   url: this.url.path,
+      //   withCredentials: true
+      //  };
+      this.pdfSrc = this.url.path;
     } else {
       this.isEnable = false;
       this.pdfSrc =  this.url.path;
