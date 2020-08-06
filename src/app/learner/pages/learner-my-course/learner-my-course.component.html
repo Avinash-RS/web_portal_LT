@@ -122,7 +122,7 @@
                           {{course.course_name}}
                         </div>
                       </div>
-                      <div class="no_pl width_100 color_black2 f_size_14 descmc f_wt_400  pointer"
+                      <div class="no_pl width_100 color_black2 m-l-2 f_size_14 descmc f_wt_400  pointer"
                         (click)="gotoDesc(course)">
                         {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
                       </div>
