@@ -257,6 +257,24 @@ padding-bottom: 5px;
   border-left: 3px solid $lxp-status-yellow!important;
   color: $color-blank!important;
 }
+
+.color-blue-card-status {
+ 
+  border-left: 8px solid $bule2!important;
+  color: $color-blank!important;
+}
+
+.color-grey-card-status {
+  border-left: 8px solid #b5acac !important;
+  // color: #b5acac !important;
+}
+
+.color-yellow-card-status {
+  border-left: 8px solid $lxp-status-yellow !important;
+  color: $color-blank !important;
+}
+
+
 .LaunchBtn{
   border: 1px solid $lxp-theme-green !important;
   border-radius: 5px;
@@ -304,6 +322,7 @@ padding-bottom: 5px;
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
+  margin-top:5px;
 }
 
 .Completedstatus{
@@ -313,6 +332,17 @@ padding-bottom: 5px;
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
+  margin-top:5px;
+}
+
+.Upcomingstatus{
+  background:$bule2;
+  padding: 2px 6px;
+  float: right;
+  border-radius: 4px;
+  font-size: 13px;
+  color: $color-white;
+  margin-top:5px;
 }
 
 .space-10{
@@ -328,9 +358,10 @@ padding-bottom: 5px;
   border-radius: 0px;
   box-shadow: none;
   margin-left: 3%;
-  height: 100px;
+  height: auto;
   margin-bottom: 0%;
   background: transparent !important;
+  
 }
 .session-sub-card{
         width: 96%;
@@ -577,10 +608,12 @@ hr {
     // color: #b5acac !important;
 }
 
-.color-blue {
+.color-yellow {
     border-left: 8px solid $lxp-status-yellow !important;
     color: $color-blank !important;
 }
+
+
 
 .color-white {
     color: #b5acac;
