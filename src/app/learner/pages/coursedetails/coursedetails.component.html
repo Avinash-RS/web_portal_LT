@@ -72,7 +72,6 @@
                                     <ng-container *ngFor="let mod of res?.children; let j = index">
                                         <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-
                                             <ng-template matStepLabel>
                                                 <span class="topicnm"
                                                     (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
