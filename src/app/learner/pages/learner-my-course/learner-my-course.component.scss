@@ -81,9 +81,12 @@
 .m-l-4{
   margin-left: 4%;
 }
+.m-p-2{
+  margin-top: 2%;
+}
 .para{
   display: inline-flex;
-  font-size: 18px;
+  font-size: 15px;
   padding: 17px;
 }
 .box-size{
@@ -134,8 +137,8 @@
 
 .bodybg {
     width: auto;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 18px;
+    padding-right: 18px;
     min-height: 100vh;
     display: flex;
     background-color: $color-white;
@@ -164,7 +167,9 @@
 
 .coursebg {
     background-color: $color_white;
-    // margin-bottom: 10px;
+    // margin-bottom: 10px;\
+    margin-top: 1%;
+    margin-bottom: 1%;
     box-shadow: none;
     border-bottom: 1px solid #bebebead;
 
@@ -293,6 +298,7 @@ padding-bottom: 5px;
 
 .statBtn {
   border: 1px solid $color-small-blue;
+  margin-top: 23%;
 }
 
 // .mat-stroked-button {
@@ -631,7 +637,9 @@ hr {
     padding-left: 128px;
     margin-bottom: 15px;
 }
+// .font{
 
+// }
 :host ::ng-deep .mat-tab-nav-bar, .mat-tab-header {
    border-bottom: none !important;
 }

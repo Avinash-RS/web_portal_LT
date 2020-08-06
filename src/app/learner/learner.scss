@@ -1,5 +1,13 @@
 @import "variable";
 
+.mat-card {
+  font-family: Roboto Condensed !important;
+}
+
+button, input, optgroup, select, textarea , h1 , span {
+  font-family: Roboto Condensed !important;
+}
+
 .my-panel {
   background:$lxp-theme-green !important;
   height: 100px;
