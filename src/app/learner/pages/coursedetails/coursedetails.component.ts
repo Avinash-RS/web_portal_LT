@@ -746,7 +746,7 @@ export class CoursedetailsComponent implements OnInit {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              this.loadingForum = false;
+              // this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);
