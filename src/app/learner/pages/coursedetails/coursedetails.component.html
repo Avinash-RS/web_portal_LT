@@ -309,7 +309,7 @@
                                                                         <div class="row">
                                                                             <span class="singleline-text"><b>Assignment
                                                                                     name</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             <img *ngIf="file.doc_type == 'application/pdf'"
                                                                                 class="size" alt=""
@@ -344,7 +344,7 @@
                                                                     <div class="col-1 no-cursor">
                                                                         <div class="row">
                                                                             <span><b>View</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             <mat-icon *ngIf="file.enableView"
                                                                                 (click)="previewDoc(previewDialog,file)"
@@ -358,7 +358,7 @@
                                                                     <div class="col-2">
                                                                         <div class="row">
                                                                             <span><b>Start date</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{assignmentStartDate}}
                                                                         </div>
@@ -366,7 +366,7 @@
                                                                     <div class="col-2">
                                                                         <div class="row">
                                                                             <span><b>End date</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{assignmentEndDate}}
                                                                         </div>
@@ -374,15 +374,33 @@
                                                                     <div class="col-1">
                                                                         <div class="row">
                                                                             <span><b>Score</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{file?.score}}
                                                                         </div>
                                                                     </div>
+
+
+                                                                    <div class="col-1">
+                                                                        <div class="row mt-4">
+                                                                            <button class="upload-btn"
+                                                                                mat-stroked-button
+                                                                                [disabled]="!assignmentContent?.enableUpload"
+                                                                                (click)="fileInput.click()">
+                                                                                Upload</button>
+                                                                            <input class="form-control border-right-0"
+                                                                                type='file' id="upload-photo" #fileInput
+                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+
+
+                                                                            <!-- </div> -->
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="col-2">
                                                                         <div class="row">
                                                                             <span><b>Status</b></span>
-                                                                        </div>
+                                                                        </div><br>
 
                                                                         <div class="row">
                                                                             <div class="disply no-cursor"
@@ -401,26 +419,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-1">
-                                                                        <div class="row mt-4">
-                                                                            <button class="upload-btn"
-                                                                                mat-stroked-button
-                                                                                [disabled]="!assignmentContent?.enableUpload"
-                                                                                (click)="fileInput.click()">
-                                                                                Upload</button>
-                                                                            <input class="form-control border-right-0"
-                                                                                type='file' id="upload-photo" #fileInput
-                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
-
-
-                                                                            <!-- </div> -->
-                                                                        </div>
-                                                                    </div>
-
                                                                     <div class=col-1>
-                                                                        <div class="row">
-
-                                                                        </div>
                                                                         <div class="row">
                                                                             <span class="info-icon">
                                                                                 <mat-icon class="icon"
@@ -546,6 +545,9 @@
 
                         </mat-accordion>
                         <ng-template #previewDialog>
+                            <button mat-icon-button class="download-button">
+                                <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+                            </button>
                             <button mat-icon-button class="close-button" [mat-dialog-close]="true">
                                 <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close</mat-icon>
                             </button>
@@ -673,8 +675,8 @@
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null" class="new_Thread "
-                                                style="border-radius: 0 !important;">
+                                                [disabled]="course === null || selectedModuleData === null "
+                                                class="new_Thread " style="border-radius: 0 !important;">
                                                 New thread</button>
                                         </div>
                                     </div>

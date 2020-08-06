@@ -365,6 +365,13 @@ export class CoursedetailsComponent implements OnInit {
     });
     this.docpath = path;
   }
+  downloadPdf(doc) {
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
+    link.href = doc.path;
+    link.click();
+  }
 
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
@@ -746,7 +753,7 @@ export class CoursedetailsComponent implements OnInit {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              this.loadingForum = false;
+              // this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);
