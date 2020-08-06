@@ -44,7 +44,7 @@
                           <span class="dot" *ngIf="l.author_name">&nbsp;.&nbsp;</span>
                         </span>
                         <mat-icon class="timer"> alarm_on </mat-icon>
-                        <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                        <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
                       </div>
                     </div>
                   </div>
@@ -137,7 +137,7 @@
 
 
                         <mat-icon class="timer"> alarm_on </mat-icon>
-                        <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                        <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
                       </div>
                     </div>
                   </div>
@@ -241,7 +241,7 @@
                         </span>
 
                         <mat-icon class="timer"> alarm_on </mat-icon>
-                        <span class="aligned-with-icon"> {{course.course_duration}} hours</span>
+                        <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
                       </div>
                     </div>
                   </div>
