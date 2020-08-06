@@ -24,7 +24,7 @@
                                 <mat-icon class="alarmIcon">alarm</mat-icon>
                             </div>
                             <div class="col-4">
-                                <span class="courseTime">{{content?.coursetime}}</span>
+                                <span class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                     </div>
                                     <div>
                                         <div class="moduleHead" matTooltip="{{res?.title}}">
-                                            <div class="modhead">{{res?.title}}</div>
+                                            <div class="modhead">{{res?.title }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                 <span class="moduleund">
                                     <mat-icon class="time-icon">alarm</mat-icon>
                                     <span class="course-time">
-                                        {{res?.moduletime}}
+                                        {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                     </span>
                                 </span>
 
