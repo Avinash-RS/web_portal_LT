@@ -396,38 +396,40 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-2">
-                                                                        <div class="row">
-                                                                            <span><b>Status</b></span>
-                                                                        </div><br>
-
-                                                                        <div class="row">
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.doc_status === false">
-                                                                                <!-- <mat-icon class="no-cursor icon">
-        check_circle</mat-icon> -->
-                                                                                <div class="icon">
-                                                                                    Submitted</div>
-                                                                            </div>
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.grade_status === true">
-                                                                                <div class="grade"
-                                                                                    style="padding-top: 4px;color: green;">
-                                                                                    Graded</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
                                                                     <div class=col-1>
                                                                         <div class="row">
                                                                             <span class="info-icon">
                                                                                 <mat-icon class="icon"
-                                                                                    matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
-                                                                                    info</mat-icon>
+                                                                                matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
+                                                                                info</mat-icon>
                                                                             </span>
                                                                         </div>
-
+                                                                       
                                                                     </div>
+
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>Status</b></span>
+                                                                        </div><br>
+                                                                        
+<div class="row">
+    <div class="disply no-cursor"
+    *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+    <!-- <mat-icon class="no-cursor icon">
+        check_circle</mat-icon> -->
+    <div class="icon">
+        Submitted</div>
+</div>
+<div class="disply no-cursor"
+    *ngIf="file.grade_status === 'Evaluated'">
+    <div class="grade"
+        style="color: green;">
+        Graded</div>
+</div>
+</div>
+                                                                    </div>
+                                                                   
+                                        
                                                                 </div>
 
 
