@@ -365,6 +365,13 @@ export class CoursedetailsComponent implements OnInit {
     });
     this.docpath = path;
   }
+  downloadPdf(doc) {
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
+    link.href = doc.path;
+    link.click();
+  }
 
   scroll(el: HTMLElement) {
     el.scrollTop = 0;
