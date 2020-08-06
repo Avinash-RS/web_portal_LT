@@ -675,7 +675,7 @@
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null" class="new_Thread "
+                                                [disabled]="course === null || selectedModuleData === null " class="new_Thread "
                                                 style="border-radius: 0 !important;">
                                                 New thread</button>
                                         </div>

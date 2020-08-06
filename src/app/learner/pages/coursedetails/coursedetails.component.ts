@@ -506,7 +506,6 @@ export class CoursedetailsComponent implements OnInit {
           toPid: pidData?.pid ? pidData.pid : 0,
           course_id: this.course?.course_id,
           course_name: this.course?.course_name,
-          module_id: this.selectedModuleData._id,
           module_name: this.selectedModuleData.title,
           thread_id: (this.selectedThreadData.tid).toString(),
           thread_name: this.selectedThreadData.title,
@@ -705,7 +704,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   viewAllThreads() {
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?._id, this.course?.course_id).subscribe((result: any) => {
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id).subscribe((result: any) => {
       const temp = result.data.ViewAllThreadData.data;
       if (result?.data?.ViewAllThreadData?.data !== '') {
         result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
@@ -738,7 +737,7 @@ export class CoursedetailsComponent implements OnInit {
       } else {
         this.closedialogbox();
         this.loadingForum = true;
-        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?._id,
+        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
           .subscribe((result: any) => {
             this.loadingForum = true;
@@ -747,7 +746,7 @@ export class CoursedetailsComponent implements OnInit {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              this.loadingForum = false;
+              // this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);

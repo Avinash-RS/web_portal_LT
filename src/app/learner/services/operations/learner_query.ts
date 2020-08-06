@@ -1059,8 +1059,8 @@ export const ViewSingleTopicDiscussionData = gql`
 `;
 
 export const ViewAllThreadData = gql`
-  query ViewAllThreadData($module_id: String, $course_id: String) {
-    ViewAllThreadData(module_id: $module_id, course_id: $course_id) {
+  query ViewAllThreadData($module_name: String, $course_id: String) {
+    ViewAllThreadData(module_name: $module_name, course_id: $course_id) {
       success
       message
       data {
