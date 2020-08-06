@@ -225,6 +225,24 @@ padding-bottom: 5px;
   border-left: 3px solid $lxp-status-yellow!important;
   color: $color-blank!important;
 }
+
+.color-blue-card-status {
+ 
+  border-left: 8px solid $bule2!important;
+  color: $color-blank!important;
+}
+
+.color-grey-card-status {
+  border-left: 8px solid #b5acac !important;
+  // color: #b5acac !important;
+}
+
+.color-yellow-card-status {
+  border-left: 8px solid $lxp-status-yellow !important;
+  color: $color-blank !important;
+}
+
+
 .LaunchBtn{
   border: 1px solid $lxp-theme-green !important;
   border-radius: 5px;
@@ -272,6 +290,7 @@ padding-bottom: 5px;
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
+  margin-top:5px;
 }
 
 .Completedstatus{
@@ -281,6 +300,7 @@ padding-bottom: 5px;
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
+  margin-top:5px;
 }
 
 .Upcomingstatus{
@@ -290,6 +310,7 @@ padding-bottom: 5px;
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
+  margin-top:5px;
 }
 
 .space-10{
@@ -550,10 +571,7 @@ hr {
     color: $color-blank !important;
 }
 
-.color-blue {
-  border-left: 8px solid $bule2 !important;
-  color: $color-blank !important;
-}
+
 
 .color-white {
     color: #b5acac;

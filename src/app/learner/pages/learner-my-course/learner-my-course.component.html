@@ -329,7 +329,7 @@
     </mat-card>
       
 
-      <div  *ngIf="results?.message?.length > 5 ">
+      <div  *ngIf="showViewButton">
       <button class="btn btn-primary" type="button" [routerLink]="['/Learner/calendar']">
         View All Activity
       </button>
@@ -351,14 +351,14 @@
                   <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="showUpcoming == 'upcoming' ">
                     Upcoming</span>
             </div>
-            <p class="coursenameT"  [ngClass]="{'color-yellow': showOngoing == 'ongoing', 'color-grey':showCompleted == 'completed' }"> {{ result?.activity_details.coursename }}</p>
+            <p class="coursenameT"  [ngClass]="{'color-blue-card-status':showUpcoming === 'upcoming','color-grey-card-status':showCompleted === 'completed', 'color-yellow-card-status':showOngoing === 'ongoing'}"> {{ result?.activity_details.coursename }}</p>
             <h5 class="m-l-4">{{ result?.activity_details.topicname }}                 
             </h5>
             <div class="m-l-4 p-b-5" > <span class="f_wt_500 f_size_14">Type </span>: <span
                 class="lxp-text f_size_12 f_wt_400">{{ result?.activity_details.activitytype }} </span>
               <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
               <span  class="aligned-icon lxp-text f_size_12 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
-                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap   pointer float-right LaunchBtn">Launch</button>
+                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'  && showOngoing ==='ongoing' && showUpcoming === 'upcoming'" mat-stroked-button class="blue_clr cap   pointer float-right LaunchBtn">Launch</button>
             </div>
           </div>
         </mat-card>

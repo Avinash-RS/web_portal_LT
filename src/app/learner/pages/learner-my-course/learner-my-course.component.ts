@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { data } from 'jquery';
 import * as moment from 'moment';   
+
 // import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -58,7 +59,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
-      const dateValue = new Date().toISOString()
+      // const dateValue = new Date().toISOString()
     // const static =
     const message = [{message:[{activity_details: { activityname: "Test case 12",
     activitytype: "Live Classroom",
@@ -83,7 +84,7 @@ export class LearnerMyCourseComponent implements OnInit {
   console.log(formatDate,"currentDate");
   
    var topicStart = new Date();
-  //  const dateValue = moment(topicStart).format("YYYY-MM-DD")
+   const dateValue = moment(topicStart).format("YYYY-MM-DD")
   //   console.log(dateValue);
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
@@ -101,9 +102,9 @@ export class LearnerMyCourseComponent implements OnInit {
         const EndDate = new Date(el.activity_details.enddate)  
         console.log(EndDate,"EndDate");
 
-        if(currentDate>StartDate && currentDate > EndDate){
+        if(currentDate>StartDate){
           this.showCompleted = "completed"
-        }else if(currentDate === StartDate || currentDate < EndDate ){     
+        }else if(currentDate == StartDate && currentDate < EndDate ){     
           this.showOngoing = "ongoing"
         }else{
           this.showUpcoming = "upcoming"
@@ -114,6 +115,7 @@ export class LearnerMyCourseComponent implements OnInit {
       console.log("length",this.results['message'].length);
        
       // tslint:disable-next-line:no-string-literal
+      // debugger;
       if(this.results['message'].length<5){
         this.showViewButton = false;
         console.log(this.showViewButton)
