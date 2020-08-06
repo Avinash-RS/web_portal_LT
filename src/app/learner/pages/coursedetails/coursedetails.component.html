@@ -308,7 +308,7 @@
                                                                         matTooltip="{{file.type_name}}">
                                                                         <div class="row">
                                                                             <span class="singleline-text"><b>Assignment name</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             <img *ngIf="file.doc_type == 'application/pdf'"
                                                                                 class="size" alt=""
@@ -343,7 +343,7 @@
                                                                     <div class="col-1 no-cursor">
                                                                         <div class="row">
                                                                             <span><b>View</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             <mat-icon *ngIf="file.enableView"
                                                                                 (click)="previewDoc(previewDialog,file)"
@@ -357,7 +357,7 @@
                                                                     <div class="col-2">
                                                                         <div class="row">
                                                                             <span><b>Start date</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{assignmentStartDate}}
                                                                         </div>
@@ -365,7 +365,7 @@
                                                                     <div class="col-2">
                                                                         <div class="row">
                                                                             <span><b>End date</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{assignmentEndDate}}
                                                                         </div>
@@ -373,32 +373,12 @@
                                                                     <div class="col-1">
                                                                         <div class="row">
                                                                             <span><b>Score</b></span>
-                                                                        </div>
+                                                                        </div><br>
                                                                         <div class="row">
                                                                             {{file?.score}}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-2">
-                                                                        <div class="row">
-                                                                            <span><b>Status</b></span>
-                                                                        </div>
-                                                                        
-<div class="row">
-    <div class="disply no-cursor"
-    *ngIf="file.doc_status === false">
-    <!-- <mat-icon class="no-cursor icon">
-        check_circle</mat-icon> -->
-    <div class="icon">
-        Submitted</div>
-</div>
-<div class="disply no-cursor"
-    *ngIf="file.grade_status === true">
-    <div class="grade"
-        style="padding-top: 4px;color: green;">
-        Graded</div>
-</div>
-</div>
-                                                                    </div>
+
                                                                    
                                                                     <div class="col-1">
                                                                         <div class="row mt-4">
@@ -415,6 +395,28 @@
                                                                                
                                                                             <!-- </div> -->
                                                                         </div>
+                                                                    </div>
+
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>Status</b></span>
+                                                                        </div><br>
+                                                                        
+<div class="row">
+    <div class="disply no-cursor"
+    *ngIf="file.doc_status === false">
+    <!-- <mat-icon class="no-cursor icon">
+        check_circle</mat-icon> -->
+    <div class="icon">
+        Submitted</div>
+</div>
+<div class="disply no-cursor"
+    *ngIf="file.grade_status === true">
+    <div class="grade"
+        style="padding-top: 4px;color: green;">
+        Graded</div>
+</div>
+</div>
                                                                     </div>
                                                                    
                                                                     <div class=col-1>
