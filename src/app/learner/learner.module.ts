@@ -52,6 +52,7 @@ import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-das
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { NewHomeComponent } from './pages/new-home/new-home.component';
@@ -202,6 +203,15 @@ const routes: Routes = [
     NgxMaskModule,
     AngularEditorModule,
     RouterModule.forChild(routes),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      // radius: 10,
+      // outerStrokeWidth: 10,
+      // innerStrokeWidth: 8,
+      // outerStrokeColor: '#78C000',
+      // innerStrokeColor: '#C7E596',
+      // animationDuration: 300,
+    }),
     NgxMaskModule.forChild(),
     FormsModule,
     BsDatepickerModule.forRoot(),
@@ -219,6 +229,7 @@ const routes: Routes = [
     InfiniteScrollModule,
     PdfJsViewerModule,
     RatingModule,
+    NgCircleProgressModule
   ],
   providers: [
     Apollo

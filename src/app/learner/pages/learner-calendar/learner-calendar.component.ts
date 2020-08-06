@@ -24,10 +24,18 @@ export class LearnerCalendarComponent implements OnInit {
   public selectedMoment = new Date();
   selectedToday;
   bsInlineValue = new Date();
-
+  currentDate = new Date();
+  showOngoing:any;
+  showCompleted:any;
+  showUpcoming:any;
+  currentStartTime:any;
+  currentEndTime:any;
   constructor(private service: LearnerServicesService,private router: Router) {}
 
   ngOnInit() {
+    this.showUpcoming = '';
+    this.showOngoing = '';
+    this.showCompleted = '';  
     this.UserDetails =
       JSON.parse(localStorage.getItem("UserDetails")) ||
       JSON.parse(sessionStorage.getItem("UserDetails")) ||
@@ -45,6 +53,9 @@ export class LearnerCalendarComponent implements OnInit {
     // var formattedDate = moment(event).format();
     // this.selectedDate = new Date(event).toUTCString();
     // this.selectedDate = moment.utc(event).format();
+    this.showUpcoming = ''
+    this.showOngoing = ''
+    this.showCompleted = ''
     this.selectedDate = new Date(
       Date.UTC(
         event.getUTCFullYear(),
@@ -65,21 +76,49 @@ export class LearnerCalendarComponent implements OnInit {
     } else {
       this.selectedToday = false;
     }
-    this.service.getReadLeanerActivity(this.user_id, selectedDate).subscribe(
+    
+    const dateValue = moment(selectedDate).format("YYYY-MM-DD")
+    console.log(dateValue);
+    this.service.getReadLeanerActivity(this.user_id, dateValue).subscribe(
       (res: any) => {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
           this.learnerActivityList =
             res.data?.get_read_learner_activity?.message;
-          if (this.selectedToday) {
+            
+          // if (this.selectedToday) {
+            // this.learnerActivityList.forEach((element, index) => {
+            //   if (index == 0) {
+            //     element.activity_details.ongoing = "true";
+            //   } else {
+            //     element.activity_details.ongoing = "false";
+            //   }
+            // });
+
+            console.log(this.learnerActivityList);
             this.learnerActivityList.forEach((element, index) => {
-              if (index == 0) {
-                element.activity_details.ongoing = "true";
-              } else {
-                element.activity_details.ongoing = "false";
+
+              this.currentStartTime = moment(element.activity_details.startdate).format('LT'); 
+              
+               this.currentEndTime = moment(element.activity_details.enddate).format('LT'); 
+            
+              const StartDate = new Date(element.activity_details.startdate)  
+              
+
+               const EndDate = new Date(element.activity_details.enddate)  
+               
+               console.log(this.currentDate > StartDate)
+               if(this.currentDate > StartDate){
+                console.log("completed");
+                this.showCompleted = "completed"
+              }else if(this.currentDate == StartDate && this.currentDate < EndDate ){     
+                this.showOngoing = "ongoing"
+              }else{
+                this.showUpcoming = "upcoming"
               }
-            });
-          }
+
+            })
+          // }
         } else {
           this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
           this.showErrorCard = true;

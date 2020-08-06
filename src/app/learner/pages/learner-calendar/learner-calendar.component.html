@@ -34,11 +34,20 @@
                         <mat-card class="session-card">
                           <div class="session-sub-card">
                             <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
-                            <div class="m-l-4"><span class="lxp-text f_size_14 f_wt_400">{{selectedDate | date :'dd MMM yyyy'}}
-                              </span>
+                            <div class="m-l-4">
+
+                              <span class="lxp-text f_size_14 f_wt_400 fa fa-calendar"> {{data.activity_details.startdate | date :'dd MMM yyyy'}}
+                                |  <i class="fa fa-clock-o" aria-hidden="true"> {{currentStartTime}}</i>-{{currentEndTime}} </span>
+                                 <span class="status lxp-text f_size_14 f_wt_400" *ngIf="showOngoing == 'ongoing' ">
+                                   Ongoing</span>
+                                     <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="showUpcoming == 'upcoming' ">
+                                       Upcoming</span>
+                                       <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="showCompleted == 'completed' ">
+                                        completed</span>
+            
                      
                             </div>
-                            <p class="coursenameT" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }"> {{ data.activity_details.coursename }}</p>
+                            <p class="coursenameT" [ngClass]="{'color-yellow-card-status': showOngoing === 'ongoing', 'color-grey-card-status':showCompleted === 'completed','color-blue-card-status':showUpcoming === 'upcoming' }"> {{ data.activity_details.coursename }}</p>
                             <h5 class="m-l-4">{{ data.activity_details.topicname }}
                              
                             </h5>
@@ -47,7 +56,7 @@
                               <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
                               <span
                                 class="aligned-icon lxp-text f_size_14 f_wt_400">{{ data.activity_details.createdby_name }}</span>
-                                <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
+                                <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && showOngoing ==='ongoing' && showUpcoming === 'upcoming'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
                             </h5>
                           </div>
                         </mat-card>

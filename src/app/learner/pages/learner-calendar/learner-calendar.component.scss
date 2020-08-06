@@ -30,7 +30,7 @@ div.scrollcard {
 }
 .myC-head{
     margin-left: 2% !important;
-    margin-top: 1%;
+    margin-top: 2%;
     margin-bottom: -2%;
   }
 .color-grey {
@@ -50,7 +50,9 @@ div.scrollcard {
     display: inline-flex;
     font-size: 18px;
 }
-
+ :host ::ng-deep.bs-datepicker-container {
+ padding: 0px !important; 
+ }
 .iconevent{
     padding: 9px;
     font-size: 37px;
@@ -61,11 +63,57 @@ div.scrollcard {
     color: $color-blank!important;
 }
 
+.color-blue-card-status {
+ 
+    border-left: 4px solid $bule2!important;
+    color: $color-blank!important;
+  }
+
+.color-grey-card-status {
+    border-left: 4px solid #b5acac !important;
+    // color: #b5acac !important;
+  }
+  
+  .color-yellow-card-status {
+    border-left: 8px solid $lxp-status-yellow !important;
+    color: $color-blank !important;
+  }
+  
+  .Upcomingstatus{
+    background:$bule2;
+    padding: 2px 6px;
+    float: right;
+    border-radius: 4px;
+    font-size: 13px;
+    color: $color-white;
+    margin-top:5px;
+  }
+
+  .Completedstatus{
+    background: #b5acac;
+    padding: 2px 6px;
+    float: right;
+    border-radius: 4px;
+    font-size: 13px;
+    color: $color-white;
+    margin-top:5px;
+  }
+  
 .color-white {
     color: #b5acac;
     background: $color-white !important;
-    border-left: 0px !important
+    border-left: 0px !important;
 }
+
+.status{
+    background: $lxp-status-yellow;
+    padding: 2px 6px;
+    float: right;
+    border-radius: 4px;
+    font-size: 13px;
+    color: $color-white;
+    margin-top:5px;
+  }
 
 
 ::ng-deep .learner-calender .theme-blue .bs-datepicker-head {

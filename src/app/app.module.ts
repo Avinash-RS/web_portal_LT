@@ -72,7 +72,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,
-      deps: [PlatformLocation,ConfigsLoaderService]
+      deps: [PlatformLocation, ConfigsLoaderService]
   },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
