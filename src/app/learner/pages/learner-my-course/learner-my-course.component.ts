@@ -91,16 +91,16 @@ export class LearnerMyCourseComponent implements OnInit {
      
       this.results['message'].forEach(el=>{
         // console.log(el.activity_details.startdate);
-        this.currentStartTime = moment(el.activity_details.startdate).format('LT'); 
-       console.log(this.currentStartTime)
-        this.currentEndTime = moment(el.activity_details.enddate).format('LT'); 
-        console.log(this.currentEndTime)
+        this.currentStartTime = moment(el.activity_details.startdate).format('LT');
+      //  console.log(this.currentStartTime)
+        this.currentEndTime = moment(el.activity_details.enddate).format('LT');
+        // console.log(this.currentEndTime);
 
-        const StartDate = new Date(el.activity_details.startdate)  
-        console.log(StartDate,"StartDate");
+        const StartDate = new Date(el.activity_details.startdate);
+        // console.log(StartDate,"StartDate");
 
-        const EndDate = new Date(el.activity_details.enddate)  
-        console.log(EndDate,"EndDate");
+        const EndDate = new Date(el.activity_details.enddate);
+        // console.log(EndDate,"EndDate");
 
         if(currentDate>StartDate){
           this.showCompleted = "completed"
@@ -112,13 +112,13 @@ export class LearnerMyCourseComponent implements OnInit {
         
       })
 
-      console.log("length",this.results['message'].length);
+      // console.log("length",this.results['message'].length);
        
       // tslint:disable-next-line:no-string-literal
       // debugger;
       if(this.results['message'].length<5){
         this.showViewButton = false;
-        console.log(this.showViewButton)
+        // console.log(this.showViewButton);
       }else{
         this.showViewButton = true;
       }

@@ -305,19 +305,20 @@
     <hr class="hrStyle">
 
 
-    <mat-card class="coursebg width_80 m-l-5" *ngIf="results?.message?.length == 0">
+    <div class=" m-l-4" *ngIf="results?.message?.length == 0">
       <div class="row width_100 no_margin">
         <div class="container-fluid">
           <div class="row">
             <div class="box-size">
               <div class=" errorbox animated animatedFadeInUp fadeInUp">
-                <p class="para"> {{ results?.error_msg }}</p>
+                <p class="para" *ngIf="results?.success == false">Activity details not found </p>
+                <!-- {{ results?.error_msg }} -->
               </div>
             </div>
           </div>
         </div>
       </div>
-    </mat-card>
+    </div>
       
 
       <div  *ngIf="showViewButton">
