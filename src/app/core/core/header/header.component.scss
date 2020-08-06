@@ -86,7 +86,7 @@
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
-    border-bottom: 4px solid $color-white !important; 
+    border-bottom: 2px solid $color-white !important; 
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
@@ -116,7 +116,7 @@ color:  $color-white
     top: 7px;
   }
  .colgreen{
-    border-bottom: 4px solid $color-white !important; 
+    border-bottom: 2px solid $color-white !important; 
     color: $color-white !important;
     // position: relative;
     // top: 2px;

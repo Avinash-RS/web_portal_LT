@@ -1,11 +1,7 @@
-pdf-viewer {
-    display: block;
-    height: 100vh;
-}
-
 .ng2-pdf-viewer-container {
-    overflow-x: auto;
+    overflow-x: hidden !important;
     position: absolute !important;
     height: 100%;
     -webkit-overflow-scrolling: touch;
-}
+  }
+

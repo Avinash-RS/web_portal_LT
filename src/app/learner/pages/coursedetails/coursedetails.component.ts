@@ -136,6 +136,7 @@ export class CoursedetailsComponent implements OnInit {
   sortBox = false;
   searchthreadname = false;
   assignmentStartDate: any;
+  assignmentEndDate: any;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -227,8 +228,11 @@ export class CoursedetailsComponent implements OnInit {
         this.assignmentContent.coursedetails.forEach(element => {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
+              if (fileData.startDate && fileData.endDate) {
               const startDate = new Date(fileData.startDate);
+              const endDate = new Date(fileData.endDate);
               this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+              this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
               if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
                 fileData.enableView = true;
               } else {
@@ -240,20 +244,20 @@ export class CoursedetailsComponent implements OnInit {
               } else if (moment().format('DD-MM-YYYY') < this.assignmentStartDate || moment().format('DD-MM-YYYY') > this.courseEndDate) {
                 this.assignmentContent.enableUpload = false;
               }
+            }
             });
           });
         });
       }
-
     });
   }
-  uploadAssignmentsFile(event, fileId, modulename, topicname, assName, score, endDate) {
+  uploadAssignmentsFile(event, fileId, modulename, topicname, assName, score, endDate, path) {
     this.assFile = event.target.files[0] as File;
-    this.postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate);
+    this.postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate, path);
 
   }
 
-  postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate) {
+  postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate, path) {
     if (!score) {
       score = 50;
     }
@@ -274,6 +278,7 @@ export class CoursedetailsComponent implements OnInit {
     payload.append('type_name', assName);
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', score);
+    payload.append('questionUrl', path);
     this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
@@ -359,6 +364,13 @@ export class CoursedetailsComponent implements OnInit {
       disableClose: true,
     });
     this.docpath = path;
+  }
+  downloadPdf(doc) {
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
+    link.href = doc.path;
+    link.click();
   }
 
   scroll(el: HTMLElement) {
@@ -501,7 +513,6 @@ export class CoursedetailsComponent implements OnInit {
           toPid: pidData?.pid ? pidData.pid : 0,
           course_id: this.course?.course_id,
           course_name: this.course?.course_name,
-          module_id: this.selectedModuleData._id,
           module_name: this.selectedModuleData.title,
           thread_id: (this.selectedThreadData.tid).toString(),
           thread_name: this.selectedThreadData.title,
@@ -700,7 +711,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   viewAllThreads() {
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?._id, this.course?.course_id).subscribe((result: any) => {
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id).subscribe((result: any) => {
       const temp = result.data.ViewAllThreadData.data;
       if (result?.data?.ViewAllThreadData?.data !== '') {
         result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
@@ -733,7 +744,7 @@ export class CoursedetailsComponent implements OnInit {
       } else {
         this.closedialogbox();
         this.loadingForum = true;
-        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?._id,
+        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
           .subscribe((result: any) => {
             this.loadingForum = true;
@@ -742,7 +753,7 @@ export class CoursedetailsComponent implements OnInit {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
-              this.loadingForum = false;
+              // this.loadingForum = false;
             } else {
               this.loadingForum = false;
               this.toastr.warning(result.data.CreateNewThread?.message);

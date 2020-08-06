@@ -11,6 +11,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchPipe } from '../pipes/search.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 // local
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
@@ -69,7 +70,7 @@ const routes: Routes = [
     MaterialModule,
     RouterModule,
     CommonModule,
-   
+    PdfViewerModule,
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),

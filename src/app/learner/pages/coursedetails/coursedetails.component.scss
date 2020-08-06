@@ -3,7 +3,13 @@
 .close-button {
     float: right;
     top: -25px;
-    right: -16px;
+    right: -47px;
+}
+
+.download-button {
+    float: right;
+    top: -3px;
+    right: 33px;
 }
 
 // auto hide course title 
@@ -47,6 +53,13 @@
     background: $lxp-theme-green;
     height: 30px;
     border-radius: 50px;
+    color: $color-white;
+}
+
+.download-icon {
+    background: $lxp-theme-green;
+    height: 26px;
+    border-radius: 34px;
     color: $color-white;
 }
 
@@ -497,6 +510,7 @@ li {
     .course-time {
         font-size: 12px;
         margin-left: -12px;
+        position: absolute;
     }
 
     .exp-icon {
@@ -1087,13 +1101,14 @@ li {
 }
 .info-icon{
     position: relative;
-    left: 16px;
-    top: 15px;
+    left: -17px;
+    top: 36px;
 }
 .upload-btn{
     position: relative;
     bottom: 5px;
     right: 23px;
+    top: 16px;
 }
 .singleline-text{
     white-space: nowrap
