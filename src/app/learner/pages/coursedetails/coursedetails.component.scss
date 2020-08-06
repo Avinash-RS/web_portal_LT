@@ -552,7 +552,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
     .mat-step-icon {
         background-color: #0E7D12 !important;
-        color: $color-white !important;
+        color: #0E7D12 !important;
         height: 20px !important;
         width: 20px !important;
     }
@@ -561,7 +561,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colYellow"] {
     .mat-step-icon {
         background-color: $color-yellow !important;
-        color: $color-white !important;
+        color: $color-yellow !important;
         height: 20px !important;
         width: 20px !important;
     }
@@ -570,7 +570,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colWhite"] {
     .mat-step-icon {
         background-color: $color-white !important;
-        color: $color-blank !important;
+        color: $color-white !important;
         border: 2px solid $color-border;
         height: 20px !important;
         width: 20px !important;
@@ -581,7 +581,10 @@ li {
 :host ::ng-deep .mat-step-header {
     margin-left: 1% !important;
 }
+:host ::ng-deep .mat-step-icon .mat-icon, .mat-step-icon-content {
+    color: $color-white !important;
 
+}
 .moduleHead {
     padding-left: 8px;
     position: absolute;
