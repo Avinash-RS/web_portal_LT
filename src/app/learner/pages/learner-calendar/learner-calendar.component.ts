@@ -65,7 +65,10 @@ export class LearnerCalendarComponent implements OnInit {
     } else {
       this.selectedToday = false;
     }
-    this.service.getReadLeanerActivity(this.user_id, selectedDate).subscribe(
+    
+    const dateValue = moment(selectedDate).format("YYYY-MM-DD")
+    console.log(dateValue);
+    this.service.getReadLeanerActivity(this.user_id, dateValue).subscribe(
       (res: any) => {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;

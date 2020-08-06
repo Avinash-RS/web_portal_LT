@@ -283,6 +283,15 @@ padding-bottom: 5px;
   color: $color-white;
 }
 
+.Upcomingstatus{
+  background:$bule2;
+  padding: 2px 6px;
+  float: right;
+  border-radius: 4px;
+  font-size: 13px;
+  color: $color-white;
+}
+
 .space-10{
   margin-top: 10px;
 }
@@ -296,9 +305,10 @@ padding-bottom: 5px;
   border-radius: 0px;
   box-shadow: none;
   margin-left: 3%;
-  height: 100px;
+  height: auto;
   margin-bottom: 0%;
   background: transparent !important;
+  
 }
 .session-sub-card{
         width: 96%;
@@ -535,9 +545,14 @@ hr {
     // color: #b5acac !important;
 }
 
-.color-blue {
+.color-yellow {
     border-left: 8px solid $lxp-status-yellow !important;
     color: $color-blank !important;
+}
+
+.color-blue {
+  border-left: 8px solid $bule2 !important;
+  color: $color-blank !important;
 }
 
 .color-white {
