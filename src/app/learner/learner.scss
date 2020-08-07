@@ -1,5 +1,5 @@
 @import "variable";
-
+// gobal css 
 .mat-card {
   font-family: Roboto Condensed !important;
 }
@@ -7,7 +7,27 @@
 button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
   font-family: Roboto Condensed !important;
 }
+.powered{
+  // font-size: 14px !important;
+  // font-weight: 400;
+  // padding: 18px;
+  // position: absolute;
+  // color: $lxp-footer-text;
+  padding-left: 78px;
+}
+.footericon{
+  width: 100%;
+  // position: absolute;
+  // margin-left: 5px;
 
+}
+.footer20{
+  // background: #ffffff85;
+  height: 50px;
+  bottom: 6px;
+  width: 100%;
+  position: absolute;
+}
 .errorbox{
   border-left: 7px solid;
   height: 55px;
@@ -17,6 +37,17 @@ button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
   width: 96%;
 }
 
+.main-logo{
+  width: 85%;
+  text-align: center;
+  margin-left: 6%;
+  margin-right: 6%;
+  position: relative;
+}
+.no_pr{
+  padding-right: 0px !important;
+}
+//////////////////
 .my-panel {
   background:$lxp-theme-green !important;
   height: 100px;
@@ -395,12 +426,7 @@ button:disabled:hover {
 }
 
 .beforeloginimg{
-  // width: 100%;
-  width: 85% !important;
-  margin-left: 6%;
-  margin-top: -3%;
     height: 100vh;
-    padding: 10px;
 }
 .color_lxp_green{
 color: $lxp-theme-green;

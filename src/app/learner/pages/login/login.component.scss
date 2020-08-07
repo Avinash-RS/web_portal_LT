@@ -10,6 +10,7 @@ mat-card {
     text-align: right !important;
 }
 
+
 // :host ::ng-deep input[type=text][type=password] {
 //     width: 100%;
 //     padding: 12px 20px;
@@ -83,14 +84,14 @@ a:hover {
     padding-top: 21px !important;
 }
 
-:host ::ng-deep.signIn {
-    text-align: center !important;
-    margin-top: 70px !important;
-    margin-bottom: 10px !important;
-    color: $lxp-gray !important;
-    font-size: 28px;
-    letter-spacing: 0.5px;
-}
+// :host ::ng-deep.signIn {
+//     text-align: center !important;
+//     margin-top: 70px !important;
+//     margin-bottom: 10px !important;
+//     color: $lxp-gray !important;
+//     font-size: 28px;
+//     letter-spacing: 0.5px;
+// }
 
 // :host ::ng-deep.linee {
 //     border-left: 222px solid $color-border;
@@ -236,14 +237,14 @@ mat-card-title {
 }
 :host ::ng-deep.footer20{
     // background: #ffffff85;
-    height: 50px;
-    bottom: 6px;
-    width: 100%;
-    position: absolute;
+    // height: 50px;
+    // bottom: 6px;
+    // width: 100%;
+    // position: absolute;
 }
 
   :host ::ng-deep.footericon{
-    width: 100%;
+    // width: 100%;
     // position: absolute;
     // margin-left: 5px;
 
@@ -259,14 +260,14 @@ mat-card-title {
     color: $lxp-footer-text;
 }
 
-:host ::ng-deep .powered{
-    // font-size: 14px !important;
-    // font-weight: 400;
-    // padding: 18px;
-    // position: absolute;
-    // color: $lxp-footer-text;
-    padding-left: 78px;
-}
+// :host ::ng-deep .powered{
+//     // font-size: 14px !important;
+//     // font-weight: 400;
+//     // padding: 18px;
+//     // position: absolute;
+//     // color: $lxp-footer-text;
+//     padding-left: 78px;
+// }
 
 // new changes
 input.mat-input-element {
@@ -280,7 +281,7 @@ input.mat-input-element {
 }
 .btn {
          font-size: 16px;
-        background: #c02222 !important;
+        background: $lxp-theme-green !important;
         color: $color-white;
         border-radius: 50px !important;
         width: 54%;
@@ -297,7 +298,6 @@ input.mat-input-element {
 .btn:disabled {
   opacity: 1 !important;
   color: $color-white !important;
-//   background-color: $color-border !important;
   border-radius: .25rem;
   font-size: 16px;
 }
@@ -398,11 +398,11 @@ input.mat-input-element {
         margin-right: 0px !important;
         margin-left: 0px !important;
     }
-    .beforeloginimg {
-        width: 100%;
-         height: 0vh !important; 
-         padding: 10px;
-    }
+    // .beforeloginimg {
+    // width: 85% !important;
+    // text-align: center;
+    // height: 100vh ;
+    // }
     .linee {
         border-left: 222px solid none !important;
     }

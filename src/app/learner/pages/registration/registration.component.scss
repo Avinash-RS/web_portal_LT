@@ -31,11 +31,11 @@ text-align: center;
 }
 :host ::ng-deep .btn.disabled,
 .btn:disabled {
-color: $color-white !important;
-border-radius: .25rem;
-font-size: 16px;
+  opacity: 1 !important;
+  color: $color-white !important;
+  border-radius: .25rem;
+  font-size: 16px;
 }
-
 :host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0em 0 !important;
 }
@@ -78,13 +78,13 @@ input.mat-input-element {
   margin-left: -10px;
 }
 
-:host ::ng-deep.signIn {
-  text-align: center !important;
-  margin-top: 27px !important;
-  color: $lxp-theme-green !important;
-  font-size: 28px;
-  letter-spacing: 0.5px;
-}
+// :host ::ng-deep.signIn {
+//   text-align: center !important;
+//   margin-top: 27px !important;
+//   color: $lxp-theme-green !important;
+//   font-size: 28px;
+//   letter-spacing: 0.5px;
+// }
 
 
 .account {
@@ -225,12 +225,12 @@ a {
   overflow: hidden !important;
 
 }
-:host ::ng-deep.footericon{
-  width: 100%;
-  position: absolute;
-  margin-left: 5px;
+// :host ::ng-deep.footericon{
+//   width: 100%;
+//   position: absolute;
+//   margin-left: 5px;
 
-}
+// }
 :host ::ng-deep.footertext{
   font-size: 14px !important;
   font-weight: 400;
@@ -239,13 +239,13 @@ a {
   color: $lxp-footer-text;
 }
 
-:host ::ng-deep .powered{
-  font-size: 14px !important;
-  font-weight: 400;
-  padding: 18px;
-  position: absolute;
-  color: $lxp-footer-text;
-}
+// :host ::ng-deep .powered{
+//   font-size: 14px !important;
+//   font-weight: 400;
+//   padding: 18px;
+//   position: absolute;
+//   color: $lxp-footer-text;
+// }
 :host ::ng-deep.footer20{
   height: 50px;
   bottom: 6px;
