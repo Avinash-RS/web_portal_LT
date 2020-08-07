@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
       title: 'Are you sure you want to logout ?',
       // icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3aaf9f',
+      confirmButtonColor: '#ffcc00',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {

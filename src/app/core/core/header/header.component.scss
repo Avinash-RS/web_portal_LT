@@ -67,7 +67,7 @@
 
 
 :host ::ng-deep .mat-toolbar.mat-primary {
-    background-color: $lxp-theme-green !important;
+    background-color: $lxp-theme-yellow-sec !important;
     -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.1) !important;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 
@@ -84,7 +84,7 @@
     height: 50px;
     padding: 3px 0px;
     color: $color-border;
-    background: $lxp-theme-green !important;
+    background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
