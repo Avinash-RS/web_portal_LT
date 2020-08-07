@@ -75,7 +75,7 @@
     font-size: 14px !important;
      font-weight: 400 !important;
     // margin-right: 58%;
-    // color: $label !important;
+    // color: $lxp-gray !important;
 
 }
 .m-l-4{
@@ -95,23 +95,15 @@
   width: 100%;
 }
 .progess{
-  // position: absolute;
   width: 70px;
-  // margin-top: -20px;
-  // margin-left: 41%;
-  float: right;
+  margin-left: 24%;
+  // position: absolute;
+
 }
 .width-80{
   max-width: 80%
 }
-.errorbox{
-  border-left: 7px solid;
-  height: 55px;
-  background: #ffecb3;
-  border-left-color: #ffc107;
-  color: rgba(0,0,0,.87);
-  width: 96%;
-}
+
 :host ::ng-deep.mat-tab-label {
   height: 48px;
   padding: 0px 11px !important;
@@ -299,7 +291,7 @@ padding-bottom: 5px;
 }
 
 .statBtn {
-  border: 1px solid $color-small-blue;
+  border: 1px solid #898989 !important;
   margin-top: 23%;
 }
 
@@ -405,12 +397,12 @@ hr {
 }
 
 :host ::ng-deep .mat-progress-bar-fill::after {
-    background-color: $lxp-theme-green !important;
+    background-color: $lxp-gray !important;
 }
 
 :host ::ng-deep .mat-badge-content {
   color: $color-white;
-  background: $lxp-theme-green;
+  background: $lxp-gray;
 }
 
 .mat-progress-bar {
@@ -453,7 +445,7 @@ hr {
       // text-align: left;
       /* justify-content: end; */
       position: relative;
-      // margin-left: 13%;
+      // margin-left: 25%;
 }
 
 ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{

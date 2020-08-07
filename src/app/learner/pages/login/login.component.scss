@@ -85,8 +85,9 @@ a:hover {
 
 :host ::ng-deep.signIn {
     text-align: center !important;
-    margin-top: 27px !important;
-    color: $lxp-theme-green !important;
+    margin-top: 70px !important;
+    margin-bottom: 10px !important;
+    color: $lxp-gray !important;
     font-size: 28px;
     letter-spacing: 0.5px;
 }
@@ -156,6 +157,7 @@ mat-card-title {
 
 :host ::ng-deep.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
+    background: $lxp-theme-green !important;
 }
 
 
@@ -242,9 +244,12 @@ mat-card-title {
 
   :host ::ng-deep.footericon{
     width: 100%;
-    position: absolute;
-    margin-left: 5px;
+    // position: absolute;
+    // margin-left: 5px;
 
+}
+.border-right{
+    border-right: 1px solid $color-border;
 }
 :host ::ng-deep.footertext{
     font-size: 14px !important;
@@ -255,11 +260,12 @@ mat-card-title {
 }
 
 :host ::ng-deep .powered{
-    font-size: 14px !important;
-    font-weight: 400;
-    padding: 18px;
-    position: absolute;
-    color: $lxp-footer-text;
+    // font-size: 14px !important;
+    // font-weight: 400;
+    // padding: 18px;
+    // position: absolute;
+    // color: $lxp-footer-text;
+    padding-left: 78px;
 }
 
 // new changes
@@ -289,7 +295,7 @@ input.mat-input-element {
 }
 :host ::ng-deep .btn.disabled,
 .btn:disabled {
-//   opacity: 0.65;
+  opacity: 1 !important;
   color: $color-white !important;
 //   background-color: $color-border !important;
   border-radius: .25rem;
@@ -395,6 +401,7 @@ input.mat-input-element {
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
+         padding: 10px;
     }
     .linee {
         border-left: 222px solid none !important;
@@ -442,6 +449,7 @@ input.mat-input-element {
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
+         padding: 10px;
     }
     .footer20 {
         position: absolute;
@@ -498,6 +506,7 @@ input.mat-input-element {
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
+         padding: 10px;
     }
 }
 

@@ -8,6 +8,15 @@ button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
   font-family: Roboto Condensed !important;
 }
 
+.errorbox{
+  border-left: 7px solid;
+  height: 55px;
+  background: $lxp-gray;
+  border-left-color: $lxp-theme-yellow-sec;
+  color: $color-white;
+  width: 96%;
+}
+
 .my-panel {
   background:$lxp-theme-green !important;
   height: 100px;
@@ -388,6 +397,7 @@ button:disabled:hover {
 .beforeloginimg{
   width: 100%;
     height: 100vh;
+    padding: 10px;
 }
 .color_lxp_green{
 color: $lxp-theme-green;
@@ -405,8 +415,9 @@ color: $lxp-theme-green;
 
 .signIn {
   text-align: center !important;
-  margin-top: 27px !important;
-  color: $lxp-theme-green !important;
+  margin-top: 70px !important;
+    margin-bottom: 10px !important;
+  color: $lxp-gray !important;
   font-size: 28px;
   letter-spacing: 0.5px;
 }

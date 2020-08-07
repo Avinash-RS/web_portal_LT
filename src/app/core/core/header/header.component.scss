@@ -83,22 +83,23 @@
     border: none;
     height: 50px;
     padding: 3px 0px;
-    color: $color-border;
+    color: $lxp-gray;
     background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $color-white !important; 
+    border-bottom: 2px solid $color-blank !important; 
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
   }
 .btn1:hover{
-color:  $color-white
+color:  $color-blank !important;
 }
 :host ::ng-deep button:active {
     outline: none !important;
     border: none;
+    color: $color-blank;
     }
 
   .tab{
@@ -121,11 +122,14 @@ color:  $color-white
     top: 8px;
   }
  .colgreen{
-    border-bottom: 2px solid $color-white !important; 
-    color: $color-white !important;
+    border-bottom: 2px solid $color-blank !important; 
+    color: $color-blank !important;
     // position: relative;
     // top: 2px;
 
+ }
+ .iconmenu{
+     color: $color-blank !important;
  }
  .mat-h5, .mat-typography h5 {
     margin: 0px 0 5px !important;

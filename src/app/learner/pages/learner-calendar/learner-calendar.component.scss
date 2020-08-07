@@ -39,9 +39,9 @@ div.scrollcard {
 .errorbox{
     border-left: 7px solid;
     height: 55px;
-    background: #ffecb3;
-    border-left-color: #ffc107;
-    color: rgba(0,0,0,.87);
+    background: $lxp-gray !important;
+    border-left-color: $lxp-theme-yellow-sec;
+    color:$color-white;
 }
 .f_size_24{
     font-size: 24px;
