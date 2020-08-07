@@ -125,7 +125,7 @@
                             (click)="gotoDesc(course)">
                             {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
                           </div>
-                          <div class="width_100 color_black2 f_size_12 f_wt_400 space2 pointer" (click)="gotoDesc(course)">
+                          <div class="width_100 color_black2 f_size_12 f_wt_400 space2 m-b-2 pointer" (click)="gotoDesc(course)">
                             {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}}
     
                             <span class="dot" *ngIf="course.course_mode">&nbsp;.&nbsp;</span>
