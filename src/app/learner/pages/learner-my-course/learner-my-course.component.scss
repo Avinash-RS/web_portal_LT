@@ -117,7 +117,7 @@
 }
 
 :host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
-    color: $color-blank !important;
+    // color: $color-blank !important;
 }
 
 :host /deep/ .mat-ink-bar {
@@ -418,6 +418,24 @@ hr {
     background-color: $color-white;
     color:$lxp-button-text;
 }
+
+.blue_clr:hover {
+  background-color: $lxp-theme-green !important;
+  color: $color-white !important;
+}
+
+.blue_clr1 {
+  background-color: $color-white;
+  color:$lxp-button-text;
+}
+
+.blue_clr1:hover {
+background-color: $lxp-theme-green !important;
+color: $color-white !important;
+}
+
+
+
 .pad1020{
     // padding: 20px 0 10px 18px !important;
     padding-top: 20px !important;
@@ -470,13 +488,18 @@ hr {
 
 .statBtn {
     border: 1px solid $lxp-theme-green;
-    border-radius: 50px;
+    border-radius: 4px;
     width: 110px;
 }
-.blue_clr:hover {
-    background-color: $lxp-theme-green !important;
-    color: $color-white !important;
+
+.statBtn1{
+  border: 1px solid $lxp-gray;
+  border-radius: 4px;
+  width: 120px;
 }
+
+
+
 .timer{
   position: relative;
   top: 5px;
@@ -498,7 +521,7 @@ hr {
     color: $label;
     font-weight: 500;
     background-color: $profile-t-grey;
-    text-align: center;
+    text-align: right;
     border-top: 2px solid $profile-p-grey;
   }
 

@@ -395,7 +395,10 @@ button:disabled:hover {
 }
 
 .beforeloginimg{
-  width: 100%;
+  // width: 100%;
+  width: 85% !important;
+  margin-left: 6%;
+  margin-top: -3%;
     height: 100vh;
     padding: 10px;
 }

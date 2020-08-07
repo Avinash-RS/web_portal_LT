@@ -19,7 +19,7 @@
   <!-- <div>
     <img class="hearder-logo" alt="" [src]="orgDetails ? orgDetails.organization_logo : 'assets/learner/logo.png'">
   </div> -->
-  <button class="profileimg" mat-icon-button >{{initials}}</button>
+  <!-- <button class="profileimg" mat-icon-button >{{initials}}</button> -->
   <!-- [matMenuTriggerFor]="menu" -->
   <!-- <mat-menu #menu="matMenu">
     <button class="backgroundcol" mat-menu-item (click)="navigateProfile()">
@@ -43,10 +43,10 @@
       <label>Logout</label>
     </button>
   </mat-menu> -->
-
-  <button class="iconmenu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <button class="profileimg" mat-icon-button  [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">{{initials}}</button>
+  <!-- <button class="iconmenu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>more_vert</mat-icon>
-  </button>
+  </button> -->
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="navigateProfile()">
       <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
