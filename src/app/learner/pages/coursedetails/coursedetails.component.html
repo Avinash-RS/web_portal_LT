@@ -560,7 +560,7 @@
 
                     <!-- Assignments tab end -->
                     <!-- Forum -->
-                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null"
+                    <!-- <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null"
                         class="discussion_forum">
                         <div class="spinner-container" *ngIf="loadingForum">
                             <mat-spinner diameter="40"></mat-spinner>
@@ -576,7 +576,7 @@
                                             &nbsp;({{'Module'+ ' ' +selectedModuleData.indexValue}}) |
                                             {{ discussionData?.topics?.length ? discussionData.topics.length : 0 }}
                                             {{discussionData?.topics?.length > 1 ? 'Threads' : 'Thread'}}
-                                            <!-- {{discussionData?.topics?.length || 0}}  Threads -->
+                                           
                                         </p>
                                     </div>
                                 </div>
@@ -593,7 +593,6 @@
                                                 style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
                                             </span> :
                                             &nbsp;&nbsp;
-                                            <!-- <span class="f_size_15 f_wt_500">{{selectedThreadData?.titleRaw | titlecase}}</span> -->
                                         </p>
                                     </div>
                                 </div>
@@ -615,8 +614,7 @@
                                                 <mat-option value="1">Latest</mat-option>
                                                 <mat-option value="0">Oldest</mat-option>
                                             </mat-select>
-                                            <!-- <mat-icon matSuffix (click)="closeSort()" class="pointer align_bottom">
-                close</mat-icon> -->
+                                          
                                         </mat-form-field>
 
                                         <form class="search-form">
@@ -634,14 +632,10 @@
                   (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text" matInput
                                                     name="searchbar" [(ngModel)]="filterValue"
                                                     (input)="onSearchChange($event.target.value);">
-                                                <!-- <mat-placeholder>Search</mat-placeholder> -->
                                                 <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
                                                     (click)="closeSearch()">
                                                     close</mat-icon>
-                                                <!-- <mat-icon matSuffix *ngIf="filterValue === null"
-                    [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
-                    style="font-size: 1.2em">search
-                  </mat-icon> -->
+                                        
                                             </mat-form-field>
                                         </form>
                                     </div>
@@ -654,24 +648,7 @@
                                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 float_right no_padding">
                                     <div class="row">
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                            <!-- <form class="search-form">
-                                                <mat-form-field class="example-full-width">
-                                                    <input class="toolbar-search" [disabled]="
-                                                    showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
-                                                    (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
-                                                        type="text" matInput name="searchbar" [(ngModel)]="filterValue"
-                                                        (input)="onSearchChange($event.target.value);">
-                                                    <mat-placeholder>Search</mat-placeholder>
-                                                    <mat-icon matSuffix *ngIf="filterValue?.length > 0"
-                                                        style="font-size: 1.2em" (click)="closeSearch()">
-                                                        close</mat-icon>
-                                                    <mat-icon matSuffix *ngIf="filterValue == null" [ngClass]="
-                                                    (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
-                                                    (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
-                                                     'pointerNone' : 'pointer'" style="font-size: 1.2em">search
-                                                    </mat-icon>
-                                                </mat-form-field>
-                                            </form> -->
+                                            
                                         </div>
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
@@ -684,17 +661,7 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="row" *ngIf="showSearch">
-                                <div class="col-11 center">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="toolbar-search" type="text" matInput autofocus  [(ngModel)]="filterValue"
-                                            (input)="searchThread($event.target.value); ">
-                                        <mat-placeholder>Search</mat-placeholder>
-                                        <mat-icon matSuffix style="font-size: 1.2em" (click)="closeSearch()">
-                                            close</mat-icon>
-                                    </mat-form-field>
-                                </div>
-                            </div> -->
+                           
                         </mat-card>
 
                         <div *ngIf="showCourseDetails && discussionData?.topics?.length > 0" infiniteScroll
@@ -712,9 +679,7 @@
                                                         class="titlecolor">{{data?.user?.username | titlecase}}
                                                         &nbsp;</strong>
                                                     &nbsp; | &nbsp; {{data?.lastposttimeISO | date : 'medium'}} </p>
-                                                <!-- <p class="pointer"> Created by <strong
-                                                        class="titlecolor">{{data?.user?.username | titlecase}}</strong>
-                                                    &nbsp; | &nbsp; {{data?.timestampISO | date : 'medium'}} </p> -->
+                                             
                                             </div>
                                         </div>
                                         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
@@ -739,12 +704,12 @@
                         </div>
 
                         <div class="comment_card" *ngIf="showCommentThread && selectedThreadData != null">
-                            <!-- for thread -->
+                           
 
                             <mat-card class="black_border m-b-10 no-radius no_padding">
-                                <!-- name row start -->
+                             
                                 <div class="no_padding no_margin thread-header">
-                                    <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); -->
+                                 
                                     <div class="row padding_matcard">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
                                             <button class="profileimg"
@@ -765,8 +730,7 @@
                                     </div>
                                 </div>
 
-                                <!-- name row end -->
-                                <!-- content start -->
+                              
                                 <div class="row p-lr-30 m-t-20">
                                     <div class=col-1></div>
                                     <div class="col-11 thread_title p-l-0">
@@ -780,7 +744,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--content ends  -->
+                               
                                 <mat-card-actions class="no_margin no_padding">
                                     <div class="row p-lr-30 m-t-20 m-b-15">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
@@ -835,7 +799,7 @@
                                     </div>
                                 </mat-card-actions>
                             </mat-card>
-                            <!-- for posts -->
+                          
                             <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
                                 <div *ngIf="post.deleted === false">
                                     <mat-card *ngIf="pin !== 0" class="no-radius no_padding"
@@ -870,8 +834,7 @@
                                                 <p class="no_margin" *ngIf="post?.deleted === false"
                                                     [innerHTML]="post?.content">
                                                 </p>
-                                                <!-- <p class="no_margin" *ngIf="post?.deleted === true"
-                                            [innerHTML]="post?.local_content"></p> -->
+                                            
                                             </div>
                                         </div>
                                         <mat-card-actions class="no_margin no_padding">
@@ -931,13 +894,13 @@
                                             </div>
                                         </mat-card-actions>
 
-                                        <!-- // 1st child -->
+                                     
                                         <div *ngFor="let posts of topicDiscussionData?.posts; let pjn = index;">
                                             <div style="padding: 0px 10px;" *ngIf="posts.deleted === false">
                                                 <mat-card class="no-radius no_padding black_border m-bt-4"
                                                     *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid">
                                                     <div class="black_border no_padding no_margin child-post-header">
-                                                        <!-- F1F1F15C  -->
+                                                      
                                                         <div class="row padding_matcard">
                                                             <div
                                                                 class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
@@ -962,8 +925,7 @@
                                                             class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
                                                             <p class="no_margin" *ngIf="posts?.deleted === false"
                                                                 [innerHTML]="posts?.content"></p>
-                                                            <!-- <p class="no_margin" *ngIf="posts?.deleted === true"
-                                                        [innerHTML]="posts?.local_content"></p> -->
+                                                            
                                                         </div>
                                                     </div>
                                                     <mat-card-actions class="no_margin no_padding">
@@ -983,13 +945,7 @@
                                                                         thumb_up_alt</mat-icon>Like
                                                                     ({{posts?.bookmarks || 0}})
                                                                 </button> &nbsp;&nbsp;
-                                                                <!-- // commented by Mythreyi - no need child's child comment -->
-                                                                <!-- <button mat-button
-                                                            (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
-                                                            class="f_size_12 no_padding">
-                                                            <mat-icon class="action_icon">
-                                                                comment</mat-icon>Comment
-                                                        </button> -->
+                                                              
                                                             </div>
                                                         </div>
                                                         <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
@@ -1028,7 +984,7 @@
                                                         </div>
                                                     </mat-card-actions>
 
-                                                    <!-- // 2nd child --- in learner d.f /// Refer this div-- Kani -- -->
+                                               
                                                     <div
                                                         *ngFor="let postss of topicDiscussionData?.posts; let pkn = index;">
                                                         <div style="padding: 0px 10px;"
@@ -1063,10 +1019,7 @@
                                                                         <p class="no_margin"
                                                                             *ngIf="postss?.deleted === false"
                                                                             [innerHTML]="postss?.content"></p>
-                                                                        <!-- <p class="no_margin"
-                                                                    *ngIf="postss?.deleted === true"
-                                                                    [innerHTML]="postss?.local_content">
-                                                                </p> -->
+                                                                       
                                                                     </div>
                                                                 </div>
                                                                 <mat-card-actions class="no_margin no_padding">
@@ -1137,10 +1090,10 @@
                                             <!-- <app-input [type]="'text'" class="width_100" [form]="addThreadForm" [required]="'true'" [name]="'Thread title'"
                                       [controlname]="'title'" [reqcondition]="'req'">
                                     </app-input> -->
-                                        </div>
-                                    </div>
+                                        <!-- </div>
+                                    </div> -->
 
-                                    <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
+                                    <!-- <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
                                         <div class="col-12">
                                             <mat-label>Description</mat-label><span class="mand"> *</span>
                                         </div>
@@ -1158,12 +1111,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <br>
-                                </form>
-                            </mat-dialog-content>
-                            <mat-dialog-actions align="end" class="dialogButtons">
+                                    <!-- <br>
+                                </form> -->
+                            <!-- </mat-dialog-content> -->
+                            <!-- <mat-dialog-actions align="end" class="dialogButtons">
                                 <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
                                     [disabled]="addThreadForm.untouched">Reset</button>
                                 <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
@@ -1171,7 +1124,7 @@
                             </mat-dialog-actions>
                             <br>
                         </ng-template>
-                    </mat-tab>
+                    </mat-tab> --> 
                 </mat-tab-group>
             </div>
 
