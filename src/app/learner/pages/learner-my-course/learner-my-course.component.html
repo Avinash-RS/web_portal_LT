@@ -6,7 +6,8 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12   p-0">
         <mat-tab-group mat-align-tabs="start" animationDuration="1000ms"
           class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
-          <mat-tab [disabled]='incomplete?.length === 0'>
+          <mat-tab>
+            <!-- [disabled]='incom.plete?length === 0' -->
             <ng-template matTabLabel>
               <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">Ongoing</span>
             </ng-template>
