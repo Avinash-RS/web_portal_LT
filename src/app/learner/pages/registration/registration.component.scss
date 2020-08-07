@@ -252,7 +252,16 @@ a {
   width: 100%;
   position: absolute;
 }
-
+.hearder-logo {
+  height: 36px;
+  // padding-left: 0.5%;
+}
+.mat-toolbar {
+  background: $lxp-theme-yellow-sec !important;
+  color: $color-blank;
+  position: absolute;
+  z-index: 4;
+}
 // mobile screen
 @media (max-width: 480px) {
   .wrap-reg {

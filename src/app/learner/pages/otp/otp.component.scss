@@ -29,7 +29,16 @@
     background: transparent;
   }
 }
-
+.hearder-logo {
+  height: 36px;
+  // padding-left: 0.5%;
+}
+.mat-toolbar {
+  background: $lxp-theme-yellow-sec !important;
+  color: $color-blank;
+  position: absolute;
+  z-index: 4;
+}
 // :host ::ng-deep label {
 //   margin-bottom: 0.1em !important;
 // }
