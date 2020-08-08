@@ -18,7 +18,7 @@
                   <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                     <div class="row">
                       <div class="col-2">
-                        <div class="courseHover">
+                        <div class="courseHover"  (click)="gotoDesc(course)">
                           <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                           <div class="overlay">
                             <mat-icon class="text"> play_arrow </mat-icon>
@@ -44,7 +44,8 @@
                               <span class="dot" *ngIf="l.author_name">&nbsp;.&nbsp;</span>
                             </span>
                             <mat-icon class="timer"> alarm_on </mat-icon>
-                            <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
+                            <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}} </span>
+                            <!-- <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span> -->
                           </div>
                         </div>
                       </div>
@@ -108,7 +109,7 @@
                   <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                     <div class="row">
                       <div class="col-2">
-                        <div class="courseHover">
+                        <div class="courseHover"  (click)="gotoDesc(course)">
                           <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                           <div class="overlay">
                             <mat-icon class="text"> play_arrow </mat-icon>
@@ -137,14 +138,15 @@
     
     
                             <mat-icon class="timer"> alarm_on </mat-icon>
-                            <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
+                            <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}} </span>
+                            <!-- <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span> -->
                           </div>
                         </div>
                       </div>
                       <div class="col-2">
                         <div class="progess pointer" (click)="gotoDesc(course)">
                           <circle-progress [percent]="course?.coursePlayerStatus?.course_percentage|| 0" [radius]="10"
-                            [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#ffcc00'"
+                            [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1" [outerStrokeColor]="'#ffcc00'"
                             [innerStrokeColor]="'#9d9d9d'" [titleFontSize]="5" [unitsFontSize]="5" [showSubtitle]="false"
                             [animation]="true" [animationDuration]="300" [startFromZero]="false" [responsive]="true">
                           </circle-progress>
@@ -211,7 +213,7 @@
                   <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                     <div class="row">
                       <div class="col-2">
-                        <div class="courseHover">
+                        <div class="courseHover"  (click)="gotoDesc(course)">
                           <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                           <div class="overlay">
                             <mat-icon class="text"> play_arrow </mat-icon>
@@ -241,7 +243,8 @@
                             </span>
     
                             <mat-icon class="timer"> alarm_on </mat-icon>
-                            <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span>
+                            <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}} </span>
+                            <!-- <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span> -->
                           </div>
                         </div>
                       </div>
