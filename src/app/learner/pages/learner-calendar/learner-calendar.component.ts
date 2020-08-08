@@ -94,6 +94,7 @@ export class LearnerCalendarComponent implements OnInit {
             //     element.activity_details.ongoing = "false";
             //   }
             // });
+            
 
             console.log(this.learnerActivityList);
             this.learnerActivityList.forEach((element, index) => {
@@ -101,22 +102,24 @@ export class LearnerCalendarComponent implements OnInit {
               this.currentStartTime = moment(element.activity_details.startdate).format('LT'); 
               
                this.currentEndTime = moment(element.activity_details.enddate).format('LT'); 
+              // const loginDate = moment(this.currentDate); 
             
               const StartDate = new Date(element.activity_details.startdate)  
               
 
                const EndDate = new Date(element.activity_details.enddate)  
-               
-               console.log(this.currentDate > StartDate)
-               if(this.currentDate > StartDate){
-                console.log("completed");
-                this.showCompleted = "completed"
-              }else if(this.currentDate == StartDate && this.currentDate < EndDate ){     
-                this.showOngoing = "ongoing"
-              }else{
-                this.showUpcoming = "upcoming"
-              }
-
+              
+              
+             
+              // if(this.currentDate > StartDate){
+              //   console.log("completed");
+              //   this.showCompleted = "completed"
+              // }else if(this.currentDate == StartDate && this.currentDate < EndDate ){     
+              //   this.showOngoing = "ongoing"
+              // }else{
+              //   console.log("upcoming123123");
+              //   this.showUpcoming = "upcoming"
+              // }
             })
           // }
         } else {

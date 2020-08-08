@@ -122,6 +122,11 @@ div.scrollcard {
     background-color: $lxp-theme-green !important;
 }
 
+::ng-deep.theme-blue .bs-datepicker-body table td.week span {
+  color: #5bc0de;
+  display: none;
+}
+
 .blue_clr {
     background-color: $lxp-theme-green;
     color: $lxp-button-text;
