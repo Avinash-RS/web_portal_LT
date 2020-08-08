@@ -58,8 +58,11 @@
                                 </span>
 
                             </mat-panel-title>
-                            <span *ngIf="res?.status == 'Passed'"
-                                class="material-icons mod-check-iconmod-check-icon mar">done</span>
+
+                            
+                            
+                                <mat-icon *ngIf="res?.status == 'Passed'"
+                                class="material-icons mar">done</mat-icon>
                             <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                             </mat-icon>
                             <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
