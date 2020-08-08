@@ -230,18 +230,18 @@ export class CoursedetailsComponent implements OnInit {
               if (fileData.startDate && fileData.endDate) {
               const startDate = new Date(fileData.startDate);
               const endDate = new Date(fileData.endDate);
-              this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-              this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
+              fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+              fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
                 fileData.enableView = true;
               } else {
                 fileData.enableView = false;
               }
 
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
               moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
                 this.assignmentContent.enableUpload = true;
-              } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
+              } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
               moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
                 this.assignmentContent.enableUpload = false;
               }
