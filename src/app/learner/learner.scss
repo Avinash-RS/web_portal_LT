@@ -1,5 +1,63 @@
 @import "variable";
+// gobal css 
+.mat-card {
+  font-family: Roboto Condensed !important;
+}
 
+button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
+  font-family: Roboto Condensed !important;
+}
+.powered{
+  // font-size: 14px !important;
+  // font-weight: 400;
+  // padding: 18px;
+  // position: absolute;
+  // color: $lxp-footer-text;
+  padding-left: 78px;
+}
+.footericon{
+  width: 100%;
+  // position: absolute;
+  // margin-left: 5px;
+
+}
+.headTit {
+  display: contents;
+  font-size: 14px;
+  font-style: oblique;
+  color: $color-blank;
+  margin-left: 2px;
+  font-weight: bold;
+}
+.footer20{
+  // background: #ffffff85;
+  height: 50px;
+  bottom: 6px;
+  width: 100%;
+  position: absolute;
+}
+.errorbox{
+  border-left: 7px solid;
+  height: 55px;
+  background: $lxp-gray;
+  border-left-color: $lxp-theme-yellow-sec;
+  color: $color-white;
+  width: 96%;
+}
+
+.main-logo {
+  width: 80%;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: relative;
+
+}
+
+.no_pr{
+  padding-right: 0px !important;
+}
+//////////////////
 .my-panel {
   background:$lxp-theme-green !important;
   height: 100px;
@@ -378,7 +436,6 @@ button:disabled:hover {
 }
 
 .beforeloginimg{
-  width: 100%;
     height: 100vh;
 }
 .color_lxp_green{
@@ -397,8 +454,9 @@ color: $lxp-theme-green;
 
 .signIn {
   text-align: center !important;
-  margin-top: 27px !important;
-  color: $lxp-theme-green !important;
+  margin-top: 30% !important;
+    margin-bottom: 10px !important;
+  color: $lxp-gray !important;
   font-size: 28px;
   letter-spacing: 0.5px;
 }

@@ -30,7 +30,7 @@ div.scrollcard {
 }
 .myC-head{
     margin-left: 2% !important;
-    margin-top: 1%;
+    margin-top: 2%;
     margin-bottom: -2%;
   }
 .color-grey {
@@ -39,9 +39,9 @@ div.scrollcard {
 .errorbox{
     border-left: 7px solid;
     height: 55px;
-    background: #ffecb3;
-    border-left-color: #ffc107;
-    color: rgba(0,0,0,.87);
+    background: $lxp-gray !important;
+    border-left-color: $lxp-theme-yellow-sec;
+    color:$color-white;
 }
 .f_size_24{
     font-size: 24px;
@@ -50,7 +50,9 @@ div.scrollcard {
     display: inline-flex;
     font-size: 18px;
 }
-
+ :host ::ng-deep.bs-datepicker-container {
+ padding: 0px !important; 
+ }
 .iconevent{
     padding: 9px;
     font-size: 37px;
@@ -63,12 +65,12 @@ div.scrollcard {
 
 .color-blue-card-status {
  
-    border-left: 8px solid $bule2!important;
+    border-left: 4px solid $bule2!important;
     color: $color-blank!important;
   }
 
 .color-grey-card-status {
-    border-left: 8px solid #b5acac !important;
+    border-left: 4px solid #b5acac !important;
     // color: #b5acac !important;
   }
   
@@ -100,7 +102,7 @@ div.scrollcard {
 .color-white {
     color: #b5acac;
     background: $color-white !important;
-    border-left: 0px !important
+    border-left: 0px !important;
 }
 
 .status{

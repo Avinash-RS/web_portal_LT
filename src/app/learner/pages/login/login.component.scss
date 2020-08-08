@@ -10,6 +10,7 @@ mat-card {
     text-align: right !important;
 }
 
+
 // :host ::ng-deep input[type=text][type=password] {
 //     width: 100%;
 //     padding: 12px 20px;
@@ -83,13 +84,14 @@ a:hover {
     padding-top: 21px !important;
 }
 
-:host ::ng-deep.signIn {
-    text-align: center !important;
-    margin-top: 27px !important;
-    color: $lxp-theme-green !important;
-    font-size: 28px;
-    letter-spacing: 0.5px;
-}
+// :host ::ng-deep.signIn {
+//     text-align: center !important;
+//     margin-top: 70px !important;
+//     margin-bottom: 10px !important;
+//     color: $lxp-gray !important;
+//     font-size: 28px;
+//     letter-spacing: 0.5px;
+// }
 
 // :host ::ng-deep.linee {
 //     border-left: 222px solid $color-border;
@@ -156,6 +158,7 @@ mat-card-title {
 
 :host ::ng-deep.mat-raised-button[disabled]:not([class*='mat-elevation-z']) {
     color: #d2d1d1;
+    background: $lxp-theme-green !important;
 }
 
 
@@ -234,17 +237,41 @@ mat-card-title {
 }
 :host ::ng-deep.footer20{
     // background: #ffffff85;
-    height: 50px;
-    bottom: 6px;
-    width: 100%;
-    position: absolute;
+    // height: 50px;
+    // bottom: 6px;
+    // width: 100%;
+    // position: absolute;
 }
 
   :host ::ng-deep.footericon{
-    width: 100%;
-    position: absolute;
-    margin-left: 5px;
+    // width: 100%;
+    // position: absolute;
+    // margin-left: 5px;
 
+}
+.hearder-logo {
+    height: 36px;
+    // padding-left: 0.5%;
+}
+.mat-toolbar {
+    background: $lxp-theme-yellow-sec !important;
+    color: $color-blank;
+    position: absolute;
+    z-index: 4;
+}
+.headTit{
+    display: contents;
+    font-size: 14px;
+    font-style: oblique;
+    color: $color-blank;
+    margin-left: 2px;
+    font-weight: bold;
+  }
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.border-right{
+    border-right: 1px solid $color-border;
 }
 :host ::ng-deep.footertext{
     font-size: 14px !important;
@@ -254,13 +281,14 @@ mat-card-title {
     color: $lxp-footer-text;
 }
 
-:host ::ng-deep .powered{
-    font-size: 14px !important;
-    font-weight: 400;
-    padding: 18px;
-    position: absolute;
-    color: $lxp-footer-text;
-}
+// :host ::ng-deep .powered{
+//     // font-size: 14px !important;
+//     // font-weight: 400;
+//     // padding: 18px;
+//     // position: absolute;
+//     // color: $lxp-footer-text;
+//     padding-left: 78px;
+// }
 
 // new changes
 input.mat-input-element {
@@ -289,9 +317,8 @@ input.mat-input-element {
 }
 :host ::ng-deep .btn.disabled,
 .btn:disabled {
-//   opacity: 0.65;
+  opacity: 1 !important;
   color: $color-white !important;
-//   background-color: $color-border !important;
   border-radius: .25rem;
   font-size: 16px;
 }
@@ -392,10 +419,11 @@ input.mat-input-element {
         margin-right: 0px !important;
         margin-left: 0px !important;
     }
-    .beforeloginimg {
-        width: 100%;
-         height: 0vh !important; 
-    }
+    // .beforeloginimg {
+    // width: 85% !important;
+    // text-align: center;
+    // height: 100vh ;
+    // }
     .linee {
         border-left: 222px solid none !important;
     }
@@ -442,6 +470,7 @@ input.mat-input-element {
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
+         padding: 10px;
     }
     .footer20 {
         position: absolute;
@@ -498,6 +527,7 @@ input.mat-input-element {
     .beforeloginimg {
         width: 100%;
          height: 0vh !important; 
+         padding: 10px;
     }
 }
 

@@ -28,7 +28,9 @@
     }
 
     .logo{
-        font-size: 26px;font-family: Roboto;color:white;margin-top: 8px;
+        font-size: 26px;
+        font-family: Roboto;
+        color:white;margin-top: 8px;
     }
     .mat-drawer-inner-container{
         overflow: hidden !important;
@@ -48,8 +50,8 @@
     .mat-row{
         min-height: 39px !important;
     }
-    .mat-h1, .mat-headline, .mat-typography h1{
-        margin: 0px !important;
-    }
+    // .mat-h1, .mat-headline, .mat-typography h1{
+    //     margin: 0px !important;
+    // }
 }
 

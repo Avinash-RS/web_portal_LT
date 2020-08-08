@@ -16,7 +16,7 @@
             <mat-toolbar class="header">
                 <div class="row margin-15">
                     <div class="col-6 Outine">
-                        Course outline
+                        Course Outline
                     </div> |
                     <div class="col-6">
                         <div class="row">
@@ -24,7 +24,7 @@
                                 <mat-icon class="alarmIcon">alarm</mat-icon>
                             </div>
                             <div class="col-4">
-                                <span class="courseTime">{{content?.coursetime}}</span>
+                                <span class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                     </div>
                                     <div>
                                         <div class="moduleHead" matTooltip="{{res?.title}}">
-                                            <div class="modhead">{{res?.title}}</div>
+                                            <div class="modhead">{{res?.title }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,13 +53,16 @@
                                 <span class="moduleund">
                                     <mat-icon class="time-icon">alarm</mat-icon>
                                     <span class="course-time">
-                                        {{res?.moduletime}}
+                                        {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                     </span>
                                 </span>
 
                             </mat-panel-title>
-                            <span *ngIf="res?.status == 'Passed'"
-                                class="material-icons mod-check-iconmod-check-icon mar">done</span>
+
+                            
+                            
+                                <mat-icon *ngIf="res?.status == 'Passed'"
+                                class="material-icons mar">done</mat-icon>
                             <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                             </mat-icon>
                             <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
@@ -72,7 +75,6 @@
                                     <ng-container *ngFor="let mod of res?.children; let j = index">
                                         <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-
                                             <ng-template matStepLabel>
                                                 <span class="topicnm"
                                                     (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
@@ -241,7 +243,7 @@
 
 
                             <ng-container *ngIf="!content?.noresource">
-                                <span>This course does not have resource files.</span>
+                                <span style="padding: 16px;">This course does not have resource files.</span>
                             </ng-container>
                         </mat-accordion>
                     </mat-tab>
@@ -397,38 +399,40 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-2">
-                                                                        <div class="row">
-                                                                            <span><b>Status</b></span>
-                                                                        </div><br>
-
-                                                                        <div class="row">
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.doc_status === false">
-                                                                                <!-- <mat-icon class="no-cursor icon">
-        check_circle</mat-icon> -->
-                                                                                <div class="icon">
-                                                                                    Submitted</div>
-                                                                            </div>
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.grade_status === true">
-                                                                                <div class="grade"
-                                                                                    style="padding-top: 4px;color: green;">
-                                                                                    Graded</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
                                                                     <div class=col-1>
                                                                         <div class="row">
                                                                             <span class="info-icon">
                                                                                 <mat-icon class="icon"
-                                                                                    matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
-                                                                                    info</mat-icon>
+                                                                                matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
+                                                                                info</mat-icon>
                                                                             </span>
                                                                         </div>
-
+                                                                       
                                                                     </div>
+
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>Status</b></span>
+                                                                        </div><br>
+                                                                        
+<div class="row">
+    <div class="disply no-cursor"
+    *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+    <!-- <mat-icon class="no-cursor icon">
+        check_circle</mat-icon> -->
+    <div class="icon">
+        Submitted</div>
+</div>
+<div class="disply no-cursor"
+    *ngIf="file.grade_status === 'Evaluated'">
+    <div class="grade"
+        style="color: green;">
+        Graded</div>
+</div>
+</div>
+                                                                    </div>
+                                                                   
+                                        
                                                                 </div>
 
 
@@ -1141,7 +1145,7 @@
 
                                     <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
                                         <div class="col-12">
-                                            <mat-label>Description</mat-label><span class="mand"> *</span>
+                                            <mat-label>Post</mat-label><span class="mand"> *</span>
                                         </div>
                                         <div class="col-12 m-b-0">
                                             <div class="form-group m-b-0">
@@ -1149,10 +1153,10 @@
                                                 </angular-editor>
                                                 <div *ngIf="f.thread_description.touched && f.thread_description.errors"
                                                     class="mand">
-                                                    <div *ngIf="f.thread_description.errors.minlength">Description must
+                                                    <div *ngIf="f.thread_description.errors.minlength">Post must
                                                         be
                                                         minimum of 8 characters </div>
-                                                    <div *ngIf="f.thread_description.errors.required">Description is
+                                                    <div *ngIf="f.thread_description.errors.required">Post is
                                                         required</div>
                                                 </div>
                                             </div>
@@ -1180,11 +1184,11 @@
 
 
     <div class="footer">
-        <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
-            <span class="powered">Powered by :
-                <img width="160px" alt="" src="assets/learner/LT_small.svg">
+        <!-- <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp; -->
+            <span class="powered">
+                <img width="160px" alt="" src="assets/learner/LnT-Full-black-logo.svg">
             </span>
-        </span>
+        <!-- </span> -->
 
     </div>
 </div>

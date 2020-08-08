@@ -193,12 +193,12 @@ li {
 .desc {
     margin-top: 10px;
     // font-weight: 500;
-    margin-left: -12px;
+    margin-left: -15px;
 }
 
 .head-h1 {
     font-size: 20px;
-    color: $lxp-theme-green;
+    color: $color-blank;
     margin-top: 10px;
     font-weight: 500;
 
@@ -206,7 +206,7 @@ li {
 
 .head-h2 {
     font-size: 20px;
-    color: $lxp-theme-green;
+    color:$color-blank;
     margin-top: 10px;
     font-weight: 500;
 
@@ -383,6 +383,7 @@ li {
     align-items: center;
     width: 100%;
     height: 700px;
+    border: none !important;
     // border: 1px solid $color-border;
 }
 
@@ -472,14 +473,18 @@ li {
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
     // font-weight: 500 !important;
-    // color: $label !important;
+    // color: $color-blank !important;
 
 }
 
 :host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
-    color: $color-blank !important;
+    // color: $color-blank !important;
 }
 
+:host ::ng-deep.mat-tab-label-active{
+    // color: $color-blank !important;
+    opacity: 1 !important;
+  }
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
     background-color: $lxp-theme-green !important;
@@ -509,7 +514,7 @@ li {
 
     .course-time {
         font-size: 12px;
-        margin-left: -12px;
+        margin-left: -8px;
         position: absolute;
     }
 
@@ -552,7 +557,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
     .mat-step-icon {
         background-color: #0E7D12 !important;
-        color: $color-white !important;
+        color: #0E7D12 !important;
         height: 20px !important;
         width: 20px !important;
     }
@@ -561,7 +566,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colYellow"] {
     .mat-step-icon {
         background-color: $color-yellow !important;
-        color: $color-white !important;
+        color: $color-yellow !important;
         height: 20px !important;
         width: 20px !important;
     }
@@ -570,7 +575,7 @@ li {
 ::ng-deep .mat-step-header[aria-labelledby="colWhite"] {
     .mat-step-icon {
         background-color: $color-white !important;
-        color: $color-blank !important;
+        color: $color-white !important;
         border: 2px solid $color-border;
         height: 20px !important;
         width: 20px !important;
@@ -579,9 +584,12 @@ li {
 }
 
 :host ::ng-deep .mat-step-header {
-    margin-left: -7% !important;
+    margin-left: 0.8% !important;
 }
+:host ::ng-deep .mat-step-icon .mat-icon, .mat-step-icon-content {
+    color: $color-white !important;
 
+}
 .moduleHead {
     padding-left: 8px;
     position: absolute;
@@ -592,7 +600,7 @@ li {
 }
 
 .moduleund {
-    margin-left: 37px;
+    margin-left: 36px;
     font-weight: 500;
     height: 20px;
     margin-top: -8px;
@@ -622,7 +630,7 @@ li {
 
 //////////foooter
 .footer {
-    padding: 30px;
+    padding: 15px;
     font-size: inherit;
     left: 0;
     bottom: 0;
@@ -630,7 +638,7 @@ li {
     color: $label;
     font-weight: 500;
     background-color: $profile-t-grey;
-    text-align: center;
+    text-align: right;
     border-top: 2px solid $profile-p-grey;
 }
 
@@ -642,7 +650,7 @@ li {
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
-    color: $label;
+    // color: $lxp-gray !important;
 }
 
 :host ::ng-deep.footericon {
@@ -702,21 +710,21 @@ li {
     font-size: 30px;
 }
 
-/deep/ .mat-checkbox-layout .mat-checkbox-label {
-    white-space: normal !important;
-}
+// /deep/ .mat-checkbox-layout .mat-checkbox-label {
+//     white-space: normal !important;
+// }
 
-/deep/ .mat-checkbox-inner-container {
-    display: inline-block;
-    height: 16px;
-    line-height: 0;
-    margin: 8px 0px 0px 0px !important;
-    order: 0;
-    position: relative;
-    white-space: nowrap;
-    width: 16px;
-    flex-shrink: 0;
-}
+// /deep/ .mat-checkbox-inner-container {
+//     display: inline-block;
+//     height: 16px;
+//     line-height: 0;
+//     margin: 8px 0px 0px 0px !important;
+//     order: 0;
+//     position: relative;
+//     white-space: nowrap;
+//     width: 16px;
+//     flex-shrink: 0;
+// }
 
 .greyBor {
     border: 1px solid #dddddd;

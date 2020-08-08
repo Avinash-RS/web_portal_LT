@@ -224,7 +224,6 @@ export class CoursedetailsComponent implements OnInit {
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
         this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
         this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
-
         this.assignmentContent.coursedetails.forEach(element => {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
@@ -239,9 +238,11 @@ export class CoursedetailsComponent implements OnInit {
                 fileData.enableView = false;
               }
 
-              if (moment().format('DD-MM-YYYY') >= this.assignmentStartDate && moment().format('DD-MM-YYYY') <= this.courseEndDate) {
+              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
+              moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
                 this.assignmentContent.enableUpload = true;
-              } else if (moment().format('DD-MM-YYYY') < this.assignmentStartDate || moment().format('DD-MM-YYYY') > this.courseEndDate) {
+              } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
+              moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
                 this.assignmentContent.enableUpload = false;
               }
             }

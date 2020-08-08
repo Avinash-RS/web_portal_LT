@@ -9,7 +9,8 @@
     height: 50px !important;
     position: relative;
     padding-left: 16px;
-    box-shadow: 0px 0px 13px #242636;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
+
 }
 
 .more-btn {
@@ -36,8 +37,8 @@
 }
 
 .hearder-logo {
-    height: 40px;
-    padding-left: 0.5%;
+    height: 36px;
+    // padding-left: 0.5%;
 }
 
 .edutech {
@@ -66,9 +67,10 @@
 
 
 :host ::ng-deep .mat-toolbar.mat-primary {
-    background-color: $lxp-theme-green !important;
+    background-color: $lxp-theme-yellow-sec !important;
     -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.1) !important;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3 !important;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
+
 }
 :host ::ng-deep.mat-icon-button {
     line-height: 31px !important;
@@ -80,23 +82,24 @@
     font-size: 16px;
     border: none;
     height: 50px;
-    padding: 0 0px;
-    color: $color-border;
-    background: $lxp-theme-green !important;
+    padding: 3px 0px;
+    color:$lxp-dark-gray;
+    background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $color-white !important; 
+    border-bottom: 2px solid $color-blank !important; 
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
   }
 .btn1:hover{
-color:  $color-white
+color:  $color-blank !important;
 }
 :host ::ng-deep button:active {
     outline: none !important;
     border: none;
+    color: $color-blank;
     }
 
   .tab{
@@ -108,19 +111,25 @@ color:  $color-white
     display: contents;
     font-size: 14px;
     font-style: oblique;
+    color: $color-blank;
+    margin-left: 2px;
+    font-weight: bold;
   }
   .headicon{
     font-size: 22px !important;
     // width: 30px !important;
     position: relative;
-    top: 7px;
+    top: 6px;
   }
  .colgreen{
-    border-bottom: 2px solid $color-white !important; 
-    color: $color-white !important;
+    border-bottom: 2px solid $color-blank !important; 
+    color: $color-blank !important;
     // position: relative;
     // top: 2px;
 
+ }
+ .iconmenu{
+     color: $color-blank !important;
  }
  .mat-h5, .mat-typography h5 {
     margin: 0px 0 5px !important;
