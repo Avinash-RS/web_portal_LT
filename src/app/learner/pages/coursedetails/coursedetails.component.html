@@ -1145,7 +1145,7 @@
 
                                     <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
                                         <div class="col-12">
-                                            <mat-label>Description</mat-label><span class="mand"> *</span>
+                                            <mat-label>Post</mat-label><span class="mand"> *</span>
                                         </div>
                                         <div class="col-12 m-b-0">
                                             <div class="form-group m-b-0">
@@ -1153,10 +1153,10 @@
                                                 </angular-editor>
                                                 <div *ngIf="f.thread_description.touched && f.thread_description.errors"
                                                     class="mand">
-                                                    <div *ngIf="f.thread_description.errors.minlength">Description must
+                                                    <div *ngIf="f.thread_description.errors.minlength">Post must
                                                         be
                                                         minimum of 8 characters </div>
-                                                    <div *ngIf="f.thread_description.errors.required">Description is
+                                                    <div *ngIf="f.thread_description.errors.required">Post is
                                                         required</div>
                                                 </div>
                                             </div>
