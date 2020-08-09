@@ -68,60 +68,14 @@ export class LearnerCalendarComponent implements OnInit {
     ).toISOString();
     this.getLearnerActivity(this.selectedDate);
   }
-  getLearnerActivity(selectedDate) {
-    var selectedDatediff = new Date(selectedDate);
-    var today = this.bsInlineValue.getDate() - selectedDatediff.getDate()
-    if (today == 0) {
-      this.selectedToday = true;
-    } else {
-      this.selectedToday = false;
-    }
-    
-    const dateValue = moment(selectedDate).format("YYYY-MM-DD")
-    console.log(dateValue);
+  getLearnerActivity(selectedDate) {    
+    const dateValue = moment(selectedDate).format("YYYY-MM-DD")    
     this.service.getReadLeanerActivity(this.user_id, dateValue).subscribe(
       (res: any) => {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
           this.learnerActivityList =
             res.data?.get_read_learner_activity?.message;
-            
-          // if (this.selectedToday) {
-            // this.learnerActivityList.forEach((element, index) => {
-            //   if (index == 0) {
-            //     element.activity_details.ongoing = "true";
-            //   } else {
-            //     element.activity_details.ongoing = "false";
-            //   }
-            // });
-            
-
-            console.log(this.learnerActivityList);
-            this.learnerActivityList.forEach((element, index) => {
-
-              this.currentStartTime = moment(element.activity_details.startdate).format('LT'); 
-              
-               this.currentEndTime = moment(element.activity_details.enddate).format('LT'); 
-              // const loginDate = moment(this.currentDate); 
-            
-              const StartDate = new Date(element.activity_details.startdate)  
-              
-
-               const EndDate = new Date(element.activity_details.enddate)  
-              
-              
-             
-              // if(this.currentDate > StartDate){
-              //   console.log("completed");
-              //   this.showCompleted = "completed"
-              // }else if(this.currentDate == StartDate && this.currentDate < EndDate ){     
-              //   this.showOngoing = "ongoing"
-              // }else{
-              //   console.log("upcoming123123");
-              //   this.showUpcoming = "upcoming"
-              // }
-            })
-          // }
         } else {
           this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
           this.showErrorCard = true;
