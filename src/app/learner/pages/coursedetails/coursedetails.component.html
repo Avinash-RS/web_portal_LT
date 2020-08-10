@@ -1,18 +1,25 @@
-<app-header></app-header>
+<div  id='hideMe'>
+
+    <app-header></app-header>
+</div>
+
 <!-- <button mat-button class="backbtn" [routerLink]="['/Learner/MyCourse']">
     <mat-icon class="backIcon">keyboard_backspace</mat-icon>
     &nbsp; Back to My Courses
 </button> -->
-
-<div class="row " id='hideMe'>
-    <div class="col-12">
-        <h1 class="nameh1 animated animatedFadeInUp fadeInUp">{{course?.course_name | titlecase }}</h1>
-    </div>
-</div>
+<!--  -->
 
 <div class="container007 animated animatedFadeInUp fadeInUp">
+    
+    
     <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
-        <mat-drawer #drawer class="drawer" mode="side" opened="true">
+
+        <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
+            <div class="row " >
+                <div class="col-12" (click)="tabs.selectedIndex = 0">
+                    <h1 class="nameh1">{{course?.course_name | titlecase }}</h1>
+                </div>
+            </div>
             <mat-toolbar class="header">
                 <div class="row margin-15">
                     <div class="col-6 Outine">
@@ -96,11 +103,12 @@
             </div>
 
             <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
-
-            <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
-
             <div class="">
-                <mat-tab-group animationDuration="1000ms">
+                <mat-tab-group #tabs animationDuration="1000ms">
+                    <mat-tab >
+                        <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
+
+                    </mat-tab>
                     <mat-tab label="About the course">
                         <h3 class="head-h1">Course description</h3>
                         <div class="vertical"></div>
@@ -1175,8 +1183,11 @@
                             <br>
                         </ng-template>
                     </mat-tab>
+                    
                 </mat-tab-group>
             </div>
+         
+      
 
             <div style="height: 100px">&nbsp;</div>
         </div>

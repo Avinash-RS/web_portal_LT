@@ -137,6 +137,7 @@ export class CoursedetailsComponent implements OnInit {
   searchthreadname = false;
   assignmentStartDate: any;
   assignmentEndDate: any;
+  sider = true;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -344,6 +345,7 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
+        this.sider = false;
       }, 20000);
     // this.cancelPageRefresh();
   }
