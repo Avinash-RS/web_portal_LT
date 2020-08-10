@@ -250,7 +250,7 @@
 
                     <!-- Assignments tab -->
                     <mat-tab label="Assignments" class="discussion_forum"
-                        *ngIf="assignmentContent?.coursedetails.length">
+                        *ngIf="assignmentContent?.coursedetails.length" >
                         <mat-accordion>
                             <ng-container>
                                 <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -563,7 +563,7 @@
 
                     <!-- Assignments tab end -->
                     <!-- Forum -->
-                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null"
+                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null || selectedModuleData === undefined"
                         class="discussion_forum">
                         <div class="spinner-container" *ngIf="loadingForum">
                             <mat-spinner diameter="40"></mat-spinner>
