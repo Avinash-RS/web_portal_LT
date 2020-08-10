@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 const routes: Routes = [
   {
@@ -9,6 +11,8 @@ const routes: Routes = [
     loadChildren: './learner/learner.module#LearnerModule',
      data : {title: 'Welcome to EduTech'}
   },
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'},
   {
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
