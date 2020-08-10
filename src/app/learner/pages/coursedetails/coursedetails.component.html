@@ -563,7 +563,7 @@
 
                     <!-- Assignments tab end -->
                     <!-- Forum -->
-                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null"
+                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null || selectedModuleData === undefined"
                         class="discussion_forum">
                         <div class="spinner-container" *ngIf="loadingForum">
                             <mat-spinner diameter="40"></mat-spinner>
