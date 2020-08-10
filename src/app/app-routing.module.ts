@@ -11,8 +11,8 @@ const routes: Routes = [
     loadChildren: './learner/learner.module#LearnerModule',
      data : {title: 'Welcome to EduTech'}
   },
-  {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '/404'},
+  // {path: '404', component: NotFoundComponent},
+  // {path: '**', redirectTo: '/404'},
   {
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
