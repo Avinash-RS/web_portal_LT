@@ -159,11 +159,14 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            this.selectedModuleData = this.scromApiData?.childData[0];
-            this.selectedModuleData.indexValue = 1;
-            if (this.selectedModuleData) {
-              this.viewAllThreads();
+            this.selectedModuleData = this.scromApiData?.childData[0] || null;
+            if (this.scromApiData?.childData[0]) {
+              this.selectedModuleData.indexValue = 1;
+              if (this.selectedModuleData) {
+                this.viewAllThreads();
+              }
             }
+
             // all post in one thread
             this.loading = false;
             // if (this.course.topicData && this.course.topicData.length) {
@@ -228,24 +231,24 @@ export class CoursedetailsComponent implements OnInit {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
               if (fileData.startDate && fileData.endDate) {
-              const startDate = new Date(fileData.startDate);
-              const endDate = new Date(fileData.endDate);
-              this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-              this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
-                fileData.enableView = true;
-              } else {
-                fileData.enableView = false;
-              }
+                const startDate = new Date(fileData.startDate);
+                const endDate = new Date(fileData.endDate);
+                this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+                this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+                if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
+                  fileData.enableView = true;
+                } else {
+                  fileData.enableView = false;
+                }
 
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
-              moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                this.assignmentContent.enableUpload = true;
-              } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
-              moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                this.assignmentContent.enableUpload = false;
+                if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
+                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
+                  this.assignmentContent.enableUpload = true;
+                } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
+                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
+                  this.assignmentContent.enableUpload = false;
+                }
               }
-            }
             });
           });
         });
@@ -766,7 +769,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  likeandunlikepost(d ?) {
+  likeandunlikepost(d?) {
     console.log('abc', this.userDetail.nodebb_response);
     if (this.userDetail.nodebb_response != null || d !== undefined) {
       const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
