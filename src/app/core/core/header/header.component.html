@@ -3,7 +3,7 @@
     <img class="hearder-logo " alt="" src="assets/learner/LT.svg">
     <span class="headTit">&nbsp;LARSEN & TOUBRO</span>
   <span class="spacer"></span>
-  <div class="tab" >
+  <div class="tab" *ngIf="show">
       <button class="btn1"  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
       'colWhite'" md-raised-button routerLink="/Learner/MyCourse" >
         <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon> My Courses </button>
@@ -51,6 +51,16 @@
     <button mat-menu-item (click)="navigateProfile()">
       <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
       <span>Profile</span> 
+    </button>
+
+    <button mat-menu-item  routerLink="/Learner/MyCourse" routerLinkActive="active" *ngIf="!show">
+      <mat-icon fontSet="material-icons-outlined">local_library</mat-icon>
+      <span>My Courses</span> 
+    </button>
+
+    <button mat-menu-item  routerLink="/Learner/calendar" routerLinkActive="active"  *ngIf="!show">
+      <mat-icon fontSet="material-icons-outlined">event_note</mat-icon>
+      <span>Calendar</span> 
     </button>
     <button mat-menu-item (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>

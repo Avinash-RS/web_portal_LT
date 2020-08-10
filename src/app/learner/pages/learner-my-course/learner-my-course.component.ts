@@ -3,9 +3,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { data } from 'jquery';
-import * as moment from 'moment';   
-
+import * as moment from 'moment';
 // import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -36,13 +34,13 @@ export class LearnerMyCourseComponent implements OnInit {
   screenWidth: number;
   showShortDesciption = true;
   show = false;
-  showViewButton:boolean;
+  showViewButton: boolean;
   results = [];
-  currentStartTime:string;
-  currentEndTime:string;
-  showCompleted:string;
-  showOngoing:string;
-  showUpcoming:string;
+  currentStartTime: string;
+  currentEndTime: string;
+  showCompleted: string;
+  showOngoing: string;
+  showUpcoming: string;
 
 
 
@@ -59,13 +57,67 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
-   var topicStart = new Date();
-   const dateValue = moment(topicStart).format("YYYY-MM-DD")
+      // const dateValue = new Date().toISOString()
+    // const static =
+    const message = [{message: [{activity_details: { activityname: 'Test case 12',
+    activitytype: 'Live Classroom',
+    courseid: 'c23ft3yr',
+    coursename: 'Foreman S3',
+    created_on: '2020-08-05T07:12:13.931Z',
+    createdby_id: 'admin',
+    createdby_name: 'lxpadmin',
+    createdby_role: '1234ab',
+    enddate: '2020-08-05T08:35:58.000Z',
+    link: 'https://teams.microsoft.com/l/meetup-join/19%3ameeting_MTk3OGY3MjgtYmI5Zi00MzE5LThjNDUtOGExYmQ4MDU2OGY4%40thread.v2/0?context=%7b%22Tid%22%3a%22b24d70a0-4ca9-4744-b060-812c8f92be7f%22%2c%22Oid%22%3a%224483fef5-e95c-46ce-8890-6c39bc7cd8c7%22%7d',
+    modulename: 'Course 1',
+    resourcefile: null,
+    score: null,
+    startdate: '2020-08-05T06:35:58.000Z',
+    status: 'true',
+    topicname: 'Codes for Foundations1',
+    _id: '5f2a50055e15d300116e4613'}}]}];
+
+    const currentDate = new Date();
+    const formatDate = moment(currentDate).format();
+    console.log(formatDate, 'currentDate');
+
+    const topicStart = new Date();
+    const dateValue = moment(topicStart).format('YYYY-MM-DD');
+  //   console.log(dateValue);
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
-      if(this.results['message'].length<5){
+
+      this.results['message'].forEach((el: any) => {
+        // console.log(el.activity_details.startdate);
+        this.currentStartTime = moment(el.activity_details.startdate).format('LT');
+      //  console.log(this.currentStartTime)
+        this.currentEndTime = moment(el.activity_details.enddate).format('LT');
+        // console.log(this.currentEndTime);
+
+        const StartDate = new Date(el.activity_details.startdate);
+        // console.log(StartDate,"StartDate");
+
+        const EndDate = new Date(el.activity_details.enddate);
+        // console.log(EndDate,"EndDate");
+
+        if (currentDate > StartDate) {
+          this.showCompleted = 'completed';
+        } else if (currentDate === StartDate && currentDate < EndDate ) {
+          this.showOngoing = 'ongoing';
+        } else {
+          this.showUpcoming = 'upcoming';
+        }
+
+      });
+
+      // console.log("length",this.results['message'].length);
+
+      // tslint:disable-next-line:no-string-literal
+      // debugger;
+      if (this.results['message'].length < 5) {
         this.showViewButton = false;
-      }else{
+        // console.log(this.showViewButton);
+      } else {
         this.showViewButton = true;
       }
       // console.log('after playlist order UPDATED', data.data);
@@ -163,6 +215,7 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
   alterDescriptionText() {
+    console.log('in');
     this.showShortDesciption = !this.showShortDesciption;
   }
 
@@ -171,15 +224,19 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   launchAssignment(value) {
-    if (value.activity_details.activitytype === 'Assignment') {
-      const detail = {
-        id: value.activity_details.courseid,
-        wishlist: false,
-        wishlist_id: false,
-        enrollment_status: false
-      };
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    if (this.screenWidth < 800) {
+      this.show = true;
+    } else {
+      if (value.activity_details.activitytype === 'Assignment') {
+        const detail = {
+          id: value.activity_details.courseid,
+          wishlist: false,
+          wishlist_id: false,
+          enrollment_status: false
+        };
+        this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
+   }
   }
   launchActivity(value) {
       window.open(value.activity_details.link);

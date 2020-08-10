@@ -19,9 +19,14 @@ export class HeaderComponent implements OnInit {
   activeUrl: string;
   orgDetails: any;
   loginDetails: any;
+  screenHeight: number;
+  screenWidth: number;
+  show = true;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
-              public router: Router, private gs: GlobalServiceService) { }
+              public router: Router, private gs: GlobalServiceService) {
+                this.getScreenSize();
+               }
 
   ngOnInit() {
     this.activeUrl = this.router.url;
@@ -42,6 +47,13 @@ export class HeaderComponent implements OnInit {
       this.initials = Name.charAt(0);
     } else {
       this.initials = Name.charAt(0) + Name.charAt(Name.length - 1);
+    }
+  }
+  getScreenSize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 800) {
+      this.show = false;
     }
   }
 
