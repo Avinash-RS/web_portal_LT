@@ -60,6 +60,7 @@ export class CoursedetailsComponent implements OnInit {
   selected = '1';
   discussionData1: any = [];
   dataRefresher: any;
+  isFullScreen = false;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -368,10 +369,12 @@ export class CoursedetailsComponent implements OnInit {
     document.getElementsByTagName('iframe')[0].className = 'fullScreen';
     const elem = document.body;
     if (!document.fullscreenElement) {
+      this.isFullScreen = true;
       elem.requestFullscreen().catch(err => {
       });
       } else {
         document.exitFullscreen();
+        this.isFullScreen = false;
       }
 }
 showHeader() {

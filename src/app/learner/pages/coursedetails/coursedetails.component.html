@@ -1,5 +1,7 @@
 <div  *ngIf="sider">
+    <span *ngIf="!isFullScreen">
     <app-header></app-header>
+</span>
 </div>
 
 <!-- <button mat-button class="backbtn" [routerLink]="['/Learner/MyCourse']">
@@ -9,7 +11,6 @@
 <!--  -->
 
 <div class="container007 animated animatedFadeInUp fadeInUp">
-    
     
     <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
 
@@ -100,19 +101,19 @@
             <!-- <div class="spinner-container" *ngIf="loading">
                 <mat-spinner diameter="40"></mat-spinner>
             </div> -->
-            <span (click)="showHeader()">
+            <span (click)="showHeader()" *ngIf="!isFullScreen">
                 <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
             </span>
             <div class="">
-                <span>
+                <span >
                     <mat-icon class="fullScr" (click)="makeFullScreen()" >fullscreen</mat-icon>
                 </span>
-                <mat-tab-group #tabs animationDuration="1000ms">
+                <mat-tab-group #tabs animationDuration="1000ms" >
                     <mat-tab>
                         <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
 
                     </mat-tab>
-                    <mat-tab label="About the course">
+                    <mat-tab label="About the course" *ngIf="!isFullScreen">
                         <h3 class="head-h1">Course description</h3>
                         <div class="vertical"></div>
 
@@ -165,7 +166,7 @@
                         </div>
                     </mat-tab>
 
-                    <mat-tab label="Resources">
+                    <mat-tab label="Resources" *ngIf="!isFullScreen">
                         <mat-accordion>
                             <ng-container *ngIf="content?.noresource">
                                 <ng-container *ngFor="let res of content?.coursedetails; let i = index">
@@ -258,6 +259,7 @@
                     </mat-tab>
 
                     <!-- Assignments tab -->
+                    <div *ngIf="!isFullScreen">
                     <mat-tab label="Assignments" class="discussion_forum"
                         *ngIf="assignmentContent?.coursedetails.length" (click)="getAssignmentmoduleData">
                         <mat-accordion>
@@ -607,9 +609,11 @@
                             </div>
                         </ng-template>
                     </mat-tab>
+                    </div>
 
                     <!-- Assignments tab end -->
                     <!-- Forum -->
+                    <div *ngIf="!isFullScreen">
                     <mat-tab *ngIf="userDetail.is_forum_config" label="Forum" [disabled]="selectedModuleData === null || selectedModuleData === undefined"
                         class="discussion_forum">
                         <div class="spinner-container" *ngIf="loadingForum">
@@ -1223,13 +1227,10 @@
                             <br>
                         </ng-template>
                     </mat-tab>
-                    
+                </div>
                 </mat-tab-group>
             </div>
-         
-      
-
-            <div style="height: 100px">&nbsp;</div>
+            <!-- <div style="height: 100px">&nbsp;</div> -->
         </div>
     </mat-drawer-container>
 
