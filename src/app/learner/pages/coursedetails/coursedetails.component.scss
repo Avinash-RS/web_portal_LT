@@ -681,7 +681,14 @@ iframe.fullScreen {
  :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
     display: none;
   }
-  
+  .hide {
+    display: none;
+  }
+      
+  .myDIV:hover + .hide {
+    display: block;
+    color: red;
+  }
 
 .nameh1 {
     color: $color-blank !important;
