@@ -214,7 +214,7 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    this.getAssignmentmoduleData();
+    //this.getAssignmentmoduleData();
   }
 
   ngOnInit(): void {
