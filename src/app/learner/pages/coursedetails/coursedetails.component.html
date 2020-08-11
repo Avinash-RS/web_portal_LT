@@ -98,14 +98,17 @@
         </mat-drawer>
 
         <div class="main contents">
-            <div class="spinner-container" *ngIf="loading">
+            <!-- <div class="spinner-container" *ngIf="loading">
                 <mat-spinner diameter="40"></mat-spinner>
-            </div>
+            </div> -->
 
             <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
             <div class="">
+                <span>
+                    <mat-icon class="fullScr" (click)="makeFullScreen()" >fullscreen</mat-icon>
+                </span>
                 <mat-tab-group #tabs animationDuration="1000ms">
-                    <mat-tab >
+                    <mat-tab>
                         <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
 
                     </mat-tab>
