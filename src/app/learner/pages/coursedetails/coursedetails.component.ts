@@ -219,6 +219,8 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+      console.log('testing',this.assignmentContent);
+      
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
@@ -228,10 +230,15 @@ export class CoursedetailsComponent implements OnInit {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
               if (fileData.startDate && fileData.endDate) {
-              const startDate = new Date(fileData.startDate);
-              const endDate = new Date(fileData.endDate);
+                let date1 = JSON.parse(JSON.stringify(fileData.startDate))
+                let date2 = JSON.parse(JSON.stringify(fileData.endDate))
+              const startDate = new Date(date1);
+              const endDate = new Date(date2);
               fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
               fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+              console.log(fileData.assignmentStartDate)
+              console.log(fileData.assignmentEndDate)
+
               if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
                 fileData.enableView = true;
               } else {
