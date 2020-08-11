@@ -274,12 +274,17 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    const enddate = new Date(endDate);
-    if (moment().format('DD-MM-YYYY HH:MM') > moment(enddate).format('DD-MM-YYYY HH:MM')) {
+    var today_Date = moment().toDate();
+    var start_Date = moment(endDate).toDate();
+       if(today_Date>start_Date){
+
       submitStatus = 'late';
+      
     } else {
       submitStatus = 'ontime';
     }
+   
+    
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
