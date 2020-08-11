@@ -922,6 +922,7 @@ export const getAssignmentmoduleData = gql`
                 type_name
                 doc_status
                 grade_status
+                score_mark
                 resubmit
                 doc_type
                 score

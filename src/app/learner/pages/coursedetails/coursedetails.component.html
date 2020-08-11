@@ -316,13 +316,14 @@
                                                                 *ngIf="file?.assignment === true">
 
 
-                                                                <div class="row">
+                                                              
+                                                                <div class="row detailrow">
                                                                     <div class="col-2 no-cursor"
                                                                         matTooltip="{{file.type_name}}">
                                                                         <div class="row">
-                                                                            <span class="singleline-text"><b>Assignment
+                                                                            <span class="singleline-text "><b>Assignment
                                                                                     name</b></span>
-                                                                        </div><br>
+                                                                        </div>
                                                                         <div class="row">
                                                                             <img *ngIf="file.doc_type == 'application/pdf'"
                                                                                 class="size" alt=""
@@ -351,102 +352,129 @@
                                                                             <mat-icon class="docType no-cursor"
                                                                                 *ngIf="file.doc_type == 'text/plain' ">
                                                                                 description </mat-icon>&nbsp;
-                                                                            {{file.type_name}}
+                                                                            <span class="textTruncate">
+                                                                                {{file.type_name}}
+                                                                            </span>
+
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-1 no-cursor">
                                                                         <div class="row">
-                                                                            <span><b>View</b></span>
-                                                                        </div><br>
+                                                                            <span><b>Question</b></span>
+                                                                        </div>
                                                                         <div class="row">
-                                                                            <mat-icon *ngIf="file.enableView"
+                                                                            <span class="ml-3">
+                                                                                <mat-icon *ngIf="file.enableView"
                                                                                 (click)="previewDoc(previewDialog,file)"
                                                                                 class="viewDoc">remove_red_eye
                                                                             </mat-icon>
                                                                             <mat-icon *ngIf="!file.enableView"
                                                                                 class="viewDoc">remove_red_eye
                                                                             </mat-icon>
+                                                                            </span>
+                                                                            
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-2">
+                                                                    <div class="col-4">
                                                                         <div class="row">
-                                                                            <span><b>Start date</b></span>
-                                                                        </div><br>
-                                                                        <div class="row">
-                                                                            {{assignmentStartDate}}
+                                                                            <div class="col">
+                                                                                <span><b>Start date</b></span>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <span><b>End date</b></span>
+                                                                            </div>
+
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-2">
                                                                         <div class="row">
-                                                                            <span><b>End date</b></span>
-                                                                        </div><br>
-                                                                        <div class="row">
-                                                                            {{assignmentEndDate}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="row">
-                                                                            <span><b>Score</b></span>
-                                                                        </div><br>
-                                                                        <div class="row">
-                                                                            {{file?.score}}
+                                                                            <div class="col">
+                                                                                <span class="singleline-text">
+                                                                                    {{file.startDate  | date :'MMM d, y h:mm a'
+                                                                                }}
+                                                                                </span>
+
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <span class="singleline-text">
+                                                                                    {{file.endDate  | date :'MMM d, y h:mm a'
+                                                                                }}
+                                                                                </span>
+
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
-
                                                                     <div class="col-1">
-                                                                        <div class="row mt-4">
-                                                                            <button class="upload-btn"
-                                                                                mat-stroked-button
+                                                                        <div class="row">
+                                                                            <span>
+                                                                                <b>Upload</b>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <i class="fa fa-upload searchicon ml-3"
+                                                                                aria-hidden="true"
                                                                                 [disabled]="!assignmentContent?.enableUpload"
-                                                                                (click)="fileInput.click()">
-                                                                                Upload</button>
+                                                                                (click)="fileInput.click()"></i>
                                                                             <input class="form-control border-right-0"
                                                                                 type='file' id="upload-photo" #fileInput
-                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate)">
 
 
                                                                             <!-- </div> -->
                                                                         </div>
                                                                     </div>
 
+                                                                    <div class="col-1">
+                                                                        <div class="row">
+                                                                            <span class="singleline-text"><b> Max
+                                                                                    Score</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="ml-3">
+                                                                                {{file?.score}}
+                                                                            </span>
+                                                                            
+                                                                        </div>
+                                                                    </div>
                                                                     <div class=col-1>
                                                                         <div class="row">
-                                                                            <span class="info-icon">
-                                                                                <mat-icon class="icon"
-                                                                                matTooltip="File size: 10mb Type: pdf,jpg,jpeg,png only">
-                                                                                info</mat-icon>
+                                                                            <span class="singleline-text">
+                                                                                <b>
+                                                                                    Obtained score
+                                                                                </b>
                                                                             </span>
                                                                         </div>
-                                                                       
-                                                                    </div>
+                                                                        <div class="row">
+                                                                            <span class="ml-5">
+                                                                                {{file?.score_mark}}
+                                                                            </span>
+                                                                        </div>
 
-                                                                    <div class="col-2">
+                                                                    </div>
+                                                                    <div class="col-2 status-col">
                                                                         <div class="row">
                                                                             <span><b>Status</b></span>
-                                                                        </div><br>
-                                                                        
-<div class="row">
-    <div class="disply no-cursor"
-    *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
-    <!-- <mat-icon class="no-cursor icon">
-        check_circle</mat-icon> -->
-    <div class="icon">
-        Submitted</div>
-</div>
-<div class="disply no-cursor"
-    *ngIf="file.grade_status === 'Evaluated'">
-    <div class="grade"
-        style="color: green;">
-        Graded</div>
-</div>
-</div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+                                                                                <div class="icon">
+                                                                                    Submitted</div>
+                                                                            </div>
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
+                                                                                <div class="not-submited">
+                                                                                    Yet to Submit</div>
+                                                                            </div>
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.grade_status === 'Evaluated'">
+                                                                                <div class="grade"
+                                                                                    style="padding-top: 4px;color: green;">
+                                                                                    Graded</div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                   
-                                        
                                                                 </div>
-
-
 
 
 
