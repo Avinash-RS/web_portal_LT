@@ -49,7 +49,7 @@
                                         <span class='index-number'>{{i+1}}.</span>
                                     </div>
                                     <div>
-                                        <div class="moduleHead" matTooltip="{{res?.title}}">
+                                        <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
                                             <div class="modhead">{{res?.title }}</div>
                                         </div>
                                     </div>
@@ -221,8 +221,6 @@
                                                                             class="size" alt=""
                                                                             src="assets/learner/fileicon/Excel_Icon.svg">
 
-
-
                                                                         <mat-icon class="docType"
                                                                             *ngIf="file.doc_type == 'text/plain' ">
                                                                             description
@@ -312,14 +310,13 @@
                                                             </div> -->
                                                         <!-- <div class="content"> -->
                                                         <div class="row" *ngFor="let file of mod.resourse?.files">
-                                                            <div class="col-12" style="margin-top:6px"
+                                                            <div class="col-12 detailrow pl-0 mt-3"
                                                                 *ngIf="file?.assignment === true">
 
 
                                                               
-                                                                <div class="row detailrow">
-                                                                    <div class="col-2 no-cursor"
-                                                                        matTooltip="{{file.type_name}}">
+                                                                <div class="row ">
+                                                                    <div class="col-2 no-cursor">
                                                                         <div class="row">
                                                                             <span class="singleline-text "><b>Assignment
                                                                                     name</b></span>
@@ -352,7 +349,8 @@
                                                                             <mat-icon class="docType no-cursor"
                                                                                 *ngIf="file.doc_type == 'text/plain' ">
                                                                                 description </mat-icon>&nbsp;
-                                                                            <span class="textTruncate">
+                                                                            <span class="textTruncate" tooltip="{{file.type_name}}"
+                                                                            placement="bottom">
                                                                                 {{file.type_name}}
                                                                             </span>
 
@@ -410,10 +408,20 @@
                                                                             </span>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <i class="fa fa-upload searchicon ml-3"
+
+                                                                            <span>
+                                                                               
+                                                                                <i class="fa fa-upload searchicon ml-3 tooltip-350"
+                                                                                [tooltip]="popTemplate"
+                                                                                placement="bottom"      
                                                                                 aria-hidden="true"
+                                                                                placement="bottom"
+                                                                                
                                                                                 [disabled]="!assignmentContent?.enableUpload"
                                                                                 (click)="fileInput.click()"></i>
+                                                                              
+                                                                            </span>
+                                                                           
                                                                             <input class="form-control border-right-0"
                                                                                 type='file' id="upload-photo" #fileInput
                                                                                 (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
@@ -426,7 +434,7 @@
                                                                     <div class="col-1">
                                                                         <div class="row">
                                                                             <span class="singleline-text"><b> Max
-                                                                                    Score</b></span>
+                                                                                    score</b></span>
                                                                         </div>
                                                                         <div class="row">
                                                                             <span class="ml-3">
@@ -1235,3 +1243,13 @@
 
     </div>
 </div>
+
+<ng-template #popTemplate class="tooltip-container">
+    
+    <span class="singleline-text">
+        <span>
+            File size : 10mb, Format : jpg, png, jpeg, pdf
+        </span>
+        
+    </span>
+</ng-template>
