@@ -1,5 +1,4 @@
-<div  id='hideMe'>
-
+<div  *ngIf="sider">
     <app-header></app-header>
 </div>
 
@@ -101,8 +100,9 @@
             <!-- <div class="spinner-container" *ngIf="loading">
                 <mat-spinner diameter="40"></mat-spinner>
             </div> -->
-
-            <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+            <span (click)="showHeader()">
+                <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+            </span>
             <div class="">
                 <span>
                     <mat-icon class="fullScr" (click)="makeFullScreen()" >fullscreen</mat-icon>

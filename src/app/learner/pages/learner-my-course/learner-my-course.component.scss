@@ -677,9 +677,9 @@ hr {
     padding: 0.75rem;
   }
 
-  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-    display: none !important;
-  }
+  // :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  //   display: none !important;
+  // }
 
   #insidecard.uk-card-default {
     background: $color-white;
