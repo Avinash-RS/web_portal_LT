@@ -793,16 +793,16 @@
                                 </div>
                                 <!--content ends  -->
                                 <mat-card-actions class="no_margin no_padding">
-                                    <div class="row p-lr-30 m-t-20 m-b-15">
+                                    <div class="row p-lr-30 m-t-20 m-b-15" *ngIf ="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                         <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                             &nbsp;
-                                            <button mat-button class="f_size_12 no_padding"
+                                            <button mat-button class="f_size_12 no_padding" [disabled] = "topicDiscussionData.posts[0].apiCalled"
                                                 (click)="likeandunlikepost(topicDiscussionData?.posts && topicDiscussionData?.posts[0])">
-                                                <mat-icon class="action_icon"
+                                                <mat-icon class="action_icon" [ngClass] = "{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
                                                     *ngIf="topicDiscussionData?.posts && !topicDiscussionData?.posts[0]?.bookmarked">
                                                     thumb_up_alt</mat-icon>
-                                                <mat-icon class="action_icon_filled"
+                                                <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
                                                     *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.bookmarked">
                                                     thumb_up_alt</mat-icon>Like
                                                 ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
@@ -890,11 +890,12 @@
                                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                                 <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                     &nbsp;
-                                                    <button mat-button class="f_size_12 no_padding"
+                                                    <button mat-button class="f_size_12 no_padding" [disabled] = "post?.apiCalled"
                                                         (click)="likeandunlikepost(post)">
-                                                        <mat-icon class="action_icon" *ngIf="!post.bookmarked">
+                                                        <mat-icon class="action_icon" [ngClass] = "{ 'pointerNone' : post.apiCalled }" *ngIf="!post.bookmarked">
                                                             thumb_up_alt</mat-icon>
-                                                        <mat-icon class="action_icon_filled" *ngIf="post.bookmarked">
+                                                        <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : post.apiCalled }"
+                                                        *ngIf="post.bookmarked">
                                                             thumb_up_alt</mat-icon>Like
                                                         ({{post?.bookmarks || 0}})
                                                     </button> &nbsp;&nbsp;
@@ -984,12 +985,12 @@
                                                             <div
                                                                 class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                                 &nbsp;
-                                                                <button mat-button class="f_size_12 no_padding"
+                                                                <button mat-button class="f_size_12 no_padding" [disabled] = "posts.apiCalled"
                                                                     (click)="likeandunlikepost(posts)">
-                                                                    <mat-icon class="action_icon"
+                                                                    <mat-icon class="action_icon" [ngClass] = "{ 'pointerNone' : posts.apiCalled }"
                                                                         *ngIf="!posts?.bookmarked">
                                                                         thumb_up_alt</mat-icon>
-                                                                    <mat-icon class="action_icon_filled"
+                                                                    <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : posts.apiCalled }"
                                                                         *ngIf="posts.bookmarked">
                                                                         thumb_up_alt</mat-icon>Like
                                                                     ({{posts?.bookmarks || 0}})
@@ -1088,13 +1089,13 @@
                                                                         <div
                                                                             class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                                             &nbsp;
-                                                                            <button mat-button
-                                                                                class="f_size_12 no_padding"
+                                                                            <button mat-button [disabled] = "postss?.apiCalled"
+                                                                                class="f_size_12 no_padding" 
                                                                                 (click)="likeandunlikepost(postss)">
-                                                                                <mat-icon class="action_icon"
+                                                                                <mat-icon class="action_icon" [ngClass] = "{ 'pointerNone' : postss.apiCalled }"
                                                                                     *ngIf="!postss?.bookmarked">
                                                                                     thumb_up_alt</mat-icon>
-                                                                                <mat-icon class="action_icon_filled"
+                                                                                <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : postss.apiCalled }"
                                                                                     *ngIf="postss.bookmarked">
                                                                                     thumb_up_alt</mat-icon>Like
                                                                                 ({{postss?.bookmarks || 0}})
