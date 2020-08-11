@@ -357,6 +357,24 @@ export class CoursedetailsComponent implements OnInit {
     // this.cancelPageRefresh();
   }
 
+
+
+  makeFullScreen() {
+    document.getElementsByTagName('iframe')[0].className = 'fullScreen';
+    const elem = document.body;
+    if (!document.fullscreenElement) {
+      elem.requestFullscreen().catch(err => {
+       //  alert(Error attempting to enable full-screen mode: ${err.message} (${err.name}));
+      });
+      } else {
+        document.exitFullscreen();
+      }
+    // requestFullScreen(elem);
+}
+openFullscreen() {
+  const elem = document.body;
+
+  }
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
