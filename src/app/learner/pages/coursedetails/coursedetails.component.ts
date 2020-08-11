@@ -60,6 +60,7 @@ export class CoursedetailsComponent implements OnInit {
   selected = '1';
   discussionData1: any = [];
   dataRefresher: any;
+  isFullScreen = false;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -214,7 +215,7 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    this.getAssignmentmoduleData();
+    //this.getAssignmentmoduleData();
   }
 
   ngOnInit(): void {
@@ -223,6 +224,8 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+      console.log('testing',this.assignmentContent);
+      
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
@@ -232,23 +235,28 @@ export class CoursedetailsComponent implements OnInit {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
               if (fileData.startDate && fileData.endDate) {
-                const startDate = new Date(fileData.startDate);
-                const endDate = new Date(fileData.endDate);
-                this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-                this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-                if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
-                  fileData.enableView = true;
-                } else {
-                  fileData.enableView = false;
-                }
+                let date1 = JSON.parse(JSON.stringify(fileData.startDate))
+                let date2 = JSON.parse(JSON.stringify(fileData.endDate))
+              const startDate = new Date(date1);
+              const endDate = new Date(date2);
+              fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+              fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+              console.log(fileData.assignmentStartDate)
+              console.log(fileData.assignmentEndDate)
 
-                if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
-                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                  this.assignmentContent.enableUpload = true;
-                } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
-                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                  this.assignmentContent.enableUpload = false;
-                }
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
+                fileData.enableView = true;
+              } else {
+                fileData.enableView = false;
+              }
+
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
+              moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
+                this.assignmentContent.enableUpload = true;
+              } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
+              moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
+                this.assignmentContent.enableUpload = false;
+              }
               }
             });
           });
@@ -267,12 +275,17 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    const enddate = new Date(endDate);
-    if (moment().format('DD-MM-YYYY HH:MM') > moment(enddate).format('DD-MM-YYYY HH:MM')) {
+    var today_Date = moment().toDate();
+    var start_Date = moment(endDate).toDate();
+       if(today_Date>start_Date){
+
       submitStatus = 'late';
+      
     } else {
       submitStatus = 'ontime';
     }
+   
+    
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
@@ -356,18 +369,17 @@ export class CoursedetailsComponent implements OnInit {
     document.getElementsByTagName('iframe')[0].className = 'fullScreen';
     const elem = document.body;
     if (!document.fullscreenElement) {
+      this.isFullScreen = true;
       elem.requestFullscreen().catch(err => {
-       //  alert(Error attempting to enable full-screen mode: ${err.message} (${err.name}));
       });
       } else {
         document.exitFullscreen();
+        this.isFullScreen = false;
       }
-    // requestFullScreen(elem);
 }
-openFullscreen() {
-  const elem = document.body;
-
-  }
+showHeader() {
+  this.sider = true;
+}
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);

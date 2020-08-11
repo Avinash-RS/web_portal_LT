@@ -94,7 +94,9 @@
   font-weight: 500 !important;
   color: #616060;
 }
-
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child{
+  display: inherit !important;
+}
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
   font-size: 14px !important;
   font-weight: 400 !important;
