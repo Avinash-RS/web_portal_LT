@@ -137,13 +137,14 @@ export class CoursedetailsComponent implements OnInit {
   searchthreadname = false;
   assignmentStartDate: any;
   assignmentEndDate: any;
+  sider = true;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
-
+    this.selectedModuleData = null;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
@@ -159,11 +160,14 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            this.selectedModuleData = this.scromApiData?.childData[0];
-            this.selectedModuleData.indexValue = 1;
-            if (this.selectedModuleData) {
-              this.viewAllThreads();
+            this.selectedModuleData = this.scromApiData?.childData[0] || null;
+            if (this.scromApiData?.childData[0]) {
+              this.selectedModuleData.indexValue = 1;
+              if (this.selectedModuleData) {
+                this.viewAllThreads();
+              }
             }
+
             // all post in one thread
             this.loading = false;
             // if (this.course.topicData && this.course.topicData.length) {
@@ -252,7 +256,7 @@ export class CoursedetailsComponent implements OnInit {
               moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
                 this.assignmentContent.enableUpload = false;
               }
-            }
+              }
             });
           });
         });
@@ -348,6 +352,7 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
+        this.sider = false;
       }, 20000);
     // this.cancelPageRefresh();
   }
@@ -507,7 +512,6 @@ export class CoursedetailsComponent implements OnInit {
   sendComment(type, data, array?, pidData?) {
     let d = data;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
-    console.log(d.length);
     if (d.length > 8) {
       if (d.length > 55500) {
         this.toastr.warning('Comment should be less than 60000 characters');
@@ -527,7 +531,6 @@ export class CoursedetailsComponent implements OnInit {
           created_by: this.userDetail.username,
           a2i: this.a2iFlag || false,
         };
-        console.log(data1);
         this.Lservice.postcomment(data1).subscribe((result: any) => {
           this.a2iFlag = false;
           if (result.success) {
@@ -739,7 +742,6 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   createNewThread() {
-    console.log(this.addThreadForm.value);
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
@@ -773,38 +775,47 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  likeandunlikepost(d ?) {
-    console.log('abc', this.userDetail.nodebb_response);
+  likeandunlikepost(d?) {
     if (this.userDetail.nodebb_response != null || d !== undefined) {
       const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
-      if (d.bookmarked) {
-        d.bookmarked = !d.bookmarked;
-        d.bookmarks = d.bookmarks - 1;
-        this.Lservice.unlikepost(data).subscribe((result: any) => {
-          if (!result.success) {
-            d.bookmarked = !d.bookmarked;
-            d.bookmarks = d.bookmarks + 1;
-            this.toastr.warning('Something went wrong. Try like/dislike later');
-          } else {
-            // this.toastr.success('Unliked successfully');
-            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-          }
-          this.loadingForum = false;
-        });
+      if (d.apiCalled) {
+        return false;
       } else {
-        d.bookmarked = !d.bookmarked;
-        d.bookmarks = d.bookmarks + 1;
-        this.Lservice.likepost(data).subscribe((result: any) => {
-          if (!result.success) {
-            d.bookmarked = !d.bookmarked;
-            d.bookmarks = d.bookmarks - 1;
-            this.toastr.warning('Something went wrong. Try like/dislike later');
-          } else {
-            // this.toastr.success('Liked successfully');
-            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-          }
-          this.loadingForum = false;
-        });
+        if (d.bookmarked) {
+          d.bookmarked = false;
+          d.bookmarks = d.bookmarks > 1 ? d.bookmarks - 1 : 0;
+          d.apiCalled = true;
+          console.log(d);
+          this.Lservice.unlikepost(data).subscribe((result: any) => {
+            if (!result.success) {
+              d.bookmarked = true;
+              d.bookmarks = d.bookmarks + 1;
+              d.apiCalled = false;
+              this.toastr.warning('Something went wrong. Try like/dislike later');
+            } else {
+              d.apiCalled = false;
+              d.bookmarked = false;
+            }
+            this.loadingForum = false;
+          });
+        } else {
+          d.bookmarked = true;
+          d.bookmarks = d.bookmarks + 1;
+          d.apiCalled = true;
+          console.log(d);
+          this.Lservice.likepost(data).subscribe((result: any) => {
+            if (!result.success) {
+              d.apiCalled = false;
+              d.bookmarked = false;
+              d.bookmarks = d.bookmarks - 1;
+              this.toastr.warning('Something went wrong. Try like/dislike later');
+            } else {
+              d.apiCalled = false;
+              d.bookmarked = true;
+            }
+            this.loadingForum = false;
+          });
+        }
       }
     } else {
       this.toastr.warning('You are not a registered user for forum');

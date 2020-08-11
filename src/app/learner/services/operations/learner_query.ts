@@ -946,6 +946,7 @@ query get_read_learner_activity($userid: String!, $date: String!){
         error_msg
         message{
             _id
+            status
             activity_details{
                     topicname
                     status
@@ -956,7 +957,17 @@ query get_read_learner_activity($userid: String!, $date: String!){
                     enddate
                     activitytype
                     activityname
-                    resourcefile
+                    resourcefile{
+                      assignment
+                      checked
+                      doc_type
+                      filename
+                      path
+                      size
+                      type_name
+                      _id
+              }
+
                     score
                     link
                     created_on
@@ -1116,6 +1127,7 @@ export const getReadLeanerActivity = gql`
       error_msg
       message {
         _id
+        status
         activity_details {
           topicname
           status
@@ -1126,7 +1138,17 @@ export const getReadLeanerActivity = gql`
           enddate
           activitytype
           activityname
-          resourcefile
+          resourcefile{
+            assignment
+            checked
+            doc_type
+            filename
+            path
+            size
+            type_name
+            _id
+    }
+
           score
           link
           created_on

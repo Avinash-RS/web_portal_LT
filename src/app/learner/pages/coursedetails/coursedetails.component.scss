@@ -14,10 +14,10 @@
 
 // auto hide course title 
 #hideMe {
-    -moz-animation: cssAnimation 0s ease-in 5s forwards;
-    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
-    -o-animation: cssAnimation 0s ease-in 5s forwards;
-    animation: cssAnimation 0s ease-in 5s forwards;
+    -moz-animation: cssAnimation 0s ease-in 20s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 20s forwards;
+    -o-animation: cssAnimation 0s ease-in 20s forwards;
+    animation: cssAnimation 0s ease-in 20s forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
@@ -408,6 +408,7 @@ li {
     margin-top: 10px;
 }
 
+
 // silder
 .drawer {
     position: absolute;
@@ -415,7 +416,7 @@ li {
     background: $color-white !important;
     min-width: 30%;
     margin-top: 0%;
-    border-right: 1px solid $color-border;
+    border-right: none !important;
 }
 
 .drawer .header {
@@ -659,10 +660,20 @@ li {
     margin-left: 5px;
 
 }
+::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+    display: none;
+  }
+  
 
 .nameh1 {
     color: $color-blank !important;
     padding-left: 8px;
+    font-size: 17px;
+    margin-top: 11px;
+    height: 37px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    border-bottom: 2px solid $lxp-theme-green;
 
 }
 
