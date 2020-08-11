@@ -369,17 +369,14 @@ export class CoursedetailsComponent implements OnInit {
     const elem = document.body;
     if (!document.fullscreenElement) {
       elem.requestFullscreen().catch(err => {
-       //  alert(Error attempting to enable full-screen mode: ${err.message} (${err.name}));
       });
       } else {
         document.exitFullscreen();
       }
-    // requestFullScreen(elem);
 }
-openFullscreen() {
-  const elem = document.body;
-
-  }
+showHeader() {
+  this.sider = true;
+}
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
