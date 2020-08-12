@@ -198,7 +198,7 @@ export class CoursedetailsComponent implements OnInit {
       this.content.coursedetails.forEach(element => {
         let resourceFile = false;
         element.moduledetails.forEach(value => {
-          if (value.resourse) {
+          if (value.resourse && value.resourse.files && value.resourse.files.length) {
             resourceFile = true;
             noresource = true;
           }
