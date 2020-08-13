@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('UserManagementComponent', () => {
   let component: UserManagementComponent;
   let fixture: ComponentFixture<UserManagementComponent>;
-  let usermanagement = require("../../../../assets/mockdata/wca/user-management.json");
+  let usermanagement = require("assets/mockdata/wca/user-management.json");
   const dialogMock = {
     closeAll: () => { }
     };
