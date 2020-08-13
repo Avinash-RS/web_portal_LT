@@ -425,13 +425,32 @@ iframe.fullScreen {
 
 
 .fullScr{
-    margin-left: 88%;
+    margin-left: 89%;
     position: absolute;
-    top: 1.3%;
+    top: 2.3%;
     z-index: 99;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 0px 0px 10px 10px;
 }
+.prevBtn{
+    margin-left: 80%;
+    position: absolute;
+    top: 2.3%;
+    z-index: 99;
+}
+.nextBtn{
+    margin-left: 85%;
+    position: absolute;
+    top: 2.3%;
+    z-index: 99;
+}
+.divder{
+    margin-left: 83.5%;
+    position: absolute;
+    top: 2.3%;
+    z-index: 99;
+}
+
 // iframe {
 //     width: 100%;
 //     height: 546px;

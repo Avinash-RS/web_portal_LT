@@ -15,7 +15,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 describe('AddModuleComponent', () => {
   let component: AddModuleComponent;
   let fixture: ComponentFixture<AddModuleComponent>;
-  let addModuleData = require("../../../../assets/mockdata/wca/add-module.json");
+  let addModuleData = require("assets/mockdata/wca/add-module.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

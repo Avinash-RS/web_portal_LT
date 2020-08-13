@@ -14,7 +14,7 @@ import { MockWcaService } from '../../services/wca.mock.service';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let dashboardData = require("../../../../assets/mockdata/wca/dashboard.json");
+  let dashboardData = require("assets/mockdata/wca/dashboard.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

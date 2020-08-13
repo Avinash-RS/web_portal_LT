@@ -8,7 +8,7 @@
     "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
     "build:qa": "ng build --configuration qa",
     "build:dev": "ng build",
-    "test": "ng test --browsers=ChromeHeadless --watch=false",
+    "test": "ng test --watch=false --progress=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "webdriver-update": "node_modules/bin/webdriver-manager update"
