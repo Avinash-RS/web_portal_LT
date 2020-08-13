@@ -113,6 +113,7 @@ div.scrollcard {
     font-size: 13px;
     color: $color-white;
     margin-top:5px;
+    margin-left:0px;
   }
 
 
@@ -222,7 +223,7 @@ div.scrollcard {
     background: transparent !important;
   }
   .session-sub-card{
-          width: 90%;
+          width: 100%;
           border-bottom: 1px solid #dedede;
           // margin-left: 3%;
           // padding-left: 14px;
