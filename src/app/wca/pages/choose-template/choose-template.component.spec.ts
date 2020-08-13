@@ -15,7 +15,7 @@ import { MockWcaService } from '../../services/wca.mock.service';
 describe('ChooseTemplateComponent', () => {
   let component: ChooseTemplateComponent;
   let fixture: ComponentFixture<ChooseTemplateComponent>;
-  let chooseTemplateData = require("../../../../assets/mockdata/wca/choose-template.json");
+  let chooseTemplateData = require("assets/mockdata/wca/choose-template.json");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
