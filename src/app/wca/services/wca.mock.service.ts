@@ -9,10 +9,10 @@ import { Observable, of } from 'rxjs';
 
 export class MockWcaService extends WcaService {
 
-    dashboardData = require("assets/mockdata/wca/dashboard.json");
-    createTemplateData = require("assets/mockdata/wca/create-template.json");
-    chooseTemplateData = require("assets/mockdata/wca/choose-template.json");
-    addModuleData = require("assets/mockdata/wca/add-module.json");
+    dashboardData = require("../../../assets/mockdata/wca/dashboard.json");
+    createTemplateData = require("../../../assets/mockdata/wca/create-template.json");
+    chooseTemplateData = require("../../../assets/mockdata/wca/choose-template.json");
+    addModuleData = require("../../../assets/mockdata/wca/add-module.json");
     successResponse = {
         Code: 200,
         Message: "Success"

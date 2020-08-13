@@ -18,7 +18,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 describe('CoursedetailsComponent', () => {
   let component: CoursedetailsComponent;
   let fixture: ComponentFixture<CoursedetailsComponent>;
-  let coursedetails = require('assets/mockdata/learner/coursedetails');
+  let coursedetails = require('../../../../assets/mockdata/learner/coursedetails');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
