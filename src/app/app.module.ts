@@ -1,16 +1,16 @@
-//angular
+// angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
+import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//others
+// others
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-//local
+// local
 import { MaterialModule } from '@core/material.module';
 import { GraphqlModule } from './graphql/graphql.modules';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,8 +19,6 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 // import { DialogComponent } from './wca/pages/dialog/dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MAT_TABS_CONFIG } from '@angular/material';
-import { Ppt2Component } from './ppt2/ppt2.component';
-import { Ppt1Component } from './ppt1/ppt1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
@@ -44,8 +42,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AlertComponentComponent,
     // DialogComponent,
     NotFoundComponent,
-    Ppt2Component,
-    Ppt1Component,
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
@@ -75,10 +71,10 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,
       deps: [PlatformLocation, ConfigsLoaderService]
-  },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true }} ,
+    },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' } },
-   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -86,5 +82,5 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
 })
 export class AppModule { }
 export function appInitializerFactory(configsLoaderService: ConfigsLoaderService) {
-  return () => configsLoaderService.loadConfigs(); 
+  return () => configsLoaderService.loadConfigs();
 }
