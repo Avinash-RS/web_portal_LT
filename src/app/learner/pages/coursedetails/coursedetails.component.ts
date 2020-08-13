@@ -8,14 +8,11 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-// import { setInterval, clearInterval} from 'timers';
-// import Swal from 'sweetalert2';
-import * as myGlobals from '@core/globals';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
-
+// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -139,12 +136,20 @@ export class CoursedetailsComponent implements OnInit {
   assignmentStartDate: any;
   assignmentEndDate: any;
   sider = true;
+  moduleLenth: number;
+  topicLenght = 0;
+  // urlpath = [];
+  currentPage = 0;
+  topiccurrentPage = 0;
+  getTopicLengthofModule: any;
+  gettopicLink: any;
+  topiccurrentlink = 0;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.selectedModuleData = null;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -157,6 +162,7 @@ export class CoursedetailsComponent implements OnInit {
       this.loading = true;
       this.playerModuleAndTopic(true);
       this.refreshData();
+      this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -215,7 +221,7 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    //this.getAssignmentmoduleData();
+    // this.getAssignmentmoduleData();
   }
 
   ngOnInit(): void {
@@ -224,8 +230,8 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-      console.log('testing',this.assignmentContent);
-      
+      console.log('testing', this.assignmentContent);
+
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
@@ -235,28 +241,28 @@ export class CoursedetailsComponent implements OnInit {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
               if (fileData.startDate && fileData.endDate) {
-                let date1 = JSON.parse(JSON.stringify(fileData.startDate))
-                let date2 = JSON.parse(JSON.stringify(fileData.endDate))
-              const startDate = new Date(date1);
-              const endDate = new Date(date2);
-              fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-              fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-              console.log(fileData.assignmentStartDate)
-              console.log(fileData.assignmentEndDate)
+                const date1 = JSON.parse(JSON.stringify(fileData.startDate));
+                const date2 = JSON.parse(JSON.stringify(fileData.endDate));
+                const startDate = new Date(date1);
+                const endDate = new Date(date2);
+                fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+                fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+                console.log(fileData.assignmentStartDate);
+                console.log(fileData.assignmentEndDate);
 
-              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
-                fileData.enableView = true;
-              } else {
-                fileData.enableView = false;
-              }
+                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
+                  fileData.enableView = true;
+                } else {
+                  fileData.enableView = false;
+                }
 
-              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
-              moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                this.assignmentContent.enableUpload = true;
-              } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
-              moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                this.assignmentContent.enableUpload = false;
-              }
+                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
+                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
+                  this.assignmentContent.enableUpload = true;
+                } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
+                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
+                  this.assignmentContent.enableUpload = false;
+                }
               }
             });
           });
@@ -275,17 +281,17 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    var today_Date = moment().toDate();
-    var start_Date = moment(endDate).toDate();
-       if(today_Date>start_Date){
+    const today_Date = moment().toDate();
+    const start_Date = moment(endDate).toDate();
+    if (today_Date > start_Date) {
 
       submitStatus = 'late';
-      
+
     } else {
       submitStatus = 'ontime';
     }
-   
-    
+
+
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
@@ -307,6 +313,63 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
 
+  getPlayerNextPrve() {
+    this.Lservice.playerModuleAndTopic(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+      this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
+      this.scromModuleData = this.scromApiData?.childData;
+      this.moduleLenth = this.scromApiData?.childData.length;
+    });
+  }
+
+
+
+  topicNext() {
+    // debugger;
+    if (this.currentPage < (this.moduleLenth)) {
+      this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
+      console.log(this.getTopicLengthofModule);
+      if (this.topiccurrentPage < this.getTopicLengthofModule) {
+        this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
+        // debugger;
+        this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.gettopicLink.link);
+          console.log(this.urlSafe, 'vjvjvj');
+        this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.getTopicLengthofModule.title,
+          this.getTopicLengthofModule.status, this.moduleLenth, this.getTopicLengthofModule, this.currentPage);
+      }
+      if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
+        this.currentPage++;
+        this.topiccurrentPage = 0;
+      } else {
+        this.topiccurrentPage++;
+        this.topiccurrentlink = this.topiccurrentPage;
+      }
+    }
+  }
+
+  topicPrve() {
+    if (this.currentPage > 0) {
+      if (this.topiccurrentlink >= 0) {
+        this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.gettopicLink.link);
+      }
+      if (this.topiccurrentlink === 0) {
+       this.currentPage--;
+       if (this.currentPage !== 0) {
+        this.topiccurrentlink = this.scromModuleData[this.currentPage - 1].topic_len;
+        this.topiccurrentlink--;
+       }
+      } else {
+        this.topiccurrentlink--;
+      }
+    }
+  }
 
   // get Scrom module and topic
   playerModuleAndTopic(setPageFlag) {
@@ -323,6 +386,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
+    console.log(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex)
     // tslint:disable-next-line:radix
     const len = parseInt(topicLenght);
     if (topindex === len) {
@@ -341,7 +405,8 @@ export class CoursedetailsComponent implements OnInit {
         }]
       }]
     };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.finalper)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid,
+      jsonData.module, this.finalper)
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
           this.playerModuleAndTopic(true);
@@ -366,20 +431,22 @@ export class CoursedetailsComponent implements OnInit {
 
 
   makeFullScreen() {
-    document.getElementsByTagName('iframe')[0].className = 'fullScreen';
+    // document.getElementsByTagName('iframe')[0].className = 'fullScreen';
     const elem = document.body;
     if (!document.fullscreenElement) {
       this.isFullScreen = true;
       elem.requestFullscreen().catch(err => {
       });
-      } else {
-        document.exitFullscreen();
-        this.isFullScreen = false;
-      }
-}
-showHeader() {
-  this.sider = true;
-}
+    } else {
+      // debugger;
+      document.exitFullscreen();
+      this.isFullScreen = false;
+      this.sider = true;
+    }
+  }
+  showHeader() {
+    this.sider = true;
+  }
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
