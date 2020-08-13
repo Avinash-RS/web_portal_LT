@@ -46,7 +46,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {CdkDetailRowDirective} from '../batch-management/cdk-detail-row.directive';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 // import { SearchPipe } from '../pipes/search.pipe';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
@@ -188,7 +190,8 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    LearnerCalendarComponent
+    LearnerCalendarComponent,
+    CdkDetailRowDirective
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

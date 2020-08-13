@@ -5,6 +5,8 @@ import { FilterPipeWithoutUnique } from './filterpipe_without_unique';
 import { FilterPipeforselect } from './filterSelect';
 // import { SearchPipe } from './search.pipe';
 import { SortPipe } from './sort.pipe';
+import { SortStatusPipe } from './sort-status.pipe';
+
 
 
 
@@ -14,7 +16,8 @@ import { SortPipe } from './sort.pipe';
     FilterPipeWithoutUnique,
     FilterPipeforselect,
     // SearchPipe,
-    SortPipe
+    SortPipe,
+    SortStatusPipe
   ],
   imports: [
     CommonModule
@@ -24,7 +27,8 @@ import { SortPipe } from './sort.pipe';
     FilterPipeWithoutUnique,
     FilterPipeforselect,
     // SearchPipe,
-    SortPipe
+    SortPipe,
+    SortStatusPipe
   ],
 })
 export class PipeModule { }
