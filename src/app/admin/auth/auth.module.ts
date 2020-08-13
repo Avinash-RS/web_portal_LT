@@ -5,9 +5,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
-import { UserManagementComponent } from '../pages/user-management/user-management.component';
-import { ReportManagementComponent } from '@admin/pages/report-management/report-management.component';
-import { AddUserComponent } from '@admin/pages/add-user/add-user.component';
+
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -43,18 +41,17 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { appRoutes } from './lazyloader.routes';
-import { AdminCoursesComponent } from '@admin/pages/admin-courses/admin-courses.component';
+
 import { CoreModule } from '@core/core.module';
-import { PublishCourseComponent } from '@admin/pages/publish-course/publish-course.component';
 // import { WcaModule } from '../../wca/wca.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CatalogueManagementComponent } from '@admin/pages/catalogue-management/catalogue-management.component';
+
 import { DndDirective } from '../core/dnd.directive';
-import { CatagoryManagementComponent } from '@admin/pages/catagory-management/catagory-management.component';
+
 import { PipeModule } from '../../pipes/pipe.module';
 // import { SearchPipe } from '../../pipes/search.pipe';
-import { AuditlogComponent } from '@admin/pages/auditlog/auditlog.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,10 +61,6 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { AdminCoreModule } from '../core/admin-core.module';
 import { from } from 'rxjs';
-import { GroupManagementComponent } from '../pages/group-management/group-management.component';
-import { AdminDashboardComponent } from '@admin/pages/admin-dashboard/admin-dashboard.component';
-import { EnrollmentComponent } from '@admin/pages/enrollment/enrollment.component';
-import { LearnerprofileComponent } from '@admin/pages/learnerprofile/learnerprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import { MatNativeDateModule } from '@angular/material';
 import { PagesModule } from './../pages/pages.module';
@@ -126,12 +119,11 @@ import { PagesModule } from './../pages/pages.module';
   declarations: [
     DndDirective,
     AuthComponent,
-    UserManagementComponent,
-    GroupManagementComponent,
-    AdminCoursesComponent,
+   
+  
     // ReportManagementComponent, AddUserComponent, , CatalogueManagementComponent, AdminDashboardComponent,
     // NewHomeComponent,
-    PublishCourseComponent
+   
     // CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent
   ],
   providers: [

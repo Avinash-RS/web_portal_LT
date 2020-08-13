@@ -27,11 +27,11 @@ const routes: Routes = [
     loadChildren: './core/core.module#CoreModule',
     data : {title: 'Player'}
   },
-  {
-    path: 'Wca',
-    loadChildren: './wca/wca.module#WcaModule',
-    data : {title: 'Web Content Authoring'}
-  },
+  // {
+  //   path: '*',
+  //   // loadChildren: './wca/wca.module#WcaModule',
+  //   data : {title: 'Web Content Authoring'}
+  // },
   {path: '**', component: NotFoundComponent},
   // {path: '**', redirectTo: '/404'},
 

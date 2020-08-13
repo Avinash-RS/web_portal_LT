@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsRouterModule } from './forms.router';
-import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
-import { TemplateDrivenFormsComponent } from './template-driven-forms/template-driven-forms.component';
+
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
 			MatButtonModule,
@@ -28,6 +28,6 @@ import { FormsModule }   from '@angular/forms';
 		 ReactiveFormsModule,
 		 FormsModule
 	],
-	declarations: [ReactiveFormsComponent, TemplateDrivenFormsComponent]
+	declarations: [ ]
 })
 export class FormModule { }

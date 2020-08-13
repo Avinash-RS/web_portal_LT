@@ -17,24 +17,14 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminCoreModule } from '../core/admin-core.module';
-import { AddUserComponent } from './add-user/add-user.component';
+
 import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { ReportManagementComponent } from './report-management/report-management.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CatalogueManagementComponent } from './catalogue-management/catalogue-management.component';
-import { CatagoryManagementComponent } from './catagory-management/catagory-management.component';
-import { EnrollmentComponent } from './enrollment/enrollment.component';
-import { LearnerprofileComponent } from './learnerprofile/learnerprofile.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ChartsModule } from 'ng2-charts';
-import { AuditlogComponent } from './auditlog/auditlog.component';
 import { PipeModule } from './../../pipes/pipe.module';
 import { MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ReportsComponent } from './reports/reports.component';
-import { BulkEnrollmentComponent } from './bulk-enrollment/bulk-enrollment.component';
-import { BulkEnrolmentReportsComponent } from './bulk-enrolment-reports/bulk-enrolment-reports.component';
 
 @NgModule({
     imports: [
@@ -77,11 +67,9 @@ import { BulkEnrolmentReportsComponent } from './bulk-enrolment-reports/bulk-enr
         MatNativeDateModule,
         CoreModule
     ],
-    declarations: [AddUserComponent, ReportManagementComponent, AdminDashboardComponent, CatalogueManagementComponent,
-        CatagoryManagementComponent, EnrollmentComponent, LearnerprofileComponent, AuditlogComponent, ReportsComponent,
-        ReportsComponent,
-        BulkEnrollmentComponent,
-        BulkEnrolmentReportsComponent],
+    declarations: [ 
+        
+        ],
 
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [

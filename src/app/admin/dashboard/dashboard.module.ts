@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 
 
 export const appRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
+   
 ];
 
 @NgModule({
@@ -18,7 +18,7 @@ export const appRoutes: Routes = [
     MatCardModule,
    
   ],
-  declarations: [DashboardComponent],
+  declarations: [],
   exports: [ ]
 })
 export class DashboardModule { }
