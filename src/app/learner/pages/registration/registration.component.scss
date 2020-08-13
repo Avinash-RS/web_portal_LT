@@ -285,7 +285,7 @@ a {
     margin-left: -19px;
   }
   .footericon {
-    width: 67%;
+    width: 100%;
     position: absolute;
     margin-left: 5px;
     margin-top: 4px;
@@ -324,4 +324,9 @@ a {
     bottom: 13px;
     width: 84%;
   }
+}
+.forgot1 {
+  color: $lxp-text ;
+  // cursor: pointer;
+  font-size: 13px;
 }

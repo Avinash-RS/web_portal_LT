@@ -60,6 +60,7 @@ export class CoursedetailsComponent implements OnInit {
   selected = '1';
   discussionData1: any = [];
   dataRefresher: any;
+  isFullScreen = false;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -137,13 +138,14 @@ export class CoursedetailsComponent implements OnInit {
   searchthreadname = false;
   assignmentStartDate: any;
   assignmentEndDate: any;
+  sider = true;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
-
+    this.selectedModuleData = null;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
@@ -159,11 +161,14 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            this.selectedModuleData = this.scromApiData?.childData[0];
-            this.selectedModuleData.indexValue = 1;
-            if (this.selectedModuleData) {
-              this.viewAllThreads();
+            this.selectedModuleData = this.scromApiData?.childData[0] || null;
+            if (this.scromApiData?.childData[0]) {
+              this.selectedModuleData.indexValue = 1;
+              if (this.selectedModuleData) {
+                this.viewAllThreads();
+              }
             }
+
             // all post in one thread
             this.loading = false;
             // if (this.course.topicData && this.course.topicData.length) {
@@ -210,7 +215,7 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    this.getAssignmentmoduleData();
+    //this.getAssignmentmoduleData();
   }
 
   ngOnInit(): void {
@@ -219,6 +224,8 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+      console.log('testing',this.assignmentContent);
+      
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
@@ -228,24 +235,29 @@ export class CoursedetailsComponent implements OnInit {
           element.moduledetails.forEach(moduleData => {
             moduleData.resourse.files.forEach(fileData => {
               if (fileData.startDate && fileData.endDate) {
-              const startDate = new Date(fileData.startDate);
-              const endDate = new Date(fileData.endDate);
-              this.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-              this.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate) {
+                let date1 = JSON.parse(JSON.stringify(fileData.startDate))
+                let date2 = JSON.parse(JSON.stringify(fileData.endDate))
+              const startDate = new Date(date1);
+              const endDate = new Date(date2);
+              fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+              fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+              console.log(fileData.assignmentStartDate)
+              console.log(fileData.assignmentEndDate)
+
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
                 fileData.enableView = true;
               } else {
                 fileData.enableView = false;
               }
 
-              if (moment().format('DD-MM-YYYY HH:MM') >= this.assignmentStartDate &&
+              if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
               moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
                 this.assignmentContent.enableUpload = true;
-              } else if (moment().format('DD-MM-YYYY HH:MM') < this.assignmentStartDate ||
+              } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
               moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
                 this.assignmentContent.enableUpload = false;
               }
-            }
+              }
             });
           });
         });
@@ -263,12 +275,17 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    const enddate = new Date(endDate);
-    if (moment().format('DD-MM-YYYY HH:MM') > moment(enddate).format('DD-MM-YYYY HH:MM')) {
+    var today_Date = moment().toDate();
+    var start_Date = moment(endDate).toDate();
+       if(today_Date>start_Date){
+
       submitStatus = 'late';
+      
     } else {
       submitStatus = 'ontime';
     }
+   
+    
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
@@ -341,10 +358,28 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
+        this.sider = false;
       }, 20000);
     // this.cancelPageRefresh();
   }
 
+
+
+  makeFullScreen() {
+    document.getElementsByTagName('iframe')[0].className = 'fullScreen';
+    const elem = document.body;
+    if (!document.fullscreenElement) {
+      this.isFullScreen = true;
+      elem.requestFullscreen().catch(err => {
+      });
+      } else {
+        document.exitFullscreen();
+        this.isFullScreen = false;
+      }
+}
+showHeader() {
+  this.sider = true;
+}
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
@@ -500,7 +535,6 @@ export class CoursedetailsComponent implements OnInit {
   sendComment(type, data, array?, pidData?) {
     let d = data;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
-    console.log(d.length);
     if (d.length > 8) {
       if (d.length > 55500) {
         this.toastr.warning('Comment should be less than 60000 characters');
@@ -520,7 +554,6 @@ export class CoursedetailsComponent implements OnInit {
           created_by: this.userDetail.username,
           a2i: this.a2iFlag || false,
         };
-        console.log(data1);
         this.Lservice.postcomment(data1).subscribe((result: any) => {
           this.a2iFlag = false;
           if (result.success) {
@@ -732,7 +765,6 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   createNewThread() {
-    console.log(this.addThreadForm.value);
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
@@ -766,38 +798,47 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  likeandunlikepost(d ?) {
-    console.log('abc', this.userDetail.nodebb_response);
+  likeandunlikepost(d?) {
     if (this.userDetail.nodebb_response != null || d !== undefined) {
       const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
-      if (d.bookmarked) {
-        d.bookmarked = !d.bookmarked;
-        d.bookmarks = d.bookmarks - 1;
-        this.Lservice.unlikepost(data).subscribe((result: any) => {
-          if (!result.success) {
-            d.bookmarked = !d.bookmarked;
-            d.bookmarks = d.bookmarks + 1;
-            this.toastr.warning('Something went wrong. Try like/dislike later');
-          } else {
-            // this.toastr.success('Unliked successfully');
-            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-          }
-          this.loadingForum = false;
-        });
+      if (d.apiCalled) {
+        return false;
       } else {
-        d.bookmarked = !d.bookmarked;
-        d.bookmarks = d.bookmarks + 1;
-        this.Lservice.likepost(data).subscribe((result: any) => {
-          if (!result.success) {
-            d.bookmarked = !d.bookmarked;
-            d.bookmarks = d.bookmarks - 1;
-            this.toastr.warning('Something went wrong. Try like/dislike later');
-          } else {
-            // this.toastr.success('Liked successfully');
-            // this.viewsingletopicdiscussion(this.selectedThreadData.tid);
-          }
-          this.loadingForum = false;
-        });
+        if (d.bookmarked) {
+          d.bookmarked = false;
+          d.bookmarks = d.bookmarks > 1 ? d.bookmarks - 1 : 0;
+          d.apiCalled = true;
+          console.log(d);
+          this.Lservice.unlikepost(data).subscribe((result: any) => {
+            if (!result.success) {
+              d.bookmarked = true;
+              d.bookmarks = d.bookmarks + 1;
+              d.apiCalled = false;
+              this.toastr.warning('Something went wrong. Try like/dislike later');
+            } else {
+              d.apiCalled = false;
+              d.bookmarked = false;
+            }
+            this.loadingForum = false;
+          });
+        } else {
+          d.bookmarked = true;
+          d.bookmarks = d.bookmarks + 1;
+          d.apiCalled = true;
+          console.log(d);
+          this.Lservice.likepost(data).subscribe((result: any) => {
+            if (!result.success) {
+              d.apiCalled = false;
+              d.bookmarked = false;
+              d.bookmarks = d.bookmarks - 1;
+              this.toastr.warning('Something went wrong. Try like/dislike later');
+            } else {
+              d.apiCalled = false;
+              d.bookmarked = true;
+            }
+            this.loadingForum = false;
+          });
+        }
       }
     } else {
       this.toastr.warning('You are not a registered user for forum');

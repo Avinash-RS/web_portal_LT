@@ -38,6 +38,11 @@ mat-form-field {
     cursor: pointer;
     font-size: 13px;
 }
+.forgot1 {
+    color: $lxp-text ;
+    // cursor: pointer;
+    font-size: 13px;
+}
 
 a:hover {
     color: $lxp-theme-green !important;
@@ -458,7 +463,7 @@ input.mat-input-element {
         color: $label;
     }
     .footericon {
-        width: 67%;
+        width: 100%;
         position: absolute;
         margin-left: 5px;
         margin-top: 4px;

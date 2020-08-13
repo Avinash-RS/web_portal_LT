@@ -26,6 +26,7 @@ import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -42,6 +43,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AppComponent,
     AlertComponentComponent,
     // DialogComponent,
+    NotFoundComponent,
     Ppt2Component,
     Ppt1Component,
   ],

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Ppt2Component } from './ppt2/ppt2.component';
 import { Ppt1Component } from './ppt1/ppt1.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 const routes: Routes = [
   {
@@ -9,6 +11,7 @@ const routes: Routes = [
     loadChildren: './learner/learner.module#LearnerModule',
      data : {title: 'Welcome to EduTech'}
   },
+  
   {
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
@@ -29,23 +32,15 @@ const routes: Routes = [
     loadChildren: './wca/wca.module#WcaModule',
     data : {title: 'Web Content Authoring'}
   },
-  {
-    path: 'ppt1',
-    component: Ppt1Component,
-    data : {title: 'Sample PPt1'}
-  }
-  ,
-  {
-    path: 'ppt2',
-    component: Ppt2Component,
-    data : {title: 'Sample PPt1'}
-  }
+  {path: '**', component: NotFoundComponent},
+  // {path: '**', redirectTo: '/404'},
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled',
+    initialNavigation: 'enabled',
   })],
   exports: [RouterModule]
 })
