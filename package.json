@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
     "build:qa": "ng build --configuration qa",
     "build:dev": "ng build",
     "test": "ng test --browsers=ChromeHeadless --watch=false",

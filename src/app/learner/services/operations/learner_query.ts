@@ -985,6 +985,7 @@ export const playerModuleAndTopic = gql`
       message {
         _id
         url
+        total_topic_len
         course_id
         childData {
           title
