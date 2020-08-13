@@ -37,7 +37,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showShortDesciption = true;
   show = false;
   showViewButton:boolean;
-  results = [];
+  results: any;
   currentStartTime:string;
   currentEndTime:string;
   showCompleted:string;
@@ -63,6 +63,7 @@ export class LearnerMyCourseComponent implements OnInit {
    const dateValue = moment(topicStart).format("YYYY-MM-DD")
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
+      console.log(this.results);
       if(this.results['message'].length<5){
         this.showViewButton = false;
       }else{

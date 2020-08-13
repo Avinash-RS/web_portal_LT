@@ -34,6 +34,9 @@ export class BatchAddCourseComponent implements OnInit {
   formTypeCourse;
   selectCourses;
   SelectedData: AddedCourse[] = [];
+  showAddCatForm:any;
+  showAddSubCatForm:any;
+  
   readonly dataSource$: BehaviorSubject<any[]>;
   readonly treeSource: MatTreeNestedDataSource<any>;
   /** tree control */

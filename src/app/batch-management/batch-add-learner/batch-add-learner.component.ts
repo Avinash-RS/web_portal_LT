@@ -35,6 +35,7 @@ export class BatchAddLearnerComponent implements OnInit {
   SelectLeaners = false;
   dataSource = new MatTableDataSource<LeanerList>(this.ELEMENT_DATA);
   selection = new SelectionModel(true, []);
+  trackBy:any;
   branchDetails = {
     batchname: '',
     batchdescription: '',
