@@ -10,7 +10,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 describe('LearnerDashboardComponent', () => {
   let component: LearnerDashboardComponent;
   let fixture: ComponentFixture<LearnerDashboardComponent>;
-  let dashboardData = require("assets/mockdata/admin/admin_dashboard.json");
+  let dashboardData = require("../../../../assets/mockdata/admin/admin_dashboard.json");
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [

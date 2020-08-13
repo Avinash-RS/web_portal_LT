@@ -22,15 +22,8 @@
                 <mat-tab-group #tabs animationDuration="1000ms">
                     <mat-tab label="{{course?.course_name | titlecase }}" >
                         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
-                        <div class="">
-                            <div class="">
-                                <!-- {{sider}} -->
+                        
                                 <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
-                                    <!-- <div class="row ">
-                                        <div class="col-12" (click)="tabs.selectedIndex = 0">
-                                            <h1 class="nameh1">{{course?.course_name | titlecase }}</h1>
-                                        </div>
-                                    </div> -->
                                     <mat-toolbar class="header">
                                         <div class="row">
                                             <div class="col-6 Outine">
@@ -107,11 +100,11 @@
                                         </mat-accordion>
                                     </div>
                                 </mat-drawer>
-                            </div>
-                            <div class="">
+                          
+                        
                                 <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-                            </div>
-                        </div>
+                     
+                     
                      
                     </mat-drawer-container>
                     </mat-tab>

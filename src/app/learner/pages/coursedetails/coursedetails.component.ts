@@ -8,14 +8,13 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+// import { setInterval, clearInterval} from 'timers';
+// import Swal from 'sweetalert2';
+import * as myGlobals from '@core/globals';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
-// import { debugger } from 'fusioncharts';
-// import { debugger } from 'fusioncharts';
-// import { debugger } from 'fusioncharts';
-// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -327,7 +326,7 @@ export class CoursedetailsComponent implements OnInit {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
       this.moduleLenth = this.scromApiData?.childData.length;
-      this.playerTopicLen =  this.scromApiData.total_topic_len;
+      this.playerTopicLen = this.scromApiData.total_topic_len;
 
     });
   }
@@ -343,11 +342,12 @@ export class CoursedetailsComponent implements OnInit {
         this.totTopicLenght = this.totTopicLenght + 1;
         this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.gettopicLink.link);
+          (environment.scormUrl + '/scormPlayer.html?contentID=' +
+            this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+            this.getuserid._id + '&path=' + this.gettopicLink.link);
         this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
-          this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule) , this.topiccurrentPage + 1);
+          // tslint:disable-next-line:radix
+          this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule), this.topiccurrentPage + 1);
       }
       if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
         this.currentPage++;
@@ -358,17 +358,17 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
     if ((this.totTopicLenght) === this.playerTopicLen) {
-        this.isNextEnable = true;
+      this.isNextEnable = true;
     }
 
     if (this.totTopicLenght > 0 || this.playerTopicLen === this.totTopicLenght) {
-       this.isprevEnable = false;
+      this.isprevEnable = false;
     }
   }
 
   topicPrve() {
     if (this.currentPage > 0) {
-      this.totTopicLenght -- ;
+      this.totTopicLenght--;
       this.isNextEnable = false;
       // debugger;
       if (this.totTopicLenght === 0) {
@@ -377,16 +377,16 @@ export class CoursedetailsComponent implements OnInit {
       if (this.topiccurrentlink >= 0) {
         this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.gettopicLink.link);
+          (environment.scormUrl + '/scormPlayer.html?contentID=' +
+            this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+            this.getuserid._id + '&path=' + this.gettopicLink.link);
       }
       if (this.topiccurrentlink === 0) {
-       this.currentPage--;
-       if (this.currentPage !== 0) {
-        this.topiccurrentlink = this.scromModuleData[this.currentPage - 1].topic_len;
-        this.topiccurrentlink--;
-       }
+        this.currentPage--;
+        if (this.currentPage !== 0) {
+          this.topiccurrentlink = this.scromModuleData[this.currentPage - 1].topic_len;
+          this.topiccurrentlink--;
+        }
       } else {
         this.topiccurrentlink--;
       }
@@ -425,8 +425,7 @@ export class CoursedetailsComponent implements OnInit {
         }]
       }]
     };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid,
-      jsonData.module, this.finalper)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.finalper)
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
           this.playerModuleAndTopic(true);
