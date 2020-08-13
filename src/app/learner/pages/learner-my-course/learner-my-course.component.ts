@@ -86,10 +86,6 @@ export class LearnerMyCourseComponent implements OnInit {
   //   console.log(dateValue);
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
-<<<<<<< HEAD
-      console.log(this.results);
-      if(this.results['message'].length<5){
-=======
 
       this.results['message'].forEach((el: any) => {
         // console.log(el.activity_details.startdate);
@@ -119,7 +115,6 @@ export class LearnerMyCourseComponent implements OnInit {
       // tslint:disable-next-line:no-string-literal
       // debugger;
       if (this.results['message'].length < 5) {
->>>>>>> bd81c7f4bbe79eef34ad37769eaea9700bfe658f
         this.showViewButton = false;
         // console.log(this.showViewButton);
       } else {
