@@ -13,6 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 // import { debugger } from 'fusioncharts';
+// import { debugger } from 'fusioncharts';
+// import { debugger } from 'fusioncharts';
+// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -144,6 +147,11 @@ export class CoursedetailsComponent implements OnInit {
   getTopicLengthofModule: any;
   gettopicLink: any;
   topiccurrentlink = 0;
+  moduleInfo: any;
+  totTopicLenght = 0;
+  playerTopicLen: any;
+  isNextEnable = false;
+  isprevEnable = false;
   // initials: any;
 
   constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -318,27 +326,27 @@ export class CoursedetailsComponent implements OnInit {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
       this.moduleLenth = this.scromApiData?.childData.length;
+      this.playerTopicLen =  this.scromApiData.total_topic_len;
+
     });
   }
 
 
 
   topicNext() {
-    // debugger;
     if (this.currentPage < (this.moduleLenth)) {
       this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
-      console.log(this.getTopicLengthofModule);
+      this.moduleInfo = this.scromModuleData[this.currentPage];
       if (this.topiccurrentPage < this.getTopicLengthofModule) {
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
-        // debugger;
+        this.totTopicLenght = this.totTopicLenght + 1;
         this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.gettopicLink.link);
-          console.log(this.urlSafe, 'vjvjvj');
-        this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.getTopicLengthofModule.title,
-          this.getTopicLengthofModule.status, this.moduleLenth, this.getTopicLengthofModule, this.currentPage);
+        this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
+          this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule) , this.topiccurrentPage + 1);
       }
       if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
         this.currentPage++;
@@ -348,10 +356,23 @@ export class CoursedetailsComponent implements OnInit {
         this.topiccurrentlink = this.topiccurrentPage;
       }
     }
+    if ((this.totTopicLenght) === this.playerTopicLen) {
+        this.isNextEnable = true;
+    }
+
+    if (this.totTopicLenght > 0 || this.playerTopicLen === this.totTopicLenght) {
+       this.isprevEnable = false;
+    }
   }
 
   topicPrve() {
     if (this.currentPage > 0) {
+      this.totTopicLenght -- ;
+      this.isNextEnable = false;
+      // debugger;
+      if (this.totTopicLenght === 0) {
+        this.isprevEnable = true;
+      }
       if (this.topiccurrentlink >= 0) {
         this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
@@ -386,11 +407,9 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
-    console.log(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex)
     // tslint:disable-next-line:radix
     const len = parseInt(topicLenght);
     if (topindex === len) {
-
       moduleStatus = 'Passed';
     } else {
       moduleStatus = 'Process';

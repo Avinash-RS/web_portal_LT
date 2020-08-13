@@ -96,9 +96,9 @@
                 <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
             </span>
             <div class="">
-                <mat-button class="prevBtn pointer" (click)="topicPrve()">Prev</mat-button>
+                <button class="prevBtn pointer" mat-button [disabled]="isprevEnable" (click)="topicPrve()">Prev</button>
                 <span class="divder">|</span>
-                <mat-button class="nextBtn pointer" (click)="topicNext()"> Next</mat-button>
+                <button class="nextBtn pointer" mat-button [disabled]="isNextEnable" (click)="topicNext()"> Next</button>
                 <span>
                     <mat-icon class="fullScr" (click)="makeFullScreen()">fullscreen</mat-icon>
                 </span>

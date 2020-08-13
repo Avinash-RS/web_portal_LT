@@ -433,16 +433,32 @@ iframe.fullScreen {
     border-radius: 0px 0px 10px 10px;
 }
 .prevBtn{
-    margin-left: 80%;
+    margin-left: 79%;
     position: absolute;
-    top: 2.3%;
+    top: 0.4%;
     z-index: 99;
 }
 .nextBtn{
-    margin-left: 85%;
+    margin-left: 83%;
     position: absolute;
-    top: 2.3%;
+    top: 0.5%;
     z-index: 99;
+}
+
+:host ::ng-deep .nextBtn.disabled,
+.nextBtn:disabled {
+  opacity: 0.65 !important;
+  color: $color-border !important;
+//   border-radius: .25rem;
+  font-size: 16px;
+}
+
+:host ::ng-deep .prevBtn.disabled,
+.prevBtn:disabled {
+  opacity: 0.65 !important;
+  color: $color-border !important;
+//   border-radius: .25rem;
+  font-size: 16px;
 }
 .divder{
     margin-left: 83.5%;
