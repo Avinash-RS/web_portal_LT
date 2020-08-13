@@ -3,7 +3,7 @@
     background: $color-white;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    border-left: 8px solid #b5acac;
+    border-left: 8px solid $lxp-light-grey;
     padding: 10px;
     margin-bottom: 20px;
 }.f_size_22{
@@ -29,12 +29,12 @@ div.scrollcard {
     text-align: center !important;
 }
 .myC-head{
-    margin-left: 2% !important;
+    margin-left: 1% !important;
     margin-top: 2%;
     margin-bottom: -2%;
   }
 .color-grey {
-    border-left: 2px solid #b5acac !important;
+    border-left: 2px solid $lxp-light-grey !important;
 }
 .errorbox{
     border-left: 7px solid;
@@ -70,7 +70,7 @@ div.scrollcard {
   }
 
 .color-grey-card-status {
-    border-left: 3px solid #b5acac !important;
+    border-left: 3px solid $lxp-light-grey !important;
     // color: #b5acac !important;
   }
   
@@ -90,7 +90,7 @@ div.scrollcard {
   }
 
   .Completedstatus{
-    background: #b5acac;
+    background: $lxp-light-grey;
     padding: 2px 6px;
     float: right;
     border-radius: 4px;
@@ -100,7 +100,7 @@ div.scrollcard {
   }
   
 .color-white {
-    color: #b5acac;
+    color: $lxp-light-grey;
     background: $color-white !important;
     border-left: 0px !important;
 }
@@ -173,7 +173,7 @@ div.scrollcard {
     color: $color-blank !important;
 }
 .m-l-4{
-    margin-left: 3%;
+    margin-left: 2%;
   }
   hr {
   
