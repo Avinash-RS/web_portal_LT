@@ -17,11 +17,11 @@ const routes: Routes = [
     loadChildren: './learner/learner.module#LearnerModule',
     data : {animation: 'Learner'}
   },
-  {
-    path: 'Admin',
-    loadChildren: './admin/admin.module#AdminModule',
-    data : {title: 'Admin '}
-  },
+  // {
+  //   path: 'Admin',
+  //   loadChildren: './admin/admin.module#AdminModule',
+  //   data : {title: 'Admin '}
+  // },
   {
     path: 'Player',
     loadChildren: './core/core.module#CoreModule',
