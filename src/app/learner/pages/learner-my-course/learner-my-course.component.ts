@@ -35,7 +35,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showShortDesciption = true;
   show = false;
   showViewButton: boolean;
-  results = [];
+  results: any = [];
   currentStartTime: string;
   currentEndTime: string;
   showCompleted: string;
