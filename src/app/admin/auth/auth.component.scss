@@ -11,12 +11,12 @@
         position: relative;
         width: 250px;
     }
-    .drawer{
-        background: $lxp-blue;    
-        overflow: hidden;
-        position: relative;
-        width: 80px;
-    }
+    // .drawer{
+    //     background: $lxp-blue;    
+    //     overflow: hidden;
+    //     position: relative;
+    //     width: 80px;
+    // }
     [no-over-flow] {
         overflow: hidden;
     }
@@ -32,10 +32,10 @@
         font-family: Roboto;
         color:white;margin-top: 8px;
     }
-    .mat-drawer-inner-container{
-        overflow: hidden !important;
-        background: $lxp-blue;
-    }
+    // .mat-drawer-inner-container{
+    //     overflow: hidden !important;
+    //     background: $lxp-blue;
+    // }
     
     .mat-toolbar.mat-primary{
         background-color: #004072 !important;

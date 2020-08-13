@@ -22,6 +22,7 @@
     animation-fill-mode: forwards;
 }
 
+
 @keyframes cssAnimation {
     to {
         width: 0;
@@ -37,6 +38,19 @@
         visibility: hidden;
     }
 }
+
+// .tooltip1 span {
+//     opacity: 0;
+//     border: 1px solid transparent;
+//     transition: all .4s 4.6s;
+//   }
+  
+//   .tooltip1:hover span {
+//     opacity: 1;
+//     border: 1px solid #000;
+//     opacity: 1;
+//     transition: all .4s;
+//   }
 
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
@@ -405,6 +419,11 @@ iframe.fullScreen {
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
+    padding: 8px !important;
+}
+
+:host ::ng-deep .mat-tab-label-container{
+    margin-left: 2% !important;
 }
 
 // :host ::ng-deep.mat-tab-body{
@@ -425,33 +444,34 @@ iframe.fullScreen {
 
 
 .fullScr{
-    margin-left: 89%;
-    position: absolute;
-    top: 2.3%;
-    z-index: 99;
+    // margin-left: 96%;
+    // position: absolute;
+    margin-top: 4px;
+    position: absolute !important;
+    // z-index: 99;
     background-color: $color-white;
     border-radius: 0px 0px 10px 10px;
 }
 .prevBtn{
-    margin-left: 79%;
+    margin-left: 86%;
     position: absolute;
-    top: 0.4%;
+    top: 1%;
     z-index: 99;
 }
-.nextBtn{
-    margin-left: 83%;
-    position: absolute;
-    top: 0.5%;
-    z-index: 99;
-}
+// .nextBtn{
+//     margin-left: 83%;
+//     position: absolute;
+//     top: 1%;
+//     z-index: 99;
+// }
 
-:host ::ng-deep .nextBtn.disabled,
-.nextBtn:disabled {
-  opacity: 0.65 !important;
-  color: $color-border !important;
-//   border-radius: .25rem;
-  font-size: 16px;
-}
+// :host ::ng-deep .nextBtn.disabled,
+// .nextBtn:disabled {
+//   opacity: 0.65 !important;
+//   color: $color-border !important;
+// //   border-radius: .25rem;
+//   font-size: 16px;
+// }
 
 :host ::ng-deep .prevBtn.disabled,
 .prevBtn:disabled {
@@ -460,12 +480,12 @@ iframe.fullScreen {
 //   border-radius: .25rem;
   font-size: 16px;
 }
-.divder{
-    margin-left: 83.5%;
-    position: absolute;
-    top: 2.3%;
-    z-index: 99;
-}
+// .divder{
+//     margin-left: 83.3%;
+//     position: absolute;
+//     top: 1.9%;
+//     z-index: 99;
+// }
 
 // iframe {
 //     width: 100%;
@@ -480,11 +500,16 @@ iframe.fullScreen {
 // }
 
 // silder
+.closebgt{
+    position: absolute;
+    top: 1.3%;
+    z-index: 99;
+}
 .drawer {
     position: absolute;
     height: 100%;
     background: $color-white !important;
-    min-width: 30%;
+    min-width: 25%;
     margin-top: 0%;
     border-right: none !important;
 }
@@ -527,8 +552,9 @@ iframe.fullScreen {
 }
 
 :host ::ng-deep .mat-drawer-content {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     overflow: hidden !important;
 }
 
@@ -538,7 +564,7 @@ iframe.fullScreen {
     padding-right: 40px;
     min-height: 100vh;
     display: flex;
-    background-color: #ffffff;
+    background-color: $color-white;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
@@ -730,17 +756,9 @@ iframe.fullScreen {
     margin-left: 5px;
 
 }
- :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
-    display: none;
-  }
-  .hide {
-    display: none;
-  }
-      
-  .myDIV:hover + .hide {
-    display: block;
-    color: red;
-  }
+//  :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+//     display: none;
+//   }
 
 .nameh1 {
     color: $color-blank !important;

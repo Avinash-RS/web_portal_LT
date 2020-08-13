@@ -60,7 +60,7 @@ export class CoursedetailsComponent implements OnInit {
   selected = '1';
   discussionData1: any = [];
   dataRefresher: any;
-  isFullScreen = false;
+  // isFullScreen = false;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -170,6 +170,7 @@ export class CoursedetailsComponent implements OnInit {
       this.loading = true;
       this.playerModuleAndTopic(true);
       this.refreshData();
+      this.autoHide();
       this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
@@ -289,9 +290,9 @@ export class CoursedetailsComponent implements OnInit {
       score = 50;
     }
     let submitStatus = 'ontime';
-    const today_Date = moment().toDate();
-    const start_Date = moment(endDate).toDate();
-    if (today_Date > start_Date) {
+    const todayDate = moment().toDate();
+    const startDate = moment(endDate).toDate();
+    if (todayDate > startDate) {
 
       submitStatus = 'late';
 
@@ -442,27 +443,29 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
-        this.sider = false;
+        // this.sider = false;
       }, 20000);
     // this.cancelPageRefresh();
   }
 
-
+  autoHide() {
+    this.dataRefresher =
+    setInterval(() => {
+      this.playerModuleAndTopic(false);
+      this.sider = false;
+    }, 10000);
+  }
 
   makeFullScreen() {
-    // document.getElementsByTagName('iframe')[0].className = 'fullScreen';
-    const elem = document.body;
-    if (!document.fullscreenElement) {
-      this.isFullScreen = true;
-      elem.requestFullscreen().catch(err => {
-      });
-    } else {
-      // debugger;
-      document.exitFullscreen();
-      this.isFullScreen = false;
-      this.sider = true;
-    }
+    const element = document.querySelector('#myPlayer');
+    element.requestFullscreen()
+    .then(() => {
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
   }
+
   showHeader() {
     this.sider = true;
   }
