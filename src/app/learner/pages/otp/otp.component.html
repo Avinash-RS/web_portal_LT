@@ -1,6 +1,6 @@
 <mat-toolbar>
   <img class="hearder-logo " alt="" src="assets/learner/LT.svg">
-  <span class="headTit">&nbsp;LARSEN & TOUBRO</span>
+  <span class="headTit">&nbsp;{{'LARSEN & TOUBRO' | translate }}</span>
 </mat-toolbar>
 <div *ngIf="!isLinkActive" class="limiter">
   <div class="row container-reg200">
@@ -11,7 +11,10 @@
     </div>
       <div class="row footer20">
         <div class="col-8">
-          <!-- <span class="footertext">© 2020 L&T EduTech.</span> -->
+          <div class="powered">
+            <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+           <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
+          </div>
         </div>
         <div class="col-4">
           <!-- <span class="powered">
@@ -24,24 +27,24 @@
       <div class="wrap-reg ">
         <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
         <form [formGroup]="otpForm">
-          <h1 class="animated animatedFadeInUp fadeInUp signIn">Enter the mobile number</h1><br><br>
+          <h1 class="animated animatedFadeInUp fadeInUp signIn">{{'Enter the mobile number' | translate }}</h1><br><br>
           <!-- <label>Mobile number</label> -->
           <mat-form-field appearance="outline">
-            <mat-label class="label-color">Mobile number</mat-label>
-            <input matInput  placeholder="Enter mobile number without country code"   minlength="10" pattern="[1-9]{1}[0-9]{9}"
+            <mat-label class="label-color">{{'Mobile number' | translate }}</mat-label>
+            <input matInput  [placeholder]="'Enter mobile number without country code' | translate "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
              mask="0000000000"  maxlength="10"
              formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" required>
             <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
               phone</mat-icon>
             <mat-error class="error"  *ngIf="otpForm.get('mobile').hasError('required')">
-              Mobile number is required
+              {{'Mobile number is required' | translate }}
             </mat-error>
             <mat-error class="error"  *ngIf="otpForm.get('mobile').hasError('minlength')">
-              Mobile number must be 10 digits
+              {{'Mobile number must be 10 digits' | translate }}
             </mat-error>
          
             <mat-error class="error" *ngIf="otpForm.get('mobile').hasError('pattern')">
-              Mobile number is invalid
+              {{'Mobile number is invalid' | translate }}
             </mat-error>
           </mat-form-field>
           <!-- <div class="form-group">
@@ -57,16 +60,16 @@
 
 
           <button *ngIf="otpFeature == 'false'" mat-raised-button class="btn" [disabled]="!otpForm.valid"
-            (click)="otpverification()">NEXT</button>
+            (click)="otpverification()">{{'NEXT' | translate }}</button>
           <!-- // sms getway integation pending  -->
           <div *ngIf="otpFeature == 'true'">
             <div *ngIf="isenable"><br>
-              <p class="head">OTP will be sent to this number</p>
-              <button mat-raised-button class="btn" [disabled]="!otpForm.valid" (click)="otpverification()">VERIFY</button>
+              <p class="head">{{'OTP will be sent to this number' | translate }}</p>
+              <button mat-raised-button class="btn" [disabled]="!otpForm.valid" (click)="otpverification()">{{'VERIFY' | translate }}</button>
             </div>
 
             <div *ngIf="showotp"><br>
-              <p class="otphead">OTP Code</p>
+              <p class="otphead">{{'OTP Code' | translate }}</p>
               <ng-otp-input [config]="config" [ngClass]="{ 'is-invalid': f.otp.touched && f.otp.errors }"
                 formControlName="otp" min="0" max="9" (onInputChange)="onOtpChange($event)" pattern="[0-9]{1}">
               </ng-otp-input>
@@ -77,23 +80,24 @@
             </div>
 
             <div *ngIf="showotp">
-              <button class="btn" mat-raised-button [disabled]="verifybutton" (click)="otpverify()">VERIFY</button>
+              <button class="btn" mat-raised-button [disabled]="verifybutton" (click)="otpverify()">{{'VERIFY' | translate }}</button>
             </div><br>
             <div class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b
                 (click)="Resendcode()"><br>
-                Resend OTP</b></div>
+                {{'Resend OTP' | translate }}</b></div>
 
           </div>
           <!-- // sms getway integation pending  -->
         </form>
       </div>
       <div class="row footer20">
-        <div class="col-6">
+        <div class="col-3">
         </div>
-        <div class="col-4">
-          <span class="powered">
-            <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg">
-          </span>
+        <div class="col-9">
+          <!-- <span class="powered"> -->
+            <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+           <!-- <span class="forgot1">{{'2020 © L&T EduTech All Rights Reserved' | translate }}</span> 
+          </span> -->
         </div>
       </div>
     </div>

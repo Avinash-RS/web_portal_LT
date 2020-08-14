@@ -108,7 +108,7 @@ a {
   font-size: 14px;
   text-align: center;
   // font-weight: 600;
-  margin-top: 10%;
+  // margin-top: 10%;
 }
 
 .link {
@@ -324,4 +324,9 @@ a {
     bottom: 13px;
     width: 84%;
   }
+}
+.forgot1 {
+  color: $lxp-text ;
+  // cursor: pointer;
+  font-size: 13px;
 }

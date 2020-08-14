@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import Swal from 'sweetalert2';
 import { element } from 'protractor';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -64,12 +65,13 @@ export class ViewAllCoursesComponent implements OnInit {
   showCategory: Boolean = false;
   element: any;
 
-  constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService,
+  constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService, public translate: TranslateService,
               private dialog: MatDialog, private globalservice: GlobalServiceService, public CommonServices: CommonServicesService) {
     this.btnType = 'Enroll Now';
   }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.userDetailes = this.globalservice.checkLogout();
     if (!this.userDetailes.group_id) {
       this.userDetailes.group_id = '1';

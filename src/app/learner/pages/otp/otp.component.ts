@@ -7,6 +7,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import * as myGlobals from '@core/globals';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -41,7 +42,8 @@ export class OtpComponent implements OnInit {
   resendtimeLeft = 60;
   resendLabel = false;
   otpFeature: any;
-  constructor(private router: Router,
+  constructor(public translate: TranslateService,
+              private router: Router,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
               private loader: Ng4LoadingSpinnerService,
@@ -70,6 +72,7 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.systemip = localStorage.getItem('Systemip');
     this.otpForm = this.formBuilder.group({
       // mobile: new FormControl('', myGlobals.mobileVal),

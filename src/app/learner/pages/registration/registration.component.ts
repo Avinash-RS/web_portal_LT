@@ -8,6 +8,7 @@ import { TermsconditionsComponent } from '../termsconditions/termsconditions.com
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -19,9 +20,10 @@ export class RegistrationComponent implements OnInit {
   loading = false;
   userDetails: any;
   platform: string;
-  is_staff: boolean;
+  // is_staff: boolean;
   fullname: any;
   constructor(
+    public translate: TranslateService,
     private formBuilder: FormBuilder,
     private router: Router,
     private loader: Ng4LoadingSpinnerService,
@@ -32,9 +34,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.registerForm = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
         Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
+        mobile: ['', [Validators.required, Validators.minLength(10),  Validators.maxLength(10),
+          Validators.pattern(/^[6-9][0-9]{9}$/)]],
       email: ['', [ Validators.minLength(6),
         Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
       termsandconditions: new FormControl('', [])
@@ -61,7 +66,7 @@ export class RegistrationComponent implements OnInit {
       if (data.data.user_registration.success === 'true') {
         this.toastr.success(data.data.user_registration.message, null);
         this.loader.hide();
-        this.registerForm.setErrors(null); 
+        this.registerForm.setErrors(null);
       } else {
         this.toastr.error(data.data.user_registration.message, null);
         this.loader.hide();

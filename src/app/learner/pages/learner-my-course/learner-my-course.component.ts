@@ -4,7 +4,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
-// import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -35,7 +35,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showShortDesciption = true;
   show = false;
   showViewButton: boolean;
-  results = [];
+  results: any = [];
   currentStartTime: string;
   currentEndTime: string;
   showCompleted: string;
@@ -45,7 +45,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
 
   constructor(
-    // public translate: TranslateService,
+    public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router) {
     this.userDetailes = this.gs.checkLogout();
@@ -57,6 +57,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
       // const dateValue = new Date().toISOString()
     // const static =
     const message = [{message: [{activity_details: { activityname: 'Test case 12',

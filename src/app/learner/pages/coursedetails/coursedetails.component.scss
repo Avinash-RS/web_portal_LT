@@ -22,6 +22,7 @@
     animation-fill-mode: forwards;
 }
 
+
 @keyframes cssAnimation {
     to {
         width: 0;
@@ -37,6 +38,19 @@
         visibility: hidden;
     }
 }
+
+// .tooltip1 span {
+//     opacity: 0;
+//     border: 1px solid transparent;
+//     transition: all .4s 4.6s;
+//   }
+  
+//   .tooltip1:hover span {
+//     opacity: 1;
+//     border: 1px solid #000;
+//     opacity: 1;
+//     transition: all .4s;
+//   }
 
 :host ::ng-deep mat-dialog-container {
     overflow: hidden !important;
@@ -379,24 +393,24 @@ li {
     margin-top: 2px
 }
 .player {
-    align-items: center;
+    // align-items: center;
     width: 100%;
-    height: 546px;
+    height: 100vh;
     border: none !important;
     // border: 1px solid $color-border;
 }
-.fullScr{
-    // position: relative;
-    margin-left: 88%;
-    top: 1.3%;
-}
+// .fullScr{
+//     // position: relative;
+//     margin-left: 88%;
+//     top: 1.3%;
+// }
 iframe {
     width: 100%;
-    height: 546px;
+    height: 100vh;
 }
 iframe.fullScreen {
     width: 100%;
-    height: 546px;
+    height: 100vh;
     // position: absolute;
     top: 0;
     left: 0;
@@ -405,6 +419,11 @@ iframe.fullScreen {
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
+    padding: 8px !important;
+}
+
+:host ::ng-deep .mat-tab-label-container{
+    margin-left: 2% !important;
 }
 
 // :host ::ng-deep.mat-tab-body{
@@ -423,37 +442,74 @@ iframe.fullScreen {
     margin-top: 10px;
 }
 
-.player {
-    align-items: center;
-    width: 100%;
-    height: 546px;
-    border: none !important;
-    // border: 1px solid $color-border;
-}
+
 .fullScr{
-    margin-left: 88%;
+    // margin-left: 96%;
+    // position: absolute;
+    margin-top: 4px;
+    position: absolute !important;
+    // z-index: 99;
+    background-color: $color-white;
+    border-radius: 0px 0px 10px 10px;
+}
+.prevBtn{
+    margin-left: 86%;
+    position: absolute;
+    top: 1%;
+    z-index: 99;
+}
+// .nextBtn{
+//     margin-left: 83%;
+//     position: absolute;
+//     top: 1%;
+//     z-index: 99;
+// }
+
+// :host ::ng-deep .nextBtn.disabled,
+// .nextBtn:disabled {
+//   opacity: 0.65 !important;
+//   color: $color-border !important;
+// //   border-radius: .25rem;
+//   font-size: 16px;
+// }
+
+:host ::ng-deep .prevBtn.disabled,
+.prevBtn:disabled {
+  opacity: 0.65 !important;
+  color: $color-border !important;
+//   border-radius: .25rem;
+  font-size: 16px;
+}
+// .divder{
+//     margin-left: 83.3%;
+//     position: absolute;
+//     top: 1.9%;
+//     z-index: 99;
+// }
+
+// iframe {
+//     width: 100%;
+//     height: 546px;
+// }
+// iframe.fullScreen {
+//     width: 100%;
+//     height: 546px;
+//     // position: absolute;
+//     top: 0;
+//     left: 0;
+// }
+
+// silder
+.closebgt{
     position: absolute;
     top: 1.3%;
     z-index: 99;
 }
-iframe {
-    width: 100%;
-    height: 546px;
-}
-iframe.fullScreen {
-    width: 100%;
-    height: 546px;
-    // position: absolute;
-    top: 0;
-    left: 0;
-}
-
-// silder
 .drawer {
     position: absolute;
     height: 100%;
     background: $color-white !important;
-    min-width: 30%;
+    min-width: 25%;
     margin-top: 0%;
     border-right: none !important;
 }
@@ -496,8 +552,9 @@ iframe.fullScreen {
 }
 
 :host ::ng-deep .mat-drawer-content {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     overflow: hidden !important;
 }
 
@@ -507,7 +564,7 @@ iframe.fullScreen {
     padding-right: 40px;
     min-height: 100vh;
     display: flex;
-    background-color: #ffffff;
+    background-color: $color-white;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
@@ -699,10 +756,9 @@ iframe.fullScreen {
     margin-left: 5px;
 
 }
- :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
-    display: none;
-  }
-  
+//  :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+//     display: none;
+//   }
 
 .nameh1 {
     color: $color-blank !important;
@@ -884,21 +940,21 @@ iframe.fullScreen {
 .thread-header {
     // background-color: #C9E4F35C;
     // background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
-    background-image: linear-gradient(#c1dceb, #c9e4f35c);
+    background-image: linear-gradient(#FFCC00, #faf5cb);  
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
 }
 
 .post-header {
     // background-color: #F1F1F1;
-    background-image: linear-gradient(#F1F1F1, #fafafa);
+    background-image: linear-gradient(#f1f1f1, #fafafa);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
 }
 
 .child-post-header {
     // background-color: #F1F1F15C;
-    background-image: linear-gradient(#F1F1F15C, #fafafa);
+    background-image: linear-gradient(#f1f1f15c, #fafafa);
     box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
 }

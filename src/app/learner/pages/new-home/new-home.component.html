@@ -1,7 +1,7 @@
 <app-header></app-header>
 <!-- <mat-tab-group style="margin-top: 5%;" class="myC">
   <mat-tab label="My Courses" class="m-l-5 "> -->
-<p class="mHead">My Courses</p>
+<p class="mHead">{{'My Courses' | translate }}</p>
 <div class="vertical"></div>
 <hr style="margin: 0 !important;">
 <div class="spinner-container" *ngIf="loading">
@@ -43,7 +43,7 @@
                                     {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <span *ngFor="let l of course?.author_details;let in = index">
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
-                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; Course Duration: {{course.course_duration}} hours
+                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; {{'Course Duration:' | translate }} {{course.course_duration}} {{'hours' | translate }}
                                 </div>
                                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -58,14 +58,14 @@
                                         <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'" class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon class="icon-color">play_circle_outline</mat-icon>
                       &nbsp;<span class="cap icon-color">
-                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
+                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
+                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume | translate ' : 'Start | translate '}}&nbsp;
                       </span>
                     </button>
                                         <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon class="icon-color">replay</mat-icon>
                       &nbsp;<span class="cap icon-color">
-                        Replay&nbsp;
+                        {{'Replay' | translate }}&nbsp;
                       </span>
                     </button>
                                     </div>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
 
-                                <span style="font-size: medium;"> You have no enrolled courses at the moment.</span>
+                                <span style="font-size: medium;"> {{'You have no enrolled courses at the moment.' | translate }}</span>
                             </div>
                         </div>
                     </mat-card>
@@ -113,7 +113,7 @@
                                     {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <span *ngFor="let l of course?.author_details;let in = index">
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
-                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; Course Duration: {{course.course_duration}} hours
+                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; {{'Course Duration:' | translate }} {{course.course_duration}} {{'hours' | translate }}
                                 </div>
                                 <div class="row color_black f_size_12 f_wt_400 m-t-3 pointer" (click)="gotoDesc(course)">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -131,8 +131,8 @@
                       &nbsp;Resume&nbsp;
                     </span> -->
                       &nbsp;<span class="cap icon-color">
-                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                        course?.coursePlayerStatus?.status === 'start' ? 'Start' : 'Resume'}}&nbsp;
+                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
+                        course?.coursePlayerStatus?.status === 'start' ? 'Start | translate ' : 'Resume | translate '}}&nbsp;
                       </span>
                     </button>
                                     </div>
@@ -143,7 +143,7 @@
                 </ng-container>
                 <div *ngIf="incomplete?.length === 0" class="space5">
                     <mat-card class="coursebg width_60 center noCourse center_align">
-                        You have no enrolled courses at the moment
+                        {{'You have no enrolled courses at the moment' | translate }}
                     </mat-card>
                 </div>
             </mat-tab>
@@ -168,7 +168,7 @@
                                     {{course.course_mode === 'self-placed' ? 'Self paced' : course.course_mode}} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <span *ngFor="let l of course?.author_details;let in = index">
                     {{l.author_name && in != 0 ? ', ' + l.author_name : l.author_name || null}}
-                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; Course Duration: {{course?.course_duration}} hours
+                  </span> &nbsp;&nbsp;|&nbsp;&nbsp; {{'Course Duration:' | translate }} {{course?.course_duration}} {{'hours' | translate }}
                                 </div>
                                 <div class="row color_black f_size_12 f_wt_400 m-t-3" (click)="gotoDesc(course)">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-12 display_flex">
@@ -184,7 +184,7 @@
                                         <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="blue_clr cap m-b-10 statBtn pointer" (click)="gotoDesc(course)">
                       <mat-icon class="icon-color">replay</mat-icon>
                       &nbsp;<span class="cap icon-color">
-                        Replay&nbsp;
+                        {{'Replay' | translate }}&nbsp;
                       </span>
                     </button>
                                     </div>
@@ -195,7 +195,7 @@
                 </ng-container>
                 <div *ngIf="completed?.length === 0" class="space5">
                     <mat-card class="coursebg width_60 center noCourse center_align">
-                        You have no enrolled courses at the moment
+                        {{'You have no enrolled courses at the moment' | translate }}
                     </mat-card>
                 </div>
             </mat-tab>
@@ -223,7 +223,7 @@
             <mat-card *ngFor="let result of results.message" style="border-radius: 10px;">
                 <div class="col-md-8" id="insidecard" class="uk-card uk-card-default uk-card-body" style="font-size: medium;" [ngClass]="{'color-blue': result.activity_details.ongoing == 'true', 'color-grey':result.activity_details.ongoing == 'false' }">
                     <h5>{{strDate | date :'dd MMM yyyy'}}
-                        <span *ngIf="result.activity_details.ongoing == 'true' "> | On-going</span>
+                        <span *ngIf="result.activity_details.ongoing == 'true' "> | {{'On-going' | translate }}</span>
                     </h5>
                     1<img *ngIf="data.activity_details.activitytype == 'Live  Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
                     <p> {{ result.activity_details.coursename }}</p>
@@ -238,27 +238,27 @@
 <div class="modal" *ngIf="show">
     <div class="modal-content">
         <div class="modal-header">
-            <span style="font-size:22px; color: red;">Alert !</span>
+            <span style="font-size:22px; color: red;">{{'Alert' | translate }} !</span>
         </div>
         <div class="modal-body">
-            <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
-            <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
+            <p class="f_size_16">{{'Courses works best in Laptop / Desktop.' | translate }}</p>
+            <p class="f_size_16">{{'Accessing courses via mobile is forbidden.' | translate }} </p>
             <div class="row">
                 <div class="col-8">
-                    <p><b>Recommended browsers</b></p>
+                    <p><b>{{'Recommended browsers' | translate }}</b></p>
                 </div>
                 <div class="col-1">
                     <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
                 </div>
             </div>
             <div [ngClass]="{'show-less': showShortDesciption}">
-                <p>L&T Kaushalya supports the most recent versions of the following browsers.</p>
+                <p>{{'L&T Kaushalya supports the most recent versions of the following browsers.' | translate }}</p>
                 <ul>
-                    <li>Google Chrome (recommended)</li>
-                    <li>Firefox</li>
-                    <li>Safari</li>
-                    <li>Internet Explorer 11</li>
-                    <li>Microsoft Edge</li>
+                    <li>{{'Google Chrome' | translate }} ({{'recommended' | translate }})</li>
+                    <li>{{'Firefox' | translate }}</li>
+                    <li>{{'Safari' | translate }}</li>
+                    <li>{{'Internet Explorer 11' | translate }}</li>
+                    <li>{{'Microsoft Edge' | translate }}</li>
 
                 </ul>
                 <p>If you're using an older browser , updating your browser can help solve problems.</p>
@@ -267,7 +267,7 @@
 
         </div>
         <div class="modal-footer">
-            <button class="roundbtn" (click)="close()">Close</button>
+            <button class="roundbtn" (click)="close()">{{'Close' | translate }}</button>
         </div>
     </div>
 </div>
@@ -275,8 +275,8 @@
 <div class="footer" *ngIf="!loading">
     <!-- <span class="float_left">2020 LARSEN & TOUBRO LIMITED. All rights reserved.</span> <span class="float_right">Copyright & Terms | Privacy Policy</span> -->
 
-    <span class="center_align">© 2020 L&T EduTech. &nbsp; &nbsp; | &nbsp; &nbsp;
-    <span class="powered">Powered by :
+    <span class="center_align">{{'© 2020 L&T EduTech.' | translate }} &nbsp; &nbsp; | &nbsp; &nbsp;
+    <span class="powered">{{'Powered by' | translate }} :
       <img width="160px" alt="" src="assets/learner/LT_small.svg">
     </span>
     </span>

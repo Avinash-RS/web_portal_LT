@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { LearnerServicesService } from "../../services/learner-services.service";
 import * as moment from "moment";
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: "app-learner-calendar",
   templateUrl: "./learner-calendar.component.html",
@@ -30,9 +31,10 @@ export class LearnerCalendarComponent implements OnInit {
   showUpcoming:any;
   currentStartTime:any;
   currentEndTime:any;
-  constructor(private service: LearnerServicesService,private router: Router) {}
+  constructor(public translate: TranslateService,private service: LearnerServicesService,private router: Router) {}
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.showUpcoming = '';
     this.showOngoing = '';
     this.showCompleted = '';  

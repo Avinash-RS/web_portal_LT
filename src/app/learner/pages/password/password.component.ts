@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password',
@@ -31,13 +32,15 @@ export class PasswordComponent implements OnInit {
   showconpassbutton  = false;
   showconpsseye  = false;
 
-  constructor(private router: Router,
+  constructor(public translate: TranslateService,
+              private router: Router,
               private loader: Ng4LoadingSpinnerService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
               public service: LearnerServicesService) { }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.systemip = localStorage.getItem('Systemip');
     this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({

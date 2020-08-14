@@ -6,7 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-forgot-username-and-password',
   templateUrl: './forgot-username-and-password.component.html',
@@ -26,7 +26,8 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   isForgotPasswordEnable = false;
   isshow = true;
   isnextBtnEnable = true;
-  constructor( private formBuilder: FormBuilder,
+  constructor( public translate: TranslateService,
+               private formBuilder: FormBuilder,
                private router: Router,
                private toastr: ToastrService,
                private loader: Ng4LoadingSpinnerService,
@@ -44,6 +45,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
 
 ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),

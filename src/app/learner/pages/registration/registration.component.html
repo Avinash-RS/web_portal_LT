@@ -24,7 +24,10 @@
           </div>
             <div class="row footer20">
               <div class="col-8">
-                <!-- <span class="footertext">© 2020 L&T EduTech.</span> -->
+                <div class="powered">
+                  <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+                 <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
+                </div>
               </div>
               <div class="col-4">
                 <!-- <span class="powered">
@@ -39,7 +42,7 @@
                 <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
                 <form [formGroup]="registerForm">
                     <!-- <div class="borderbox"> -->
-                        <h1 class=" animated animatedFadeInUp fadeInUp signIn">Create an account </h1><br><br>
+                        <h1 class=" animated animatedFadeInUp fadeInUp signIn">Create an account</h1><br><br>
                         <mat-form-field  appearance="outline">
                             <mat-label class="label-color">Full Name</mat-label>
                             <input matInput id="fullname"  #fullname placeholder="Enter the full name"  formControlName="fullname" 
@@ -77,6 +80,26 @@
                             </div>
                         </div> -->
                         <br><br>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label class="label-color">{{'Mobile number'}}</mat-label>
+                          <input matInput  [placeholder]="'Enter mobile number without country code' "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
+                           mask="0000000000"  maxlength="10"
+                           formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" required>
+                          <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
+                            phone</mat-icon>
+                          <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
+                            {{'Mobile number is required' }}
+                          </mat-error>
+                          <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
+                            {{'Mobile number must be 10 digits'}}
+                          </mat-error>
+                       
+                          <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
+                            {{'Mobile number is invalid' }}
+                          </mat-error>
+                        </mat-form-field>
+                        <br><br>
                         <mat-form-field appearance="outline">
                             <mat-label class="label-color">Email</mat-label>
                             <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
@@ -84,7 +107,7 @@
                             <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
                             <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
                             <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
-                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address </mat-error>
+                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address</mat-error>
                           </mat-form-field>
                         <div class=" space5">
                             <!-- <label class="fromLabel">Email ID</label>
@@ -98,7 +121,7 @@
 
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="alert1"> <b>Note</b> : This name will be used in your certificates</div>
+                                    <div class="alert1"> <b>{{'Note' | translate }}</b> {{': Full name will be used in your certificates' | translate }}</div>
                                 </div>
                             </div>
 
@@ -108,8 +131,7 @@
                             </button>
 
                             <div class="account">Already have an account?
-                                <a [routerLink]="['/Learner/login']" routerLinkActive="active"><span class="col">Sign
-                                        in</span></a>
+                                <a [routerLink]="['/Learner/login']" routerLinkActive="active"><span class="col">Sign in</span></a>
                             </div>
                         </div>
                     <!-- </div> -->
@@ -126,15 +148,15 @@
                 </div> -->
             </div>
             <div class="row footer20">
-                <div class="col-6">
-                 
-                </div>
-                <div class="col-4">
-                  <span class="powered">
-                    <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg">
-                  </span>
-                </div>
+              <div class="col-3">
               </div>
+              <div class="col-9">
+                <!-- <span class="powered"> -->
+                  <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+                 <!-- <span class="forgot1">{{'2020 © L&T EduTech All Rights Reserved' | translate }}</span> 
+                </span> -->
+              </div>
+            </div>
 
         </div>
     </div>

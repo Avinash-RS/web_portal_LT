@@ -2,7 +2,7 @@
 <mat-tab-group>
 
 
-  <mat-tab label="Explore">
+  <mat-tab [label]="'Explore'| translate">
     <!-- <div  class="row section_1" [style.background]="'url(../../../../assets/learner/Learnerhomebanner.jpg)'" >
       <div class="col-md-8 section_1_a">
         <h1 class="welcom">Welcome to </h1>
@@ -19,23 +19,23 @@
     <div style="margin-top: 3%;"></div>
     <div class="row">
       <div class="col-6">
-        <h3>All courses <span class="tot">(Total {{total_count}} results)</span></h3>
+        <h3>{{'All courses' | translate }} <span class="tot">({{'Total' | translate }} {{total_count}} {{'results' | translate }})</span></h3>
         <div class="vertical"></div>
       </div>
 
       <div class="col-3">
-        <button class="submit" (click)="viewCategory(element)"> Category
+        <button class="submit" (click)="viewCategory(element)"> {{'Category' | translate }}
           <i class="fa fa-chevron-down colr"></i>
         </button>
       </div>
       <div class="col-3">
         <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
           <i class="fa fa-filter colrr"></i>
-          Filter
+          {{'Filter' | translate }}
         </button>
         <select class="category" (change)="onChange($event.target.value)">
-          <option value="allcourses">All courses</option>
-          <option value="popularCourse">Popular courses</option>
+          <option value="allcourses">{{'All courses' | translate }}</option>
+          <option value="popularCourse">{{'Popular courses' | translate }}</option>
         </select>
       </div>
     </div>
@@ -88,11 +88,11 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="My Courses">
+  <mat-tab [label]="'My Courses'| translate">
     <div class="row">
       <div class="col-md-6 col-sm-12 col-12">
         <div class="smallbox">
-          <h2>Courses yet to start</h2>
+          <h2>{{'Courses yet to start' | translate }}</h2>
           <div class="row">
             <div class="col-10">
               <span class="count">{{yetToStart?.totalCount}}</span>
@@ -123,7 +123,7 @@
 
       <div class="col-md-6 col-sm-12 col-12">
         <div class="smallbox">
-          <h2>Courses in-progress</h2>
+          <h2>{{'Courses in-progress' | translate }}</h2>
           <div class="row">
             <div class="col-10">
               <span class="count">{{incomplete?.totalCount}}</span>
@@ -157,7 +157,7 @@
     </div>
     <!-- ---------------------My Enrolled courses section start------------------------- -->
     <div style="margin-top: 3%;"></div>
-    <h3>My enrolled courses</h3>
+    <h3>{{'My enrolled courses' | translate }}</h3>
     <div class="vertical"></div>
     <div class="row">
       <div class="col-12">
@@ -172,7 +172,7 @@
             </ng-container>
             <div class="col-md-12" style="text-align: center;">
               <h2 *ngIf="enrolledCourses && enrolledCourses.length == 0">
-                No courses yet
+                {{'No courses yet' | translate }}
               </h2>
             </div>
           </div>
@@ -182,7 +182,7 @@
     <!-- ---------------------My Enrolled courses section end------------------------- -->
     <!-- ---------------------Wishlist section start------------------------- -->
     <div style="margin-top: 3%;"></div>
-    <h3>Wishlist</h3>
+    <h3>{{'Wishlist' | translate }}</h3>
     <div class="vertical"></div>
     <div class="row">
       <div class="col-12">
@@ -197,7 +197,7 @@
             </ng-container>
             <div class="col-md-12" style="text-align: center;">
               <h2 *ngIf="wishList && wishList.length == 0">
-                No courses yet
+                {{'No courses yet' | translate }}
               </h2>
             </div>
           </div>

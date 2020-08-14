@@ -30,6 +30,9 @@
   margin-top: 2%;
 }
 
+.m-left-2{
+  margin-left: 2%;
+}
 // @media screen and (min-width: 270px) and (max-width: 795px) {
 //     .descmc {
 //         max-height: 175px !important;
@@ -94,7 +97,9 @@
   font-weight: 500 !important;
   color: #616060;
 }
-
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child{
+  display: inherit !important;
+}
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
   font-size: 14px !important;
   font-weight: 400 !important;
@@ -398,8 +403,8 @@
 
 .mainCard {
   background: #f9f9f9;
-  margin-left: 5%;
-  width: 90%;
+  margin-left: 3px;
+  width: 98%;
   padding-top: 9px;
 }
 
@@ -422,6 +427,8 @@
   margin-left: 4%;
   // padding-bottom: 5px;
 }
+
+
 
 hr {
 
@@ -677,9 +684,9 @@ hr {
     padding: 0.75rem;
   }
 
-  // :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-  //   display: none !important;
-  // }
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
+  }
 
   #insidecard.uk-card-default {
     background: $color-white;
