@@ -1,11 +1,11 @@
 @import '~@angular/material/theming';
-@import '../app/admin/auth/auth.component.scss';
+// @import '../app/admin/auth/auth.component.scss';
 @import '../app/admin/core/sidemenu/sidemenu.component.scss';
 @import '../app/admin/core/sidemenu-item/sidemenu-item.component.scss';
-@import '../app/admin/dashboard-widget/dashcard/dashcard.component.scss';
-@import '../app/admin/dashboard-widget/profile-card/profile-card.component.scss';
-@import '../app/admin/dashboard-widget/round-progressbar/round-progressbar.component.scss';
-@import '../app/admin/dashboard-widget/sales-list/sales-list.component.scss';
+// @import '../app/admin/dashboard-widget/dashcard/dashcard.component.scss';
+// // @import '../app/admin/dashboard-widget/profile-card/profile-card.component.scss';
+// @import '../app/admin/dashboard-widget/round-progressbar/round-progressbar.component.scss';
+// @import '../app/admin/dashboard-widget/sales-list/sales-list.component.scss';
 $lxp-blue:#024d87  ;
 
 $mat-light-theme-background: (
@@ -67,13 +67,13 @@ lxp-profile-card{
     $dashboard-profile-accent:  mat-palette($accent , 900);
     $dashboard-profile-warn:    mat-palette($warn );
     $lxp-dashboard-profile-theme:   mat-dark-theme($dashboard-profile-primary, $dashboard-profile-accent,$dashboard-profile-warn);
-    @include dashboard-profile($lxp-dashboard-profile-theme);
+    // @include dashboard-profile($lxp-dashboard-profile-theme);
     @include mat-tabs-theme($lxp-dashboard-profile-theme);
 }
 @include angular-material-theme($lxp-theme);
-@include auth($lxp-theme);
-@include round-progressbar($lxp-theme);
-@include sales-list($lxp-theme);
+// // @include auth($lxp-theme);
+// @include round-progressbar($lxp-theme);
+// @include sales-list($lxp-theme);
 
 html {
   height:100%;

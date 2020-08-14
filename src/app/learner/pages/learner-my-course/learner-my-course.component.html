@@ -3,7 +3,7 @@
     <div class="col-xl-8  col-md-12 col-sm-12 col-12">
         <div class="f_size_22   myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' | translate }}</div>
         <div class="bodybg" *ngIf="!loading">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12   p-0">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
                 <mat-tab-group mat-align-tabs="start" animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
                     <mat-tab>
                         <!-- [disabled]='incom.plete?length === 0' -->
@@ -317,8 +317,10 @@
                     <mat-card class="session-card">
                         <div class="session-sub-card">
                             <img alt="" *ngIf="result.activity_details.activitytype == 'Live Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
-                            <div class="m-l-4">
-                                <mat-icon class="event">event</mat-icon><span class="lxp-text f_size_14 f_wt_400"> {{result.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{result.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
+                            <!--  -->
+                            <!-- <div class="m-left-2"> -->
+                                <div>
+                                <mat-icon class="event">event</mat-icon><span class="lxp-text f_size_14 f_wt_400">{{result.activity_details.startdate | date :'MMM d, y h:mm a'}}-{{result.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
                                 <!-- |  <i class="fa fa-clock-o" aria-hidden="true"> {{currentStartTime}}</i>-{{currentEndTime}}  -->
                                 <span class="status lxp-text f_size_14 f_wt_400" *ngIf="result.status == 'On going' ">
                                 {{'Ongoing' | translate }}</span>
