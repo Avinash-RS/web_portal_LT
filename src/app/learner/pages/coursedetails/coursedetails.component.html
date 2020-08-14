@@ -261,7 +261,7 @@
                     <!-- Assignments tab -->
                     <div >
                         <mat-tab label="Assignments" class="discussion_forum"
-                            *ngIf="assignmentContent?.coursedetails.length" (click)="getAssignmentmoduleData">
+                            *ngIf="assignmentContent?.coursedetails.length">
                             <mat-accordion>
                                 <ng-container>
                                     <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
