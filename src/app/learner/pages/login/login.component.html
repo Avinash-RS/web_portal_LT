@@ -12,6 +12,10 @@
     </div>
       <div class="row footer20">
         <div class="col-8">
+          <div class="powered">
+            <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+           <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
+          </div>
           <!-- <span class="footertext">© 2020 L&T EduTech.</span> -->
         </div>
         <div class="col-4">
@@ -87,14 +91,14 @@
             </div>
             <div class="space-20"></div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <mat-form-field>
                 <label>{{'Select Language' | translate }}</label>
                 <mat-select  #langSelect  formControlName="language" disableRipple>
                   <mat-option *ngFor="let lang of languages" [value]="lang.lang" [selected]="lang === translate.currentLang">{{ lang.languagename }}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
+            </div> -->
 
             <div style="text-align: end;">
               <mat-checkbox class="remember_me" formControlName="remember_me">
@@ -119,7 +123,7 @@
 
             <div class="sign_up">
               <span class="haveacc">Don't have an account?</span>
-              <a   [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
+              <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
           </mat-card-content>
         </form>
 
@@ -128,10 +132,7 @@
         <div class="col-3">
         </div>
         <div class="col-9">
-          <span class="powered">
-            <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
-           <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
-          </span>
+       
         </div>
       </div>
      

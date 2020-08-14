@@ -24,7 +24,10 @@
           </div>
             <div class="row footer20">
               <div class="col-8">
-                <!-- <span class="footertext">© 2020 L&T EduTech.</span> -->
+                <div class="powered">
+                  <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+                 <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
+                </div>
               </div>
               <div class="col-4">
                 <!-- <span class="powered">
@@ -77,6 +80,26 @@
                             </div>
                         </div> -->
                         <br><br>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label class="label-color">{{'Mobile number' | translate }}</mat-label>
+                          <input matInput  [placeholder]="'Enter mobile number without country code' | translate "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
+                           mask="0000000000"  maxlength="10"
+                           formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" required>
+                          <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
+                            phone</mat-icon>
+                          <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
+                            {{'Mobile number is required' | translate }}
+                          </mat-error>
+                          <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
+                            {{'Mobile number must be 10 digits' | translate }}
+                          </mat-error>
+                       
+                          <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
+                            {{'Mobile number is invalid' | translate }}
+                          </mat-error>
+                        </mat-form-field>
+
                         <mat-form-field appearance="outline">
                             <mat-label class="label-color">Email</mat-label>
                             <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
@@ -98,7 +121,7 @@
 
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="alert1"> <b>Note</b> : This name will be used in your certificates</div>
+                                    <div class="alert1"> <b>{{'Note' | translate }}</b> {{': Full name will be used in your certificates' | translate }}</div>
                                 </div>
                             </div>
 
@@ -128,10 +151,15 @@
               <div class="col-3">
               </div>
               <div class="col-9">
-                <span class="powered">
+                <!-- <span class="powered"> -->
                   <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
+<<<<<<< HEAD
                  <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
                 </span>
+=======
+                 <!-- <span class="forgot1">{{'2020 © L&T EduTech All Rights Reserved' | translate }}</span> 
+                </span> -->
+>>>>>>> 4d1e4667a4642ce32419ca461a57a2ea626000f0
               </div>
             </div>
 
