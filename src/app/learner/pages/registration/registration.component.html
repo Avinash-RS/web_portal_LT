@@ -82,24 +82,24 @@
                         <br><br>
 
                         <mat-form-field appearance="outline">
-                          <mat-label class="label-color">{{'Mobile number' | translate }}</mat-label>
-                          <input matInput  [placeholder]="'Enter mobile number without country code' | translate "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
+                          <mat-label class="label-color">{{'Mobile number'}}</mat-label>
+                          <input matInput  [placeholder]="'Enter mobile number without country code' "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
                            mask="0000000000"  maxlength="10"
                            formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" required>
                           <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
                             phone</mat-icon>
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
-                            {{'Mobile number is required' | translate }}
+                            {{'Mobile number is required' }}
                           </mat-error>
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
-                            {{'Mobile number must be 10 digits' | translate }}
+                            {{'Mobile number must be 10 digits'}}
                           </mat-error>
                        
                           <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
-                            {{'Mobile number is invalid' | translate }}
+                            {{'Mobile number is invalid' }}
                           </mat-error>
                         </mat-form-field>
-
+                        <br><br>
                         <mat-form-field appearance="outline">
                             <mat-label class="label-color">Email</mat-label>
                             <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
