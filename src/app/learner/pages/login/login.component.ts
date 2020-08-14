@@ -4,7 +4,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
-// import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,14 +17,14 @@ export class LoginComponent implements OnInit {
   show = false;
   loginForm: FormGroup;
   languages: any;
-  // public translate: TranslateService, 
-  constructor(private router: Router, private formBuilder: FormBuilder,
+
+  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
               private service: LearnerServicesService, private toastr: ToastrService) {
-      // /this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
+      this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
       // translate.addLangs(['en', 'ta']);
-      // translate.setDefaultLang('en');
-      // const browserLang = translate.getBrowserLang();
+      translate.setDefaultLang('en');
+      const browserLang = translate.getBrowserLang();
   }
 
   ngOnInit() {
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/Learner/profile']);
               }
             } else {
-              localStorage.setItem('Fullname', loginresult.data.login.message.full_name);// Added ny Mythreyi
+              localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               sessionStorage.setItem('remember_me', 'false');
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);

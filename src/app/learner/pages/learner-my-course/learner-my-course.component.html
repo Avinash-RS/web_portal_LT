@@ -1,14 +1,14 @@
 <app-header></app-header>
 <div class="row">
     <div class="col-xl-8  col-md-12 col-sm-12 col-12">
-        <div class="f_size_22   myC-head animated animatedFadeInUp fadeInUp ">My Courses</div>
+        <div class="f_size_22   myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' | translate }}</div>
         <div class="bodybg" *ngIf="!loading">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12   p-0">
                 <mat-tab-group mat-align-tabs="start" animationDuration="1000ms" class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
                     <mat-tab>
                         <!-- [disabled]='incom.plete?length === 0' -->
                         <ng-template matTabLabel>
-                            <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">Ongoing</span>
+                            <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' | translate }}</span>
                         </ng-template>
 
                         <div class="container" *ngFor="let course of incomplete ;let j=index">
@@ -58,14 +58,14 @@
                                             <button mat-stroked-button  data-toggle="modal" data-target="#myModal" *ngIf="course?.coursePlayerStatus?.status !== 'completed'" class="blue_clr cap  statBtn pointer" (click)="gotoDesc(course)">
                                               <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                               <span class="cap f_wt_400">
-                                                {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
+                                                {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start | translate '}}&nbsp;
                                               </span>
                                             </button>
                                             <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="blue_clr cap statBtn pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
                                             <mat-icon class="icon-color">replay</mat-icon>
                                             <span class="cap f_wt_400">
-                                              Replay&nbsp;
+                                              {{'Replay' | translate }}&nbsp;
                                             </span>
                                           </button>
                                         </div>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
 
-                                        <span style="font-size: medium;">You have no enrolled courses at the moment.</span>
+                                        <span style="font-size: medium;">{{'You have no enrolled courses at the moment.' | translate }}</span>
                                     </div>
                                 </div>
                             </mat-card>
@@ -93,7 +93,7 @@
 
                     <mat-tab>
                         <ng-template matTabLabel>
-                            <span matBadge="{{completed?.length}}" matBadgeOverlap="false">Completed</span>
+                            <span matBadge="{{completed?.length}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                         </ng-template>
                         <div class="container" *ngFor="let course of completed;let k=index">
                             <mat-card class="coursebg" matRipple>
@@ -129,7 +129,7 @@
 
 
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
-                                                <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}} </span>
+                                                <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours | translate ' : '1' + ' hour | translate ') : '1' + 'hour | translate '}} </span>
                                                 <!-- <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span> -->
                                             </div>
                                         </div>
@@ -154,7 +154,7 @@
                                                     <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="blue_clr cap statBtn pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
                                 <mat-icon class="icon-color">replay</mat-icon>
                                 <span class="cap f_wt_400">
-                                  Replay&nbsp;
+                                  {{'Replay' | translate }}&nbsp;
                                 </span>
                               </button>
                                                 </div>
@@ -179,7 +179,7 @@
                                     </div>
                                     <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
 
-                                        <span style="font-size: medium;"> You have no enrolled courses at the moment.</span>
+                                        <span style="font-size: medium;"> {{'You have no enrolled courses at the moment.' | translate }}</span>
                                     </div>
                                 </div>
                             </mat-card>
@@ -190,7 +190,7 @@
 
                     <mat-tab>
                         <ng-template matTabLabel>
-                            <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">All</span>
+                            <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' | translate }}</span>
                         </ng-template>
                         <div class="container" *ngFor="let course of enrolledCourses ;let i=index">
                             <mat-card class="coursebg" matRipple>
@@ -227,7 +227,7 @@
                                                 </span>
 
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
-                                                <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}} </span>
+                                                <span class="aligned-with-icon"> {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours | translate ' : '1' + ' hour | translate ') : '1' + 'hour | translate '}} </span>
                                                 <!-- <span class="aligned-with-icon"> {{course.course_duration ? course.course_duration : '0'}} hours</span> -->
                                             </div>
                                         </div>
@@ -249,14 +249,14 @@
                                             <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status !== 'completed'" class="blue_clr cap  statBtn pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
                                             <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                             <span class="cap f_wt_400">
-                                              {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                  course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'}}&nbsp;
+                                              {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
+                                                  course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start | translate '}}&nbsp;
                                             </span>
                                           </button>
                                             <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="blue_clr cap statBtn pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
                             <mat-icon class="icon-color">replay</mat-icon>
                             <span class="cap f_wt_400">
-                              Replay&nbsp;
+                              {{'Replay' | translate }}&nbsp;
                             </span>
                           </button>
                                         </div>
@@ -279,7 +279,7 @@
                                     </div>
                                     <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl" style="padding: 5px !important;margin : auto">
 
-                                        <span style="font-size: medium;"> You have no enrolled courses at the moment.</span>
+                                        <span style="font-size: medium;"> {{'You have no enrolled courses at the moment.' | translate }}</span>
                                     </div>
                                 </div>
                             </mat-card>
@@ -290,7 +290,7 @@
         </div>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12">
-        <div class="f_size_22 pad-7 m-l-13 animated animatedFadeInUp m-p-2 fadeInUp">Today's Sessions</div>
+        <div class="f_size_22 pad-7 m-l-13 animated animatedFadeInUp m-p-2 fadeInUp">{{'Todays Sessions' | translate }}</div>
         <!-- <hr class="hrStyle"> -->
         <div class=" m-l-4" *ngIf="results?.message?.length == 0">
             <div class="row width_100 no_margin">
@@ -298,7 +298,7 @@
                     <div class="row">
                         <div class="box-size">
                             <div class=" errorbox animated animatedFadeInUp fadeInUp">
-                                <p class="para" *ngIf="results?.success == false">Activity details not found </p>
+                                <p class="para" *ngIf="results?.success == false">{{'Activity details not found' | translate }} </p>
                                 <!-- {{ results?.error_msg }} -->
                             </div>
                         </div>
@@ -309,7 +309,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-0">
             <div *ngIf="showViewButton">
                 <button class="btn" type="button" [routerLink]="['/Learner/calendar']">
-        View All Activity
+        {{'View All Activity' | translate }}
       </button>
             </div>
             <div *ngIf="results?.message?.length > 0">
@@ -321,11 +321,11 @@
                                 <mat-icon class="event">event</mat-icon><span class="lxp-text f_size_14 f_wt_400"> {{result.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{result.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
                                 <!-- |  <i class="fa fa-clock-o" aria-hidden="true"> {{currentStartTime}}</i>-{{currentEndTime}}  -->
                                 <span class="status lxp-text f_size_14 f_wt_400" *ngIf="result.status == 'On going' ">
-                                Ongoing</span>
+                                {{'Ongoing' | translate }}</span>
                                                   <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="result.status == 'Up Coming' ">
-                                    Upcoming</span>
+                                    {{'Upcoming' | translate }}</span>
                                                   <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="result.status == 'Completed' ">
-                                    completed</span>
+                                    {{'completed' | translate }}</span>
                             </div>
                             <p class="coursenameT" [ngClass]="{'color-yellow-card-status': result.status === 'On going', 'color-grey-card-status':result.status === 'Completed','color-blue-card-status':result.status === 'Up Coming'}"> {{ result?.activity_details.coursename }}</p>
                             <h5 class="m-l-4">{{ result?.activity_details.topicname }}
@@ -333,7 +333,7 @@
                             <div class="m-l-4 p-b-5"> <span class="f_wt_500 f_size_14">Type </span>: <span class="lxp-text f_size_12 f_wt_400">{{ result?.activity_details.activitytype }} </span>
                                 <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
                                 <span class="aligned-icon lxp-text f_size_12 f_wt_400">{{ result?.activity_details.createdby_name }}</span>
-                                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'  && result.status ==='On going'" mat-stroked-button class="blue_clr cap   pointer float-right LaunchBtn">Launch</button>
+                                <button (click)="launchActivity(result)" *ngIf="result.activity_details.activitytype == 'Live Classroom'  && result.status ==='On going'" mat-stroked-button class="blue_clr cap   pointer float-right LaunchBtn">{{'Launch' | translate }}</button>
                             </div>
                         </div>
                     </mat-card>
@@ -341,7 +341,7 @@
                 <br/>
                 <br/>
                 <div>
-                    <button mat-stroked-button data-toggle="modal" data-target="#myModal" class="blue_clr1 cap  statBtn1 pointer" [routerLink]="['/Learner/calendar']" style="margin-left: 66%;">View All Activity</button>
+                    <button mat-stroked-button data-toggle="modal" data-target="#myModal" class="blue_clr1 cap  statBtn1 pointer" [routerLink]="['/Learner/calendar']" style="margin-left: 66%;">{{'View All Activity' | translate }}</button>
                 </div>
             </div>
         </div>
@@ -356,27 +356,27 @@
 <div class="modal" *ngIf="show" id="myModal" role="dialog">
   <div class="modal-content">
       <div class="modal-header">
-          <span style="font-size:22px; color: red;">Alert !</span>
+          <span style="font-size:22px; color: red;">{{'Alert !' | translate }}</span>
       </div>
       <div class="modal-body">
-          <p class="f_size_16">Courses works best in Laptop / Desktop.</p>
-          <p class="f_size_16">Accessing courses via mobile is forbidden. </p>
+          <p class="f_size_16">{{'Courses works best in Laptop / Desktop.' | translate }}</p>
+          <p class="f_size_16">{{'Accessing courses via mobile is forbidden.' | translate }} </p>
           <div class="row">
               <div class="col-8">
-                  <p><b>Recommended browsers</b></p>
+                  <p><b>{{'Recommended browsers' | translate }}</b></p>
               </div>
               <div class="col-1">
                   <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
               </div>
           </div>
           <div [ngClass]="{'show-less': showShortDesciption}">
-              <p>L&T supports the most recent versions of the following browsers.</p>
+              <p>{{'L&T supports the most recent versions of the following browsers.' | translate }}</p>
               <ul>
-                  <li>Google Chrome (recommended)</li>
-                  <li>Firefox</li>
-                  <li>Safari</li>
-                  <li>Internet Explorer 11</li>
-                  <li>Microsoft Edge</li>
+                  <li>{{'Google Chrome' | translate }} ({{'recommended' | translate }})</li>
+                  <li>{{'Firefox' | translate }}</li>
+                  <li>{{'Safari' | translate }}</li>
+                  <li>{{'Internet Explorer 11' | translate }}</li>
+                  <li>{{'Microsoft Edge' | translate }}</li>
 
               </ul>
               <p>If you're using an older browser , updating your browser can help solve problems.</p>

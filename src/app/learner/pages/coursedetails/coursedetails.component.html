@@ -17,13 +17,13 @@
         <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
             <div class="row " >
                 <div class="col-12" (click)="tabs.selectedIndex = 0">
-                    <h1 class="nameh1">{{course?.course_name | titlecase }}</h1>
+                    <h1 class="nameh1">{{course?.course_name | titlecase | translate}}</h1>
                 </div>
             </div>
             <mat-toolbar class="header">
                 <div class="row margin-15">
                     <div class="col-6 Outine">
-                        Course Outline
+                         {{'Course Outline' | translate}}
                     </div> |
                     <div class="col-6">
                         <div class="row">
@@ -113,15 +113,15 @@
                         <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
 
                     </mat-tab>
-                    <mat-tab label="About the course" *ngIf="!isFullScreen">
-                        <h3 class="head-h1">Course description</h3>
+                    <mat-tab [label]="'About the course'| translate" *ngIf="!isFullScreen">
+                        <h3 class="head-h1">{{ 'Course description' | translate}}</h3>
                         <div class="vertical"></div>
 
-                        <div class="curInclu">This course includes :</div>
+                        <div class="curInclu">{{ 'This course includes :' | translate}}</div>
                         <div class="row display_flex">
                             <div style="max-width: 196px;">
-                                <span class="font-color;padding: 5px">{{content?.totalResourseCount}} downloadable
-                                    resources</span>
+                                <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable
+                                    resources'| translate}}</span>
                             </div>
                             <!-- &nbsp; |&nbsp; -->
                             <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
@@ -144,7 +144,7 @@
                         </div>
 
                         <div *ngIf="course?.author_details[0].author_name != ''">
-                            <h3 class="head-h2">Instructors</h3>
+                            <h3 class="head-h2">{{'Instructors'| translate}}</h3>
                             <div class="vertical"></div>
                             <div class="instr-box" *ngFor="let author of course?.author_details">
                                 <div class="row">
@@ -153,7 +153,7 @@
                                             [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
                                     </div>
                                     <div class="col-6">
-                                        <div class="authorname">{{author?.author_name | titlecase}}</div>
+                                        <div class="authorname">{{author?.author_name | titlecase| translate}}</div>
                                     </div>
 
                                     <div class="row margin-35 borderline">
@@ -166,7 +166,7 @@
                         </div>
                     </mat-tab>
 
-                    <mat-tab label="Resources" *ngIf="!isFullScreen">
+                    <mat-tab [label]="'Resources'| translate" *ngIf="!isFullScreen">
                         <mat-accordion>
                             <ng-container *ngIf="content?.noresource">
                                 <ng-container *ngFor="let res of content?.coursedetails; let i = index">
@@ -253,14 +253,14 @@
 
 
                             <ng-container *ngIf="!content?.noresource">
-                                <span style="padding: 16px;">This course does not have resource files.</span>
+                                <span style="padding: 16px;">{{'This course does not have resource files.'| translate}}</span>
                             </ng-container>
                         </mat-accordion>
                     </mat-tab>
 
                     <!-- Assignments tab -->
                     <div *ngIf="!isFullScreen">
-                    <mat-tab label="Assignments" class="discussion_forum"
+                    <mat-tab [label]="'Assignments'| translate" class="discussion_forum"
                         *ngIf="assignmentContent?.coursedetails.length" (click)="getAssignmentmoduleData">
                         <mat-accordion>
                             <ng-container>
@@ -320,8 +320,8 @@
                                                                 <div class="row ">
                                                                     <div class="col-2 no-cursor">
                                                                         <div class="row">
-                                                                            <span class="singleline-text "><b>Assignment
-                                                                                    name</b></span>
+                                                                            <span class="singleline-text "><b>{{'Assignment
+                                                                                    name'| translate}}</b></span>
                                                                         </div>
                                                                         <div class="row">
                                                                             <img *ngIf="file.doc_type == 'application/pdf'"
@@ -360,7 +360,7 @@
                                                                     </div>
                                                                     <div class="col-1 no-cursor">
                                                                         <div class="row">
-                                                                            <span><b>Question</b></span>
+                                                                            <span><b>{{'Question' | translate }}</b></span>
                                                                         </div>
                                                                         <div class="row">
                                                                             <span class="ml-3">
@@ -378,10 +378,10 @@
                                                                     <div class="col-4">
                                                                         <div class="row">
                                                                             <div class="col">
-                                                                                <span><b>Start date</b></span>
+                                                                                <span><b>{{'Start date' | translate }}</b></span>
                                                                             </div>
                                                                             <div class="col">
-                                                                                <span><b>End date</b></span>
+                                                                                <span><b>{{'End date' | translate }}</b></span>
                                                                             </div>
 
                                                                         </div>
@@ -406,7 +406,7 @@
                                                                     <div class="col-1">
                                                                         <div class="row">
                                                                             <span>
-                                                                                <b>Upload</b>
+                                                                                <b>{{'Upload' | translate }}</b>
                                                                             </span>
                                                                         </div>
                                                                         <div class="row">
@@ -435,8 +435,8 @@
 
                                                                     <div class="col-1">
                                                                         <div class="row">
-                                                                            <span class="singleline-text"><b> Max
-                                                                                    score</b></span>
+                                                                            <span class="singleline-text"><b> {{'Max
+                                                                                    score' | translate }}</b></span>
                                                                         </div>
                                                                         <div class="row">
                                                                             <span class="ml-3">
@@ -449,7 +449,7 @@
                                                                         <div class="row">
                                                                             <span class="singleline-text">
                                                                                 <b>
-                                                                                    Obtained score
+                                                                                    {{'Obtained score' | translate }}
                                                                                 </b>
                                                                             </span>
                                                                         </div>
@@ -462,7 +462,7 @@
                                                                     </div>
                                                                     <div class="col-2 status-col">
                                                                         <div class="row">
-                                                                            <span><b>Status</b></span>
+                                                                            <span><b>{{'Status' | translate }}</b></span>
                                                                         </div>
 
                                                                         <div class="row">
@@ -474,7 +474,7 @@
                                                                             <div class="disply no-cursor"
                                                                                 *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
                                                                                 <div class="not-submited">
-                                                                                    Yet to Submit</div>
+                                                                                    {{'Yet to Submit' | translate }}</div>
                                                                             </div>
                                                                             <div class="disply no-cursor"
                                                                                 *ngIf="file.grade_status === 'Evaluated'">
@@ -626,10 +626,10 @@
                                     <div class="row" *ngIf="selectedModuleData">
                                         <p (click)="gotoDisplayAllThreads()">
                                             <span
-                                                class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name'}}</span>
+                                                class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name | translate '}}</span>
                                             &nbsp;({{'Module'+ ' ' +selectedModuleData.indexValue}}) |
                                             {{ discussionData?.topics?.length ? discussionData.topics.length : 0 }}
-                                            {{discussionData?.topics?.length > 1 ? 'Threads' : 'Thread'}}
+                                            {{discussionData?.topics?.length > 1 ? 'Threads | translate ' : 'Thread | translate '}}
                                             <!-- {{discussionData?.topics?.length || 0}}  Threads -->
                                         </p>
                                     </div>
@@ -666,8 +666,8 @@
                                             <mat-select [(value)]="selected"
                                                 [disabled]="discussionData === null || discussionData?.topics?.length === 0"
                                                 (selectionChange)="changedSort($event.value)">
-                                                <mat-option value="1">Latest</mat-option>
-                                                <mat-option value="0">Oldest</mat-option>
+                                                <mat-option value="1">{{'Latest' | translate }}</mat-option>
+                                                <mat-option value="0">{{'Oldest' | translate }}</mat-option>
                                             </mat-select>
                                             <!-- <mat-icon matSuffix (click)="closeSort()" class="pointer align_bottom">
                 close</mat-icon> -->
@@ -732,7 +732,7 @@
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
                                                 [disabled]="course === null || selectedModuleData === null "
                                                 class="new_Thread " style="border-radius: 0 !important;">
-                                                New thread</button>
+                                                {{'New thread' | translate }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -762,7 +762,7 @@
                                                 <h3> {{data?.titleRaw | titlecase}}</h3>
                                             </div>
                                             <div class="row f_size_14 date_color">
-                                                <p> Last post by <strong
+                                                <p> {{'Last post by' | translate }} <strong
                                                         class="titlecolor">{{data?.user?.username | titlecase}}
                                                         &nbsp;</strong>
                                                     &nbsp; | &nbsp; {{data?.lastposttimeISO | date : 'medium'}} </p>
@@ -787,7 +787,7 @@
                             <br><br>
                             <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
                                 <br>
-                                No threads found! create new..
+                                {{'No threads found! create new..' | translate }}
                                 <br> <br>
                             </mat-card>
                         </div>
@@ -847,14 +847,14 @@
                                                     thumb_up_alt</mat-icon>
                                                 <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
                                                     *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.bookmarked">
-                                                    thumb_up_alt</mat-icon>Like
+                                                    thumb_up_alt</mat-icon>{{'Like' | translate }}
                                                 ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
                                             </button> &nbsp;&nbsp;
                                             <button mat-button class="f_size_12 no_padding" (click)="clickToComment()"
                                                 [disabled]="selectedThreadData?.thread_status === false">
                                                 <mat-icon class="action_icon"
                                                     [disabled]="selectedThreadData?.thread_status === false">
-                                                    comment</mat-icon>Comment
+                                                    comment</mat-icon>{{'Comment' | translate }}
                                             </button>
                                         </div>
                                     </div>
@@ -863,7 +863,7 @@
                                         <div
                                             class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
                                             <angular-editor [config]="config" name="addThreadComment" autofocus
-                                                [placeholder]="'Leave your comments here...'"
+                                                [placeholder]="'Leave your comments here...' | translate "
                                                 [(ngModel)]="addThreadComment" ngDefaultControl>
                                             </angular-editor>
                                         </div>
@@ -875,14 +875,14 @@
                                                     class="col-xl-10 col-lg-10 col-md-10 col-sm-6 col-6 float_right no_padding">
                                                     <mat-checkbox class="width_100 f_size_15 align-middle"
                                                         [(ngModel)]="a2iFlag">
-                                                        &nbsp;&nbsp;Ask the instructor
+                                                        &nbsp;&nbsp;{{'Ask the instructor' | translate }}
                                                     </mat-checkbox>
                                                 </div>
                                                 <div
                                                     class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
                                                     <button mat-button class="new_Thread no-radius ht-30 width_60"
                                                         [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
-                                                        (click)="sendComment('thread',addThreadComment)">Send</button>
+                                                        (click)="sendComment('thread',addThreadComment)">{{'Send' | translate }}</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -911,7 +911,7 @@
                                                             <span> &nbsp; | &nbsp;
                                                                 {{post?.timestampISO | date : 'medium'}}
                                                                 &nbsp; </span>
-                                                            <span class="a2i_lable" *ngIf="post.a2i_lable"> A2I</span>
+                                                            <span class="a2i_lable" *ngIf="post.a2i_lable"> {{'A2I' | translate }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -939,7 +939,7 @@
                                                             thumb_up_alt</mat-icon>
                                                         <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : post.apiCalled }"
                                                         *ngIf="post.bookmarked">
-                                                            thumb_up_alt</mat-icon>Like
+                                                            thumb_up_alt</mat-icon>{{'Like' | translate }}
                                                         ({{post?.bookmarks || 0}})
                                                     </button> &nbsp;&nbsp;
                                                     <button mat-button
@@ -947,7 +947,7 @@
                                                         (click)="clickToCommentPost(pin)" class="f_size_12 no_padding">
                                                         <mat-icon class="action_icon"
                                                             [disabled]="selectedThreadData?.thread_status === false">
-                                                            comment</mat-icon>Comment
+                                                            comment</mat-icon>{{'Comment' | translate }}
                                                     </button>
                                                 </div>
                                             </div>
@@ -958,7 +958,7 @@
                                                     class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding m-b-0">
                                                     <angular-editor [config]="config" autofocus
                                                         name="addPostComment[pin]"
-                                                        [placeholder]="'Leave your comments here...'"
+                                                        [placeholder]="'Leave your comments here...' | translate "
                                                         [(ngModel)]="addPostComment[pin]" ngDefaultControl>
                                                     </angular-editor>
                                                 </div>
@@ -971,7 +971,7 @@
                                                             class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
                                                             <mat-checkbox class="width_100 f_size_15 align-middle"
                                                                 [(ngModel)]="a2iFlag">
-                                                                &nbsp;&nbsp;Ask the instructor
+                                                                &nbsp;&nbsp;{{'Ask the instructor' | translate }}
                                                             </mat-checkbox>
                                                         </div>
                                                         <div
@@ -979,7 +979,7 @@
                                                             <button mat-button
                                                                 class="new_Thread no-radius ht-30 width_50"
                                                                 (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
-                                                                [disabled]="addPostComment && addPostComment[pin] == null">Send</button>
+                                                                [disabled]="addPostComment && addPostComment[pin] == null">{{'Send' | translate }}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1035,7 +1035,7 @@
                                                                         thumb_up_alt</mat-icon>
                                                                     <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : posts.apiCalled }"
                                                                         *ngIf="posts.bookmarked">
-                                                                        thumb_up_alt</mat-icon>Like
+                                                                        thumb_up_alt</mat-icon>{{'Like' | translate }}
                                                                     ({{posts?.bookmarks || 0}})
                                                                 </button> &nbsp;&nbsp;
                                                                 <!-- // commented by Mythreyi - no need child's child comment -->
@@ -1053,7 +1053,7 @@
                                                             <div
                                                                 class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding no_margin">
                                                                 <angular-editor [config]="config"
-                                                                    [placeholder]="'Leave your comments here...'"
+                                                                    [placeholder]="'Leave your comments here...' | translate "
                                                                     [(ngModel)]="addPostComment[pjn]">
                                                                 </angular-editor>
                                                             </div>
@@ -1069,14 +1069,14 @@
                                                                         <mat-checkbox
                                                                             class="width_100 f_size_12 align-middle"
                                                                             [(ngModel)]="a2iFlag">
-                                                                            &nbsp;Ask the instructor
+                                                                            &nbsp;{{'Ask the instructor' | translate }}
                                                                         </mat-checkbox>
                                                                     </div>
                                                                     <div
                                                                         class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
                                                                         <button mat-button
                                                                             class="new_Thread no-radius ht-30"
-                                                                            (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">Send</button>
+                                                                            (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">{{'Send' | translate }}</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1140,7 +1140,7 @@
                                                                                     thumb_up_alt</mat-icon>
                                                                                 <mat-icon class="action_icon_filled" [ngClass] = "{ 'pointerNone' : postss.apiCalled }"
                                                                                     *ngIf="postss.bookmarked">
-                                                                                    thumb_up_alt</mat-icon>Like
+                                                                                    thumb_up_alt</mat-icon>{{'Like' | translate }}
                                                                                 ({{postss?.bookmarks || 0}})
                                                                             </button> &nbsp;&nbsp;
                                                                         </div>

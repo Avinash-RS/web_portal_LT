@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 // import * as crypto from 'crypto';
 // import CryptoJS from 'crypto-js';
 import SimpleCrypto from 'simple-crypto-js';
+import { TranslateService } from '@ngx-translate/core';
 const _secretKey = 'myTotalySecretKey';
 const simpleCrypto = new SimpleCrypto(_secretKey);
 
@@ -38,6 +39,7 @@ export class ResetpasswordComponent implements OnInit {
 
 
   constructor(
+    public translate: TranslateService,
     private loader: Ng4LoadingSpinnerService,
     private router: Router,
     private formBuilder: FormBuilder,
@@ -46,6 +48,7 @@ export class ResetpasswordComponent implements OnInit {
     public service: LearnerServicesService) { }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
         // const decryptedString = simpleCrypto.decrypt(params.code);

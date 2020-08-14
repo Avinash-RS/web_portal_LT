@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-coursedetails',
@@ -141,7 +142,7 @@ export class CoursedetailsComponent implements OnInit {
   sider = true;
   // initials: any;
 
-  constructor(private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+  constructor(public translate: TranslateService,private router: ActivatedRoute, public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
@@ -219,6 +220,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.translate.use(localStorage.getItem('language'));
   }
 
   getAssignmentmoduleData() {

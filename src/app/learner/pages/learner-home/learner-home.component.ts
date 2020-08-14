@@ -7,6 +7,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { MatDialog } from '@angular/material';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -41,13 +42,15 @@ export class LearnerHomeComponent implements OnInit {
   total_count: number;
 
 
-  constructor(public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
+  constructor(public translate: TranslateService,
+              public learnerService: LearnerServicesService, private router: Router, private gs: GlobalServiceService,
               private loader: Ng4LoadingSpinnerService, public activatedRoute: ActivatedRoute,
               private globalservice: GlobalServiceService, public commonServices: CommonServicesService,
               private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.userDetailes = this.globalservice.checkLogout();
     this.getEnrolledCourses();
     this.getallcourses();

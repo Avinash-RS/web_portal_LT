@@ -8,6 +8,7 @@ import { TermsconditionsComponent } from '../termsconditions/termsconditions.com
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -22,6 +23,7 @@ export class RegistrationComponent implements OnInit {
   is_staff: boolean;
   fullname: any;
   constructor(
+    public translate: TranslateService,
     private formBuilder: FormBuilder,
     private router: Router,
     private loader: Ng4LoadingSpinnerService,
@@ -32,6 +34,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.registerForm = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
         Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],

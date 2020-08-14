@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { from } from 'rxjs';
 import { data } from 'jquery';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-home',
@@ -26,13 +27,15 @@ export class NewHomeComponent implements OnInit {
   results = [];
 
 
-  constructor(public learnerService: LearnerServicesService, private gs: GlobalServiceService, private router: Router) {
+  constructor(public translate: TranslateService,public learnerService: LearnerServicesService, 
+              private gs: GlobalServiceService, private router: Router) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
     this.getScreenSize();
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     // this.selectedDate = new Date(
     //   Date.UTC(
     //     event.getUTCFullYear(),

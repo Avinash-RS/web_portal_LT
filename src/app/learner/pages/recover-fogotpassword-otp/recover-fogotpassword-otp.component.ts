@@ -5,6 +5,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recover-fogotpassword-otp',
@@ -24,7 +25,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   email: string;
   details: any;
   constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
-                private loader: Ng4LoadingSpinnerService,
+                private loader: Ng4LoadingSpinnerService, public translate: TranslateService,
                 private router: Router,
                 private toastr: ToastrService,
                 public service: LearnerServicesService, ) {
@@ -43,6 +44,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
     };
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     const val = localStorage.getItem('Details_user');
     this.details = JSON.parse(val);
 

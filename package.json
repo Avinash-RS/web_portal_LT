@@ -30,6 +30,8 @@
     "@ckeditor/ckeditor5-angular": "^1.0.1",
     "@ckeditor/ckeditor5-build-classic": "^11.2.0",
     "@kolkov/angular-editor": "^0.18.8",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^7.4.0",
     "@types/cucumber": "^6.0.1",
     "@types/jasmine": "^2.8.16",

@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { slideInAnimation } from 'src/app/router.animation';
-
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -26,11 +26,11 @@ import { slideInAnimation } from 'src/app/router.animation';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
-  constructor(
-    private alert: AlertServiceService, public service: LearnerServicesService,
-    private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
-    private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-    private router: Router, private gs: GlobalServiceService) {
+  constructor(public translate: TranslateService,
+              private alert: AlertServiceService, public service: LearnerServicesService,
+              private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
+              private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
+              private router: Router, private gs: GlobalServiceService) {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
@@ -145,6 +145,7 @@ export class ProfileComponent implements OnInit {
   duplicateValueCheck = [];
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
     } else {

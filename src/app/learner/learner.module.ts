@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 // others
 import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
@@ -59,6 +59,15 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { NewHomeComponent } from './pages/new-home/new-home.component';
 import { LearnerCalendarComponent } from './pages/learner-calendar/learner-calendar.component';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
+
+
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
@@ -233,7 +242,14 @@ const routes: Routes = [
     InfiniteScrollModule,
     PdfJsViewerModule,
     RatingModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     Apollo

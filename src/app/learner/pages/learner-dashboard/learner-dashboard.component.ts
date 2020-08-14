@@ -3,6 +3,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-learner-dashboard',
@@ -13,12 +14,14 @@ export class LearnerDashboardComponent implements OnInit {
   userDetailes: any;
   dashboardData: any;
   constructor(
+    public translate: TranslateService,
     public service: LearnerServicesService,
     private gs: GlobalServiceService,
     private router: Router,
     private loader: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.translate.use(localStorage.getItem('language'));
     this.userDetailes = this.gs.checkLogout();
     this.getLearnerDashboard()
   }

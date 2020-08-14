@@ -1,8 +1,8 @@
 <app-header></app-header>
 <nav aria-label="breadcrumb" class="coursebreadcrumb ">
   <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      <li class="breadcrumb-item"><a [routerLink]="['/Learner/home']">{{'Home' | translate }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{'Dashboard' | translate }}</li>
   </ol>
 </nav>
 
@@ -10,7 +10,7 @@
   <div class="col-md-3 col-sm-12 col-12">
 
     <div class="smallbox">
-      <h2>Courses enrolled</h2>
+      <h2>{{'Courses enrolled' | translate }}</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.courseEnrolled.totalCount}}</span>
@@ -41,7 +41,7 @@
 
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses yet to start</h2>
+      <h2>{{'Courses yet to start' | translate }}</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.incomplete[0].totalCount}}</span>
@@ -72,7 +72,7 @@
 
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses in-progress</h2>
+      <h2>{{'Courses in-progress' | translate }}</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.suspend[0].totalCount}}</span>
@@ -103,7 +103,7 @@
 
   <div class="col-md-3 col-sm-12 col-12">
     <div class="smallbox">
-      <h2>Courses completed</h2>
+      <h2>{{'Courses completed' | translate }}</h2>
       <div class="row">
         <div class="col-8">
           <span class="count">{{dashboardData?.completed[0].totalCount}}</span>
@@ -135,7 +135,7 @@
 
 
 <div class="container containerShadow">
-    <span class="txthead"><b>Last accessed </b><span class="h8">Courses</span> (click on any course to resume)</span>
+    <span class="txthead"><b>{{'Last accessed' | translate }} </b><span class="h8">{{'Courses' | translate }}</span> ({{'click on any course to resume' | translate }})</span>
             <div class="row" >
               <div class="col-md-6 col-sm-12 col-12" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
               <div class="lg-box" (click)="gotohome()" >
@@ -149,7 +149,7 @@
                 <h3 class="coursehead">{{dashboard?.course_name}}</h3>
                 <mat-progress-bar class="border-radius-5" mode="determinate"[value]="dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0' ">
                 </mat-progress-bar>
-                <span class="percent">{{dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0'}}% Complete</span>
+                <span class="percent">{{dashboard?.coursePlayerStatus.course_percentage != null ? dashboard?.coursePlayerStatus.course_percentage : '0'}}% {{'Complete' | translate }}</span>
               </div>
             </div>
           </div>
