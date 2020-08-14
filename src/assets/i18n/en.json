@@ -696,6 +696,9 @@
   "days":"days",
   "or":"or",
   "more vert":"more vert",
-  "file upload":"file upload"
+  "file upload":"file upload",
+
+
+  "Start" : "Start test"
 
 }
