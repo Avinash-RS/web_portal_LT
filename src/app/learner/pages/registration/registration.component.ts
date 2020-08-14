@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   loading = false;
   userDetails: any;
   platform: string;
-  is_staff: boolean;
+  // is_staff: boolean;
   fullname: any;
   constructor(
     public translate: TranslateService,
@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
       if (data.data.user_registration.success === 'true') {
         this.toastr.success(data.data.user_registration.message, null);
         this.loader.hide();
-        this.registerForm.setErrors(null); 
+        this.registerForm.setErrors(null);
       } else {
         this.toastr.error(data.data.user_registration.message, null);
         this.loader.hide();
