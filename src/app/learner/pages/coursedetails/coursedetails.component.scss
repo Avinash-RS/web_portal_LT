@@ -1,15 +1,23 @@
 @import "variable";
 
 .close-button {
+    background: $lxp-theme-green !important;
     float: right;
-    top: -25px;
-    right: -47px;
+    top: -12px;
+    position: relative;
+    right: -53px;
+    height: 35px;
+    width: 35px;
 }
 
 .download-button {
+    background: $lxp-theme-green !important;
     float: right;
-    top: -3px;
-    right: 33px;
+    position: relative;
+    top: -12px;
+    right: 26px;
+    height: 35px;
+    width: 35px;
 }
 
 // auto hide course title 
@@ -71,10 +79,8 @@
 }
 
 .download-icon {
-    background: $lxp-theme-green;
-    height: 26px;
-    border-radius: 34px;
-    color: $color-white;
+    position: relative;
+    top: -2px;
 }
 
 .previewDialog {

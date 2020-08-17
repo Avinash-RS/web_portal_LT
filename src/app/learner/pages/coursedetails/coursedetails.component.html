@@ -477,13 +477,23 @@
 
                             </mat-accordion>
                             <ng-template #previewDialog>
-                                <button mat-icon-button class="download-button">
+                                <!-- <button mat-icon-button class="download-button">
                                     <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-                                </button>
-                                <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+                                </button> -->
+                                <div>
+                                    <button mat-mini-fab class="download-button">
+                                      <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+                                    </button>
+                                  </div>
+                                  <div>
+                                    <button mat-mini-fab class="close-button">
+                                      <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+                                    </button>
+                                  </div>
+                                <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
                                     <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
                                     </mat-icon>
-                                </button>
+                                </button> -->
                                 <div *ngIf="docpath">
                                     <app-pdfreader [url]="docpath"></app-pdfreader>
                                 </div>
