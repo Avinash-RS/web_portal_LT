@@ -39,10 +39,10 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 
-const routes: Routes = [
-  { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
-  { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
-];
+// const routes: Routes = [
+//   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
+//   { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
+// ];
 @NgModule({
   declarations: [
     CapslockDirective,
@@ -74,7 +74,7 @@ const routes: Routes = [
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),
-    RouterModule.forChild(routes),
+    // RouterModule.forChild(routes),
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,

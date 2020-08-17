@@ -601,7 +601,9 @@ body {
 //   align-items: unset !important;
 //   display: unset !important;
 // }
-
+.mat-spinner-color::ng-deep circle{
+  stroke: $lxp-theme-yellow-sec !important;
+  }
 .allow-cr {
   white-space: pre;
   color: #5e5e5e !important;

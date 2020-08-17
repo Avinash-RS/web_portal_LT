@@ -15,6 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  public codeValue: string;
 
   registerForm: FormGroup;
   loading = false;
@@ -38,7 +39,7 @@ export class RegistrationComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
         Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
-        mobile: ['', [Validators.required, Validators.minLength(10),  Validators.maxLength(10),
+        mobile: ['', [ Validators.minLength(10),  Validators.maxLength(10),
           Validators.pattern(/^[6-9][0-9]{9}$/)]],
       email: ['', [ Validators.minLength(6),
         Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
@@ -58,7 +59,8 @@ export class RegistrationComponent implements OnInit {
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
     // this.registerForm.value.termsandconditions
-    this.service.user_registration(this.registerForm.value.email, this.fullname, true ).subscribe((data: any) => {
+    this.service.user_registration(this.registerForm.value.email, this.fullname,
+    this.registerForm.value.mobile, true ).subscribe((data: any) => {
     this.registerForm.reset();
     this.registerForm.setErrors(null); // could be removed
     this.registerForm.updateValueAndValidity();

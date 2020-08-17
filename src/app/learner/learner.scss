@@ -50,12 +50,14 @@ button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
 .main-logo {
   width: 60%;
   text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
   position: relative;
 
 }
-
+.mat-spinner-color::ng-deep circle{
+  stroke: $lxp-theme-yellow-sec !important;
+  }
 .no_pr{
   padding-right: 0px !important;
 }

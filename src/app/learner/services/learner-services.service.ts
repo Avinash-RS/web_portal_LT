@@ -132,11 +132,12 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
-  user_registration(email, full_name, termsandconditions) {
+  user_registration(email, full_name, mobile_number, termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name,
+        mobile_number,
         email,
         term_condition: termsandconditions,
         domain: this.envDomain

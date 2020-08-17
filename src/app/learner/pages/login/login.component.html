@@ -29,16 +29,26 @@
       <div class="wrap-reg">
         <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
         <form [formGroup]="loginForm">
-          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign In to your account' | translate }}</h1> <br><br>
+          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign In to your account' }}</h1> <br><br>
           <mat-card-content style="margin-top:10px">
 
             <mat-form-field appearance="outline">
+              <mat-label class="label-color">Email</mat-label>
+              <input matInput  id="username" #username placeholder="Enter the email"  formControlName="username" maxlength="64"
+              required>
+              <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
+              <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">Email is required</mat-error>
+              <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
+              <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">Please enter a valid email address</mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Username' | translate }}</mat-label>
               <input matInput  [placeholder]="'Enter username' | translate "  formControlName="username"  [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" required>
             
               <mat-icon matPrefix class="icon-color">person_outline</mat-icon>
               <mat-error class="error" *ngIf="f.username.touched && f.username.errors">{{'Username is required' | translate }}</mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors.required">Username is required</div>     </div> -->
             <!-- <div class="form-group">
@@ -53,10 +63,14 @@
                     
          
             </div> -->
-            <div style="text-align: end;">
+
+            <!-- // dont remove ; ankit -->
+            <!-- <div style="text-align: end;">
               <a  class="forgot" (click)="forgotusername('forgotUsername')">{{'Forgot username?' | translate }}</a>
              
-            </div>
+            </div> -->
+
+
             <div class="space-20"></div>
             <!-- <div class="form-group">
               <label>Username</label>
@@ -68,15 +82,15 @@
             </div> -->
             <div class="" appCapslock (capsLock)="capsOn=$event">
               <!-- <label>Password</label> -->
-              <div *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
+              <div *ngIf="capsOn">{{'Caps lock is on !' }}</div>
               <mat-form-field appearance="outline">
-                <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
-                <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
+                <mat-label  class="label-color">{{'Password' }}</mat-label>
+                <input matInput  [placeholder]="'Enter password' " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                 <mat-icon class="icon-color" matPrefix>lock_outline</mat-icon>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon class="icon-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
+                <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' }}</mat-error>
               </mat-form-field>
               <!-- <span class="pwsicon">
               <input [type]="show ? 'text' : 'password'" name="password" placeholder="Password"  formControlName="password"
@@ -102,17 +116,17 @@
 
             <div style="text-align: end;">
               <mat-checkbox class="remember_me" formControlName="remember_me">
-                {{'Keep me signed in' | translate }}
+                {{'Keep me signed in' }}
               </mat-checkbox>
             <mat-label>
-            <a  class="forgot"(click)="reserPassword('reserPassword')">{{'Forgot password?' | translate }}</a>
+            <a  class="forgot"(click)="reserPassword('reserPassword')">{{'Forgot password?' }}</a>
             </mat-label></div>
 
             <div class="space-20"></div>
 
             <div class="center">
               <button class="btn" id="login" mat-raised-button [disabled]="loginForm.invalid" (click)="login()">{{'SIGN
-                IN' | translate }}</button>
+                IN'  }}</button>
   
             </div>
 <!--            
@@ -123,7 +137,7 @@
 
             <div class="sign_up">
               <span class="haveacc">Don't have an account?</span>
-              <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
+              <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' }}</span></a> </div><br><br>
           </mat-card-content>
         </form>
 
